@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension extends adds an optional rotation transform to copy commands {@link KHRCopyCommands2#vkCmdBlitImage2KHR CmdBlitImage2KHR}, {@link KHRCopyCommands2#vkCmdCopyImageToBuffer2KHR CmdCopyImageToBuffer2KHR} and {@link KHRCopyCommands2#vkCmdCopyBufferToImage2KHR CmdCopyBufferToImage2KHR}. When copying between two resources, where one resource contains rotated content and the other does not, a rotated copy may be desired. This extension may be used in combination with VK_QCOM_render_pass_transform which adds rotated renderpasses.
+ * This extension extends adds an optional rotation transform to copy commands {@link KHRCopyCommands2#vkCmdBlitImage2KHR CmdBlitImage2KHR}, {@link KHRCopyCommands2#vkCmdCopyImageToBuffer2KHR CmdCopyImageToBuffer2KHR} and {@link KHRCopyCommands2#vkCmdCopyBufferToImage2KHR CmdCopyBufferToImage2KHR}. When copying between two resources, where one resource contains rotated content and the other does not, a rotated copy may be desired. This extension may be used in combination with VK_QCOM_render_pass_transform which adds rotated render passes.
  * 
  * <p>This extension adds an extension structure to the following commands: vkCmdBlitImage2KHR, vkCmdCopyImageToBuffer2KHR and vkCmdCopyBufferToImage2KHR</p>
  * 

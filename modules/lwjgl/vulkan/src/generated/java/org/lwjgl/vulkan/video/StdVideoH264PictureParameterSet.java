@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t pic_parameter_set_id;
  *     uint8_t num_ref_idx_l0_default_active_minus1;
  *     uint8_t num_ref_idx_l1_default_active_minus1;
- *     StdVideoH264WeightedBiPredIdc weighted_bipred_idc;
+ *     StdVideoH264WeightedBipredIdc weighted_bipred_idc;
  *     int8_t pic_init_qp_minus26;
  *     int8_t pic_init_qs_minus26;
  *     int8_t chroma_qp_index_offset;
@@ -113,7 +113,7 @@ public class StdVideoH264PictureParameterSet extends Struct implements NativeRes
     @NativeType("uint8_t")
     public byte num_ref_idx_l1_default_active_minus1() { return nnum_ref_idx_l1_default_active_minus1(address()); }
     /** @return the value of the {@code weighted_bipred_idc} field. */
-    @NativeType("StdVideoH264WeightedBiPredIdc")
+    @NativeType("StdVideoH264WeightedBipredIdc")
     public int weighted_bipred_idc() { return nweighted_bipred_idc(address()); }
     /** @return the value of the {@code pic_init_qp_minus26} field. */
     @NativeType("int8_t")
@@ -129,7 +129,7 @@ public class StdVideoH264PictureParameterSet extends Struct implements NativeRes
     public byte second_chroma_qp_index_offset() { return nsecond_chroma_qp_index_offset(address()); }
     /** @return a {@link StdVideoH264PpsFlags} view of the {@code flags} field. */
     public StdVideoH264PpsFlags flags() { return nflags(address()); }
-    /** must be a valid pointer if  StdVideoH264PpsFlags::scaling_matrix_present_flag is set */
+    /** must be a valid pointer if  StdVideoH264PpsFlags::pic_scaling_matrix_present_flag is set */
     @NativeType("StdVideoH264ScalingLists *")
     public StdVideoH264ScalingLists pScalingLists() { return npScalingLists(address()); }
 
@@ -142,7 +142,7 @@ public class StdVideoH264PictureParameterSet extends Struct implements NativeRes
     /** Sets the specified value to the {@code num_ref_idx_l1_default_active_minus1} field. */
     public StdVideoH264PictureParameterSet num_ref_idx_l1_default_active_minus1(@NativeType("uint8_t") byte value) { nnum_ref_idx_l1_default_active_minus1(address(), value); return this; }
     /** Sets the specified value to the {@code weighted_bipred_idc} field. */
-    public StdVideoH264PictureParameterSet weighted_bipred_idc(@NativeType("StdVideoH264WeightedBiPredIdc") int value) { nweighted_bipred_idc(address(), value); return this; }
+    public StdVideoH264PictureParameterSet weighted_bipred_idc(@NativeType("StdVideoH264WeightedBipredIdc") int value) { nweighted_bipred_idc(address(), value); return this; }
     /** Sets the specified value to the {@code pic_init_qp_minus26} field. */
     public StdVideoH264PictureParameterSet pic_init_qp_minus26(@NativeType("int8_t") byte value) { npic_init_qp_minus26(address(), value); return this; }
     /** Sets the specified value to the {@code pic_init_qs_minus26} field. */
@@ -431,7 +431,7 @@ public class StdVideoH264PictureParameterSet extends Struct implements NativeRes
         @NativeType("uint8_t")
         public byte num_ref_idx_l1_default_active_minus1() { return StdVideoH264PictureParameterSet.nnum_ref_idx_l1_default_active_minus1(address()); }
         /** @return the value of the {@code weighted_bipred_idc} field. */
-        @NativeType("StdVideoH264WeightedBiPredIdc")
+        @NativeType("StdVideoH264WeightedBipredIdc")
         public int weighted_bipred_idc() { return StdVideoH264PictureParameterSet.nweighted_bipred_idc(address()); }
         /** @return the value of the {@code pic_init_qp_minus26} field. */
         @NativeType("int8_t")
@@ -460,7 +460,7 @@ public class StdVideoH264PictureParameterSet extends Struct implements NativeRes
         /** Sets the specified value to the {@code num_ref_idx_l1_default_active_minus1} field. */
         public StdVideoH264PictureParameterSet.Buffer num_ref_idx_l1_default_active_minus1(@NativeType("uint8_t") byte value) { StdVideoH264PictureParameterSet.nnum_ref_idx_l1_default_active_minus1(address(), value); return this; }
         /** Sets the specified value to the {@code weighted_bipred_idc} field. */
-        public StdVideoH264PictureParameterSet.Buffer weighted_bipred_idc(@NativeType("StdVideoH264WeightedBiPredIdc") int value) { StdVideoH264PictureParameterSet.nweighted_bipred_idc(address(), value); return this; }
+        public StdVideoH264PictureParameterSet.Buffer weighted_bipred_idc(@NativeType("StdVideoH264WeightedBipredIdc") int value) { StdVideoH264PictureParameterSet.nweighted_bipred_idc(address(), value); return this; }
         /** Sets the specified value to the {@code pic_init_qp_minus26} field. */
         public StdVideoH264PictureParameterSet.Buffer pic_init_qp_minus26(@NativeType("int8_t") byte value) { StdVideoH264PictureParameterSet.npic_init_qp_minus26(address(), value); return this; }
         /** Sets the specified value to the {@code pic_init_qs_minus26} field. */

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The queue returned by {@code vkGetDeviceQueue2} <b>must</b> have the same {@code flags} value from this structure as that used at device creation time in a {@link VkDeviceQueueCreateInfo} instance. If no matching {@code flags} were specified at device creation time, then the handle returned in {@code pQueue} <b>must</b> be {@code NULL}.</p>
+ * <p>The queue returned by {@code vkGetDeviceQueue2} <b>must</b> have the same {@code flags} value from this structure as that used at device creation time in a {@link VkDeviceQueueCreateInfo} structure. If no matching {@code flags} were specified at device creation time, then the handle returned in {@code pQueue} <b>must</b> be {@code NULL}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

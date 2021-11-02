@@ -16,14 +16,16 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
+
 /**
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct StdVideoH265DecPicBufMgr {
- *     uint32_t max_latency_increase_plus1[7];
- *     uint8_t max_dec_pic_buffering_minus1[7];
- *     uint8_t max_num_reorder_pics[7];
+ *     uint32_t max_latency_increase_plus1[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE];
+ *     uint8_t max_dec_pic_buffering_minus1[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE];
+ *     uint8_t max_num_reorder_pics[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE];
  * }</code></pre>
  */
 public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
@@ -42,9 +44,9 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
 
     static {
         Layout layout = __struct(
-            __array(4, 7),
-            __array(1, 7),
-            __array(1, 7)
+            __array(4, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE),
+            __array(1, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE),
+            __array(1, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -69,34 +71,34 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link IntBuffer} view of the {@code max_latency_increase_plus1} field. */
-    @NativeType("uint32_t[7]")
+    @NativeType("uint32_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
     public IntBuffer max_latency_increase_plus1() { return nmax_latency_increase_plus1(address()); }
     /** @return the value at the specified index of the {@code max_latency_increase_plus1} field. */
     @NativeType("uint32_t")
     public int max_latency_increase_plus1(int index) { return nmax_latency_increase_plus1(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code max_dec_pic_buffering_minus1} field. */
-    @NativeType("uint8_t[7]")
+    @NativeType("uint8_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
     public ByteBuffer max_dec_pic_buffering_minus1() { return nmax_dec_pic_buffering_minus1(address()); }
     /** @return the value at the specified index of the {@code max_dec_pic_buffering_minus1} field. */
     @NativeType("uint8_t")
     public byte max_dec_pic_buffering_minus1(int index) { return nmax_dec_pic_buffering_minus1(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code max_num_reorder_pics} field. */
-    @NativeType("uint8_t[7]")
+    @NativeType("uint8_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
     public ByteBuffer max_num_reorder_pics() { return nmax_num_reorder_pics(address()); }
     /** @return the value at the specified index of the {@code max_num_reorder_pics} field. */
     @NativeType("uint8_t")
     public byte max_num_reorder_pics(int index) { return nmax_num_reorder_pics(address(), index); }
 
     /** Copies the specified {@link IntBuffer} to the {@code max_latency_increase_plus1} field. */
-    public StdVideoH265DecPicBufMgr max_latency_increase_plus1(@NativeType("uint32_t[7]") IntBuffer value) { nmax_latency_increase_plus1(address(), value); return this; }
+    public StdVideoH265DecPicBufMgr max_latency_increase_plus1(@NativeType("uint32_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") IntBuffer value) { nmax_latency_increase_plus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code max_latency_increase_plus1} field. */
     public StdVideoH265DecPicBufMgr max_latency_increase_plus1(int index, @NativeType("uint32_t") int value) { nmax_latency_increase_plus1(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code max_dec_pic_buffering_minus1} field. */
-    public StdVideoH265DecPicBufMgr max_dec_pic_buffering_minus1(@NativeType("uint8_t[7]") ByteBuffer value) { nmax_dec_pic_buffering_minus1(address(), value); return this; }
+    public StdVideoH265DecPicBufMgr max_dec_pic_buffering_minus1(@NativeType("uint8_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") ByteBuffer value) { nmax_dec_pic_buffering_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code max_dec_pic_buffering_minus1} field. */
     public StdVideoH265DecPicBufMgr max_dec_pic_buffering_minus1(int index, @NativeType("uint8_t") byte value) { nmax_dec_pic_buffering_minus1(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code max_num_reorder_pics} field. */
-    public StdVideoH265DecPicBufMgr max_num_reorder_pics(@NativeType("uint8_t[7]") ByteBuffer value) { nmax_num_reorder_pics(address(), value); return this; }
+    public StdVideoH265DecPicBufMgr max_num_reorder_pics(@NativeType("uint8_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") ByteBuffer value) { nmax_num_reorder_pics(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code max_num_reorder_pics} field. */
     public StdVideoH265DecPicBufMgr max_num_reorder_pics(int index, @NativeType("uint8_t") byte value) { nmax_num_reorder_pics(address(), index, value); return this; }
 
@@ -240,50 +242,50 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #max_latency_increase_plus1}. */
-    public static IntBuffer nmax_latency_increase_plus1(long struct) { return memIntBuffer(struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1, 7); }
+    public static IntBuffer nmax_latency_increase_plus1(long struct) { return memIntBuffer(struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE); }
     /** Unsafe version of {@link #max_latency_increase_plus1(int) max_latency_increase_plus1}. */
     public static int nmax_latency_increase_plus1(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1 + check(index, 7) * 4);
+        return UNSAFE.getInt(null, struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #max_dec_pic_buffering_minus1}. */
-    public static ByteBuffer nmax_dec_pic_buffering_minus1(long struct) { return memByteBuffer(struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1, 7); }
+    public static ByteBuffer nmax_dec_pic_buffering_minus1(long struct) { return memByteBuffer(struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE); }
     /** Unsafe version of {@link #max_dec_pic_buffering_minus1(int) max_dec_pic_buffering_minus1}. */
     public static byte nmax_dec_pic_buffering_minus1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1 + check(index, 7) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #max_num_reorder_pics}. */
-    public static ByteBuffer nmax_num_reorder_pics(long struct) { return memByteBuffer(struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS, 7); }
+    public static ByteBuffer nmax_num_reorder_pics(long struct) { return memByteBuffer(struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE); }
     /** Unsafe version of {@link #max_num_reorder_pics(int) max_num_reorder_pics}. */
     public static byte nmax_num_reorder_pics(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS + check(index, 7) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS + check(index, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE) * 1);
     }
 
     /** Unsafe version of {@link #max_latency_increase_plus1(IntBuffer) max_latency_increase_plus1}. */
     public static void nmax_latency_increase_plus1(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 7); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1, value.remaining() * 4);
     }
     /** Unsafe version of {@link #max_latency_increase_plus1(int, int) max_latency_increase_plus1}. */
     public static void nmax_latency_increase_plus1(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1 + check(index, 7) * 4, value);
+        UNSAFE.putInt(null, struct + StdVideoH265DecPicBufMgr.MAX_LATENCY_INCREASE_PLUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #max_dec_pic_buffering_minus1(ByteBuffer) max_dec_pic_buffering_minus1}. */
     public static void nmax_dec_pic_buffering_minus1(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 7); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1, value.remaining() * 1);
     }
     /** Unsafe version of {@link #max_dec_pic_buffering_minus1(int, byte) max_dec_pic_buffering_minus1}. */
     public static void nmax_dec_pic_buffering_minus1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1 + check(index, 7) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoH265DecPicBufMgr.MAX_DEC_PIC_BUFFERING_MINUS1 + check(index, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #max_num_reorder_pics(ByteBuffer) max_num_reorder_pics}. */
     public static void nmax_num_reorder_pics(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 7); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS, value.remaining() * 1);
     }
     /** Unsafe version of {@link #max_num_reorder_pics(int, byte) max_num_reorder_pics}. */
     public static void nmax_num_reorder_pics(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS + check(index, 7) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoH265DecPicBufMgr.MAX_NUM_REORDER_PICS + check(index, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE) * 1, value);
     }
 
     // -----------------------------------
@@ -325,34 +327,34 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
         }
 
         /** @return a {@link IntBuffer} view of the {@code max_latency_increase_plus1} field. */
-        @NativeType("uint32_t[7]")
+        @NativeType("uint32_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
         public IntBuffer max_latency_increase_plus1() { return StdVideoH265DecPicBufMgr.nmax_latency_increase_plus1(address()); }
         /** @return the value at the specified index of the {@code max_latency_increase_plus1} field. */
         @NativeType("uint32_t")
         public int max_latency_increase_plus1(int index) { return StdVideoH265DecPicBufMgr.nmax_latency_increase_plus1(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code max_dec_pic_buffering_minus1} field. */
-        @NativeType("uint8_t[7]")
+        @NativeType("uint8_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
         public ByteBuffer max_dec_pic_buffering_minus1() { return StdVideoH265DecPicBufMgr.nmax_dec_pic_buffering_minus1(address()); }
         /** @return the value at the specified index of the {@code max_dec_pic_buffering_minus1} field. */
         @NativeType("uint8_t")
         public byte max_dec_pic_buffering_minus1(int index) { return StdVideoH265DecPicBufMgr.nmax_dec_pic_buffering_minus1(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code max_num_reorder_pics} field. */
-        @NativeType("uint8_t[7]")
+        @NativeType("uint8_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
         public ByteBuffer max_num_reorder_pics() { return StdVideoH265DecPicBufMgr.nmax_num_reorder_pics(address()); }
         /** @return the value at the specified index of the {@code max_num_reorder_pics} field. */
         @NativeType("uint8_t")
         public byte max_num_reorder_pics(int index) { return StdVideoH265DecPicBufMgr.nmax_num_reorder_pics(address(), index); }
 
         /** Copies the specified {@link IntBuffer} to the {@code max_latency_increase_plus1} field. */
-        public StdVideoH265DecPicBufMgr.Buffer max_latency_increase_plus1(@NativeType("uint32_t[7]") IntBuffer value) { StdVideoH265DecPicBufMgr.nmax_latency_increase_plus1(address(), value); return this; }
+        public StdVideoH265DecPicBufMgr.Buffer max_latency_increase_plus1(@NativeType("uint32_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") IntBuffer value) { StdVideoH265DecPicBufMgr.nmax_latency_increase_plus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code max_latency_increase_plus1} field. */
         public StdVideoH265DecPicBufMgr.Buffer max_latency_increase_plus1(int index, @NativeType("uint32_t") int value) { StdVideoH265DecPicBufMgr.nmax_latency_increase_plus1(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code max_dec_pic_buffering_minus1} field. */
-        public StdVideoH265DecPicBufMgr.Buffer max_dec_pic_buffering_minus1(@NativeType("uint8_t[7]") ByteBuffer value) { StdVideoH265DecPicBufMgr.nmax_dec_pic_buffering_minus1(address(), value); return this; }
+        public StdVideoH265DecPicBufMgr.Buffer max_dec_pic_buffering_minus1(@NativeType("uint8_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") ByteBuffer value) { StdVideoH265DecPicBufMgr.nmax_dec_pic_buffering_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code max_dec_pic_buffering_minus1} field. */
         public StdVideoH265DecPicBufMgr.Buffer max_dec_pic_buffering_minus1(int index, @NativeType("uint8_t") byte value) { StdVideoH265DecPicBufMgr.nmax_dec_pic_buffering_minus1(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code max_num_reorder_pics} field. */
-        public StdVideoH265DecPicBufMgr.Buffer max_num_reorder_pics(@NativeType("uint8_t[7]") ByteBuffer value) { StdVideoH265DecPicBufMgr.nmax_num_reorder_pics(address(), value); return this; }
+        public StdVideoH265DecPicBufMgr.Buffer max_num_reorder_pics(@NativeType("uint8_t[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") ByteBuffer value) { StdVideoH265DecPicBufMgr.nmax_num_reorder_pics(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code max_num_reorder_pics} field. */
         public StdVideoH265DecPicBufMgr.Buffer max_num_reorder_pics(int index, @NativeType("uint8_t") byte value) { StdVideoH265DecPicBufMgr.nmax_num_reorder_pics(address(), index, value); return this; }
 

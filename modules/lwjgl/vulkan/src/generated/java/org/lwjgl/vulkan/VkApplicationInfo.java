@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>If we modify the above example so that the application sets {@code apiVersion} to 1.1, then the application <b>must</b> not use Vulkan 1.2 functionality on the physical device that supports Vulkan 1.2.</p>
  * </div>
  * 
- * <p>Implicit layers <b>must</b> be disabled if they do not support a version at least as high as {@code apiVersion}. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#LoaderAndLayerInterface">Vulkan Loader Specification and Architecture Overview</a> document for additional information.</p>
+ * <p>Implicit layers <b>must</b> be disabled if they do not support a version at least as high as {@code apiVersion}. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#LoaderInterfaceArchitecture">“{@code Architecture of the Vulkan Loader Interfaces}”</a> document for additional information.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 

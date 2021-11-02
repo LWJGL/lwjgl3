@@ -18,24 +18,24 @@ extern "C" {
 // *************************************************
 
 typedef struct StdVideoEncodeH264SliceHeaderFlags {
-    uint32_t idr_flag:1;
-    uint32_t is_reference_flag:1;
-    uint32_t num_ref_idx_active_override_flag:1;
-    uint32_t no_output_of_prior_pics_flag:1;
-    uint32_t long_term_reference_flag:1;
-    uint32_t adaptive_ref_pic_marking_mode_flag:1;
-    uint32_t no_prior_references_available_flag:1;
+    uint32_t idr_flag : 1;
+    uint32_t is_reference_flag : 1;
+    uint32_t num_ref_idx_active_override_flag : 1;
+    uint32_t no_output_of_prior_pics_flag : 1;
+    uint32_t long_term_reference_flag : 1;
+    uint32_t adaptive_ref_pic_marking_mode_flag : 1;
+    uint32_t no_prior_references_available_flag : 1;
 } StdVideoEncodeH264SliceHeaderFlags;
 
 typedef struct StdVideoEncodeH264PictureInfoFlags {
-    uint32_t idr_flag:1;
-    uint32_t is_reference_flag:1;
-    uint32_t long_term_reference_flag:1;
+    uint32_t idr_flag : 1;
+    uint32_t is_reference_flag : 1;
+    uint32_t long_term_reference_flag : 1;
 } StdVideoEncodeH264PictureInfoFlags;
 
 typedef struct StdVideoEncodeH264RefMgmtFlags {
-    uint32_t ref_pic_list_modification_l0_flag:1;
-    uint32_t ref_pic_list_modification_l1_flag:1;
+    uint32_t ref_pic_list_modification_l0_flag : 1;
+    uint32_t ref_pic_list_modification_l1_flag : 1;
 } StdVideoEncodeH264RefMgmtFlags;
 
 typedef struct StdVideoEncodeH264RefListModEntry {

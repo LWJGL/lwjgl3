@@ -111,7 +111,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-invocationMask">{@code invocationMask} feature</a> is enabled, and if {@code image} was created with {@code usage} containing {@link HUAWEIInvocationMask#VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI}, {@code format} <b>must</b> be {@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT}</li>
  * <li>If {@code flags} does not contain {@link EXTFragmentDensityMap#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT} and {@code image} was created with {@code usage} containing {@link EXTFragmentDensityMap#VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT}, its {@code flags} <b>must</b> not contain any of {@link VK11#VK_IMAGE_CREATE_PROTECTED_BIT IMAGE_CREATE_PROTECTED_BIT}, {@link VK10#VK_IMAGE_CREATE_SPARSE_BINDING_BIT IMAGE_CREATE_SPARSE_BINDING_BIT}, {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT}, or {@link VK10#VK_IMAGE_CREATE_SPARSE_ALIASED_BIT IMAGE_CREATE_SPARSE_ALIASED_BIT}</li>
  * <li>If the {@code pNext} chain includes a {@link VkImageViewUsageCreateInfo} structure, and {@code image} was not created with a {@link VkImageStencilUsageCreateInfo} structure included in the {@code pNext} chain of {@link VkImageCreateInfo}, its {@code usage} member <b>must</b> not include any bits that were not set in the {@code usage} member of the {@link VkImageCreateInfo} structure used to create {@code image}</li>
- * <li>If the {@code pNext} chain includes a {@link VkImageViewUsageCreateInfo} structure, {@code image} was created with a {@link VkImageStencilUsageCreateInfo} structure included in the {@code pNext} chain of {@link VkImageCreateInfo}, and {@code subresourceRange.aspectMask} includes {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}, the {@code usage} member of the {@link VkImageViewUsageCreateInfo} instance <b>must</b> not include any bits that were not set in the {@code usage} member of the {@link VkImageStencilUsageCreateInfo} structure used to create {@code image}</li>
+ * <li>If the {@code pNext} chain includes a {@link VkImageViewUsageCreateInfo} structure, {@code image} was created with a {@link VkImageStencilUsageCreateInfo} structure included in the {@code pNext} chain of {@link VkImageCreateInfo}, and {@code subresourceRange.aspectMask} includes {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}, the {@code usage} member of the {@link VkImageViewUsageCreateInfo} structure <b>must</b> not include any bits that were not set in the {@code usage} member of the {@link VkImageStencilUsageCreateInfo} structure used to create {@code image}</li>
  * <li>If the {@code pNext} chain includes a {@link VkImageViewUsageCreateInfo} structure, {@code image} was created with a {@link VkImageStencilUsageCreateInfo} structure included in the {@code pNext} chain of {@link VkImageCreateInfo}, and {@code subresourceRange.aspectMask} includes bits other than {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}, the {@code usage} member of the {@link VkImageViewUsageCreateInfo} structure <b>must</b> not include any bits that were not set in the {@code usage} member of the {@link VkImageCreateInfo} structure used to create {@code image}</li>
  * <li>If {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_1D IMAGE_VIEW_TYPE_1D}, {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D}, or {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}; and {@code subresourceRange.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, then {@code subresourceRange.layerCount} <b>must</b> be 1</li>
  * <li>If {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_1D IMAGE_VIEW_TYPE_1D}, {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D}, or {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}; and {@code subresourceRange.layerCount} is {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, then the remaining number of layers <b>must</b> be 1</li>
@@ -129,7 +129,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkImageViewASTCDecodeModeEXT}, {@link VkImageViewUsageCreateInfo}, {@link VkSamplerYcbcrConversionInfo}, {@link VkVideoProfileKHR}, or {@link VkVideoProfilesKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkImageViewASTCDecodeModeEXT}, {@link VkImageViewUsageCreateInfo}, {@link VkSamplerYcbcrConversionInfo}, {@link VkVideoDecodeH264ProfileEXT}, {@link VkVideoDecodeH265ProfileEXT}, {@link VkVideoEncodeH264ProfileEXT}, {@link VkVideoEncodeH265ProfileEXT}, {@link VkVideoProfileKHR}, or {@link VkVideoProfilesKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkImageViewCreateFlagBits} values</li>
  * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
@@ -253,6 +253,14 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
     public VkImageViewCreateInfo pNext(VkSamplerYcbcrConversionInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerYcbcrConversionInfoKHR} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkSamplerYcbcrConversionInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH264ProfileEXT} value to the {@code pNext} chain. */
+    public VkImageViewCreateInfo pNext(VkVideoDecodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH265ProfileEXT} value to the {@code pNext} chain. */
+    public VkImageViewCreateInfo pNext(VkVideoDecodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH264ProfileEXT} value to the {@code pNext} chain. */
+    public VkImageViewCreateInfo pNext(VkVideoEncodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH265ProfileEXT} value to the {@code pNext} chain. */
+    public VkImageViewCreateInfo pNext(VkVideoEncodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
@@ -552,6 +560,14 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
         public VkImageViewCreateInfo.Buffer pNext(VkSamplerYcbcrConversionInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerYcbcrConversionInfoKHR} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkSamplerYcbcrConversionInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH264ProfileEXT} value to the {@code pNext} chain. */
+        public VkImageViewCreateInfo.Buffer pNext(VkVideoDecodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH265ProfileEXT} value to the {@code pNext} chain. */
+        public VkImageViewCreateInfo.Buffer pNext(VkVideoDecodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH264ProfileEXT} value to the {@code pNext} chain. */
+        public VkImageViewCreateInfo.Buffer pNext(VkVideoEncodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH265ProfileEXT} value to the {@code pNext} chain. */
+        public VkImageViewCreateInfo.Buffer pNext(VkVideoEncodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */

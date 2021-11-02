@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t vps_time_scale;
  *     uint32_t vps_num_ticks_poc_diff_one_minus1;
  *     {@link StdVideoH265DecPicBufMgr StdVideoH265DecPicBufMgr} * pDecPicBufMgr;
- *     {@link StdVideoH265HrdParameters StdVideoH265HrdParameters} * hrd_parameters;
+ *     {@link StdVideoH265HrdParameters StdVideoH265HrdParameters} * pHrdParameters;
  *     {@link StdVideoH265VpsFlags StdVideoH265VpsFlags} flags;
  * }</code></pre>
  */
@@ -47,7 +47,7 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
         VPS_TIME_SCALE,
         VPS_NUM_TICKS_POC_DIFF_ONE_MINUS1,
         PDECPICBUFMGR,
-        HRD_PARAMETERS,
+        PHRDPARAMETERS,
         FLAGS;
 
     static {
@@ -71,7 +71,7 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
         VPS_TIME_SCALE = layout.offsetof(3);
         VPS_NUM_TICKS_POC_DIFF_ONE_MINUS1 = layout.offsetof(4);
         PDECPICBUFMGR = layout.offsetof(5);
-        HRD_PARAMETERS = layout.offsetof(6);
+        PHRDPARAMETERS = layout.offsetof(6);
         FLAGS = layout.offsetof(7);
     }
 
@@ -106,9 +106,9 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
     /** @return a {@link StdVideoH265DecPicBufMgr} view of the struct pointed to by the {@code pDecPicBufMgr} field. */
     @NativeType("StdVideoH265DecPicBufMgr *")
     public StdVideoH265DecPicBufMgr pDecPicBufMgr() { return npDecPicBufMgr(address()); }
-    /** @return a {@link StdVideoH265HrdParameters} view of the struct pointed to by the {@code hrd_parameters} field. */
+    /** @return a {@link StdVideoH265HrdParameters} view of the struct pointed to by the {@code pHrdParameters} field. */
     @NativeType("StdVideoH265HrdParameters *")
-    public StdVideoH265HrdParameters hrd_parameters() { return nhrd_parameters(address()); }
+    public StdVideoH265HrdParameters pHrdParameters() { return npHrdParameters(address()); }
     /** @return a {@link StdVideoH265VpsFlags} view of the {@code flags} field. */
     public StdVideoH265VpsFlags flags() { return nflags(address()); }
 
@@ -124,8 +124,8 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
     public StdVideoH265VideoParameterSet vps_num_ticks_poc_diff_one_minus1(@NativeType("uint32_t") int value) { nvps_num_ticks_poc_diff_one_minus1(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoH265DecPicBufMgr} to the {@code pDecPicBufMgr} field. */
     public StdVideoH265VideoParameterSet pDecPicBufMgr(@NativeType("StdVideoH265DecPicBufMgr *") StdVideoH265DecPicBufMgr value) { npDecPicBufMgr(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265HrdParameters} to the {@code hrd_parameters} field. */
-    public StdVideoH265VideoParameterSet hrd_parameters(@NativeType("StdVideoH265HrdParameters *") StdVideoH265HrdParameters value) { nhrd_parameters(address(), value); return this; }
+    /** Sets the address of the specified {@link StdVideoH265HrdParameters} to the {@code pHrdParameters} field. */
+    public StdVideoH265VideoParameterSet pHrdParameters(@NativeType("StdVideoH265HrdParameters *") StdVideoH265HrdParameters value) { npHrdParameters(address(), value); return this; }
     /** Copies the specified {@link StdVideoH265VpsFlags} to the {@code flags} field. */
     public StdVideoH265VideoParameterSet flags(StdVideoH265VpsFlags value) { nflags(address(), value); return this; }
     /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -139,7 +139,7 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
         int vps_time_scale,
         int vps_num_ticks_poc_diff_one_minus1,
         StdVideoH265DecPicBufMgr pDecPicBufMgr,
-        StdVideoH265HrdParameters hrd_parameters,
+        StdVideoH265HrdParameters pHrdParameters,
         StdVideoH265VpsFlags flags
     ) {
         vps_video_parameter_set_id(vps_video_parameter_set_id);
@@ -148,7 +148,7 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
         vps_time_scale(vps_time_scale);
         vps_num_ticks_poc_diff_one_minus1(vps_num_ticks_poc_diff_one_minus1);
         pDecPicBufMgr(pDecPicBufMgr);
-        hrd_parameters(hrd_parameters);
+        pHrdParameters(pHrdParameters);
         flags(flags);
 
         return this;
@@ -292,8 +292,8 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
     public static int nvps_num_ticks_poc_diff_one_minus1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265VideoParameterSet.VPS_NUM_TICKS_POC_DIFF_ONE_MINUS1); }
     /** Unsafe version of {@link #pDecPicBufMgr}. */
     public static StdVideoH265DecPicBufMgr npDecPicBufMgr(long struct) { return StdVideoH265DecPicBufMgr.create(memGetAddress(struct + StdVideoH265VideoParameterSet.PDECPICBUFMGR)); }
-    /** Unsafe version of {@link #hrd_parameters}. */
-    public static StdVideoH265HrdParameters nhrd_parameters(long struct) { return StdVideoH265HrdParameters.create(memGetAddress(struct + StdVideoH265VideoParameterSet.HRD_PARAMETERS)); }
+    /** Unsafe version of {@link #pHrdParameters}. */
+    public static StdVideoH265HrdParameters npHrdParameters(long struct) { return StdVideoH265HrdParameters.create(memGetAddress(struct + StdVideoH265VideoParameterSet.PHRDPARAMETERS)); }
     /** Unsafe version of {@link #flags}. */
     public static StdVideoH265VpsFlags nflags(long struct) { return StdVideoH265VpsFlags.create(struct + StdVideoH265VideoParameterSet.FLAGS); }
 
@@ -309,8 +309,8 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
     public static void nvps_num_ticks_poc_diff_one_minus1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265VideoParameterSet.VPS_NUM_TICKS_POC_DIFF_ONE_MINUS1, value); }
     /** Unsafe version of {@link #pDecPicBufMgr(StdVideoH265DecPicBufMgr) pDecPicBufMgr}. */
     public static void npDecPicBufMgr(long struct, StdVideoH265DecPicBufMgr value) { memPutAddress(struct + StdVideoH265VideoParameterSet.PDECPICBUFMGR, value.address()); }
-    /** Unsafe version of {@link #hrd_parameters(StdVideoH265HrdParameters) hrd_parameters}. */
-    public static void nhrd_parameters(long struct, StdVideoH265HrdParameters value) { memPutAddress(struct + StdVideoH265VideoParameterSet.HRD_PARAMETERS, value.address()); }
+    /** Unsafe version of {@link #pHrdParameters(StdVideoH265HrdParameters) pHrdParameters}. */
+    public static void npHrdParameters(long struct, StdVideoH265HrdParameters value) { memPutAddress(struct + StdVideoH265VideoParameterSet.PHRDPARAMETERS, value.address()); }
     /** Unsafe version of {@link #flags(StdVideoH265VpsFlags) flags}. */
     public static void nflags(long struct, StdVideoH265VpsFlags value) { memCopy(value.address(), struct + StdVideoH265VideoParameterSet.FLAGS, StdVideoH265VpsFlags.SIZEOF); }
 
@@ -321,9 +321,9 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + StdVideoH265VideoParameterSet.PDECPICBUFMGR));
-        long hrd_parameters = memGetAddress(struct + StdVideoH265VideoParameterSet.HRD_PARAMETERS);
-        check(hrd_parameters);
-        StdVideoH265HrdParameters.validate(hrd_parameters);
+        long pHrdParameters = memGetAddress(struct + StdVideoH265VideoParameterSet.PHRDPARAMETERS);
+        check(pHrdParameters);
+        StdVideoH265HrdParameters.validate(pHrdParameters);
     }
 
     /**
@@ -394,9 +394,9 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
         /** @return a {@link StdVideoH265DecPicBufMgr} view of the struct pointed to by the {@code pDecPicBufMgr} field. */
         @NativeType("StdVideoH265DecPicBufMgr *")
         public StdVideoH265DecPicBufMgr pDecPicBufMgr() { return StdVideoH265VideoParameterSet.npDecPicBufMgr(address()); }
-        /** @return a {@link StdVideoH265HrdParameters} view of the struct pointed to by the {@code hrd_parameters} field. */
+        /** @return a {@link StdVideoH265HrdParameters} view of the struct pointed to by the {@code pHrdParameters} field. */
         @NativeType("StdVideoH265HrdParameters *")
-        public StdVideoH265HrdParameters hrd_parameters() { return StdVideoH265VideoParameterSet.nhrd_parameters(address()); }
+        public StdVideoH265HrdParameters pHrdParameters() { return StdVideoH265VideoParameterSet.npHrdParameters(address()); }
         /** @return a {@link StdVideoH265VpsFlags} view of the {@code flags} field. */
         public StdVideoH265VpsFlags flags() { return StdVideoH265VideoParameterSet.nflags(address()); }
 
@@ -412,8 +412,8 @@ public class StdVideoH265VideoParameterSet extends Struct implements NativeResou
         public StdVideoH265VideoParameterSet.Buffer vps_num_ticks_poc_diff_one_minus1(@NativeType("uint32_t") int value) { StdVideoH265VideoParameterSet.nvps_num_ticks_poc_diff_one_minus1(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoH265DecPicBufMgr} to the {@code pDecPicBufMgr} field. */
         public StdVideoH265VideoParameterSet.Buffer pDecPicBufMgr(@NativeType("StdVideoH265DecPicBufMgr *") StdVideoH265DecPicBufMgr value) { StdVideoH265VideoParameterSet.npDecPicBufMgr(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265HrdParameters} to the {@code hrd_parameters} field. */
-        public StdVideoH265VideoParameterSet.Buffer hrd_parameters(@NativeType("StdVideoH265HrdParameters *") StdVideoH265HrdParameters value) { StdVideoH265VideoParameterSet.nhrd_parameters(address(), value); return this; }
+        /** Sets the address of the specified {@link StdVideoH265HrdParameters} to the {@code pHrdParameters} field. */
+        public StdVideoH265VideoParameterSet.Buffer pHrdParameters(@NativeType("StdVideoH265HrdParameters *") StdVideoH265HrdParameters value) { StdVideoH265VideoParameterSet.npHrdParameters(address(), value); return this; }
         /** Copies the specified {@link StdVideoH265VpsFlags} to the {@code flags} field. */
         public StdVideoH265VideoParameterSet.Buffer flags(StdVideoH265VpsFlags value) { StdVideoH265VideoParameterSet.nflags(address(), value); return this; }
         /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */

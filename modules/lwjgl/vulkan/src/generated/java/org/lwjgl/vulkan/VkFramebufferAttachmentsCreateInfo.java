@@ -94,7 +94,7 @@ public class VkFramebufferAttachmentsCreateInfo extends Struct implements Native
     /** the number of attachments being described. */
     @NativeType("uint32_t")
     public int attachmentImageInfoCount() { return nattachmentImageInfoCount(address()); }
-    /** a pointer to an array of {@link VkFramebufferAttachmentImageInfo} instances, each of which describes a number of parameters of the corresponding attachment in a render pass instance. */
+    /** a pointer to an array of {@link VkFramebufferAttachmentImageInfo} structures, each of which describes a number of parameters of the corresponding attachment in a render pass instance. */
     @Nullable
     @NativeType("VkFramebufferAttachmentImageInfo const *")
     public VkFramebufferAttachmentImageInfo.Buffer pAttachmentImageInfos() { return npAttachmentImageInfos(address()); }

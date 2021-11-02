@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code swapchainCount} <b>must</b> be the same value as {@link VkPresentInfoKHR}{@code ::swapchainCount}, where this {@link VkPresentIdKHR} is in the pNext-chain of the {@link VkPresentInfoKHR} structure</li>
+ * <li>{@code swapchainCount} <b>must</b> be the same value as {@link VkPresentInfoKHR}{@code ::swapchainCount}, where this {@link VkPresentIdKHR} is in the {@code pNext} chain of the {@link VkPresentInfoKHR} structure</li>
  * <li>Each {@code presentIds} entry <b>must</b> be greater than any previous {@code presentIds} entry passed for the associated {@code pSwapchains} entry</li>
  * </ul>
  * 

@@ -92,12 +92,12 @@ val VkVideoEncodeH264CapabilityFlagBitsEXT = "VkVideoEncodeH264CapabilityFlagBit
 val VkVideoEncodeH264InputModeFlagBitsEXT = "VkVideoEncodeH264InputModeFlagBitsEXT".enumType
 val VkVideoEncodeH264OutputModeFlagBitsEXT = "VkVideoEncodeH264OutputModeFlagBitsEXT".enumType
 val VkVideoEncodeH264CreateFlagBitsEXT = "VkVideoEncodeH264CreateFlagBitsEXT".enumType
-val VkVideoEncodeH265CapabilityFlagBitsEXT = "VkVideoEncodeH265CapabilityFlagBitsEXT".enumType
 val VkVideoEncodeH265InputModeFlagBitsEXT = "VkVideoEncodeH265InputModeFlagBitsEXT".enumType
 val VkVideoEncodeH265OutputModeFlagBitsEXT = "VkVideoEncodeH265OutputModeFlagBitsEXT".enumType
 val VkVideoEncodeH265CtbSizeFlagBitsEXT = "VkVideoEncodeH265CtbSizeFlagBitsEXT".enumType
 val VkVideoDecodeH264PictureLayoutFlagBitsEXT = "VkVideoDecodeH264PictureLayoutFlagBitsEXT".enumType
 val VkShaderInfoTypeAMD = "VkShaderInfoTypeAMD".enumType
+val VkRenderingFlagBitsKHR = "VkRenderingFlagBitsKHR".enumType
 val VkExternalMemoryHandleTypeFlagBitsNV = "VkExternalMemoryHandleTypeFlagBitsNV".enumType
 val VkExternalMemoryFeatureFlagBitsNV = "VkExternalMemoryFeatureFlagBitsNV".enumType
 val VkValidationCheckEXT = "VkValidationCheckEXT".enumType
@@ -208,6 +208,7 @@ val VkVideoEncodeH265CreateFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265CreateF
 val VkVideoEncodeH265CtbSizeFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265CtbSizeFlagsEXT")
 val VkVideoDecodeH264PictureLayoutFlagsEXT = typedef(VkFlags, "VkVideoDecodeH264PictureLayoutFlagsEXT")
 val VkVideoDecodeH264CreateFlagsEXT = typedef(VkFlags, "VkVideoDecodeH264CreateFlagsEXT")
+val VkRenderingFlagsKHR = typedef(VkFlags, "VkRenderingFlagsKHR")
 val VkExternalMemoryHandleTypeFlagsNV = typedef(VkFlags, "VkExternalMemoryHandleTypeFlagsNV")
 val VkExternalMemoryFeatureFlagsNV = typedef(VkFlags, "VkExternalMemoryFeatureFlagsNV")
 val VkPeerMemoryFeatureFlagsKHR = typedef(VkFlags, "VkPeerMemoryFeatureFlagsKHR")
@@ -1599,8 +1600,7 @@ val VkVideoBeginCodingInfoKHR = struct(Module.VULKAN, "VkVideoBeginCodingInfoKHR
             <li>{@code codecQualityPreset} <b>must</b> not be 0</li>
             <li>{@code videoSession} <b>must</b> be a valid {@code VkVideoSessionKHR} handle</li>
             <li>If {@code videoSessionParameters} is not #NULL_HANDLE, {@code videoSessionParameters} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
-            <li>{@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid ##VkVideoReferenceSlotKHR structures</li>
-            <li>{@code referenceSlotCount} <b>must</b> be greater than 0</li>
+            <li>If {@code referenceSlotCount} is not 0, {@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid ##VkVideoReferenceSlotKHR structures</li>
             <li>If {@code videoSessionParameters} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code videoSession}</li>
             <li>Both of {@code videoSession}, and {@code videoSessionParameters} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
         </ul>
@@ -1615,7 +1615,7 @@ val VkVideoBeginCodingInfoKHR = struct(Module.VULKAN, "VkVideoBeginCodingInfoKHR
     VkVideoCodingQualityPresetFlagsKHR("codecQualityPreset", "a bitmask of {@code VkVideoCodingQualityPresetFlagBitsKHR} specifying the Video Decode or Encode quality preset.")
     VkVideoSessionKHR("videoSession", "the video session object to be bound for the processing of the video commands.")
     VkVideoSessionParametersKHR("videoSessionParameters", "#NULL_HANDLE or a handle of a {@code VkVideoSessionParametersKHR} object to be used for the processing of the video commands. If #NULL_HANDLE, then no video session parameters apply to this command buffer context.")
-    AutoSize("pReferenceSlots")..uint32_t("referenceSlotCount", "the number of reference slot entries provided in {@code pReferenceSlots}.")
+    AutoSize("pReferenceSlots", optional = true)..uint32_t("referenceSlotCount", "the number of reference slot entries provided in {@code pReferenceSlots}.")
     VkVideoReferenceSlotKHR.const.p("pReferenceSlots", "a pointer to an array of ##VkVideoReferenceSlotKHR structures specifying reference slots, used within the video command context between this #CmdBeginVideoCodingKHR() command and the #CmdEndVideoCodingKHR() commmand that follows. Each reference slot provides a slot index and the ##VkVideoPictureResourceKHR specifying the reference picture resource bound to this slot index. A slot index <b>must</b> not appear more than once in {@code pReferenceSlots} in a given command.")
 }
 
@@ -1679,8 +1679,7 @@ val VkVideoDecodeInfoKHR = struct(Module.VULKAN, "VkVideoDecodeInfoKHR") {
             <li>{@code srcBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
             <li>{@code dstPictureResource} <b>must</b> be a valid ##VkVideoPictureResourceKHR structure</li>
             <li>{@code pSetupReferenceSlot} <b>must</b> be a valid pointer to a valid ##VkVideoReferenceSlotKHR structure</li>
-            <li>{@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid ##VkVideoReferenceSlotKHR structures</li>
-            <li>{@code referenceSlotCount} <b>must</b> be greater than 0</li>
+            <li>If {@code referenceSlotCount} is not 0, {@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid ##VkVideoReferenceSlotKHR structures</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1700,7 +1699,7 @@ val VkVideoDecodeInfoKHR = struct(Module.VULKAN, "VkVideoDecodeInfoKHR") {
     VkDeviceSize("srcBufferRange", "the size of the srcBuffer with valid encoded bitstream, starting from {@code srcBufferOffset}. It <b>must</b> meet the alignment requirement {@code minBitstreamBufferSizeAlignment} within ##VkVideoCapabilitiesKHR queried with the #GetPhysicalDeviceVideoCapabilitiesKHR() function.")
     VkVideoPictureResourceKHR("dstPictureResource", "the destination <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#decoded-output-picture\">Decoded Output Picture</a> Resource.")
     VkVideoReferenceSlotKHR.const.p("pSetupReferenceSlot", "{@code NULL} or a pointer to a ##VkVideoReferenceSlotKHR structure used for generating a DPB reference slot and Picture Resource. {@code pSetupReferenceSlot→slotIndex} specifies the slot index number to use as a target for producing the DPB data. {@code slotIndex} <b>must</b> reference a valid entry as specified in ##VkVideoBeginCodingInfoKHR via the {@code pReferenceSlots} within the #CmdBeginVideoCodingKHR() command that established the Vulkan Video Decode Context for this command.")
-    AutoSize("pReferenceSlots")..uint32_t("referenceSlotCount", "the number of the DPB Reference Pictures that will be used when this decoding operation is executing.")
+    AutoSize("pReferenceSlots", optional = true)..uint32_t("referenceSlotCount", "the number of the DPB Reference Pictures that will be used when this decoding operation is executing.")
     VkVideoReferenceSlotKHR.const.p("pReferenceSlots", "a pointer to an array of ##VkVideoReferenceSlotKHR structures specifying the DPB Reference pictures that will be used when this decoding operation is executing.")
 }
 
@@ -2186,8 +2185,7 @@ val VkVideoEncodeH265CapabilitiesEXT = struct(Module.VULKAN, "VkVideoEncodeH265C
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265CapabilityFlagBitsEXT} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
+            <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code inputModeFlags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265InputModeFlagBitsEXT} values</li>
             <li>{@code inputModeFlags} <b>must</b> not be 0</li>
             <li>{@code outputModeFlags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265OutputModeFlagBitsEXT} values</li>
@@ -2615,7 +2613,7 @@ val VkVideoDecodeH264MvcEXT = struct(Module.VULKAN, "VkVideoDecodeH264MvcEXT") {
         Structure specifies parameters of mvc views.
 
         <h5>Description</h5>
-        When the content type is H.264 MVC, an instance of ##VkVideoDecodeH264MvcEXT <b>must</b> be chained to ##VkVideoDecodeH264PictureInfoEXT.
+        When the content type is H.264 MVC, a ##VkVideoDecodeH264MvcEXT structure <b>must</b> be chained to ##VkVideoDecodeH264PictureInfoEXT.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2700,6 +2698,408 @@ val VkShaderStatisticsInfoAMD = struct(Module.VULKAN, "VkShaderStatisticsInfoAMD
     uint32_t("numAvailableVgprs", "the maximum limit of VGPRs made available to the shader compiler.")
     uint32_t("numAvailableSgprs", "the maximum limit of SGPRs made available to the shader compiler.")
     uint32_t("computeWorkGroupSize", "the local workgroup size of this shader in { X, Y, Z } dimensions.")[3]
+}
+
+val VkRenderingAttachmentInfoKHR = struct(Module.VULKAN, "VkRenderingAttachmentInfoKHR") {
+    documentation =
+        """
+        Structure specifying attachment information.
+
+        <h5>Description</h5>
+        Values in {@code imageView} are loaded and stored according to the values of {@code loadOp} and {@code storeOp}, within the render area for each device specified in ##VkRenderingInfoKHR. If {@code imageView} is #NULL_HANDLE, other members of this structure are ignored; writes to this attachment will be discarded, and no load, store, or resolve operations will be performed.
+
+        If {@code resolveMode} is #RESOLVE_MODE_NONE, then {@code resolveImageView} is ignored. If {@code resolveMode} is not #RESOLVE_MODE_NONE, values in {@code resolveImageView} within the render area become undefined once rendering begins. At the end of rendering, the color values written to each pixel location in {@code imageView} will be resolved according to {@code resolveMode} and stored into the the same location in {@code resolveImageView}.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The resolve mode and store operation are independent; it is valid to write both resolved and unresolved values, and equally valid to discard the unresolved values while writing the resolved ones.
+        </div>
+
+        Store and resolve operations are only performed at the end of a render pass instance that does not specify the #RENDERING_SUSPENDING_BIT_KHR flag.
+
+        Load operations are only performed at the beginning of a render pass instance that does not specify the #RENDERING_RESUMING_BIT_KHR flag.
+
+        Image contents at the end of a suspended render pass instance remain defined for access by a resuming render pass instance.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code imageView} is not #NULL_HANDLE and has a non-integer color format, {@code resolveMode} <b>must</b> be #RESOLVE_MODE_NONE or #RESOLVE_MODE_AVERAGE_BIT</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and has an integer color format, {@code resolveMode} <b>must</b> be #RESOLVE_MODE_NONE or #RESOLVE_MODE_SAMPLE_ZERO_BIT</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and {@code resolveMode} is not #RESOLVE_MODE_NONE, {@code imageView} <b>must</b> not have a sample count of #SAMPLE_COUNT_1_BIT</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and {@code resolveMode} is not #RESOLVE_MODE_NONE, {@code resolveImageView} <b>must</b> have a sample count of #SAMPLE_COUNT_1_BIT</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and {@code resolveMode} is not #RESOLVE_MODE_NONE, {@code imageView} and {@code resolveImageView} <b>must</b> have the same {@code VkFormat}</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code layout} <b>must</b> not be #IMAGE_LAYOUT_UNDEFINED, #IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, or #IMAGE_LAYOUT_PREINITIALIZED</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and {@code resolveMode} is not #RESOLVE_MODE_NONE, {@code resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_UNDEFINED, #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL, #IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, #IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, or #IMAGE_LAYOUT_PREINITIALIZED</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and {@code resolveMode} is not #RESOLVE_MODE_NONE, {@code resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL or #IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code layout} <b>must</b> not be #IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and {@code resolveMode} is not #RESOLVE_MODE_NONE, {@code resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_SHADING_RATE_OPTIMAL_NV</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code layout} <b>must</b> not be #IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and {@code resolveMode} is not #RESOLVE_MODE_NONE, {@code resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and {@code resolveMode} is not #RESOLVE_MODE_NONE, {@code resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code layout} <b>must</b> not be #IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and {@code resolveMode} is not #RESOLVE_MODE_NONE, {@code resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code layout} <b>must</b> not be #IMAGE_LAYOUT_PRESENT_SRC_KHR</li>
+            <li>If {@code imageView} is not #NULL_HANDLE and {@code resolveMode} is not #RESOLVE_MODE_NONE, {@code resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_PRESENT_SRC_KHR</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
+            <li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+            <li>If {@code resolveMode} is not 0, {@code resolveMode} <b>must</b> be a valid {@code VkResolveModeFlagBits} value</li>
+            <li>If {@code resolveImageView} is not #NULL_HANDLE, {@code resolveImageView} <b>must</b> be a valid {@code VkImageView} handle</li>
+            <li>{@code resolveImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+            <li>{@code loadOp} <b>must</b> be a valid {@code VkAttachmentLoadOp} value</li>
+            <li>{@code storeOp} <b>must</b> be a valid {@code VkAttachmentStoreOp} value</li>
+            <li>{@code clearValue} <b>must</b> be a valid ##VkClearValue union</li>
+            <li>Both of {@code imageView}, and {@code resolveImageView} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkClearValue, ##VkRenderingInfoKHR
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkImageView("imageView", "the image view that will be used for rendering.")
+    VkImageLayout("imageLayout", "the layout that {@code imageView} will be in during rendering.")
+    VkResolveModeFlagBits("resolveMode", "a {@code VkResolveModeFlagBits} value defining how multisampled data written to {@code imageView} will be resolved.")
+    VkImageView("resolveImageView", "an image view used to write resolved multisample data at the end of rendering.")
+    VkImageLayout("resolveImageLayout", "the layout that {@code resolveImageView} will be in during rendering.")
+    VkAttachmentLoadOp("loadOp", "a {@code VkAttachmentLoadOp} value specifying how the contents of {@code imageView} are treated at the start of the render pass instance.")
+    VkAttachmentStoreOp("storeOp", "a {@code VkAttachmentStoreOp} value specifying how the contents of {@code imageView} are treated at the end of the render pass instance.")
+    VkClearValue("clearValue", "a ##VkClearValue structure that defines values used to clear {@code imageView} when {@code loadOp} is #ATTACHMENT_LOAD_OP_CLEAR.")
+}
+
+val VkRenderingInfoKHR = struct(Module.VULKAN, "VkRenderingInfoKHR") {
+    documentation =
+        """
+        Structure specifying render pass instance begin info.
+
+        <h5>Description</h5>
+        If {@code viewMask} is not 0, multiview is enabled.
+
+        If there’s an instance of ##VkDeviceGroupRenderPassBeginInfo included in the {@code pNext} chain and its {@code deviceCount} member is not 0, then {@code renderArea} is ignored, and the render area is defined per-device by that structure.
+
+        Each element of the {@code pColorAttachments} array corresponds to an output location in the shader, i.e. if the shader declares an output variable decorated with a {@code Location} value of <b>X</b>, then it uses the attachment provided in {@code pColorAttachments}[<b>X</b>]. If the {@code imageView} member of any element of {@code pColorAttachments} is #NULL_HANDLE, writes to the corresponding location by a fragment are discarded.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code viewMask} is 0, {@code layerCount} <b>must</b> not be 0</li>
+            <li>If neither the {@link AMDMixedAttachmentSamples VK_AMD_mixed_attachment_samples} nor the {@link NVFramebufferMixedSamples VK_NV_framebuffer_mixed_samples} extensions are enabled, {@code imageView} members of {@code pDepthAttachment}, {@code pStencilAttachment}, and elements of {@code pColorAttachments} that are not #NULL_HANDLE <b>must</b> have been created with the same {@code sampleCount}</li>
+            <li>If the {@code pNext} chain does not contain ##VkDeviceGroupRenderPassBeginInfo or its {@code deviceRenderAreaCount} member is equal to 0, {@code renderArea.offset.x} <b>must</b> be greater than or equal to 0</li>
+            <li>If the {@code pNext} chain does not contain ##VkDeviceGroupRenderPassBeginInfo or its {@code deviceRenderAreaCount} member is equal to 0, {@code renderArea.offset.y} <b>must</b> be greater than or equal to 0</li>
+            <li>If the {@code pNext} chain does not contain ##VkDeviceGroupRenderPassBeginInfo or its {@code deviceRenderAreaCount} member is equal to 0, the width of the {@code imageView} member of any element of {@code pColorAttachments}, {@code pDepthAttachment}, or {@code pStencilAttachment} that is not #NULL_HANDLE <b>must</b> be greater than or equal to <code>renderArea.offset.x + renderArea.extent.width</code></li>
+            <li>If the {@code pNext} chain does not contain ##VkDeviceGroupRenderPassBeginInfo or its {@code deviceRenderAreaCount} member is equal to 0, the height of the {@code imageView} member of any element of {@code pColorAttachments}, {@code pDepthAttachment}, or {@code pStencilAttachment} that is not #NULL_HANDLE <b>must</b> be greater than or equal to <code>renderArea.offset.y + renderArea.extent.height</code></li>
+            <li>If the {@code pNext} chain contains ##VkDeviceGroupRenderPassBeginInfo, the {@code offset.x} member of each element of {@code pDeviceRenderAreas} <b>must</b> be greater than or equal to 0</li>
+            <li>If the {@code pNext} chain contains ##VkDeviceGroupRenderPassBeginInfo, the {@code offset.y} member of each element of {@code pDeviceRenderAreas} <b>must</b> be greater than or equal to 0</li>
+            <li>If the {@code pNext} chain contains ##VkDeviceGroupRenderPassBeginInfo, the width of the {@code imageView} member of any element of {@code pColorAttachments}, {@code pDepthAttachment}, or {@code pStencilAttachment} that is not #NULL_HANDLE <b>must</b> be greater than or equal to the sum of the {@code offset.x} and {@code extent.width} members of each element of {@code pDeviceRenderAreas}</li>
+            <li>If the {@code pNext} chain contains ##VkDeviceGroupRenderPassBeginInfo, the height of the {@code imageView} member of any element of {@code pColorAttachments}, {@code pDepthAttachment}, or {@code pStencilAttachment} that is not #NULL_HANDLE <b>must</b> be greater than or equal to the sum of the {@code offset.y} and {@code extent.height} members of each element of {@code pDeviceRenderAreas}</li>
+            <li>If neither {@code pDepthAttachment} or {@code pStencilAttachment} are {@code NULL} and the {@code imageView} member of either structure is not #NULL_HANDLE, the {@code imageView} member of each structure <b>must</b> be the same</li>
+            <li>If neither {@code pDepthAttachment} or {@code pStencilAttachment} are {@code NULL}, and the {@code resolveMode} member of each is not #RESOLVE_MODE_NONE, the {@code resolveImageView} member of each structure <b>must</b> be the same</li>
+            <li>If {@code colorAttachmentCount} is not 0 and the {@code imageView} member of an element of {@code pColorAttachments} is not #NULL_HANDLE, that {@code imageView} <b>must</b> have been created with #IMAGE_USAGE_COLOR_ATTACHMENT_BIT</li>
+            <li>If {@code pDepthAttachment} is not {@code NULL} and {@code pDepthAttachment→imageView} is not #NULL_HANDLE, {@code pDepthAttachment→imageView} <b>must</b> have been created with #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
+            <li>If {@code pStencilAttachment} is not {@code NULL} and {@code pStencilAttachment→imageView} is not #NULL_HANDLE, {@code pStencilAttachment→imageView} <b>must</b> have been created with a stencil usage including #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
+            <li>If {@code colorAttachmentCount} is not 0 and the {@code imageView} member of an element of {@code pColorAttachments} is not #NULL_HANDLE, the {@code layout} member of that element of {@code pColorAttachments} <b>must</b> not be #IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</li>
+            <li>If {@code colorAttachmentCount} is not 0 and the {@code imageView} member of an element of {@code pColorAttachments} is not #NULL_HANDLE, if the {@code resolveMode} member of that element of {@code pColorAttachments} is not #RESOLVE_MODE_NONE, its {@code resolveImageLayout} member <b>must</b> not be #IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</li>
+            <li>If {@code pDepthAttachment} is not {@code NULL} and {@code pDepthAttachment→imageView} is not #NULL_HANDLE, {@code pDepthAttachment→layout} <b>must</b> not be #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</li>
+            <li>If {@code pDepthAttachment} is not {@code NULL}, {@code pDepthAttachment→imageView} is not #NULL_HANDLE, and {@code pDepthAttachment→resolveMode} is not #RESOLVE_MODE_NONE, {@code pDepthAttachment→resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</li>
+            <li>If {@code pStencilAttachment} is not {@code NULL} and {@code pStencilAttachment→imageView} is not #NULL_HANDLE, {@code pStencilAttachment→layout} <b>must</b> not be #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</li>
+            <li>If {@code pStencilAttachment} is not {@code NULL}, {@code pStencilAttachment→imageView} is not #NULL_HANDLE, and {@code pStencilAttachment→resolveMode} is not #RESOLVE_MODE_NONE, {@code pStencilAttachment→resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL</li>
+            <li>If {@code colorAttachmentCount} is not 0 and the {@code imageView} member of an element of {@code pColorAttachments} is not #NULL_HANDLE, the {@code layout} member of that element of {@code pColorAttachments} <b>must</b> not be #IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</li>
+            <li>If {@code colorAttachmentCount} is not 0 and the {@code imageView} member of an element of {@code pColorAttachments} is not #NULL_HANDLE, if the {@code resolveMode} member of that element of {@code pColorAttachments} is not #RESOLVE_MODE_NONE, its {@code resolveImageLayout} member <b>must</b> not be #IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</li>
+            <li>If {@code pDepthAttachment} is not {@code NULL}, {@code pDepthAttachment→imageView} is not #NULL_HANDLE, and {@code pDepthAttachment→resolveMode} is not #RESOLVE_MODE_NONE, {@code pDepthAttachment→resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL</li>
+            <li>If {@code pStencilAttachment} is not {@code NULL}, {@code pStencilAttachment→imageView} is not #NULL_HANDLE, and {@code pStencilAttachment→resolveMode} is not #RESOLVE_MODE_NONE, {@code pStencilAttachment→resolveImageLayout} <b>must</b> not be #IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL</li>
+            <li>If {@code colorAttachmentCount} is not 0 and the {@code imageView} member of an element of {@code pColorAttachments} is not #NULL_HANDLE, the {@code layout} member of that element of {@code pColorAttachments} <b>must</b> not be #IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL, #IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL, #IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL, or #IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</li>
+            <li>If {@code colorAttachmentCount} is not 0 and the {@code imageView} member of an element of {@code pColorAttachments} is not #NULL_HANDLE, if the {@code resolveMode} member of that element of {@code pColorAttachments} is not #RESOLVE_MODE_NONE, its {@code resolveImageLayout} member <b>must</b> not be #IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL, #IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL, #IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL, or #IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL</li>
+            <li>If {@code pDepthAttachment} is not {@code NULL} and {@code pDepthAttachment→imageView} is not #NULL_HANDLE, {@code pDepthAttachment→resolveMode} <b>must</b> be one of the bits set in ##VkPhysicalDeviceDepthStencilResolveProperties{@code ::supportedDepthResolveModes}</li>
+            <li>If {@code pStencilAttachment} is not {@code NULL} and {@code pStencilAttachment→imageView} is not #NULL_HANDLE, {@code pStencilAttachment→resolveMode} <b>must</b> be one of the bits set in ##VkPhysicalDeviceDepthStencilResolveProperties{@code ::supportedStencilResolveModes}</li>
+            <li>If {@code pDepthAttachment} or {@code pStencilAttachment} are both not {@code NULL}, {@code pDepthAttachment→imageView} and {@code pStencilAttachment→imageView} are both not #NULL_HANDLE, and ##VkPhysicalDeviceDepthStencilResolveProperties{@code ::independentResolveNone} is #FALSE, the {@code resolveMode} of both structures <b>must</b> be the same value</li>
+            <li>If {@code pDepthAttachment} or {@code pStencilAttachment} are both not {@code NULL}, {@code pDepthAttachment→imageView} and {@code pStencilAttachment→imageView} are both not #NULL_HANDLE, ##VkPhysicalDeviceDepthStencilResolveProperties{@code ::independentResolve} is #FALSE, and the {@code resolveMode} of neither structure is #RESOLVE_MODE_NONE, the {@code resolveMode} of both structures <b>must</b> be the same value</li>
+            <li>{@code colorAttachmentCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxColorAttachments}</li>
+            <li>If the {@code imageView} member of a ##VkRenderingFragmentDensityMapAttachmentInfoEXT structure included in the {@code pNext} chain is not #NULL_HANDLE, and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-fragmentDensityMapNonSubsampledImages">non-subsample image feature</a> is not enabled, valid {@code imageView} and {@code resolveImageView} members of {@code pDepthAttachment}, {@code pStencilAttachment}, and each element of {@code pColorAttachments} <b>must</b> be a {@code VkImageView} created with #IMAGE_CREATE_SUBSAMPLED_BIT_EXT</li>
+            <li>If the {@code imageView} member of a ##VkRenderingFragmentDensityMapAttachmentInfoEXT structure included in the {@code pNext} chain is not #NULL_HANDLE, and {@code viewMask} is not 0, {@code imageView} <b>must</b> have a {@code layerCount} greater than or equal to the index of the most significant bit in {@code viewMask}</li>
+            <li>If the {@code imageView} member of a ##VkRenderingFragmentDensityMapAttachmentInfoEXT structure included in the {@code pNext} chain is not #NULL_HANDLE, and {@code viewMask} is 0, {@code imageView} <b>must</b> have a {@code layerCount} equal to 1</li>
+            <li>If the {@code pNext} chain does not contain ##VkDeviceGroupRenderPassBeginInfo or its {@code deviceRenderAreaCount} member is equal to 0 and the {@code imageView} member of a ##VkRenderingFragmentDensityMapAttachmentInfoEXT structure included in the {@code pNext} chain is not #NULL_HANDLE, {@code imageView} <b>must</b> have a width greater than or equal to \left\lceil{\frac{renderArea_{x}+renderArea_{width}}{maxFragmentDensityTexelSize_{width}}}\right\rceil</li>
+            <li>If the {@code pNext} chain contains a ##VkDeviceGroupRenderPassBeginInfo structure, its {@code deviceRenderAreaCount} member is not 0, and the {@code imageView} member of a ##VkRenderingFragmentDensityMapAttachmentInfoEXT structure included in the {@code pNext} chain is not #NULL_HANDLE, {@code imageView} <b>must</b> have a width greater than or equal to \left\lceil{\frac{pDeviceRenderAreas_{x}+pDeviceRenderAreas_{width}}{maxFragmentDensityTexelSize_{width}}}\right\rceil for each element of {@code pDeviceRenderAreas}</li>
+            <li>If the {@code pNext} chain does not contain ##VkDeviceGroupRenderPassBeginInfo or its {@code deviceRenderAreaCount} member is equal to 0 and the {@code imageView} member of a ##VkRenderingFragmentDensityMapAttachmentInfoEXT structure included in the {@code pNext} chain is not #NULL_HANDLE, {@code imageView} <b>must</b> have a height greater than or equal to \left\lceil{\frac{renderArea_{y}+renderArea_{height}}{maxFragmentDensityTexelSize_{height}}}\right\rceil</li>
+            <li>If the {@code pNext} chain contains a ##VkDeviceGroupRenderPassBeginInfo structure, its {@code deviceRenderAreaCount} member is not 0, and the {@code imageView} member of a ##VkRenderingFragmentDensityMapAttachmentInfoEXT structure included in the {@code pNext} chain is not #NULL_HANDLE, {@code imageView} <b>must</b> have a height greater than or equal to \left\lceil{\frac{pDeviceRenderAreas_{y}+pDeviceRenderAreas_{height}}{maxFragmentDensityTexelSize_{height}}}\right\rceil for each element of {@code pDeviceRenderAreas}</li>
+            <li>If the {@code imageView} member of a ##VkRenderingFragmentDensityMapAttachmentInfoEXT structure included in the {@code pNext} chain is not #NULL_HANDLE, it <b>must</b> not be equal to the {@code imageView} or {@code resolveImageView} member of {@code pDepthAttachment}, {@code pStencilAttachment}, or any element of {@code pColorAttachments}</li>
+            <li>If the {@code pNext} chain does not contain ##VkDeviceGroupRenderPassBeginInfo or its {@code deviceRenderAreaCount} member is equal to 0 and the {@code imageView} member of a ##VkRenderingFragmentShadingRateAttachmentInfoKHR structure included in the {@code pNext} chain is not #NULL_HANDLE, {@code imageView} <b>must</b> have a width greater than or equal to \left\lceil{\frac{renderArea_{x}+renderArea_{width}}{shadingRateAttachmentTexelSize_{width}}}\right\rceil</li>
+            <li>If the {@code pNext} chain contains a ##VkDeviceGroupRenderPassBeginInfo structure, its {@code deviceRenderAreaCount} member is not 0, and the {@code imageView} member of a ##VkRenderingFragmentShadingRateAttachmentInfoKHR structure included in the {@code pNext} chain is not #NULL_HANDLE, {@code imageView} <b>must</b> have a width greater than or equal to \left\lceil{\frac{pDeviceRenderAreas_{x}+pDeviceRenderAreas_{width}}{shadingRateAttachmentTexelSize_{width}}}\right\rceil for each element of {@code pDeviceRenderAreas}</li>
+            <li>If the {@code pNext} chain does not contain ##VkDeviceGroupRenderPassBeginInfo or its {@code deviceRenderAreaCount} member is equal to 0 and the {@code imageView} member of a ##VkRenderingFragmentShadingRateAttachmentInfoKHR structure included in the {@code pNext} chain is not #NULL_HANDLE, {@code imageView} <b>must</b> have a height greater than or equal to \left\lceil{\frac{renderArea_{y}+renderArea_{height}}{shadingRateAttachmentTexelSize_{height}}}\right\rceil</li>
+            <li>If the {@code pNext} chain contains a ##VkDeviceGroupRenderPassBeginInfo structure, its {@code deviceRenderAreaCount} member is not 0, and the {@code imageView} member of a ##VkRenderingFragmentShadingRateAttachmentInfoKHR structure included in the {@code pNext} chain is not #NULL_HANDLE, {@code imageView} <b>must</b> have a height greater than or equal to \left\lceil{\frac{pDeviceRenderAreas_{y}+pDeviceRenderAreas_{height}}{shadingRateAttachmentTexelSize_{height}}}\right\rceil for each element of {@code pDeviceRenderAreas}</li>
+            <li>If the {@code imageView} member of a ##VkRenderingFragmentShadingRateAttachmentInfoKHR structure included in the {@code pNext} chain is not #NULL_HANDLE, and {@code viewMask} is 0, {@code imageView} <b>must</b> have a {@code layerCount} that is either equal to 1 or greater than or equal to {@code layerCount}</li>
+            <li>If the {@code imageView} member of a ##VkRenderingFragmentShadingRateAttachmentInfoKHR structure included in the {@code pNext} chain is not #NULL_HANDLE, and {@code viewMask} is not 0, {@code imageView} <b>must</b> have a {@code layerCount} that either equal to 1 or greater than or equal to the index of the most significant bit in {@code viewMask}</li>
+            <li>If the {@code imageView} member of a ##VkRenderingFragmentShadingRateAttachmentInfoKHR structure included in the {@code pNext} chain is not #NULL_HANDLE, it <b>must</b> not be equal to the {@code imageView} or {@code resolveImageView} member of {@code pDepthAttachment}, {@code pStencilAttachment}, or any element of {@code pColorAttachments}</li>
+            <li>If the {@code imageView} member of a ##VkRenderingFragmentShadingRateAttachmentInfoKHR structure included in the {@code pNext} chain is not #NULL_HANDLE, it <b>must</b> not be equal to the {@code imageView} member of a ##VkRenderingFragmentDensityMapAttachmentInfoEXT structure included in the {@code pNext} chain</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-multiview">{@code multiview}</a> feature is not enabled, {@code viewMask} <b>must</b> be 0</li>
+            <li>The index of the most significant bit in {@code viewMask} <b>must</b> be less than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-maxMultiviewViewCount">{@code maxMultiviewViewCount}</a></li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDERING_INFO_KHR</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkDeviceGroupRenderPassBeginInfo, ##VkMultiviewPerViewAttributesInfoNVX, ##VkRenderingFragmentDensityMapAttachmentInfoEXT, or ##VkRenderingFragmentShadingRateAttachmentInfoKHR</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkRenderingFlagBitsKHR} values</li>
+            <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachments} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid ##VkRenderingAttachmentInfoKHR structures</li>
+            <li>If {@code pDepthAttachment} is not {@code NULL}, {@code pDepthAttachment} <b>must</b> be a valid pointer to a valid ##VkRenderingAttachmentInfoKHR structure</li>
+            <li>If {@code pStencilAttachment} is not {@code NULL}, {@code pStencilAttachment} <b>must</b> be a valid pointer to a valid ##VkRenderingAttachmentInfoKHR structure</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkRect2D, ##VkRenderingAttachmentInfoKHR, #CmdBeginRenderingKHR()
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDERING_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
+    PointerSetter(
+        "VkDeviceGroupRenderPassBeginInfo", "VkDeviceGroupRenderPassBeginInfoKHR", "VkMultiviewPerViewAttributesInfoNVX", "VkRenderingFragmentDensityMapAttachmentInfoEXT", "VkRenderingFragmentShadingRateAttachmentInfoKHR",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkRenderingFlagsKHR("flags", "a bitmask of {@code VkRenderingFlagBitsKHR}.")
+    VkRect2D("renderArea", "the render area that is affected by the render pass instance.")
+    uint32_t("layerCount", "the number of layers rendered to in each attachment when {@code viewMask} is 0.")
+    uint32_t("viewMask", "the view mask indicating the indices of attachment layers that will be rendered when it is not 0.")
+    AutoSize("pColorAttachments", optional = true)..uint32_t("colorAttachmentCount", "the number of elements in {@code pColorAttachments}.")
+    VkRenderingAttachmentInfoKHR.const.p("pColorAttachments", "a pointer to an array of {@code colorAttachmentCount} ##VkRenderingAttachmentInfoKHR structures describing any color attachments used.")
+    nullable..VkRenderingAttachmentInfoKHR.const.p("pDepthAttachment", "a pointer to a ##VkRenderingAttachmentInfoKHR structure describing a depth attachment.")
+    nullable..VkRenderingAttachmentInfoKHR.const.p("pStencilAttachment", "a pointer to a ##VkRenderingAttachmentInfoKHR structure describing a stencil attachment.")
+}
+
+val VkPipelineRenderingCreateInfoKHR = struct(Module.VULKAN, "VkPipelineRenderingCreateInfoKHR") {
+    documentation =
+        """
+        Structure specifying attachment formats.
+
+        <h5>Description</h5>
+        When a pipeline is created without a {@code VkRenderPass}, if this structure is present in the {@code pNext} chain of ##VkGraphicsPipelineCreateInfo, it specifies the view mask and format of attachments used for rendering. If this structure is not specified, and the pipeline does not include a {@code VkRenderPass}, {@code viewMask} and {@code colorAttachmentCount} are 0, and {@code depthAttachmentFormat} and {@code stencilAttachmentFormat} are #FORMAT_UNDEFINED. If a graphics pipeline is created with a valid {@code VkRenderPass}, parameters of this structure are ignored.
+
+        If {@code depthAttachmentFormat}, {@code stencilAttachmentFormat}, or any element of {@code pColorAttachmentFormats} is #FORMAT_UNDEFINED, it indicates that the corresponding attachment is unused within the render pass. Valid formats indicate that an attachment <b>can</b> be used - but it is still valid to set the attachment to {@code NULL} when beginning rendering.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If any element of {@code pColorAttachmentFormats} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</li>
+            <li>If {@code depthAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
+            <li>If {@code stencilAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
+            <li>If {@code depthAttachmentFormat} is not #FORMAT_UNDEFINED and {@code stencilAttachmentFormat} is not #FORMAT_UNDEFINED, {@code depthAttachmentFormat} <b>must</b> equal {@code stencilAttachmentFormat}</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-multiview">{@code multiview}</a> feature is not enabled, {@code viewMask} <b>must</b> be 0</li>
+            <li>The index of the most significant bit in {@code viewMask} <b>must</b> be less than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-maxMultiviewViewCount">{@code maxMultiviewViewCount}</a></li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO_KHR</li>
+            <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachmentFormats} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid {@code VkFormat} values</li>
+            <li>{@code depthAttachmentFormat} <b>must</b> be a valid {@code VkFormat} value</li>
+            <li>{@code stencilAttachmentFormat} <b>must</b> be a valid {@code VkFormat} value</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    uint32_t("viewMask", "the viewMask used for rendering.")
+    AutoSize("pColorAttachmentFormats", optional = true)..uint32_t("colorAttachmentCount", "the number of entries in {@code pColorAttachmentFormats}")
+    VkFormat.const.p("pColorAttachmentFormats", "an array of {@code VkFormat} values defining the format of color attachments used in this pipeline.")
+    VkFormat("depthAttachmentFormat", "a {@code VkFormat} value defining the format of the depth attachment used in this pipeline.")
+    VkFormat("stencilAttachmentFormat", "a {@code VkFormat} value defining the format of the stencil attachment used in this pipeline.")
+}
+
+val VkPhysicalDeviceDynamicRenderingFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceDynamicRenderingFeaturesKHR") {
+    documentation =
+        """
+        Structure indicating support for dynamic render pass instances.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceDynamicRenderingFeaturesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceDynamicRenderingFeaturesKHR <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("dynamicRendering", "specifies that the implementation supports dynamic render pass instances using the #CmdBeginRenderingKHR() command.")
+}
+
+val VkCommandBufferInheritanceRenderingInfoKHR = struct(Module.VULKAN, "VkCommandBufferInheritanceRenderingInfoKHR") {
+    documentation =
+        """
+        Structure specifying command buffer inheritance info for dynamic render pass instances.
+
+        <h5>Description</h5>
+        If the {@code pNext} chain of ##VkCommandBufferInheritanceInfo includes a ##VkCommandBufferInheritanceRenderingInfoKHR structure, then that structure controls parameters of dynamic render pass instances that the {@code VkCommandBuffer} <b>can</b> be executed within. If ##VkCommandBufferInheritanceInfo{@code ::renderPass} is not #NULL_HANDLE, or #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT is not specified in ##VkCommandBufferBeginInfo{@code ::flags}, parameters of this structure are ignored.
+
+        If {@code colorAttachmentCount} is 0 and the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-variableMultisampleRate">{@code variableMultisampleRate}</a> feature is enabled, {@code rasterizationSamples} is ignored.
+
+        If {@code depthAttachmentFormat}, {@code stencilAttachmentFormat}, or any element of {@code pColorAttachmentFormats} is #FORMAT_UNDEFINED, it indicates that the corresponding attachment is unused within the render pass.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code colorAttachmentCount} is not 0, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-variableMultisampleRate">{@code variableMultisampleRate}</a> feature is not enabled, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
+            <li>If any element of {@code pColorAttachmentFormats} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</li>
+            <li>If {@code depthAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
+            <li>If {@code stencilAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
+            <li>If {@code depthAttachmentFormat} is not #FORMAT_UNDEFINED and {@code stencilAttachmentFormat} is not #FORMAT_UNDEFINED, {@code depthAttachmentFormat} <b>must</b> equal {@code stencilAttachmentFormat}</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-multiview">{@code multiview}</a> feature is not enabled, {@code viewMask} <b>must</b> be 0</li>
+            <li>The index of the most significant bit in {@code viewMask} <b>must</b> be less than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-maxMultiviewViewCount">{@code maxMultiviewViewCount}</a></li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkRenderingFlagBitsKHR} values</li>
+            <li>{@code pColorAttachmentFormats} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid {@code VkFormat} values</li>
+            <li>{@code depthAttachmentFormat} <b>must</b> be a valid {@code VkFormat} value</li>
+            <li>{@code stencilAttachmentFormat} <b>must</b> be a valid {@code VkFormat} value</li>
+            <li>If {@code rasterizationSamples} is not 0, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
+            <li>{@code colorAttachmentCount} <b>must</b> be greater than 0</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR")..VkStructureType("sType", "the type of this structure")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure")
+    VkRenderingFlagsKHR("flags", "a bitmask of {@code VkRenderingFlagBitsKHR} used by the render pass instance.")
+    uint32_t("viewMask", "the view mask used for rendering.")
+    AutoSize("pColorAttachmentFormats")..uint32_t("colorAttachmentCount", "the number of color attachments specified in the render pass instance.")
+    VkFormat.const.p("pColorAttachmentFormats", "an array of {@code VkFormat} values defining the format of color attachments.")
+    VkFormat("depthAttachmentFormat", "a {@code VkFormat} value defining the format of the depth attachment.")
+    VkFormat("stencilAttachmentFormat", "a {@code VkFormat} value defining the format of the stencil attachment.")
+    VkSampleCountFlagBits("rasterizationSamples", "a {@code VkSampleCountFlagBits} specifying the number of samples used in rasterization.")
+}
+
+val VkRenderingFragmentShadingRateAttachmentInfoKHR = struct(Module.VULKAN, "VkRenderingFragmentShadingRateAttachmentInfoKHR") {
+    documentation =
+        """
+        Structure specifying fragment shading rate attachment information.
+
+        <h5>Description</h5>
+        This structure can be included in the {@code pNext} chain of ##VkRenderingInfoKHR to define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a>. If {@code imageView} is #NULL_HANDLE, or if this structure isn’t specified, the implementation behaves as if a valid shading rate attachment was specified with all texels specifying a single pixel per fragment.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code layout} <b>must</b> be #IMAGE_LAYOUT_GENERAL or #IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have been created with #IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code shadingRateAttachmentTexelSize.width} <b>must</b> be a power of two value</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code shadingRateAttachmentTexelSize.width} <b>must</b> be less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-maxFragmentShadingRateAttachmentTexelSize">{@code maxFragmentShadingRateAttachmentTexelSize.width}</a></li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code shadingRateAttachmentTexelSize.width} <b>must</b> be greater than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-minFragmentShadingRateAttachmentTexelSize">{@code minFragmentShadingRateAttachmentTexelSize.width}</a></li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code shadingRateAttachmentTexelSize.height} <b>must</b> be a power of two value</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code shadingRateAttachmentTexelSize.height} <b>must</b> be less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-maxFragmentShadingRateAttachmentTexelSize">{@code maxFragmentShadingRateAttachmentTexelSize.height}</a></li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code shadingRateAttachmentTexelSize.height} <b>must</b> be greater than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-minFragmentShadingRateAttachmentTexelSize">{@code minFragmentShadingRateAttachmentTexelSize.height}</a></li>
+            <li>If {@code imageView} is not #NULL_HANDLE, the quotient of {@code shadingRateAttachmentTexelSize.width} and {@code shadingRateAttachmentTexelSize.height} <b>must</b> be less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-maxFragmentShadingRateAttachmentTexelSizeAspectRatio">{@code maxFragmentShadingRateAttachmentTexelSizeAspectRatio}</a></li>
+            <li>If {@code imageView} is not #NULL_HANDLE, the quotient of {@code shadingRateAttachmentTexelSize.height} and {@code shadingRateAttachmentTexelSize.width} <b>must</b> be less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-maxFragmentShadingRateAttachmentTexelSizeAspectRatio">{@code maxFragmentShadingRateAttachmentTexelSizeAspectRatio}</a></li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
+            <li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkExtent2D
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkImageView("imageView", "the image view that will be used as a fragment shading rate attachment.")
+    VkImageLayout("imageLayout", "the layout that {@code imageView} will be in during rendering.")
+    VkExtent2D("shadingRateAttachmentTexelSize", "specifies the number of pixels corresponding to each texel in {@code imageView}.")
+}
+
+val VkRenderingFragmentDensityMapAttachmentInfoEXT = struct(Module.VULKAN, "VkRenderingFragmentDensityMapAttachmentInfoEXT") {
+    documentation =
+        """
+        Structure specifying fragment shading rate attachment information.
+
+        <h5>Description</h5>
+        This structure can be included in the {@code pNext} chain of ##VkRenderingInfoKHR to define a fragment density map. If {@code imageView} is #NULL_HANDLE, If this structure isn’t specified, {@code imageView} is #NULL_HANDLE.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code layout} <b>must</b> be #IMAGE_LAYOUT_GENERAL or #IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have been created with #IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> not have been created with #IMAGE_CREATE_SUBSAMPLED_BIT_EXT</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT</li>
+            <li>{@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
+            <li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkImageView("imageView", "the image view that will be used as a fragment shading rate attachment.")
+    VkImageLayout("imageLayout", "the layout that {@code imageView} will be in during rendering.")
+}
+
+val VkAttachmentSampleCountInfoAMD = struct(Module.VULKAN, "VkAttachmentSampleCountInfoAMD") {
+    documentation =
+        """
+        Structure specifying command buffer inheritance info for dynamic render pass instances.
+
+        <h5>Description</h5>
+        If ##VkCommandBufferInheritanceInfo{@code ::renderPass} is #NULL_HANDLE, #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT is specified in ##VkCommandBufferBeginInfo{@code ::flags}, and the {@code pNext} chain of ##VkCommandBufferInheritanceInfo includes ##VkAttachmentSampleCountInfoAMD, then this structure defines the sample counts of each attachment within the render pass instance. If ##VkAttachmentSampleCountInfoAMD is not included, the value of ##VkCommandBufferInheritanceRenderingInfoKHR{@code ::rasterizationSamples} is used as the sample count for each attachment. If ##VkCommandBufferInheritanceInfo{@code ::renderPass} is not #NULL_HANDLE, or #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT is not specified in ##VkCommandBufferBeginInfo{@code ::flags}, parameters of this structure are ignored.
+
+        ##VkAttachmentSampleCountInfoAMD <b>can</b> also be included in the {@code pNext} chain of ##VkGraphicsPipelineCreateInfo. When a graphics pipeline is created without a {@code VkRenderPass}, if this structure is present in the {@code pNext} chain of ##VkGraphicsPipelineCreateInfo, it specifies the sample count of attachments used for rendering. If this structure is not specified, and the pipeline does not include a {@code VkRenderPass}, the value of ##VkPipelineMultisampleStateCreateInfo{@code ::rasterizationSamples} is used as the sample count for each attachment. If a graphics pipeline is created with a valid {@code VkRenderPass}, parameters of this structure are ignored.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD</li>
+            <li>{@code pColorAttachmentSamples} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid or #NULL_HANDLE {@code VkSampleCountFlagBits} values</li>
+            <li>If {@code depthStencilAttachmentSamples} is not 0, {@code depthStencilAttachmentSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
+            <li>{@code colorAttachmentCount} <b>must</b> be greater than 0</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD")..VkStructureType("sType", "the type of this structure")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure")
+    AutoSize("pColorAttachmentSamples", optional = true)..uint32_t("colorAttachmentCount", "the number of color attachments specified in a render pass instance.")
+    nullable..VkSampleCountFlagBits.const.p("pColorAttachmentSamples", "an array of {@code VkSampleCountFlagBits} values defining the sample count of color attachments.")
+    VkSampleCountFlagBits("depthStencilAttachmentSamples", "a {@code VkSampleCountFlagBits} value defining the sample count of a depth/stencil attachment.")
+}
+
+val VkAttachmentSampleCountInfoNV = struct(Module.VULKAN, "VkAttachmentSampleCountInfoNV", alias = VkAttachmentSampleCountInfoAMD) {
+    documentation = "See ##VkAttachmentSampleCountInfoAMD."
+
+    Expression("#STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD")..VkStructureType("sType", "")
+    nullable..opaque_const_p("pNext", "")
+    AutoSize("pColorAttachmentSamples", optional = true)..uint32_t("colorAttachmentCount", "")
+    nullable..VkSampleCountFlagBits.const.p("pColorAttachmentSamples", "")
+    VkSampleCountFlagBits("depthStencilAttachmentSamples", "")
+}
+
+val VkMultiviewPerViewAttributesInfoNVX = struct(Module.VULKAN, "VkMultiviewPerViewAttributesInfoNVX") {
+    documentation =
+        """
+        Structure specifying the multiview per-attribute properties.
+
+        <h5>Description</h5>
+        When dynamic render pass instances are being used, instead of specifying #SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX or #SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX in the subpass description flags, the per-attibute properties of the render pass instance <b>must</b> be specified by the ##VkMultiviewPerViewAttributesInfoNVX structure Include the ##VkMultiviewPerViewAttributesInfoNVX structure in the {@code pNext} chain of ##VkGraphicsPipelineCreateInfo when creating a graphics pipeline for dynamic rendering, ##VkRenderingInfoKHR when starting a dynamic render pass instance, and ##VkCommandBufferInheritanceInfo when specifying the dynamic render pass instance parameters for secondary command buffers.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code perViewAttributesPositionXOnly} is #TRUE then {@code perViewAttributes} <b>must</b> also be #TRUE</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("perViewAttributes", "specifies that shaders compiled for this pipeline write the attributes for all views in a single invocation of each vertex processing stage. All pipelines executed within a render pass instance that includes this bit <b>must</b> write per-view attributes to the {@code *PerViewNV[]} shader outputs, in addition to the non-per-view (e.g. {@code Position}) outputs.")
+    VkBool32("perViewAttributesPositionXOnly", "specifies that shaders compiled for this pipeline use per-view positions which only differ in value in the x component. Per-view viewport mask <b>can</b> also be used.")
 }
 
 val VkPhysicalDeviceCornerSampledImageFeaturesNV = struct(Module.VULKAN, "VkPhysicalDeviceCornerSampledImageFeaturesNV") {
@@ -6276,6 +6676,8 @@ val VkAccelerationStructureBuildGeometryInfoKHR = struct(Module.VULKAN, "VkAccel
         If ##VkAccelerationStructureGeometryInstancesDataKHR{@code ::arrayOfPointers} is #TRUE, the pointer for any given element of the array of instance pointers consists of 4 bits of {@code VkAccelerationStructureMotionInstanceTypeNV} in the low 4 bits of the pointer identifying the type of structure at the pointer. The device address accessed is the value in the array with the low 4 bits set to zero. The structure at the pointer is one of ##VkAccelerationStructureInstanceKHR, ##VkAccelerationStructureMatrixMotionInstanceNV or ##VkAccelerationStructureSRTMotionInstanceNV, depending on the type value encoded in the low 4 bits.
 
         A top level acceleration structure with either motion instances or vertex motion in its instances <b>must</b> set #BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV in {@code flags}.
+
+        Members {@code srcAccelerationStructure} and {@code dstAccelerationStructure} <b>may</b> be the same or different for an update operation (when {@code mode} is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR). If they are the same, the update happens in-place. Otherwise, the target acceleration structure is updated and the source is not modified.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -10348,7 +10750,7 @@ val VkPhysicalDeviceProvokingVertexPropertiesEXT = struct(Module.VULKAN, "VkPhys
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkBool32("provokingVertexModePerPipeline", "indicates whether the implementation supports graphics pipelines with different provoking vertex modes within the same renderpass instance.")
+    VkBool32("provokingVertexModePerPipeline", "indicates whether the implementation supports graphics pipelines with different provoking vertex modes within the same render pass instance.")
     VkBool32("transformFeedbackPreservesTriangleFanProvokingVertex", "indicates whether the implementation can preserve the provoking vertex order when writing triangle fan vertices to transform feedback.")
 }
 
@@ -10360,7 +10762,7 @@ val VkPipelineRasterizationProvokingVertexStateCreateInfoEXT = struct(Module.VUL
         <h5>Description</h5>
         If this struct is not provided when creating the pipeline, the pipeline will use the #PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT mode.
 
-        If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-provokingVertexModePerPipeline">provokingVertexModePerPipeline</a> limit is #FALSE, then the all pipelines bound within a renderpass instance <b>must</b> have the same {@code provokingVertexMode}.
+        If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-provokingVertexModePerPipeline">provokingVertexModePerPipeline</a> limit is #FALSE, then all pipelines bound within a render pass instance <b>must</b> have the same {@code provokingVertexMode}.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -11800,7 +12202,7 @@ val VkPresentIdKHR = struct(Module.VULKAN, "VkPresentIdKHR") {
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code swapchainCount} <b>must</b> be the same value as ##VkPresentInfoKHR{@code ::swapchainCount}, where this ##VkPresentIdKHR is in the pNext-chain of the ##VkPresentInfoKHR structure</li>
+            <li>{@code swapchainCount} <b>must</b> be the same value as ##VkPresentInfoKHR{@code ::swapchainCount}, where this ##VkPresentIdKHR is in the {@code pNext} chain of the ##VkPresentInfoKHR structure</li>
             <li>Each {@code presentIds} entry <b>must</b> be greater than any previous {@code presentIds} entry passed for the associated {@code pSwapchains} entry</li>
         </ul>
 
@@ -11945,8 +12347,7 @@ val VkVideoEncodeInfoKHR = struct(Module.VULKAN, "VkVideoEncodeInfoKHR") {
             <li>{@code dstBitstreamBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
             <li>{@code srcPictureResource} <b>must</b> be a valid ##VkVideoPictureResourceKHR structure</li>
             <li>{@code pSetupReferenceSlot} <b>must</b> be a valid pointer to a valid ##VkVideoReferenceSlotKHR structure</li>
-            <li>{@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid ##VkVideoReferenceSlotKHR structures</li>
-            <li>{@code referenceSlotCount} <b>must</b> be greater than 0</li>
+            <li>If {@code referenceSlotCount} is not 0, {@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid ##VkVideoReferenceSlotKHR structures</li>
         </ul>
 
         <h5>See Also</h5>
@@ -11966,7 +12367,7 @@ val VkVideoEncodeInfoKHR = struct(Module.VULKAN, "VkVideoEncodeInfoKHR") {
     VkDeviceSize("dstBitstreamBufferMaxRange", "the maximum size of the {@code dstBitstreamBuffer} that can be used while the encoded bitstream output is produced. {@code dstBitstreamBufferMaxRange}’s value <b>must</b> be aligned to ##VkVideoCapabilitiesKHR{@code ::minBitstreamBufferSizeAlignment}, as reported by the implementation.")
     VkVideoPictureResourceKHR("srcPictureResource", "the Picture Resource of the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#input-encode-picture\">Input Picture</a> to be encoded by the operation.")
     VkVideoReferenceSlotKHR.const.p("pSetupReferenceSlot", "a pointer to a ##VkVideoReferenceSlotKHR structure used for generating a reconstructed reference slot and Picture Resource. {@code pSetupReferenceSlot→slotIndex} specifies the slot index number to use as a target for producing the Reconstructed (DPB) data. {@code pSetupReferenceSlot} <b>must</b> be one of the entries provided in ##VkVideoBeginCodingInfoKHR via the {@code pReferenceSlots} within the #CmdBeginVideoCodingKHR() command that established the Vulkan Video Encode Context for this command.")
-    AutoSize("pReferenceSlots")..uint32_t("referenceSlotCount", "the number of Reconstructed Reference Pictures that will be used when this encoding operation is executing.")
+    AutoSize("pReferenceSlots", optional = true)..uint32_t("referenceSlotCount", "the number of Reconstructed Reference Pictures that will be used when this encoding operation is executing.")
     VkVideoReferenceSlotKHR.const.p("pReferenceSlots", "{@code NULL} or a pointer to an array of ##VkVideoReferenceSlotKHR structures that will be used when this encoding operation is executing. Each entry in {@code pReferenceSlots} <b>must</b> be one of the entries provided in ##VkVideoBeginCodingInfoKHR via the {@code pReferenceSlots} within the #CmdBeginVideoCodingKHR() command that established the Vulkan Video Encode Context for this command.")
 }
 
@@ -12633,6 +13034,11 @@ val VkSubmitInfo2KHR = struct(Module.VULKAN, "VkSubmitInfo2KHR") {
             <li>If the protected memory feature is not enabled, {@code flags} <b>must</b> not include #SUBMIT_PROTECTED_BIT_KHR</li>
             <li>If {@code flags} includes #SUBMIT_PROTECTED_BIT_KHR, all elements of {@code pCommandBuffers} <b>must</b> be protected command buffers</li>
             <li>If {@code flags} does not include #SUBMIT_PROTECTED_BIT_KHR, each element of {@code pCommandBuffers} <b>must</b> not be a protected command buffer</li>
+            <li>If any {@code commandBuffer} member of an element of {@code pCommandBufferInfos} contains any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#renderpass-suspension">resumed render pass instances</a>, they <b>must</b> be suspended by a render pass instance earlier in submission order within {@code pCommandBufferInfos}</li>
+            <li>If any {@code commandBuffer} member of an element of {@code pCommandBufferInfos} contains any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#renderpass-suspension">suspended render pass instances</a>, they <b>must</b> be resumed by a render pass instance later in submission order within {@code pCommandBufferInfos}</li>
+            <li>If any {@code commandBuffer} member of an element of {@code pCommandBufferInfos} contains any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#renderpass-suspension">suspended render pass instances</a>, there <b>must</b> be no action or synchronization commands between that render pass instance and the render pass instance that resumes it</li>
+            <li>If any {@code commandBuffer} member of an element of {@code pCommandBufferInfos} contains any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#renderpass-suspension">suspended render pass instances</a>, there <b>must</b> be no render pass instances between that render pass instance and the render pass instance that resumes it</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-variableSampleLocations">{@code variableSampleLocations}</a> limit is not supported, and any {@code commandBuffer} member of an element of {@code pCommandBufferInfos} contains any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#renderpass-suspension">suspended render pass instances</a>, where a graphics pipeline has been bound, any pipelines bound in the render pass instance that resumes it, or any subsequent render pass instances that resume from that one and so on, <b>must</b> use the same sample locations</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -14173,7 +14579,7 @@ val VkSubpassShadingPipelineCreateInfoHUAWEI = struct(Module.VULKAN, "VkSubpassS
 
     Expression("#STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkRenderPass("renderPass", "a handle to a render pass object describing the environment in which the pipeline will be used; the pipeline <b>must</b> only be used with an instance of any render pass compatible with the one provided. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#renderpass-compatibility\">Render Pass Compatibility</a> for more information.")
+    VkRenderPass("renderPass", "a handle to a render pass object describing the environment in which the pipeline will be used. The pipeline <b>must</b> only be used with a render pass instance compatible with the one provided. See <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#renderpass-compatibility\">Render Pass Compatibility</a> for more information.")
     uint32_t("subpass", "the index of the subpass in the render pass where this pipeline will be used.")
 }
 

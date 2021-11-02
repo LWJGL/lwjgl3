@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t weighted_pred_flag : 1;
  *     uint32_t pic_order_present_flag : 1;
  *     uint32_t entropy_coding_mode_flag : 1;
- *     uint32_t scaling_matrix_present_flag : 1;
+ *     uint32_t pic_scaling_matrix_present_flag : 1;
  * }</code></pre>
  */
 public class StdVideoH264PpsFlags extends Struct implements NativeResource {
@@ -91,9 +91,9 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
     /** @return the value of the {@code entropy_coding_mode_flag} field. */
     @NativeType("uint32_t")
     public boolean entropy_coding_mode_flag() { return nentropy_coding_mode_flag(address()) != 0; }
-    /** @return the value of the {@code scaling_matrix_present_flag} field. */
+    /** @return the value of the {@code pic_scaling_matrix_present_flag} field. */
     @NativeType("uint32_t")
-    public boolean scaling_matrix_present_flag() { return nscaling_matrix_present_flag(address()) != 0; }
+    public boolean pic_scaling_matrix_present_flag() { return npic_scaling_matrix_present_flag(address()) != 0; }
 
     /** Sets the specified value to the {@code transform_8x8_mode_flag} field. */
     public StdVideoH264PpsFlags transform_8x8_mode_flag(@NativeType("uint32_t") boolean value) { ntransform_8x8_mode_flag(address(), value ? 1 : 0); return this; }
@@ -111,8 +111,8 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
     public StdVideoH264PpsFlags pic_order_present_flag(@NativeType("uint32_t") boolean value) { npic_order_present_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code entropy_coding_mode_flag} field. */
     public StdVideoH264PpsFlags entropy_coding_mode_flag(@NativeType("uint32_t") boolean value) { nentropy_coding_mode_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code scaling_matrix_present_flag} field. */
-    public StdVideoH264PpsFlags scaling_matrix_present_flag(@NativeType("uint32_t") boolean value) { nscaling_matrix_present_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code pic_scaling_matrix_present_flag} field. */
+    public StdVideoH264PpsFlags pic_scaling_matrix_present_flag(@NativeType("uint32_t") boolean value) { npic_scaling_matrix_present_flag(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoH264PpsFlags set(
@@ -124,7 +124,7 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
         boolean weighted_pred_flag,
         boolean pic_order_present_flag,
         boolean entropy_coding_mode_flag,
-        boolean scaling_matrix_present_flag
+        boolean pic_scaling_matrix_present_flag
     ) {
         transform_8x8_mode_flag(transform_8x8_mode_flag);
         redundant_pic_cnt_present_flag(redundant_pic_cnt_present_flag);
@@ -134,7 +134,7 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
         weighted_pred_flag(weighted_pred_flag);
         pic_order_present_flag(pic_order_present_flag);
         entropy_coding_mode_flag(entropy_coding_mode_flag);
-        scaling_matrix_present_flag(scaling_matrix_present_flag);
+        pic_scaling_matrix_present_flag(pic_scaling_matrix_present_flag);
 
         return this;
     }
@@ -282,8 +282,8 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
     public static int npic_order_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_40) >>> 6; }
     /** Unsafe version of {@link #entropy_coding_mode_flag}. */
     public static int nentropy_coding_mode_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_80) >>> 7; }
-    /** Unsafe version of {@link #scaling_matrix_present_flag}. */
-    public static int nscaling_matrix_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_01_00) >>> 8; }
+    /** Unsafe version of {@link #pic_scaling_matrix_present_flag}. */
+    public static int npic_scaling_matrix_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_01_00) >>> 8; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264PpsFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #transform_8x8_mode_flag(boolean) transform_8x8_mode_flag}. */
@@ -302,8 +302,8 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
     public static void npic_order_present_flag(long struct, int value) { nbitfield0(struct, ((value << 6) & 0x00_00_00_40) | (nbitfield0(struct) & 0xFF_FF_FF_BF)); }
     /** Unsafe version of {@link #entropy_coding_mode_flag(boolean) entropy_coding_mode_flag}. */
     public static void nentropy_coding_mode_flag(long struct, int value) { nbitfield0(struct, ((value << 7) & 0x00_00_00_80) | (nbitfield0(struct) & 0xFF_FF_FF_7F)); }
-    /** Unsafe version of {@link #scaling_matrix_present_flag(boolean) scaling_matrix_present_flag}. */
-    public static void nscaling_matrix_present_flag(long struct, int value) { nbitfield0(struct, ((value << 8) & 0x00_00_01_00) | (nbitfield0(struct) & 0xFF_FF_FE_FF)); }
+    /** Unsafe version of {@link #pic_scaling_matrix_present_flag(boolean) pic_scaling_matrix_present_flag}. */
+    public static void npic_scaling_matrix_present_flag(long struct, int value) { nbitfield0(struct, ((value << 8) & 0x00_00_01_00) | (nbitfield0(struct) & 0xFF_FF_FE_FF)); }
 
     // -----------------------------------
 
@@ -367,9 +367,9 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
         /** @return the value of the {@code entropy_coding_mode_flag} field. */
         @NativeType("uint32_t")
         public boolean entropy_coding_mode_flag() { return StdVideoH264PpsFlags.nentropy_coding_mode_flag(address()) != 0; }
-        /** @return the value of the {@code scaling_matrix_present_flag} field. */
+        /** @return the value of the {@code pic_scaling_matrix_present_flag} field. */
         @NativeType("uint32_t")
-        public boolean scaling_matrix_present_flag() { return StdVideoH264PpsFlags.nscaling_matrix_present_flag(address()) != 0; }
+        public boolean pic_scaling_matrix_present_flag() { return StdVideoH264PpsFlags.npic_scaling_matrix_present_flag(address()) != 0; }
 
         /** Sets the specified value to the {@code transform_8x8_mode_flag} field. */
         public StdVideoH264PpsFlags.Buffer transform_8x8_mode_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.ntransform_8x8_mode_flag(address(), value ? 1 : 0); return this; }
@@ -387,8 +387,8 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
         public StdVideoH264PpsFlags.Buffer pic_order_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.npic_order_present_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code entropy_coding_mode_flag} field. */
         public StdVideoH264PpsFlags.Buffer entropy_coding_mode_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.nentropy_coding_mode_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code scaling_matrix_present_flag} field. */
-        public StdVideoH264PpsFlags.Buffer scaling_matrix_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.nscaling_matrix_present_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code pic_scaling_matrix_present_flag} field. */
+        public StdVideoH264PpsFlags.Buffer pic_scaling_matrix_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.npic_scaling_matrix_present_flag(address(), value ? 1 : 0); return this; }
 
     }
 

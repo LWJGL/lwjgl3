@@ -25,7 +25,7 @@ package org.lwjgl.vulkan;
  * <li>{@link VkVideoDecodeH264PictureInfoEXT}</li>
  * </ul>
  * </li>
- * <li>Extending {@link VkVideoProfileKHR}:
+ * <li>Extending {@link VkVideoProfileKHR}, {@link VkQueryPoolCreateInfo}, {@link VkFormatProperties2}, {@link VkImageCreateInfo}, {@link VkImageViewCreateInfo}, {@link VkBufferCreateInfo}:
  * 
  * <ul>
  * <li>{@link VkVideoDecodeH264ProfileEXT}</li>

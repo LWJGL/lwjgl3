@@ -24,9 +24,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t vcl_hrd_parameters_present_flag : 1;
  *     uint32_t sub_pic_hrd_params_present_flag : 1;
  *     uint32_t sub_pic_cpb_params_in_pic_timing_sei_flag : 1;
- *     uint8_t {@link #fixed_pic_rate_general_flag};
- *     uint8_t {@link #fixed_pic_rate_within_cvs_flag};
- *     uint8_t {@link #low_delay_hrd_flag};
+ *     uint32_t {@link #fixed_pic_rate_general_flag} : 8;
+ *     uint32_t {@link #fixed_pic_rate_within_cvs_flag} : 8;
+ *     uint32_t {@link #low_delay_hrd_flag} : 8;
  * }</code></pre>
  */
 public class StdVideoH265HrdFlags extends Struct implements NativeResource {
@@ -40,25 +40,19 @@ public class StdVideoH265HrdFlags extends Struct implements NativeResource {
     /** The struct member offsets. */
     public static final int
         BITFIELD0,
-        FIXED_PIC_RATE_GENERAL_FLAG,
-        FIXED_PIC_RATE_WITHIN_CVS_FLAG,
-        LOW_DELAY_HRD_FLAG;
+        BITFIELD1;
 
     static {
         Layout layout = __struct(
             __member(4),
-            __member(1),
-            __member(1),
-            __member(1)
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
         BITFIELD0 = layout.offsetof(0);
-        FIXED_PIC_RATE_GENERAL_FLAG = layout.offsetof(1);
-        FIXED_PIC_RATE_WITHIN_CVS_FLAG = layout.offsetof(2);
-        LOW_DELAY_HRD_FLAG = layout.offsetof(3);
+        BITFIELD1 = layout.offsetof(1);
     }
 
     /**
@@ -87,14 +81,14 @@ public class StdVideoH265HrdFlags extends Struct implements NativeResource {
     @NativeType("uint32_t")
     public boolean sub_pic_cpb_params_in_pic_timing_sei_flag() { return nsub_pic_cpb_params_in_pic_timing_sei_flag(address()) != 0; }
     /** each bit represents a sublayer, bit 0 - vps_max_sub_layers_minus1 */
-    @NativeType("uint8_t")
-    public byte fixed_pic_rate_general_flag() { return nfixed_pic_rate_general_flag(address()); }
+    @NativeType("uint32_t")
+    public int fixed_pic_rate_general_flag() { return nfixed_pic_rate_general_flag(address()); }
     /** each bit represents a sublayer, bit 0 - vps_max_sub_layers_minus1 */
-    @NativeType("uint8_t")
-    public byte fixed_pic_rate_within_cvs_flag() { return nfixed_pic_rate_within_cvs_flag(address()); }
+    @NativeType("uint32_t")
+    public int fixed_pic_rate_within_cvs_flag() { return nfixed_pic_rate_within_cvs_flag(address()); }
     /** each bit represents a sublayer, bit 0 - vps_max_sub_layers_minus1 */
-    @NativeType("uint8_t")
-    public byte low_delay_hrd_flag() { return nlow_delay_hrd_flag(address()); }
+    @NativeType("uint32_t")
+    public int low_delay_hrd_flag() { return nlow_delay_hrd_flag(address()); }
 
     /** Sets the specified value to the {@code nal_hrd_parameters_present_flag} field. */
     public StdVideoH265HrdFlags nal_hrd_parameters_present_flag(@NativeType("uint32_t") boolean value) { nnal_hrd_parameters_present_flag(address(), value ? 1 : 0); return this; }
@@ -105,11 +99,11 @@ public class StdVideoH265HrdFlags extends Struct implements NativeResource {
     /** Sets the specified value to the {@code sub_pic_cpb_params_in_pic_timing_sei_flag} field. */
     public StdVideoH265HrdFlags sub_pic_cpb_params_in_pic_timing_sei_flag(@NativeType("uint32_t") boolean value) { nsub_pic_cpb_params_in_pic_timing_sei_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@link #fixed_pic_rate_general_flag} field. */
-    public StdVideoH265HrdFlags fixed_pic_rate_general_flag(@NativeType("uint8_t") byte value) { nfixed_pic_rate_general_flag(address(), value); return this; }
+    public StdVideoH265HrdFlags fixed_pic_rate_general_flag(@NativeType("uint32_t") int value) { nfixed_pic_rate_general_flag(address(), value); return this; }
     /** Sets the specified value to the {@link #fixed_pic_rate_within_cvs_flag} field. */
-    public StdVideoH265HrdFlags fixed_pic_rate_within_cvs_flag(@NativeType("uint8_t") byte value) { nfixed_pic_rate_within_cvs_flag(address(), value); return this; }
+    public StdVideoH265HrdFlags fixed_pic_rate_within_cvs_flag(@NativeType("uint32_t") int value) { nfixed_pic_rate_within_cvs_flag(address(), value); return this; }
     /** Sets the specified value to the {@link #low_delay_hrd_flag} field. */
-    public StdVideoH265HrdFlags low_delay_hrd_flag(@NativeType("uint8_t") byte value) { nlow_delay_hrd_flag(address(), value); return this; }
+    public StdVideoH265HrdFlags low_delay_hrd_flag(@NativeType("uint32_t") int value) { nlow_delay_hrd_flag(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoH265HrdFlags set(
@@ -117,9 +111,9 @@ public class StdVideoH265HrdFlags extends Struct implements NativeResource {
         boolean vcl_hrd_parameters_present_flag,
         boolean sub_pic_hrd_params_present_flag,
         boolean sub_pic_cpb_params_in_pic_timing_sei_flag,
-        byte fixed_pic_rate_general_flag,
-        byte fixed_pic_rate_within_cvs_flag,
-        byte low_delay_hrd_flag
+        int fixed_pic_rate_general_flag,
+        int fixed_pic_rate_within_cvs_flag,
+        int low_delay_hrd_flag
     ) {
         nal_hrd_parameters_present_flag(nal_hrd_parameters_present_flag);
         vcl_hrd_parameters_present_flag(vcl_hrd_parameters_present_flag);
@@ -267,12 +261,13 @@ public class StdVideoH265HrdFlags extends Struct implements NativeResource {
     public static int nsub_pic_hrd_params_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
     /** Unsafe version of {@link #sub_pic_cpb_params_in_pic_timing_sei_flag}. */
     public static int nsub_pic_cpb_params_in_pic_timing_sei_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
+    public static int nbitfield1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265HrdFlags.BITFIELD1); }
     /** Unsafe version of {@link #fixed_pic_rate_general_flag}. */
-    public static byte nfixed_pic_rate_general_flag(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265HrdFlags.FIXED_PIC_RATE_GENERAL_FLAG); }
+    public static int nfixed_pic_rate_general_flag(long struct) { return nbitfield1(struct) & 0x00_00_00_FF; }
     /** Unsafe version of {@link #fixed_pic_rate_within_cvs_flag}. */
-    public static byte nfixed_pic_rate_within_cvs_flag(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265HrdFlags.FIXED_PIC_RATE_WITHIN_CVS_FLAG); }
+    public static int nfixed_pic_rate_within_cvs_flag(long struct) { return (nbitfield1(struct) & 0x00_00_FF_00) >>> 8; }
     /** Unsafe version of {@link #low_delay_hrd_flag}. */
-    public static byte nlow_delay_hrd_flag(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265HrdFlags.LOW_DELAY_HRD_FLAG); }
+    public static int nlow_delay_hrd_flag(long struct) { return (nbitfield1(struct) & 0x00_FF_00_00) >>> 16; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265HrdFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #nal_hrd_parameters_present_flag(boolean) nal_hrd_parameters_present_flag}. */
@@ -283,12 +278,13 @@ public class StdVideoH265HrdFlags extends Struct implements NativeResource {
     public static void nsub_pic_hrd_params_present_flag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
     /** Unsafe version of {@link #sub_pic_cpb_params_in_pic_timing_sei_flag(boolean) sub_pic_cpb_params_in_pic_timing_sei_flag}. */
     public static void nsub_pic_cpb_params_in_pic_timing_sei_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
-    /** Unsafe version of {@link #fixed_pic_rate_general_flag(byte) fixed_pic_rate_general_flag}. */
-    public static void nfixed_pic_rate_general_flag(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265HrdFlags.FIXED_PIC_RATE_GENERAL_FLAG, value); }
-    /** Unsafe version of {@link #fixed_pic_rate_within_cvs_flag(byte) fixed_pic_rate_within_cvs_flag}. */
-    public static void nfixed_pic_rate_within_cvs_flag(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265HrdFlags.FIXED_PIC_RATE_WITHIN_CVS_FLAG, value); }
-    /** Unsafe version of {@link #low_delay_hrd_flag(byte) low_delay_hrd_flag}. */
-    public static void nlow_delay_hrd_flag(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265HrdFlags.LOW_DELAY_HRD_FLAG, value); }
+    public static void nbitfield1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265HrdFlags.BITFIELD1, value); }
+    /** Unsafe version of {@link #fixed_pic_rate_general_flag(int) fixed_pic_rate_general_flag}. */
+    public static void nfixed_pic_rate_general_flag(long struct, int value) { nbitfield1(struct, (nbitfield1(struct) & 0xFF_FF_FF_00) | (value & 0x00_00_00_FF)); }
+    /** Unsafe version of {@link #fixed_pic_rate_within_cvs_flag(int) fixed_pic_rate_within_cvs_flag}. */
+    public static void nfixed_pic_rate_within_cvs_flag(long struct, int value) { nbitfield1(struct, ((value << 8) & 0x00_00_FF_00) | (nbitfield1(struct) & 0xFF_FF_00_FF)); }
+    /** Unsafe version of {@link #low_delay_hrd_flag(int) low_delay_hrd_flag}. */
+    public static void nlow_delay_hrd_flag(long struct, int value) { nbitfield1(struct, ((value << 16) & 0x00_FF_00_00) | (nbitfield1(struct) & 0xFF_00_FF_FF)); }
 
     // -----------------------------------
 
@@ -341,14 +337,14 @@ public class StdVideoH265HrdFlags extends Struct implements NativeResource {
         @NativeType("uint32_t")
         public boolean sub_pic_cpb_params_in_pic_timing_sei_flag() { return StdVideoH265HrdFlags.nsub_pic_cpb_params_in_pic_timing_sei_flag(address()) != 0; }
         /** @return the value of the {@link StdVideoH265HrdFlags#fixed_pic_rate_general_flag} field. */
-        @NativeType("uint8_t")
-        public byte fixed_pic_rate_general_flag() { return StdVideoH265HrdFlags.nfixed_pic_rate_general_flag(address()); }
+        @NativeType("uint32_t")
+        public int fixed_pic_rate_general_flag() { return StdVideoH265HrdFlags.nfixed_pic_rate_general_flag(address()); }
         /** @return the value of the {@link StdVideoH265HrdFlags#fixed_pic_rate_within_cvs_flag} field. */
-        @NativeType("uint8_t")
-        public byte fixed_pic_rate_within_cvs_flag() { return StdVideoH265HrdFlags.nfixed_pic_rate_within_cvs_flag(address()); }
+        @NativeType("uint32_t")
+        public int fixed_pic_rate_within_cvs_flag() { return StdVideoH265HrdFlags.nfixed_pic_rate_within_cvs_flag(address()); }
         /** @return the value of the {@link StdVideoH265HrdFlags#low_delay_hrd_flag} field. */
-        @NativeType("uint8_t")
-        public byte low_delay_hrd_flag() { return StdVideoH265HrdFlags.nlow_delay_hrd_flag(address()); }
+        @NativeType("uint32_t")
+        public int low_delay_hrd_flag() { return StdVideoH265HrdFlags.nlow_delay_hrd_flag(address()); }
 
         /** Sets the specified value to the {@code nal_hrd_parameters_present_flag} field. */
         public StdVideoH265HrdFlags.Buffer nal_hrd_parameters_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH265HrdFlags.nnal_hrd_parameters_present_flag(address(), value ? 1 : 0); return this; }
@@ -359,11 +355,11 @@ public class StdVideoH265HrdFlags extends Struct implements NativeResource {
         /** Sets the specified value to the {@code sub_pic_cpb_params_in_pic_timing_sei_flag} field. */
         public StdVideoH265HrdFlags.Buffer sub_pic_cpb_params_in_pic_timing_sei_flag(@NativeType("uint32_t") boolean value) { StdVideoH265HrdFlags.nsub_pic_cpb_params_in_pic_timing_sei_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@link StdVideoH265HrdFlags#fixed_pic_rate_general_flag} field. */
-        public StdVideoH265HrdFlags.Buffer fixed_pic_rate_general_flag(@NativeType("uint8_t") byte value) { StdVideoH265HrdFlags.nfixed_pic_rate_general_flag(address(), value); return this; }
+        public StdVideoH265HrdFlags.Buffer fixed_pic_rate_general_flag(@NativeType("uint32_t") int value) { StdVideoH265HrdFlags.nfixed_pic_rate_general_flag(address(), value); return this; }
         /** Sets the specified value to the {@link StdVideoH265HrdFlags#fixed_pic_rate_within_cvs_flag} field. */
-        public StdVideoH265HrdFlags.Buffer fixed_pic_rate_within_cvs_flag(@NativeType("uint8_t") byte value) { StdVideoH265HrdFlags.nfixed_pic_rate_within_cvs_flag(address(), value); return this; }
+        public StdVideoH265HrdFlags.Buffer fixed_pic_rate_within_cvs_flag(@NativeType("uint32_t") int value) { StdVideoH265HrdFlags.nfixed_pic_rate_within_cvs_flag(address(), value); return this; }
         /** Sets the specified value to the {@link StdVideoH265HrdFlags#low_delay_hrd_flag} field. */
-        public StdVideoH265HrdFlags.Buffer low_delay_hrd_flag(@NativeType("uint8_t") byte value) { StdVideoH265HrdFlags.nlow_delay_hrd_flag(address(), value); return this; }
+        public StdVideoH265HrdFlags.Buffer low_delay_hrd_flag(@NativeType("uint32_t") int value) { StdVideoH265HrdFlags.nlow_delay_hrd_flag(address(), value); return this; }
 
     }
 

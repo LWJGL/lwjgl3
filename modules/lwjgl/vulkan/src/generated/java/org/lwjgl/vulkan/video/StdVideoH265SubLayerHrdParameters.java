@@ -16,15 +16,17 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
+
 /**
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct StdVideoH265SubLayerHrdParameters {
- *     uint32_t bit_rate_value_minus1[32];
- *     uint32_t cpb_size_value_minus1[32];
- *     uint32_t cpb_size_du_value_minus1[32];
- *     uint32_t bit_rate_du_value_minus1[32];
+ *     uint32_t bit_rate_value_minus1[STD_VIDEO_H265_CPB_CNT_LIST_SIZE];
+ *     uint32_t cpb_size_value_minus1[STD_VIDEO_H265_CPB_CNT_LIST_SIZE];
+ *     uint32_t cpb_size_du_value_minus1[STD_VIDEO_H265_CPB_CNT_LIST_SIZE];
+ *     uint32_t bit_rate_du_value_minus1[STD_VIDEO_H265_CPB_CNT_LIST_SIZE];
  *     uint32_t {@link #cbr_flag};
  * }</code></pre>
  */
@@ -46,10 +48,10 @@ public class StdVideoH265SubLayerHrdParameters extends Struct implements NativeR
 
     static {
         Layout layout = __struct(
-            __array(4, 32),
-            __array(4, 32),
-            __array(4, 32),
-            __array(4, 32),
+            __array(4, STD_VIDEO_H265_CPB_CNT_LIST_SIZE),
+            __array(4, STD_VIDEO_H265_CPB_CNT_LIST_SIZE),
+            __array(4, STD_VIDEO_H265_CPB_CNT_LIST_SIZE),
+            __array(4, STD_VIDEO_H265_CPB_CNT_LIST_SIZE),
             __member(4)
         );
 
@@ -77,25 +79,25 @@ public class StdVideoH265SubLayerHrdParameters extends Struct implements NativeR
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link IntBuffer} view of the {@code bit_rate_value_minus1} field. */
-    @NativeType("uint32_t[32]")
+    @NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]")
     public IntBuffer bit_rate_value_minus1() { return nbit_rate_value_minus1(address()); }
     /** @return the value at the specified index of the {@code bit_rate_value_minus1} field. */
     @NativeType("uint32_t")
     public int bit_rate_value_minus1(int index) { return nbit_rate_value_minus1(address(), index); }
     /** @return a {@link IntBuffer} view of the {@code cpb_size_value_minus1} field. */
-    @NativeType("uint32_t[32]")
+    @NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]")
     public IntBuffer cpb_size_value_minus1() { return ncpb_size_value_minus1(address()); }
     /** @return the value at the specified index of the {@code cpb_size_value_minus1} field. */
     @NativeType("uint32_t")
     public int cpb_size_value_minus1(int index) { return ncpb_size_value_minus1(address(), index); }
     /** @return a {@link IntBuffer} view of the {@code cpb_size_du_value_minus1} field. */
-    @NativeType("uint32_t[32]")
+    @NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]")
     public IntBuffer cpb_size_du_value_minus1() { return ncpb_size_du_value_minus1(address()); }
     /** @return the value at the specified index of the {@code cpb_size_du_value_minus1} field. */
     @NativeType("uint32_t")
     public int cpb_size_du_value_minus1(int index) { return ncpb_size_du_value_minus1(address(), index); }
     /** @return a {@link IntBuffer} view of the {@code bit_rate_du_value_minus1} field. */
-    @NativeType("uint32_t[32]")
+    @NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]")
     public IntBuffer bit_rate_du_value_minus1() { return nbit_rate_du_value_minus1(address()); }
     /** @return the value at the specified index of the {@code bit_rate_du_value_minus1} field. */
     @NativeType("uint32_t")
@@ -105,19 +107,19 @@ public class StdVideoH265SubLayerHrdParameters extends Struct implements NativeR
     public int cbr_flag() { return ncbr_flag(address()); }
 
     /** Copies the specified {@link IntBuffer} to the {@code bit_rate_value_minus1} field. */
-    public StdVideoH265SubLayerHrdParameters bit_rate_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { nbit_rate_value_minus1(address(), value); return this; }
+    public StdVideoH265SubLayerHrdParameters bit_rate_value_minus1(@NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]") IntBuffer value) { nbit_rate_value_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code bit_rate_value_minus1} field. */
     public StdVideoH265SubLayerHrdParameters bit_rate_value_minus1(int index, @NativeType("uint32_t") int value) { nbit_rate_value_minus1(address(), index, value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code cpb_size_value_minus1} field. */
-    public StdVideoH265SubLayerHrdParameters cpb_size_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { ncpb_size_value_minus1(address(), value); return this; }
+    public StdVideoH265SubLayerHrdParameters cpb_size_value_minus1(@NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]") IntBuffer value) { ncpb_size_value_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code cpb_size_value_minus1} field. */
     public StdVideoH265SubLayerHrdParameters cpb_size_value_minus1(int index, @NativeType("uint32_t") int value) { ncpb_size_value_minus1(address(), index, value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code cpb_size_du_value_minus1} field. */
-    public StdVideoH265SubLayerHrdParameters cpb_size_du_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { ncpb_size_du_value_minus1(address(), value); return this; }
+    public StdVideoH265SubLayerHrdParameters cpb_size_du_value_minus1(@NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]") IntBuffer value) { ncpb_size_du_value_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code cpb_size_du_value_minus1} field. */
     public StdVideoH265SubLayerHrdParameters cpb_size_du_value_minus1(int index, @NativeType("uint32_t") int value) { ncpb_size_du_value_minus1(address(), index, value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code bit_rate_du_value_minus1} field. */
-    public StdVideoH265SubLayerHrdParameters bit_rate_du_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { nbit_rate_du_value_minus1(address(), value); return this; }
+    public StdVideoH265SubLayerHrdParameters bit_rate_du_value_minus1(@NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]") IntBuffer value) { nbit_rate_du_value_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code bit_rate_du_value_minus1} field. */
     public StdVideoH265SubLayerHrdParameters bit_rate_du_value_minus1(int index, @NativeType("uint32_t") int value) { nbit_rate_du_value_minus1(address(), index, value); return this; }
     /** Sets the specified value to the {@link #cbr_flag} field. */
@@ -267,67 +269,67 @@ public class StdVideoH265SubLayerHrdParameters extends Struct implements NativeR
     // -----------------------------------
 
     /** Unsafe version of {@link #bit_rate_value_minus1}. */
-    public static IntBuffer nbit_rate_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_VALUE_MINUS1, 32); }
+    public static IntBuffer nbit_rate_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_VALUE_MINUS1, STD_VIDEO_H265_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #bit_rate_value_minus1(int) bit_rate_value_minus1}. */
     public static int nbit_rate_value_minus1(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, 32) * 4);
+        return UNSAFE.getInt(null, struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, STD_VIDEO_H265_CPB_CNT_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #cpb_size_value_minus1}. */
-    public static IntBuffer ncpb_size_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_VALUE_MINUS1, 32); }
+    public static IntBuffer ncpb_size_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_VALUE_MINUS1, STD_VIDEO_H265_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #cpb_size_value_minus1(int) cpb_size_value_minus1}. */
     public static int ncpb_size_value_minus1(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, 32) * 4);
+        return UNSAFE.getInt(null, struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, STD_VIDEO_H265_CPB_CNT_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #cpb_size_du_value_minus1}. */
-    public static IntBuffer ncpb_size_du_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_DU_VALUE_MINUS1, 32); }
+    public static IntBuffer ncpb_size_du_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_DU_VALUE_MINUS1, STD_VIDEO_H265_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #cpb_size_du_value_minus1(int) cpb_size_du_value_minus1}. */
     public static int ncpb_size_du_value_minus1(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_DU_VALUE_MINUS1 + check(index, 32) * 4);
+        return UNSAFE.getInt(null, struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_DU_VALUE_MINUS1 + check(index, STD_VIDEO_H265_CPB_CNT_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #bit_rate_du_value_minus1}. */
-    public static IntBuffer nbit_rate_du_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_DU_VALUE_MINUS1, 32); }
+    public static IntBuffer nbit_rate_du_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_DU_VALUE_MINUS1, STD_VIDEO_H265_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #bit_rate_du_value_minus1(int) bit_rate_du_value_minus1}. */
     public static int nbit_rate_du_value_minus1(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_DU_VALUE_MINUS1 + check(index, 32) * 4);
+        return UNSAFE.getInt(null, struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_DU_VALUE_MINUS1 + check(index, STD_VIDEO_H265_CPB_CNT_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #cbr_flag}. */
     public static int ncbr_flag(long struct) { return UNSAFE.getInt(null, struct + StdVideoH265SubLayerHrdParameters.CBR_FLAG); }
 
     /** Unsafe version of {@link #bit_rate_value_minus1(IntBuffer) bit_rate_value_minus1}. */
     public static void nbit_rate_value_minus1(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 32); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_CPB_CNT_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_VALUE_MINUS1, value.remaining() * 4);
     }
     /** Unsafe version of {@link #bit_rate_value_minus1(int, int) bit_rate_value_minus1}. */
     public static void nbit_rate_value_minus1(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, 32) * 4, value);
+        UNSAFE.putInt(null, struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, STD_VIDEO_H265_CPB_CNT_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #cpb_size_value_minus1(IntBuffer) cpb_size_value_minus1}. */
     public static void ncpb_size_value_minus1(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 32); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_CPB_CNT_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_VALUE_MINUS1, value.remaining() * 4);
     }
     /** Unsafe version of {@link #cpb_size_value_minus1(int, int) cpb_size_value_minus1}. */
     public static void ncpb_size_value_minus1(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, 32) * 4, value);
+        UNSAFE.putInt(null, struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, STD_VIDEO_H265_CPB_CNT_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #cpb_size_du_value_minus1(IntBuffer) cpb_size_du_value_minus1}. */
     public static void ncpb_size_du_value_minus1(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 32); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_CPB_CNT_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_DU_VALUE_MINUS1, value.remaining() * 4);
     }
     /** Unsafe version of {@link #cpb_size_du_value_minus1(int, int) cpb_size_du_value_minus1}. */
     public static void ncpb_size_du_value_minus1(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_DU_VALUE_MINUS1 + check(index, 32) * 4, value);
+        UNSAFE.putInt(null, struct + StdVideoH265SubLayerHrdParameters.CPB_SIZE_DU_VALUE_MINUS1 + check(index, STD_VIDEO_H265_CPB_CNT_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #bit_rate_du_value_minus1(IntBuffer) bit_rate_du_value_minus1}. */
     public static void nbit_rate_du_value_minus1(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 32); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_CPB_CNT_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_DU_VALUE_MINUS1, value.remaining() * 4);
     }
     /** Unsafe version of {@link #bit_rate_du_value_minus1(int, int) bit_rate_du_value_minus1}. */
     public static void nbit_rate_du_value_minus1(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_DU_VALUE_MINUS1 + check(index, 32) * 4, value);
+        UNSAFE.putInt(null, struct + StdVideoH265SubLayerHrdParameters.BIT_RATE_DU_VALUE_MINUS1 + check(index, STD_VIDEO_H265_CPB_CNT_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #cbr_flag(int) cbr_flag}. */
     public static void ncbr_flag(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265SubLayerHrdParameters.CBR_FLAG, value); }
@@ -371,25 +373,25 @@ public class StdVideoH265SubLayerHrdParameters extends Struct implements NativeR
         }
 
         /** @return a {@link IntBuffer} view of the {@code bit_rate_value_minus1} field. */
-        @NativeType("uint32_t[32]")
+        @NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]")
         public IntBuffer bit_rate_value_minus1() { return StdVideoH265SubLayerHrdParameters.nbit_rate_value_minus1(address()); }
         /** @return the value at the specified index of the {@code bit_rate_value_minus1} field. */
         @NativeType("uint32_t")
         public int bit_rate_value_minus1(int index) { return StdVideoH265SubLayerHrdParameters.nbit_rate_value_minus1(address(), index); }
         /** @return a {@link IntBuffer} view of the {@code cpb_size_value_minus1} field. */
-        @NativeType("uint32_t[32]")
+        @NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]")
         public IntBuffer cpb_size_value_minus1() { return StdVideoH265SubLayerHrdParameters.ncpb_size_value_minus1(address()); }
         /** @return the value at the specified index of the {@code cpb_size_value_minus1} field. */
         @NativeType("uint32_t")
         public int cpb_size_value_minus1(int index) { return StdVideoH265SubLayerHrdParameters.ncpb_size_value_minus1(address(), index); }
         /** @return a {@link IntBuffer} view of the {@code cpb_size_du_value_minus1} field. */
-        @NativeType("uint32_t[32]")
+        @NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]")
         public IntBuffer cpb_size_du_value_minus1() { return StdVideoH265SubLayerHrdParameters.ncpb_size_du_value_minus1(address()); }
         /** @return the value at the specified index of the {@code cpb_size_du_value_minus1} field. */
         @NativeType("uint32_t")
         public int cpb_size_du_value_minus1(int index) { return StdVideoH265SubLayerHrdParameters.ncpb_size_du_value_minus1(address(), index); }
         /** @return a {@link IntBuffer} view of the {@code bit_rate_du_value_minus1} field. */
-        @NativeType("uint32_t[32]")
+        @NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]")
         public IntBuffer bit_rate_du_value_minus1() { return StdVideoH265SubLayerHrdParameters.nbit_rate_du_value_minus1(address()); }
         /** @return the value at the specified index of the {@code bit_rate_du_value_minus1} field. */
         @NativeType("uint32_t")
@@ -399,19 +401,19 @@ public class StdVideoH265SubLayerHrdParameters extends Struct implements NativeR
         public int cbr_flag() { return StdVideoH265SubLayerHrdParameters.ncbr_flag(address()); }
 
         /** Copies the specified {@link IntBuffer} to the {@code bit_rate_value_minus1} field. */
-        public StdVideoH265SubLayerHrdParameters.Buffer bit_rate_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { StdVideoH265SubLayerHrdParameters.nbit_rate_value_minus1(address(), value); return this; }
+        public StdVideoH265SubLayerHrdParameters.Buffer bit_rate_value_minus1(@NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]") IntBuffer value) { StdVideoH265SubLayerHrdParameters.nbit_rate_value_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code bit_rate_value_minus1} field. */
         public StdVideoH265SubLayerHrdParameters.Buffer bit_rate_value_minus1(int index, @NativeType("uint32_t") int value) { StdVideoH265SubLayerHrdParameters.nbit_rate_value_minus1(address(), index, value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code cpb_size_value_minus1} field. */
-        public StdVideoH265SubLayerHrdParameters.Buffer cpb_size_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { StdVideoH265SubLayerHrdParameters.ncpb_size_value_minus1(address(), value); return this; }
+        public StdVideoH265SubLayerHrdParameters.Buffer cpb_size_value_minus1(@NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]") IntBuffer value) { StdVideoH265SubLayerHrdParameters.ncpb_size_value_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code cpb_size_value_minus1} field. */
         public StdVideoH265SubLayerHrdParameters.Buffer cpb_size_value_minus1(int index, @NativeType("uint32_t") int value) { StdVideoH265SubLayerHrdParameters.ncpb_size_value_minus1(address(), index, value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code cpb_size_du_value_minus1} field. */
-        public StdVideoH265SubLayerHrdParameters.Buffer cpb_size_du_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { StdVideoH265SubLayerHrdParameters.ncpb_size_du_value_minus1(address(), value); return this; }
+        public StdVideoH265SubLayerHrdParameters.Buffer cpb_size_du_value_minus1(@NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]") IntBuffer value) { StdVideoH265SubLayerHrdParameters.ncpb_size_du_value_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code cpb_size_du_value_minus1} field. */
         public StdVideoH265SubLayerHrdParameters.Buffer cpb_size_du_value_minus1(int index, @NativeType("uint32_t") int value) { StdVideoH265SubLayerHrdParameters.ncpb_size_du_value_minus1(address(), index, value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code bit_rate_du_value_minus1} field. */
-        public StdVideoH265SubLayerHrdParameters.Buffer bit_rate_du_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { StdVideoH265SubLayerHrdParameters.nbit_rate_du_value_minus1(address(), value); return this; }
+        public StdVideoH265SubLayerHrdParameters.Buffer bit_rate_du_value_minus1(@NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]") IntBuffer value) { StdVideoH265SubLayerHrdParameters.nbit_rate_du_value_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code bit_rate_du_value_minus1} field. */
         public StdVideoH265SubLayerHrdParameters.Buffer bit_rate_du_value_minus1(int index, @NativeType("uint32_t") int value) { StdVideoH265SubLayerHrdParameters.nbit_rate_du_value_minus1(address(), index, value); return this; }
         /** Sets the specified value to the {@link StdVideoH265SubLayerHrdParameters#cbr_flag} field. */

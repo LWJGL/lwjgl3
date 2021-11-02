@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -32,8 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int8_t pps_cr_qp_offset;
  *     uint8_t num_tile_columns_minus1;
  *     uint8_t num_tile_rows_minus1;
- *     uint16_t column_width_minus1[19];
- *     uint16_t row_height_minus1[21];
+ *     uint16_t column_width_minus1[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE];
+ *     uint16_t row_height_minus1[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE];
  *     int8_t pps_beta_offset_div2;
  *     int8_t pps_tc_offset_div2;
  *     uint8_t log2_parallel_merge_level_minus2;
@@ -42,8 +44,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t {@link #log2_max_transform_skip_block_size_minus2};
  *     uint8_t diff_cu_chroma_qp_offset_depth;
  *     uint8_t chroma_qp_offset_list_len_minus1;
- *     int8_t cb_qp_offset_list[6];
- *     int8_t cr_qp_offset_list[6];
+ *     int8_t cb_qp_offset_list[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE];
+ *     int8_t cr_qp_offset_list[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE];
  *     uint8_t log2_sao_offset_scale_luma;
  *     uint8_t log2_sao_offset_scale_chroma;
  *     int8_t {@link #pps_act_y_qp_offset_plus5};
@@ -111,8 +113,8 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
             __member(1),
             __member(1),
             __member(1),
-            __array(2, 19),
-            __array(2, 21),
+            __array(2, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE),
+            __array(2, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE),
             __member(1),
             __member(1),
             __member(1),
@@ -121,8 +123,8 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
             __member(1),
             __member(1),
             __member(1),
-            __array(1, 6),
-            __array(1, 6),
+            __array(1, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE),
+            __array(1, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE),
             __member(1),
             __member(1),
             __member(1),
@@ -218,13 +220,13 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
     @NativeType("uint8_t")
     public byte num_tile_rows_minus1() { return nnum_tile_rows_minus1(address()); }
     /** @return a {@link ShortBuffer} view of the {@code column_width_minus1} field. */
-    @NativeType("uint16_t[19]")
+    @NativeType("uint16_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE]")
     public ShortBuffer column_width_minus1() { return ncolumn_width_minus1(address()); }
     /** @return the value at the specified index of the {@code column_width_minus1} field. */
     @NativeType("uint16_t")
     public short column_width_minus1(int index) { return ncolumn_width_minus1(address(), index); }
     /** @return a {@link ShortBuffer} view of the {@code row_height_minus1} field. */
-    @NativeType("uint16_t[21]")
+    @NativeType("uint16_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE]")
     public ShortBuffer row_height_minus1() { return nrow_height_minus1(address()); }
     /** @return the value at the specified index of the {@code row_height_minus1} field. */
     @NativeType("uint16_t")
@@ -240,10 +242,10 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
     public byte log2_parallel_merge_level_minus2() { return nlog2_parallel_merge_level_minus2(address()); }
     /** @return a {@link StdVideoH265PpsFlags} view of the {@code flags} field. */
     public StdVideoH265PpsFlags flags() { return nflags(address()); }
-    /** must be a valid pointer if pps_scaling_list_data_present_flag is set */
+    /** must be a valid pointer if {@code pps_scaling_list_data_present_flag} is set */
     @NativeType("StdVideoH265ScalingLists *")
     public StdVideoH265ScalingLists pScalingLists() { return npScalingLists(address()); }
-    /** extension PPS, valid when std_video_h265_profile_idc_format_range_extensions is set */
+    /** extension PPS, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS} is set */
     @NativeType("uint8_t")
     public byte log2_max_transform_skip_block_size_minus2() { return nlog2_max_transform_skip_block_size_minus2(address()); }
     /** @return the value of the {@code diff_cu_chroma_qp_offset_depth} field. */
@@ -253,13 +255,13 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
     @NativeType("uint8_t")
     public byte chroma_qp_offset_list_len_minus1() { return nchroma_qp_offset_list_len_minus1(address()); }
     /** @return a {@link ByteBuffer} view of the {@code cb_qp_offset_list} field. */
-    @NativeType("int8_t[6]")
+    @NativeType("int8_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE]")
     public ByteBuffer cb_qp_offset_list() { return ncb_qp_offset_list(address()); }
     /** @return the value at the specified index of the {@code cb_qp_offset_list} field. */
     @NativeType("int8_t")
     public byte cb_qp_offset_list(int index) { return ncb_qp_offset_list(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code cr_qp_offset_list} field. */
-    @NativeType("int8_t[6]")
+    @NativeType("int8_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE]")
     public ByteBuffer cr_qp_offset_list() { return ncr_qp_offset_list(address()); }
     /** @return the value at the specified index of the {@code cr_qp_offset_list} field. */
     @NativeType("int8_t")
@@ -315,11 +317,11 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
     /** Sets the specified value to the {@code num_tile_rows_minus1} field. */
     public StdVideoH265PictureParameterSet num_tile_rows_minus1(@NativeType("uint8_t") byte value) { nnum_tile_rows_minus1(address(), value); return this; }
     /** Copies the specified {@link ShortBuffer} to the {@code column_width_minus1} field. */
-    public StdVideoH265PictureParameterSet column_width_minus1(@NativeType("uint16_t[19]") ShortBuffer value) { ncolumn_width_minus1(address(), value); return this; }
+    public StdVideoH265PictureParameterSet column_width_minus1(@NativeType("uint16_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE]") ShortBuffer value) { ncolumn_width_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code column_width_minus1} field. */
     public StdVideoH265PictureParameterSet column_width_minus1(int index, @NativeType("uint16_t") short value) { ncolumn_width_minus1(address(), index, value); return this; }
     /** Copies the specified {@link ShortBuffer} to the {@code row_height_minus1} field. */
-    public StdVideoH265PictureParameterSet row_height_minus1(@NativeType("uint16_t[21]") ShortBuffer value) { nrow_height_minus1(address(), value); return this; }
+    public StdVideoH265PictureParameterSet row_height_minus1(@NativeType("uint16_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE]") ShortBuffer value) { nrow_height_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code row_height_minus1} field. */
     public StdVideoH265PictureParameterSet row_height_minus1(int index, @NativeType("uint16_t") short value) { nrow_height_minus1(address(), index, value); return this; }
     /** Sets the specified value to the {@code pps_beta_offset_div2} field. */
@@ -341,11 +343,11 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
     /** Sets the specified value to the {@code chroma_qp_offset_list_len_minus1} field. */
     public StdVideoH265PictureParameterSet chroma_qp_offset_list_len_minus1(@NativeType("uint8_t") byte value) { nchroma_qp_offset_list_len_minus1(address(), value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code cb_qp_offset_list} field. */
-    public StdVideoH265PictureParameterSet cb_qp_offset_list(@NativeType("int8_t[6]") ByteBuffer value) { ncb_qp_offset_list(address(), value); return this; }
+    public StdVideoH265PictureParameterSet cb_qp_offset_list(@NativeType("int8_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE]") ByteBuffer value) { ncb_qp_offset_list(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code cb_qp_offset_list} field. */
     public StdVideoH265PictureParameterSet cb_qp_offset_list(int index, @NativeType("int8_t") byte value) { ncb_qp_offset_list(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code cr_qp_offset_list} field. */
-    public StdVideoH265PictureParameterSet cr_qp_offset_list(@NativeType("int8_t[6]") ByteBuffer value) { ncr_qp_offset_list(address(), value); return this; }
+    public StdVideoH265PictureParameterSet cr_qp_offset_list(@NativeType("int8_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE]") ByteBuffer value) { ncr_qp_offset_list(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code cr_qp_offset_list} field. */
     public StdVideoH265PictureParameterSet cr_qp_offset_list(int index, @NativeType("int8_t") byte value) { ncr_qp_offset_list(address(), index, value); return this; }
     /** Sets the specified value to the {@code log2_sao_offset_scale_luma} field. */
@@ -587,16 +589,16 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
     /** Unsafe version of {@link #num_tile_rows_minus1}. */
     public static byte nnum_tile_rows_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.NUM_TILE_ROWS_MINUS1); }
     /** Unsafe version of {@link #column_width_minus1}. */
-    public static ShortBuffer ncolumn_width_minus1(long struct) { return memShortBuffer(struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1, 19); }
+    public static ShortBuffer ncolumn_width_minus1(long struct) { return memShortBuffer(struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE); }
     /** Unsafe version of {@link #column_width_minus1(int) column_width_minus1}. */
     public static short ncolumn_width_minus1(long struct, int index) {
-        return UNSAFE.getShort(null, struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1 + check(index, 19) * 2);
+        return UNSAFE.getShort(null, struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE) * 2);
     }
     /** Unsafe version of {@link #row_height_minus1}. */
-    public static ShortBuffer nrow_height_minus1(long struct) { return memShortBuffer(struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1, 21); }
+    public static ShortBuffer nrow_height_minus1(long struct) { return memShortBuffer(struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE); }
     /** Unsafe version of {@link #row_height_minus1(int) row_height_minus1}. */
     public static short nrow_height_minus1(long struct, int index) {
-        return UNSAFE.getShort(null, struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1 + check(index, 21) * 2);
+        return UNSAFE.getShort(null, struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE) * 2);
     }
     /** Unsafe version of {@link #pps_beta_offset_div2}. */
     public static byte npps_beta_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.PPS_BETA_OFFSET_DIV2); }
@@ -615,16 +617,16 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
     /** Unsafe version of {@link #chroma_qp_offset_list_len_minus1}. */
     public static byte nchroma_qp_offset_list_len_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.CHROMA_QP_OFFSET_LIST_LEN_MINUS1); }
     /** Unsafe version of {@link #cb_qp_offset_list}. */
-    public static ByteBuffer ncb_qp_offset_list(long struct) { return memByteBuffer(struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST, 6); }
+    public static ByteBuffer ncb_qp_offset_list(long struct) { return memByteBuffer(struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE); }
     /** Unsafe version of {@link #cb_qp_offset_list(int) cb_qp_offset_list}. */
     public static byte ncb_qp_offset_list(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST + check(index, 6) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #cr_qp_offset_list}. */
-    public static ByteBuffer ncr_qp_offset_list(long struct) { return memByteBuffer(struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST, 6); }
+    public static ByteBuffer ncr_qp_offset_list(long struct) { return memByteBuffer(struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE); }
     /** Unsafe version of {@link #cr_qp_offset_list(int) cr_qp_offset_list}. */
     public static byte ncr_qp_offset_list(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST + check(index, 6) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #log2_sao_offset_scale_luma}. */
     public static byte nlog2_sao_offset_scale_luma(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265PictureParameterSet.LOG2_SAO_OFFSET_SCALE_LUMA); }
@@ -669,21 +671,21 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
     public static void nnum_tile_rows_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.NUM_TILE_ROWS_MINUS1, value); }
     /** Unsafe version of {@link #column_width_minus1(ShortBuffer) column_width_minus1}. */
     public static void ncolumn_width_minus1(long struct, ShortBuffer value) {
-        if (CHECKS) { checkGT(value, 19); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1, value.remaining() * 2);
     }
     /** Unsafe version of {@link #column_width_minus1(int, short) column_width_minus1}. */
     public static void ncolumn_width_minus1(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1 + check(index, 19) * 2, value);
+        UNSAFE.putShort(null, struct + StdVideoH265PictureParameterSet.COLUMN_WIDTH_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE) * 2, value);
     }
     /** Unsafe version of {@link #row_height_minus1(ShortBuffer) row_height_minus1}. */
     public static void nrow_height_minus1(long struct, ShortBuffer value) {
-        if (CHECKS) { checkGT(value, 21); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1, value.remaining() * 2);
     }
     /** Unsafe version of {@link #row_height_minus1(int, short) row_height_minus1}. */
     public static void nrow_height_minus1(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1 + check(index, 21) * 2, value);
+        UNSAFE.putShort(null, struct + StdVideoH265PictureParameterSet.ROW_HEIGHT_MINUS1 + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE) * 2, value);
     }
     /** Unsafe version of {@link #pps_beta_offset_div2(byte) pps_beta_offset_div2}. */
     public static void npps_beta_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.PPS_BETA_OFFSET_DIV2, value); }
@@ -703,21 +705,21 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
     public static void nchroma_qp_offset_list_len_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.CHROMA_QP_OFFSET_LIST_LEN_MINUS1, value); }
     /** Unsafe version of {@link #cb_qp_offset_list(ByteBuffer) cb_qp_offset_list}. */
     public static void ncb_qp_offset_list(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 6); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST, value.remaining() * 1);
     }
     /** Unsafe version of {@link #cb_qp_offset_list(int, byte) cb_qp_offset_list}. */
     public static void ncb_qp_offset_list(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST + check(index, 6) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.CB_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #cr_qp_offset_list(ByteBuffer) cr_qp_offset_list}. */
     public static void ncr_qp_offset_list(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 6); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST, value.remaining() * 1);
     }
     /** Unsafe version of {@link #cr_qp_offset_list(int, byte) cr_qp_offset_list}. */
     public static void ncr_qp_offset_list(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST + check(index, 6) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.CR_QP_OFFSET_LIST + check(index, STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #log2_sao_offset_scale_luma(byte) log2_sao_offset_scale_luma}. */
     public static void nlog2_sao_offset_scale_luma(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265PictureParameterSet.LOG2_SAO_OFFSET_SCALE_LUMA, value); }
@@ -832,13 +834,13 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
         @NativeType("uint8_t")
         public byte num_tile_rows_minus1() { return StdVideoH265PictureParameterSet.nnum_tile_rows_minus1(address()); }
         /** @return a {@link ShortBuffer} view of the {@code column_width_minus1} field. */
-        @NativeType("uint16_t[19]")
+        @NativeType("uint16_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE]")
         public ShortBuffer column_width_minus1() { return StdVideoH265PictureParameterSet.ncolumn_width_minus1(address()); }
         /** @return the value at the specified index of the {@code column_width_minus1} field. */
         @NativeType("uint16_t")
         public short column_width_minus1(int index) { return StdVideoH265PictureParameterSet.ncolumn_width_minus1(address(), index); }
         /** @return a {@link ShortBuffer} view of the {@code row_height_minus1} field. */
-        @NativeType("uint16_t[21]")
+        @NativeType("uint16_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE]")
         public ShortBuffer row_height_minus1() { return StdVideoH265PictureParameterSet.nrow_height_minus1(address()); }
         /** @return the value at the specified index of the {@code row_height_minus1} field. */
         @NativeType("uint16_t")
@@ -867,13 +869,13 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
         @NativeType("uint8_t")
         public byte chroma_qp_offset_list_len_minus1() { return StdVideoH265PictureParameterSet.nchroma_qp_offset_list_len_minus1(address()); }
         /** @return a {@link ByteBuffer} view of the {@code cb_qp_offset_list} field. */
-        @NativeType("int8_t[6]")
+        @NativeType("int8_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE]")
         public ByteBuffer cb_qp_offset_list() { return StdVideoH265PictureParameterSet.ncb_qp_offset_list(address()); }
         /** @return the value at the specified index of the {@code cb_qp_offset_list} field. */
         @NativeType("int8_t")
         public byte cb_qp_offset_list(int index) { return StdVideoH265PictureParameterSet.ncb_qp_offset_list(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code cr_qp_offset_list} field. */
-        @NativeType("int8_t[6]")
+        @NativeType("int8_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE]")
         public ByteBuffer cr_qp_offset_list() { return StdVideoH265PictureParameterSet.ncr_qp_offset_list(address()); }
         /** @return the value at the specified index of the {@code cr_qp_offset_list} field. */
         @NativeType("int8_t")
@@ -929,11 +931,11 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
         /** Sets the specified value to the {@code num_tile_rows_minus1} field. */
         public StdVideoH265PictureParameterSet.Buffer num_tile_rows_minus1(@NativeType("uint8_t") byte value) { StdVideoH265PictureParameterSet.nnum_tile_rows_minus1(address(), value); return this; }
         /** Copies the specified {@link ShortBuffer} to the {@code column_width_minus1} field. */
-        public StdVideoH265PictureParameterSet.Buffer column_width_minus1(@NativeType("uint16_t[19]") ShortBuffer value) { StdVideoH265PictureParameterSet.ncolumn_width_minus1(address(), value); return this; }
+        public StdVideoH265PictureParameterSet.Buffer column_width_minus1(@NativeType("uint16_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE]") ShortBuffer value) { StdVideoH265PictureParameterSet.ncolumn_width_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code column_width_minus1} field. */
         public StdVideoH265PictureParameterSet.Buffer column_width_minus1(int index, @NativeType("uint16_t") short value) { StdVideoH265PictureParameterSet.ncolumn_width_minus1(address(), index, value); return this; }
         /** Copies the specified {@link ShortBuffer} to the {@code row_height_minus1} field. */
-        public StdVideoH265PictureParameterSet.Buffer row_height_minus1(@NativeType("uint16_t[21]") ShortBuffer value) { StdVideoH265PictureParameterSet.nrow_height_minus1(address(), value); return this; }
+        public StdVideoH265PictureParameterSet.Buffer row_height_minus1(@NativeType("uint16_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE]") ShortBuffer value) { StdVideoH265PictureParameterSet.nrow_height_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code row_height_minus1} field. */
         public StdVideoH265PictureParameterSet.Buffer row_height_minus1(int index, @NativeType("uint16_t") short value) { StdVideoH265PictureParameterSet.nrow_height_minus1(address(), index, value); return this; }
         /** Sets the specified value to the {@code pps_beta_offset_div2} field. */
@@ -955,11 +957,11 @@ public class StdVideoH265PictureParameterSet extends Struct implements NativeRes
         /** Sets the specified value to the {@code chroma_qp_offset_list_len_minus1} field. */
         public StdVideoH265PictureParameterSet.Buffer chroma_qp_offset_list_len_minus1(@NativeType("uint8_t") byte value) { StdVideoH265PictureParameterSet.nchroma_qp_offset_list_len_minus1(address(), value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code cb_qp_offset_list} field. */
-        public StdVideoH265PictureParameterSet.Buffer cb_qp_offset_list(@NativeType("int8_t[6]") ByteBuffer value) { StdVideoH265PictureParameterSet.ncb_qp_offset_list(address(), value); return this; }
+        public StdVideoH265PictureParameterSet.Buffer cb_qp_offset_list(@NativeType("int8_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE]") ByteBuffer value) { StdVideoH265PictureParameterSet.ncb_qp_offset_list(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code cb_qp_offset_list} field. */
         public StdVideoH265PictureParameterSet.Buffer cb_qp_offset_list(int index, @NativeType("int8_t") byte value) { StdVideoH265PictureParameterSet.ncb_qp_offset_list(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code cr_qp_offset_list} field. */
-        public StdVideoH265PictureParameterSet.Buffer cr_qp_offset_list(@NativeType("int8_t[6]") ByteBuffer value) { StdVideoH265PictureParameterSet.ncr_qp_offset_list(address(), value); return this; }
+        public StdVideoH265PictureParameterSet.Buffer cr_qp_offset_list(@NativeType("int8_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE]") ByteBuffer value) { StdVideoH265PictureParameterSet.ncr_qp_offset_list(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code cr_qp_offset_list} field. */
         public StdVideoH265PictureParameterSet.Buffer cr_qp_offset_list(int index, @NativeType("int8_t") byte value) { StdVideoH265PictureParameterSet.ncr_qp_offset_list(address(), index, value); return this; }
         /** Sets the specified value to the {@code log2_sao_offset_scale_luma} field. */

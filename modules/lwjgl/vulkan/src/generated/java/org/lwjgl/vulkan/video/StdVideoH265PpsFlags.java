@@ -158,13 +158,13 @@ public class StdVideoH265PpsFlags extends Struct implements NativeResource {
     /** @return the value of the {@code pps_extension_present_flag} field. */
     @NativeType("uint32_t")
     public boolean pps_extension_present_flag() { return npps_extension_present_flag(address()) != 0; }
-    /** extension PPS flags, valid when std_video_h265_profile_idc_format_range_extensions is set */
+    /** extension PPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS} is set */
     @NativeType("uint32_t")
     public boolean cross_component_prediction_enabled_flag() { return ncross_component_prediction_enabled_flag(address()) != 0; }
     /** @return the value of the {@code chroma_qp_offset_list_enabled_flag} field. */
     @NativeType("uint32_t")
     public boolean chroma_qp_offset_list_enabled_flag() { return nchroma_qp_offset_list_enabled_flag(address()) != 0; }
-    /** extension PPS flags, valid when std_video_h265_profile_idc_scc_extensions is set */
+    /** extension PPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS} is set */
     @NativeType("uint32_t")
     public boolean pps_curr_pic_ref_enabled_flag() { return npps_curr_pic_ref_enabled_flag(address()) != 0; }
     /** @return the value of the {@code residual_adaptive_colour_transform_enabled_flag} field. */

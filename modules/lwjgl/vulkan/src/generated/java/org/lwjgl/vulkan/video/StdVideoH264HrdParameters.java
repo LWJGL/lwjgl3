@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -24,9 +26,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t cpb_cnt_minus1;
  *     uint8_t bit_rate_scale;
  *     uint8_t cpb_size_scale;
- *     uint32_t bit_rate_value_minus1[32];
- *     uint32_t cpb_size_value_minus1[32];
- *     uint8_t cbr_flag[32];
+ *     uint32_t bit_rate_value_minus1[STD_VIDEO_H264_CPB_CNT_LIST_SIZE];
+ *     uint32_t cpb_size_value_minus1[STD_VIDEO_H264_CPB_CNT_LIST_SIZE];
+ *     uint8_t cbr_flag[STD_VIDEO_H264_CPB_CNT_LIST_SIZE];
  *     uint32_t initial_cpb_removal_delay_length_minus1;
  *     uint32_t cpb_removal_delay_length_minus1;
  *     uint32_t dpb_output_delay_length_minus1;
@@ -59,9 +61,9 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
             __member(1),
             __member(1),
             __member(1),
-            __array(4, 32),
-            __array(4, 32),
-            __array(1, 32),
+            __array(4, STD_VIDEO_H264_CPB_CNT_LIST_SIZE),
+            __array(4, STD_VIDEO_H264_CPB_CNT_LIST_SIZE),
+            __array(1, STD_VIDEO_H264_CPB_CNT_LIST_SIZE),
             __member(4),
             __member(4),
             __member(4),
@@ -106,19 +108,19 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
     @NativeType("uint8_t")
     public byte cpb_size_scale() { return ncpb_size_scale(address()); }
     /** @return a {@link IntBuffer} view of the {@code bit_rate_value_minus1} field. */
-    @NativeType("uint32_t[32]")
+    @NativeType("uint32_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]")
     public IntBuffer bit_rate_value_minus1() { return nbit_rate_value_minus1(address()); }
     /** @return the value at the specified index of the {@code bit_rate_value_minus1} field. */
     @NativeType("uint32_t")
     public int bit_rate_value_minus1(int index) { return nbit_rate_value_minus1(address(), index); }
     /** @return a {@link IntBuffer} view of the {@code cpb_size_value_minus1} field. */
-    @NativeType("uint32_t[32]")
+    @NativeType("uint32_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]")
     public IntBuffer cpb_size_value_minus1() { return ncpb_size_value_minus1(address()); }
     /** @return the value at the specified index of the {@code cpb_size_value_minus1} field. */
     @NativeType("uint32_t")
     public int cpb_size_value_minus1(int index) { return ncpb_size_value_minus1(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code cbr_flag} field. */
-    @NativeType("uint8_t[32]")
+    @NativeType("uint8_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]")
     public ByteBuffer cbr_flag() { return ncbr_flag(address()); }
     /** @return the value at the specified index of the {@code cbr_flag} field. */
     @NativeType("uint8_t")
@@ -143,15 +145,15 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
     /** Sets the specified value to the {@code cpb_size_scale} field. */
     public StdVideoH264HrdParameters cpb_size_scale(@NativeType("uint8_t") byte value) { ncpb_size_scale(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code bit_rate_value_minus1} field. */
-    public StdVideoH264HrdParameters bit_rate_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { nbit_rate_value_minus1(address(), value); return this; }
+    public StdVideoH264HrdParameters bit_rate_value_minus1(@NativeType("uint32_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]") IntBuffer value) { nbit_rate_value_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code bit_rate_value_minus1} field. */
     public StdVideoH264HrdParameters bit_rate_value_minus1(int index, @NativeType("uint32_t") int value) { nbit_rate_value_minus1(address(), index, value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code cpb_size_value_minus1} field. */
-    public StdVideoH264HrdParameters cpb_size_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { ncpb_size_value_minus1(address(), value); return this; }
+    public StdVideoH264HrdParameters cpb_size_value_minus1(@NativeType("uint32_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]") IntBuffer value) { ncpb_size_value_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code cpb_size_value_minus1} field. */
     public StdVideoH264HrdParameters cpb_size_value_minus1(int index, @NativeType("uint32_t") int value) { ncpb_size_value_minus1(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code cbr_flag} field. */
-    public StdVideoH264HrdParameters cbr_flag(@NativeType("uint8_t[32]") ByteBuffer value) { ncbr_flag(address(), value); return this; }
+    public StdVideoH264HrdParameters cbr_flag(@NativeType("uint8_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]") ByteBuffer value) { ncbr_flag(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code cbr_flag} field. */
     public StdVideoH264HrdParameters cbr_flag(int index, @NativeType("uint8_t") byte value) { ncbr_flag(address(), index, value); return this; }
     /** Sets the specified value to the {@code initial_cpb_removal_delay_length_minus1} field. */
@@ -323,22 +325,22 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
     /** Unsafe version of {@link #cpb_size_scale}. */
     public static byte ncpb_size_scale(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.CPB_SIZE_SCALE); }
     /** Unsafe version of {@link #bit_rate_value_minus1}. */
-    public static IntBuffer nbit_rate_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1, 32); }
+    public static IntBuffer nbit_rate_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #bit_rate_value_minus1(int) bit_rate_value_minus1}. */
     public static int nbit_rate_value_minus1(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, 32) * 4);
+        return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #cpb_size_value_minus1}. */
-    public static IntBuffer ncpb_size_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1, 32); }
+    public static IntBuffer ncpb_size_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #cpb_size_value_minus1(int) cpb_size_value_minus1}. */
     public static int ncpb_size_value_minus1(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, 32) * 4);
+        return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #cbr_flag}. */
-    public static ByteBuffer ncbr_flag(long struct) { return memByteBuffer(struct + StdVideoH264HrdParameters.CBR_FLAG, 32); }
+    public static ByteBuffer ncbr_flag(long struct) { return memByteBuffer(struct + StdVideoH264HrdParameters.CBR_FLAG, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #cbr_flag(int) cbr_flag}. */
     public static byte ncbr_flag(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.CBR_FLAG + check(index, 32) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.CBR_FLAG + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #initial_cpb_removal_delay_length_minus1}. */
     public static int ninitial_cpb_removal_delay_length_minus1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264HrdParameters.INITIAL_CPB_REMOVAL_DELAY_LENGTH_MINUS1); }
@@ -357,30 +359,30 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
     public static void ncpb_size_scale(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.CPB_SIZE_SCALE, value); }
     /** Unsafe version of {@link #bit_rate_value_minus1(IntBuffer) bit_rate_value_minus1}. */
     public static void nbit_rate_value_minus1(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 32); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1, value.remaining() * 4);
     }
     /** Unsafe version of {@link #bit_rate_value_minus1(int, int) bit_rate_value_minus1}. */
     public static void nbit_rate_value_minus1(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, 32) * 4, value);
+        UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #cpb_size_value_minus1(IntBuffer) cpb_size_value_minus1}. */
     public static void ncpb_size_value_minus1(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 32); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1, value.remaining() * 4);
     }
     /** Unsafe version of {@link #cpb_size_value_minus1(int, int) cpb_size_value_minus1}. */
     public static void ncpb_size_value_minus1(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, 32) * 4, value);
+        UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.CPB_SIZE_VALUE_MINUS1 + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #cbr_flag(ByteBuffer) cbr_flag}. */
     public static void ncbr_flag(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 32); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoH264HrdParameters.CBR_FLAG, value.remaining() * 1);
     }
     /** Unsafe version of {@link #cbr_flag(int, byte) cbr_flag}. */
     public static void ncbr_flag(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.CBR_FLAG + check(index, 32) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.CBR_FLAG + check(index, STD_VIDEO_H264_CPB_CNT_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #initial_cpb_removal_delay_length_minus1(int) initial_cpb_removal_delay_length_minus1}. */
     public static void ninitial_cpb_removal_delay_length_minus1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264HrdParameters.INITIAL_CPB_REMOVAL_DELAY_LENGTH_MINUS1, value); }
@@ -439,19 +441,19 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
         @NativeType("uint8_t")
         public byte cpb_size_scale() { return StdVideoH264HrdParameters.ncpb_size_scale(address()); }
         /** @return a {@link IntBuffer} view of the {@code bit_rate_value_minus1} field. */
-        @NativeType("uint32_t[32]")
+        @NativeType("uint32_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]")
         public IntBuffer bit_rate_value_minus1() { return StdVideoH264HrdParameters.nbit_rate_value_minus1(address()); }
         /** @return the value at the specified index of the {@code bit_rate_value_minus1} field. */
         @NativeType("uint32_t")
         public int bit_rate_value_minus1(int index) { return StdVideoH264HrdParameters.nbit_rate_value_minus1(address(), index); }
         /** @return a {@link IntBuffer} view of the {@code cpb_size_value_minus1} field. */
-        @NativeType("uint32_t[32]")
+        @NativeType("uint32_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]")
         public IntBuffer cpb_size_value_minus1() { return StdVideoH264HrdParameters.ncpb_size_value_minus1(address()); }
         /** @return the value at the specified index of the {@code cpb_size_value_minus1} field. */
         @NativeType("uint32_t")
         public int cpb_size_value_minus1(int index) { return StdVideoH264HrdParameters.ncpb_size_value_minus1(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code cbr_flag} field. */
-        @NativeType("uint8_t[32]")
+        @NativeType("uint8_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]")
         public ByteBuffer cbr_flag() { return StdVideoH264HrdParameters.ncbr_flag(address()); }
         /** @return the value at the specified index of the {@code cbr_flag} field. */
         @NativeType("uint8_t")
@@ -476,15 +478,15 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
         /** Sets the specified value to the {@code cpb_size_scale} field. */
         public StdVideoH264HrdParameters.Buffer cpb_size_scale(@NativeType("uint8_t") byte value) { StdVideoH264HrdParameters.ncpb_size_scale(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code bit_rate_value_minus1} field. */
-        public StdVideoH264HrdParameters.Buffer bit_rate_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { StdVideoH264HrdParameters.nbit_rate_value_minus1(address(), value); return this; }
+        public StdVideoH264HrdParameters.Buffer bit_rate_value_minus1(@NativeType("uint32_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]") IntBuffer value) { StdVideoH264HrdParameters.nbit_rate_value_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code bit_rate_value_minus1} field. */
         public StdVideoH264HrdParameters.Buffer bit_rate_value_minus1(int index, @NativeType("uint32_t") int value) { StdVideoH264HrdParameters.nbit_rate_value_minus1(address(), index, value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code cpb_size_value_minus1} field. */
-        public StdVideoH264HrdParameters.Buffer cpb_size_value_minus1(@NativeType("uint32_t[32]") IntBuffer value) { StdVideoH264HrdParameters.ncpb_size_value_minus1(address(), value); return this; }
+        public StdVideoH264HrdParameters.Buffer cpb_size_value_minus1(@NativeType("uint32_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]") IntBuffer value) { StdVideoH264HrdParameters.ncpb_size_value_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code cpb_size_value_minus1} field. */
         public StdVideoH264HrdParameters.Buffer cpb_size_value_minus1(int index, @NativeType("uint32_t") int value) { StdVideoH264HrdParameters.ncpb_size_value_minus1(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code cbr_flag} field. */
-        public StdVideoH264HrdParameters.Buffer cbr_flag(@NativeType("uint8_t[32]") ByteBuffer value) { StdVideoH264HrdParameters.ncbr_flag(address(), value); return this; }
+        public StdVideoH264HrdParameters.Buffer cbr_flag(@NativeType("uint8_t[STD_VIDEO_H264_CPB_CNT_LIST_SIZE]") ByteBuffer value) { StdVideoH264HrdParameters.ncbr_flag(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code cbr_flag} field. */
         public StdVideoH264HrdParameters.Buffer cbr_flag(int index, @NativeType("uint8_t") byte value) { StdVideoH264HrdParameters.ncbr_flag(address(), index, value); return this; }
         /** Sets the specified value to the {@code initial_cpb_removal_delay_length_minus1} field. */

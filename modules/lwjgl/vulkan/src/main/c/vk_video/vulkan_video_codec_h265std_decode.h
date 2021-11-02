@@ -17,6 +17,8 @@ extern "C" {
 // Video h265 Decode related parameters:
 // *************************************************
 
+#define STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE 8
+
 typedef struct StdVideoDecodeH265PictureInfoFlags {
     uint32_t IrapPicFlag : 1;
     uint32_t IdrPicFlag  : 1;
@@ -33,11 +35,14 @@ typedef struct StdVideoDecodeH265PictureInfo {
     uint16_t                           NumBitsForSTRefPicSetInSlice; // number of bits used in st_ref_pic_set()
                                                                      //when short_term_ref_pic_set_sps_flag is 0; otherwise set to 0.
     uint8_t                            NumDeltaPocsOfRefRpsIdx;      // NumDeltaPocs[ RefRpsIdx ] when short_term_ref_pic_set_sps_flag = 1, otherwise 0
-    uint8_t                            RefPicSetStCurrBefore[8];     // slotIndex as used in VkVideoReferenceSlotKHR structures representing
+    uint8_t                            RefPicSetStCurrBefore[STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE]; // slotIndex as used in
+                                                                     // VkVideoReferenceSlotKHR structures representing
                                                                      //pReferenceSlots in VkVideoDecodeInfoKHR, 0xff for invalid slotIndex
-    uint8_t                            RefPicSetStCurrAfter[8];      // slotIndex as used in VkVideoReferenceSlotKHR structures representing
+    uint8_t                            RefPicSetStCurrAfter[STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE];   // slotIndex as used in
+                                                                     // VkVideoReferenceSlotKHR structures representing
                                                                      //pReferenceSlots in VkVideoDecodeInfoKHR, 0xff for invalid slotIndex
-    uint8_t                            RefPicSetLtCurr[8];           // slotIndex as used in VkVideoReferenceSlotKHR structures representing
+    uint8_t                            RefPicSetLtCurr[STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE]; // slotIndex as used in
+                                                                     // VkVideoReferenceSlotKHR structures representing
                                                                      //pReferenceSlots in VkVideoDecodeInfoKHR, 0xff for invalid slotIndex
     StdVideoDecodeH265PictureInfoFlags flags;
 } StdVideoDecodeH265PictureInfo;

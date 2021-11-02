@@ -223,7 +223,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Description</h5>
         <ul>
-            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR indicates that the specified acceleration structure <b>can</b> be updated with {@code update} of #TRUE in #CmdBuildAccelerationStructuresKHR() or #CmdBuildAccelerationStructureNV() .</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR indicates that the specified acceleration structure <b>can</b> be updated with a {@code mode} of #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR in ##VkAccelerationStructureBuildGeometryInfoKHR or an {@code update} of #TRUE in #CmdBuildAccelerationStructureNV() .</li>
             <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR indicates that the specified acceleration structure <b>can</b> act as the source for a copy acceleration structure command with {@code mode} of #COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR to produce a compacted acceleration structure.</li>
             <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR indicates that the given acceleration structure build <b>should</b> prioritize trace performance over build time.</li>
             <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR indicates that the given acceleration structure build <b>should</b> prioritize build time over trace performance.</li>

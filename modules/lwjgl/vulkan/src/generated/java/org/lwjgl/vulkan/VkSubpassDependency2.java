@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@code viewOffset} has the same effect for the described subpass dependency as {@link VkRenderPassMultiviewCreateInfo}{@code ::pViewOffsets} has on each corresponding subpass dependency.</p>
  * 
- * <p>If an instance of {@link VkMemoryBarrier2KHR} is included in the {@code pNext} chain, {@code srcStageMask}, {@code dstStageMask}, {@code srcAccessMask}, and {@code dstAccessMask} parameters are ignored. The synchronization and access scopes instead are defined by the parameters of {@link VkMemoryBarrier2KHR}.</p>
+ * <p>If a {@link VkMemoryBarrier2KHR} structure is included in the {@code pNext} chain, {@code srcStageMask}, {@code dstStageMask}, {@code srcAccessMask}, and {@code dstAccessMask} parameters are ignored. The synchronization and access scopes instead are defined by the parameters of {@link VkMemoryBarrier2KHR}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

@@ -25,7 +25,7 @@ val EXT_video_decode_h265 = "EXTVideoDecodeH265".nativeClassVK("EXT_video_decode
                 </ul>
             </li>
             <li>
-                Extending ##VkVideoProfileKHR:
+                Extending ##VkVideoProfileKHR, ##VkQueryPoolCreateInfo, ##VkFormatProperties2, ##VkImageCreateInfo, ##VkImageViewCreateInfo, ##VkBufferCreateInfo:
                 <ul>
                     <li>##VkVideoDecodeH265ProfileEXT</li>
                 </ul>

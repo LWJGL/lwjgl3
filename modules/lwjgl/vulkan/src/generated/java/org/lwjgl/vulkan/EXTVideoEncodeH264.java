@@ -22,7 +22,7 @@ package org.lwjgl.vulkan;
  * <li>{@link VkVideoEncodeH264VclFrameInfoEXT}</li>
  * </ul>
  * </li>
- * <li>Extending {@link VkVideoProfileKHR}:
+ * <li>Extending {@link VkVideoProfileKHR}, {@link VkQueryPoolCreateInfo}, {@link VkFormatProperties2}, {@link VkImageCreateInfo}, {@link VkImageViewCreateInfo}, {@link VkBufferCreateInfo}:
  * 
  * <ul>
  * <li>{@link VkVideoEncodeH264ProfileEXT}</li>
@@ -143,9 +143,9 @@ public final class EXTVideoEncodeH264 {
      * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_TRANSFORM_8X8_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_TRANSFORM_8X8_BIT_EXT} reports if enabling transform_8x8_mode_flag in StdVideoH264PpsFlags is supported.</li>
      * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_CHROMA_QP_OFFSET_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_CHROMA_QP_OFFSET_BIT_EXT} reports if setting chroma_qp_index_offset in StdVideoH264PictureParameterSet is supported.</li>
      * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_SECOND_CHROMA_QP_OFFSET_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_SECOND_CHROMA_QP_OFFSET_BIT_EXT} reports if setting second_chroma_qp_index_offset in StdVideoH264PictureParameterSet is supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED_BIT_EXT} reports if using std_video_h264_disable_deblocking_filter_idc_disabled from StdVideoH264DisableDeblockingFilterIdc is supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED_BIT_EXT} reports if using std_video_h264_disable_deblocking_filter_idc_enabled from StdVideoH264DisableDeblockingFilterIdc is supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT} reports if using std_video_h264_disable_deblocking_filter_idc_partial from StdVideoH264DisableDeblockingFilterIdc is supported. An implementation <b>must</b> support at least one deblocking filter mode.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED_BIT_EXT} reports if using STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_DISABLED from StdVideoH264DisableDeblockingFilterIdc is supported.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED_BIT_EXT} reports if using STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_ENABLED from StdVideoH264DisableDeblockingFilterIdc is supported.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT} reports if using STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_PARTIAL from StdVideoH264DisableDeblockingFilterIdc is supported. An implementation <b>must</b> support at least one deblocking filter mode.</li>
      * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT}</li>
      * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_EVENLY_DISTRIBUTED_SLICE_SIZE_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_EVENLY_DISTRIBUTED_SLICE_SIZE_BIT_EXT}</li>
      * </ul>

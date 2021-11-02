@@ -23,7 +23,7 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>When the content type is H.264 MVC, an instance of {@link VkVideoDecodeH264MvcEXT} <b>must</b> be chained to {@link VkVideoDecodeH264PictureInfoEXT}.</p>
+ * <p>When the content type is H.264 MVC, a {@link VkVideoDecodeH264MvcEXT} structure <b>must</b> be chained to {@link VkVideoDecodeH264PictureInfoEXT}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

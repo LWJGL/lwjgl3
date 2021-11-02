@@ -33,8 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code dstBitstreamBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
  * <li>{@code srcPictureResource} <b>must</b> be a valid {@link VkVideoPictureResourceKHR} structure</li>
  * <li>{@code pSetupReferenceSlot} <b>must</b> be a valid pointer to a valid {@link VkVideoReferenceSlotKHR} structure</li>
- * <li>{@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid {@link VkVideoReferenceSlotKHR} structures</li>
- * <li>{@code referenceSlotCount} <b>must</b> be greater than 0</li>
+ * <li>If {@code referenceSlotCount} is not 0, {@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid {@link VkVideoReferenceSlotKHR} structures</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -160,6 +159,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     @NativeType("uint32_t")
     public int referenceSlotCount() { return nreferenceSlotCount(address()); }
     /** {@code NULL} or a pointer to an array of {@link VkVideoReferenceSlotKHR} structures that will be used when this encoding operation is executing. Each entry in {@code pReferenceSlots} <b>must</b> be one of the entries provided in {@link VkVideoBeginCodingInfoKHR} via the {@code pReferenceSlots} within the {@link KHRVideoQueue#vkCmdBeginVideoCodingKHR CmdBeginVideoCodingKHR} command that established the Vulkan Video Encode Context for this command. */
+    @Nullable
     @NativeType("VkVideoReferenceSlotKHR const *")
     public VkVideoReferenceSlotKHR.Buffer pReferenceSlots() { return npReferenceSlots(address()); }
 
@@ -198,7 +198,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     /** Sets the address of the specified {@link VkVideoReferenceSlotKHR} to the {@link #pSetupReferenceSlot} field. */
     public VkVideoEncodeInfoKHR pSetupReferenceSlot(@NativeType("VkVideoReferenceSlotKHR const *") VkVideoReferenceSlotKHR value) { npSetupReferenceSlot(address(), value); return this; }
     /** Sets the address of the specified {@link VkVideoReferenceSlotKHR.Buffer} to the {@link #pReferenceSlots} field. */
-    public VkVideoEncodeInfoKHR pReferenceSlots(@NativeType("VkVideoReferenceSlotKHR const *") VkVideoReferenceSlotKHR.Buffer value) { npReferenceSlots(address(), value); return this; }
+    public VkVideoEncodeInfoKHR pReferenceSlots(@Nullable @NativeType("VkVideoReferenceSlotKHR const *") VkVideoReferenceSlotKHR.Buffer value) { npReferenceSlots(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoEncodeInfoKHR set(
@@ -212,7 +212,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         long dstBitstreamBufferMaxRange,
         VkVideoPictureResourceKHR srcPictureResource,
         VkVideoReferenceSlotKHR pSetupReferenceSlot,
-        VkVideoReferenceSlotKHR.Buffer pReferenceSlots
+        @Nullable VkVideoReferenceSlotKHR.Buffer pReferenceSlots
     ) {
         sType(sType);
         pNext(pNext);
@@ -378,7 +378,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #referenceSlotCount}. */
     public static int nreferenceSlotCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeInfoKHR.REFERENCESLOTCOUNT); }
     /** Unsafe version of {@link #pReferenceSlots}. */
-    public static VkVideoReferenceSlotKHR.Buffer npReferenceSlots(long struct) { return VkVideoReferenceSlotKHR.create(memGetAddress(struct + VkVideoEncodeInfoKHR.PREFERENCESLOTS), nreferenceSlotCount(struct)); }
+    @Nullable public static VkVideoReferenceSlotKHR.Buffer npReferenceSlots(long struct) { return VkVideoReferenceSlotKHR.createSafe(memGetAddress(struct + VkVideoEncodeInfoKHR.PREFERENCESLOTS), nreferenceSlotCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.STYPE, value); }
@@ -403,7 +403,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     /** Sets the specified value to the {@code referenceSlotCount} field of the specified {@code struct}. */
     public static void nreferenceSlotCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.REFERENCESLOTCOUNT, value); }
     /** Unsafe version of {@link #pReferenceSlots(VkVideoReferenceSlotKHR.Buffer) pReferenceSlots}. */
-    public static void npReferenceSlots(long struct, VkVideoReferenceSlotKHR.Buffer value) { memPutAddress(struct + VkVideoEncodeInfoKHR.PREFERENCESLOTS, value.address()); nreferenceSlotCount(struct, value.remaining()); }
+    public static void npReferenceSlots(long struct, @Nullable VkVideoReferenceSlotKHR.Buffer value) { memPutAddress(struct + VkVideoEncodeInfoKHR.PREFERENCESLOTS, memAddressSafe(value)); nreferenceSlotCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -415,9 +415,11 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         check(pSetupReferenceSlot);
         VkVideoReferenceSlotKHR.validate(pSetupReferenceSlot);
         int referenceSlotCount = nreferenceSlotCount(struct);
-        long pReferenceSlots = memGetAddress(struct + VkVideoEncodeInfoKHR.PREFERENCESLOTS);
-        check(pReferenceSlots);
-        VkVideoReferenceSlotKHR.validate(pReferenceSlots, referenceSlotCount);
+        if (referenceSlotCount != 0) {
+            long pReferenceSlots = memGetAddress(struct + VkVideoEncodeInfoKHR.PREFERENCESLOTS);
+            check(pReferenceSlots);
+            VkVideoReferenceSlotKHR.validate(pReferenceSlots, referenceSlotCount);
+        }
     }
 
     /**
@@ -502,6 +504,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         @NativeType("uint32_t")
         public int referenceSlotCount() { return VkVideoEncodeInfoKHR.nreferenceSlotCount(address()); }
         /** @return a {@link VkVideoReferenceSlotKHR.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeInfoKHR#pReferenceSlots} field. */
+        @Nullable
         @NativeType("VkVideoReferenceSlotKHR const *")
         public VkVideoReferenceSlotKHR.Buffer pReferenceSlots() { return VkVideoEncodeInfoKHR.npReferenceSlots(address()); }
 
@@ -540,7 +543,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         /** Sets the address of the specified {@link VkVideoReferenceSlotKHR} to the {@link VkVideoEncodeInfoKHR#pSetupReferenceSlot} field. */
         public VkVideoEncodeInfoKHR.Buffer pSetupReferenceSlot(@NativeType("VkVideoReferenceSlotKHR const *") VkVideoReferenceSlotKHR value) { VkVideoEncodeInfoKHR.npSetupReferenceSlot(address(), value); return this; }
         /** Sets the address of the specified {@link VkVideoReferenceSlotKHR.Buffer} to the {@link VkVideoEncodeInfoKHR#pReferenceSlots} field. */
-        public VkVideoEncodeInfoKHR.Buffer pReferenceSlots(@NativeType("VkVideoReferenceSlotKHR const *") VkVideoReferenceSlotKHR.Buffer value) { VkVideoEncodeInfoKHR.npReferenceSlots(address(), value); return this; }
+        public VkVideoEncodeInfoKHR.Buffer pReferenceSlots(@Nullable @NativeType("VkVideoReferenceSlotKHR const *") VkVideoReferenceSlotKHR.Buffer value) { VkVideoEncodeInfoKHR.npReferenceSlots(address(), value); return this; }
 
     }
 

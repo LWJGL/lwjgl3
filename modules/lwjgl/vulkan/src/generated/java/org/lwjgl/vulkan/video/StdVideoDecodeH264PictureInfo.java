@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -26,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t {@link #reserved};
  *     uint16_t {@link #frame_num};
  *     uint16_t {@link #idr_pic_id};
- *     int32_t {@link #PicOrderCnt}[2];
+ *     int32_t {@link #PicOrderCnt}[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE];
  *     {@link StdVideoDecodeH264PictureInfoFlags StdVideoDecodeH264PictureInfoFlags} flags;
  * }</code></pre>
  */
@@ -55,7 +57,7 @@ public class StdVideoDecodeH264PictureInfo extends Struct implements NativeResou
             __member(2),
             __member(2),
             __member(2),
-            __array(4, 2),
+            __array(4, STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE),
             __member(StdVideoDecodeH264PictureInfoFlags.SIZEOF, StdVideoDecodeH264PictureInfoFlags.ALIGNOF)
         );
 
@@ -100,7 +102,7 @@ public class StdVideoDecodeH264PictureInfo extends Struct implements NativeResou
     @NativeType("uint16_t")
     public short idr_pic_id() { return nidr_pic_id(address()); }
     /** topFieldOrderCnt and BottomFieldOrderCnt fields */
-    @NativeType("int32_t[2]")
+    @NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]")
     public IntBuffer PicOrderCnt() { return nPicOrderCnt(address()); }
     /** topFieldOrderCnt and BottomFieldOrderCnt fields */
     @NativeType("int32_t")
@@ -119,7 +121,7 @@ public class StdVideoDecodeH264PictureInfo extends Struct implements NativeResou
     /** Sets the specified value to the {@link #idr_pic_id} field. */
     public StdVideoDecodeH264PictureInfo idr_pic_id(@NativeType("uint16_t") short value) { nidr_pic_id(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@link #PicOrderCnt} field. */
-    public StdVideoDecodeH264PictureInfo PicOrderCnt(@NativeType("int32_t[2]") IntBuffer value) { nPicOrderCnt(address(), value); return this; }
+    public StdVideoDecodeH264PictureInfo PicOrderCnt(@NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]") IntBuffer value) { nPicOrderCnt(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@link #PicOrderCnt} field. */
     public StdVideoDecodeH264PictureInfo PicOrderCnt(int index, @NativeType("int32_t") int value) { nPicOrderCnt(address(), index, value); return this; }
     /** Copies the specified {@link StdVideoDecodeH264PictureInfoFlags} to the {@code flags} field. */
@@ -285,10 +287,10 @@ public class StdVideoDecodeH264PictureInfo extends Struct implements NativeResou
     /** Unsafe version of {@link #idr_pic_id}. */
     public static short nidr_pic_id(long struct) { return UNSAFE.getShort(null, struct + StdVideoDecodeH264PictureInfo.IDR_PIC_ID); }
     /** Unsafe version of {@link #PicOrderCnt}. */
-    public static IntBuffer nPicOrderCnt(long struct) { return memIntBuffer(struct + StdVideoDecodeH264PictureInfo.PICORDERCNT, 2); }
+    public static IntBuffer nPicOrderCnt(long struct) { return memIntBuffer(struct + StdVideoDecodeH264PictureInfo.PICORDERCNT, STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE); }
     /** Unsafe version of {@link #PicOrderCnt(int) PicOrderCnt}. */
     public static int nPicOrderCnt(long struct, int index) {
-        return UNSAFE.getInt(null, struct + StdVideoDecodeH264PictureInfo.PICORDERCNT + check(index, 2) * 4);
+        return UNSAFE.getInt(null, struct + StdVideoDecodeH264PictureInfo.PICORDERCNT + check(index, STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE) * 4);
     }
     /** Unsafe version of {@link #flags}. */
     public static StdVideoDecodeH264PictureInfoFlags nflags(long struct) { return StdVideoDecodeH264PictureInfoFlags.create(struct + StdVideoDecodeH264PictureInfo.FLAGS); }
@@ -305,12 +307,12 @@ public class StdVideoDecodeH264PictureInfo extends Struct implements NativeResou
     public static void nidr_pic_id(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoDecodeH264PictureInfo.IDR_PIC_ID, value); }
     /** Unsafe version of {@link #PicOrderCnt(IntBuffer) PicOrderCnt}. */
     public static void nPicOrderCnt(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 2); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoDecodeH264PictureInfo.PICORDERCNT, value.remaining() * 4);
     }
     /** Unsafe version of {@link #PicOrderCnt(int, int) PicOrderCnt}. */
     public static void nPicOrderCnt(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + StdVideoDecodeH264PictureInfo.PICORDERCNT + check(index, 2) * 4, value);
+        UNSAFE.putInt(null, struct + StdVideoDecodeH264PictureInfo.PICORDERCNT + check(index, STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE) * 4, value);
     }
     /** Unsafe version of {@link #flags(StdVideoDecodeH264PictureInfoFlags) flags}. */
     public static void nflags(long struct, StdVideoDecodeH264PictureInfoFlags value) { memCopy(value.address(), struct + StdVideoDecodeH264PictureInfo.FLAGS, StdVideoDecodeH264PictureInfoFlags.SIZEOF); }
@@ -369,7 +371,7 @@ public class StdVideoDecodeH264PictureInfo extends Struct implements NativeResou
         @NativeType("uint16_t")
         public short idr_pic_id() { return StdVideoDecodeH264PictureInfo.nidr_pic_id(address()); }
         /** @return a {@link IntBuffer} view of the {@link StdVideoDecodeH264PictureInfo#PicOrderCnt} field. */
-        @NativeType("int32_t[2]")
+        @NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]")
         public IntBuffer PicOrderCnt() { return StdVideoDecodeH264PictureInfo.nPicOrderCnt(address()); }
         /** @return the value at the specified index of the {@link StdVideoDecodeH264PictureInfo#PicOrderCnt} field. */
         @NativeType("int32_t")
@@ -388,7 +390,7 @@ public class StdVideoDecodeH264PictureInfo extends Struct implements NativeResou
         /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfo#idr_pic_id} field. */
         public StdVideoDecodeH264PictureInfo.Buffer idr_pic_id(@NativeType("uint16_t") short value) { StdVideoDecodeH264PictureInfo.nidr_pic_id(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@link StdVideoDecodeH264PictureInfo#PicOrderCnt} field. */
-        public StdVideoDecodeH264PictureInfo.Buffer PicOrderCnt(@NativeType("int32_t[2]") IntBuffer value) { StdVideoDecodeH264PictureInfo.nPicOrderCnt(address(), value); return this; }
+        public StdVideoDecodeH264PictureInfo.Buffer PicOrderCnt(@NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]") IntBuffer value) { StdVideoDecodeH264PictureInfo.nPicOrderCnt(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@link StdVideoDecodeH264PictureInfo#PicOrderCnt} field. */
         public StdVideoDecodeH264PictureInfo.Buffer PicOrderCnt(int index, @NativeType("int32_t") int value) { StdVideoDecodeH264PictureInfo.nPicOrderCnt(address(), index, value); return this; }
         /** Copies the specified {@link StdVideoDecodeH264PictureInfoFlags} to the {@code flags} field. */

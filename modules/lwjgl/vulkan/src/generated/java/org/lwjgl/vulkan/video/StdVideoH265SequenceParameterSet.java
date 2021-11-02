@@ -299,7 +299,7 @@ public class StdVideoH265SequenceParameterSet extends Struct implements NativeRe
     /** must be a valid pointer if StdVideoH265SpsFlags:vui_parameters_present_flag is set palette_max_size; */
     @NativeType("StdVideoH265SequenceParameterSetVui *")
     public StdVideoH265SequenceParameterSetVui pSequenceParameterSetVui() { return npSequenceParameterSetVui(address()); }
-    /** extension SPS flags, valid when std_video_h265_profile_idc_scc_extensions is set */
+    /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS} is set */
     @NativeType("uint8_t")
     public byte palette_max_size() { return npalette_max_size(address()); }
     /** @return the value of the {@code delta_palette_max_predictor_size} field. */

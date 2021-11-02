@@ -30,6 +30,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>A top level acceleration structure with either motion instances or vertex motion in its instances <b>must</b> set {@link NVRayTracingMotionBlur#VK_BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV BUILD_ACCELERATION_STRUCTURE_MOTION_BIT_NV} in {@code flags}.</p>
  * 
+ * <p>Members {@code srcAccelerationStructure} and {@code dstAccelerationStructure} <b>may</b> be the same or different for an update operation (when {@code mode} is {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR}). If they are the same, the update happens in-place. Otherwise, the target acceleration structure is updated and the source is not modified.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

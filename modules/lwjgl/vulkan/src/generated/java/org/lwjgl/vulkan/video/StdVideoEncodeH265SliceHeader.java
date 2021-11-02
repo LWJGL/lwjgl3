@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -33,14 +35,14 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t {@link #num_ref_idx_l1_active_minus1};
  *     uint8_t {@link #luma_log2_weight_denom};
  *     int8_t delta_chroma_log2_weight_denom;
- *     int8_t delta_luma_weight_l0[15];
- *     int8_t luma_offset_l0[15];
- *     int8_t delta_chroma_weight_l0[15][2];
- *     int8_t delta_chroma_offset_l0[15][2];
- *     int8_t delta_luma_weight_l1[15];
- *     int8_t luma_offset_l1[15];
- *     int8_t delta_chroma_weight_l1[15][2];
- *     int8_t delta_chroma_offset_l1[15][2];
+ *     int8_t delta_luma_weight_l0[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE];
+ *     int8_t luma_offset_l0[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE];
+ *     int8_t delta_chroma_weight_l0[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
+ *     int8_t delta_chroma_offset_l0[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
+ *     int8_t delta_luma_weight_l1[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE];
+ *     int8_t luma_offset_l1[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE];
+ *     int8_t delta_chroma_weight_l1[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
+ *     int8_t delta_chroma_offset_l1[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
  *     uint8_t MaxNumMergeCand;
  *     int8_t slice_qp_delta;
  *     int8_t {@link #slice_cb_qp_offset};
@@ -108,14 +110,14 @@ public class StdVideoEncodeH265SliceHeader extends Struct implements NativeResou
             __member(1),
             __member(1),
             __member(1),
-            __array(1, 15),
-            __array(1, 15),
-            __array(1, 15 * 2),
-            __array(1, 15 * 2),
-            __array(1, 15),
-            __array(1, 15),
-            __array(1, 15 * 2),
-            __array(1, 15 * 2),
+            __array(1, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE),
+            __array(1, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE),
+            __array(1, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM),
+            __array(1, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM),
+            __array(1, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE),
+            __array(1, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE),
+            __array(1, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM),
+            __array(1, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM),
             __member(1),
             __member(1),
             __member(1),
@@ -213,49 +215,49 @@ public class StdVideoEncodeH265SliceHeader extends Struct implements NativeResou
     @NativeType("int8_t")
     public byte delta_chroma_log2_weight_denom() { return ndelta_chroma_log2_weight_denom(address()); }
     /** @return a {@link ByteBuffer} view of the {@code delta_luma_weight_l0} field. */
-    @NativeType("int8_t[15]")
+    @NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]")
     public ByteBuffer delta_luma_weight_l0() { return ndelta_luma_weight_l0(address()); }
     /** @return the value at the specified index of the {@code delta_luma_weight_l0} field. */
     @NativeType("int8_t")
     public byte delta_luma_weight_l0(int index) { return ndelta_luma_weight_l0(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code luma_offset_l0} field. */
-    @NativeType("int8_t[15]")
+    @NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]")
     public ByteBuffer luma_offset_l0() { return nluma_offset_l0(address()); }
     /** @return the value at the specified index of the {@code luma_offset_l0} field. */
     @NativeType("int8_t")
     public byte luma_offset_l0(int index) { return nluma_offset_l0(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code delta_chroma_weight_l0} field. */
-    @NativeType("int8_t[15][2]")
+    @NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]")
     public ByteBuffer delta_chroma_weight_l0() { return ndelta_chroma_weight_l0(address()); }
     /** @return the value at the specified index of the {@code delta_chroma_weight_l0} field. */
     @NativeType("int8_t")
     public byte delta_chroma_weight_l0(int index) { return ndelta_chroma_weight_l0(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code delta_chroma_offset_l0} field. */
-    @NativeType("int8_t[15][2]")
+    @NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]")
     public ByteBuffer delta_chroma_offset_l0() { return ndelta_chroma_offset_l0(address()); }
     /** @return the value at the specified index of the {@code delta_chroma_offset_l0} field. */
     @NativeType("int8_t")
     public byte delta_chroma_offset_l0(int index) { return ndelta_chroma_offset_l0(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code delta_luma_weight_l1} field. */
-    @NativeType("int8_t[15]")
+    @NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]")
     public ByteBuffer delta_luma_weight_l1() { return ndelta_luma_weight_l1(address()); }
     /** @return the value at the specified index of the {@code delta_luma_weight_l1} field. */
     @NativeType("int8_t")
     public byte delta_luma_weight_l1(int index) { return ndelta_luma_weight_l1(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code luma_offset_l1} field. */
-    @NativeType("int8_t[15]")
+    @NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]")
     public ByteBuffer luma_offset_l1() { return nluma_offset_l1(address()); }
     /** @return the value at the specified index of the {@code luma_offset_l1} field. */
     @NativeType("int8_t")
     public byte luma_offset_l1(int index) { return nluma_offset_l1(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code delta_chroma_weight_l1} field. */
-    @NativeType("int8_t[15][2]")
+    @NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]")
     public ByteBuffer delta_chroma_weight_l1() { return ndelta_chroma_weight_l1(address()); }
     /** @return the value at the specified index of the {@code delta_chroma_weight_l1} field. */
     @NativeType("int8_t")
     public byte delta_chroma_weight_l1(int index) { return ndelta_chroma_weight_l1(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code delta_chroma_offset_l1} field. */
-    @NativeType("int8_t[15][2]")
+    @NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]")
     public ByteBuffer delta_chroma_offset_l1() { return ndelta_chroma_offset_l1(address()); }
     /** @return the value at the specified index of the {@code delta_chroma_offset_l1} field. */
     @NativeType("int8_t")
@@ -315,35 +317,35 @@ public class StdVideoEncodeH265SliceHeader extends Struct implements NativeResou
     /** Sets the specified value to the {@code delta_chroma_log2_weight_denom} field. */
     public StdVideoEncodeH265SliceHeader delta_chroma_log2_weight_denom(@NativeType("int8_t") byte value) { ndelta_chroma_log2_weight_denom(address(), value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code delta_luma_weight_l0} field. */
-    public StdVideoEncodeH265SliceHeader delta_luma_weight_l0(@NativeType("int8_t[15]") ByteBuffer value) { ndelta_luma_weight_l0(address(), value); return this; }
+    public StdVideoEncodeH265SliceHeader delta_luma_weight_l0(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]") ByteBuffer value) { ndelta_luma_weight_l0(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code delta_luma_weight_l0} field. */
     public StdVideoEncodeH265SliceHeader delta_luma_weight_l0(int index, @NativeType("int8_t") byte value) { ndelta_luma_weight_l0(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code luma_offset_l0} field. */
-    public StdVideoEncodeH265SliceHeader luma_offset_l0(@NativeType("int8_t[15]") ByteBuffer value) { nluma_offset_l0(address(), value); return this; }
+    public StdVideoEncodeH265SliceHeader luma_offset_l0(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]") ByteBuffer value) { nluma_offset_l0(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code luma_offset_l0} field. */
     public StdVideoEncodeH265SliceHeader luma_offset_l0(int index, @NativeType("int8_t") byte value) { nluma_offset_l0(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code delta_chroma_weight_l0} field. */
-    public StdVideoEncodeH265SliceHeader delta_chroma_weight_l0(@NativeType("int8_t[15][2]") ByteBuffer value) { ndelta_chroma_weight_l0(address(), value); return this; }
+    public StdVideoEncodeH265SliceHeader delta_chroma_weight_l0(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]") ByteBuffer value) { ndelta_chroma_weight_l0(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code delta_chroma_weight_l0} field. */
     public StdVideoEncodeH265SliceHeader delta_chroma_weight_l0(int index, @NativeType("int8_t") byte value) { ndelta_chroma_weight_l0(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code delta_chroma_offset_l0} field. */
-    public StdVideoEncodeH265SliceHeader delta_chroma_offset_l0(@NativeType("int8_t[15][2]") ByteBuffer value) { ndelta_chroma_offset_l0(address(), value); return this; }
+    public StdVideoEncodeH265SliceHeader delta_chroma_offset_l0(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]") ByteBuffer value) { ndelta_chroma_offset_l0(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code delta_chroma_offset_l0} field. */
     public StdVideoEncodeH265SliceHeader delta_chroma_offset_l0(int index, @NativeType("int8_t") byte value) { ndelta_chroma_offset_l0(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code delta_luma_weight_l1} field. */
-    public StdVideoEncodeH265SliceHeader delta_luma_weight_l1(@NativeType("int8_t[15]") ByteBuffer value) { ndelta_luma_weight_l1(address(), value); return this; }
+    public StdVideoEncodeH265SliceHeader delta_luma_weight_l1(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]") ByteBuffer value) { ndelta_luma_weight_l1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code delta_luma_weight_l1} field. */
     public StdVideoEncodeH265SliceHeader delta_luma_weight_l1(int index, @NativeType("int8_t") byte value) { ndelta_luma_weight_l1(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code luma_offset_l1} field. */
-    public StdVideoEncodeH265SliceHeader luma_offset_l1(@NativeType("int8_t[15]") ByteBuffer value) { nluma_offset_l1(address(), value); return this; }
+    public StdVideoEncodeH265SliceHeader luma_offset_l1(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]") ByteBuffer value) { nluma_offset_l1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code luma_offset_l1} field. */
     public StdVideoEncodeH265SliceHeader luma_offset_l1(int index, @NativeType("int8_t") byte value) { nluma_offset_l1(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code delta_chroma_weight_l1} field. */
-    public StdVideoEncodeH265SliceHeader delta_chroma_weight_l1(@NativeType("int8_t[15][2]") ByteBuffer value) { ndelta_chroma_weight_l1(address(), value); return this; }
+    public StdVideoEncodeH265SliceHeader delta_chroma_weight_l1(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]") ByteBuffer value) { ndelta_chroma_weight_l1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code delta_chroma_weight_l1} field. */
     public StdVideoEncodeH265SliceHeader delta_chroma_weight_l1(int index, @NativeType("int8_t") byte value) { ndelta_chroma_weight_l1(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code delta_chroma_offset_l1} field. */
-    public StdVideoEncodeH265SliceHeader delta_chroma_offset_l1(@NativeType("int8_t[15][2]") ByteBuffer value) { ndelta_chroma_offset_l1(address(), value); return this; }
+    public StdVideoEncodeH265SliceHeader delta_chroma_offset_l1(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]") ByteBuffer value) { ndelta_chroma_offset_l1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code delta_chroma_offset_l1} field. */
     public StdVideoEncodeH265SliceHeader delta_chroma_offset_l1(int index, @NativeType("int8_t") byte value) { ndelta_chroma_offset_l1(address(), index, value); return this; }
     /** Sets the specified value to the {@code MaxNumMergeCand} field. */
@@ -587,52 +589,52 @@ public class StdVideoEncodeH265SliceHeader extends Struct implements NativeResou
     /** Unsafe version of {@link #delta_chroma_log2_weight_denom}. */
     public static byte ndelta_chroma_log2_weight_denom(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_LOG2_WEIGHT_DENOM); }
     /** Unsafe version of {@link #delta_luma_weight_l0}. */
-    public static ByteBuffer ndelta_luma_weight_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L0, 15); }
+    public static ByteBuffer ndelta_luma_weight_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L0, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE); }
     /** Unsafe version of {@link #delta_luma_weight_l0(int) delta_luma_weight_l0}. */
     public static byte ndelta_luma_weight_l0(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L0 + check(index, 15) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L0 + check(index, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #luma_offset_l0}. */
-    public static ByteBuffer nluma_offset_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L0, 15); }
+    public static ByteBuffer nluma_offset_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L0, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE); }
     /** Unsafe version of {@link #luma_offset_l0(int) luma_offset_l0}. */
     public static byte nluma_offset_l0(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L0 + check(index, 15) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L0 + check(index, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #delta_chroma_weight_l0}. */
-    public static ByteBuffer ndelta_chroma_weight_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L0, 15 * 2); }
+    public static ByteBuffer ndelta_chroma_weight_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L0, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM); }
     /** Unsafe version of {@link #delta_chroma_weight_l0(int) delta_chroma_weight_l0}. */
     public static byte ndelta_chroma_weight_l0(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L0 + check(index, 15 * 2) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L0 + check(index, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM) * 1);
     }
     /** Unsafe version of {@link #delta_chroma_offset_l0}. */
-    public static ByteBuffer ndelta_chroma_offset_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L0, 15 * 2); }
+    public static ByteBuffer ndelta_chroma_offset_l0(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L0, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM); }
     /** Unsafe version of {@link #delta_chroma_offset_l0(int) delta_chroma_offset_l0}. */
     public static byte ndelta_chroma_offset_l0(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L0 + check(index, 15 * 2) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L0 + check(index, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM) * 1);
     }
     /** Unsafe version of {@link #delta_luma_weight_l1}. */
-    public static ByteBuffer ndelta_luma_weight_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L1, 15); }
+    public static ByteBuffer ndelta_luma_weight_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L1, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE); }
     /** Unsafe version of {@link #delta_luma_weight_l1(int) delta_luma_weight_l1}. */
     public static byte ndelta_luma_weight_l1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L1 + check(index, 15) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L1 + check(index, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #luma_offset_l1}. */
-    public static ByteBuffer nluma_offset_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L1, 15); }
+    public static ByteBuffer nluma_offset_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L1, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE); }
     /** Unsafe version of {@link #luma_offset_l1(int) luma_offset_l1}. */
     public static byte nluma_offset_l1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L1 + check(index, 15) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L1 + check(index, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE) * 1);
     }
     /** Unsafe version of {@link #delta_chroma_weight_l1}. */
-    public static ByteBuffer ndelta_chroma_weight_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L1, 15 * 2); }
+    public static ByteBuffer ndelta_chroma_weight_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L1, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM); }
     /** Unsafe version of {@link #delta_chroma_weight_l1(int) delta_chroma_weight_l1}. */
     public static byte ndelta_chroma_weight_l1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L1 + check(index, 15 * 2) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L1 + check(index, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM) * 1);
     }
     /** Unsafe version of {@link #delta_chroma_offset_l1}. */
-    public static ByteBuffer ndelta_chroma_offset_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L1, 15 * 2); }
+    public static ByteBuffer ndelta_chroma_offset_l1(long struct) { return memByteBuffer(struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L1, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM); }
     /** Unsafe version of {@link #delta_chroma_offset_l1(int) delta_chroma_offset_l1}. */
     public static byte ndelta_chroma_offset_l1(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L1 + check(index, 15 * 2) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L1 + check(index, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM) * 1);
     }
     /** Unsafe version of {@link #MaxNumMergeCand}. */
     public static byte nMaxNumMergeCand(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceHeader.MAXNUMMERGECAND); }
@@ -681,75 +683,75 @@ public class StdVideoEncodeH265SliceHeader extends Struct implements NativeResou
     public static void ndelta_chroma_log2_weight_denom(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_LOG2_WEIGHT_DENOM, value); }
     /** Unsafe version of {@link #delta_luma_weight_l0(ByteBuffer) delta_luma_weight_l0}. */
     public static void ndelta_luma_weight_l0(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 15); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L0, value.remaining() * 1);
     }
     /** Unsafe version of {@link #delta_luma_weight_l0(int, byte) delta_luma_weight_l0}. */
     public static void ndelta_luma_weight_l0(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L0 + check(index, 15) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L0 + check(index, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #luma_offset_l0(ByteBuffer) luma_offset_l0}. */
     public static void nluma_offset_l0(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 15); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L0, value.remaining() * 1);
     }
     /** Unsafe version of {@link #luma_offset_l0(int, byte) luma_offset_l0}. */
     public static void nluma_offset_l0(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L0 + check(index, 15) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L0 + check(index, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #delta_chroma_weight_l0(ByteBuffer) delta_chroma_weight_l0}. */
     public static void ndelta_chroma_weight_l0(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 15 * 2); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM); }
         memCopy(memAddress(value), struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L0, value.remaining() * 1);
     }
     /** Unsafe version of {@link #delta_chroma_weight_l0(int, byte) delta_chroma_weight_l0}. */
     public static void ndelta_chroma_weight_l0(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L0 + check(index, 15 * 2) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L0 + check(index, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM) * 1, value);
     }
     /** Unsafe version of {@link #delta_chroma_offset_l0(ByteBuffer) delta_chroma_offset_l0}. */
     public static void ndelta_chroma_offset_l0(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 15 * 2); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM); }
         memCopy(memAddress(value), struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L0, value.remaining() * 1);
     }
     /** Unsafe version of {@link #delta_chroma_offset_l0(int, byte) delta_chroma_offset_l0}. */
     public static void ndelta_chroma_offset_l0(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L0 + check(index, 15 * 2) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L0 + check(index, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM) * 1, value);
     }
     /** Unsafe version of {@link #delta_luma_weight_l1(ByteBuffer) delta_luma_weight_l1}. */
     public static void ndelta_luma_weight_l1(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 15); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L1, value.remaining() * 1);
     }
     /** Unsafe version of {@link #delta_luma_weight_l1(int, byte) delta_luma_weight_l1}. */
     public static void ndelta_luma_weight_l1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L1 + check(index, 15) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_LUMA_WEIGHT_L1 + check(index, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #luma_offset_l1(ByteBuffer) luma_offset_l1}. */
     public static void nluma_offset_l1(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 15); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L1, value.remaining() * 1);
     }
     /** Unsafe version of {@link #luma_offset_l1(int, byte) luma_offset_l1}. */
     public static void nluma_offset_l1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L1 + check(index, 15) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.LUMA_OFFSET_L1 + check(index, STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE) * 1, value);
     }
     /** Unsafe version of {@link #delta_chroma_weight_l1(ByteBuffer) delta_chroma_weight_l1}. */
     public static void ndelta_chroma_weight_l1(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 15 * 2); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM); }
         memCopy(memAddress(value), struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L1, value.remaining() * 1);
     }
     /** Unsafe version of {@link #delta_chroma_weight_l1(int, byte) delta_chroma_weight_l1}. */
     public static void ndelta_chroma_weight_l1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L1 + check(index, 15 * 2) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_WEIGHT_L1 + check(index, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM) * 1, value);
     }
     /** Unsafe version of {@link #delta_chroma_offset_l1(ByteBuffer) delta_chroma_offset_l1}. */
     public static void ndelta_chroma_offset_l1(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 15 * 2); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM); }
         memCopy(memAddress(value), struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L1, value.remaining() * 1);
     }
     /** Unsafe version of {@link #delta_chroma_offset_l1(int, byte) delta_chroma_offset_l1}. */
     public static void ndelta_chroma_offset_l1(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L1 + check(index, 15 * 2) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.DELTA_CHROMA_OFFSET_L1 + check(index, STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM) * 1, value);
     }
     /** Unsafe version of {@link #MaxNumMergeCand(byte) MaxNumMergeCand}. */
     public static void nMaxNumMergeCand(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceHeader.MAXNUMMERGECAND, value); }
@@ -847,49 +849,49 @@ public class StdVideoEncodeH265SliceHeader extends Struct implements NativeResou
         @NativeType("int8_t")
         public byte delta_chroma_log2_weight_denom() { return StdVideoEncodeH265SliceHeader.ndelta_chroma_log2_weight_denom(address()); }
         /** @return a {@link ByteBuffer} view of the {@code delta_luma_weight_l0} field. */
-        @NativeType("int8_t[15]")
+        @NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]")
         public ByteBuffer delta_luma_weight_l0() { return StdVideoEncodeH265SliceHeader.ndelta_luma_weight_l0(address()); }
         /** @return the value at the specified index of the {@code delta_luma_weight_l0} field. */
         @NativeType("int8_t")
         public byte delta_luma_weight_l0(int index) { return StdVideoEncodeH265SliceHeader.ndelta_luma_weight_l0(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code luma_offset_l0} field. */
-        @NativeType("int8_t[15]")
+        @NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]")
         public ByteBuffer luma_offset_l0() { return StdVideoEncodeH265SliceHeader.nluma_offset_l0(address()); }
         /** @return the value at the specified index of the {@code luma_offset_l0} field. */
         @NativeType("int8_t")
         public byte luma_offset_l0(int index) { return StdVideoEncodeH265SliceHeader.nluma_offset_l0(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code delta_chroma_weight_l0} field. */
-        @NativeType("int8_t[15][2]")
+        @NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]")
         public ByteBuffer delta_chroma_weight_l0() { return StdVideoEncodeH265SliceHeader.ndelta_chroma_weight_l0(address()); }
         /** @return the value at the specified index of the {@code delta_chroma_weight_l0} field. */
         @NativeType("int8_t")
         public byte delta_chroma_weight_l0(int index) { return StdVideoEncodeH265SliceHeader.ndelta_chroma_weight_l0(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code delta_chroma_offset_l0} field. */
-        @NativeType("int8_t[15][2]")
+        @NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]")
         public ByteBuffer delta_chroma_offset_l0() { return StdVideoEncodeH265SliceHeader.ndelta_chroma_offset_l0(address()); }
         /** @return the value at the specified index of the {@code delta_chroma_offset_l0} field. */
         @NativeType("int8_t")
         public byte delta_chroma_offset_l0(int index) { return StdVideoEncodeH265SliceHeader.ndelta_chroma_offset_l0(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code delta_luma_weight_l1} field. */
-        @NativeType("int8_t[15]")
+        @NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]")
         public ByteBuffer delta_luma_weight_l1() { return StdVideoEncodeH265SliceHeader.ndelta_luma_weight_l1(address()); }
         /** @return the value at the specified index of the {@code delta_luma_weight_l1} field. */
         @NativeType("int8_t")
         public byte delta_luma_weight_l1(int index) { return StdVideoEncodeH265SliceHeader.ndelta_luma_weight_l1(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code luma_offset_l1} field. */
-        @NativeType("int8_t[15]")
+        @NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]")
         public ByteBuffer luma_offset_l1() { return StdVideoEncodeH265SliceHeader.nluma_offset_l1(address()); }
         /** @return the value at the specified index of the {@code luma_offset_l1} field. */
         @NativeType("int8_t")
         public byte luma_offset_l1(int index) { return StdVideoEncodeH265SliceHeader.nluma_offset_l1(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code delta_chroma_weight_l1} field. */
-        @NativeType("int8_t[15][2]")
+        @NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]")
         public ByteBuffer delta_chroma_weight_l1() { return StdVideoEncodeH265SliceHeader.ndelta_chroma_weight_l1(address()); }
         /** @return the value at the specified index of the {@code delta_chroma_weight_l1} field. */
         @NativeType("int8_t")
         public byte delta_chroma_weight_l1(int index) { return StdVideoEncodeH265SliceHeader.ndelta_chroma_weight_l1(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code delta_chroma_offset_l1} field. */
-        @NativeType("int8_t[15][2]")
+        @NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]")
         public ByteBuffer delta_chroma_offset_l1() { return StdVideoEncodeH265SliceHeader.ndelta_chroma_offset_l1(address()); }
         /** @return the value at the specified index of the {@code delta_chroma_offset_l1} field. */
         @NativeType("int8_t")
@@ -949,35 +951,35 @@ public class StdVideoEncodeH265SliceHeader extends Struct implements NativeResou
         /** Sets the specified value to the {@code delta_chroma_log2_weight_denom} field. */
         public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_log2_weight_denom(@NativeType("int8_t") byte value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_log2_weight_denom(address(), value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code delta_luma_weight_l0} field. */
-        public StdVideoEncodeH265SliceHeader.Buffer delta_luma_weight_l0(@NativeType("int8_t[15]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_luma_weight_l0(address(), value); return this; }
+        public StdVideoEncodeH265SliceHeader.Buffer delta_luma_weight_l0(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_luma_weight_l0(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code delta_luma_weight_l0} field. */
         public StdVideoEncodeH265SliceHeader.Buffer delta_luma_weight_l0(int index, @NativeType("int8_t") byte value) { StdVideoEncodeH265SliceHeader.ndelta_luma_weight_l0(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code luma_offset_l0} field. */
-        public StdVideoEncodeH265SliceHeader.Buffer luma_offset_l0(@NativeType("int8_t[15]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.nluma_offset_l0(address(), value); return this; }
+        public StdVideoEncodeH265SliceHeader.Buffer luma_offset_l0(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.nluma_offset_l0(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code luma_offset_l0} field. */
         public StdVideoEncodeH265SliceHeader.Buffer luma_offset_l0(int index, @NativeType("int8_t") byte value) { StdVideoEncodeH265SliceHeader.nluma_offset_l0(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code delta_chroma_weight_l0} field. */
-        public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_weight_l0(@NativeType("int8_t[15][2]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_weight_l0(address(), value); return this; }
+        public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_weight_l0(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_weight_l0(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code delta_chroma_weight_l0} field. */
         public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_weight_l0(int index, @NativeType("int8_t") byte value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_weight_l0(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code delta_chroma_offset_l0} field. */
-        public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_offset_l0(@NativeType("int8_t[15][2]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_offset_l0(address(), value); return this; }
+        public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_offset_l0(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_offset_l0(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code delta_chroma_offset_l0} field. */
         public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_offset_l0(int index, @NativeType("int8_t") byte value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_offset_l0(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code delta_luma_weight_l1} field. */
-        public StdVideoEncodeH265SliceHeader.Buffer delta_luma_weight_l1(@NativeType("int8_t[15]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_luma_weight_l1(address(), value); return this; }
+        public StdVideoEncodeH265SliceHeader.Buffer delta_luma_weight_l1(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_luma_weight_l1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code delta_luma_weight_l1} field. */
         public StdVideoEncodeH265SliceHeader.Buffer delta_luma_weight_l1(int index, @NativeType("int8_t") byte value) { StdVideoEncodeH265SliceHeader.ndelta_luma_weight_l1(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code luma_offset_l1} field. */
-        public StdVideoEncodeH265SliceHeader.Buffer luma_offset_l1(@NativeType("int8_t[15]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.nluma_offset_l1(address(), value); return this; }
+        public StdVideoEncodeH265SliceHeader.Buffer luma_offset_l1(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.nluma_offset_l1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code luma_offset_l1} field. */
         public StdVideoEncodeH265SliceHeader.Buffer luma_offset_l1(int index, @NativeType("int8_t") byte value) { StdVideoEncodeH265SliceHeader.nluma_offset_l1(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code delta_chroma_weight_l1} field. */
-        public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_weight_l1(@NativeType("int8_t[15][2]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_weight_l1(address(), value); return this; }
+        public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_weight_l1(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_weight_l1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code delta_chroma_weight_l1} field. */
         public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_weight_l1(int index, @NativeType("int8_t") byte value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_weight_l1(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code delta_chroma_offset_l1} field. */
-        public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_offset_l1(@NativeType("int8_t[15][2]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_offset_l1(address(), value); return this; }
+        public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_offset_l1(@NativeType("int8_t[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM]") ByteBuffer value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_offset_l1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code delta_chroma_offset_l1} field. */
         public StdVideoEncodeH265SliceHeader.Buffer delta_chroma_offset_l1(int index, @NativeType("int8_t") byte value) { StdVideoEncodeH265SliceHeader.ndelta_chroma_offset_l1(address(), index, value); return this; }
         /** Sets the specified value to the {@code MaxNumMergeCand} field. */

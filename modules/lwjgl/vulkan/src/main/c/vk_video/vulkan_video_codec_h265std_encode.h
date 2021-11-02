@@ -17,6 +17,10 @@ extern "C" {
 // Video h265 Encode related parameters:
 // *************************************************
 
+#define STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE   15
+#define STD_VIDEO_ENCODE_H265_CHROMA_LIST_SIZE 15
+#define STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM  2
+
 typedef struct StdVideoEncodeH265SliceHeaderFlags {
     uint32_t first_slice_segment_in_pic_flag : 1;
     uint32_t no_output_of_prior_pics_flag : 1;
@@ -32,6 +36,7 @@ typedef struct StdVideoEncodeH265SliceHeaderFlags {
     uint32_t collocated_from_l0_flag : 1;
     uint32_t slice_loop_filter_across_slices_enabled_flag : 1;
     uint32_t bLastSliceInPic : 1;
+    uint32_t reservedBits : 18;
     uint16_t luma_weight_l0_flag;   // bit 0 - num_ref_idx_l0_active_minus1
     uint16_t chroma_weight_l0_flag; // bit 0 - num_ref_idx_l0_active_minus1
     uint16_t luma_weight_l1_flag;   // bit 0 - num_ref_idx_l1_active_minus1
@@ -51,14 +56,14 @@ typedef struct StdVideoEncodeH265SliceHeader {
     uint8_t                            num_ref_idx_l1_active_minus1; // [0, 14]
     uint8_t                            luma_log2_weight_denom;       // [0, 7]
     int8_t                             delta_chroma_log2_weight_denom;
-    int8_t                             delta_luma_weight_l0[15];
-    int8_t                             luma_offset_l0[15];
-    int8_t                             delta_chroma_weight_l0[15][2];
-    int8_t                             delta_chroma_offset_l0[15][2];
-    int8_t                             delta_luma_weight_l1[15];
-    int8_t                             luma_offset_l1[15];
-    int8_t                             delta_chroma_weight_l1[15][2];
-    int8_t                             delta_chroma_offset_l1[15][2];
+    int8_t                             delta_luma_weight_l0[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE];
+    int8_t                             luma_offset_l0[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE];
+    int8_t                             delta_chroma_weight_l0[STD_VIDEO_ENCODE_H265_CHROMA_LIST_SIZE][STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
+    int8_t                             delta_chroma_offset_l0[STD_VIDEO_ENCODE_H265_CHROMA_LIST_SIZE][STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
+    int8_t                             delta_luma_weight_l1[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE];
+    int8_t                             luma_offset_l1[STD_VIDEO_ENCODE_H265_LUMA_LIST_SIZE];
+    int8_t                             delta_chroma_weight_l1[STD_VIDEO_ENCODE_H265_CHROMA_LIST_SIZE][STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
+    int8_t                             delta_chroma_offset_l1[STD_VIDEO_ENCODE_H265_CHROMA_LIST_SIZE][STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
     uint8_t                            MaxNumMergeCand;
     int8_t                             slice_qp_delta;
     int8_t                             slice_cb_qp_offset;         // [-12, 12]

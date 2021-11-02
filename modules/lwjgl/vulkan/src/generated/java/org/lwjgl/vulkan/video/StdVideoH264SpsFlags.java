@@ -30,12 +30,11 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t mb_adaptive_frame_field_flag : 1;
  *     uint32_t frame_mbs_only_flag : 1;
  *     uint32_t delta_pic_order_always_zero_flag : 1;
- *     uint32_t residual_colour_transform_flag : 1;
+ *     uint32_t separate_colour_plane_flag : 1;
  *     uint32_t gaps_in_frame_num_value_allowed_flag : 1;
- *     uint32_t first_picture_after_seek_flag : 1;
  *     uint32_t qpprime_y_zero_transform_bypass_flag : 1;
  *     uint32_t frame_cropping_flag : 1;
- *     uint32_t scaling_matrix_present_flag : 1;
+ *     uint32_t seq_scaling_matrix_present_flag : 1;
  *     uint32_t vui_parameters_present_flag : 1;
  * }</code></pre>
  */
@@ -105,24 +104,21 @@ public class StdVideoH264SpsFlags extends Struct implements NativeResource {
     /** @return the value of the {@code delta_pic_order_always_zero_flag} field. */
     @NativeType("uint32_t")
     public boolean delta_pic_order_always_zero_flag() { return ndelta_pic_order_always_zero_flag(address()) != 0; }
-    /** @return the value of the {@code residual_colour_transform_flag} field. */
+    /** @return the value of the {@code separate_colour_plane_flag} field. */
     @NativeType("uint32_t")
-    public boolean residual_colour_transform_flag() { return nresidual_colour_transform_flag(address()) != 0; }
+    public boolean separate_colour_plane_flag() { return nseparate_colour_plane_flag(address()) != 0; }
     /** @return the value of the {@code gaps_in_frame_num_value_allowed_flag} field. */
     @NativeType("uint32_t")
     public boolean gaps_in_frame_num_value_allowed_flag() { return ngaps_in_frame_num_value_allowed_flag(address()) != 0; }
-    /** @return the value of the {@code first_picture_after_seek_flag} field. */
-    @NativeType("uint32_t")
-    public boolean first_picture_after_seek_flag() { return nfirst_picture_after_seek_flag(address()) != 0; }
     /** @return the value of the {@code qpprime_y_zero_transform_bypass_flag} field. */
     @NativeType("uint32_t")
     public boolean qpprime_y_zero_transform_bypass_flag() { return nqpprime_y_zero_transform_bypass_flag(address()) != 0; }
     /** @return the value of the {@code frame_cropping_flag} field. */
     @NativeType("uint32_t")
     public boolean frame_cropping_flag() { return nframe_cropping_flag(address()) != 0; }
-    /** @return the value of the {@code scaling_matrix_present_flag} field. */
+    /** @return the value of the {@code seq_scaling_matrix_present_flag} field. */
     @NativeType("uint32_t")
-    public boolean scaling_matrix_present_flag() { return nscaling_matrix_present_flag(address()) != 0; }
+    public boolean seq_scaling_matrix_present_flag() { return nseq_scaling_matrix_present_flag(address()) != 0; }
     /** @return the value of the {@code vui_parameters_present_flag} field. */
     @NativeType("uint32_t")
     public boolean vui_parameters_present_flag() { return nvui_parameters_present_flag(address()) != 0; }
@@ -147,18 +143,16 @@ public class StdVideoH264SpsFlags extends Struct implements NativeResource {
     public StdVideoH264SpsFlags frame_mbs_only_flag(@NativeType("uint32_t") boolean value) { nframe_mbs_only_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code delta_pic_order_always_zero_flag} field. */
     public StdVideoH264SpsFlags delta_pic_order_always_zero_flag(@NativeType("uint32_t") boolean value) { ndelta_pic_order_always_zero_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code residual_colour_transform_flag} field. */
-    public StdVideoH264SpsFlags residual_colour_transform_flag(@NativeType("uint32_t") boolean value) { nresidual_colour_transform_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code separate_colour_plane_flag} field. */
+    public StdVideoH264SpsFlags separate_colour_plane_flag(@NativeType("uint32_t") boolean value) { nseparate_colour_plane_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code gaps_in_frame_num_value_allowed_flag} field. */
     public StdVideoH264SpsFlags gaps_in_frame_num_value_allowed_flag(@NativeType("uint32_t") boolean value) { ngaps_in_frame_num_value_allowed_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code first_picture_after_seek_flag} field. */
-    public StdVideoH264SpsFlags first_picture_after_seek_flag(@NativeType("uint32_t") boolean value) { nfirst_picture_after_seek_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code qpprime_y_zero_transform_bypass_flag} field. */
     public StdVideoH264SpsFlags qpprime_y_zero_transform_bypass_flag(@NativeType("uint32_t") boolean value) { nqpprime_y_zero_transform_bypass_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code frame_cropping_flag} field. */
     public StdVideoH264SpsFlags frame_cropping_flag(@NativeType("uint32_t") boolean value) { nframe_cropping_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code scaling_matrix_present_flag} field. */
-    public StdVideoH264SpsFlags scaling_matrix_present_flag(@NativeType("uint32_t") boolean value) { nscaling_matrix_present_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code seq_scaling_matrix_present_flag} field. */
+    public StdVideoH264SpsFlags seq_scaling_matrix_present_flag(@NativeType("uint32_t") boolean value) { nseq_scaling_matrix_present_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code vui_parameters_present_flag} field. */
     public StdVideoH264SpsFlags vui_parameters_present_flag(@NativeType("uint32_t") boolean value) { nvui_parameters_present_flag(address(), value ? 1 : 0); return this; }
 
@@ -174,12 +168,11 @@ public class StdVideoH264SpsFlags extends Struct implements NativeResource {
         boolean mb_adaptive_frame_field_flag,
         boolean frame_mbs_only_flag,
         boolean delta_pic_order_always_zero_flag,
-        boolean residual_colour_transform_flag,
+        boolean separate_colour_plane_flag,
         boolean gaps_in_frame_num_value_allowed_flag,
-        boolean first_picture_after_seek_flag,
         boolean qpprime_y_zero_transform_bypass_flag,
         boolean frame_cropping_flag,
-        boolean scaling_matrix_present_flag,
+        boolean seq_scaling_matrix_present_flag,
         boolean vui_parameters_present_flag
     ) {
         constraint_set0_flag(constraint_set0_flag);
@@ -192,12 +185,11 @@ public class StdVideoH264SpsFlags extends Struct implements NativeResource {
         mb_adaptive_frame_field_flag(mb_adaptive_frame_field_flag);
         frame_mbs_only_flag(frame_mbs_only_flag);
         delta_pic_order_always_zero_flag(delta_pic_order_always_zero_flag);
-        residual_colour_transform_flag(residual_colour_transform_flag);
+        separate_colour_plane_flag(separate_colour_plane_flag);
         gaps_in_frame_num_value_allowed_flag(gaps_in_frame_num_value_allowed_flag);
-        first_picture_after_seek_flag(first_picture_after_seek_flag);
         qpprime_y_zero_transform_bypass_flag(qpprime_y_zero_transform_bypass_flag);
         frame_cropping_flag(frame_cropping_flag);
-        scaling_matrix_present_flag(scaling_matrix_present_flag);
+        seq_scaling_matrix_present_flag(seq_scaling_matrix_present_flag);
         vui_parameters_present_flag(vui_parameters_present_flag);
 
         return this;
@@ -350,20 +342,18 @@ public class StdVideoH264SpsFlags extends Struct implements NativeResource {
     public static int nframe_mbs_only_flag(long struct) { return (nbitfield0(struct) & 0x00_00_01_00) >>> 8; }
     /** Unsafe version of {@link #delta_pic_order_always_zero_flag}. */
     public static int ndelta_pic_order_always_zero_flag(long struct) { return (nbitfield0(struct) & 0x00_00_02_00) >>> 9; }
-    /** Unsafe version of {@link #residual_colour_transform_flag}. */
-    public static int nresidual_colour_transform_flag(long struct) { return (nbitfield0(struct) & 0x00_00_04_00) >>> 10; }
+    /** Unsafe version of {@link #separate_colour_plane_flag}. */
+    public static int nseparate_colour_plane_flag(long struct) { return (nbitfield0(struct) & 0x00_00_04_00) >>> 10; }
     /** Unsafe version of {@link #gaps_in_frame_num_value_allowed_flag}. */
     public static int ngaps_in_frame_num_value_allowed_flag(long struct) { return (nbitfield0(struct) & 0x00_00_08_00) >>> 11; }
-    /** Unsafe version of {@link #first_picture_after_seek_flag}. */
-    public static int nfirst_picture_after_seek_flag(long struct) { return (nbitfield0(struct) & 0x00_00_10_00) >>> 12; }
     /** Unsafe version of {@link #qpprime_y_zero_transform_bypass_flag}. */
-    public static int nqpprime_y_zero_transform_bypass_flag(long struct) { return (nbitfield0(struct) & 0x00_00_20_00) >>> 13; }
+    public static int nqpprime_y_zero_transform_bypass_flag(long struct) { return (nbitfield0(struct) & 0x00_00_10_00) >>> 12; }
     /** Unsafe version of {@link #frame_cropping_flag}. */
-    public static int nframe_cropping_flag(long struct) { return (nbitfield0(struct) & 0x00_00_40_00) >>> 14; }
-    /** Unsafe version of {@link #scaling_matrix_present_flag}. */
-    public static int nscaling_matrix_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_80_00) >>> 15; }
+    public static int nframe_cropping_flag(long struct) { return (nbitfield0(struct) & 0x00_00_20_00) >>> 13; }
+    /** Unsafe version of {@link #seq_scaling_matrix_present_flag}. */
+    public static int nseq_scaling_matrix_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_40_00) >>> 14; }
     /** Unsafe version of {@link #vui_parameters_present_flag}. */
-    public static int nvui_parameters_present_flag(long struct) { return (nbitfield0(struct) & 0x00_01_00_00) >>> 16; }
+    public static int nvui_parameters_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_80_00) >>> 15; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SpsFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #constraint_set0_flag(boolean) constraint_set0_flag}. */
@@ -386,20 +376,18 @@ public class StdVideoH264SpsFlags extends Struct implements NativeResource {
     public static void nframe_mbs_only_flag(long struct, int value) { nbitfield0(struct, ((value << 8) & 0x00_00_01_00) | (nbitfield0(struct) & 0xFF_FF_FE_FF)); }
     /** Unsafe version of {@link #delta_pic_order_always_zero_flag(boolean) delta_pic_order_always_zero_flag}. */
     public static void ndelta_pic_order_always_zero_flag(long struct, int value) { nbitfield0(struct, ((value << 9) & 0x00_00_02_00) | (nbitfield0(struct) & 0xFF_FF_FD_FF)); }
-    /** Unsafe version of {@link #residual_colour_transform_flag(boolean) residual_colour_transform_flag}. */
-    public static void nresidual_colour_transform_flag(long struct, int value) { nbitfield0(struct, ((value << 10) & 0x00_00_04_00) | (nbitfield0(struct) & 0xFF_FF_FB_FF)); }
+    /** Unsafe version of {@link #separate_colour_plane_flag(boolean) separate_colour_plane_flag}. */
+    public static void nseparate_colour_plane_flag(long struct, int value) { nbitfield0(struct, ((value << 10) & 0x00_00_04_00) | (nbitfield0(struct) & 0xFF_FF_FB_FF)); }
     /** Unsafe version of {@link #gaps_in_frame_num_value_allowed_flag(boolean) gaps_in_frame_num_value_allowed_flag}. */
     public static void ngaps_in_frame_num_value_allowed_flag(long struct, int value) { nbitfield0(struct, ((value << 11) & 0x00_00_08_00) | (nbitfield0(struct) & 0xFF_FF_F7_FF)); }
-    /** Unsafe version of {@link #first_picture_after_seek_flag(boolean) first_picture_after_seek_flag}. */
-    public static void nfirst_picture_after_seek_flag(long struct, int value) { nbitfield0(struct, ((value << 12) & 0x00_00_10_00) | (nbitfield0(struct) & 0xFF_FF_EF_FF)); }
     /** Unsafe version of {@link #qpprime_y_zero_transform_bypass_flag(boolean) qpprime_y_zero_transform_bypass_flag}. */
-    public static void nqpprime_y_zero_transform_bypass_flag(long struct, int value) { nbitfield0(struct, ((value << 13) & 0x00_00_20_00) | (nbitfield0(struct) & 0xFF_FF_DF_FF)); }
+    public static void nqpprime_y_zero_transform_bypass_flag(long struct, int value) { nbitfield0(struct, ((value << 12) & 0x00_00_10_00) | (nbitfield0(struct) & 0xFF_FF_EF_FF)); }
     /** Unsafe version of {@link #frame_cropping_flag(boolean) frame_cropping_flag}. */
-    public static void nframe_cropping_flag(long struct, int value) { nbitfield0(struct, ((value << 14) & 0x00_00_40_00) | (nbitfield0(struct) & 0xFF_FF_BF_FF)); }
-    /** Unsafe version of {@link #scaling_matrix_present_flag(boolean) scaling_matrix_present_flag}. */
-    public static void nscaling_matrix_present_flag(long struct, int value) { nbitfield0(struct, ((value << 15) & 0x00_00_80_00) | (nbitfield0(struct) & 0xFF_FF_7F_FF)); }
+    public static void nframe_cropping_flag(long struct, int value) { nbitfield0(struct, ((value << 13) & 0x00_00_20_00) | (nbitfield0(struct) & 0xFF_FF_DF_FF)); }
+    /** Unsafe version of {@link #seq_scaling_matrix_present_flag(boolean) seq_scaling_matrix_present_flag}. */
+    public static void nseq_scaling_matrix_present_flag(long struct, int value) { nbitfield0(struct, ((value << 14) & 0x00_00_40_00) | (nbitfield0(struct) & 0xFF_FF_BF_FF)); }
     /** Unsafe version of {@link #vui_parameters_present_flag(boolean) vui_parameters_present_flag}. */
-    public static void nvui_parameters_present_flag(long struct, int value) { nbitfield0(struct, ((value << 16) & 0x00_01_00_00) | (nbitfield0(struct) & 0xFF_FE_FF_FF)); }
+    public static void nvui_parameters_present_flag(long struct, int value) { nbitfield0(struct, ((value << 15) & 0x00_00_80_00) | (nbitfield0(struct) & 0xFF_FF_7F_FF)); }
 
     // -----------------------------------
 
@@ -469,24 +457,21 @@ public class StdVideoH264SpsFlags extends Struct implements NativeResource {
         /** @return the value of the {@code delta_pic_order_always_zero_flag} field. */
         @NativeType("uint32_t")
         public boolean delta_pic_order_always_zero_flag() { return StdVideoH264SpsFlags.ndelta_pic_order_always_zero_flag(address()) != 0; }
-        /** @return the value of the {@code residual_colour_transform_flag} field. */
+        /** @return the value of the {@code separate_colour_plane_flag} field. */
         @NativeType("uint32_t")
-        public boolean residual_colour_transform_flag() { return StdVideoH264SpsFlags.nresidual_colour_transform_flag(address()) != 0; }
+        public boolean separate_colour_plane_flag() { return StdVideoH264SpsFlags.nseparate_colour_plane_flag(address()) != 0; }
         /** @return the value of the {@code gaps_in_frame_num_value_allowed_flag} field. */
         @NativeType("uint32_t")
         public boolean gaps_in_frame_num_value_allowed_flag() { return StdVideoH264SpsFlags.ngaps_in_frame_num_value_allowed_flag(address()) != 0; }
-        /** @return the value of the {@code first_picture_after_seek_flag} field. */
-        @NativeType("uint32_t")
-        public boolean first_picture_after_seek_flag() { return StdVideoH264SpsFlags.nfirst_picture_after_seek_flag(address()) != 0; }
         /** @return the value of the {@code qpprime_y_zero_transform_bypass_flag} field. */
         @NativeType("uint32_t")
         public boolean qpprime_y_zero_transform_bypass_flag() { return StdVideoH264SpsFlags.nqpprime_y_zero_transform_bypass_flag(address()) != 0; }
         /** @return the value of the {@code frame_cropping_flag} field. */
         @NativeType("uint32_t")
         public boolean frame_cropping_flag() { return StdVideoH264SpsFlags.nframe_cropping_flag(address()) != 0; }
-        /** @return the value of the {@code scaling_matrix_present_flag} field. */
+        /** @return the value of the {@code seq_scaling_matrix_present_flag} field. */
         @NativeType("uint32_t")
-        public boolean scaling_matrix_present_flag() { return StdVideoH264SpsFlags.nscaling_matrix_present_flag(address()) != 0; }
+        public boolean seq_scaling_matrix_present_flag() { return StdVideoH264SpsFlags.nseq_scaling_matrix_present_flag(address()) != 0; }
         /** @return the value of the {@code vui_parameters_present_flag} field. */
         @NativeType("uint32_t")
         public boolean vui_parameters_present_flag() { return StdVideoH264SpsFlags.nvui_parameters_present_flag(address()) != 0; }
@@ -511,18 +496,16 @@ public class StdVideoH264SpsFlags extends Struct implements NativeResource {
         public StdVideoH264SpsFlags.Buffer frame_mbs_only_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.nframe_mbs_only_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code delta_pic_order_always_zero_flag} field. */
         public StdVideoH264SpsFlags.Buffer delta_pic_order_always_zero_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.ndelta_pic_order_always_zero_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code residual_colour_transform_flag} field. */
-        public StdVideoH264SpsFlags.Buffer residual_colour_transform_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.nresidual_colour_transform_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code separate_colour_plane_flag} field. */
+        public StdVideoH264SpsFlags.Buffer separate_colour_plane_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.nseparate_colour_plane_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code gaps_in_frame_num_value_allowed_flag} field. */
         public StdVideoH264SpsFlags.Buffer gaps_in_frame_num_value_allowed_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.ngaps_in_frame_num_value_allowed_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code first_picture_after_seek_flag} field. */
-        public StdVideoH264SpsFlags.Buffer first_picture_after_seek_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.nfirst_picture_after_seek_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code qpprime_y_zero_transform_bypass_flag} field. */
         public StdVideoH264SpsFlags.Buffer qpprime_y_zero_transform_bypass_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.nqpprime_y_zero_transform_bypass_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code frame_cropping_flag} field. */
         public StdVideoH264SpsFlags.Buffer frame_cropping_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.nframe_cropping_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code scaling_matrix_present_flag} field. */
-        public StdVideoH264SpsFlags.Buffer scaling_matrix_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.nscaling_matrix_present_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code seq_scaling_matrix_present_flag} field. */
+        public StdVideoH264SpsFlags.Buffer seq_scaling_matrix_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.nseq_scaling_matrix_present_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code vui_parameters_present_flag} field. */
         public StdVideoH264SpsFlags.Buffer vui_parameters_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH264SpsFlags.nvui_parameters_present_flag(address(), value ? 1 : 0); return this; }
 

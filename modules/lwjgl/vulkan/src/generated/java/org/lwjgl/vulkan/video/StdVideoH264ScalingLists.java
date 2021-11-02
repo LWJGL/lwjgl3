@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -23,8 +25,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct StdVideoH264ScalingLists {
  *     uint8_t {@link #scaling_list_present_mask};
  *     uint8_t {@link #use_default_scaling_matrix_mask};
- *     uint8_t ScalingList4x4[6][16];
- *     uint8_t ScalingList8x8[2][64];
+ *     uint8_t ScalingList4x4[STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS];
+ *     uint8_t ScalingList8x8[STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS];
  * }</code></pre>
  */
 public class StdVideoH264ScalingLists extends Struct implements NativeResource {
@@ -46,8 +48,8 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
         Layout layout = __struct(
             __member(1),
             __member(1),
-            __array(1, 6 * 16),
-            __array(1, 2 * 64)
+            __array(1, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS),
+            __array(1, STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS)
         );
 
         SIZEOF = layout.getSize();
@@ -85,13 +87,13 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
     @NativeType("uint8_t")
     public byte use_default_scaling_matrix_mask() { return nuse_default_scaling_matrix_mask(address()); }
     /** @return a {@link ByteBuffer} view of the {@code ScalingList4x4} field. */
-    @NativeType("uint8_t[6][16]")
+    @NativeType("uint8_t[STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS]")
     public ByteBuffer ScalingList4x4() { return nScalingList4x4(address()); }
     /** @return the value at the specified index of the {@code ScalingList4x4} field. */
     @NativeType("uint8_t")
     public byte ScalingList4x4(int index) { return nScalingList4x4(address(), index); }
     /** @return a {@link ByteBuffer} view of the {@code ScalingList8x8} field. */
-    @NativeType("uint8_t[2][64]")
+    @NativeType("uint8_t[STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS]")
     public ByteBuffer ScalingList8x8() { return nScalingList8x8(address()); }
     /** @return the value at the specified index of the {@code ScalingList8x8} field. */
     @NativeType("uint8_t")
@@ -102,11 +104,11 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #use_default_scaling_matrix_mask} field. */
     public StdVideoH264ScalingLists use_default_scaling_matrix_mask(@NativeType("uint8_t") byte value) { nuse_default_scaling_matrix_mask(address(), value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code ScalingList4x4} field. */
-    public StdVideoH264ScalingLists ScalingList4x4(@NativeType("uint8_t[6][16]") ByteBuffer value) { nScalingList4x4(address(), value); return this; }
+    public StdVideoH264ScalingLists ScalingList4x4(@NativeType("uint8_t[STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS]") ByteBuffer value) { nScalingList4x4(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code ScalingList4x4} field. */
     public StdVideoH264ScalingLists ScalingList4x4(int index, @NativeType("uint8_t") byte value) { nScalingList4x4(address(), index, value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code ScalingList8x8} field. */
-    public StdVideoH264ScalingLists ScalingList8x8(@NativeType("uint8_t[2][64]") ByteBuffer value) { nScalingList8x8(address(), value); return this; }
+    public StdVideoH264ScalingLists ScalingList8x8(@NativeType("uint8_t[STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS]") ByteBuffer value) { nScalingList8x8(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code ScalingList8x8} field. */
     public StdVideoH264ScalingLists ScalingList8x8(int index, @NativeType("uint8_t") byte value) { nScalingList8x8(address(), index, value); return this; }
 
@@ -256,16 +258,16 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
     /** Unsafe version of {@link #use_default_scaling_matrix_mask}. */
     public static byte nuse_default_scaling_matrix_mask(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264ScalingLists.USE_DEFAULT_SCALING_MATRIX_MASK); }
     /** Unsafe version of {@link #ScalingList4x4}. */
-    public static ByteBuffer nScalingList4x4(long struct) { return memByteBuffer(struct + StdVideoH264ScalingLists.SCALINGLIST4X4, 6 * 16); }
+    public static ByteBuffer nScalingList4x4(long struct) { return memByteBuffer(struct + StdVideoH264ScalingLists.SCALINGLIST4X4, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS); }
     /** Unsafe version of {@link #ScalingList4x4(int) ScalingList4x4}. */
     public static byte nScalingList4x4(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST4X4 + check(index, 6 * 16) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST4X4 + check(index, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS) * 1);
     }
     /** Unsafe version of {@link #ScalingList8x8}. */
-    public static ByteBuffer nScalingList8x8(long struct) { return memByteBuffer(struct + StdVideoH264ScalingLists.SCALINGLIST8X8, 2 * 64); }
+    public static ByteBuffer nScalingList8x8(long struct) { return memByteBuffer(struct + StdVideoH264ScalingLists.SCALINGLIST8X8, STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS); }
     /** Unsafe version of {@link #ScalingList8x8(int) ScalingList8x8}. */
     public static byte nScalingList8x8(long struct, int index) {
-        return UNSAFE.getByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST8X8 + check(index, 2 * 64) * 1);
+        return UNSAFE.getByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST8X8 + check(index, STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS) * 1);
     }
 
     /** Unsafe version of {@link #scaling_list_present_mask(byte) scaling_list_present_mask}. */
@@ -274,21 +276,21 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
     public static void nuse_default_scaling_matrix_mask(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264ScalingLists.USE_DEFAULT_SCALING_MATRIX_MASK, value); }
     /** Unsafe version of {@link #ScalingList4x4(ByteBuffer) ScalingList4x4}. */
     public static void nScalingList4x4(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 6 * 16); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS); }
         memCopy(memAddress(value), struct + StdVideoH264ScalingLists.SCALINGLIST4X4, value.remaining() * 1);
     }
     /** Unsafe version of {@link #ScalingList4x4(int, byte) ScalingList4x4}. */
     public static void nScalingList4x4(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST4X4 + check(index, 6 * 16) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST4X4 + check(index, STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS) * 1, value);
     }
     /** Unsafe version of {@link #ScalingList8x8(ByteBuffer) ScalingList8x8}. */
     public static void nScalingList8x8(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 2 * 64); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS); }
         memCopy(memAddress(value), struct + StdVideoH264ScalingLists.SCALINGLIST8X8, value.remaining() * 1);
     }
     /** Unsafe version of {@link #ScalingList8x8(int, byte) ScalingList8x8}. */
     public static void nScalingList8x8(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST8X8 + check(index, 2 * 64) * 1, value);
+        UNSAFE.putByte(null, struct + StdVideoH264ScalingLists.SCALINGLIST8X8 + check(index, STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS) * 1, value);
     }
 
     // -----------------------------------
@@ -336,13 +338,13 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
         @NativeType("uint8_t")
         public byte use_default_scaling_matrix_mask() { return StdVideoH264ScalingLists.nuse_default_scaling_matrix_mask(address()); }
         /** @return a {@link ByteBuffer} view of the {@code ScalingList4x4} field. */
-        @NativeType("uint8_t[6][16]")
+        @NativeType("uint8_t[STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS]")
         public ByteBuffer ScalingList4x4() { return StdVideoH264ScalingLists.nScalingList4x4(address()); }
         /** @return the value at the specified index of the {@code ScalingList4x4} field. */
         @NativeType("uint8_t")
         public byte ScalingList4x4(int index) { return StdVideoH264ScalingLists.nScalingList4x4(address(), index); }
         /** @return a {@link ByteBuffer} view of the {@code ScalingList8x8} field. */
-        @NativeType("uint8_t[2][64]")
+        @NativeType("uint8_t[STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS]")
         public ByteBuffer ScalingList8x8() { return StdVideoH264ScalingLists.nScalingList8x8(address()); }
         /** @return the value at the specified index of the {@code ScalingList8x8} field. */
         @NativeType("uint8_t")
@@ -353,11 +355,11 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
         /** Sets the specified value to the {@link StdVideoH264ScalingLists#use_default_scaling_matrix_mask} field. */
         public StdVideoH264ScalingLists.Buffer use_default_scaling_matrix_mask(@NativeType("uint8_t") byte value) { StdVideoH264ScalingLists.nuse_default_scaling_matrix_mask(address(), value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code ScalingList4x4} field. */
-        public StdVideoH264ScalingLists.Buffer ScalingList4x4(@NativeType("uint8_t[6][16]") ByteBuffer value) { StdVideoH264ScalingLists.nScalingList4x4(address(), value); return this; }
+        public StdVideoH264ScalingLists.Buffer ScalingList4x4(@NativeType("uint8_t[STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS]") ByteBuffer value) { StdVideoH264ScalingLists.nScalingList4x4(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code ScalingList4x4} field. */
         public StdVideoH264ScalingLists.Buffer ScalingList4x4(int index, @NativeType("uint8_t") byte value) { StdVideoH264ScalingLists.nScalingList4x4(address(), index, value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code ScalingList8x8} field. */
-        public StdVideoH264ScalingLists.Buffer ScalingList8x8(@NativeType("uint8_t[2][64]") ByteBuffer value) { StdVideoH264ScalingLists.nScalingList8x8(address(), value); return this; }
+        public StdVideoH264ScalingLists.Buffer ScalingList8x8(@NativeType("uint8_t[STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS]") ByteBuffer value) { StdVideoH264ScalingLists.nScalingList8x8(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code ScalingList8x8} field. */
         public StdVideoH264ScalingLists.Buffer ScalingList8x8(int index, @NativeType("uint8_t") byte value) { StdVideoH264ScalingLists.nScalingList8x8(address(), index, value); return this; }
 

@@ -34,6 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t collocated_from_l0_flag : 1;
  *     uint32_t slice_loop_filter_across_slices_enabled_flag : 1;
  *     uint32_t bLastSliceInPic : 1;
+ *     uint32_t reservedBits : 18;
  *     uint16_t {@link #luma_weight_l0_flag};
  *     uint16_t {@link #chroma_weight_l0_flag};
  *     uint16_t {@link #luma_weight_l1_flag};
@@ -130,6 +131,9 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
     /** @return the value of the {@code bLastSliceInPic} field. */
     @NativeType("uint32_t")
     public int bLastSliceInPic() { return nbLastSliceInPic(address()); }
+    /** @return the value of the {@code reservedBits} field. */
+    @NativeType("uint32_t")
+    public int reservedBits() { return nreservedBits(address()); }
     /** bit 0 - num_ref_idx_l0_active_minus1 */
     @NativeType("uint16_t")
     public short luma_weight_l0_flag() { return nluma_weight_l0_flag(address()); }
@@ -171,6 +175,8 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
     public StdVideoEncodeH265SliceHeaderFlags slice_loop_filter_across_slices_enabled_flag(@NativeType("uint32_t") int value) { nslice_loop_filter_across_slices_enabled_flag(address(), value); return this; }
     /** Sets the specified value to the {@code bLastSliceInPic} field. */
     public StdVideoEncodeH265SliceHeaderFlags bLastSliceInPic(@NativeType("uint32_t") int value) { nbLastSliceInPic(address(), value); return this; }
+    /** Sets the specified value to the {@code reservedBits} field. */
+    public StdVideoEncodeH265SliceHeaderFlags reservedBits(@NativeType("uint32_t") int value) { nreservedBits(address(), value); return this; }
     /** Sets the specified value to the {@link #luma_weight_l0_flag} field. */
     public StdVideoEncodeH265SliceHeaderFlags luma_weight_l0_flag(@NativeType("uint16_t") short value) { nluma_weight_l0_flag(address(), value); return this; }
     /** Sets the specified value to the {@link #chroma_weight_l0_flag} field. */
@@ -196,6 +202,7 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
         int collocated_from_l0_flag,
         int slice_loop_filter_across_slices_enabled_flag,
         int bLastSliceInPic,
+        int reservedBits,
         short luma_weight_l0_flag,
         short chroma_weight_l0_flag,
         short luma_weight_l1_flag,
@@ -215,6 +222,7 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
         collocated_from_l0_flag(collocated_from_l0_flag);
         slice_loop_filter_across_slices_enabled_flag(slice_loop_filter_across_slices_enabled_flag);
         bLastSliceInPic(bLastSliceInPic);
+        reservedBits(reservedBits);
         luma_weight_l0_flag(luma_weight_l0_flag);
         chroma_weight_l0_flag(chroma_weight_l0_flag);
         luma_weight_l1_flag(luma_weight_l1_flag);
@@ -378,6 +386,8 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
     public static int nslice_loop_filter_across_slices_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_10_00) >>> 12; }
     /** Unsafe version of {@link #bLastSliceInPic}. */
     public static int nbLastSliceInPic(long struct) { return (nbitfield0(struct) & 0x00_00_20_00) >>> 13; }
+    /** Unsafe version of {@link #reservedBits}. */
+    public static int nreservedBits(long struct) { return nbitfield0(struct) >>> 14; }
     /** Unsafe version of {@link #luma_weight_l0_flag}. */
     public static short nluma_weight_l0_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265SliceHeaderFlags.LUMA_WEIGHT_L0_FLAG); }
     /** Unsafe version of {@link #chroma_weight_l0_flag}. */
@@ -416,6 +426,8 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
     public static void nslice_loop_filter_across_slices_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 12) & 0x00_00_10_00) | (nbitfield0(struct) & 0xFF_FF_EF_FF)); }
     /** Unsafe version of {@link #bLastSliceInPic(int) bLastSliceInPic}. */
     public static void nbLastSliceInPic(long struct, int value) { nbitfield0(struct, ((value << 13) & 0x00_00_20_00) | (nbitfield0(struct) & 0xFF_FF_DF_FF)); }
+    /** Unsafe version of {@link #reservedBits(int) reservedBits}. */
+    public static void nreservedBits(long struct, int value) { nbitfield0(struct, (value << 14) | (nbitfield0(struct) & 0x00_00_3F_FF)); }
     /** Unsafe version of {@link #luma_weight_l0_flag(short) luma_weight_l0_flag}. */
     public static void nluma_weight_l0_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265SliceHeaderFlags.LUMA_WEIGHT_L0_FLAG, value); }
     /** Unsafe version of {@link #chroma_weight_l0_flag(short) chroma_weight_l0_flag}. */
@@ -505,6 +517,9 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
         /** @return the value of the {@code bLastSliceInPic} field. */
         @NativeType("uint32_t")
         public int bLastSliceInPic() { return StdVideoEncodeH265SliceHeaderFlags.nbLastSliceInPic(address()); }
+        /** @return the value of the {@code reservedBits} field. */
+        @NativeType("uint32_t")
+        public int reservedBits() { return StdVideoEncodeH265SliceHeaderFlags.nreservedBits(address()); }
         /** @return the value of the {@link StdVideoEncodeH265SliceHeaderFlags#luma_weight_l0_flag} field. */
         @NativeType("uint16_t")
         public short luma_weight_l0_flag() { return StdVideoEncodeH265SliceHeaderFlags.nluma_weight_l0_flag(address()); }
@@ -546,6 +561,8 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
         public StdVideoEncodeH265SliceHeaderFlags.Buffer slice_loop_filter_across_slices_enabled_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nslice_loop_filter_across_slices_enabled_flag(address(), value); return this; }
         /** Sets the specified value to the {@code bLastSliceInPic} field. */
         public StdVideoEncodeH265SliceHeaderFlags.Buffer bLastSliceInPic(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nbLastSliceInPic(address(), value); return this; }
+        /** Sets the specified value to the {@code reservedBits} field. */
+        public StdVideoEncodeH265SliceHeaderFlags.Buffer reservedBits(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nreservedBits(address(), value); return this; }
         /** Sets the specified value to the {@link StdVideoEncodeH265SliceHeaderFlags#luma_weight_l0_flag} field. */
         public StdVideoEncodeH265SliceHeaderFlags.Buffer luma_weight_l0_flag(@NativeType("uint16_t") short value) { StdVideoEncodeH265SliceHeaderFlags.nluma_weight_l0_flag(address(), value); return this; }
         /** Sets the specified value to the {@link StdVideoEncodeH265SliceHeaderFlags#chroma_weight_l0_flag} field. */

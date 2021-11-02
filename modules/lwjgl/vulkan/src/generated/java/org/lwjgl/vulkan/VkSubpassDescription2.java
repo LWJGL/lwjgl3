@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@code viewMask} has the same effect for the described subpass as {@link VkRenderPassMultiviewCreateInfo}{@code ::pViewMasks} has on each corresponding subpass.</p>
  * 
- * <p>If an instance of {@link VkFragmentShadingRateAttachmentInfoKHR} is included in the {@code pNext} chain, {@code pFragmentShadingRateAttachment} is not {@code NULL}, and its {@code attachment} member is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, the identified attachment defines a fragment shading rate attachment for that subpass.</p>
+ * <p>If a {@link VkFragmentShadingRateAttachmentInfoKHR} structure is included in the {@code pNext} chain, {@code pFragmentShadingRateAttachment} is not {@code NULL}, and its {@code attachment} member is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, the identified attachment defines a fragment shading rate attachment for that subpass.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

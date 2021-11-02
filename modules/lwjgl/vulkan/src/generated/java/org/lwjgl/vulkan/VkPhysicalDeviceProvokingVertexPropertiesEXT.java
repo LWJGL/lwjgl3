@@ -89,7 +89,7 @@ public class VkPhysicalDeviceProvokingVertexPropertiesEXT extends Struct impleme
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports graphics pipelines with different provoking vertex modes within the same renderpass instance. */
+    /** indicates whether the implementation supports graphics pipelines with different provoking vertex modes within the same render pass instance. */
     @NativeType("VkBool32")
     public boolean provokingVertexModePerPipeline() { return nprovokingVertexModePerPipeline(address()) != 0; }
     /** indicates whether the implementation can preserve the provoking vertex order when writing triangle fan vertices to transform feedback. */

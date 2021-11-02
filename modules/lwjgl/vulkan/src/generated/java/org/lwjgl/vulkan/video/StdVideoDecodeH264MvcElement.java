@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -27,13 +29,13 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t {@link #temporalId};
  *     uint16_t {@link #priorityId};
  *     uint16_t numOfAnchorRefsInL0;
- *     uint16_t viewIdOfAnchorRefsInL0[15];
+ *     uint16_t viewIdOfAnchorRefsInL0[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE];
  *     uint16_t numOfAnchorRefsInL1;
- *     uint16_t viewIdOfAnchorRefsInL1[15];
+ *     uint16_t viewIdOfAnchorRefsInL1[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE];
  *     uint16_t numOfNonAnchorRefsInL0;
- *     uint16_t viewIdOfNonAnchorRefsInL0[15];
+ *     uint16_t viewIdOfNonAnchorRefsInL0[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE];
  *     uint16_t numOfNonAnchorRefsInL1;
- *     uint16_t viewIdOfNonAnchorRefsInL1[15];
+ *     uint16_t viewIdOfNonAnchorRefsInL1[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE];
  * }</code></pre>
  */
 public class StdVideoDecodeH264MvcElement extends Struct implements NativeResource {
@@ -68,13 +70,13 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
             __member(2),
             __member(2),
             __member(2),
-            __array(2, 15),
+            __array(2, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE),
             __member(2),
-            __array(2, 15),
+            __array(2, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE),
             __member(2),
-            __array(2, 15),
+            __array(2, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE),
             __member(2),
-            __array(2, 15)
+            __array(2, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -126,7 +128,7 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
     @NativeType("uint16_t")
     public short numOfAnchorRefsInL0() { return nnumOfAnchorRefsInL0(address()); }
     /** @return a {@link ShortBuffer} view of the {@code viewIdOfAnchorRefsInL0} field. */
-    @NativeType("uint16_t[15]")
+    @NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]")
     public ShortBuffer viewIdOfAnchorRefsInL0() { return nviewIdOfAnchorRefsInL0(address()); }
     /** @return the value at the specified index of the {@code viewIdOfAnchorRefsInL0} field. */
     @NativeType("uint16_t")
@@ -135,7 +137,7 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
     @NativeType("uint16_t")
     public short numOfAnchorRefsInL1() { return nnumOfAnchorRefsInL1(address()); }
     /** @return a {@link ShortBuffer} view of the {@code viewIdOfAnchorRefsInL1} field. */
-    @NativeType("uint16_t[15]")
+    @NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]")
     public ShortBuffer viewIdOfAnchorRefsInL1() { return nviewIdOfAnchorRefsInL1(address()); }
     /** @return the value at the specified index of the {@code viewIdOfAnchorRefsInL1} field. */
     @NativeType("uint16_t")
@@ -144,7 +146,7 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
     @NativeType("uint16_t")
     public short numOfNonAnchorRefsInL0() { return nnumOfNonAnchorRefsInL0(address()); }
     /** @return a {@link ShortBuffer} view of the {@code viewIdOfNonAnchorRefsInL0} field. */
-    @NativeType("uint16_t[15]")
+    @NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]")
     public ShortBuffer viewIdOfNonAnchorRefsInL0() { return nviewIdOfNonAnchorRefsInL0(address()); }
     /** @return the value at the specified index of the {@code viewIdOfNonAnchorRefsInL0} field. */
     @NativeType("uint16_t")
@@ -153,7 +155,7 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
     @NativeType("uint16_t")
     public short numOfNonAnchorRefsInL1() { return nnumOfNonAnchorRefsInL1(address()); }
     /** @return a {@link ShortBuffer} view of the {@code viewIdOfNonAnchorRefsInL1} field. */
-    @NativeType("uint16_t[15]")
+    @NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]")
     public ShortBuffer viewIdOfNonAnchorRefsInL1() { return nviewIdOfNonAnchorRefsInL1(address()); }
     /** @return the value at the specified index of the {@code viewIdOfNonAnchorRefsInL1} field. */
     @NativeType("uint16_t")
@@ -174,25 +176,25 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
     /** Sets the specified value to the {@code numOfAnchorRefsInL0} field. */
     public StdVideoDecodeH264MvcElement numOfAnchorRefsInL0(@NativeType("uint16_t") short value) { nnumOfAnchorRefsInL0(address(), value); return this; }
     /** Copies the specified {@link ShortBuffer} to the {@code viewIdOfAnchorRefsInL0} field. */
-    public StdVideoDecodeH264MvcElement viewIdOfAnchorRefsInL0(@NativeType("uint16_t[15]") ShortBuffer value) { nviewIdOfAnchorRefsInL0(address(), value); return this; }
+    public StdVideoDecodeH264MvcElement viewIdOfAnchorRefsInL0(@NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]") ShortBuffer value) { nviewIdOfAnchorRefsInL0(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code viewIdOfAnchorRefsInL0} field. */
     public StdVideoDecodeH264MvcElement viewIdOfAnchorRefsInL0(int index, @NativeType("uint16_t") short value) { nviewIdOfAnchorRefsInL0(address(), index, value); return this; }
     /** Sets the specified value to the {@code numOfAnchorRefsInL1} field. */
     public StdVideoDecodeH264MvcElement numOfAnchorRefsInL1(@NativeType("uint16_t") short value) { nnumOfAnchorRefsInL1(address(), value); return this; }
     /** Copies the specified {@link ShortBuffer} to the {@code viewIdOfAnchorRefsInL1} field. */
-    public StdVideoDecodeH264MvcElement viewIdOfAnchorRefsInL1(@NativeType("uint16_t[15]") ShortBuffer value) { nviewIdOfAnchorRefsInL1(address(), value); return this; }
+    public StdVideoDecodeH264MvcElement viewIdOfAnchorRefsInL1(@NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]") ShortBuffer value) { nviewIdOfAnchorRefsInL1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code viewIdOfAnchorRefsInL1} field. */
     public StdVideoDecodeH264MvcElement viewIdOfAnchorRefsInL1(int index, @NativeType("uint16_t") short value) { nviewIdOfAnchorRefsInL1(address(), index, value); return this; }
     /** Sets the specified value to the {@code numOfNonAnchorRefsInL0} field. */
     public StdVideoDecodeH264MvcElement numOfNonAnchorRefsInL0(@NativeType("uint16_t") short value) { nnumOfNonAnchorRefsInL0(address(), value); return this; }
     /** Copies the specified {@link ShortBuffer} to the {@code viewIdOfNonAnchorRefsInL0} field. */
-    public StdVideoDecodeH264MvcElement viewIdOfNonAnchorRefsInL0(@NativeType("uint16_t[15]") ShortBuffer value) { nviewIdOfNonAnchorRefsInL0(address(), value); return this; }
+    public StdVideoDecodeH264MvcElement viewIdOfNonAnchorRefsInL0(@NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]") ShortBuffer value) { nviewIdOfNonAnchorRefsInL0(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code viewIdOfNonAnchorRefsInL0} field. */
     public StdVideoDecodeH264MvcElement viewIdOfNonAnchorRefsInL0(int index, @NativeType("uint16_t") short value) { nviewIdOfNonAnchorRefsInL0(address(), index, value); return this; }
     /** Sets the specified value to the {@code numOfNonAnchorRefsInL1} field. */
     public StdVideoDecodeH264MvcElement numOfNonAnchorRefsInL1(@NativeType("uint16_t") short value) { nnumOfNonAnchorRefsInL1(address(), value); return this; }
     /** Copies the specified {@link ShortBuffer} to the {@code viewIdOfNonAnchorRefsInL1} field. */
-    public StdVideoDecodeH264MvcElement viewIdOfNonAnchorRefsInL1(@NativeType("uint16_t[15]") ShortBuffer value) { nviewIdOfNonAnchorRefsInL1(address(), value); return this; }
+    public StdVideoDecodeH264MvcElement viewIdOfNonAnchorRefsInL1(@NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]") ShortBuffer value) { nviewIdOfNonAnchorRefsInL1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code viewIdOfNonAnchorRefsInL1} field. */
     public StdVideoDecodeH264MvcElement viewIdOfNonAnchorRefsInL1(int index, @NativeType("uint16_t") short value) { nviewIdOfNonAnchorRefsInL1(address(), index, value); return this; }
 
@@ -368,34 +370,34 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
     /** Unsafe version of {@link #numOfAnchorRefsInL0}. */
     public static short nnumOfAnchorRefsInL0(long struct) { return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.NUMOFANCHORREFSINL0); }
     /** Unsafe version of {@link #viewIdOfAnchorRefsInL0}. */
-    public static ShortBuffer nviewIdOfAnchorRefsInL0(long struct) { return memShortBuffer(struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL0, 15); }
+    public static ShortBuffer nviewIdOfAnchorRefsInL0(long struct) { return memShortBuffer(struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL0, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE); }
     /** Unsafe version of {@link #viewIdOfAnchorRefsInL0(int) viewIdOfAnchorRefsInL0}. */
     public static short nviewIdOfAnchorRefsInL0(long struct, int index) {
-        return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL0 + check(index, 15) * 2);
+        return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL0 + check(index, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE) * 2);
     }
     /** Unsafe version of {@link #numOfAnchorRefsInL1}. */
     public static short nnumOfAnchorRefsInL1(long struct) { return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.NUMOFANCHORREFSINL1); }
     /** Unsafe version of {@link #viewIdOfAnchorRefsInL1}. */
-    public static ShortBuffer nviewIdOfAnchorRefsInL1(long struct) { return memShortBuffer(struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL1, 15); }
+    public static ShortBuffer nviewIdOfAnchorRefsInL1(long struct) { return memShortBuffer(struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL1, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE); }
     /** Unsafe version of {@link #viewIdOfAnchorRefsInL1(int) viewIdOfAnchorRefsInL1}. */
     public static short nviewIdOfAnchorRefsInL1(long struct, int index) {
-        return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL1 + check(index, 15) * 2);
+        return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL1 + check(index, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE) * 2);
     }
     /** Unsafe version of {@link #numOfNonAnchorRefsInL0}. */
     public static short nnumOfNonAnchorRefsInL0(long struct) { return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.NUMOFNONANCHORREFSINL0); }
     /** Unsafe version of {@link #viewIdOfNonAnchorRefsInL0}. */
-    public static ShortBuffer nviewIdOfNonAnchorRefsInL0(long struct) { return memShortBuffer(struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL0, 15); }
+    public static ShortBuffer nviewIdOfNonAnchorRefsInL0(long struct) { return memShortBuffer(struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL0, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE); }
     /** Unsafe version of {@link #viewIdOfNonAnchorRefsInL0(int) viewIdOfNonAnchorRefsInL0}. */
     public static short nviewIdOfNonAnchorRefsInL0(long struct, int index) {
-        return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL0 + check(index, 15) * 2);
+        return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL0 + check(index, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE) * 2);
     }
     /** Unsafe version of {@link #numOfNonAnchorRefsInL1}. */
     public static short nnumOfNonAnchorRefsInL1(long struct) { return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.NUMOFNONANCHORREFSINL1); }
     /** Unsafe version of {@link #viewIdOfNonAnchorRefsInL1}. */
-    public static ShortBuffer nviewIdOfNonAnchorRefsInL1(long struct) { return memShortBuffer(struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL1, 15); }
+    public static ShortBuffer nviewIdOfNonAnchorRefsInL1(long struct) { return memShortBuffer(struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL1, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE); }
     /** Unsafe version of {@link #viewIdOfNonAnchorRefsInL1(int) viewIdOfNonAnchorRefsInL1}. */
     public static short nviewIdOfNonAnchorRefsInL1(long struct, int index) {
-        return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL1 + check(index, 15) * 2);
+        return UNSAFE.getShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL1 + check(index, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE) * 2);
     }
 
     /** Unsafe version of {@link #flags(StdVideoDecodeH264MvcElementFlags) flags}. */
@@ -412,45 +414,45 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
     public static void nnumOfAnchorRefsInL0(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.NUMOFANCHORREFSINL0, value); }
     /** Unsafe version of {@link #viewIdOfAnchorRefsInL0(ShortBuffer) viewIdOfAnchorRefsInL0}. */
     public static void nviewIdOfAnchorRefsInL0(long struct, ShortBuffer value) {
-        if (CHECKS) { checkGT(value, 15); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL0, value.remaining() * 2);
     }
     /** Unsafe version of {@link #viewIdOfAnchorRefsInL0(int, short) viewIdOfAnchorRefsInL0}. */
     public static void nviewIdOfAnchorRefsInL0(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL0 + check(index, 15) * 2, value);
+        UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL0 + check(index, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE) * 2, value);
     }
     /** Unsafe version of {@link #numOfAnchorRefsInL1(short) numOfAnchorRefsInL1}. */
     public static void nnumOfAnchorRefsInL1(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.NUMOFANCHORREFSINL1, value); }
     /** Unsafe version of {@link #viewIdOfAnchorRefsInL1(ShortBuffer) viewIdOfAnchorRefsInL1}. */
     public static void nviewIdOfAnchorRefsInL1(long struct, ShortBuffer value) {
-        if (CHECKS) { checkGT(value, 15); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL1, value.remaining() * 2);
     }
     /** Unsafe version of {@link #viewIdOfAnchorRefsInL1(int, short) viewIdOfAnchorRefsInL1}. */
     public static void nviewIdOfAnchorRefsInL1(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL1 + check(index, 15) * 2, value);
+        UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFANCHORREFSINL1 + check(index, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE) * 2, value);
     }
     /** Unsafe version of {@link #numOfNonAnchorRefsInL0(short) numOfNonAnchorRefsInL0}. */
     public static void nnumOfNonAnchorRefsInL0(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.NUMOFNONANCHORREFSINL0, value); }
     /** Unsafe version of {@link #viewIdOfNonAnchorRefsInL0(ShortBuffer) viewIdOfNonAnchorRefsInL0}. */
     public static void nviewIdOfNonAnchorRefsInL0(long struct, ShortBuffer value) {
-        if (CHECKS) { checkGT(value, 15); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL0, value.remaining() * 2);
     }
     /** Unsafe version of {@link #viewIdOfNonAnchorRefsInL0(int, short) viewIdOfNonAnchorRefsInL0}. */
     public static void nviewIdOfNonAnchorRefsInL0(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL0 + check(index, 15) * 2, value);
+        UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL0 + check(index, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE) * 2, value);
     }
     /** Unsafe version of {@link #numOfNonAnchorRefsInL1(short) numOfNonAnchorRefsInL1}. */
     public static void nnumOfNonAnchorRefsInL1(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.NUMOFNONANCHORREFSINL1, value); }
     /** Unsafe version of {@link #viewIdOfNonAnchorRefsInL1(ShortBuffer) viewIdOfNonAnchorRefsInL1}. */
     public static void nviewIdOfNonAnchorRefsInL1(long struct, ShortBuffer value) {
-        if (CHECKS) { checkGT(value, 15); }
+        if (CHECKS) { checkGT(value, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE); }
         memCopy(memAddress(value), struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL1, value.remaining() * 2);
     }
     /** Unsafe version of {@link #viewIdOfNonAnchorRefsInL1(int, short) viewIdOfNonAnchorRefsInL1}. */
     public static void nviewIdOfNonAnchorRefsInL1(long struct, int index, short value) {
-        UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL1 + check(index, 15) * 2, value);
+        UNSAFE.putShort(null, struct + StdVideoDecodeH264MvcElement.VIEWIDOFNONANCHORREFSINL1 + check(index, STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE) * 2, value);
     }
 
     // -----------------------------------
@@ -509,7 +511,7 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
         @NativeType("uint16_t")
         public short numOfAnchorRefsInL0() { return StdVideoDecodeH264MvcElement.nnumOfAnchorRefsInL0(address()); }
         /** @return a {@link ShortBuffer} view of the {@code viewIdOfAnchorRefsInL0} field. */
-        @NativeType("uint16_t[15]")
+        @NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]")
         public ShortBuffer viewIdOfAnchorRefsInL0() { return StdVideoDecodeH264MvcElement.nviewIdOfAnchorRefsInL0(address()); }
         /** @return the value at the specified index of the {@code viewIdOfAnchorRefsInL0} field. */
         @NativeType("uint16_t")
@@ -518,7 +520,7 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
         @NativeType("uint16_t")
         public short numOfAnchorRefsInL1() { return StdVideoDecodeH264MvcElement.nnumOfAnchorRefsInL1(address()); }
         /** @return a {@link ShortBuffer} view of the {@code viewIdOfAnchorRefsInL1} field. */
-        @NativeType("uint16_t[15]")
+        @NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]")
         public ShortBuffer viewIdOfAnchorRefsInL1() { return StdVideoDecodeH264MvcElement.nviewIdOfAnchorRefsInL1(address()); }
         /** @return the value at the specified index of the {@code viewIdOfAnchorRefsInL1} field. */
         @NativeType("uint16_t")
@@ -527,7 +529,7 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
         @NativeType("uint16_t")
         public short numOfNonAnchorRefsInL0() { return StdVideoDecodeH264MvcElement.nnumOfNonAnchorRefsInL0(address()); }
         /** @return a {@link ShortBuffer} view of the {@code viewIdOfNonAnchorRefsInL0} field. */
-        @NativeType("uint16_t[15]")
+        @NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]")
         public ShortBuffer viewIdOfNonAnchorRefsInL0() { return StdVideoDecodeH264MvcElement.nviewIdOfNonAnchorRefsInL0(address()); }
         /** @return the value at the specified index of the {@code viewIdOfNonAnchorRefsInL0} field. */
         @NativeType("uint16_t")
@@ -536,7 +538,7 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
         @NativeType("uint16_t")
         public short numOfNonAnchorRefsInL1() { return StdVideoDecodeH264MvcElement.nnumOfNonAnchorRefsInL1(address()); }
         /** @return a {@link ShortBuffer} view of the {@code viewIdOfNonAnchorRefsInL1} field. */
-        @NativeType("uint16_t[15]")
+        @NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]")
         public ShortBuffer viewIdOfNonAnchorRefsInL1() { return StdVideoDecodeH264MvcElement.nviewIdOfNonAnchorRefsInL1(address()); }
         /** @return the value at the specified index of the {@code viewIdOfNonAnchorRefsInL1} field. */
         @NativeType("uint16_t")
@@ -557,25 +559,25 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
         /** Sets the specified value to the {@code numOfAnchorRefsInL0} field. */
         public StdVideoDecodeH264MvcElement.Buffer numOfAnchorRefsInL0(@NativeType("uint16_t") short value) { StdVideoDecodeH264MvcElement.nnumOfAnchorRefsInL0(address(), value); return this; }
         /** Copies the specified {@link ShortBuffer} to the {@code viewIdOfAnchorRefsInL0} field. */
-        public StdVideoDecodeH264MvcElement.Buffer viewIdOfAnchorRefsInL0(@NativeType("uint16_t[15]") ShortBuffer value) { StdVideoDecodeH264MvcElement.nviewIdOfAnchorRefsInL0(address(), value); return this; }
+        public StdVideoDecodeH264MvcElement.Buffer viewIdOfAnchorRefsInL0(@NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]") ShortBuffer value) { StdVideoDecodeH264MvcElement.nviewIdOfAnchorRefsInL0(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code viewIdOfAnchorRefsInL0} field. */
         public StdVideoDecodeH264MvcElement.Buffer viewIdOfAnchorRefsInL0(int index, @NativeType("uint16_t") short value) { StdVideoDecodeH264MvcElement.nviewIdOfAnchorRefsInL0(address(), index, value); return this; }
         /** Sets the specified value to the {@code numOfAnchorRefsInL1} field. */
         public StdVideoDecodeH264MvcElement.Buffer numOfAnchorRefsInL1(@NativeType("uint16_t") short value) { StdVideoDecodeH264MvcElement.nnumOfAnchorRefsInL1(address(), value); return this; }
         /** Copies the specified {@link ShortBuffer} to the {@code viewIdOfAnchorRefsInL1} field. */
-        public StdVideoDecodeH264MvcElement.Buffer viewIdOfAnchorRefsInL1(@NativeType("uint16_t[15]") ShortBuffer value) { StdVideoDecodeH264MvcElement.nviewIdOfAnchorRefsInL1(address(), value); return this; }
+        public StdVideoDecodeH264MvcElement.Buffer viewIdOfAnchorRefsInL1(@NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]") ShortBuffer value) { StdVideoDecodeH264MvcElement.nviewIdOfAnchorRefsInL1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code viewIdOfAnchorRefsInL1} field. */
         public StdVideoDecodeH264MvcElement.Buffer viewIdOfAnchorRefsInL1(int index, @NativeType("uint16_t") short value) { StdVideoDecodeH264MvcElement.nviewIdOfAnchorRefsInL1(address(), index, value); return this; }
         /** Sets the specified value to the {@code numOfNonAnchorRefsInL0} field. */
         public StdVideoDecodeH264MvcElement.Buffer numOfNonAnchorRefsInL0(@NativeType("uint16_t") short value) { StdVideoDecodeH264MvcElement.nnumOfNonAnchorRefsInL0(address(), value); return this; }
         /** Copies the specified {@link ShortBuffer} to the {@code viewIdOfNonAnchorRefsInL0} field. */
-        public StdVideoDecodeH264MvcElement.Buffer viewIdOfNonAnchorRefsInL0(@NativeType("uint16_t[15]") ShortBuffer value) { StdVideoDecodeH264MvcElement.nviewIdOfNonAnchorRefsInL0(address(), value); return this; }
+        public StdVideoDecodeH264MvcElement.Buffer viewIdOfNonAnchorRefsInL0(@NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]") ShortBuffer value) { StdVideoDecodeH264MvcElement.nviewIdOfNonAnchorRefsInL0(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code viewIdOfNonAnchorRefsInL0} field. */
         public StdVideoDecodeH264MvcElement.Buffer viewIdOfNonAnchorRefsInL0(int index, @NativeType("uint16_t") short value) { StdVideoDecodeH264MvcElement.nviewIdOfNonAnchorRefsInL0(address(), index, value); return this; }
         /** Sets the specified value to the {@code numOfNonAnchorRefsInL1} field. */
         public StdVideoDecodeH264MvcElement.Buffer numOfNonAnchorRefsInL1(@NativeType("uint16_t") short value) { StdVideoDecodeH264MvcElement.nnumOfNonAnchorRefsInL1(address(), value); return this; }
         /** Copies the specified {@link ShortBuffer} to the {@code viewIdOfNonAnchorRefsInL1} field. */
-        public StdVideoDecodeH264MvcElement.Buffer viewIdOfNonAnchorRefsInL1(@NativeType("uint16_t[15]") ShortBuffer value) { StdVideoDecodeH264MvcElement.nviewIdOfNonAnchorRefsInL1(address(), value); return this; }
+        public StdVideoDecodeH264MvcElement.Buffer viewIdOfNonAnchorRefsInL1(@NativeType("uint16_t[STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE]") ShortBuffer value) { StdVideoDecodeH264MvcElement.nviewIdOfNonAnchorRefsInL1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code viewIdOfNonAnchorRefsInL1} field. */
         public StdVideoDecodeH264MvcElement.Buffer viewIdOfNonAnchorRefsInL1(int index, @NativeType("uint16_t") short value) { StdVideoDecodeH264MvcElement.nviewIdOfNonAnchorRefsInL1(address(), index, value); return this; }
 
