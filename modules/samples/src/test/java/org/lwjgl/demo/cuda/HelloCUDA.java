@@ -10,7 +10,7 @@ import org.lwjgl.system.*;
 
 import java.nio.*;
 
-import static org.lwjgl.cuda.CU40.*;
+import static org.lwjgl.cuda.CU.*;
 import static org.lwjgl.cuda.NVRTC.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;

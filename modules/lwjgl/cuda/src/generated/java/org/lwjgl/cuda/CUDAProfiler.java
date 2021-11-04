@@ -58,7 +58,7 @@ public class CUDAProfiler {
     }
 
     /**
-     * Initialize the profiling.
+     * Initialize the profiling. Deprecated.
      * 
      * <p>Using this API user can initialize the CUDA profiler by specifying the configuration file, output file and output file format. This API is generally
      * used to profile different set of counters by looping the kernel launch. The {@code configFile} parameter can be used to select profiling options
@@ -98,7 +98,7 @@ public class CUDAProfiler {
     }
 
     /**
-     * Initialize the profiling.
+     * Initialize the profiling. Deprecated.
      * 
      * <p>Using this API user can initialize the CUDA profiler by specifying the configuration file, output file and output file format. This API is generally
      * used to profile different set of counters by looping the kernel launch. The {@code configFile} parameter can be used to select profiling options

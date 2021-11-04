@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -178,6 +177,7 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
      *
      * @return Source host pointer
      */
+    @Nullable
     @NativeType("void const *")
     public ByteBuffer srcHost(int capacity) { return nsrcHost(address(), capacity); }
     /** Source device pointer */
@@ -186,13 +186,9 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
     /** Source array reference */
     @NativeType("CUarray")
     public long srcArray() { return nsrcArray(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return Must be {@code NULL}
-     */
+    /** Must be {@code NULL} */
     @NativeType("void *")
-    public ByteBuffer reserved0(int capacity) { return nreserved0(address(), capacity); }
+    public long reserved0() { return nreserved0(address()); }
     /** Source pitch (ignored when src is array) */
     @NativeType("size_t")
     public long srcPitch() { return nsrcPitch(address()); }
@@ -219,6 +215,7 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
      *
      * @return Destination host pointer
      */
+    @Nullable
     @NativeType("void *")
     public ByteBuffer dstHost(int capacity) { return ndstHost(address(), capacity); }
     /** Destination device pointer */
@@ -227,13 +224,9 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
     /** Destination array reference */
     @NativeType("CUarray")
     public long dstArray() { return ndstArray(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return Must be NULL
-     */
+    /** Must be {@code NULL} */
     @NativeType("void *")
-    public ByteBuffer reserved1(int capacity) { return nreserved1(address(), capacity); }
+    public long reserved1() { return nreserved1(address()); }
     /** Destination pitch (ignored when dst is array) */
     @NativeType("size_t")
     public long dstPitch() { return ndstPitch(address()); }
@@ -261,13 +254,13 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #srcMemoryType} field. */
     public CUDA_MEMCPY3D srcMemoryType(@NativeType("CUmemorytype") int value) { nsrcMemoryType(address(), value); return this; }
     /** Sets the address of the specified {@link ByteBuffer} to the {@link #srcHost} field. */
-    public CUDA_MEMCPY3D srcHost(@NativeType("void const *") ByteBuffer value) { nsrcHost(address(), value); return this; }
+    public CUDA_MEMCPY3D srcHost(@Nullable @NativeType("void const *") ByteBuffer value) { nsrcHost(address(), value); return this; }
     /** Sets the specified value to the {@link #srcDevice} field. */
     public CUDA_MEMCPY3D srcDevice(@NativeType("CUdeviceptr") long value) { nsrcDevice(address(), value); return this; }
     /** Sets the specified value to the {@link #srcArray} field. */
     public CUDA_MEMCPY3D srcArray(@NativeType("CUarray") long value) { nsrcArray(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #reserved0} field. */
-    public CUDA_MEMCPY3D reserved0(@NativeType("void *") ByteBuffer value) { nreserved0(address(), value); return this; }
+    /** Sets the specified value to the {@link #reserved0} field. */
+    public CUDA_MEMCPY3D reserved0(@NativeType("void *") long value) { nreserved0(address(), value); return this; }
     /** Sets the specified value to the {@link #srcPitch} field. */
     public CUDA_MEMCPY3D srcPitch(@NativeType("size_t") long value) { nsrcPitch(address(), value); return this; }
     /** Sets the specified value to the {@link #srcHeight} field. */
@@ -283,13 +276,13 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #dstMemoryType} field. */
     public CUDA_MEMCPY3D dstMemoryType(@NativeType("CUmemorytype") int value) { ndstMemoryType(address(), value); return this; }
     /** Sets the address of the specified {@link ByteBuffer} to the {@link #dstHost} field. */
-    public CUDA_MEMCPY3D dstHost(@NativeType("void *") ByteBuffer value) { ndstHost(address(), value); return this; }
+    public CUDA_MEMCPY3D dstHost(@Nullable @NativeType("void *") ByteBuffer value) { ndstHost(address(), value); return this; }
     /** Sets the specified value to the {@link #dstDevice} field. */
     public CUDA_MEMCPY3D dstDevice(@NativeType("CUdeviceptr") long value) { ndstDevice(address(), value); return this; }
     /** Sets the specified value to the {@link #dstArray} field. */
     public CUDA_MEMCPY3D dstArray(@NativeType("CUarray") long value) { ndstArray(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #reserved1} field. */
-    public CUDA_MEMCPY3D reserved1(@NativeType("void *") ByteBuffer value) { nreserved1(address(), value); return this; }
+    /** Sets the specified value to the {@link #reserved1} field. */
+    public CUDA_MEMCPY3D reserved1(@NativeType("void *") long value) { nreserved1(address(), value); return this; }
     /** Sets the specified value to the {@link #dstPitch} field. */
     public CUDA_MEMCPY3D dstPitch(@NativeType("size_t") long value) { ndstPitch(address(), value); return this; }
     /** Sets the specified value to the {@link #dstHeight} field. */
@@ -308,10 +301,10 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
         long srcZ,
         long srcLOD,
         int srcMemoryType,
-        ByteBuffer srcHost,
+        @Nullable ByteBuffer srcHost,
         long srcDevice,
         long srcArray,
-        ByteBuffer reserved0,
+        long reserved0,
         long srcPitch,
         long srcHeight,
         long dstXInBytes,
@@ -319,10 +312,10 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
         long dstZ,
         long dstLOD,
         int dstMemoryType,
-        ByteBuffer dstHost,
+        @Nullable ByteBuffer dstHost,
         long dstDevice,
         long dstArray,
-        ByteBuffer reserved1,
+        long reserved1,
         long dstPitch,
         long dstHeight,
         long WidthInBytes,
@@ -513,13 +506,13 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
     /** Unsafe version of {@link #srcMemoryType}. */
     public static int nsrcMemoryType(long struct) { return UNSAFE.getInt(null, struct + CUDA_MEMCPY3D.SRCMEMORYTYPE); }
     /** Unsafe version of {@link #srcHost(int) srcHost}. */
-    public static ByteBuffer nsrcHost(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + CUDA_MEMCPY3D.SRCHOST), capacity); }
+    @Nullable public static ByteBuffer nsrcHost(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + CUDA_MEMCPY3D.SRCHOST), capacity); }
     /** Unsafe version of {@link #srcDevice}. */
     public static long nsrcDevice(long struct) { return memGetAddress(struct + CUDA_MEMCPY3D.SRCDEVICE); }
     /** Unsafe version of {@link #srcArray}. */
     public static long nsrcArray(long struct) { return memGetAddress(struct + CUDA_MEMCPY3D.SRCARRAY); }
-    /** Unsafe version of {@link #reserved0(int) reserved0}. */
-    public static ByteBuffer nreserved0(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + CUDA_MEMCPY3D.RESERVED0), capacity); }
+    /** Unsafe version of {@link #reserved0}. */
+    public static long nreserved0(long struct) { return memGetAddress(struct + CUDA_MEMCPY3D.RESERVED0); }
     /** Unsafe version of {@link #srcPitch}. */
     public static long nsrcPitch(long struct) { return memGetAddress(struct + CUDA_MEMCPY3D.SRCPITCH); }
     /** Unsafe version of {@link #srcHeight}. */
@@ -535,13 +528,13 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
     /** Unsafe version of {@link #dstMemoryType}. */
     public static int ndstMemoryType(long struct) { return UNSAFE.getInt(null, struct + CUDA_MEMCPY3D.DSTMEMORYTYPE); }
     /** Unsafe version of {@link #dstHost(int) dstHost}. */
-    public static ByteBuffer ndstHost(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + CUDA_MEMCPY3D.DSTHOST), capacity); }
+    @Nullable public static ByteBuffer ndstHost(long struct, int capacity) { return memByteBufferSafe(memGetAddress(struct + CUDA_MEMCPY3D.DSTHOST), capacity); }
     /** Unsafe version of {@link #dstDevice}. */
     public static long ndstDevice(long struct) { return memGetAddress(struct + CUDA_MEMCPY3D.DSTDEVICE); }
     /** Unsafe version of {@link #dstArray}. */
     public static long ndstArray(long struct) { return memGetAddress(struct + CUDA_MEMCPY3D.DSTARRAY); }
-    /** Unsafe version of {@link #reserved1(int) reserved1}. */
-    public static ByteBuffer nreserved1(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + CUDA_MEMCPY3D.RESERVED1), capacity); }
+    /** Unsafe version of {@link #reserved1}. */
+    public static long nreserved1(long struct) { return memGetAddress(struct + CUDA_MEMCPY3D.RESERVED1); }
     /** Unsafe version of {@link #dstPitch}. */
     public static long ndstPitch(long struct) { return memGetAddress(struct + CUDA_MEMCPY3D.DSTPITCH); }
     /** Unsafe version of {@link #dstHeight}. */
@@ -564,13 +557,13 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
     /** Unsafe version of {@link #srcMemoryType(int) srcMemoryType}. */
     public static void nsrcMemoryType(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_MEMCPY3D.SRCMEMORYTYPE, value); }
     /** Unsafe version of {@link #srcHost(ByteBuffer) srcHost}. */
-    public static void nsrcHost(long struct, ByteBuffer value) { memPutAddress(struct + CUDA_MEMCPY3D.SRCHOST, memAddress(value)); }
+    public static void nsrcHost(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + CUDA_MEMCPY3D.SRCHOST, memAddressSafe(value)); }
     /** Unsafe version of {@link #srcDevice(long) srcDevice}. */
-    public static void nsrcDevice(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.SRCDEVICE, check(value)); }
+    public static void nsrcDevice(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.SRCDEVICE, value); }
     /** Unsafe version of {@link #srcArray(long) srcArray}. */
-    public static void nsrcArray(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.SRCARRAY, check(value)); }
-    /** Unsafe version of {@link #reserved0(ByteBuffer) reserved0}. */
-    public static void nreserved0(long struct, ByteBuffer value) { memPutAddress(struct + CUDA_MEMCPY3D.RESERVED0, memAddress(value)); }
+    public static void nsrcArray(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.SRCARRAY, value); }
+    /** Unsafe version of {@link #reserved0(long) reserved0}. */
+    public static void nreserved0(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.RESERVED0, value); }
     /** Unsafe version of {@link #srcPitch(long) srcPitch}. */
     public static void nsrcPitch(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.SRCPITCH, value); }
     /** Unsafe version of {@link #srcHeight(long) srcHeight}. */
@@ -586,13 +579,13 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
     /** Unsafe version of {@link #dstMemoryType(int) dstMemoryType}. */
     public static void ndstMemoryType(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_MEMCPY3D.DSTMEMORYTYPE, value); }
     /** Unsafe version of {@link #dstHost(ByteBuffer) dstHost}. */
-    public static void ndstHost(long struct, ByteBuffer value) { memPutAddress(struct + CUDA_MEMCPY3D.DSTHOST, memAddress(value)); }
+    public static void ndstHost(long struct, @Nullable ByteBuffer value) { memPutAddress(struct + CUDA_MEMCPY3D.DSTHOST, memAddressSafe(value)); }
     /** Unsafe version of {@link #dstDevice(long) dstDevice}. */
-    public static void ndstDevice(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.DSTDEVICE, check(value)); }
+    public static void ndstDevice(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.DSTDEVICE, value); }
     /** Unsafe version of {@link #dstArray(long) dstArray}. */
-    public static void ndstArray(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.DSTARRAY, check(value)); }
-    /** Unsafe version of {@link #reserved1(ByteBuffer) reserved1}. */
-    public static void nreserved1(long struct, ByteBuffer value) { memPutAddress(struct + CUDA_MEMCPY3D.RESERVED1, memAddress(value)); }
+    public static void ndstArray(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.DSTARRAY, value); }
+    /** Unsafe version of {@link #reserved1(long) reserved1}. */
+    public static void nreserved1(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.RESERVED1, value); }
     /** Unsafe version of {@link #dstPitch(long) dstPitch}. */
     public static void ndstPitch(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.DSTPITCH, value); }
     /** Unsafe version of {@link #dstHeight(long) dstHeight}. */
@@ -603,34 +596,6 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
     public static void nHeight(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.HEIGHT, value); }
     /** Unsafe version of {@link #Depth(long) Depth}. */
     public static void nDepth(long struct, long value) { memPutAddress(struct + CUDA_MEMCPY3D.DEPTH, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + CUDA_MEMCPY3D.SRCHOST));
-        check(memGetAddress(struct + CUDA_MEMCPY3D.SRCDEVICE));
-        check(memGetAddress(struct + CUDA_MEMCPY3D.SRCARRAY));
-        check(memGetAddress(struct + CUDA_MEMCPY3D.RESERVED0));
-        check(memGetAddress(struct + CUDA_MEMCPY3D.DSTHOST));
-        check(memGetAddress(struct + CUDA_MEMCPY3D.DSTDEVICE));
-        check(memGetAddress(struct + CUDA_MEMCPY3D.DSTARRAY));
-        check(memGetAddress(struct + CUDA_MEMCPY3D.RESERVED1));
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
 
     // -----------------------------------
 
@@ -690,6 +655,7 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
          *
          * @param capacity the number of elements in the returned buffer
          */
+        @Nullable
         @NativeType("void const *")
         public ByteBuffer srcHost(int capacity) { return CUDA_MEMCPY3D.nsrcHost(address(), capacity); }
         /** @return the value of the {@link CUDA_MEMCPY3D#srcDevice} field. */
@@ -698,13 +664,9 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
         /** @return the value of the {@link CUDA_MEMCPY3D#srcArray} field. */
         @NativeType("CUarray")
         public long srcArray() { return CUDA_MEMCPY3D.nsrcArray(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@link CUDA_MEMCPY3D#reserved0} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return the value of the {@link CUDA_MEMCPY3D#reserved0} field. */
         @NativeType("void *")
-        public ByteBuffer reserved0(int capacity) { return CUDA_MEMCPY3D.nreserved0(address(), capacity); }
+        public long reserved0() { return CUDA_MEMCPY3D.nreserved0(address()); }
         /** @return the value of the {@link CUDA_MEMCPY3D#srcPitch} field. */
         @NativeType("size_t")
         public long srcPitch() { return CUDA_MEMCPY3D.nsrcPitch(address()); }
@@ -731,6 +693,7 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
          *
          * @param capacity the number of elements in the returned buffer
          */
+        @Nullable
         @NativeType("void *")
         public ByteBuffer dstHost(int capacity) { return CUDA_MEMCPY3D.ndstHost(address(), capacity); }
         /** @return the value of the {@link CUDA_MEMCPY3D#dstDevice} field. */
@@ -739,13 +702,9 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
         /** @return the value of the {@link CUDA_MEMCPY3D#dstArray} field. */
         @NativeType("CUarray")
         public long dstArray() { return CUDA_MEMCPY3D.ndstArray(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@link CUDA_MEMCPY3D#reserved1} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return the value of the {@link CUDA_MEMCPY3D#reserved1} field. */
         @NativeType("void *")
-        public ByteBuffer reserved1(int capacity) { return CUDA_MEMCPY3D.nreserved1(address(), capacity); }
+        public long reserved1() { return CUDA_MEMCPY3D.nreserved1(address()); }
         /** @return the value of the {@link CUDA_MEMCPY3D#dstPitch} field. */
         @NativeType("size_t")
         public long dstPitch() { return CUDA_MEMCPY3D.ndstPitch(address()); }
@@ -773,13 +732,13 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
         /** Sets the specified value to the {@link CUDA_MEMCPY3D#srcMemoryType} field. */
         public CUDA_MEMCPY3D.Buffer srcMemoryType(@NativeType("CUmemorytype") int value) { CUDA_MEMCPY3D.nsrcMemoryType(address(), value); return this; }
         /** Sets the address of the specified {@link ByteBuffer} to the {@link CUDA_MEMCPY3D#srcHost} field. */
-        public CUDA_MEMCPY3D.Buffer srcHost(@NativeType("void const *") ByteBuffer value) { CUDA_MEMCPY3D.nsrcHost(address(), value); return this; }
+        public CUDA_MEMCPY3D.Buffer srcHost(@Nullable @NativeType("void const *") ByteBuffer value) { CUDA_MEMCPY3D.nsrcHost(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_MEMCPY3D#srcDevice} field. */
         public CUDA_MEMCPY3D.Buffer srcDevice(@NativeType("CUdeviceptr") long value) { CUDA_MEMCPY3D.nsrcDevice(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_MEMCPY3D#srcArray} field. */
         public CUDA_MEMCPY3D.Buffer srcArray(@NativeType("CUarray") long value) { CUDA_MEMCPY3D.nsrcArray(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link CUDA_MEMCPY3D#reserved0} field. */
-        public CUDA_MEMCPY3D.Buffer reserved0(@NativeType("void *") ByteBuffer value) { CUDA_MEMCPY3D.nreserved0(address(), value); return this; }
+        /** Sets the specified value to the {@link CUDA_MEMCPY3D#reserved0} field. */
+        public CUDA_MEMCPY3D.Buffer reserved0(@NativeType("void *") long value) { CUDA_MEMCPY3D.nreserved0(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_MEMCPY3D#srcPitch} field. */
         public CUDA_MEMCPY3D.Buffer srcPitch(@NativeType("size_t") long value) { CUDA_MEMCPY3D.nsrcPitch(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_MEMCPY3D#srcHeight} field. */
@@ -795,13 +754,13 @@ public class CUDA_MEMCPY3D extends Struct implements NativeResource {
         /** Sets the specified value to the {@link CUDA_MEMCPY3D#dstMemoryType} field. */
         public CUDA_MEMCPY3D.Buffer dstMemoryType(@NativeType("CUmemorytype") int value) { CUDA_MEMCPY3D.ndstMemoryType(address(), value); return this; }
         /** Sets the address of the specified {@link ByteBuffer} to the {@link CUDA_MEMCPY3D#dstHost} field. */
-        public CUDA_MEMCPY3D.Buffer dstHost(@NativeType("void *") ByteBuffer value) { CUDA_MEMCPY3D.ndstHost(address(), value); return this; }
+        public CUDA_MEMCPY3D.Buffer dstHost(@Nullable @NativeType("void *") ByteBuffer value) { CUDA_MEMCPY3D.ndstHost(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_MEMCPY3D#dstDevice} field. */
         public CUDA_MEMCPY3D.Buffer dstDevice(@NativeType("CUdeviceptr") long value) { CUDA_MEMCPY3D.ndstDevice(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_MEMCPY3D#dstArray} field. */
         public CUDA_MEMCPY3D.Buffer dstArray(@NativeType("CUarray") long value) { CUDA_MEMCPY3D.ndstArray(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link CUDA_MEMCPY3D#reserved1} field. */
-        public CUDA_MEMCPY3D.Buffer reserved1(@NativeType("void *") ByteBuffer value) { CUDA_MEMCPY3D.nreserved1(address(), value); return this; }
+        /** Sets the specified value to the {@link CUDA_MEMCPY3D#reserved1} field. */
+        public CUDA_MEMCPY3D.Buffer reserved1(@NativeType("void *") long value) { CUDA_MEMCPY3D.nreserved1(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_MEMCPY3D#dstPitch} field. */
         public CUDA_MEMCPY3D.Buffer dstPitch(@NativeType("size_t") long value) { CUDA_MEMCPY3D.ndstPitch(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_MEMCPY3D#dstHeight} field. */

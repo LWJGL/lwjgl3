@@ -21,7 +21,7 @@ val Profiler = "CUDAProfiler".nativeClass(Module.CUDA, prefix = "CU", binding = 
     CUresult(
         "ProfilerInitialize",
         """
-        Initialize the profiling.
+        Initialize the profiling. Deprecated.
 
         Using this API user can initialize the CUDA profiler by specifying the configuration file, output file and output file format. This API is generally
         used to profile different set of counters by looping the kernel launch. The {@code configFile} parameter can be used to select profiling options

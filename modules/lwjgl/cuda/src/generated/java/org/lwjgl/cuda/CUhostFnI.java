@@ -13,7 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
- * Instances of this interface may be passed to the {@link CU100#cuLaunchHostFunc LaunchHostFunc} method.
+ * Instances of this interface may be passed to the {@link CU#cuLaunchHostFunc LaunchHostFunc} method.
  * 
  * <h3>Type</h3>
  * 

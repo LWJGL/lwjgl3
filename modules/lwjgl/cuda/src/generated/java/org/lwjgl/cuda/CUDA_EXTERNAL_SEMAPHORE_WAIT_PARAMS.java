@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * External semaphore wait parameters
+ * External semaphore wait parameters.
  * 
  * <h3>Layout</h3>
  * 
@@ -25,9 +25,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS {
  *     struct {
  *         struct {
- *             unsigned long long value;
+ *             unsigned long long {@link #params_fence_value value};
  *         } fence;
- *         unsigned int reserved[16];
+ *         union {
+ *             void * fence;
+ *             unsigned long long reserved;
+ *         } nvSciSync;
+ *         struct {
+ *             unsigned long long {@link #params_keyedMutex_key key};
+ *             unsigned int {@link #params_keyedMutex_timeoutMs timeoutMs};
+ *         } keyedMutex;
+ *         unsigned int params[10];
  *     } params;
  *     unsigned int {@link #flags};
  *     unsigned int reserved[16];
@@ -46,7 +54,13 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct implements Nativ
         PARAMS,
             PARAMS_FENCE,
                 PARAMS_FENCE_VALUE,
-            PARAMS_RESERVED,
+            PARAMS_NVSCISYNC,
+                PARAMS_NVSCISYNC_FENCE,
+                PARAMS_NVSCISYNC_RESERVED,
+            PARAMS_KEYEDMUTEX,
+                PARAMS_KEYEDMUTEX_KEY,
+                PARAMS_KEYEDMUTEX_TIMEOUTMS,
+            PARAMS_PARAMS,
         FLAGS,
         RESERVED;
 
@@ -56,7 +70,15 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct implements Nativ
                 __struct(
                     __member(8)
                 ),
-                __array(4, 16)
+                __union(
+                    __member(POINTER_SIZE),
+                    __member(8)
+                ),
+                __struct(
+                    __member(8),
+                    __member(4)
+                ),
+                __array(4, 10)
             ),
             __member(4),
             __array(4, 16)
@@ -68,9 +90,15 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct implements Nativ
         PARAMS = layout.offsetof(0);
             PARAMS_FENCE = layout.offsetof(1);
                 PARAMS_FENCE_VALUE = layout.offsetof(2);
-            PARAMS_RESERVED = layout.offsetof(3);
-        FLAGS = layout.offsetof(4);
-        RESERVED = layout.offsetof(5);
+            PARAMS_NVSCISYNC = layout.offsetof(3);
+                PARAMS_NVSCISYNC_FENCE = layout.offsetof(4);
+                PARAMS_NVSCISYNC_RESERVED = layout.offsetof(5);
+            PARAMS_KEYEDMUTEX = layout.offsetof(6);
+                PARAMS_KEYEDMUTEX_KEY = layout.offsetof(7);
+                PARAMS_KEYEDMUTEX_TIMEOUTMS = layout.offsetof(8);
+            PARAMS_PARAMS = layout.offsetof(9);
+        FLAGS = layout.offsetof(10);
+        RESERVED = layout.offsetof(11);
     }
 
     /**
@@ -86,16 +114,33 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code params.fence.value} field. */
+    /** value of fence to be waited on */
     @NativeType("unsigned long long")
     public long params_fence_value() { return nparams_fence_value(address()); }
-    /** @return a {@link IntBuffer} view of the {@code params.reserved} field. */
-    @NativeType("unsigned int[16]")
-    public IntBuffer params_reserved() { return nparams_reserved(address()); }
-    /** @return the value at the specified index of the {@code params.reserved} field. */
+    /** @return the value of the {@code params.nvSciSync.fence} field. */
+    @NativeType("void *")
+    public long params_nvSciSync_fence() { return nparams_nvSciSync_fence(address()); }
+    /** @return the value of the {@code params.nvSciSync.reserved} field. */
+    @NativeType("unsigned long long")
+    public long params_nvSciSync_reserved() { return nparams_nvSciSync_reserved(address()); }
+    /** value of key to acquire the mutex with */
+    @NativeType("unsigned long long")
+    public long params_keyedMutex_key() { return nparams_keyedMutex_key(address()); }
+    /** timeout in milliseconds to wait to acquire the mutex */
     @NativeType("unsigned int")
-    public int params_reserved(int index) { return nparams_reserved(address(), index); }
-    /** Flags reserved for the future. Must be zero. */
+    public int params_keyedMutex_timeoutMs() { return nparams_keyedMutex_timeoutMs(address()); }
+    /** @return a {@link IntBuffer} view of the {@code params.params} field. */
+    @NativeType("unsigned int[10]")
+    public IntBuffer params_params() { return nparams_params(address()); }
+    /** @return the value at the specified index of the {@code params.params} field. */
+    @NativeType("unsigned int")
+    public int params_params(int index) { return nparams_params(address(), index); }
+    /**
+     * only when {@code CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS} is used to wait on a {@code CUexternalSemaphore} of type
+     * {@link CU#CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_NVSCISYNC EXTERNAL_SEMAPHORE_HANDLE_TYPE_NVSCISYNC}, the valid flag is {@link CU#CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC} which indicates that while waiting for
+     * the {@code CUexternalSemaphore}, no memory synchronization operations should be performed for any external memory object imported as
+     * {@link CU#CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF}. For all other types of {@code CUexternalSemaphore}, {@code flags} must be zero.
+     */
     @NativeType("unsigned int")
     public int flags() { return nflags(address()); }
     /** @return a {@link IntBuffer} view of the {@code reserved} field. */
@@ -105,33 +150,26 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct implements Nativ
     @NativeType("unsigned int")
     public int reserved(int index) { return nreserved(address(), index); }
 
-    /** Sets the specified value to the {@code value} field. */
+    /** Sets the specified value to the {@link #params_fence_value} field. */
     public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS params_fence_value(@NativeType("unsigned long long") long value) { nparams_fence_value(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
-    public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS params_reserved(@NativeType("unsigned int[16]") IntBuffer value) { nparams_reserved(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code reserved} field. */
-    public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS params_reserved(int index, @NativeType("unsigned int") int value) { nparams_reserved(address(), index, value); return this; }
+    /** Sets the specified value to the {@code fence} field. */
+    public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS params_nvSciSync_fence(@NativeType("void *") long value) { nparams_nvSciSync_fence(address(), value); return this; }
+    /** Sets the specified value to the {@code reserved} field. */
+    public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS params_nvSciSync_reserved(@NativeType("unsigned long long") long value) { nparams_nvSciSync_reserved(address(), value); return this; }
+    /** Sets the specified value to the {@link #params_keyedMutex_key} field. */
+    public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS params_keyedMutex_key(@NativeType("unsigned long long") long value) { nparams_keyedMutex_key(address(), value); return this; }
+    /** Sets the specified value to the {@link #params_keyedMutex_timeoutMs} field. */
+    public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS params_keyedMutex_timeoutMs(@NativeType("unsigned int") int value) { nparams_keyedMutex_timeoutMs(address(), value); return this; }
+    /** Copies the specified {@link IntBuffer} to the {@code params} field. */
+    public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS params_params(@NativeType("unsigned int[10]") IntBuffer value) { nparams_params(address(), value); return this; }
+    /** Sets the specified value at the specified index of the {@code params} field. */
+    public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS params_params(int index, @NativeType("unsigned int") int value) { nparams_params(address(), index, value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
     public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS flags(@NativeType("unsigned int") int value) { nflags(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS reserved(@NativeType("unsigned int[16]") IntBuffer value) { nreserved(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code reserved} field. */
     public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS reserved(int index, @NativeType("unsigned int") int value) { nreserved(address(), index, value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS set(
-        long params_fence_value,
-        IntBuffer params_reserved,
-        int flags,
-        IntBuffer reserved
-    ) {
-        params_fence_value(params_fence_value);
-        params_reserved(params_reserved);
-        flags(flags);
-        reserved(reserved);
-
-        return this;
-    }
 
     /**
      * Copies the specified struct data to this struct.
@@ -279,11 +317,19 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct implements Nativ
 
     /** Unsafe version of {@link #params_fence_value}. */
     public static long nparams_fence_value(long struct) { return UNSAFE.getLong(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_FENCE_VALUE); }
-    /** Unsafe version of {@link #params_reserved}. */
-    public static IntBuffer nparams_reserved(long struct) { return memIntBuffer(struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_RESERVED, 16); }
-    /** Unsafe version of {@link #params_reserved(int) params_reserved}. */
-    public static int nparams_reserved(long struct, int index) {
-        return UNSAFE.getInt(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_RESERVED + check(index, 16) * 4);
+    /** Unsafe version of {@link #params_nvSciSync_fence}. */
+    public static long nparams_nvSciSync_fence(long struct) { return memGetAddress(struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_NVSCISYNC_FENCE); }
+    /** Unsafe version of {@link #params_nvSciSync_reserved}. */
+    public static long nparams_nvSciSync_reserved(long struct) { return UNSAFE.getLong(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_NVSCISYNC_RESERVED); }
+    /** Unsafe version of {@link #params_keyedMutex_key}. */
+    public static long nparams_keyedMutex_key(long struct) { return UNSAFE.getLong(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_KEYEDMUTEX_KEY); }
+    /** Unsafe version of {@link #params_keyedMutex_timeoutMs}. */
+    public static int nparams_keyedMutex_timeoutMs(long struct) { return UNSAFE.getInt(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_KEYEDMUTEX_TIMEOUTMS); }
+    /** Unsafe version of {@link #params_params}. */
+    public static IntBuffer nparams_params(long struct) { return memIntBuffer(struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_PARAMS, 10); }
+    /** Unsafe version of {@link #params_params(int) params_params}. */
+    public static int nparams_params(long struct, int index) {
+        return UNSAFE.getInt(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_PARAMS + check(index, 10) * 4);
     }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.FLAGS); }
@@ -296,14 +342,22 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct implements Nativ
 
     /** Unsafe version of {@link #params_fence_value(long) params_fence_value}. */
     public static void nparams_fence_value(long struct, long value) { UNSAFE.putLong(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_FENCE_VALUE, value); }
-    /** Unsafe version of {@link #params_reserved(IntBuffer) params_reserved}. */
-    public static void nparams_reserved(long struct, IntBuffer value) {
-        if (CHECKS) { checkGT(value, 16); }
-        memCopy(memAddress(value), struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_RESERVED, value.remaining() * 4);
+    /** Unsafe version of {@link #params_nvSciSync_fence(long) params_nvSciSync_fence}. */
+    public static void nparams_nvSciSync_fence(long struct, long value) { memPutAddress(struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_NVSCISYNC_FENCE, value); }
+    /** Unsafe version of {@link #params_nvSciSync_reserved(long) params_nvSciSync_reserved}. */
+    public static void nparams_nvSciSync_reserved(long struct, long value) { UNSAFE.putLong(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_NVSCISYNC_RESERVED, value); }
+    /** Unsafe version of {@link #params_keyedMutex_key(long) params_keyedMutex_key}. */
+    public static void nparams_keyedMutex_key(long struct, long value) { UNSAFE.putLong(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_KEYEDMUTEX_KEY, value); }
+    /** Unsafe version of {@link #params_keyedMutex_timeoutMs(int) params_keyedMutex_timeoutMs}. */
+    public static void nparams_keyedMutex_timeoutMs(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_KEYEDMUTEX_TIMEOUTMS, value); }
+    /** Unsafe version of {@link #params_params(IntBuffer) params_params}. */
+    public static void nparams_params(long struct, IntBuffer value) {
+        if (CHECKS) { checkGT(value, 10); }
+        memCopy(memAddress(value), struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_PARAMS, value.remaining() * 4);
     }
-    /** Unsafe version of {@link #params_reserved(int, int) params_reserved}. */
-    public static void nparams_reserved(long struct, int index, int value) {
-        UNSAFE.putInt(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_RESERVED + check(index, 16) * 4, value);
+    /** Unsafe version of {@link #params_params(int, int) params_params}. */
+    public static void nparams_params(long struct, int index, int value) {
+        UNSAFE.putInt(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.PARAMS_PARAMS + check(index, 10) * 4, value);
     }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.FLAGS, value); }
@@ -355,15 +409,27 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code params.fence.value} field. */
+        /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS#params_fence_value} field. */
         @NativeType("unsigned long long")
         public long params_fence_value() { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_fence_value(address()); }
-        /** @return a {@link IntBuffer} view of the {@code params.reserved} field. */
-        @NativeType("unsigned int[16]")
-        public IntBuffer params_reserved() { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_reserved(address()); }
-        /** @return the value at the specified index of the {@code params.reserved} field. */
+        /** @return the value of the {@code params.nvSciSync.fence} field. */
+        @NativeType("void *")
+        public long params_nvSciSync_fence() { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_nvSciSync_fence(address()); }
+        /** @return the value of the {@code params.nvSciSync.reserved} field. */
+        @NativeType("unsigned long long")
+        public long params_nvSciSync_reserved() { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_nvSciSync_reserved(address()); }
+        /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS#params_keyedMutex_key} field. */
+        @NativeType("unsigned long long")
+        public long params_keyedMutex_key() { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_keyedMutex_key(address()); }
+        /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS#params_keyedMutex_timeoutMs} field. */
         @NativeType("unsigned int")
-        public int params_reserved(int index) { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_reserved(address(), index); }
+        public int params_keyedMutex_timeoutMs() { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_keyedMutex_timeoutMs(address()); }
+        /** @return a {@link IntBuffer} view of the {@code params.params} field. */
+        @NativeType("unsigned int[10]")
+        public IntBuffer params_params() { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_params(address()); }
+        /** @return the value at the specified index of the {@code params.params} field. */
+        @NativeType("unsigned int")
+        public int params_params(int index) { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_params(address(), index); }
         /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS#flags} field. */
         @NativeType("unsigned int")
         public int flags() { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nflags(address()); }
@@ -374,12 +440,20 @@ public class CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS extends Struct implements Nativ
         @NativeType("unsigned int")
         public int reserved(int index) { return CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nreserved(address(), index); }
 
-        /** Sets the specified value to the {@code value} field. */
+        /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS#params_fence_value} field. */
         public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer params_fence_value(@NativeType("unsigned long long") long value) { CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_fence_value(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
-        public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer params_reserved(@NativeType("unsigned int[16]") IntBuffer value) { CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_reserved(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code reserved} field. */
-        public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer params_reserved(int index, @NativeType("unsigned int") int value) { CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_reserved(address(), index, value); return this; }
+        /** Sets the specified value to the {@code fence} field. */
+        public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer params_nvSciSync_fence(@NativeType("void *") long value) { CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_nvSciSync_fence(address(), value); return this; }
+        /** Sets the specified value to the {@code reserved} field. */
+        public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer params_nvSciSync_reserved(@NativeType("unsigned long long") long value) { CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_nvSciSync_reserved(address(), value); return this; }
+        /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS#params_keyedMutex_key} field. */
+        public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer params_keyedMutex_key(@NativeType("unsigned long long") long value) { CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_keyedMutex_key(address(), value); return this; }
+        /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS#params_keyedMutex_timeoutMs} field. */
+        public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer params_keyedMutex_timeoutMs(@NativeType("unsigned int") int value) { CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_keyedMutex_timeoutMs(address(), value); return this; }
+        /** Copies the specified {@link IntBuffer} to the {@code params} field. */
+        public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer params_params(@NativeType("unsigned int[10]") IntBuffer value) { CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_params(address(), value); return this; }
+        /** Sets the specified value at the specified index of the {@code params} field. */
+        public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer params_params(int index, @NativeType("unsigned int") int value) { CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nparams_params(address(), index, value); return this; }
         /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS#flags} field. */
         public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer flags(@NativeType("unsigned int") int value) { CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.nflags(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */

@@ -130,6 +130,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct implements NativeResource {
      *
      * @return Array of pointers to kernel parameters
      */
+    @Nullable
     @NativeType("void **")
     public PointerBuffer kernelParams(int capacity) { return nkernelParams(address(), capacity); }
 
@@ -152,7 +153,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #hStream} field. */
     public CUDA_LAUNCH_PARAMS hStream(@NativeType("CUstream") long value) { nhStream(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@link #kernelParams} field. */
-    public CUDA_LAUNCH_PARAMS kernelParams(@NativeType("void **") PointerBuffer value) { nkernelParams(address(), value); return this; }
+    public CUDA_LAUNCH_PARAMS kernelParams(@Nullable @NativeType("void **") PointerBuffer value) { nkernelParams(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public CUDA_LAUNCH_PARAMS set(
@@ -165,7 +166,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct implements NativeResource {
         int blockDimZ,
         int sharedMemBytes,
         long hStream,
-        PointerBuffer kernelParams
+        @Nullable PointerBuffer kernelParams
     ) {
         function(function);
         gridDimX(gridDimX);
@@ -344,7 +345,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct implements NativeResource {
     /** Unsafe version of {@link #hStream}. */
     public static long nhStream(long struct) { return memGetAddress(struct + CUDA_LAUNCH_PARAMS.HSTREAM); }
     /** Unsafe version of {@link #kernelParams(int) kernelParams}. */
-    public static PointerBuffer nkernelParams(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + CUDA_LAUNCH_PARAMS.KERNELPARAMS), capacity); }
+    @Nullable public static PointerBuffer nkernelParams(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + CUDA_LAUNCH_PARAMS.KERNELPARAMS), capacity); }
 
     /** Unsafe version of {@link #function(long) function}. */
     public static void nfunction(long struct, long value) { memPutAddress(struct + CUDA_LAUNCH_PARAMS.FUNCTION, check(value)); }
@@ -363,9 +364,9 @@ public class CUDA_LAUNCH_PARAMS extends Struct implements NativeResource {
     /** Unsafe version of {@link #sharedMemBytes(int) sharedMemBytes}. */
     public static void nsharedMemBytes(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_LAUNCH_PARAMS.SHAREDMEMBYTES, value); }
     /** Unsafe version of {@link #hStream(long) hStream}. */
-    public static void nhStream(long struct, long value) { memPutAddress(struct + CUDA_LAUNCH_PARAMS.HSTREAM, check(value)); }
+    public static void nhStream(long struct, long value) { memPutAddress(struct + CUDA_LAUNCH_PARAMS.HSTREAM, value); }
     /** Unsafe version of {@link #kernelParams(PointerBuffer) kernelParams}. */
-    public static void nkernelParams(long struct, PointerBuffer value) { memPutAddress(struct + CUDA_LAUNCH_PARAMS.KERNELPARAMS, memAddress(value)); }
+    public static void nkernelParams(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + CUDA_LAUNCH_PARAMS.KERNELPARAMS, memAddressSafe(value)); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -374,8 +375,6 @@ public class CUDA_LAUNCH_PARAMS extends Struct implements NativeResource {
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + CUDA_LAUNCH_PARAMS.FUNCTION));
-        check(memGetAddress(struct + CUDA_LAUNCH_PARAMS.HSTREAM));
-        check(memGetAddress(struct + CUDA_LAUNCH_PARAMS.KERNELPARAMS));
     }
 
     /**
@@ -460,6 +459,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct implements NativeResource {
          *
          * @param capacity the number of elements in the returned buffer
          */
+        @Nullable
         @NativeType("void **")
         public PointerBuffer kernelParams(int capacity) { return CUDA_LAUNCH_PARAMS.nkernelParams(address(), capacity); }
 
@@ -482,7 +482,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct implements NativeResource {
         /** Sets the specified value to the {@link CUDA_LAUNCH_PARAMS#hStream} field. */
         public CUDA_LAUNCH_PARAMS.Buffer hStream(@NativeType("CUstream") long value) { CUDA_LAUNCH_PARAMS.nhStream(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@link CUDA_LAUNCH_PARAMS#kernelParams} field. */
-        public CUDA_LAUNCH_PARAMS.Buffer kernelParams(@NativeType("void **") PointerBuffer value) { CUDA_LAUNCH_PARAMS.nkernelParams(address(), value); return this; }
+        public CUDA_LAUNCH_PARAMS.Buffer kernelParams(@Nullable @NativeType("void **") PointerBuffer value) { CUDA_LAUNCH_PARAMS.nkernelParams(address(), value); return this; }
 
     }
 

@@ -30,6 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *             void * {@link #handle_win32_handle handle};
  *             void const * {@link #handle_win32_name name};
  *         } win32;
+ *         void const * {@link #handle_nvSciBufObject nvSciBufObject};
  *     } handle;
  *     unsigned long long {@link #size};
  *     unsigned int {@link #flags};
@@ -52,6 +53,7 @@ public class CUDA_EXTERNAL_MEMORY_HANDLE_DESC extends Struct implements NativeRe
             HANDLE_WIN32,
                 HANDLE_WIN32_HANDLE,
                 HANDLE_WIN32_NAME,
+            HANDLE_NVSCIBUFOBJECT,
         SIZE,
         FLAGS,
         RESERVED;
@@ -64,7 +66,8 @@ public class CUDA_EXTERNAL_MEMORY_HANDLE_DESC extends Struct implements NativeRe
                 __struct(
                     __member(POINTER_SIZE),
                     __member(POINTER_SIZE)
-                )
+                ),
+                __member(POINTER_SIZE)
             ),
             __member(8),
             __member(4),
@@ -80,9 +83,10 @@ public class CUDA_EXTERNAL_MEMORY_HANDLE_DESC extends Struct implements NativeRe
             HANDLE_WIN32 = layout.offsetof(3);
                 HANDLE_WIN32_HANDLE = layout.offsetof(4);
                 HANDLE_WIN32_NAME = layout.offsetof(5);
-        SIZE = layout.offsetof(6);
-        FLAGS = layout.offsetof(7);
-        RESERVED = layout.offsetof(8);
+            HANDLE_NVSCIBUFOBJECT = layout.offsetof(6);
+        SIZE = layout.offsetof(7);
+        FLAGS = layout.offsetof(8);
+        RESERVED = layout.offsetof(9);
     }
 
     /**
@@ -109,10 +113,13 @@ public class CUDA_EXTERNAL_MEMORY_HANDLE_DESC extends Struct implements NativeRe
     /** Name of a valid memory object. Must be NULL if 'handle' is non-NULL. */
     @NativeType("void const *")
     public long handle_win32_name() { return nhandle_win32_name(address()); }
+    /** A handle representing an {@code NvSciBuf} Object. Valid when type is {@link CU#CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF} */
+    @NativeType("void const *")
+    public long handle_nvSciBufObject() { return nhandle_nvSciBufObject(address()); }
     /** Size of the memory allocation */
     @NativeType("unsigned long long")
     public long size() { return nsize(address()); }
-    /** Flags must either be zero or ::CUDA_EXTERNAL_MEMORY_DEDICATED */
+    /** Flags must either be zero or {@link CU#CUDA_EXTERNAL_MEMORY_DEDICATED} */
     @NativeType("unsigned int")
     public int flags() { return nflags(address()); }
     /** @return a {@link IntBuffer} view of the {@code reserved} field. */
@@ -130,6 +137,8 @@ public class CUDA_EXTERNAL_MEMORY_HANDLE_DESC extends Struct implements NativeRe
     public CUDA_EXTERNAL_MEMORY_HANDLE_DESC handle_win32_handle(@NativeType("void *") long value) { nhandle_win32_handle(address(), value); return this; }
     /** Sets the specified value to the {@link #handle_win32_name} field. */
     public CUDA_EXTERNAL_MEMORY_HANDLE_DESC handle_win32_name(@NativeType("void const *") long value) { nhandle_win32_name(address(), value); return this; }
+    /** Sets the specified value to the {@link #handle_nvSciBufObject} field. */
+    public CUDA_EXTERNAL_MEMORY_HANDLE_DESC handle_nvSciBufObject(@NativeType("void const *") long value) { nhandle_nvSciBufObject(address(), value); return this; }
     /** Sets the specified value to the {@link #size} field. */
     public CUDA_EXTERNAL_MEMORY_HANDLE_DESC size(@NativeType("unsigned long long") long value) { nsize(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -291,6 +300,8 @@ public class CUDA_EXTERNAL_MEMORY_HANDLE_DESC extends Struct implements NativeRe
     public static long nhandle_win32_handle(long struct) { return memGetAddress(struct + CUDA_EXTERNAL_MEMORY_HANDLE_DESC.HANDLE_WIN32_HANDLE); }
     /** Unsafe version of {@link #handle_win32_name}. */
     public static long nhandle_win32_name(long struct) { return memGetAddress(struct + CUDA_EXTERNAL_MEMORY_HANDLE_DESC.HANDLE_WIN32_NAME); }
+    /** Unsafe version of {@link #handle_nvSciBufObject}. */
+    public static long nhandle_nvSciBufObject(long struct) { return memGetAddress(struct + CUDA_EXTERNAL_MEMORY_HANDLE_DESC.HANDLE_NVSCIBUFOBJECT); }
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return UNSAFE.getLong(null, struct + CUDA_EXTERNAL_MEMORY_HANDLE_DESC.SIZE); }
     /** Unsafe version of {@link #flags}. */
@@ -310,6 +321,8 @@ public class CUDA_EXTERNAL_MEMORY_HANDLE_DESC extends Struct implements NativeRe
     public static void nhandle_win32_handle(long struct, long value) { memPutAddress(struct + CUDA_EXTERNAL_MEMORY_HANDLE_DESC.HANDLE_WIN32_HANDLE, value); }
     /** Unsafe version of {@link #handle_win32_name(long) handle_win32_name}. */
     public static void nhandle_win32_name(long struct, long value) { memPutAddress(struct + CUDA_EXTERNAL_MEMORY_HANDLE_DESC.HANDLE_WIN32_NAME, value); }
+    /** Unsafe version of {@link #handle_nvSciBufObject(long) handle_nvSciBufObject}. */
+    public static void nhandle_nvSciBufObject(long struct, long value) { memPutAddress(struct + CUDA_EXTERNAL_MEMORY_HANDLE_DESC.HANDLE_NVSCIBUFOBJECT, value); }
     /** Unsafe version of {@link #size(long) size}. */
     public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + CUDA_EXTERNAL_MEMORY_HANDLE_DESC.SIZE, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
@@ -373,6 +386,9 @@ public class CUDA_EXTERNAL_MEMORY_HANDLE_DESC extends Struct implements NativeRe
         /** @return the value of the {@link CUDA_EXTERNAL_MEMORY_HANDLE_DESC#handle_win32_name} field. */
         @NativeType("void const *")
         public long handle_win32_name() { return CUDA_EXTERNAL_MEMORY_HANDLE_DESC.nhandle_win32_name(address()); }
+        /** @return the value of the {@link CUDA_EXTERNAL_MEMORY_HANDLE_DESC#handle_nvSciBufObject} field. */
+        @NativeType("void const *")
+        public long handle_nvSciBufObject() { return CUDA_EXTERNAL_MEMORY_HANDLE_DESC.nhandle_nvSciBufObject(address()); }
         /** @return the value of the {@link CUDA_EXTERNAL_MEMORY_HANDLE_DESC#size} field. */
         @NativeType("unsigned long long")
         public long size() { return CUDA_EXTERNAL_MEMORY_HANDLE_DESC.nsize(address()); }
@@ -394,6 +410,8 @@ public class CUDA_EXTERNAL_MEMORY_HANDLE_DESC extends Struct implements NativeRe
         public CUDA_EXTERNAL_MEMORY_HANDLE_DESC.Buffer handle_win32_handle(@NativeType("void *") long value) { CUDA_EXTERNAL_MEMORY_HANDLE_DESC.nhandle_win32_handle(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_EXTERNAL_MEMORY_HANDLE_DESC#handle_win32_name} field. */
         public CUDA_EXTERNAL_MEMORY_HANDLE_DESC.Buffer handle_win32_name(@NativeType("void const *") long value) { CUDA_EXTERNAL_MEMORY_HANDLE_DESC.nhandle_win32_name(address(), value); return this; }
+        /** Sets the specified value to the {@link CUDA_EXTERNAL_MEMORY_HANDLE_DESC#handle_nvSciBufObject} field. */
+        public CUDA_EXTERNAL_MEMORY_HANDLE_DESC.Buffer handle_nvSciBufObject(@NativeType("void const *") long value) { CUDA_EXTERNAL_MEMORY_HANDLE_DESC.nhandle_nvSciBufObject(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_EXTERNAL_MEMORY_HANDLE_DESC#size} field. */
         public CUDA_EXTERNAL_MEMORY_HANDLE_DESC.Buffer size(@NativeType("unsigned long long") long value) { CUDA_EXTERNAL_MEMORY_HANDLE_DESC.nsize(address(), value); return this; }
         /** Sets the specified value to the {@link CUDA_EXTERNAL_MEMORY_HANDLE_DESC#flags} field. */

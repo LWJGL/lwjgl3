@@ -127,6 +127,7 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
      *
      * @return Array of pointers to kernel parameters
      */
+    @Nullable
     @NativeType("void **")
     public PointerBuffer kernelParams(int capacity) { return nkernelParams(address(), capacity); }
     /**
@@ -134,6 +135,7 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
      *
      * @return Extra options
      */
+    @Nullable
     @NativeType("void **")
     public PointerBuffer extra(int capacity) { return nextra(address(), capacity); }
 
@@ -154,9 +156,9 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #sharedMemBytes} field. */
     public CUDA_KERNEL_NODE_PARAMS sharedMemBytes(@NativeType("unsigned int") int value) { nsharedMemBytes(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@link #kernelParams} field. */
-    public CUDA_KERNEL_NODE_PARAMS kernelParams(@NativeType("void **") PointerBuffer value) { nkernelParams(address(), value); return this; }
+    public CUDA_KERNEL_NODE_PARAMS kernelParams(@Nullable @NativeType("void **") PointerBuffer value) { nkernelParams(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@link #extra} field. */
-    public CUDA_KERNEL_NODE_PARAMS extra(@NativeType("void **") PointerBuffer value) { nextra(address(), value); return this; }
+    public CUDA_KERNEL_NODE_PARAMS extra(@Nullable @NativeType("void **") PointerBuffer value) { nextra(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public CUDA_KERNEL_NODE_PARAMS set(
@@ -168,8 +170,8 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
         int blockDimY,
         int blockDimZ,
         int sharedMemBytes,
-        PointerBuffer kernelParams,
-        PointerBuffer extra
+        @Nullable PointerBuffer kernelParams,
+        @Nullable PointerBuffer extra
     ) {
         func(func);
         gridDimX(gridDimX);
@@ -346,9 +348,9 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
     /** Unsafe version of {@link #sharedMemBytes}. */
     public static int nsharedMemBytes(long struct) { return UNSAFE.getInt(null, struct + CUDA_KERNEL_NODE_PARAMS.SHAREDMEMBYTES); }
     /** Unsafe version of {@link #kernelParams(int) kernelParams}. */
-    public static PointerBuffer nkernelParams(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.KERNELPARAMS), capacity); }
+    @Nullable public static PointerBuffer nkernelParams(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.KERNELPARAMS), capacity); }
     /** Unsafe version of {@link #extra(int) extra}. */
-    public static PointerBuffer nextra(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.EXTRA), capacity); }
+    @Nullable public static PointerBuffer nextra(long struct, int capacity) { return memPointerBufferSafe(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.EXTRA), capacity); }
 
     /** Unsafe version of {@link #func(long) func}. */
     public static void nfunc(long struct, long value) { memPutAddress(struct + CUDA_KERNEL_NODE_PARAMS.FUNC, check(value)); }
@@ -367,9 +369,9 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
     /** Unsafe version of {@link #sharedMemBytes(int) sharedMemBytes}. */
     public static void nsharedMemBytes(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_KERNEL_NODE_PARAMS.SHAREDMEMBYTES, value); }
     /** Unsafe version of {@link #kernelParams(PointerBuffer) kernelParams}. */
-    public static void nkernelParams(long struct, PointerBuffer value) { memPutAddress(struct + CUDA_KERNEL_NODE_PARAMS.KERNELPARAMS, memAddress(value)); }
+    public static void nkernelParams(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + CUDA_KERNEL_NODE_PARAMS.KERNELPARAMS, memAddressSafe(value)); }
     /** Unsafe version of {@link #extra(PointerBuffer) extra}. */
-    public static void nextra(long struct, PointerBuffer value) { memPutAddress(struct + CUDA_KERNEL_NODE_PARAMS.EXTRA, memAddress(value)); }
+    public static void nextra(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + CUDA_KERNEL_NODE_PARAMS.EXTRA, memAddressSafe(value)); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -378,8 +380,6 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.FUNC));
-        check(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.KERNELPARAMS));
-        check(memGetAddress(struct + CUDA_KERNEL_NODE_PARAMS.EXTRA));
     }
 
     /**
@@ -461,6 +461,7 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
          *
          * @param capacity the number of elements in the returned buffer
          */
+        @Nullable
         @NativeType("void **")
         public PointerBuffer kernelParams(int capacity) { return CUDA_KERNEL_NODE_PARAMS.nkernelParams(address(), capacity); }
         /**
@@ -468,6 +469,7 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
          *
          * @param capacity the number of elements in the returned buffer
          */
+        @Nullable
         @NativeType("void **")
         public PointerBuffer extra(int capacity) { return CUDA_KERNEL_NODE_PARAMS.nextra(address(), capacity); }
 
@@ -488,9 +490,9 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct implements NativeResource {
         /** Sets the specified value to the {@link CUDA_KERNEL_NODE_PARAMS#sharedMemBytes} field. */
         public CUDA_KERNEL_NODE_PARAMS.Buffer sharedMemBytes(@NativeType("unsigned int") int value) { CUDA_KERNEL_NODE_PARAMS.nsharedMemBytes(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@link CUDA_KERNEL_NODE_PARAMS#kernelParams} field. */
-        public CUDA_KERNEL_NODE_PARAMS.Buffer kernelParams(@NativeType("void **") PointerBuffer value) { CUDA_KERNEL_NODE_PARAMS.nkernelParams(address(), value); return this; }
+        public CUDA_KERNEL_NODE_PARAMS.Buffer kernelParams(@Nullable @NativeType("void **") PointerBuffer value) { CUDA_KERNEL_NODE_PARAMS.nkernelParams(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@link CUDA_KERNEL_NODE_PARAMS#extra} field. */
-        public CUDA_KERNEL_NODE_PARAMS.Buffer extra(@NativeType("void **") PointerBuffer value) { CUDA_KERNEL_NODE_PARAMS.nextra(address(), value); return this; }
+        public CUDA_KERNEL_NODE_PARAMS.Buffer extra(@Nullable @NativeType("void **") PointerBuffer value) { CUDA_KERNEL_NODE_PARAMS.nextra(address(), value); return this; }
 
     }
 

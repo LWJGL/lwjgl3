@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Per-operation parameters for ::cuStreamBatchMemOp.
+ * Per-operation parameters for {@link CU#cuStreamBatchMemOp StreamBatchMemOp}.
  * 
  * <h3>Layout</h3>
  * 
@@ -421,7 +421,7 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     /** Unsafe version of {@link #waitValue_operation(int) waitValue_operation}. */
     public static void nwaitValue_operation(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.WAITVALUE_OPERATION, value); }
     /** Unsafe version of {@link #waitValue_address(long) waitValue_address}. */
-    public static void nwaitValue_address(long struct, long value) { memPutAddress(struct + CUstreamBatchMemOpParams.WAITVALUE_ADDRESS, check(value)); }
+    public static void nwaitValue_address(long struct, long value) { memPutAddress(struct + CUstreamBatchMemOpParams.WAITVALUE_ADDRESS, value); }
     /** Unsafe version of {@link #waitValue_value(int) waitValue_value}. */
     public static void nwaitValue_value(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.WAITVALUE_VALUE, value); }
     /** Unsafe version of {@link #waitValue_value64(long) waitValue_value64}. */
@@ -429,11 +429,11 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     /** Unsafe version of {@link #waitValue_flags(int) waitValue_flags}. */
     public static void nwaitValue_flags(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.WAITVALUE_FLAGS, value); }
     /** Unsafe version of {@link #waitValue_alias(long) waitValue_alias}. */
-    public static void nwaitValue_alias(long struct, long value) { memPutAddress(struct + CUstreamBatchMemOpParams.WAITVALUE_ALIAS, check(value)); }
+    public static void nwaitValue_alias(long struct, long value) { memPutAddress(struct + CUstreamBatchMemOpParams.WAITVALUE_ALIAS, value); }
     /** Unsafe version of {@link #writeValue_operation(int) writeValue_operation}. */
     public static void nwriteValue_operation(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.WRITEVALUE_OPERATION, value); }
     /** Unsafe version of {@link #writeValue_address(long) writeValue_address}. */
-    public static void nwriteValue_address(long struct, long value) { memPutAddress(struct + CUstreamBatchMemOpParams.WRITEVALUE_ADDRESS, check(value)); }
+    public static void nwriteValue_address(long struct, long value) { memPutAddress(struct + CUstreamBatchMemOpParams.WRITEVALUE_ADDRESS, value); }
     /** Unsafe version of {@link #writeValue_value(int) writeValue_value}. */
     public static void nwriteValue_value(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.WRITEVALUE_VALUE, value); }
     /** Unsafe version of {@link #writeValue_value64(long) writeValue_value64}. */
@@ -441,7 +441,7 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     /** Unsafe version of {@link #writeValue_flags(int) writeValue_flags}. */
     public static void nwriteValue_flags(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.WRITEVALUE_FLAGS, value); }
     /** Unsafe version of {@link #writeValue_alias(long) writeValue_alias}. */
-    public static void nwriteValue_alias(long struct, long value) { memPutAddress(struct + CUstreamBatchMemOpParams.WRITEVALUE_ALIAS, check(value)); }
+    public static void nwriteValue_alias(long struct, long value) { memPutAddress(struct + CUstreamBatchMemOpParams.WRITEVALUE_ALIAS, value); }
     /** Unsafe version of {@link #flushRemoteWrites_operation(int) flushRemoteWrites_operation}. */
     public static void nflushRemoteWrites_operation(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.FLUSHREMOTEWRITES_OPERATION, value); }
     /** Unsafe version of {@link #flushRemoteWrites_flags(int) flushRemoteWrites_flags}. */

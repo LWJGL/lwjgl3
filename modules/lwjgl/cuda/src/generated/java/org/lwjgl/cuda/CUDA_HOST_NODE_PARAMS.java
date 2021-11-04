@@ -241,7 +241,7 @@ public class CUDA_HOST_NODE_PARAMS extends Struct implements NativeResource {
     /** Unsafe version of {@link #fn(CUhostFnI) fn}. */
     public static void nfn(long struct, CUhostFnI value) { memPutAddress(struct + CUDA_HOST_NODE_PARAMS.FN, value.address()); }
     /** Unsafe version of {@link #userData(long) userData}. */
-    public static void nuserData(long struct, long value) { memPutAddress(struct + CUDA_HOST_NODE_PARAMS.USERDATA, check(value)); }
+    public static void nuserData(long struct, long value) { memPutAddress(struct + CUDA_HOST_NODE_PARAMS.USERDATA, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -250,7 +250,6 @@ public class CUDA_HOST_NODE_PARAMS extends Struct implements NativeResource {
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + CUDA_HOST_NODE_PARAMS.FN));
-        check(memGetAddress(struct + CUDA_HOST_NODE_PARAMS.USERDATA));
     }
 
     /**

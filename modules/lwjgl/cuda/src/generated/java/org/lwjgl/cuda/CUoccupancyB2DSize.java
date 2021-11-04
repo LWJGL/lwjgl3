@@ -12,7 +12,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Instances of this class may be passed to the {@link CU65#cuOccupancyMaxPotentialBlockSize OccupancyMaxPotentialBlockSize} and {@link CU65#cuOccupancyMaxPotentialBlockSizeWithFlags OccupancyMaxPotentialBlockSizeWithFlags} methods.
+ * Instances of this class may be passed to the {@link CU#cuOccupancyMaxPotentialBlockSize OccupancyMaxPotentialBlockSize} and {@link CU#cuOccupancyMaxPotentialBlockSizeWithFlags OccupancyMaxPotentialBlockSizeWithFlags} methods.
  * 
  * <h3>Type</h3>
  * 

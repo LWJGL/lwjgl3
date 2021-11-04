@@ -50,7 +50,7 @@ public interface CUstreamCallbackI extends CallbackI {
      * CUDA stream callback.
      *
      * @param hStream  the stream the callback was added to, as passed to {@link CU#cuStreamAddCallback StreamAddCallback}. May be {@code NULL}.
-     * @param status   CUDA_SUCCESS or any persistent error on the stream
+     * @param status   {@link CU#CUDA_SUCCESS} or any persistent error on the stream
      * @param userData user parameter provided at registration
      */
     void invoke(@NativeType("CUstream") long hStream, @NativeType("CUresult") int status, @NativeType("void *") long userData);

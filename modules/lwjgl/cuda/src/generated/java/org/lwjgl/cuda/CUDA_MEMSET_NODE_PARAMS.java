@@ -94,7 +94,7 @@ public class CUDA_MEMSET_NODE_PARAMS extends Struct implements NativeResource {
     /** Size of each element in bytes. Must be 1, 2, or 4. */
     @NativeType("unsigned int")
     public int elementSize() { return nelementSize(address()); }
-    /** Width in bytes, of the row */
+    /** Width of the row in elements */
     @NativeType("size_t")
     public long width() { return nwidth(address()); }
     /** Number of rows */

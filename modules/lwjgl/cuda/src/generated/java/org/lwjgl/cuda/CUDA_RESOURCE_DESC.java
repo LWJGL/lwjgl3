@@ -417,11 +417,11 @@ public class CUDA_RESOURCE_DESC extends Struct implements NativeResource {
     /** Unsafe version of {@link #resType(int) resType}. */
     public static void nresType(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_RESOURCE_DESC.RESTYPE, value); }
     /** Unsafe version of {@link #res_array_hArray(long) res_array_hArray}. */
-    public static void nres_array_hArray(long struct, long value) { memPutAddress(struct + CUDA_RESOURCE_DESC.RES_ARRAY_HARRAY, check(value)); }
+    public static void nres_array_hArray(long struct, long value) { memPutAddress(struct + CUDA_RESOURCE_DESC.RES_ARRAY_HARRAY, value); }
     /** Unsafe version of {@link #res_mipmap_hMipmappedArray(long) res_mipmap_hMipmappedArray}. */
-    public static void nres_mipmap_hMipmappedArray(long struct, long value) { memPutAddress(struct + CUDA_RESOURCE_DESC.RES_MIPMAP_HMIPMAPPEDARRAY, check(value)); }
+    public static void nres_mipmap_hMipmappedArray(long struct, long value) { memPutAddress(struct + CUDA_RESOURCE_DESC.RES_MIPMAP_HMIPMAPPEDARRAY, value); }
     /** Unsafe version of {@link #res_linear_devPtr(long) res_linear_devPtr}. */
-    public static void nres_linear_devPtr(long struct, long value) { memPutAddress(struct + CUDA_RESOURCE_DESC.RES_LINEAR_DEVPTR, check(value)); }
+    public static void nres_linear_devPtr(long struct, long value) { memPutAddress(struct + CUDA_RESOURCE_DESC.RES_LINEAR_DEVPTR, value); }
     /** Unsafe version of {@link #res_linear_format(int) res_linear_format}. */
     public static void nres_linear_format(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_RESOURCE_DESC.RES_LINEAR_FORMAT, value); }
     /** Unsafe version of {@link #res_linear_numChannels(int) res_linear_numChannels}. */
@@ -429,7 +429,7 @@ public class CUDA_RESOURCE_DESC extends Struct implements NativeResource {
     /** Unsafe version of {@link #res_linear_sizeInBytes(long) res_linear_sizeInBytes}. */
     public static void nres_linear_sizeInBytes(long struct, long value) { memPutAddress(struct + CUDA_RESOURCE_DESC.RES_LINEAR_SIZEINBYTES, value); }
     /** Unsafe version of {@link #res_pitch2D_devPtr(long) res_pitch2D_devPtr}. */
-    public static void nres_pitch2D_devPtr(long struct, long value) { memPutAddress(struct + CUDA_RESOURCE_DESC.RES_PITCH2D_DEVPTR, check(value)); }
+    public static void nres_pitch2D_devPtr(long struct, long value) { memPutAddress(struct + CUDA_RESOURCE_DESC.RES_PITCH2D_DEVPTR, value); }
     /** Unsafe version of {@link #res_pitch2D_format(int) res_pitch2D_format}. */
     public static void nres_pitch2D_format(long struct, int value) { UNSAFE.putInt(null, struct + CUDA_RESOURCE_DESC.RES_PITCH2D_FORMAT, value); }
     /** Unsafe version of {@link #res_pitch2D_numChannels(int) res_pitch2D_numChannels}. */
