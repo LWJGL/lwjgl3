@@ -142,13 +142,13 @@ val CUuuid = struct(Module.CUDA, "CUuuid", mutable = false) {
 }
 
 val CUipcEventHandle = struct(Module.CUDA, "CUIPCEventHandle", nativeName = "CUipcEventHandle") {
-    javaImport("static org.lwjgl.cuda.CU41.*")
+    javaImport("static org.lwjgl.cuda.CU.*")
 
     char("reserved", "")["CU_IPC_HANDLE_SIZE"]
 }
 
 val CUipcMemHandle = struct(Module.CUDA, "CUIPCMemHandle", nativeName = "CUipcMemHandle") {
-    javaImport("static org.lwjgl.cuda.CU41.*")
+    javaImport("static org.lwjgl.cuda.CU.*")
 
     char("reserved", "")["CU_IPC_HANDLE_SIZE"]
 }

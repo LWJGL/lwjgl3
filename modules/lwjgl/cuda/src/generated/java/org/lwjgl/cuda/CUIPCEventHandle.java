@@ -16,7 +16,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
-import static org.lwjgl.cuda.CU41.*;
+import static org.lwjgl.cuda.CU.*;
 
 /**
  * <h3>Layout</h3>
