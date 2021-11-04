@@ -754,7 +754,7 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
         int stageCount = nstageCount(struct);
         long pStages = memGetAddress(struct + VkGraphicsPipelineCreateInfo.PSTAGES);
         check(pStages);
-        VkPipelineShaderStageCreateInfo.validate(pStages, stageCount);
+        validate(pStages, stageCount, VkPipelineShaderStageCreateInfo.SIZEOF, VkPipelineShaderStageCreateInfo::validate);
         long pVertexInputState = memGetAddress(struct + VkGraphicsPipelineCreateInfo.PVERTEXINPUTSTATE);
         if (pVertexInputState != NULL) {
             VkPipelineVertexInputStateCreateInfo.validate(pVertexInputState);
@@ -767,18 +767,6 @@ public class VkGraphicsPipelineCreateInfo extends Struct implements NativeResour
         long pDynamicState = memGetAddress(struct + VkGraphicsPipelineCreateInfo.PDYNAMICSTATE);
         if (pDynamicState != NULL) {
             VkPipelineDynamicStateCreateInfo.validate(pDynamicState);
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 

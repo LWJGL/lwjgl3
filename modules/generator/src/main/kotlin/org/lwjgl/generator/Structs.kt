@@ -462,7 +462,12 @@ $indent}"""
                     "${if (hasPointer) "" else
                         "${indent}long ${m.name} = memGetAddress($STRUCT + $className.${m.offsetField});\n" +
                         "${indent}check(${m.name});\n"
-                    }$indent${m.nativeType.javaMethodType}.validate(${m.name}${getReferenceMember<AutoSizeMember>(m.name).let { if (it != null) ", ${it.name}" else "" }});"
+                    }$indent${getReferenceMember<AutoSizeMember>(m.name).let { 
+                        if (it == null) 
+                            "${m.nativeType.javaMethodType}.validate(${m.name});" 
+                        else
+                            "validate(${m.name}, ${it.name}, ${m.nativeType.javaMethodType}.SIZEOF, ${m.nativeType.javaMethodType}::validate);"}
+                    }"
                 }
             } else
                 "${indent}check(memGetAddress($STRUCT + $className.${m.offsetField}));"
@@ -495,7 +500,7 @@ $indent}"""
 
                         // if m != 0, make sure auto-sized members are not null
                         validations.add(
-                            validationBlock("${if (refValidations.contains(", ${m.name})")) {
+                            validationBlock("${if (refValidations.contains(", ${m.name}")) {
                                 validations.addCount(m)
                                 m.name
                             } else "n${m.name}($STRUCT)"} != 0", refValidations)
@@ -1206,18 +1211,6 @@ $indentation}"""
      */
     public static void validate(long $STRUCT) {
 ${validations.joinToString("\n")}
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
     }""")
                     }
                 }

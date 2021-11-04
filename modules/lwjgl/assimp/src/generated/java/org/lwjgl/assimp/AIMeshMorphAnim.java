@@ -269,19 +269,7 @@ public class AIMeshMorphAnim extends Struct implements NativeResource {
         int mNumKeys = nmNumKeys(struct);
         long mKeys = memGetAddress(struct + AIMeshMorphAnim.MKEYS);
         check(mKeys);
-        AIMeshMorphKey.validate(mKeys, mNumKeys);
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
+        validate(mKeys, mNumKeys, AIMeshMorphKey.SIZEOF, AIMeshMorphKey::validate);
     }
 
     // -----------------------------------

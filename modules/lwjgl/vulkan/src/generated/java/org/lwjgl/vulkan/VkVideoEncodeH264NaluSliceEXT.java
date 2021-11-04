@@ -388,23 +388,11 @@ public class VkVideoEncodeH264NaluSliceEXT extends Struct implements NativeResou
         byte refFinalList0EntryCount = nrefFinalList0EntryCount(struct);
         long pRefFinalList0Entries = memGetAddress(struct + VkVideoEncodeH264NaluSliceEXT.PREFFINALLIST0ENTRIES);
         check(pRefFinalList0Entries);
-        VkVideoEncodeH264DpbSlotInfoEXT.validate(pRefFinalList0Entries, refFinalList0EntryCount);
+        validate(pRefFinalList0Entries, refFinalList0EntryCount, VkVideoEncodeH264DpbSlotInfoEXT.SIZEOF, VkVideoEncodeH264DpbSlotInfoEXT::validate);
         byte refFinalList1EntryCount = nrefFinalList1EntryCount(struct);
         long pRefFinalList1Entries = memGetAddress(struct + VkVideoEncodeH264NaluSliceEXT.PREFFINALLIST1ENTRIES);
         check(pRefFinalList1Entries);
-        VkVideoEncodeH264DpbSlotInfoEXT.validate(pRefFinalList1Entries, refFinalList1EntryCount);
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
+        validate(pRefFinalList1Entries, refFinalList1EntryCount, VkVideoEncodeH264DpbSlotInfoEXT.SIZEOF, VkVideoEncodeH264DpbSlotInfoEXT::validate);
     }
 
     // -----------------------------------

@@ -321,21 +321,9 @@ public class VkGraphicsPipelineShaderGroupsCreateInfoNV extends Struct implement
         int groupCount = ngroupCount(struct);
         long pGroups = memGetAddress(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PGROUPS);
         check(pGroups);
-        VkGraphicsShaderGroupCreateInfoNV.validate(pGroups, groupCount);
+        validate(pGroups, groupCount, VkGraphicsShaderGroupCreateInfoNV.SIZEOF, VkGraphicsShaderGroupCreateInfoNV::validate);
         if (npipelineCount(struct) != 0) {
             check(memGetAddress(struct + VkGraphicsPipelineShaderGroupsCreateInfoNV.PPIPELINES));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 

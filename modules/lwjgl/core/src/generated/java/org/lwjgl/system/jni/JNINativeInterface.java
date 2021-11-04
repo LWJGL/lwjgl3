@@ -989,7 +989,7 @@ public class JNINativeInterface {
     @NativeType("jint")
     public static int RegisterNatives(@NativeType("jclass") Class<?> targetClass, @NativeType("JNINativeMethod const *") JNINativeMethod.Buffer methods) {
         if (CHECKS) {
-            JNINativeMethod.validate(methods.address(), methods.remaining());
+            Struct.validate(methods.address(), methods.remaining(), JNINativeMethod.SIZEOF, JNINativeMethod::validate);
         }
         return nRegisterNatives(targetClass, methods.address(), methods.remaining());
     }

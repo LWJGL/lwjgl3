@@ -377,7 +377,7 @@ public class MeshOptimizer {
         long vertex_count = destination.remaining();
         if (CHECKS) {
             checkSafe(indices, index_count);
-            MeshoptStream.validate(streams.address(), streams.remaining());
+            Struct.validate(streams.address(), streams.remaining(), MeshoptStream.SIZEOF, MeshoptStream::validate);
         }
         return nmeshopt_generateVertexRemapMulti(memAddress(destination), memAddressSafe(indices), index_count, vertex_count, streams.address(), streams.remaining());
     }
@@ -461,7 +461,7 @@ public class MeshOptimizer {
     public static void meshopt_generateShadowIndexBufferMulti(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("size_t") long vertex_count, @NativeType("struct meshopt_Stream const *") MeshoptStream.Buffer streams) {
         if (CHECKS) {
             check(indices, destination.remaining());
-            MeshoptStream.validate(streams.address(), streams.remaining());
+            Struct.validate(streams.address(), streams.remaining(), MeshoptStream.SIZEOF, MeshoptStream::validate);
         }
         nmeshopt_generateShadowIndexBufferMulti(memAddress(destination), memAddress(indices), destination.remaining(), vertex_count, streams.address(), streams.remaining());
     }

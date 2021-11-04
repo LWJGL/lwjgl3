@@ -608,23 +608,11 @@ public class EXRHeader extends Struct implements NativeResource {
         int num_custom_attributes = nnum_custom_attributes(struct);
         long custom_attributes = memGetAddress(struct + EXRHeader.CUSTOM_ATTRIBUTES);
         if (custom_attributes != NULL) {
-            EXRAttribute.validate(custom_attributes, num_custom_attributes);
+            validate(custom_attributes, num_custom_attributes, EXRAttribute.SIZEOF, EXRAttribute::validate);
         }
         check(memGetAddress(struct + EXRHeader.CHANNELS));
         check(memGetAddress(struct + EXRHeader.PIXEL_TYPES));
         check(memGetAddress(struct + EXRHeader.REQUESTED_PIXEL_TYPES));
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
     }
 
     // -----------------------------------

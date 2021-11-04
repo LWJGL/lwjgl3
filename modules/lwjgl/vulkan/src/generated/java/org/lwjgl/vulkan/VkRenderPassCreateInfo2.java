@@ -417,24 +417,12 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
         int subpassCount = nsubpassCount(struct);
         long pSubpasses = memGetAddress(struct + VkRenderPassCreateInfo2.PSUBPASSES);
         check(pSubpasses);
-        VkSubpassDescription2.validate(pSubpasses, subpassCount);
+        validate(pSubpasses, subpassCount, VkSubpassDescription2.SIZEOF, VkSubpassDescription2::validate);
         if (ndependencyCount(struct) != 0) {
             check(memGetAddress(struct + VkRenderPassCreateInfo2.PDEPENDENCIES));
         }
         if (ncorrelatedViewMaskCount(struct) != 0) {
             check(memGetAddress(struct + VkRenderPassCreateInfo2.PCORRELATEDVIEWMASKS));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 

@@ -322,29 +322,17 @@ public class VkVideoEncodeH265ReferenceListsEXT extends Struct implements Native
         if (referenceList0EntryCount != 0) {
             long pReferenceList0Entries = memGetAddress(struct + VkVideoEncodeH265ReferenceListsEXT.PREFERENCELIST0ENTRIES);
             check(pReferenceList0Entries);
-            VkVideoEncodeH265DpbSlotInfoEXT.validate(pReferenceList0Entries, referenceList0EntryCount);
+            validate(pReferenceList0Entries, referenceList0EntryCount, VkVideoEncodeH265DpbSlotInfoEXT.SIZEOF, VkVideoEncodeH265DpbSlotInfoEXT::validate);
         }
         byte referenceList1EntryCount = nreferenceList1EntryCount(struct);
         if (referenceList1EntryCount != 0) {
             long pReferenceList1Entries = memGetAddress(struct + VkVideoEncodeH265ReferenceListsEXT.PREFERENCELIST1ENTRIES);
             check(pReferenceList1Entries);
-            VkVideoEncodeH265DpbSlotInfoEXT.validate(pReferenceList1Entries, referenceList1EntryCount);
+            validate(pReferenceList1Entries, referenceList1EntryCount, VkVideoEncodeH265DpbSlotInfoEXT.SIZEOF, VkVideoEncodeH265DpbSlotInfoEXT::validate);
         }
         long pReferenceModifications = memGetAddress(struct + VkVideoEncodeH265ReferenceListsEXT.PREFERENCEMODIFICATIONS);
         check(pReferenceModifications);
         StdVideoEncodeH265ReferenceModifications.validate(pReferenceModifications);
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
     }
 
     // -----------------------------------

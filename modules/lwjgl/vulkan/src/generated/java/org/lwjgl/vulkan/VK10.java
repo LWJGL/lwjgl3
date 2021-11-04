@@ -4101,7 +4101,7 @@ public class VK10 {
     public static int nvkQueueSubmit(VkQueue queue, int submitCount, long pSubmits, long fence) {
         long __functionAddress = queue.getCapabilities().vkQueueSubmit;
         if (CHECKS) {
-            if (pSubmits != NULL) { VkSubmitInfo.validate(pSubmits, submitCount); }
+            if (pSubmits != NULL) { Struct.validate(pSubmits, submitCount, VkSubmitInfo.SIZEOF, VkSubmitInfo::validate); }
         }
         return callPPJI(queue.address(), submitCount, pSubmits, fence, __functionAddress);
     }
@@ -5461,7 +5461,7 @@ public class VK10 {
     public static int nvkQueueBindSparse(VkQueue queue, int bindInfoCount, long pBindInfo, long fence) {
         long __functionAddress = queue.getCapabilities().vkQueueBindSparse;
         if (CHECKS) {
-            if (pBindInfo != NULL) { VkBindSparseInfo.validate(pBindInfo, bindInfoCount); }
+            if (pBindInfo != NULL) { Struct.validate(pBindInfo, bindInfoCount, VkBindSparseInfo.SIZEOF, VkBindSparseInfo::validate); }
         }
         return callPPJI(queue.address(), bindInfoCount, pBindInfo, fence, __functionAddress);
     }
@@ -8095,7 +8095,7 @@ public class VK10 {
     public static int nvkCreateGraphicsPipelines(VkDevice device, long pipelineCache, int createInfoCount, long pCreateInfos, long pAllocator, long pPipelines) {
         long __functionAddress = device.getCapabilities().vkCreateGraphicsPipelines;
         if (CHECKS) {
-            VkGraphicsPipelineCreateInfo.validate(pCreateInfos, createInfoCount);
+            Struct.validate(pCreateInfos, createInfoCount, VkGraphicsPipelineCreateInfo.SIZEOF, VkGraphicsPipelineCreateInfo::validate);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPJPPPI(device.address(), pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines, __functionAddress);
@@ -8190,7 +8190,7 @@ public class VK10 {
     public static int nvkCreateComputePipelines(VkDevice device, long pipelineCache, int createInfoCount, long pCreateInfos, long pAllocator, long pPipelines) {
         long __functionAddress = device.getCapabilities().vkCreateComputePipelines;
         if (CHECKS) {
-            VkComputePipelineCreateInfo.validate(pCreateInfos, createInfoCount);
+            Struct.validate(pCreateInfos, createInfoCount, VkComputePipelineCreateInfo.SIZEOF, VkComputePipelineCreateInfo::validate);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPJPPPI(device.address(), pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines, __functionAddress);
@@ -15838,7 +15838,7 @@ public class VK10 {
         long __functionAddress = device.getCapabilities().vkCreateGraphicsPipelines;
         if (CHECKS) {
             check(pPipelines, pCreateInfos.remaining());
-            VkGraphicsPipelineCreateInfo.validate(pCreateInfos.address(), pCreateInfos.remaining());
+            Struct.validate(pCreateInfos.address(), pCreateInfos.remaining(), VkGraphicsPipelineCreateInfo.SIZEOF, VkGraphicsPipelineCreateInfo::validate);
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPJPPPI(device.address(), pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pPipelines, __functionAddress);
@@ -15850,7 +15850,7 @@ public class VK10 {
         long __functionAddress = device.getCapabilities().vkCreateComputePipelines;
         if (CHECKS) {
             check(pPipelines, pCreateInfos.remaining());
-            VkComputePipelineCreateInfo.validate(pCreateInfos.address(), pCreateInfos.remaining());
+            Struct.validate(pCreateInfos.address(), pCreateInfos.remaining(), VkComputePipelineCreateInfo.SIZEOF, VkComputePipelineCreateInfo::validate);
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPJPPPI(device.address(), pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pPipelines, __functionAddress);

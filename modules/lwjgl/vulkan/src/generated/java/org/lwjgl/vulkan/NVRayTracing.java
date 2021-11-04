@@ -549,7 +549,7 @@ public class NVRayTracing {
         long __functionAddress = device.getCapabilities().vkBindAccelerationStructureMemoryNV;
         if (CHECKS) {
             check(__functionAddress);
-            VkBindAccelerationStructureMemoryInfoNV.validate(pBindInfos, bindInfoCount);
+            Struct.validate(pBindInfos, bindInfoCount, VkBindAccelerationStructureMemoryInfoNV.SIZEOF, VkBindAccelerationStructureMemoryInfoNV::validate);
         }
         return callPPI(device.address(), bindInfoCount, pBindInfos, __functionAddress);
     }
@@ -925,7 +925,7 @@ public class NVRayTracing {
         long __functionAddress = device.getCapabilities().vkCreateRayTracingPipelinesNV;
         if (CHECKS) {
             check(__functionAddress);
-            VkRayTracingPipelineCreateInfoNV.validate(pCreateInfos, createInfoCount);
+            Struct.validate(pCreateInfos, createInfoCount, VkRayTracingPipelineCreateInfoNV.SIZEOF, VkRayTracingPipelineCreateInfoNV::validate);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPJPPPI(device.address(), pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines, __functionAddress);
@@ -1316,7 +1316,7 @@ public class NVRayTracing {
         if (CHECKS) {
             check(__functionAddress);
             check(pPipelines, pCreateInfos.remaining());
-            VkRayTracingPipelineCreateInfoNV.validate(pCreateInfos.address(), pCreateInfos.remaining());
+            Struct.validate(pCreateInfos.address(), pCreateInfos.remaining(), VkRayTracingPipelineCreateInfoNV.SIZEOF, VkRayTracingPipelineCreateInfoNV::validate);
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPJPPPI(device.address(), pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pPipelines, __functionAddress);

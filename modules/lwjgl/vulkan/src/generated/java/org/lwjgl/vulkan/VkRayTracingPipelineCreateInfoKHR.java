@@ -486,7 +486,7 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct implements NativeR
         if (stageCount != 0) {
             long pStages = memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PSTAGES);
             check(pStages);
-            VkPipelineShaderStageCreateInfo.validate(pStages, stageCount);
+            validate(pStages, stageCount, VkPipelineShaderStageCreateInfo.SIZEOF, VkPipelineShaderStageCreateInfo::validate);
         }
         if (ngroupCount(struct) != 0) {
             check(memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PGROUPS));
@@ -498,18 +498,6 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct implements NativeR
         long pDynamicState = memGetAddress(struct + VkRayTracingPipelineCreateInfoKHR.PDYNAMICSTATE);
         if (pDynamicState != NULL) {
             VkPipelineDynamicStateCreateInfo.validate(pDynamicState);
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 

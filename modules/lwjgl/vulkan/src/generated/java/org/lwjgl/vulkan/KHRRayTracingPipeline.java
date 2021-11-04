@@ -440,7 +440,7 @@ public class KHRRayTracingPipeline {
         long __functionAddress = device.getCapabilities().vkCreateRayTracingPipelinesKHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkRayTracingPipelineCreateInfoKHR.validate(pCreateInfos, createInfoCount);
+            Struct.validate(pCreateInfos, createInfoCount, VkRayTracingPipelineCreateInfoKHR.SIZEOF, VkRayTracingPipelineCreateInfoKHR::validate);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPJJPPPI(device.address(), deferredOperation, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines, __functionAddress);
@@ -963,7 +963,7 @@ public class KHRRayTracingPipeline {
         if (CHECKS) {
             check(__functionAddress);
             check(pPipelines, pCreateInfos.remaining());
-            VkRayTracingPipelineCreateInfoKHR.validate(pCreateInfos.address(), pCreateInfos.remaining());
+            Struct.validate(pCreateInfos.address(), pCreateInfos.remaining(), VkRayTracingPipelineCreateInfoKHR.SIZEOF, VkRayTracingPipelineCreateInfoKHR::validate);
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPJJPPPI(device.address(), deferredOperation, pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pPipelines, __functionAddress);

@@ -154,6 +154,25 @@ public abstract class Struct extends Pointer.Default {
         return ByteBuffer.allocateDirect(elements * elementSize).order(ByteOrder.nativeOrder());
     }
 
+    /** A functional interface that enables lambda expressions to be passed to the {@link #validate} method. [INTERNAL USE ONLY] */
+    @FunctionalInterface
+    public interface StructValidation {
+        void validate(long struct);
+    }
+
+    /**
+     * Validates each struct contained in the specified struct array. [INTERNAL USE ONLY]
+     *
+     * @param array  the struct array to validate
+     * @param count  the number of structs in {@code array}
+     * @param SIZEOF the size of each struct, in bytes
+     */
+    public static void validate(long array, int count, int SIZEOF, StructValidation validation) {
+        for (int i = 0; i < count; i++) {
+            validation.validate(array + Integer.toUnsignedLong(i) * SIZEOF);
+        }
+    }
+
     // ---------------- Struct Member Layout ----------------
 
     protected static class Member {

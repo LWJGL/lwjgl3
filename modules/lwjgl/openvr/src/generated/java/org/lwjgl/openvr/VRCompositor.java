@@ -333,7 +333,7 @@ public class VRCompositor {
         long __functionAddress = OpenVR.VRCompositor.SetSkyboxOverride;
         if (CHECKS) {
             check(__functionAddress);
-            Texture.validate(pTextures, unTextureCount);
+            Struct.validate(pTextures, unTextureCount, Texture.SIZEOF, Texture::validate);
         }
         return callPI(pTextures, unTextureCount, __functionAddress);
     }

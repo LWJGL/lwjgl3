@@ -346,30 +346,18 @@ public class VkVideoEncodeH264VclFrameInfoEXT extends Struct implements NativeRe
         byte refDefaultFinalList0EntryCount = nrefDefaultFinalList0EntryCount(struct);
         long pRefDefaultFinalList0Entries = memGetAddress(struct + VkVideoEncodeH264VclFrameInfoEXT.PREFDEFAULTFINALLIST0ENTRIES);
         check(pRefDefaultFinalList0Entries);
-        VkVideoEncodeH264DpbSlotInfoEXT.validate(pRefDefaultFinalList0Entries, refDefaultFinalList0EntryCount);
+        validate(pRefDefaultFinalList0Entries, refDefaultFinalList0EntryCount, VkVideoEncodeH264DpbSlotInfoEXT.SIZEOF, VkVideoEncodeH264DpbSlotInfoEXT::validate);
         byte refDefaultFinalList1EntryCount = nrefDefaultFinalList1EntryCount(struct);
         long pRefDefaultFinalList1Entries = memGetAddress(struct + VkVideoEncodeH264VclFrameInfoEXT.PREFDEFAULTFINALLIST1ENTRIES);
         check(pRefDefaultFinalList1Entries);
-        VkVideoEncodeH264DpbSlotInfoEXT.validate(pRefDefaultFinalList1Entries, refDefaultFinalList1EntryCount);
+        validate(pRefDefaultFinalList1Entries, refDefaultFinalList1EntryCount, VkVideoEncodeH264DpbSlotInfoEXT.SIZEOF, VkVideoEncodeH264DpbSlotInfoEXT::validate);
         int naluSliceEntryCount = nnaluSliceEntryCount(struct);
         long pNaluSliceEntries = memGetAddress(struct + VkVideoEncodeH264VclFrameInfoEXT.PNALUSLICEENTRIES);
         check(pNaluSliceEntries);
-        VkVideoEncodeH264NaluSliceEXT.validate(pNaluSliceEntries, naluSliceEntryCount);
+        validate(pNaluSliceEntries, naluSliceEntryCount, VkVideoEncodeH264NaluSliceEXT.SIZEOF, VkVideoEncodeH264NaluSliceEXT::validate);
         long pCurrentPictureInfo = memGetAddress(struct + VkVideoEncodeH264VclFrameInfoEXT.PCURRENTPICTUREINFO);
         check(pCurrentPictureInfo);
         VkVideoEncodeH264DpbSlotInfoEXT.validate(pCurrentPictureInfo);
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
     }
 
     // -----------------------------------

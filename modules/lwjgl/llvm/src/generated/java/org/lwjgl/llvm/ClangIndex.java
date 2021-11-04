@@ -3971,7 +3971,7 @@ public class ClangIndex {
         long __functionAddress = Functions.createTranslationUnitFromSourceFile;
         if (CHECKS) {
             check(CIdx);
-            if (unsaved_files != NULL) { CXUnsavedFile.validate(unsaved_files, num_unsaved_files); }
+            if (unsaved_files != NULL) { Struct.validate(unsaved_files, num_unsaved_files, CXUnsavedFile.SIZEOF, CXUnsavedFile::validate); }
         }
         return invokePPPPP(CIdx, source_filename, num_clang_command_line_args, clang_command_line_args, num_unsaved_files, unsaved_files, __functionAddress);
     }
@@ -4155,7 +4155,7 @@ public class ClangIndex {
         long __functionAddress = Functions.parseTranslationUnit;
         if (CHECKS) {
             check(CIdx);
-            if (unsaved_files != NULL) { CXUnsavedFile.validate(unsaved_files, num_unsaved_files); }
+            if (unsaved_files != NULL) { Struct.validate(unsaved_files, num_unsaved_files, CXUnsavedFile.SIZEOF, CXUnsavedFile::validate); }
         }
         return invokePPPPP(CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options, __functionAddress);
     }
@@ -4200,7 +4200,7 @@ public class ClangIndex {
         long __functionAddress = Functions.parseTranslationUnit2;
         if (CHECKS) {
             check(CIdx);
-            if (unsaved_files != NULL) { CXUnsavedFile.validate(unsaved_files, num_unsaved_files); }
+            if (unsaved_files != NULL) { Struct.validate(unsaved_files, num_unsaved_files, CXUnsavedFile.SIZEOF, CXUnsavedFile::validate); }
         }
         return invokePPPPPI(CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options, out_TU, __functionAddress);
     }
@@ -4446,7 +4446,7 @@ public class ClangIndex {
         long __functionAddress = Functions.reparseTranslationUnit;
         if (CHECKS) {
             check(TU);
-            if (unsaved_files != NULL) { CXUnsavedFile.validate(unsaved_files, num_unsaved_files); }
+            if (unsaved_files != NULL) { Struct.validate(unsaved_files, num_unsaved_files, CXUnsavedFile.SIZEOF, CXUnsavedFile::validate); }
         }
         return invokePPI(TU, num_unsaved_files, unsaved_files, options, __functionAddress);
     }

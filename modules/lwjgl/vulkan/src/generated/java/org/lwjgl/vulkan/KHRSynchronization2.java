@@ -704,7 +704,7 @@ public class KHRSynchronization2 {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdWaitEvents2KHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkDependencyInfoKHR.validate(pDependencyInfos, eventCount);
+            Struct.validate(pDependencyInfos, eventCount, VkDependencyInfoKHR.SIZEOF, VkDependencyInfoKHR::validate);
         }
         callPPPV(commandBuffer.address(), eventCount, pEvents, pDependencyInfos, __functionAddress);
     }
@@ -1009,7 +1009,7 @@ public class KHRSynchronization2 {
         long __functionAddress = queue.getCapabilities().vkQueueSubmit2KHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pSubmits != NULL) { VkSubmitInfo2KHR.validate(pSubmits, submitCount); }
+            if (pSubmits != NULL) { Struct.validate(pSubmits, submitCount, VkSubmitInfo2KHR.SIZEOF, VkSubmitInfo2KHR::validate); }
         }
         return callPPJI(queue.address(), submitCount, pSubmits, fence, __functionAddress);
     }
@@ -1276,7 +1276,7 @@ public class KHRSynchronization2 {
         if (CHECKS) {
             check(__functionAddress);
             check(pDependencyInfos, pEvents.length);
-            VkDependencyInfoKHR.validate(pDependencyInfos.address(), pEvents.length);
+            Struct.validate(pDependencyInfos.address(), pEvents.length, VkDependencyInfoKHR.SIZEOF, VkDependencyInfoKHR::validate);
         }
         callPPPV(commandBuffer.address(), pEvents.length, pEvents, pDependencyInfos.address(), __functionAddress);
     }

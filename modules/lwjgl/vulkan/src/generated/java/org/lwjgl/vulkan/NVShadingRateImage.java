@@ -263,7 +263,7 @@ public class NVShadingRateImage {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetViewportShadingRatePaletteNV;
         if (CHECKS) {
             check(__functionAddress);
-            VkShadingRatePaletteNV.validate(pShadingRatePalettes, viewportCount);
+            Struct.validate(pShadingRatePalettes, viewportCount, VkShadingRatePaletteNV.SIZEOF, VkShadingRatePaletteNV::validate);
         }
         callPPV(commandBuffer.address(), firstViewport, viewportCount, pShadingRatePalettes, __functionAddress);
     }
@@ -342,7 +342,7 @@ public class NVShadingRateImage {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetCoarseSampleOrderNV;
         if (CHECKS) {
             check(__functionAddress);
-            if (pCustomSampleOrders != NULL) { VkCoarseSampleOrderCustomNV.validate(pCustomSampleOrders, customSampleOrderCount); }
+            if (pCustomSampleOrders != NULL) { Struct.validate(pCustomSampleOrders, customSampleOrderCount, VkCoarseSampleOrderCustomNV.SIZEOF, VkCoarseSampleOrderCustomNV::validate); }
         }
         callPPV(commandBuffer.address(), sampleOrderType, customSampleOrderCount, pCustomSampleOrders, __functionAddress);
     }

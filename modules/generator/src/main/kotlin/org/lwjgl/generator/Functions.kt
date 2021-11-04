@@ -546,7 +546,7 @@ class Func(
             .forEach {
                 // Do this after the AutoSize check
                 checks.add(
-                    "${it.nativeType.javaMethodType}.validate(${it.name}.address()${sequenceOf(
+                    sequenceOf(
                         if (it.has<Check>()) it.get<Check>().expression else null,
                         getReferenceParam<AutoSize>(it.name).let { autoSize ->
                             if (autoSize == null)
@@ -564,12 +564,20 @@ class Func(
                                         "(int)$name"
                                 }
                         }
-                    ).firstOrNull { size -> size != null }.let { size -> if (size == null) "" else ", $size" }});".let { validation ->
-                        if (it.has<Nullable>())
-                            "if (${it.name} != null) { $validation }"
-                        else
-                            validation
-                    }
+                    )
+                        .firstOrNull { size -> size != null }
+                        .let { size ->
+                            if (size == null)
+                                "${it.nativeType.javaMethodType}.validate(${it.name}.address());"
+                            else
+                                "Struct.validate(${it.name}.address(), $size, ${it.nativeType.javaMethodType}.SIZEOF, ${it.nativeType.javaMethodType}::validate);"
+                        }
+                        .let { validation ->
+                            if (it.has<Nullable>())
+                                "if (${it.name} != null) { $validation }"
+                            else
+                                validation
+                        }
                 )
             }
 
@@ -764,7 +772,7 @@ class Func(
                     checks.add("check(${it.name});")
                 else if (it.isInput && it.nativeType.hasStructValidation)
                     checks.add(
-                        "${it.nativeType.javaMethodType}.validate(${it.name}${sequenceOf(
+                        sequenceOf(
                             if (it.has<Check>()) it.get<Check>().expression else null,
                             getReferenceParam<AutoSize>(it.name).let { autoSize ->
                                 autoSize?.name?.let { name ->
@@ -774,12 +782,20 @@ class Func(
                                         "(int)$name"
                                 }
                             }
-                        ).firstOrNull { size -> size != null }.let { size -> if (size == null) "" else ", $size" }});".let { validation ->
-                            if (it.has<Nullable>())
-                                "if (${it.name} != NULL) { $validation }"
-                            else
-                                validation
-                        }
+                        )
+                            .firstOrNull { size -> size != null }
+                            .let { size ->
+                                if (size == null)
+                                    "${it.nativeType.javaMethodType}.validate(${it.name});"
+                                else
+                                    "Struct.validate(${it.name}, $size, ${it.nativeType.javaMethodType}.SIZEOF, ${it.nativeType.javaMethodType}::validate);"
+                            }
+                            .let { validation ->
+                                if (it.has<Nullable>())
+                                    "if (${it.name} != NULL) { $validation }"
+                                else
+                                    validation
+                            }
                     )
             }
 

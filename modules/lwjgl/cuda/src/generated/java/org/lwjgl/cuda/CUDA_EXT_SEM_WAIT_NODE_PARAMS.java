@@ -250,18 +250,6 @@ public class CUDA_EXT_SEM_WAIT_NODE_PARAMS extends Struct implements NativeResou
         check(memGetAddress(struct + CUDA_EXT_SEM_WAIT_NODE_PARAMS.PARAMSARRAY));
     }
 
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
-        }
-    }
-
     // -----------------------------------
 
     /** An array of {@link CUDA_EXT_SEM_WAIT_NODE_PARAMS} structs. */

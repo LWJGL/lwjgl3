@@ -349,19 +349,7 @@ public class EXRImage extends Struct implements NativeResource {
         if (num_tiles != 0) {
             long tiles = memGetAddress(struct + EXRImage.TILES);
             check(tiles);
-            EXRTile.validate(tiles, num_tiles);
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
+            validate(tiles, num_tiles, EXRTile.SIZEOF, EXRTile::validate);
         }
     }
 

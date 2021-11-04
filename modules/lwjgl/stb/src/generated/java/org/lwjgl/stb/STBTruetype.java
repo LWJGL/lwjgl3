@@ -558,7 +558,7 @@ public class STBTruetype {
     @NativeType("int")
     public static boolean stbtt_PackFontRanges(@NativeType("stbtt_pack_context *") STBTTPackContext spc, @NativeType("unsigned char const *") ByteBuffer fontdata, int font_index, @NativeType("stbtt_pack_range *") STBTTPackRange.Buffer ranges) {
         if (CHECKS) {
-            STBTTPackRange.validate(ranges.address(), ranges.remaining());
+            Struct.validate(ranges.address(), ranges.remaining(), STBTTPackRange.SIZEOF, STBTTPackRange::validate);
         }
         return nstbtt_PackFontRanges(spc.address(), memAddress(fontdata), font_index, ranges.address(), ranges.remaining()) != 0;
     }
@@ -656,7 +656,7 @@ public class STBTruetype {
      */
     public static int stbtt_PackFontRangesGatherRects(@NativeType("stbtt_pack_context *") STBTTPackContext spc, @NativeType("stbtt_fontinfo *") STBTTFontinfo info, @NativeType("stbtt_pack_range *") STBTTPackRange.Buffer ranges, @NativeType("stbrp_rect *") STBRPRect.Buffer rects) {
         if (CHECKS) {
-            STBTTPackRange.validate(ranges.address(), ranges.remaining());
+            Struct.validate(ranges.address(), ranges.remaining(), STBTTPackRange.SIZEOF, STBTTPackRange::validate);
         }
         return nstbtt_PackFontRangesGatherRects(spc.address(), info.address(), ranges.address(), ranges.remaining(), rects.address());
     }
@@ -702,7 +702,7 @@ public class STBTruetype {
     @NativeType("int")
     public static boolean stbtt_PackFontRangesRenderIntoRects(@NativeType("stbtt_pack_context *") STBTTPackContext spc, @NativeType("stbtt_fontinfo *") STBTTFontinfo info, @NativeType("stbtt_pack_range *") STBTTPackRange.Buffer ranges, @NativeType("stbrp_rect *") STBRPRect.Buffer rects) {
         if (CHECKS) {
-            STBTTPackRange.validate(ranges.address(), ranges.remaining());
+            Struct.validate(ranges.address(), ranges.remaining(), STBTTPackRange.SIZEOF, STBTTPackRange::validate);
         }
         return nstbtt_PackFontRangesRenderIntoRects(spc.address(), info.address(), ranges.address(), ranges.remaining(), rects.address()) != 0;
     }

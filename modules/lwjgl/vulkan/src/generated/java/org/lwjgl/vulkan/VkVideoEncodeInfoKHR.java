@@ -418,19 +418,7 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         if (referenceSlotCount != 0) {
             long pReferenceSlots = memGetAddress(struct + VkVideoEncodeInfoKHR.PREFERENCESLOTS);
             check(pReferenceSlots);
-            VkVideoReferenceSlotKHR.validate(pReferenceSlots, referenceSlotCount);
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
+            validate(pReferenceSlots, referenceSlotCount, VkVideoReferenceSlotKHR.SIZEOF, VkVideoReferenceSlotKHR::validate);
         }
     }
 

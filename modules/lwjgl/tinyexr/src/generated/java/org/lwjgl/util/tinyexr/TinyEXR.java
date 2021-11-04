@@ -648,7 +648,7 @@ public class TinyEXR {
             check(exr_headers, images.remaining());
             checkNT1(filename);
             check(err, 1);
-            EXRImage.validate(images.address(), images.remaining());
+            Struct.validate(images.address(), images.remaining(), EXRImage.SIZEOF, EXRImage::validate);
         }
         return nSaveEXRMultipartImageToFile(images.address(), memAddress(exr_headers), images.remaining(), memAddress(filename), memAddress(err));
     }
@@ -666,7 +666,7 @@ public class TinyEXR {
         if (CHECKS) {
             check(exr_headers, images.remaining());
             check(err, 1);
-            EXRImage.validate(images.address(), images.remaining());
+            Struct.validate(images.address(), images.remaining(), EXRImage.SIZEOF, EXRImage::validate);
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -698,7 +698,7 @@ public class TinyEXR {
             check(exr_headers, images.remaining());
             check(memory, 1);
             check(err, 1);
-            EXRImage.validate(images.address(), images.remaining());
+            Struct.validate(images.address(), images.remaining(), EXRImage.SIZEOF, EXRImage::validate);
         }
         return nSaveEXRMultipartImageToMemory(images.address(), memAddress(exr_headers), images.remaining(), memAddress(memory), memAddress(err));
     }

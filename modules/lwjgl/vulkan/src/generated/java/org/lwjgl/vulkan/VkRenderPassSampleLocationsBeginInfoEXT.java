@@ -321,25 +321,13 @@ public class VkRenderPassSampleLocationsBeginInfoEXT extends Struct implements N
         if (attachmentInitialSampleLocationsCount != 0) {
             long pAttachmentInitialSampleLocations = memGetAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PATTACHMENTINITIALSAMPLELOCATIONS);
             check(pAttachmentInitialSampleLocations);
-            VkAttachmentSampleLocationsEXT.validate(pAttachmentInitialSampleLocations, attachmentInitialSampleLocationsCount);
+            validate(pAttachmentInitialSampleLocations, attachmentInitialSampleLocationsCount, VkAttachmentSampleLocationsEXT.SIZEOF, VkAttachmentSampleLocationsEXT::validate);
         }
         int postSubpassSampleLocationsCount = npostSubpassSampleLocationsCount(struct);
         if (postSubpassSampleLocationsCount != 0) {
             long pPostSubpassSampleLocations = memGetAddress(struct + VkRenderPassSampleLocationsBeginInfoEXT.PPOSTSUBPASSSAMPLELOCATIONS);
             check(pPostSubpassSampleLocations);
-            VkSubpassSampleLocationsEXT.validate(pPostSubpassSampleLocations, postSubpassSampleLocationsCount);
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
+            validate(pPostSubpassSampleLocations, postSubpassSampleLocationsCount, VkSubpassSampleLocationsEXT.SIZEOF, VkSubpassSampleLocationsEXT::validate);
         }
     }
 

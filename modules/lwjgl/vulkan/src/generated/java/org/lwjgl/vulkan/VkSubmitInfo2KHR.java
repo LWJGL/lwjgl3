@@ -375,22 +375,10 @@ public class VkSubmitInfo2KHR extends Struct implements NativeResource {
         if (commandBufferInfoCount != 0) {
             long pCommandBufferInfos = memGetAddress(struct + VkSubmitInfo2KHR.PCOMMANDBUFFERINFOS);
             check(pCommandBufferInfos);
-            VkCommandBufferSubmitInfoKHR.validate(pCommandBufferInfos, commandBufferInfoCount);
+            validate(pCommandBufferInfos, commandBufferInfoCount, VkCommandBufferSubmitInfoKHR.SIZEOF, VkCommandBufferSubmitInfoKHR::validate);
         }
         if (nsignalSemaphoreInfoCount(struct) != 0) {
             check(memGetAddress(struct + VkSubmitInfo2KHR.PSIGNALSEMAPHOREINFOS));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 

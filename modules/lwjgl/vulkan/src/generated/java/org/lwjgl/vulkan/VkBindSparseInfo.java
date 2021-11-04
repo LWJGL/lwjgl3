@@ -430,34 +430,22 @@ public class VkBindSparseInfo extends Struct implements NativeResource {
         if (bufferBindCount != 0) {
             long pBufferBinds = memGetAddress(struct + VkBindSparseInfo.PBUFFERBINDS);
             check(pBufferBinds);
-            VkSparseBufferMemoryBindInfo.validate(pBufferBinds, bufferBindCount);
+            validate(pBufferBinds, bufferBindCount, VkSparseBufferMemoryBindInfo.SIZEOF, VkSparseBufferMemoryBindInfo::validate);
         }
         int imageOpaqueBindCount = nimageOpaqueBindCount(struct);
         if (imageOpaqueBindCount != 0) {
             long pImageOpaqueBinds = memGetAddress(struct + VkBindSparseInfo.PIMAGEOPAQUEBINDS);
             check(pImageOpaqueBinds);
-            VkSparseImageOpaqueMemoryBindInfo.validate(pImageOpaqueBinds, imageOpaqueBindCount);
+            validate(pImageOpaqueBinds, imageOpaqueBindCount, VkSparseImageOpaqueMemoryBindInfo.SIZEOF, VkSparseImageOpaqueMemoryBindInfo::validate);
         }
         int imageBindCount = nimageBindCount(struct);
         if (imageBindCount != 0) {
             long pImageBinds = memGetAddress(struct + VkBindSparseInfo.PIMAGEBINDS);
             check(pImageBinds);
-            VkSparseImageMemoryBindInfo.validate(pImageBinds, imageBindCount);
+            validate(pImageBinds, imageBindCount, VkSparseImageMemoryBindInfo.SIZEOF, VkSparseImageMemoryBindInfo::validate);
         }
         if (nsignalSemaphoreCount(struct) != 0) {
             check(memGetAddress(struct + VkBindSparseInfo.PSIGNALSEMAPHORES));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 

@@ -2331,7 +2331,7 @@ public class GLFW {
         long __functionAddress = Functions.SetWindowIcon;
         if (CHECKS) {
             check(window);
-            if (images != NULL) { GLFWImage.validate(images, count); }
+            if (images != NULL) { Struct.validate(images, count, GLFWImage.SIZEOF, GLFWImage::validate); }
         }
         invokePPV(window, count, images, __functionAddress);
     }

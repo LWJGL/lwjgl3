@@ -683,24 +683,12 @@ public class AIMesh extends Struct implements NativeResource {
         check(memGetAddress(struct + AIMesh.MVERTICES));
         long mFaces = memGetAddress(struct + AIMesh.MFACES);
         check(mFaces);
-        AIFace.validate(mFaces, mNumFaces);
+        validate(mFaces, mNumFaces, AIFace.SIZEOF, AIFace::validate);
         if (nmNumBones(struct) != 0) {
             check(memGetAddress(struct + AIMesh.MBONES));
         }
         if (nmNumAnimMeshes(struct) != 0) {
             check(memGetAddress(struct + AIMesh.MANIMMESHES));
-        }
-    }
-
-    /**
-     * Calls {@link #validate(long)} for each struct contained in the specified struct array.
-     *
-     * @param array the struct array to validate
-     * @param count the number of structs in {@code array}
-     */
-    public static void validate(long array, int count) {
-        for (int i = 0; i < count; i++) {
-            validate(array + Integer.toUnsignedLong(i) * SIZEOF);
         }
     }
 

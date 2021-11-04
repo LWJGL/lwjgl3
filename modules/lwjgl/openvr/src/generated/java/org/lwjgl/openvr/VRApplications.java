@@ -227,7 +227,7 @@ public class VRApplications {
         long __functionAddress = OpenVR.VRApplications.LaunchTemplateApplication;
         if (CHECKS) {
             check(__functionAddress);
-            AppOverrideKeys.validate(pKeys, unKeys);
+            Struct.validate(pKeys, unKeys, AppOverrideKeys.SIZEOF, AppOverrideKeys::validate);
         }
         return callPPPI(pchTemplateAppKey, pchNewAppKey, pKeys, unKeys, __functionAddress);
     }

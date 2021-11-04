@@ -1559,7 +1559,7 @@ public class ObjCRuntime {
         long __functionAddress = Functions.class_addProperty;
         if (CHECKS) {
             check(cls);
-            ObjCPropertyAttribute.validate(attributes, attributeCount);
+            Struct.validate(attributes, attributeCount, ObjCPropertyAttribute.SIZEOF, ObjCPropertyAttribute::validate);
         }
         return invokePPPZ(cls, name, attributes, attributeCount, __functionAddress);
     }
@@ -1613,7 +1613,7 @@ public class ObjCRuntime {
         long __functionAddress = Functions.class_replaceProperty;
         if (CHECKS) {
             check(cls);
-            ObjCPropertyAttribute.validate(attributes, attributeCount);
+            Struct.validate(attributes, attributeCount, ObjCPropertyAttribute.SIZEOF, ObjCPropertyAttribute::validate);
         }
         invokePPPV(cls, name, attributes, attributeCount, __functionAddress);
     }
@@ -2892,7 +2892,7 @@ public class ObjCRuntime {
         long __functionAddress = Functions.protocol_addProperty;
         if (CHECKS) {
             check(proto);
-            ObjCPropertyAttribute.validate(attributes, attributeCount);
+            Struct.validate(attributes, attributeCount, ObjCPropertyAttribute.SIZEOF, ObjCPropertyAttribute::validate);
         }
         invokePPPV(proto, name, attributes, attributeCount, isRequiredProperty, isInstanceProperty, __functionAddress);
     }
