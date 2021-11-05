@@ -753,6 +753,13 @@ val CUDA_RESOURCE_VIEW_DESC = struct(Module.CUDA, "CUDA_RESOURCE_VIEW_DESC") {
     unsigned_int("reserved", "")[16]
 }
 
+val CUDA_POINTER_ATTRIBUTE_P2P_TOKENS = struct(Module.CUDA, "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS") {
+    documentation = "GPU Direct v3 tokens."
+
+    unsigned_long_long("p2pToken", "")
+    unsigned_int("vaSpaceToken", "")
+}
+
 val CUdevprop = struct(Module.CUDA, "CUdevprop") {
     documentation = "Legacy device properties."
 

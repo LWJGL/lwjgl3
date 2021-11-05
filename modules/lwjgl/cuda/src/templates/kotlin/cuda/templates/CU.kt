@@ -3131,7 +3131,7 @@ EnumConstant(
             """
             #MEMHOSTALLOC_WRITECOMBINED: Allocates the memory as write-combined (WC). WC memory can be transferred across the PCI Express bus more quickly on
             some system configurations, but cannot be read efficiently by most CPUs. WC memory is a good option for buffers that will be written by the CPU and
-            read by the GPU via mapped pinned memory or host->device transfers.
+            read by the GPU via mapped pinned memory or host-&gt;device transfers.
             """
         )}
 
@@ -3320,7 +3320,7 @@ EnumConstant(
         restricted to GPUs in TCC mode.
         """,
 
-        CUipcEventHandle.p("pHandle", "pointer to a user allocated ##CUipcEventHandle in which to return the opaque event handle"),
+        CUipcEventHandle.p("pHandle", "pointer to a user allocated {@code CUipcEventHandle} in which to return the opaque event handle"),
         CUevent("event", "event allocated with #EVENT_INTERPROCESS and #EVENT_DISABLE_TIMING flags")
     )
 
@@ -3396,7 +3396,7 @@ EnumConstant(
         restricted to GPUs in TCC mode.
         """,
 
-        CUipcMemHandle.p("pHandle", "pointer to user allocated ##CUipcMemHandle to return the handle in"),
+        CUipcMemHandle.p("pHandle", "pointer to user allocated {@code CUipcMemHandle} to return the handle in"),
         CUdeviceptr("dptr", "base pointer to previously allocated device memory")
     )
 
@@ -3444,7 +3444,7 @@ EnumConstant(
      * {@code cuIpcOpenMemHandle} can attempt to enable peer access between the devices as if the user called {@link #cuCtxEnablePeerAccess CtxEnablePeerAccess}. This behavior is controlled
      * by the {@link #CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS IPC_MEM_LAZY_ENABLE_PEER_ACCESS} flag. {@link #cuDeviceCanAccessPeer DeviceCanAccessPeer} can determine if a mapping is possible.</p>
      * 
-     * <p>Contexts that may open {@link CUipcMemHandle}s are restricted in the following way. {@code CUipcMemHandles} from each {@code CUdevice} in a given process may
+     * <p>Contexts that may open {@link CUIPCMemHandle}s are restricted in the following way. {@code CUipcMemHandles} from each {@code CUdevice} in a given process may
      * only be opened by one {@code CUcontext} per {@code CUdevice} per other process.</p>
      * 
      * <p>If the memory handle has already been opened by the current context, the reference count on the handle is incremented by 1 and the existing device
@@ -3828,7 +3828,7 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
         #Memcpy2D() returns an error if any pitch is greater than the maximum allowed (#DEVICE_ATTRIBUTE_MAX_PITCH). #MemAllocPitch() passes back pitches that
         always work with {@code cuMemcpy2D()}. On intra-device memory copies (device to device, CUDA array to device, CUDA array to CUDA array),
         {@code cuMemcpy2D()} may fail for pitches not computed by {@code cuMemAllocPitch()}. {@code cuMemcpy2DUnaligned()} does not have this restriction, but
-        may run significantly slower in the cases where {@code cuMemcpy2D()} would have returned an error code.</h3>
+        may run significantly slower in the cases where {@code cuMemcpy2D()} would have returned an error code.
         """,
 
         CUDA_MEMCPY2D.const.p("pCopy", "parameters for the memory copy")

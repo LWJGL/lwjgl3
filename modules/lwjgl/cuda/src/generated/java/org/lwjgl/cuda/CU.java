@@ -5066,7 +5066,7 @@ public class CU {
      * {@link #cuMemHostGetDevicePointer MemHostGetDevicePointer}.</li>
      * <li>{@link #CU_MEMHOSTALLOC_WRITECOMBINED MEMHOSTALLOC_WRITECOMBINED}: Allocates the memory as write-combined (WC). WC memory can be transferred across the PCI Express bus more quickly on
      * some system configurations, but cannot be read efficiently by most CPUs. WC memory is a good option for buffers that will be written by the CPU and
-     * read by the GPU via mapped pinned memory or host->device transfers.</li>
+     * read by the GPU via mapped pinned memory or host-&gt;device transfers.</li>
      * </ul>
      * 
      * <p>All of these flags are orthogonal to one another: a developer may allocate memory that is portable, mapped and/or write-combined with no restrictions.</p>
@@ -5350,7 +5350,7 @@ public class CU {
      * <p>IPC functionality is restricted to devices with support for unified addressing on Linux and Windows operating systems. IPC functionality on Windows is
      * restricted to GPUs in TCC mode.</p>
      *
-     * @param pHandle pointer to a user allocated {@link CUipcEventHandle} in which to return the opaque event handle
+     * @param pHandle pointer to a user allocated {@code CUipcEventHandle} in which to return the opaque event handle
      * @param event   event allocated with {@link #CU_EVENT_INTERPROCESS EVENT_INTERPROCESS} and {@link #CU_EVENT_DISABLE_TIMING EVENT_DISABLE_TIMING} flags
      */
     @NativeType("CUresult")
@@ -5393,7 +5393,7 @@ public class CU {
      * <p>IPC functionality is restricted to devices with support for unified addressing on Linux and Windows operating systems. IPC functionality on Windows is
      * restricted to GPUs in TCC mode.</p>
      *
-     * @param pHandle pointer to user allocated {@link CUipcMemHandle} to return the handle in
+     * @param pHandle pointer to user allocated {@code CUipcMemHandle} to return the handle in
      * @param dptr    base pointer to previously allocated device memory
      */
     @NativeType("CUresult")
@@ -6284,7 +6284,7 @@ public class CU {
      * <p>{@link #cuMemcpy2D Memcpy2D} returns an error if any pitch is greater than the maximum allowed ({@link #CU_DEVICE_ATTRIBUTE_MAX_PITCH DEVICE_ATTRIBUTE_MAX_PITCH}). {@link #cuMemAllocPitch MemAllocPitch} passes back pitches that
      * always work with {@code cuMemcpy2D()}. On intra-device memory copies (device to device, CUDA array to device, CUDA array to CUDA array),
      * {@code cuMemcpy2D()} may fail for pitches not computed by {@code cuMemAllocPitch()}. {@code cuMemcpy2DUnaligned()} does not have this restriction, but
-     * may run significantly slower in the cases where {@code cuMemcpy2D()} would have returned an error code.</p></h3>
+     * may run significantly slower in the cases where {@code cuMemcpy2D()} would have returned an error code.</p>
      *
      * @param pCopy parameters for the memory copy
      */
@@ -16049,7 +16049,7 @@ public class CU {
      * {@code cuIpcOpenMemHandle} can attempt to enable peer access between the devices as if the user called {@link #cuCtxEnablePeerAccess CtxEnablePeerAccess}. This behavior is controlled
      * by the {@link #CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS IPC_MEM_LAZY_ENABLE_PEER_ACCESS} flag. {@link #cuDeviceCanAccessPeer DeviceCanAccessPeer} can determine if a mapping is possible.</p>
      * 
-     * <p>Contexts that may open {@link CUipcMemHandle}s are restricted in the following way. {@code CUipcMemHandles} from each {@code CUdevice} in a given process may
+     * <p>Contexts that may open {@link CUIPCMemHandle}s are restricted in the following way. {@code CUipcMemHandles} from each {@code CUdevice} in a given process may
      * only be opened by one {@code CUcontext} per {@code CUdevice} per other process.</p>
      * 
      * <p>If the memory handle has already been opened by the current context, the reference count on the handle is incremented by 1 and the existing device
