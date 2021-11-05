@@ -10,7 +10,7 @@ import ovr.*
 val OVR = "OVR".nativeClass(Module.OVR, prefixMethod = "ovr_", prefixConstant = "ovr") {
     nativeDirective(
         """DISABLE_WARNINGS()
-#include "OVR_CAPIShim.c"
+#include "OVR_CAPI.h"
 ENABLE_WARNINGS()""")
 
     documentation =

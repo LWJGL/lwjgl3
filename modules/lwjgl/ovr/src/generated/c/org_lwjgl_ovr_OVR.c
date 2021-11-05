@@ -5,7 +5,7 @@
  */
 #include "common_tools.h"
 DISABLE_WARNINGS()
-#include "OVR_CAPIShim.c"
+#include "OVR_CAPI.h"
 ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
