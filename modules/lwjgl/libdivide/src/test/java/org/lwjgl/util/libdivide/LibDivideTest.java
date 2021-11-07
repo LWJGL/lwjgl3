@@ -244,7 +244,7 @@ public class LibDivideTest {
                 short d;
                 do {
                     d = (short)rand.nextInt();
-                } while (skipOne && d == 1);
+                } while (d == 0 || (skipOne && d == 1));
 
                 test16(magic, genRef, gen, d);
                 for (int j = Short.MIN_VALUE; j <= Short.MAX_VALUE; j++) { // test all
@@ -323,7 +323,7 @@ public class LibDivideTest {
                 int d;
                 do {
                     d = rand.nextInt();
-                } while (skipOne && d == 1);
+                } while (d == 0 || (skipOne && d == 1));
 
                 test32(magic, genRef, gen, d);
                 for (int j = 0; j < RANDOM_NUMERS; j++) {
@@ -402,7 +402,7 @@ public class LibDivideTest {
                 long d;
                 do {
                     d = rand.nextLong();
-                } while (skipOne && d == 1L);
+                } while (d == 0L || (skipOne && d == 1L));
 
                 test64(magic, genRef, gen, d);
                 for (int j = 0; j < RANDOM_NUMERS; j++) {
