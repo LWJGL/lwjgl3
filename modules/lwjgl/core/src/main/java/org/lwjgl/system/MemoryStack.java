@@ -164,6 +164,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      */
     @Override
     public void close() {
+        //noinspection resource
         pop();
     }
 
@@ -649,11 +650,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public ByteBuffer ASCII(CharSequence text, boolean nullTerminated) {
         int  length = memLengthASCII(text, nullTerminated);
         long target = nmalloc(1, length);
-        if (BITS64) {
-            encodeASCIIUnsafe64(text, nullTerminated, target);
-        } else {
-            encodeASCIIUnsafe32(text, nullTerminated, (int)target);
-        }
+        encodeASCIIUnsafe(text, nullTerminated, target);
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
@@ -667,9 +664,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      */
     public int nASCII(CharSequence text, boolean nullTerminated) {
         long target = nmalloc(1, memLengthASCII(text, nullTerminated));
-        return BITS64
-            ? encodeASCIIUnsafe64(text, nullTerminated, target)
-            : encodeASCIIUnsafe32(text, nullTerminated, (int)target);
+        return encodeASCIIUnsafe(text, nullTerminated, target);
     }
 
     /** Like {@link #ASCII(CharSequence) ASCII}, but returns {@code null} if {@code text} is {@code null}. */
@@ -707,11 +702,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public ByteBuffer UTF8(CharSequence text, boolean nullTerminated) {
         int  length = memLengthUTF8(text, nullTerminated);
         long target = nmalloc(1, length);
-        if (BITS64) {
-            encodeUTF8Unsafe64(text, nullTerminated, target);
-        } else {
-            encodeUTF8Unsafe32(text, nullTerminated, (int)target);
-        }
+        encodeUTF8Unsafe(text, nullTerminated, target);
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
@@ -725,9 +716,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      */
     public int nUTF8(CharSequence text, boolean nullTerminated) {
         long target = nmalloc(1, memLengthUTF8(text, nullTerminated));
-        return BITS64
-            ? encodeUTF8Unsafe64(text, nullTerminated, target)
-            : encodeUTF8Unsafe32(text, nullTerminated, (int)target);
+        return encodeUTF8Unsafe(text, nullTerminated, target);
     }
 
     /** Like {@link #UTF8(CharSequence) UTF8}, but returns {@code null} if {@code text} is {@code null}. */
@@ -765,11 +754,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     public ByteBuffer UTF16(CharSequence text, boolean nullTerminated) {
         int  length = memLengthUTF16(text, nullTerminated);
         long target = nmalloc(2, length);
-        if (BITS64) {
-            encodeUTF16Unsafe64(text, nullTerminated, target);
-        } else {
-            encodeUTF16Unsafe32(text, nullTerminated, (int)target);
-        }
+        encodeUTF16Unsafe(text, nullTerminated, target);
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
 
@@ -783,9 +768,7 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
      */
     public int nUTF16(CharSequence text, boolean nullTerminated) {
         long target = nmalloc(2, memLengthUTF16(text, nullTerminated));
-        return BITS64
-            ? encodeUTF16Unsafe64(text, nullTerminated, target)
-            : encodeUTF16Unsafe32(text, nullTerminated, (int)target);
+        return encodeUTF16Unsafe(text, nullTerminated, target);
     }
 
     /** Like {@link #UTF16(CharSequence) UTF16}, but returns {@code null} if {@code text} is {@code null}. */
