@@ -59,9 +59,9 @@ public final class Vorbis implements AutoCloseable {
 
     private final long window;
 
-    private int
-        clientW = 640,
-        clientH = 320;
+    private float
+        clientW,
+        clientH;
 
     private int
         framebufferW,
@@ -108,27 +108,25 @@ public final class Vorbis implements AutoCloseable {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
         glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
+        glfwWindowHint(GLFW_SAMPLES, 8);
         if (Platform.get() == Platform.MACOSX) {
             glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE);
         }
 
-        window = glfwCreateWindow(clientW, clientH, "stb_vorbis demo", NULL, NULL);
+        window = glfwCreateWindow(640, 320, "stb_vorbis demo", NULL, NULL);
         if (window == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
+        }
+        try (MemoryStack s = stackPush()) {
+            IntBuffer pw = s.mallocInt(1);
+            IntBuffer ph = s.mallocInt(1);
+
+            glfwGetFramebufferSize(window, pw, ph);
+            changedFramebufferSize(window, pw.get(0), ph.get(0));
         }
 
         // Center window
         long monitor = glfwGetPrimaryMonitor();
-
-        try (MemoryStack s = stackPush()) {
-            FloatBuffer px = s.mallocFloat(1);
-            FloatBuffer py = s.mallocFloat(1);
-
-            glfwGetMonitorContentScale(monitor, px, py);
-
-            scaleX = px.get(0);
-            scaleY = py.get(0);
-        }
 
         GLFWVidMode vidmode = Objects.requireNonNull(glfwGetVideoMode(monitor));
         glfwSetWindowPos(
@@ -137,27 +135,7 @@ public final class Vorbis implements AutoCloseable {
             (vidmode.height() - (int)(clientH * scaleY)) / 2
         );
 
-        glfwSetFramebufferSizeCallback(window, (window, width, height) -> {
-            this.framebufferW = width;
-            this.framebufferH = height;
-
-            try (MemoryStack s = stackPush()) {
-                FloatBuffer px = s.mallocFloat(1);
-                FloatBuffer py = s.mallocFloat(1);
-
-                glfwGetWindowContentScale(window, px, py);
-
-                if (scaleX != px.get(0) || scaleY != py.get(0)) {
-                    scaleX = px.get(0);
-                    scaleY = py.get(0);
-
-                    System.out.println("New content scale: " + scaleX + " x " + scaleY);
-                }
-            }
-
-            this.clientW = round(width / scaleX);
-            this.clientH = round(height / scaleY);
-        });
+        glfwSetFramebufferSizeCallback(window, this::changedFramebufferSize);
 
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
             if (action == GLFW_RELEASE) {
@@ -204,6 +182,28 @@ public final class Vorbis implements AutoCloseable {
                 seek(track, cursorX, cursorY);
             }
         });
+    }
+
+    private void changedFramebufferSize(long window, int width, int height) {
+        this.framebufferW = width;
+        this.framebufferH = height;
+
+        try (MemoryStack s = stackPush()) {
+            FloatBuffer px = s.mallocFloat(1);
+            FloatBuffer py = s.mallocFloat(1);
+
+            glfwGetWindowContentScale(window, px, py);
+
+            if (scaleX != px.get(0) || scaleY != py.get(0)) {
+                scaleX = px.get(0);
+                scaleY = py.get(0);
+
+                System.out.println("New content scale: " + scaleX + " x " + scaleY);
+            }
+        }
+
+        this.clientW = width / scaleX;
+        this.clientH = height / scaleY;
     }
 
     @Override
@@ -646,7 +646,7 @@ public final class Vorbis implements AutoCloseable {
 
         void render(
             int framebufferW, int framebufferH,
-            int clientW, int clientH,
+            float clientW, float clientH,
             float progress, float progressTime
         ) {
             glViewport(0, 0, framebufferW, framebufferH);
