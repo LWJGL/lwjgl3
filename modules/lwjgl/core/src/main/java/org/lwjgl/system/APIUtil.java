@@ -285,9 +285,6 @@ public final class APIUtil {
             return;
         }
 
-        System.err.println(value);
-        System.err.println(value.getClass());
-
         if (value instanceof String) {
             String s = (String)value;
             if (s.indexOf('.') != -1) { // classpath
@@ -634,13 +631,13 @@ public final class APIUtil {
         return Platform.get() == Platform.WINDOWS && Pointer.BITS32 ? FFI_STDCALL : FFI_DEFAULT_ABI;
     }
 
-    public static void apiClosureRet(long ret, boolean __result) {memPutAddress(ret, __result ? 1L : 0L);}
-    public static void apiClosureRet(long ret, byte __result)    {memPutAddress(ret, __result & 0xFFL);}
-    public static void apiClosureRet(long ret, short __result)   {memPutAddress(ret, __result & 0xFFFFL);}
-    public static void apiClosureRet(long ret, int __result)     {memPutAddress(ret, __result & 0xFFFF_FFFFL);}
-    public static void apiClosureRetL(long ret, long __result)   {memPutLong(ret, __result);}
-    public static void apiClosureRetP(long ret, long __result)   {memPutAddress(ret, __result);}
-    public static void apiClosureRet(long ret, float __result)   {memPutFloat(ret, __result);}
-    public static void apiClosureRet(long ret, double __result)  {memPutDouble(ret, __result);}
+    public static void apiClosureRet(long ret, boolean __result) { memPutAddress(ret, __result ? 1L : 0L); }
+    public static void apiClosureRet(long ret, byte __result)    { memPutAddress(ret, __result & 0xFFL); }
+    public static void apiClosureRet(long ret, short __result)   { memPutAddress(ret, __result & 0xFFFFL); }
+    public static void apiClosureRet(long ret, int __result)     { memPutAddress(ret, __result & 0xFFFF_FFFFL); }
+    public static void apiClosureRetL(long ret, long __result)   { memPutLong(ret, __result); }
+    public static void apiClosureRetP(long ret, long __result)   { memPutAddress(ret, __result); }
+    public static void apiClosureRet(long ret, float __result)   { memPutFloat(ret, __result); }
+    public static void apiClosureRet(long ret, double __result)  { memPutDouble(ret, __result); }
 
 }
