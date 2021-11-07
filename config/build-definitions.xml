@@ -19,21 +19,33 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         Valid values: x64, x86, arm64, arm32
     -->
     <property name="build.arch" value="${env.LWJGL_BUILD_ARCH}" if:set="env.LWJGL_BUILD_ARCH"/>
-    <condition property="build.arch" value="x64" else="x86" unless:set="build.arch"> <!-- Normalize os.arch -->
-        <contains string="${os.arch}" substring="64"/>
+
+    <local name="is64Bit"/>
+    <condition property="is64Bit" value="true" else="false">
+        <or>
+            <contains string="${os.arch}" substring="64"/>
+            <contains string="${os.arch}" substring="armv8"/>
+        </or>
     </condition>
+    <condition property="build.arch.arm" value="true">
+        <or>
+            <contains string="${build.arch}" substring="arm"/>
+            <contains string="${os.arch}"    substring="arm"/>
+            <contains string="${os.arch}"    substring="aarch64"/>
+        </or>
+    </condition>
+
+    <!-- Normalize os.arch -->
+    <condition property="build.arch" value="arm64" unless:set="build.arch"><and>     <isset property="build.arch.arm"/>      <istrue  value="${is64Bit}"/></and></condition>
+    <condition property="build.arch" value="arm32" unless:set="build.arch"><and>     <isset property="build.arch.arm"/>      <isfalse value="${is64Bit}"/></and></condition>
+    <condition property="build.arch" value="x64"   unless:set="build.arch"><and><not><isset property="build.arch.arm"/></not><istrue  value="${is64Bit}"/></and></condition>
+    <condition property="build.arch" value="x86"   unless:set="build.arch"><and><not><isset property="build.arch.arm"/></not><isfalse value="${is64Bit}"/></and></condition>
 
     <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32">
         <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32)$"/></not></condition>
     </fail>
 
     <property name="build.arch.${build.arch}" value="true"/>
-    <condition property="build.arch.arm" value="true">
-        <or>
-            <isset property="build.arch.arm64"/>
-            <isset property="build.arch.arm32"/>
-        </or>
-    </condition>
 
     <!--
     This is used as the source of binary dependencies. Valid values:
@@ -79,7 +91,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="bin.ant" location="bin/classes/ant" relative="true"/>
     <property name="bin.extract" location="bin/classes/extract" relative="true"/>
     <property name="bin.generator" location="bin/classes/generator" relative="true"/>
-    <property name="bin.javadoc" location="bin/javadoc" relative="true"/>
+    <property name="bin.javadoc" location="../lwjgl3-javadoc/public" relative="true"/>
     <property name="bin.lwjgl" location="bin/classes/lwjgl" relative="true"/>
     <property name="bin.samples" location="bin/classes/samples" relative="true"/>
     <property name="bin.templates" location="bin/classes/templates" relative="true"/>
