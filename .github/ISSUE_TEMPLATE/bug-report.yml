@@ -1,6 +1,5 @@
 name: Bug Report
 description: Report an LWJGL bug
-labels: ["Type: Bug"]
 body:
   - type: dropdown
     id: lwjgl-version
