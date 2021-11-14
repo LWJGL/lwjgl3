@@ -296,9 +296,17 @@ val bgfx_fatal_t = "bgfx_fatal_t".enumType
 
 private val _bgfx_callback_interface_t = struct(Module.BGFX, "BGFXCallbackInterface", nativeName = "bgfx_callback_interface_t")
 val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = "bgfx_callback_vtbl_t", skipBuffer = true) {
-    documentation = "Callback virtual table."
+    documentation =
+        """
+        Callback virtual table.
+        
+        <b>LWJGL note</b>: The bgfx build bundled with LWJGL will never invoke the {@code fatal}, {@code trace_vargs}, {@code profiler_begin},
+        {@code profiler_begin_literal}, {@code profiler_end} callbacks, so they may be #NULL. When using a custom build with {@code BGFX_CONFIG_DEBUG}
+        ({@code Debug} configuration) and/or {@code BGFX_CONFIG_PROFILER} ({@code --with-profiler} build option), the corresponding callbacks should not be
+        #NULL.
+        """
 
-    Module.BGFX.callback {
+    nullable..Module.BGFX.callback {
         void(
             "BGFXFatalCallback",
             "This callback is called on unrecoverable errors.",
@@ -318,7 +326,7 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
                 """
         }
     }("fatal", "the fatal error callback")
-    Module.BGFX.callback {
+    nullable..Module.BGFX.callback {
         void(
             "BGFXTraceVarArgsCallback",
             "Will be called when a debug message is produced.",
@@ -337,7 +345,7 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
                 """
         }
     }("trace_vargs", "the debug message callback")
-    Module.BGFX.callback {
+    nullable..Module.BGFX.callback {
         void(
             "BGFXProfilerBegin",
             """
@@ -355,7 +363,7 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
             documentation = "Profiler region begin."
         }
     }("profiler_begin", "the profiler begin callback")
-    Module.BGFX.callback {
+    nullable..Module.BGFX.callback {
         void(
             "BGFXProfilerBeginLiteral",
             """
@@ -373,7 +381,7 @@ val bgfx_callback_vtbl_t = struct(Module.BGFX, "BGFXCallbackVtbl", nativeName = 
             documentation = "Profiler region begin with string literal name."
         }
     }("profiler_begin_literal", "the profiler begin literal callback")
-    Module.BGFX.callback {
+    nullable..Module.BGFX.callback {
         void(
             "BGFXProfilerEnd",
             """

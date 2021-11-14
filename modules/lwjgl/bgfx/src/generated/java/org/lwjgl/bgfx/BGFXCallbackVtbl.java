@@ -19,6 +19,11 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Callback virtual table.
  * 
+ * <p><b>LWJGL note</b>: The bgfx build bundled with LWJGL will never invoke the {@code fatal}, {@code trace_vargs}, {@code profiler_begin},
+ * {@code profiler_begin_literal}, {@code profiler_end} callbacks, so they may be {@code NULL}. When using a custom build with {@code BGFX_CONFIG_DEBUG}
+ * ({@code Debug} configuration) and/or {@code BGFX_CONFIG_PROFILER} ({@code --with-profiler} build option), the corresponding callbacks should not be
+ * {@code NULL}.</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -108,18 +113,23 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
     public int sizeof() { return SIZEOF; }
 
     /** the fatal error callback */
+    @Nullable
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, bgfx_fatal_t, char const *)")
     public BGFXFatalCallback fatal() { return nfatal(address()); }
     /** the debug message callback */
+    @Nullable
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, char const *, va_list)")
     public BGFXTraceVarArgsCallback trace_vargs() { return ntrace_vargs(address()); }
     /** the profiler begin callback */
+    @Nullable
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)")
     public BGFXProfilerBegin profiler_begin() { return nprofiler_begin(address()); }
     /** the profiler begin literal callback */
+    @Nullable
     @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)")
     public BGFXProfilerBeginLiteral profiler_begin_literal() { return nprofiler_begin_literal(address()); }
     /** the profiler end callback */
+    @Nullable
     @NativeType("void (*) (bgfx_callback_interface_t *)")
     public BGFXProfilerEnd profiler_end() { return nprofiler_end(address()); }
     /** the cache read size callback */
@@ -145,15 +155,15 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
     public BGFXCaptureFrameCallback capture_frame() { return ncapture_frame(address()); }
 
     /** Sets the specified value to the {@link #fatal} field. */
-    public BGFXCallbackVtbl fatal(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, bgfx_fatal_t, char const *)") BGFXFatalCallbackI value) { nfatal(address(), value); return this; }
+    public BGFXCallbackVtbl fatal(@Nullable @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, bgfx_fatal_t, char const *)") BGFXFatalCallbackI value) { nfatal(address(), value); return this; }
     /** Sets the specified value to the {@link #trace_vargs} field. */
-    public BGFXCallbackVtbl trace_vargs(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, char const *, va_list)") BGFXTraceVarArgsCallbackI value) { ntrace_vargs(address(), value); return this; }
+    public BGFXCallbackVtbl trace_vargs(@Nullable @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint16_t, char const *, va_list)") BGFXTraceVarArgsCallbackI value) { ntrace_vargs(address(), value); return this; }
     /** Sets the specified value to the {@link #profiler_begin} field. */
-    public BGFXCallbackVtbl profiler_begin(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)") BGFXProfilerBeginI value) { nprofiler_begin(address(), value); return this; }
+    public BGFXCallbackVtbl profiler_begin(@Nullable @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)") BGFXProfilerBeginI value) { nprofiler_begin(address(), value); return this; }
     /** Sets the specified value to the {@link #profiler_begin_literal} field. */
-    public BGFXCallbackVtbl profiler_begin_literal(@NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)") BGFXProfilerBeginLiteralI value) { nprofiler_begin_literal(address(), value); return this; }
+    public BGFXCallbackVtbl profiler_begin_literal(@Nullable @NativeType("void (*) (bgfx_callback_interface_t *, char const *, uint32_t, char const *, uint16_t)") BGFXProfilerBeginLiteralI value) { nprofiler_begin_literal(address(), value); return this; }
     /** Sets the specified value to the {@link #profiler_end} field. */
-    public BGFXCallbackVtbl profiler_end(@NativeType("void (*) (bgfx_callback_interface_t *)") BGFXProfilerEndI value) { nprofiler_end(address(), value); return this; }
+    public BGFXCallbackVtbl profiler_end(@Nullable @NativeType("void (*) (bgfx_callback_interface_t *)") BGFXProfilerEndI value) { nprofiler_end(address(), value); return this; }
     /** Sets the specified value to the {@link #cache_read_size} field. */
     public BGFXCallbackVtbl cache_read_size(@NativeType("uint32_t (*) (bgfx_callback_interface_t *, uint64_t)") BGFXCacheReadSizeCallbackI value) { ncache_read_size(address(), value); return this; }
     /** Sets the specified value to the {@link #cache_read} field. */
@@ -274,15 +284,15 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
     // -----------------------------------
 
     /** Unsafe version of {@link #fatal}. */
-    public static BGFXFatalCallback nfatal(long struct) { return BGFXFatalCallback.create(memGetAddress(struct + BGFXCallbackVtbl.FATAL)); }
+    @Nullable public static BGFXFatalCallback nfatal(long struct) { return BGFXFatalCallback.createSafe(memGetAddress(struct + BGFXCallbackVtbl.FATAL)); }
     /** Unsafe version of {@link #trace_vargs}. */
-    public static BGFXTraceVarArgsCallback ntrace_vargs(long struct) { return BGFXTraceVarArgsCallback.create(memGetAddress(struct + BGFXCallbackVtbl.TRACE_VARGS)); }
+    @Nullable public static BGFXTraceVarArgsCallback ntrace_vargs(long struct) { return BGFXTraceVarArgsCallback.createSafe(memGetAddress(struct + BGFXCallbackVtbl.TRACE_VARGS)); }
     /** Unsafe version of {@link #profiler_begin}. */
-    public static BGFXProfilerBegin nprofiler_begin(long struct) { return BGFXProfilerBegin.create(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN)); }
+    @Nullable public static BGFXProfilerBegin nprofiler_begin(long struct) { return BGFXProfilerBegin.createSafe(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN)); }
     /** Unsafe version of {@link #profiler_begin_literal}. */
-    public static BGFXProfilerBeginLiteral nprofiler_begin_literal(long struct) { return BGFXProfilerBeginLiteral.create(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN_LITERAL)); }
+    @Nullable public static BGFXProfilerBeginLiteral nprofiler_begin_literal(long struct) { return BGFXProfilerBeginLiteral.createSafe(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN_LITERAL)); }
     /** Unsafe version of {@link #profiler_end}. */
-    public static BGFXProfilerEnd nprofiler_end(long struct) { return BGFXProfilerEnd.create(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_END)); }
+    @Nullable public static BGFXProfilerEnd nprofiler_end(long struct) { return BGFXProfilerEnd.createSafe(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_END)); }
     /** Unsafe version of {@link #cache_read_size}. */
     public static BGFXCacheReadSizeCallback ncache_read_size(long struct) { return BGFXCacheReadSizeCallback.create(memGetAddress(struct + BGFXCallbackVtbl.CACHE_READ_SIZE)); }
     /** Unsafe version of {@link #cache_read}. */
@@ -299,15 +309,15 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
     public static BGFXCaptureFrameCallback ncapture_frame(long struct) { return BGFXCaptureFrameCallback.create(memGetAddress(struct + BGFXCallbackVtbl.CAPTURE_FRAME)); }
 
     /** Unsafe version of {@link #fatal(BGFXFatalCallbackI) fatal}. */
-    public static void nfatal(long struct, BGFXFatalCallbackI value) { memPutAddress(struct + BGFXCallbackVtbl.FATAL, value.address()); }
+    public static void nfatal(long struct, @Nullable BGFXFatalCallbackI value) { memPutAddress(struct + BGFXCallbackVtbl.FATAL, memAddressSafe(value)); }
     /** Unsafe version of {@link #trace_vargs(BGFXTraceVarArgsCallbackI) trace_vargs}. */
-    public static void ntrace_vargs(long struct, BGFXTraceVarArgsCallbackI value) { memPutAddress(struct + BGFXCallbackVtbl.TRACE_VARGS, value.address()); }
+    public static void ntrace_vargs(long struct, @Nullable BGFXTraceVarArgsCallbackI value) { memPutAddress(struct + BGFXCallbackVtbl.TRACE_VARGS, memAddressSafe(value)); }
     /** Unsafe version of {@link #profiler_begin(BGFXProfilerBeginI) profiler_begin}. */
-    public static void nprofiler_begin(long struct, BGFXProfilerBeginI value) { memPutAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN, value.address()); }
+    public static void nprofiler_begin(long struct, @Nullable BGFXProfilerBeginI value) { memPutAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN, memAddressSafe(value)); }
     /** Unsafe version of {@link #profiler_begin_literal(BGFXProfilerBeginLiteralI) profiler_begin_literal}. */
-    public static void nprofiler_begin_literal(long struct, BGFXProfilerBeginLiteralI value) { memPutAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN_LITERAL, value.address()); }
+    public static void nprofiler_begin_literal(long struct, @Nullable BGFXProfilerBeginLiteralI value) { memPutAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN_LITERAL, memAddressSafe(value)); }
     /** Unsafe version of {@link #profiler_end(BGFXProfilerEndI) profiler_end}. */
-    public static void nprofiler_end(long struct, BGFXProfilerEndI value) { memPutAddress(struct + BGFXCallbackVtbl.PROFILER_END, value.address()); }
+    public static void nprofiler_end(long struct, @Nullable BGFXProfilerEndI value) { memPutAddress(struct + BGFXCallbackVtbl.PROFILER_END, memAddressSafe(value)); }
     /** Unsafe version of {@link #cache_read_size(BGFXCacheReadSizeCallbackI) cache_read_size}. */
     public static void ncache_read_size(long struct, BGFXCacheReadSizeCallbackI value) { memPutAddress(struct + BGFXCallbackVtbl.CACHE_READ_SIZE, value.address()); }
     /** Unsafe version of {@link #cache_read(BGFXCacheReadCallbackI) cache_read}. */
@@ -329,11 +339,6 @@ public class BGFXCallbackVtbl extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + BGFXCallbackVtbl.FATAL));
-        check(memGetAddress(struct + BGFXCallbackVtbl.TRACE_VARGS));
-        check(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN));
-        check(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_BEGIN_LITERAL));
-        check(memGetAddress(struct + BGFXCallbackVtbl.PROFILER_END));
         check(memGetAddress(struct + BGFXCallbackVtbl.CACHE_READ_SIZE));
         check(memGetAddress(struct + BGFXCallbackVtbl.CACHE_READ));
         check(memGetAddress(struct + BGFXCallbackVtbl.CACHE_WRITE));
