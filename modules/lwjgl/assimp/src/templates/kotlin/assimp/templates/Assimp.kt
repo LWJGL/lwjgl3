@@ -515,6 +515,16 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Importers which parse JSON may use this to obtain a pointer to a {@code rapidjson::IRemoteSchemaDocumentProvider}.
+
+        Property type: void*. The default value is {@code nullptr}
+        """,
+
+        "AI_CONFIG_IMPORT_SCHEMA_DOCUMENT_PROVIDER".."IMPORT_SCHEMA_DOCUMENT_PROVIDER"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Set whether the fbx importer will merge all geometry layers present in the source file or take only the first.
 
         Property type: bool. The default value is true (1)

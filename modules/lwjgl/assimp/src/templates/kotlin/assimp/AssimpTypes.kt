@@ -360,15 +360,17 @@ val aiAnimMesh = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnim
     )..unsigned_int(
         "mNumVertices",
         """
-        The number of vertices in the {@code aiAnimMesh}, and thus the length of all the member arrays. This has always the same value as the
-        {@code mNumVertices} property in the corresponding ##AIMesh. It is duplicated here merely to make the length of the member arrays accessible even if
-        the {@code aiMesh} is not known, e.g. from language bindings.
+        The number of vertices in the {@code aiAnimMesh}, and thus the length of all the member arrays.
+        
+        This has always the same value as the {@code mNumVertices} property in the corresponding ##AIMesh. It is duplicated here merely to make the length of
+        the member arrays accessible even if the {@code aiMesh} is not known, e.g. from language bindings.
         """
     )
     float("mWeight", "Weight of the {@code AnimMesh}.")
 }
 
 val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
+    javaImport("static org.lwjgl.assimp.Assimp.*")
     documentation =
         """
         A mesh represents a geometry or model with a single material.
@@ -389,7 +391,7 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         """
     ).links("PrimitiveType_\\w+", LinkMode.BITFIELD)
     AutoSize(
-        "mVertices", "mNormals", "mTangents", "mBitangents", "mTextureCoordsNames"
+        "mVertices", "mNormals", "mTangents", "mBitangents"
     )..AutoSizeIndirect(
         "mColors", "mTextureCoords"
     )..unsigned_int(
@@ -450,15 +452,14 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         Vertex color sets. A mesh may contain 0 to #AI_MAX_NUMBER_OF_COLOR_SETS vertex colors per vertex. #NULL if not present. Each array is
         {@code mNumVertices} in size if present.
         """
-    )["Assimp.AI_MAX_NUMBER_OF_COLOR_SETS"]
+    )["AI_MAX_NUMBER_OF_COLOR_SETS"]
     nullable..aiVector3D.p(
         "mTextureCoords",
         """
         Vertex texture coordinates, also known as UV channels. A mesh may contain 0 to #AI_MAX_NUMBER_OF_TEXTURECOORDS per vertex. #NULL if not present. The
         array is {@code mNumVertices} in size.
         """
-    )["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
-    aiString("mTextureCoordsNames", "Vertex stream names.")["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"];
+    )["AI_MAX_NUMBER_OF_TEXTURECOORDS"]
     unsigned_int(
         "mNumUVComponents",
         """
@@ -468,7 +469,7 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
         
         Note: 4D coordinates are not supported.
         """
-    )["Assimp.AI_MAX_NUMBER_OF_TEXTURECOORDS"]
+    )["AI_MAX_NUMBER_OF_TEXTURECOORDS"]
     aiFace.p(
         "mFaces",
         """
@@ -521,6 +522,10 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
     )
     unsigned_int("mMethod", "Method of morphing when anim-meshes are specified.").links("MorphingMethod_\\w+")
     aiAABB("mAABB", "the bounding box")
+    Check("AI_MAX_NUMBER_OF_TEXTURECOORDS")..nullable..aiString.p.p(
+        "mTextureCoordsNames",
+        "Vertex UV stream names. Pointer to array of size #AI_MAX_NUMBER_OF_TEXTURECOORDS."
+    )
 }
 
 val aiUVTransform = struct(Module.ASSIMP, "AIUVTransform", nativeName = "struct aiUVTransform", mutable = false) {

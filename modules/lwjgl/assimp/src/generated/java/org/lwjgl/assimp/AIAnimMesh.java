@@ -137,9 +137,10 @@ public class AIAnimMesh extends Struct implements NativeResource {
     @NativeType("struct aiVector3D *")
     public AIVector3D.Buffer mTextureCoords(int index) { return nmTextureCoords(address(), index); }
     /**
-     * The number of vertices in the {@code aiAnimMesh}, and thus the length of all the member arrays. This has always the same value as the
-     * {@code mNumVertices} property in the corresponding {@link AIMesh}. It is duplicated here merely to make the length of the member arrays accessible even if
-     * the {@code aiMesh} is not known, e.g. from language bindings.
+     * The number of vertices in the {@code aiAnimMesh}, and thus the length of all the member arrays.
+     * 
+     * <p>This has always the same value as the {@code mNumVertices} property in the corresponding {@link AIMesh}. It is duplicated here merely to make the length of
+     * the member arrays accessible even if the {@code aiMesh} is not known, e.g. from language bindings.</p>
      */
     @NativeType("unsigned int")
     public int mNumVertices() { return nmNumVertices(address()); }
