@@ -83,6 +83,28 @@ class AutoSizeIndirect(
     }
 }
 
+/** Adds a capacity check to a buffer parameter. */
+class Check(
+    /** An integer expression to validate against the buffer capacity. */
+    val expression: String,
+    /** If true, the check will only be performed in debug mode. Useful for expensive checks. */
+    val debug: Boolean = false
+) : MemberParamModifier {
+    override val isSpecial = expression != "0"
+    override fun validate(param: Parameter) {
+        require(param.nativeType is PointerType<*>) {
+            "The Check modifier can only be applied to pointer types."
+        }
+
+        require(param.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) {
+            "The Check modifier cannot be applied to opaque pointer types."
+        }
+    }
+}
+
+/** Factory method for Check modifiers with integer expressions. */
+fun Check(value: Int) = Check(value.toString())
+
 /** Marks an array member as terminated by the specified value. */
 class TerminatedMember(val value: String) : StructMemberModifier {
     override val isSpecial = true

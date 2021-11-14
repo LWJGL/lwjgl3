@@ -538,7 +538,7 @@ $indent}"""
         it.has<T>(reference)
     } // Assumes at most 1 parameter will be found that references the specified parameter
 
-    private fun getAutoSizeExpression(reference: String)= members
+    private fun getAutoSizeExpression(reference: String) = members
         .filter { it.has<AutoSizeMember>(reference) }
         .joinToString(" * ") { it.autoSize }
         .run {
@@ -547,6 +547,8 @@ $indent}"""
             else
                 this
         }
+
+    private fun StructMember.getCheckExpression() = if (this.has<Check>()) this.get<Check>().expression else null
 
     private fun PrintWriter.printDocumentation() {
         val builder = StringBuilder()
@@ -2036,7 +2038,7 @@ ${validations.joinToString("\n")}
                         }
                     } else if (it.nativeType is CharType) {
                         val mapping = it.nativeType.mapping
-                        val capacity = getAutoSizeExpression(it.name)
+                        val capacity = getAutoSizeExpression(it.name) ?: it.getCheckExpression()
                         val byteSize = capacity ?: if (mapping.bytes == 1) it.size else "${it.size} * ${mapping.bytes}"
 
                         if (it.public)
@@ -2077,7 +2079,7 @@ ${validations.joinToString("\n")}
                         if (it.public)
                             println("$t/** Unsafe version of {@link #$getter}. */")
                         println(if (it.isStructBuffer) {
-                            val capacity = getAutoSizeExpression(it.name)
+                            val capacity = getAutoSizeExpression(it.name) ?: it.getCheckExpression()
 
                             if (capacity == null)
                                 "$t${it.nullable("public")} static $returnType.Buffer n$getter(long $STRUCT, int $BUFFER_CAPACITY_PARAM) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field), $BUFFER_CAPACITY_PARAM); }"
@@ -2087,7 +2089,7 @@ ${validations.joinToString("\n")}
                             "$t${it.nullable("public")} static $returnType n$getter(long $STRUCT) { return ${it.construct(returnType)}(memGetAddress($STRUCT + $field)); }"
                         )
                     } else {
-                        val capacity = getAutoSizeExpression(it.name)
+                        val capacity = getAutoSizeExpression(it.name) ?: it.getCheckExpression()
 
                         if (capacity == null) {
                             if (it.public)
@@ -2204,7 +2206,7 @@ ${validations.joinToString("\n")}
                     val returnType = it.nativeType.javaMethodType
                     if (it.nativeType.dereference is StructType) {
                         if (it.isStructBuffer) {
-                            if (getReferenceMember<AutoSizeMember>(it.name) == null) {
+                            if (getReferenceMember<AutoSizeMember>(it.name) == null && !it.has<Check>()) {
                                 printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType.Buffer} view of the struct array pointed to by the #member field.", getter, member, BUFFER_CAPACITY)
                                 generateGetterAnnotations(indent, it, "$returnType.Buffer")
                                 println("${indent}public $returnType.Buffer $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
@@ -2219,7 +2221,7 @@ ${validations.joinToString("\n")}
                             println("${indent}public $returnType $getter() { return $n$getter($ADDRESS); }")
                         }
                     } else {
-                        if (getReferenceMember<AutoSizeMember>(it.name) == null) {
+                        if (getReferenceMember<AutoSizeMember>(it.name) == null && !it.has<Check>()) {
                             printGetterJavadoc(accessMode, it, indent, "@return a {@link $returnType} view of the data pointed to by the #member field.", getter, member, BUFFER_CAPACITY)
                             generateGetterAnnotations(indent, it, returnType)
                             println("${indent}public $returnType $getter(int $BUFFER_CAPACITY_PARAM) { return $n$getter($ADDRESS, $BUFFER_CAPACITY_PARAM); }")
