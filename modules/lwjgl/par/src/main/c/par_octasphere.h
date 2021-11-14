@@ -223,6 +223,7 @@ static float* paro_write_geodesic(float* dst, const float point_a[3], const floa
     const float dtheta = angle_between_endpoints / num_segments;
     float rotation_axis[3], quat[4];
     paro_cross(rotation_axis, point_a, point_b);
+    paro_normalize(rotation_axis);
     for (int point_index = 1; point_index < num_segments; point_index++, dst += 3) {
         paro_quat_from_rotation(quat, rotation_axis, dtheta * point_index);
         paro_quat_rotate_vector(dst, quat, point_a);
