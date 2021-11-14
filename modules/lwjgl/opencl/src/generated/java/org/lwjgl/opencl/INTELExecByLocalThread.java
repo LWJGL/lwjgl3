@@ -6,7 +6,7 @@
 package org.lwjgl.opencl;
 
 /**
- * Native bindings to the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_thread_local_exec.txt">intel_thread_local_exec</a> extension.
+ * Native bindings to the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_exec_by_local_thread.txt">intel_exec_by_local_thread</a> extension.
  * 
  * <p>This extension allows the user to execute OpenCL tasks and kernels with the user application's threads. The extension defines a token that can be passed
  * to {@link CL10#clCreateCommandQueue CreateCommandQueue}, creating a queue with the "thread local exec" capability.</p>
@@ -25,11 +25,11 @@ package org.lwjgl.opencl;
  * queues will incur the minimal overhead of a function call and possibly an if-then-else to distinguish between a local command queue and a regular one.
  * {@link CL10#clEnqueueNDRangeKernel EnqueueNDRangeKernel} and {@link CL10#clEnqueueTask EnqueueTask} should have optimized implementations using a single execution thread.</p>
  */
-public final class INTELThreadLocalExec {
+public final class INTELExecByLocalThread {
 
     /** cl_command_queue_properties */
     public static final int CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL = 1 << 31;
 
-    private INTELThreadLocalExec() {}
+    private INTELExecByLocalThread() {}
 
 }

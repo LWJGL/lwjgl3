@@ -701,6 +701,8 @@ public class CLCapabilities {
     public final boolean cl_intel_driver_diagnostics;
     /** When true, {@link INTELEGLImageYUV} is supported. */
     public final boolean cl_intel_egl_image_yuv;
+    /** When true, {@link INTELExecByLocalThread} is supported. */
+    public final boolean cl_intel_exec_by_local_thread;
     /**
      * This extension augments the block read/write functionality available in the Intel vendor extensions {@link INTELSubgroups intel_subgroups} and
      * <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_subgroups_short.txt">intel_media_block_io</a> by the specification of additional built-in functions to facilitate the reading and writing of flexible 2D
@@ -793,8 +795,6 @@ public class CLCapabilities {
      * <p>Requires {@link CL12 OpenCL 1.2} and {@link INTELSubgroups intel_subgroups}.</p>
      */
     public final boolean cl_intel_subgroups_short;
-    /** When true, {@link INTELThreadLocalExec} is supported. */
-    public final boolean cl_intel_thread_local_exec;
     /** When true, {@link INTELVAAPIMediaSharing} is supported. */
     public final boolean cl_intel_va_api_media_sharing;
     /**
@@ -1706,6 +1706,7 @@ public class CLCapabilities {
         cl_intel_device_side_avc_motion_estimation = ext.contains("cl_intel_device_side_avc_motion_estimation");
         cl_intel_driver_diagnostics = ext.contains("cl_intel_driver_diagnostics");
         cl_intel_egl_image_yuv = ext.contains("cl_intel_egl_image_yuv");
+        cl_intel_exec_by_local_thread = ext.contains("cl_intel_exec_by_local_thread");
         cl_intel_media_block_io = ext.contains("cl_intel_media_block_io");
         cl_intel_mem_channel_property = ext.contains("cl_intel_mem_channel_property");
         cl_intel_mem_force_host_memory = ext.contains("cl_intel_mem_force_host_memory");
@@ -1723,7 +1724,6 @@ public class CLCapabilities {
         cl_intel_subgroups_char = ext.contains("cl_intel_subgroups_char");
         cl_intel_subgroups_long = ext.contains("cl_intel_subgroups_long");
         cl_intel_subgroups_short = ext.contains("cl_intel_subgroups_short");
-        cl_intel_thread_local_exec = ext.contains("cl_intel_thread_local_exec");
         cl_intel_va_api_media_sharing = check_intel_va_api_media_sharing(ext);
         cl_khr_3d_image_writes = ext.contains("cl_khr_3d_image_writes");
         cl_khr_async_work_group_copy_fence = ext.contains("cl_khr_async_work_group_copy_fence");
