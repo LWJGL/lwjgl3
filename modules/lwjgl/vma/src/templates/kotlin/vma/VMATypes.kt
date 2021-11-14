@@ -96,10 +96,28 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
     "PFN_vkCreateImage".handle("vkCreateImage", "")
     "PFN_vkDestroyImage".handle("vkDestroyImage", "")
     "PFN_vkCmdCopyBuffer".handle("vkCmdCopyBuffer", "")
-    nullable.."PFN_vkGetBufferMemoryRequirements2KHR".handle("vkGetBufferMemoryRequirements2KHR", "")
-    nullable.."PFN_vkGetImageMemoryRequirements2KHR".handle("vkGetImageMemoryRequirements2KHR", "")
-    nullable.."PFN_vkBindBufferMemory2KHR".handle("vkBindBufferMemory2KHR", "")
-    nullable.."PFN_vkBindImageMemory2KHR".handle("vkBindImageMemory2KHR", "")
+    nullable.."PFN_vkGetBufferMemoryRequirements2KHR".handle(
+        "vkGetBufferMemoryRequirements2KHR",
+        """
+        {@code vkGetBufferMemoryRequirements2} on Vulkan &ge; 1.1, {@code vkGetBufferMemoryRequirements2KHR} when using {@code VK_KHR_dedicated_allocation}
+        extension.
+        """
+    )
+    nullable.."PFN_vkGetImageMemoryRequirements2KHR".handle(
+        "vkGetImageMemoryRequirements2KHR",
+        """
+        {@code vkGetImageMemoryRequirements2} on Vulkan &ge; 1.1, {@code vkGetImageMemoryRequirements2KHR} when using {@code VK_KHR_dedicated_allocation}
+        extension.
+        """
+    )
+    nullable.."PFN_vkBindBufferMemory2KHR".handle(
+        "vkBindBufferMemory2KHR",
+        "{@code vkBindBufferMemory2} on Vulkan &ge; 1.1, {@code vkBindBufferMemory2KHR} when using {@code VK_KHR_bind_memory2} extension."
+    )
+    nullable.."PFN_vkBindImageMemory2KHR".handle(
+        "vkBindImageMemory2KHR",
+        "{@code vkBindImageMemory2} on Vulkan &ge; 1.1, {@code vkBindImageMemory2KHR} when using {@code VK_KHR_bind_memory2} extension."
+    )
     nullable.."PFN_vkGetPhysicalDeviceMemoryProperties2KHR".handle("vkGetPhysicalDeviceMemoryProperties2KHR", "")
 
     customMethod("""
