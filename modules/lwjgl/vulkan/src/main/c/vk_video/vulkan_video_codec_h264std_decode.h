@@ -29,6 +29,7 @@ typedef enum StdVideoDecodeH264FieldOrderCount {
 typedef struct StdVideoDecodeH264PictureInfoFlags {
     uint32_t field_pic_flag : 1;             // Is field picture
     uint32_t is_intra : 1;                   // Is intra picture
+    uint32_t IdrPicFlag : 1;                 // instantaneous decoding refresh (IDR) picture
     uint32_t bottom_field_flag : 1;          // bottom (true) or top (false) field if field_pic_flag is set.
     uint32_t is_reference : 1;               // This only applies to picture info, and not to the DPB lists.
     uint32_t complementary_field_pair : 1;   // complementary field pair, complementary non-reference field pair, complementary reference field pair

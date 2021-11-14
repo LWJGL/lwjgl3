@@ -22,6 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct StdVideoDecodeH264PictureInfoFlags {
  *     uint32_t {@link #field_pic_flag} : 1;
  *     uint32_t {@link #is_intra} : 1;
+ *     uint32_t {@link #IdrPicFlag} : 1;
  *     uint32_t {@link #bottom_field_flag} : 1;
  *     uint32_t {@link #is_reference} : 1;
  *     uint32_t {@link #complementary_field_pair} : 1;
@@ -69,6 +70,9 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct implements Native
     /** is intra picture */
     @NativeType("uint32_t")
     public boolean is_intra() { return nis_intra(address()) != 0; }
+    /** instantaneous decoding refresh (IDR) picture */
+    @NativeType("uint32_t")
+    public boolean IdrPicFlag() { return nIdrPicFlag(address()) != 0; }
     /** bottom (true) or top (false) field if field_pic_flag is set */
     @NativeType("uint32_t")
     public boolean bottom_field_flag() { return nbottom_field_flag(address()) != 0; }
@@ -83,6 +87,8 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct implements Native
     public StdVideoDecodeH264PictureInfoFlags field_pic_flag(@NativeType("uint32_t") boolean value) { nfield_pic_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@link #is_intra} field. */
     public StdVideoDecodeH264PictureInfoFlags is_intra(@NativeType("uint32_t") boolean value) { nis_intra(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@link #IdrPicFlag} field. */
+    public StdVideoDecodeH264PictureInfoFlags IdrPicFlag(@NativeType("uint32_t") boolean value) { nIdrPicFlag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@link #bottom_field_flag} field. */
     public StdVideoDecodeH264PictureInfoFlags bottom_field_flag(@NativeType("uint32_t") boolean value) { nbottom_field_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@link #is_reference} field. */
@@ -94,12 +100,14 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct implements Native
     public StdVideoDecodeH264PictureInfoFlags set(
         boolean field_pic_flag,
         boolean is_intra,
+        boolean IdrPicFlag,
         boolean bottom_field_flag,
         boolean is_reference,
         boolean complementary_field_pair
     ) {
         field_pic_flag(field_pic_flag);
         is_intra(is_intra);
+        IdrPicFlag(IdrPicFlag);
         bottom_field_flag(bottom_field_flag);
         is_reference(is_reference);
         complementary_field_pair(complementary_field_pair);
@@ -238,24 +246,28 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct implements Native
     public static int nfield_pic_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #is_intra}. */
     public static int nis_intra(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
+    /** Unsafe version of {@link #IdrPicFlag}. */
+    public static int nIdrPicFlag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
     /** Unsafe version of {@link #bottom_field_flag}. */
-    public static int nbottom_field_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
+    public static int nbottom_field_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
     /** Unsafe version of {@link #is_reference}. */
-    public static int nis_reference(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
+    public static int nis_reference(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
     /** Unsafe version of {@link #complementary_field_pair}. */
-    public static int ncomplementary_field_pair(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
+    public static int ncomplementary_field_pair(long struct) { return (nbitfield0(struct) & 0x00_00_00_20) >>> 5; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH264PictureInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #field_pic_flag(boolean) field_pic_flag}. */
     public static void nfield_pic_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #is_intra(boolean) is_intra}. */
     public static void nis_intra(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
+    /** Unsafe version of {@link #IdrPicFlag(boolean) IdrPicFlag}. */
+    public static void nIdrPicFlag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
     /** Unsafe version of {@link #bottom_field_flag(boolean) bottom_field_flag}. */
-    public static void nbottom_field_flag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
+    public static void nbottom_field_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
     /** Unsafe version of {@link #is_reference(boolean) is_reference}. */
-    public static void nis_reference(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
+    public static void nis_reference(long struct, int value) { nbitfield0(struct, ((value << 4) & 0x00_00_00_10) | (nbitfield0(struct) & 0xFF_FF_FF_EF)); }
     /** Unsafe version of {@link #complementary_field_pair(boolean) complementary_field_pair}. */
-    public static void ncomplementary_field_pair(long struct, int value) { nbitfield0(struct, ((value << 4) & 0x00_00_00_10) | (nbitfield0(struct) & 0xFF_FF_FF_EF)); }
+    public static void ncomplementary_field_pair(long struct, int value) { nbitfield0(struct, ((value << 5) & 0x00_00_00_20) | (nbitfield0(struct) & 0xFF_FF_FF_DF)); }
 
     // -----------------------------------
 
@@ -301,6 +313,9 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct implements Native
         /** @return the value of the {@link StdVideoDecodeH264PictureInfoFlags#is_intra} field. */
         @NativeType("uint32_t")
         public boolean is_intra() { return StdVideoDecodeH264PictureInfoFlags.nis_intra(address()) != 0; }
+        /** @return the value of the {@link StdVideoDecodeH264PictureInfoFlags#IdrPicFlag} field. */
+        @NativeType("uint32_t")
+        public boolean IdrPicFlag() { return StdVideoDecodeH264PictureInfoFlags.nIdrPicFlag(address()) != 0; }
         /** @return the value of the {@link StdVideoDecodeH264PictureInfoFlags#bottom_field_flag} field. */
         @NativeType("uint32_t")
         public boolean bottom_field_flag() { return StdVideoDecodeH264PictureInfoFlags.nbottom_field_flag(address()) != 0; }
@@ -315,6 +330,8 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct implements Native
         public StdVideoDecodeH264PictureInfoFlags.Buffer field_pic_flag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264PictureInfoFlags.nfield_pic_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfoFlags#is_intra} field. */
         public StdVideoDecodeH264PictureInfoFlags.Buffer is_intra(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264PictureInfoFlags.nis_intra(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfoFlags#IdrPicFlag} field. */
+        public StdVideoDecodeH264PictureInfoFlags.Buffer IdrPicFlag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264PictureInfoFlags.nIdrPicFlag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfoFlags#bottom_field_flag} field. */
         public StdVideoDecodeH264PictureInfoFlags.Buffer bottom_field_flag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264PictureInfoFlags.nbottom_field_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfoFlags#is_reference} field. */

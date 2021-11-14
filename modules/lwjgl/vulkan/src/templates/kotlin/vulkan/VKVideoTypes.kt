@@ -197,6 +197,7 @@ val StdVideoDecodeH264PictureInfoFlags = struct(Module.VULKAN, "StdVideoDecodeH2
 
     uint32_tb("field_pic_flag", "is field picture", bits = 1)
     uint32_tb("is_intra", "is intra picture", bits = 1)
+    uint32_tb("IdrPicFlag", "instantaneous decoding refresh (IDR) picture", bits = 1)
     uint32_tb("bottom_field_flag", "bottom (true) or top (false) field if field_pic_flag is set", bits = 1)
     uint32_tb("is_reference", "this only applies to picture info, and not to the DPB lists", bits = 1)
     uint32_tb("complementary_field_pair", "complementary field pair, complementary non-reference field pair, complementary reference field pair", bits = 1)

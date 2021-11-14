@@ -92,7 +92,7 @@ val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", typ
     VkResult(
         "CreateWin32SurfaceKHR",
         """
-        Create a {@code VkSurfaceKHR} object for an Win32 native window.
+        Create a VkSurfaceKHR object for an Win32 native window.
 
         <h5>C Specification</h5>
         To create a {@code VkSurfaceKHR} object for a Win32 window, call:

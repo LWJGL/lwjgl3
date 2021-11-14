@@ -175,7 +175,7 @@ public class KHRExternalMemoryFd {
      * 
      * <ul>
      * <li>{@code fd} <b>must</b> be an external memory handle created outside of the Vulkan API</li>
-     * <li>{@code handleType} <b>must</b> not be {@link KHRExternalMemoryCapabilities#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR}</li>
+     * <li>{@code handleType} <b>must</b> not be {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

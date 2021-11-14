@@ -106,9 +106,9 @@ val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", 
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code srcBuffer} <b>must</b> not be a protected buffer</li>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code dstBuffer} <b>must</b> not be a protected buffer</li>
-            <li>If {@code commandBuffer} is a protected command buffer, then {@code dstBuffer} <b>must</b> not be an unprotected buffer</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcBuffer} <b>must</b> not be a protected buffer</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstBuffer} <b>must</b> not be a protected buffer</li>
+            <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstBuffer} <b>must</b> not be an unprotected buffer</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -158,9 +158,9 @@ val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", 
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code srcImage} <b>must</b> not be a protected image</li>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code dstImage} <b>must</b> not be a protected image</li>
-            <li>If {@code commandBuffer} is a protected command buffer, then {@code dstImage} <b>must</b> not be an unprotected image</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcImage} <b>must</b> not be a protected image</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be a protected image</li>
+            <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be an unprotected image</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -210,9 +210,9 @@ val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", 
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code srcBuffer} <b>must</b> not be a protected buffer</li>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code dstImage} <b>must</b> not be a protected image</li>
-            <li>If {@code commandBuffer} is a protected command buffer, then {@code dstImage} <b>must</b> not be an unprotected image</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcBuffer} <b>must</b> not be a protected buffer</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be a protected image</li>
+            <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be an unprotected image</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -262,9 +262,9 @@ val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", 
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code srcImage} <b>must</b> not be a protected image</li>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code dstBuffer} <b>must</b> not be a protected buffer</li>
-            <li>If {@code commandBuffer} is a protected command buffer, then {@code dstBuffer} <b>must</b> not be an unprotected buffer</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcImage} <b>must</b> not be a protected image</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstBuffer} <b>must</b> not be a protected buffer</li>
+            <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstBuffer} <b>must</b> not be an unprotected buffer</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -314,9 +314,9 @@ val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", 
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code srcImage} <b>must</b> not be a protected image</li>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code dstImage} <b>must</b> not be a protected image</li>
-            <li>If {@code commandBuffer} is a protected command buffer, then {@code dstImage} <b>must</b> not be an unprotected image</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcImage} <b>must</b> not be a protected image</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be a protected image</li>
+            <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be an unprotected image</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -366,9 +366,9 @@ val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", 
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code srcImage} <b>must</b> not be a protected image</li>
-            <li>If {@code commandBuffer} is an unprotected command buffer, then {@code dstImage} <b>must</b> not be a protected image</li>
-            <li>If {@code commandBuffer} is a protected command buffer, then {@code dstImage} <b>must</b> not be an unprotected image</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcImage} <b>must</b> not be a protected image</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be a protected image</li>
+            <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be an unprotected image</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

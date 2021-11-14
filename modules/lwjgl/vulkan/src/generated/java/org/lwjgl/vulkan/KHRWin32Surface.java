@@ -98,7 +98,7 @@ public class KHRWin32Surface {
     }
 
     /**
-     * Create a {@code VkSurfaceKHR} object for an Win32 native window.
+     * Create a VkSurfaceKHR object for an Win32 native window.
      * 
      * <h5>C Specification</h5>
      * 

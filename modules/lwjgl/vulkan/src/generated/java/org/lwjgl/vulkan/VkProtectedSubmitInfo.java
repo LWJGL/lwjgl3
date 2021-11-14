@@ -18,12 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure indicating whether the submission is protected.
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the protected memory feature is not enabled, {@code protectedSubmit} <b>must</b> not be {@link VK10#VK_TRUE TRUE}</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

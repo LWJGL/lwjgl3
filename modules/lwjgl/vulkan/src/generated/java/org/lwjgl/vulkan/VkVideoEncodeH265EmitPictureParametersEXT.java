@@ -103,10 +103,10 @@ public class VkVideoEncodeH265EmitPictureParametersEXT extends Struct implements
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the H.265 VPS ID for the H.265 VPS to insert in the bitstream. The VPS ID <b>must</b> match the VPS provided in {@code vpsStd} of {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}. This is retrieved from the VkVideoSessionParametersKHR object provided in {@link VkVideoBeginCodingInfoKHR}. */
+    /** the H.265 VPS ID for the H.265 VPS to insert in the bitstream. The VPS ID <b>must</b> match the VPS provided in {@code vpsStd} of {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}. This is retrieved from the {@code VkVideoSessionParametersKHR} object provided in {@link VkVideoBeginCodingInfoKHR}. */
     @NativeType("uint8_t")
     public byte vpsId() { return nvpsId(address()); }
-    /** the H.265 SPS ID for the H.265 SPS to insert in the bitstream. The SPS ID <b>must</b> match one of the IDs of the SPS(s) provided in {@code pSpsStd} of {@link VkVideoEncodeH265SessionParametersCreateInfoEXT} to identify the SPS parameter set to insert in the bitstream. This is retrieved from the VkVideoSessionParametersKHR object provided in {@link VkVideoBeginCodingInfoKHR}. */
+    /** the H.265 SPS ID for the H.265 SPS to insert in the bitstream. The SPS ID <b>must</b> match one of the IDs of the SPS(s) provided in {@code pSpsStd} of {@link VkVideoEncodeH265SessionParametersCreateInfoEXT} to identify the SPS parameter set to insert in the bitstream. This is retrieved from the {@code VkVideoSessionParametersKHR} object provided in {@link VkVideoBeginCodingInfoKHR}. */
     @NativeType("uint8_t")
     public byte spsId() { return nspsId(address()); }
     /** enables the emitting of the VPS structure with id of {@code vpsId}. */
@@ -118,7 +118,7 @@ public class VkVideoEncodeH265EmitPictureParametersEXT extends Struct implements
     /** the number of entries in the {@code ppsIdEntries}. If this parameter is 0 then no pps entries are going to be emitted in the bitstream. */
     @NativeType("uint32_t")
     public int ppsIdEntryCount() { return nppsIdEntryCount(address()); }
-    /** the H.265 PPS IDs for the H.265 PPS to insert in the bitstream. The PPS IDs <b>must</b> match one of the IDs of the PPS(s) provided in {@code pPpsStd} of {@link VkVideoEncodeH265SessionParametersCreateInfoEXT} to identify the PPS parameter set to insert in the bitstream. This is retrieved from the VkVideoSessionParametersKHR object provided in {@link VkVideoBeginCodingInfoKHR}. */
+    /** the H.265 PPS IDs for the H.265 PPS to insert in the bitstream. The PPS IDs <b>must</b> match one of the IDs of the PPS(s) provided in {@code pPpsStd} of {@link VkVideoEncodeH265SessionParametersCreateInfoEXT} to identify the PPS parameter set to insert in the bitstream. This is retrieved from the {@code VkVideoSessionParametersKHR} object provided in {@link VkVideoBeginCodingInfoKHR}. */
     @Nullable
     @NativeType("uint8_t const *")
     public ByteBuffer ppsIdEntries() { return nppsIdEntries(address()); }

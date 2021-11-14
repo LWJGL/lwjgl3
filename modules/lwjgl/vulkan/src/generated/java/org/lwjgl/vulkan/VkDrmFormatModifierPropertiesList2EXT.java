@@ -24,6 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Among the elements in array {@code pDrmFormatModifierProperties}, each returned {@code drmFormatModifier} <b>must</b> be unique.</p>
  * 
+ * <p>Among the elements in array {@code pDrmFormatModifierProperties}, the bits reported in {@code drmFormatModifierTilingFeatures} <b>must</b> include the bits reported in the corresponding element of {@link VkDrmFormatModifierPropertiesListEXT}{@code ::pDrmFormatModifierProperties}.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

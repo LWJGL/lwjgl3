@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code subpass} <b>must</b> be created with VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI bind point</li>
+ * <li>{@code subpass} <b>must</b> be created with {@link HUAWEISubpassShading#VK_PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI PIPELINE_BIND_POINT_SUBPASS_SHADING_HUAWEI} bind point</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

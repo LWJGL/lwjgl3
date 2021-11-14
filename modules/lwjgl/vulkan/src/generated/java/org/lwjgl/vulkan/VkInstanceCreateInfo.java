@@ -26,8 +26,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkDebugReportCallbackCreateInfoEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain VK_EXT_debug_report</li>
- * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkDebugUtilsMessengerCreateInfoEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain VK_EXT_debug_utils</li>
+ * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkDebugReportCallbackCreateInfoEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link EXTDebugReport VK_EXT_debug_report}</li>
+ * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkDebugUtilsMessengerCreateInfoEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link EXTDebugUtils VK_EXT_debug_utils}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
