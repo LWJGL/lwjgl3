@@ -207,7 +207,9 @@ enum class Artifacts(
     REMOTERY(
         "lwjgl-remotery", "LWJGL - Remotery bindings",
         "A realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in a web browser.",
-        *Platforms.ALL
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32,
+        Platforms.MACOS, Platforms.MACOS_ARM64,
+        Platforms.WINDOWS, Platforms.WINDOWS_X86
     ),
     RPMALLOC(
         "lwjgl-rpmalloc", "LWJGL - rpmalloc bindings",

@@ -397,6 +397,7 @@
             </classpath>
 
             <jvmarg line="${generator.bindings}"/>
+            <jvmarg line="-Dfile.encoding=UTF8 -Dline.separator=&#10;"/>
 
             <arg value="${module.lwjgl}"/>
         </java>
@@ -575,7 +576,7 @@
     </target>
 
     <target name="extract" description="Runs the LWJGL Template Extraction tool" depends="compile-native, -compile-extract">
-        <java classname="org.lwjgl.extract.MainKt" fork="true" spawn="false" taskname="LWJGL Template Extraction Tool">
+        <java classname="org.lwjgl.extract.MainKt" fork="true" spawn="true" taskname="LWJGL Template Extraction Tool">
             <classpath>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/9" if:set="core.java9"/>
                 <pathelement path="${bin.lwjgl}/core/META-INF/versions/10" if:set="core.java10"/>
@@ -1575,7 +1576,19 @@
         <release-module name="par" native-library="lwjgl_par" title="par" if:true="${binding.par}"/>
 
         <!-- Remotery -->
-        <release-module name="remotery" native-library="lwjgl_remotery" title="remotery" if:true="${binding.remotery}"/>
+        <release-module name="remotery" title="remotery" if:true="${binding.remotery}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="liblwjgl_remotery.so"/>
+                <get-release platform="linux" arch="arm64" file="liblwjgl_remotery.so"/>
+                <get-release platform="linux" arch="arm32" file="liblwjgl_remotery.so"/>
+
+                <get-release platform="macos" arch="x64" file="liblwjgl_remotery.dylib"/>
+                <get-release platform="macos" arch="arm64" file="liblwjgl_remotery.dylib"/>
+
+                <get-release platform="windows" arch="x64" file="lwjgl_remotery.dll"/>
+                <get-release platform="windows" arch="x86" file="lwjgl_remotery.dll"/>
+            </natives>
+        </release-module>
 
         <!-- rpmalloc -->
         <release-module name="rpmalloc" native-library="lwjgl_rpmalloc" title="rpmalloc" if:true="${binding.rpmalloc}"/>

@@ -91,7 +91,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <property name="bin.ant" location="bin/classes/ant" relative="true"/>
     <property name="bin.extract" location="bin/classes/extract" relative="true"/>
     <property name="bin.generator" location="bin/classes/generator" relative="true"/>
-    <property name="bin.javadoc" location="../lwjgl3-javadoc/public" relative="true"/>
+    <property name="bin.javadoc" location="bin/javadoc" relative="true"/>
     <property name="bin.lwjgl" location="bin/classes/lwjgl" relative="true"/>
     <property name="bin.samples" location="bin/classes/samples" relative="true"/>
     <property name="bin.templates" location="bin/classes/templates" relative="true"/>
