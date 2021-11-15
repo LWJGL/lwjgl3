@@ -3376,7 +3376,6 @@ public class Vma {
         if (CHECKS) {
             check(virtualBlock);
             check(pOffset, 1);
-            VmaVirtualAllocationCreateInfo.validate(pCreateInfo.address());
         }
         return nvmaVirtualAllocate(virtualBlock, pCreateInfo.address(), memAddress(pOffset));
     }

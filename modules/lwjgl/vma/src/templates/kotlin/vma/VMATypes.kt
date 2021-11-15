@@ -792,7 +792,7 @@ val VmaVirtualAllocationCreateInfo = struct(Module.VMA, "VmaVirtualAllocationCre
         """
     )
     VmaVirtualAllocationCreateFlags("flags", "use combination of {@code VmaVirtualAllocationCreateFlagBits}").links("VIRTUAL_ALLOCATION_CREATE_\\w+", LinkMode.BITFIELD)
-    opaque_p(
+    nullable..opaque_p(
         "pUserData",
         """
         custom pointer to be associated with the allocation. Optional.
@@ -813,7 +813,7 @@ val VmaVirtualAllocationInfo = struct(Module.VMA, "VmaVirtualAllocationInfo", mu
         Same value as passed in ##VmaVirtualAllocationCreateInfo{@code ::size}.
         """
     )
-    opaque_p(
+    nullable..opaque_p(
         "pUserData",
         """
         custom pointer associated with the allocation.
