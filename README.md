@@ -75,8 +75,10 @@ following platforms/architectures:
 - Linux arm64 (ARMv8/AArch64)
 - Linux arm32 (ARMv7/armhf)
 - macOS x64
+- macOS arm64
 - Windows x64
 - Windows x86
+- Windows arm64
 
 Example code:
 
