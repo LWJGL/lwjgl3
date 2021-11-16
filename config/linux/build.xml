@@ -151,11 +151,12 @@
     </macrodef>
 
     <target name="compile-native-platform">
-        <exec executable="bash" outputproperty="gcc.version" unless:set="gcc.version">
-            <arg value="-c"/>
-            <arg value="gcc --version | grep ^gcc | sed 's/^.* //g;s/.[0-9]//2'"/>
+        <local name="gcc.version.string"/>
+        <exec executable="bash" outputproperty="gcc.version.string" logError="true" failonerror="true">
+            <arg line="-o pipefail -c"/>
+            <arg value="${gcc.prefix}gcc${gcc.suffix} --version | grep ^gcc"/>
         </exec>
-        <echo message="Building with GCC v${gcc.version} (command: ${gcc.prefix}gcc${gcc.suffix})"/>
+        <echo message='${gcc.prefix}gcc${gcc.suffix} --version: "${gcc.version.string}"' taskname="Compiler"/>
 
         <parallel threadsPerProcessor="2">
 
