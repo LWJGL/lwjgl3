@@ -219,11 +219,13 @@
         </build>
 
         <!-- Meow -->
-        <local name="meow.flags"/>
-        <condition property="meow.flags" value="-march=armv8-a+crypto" else="-maes -msse4.2">
-            <isset property="build.arch.arm"/>
-        </condition>
-        <build module="meow" simple="true" flags="-Werror -Wfatal-errors ${meow.flags}" if:true="${binding.meow}"/>
+        <sequential if:true="${binding.meow}">
+            <local name="meow.flags"/>
+            <condition property="meow.flags" value="-march=armv8-a+crypto" else="-maes -msse4.2">
+                <isset property="build.arch.arm"/>
+            </condition>
+            <build module="meow" simple="true" flags="-Werror -Wfatal-errors ${meow.flags}"/>
+        </sequential>
 
         <!-- meshoptimizer -->
         <build module="meshoptimizer" simple="true" linker="g++" if:true="${binding.meshoptimizer}">
@@ -393,17 +395,19 @@
         </build>
 
         <!-- xxHash -->
-        <local name="xxhash.flags"/>
-        <condition property="xxhash.flags" value="" else="-mavx512f">
-            <isset property="build.arch.arm"/>
-        </condition>
-        <build module="xxhash" flags="-Werror -Wfatal-errors ${xxhash.flags}" if:true="${binding.xxhash}">
-            <source>
-                <arg value="-I${src.main.rel}"/>
-                <fileset dir="." includes="${src.generated}/*.c"/>
-                <fileset dir="." includes="${src.main}/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
-            </source>
-        </build>
+        <sequential if:true="${binding.xxhash}">
+            <local name="xxhash.flags"/>
+            <condition property="xxhash.flags" value="" else="-mavx512f">
+                <isset property="build.arch.arm"/>
+            </condition>
+            <build module="xxhash" flags="-Werror -Wfatal-errors ${xxhash.flags}">
+                <source>
+                    <arg value="-I${src.main.rel}"/>
+                    <fileset dir="." includes="${src.generated}/*.c"/>
+                    <fileset dir="." includes="${src.main}/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
+                </source>
+            </build>
+        </sequential>
 
         <!-- yoga -->
         <build module="yoga" simple="true" lang="c++" if:true="${binding.yoga}">
