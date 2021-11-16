@@ -318,11 +318,19 @@
         </exec>
 
         <local name="commit_mismatch"/>
+        <local name="fail_on_mismatch"/>
         <condition property="commit_mismatch" value="true">
             <not><equals arg1="${Implementation-Version}" arg2="${commit}"/></not>
         </condition>
-        <delete file="templates.jar" taskname="Deleting the compiled Kotlin templates cache" if:set="commit_mismatch"/>
-        <fail message="The current commit does not match the Kotlin template cache's commit." if="commit_mismatch"/>
+        <condition property="fail_on_mismatch" value="true">
+            <and>
+                <isset property="commit_mismatch"/>
+                <not><isset property="hydrate-kotlinc.force"/></not>
+            </and>
+        </condition>
+        <delete file="templates.jar" taskname="Deleting the compiled Kotlin templates cache" if:set="fail_on_mismatch"/>
+        <fail message="The current commit does not match the Kotlin template cache's commit." if="fail_on_mismatch"/>
+        <echo message="The current commit does not match the Kotlin template cache's commit, but hydration has been forced." taskname="WARNING" if:set="commit_mismatch"/>
 
         <!-- Hydrate -->
         <antcall target="clean-kotlin"/>
