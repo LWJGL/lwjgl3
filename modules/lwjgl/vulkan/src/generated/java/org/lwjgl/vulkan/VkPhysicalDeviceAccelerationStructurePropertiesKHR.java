@@ -20,6 +20,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
+ * <p>Due to the fact that the geometry, instance, and primitive counts are specified at acceleration structure creation as 32-bit values, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxGeometryCount">{@code maxGeometryCount}</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxInstanceCount">{@code maxInstanceCount}</a>, and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxPrimitiveCount">{@code maxPrimitiveCount}</a> <b>must</b> not exceed <code>2<sup>32</sup>-1</code>.</p>
+ * 
  * <p>If the {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
  * 
  * <p>Limits specified by this structure <b>must</b> match those specified with the same name in {@link VkPhysicalDeviceRayTracingPropertiesNV}.</p>

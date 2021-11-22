@@ -129,7 +129,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkImageViewASTCDecodeModeEXT}, {@link VkImageViewUsageCreateInfo}, {@link VkSamplerYcbcrConversionInfo}, {@link VkVideoDecodeH264ProfileEXT}, {@link VkVideoDecodeH265ProfileEXT}, {@link VkVideoEncodeH264ProfileEXT}, {@link VkVideoEncodeH265ProfileEXT}, {@link VkVideoProfileKHR}, or {@link VkVideoProfilesKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkImageViewASTCDecodeModeEXT}, {@link VkImageViewMinLodCreateInfoEXT}, {@link VkImageViewUsageCreateInfo}, {@link VkSamplerYcbcrConversionInfo}, {@link VkVideoDecodeH264ProfileEXT}, {@link VkVideoDecodeH265ProfileEXT}, {@link VkVideoEncodeH264ProfileEXT}, {@link VkVideoEncodeH265ProfileEXT}, {@link VkVideoProfileKHR}, or {@link VkVideoProfilesKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkImageViewCreateFlagBits} values</li>
  * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
@@ -245,6 +245,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
     public VkImageViewCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkImageViewASTCDecodeModeEXT} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkImageViewASTCDecodeModeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageViewMinLodCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkImageViewCreateInfo pNext(VkImageViewMinLodCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewUsageCreateInfo} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewUsageCreateInfoKHR} value to the {@code pNext} chain. */
@@ -552,6 +554,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
         public VkImageViewCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageViewCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkImageViewASTCDecodeModeEXT} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewASTCDecodeModeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageViewMinLodCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkImageViewCreateInfo.Buffer pNext(VkImageViewMinLodCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewUsageCreateInfo} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewUsageCreateInfoKHR} value to the {@code pNext} chain. */

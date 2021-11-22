@@ -17,6 +17,24 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * Stub description of VkCuLaunchInfoNVX.
+ * 
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link NVXBinaryImport#VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code function} <b>must</b> be a valid {@code VkCuFunctionNVX} handle</li>
+ * <li>{@code pParams} <b>must</b> be a valid pointer to an array of {@code paramCount} bytes</li>
+ * <li>{@code pExtras} <b>must</b> be a valid pointer to an array of {@code extraCount} bytes</li>
+ * <li>{@code paramCount} <b>must</b> be greater than 0</li>
+ * <li>{@code extraCount} <b>must</b> be greater than 0</li>
+ * </ul>
+ * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link NVXBinaryImport#vkCmdCuLaunchKernelNVX CmdCuLaunchKernelNVX}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

@@ -20,6 +20,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
+ * <p>Due to the fact that the geometry, instance, and triangle counts are specified at acceleration structure creation as 32-bit values, {@code maxGeometryCount}, {@code maxInstanceCount}, and {@code maxTriangleCount} <b>must</b> not exceed <code>2<sup>32</sup>-1</code>.</p>
+ * 
  * <p>If the {@link VkPhysicalDeviceRayTracingPropertiesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
  * 
  * <p>Limits specified by this structure <b>must</b> match those specified with the same name in {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR} and {@link VkPhysicalDeviceRayTracingPipelinePropertiesKHR}.</p>

@@ -17,6 +17,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * Stub description of VkCuFunctionCreateInfoNVX.
+ * 
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link NVXBinaryImport#VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code module} <b>must</b> be a valid {@code VkCuModuleNVX} handle</li>
+ * <li>{@code pName} <b>must</b> be a null-terminated UTF-8 string</li>
+ * </ul>
+ * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link NVXBinaryImport#vkCreateCuFunctionNVX CreateCuFunctionNVX}</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

@@ -1853,6 +1853,22 @@ val VkPipelineRasterizationStateStreamCreateInfoEXT = struct(Module.VULKAN, "VkP
 }
 
 val VkCuModuleCreateInfoNVX = struct(Module.VULKAN, "VkCuModuleCreateInfoNVX") {
+    documentation =
+        """
+        Stub description of VkCuModuleCreateInfoNVX.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
+            <li>{@code dataSize} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CreateCuModuleNVX()
+        """
+
     Expression("#STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX")..VkStructureType("sType", "")
     nullable..opaque_const_p("pNext", "")
     AutoSize("pData")..size_t("dataSize", "")
@@ -1860,6 +1876,22 @@ val VkCuModuleCreateInfoNVX = struct(Module.VULKAN, "VkCuModuleCreateInfoNVX") {
 }
 
 val VkCuFunctionCreateInfoNVX = struct(Module.VULKAN, "VkCuFunctionCreateInfoNVX") {
+    documentation =
+        """
+        Stub description of VkCuFunctionCreateInfoNVX.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code module} <b>must</b> be a valid {@code VkCuModuleNVX} handle</li>
+            <li>{@code pName} <b>must</b> be a null-terminated UTF-8 string</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CreateCuFunctionNVX()
+        """
+
     Expression("#STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX")..VkStructureType("sType", "")
     nullable..opaque_const_p("pNext", "")
     VkCuModuleNVX("module", "")
@@ -1867,6 +1899,25 @@ val VkCuFunctionCreateInfoNVX = struct(Module.VULKAN, "VkCuFunctionCreateInfoNVX
 }
 
 val VkCuLaunchInfoNVX = struct(Module.VULKAN, "VkCuLaunchInfoNVX") {
+    documentation =
+        """
+        Stub description of VkCuLaunchInfoNVX.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code function} <b>must</b> be a valid {@code VkCuFunctionNVX} handle</li>
+            <li>{@code pParams} <b>must</b> be a valid pointer to an array of {@code paramCount} bytes</li>
+            <li>{@code pExtras} <b>must</b> be a valid pointer to an array of {@code extraCount} bytes</li>
+            <li>{@code paramCount} <b>must</b> be greater than 0</li>
+            <li>{@code extraCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CmdCuLaunchKernelNVX()
+        """
+
     Expression("#STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX")..VkStructureType("sType", "")
     nullable..opaque_const_p("pNext", "")
     VkCuFunctionNVX("function", "")
@@ -6891,6 +6942,8 @@ val VkPhysicalDeviceAccelerationStructurePropertiesKHR = struct(Module.VULKAN, "
         Properties of the physical device for acceleration structure.
 
         <h5>Description</h5>
+        Due to the fact that the geometry, instance, and primitive counts are specified at acceleration structure creation as 32-bit values, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-maxGeometryCount">{@code maxGeometryCount}</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-maxInstanceCount">{@code maxInstanceCount}</a>, and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-maxPrimitiveCount">{@code maxPrimitiveCount}</a> <b>must</b> not exceed <code>2<sup>32</sup>-1</code>.
+
         If the ##VkPhysicalDeviceAccelerationStructurePropertiesKHR structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
 
         Limits specified by this structure <b>must</b> match those specified with the same name in ##VkPhysicalDeviceRayTracingPropertiesNV.
@@ -8541,6 +8594,8 @@ val VkPhysicalDeviceRayTracingPropertiesNV = struct(Module.VULKAN, "VkPhysicalDe
         Properties of the physical device for ray tracing.
 
         <h5>Description</h5>
+        Due to the fact that the geometry, instance, and triangle counts are specified at acceleration structure creation as 32-bit values, {@code maxGeometryCount}, {@code maxInstanceCount}, and {@code maxTriangleCount} <b>must</b> not exceed <code>2<sup>32</sup>-1</code>.
+
         If the ##VkPhysicalDeviceRayTracingPropertiesNV structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
 
         Limits specified by this structure <b>must</b> match those specified with the same name in ##VkPhysicalDeviceAccelerationStructurePropertiesKHR and ##VkPhysicalDeviceRayTracingPipelinePropertiesKHR.
@@ -14820,6 +14875,47 @@ val VkQueueFamilyGlobalPriorityPropertiesEXT = struct(Module.VULKAN, "VkQueueFam
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     uint32_t("priorityCount", "the number of supported global queue priorities in this queue family, and it <b>must</b> be greater than 0.")
     VkQueueGlobalPriorityEXT("priorities", "an array of #MAX_GLOBAL_PRIORITY_SIZE_EXT {@code VkQueueGlobalPriorityEXT} enums representing all supported global queue priorities in this queue family. The first {@code priorityCount} elements of the array will be valid.")["VK_MAX_GLOBAL_PRIORITY_SIZE_EXT"]
+}
+
+val VkPhysicalDeviceImageViewMinLodFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceImageViewMinLodFeaturesEXT") {
+    documentation =
+        """
+        Structure describing whether clamping the min lod of a image view is supported by the implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceImageViewMinLodFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceImageViewMinLodFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("minLod", "indicates whether the implementation supports clamping the minimum LOD value during <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#textures-image-level-selection\">Image Level(s) Selection</a> and <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#textures-integer-coordinate-operations\">Integer Texel Coordinate Operations</a> with a given {@code VkImageView} by ##VkImageViewMinLodCreateInfoEXT{@code ::minLod}.")
+}
+
+val VkImageViewMinLodCreateInfoEXT = struct(Module.VULKAN, "VkImageViewMinLodCreateInfoEXT") {
+    documentation =
+        """
+        Structure describing the minimum lod of an image view.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-minLod">{@code minLod}</a> feature is not enabled, {@code minLod} <b>must</b> be {@code 0.0}.</li>
+            <li>{@code minLod} <b>must</b> be less or equal to the index of the last mipmap level accessible to the view.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    float("minLod", "the value to clamp the minimum LOD accessible by this {@code VkImageView}.")
 }
 
 val VkPhysicalDeviceMultiDrawFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceMultiDrawFeaturesEXT") {

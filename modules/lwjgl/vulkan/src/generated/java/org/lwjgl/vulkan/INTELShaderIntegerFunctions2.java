@@ -8,7 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * This extension adds support for several new integer instructions in SPIR-V for use in graphics shaders. Many of these instructions have pre-existing counterparts in the Kernel environment.
  * 
- * <p>The added integer functions are defined by the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/INTEL/SPV_INTEL_shader_integer_functions2.html">{@code SPV_INTEL_shader_integer_functions}</a> SPIR-V extension and can be used with the GL_INTEL_shader_integer_functions2 GLSL extension.</p>
+ * <p>The added integer functions are defined by the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/INTEL/SPV_INTEL_shader_integer_functions2.html">{@code SPV_INTEL_shader_integer_functions2}</a> SPIR-V extension and can be used with the GL_INTEL_shader_integer_functions2 GLSL extension.</p>
  * 
  * <h5>VK_INTEL_shader_integer_functions2</h5>
  * 

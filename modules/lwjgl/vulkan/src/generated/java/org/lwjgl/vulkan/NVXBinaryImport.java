@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>There is currently no specification language written for this extension, so although it appears in the Vulkan headers, its interfaces are not summarized here.</p>
+ * <p>There is currently no specification language written for this extension. The links to APIs defined by the extension are to stubs that only include generated content such as API declarations and implicit valid usage statements.</p>
  * </div>
  * 
  * <h5>VK_NVX_binary_import</h5>
@@ -115,6 +115,7 @@ public class NVXBinaryImport {
 
     // --- [ vkCreateCuModuleNVX ] ---
 
+    /** Unsafe version of: {@link #vkCreateCuModuleNVX CreateCuModuleNVX} */
     public static int nvkCreateCuModuleNVX(VkDevice device, long pCreateInfo, long pAllocator, long pModule) {
         long __functionAddress = device.getCapabilities().vkCreateCuModuleNVX;
         if (CHECKS) {
@@ -125,6 +126,47 @@ public class NVXBinaryImport {
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pModule, __functionAddress);
     }
 
+    /**
+     * Stub description of vkCreateCuModuleNVX.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>There is currently no specification language written for this command. This section acts only as placeholder and to avoid dead links in the specification and reference pages.</p>
+     * 
+     * <pre><code>
+     * VkResult vkCreateCuModuleNVX(
+     *     VkDevice                                    device,
+     *     const VkCuModuleCreateInfoNVX*              pCreateInfo,
+     *     const VkAllocationCallbacks*                pAllocator,
+     *     VkCuModuleNVX*                              pModule);</code></pre>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+     * <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid {@link VkCuModuleCreateInfoNVX} structure</li>
+     * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
+     * <li>{@code pModule} <b>must</b> be a valid pointer to a {@code VkCuModuleNVX} handle</li>
+     * </ul>
+     * 
+     * <h5>Return Codes</h5>
+     * 
+     * <dl>
+     * <dt>On success, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
+     * </ul></dd>
+     * <dt>On failure, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
+     * <li>{@link VK10#VK_ERROR_INITIALIZATION_FAILED ERROR_INITIALIZATION_FAILED}</li>
+     * </ul></dd>
+     * </dl>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkAllocationCallbacks}, {@link VkCuModuleCreateInfoNVX}</p>
+     */
     @NativeType("VkResult")
     public static int vkCreateCuModuleNVX(VkDevice device, @NativeType("VkCuModuleCreateInfoNVX const *") VkCuModuleCreateInfoNVX pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCuModuleNVX *") LongBuffer pModule) {
         if (CHECKS) {
@@ -135,6 +177,7 @@ public class NVXBinaryImport {
 
     // --- [ vkCreateCuFunctionNVX ] ---
 
+    /** Unsafe version of: {@link #vkCreateCuFunctionNVX CreateCuFunctionNVX} */
     public static int nvkCreateCuFunctionNVX(VkDevice device, long pCreateInfo, long pAllocator, long pFunction) {
         long __functionAddress = device.getCapabilities().vkCreateCuFunctionNVX;
         if (CHECKS) {
@@ -145,6 +188,47 @@ public class NVXBinaryImport {
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pFunction, __functionAddress);
     }
 
+    /**
+     * Stub description of vkCreateCuFunctionNVX.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>There is currently no specification language written for this command. This section acts only as placeholder and to avoid dead links in the specification and reference pages.</p>
+     * 
+     * <pre><code>
+     * VkResult vkCreateCuFunctionNVX(
+     *     VkDevice                                    device,
+     *     const VkCuFunctionCreateInfoNVX*            pCreateInfo,
+     *     const VkAllocationCallbacks*                pAllocator,
+     *     VkCuFunctionNVX*                            pFunction);</code></pre>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+     * <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid {@link VkCuFunctionCreateInfoNVX} structure</li>
+     * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
+     * <li>{@code pFunction} <b>must</b> be a valid pointer to a {@code VkCuFunctionNVX} handle</li>
+     * </ul>
+     * 
+     * <h5>Return Codes</h5>
+     * 
+     * <dl>
+     * <dt>On success, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
+     * </ul></dd>
+     * <dt>On failure, this command returns</dt>
+     * <dd><ul>
+     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
+     * <li>{@link VK10#VK_ERROR_INITIALIZATION_FAILED ERROR_INITIALIZATION_FAILED}</li>
+     * </ul></dd>
+     * </dl>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkAllocationCallbacks}, {@link VkCuFunctionCreateInfoNVX}</p>
+     */
     @NativeType("VkResult")
     public static int vkCreateCuFunctionNVX(VkDevice device, @NativeType("VkCuFunctionCreateInfoNVX const *") VkCuFunctionCreateInfoNVX pCreateInfo, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator, @NativeType("VkCuFunctionNVX *") LongBuffer pFunction) {
         if (CHECKS) {
@@ -155,6 +239,7 @@ public class NVXBinaryImport {
 
     // --- [ vkDestroyCuModuleNVX ] ---
 
+    /** Unsafe version of: {@link #vkDestroyCuModuleNVX DestroyCuModuleNVX} */
     public static void nvkDestroyCuModuleNVX(VkDevice device, long module, long pAllocator) {
         long __functionAddress = device.getCapabilities().vkDestroyCuModuleNVX;
         if (CHECKS) {
@@ -164,12 +249,39 @@ public class NVXBinaryImport {
         callPJPV(device.address(), module, pAllocator, __functionAddress);
     }
 
+    /**
+     * Stub description of vkDestroyCuModuleNVX.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>There is currently no specification language written for this command. This section acts only as placeholder and to avoid dead links in the specification and reference pages.</p>
+     * 
+     * <pre><code>
+     * void vkDestroyCuModuleNVX(
+     *     VkDevice                                    device,
+     *     VkCuModuleNVX                               module,
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+     * <li>{@code module} <b>must</b> be a valid {@code VkCuModuleNVX} handle</li>
+     * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
+     * <li>{@code module} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkAllocationCallbacks}</p>
+     */
     public static void vkDestroyCuModuleNVX(VkDevice device, @NativeType("VkCuModuleNVX") long module, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
         nvkDestroyCuModuleNVX(device, module, memAddressSafe(pAllocator));
     }
 
     // --- [ vkDestroyCuFunctionNVX ] ---
 
+    /** Unsafe version of: {@link #vkDestroyCuFunctionNVX DestroyCuFunctionNVX} */
     public static void nvkDestroyCuFunctionNVX(VkDevice device, long function, long pAllocator) {
         long __functionAddress = device.getCapabilities().vkDestroyCuFunctionNVX;
         if (CHECKS) {
@@ -179,12 +291,39 @@ public class NVXBinaryImport {
         callPJPV(device.address(), function, pAllocator, __functionAddress);
     }
 
+    /**
+     * Stub description of vkDestroyCuFunctionNVX.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>There is currently no specification language written for this command. This section acts only as placeholder and to avoid dead links in the specification and reference pages.</p>
+     * 
+     * <pre><code>
+     * void vkDestroyCuFunctionNVX(
+     *     VkDevice                                    device,
+     *     VkCuFunctionNVX                             function,
+     *     const VkAllocationCallbacks*                pAllocator);</code></pre>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+     * <li>{@code function} <b>must</b> be a valid {@code VkCuFunctionNVX} handle</li>
+     * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
+     * <li>{@code function} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkAllocationCallbacks}</p>
+     */
     public static void vkDestroyCuFunctionNVX(VkDevice device, @NativeType("VkCuFunctionNVX") long function, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
         nvkDestroyCuFunctionNVX(device, function, memAddressSafe(pAllocator));
     }
 
     // --- [ vkCmdCuLaunchKernelNVX ] ---
 
+    /** Unsafe version of: {@link #vkCmdCuLaunchKernelNVX CmdCuLaunchKernelNVX} */
     public static void nvkCmdCuLaunchKernelNVX(VkCommandBuffer commandBuffer, long pLaunchInfo) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdCuLaunchKernelNVX;
         if (CHECKS) {
@@ -194,6 +333,44 @@ public class NVXBinaryImport {
         callPPV(commandBuffer.address(), pLaunchInfo, __functionAddress);
     }
 
+    /**
+     * Stub description of vkCmdCuLaunchKernelNVX.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>There is currently no specification language written for this command. This section acts only as placeholder and to avoid dead links in the specification and reference pages.</p>
+     * 
+     * <pre><code>
+     * void vkCmdCuLaunchKernelNVX(
+     *     VkCommandBuffer                             commandBuffer,
+     *     const VkCuLaunchInfoNVX*                    pLaunchInfo);</code></pre>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+     * <li>{@code pLaunchInfo} <b>must</b> be a valid pointer to a valid {@link VkCuLaunchInfoNVX} structure</li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+     * </ul>
+     * 
+     * <h5>Host Synchronization</h5>
+     * 
+     * <ul>
+     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+     * </ul>
+     * 
+     * <h5>Command Properties</h5>
+     * 
+     * <table class="lwjgl">
+     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
+     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics Compute</td></tr></tbody>
+     * </table>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkCuLaunchInfoNVX}</p>
+     */
     public static void vkCmdCuLaunchKernelNVX(VkCommandBuffer commandBuffer, @NativeType("VkCuLaunchInfoNVX const *") VkCuLaunchInfoNVX pLaunchInfo) {
         nvkCmdCuLaunchKernelNVX(commandBuffer, pLaunchInfo.address());
     }

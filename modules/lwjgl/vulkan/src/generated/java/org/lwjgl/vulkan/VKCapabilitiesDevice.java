@@ -763,6 +763,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_image_drm_format_modifier;
     /** When true, {@link EXTImageRobustness} is supported. */
     public final boolean VK_EXT_image_robustness;
+    /** When true, {@link EXTImageViewMinLod} is supported. */
+    public final boolean VK_EXT_image_view_min_lod;
     /** When true, {@link EXTIndexTypeUint8} is supported. */
     public final boolean VK_EXT_index_type_uint8;
     /** When true, {@link EXTInlineUniformBlock} is supported. */
@@ -1176,6 +1178,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_host_query_reset = check_EXT_host_query_reset(provider, caps, ext);
         VK_EXT_image_drm_format_modifier = check_EXT_image_drm_format_modifier(provider, caps, ext);
         VK_EXT_image_robustness = ext.contains("VK_EXT_image_robustness");
+        VK_EXT_image_view_min_lod = ext.contains("VK_EXT_image_view_min_lod");
         VK_EXT_index_type_uint8 = ext.contains("VK_EXT_index_type_uint8");
         VK_EXT_inline_uniform_block = ext.contains("VK_EXT_inline_uniform_block");
         VK_EXT_line_rasterization = check_EXT_line_rasterization(provider, caps, ext);

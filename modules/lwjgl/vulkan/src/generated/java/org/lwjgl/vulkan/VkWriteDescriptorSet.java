@@ -77,6 +77,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, the {@code imageView} member of each element of {@code pImageInfo} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_STORAGE_BIT IMAGE_USAGE_STORAGE_BIT} set</li>
  * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, then {@code dstSet} <b>must</b> not have been allocated with a layout that included immutable samplers for {@code dstBinding}</li>
  * <li>If the {@link VkDescriptorSetLayoutBinding} for {@code dstSet} at {@code dstBinding} is {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}, the new active descriptor type {@code descriptorType} <b>must</b> exist in the corresponding {@code pMutableDescriptorTypeLists} list for {@code dstBinding}</li>
+ * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT}, the {@code imageView} member of each element of {@code pImageInfo} <b>must</b> have either been created without a {@link VkImageViewMinLodCreateInfoEXT} present in the {@code pNext} chain or with a {@link VkImageViewMinLodCreateInfoEXT}{@code ::minLod} of {@code 0.0}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
