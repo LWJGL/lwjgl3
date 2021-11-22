@@ -72,7 +72,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 198
+#define VK_HEADER_VERSION 199
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 2, VK_HEADER_VERSION)
@@ -897,6 +897,8 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT = 1000381001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT = 1000388000,
     VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT = 1000388001,
+    VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT = 1000391000,
+    VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT = 1000391001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT = 1000392000,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT = 1000392001,
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT = 1000411000,
@@ -5352,6 +5354,7 @@ typedef enum VkDriverId {
     VK_DRIVER_ID_MESA_TURNIP = 18,
     VK_DRIVER_ID_MESA_V3DV = 19,
     VK_DRIVER_ID_MESA_PANVK = 20,
+    VK_DRIVER_ID_SAMSUNG_PROPRIETARY = 21,
     VK_DRIVER_ID_AMD_PROPRIETARY_KHR = VK_DRIVER_ID_AMD_PROPRIETARY,
     VK_DRIVER_ID_AMD_OPEN_SOURCE_KHR = VK_DRIVER_ID_AMD_OPEN_SOURCE,
     VK_DRIVER_ID_MESA_RADV_KHR = VK_DRIVER_ID_MESA_RADV,
@@ -12999,6 +13002,23 @@ typedef struct VkQueueFamilyGlobalPriorityPropertiesEXT {
     uint32_t                    priorityCount;
     VkQueueGlobalPriorityEXT    priorities[VK_MAX_GLOBAL_PRIORITY_SIZE_EXT];
 } VkQueueFamilyGlobalPriorityPropertiesEXT;
+
+
+
+#define VK_EXT_image_view_min_lod 1
+#define VK_EXT_IMAGE_VIEW_MIN_LOD_SPEC_VERSION 1
+#define VK_EXT_IMAGE_VIEW_MIN_LOD_EXTENSION_NAME "VK_EXT_image_view_min_lod"
+typedef struct VkPhysicalDeviceImageViewMinLodFeaturesEXT {
+    VkStructureType    sType;
+    void*              pNext;
+    VkBool32           minLod;
+} VkPhysicalDeviceImageViewMinLodFeaturesEXT;
+
+typedef struct VkImageViewMinLodCreateInfoEXT {
+    VkStructureType    sType;
+    const void*        pNext;
+    float              minLod;
+} VkImageViewMinLodCreateInfoEXT;
 
 
 
