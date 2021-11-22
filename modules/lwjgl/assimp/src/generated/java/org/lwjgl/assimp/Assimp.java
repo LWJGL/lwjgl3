@@ -1667,19 +1667,18 @@ public class Assimp {
         _AI_MATKEY_UVTRANSFORM_BASE           = "$tex.uvtrafo",
         _AI_MATKEY_TEXFLAGS_BASE              = "$tex.flags";
 
+    public static final int AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE = aiTextureType_UNKNOWN;
+
     /** PBR Material keys */
     public static final String
-        aiAI_MATKEY_GLTF_ALPHAMODE               = "$mat.gltf.alphaMode",
-        aiAI_MATKEY_GLTF_ALPHACUTOFF             = "$mat.gltf.alphaCutoff",
-        ai_AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE  = "$tex.file.texCoord",
-        ai_AI_MATKEY_GLTF_MAPPINGNAME_BASE       = "$tex.mappingname",
-        ai_AI_MATKEY_GLTF_MAPPINGID_BASE         = "$tex.mappingid",
-        ai_AI_MATKEY_GLTF_MAPPINGFILTER_MAG_BASE = "$tex.mappingfiltermag",
-        ai_AI_MATKEY_GLTF_MAPPINGFILTER_MIN_BASE = "$tex.mappingfiltermin",
-        ai_AI_MATKEY_GLTF_SCALE_BASE             = "$tex.scale",
-        ai_AI_MATKEY_GLTF_STRENGTH_BASE          = "$tex.strength";
-
-    public static final int AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE = aiTextureType_UNKNOWN;
+        AI_MATKEY_GLTF_ALPHAMODE               = "$mat.gltf.alphaMode",
+        AI_MATKEY_GLTF_ALPHACUTOFF             = "$mat.gltf.alphaCutoff",
+        _AI_MATKEY_GLTF_MAPPINGNAME_BASE       = "$tex.mappingname",
+        _AI_MATKEY_GLTF_MAPPINGID_BASE         = "$tex.mappingid",
+        _AI_MATKEY_GLTF_MAPPINGFILTER_MAG_BASE = "$tex.mappingfiltermag",
+        _AI_MATKEY_GLTF_MAPPINGFILTER_MIN_BASE = "$tex.mappingfiltermin",
+        _AI_MATKEY_GLTF_SCALE_BASE             = "$tex.scale",
+        _AI_MATKEY_GLTF_STRENGTH_BASE          = "$tex.strength";
 
     /** Maximum number of indices per face (polygon). */
     public static final int AI_MAX_FACE_INDICES = 0x7FFF;

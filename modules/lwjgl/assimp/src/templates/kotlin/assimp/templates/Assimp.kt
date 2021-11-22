@@ -2970,24 +2970,23 @@ aiAttachLogStream(&c);""")}
         "_AI_MATKEY_TEXFLAGS_BASE".."\$tex.flags"
     ).noPrefix()
 
+    IntConstant(
+        "",
+        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN"
+    ).noPrefix()
+
     StringConstant(
         "PBR Material keys",
 
         "AI_MATKEY_GLTF_ALPHAMODE".."\$mat.gltf.alphaMode",
         "AI_MATKEY_GLTF_ALPHACUTOFF".."\$mat.gltf.alphaCutoff",
 
-        "_AI_MATKEY_GLTF_TEXTURE_TEXCOORD_BASE".."\$tex.file.texCoord",
         "_AI_MATKEY_GLTF_MAPPINGNAME_BASE".."\$tex.mappingname",
         "_AI_MATKEY_GLTF_MAPPINGID_BASE".."\$tex.mappingid",
         "_AI_MATKEY_GLTF_MAPPINGFILTER_MAG_BASE".."\$tex.mappingfiltermag",
         "_AI_MATKEY_GLTF_MAPPINGFILTER_MIN_BASE".."\$tex.mappingfiltermin",
         "_AI_MATKEY_GLTF_SCALE_BASE".."\$tex.scale",
         "_AI_MATKEY_GLTF_STRENGTH_BASE".."\$tex.strength"
-    )
-
-    IntConstant(
-        "",
-        "AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE".."aiTextureType_UNKNOWN"
     ).noPrefix()
 
     charASCII.const.p(
