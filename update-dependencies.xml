@@ -15,8 +15,8 @@
         <property name="jcommander" value="1.78"/>
         <property name="jquery" value="3.5.1"/>
     <property name="joml" value="1.10.2"/>
-    <property name="kotlinc-version" value="1.5.31"/>
-    <property name="kotlinc-build" value="1.5.31-release-548"/>
+    <property name="kotlinc-version" value="1.6.0"/>
+    <property name="kotlinc-build" value="1.6.0-release-798"/>
     <property name="jmh-core" value="1.33"/>
         <property name="jmh-generator-annprocess" value="1.33"/>
         <property name="jopt-simple" value="5.0.4"/>

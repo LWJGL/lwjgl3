@@ -444,7 +444,7 @@ class Struct(
                     """${
                     if (hasPointer) "" else "${indent}long ${m.name} = $STRUCT + $className.${m.offsetField};\n"
                     }${indent}for (int i = 0; i < ${getReferenceMember<AutoSizeMember>(m.name)?.name ?: m.size}; i++) {${
-                    if (m is PointerType<*>) {
+                    if (m.nativeType is PointerType<*>) {
                         if (m.validSize == m.size)
                             "\n$indent   check(memGetAddress(${m.name}));"
                         else
@@ -747,9 +747,7 @@ $indentation}"""
                     val getter = member.getter
                     member.bitfield(bitfieldIndex, (-1 ushr (bitsTotal - member.bits)) shl bitsConsumed)
                     val newGetter = member.getter
-                    if (getter != newGetter) {
-                        throw IllegalStateException("$getter - $newGetter")
-                    }
+                    check(getter == newGetter) { "$getter - $newGetter" }
                 }
 
                 bitsConsumed += member.bits

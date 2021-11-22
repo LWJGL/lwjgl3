@@ -32,8 +32,8 @@ import kotlin.math.*
     - Target source (C)     -> <module>/src/generated/c/opengl/org_lwjgl_opengl_ARBImaging.c
 */
 fun main(args: Array<String>) {
-    System.setProperty("file.encoding", "UTF8");
-    System.setProperty("line.separator", "\n");
+    System.setProperty("file.encoding", "UTF8")
+    System.setProperty("line.separator", "\n")
 
     require(args.isNotEmpty()) {
         "Module root path not specified"
