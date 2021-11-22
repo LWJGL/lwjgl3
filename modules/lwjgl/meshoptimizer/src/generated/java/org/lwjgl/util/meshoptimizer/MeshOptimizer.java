@@ -325,7 +325,7 @@ public class MeshOptimizer {
 
     static { LibMeshOptimizer.initialize(); }
 
-    public static final int MESHOPTIMIZER_VERSION = 160;
+    public static final int MESHOPTIMIZER_VERSION = 170;
 
     protected MeshOptimizer() {
         throw new UnsupportedOperationException();
@@ -472,7 +472,7 @@ public class MeshOptimizer {
     public static native void nmeshopt_generateAdjacencyIndexBuffer(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride);
 
     /**
-     * Experimental: Generate index buffer that can be used as a geometry shader input with triangle adjacency topology.
+     * Generate index buffer that can be used as a geometry shader input with triangle adjacency topology.
      * 
      * <p>Each triangle is converted into a 6-vertex patch with the following layout:</p>
      * 
@@ -501,7 +501,7 @@ public class MeshOptimizer {
     public static native void nmeshopt_generateTessellationIndexBuffer(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride);
 
     /**
-     * Experimental: Generate index buffer that can be used for PN-AEN tessellation with crack-free displacement.
+     * Generate index buffer that can be used for PN-AEN tessellation with crack-free displacement.
      * 
      * <p>Each triangle is converted into a 12-vertex patch with the following layout:</p>
      * 
@@ -681,7 +681,7 @@ public class MeshOptimizer {
     // --- [ meshopt_encodeIndexVersion ] ---
 
     /**
-     * Experimental: Set index encoder format version.
+     * Set index encoder format version.
      *
      * @param version must specify the data format version to encode; valid values are 0 (decodable by all library versions) and 1 (decodable by 0.14+)
      */
@@ -713,7 +713,7 @@ public class MeshOptimizer {
     public static native long nmeshopt_encodeIndexSequence(long buffer, long buffer_size, long indices, long index_count);
 
     /**
-     * Experimental: Index sequence encoder.
+     * Index sequence encoder.
      * 
      * <p>Encodes index sequence into an array of bytes that is generally smaller and compresses better compared to original. Input index sequence can represent
      * arbitrary topology; for triangle lists {@link #meshopt_encodeIndexBuffer encodeIndexBuffer} is likely to be better. Returns encoded data size on success, 0 on error; the only error
@@ -782,7 +782,7 @@ public class MeshOptimizer {
     // --- [ meshopt_encodeVertexVersion ] ---
 
     /**
-     * Experimental: Set vertex encoder format version.
+     * Set vertex encoder format version.
      *
      * @param version must specify the data format version to encode; valid values are 0 (decodable by all library versions)
      */
@@ -811,24 +811,36 @@ public class MeshOptimizer {
     // --- [ meshopt_decodeFilterOct ] ---
 
     /** Unsafe version of: {@link #meshopt_decodeFilterOct decodeFilterOct} */
-    public static native void nmeshopt_decodeFilterOct(long buffer, long vertex_count, long vertex_size);
+    public static native void nmeshopt_decodeFilterOct(long buffer, long count, long stride);
 
     /**
      * Experimental: Decodes octahedral encoding of a unit vector with K-bit (K &le; 16) signed X/Y as an input; Z must store 1.0f.
      * 
      * <p>Each component is stored as an 8-bit or 16-bit normalized integer; stride must be equal to 4 or 8. W is preserved as is.</p>
      */
-    public static void meshopt_decodeFilterOct(@NativeType("void *") ByteBuffer buffer, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size) {
+    public static void meshopt_decodeFilterOct(@NativeType("void *") ByteBuffer buffer, @NativeType("size_t") long count, @NativeType("size_t") long stride) {
         if (CHECKS) {
-            check(buffer, vertex_count * vertex_size);
+            check(buffer, count * stride);
         }
-        nmeshopt_decodeFilterOct(memAddress(buffer), vertex_count, vertex_size);
+        nmeshopt_decodeFilterOct(memAddress(buffer), count, stride);
+    }
+
+    /**
+     * Experimental: Decodes octahedral encoding of a unit vector with K-bit (K &le; 16) signed X/Y as an input; Z must store 1.0f.
+     * 
+     * <p>Each component is stored as an 8-bit or 16-bit normalized integer; stride must be equal to 4 or 8. W is preserved as is.</p>
+     */
+    public static void meshopt_decodeFilterOct(@NativeType("void *") ShortBuffer buffer, @NativeType("size_t") long count, @NativeType("size_t") long stride) {
+        if (CHECKS) {
+            check(buffer, (count * stride) >> 1);
+        }
+        nmeshopt_decodeFilterOct(memAddress(buffer), count, stride);
     }
 
     // --- [ meshopt_decodeFilterQuat ] ---
 
     /** Unsafe version of: {@link #meshopt_decodeFilterQuat decodeFilterQuat} */
-    public static native void nmeshopt_decodeFilterQuat(long buffer, long vertex_count, long vertex_size);
+    public static native void nmeshopt_decodeFilterQuat(long buffer, long count, long stride);
 
     /**
      * Experimental: Decodes 3-component quaternion encoding with K-bit (4 &le; K &le; 16) component encoding and a 2-bit component index indicating which
@@ -836,28 +848,154 @@ public class MeshOptimizer {
      * 
      * <p>Each component is stored as an 16-bit integer; stride must be equal to 8.</p>
      */
-    public static void meshopt_decodeFilterQuat(@NativeType("void *") ByteBuffer buffer, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size) {
+    public static void meshopt_decodeFilterQuat(@NativeType("void *") ByteBuffer buffer, @NativeType("size_t") long count, @NativeType("size_t") long stride) {
         if (CHECKS) {
-            check(buffer, vertex_count * vertex_size);
+            check(buffer, count * stride);
         }
-        nmeshopt_decodeFilterQuat(memAddress(buffer), vertex_count, vertex_size);
+        nmeshopt_decodeFilterQuat(memAddress(buffer), count, stride);
+    }
+
+    /**
+     * Experimental: Decodes 3-component quaternion encoding with K-bit (4 &le; K &le; 16) component encoding and a 2-bit component index indicating which
+     * component to reconstruct.
+     * 
+     * <p>Each component is stored as an 16-bit integer; stride must be equal to 8.</p>
+     */
+    public static void meshopt_decodeFilterQuat(@NativeType("void *") ShortBuffer buffer, @NativeType("size_t") long count, @NativeType("size_t") long stride) {
+        if (CHECKS) {
+            check(buffer, (count * stride) >> 1);
+        }
+        nmeshopt_decodeFilterQuat(memAddress(buffer), count, stride);
     }
 
     // --- [ meshopt_decodeFilterExp ] ---
 
     /** Unsafe version of: {@link #meshopt_decodeFilterExp decodeFilterExp} */
-    public static native void nmeshopt_decodeFilterExp(long buffer, long vertex_count, long vertex_size);
+    public static native void nmeshopt_decodeFilterExp(long buffer, long count, long stride);
 
     /**
      * Experimental: Decodes exponential encoding of floating-point data with 8-bit exponent and 24-bit integer mantissa as {@code 2^E*M}.
      * 
      * <p>Each 32-bit component is decoded in isolation; stride must be divisible by 4.</p>
      */
-    public static void meshopt_decodeFilterExp(@NativeType("void *") ByteBuffer buffer, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_size) {
+    public static void meshopt_decodeFilterExp(@NativeType("void *") ByteBuffer buffer, @NativeType("size_t") long count, @NativeType("size_t") long stride) {
         if (CHECKS) {
-            check(buffer, vertex_count * vertex_size);
+            check(buffer, count * stride);
         }
-        nmeshopt_decodeFilterExp(memAddress(buffer), vertex_count, vertex_size);
+        nmeshopt_decodeFilterExp(memAddress(buffer), count, stride);
+    }
+
+    /**
+     * Experimental: Decodes exponential encoding of floating-point data with 8-bit exponent and 24-bit integer mantissa as {@code 2^E*M}.
+     * 
+     * <p>Each 32-bit component is decoded in isolation; stride must be divisible by 4.</p>
+     */
+    public static void meshopt_decodeFilterExp(@NativeType("void *") IntBuffer buffer, @NativeType("size_t") long count, @NativeType("size_t") long stride) {
+        if (CHECKS) {
+            check(buffer, (count * stride) >> 2);
+        }
+        nmeshopt_decodeFilterExp(memAddress(buffer), count, stride);
+    }
+
+    // --- [ meshopt_encodeFilterOct ] ---
+
+    /** Unsafe version of: {@link #meshopt_encodeFilterOct encodeFilterOct} */
+    public static native void nmeshopt_encodeFilterOct(long destination, long count, long stride, int bits, long data);
+
+    /**
+     * Experimental: Encodes unit vectors with K-bit (K &le; 16) signed X/Y as an output.
+     * 
+     * <p>Each component is stored as an 8-bit or 16-bit normalized integer; {@code stride} must be equal to 4 or 8. {@code W} is preserved as is. Input data
+     * must contain 4 floats for every vector ({@code count*4} total).</p>
+     */
+    public static void meshopt_encodeFilterOct(@NativeType("void *") ByteBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
+        if (CHECKS) {
+            check(destination, count * 4 * (stride >> 2));
+            check(data, count * 4);
+        }
+        nmeshopt_encodeFilterOct(memAddress(destination), count, stride, bits, memAddress(data));
+    }
+
+    /**
+     * Experimental: Encodes unit vectors with K-bit (K &le; 16) signed X/Y as an output.
+     * 
+     * <p>Each component is stored as an 8-bit or 16-bit normalized integer; {@code stride} must be equal to 4 or 8. {@code W} is preserved as is. Input data
+     * must contain 4 floats for every vector ({@code count*4} total).</p>
+     */
+    public static void meshopt_encodeFilterOct(@NativeType("void *") ShortBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
+        if (CHECKS) {
+            check(destination, (count * 4 * (stride >> 2)) >> 1);
+            check(data, count * 4);
+        }
+        nmeshopt_encodeFilterOct(memAddress(destination), count, stride, bits, memAddress(data));
+    }
+
+    // --- [ meshopt_encodeFilterQuat ] ---
+
+    /** Unsafe version of: {@link #meshopt_encodeFilterQuat encodeFilterQuat} */
+    public static native void nmeshopt_encodeFilterQuat(long destination, long count, long stride, int bits, long data);
+
+    /**
+     * Experimental: Encodes unit quaternions with K-bit (4 &le; K &le; 16) component encoding.
+     * 
+     * <p>Each component is stored as an 16-bit integer; {@code stride} must be equal to 8. Input data must contain 4 floats for every quaternion
+     * ({@code count*4} total).</p>
+     */
+    public static void meshopt_encodeFilterQuat(@NativeType("void *") ByteBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
+        if (CHECKS) {
+            check(destination, count * 4 * 2);
+            check(data, count * 4);
+        }
+        nmeshopt_encodeFilterQuat(memAddress(destination), count, stride, bits, memAddress(data));
+    }
+
+    /**
+     * Experimental: Encodes unit quaternions with K-bit (4 &le; K &le; 16) component encoding.
+     * 
+     * <p>Each component is stored as an 16-bit integer; {@code stride} must be equal to 8. Input data must contain 4 floats for every quaternion
+     * ({@code count*4} total).</p>
+     */
+    public static void meshopt_encodeFilterQuat(@NativeType("void *") ShortBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
+        if (CHECKS) {
+            check(destination, (count * 4 * 2) >> 1);
+            check(data, count * 4);
+        }
+        nmeshopt_encodeFilterQuat(memAddress(destination), count, stride, bits, memAddress(data));
+    }
+
+    // --- [ meshopt_encodeFilterExp ] ---
+
+    /** Unsafe version of: {@link #meshopt_encodeFilterExp encodeFilterExp} */
+    public static native void nmeshopt_encodeFilterExp(long destination, long count, long stride, int bits, long data);
+
+    /**
+     * Experimental: Encodes arbitrary (finite) floating-point data with 8-bit exponent and K-bit integer mantissa (1 &le; K &le; 24).
+     * 
+     * <p>Mantissa is shared between all components of a given vector as defined by {@code stride}; {@code stride} must be divisible by 4. Input data must
+     * contain {@code stride/4} floats for every vector ({@code count*stride/4} total). When individual (scalar) encoding is desired, simply pass
+     * {@code stride=4} and adjust {@code count} accordingly.</p>
+     */
+    public static void meshopt_encodeFilterExp(@NativeType("void *") ByteBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
+        if (CHECKS) {
+            check(destination, count * (stride >> 2) * 4);
+            check(data, count * (stride >> 2));
+        }
+        nmeshopt_encodeFilterExp(memAddress(destination), count, stride, bits, memAddress(data));
+    }
+
+    /**
+     * Experimental: Encodes arbitrary (finite) floating-point data with 8-bit exponent and K-bit integer mantissa (1 &le; K &le; 24).
+     * 
+     * <p>Mantissa is shared between all components of a given vector as defined by {@code stride}; {@code stride} must be divisible by 4. Input data must
+     * contain {@code stride/4} floats for every vector ({@code count*stride/4} total). When individual (scalar) encoding is desired, simply pass
+     * {@code stride=4} and adjust {@code count} accordingly.</p>
+     */
+    public static void meshopt_encodeFilterExp(@NativeType("void *") IntBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
+        if (CHECKS) {
+            check(destination, (count * (stride >> 2) * 4) >> 2);
+            check(data, count * (stride >> 2));
+        }
+        nmeshopt_encodeFilterExp(memAddress(destination), count, stride, bits, memAddress(data));
     }
 
     // --- [ meshopt_simplify ] ---
@@ -1064,8 +1202,8 @@ public class MeshOptimizer {
     public static native long nmeshopt_buildMeshlets(long meshlets, long meshlet_vertices, long meshlet_triangles, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long max_vertices, long max_triangles, float cone_weight);
 
     /**
-     * Experimental: Meshlet builder. Splits the mesh into a set of meshlets where each meshlet has a micro index buffer indexing into meshlet vertices that
-     * refer to the original vertex buffer.
+     * Meshlet builder. Splits the mesh into a set of meshlets where each meshlet has a micro index buffer indexing into meshlet vertices that refer to the
+     * original vertex buffer.
      * 
      * <p>The resulting data can be used to render meshes using NVidia programmable mesh shading pipeline, or in other cluster-based renderers. When using
      * {@code buildMeshlets}, vertex positions need to be provided to minimize the size of the resulting clusters. When using {@link #meshopt_buildMeshletsScan buildMeshletsScan}, for
@@ -1106,6 +1244,7 @@ public class MeshOptimizer {
 
     // --- [ meshopt_buildMeshletsBound ] ---
 
+    /** See {@link #meshopt_buildMeshlets buildMeshlets}. */
     @NativeType("size_t")
     public static native long meshopt_buildMeshletsBound(@NativeType("size_t") long index_count, @NativeType("size_t") long max_vertices, @NativeType("size_t") long max_triangles);
 
@@ -1119,7 +1258,7 @@ public class MeshOptimizer {
     public static native void nmeshopt_computeClusterBounds(long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long __result);
 
     /**
-     * Experimental: Cluster bounds generator. Creates bounding volumes that can be used for frustum, backface and occlusion culling.
+     * Cluster bounds generator. Creates bounding volumes that can be used for frustum, backface and occlusion culling.
      * 
      * <p>For backface culling with orthographic projection, use the following formula to reject backfacing clusters: {@code dot(view, cone_axis) >= cone_cutoff}</p>
      * 

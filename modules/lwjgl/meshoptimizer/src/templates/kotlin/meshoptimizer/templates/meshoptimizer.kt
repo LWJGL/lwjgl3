@@ -301,7 +301,7 @@ nmeshopt_setAllocator(
 );""")}
         """
 
-    IntConstant("", "VERSION".."160")
+    IntConstant("", "VERSION".."170")
 
     size_t(
         "generateVertexRemap",
@@ -407,7 +407,7 @@ nmeshopt_setAllocator(
     void(
         "generateAdjacencyIndexBuffer",
         """
-        Experimental: Generate index buffer that can be used as a geometry shader input with triangle adjacency topology.
+        Generate index buffer that can be used as a geometry shader input with triangle adjacency topology.
 
         Each triangle is converted into a 6-vertex patch with the following layout:
         ${ul(
@@ -433,7 +433,7 @@ nmeshopt_setAllocator(
     void(
         "generateTessellationIndexBuffer",
         """
-        Experimental: Generate index buffer that can be used for PN-AEN tessellation with crack-free displacement.
+        Generate index buffer that can be used for PN-AEN tessellation with crack-free displacement.
         
         Each triangle is converted into a 12-vertex patch with the following layout:
         ${ul(
@@ -590,7 +590,7 @@ nmeshopt_setAllocator(
 
     void(
         "encodeIndexVersion",
-        "Experimental: Set index encoder format version.",
+        "Set index encoder format version.",
 
         int("version", "must specify the data format version to encode; valid values are 0 (decodable by all library versions) and 1 (decodable by 0.14+)")
     )
@@ -614,7 +614,7 @@ nmeshopt_setAllocator(
     size_t(
         "encodeIndexSequence",
         """
-        Experimental: Index sequence encoder.
+        Index sequence encoder.
 
         Encodes index sequence into an array of bytes that is generally smaller and compresses better compared to original. Input index sequence can represent
         arbitrary topology; for triangle lists #encodeIndexBuffer() is likely to be better. Returns encoded data size on success, 0 on error; the only error
@@ -678,7 +678,7 @@ nmeshopt_setAllocator(
 
     void(
         "encodeVertexVersion",
-        "Experimental: Set vertex encoder format version.",
+        "Set vertex encoder format version.",
 
         int("version", "must specify the data format version to encode; valid values are 0 (decodable by all library versions)")
     )
@@ -707,9 +707,9 @@ nmeshopt_setAllocator(
         Each component is stored as an 8-bit or 16-bit normalized integer; stride must be equal to 4 or 8. W is preserved as is.
         """,
 
-        Check("vertex_count * vertex_size")..void.p("buffer", ""),
-        size_t("vertex_count", ""),
-        size_t("vertex_size", "")
+        MultiType(PointerMapping.DATA_SHORT)..Check("count * stride")..void.p("buffer", ""),
+        size_t("count", ""),
+        size_t("stride", "")
     )
 
     void(
@@ -721,9 +721,9 @@ nmeshopt_setAllocator(
         Each component is stored as an 16-bit integer; stride must be equal to 8.
         """,
 
-        Check("vertex_count * vertex_size")..void.p("buffer", ""),
-        size_t("vertex_count", ""),
-        size_t("vertex_size", "")
+        MultiType(PointerMapping.DATA_SHORT)..Check("count * stride")..void.p("buffer", ""),
+        size_t("count", ""),
+        size_t("stride", "")
     )
 
     void(
@@ -734,9 +734,58 @@ nmeshopt_setAllocator(
         Each 32-bit component is decoded in isolation; stride must be divisible by 4.
         """,
 
-        Check("vertex_count * vertex_size")..void.p("buffer", ""),
-        size_t("vertex_count", ""),
-        size_t("vertex_size", "")
+        MultiType(PointerMapping.DATA_INT)..Check("count * stride")..void.p("buffer", ""),
+        size_t("count", ""),
+        size_t("stride", "")
+    )
+
+    void(
+        "encodeFilterOct",
+        """
+        Experimental: Encodes unit vectors with K-bit (K &le; 16) signed X/Y as an output.
+     
+        Each component is stored as an 8-bit or 16-bit normalized integer; {@code stride} must be equal to 4 or 8. {@code W} is preserved as is. Input data
+        must contain 4 floats for every vector ({@code count*4} total).
+        """,
+
+        MultiType(PointerMapping.DATA_SHORT)..Check("count * 4 * (stride >> 2)")..void.p("destination", ""),
+        size_t("count", ""),
+        size_t("stride", ""),
+        int("bits", ""),
+        Check("count * 4")..float.const.p("data", "")
+    )
+
+    void(
+        "encodeFilterQuat",
+        """
+        Experimental: Encodes unit quaternions with K-bit (4 &le; K &le; 16) component encoding.
+
+        Each component is stored as an 16-bit integer; {@code stride} must be equal to 8. Input data must contain 4 floats for every quaternion
+        ({@code count*4} total).
+        """,
+
+        MultiType(PointerMapping.DATA_SHORT)..Check("count * 4 * 2")..void.p("destination", ""),
+        size_t("count", ""),
+        size_t("stride", ""),
+        int("bits", ""),
+        Check("count * 4")..float.const.p("data", "")
+    )
+
+    void(
+        "encodeFilterExp",
+        """
+        Experimental: Encodes arbitrary (finite) floating-point data with 8-bit exponent and K-bit integer mantissa (1 &le; K &le; 24).
+
+        Mantissa is shared between all components of a given vector as defined by {@code stride}; {@code stride} must be divisible by 4. Input data must
+        contain {@code stride/4} floats for every vector ({@code count*stride/4} total). When individual (scalar) encoding is desired, simply pass
+        {@code stride=4} and adjust {@code count} accordingly.
+        """,
+
+        MultiType(PointerMapping.DATA_INT)..Check("count * (stride >> 2) * 4")..void.p("destination", ""),
+        size_t("count", ""),
+        size_t("stride", ""),
+        int("bits", ""),
+        Check("count * (stride >> 2)")..float.const.p("data", "")
     )
 
     size_t(
@@ -928,8 +977,8 @@ nmeshopt_setAllocator(
     size_t(
         "buildMeshlets",
         """
-        Experimental: Meshlet builder. Splits the mesh into a set of meshlets where each meshlet has a micro index buffer indexing into meshlet vertices that
-        refer to the original vertex buffer.
+        Meshlet builder. Splits the mesh into a set of meshlets where each meshlet has a micro index buffer indexing into meshlet vertices that refer to the
+        original vertex buffer.
          
         The resulting data can be used to render meshes using NVidia programmable mesh shading pipeline, or in other cluster-based renderers. When using
         {@code buildMeshlets}, vertex positions need to be provided to minimize the size of the resulting clusters. When using #buildMeshletsScan(), for
@@ -979,18 +1028,17 @@ nmeshopt_setAllocator(
 
     size_t(
         "buildMeshletsBound",
-        "",
+        "See #buildMeshlets().",
 
         size_t("index_count", ""),
         size_t("max_vertices", ""),
         size_t("max_triangles", "")
     )
 
-
     meshopt_Bounds(
         "computeClusterBounds",
         """
-        Experimental: Cluster bounds generator. Creates bounding volumes that can be used for frustum, backface and occlusion culling.
+        Cluster bounds generator. Creates bounding volumes that can be used for frustum, backface and occlusion culling.
 
         For backface culling with orthographic projection, use the following formula to reject backfacing clusters: {@code dot(view, cone_axis) >= cone_cutoff}
 

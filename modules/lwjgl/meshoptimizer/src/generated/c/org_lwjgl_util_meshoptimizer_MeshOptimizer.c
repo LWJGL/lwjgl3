@@ -183,22 +183,43 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     return (jint)meshopt_decodeVertexBuffer(destination, (size_t)vertex_count, (size_t)vertex_size, buffer, (size_t)buffer_size);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1decodeFilterOct(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong vertex_count, jlong vertex_size) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1decodeFilterOct(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong count, jlong stride) {
     void *buffer = (void *)(intptr_t)bufferAddress;
     UNUSED_PARAMS(__env, clazz)
-    meshopt_decodeFilterOct(buffer, (size_t)vertex_count, (size_t)vertex_size);
+    meshopt_decodeFilterOct(buffer, (size_t)count, (size_t)stride);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1decodeFilterQuat(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong vertex_count, jlong vertex_size) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1decodeFilterQuat(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong count, jlong stride) {
     void *buffer = (void *)(intptr_t)bufferAddress;
     UNUSED_PARAMS(__env, clazz)
-    meshopt_decodeFilterQuat(buffer, (size_t)vertex_count, (size_t)vertex_size);
+    meshopt_decodeFilterQuat(buffer, (size_t)count, (size_t)stride);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1decodeFilterExp(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong vertex_count, jlong vertex_size) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1decodeFilterExp(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong count, jlong stride) {
     void *buffer = (void *)(intptr_t)bufferAddress;
     UNUSED_PARAMS(__env, clazz)
-    meshopt_decodeFilterExp(buffer, (size_t)vertex_count, (size_t)vertex_size);
+    meshopt_decodeFilterExp(buffer, (size_t)count, (size_t)stride);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeFilterOct(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong count, jlong stride, jint bits, jlong dataAddress) {
+    void *destination = (void *)(intptr_t)destinationAddress;
+    float const *data = (float const *)(intptr_t)dataAddress;
+    UNUSED_PARAMS(__env, clazz)
+    meshopt_encodeFilterOct(destination, (size_t)count, (size_t)stride, bits, data);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeFilterQuat(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong count, jlong stride, jint bits, jlong dataAddress) {
+    void *destination = (void *)(intptr_t)destinationAddress;
+    float const *data = (float const *)(intptr_t)dataAddress;
+    UNUSED_PARAMS(__env, clazz)
+    meshopt_encodeFilterQuat(destination, (size_t)count, (size_t)stride, bits, data);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeFilterExp(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong count, jlong stride, jint bits, jlong dataAddress) {
+    void *destination = (void *)(intptr_t)destinationAddress;
+    float const *data = (float const *)(intptr_t)dataAddress;
+    UNUSED_PARAMS(__env, clazz)
+    meshopt_encodeFilterExp(destination, (size_t)count, (size_t)stride, bits, data);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplify(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong target_index_count, jfloat target_error, jlong result_errorAddress) {
