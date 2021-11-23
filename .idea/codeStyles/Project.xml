@@ -2,8 +2,6 @@
   <code_scheme name="Project" version="173">
     <option name="LINE_SEPARATOR" value="&#10;" />
     <option name="RIGHT_MARGIN" value="160" />
-    <option name="HTML_ATTRIBUTE_WRAP" value="0" />
-    <option name="HTML_TEXT_WRAP" value="0" />
     <JavaCodeStyleSettings>
       <option name="DO_NOT_WRAP_AFTER_SINGLE_ANNOTATION" value="true" />
       <option name="BLANK_LINES_AROUND_INITIALIZER" value="0" />
@@ -42,6 +40,7 @@
       <option name="ALIGN_GROUP_FIELD_DECLARATIONS" value="true" />
       <option name="ALIGN_CONSECUTIVE_VARIABLE_DECLARATIONS" value="true" />
       <option name="ALIGN_SUBSEQUENT_SIMPLE_METHODS" value="true" />
+      <option name="SPACE_WITHIN_BRACES" value="true" />
       <option name="SPACE_AFTER_TYPE_CAST" value="false" />
       <option name="SPACE_BEFORE_ARRAY_INITIALIZER_LBRACE" value="true" />
       <option name="PREFER_PARAMETERS_WRAP" value="true" />
@@ -57,6 +56,9 @@
       <indentOptions>
         <option name="CONTINUATION_INDENT_SIZE" value="4" />
       </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="Markdown">
+      <option name="RIGHT_MARGIN" value="72" />
     </codeStyleSettings>
     <codeStyleSettings language="kotlin">
       <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
