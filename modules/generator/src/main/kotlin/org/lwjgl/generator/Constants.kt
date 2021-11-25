@@ -56,6 +56,16 @@ class EnumIntValueExpression(
 val EnumConstant = ConstantType(EnumIntValue::class) { "0x%X".format(it) }
 
 // TODO: this is ugly, try new DSL?
+open class EnumByteValue(
+    documentation: (() -> String?) = { null },
+    val value: Byte? = null
+) : EnumValue(documentation)
+class EnumByteValueExpression(
+    documentation: () -> String?,
+    val expression: String
+) : EnumByteValue(documentation, null)
+val EnumConstantByte = ConstantType(EnumByteValue::class) { "0x%X".format(it) }
+
 open class EnumLongValue(
     documentation: (() -> String?) = { null },
     val value: Long? = null
@@ -139,6 +149,48 @@ class ConstantBlock<T : Any>(
         }
     }
 
+    private fun generateEnumByte(rootBlock: ArrayList<Constant<Number>>) {
+        var value = 0L
+        var formatType = 1 // 0: hex, 1: decimal
+        for (c in constants) {
+            if (c is ConstantExpression) {
+                @Suppress("UNCHECKED_CAST")
+                rootBlock.add(c as ConstantExpression<Byte>)
+                continue
+            }
+
+            (c.value as EnumByteValue).let { ev ->
+                rootBlock.add(when {
+                    ev is EnumByteValueExpression -> {
+                        try {
+                            value = java.lang.Byte.parseByte(ev.expression) + 1L // decimal
+                            formatType = 1 // next values will be decimal
+                        } catch(e: NumberFormatException) {
+                            try {
+                                value = java.lang.Byte.parseByte(ev.expression, 16) + 1L // hex
+                            } catch(e: Exception) {
+                                // ignore
+                            }
+                            formatType = 0 // next values will be hex
+                        }
+                        ConstantExpression(c.name, ev.expression, false)
+                    }
+                    ev.value != null          -> {
+                        value = ev.value + 1L
+                        formatType = 0
+                        Constant(c.name, ev.value)
+                    }
+                    else                      -> {
+                        if (formatType == 1)
+                            ConstantExpression(c.name, (value++).toString(), false)
+                        else
+                            Constant(c.name, value++)
+                    }
+                })
+            }
+        }
+    }
+
     private fun generateEnumLong(rootBlock: ArrayList<Constant<Number>>) {
         var value = 0L
         var formatType = 1 // 0: hex, 1: decimal
@@ -182,7 +234,7 @@ class ConstantBlock<T : Any>(
     }
 
     internal fun generate(writer: PrintWriter) {
-        if (constantType === EnumConstant || constantType === EnumConstantLong) {
+        if (constantType === EnumConstant || constantType === EnumConstantByte || constantType === EnumConstantLong) {
             // Increment/update the current enum value while iterating the enum constants.
             // Constants without documentation are added to the root block.
             // Constants with documentation go to their own block.
@@ -192,6 +244,9 @@ class ConstantBlock<T : Any>(
             val constantTypeRender = if (constantType === EnumConstant) {
                 generateEnumInt(rootBlock)
                 IntConstant
+            } else if (constantType === EnumConstantByte) {
+                generateEnumByte(rootBlock)
+                ByteConstant
             } else {
                 generateEnumLong(rootBlock)
                 LongConstant

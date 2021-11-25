@@ -657,6 +657,15 @@ class NativeClass internal constructor(
         Constant(this, EnumIntValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
 
     // TODO: this is ugly, try new DSL?
+    val String.enumByte get() = Constant(this, EnumByteValue())
+    infix fun String.enumByte(documentation: String) =
+        Constant(this, EnumByteValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))
+    infix fun String.enum(value: Byte) = Constant(this, EnumByteValue(value = value))
+    fun String.enum(documentation: String, value: Byte) =
+        Constant(this, EnumByteValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, value))
+    fun String.enumByte(documentation: String, expression: String) =
+        Constant(this, EnumByteValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
+    
     val String.enumLong get() = Constant(this, EnumLongValue())
     infix fun String.enumLong(documentation: String) =
         Constant(this, EnumLongValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))
