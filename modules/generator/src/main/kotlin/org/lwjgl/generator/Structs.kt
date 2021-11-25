@@ -548,7 +548,13 @@ $indent}"""
                 this
         }
 
-    private fun StructMember.getCheckExpression() = if (this.has<Check>()) this.get<Check>().expression else null
+    private fun StructMember.getCheckExpression() = if (this.has<Check>())
+        this.get<Check>().expression.let { expression ->
+            // if expression is the name of another member, convert to auto-size expression
+            members.singleOrNull { it.name == expression }?.autoSize ?: expression
+        }
+    else
+        null
 
     private fun PrintWriter.printDocumentation() {
         val builder = StringBuilder()
@@ -1568,7 +1574,7 @@ ${validations.joinToString("\n")}
             }
         }
         .let {
-            val factor = get<AutoSizeMember>().factor
+            val factor = if (has<AutoSizeMember>()) get<AutoSizeMember>().factor else null
             if (factor != null)
                 "(${factor.scale(it)})"
             else
