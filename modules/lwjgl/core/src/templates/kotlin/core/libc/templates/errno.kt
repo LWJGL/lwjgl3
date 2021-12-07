@@ -70,7 +70,10 @@ val errno = "LibCErrno".nativeClass(Module.CORE_LIBC) {
         void()
     )
 
-    int(
+    Code(
+        nativeCall = """${t}EnvData *envData = (EnvData *)(*__env)->reserved2;
+${t}return envData == NULL ? 0 : envData->errnum;"""
+    )..int(
         "getErrno",
         """
         Returns the integer variable {@code errno}, which is set by system calls and some library functions in the event of an error to indicate what went

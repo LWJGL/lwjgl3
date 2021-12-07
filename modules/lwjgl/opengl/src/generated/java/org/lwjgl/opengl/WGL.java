@@ -11,7 +11,6 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
-import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -19,6 +18,8 @@ import org.lwjgl.system.windows.*;
 
 /** Native bindings to WGL functionality. */
 public class WGL {
+
+    static { GL.initialize(); }
 
     /** Contains the function pointers loaded from {@code GL.getFunctionProvider()}. */
     public static final class Functions {
@@ -84,6 +85,9 @@ public class WGL {
 
     // --- [ wglCreateContext ] ---
 
+    /** Unsafe version of: {@link #wglCreateContext CreateContext} */
+    public static native long nwglCreateContext(long hdc, long __functionAddress);
+
     /**
      * Creates a new OpenGL rendering context, which is suitable for drawing on the device referenced by device. The rendering context has the same pixel
      * format as the device context.
@@ -96,10 +100,13 @@ public class WGL {
         if (CHECKS) {
             check(hdc);
         }
-        return callPP(hdc, __functionAddress);
+        return nwglCreateContext(hdc, __functionAddress);
     }
 
     // --- [ wglCreateLayerContext ] ---
+
+    /** Unsafe version of: {@link #wglCreateLayerContext CreateLayerContext} */
+    public static native long nwglCreateLayerContext(long hdc, int layerPlane, long __functionAddress);
 
     /**
      * Creates a new OpenGL rendering context for drawing to a specified layer plane on a device context.
@@ -117,10 +124,13 @@ public class WGL {
         if (CHECKS) {
             check(hdc);
         }
-        return callPP(hdc, layerPlane, __functionAddress);
+        return nwglCreateLayerContext(hdc, layerPlane, __functionAddress);
     }
 
     // --- [ wglCopyContext ] ---
+
+    /** Unsafe version of: {@link #wglCopyContext CopyContext} */
+    public static native int nwglCopyContext(long src, long dst, int mask, long __functionAddress);
 
     /**
      * Copies selected groups of rendering states from one OpenGL rendering context to another.
@@ -137,10 +147,13 @@ public class WGL {
             check(src);
             check(dst);
         }
-        return callPPI(src, dst, mask, __functionAddress) != 0;
+        return nwglCopyContext(src, dst, mask, __functionAddress) != 0;
     }
 
     // --- [ wglDeleteContext ] ---
+
+    /** Unsafe version of: {@link #wglDeleteContext DeleteContext} */
+    public static native int nwglDeleteContext(long context, long __functionAddress);
 
     /**
      * Deletes a specified OpenGL rendering context.
@@ -153,33 +166,42 @@ public class WGL {
         if (CHECKS) {
             check(context);
         }
-        return callPI(context, __functionAddress) != 0;
+        return nwglDeleteContext(context, __functionAddress) != 0;
     }
 
     // --- [ wglGetCurrentContext ] ---
+
+    /** Unsafe version of: {@link #wglGetCurrentContext GetCurrentContext} */
+    public static native long nwglGetCurrentContext(long __functionAddress);
 
     /** Obtains a handle to the current OpenGL rendering context of the calling thread. */
     @NativeType("HGLRC")
     public static long wglGetCurrentContext() {
         long __functionAddress = Functions.GetCurrentContext;
-        return callP(__functionAddress);
+        return nwglGetCurrentContext(__functionAddress);
     }
 
     // --- [ wglGetCurrentDC ] ---
+
+    /** Unsafe version of: {@link #wglGetCurrentDC GetCurrentDC} */
+    public static native long nwglGetCurrentDC(long __functionAddress);
 
     /** Obtains a handle to the device context that is associated with the current OpenGL rendering context of the calling thread. */
     @NativeType("HDC")
     public static long wglGetCurrentDC() {
         long __functionAddress = Functions.GetCurrentDC;
-        return callP(__functionAddress);
+        return nwglGetCurrentDC(__functionAddress);
     }
 
     // --- [ wglGetProcAddress ] ---
 
     /** Unsafe version of: {@link #wglGetProcAddress GetProcAddress} */
+    public static native long nwglGetProcAddress(long proc, long __functionAddress);
+
+    /** Unsafe version of: {@link #wglGetProcAddress GetProcAddress} */
     public static long nwglGetProcAddress(long proc) {
         long __functionAddress = Functions.GetProcAddress;
-        return callPP(proc, __functionAddress);
+        return nwglGetProcAddress(proc, __functionAddress);
     }
 
     /**
@@ -216,6 +238,9 @@ public class WGL {
 
     // --- [ wglMakeCurrent ] ---
 
+    /** Unsafe version of: {@link #wglMakeCurrent MakeCurrent} */
+    public static native int nwglMakeCurrent(long hdc, long hglrc, long __functionAddress);
+
     /**
      * Makes a specified OpenGL rendering context the calling thread's current rendering context. All subsequent OpenGL calls made by the thread are drawn on
      * the device identified by device. You can also use MakeCurrent to change the calling thread's current rendering context so it's no longer current.
@@ -228,10 +253,13 @@ public class WGL {
     @NativeType("BOOL")
     public static boolean wglMakeCurrent(@NativeType("HDC") long hdc, @NativeType("HGLRC") long hglrc) {
         long __functionAddress = Functions.MakeCurrent;
-        return callPPI(hdc, hglrc, __functionAddress) != 0;
+        return nwglMakeCurrent(hdc, hglrc, __functionAddress) != 0;
     }
 
     // --- [ wglShareLists ] ---
+
+    /** Unsafe version of: {@link #wglShareLists ShareLists} */
+    public static native int nwglShareLists(long hglrc1, long hglrc2, long __functionAddress);
 
     /**
      * Enables multiple OpenGL rendering contexts to share a single display-list space.
@@ -247,7 +275,7 @@ public class WGL {
             check(hglrc1);
             check(hglrc2);
         }
-        return callPPI(hglrc1, hglrc2, __functionAddress) != 0;
+        return nwglShareLists(hglrc1, hglrc2, __functionAddress) != 0;
     }
 
 }

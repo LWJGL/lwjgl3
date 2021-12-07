@@ -4,7 +4,7 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
-#define APIENTRY __stdcall
+#include "WindowsLWJGL.h"
 
 typedef jshort (APIENTRY *RegisterClassExWPROC) (intptr_t);
 typedef jint (APIENTRY *UnregisterClassWPROC) (intptr_t, intptr_t);

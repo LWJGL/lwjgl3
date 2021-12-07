@@ -11,7 +11,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 import static org.lwjgl.system.jni.JNINativeInterface.*;
 
-/** This class supports bindings with thread-local contexts. [INTERNAL USE ONLY] */
+/** This class supports bindings with thread-local data. [INTERNAL USE ONLY] */
 public final class ThreadLocalUtil {
 
     /*
@@ -25,7 +25,7 @@ public final class ThreadLocalUtil {
     any) instances we encounter, which is indeed the case for the vast majority of programs. If an incompatible instance is encountered, there is a fall back
     to the thread-local lookup.
 
-    The above is applicable to methods with Critical Natives (i.e. array overloads). All other methods use the following technique:
+    The above applies to array overload methods only. All other methods use the following technique:
 
     2) The function pointers of a capabilities instance are stored in an off-heap array, which is then stored in one of the reserved members of the
     jniNativeInterface struct. This struct is then injected to the Hotspot native thread that corresponds to the Java thread in which the capabilities instance
@@ -80,19 +80,24 @@ public final class ThreadLocalUtil {
     - Depends on Hotspot implementation details.
     - Requires custom JNI code for each function.
     - (minor) Function pointers are not checked anymore. Calling an unsupported function causes a segfault.
-    - (minor) Critical Natives cannot use it, there's no JNIEnv* parameter.
     - (minor) JVMTI has the ability to intercept JNI functions with SetJNIFunctionTable. This interacts badly with the jniNativeInterface copies, but it should
     be easy to workaround (attaching the agent at startup, making sure no contexts are current when the agent is attached, clearing and setting again the
     capabilities instance).
+
+    Since 3.3.1: the JNIEnv copies are now also used for storing/retrieving the thread-local errno/LastError values.
     */
 
     /** The global JNIEnv. */
-    private static final long JNI_NATIVE_INTERFACE = getThreadJNIEnv();
+    private static final long JNI_NATIVE_INTERFACE = memGetAddress(getThreadJNIEnv());
+
+    /** The number of pointers in the JNIEnv struct. */
+    private static final int JNI_NATIVE_INTERFACE_FUNCTION_COUNT;
 
     /** A function to delegate to when an unsupported function is called. */
     private static final long FUNCTION_MISSING_ABORT = getFunctionMissingAbort();
 
-    private static final long SIZE_OF_JNI_NATIVE_INTERFACE;
+    /** The offset in JNIEnv at which to store the pointer to the capabilities array. */
+    private static final int CAPABILITIES_OFFSET = 3 * POINTER_SIZE;
 
     static {
         int JNI_VERSION = GetVersion();
@@ -130,7 +135,7 @@ public final class ThreadLocalUtil {
                 DEBUG_STREAM
                     .println("[LWJGL] [ThreadLocalUtil] Unsupported JNI version detected, this may result in a crash. Please inform LWJGL developers.");
         }
-        SIZE_OF_JNI_NATIVE_INTERFACE = Integer.toUnsignedLong((reservedCount + jniCallCount)) * POINTER_SIZE;
+        JNI_NATIVE_INTERFACE_FUNCTION_COUNT = reservedCount + jniCallCount;
     }
 
     private ThreadLocalUtil() {
@@ -138,41 +143,41 @@ public final class ThreadLocalUtil {
 
     private static native long getThreadJNIEnv();
 
-    private static native void setThreadJNIEnv(long JNIEnv);
-
     private static native long getFunctionMissingAbort();
 
-    public static void setEnv(long capabilities, int index) {
-        if (index < 0 || 3 < index) { // reserved0-3
-            throw new IndexOutOfBoundsException();
-        }
+    private static native long nsetupEnvData(int functionCount);
+    public static long setupEnvData() {
+        return nsetupEnvData(JNI_NATIVE_INTERFACE_FUNCTION_COUNT);
+    }
 
+    public static void setCapabilities(long capabilities) {
         // Get thread's JNIEnv
-        long env = getThreadJNIEnv();
+        long env_pp = getThreadJNIEnv();
+        long env_p  = memGetAddress(env_pp);
 
         if (capabilities == NULL) {
-            if (env != JNI_NATIVE_INTERFACE) {
-                setThreadJNIEnv(JNI_NATIVE_INTERFACE);
-                nmemFree(env);
+            if (env_p != JNI_NATIVE_INTERFACE) {
+                memPutAddress(env_p + CAPABILITIES_OFFSET,
+                    // FUNCTION_MISSING_ABORT table
+                    memGetAddress(JNI_NATIVE_INTERFACE + CAPABILITIES_OFFSET));
             }
         } else {
-            if (env == JNI_NATIVE_INTERFACE) {
-                long newEnv = nmemAllocChecked(SIZE_OF_JNI_NATIVE_INTERFACE);
-                memCopy(env, newEnv, SIZE_OF_JNI_NATIVE_INTERFACE);
-                setThreadJNIEnv(env = newEnv);
+            if (env_p == JNI_NATIVE_INTERFACE) {
+                setupEnvData();
+                env_p = memGetAddress(env_pp);
             }
-
-            memPutAddress(env + Integer.toUnsignedLong(index) * POINTER_SIZE, capabilities);
+            memPutAddress(env_p + CAPABILITIES_OFFSET, capabilities);
         }
     }
 
     // Ensures FUNCTION_MISSING_ABORT will be called even if no context is current,
-    public static void setFunctionMissingAddresses(int functionCount, int index) {
+    public static void setFunctionMissingAddresses(int functionCount) {
+        long ptr = JNI_NATIVE_INTERFACE + CAPABILITIES_OFFSET;
         if (functionCount == 0) {
-            long missingCaps = memGetAddress(JNI_NATIVE_INTERFACE + Integer.toUnsignedLong(index) * POINTER_SIZE);
+            long missingCaps = memGetAddress(ptr);
             if (missingCaps != NULL) {
                 getAllocator().free(missingCaps);
-                memPutAddress(JNI_NATIVE_INTERFACE + Integer.toUnsignedLong(index) * POINTER_SIZE, NULL);
+                memPutAddress(ptr, NULL);
             }
         } else {
             long missingCaps = getAllocator().malloc(Integer.toUnsignedLong(functionCount) * POINTER_SIZE);
@@ -180,7 +185,7 @@ public final class ThreadLocalUtil {
                 memPutAddress(missingCaps + Integer.toUnsignedLong(i) * POINTER_SIZE, FUNCTION_MISSING_ABORT);
             }
 
-            memPutAddress(JNI_NATIVE_INTERFACE + Integer.toUnsignedLong(index) * POINTER_SIZE, missingCaps);
+            memPutAddress(ptr, missingCaps);
         }
     }
 

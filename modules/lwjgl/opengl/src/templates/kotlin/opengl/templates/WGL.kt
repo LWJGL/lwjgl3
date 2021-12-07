@@ -9,9 +9,8 @@ import opengl.*
 import core.windows.*
 
 val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.delegate("GL.getFunctionProvider()")) {
-    javaImport(
-        "org.lwjgl.system.windows.*"
-    )
+    nativeImport("WindowsLWJGL.h")
+    javaImport("org.lwjgl.system.windows.*")
 
     documentation = "Native bindings to WGL functionality."
 
@@ -56,7 +55,7 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         "SWAP_UNDERLAY15"..0x40000000
     )
 
-    HGLRC(
+    SaveLastError..HGLRC(
         "CreateContext",
         """
         Creates a new OpenGL rendering context, which is suitable for drawing on the device referenced by device. The rendering context has the same pixel
@@ -66,7 +65,7 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         HDC("hdc", "handle to a device context for which the function creates a suitable OpenGL rendering context")
     )
 
-    HGLRC(
+    SaveLastError..HGLRC(
         "CreateLayerContext",
         "Creates a new OpenGL rendering context for drawing to a specified layer plane on a device context.",
 
@@ -83,7 +82,7 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         )
     )
 
-    BOOL(
+    SaveLastError..BOOL(
         "CopyContext",
         "Copies selected groups of rendering states from one OpenGL rendering context to another.",
 
@@ -98,26 +97,26 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         )
     )
 
-    BOOL(
+    SaveLastError..BOOL(
         "DeleteContext",
         "Deletes a specified OpenGL rendering context.",
 
         HGLRC("context", "handle to an OpenGL rendering context that the function will delete")
     )
 
-    HGLRC(
+    SaveLastError..HGLRC(
         "GetCurrentContext",
         "Obtains a handle to the current OpenGL rendering context of the calling thread.",
         void()
     )
 
-    HDC(
+    SaveLastError..HDC(
         "GetCurrentDC",
         "Obtains a handle to the device context that is associated with the current OpenGL rendering context of the calling thread.",
         void()
     )
 
-    PROC(
+    SaveLastError..PROC(
         "GetProcAddress",
         "Returns the address of an OpenGL extension function for use with the current OpenGL rendering context.",
 
@@ -130,7 +129,7 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         )
     )
 
-    BOOL(
+    SaveLastError..BOOL(
         "MakeCurrent",
         """
         Makes a specified OpenGL rendering context the calling thread's current rendering context. All subsequent OpenGL calls made by the thread are drawn on
@@ -148,7 +147,7 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         )
     )
 
-    BOOL(
+    SaveLastError..BOOL(
         "ShareLists",
         "Enables multiple OpenGL rendering contexts to share a single display-list space.",
 
@@ -174,7 +173,7 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
     */
 
     /*
-    NativeName("wglUseFontBitmapsW")..BOOL(
+    SaveLastError..NativeName("wglUseFontBitmapsW")..BOOL(
         "UseFontBitmaps",
         """
         Creates a set of bitmap display lists for use in the current OpenGL rendering context. The set of bitmap display lists is based on the glyphs in the
@@ -189,7 +188,7 @@ val WGL = "WGL".nativeClass(Module.OPENGL, prefix = "WGL", binding = GLBinding.d
         DWORD("listBase", "the starting display list")
     )
 
-    NativeName("wglUseFontOutlinesW")..BOOL(
+    SaveLastError..NativeName("wglUseFontOutlinesW")..BOOL(
         "UseFontOutlines",
         """
         Creates a set of display lists, one for each glyph of the currently selected outline font of a device context, for use with the current rendering

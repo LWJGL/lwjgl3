@@ -173,7 +173,7 @@ public final class GLES {
         }
 
         GLES.functionProvider = functionProvider;
-        ThreadLocalUtil.setFunctionMissingAddresses(GLESCapabilities.ADDRESS_BUFFER_SIZE, 3);
+        ThreadLocalUtil.setFunctionMissingAddresses(GLESCapabilities.ADDRESS_BUFFER_SIZE);
     }
     /** Unloads the OpenGL ES native library. */
     public static void destroy() {
@@ -181,7 +181,7 @@ public final class GLES {
             return;
         }
 
-        ThreadLocalUtil.setFunctionMissingAddresses(0, 3);
+        ThreadLocalUtil.setFunctionMissingAddresses(0);
 
         if (functionProvider instanceof NativeResource) {
             ((NativeResource)functionProvider).free();
@@ -203,7 +203,7 @@ public final class GLES {
      */
     public static void setCapabilities(@Nullable GLESCapabilities caps) {
         capabilitiesTLS.set(caps);
-        ThreadLocalUtil.setEnv(caps == null ? NULL : memAddress(caps.addresses), 3);
+        ThreadLocalUtil.setCapabilities(caps == null ? NULL : memAddress(caps.addresses));
         icd.set(caps);
     }
 

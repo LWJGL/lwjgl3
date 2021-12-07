@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import core.windows.*
 
 val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", binding = simpleBinding(Module.CORE_WINDOWS, "user32")) {
-    nativeDirective("#define APIENTRY __stdcall")
+    nativeImport("WindowsLWJGL.h")
 
     documentation = "Native bindings to WinUser.h and user32.dll."
 

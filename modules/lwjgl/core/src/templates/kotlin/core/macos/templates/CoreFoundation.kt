@@ -14,9 +14,7 @@ val ALLOCATOR = nullable..Parameter(
 )
 
 val CoreFoundation = "CoreFoundation".nativeClass(Module.CORE_MACOS, nativeSubPath = "macos") {
-    nativeImport(
-        "macOSLWJGL.h"
-    )
+    nativeImport("<CoreFoundation/CoreFoundation.h>")
 
     documentation = "Native bindings to &lt;CoreFoundation.h&gt;."
 

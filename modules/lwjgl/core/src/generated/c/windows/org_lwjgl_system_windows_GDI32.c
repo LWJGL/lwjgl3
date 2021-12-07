@@ -4,7 +4,7 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
-#define APIENTRY __stdcall
+#include "WindowsLWJGL.h"
 
 typedef jint (APIENTRY *ChoosePixelFormatPROC) (intptr_t, intptr_t);
 typedef jint (APIENTRY *DescribePixelFormatPROC) (intptr_t, jint, jint, intptr_t);

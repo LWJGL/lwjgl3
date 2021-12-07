@@ -7,10 +7,7 @@ package core.linux.templates
 import org.lwjgl.generator.*
 
 val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
-    nativeImport(
-        "LinuxLWJGL.h",
-        "<dlfcn.h>"
-    )
+    nativeImport("<dlfcn.h>")
 
     documentation = "Native bindings to &lt;dlfcn.h&gt;."
 

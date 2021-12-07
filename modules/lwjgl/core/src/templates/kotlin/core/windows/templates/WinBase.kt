@@ -32,7 +32,10 @@ val WinBase = "WinBase".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
         void()
     )
 
-    DWORD(
+    Code(
+        nativeCall = """${t}EnvData *envData = (EnvData *)(*__env)->reserved2;
+${t}return envData == NULL ? 0 : envData->LastError;"""
+    )..DWORD(
         "getLastError",
         """
         Retrieves the calling thread's last-error code value. The last-error code is maintained on a per-thread basis. Multiple threads do not overwrite each

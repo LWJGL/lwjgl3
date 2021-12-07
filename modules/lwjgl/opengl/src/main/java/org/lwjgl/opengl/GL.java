@@ -152,7 +152,9 @@ public final class GL {
 
                 @Override
                 public long getFunctionAddress(ByteBuffer functionName) {
-                    long address = GetProcAddress == NULL ? NULL : callPP(memAddress(functionName), GetProcAddress);
+                    long address = GetProcAddress == NULL ? NULL : Platform.get() == Platform.WINDOWS
+                        ? nwglGetProcAddress(memAddress(functionName), GetProcAddress) // save LastError
+                        : callPP(memAddress(functionName), GetProcAddress);
                     if (address == NULL) {
                         address = library.getFunctionAddress(functionName);
                         if (address == NULL && DEBUG_FUNCTIONS) {
@@ -180,7 +182,7 @@ public final class GL {
         }
 
         GL.functionProvider = functionProvider;
-        ThreadLocalUtil.setFunctionMissingAddresses(GLCapabilities.ADDRESS_BUFFER_SIZE, 3);
+        ThreadLocalUtil.setFunctionMissingAddresses(GLCapabilities.ADDRESS_BUFFER_SIZE);
     }
 
     /** Unloads the OpenGL native library. */
@@ -189,7 +191,7 @@ public final class GL {
             return;
         }
 
-        ThreadLocalUtil.setFunctionMissingAddresses(0, 3);
+        ThreadLocalUtil.setFunctionMissingAddresses(0);
 
         capabilitiesWGL = null;
         capabilitiesGLX = null;
@@ -214,7 +216,7 @@ public final class GL {
      */
     public static void setCapabilities(@Nullable GLCapabilities caps) {
         capabilitiesTLS.set(caps);
-        ThreadLocalUtil.setEnv(caps == null ? NULL : memAddress(caps.addresses), 3);
+        ThreadLocalUtil.setCapabilities(caps == null ? NULL : memAddress(caps.addresses));
         icd.set(caps);
     }
 

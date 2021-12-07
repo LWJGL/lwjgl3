@@ -282,7 +282,12 @@
         </build>
 
         <!-- OpenGL -->
-        <build_simple module="opengl"/>
+        <build module="opengl">
+            <source>
+                <arg value="-I${src.main.rel}"/>
+                <fileset dir="." includes="${src.generated}/*" excludes="${src.generated}/org_lwjgl_opengl_WGL.c"/>
+            </source>
+        </build>
 
         <!-- OpenGL ES -->
         <build_simple module="opengles"/>
