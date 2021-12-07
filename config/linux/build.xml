@@ -38,7 +38,9 @@
                 <arg line="-c -std=gnu++11" if:set="cpp"/>
                 <arg line="-m64" if:set="build.arch.x64"/>
                 <arg line="-m32 -mfpmath=sse -msse -msse2" if:set="build.arch.x86"/>
-                <arg line="-O3 @{lto} -fPIC @{flags} -pthread -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
+                <arg line="-O3 @{lto} -fPIC @{flags} -pthread -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
+                <arg line="-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0 -D_GNU_SOURCE"/>
+                <arg line="-D_FILE_OFFSET_BITS=64"/>
 
                 <arg value="-I${jni.headers}"/>
                 <arg value="-I${jni.headers}/linux"/>
@@ -162,13 +164,22 @@
 
         <!-- CORE -->
         <build module="core" flags="-Werror -Wfatal-errors -Wall -Wextra -pedantic">
+            <beforeCompile>
+                <compile>
+                    <arg value="-I${src.main.rel}/${platform}/liburing"/>
+                    <arg value="-I${src.main.rel}/${platform}/liburing/include"/>
+                    <arg value="-DCONFIG_HAVE_MEMFD_CREATE"/>
+                    <fileset dir="." includes="${src.main}/${platform}/liburing/*.c"/>
+                </compile>
+            </beforeCompile>
             <source>
                 <arg value="-I${src.main.rel}/libffi"/>
                 <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
                 <arg value="-I${src.main.rel}/libffi/x86" unless:set="build.arch.arm"/>
-                <!-- for libffi/x86/ffitarget.h -->
-                <arg value="-DX86_64" if:set="build.arch.x64"/>
+                <arg value="-DX86_64" if:set="build.arch.x64"/> <!-- for libffi/x86/ffitarget.h -->
+                <arg value="-I${src.main.rel}/${platform}/liburing"/>
+                <arg value="-I${src.main.rel}/${platform}/liburing/include"/>
                 <fileset dir=".">
                     <include name="${src.main}/*.c"/>
                     <include name="${src.generated}/*.c"/>

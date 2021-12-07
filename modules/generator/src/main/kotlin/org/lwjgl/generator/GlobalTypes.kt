@@ -41,6 +41,7 @@ val unsigned_short = IntegerType("unsigned short", PrimitiveMapping.SHORT, unsig
 val unsigned_int = IntegerType("unsigned int", PrimitiveMapping.INT, unsigned = true)
 val unsigned_intb = PrimitiveType("unsigned int", PrimitiveMapping.BOOLEAN4)
 val unsigned_long = IntegerType("unsigned long", PrimitiveMapping.CLONG, unsigned = true)
+val unsigned_long_int = IntegerType("unsigned long int", PrimitiveMapping.CLONG, unsigned = true)
 val unsigned_long_long = IntegerType("unsigned long long", PrimitiveMapping.LONG, unsigned = true)
 
 // strings

@@ -3,6 +3,9 @@
  * License terms: https://www.lwjgl.org/license
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
+#ifdef LWJGL_WINDOWS
+    #define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "common_tools.h"
 #include <string.h>
 
@@ -26,6 +29,11 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCString_nmemmove__JJJ(JNIE
     void const *src = (void const *)(intptr_t)srcAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jlong)(intptr_t)memmove(dest, src, (size_t)count);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCString_nstrerror(JNIEnv *__env, jclass clazz, jint errnum) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(intptr_t)strerror(errnum);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCString_nmemset___3BIJ(JNIEnv *__env, jclass clazz, jbyteArray destAddress, jint c, jlong count) {

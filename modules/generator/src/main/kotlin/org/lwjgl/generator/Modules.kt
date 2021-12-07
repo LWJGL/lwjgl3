@@ -38,6 +38,11 @@ enum class Module(
         "org.lwjgl.system.linux",
         "Contains bindings to native APIs specific to the Linux operating system."
     ),
+    CORE_LINUX_LIBURING(
+        "core.linux.liburing",
+        "org.lwjgl.system.linux.liburing",
+        "Contains bindings to liburing." // TODO:
+    ),
     CORE_MACOS(
         "core.macos",
         "org.lwjgl.system.macosx",

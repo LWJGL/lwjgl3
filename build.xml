@@ -802,6 +802,7 @@
             <include name="org/lwjgl/demo/stb/**" if:set="test.stb"/>
 
             <include name="org/lwjgl/demo/system/jawt/**" if:set="test.jawt"/>
+            <include name="org/lwjgl/demo/system/linux/liburing/**" if:set="platform.linux"/>
 
             <include name="org/lwjgl/demo/util/*.java"/>
             <include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>

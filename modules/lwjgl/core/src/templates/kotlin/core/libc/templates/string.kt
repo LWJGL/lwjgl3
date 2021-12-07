@@ -7,6 +7,10 @@ package core.libc.templates
 import org.lwjgl.generator.*
 
 val string = "LibCString".nativeClass(Module.CORE_LIBC) {
+    nativeDirective(
+        """#ifdef LWJGL_WINDOWS
+    #define _CRT_SECURE_NO_WARNINGS
+#endif""", beforeIncludes = true)
     nativeImport("<string.h>")
 
     documentation = "Native bindings to string.h."
@@ -134,4 +138,11 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
         }
         return nmemmove(memAddress(dest), memAddress(src), (long)src.remaining() * src.sizeof());
     }""")
+
+    charASCII.p(
+        "strerror",
+        "Returns string describing error number.",
+
+        int("errnum", "")
+    )
 }

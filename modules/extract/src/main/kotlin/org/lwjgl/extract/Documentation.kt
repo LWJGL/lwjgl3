@@ -229,6 +229,10 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
                         parseChildren(doc, builder, context)
                         builder.append("</h3>")
                     }
+                    "pre" -> {
+                        builder.append("Precondition: ")
+                        parseChildren(doc, builder, context)
+                    }
                     "return",
                     "returns",
                     "result"     -> {
