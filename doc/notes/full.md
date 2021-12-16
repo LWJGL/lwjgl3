@@ -14,7 +14,7 @@ This build includes the following changes:
 - bgfx: Updated to API version 115 (up from 100)
 - CUDA: Updated to 11.5.0 (up from 10.1.0)
   * Now includes full API documentation.
-- glfw: Updated to latest 3.3.4 (up from 3.3.1):
+- glfw: Updated to latest 3.3.5 (up from 3.3.1):
   * Added `GLFW_WIN32_KEYBOARD_MENU`.
   * Added `GLFW_CURSOR_UNAVAILABLE`.
   * Added `GLFW_FEATURE_UNAVAILABLE`.
