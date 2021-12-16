@@ -2303,7 +2303,6 @@ public class VK11 extends VK10 {
         long __functionAddress = device.getCapabilities().vkCreateSamplerYcbcrConversion;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pYcbcrConversion, __functionAddress);
     }
@@ -2388,7 +2387,6 @@ public class VK11 extends VK10 {
         long __functionAddress = device.getCapabilities().vkDestroySamplerYcbcrConversion;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), ycbcrConversion, pAllocator, __functionAddress);
     }
@@ -2449,7 +2447,6 @@ public class VK11 extends VK10 {
         if (CHECKS) {
             check(__functionAddress);
             VkDescriptorUpdateTemplateCreateInfo.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pDescriptorUpdateTemplate, __functionAddress);
     }
@@ -2528,7 +2525,6 @@ public class VK11 extends VK10 {
         long __functionAddress = device.getCapabilities().vkDestroyDescriptorUpdateTemplate;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), descriptorUpdateTemplate, pAllocator, __functionAddress);
     }
@@ -2718,7 +2714,6 @@ public class VK11 extends VK10 {
         long __functionAddress = device.getCapabilities().vkUpdateDescriptorSetWithTemplate;
         if (CHECKS) {
             check(__functionAddress);
-            check(pData);
         }
         callPJJPV(device.address(), descriptorSet, descriptorUpdateTemplate, pData, __functionAddress);
     }
@@ -3016,7 +3011,6 @@ public class VK11 extends VK10 {
         if (CHECKS) {
             check(__functionAddress);
             check(pYcbcrConversion, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pYcbcrConversion, __functionAddress);
     }
@@ -3029,7 +3023,6 @@ public class VK11 extends VK10 {
             check(__functionAddress);
             check(pDescriptorUpdateTemplate, 1);
             VkDescriptorUpdateTemplateCreateInfo.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pDescriptorUpdateTemplate, __functionAddress);
     }

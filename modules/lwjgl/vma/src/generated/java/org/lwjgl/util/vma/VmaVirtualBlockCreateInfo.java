@@ -251,18 +251,6 @@ public class VmaVirtualBlockCreateInfo extends Struct implements NativeResource 
     /** Unsafe version of {@link #pAllocationCallbacks(VkAllocationCallbacks) pAllocationCallbacks}. */
     public static void npAllocationCallbacks(long struct, @Nullable VkAllocationCallbacks value) { memPutAddress(struct + VmaVirtualBlockCreateInfo.PALLOCATIONCALLBACKS, memAddressSafe(value)); }
 
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        long pAllocationCallbacks = memGetAddress(struct + VmaVirtualBlockCreateInfo.PALLOCATIONCALLBACKS);
-        if (pAllocationCallbacks != NULL) {
-            VkAllocationCallbacks.validate(pAllocationCallbacks);
-        }
-    }
-
     // -----------------------------------
 
     /** An array of {@link VmaVirtualBlockCreateInfo} structs. */

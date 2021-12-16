@@ -92,7 +92,6 @@ public class KHRDisplaySwapchain {
         long __functionAddress = device.getCapabilities().vkCreateSharedSwapchainsKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), swapchainCount, pCreateInfos, pAllocator, pSwapchains, __functionAddress);
     }
@@ -176,7 +175,6 @@ public class KHRDisplaySwapchain {
         if (CHECKS) {
             check(__functionAddress);
             check(pSwapchains, pCreateInfos.remaining());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pSwapchains, __functionAddress);
     }

@@ -92,7 +92,6 @@ public class KHRWin32Surface {
         if (CHECKS) {
             check(__functionAddress);
             VkWin32SurfaceCreateInfoKHR.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(instance.address(), pCreateInfo, pAllocator, pSurface, __functionAddress);
     }
@@ -201,7 +200,6 @@ public class KHRWin32Surface {
             check(__functionAddress);
             check(pSurface, 1);
             VkWin32SurfaceCreateInfoKHR.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface, __functionAddress);
     }

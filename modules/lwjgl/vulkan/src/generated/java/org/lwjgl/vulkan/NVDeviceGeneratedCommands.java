@@ -565,7 +565,6 @@ public class NVDeviceGeneratedCommands {
         if (CHECKS) {
             check(__functionAddress);
             VkIndirectCommandsLayoutCreateInfoNV.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pIndirectCommandsLayout, __functionAddress);
     }
@@ -637,7 +636,6 @@ public class NVDeviceGeneratedCommands {
         long __functionAddress = device.getCapabilities().vkDestroyIndirectCommandsLayoutNV;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), indirectCommandsLayout, pAllocator, __functionAddress);
     }
@@ -699,7 +697,6 @@ public class NVDeviceGeneratedCommands {
             check(__functionAddress);
             check(pIndirectCommandsLayout, 1);
             VkIndirectCommandsLayoutCreateInfoNV.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pIndirectCommandsLayout, __functionAddress);
     }

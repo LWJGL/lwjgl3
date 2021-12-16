@@ -366,7 +366,6 @@ public class NVRayTracing {
         if (CHECKS) {
             check(__functionAddress);
             VkAccelerationStructureCreateInfoNV.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pAccelerationStructure, __functionAddress);
     }
@@ -437,7 +436,6 @@ public class NVRayTracing {
         long __functionAddress = device.getCapabilities().vkDestroyAccelerationStructureNV;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), accelerationStructure, pAllocator, __functionAddress);
     }
@@ -926,7 +924,6 @@ public class NVRayTracing {
         if (CHECKS) {
             check(__functionAddress);
             Struct.validate(pCreateInfos, createInfoCount, VkRayTracingPipelineCreateInfoNV.SIZEOF, VkRayTracingPipelineCreateInfoNV::validate);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPJPPPI(device.address(), pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines, __functionAddress);
     }
@@ -1304,7 +1301,6 @@ public class NVRayTracing {
             check(__functionAddress);
             check(pAccelerationStructure, 1);
             VkAccelerationStructureCreateInfoNV.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pAccelerationStructure, __functionAddress);
     }
@@ -1317,7 +1313,6 @@ public class NVRayTracing {
             check(__functionAddress);
             check(pPipelines, pCreateInfos.remaining());
             Struct.validate(pCreateInfos.address(), pCreateInfos.remaining(), VkRayTracingPipelineCreateInfoNV.SIZEOF, VkRayTracingPipelineCreateInfoNV::validate);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPJPPPI(device.address(), pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pPipelines, __functionAddress);
     }

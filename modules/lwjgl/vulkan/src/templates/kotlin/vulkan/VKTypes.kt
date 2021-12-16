@@ -840,9 +840,9 @@ val VkAllocationCallbacks = struct(Module.VULKAN, "VkAllocationCallbacks") {
         """
 
     nullable..opaque_p("pUserData", "a value to be interpreted by the implementation of the callbacks. When any of the callbacks in ##VkAllocationCallbacks are called, the Vulkan implementation will pass this value as the first parameter to the callback. This value <b>can</b> vary each time an allocator is passed into a command, even when the same object takes an allocator in multiple commands.")
-    PFN_vkAllocationFunction("pfnAllocation", "a ##VkAllocationFunction pointer to an application-defined memory allocation function.")
-    PFN_vkReallocationFunction("pfnReallocation", "a ##VkReallocationFunction pointer to an application-defined memory reallocation function.")
-    PFN_vkFreeFunction("pfnFree", "a ##VkFreeFunction pointer to an application-defined memory free function.")
+    nullable..PFN_vkAllocationFunction("pfnAllocation", "a ##VkAllocationFunction pointer to an application-defined memory allocation function.")
+    nullable..PFN_vkReallocationFunction("pfnReallocation", "a ##VkReallocationFunction pointer to an application-defined memory reallocation function.")
+    nullable..PFN_vkFreeFunction("pfnFree", "a ##VkFreeFunction pointer to an application-defined memory free function.")
     nullable..PFN_vkInternalAllocationNotification("pfnInternalAllocation", "a ##VkInternalAllocationNotification pointer to an application-defined function that is called by the implementation when the implementation makes internal allocations.")
     nullable..PFN_vkInternalFreeNotification("pfnInternalFree", "a ##VkInternalFreeNotification pointer to an application-defined function that is called by the implementation when the implementation frees internal allocations.")
 }

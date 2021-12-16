@@ -441,7 +441,6 @@ public class KHRVideoQueue {
         if (CHECKS) {
             check(__functionAddress);
             VkVideoSessionCreateInfoKHR.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pVideoSession, __functionAddress);
     }
@@ -510,7 +509,6 @@ public class KHRVideoQueue {
         long __functionAddress = device.getCapabilities().vkDestroyVideoSessionKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), videoSession, pAllocator, __functionAddress);
     }
@@ -698,7 +696,6 @@ public class KHRVideoQueue {
         long __functionAddress = device.getCapabilities().vkCreateVideoSessionParametersKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pVideoSessionParameters, __functionAddress);
     }
@@ -825,7 +822,6 @@ public class KHRVideoQueue {
         long __functionAddress = device.getCapabilities().vkDestroyVideoSessionParametersKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), videoSessionParameters, pAllocator, __functionAddress);
     }
@@ -1058,7 +1054,6 @@ public class KHRVideoQueue {
             check(__functionAddress);
             check(pVideoSession, 1);
             VkVideoSessionCreateInfoKHR.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pVideoSession, __functionAddress);
     }
@@ -1082,7 +1077,6 @@ public class KHRVideoQueue {
         if (CHECKS) {
             check(__functionAddress);
             check(pVideoSessionParameters, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pVideoSessionParameters, __functionAddress);
     }

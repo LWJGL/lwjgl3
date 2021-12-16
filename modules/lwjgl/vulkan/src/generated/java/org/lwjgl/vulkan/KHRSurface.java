@@ -286,7 +286,6 @@ public class KHRSurface {
         long __functionAddress = instance.getCapabilities().vkDestroySurfaceKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(instance.address(), surface, pAllocator, __functionAddress);
     }

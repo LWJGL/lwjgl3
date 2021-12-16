@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -152,6 +151,7 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
     @NativeType("uint32_t")
     public int viewportDepthCount() { return nviewportDepthCount(address()); }
     /** a pointer to a {@link VkViewport} structure specifying the expected depth range for each inherited viewport. */
+    @Nullable
     @NativeType("VkViewport const *")
     public VkViewport pViewportDepths() { return npViewportDepths(address()); }
 
@@ -166,7 +166,7 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
     /** Sets the specified value to the {@link #viewportDepthCount} field. */
     public VkCommandBufferInheritanceViewportScissorInfoNV viewportDepthCount(@NativeType("uint32_t") int value) { nviewportDepthCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkViewport} to the {@link #pViewportDepths} field. */
-    public VkCommandBufferInheritanceViewportScissorInfoNV pViewportDepths(@NativeType("VkViewport const *") VkViewport value) { npViewportDepths(address(), value); return this; }
+    public VkCommandBufferInheritanceViewportScissorInfoNV pViewportDepths(@Nullable @NativeType("VkViewport const *") VkViewport value) { npViewportDepths(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkCommandBufferInheritanceViewportScissorInfoNV set(
@@ -174,7 +174,7 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
         long pNext,
         boolean viewportScissor2D,
         int viewportDepthCount,
-        VkViewport pViewportDepths
+        @Nullable VkViewport pViewportDepths
     ) {
         sType(sType);
         pNext(pNext);
@@ -320,7 +320,7 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
     /** Unsafe version of {@link #viewportDepthCount}. */
     public static int nviewportDepthCount(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceViewportScissorInfoNV.VIEWPORTDEPTHCOUNT); }
     /** Unsafe version of {@link #pViewportDepths}. */
-    public static VkViewport npViewportDepths(long struct) { return VkViewport.create(memGetAddress(struct + VkCommandBufferInheritanceViewportScissorInfoNV.PVIEWPORTDEPTHS)); }
+    @Nullable public static VkViewport npViewportDepths(long struct) { return VkViewport.createSafe(memGetAddress(struct + VkCommandBufferInheritanceViewportScissorInfoNV.PVIEWPORTDEPTHS)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceViewportScissorInfoNV.STYPE, value); }
@@ -331,16 +331,7 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
     /** Unsafe version of {@link #viewportDepthCount(int) viewportDepthCount}. */
     public static void nviewportDepthCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceViewportScissorInfoNV.VIEWPORTDEPTHCOUNT, value); }
     /** Unsafe version of {@link #pViewportDepths(VkViewport) pViewportDepths}. */
-    public static void npViewportDepths(long struct, VkViewport value) { memPutAddress(struct + VkCommandBufferInheritanceViewportScissorInfoNV.PVIEWPORTDEPTHS, value.address()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkCommandBufferInheritanceViewportScissorInfoNV.PVIEWPORTDEPTHS));
-    }
+    public static void npViewportDepths(long struct, @Nullable VkViewport value) { memPutAddress(struct + VkCommandBufferInheritanceViewportScissorInfoNV.PVIEWPORTDEPTHS, memAddressSafe(value)); }
 
     // -----------------------------------
 
@@ -393,6 +384,7 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
         @NativeType("uint32_t")
         public int viewportDepthCount() { return VkCommandBufferInheritanceViewportScissorInfoNV.nviewportDepthCount(address()); }
         /** @return a {@link VkViewport} view of the struct pointed to by the {@link VkCommandBufferInheritanceViewportScissorInfoNV#pViewportDepths} field. */
+        @Nullable
         @NativeType("VkViewport const *")
         public VkViewport pViewportDepths() { return VkCommandBufferInheritanceViewportScissorInfoNV.npViewportDepths(address()); }
 
@@ -407,7 +399,7 @@ public class VkCommandBufferInheritanceViewportScissorInfoNV extends Struct impl
         /** Sets the specified value to the {@link VkCommandBufferInheritanceViewportScissorInfoNV#viewportDepthCount} field. */
         public VkCommandBufferInheritanceViewportScissorInfoNV.Buffer viewportDepthCount(@NativeType("uint32_t") int value) { VkCommandBufferInheritanceViewportScissorInfoNV.nviewportDepthCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkViewport} to the {@link VkCommandBufferInheritanceViewportScissorInfoNV#pViewportDepths} field. */
-        public VkCommandBufferInheritanceViewportScissorInfoNV.Buffer pViewportDepths(@NativeType("VkViewport const *") VkViewport value) { VkCommandBufferInheritanceViewportScissorInfoNV.npViewportDepths(address(), value); return this; }
+        public VkCommandBufferInheritanceViewportScissorInfoNV.Buffer pViewportDepths(@Nullable @NativeType("VkViewport const *") VkViewport value) { VkCommandBufferInheritanceViewportScissorInfoNV.npViewportDepths(address(), value); return this; }
 
     }
 

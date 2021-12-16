@@ -1025,7 +1025,7 @@ val VkXlibSurfaceCreateInfoKHR = struct(Module.VULKAN, "VkXlibSurfaceCreateInfoK
     Expression("#STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkXlibSurfaceCreateFlagsKHR("flags", "reserved for future use.")
-    Display.p("dpy", "a pointer to an Xlib {@code Display} connection to the X server.")
+    nullable..Display.p("dpy", "a pointer to an Xlib {@code Display} connection to the X server.")
     Window("window", "an Xlib {@code Window} to associate the surface with.")
 }
 
@@ -1055,8 +1055,8 @@ val VkWaylandSurfaceCreateInfoKHR = struct(Module.VULKAN, "VkWaylandSurfaceCreat
     Expression("#STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkWaylandSurfaceCreateFlagsKHR("flags", "reserved for future use.")
-    wl_display.p("display", "{@code display} and {@code surface} are pointers to the Wayland {@code wl_display} and {@code wl_surface} to associate the surface with.")
-    wl_surface.p("surface", "see {@code display}")
+    nullable..wl_display.p("display", "{@code display} and {@code surface} are pointers to the Wayland {@code wl_display} and {@code wl_surface} to associate the surface with.")
+    nullable..wl_surface.p("surface", "see {@code display}")
 }
 
 val VkWin32SurfaceCreateInfoKHR = struct(Module.VULKAN, "VkWin32SurfaceCreateInfoKHR") {
@@ -5806,7 +5806,7 @@ val VkMacOSSurfaceCreateInfoMVK = struct(Module.VULKAN, "VkMacOSSurfaceCreateInf
     Expression("#STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkMacOSSurfaceCreateFlagsMVK("flags", "reserved for future use.")
-    opaque_const_p("pView", "a reference to either a {@code CAMetalLayer} object or an {@code NSView} object.")
+    nullable..opaque_const_p("pView", "a reference to either a {@code CAMetalLayer} object or an {@code NSView} object.")
 }
 
 val VkMemoryDedicatedRequirementsKHR = struct(Module.VULKAN, "VkMemoryDedicatedRequirementsKHR", mutable = false, alias = VkMemoryDedicatedRequirements) {
@@ -6484,7 +6484,7 @@ val VkDeviceOrHostAddressKHR = union(Module.VULKAN, "VkDeviceOrHostAddressKHR") 
         """
 
     VkDeviceAddress("deviceAddress", "a buffer device address as returned by the #GetBufferDeviceAddressKHR() command.")
-    opaque_p("hostAddress", "a host memory address.")
+    nullable..opaque_p("hostAddress", "a host memory address.")
 }
 
 val VkDeviceOrHostAddressConstKHR = union(Module.VULKAN, "VkDeviceOrHostAddressConstKHR") {
@@ -6497,7 +6497,7 @@ val VkDeviceOrHostAddressConstKHR = union(Module.VULKAN, "VkDeviceOrHostAddressC
         """
 
     VkDeviceAddress("deviceAddress", "a buffer device address as returned by the #GetBufferDeviceAddressKHR() command.")
-    opaque_const_p("hostAddress", "a const host memory address.")
+    nullable..opaque_const_p("hostAddress", "a const host memory address.")
 }
 
 val VkAccelerationStructureBuildRangeInfoKHR = struct(Module.VULKAN, "VkAccelerationStructureBuildRangeInfoKHR") {
@@ -9565,7 +9565,7 @@ val VkCheckpointDataNV = struct(Module.VULKAN, "VkCheckpointDataNV", mutable = f
     Expression("#STRUCTURE_TYPE_CHECKPOINT_DATA_NV")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkPipelineStageFlagBits("stage", "a {@code VkPipelineStageFlagBits} value specifying which pipeline stage the checkpoint marker data refers to.")
-    opaque_p("pCheckpointMarker", "contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to.")
+    nullable..opaque_p("pCheckpointMarker", "contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to.")
 }
 
 val VkPhysicalDeviceTimelineSemaphoreFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceTimelineSemaphoreFeaturesKHR", alias = VkPhysicalDeviceTimelineSemaphoreFeatures) {
@@ -9928,7 +9928,7 @@ val VkMetalSurfaceCreateInfoEXT = struct(Module.VULKAN, "VkMetalSurfaceCreateInf
     Expression("#STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkMetalSurfaceCreateFlagsEXT("flags", "reserved for future use.")
-    CAMetalLayer.const.p("pLayer", "a reference to a {@code CAMetalLayer} object representing a renderable surface.")
+    nullable..CAMetalLayer.const.p("pLayer", "a reference to a {@code CAMetalLayer} object representing a renderable surface.")
 }
 
 val VkPhysicalDeviceFragmentDensityMapFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceFragmentDensityMapFeaturesEXT") {
@@ -11864,7 +11864,7 @@ val VkCommandBufferInheritanceViewportScissorInfoNV = struct(Module.VULKAN, "VkC
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("viewportScissor2D", "specifies whether the listed dynamic state is inherited.")
     uint32_t("viewportDepthCount", "specifies the maximum number of viewports to inherit. When {@code viewportScissor2D} is #FALSE, the behavior is as if this value is zero.")
-    VkViewport.const.p("pViewportDepths", "a pointer to a ##VkViewport structure specifying the expected depth range for each inherited viewport.")
+    nullable..VkViewport.const.p("pViewportDepths", "a pointer to a ##VkViewport structure specifying the expected depth range for each inherited viewport.")
 }
 
 val VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR") {
@@ -13184,7 +13184,7 @@ val VkCheckpointData2NV = struct(Module.VULKAN, "VkCheckpointData2NV", mutable =
     Expression("#STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkPipelineStageFlags2KHR("stage", "indicates a single pipeline stage which the checkpoint marker data refers to.")
-    opaque_p("pCheckpointMarker", "contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to.")
+    nullable..opaque_p("pCheckpointMarker", "contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to.")
 }
 
 val VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR") {

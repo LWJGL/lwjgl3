@@ -255,6 +255,6 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
         VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "a descriptor update template defining how to interpret the descriptor information in {@code pData}."),
         VkPipelineLayout("layout", "a {@code VkPipelineLayout} object used to program the bindings. It <b>must</b> be compatible with the layout used to create the {@code descriptorUpdateTemplate} handle."),
         uint32_t("set", "the set number of the descriptor set in the pipeline layout that will be updated. This <b>must</b> be the same number used to create the {@code descriptorUpdateTemplate} handle."),
-        opaque_const_p("pData", "a pointer to memory containing descriptors for the templated update.")
+        nullable..opaque_const_p("pData", "a pointer to memory containing descriptors for the templated update.")
     )
 }

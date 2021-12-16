@@ -83,8 +83,6 @@ public class MVKMacosSurface {
         long __functionAddress = instance.getCapabilities().vkCreateMacOSSurfaceMVK;
         if (CHECKS) {
             check(__functionAddress);
-            VkMacOSSurfaceCreateInfoMVK.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(instance.address(), pCreateInfo, pAllocator, pSurface, __functionAddress);
     }
@@ -158,8 +156,6 @@ public class MVKMacosSurface {
         if (CHECKS) {
             check(__functionAddress);
             check(pSurface, 1);
-            VkMacOSSurfaceCreateInfoMVK.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface, __functionAddress);
     }

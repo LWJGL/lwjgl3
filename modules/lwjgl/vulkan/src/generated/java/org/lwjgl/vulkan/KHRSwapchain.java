@@ -190,7 +190,6 @@ public class KHRSwapchain {
         long __functionAddress = device.getCapabilities().vkCreateSwapchainKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pSwapchain, __functionAddress);
     }
@@ -285,7 +284,6 @@ public class KHRSwapchain {
         long __functionAddress = device.getCapabilities().vkDestroySwapchainKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), swapchain, pAllocator, __functionAddress);
     }
@@ -940,7 +938,6 @@ public class KHRSwapchain {
         if (CHECKS) {
             check(__functionAddress);
             check(pSwapchain, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSwapchain, __functionAddress);
     }

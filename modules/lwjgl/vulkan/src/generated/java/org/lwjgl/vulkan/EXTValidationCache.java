@@ -109,7 +109,6 @@ public class EXTValidationCache {
         if (CHECKS) {
             check(__functionAddress);
             VkValidationCacheCreateInfoEXT.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pValidationCache, __functionAddress);
     }
@@ -188,7 +187,6 @@ public class EXTValidationCache {
         long __functionAddress = device.getCapabilities().vkDestroyValidationCacheEXT;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), validationCache, pAllocator, __functionAddress);
     }
@@ -425,7 +423,6 @@ public class EXTValidationCache {
             check(__functionAddress);
             check(pValidationCache, 1);
             VkValidationCacheCreateInfoEXT.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pValidationCache, __functionAddress);
     }

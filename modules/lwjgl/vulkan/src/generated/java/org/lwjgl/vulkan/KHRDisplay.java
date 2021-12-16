@@ -429,7 +429,6 @@ public class KHRDisplay {
         long __functionAddress = physicalDevice.getCapabilities().vkCreateDisplayModeKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPJPPPI(physicalDevice.address(), display, pCreateInfo, pAllocator, pMode, __functionAddress);
     }
@@ -573,7 +572,6 @@ public class KHRDisplay {
         long __functionAddress = instance.getCapabilities().vkCreateDisplayPlaneSurfaceKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(instance.address(), pCreateInfo, pAllocator, pSurface, __functionAddress);
     }
@@ -687,7 +685,6 @@ public class KHRDisplay {
         if (CHECKS) {
             check(__functionAddress);
             check(pMode, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPJPPPI(physicalDevice.address(), display, pCreateInfo.address(), memAddressSafe(pAllocator), pMode, __functionAddress);
     }
@@ -699,7 +696,6 @@ public class KHRDisplay {
         if (CHECKS) {
             check(__functionAddress);
             check(pSurface, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface, __functionAddress);
     }

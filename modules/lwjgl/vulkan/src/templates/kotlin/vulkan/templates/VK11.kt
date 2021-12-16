@@ -2110,7 +2110,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that updates the descriptor set."),
         VkDescriptorSet("descriptorSet", "the descriptor set to update"),
         VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "a {@code VkDescriptorUpdateTemplate} object specifying the update mapping between {@code pData} and the descriptor set to update."),
-        opaque_const_p("pData", "a pointer to memory containing one or more ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} structures or {@code VkAccelerationStructureKHR} or {@code VkAccelerationStructureNV} handles used to write the descriptors.")
+        nullable..opaque_const_p("pData", "a pointer to memory containing one or more ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} structures or {@code VkAccelerationStructureKHR} or {@code VkAccelerationStructureNV} handles used to write the descriptors.")
     )
 
     // Promoted from VK_KHR_external_memory_capabilities

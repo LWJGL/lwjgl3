@@ -79,7 +79,6 @@ public class EXTHeadlessSurface {
         long __functionAddress = instance.getCapabilities().vkCreateHeadlessSurfaceEXT;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(instance.address(), pCreateInfo, pAllocator, pSurface, __functionAddress);
     }
@@ -145,7 +144,6 @@ public class EXTHeadlessSurface {
         if (CHECKS) {
             check(__functionAddress);
             check(pSurface, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface, __functionAddress);
     }

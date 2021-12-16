@@ -271,7 +271,6 @@ public class KHRPushDescriptor {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdPushDescriptorSetWithTemplateKHR;
         if (CHECKS) {
             check(__functionAddress);
-            check(pData);
         }
         callPJJPV(commandBuffer.address(), descriptorUpdateTemplate, layout, set, pData, __functionAddress);
     }

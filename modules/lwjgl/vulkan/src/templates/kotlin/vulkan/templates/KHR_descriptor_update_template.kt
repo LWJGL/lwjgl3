@@ -138,7 +138,7 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         VkDevice("device", "the logical device that updates the descriptor set."),
         VkDescriptorSet("descriptorSet", "the descriptor set to update"),
         VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "a {@code VkDescriptorUpdateTemplate} object specifying the update mapping between {@code pData} and the descriptor set to update."),
-        opaque_const_p("pData", "a pointer to memory containing one or more ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} structures or {@code VkAccelerationStructureKHR} or {@code VkAccelerationStructureNV} handles used to write the descriptors.")
+        nullable..opaque_const_p("pData", "a pointer to memory containing one or more ##VkDescriptorImageInfo, ##VkDescriptorBufferInfo, or {@code VkBufferView} structures or {@code VkAccelerationStructureKHR} or {@code VkAccelerationStructureNV} handles used to write the descriptors.")
     )
 
     DependsOn("VK_KHR_push_descriptor")..void(
@@ -236,6 +236,6 @@ val KHR_descriptor_update_template = "KHRDescriptorUpdateTemplate".nativeClassVK
         VkDescriptorUpdateTemplate("descriptorUpdateTemplate", "a descriptor update template defining how to interpret the descriptor information in {@code pData}."),
         VkPipelineLayout("layout", "a {@code VkPipelineLayout} object used to program the bindings. It <b>must</b> be compatible with the layout used to create the {@code descriptorUpdateTemplate} handle."),
         uint32_t("set", "the set number of the descriptor set in the pipeline layout that will be updated. This <b>must</b> be the same number used to create the {@code descriptorUpdateTemplate} handle."),
-        opaque_const_p("pData", "a pointer to memory containing descriptors for the templated update.")
+        nullable..opaque_const_p("pData", "a pointer to memory containing descriptors for the templated update.")
     )
 }

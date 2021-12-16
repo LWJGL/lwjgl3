@@ -421,7 +421,6 @@ public class KHRAccelerationStructure {
         long __functionAddress = device.getCapabilities().vkCreateAccelerationStructureKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pAccelerationStructure, __functionAddress);
     }
@@ -503,7 +502,6 @@ public class KHRAccelerationStructure {
         long __functionAddress = device.getCapabilities().vkDestroyAccelerationStructureKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), accelerationStructure, pAllocator, __functionAddress);
     }
@@ -1891,7 +1889,6 @@ public class KHRAccelerationStructure {
         if (CHECKS) {
             check(__functionAddress);
             check(pAccelerationStructure, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pAccelerationStructure, __functionAddress);
     }

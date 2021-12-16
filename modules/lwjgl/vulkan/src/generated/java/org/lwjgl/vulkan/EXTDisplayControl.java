@@ -204,7 +204,6 @@ public class EXTDisplayControl {
         long __functionAddress = device.getCapabilities().vkRegisterDeviceEventEXT;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pDeviceEventInfo, pAllocator, pFence, __functionAddress);
     }
@@ -269,7 +268,6 @@ public class EXTDisplayControl {
         long __functionAddress = device.getCapabilities().vkRegisterDisplayEventEXT;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPJPPPI(device.address(), display, pDisplayEventInfo, pAllocator, pFence, __functionAddress);
     }
@@ -411,7 +409,6 @@ public class EXTDisplayControl {
         if (CHECKS) {
             check(__functionAddress);
             check(pFence, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pDeviceEventInfo.address(), memAddressSafe(pAllocator), pFence, __functionAddress);
     }
@@ -423,7 +420,6 @@ public class EXTDisplayControl {
         if (CHECKS) {
             check(__functionAddress);
             check(pFence, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPJPPPI(device.address(), display, pDisplayEventInfo.address(), memAddressSafe(pAllocator), pFence, __functionAddress);
     }

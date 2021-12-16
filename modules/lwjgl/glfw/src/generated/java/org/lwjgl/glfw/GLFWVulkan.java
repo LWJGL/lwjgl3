@@ -279,7 +279,6 @@ public class GLFWVulkan {
         long __functionAddress = Functions.CreateWindowSurface;
         if (CHECKS) {
             check(window);
-            if (allocator != NULL) { VkAllocationCallbacks.validate(allocator); }
         }
         return invokePPPPI(instance, window, allocator, surface, __functionAddress);
     }
@@ -337,7 +336,6 @@ public class GLFWVulkan {
         if (CHECKS) {
             check(window);
             check(surface, 1);
-            if (allocator != null) { VkAllocationCallbacks.validate(allocator.address()); }
         }
         return invokePPPPI(instance.address(), window, memAddressSafe(allocator), surface, __functionAddress);
     }

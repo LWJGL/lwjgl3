@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -99,12 +98,15 @@ public class VkAllocationCallbacks extends Struct implements NativeResource {
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
     /** a {@link VkAllocationFunction} pointer to an application-defined memory allocation function. */
+    @Nullable
     @NativeType("PFN_vkAllocationFunction")
     public VkAllocationFunction pfnAllocation() { return npfnAllocation(address()); }
     /** a {@link VkReallocationFunction} pointer to an application-defined memory reallocation function. */
+    @Nullable
     @NativeType("PFN_vkReallocationFunction")
     public VkReallocationFunction pfnReallocation() { return npfnReallocation(address()); }
     /** a {@link VkFreeFunction} pointer to an application-defined memory free function. */
+    @Nullable
     @NativeType("PFN_vkFreeFunction")
     public VkFreeFunction pfnFree() { return npfnFree(address()); }
     /** a {@link VkInternalAllocationNotification} pointer to an application-defined function that is called by the implementation when the implementation makes internal allocations. */
@@ -119,11 +121,11 @@ public class VkAllocationCallbacks extends Struct implements NativeResource {
     /** Sets the specified value to the {@link #pUserData} field. */
     public VkAllocationCallbacks pUserData(@NativeType("void *") long value) { npUserData(address(), value); return this; }
     /** Sets the specified value to the {@link #pfnAllocation} field. */
-    public VkAllocationCallbacks pfnAllocation(@NativeType("PFN_vkAllocationFunction") VkAllocationFunctionI value) { npfnAllocation(address(), value); return this; }
+    public VkAllocationCallbacks pfnAllocation(@Nullable @NativeType("PFN_vkAllocationFunction") VkAllocationFunctionI value) { npfnAllocation(address(), value); return this; }
     /** Sets the specified value to the {@link #pfnReallocation} field. */
-    public VkAllocationCallbacks pfnReallocation(@NativeType("PFN_vkReallocationFunction") VkReallocationFunctionI value) { npfnReallocation(address(), value); return this; }
+    public VkAllocationCallbacks pfnReallocation(@Nullable @NativeType("PFN_vkReallocationFunction") VkReallocationFunctionI value) { npfnReallocation(address(), value); return this; }
     /** Sets the specified value to the {@link #pfnFree} field. */
-    public VkAllocationCallbacks pfnFree(@NativeType("PFN_vkFreeFunction") VkFreeFunctionI value) { npfnFree(address(), value); return this; }
+    public VkAllocationCallbacks pfnFree(@Nullable @NativeType("PFN_vkFreeFunction") VkFreeFunctionI value) { npfnFree(address(), value); return this; }
     /** Sets the specified value to the {@link #pfnInternalAllocation} field. */
     public VkAllocationCallbacks pfnInternalAllocation(@Nullable @NativeType("PFN_vkInternalAllocationNotification") VkInternalAllocationNotificationI value) { npfnInternalAllocation(address(), value); return this; }
     /** Sets the specified value to the {@link #pfnInternalFree} field. */
@@ -295,11 +297,11 @@ public class VkAllocationCallbacks extends Struct implements NativeResource {
     /** Unsafe version of {@link #pUserData}. */
     public static long npUserData(long struct) { return memGetAddress(struct + VkAllocationCallbacks.PUSERDATA); }
     /** Unsafe version of {@link #pfnAllocation}. */
-    public static VkAllocationFunction npfnAllocation(long struct) { return VkAllocationFunction.create(memGetAddress(struct + VkAllocationCallbacks.PFNALLOCATION)); }
+    @Nullable public static VkAllocationFunction npfnAllocation(long struct) { return VkAllocationFunction.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNALLOCATION)); }
     /** Unsafe version of {@link #pfnReallocation}. */
-    public static VkReallocationFunction npfnReallocation(long struct) { return VkReallocationFunction.create(memGetAddress(struct + VkAllocationCallbacks.PFNREALLOCATION)); }
+    @Nullable public static VkReallocationFunction npfnReallocation(long struct) { return VkReallocationFunction.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNREALLOCATION)); }
     /** Unsafe version of {@link #pfnFree}. */
-    public static VkFreeFunction npfnFree(long struct) { return VkFreeFunction.create(memGetAddress(struct + VkAllocationCallbacks.PFNFREE)); }
+    @Nullable public static VkFreeFunction npfnFree(long struct) { return VkFreeFunction.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNFREE)); }
     /** Unsafe version of {@link #pfnInternalAllocation}. */
     @Nullable public static VkInternalAllocationNotification npfnInternalAllocation(long struct) { return VkInternalAllocationNotification.createSafe(memGetAddress(struct + VkAllocationCallbacks.PFNINTERNALALLOCATION)); }
     /** Unsafe version of {@link #pfnInternalFree}. */
@@ -308,26 +310,15 @@ public class VkAllocationCallbacks extends Struct implements NativeResource {
     /** Unsafe version of {@link #pUserData(long) pUserData}. */
     public static void npUserData(long struct, long value) { memPutAddress(struct + VkAllocationCallbacks.PUSERDATA, value); }
     /** Unsafe version of {@link #pfnAllocation(VkAllocationFunctionI) pfnAllocation}. */
-    public static void npfnAllocation(long struct, VkAllocationFunctionI value) { memPutAddress(struct + VkAllocationCallbacks.PFNALLOCATION, value.address()); }
+    public static void npfnAllocation(long struct, @Nullable VkAllocationFunctionI value) { memPutAddress(struct + VkAllocationCallbacks.PFNALLOCATION, memAddressSafe(value)); }
     /** Unsafe version of {@link #pfnReallocation(VkReallocationFunctionI) pfnReallocation}. */
-    public static void npfnReallocation(long struct, VkReallocationFunctionI value) { memPutAddress(struct + VkAllocationCallbacks.PFNREALLOCATION, value.address()); }
+    public static void npfnReallocation(long struct, @Nullable VkReallocationFunctionI value) { memPutAddress(struct + VkAllocationCallbacks.PFNREALLOCATION, memAddressSafe(value)); }
     /** Unsafe version of {@link #pfnFree(VkFreeFunctionI) pfnFree}. */
-    public static void npfnFree(long struct, VkFreeFunctionI value) { memPutAddress(struct + VkAllocationCallbacks.PFNFREE, value.address()); }
+    public static void npfnFree(long struct, @Nullable VkFreeFunctionI value) { memPutAddress(struct + VkAllocationCallbacks.PFNFREE, memAddressSafe(value)); }
     /** Unsafe version of {@link #pfnInternalAllocation(VkInternalAllocationNotificationI) pfnInternalAllocation}. */
     public static void npfnInternalAllocation(long struct, @Nullable VkInternalAllocationNotificationI value) { memPutAddress(struct + VkAllocationCallbacks.PFNINTERNALALLOCATION, memAddressSafe(value)); }
     /** Unsafe version of {@link #pfnInternalFree(VkInternalFreeNotificationI) pfnInternalFree}. */
     public static void npfnInternalFree(long struct, @Nullable VkInternalFreeNotificationI value) { memPutAddress(struct + VkAllocationCallbacks.PFNINTERNALFREE, memAddressSafe(value)); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkAllocationCallbacks.PFNALLOCATION));
-        check(memGetAddress(struct + VkAllocationCallbacks.PFNREALLOCATION));
-        check(memGetAddress(struct + VkAllocationCallbacks.PFNFREE));
-    }
 
     // -----------------------------------
 
@@ -371,12 +362,15 @@ public class VkAllocationCallbacks extends Struct implements NativeResource {
         @NativeType("void *")
         public long pUserData() { return VkAllocationCallbacks.npUserData(address()); }
         /** @return the value of the {@link VkAllocationCallbacks#pfnAllocation} field. */
+        @Nullable
         @NativeType("PFN_vkAllocationFunction")
         public VkAllocationFunction pfnAllocation() { return VkAllocationCallbacks.npfnAllocation(address()); }
         /** @return the value of the {@link VkAllocationCallbacks#pfnReallocation} field. */
+        @Nullable
         @NativeType("PFN_vkReallocationFunction")
         public VkReallocationFunction pfnReallocation() { return VkAllocationCallbacks.npfnReallocation(address()); }
         /** @return the value of the {@link VkAllocationCallbacks#pfnFree} field. */
+        @Nullable
         @NativeType("PFN_vkFreeFunction")
         public VkFreeFunction pfnFree() { return VkAllocationCallbacks.npfnFree(address()); }
         /** @return the value of the {@link VkAllocationCallbacks#pfnInternalAllocation} field. */
@@ -391,11 +385,11 @@ public class VkAllocationCallbacks extends Struct implements NativeResource {
         /** Sets the specified value to the {@link VkAllocationCallbacks#pUserData} field. */
         public VkAllocationCallbacks.Buffer pUserData(@NativeType("void *") long value) { VkAllocationCallbacks.npUserData(address(), value); return this; }
         /** Sets the specified value to the {@link VkAllocationCallbacks#pfnAllocation} field. */
-        public VkAllocationCallbacks.Buffer pfnAllocation(@NativeType("PFN_vkAllocationFunction") VkAllocationFunctionI value) { VkAllocationCallbacks.npfnAllocation(address(), value); return this; }
+        public VkAllocationCallbacks.Buffer pfnAllocation(@Nullable @NativeType("PFN_vkAllocationFunction") VkAllocationFunctionI value) { VkAllocationCallbacks.npfnAllocation(address(), value); return this; }
         /** Sets the specified value to the {@link VkAllocationCallbacks#pfnReallocation} field. */
-        public VkAllocationCallbacks.Buffer pfnReallocation(@NativeType("PFN_vkReallocationFunction") VkReallocationFunctionI value) { VkAllocationCallbacks.npfnReallocation(address(), value); return this; }
+        public VkAllocationCallbacks.Buffer pfnReallocation(@Nullable @NativeType("PFN_vkReallocationFunction") VkReallocationFunctionI value) { VkAllocationCallbacks.npfnReallocation(address(), value); return this; }
         /** Sets the specified value to the {@link VkAllocationCallbacks#pfnFree} field. */
-        public VkAllocationCallbacks.Buffer pfnFree(@NativeType("PFN_vkFreeFunction") VkFreeFunctionI value) { VkAllocationCallbacks.npfnFree(address(), value); return this; }
+        public VkAllocationCallbacks.Buffer pfnFree(@Nullable @NativeType("PFN_vkFreeFunction") VkFreeFunctionI value) { VkAllocationCallbacks.npfnFree(address(), value); return this; }
         /** Sets the specified value to the {@link VkAllocationCallbacks#pfnInternalAllocation} field. */
         public VkAllocationCallbacks.Buffer pfnInternalAllocation(@Nullable @NativeType("PFN_vkInternalAllocationNotification") VkInternalAllocationNotificationI value) { VkAllocationCallbacks.npfnInternalAllocation(address(), value); return this; }
         /** Sets the specified value to the {@link VkAllocationCallbacks#pfnInternalFree} field. */

@@ -285,7 +285,6 @@ public class EXTDebugReport {
         if (CHECKS) {
             check(__functionAddress);
             VkDebugReportCallbackCreateInfoEXT.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(instance.address(), pCreateInfo, pAllocator, pCallback, __functionAddress);
     }
@@ -352,7 +351,6 @@ public class EXTDebugReport {
         long __functionAddress = instance.getCapabilities().vkDestroyDebugReportCallbackEXT;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(instance.address(), callback, pAllocator, __functionAddress);
     }
@@ -542,7 +540,6 @@ public class EXTDebugReport {
             check(__functionAddress);
             check(pCallback, 1);
             VkDebugReportCallbackCreateInfoEXT.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pCallback, __functionAddress);
     }

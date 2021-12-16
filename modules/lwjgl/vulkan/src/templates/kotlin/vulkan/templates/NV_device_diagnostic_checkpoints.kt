@@ -110,7 +110,7 @@ val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeCla
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer that will receive the marker"),
-        opaque_const_p("pCheckpointMarker", "an opaque application-provided value that will be associated with the checkpoint.")
+        nullable..opaque_const_p("pCheckpointMarker", "an opaque application-provided value that will be associated with the checkpoint.")
     )
 
     void(

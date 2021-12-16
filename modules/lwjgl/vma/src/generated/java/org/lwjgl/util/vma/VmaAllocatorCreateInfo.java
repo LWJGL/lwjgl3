@@ -411,10 +411,6 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
     public static void validate(long struct) {
         check(memGetAddress(struct + VmaAllocatorCreateInfo.PHYSICALDEVICE));
         check(memGetAddress(struct + VmaAllocatorCreateInfo.DEVICE));
-        long pAllocationCallbacks = memGetAddress(struct + VmaAllocatorCreateInfo.PALLOCATIONCALLBACKS);
-        if (pAllocationCallbacks != NULL) {
-            VkAllocationCallbacks.validate(pAllocationCallbacks);
-        }
         long pVulkanFunctions = memGetAddress(struct + VmaAllocatorCreateInfo.PVULKANFUNCTIONS);
         check(pVulkanFunctions);
         VmaVulkanFunctions.validate(pVulkanFunctions);

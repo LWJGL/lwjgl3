@@ -120,7 +120,6 @@ public class KHRCreateRenderpass2 {
         if (CHECKS) {
             check(__functionAddress);
             VkRenderPassCreateInfo2.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pRenderPass, __functionAddress);
     }
@@ -214,7 +213,6 @@ public class KHRCreateRenderpass2 {
             check(__functionAddress);
             check(pRenderPass, 1);
             VkRenderPassCreateInfo2.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pRenderPass, __functionAddress);
     }

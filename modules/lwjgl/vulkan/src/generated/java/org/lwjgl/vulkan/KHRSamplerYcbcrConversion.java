@@ -304,7 +304,6 @@ public class KHRSamplerYcbcrConversion {
         long __functionAddress = device.getCapabilities().vkCreateSamplerYcbcrConversionKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pYcbcrConversion, __functionAddress);
     }
@@ -332,7 +331,6 @@ public class KHRSamplerYcbcrConversion {
         long __functionAddress = device.getCapabilities().vkDestroySamplerYcbcrConversionKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), ycbcrConversion, pAllocator, __functionAddress);
     }
@@ -355,7 +353,6 @@ public class KHRSamplerYcbcrConversion {
         if (CHECKS) {
             check(__functionAddress);
             check(pYcbcrConversion, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pYcbcrConversion, __functionAddress);
     }

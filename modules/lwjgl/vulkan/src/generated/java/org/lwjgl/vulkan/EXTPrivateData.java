@@ -99,7 +99,6 @@ public class EXTPrivateData {
         long __functionAddress = device.getCapabilities().vkCreatePrivateDataSlotEXT;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pPrivateDataSlot, __functionAddress);
     }
@@ -170,7 +169,6 @@ public class EXTPrivateData {
         long __functionAddress = device.getCapabilities().vkDestroyPrivateDataSlotEXT;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), privateDataSlot, pAllocator, __functionAddress);
     }
@@ -352,7 +350,6 @@ public class EXTPrivateData {
         if (CHECKS) {
             check(__functionAddress);
             check(pPrivateDataSlot, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pPrivateDataSlot, __functionAddress);
     }

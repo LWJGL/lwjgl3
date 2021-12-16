@@ -121,7 +121,6 @@ public class NVXBinaryImport {
         if (CHECKS) {
             check(__functionAddress);
             VkCuModuleCreateInfoNVX.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pModule, __functionAddress);
     }
@@ -183,7 +182,6 @@ public class NVXBinaryImport {
         if (CHECKS) {
             check(__functionAddress);
             VkCuFunctionCreateInfoNVX.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(device.address(), pCreateInfo, pAllocator, pFunction, __functionAddress);
     }
@@ -244,7 +242,6 @@ public class NVXBinaryImport {
         long __functionAddress = device.getCapabilities().vkDestroyCuModuleNVX;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), module, pAllocator, __functionAddress);
     }
@@ -286,7 +283,6 @@ public class NVXBinaryImport {
         long __functionAddress = device.getCapabilities().vkDestroyCuFunctionNVX;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), function, pAllocator, __functionAddress);
     }
@@ -383,7 +379,6 @@ public class NVXBinaryImport {
             check(__functionAddress);
             check(pModule, 1);
             VkCuModuleCreateInfoNVX.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pModule, __functionAddress);
     }
@@ -396,7 +391,6 @@ public class NVXBinaryImport {
             check(__functionAddress);
             check(pFunction, 1);
             VkCuFunctionCreateInfoNVX.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pFunction, __functionAddress);
     }

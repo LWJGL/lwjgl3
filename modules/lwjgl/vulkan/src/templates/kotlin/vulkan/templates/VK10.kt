@@ -6741,7 +6741,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that owns the descriptor pool."),
         VkDescriptorPool("descriptorPool", "the descriptor pool from which the descriptor sets were allocated."),
         AutoSize("pDescriptorSets")..uint32_t("descriptorSetCount", "the number of elements in the {@code pDescriptorSets} array."),
-        VkDescriptorSet.const.p("pDescriptorSets", "a pointer to an array of handles to {@code VkDescriptorSet} objects.")
+        nullable..VkDescriptorSet.const.p("pDescriptorSets", "a pointer to an array of handles to {@code VkDescriptorSet} objects.")
     )
 
     void(
@@ -7296,7 +7296,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkDevice("device", "the logical device that owns the command pool."),
         VkCommandPool("commandPool", "the command pool from which the command buffers were allocated."),
         AutoSize("pCommandBuffers")..uint32_t("commandBufferCount", "the length of the {@code pCommandBuffers} array."),
-        VkCommandBuffer.const.p("pCommandBuffers", "a pointer to an array of handles of command buffers to free.")
+        nullable..VkCommandBuffer.const.p("pCommandBuffers", "a pointer to an array of handles of command buffers to free.")
     )
 
     VkResult(
@@ -9801,7 +9801,7 @@ val VK10 = "VK10".nativeClass(Module.VULKAN, "VK10", prefix = "VK", binding = VK
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkImage("image", "the image to be cleared."),
         VkImageLayout("imageLayout", "specifies the current layout of the image subresource ranges to be cleared, and <b>must</b> be #IMAGE_LAYOUT_SHARED_PRESENT_KHR, #IMAGE_LAYOUT_GENERAL or #IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL."),
-        VkClearColorValue.const.p("pColor", "a pointer to a ##VkClearColorValue structure containing the values that the image subresource ranges will be cleared to (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#clears-values\">Clear Values</a> below)."),
+        nullable..VkClearColorValue.const.p("pColor", "a pointer to a ##VkClearColorValue structure containing the values that the image subresource ranges will be cleared to (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#clears-values\">Clear Values</a> below)."),
         AutoSize("pRanges")..uint32_t("rangeCount", "the number of image subresource range structures in {@code pRanges}."),
         VkImageSubresourceRange.const.p("pRanges", "a pointer to an array of ##VkImageSubresourceRange structures describing a range of mipmap levels, array layers, and aspects to be cleared, as described in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#resources-image-views\">Image Views</a>.")
     )

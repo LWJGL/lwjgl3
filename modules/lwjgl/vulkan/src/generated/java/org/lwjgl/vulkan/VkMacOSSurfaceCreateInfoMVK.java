@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -292,16 +291,7 @@ public class VkMacOSSurfaceCreateInfoMVK extends Struct implements NativeResourc
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkMacOSSurfaceCreateInfoMVK.FLAGS, value); }
     /** Unsafe version of {@link #pView(long) pView}. */
-    public static void npView(long struct, long value) { memPutAddress(struct + VkMacOSSurfaceCreateInfoMVK.PVIEW, check(value)); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkMacOSSurfaceCreateInfoMVK.PVIEW));
-    }
+    public static void npView(long struct, long value) { memPutAddress(struct + VkMacOSSurfaceCreateInfoMVK.PVIEW, value); }
 
     // -----------------------------------
 

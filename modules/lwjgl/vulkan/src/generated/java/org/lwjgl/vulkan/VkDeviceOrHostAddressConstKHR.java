@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -216,7 +215,7 @@ public class VkDeviceOrHostAddressConstKHR extends Struct implements NativeResou
     /** Unsafe version of {@link #deviceAddress(long) deviceAddress}. */
     public static void ndeviceAddress(long struct, long value) { UNSAFE.putLong(null, struct + VkDeviceOrHostAddressConstKHR.DEVICEADDRESS, value); }
     /** Unsafe version of {@link #hostAddress(long) hostAddress}. */
-    public static void nhostAddress(long struct, long value) { memPutAddress(struct + VkDeviceOrHostAddressConstKHR.HOSTADDRESS, check(value)); }
+    public static void nhostAddress(long struct, long value) { memPutAddress(struct + VkDeviceOrHostAddressConstKHR.HOSTADDRESS, value); }
 
     // -----------------------------------
 

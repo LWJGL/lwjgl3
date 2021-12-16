@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -307,19 +306,9 @@ public class VkWaylandSurfaceCreateInfoKHR extends Struct implements NativeResou
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkWaylandSurfaceCreateInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #display(long) display}. */
-    public static void ndisplay(long struct, long value) { memPutAddress(struct + VkWaylandSurfaceCreateInfoKHR.DISPLAY, check(value)); }
+    public static void ndisplay(long struct, long value) { memPutAddress(struct + VkWaylandSurfaceCreateInfoKHR.DISPLAY, value); }
     /** Unsafe version of {@link #surface(long) surface}. */
-    public static void nsurface(long struct, long value) { memPutAddress(struct + VkWaylandSurfaceCreateInfoKHR.SURFACE, check(value)); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkWaylandSurfaceCreateInfoKHR.DISPLAY));
-        check(memGetAddress(struct + VkWaylandSurfaceCreateInfoKHR.SURFACE));
-    }
+    public static void nsurface(long struct, long value) { memPutAddress(struct + VkWaylandSurfaceCreateInfoKHR.SURFACE, value); }
 
     // -----------------------------------
 

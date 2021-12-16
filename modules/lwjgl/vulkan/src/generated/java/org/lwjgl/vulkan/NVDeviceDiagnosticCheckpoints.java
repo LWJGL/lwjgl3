@@ -126,7 +126,6 @@ public class NVDeviceDiagnosticCheckpoints {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetCheckpointNV;
         if (CHECKS) {
             check(__functionAddress);
-            check(pCheckpointMarker);
         }
         callPPV(commandBuffer.address(), pCheckpointMarker, __functionAddress);
     }

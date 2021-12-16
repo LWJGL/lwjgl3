@@ -75,8 +75,6 @@ public class EXTMetalSurface {
         long __functionAddress = instance.getCapabilities().vkCreateMetalSurfaceEXT;
         if (CHECKS) {
             check(__functionAddress);
-            VkMetalSurfaceCreateInfoEXT.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(instance.address(), pCreateInfo, pAllocator, pSurface, __functionAddress);
     }
@@ -143,8 +141,6 @@ public class EXTMetalSurface {
         if (CHECKS) {
             check(__functionAddress);
             check(pSurface, 1);
-            VkMetalSurfaceCreateInfoEXT.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface, __functionAddress);
     }

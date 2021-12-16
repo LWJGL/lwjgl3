@@ -3306,7 +3306,6 @@ public class Vma {
     public static int vmaCreateVirtualBlock(@NativeType("VmaVirtualBlockCreateInfo const *") VmaVirtualBlockCreateInfo pCreateInfo, @NativeType("VmaVirtualBlock *") PointerBuffer pVirtualBlock) {
         if (CHECKS) {
             check(pVirtualBlock, 1);
-            VmaVirtualBlockCreateInfo.validate(pCreateInfo.address());
         }
         return nvmaCreateVirtualBlock(pCreateInfo.address(), memAddress(pVirtualBlock));
     }

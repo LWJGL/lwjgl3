@@ -91,8 +91,6 @@ public class KHRWaylandSurface {
         long __functionAddress = instance.getCapabilities().vkCreateWaylandSurfaceKHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkWaylandSurfaceCreateInfoKHR.validate(pCreateInfo);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPPI(instance.address(), pCreateInfo, pAllocator, pSurface, __functionAddress);
     }
@@ -204,8 +202,6 @@ public class KHRWaylandSurface {
         if (CHECKS) {
             check(__functionAddress);
             check(pSurface, 1);
-            VkWaylandSurfaceCreateInfoKHR.validate(pCreateInfo.address());
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pSurface, __functionAddress);
     }

@@ -210,7 +210,6 @@ public class KHRDeferredHostOperations {
         long __functionAddress = device.getCapabilities().vkCreateDeferredOperationKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         return callPPPI(device.address(), pAllocator, pDeferredOperation, __functionAddress);
     }
@@ -272,7 +271,6 @@ public class KHRDeferredHostOperations {
         long __functionAddress = device.getCapabilities().vkDestroyDeferredOperationKHR;
         if (CHECKS) {
             check(__functionAddress);
-            if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
         callPJPV(device.address(), operation, pAllocator, __functionAddress);
     }
@@ -504,7 +502,6 @@ public class KHRDeferredHostOperations {
         if (CHECKS) {
             check(__functionAddress);
             check(pDeferredOperation, 1);
-            if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
         return callPPPI(device.address(), memAddressSafe(pAllocator), pDeferredOperation, __functionAddress);
     }
