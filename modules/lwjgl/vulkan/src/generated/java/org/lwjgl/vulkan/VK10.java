@@ -15401,12 +15401,79 @@ public class VK10 {
         }
     }
 
+    // --- [ VK_MAKE_API_VERSION ] ---
+
+    /**
+     * Constructs an API version number.
+     * 
+     * <p>This macro <b>can</b> be used when constructing the {@link VkApplicationInfo}{@code ::pname:apiVersion} parameter passed to {@link #vkCreateInstance CreateInstance}.</p>
+     *
+     * @param variant the variant number
+     * @param major   the major version number
+     * @param minor   the minor version number
+     * @param patch   the patch version number
+     */
+    @NativeType("uint32_t")
+    public static int VK_MAKE_API_VERSION(@NativeType("uint32_t") int variant, @NativeType("uint32_t") int major, @NativeType("uint32_t") int minor, @NativeType("uint32_t") int patch) {
+        return (variant << 29) | (major << 22) | (minor << 12) | patch;
+    }
+
+    // --- [ VK_API_VERSION_VARIANT ] ---
+
+    /**
+     * Extracts the API variant version number from a packed version number.
+     *
+     * @param version the Vulkan API version
+     */
+    @NativeType("uint32_t")
+    public static int VK_API_VERSION_VARIANT(@NativeType("uint32_t") int version) {
+        return version >>> 29;
+    }
+
+    // --- [ VK_API_VERSION_MAJOR ] ---
+
+    /**
+     * Extracts the API major version number from a packed version number.
+     *
+     * @param version the Vulkan API version
+     */
+    @NativeType("uint32_t")
+    public static int VK_API_VERSION_MAJOR(@NativeType("uint32_t") int version) {
+        return (version >>> 22) & 0x7F;
+    }
+
+    // --- [ VK_API_VERSION_MINOR ] ---
+
+    /**
+     * Extracts the API minor version number from a packed version number.
+     *
+     * @param version the Vulkan API version
+     */
+    @NativeType("uint32_t")
+    public static int VK_API_VERSION_MINOR(@NativeType("uint32_t") int version) {
+        return (version >>> 12) & 0x3FF;
+    }
+
+    // --- [ VK_API_VERSION_PATCH ] ---
+
+    /**
+     * Extracts the API patch version number from a packed version number.
+     *
+     * @param version the Vulkan API version
+     */
+    @NativeType("uint32_t")
+    public static int VK_API_VERSION_PATCH(@NativeType("uint32_t") int version) {
+        return (version >>> 22) & 0xFFF;
+    }
+
     // --- [ VK_MAKE_VERSION ] ---
 
     /**
      * Constructs an API version number.
      * 
      * <p>This macro <b>can</b> be used when constructing the {@link VkApplicationInfo}{@code ::pname:apiVersion} parameter passed to {@link #vkCreateInstance CreateInstance}.</p>
+     * 
+     * <p><em>Deprecated</em>, {@link #VK_MAKE_API_VERSION} should be used instead.</p>
      *
      * @param major the major version number
      * @param minor the minor version number
@@ -15421,6 +15488,8 @@ public class VK10 {
 
     /**
      * Extracts the API major version number from a packed version number.
+     * 
+     * <p><em>Deprecated</em>, {@link #VK_API_VERSION_MAJOR} should be used instead.</p>
      *
      * @param version the Vulkan API version
      */
@@ -15433,6 +15502,8 @@ public class VK10 {
 
     /**
      * Extracts the API minor version number from a packed version number.
+     * 
+     * <p><em>Deprecated</em>, {@link #VK_API_VERSION_MINOR} should be used instead.</p>
      *
      * @param version the Vulkan API version
      */
@@ -15445,6 +15516,8 @@ public class VK10 {
 
     /**
      * Extracts the API patch version number from a packed version number.
+     * 
+     * <p><em>Deprecated</em>, {@link #VK_API_VERSION_PATCH} should be used instead.</p>
      *
      * @param version the Vulkan API version
      */
