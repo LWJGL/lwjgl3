@@ -58,12 +58,66 @@ fun templateCustomization() {
             "NULL_HANDLE"..0L
         )
 
+        macro(expression = "(variant << 29) | (major << 22) | (minor << 12) | patch")..uint32_t(
+            "VK_MAKE_API_VERSION",
+            """
+            Constructs an API version number.
+
+            This macro <b>can</b> be used when constructing the ##VkApplicationInfo{@code ::pname:apiVersion} parameter passed to #CreateInstance().
+            """,
+
+            uint32_t("variant", "the variant number"),
+            uint32_t("major", "the major version number"),
+            uint32_t("minor", "the minor version number"),
+            uint32_t("patch", "the patch version number"),
+
+            noPrefix = true
+        )
+
+        macro(expression = "version >>> 29")..uint32_t(
+            "VK_API_VERSION_VARIANT",
+            "Extracts the API variant version number from a packed version number.",
+
+            uint32_t("version", "the Vulkan API version"),
+
+            noPrefix = true
+        )
+
+        macro(expression = "(version >>> 22) & 0x7F")..uint32_t(
+            "VK_API_VERSION_MAJOR",
+            "Extracts the API major version number from a packed version number.",
+
+            uint32_t("version", "the Vulkan API version"),
+
+            noPrefix = true
+        )
+
+        macro(expression = "(version >>> 12) & 0x3FF")..uint32_t(
+            "VK_API_VERSION_MINOR",
+            "Extracts the API minor version number from a packed version number.",
+
+            uint32_t("version", "the Vulkan API version"),
+
+            noPrefix = true
+        )
+
+        macro(expression = "(version >>> 22) & 0xFFF")..uint32_t(
+            "VK_API_VERSION_PATCH",
+            "Extracts the API patch version number from a packed version number.",
+
+            uint32_t("version", "the Vulkan API version"),
+
+            noPrefix = true
+        )
+
         macro(expression = "(major << 22) | (minor << 12) | patch")..uint32_t(
             "VK_MAKE_VERSION",
             """
             Constructs an API version number.
 
             This macro <b>can</b> be used when constructing the ##VkApplicationInfo{@code ::pname:apiVersion} parameter passed to #CreateInstance().
+
+            <em>Deprecated</em>, #VK_MAKE_API_VERSION() should be used instead.
             """,
 
             uint32_t("major", "the major version number"),
@@ -75,7 +129,11 @@ fun templateCustomization() {
 
         macro(expression = "version >>> 22")..uint32_t(
             "VK_VERSION_MAJOR",
-            "Extracts the API major version number from a packed version number.",
+            """
+            Extracts the API major version number from a packed version number.
+
+            <em>Deprecated</em>, #VK_API_VERSION_MAJOR() should be used instead.
+            """,
 
             uint32_t("version", "the Vulkan API version"),
 
@@ -84,7 +142,11 @@ fun templateCustomization() {
 
         macro(expression = "(version >>> 12) & 0x3FF")..uint32_t(
             "VK_VERSION_MINOR",
-            "Extracts the API minor version number from a packed version number.",
+            """
+            Extracts the API minor version number from a packed version number.
+
+            <em>Deprecated</em>, #VK_API_VERSION_MINOR() should be used instead.
+            """,
 
             uint32_t("version", "the Vulkan API version"),
 
@@ -93,7 +155,11 @@ fun templateCustomization() {
 
         macro(expression = "version & 0xFFF")..uint32_t(
             "VK_VERSION_PATCH",
-            "Extracts the API patch version number from a packed version number.",
+            """
+            Extracts the API patch version number from a packed version number.
+
+            <em>Deprecated</em>, #VK_API_VERSION_PATCH() should be used instead.
+            """,
 
             uint32_t("version", "the Vulkan API version"),
 
