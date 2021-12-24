@@ -673,6 +673,16 @@ static void SetErrorMessage(const std::string &msg, const char **err) {
   }
 }
 
+static void SetWarningMessage(const std::string &msg, const char **warn) {
+  if (warn) {
+#ifdef _WIN32
+    (*warn) = _strdup(msg.c_str());
+#else
+    (*warn) = strdup(msg.c_str());
+#endif
+  }
+}
+
 static const int kEXRVersionSize = 8;
 
 static void cpy2(unsigned short *dst_val, const unsigned short *src_val) {
@@ -955,7 +965,7 @@ static const char *ReadString(std::string *s, const char *ptr, size_t len) {
   }
 
   if (size_t(q - ptr) >= len) {
-    (*s) = std::string();
+    (*s).clear();
     return NULL;
   }
 
@@ -1173,7 +1183,7 @@ static void WriteChannelInfo(std::vector<unsigned char> &data,
 
   // Calculate total size.
   for (size_t c = 0; c < channels.size(); c++) {
-    sz += strlen(channels[c].name.c_str()) + 1;  // +1 for \0
+    sz += channels[c].name.length() + 1;  // +1 for \0
     sz += 16;                                    // 4 * int
   }
   data.resize(sz + 1);
@@ -1181,8 +1191,8 @@ static void WriteChannelInfo(std::vector<unsigned char> &data,
   unsigned char *p = &data.at(0);
 
   for (size_t c = 0; c < channels.size(); c++) {
-    memcpy(p, channels[c].name.c_str(), strlen(channels[c].name.c_str()));
-    p += strlen(channels[c].name.c_str());
+    memcpy(p, channels[c].name.c_str(), channels[c].name.length());
+    p += channels[c].name.length();
     (*p) = '\0';
     p++;
 
@@ -4258,6 +4268,13 @@ static int ParseEXRHeader(HeaderInfo *info, bool *empty_header,
     if ((version->tiled || version->multipart || version->non_image) && attr_name.compare("tiles") == 0) {
       unsigned int x_size, y_size;
       unsigned char tile_mode;
+      if (data.size() != 9) {
+        if (err) {
+          (*err) += "(ParseEXRHeader) Invalid attribute data size. Attribute data size must be 9.\n";
+        }
+        return TINYEXR_ERROR_INVALID_DATA;
+      }
+
       assert(data.size() == 9);
       memcpy(&x_size, &data.at(0), sizeof(int));
       memcpy(&y_size, &data.at(4), sizeof(int));
@@ -4503,7 +4520,7 @@ static int ParseEXRHeader(HeaderInfo *info, bool *empty_header,
 }
 
 // C++ HeaderInfo to C EXRHeader conversion.
-static void ConvertHeader(EXRHeader *exr_header, const HeaderInfo &info) {
+static bool ConvertHeader(EXRHeader *exr_header, const HeaderInfo &info, std::string *warn, std::string *err) {
   exr_header->pixel_aspect_ratio = info.pixel_aspect_ratio;
   exr_header->screen_window_center[0] = info.screen_window_center[0];
   exr_header->screen_window_center[1] = info.screen_window_center[1];
@@ -4527,19 +4544,45 @@ static void ConvertHeader(EXRHeader *exr_header, const HeaderInfo &info) {
 
   EXRSetNameAttr(exr_header, info.name.c_str());
 
+  bool valid = true;
+
   if (!info.type.empty()) {
     if (info.type == "scanlineimage") {
-      assert(!exr_header->tiled);
+      if (exr_header->tiled) {
+        if (err) {
+          (*err) += "(ConvertHeader) tiled bit must be off for `scanlineimage` type.\n";
+        }
+        valid = false;
+      }
     } else if (info.type == "tiledimage") {
-      assert(exr_header->tiled);
+      if (!exr_header->tiled) {
+        if (err) {
+          (*err) += "(ConvertHeader) tiled bit must be on for `tiledimage` type.\n";
+        }
+        valid = false;
+      }
     } else if (info.type == "deeptile") {
       exr_header->non_image = 1;
-      assert(exr_header->tiled);
+      if (!exr_header->tiled) {
+        if (err) {
+          (*err) += "(ConvertHeader) tiled bit must be on for `deeptile` type.\n";
+        }
+        valid = false;
+      }
     } else if (info.type == "deepscanline") {
       exr_header->non_image = 1;
-      assert(!exr_header->tiled);
+      if (exr_header->tiled) {
+        if (err) {
+          (*err) += "(ConvertHeader) tiled bit must be off for `deepscanline` type.\n";
+        }
+        valid = false;
+      }
     } else {
-      assert(false);
+      if (warn) {
+        std::stringstream ss;
+        ss << "(ConvertHeader) Unsupported or unknown info.type: " << info.type << "\n";
+        (*warn) += ss.str();
+      }
     }
   }
 
@@ -4602,6 +4645,8 @@ static void ConvertHeader(EXRHeader *exr_header, const HeaderInfo &info) {
   }
 
   exr_header->header_len = info.header_len;
+
+  return true;
 }
 
 struct OffsetData {
@@ -5106,7 +5151,6 @@ static int DecodeChunk(EXRImage *exr_image, const EXRHeader *exr_header,
 
   if (invalid_data) {
     if (err) {
-      std::stringstream ss;
       (*err) += "Invalid data found when decoding pixels.\n";
     }
     return TINYEXR_ERROR_INVALID_DATA;
@@ -5728,7 +5772,7 @@ struct LayerChannel {
 };
 
 static void ChannelsInLayer(const EXRHeader &exr_header,
-                            const std::string layer_name,
+                            const std::string &layer_name,
                             std::vector<LayerChannel> &channels) {
   channels.clear();
   for (int c = 0; c < exr_header.num_channels; c++) {
@@ -6068,16 +6112,29 @@ int ParseEXRHeaderFromMemory(EXRHeader *exr_header, const EXRVersion *version,
   tinyexr::HeaderInfo info;
   info.clear();
 
-  std::string err_str;
-  int ret = ParseEXRHeader(&info, NULL, version, &err_str, marker, marker_size);
+  int ret;
+  {
+    std::string err_str;
+    ret = ParseEXRHeader(&info, NULL, version, &err_str, marker, marker_size);
 
-  if (ret != TINYEXR_SUCCESS) {
-    if (err && !err_str.empty()) {
-      tinyexr::SetErrorMessage(err_str, err);
+    if (ret != TINYEXR_SUCCESS) {
+      if (err && !err_str.empty()) {
+        tinyexr::SetErrorMessage(err_str, err);
+      }
     }
   }
 
-  ConvertHeader(exr_header, info);
+  {
+    std::string warn;
+    std::string err_str;
+
+    if (!ConvertHeader(exr_header, info, &warn, &err_str)) {
+      if (err && !err_str.empty()) {
+        tinyexr::SetErrorMessage(err_str, err);
+      }
+      ret = TINYEXR_ERROR_INVALID_HEADER;
+    }
+  }
 
   exr_header->multipart = version->multipart ? 1 : 0;
   exr_header->non_image = version->non_image ? 1 : 0;
@@ -6285,7 +6342,7 @@ int LoadEXRImageFromFile(EXRImage *exr_image, const EXRHeader *exr_header,
 
   FILE *fp = NULL;
 #ifdef _WIN32
-#if defined(_MSC_VER) || defined(__MINGW32__)  // MSVC, MinGW gcc or clang
+#if defined(_MSC_VER) || (defined(MINGW_HAS_SECURE_API) && MINGW_HAS_SECURE_API) // MSVC, MinGW GCC, or Clang.
   errno_t errcode =
       _wfopen_s(&fp, tinyexr::UTF8ToWchar(filename).c_str(), L"rb");
   if (errcode != 0) {
@@ -6294,7 +6351,7 @@ int LoadEXRImageFromFile(EXRImage *exr_image, const EXRHeader *exr_header,
     return TINYEXR_ERROR_CANT_OPEN_FILE;
   }
 #else
-  // Unknown compiler
+  // Unknown compiler or MinGW without MINGW_HAS_SECURE_API.
   fp = fopen(filename, "rb");
 #endif
 #else
@@ -7120,7 +7177,7 @@ static size_t SaveEXRNPartImageToMemory(const EXRImage* exr_images,
         {
           size_t len = 0;
           if ((len = strlen(exr_headers[i]->name)) > 0) {
-            partnames.insert(std::string(exr_headers[i]->name));
+            partnames.emplace(exr_headers[i]->name);
             if (partnames.size() != i + 1) {
               SetErrorMessage("'name' attributes must be unique for a multi-part file", err);
               return 0;
@@ -7294,7 +7351,7 @@ int SaveEXRImageToFile(const EXRImage *exr_image, const EXRHeader *exr_header,
 
   FILE *fp = NULL;
 #ifdef _WIN32
-#if defined(_MSC_VER) || defined(__MINGW32__)  // MSVC, MinGW gcc or clang
+#if defined(_MSC_VER) || (defined(MINGW_HAS_SECURE_API) && MINGW_HAS_SECURE_API) // MSVC, MinGW GCC, or Clang
   errno_t errcode =
       _wfopen_s(&fp, tinyexr::UTF8ToWchar(filename).c_str(), L"wb");
   if (errcode != 0) {
@@ -7303,7 +7360,7 @@ int SaveEXRImageToFile(const EXRImage *exr_image, const EXRHeader *exr_header,
     return TINYEXR_ERROR_CANT_WRITE_FILE;
   }
 #else
-  // Unknown compiler
+  // Unknown compiler or MinGW without MINGW_HAS_SECURE_API.
   fp = fopen(filename, "wb");
 #endif
 #else
@@ -7363,7 +7420,7 @@ int SaveEXRMultipartImageToFile(const EXRImage* exr_images,
 
   FILE *fp = NULL;
 #ifdef _WIN32
-#if defined(_MSC_VER) || defined(__MINGW32__)  // MSVC, MinGW gcc or clang
+#if defined(_MSC_VER) || (defined(MINGW_HAS_SECURE_API) && MINGW_HAS_SECURE_API) // MSVC, MinGW GCC, or Clang.
   errno_t errcode =
     _wfopen_s(&fp, tinyexr::UTF8ToWchar(filename).c_str(), L"wb");
   if (errcode != 0) {
@@ -7372,7 +7429,7 @@ int SaveEXRMultipartImageToFile(const EXRImage* exr_images,
     return TINYEXR_ERROR_CANT_WRITE_FILE;
   }
 #else
-  // Unknown compiler
+  // Unknown compiler or MinGW without MINGW_HAS_SECURE_API.
   fp = fopen(filename, "wb");
 #endif
 #else
@@ -7414,7 +7471,7 @@ int LoadDeepEXR(DeepImage *deep_image, const char *filename, const char **err) {
 
 #ifdef _WIN32
   FILE *fp = NULL;
-#if defined(_MSC_VER) || defined(__MINGW32__)  // MSVC, MinGW gcc or clang
+#if defined(_MSC_VER) || (defined(MINGW_HAS_SECURE_API) && MINGW_HAS_SECURE_API) // MSVC, MinGW GCC, or Clang.
   errno_t errcode =
       _wfopen_s(&fp, tinyexr::UTF8ToWchar(filename).c_str(), L"rb");
   if (errcode != 0) {
@@ -7423,7 +7480,7 @@ int LoadDeepEXR(DeepImage *deep_image, const char *filename, const char **err) {
     return TINYEXR_ERROR_CANT_OPEN_FILE;
   }
 #else
-  // Unknown compiler
+  // Unknown compiler or MinGW without MINGW_HAS_SECURE_API.
   fp = fopen(filename, "rb");
 #endif
   if (!fp) {
@@ -7589,9 +7646,6 @@ int LoadDeepEXR(DeepImage *deep_image, const char *filename, const char **err) {
 
   int data_width = dw - dx + 1;
   int data_height = dh - dy + 1;
-
-  std::vector<float> image(
-      static_cast<size_t>(data_width * data_height * 4));  // 4 = RGBA
 
   // Read offset tables.
   int num_blocks = data_height / num_scanline_blocks;
@@ -7934,7 +7988,7 @@ int ParseEXRHeaderFromFile(EXRHeader *exr_header, const EXRVersion *exr_version,
 
   FILE *fp = NULL;
 #ifdef _WIN32
-#if defined(_MSC_VER) || defined(__MINGW32__)  // MSVC, MinGW gcc or clang
+#if defined(_MSC_VER) || (defined(MINGW_HAS_SECURE_API) && MINGW_HAS_SECURE_API) // MSVC, MinGW GCC, or Clang.
   errno_t errcode =
       _wfopen_s(&fp, tinyexr::UTF8ToWchar(filename).c_str(), L"rb");
   if (errcode != 0) {
@@ -7942,7 +7996,7 @@ int ParseEXRHeaderFromFile(EXRHeader *exr_header, const EXRVersion *exr_version,
     return TINYEXR_ERROR_INVALID_FILE;
   }
 #else
-  // Unknown compiler
+  // Unknown compiler or MinGW without MINGW_HAS_SECURE_API.
   fp = fopen(filename, "rb");
 #endif
 #else
@@ -8036,11 +8090,24 @@ int ParseEXRMultipartHeaderFromMemory(EXRHeader ***exr_headers,
   // allocate memory for EXRHeader and create array of EXRHeader pointers.
   (*exr_headers) =
       static_cast<EXRHeader **>(malloc(sizeof(EXRHeader *) * infos.size()));
+
+  
+  int retcode = TINYEXR_SUCCESS;
+
   for (size_t i = 0; i < infos.size(); i++) {
     EXRHeader *exr_header = static_cast<EXRHeader *>(malloc(sizeof(EXRHeader)));
     memset(exr_header, 0, sizeof(EXRHeader));
 
-    ConvertHeader(exr_header, infos[i]);
+    std::string warn;
+    std::string _err;
+    if (!ConvertHeader(exr_header, infos[i], &warn, &_err)) {
+      if (!_err.empty()) {
+        tinyexr::SetErrorMessage(
+            _err, err);
+      }
+      // continue to converting headers
+      retcode = TINYEXR_ERROR_INVALID_HEADER;
+    }
 
     exr_header->multipart = exr_version->multipart ? 1 : 0;
 
@@ -8049,7 +8116,7 @@ int ParseEXRMultipartHeaderFromMemory(EXRHeader ***exr_headers,
 
   (*num_headers) = static_cast<int>(infos.size());
 
-  return TINYEXR_SUCCESS;
+  return retcode;
 }
 
 int ParseEXRMultipartHeaderFromFile(EXRHeader ***exr_headers, int *num_headers,
@@ -8064,7 +8131,7 @@ int ParseEXRMultipartHeaderFromFile(EXRHeader ***exr_headers, int *num_headers,
 
   FILE *fp = NULL;
 #ifdef _WIN32
-#if defined(_MSC_VER) || defined(__MINGW32__)  // MSVC, MinGW gcc or clang
+#if defined(_MSC_VER) || (defined(MINGW_HAS_SECURE_API) && MINGW_HAS_SECURE_API) // MSVC, MinGW GCC, or Clang.
   errno_t errcode =
       _wfopen_s(&fp, tinyexr::UTF8ToWchar(filename).c_str(), L"rb");
   if (errcode != 0) {
@@ -8072,7 +8139,7 @@ int ParseEXRMultipartHeaderFromFile(EXRHeader ***exr_headers, int *num_headers,
     return TINYEXR_ERROR_INVALID_FILE;
   }
 #else
-  // Unknown compiler
+  // Unknown compiler or MinGW without MINGW_HAS_SECURE_API.
   fp = fopen(filename, "rb");
 #endif
 #else
@@ -8170,14 +8237,14 @@ int ParseEXRVersionFromFile(EXRVersion *version, const char *filename) {
 
   FILE *fp = NULL;
 #ifdef _WIN32
-#if defined(_MSC_VER) || defined(__MINGW32__)  // MSVC, MinGW gcc or clang
+#if defined(_MSC_VER) || (defined(MINGW_HAS_SECURE_API) && MINGW_HAS_SECURE_API) // MSVC, MinGW GCC, or Clang.
   errno_t err = _wfopen_s(&fp, tinyexr::UTF8ToWchar(filename).c_str(), L"rb");
   if (err != 0) {
     // TODO(syoyo): return wfopen_s erro code
     return TINYEXR_ERROR_CANT_OPEN_FILE;
   }
 #else
-  // Unknown compiler
+  // Unknown compiler or MinGW without MINGW_HAS_SECURE_API.
   fp = fopen(filename, "rb");
 #endif
 #else
@@ -8348,7 +8415,7 @@ int LoadEXRMultipartImageFromFile(EXRImage *exr_images,
 
   FILE *fp = NULL;
 #ifdef _WIN32
-#if defined(_MSC_VER) || defined(__MINGW32__)  // MSVC, MinGW gcc or clang
+#if defined(_MSC_VER) || (defined(MINGW_HAS_SECURE_API) && MINGW_HAS_SECURE_API) // MSVC, MinGW GCC, or Clang.
   errno_t errcode =
       _wfopen_s(&fp, tinyexr::UTF8ToWchar(filename).c_str(), L"rb");
   if (errcode != 0) {
@@ -8356,7 +8423,7 @@ int LoadEXRMultipartImageFromFile(EXRImage *exr_images,
     return TINYEXR_ERROR_CANT_OPEN_FILE;
   }
 #else
-  // Unknown compiler
+  // Unknown compiler or MinGW without MINGW_HAS_SECURE_API.
   fp = fopen(filename, "rb");
 #endif
 #else
