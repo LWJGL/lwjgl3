@@ -358,11 +358,11 @@ nk_style_pop_vec2(ctx);""")}
     EnumConstant(
         "nk_convert_result",
 
-        "CONVERT_SUCCESS".enum("", 0),
-        "CONVERT_INVALID_PARAM".enum("", 1),
-        "CONVERT_COMMAND_BUFFER_FULL".enum("", 1.NK_FLAG),
-        "CONVERT_VERTEX_BUFFER_FULL".enum("", 2.NK_FLAG),
-        "CONVERT_ELEMENT_BUFFER_FULL".enum("", 3.NK_FLAG)
+        "CONVERT_SUCCESS".enum("Signals a successful draw command to vertex buffer conversion.", 0),
+        "CONVERT_INVALID_PARAM".enum("An invalid argument was passed in the function call.", 1),
+        "CONVERT_COMMAND_BUFFER_FULL".enum("The provided buffer for storing draw commands is full or failed to allocate more memory.", 1.NK_FLAG),
+        "CONVERT_VERTEX_BUFFER_FULL".enum("The provided buffer for storing vertices is full or failed to allocate more memory.", 2.NK_FLAG),
+        "CONVERT_ELEMENT_BUFFER_FULL".enum("The provided buffer for storing indices is full or failed to allocate more memory.", 3.NK_FLAG)
     )
 
     val SymbolTypes = EnumConstant(
@@ -1227,7 +1227,7 @@ nk_style_pop_vec2(ctx);""")}
 
         nk_bool(
             "group_begin",
-            "",
+            "Start a new group with internal scrollbar handling.",
 
             ctx,
             charUTF8.const.p("title", ""),
@@ -1235,7 +1235,7 @@ nk_style_pop_vec2(ctx);""")}
         )
         nk_bool(
             "group_begin_titled",
-            "",
+            "Start a new group with separated name and title and internal scrollbar handling.",
 
             ctx,
             charUTF8.const.p("name", "must be an unique identifier for this group"),
@@ -1248,10 +1248,10 @@ nk_style_pop_vec2(ctx);""")}
 
             returnDoc = "{@code true} if visible and fillable with widgets or {@code false} otherwise"
         )
-        void("group_end", "", ctx)
+        void("group_end", "Ends a group. Should only be called if #group_begin() returned non-zero.", ctx)
         nk_bool(
             "group_scrolled_offset_begin",
-            "",
+            "Start a new group with manual separated handling of scrollbar x- and y-offset.",
 
             ctx,
             Check(1)..nk_uint.p("x_offset", ""),
@@ -1261,17 +1261,17 @@ nk_style_pop_vec2(ctx);""")}
         )
         nk_bool(
             "group_scrolled_begin",
-            "",
+            "Start a new group with manual scrollbar handling.",
 
             ctx,
             nk_scroll.p("scroll", ""),
             charUTF8.const.p("title", ""),
             nk_flags("flags", "")
         )
-        void("group_scrolled_end", "", ctx)
+        void("group_scrolled_end", "Ends a group with manual scrollbar handling. Should only be called if #group_scrolled_begin() returned non-zero.", ctx)
         void(
             "group_get_scroll",
-            "Gets the scroll position of the given group.",
+            "Gets the scroll offset for the given group.",
 
             ctx,
             charUTF8.const.p("id", "the id of the group to get the scroll position of"),
@@ -1280,7 +1280,7 @@ nk_style_pop_vec2(ctx);""")}
         )
         void(
             "group_set_scroll",
-            "Sets the scroll position of the given group.",
+            "Sets the scroll offset for the given group.",
 
             ctx,
             charUTF8.const.p("id", "the id of the group to scroll"),
@@ -1308,7 +1308,7 @@ nk_style_pop_vec2(ctx);""")}
 
         val tree_push_hashed = nk_bool(
             "tree_push_hashed",
-            "Start a collapsable UI section with internal state management with full control over internal unique ID used to store state.",
+            "Start a collapsible UI section with internal state management with full control over internal unique ID used to store state.",
 
             ctx,
             nk_tree_type(
@@ -1324,7 +1324,7 @@ nk_style_pop_vec2(ctx);""")}
         )
         nk_bool(
             "tree_image_push_hashed",
-            "Start a collapsable UI section with internal state management with full control over internal unique ID used to store state.",
+            "Start a collapsible UI section with internal state management with full control over internal unique ID used to store state.",
 
             ctx,
             tree_push_hashed["type"],
@@ -1335,11 +1335,11 @@ nk_style_pop_vec2(ctx);""")}
             tree_push_hashed["len"],
             tree_push_hashed["seed"]
         )
-        void("tree_pop", "Ends a collapsable UI section", ctx)
+        void("tree_pop", "Ends a collapsible UI section", ctx)
 
         nk_bool(
             "tree_state_push",
-            "Start a collapsable UI section with external state management.",
+            "Start a collapsible UI section with external state management.",
 
             ctx,
             tree_push_hashed["type"],
@@ -1348,7 +1348,7 @@ nk_style_pop_vec2(ctx);""")}
         )
         nk_bool(
             "tree_state_image_push",
-            "Start a collapsable UI section with image and label header and external state management.",
+            "Start a collapsible UI section with image and label header and external state management.",
 
             ctx,
             tree_push_hashed["type"],
@@ -1356,7 +1356,7 @@ nk_style_pop_vec2(ctx);""")}
             tree_push_hashed["title"],
             Check(1)..nk_collapse_states.p("state", "")
         )
-        void("tree_state_pop", "Ends a collapsable UI section.", ctx)
+        void("tree_state_pop", "Ends a collapsible UI section.", ctx)
 
         nk_bool(
             "tree_element_push_hashed",
@@ -2005,7 +2005,7 @@ nk_style_pop_vec2(ctx);""")}
 
         void(
             "property_int",
-            "",
+            "Integer property directly modifying a passed in value.",
 
             ctx,
             charUTF8.const.p("name", ""),
@@ -2018,7 +2018,7 @@ nk_style_pop_vec2(ctx);""")}
 
         void(
             "property_float",
-            "",
+            "Float property directly modifying a passed in value.",
 
             ctx,
             charUTF8.const.p("name", ""),
@@ -2031,7 +2031,7 @@ nk_style_pop_vec2(ctx);""")}
 
         void(
             "property_double",
-            "",
+            "Double property directly modifying a passed in value.",
 
             ctx,
             charUTF8.const.p("name", ""),
@@ -2044,7 +2044,7 @@ nk_style_pop_vec2(ctx);""")}
 
         int(
             "propertyi",
-            "",
+            "Integer property returning the modified int value.",
 
             ctx,
             charUTF8.const.p("name", ""),
@@ -2057,7 +2057,7 @@ nk_style_pop_vec2(ctx);""")}
 
         float(
             "propertyf",
-            "",
+            "Float property returning the modified float value.",
 
             ctx,
             charUTF8.const.p("name", ""),
@@ -2070,7 +2070,7 @@ nk_style_pop_vec2(ctx);""")}
 
         double(
             "propertyd",
-            "",
+            "Double property returning the modified double value.",
 
             ctx,
             charUTF8.const.p("name", ""),

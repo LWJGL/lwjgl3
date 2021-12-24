@@ -450,11 +450,11 @@ public class Nuklear {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #NK_CONVERT_SUCCESS CONVERT_SUCCESS}</li>
-     * <li>{@link #NK_CONVERT_INVALID_PARAM CONVERT_INVALID_PARAM}</li>
-     * <li>{@link #NK_CONVERT_COMMAND_BUFFER_FULL CONVERT_COMMAND_BUFFER_FULL}</li>
-     * <li>{@link #NK_CONVERT_VERTEX_BUFFER_FULL CONVERT_VERTEX_BUFFER_FULL}</li>
-     * <li>{@link #NK_CONVERT_ELEMENT_BUFFER_FULL CONVERT_ELEMENT_BUFFER_FULL}</li>
+     * <li>{@link #NK_CONVERT_SUCCESS CONVERT_SUCCESS} - Signals a successful draw command to vertex buffer conversion.</li>
+     * <li>{@link #NK_CONVERT_INVALID_PARAM CONVERT_INVALID_PARAM} - An invalid argument was passed in the function call.</li>
+     * <li>{@link #NK_CONVERT_COMMAND_BUFFER_FULL CONVERT_COMMAND_BUFFER_FULL} - The provided buffer for storing draw commands is full or failed to allocate more memory.</li>
+     * <li>{@link #NK_CONVERT_VERTEX_BUFFER_FULL CONVERT_VERTEX_BUFFER_FULL} - The provided buffer for storing vertices is full or failed to allocate more memory.</li>
+     * <li>{@link #NK_CONVERT_ELEMENT_BUFFER_FULL CONVERT_ELEMENT_BUFFER_FULL} - The provided buffer for storing indices is full or failed to allocate more memory.</li>
      * </ul>
      */
     public static final int
@@ -2584,7 +2584,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_group_begin group_begin} */
     public static native boolean nnk_group_begin(long ctx, long title, int flags);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Start a new group with internal scrollbar handling.
+     *
+     * @param ctx the nuklear context
+     */
     @NativeType("nk_bool")
     public static boolean nk_group_begin(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer title, @NativeType("nk_flags") int flags) {
         if (CHECKS) {
@@ -2593,7 +2597,11 @@ public class Nuklear {
         return nnk_group_begin(ctx.address(), memAddress(title), flags);
     }
 
-    /** @param ctx the nuklear context */
+    /**
+     * Start a new group with internal scrollbar handling.
+     *
+     * @param ctx the nuklear context
+     */
     @NativeType("nk_bool")
     public static boolean nk_group_begin(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence title, @NativeType("nk_flags") int flags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -2612,6 +2620,8 @@ public class Nuklear {
     public static native boolean nnk_group_begin_titled(long ctx, long name, long title, int flags);
 
     /**
+     * Start a new group with separated name and title and internal scrollbar handling.
+     *
      * @param ctx   the nuklear context
      * @param name  must be an unique identifier for this group
      * @param title group header title
@@ -2629,6 +2639,8 @@ public class Nuklear {
     }
 
     /**
+     * Start a new group with separated name and title and internal scrollbar handling.
+     *
      * @param ctx   the nuklear context
      * @param name  must be an unique identifier for this group
      * @param title group header title
@@ -2655,7 +2667,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_group_end group_end} */
     public static native void nnk_group_end(long ctx);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Ends a group. Should only be called if {@link #nk_group_begin group_begin} returned non-zero.
+     *
+     * @param ctx the nuklear context
+     */
     public static void nk_group_end(@NativeType("struct nk_context *") NkContext ctx) {
         nnk_group_end(ctx.address());
     }
@@ -2665,7 +2681,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_group_scrolled_offset_begin group_scrolled_offset_begin} */
     public static native boolean nnk_group_scrolled_offset_begin(long ctx, long x_offset, long y_offset, long title, int flags);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Start a new group with manual separated handling of scrollbar x- and y-offset.
+     *
+     * @param ctx the nuklear context
+     */
     @NativeType("nk_bool")
     public static boolean nk_group_scrolled_offset_begin(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_uint *") IntBuffer x_offset, @NativeType("nk_uint *") IntBuffer y_offset, @NativeType("char const *") ByteBuffer title, @NativeType("nk_flags") int flags) {
         if (CHECKS) {
@@ -2676,7 +2696,11 @@ public class Nuklear {
         return nnk_group_scrolled_offset_begin(ctx.address(), memAddress(x_offset), memAddress(y_offset), memAddress(title), flags);
     }
 
-    /** @param ctx the nuklear context */
+    /**
+     * Start a new group with manual separated handling of scrollbar x- and y-offset.
+     *
+     * @param ctx the nuklear context
+     */
     @NativeType("nk_bool")
     public static boolean nk_group_scrolled_offset_begin(@NativeType("struct nk_context *") NkContext ctx, @NativeType("nk_uint *") IntBuffer x_offset, @NativeType("nk_uint *") IntBuffer y_offset, @NativeType("char const *") CharSequence title, @NativeType("nk_flags") int flags) {
         if (CHECKS) {
@@ -2698,7 +2722,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_group_scrolled_begin group_scrolled_begin} */
     public static native boolean nnk_group_scrolled_begin(long ctx, long scroll, long title, int flags);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Start a new group with manual scrollbar handling.
+     *
+     * @param ctx the nuklear context
+     */
     @NativeType("nk_bool")
     public static boolean nk_group_scrolled_begin(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_scroll *") NkScroll scroll, @NativeType("char const *") ByteBuffer title, @NativeType("nk_flags") int flags) {
         if (CHECKS) {
@@ -2707,7 +2735,11 @@ public class Nuklear {
         return nnk_group_scrolled_begin(ctx.address(), scroll.address(), memAddress(title), flags);
     }
 
-    /** @param ctx the nuklear context */
+    /**
+     * Start a new group with manual scrollbar handling.
+     *
+     * @param ctx the nuklear context
+     */
     @NativeType("nk_bool")
     public static boolean nk_group_scrolled_begin(@NativeType("struct nk_context *") NkContext ctx, @NativeType("struct nk_scroll *") NkScroll scroll, @NativeType("char const *") CharSequence title, @NativeType("nk_flags") int flags) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -2725,7 +2757,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_group_scrolled_end group_scrolled_end} */
     public static native void nnk_group_scrolled_end(long ctx);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Ends a group with manual scrollbar handling. Should only be called if {@link #nk_group_scrolled_begin group_scrolled_begin} returned non-zero.
+     *
+     * @param ctx the nuklear context
+     */
     public static void nk_group_scrolled_end(@NativeType("struct nk_context *") NkContext ctx) {
         nnk_group_scrolled_end(ctx.address());
     }
@@ -2736,7 +2772,7 @@ public class Nuklear {
     public static native void nnk_group_get_scroll(long ctx, long id, long x_offset, long y_offset);
 
     /**
-     * Gets the scroll position of the given group.
+     * Gets the scroll offset for the given group.
      *
      * @param ctx      the nuklear context
      * @param id       the id of the group to get the scroll position of
@@ -2753,7 +2789,7 @@ public class Nuklear {
     }
 
     /**
-     * Gets the scroll position of the given group.
+     * Gets the scroll offset for the given group.
      *
      * @param ctx      the nuklear context
      * @param id       the id of the group to get the scroll position of
@@ -2781,7 +2817,7 @@ public class Nuklear {
     public static native void nnk_group_set_scroll(long ctx, long id, int x_offset, int y_offset);
 
     /**
-     * Sets the scroll position of the given group.
+     * Sets the scroll offset for the given group.
      *
      * @param ctx      the nuklear context
      * @param id       the id of the group to scroll
@@ -2796,7 +2832,7 @@ public class Nuklear {
     }
 
     /**
-     * Sets the scroll position of the given group.
+     * Sets the scroll offset for the given group.
      *
      * @param ctx      the nuklear context
      * @param id       the id of the group to scroll
@@ -2859,7 +2895,7 @@ public class Nuklear {
     public static native boolean nnk_tree_push_hashed(long ctx, int type, long title, int initial_state, long hash, int len, int seed);
 
     /**
-     * Start a collapsable UI section with internal state management with full control over internal unique ID used to store state.
+     * Start a collapsible UI section with internal state management with full control over internal unique ID used to store state.
      *
      * @param ctx           the nuklear context
      * @param type          value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node. One of:<br><table><tr><td>{@link #NK_TREE_NODE TREE_NODE}</td><td>{@link #NK_TREE_TAB TREE_TAB}</td></tr></table>
@@ -2877,7 +2913,7 @@ public class Nuklear {
     }
 
     /**
-     * Start a collapsable UI section with internal state management with full control over internal unique ID used to store state.
+     * Start a collapsible UI section with internal state management with full control over internal unique ID used to store state.
      *
      * @param ctx           the nuklear context
      * @param type          value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node. One of:<br><table><tr><td>{@link #NK_TREE_NODE TREE_NODE}</td><td>{@link #NK_TREE_TAB TREE_TAB}</td></tr></table>
@@ -2908,7 +2944,7 @@ public class Nuklear {
     public static native boolean nnk_tree_image_push_hashed(long ctx, int type, long img, long title, int initial_state, long hash, int len, int seed);
 
     /**
-     * Start a collapsable UI section with internal state management with full control over internal unique ID used to store state.
+     * Start a collapsible UI section with internal state management with full control over internal unique ID used to store state.
      *
      * @param ctx           the nuklear context
      * @param type          value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node. One of:<br><table><tr><td>{@link #NK_TREE_NODE TREE_NODE}</td><td>{@link #NK_TREE_TAB TREE_TAB}</td></tr></table>
@@ -2927,7 +2963,7 @@ public class Nuklear {
     }
 
     /**
-     * Start a collapsable UI section with internal state management with full control over internal unique ID used to store state.
+     * Start a collapsible UI section with internal state management with full control over internal unique ID used to store state.
      *
      * @param ctx           the nuklear context
      * @param type          value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node. One of:<br><table><tr><td>{@link #NK_TREE_NODE TREE_NODE}</td><td>{@link #NK_TREE_TAB TREE_TAB}</td></tr></table>
@@ -2955,7 +2991,7 @@ public class Nuklear {
     public static native void nnk_tree_pop(long ctx);
 
     /**
-     * Ends a collapsable UI section
+     * Ends a collapsible UI section
      *
      * @param ctx the nuklear context
      */
@@ -2969,7 +3005,7 @@ public class Nuklear {
     public static native boolean nnk_tree_state_push(long ctx, int type, long title, long state);
 
     /**
-     * Start a collapsable UI section with external state management.
+     * Start a collapsible UI section with external state management.
      *
      * @param ctx   the nuklear context
      * @param type  value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node. One of:<br><table><tr><td>{@link #NK_TREE_NODE TREE_NODE}</td><td>{@link #NK_TREE_TAB TREE_TAB}</td></tr></table>
@@ -2986,7 +3022,7 @@ public class Nuklear {
     }
 
     /**
-     * Start a collapsable UI section with external state management.
+     * Start a collapsible UI section with external state management.
      *
      * @param ctx   the nuklear context
      * @param type  value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node. One of:<br><table><tr><td>{@link #NK_TREE_NODE TREE_NODE}</td><td>{@link #NK_TREE_TAB TREE_TAB}</td></tr></table>
@@ -3014,7 +3050,7 @@ public class Nuklear {
     public static native boolean nnk_tree_state_image_push(long ctx, int type, long image, long title, long state);
 
     /**
-     * Start a collapsable UI section with image and label header and external state management.
+     * Start a collapsible UI section with image and label header and external state management.
      *
      * @param ctx   the nuklear context
      * @param type  value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node. One of:<br><table><tr><td>{@link #NK_TREE_NODE TREE_NODE}</td><td>{@link #NK_TREE_TAB TREE_TAB}</td></tr></table>
@@ -3031,7 +3067,7 @@ public class Nuklear {
     }
 
     /**
-     * Start a collapsable UI section with image and label header and external state management.
+     * Start a collapsible UI section with image and label header and external state management.
      *
      * @param ctx   the nuklear context
      * @param type  value from the {@code nk_tree_type} section to visually mark a tree node header as either a collapseable UI section or tree node. One of:<br><table><tr><td>{@link #NK_TREE_NODE TREE_NODE}</td><td>{@link #NK_TREE_TAB TREE_TAB}</td></tr></table>
@@ -3059,7 +3095,7 @@ public class Nuklear {
     public static native void nnk_tree_state_pop(long ctx);
 
     /**
-     * Ends a collapsable UI section.
+     * Ends a collapsible UI section.
      *
      * @param ctx the nuklear context
      */
@@ -4685,7 +4721,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_property_int property_int} */
     public static native void nnk_property_int(long ctx, long name, int min, long val, int max, int step, float inc_per_pixel);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Integer property directly modifying a passed in value.
+     *
+     * @param ctx the nuklear context
+     */
     public static void nk_property_int(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, int min, @NativeType("int *") IntBuffer val, int max, int step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
@@ -4694,7 +4734,11 @@ public class Nuklear {
         nnk_property_int(ctx.address(), memAddress(name), min, memAddress(val), max, step, inc_per_pixel);
     }
 
-    /** @param ctx the nuklear context */
+    /**
+     * Integer property directly modifying a passed in value.
+     *
+     * @param ctx the nuklear context
+     */
     public static void nk_property_int(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, int min, @NativeType("int *") IntBuffer val, int max, int step, float inc_per_pixel) {
         if (CHECKS) {
             check(val, 1);
@@ -4714,7 +4758,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_property_float property_float} */
     public static native void nnk_property_float(long ctx, long name, float min, long val, float max, float step, float inc_per_pixel);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Float property directly modifying a passed in value.
+     *
+     * @param ctx the nuklear context
+     */
     public static void nk_property_float(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, float min, @NativeType("float *") FloatBuffer val, float max, float step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
@@ -4723,7 +4771,11 @@ public class Nuklear {
         nnk_property_float(ctx.address(), memAddress(name), min, memAddress(val), max, step, inc_per_pixel);
     }
 
-    /** @param ctx the nuklear context */
+    /**
+     * Float property directly modifying a passed in value.
+     *
+     * @param ctx the nuklear context
+     */
     public static void nk_property_float(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, float min, @NativeType("float *") FloatBuffer val, float max, float step, float inc_per_pixel) {
         if (CHECKS) {
             check(val, 1);
@@ -4743,7 +4795,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_property_double property_double} */
     public static native void nnk_property_double(long ctx, long name, double min, long val, double max, double step, float inc_per_pixel);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Double property directly modifying a passed in value.
+     *
+     * @param ctx the nuklear context
+     */
     public static void nk_property_double(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, double min, @NativeType("double *") DoubleBuffer val, double max, double step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
@@ -4752,7 +4808,11 @@ public class Nuklear {
         nnk_property_double(ctx.address(), memAddress(name), min, memAddress(val), max, step, inc_per_pixel);
     }
 
-    /** @param ctx the nuklear context */
+    /**
+     * Double property directly modifying a passed in value.
+     *
+     * @param ctx the nuklear context
+     */
     public static void nk_property_double(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, double min, @NativeType("double *") DoubleBuffer val, double max, double step, float inc_per_pixel) {
         if (CHECKS) {
             check(val, 1);
@@ -4772,7 +4832,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_propertyi propertyi} */
     public static native int nnk_propertyi(long ctx, long name, int min, int val, int max, int step, float inc_per_pixel);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Integer property returning the modified int value.
+     *
+     * @param ctx the nuklear context
+     */
     public static int nk_propertyi(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, int min, int val, int max, int step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
@@ -4780,7 +4844,11 @@ public class Nuklear {
         return nnk_propertyi(ctx.address(), memAddress(name), min, val, max, step, inc_per_pixel);
     }
 
-    /** @param ctx the nuklear context */
+    /**
+     * Integer property returning the modified int value.
+     *
+     * @param ctx the nuklear context
+     */
     public static int nk_propertyi(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, int min, int val, int max, int step, float inc_per_pixel) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -4797,7 +4865,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_propertyf propertyf} */
     public static native float nnk_propertyf(long ctx, long name, float min, float val, float max, float step, float inc_per_pixel);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Float property returning the modified float value.
+     *
+     * @param ctx the nuklear context
+     */
     public static float nk_propertyf(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, float min, float val, float max, float step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
@@ -4805,7 +4877,11 @@ public class Nuklear {
         return nnk_propertyf(ctx.address(), memAddress(name), min, val, max, step, inc_per_pixel);
     }
 
-    /** @param ctx the nuklear context */
+    /**
+     * Float property returning the modified float value.
+     *
+     * @param ctx the nuklear context
+     */
     public static float nk_propertyf(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, float min, float val, float max, float step, float inc_per_pixel) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -4822,7 +4898,11 @@ public class Nuklear {
     /** Unsafe version of: {@link #nk_propertyd propertyd} */
     public static native double nnk_propertyd(long ctx, long name, double min, double val, double max, double step, float inc_per_pixel);
 
-    /** @param ctx the nuklear context */
+    /**
+     * Double property returning the modified double value.
+     *
+     * @param ctx the nuklear context
+     */
     public static double nk_propertyd(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") ByteBuffer name, double min, double val, double max, double step, float inc_per_pixel) {
         if (CHECKS) {
             checkNT1(name);
@@ -4830,7 +4910,11 @@ public class Nuklear {
         return nnk_propertyd(ctx.address(), memAddress(name), min, val, max, step, inc_per_pixel);
     }
 
-    /** @param ctx the nuklear context */
+    /**
+     * Double property returning the modified double value.
+     *
+     * @param ctx the nuklear context
+     */
     public static double nk_propertyd(@NativeType("struct nk_context *") NkContext ctx, @NativeType("char const *") CharSequence name, double min, double val, double max, double step, float inc_per_pixel) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
