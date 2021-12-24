@@ -252,7 +252,15 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         ),
         "DEBUG_STATS".enum("Display internal statistics.", 0x00000004),
         "DEBUG_TEXT".enum("Display debug text.", 0x00000008),
-        "DEBUG_PROFILER".enum("Enable profiler.", 0x00000010)
+        "DEBUG_PROFILER".enum(
+            """
+            Enable profiler.
+            
+            This causes per-view statistics to be collected, available through ##BGFXViewStats. This is unrelated to the profiler functions in
+            ##BGFXCallbackInterface.
+            """,
+            0x00000010
+        )
     ).javaDocLinks
 
     val BufferFlags = IntConstant(
@@ -508,8 +516,10 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "PCI_ID_NONE"..0x0000.s,
         "PCI_ID_SOFTWARE_RASTERIZER"..0x0001.s,
         "PCI_ID_AMD"..0x1002.s,
+        "PCI_ID_APPLE"..0x106b.s,
         "PCI_ID_INTEL".."(short)0x8086",
-        "PCI_ID_NVIDIA"..0x10de.s
+        "PCI_ID_NVIDIA"..0x10de.s,
+        "PCI_ID_MICROSOFT"..0x1414.s
     )
 
     val CubeMapSides = ByteConstant(

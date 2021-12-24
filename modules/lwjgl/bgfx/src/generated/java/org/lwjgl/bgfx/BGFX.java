@@ -427,7 +427,12 @@ public class BGFX {
      * </li>
      * <li>{@link #BGFX_DEBUG_STATS DEBUG_STATS} - Display internal statistics.</li>
      * <li>{@link #BGFX_DEBUG_TEXT DEBUG_TEXT} - Display debug text.</li>
-     * <li>{@link #BGFX_DEBUG_PROFILER DEBUG_PROFILER} - Enable profiler.</li>
+     * <li>{@link #BGFX_DEBUG_PROFILER DEBUG_PROFILER} - 
+     * Enable profiler.
+     * 
+     * <p>This causes per-view statistics to be collected, available through {@link BGFXViewStats}. This is unrelated to the profiler functions in
+     * {@link BGFXCallbackInterface}.</p>
+     * </li>
      * </ul>
      */
     public static final int
@@ -644,8 +649,10 @@ public class BGFX {
         BGFX_PCI_ID_NONE                = 0x0,
         BGFX_PCI_ID_SOFTWARE_RASTERIZER = 0x1,
         BGFX_PCI_ID_AMD                 = 0x1002,
+        BGFX_PCI_ID_APPLE               = 0x106B,
         BGFX_PCI_ID_INTEL               = (short)0x8086,
-        BGFX_PCI_ID_NVIDIA              = 0x10DE;
+        BGFX_PCI_ID_NVIDIA              = 0x10DE,
+        BGFX_PCI_ID_MICROSOFT           = 0x1414;
 
     /** Cubemap */
     public static final byte
