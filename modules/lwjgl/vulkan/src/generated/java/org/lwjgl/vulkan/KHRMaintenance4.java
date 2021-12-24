@@ -28,6 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Add new {@link #vkGetDeviceBufferMemoryRequirementsKHR GetDeviceBufferMemoryRequirementsKHR}, {@link #vkGetDeviceImageMemoryRequirementsKHR GetDeviceImageMemoryRequirementsKHR}, and {@link #vkGetDeviceImageSparseMemoryRequirementsKHR GetDeviceImageSparseMemoryRequirementsKHR} to allow the application to query the image memory requirements without having to create an image object and query it.</li>
  * <li>Relax the requirement that push constants must be initialized before they are dynamically accessed.</li>
  * <li>Relax the interface matching rules to allow a larger output vector to match with a smaller input vector, with additional values being discarded.</li>
+ * <li>Add a guarantee for buffer memory requirement that the size memory requirement is never greater than the result of aligning create size with the alignment memory requirement.</li>
  * </ul>
  * 
  * <h5>VK_KHR_maintenance4</h5>
@@ -40,7 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>414</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.1</li>
@@ -55,7 +56,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2021-08-18</dd>
+ * <dd>2021-10-25</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires SPIR-V 1.2 for {@code LocalSizeId}</li>
@@ -70,13 +71,14 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Graeme Leese, Broadcom</li>
  * <li>Tom Olson, Arm</li>
  * <li>Stu Smith, AMD</li>
+ * <li>Yiwei Zhang, Google</li>
  * </ul></dd>
  * </dl>
  */
 public class KHRMaintenance4 {
 
     /** The extension specification version. */
-    public static final int VK_KHR_MAINTENANCE_4_SPEC_VERSION = 1;
+    public static final int VK_KHR_MAINTENANCE_4_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_KHR_MAINTENANCE_4_EXTENSION_NAME = "VK_KHR_maintenance4";
@@ -98,6 +100,9 @@ public class KHRMaintenance4 {
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR = 1000413001,
         VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR        = 1000413002,
         VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR         = 1000413003;
+
+    /** Extends {@code VkImageAspectFlagBits}. */
+    public static final int VK_IMAGE_ASPECT_NONE_KHR = 0;
 
     protected KHRMaintenance4() {
         throw new UnsupportedOperationException();

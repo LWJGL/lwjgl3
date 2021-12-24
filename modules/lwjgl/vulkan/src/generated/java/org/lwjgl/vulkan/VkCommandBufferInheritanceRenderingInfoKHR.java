@@ -34,6 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-variableMultisampleRate">{@code variableMultisampleRate}</a> feature is not enabled, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
  * <li>If any element of {@code pColorAttachmentFormats} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#potential-format-features">potential format features</a> that include {@link VK10#VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT FORMAT_FEATURE_COLOR_ATTACHMENT_BIT}</li>
  * <li>If {@code depthAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#potential-format-features">potential format features</a> that include {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
+ * <li>When rendering to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#glossary">Linear Color attachment</a>, if any element of {@code pColorAttachmentFormats} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#potential-format-features">potential format features</a> that include {@link NVLinearColorAttachment#VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV}</li>
  * <li>If {@code stencilAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#potential-format-features">potential format features</a> that include {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
  * <li>If {@code depthAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} and {@code stencilAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, {@code depthAttachmentFormat} <b>must</b> equal {@code stencilAttachmentFormat}</li>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-multiview">{@code multiview}</a> feature is not enabled, {@code viewMask} <b>must</b> be 0</li>
@@ -45,11 +46,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR}</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkRenderingFlagBitsKHR} values</li>
- * <li>{@code pColorAttachmentFormats} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid {@code VkFormat} values</li>
+ * <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachmentFormats} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid {@code VkFormat} values</li>
  * <li>{@code depthAttachmentFormat} <b>must</b> be a valid {@code VkFormat} value</li>
  * <li>{@code stencilAttachmentFormat} <b>must</b> be a valid {@code VkFormat} value</li>
  * <li>If {@code rasterizationSamples} is not 0, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
- * <li>{@code colorAttachmentCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -142,7 +142,8 @@ public class VkCommandBufferInheritanceRenderingInfoKHR extends Struct implement
     /** the number of color attachments specified in the render pass instance. */
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
-    /** an array of {@code VkFormat} values defining the format of color attachments. */
+    /** a pointer to an array of {@code VkFormat} values defining the format of color attachments. */
+    @Nullable
     @NativeType("VkFormat const *")
     public IntBuffer pColorAttachmentFormats() { return npColorAttachmentFormats(address()); }
     /** a {@code VkFormat} value defining the format of the depth attachment. */
@@ -166,7 +167,7 @@ public class VkCommandBufferInheritanceRenderingInfoKHR extends Struct implement
     /** Sets the specified value to the {@link #viewMask} field. */
     public VkCommandBufferInheritanceRenderingInfoKHR viewMask(@NativeType("uint32_t") int value) { nviewMask(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pColorAttachmentFormats} field. */
-    public VkCommandBufferInheritanceRenderingInfoKHR pColorAttachmentFormats(@NativeType("VkFormat const *") IntBuffer value) { npColorAttachmentFormats(address(), value); return this; }
+    public VkCommandBufferInheritanceRenderingInfoKHR pColorAttachmentFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { npColorAttachmentFormats(address(), value); return this; }
     /** Sets the specified value to the {@link #depthAttachmentFormat} field. */
     public VkCommandBufferInheritanceRenderingInfoKHR depthAttachmentFormat(@NativeType("VkFormat") int value) { ndepthAttachmentFormat(address(), value); return this; }
     /** Sets the specified value to the {@link #stencilAttachmentFormat} field. */
@@ -180,7 +181,7 @@ public class VkCommandBufferInheritanceRenderingInfoKHR extends Struct implement
         long pNext,
         int flags,
         int viewMask,
-        IntBuffer pColorAttachmentFormats,
+        @Nullable IntBuffer pColorAttachmentFormats,
         int depthAttachmentFormat,
         int stencilAttachmentFormat,
         int rasterizationSamples
@@ -334,7 +335,7 @@ public class VkCommandBufferInheritanceRenderingInfoKHR extends Struct implement
     /** Unsafe version of {@link #colorAttachmentCount}. */
     public static int ncolorAttachmentCount(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderingInfoKHR.COLORATTACHMENTCOUNT); }
     /** Unsafe version of {@link #pColorAttachmentFormats() pColorAttachmentFormats}. */
-    public static IntBuffer npColorAttachmentFormats(long struct) { return memIntBuffer(memGetAddress(struct + VkCommandBufferInheritanceRenderingInfoKHR.PCOLORATTACHMENTFORMATS), ncolorAttachmentCount(struct)); }
+    @Nullable public static IntBuffer npColorAttachmentFormats(long struct) { return memIntBufferSafe(memGetAddress(struct + VkCommandBufferInheritanceRenderingInfoKHR.PCOLORATTACHMENTFORMATS), ncolorAttachmentCount(struct)); }
     /** Unsafe version of {@link #depthAttachmentFormat}. */
     public static int ndepthAttachmentFormat(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferInheritanceRenderingInfoKHR.DEPTHATTACHMENTFORMAT); }
     /** Unsafe version of {@link #stencilAttachmentFormat}. */
@@ -353,7 +354,7 @@ public class VkCommandBufferInheritanceRenderingInfoKHR extends Struct implement
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
     public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderingInfoKHR.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachmentFormats(IntBuffer) pColorAttachmentFormats}. */
-    public static void npColorAttachmentFormats(long struct, IntBuffer value) { memPutAddress(struct + VkCommandBufferInheritanceRenderingInfoKHR.PCOLORATTACHMENTFORMATS, memAddress(value)); ncolorAttachmentCount(struct, value.remaining()); }
+    public static void npColorAttachmentFormats(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkCommandBufferInheritanceRenderingInfoKHR.PCOLORATTACHMENTFORMATS, memAddressSafe(value)); ncolorAttachmentCount(struct, value == null ? 0 : value.remaining()); }
     /** Unsafe version of {@link #depthAttachmentFormat(int) depthAttachmentFormat}. */
     public static void ndepthAttachmentFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferInheritanceRenderingInfoKHR.DEPTHATTACHMENTFORMAT, value); }
     /** Unsafe version of {@link #stencilAttachmentFormat(int) stencilAttachmentFormat}. */
@@ -367,7 +368,9 @@ public class VkCommandBufferInheritanceRenderingInfoKHR extends Struct implement
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + VkCommandBufferInheritanceRenderingInfoKHR.PCOLORATTACHMENTFORMATS));
+        if (ncolorAttachmentCount(struct) != 0) {
+            check(memGetAddress(struct + VkCommandBufferInheritanceRenderingInfoKHR.PCOLORATTACHMENTFORMATS));
+        }
     }
 
     // -----------------------------------
@@ -424,6 +427,7 @@ public class VkCommandBufferInheritanceRenderingInfoKHR extends Struct implement
         @NativeType("uint32_t")
         public int colorAttachmentCount() { return VkCommandBufferInheritanceRenderingInfoKHR.ncolorAttachmentCount(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkCommandBufferInheritanceRenderingInfoKHR#pColorAttachmentFormats} field. */
+        @Nullable
         @NativeType("VkFormat const *")
         public IntBuffer pColorAttachmentFormats() { return VkCommandBufferInheritanceRenderingInfoKHR.npColorAttachmentFormats(address()); }
         /** @return the value of the {@link VkCommandBufferInheritanceRenderingInfoKHR#depthAttachmentFormat} field. */
@@ -447,7 +451,7 @@ public class VkCommandBufferInheritanceRenderingInfoKHR extends Struct implement
         /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderingInfoKHR#viewMask} field. */
         public VkCommandBufferInheritanceRenderingInfoKHR.Buffer viewMask(@NativeType("uint32_t") int value) { VkCommandBufferInheritanceRenderingInfoKHR.nviewMask(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkCommandBufferInheritanceRenderingInfoKHR#pColorAttachmentFormats} field. */
-        public VkCommandBufferInheritanceRenderingInfoKHR.Buffer pColorAttachmentFormats(@NativeType("VkFormat const *") IntBuffer value) { VkCommandBufferInheritanceRenderingInfoKHR.npColorAttachmentFormats(address(), value); return this; }
+        public VkCommandBufferInheritanceRenderingInfoKHR.Buffer pColorAttachmentFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { VkCommandBufferInheritanceRenderingInfoKHR.npColorAttachmentFormats(address(), value); return this; }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderingInfoKHR#depthAttachmentFormat} field. */
         public VkCommandBufferInheritanceRenderingInfoKHR.Buffer depthAttachmentFormat(@NativeType("VkFormat") int value) { VkCommandBufferInheritanceRenderingInfoKHR.ndepthAttachmentFormat(address(), value); return this; }
         /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderingInfoKHR#stencilAttachmentFormat} field. */

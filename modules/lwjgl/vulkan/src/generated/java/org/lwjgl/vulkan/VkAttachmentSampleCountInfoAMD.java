@@ -101,7 +101,7 @@ public class VkAttachmentSampleCountInfoAMD extends Struct implements NativeReso
     /** the number of color attachments specified in a render pass instance. */
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
-    /** an array of {@code VkSampleCountFlagBits} values defining the sample count of color attachments. */
+    /** a pointer to an array of {@code VkSampleCountFlagBits} values defining the sample count of color attachments. */
     @Nullable
     @NativeType("VkSampleCountFlagBits const *")
     public IntBuffer pColorAttachmentSamples() { return npColorAttachmentSamples(address()); }

@@ -25,7 +25,7 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
             <dd>40</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>3</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -43,7 +43,7 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2020-01-22</dd>
+            <dd>2021-12-08</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -64,7 +64,7 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VIDEO_ENCODE_H265_SPEC_VERSION".."2"
+        "EXT_VIDEO_ENCODE_H265_SPEC_VERSION".."3"
     )
 
     StringConstant(
@@ -85,7 +85,9 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
         "STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT".."1000039006",
         "STRUCTURE_TYPE_VIDEO_ENCODE_H265_EMIT_PICTURE_PARAMETERS_EXT".."1000039007",
         "STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_EXT".."1000039008",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT".."1000039009"
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT".."1000039009",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT".."1000039010",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT".."1000039011"
     )
 
     EnumConstant(
@@ -167,5 +169,25 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
         "VIDEO_ENCODE_H265_CTB_SIZE_16_BIT_EXT".enum(0x00000002),
         "VIDEO_ENCODE_H265_CTB_SIZE_32_BIT_EXT".enum(0x00000004),
         "VIDEO_ENCODE_H265_CTB_SIZE_64_BIT_EXT".enum(0x00000008)
+    )
+
+    EnumConstant(
+        """
+        VkVideoEncodeH265RateControlStructureFlagBitsEXT - Video encode H.265 rate control structure flags
+
+        <h5>Description</h5>
+        <ul>
+            <li>#VIDEO_ENCODE_H265_RATE_CONTROL_STRUCTURE_UNKNOWN_EXT is 0, and specifies a reference structure unknown at the time of stream rate control configuration.</li>
+            <li>#VIDEO_ENCODE_H265_RATE_CONTROL_STRUCTURE_FLAT_BIT_EXT specifies a flat reference structure.</li>
+            <li>#VIDEO_ENCODE_H265_RATE_CONTROL_STRUCTURE_DYADIC_BIT_EXT specifies a dyadic reference structure.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkVideoEncodeH265RateControlInfoEXT
+        """,
+
+        "VIDEO_ENCODE_H265_RATE_CONTROL_STRUCTURE_UNKNOWN_EXT".."0",
+        "VIDEO_ENCODE_H265_RATE_CONTROL_STRUCTURE_FLAT_BIT_EXT".enum(0x00000001),
+        "VIDEO_ENCODE_H265_RATE_CONTROL_STRUCTURE_DYADIC_BIT_EXT".enum(0x00000002)
     )
 }

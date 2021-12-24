@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing capability of a surface to be protected.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is enabled, the value returned in {@code supportsProtected} will be identical for every valid surface created on this physical device, and so in the {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR} call, {@link VkPhysicalDeviceSurfaceInfo2KHR}{@code ::surface} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}. In that case, the contents of {@link VkSurfaceCapabilities2KHR}{@code ::surfaceCapabilities} as well as any other struct chained to it will be undefined.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

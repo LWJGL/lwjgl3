@@ -22,7 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_END_INFO STRUCTURE_TYPE_SUBPASS_END_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -89,6 +90,8 @@ public class VkSubpassEndInfo extends Struct implements NativeResource {
     public VkSubpassEndInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_END_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassEndInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM} value to the {@code pNext} chain. */
+    public VkSubpassEndInfo pNext(VkSubpassFragmentDensityMapOffsetEndInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkSubpassEndInfo set(
@@ -288,6 +291,8 @@ public class VkSubpassEndInfo extends Struct implements NativeResource {
         public VkSubpassEndInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_END_INFO); }
         /** Sets the specified value to the {@link VkSubpassEndInfo#pNext} field. */
         public VkSubpassEndInfo.Buffer pNext(@NativeType("void const *") long value) { VkSubpassEndInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM} value to the {@code pNext} chain. */
+        public VkSubpassEndInfo.Buffer pNext(VkSubpassFragmentDensityMapOffsetEndInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

@@ -116,6 +116,7 @@ val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", typ
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-transformFeedback">transform feedback</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-meshShader">mesh shaders</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_MESH_SHADER_BIT_NV or #PIPELINE_STAGE_TASK_SHADER_BIT_NV</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-shadingRateImage">shading rate image</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-synchronization2">{@code synchronization2}</a> feature is not enabled, {@code pipelineStage} <b>must</b> not be #PIPELINE_STAGE_NONE_KHR</li>
             <li>{@code dstOffset} <b>must</b> be less than or equal to the size of {@code dstBuffer} minus 4</li>
             <li>{@code dstBuffer} <b>must</b> have been created with #BUFFER_USAGE_TRANSFER_DST_BIT usage flag</li>
             <li>If {@code dstBuffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
@@ -125,7 +126,7 @@ val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", typ
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pipelineStage} <b>must</b> be a valid {@code VkPipelineStageFlagBits} value</li>
+            <li>If {@code pipelineStage} is not 0, {@code pipelineStage} <b>must</b> be a valid {@code VkPipelineStageFlagBits} value</li>
             <li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>

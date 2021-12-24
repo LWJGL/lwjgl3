@@ -23,6 +23,7 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
             <li>Add new #GetDeviceBufferMemoryRequirementsKHR(), #GetDeviceImageMemoryRequirementsKHR(), and #GetDeviceImageSparseMemoryRequirementsKHR() to allow the application to query the image memory requirements without having to create an image object and query it.</li>
             <li>Relax the requirement that push constants must be initialized before they are dynamically accessed.</li>
             <li>Relax the interface matching rules to allow a larger output vector to match with a smaller input vector, with additional values being discarded.</li>
+            <li>Add a guarantee for buffer memory requirement that the size memory requirement is never greater than the result of aligning create size with the alignment memory requirement.</li>
         </ul>
 
         <h5>VK_KHR_maintenance4</h5>
@@ -37,7 +38,7 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
             <dd>414</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -53,7 +54,7 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-08-18</dd>
+            <dd>2021-10-25</dd>
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
@@ -70,6 +71,7 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
                 <li>Graeme Leese, Broadcom</li>
                 <li>Tom Olson, Arm</li>
                 <li>Stu Smith, AMD</li>
+                <li>Yiwei Zhang, Google</li>
             </ul></dd>
         </dl>
         """
@@ -77,7 +79,7 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
     IntConstant(
         "The extension specification version.",
 
-        "KHR_MAINTENANCE_4_SPEC_VERSION".."1"
+        "KHR_MAINTENANCE_4_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -93,6 +95,12 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR".."1000413001",
         "STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR".."1000413002",
         "STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR".."1000413003"
+    )
+
+    EnumConstant(
+        "Extends {@code VkImageAspectFlagBits}.",
+
+        "IMAGE_ASPECT_NONE_KHR".."0"
     )
 
     void(

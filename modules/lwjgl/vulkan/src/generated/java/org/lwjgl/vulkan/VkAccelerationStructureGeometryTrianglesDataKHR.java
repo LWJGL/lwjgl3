@@ -145,7 +145,7 @@ public class VkAccelerationStructureGeometryTrianglesDataKHR extends Struct impl
     public int indexType() { return nindexType(address()); }
     /** a device or host address to memory containing index data for this geometry. */
     public VkDeviceOrHostAddressConstKHR indexData() { return nindexData(address()); }
-    /** a device or host address to memory containing an optional reference to a {@link VkTransformMatrixKHR} structure that describes a transformation from the space in which the vertices in this geometry are described to the space in which the acceleration structure is defined. */
+    /** a device or host address to memory containing an optional reference to a {@link VkTransformMatrixKHR} structure describing a transformation from the space in which the vertices in this geometry are described to the space in which the acceleration structure is defined. */
     public VkDeviceOrHostAddressConstKHR transformData() { return ntransformData(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

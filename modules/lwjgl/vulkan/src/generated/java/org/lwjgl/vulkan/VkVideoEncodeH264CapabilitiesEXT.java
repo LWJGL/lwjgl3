@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying H.264 encode capabilities.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>When {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} is called to query the capabilities with parameter {@code videoCodecOperation} specified as {@link EXTVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT}, a {@link VkVideoEncodeH264CapabilitiesEXT} structure <b>can</b> be chained to {@link VkVideoCapabilitiesKHR} to retrieve H.264 extension specific capabilities.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

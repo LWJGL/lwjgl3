@@ -12,7 +12,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>In such cases, there <b>can</b> be no contents generated for an attachment within the render area.</p>
  * 
- * <p>This extension adds a new {@code VkAttachmentStoreOp} {@link #VK_ATTACHMENT_STORE_OP_NONE_QCOM ATTACHMENT_STORE_OP_NONE_QCOM} which specifies that the contents within the render area <b>may</b> not be written to memory, but that the prior contents of the attachment in memory are preserved. However, if any contents were generated within the render area during rendering, the contents of the attachment will be undefined inside the render area.</p>
+ * <p>This extension adds a new {@code VkAttachmentStoreOp} {@link #VK_ATTACHMENT_STORE_OP_NONE_QCOM ATTACHMENT_STORE_OP_NONE_QCOM} specifying that the contents within the render area <b>may</b> not be written to memory, but that the prior contents of the attachment in memory are preserved. However, if any contents were generated within the render area during rendering, the contents of the attachment will be undefined inside the render area.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 

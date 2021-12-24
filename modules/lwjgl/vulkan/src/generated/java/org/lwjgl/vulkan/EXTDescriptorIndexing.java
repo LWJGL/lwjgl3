@@ -58,6 +58,8 @@ package org.lwjgl.vulkan;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>Promoted to Vulkan 1.2 Core</li>
+ * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_descriptor_indexing.html">{@code SPV_EXT_descriptor_indexing}</a></li>
+ * <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_nonuniform_qualifier.txt">{@code GL_EXT_nonuniform_qualifier}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

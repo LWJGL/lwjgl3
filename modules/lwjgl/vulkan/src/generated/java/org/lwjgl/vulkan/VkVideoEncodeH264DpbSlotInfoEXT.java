@@ -37,10 +37,10 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <pre><code>
  * struct VkVideoEncodeH264DpbSlotInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     int8_t slotIndex;
- *     {@link StdVideoEncodeH264PictureInfo StdVideoEncodeH264PictureInfo} const * pStdPictureInfo;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     int8_t {@link #slotIndex};
+ *     {@link StdVideoEncodeH264PictureInfo StdVideoEncodeH264PictureInfo} const * {@link #pStdPictureInfo};
  * }</code></pre>
  */
 public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeResource {
@@ -88,28 +88,28 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code slotIndex} field. */
+    /** the slot index for this picture. {@code slotIndex} <b>must</b> match the {@code slotIndex} in {@code pSetupReferenceSlot} of {@link VkVideoEncodeInfoKHR} in the command used to encode the corresponding picture. */
     @NativeType("int8_t")
     public byte slotIndex() { return nslotIndex(address()); }
-    /** @return a {@link StdVideoEncodeH264PictureInfo} view of the struct pointed to by the {@code pStdPictureInfo} field. */
+    /** a pointer to a {@code StdVideoEncodeH264PictureInfo} structure specifying codec standard specific syntax/information associated with this picture from the H.264 specification. */
     @NativeType("StdVideoEncodeH264PictureInfo const *")
     public StdVideoEncodeH264PictureInfo pStdPictureInfo() { return npStdPictureInfo(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkVideoEncodeH264DpbSlotInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT} value to the {@code sType} field. */
+    /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT} value to the {@link #sType} field. */
     public VkVideoEncodeH264DpbSlotInfoEXT sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeH264DpbSlotInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code slotIndex} field. */
+    /** Sets the specified value to the {@link #slotIndex} field. */
     public VkVideoEncodeH264DpbSlotInfoEXT slotIndex(@NativeType("int8_t") byte value) { nslotIndex(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoEncodeH264PictureInfo} to the {@code pStdPictureInfo} field. */
+    /** Sets the address of the specified {@link StdVideoEncodeH264PictureInfo} to the {@link #pStdPictureInfo} field. */
     public VkVideoEncodeH264DpbSlotInfoEXT pStdPictureInfo(@NativeType("StdVideoEncodeH264PictureInfo const *") StdVideoEncodeH264PictureInfo value) { npStdPictureInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,28 +318,28 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkVideoEncodeH264DpbSlotInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH264DpbSlotInfoEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkVideoEncodeH264DpbSlotInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH264DpbSlotInfoEXT.npNext(address()); }
-        /** @return the value of the {@code slotIndex} field. */
+        /** @return the value of the {@link VkVideoEncodeH264DpbSlotInfoEXT#slotIndex} field. */
         @NativeType("int8_t")
         public byte slotIndex() { return VkVideoEncodeH264DpbSlotInfoEXT.nslotIndex(address()); }
-        /** @return a {@link StdVideoEncodeH264PictureInfo} view of the struct pointed to by the {@code pStdPictureInfo} field. */
+        /** @return a {@link StdVideoEncodeH264PictureInfo} view of the struct pointed to by the {@link VkVideoEncodeH264DpbSlotInfoEXT#pStdPictureInfo} field. */
         @NativeType("StdVideoEncodeH264PictureInfo const *")
         public StdVideoEncodeH264PictureInfo pStdPictureInfo() { return VkVideoEncodeH264DpbSlotInfoEXT.npStdPictureInfo(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkVideoEncodeH264DpbSlotInfoEXT#sType} field. */
         public VkVideoEncodeH264DpbSlotInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264DpbSlotInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT} value to the {@code sType} field. */
+        /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT} value to the {@link VkVideoEncodeH264DpbSlotInfoEXT#sType} field. */
         public VkVideoEncodeH264DpbSlotInfoEXT.Buffer sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkVideoEncodeH264DpbSlotInfoEXT#pNext} field. */
         public VkVideoEncodeH264DpbSlotInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH264DpbSlotInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code slotIndex} field. */
+        /** Sets the specified value to the {@link VkVideoEncodeH264DpbSlotInfoEXT#slotIndex} field. */
         public VkVideoEncodeH264DpbSlotInfoEXT.Buffer slotIndex(@NativeType("int8_t") byte value) { VkVideoEncodeH264DpbSlotInfoEXT.nslotIndex(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoEncodeH264PictureInfo} to the {@code pStdPictureInfo} field. */
+        /** Sets the address of the specified {@link StdVideoEncodeH264PictureInfo} to the {@link VkVideoEncodeH264DpbSlotInfoEXT#pStdPictureInfo} field. */
         public VkVideoEncodeH264DpbSlotInfoEXT.Buffer pStdPictureInfo(@NativeType("StdVideoEncodeH264PictureInfo const *") StdVideoEncodeH264PictureInfo value) { VkVideoEncodeH264DpbSlotInfoEXT.npStdPictureInfo(address(), value); return this; }
 
     }

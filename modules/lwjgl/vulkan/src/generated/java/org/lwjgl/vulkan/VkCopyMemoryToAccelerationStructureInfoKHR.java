@@ -110,7 +110,7 @@ public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct implement
     /** the target acceleration structure for the copy. */
     @NativeType("VkAccelerationStructureKHR")
     public long dst() { return ndst(address()); }
-    /** a {@code VkCopyAccelerationStructureModeKHR} value that specifies additional operations to perform during the copy. */
+    /** a {@code VkCopyAccelerationStructureModeKHR} value specifying additional operations to perform during the copy. */
     @NativeType("VkCopyAccelerationStructureModeKHR")
     public int mode() { return nmode(address()); }
 

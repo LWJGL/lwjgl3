@@ -28,6 +28,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If the {@code pNext} chain includes a {@link VkSurfaceFullScreenExclusiveInfoEXT} structure with its {@code fullScreenExclusive} member set to {@link EXTFullScreenExclusive#VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT}, and {@code surface} was created using {@link KHRWin32Surface#vkCreateWin32SurfaceKHR CreateWin32SurfaceKHR}, a {@link VkSurfaceFullScreenExclusiveWin32InfoEXT} structure <b>must</b> be included in the {@code pNext} chain</li>
+ * <li>When passed as the {@code pSurfaceInfo} parameter of {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR}, if the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is enabled and the {@code pNext} chain of the {@code pSurfaceCapabilities} parameter includes {@link VkSurfaceProtectedCapabilitiesKHR}, then {@code surface} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}. Otherwise, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+ * <li>When passed as the {@code pSurfaceInfo} parameter of {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceFormats2KHR GetPhysicalDeviceSurfaceFormats2KHR}, if the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is enabled, then {@code surface} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}. Otherwise, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+ * <li>When passed as the {@code pSurfaceInfo} parameter of {@link EXTFullScreenExclusive#vkGetPhysicalDeviceSurfacePresentModes2EXT GetPhysicalDeviceSurfacePresentModes2EXT}, if the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is enabled, then {@code surface} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}. Otherwise, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -36,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRGetSurfaceCapabilities2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkSurfaceFullScreenExclusiveInfoEXT} or {@link VkSurfaceFullScreenExclusiveWin32InfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+ * <li>If {@code surface} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
  * </ul>
  * 
  * <h5>See Also</h5>

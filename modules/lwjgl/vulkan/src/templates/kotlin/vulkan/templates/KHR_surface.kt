@@ -380,6 +380,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
             <li>{@code surface} <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
         </ul>
 
@@ -437,18 +438,21 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
 
         If {@code pSurfaceFormats} includes an entry whose value for {@code colorSpace} is #COLOR_SPACE_SRGB_NONLINEAR_KHR and whose value for {@code format} is a UNORM (or SRGB) format and the corresponding SRGB (or UNORM) format is a color renderable format for #IMAGE_TILING_OPTIMAL, then {@code pSurfaceFormats} <b>must</b> also contain an entry with the same value for {@code colorSpace} and {@code format} equal to the corresponding SRGB (or UNORM) format.
 
+        If the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is enabled, the values returned in {@code pSurfaceFormats} will be identical for every valid surface created on this physical device, and so {@code surface} <b>can</b> be #NULL_HANDLE.
+
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code surface} <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
+            <li>If the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is not enabled, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+            <li>If {@code surface} is not #NULL_HANDLE, it <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+            <li>If {@code surface} is not #NULL_HANDLE, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
             <li>{@code pSurfaceFormatCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
             <li>If the value referenced by {@code pSurfaceFormatCount} is not 0, and {@code pSurfaceFormats} is not {@code NULL}, {@code pSurfaceFormats} <b>must</b> be a valid pointer to an array of {@code pSurfaceFormatCount} ##VkSurfaceFormatKHR structures</li>
-            <li>Both of {@code physicalDevice}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+            <li>Both of {@code physicalDevice}, and {@code surface} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
         <h5>Return Codes</h5>
@@ -495,18 +499,21 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         <h5>Description</h5>
         If {@code pPresentModes} is {@code NULL}, then the number of presentation modes supported for the given {@code surface} is returned in {@code pPresentModeCount}. Otherwise, {@code pPresentModeCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pPresentModes} array, and on return the variable is overwritten with the number of values actually written to {@code pPresentModes}. If the value of {@code pPresentModeCount} is less than the number of presentation modes supported, at most {@code pPresentModeCount} values will be written, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available modes were returned.
 
+        If the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is enabled, the values returned in {@code pPresentModes} will be identical for every valid surface created on this physical device, and so {@code surface} <b>can</b> be #NULL_HANDLE.
+
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code surface} <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
+            <li>If the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is not enabled, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+            <li>If {@code surface} is not #NULL_HANDLE, it <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+            <li>If {@code surface} is not #NULL_HANDLE, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
             <li>{@code pPresentModeCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
             <li>If the value referenced by {@code pPresentModeCount} is not 0, and {@code pPresentModes} is not {@code NULL}, {@code pPresentModes} <b>must</b> be a valid pointer to an array of {@code pPresentModeCount} {@code VkPresentModeKHR} values</li>
-            <li>Both of {@code physicalDevice}, and {@code surface} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+            <li>Both of {@code physicalDevice}, and {@code surface} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
         </ul>
 
         <h5>Return Codes</h5>

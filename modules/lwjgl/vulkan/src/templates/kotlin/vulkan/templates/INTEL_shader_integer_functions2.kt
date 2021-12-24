@@ -49,6 +49,12 @@ val INTEL_shader_integer_functions2 = "INTELShaderIntegerFunctions2".nativeClass
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/INTEL/SPV_INTEL_shader_integer_functions2.html">{@code SPV_INTEL_shader_integer_functions2}</a>.</li>
+                <li>This extension provides API support for <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/INTEL/INTEL_shader_integer_functions2.txt">{@code GL_INTEL_shader_integer_functions2}</a>.</li>
+            </ul></dd>
+
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Ian Romanick, Intel</li>

@@ -133,7 +133,7 @@ public class VkPhysicalDeviceRayTracingPipelinePropertiesKHR extends Struct impl
     /** the maximum number of ray generation shader invocations which <b>may</b> be produced by a single {@link KHRRayTracingPipeline#vkCmdTraceRaysIndirectKHR CmdTraceRaysIndirectKHR} or {@link KHRRayTracingPipeline#vkCmdTraceRaysKHR CmdTraceRaysKHR} command. */
     @NativeType("uint32_t")
     public int maxRayDispatchInvocationCount() { return nmaxRayDispatchInvocationCount(address()); }
-    /** the <b>required</b> alignment in bytes for each shader binding table entry. */
+    /** the <b>required</b> alignment in bytes for each shader binding table entry. The value <b>must</b> be a power of two. */
     @NativeType("uint32_t")
     public int shaderGroupHandleAlignment() { return nshaderGroupHandleAlignment(address()); }
     /** the maximum size in bytes for a ray attribute structure */

@@ -138,7 +138,7 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
     /** similar to {@code maxDescriptorSetAccelerationStructures} but counts descriptor bindings from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindAccelerationStructures() { return nmaxDescriptorSetUpdateAfterBindAccelerationStructures(address()); }
-    /** the minimum <b>required</b> alignment, in bytes, for scratch data passed in to an acceleration structure build command. */
+    /** the minimum <b>required</b> alignment, in bytes, for scratch data passed in to an acceleration structure build command. The value <b>must</b> be a power of two. */
     @NativeType("uint32_t")
     public int minAccelerationStructureScratchOffsetAlignment() { return nminAccelerationStructureScratchOffsetAlignment(address()); }
 

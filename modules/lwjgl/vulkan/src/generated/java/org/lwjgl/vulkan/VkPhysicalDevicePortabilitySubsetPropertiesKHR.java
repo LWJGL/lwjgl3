@@ -85,7 +85,7 @@ public class VkPhysicalDevicePortabilitySubsetPropertiesKHR extends Struct imple
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the minimum alignment for vertex input strides. {@link VkVertexInputBindingDescription}{@code ::stride} <b>must</b> be a multiple of, and at least as large as, this value. */
+    /** indicates the minimum alignment for vertex input strides. {@link VkVertexInputBindingDescription}{@code ::stride} <b>must</b> be a multiple of, and at least as large as, this value. The value <b>must</b> be a power of two. */
     @NativeType("uint32_t")
     public int minVertexInputBindingStrideAlignment() { return nminVertexInputBindingStrideAlignment(address()); }
 

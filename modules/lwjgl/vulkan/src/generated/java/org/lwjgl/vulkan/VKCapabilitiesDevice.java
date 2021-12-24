@@ -699,6 +699,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_AMD_shader_trinary_minmax;
     /** When true, {@link AMDTextureGatherBiasLod} is supported. */
     public final boolean VK_AMD_texture_gather_bias_lod;
+    /** When true, {@link ARMRasterizationOrderAttachmentAccess} is supported. */
+    public final boolean VK_ARM_rasterization_order_attachment_access;
     /** When true, {@link EXT4444Formats} is supported. */
     public final boolean VK_EXT_4444_formats;
     /** When true, {@link EXTAstcDecodeMode} is supported. */
@@ -721,6 +723,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_custom_border_color;
     /** When true, {@link EXTDebugMarker} is supported. */
     public final boolean VK_EXT_debug_marker;
+    /** When true, {@link EXTDepthClipControl} is supported. */
+    public final boolean VK_EXT_depth_clip_control;
     /** When true, {@link EXTDepthClipEnable} is supported. */
     public final boolean VK_EXT_depth_clip_enable;
     /** When true, {@link EXTDepthRangeUnrestricted} is supported. */
@@ -1069,6 +1073,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NV_glsl_shader;
     /** When true, {@link NVInheritedViewportScissor} is supported. */
     public final boolean VK_NV_inherited_viewport_scissor;
+    /** When true, {@link NVLinearColorAttachment} is supported. */
+    public final boolean VK_NV_linear_color_attachment;
     /** When true, {@link NVMeshShader} is supported. */
     public final boolean VK_NV_mesh_shader;
     /** When true, {@link NVRayTracing} is supported. */
@@ -1101,6 +1107,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NVX_image_view_handle;
     /** When true, {@link NVXMultiviewPerViewAttributes} is supported. */
     public final boolean VK_NVX_multiview_per_view_attributes;
+    /** When true, {@link QCOMFragmentDensityMapOffset} is supported. */
+    public final boolean VK_QCOM_fragment_density_map_offset;
     /** When true, {@link QCOMRenderPassShaderResolve} is supported. */
     public final boolean VK_QCOM_render_pass_shader_resolve;
     /** When true, {@link QCOMRenderPassStoreOps} is supported. */
@@ -1145,6 +1153,7 @@ public class VKCapabilitiesDevice {
         VK_AMD_shader_info = check_AMD_shader_info(provider, caps, ext);
         VK_AMD_shader_trinary_minmax = ext.contains("VK_AMD_shader_trinary_minmax");
         VK_AMD_texture_gather_bias_lod = ext.contains("VK_AMD_texture_gather_bias_lod");
+        VK_ARM_rasterization_order_attachment_access = ext.contains("VK_ARM_rasterization_order_attachment_access");
         VK_EXT_4444_formats = ext.contains("VK_EXT_4444_formats");
         VK_EXT_astc_decode_mode = ext.contains("VK_EXT_astc_decode_mode");
         VK_EXT_blend_operation_advanced = ext.contains("VK_EXT_blend_operation_advanced");
@@ -1157,6 +1166,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_custom_border_color = ext.contains("VK_EXT_custom_border_color");
         VK_EXT_debug_marker = check_EXT_debug_marker(provider, caps, ext);
         check_EXT_debug_utils(provider, caps, capsInstance);
+        VK_EXT_depth_clip_control = ext.contains("VK_EXT_depth_clip_control");
         VK_EXT_depth_clip_enable = ext.contains("VK_EXT_depth_clip_enable");
         VK_EXT_depth_range_unrestricted = ext.contains("VK_EXT_depth_range_unrestricted");
         VK_EXT_descriptor_indexing = ext.contains("VK_EXT_descriptor_indexing");
@@ -1331,6 +1341,7 @@ public class VKCapabilitiesDevice {
         VK_NV_geometry_shader_passthrough = ext.contains("VK_NV_geometry_shader_passthrough");
         VK_NV_glsl_shader = ext.contains("VK_NV_glsl_shader");
         VK_NV_inherited_viewport_scissor = ext.contains("VK_NV_inherited_viewport_scissor");
+        VK_NV_linear_color_attachment = ext.contains("VK_NV_linear_color_attachment");
         VK_NV_mesh_shader = check_NV_mesh_shader(provider, caps, ext);
         VK_NV_ray_tracing = check_NV_ray_tracing(provider, caps, ext);
         VK_NV_ray_tracing_motion_blur = ext.contains("VK_NV_ray_tracing_motion_blur");
@@ -1347,6 +1358,7 @@ public class VKCapabilitiesDevice {
         VK_NVX_binary_import = check_NVX_binary_import(provider, caps, ext);
         VK_NVX_image_view_handle = check_NVX_image_view_handle(provider, caps, ext);
         VK_NVX_multiview_per_view_attributes = ext.contains("VK_NVX_multiview_per_view_attributes");
+        VK_QCOM_fragment_density_map_offset = ext.contains("VK_QCOM_fragment_density_map_offset");
         VK_QCOM_render_pass_shader_resolve = ext.contains("VK_QCOM_render_pass_shader_resolve");
         VK_QCOM_render_pass_store_ops = ext.contains("VK_QCOM_render_pass_store_ops");
         VK_QCOM_render_pass_transform = ext.contains("VK_QCOM_render_pass_transform");

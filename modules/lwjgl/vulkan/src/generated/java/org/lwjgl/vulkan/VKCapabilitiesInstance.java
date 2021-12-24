@@ -238,6 +238,8 @@ public class VKCapabilitiesInstance {
     public final boolean VK_EXT_validation_features;
     /** When true, {@link EXTValidationFlags} is supported. */
     public final boolean VK_EXT_validation_flags;
+    /** When true, {@link GOOGLESurfacelessQuery} is supported. */
+    public final boolean VK_GOOGLE_surfaceless_query;
     /** When true, {@link KHRDeviceGroupCreation} is supported. */
     public final boolean VK_KHR_device_group_creation;
     /** When true, {@link KHRDisplay} is supported. */
@@ -292,6 +294,7 @@ public class VKCapabilitiesInstance {
         check_EXT_tooling_info(provider, caps, deviceExt);
         VK_EXT_validation_features = ext.contains("VK_EXT_validation_features");
         VK_EXT_validation_flags = ext.contains("VK_EXT_validation_flags");
+        VK_GOOGLE_surfaceless_query = ext.contains("VK_GOOGLE_surfaceless_query");
         check_KHR_device_group(provider, caps, deviceExt);
         VK_KHR_device_group_creation = check_KHR_device_group_creation(provider, caps, ext);
         VK_KHR_display = check_KHR_display(provider, caps, ext);

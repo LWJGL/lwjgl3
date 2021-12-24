@@ -95,7 +95,8 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         "STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR".."1000023012",
         "STRUCTURE_TYPE_VIDEO_PROFILES_KHR".."1000023013",
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR".."1000023014",
-        "STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR".."1000023015"
+        "STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR".."1000023015",
+        "STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR".."1000023016"
     )
 
     EnumConstant(
@@ -212,8 +213,10 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         <h5>Description</h5>
         <ul>
             <li>#VIDEO_CODING_CONTROL_DEFAULT_KHR indicates a request for the coding control paramaters to be applied to the current state of the bound video session.</li>
-            <li>#VIDEO_CODING_CONTROL_RESET_BIT_KHR indicates a request for the bound video session state to be reset before the coding control parameters are applied. The state after reset is identical to the state immediately after video session creation.</li>
+            <li>#VIDEO_CODING_CONTROL_RESET_BIT_KHR indicates a request for the bound video session device context to be reset before the coding control parameters are applied.</li>
         </ul>
+
+        A newly created video session <b>must</b> be reset before use for video decode or encode operations. The reset operation returns all session DPB slots to the unused state (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#video-session-dpb-slot-states">DPB Slot States</a>). For encode sessions, the reset operation returns rate control configuration to implementation default settings. After decode or encode operations are performed on a session, the reset operation <b>may</b> be used to return the video session device context to the same initial state as after the reset of a newly created video session. This <b>may</b> be used when different video sequences are processed with the same session.
         """,
 
         "VIDEO_CODING_CONTROL_DEFAULT_KHR".."0",
@@ -755,7 +758,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         Set encode rate control parameters.
 
         <h5>C Specification</h5>
-        To apply dynamic controls to video decode or video operations, call:
+        To apply dynamic controls to video decode or video encode operations, call:
 
         <pre><code>
 ￿void vkCmdControlVideoCodingKHR(
@@ -787,7 +790,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkVideoCodingControlInfoKHR
         """,
 
-        VkCommandBuffer("commandBuffer", "the command buffer to be filled by this function for setting encode rate control parameters."),
+        VkCommandBuffer("commandBuffer", "the command buffer to be filled by this function."),
         VkVideoCodingControlInfoKHR.const.p("pCodingControlInfo", "a pointer to a ##VkVideoCodingControlInfoKHR structure.")
     )
 }

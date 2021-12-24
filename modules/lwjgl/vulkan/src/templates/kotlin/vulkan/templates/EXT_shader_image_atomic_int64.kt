@@ -51,6 +51,12 @@ val EXT_shader_image_atomic_int64 = "EXTShaderImageAtomicInt64".nativeClassVK("E
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_shader_image_int64.html">{@code SPV_EXT_shader_image_int64}</a></li>
+                <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_shader_image_int64.txt">{@code GLSL_EXT_shader_image_int64}</a></li>
+            </ul></dd>
+
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Matthaeus Chajdas, AMD</li>
@@ -58,12 +64,6 @@ val EXT_shader_image_atomic_int64 = "EXTShaderImageAtomicInt64".nativeClassVK("E
                 <li>Tobias Hector, AMD</li>
                 <li>Jeff Bolz, Nvidia</li>
                 <li>Jason Ekstrand, Intel</li>
-            </ul></dd>
-
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension requires the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_shader_image_int64.html">{@code SPV_EXT_shader_image_int64}</a> SPIR-V extension.</li>
-                <li>This extension requires the <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_shader_image_int64.txt">{@code GLSL_EXT_shader_image_int64}</a> extension for GLSL source languages.</li>
             </ul></dd>
         </dl>
         """

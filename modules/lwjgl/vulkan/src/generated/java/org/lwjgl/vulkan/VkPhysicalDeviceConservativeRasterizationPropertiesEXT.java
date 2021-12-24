@@ -135,7 +135,7 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
     /** {@link VK10#VK_FALSE FALSE} if the implementation culls lines that become zero length after they are quantized to the fixed-point rasterization pixel grid. {@code degenerateLinesRasterized} is {@link VK10#VK_TRUE TRUE} if zero length lines are not culled and the provoking vertex attributes and depth value are used for the fragments. */
     @NativeType("VkBool32")
     public boolean degenerateLinesRasterized() { return ndegenerateLinesRasterized(address()) != 0; }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports the SPIR-V builtin fragment shader input variable {@code FullyCoveredEXT} which specifies that conservative rasterization is enabled and the fragment area is fully covered by the generating primitive. */
+    /** {@link VK10#VK_TRUE TRUE} if the implementation supports the SPIR-V builtin fragment shader input variable {@code FullyCoveredEXT} specifying that conservative rasterization is enabled and the fragment area is fully covered by the generating primitive. */
     @NativeType("VkBool32")
     public boolean fullyCoveredFragmentShaderInputVariable() { return nfullyCoveredFragmentShaderInputVariable(address()) != 0; }
     /** {@link VK10#VK_TRUE TRUE} if the implementation supports conservative rasterization with the {@code PostDepthCoverage} execution mode enabled. Otherwise the {@code PostDepthCoverage} execution mode <b>must</b> not be used when conservative rasterization is enabled. */

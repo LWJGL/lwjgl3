@@ -122,6 +122,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
             <li>{@code pipelineBindPoint} <b>must</b> be supported by the {@code commandBuffer}’s parent {@code VkCommandPool}’s queue family</li>
             <li>{@code set} <b>must</b> be less than ##VkPipelineLayoutCreateInfo{@code ::setLayoutCount} provided when {@code layout} was created</li>
             <li>{@code set} <b>must</b> be the unique set number in the pipeline layout that uses a descriptor set layout that was created with #DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR</li>
+            <li>For each element <code>i</code> where {@code pDescriptorWrites}[i].{@code descriptorType} is #DESCRIPTOR_TYPE_SAMPLED_IMAGE, #DESCRIPTOR_TYPE_STORAGE_IMAGE, or #DESCRIPTOR_TYPE_INPUT_ATTACHMENT, {@code pDescriptorWrites}[i].{@code pImageInfo} <b>must</b> be a valid pointer to an array of {@code pDescriptorWrites}[i].{@code descriptorCount} valid ##VkDescriptorImageInfo structures</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

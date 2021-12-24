@@ -660,7 +660,6 @@ public class KHRSynchronization2 {
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
      * <li>{@code stageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2KHR} values</li>
-     * <li>{@code stageMask} <b>must</b> not be 0</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
      * <li>This command <b>must</b> only be called outside of a render pass instance</li>
@@ -725,7 +724,7 @@ public class KHRSynchronization2 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>When {@code vkCmdWaitEvents2KHR} is submitted to a queue, it inserts memory dependencies according to the elements of {@code pDependencyInfos} and each corresponding element of {@code pEvents}. {@code vkCmdWaitEvents2KHR} <b>must</b> not be used to wait on event signal operations occurring on other queues, or signal operations execyted by {@link VK10#vkCmdSetEvent CmdSetEvent}.</p>
+     * <p>When {@code vkCmdWaitEvents2KHR} is submitted to a queue, it inserts memory dependencies according to the elements of {@code pDependencyInfos} and each corresponding element of {@code pEvents}. {@code vkCmdWaitEvents2KHR} <b>must</b> not be used to wait on event signal operations occurring on other queues, or signal operations executed by {@link VK10#vkCmdSetEvent CmdSetEvent}.</p>
      * 
      * <p>The first <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> of each memory dependency defined by any element <code>i</code> of {@code pDependencyInfos} are applied to operations that occurred earlier in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-submission-order">submission order</a> than the last event signal operation on element <code>i</code> of {@code pEvents}.</p>
      * 
@@ -833,9 +832,9 @@ public class KHRSynchronization2 {
      * 
      * <p>When {@link #vkCmdPipelineBarrier2KHR CmdPipelineBarrier2KHR} is submitted to a queue, it defines memory dependencies between commands that were submitted before it, and those submitted after it.</p>
      * 
-     * <p>The first <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> of each memory dependency defined by any element <code>i</code> of {@code pDependencyInfos} are applied to operations that occurred earlier in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-submission-order">submission order</a>.</p>
+     * <p>The first <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> of each memory dependency defined by {@code pDependencyInfo} are applied to operations that occurred earlier in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-submission-order">submission order</a>.</p>
      * 
-     * <p>The second <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> of each memory dependency defined by any element <code>i</code> of {@code pDependencyInfos} are applied to operations that occurred later in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-submission-order">submission order</a>.</p>
+     * <p>The second <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> of each memory dependency defined by {@code pDependencyInfo} are applied to operations that occurred later in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-submission-order">submission order</a>.</p>
      * 
      * <p>If {@code vkCmdPipelineBarrier2KHR} is recorded within a render pass instance, the synchronization scopes are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-pipeline-barriers-subpass-self-dependencies">limited to operations within the same subpass</a>.</p>
      * 
@@ -964,10 +963,9 @@ public class KHRSynchronization2 {
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code stage} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2KHR} values</li>
-     * <li>{@code stage} <b>must</b> not be 0</li>
      * <li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
+     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, compute, decode, or encode operations</li>
      * <li>Both of {@code commandBuffer}, and {@code queryPool} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
      * </ul>
      * 
@@ -982,7 +980,7 @@ public class KHRSynchronization2 {
      * 
      * <table class="lwjgl">
      * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Transfer Graphics Compute</td></tr></tbody>
+     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Transfer Graphics Compute Decode Encode</td></tr></tbody>
      * </table>
      *
      * @param commandBuffer the command buffer into which the command will be recorded.
@@ -1172,7 +1170,6 @@ public class KHRSynchronization2 {
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code stage} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2KHR} values</li>
-     * <li>{@code stage} <b>must</b> not be 0</li>
      * <li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>

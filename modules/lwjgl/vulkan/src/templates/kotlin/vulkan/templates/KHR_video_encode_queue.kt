@@ -97,7 +97,8 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         "Extends {@code VkStructureType}.",
 
         "STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR".."1000299000",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR".."1000299001"
+        "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR".."1000299001",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR".."1000299002"
     )
 
     EnumConstant(
@@ -165,16 +166,14 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
     EnumConstant(
         """
-        VkVideoEncodeRateControlFlagBitsKHR - Video Encode Rate Control Flags
+        VkVideoEncodeRateControlFlagBitsKHR - Reserved for future use
 
         <h5>Description</h5>
-        <ul>
-            <li>#VIDEO_ENCODE_RESERVED_0_BIT_KHR The current version of the specification has reserved this value for future use.</li>
-        </ul>
+        {@code VkVideoEncodeRateControlFlagBitsKHR} defines bits which may be set in a {@code VkVideoEncodeRateControlFlagsKHR} value, but is currently unused.
         """,
 
         "VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR".."0",
-        "VIDEO_ENCODE_RATE_CONTROL_RESET_BIT_KHR".enum(0x00000001)
+        "VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR".enum(0x00000001)
     )
 
     EnumConstant(

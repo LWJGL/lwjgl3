@@ -113,6 +113,7 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
 
         <h5>Valid Usage</h5>
         <ul>
+            <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
             <li>{@code surface} <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
         </ul>
 

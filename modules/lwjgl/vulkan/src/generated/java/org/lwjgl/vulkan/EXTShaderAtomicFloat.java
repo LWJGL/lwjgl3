@@ -40,7 +40,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_shader_atomic_float_add.html">{@code SPV_EXT_shader_atomic_float_add}</a></li>
- * <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/tree/master/extensions/ext/GLSL_EXT_shader_atomic_float.txt">{@code GL_EXT_shader_atomic_float}</a></li>
+ * <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_shader_atomic_float.txt">{@code GL_EXT_shader_atomic_float}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

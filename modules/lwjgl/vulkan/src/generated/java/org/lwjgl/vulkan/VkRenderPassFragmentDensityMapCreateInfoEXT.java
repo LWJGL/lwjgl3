@@ -35,7 +35,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@code fragmentDensityMapAttachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code fragmentDensityMapAttachment} <b>must</b> be less than {@link VkRenderPassCreateInfo}{@code ::attachmentCount}</li>
  * <li>If {@code fragmentDensityMapAttachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code fragmentDensityMapAttachment} <b>must</b> not be an element of {@link VkSubpassDescription}{@code ::pInputAttachments}, {@link VkSubpassDescription}{@code ::pColorAttachments}, {@link VkSubpassDescription}{@code ::pResolveAttachments}, {@link VkSubpassDescription}{@code ::pDepthStencilAttachment}, or {@link VkSubpassDescription}{@code ::pPreserveAttachments} for any subpass</li>
  * <li>If {@code fragmentDensityMapAttachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code layout} <b>must</b> be equal to {@link EXTFragmentDensityMap#VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT}, or {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL}</li>
  * <li>If {@code fragmentDensityMapAttachment} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, {@code fragmentDensityMapAttachment} <b>must</b> reference an attachment with a {@code loadOp} equal to {@link VK10#VK_ATTACHMENT_LOAD_OP_LOAD ATTACHMENT_LOAD_OP_LOAD} or {@link VK10#VK_ATTACHMENT_LOAD_OP_DONT_CARE ATTACHMENT_LOAD_OP_DONT_CARE}</li>

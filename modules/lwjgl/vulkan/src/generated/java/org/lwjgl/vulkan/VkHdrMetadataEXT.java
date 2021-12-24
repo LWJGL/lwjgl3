@@ -119,13 +119,13 @@ public class VkHdrMetadataEXT extends Struct implements NativeResource {
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the reference monitor’s red primary in chromaticity coordinates */
+    /** a {@link VkXYColorEXT} structure specifying the reference monitor’s red primary in chromaticity coordinates */
     public VkXYColorEXT displayPrimaryRed() { return ndisplayPrimaryRed(address()); }
-    /** the reference monitor’s green primary in chromaticity coordinates */
+    /** a {@link VkXYColorEXT} structure specifying the reference monitor’s green primary in chromaticity coordinates */
     public VkXYColorEXT displayPrimaryGreen() { return ndisplayPrimaryGreen(address()); }
-    /** the reference monitor’s blue primary in chromaticity coordinates */
+    /** a {@link VkXYColorEXT} structure specifying the reference monitor’s blue primary in chromaticity coordinates */
     public VkXYColorEXT displayPrimaryBlue() { return ndisplayPrimaryBlue(address()); }
-    /** the reference monitor’s white-point in chromaticity coordinates */
+    /** a {@link VkXYColorEXT} structure specifying the reference monitor’s white-point in chromaticity coordinates */
     public VkXYColorEXT whitePoint() { return nwhitePoint(address()); }
     /** the maximum luminance of the reference monitor in nits */
     public float maxLuminance() { return nmaxLuminance(address()); }

@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing whether subpass shading is enabled.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link VkPhysicalDeviceSubpassShadingFeaturesHUAWEI} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceSubpassShadingFeaturesHUAWEI} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -28,9 +32,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceSubpassShadingFeaturesHUAWEI {
- *     VkStructureType sType;
- *     void * pNext;
- *     VkBool32 subpassShading;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #subpassShading};
  * }</code></pre>
  */
 public class VkPhysicalDeviceSubpassShadingFeaturesHUAWEI extends Struct implements NativeResource {
@@ -75,23 +79,23 @@ public class VkPhysicalDeviceSubpassShadingFeaturesHUAWEI extends Struct impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code subpassShading} field. */
+    /** specifies whether subpass shading is supported. */
     @NativeType("VkBool32")
     public boolean subpassShading() { return nsubpassShading(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI} value to the {@code sType} field. */
+    /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI} value to the {@link #sType} field. */
     public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code subpassShading} field. */
+    /** Sets the specified value to the {@link #subpassShading} field. */
     public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI subpassShading(@NativeType("VkBool32") boolean value) { nsubpassShading(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -285,23 +289,23 @@ public class VkPhysicalDeviceSubpassShadingFeaturesHUAWEI extends Struct impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSubpassShadingFeaturesHUAWEI#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSubpassShadingFeaturesHUAWEI#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.npNext(address()); }
-        /** @return the value of the {@code subpassShading} field. */
+        /** @return the value of the {@link VkPhysicalDeviceSubpassShadingFeaturesHUAWEI#subpassShading} field. */
         @NativeType("VkBool32")
         public boolean subpassShading() { return VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.nsubpassShading(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceSubpassShadingFeaturesHUAWEI#sType} field. */
         public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.nsType(address(), value); return this; }
-        /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI} value to the {@code sType} field. */
+        /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI} value to the {@link VkPhysicalDeviceSubpassShadingFeaturesHUAWEI#sType} field. */
         public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.Buffer sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceSubpassShadingFeaturesHUAWEI#pNext} field. */
         public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code subpassShading} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceSubpassShadingFeaturesHUAWEI#subpassShading} field. */
         public VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.Buffer subpassShading(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.nsubpassShading(address(), value ? 1 : 0); return this; }
 
     }

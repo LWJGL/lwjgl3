@@ -53,6 +53,7 @@ val AMD_shader_explicit_vertex_parameter = "AMDShaderExplicitVertexParameter".na
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_shader_explicit_vertex_parameter.html">{@code SPV_AMD_shader_explicit_vertex_parameter}</a></li>
+                <li>This extension provides API support for <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_shader_explicit_vertex_parameter.txt">{@code GL_AMD_shader_explicit_vertex_parameter}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

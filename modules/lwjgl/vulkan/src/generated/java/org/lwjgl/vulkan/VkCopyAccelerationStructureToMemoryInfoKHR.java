@@ -109,7 +109,7 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
     public long src() { return nsrc(address()); }
     /** the device or host address to memory which is the target for the copy */
     public VkDeviceOrHostAddressKHR dst() { return ndst(address()); }
-    /** a {@code VkCopyAccelerationStructureModeKHR} value that specifies additional operations to perform during the copy. */
+    /** a {@code VkCopyAccelerationStructureModeKHR} value specifying additional operations to perform during the copy. */
     @NativeType("VkCopyAccelerationStructureModeKHR")
     public int mode() { return nmode(address()); }
 

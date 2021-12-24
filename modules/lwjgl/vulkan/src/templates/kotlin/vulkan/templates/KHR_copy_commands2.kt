@@ -13,7 +13,7 @@ val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", 
         """
         This extension provides extensible versions of the Vulkan buffer and image copy commands. The new commands are functionally identical to the core commands, except that their copy parameters are specified using extensible structures that can be used to pass extension-specific information.
 
-        The following extensible copy commands are introduced with this extension: #CmdCopyBuffer2KHR(), #CmdCopyImage2KHR(), #CmdCopyBufferToImage2KHR(), #CmdCopyImageToBuffer2KHR(), #CmdBlitImage2KHR(), and #CmdResolveImage2KHR(). Each command contains an stext:*Info2KHR structure parameter that includes {@code sType}/{@code pNext} members. Lower level structures that describe each region to be copied are also extended with {@code sType}/{@code pNext} members.
+        The following extensible copy commands are introduced with this extension: #CmdCopyBuffer2KHR(), #CmdCopyImage2KHR(), #CmdCopyBufferToImage2KHR(), #CmdCopyImageToBuffer2KHR(), #CmdBlitImage2KHR(), and #CmdResolveImage2KHR(). Each command contains an stext:*Info2KHR structure parameter that includes {@code sType}/{@code pNext} members. Lower level structures describing each region to be copied are also extended with {@code sType}/{@code pNext} members.
 
         <h5>VK_KHR_copy_commands2</h5>
         <dl>

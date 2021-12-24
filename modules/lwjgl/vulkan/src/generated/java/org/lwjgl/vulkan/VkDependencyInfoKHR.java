@@ -127,21 +127,21 @@ public class VkDependencyInfoKHR extends Struct implements NativeResource {
     /** the length of the {@code pMemoryBarriers} array. */
     @NativeType("uint32_t")
     public int memoryBarrierCount() { return nmemoryBarrierCount(address()); }
-    /** a pointer to an array of {@link VkMemoryBarrier2KHR} structures that define memory dependencies between any memory accesses. */
+    /** a pointer to an array of {@link VkMemoryBarrier2KHR} structures defining memory dependencies between any memory accesses. */
     @Nullable
     @NativeType("VkMemoryBarrier2KHR const *")
     public VkMemoryBarrier2KHR.Buffer pMemoryBarriers() { return npMemoryBarriers(address()); }
     /** the length of the {@code pBufferMemoryBarriers} array. */
     @NativeType("uint32_t")
     public int bufferMemoryBarrierCount() { return nbufferMemoryBarrierCount(address()); }
-    /** a pointer to an array of {@link VkBufferMemoryBarrier2KHR} structures that define memory dependencies between buffer ranges. */
+    /** a pointer to an array of {@link VkBufferMemoryBarrier2KHR} structures defining memory dependencies between buffer ranges. */
     @Nullable
     @NativeType("VkBufferMemoryBarrier2KHR const *")
     public VkBufferMemoryBarrier2KHR.Buffer pBufferMemoryBarriers() { return npBufferMemoryBarriers(address()); }
     /** the length of the {@code pImageMemoryBarriers} array. */
     @NativeType("uint32_t")
     public int imageMemoryBarrierCount() { return nimageMemoryBarrierCount(address()); }
-    /** a pointer to an array of {@link VkImageMemoryBarrier2KHR} structures that define memory dependencies between image subresources. */
+    /** a pointer to an array of {@link VkImageMemoryBarrier2KHR} structures defining memory dependencies between image subresources. */
     @Nullable
     @NativeType("VkImageMemoryBarrier2KHR const *")
     public VkImageMemoryBarrier2KHR.Buffer pImageMemoryBarriers() { return npImageMemoryBarriers(address()); }

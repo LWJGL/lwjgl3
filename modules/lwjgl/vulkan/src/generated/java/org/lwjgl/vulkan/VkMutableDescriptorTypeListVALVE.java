@@ -91,7 +91,7 @@ public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeRe
     /** the number of elements in {@code pDescriptorTypes}. */
     @NativeType("uint32_t")
     public int descriptorTypeCount() { return ndescriptorTypeCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@code descriptorTypeCount} {@code VkDescriptorType} values which define which descriptor types a given binding may mutate to. */
+    /** {@code NULL} or a pointer to an array of {@code descriptorTypeCount} {@code VkDescriptorType} values defining which descriptor types a given binding may mutate to. */
     @Nullable
     @NativeType("VkDescriptorType const *")
     public IntBuffer pDescriptorTypes() { return npDescriptorTypes(address()); }

@@ -147,7 +147,8 @@ val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code pSurfaceInfo→surface} <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
+            <li>If the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is not enabled, {@code pSurfaceInfo→surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+            <li>If {@code pSurfaceInfo→surface} is not #NULL_HANDLE, it <b>must</b> be supported by {@code physicalDevice}, as reported by #GetPhysicalDeviceSurfaceSupportKHR() or an equivalent platform-specific mechanism</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

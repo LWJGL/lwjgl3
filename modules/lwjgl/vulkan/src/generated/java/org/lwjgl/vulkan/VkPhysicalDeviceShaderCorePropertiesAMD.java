@@ -140,7 +140,7 @@ public class VkPhysicalDeviceShaderCorePropertiesAMD extends Struct implements N
     /** an unsigned integer value indicating the number of shader engines found inside the shader core of the physical device. */
     @NativeType("uint32_t")
     public int shaderEngineCount() { return nshaderEngineCount(address()); }
-    /** an unsigned integer value indicating the number of shader arrays inside a shader engine. Each shader array has its own scan converter, set of compute units, and a render back end (color and depth buffers). Shader arrays within a shader engine share shader processor input (wave launcher) and shader export (export buffer) units. Currently, a shader engine can have one or two shader arrays. */
+    /** an unsigned integer value indicating the number of shader arrays inside a shader engine. Each shader array has its own scan converter, set of compute units, and a render back end (color and depth attachments). Shader arrays within a shader engine share shader processor input (wave launcher) and shader export (export buffer) units. Currently, a shader engine can have one or two shader arrays. */
     @NativeType("uint32_t")
     public int shaderArraysPerEngineCount() { return nshaderArraysPerEngineCount(address()); }
     /** an unsigned integer value indicating the physical number of compute units within a shader array. The active number of compute units in a shader array <b>may</b> be lower. A compute unit houses a set of SIMDs along with a sequencer module and a local data store. */

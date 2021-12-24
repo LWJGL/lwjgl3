@@ -91,6 +91,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/AMD/SPV_AMD_texture_gather_bias_lod.html">{@code SPV_AMD_texture_gather_bias_lod}</a></li>
+ * <li>This extension provides API support for <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_texture_gather_bias_lod.txt">{@code GL_AMD_texture_gather_bias_lod}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

@@ -6,47 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * <ul>
- * <li>{@link VkVideoEncodeH264DpbSlotInfoEXT}</li>
- * <li>{@link VkVideoEncodeH264NaluSliceEXT}</li>
- * <li>Extending {@link VkVideoCapabilitiesKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoEncodeH264CapabilitiesEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoEncodeInfoKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoEncodeH264EmitPictureParametersEXT}</li>
- * <li>{@link VkVideoEncodeH264VclFrameInfoEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoProfileKHR}, {@link VkQueryPoolCreateInfo}, {@link VkFormatProperties2}, {@link VkImageCreateInfo}, {@link VkImageViewCreateInfo}, {@link VkBufferCreateInfo}:
- * 
- * <ul>
- * <li>{@link VkVideoEncodeH264ProfileEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoSessionCreateInfoKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoEncodeH264SessionCreateInfoEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoSessionParametersCreateInfoKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoEncodeH264SessionParametersCreateInfoEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoSessionParametersUpdateInfoKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoEncodeH264SessionParametersAddInfoEXT}</li>
- * </ul>
- * </li>
- * </ul>
+ * This extension allows applications to compress a raw video sequence by using the H.264/AVC video compression standard.
  * 
  * <h5>VK_EXT_video_encode_h264</h5>
  * 
@@ -58,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>39</dd>
  * <dt><b>Revision</b></dt>
- * <dd>2</dd>
+ * <dd>3</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -75,7 +35,7 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2021-03-29</dd>
+ * <dd>2021-12-08</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -95,7 +55,7 @@ package org.lwjgl.vulkan;
 public final class EXTVideoEncodeH264 {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 2;
+    public static final int VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String VK_EXT_VIDEO_ENCODE_H264_EXTENSION_NAME = "VK_EXT_video_encode_h264";
@@ -115,6 +75,8 @@ public final class EXTVideoEncodeH264 {
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT}</li>
      * </ul>
      */
     public static final int
@@ -126,7 +88,9 @@ public final class EXTVideoEncodeH264 {
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT                  = 1000038005,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT                     = 1000038006,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT        = 1000038007,
-        VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT                        = 1000038008;
+        VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT                        = 1000038008,
+        VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT              = 1000038009,
+        VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT        = 1000038010;
 
     /** Extends {@code VkVideoCodecOperationFlagBitsKHR}. */
     public static final int VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT = 0x10000;
@@ -230,6 +194,30 @@ public final class EXTVideoEncodeH264 {
     public static final int
         VK_VIDEO_ENCODE_H264_CREATE_DEFAULT_EXT        = 0,
         VK_VIDEO_ENCODE_H264_CREATE_RESERVED_0_BIT_EXT = 0x1;
+
+    /**
+     * VkVideoEncodeH264RateControlStructureFlagBitsEXT - Video encode H.264 rate control structure flags
+     * 
+     * <h5>Description</h5>
+     * 
+     * <p>specifies a dyadic reference structure.</p>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkVideoEncodeH264RateControlInfoEXT}</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_UNKNOWN_EXT VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_UNKNOWN_EXT}</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_FLAT_BIT_EXT VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_FLAT_BIT_EXT}</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_DYADIC_BIT_EXT VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_DYADIC_BIT_EXT}</li>
+     * </ul>
+     */
+    public static final int
+        VK_VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_UNKNOWN_EXT    = 0,
+        VK_VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_FLAT_BIT_EXT   = 0x1,
+        VK_VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_DYADIC_BIT_EXT = 0x2;
 
     private EXTVideoEncodeH264() {}
 

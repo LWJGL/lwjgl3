@@ -22,13 +22,13 @@ val EXT_shader_subgroup_ballot = "EXTShaderSubgroupBallot".nativeClassVK("EXT_sh
         This extension provides access to a number of additional built-in shader variables in Vulkan:
 
         <ul>
-            <li>{@code SubgroupEqMaskKHR}, which contains the subgroup mask of the current subgroup invocation,</li>
-            <li>{@code SubgroupGeMaskKHR}, which contains the subgroup mask of the invocations greater than or equal to the current invocation,</li>
-            <li>{@code SubgroupGtMaskKHR}, which contains the subgroup mask of the invocations greater than the current invocation,</li>
-            <li>{@code SubgroupLeMaskKHR}, which contains the subgroup mask of the invocations less than or equal to the current invocation,</li>
-            <li>{@code SubgroupLtMaskKHR}, which contains the subgroup mask of the invocations less than the current invocation,</li>
-            <li>{@code SubgroupLocalInvocationId}, which contains the index of an invocation within a subgroup, and</li>
-            <li>{@code SubgroupSize}, which contains the maximum number of invocations in a subgroup.</li>
+            <li>{@code SubgroupEqMaskKHR}, containing the subgroup mask of the current subgroup invocation,</li>
+            <li>{@code SubgroupGeMaskKHR}, containing the subgroup mask of the invocations greater than or equal to the current invocation,</li>
+            <li>{@code SubgroupGtMaskKHR}, containing the subgroup mask of the invocations greater than the current invocation,</li>
+            <li>{@code SubgroupLeMaskKHR}, containing the subgroup mask of the invocations less than or equal to the current invocation,</li>
+            <li>{@code SubgroupLtMaskKHR}, containing the subgroup mask of the invocations less than the current invocation,</li>
+            <li>{@code SubgroupLocalInvocationId}, containing the index of an invocation within a subgroup, and</li>
+            <li>{@code SubgroupSize}, containing the maximum number of invocations in a subgroup.</li>
         </ul>
 
         Additionally, this extension provides access to the new SPIR-V instructions:

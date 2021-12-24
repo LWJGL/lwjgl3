@@ -17,7 +17,7 @@ val QCOM_render_pass_store_ops = "QCOMRenderPassStoreOps".nativeClassVK("QCOM_re
 
         In such cases, there <b>can</b> be no contents generated for an attachment within the render area.
 
-        This extension adds a new {@code VkAttachmentStoreOp} #ATTACHMENT_STORE_OP_NONE_QCOM which specifies that the contents within the render area <b>may</b> not be written to memory, but that the prior contents of the attachment in memory are preserved. However, if any contents were generated within the render area during rendering, the contents of the attachment will be undefined inside the render area.
+        This extension adds a new {@code VkAttachmentStoreOp} #ATTACHMENT_STORE_OP_NONE_QCOM specifying that the contents within the render area <b>may</b> not be written to memory, but that the prior contents of the attachment in memory are preserved. However, if any contents were generated within the render area during rendering, the contents of the attachment will be undefined inside the render area.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The {@code VkAttachmentStoreOp} #ATTACHMENT_STORE_OP_STORE <b>may</b> force an implementation to assume that the attachment was written and force an implementation to flush data to memory or to a higher level cache. The {@code VkAttachmentStoreOp} #ATTACHMENT_STORE_OP_NONE_QCOM <b>may</b> allow an implementation to assume that the attachment was not written and allow an implementation to avoid such a flush..

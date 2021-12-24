@@ -19,6 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifies H.265 decode session creation parameters.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>A {@link VkVideoDecodeH265SessionCreateInfoEXT} structure <b>can</b> be chained to {@link VkVideoSessionCreateInfoKHR} when the function {@link KHRVideoQueue#vkCreateVideoSessionKHR CreateVideoSessionKHR} is called to create a video session for H.265 decode operations.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

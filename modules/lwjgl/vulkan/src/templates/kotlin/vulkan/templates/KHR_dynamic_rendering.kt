@@ -99,6 +99,7 @@ val KHR_dynamic_rendering = "KHRDynamicRendering".nativeClassVK("KHR_dynamic_ren
     EnumConstant(
         "Extends {@code VkPipelineCreateFlagBits}.",
 
+        "PIPELINE_CREATE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR".enum(0x00200000),
         "PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR".enum(0x00200000)
     )
 
@@ -111,6 +112,7 @@ val KHR_dynamic_rendering = "KHRDynamicRendering".nativeClassVK("KHR_dynamic_ren
     EnumConstant(
         "Extends {@code VkPipelineCreateFlagBits}.",
 
+        "PIPELINE_CREATE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT".enum(0x00400000),
         "PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT".enum(0x00400000)
     )
 

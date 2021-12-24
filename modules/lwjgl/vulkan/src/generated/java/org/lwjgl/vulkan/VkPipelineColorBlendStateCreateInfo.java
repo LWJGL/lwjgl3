@@ -19,18 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of a newly created pipeline color blend state.
  * 
- * <h5>Description</h5>
- * 
- * <p>Each element of the {@code pAttachments} array is a {@link VkPipelineColorBlendAttachmentState} structure specifying per-target blending state for each individual color attachment. If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-independentBlend">independent blending</a> feature is not enabled on the device, all {@link VkPipelineColorBlendAttachmentState} elements in the {@code pAttachments} array <b>must</b> be identical.</p>
- * 
- * <p>The value of {@code attachmentCount} <b>must</b> be greater than the index of all color attachments that are not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} in {@link VkSubpassDescription}{@code ::pColorAttachments} or {@link VkSubpassDescription2}{@code ::pColorAttachments} for the subpass in which this pipeline is used.</p>
- * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-independentBlend">independent blending</a> feature is not enabled, all elements of {@code pAttachments} <b>must</b> be identical</li>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-logicOp">logic operations</a> feature is not enabled, {@code logicOpEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If {@code logicOpEnable} is {@link VK10#VK_TRUE TRUE}, {@code logicOp} <b>must</b> be a valid {@code VkLogicOp} value</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-rasterizationOrderColorAttachmentAccess">{@code rasterizationOrderColorAttachmentAccess}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link ARMRasterizationOrderAttachmentAccess#VK_PIPELINE_COLOR_BLEND_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM PIPELINE_COLOR_BLEND_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -39,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT} or {@link VkPipelineColorWriteCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineColorBlendStateCreateFlagBits} values</li>
  * <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid {@link VkPipelineColorBlendAttachmentState} structures</li>
  * </ul>
  * 
@@ -124,7 +119,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** a bitmask of {@code VkPipelineColorBlendStateCreateFlagBits} specifying additional color blending information. */
     @NativeType("VkPipelineColorBlendStateCreateFlags")
     public int flags() { return nflags(address()); }
     /** controls whether to apply <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-logicop">Logical Operations</a>. */
@@ -136,7 +131,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
     /** the number of {@link VkPipelineColorBlendAttachmentState} elements in {@code pAttachments}. */
     @NativeType("uint32_t")
     public int attachmentCount() { return nattachmentCount(address()); }
-    /** a pointer to an array of per target attachment states. */
+    /** a pointer to an array of {@link VkPipelineColorBlendAttachmentState} structures defining blend state for each color attachment. */
     @Nullable
     @NativeType("VkPipelineColorBlendAttachmentState const *")
     public VkPipelineColorBlendAttachmentState.Buffer pAttachments() { return npAttachments(address()); }

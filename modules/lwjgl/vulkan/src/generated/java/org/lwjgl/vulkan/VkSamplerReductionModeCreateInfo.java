@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@code pNext} chain of {@link VkSamplerCreateInfo} includes a {@link VkSamplerReductionModeCreateInfo} structure, then that structure includes a mode that controls how texture filtering combines texel values.</p>
+ * <p>If the {@code pNext} chain of {@link VkSamplerCreateInfo} includes a {@link VkSamplerReductionModeCreateInfo} structure, then that structure includes a mode controlling how texture filtering combines texel values.</p>
  * 
  * <p>If this structure is not present, {@code reductionMode} is considered to be {@link VK12#VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE}.</p>
  * 

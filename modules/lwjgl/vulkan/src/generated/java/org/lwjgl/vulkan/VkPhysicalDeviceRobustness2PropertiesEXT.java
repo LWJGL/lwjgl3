@@ -89,10 +89,10 @@ public class VkPhysicalDeviceRobustness2PropertiesEXT extends Struct implements 
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the number of bytes that the range of a storage buffer descriptor is rounded up to when used for bounds-checking when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled. This value is either 1 or 4. */
+    /** the number of bytes that the range of a storage buffer descriptor is rounded up to when used for bounds-checking when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled. This value <b>must</b> be either 1 or 4. */
     @NativeType("VkDeviceSize")
     public long robustStorageBufferAccessSizeAlignment() { return nrobustStorageBufferAccessSizeAlignment(address()); }
-    /** the number of bytes that the range of a uniform buffer descriptor is rounded up to when used for bounds-checking when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled. This value is a power of two in the range [1, 256]. */
+    /** the number of bytes that the range of a uniform buffer descriptor is rounded up to when used for bounds-checking when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> is enabled. This value <b>must</b> be a power of two in the range [1, 256]. */
     @NativeType("VkDeviceSize")
     public long robustUniformBufferAccessSizeAlignment() { return nrobustUniformBufferAccessSizeAlignment(address()); }
 

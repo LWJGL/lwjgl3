@@ -13,7 +13,7 @@ import static org.lwjgl.system.JNI.*;
 /**
  * This extension provides extensible versions of the Vulkan buffer and image copy commands. The new commands are functionally identical to the core commands, except that their copy parameters are specified using extensible structures that can be used to pass extension-specific information.
  * 
- * <p>The following extensible copy commands are introduced with this extension: {@link #vkCmdCopyBuffer2KHR CmdCopyBuffer2KHR}, {@link #vkCmdCopyImage2KHR CmdCopyImage2KHR}, {@link #vkCmdCopyBufferToImage2KHR CmdCopyBufferToImage2KHR}, {@link #vkCmdCopyImageToBuffer2KHR CmdCopyImageToBuffer2KHR}, {@link #vkCmdBlitImage2KHR CmdBlitImage2KHR}, and {@link #vkCmdResolveImage2KHR CmdResolveImage2KHR}. Each command contains an stext:*Info2KHR structure parameter that includes {@code sType}/{@code pNext} members. Lower level structures that describe each region to be copied are also extended with {@code sType}/{@code pNext} members.</p>
+ * <p>The following extensible copy commands are introduced with this extension: {@link #vkCmdCopyBuffer2KHR CmdCopyBuffer2KHR}, {@link #vkCmdCopyImage2KHR CmdCopyImage2KHR}, {@link #vkCmdCopyBufferToImage2KHR CmdCopyBufferToImage2KHR}, {@link #vkCmdCopyImageToBuffer2KHR CmdCopyImageToBuffer2KHR}, {@link #vkCmdBlitImage2KHR CmdBlitImage2KHR}, and {@link #vkCmdResolveImage2KHR CmdResolveImage2KHR}. Each command contains an stext:*Info2KHR structure parameter that includes {@code sType}/{@code pNext} members. Lower level structures describing each region to be copied are also extended with {@code sType}/{@code pNext} members.</p>
  * 
  * <h5>VK_KHR_copy_commands2</h5>
  * 

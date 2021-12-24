@@ -195,18 +195,14 @@ val STD_vulkan_video_codec_h264 = "STDVulkanVideoCodecH264".nativeClassVK("STD_v
 
     // vulkan_video_codec_h264std_decode.h
 
-    IntConstant(
-        "",
-
-        "VIDEO_DECODE_H264_MVC_REF_LIST_SIZE".."15"
-    )
+    IntConstant("", "VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE".."2")
+    IntConstant("", "VIDEO_DECODE_H264_MVC_REF_LIST_SIZE".."15")
 
     EnumConstant(
         "{@code StdVideoDecodeH264FieldOrderCount}",
 
         "VIDEO_DECODE_H264_FIELD_ORDER_COUNT_TOP".enum("", "0"),
         "VIDEO_DECODE_H264_FIELD_ORDER_COUNT_BOTTOM".enum,
-        "VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE".enum,
         "VIDEO_DECODE_H264_FIELD_ORDER_COUNT_INVALID".enum("", 0x7FFFFFFF)
     )
 }

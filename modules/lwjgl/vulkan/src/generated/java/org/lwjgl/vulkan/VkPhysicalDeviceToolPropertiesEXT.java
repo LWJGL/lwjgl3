@@ -125,10 +125,10 @@ public class VkPhysicalDeviceToolPropertiesEXT extends Struct implements NativeR
     /** a null-terminated UTF-8 string containing a description of the tool. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
-    /** a null-terminated UTF-8 string that contains the name of the layer implementing the tool, if the tool is implemented in a layer - otherwise it <b>may</b> be an empty string. */
+    /** a null-terminated UTF-8 string containing the name of the layer implementing the tool, if the tool is implemented in a layer - otherwise it <b>may</b> be an empty string. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public ByteBuffer layer() { return nlayer(address()); }
-    /** a null-terminated UTF-8 string that contains the name of the layer implementing the tool, if the tool is implemented in a layer - otherwise it <b>may</b> be an empty string. */
+    /** a null-terminated UTF-8 string containing the name of the layer implementing the tool, if the tool is implemented in a layer - otherwise it <b>may</b> be an empty string. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public String layerString() { return nlayerString(address()); }
 

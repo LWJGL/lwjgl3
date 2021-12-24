@@ -1501,11 +1501,11 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>
                 For ##VkAccelerationStructureBuildGeometryInfoKHR:
                 <ul>
-                    <li>Its {@code type}, and {@code flags} members are equal to those specified in {@code pBuildInfo}.</li>
-                    <li>{@code geometryCount} is less than or equal to that specified in {@code pBuildInfo}.</li>
-                    <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, its {@code geometryType} member is equal to that specified in {@code pBuildInfo}.</li>
-                    <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to #GEOMETRY_TYPE_TRIANGLES_KHR, the {@code vertexFormat} and {@code indexType} members of {@code geometry.triangles} are equal to those specified in the same element in {@code pBuildInfo}.</li>
-                    <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to #GEOMETRY_TYPE_TRIANGLES_KHR, the {@code maxVertex} member of {@code geometry.triangles} is less than or equal to that specified in the same element in {@code pBuildInfo}.</li>
+                    <li>Its {@code type}, and {@code flags} members are equal to {@code pBuildInfo→type} and {@code pBuildInfo→flags}, respectively.</li>
+                    <li>{@code geometryCount} is less than or equal to {@code pBuildInfo→geometryCount}.</li>
+                    <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, its {@code geometryType} member is equal to {@code pBuildInfo→geometryType}.</li>
+                    <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to #GEOMETRY_TYPE_TRIANGLES_KHR, the {@code vertexFormat} and {@code indexType} members of {@code geometry.triangles} are equal to the corresponding members of the same element in {@code pBuildInfo}.</li>
+                    <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to #GEOMETRY_TYPE_TRIANGLES_KHR, the {@code maxVertex} member of {@code geometry.triangles} is less than or equal to the corresponding member of the same element in {@code pBuildInfo}.</li>
                     <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to #GEOMETRY_TYPE_TRIANGLES_KHR, if the applicable address in the {@code transformData} member of {@code geometry.triangles} is not {@code NULL}, the corresponding {@code transformData.hostAddress} parameter in {@code pBuildInfo} is not {@code NULL}.</li>
                 </ul>
             </li>

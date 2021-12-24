@@ -95,7 +95,7 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
     /** the number of elements in the {@code pVertexBindingDivisors} array. */
     @NativeType("uint32_t")
     public int vertexBindingDivisorCount() { return nvertexBindingDivisorCount(address()); }
-    /** a pointer to an array of {@link VkVertexInputBindingDivisorDescriptionEXT} structures, which specifies the divisor value for each binding. */
+    /** a pointer to an array of {@link VkVertexInputBindingDivisorDescriptionEXT} structures specifying the divisor value for each binding. */
     @NativeType("VkVertexInputBindingDivisorDescriptionEXT const *")
     public VkVertexInputBindingDivisorDescriptionEXT.Buffer pVertexBindingDivisors() { return npVertexBindingDivisors(address()); }
 

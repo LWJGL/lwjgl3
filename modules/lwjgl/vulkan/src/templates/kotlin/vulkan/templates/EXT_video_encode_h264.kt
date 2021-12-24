@@ -11,47 +11,7 @@ import vulkan.*
 val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode_h264", type = "device", postfix = EXT) {
     documentation =
         """
-        <ul>
-            <li>##VkVideoEncodeH264DpbSlotInfoEXT</li>
-            <li>##VkVideoEncodeH264NaluSliceEXT</li>
-            <li>
-                Extending ##VkVideoCapabilitiesKHR:
-                <ul>
-                    <li>##VkVideoEncodeH264CapabilitiesEXT</li>
-                </ul>
-            </li>
-            <li>
-                Extending ##VkVideoEncodeInfoKHR:
-                <ul>
-                    <li>##VkVideoEncodeH264EmitPictureParametersEXT</li>
-                    <li>##VkVideoEncodeH264VclFrameInfoEXT</li>
-                </ul>
-            </li>
-            <li>
-                Extending ##VkVideoProfileKHR, ##VkQueryPoolCreateInfo, ##VkFormatProperties2, ##VkImageCreateInfo, ##VkImageViewCreateInfo, ##VkBufferCreateInfo:
-                <ul>
-                    <li>##VkVideoEncodeH264ProfileEXT</li>
-                </ul>
-            </li>
-            <li>
-                Extending ##VkVideoSessionCreateInfoKHR:
-                <ul>
-                    <li>##VkVideoEncodeH264SessionCreateInfoEXT</li>
-                </ul>
-            </li>
-            <li>
-                Extending ##VkVideoSessionParametersCreateInfoKHR:
-                <ul>
-                    <li>##VkVideoEncodeH264SessionParametersCreateInfoEXT</li>
-                </ul>
-            </li>
-            <li>
-                Extending ##VkVideoSessionParametersUpdateInfoKHR:
-                <ul>
-                    <li>##VkVideoEncodeH264SessionParametersAddInfoEXT</li>
-                </ul>
-            </li>
-        </ul>
+        This extension allows applications to compress a raw video sequence by using the H.264/AVC video compression standard.
 
         <h5>VK_EXT_video_encode_h264</h5>
         <dl>
@@ -65,7 +25,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
             <dd>39</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>3</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -83,7 +43,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-03-29</dd>
+            <dd>2021-12-08</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -106,7 +66,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VIDEO_ENCODE_H264_SPEC_VERSION".."2"
+        "EXT_VIDEO_ENCODE_H264_SPEC_VERSION".."3"
     )
 
     StringConstant(
@@ -126,7 +86,9 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         "STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT".."1000038005",
         "STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT".."1000038006",
         "STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT".."1000038007",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT".."1000038008"
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT".."1000038008",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT".."1000038009",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT".."1000038010"
     )
 
     EnumConstant(
@@ -237,5 +199,21 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
 
         "VIDEO_ENCODE_H264_CREATE_DEFAULT_EXT".."0",
         "VIDEO_ENCODE_H264_CREATE_RESERVED_0_BIT_EXT".enum(0x00000001)
+    )
+
+    EnumConstant(
+        """
+        VkVideoEncodeH264RateControlStructureFlagBitsEXT - Video encode H.264 rate control structure flags
+
+        <h5>Description</h5>
+        specifies a dyadic reference structure.
+
+        <h5>See Also</h5>
+        ##VkVideoEncodeH264RateControlInfoEXT
+        """,
+
+        "VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_UNKNOWN_EXT".."0",
+        "VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_FLAT_BIT_EXT".enum(0x00000001),
+        "VIDEO_ENCODE_H264_RATE_CONTROL_STRUCTURE_DYADIC_BIT_EXT".enum(0x00000002)
     )
 }

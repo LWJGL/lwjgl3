@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo} includes a {@link VkPipelineFragmentShadingRateStateCreateInfoKHR} structure, then that structure includes parameters that control the pipeline fragment shading rate.</p>
+ * <p>If the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo} includes a {@link VkPipelineFragmentShadingRateStateCreateInfoKHR} structure, then that structure includes parameters controlling the pipeline fragment shading rate.</p>
  * 
  * <p>If this structure is not present, {@code fragmentSize} is considered to be equal to <code>(1,1)</code>, and both elements of {@code combinerOps} are considered to be equal to {@link KHRFragmentShadingRate#VK_FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR}.</p>
  * 

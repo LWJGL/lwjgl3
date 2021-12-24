@@ -592,7 +592,7 @@ public class KHRPerformanceQuery {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To record and submit a command buffer that contains a performance query pool the profiling lock <b>must</b> be held. The profiling lock <b>must</b> be acquired prior to any call to {@link VK10#vkBeginCommandBuffer BeginCommandBuffer} that will be using a performance query pool. The profiling lock <b>must</b> be held while any command buffer that contains a performance query pool is in the <em>recording</em>, <em>executable</em>, or <em>pending state</em>. To acquire the profiling lock, call:</p>
+     * <p>To record and submit a command buffer containing a performance query pool the profiling lock <b>must</b> be held. The profiling lock <b>must</b> be acquired prior to any call to {@link VK10#vkBeginCommandBuffer BeginCommandBuffer} that will be using a performance query pool. The profiling lock <b>must</b> be held while any command buffer containing a performance query pool is in the <em>recording</em>, <em>executable</em>, or <em>pending state</em>. To acquire the profiling lock, call:</p>
      * 
      * <pre><code>
      * VkResult vkAcquireProfilingLockKHR(
@@ -629,7 +629,7 @@ public class KHRPerformanceQuery {
      * <p>{@link VkAcquireProfilingLockInfoKHR}</p>
      *
      * @param device the logical device to profile.
-     * @param pInfo  a pointer to a {@link VkAcquireProfilingLockInfoKHR} structure which contains information about how the profiling is to be acquired.
+     * @param pInfo  a pointer to a {@link VkAcquireProfilingLockInfoKHR} structure containing information about how the profiling is to be acquired.
      */
     @NativeType("VkResult")
     public static int vkAcquireProfilingLockKHR(VkDevice device, @NativeType("VkAcquireProfilingLockInfoKHR const *") VkAcquireProfilingLockInfoKHR pInfo) {

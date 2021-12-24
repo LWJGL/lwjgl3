@@ -804,6 +804,7 @@ public class KHRSwapchain {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
+     * <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
      * <li>{@code surface} <b>must</b> be supported by {@code physicalDevice}, as reported by {@link KHRSurface#vkGetPhysicalDeviceSurfaceSupportKHR GetPhysicalDeviceSurfaceSupportKHR} or an equivalent platform-specific mechanism</li>
      * </ul>
      * 

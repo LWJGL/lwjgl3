@@ -94,25 +94,27 @@ public class KHRVideoQueue {
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR STRUCTURE_TYPE_VIDEO_PROFILES_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR}</li>
      * </ul>
      */
     public static final int
-        VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR                        = 1000023000,
-        VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR                   = 1000023001,
-        VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR               = 1000023002,
-        VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR          = 1000023003,
-        VK_STRUCTURE_TYPE_VIDEO_BIND_MEMORY_KHR                    = 1000023004,
-        VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR            = 1000023005,
-        VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR = 1000023006,
-        VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR = 1000023007,
-        VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR              = 1000023008,
-        VK_STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR                = 1000023009,
-        VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR            = 1000023010,
-        VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR                 = 1000023011,
-        VK_STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR      = 1000023012,
-        VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR                       = 1000023013,
-        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR    = 1000023014,
-        VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR              = 1000023015;
+        VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR                                 = 1000023000,
+        VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR                            = 1000023001,
+        VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR                        = 1000023002,
+        VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR                   = 1000023003,
+        VK_STRUCTURE_TYPE_VIDEO_BIND_MEMORY_KHR                             = 1000023004,
+        VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR                     = 1000023005,
+        VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR          = 1000023006,
+        VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR          = 1000023007,
+        VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR                       = 1000023008,
+        VK_STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR                         = 1000023009,
+        VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR                     = 1000023010,
+        VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR                          = 1000023011,
+        VK_STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR               = 1000023012,
+        VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR                                = 1000023013,
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR             = 1000023014,
+        VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR                       = 1000023015,
+        VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR = 1000023016;
 
     /**
      * Extends {@code VkObjectType}.
@@ -242,8 +244,10 @@ public class KHRVideoQueue {
      * 
      * <ul>
      * <li>{@link #VK_VIDEO_CODING_CONTROL_DEFAULT_KHR VIDEO_CODING_CONTROL_DEFAULT_KHR} indicates a request for the coding control paramaters to be applied to the current state of the bound video session.</li>
-     * <li>{@link #VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR} indicates a request for the bound video session state to be reset before the coding control parameters are applied. The state after reset is identical to the state immediately after video session creation.</li>
+     * <li>{@link #VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR} indicates a request for the bound video session device context to be reset before the coding control parameters are applied.</li>
      * </ul>
+     * 
+     * <p>A newly created video session <b>must</b> be reset before use for video decode or encode operations. The reset operation returns all session DPB slots to the unused state (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#video-session-dpb-slot-states">DPB Slot States</a>). For encode sessions, the reset operation returns rate control configuration to implementation default settings. After decode or encode operations are performed on a session, the reset operation <b>may</b> be used to return the video session device context to the same initial state as after the reset of a newly created video session. This <b>may</b> be used when different video sequences are processed with the same session.</p>
      */
     public static final int
         VK_VIDEO_CODING_CONTROL_DEFAULT_KHR   = 0,
@@ -992,7 +996,7 @@ public class KHRVideoQueue {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To apply dynamic controls to video decode or video operations, call:</p>
+     * <p>To apply dynamic controls to video decode or video encode operations, call:</p>
      * 
      * <pre><code>
      * void vkCmdControlVideoCodingKHR(
@@ -1027,7 +1031,7 @@ public class KHRVideoQueue {
      * 
      * <p>{@link VkVideoCodingControlInfoKHR}</p>
      *
-     * @param commandBuffer      the command buffer to be filled by this function for setting encode rate control parameters.
+     * @param commandBuffer      the command buffer to be filled by this function.
      * @param pCodingControlInfo a pointer to a {@link VkVideoCodingControlInfoKHR} structure.
      */
     public static void vkCmdControlVideoCodingKHR(VkCommandBuffer commandBuffer, @NativeType("VkVideoCodingControlInfoKHR const *") VkVideoCodingControlInfoKHR pCodingControlInfo) {

@@ -23,6 +23,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-depthBounds">depth bounds testing</a> feature is not enabled, {@code depthBoundsTestEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, and {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR}{@code ::separateStencilMaskRef} is {@link VK10#VK_FALSE FALSE}, and the value of {@link VkPipelineDepthStencilStateCreateInfo}{@code ::stencilTestEnable} is {@link VK10#VK_TRUE TRUE}, and the value of {@link VkPipelineRasterizationStateCreateInfo}{@code ::cullMode} is {@link VK10#VK_CULL_MODE_NONE CULL_MODE_NONE}, the value of {@code reference} in each of the {@link VkStencilOpState} structs in {@code front} and {@code back} <b>must</b> be the same</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-rasterizationOrderDepthAttachmentAccess">{@code rasterizationOrderDepthAttachmentAccess}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link ARMRasterizationOrderAttachmentAccess#VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM}</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-rasterizationOrderStencilAttachmentAccess">{@code rasterizationOrderStencilAttachmentAccess}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link ARMRasterizationOrderAttachmentAccess#VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -30,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO}</li>
  * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineDepthStencilStateCreateFlagBits} values</li>
  * <li>{@code depthCompareOp} <b>must</b> be a valid {@code VkCompareOp} value</li>
  * <li>{@code front} <b>must</b> be a valid {@link VkStencilOpState} structure</li>
  * <li>{@code back} <b>must</b> be a valid {@link VkStencilOpState} structure</li>
@@ -133,7 +135,7 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct implements Nat
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** a bitmask of {@code VkPipelineDepthStencilStateCreateFlagBits} specifying additional depth/stencil state information. */
     @NativeType("VkPipelineDepthStencilStateCreateFlags")
     public int flags() { return nflags(address()); }
     /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-depth">depth testing</a> is enabled. */

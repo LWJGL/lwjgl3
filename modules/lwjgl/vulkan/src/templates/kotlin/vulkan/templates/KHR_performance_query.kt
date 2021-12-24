@@ -516,7 +516,7 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
         Acquires the profiling lock.
 
         <h5>C Specification</h5>
-        To record and submit a command buffer that contains a performance query pool the profiling lock <b>must</b> be held. The profiling lock <b>must</b> be acquired prior to any call to #BeginCommandBuffer() that will be using a performance query pool. The profiling lock <b>must</b> be held while any command buffer that contains a performance query pool is in the <em>recording</em>, <em>executable</em>, or <em>pending state</em>. To acquire the profiling lock, call:
+        To record and submit a command buffer containing a performance query pool the profiling lock <b>must</b> be held. The profiling lock <b>must</b> be acquired prior to any call to #BeginCommandBuffer() that will be using a performance query pool. The profiling lock <b>must</b> be held while any command buffer containing a performance query pool is in the <em>recording</em>, <em>executable</em>, or <em>pending state</em>. To acquire the profiling lock, call:
 
         <pre><code>
 ￿VkResult vkAcquireProfilingLockKHR(
@@ -551,7 +551,7 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
         """,
 
         VkDevice("device", "the logical device to profile."),
-        VkAcquireProfilingLockInfoKHR.const.p("pInfo", "a pointer to a ##VkAcquireProfilingLockInfoKHR structure which contains information about how the profiling is to be acquired.")
+        VkAcquireProfilingLockInfoKHR.const.p("pInfo", "a pointer to a ##VkAcquireProfilingLockInfoKHR structure containing information about how the profiling is to be acquired.")
     )
 
     void(

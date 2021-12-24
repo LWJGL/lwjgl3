@@ -52,6 +52,7 @@ val KHR_shader_subgroup_uniform_control_flow = "KHRShaderSubgroupUniformControlF
             <dd><ul>
                 <li>Requires SPIR-V 1.3.</li>
                 <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_subgroup_uniform_control_flow.html">{@code SPV_KHR_subgroup_uniform_control_flow}</a></li>
+                <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_subgroupuniform_qualifier.txt">{@code GL_EXT_subgroupuniform_qualifier}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

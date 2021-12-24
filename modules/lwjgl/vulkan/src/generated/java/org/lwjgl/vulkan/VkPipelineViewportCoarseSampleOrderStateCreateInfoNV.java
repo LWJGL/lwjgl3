@@ -117,7 +117,7 @@ public class VkPipelineViewportCoarseSampleOrderStateCreateInfoNV extends Struct
     /** specifies the number of custom sample orderings to use when ordering coverage samples. */
     @NativeType("uint32_t")
     public int customSampleOrderCount() { return ncustomSampleOrderCount(address()); }
-    /** a pointer to an array of {@code customSampleOrderCount} {@link VkCoarseSampleOrderCustomNV} structures, each of which specifies the coverage sample order for a single combination of fragment area and coverage sample count. */
+    /** a pointer to an array of {@code customSampleOrderCount} {@link VkCoarseSampleOrderCustomNV} structures, each structure specifying the coverage sample order for a single combination of fragment area and coverage sample count. */
     @Nullable
     @NativeType("VkCoarseSampleOrderCustomNV const *")
     public VkCoarseSampleOrderCustomNV.Buffer pCustomSampleOrders() { return npCustomSampleOrders(address()); }

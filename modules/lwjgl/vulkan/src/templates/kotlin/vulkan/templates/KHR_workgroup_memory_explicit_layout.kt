@@ -54,6 +54,7 @@ val KHR_workgroup_memory_explicit_layout = "KHRWorkgroupMemoryExplicitLayout".na
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_workgroup_memory_explicit_layout.html">{@code SPV_KHR_workgroup_memory_explicit_layout}</a></li>
+                <li>This extension provides API support for <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GL_EXT_shared_memory_block.txt">{@code GL_EXT_shared_memory_block}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

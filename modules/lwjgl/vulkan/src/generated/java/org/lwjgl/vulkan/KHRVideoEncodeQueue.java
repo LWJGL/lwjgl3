@@ -95,11 +95,13 @@ public class KHRVideoEncodeQueue {
      * <ul>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR}</li>
      * </ul>
      */
     public static final int
-        VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR              = 1000299000,
-        VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR = 1000299001;
+        VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR                    = 1000299000,
+        VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR       = 1000299001,
+        VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR = 1000299002;
 
     /** Extends {@code VkQueueFlagBits}. */
     public static final int VK_QUEUE_VIDEO_ENCODE_BIT_KHR = 0x40;
@@ -201,24 +203,22 @@ public class KHRVideoEncodeQueue {
         VK_VIDEO_ENCODE_RESERVED_0_BIT_KHR = 0x1;
 
     /**
-     * VkVideoEncodeRateControlFlagBitsKHR - Video Encode Rate Control Flags
+     * VkVideoEncodeRateControlFlagBitsKHR - Reserved for future use
      * 
      * <h5>Description</h5>
      * 
-     * <ul>
-     * <li>{@link #VK_VIDEO_ENCODE_RESERVED_0_BIT_KHR VIDEO_ENCODE_RESERVED_0_BIT_KHR} The current version of the specification has reserved this value for future use.</li>
-     * </ul>
+     * <p>{@code VkVideoEncodeRateControlFlagBitsKHR} defines bits which may be set in a {@code VkVideoEncodeRateControlFlagsKHR} value, but is currently unused.</p>
      * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
      * <li>{@link #VK_VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR}</li>
-     * <li>{@link #VK_VIDEO_ENCODE_RATE_CONTROL_RESET_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_RESET_BIT_KHR}</li>
+     * <li>{@link #VK_VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR}</li>
      * </ul>
      */
     public static final int
-        VK_VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR   = 0,
-        VK_VIDEO_ENCODE_RATE_CONTROL_RESET_BIT_KHR = 0x1;
+        VK_VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR        = 0,
+        VK_VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR = 0x1;
 
     /**
      * VkVideoEncodeRateControlModeFlagBitsKHR - Video encode rate control modes

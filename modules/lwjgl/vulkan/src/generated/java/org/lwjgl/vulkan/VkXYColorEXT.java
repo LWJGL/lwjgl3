@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Specify X,Y chromaticity coordinates.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>Chromaticity coordinates are as specified in CIE 15:2004 “{@code Calculation of chromaticity coordinates}” (Section 7.3) and are limited to between 0 and 1 for real colors for the reference monitor.</p>
+ * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkHdrMetadataEXT}</p>
@@ -26,8 +30,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkXYColorEXT {
- *     float x;
- *     float y;
+ *     float {@link #x};
+ *     float {@link #y};
  * }</code></pre>
  */
 public class VkXYColorEXT extends Struct implements NativeResource {
@@ -69,14 +73,14 @@ public class VkXYColorEXT extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code x} field. */
+    /** the <code>x</code> chromaticity coordinate. */
     public float x() { return nx(address()); }
-    /** @return the value of the {@code y} field. */
+    /** the <code>y</code> chromaticity coordinate. */
     public float y() { return ny(address()); }
 
-    /** Sets the specified value to the {@code x} field. */
+    /** Sets the specified value to the {@link #x} field. */
     public VkXYColorEXT x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@code y} field. */
+    /** Sets the specified value to the {@link #y} field. */
     public VkXYColorEXT y(float value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -282,14 +286,14 @@ public class VkXYColorEXT extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code x} field. */
+        /** @return the value of the {@link VkXYColorEXT#x} field. */
         public float x() { return VkXYColorEXT.nx(address()); }
-        /** @return the value of the {@code y} field. */
+        /** @return the value of the {@link VkXYColorEXT#y} field. */
         public float y() { return VkXYColorEXT.ny(address()); }
 
-        /** Sets the specified value to the {@code x} field. */
+        /** Sets the specified value to the {@link VkXYColorEXT#x} field. */
         public VkXYColorEXT.Buffer x(float value) { VkXYColorEXT.nx(address(), value); return this; }
-        /** Sets the specified value to the {@code y} field. */
+        /** Sets the specified value to the {@link VkXYColorEXT#y} field. */
         public VkXYColorEXT.Buffer y(float value) { VkXYColorEXT.ny(address(), value); return this; }
 
     }

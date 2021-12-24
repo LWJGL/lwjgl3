@@ -19,6 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifies H.264 encode frame parameters.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>In order to encode a frame, add a {@link VkVideoEncodeH264VclFrameInfoEXT} structure to the {@code pNext} chain of the {@link VkVideoEncodeInfoKHR} structure passed to the {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} command.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

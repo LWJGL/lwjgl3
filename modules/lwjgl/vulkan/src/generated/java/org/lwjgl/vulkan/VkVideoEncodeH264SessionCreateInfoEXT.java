@@ -19,6 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifies H.264 encoder creation parameters.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>A {@link VkVideoEncodeH264SessionCreateInfoEXT} structure <b>must</b> be chained to {@link VkVideoSessionCreateInfoKHR} when the function {@link KHRVideoQueue#vkCreateVideoSessionKHR CreateVideoSessionKHR} is called with {@code videoCodecOperation} in {@link VkVideoSessionCreateInfoKHR} set to {@link EXTVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT}.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

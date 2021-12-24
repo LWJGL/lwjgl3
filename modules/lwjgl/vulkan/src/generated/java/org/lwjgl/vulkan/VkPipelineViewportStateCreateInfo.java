@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV}, {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV}, {@link VkPipelineViewportShadingRateImageStateCreateInfoNV}, {@link VkPipelineViewportSwizzleStateCreateInfoNV}, or {@link VkPipelineViewportWScalingStateCreateInfoNV}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV}, {@link VkPipelineViewportDepthClipControlCreateInfoEXT}, {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV}, {@link VkPipelineViewportShadingRateImageStateCreateInfoNV}, {@link VkPipelineViewportSwizzleStateCreateInfoNV}, or {@link VkPipelineViewportWScalingStateCreateInfoNV}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * </ul>
@@ -146,6 +146,8 @@ public class VkPipelineViewportStateCreateInfo extends Struct implements NativeR
     public VkPipelineViewportStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} value to the {@code pNext} chain. */
     public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPipelineViewportDepthClipControlCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportDepthClipControlCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} value to the {@code pNext} chain. */
     public VkPipelineViewportStateCreateInfo pNext(VkPipelineViewportExclusiveScissorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineViewportShadingRateImageStateCreateInfoNV} value to the {@code pNext} chain. */
@@ -430,6 +432,8 @@ public class VkPipelineViewportStateCreateInfo extends Struct implements NativeR
         public VkPipelineViewportStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportStateCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineViewportCoarseSampleOrderStateCreateInfoNV} value to the {@code pNext} chain. */
         public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPipelineViewportDepthClipControlCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportDepthClipControlCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV} value to the {@code pNext} chain. */
         public VkPipelineViewportStateCreateInfo.Buffer pNext(VkPipelineViewportExclusiveScissorStateCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineViewportShadingRateImageStateCreateInfoNV} value to the {@code pNext} chain. */

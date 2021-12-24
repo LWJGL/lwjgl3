@@ -160,7 +160,7 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct implements NativeRes
     /** specifies the token command type. */
     @NativeType("VkIndirectCommandsTokenTypeNV")
     public int tokenType() { return ntokenType(address()); }
-    /** the index of the input stream that contains the token argument data. */
+    /** the index of the input stream containing the token argument data. */
     @NativeType("uint32_t")
     public int stream$() { return nstream$(address()); }
     /** a relative starting offset within the input stream memory for the token argument data. */

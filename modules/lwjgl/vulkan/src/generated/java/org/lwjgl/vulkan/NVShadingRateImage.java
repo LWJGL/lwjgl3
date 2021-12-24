@@ -404,7 +404,7 @@ public class NVShadingRateImage {
      *
      * @param commandBuffer       the command buffer into which the command will be recorded.
      * @param sampleOrderType     specifies the mechanism used to order coverage samples in fragments larger than one pixel.
-     * @param pCustomSampleOrders a pointer to an array of {@link VkCoarseSampleOrderCustomNV} structures, each of which specifies the coverage sample order for a single combination of fragment area and coverage sample count.
+     * @param pCustomSampleOrders a pointer to an array of {@link VkCoarseSampleOrderCustomNV} structures, each structure specifying the coverage sample order for a single combination of fragment area and coverage sample count.
      */
     public static void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, @NativeType("VkCoarseSampleOrderTypeNV") int sampleOrderType, @Nullable @NativeType("VkCoarseSampleOrderCustomNV const *") VkCoarseSampleOrderCustomNV.Buffer pCustomSampleOrders) {
         nvkCmdSetCoarseSampleOrderNV(commandBuffer, sampleOrderType, remainingSafe(pCustomSampleOrders), memAddressSafe(pCustomSampleOrders));

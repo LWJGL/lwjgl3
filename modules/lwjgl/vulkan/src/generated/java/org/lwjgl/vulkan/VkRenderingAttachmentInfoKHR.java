@@ -183,7 +183,7 @@ public class VkRenderingAttachmentInfoKHR extends Struct implements NativeResour
     /** a {@code VkAttachmentStoreOp} value specifying how the contents of {@code imageView} are treated at the end of the render pass instance. */
     @NativeType("VkAttachmentStoreOp")
     public int storeOp() { return nstoreOp(address()); }
-    /** a {@link VkClearValue} structure that defines values used to clear {@code imageView} when {@code loadOp} is {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}. */
+    /** a {@link VkClearValue} structure defining values used to clear {@code imageView} when {@code loadOp} is {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}. */
     public VkClearValue clearValue() { return nclearValue(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

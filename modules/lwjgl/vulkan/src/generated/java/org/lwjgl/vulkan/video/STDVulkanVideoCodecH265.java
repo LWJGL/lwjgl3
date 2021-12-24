@@ -16,8 +16,8 @@ public final class STDVulkanVideoCodecH265 {
     public static final String VK_STD_VULKAN_VIDEO_CODEC_H265_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h265";
 
     public static final int
-        STD_VIDEO_H265_CPB_CNT_LIST_SIZE                        = 32,
         STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE               = 7,
+        STD_VIDEO_H265_CPB_CNT_LIST_SIZE                        = 32,
         STD_VIDEO_H265_SCALING_LIST_4X4_NUM_LISTS               = 6,
         STD_VIDEO_H265_SCALING_LIST_4X4_NUM_ELEMENTS            = 16,
         STD_VIDEO_H265_SCALING_LIST_8X8_NUM_LISTS               = 6,
@@ -26,11 +26,11 @@ public final class STDVulkanVideoCodecH265 {
         STD_VIDEO_H265_SCALING_LIST_16X16_NUM_ELEMENTS          = 64,
         STD_VIDEO_H265_SCALING_LIST_32X32_NUM_LISTS             = 2,
         STD_VIDEO_H265_SCALING_LIST_32X32_NUM_ELEMENTS          = 64,
-        STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE               = 6,
+        STD_VIDEO_H265_PREDICTOR_PALETTE_COMPONENTS_LIST_SIZE   = 3,
+        STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE = 128,
         STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE     = 19,
         STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE     = 21,
-        STD_VIDEO_H265_PREDICTOR_PALETTE_COMPONENTS_LIST_SIZE   = 3,
-        STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE = 128;
+        STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE               = 6;
 
     /**
      * {@code StdVideoH265ChromaFormatIdc}

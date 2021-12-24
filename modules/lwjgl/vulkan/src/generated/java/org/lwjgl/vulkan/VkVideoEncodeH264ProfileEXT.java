@@ -20,6 +20,10 @@ import org.lwjgl.vulkan.video.*;
 /**
  * Structure specifying H.264 encode profile.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>An H.264 encode profile is specified by including a {@link VkVideoEncodeH264ProfileEXT} structure in the {@code pNext} chain of the {@link VkVideoProfileKHR} structure when {@link VkVideoProfileKHR}{@code ::videoCodecOperation} is {@link EXTVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT}.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

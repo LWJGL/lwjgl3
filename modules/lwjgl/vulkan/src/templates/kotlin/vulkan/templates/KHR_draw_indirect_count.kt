@@ -11,7 +11,7 @@ import vulkan.*
 val KHR_draw_indirect_count = "KHRDrawIndirectCount".nativeClassVK("KHR_draw_indirect_count", type = "device", postfix = KHR) {
     documentation =
         """
-        This extension is based off the {@link AMDDrawIndirectCount VK_AMD_draw_indirect_count} extension. This extension allows an application to source the number of draws for indirect draw calls from a buffer.
+        This extension is based off the {@link AMDDrawIndirectCount VK_AMD_draw_indirect_count} extension. This extension allows an application to source the number of draws for indirect drawing calls from a buffer.
 
         Applications might want to do culling on the GPU via a compute shader prior to drawing. This enables the application to generate an arbitrary number of drawing commands and execute them without host intervention.
 

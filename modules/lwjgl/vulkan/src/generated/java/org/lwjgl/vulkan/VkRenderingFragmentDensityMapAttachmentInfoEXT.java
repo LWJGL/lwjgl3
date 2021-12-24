@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>This structure can be included in the {@code pNext} chain of {@link VkRenderingInfoKHR} to define a fragment density map. If {@code imageView} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, or if this structure is not specified, {@code imageView} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</p>
+ * <p>This structure can be included in the {@code pNext} chain of {@link VkRenderingInfoKHR} to define a fragment density map. If this structure is not included in the {@code pNext} chain, {@code imageView} is treated as {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

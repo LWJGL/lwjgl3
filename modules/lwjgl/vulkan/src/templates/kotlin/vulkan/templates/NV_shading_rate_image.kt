@@ -351,6 +351,6 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkCoarseSampleOrderTypeNV("sampleOrderType", "specifies the mechanism used to order coverage samples in fragments larger than one pixel."),
         AutoSize("pCustomSampleOrders")..uint32_t("customSampleOrderCount", "specifies the number of custom sample orderings to use when ordering coverage samples."),
-        nullable..VkCoarseSampleOrderCustomNV.const.p("pCustomSampleOrders", "a pointer to an array of ##VkCoarseSampleOrderCustomNV structures, each of which specifies the coverage sample order for a single combination of fragment area and coverage sample count.")
+        nullable..VkCoarseSampleOrderCustomNV.const.p("pCustomSampleOrders", "a pointer to an array of ##VkCoarseSampleOrderCustomNV structures, each structure specifying the coverage sample order for a single combination of fragment area and coverage sample count.")
     )
 }
