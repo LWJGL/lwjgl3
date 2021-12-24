@@ -521,7 +521,12 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         Prepares a vectored IO read request.
 
         The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start reading {@code nr_vecs} into the {@code iovecs} array at
-        {@code offset}.
+        the specified {@code offset}.
+
+        On files that support seeking, if the {@code offset} is set to -1, the read operation commences at the file offset, and the file offset is incremented
+        by the number of bytes read. See {@code read(2)} for more details.
+
+        On files that are not capable of seeking, the offset is ignored.
 
         After the write has been prepared it can be submitted with one of the submit functions.
         """,
@@ -539,7 +544,7 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         Prepares a vectored IO read request.
 
         The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start reading {@code nr_vecs} into the {@code iovecs} array at
-        {@code offset}.
+        the specified {@code offset}.
 
         The behavior of the function can be controlled with the {@code flags} parameter. Supported values for flags are:
         ${ul(
@@ -549,6 +554,11 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
             "{@code RWF_NOWAIT} - per-IO, return {@code -EAGAIN} if operation would block",
             "{@code RWF_APPEND} - per-IO {@code O_APPEND}"
         )}
+
+        On files that support seeking, if the {@code offset} is set to -1, the read operation commences at the file offset, and the file offset is incremented
+        by the number of bytes read. See {@code read(2)} for more details.
+
+        On files that are not capable of seeking, the offset is ignored.
 
         After the write has been prepared, it can be submitted with one of the submit functions.
         """,
@@ -579,7 +589,12 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         Prepares a vectored IO write request.
 
         The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing {@code nr_vecs} from the {@code iovecs} array at
-        file {@code offset}.
+        the specified {@code offset}.
+
+        On files that support seeking, if the {@code offset} is set to -1, the write operation commences at the file offset, and the file offset is incremented
+        by the number of bytes written. See {@code write(2)} for more details.
+
+        On files that are not capable of seeking, the offset is ignored.
 
         After the write has been prepared it can be submitted with one of the submit functions.
         """,
@@ -597,7 +612,7 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         Prepares a vectored IO write request.
 
         The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing {@code nr_vecs} from the {@code iovecs} array at
-        file {@code offset}.
+        the specified {@code offset}.
 
         The behavior of the function can be controlled with the {@code flags} parameter. Supported values for flags are:
         ${ul(
@@ -607,6 +622,11 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
             "{@code RWF_NOWAIT} - per-IO, return {@code -EAGAIN} if operation would block",
             "{@code RWF_APPEND} - per-IO {@code O_APPEND}"    
         )}
+
+        On files that support seeking, if the {@code offset} is set to -1, the write operation commences at the file offset, and the file offset is incremented
+        by the number of bytes written. See {@code write(2)} for more details.
+
+        On files that are not capable of seeking, the offset is ignored.
 
         After the write has been prepared, it can be submitted with one of the submit functions.
         """,
@@ -850,7 +870,12 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         Prepares an IO read request.
 
         The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start reading {@code nbytes} into the buffer {@code buf} at
-        the {@code offset}.
+        the specified {@code offset}.
+
+        On files that support seeking, if the {@code offset} is set to -1, the read operation commences at the file offset, and the file offset is incremented
+        by the number of bytes read. See {@code read(2)} for more details.
+
+        On files that are not capable of seeking, the {@code offset} is ignored.
 
         After the read has been prepared it can be submitted with one of the submit functions.
         """,
@@ -868,7 +893,12 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         Prepares an IO write request.
 
         The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing {@code nbytes} from the buffer {@code buf} at
-        file {@code offset}.
+        the specified {@code offset}.
+
+        On files that support seeking, if the {@code offset} is set to -1, the write operation commences at the file offset, and the file offset is incremented
+        by the number of bytes written. See {@code write(2)} for more details.
+
+        On files that are not capable of seeking, the offset is ignored.
 
         After the write has been prepared, it can be submitted with one of the submit functions.
         """,
@@ -1060,6 +1090,25 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         int("newdfd", ""),
         charUTF8.const.p("newpath", ""),
         int("flags", "") // TODO:
+    )
+
+    // TODO: add readdir(3)
+    void(
+        "prep_getdents",
+        """
+        Prepares a {@code getdents64} request.
+        
+        The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing up to {@code count} bytes into the buffer
+        {@code buf} starting at {@code offset}.
+
+        After the {@code getdents} call has been prepared it can be submitted with one of the submit functions.
+        """,
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        void.p("buf", ""),
+        AutoSize("buf")..unsigned_int("count", ""),
+        uint64_t("offset", "")
     )
 
     unsigned_int(

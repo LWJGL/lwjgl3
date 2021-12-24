@@ -832,6 +832,13 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             Available since 5.15.
             """
         ),
+        "OP_GETDENTS".enumByte(
+            """
+            Issue the equivalent of a {@code getdents64(2)} system call.
+
+            Available since 5.17.
+            """
+        ),
         "OP_LAST".enumByte
     )
 

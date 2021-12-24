@@ -611,7 +611,12 @@ public class LibURing {
      * Prepares a vectored IO read request.
      * 
      * <p>The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start reading {@code nr_vecs} into the {@code iovecs} array at
-     * {@code offset}.</p>
+     * the specified {@code offset}.</p>
+     * 
+     * <p>On files that support seeking, if the {@code offset} is set to -1, the read operation commences at the file offset, and the file offset is incremented
+     * by the number of bytes read. See {@code read(2)} for more details.</p>
+     * 
+     * <p>On files that are not capable of seeking, the offset is ignored.</p>
      * 
      * <p>After the write has been prepared it can be submitted with one of the submit functions.</p>
      */
@@ -628,7 +633,7 @@ public class LibURing {
      * Prepares a vectored IO read request.
      * 
      * <p>The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start reading {@code nr_vecs} into the {@code iovecs} array at
-     * {@code offset}.</p>
+     * the specified {@code offset}.</p>
      * 
      * <p>The behavior of the function can be controlled with the {@code flags} parameter. Supported values for flags are:</p>
      * 
@@ -639,6 +644,11 @@ public class LibURing {
      * <li>{@code RWF_NOWAIT} - per-IO, return {@code -EAGAIN} if operation would block</li>
      * <li>{@code RWF_APPEND} - per-IO {@code O_APPEND}</li>
      * </ul>
+     * 
+     * <p>On files that support seeking, if the {@code offset} is set to -1, the read operation commences at the file offset, and the file offset is incremented
+     * by the number of bytes read. See {@code read(2)} for more details.</p>
+     * 
+     * <p>On files that are not capable of seeking, the offset is ignored.</p>
      * 
      * <p>After the write has been prepared, it can be submitted with one of the submit functions.</p>
      */
@@ -663,7 +673,12 @@ public class LibURing {
      * Prepares a vectored IO write request.
      * 
      * <p>The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing {@code nr_vecs} from the {@code iovecs} array at
-     * file {@code offset}.</p>
+     * the specified {@code offset}.</p>
+     * 
+     * <p>On files that support seeking, if the {@code offset} is set to -1, the write operation commences at the file offset, and the file offset is incremented
+     * by the number of bytes written. See {@code write(2)} for more details.</p>
+     * 
+     * <p>On files that are not capable of seeking, the offset is ignored.</p>
      * 
      * <p>After the write has been prepared it can be submitted with one of the submit functions.</p>
      */
@@ -680,7 +695,7 @@ public class LibURing {
      * Prepares a vectored IO write request.
      * 
      * <p>The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing {@code nr_vecs} from the {@code iovecs} array at
-     * file {@code offset}.</p>
+     * the specified {@code offset}.</p>
      * 
      * <p>The behavior of the function can be controlled with the {@code flags} parameter. Supported values for flags are:</p>
      * 
@@ -691,6 +706,11 @@ public class LibURing {
      * <li>{@code RWF_NOWAIT} - per-IO, return {@code -EAGAIN} if operation would block</li>
      * <li>{@code RWF_APPEND} - per-IO {@code O_APPEND}</li>
      * </ul>
+     * 
+     * <p>On files that support seeking, if the {@code offset} is set to -1, the write operation commences at the file offset, and the file offset is incremented
+     * by the number of bytes written. See {@code write(2)} for more details.</p>
+     * 
+     * <p>On files that are not capable of seeking, the offset is ignored.</p>
      * 
      * <p>After the write has been prepared, it can be submitted with one of the submit functions.</p>
      */
@@ -928,7 +948,12 @@ public class LibURing {
      * Prepares an IO read request.
      * 
      * <p>The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start reading {@code nbytes} into the buffer {@code buf} at
-     * the {@code offset}.</p>
+     * the specified {@code offset}.</p>
+     * 
+     * <p>On files that support seeking, if the {@code offset} is set to -1, the read operation commences at the file offset, and the file offset is incremented
+     * by the number of bytes read. See {@code read(2)} for more details.</p>
+     * 
+     * <p>On files that are not capable of seeking, the {@code offset} is ignored.</p>
      * 
      * <p>After the read has been prepared it can be submitted with one of the submit functions.</p>
      */
@@ -945,7 +970,12 @@ public class LibURing {
      * Prepares an IO write request.
      * 
      * <p>The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing {@code nbytes} from the buffer {@code buf} at
-     * file {@code offset}.</p>
+     * the specified {@code offset}.</p>
+     * 
+     * <p>On files that support seeking, if the {@code offset} is set to -1, the write operation commences at the file offset, and the file offset is incremented
+     * by the number of bytes written. See {@code write(2)} for more details.</p>
+     * 
+     * <p>On files that are not capable of seeking, the offset is ignored.</p>
      * 
      * <p>After the write has been prepared, it can be submitted with one of the submit functions.</p>
      */
@@ -1211,6 +1241,23 @@ public class LibURing {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ io_uring_prep_getdents ] ---
+
+    /** Unsafe version of: {@link #io_uring_prep_getdents prep_getdents} */
+    public static native void nio_uring_prep_getdents(long sqe, int fd, long buf, int count, long offset);
+
+    /**
+     * Prepares a {@code getdents64} request.
+     * 
+     * <p>The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing up to {@code count} bytes into the buffer
+     * {@code buf} starting at {@code offset}.</p>
+     * 
+     * <p>After the {@code getdents} call has been prepared it can be submitted with one of the submit functions.</p>
+     */
+    public static void io_uring_prep_getdents(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void *") ByteBuffer buf, @NativeType("uint64_t") long offset) {
+        nio_uring_prep_getdents(sqe.address(), fd, memAddress(buf), buf.remaining(), offset);
     }
 
     // --- [ io_uring_sq_ready ] ---

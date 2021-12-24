@@ -751,6 +751,11 @@ public class LibIOURing {
      * 
      * <p>Available since 5.15.</p>
      * </li>
+     * <li>{@link #IORING_OP_GETDENTS OP_GETDENTS} - 
+     * Issue the equivalent of a {@code getdents64(2)} system call.
+     * 
+     * <p>Available since 5.17.</p>
+     * </li>
      * <li>{@link #IORING_OP_LAST OP_LAST}</li>
      * </ul>
      */
@@ -795,7 +800,8 @@ public class LibIOURing {
         IORING_OP_MKDIRAT         = 37,
         IORING_OP_SYMLINKAT       = 38,
         IORING_OP_LINKAT          = 39,
-        IORING_OP_LAST            = 40;
+        IORING_OP_GETDENTS        = 40,
+        IORING_OP_LAST            = 41;
 
     /** {@code sqe->fsync_flags} */
     public static final int IORING_FSYNC_DATASYNC = 1 << 0;
