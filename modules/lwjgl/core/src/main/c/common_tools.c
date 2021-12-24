@@ -113,7 +113,7 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
         return data;
     }
 
-    static inline EnvData* tlsGetEnvData(void) {
+    inline EnvData* tlsGetEnvData(void) {
         EnvData* data = (EnvData*)TlsGetValue(envTLS);
         if (data == NULL) {
             data = tlsCreateEnvData();
@@ -178,7 +178,7 @@ static inline void linkEnvData(EnvData* data, JNIEnv *env) {
         return data;
     }
 
-    static inline EnvData* tlsGetEnvData(void) {
+    inline EnvData* tlsGetEnvData(void) {
         EnvData* data = (EnvData*)pthread_getspecific(envTLS);
         if (data == NULL) {
             data = tlsCreateEnvData();

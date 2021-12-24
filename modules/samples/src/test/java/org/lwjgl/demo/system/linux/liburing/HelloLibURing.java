@@ -6,6 +6,7 @@ package org.lwjgl.demo.system.linux.liburing;
 
 import org.lwjgl.*;
 import org.lwjgl.system.*;
+import org.lwjgl.system.linux.*;
 import org.lwjgl.system.linux.liburing.*;
 
 import java.io.*;

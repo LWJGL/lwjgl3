@@ -4,8 +4,6 @@
  */
 package org.lwjgl.demo.system.linux.liburing;
 
-import org.lwjgl.system.libc.*;
-
 import java.io.*;
 import java.nio.*;
 import java.nio.channels.*;
