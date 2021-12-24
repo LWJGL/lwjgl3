@@ -550,7 +550,7 @@ public class FCNTL {
      * <li>{@link #LOCK_MAND LOCK_MAND} - This is a mandatory flock...</li>
      * <li>{@link #LOCK_READ LOCK_READ} - which allows concurrent read operations</li>
      * <li>{@link #LOCK_WRITE LOCK_WRITE} - which allows concurrent write operations</li>
-     * <li>{@link #LOCK_RW LOCK_RW} - which allows concurrent read & writes ops</li>
+     * <li>{@link #LOCK_RW LOCK_RW} - which allows concurrent read &amp; writes ops</li>
      * </ul>
      */
     public static final int

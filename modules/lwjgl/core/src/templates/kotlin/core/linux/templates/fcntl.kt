@@ -557,7 +557,7 @@ val fcntl = "FCNTL".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         "LOCK_MAND".enum("This is a mandatory flock...", "32"),
         "LOCK_READ".enum("which allows concurrent read operations", "64"),
         "LOCK_WRITE".enum("which allows concurrent write operations", "128"),
-        "LOCK_RW".enum("which allows concurrent read & writes ops", "192")
+        "LOCK_RW".enum("which allows concurrent read &amp; writes ops", "192")
     )
 
     EnumConstant(

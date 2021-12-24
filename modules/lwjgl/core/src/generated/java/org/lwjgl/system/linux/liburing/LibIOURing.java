@@ -930,10 +930,10 @@ public class LibIOURing {
      * <p>which is behaves just like the original definition by default. However, if {@code IORING_ENTER_EXT_ARG} is set, then instead of a {@code sigset_t}
      * being passed in, a pointer to a struct {@code io_uring_getevents_arg} is used instead and {@code argsz} must be set to the size of this structure.</p>
      * 
-     * <p>The definition is {@link IOURingGeteventsArgs} which allows passing in both a signal mask as well as pointer to a struct {@code __kernel_timespec}
-     * timeout value. If {@code ts} is set to a valid pointer, then this time value indicates the timeout for waiting on events. If an application is
-     * waiting on events and wishes to stop waiting after a specified amount of time, then this can be accomplished directly in version 5.11 and newer by
-     * using this feature.</p>
+     * <p>The definition is {@link IOURingGeteventsArg} which allows passing in both a signal mask as well as pointer to a struct {@code __kernel_timespec} timeout
+     * value. If {@code ts} is set to a valid pointer, then this time value indicates the timeout for waiting on events. If an application is waiting on
+     * events and wishes to stop waiting after a specified amount of time, then this can be accomplished directly in version 5.11 and newer by using this
+     * feature.</p>
      * </li>
      * </ul>
      */
