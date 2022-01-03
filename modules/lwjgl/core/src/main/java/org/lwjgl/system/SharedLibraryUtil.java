@@ -25,7 +25,7 @@ public final class SharedLibraryUtil {
                     return null;
                 }
                 if (len < maxLen) {
-                    return memUTF8(buffer, len);
+                    return memUTF8(buffer, len - 1); // drop the null-terminator
                 }
                 buffer = memRealloc(buffer, maxLen = maxLen * 3 / 2);
             }
