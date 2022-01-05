@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_external_memory = "KHRExternalMemory".nativeClassVK("KHR_external_memory", type = "device", postfix = KHR) {
+val KHR_external_memory = "KHRExternalMemory".nativeClassVK("KHR_external_memory", type = "device", postfix = "KHR") {
     documentation =
         """
         An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export non-Vulkan handles from Vulkan memory objects such that the underlying resources can be referenced outside the scope of the Vulkan logical device that created them.

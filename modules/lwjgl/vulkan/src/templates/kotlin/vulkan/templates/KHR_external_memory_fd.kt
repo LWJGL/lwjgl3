@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_memory_fd", type = "device", postfix = KHR) {
+val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_memory_fd", type = "device", postfix = "KHR") {
     documentation =
         """
         An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export POSIX file descriptor handles from Vulkan memory objects and to import Vulkan memory objects from POSIX file descriptor handles exported from other Vulkan memory objects or from similar resources in other APIs.

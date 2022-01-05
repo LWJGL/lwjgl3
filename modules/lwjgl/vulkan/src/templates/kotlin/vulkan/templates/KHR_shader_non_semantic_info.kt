@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_shader_non_semantic_info = "KHRShaderNonSemanticInfo".nativeClassVK("KHR_shader_non_semantic_info", type = "device", postfix = KHR) {
+val KHR_shader_non_semantic_info = "KHRShaderNonSemanticInfo".nativeClassVK("KHR_shader_non_semantic_info", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension allows the use of the {@code SPV_KHR_non_semantic_info} extension in SPIR-V shader modules.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_blend_operation_advanced = "EXTBlendOperationAdvanced".nativeClassVK("EXT_blend_operation_advanced", type = "device", postfix = EXT) {
+val EXT_blend_operation_advanced = "EXTBlendOperationAdvanced".nativeClassVK("EXT_blend_operation_advanced", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds a number of “{@code advanced}” blending operations that <b>can</b> be used to perform new color blending operations, many of which are more complex than the standard blend modes provided by unextended Vulkan. This extension requires different styles of usage, depending on the level of hardware support and the enabled features:

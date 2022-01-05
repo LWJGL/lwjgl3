@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor", type = "device", postfix = KHR) {
+val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension allows descriptors to be written into the command buffer, while the implementation is responsible for managing their memory. Push descriptors may enable easier porting from older APIs and in some cases can be more efficient than writing descriptors into descriptor sets.

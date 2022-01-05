@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_uniform_buffer_standard_layout = "KHRUniformBufferStandardLayout".nativeClassVK("KHR_uniform_buffer_standard_layout", type = "device", postfix = KHR) {
+val KHR_uniform_buffer_standard_layout = "KHRUniformBufferStandardLayout".nativeClassVK("KHR_uniform_buffer_standard_layout", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension enables tighter array and struct packing to be used with uniform buffers.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val GOOGLE_hlsl_functionality1 = "GOOGLEHlslFunctionality1".nativeClassVK("GOOGLE_hlsl_functionality1", type = "device", postfix = GOOGLE) {
+val GOOGLE_hlsl_functionality1 = "GOOGLEHlslFunctionality1".nativeClassVK("GOOGLE_hlsl_functionality1", type = "device", postfix = "GOOGLE") {
     documentation =
         """
         The {@code VK_GOOGLE_hlsl_functionality1} extension allows use of the {@code SPV_GOOGLE_hlsl_functionality1} extension in SPIR-V shader modules.

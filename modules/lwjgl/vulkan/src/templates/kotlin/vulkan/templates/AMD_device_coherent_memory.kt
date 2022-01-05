@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_device_coherent_memory = "AMDDeviceCoherentMemory".nativeClassVK("AMD_device_coherent_memory", type = "device", postfix = AMD) {
+val AMD_device_coherent_memory = "AMDDeviceCoherentMemory".nativeClassVK("AMD_device_coherent_memory", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension adds the device coherent and device uncached memory types. Any device accesses to device coherent memory are automatically made visible to any other device access. Device uncached memory indicates to applications that caches are disabled for a particular memory type, which guarantees device coherence.

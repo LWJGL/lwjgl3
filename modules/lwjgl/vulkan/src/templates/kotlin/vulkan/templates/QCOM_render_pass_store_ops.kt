@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val QCOM_render_pass_store_ops = "QCOMRenderPassStoreOps".nativeClassVK("QCOM_render_pass_store_ops", type = "device", postfix = QCOM) {
+val QCOM_render_pass_store_ops = "QCOMRenderPassStoreOps".nativeClassVK("QCOM_render_pass_store_ops", type = "device", postfix = "QCOM") {
     documentation =
         """
         Renderpass attachments <b>can</b> be read-only for the duration of a render pass.

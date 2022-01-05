@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_shader_integer_dot_product = "KHRShaderIntegerDotProduct".nativeClassVK("KHR_shader_integer_dot_product", type = "device", postfix = KHR) {
+val KHR_shader_integer_dot_product = "KHRShaderIntegerDotProduct".nativeClassVK("KHR_shader_integer_dot_product", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension adds support for the integer dot product SPIR-V instructions defined in SPV_KHR_integer_dot_product. These instructions are particularly useful for neural network inference and training but find uses in other general purpose compute applications as well.

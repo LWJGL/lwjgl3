@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_timeline_semaphore = "KHRTimelineSemaphore".nativeClassVK("KHR_timeline_semaphore", type = "device", postfix = KHR) {
+val KHR_timeline_semaphore = "KHRTimelineSemaphore".nativeClassVK("KHR_timeline_semaphore", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension introduces a new type of semaphore that has an integer payload identifying a point in a timeline. Such timeline semaphores support the following operations:

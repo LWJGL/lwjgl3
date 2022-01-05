@@ -490,7 +490,7 @@ val VkBaseInStructure = struct(Module.VULKAN, "VkBaseInStructure") {
         """
 
     VkStructureType("sType", "the structure type of the structure being iterated through.")
-    nullable.._VkBaseInStructure.p("pNext", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable.._VkBaseInStructure.const.p("pNext", "{@code NULL} or a pointer to the next structure in a structure chain.")
 }
 
 val _VkBaseOutStructure = struct(Module.VULKAN, "VkBaseOutStructure")

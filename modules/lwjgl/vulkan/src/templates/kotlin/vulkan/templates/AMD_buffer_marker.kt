@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", type = "device", postfix = AMD) {
+val AMD_buffer_marker = "AMDBufferMarker".nativeClassVK("AMD_buffer_marker", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension adds a new operation to execute pipelined writes of small marker values into a {@code VkBuffer} object.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_shader_subgroup_uniform_control_flow = "KHRShaderSubgroupUniformControlFlow".nativeClassVK("KHR_shader_subgroup_uniform_control_flow", type = "device", postfix = KHR) {
+val KHR_shader_subgroup_uniform_control_flow = "KHRShaderSubgroupUniformControlFlow".nativeClassVK("KHR_shader_subgroup_uniform_control_flow", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension allows the use of the {@code SPV_KHR_subgroup_uniform_control_flow} SPIR-V extension in shader modules. {@code SPV_KHR_subgroup_uniform_control_flow} provides stronger guarantees that diverged subgroups will reconverge.

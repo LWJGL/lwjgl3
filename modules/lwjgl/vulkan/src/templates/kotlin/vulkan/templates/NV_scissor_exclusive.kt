@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclusive", type = "device", postfix = NV) {
+val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclusive", type = "device", postfix = "NV") {
     documentation =
         """
         This extension adds support for an exclusive scissor test to Vulkan. The exclusive scissor test behaves like the scissor test, except that the exclusive scissor test fails for pixels inside the corresponding rectangle and passes for pixels outside the rectangle. If the same rectangle is used for both the scissor and exclusive scissor tests, the exclusive scissor test will pass if and only if the scissor test fails.

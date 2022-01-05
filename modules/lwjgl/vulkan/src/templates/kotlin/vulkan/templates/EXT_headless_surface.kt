@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surface", type = "instance", postfix = EXT) {
+val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surface", type = "instance", postfix = "EXT") {
     documentation =
         """
         The {@code VK_EXT_headless_surface} extension is an instance extension. It provides a mechanism to create {@code VkSurfaceKHR} objects independently of any window system or display device. The presentation operation for a swapchain created from a headless surface is by default a no-op, resulting in no externally-visible result.

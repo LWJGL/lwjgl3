@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_depth_clip_control = "EXTDepthClipControl".nativeClassVK("EXT_depth_clip_control", type = "device", postfix = EXT) {
+val EXT_depth_clip_control = "EXTDepthClipControl".nativeClassVK("EXT_depth_clip_control", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows the application to use the OpenGL depth range in NDC, i.e. with depth in range <code>[-1, 1]</code>, as opposed to Vulkan’s default of <code>[0, 1]</code>. The purpose of this extension is to allow efficient layering of OpenGL over Vulkan, by avoiding emulation in the pre-rasterization shader stages. This emulation, which effectively duplicates gl_Position but with a different depth value, costs ALU and consumes shader output components that the implementation may not have to spare to meet OpenGL minimum requirements.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_acceleration_structure", type = "device", postfix = KHR) {
+val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_acceleration_structure", type = "device", postfix = "KHR") {
     documentation =
         """
         In order to be efficient, rendering techniques such as ray tracing need a quick way to identify which primitives may be intersected by a ray traversing the geometries. Acceleration structures are the most common way to represent the geometry spatially sorted, in order to quickly identify such potential intersections.

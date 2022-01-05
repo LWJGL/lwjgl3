@@ -9,7 +9,8 @@ import org.lwjgl.generator.*
 import core.windows.*
 import vulkan.*
 
-val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", type = "instance", postfix = KHR) {
+val KHR_win32_surface = "KHRWin32Surface".nativeClassVK("KHR_win32_surface", type = "instance", postfix = "KHR") {
+    javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
         The {@code VK_KHR_win32_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) that refers to a Win32 {@code HWND}, as well as a query to determine support for rendering to the windows desktop.

@@ -9,7 +9,8 @@ import org.lwjgl.generator.*
 import core.windows.*
 import vulkan.*
 
-val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_external_memory_win32", type = "device", postfix = KHR) {
+val KHR_external_memory_win32 = "KHRExternalMemoryWin32".nativeClassVK("KHR_external_memory_win32", type = "device", postfix = "KHR") {
+    javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
         An application may wish to reference device memory in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension enables an application to export Windows handles from Vulkan memory objects and to import Vulkan memory objects from Windows handles exported from other Vulkan memory objects or from similar resources in other APIs.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_private_data = "EXTPrivateData".nativeClassVK("EXT_private_data", type = "device", postfix = EXT) {
+val EXT_private_data = "EXTPrivateData".nativeClassVK("EXT_private_data", type = "device", postfix = "EXT") {
     documentation =
         """
         The 'VK_EXT_private_data' extension is a device extension which enables attaching arbitrary payloads to Vulkan objects. It introduces the idea of private data slots as a means of storing a 64-bit unsigned integer of application defined data. Private data slots can be created or destroyed any time an associated device is available. Private data slots can be reserved at device creation time, and limiting use to the amount reserved will allow the extension to exhibit better performance characteristics.

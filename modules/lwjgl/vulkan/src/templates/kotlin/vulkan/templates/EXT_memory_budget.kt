@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_memory_budget = "EXTMemoryBudget".nativeClassVK("EXT_memory_budget", type = "device", postfix = EXT) {
+val EXT_memory_budget = "EXTMemoryBudget".nativeClassVK("EXT_memory_budget", type = "device", postfix = "EXT") {
     documentation =
         """
         While running a Vulkan application, other processes on the machine might also be attempting to use the same device memory, which can pose problems. This extension adds support for querying the amount of memory used and the total memory budget for a memory heap. The values returned by this query are implementation-dependent and can depend on a variety of factors including operating system and system load.

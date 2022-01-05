@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode_h265", type = "device", postfix = EXT) {
+val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode_h265", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows applications to compress a raw video sequence by using the H.265/HEVC video compression standard.

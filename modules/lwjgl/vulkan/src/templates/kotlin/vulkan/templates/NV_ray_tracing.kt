@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "device", postfix = NV) {
+val NV_ray_tracing = "NVRayTracing".nativeClassVK("NV_ray_tracing", type = "device", postfix = "NV") {
     documentation =
         """
         Rasterization has been the dominant method to produce interactive graphics, but increasing performance of graphics hardware has made ray tracing a viable option for interactive rendering. Being able to integrate ray tracing with traditional rasterization makes it easier for applications to incrementally add ray traced effects to existing applications or to do hybrid approaches with rasterization for primary visibility and ray tracing for secondary queries.

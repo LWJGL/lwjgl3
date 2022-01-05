@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_host_query_reset = "EXTHostQueryReset".nativeClassVK("EXT_host_query_reset", type = "device", postfix = EXT) {
+val EXT_host_query_reset = "EXTHostQueryReset".nativeClassVK("EXT_host_query_reset", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds a new function to reset queries from the host.

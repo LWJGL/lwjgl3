@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val QCOM_rotated_copy_commands = "QCOMRotatedCopyCommands".nativeClassVK("QCOM_rotated_copy_commands", type = "device", postfix = QCOM) {
+val QCOM_rotated_copy_commands = "QCOMRotatedCopyCommands".nativeClassVK("QCOM_rotated_copy_commands", type = "device", postfix = "QCOM") {
     documentation =
         """
         This extension extends adds an optional rotation transform to copy commands #CmdBlitImage2KHR(), #CmdCopyImageToBuffer2KHR() and #CmdCopyBufferToImage2KHR(). When copying between two resources, where one resource contains rotated content and the other does not, a rotated copy may be desired. This extension may be used in combination with VK_QCOM_render_pass_transform which adds rotated render passes.

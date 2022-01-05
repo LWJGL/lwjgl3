@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_shader_viewport_index_layer = "EXTShaderViewportIndexLayer".nativeClassVK("EXT_shader_viewport_index_layer", type = "device", postfix = EXT) {
+val EXT_shader_viewport_index_layer = "EXTShaderViewportIndexLayer".nativeClassVK("EXT_shader_viewport_index_layer", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds support for the {@code ShaderViewportIndexLayerEXT} capability from the {@code SPV_EXT_shader_viewport_index_layer} extension in Vulkan.

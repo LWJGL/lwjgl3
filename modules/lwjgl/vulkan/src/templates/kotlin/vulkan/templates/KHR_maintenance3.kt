@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_maintenance3 = "KHRMaintenance3".nativeClassVK("KHR_maintenance3", type = "device", postfix = KHR) {
+val KHR_maintenance3 = "KHRMaintenance3".nativeClassVK("KHR_maintenance3", type = "device", postfix = "KHR") {
     documentation =
         """
         {@code VK_KHR_maintenance3} adds a collection of minor features that were intentionally left out or overlooked from the original Vulkan 1.0 release.

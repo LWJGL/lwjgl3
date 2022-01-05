@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_external_fence = "KHRExternalFence".nativeClassVK("KHR_external_fence", type = "device", postfix = KHR) {
+val KHR_external_fence = "KHRExternalFence".nativeClassVK("KHR_external_fence", type = "device", postfix = "KHR") {
     documentation =
         """
         An application using external memory may wish to synchronize access to that memory using fences. This extension enables an application to create fences from which non-Vulkan handles that reference the underlying synchronization primitive can be exported.

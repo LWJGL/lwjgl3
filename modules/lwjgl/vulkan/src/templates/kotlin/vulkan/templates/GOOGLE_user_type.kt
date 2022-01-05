@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val GOOGLE_user_type = "GOOGLEUserType".nativeClassVK("GOOGLE_user_type", type = "device", postfix = GOOGLE) {
+val GOOGLE_user_type = "GOOGLEUserType".nativeClassVK("GOOGLE_user_type", type = "device", postfix = "GOOGLE") {
     documentation =
         """
         The {@code VK_GOOGLE_user_type} extension allows use of the {@code SPV_GOOGLE_user_type} extension in SPIR-V shader modules.

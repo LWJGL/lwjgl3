@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_device_group_creation = "KHRDeviceGroupCreation".nativeClassVK("KHR_device_group_creation", type = "instance", postfix = KHR) {
+val KHR_device_group_creation = "KHRDeviceGroupCreation".nativeClassVK("KHR_device_group_creation", type = "instance", postfix = "KHR") {
     documentation =
         """
         This extension provides instance-level commands to enumerate groups of physical devices, and to create a logical device from a subset of one of those groups. Such a logical device can then be used with new features in the {@link KHRDeviceGroup VK_KHR_device_group} extension.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_physical_device_drm = "EXTPhysicalDeviceDrm".nativeClassVK("EXT_physical_device_drm", type = "device", postfix = EXT) {
+val EXT_physical_device_drm = "EXTPhysicalDeviceDrm".nativeClassVK("EXT_physical_device_drm", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension provides new facilities to query DRM properties for physical devices, enabling users to match Vulkan physical devices with DRM nodes on Linux.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NVX_binary_import = "NVXBinaryImport".nativeClassVK("NVX_binary_import", type = "device", postfix = NVX) {
+val NVX_binary_import = "NVXBinaryImport".nativeClassVK("NVX_binary_import", type = "device", postfix = "NVX") {
     documentation =
         """
         This extension allows applications to import CuBIN binaries and execute them.

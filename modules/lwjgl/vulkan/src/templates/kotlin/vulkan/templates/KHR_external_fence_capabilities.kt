@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClassVK("KHR_external_fence_capabilities", type = "instance", postfix = KHR) {
+val KHR_external_fence_capabilities = "KHRExternalFenceCapabilities".nativeClassVK("KHR_external_fence_capabilities", type = "instance", postfix = "KHR") {
     documentation =
         """
         An application may wish to reference device fences in multiple Vulkan logical devices or instances, in multiple processes, and/or in multiple APIs. This extension provides a set of capability queries and handle definitions that allow an application to determine what types of “{@code external}” fence handles an implementation supports for a given set of use cases.

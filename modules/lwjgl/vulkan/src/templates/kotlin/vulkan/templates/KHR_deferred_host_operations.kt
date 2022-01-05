@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KHR_deferred_host_operations", type = "device", postfix = KHR) {
+val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KHR_deferred_host_operations", type = "device", postfix = "KHR") {
     documentation =
         """
         The {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations} extension defines the infrastructure and usage patterns for deferrable commands, but does not specify any commands as deferrable. This is left to additional dependent extensions. Commands <b>must</b> not be deferred unless the deferral is specifically allowed by another extension which depends on {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations}.

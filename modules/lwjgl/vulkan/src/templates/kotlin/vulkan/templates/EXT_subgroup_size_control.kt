@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_subgroup_size_control = "EXTSubgroupSizeControl".nativeClassVK("EXT_subgroup_size_control", type = "device", postfix = EXT) {
+val EXT_subgroup_size_control = "EXTSubgroupSizeControl".nativeClassVK("EXT_subgroup_size_control", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension enables an implementation to control the subgroup size by allowing a varying subgroup size and also specifying a required subgroup size.

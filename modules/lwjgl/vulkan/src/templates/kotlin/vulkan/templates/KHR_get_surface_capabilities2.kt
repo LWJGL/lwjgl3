@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("KHR_get_surface_capabilities2", type = "instance", postfix = KHR) {
+val KHR_get_surface_capabilities2 = "KHRGetSurfaceCapabilities2".nativeClassVK("KHR_get_surface_capabilities2", type = "instance", postfix = "KHR") {
     documentation =
         """
         This extension provides new entry points to query device surface capabilities in a way that can be easily extended by other extensions, without introducing any further entry points. This extension can be considered the {@link KHRSurface VK_KHR_surface} equivalent of the {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} extension.

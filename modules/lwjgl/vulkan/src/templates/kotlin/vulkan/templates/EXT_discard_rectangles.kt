@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_rectangles", type = "device", postfix = EXT) {
+val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_rectangles", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension provides additional orthogonally aligned “{@code discard rectangles}” specified in framebuffer-space coordinates that restrict rasterization of all points, lines and triangles.

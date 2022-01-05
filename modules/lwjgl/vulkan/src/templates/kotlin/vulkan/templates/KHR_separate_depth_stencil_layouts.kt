@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_separate_depth_stencil_layouts = "KHRSeparateDepthStencilLayouts".nativeClassVK("KHR_separate_depth_stencil_layouts", type = "device", postfix = KHR) {
+val KHR_separate_depth_stencil_layouts = "KHRSeparateDepthStencilLayouts".nativeClassVK("KHR_separate_depth_stencil_layouts", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension allows image memory barriers for depth/stencil images to have just one of the #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT aspect bits set, rather than require both. This allows their layouts to be set independently. To support depth/stencil images with different layouts for the depth and stencil aspects, the depth/stencil attachment interface has been updated to support a separate layout for stencil.

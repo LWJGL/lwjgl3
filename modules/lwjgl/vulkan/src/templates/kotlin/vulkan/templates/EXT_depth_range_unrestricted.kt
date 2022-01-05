@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_depth_range_unrestricted = "EXTDepthRangeUnrestricted".nativeClassVK("EXT_depth_range_unrestricted", type = "device", postfix = EXT) {
+val EXT_depth_range_unrestricted = "EXTDepthRangeUnrestricted".nativeClassVK("EXT_depth_range_unrestricted", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension removes the ##VkViewport {@code minDepth} and {@code maxDepth} restrictions that the values must be between {@code 0.0} and {@code 1.0}, inclusive. It also removes the same restriction on ##VkPipelineDepthStencilStateCreateInfo {@code minDepthBounds} and {@code maxDepthBounds}. Finally it removes the restriction on the {@code depth} value in ##VkClearDepthStencilValue.

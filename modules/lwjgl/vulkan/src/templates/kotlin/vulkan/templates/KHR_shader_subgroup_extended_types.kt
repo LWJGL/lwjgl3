@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_shader_subgroup_extended_types = "KHRShaderSubgroupExtendedTypes".nativeClassVK("KHR_shader_subgroup_extended_types", type = "device", postfix = KHR) {
+val KHR_shader_subgroup_extended_types = "KHRShaderSubgroupExtendedTypes".nativeClassVK("KHR_shader_subgroup_extended_types", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension enables the Non Uniform Group Operations in SPIR-V to support 8-bit integer, 16-bit integer, 64-bit integer, 16-bit floating-point, and vectors of these types.

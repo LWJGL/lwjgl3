@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_pci_bus_info = "EXTPciBusInfo".nativeClassVK("EXT_pci_bus_info", type = "device", postfix = EXT) {
+val EXT_pci_bus_info = "EXTPciBusInfo".nativeClassVK("EXT_pci_bus_info", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds a new query to obtain PCI bus information about a physical device.

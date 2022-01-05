@@ -6,46 +6,9 @@
 package vulkan
 
 import org.lwjgl.generator.*
-//import core.android.*
 import core.linux.*
 import core.macos.*
 import core.windows.*
-
-const val IMG = "IMG"
-const val AMD = "AMD"
-const val AMDX = "AMDX"
-const val ARM = "ARM"
-const val FSL = "FSL"
-const val BRCM = "BRCM"
-const val NXP = "NXP"
-const val NV = "NV"
-const val NVX = "NVX"
-const val VIV = "VIV"
-const val VSI = "VSI"
-const val KDAB = "KDAB"
-const val ANDROID = "ANDROID"
-const val CHROMIUM = "CHROMIUM"
-const val FUCHSIA = "FUCHSIA"
-const val GGP = "GGP"
-const val GOOGLE = "GOOGLE"
-const val QCOM = "QCOM"
-const val LUNARG = "LUNARG"
-const val SAMSUNG = "SAMSUNG"
-const val SEC = "SEC"
-const val TIZEN = "TIZEN"
-const val RENDERDOC = "RENDERDOC"
-const val NN = "NN"
-const val MVK = "MVK"
-const val KHR = "KHR"
-const val KHX = "KHX"
-const val EXT = "EXT"
-const val MESA = "MESA"
-const val INTEL = "INTEL"
-const val HUAWEI = "HUAWEI"
-const val VALVE = "VALVE"
-const val QNX = "QNX"
-const val JUICE = "JUICE"
-const val FB = "FB"
 
 // Handle types
 val VkSurfaceKHR = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkSurfaceKHR")
@@ -15239,7 +15202,7 @@ val VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT = struct(Module.VULKAN, "VkPh
 }
 
 val VkQueueFamilyGlobalPriorityPropertiesEXT = struct(Module.VULKAN, "VkQueueFamilyGlobalPriorityPropertiesEXT") {
-    javaImport("static org.lwjgl.vulkan.VK10.*")
+    javaImport("static org.lwjgl.vulkan.EXTGlobalPriorityQuery.*")
     documentation =
         """
         Return structure for queue family global priority information query.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type = "device", postfix = KHR) {
+val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type = "device", postfix = "KHR") {
     documentation =
         """
         This device extension allows an application that uses the {@link KHRSwapchain VK_KHR_swapchain} extension to wait for present operations to complete. An application can use this to monitor and control the pacing of the application by managing the number of outstanding images yet to be presented.

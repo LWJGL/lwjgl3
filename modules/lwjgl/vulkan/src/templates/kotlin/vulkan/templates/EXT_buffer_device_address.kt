@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buffer_device_address", type = "device", postfix = EXT) {
+val EXT_buffer_device_address = "EXTBufferDeviceAddress".nativeClassVK("EXT_buffer_device_address", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows the application to query a 64-bit buffer device address value for a buffer, which can be used to access the buffer memory via the {@code PhysicalStorageBufferEXT} storage class in the <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_buffer_reference.txt">{@code GL_EXT_buffer_reference}</a> GLSL extension and <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_physical_storage_buffer.html">{@code SPV_EXT_physical_storage_buffer}</a> SPIR-V extension.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_pipeline_compiler_control = "AMDPipelineCompilerControl".nativeClassVK("AMD_pipeline_compiler_control", type = "device", postfix = AMD) {
+val AMD_pipeline_compiler_control = "AMDPipelineCompilerControl".nativeClassVK("AMD_pipeline_compiler_control", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension introduces ##VkPipelineCompilerControlCreateInfoAMD structure that can be chained to a pipeline’s creation information to specify additional flags that affect pipeline compilation.

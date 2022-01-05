@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeClassVK("NV_device_diagnostic_checkpoints", type = "device", postfix = NV) {
+val NV_device_diagnostic_checkpoints = "NVDeviceDiagnosticCheckpoints".nativeClassVK("NV_device_diagnostic_checkpoints", type = "device", postfix = "NV") {
     documentation =
         """
         This extension allows applications to insert markers in the command stream and associate them with custom data.

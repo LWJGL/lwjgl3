@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_handle", type = "device", postfix = NVX) {
+val NVX_image_view_handle = "NVXImageViewHandle".nativeClassVK("NVX_image_view_handle", type = "device", postfix = "NVX") {
     documentation =
         """
         This extension allows applications to query an opaque handle from an image view for use as a sampled image or storage image. This provides no direct functionality itself.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_vertex_input_dynamic_state = "EXTVertexInputDynamicState".nativeClassVK("EXT_vertex_input_dynamic_state", type = "device", postfix = EXT) {
+val EXT_vertex_input_dynamic_state = "EXTVertexInputDynamicState".nativeClassVK("EXT_vertex_input_dynamic_state", type = "device", postfix = "EXT") {
     documentation =
         """
         One of the states that contributes to the combinatorial explosion of pipeline state objects that need to be created, is the vertex input binding and attribute descriptions. By allowing them to be dynamic applications may reduce the number of pipeline objects they need to create.

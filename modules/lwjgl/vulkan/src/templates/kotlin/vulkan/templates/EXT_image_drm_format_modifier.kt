@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("EXT_image_drm_format_modifier", type = "device", postfix = EXT) {
+val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("EXT_image_drm_format_modifier", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension provides the ability to use <em>DRM format modifiers</em> with images, enabling Vulkan to better integrate with the Linux ecosystem of graphics, video, and display APIs.

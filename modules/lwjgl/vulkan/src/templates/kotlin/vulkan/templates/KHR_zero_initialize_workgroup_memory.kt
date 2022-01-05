@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_zero_initialize_workgroup_memory = "KHRZeroInitializeWorkgroupMemory".nativeClassVK("KHR_zero_initialize_workgroup_memory", type = "device", postfix = KHR) {
+val KHR_zero_initialize_workgroup_memory = "KHRZeroInitializeWorkgroupMemory".nativeClassVK("KHR_zero_initialize_workgroup_memory", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension allows the use of a null constant initializer on shader Workgroup memory variables, allowing implementations to expose any special hardware or instructions they may have. Zero initialization is commonly used by applications running untrusted content (e.g. web browsers) as way of defeating memory-scraping attacks.

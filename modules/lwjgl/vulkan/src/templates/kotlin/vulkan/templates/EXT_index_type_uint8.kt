@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_index_type_uint8 = "EXTIndexTypeUint8".nativeClassVK("EXT_index_type_uint8", type = "device", postfix = EXT) {
+val EXT_index_type_uint8 = "EXTIndexTypeUint8".nativeClassVK("EXT_index_type_uint8", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows {@code uint8_t} indices to be used with #CmdBindIndexBuffer().

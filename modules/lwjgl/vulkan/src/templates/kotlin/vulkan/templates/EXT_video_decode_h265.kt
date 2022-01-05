@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_video_decode_h265 = "EXTVideoDecodeH265".nativeClassVK("EXT_video_decode_h265", type = "device", postfix = EXT) {
+val EXT_video_decode_h265 = "EXTVideoDecodeH265".nativeClassVK("EXT_video_decode_h265", type = "device", postfix = "EXT") {
     documentation =
         """
         <ul>

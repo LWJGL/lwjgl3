@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_16bit_storage = "KHR16bitStorage".nativeClassVK("KHR_16bit_storage", type = "device", postfix = KHR) {
+val KHR_16bit_storage = "KHR16bitStorage".nativeClassVK("KHR_16bit_storage", type = "device", postfix = "KHR") {
     documentation =
         """
         The {@code VK_KHR_16bit_storage} extension allows use of 16-bit types in shader input and output interfaces, and push constant blocks. This extension introduces several new optional features which map to SPIR-V capabilities and allow access to 16-bit data in {@code Block}-decorated objects in the {@code Uniform} and the {@code StorageBuffer} storage classes, and objects in the {@code PushConstant} storage class. This extension allows 16-bit variables to be declared and used as user-defined shader inputs and outputs but does not change location assignment and component assignment rules.

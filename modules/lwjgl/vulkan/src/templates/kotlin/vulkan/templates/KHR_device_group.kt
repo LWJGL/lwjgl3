@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type = "device", postfix = KHR) {
+val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension provides functionality to use a logical device that consists of multiple physical devices, as created with the {@link KHRDeviceGroupCreation VK_KHR_device_group_creation} extension. A device group can allocate memory across the subdevices, bind memory from one subdevice to a resource on another subdevice, record command buffers where some work executes on an arbitrary subset of the subdevices, and potentially present a swapchain image from one or more subdevices.

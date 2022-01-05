@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_linear_color_attachment = "NVLinearColorAttachment".nativeClassVK("NV_linear_color_attachment", type = "device", postfix = NV) {
+val NV_linear_color_attachment = "NVLinearColorAttachment".nativeClassVK("NV_linear_color_attachment", type = "device", postfix = "NV") {
     documentation =
         """
         This extension expands support for using #IMAGE_TILING_LINEAR images as color attachments when all the color attachments in the render pass instance have #IMAGE_TILING_LINEAR tiling. This extension adds a new flag bit #FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV that extends the existing {@code VkFormatFeatureFlagBits2KHR} bits. This flag <b>can</b> be set for renderable color formats in the ##VkFormatProperties3KHR{@code ::linearTilingFeatures} format properties structure member. Formats with the #FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV flag <b>may</b> be used as color attachments as long as all the color attachments in the render pass instance have #IMAGE_TILING_LINEAR tiling, and the formats their images views are created with have ##VkFormatProperties3KHR{@code ::linearTilingFeatures} which include #FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV. This extension supports both dynamic rendering and traditional render passes.

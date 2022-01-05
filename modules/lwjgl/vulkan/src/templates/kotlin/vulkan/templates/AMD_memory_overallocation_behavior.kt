@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_memory_overallocation_behavior = "AMDMemoryOverallocationBehavior".nativeClassVK("AMD_memory_overallocation_behavior", type = "device", postfix = AMD) {
+val AMD_memory_overallocation_behavior = "AMDMemoryOverallocationBehavior".nativeClassVK("AMD_memory_overallocation_behavior", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension allows controlling whether explicit overallocation beyond the device memory heap sizes (reported by ##VkPhysicalDeviceMemoryProperties) is allowed or not. Overallocation may lead to performance loss and is not supported for all platforms.

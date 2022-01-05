@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type = "device", postfix = KHR) {
+val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type = "device", postfix = "KHR") {
     documentation =
         """
         {@code VK_KHR_maintenance4} adds a collection of minor features, none of which would warrant an entire extension of their own.

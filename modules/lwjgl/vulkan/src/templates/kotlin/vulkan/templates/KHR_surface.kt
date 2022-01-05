@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", postfix = KHR) {
+val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", postfix = "KHR") {
     documentation =
         """
         The {@code VK_KHR_surface} extension is an instance extension. It introduces {@code VkSurfaceKHR} objects, which abstract native platform surface or window objects for use with Vulkan. It also provides a way to determine whether a queue family in a physical device supports presenting to particular surface.

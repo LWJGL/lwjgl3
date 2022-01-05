@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_shader_fragment_mask = "AMDShaderFragmentMask".nativeClassVK("AMD_shader_fragment_mask", type = "device", postfix = AMD) {
+val AMD_shader_fragment_mask = "AMDShaderFragmentMask".nativeClassVK("AMD_shader_fragment_mask", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension provides efficient read access to the fragment mask in compressed multisampled color surfaces. The fragment mask is a lookup table that associates color samples with color fragment values.

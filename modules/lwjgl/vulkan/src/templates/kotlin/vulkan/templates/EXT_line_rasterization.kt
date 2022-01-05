@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rasterization", type = "device", postfix = EXT) {
+val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rasterization", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds some line rasterization features that are commonly used in CAD applications and supported in other APIs like OpenGL. Bresenham-style line rasterization is supported, smooth rectangular lines (coverage to alpha) are supported, and stippled lines are supported for all three line rasterization modes.

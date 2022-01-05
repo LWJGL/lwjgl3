@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_fragment_density_map2 = "EXTFragmentDensityMap2".nativeClassVK("EXT_fragment_density_map2", type = "device", postfix = EXT) {
+val EXT_fragment_density_map2 = "EXTFragmentDensityMap2".nativeClassVK("EXT_fragment_density_map2", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds additional features and properties to {@link EXTFragmentDensityMap VK_EXT_fragment_density_map} in order to reduce fragment density map host latency as well as improved queries for subsampled sampler implementation-dependent behavior.

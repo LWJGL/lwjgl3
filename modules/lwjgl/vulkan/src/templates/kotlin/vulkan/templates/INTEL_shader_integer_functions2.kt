@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val INTEL_shader_integer_functions2 = "INTELShaderIntegerFunctions2".nativeClassVK("INTEL_shader_integer_functions2", type = "device", postfix = INTEL) {
+val INTEL_shader_integer_functions2 = "INTELShaderIntegerFunctions2".nativeClassVK("INTEL_shader_integer_functions2", type = "device", postfix = "INTEL") {
     documentation =
         """
         This extension adds support for several new integer instructions in SPIR-V for use in graphics shaders. Many of these instructions have pre-existing counterparts in the Kernel environment.

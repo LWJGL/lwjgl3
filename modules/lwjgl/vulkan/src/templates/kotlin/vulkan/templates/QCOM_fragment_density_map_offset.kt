@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val QCOM_fragment_density_map_offset = "QCOMFragmentDensityMapOffset".nativeClassVK("QCOM_fragment_density_map_offset", type = "device", postfix = QCOM) {
+val QCOM_fragment_density_map_offset = "QCOMFragmentDensityMapOffset".nativeClassVK("QCOM_fragment_density_map_offset", type = "device", postfix = "QCOM") {
     documentation =
         """
         This extension allows an application to specify offsets to a fragment density map attachment, changing the framebuffer location where density values are applied to without having to regenerate the fragment density map.

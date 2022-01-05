@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fence_fd", type = "device", postfix = KHR) {
+val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fence_fd", type = "device", postfix = "KHR") {
     documentation =
         """
         An application using external memory may wish to synchronize access to that memory using fences. This extension enables an application to export fence payload to and import fence payload from POSIX file descriptors.

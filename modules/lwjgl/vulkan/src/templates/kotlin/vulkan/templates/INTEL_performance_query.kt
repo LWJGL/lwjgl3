@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_performance_query", type = "device", postfix = INTEL) {
+val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_performance_query", type = "device", postfix = "INTEL") {
     documentation =
         """
         This extension allows an application to capture performance data to be interpreted by a external application or library.

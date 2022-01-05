@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasterization_order", type = "device", postfix = AMD) {
+val AMD_rasterization_order = "AMDRasterizationOrder".nativeClassVK("AMD_rasterization_order", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension introduces the possibility for the application to control the order of primitive rasterization. In unextended Vulkan, the following stages are guaranteed to execute in <em>API order</em>:

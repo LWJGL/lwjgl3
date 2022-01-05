@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_separate_stencil_usage = "EXTSeparateStencilUsage".nativeClassVK("EXT_separate_stencil_usage", type = "device", postfix = EXT) {
+val EXT_separate_stencil_usage = "EXTSeparateStencilUsage".nativeClassVK("EXT_separate_stencil_usage", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows specifying separate usage flags for the stencil aspect of images with a depth-stencil format at image creation time.

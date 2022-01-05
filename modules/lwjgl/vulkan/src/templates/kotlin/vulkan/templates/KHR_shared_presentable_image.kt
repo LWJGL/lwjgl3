@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KHR_shared_presentable_image", type = "device", postfix = KHR) {
+val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KHR_shared_presentable_image", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension extends {@link KHRSwapchain VK_KHR_swapchain} to enable creation of a shared presentable image. This allows the application to use the image while the presention engine is accessing it, in order to reduce the latency between rendering and presentation.

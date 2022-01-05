@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_scalar_block_layout = "EXTScalarBlockLayout".nativeClassVK("EXT_scalar_block_layout", type = "device", postfix = EXT) {
+val EXT_scalar_block_layout = "EXTScalarBlockLayout".nativeClassVK("EXT_scalar_block_layout", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension enables C-like structure layout for SPIR-V blocks. It modifies the alignment rules for uniform buffers, storage buffers and push constants, allowing non-scalar types to be aligned solely based on the size of their components, without additional requirements.

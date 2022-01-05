@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_format_feature_flags2 = "KHRFormatFeatureFlags2".nativeClassVK("KHR_format_feature_flags2", type = "device", postfix = KHR) {
+val KHR_format_feature_flags2 = "KHRFormatFeatureFlags2".nativeClassVK("KHR_format_feature_flags2", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension adds a new {@code VkFormatFeatureFlagBits2KHR} 64bits format feature flag type to extend the existing {@code VkFormatFeatureFlagBits} which is limited to 31 flags. At the time of this writing 29 bits of {@code VkFormatFeatureFlagBits} are already used.

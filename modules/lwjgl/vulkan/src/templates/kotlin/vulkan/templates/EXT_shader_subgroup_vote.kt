@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_shader_subgroup_vote = "EXTShaderSubgroupVote".nativeClassVK("EXT_shader_subgroup_vote", type = "device", postfix = EXT) {
+val EXT_shader_subgroup_vote = "EXTShaderSubgroupVote".nativeClassVK("EXT_shader_subgroup_vote", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds support for the following SPIR-V extension in Vulkan:

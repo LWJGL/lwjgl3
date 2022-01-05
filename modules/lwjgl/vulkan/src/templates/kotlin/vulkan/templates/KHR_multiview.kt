@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_multiview = "KHRMultiview".nativeClassVK("KHR_multiview", type = "device", postfix = KHR) {
+val KHR_multiview = "KHRMultiview".nativeClassVK("KHR_multiview", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension has the same goal as the OpenGL ES {@code GL_OVR_multiview} extension. Multiview is a rendering technique originally designed for VR where it is more efficient to record a single set of commands to be executed with slightly different behavior for each “{@code view}”.

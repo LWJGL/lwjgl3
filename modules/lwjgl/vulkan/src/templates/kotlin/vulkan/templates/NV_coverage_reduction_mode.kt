@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_coverage_reduction_mode", type = "device", postfix = NV) {
+val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_coverage_reduction_mode", type = "device", postfix = "NV") {
     documentation =
         """
         When using a framebuffer with mixed samples, a per-fragment coverage reduction operation is performed which generates color sample coverage from the pixel coverage. This extension defines the following modes to control how this reduction is performed.

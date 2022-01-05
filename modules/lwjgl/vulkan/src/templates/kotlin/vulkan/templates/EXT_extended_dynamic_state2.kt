@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_extended_dynamic_state2", type = "device", postfix = EXT) {
+val EXT_extended_dynamic_state2 = "EXTExtendedDynamicState2".nativeClassVK("EXT_extended_dynamic_state2", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds some more dynamic state to support applications that need to reduce the number of pipeline state objects they compile and bind.

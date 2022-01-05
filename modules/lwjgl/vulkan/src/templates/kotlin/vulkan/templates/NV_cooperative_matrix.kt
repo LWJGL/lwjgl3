@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_cooperative_matrix = "NVCooperativeMatrix".nativeClassVK("NV_cooperative_matrix", type = "device", postfix = NV) {
+val NV_cooperative_matrix = "NVCooperativeMatrix".nativeClassVK("NV_cooperative_matrix", type = "device", postfix = "NV") {
     documentation =
         """
         This extension adds support for using cooperative matrix types in SPIR-V. Cooperative matrix types are medium-sized matrices that are primarily supported in compute shaders, where the storage for the matrix is spread across all invocations in some scope (usually a subgroup) and those invocations cooperate to efficiently perform matrix multiplies.

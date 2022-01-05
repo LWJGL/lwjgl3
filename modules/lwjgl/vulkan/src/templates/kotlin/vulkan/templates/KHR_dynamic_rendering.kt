@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_dynamic_rendering = "KHRDynamicRendering".nativeClassVK("KHR_dynamic_rendering", type = "device", postfix = KHR) {
+val KHR_dynamic_rendering = "KHRDynamicRendering".nativeClassVK("KHR_dynamic_rendering", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension allows applications to create single-pass render pass instances without needing to create render pass objects or framebuffers. Dynamic render passes can also span across multiple primary command buffers, rather than relying on secondary command buffers.

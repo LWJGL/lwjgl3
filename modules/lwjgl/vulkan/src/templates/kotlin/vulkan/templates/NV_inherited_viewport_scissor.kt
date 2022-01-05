@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_inherited_viewport_scissor = "NVInheritedViewportScissor".nativeClassVK("NV_inherited_viewport_scissor", type = "device", postfix = NV) {
+val NV_inherited_viewport_scissor = "NVInheritedViewportScissor".nativeClassVK("NV_inherited_viewport_scissor", type = "device", postfix = "NV") {
     documentation =
         """
         This extension adds the ability for a secondary command buffer to inherit the dynamic viewport and scissor state from a primary command buffer, or a previous secondary command buffer executed within the same #CmdExecuteCommands() call. It addresses a frequent scenario in applications that deal with window resizing and want to improve utilization of re-usable secondary command buffers. The functionality is provided through ##VkCommandBufferInheritanceViewportScissorInfoNV. Viewport inheritance is effectively limited to the 2D rectangle; secondary command buffers must re-specify the inherited depth range values.

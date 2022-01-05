@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_descriptor_indexing = "EXTDescriptorIndexing".nativeClassVK("EXT_descriptor_indexing", type = "device", postfix = EXT) {
+val EXT_descriptor_indexing = "EXTDescriptorIndexing".nativeClassVK("EXT_descriptor_indexing", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds several small features which together enable applications to create large descriptor sets containing substantially all of their resources, and selecting amongst those resources with dynamic (non-uniform) indexes in the shader. There are feature enables and SPIR-V capabilities for non-uniform descriptor indexing in the shader, and non-uniform indexing in the shader requires use of a new {@code NonUniformEXT} decoration defined in the {@code SPV_EXT_descriptor_indexing} SPIR-V extension. There are descriptor set layout binding creation flags enabling several features:

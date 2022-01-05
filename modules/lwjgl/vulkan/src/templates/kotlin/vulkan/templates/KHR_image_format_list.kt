@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_image_format_list = "KHRImageFormatList".nativeClassVK("KHR_image_format_list", type = "device", postfix = KHR) {
+val KHR_image_format_list = "KHRImageFormatList".nativeClassVK("KHR_image_format_list", type = "device", postfix = "KHR") {
     documentation =
         """
         On some implementations, setting the #IMAGE_CREATE_MUTABLE_FORMAT_BIT on image creation can cause access to that image to perform worse than an equivalent image created without #IMAGE_CREATE_MUTABLE_FORMAT_BIT because the implementation does not know what view formats will be paired with the image.

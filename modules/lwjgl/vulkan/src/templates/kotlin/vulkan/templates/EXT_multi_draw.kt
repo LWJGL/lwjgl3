@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_multi_draw = "EXTMultiDraw".nativeClassVK("EXT_multi_draw", type = "device", postfix = EXT) {
+val EXT_multi_draw = "EXTMultiDraw".nativeClassVK("EXT_multi_draw", type = "device", postfix = "EXT") {
     documentation =
         """
         Processing multiple draw commands in sequence incurs measurable overhead within drivers due to repeated state checks and updates during dispatch. This extension enables passing the entire sequence of draws directly to the driver in order to avoid any such overhead, using an array of ##VkMultiDrawInfoEXT or ##VkMultiDrawIndexedInfoEXT structs with {@code vkCmdDrawMultiEXT} or {@code vkCmdDrawMultiIndexedEXT}, respectively. These functions could be used any time multiple draw commands are being recorded without any state changes between them in order to maximize performance.

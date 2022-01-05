@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_pageable_device_local_memory = "EXTPageableDeviceLocalMemory".nativeClassVK("EXT_pageable_device_local_memory", type = "device", postfix = EXT) {
+val EXT_pageable_device_local_memory = "EXTPageableDeviceLocalMemory".nativeClassVK("EXT_pageable_device_local_memory", type = "device", postfix = "EXT") {
     documentation =
         """
         Vulkan is frequently implemented on multi-user and multi-process operating systems where the device-local memory can be shared by more than one process. On such systems the size of the device-local memory available to the application may not be the full size of the memory heap at all times. In order for these operating systems to support multiple applications the device-local memory is virtualized and paging is used to move memory between device-local and host-local memory heaps, transparent to the application.

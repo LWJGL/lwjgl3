@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_provoking_vertex = "EXTProvokingVertex".nativeClassVK("EXT_provoking_vertex", type = "device", postfix = EXT) {
+val EXT_provoking_vertex = "EXTProvokingVertex".nativeClassVK("EXT_provoking_vertex", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows changing the provoking vertex convention between Vulkan’s default convention (first vertex) and OpenGL’s convention (last vertex).

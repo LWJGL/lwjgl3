@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invocation_mask", type = "device", postfix = HUAWEI) {
+val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invocation_mask", type = "device", postfix = "HUAWEI") {
     documentation =
         """
         The rays to trace may be sparse in some use cases. For example, the scene only have a few regions to reflect. Providing an invocation mask image to the ray tracing commands could potentially give the hardware the hint to do certain optimization without invoking an additional pass to compact the ray buffer.

@@ -6,10 +6,9 @@
 package vulkan.templates
 
 import org.lwjgl.generator.*
-import core.windows.*
 import vulkan.*
 
-val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full_screen_exclusive", type = "device", postfix = EXT) {
+val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full_screen_exclusive", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows applications to set the policy for swapchain creation and presentation mechanisms relating to full-screen access. Implementations may be able to acquire exclusive access to a particular display for an application window that covers the whole screen. This can increase performance on some systems by bypassing composition, however it can also result in disruptive or expensive transitions in the underlying windowing system when a change occurs.

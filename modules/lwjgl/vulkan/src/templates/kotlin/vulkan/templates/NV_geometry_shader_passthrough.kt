@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK("NV_geometry_shader_passthrough", type = "device", postfix = NV) {
+val NV_geometry_shader_passthrough = "NVGeometryShaderPassthrough".nativeClassVK("NV_geometry_shader_passthrough", type = "device", postfix = "NV") {
     documentation =
         """
         This extension adds support for the following SPIR-V extension in Vulkan:

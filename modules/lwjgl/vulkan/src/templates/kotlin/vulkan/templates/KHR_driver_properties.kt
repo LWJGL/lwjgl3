@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_driver_properties = "KHRDriverProperties".nativeClassVK("KHR_driver_properties", type = "device", postfix = KHR) {
+val KHR_driver_properties = "KHRDriverProperties".nativeClassVK("KHR_driver_properties", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension provides a new physical device query which allows retrieving information about the driver implementation, allowing applications to determine which physical device corresponds to which particular vendor’s driver, and which conformance test suite version the driver implementation is compliant with.

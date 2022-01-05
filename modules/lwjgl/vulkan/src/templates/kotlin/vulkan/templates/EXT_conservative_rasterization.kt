@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_conservative_rasterization = "EXTConservativeRasterization".nativeClassVK("EXT_conservative_rasterization", type = "device", postfix = EXT) {
+val EXT_conservative_rasterization = "EXTConservativeRasterization".nativeClassVK("EXT_conservative_rasterization", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds a new rasterization mode called conservative rasterization. There are two modes of conservative rasterization; overestimation and underestimation.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_pipeline_creation_cache_control = "EXTPipelineCreationCacheControl".nativeClassVK("EXT_pipeline_creation_cache_control", type = "device", postfix = EXT) {
+val EXT_pipeline_creation_cache_control = "EXTPipelineCreationCacheControl".nativeClassVK("EXT_pipeline_creation_cache_control", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds flags to stext:Vk*PipelineCreateInfo and ##VkPipelineCacheCreateInfo structures with the aim of improving the predictability of pipeline creation cost. The goal is to provide information about potentially expensive hazards within the client driver during pipeline creation to the application before carrying them out rather than after.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_present_id = "KHRPresentId".nativeClassVK("KHR_present_id", type = "device", postfix = KHR) {
+val KHR_present_id = "KHRPresentId".nativeClassVK("KHR_present_id", type = "device", postfix = "KHR") {
     documentation =
         """
         This device extension allows an application that uses the {@link KHRSwapchain VK_KHR_swapchain} extension to provide an identifier for present operations on a swapchain. An application <b>can</b> use this to reference specific present operations in other extensions.

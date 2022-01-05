@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_portability_subset = "KHRPortabilitySubset".nativeClassVK("KHR_portability_subset", type = "device", postfix = KHR) {
+val KHR_portability_subset = "KHRPortabilitySubset".nativeClassVK("KHR_portability_subset", type = "device", postfix = "KHR") {
     documentation =
         """
         The `VK_KHR_portability_subset extension allows a non-conformant Vulkan implementation to be built on top of another non-Vulkan graphics API, and identifies differences between that implementation and a fully-conformant native Vulkan implementation.

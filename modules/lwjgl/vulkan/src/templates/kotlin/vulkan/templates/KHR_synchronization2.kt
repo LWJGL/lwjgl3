@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronization2", type = "device", postfix = KHR) {
+val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronization2", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension modifies the original core synchronization APIs to simplify the interface and improve usability of these APIs. It also adds new pipeline stage and access flag types that extend into the 64-bit range, as we have run out within the 32-bit range. The new flags are identical to the old values within the 32-bit range, with new stages and bits beyond that.

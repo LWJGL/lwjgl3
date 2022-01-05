@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_color_write_enable = "EXTColorWriteEnable".nativeClassVK("EXT_color_write_enable", type = "device", postfix = EXT) {
+val EXT_color_write_enable = "EXTColorWriteEnable".nativeClassVK("EXT_color_write_enable", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows for selectively enabling and disabling writes to output color attachments via a pipeline dynamic state.

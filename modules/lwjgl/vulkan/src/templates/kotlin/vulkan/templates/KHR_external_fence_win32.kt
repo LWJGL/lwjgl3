@@ -9,7 +9,8 @@ import org.lwjgl.generator.*
 import core.windows.*
 import vulkan.*
 
-val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_external_fence_win32", type = "device", postfix = KHR) {
+val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_external_fence_win32", type = "device", postfix = "KHR") {
+    javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
         An application using external memory may wish to synchronize access to that memory using fences. This extension enables an application to export fence payload to and import fence payload from Windows handles.

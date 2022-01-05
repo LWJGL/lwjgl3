@@ -9,7 +9,8 @@ import org.lwjgl.generator.*
 import core.windows.*
 import vulkan.*
 
-val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KHR_external_semaphore_win32", type = "device", postfix = KHR) {
+val KHR_external_semaphore_win32 = "KHRExternalSemaphoreWin32".nativeClassVK("KHR_external_semaphore_win32", type = "device", postfix = "KHR") {
+    javaImport("org.lwjgl.system.windows.*")
     documentation =
         """
         An application using external memory may wish to synchronize access to that memory using semaphores. This extension enables an application to export semaphore payload to and import semaphore payload from Windows handles.

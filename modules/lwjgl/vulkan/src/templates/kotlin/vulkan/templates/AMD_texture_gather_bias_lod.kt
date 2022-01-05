@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_texture_gather_bias_lod", type = "device", postfix = AMD) {
+val AMD_texture_gather_bias_lod = "AMDTextureGatherBiasLod".nativeClassVK("AMD_texture_gather_bias_lod", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension adds two related features.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_filter_cubic = "EXTFilterCubic".nativeClassVK("EXT_filter_cubic", type = "device", postfix = EXT) {
+val EXT_filter_cubic = "EXTFilterCubic".nativeClassVK("EXT_filter_cubic", type = "device", postfix = "EXT") {
     documentation =
         """
         {@code VK_EXT_filter_cubic} extends {@code VK_IMG_filter_cubic}.

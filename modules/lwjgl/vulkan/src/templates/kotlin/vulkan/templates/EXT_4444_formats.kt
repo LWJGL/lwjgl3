@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_4444_formats = "EXT4444Formats".nativeClassVK("EXT_4444_formats", type = "device", postfix = EXT) {
+val EXT_4444_formats = "EXT4444Formats".nativeClassVK("EXT_4444_formats", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension defines the #FORMAT_A4R4G4B4_UNORM_PACK16_EXT and #FORMAT_A4B4G4R4_UNORM_PACK16_EXT formats which are defined in other current graphics APIs.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_post_depth_coverage = "EXTPostDepthCoverage".nativeClassVK("EXT_post_depth_coverage", type = "device", postfix = EXT) {
+val EXT_post_depth_coverage = "EXTPostDepthCoverage".nativeClassVK("EXT_post_depth_coverage", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds support for the following SPIR-V extension in Vulkan:

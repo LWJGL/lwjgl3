@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_calibrated_timestamps", type = "device", postfix = EXT) {
+val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_calibrated_timestamps", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension provides an interface to query calibrated timestamps obtained quasi simultaneously from two time domains.

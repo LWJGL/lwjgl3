@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_external_memory_rdma = "NVExternalMemoryRdma".nativeClassVK("NV_external_memory_rdma", type = "device", postfix = NV) {
+val NV_external_memory_rdma = "NVExternalMemoryRdma".nativeClassVK("NV_external_memory_rdma", type = "device", postfix = "NV") {
     documentation =
         """
         This extension adds support for allocating memory which can be used for remote direct memory access (RDMA) from other devices.

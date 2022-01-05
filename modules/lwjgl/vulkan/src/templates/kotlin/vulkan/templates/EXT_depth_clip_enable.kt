@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_depth_clip_enable = "EXTDepthClipEnable".nativeClassVK("EXT_depth_clip_enable", type = "device", postfix = EXT) {
+val EXT_depth_clip_enable = "EXTDepthClipEnable".nativeClassVK("EXT_depth_clip_enable", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows the depth clipping operation, that is normally implicitly controlled by ##VkPipelineRasterizationStateCreateInfo{@code ::depthClampEnable}, to instead be controlled explicitly by ##VkPipelineRasterizationDepthClipStateCreateInfoEXT{@code ::depthClipEnable}.

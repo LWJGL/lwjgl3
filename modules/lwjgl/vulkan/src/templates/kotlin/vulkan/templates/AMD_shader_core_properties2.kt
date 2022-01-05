@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_shader_core_properties2 = "AMDShaderCoreProperties2".nativeClassVK("AMD_shader_core_properties2", type = "device", postfix = AMD) {
+val AMD_shader_core_properties2 = "AMDShaderCoreProperties2".nativeClassVK("AMD_shader_core_properties2", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension exposes additional shader core properties for a target physical device through the {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} extension.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "device", postfix = AMD) {
+val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension adds a way to query certain information about a compiled shader which is part of a pipeline. This information may include shader disassembly, shader binary and various statistics about a shader’s resource usage.

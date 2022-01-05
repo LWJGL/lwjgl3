@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_load_store_op_none = "EXTLoadStoreOpNone".nativeClassVK("EXT_load_store_op_none", type = "device", postfix = EXT) {
+val EXT_load_store_op_none = "EXTLoadStoreOpNone".nativeClassVK("EXT_load_store_op_none", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension incorporates #ATTACHMENT_STORE_OP_NONE_EXT from {@link QCOMRenderPassStoreOps VK_QCOM_render_pass_store_ops}, enabling applications to avoid unnecessary synchronization when an attachment is not written during a render pass.

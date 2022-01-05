@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_spirv_1_4 = "KHRSpirv14".nativeClassVK("KHR_spirv_1_4", type = "device", postfix = KHR) {
+val KHR_spirv_1_4 = "KHRSpirv14".nativeClassVK("KHR_spirv_1_4", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension allows the use of SPIR-V 1.4 shader modules. SPIR-V 1.4’s new features primarily make it an easier target for compilers from high-level languages, rather than exposing new hardware functionality.

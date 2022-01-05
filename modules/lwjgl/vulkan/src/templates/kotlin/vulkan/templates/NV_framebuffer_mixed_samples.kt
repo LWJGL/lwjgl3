@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassVK("NV_framebuffer_mixed_samples", type = "device", postfix = NV) {
+val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassVK("NV_framebuffer_mixed_samples", type = "device", postfix = "NV") {
     documentation =
         """
         This extension allows multisample rendering with a raster and depth/stencil sample count that is larger than the color sample count. Rasterization and the results of the depth and stencil tests together determine the portion of a pixel that is “{@code covered}”. It can be useful to evaluate coverage at a higher frequency than color samples are stored. This coverage is then “{@code reduced}” to a collection of covered color samples, each having an opacity value corresponding to the fraction of the color sample covered. The opacity can optionally be blended into individual color samples.

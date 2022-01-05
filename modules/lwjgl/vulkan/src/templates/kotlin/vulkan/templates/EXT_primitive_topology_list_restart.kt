@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_primitive_topology_list_restart = "EXTPrimitiveTopologyListRestart".nativeClassVK("EXT_primitive_topology_list_restart", type = "device", postfix = EXT) {
+val EXT_primitive_topology_list_restart = "EXTPrimitiveTopologyListRestart".nativeClassVK("EXT_primitive_topology_list_restart", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows list primitives to use the primitive restart index value. This provides a more efficient implementation when layering OpenGL functionality on Vulkan by avoiding emulation which incurs data copies.

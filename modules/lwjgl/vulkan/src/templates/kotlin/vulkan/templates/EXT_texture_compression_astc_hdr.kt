@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_texture_compression_astc_hdr = "EXTTextureCompressionAstcHdr".nativeClassVK("EXT_texture_compression_astc_hdr", type = "device", postfix = EXT) {
+val EXT_texture_compression_astc_hdr = "EXTTextureCompressionAstcHdr".nativeClassVK("EXT_texture_compression_astc_hdr", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds support for textures compressed using the Adaptive Scalable Texture Compression (ASTC) High Dynamic Range (HDR) profile.

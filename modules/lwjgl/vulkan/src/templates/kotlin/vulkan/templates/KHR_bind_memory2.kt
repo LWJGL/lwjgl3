@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type = "device", postfix = KHR) {
+val KHR_bind_memory2 = "KHRBindMemory2".nativeClassVK("KHR_bind_memory2", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension provides versions of #BindBufferMemory() and #BindImageMemory() that allow multiple bindings to be performed at once, and are extensible.

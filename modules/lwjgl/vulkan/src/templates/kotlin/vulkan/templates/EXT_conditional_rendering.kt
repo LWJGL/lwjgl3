@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_conditional_rendering = "EXTConditionalRendering".nativeClassVK("EXT_conditional_rendering", type = "device", postfix = EXT) {
+val EXT_conditional_rendering = "EXTConditionalRendering".nativeClassVK("EXT_conditional_rendering", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows the execution of one or more rendering commands to be conditional on a value in buffer memory. This may help an application reduce the latency by conditionally discarding rendering commands without application intervention. The conditional rendering commands are limited to draws, compute dispatches and clearing attachments within a conditional rendering block.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_sampler_filter_minmax = "EXTSamplerFilterMinmax".nativeClassVK("EXT_sampler_filter_minmax", type = "device", postfix = EXT) {
+val EXT_sampler_filter_minmax = "EXTSamplerFilterMinmax".nativeClassVK("EXT_sampler_filter_minmax", type = "device", postfix = "EXT") {
     documentation =
         """
         In unextended Vulkan, minification and magnification filters such as LINEAR allow sampled image lookups to return a filtered texel value produced by computing a weighted average of a collection of texels in the neighborhood of the texture coordinate provided.

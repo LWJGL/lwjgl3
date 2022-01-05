@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_compute_shader_derivatives = "NVComputeShaderDerivatives".nativeClassVK("NV_compute_shader_derivatives", type = "device", postfix = NV) {
+val NV_compute_shader_derivatives = "NVComputeShaderDerivatives".nativeClassVK("NV_compute_shader_derivatives", type = "device", postfix = "NV") {
     documentation =
         """
         This extension adds Vulkan support for the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_compute_shader_derivatives.html">{@code SPV_NV_compute_shader_derivatives}</a> SPIR-V extension.

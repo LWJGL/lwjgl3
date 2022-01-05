@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_mesh_shader = "NVMeshShader".nativeClassVK("NV_mesh_shader", type = "device", postfix = NV) {
+val NV_mesh_shader = "NVMeshShader".nativeClassVK("NV_mesh_shader", type = "device", postfix = "NV") {
     documentation =
         """
         This extension provides a new mechanism allowing applications to generate collections of geometric primitives via programmable mesh shading. It is an alternative to the existing programmable primitive shading pipeline, which relied on generating input primitives by a fixed function assembler as well as fixed function vertex fetch.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_shader_image_atomic_int64 = "EXTShaderImageAtomicInt64".nativeClassVK("EXT_shader_image_atomic_int64", type = "device", postfix = EXT) {
+val EXT_shader_image_atomic_int64 = "EXTShaderImageAtomicInt64".nativeClassVK("EXT_shader_image_atomic_int64", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension extends existing 64-bit integer atomic support to enable these operations on images as well.

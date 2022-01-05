@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val ARM_rasterization_order_attachment_access = "ARMRasterizationOrderAttachmentAccess".nativeClassVK("ARM_rasterization_order_attachment_access", type = "device", postfix = ARM) {
+val ARM_rasterization_order_attachment_access = "ARMRasterizationOrderAttachmentAccess".nativeClassVK("ARM_rasterization_order_attachment_access", type = "device", postfix = "ARM") {
     documentation =
         """
         Renderpasses, and specifically <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-barriers-subpass-self-dependencies">subpass self-dependencies</a> enable much of the same functionality as the framebuffer fetch and pixel local storage extensions did for OpenGL ES. But certain techniques such as programmable blending are awkward or impractical to implement with these alone, in part because a self-dependency is required every time a fragment will read a value at a given sample coordinate.

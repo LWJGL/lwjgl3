@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_device_generated_commands = "NVDeviceGeneratedCommands".nativeClassVK("NV_device_generated_commands", type = "device", postfix = NV) {
+val NV_device_generated_commands = "NVDeviceGeneratedCommands".nativeClassVK("NV_device_generated_commands", type = "device", postfix = "NV") {
     documentation =
         """
         This extension allows the device to generate a number of critical graphics commands for command buffers.

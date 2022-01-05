@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locations", type = "device", postfix = EXT) {
+val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locations", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows an application to modify the locations of samples within a pixel used in rasterization. Additionally, it allows applications to specify different sample locations for each pixel in a group of adjacent pixels, which <b>can</b> increase antialiasing quality (particularly if a custom resolve shader is used that takes advantage of these different locations).

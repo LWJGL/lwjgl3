@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_border_color_swizzle = "EXTBorderColorSwizzle".nativeClassVK("EXT_border_color_swizzle", type = "device", postfix = EXT) {
+val EXT_border_color_swizzle = "EXTBorderColorSwizzle".nativeClassVK("EXT_border_color_swizzle", type = "device", postfix = "EXT") {
     documentation =
         """
         After the publication of VK_EXT_custom_border_color, it was discovered that some implementations had undefined behavior when combining a sampler that uses a custom border color with image views whose component mapping is not the identity mapping.

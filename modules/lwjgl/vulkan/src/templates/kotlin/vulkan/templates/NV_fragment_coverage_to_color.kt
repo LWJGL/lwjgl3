@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_fragment_coverage_to_color = "NVFragmentCoverageToColor".nativeClassVK("NV_fragment_coverage_to_color", type = "device", postfix = NV) {
+val NV_fragment_coverage_to_color = "NVFragmentCoverageToColor".nativeClassVK("NV_fragment_coverage_to_color", type = "device", postfix = "NV") {
     documentation =
         """
         This extension allows the fragment coverage value, represented as an integer bitmask, to be substituted for a color output being written to a single-component color attachment with integer components (e.g. #FORMAT_R8_UINT). The functionality provided by this extension is different from simply writing the {@code SampleMask} fragment shader output, in that the coverage value written to the framebuffer is taken after stencil test and depth test, as well as after fragment operations such as alpha-to-coverage.

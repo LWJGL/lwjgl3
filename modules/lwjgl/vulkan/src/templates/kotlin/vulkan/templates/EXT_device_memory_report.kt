@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_device_memory_report = "EXTDeviceMemoryReport".nativeClassVK("EXT_device_memory_report", type = "device", postfix = EXT) {
+val EXT_device_memory_report = "EXTDeviceMemoryReport".nativeClassVK("EXT_device_memory_report", type = "device", postfix = "EXT") {
     documentation =
         """
         This device extension allows registration of device memory event callbacks upon device creation, so that applications or middleware can obtain detailed information about memory usage and how memory is associated with Vulkan objects. This extension exposes the actual underlying device memory usage, including allocations that are not normally visible to the application, such as memory consumed by #CreateGraphicsPipelines(). It is intended primarily for use by debug tooling rather than for production applications.

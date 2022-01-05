@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_fragment_shading_rate", type = "device", postfix = KHR) {
+val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_fragment_shading_rate", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension adds the ability to change the rate at which fragments are shaded. Rather than the usual single fragment invocation for each pixel covered by a primitive, multiple pixels can be shaded by a single fragment shader invocation.

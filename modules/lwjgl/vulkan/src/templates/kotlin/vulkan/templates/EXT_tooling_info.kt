@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_tooling_info = "EXTToolingInfo".nativeClassVK("EXT_tooling_info", type = "device", postfix = EXT) {
+val EXT_tooling_info = "EXTToolingInfo".nativeClassVK("EXT_tooling_info", type = "device", postfix = "EXT") {
     documentation =
         """
         When an error occurs during application development, a common question is "What tools are actually running right now?" This extension adds the ability to query that information directly from the Vulkan implementation.

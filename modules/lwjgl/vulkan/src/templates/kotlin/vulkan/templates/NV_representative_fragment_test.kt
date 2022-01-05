@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_representative_fragment_test = "NVRepresentativeFragmentTest".nativeClassVK("NV_representative_fragment_test", type = "device", postfix = NV) {
+val NV_representative_fragment_test = "NVRepresentativeFragmentTest".nativeClassVK("NV_representative_fragment_test", type = "device", postfix = "NV") {
     documentation =
         """
         This extension provides a new representative fragment test that allows implementations to reduce the amount of rasterization and fragment processing work performed for each point, line, or triangle primitive. For any primitive that produces one or more fragments that pass all other early fragment tests, the implementation is permitted to choose one or more “{@code representative}” fragments for processing and discard all other fragments. For draw calls rendering multiple points, lines, or triangles arranged in lists, strips, or fans, the representative fragment test is performed independently for each of those primitives.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_workgroup_memory_explicit_layout = "KHRWorkgroupMemoryExplicitLayout".nativeClassVK("KHR_workgroup_memory_explicit_layout", type = "device", postfix = KHR) {
+val KHR_workgroup_memory_explicit_layout = "KHRWorkgroupMemoryExplicitLayout".nativeClassVK("KHR_workgroup_memory_explicit_layout", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension adds Vulkan support for the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_workgroup_memory_explicit_layout.html">{@code SPV_KHR_workgroup_memory_explicit_layout}</a> SPIR-V extension, which allows shaders to explicitly define the layout of {@code Workgroup} storage class memory and create aliases between variables from that storage class in a compute shader.

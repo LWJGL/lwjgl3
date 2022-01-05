@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_custom_border_color = "EXTCustomBorderColor".nativeClassVK("EXT_custom_border_color", type = "device", postfix = EXT) {
+val EXT_custom_border_color = "EXTCustomBorderColor".nativeClassVK("EXT_custom_border_color", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension provides cross-vendor functionality to specify a custom border color for use when the sampler address mode #SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER is used.

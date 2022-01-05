@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_shader_image_footprint = "NVShaderImageFootprint".nativeClassVK("NV_shader_image_footprint", type = "device", postfix = NV) {
+val NV_shader_image_footprint = "NVShaderImageFootprint".nativeClassVK("NV_shader_image_footprint", type = "device", postfix = "NV") {
     documentation =
         """
         This extension adds Vulkan support for the <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/NV/SPV_NV_shader_image_footprint.html">{@code SPV_NV_shader_image_footprint}</a> SPIR-V extension. That SPIR-V extension provides a new instruction {@code OpImageSampleFootprintNV} allowing shaders to determine the set of texels that would be accessed by an equivalent filtered texture lookup.

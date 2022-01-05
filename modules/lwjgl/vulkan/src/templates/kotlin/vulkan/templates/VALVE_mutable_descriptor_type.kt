@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val VALVE_mutable_descriptor_type = "VALVEMutableDescriptorType".nativeClassVK("VALVE_mutable_descriptor_type", type = "device", postfix = VALVE) {
+val VALVE_mutable_descriptor_type = "VALVEMutableDescriptorType".nativeClassVK("VALVE_mutable_descriptor_type", type = "device", postfix = "VALVE") {
     documentation =
         """
         This extension allows applications to reduce descriptor memory footprint by allowing a descriptor to be able to mutate to a given list of descriptor types depending on which descriptor types are written into, or copied into a descriptor set.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_fragment_shader_interlock = "EXTFragmentShaderInterlock".nativeClassVK("EXT_fragment_shader_interlock", type = "device", postfix = EXT) {
+val EXT_fragment_shader_interlock = "EXTFragmentShaderInterlock".nativeClassVK("EXT_fragment_shader_interlock", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds support for the {@code FragmentShaderPixelInterlockEXT}, {@code FragmentShaderSampleInterlockEXT}, and {@code FragmentShaderShadingRateInterlockEXT} capabilities from the {@code SPV_EXT_fragment_shader_interlock} extension to Vulkan.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_external_memory = "NVExternalMemory".nativeClassVK("NV_external_memory", type = "device", postfix = NV) {
+val NV_external_memory = "NVExternalMemory".nativeClassVK("NV_external_memory", type = "device", postfix = "NV") {
     documentation =
         """
         Applications may wish to export memory to other Vulkan instances or other APIs, or import memory from other Vulkan instances or other APIs to enable Vulkan workloads to be split up across application module, process, or API boundaries. This extension enables applications to create exportable Vulkan memory objects such that the underlying resources can be referenced outside the Vulkan instance that created them.

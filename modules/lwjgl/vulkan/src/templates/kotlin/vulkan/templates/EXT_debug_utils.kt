@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "instance", postfix = EXT) {
+val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "instance", postfix = "EXT") {
     documentation =
         """
         Due to the nature of the Vulkan interface, there is very little error information available to the developer and application. By using the {@code VK_EXT_debug_utils} extension, developers <b>can</b> obtain more information. When combined with validation layers, even more detailed feedback on the application’s use of Vulkan will be provided.

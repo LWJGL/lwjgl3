@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_variable_pointers = "KHRVariablePointers".nativeClassVK("KHR_variable_pointers", type = "device", postfix = KHR) {
+val KHR_variable_pointers = "KHRVariablePointers".nativeClassVK("KHR_variable_pointers", type = "device", postfix = "KHR") {
     documentation =
         """
         The {@code VK_KHR_variable_pointers} extension allows implementations to indicate their level of support for the {@code SPV_KHR_variable_pointers} SPIR-V extension. The SPIR-V extension allows shader modules to use invocation-private pointers into uniform and/or storage buffers, where the pointer values can be dynamic and non-uniform.

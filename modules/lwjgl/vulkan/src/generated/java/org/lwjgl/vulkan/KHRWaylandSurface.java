@@ -15,6 +15,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+import org.lwjgl.system.linux.*;
+
 /**
  * The {@code VK_KHR_wayland_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) that refers to a Wayland {@code wl_surface}, as well as a query to determine support for rendering to a Wayland compositor.
  * 

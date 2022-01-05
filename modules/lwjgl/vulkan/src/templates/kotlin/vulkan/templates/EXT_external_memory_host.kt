@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_external_memory_host", type = "device", postfix = EXT) {
+val EXT_external_memory_host = "EXTExternalMemoryHost".nativeClassVK("EXT_external_memory_host", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension enables an application to import host allocations and host mapped foreign device memory to Vulkan memory objects.

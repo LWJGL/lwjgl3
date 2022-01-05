@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_depth_stencil_resolve = "KHRDepthStencilResolve".nativeClassVK("KHR_depth_stencil_resolve", type = "device", postfix = KHR) {
+val KHR_depth_stencil_resolve = "KHRDepthStencilResolve".nativeClassVK("KHR_depth_stencil_resolve", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension adds support for automatically resolving multisampled depth/stencil attachments in a subpass in a similar manner as for color attachments.

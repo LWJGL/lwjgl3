@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_cache", type = "device", postfix = EXT) {
+val EXT_validation_cache = "EXTValidationCache".nativeClassVK("EXT_validation_cache", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension provides a mechanism for caching the results of potentially expensive internal validation operations across multiple runs of a Vulkan application. At the core is the {@code VkValidationCacheEXT} object type, which is managed similarly to the existing {@code VkPipelineCache}.

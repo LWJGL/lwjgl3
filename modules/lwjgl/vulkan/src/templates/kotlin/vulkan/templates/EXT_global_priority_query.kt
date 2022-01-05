@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_global_priority_query = "EXTGlobalPriorityQuery".nativeClassVK("EXT_global_priority_query", type = "device", postfix = EXT) {
+val EXT_global_priority_query = "EXTGlobalPriorityQuery".nativeClassVK("EXT_global_priority_query", type = "device", postfix = "EXT") {
     documentation =
         """
         This device extension allows applications to query the global queue priorities supported by a queue family. It allows implementations to report which global priority levels are treated differently by the implementation, instead of silently mapping multiple requested global priority levels to the same internal priority, or using device creation failure to signal that a requested priority is not supported. It is intended primarily for use by system integration along with certain platform-specific priority enforcement rules.

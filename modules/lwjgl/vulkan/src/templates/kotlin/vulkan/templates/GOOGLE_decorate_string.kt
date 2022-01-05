@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val GOOGLE_decorate_string = "GOOGLEDecorateString".nativeClassVK("GOOGLE_decorate_string", type = "device", postfix = GOOGLE) {
+val GOOGLE_decorate_string = "GOOGLEDecorateString".nativeClassVK("GOOGLE_decorate_string", type = "device", postfix = "GOOGLE") {
     documentation =
         """
         The {@code VK_GOOGLE_decorate_string} extension allows use of the {@code SPV_GOOGLE_decorate_string} extension in SPIR-V shader modules.

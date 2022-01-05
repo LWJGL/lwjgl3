@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validation_features", type = "instance", postfix = EXT) {
+val EXT_validation_features = "EXTValidationFeatures".nativeClassVK("EXT_validation_features", type = "instance", postfix = "EXT") {
     documentation =
         """
         This extension provides the ##VkValidationFeaturesEXT struct that can be included in the {@code pNext} chain of the ##VkInstanceCreateInfo structure passed as the {@code pCreateInfo} parameter of #CreateInstance(). The structure contains an array of {@code VkValidationFeatureEnableEXT} enum values that enable specific validation features that are disabled by default. The structure also contains an array of {@code VkValidationFeatureDisableEXT} enum values that disable specific validation layer features that are enabled by default.

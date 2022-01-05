@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_shader_stencil_export = "EXTShaderStencilExport".nativeClassVK("EXT_shader_stencil_export", type = "device", postfix = EXT) {
+val EXT_shader_stencil_export = "EXTShaderStencilExport".nativeClassVK("EXT_shader_stencil_export", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds support for the SPIR-V extension {@code SPV_EXT_shader_stencil_export}, providing a mechanism whereby a shader may generate the stencil reference value per invocation. When stencil testing is enabled, this allows the test to be performed against the value generated in the shader.

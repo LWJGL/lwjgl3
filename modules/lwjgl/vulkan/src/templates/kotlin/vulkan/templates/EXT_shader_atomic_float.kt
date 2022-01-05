@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_shader_atomic_float = "EXTShaderAtomicFloat".nativeClassVK("EXT_shader_atomic_float", type = "device", postfix = EXT) {
+val EXT_shader_atomic_float = "EXTShaderAtomicFloat".nativeClassVK("EXT_shader_atomic_float", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows a shader to contain floating-point atomic operations on buffer, workgroup, and image memory. It also advertises the SPIR-V {@code AtomicFloat32AddEXT} and {@code AtomicFloat64AddEXT} capabilities that allows atomic addition on floating-points numbers. The supported operations include {@code OpAtomicFAddEXT}, {@code OpAtomicExchange}, {@code OpAtomicLoad} and {@code OpAtomicStore}.

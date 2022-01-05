@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_8bit_storage = "KHR8bitStorage".nativeClassVK("KHR_8bit_storage", type = "device", postfix = KHR) {
+val KHR_8bit_storage = "KHR8bitStorage".nativeClassVK("KHR_8bit_storage", type = "device", postfix = "KHR") {
     documentation =
         """
         The {@code VK_KHR_8bit_storage} extension allows use of 8-bit types in uniform and storage buffers, and push constant blocks. This extension introduces several new optional features which map to SPIR-V capabilities and allow access to 8-bit data in {@code Block}-decorated objects in the {@code Uniform} and the {@code StorageBuffer} storage classes, and objects in the {@code PushConstant} storage class.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", postfix = KHR) {
+val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", postfix = "KHR") {
     documentation =
         """
         This extension provides the API to enumerate displays and available modes on a given device.

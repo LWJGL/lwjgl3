@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_image_view_min_lod = "EXTImageViewMinLod".nativeClassVK("EXT_image_view_min_lod", type = "device", postfix = EXT) {
+val EXT_image_view_min_lod = "EXTImageViewMinLod".nativeClassVK("EXT_image_view_min_lod", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows applications to clamp the minimum LOD value during <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-image-level-selection">Image Level(s) Selection</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#textures-integer-coordinate-operations">Integer Texel Coordinate Operations</a> with a given {@code VkImageView} by ##VkImageViewMinLodCreateInfoEXT{@code ::minLod}.

@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_shader_atomic_float2 = "EXTShaderAtomicFloat2".nativeClassVK("EXT_shader_atomic_float2", type = "device", postfix = EXT) {
+val EXT_shader_atomic_float2 = "EXTShaderAtomicFloat2".nativeClassVK("EXT_shader_atomic_float2", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension allows a shader to perform 16-bit floating-point atomic operations on buffer and workgroup memory as well as floating-point atomic minimum and maximum operations on buffer, workgroup, and image memory. It advertises the SPIR-V {@code AtomicFloat16AddEXT} capability which allows atomic add operations on 16-bit floating-point numbers and the SPIR-V {@code AtomicFloat16MinMaxEXT}, {@code AtomicFloat32MinMaxEXT} and {@code AtomicFloat64MinMaxEXT} capabilities which allow atomic minimum and maximum operations on floating-point numbers. The supported operations include {@code OpAtomicFAddEXT}, {@code OpAtomicFMinEXT} and {@code OpAtomicFMaxEXT}.

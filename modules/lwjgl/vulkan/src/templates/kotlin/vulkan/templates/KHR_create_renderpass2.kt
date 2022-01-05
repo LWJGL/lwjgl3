@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_renderpass2", type = "device", postfix = KHR) {
+val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_renderpass2", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension provides a new entry point to create render passes in a way that can be easily extended by other extensions through the substructures of render pass creation. The Vulkan 1.0 render pass creation sub-structures do not include {@code sType}/{@code pNext} members. Additionally, the render pass begin/next/end commands have been augmented with new extensible structures for passing additional subpass information.

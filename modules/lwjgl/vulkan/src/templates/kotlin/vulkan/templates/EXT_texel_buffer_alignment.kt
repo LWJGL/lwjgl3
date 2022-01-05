@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_texel_buffer_alignment = "EXTTexelBufferAlignment".nativeClassVK("EXT_texel_buffer_alignment", type = "device", postfix = EXT) {
+val EXT_texel_buffer_alignment = "EXTTexelBufferAlignment".nativeClassVK("EXT_texel_buffer_alignment", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds more expressive alignment requirements for uniform and storage texel buffers. Some implementations have single texel alignment requirements that cannot be expressed via ##VkPhysicalDeviceLimits{@code ::minTexelBufferOffsetAlignment}.

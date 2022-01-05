@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance_query", type = "device", postfix = KHR) {
+val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance_query", type = "device", postfix = "KHR") {
     documentation =
         """
         The {@code VK_KHR_performance_query} extension adds a mechanism to allow querying of performance counters for use in applications and by profiling tools.

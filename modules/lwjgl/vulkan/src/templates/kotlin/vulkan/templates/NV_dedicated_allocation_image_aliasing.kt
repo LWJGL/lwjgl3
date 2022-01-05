@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val NV_dedicated_allocation_image_aliasing = "NVDedicatedAllocationImageAliasing".nativeClassVK("NV_dedicated_allocation_image_aliasing", type = "device", postfix = NV) {
+val NV_dedicated_allocation_image_aliasing = "NVDedicatedAllocationImageAliasing".nativeClassVK("NV_dedicated_allocation_image_aliasing", type = "device", postfix = "NV") {
     documentation =
         """
         This extension allows applications to alias images on dedicated allocations, subject to specific restrictions: the extent and the number of layers in the image being aliased must be smaller than or equal to those of the original image for which the allocation was created, and every other image parameter must match.

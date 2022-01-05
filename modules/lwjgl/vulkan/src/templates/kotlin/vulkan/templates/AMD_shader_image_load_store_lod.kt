@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_shader_image_load_store_lod = "AMDShaderImageLoadStoreLod".nativeClassVK("AMD_shader_image_load_store_lod", type = "device", postfix = AMD) {
+val AMD_shader_image_load_store_lod = "AMDShaderImageLoadStoreLod".nativeClassVK("AMD_shader_image_load_store_lod", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension adds support for the following SPIR-V extension in Vulkan:

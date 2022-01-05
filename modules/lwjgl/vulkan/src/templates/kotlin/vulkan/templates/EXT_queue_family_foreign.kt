@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_family_foreign", type = "device", postfix = EXT) {
+val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_family_foreign", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension defines a special queue family, #QUEUE_FAMILY_FOREIGN_EXT, which can be used to transfer ownership of resources backed by external memory to foreign, external queues. This is similar to #QUEUE_FAMILY_EXTERNAL_KHR, defined in {@link KHRExternalMemory VK_KHR_external_memory}. The key differences between the two are:

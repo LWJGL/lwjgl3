@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val QCOM_render_pass_shader_resolve = "QCOMRenderPassShaderResolve".nativeClassVK("QCOM_render_pass_shader_resolve", type = "device", postfix = QCOM) {
+val QCOM_render_pass_shader_resolve = "QCOMRenderPassShaderResolve".nativeClassVK("QCOM_render_pass_shader_resolve", type = "device", postfix = "QCOM") {
     documentation =
         """
         This extension allows a shader resolve to replace fixed-function resolve.

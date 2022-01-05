@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_memory_priority = "EXTMemoryPriority".nativeClassVK("EXT_memory_priority", type = "device", postfix = EXT) {
+val EXT_memory_priority = "EXTMemoryPriority".nativeClassVK("EXT_memory_priority", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds a {@code priority} value specified at memory allocation time. On some systems with both device-local and non-device-local memory heaps, the implementation may transparently move memory from one heap to another when a heap becomes full (for example, when the total memory used across all processes exceeds the size of the heap). In such a case, this priority value may be used to determine which allocations are more likely to remain in device-local memory.

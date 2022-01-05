@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_pipeline_creation_feedback = "EXTPipelineCreationFeedback".nativeClassVK("EXT_pipeline_creation_feedback", type = "device", postfix = EXT) {
+val EXT_pipeline_creation_feedback = "EXTPipelineCreationFeedback".nativeClassVK("EXT_pipeline_creation_feedback", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension adds a mechanism to provide feedback to an application about pipeline creation, with the specific goal of allowing a feedback loop between build systems and in-the-field application executions to ensure effective pipeline caches are shipped to customers.

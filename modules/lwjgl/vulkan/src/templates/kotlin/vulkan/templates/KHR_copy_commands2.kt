@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", type = "device", postfix = KHR) {
+val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension provides extensible versions of the Vulkan buffer and image copy commands. The new commands are functionally identical to the core commands, except that their copy parameters are specified using extensible structures that can be used to pass extension-specific information.

@@ -420,8 +420,4 @@ fun templateCustomization() {
     NV_ray_tracing.apply {
         MultiType(PointerMapping.DATA_LONG)..this["GetAccelerationStructureHandleNV"].getParam("pData")
     }
-
-    VkQueueFamilyGlobalPriorityPropertiesEXT.definition.apply {
-        javaImport("static org.lwjgl.vulkan.EXTGlobalPriorityQuery.*")
-    }
 }

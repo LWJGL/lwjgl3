@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_storage_buffer_storage_class = "KHRStorageBufferStorageClass".nativeClassVK("KHR_storage_buffer_storage_class", type = "device", postfix = KHR) {
+val KHR_storage_buffer_storage_class = "KHRStorageBufferStorageClass".nativeClassVK("KHR_storage_buffer_storage_class", type = "device", postfix = "KHR") {
     documentation =
         """
         This extension adds support for the following SPIR-V extension in Vulkan:

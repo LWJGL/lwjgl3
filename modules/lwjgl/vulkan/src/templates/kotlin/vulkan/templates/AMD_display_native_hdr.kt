@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val AMD_display_native_hdr = "AMDDisplayNativeHdr".nativeClassVK("AMD_display_native_hdr", type = "device", postfix = AMD) {
+val AMD_display_native_hdr = "AMDDisplayNativeHdr".nativeClassVK("AMD_display_native_hdr", type = "device", postfix = "AMD") {
     documentation =
         """
         This extension introduces the following display native HDR features to Vulkan:

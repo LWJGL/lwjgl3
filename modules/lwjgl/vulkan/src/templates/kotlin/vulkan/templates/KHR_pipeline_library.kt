@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_pipeline_library = "KHRPipelineLibrary".nativeClassVK("KHR_pipeline_library", type = "device", postfix = KHR) {
+val KHR_pipeline_library = "KHRPipelineLibrary".nativeClassVK("KHR_pipeline_library", type = "device", postfix = "KHR") {
     documentation =
         """
         A pipeline library is a special pipeline that cannot be bound, instead it defines a set of shaders and shader groups which can be linked into other pipelines. This extension defines the infrastructure for pipeline libraries, but does not specify the creation or usage of pipeline libraries. This is left to additional dependent extensions.

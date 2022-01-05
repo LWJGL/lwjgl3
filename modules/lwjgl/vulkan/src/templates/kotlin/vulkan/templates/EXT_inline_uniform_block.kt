@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_inline_uniform_block = "EXTInlineUniformBlock".nativeClassVK("EXT_inline_uniform_block", type = "device", postfix = EXT) {
+val EXT_inline_uniform_block = "EXTInlineUniformBlock".nativeClassVK("EXT_inline_uniform_block", type = "device", postfix = "EXT") {
     documentation =
         """
         This extension introduces the ability to back uniform blocks directly with descriptor sets by storing inline uniform data within descriptor pool storage. Compared to push constants this new construct allows uniform data to be reused across multiple disjoint sets of drawing or dispatching commands and <b>may</b> enable uniform data to be accessed with fewer indirections compared to uniforms backed by buffer memory.

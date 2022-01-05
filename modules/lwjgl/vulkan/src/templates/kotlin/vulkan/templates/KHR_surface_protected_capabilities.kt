@@ -8,7 +8,7 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val KHR_surface_protected_capabilities = "KHRSurfaceProtectedCapabilities".nativeClassVK("KHR_surface_protected_capabilities", type = "instance", postfix = KHR) {
+val KHR_surface_protected_capabilities = "KHRSurfaceProtectedCapabilities".nativeClassVK("KHR_surface_protected_capabilities", type = "instance", postfix = "KHR") {
     documentation =
         """
         This extension extends ##VkSurfaceCapabilities2KHR, providing applications a way to query whether swapchains <b>can</b> be created with the #SWAPCHAIN_CREATE_PROTECTED_BIT_KHR flag set.
