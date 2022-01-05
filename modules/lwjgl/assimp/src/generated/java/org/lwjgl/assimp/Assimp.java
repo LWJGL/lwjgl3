@@ -5234,7 +5234,7 @@ public class Assimp {
         if (CHECKS) {
             checkNT1(pKey);
             checkSafe(pMax, 1);
-            check(pOut, pMax.get(pMax.position()));
+            if (pMax != null) { check(pOut, pMax.get(pMax.position())); }
         }
         return naiGetMaterialFloatArray(pMat.address(), memAddress(pKey), type, index, memAddress(pOut), memAddressSafe(pMax));
     }
@@ -5255,7 +5255,7 @@ public class Assimp {
     public static int aiGetMaterialFloatArray(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") CharSequence pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("float *") FloatBuffer pOut, @Nullable @NativeType("unsigned int *") IntBuffer pMax) {
         if (CHECKS) {
             checkSafe(pMax, 1);
-            check(pOut, pMax.get(pMax.position()));
+            if (pMax != null) { check(pOut, pMax.get(pMax.position())); }
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -5299,7 +5299,7 @@ public class Assimp {
         if (CHECKS) {
             checkNT1(pKey);
             checkSafe(pMax, 1);
-            check(pOut, pMax.get(pMax.position()));
+            if (pMax != null) { check(pOut, pMax.get(pMax.position())); }
         }
         return naiGetMaterialIntegerArray(pMat.address(), memAddress(pKey), type, index, memAddress(pOut), memAddressSafe(pMax));
     }
@@ -5320,7 +5320,7 @@ public class Assimp {
     public static int aiGetMaterialIntegerArray(@NativeType("struct aiMaterial const *") AIMaterial pMat, @NativeType("char const *") CharSequence pKey, @NativeType("unsigned int") int type, @NativeType("unsigned int") int index, @NativeType("int *") IntBuffer pOut, @Nullable @NativeType("unsigned int *") IntBuffer pMax) {
         if (CHECKS) {
             checkSafe(pMax, 1);
-            check(pOut, pMax.get(pMax.position()));
+            if (pMax != null) { check(pOut, pMax.get(pMax.position())); }
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -5682,7 +5682,7 @@ public class Assimp {
         if (CHECKS) {
             checkNT1(pKey);
             checkSafe(pMax, 1);
-            check(pOut, pMax[0]);
+            if (pMax != null) { check(pOut, pMax[0]); }
             AIMaterial.validate(pMat.address());
         }
         return invokePPPPI(pMat.address(), memAddress(pKey), type, index, pOut, pMax, __functionAddress);
@@ -5694,7 +5694,7 @@ public class Assimp {
         long __functionAddress = Functions.GetMaterialFloatArray;
         if (CHECKS) {
             checkSafe(pMax, 1);
-            check(pOut, pMax[0]);
+            if (pMax != null) { check(pOut, pMax[0]); }
             AIMaterial.validate(pMat.address());
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -5714,7 +5714,7 @@ public class Assimp {
         if (CHECKS) {
             checkNT1(pKey);
             checkSafe(pMax, 1);
-            check(pOut, pMax[0]);
+            if (pMax != null) { check(pOut, pMax[0]); }
             AIMaterial.validate(pMat.address());
         }
         return invokePPPPI(pMat.address(), memAddress(pKey), type, index, pOut, pMax, __functionAddress);
@@ -5726,7 +5726,7 @@ public class Assimp {
         long __functionAddress = Functions.GetMaterialIntegerArray;
         if (CHECKS) {
             checkSafe(pMax, 1);
-            check(pOut, pMax[0]);
+            if (pMax != null) { check(pOut, pMax[0]); }
             AIMaterial.validate(pMat.address());
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();

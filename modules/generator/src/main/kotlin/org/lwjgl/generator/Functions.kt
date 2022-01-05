@@ -500,11 +500,19 @@ class Func(
                     } else if (autoSize.factor != null)
                         expression = autoSize.factor.scaleInv(expression)
 
-                    sequenceOf(autoSize.reference, *autoSize.dependent).forEach { reference ->
-                        val bufferParam = paramMap[reference]!!
-                        Safe = if (bufferParam.has<Nullable>()) "Safe" else ""
-                        checks.add("check$Safe($reference, $expression);")
-                    }
+                    sequenceOf(autoSize.reference, *autoSize.dependent)
+                        .map { reference ->
+                            val bufferParam = paramMap[reference]!!
+                            Safe = if (bufferParam.has<Nullable>()) "Safe" else ""
+                            "check$Safe($reference, $expression);"
+                        }
+                        .let { expressions ->
+                            if (it.has<Nullable>()) {
+                                checks.add("if (${it.name} != null) { ${expressions.joinToString(" ")} }")
+                            } else {
+                                checks.addAll(expressions)
+                            }
+                        }
                 }
 
                 if (mode !== NORMAL) {
