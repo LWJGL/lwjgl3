@@ -374,6 +374,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return MemoryUtil.wrap(BUFFER_BYTE, ncalloc(1, size, 1), size).order(NATIVE_ORDER);
     }
 
+    /** Unsafe version of {@link #bytes(byte)}. */
+    public long nbyte(byte value) {
+        long a = nmalloc(1, 1);
+        memPutByte(a, value);
+        return a;
+    }
     /** Single value version of {@link #malloc}. */
     public ByteBuffer bytes(byte x) { return malloc(1).put(0, x); }
     /** Two value version of {@link #malloc}. */
@@ -401,6 +407,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return MemoryUtil.wrap(BUFFER_SHORT, address, size);
     }
 
+    /** Unsafe version of {@link #shorts(short)}. */
+    public long nshort(short value) {
+        long a = nmalloc(2, 2);
+        memPutShort(a, value);
+        return a;
+    }
     /** Single value version of {@link #mallocShort}. */
     public ShortBuffer shorts(short x) { return mallocShort(1).put(0, x); }
     /** Two value version of {@link #mallocShort}. */
@@ -428,6 +440,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return MemoryUtil.wrap(BUFFER_INT, address, size);
     }
 
+    /** Unsafe version of {@link #ints(int)}. */
+    public long nint(int value) {
+        long a = nmalloc(4, 4);
+        memPutInt(a, value);
+        return a;
+    }
     /** Single value version of {@link #mallocInt}. */
     public IntBuffer ints(int x) { return mallocInt(1).put(0, x); }
     /** Two value version of {@link #mallocInt}. */
@@ -455,6 +473,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return MemoryUtil.wrap(BUFFER_LONG, address, size);
     }
 
+    /** Unsafe version of {@link #longs(long)}. */
+    public long nlong(long value) {
+        long a = nmalloc(8, 8);
+        memPutLong(a, value);
+        return a;
+    }
     /** Single value version of {@link #mallocLong}. */
     public LongBuffer longs(long x) { return mallocLong(1).put(0, x); }
     /** Two value version of {@link #mallocLong}. */
@@ -482,6 +506,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return wrap(CLongBuffer.class, address, size);
     }
 
+    /** Unsafe version of {@link #clongs(long)}. */
+    public long nclong(long value) {
+        long a = nmalloc(CLONG_SIZE, CLONG_SIZE);
+        memPutCLong(a, value);
+        return a;
+    }
     /** Single value version of {@link #mallocCLong}. */
     public CLongBuffer clongs(long x) { return mallocCLong(1).put(0, x); }
     /** Two value version of {@link #mallocCLong}. */
@@ -509,6 +539,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return MemoryUtil.wrap(BUFFER_FLOAT, address, size);
     }
 
+    /** Unsafe version of {@link #floats(float)}. */
+    public long nfloat(float value) {
+        long a = nmalloc(4, 4);
+        memPutFloat(a, value);
+        return a;
+    }
     /** Single value version of {@link #mallocFloat}. */
     public FloatBuffer floats(float x) { return mallocFloat(1).put(0, x); }
     /** Two value version of {@link #mallocFloat}. */
@@ -536,6 +572,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return MemoryUtil.wrap(BUFFER_DOUBLE, address, size);
     }
 
+    /** Unsafe version of {@link #doubles(double)}. */
+    public long ndouble(double value) {
+        long a = nmalloc(8, 8);
+        memPutDouble(a, value);
+        return a;
+    }
     /** Single value version of {@link #mallocDouble}. */
     public DoubleBuffer doubles(double x) { return mallocDouble(1).put(0, x); }
     /** Two value version of {@link #mallocDouble}. */
@@ -563,6 +605,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return wrap(PointerBuffer.class, address, size);
     }
 
+    /** Unsafe version of {@link #pointers(long)}. */
+    public long npointer(long value) {
+        long a = nmalloc(POINTER_SIZE, POINTER_SIZE);
+        memPutAddress(a, value);
+        return a;
+    }
     /** Single value version of {@link #mallocPointer}. */
     public PointerBuffer pointers(long x) { return mallocPointer(1).put(0, x); }
     /** Two value version of {@link #mallocPointer}. */
@@ -578,6 +626,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return buffer;
     }
 
+    /** Unsafe version of {@link #pointers(Pointer)}. */
+    public long npointer(Pointer value) {
+        long a = nmalloc(POINTER_SIZE, POINTER_SIZE);
+        memPutAddress(a, value.address());
+        return a;
+    }
     /** Single value version of {@link #mallocPointer}. */
     public PointerBuffer pointers(Pointer x) { return mallocPointer(1).put(0, x); }
     /** Two value version of {@link #mallocPointer}. */
@@ -595,6 +649,12 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return buffer;
     }
 
+    /** Unsafe version of {@link #pointers(Buffer)}. */
+    public long npointer(Buffer value) {
+        long a = nmalloc(POINTER_SIZE, POINTER_SIZE);
+        memPutAddress(a, memAddress(value));
+        return a;
+    }
     /** Single value version of {@link #mallocPointer}. */
     public PointerBuffer pointers(Buffer x) {
         return mallocPointer(1)

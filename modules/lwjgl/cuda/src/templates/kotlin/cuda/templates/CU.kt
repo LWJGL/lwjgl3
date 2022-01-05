@@ -8,11 +8,7 @@ import cuda.*
 import org.lwjgl.generator.*
 
 val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) {
-    javaImport(
-        "org.lwjgl.system.libffi.*",
-        "static org.lwjgl.cuda.CUDA.*",
-        "static org.lwjgl.system.libffi.LibFFI.*"
-    )
+    javaImport("static org.lwjgl.cuda.CUDA.*")
 
     documentation =
         """
@@ -53,7 +49,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "CTX_MAP_HOST".enum(
             """
             This flag was deprecated as of CUDA 11.0 and it no longer has any effect.
-            
+
             All contexts as of CUDA 3.2 behave as though the flag is enabled.
             """,
             0x08
@@ -105,7 +101,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "EVENT_RECORD_EXTERNAL".enum(
             """
             When using stream capture, create an event record node instead of the default behavior.
-             
+
             This flag is invalid when used outside of capture.
             """
         )
@@ -118,7 +114,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "EVENT_WAIT_EXTERNAL".enum(
             """
             When using stream capture, create an event wait node instead of the default behavior.
-            
+
             This flag is invalid when used outside of capture.
             """
         )
@@ -756,7 +752,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "JIT_LTO".enum(
             """
             Enable link-time optimization (-dlto) for device code (0: false, default)
-            
+
             Option type: {@code int}. Applies to: compiler and linker
             """
         ),
@@ -767,7 +763,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
                 "1 : flushes denormal values to zero",
                 "0 : preserves denormal values"
             )} 
-            
+
             Option type: {@code int}. Applies to: link-time optimization specified with #JIT_LTO
             """
         ),
@@ -778,7 +774,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
                 "1 : Enables the IEEE round-to-nearest mode",
                 "0 : Enables the fast approximation mode"
             )}
-            
+
             Option type: {@code int}. Applies to: link-time optimization specified with #JIT_LTO
             """
         ),
@@ -797,7 +793,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
             """
             Enable/Disable the contraction of floating-point multiplies and adds/subtracts into floating-point multiply-add (-fma) operations (1: Enable,
             default; 0: Disable).
-            
+
             Option type: {@code int}. Applies to: link-time optimization specified with #JIT_LTO
             """
         ),
@@ -805,7 +801,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
             """
             Enable/Disable the contraction of floating-point multiplies and adds/subtracts into floating-point multiply-add (-fma) operations (1: Enable,
             default; 0: Disable).
-            
+
             Option type: {@code int}. Applies to: link-time optimization specified with #JIT_LTO
             """
         )
@@ -894,7 +890,7 @@ val CU = "CU".nativeClass(Module.CUDA, prefix = "CU", binding = NVCUDA_BINDING) 
         "JIT_INPUT_NVVM".enum(
             """
             High-level intermediate code for link-time optimization. 
- 
+
             Applicable options: NVVM compiler options, PTX compiler options
             """
         ),
@@ -1046,7 +1042,7 @@ EnumConstant(
         "CUDA_SUCCESS".enum(
             """
             The API call returned with no errors.
-            
+
             In the case of query calls, this also means that the operation being queried is complete (see #EventQuery() and #StreamQuery()).
             """,
             "0"
@@ -1402,7 +1398,7 @@ EnumConstant(
         "MEMHOSTREGISTER_READ_ONLY".enum(
             """
             If set, the passed memory pointer is treated as pointing to memory that is considered read-only by the device.
-            
+
             On platforms without #DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS_USES_HOST_PAGE_TABLES, this flag is required in order to register memory mapped to
             the CPU as read-only. Support for the use of this flag can be queried from the device attribute
             #DEVICE_ATTRIBUTE_READ_ONLY_HOST_REGISTER_SUPPORTED. Using this flag with a current context associated with a device that does not have this
@@ -1643,7 +1639,7 @@ EnumConstant(
             """
             Allow #MemAllocAsync() to use memory asynchronously freed in another streams as long as a stream ordering dependency of the allocating stream on
             the free action exists. Cuda events and null stream interactions can create the required stream ordered dependencies.
-            
+
             (value type = {@code int}, default enabled)
             """,
             "1"
@@ -1655,17 +1651,17 @@ EnumConstant(
             """
             Allow #MemAllocAsync() to insert new stream dependencies in order to establish the stream ordering required to reuse a piece of memory released by
             #MemFreeAsync().
-            
+
             (value type = {@code int}, default enabled).
             """
         ),
         "MEMPOOL_ATTR_RELEASE_THRESHOLD".enum(
             """
             Amount of reserved memory in bytes to hold onto before trying to release memory back to the OS.
-            
+
             When more than the release threshold bytes of memory are held by the memory pool, the allocator will try to release memory back to the OS on the
             next call to stream, event or context synchronize.
-            
+
             (value type = {@code cuuint64_t}, default 0)
             """
         ),
@@ -1673,7 +1669,7 @@ EnumConstant(
         "MEMPOOL_ATTR_RESERVED_MEM_HIGH".enum(
             """
             High watermark of backing memory allocated for the {@code mempool} since the last time it was reset. High watermark can only be reset to zero.
-            
+
             (value type = {@code cuuint64_t})
             """
         ),
@@ -1682,7 +1678,7 @@ EnumConstant(
             """
             High watermark of the amount of memory from the pool that was in use by the application since the last time it was reset. High watermark can only
             be reset to zero.
-            
+
             (value type = {@code cuuint64_t})
             """
         )
@@ -1695,7 +1691,7 @@ EnumConstant(
         "GRAPH_MEM_ATTR_USED_MEM_HIGH".enum(
             """
             High watermark of memory, in bytes, associated with graphs since the last time it was reset. High watermark can only be reset to zero.
-            
+
             (value type = {@code cuuint64_t}) 
             """
         ),
@@ -2149,7 +2145,7 @@ EnumConstant(
         "DeviceGetProperties",
         """
         Returns properties for a selected device.
-        
+
         Deprecated: This function was deprecated as of CUDA 5.0 and replaced by #DeviceGetAttribute().
 
         Returns in {@code *prop} the properties of device {@code dev}.
@@ -2163,7 +2159,7 @@ EnumConstant(
         "DeviceComputeCapability",
         """
         Returns the compute capability of the device.
-        
+
         Deprecated: This function was deprecated as of CUDA 5.0 and its functionality superceded by #DeviceGetAttribute().
 
         Returns in {@code *major} and {@code *minor} the major and minor revision numbers that define the compute capability of the device {@code dev}.
@@ -2232,7 +2228,7 @@ EnumConstant(
             "#CTX_SCHED_BLOCKING_SYNC: Instruct CUDA to block the CPU thread on a synchronization primitive when waiting for the GPU to finish work.",
             """
             #CTX_BLOCKING_SYNC: Instruct CUDA to block the CPU thread on a synchronization primitive when waiting for the GPU to finish work.
-            
+
             <b> Deprecated:</b> This flag was deprecated as of CUDA 4.0 and was replaced with #CTX_SCHED_BLOCKING_SYNC.
             """,
             """
@@ -2245,7 +2241,7 @@ EnumConstant(
             """
             #CTX_LMEM_RESIZE_TO_MAX: Instruct CUDA to not reduce local memory after resizing local memory for a kernel. This can prevent thrashing by local
             memory allocations when launching many kernels with high local memory usage at the cost of potentially increased memory usage.
-            
+
             <b> Deprecated:</b> This flag is deprecated and the behavior enabled by this flag is now the default and cannot be disabled.
             """
         )}
@@ -2326,7 +2322,7 @@ EnumConstant(
             "#CTX_SCHED_BLOCKING_SYNC: Instruct CUDA to block the CPU thread on a synchronization primitive when waiting for the GPU to finish work.",
             """
             #CTX_BLOCKING_SYNC: Instruct CUDA to block the CPU thread on a synchronization primitive when waiting for the GPU to finish work.
-            
+
             <b> Deprecated:</b> This flag was deprecated as of CUDA 4.0 and was replaced with #CTX_SCHED_BLOCKING_SYNC.
             """,
             """
@@ -2343,7 +2339,7 @@ EnumConstant(
             """
             #CTX_LMEM_RESIZE_TO_MAX: Instruct CUDA to not reduce local memory after resizing local memory for a kernel. This can prevent thrashing by local
             memory allocations when launching many kernels with high local memory usage at the cost of potentially increased memory usage.
-            
+
             <b> Deprecated:</b> This flag is deprecated and the behavior enabled by this flag is now the default and cannot be disabled. Instead, the
             per-thread stack size can be controlled with #CtxSetLimit().
             """
@@ -2395,7 +2391,7 @@ EnumConstant(
             "#CTX_SCHED_BLOCKING_SYNC: Instruct CUDA to block the CPU thread on a synchronization primitive when waiting for the GPU to finish work.",
             """
             #CTX_BLOCKING_SYNC: Instruct CUDA to block the CPU thread on a synchronization primitive when waiting for the GPU to finish work.
-            
+
             <b> Deprecated:</b> This flag was deprecated as of CUDA 4.0 and was replaced with #CTX_SCHED_BLOCKING_SYNC.
             """,
             """
@@ -2412,7 +2408,7 @@ EnumConstant(
             """
             #CTX_LMEM_RESIZE_TO_MAX: Instruct CUDA to not reduce local memory after resizing local memory for a kernel. This can prevent thrashing by local
             memory allocations when launching many kernels with high local memory usage at the cost of potentially increased memory usage.
-            
+
             <b> Deprecated:</b> This flag is deprecated and the behavior enabled by this flag is now the default and cannot be disabled. Instead, the
             per-thread stack size can be controlled with #CtxSetLimit().
             """
@@ -2745,7 +2741,7 @@ EnumConstant(
         "CtxAttach",
         """
         Increment a context's usage-count.
-        
+
         Deprecated: Note that this function is deprecated and should not be used.
 
         Increments the usage count of the context and passes back a context handle in {@code *pctx} that must be passed to #CtxDetach() when the application
@@ -2762,7 +2758,7 @@ EnumConstant(
         "CtxDetach",
         """
         Decrement a context's usage-count
-        
+
         Deprecated: Note that this function is deprecated and should not be used.
 
         Decrements the usage count of the context {@code ctx}, and destroys the context if the usage count goes to 0. The context must be a handle that was
@@ -3324,62 +3320,23 @@ EnumConstant(
         CUevent("event", "event allocated with #EVENT_INTERPROCESS and #EVENT_DISABLE_TIMING flags")
     )
 
-    // struct passed by value
-    IgnoreMissing..private..NativeName("cuIpcOpenEventHandle")..CUresult("IpcOpenEventHandle\$Address", "", void())
-    customMethod("""
-    // --- [ cuIpcOpenEventHandle ] ---
+    IgnoreMissing..CUresult(
+        "IpcOpenEventHandle",
+        """
+        Opens an interprocess event handle for use in the current process.
 
-    private static final FFICIF IpcOpenEventHandleCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(apiCreateArray(ffi_type_schar, 64))
-    );
+        Opens an interprocess event handle exported from another process with #IpcGetEventHandle(). This function returns a {@code CUevent} that behaves like a
+        locally created event with the #EVENT_DISABLE_TIMING flag specified. This event must be freed with #EventDestroy().
 
-    /** Unsafe version of: {@link #cuIpcOpenEventHandle IpcOpenEventHandle} */
-    public static int ncuIpcOpenEventHandle(long phEvent, long handle) {
-        long __functionAddress = Functions.IpcOpenEventHandle${"$"}Address;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            long __result = stack.nmalloc(4);        
-        
-            long values = stack.nmalloc(8, POINTER_SIZE + 8);
-            memPutAddress(values, phEvent);
-            memPutLong(values + POINTER_SIZE, handle);
-            
-            long arguments = stack.nmalloc(POINTER_SIZE,POINTER_SIZE * 2);
-            memPutAddress(arguments, values);
-            memPutAddress(arguments + POINTER_SIZE, values + POINTER_SIZE);
+        Performing operations on the imported event after the exported event has been freed with {@code cuEventDestroy} will result in undefined behavior.
 
-            nffi_call(IpcOpenEventHandleCIF.address(), __functionAddress, __result, arguments);
-            return memGetInt(__result);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
+        IPC functionality is restricted to devices with support for unified addressing on Linux and Windows operating systems. IPC functionality on Windows is
+        restricted to GPUs in TCC mode.
+        """,
 
-    /**
-     * Opens an interprocess event handle for use in the current process.
-     * 
-     * <p>Opens an interprocess event handle exported from another process with {@link #cuIpcGetEventHandle IpcGetEventHandle}. This function returns a {@code CUevent} that behaves like a
-     * locally created event with the {@link #CU_EVENT_DISABLE_TIMING EVENT_DISABLE_TIMING} flag specified. This event must be freed with {@link #cuEventDestroy EventDestroy}.</p>
-     * 
-     * <p>Performing operations on the imported event after the exported event has been freed with {@link #cuEventDestroy EventDestroy} will result in undefined behavior.</p>
-     * 
-     * <p>IPC functionality is restricted to devices with support for unified addressing on Linux and Windows operating systems. IPC functionality on Windows is
-     * restricted to GPUs in TCC mode.</p>
-     *
-     * @param phEvent returns the imported event
-     * @param handle  interprocess handle to open
-     */
-    @NativeType("CUresult")
-    public static int cuIpcOpenEventHandle(@NativeType("CUevent *") PointerBuffer phEvent, @NativeType("CUipcEventHandle") CUIPCEventHandle handle) {
-        if (CHECKS) {
-            check(phEvent, 1);
-        }
-        return ncuIpcOpenEventHandle(memAddress(phEvent), handle.address());
-    }""")
+        Check(1)..CUevent.p("phEvent", "returns the imported event"),
+        CUipcEventHandle("handle", "interprocess handle to open")
+    )
 
     IgnoreMissing..CUresult(
         "IpcGetMemHandle",
@@ -3400,79 +3357,37 @@ EnumConstant(
         CUdeviceptr("dptr", "base pointer to previously allocated device memory")
     )
 
-    // struct passed by value
-    IgnoreMissing..private..NativeName("__CUDA_API_VERSION(\"cuIpcOpenMemHandle\", 2)")..CUresult("IpcOpenMemHandle\$Address", "", void())
-    customMethod("""
-    // --- [ cuIpcOpenMemHandle ] ---
+    IgnoreMissing..CUresult(
+        "IpcOpenMemHandle",
+        """
+        Opens an interprocess memory handle exported from another process and returns a device pointer usable in the local process.
 
-    private static final FFICIF IpcOpenMemHandleCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(apiCreateArray(ffi_type_schar, 64)), ffi_type_uint32
-    );
+        Maps memory exported from another process with #IpcGetMemHandle() into the current device address space. For contexts on different devices
+        {@code cuIpcOpenMemHandle} can attempt to enable peer access between the devices as if the user called #CtxEnablePeerAccess(). This behavior is
+        controlled by the #IPC_MEM_LAZY_ENABLE_PEER_ACCESS flag. #DeviceCanAccessPeer() can determine if a mapping is possible.
 
-    /** Unsafe version of: {@link #cuIpcOpenMemHandle IpcIpcOpenMemHandle} */
-    public static int ncuIpcOpenMemHandle(long pdptr, long handle, int Flags) {
-        long __functionAddress = Functions.IpcOpenEventHandle${"$"}Address;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            long __result = stack.nmalloc(4);        
-        
-            long values = stack.nmalloc(8, POINTER_SIZE + 8 + 4);
-            memPutAddress(values, pdptr);
-            memPutLong(values + POINTER_SIZE, handle);
-            memPutInt(values + POINTER_SIZE + 8, Flags);
-            
-            long arguments = stack.nmalloc(POINTER_SIZE,POINTER_SIZE * 3);
-            memPutAddress(arguments, values);
-            memPutAddress(arguments + POINTER_SIZE, values + POINTER_SIZE);
-            memPutAddress(arguments + POINTER_SIZE * 2, values + POINTER_SIZE + 8);
+        Contexts that may open ##CUIPCMemHandle are restricted in the following way. {@code CUipcMemHandle}s from each {@code CUdevice} in a given process may
+        only be opened by one {@code CUcontext} per {@code CUdevice} per other process.
 
-            nffi_call(IpcOpenMemHandleCIF.address(), __functionAddress, __result, arguments);
-            return memGetInt(__result);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
+        If the memory handle has already been opened by the current context, the reference count on the handle is incremented by 1 and the existing device
+        pointer is returned.
 
-    /**
-     * Opens an interprocess memory handle exported from another process and returns a device pointer usable in the local process.
-     * 
-     * <p>Maps memory exported from another process with {@link #cuIpcGetMemHandle IpcGetMemHandle} into the current device address space. For contexts on different devices
-     * {@code cuIpcOpenMemHandle} can attempt to enable peer access between the devices as if the user called {@link #cuCtxEnablePeerAccess CtxEnablePeerAccess}. This behavior is controlled
-     * by the {@link #CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS IPC_MEM_LAZY_ENABLE_PEER_ACCESS} flag. {@link #cuDeviceCanAccessPeer DeviceCanAccessPeer} can determine if a mapping is possible.</p>
-     * 
-     * <p>Contexts that may open {@link CUIPCMemHandle}s are restricted in the following way. {@code CUipcMemHandles} from each {@code CUdevice} in a given process may
-     * only be opened by one {@code CUcontext} per {@code CUdevice} per other process.</p>
-     * 
-     * <p>If the memory handle has already been opened by the current context, the reference count on the handle is incremented by 1 and the existing device
-     * pointer is returned.</p>
-     * 
-     * <p>Memory returned from {@code cuIpcOpenMemHandle} must be freed with {@link #cuIpcCloseMemHandle IpcCloseMemHandle}.</p>
-     * 
-     * <p>Calling {@link #cuMemFree MemFree} on an exported memory region before calling {@link #cuIpcCloseMemHandle IpcCloseMemHandle} in the importing context will result in undefined behavior.</p>
-     * 
-     * <p>IPC functionality is restricted to devices with support for unified addressing on Linux and Windows operating systems. IPC functionality on Windows is
-     * restricted to GPUs in TCC mode</p>
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>No guarantees are made about the address returned in {@code *pdptr}. In particular, multiple processes may not receive the same address for
-     * the same {@code handle}.</p></div>
-     *
-     * @param pdptr  returned device pointer
-     * @param handle {@code CUipcMemHandle} to open
-     * @param Flags  flags for this operation. Must be specified as {@link #CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS IPC_MEM_LAZY_ENABLE_PEER_ACCESS}
-     */
-    @NativeType("CUresult")
-    public static int cuIpcOpenMemHandle(@NativeType("CUdeviceptr *") PointerBuffer pdptr, @NativeType("CUipcMemHandle") CUIPCMemHandle handle, @NativeType("unsigned int") int Flags) {
-        if (CHECKS) {
-            check(pdptr, 1);
-        }
-        return ncuIpcOpenMemHandle(memAddress(pdptr), handle.address(), Flags);
-    }""")
+        Memory returned from {@code cuIpcOpenMemHandle} must be freed with #IpcCloseMemHandle().
+
+        Calling #MemFree() on an exported memory region before calling {@code cuIpcCloseMemHandle} in the importing context will result in undefined behavior.
+
+        IPC functionality is restricted to devices with support for unified addressing on Linux and Windows operating systems. IPC functionality on Windows is
+        restricted to GPUs in TCC mode.
+
+        ${note("""
+        No guarantees are made about the address returned in {@code *pdptr}. In particular, multiple processes may not receive the same address for the same
+        {@code handle}.""")}
+        """,
+
+        Check(1)..CUdeviceptr.p("pdptr", "returned device pointer"),
+        CUipcMemHandle("handle", "{@code CUipcMemHandle} to open"),
+        unsigned_int("Flags", "flags for this operation. Must be specified as #IPC_MEM_LAZY_ENABLE_PEER_ACCESS.")
+    ).versioned()
 
     IgnoreMissing..CUresult(
         "IpcCloseMemHandle",
@@ -3698,7 +3613,7 @@ EnumConstant(
         Copies memory for 2D arrays.
 
         Perform a 2D memory copy according to the parameters specified in {@code pCopy}.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_UNIFIED, {@code srcDevice} and {@code srcPitch} specify the (unified virtual address space) base address of the
         source data and the bytes per row to apply. {@code srcArray} is ignored. This value may be used only if unified addressing is supported in the calling
         context.
@@ -3734,7 +3649,7 @@ voidStart = (void*)((char*)srcHost+srcY*srcPitch + srcXInBytes);""")}
          For device pointers, the starting address is
         ${codeBlock("""
 CUdeviceptr Start = srcDevice+srcY*srcPitch+srcXInBytes;""")}
- 
+
         For CUDA arrays, {@code srcXInBytes} must be evenly divisible by the array element size.
 
         {@code dstXInBytes} and {@code dstY} specify the base address of the destination data for the copy.
@@ -3742,7 +3657,7 @@ CUdeviceptr Start = srcDevice+srcY*srcPitch+srcXInBytes;""")}
         For host pointers, the base address is
         ${codeBlock("""
 voiddstStart = (void*)((char*)dstHost+dstY*dstPitch + dstXInBytes);""")}
- 
+
         For device pointers, the starting address is
         ${codeBlock("""
 CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
@@ -3769,62 +3684,62 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
         Copies memory for 2D arrays.
 
         Perform a 2D memory copy according to the parameters specified in {@code pCopy}.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_UNIFIED, {@code srcDevice} and {@code srcPitch} specify the (unified virtual address space) base address of the
         source data and the bytes per row to apply. {@code srcArray} is ignored. This value may be used only if unified addressing is supported in the calling
         context.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_HOST, {@code srcHost} and {@code srcPitch} specify the (host) base address of the source data and the bytes per
         row to apply. {@code srcArray} is ignored.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_DEVICE, {@code srcDevice} and {@code srcPitch} specify the (device) base address of the source data and the
         bytes per row to apply. {@code srcArray} is ignored.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_ARRAY, {@code srcArray} specifies the handle of the source data. {@code srcHost}, {@code srcDevice} and
         {@code srcPitch} are ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_UNIFIED, {@code dstDevice} and {@code dstPitch} specify the (unified virtual address space) base address of the
         source data and the bytes per row to apply. {@code dstArray} is ignored. This value may be used only if unified addressing is supported in the calling
         context.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_HOST, {@code dstHost} and {@code dstPitch} specify the (host) base address of the destination data and the
         bytes per row to apply. {@code dstArray} is ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_DEVICE, {@code dstDevice} and {@code dstPitch} specify the (device) base address of the destination data and
         the bytes per row to apply. {@code dstArray} is ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_ARRAY, {@code dstArray} specifies the handle of the destination data. {@code dstHost}, {@code dstDevice} and
         {@code dstPitch} are ignored.
 
         {@code srcXInBytes} and {@code srcY} specify the base address of the source data for the copy.
-        
+
         For host pointers, the starting address is
         ${codeBlock("""
   void* Start = (void*)((char*)srcHost+srcY*srcPitch + srcXInBytes);""")}
-  
+
         For device pointers, the starting address is
         ${codeBlock("""
   CUdeviceptr Start = srcDevice+srcY*srcPitch+srcXInBytes;""")}
-  
+
         For CUDA arrays, {@code srcXInBytes} must be evenly divisible by the array element size.
 
         {@code dstXInBytes} and {@code dstY} specify the base address of the destination data for the copy.
-        
+
         For host pointers, the base address is
         ${codeBlock("""
   void* dstStart = (void*)((char*)dstHost+dstY*dstPitch + dstXInBytes);""")}
-  
+
         For device pointers, the starting address is
         ${codeBlock("""
   CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
-  
+
         For CUDA arrays, {@code dstXInBytes} must be evenly divisible by the array element size.
 
         {@code WidthInBytes} and {@code Height} specify the width (in bytes) and height of the 2D copy being performed.
-        
+
         If specified, {@code srcPitch} must be greater than or equal to {@code WidthInBytes} + {@code srcXInBytes}, and {@code dstPitch} must be greater than
         or equal to {@code WidthInBytes} + {@code dstXInBytes}.
-        
+
         #Memcpy2D() returns an error if any pitch is greater than the maximum allowed (#DEVICE_ATTRIBUTE_MAX_PITCH). #MemAllocPitch() passes back pitches that
         always work with {@code cuMemcpy2D()}. On intra-device memory copies (device to device, CUDA array to device, CUDA array to CUDA array),
         {@code cuMemcpy2D()} may fail for pitches not computed by {@code cuMemAllocPitch()}. {@code cuMemcpy2DUnaligned()} does not have this restriction, but
@@ -3840,65 +3755,65 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
         Copies memory for 3D arrays.
 
         Perform a 3D memory copy according to the parameters specified in {@code pCopy}.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_UNIFIED, {@code srcDevice} and {@code srcPitch} specify the (unified virtual address space) base address of the
         source data and the bytes per row to apply. {@code srcArray} is ignored. This value may be used only if unified addressing is supported in the calling
         context.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_HOST, {@code srcHost}, {@code srcPitch} and {@code srcHeight} specify the (host) base address of the source
         data, the bytes per row, and the height of each 2D slice of the 3D array. {@code srcArray} is ignored.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_DEVICE, {@code srcDevice}, {@code srcPitch} and {@code srcHeight} specify the (device) base address of the
         source data, the bytes per row, and the height of each 2D slice of the 3D array. {@code srcArray} is ignored.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_ARRAY, {@code srcArray} specifies the handle of the source data. {@code srcHost}, {@code srcDevice},
         {@code srcPitch} and {@code srcHeight} are ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_UNIFIED, {@code dstDevice} and {@code dstPitch} specify the (unified virtual address space) base address of the
         source data and the bytes per row to apply. {@code dstArray} is ignored. This value may be used only if unified addressing is supported in the calling
         context.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_HOST, {@code dstHost} and {@code dstPitch} specify the (host) base address of the destination data, the bytes
         per row, and the height of each 2D slice of the 3D array. {@code dstArray} is ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_DEVICE, {@code dstDevice} and {@code dstPitch} specify the (device) base address of the destination data, the
         bytes per row, and the height of each 2D slice of the 3D array. {@code dstArray} is ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_ARRAY, {@code dstArray} specifies the handle of the destination data. {@code dstHost}, {@code dstDevice},
         {@code dstPitch} and {@code dstHeight} are ignored.
 
         {@code srcXInBytes}, {@code srcY} and {@code srcZ} specify the base address of the source data for the copy.
-        
+
         For host pointers, the starting address is
         ${codeBlock("""
   void* Start = (void*)((char*)srcHost+(srcZ*srcHeight+srcY)*srcPitch + srcXInBytes);""")}
-  
+
         For device pointers, the starting address is
         ${codeBlock("""
   CUdeviceptr Start = srcDevice+(srcZ*srcHeight+srcY)*srcPitch+srcXInBytes;""")}
-  
+
         For CUDA arrays, {@code srcXInBytes} must be evenly divisible by the array element size.
 
         {@code dstXInBytes}, {@code dstY} and {@code dstZ} specify the base address of the destination data for the copy.
-        
+
         For host pointers, the base address is
         ${codeBlock("""
   void* dstStart = (void*)((char*)dstHost+(dstZ*dstHeight+dstY)*dstPitch + dstXInBytes);""")}
-  
+
         For device pointers, the starting address is
         ${codeBlock("""
   CUdeviceptr dstStart = dstDevice+(dstZ*dstHeight+dstY)*dstPitch+dstXInBytes;""")}
-  
+
         For CUDA arrays, {@code dstXInBytes} must be evenly divisible by the array element size.
 
         {@code WidthInBytes}, {@code Height} and {@code Depth} specify the width (in bytes), height and depth of the 3D copy being performed.
-        
+
         If specified, {@code srcPitch} must be greater than or equal to {@code WidthInBytes} + {@code srcXInBytes}, and {@code dstPitch} must be greater than
         or equal to {@code WidthInBytes} + {@code dstXInBytes}.
-        
+
         If specified, {@code srcHeight} must be greater than or equal to {@code Height} + {@code srcY}, and {@code dstHeight} must be greater than or equal to
         {@code Height} + {@code dstY}.
-        
+
         #Memcpy3D() returns an error if any pitch is greater than the maximum allowed (#DEVICE_ATTRIBUTE_MAX_PITCH).
 
         The {@code srcLOD} and {@code dstLOD} members of the {@code CUDA_MEMCPY3D} structure must be set to 0.
@@ -4040,36 +3955,36 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
 
         If {@code srcMemoryType} is #MEMORYTYPE_HOST, {@code srcHost} and {@code srcPitch} specify the (host) base address of the source data and the bytes per
         row to apply. {@code srcArray} is ignored.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_UNIFIED, {@code srcDevice} and {@code srcPitch} specify the (unified virtual address space) base address of the
         source data and the bytes per row to apply. {@code srcArray} is ignored. This value may be used only if unified addressing is supported in the calling
         context.
 
         If {@code srcMemoryType} is #MEMORYTYPE_DEVICE, {@code srcDevice} and {@code srcPitch} specify the (device) base address of the source data and the
         bytes per row to apply. {@code srcArray} is ignored.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_ARRAY, {@code srcArray} specifies the handle of the source data. {@code srcHost}, {@code srcDevice} and
         {@code srcPitch} are ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_UNIFIED, {@code dstDevice} and {@code dstPitch} specify the (unified virtual address space) base address of the
         source data and the bytes per row to apply. {@code dstArray} is ignored. This value may be used only if unified addressing is supported in the calling
         context.
 
         If {@code dstMemoryType} is #MEMORYTYPE_HOST, {@code dstHost} and {@code dstPitch} specify the (host) base address of the destination data and the
         bytes per row to apply. {@code dstArray} is ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_DEVICE, {@code dstDevice} and {@code dstPitch} specify the (device) base address of the destination data and
         the bytes per row to apply. {@code dstArray} is ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_ARRAY, {@code dstArray} specifies the handle of the destination data. {@code dstHost}, {@code dstDevice} and
         {@code dstPitch} are ignored.
 
         {@code srcXInBytes} and {@code srcY} specify the base address of the source data for the copy.
-        
+
         For host pointers, the starting address is
         ${codeBlock("""
   void* Start = (void*)((char*)srcHost+srcY*srcPitch + srcXInBytes);""")}
-  
+
         For device pointers, the starting address is
         ${codeBlock("""
   CUdeviceptr Start = srcDevice+srcY*srcPitch+srcXInBytes;""")}
@@ -4081,24 +3996,24 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
         For host pointers, the base address is
         ${codeBlock("""
   void* dstStart = (void*)((char*)dstHost+dstY*dstPitch + dstXInBytes);""")}
-  
+
         For device pointers, the starting address is
         ${codeBlock("""
   CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
-  
+
         For CUDA arrays, {@code dstXInBytes} must be evenly divisible by the array element size.
 
         {@code WidthInBytes} and {@code Height} specify the width (in bytes) and height of the 2D copy being performed.
-        
+
         If specified, {@code srcPitch} must be greater than or equal to {@code WidthInBytes} + {@code srcXInBytes}, and {@code dstPitch} must be greater than
         or equal to {@code WidthInBytes} + {@code dstXInBytes}.
-        
+
         If specified, {@code srcPitch} must be greater than or equal to {@code WidthInBytes} + {@code srcXInBytes}, and {@code dstPitch} must be greater than
         or equal to {@code WidthInBytes} + {@code dstXInBytes}.
-        
+
         If specified, {@code srcHeight} must be greater than or equal to {@code Height} + {@code srcY}, and {@code dstHeight} must be greater than or equal to
         {@code Height} + {@code dstY}.
-        
+
         {@code cuMemcpy2DAsync()} returns an error if any pitch is greater than the maximum allowed (#DEVICE_ATTRIBUTE_MAX_PITCH). #MemAllocPitch() passes back
         pitches that always work with #Memcpy2D(). On intra-device memory copies (device to device, CUDA array to device, CUDA array to CUDA array),
         {@code cuMemcpy2DAsync()} may fail for pitches not computed by {@code cuMemAllocPitch()}.
@@ -4114,7 +4029,7 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
         Copies memory for 3D arrays.
 
         Perform a 3D memory copy according to the parameters specified in {@code pCopy}.
-        
+
         If {@code srcMemoryType} is #MEMORYTYPE_UNIFIED, {@code srcDevice} and {@code srcPitch} specify the (unified virtual address space) base address of the
         source data and the bytes per row to apply. {@code srcArray} is ignored. This value may be used only if unified addressing is supported in the calling
         context.
@@ -4131,48 +4046,48 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
         If {@code dstMemoryType} is #MEMORYTYPE_UNIFIED, {@code dstDevice} and {@code dstPitch} specify the (unified virtual address space) base address of the
         source data and the bytes per row to apply.  {@code dstArray} is ignored. This value may be used only if unified addressing is supported in the calling
         context.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_HOST, {@code dstHost} and {@code dstPitch} specify the (host) base address of the destination data, the bytes
         per row, and the height of each 2D slice of the 3D array. {@code dstArray} is ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_DEVICE, {@code dstDevice} and {@code dstPitch} specify the (device) base address of the destination data, the
         bytes per row, and the height of each 2D slice of the 3D array. {@code dstArray} is ignored.
-        
+
         If {@code dstMemoryType} is #MEMORYTYPE_ARRAY, {@code dstArray} specifies the handle of the destination data. {@code dstHost}, {@code dstDevice},
         {@code dstPitch} and {@code dstHeight} are ignored.
 
         - {@code srcXInBytes}, {@code srcY} and {@code srcZ} specify the base address of the source data for the copy.
-        
+
         For host pointers, the starting address is
         ${codeBlock("""
   void* Start = (void*)((char*)srcHost+(srcZ*srcHeight+srcY)*srcPitch + srcXInBytes);""")}
-  
+
         For device pointers, the starting address is
         ${codeBlock("""
   CUdeviceptr Start = srcDevice+(srcZ*srcHeight+srcY)*srcPitch+srcXInBytes;""")}
-  
+
         For CUDA arrays, {@code srcXInBytes} must be evenly divisible by the array element size.
 
         {@code dstXInBytes}, {@code dstY} and {@code dstZ} specify the base address of the destination data for the copy.
-        
+
         For host pointers, the base address is
         ${codeBlock("""
   void* dstStart = (void*)((char*)dstHost+(dstZ*dstHeight+dstY)*dstPitch + dstXInBytes);""")}
-  
+
         For device pointers, the starting address is
         ${codeBlock("""
   CUdeviceptr dstStart = dstDevice+(dstZ*dstHeight+dstY)*dstPitch+dstXInBytes;""")}
-  
+
         For CUDA arrays, {@code dstXInBytes} must be evenly divisible by the array element size.
 
-        {@code {@}code WidthInBytes}, {@code Height} and {@code Depth} specify the width (in bytes), height and depth of the 3D copy being performed.
-        
+        {@code WidthInBytes}, {@code Height} and {@code Depth} specify the width (in bytes), height and depth of the 3D copy being performed.
+
         If specified, {@code srcPitch} must be greater than or equal to {@code WidthInBytes} + {@code srcXInBytes}, and {@code dstPitch} must be greater than
         or equal to {@code WidthInBytes} + {@code dstXInBytes}.
-        
+
         If specified, {@code srcHeight} must be greater than or equal to {@code Height} + {@code srcY}, and {@code dstHeight} must be greater than or equal to
         {@code Height} + {@code dstY}.
-        
+
         #Memcpy3DAsync() returns an error if any pitch is greater than the maximum allowed (#DEVICE_ATTRIBUTE_MAX_PITCH).
 
         The {@code srcLOD} and {@code dstLOD} members of the {@code CUDA_MEMCPY3D} structure must be set to 0.
@@ -4545,7 +4460,7 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
         Note that 2D CUDA arrays have different size requirements if the #CUDA_ARRAY3D_TEXTURE_GATHER flag is set. {@code Width} and {@code Height} must not
         be greater than #DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_GATHER_WIDTH and #DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_GATHER_HEIGHT respectively, in that
         case.
-        
+
         <table>
         <tr><td><b>CUDA array type</b></td>
         <td><b>Valid extents that must always be met<br>{(width range in elements), (height range),
@@ -5266,7 +5181,7 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
             """,
             """
             #POINTER_ATTRIBUTE_MEMORY_TYPE:
-            
+
             Returns in {@code *data} the physical memory type of the memory that {@code ptr} addresses as a {@code CUmemorytype} enumerated value. The type of
             {@code data} must be unsigned int.
 
@@ -5283,7 +5198,7 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
             """
             #POINTER_ATTRIBUTE_DEVICE_POINTER: Returns in {@code *data} the device pointer value through which {@code ptr} may be accessed by kernels running
             in the current {@code CUcontext}. The type of {@code data} must be {@code CUdeviceptr *}.
-        
+
             If there exists no device pointer value through which kernels running in the current {@code CUcontext} may access {@code ptr} then
             #CUDA_ERROR_INVALID_VALUE is returned.
 
@@ -5308,7 +5223,7 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
             """,
             """
             #POINTER_ATTRIBUTE_SYNC_MEMOPS:
-            
+
             A boolean attribute which when set, ensures that synchronous memory operations initiated on the region of memory that {@code ptr} points to will
             always synchronize. See further documentation in the section titled "API synchronization behavior" to learn more about cases when synchronous
             memory operations can exhibit asynchronous behavior.
@@ -5363,7 +5278,7 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
             "The host address will correspond to an invalid unmapped device address (which will result in an exception if accessed from the device)",
             "The device address will correspond to an invalid unmapped host address (which will result in an exception if accessed from the host)."
         )}
-        
+
         For these types of allocations, querying #POINTER_ATTRIBUTE_HOST_POINTER and #POINTER_ATTRIBUTE_DEVICE_POINTER may be used to retrieve the host and
         device addresses from either address.
         """,
@@ -5598,7 +5513,7 @@ CUdeviceptr dstStart = dstDevice+dstY*dstPitch+dstXInBytes;""")}
         ${ul(
             """
             #POINTER_ATTRIBUTE_SYNC_MEMOPS: A boolean attribute that can either be set (1) or unset (0).
-            
+
             When set, the region of memory that {@code ptr} points to is guaranteed to always synchronize memory operations that are synchronous. If there are
             some previously initiated synchronous memory operations that are pending when this attribute is set, the function does not return until those
             memory operations are complete. See further documentation in the section titled "API synchronization behavior" to learn more about cases when
@@ -5989,7 +5904,7 @@ cuThreadExchangeStreamCaptureMode(&mode); // restore previous mode""")}
             "graph_out",
             """
             optional location to return the graph being captured into.
-            
+
             All operations other than destroy and node removal are permitted on the graph while the capture sequence is in progress. This API does not transfer
             ownership of the graph, which is transferred or destroyed at #StreamEndCapture(). Note that the graph handle may be invalidated before end of
             capture for certain errors. Nodes that are or become unreachable from the original stream at #StreamEndCapture() due to direct actions on the graph
@@ -6000,7 +5915,7 @@ cuThreadExchangeStreamCaptureMode(&mode); // restore previous mode""")}
             "dependencies_out",
             """
             optional location to store a pointer to an array of nodes.
-            
+
             The next node to be captured in the stream will depend on this set of nodes, absent operations such as event wait which modify this set. The array
             pointer is valid until the next API call which operates on the stream or until end of capture. The node handles may be copied out and are valid
             until they or the graph is destroyed. The driver-owned array may also be passed directly to APIs that operate on the graph (not the stream) without
@@ -6356,7 +6271,7 @@ cuThreadExchangeStreamCaptureMode(&mode); // restore previous mode""")}
         If {@code ::type} is #EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF, then {@code ::handle::nvSciBufObject} must be non-#NULL and reference a valid
         {@code NvSciBuf} object. If the {@code NvSciBuf} object imported into CUDA is also mapped by other drivers, then the application must use
         #WaitExternalSemaphoresAsync() or #SignalExternalSemaphoresAsync() as appropriate barriers to maintain coherence between CUDA and the other drivers.
-        See ##CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC and ##CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC for memory synchronization.
+        See #CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC and #CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC for memory synchronization.
 
         The size of the memory object must be specified in {@code ::size}.
 
@@ -6851,14 +6766,14 @@ cuThreadExchangeStreamCaptureMode(&mode); // restore previous mode""")}
         ${ol(
             """
             Kernel parameters can be specified via {@code kernelParams}.
-            
+
             If {@code f} has N parameters, then {@code kernelParams} needs to be an array of N pointers. Each of {@code kernelParams[0]} through
             {@code kernelParams[N-1]} must point to a region of memory from which the actual kernel parameter will be copied. The number of kernel parameters
             and their offsets and sizes do not need to be specified as that information is retrieved directly from the kernel's image.
             """,
             """
             Kernel parameters can also be packaged by the application into a single buffer that is passed in via the {@code extra} parameter.
-            
+
             This places the burden on the application of knowing each kernel parameter's size and alignment/padding within the buffer. Here is an example of
             using the {@code extra} parameter in this manner:
             ${codeBlock("""
@@ -9132,7 +9047,7 @@ size_t blockToSmem(int blockSize);""")}
 
         Texture objects are only supported on devices of compute capability 3.0 or higher. Additionally, a texture object is an opaque value, and, as such,
         should only be accessed through CUDA API calls.
-        
+
         ${ul(
             """
             If {@code CUDA_RESOURCE_DESC::resType} is set to #RESOURCE_TYPE_ARRAY, {@code CUDA_RESOURCE_DESC::res::array::hArray} must be set to a valid CUDA

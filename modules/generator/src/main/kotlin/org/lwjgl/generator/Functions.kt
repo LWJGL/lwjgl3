@@ -150,7 +150,7 @@ class Func(
     internal val hasCustomJNIWithIgnoreAddress get() = (this.returns.isStructValue || hasNativeCode) && (!has<Macro> { expression != null })
 
     internal val hasCustomJNI: Boolean by lazy(LazyThreadSafetyMode.NONE) {
-        (!hasFunctionAddressParam || returns.isStructValue || hasNativeCode || hasParam { it.nativeType is StructType }) && (!has<Macro> { expression != null })
+        (!hasFunctionAddressParam || hasNativeCode || ((nativeClass.module.library != null || nativeClass.module.key.startsWith("core.")) && (returns.isStructValue || hasParam { it.nativeType is StructType }))) && !has<Macro> { expression != null }
     }
 
     private val isNativeOnly: Boolean by lazy(LazyThreadSafetyMode.NONE) {
@@ -731,6 +731,16 @@ class Func(
     }
 
     private fun PrintWriter.generateUnsafeMethod(constantMacro: Boolean, hasReuse: Boolean) {
+        val customJNI = hasCustomJNI
+        val useLibFFI = !customJNI && (returns.isStructValue || hasParam { it.nativeType is StructType })
+
+        if (useLibFFI) {
+            println("""
+    private static final FFICIF ${name}CIF = apiCreateCIF(
+        ${if (nativeClass.module.callingConvention == CallingConvention.DEFAULT) "FFI_DEFAULT_ABI" else "apiStdcall()"}, ${returns.nativeType.libffiType},
+        ${parameters.joinToString(", ") { it.nativeType.libffiType }}
+    );""")
+        }
         println()
 
         printUnsafeJavadoc(constantMacro)
@@ -817,30 +827,78 @@ class Func(
             }
         }
 
+        val hasReturnStatement = !(returns.isVoid || returns.isStructValue)
         // Native method call
-        print("$t$t")
-        if (!returns.isVoid && !returns.isStructValue)
-            print("return ")
-        print(if (hasCustomJNI)
-            "n$name("
-        else
-            "${nativeClass.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.jniSignatureJava }.joinToString("")}${returns.nativeType.jniSignature}("
-        )
-        printList(getNativeParams()) {
-            if (it.isFunctionProvider)
-                "${it.name}.$ADDRESS"
+        if (useLibFFI) {
+            // TODO: This implementation takes advantage of MemoryStack's automatic alignment. Could be precomputed + hardcoded for more efficiency.
+            // TODO: This implementation has not been tested with too many different signatures and probably contains bugs.
+            println("""$t${t}MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            ${if (hasReturnStatement) { """long __result = stack.n${when {
+                    returns.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "byte"
+                    returns.nativeType is PointerType<*>                   -> "pointer"
+                    else                                                   -> returns.nativeType.nativeMethodType
+                }}(0);
+            """
+            } else ""}long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * ${parameters.size});
+            ${parameters.asSequence()
+                .withIndex()
+                .joinToString("\n$t$t$t") { (i, it) ->
+                    "memPutAddress(arguments${when (i) {
+                        0    -> ""
+                        1    -> " + POINTER_SIZE"
+                        else -> " + $i * POINTER_SIZE"
+                    }}, ${
+                        if (it.nativeType is StructType) {
+                            it.name
+                        } else {
+                            "stack.n${when {
+                                it.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "byte"
+                                it.nativeType is PointerType<*>                   -> "pointer"
+                                else                                              -> it.nativeType.nativeMethodType
+                            }}(${it.name})"
+                        }
+                    });"
+                }
+            }
+
+            nffi_call(${name}CIF.address(), $FUNCTION_ADDRESS, ${if (returns.isVoid) "NULL" else "__result"}, arguments);${if (hasReturnStatement) {
+                """
+
+            return memGet${when {
+                    returns.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "Byte"
+                    returns.nativeType is PointerType<*>                   -> "Address"
+                    else                                                   -> returns.nativeType.nativeMethodType.upperCaseFirst
+                }}(__result);"""
+            } else ""}
+        } finally {
+            stack.setPointer(stackPointer);
+        }""")
+        } else {
+            print("$t$t")
+            if (hasReturnStatement)
+                print("return ")
+            print(if (customJNI)
+                "n$name("
             else
-                it.name
+                "${nativeClass.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.jniSignatureJava }.joinToString("")}${returns.nativeType.jniSignature}("
+            )
+            printList(getNativeParams()) {
+                if (it.isFunctionProvider)
+                    "${it.name}.$ADDRESS"
+                else
+                    it.name
+            }
+            if (!hasExplicitFunctionAddress) {
+                if (hasNativeParams) print(", ")
+                print(FUNCTION_ADDRESS)
+            }
+            if (returns.isStructValue && !hasParam { it has ReturnParam }) {
+                print(", ")
+                print(RESULT)
+            }
+            println(");")
         }
-        if (!hasExplicitFunctionAddress) {
-            if (hasNativeParams) print(", ")
-            print(FUNCTION_ADDRESS)
-        }
-        if (returns.isStructValue && !hasParam { it has ReturnParam }) {
-            print(", ")
-            print(RESULT)
-        }
-        println(");")
 
         println("$t}")
     }

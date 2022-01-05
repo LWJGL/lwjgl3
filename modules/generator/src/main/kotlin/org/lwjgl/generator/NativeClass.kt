@@ -446,7 +446,8 @@ class NativeClass internal constructor(
             val functions = this@NativeClass.functions
                 .filter { !it.has<Reuse>() }
 
-            val hasMemoryStack = hasBuffers && functions.any { func ->
+            val hasLibFFI = skipNative && functions.any { it.returns.isStructValue || it.parameters.any { param -> param.nativeType is StructType }}
+            val hasMemoryStack = (hasBuffers && functions.any { func ->
                 func.hasParam {
                     it.nativeType is PointerType<*> &&
                     (
@@ -457,7 +458,7 @@ class NativeClass internal constructor(
                         (it.nativeType is CharSequenceType && it.isInput)
                     )
                 }
-            }
+            }) || hasLibFFI
 
             if ((hasFunctions || binding != null) && module !== Module.CORE) {
                 println("import org.lwjgl.system.*;")
@@ -466,9 +467,9 @@ class NativeClass internal constructor(
             val staticImports = ArrayList<String>()
 
             if (hasFunctions) {
-                if (binding is SimpleBinding || (binding != null && functions.any { it.has<MapPointer>() }))
+                if (binding is SimpleBinding || (binding != null && functions.any { it.has<MapPointer>() }) || hasLibFFI)
                     staticImports.add("org.lwjgl.system.APIUtil.*")
-                if ((binding != null && binding.apiCapabilities == APICapabilities.JAVA_CAPABILITIES) || functions.any { func ->
+                if ((binding != null && binding.apiCapabilities.ordinal >= 2) || functions.any { func ->
                         func.hasParam { param ->
                             param.nativeType is PointerType<*> && func.getReferenceParam<AutoSize>(param.name).let {
                                 if (it == null)
@@ -482,13 +483,17 @@ class NativeClass internal constructor(
             }
             if (binding != null && functions.any { !it.hasCustomJNI || it.hasArrayOverloads })
                 staticImports.add("org.lwjgl.system.JNI.*")
+            if (hasLibFFI) {
+                println("import org.lwjgl.system.libffi.*;")
+                staticImports.add("org.lwjgl.system.libffi.LibFFI.*")
+            }
             if (hasMemoryStack)
                 staticImports.add("org.lwjgl.system.MemoryStack.*")
-            if (hasBuffers && functions.any {
+            if ((hasBuffers && functions.any {
                 it.returns.isBufferPointer || it.hasParam { param ->
                     param.nativeType.let { type -> type is PointerType<*> && type.mapping !== PointerMapping.OPAQUE_POINTER && (type.elementType !is StructType || param.has<Nullable>()) }
                 }
-            }) {
+            }) || hasLibFFI) {
                 staticImports.add("org.lwjgl.system.MemoryUtil.*")
                 if (!hasMemoryStack && functions.any { func ->
                     func.hasParam {
@@ -665,7 +670,7 @@ class NativeClass internal constructor(
         Constant(this, EnumByteValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, value))
     fun String.enumByte(documentation: String, expression: String) =
         Constant(this, EnumByteValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
-    
+
     val String.enumLong get() = Constant(this, EnumLongValue())
     infix fun String.enumLong(documentation: String) =
         Constant(this, EnumLongValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))

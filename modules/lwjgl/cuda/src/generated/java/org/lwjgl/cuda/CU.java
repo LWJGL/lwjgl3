@@ -12,17 +12,16 @@ import java.nio.*;
 import org.lwjgl.*;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import org.lwjgl.system.libffi.*;
-
 import static org.lwjgl.cuda.CUDA.*;
-import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Contains bindings to the <a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">CUDA Driver API</a>.
@@ -117,9 +116,9 @@ public class CU {
             DeviceGetByPCIBusId                                = NVCUDA.getFunctionAddress("cuDeviceGetByPCIBusId"),
             DeviceGetPCIBusId                                  = NVCUDA.getFunctionAddress("cuDeviceGetPCIBusId"),
             IpcGetEventHandle                                  = NVCUDA.getFunctionAddress("cuIpcGetEventHandle"),
-            IpcOpenEventHandle$Address                         = NVCUDA.getFunctionAddress("cuIpcOpenEventHandle"),
+            IpcOpenEventHandle                                 = NVCUDA.getFunctionAddress("cuIpcOpenEventHandle"),
             IpcGetMemHandle                                    = NVCUDA.getFunctionAddress("cuIpcGetMemHandle"),
-            IpcOpenMemHandle$Address                           = NVCUDA.getFunctionAddress(__CUDA_API_VERSION("cuIpcOpenMemHandle", 2)),
+            IpcOpenMemHandle                                   = NVCUDA.getFunctionAddress(__CUDA_API_VERSION("cuIpcOpenMemHandle", 2)),
             IpcCloseMemHandle                                  = NVCUDA.getFunctionAddress("cuIpcCloseMemHandle"),
             MemHostRegister                                    = NVCUDA.getFunctionAddress(__CUDA_API_VERSION("cuMemHostRegister", 2)),
             MemHostUnregister                                  = NVCUDA.getFunctionAddress("cuMemHostUnregister"),
@@ -5357,15 +5356,54 @@ public class CU {
         return ncuIpcGetEventHandle(pHandle.address(), event);
     }
 
-    // --- [ cuIpcOpenEventHandle$Address ] ---
+    // --- [ cuIpcOpenEventHandle ] ---
 
-    @NativeType("CUresult")
-    private static int cuIpcOpenEventHandle$Address() {
-        long __functionAddress = Functions.IpcOpenEventHandle$Address;
+    private static final FFICIF cuIpcOpenEventHandleCIF = apiCreateCIF(
+        apiStdcall(), ffi_type_uint32,
+        ffi_type_pointer, apiCreateStruct(apiCreateArray(ffi_type_sint8, CU_IPC_HANDLE_SIZE))
+    );
+
+    /** Unsafe version of: {@link #cuIpcOpenEventHandle IpcOpenEventHandle} */
+    public static int ncuIpcOpenEventHandle(long phEvent, long handle) {
+        long __functionAddress = Functions.IpcOpenEventHandle;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress);
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            long __result = stack.nint(0);
+            long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * 2);
+            memPutAddress(arguments, stack.npointer(phEvent));
+            memPutAddress(arguments + POINTER_SIZE, handle);
+
+            nffi_call(cuIpcOpenEventHandleCIF.address(), __functionAddress, __result, arguments);
+
+            return memGetInt(__result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    /**
+     * Opens an interprocess event handle for use in the current process.
+     * 
+     * <p>Opens an interprocess event handle exported from another process with {@link #cuIpcGetEventHandle IpcGetEventHandle}. This function returns a {@code CUevent} that behaves like a
+     * locally created event with the {@link #CU_EVENT_DISABLE_TIMING EVENT_DISABLE_TIMING} flag specified. This event must be freed with {@link #cuEventDestroy EventDestroy}.</p>
+     * 
+     * <p>Performing operations on the imported event after the exported event has been freed with {@code cuEventDestroy} will result in undefined behavior.</p>
+     * 
+     * <p>IPC functionality is restricted to devices with support for unified addressing on Linux and Windows operating systems. IPC functionality on Windows is
+     * restricted to GPUs in TCC mode.</p>
+     *
+     * @param phEvent returns the imported event
+     * @param handle  interprocess handle to open
+     */
+    @NativeType("CUresult")
+    public static int cuIpcOpenEventHandle(@NativeType("CUevent *") PointerBuffer phEvent, @NativeType("CUipcEventHandle") CUIPCEventHandle handle) {
+        if (CHECKS) {
+            check(phEvent, 1);
+        }
+        return ncuIpcOpenEventHandle(memAddress(phEvent), handle.address());
     }
 
     // --- [ cuIpcGetMemHandle ] ---
@@ -5400,15 +5438,70 @@ public class CU {
         return ncuIpcGetMemHandle(pHandle.address(), dptr);
     }
 
-    // --- [ cuIpcOpenMemHandle$Address ] ---
+    // --- [ cuIpcOpenMemHandle ] ---
 
-    @NativeType("CUresult")
-    private static int cuIpcOpenMemHandle$Address() {
-        long __functionAddress = Functions.IpcOpenMemHandle$Address;
+    private static final FFICIF cuIpcOpenMemHandleCIF = apiCreateCIF(
+        apiStdcall(), ffi_type_uint32,
+        ffi_type_pointer, apiCreateStruct(apiCreateArray(ffi_type_sint8, CU_IPC_HANDLE_SIZE)), ffi_type_uint32
+    );
+
+    /** Unsafe version of: {@link #cuIpcOpenMemHandle IpcOpenMemHandle} */
+    public static int ncuIpcOpenMemHandle(long pdptr, long handle, int Flags) {
+        long __functionAddress = Functions.IpcOpenMemHandle;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callI(__functionAddress);
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            long __result = stack.nint(0);
+            long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * 3);
+            memPutAddress(arguments, stack.npointer(pdptr));
+            memPutAddress(arguments + POINTER_SIZE, handle);
+            memPutAddress(arguments + 2 * POINTER_SIZE, stack.nint(Flags));
+
+            nffi_call(cuIpcOpenMemHandleCIF.address(), __functionAddress, __result, arguments);
+
+            return memGetInt(__result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    /**
+     * Opens an interprocess memory handle exported from another process and returns a device pointer usable in the local process.
+     * 
+     * <p>Maps memory exported from another process with {@link #cuIpcGetMemHandle IpcGetMemHandle} into the current device address space. For contexts on different devices
+     * {@code cuIpcOpenMemHandle} can attempt to enable peer access between the devices as if the user called {@link #cuCtxEnablePeerAccess CtxEnablePeerAccess}. This behavior is
+     * controlled by the {@link #CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS IPC_MEM_LAZY_ENABLE_PEER_ACCESS} flag. {@link #cuDeviceCanAccessPeer DeviceCanAccessPeer} can determine if a mapping is possible.</p>
+     * 
+     * <p>Contexts that may open {@link CUIPCMemHandle} are restricted in the following way. {@code CUipcMemHandle}s from each {@code CUdevice} in a given process may
+     * only be opened by one {@code CUcontext} per {@code CUdevice} per other process.</p>
+     * 
+     * <p>If the memory handle has already been opened by the current context, the reference count on the handle is incremented by 1 and the existing device
+     * pointer is returned.</p>
+     * 
+     * <p>Memory returned from {@code cuIpcOpenMemHandle} must be freed with {@link #cuIpcCloseMemHandle IpcCloseMemHandle}.</p>
+     * 
+     * <p>Calling {@link #cuMemFree MemFree} on an exported memory region before calling {@code cuIpcCloseMemHandle} in the importing context will result in undefined behavior.</p>
+     * 
+     * <p>IPC functionality is restricted to devices with support for unified addressing on Linux and Windows operating systems. IPC functionality on Windows is
+     * restricted to GPUs in TCC mode.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>No guarantees are made about the address returned in {@code *pdptr}. In particular, multiple processes may not receive the same address for the same
+     * {@code handle}.</p></div>
+     *
+     * @param pdptr  returned device pointer
+     * @param handle {@code CUipcMemHandle} to open
+     * @param Flags  flags for this operation. Must be specified as {@link #CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS IPC_MEM_LAZY_ENABLE_PEER_ACCESS}.
+     */
+    @NativeType("CUresult")
+    public static int cuIpcOpenMemHandle(@NativeType("CUdeviceptr *") PointerBuffer pdptr, @NativeType("CUipcMemHandle") CUIPCMemHandle handle, @NativeType("unsigned int") int Flags) {
+        if (CHECKS) {
+            check(pdptr, 1);
+        }
+        return ncuIpcOpenMemHandle(memAddress(pdptr), handle.address(), Flags);
     }
 
     // --- [ cuIpcCloseMemHandle ] ---
@@ -7133,7 +7226,7 @@ public class CU {
      * 
      * <p>For CUDA arrays, {@code dstXInBytes} must be evenly divisible by the array element size.</p>
      * 
-     * <p>{@code {@}code WidthInBytes}, {@code Height} and {@code Depth} specify the width (in bytes), height and depth of the 3D copy being performed.</p>
+     * <p>{@code WidthInBytes}, {@code Height} and {@code Depth} specify the width (in bytes), height and depth of the 3D copy being performed.</p>
      * 
      * <p>If specified, {@code srcPitch} must be greater than or equal to {@code WidthInBytes} + {@code srcXInBytes}, and {@code dstPitch} must be greater than
      * or equal to {@code WidthInBytes} + {@code dstXInBytes}.</p>
@@ -10651,7 +10744,7 @@ public class CU {
      * <p>If {@code ::type} is {@link #CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF}, then {@code ::handle::nvSciBufObject} must be non-{@code NULL} and reference a valid
      * {@code NvSciBuf} object. If the {@code NvSciBuf} object imported into CUDA is also mapped by other drivers, then the application must use
      * {@link #cuWaitExternalSemaphoresAsync WaitExternalSemaphoresAsync} or {@link #cuSignalExternalSemaphoresAsync SignalExternalSemaphoresAsync} as appropriate barriers to maintain coherence between CUDA and the other drivers.
-     * See {@link CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC} and {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC} for memory synchronization.</p>
+     * See {@link #CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC} and {@link #CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC} for memory synchronization.</p>
      * 
      * <p>The size of the memory object must be specified in {@code ::size}.</p>
      * 
@@ -15951,131 +16044,6 @@ public class CU {
     @NativeType("CUresult")
     public static int cuGetExportTable(@NativeType("void const **") PointerBuffer ppExportTable, @NativeType("CUuuid const *") CUuuid pExportTableId) {
         return ncuGetExportTable(memAddress(ppExportTable), pExportTableId.address());
-    }
-
-    // --- [ cuIpcOpenEventHandle ] ---
-
-    private static final FFICIF IpcOpenEventHandleCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(apiCreateArray(ffi_type_schar, 64))
-    );
-
-    /** Unsafe version of: {@link #cuIpcOpenEventHandle IpcOpenEventHandle} */
-    public static int ncuIpcOpenEventHandle(long phEvent, long handle) {
-        long __functionAddress = Functions.IpcOpenEventHandle$Address;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            long __result = stack.nmalloc(4);        
-        
-            long values = stack.nmalloc(8, POINTER_SIZE + 8);
-            memPutAddress(values, phEvent);
-            memPutLong(values + POINTER_SIZE, handle);
-            
-            long arguments = stack.nmalloc(POINTER_SIZE,POINTER_SIZE * 2);
-            memPutAddress(arguments, values);
-            memPutAddress(arguments + POINTER_SIZE, values + POINTER_SIZE);
-
-            nffi_call(IpcOpenEventHandleCIF.address(), __functionAddress, __result, arguments);
-            return memGetInt(__result);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /**
-     * Opens an interprocess event handle for use in the current process.
-     * 
-     * <p>Opens an interprocess event handle exported from another process with {@link #cuIpcGetEventHandle IpcGetEventHandle}. This function returns a {@code CUevent} that behaves like a
-     * locally created event with the {@link #CU_EVENT_DISABLE_TIMING EVENT_DISABLE_TIMING} flag specified. This event must be freed with {@link #cuEventDestroy EventDestroy}.</p>
-     * 
-     * <p>Performing operations on the imported event after the exported event has been freed with {@link #cuEventDestroy EventDestroy} will result in undefined behavior.</p>
-     * 
-     * <p>IPC functionality is restricted to devices with support for unified addressing on Linux and Windows operating systems. IPC functionality on Windows is
-     * restricted to GPUs in TCC mode.</p>
-     *
-     * @param phEvent returns the imported event
-     * @param handle  interprocess handle to open
-     */
-    @NativeType("CUresult")
-    public static int cuIpcOpenEventHandle(@NativeType("CUevent *") PointerBuffer phEvent, @NativeType("CUipcEventHandle") CUIPCEventHandle handle) {
-        if (CHECKS) {
-            check(phEvent, 1);
-        }
-        return ncuIpcOpenEventHandle(memAddress(phEvent), handle.address());
-    }
-
-    // --- [ cuIpcOpenMemHandle ] ---
-
-    private static final FFICIF IpcOpenMemHandleCIF = apiCreateCIF(
-        apiStdcall(), ffi_type_uint32,
-        ffi_type_pointer, apiCreateStruct(apiCreateArray(ffi_type_schar, 64)), ffi_type_uint32
-    );
-
-    /** Unsafe version of: {@link #cuIpcOpenMemHandle IpcIpcOpenMemHandle} */
-    public static int ncuIpcOpenMemHandle(long pdptr, long handle, int Flags) {
-        long __functionAddress = Functions.IpcOpenEventHandle$Address;
-        if (CHECKS) {
-            check(__functionAddress);
-        }
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            long __result = stack.nmalloc(4);        
-        
-            long values = stack.nmalloc(8, POINTER_SIZE + 8 + 4);
-            memPutAddress(values, pdptr);
-            memPutLong(values + POINTER_SIZE, handle);
-            memPutInt(values + POINTER_SIZE + 8, Flags);
-            
-            long arguments = stack.nmalloc(POINTER_SIZE,POINTER_SIZE * 3);
-            memPutAddress(arguments, values);
-            memPutAddress(arguments + POINTER_SIZE, values + POINTER_SIZE);
-            memPutAddress(arguments + POINTER_SIZE * 2, values + POINTER_SIZE + 8);
-
-            nffi_call(IpcOpenMemHandleCIF.address(), __functionAddress, __result, arguments);
-            return memGetInt(__result);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /**
-     * Opens an interprocess memory handle exported from another process and returns a device pointer usable in the local process.
-     * 
-     * <p>Maps memory exported from another process with {@link #cuIpcGetMemHandle IpcGetMemHandle} into the current device address space. For contexts on different devices
-     * {@code cuIpcOpenMemHandle} can attempt to enable peer access between the devices as if the user called {@link #cuCtxEnablePeerAccess CtxEnablePeerAccess}. This behavior is controlled
-     * by the {@link #CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS IPC_MEM_LAZY_ENABLE_PEER_ACCESS} flag. {@link #cuDeviceCanAccessPeer DeviceCanAccessPeer} can determine if a mapping is possible.</p>
-     * 
-     * <p>Contexts that may open {@link CUIPCMemHandle}s are restricted in the following way. {@code CUipcMemHandles} from each {@code CUdevice} in a given process may
-     * only be opened by one {@code CUcontext} per {@code CUdevice} per other process.</p>
-     * 
-     * <p>If the memory handle has already been opened by the current context, the reference count on the handle is incremented by 1 and the existing device
-     * pointer is returned.</p>
-     * 
-     * <p>Memory returned from {@code cuIpcOpenMemHandle} must be freed with {@link #cuIpcCloseMemHandle IpcCloseMemHandle}.</p>
-     * 
-     * <p>Calling {@link #cuMemFree MemFree} on an exported memory region before calling {@link #cuIpcCloseMemHandle IpcCloseMemHandle} in the importing context will result in undefined behavior.</p>
-     * 
-     * <p>IPC functionality is restricted to devices with support for unified addressing on Linux and Windows operating systems. IPC functionality on Windows is
-     * restricted to GPUs in TCC mode</p>
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>No guarantees are made about the address returned in {@code *pdptr}. In particular, multiple processes may not receive the same address for
-     * the same {@code handle}.</p></div>
-     *
-     * @param pdptr  returned device pointer
-     * @param handle {@code CUipcMemHandle} to open
-     * @param Flags  flags for this operation. Must be specified as {@link #CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS IPC_MEM_LAZY_ENABLE_PEER_ACCESS}
-     */
-    @NativeType("CUresult")
-    public static int cuIpcOpenMemHandle(@NativeType("CUdeviceptr *") PointerBuffer pdptr, @NativeType("CUipcMemHandle") CUIPCMemHandle handle, @NativeType("unsigned int") int Flags) {
-        if (CHECKS) {
-            check(pdptr, 1);
-        }
-        return ncuIpcOpenMemHandle(memAddress(pdptr), handle.address(), Flags);
     }
 
 }

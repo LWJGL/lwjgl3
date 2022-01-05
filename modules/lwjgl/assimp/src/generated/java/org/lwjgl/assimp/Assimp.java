@@ -12,16 +12,14 @@ import java.nio.*;
 import org.lwjgl.*;
 
 import org.lwjgl.system.*;
+import org.lwjgl.system.libffi.*;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.libffi.LibFFI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-
-import org.lwjgl.system.libffi.*;
-
-import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
  * Contains bindings to the <a target="_blank" href="http://www.assimp.org/">Assimp</a> library.
@@ -191,6 +189,7 @@ public class Assimp {
             ImportFileFromMemory                           = apiGetFunctionAddress(ASSIMP, "aiImportFileFromMemory"),
             ImportFileFromMemoryWithProperties             = apiGetFunctionAddress(ASSIMP, "aiImportFileFromMemoryWithProperties"),
             ApplyPostProcessing                            = apiGetFunctionAddress(ASSIMP, "aiApplyPostProcessing"),
+            GetPredefinedLogStream                         = apiGetFunctionAddress(ASSIMP, "aiGetPredefinedLogStream"),
             AttachLogStream                                = apiGetFunctionAddress(ASSIMP, "aiAttachLogStream"),
             EnableVerboseLogging                           = apiGetFunctionAddress(ASSIMP, "aiEnableVerboseLogging"),
             DetachLogStream                                = apiGetFunctionAddress(ASSIMP, "aiDetachLogStream"),
@@ -3165,6 +3164,86 @@ public class Assimp {
         return AIScene.createSafe(__result);
     }
 
+    // --- [ aiGetPredefinedLogStream ] ---
+
+    private static final FFICIF aiGetPredefinedLogStreamCIF = apiCreateCIF(
+        FFI_DEFAULT_ABI, apiCreateStruct(ffi_type_pointer, ffi_type_pointer),
+        ffi_type_uint32, ffi_type_pointer
+    );
+
+    /** Unsafe version of: {@link #aiGetPredefinedLogStream GetPredefinedLogStream} */
+    public static void naiGetPredefinedLogStream(int pStreams, long file, long __result) {
+        long __functionAddress = Functions.GetPredefinedLogStream;
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * 2);
+            memPutAddress(arguments, stack.nint(pStreams));
+            memPutAddress(arguments + POINTER_SIZE, stack.npointer(file));
+
+            nffi_call(aiGetPredefinedLogStreamCIF.address(), __functionAddress, __result, arguments);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    /**
+     * Get one of the predefine log streams.
+     * 
+     * <p>This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce Assimp's overall import performance.</p>
+     * 
+     * <p>Usage is rather simple (this will stream the log to a file, named log.txt, and the stdout stream of the process:</p>
+     * 
+     * <pre><code>
+     * struct aiLogStream c;
+     * c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
+     * aiAttachLogStream(&amp;c);
+     * c = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, NULL);
+     * aiAttachLogStream(&amp;c);</code></pre>
+     *
+     * @param pStreams One of the {@code aiDefaultLogStream} enumerated values. One of:<br><table><tr><td>{@link #aiDefaultLogStream_FILE DefaultLogStream_FILE}</td><td>{@link #aiDefaultLogStream_STDOUT DefaultLogStream_STDOUT}</td><td>{@link #aiDefaultLogStream_STDERR DefaultLogStream_STDERR}</td></tr><tr><td>{@link #aiDefaultLogStream_DEBUGGER DefaultLogStream_DEBUGGER}</td></tr></table>
+     * @param file     Solely for the {@link #aiDefaultLogStream_FILE DefaultLogStream_FILE} flag: specifies the file to write to. Pass {@code NULL} for all other flags.
+     * @param __result The log stream. {@code callback} is set to {@code NULL} if something went wrong.
+     */
+    @NativeType("struct aiLogStream")
+    public static AILogStream aiGetPredefinedLogStream(@NativeType("aiDefaultLogStream") int pStreams, @Nullable @NativeType("char const *") ByteBuffer file, @NativeType("struct aiLogStream") AILogStream __result) {
+        if (CHECKS) {
+            checkNT1Safe(file);
+        }
+        naiGetPredefinedLogStream(pStreams, memAddressSafe(file), __result.address());
+        return __result;
+    }
+
+    /**
+     * Get one of the predefine log streams.
+     * 
+     * <p>This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce Assimp's overall import performance.</p>
+     * 
+     * <p>Usage is rather simple (this will stream the log to a file, named log.txt, and the stdout stream of the process:</p>
+     * 
+     * <pre><code>
+     * struct aiLogStream c;
+     * c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
+     * aiAttachLogStream(&amp;c);
+     * c = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, NULL);
+     * aiAttachLogStream(&amp;c);</code></pre>
+     *
+     * @param pStreams One of the {@code aiDefaultLogStream} enumerated values. One of:<br><table><tr><td>{@link #aiDefaultLogStream_FILE DefaultLogStream_FILE}</td><td>{@link #aiDefaultLogStream_STDOUT DefaultLogStream_STDOUT}</td><td>{@link #aiDefaultLogStream_STDERR DefaultLogStream_STDERR}</td></tr><tr><td>{@link #aiDefaultLogStream_DEBUGGER DefaultLogStream_DEBUGGER}</td></tr></table>
+     * @param file     Solely for the {@link #aiDefaultLogStream_FILE DefaultLogStream_FILE} flag: specifies the file to write to. Pass {@code NULL} for all other flags.
+     * @param __result The log stream. {@code callback} is set to {@code NULL} if something went wrong.
+     */
+    @NativeType("struct aiLogStream")
+    public static AILogStream aiGetPredefinedLogStream(@NativeType("aiDefaultLogStream") int pStreams, @Nullable @NativeType("char const *") CharSequence file, @NativeType("struct aiLogStream") AILogStream __result) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8Safe(file, true);
+            long fileEncoded = file == null ? NULL : stack.getPointerAddress();
+            naiGetPredefinedLogStream(pStreams, fileEncoded, __result.address());
+            return __result;
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
     // --- [ aiAttachLogStream ] ---
 
     /** Unsafe version of: {@link #aiAttachLogStream AttachLogStream} */
@@ -5753,89 +5832,6 @@ public class Assimp {
             AIMaterial.validate(pMat.address());
         }
         return invokePPPPPPPPI(pMat.address(), type, index, path.address(), mapping, uvindex, blend, op, mapmode, flags, __functionAddress);
-    }
-
-    private static final long GetPredefinedLogStream = ASSIMP.getFunctionAddress("aiGetPredefinedLogStream");
-    
-    private static final FFICIF GetPredefinedLogStreamCIF = apiCreateCIF(
-        FFI_DEFAULT_ABI, apiCreateStruct(ffi_type_pointer, ffi_type_pointer),
-        ffi_type_uint32, ffi_type_pointer
-    );
-
-    /** Unsafe version of: {@link #aiGetPredefinedLogStream GetPredefinedLogStream} */
-    public static void naiGetPredefinedLogStream(int pStreams, long file, long __result) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            long values = stack.nmalloc(POINTER_SIZE,POINTER_SIZE * 2);
-            memPutInt(values, pStreams);
-            memPutAddress(values + POINTER_SIZE, file);
-
-            long arguments = stack.nmalloc(POINTER_SIZE,POINTER_SIZE * 2);
-            memPutAddress(arguments, values);
-            memPutAddress(arguments + POINTER_SIZE, values + POINTER_SIZE);
-
-            nffi_call(GetPredefinedLogStreamCIF.address(), GetPredefinedLogStream, __result, arguments);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
-    }
-
-    /**
-     * Get one of the predefine log streams.
-     *
-     * <p>This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce Assimp's overall import performance.</p>
-     *
-     * <p>Usage is rather simple (this will stream the log to a file, named log.txt, and the stdout stream of the process:</p>
-     *
-     * <pre><code>
-     * struct aiLogStream c;
-     * c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
-     * aiAttachLogStream(&amp;c);
-     * c = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, NULL);
-     * aiAttachLogStream(&amp;c);</code></pre>
-     *
-     * @param pStreams One of the {@code aiDefaultLogStream} enumerated values. One of:<br><table><tr><td>{@link #aiDefaultLogStream_FILE DefaultLogStream_FILE}</td><td>{@link #aiDefaultLogStream_STDOUT DefaultLogStream_STDOUT}</td><td>{@link #aiDefaultLogStream_STDERR DefaultLogStream_STDERR}</td></tr><tr><td>{@link #aiDefaultLogStream_DEBUGGER DefaultLogStream_DEBUGGER}</td></tr></table>
-     * @param file     Solely for the {@link #aiDefaultLogStream_FILE DefaultLogStream_FILE} flag: specifies the file to write to. Pass {@code NULL} for all other flags.
-     * @param __result The log stream. {@code callback} is set to {@code NULL} if something went wrong.
-     */
-    @NativeType("struct aiLogStream")
-    public static AILogStream aiGetPredefinedLogStream(@NativeType("aiDefaultLogStream") int pStreams, @Nullable @NativeType("char const *") ByteBuffer file, @NativeType("struct aiLogStream") AILogStream __result) {
-        if (CHECKS) {
-            checkNT1Safe(file);
-        }
-        naiGetPredefinedLogStream(pStreams, memAddressSafe(file), __result.address());
-        return __result;
-    }
-
-    /**
-     * Get one of the predefine log streams.
-     *
-     * <p>This is the quick'n'easy solution to access Assimp's log system. Attaching a log stream can slightly reduce Assimp's overall import performance.</p>
-     *
-     * <p>Usage is rather simple (this will stream the log to a file, named log.txt, and the stdout stream of the process:</p>
-     *
-     * <pre><code>
-     * struct aiLogStream c;
-     * c = aiGetPredefinedLogStream(aiDefaultLogStream_FILE, "log.txt");
-     * aiAttachLogStream(&amp;c);
-     * c = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, NULL);
-     * aiAttachLogStream(&amp;c);</code></pre>
-     *
-     * @param pStreams One of the {@code aiDefaultLogStream} enumerated values. One of:<br><table><tr><td>{@link #aiDefaultLogStream_FILE DefaultLogStream_FILE}</td><td>{@link #aiDefaultLogStream_STDOUT DefaultLogStream_STDOUT}</td><td>{@link #aiDefaultLogStream_STDERR DefaultLogStream_STDERR}</td></tr><tr><td>{@link #aiDefaultLogStream_DEBUGGER DefaultLogStream_DEBUGGER}</td></tr></table>
-     * @param file     Solely for the {@link #aiDefaultLogStream_FILE DefaultLogStream_FILE} flag: specifies the file to write to. Pass {@code NULL} for all other flags.
-     * @param __result The log stream. {@code callback} is set to {@code NULL} if something went wrong.
-     */
-    @NativeType("struct aiLogStream")
-    public static AILogStream aiGetPredefinedLogStream(@NativeType("aiDefaultLogStream") int pStreams, @Nullable @NativeType("char const *") CharSequence file, @NativeType("struct aiLogStream") AILogStream __result) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            stack.nUTF8Safe(file, true);
-            long fileEncoded = file == null ? NULL : stack.getPointerAddress();
-            naiGetPredefinedLogStream(pStreams, fileEncoded, __result.address());
-            return __result;
-        } finally {
-            stack.setPointer(stackPointer);
-        }
     }
 
 }

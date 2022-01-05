@@ -41,6 +41,8 @@ interface NativeType {
 
     val p : PointerType<out NativeType>
     val const : NativeType
+
+    val libffiType: String
 }
 // These interfaces simplify some implementation details and the DSL.
 interface DataType : NativeType // (all types except void & opaque types, i.e. types with known data layout)
@@ -64,6 +66,8 @@ abstract class BaseType internal constructor(
 class VoidType internal constructor(name: String) : BaseType(name, TypeMapping.VOID) {
     override val p by lazy { PointerType(name, PointerMapping.DATA_BYTE, elementType = this) }
     override val const by lazy { VoidType(this.name.const) }
+    override val libffiType: String
+        get() = "ffi_type_void"
 }
 val String.void: VoidType get() = VoidType(this)
 
@@ -71,6 +75,8 @@ val String.void: VoidType get() = VoidType(this)
 class OpaqueType internal constructor(name: String) : BaseType(name, TypeMapping.VOID) {
     override val p by lazy { PointerType(this.name, PointerMapping.OPAQUE_POINTER, elementType = this) }
     override val const by lazy { OpaqueType(this.name.const) }
+    override val libffiType: String
+        get() = throw IllegalStateException()
 }
 val String.opaque get() = OpaqueType(this)
 val String.handle get() = typedef(this.opaque.p, this)
@@ -80,12 +86,30 @@ open class PrimitiveType(name: String, mapping: PrimitiveMapping) : BaseType(nam
     override val mapping: PrimitiveMapping get() = super.mapping as PrimitiveMapping
     override val p: PointerType<out PrimitiveType> by lazy { PointerType(this.name, this.mapping.toPointer, elementType = this) }
     override val const by lazy { PrimitiveType(this.name.const, this.mapping) }
+    override val libffiType: String
+        get() = when (mapping) {
+            PrimitiveMapping.BOOLEAN  -> "ffi_type_uint8"
+            PrimitiveMapping.BOOLEAN4 -> "ffi_type_uint32"
+            PrimitiveMapping.POINTER  -> "ffi_type_pointer"
+            PrimitiveMapping.FLOAT    -> "ffi_type_float"
+            PrimitiveMapping.DOUBLE   -> "ffi_type_double"
+            else                      -> throw IllegalStateException()
+        }
 }
 
 // Specialization for integers.
 open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false) : PrimitiveType(name, mapping) {
     override val p by lazy { PointerType(this.name, this.mapping.toPointer, elementType = this) }
     override val const by lazy { IntegerType(this.name.const, this.mapping, unsigned) }
+    override val libffiType: String
+        get() = when (mapping) {
+            PrimitiveMapping.BYTE  -> if (unsigned) "ffi_type_uint8" else "ffi_type_sint8"
+            PrimitiveMapping.SHORT -> if (unsigned) "ffi_type_uint16" else "ffi_type_sint16"
+            PrimitiveMapping.INT   -> if (unsigned) "ffi_type_uint32" else "ffi_type_sint32"
+            PrimitiveMapping.LONG  -> if (unsigned) "ffi_type_uint64" else "ffi_type_sint64"
+            PrimitiveMapping.CLONG -> if (unsigned) "ffi_type_ulong" else "ffi_type_slong"
+            else                   -> throw IllegalStateException()
+        }
 }
 val String.enumType get() = IntegerType(this, PrimitiveMapping.INT, unsigned = true)
 fun String.enumType(type: IntegerType) = typedef(type, this)
@@ -97,6 +121,13 @@ class CharType(name: String, mapping: CharMapping) : PrimitiveType(name, mapping
     /** Converts CharType to CharSequenceType. */
     override val p by lazy { CharSequenceType(this.name, PointerMapping.DATA_BYTE, elementType = this) }
     override val const by lazy { CharType(this.name.const, this.mapping) }
+    override val libffiType: String
+        get() = when (mapping) {
+            CharMapping.ASCII,
+            CharMapping.UTF8  -> "ffi_type_uchar"
+            CharMapping.UTF16 -> "ffi_type_ushort"
+            else              -> throw IllegalStateException()
+        }
 }
 
 // Arrays
@@ -110,6 +141,8 @@ class CArrayType<T : DataType> internal constructor(
     }*/
     override val p: PointerType<out NativeType> get() { throw UnsupportedOperationException() }
     override val const: NativeType get() { throw UnsupportedOperationException() }
+    override val libffiType: String
+        get() = "apiCreateArray(${elementType.libffiType}, $size)" // TODO
 
     val size: String get() = dimensions.joinToString(" * ")
     val def: String get() = dimensions.joinToString("") { "[$it]" }
@@ -130,12 +163,22 @@ class StructType internal constructor(
         get() = definition.className
     override val p by lazy { PointerType(this.name, PointerMapping.DATA_POINTER, elementType = this) }
     override val const by lazy { StructType(definition, this.name.const) }
+    override val libffiType: String
+        get() = "apiCreate${if (definition.union) "Union" else "Struct"}(${definition.members.joinToString(", ") {
+            if (it is StructMemberArray) {
+                "apiCreateArray(${it.nativeType.libffiType}, ${it.size})"
+            } else {
+                it.nativeType.libffiType
+            }
+        }})"
 }
 
 // Java instance passed as jobject to native code
 class JObjectType(name: String, type: KClass<*>) : BaseType(name, TypeMapping(name, type, type)), ReferenceType {
     override val p: PointerType<out NativeType> get() { throw UnsupportedOperationException() }
     override val const: NativeType get() { throw UnsupportedOperationException() }
+    override val libffiType: String
+        get() = throw IllegalStateException()
 }
 val KClass<*>.jobject: JObjectType get() = JObjectType("jobject", this)
 
@@ -168,6 +211,8 @@ open class PointerType<T : NativeType> internal constructor(
     override val p by lazy { PointerType(this.name, PointerMapping.DATA_POINTER, elementType = this) }
     /** Returns `<element type> * const` */
     override val const by lazy { PointerType(this.name.const, this.mapping, true, elementType) }
+    override val libffiType: String
+        get() = "ffi_type_pointer"
 }
 internal val NativeType.dereference get() = (if (this is PointerType<*>) this.elementType else this)
 internal val NativeType.hasStructValidation
