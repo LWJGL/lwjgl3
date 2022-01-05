@@ -18,7 +18,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.Pointer.*;
 
 /** The core OpenCL 1.0 functionality. */
 public class CL10 {

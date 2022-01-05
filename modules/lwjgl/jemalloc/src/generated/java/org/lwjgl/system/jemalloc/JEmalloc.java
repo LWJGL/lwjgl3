@@ -18,7 +18,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.Pointer.*;
 
 /**
  * Native bindings to <a target="_blank" href="http://jemalloc.net/">jemalloc</a>.

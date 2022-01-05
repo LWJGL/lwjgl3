@@ -490,7 +490,7 @@ class NativeClass internal constructor(
                 }
             }) {
                 staticImports.add("org.lwjgl.system.MemoryUtil.*")
-                if (functions.any { func ->
+                if (!hasMemoryStack && functions.any { func ->
                     func.hasParam {
                         it.has<MultiType> { types.contains(PointerMapping.DATA_POINTER) } && func.hasAutoSizeFor(it)
                     }
