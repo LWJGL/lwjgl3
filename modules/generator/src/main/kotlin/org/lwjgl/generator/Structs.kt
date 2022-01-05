@@ -260,6 +260,8 @@ class Struct(
 
     // Plain struct member
     operator fun DataType.invoke(name: String, documentation: String) = add(StructMember(this, name, documentation, -1))
+    // Array struct member
+    operator fun CArrayType<*>.invoke(name: String, documentation: String, validSize: String = this.size) = add(StructMemberArray(this, name, documentation, validSize))
 
     // Bitfield struct member
     operator fun PrimitiveType.invoke(name: String, documentation: String, bits: Int) = add(StructMember(this, name, documentation, bits))
