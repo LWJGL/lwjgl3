@@ -1815,6 +1815,10 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callJPPI__JJJJ(JNIEnv *__env, j
     UNUSED_PARAMS(__env, clazz)
     return ((jint (APIENTRY *) (jlong, intptr_t, intptr_t))(intptr_t)__functionAddress)(param0, (intptr_t)param1, (intptr_t)param2);
 }
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJJI__JJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return ((jint (APIENTRY *) (intptr_t, jlong, jlong))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2);
+}
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJPI__JJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     return ((jint (APIENTRY *) (intptr_t, jlong, intptr_t))(intptr_t)__functionAddress)((intptr_t)param0, param1, (intptr_t)param2);
@@ -1850,6 +1854,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callJPPI__JJJIJ(JNIEnv *__env, 
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJJI__JJIJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jint param2, jlong param3, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     return ((jint (APIENTRY *) (intptr_t, jlong, jint, jlong))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3);
+}
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJJI__JJJFJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jfloat param3, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return ((jint (APIENTRY *) (intptr_t, jlong, jlong, jfloat))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3);
+}
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJJI__JJJIJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jint param3, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return ((jint (APIENTRY *) (intptr_t, jlong, jlong, jint))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3);
 }
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJJI__JJJZJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jboolean param3, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
@@ -1971,6 +1983,10 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPPPI__JIIIIIIIJJJ(JNIEnv *_
     UNUSED_PARAMS(__env, clazz)
     return ((jint (APIENTRY *) (intptr_t, jint, jint, jint, jint, jint, jint, jint, intptr_t, intptr_t))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3, param4, param5, param6, param7, (intptr_t)param8, (intptr_t)param9);
 }
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callJJPPI__JJJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong param3, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return ((jint (APIENTRY *) (jlong, jlong, intptr_t, intptr_t))(intptr_t)__functionAddress)(param0, param1, (intptr_t)param2, (intptr_t)param3);
+}
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callJPPPI__JJJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong param3, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     return ((jint (APIENTRY *) (jlong, intptr_t, intptr_t, intptr_t))(intptr_t)__functionAddress)(param0, (intptr_t)param1, (intptr_t)param2, (intptr_t)param3);
@@ -1979,9 +1995,17 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJJJI__JJJJJ(JNIEnv *__env,
     UNUSED_PARAMS(__env, clazz)
     return ((jint (APIENTRY *) (intptr_t, jlong, jlong, jlong))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, param3);
 }
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJJPI__JJJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong param3, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return ((jint (APIENTRY *) (intptr_t, jlong, jlong, intptr_t))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, (intptr_t)param3);
+}
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJPPI__JJJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong param3, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     return ((jint (APIENTRY *) (intptr_t, jlong, intptr_t, intptr_t))(intptr_t)__functionAddress)((intptr_t)param0, param1, (intptr_t)param2, (intptr_t)param3);
+}
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPPJPI__JJJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong param3, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return ((jint (APIENTRY *) (intptr_t, intptr_t, jlong, intptr_t))(intptr_t)__functionAddress)((intptr_t)param0, (intptr_t)param1, param2, (intptr_t)param3);
 }
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPPNPI__JJJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong param3, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
@@ -2074,6 +2098,10 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPPPPI__JIIIIIIIJJJJ(JNIEnv 
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPPPPI__IJJIIIIIIIIIIIIIIIIIIJJJ(JNIEnv *__env, jclass clazz, jint param0, jlong param1, jlong param2, jint param3, jint param4, jint param5, jint param6, jint param7, jint param8, jint param9, jint param10, jint param11, jint param12, jint param13, jint param14, jint param15, jint param16, jint param17, jint param18, jint param19, jint param20, jlong param21, jlong param22, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)
     return ((jint (APIENTRY *) (jint, intptr_t, intptr_t, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, intptr_t, intptr_t))(intptr_t)__functionAddress)(param0, (intptr_t)param1, (intptr_t)param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16, param17, param18, param19, param20, (intptr_t)param21, (intptr_t)param22);
+}
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJJPPI__JJJJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong param3, jlong param4, jlong __functionAddress) {
+    UNUSED_PARAMS(__env, clazz)
+    return ((jint (APIENTRY *) (intptr_t, jlong, jlong, intptr_t, intptr_t))(intptr_t)__functionAddress)((intptr_t)param0, param1, param2, (intptr_t)param3, (intptr_t)param4);
 }
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_JNI_callPJPPPI__JJJJJJ(JNIEnv *__env, jclass clazz, jlong param0, jlong param1, jlong param2, jlong param3, jlong param4, jlong __functionAddress) {
     UNUSED_PARAMS(__env, clazz)

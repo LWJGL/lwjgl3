@@ -35,6 +35,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.opengl.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.opengl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.opengles.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.opengles.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.openvr.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.openvr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.openxr.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.openxr.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.opus.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.opus.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.ovr.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.ovr.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.par.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.par.iml" />
@@ -82,6 +83,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengles.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opengles.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openvr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openvr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openxr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.openxr.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opus.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.opus.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.ovr.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.ovr.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.par.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.par.iml" />

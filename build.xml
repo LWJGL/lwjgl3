@@ -178,6 +178,7 @@
             <and>
                 <isfalse value="${binding.egl}"/>
                 <istrue value="${binding.glfw}"/>
+                <istrue value="${binding.openxr}"/>
             </and>
         </condition>
 
@@ -186,6 +187,7 @@
             <and>
                 <isfalse value="${binding.opengl}"/>
                 <istrue value="${binding.glfw}"/>
+                <istrue value="${binding.openxr}"/>
             </and>
         </condition>
 
@@ -194,6 +196,7 @@
             <and>
                 <isfalse value="${binding.vulkan}"/>
                 <istrue value="${binding.glfw}"/>
+                <istrue value="${binding.openxr}"/>
             </and>
         </condition>
 
@@ -542,6 +545,14 @@
             <exclude name="org/lwjgl/glfw/GLFWNativeWGL.java" unless:true="${binding.opengl}"/>
             <exclude name="org/lwjgl/glfw/GLFWVulkan.java" unless:true="${binding.vulkan}"/>
         </compileBinding>
+
+        <compileBinding binding="openxr">
+            <classpath>
+                <pathelement path="${bin.lwjgl}/egl"/>
+                <pathelement path="${bin.lwjgl}/opengl"/>
+                <pathelement path="${bin.lwjgl}/vulkan"/>
+            </classpath>
+        </compileBinding>
     </target>
 
     <target name="compile-native" description="Compiles the native source code" depends="init, compile">
@@ -798,6 +809,7 @@
             <include name="org/lwjgl/demo/opengl/**" if:true="${binding.opengl}"/>
 
             <include name="org/lwjgl/demo/openvr/**" if:true="${binding.openvr}"/>
+            <include name="org/lwjgl/demo/openxr/**" if:set="${binding.openxr}"/>
             <include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
             <include name="org/lwjgl/demo/stb/**" if:set="test.stb"/>
 
@@ -1569,6 +1581,9 @@
                 <get-release platform="windows" arch="x86" file="openvr_api.dll.git"/>
             </natives>
         </release-module>
+
+        <!-- OpenXR -->
+        <release-module name="openxr" title="OpenXR" if:true="${binding.openxr}"/>
 
         <!-- Opus -->
         <release-module name="opus" native-library="opus" title="Opus" if:true="${binding.opus}"/>

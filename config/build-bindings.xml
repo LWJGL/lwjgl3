@@ -46,6 +46,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.opengl" value="true"/>
     <property name="binding.opengles" value="true"/>
     <condition property="binding.openvr" value="false" else="true"><isset property="build.arch.arm"/></condition>
+    <property name="binding.openxr" value="true"/>
     <property name="binding.opus" value="true"/>
     <property name="binding.par" value="true"/>
     <condition property="binding.remotery" value="false" else="true">
@@ -74,6 +75,7 @@ This script is included in /config/build-definitions.xml.
     <property name="java-only.binding.jawt" value="true"/>
     <property name="java-only.binding.odbc" value="true"/>
     <property name="java-only.binding.opencl" value="true"/>
+    <property name="java-only.binding.openxr" value="true"/>
 
     <!-- Set the path to the Oculus SDK to enable. -->
     <!-- TODO: add headers in here -->
@@ -114,6 +116,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.opengl}"><local name="module"/><property name="module" value="opengl"/><body/></sequential>
                 <sequential if:true="${binding.opengles}"><local name="module"/><property name="module" value="opengles"/><body/></sequential>
                 <sequential if:true="${binding.openvr}"><local name="module"/><property name="module" value="openvr"/><body/></sequential>
+                <sequential if:true="${binding.openxr}"><local name="module"/><property name="module" value="openxr"/><body/></sequential>
                 <sequential if:true="${binding.opus}"><local name="module"/><property name="module" value="opus"/><body/></sequential>
                 <sequential if:true="${binding.ovr}"><local name="module"/><property name="module" value="ovr"/><body/></sequential>
                 <sequential if:true="${binding.par}"><local name="module"/><property name="module" value="par"/><body/></sequential>

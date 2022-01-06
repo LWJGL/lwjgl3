@@ -140,7 +140,6 @@ improve the chances of a quick and useful response.
 |-------|-----------|
 |[Assimp](http://www.assimp.org/)|A portable Open Source library to import various well-known 3D model formats in a uniform manner.|
 |[bgfx](https://bkaradzic.github.io/bgfx/)|Cross-platform, graphics API agnostic, “Bring Your Own Engine/Framework” style rendering library, licensed under permissive BSD-2 clause open source license.|
-|[LibOVR](https://developer.oculus.com/documentation/)|The API of the Oculus SDK.|
 |[meshoptimizer](https://github.com/zeux/meshoptimizer)|A mesh optimization library that makes meshes smaller and faster to render.|
 |[NanoSVG](https://github.com/memononen/nanosvg)|A simple stupid SVG parser.|
 |[NanoVG](https://github.com/memononen/nanovg)|A small antialiased vector graphics rendering library for OpenGL.|
@@ -148,13 +147,20 @@ improve the chances of a quick and useful response.
 |[par_octasphere](https://prideout.net/blog/octasphere)|Generates triangle meshes for spheres, rounded boxes, and capsules.|
 |[par_shapes](https://prideout.net/shapes)|Generate parametric surfaces and other simple shapes.|
 |[par_streamlines](https://prideout.net/blog/par_streamlines/)|Triangulate wide lines and curves.|
-|[OpenVR](https://github.com/ValveSoftware/openvr)|An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.|
 |[Shaderc](https://github.com/google/shaderc)|A collection of libraries for shader compilation.|
 |[SPIRV-Cross](https://github.com/KhronosGroup/SPIRV-Cross)|A library for performing reflection on SPIR-V and disassembling SPIR-V back to high level languages.|
 |[Tiny OpenEXR](https://github.com/syoyo/tinyexr)|A small, single header-only library to load and save OpenEXR(.exr) images.|
 |[Tootle (AMD)](https://github.com/GPUOpen-Tools/amd-tootle)|A 3D triangle mesh optimization library that improves on existing mesh preprocessing techniques.|
 |[Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)|An easy to integrate Vulkan memory allocation library.|
 |[Yoga](https://facebook.github.io/yoga/)|An open-source, cross-platform layout library that implements Flexbox.|
+
+#### AR/VR
+
+|Library|Description|
+|-------|-----------|
+|[LibOVR](https://developer.oculus.com/documentation/)|The API of the Oculus SDK.|
+|[OpenVR](https://github.com/ValveSoftware/openvr)|An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.|
+|[OpenXR](https://www.khronos.org/openxr/)|A royalty-free, open standard that provides high-performance access to Augmented Reality (AR) and Virtual Reality (VR)—collectively known as XR—platforms and devices.|
 
 #### [stb](https://github.com/nothings/stb) - single-file public domain libraries for C/C++
 

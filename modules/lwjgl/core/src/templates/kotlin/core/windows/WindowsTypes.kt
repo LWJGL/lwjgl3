@@ -23,6 +23,7 @@ val UINT = IntegerType("UINT", PrimitiveMapping.INT, unsigned = true)
 val DWORD = IntegerType("DWORD", PrimitiveMapping.INT)
 val LONG = IntegerType("LONG", PrimitiveMapping.INT)
 val ULONG = IntegerType("ULONG", PrimitiveMapping.INT, unsigned = true)
+val LONGLONG = IntegerType("LONGLONG", PrimitiveMapping.LONG)
 val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
 val LDOUBLE = PrimitiveType("LDOUBLE", PrimitiveMapping.DOUBLE)
 
@@ -39,7 +40,7 @@ val WPARAM = typedef(UINT_PTR, "WPARAM")
 val LPARAM = typedef(LONG_PTR, "LPARAM")
 
 val CHAR = CharType("CHAR", CharMapping.ASCII)
-val WCHAR = CharType("CHAR", CharMapping.UTF16)
+val WCHAR = CharType("WCHAR", CharMapping.UTF16)
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 
 val LPCSTR = typedef(CHAR.const.p, "LPCSTR")
@@ -67,6 +68,14 @@ val HMONITOR = typedef(HANDLE, "HMONITOR")
 val DPI_AWARENESS_CONTEXT = typedef(HANDLE, "DPI_AWARENESS_CONTEXT")
 
 val COLORREF = typedef(DWORD, "COLORREF")
+
+val LARGE_INTEGER = union(Module.CORE_WINDOWS, "LARGE_INTEGER") {
+    struct {
+        DWORD("LowPart", "")
+        LONG("HighPart", "")
+    }("u", "")
+    LONGLONG("QuadPart", "")
+}
 
 /*val POINTFLOAT = struct(Binding.CORE_WINDOWS, "POINTFLOAT") {
     documentation = "Contains the x and y coordinates of a point."

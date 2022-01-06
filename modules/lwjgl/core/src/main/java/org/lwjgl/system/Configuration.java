@@ -488,6 +488,14 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the OpenVR library (<b>org.lwjgl.openvr.libname</b>). */
     public static final Configuration<String> OPENVR_LIBRARY_NAME = new Configuration<>("org.lwjgl.openvr.libname", StateInit.STRING);
 
+    // -- OpenXR
+
+    /** Similar to {@link #EGL_EXPLICIT_INIT} for the OpenXR library (<b>org.lwjgl.openxr.explicitInit</b>). */
+    public static final Configuration<Boolean> OPENXR_EXPLICIT_INIT = new Configuration<>("org.lwjgl.openxr.explicitInit", StateInit.BOOLEAN);
+
+    /** Similar to {@link #LIBRARY_NAME} for the OpenXR library (<b>org.lwjgl.openxr.libname</b>). */
+    public static final Configuration<String> OPENXR_LIBRARY_NAME = new Configuration<>("org.lwjgl.openxr.libname", StateInit.STRING);
+
     // -- OPUS
 
     /** Similar to {@link #LIBRARY_NAME} for the Opus library (<b>org.lwjgl.opus.libname</b>). */
