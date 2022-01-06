@@ -47,7 +47,7 @@ public final class XR {
         SharedLibrary XR;
         switch (Platform.get()) {
             case LINUX:
-                XR = Library.loadNative(XR.class, "org.lwjgl.openxr", Configuration.OPENXR_LIBRARY_NAME, "openxr_loader");
+                XR = Library.loadNative(XR.class, "org.lwjgl.openxr", Configuration.OPENXR_LIBRARY_NAME, "libopenxr_loader.so.1", "openxr_loader");
                 break;
             case WINDOWS:
                 XR = Library.loadNative(XR.class, "org.lwjgl.openxr", Configuration.OPENXR_LIBRARY_NAME, "openxr-loader");
