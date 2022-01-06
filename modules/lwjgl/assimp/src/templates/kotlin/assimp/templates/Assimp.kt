@@ -2855,6 +2855,7 @@ aiAttachLogStream(&c);""")}
         "AI_MATKEY_METALLIC_FACTOR".."\$mat.metallicFactor",
         "AI_MATKEY_USE_ROUGHNESS_MAP".."\$mat.useRoughnessMap",
         "AI_MATKEY_ROUGHNESS_FACTOR".."\$mat.roughnessFactor",
+        "AI_MATKEY_ANISOTROPY_FACTOR".."\$mat.anisotropyFactor",
         "AI_MATKEY_SPECULAR_FACTOR".."\$mat.specularFactor",
         "AI_MATKEY_GLOSSINESS_FACTOR".."\$mat.glossinessFactor",
         "AI_MATKEY_SHEEN_COLOR_FACTOR".."\$clr.sheen.factor",
