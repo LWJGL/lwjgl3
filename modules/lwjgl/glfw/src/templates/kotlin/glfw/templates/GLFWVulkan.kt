@@ -55,9 +55,9 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         """
         Returns whether the Vulkan loader has been found. This check is performed by #Init().
 
-         The availability of a Vulkan loader and even an ICD does not by itself guarantee that surface creation or even instance creation is possible. Call
-         #GetRequiredInstanceExtensions() to check whether the extensions necessary for Vulkan surface creation are available and
-         #GetPhysicalDevicePresentationSupport() to check whether a queue family of a physical device supports image presentation.
+        The availability of a Vulkan loader and even an ICD does not by itself guarantee that surface creation or even instance creation is possible. Call
+        #GetRequiredInstanceExtensions() to check whether the extensions necessary for Vulkan surface creation are available and
+        #GetPhysicalDevicePresentationSupport() to check whether a queue family of a physical device supports image presentation.
 
         Possible errors include #NOT_INITIALIZED.
 
@@ -83,8 +83,6 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
 
         Additional extensions may be required by future versions of GLFW. You should check if any extensions you wish to enable are already in the returned
         array, as it is an error to specify an extension more than once in the {@code VkInstanceCreateInfo} struct.
-        
-        macOS: GLFW currently supports both the {@code VK_MVK_macos_surface} and the newer {@code VK_EXT_metal_surface} extensions.
 
         The returned array is allocated and freed by GLFW. You should not free it yourself. It is guaranteed to be valid only until the library is terminated.
 
@@ -179,15 +177,25 @@ val GLFWVulkan = "GLFWVulkan".dependsOn(Module.VULKAN)?.nativeClass(Module.GLFW,
         Possible errors include #NOT_INITIALIZED, #API_UNAVAILABLE, #PLATFORM_ERROR and #INVALID_VALUE.
 
         If an error occurs before the creation call is made, GLFW returns the Vulkan error code most appropriate for the error. Appropriate use of
-        #VulkanSupported() and #GetRequiredInstanceExtensions() should eliminate almost all occurrences of these errors.
-        
-        macOS: This function currently only supports the {@code VK_MVK_macos_surface} extension from MoltenVK.
- 
-        macOS: This function creates and sets a {@code CAMetalLayer} instance for the window content view, which is required for MoltenVK to function.
+        #VulkanSupported() and {@code glfwGetRequiredInstanceExtensions} should eliminate almost all occurrences of these errors.
 
-        x11: GLFW by default attempts to use the {@code VK_KHR_xcb_surface} extension, if available. You can make it prefer the {@code VK_KHR_xlib_surface} extension by setting the #X11_XCB_VULKAN_SURFACE init hint.
-
-        This function may be called from any thread. For synchronization details of Vulkan objects, see the Vulkan specification.
+        Notes:
+        ${ul(
+            "This function may be called from any thread. For synchronization details of Vulkan objects, see the Vulkan specification.",
+            """
+            <b>macOS</b>: GLFW prefers the {@code VK_EXT_metal_surface} extension, with the {@code VK_MVK_macos_surface} extension as a fallback. The name of
+            the selected extension, if any, is included in the array returned by {@code glfwGetRequiredInstanceExtensions}.
+            """,
+            """
+            <b>macOS</b>: This function creates and sets a {@code CAMetalLayer} instance for the window content view, which is required for MoltenVK to
+            function.
+            """,
+            """
+            <b>x11</b>: By default GLFW prefers the {@code VK_KHR_xcb_surface} extension, with the {@code VK_KHR_xlib_surface} extension as a fallback. You can
+            make {@code VK_KHR_xlib_surface} the preferred extension by setting the #X11_XCB_VULKAN_SURFACE init hint. The name of the selected extension, if
+            any, is included in the array returned by {@code glfwGetRequiredInstanceExtensions}.
+            """
+        )}
         """,
 
         VkInstance("instance", "the Vulkan instance to create the surface in"),

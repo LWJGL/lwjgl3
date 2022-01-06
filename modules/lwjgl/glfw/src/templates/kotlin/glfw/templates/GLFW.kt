@@ -2184,7 +2184,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         By default, windowed mode windows are focused when shown. Set the #FOCUS_ON_SHOW window hint to change this behavior for all newly created windows, or
         change the behavior for an existing window with #SetWindowAttrib().
 
-        This function must only be called from the main thread.
+        Notes:
+        ${ul(
+            "This function must only be called from the main thread.",
+            """
+            <b>Wayland</b>: Because Wayland wants every frame of the desktop to be complete, this function does not immediately make the window visible.
+            Instead it will become visible the next time the window framebuffer is updated after this call.
+            """
+        )}
         """,
 
         GLFWwindow.p("window", "the window to make visible"),
