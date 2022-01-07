@@ -4,11 +4,13 @@
  */
 package org.lwjgl.openxr;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.openxr.XR10.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Wraps an {@code XrInstance} handle. */
@@ -32,11 +34,16 @@ public class XrInstance extends DispatchableHandle {
             : XR_MAKE_VERSION(1, 0, 0);
 
         return new XRCapabilities(functionName -> {
-            long address = callPPP(handle, memAddress(functionName), XR.getGlobalCommands().xrGetInstanceProcAddr);
-            if (address == NULL && Checks.DEBUG_FUNCTIONS) {
-                apiLog("Failed to locate address for XR instance function " + memASCII(functionName));
+            try (MemoryStack stack = stackPush()) {
+                PointerBuffer pp = stack.mallocPointer(1);
+
+                int result = callPPPI(handle, memAddress(functionName), pp.address(), XR.getGlobalCommands().xrGetInstanceProcAddr);
+                if (result != XR_SUCCESS && Checks.DEBUG_FUNCTIONS) {
+                    apiLog("Failed to query address of XR function " + memASCII(functionName));
+                }
+
+                return pp.get(0);
             }
-            return address;
         }, apiVersion, XR.getEnabledExtensionSet(apiVersion, ci.enabledExtensionNames()));
     }
 

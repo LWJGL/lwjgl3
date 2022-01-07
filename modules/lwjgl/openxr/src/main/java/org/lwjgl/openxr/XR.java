@@ -135,16 +135,19 @@ public final class XR {
         private long getFunctionAddress(String name) { return getFunctionAddress(name, true); }
         private long getFunctionAddress(String name, boolean required) {
             try (MemoryStack stack = stackPush()) {
-                long address = callPPP(NULL, memAddress(stack.ASCII(name)), xrGetInstanceProcAddr);
-                if (address == NULL && required) {
+                PointerBuffer pp = stack.mallocPointer(1);
+
+                int result = callPPPI(NULL, memAddress(stack.ASCII(name)), pp.address(), xrGetInstanceProcAddr);
+                if (result != XR_SUCCESS && required) {
                     throw new IllegalArgumentException("A critical function is missing. Make sure that OpenXR is available.");
                 }
-                return address;
+
+                return pp.get(0);
             }
         }
     }
 
-    /** Returns the Vulkan global commands. */
+    /** Returns the OpenXR global commands. */
     static GlobalCommands getGlobalCommands() { return check(globalCommands); }
 
     static Set<String> getEnabledExtensionSet(long apiVersion, @Nullable PointerBuffer extensionNames) {
@@ -164,7 +167,7 @@ public final class XR {
                 maxMinor = min(minorVersion, maxMinor);
             }
             for (int m = 0; m <= maxMinor; m++) {
-                enabledExtensions.add(String.format("Vulkan%d%d", M, m));
+                enabledExtensions.add(String.format("OpenXR%d%d", M, m));
             }
         }
 
