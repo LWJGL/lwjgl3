@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -268,20 +267,11 @@ public class XrView extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrView.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrView.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrView.NEXT, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrView.POSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #fov(XrFovf) fov}. */
     public static void nfov(long struct, XrFovf value) { memCopy(value.address(), struct + XrView.FOV, XrFovf.SIZEOF); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrView.NEXT));
-    }
 
     // -----------------------------------
 

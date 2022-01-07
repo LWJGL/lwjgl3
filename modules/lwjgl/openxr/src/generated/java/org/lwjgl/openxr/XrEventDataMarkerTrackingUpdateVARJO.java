@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -293,7 +292,7 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct implements Nati
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataMarkerTrackingUpdateVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataMarkerTrackingUpdateVARJO.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataMarkerTrackingUpdateVARJO.NEXT, value); }
     /** Unsafe version of {@link #markerId(long) markerId}. */
     public static void nmarkerId(long struct, long value) { UNSAFE.putLong(null, struct + XrEventDataMarkerTrackingUpdateVARJO.MARKERID, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
@@ -302,15 +301,6 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct implements Nati
     public static void nisPredicted(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataMarkerTrackingUpdateVARJO.ISPREDICTED, value); }
     /** Unsafe version of {@link #time(long) time}. */
     public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrEventDataMarkerTrackingUpdateVARJO.TIME, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataMarkerTrackingUpdateVARJO.NEXT));
-    }
 
     // -----------------------------------
 

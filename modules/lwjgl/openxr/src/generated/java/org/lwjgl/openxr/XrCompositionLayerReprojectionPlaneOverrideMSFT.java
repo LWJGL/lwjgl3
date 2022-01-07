@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -287,22 +286,13 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct impl
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.NEXT, value); }
     /** Unsafe version of {@link #position$(XrVector3f) position$}. */
     public static void nposition$(long struct, XrVector3f value) { memCopy(value.address(), struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.POSITION, XrVector3f.SIZEOF); }
     /** Unsafe version of {@link #normal(XrVector3f) normal}. */
     public static void nnormal(long struct, XrVector3f value) { memCopy(value.address(), struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.NORMAL, XrVector3f.SIZEOF); }
     /** Unsafe version of {@link #velocity(XrVector3f) velocity}. */
     public static void nvelocity(long struct, XrVector3f value) { memCopy(value.address(), struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.VELOCITY, XrVector3f.SIZEOF); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerReprojectionPlaneOverrideMSFT.NEXT));
-    }
 
     // -----------------------------------
 

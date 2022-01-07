@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -269,20 +268,11 @@ public class XrSceneObjectTypesFilterInfoMSFT extends Struct implements NativeRe
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneObjectTypesFilterInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneObjectTypesFilterInfoMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneObjectTypesFilterInfoMSFT.NEXT, value); }
     /** Sets the specified value to the {@code objectTypeCount} field of the specified {@code struct}. */
     public static void nobjectTypeCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneObjectTypesFilterInfoMSFT.OBJECTTYPECOUNT, value); }
     /** Unsafe version of {@link #objectTypes(IntBuffer) objectTypes}. */
     public static void nobjectTypes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + XrSceneObjectTypesFilterInfoMSFT.OBJECTTYPES, memAddressSafe(value)); if (value != null) { nobjectTypeCount(struct, value.remaining()); } }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSceneObjectTypesFilterInfoMSFT.NEXT));
-    }
 
     // -----------------------------------
 

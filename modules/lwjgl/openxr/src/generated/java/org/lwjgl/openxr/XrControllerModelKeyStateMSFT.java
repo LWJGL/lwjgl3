@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -256,18 +255,9 @@ public class XrControllerModelKeyStateMSFT extends Struct implements NativeResou
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrControllerModelKeyStateMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrControllerModelKeyStateMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrControllerModelKeyStateMSFT.NEXT, value); }
     /** Unsafe version of {@link #modelKey(long) modelKey}. */
     public static void nmodelKey(long struct, long value) { UNSAFE.putLong(null, struct + XrControllerModelKeyStateMSFT.MODELKEY, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrControllerModelKeyStateMSFT.NEXT));
-    }
 
     // -----------------------------------
 

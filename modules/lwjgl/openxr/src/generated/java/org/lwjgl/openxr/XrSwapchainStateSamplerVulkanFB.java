@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -399,7 +398,7 @@ public class XrSwapchainStateSamplerVulkanFB extends Struct implements NativeRes
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainStateSamplerVulkanFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainStateSamplerVulkanFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainStateSamplerVulkanFB.NEXT, value); }
     /** Unsafe version of {@link #minFilter(int) minFilter}. */
     public static void nminFilter(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainStateSamplerVulkanFB.MINFILTER, value); }
     /** Unsafe version of {@link #magFilter(int) magFilter}. */
@@ -422,15 +421,6 @@ public class XrSwapchainStateSamplerVulkanFB extends Struct implements NativeRes
     public static void nmaxAnisotropy(long struct, float value) { UNSAFE.putFloat(null, struct + XrSwapchainStateSamplerVulkanFB.MAXANISOTROPY, value); }
     /** Unsafe version of {@link #borderColor(XrColor4f) borderColor}. */
     public static void nborderColor(long struct, XrColor4f value) { memCopy(value.address(), struct + XrSwapchainStateSamplerVulkanFB.BORDERCOLOR, XrColor4f.SIZEOF); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSwapchainStateSamplerVulkanFB.NEXT));
-    }
 
     // -----------------------------------
 

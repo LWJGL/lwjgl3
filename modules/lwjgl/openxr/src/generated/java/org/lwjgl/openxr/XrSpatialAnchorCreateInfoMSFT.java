@@ -278,7 +278,7 @@ public class XrSpatialAnchorCreateInfoMSFT extends Struct implements NativeResou
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorCreateInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorCreateInfoMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorCreateInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
     public static void nspace(long struct, XrSpace value) { memPutAddress(struct + XrSpatialAnchorCreateInfoMSFT.SPACE, value.address()); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
@@ -292,7 +292,6 @@ public class XrSpatialAnchorCreateInfoMSFT extends Struct implements NativeResou
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrSpatialAnchorCreateInfoMSFT.NEXT));
         check(memGetAddress(struct + XrSpatialAnchorCreateInfoMSFT.SPACE));
     }
 

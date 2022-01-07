@@ -289,7 +289,7 @@ public class XrPassthroughLayerCreateInfoFB extends Struct implements NativeReso
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughLayerCreateInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughLayerCreateInfoFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughLayerCreateInfoFB.NEXT, value); }
     /** Unsafe version of {@link #passthrough(XrPassthroughFB) passthrough}. */
     public static void npassthrough(long struct, XrPassthroughFB value) { memPutAddress(struct + XrPassthroughLayerCreateInfoFB.PASSTHROUGH, value.address()); }
     /** Unsafe version of {@link #flags(long) flags}. */
@@ -303,7 +303,6 @@ public class XrPassthroughLayerCreateInfoFB extends Struct implements NativeReso
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrPassthroughLayerCreateInfoFB.NEXT));
         check(memGetAddress(struct + XrPassthroughLayerCreateInfoFB.PASSTHROUGH));
     }
 

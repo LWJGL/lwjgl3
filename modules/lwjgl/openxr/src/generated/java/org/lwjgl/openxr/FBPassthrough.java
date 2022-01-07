@@ -143,7 +143,6 @@ public class FBPassthrough {
         long __functionAddress = session.getCapabilities().xrCreatePassthroughFB;
         if (CHECKS) {
             check(__functionAddress);
-            XrPassthroughCreateInfoFB.validate(createInfo);
         }
         return callPPPI(session.address(), createInfo, outPassthrough, __functionAddress);
     }
@@ -639,7 +638,6 @@ public class FBPassthrough {
         long __functionAddress = layer.getCapabilities().xrPassthroughLayerSetStyleFB;
         if (CHECKS) {
             check(__functionAddress);
-            XrPassthroughStyleFB.validate(style);
         }
         return callPPI(layer.address(), style, __functionAddress);
     }

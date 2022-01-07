@@ -266,7 +266,7 @@ public class XrSpatialAnchorPersistenceInfoMSFT extends Struct implements Native
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorPersistenceInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorPersistenceInfoMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorPersistenceInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #spatialAnchorPersistenceName(XrSpatialAnchorPersistenceNameMSFT) spatialAnchorPersistenceName}. */
     public static void nspatialAnchorPersistenceName(long struct, XrSpatialAnchorPersistenceNameMSFT value) { memCopy(value.address(), struct + XrSpatialAnchorPersistenceInfoMSFT.SPATIALANCHORPERSISTENCENAME, XrSpatialAnchorPersistenceNameMSFT.SIZEOF); }
     /** Unsafe version of {@link #spatialAnchor(XrSpatialAnchorMSFT) spatialAnchor}. */
@@ -278,7 +278,6 @@ public class XrSpatialAnchorPersistenceInfoMSFT extends Struct implements Native
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrSpatialAnchorPersistenceInfoMSFT.NEXT));
         check(memGetAddress(struct + XrSpatialAnchorPersistenceInfoMSFT.SPATIALANCHOR));
     }
 

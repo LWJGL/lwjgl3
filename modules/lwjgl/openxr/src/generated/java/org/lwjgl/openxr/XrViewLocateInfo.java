@@ -283,7 +283,7 @@ public class XrViewLocateInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrViewLocateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrViewLocateInfo.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrViewLocateInfo.NEXT, value); }
     /** Unsafe version of {@link #viewConfigurationType(int) viewConfigurationType}. */
     public static void nviewConfigurationType(long struct, int value) { UNSAFE.putInt(null, struct + XrViewLocateInfo.VIEWCONFIGURATIONTYPE, value); }
     /** Unsafe version of {@link #displayTime(long) displayTime}. */
@@ -297,7 +297,6 @@ public class XrViewLocateInfo extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrViewLocateInfo.NEXT));
         check(memGetAddress(struct + XrViewLocateInfo.SPACE));
     }
 

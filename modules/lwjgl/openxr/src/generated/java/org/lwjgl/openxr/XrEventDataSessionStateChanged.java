@@ -281,7 +281,7 @@ public class XrEventDataSessionStateChanged extends Struct implements NativeReso
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataSessionStateChanged.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataSessionStateChanged.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataSessionStateChanged.NEXT, value); }
     /** Unsafe version of {@link #session(XrSession) session}. */
     public static void nsession(long struct, XrSession value) { memPutAddress(struct + XrEventDataSessionStateChanged.SESSION, value.address()); }
     /** Unsafe version of {@link #state(int) state}. */
@@ -295,7 +295,6 @@ public class XrEventDataSessionStateChanged extends Struct implements NativeReso
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataSessionStateChanged.NEXT));
         check(memGetAddress(struct + XrEventDataSessionStateChanged.SESSION));
     }
 

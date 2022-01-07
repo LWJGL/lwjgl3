@@ -313,7 +313,7 @@ public class XrInstanceCreateInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInstanceCreateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrInstanceCreateInfo.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrInstanceCreateInfo.NEXT, value); }
     /** Unsafe version of {@link #createFlags(long) createFlags}. */
     public static void ncreateFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrInstanceCreateInfo.CREATEFLAGS, value); }
     /** Unsafe version of {@link #applicationInfo(XrApplicationInfo) applicationInfo}. */
@@ -333,7 +333,6 @@ public class XrInstanceCreateInfo extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrInstanceCreateInfo.NEXT));
         if (nenabledApiLayerCount(struct) != 0) {
             check(memGetAddress(struct + XrInstanceCreateInfo.ENABLEDAPILAYERNAMES));
         }

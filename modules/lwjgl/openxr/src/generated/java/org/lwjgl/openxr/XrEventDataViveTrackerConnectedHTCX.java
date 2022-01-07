@@ -255,7 +255,7 @@ public class XrEventDataViveTrackerConnectedHTCX extends Struct implements Nativ
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataViveTrackerConnectedHTCX.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataViveTrackerConnectedHTCX.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataViveTrackerConnectedHTCX.NEXT, value); }
     /** Unsafe version of {@link #paths(XrViveTrackerPathsHTCX) paths}. */
     public static void npaths(long struct, XrViveTrackerPathsHTCX value) { memPutAddress(struct + XrEventDataViveTrackerConnectedHTCX.PATHS, value.address()); }
 
@@ -265,7 +265,6 @@ public class XrEventDataViveTrackerConnectedHTCX extends Struct implements Nativ
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataViveTrackerConnectedHTCX.NEXT));
         check(memGetAddress(struct + XrEventDataViveTrackerConnectedHTCX.PATHS));
     }
 

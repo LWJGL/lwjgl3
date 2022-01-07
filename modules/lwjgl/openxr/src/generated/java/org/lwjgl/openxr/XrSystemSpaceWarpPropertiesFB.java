@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -263,20 +262,11 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemSpaceWarpPropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemSpaceWarpPropertiesFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemSpaceWarpPropertiesFB.NEXT, value); }
     /** Unsafe version of {@link #recommendedMotionVectorImageRectWidth(int) recommendedMotionVectorImageRectWidth}. */
     public static void nrecommendedMotionVectorImageRectWidth(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemSpaceWarpPropertiesFB.RECOMMENDEDMOTIONVECTORIMAGERECTWIDTH, value); }
     /** Unsafe version of {@link #recommendedMotionVectorImageRectHeight(int) recommendedMotionVectorImageRectHeight}. */
     public static void nrecommendedMotionVectorImageRectHeight(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemSpaceWarpPropertiesFB.RECOMMENDEDMOTIONVECTORIMAGERECTHEIGHT, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSystemSpaceWarpPropertiesFB.NEXT));
-    }
 
     // -----------------------------------
 

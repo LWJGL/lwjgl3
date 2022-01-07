@@ -273,7 +273,7 @@ public class XrHolographicWindowAttachmentMSFT extends Struct implements NativeR
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHolographicWindowAttachmentMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrHolographicWindowAttachmentMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrHolographicWindowAttachmentMSFT.NEXT, value); }
     /** Unsafe version of {@link #holographicSpace(long) holographicSpace}. */
     public static void nholographicSpace(long struct, long value) { memPutAddress(struct + XrHolographicWindowAttachmentMSFT.HOLOGRAPHICSPACE, check(value)); }
     /** Unsafe version of {@link #coreWindow(long) coreWindow}. */
@@ -285,7 +285,6 @@ public class XrHolographicWindowAttachmentMSFT extends Struct implements NativeR
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrHolographicWindowAttachmentMSFT.NEXT));
         check(memGetAddress(struct + XrHolographicWindowAttachmentMSFT.HOLOGRAPHICSPACE));
         check(memGetAddress(struct + XrHolographicWindowAttachmentMSFT.COREWINDOW));
     }

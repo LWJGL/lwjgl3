@@ -269,7 +269,7 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationFrameEndInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSecondaryViewConfigurationFrameEndInfoMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSecondaryViewConfigurationFrameEndInfoMSFT.NEXT, value); }
     /** Sets the specified value to the {@code viewConfigurationCount} field of the specified {@code struct}. */
     public static void nviewConfigurationCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationFrameEndInfoMSFT.VIEWCONFIGURATIONCOUNT, value); }
     /** Unsafe version of {@link #viewConfigurationLayersInfo(XrSecondaryViewConfigurationLayerInfoMSFT.Buffer) viewConfigurationLayersInfo}. */
@@ -281,7 +281,6 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrSecondaryViewConfigurationFrameEndInfoMSFT.NEXT));
         int viewConfigurationCount = nviewConfigurationCount(struct);
         long viewConfigurationLayersInfo = memGetAddress(struct + XrSecondaryViewConfigurationFrameEndInfoMSFT.VIEWCONFIGURATIONLAYERSINFO);
         check(viewConfigurationLayersInfo);

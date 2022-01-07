@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -263,20 +262,11 @@ public class XrViewConfigurationProperties extends Struct implements NativeResou
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrViewConfigurationProperties.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrViewConfigurationProperties.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrViewConfigurationProperties.NEXT, value); }
     /** Unsafe version of {@link #viewConfigurationType(int) viewConfigurationType}. */
     public static void nviewConfigurationType(long struct, int value) { UNSAFE.putInt(null, struct + XrViewConfigurationProperties.VIEWCONFIGURATIONTYPE, value); }
     /** Unsafe version of {@link #fovMutable(boolean) fovMutable}. */
     public static void nfovMutable(long struct, int value) { UNSAFE.putInt(null, struct + XrViewConfigurationProperties.FOVMUTABLE, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrViewConfigurationProperties.NEXT));
-    }
 
     // -----------------------------------
 

@@ -309,7 +309,7 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct implements NativeResou
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanInstanceCreateInfoKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanInstanceCreateInfoKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanInstanceCreateInfoKHR.NEXT, value); }
     /** Unsafe version of {@link #systemId(long) systemId}. */
     public static void nsystemId(long struct, long value) { UNSAFE.putLong(null, struct + XrVulkanInstanceCreateInfoKHR.SYSTEMID, value); }
     /** Unsafe version of {@link #createFlags(long) createFlags}. */
@@ -327,7 +327,6 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct implements NativeResou
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrVulkanInstanceCreateInfoKHR.NEXT));
         check(memGetAddress(struct + XrVulkanInstanceCreateInfoKHR.PFNGETINSTANCEPROCADDR));
         long vulkanCreateInfo = memGetAddress(struct + XrVulkanInstanceCreateInfoKHR.VULKANCREATEINFO);
         check(vulkanCreateInfo);

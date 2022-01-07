@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -261,20 +260,11 @@ public class XrCompositionLayerDepthTestVARJO extends Struct implements NativeRe
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerDepthTestVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerDepthTestVARJO.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerDepthTestVARJO.NEXT, value); }
     /** Unsafe version of {@link #depthTestRangeNearZ(float) depthTestRangeNearZ}. */
     public static void ndepthTestRangeNearZ(long struct, float value) { UNSAFE.putFloat(null, struct + XrCompositionLayerDepthTestVARJO.DEPTHTESTRANGENEARZ, value); }
     /** Unsafe version of {@link #depthTestRangeFarZ(float) depthTestRangeFarZ}. */
     public static void ndepthTestRangeFarZ(long struct, float value) { UNSAFE.putFloat(null, struct + XrCompositionLayerDepthTestVARJO.DEPTHTESTRANGEFARZ, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerDepthTestVARJO.NEXT));
-    }
 
     // -----------------------------------
 

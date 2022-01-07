@@ -320,7 +320,7 @@ public class XrGeometryInstanceCreateInfoFB extends Struct implements NativeReso
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGeometryInstanceCreateInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrGeometryInstanceCreateInfoFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrGeometryInstanceCreateInfoFB.NEXT, value); }
     /** Unsafe version of {@link #layer(XrPassthroughLayerFB) layer}. */
     public static void nlayer(long struct, XrPassthroughLayerFB value) { memPutAddress(struct + XrGeometryInstanceCreateInfoFB.LAYER, value.address()); }
     /** Unsafe version of {@link #mesh(XrTriangleMeshFB) mesh}. */
@@ -338,7 +338,6 @@ public class XrGeometryInstanceCreateInfoFB extends Struct implements NativeReso
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrGeometryInstanceCreateInfoFB.NEXT));
         check(memGetAddress(struct + XrGeometryInstanceCreateInfoFB.LAYER));
         check(memGetAddress(struct + XrGeometryInstanceCreateInfoFB.MESH));
         check(memGetAddress(struct + XrGeometryInstanceCreateInfoFB.BASESPACE));

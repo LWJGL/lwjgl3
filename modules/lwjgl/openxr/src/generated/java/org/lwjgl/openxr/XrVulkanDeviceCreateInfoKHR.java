@@ -323,7 +323,7 @@ public class XrVulkanDeviceCreateInfoKHR extends Struct implements NativeResourc
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanDeviceCreateInfoKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanDeviceCreateInfoKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanDeviceCreateInfoKHR.NEXT, value); }
     /** Unsafe version of {@link #systemId(long) systemId}. */
     public static void nsystemId(long struct, long value) { UNSAFE.putLong(null, struct + XrVulkanDeviceCreateInfoKHR.SYSTEMID, value); }
     /** Unsafe version of {@link #createFlags(long) createFlags}. */
@@ -343,7 +343,6 @@ public class XrVulkanDeviceCreateInfoKHR extends Struct implements NativeResourc
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrVulkanDeviceCreateInfoKHR.NEXT));
         check(memGetAddress(struct + XrVulkanDeviceCreateInfoKHR.PFNGETINSTANCEPROCADDR));
         check(memGetAddress(struct + XrVulkanDeviceCreateInfoKHR.VULKANPHYSICALDEVICE));
         long vulkanCreateInfo = memGetAddress(struct + XrVulkanDeviceCreateInfoKHR.VULKANCREATEINFO);

@@ -303,7 +303,7 @@ public class XrGeometryInstanceTransformFB extends Struct implements NativeResou
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGeometryInstanceTransformFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrGeometryInstanceTransformFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrGeometryInstanceTransformFB.NEXT, value); }
     /** Unsafe version of {@link #baseSpace(XrSpace) baseSpace}. */
     public static void nbaseSpace(long struct, XrSpace value) { memPutAddress(struct + XrGeometryInstanceTransformFB.BASESPACE, value.address()); }
     /** Unsafe version of {@link #time(long) time}. */
@@ -319,7 +319,6 @@ public class XrGeometryInstanceTransformFB extends Struct implements NativeResou
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrGeometryInstanceTransformFB.NEXT));
         check(memGetAddress(struct + XrGeometryInstanceTransformFB.BASESPACE));
     }
 

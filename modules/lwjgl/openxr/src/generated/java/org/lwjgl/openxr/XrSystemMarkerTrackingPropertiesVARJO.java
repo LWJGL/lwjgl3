@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -256,18 +255,9 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemMarkerTrackingPropertiesVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemMarkerTrackingPropertiesVARJO.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemMarkerTrackingPropertiesVARJO.NEXT, value); }
     /** Unsafe version of {@link #supportsMarkerTracking(boolean) supportsMarkerTracking}. */
     public static void nsupportsMarkerTracking(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemMarkerTrackingPropertiesVARJO.SUPPORTSMARKERTRACKING, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSystemMarkerTrackingPropertiesVARJO.NEXT));
-    }
 
     // -----------------------------------
 

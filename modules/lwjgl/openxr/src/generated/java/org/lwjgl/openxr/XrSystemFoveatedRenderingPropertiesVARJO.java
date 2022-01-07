@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -250,18 +249,9 @@ public class XrSystemFoveatedRenderingPropertiesVARJO extends Struct implements 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFoveatedRenderingPropertiesVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemFoveatedRenderingPropertiesVARJO.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemFoveatedRenderingPropertiesVARJO.NEXT, value); }
     /** Unsafe version of {@link #supportsFoveatedRendering(boolean) supportsFoveatedRendering}. */
     public static void nsupportsFoveatedRendering(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFoveatedRenderingPropertiesVARJO.SUPPORTSFOVEATEDRENDERING, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSystemFoveatedRenderingPropertiesVARJO.NEXT));
-    }
 
     // -----------------------------------
 

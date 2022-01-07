@@ -306,7 +306,6 @@ public class VARJOMarkerTracking {
         long __functionAddress = session.getCapabilities().xrCreateMarkerSpaceVARJO;
         if (CHECKS) {
             check(__functionAddress);
-            XrMarkerSpaceCreateInfoVARJO.validate(createInfo);
         }
         return callPPPI(session.address(), createInfo, space, __functionAddress);
     }

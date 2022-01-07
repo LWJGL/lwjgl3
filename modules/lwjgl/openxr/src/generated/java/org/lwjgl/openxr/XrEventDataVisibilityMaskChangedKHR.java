@@ -274,7 +274,7 @@ public class XrEventDataVisibilityMaskChangedKHR extends Struct implements Nativ
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataVisibilityMaskChangedKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataVisibilityMaskChangedKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataVisibilityMaskChangedKHR.NEXT, value); }
     /** Unsafe version of {@link #session(XrSession) session}. */
     public static void nsession(long struct, XrSession value) { memPutAddress(struct + XrEventDataVisibilityMaskChangedKHR.SESSION, value.address()); }
     /** Unsafe version of {@link #viewConfigurationType(int) viewConfigurationType}. */
@@ -288,7 +288,6 @@ public class XrEventDataVisibilityMaskChangedKHR extends Struct implements Nativ
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataVisibilityMaskChangedKHR.NEXT));
         check(memGetAddress(struct + XrEventDataVisibilityMaskChangedKHR.SESSION));
     }
 

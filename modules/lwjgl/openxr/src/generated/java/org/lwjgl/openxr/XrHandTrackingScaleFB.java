@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -282,7 +281,7 @@ public class XrHandTrackingScaleFB extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingScaleFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrHandTrackingScaleFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrHandTrackingScaleFB.NEXT, value); }
     /** Unsafe version of {@link #sensorOutput(float) sensorOutput}. */
     public static void nsensorOutput(long struct, float value) { UNSAFE.putFloat(null, struct + XrHandTrackingScaleFB.SENSOROUTPUT, value); }
     /** Unsafe version of {@link #currentOutput(float) currentOutput}. */
@@ -291,15 +290,6 @@ public class XrHandTrackingScaleFB extends Struct implements NativeResource {
     public static void noverrideHandScale(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingScaleFB.OVERRIDEHANDSCALE, value); }
     /** Unsafe version of {@link #overrideValueInput(float) overrideValueInput}. */
     public static void noverrideValueInput(long struct, float value) { UNSAFE.putFloat(null, struct + XrHandTrackingScaleFB.OVERRIDEVALUEINPUT, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrHandTrackingScaleFB.NEXT));
-    }
 
     // -----------------------------------
 

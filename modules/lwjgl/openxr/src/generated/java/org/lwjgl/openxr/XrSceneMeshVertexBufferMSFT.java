@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -278,22 +277,13 @@ public class XrSceneMeshVertexBufferMSFT extends Struct implements NativeResourc
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshVertexBufferMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneMeshVertexBufferMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneMeshVertexBufferMSFT.NEXT, value); }
     /** Sets the specified value to the {@code vertexCapacityInput} field of the specified {@code struct}. */
     public static void nvertexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshVertexBufferMSFT.VERTEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #vertexCountOutput(int) vertexCountOutput}. */
     public static void nvertexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshVertexBufferMSFT.VERTEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #vertices(XrVector3f.Buffer) vertices}. */
     public static void nvertices(long struct, @Nullable XrVector3f.Buffer value) { memPutAddress(struct + XrSceneMeshVertexBufferMSFT.VERTICES, memAddressSafe(value)); if (value != null) { nvertexCapacityInput(struct, value.remaining()); } }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSceneMeshVertexBufferMSFT.NEXT));
-    }
 
     // -----------------------------------
 

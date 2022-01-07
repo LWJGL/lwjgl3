@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -291,7 +290,7 @@ public class XrActionStateFloat extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateFloat.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrActionStateFloat.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrActionStateFloat.NEXT, value); }
     /** Unsafe version of {@link #currentState(float) currentState}. */
     public static void ncurrentState(long struct, float value) { UNSAFE.putFloat(null, struct + XrActionStateFloat.CURRENTSTATE, value); }
     /** Unsafe version of {@link #changedSinceLastSync(boolean) changedSinceLastSync}. */
@@ -300,15 +299,6 @@ public class XrActionStateFloat extends Struct implements NativeResource {
     public static void nlastChangeTime(long struct, long value) { UNSAFE.putLong(null, struct + XrActionStateFloat.LASTCHANGETIME, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
     public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateFloat.ISACTIVE, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrActionStateFloat.NEXT));
-    }
 
     // -----------------------------------
 

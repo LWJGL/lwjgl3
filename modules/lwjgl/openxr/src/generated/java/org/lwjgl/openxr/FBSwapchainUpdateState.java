@@ -30,7 +30,6 @@ public class FBSwapchainUpdateState {
         long __functionAddress = swapchain.getCapabilities().xrUpdateSwapchainFB;
         if (CHECKS) {
             check(__functionAddress);
-            XrSwapchainStateBaseHeaderFB.validate(state);
         }
         return callPPI(swapchain.address(), state, __functionAddress);
     }

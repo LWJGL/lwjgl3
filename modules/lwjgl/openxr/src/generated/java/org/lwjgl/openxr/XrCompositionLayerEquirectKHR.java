@@ -352,7 +352,7 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerEquirectKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerEquirectKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerEquirectKHR.NEXT, value); }
     /** Unsafe version of {@link #layerFlags(long) layerFlags}. */
     public static void nlayerFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerEquirectKHR.LAYERFLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
@@ -376,7 +376,6 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerEquirectKHR.NEXT));
         check(memGetAddress(struct + XrCompositionLayerEquirectKHR.SPACE));
         XrSwapchainSubImage.validate(struct + XrCompositionLayerEquirectKHR.SUBIMAGE);
     }

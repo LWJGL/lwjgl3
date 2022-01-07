@@ -257,7 +257,7 @@ public class XrGraphicsBindingOpenGLWaylandKHR extends Struct implements NativeR
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLWaylandKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLWaylandKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLWaylandKHR.NEXT, value); }
     /** Unsafe version of {@link #display(long) display}. */
     public static void ndisplay(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLWaylandKHR.DISPLAY, check(value)); }
 
@@ -267,7 +267,6 @@ public class XrGraphicsBindingOpenGLWaylandKHR extends Struct implements NativeR
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrGraphicsBindingOpenGLWaylandKHR.NEXT));
         check(memGetAddress(struct + XrGraphicsBindingOpenGLWaylandKHR.DISPLAY));
     }
 

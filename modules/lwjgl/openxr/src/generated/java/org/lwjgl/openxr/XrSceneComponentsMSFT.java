@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -278,22 +277,13 @@ public class XrSceneComponentsMSFT extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentsMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneComponentsMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneComponentsMSFT.NEXT, value); }
     /** Sets the specified value to the {@code componentCapacityInput} field of the specified {@code struct}. */
     public static void ncomponentCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentsMSFT.COMPONENTCAPACITYINPUT, value); }
     /** Unsafe version of {@link #componentCountOutput(int) componentCountOutput}. */
     public static void ncomponentCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentsMSFT.COMPONENTCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #components(XrSceneComponentMSFT.Buffer) components}. */
     public static void ncomponents(long struct, @Nullable XrSceneComponentMSFT.Buffer value) { memPutAddress(struct + XrSceneComponentsMSFT.COMPONENTS, memAddressSafe(value)); if (value != null) { ncomponentCapacityInput(struct, value.remaining()); } }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSceneComponentsMSFT.NEXT));
-    }
 
     // -----------------------------------
 

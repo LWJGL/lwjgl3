@@ -55,7 +55,6 @@ public class MSFTSceneUnderstandingSerialization {
         long __functionAddress = sceneObserver.getCapabilities().xrDeserializeSceneMSFT;
         if (CHECKS) {
             check(__functionAddress);
-            XrSceneDeserializeInfoMSFT.validate(deserializeInfo);
         }
         return callPPI(sceneObserver.address(), deserializeInfo, __functionAddress);
     }
@@ -131,7 +130,6 @@ public class MSFTSceneUnderstandingSerialization {
         long __functionAddress = scene.getCapabilities().xrGetSerializedSceneFragmentDataMSFT;
         if (CHECKS) {
             check(__functionAddress);
-            XrSerializedSceneFragmentDataGetInfoMSFT.validate(getInfo);
         }
         return callPPPPI(scene.address(), getInfo, countInput, readOutput, buffer, __functionAddress);
     }

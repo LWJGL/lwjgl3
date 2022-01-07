@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -264,20 +263,11 @@ public class XrInputSourceLocalizedNameGetInfo extends Struct implements NativeR
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInputSourceLocalizedNameGetInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrInputSourceLocalizedNameGetInfo.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrInputSourceLocalizedNameGetInfo.NEXT, value); }
     /** Unsafe version of {@link #sourcePath(long) sourcePath}. */
     public static void nsourcePath(long struct, long value) { UNSAFE.putLong(null, struct + XrInputSourceLocalizedNameGetInfo.SOURCEPATH, value); }
     /** Unsafe version of {@link #whichComponents(long) whichComponents}. */
     public static void nwhichComponents(long struct, long value) { UNSAFE.putLong(null, struct + XrInputSourceLocalizedNameGetInfo.WHICHCOMPONENTS, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrInputSourceLocalizedNameGetInfo.NEXT));
-    }
 
     // -----------------------------------
 

@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -264,20 +263,11 @@ public class XrReferenceSpaceCreateInfo extends Struct implements NativeResource
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrReferenceSpaceCreateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrReferenceSpaceCreateInfo.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrReferenceSpaceCreateInfo.NEXT, value); }
     /** Unsafe version of {@link #referenceSpaceType(int) referenceSpaceType}. */
     public static void nreferenceSpaceType(long struct, int value) { UNSAFE.putInt(null, struct + XrReferenceSpaceCreateInfo.REFERENCESPACETYPE, value); }
     /** Unsafe version of {@link #poseInReferenceSpace(XrPosef) poseInReferenceSpace}. */
     public static void nposeInReferenceSpace(long struct, XrPosef value) { memCopy(value.address(), struct + XrReferenceSpaceCreateInfo.POSEINREFERENCESPACE, XrPosef.SIZEOF); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrReferenceSpaceCreateInfo.NEXT));
-    }
 
     // -----------------------------------
 

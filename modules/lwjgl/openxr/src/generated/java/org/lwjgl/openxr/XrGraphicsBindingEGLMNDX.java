@@ -301,7 +301,7 @@ public class XrGraphicsBindingEGLMNDX extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingEGLMNDX.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingEGLMNDX.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingEGLMNDX.NEXT, value); }
     /** Unsafe version of {@link #getProcAddress(long) getProcAddress}. */
     public static void ngetProcAddress(long struct, long value) { memPutAddress(struct + XrGraphicsBindingEGLMNDX.GETPROCADDRESS, check(value)); }
     /** Unsafe version of {@link #display(long) display}. */
@@ -317,7 +317,6 @@ public class XrGraphicsBindingEGLMNDX extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrGraphicsBindingEGLMNDX.NEXT));
         check(memGetAddress(struct + XrGraphicsBindingEGLMNDX.GETPROCADDRESS));
         check(memGetAddress(struct + XrGraphicsBindingEGLMNDX.DISPLAY));
         check(memGetAddress(struct + XrGraphicsBindingEGLMNDX.CONFIG));

@@ -315,7 +315,7 @@ public class XrGraphicsBindingOpenGLXlibKHR extends Struct implements NativeReso
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLXlibKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXlibKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXlibKHR.NEXT, value); }
     /** Unsafe version of {@link #xDisplay(long) xDisplay}. */
     public static void nxDisplay(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXlibKHR.XDISPLAY, check(value)); }
     /** Unsafe version of {@link #visualid(int) visualid}. */
@@ -333,7 +333,6 @@ public class XrGraphicsBindingOpenGLXlibKHR extends Struct implements NativeReso
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrGraphicsBindingOpenGLXlibKHR.NEXT));
         check(memGetAddress(struct + XrGraphicsBindingOpenGLXlibKHR.XDISPLAY));
         check(memGetAddress(struct + XrGraphicsBindingOpenGLXlibKHR.GLXFBCONFIG));
         check(memGetAddress(struct + XrGraphicsBindingOpenGLXlibKHR.GLXDRAWABLE));

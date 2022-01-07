@@ -366,7 +366,6 @@ public class MSFTSceneUnderstanding {
         long __functionAddress = session.getCapabilities().xrCreateSceneObserverMSFT;
         if (CHECKS) {
             check(__functionAddress);
-            if (createInfo != NULL) { XrSceneObserverCreateInfoMSFT.validate(createInfo); }
         }
         return callPPPI(session.address(), createInfo, sceneObserver, __functionAddress);
     }
@@ -492,7 +491,6 @@ public class MSFTSceneUnderstanding {
         long __functionAddress = sceneObserver.getCapabilities().xrCreateSceneMSFT;
         if (CHECKS) {
             check(__functionAddress);
-            if (createInfo != NULL) { XrSceneCreateInfoMSFT.validate(createInfo); }
         }
         return callPPPI(sceneObserver.address(), createInfo, scene, __functionAddress);
     }
@@ -822,7 +820,6 @@ public class MSFTSceneUnderstanding {
         long __functionAddress = scene.getCapabilities().xrGetSceneComponentsMSFT;
         if (CHECKS) {
             check(__functionAddress);
-            XrSceneComponentsGetInfoMSFT.validate(getInfo);
         }
         return callPPPI(scene.address(), getInfo, components, __functionAddress);
     }
@@ -974,7 +971,6 @@ public class MSFTSceneUnderstanding {
         long __functionAddress = scene.getCapabilities().xrGetSceneMeshBuffersMSFT;
         if (CHECKS) {
             check(__functionAddress);
-            XrSceneMeshBuffersGetInfoMSFT.validate(getInfo);
         }
         return callPPPI(scene.address(), getInfo, buffers, __functionAddress);
     }

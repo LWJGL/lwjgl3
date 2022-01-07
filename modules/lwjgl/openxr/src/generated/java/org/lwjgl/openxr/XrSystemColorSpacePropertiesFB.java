@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -247,18 +246,9 @@ public class XrSystemColorSpacePropertiesFB extends Struct implements NativeReso
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemColorSpacePropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemColorSpacePropertiesFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemColorSpacePropertiesFB.NEXT, value); }
     /** Unsafe version of {@link #colorSpace(int) colorSpace}. */
     public static void ncolorSpace(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemColorSpacePropertiesFB.COLORSPACE, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSystemColorSpacePropertiesFB.NEXT));
-    }
 
     // -----------------------------------
 

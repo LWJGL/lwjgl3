@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -264,20 +263,11 @@ public class XrMarkerSpaceCreateInfoVARJO extends Struct implements NativeResour
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrMarkerSpaceCreateInfoVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrMarkerSpaceCreateInfoVARJO.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrMarkerSpaceCreateInfoVARJO.NEXT, value); }
     /** Unsafe version of {@link #markerId(long) markerId}. */
     public static void nmarkerId(long struct, long value) { UNSAFE.putLong(null, struct + XrMarkerSpaceCreateInfoVARJO.MARKERID, value); }
     /** Unsafe version of {@link #poseInMarkerSpace(XrPosef) poseInMarkerSpace}. */
     public static void nposeInMarkerSpace(long struct, XrPosef value) { memCopy(value.address(), struct + XrMarkerSpaceCreateInfoVARJO.POSEINMARKERSPACE, XrPosef.SIZEOF); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrMarkerSpaceCreateInfoVARJO.NEXT));
-    }
 
     // -----------------------------------
 

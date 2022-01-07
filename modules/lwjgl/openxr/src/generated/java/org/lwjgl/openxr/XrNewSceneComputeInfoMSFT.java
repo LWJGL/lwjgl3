@@ -290,7 +290,7 @@ public class XrNewSceneComputeInfoMSFT extends Struct implements NativeResource 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrNewSceneComputeInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrNewSceneComputeInfoMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrNewSceneComputeInfoMSFT.NEXT, value); }
     /** Sets the specified value to the {@code requestedFeatureCount} field of the specified {@code struct}. */
     public static void nrequestedFeatureCount(long struct, int value) { UNSAFE.putInt(null, struct + XrNewSceneComputeInfoMSFT.REQUESTEDFEATURECOUNT, value); }
     /** Unsafe version of {@link #requestedFeatures(IntBuffer) requestedFeatures}. */
@@ -306,7 +306,6 @@ public class XrNewSceneComputeInfoMSFT extends Struct implements NativeResource 
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrNewSceneComputeInfoMSFT.NEXT));
         check(memGetAddress(struct + XrNewSceneComputeInfoMSFT.REQUESTEDFEATURES));
         XrSceneBoundsMSFT.validate(struct + XrNewSceneComputeInfoMSFT.BOUNDS);
     }

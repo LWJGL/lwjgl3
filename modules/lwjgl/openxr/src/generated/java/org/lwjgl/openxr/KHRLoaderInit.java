@@ -30,7 +30,6 @@ public class KHRLoaderInit {
         long __functionAddress = XR.getGlobalCommands().xrInitializeLoaderKHR;
         if (CHECKS) {
             check(__functionAddress);
-            XrLoaderInitInfoBaseHeaderKHR.validate(loaderInitInfo);
         }
         return callPI(loaderInitInfo, __functionAddress);
     }

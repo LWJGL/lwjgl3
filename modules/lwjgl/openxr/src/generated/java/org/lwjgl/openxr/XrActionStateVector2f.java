@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -293,7 +292,7 @@ public class XrActionStateVector2f extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateVector2f.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrActionStateVector2f.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrActionStateVector2f.NEXT, value); }
     /** Unsafe version of {@link #currentState(XrVector2f) currentState}. */
     public static void ncurrentState(long struct, XrVector2f value) { memCopy(value.address(), struct + XrActionStateVector2f.CURRENTSTATE, XrVector2f.SIZEOF); }
     /** Unsafe version of {@link #changedSinceLastSync(boolean) changedSinceLastSync}. */
@@ -302,15 +301,6 @@ public class XrActionStateVector2f extends Struct implements NativeResource {
     public static void nlastChangeTime(long struct, long value) { UNSAFE.putLong(null, struct + XrActionStateVector2f.LASTCHANGETIME, value); }
     /** Unsafe version of {@link #isActive(boolean) isActive}. */
     public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrActionStateVector2f.ISACTIVE, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrActionStateVector2f.NEXT));
-    }
 
     // -----------------------------------
 

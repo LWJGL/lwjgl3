@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -278,22 +277,13 @@ public class XrSceneMeshIndicesUint16MSFT extends Struct implements NativeResour
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshIndicesUint16MSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneMeshIndicesUint16MSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneMeshIndicesUint16MSFT.NEXT, value); }
     /** Sets the specified value to the {@code indexCapacityInput} field of the specified {@code struct}. */
     public static void nindexCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshIndicesUint16MSFT.INDEXCAPACITYINPUT, value); }
     /** Unsafe version of {@link #indexCountOutput(int) indexCountOutput}. */
     public static void nindexCountOutput(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneMeshIndicesUint16MSFT.INDEXCOUNTOUTPUT, value); }
     /** Unsafe version of {@link #indices(ShortBuffer) indices}. */
     public static void nindices(long struct, @Nullable ShortBuffer value) { memPutAddress(struct + XrSceneMeshIndicesUint16MSFT.INDICES, memAddressSafe(value)); if (value != null) { nindexCapacityInput(struct, value.remaining()); } }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSceneMeshIndicesUint16MSFT.NEXT));
-    }
 
     // -----------------------------------
 

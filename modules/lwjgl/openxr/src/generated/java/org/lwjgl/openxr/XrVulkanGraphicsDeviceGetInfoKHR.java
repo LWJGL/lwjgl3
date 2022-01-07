@@ -266,7 +266,7 @@ public class XrVulkanGraphicsDeviceGetInfoKHR extends Struct implements NativeRe
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVulkanGraphicsDeviceGetInfoKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanGraphicsDeviceGetInfoKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrVulkanGraphicsDeviceGetInfoKHR.NEXT, value); }
     /** Unsafe version of {@link #systemId(long) systemId}. */
     public static void nsystemId(long struct, long value) { UNSAFE.putLong(null, struct + XrVulkanGraphicsDeviceGetInfoKHR.SYSTEMID, value); }
     /** Unsafe version of {@link #vulkanInstance(VkInstance) vulkanInstance}. */
@@ -278,7 +278,6 @@ public class XrVulkanGraphicsDeviceGetInfoKHR extends Struct implements NativeRe
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrVulkanGraphicsDeviceGetInfoKHR.NEXT));
         check(memGetAddress(struct + XrVulkanGraphicsDeviceGetInfoKHR.VULKANINSTANCE));
     }
 

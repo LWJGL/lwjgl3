@@ -270,7 +270,7 @@ public class XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT extends Struct imp
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #spatialAnchorStore(XrSpatialAnchorStoreConnectionMSFT) spatialAnchorStore}. */
     public static void nspatialAnchorStore(long struct, XrSpatialAnchorStoreConnectionMSFT value) { memPutAddress(struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.SPATIALANCHORSTORE, value.address()); }
     /** Unsafe version of {@link #spatialAnchorPersistenceName(XrSpatialAnchorPersistenceNameMSFT) spatialAnchorPersistenceName}. */
@@ -282,7 +282,6 @@ public class XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT extends Struct imp
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.NEXT));
         check(memGetAddress(struct + XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT.SPATIALANCHORSTORE));
     }
 

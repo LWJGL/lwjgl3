@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -289,7 +288,7 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrViewConfigurationDepthRangeEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrViewConfigurationDepthRangeEXT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrViewConfigurationDepthRangeEXT.NEXT, value); }
     /** Unsafe version of {@link #recommendedNearZ(float) recommendedNearZ}. */
     public static void nrecommendedNearZ(long struct, float value) { UNSAFE.putFloat(null, struct + XrViewConfigurationDepthRangeEXT.RECOMMENDEDNEARZ, value); }
     /** Unsafe version of {@link #minNearZ(float) minNearZ}. */
@@ -298,15 +297,6 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
     public static void nrecommendedFarZ(long struct, float value) { UNSAFE.putFloat(null, struct + XrViewConfigurationDepthRangeEXT.RECOMMENDEDFARZ, value); }
     /** Unsafe version of {@link #maxFarZ(float) maxFarZ}. */
     public static void nmaxFarZ(long struct, float value) { UNSAFE.putFloat(null, struct + XrViewConfigurationDepthRangeEXT.MAXFARZ, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrViewConfigurationDepthRangeEXT.NEXT));
-    }
 
     // -----------------------------------
 

@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -279,22 +278,13 @@ public class XrHapticVibration extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHapticVibration.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrHapticVibration.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrHapticVibration.NEXT, value); }
     /** Unsafe version of {@link #duration(long) duration}. */
     public static void nduration(long struct, long value) { UNSAFE.putLong(null, struct + XrHapticVibration.DURATION, value); }
     /** Unsafe version of {@link #frequency(float) frequency}. */
     public static void nfrequency(long struct, float value) { UNSAFE.putFloat(null, struct + XrHapticVibration.FREQUENCY, value); }
     /** Unsafe version of {@link #amplitude(float) amplitude}. */
     public static void namplitude(long struct, float value) { UNSAFE.putFloat(null, struct + XrHapticVibration.AMPLITUDE, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrHapticVibration.NEXT));
-    }
 
     // -----------------------------------
 

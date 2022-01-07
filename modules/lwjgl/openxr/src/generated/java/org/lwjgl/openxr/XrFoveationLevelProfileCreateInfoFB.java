@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -273,22 +272,13 @@ public class XrFoveationLevelProfileCreateInfoFB extends Struct implements Nativ
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationLevelProfileCreateInfoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrFoveationLevelProfileCreateInfoFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrFoveationLevelProfileCreateInfoFB.NEXT, value); }
     /** Unsafe version of {@link #level(int) level}. */
     public static void nlevel(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationLevelProfileCreateInfoFB.LEVEL, value); }
     /** Unsafe version of {@link #verticalOffset(float) verticalOffset}. */
     public static void nverticalOffset(long struct, float value) { UNSAFE.putFloat(null, struct + XrFoveationLevelProfileCreateInfoFB.VERTICALOFFSET, value); }
     /** Unsafe version of {@link #dynamic(int) dynamic}. */
     public static void ndynamic(long struct, int value) { UNSAFE.putInt(null, struct + XrFoveationLevelProfileCreateInfoFB.DYNAMIC, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrFoveationLevelProfileCreateInfoFB.NEXT));
-    }
 
     // -----------------------------------
 

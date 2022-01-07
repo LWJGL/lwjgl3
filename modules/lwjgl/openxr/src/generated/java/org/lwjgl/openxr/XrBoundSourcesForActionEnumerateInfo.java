@@ -250,7 +250,7 @@ public class XrBoundSourcesForActionEnumerateInfo extends Struct implements Nati
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrBoundSourcesForActionEnumerateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrBoundSourcesForActionEnumerateInfo.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrBoundSourcesForActionEnumerateInfo.NEXT, value); }
     /** Unsafe version of {@link #action(XrAction) action}. */
     public static void naction(long struct, XrAction value) { memPutAddress(struct + XrBoundSourcesForActionEnumerateInfo.ACTION, value.address()); }
 
@@ -260,7 +260,6 @@ public class XrBoundSourcesForActionEnumerateInfo extends Struct implements Nati
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrBoundSourcesForActionEnumerateInfo.NEXT));
         check(memGetAddress(struct + XrBoundSourcesForActionEnumerateInfo.ACTION));
     }
 

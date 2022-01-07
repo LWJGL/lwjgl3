@@ -137,7 +137,7 @@ val XrCompositionLayerCubeKHR = struct(Module.OPENXR, "XrCompositionLayerCubeKHR
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_CUBE_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrCompositionLayerFlags("layerFlags", "any flags to apply to this layer.")
     XrSpace("space", "the {@code XrSpace} in which the {@code orientation} of the cube layer is evaluated over time.")
     XrEyeVisibility("eyeVisibility", "")
@@ -167,7 +167,7 @@ val XrCompositionLayerDepthInfoKHR = struct(Module.OPENXR, "XrCompositionLayerDe
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrSwapchainSubImage("subImage", "identifies the depth image ##XrSwapchainSubImage to be associated with the color swapchain. The contained {@code imageRect} specifies the valid portion of the depth image to use, in pixels. It also implicitly defines the transform from normalized image coordinates into pixel coordinates. The contained {@code imageArrayIndex} is the depth image array index, with 0 meaning the first or only array element.")
     float("minDepth", "{@code minDepth} and {@code maxDepth} are the range of depth values the {@code depthSwapchain} could have, in the range of <code>[0.0,1.0]</code>. This is akin to min and max values of OpenGL’s {@code glDepthRange}, but with the requirement here that <code>maxDepth ≥ minDepth</code>.")
     float("maxDepth", "see {@code minDepth}")
@@ -194,7 +194,7 @@ val XrVulkanSwapchainFormatListCreateInfoKHR = struct(Module.OPENXR, "XrVulkanSw
         """
 
     Expression("#TYPE_VULKAN_SWAPCHAIN_FORMAT_LIST_CREATE_INFO_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     AutoSize("viewFormats", optional = true)..uint32_t("viewFormatCount", "the number of view formats passed in {@code viewFormats}.")
     VkFormat.const.p("viewFormats", "an array of {@code VkFormat}.")
 }
@@ -217,7 +217,7 @@ val XrEventDataPerfSettingsEXT = struct(Module.OPENXR, "XrEventDataPerfSettingsE
         """
 
     Expression("#TYPE_EVENT_DATA_PERF_SETTINGS_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrPerfSettingsDomainEXT("domain", ": processing domain in which a threshold has been crossed")
     XrPerfSettingsSubDomainEXT("subDomain", ": system area in which a threshold has been crossed")
     XrPerfSettingsNotificationLevelEXT("fromLevel", ": enumerated notification level which has been exited")
@@ -248,7 +248,7 @@ val XrCompositionLayerCylinderKHR = struct(Module.OPENXR, "XrCompositionLayerCyl
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_CYLINDER_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrCompositionLayerFlags("layerFlags", "specifies options for the layer.")
     XrSpace("space", "the {@code XrSpace} in which the {@code pose} of the cylinder layer is evaluated over time.")
     XrEyeVisibility("eyeVisibility", "")
@@ -283,7 +283,7 @@ val XrCompositionLayerEquirectKHR = struct(Module.OPENXR, "XrCompositionLayerEqu
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_EQUIRECT_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrCompositionLayerFlags("layerFlags", "specifies options for the layer.")
     XrSpace("space", "the {@code XrSpace} in which the {@code pose} of the equirect layer is evaluated over time.")
     XrEyeVisibility("eyeVisibility", "")
@@ -319,7 +319,7 @@ val XrDebugUtilsObjectNameInfoEXT = struct(Module.OPENXR, "XrDebugUtilsObjectNam
         """
 
     Expression("#TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrObjectType("objectType", "an {@code XrObjectType} specifying the type of the object to be named.")
     uint64_t("objectHandle", "the object to be named.")
     nullable..charUTF8.const.p("objectName", "a {@code NULL} terminated UTF-8 string specifying the name to apply to objectHandle.")
@@ -343,7 +343,7 @@ val XrDebugUtilsLabelEXT = struct(Module.OPENXR, "XrDebugUtilsLabelEXT") {
         """
 
     Expression("#TYPE_DEBUG_UTILS_LABEL_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     charUTF8.const.p("labelName", "a {@code NULL} terminated UTF-8 string specifying the label name.")
 }
 
@@ -375,7 +375,7 @@ val XrDebugUtilsMessengerCallbackDataEXT = struct(Module.OPENXR, "XrDebugUtilsMe
         """
 
     Expression("#TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     charUTF8.const.p("messageId", "a {@code NULL} terminated string that identifies the message in a unique way. If the callback is triggered by a validation layer, this string corresponds the Valid Usage ID (VUID) that can be used to jump to the appropriate location in the OpenXR specification. This value <b>may</b> be {@code NULL} if no unique message identifier is associated with the message.")
     charUTF8.const.p("functionName", "a {@code NULL} terminated string that identifies the OpenXR function that was executing at the time the message callback was triggered. This value <b>may</b> be {@code NULL} in cases where it is difficult to determine the originating OpenXR function.")
     charUTF8.const.p("message", "a {@code NULL} terminated string detailing the trigger conditions.")
@@ -426,7 +426,7 @@ val XrDebugUtilsMessengerCreateInfoEXT = struct(Module.OPENXR, "XrDebugUtilsMess
         """
 
     Expression("#TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrDebugUtilsMessageSeverityFlagsEXT("messageSeverities", "a bitmask of {@code XrDebugUtilsMessageSeverityFlagBitsEXT} specifying which severity of event(s) that will cause this callback to be called.")
     XrDebugUtilsMessageTypeFlagsEXT("messageTypes", "a combination of {@code XrDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) will cause this callback to be called.")
     PFN_xrDebugUtilsMessengerCallbackEXT("userCallback", "the application defined callback function to call.")
@@ -458,7 +458,7 @@ val XrGraphicsBindingOpenGLWin32KHR = struct(Module.OPENXR, "XrGraphicsBindingOp
         """
 
     Expression("#TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     HDC("hDC", "a valid Windows HW device context handle.")
     HGLRC("hGLRC", "a valid Windows OpenGL rendering context handle.")
 }
@@ -491,7 +491,7 @@ val XrGraphicsBindingOpenGLXlibKHR = struct(Module.OPENXR, "XrGraphicsBindingOpe
         """
 
     Expression("#TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     Display.p("xDisplay", "a valid X11 {@code Display}.")
     uint32_t("visualid", "a valid X11 visual identifier.")
     GLXFBConfig("glxFBConfig", "a valid X11 OpenGL GLX {@code GLXFBConfig}.")
@@ -526,7 +526,7 @@ val XrGraphicsBindingOpenGLXcbKHR = struct(Module.OPENXR, "XrGraphicsBindingOpen
         """
 
     Expression("#TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     xcb_connection_t.p("connection", "a valid {@code xcb_connection_t}.")
     uint32_t("screenNumber", "an index indicating which screen should be used for rendering.")
     xcb_glx_fbconfig_t("fbconfigid", "a valid XCB OpenGL GLX {@code xcb_glx_fbconfig_t}.")
@@ -558,7 +558,7 @@ val XrGraphicsBindingOpenGLWaylandKHR = struct(Module.OPENXR, "XrGraphicsBinding
         """
 
     Expression("#TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     wl_display.p("display", "a valid Wayland {@code wl_display}.")
 }
 
@@ -591,7 +591,7 @@ val XrSwapchainImageOpenGLKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLKHR
         """
 
     Expression("#TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     uint32_t("image", "the OpenGL texture handle associated with this swapchain image.")
 }
 
@@ -615,7 +615,7 @@ val XrGraphicsRequirementsOpenGLKHR = struct(Module.OPENXR, "XrGraphicsRequireme
         """
 
     Expression("#TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrVersion("minApiVersionSupported", "the minimum version of OpenGL that the runtime supports. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
     XrVersion("maxApiVersionSupported", "the maximum version of OpenGL that the runtime has been tested on and is known to support. Newer OpenGL versions might work if they are compatible. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
 }
@@ -649,7 +649,7 @@ val XrSwapchainImageOpenGLESKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLE
         """
 
     Expression("#TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     uint32_t("image", "an index indicating the current OpenGL ES swapchain image to use.")
 }
 
@@ -673,7 +673,7 @@ val XrGraphicsRequirementsOpenGLESKHR = struct(Module.OPENXR, "XrGraphicsRequire
         """
 
     Expression("#TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrVersion("minApiVersionSupported", "the minimum version of OpenGL ES that the runtime supports. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
     XrVersion("maxApiVersionSupported", "the maximum version of OpenGL ES that the runtime has been tested on and is known to support. Newer OpenGL ES versions might work if they are compatible. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
 }
@@ -710,7 +710,7 @@ val XrGraphicsBindingVulkanKHR = struct(Module.OPENXR, "XrGraphicsBindingVulkanK
         """
 
     Expression("#TYPE_GRAPHICS_BINDING_VULKAN_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     VkInstance("instance", "a valid Vulkan {@code VkInstance}.")
     VkPhysicalDevice("physicalDevice", "a valid Vulkan {@code VkPhysicalDevice}.")
     VkDevice("device", "a valid Vulkan {@code VkDevice}.")
@@ -749,7 +749,7 @@ val XrSwapchainImageVulkanKHR = struct(Module.OPENXR, "XrSwapchainImageVulkanKHR
         """
 
     Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     VkImage("image", "a valid Vulkan {@code VkImage} to use.")
 }
 
@@ -773,7 +773,7 @@ val XrGraphicsRequirementsVulkanKHR = struct(Module.OPENXR, "XrGraphicsRequireme
         """
 
     Expression("#TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrVersion("minApiVersionSupported", "the minimum Vulkan Instance API version that the runtime supports. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
     XrVersion("maxApiVersionSupported", "the maximum Vulkan Instance API version that the runtime has been tested on and is known to support. Newer Vulkan Instance API versions might work if they are compatible. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
 }
@@ -792,7 +792,7 @@ val XrSystemEyeGazeInteractionPropertiesEXT = struct(Module.OPENXR, "XrSystemEye
         """
 
     Expression("#TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrBool32("supportsEyeGazeInteraction", "the runtime <b>must</b> set this value to #TRUE when eye gaze sufficient for use cases such as aiming or targeting is supported by the current device, otherwise the runtime <b>must</b> set this to #FALSE.")
 }
 
@@ -810,7 +810,7 @@ val XrEyeGazeSampleTimeEXT = struct(Module.OPENXR, "XrEyeGazeSampleTimeEXT") {
         """
 
     Expression("#TYPE_EYE_GAZE_SAMPLE_TIME_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrTime("time", "when in time the eye gaze pose is expressed.")
 }
 
@@ -833,7 +833,7 @@ val XrVisibilityMaskKHR = struct(Module.OPENXR, "XrVisibilityMaskKHR") {
         """
 
     Expression("#TYPE_VISIBILITY_MASK_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput", "the capacity of the {@code vertices} array, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("vertexCountOutput", "filled in by the runtime with the count of vertices written or the required capacity in the case that {@code vertexCapacityInput} or {@code indexCapacityInput} is 0.")
     nullable..XrVector2f.p("vertices", "an array of vertices filled in by the runtime that specifies mask coordinates in the z=-1 plane of the rendered view—​i.e. one meter in front of the view. When rendering the mask for use in a projection layer, these vertices must be transformed by the application’s projection matrix used for the respective ##XrCompositionLayerProjectionView.")
@@ -858,7 +858,7 @@ val XrEventDataVisibilityMaskChangedKHR = struct(Module.OPENXR, "XrEventDataVisi
         """
 
     Expression("#TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrSession("session", "the {@code XrSession} for which the view mask has changed.")
     XrViewConfigurationType("viewConfigurationType", "the view configuration whose mask has changed.")
     uint32_t("viewIndex", "the individual view within the view configuration to which the change refers.")
@@ -879,7 +879,7 @@ val XrSessionCreateInfoOverlayEXTX = struct(Module.OPENXR, "XrSessionCreateInfoO
         """
 
     Expression("#TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrOverlaySessionCreateFlagsEXTX("createFlags", "0 or one or more {@code XrOverlaySessionCreateFlagBitsEXTX} which indicate various characteristics desired for the overlay session.")
     uint32_t("sessionLayersPlacement", "a value indicating the desired placement of the session’s composition layers in terms of other sessions.")
 }
@@ -908,7 +908,7 @@ val XrEventDataMainSessionVisibilityChangedEXTX = struct(Module.OPENXR, "XrEvent
         """
 
     Expression("#TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrBool32("visible", "")
     XrOverlayMainSessionFlagsEXTX("flags", "")
 }
@@ -935,7 +935,7 @@ val XrCompositionLayerColorScaleBiasKHR = struct(Module.OPENXR, "XrCompositionLa
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrColor4f("colorScale", "an ##XrColor4f which will modulate the color sourced from the images.")
     XrColor4f("colorBias", "an ##XrColor4f which will offset the color sourced from the images.")
 }
@@ -958,7 +958,7 @@ val XrSpatialAnchorCreateInfoMSFT = struct(Module.OPENXR, "XrSpatialAnchorCreate
         """
 
     Expression("#TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrSpace("space", "a handle to the {@code XrSpace} in which {@code pose} is specified.")
     XrPosef("pose", "the ##XrPosef within {@code space} at {@code time} that specifies the point in the real world used to initialize the new anchor.")
     XrTime("time", "the {@code XrTime} at which {@code pose} will be evaluated within {@code space}.")
@@ -982,7 +982,7 @@ val XrSpatialAnchorSpaceCreateInfoMSFT = struct(Module.OPENXR, "XrSpatialAnchorS
         """
 
     Expression("#TYPE_SPATIAL_ANCHOR_SPACE_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrSpatialAnchorMSFT("anchor", "a handle to an {@code XrSpatialAnchorMSFT} previously created with #CreateSpatialAnchorMSFT().")
     XrPosef("poseInAnchorSpace", "an ##XrPosef defining the position and orientation of the new space’s origin relative to the anchor’s natural origin.")
 }
@@ -1010,7 +1010,7 @@ val XrCompositionLayerImageLayoutFB = struct(Module.OPENXR, "XrCompositionLayerI
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrCompositionLayerImageLayoutFlagsFB("flags", "a bitmask of {@code XrCompositionLayerImageLayoutFlagBitsFB}.")
 }
 
@@ -1040,7 +1040,7 @@ val XrCompositionLayerAlphaBlendFB = struct(Module.OPENXR, "XrCompositionLayerAl
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     XrBlendFactorFB("srcFactorColor", "specifies the source color blend factor.")
     XrBlendFactorFB("dstFactorColor", "specifies the destination color blend factor.")
     XrBlendFactorFB("srcFactorAlpha", "specifies the source alpha blend factor.")
@@ -1067,7 +1067,7 @@ val XrViewConfigurationDepthRangeEXT = struct(Module.OPENXR, "XrViewConfiguratio
         """
 
     Expression("#TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     float("recommendedNearZ", "the recommended minimum positive distance in meters that content should be rendered for the view to achieve the best user experience.")
     float("minNearZ", "the absolute minimum positive distance in meters that content should be rendered for the view.")
     float("recommendedFarZ", "the recommended maximum positive distance in meters that content should be rendered for the view to achieve the best user experience.")
@@ -1101,7 +1101,7 @@ val XrGraphicsBindingEGLMNDX = struct(Module.OPENXR, "XrGraphicsBindingEGLMNDX")
         """
 
     Expression("#TYPE_GRAPHICS_BINDING_EGL_MNDX")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     PFNEGLGETPROCADDRESSPROC("getProcAddress", "a valid function pointer to {@code eglGetProcAddress}.")
     EGLDisplay("display", "a valid EGL {@code EGLDisplay}.")
     EGLConfig("config", "a valid EGL {@code EGLConfig}.")
@@ -1126,7 +1126,7 @@ val XrSpatialGraphNodeSpaceCreateInfoMSFT = struct(Module.OPENXR, "XrSpatialGrap
         """
 
     Expression("#TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrSpatialGraphNodeTypeMSFT("nodeType", "an {@code XrSpatialGraphNodeTypeMSFT} specifying the spatial node type.")
     uint8_t("nodeId", "a global unique identifier (a.k.a. GUID or 16 byte array), representing the spatial node that is being tracked.")[16]
     XrPosef("pose", "an ##XrPosef defining the position and orientation of the new space’s origin within the natural reference frame of the spatial graph node.")
@@ -1148,7 +1148,7 @@ val XrSystemHandTrackingPropertiesEXT = struct(Module.OPENXR, "XrSystemHandTrack
         """
 
     Expression("#TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrBool32("supportsHandTracking", "an {@code XrBool32}, indicating if current system is capable of hand tracking input.")
 }
 
@@ -1171,7 +1171,7 @@ val XrHandTrackerCreateInfoEXT = struct(Module.OPENXR, "XrHandTrackerCreateInfoE
         """
 
     Expression("#TYPE_HAND_TRACKER_CREATE_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrHandEXT("hand", "an {@code XrHandEXT} which describes which hand the tracker is tracking.")
     XrHandJointSetEXT("handJointSet", "an {@code XrHandJointSetEXT} describe the set of hand joints to retrieve.")
 }
@@ -1194,7 +1194,7 @@ val XrHandJointsLocateInfoEXT = struct(Module.OPENXR, "XrHandJointsLocateInfoEXT
         """
 
     Expression("#TYPE_HAND_JOINTS_LOCATE_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrSpace("baseSpace", "an {@code XrSpace} within which the returned hand joint locations will be represented.")
     XrTime("time", "an {@code XrTime} at which to locate the hand joints.")
 }
@@ -1277,7 +1277,7 @@ val XrHandJointLocationsEXT = struct(Module.OPENXR, "XrHandJointLocationsEXT") {
         """
 
     Expression("#TYPE_HAND_JOINT_LOCATIONS_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain, such as ##XrHandJointVelocitiesEXT.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain, such as ##XrHandJointVelocitiesEXT.")
     XrBool32("isActive", "an {@code XrBool32} indicating if the hand tracker is actively tracking.")
     AutoSize("jointLocations")..uint32_t("jointCount", "a {@code uint32_t} describing the count of elements in {@code jointLocations} array.")
     XrHandJointLocationEXT.p("jointLocations", "an array of ##XrHandJointLocationEXT receiving the returned hand joint locations.")
@@ -1313,7 +1313,7 @@ val XrHandJointVelocitiesEXT = struct(Module.OPENXR, "XrHandJointVelocitiesEXT")
         """
 
     Expression("#TYPE_HAND_JOINT_VELOCITIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     AutoSize("jointVelocities")..uint32_t("jointCount", "a {@code uint32_t} describing the number of elements in {@code jointVelocities} array.")
     XrHandJointVelocityEXT.p("jointVelocities", "an array of ##XrHandJointVelocityEXT receiving the returned hand joint velocities.")
 }
@@ -1340,7 +1340,7 @@ val XrSystemHandTrackingMeshPropertiesMSFT = struct(Module.OPENXR, "XrSystemHand
         """
 
     Expression("#TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrBool32("supportsHandTrackingMesh", "an {@code XrBool32}, indicating if current system is capable of hand tracking mesh input.")
     uint32_t("maxHandMeshIndexCount", "a {@code uint32_t} returns the maximum count of indices that will be returned from the hand tracker.")
     uint32_t("maxHandMeshVertexCount", "a {@code uint32_t} returns the maximum count of vertices that will be returned from the hand tracker.")
@@ -1364,7 +1364,7 @@ val XrHandMeshSpaceCreateInfoMSFT = struct(Module.OPENXR, "XrHandMeshSpaceCreate
         """
 
     Expression("#TYPE_HAND_MESH_SPACE_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrHandPoseTypeMSFT("handPoseType", "an {@code XrHandPoseTypeMSFT} used to specify the type of hand this mesh is tracking. Indices and vertices returned from #UpdateHandMeshMSFT() for a hand type will be relative to the corresponding space create with the same hand type.")
     XrPosef("poseInHandMeshSpace", "an ##XrPosef defining the position and orientation of the new space’s origin within the natural reference frame of the hand mesh space.")
 }
@@ -1392,7 +1392,7 @@ val XrHandMeshUpdateInfoMSFT = struct(Module.OPENXR, "XrHandMeshUpdateInfoMSFT")
         """
 
     Expression("#TYPE_HAND_MESH_UPDATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrTime("time", "the {@code XrTime} that describes the time for which the application wishes to query the hand mesh state.")
     XrHandPoseTypeMSFT("handPoseType", "an {@code XrHandPoseTypeMSFT} which describes the type of hand pose of the hand mesh to update.")
 }
@@ -1517,7 +1517,7 @@ val XrHandMeshMSFT = struct(Module.OPENXR, "XrHandMeshMSFT") {
         """
 
     Expression("#TYPE_HAND_MESH_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrBool32("isActive", "an {@code XrBool32} indicating if the current hand tracker is active.")
     XrBool32("indexBufferChanged", "an {@code XrBool32} indicating if the {@code indexBuffer} content was changed during the update.")
     XrBool32("vertexBufferChanged", "an {@code XrBool32} indicating if the {@code vertexBuffer} content was changed during the update.")
@@ -1543,7 +1543,7 @@ val XrHandPoseTypeInfoMSFT = struct(Module.OPENXR, "XrHandPoseTypeInfoMSFT") {
         """
 
     Expression("#TYPE_HAND_POSE_TYPE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrHandPoseTypeMSFT("handPoseType", "an {@code XrHandPoseTypeMSFT} that describes the type of hand pose of the hand tracking.")
 }
 
@@ -1573,7 +1573,7 @@ val XrSecondaryViewConfigurationSessionBeginInfoMSFT = struct(Module.OPENXR, "Xr
         """
 
     Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_SESSION_BEGIN_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     AutoSize("enabledViewConfigurationTypes")..uint32_t("viewConfigurationCount", "the number of elements in {@code enabledViewConfigurationTypes}")
     XrViewConfigurationType.const.p("enabledViewConfigurationTypes", "an array of enabled secondary view configuration types that application supports.")
 }
@@ -1603,7 +1603,7 @@ val XrSecondaryViewConfigurationStateMSFT = struct(Module.OPENXR, "XrSecondaryVi
         """
 
     Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_STATE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrViewConfigurationType("viewConfigurationType", "an {@code XrViewConfigurationType} that represents the returned state.")
     XrBool32("active", "an {@code XrBool32} returns whether the secondary view configuration is active and displaying frames to users.")
 }
@@ -1630,7 +1630,7 @@ val XrSecondaryViewConfigurationFrameStateMSFT = struct(Module.OPENXR, "XrSecond
         """
 
     Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     AutoSize("viewConfigurationStates")..uint32_t("viewConfigurationCount", "the number of elements in {@code viewConfigurationStates}.")
     XrSecondaryViewConfigurationStateMSFT.p("viewConfigurationStates", "an array of ##XrSecondaryViewConfigurationStateMSFT structures.")
 }
@@ -1665,7 +1665,7 @@ val XrSecondaryViewConfigurationLayerInfoMSFT = struct(Module.OPENXR, "XrSeconda
         """
 
     Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrViewConfigurationType("viewConfigurationType", "{@code XrViewConfigurationType} to which the composition layers will be displayed.")
     XrEnvironmentBlendMode("environmentBlendMode", "the {@code XrEnvironmentBlendMode} value representing the desired <a target=\"_blank\" href=\"https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\\#environment_blend_mode\">environment blend mode</a> for this view configuration.")
     AutoSize("layers")..uint32_t("layerCount", "the number of composition layers in this frame for the secondary view configuration type. The maximum supported layer count is identified by ##XrSystemGraphicsProperties::maxLayerCount. If layerCount is greater than the maximum supported layer count then #ERROR_LAYER_LIMIT_EXCEEDED is returned. The runtime <b>must</b> support at least #MIN_COMPOSITION_LAYERS_SUPPORTED layers.")
@@ -1698,7 +1698,7 @@ val XrSecondaryViewConfigurationFrameEndInfoMSFT = struct(Module.OPENXR, "XrSeco
         """
 
     Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_END_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     AutoSize("viewConfigurationLayersInfo")..uint32_t("viewConfigurationCount", "the number of elements in {@code viewConfigurationLayersInfo}.")
     XrSecondaryViewConfigurationLayerInfoMSFT.const.p("viewConfigurationLayersInfo", "an array of ##XrSecondaryViewConfigurationLayerInfoMSFT, containing composition layers to be submitted for the specified active view configuration.")
 }
@@ -1726,7 +1726,7 @@ val XrSecondaryViewConfigurationSwapchainCreateInfoMSFT = struct(Module.OPENXR, 
         """
 
     Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrViewConfigurationType("viewConfigurationType", "the secondary view configuration type the application is intending to use this swapchain for.")
 }
 
@@ -1752,7 +1752,7 @@ val XrControllerModelKeyStateMSFT = struct(Module.OPENXR, "XrControllerModelKeyS
         """
 
     Expression("#TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     XrControllerModelKeyMSFT("modelKey", "the model key corresponding to the controller render model being queried.")
 }
 
@@ -1783,7 +1783,7 @@ val XrControllerModelNodePropertiesMSFT = struct(Module.OPENXR, "XrControllerMod
         """
 
     Expression("#TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     charUTF8("parentNodeName", "the name of the parent node in the provided glTF file. The parent name <b>may</b> be empty if it should not be used to locate this node.")["XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT"]
     charUTF8("nodeName", "the name of this node in the provided glTF file.")["XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT"]
 }
@@ -1806,7 +1806,7 @@ val XrControllerModelPropertiesMSFT = struct(Module.OPENXR, "XrControllerModelPr
         """
 
     Expression("#TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("nodeProperties", optional = true)..uint32_t("nodeCapacityInput", "the capacity of the {@code nodeProperties} array, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("nodeCountOutput", "filled in by the runtime with the count of elements in {@code nodeProperties} array, or returns the required capacity in the case that {@code nodeCapacityInput} is 0.")
     nullable..XrControllerModelNodePropertiesMSFT.p("nodeProperties", "a pointer to an application-allocated array that will be filled with the ##XrControllerModelNodePropertiesMSFT values. It <b>can</b> be {@code NULL} if {@code nodeCapacityInput} is 0.")
@@ -1834,7 +1834,7 @@ val XrControllerModelNodeStateMSFT = struct(Module.OPENXR, "XrControllerModelNod
         """
 
     Expression("#TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     XrPosef("nodePose", "an ##XrPosef of the node in its parent node space.")
 }
 
@@ -1856,7 +1856,7 @@ val XrControllerModelStateMSFT = struct(Module.OPENXR, "XrControllerModelStateMS
         """
 
     Expression("#TYPE_CONTROLLER_MODEL_STATE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("nodeStates", optional = true)..uint32_t("nodeCapacityInput", "the capacity of the {@code nodeStates} array, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("nodeCountOutput", "filled in by the runtime with the count of elements in {@code nodeStates} array, or returns the required capacity in the case that {@code nodeCapacityInput} is 0.")
     nullable..XrControllerModelNodeStateMSFT.p("nodeStates", "a pointer to an application-allocated array that will be filled with the ##XrControllerModelNodeStateMSFT values. It <b>can</b> be {@code NULL} if {@code sourceCapacityInput} is 0.")
@@ -1879,7 +1879,7 @@ val XrViewConfigurationViewFovEPIC = struct(Module.OPENXR, "XrViewConfigurationV
         """
 
     Expression("#TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrFovf("recommendedFov", "the recommended field-of-view based on the current user IPD.")
     XrFovf("maxMutableFov", "the maximum field-of-view that the runtime can display.")
 }
@@ -1910,7 +1910,7 @@ val XrHolographicWindowAttachmentMSFT = struct(Module.OPENXR, "XrHolographicWind
         """
 
     Expression("#TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     IUnknown.p("holographicSpace", "a pointer to a valid {@code Windows}.Graphics.Holographic.HolographicSpace.")
     IUnknown.p("coreWindow", "a pointer to a valid {@code Windows}.UI.Core.CoreWindow.")
 }
@@ -1937,7 +1937,7 @@ val XrCompositionLayerReprojectionInfoMSFT = struct(Module.OPENXR, "XrCompositio
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_REPROJECTION_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     XrReprojectionModeMSFT("reprojectionMode", "an {@code XrReprojectionModeMSFT} enum providing a hint to the reprojection mode to the corresponding projection layer.")
 }
 
@@ -1965,7 +1965,7 @@ val XrCompositionLayerReprojectionPlaneOverrideMSFT = struct(Module.OPENXR, "XrC
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrVector3f("position", "describes the position of the focus plane represented in the corresponding ##XrCompositionLayerProjection{@code ::space}.")
     XrVector3f("normal", "a unit vector describes the focus plane normal represented in the corresponding ##XrCompositionLayerProjection{@code ::space}.")
     XrVector3f("velocity", "a velocity of the position in the corresponding ##XrCompositionLayerProjection{@code ::space} measured in meters per second.")
@@ -1991,7 +1991,7 @@ val XrSwapchainStateBaseHeaderFB = struct(Module.OPENXR, "XrSwapchainStateBaseHe
         """
 
     XrStructureType("type", "the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
 }
 
 val XrCompositionLayerSecureContentFB = struct(Module.OPENXR, "XrCompositionLayerSecureContentFB") {
@@ -2020,7 +2020,7 @@ val XrCompositionLayerSecureContentFB = struct(Module.OPENXR, "XrCompositionLaye
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrCompositionLayerSecureContentFlagsFB("flags", "a bitmask of {@code XrCompositionLayerSecureContentFlagBitsFB}.")
 }
 
@@ -2055,7 +2055,7 @@ val XrInteractionProfileAnalogThresholdVALVE = struct(Module.OPENXR, "XrInteract
         """
 
     Expression("#TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrAction("action", "the handle of an action in the suggested binding list.")
     XrPath("binding", "the input path used for the specified action in the suggested binding list.")
     float("onThreshold", "the value between 0.0 and 1.0 at which the runtime <b>must</b> consider the binding to be true. The binding must remain true until the input analog value falls below {@code offThreshold}.")
@@ -2082,7 +2082,7 @@ val XrHandJointsMotionRangeInfoEXT = struct(Module.OPENXR, "XrHandJointsMotionRa
         """
 
     Expression("#TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrHandJointsMotionRangeEXT("handJointsMotionRange", "an {@code XrHandJointsMotionRangeEXT} that defines the hand joint range of motion the application wants.")
 }
 
@@ -2102,7 +2102,7 @@ val XrLoaderInitInfoBaseHeaderKHR = struct(Module.OPENXR, "XrLoaderInitInfoBaseH
         """
 
     XrStructureType("type", "the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
 }
 
 val XrVulkanInstanceCreateInfoKHR = struct(Module.OPENXR, "XrVulkanInstanceCreateInfoKHR") {
@@ -2127,7 +2127,7 @@ val XrVulkanInstanceCreateInfoKHR = struct(Module.OPENXR, "XrVulkanInstanceCreat
         """
 
     Expression("#TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrSystemId("systemId", "an {@code XrSystemId} handle for the system which will be used to create a session.")
     XrVulkanInstanceCreateFlagsKHR("createFlags", "")
     PFN_vkGetInstanceProcAddr("pfnGetInstanceProcAddr", "a function pointer to {@code vkGetInstanceProcAddr} or a compatible entry point.")
@@ -2158,7 +2158,7 @@ val XrVulkanDeviceCreateInfoKHR = struct(Module.OPENXR, "XrVulkanDeviceCreateInf
         """
 
     Expression("#TYPE_VULKAN_DEVICE_CREATE_INFO_KHR")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrSystemId("systemId", "an {@code XrSystemId} handle for the system which will be used to create a session.")
     XrVulkanDeviceCreateFlagsKHR("createFlags", "")
     PFN_vkGetInstanceProcAddr("pfnGetInstanceProcAddr", "a function pointer to {@code vkGetInstanceProcAddr} or a compatible entry point.")
@@ -2172,7 +2172,7 @@ val XrGraphicsBindingVulkan2KHR = struct(Module.OPENXR, "XrGraphicsBindingVulkan
     documentation = "See ##XrGraphicsBindingVulkanKHR."
 
     Expression("#TYPE_GRAPHICS_BINDING_VULKAN_KHR")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     VkInstance("instance", "")
     VkPhysicalDevice("physicalDevice", "")
     VkDevice("device", "")
@@ -2199,7 +2199,7 @@ val XrVulkanGraphicsDeviceGetInfoKHR = struct(Module.OPENXR, "XrVulkanGraphicsDe
         """
 
     Expression("#TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrSystemId("systemId", "an {@code XrSystemId} handle for the system which will be used to create a session.")
     VkInstance("vulkanInstance", "a valid Vulkan {@code VkInstance}.")
 }
@@ -2209,7 +2209,7 @@ val XrSwapchainImageVulkan2KHR = struct(Module.OPENXR, "XrSwapchainImageVulkan2K
     documentation = "See ##XrSwapchainImageVulkanKHR."
 
     Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     VkImage("image", "")
 }
 
@@ -2217,7 +2217,7 @@ val XrGraphicsRequirementsVulkan2KHR = struct(Module.OPENXR, "XrGraphicsRequirem
     documentation = "See ##XrGraphicsRequirementsVulkanKHR."
 
     Expression("#TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR")..XrStructureType("type", "")
-    opaque_p("next", "")
+    nullable..opaque_p("next", "")
     XrVersion("minApiVersionSupported", "")
     XrVersion("maxApiVersionSupported", "")
 }
@@ -2246,7 +2246,7 @@ val XrCompositionLayerEquirect2KHR = struct(Module.OPENXR, "XrCompositionLayerEq
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrCompositionLayerFlags("layerFlags", "specifies options for the layer.")
     XrSpace("space", "the {@code XrSpace} in which the {@code pose} of the equirect layer is evaluated over time.")
     XrEyeVisibility("eyeVisibility", "")
@@ -2292,7 +2292,7 @@ val XrSceneObserverCreateInfoMSFT = struct(Module.OPENXR, "XrSceneObserverCreate
         """
 
     Expression("#TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
 }
 
 val XrSceneCreateInfoMSFT = struct(Module.OPENXR, "XrSceneCreateInfoMSFT") {
@@ -2312,7 +2312,7 @@ val XrSceneCreateInfoMSFT = struct(Module.OPENXR, "XrSceneCreateInfoMSFT") {
         """
 
     Expression("#TYPE_SCENE_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
 }
 
 val XrSceneSphereBoundMSFT = struct(Module.OPENXR, "XrSceneSphereBoundMSFT") {
@@ -2428,7 +2428,7 @@ val XrNewSceneComputeInfoMSFT = struct(Module.OPENXR, "XrNewSceneComputeInfoMSFT
         """
 
     Expression("#TYPE_NEW_SCENE_COMPUTE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("requestedFeatures")..uint32_t("requestedFeatureCount", "the number of features.")
     XrSceneComputeFeatureMSFT.const.p("requestedFeatures", "an array of {@code XrSceneComputeFeatureMSFT}.")
     XrSceneComputeConsistencyMSFT("consistency", "indicates the requested {@code XrSceneComputeConsistencyMSFT}, trading off speed against the quality of the resulting scene.")
@@ -2453,7 +2453,7 @@ val XrVisualMeshComputeLodInfoMSFT = struct(Module.OPENXR, "XrVisualMeshComputeL
         """
 
     Expression("#TYPE_VISUAL_MESH_COMPUTE_LOD_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     XrMeshComputeLodMSFT("lod", "the requested mesh level of detail specified by {@code XrMeshComputeLodMSFT}.")
 }
 
@@ -2503,7 +2503,7 @@ val XrSceneComponentsMSFT = struct(Module.OPENXR, "XrSceneComponentsMSFT") {
         """
 
     Expression("#TYPE_SCENE_COMPONENTS_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("components", optional = true)..uint32_t("componentCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("componentCountOutput", "a pointer to the count of components, or a pointer to the required capacity in the case that {@code componentCapacityInput} is 0.")
     nullable..XrSceneComponentMSFT.p("components", "an array of ##XrSceneComponentMSFT.")
@@ -2527,7 +2527,7 @@ val XrSceneComponentsGetInfoMSFT = struct(Module.OPENXR, "XrSceneComponentsGetIn
         """
 
     Expression("#TYPE_SCENE_COMPONENTS_GET_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     XrSceneComponentTypeMSFT("componentType", "the scene component type requested.")
 }
 
@@ -2568,7 +2568,7 @@ val XrSceneComponentLocationsMSFT = struct(Module.OPENXR, "XrSceneComponentLocat
         """
 
     Expression("#TYPE_SCENE_COMPONENT_LOCATIONS_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     AutoSize("locations", optional = true)..uint32_t("locationCount", "a {@code uint32_t} describing the count of elements in the {@code locations} array.")
     nullable..XrSceneComponentLocationMSFT.p("locations", "an array of ##XrSceneComponentLocationMSFT scene component locations.")
 }
@@ -2592,7 +2592,7 @@ val XrSceneComponentsLocateInfoMSFT = struct(Module.OPENXR, "XrSceneComponentsLo
         """
 
     Expression("#TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrSpace("baseSpace", "an {@code XrSpace} within which the scene components will be located.")
     XrTime("time", "an {@code XrTime} at which to locate the scene components.")
     AutoSize("componentIds", optional = true)..uint32_t("componentIdCount", "a {@code uint32_t} describing the count of elements in the {@code componentIds} array.")
@@ -2648,7 +2648,7 @@ val XrSceneObjectsMSFT = struct(Module.OPENXR, "XrSceneObjectsMSFT") {
         """
 
     Expression("#TYPE_SCENE_OBJECTS_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("sceneObjects", optional = true)..uint32_t("sceneObjectCount", "a {@code uint32_t} describing the count of elements in the {@code sceneObjects} array.")
     nullable..XrSceneObjectMSFT.p("sceneObjects", "an array of ##XrSceneObjectMSFT.")
 }
@@ -2673,7 +2673,7 @@ val XrSceneComponentParentFilterInfoMSFT = struct(Module.OPENXR, "XrSceneCompone
         """
 
     Expression("#TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     XrUuidMSFT("parentId", "the ##XrUuidMSFT of the parent scene component to filter by.")
 }
 
@@ -2698,7 +2698,7 @@ val XrSceneObjectTypesFilterInfoMSFT = struct(Module.OPENXR, "XrSceneObjectTypes
         """
 
     Expression("#TYPE_SCENE_OBJECT_TYPES_FILTER_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("objectTypes", optional = true)..uint32_t("objectTypeCount", "a {@code uint32_t} describing the count of elements in the {@code objectTypes} array.")
     nullable..XrSceneObjectTypeMSFT.const.p("objectTypes", "an array of {@code XrSceneObjectTypeMSFT} to filter by.")
 }
@@ -2749,7 +2749,7 @@ val XrScenePlanesMSFT = struct(Module.OPENXR, "XrScenePlanesMSFT") {
         """
 
     Expression("#TYPE_SCENE_PLANES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("scenePlanes", optional = true)..uint32_t("scenePlaneCount", "a {@code uint32_t} describing the count of elements in the ##XrScenePlaneMSFT array.")
     nullable..XrScenePlaneMSFT.p("scenePlanes", "an array of ##XrScenePlaneMSFT.")
 }
@@ -2775,7 +2775,7 @@ val XrScenePlaneAlignmentFilterInfoMSFT = struct(Module.OPENXR, "XrScenePlaneAli
         """
 
     Expression("#TYPE_SCENE_PLANE_ALIGNMENT_FILTER_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("alignments", optional = true)..uint32_t("alignmentCount", "a {@code uint32_t} describing the count of elements in the {@code alignments} array.")
     nullable..XrScenePlaneAlignmentTypeMSFT.const.p("alignments", "an array of {@code XrScenePlaneAlignmentTypeMSFT} to filter by.")
 }
@@ -2816,7 +2816,7 @@ val XrSceneMeshesMSFT = struct(Module.OPENXR, "XrSceneMeshesMSFT") {
         """
 
     Expression("#TYPE_SCENE_MESHES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("sceneMeshes", optional = true)..uint32_t("sceneMeshCount", "a {@code uint32_t} describing the count of elements in the {@code sceneMeshes} array.")
     nullable..XrSceneMeshMSFT.p("sceneMeshes", "an array of ##XrSceneMeshMSFT.")
 }
@@ -2838,7 +2838,7 @@ val XrSceneMeshBuffersGetInfoMSFT = struct(Module.OPENXR, "XrSceneMeshBuffersGet
         """
 
     Expression("#TYPE_SCENE_MESH_BUFFERS_GET_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     uint64_t("meshBufferId", "the {@code uint64_t} identifier that specifies the scene mesh buffer to read.")
 }
 
@@ -2859,7 +2859,7 @@ val XrSceneMeshBuffersMSFT = struct(Module.OPENXR, "XrSceneMeshBuffersMSFT") {
         """
 
     Expression("#TYPE_SCENE_MESH_BUFFERS_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
 }
 
 val XrSceneMeshVertexBufferMSFT = struct(Module.OPENXR, "XrSceneMeshVertexBufferMSFT") {
@@ -2880,7 +2880,7 @@ val XrSceneMeshVertexBufferMSFT = struct(Module.OPENXR, "XrSceneMeshVertexBuffer
         """
 
     Expression("#TYPE_SCENE_MESH_VERTEX_BUFFER_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("vertexCountOutput", "a pointer to the count of vertices, or a pointer to the required capacity in the case that {@code vertexCapacityInput} is 0.")
     nullable..XrVector3f.p("vertices", "an array of ##XrVector3f filled in by the runtime returns the position of vertices in the mesh component’s space.")
@@ -2904,7 +2904,7 @@ val XrSceneMeshIndicesUint32MSFT = struct(Module.OPENXR, "XrSceneMeshIndicesUint
         """
 
     Expression("#TYPE_SCENE_MESH_INDICES_UINT32_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("indices", optional = true)..uint32_t("indexCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("indexCountOutput", "a pointer to the count of indices, or a pointer to the required capacity in the case that {@code indexCapacityInput} is 0.")
     nullable..uint32_t.p("indices", "an array of triangle indices filled in by the runtime, specifying the indices of the scene mesh buffer in the vertices array. The triangle indices <b>must</b> be returned in counter-clockwise order and three indices denote one triangle.")
@@ -2928,7 +2928,7 @@ val XrSceneMeshIndicesUint16MSFT = struct(Module.OPENXR, "XrSceneMeshIndicesUint
         """
 
     Expression("#TYPE_SCENE_MESH_INDICES_UINT16_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("indices", optional = true)..uint32_t("indexCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("indexCountOutput", "a pointer to the count of indices, or a pointer to the required capacity in the case that {@code indexCapacityInput} is 0.")
     nullable..uint16_t.p("indices", "an array of triangle indices filled in by the runtime, specifying the indices of the scene mesh buffer in the vertices array. The triangle indices <b>must</b> be returned in counter-clockwise order and three indices denote one triangle.")
@@ -2951,7 +2951,7 @@ val XrSerializedSceneFragmentDataGetInfoMSFT = struct(Module.OPENXR, "XrSerializ
         """
 
     Expression("#TYPE_SERIALIZED_SCENE_FRAGMENT_DATA_GET_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrUuidMSFT("sceneFragmentId", "the ##XrUuidMSFT of the serialized scene fragment that was previously read from #GetSceneComponentsMSFT() with #SCENE_COMPONENT_TYPE_SERIALIZED_SCENE_FRAGMENT_MSFT.")
 }
 
@@ -2995,7 +2995,7 @@ val XrSceneDeserializeInfoMSFT = struct(Module.OPENXR, "XrSceneDeserializeInfoMS
         """
 
     Expression("#TYPE_SCENE_DESERIALIZE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     AutoSize("fragments", optional = true)..uint32_t("fragmentCount", "the count of ##XrDeserializeSceneFragmentMSFT structures in the {@code fragments} array.")
     nullable..XrDeserializeSceneFragmentMSFT.const.p("fragments", "an array of ##XrDeserializeSceneFragmentMSFT.")
 }
@@ -3017,7 +3017,7 @@ val XrEventDataDisplayRefreshRateChangedFB = struct(Module.OPENXR, "XrEventDataD
         """
 
     Expression("#TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     float("fromDisplayRefreshRate", "the previous display refresh rate.")
     float("toDisplayRefreshRate", "the new display refresh rate.")
 }
@@ -3042,7 +3042,7 @@ val XrViveTrackerPathsHTCX = struct(Module.OPENXR, "XrViveTrackerPathsHTCX", mut
         """
 
     Expression("#TYPE_VIVE_TRACKER_PATHS_HTCX")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrPath("persistentPath", "the unique path of the VIVE tracker which is persistent over the lifetime of the hardware.")
     XrPath("rolePath", "the path of the VIVE tracker role. This <b>may</b> be #NULL_PATH if the role is not assigned.")
 }
@@ -3068,7 +3068,7 @@ val XrEventDataViveTrackerConnectedHTCX = struct(Module.OPENXR, "XrEventDataVive
         """
 
     Expression("#TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrViveTrackerPathsHTCX.p("paths", "contains two paths of the connected VIVE tracker.")
 }
 
@@ -3087,7 +3087,7 @@ val XrSystemColorSpacePropertiesFB = struct(Module.OPENXR, "XrSystemColorSpacePr
         """
 
     Expression("#TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrColorSpaceFB("colorSpace", "the native color space of the XR device.")
 }
 
@@ -3153,7 +3153,7 @@ val XrHandTrackingMeshFB = struct(Module.OPENXR, "XrHandTrackingMeshFB") {
         """
 
     Expression("#TYPE_HAND_TRACKING_MESH_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     AutoSize("jointBindPoses", "jointRadii", "jointParents")..uint32_t("jointCapacityInput", "the capacity of the joint data arrays in this structure, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("jointCountOutput", "filled in by the runtime with the count of joint data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is 0.")
     XrPosef.p("jointBindPoses", "an array of poses that matches what is returned by #LocateHandJointsEXT() which describes the hand skeleton’s bind pose.")
@@ -3185,7 +3185,7 @@ val XrHandTrackingScaleFB = struct(Module.OPENXR, "XrHandTrackingScaleFB") {
         """
 
     Expression("#TYPE_HAND_TRACKING_SCALE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     float("sensorOutput", "an output value: the currently measured scale as would be applied without passing this structure.")
     float("currentOutput", "an output value: the effective output that the bind skeleton is getting on the current call, which may be subject to filtering, scaling, or validation.")
     XrBool32("overrideHandScale", "indicates whether the runtime should scale the output of this #LocateHandJointsEXT() call according to {@code overrideValueInput}")
@@ -3209,7 +3209,7 @@ val XrHandTrackingAimStateFB = struct(Module.OPENXR, "XrHandTrackingAimStateFB",
         """
 
     Expression("#TYPE_HAND_TRACKING_AIM_STATE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrHandTrackingAimFlagsFB("status", "a bitmask of {@code XrHandTrackingAimFlagBitsFB} describing the availability and state of other signals.")
     XrPosef("aimPose", "a system-determined \"aim\" pose, similar in intent and convention to the <a target=\"_blank\" href=\"https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\\#aim-pose\">aim poses</a> used with the action system, based on hand data.")
     float("pinchStrengthIndex", "the current pinching strength for the index finger of this hand. Range is 0.0 to 1.0, with 1.0 meaning index and thumb are fully touching.")
@@ -3263,7 +3263,7 @@ val XrHandTrackingCapsulesStateFB = struct(Module.OPENXR, "XrHandTrackingCapsule
         """
 
     Expression("#TYPE_HAND_TRACKING_CAPSULES_STATE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrHandCapsuleFB("capsules", "an array of capsules.")["XR_FB_HAND_TRACKING_CAPSULE_COUNT"]
 }
 
@@ -3284,7 +3284,7 @@ val XrFoveationProfileCreateInfoFB = struct(Module.OPENXR, "XrFoveationProfileCr
         """
 
     Expression("#TYPE_FOVEATION_PROFILE_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
 }
 
 val XrSwapchainCreateInfoFoveationFB = struct(Module.OPENXR, "XrSwapchainCreateInfoFoveationFB") {
@@ -3302,7 +3302,7 @@ val XrSwapchainCreateInfoFoveationFB = struct(Module.OPENXR, "XrSwapchainCreateI
         """
 
     Expression("#TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrSwapchainCreateFoveationFlagsFB("flags", "a bitmask of {@code XrSwapchainCreateFoveationFlagBitsFB} which indicate various characteristics for how foveation is enabled on the swapchain.")
 }
 
@@ -3322,7 +3322,7 @@ val XrSwapchainStateFoveationFB = struct(Module.OPENXR, "XrSwapchainStateFoveati
         """
 
     Expression("#TYPE_SWAPCHAIN_STATE_FOVEATION_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrSwapchainStateFoveationFlagsFB("flags", "a bitmask of {@code XrSwapchainStateFoveationFlagBitsFB} which indicate various characteristics of how and when the foveation properties of the swapchain <b>must</b> be updated.")
     XrFoveationProfileFB("profile", "an {@code XrFoveationProfileFB} defining the desired foveation properties to be applied to the swapchain.")
 }
@@ -3343,7 +3343,7 @@ val XrFoveationLevelProfileCreateInfoFB = struct(Module.OPENXR, "XrFoveationLeve
         """
 
     Expression("#TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrFoveationLevelFB("level", "the maximum desired foveation level.")
     float("verticalOffset", "the desired vertical offset in degrees for the center of the foveation pattern.")
     XrFoveationDynamicFB("dynamic", "the desired dynamic foveation setting.")
@@ -3374,7 +3374,7 @@ val XrTriangleMeshCreateInfoFB = struct(Module.OPENXR, "XrTriangleMeshCreateInfo
         """
 
     Expression("#TYPE_TRIANGLE_MESH_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrTriangleMeshFlagsFB("flags", "a bitmask of {@code XrTriangleMeshFlagBitsFB} that specify behavior.")
     XrWindingOrderFB("windingOrder", "the {@code XrWindingOrderFB} value defining the winding order of the mesh triangles.")
     uint32_t("vertexCount", "the number of vertices in the mesh. In the case of the mutable mesh, the value is treated as the maximum number of vertices the mesh will be able to represent at any time in its lifecycle. The actual number of vertices can vary and is defined when #TriangleMeshEndUpdateFB() is called.")
@@ -3404,7 +3404,7 @@ val XrSystemPassthroughPropertiesFB = struct(Module.OPENXR, "XrSystemPassthrough
         """
 
     Expression("#TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrBool32("supportsPassthrough", "")
 }
 
@@ -3434,7 +3434,7 @@ val XrPassthroughCreateInfoFB = struct(Module.OPENXR, "XrPassthroughCreateInfoFB
         """
 
     Expression("#TYPE_PASSTHROUGH_CREATE_INFO_FB")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrPassthroughFlagsFB("flags", "")
 }
 
@@ -3467,7 +3467,7 @@ val XrPassthroughLayerCreateInfoFB = struct(Module.OPENXR, "XrPassthroughLayerCr
         """
 
     Expression("#TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrPassthroughFB("passthrough", "")
     XrPassthroughFlagsFB("flags", "")
     XrPassthroughLayerPurposeFB("purpose", "")
@@ -3504,7 +3504,7 @@ val XrCompositionLayerPassthroughFB = struct(Module.OPENXR, "XrCompositionLayerP
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrCompositionLayerFlags("flags", "")
     XrSpace("space", "")
     XrPassthroughLayerFB("layerHandle", "")
@@ -3542,7 +3542,7 @@ val XrGeometryInstanceCreateInfoFB = struct(Module.OPENXR, "XrGeometryInstanceCr
         """
 
     Expression("#TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrPassthroughLayerFB("layer", "")
     XrTriangleMeshFB("mesh", "")
     XrSpace("baseSpace", "")
@@ -3578,7 +3578,7 @@ val XrGeometryInstanceTransformFB = struct(Module.OPENXR, "XrGeometryInstanceTra
         """
 
     Expression("#TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrSpace("baseSpace", "")
     XrTime("time", "")
     XrPosef("pose", "")
@@ -3610,7 +3610,7 @@ val XrPassthroughStyleFB = struct(Module.OPENXR, "XrPassthroughStyleFB") {
         """
 
     Expression("#TYPE_PASSTHROUGH_STYLE_FB")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     float("textureOpacityFactor", "")
     XrColor4f("edgeColor", "")
 }
@@ -3640,7 +3640,7 @@ val XrPassthroughColorMapMonoToRgbaFB = struct(Module.OPENXR, "XrPassthroughColo
         """
 
     Expression("#TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrColor4f("textureColorMap", "")["XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB"]
 }
 
@@ -3666,7 +3666,7 @@ val XrPassthroughColorMapMonoToMonoFB = struct(Module.OPENXR, "XrPassthroughColo
         """
 
     Expression("#TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     uint8_t("textureColorMap", "")["XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB"]
 }
 
@@ -3693,7 +3693,7 @@ val XrEventDataPassthroughStateChangedFB = struct(Module.OPENXR, "XrEventDataPas
         """
 
     Expression("#TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB")..XrStructureType("type", "")
-    opaque_const_p("next", "")
+    nullable..opaque_const_p("next", "")
     XrPassthroughStateChangedFlagsFB("flags", "")
 }
 
@@ -3716,7 +3716,7 @@ val XrBindingModificationBaseHeaderKHR = struct(Module.OPENXR, "XrBindingModific
         """
 
     XrStructureType("type", "the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or in this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or in this extension.")
 }
 
 val XrBindingModificationsKHR = struct(Module.OPENXR, "XrBindingModificationsKHR") {
@@ -3737,7 +3737,7 @@ val XrBindingModificationsKHR = struct(Module.OPENXR, "XrBindingModificationsKHR
         """
 
     Expression("#TYPE_BINDING_MODIFICATIONS_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     AutoSize("bindingModifications", optional = true)..uint32_t("bindingModificationCount", "the number of binding modifications in the array pointed to by {@code bindingModifications}.")
     nullable..XrBindingModificationBaseHeaderKHR.const.p.const.p("bindingModifications", "a pointer to an array of pointers to binding modification structures based on ##XrBindingModificationBaseHeaderKHR, that define all of the application’s suggested binding modifications for the specified interaction profile.")
 }
@@ -3762,7 +3762,7 @@ val XrViewLocateFoveatedRenderingVARJO = struct(Module.OPENXR, "XrViewLocateFove
         """
 
     Expression("#TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrBool32("foveatedRenderingActive", "an {@code XrBool32}, indicating if runtime should return foveated FoV.")
 }
 
@@ -3814,7 +3814,7 @@ val XrFoveatedViewConfigurationViewVARJO = struct(Module.OPENXR, "XrFoveatedView
         """
 
     Expression("#TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrBool32("foveatedRenderingActive", "an {@code XrBool32}, indicating if the runtime should return foveated view configuration view.")
 }
 
@@ -3835,7 +3835,7 @@ val XrSystemFoveatedRenderingPropertiesVARJO = struct(Module.OPENXR, "XrSystemFo
         """
 
     Expression("#TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrBool32("supportsFoveatedRendering", "an {@code XrBool32}, indicating if current system is capable of performoning foveated rendering.")
 }
 
@@ -3856,7 +3856,7 @@ val XrCompositionLayerDepthTestVARJO = struct(Module.OPENXR, "XrCompositionLayer
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     float("depthTestRangeNearZ", "in a non-negative distance in meters that specifies the lower bound of the range where depth testing should be performed. Must be less than {@code depthTestRangeFarZ}. Value of zero means that there is no lower bound.")
     float("depthTestRangeFarZ", "a positive distance in meters that specifies the upper bound of the range where depth testing should be performed. Must be greater than {@code depthTestRangeNearZ}. Value of floating point positive infinity means that there is no upper bound.")
 }
@@ -3883,7 +3883,7 @@ val XrSystemMarkerTrackingPropertiesVARJO = struct(Module.OPENXR, "XrSystemMarke
         """
 
     Expression("#TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     XrBool32("supportsMarkerTracking", "an {@code XrBool32}, indicating if current system is capable of performing marker tracking.")
 }
 
@@ -3907,7 +3907,7 @@ val XrEventDataMarkerTrackingUpdateVARJO = struct(Module.OPENXR, "XrEventDataMar
         """
 
     Expression("#TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     uint64_t("markerId", "unique identifier of the marker that has been updated.")
     XrBool32("isActive", "the tracking state of the marker.")
     XrBool32("isPredicted", "")
@@ -3931,7 +3931,7 @@ val XrMarkerSpaceCreateInfoVARJO = struct(Module.OPENXR, "XrMarkerSpaceCreateInf
         """
 
     Expression("#TYPE_MARKER_SPACE_CREATE_INFO_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     uint64_t("markerId", "unique identifier of the marker.")
     XrPosef("poseInMarkerSpace", "an ##XrPosef defining the position and orientation of the new space’s origin relative to the marker’s natural origin.")
 }
@@ -3977,7 +3977,7 @@ val XrSpatialAnchorPersistenceInfoMSFT = struct(Module.OPENXR, "XrSpatialAnchorP
         """
 
     Expression("#TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
     XrSpatialAnchorPersistenceNameMSFT("spatialAnchorPersistenceName", "an ##XrSpatialAnchorPersistenceNameMSFT containing the name associated with the {@code XrSpatialAnchorMSFT} in the spatial anchor store.")
     XrSpatialAnchorMSFT("spatialAnchor", "the {@code XrSpatialAnchorMSFT} that the application wishes to perform persistence operations on.")
 }
@@ -4004,7 +4004,7 @@ val XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT = struct(Module.OPENXR, "Xr
         """
 
     Expression("#TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
     XrSpatialAnchorStoreConnectionMSFT("spatialAnchorStore", "the {@code XrSpatialAnchorStoreConnectionMSFT} from which the spatial anchor will be loaded from.")
     XrSpatialAnchorPersistenceNameMSFT("spatialAnchorPersistenceName", "the ##XrSpatialAnchorPersistenceNameMSFT associated with the {@code XrSpatialAnchorMSFT} in the spatial anchor store. This name is used to create an {@code XrSpatialAnchorMSFT} handle from a spatial anchor persisted in the spatial anchor store.")
 }
@@ -4027,7 +4027,7 @@ val XrSwapchainImageFoveationVulkanFB = struct(Module.OPENXR, "XrSwapchainImageF
         """
 
     Expression("#TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     VkImage("image", "a valid Vulkan {@code VkImage} to use.")
     uint32_t("width", "the horizontal width in pixels of the image.")
     uint32_t("height", "the vertical height in pixels of the image.")
@@ -4072,7 +4072,7 @@ val XrSwapchainStateSamplerOpenGLESFB = struct(Module.OPENXR, "XrSwapchainStateS
         """
 
     Expression("#TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     EGLenum("minFilter", "a valid Android OpenGL ES {@code EGLenum}.")
     EGLenum("magFilter", "a valid Android OpenGL ES {@code EGLenum}.")
     EGLenum("wrapModeS", "a valid Android OpenGL ES {@code EGLenum}.")
@@ -4119,7 +4119,7 @@ val XrSwapchainStateSamplerVulkanFB = struct(Module.OPENXR, "XrSwapchainStateSam
         """
 
     Expression("#TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     VkFilter("minFilter", "a valid Vulkan {@code VkFilter}.")
     VkFilter("magFilter", "a valid Vulkan {@code VkFilter}.")
     VkSamplerMipmapMode("mipmapMode", "a valid Vulkan {@code VkSamplerMipmapMode}.")
@@ -4156,7 +4156,7 @@ val XrCompositionLayerSpaceWarpInfoFB = struct(Module.OPENXR, "XrCompositionLaye
         """
 
     Expression("#TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     XrCompositionLayerSpaceWarpInfoFlagsFB("layerFlags", "a bitmask of {@code XrCompositionLayerSpaceWarpInfoFlagsFB}.")
     XrSwapchainSubImage("motionVectorSubImage", "identifies the motion vector image ##XrSwapchainSubImage to be associated with the submitted layer ##XrCompositionLayerProjection.")
     XrPosef("appSpaceDeltaPose", "the incremental application-applied transform, if any, since the previous frame that affects the view. When artificial locomotion (scripted movement, teleportation, etc.) happens, the application might transform the whole ##XrCompositionLayerProjection::space from one application space pose to another pose between frames. The pose should be identity when there is no ##XrCompositionLayerProjection::space transformation in application.")
@@ -4184,7 +4184,7 @@ val XrSystemSpaceWarpPropertiesFB = struct(Module.OPENXR, "XrSystemSpaceWarpProp
         """
 
     Expression("#TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     uint32_t("recommendedMotionVectorImageRectWidth", "recommended motion vector and depth image width")
     uint32_t("recommendedMotionVectorImageRectHeight", "recommended motion vector and depth image height")
 }

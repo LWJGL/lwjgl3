@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -251,18 +250,9 @@ public class XrVisualMeshComputeLodInfoMSFT extends Struct implements NativeReso
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrVisualMeshComputeLodInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrVisualMeshComputeLodInfoMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrVisualMeshComputeLodInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #lod(int) lod}. */
     public static void nlod(long struct, int value) { UNSAFE.putInt(null, struct + XrVisualMeshComputeLodInfoMSFT.LOD, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrVisualMeshComputeLodInfoMSFT.NEXT));
-    }
 
     // -----------------------------------
 

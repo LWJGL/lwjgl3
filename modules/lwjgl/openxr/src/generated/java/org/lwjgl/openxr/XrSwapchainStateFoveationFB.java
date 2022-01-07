@@ -261,7 +261,7 @@ public class XrSwapchainStateFoveationFB extends Struct implements NativeResourc
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainStateFoveationFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainStateFoveationFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainStateFoveationFB.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
     public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrSwapchainStateFoveationFB.FLAGS, value); }
     /** Unsafe version of {@link #profile(XrFoveationProfileFB) profile}. */
@@ -273,7 +273,6 @@ public class XrSwapchainStateFoveationFB extends Struct implements NativeResourc
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrSwapchainStateFoveationFB.NEXT));
         check(memGetAddress(struct + XrSwapchainStateFoveationFB.PROFILE));
     }
 

@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -291,7 +290,7 @@ public class XrFrameEndInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrFrameEndInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrFrameEndInfo.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrFrameEndInfo.NEXT, value); }
     /** Unsafe version of {@link #displayTime(long) displayTime}. */
     public static void ndisplayTime(long struct, long value) { UNSAFE.putLong(null, struct + XrFrameEndInfo.DISPLAYTIME, value); }
     /** Unsafe version of {@link #environmentBlendMode(int) environmentBlendMode}. */
@@ -300,15 +299,6 @@ public class XrFrameEndInfo extends Struct implements NativeResource {
     public static void nlayerCount(long struct, int value) { UNSAFE.putInt(null, struct + XrFrameEndInfo.LAYERCOUNT, value); }
     /** Unsafe version of {@link #layers(PointerBuffer) layers}. */
     public static void nlayers(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + XrFrameEndInfo.LAYERS, memAddressSafe(value)); if (value != null) { nlayerCount(struct, value.remaining()); } }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrFrameEndInfo.NEXT));
-    }
 
     // -----------------------------------
 

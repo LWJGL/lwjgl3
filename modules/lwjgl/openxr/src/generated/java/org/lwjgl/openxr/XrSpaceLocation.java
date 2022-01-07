@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -264,20 +263,11 @@ public class XrSpaceLocation extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSpaceLocation.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceLocation.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSpaceLocation.NEXT, value); }
     /** Unsafe version of {@link #locationFlags(long) locationFlags}. */
     public static void nlocationFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrSpaceLocation.LOCATIONFLAGS, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrSpaceLocation.POSE, XrPosef.SIZEOF); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSpaceLocation.NEXT));
-    }
 
     // -----------------------------------
 

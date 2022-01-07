@@ -299,7 +299,7 @@ public class XrSecondaryViewConfigurationLayerInfoMSFT extends Struct implements
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationLayerInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSecondaryViewConfigurationLayerInfoMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSecondaryViewConfigurationLayerInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #viewConfigurationType(int) viewConfigurationType}. */
     public static void nviewConfigurationType(long struct, int value) { UNSAFE.putInt(null, struct + XrSecondaryViewConfigurationLayerInfoMSFT.VIEWCONFIGURATIONTYPE, value); }
     /** Unsafe version of {@link #environmentBlendMode(int) environmentBlendMode}. */
@@ -315,7 +315,6 @@ public class XrSecondaryViewConfigurationLayerInfoMSFT extends Struct implements
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrSecondaryViewConfigurationLayerInfoMSFT.NEXT));
         check(memGetAddress(struct + XrSecondaryViewConfigurationLayerInfoMSFT.LAYERS));
     }
 

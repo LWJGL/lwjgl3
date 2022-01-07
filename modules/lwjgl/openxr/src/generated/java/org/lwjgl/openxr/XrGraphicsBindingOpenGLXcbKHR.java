@@ -326,7 +326,7 @@ public class XrGraphicsBindingOpenGLXcbKHR extends Struct implements NativeResou
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrGraphicsBindingOpenGLXcbKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXcbKHR.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXcbKHR.NEXT, value); }
     /** Unsafe version of {@link #connection(long) connection}. */
     public static void nconnection(long struct, long value) { memPutAddress(struct + XrGraphicsBindingOpenGLXcbKHR.CONNECTION, check(value)); }
     /** Unsafe version of {@link #screenNumber(int) screenNumber}. */
@@ -346,7 +346,6 @@ public class XrGraphicsBindingOpenGLXcbKHR extends Struct implements NativeResou
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrGraphicsBindingOpenGLXcbKHR.NEXT));
         check(memGetAddress(struct + XrGraphicsBindingOpenGLXcbKHR.CONNECTION));
     }
 

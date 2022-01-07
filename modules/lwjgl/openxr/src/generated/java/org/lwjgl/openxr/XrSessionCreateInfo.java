@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -270,20 +269,11 @@ public class XrSessionCreateInfo extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSessionCreateInfo.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSessionCreateInfo.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSessionCreateInfo.NEXT, value); }
     /** Unsafe version of {@link #createFlags(long) createFlags}. */
     public static void ncreateFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrSessionCreateInfo.CREATEFLAGS, value); }
     /** Unsafe version of {@link #systemId(long) systemId}. */
     public static void nsystemId(long struct, long value) { UNSAFE.putLong(null, struct + XrSessionCreateInfo.SYSTEMID, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSessionCreateInfo.NEXT));
-    }
 
     // -----------------------------------
 

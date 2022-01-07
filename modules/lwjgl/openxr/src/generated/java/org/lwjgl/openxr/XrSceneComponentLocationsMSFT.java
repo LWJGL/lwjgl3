@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -265,20 +264,11 @@ public class XrSceneComponentLocationsMSFT extends Struct implements NativeResou
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentLocationsMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneComponentLocationsMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneComponentLocationsMSFT.NEXT, value); }
     /** Sets the specified value to the {@code locationCount} field of the specified {@code struct}. */
     public static void nlocationCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneComponentLocationsMSFT.LOCATIONCOUNT, value); }
     /** Unsafe version of {@link #locations(XrSceneComponentLocationMSFT.Buffer) locations}. */
     public static void nlocations(long struct, @Nullable XrSceneComponentLocationMSFT.Buffer value) { memPutAddress(struct + XrSceneComponentLocationsMSFT.LOCATIONS, memAddressSafe(value)); if (value != null) { nlocationCount(struct, value.remaining()); } }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSceneComponentLocationsMSFT.NEXT));
-    }
 
     // -----------------------------------
 

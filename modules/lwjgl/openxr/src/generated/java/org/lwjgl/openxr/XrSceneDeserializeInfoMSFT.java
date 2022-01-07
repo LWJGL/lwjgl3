@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -269,20 +268,11 @@ public class XrSceneDeserializeInfoMSFT extends Struct implements NativeResource
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneDeserializeInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneDeserializeInfoMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSceneDeserializeInfoMSFT.NEXT, value); }
     /** Sets the specified value to the {@code fragmentCount} field of the specified {@code struct}. */
     public static void nfragmentCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSceneDeserializeInfoMSFT.FRAGMENTCOUNT, value); }
     /** Unsafe version of {@link #fragments(XrDeserializeSceneFragmentMSFT.Buffer) fragments}. */
     public static void nfragments(long struct, @Nullable XrDeserializeSceneFragmentMSFT.Buffer value) { memPutAddress(struct + XrSceneDeserializeInfoMSFT.FRAGMENTS, memAddressSafe(value)); if (value != null) { nfragmentCount(struct, value.remaining()); } }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSceneDeserializeInfoMSFT.NEXT));
-    }
 
     // -----------------------------------
 

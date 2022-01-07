@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -246,18 +245,9 @@ public class XrEyeGazeSampleTimeEXT extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEyeGazeSampleTimeEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrEyeGazeSampleTimeEXT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrEyeGazeSampleTimeEXT.NEXT, value); }
     /** Unsafe version of {@link #time(long) time}. */
     public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrEyeGazeSampleTimeEXT.TIME, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrEyeGazeSampleTimeEXT.NEXT));
-    }
 
     // -----------------------------------
 

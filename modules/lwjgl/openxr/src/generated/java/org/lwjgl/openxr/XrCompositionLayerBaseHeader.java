@@ -266,7 +266,7 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerBaseHeader.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerBaseHeader.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerBaseHeader.NEXT, value); }
     /** Unsafe version of {@link #layerFlags(long) layerFlags}. */
     public static void nlayerFlags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerBaseHeader.LAYERFLAGS, value); }
     /** Unsafe version of {@link #space(XrSpace) space}. */
@@ -278,7 +278,6 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerBaseHeader.NEXT));
         check(memGetAddress(struct + XrCompositionLayerBaseHeader.SPACE));
     }
 

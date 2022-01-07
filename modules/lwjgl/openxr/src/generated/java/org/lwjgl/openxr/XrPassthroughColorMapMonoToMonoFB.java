@@ -265,7 +265,7 @@ public class XrPassthroughColorMapMonoToMonoFB extends Struct implements NativeR
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrPassthroughColorMapMonoToMonoFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughColorMapMonoToMonoFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrPassthroughColorMapMonoToMonoFB.NEXT, value); }
     /** Unsafe version of {@link #textureColorMap(ByteBuffer) textureColorMap}. */
     public static void ntextureColorMap(long struct, ByteBuffer value) {
         if (CHECKS) { checkGT(value, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB); }
@@ -274,15 +274,6 @@ public class XrPassthroughColorMapMonoToMonoFB extends Struct implements NativeR
     /** Unsafe version of {@link #textureColorMap(int, byte) textureColorMap}. */
     public static void ntextureColorMap(long struct, int index, byte value) {
         UNSAFE.putByte(null, struct + XrPassthroughColorMapMonoToMonoFB.TEXTURECOLORMAP + check(index, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB) * 1, value);
-    }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrPassthroughColorMapMonoToMonoFB.NEXT));
     }
 
     // -----------------------------------

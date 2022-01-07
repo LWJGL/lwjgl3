@@ -66,7 +66,6 @@ public class FBFoveation {
         long __functionAddress = session.getCapabilities().xrCreateFoveationProfileFB;
         if (CHECKS) {
             check(__functionAddress);
-            XrFoveationProfileCreateInfoFB.validate(createInfo);
         }
         return callPPPI(session.address(), createInfo, profile, __functionAddress);
     }

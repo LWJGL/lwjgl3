@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -251,18 +250,9 @@ public class XrSerializedSceneFragmentDataGetInfoMSFT extends Struct implements 
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSerializedSceneFragmentDataGetInfoMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrSerializedSceneFragmentDataGetInfoMSFT.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSerializedSceneFragmentDataGetInfoMSFT.NEXT, value); }
     /** Unsafe version of {@link #sceneFragmentId(XrUuidMSFT) sceneFragmentId}. */
     public static void nsceneFragmentId(long struct, XrUuidMSFT value) { memCopy(value.address(), struct + XrSerializedSceneFragmentDataGetInfoMSFT.SCENEFRAGMENTID, XrUuidMSFT.SIZEOF); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrSerializedSceneFragmentDataGetInfoMSFT.NEXT));
-    }
 
     // -----------------------------------
 

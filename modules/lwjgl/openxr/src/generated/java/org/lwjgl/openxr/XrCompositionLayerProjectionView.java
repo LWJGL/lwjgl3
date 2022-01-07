@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -283,7 +282,7 @@ public class XrCompositionLayerProjectionView extends Struct implements NativeRe
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerProjectionView.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerProjectionView.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerProjectionView.NEXT, value); }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrCompositionLayerProjectionView.POSE, XrPosef.SIZEOF); }
     /** Unsafe version of {@link #fov(XrFovf) fov}. */
@@ -297,7 +296,6 @@ public class XrCompositionLayerProjectionView extends Struct implements NativeRe
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerProjectionView.NEXT));
         XrSwapchainSubImage.validate(struct + XrCompositionLayerProjectionView.SUBIMAGE);
     }
 

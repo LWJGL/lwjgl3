@@ -446,7 +446,7 @@ public class XrHandTrackingMeshFB extends Struct implements NativeResource {
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingMeshFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrHandTrackingMeshFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrHandTrackingMeshFB.NEXT, value); }
     /** Sets the specified value to the {@code jointCapacityInput} field of the specified {@code struct}. */
     public static void njointCapacityInput(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingMeshFB.JOINTCAPACITYINPUT, value); }
     /** Unsafe version of {@link #jointCountOutput(int) jointCountOutput}. */
@@ -484,7 +484,6 @@ public class XrHandTrackingMeshFB extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + XrHandTrackingMeshFB.NEXT));
         check(memGetAddress(struct + XrHandTrackingMeshFB.JOINTBINDPOSES));
         check(memGetAddress(struct + XrHandTrackingMeshFB.JOINTRADII));
         check(memGetAddress(struct + XrHandTrackingMeshFB.JOINTPARENTS));

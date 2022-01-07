@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -257,18 +256,9 @@ public class XrCompositionLayerImageLayoutFB extends Struct implements NativeRes
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerImageLayoutFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerImageLayoutFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerImageLayoutFB.NEXT, value); }
     /** Unsafe version of {@link #flags(long) flags}. */
     public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrCompositionLayerImageLayoutFB.FLAGS, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerImageLayoutFB.NEXT));
-    }
 
     // -----------------------------------
 

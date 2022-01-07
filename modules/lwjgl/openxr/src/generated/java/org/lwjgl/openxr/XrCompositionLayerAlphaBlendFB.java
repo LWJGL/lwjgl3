@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -299,7 +298,7 @@ public class XrCompositionLayerAlphaBlendFB extends Struct implements NativeReso
     /** Unsafe version of {@link #type(int) type}. */
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerAlphaBlendFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
-    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerAlphaBlendFB.NEXT, check(value)); }
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrCompositionLayerAlphaBlendFB.NEXT, value); }
     /** Unsafe version of {@link #srcFactorColor(int) srcFactorColor}. */
     public static void nsrcFactorColor(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerAlphaBlendFB.SRCFACTORCOLOR, value); }
     /** Unsafe version of {@link #dstFactorColor(int) dstFactorColor}. */
@@ -308,15 +307,6 @@ public class XrCompositionLayerAlphaBlendFB extends Struct implements NativeReso
     public static void nsrcFactorAlpha(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerAlphaBlendFB.SRCFACTORALPHA, value); }
     /** Unsafe version of {@link #dstFactorAlpha(int) dstFactorAlpha}. */
     public static void ndstFactorAlpha(long struct, int value) { UNSAFE.putInt(null, struct + XrCompositionLayerAlphaBlendFB.DSTFACTORALPHA, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrCompositionLayerAlphaBlendFB.NEXT));
-    }
 
     // -----------------------------------
 

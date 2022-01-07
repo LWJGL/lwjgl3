@@ -64,7 +64,6 @@ public class FBTriangleMesh {
         long __functionAddress = session.getCapabilities().xrCreateTriangleMeshFB;
         if (CHECKS) {
             check(__functionAddress);
-            XrTriangleMeshCreateInfoFB.validate(createInfo);
         }
         return callPPPI(session.address(), createInfo, outTriangleMesh, __functionAddress);
     }
