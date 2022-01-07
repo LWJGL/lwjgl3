@@ -707,6 +707,15 @@
             </and>
         </condition>
 
+        <local name="test.openxr"/>
+        <condition property="test.openxr">
+            <and>
+                <istrue value="${binding.glfw}"/>
+                <istrue value="${binding.opengl}"/>
+                <istrue value="${binding.vulkan}"/>
+            </and>
+        </condition>
+
         <local name="test.par"/>
         <condition property="test.par">
             <and>
@@ -809,7 +818,7 @@
             <include name="org/lwjgl/demo/opengl/**" if:true="${binding.opengl}"/>
 
             <include name="org/lwjgl/demo/openvr/**" if:true="${binding.openvr}"/>
-            <include name="org/lwjgl/demo/openxr/**" if:set="${binding.openxr}"/>
+            <include name="org/lwjgl/demo/openxr/**" if:set="test.openxr"/>
             <include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
             <include name="org/lwjgl/demo/stb/**" if:set="test.stb"/>
 
