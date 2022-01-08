@@ -1592,7 +1592,27 @@
         </release-module>
 
         <!-- OpenXR -->
-        <release-module name="openxr" title="OpenXR" if:true="${binding.openxr}"/>
+        <release-module name="openxr" title="OpenXR" if:true="${binding.openxr}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="libopenxr_loader.so"/>
+                <get-release platform="linux" arch="x64" file="libopenxr_loader.so.git"/>
+
+                <get-release platform="linux" arch="arm64" file="libopenxr_loader.so"/>
+                <get-release platform="linux" arch="arm64" file="libopenxr_loader.so.git"/>
+
+                <get-release platform="linux" arch="arm32" file="libopenxr_loader.so"/>
+                <get-release platform="linux" arch="arm32" file="libopenxr_loader.so.git"/>
+
+                <get-release platform="windows" arch="x64" file="openxr-loader.dll"/>
+                <get-release platform="windows" arch="x64" file="openxr-loader.dll.git"/>
+
+                <get-release platform="windows" arch="x86" file="openxr-loader.dll"/>
+                <get-release platform="windows" arch="x86" file="openxr-loader.dll.git"/>
+
+                <get-release platform="windows" arch="arm64" file="openxr-loader.dll"/>
+                <get-release platform="windows" arch="arm64" file="openxr-loader.dll.git"/>
+            </natives>
+        </release-module>
 
         <!-- Opus -->
         <release-module name="opus" native-library="opus" title="Opus" if:true="${binding.opus}"/>

@@ -44,18 +44,14 @@ public final class XR {
      * @see #create(String)
      */
     public static void create() {
-        SharedLibrary XR;
-        switch (Platform.get()) {
-            case LINUX:
-                XR = Library.loadNative(XR.class, "org.lwjgl.openxr", Configuration.OPENXR_LIBRARY_NAME, "libopenxr_loader.so.1", "openxr_loader");
-                break;
-            case WINDOWS:
-                XR = Library.loadNative(XR.class, "org.lwjgl.openxr", Configuration.OPENXR_LIBRARY_NAME, "openxr-loader");
-                break;
-            default:
-                throw new UnsupportedOperationException();
-        }
-        create(XR);
+        create(Library.loadNative(
+            XR.class,
+            "org.lwjgl.openxr",
+            Configuration.OPENXR_LIBRARY_NAME.get(Platform.mapLibraryNameBundled(Platform.get() == Platform.WINDOWS
+                ? "openxr-loader"
+                : "openxr_loader")),
+            true
+        ));
     }
 
     /**

@@ -435,6 +435,7 @@ EXPORTS
             <update-dependency module="glfw" artifact="glfw.dll"/>
             <update-dependency module="openal" artifact="OpenAL.dll"/>
             <update-dependency module="openvr" artifact="openvr_api.dll"/>
+            <update-dependency module="openxr" artifact="openxr-loader.dll"/>
             <update-dependency module="opus" artifact="opus.dll"/>
             <update-dependency module="shaderc" artifact="shaderc.dll"/>
             <update-dependency module="spvc" artifact="spirv-cross.dll"/>

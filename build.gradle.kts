@@ -191,7 +191,9 @@ enum class Artifacts(
     ),
     OPENXR(
         "lwjgl-openxr", "LWJGL - OpenXR bindings",
-        "A royalty-free, open standard that provides high-performance access to Augmented Reality (AR) and Virtual Reality (VR)—collectively known as XR—platforms and devices."
+        "A royalty-free, open standard that provides high-performance access to Augmented Reality (AR) and Virtual Reality (VR)—collectively known as XR—platforms and devices.",
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.LINUX_ARM32,
+        Platforms.WINDOWS, Platforms.WINDOWS_X86, Platforms.WINDOWS_ARM64
     ),
     OPUS(
         "lwjgl-opus", "LWJGL - Opus bindings",

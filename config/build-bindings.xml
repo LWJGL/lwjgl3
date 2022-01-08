@@ -75,7 +75,6 @@ This script is included in /config/build-definitions.xml.
     <property name="java-only.binding.jawt" value="true"/>
     <property name="java-only.binding.odbc" value="true"/>
     <property name="java-only.binding.opencl" value="true"/>
-    <property name="java-only.binding.openxr" value="true"/>
 
     <!-- Set the path to the Oculus SDK to enable. -->
     <!-- TODO: add headers in here -->
