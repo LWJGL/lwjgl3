@@ -8,7 +8,7 @@ package openxr.templates
 import org.lwjgl.generator.*
 import openxr.*
 
-val MNDX_egl_enable = "MNDXEglEnable".nativeClassXR("MNDX_egl_enable", type = "instance", postfix = "MNDX") {
+val MNDX_egl_enable = "MNDXEGLEnable".nativeClassXR("MNDX_egl_enable", type = "instance", postfix = "MNDX") {
     documentation =
         """
         The $templateName extension.

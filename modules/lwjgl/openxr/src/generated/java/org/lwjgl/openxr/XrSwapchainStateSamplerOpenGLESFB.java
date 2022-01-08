@@ -37,8 +37,8 @@ import org.lwjgl.egl.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>The {@link FBSwapchainUpdateStateOpenGLEs XR_FB_swapchain_update_state_opengl_es} extension <b>must</b> be enabled prior to using {@link XrSwapchainStateSamplerOpenGLESFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSwapchainUpdateStateOpenGLEs#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB}</li>
+ * <li>The {@link FBSwapchainUpdateStateOpenGLES XR_FB_swapchain_update_state_opengl_es} extension <b>must</b> be enabled prior to using {@link XrSwapchainStateSamplerOpenGLESFB}</li>
+ * <li>{@code type} <b>must</b> be {@link FBSwapchainUpdateStateOpenGLES#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code minFilter} <b>must</b> be a valid {@code EGLenum} value</li>
  * <li>{@code magFilter} <b>must</b> be a valid {@code EGLenum} value</li>
@@ -178,8 +178,8 @@ public class XrSwapchainStateSamplerOpenGLESFB extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #type} field. */
     public XrSwapchainStateSamplerOpenGLESFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSwapchainUpdateStateOpenGLEs#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB} value to the {@link #type} field. */
-    public XrSwapchainStateSamplerOpenGLESFB type$Default() { return type(FBSwapchainUpdateStateOpenGLEs.XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB); }
+    /** Sets the {@link FBSwapchainUpdateStateOpenGLES#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB} value to the {@link #type} field. */
+    public XrSwapchainStateSamplerOpenGLESFB type$Default() { return type(FBSwapchainUpdateStateOpenGLES.XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSwapchainStateSamplerOpenGLESFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Sets the specified value to the {@link #minFilter} field. */
@@ -487,8 +487,8 @@ public class XrSwapchainStateSamplerOpenGLESFB extends Struct implements NativeR
 
         /** Sets the specified value to the {@link XrSwapchainStateSamplerOpenGLESFB#type} field. */
         public XrSwapchainStateSamplerOpenGLESFB.Buffer type(@NativeType("XrStructureType") int value) { XrSwapchainStateSamplerOpenGLESFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSwapchainUpdateStateOpenGLEs#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB} value to the {@link XrSwapchainStateSamplerOpenGLESFB#type} field. */
-        public XrSwapchainStateSamplerOpenGLESFB.Buffer type$Default() { return type(FBSwapchainUpdateStateOpenGLEs.XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB); }
+        /** Sets the {@link FBSwapchainUpdateStateOpenGLES#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB} value to the {@link XrSwapchainStateSamplerOpenGLESFB#type} field. */
+        public XrSwapchainStateSamplerOpenGLESFB.Buffer type$Default() { return type(FBSwapchainUpdateStateOpenGLES.XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB); }
         /** Sets the specified value to the {@link XrSwapchainStateSamplerOpenGLESFB#next} field. */
         public XrSwapchainStateSamplerOpenGLESFB.Buffer next(@NativeType("void *") long value) { XrSwapchainStateSamplerOpenGLESFB.nnext(address(), value); return this; }
         /** Sets the specified value to the {@link XrSwapchainStateSamplerOpenGLESFB#minFilter} field. */

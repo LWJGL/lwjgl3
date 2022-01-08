@@ -34,8 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>The {@link KHROpenGLEsEnable XR_KHR_opengl_es_enable} extension <b>must</b> be enabled prior to using {@link XrSwapchainImageOpenGLESKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHROpenGLEsEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR}</li>
+ * <li>The {@link KHROpenGLESEnable XR_KHR_opengl_es_enable} extension <b>must</b> be enabled prior to using {@link XrSwapchainImageOpenGLESKHR}</li>
+ * <li>{@code type} <b>must</b> be {@link KHROpenGLESEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
@@ -106,8 +106,8 @@ public class XrSwapchainImageOpenGLESKHR extends Struct implements NativeResourc
 
     /** Sets the specified value to the {@link #type} field. */
     public XrSwapchainImageOpenGLESKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHROpenGLEsEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR} value to the {@link #type} field. */
-    public XrSwapchainImageOpenGLESKHR type$Default() { return type(KHROpenGLEsEnable.XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR); }
+    /** Sets the {@link KHROpenGLESEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR} value to the {@link #type} field. */
+    public XrSwapchainImageOpenGLESKHR type$Default() { return type(KHROpenGLESEnable.XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSwapchainImageOpenGLESKHR next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Sets the specified value to the {@link #image} field. */
@@ -316,8 +316,8 @@ public class XrSwapchainImageOpenGLESKHR extends Struct implements NativeResourc
 
         /** Sets the specified value to the {@link XrSwapchainImageOpenGLESKHR#type} field. */
         public XrSwapchainImageOpenGLESKHR.Buffer type(@NativeType("XrStructureType") int value) { XrSwapchainImageOpenGLESKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHROpenGLEsEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR} value to the {@link XrSwapchainImageOpenGLESKHR#type} field. */
-        public XrSwapchainImageOpenGLESKHR.Buffer type$Default() { return type(KHROpenGLEsEnable.XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR); }
+        /** Sets the {@link KHROpenGLESEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR} value to the {@link XrSwapchainImageOpenGLESKHR#type} field. */
+        public XrSwapchainImageOpenGLESKHR.Buffer type$Default() { return type(KHROpenGLESEnable.XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR); }
         /** Sets the specified value to the {@link XrSwapchainImageOpenGLESKHR#next} field. */
         public XrSwapchainImageOpenGLESKHR.Buffer next(@NativeType("void *") long value) { XrSwapchainImageOpenGLESKHR.nnext(address(), value); return this; }
         /** Sets the specified value to the {@link XrSwapchainImageOpenGLESKHR#image} field. */

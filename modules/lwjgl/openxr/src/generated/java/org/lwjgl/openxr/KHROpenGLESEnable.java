@@ -11,7 +11,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
 /** The KHR_opengl_es_enable extension. */
-public class KHROpenGLEsEnable {
+public class KHROpenGLESEnable {
 
     /** The extension specification version. */
     public static final int XR_KHR_opengl_es_enable_SPEC_VERSION = 8;
@@ -35,7 +35,7 @@ public class KHROpenGLEsEnable {
         XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR          = 1000024002,
         XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR    = 1000024003;
 
-    protected KHROpenGLEsEnable() {
+    protected KHROpenGLESEnable() {
         throw new UnsupportedOperationException();
     }
 
@@ -70,7 +70,7 @@ public class KHROpenGLEsEnable {
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
-     * <li>The {@link KHROpenGLEsEnable XR_KHR_opengl_es_enable} extension <b>must</b> be enabled prior to calling {@link #xrGetOpenGLESGraphicsRequirementsKHR GetOpenGLESGraphicsRequirementsKHR}</li>
+     * <li>The {@link KHROpenGLESEnable XR_KHR_opengl_es_enable} extension <b>must</b> be enabled prior to calling {@link #xrGetOpenGLESGraphicsRequirementsKHR GetOpenGLESGraphicsRequirementsKHR}</li>
      * <li>{@code instance} <b>must</b> be a valid {@code XrInstance} handle</li>
      * <li>{@code graphicsRequirements} <b>must</b> be a pointer to an {@link XrGraphicsRequirementsOpenGLESKHR} structure</li>
      * </ul>

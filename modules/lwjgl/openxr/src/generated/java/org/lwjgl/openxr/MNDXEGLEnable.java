@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /** The MNDX_egl_enable extension. */
-public final class MNDXEglEnable {
+public final class MNDXEGLEnable {
 
     /** The extension specification version. */
     public static final int XR_MNDX_egl_enable_SPEC_VERSION = 1;
@@ -17,6 +17,6 @@ public final class MNDXEglEnable {
     /** Extends {@code XrStructureType}. */
     public static final int XR_TYPE_GRAPHICS_BINDING_EGL_MNDX = 1000048004;
 
-    private MNDXEglEnable() {}
+    private MNDXEGLEnable() {}
 
 }

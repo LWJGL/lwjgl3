@@ -326,7 +326,7 @@ public class XRCapabilities {
     public final boolean XR_FB_space_warp;
     /** When true, {@link FBSwapchainUpdateState} is supported. */
     public final boolean XR_FB_swapchain_update_state;
-    /** When true, {@link FBSwapchainUpdateStateOpenGLEs} is supported. */
+    /** When true, {@link FBSwapchainUpdateStateOpenGLES} is supported. */
     public final boolean XR_FB_swapchain_update_state_opengl_es;
     /** When true, {@link FBSwapchainUpdateStateVulkan} is supported. */
     public final boolean XR_FB_swapchain_update_state_vulkan;
@@ -358,7 +358,7 @@ public class XRCapabilities {
     public final boolean XR_KHR_loader_init;
     /** When true, {@link KHROpenGLEnable} is supported. */
     public final boolean XR_KHR_opengl_enable;
-    /** When true, {@link KHROpenGLEsEnable} is supported. */
+    /** When true, {@link KHROpenGLESEnable} is supported. */
     public final boolean XR_KHR_opengl_es_enable;
     /** When true, {@link KHRSwapchainUsageInputAttachmentBit} is supported. */
     public final boolean XR_KHR_swapchain_usage_input_attachment_bit;
@@ -376,7 +376,7 @@ public class XRCapabilities {
     public final boolean XR_MND_headless;
     /** When true, {@link MNDSwapchainUsageInputAttachmentBit} is supported. */
     public final boolean XR_MND_swapchain_usage_input_attachment_bit;
-    /** When true, {@link MNDXEglEnable} is supported. */
+    /** When true, {@link MNDXEGLEnable} is supported. */
     public final boolean XR_MNDX_egl_enable;
     /** When true, {@link MSFTCompositionLayerReprojection} is supported. */
     public final boolean XR_MSFT_composition_layer_reprojection;

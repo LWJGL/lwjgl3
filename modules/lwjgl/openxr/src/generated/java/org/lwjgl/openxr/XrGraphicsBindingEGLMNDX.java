@@ -30,8 +30,8 @@ import org.lwjgl.egl.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>The {@link MNDXEglEnable XR_MNDX_egl_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsBindingEGLMNDX}</li>
- * <li>{@code type} <b>must</b> be {@link MNDXEglEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX}</li>
+ * <li>The {@link MNDXEGLEnable XR_MNDX_egl_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsBindingEGLMNDX}</li>
+ * <li>{@code type} <b>must</b> be {@link MNDXEGLEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code getProcAddress} <b>must</b> be a valid {@code PFNEGLGETPROCADDRESSPROC} value</li>
  * <li>{@code display} <b>must</b> be a valid {@code EGLDisplay} value</li>
@@ -127,8 +127,8 @@ public class XrGraphicsBindingEGLMNDX extends Struct implements NativeResource {
 
     /** Sets the specified value to the {@link #type} field. */
     public XrGraphicsBindingEGLMNDX type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MNDXEglEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX} value to the {@link #type} field. */
-    public XrGraphicsBindingEGLMNDX type$Default() { return type(MNDXEglEnable.XR_TYPE_GRAPHICS_BINDING_EGL_MNDX); }
+    /** Sets the {@link MNDXEGLEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX} value to the {@link #type} field. */
+    public XrGraphicsBindingEGLMNDX type$Default() { return type(MNDXEGLEnable.XR_TYPE_GRAPHICS_BINDING_EGL_MNDX); }
     /** Sets the specified value to the {@link #next} field. */
     public XrGraphicsBindingEGLMNDX next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Sets the specified value to the {@link #getProcAddress} field. */
@@ -382,8 +382,8 @@ public class XrGraphicsBindingEGLMNDX extends Struct implements NativeResource {
 
         /** Sets the specified value to the {@link XrGraphicsBindingEGLMNDX#type} field. */
         public XrGraphicsBindingEGLMNDX.Buffer type(@NativeType("XrStructureType") int value) { XrGraphicsBindingEGLMNDX.ntype(address(), value); return this; }
-        /** Sets the {@link MNDXEglEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX} value to the {@link XrGraphicsBindingEGLMNDX#type} field. */
-        public XrGraphicsBindingEGLMNDX.Buffer type$Default() { return type(MNDXEglEnable.XR_TYPE_GRAPHICS_BINDING_EGL_MNDX); }
+        /** Sets the {@link MNDXEGLEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX} value to the {@link XrGraphicsBindingEGLMNDX#type} field. */
+        public XrGraphicsBindingEGLMNDX.Buffer type$Default() { return type(MNDXEGLEnable.XR_TYPE_GRAPHICS_BINDING_EGL_MNDX); }
         /** Sets the specified value to the {@link XrGraphicsBindingEGLMNDX#next} field. */
         public XrGraphicsBindingEGLMNDX.Buffer next(@NativeType("void const *") long value) { XrGraphicsBindingEGLMNDX.nnext(address(), value); return this; }
         /** Sets the specified value to the {@link XrGraphicsBindingEGLMNDX#getProcAddress} field. */

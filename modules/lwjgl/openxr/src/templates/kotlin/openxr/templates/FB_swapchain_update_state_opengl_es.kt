@@ -8,7 +8,7 @@ package openxr.templates
 import org.lwjgl.generator.*
 import openxr.*
 
-val FB_swapchain_update_state_opengl_es = "FBSwapchainUpdateStateOpenGLEs".nativeClassXR("FB_swapchain_update_state_opengl_es", type = "instance", postfix = "FB") {
+val FB_swapchain_update_state_opengl_es = "FBSwapchainUpdateStateOpenGLES".nativeClassXR("FB_swapchain_update_state_opengl_es", type = "instance", postfix = "FB") {
     documentation =
         """
         The $templateName extension.

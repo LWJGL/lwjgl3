@@ -6,7 +6,7 @@
 package org.lwjgl.openxr;
 
 /** The FB_swapchain_update_state_opengl_es extension. */
-public final class FBSwapchainUpdateStateOpenGLEs {
+public final class FBSwapchainUpdateStateOpenGLES {
 
     /** The extension specification version. */
     public static final int XR_FB_swapchain_update_state_opengl_es_SPEC_VERSION = 1;
@@ -17,6 +17,6 @@ public final class FBSwapchainUpdateStateOpenGLEs {
     /** Extends {@code XrStructureType}. */
     public static final int XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB = 1000162000;
 
-    private FBSwapchainUpdateStateOpenGLEs() {}
+    private FBSwapchainUpdateStateOpenGLES() {}
 
 }

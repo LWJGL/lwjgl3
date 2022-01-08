@@ -20,19 +20,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>{@link XrGraphicsRequirementsOpenGLESKHR} is populated by {@link KHROpenGLEsEnable#xrGetOpenGLESGraphicsRequirementsKHR GetOpenGLESGraphicsRequirementsKHR} with the runtime’s OpenGL ES API version requirements.</p>
+ * <p>{@link XrGraphicsRequirementsOpenGLESKHR} is populated by {@link KHROpenGLESEnable#xrGetOpenGLESGraphicsRequirementsKHR GetOpenGLESGraphicsRequirementsKHR} with the runtime’s OpenGL ES API version requirements.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>The {@link KHROpenGLEsEnable XR_KHR_opengl_es_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsRequirementsOpenGLESKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHROpenGLEsEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR}</li>
+ * <li>The {@link KHROpenGLESEnable XR_KHR_opengl_es_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsRequirementsOpenGLESKHR}</li>
+ * <li>{@code type} <b>must</b> be {@link KHROpenGLESEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link KHROpenGLEsEnable#xrGetOpenGLESGraphicsRequirementsKHR GetOpenGLESGraphicsRequirementsKHR}</p>
+ * <p>{@link KHROpenGLESEnable#xrGetOpenGLESGraphicsRequirementsKHR GetOpenGLESGraphicsRequirementsKHR}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -104,8 +104,8 @@ public class XrGraphicsRequirementsOpenGLESKHR extends Struct implements NativeR
 
     /** Sets the specified value to the {@link #type} field. */
     public XrGraphicsRequirementsOpenGLESKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHROpenGLEsEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR} value to the {@link #type} field. */
-    public XrGraphicsRequirementsOpenGLESKHR type$Default() { return type(KHROpenGLEsEnable.XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR); }
+    /** Sets the {@link KHROpenGLESEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR} value to the {@link #type} field. */
+    public XrGraphicsRequirementsOpenGLESKHR type$Default() { return type(KHROpenGLESEnable.XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR); }
     /** Sets the specified value to the {@link #next} field. */
     public XrGraphicsRequirementsOpenGLESKHR next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Sets the specified value to the {@link #minApiVersionSupported} field. */
@@ -325,8 +325,8 @@ public class XrGraphicsRequirementsOpenGLESKHR extends Struct implements NativeR
 
         /** Sets the specified value to the {@link XrGraphicsRequirementsOpenGLESKHR#type} field. */
         public XrGraphicsRequirementsOpenGLESKHR.Buffer type(@NativeType("XrStructureType") int value) { XrGraphicsRequirementsOpenGLESKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHROpenGLEsEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR} value to the {@link XrGraphicsRequirementsOpenGLESKHR#type} field. */
-        public XrGraphicsRequirementsOpenGLESKHR.Buffer type$Default() { return type(KHROpenGLEsEnable.XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR); }
+        /** Sets the {@link KHROpenGLESEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR} value to the {@link XrGraphicsRequirementsOpenGLESKHR#type} field. */
+        public XrGraphicsRequirementsOpenGLESKHR.Buffer type$Default() { return type(KHROpenGLESEnable.XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR); }
         /** Sets the specified value to the {@link XrGraphicsRequirementsOpenGLESKHR#next} field. */
         public XrGraphicsRequirementsOpenGLESKHR.Buffer next(@NativeType("void *") long value) { XrGraphicsRequirementsOpenGLESKHR.nnext(address(), value); return this; }
         /** Sets the specified value to the {@link XrGraphicsRequirementsOpenGLESKHR#minApiVersionSupported} field. */

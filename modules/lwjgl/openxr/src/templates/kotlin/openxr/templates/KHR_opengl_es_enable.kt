@@ -8,7 +8,7 @@ package openxr.templates
 import org.lwjgl.generator.*
 import openxr.*
 
-val KHR_opengl_es_enable = "KHROpenGLEsEnable".nativeClassXR("KHR_opengl_es_enable", type = "instance", postfix = "KHR") {
+val KHR_opengl_es_enable = "KHROpenGLESEnable".nativeClassXR("KHR_opengl_es_enable", type = "instance", postfix = "KHR") {
     documentation =
         """
         The $templateName extension.
@@ -53,7 +53,7 @@ val KHR_opengl_es_enable = "KHROpenGLEsEnable".nativeClassXR("KHR_opengl_es_enab
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>The {@link KHROpenGLEsEnable XR_KHR_opengl_es_enable} extension <b>must</b> be enabled prior to calling #GetOpenGLESGraphicsRequirementsKHR()</li>
+            <li>The {@link KHROpenGLESEnable XR_KHR_opengl_es_enable} extension <b>must</b> be enabled prior to calling #GetOpenGLESGraphicsRequirementsKHR()</li>
             <li>{@code instance} <b>must</b> be a valid {@code XrInstance} handle</li>
             <li>{@code graphicsRequirements} <b>must</b> be a pointer to an ##XrGraphicsRequirementsOpenGLESKHR structure</li>
         </ul>
