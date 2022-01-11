@@ -121,6 +121,36 @@ public class XrSystemProperties extends Struct implements NativeResource {
     /** an {@link XrSystemTrackingProperties} structure specifying system tracking properties. */
     public XrSystemTrackingProperties trackingProperties() { return ntrackingProperties(address()); }
 
+    /** Sets the specified value to the {@link #type} field. */
+    public XrSystemProperties type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
+    /** Sets the {@link XR10#XR_TYPE_SYSTEM_PROPERTIES TYPE_SYSTEM_PROPERTIES} value to the {@link #type} field. */
+    public XrSystemProperties type$Default() { return type(XR10.XR_TYPE_SYSTEM_PROPERTIES); }
+    /** Sets the specified value to the {@link #next} field. */
+    public XrSystemProperties next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public XrSystemProperties set(
+        int type,
+        long next
+    ) {
+        type(type);
+        next(next);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public XrSystemProperties set(XrSystemProperties src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
 
     /** Returns a new {@code XrSystemProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -252,6 +282,11 @@ public class XrSystemProperties extends Struct implements NativeResource {
     /** Unsafe version of {@link #trackingProperties}. */
     public static XrSystemTrackingProperties ntrackingProperties(long struct) { return XrSystemTrackingProperties.create(struct + XrSystemProperties.TRACKINGPROPERTIES); }
 
+    /** Unsafe version of {@link #type(int) type}. */
+    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemProperties.TYPE, value); }
+    /** Unsafe version of {@link #next(long) next}. */
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemProperties.NEXT, value); }
+
     // -----------------------------------
 
     /** An array of {@link XrSystemProperties} structs. */
@@ -312,6 +347,13 @@ public class XrSystemProperties extends Struct implements NativeResource {
         public XrSystemGraphicsProperties graphicsProperties() { return XrSystemProperties.ngraphicsProperties(address()); }
         /** @return a {@link XrSystemTrackingProperties} view of the {@link XrSystemProperties#trackingProperties} field. */
         public XrSystemTrackingProperties trackingProperties() { return XrSystemProperties.ntrackingProperties(address()); }
+
+        /** Sets the specified value to the {@link XrSystemProperties#type} field. */
+        public XrSystemProperties.Buffer type(@NativeType("XrStructureType") int value) { XrSystemProperties.ntype(address(), value); return this; }
+        /** Sets the {@link XR10#XR_TYPE_SYSTEM_PROPERTIES TYPE_SYSTEM_PROPERTIES} value to the {@link XrSystemProperties#type} field. */
+        public XrSystemProperties.Buffer type$Default() { return type(XR10.XR_TYPE_SYSTEM_PROPERTIES); }
+        /** Sets the specified value to the {@link XrSystemProperties#next} field. */
+        public XrSystemProperties.Buffer next(@NativeType("void *") long value) { XrSystemProperties.nnext(address(), value); return this; }
 
     }
 

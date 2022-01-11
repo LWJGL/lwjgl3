@@ -119,6 +119,36 @@ public class XrApiLayerProperties extends Struct implements NativeResource {
     @NativeType("char[XR_MAX_API_LAYER_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
 
+    /** Sets the specified value to the {@link #type} field. */
+    public XrApiLayerProperties type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
+    /** Sets the {@link XR10#XR_TYPE_API_LAYER_PROPERTIES TYPE_API_LAYER_PROPERTIES} value to the {@link #type} field. */
+    public XrApiLayerProperties type$Default() { return type(XR10.XR_TYPE_API_LAYER_PROPERTIES); }
+    /** Sets the specified value to the {@link #next} field. */
+    public XrApiLayerProperties next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public XrApiLayerProperties set(
+        int type,
+        long next
+    ) {
+        type(type);
+        next(next);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public XrApiLayerProperties set(XrApiLayerProperties src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
 
     /** Returns a new {@code XrApiLayerProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -250,6 +280,11 @@ public class XrApiLayerProperties extends Struct implements NativeResource {
     /** Unsafe version of {@link #descriptionString}. */
     public static String ndescriptionString(long struct) { return memUTF8(struct + XrApiLayerProperties.DESCRIPTION); }
 
+    /** Unsafe version of {@link #type(int) type}. */
+    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrApiLayerProperties.TYPE, value); }
+    /** Unsafe version of {@link #next(long) next}. */
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrApiLayerProperties.NEXT, value); }
+
     // -----------------------------------
 
     /** An array of {@link XrApiLayerProperties} structs. */
@@ -312,6 +347,13 @@ public class XrApiLayerProperties extends Struct implements NativeResource {
         /** @return the null-terminated string stored in the {@link XrApiLayerProperties#description} field. */
         @NativeType("char[XR_MAX_API_LAYER_DESCRIPTION_SIZE]")
         public String descriptionString() { return XrApiLayerProperties.ndescriptionString(address()); }
+
+        /** Sets the specified value to the {@link XrApiLayerProperties#type} field. */
+        public XrApiLayerProperties.Buffer type(@NativeType("XrStructureType") int value) { XrApiLayerProperties.ntype(address(), value); return this; }
+        /** Sets the {@link XR10#XR_TYPE_API_LAYER_PROPERTIES TYPE_API_LAYER_PROPERTIES} value to the {@link XrApiLayerProperties#type} field. */
+        public XrApiLayerProperties.Buffer type$Default() { return type(XR10.XR_TYPE_API_LAYER_PROPERTIES); }
+        /** Sets the specified value to the {@link XrApiLayerProperties#next} field. */
+        public XrApiLayerProperties.Buffer next(@NativeType("void *") long value) { XrApiLayerProperties.nnext(address(), value); return this; }
 
     }
 

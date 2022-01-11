@@ -102,6 +102,36 @@ public class XrViveTrackerPathsHTCX extends Struct implements NativeResource {
     @NativeType("XrPath")
     public long rolePath() { return nrolePath(address()); }
 
+    /** Sets the specified value to the {@link #type} field. */
+    public XrViveTrackerPathsHTCX type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
+    /** Sets the {@link HTCXViveTrackerInteraction#XR_TYPE_VIVE_TRACKER_PATHS_HTCX TYPE_VIVE_TRACKER_PATHS_HTCX} value to the {@link #type} field. */
+    public XrViveTrackerPathsHTCX type$Default() { return type(HTCXViveTrackerInteraction.XR_TYPE_VIVE_TRACKER_PATHS_HTCX); }
+    /** Sets the specified value to the {@link #next} field. */
+    public XrViveTrackerPathsHTCX next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public XrViveTrackerPathsHTCX set(
+        int type,
+        long next
+    ) {
+        type(type);
+        next(next);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public XrViveTrackerPathsHTCX set(XrViveTrackerPathsHTCX src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
 
     /** Returns a new {@code XrViveTrackerPathsHTCX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -225,6 +255,11 @@ public class XrViveTrackerPathsHTCX extends Struct implements NativeResource {
     /** Unsafe version of {@link #rolePath}. */
     public static long nrolePath(long struct) { return UNSAFE.getLong(null, struct + XrViveTrackerPathsHTCX.ROLEPATH); }
 
+    /** Unsafe version of {@link #type(int) type}. */
+    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrViveTrackerPathsHTCX.TYPE, value); }
+    /** Unsafe version of {@link #next(long) next}. */
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrViveTrackerPathsHTCX.NEXT, value); }
+
     // -----------------------------------
 
     /** An array of {@link XrViveTrackerPathsHTCX} structs. */
@@ -275,6 +310,13 @@ public class XrViveTrackerPathsHTCX extends Struct implements NativeResource {
         /** @return the value of the {@link XrViveTrackerPathsHTCX#rolePath} field. */
         @NativeType("XrPath")
         public long rolePath() { return XrViveTrackerPathsHTCX.nrolePath(address()); }
+
+        /** Sets the specified value to the {@link XrViveTrackerPathsHTCX#type} field. */
+        public XrViveTrackerPathsHTCX.Buffer type(@NativeType("XrStructureType") int value) { XrViveTrackerPathsHTCX.ntype(address(), value); return this; }
+        /** Sets the {@link HTCXViveTrackerInteraction#XR_TYPE_VIVE_TRACKER_PATHS_HTCX TYPE_VIVE_TRACKER_PATHS_HTCX} value to the {@link XrViveTrackerPathsHTCX#type} field. */
+        public XrViveTrackerPathsHTCX.Buffer type$Default() { return type(HTCXViveTrackerInteraction.XR_TYPE_VIVE_TRACKER_PATHS_HTCX); }
+        /** Sets the specified value to the {@link XrViveTrackerPathsHTCX#next} field. */
+        public XrViveTrackerPathsHTCX.Buffer next(@NativeType("void *") long value) { XrViveTrackerPathsHTCX.nnext(address(), value); return this; }
 
     }
 

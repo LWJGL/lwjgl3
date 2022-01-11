@@ -102,6 +102,36 @@ public class XrInstanceProperties extends Struct implements NativeResource {
     @NativeType("char[XR_MAX_RUNTIME_NAME_SIZE]")
     public String runtimeNameString() { return nruntimeNameString(address()); }
 
+    /** Sets the specified value to the {@link #type} field. */
+    public XrInstanceProperties type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
+    /** Sets the {@link XR10#XR_TYPE_INSTANCE_PROPERTIES TYPE_INSTANCE_PROPERTIES} value to the {@link #type} field. */
+    public XrInstanceProperties type$Default() { return type(XR10.XR_TYPE_INSTANCE_PROPERTIES); }
+    /** Sets the specified value to the {@link #next} field. */
+    public XrInstanceProperties next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public XrInstanceProperties set(
+        int type,
+        long next
+    ) {
+        type(type);
+        next(next);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public XrInstanceProperties set(XrInstanceProperties src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
 
     /** Returns a new {@code XrInstanceProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -227,6 +257,11 @@ public class XrInstanceProperties extends Struct implements NativeResource {
     /** Unsafe version of {@link #runtimeNameString}. */
     public static String nruntimeNameString(long struct) { return memUTF8(struct + XrInstanceProperties.RUNTIMENAME); }
 
+    /** Unsafe version of {@link #type(int) type}. */
+    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrInstanceProperties.TYPE, value); }
+    /** Unsafe version of {@link #next(long) next}. */
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrInstanceProperties.NEXT, value); }
+
     // -----------------------------------
 
     /** An array of {@link XrInstanceProperties} structs. */
@@ -280,6 +315,13 @@ public class XrInstanceProperties extends Struct implements NativeResource {
         /** @return the null-terminated string stored in the {@link XrInstanceProperties#runtimeName} field. */
         @NativeType("char[XR_MAX_RUNTIME_NAME_SIZE]")
         public String runtimeNameString() { return XrInstanceProperties.nruntimeNameString(address()); }
+
+        /** Sets the specified value to the {@link XrInstanceProperties#type} field. */
+        public XrInstanceProperties.Buffer type(@NativeType("XrStructureType") int value) { XrInstanceProperties.ntype(address(), value); return this; }
+        /** Sets the {@link XR10#XR_TYPE_INSTANCE_PROPERTIES TYPE_INSTANCE_PROPERTIES} value to the {@link XrInstanceProperties#type} field. */
+        public XrInstanceProperties.Buffer type$Default() { return type(XR10.XR_TYPE_INSTANCE_PROPERTIES); }
+        /** Sets the specified value to the {@link XrInstanceProperties#next} field. */
+        public XrInstanceProperties.Buffer next(@NativeType("void *") long value) { XrInstanceProperties.nnext(address(), value); return this; }
 
     }
 

@@ -55,8 +55,8 @@ val XrApiLayerProperties = struct(Module.OPENXR, "XrApiLayerProperties", mutable
         #EnumerateApiLayerProperties()
         """
 
-    Expression("#TYPE_API_LAYER_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_API_LAYER_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     charUTF8("layerName", "a string specifying the name of the API layer. Use this name in the ##XrInstanceCreateInfo{@code ::enabledApiLayerNames} array to enable this API layer for an instance.")["XR_MAX_API_LAYER_NAME_SIZE"]
     XrVersion("specVersion", "the API version the API layer was written to, encoded as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\\#api-version-numbers-and-semantics\">API Version Numbers and Semantics</a> section.")
     uint32_t("layerVersion", "the version of this API layer. It is an integer, increasing with backward compatible changes.")
@@ -79,8 +79,8 @@ val XrExtensionProperties = struct(Module.OPENXR, "XrExtensionProperties", mutab
         #EnumerateInstanceExtensionProperties()
         """
 
-    Expression("#TYPE_EXTENSION_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_EXTENSION_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     charUTF8("extensionName", "a {@code NULL} terminated string specifying the name of the extension.")["XR_MAX_EXTENSION_NAME_SIZE"]
     uint32_t("extensionVersion", "the version of this extension. It is an integer, incremented with backward compatible changes.")
 }
@@ -159,8 +159,8 @@ val XrInstanceProperties = struct(Module.OPENXR, "XrInstanceProperties", mutable
         #GetInstanceProperties()
         """
 
-    Expression("#TYPE_INSTANCE_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_INSTANCE_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     XrVersion("runtimeVersion", "the runtime’s version (not necessarily related to an OpenXR API version), expressed in the format of #XR_MAKE_VERSION().")
     charUTF8("runtimeName", "the name of the runtime.")["XR_MAX_RUNTIME_NAME_SIZE"]
 }
@@ -252,8 +252,8 @@ val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = f
         ##XrSystemGraphicsProperties, ##XrSystemTrackingProperties, #GetSystem(), #GetSystemProperties()
         """
 
-    Expression("#TYPE_SYSTEM_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_SYSTEM_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     XrSystemId("systemId", "the {@code XrSystemId} identifying the system.")
     uint32_t("vendorId", "a unique identifier for the vendor of the system.")
     charUTF8("systemName", "a string containing the name of the system.")["XR_MAX_SYSTEM_NAME_SIZE"]

@@ -102,6 +102,36 @@ public class XrExtensionProperties extends Struct implements NativeResource {
     @NativeType("uint32_t")
     public int extensionVersion() { return nextensionVersion(address()); }
 
+    /** Sets the specified value to the {@link #type} field. */
+    public XrExtensionProperties type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
+    /** Sets the {@link XR10#XR_TYPE_EXTENSION_PROPERTIES TYPE_EXTENSION_PROPERTIES} value to the {@link #type} field. */
+    public XrExtensionProperties type$Default() { return type(XR10.XR_TYPE_EXTENSION_PROPERTIES); }
+    /** Sets the specified value to the {@link #next} field. */
+    public XrExtensionProperties next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public XrExtensionProperties set(
+        int type,
+        long next
+    ) {
+        type(type);
+        next(next);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public XrExtensionProperties set(XrExtensionProperties src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
 
     /** Returns a new {@code XrExtensionProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -227,6 +257,11 @@ public class XrExtensionProperties extends Struct implements NativeResource {
     /** Unsafe version of {@link #extensionVersion}. */
     public static int nextensionVersion(long struct) { return UNSAFE.getInt(null, struct + XrExtensionProperties.EXTENSIONVERSION); }
 
+    /** Unsafe version of {@link #type(int) type}. */
+    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrExtensionProperties.TYPE, value); }
+    /** Unsafe version of {@link #next(long) next}. */
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrExtensionProperties.NEXT, value); }
+
     // -----------------------------------
 
     /** An array of {@link XrExtensionProperties} structs. */
@@ -280,6 +315,13 @@ public class XrExtensionProperties extends Struct implements NativeResource {
         /** @return the value of the {@link XrExtensionProperties#extensionVersion} field. */
         @NativeType("uint32_t")
         public int extensionVersion() { return XrExtensionProperties.nextensionVersion(address()); }
+
+        /** Sets the specified value to the {@link XrExtensionProperties#type} field. */
+        public XrExtensionProperties.Buffer type(@NativeType("XrStructureType") int value) { XrExtensionProperties.ntype(address(), value); return this; }
+        /** Sets the {@link XR10#XR_TYPE_EXTENSION_PROPERTIES TYPE_EXTENSION_PROPERTIES} value to the {@link XrExtensionProperties#type} field. */
+        public XrExtensionProperties.Buffer type$Default() { return type(XR10.XR_TYPE_EXTENSION_PROPERTIES); }
+        /** Sets the specified value to the {@link XrExtensionProperties#next} field. */
+        public XrExtensionProperties.Buffer next(@NativeType("void *") long value) { XrExtensionProperties.nnext(address(), value); return this; }
 
     }
 

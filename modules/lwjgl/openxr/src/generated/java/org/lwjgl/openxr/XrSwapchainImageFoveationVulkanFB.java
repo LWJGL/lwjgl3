@@ -9,9 +9,11 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 import org.lwjgl.vulkan.*;
 
@@ -41,7 +43,7 @@ import org.lwjgl.vulkan.*;
  *     uint32_t {@link #height};
  * }</code></pre>
  */
-public class XrSwapchainImageFoveationVulkanFB extends Struct {
+public class XrSwapchainImageFoveationVulkanFB extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -105,7 +107,53 @@ public class XrSwapchainImageFoveationVulkanFB extends Struct {
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
 
+    /** Sets the specified value to the {@link #type} field. */
+    public XrSwapchainImageFoveationVulkanFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
+    /** Sets the {@link FBFoveationVulkan#XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB} value to the {@link #type} field. */
+    public XrSwapchainImageFoveationVulkanFB type$Default() { return type(FBFoveationVulkan.XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB); }
+    /** Sets the specified value to the {@link #next} field. */
+    public XrSwapchainImageFoveationVulkanFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public XrSwapchainImageFoveationVulkanFB set(
+        int type,
+        long next
+    ) {
+        type(type);
+        next(next);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public XrSwapchainImageFoveationVulkanFB set(XrSwapchainImageFoveationVulkanFB src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
+
+    /** Returns a new {@code XrSwapchainImageFoveationVulkanFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static XrSwapchainImageFoveationVulkanFB malloc() {
+        return wrap(XrSwapchainImageFoveationVulkanFB.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code XrSwapchainImageFoveationVulkanFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static XrSwapchainImageFoveationVulkanFB calloc() {
+        return wrap(XrSwapchainImageFoveationVulkanFB.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code XrSwapchainImageFoveationVulkanFB} instance allocated with {@link BufferUtils}. */
+    public static XrSwapchainImageFoveationVulkanFB create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(XrSwapchainImageFoveationVulkanFB.class, memAddress(container), container);
+    }
 
     /** Returns a new {@code XrSwapchainImageFoveationVulkanFB} instance for the specified memory address. */
     public static XrSwapchainImageFoveationVulkanFB create(long address) {
@@ -116,6 +164,34 @@ public class XrSwapchainImageFoveationVulkanFB extends Struct {
     @Nullable
     public static XrSwapchainImageFoveationVulkanFB createSafe(long address) {
         return address == NULL ? null : wrap(XrSwapchainImageFoveationVulkanFB.class, address);
+    }
+
+    /**
+     * Returns a new {@link XrSwapchainImageFoveationVulkanFB.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static XrSwapchainImageFoveationVulkanFB.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link XrSwapchainImageFoveationVulkanFB.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static XrSwapchainImageFoveationVulkanFB.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link XrSwapchainImageFoveationVulkanFB.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static XrSwapchainImageFoveationVulkanFB.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -134,6 +210,45 @@ public class XrSwapchainImageFoveationVulkanFB extends Struct {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
+
+    /**
+     * Returns a new {@code XrSwapchainImageFoveationVulkanFB} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static XrSwapchainImageFoveationVulkanFB malloc(MemoryStack stack) {
+        return wrap(XrSwapchainImageFoveationVulkanFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code XrSwapchainImageFoveationVulkanFB} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static XrSwapchainImageFoveationVulkanFB calloc(MemoryStack stack) {
+        return wrap(XrSwapchainImageFoveationVulkanFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link XrSwapchainImageFoveationVulkanFB.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static XrSwapchainImageFoveationVulkanFB.Buffer malloc(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link XrSwapchainImageFoveationVulkanFB.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static XrSwapchainImageFoveationVulkanFB.Buffer calloc(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
     // -----------------------------------
 
     /** Unsafe version of {@link #type}. */
@@ -147,10 +262,15 @@ public class XrSwapchainImageFoveationVulkanFB extends Struct {
     /** Unsafe version of {@link #height}. */
     public static int nheight(long struct) { return UNSAFE.getInt(null, struct + XrSwapchainImageFoveationVulkanFB.HEIGHT); }
 
+    /** Unsafe version of {@link #type(int) type}. */
+    public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainImageFoveationVulkanFB.TYPE, value); }
+    /** Unsafe version of {@link #next(long) next}. */
+    public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainImageFoveationVulkanFB.NEXT, value); }
+
     // -----------------------------------
 
     /** An array of {@link XrSwapchainImageFoveationVulkanFB} structs. */
-    public static class Buffer extends StructBuffer<XrSwapchainImageFoveationVulkanFB, Buffer> {
+    public static class Buffer extends StructBuffer<XrSwapchainImageFoveationVulkanFB, Buffer> implements NativeResource {
 
         private static final XrSwapchainImageFoveationVulkanFB ELEMENT_FACTORY = XrSwapchainImageFoveationVulkanFB.create(-1L);
 
@@ -200,6 +320,13 @@ public class XrSwapchainImageFoveationVulkanFB extends Struct {
         /** @return the value of the {@link XrSwapchainImageFoveationVulkanFB#height} field. */
         @NativeType("uint32_t")
         public int height() { return XrSwapchainImageFoveationVulkanFB.nheight(address()); }
+
+        /** Sets the specified value to the {@link XrSwapchainImageFoveationVulkanFB#type} field. */
+        public XrSwapchainImageFoveationVulkanFB.Buffer type(@NativeType("XrStructureType") int value) { XrSwapchainImageFoveationVulkanFB.ntype(address(), value); return this; }
+        /** Sets the {@link FBFoveationVulkan#XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB} value to the {@link XrSwapchainImageFoveationVulkanFB#type} field. */
+        public XrSwapchainImageFoveationVulkanFB.Buffer type$Default() { return type(FBFoveationVulkan.XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB); }
+        /** Sets the specified value to the {@link XrSwapchainImageFoveationVulkanFB#next} field. */
+        public XrSwapchainImageFoveationVulkanFB.Buffer next(@NativeType("void *") long value) { XrSwapchainImageFoveationVulkanFB.nnext(address(), value); return this; }
 
     }
 
