@@ -113,6 +113,12 @@ public class XrSceneComponentsMSFT extends Struct implements NativeResource {
     public XrSceneComponentsMSFT type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_COMPONENTS_MSFT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSceneComponentsMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSceneMeshesMSFT} value to the {@code next} chain. */
+    public XrSceneComponentsMSFT next(XrSceneMeshesMSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSceneObjectsMSFT} value to the {@code next} chain. */
+    public XrSceneComponentsMSFT next(XrSceneObjectsMSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrScenePlanesMSFT} value to the {@code next} chain. */
+    public XrSceneComponentsMSFT next(XrScenePlanesMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #componentCapacityInput} field. */
     public XrSceneComponentsMSFT componentCapacityInput(@NativeType("uint32_t") int value) { ncomponentCapacityInput(address(), value); return this; }
     /** Sets the specified value to the {@link #componentCountOutput} field. */
@@ -346,6 +352,12 @@ public class XrSceneComponentsMSFT extends Struct implements NativeResource {
         public XrSceneComponentsMSFT.Buffer type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_COMPONENTS_MSFT); }
         /** Sets the specified value to the {@link XrSceneComponentsMSFT#next} field. */
         public XrSceneComponentsMSFT.Buffer next(@NativeType("void *") long value) { XrSceneComponentsMSFT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSceneMeshesMSFT} value to the {@code next} chain. */
+        public XrSceneComponentsMSFT.Buffer next(XrSceneMeshesMSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSceneObjectsMSFT} value to the {@code next} chain. */
+        public XrSceneComponentsMSFT.Buffer next(XrSceneObjectsMSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrScenePlanesMSFT} value to the {@code next} chain. */
+        public XrSceneComponentsMSFT.Buffer next(XrScenePlanesMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrSceneComponentsMSFT#componentCapacityInput} field. */
         public XrSceneComponentsMSFT.Buffer componentCapacityInput(@NativeType("uint32_t") int value) { XrSceneComponentsMSFT.ncomponentCapacityInput(address(), value); return this; }
         /** Sets the specified value to the {@link XrSceneComponentsMSFT#componentCountOutput} field. */

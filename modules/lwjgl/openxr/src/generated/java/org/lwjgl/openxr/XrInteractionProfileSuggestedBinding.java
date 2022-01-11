@@ -113,6 +113,8 @@ public class XrInteractionProfileSuggestedBinding extends Struct implements Nati
     public XrInteractionProfileSuggestedBinding type$Default() { return type(XR10.XR_TYPE_INTERACTION_PROFILE_SUGGESTED_BINDING); }
     /** Sets the specified value to the {@link #next} field. */
     public XrInteractionProfileSuggestedBinding next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrBindingModificationsKHR} value to the {@code next} chain. */
+    public XrInteractionProfileSuggestedBinding next(XrBindingModificationsKHR value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #interactionProfile} field. */
     public XrInteractionProfileSuggestedBinding interactionProfile(@NativeType("XrPath") long value) { ninteractionProfile(address(), value); return this; }
     /** Sets the address of the specified {@link XrActionSuggestedBinding.Buffer} to the {@link #suggestedBindings} field. */
@@ -353,6 +355,8 @@ public class XrInteractionProfileSuggestedBinding extends Struct implements Nati
         public XrInteractionProfileSuggestedBinding.Buffer type$Default() { return type(XR10.XR_TYPE_INTERACTION_PROFILE_SUGGESTED_BINDING); }
         /** Sets the specified value to the {@link XrInteractionProfileSuggestedBinding#next} field. */
         public XrInteractionProfileSuggestedBinding.Buffer next(@NativeType("void const *") long value) { XrInteractionProfileSuggestedBinding.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrBindingModificationsKHR} value to the {@code next} chain. */
+        public XrInteractionProfileSuggestedBinding.Buffer next(XrBindingModificationsKHR value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrInteractionProfileSuggestedBinding#interactionProfile} field. */
         public XrInteractionProfileSuggestedBinding.Buffer interactionProfile(@NativeType("XrPath") long value) { XrInteractionProfileSuggestedBinding.ninteractionProfile(address(), value); return this; }
         /** Sets the address of the specified {@link XrActionSuggestedBinding.Buffer} to the {@link XrInteractionProfileSuggestedBinding#suggestedBindings} field. */

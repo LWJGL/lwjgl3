@@ -106,6 +106,14 @@ public class XrHandJointsLocateInfoEXT extends Struct implements NativeResource 
     public XrHandJointsLocateInfoEXT type$Default() { return type(EXTHandTracking.XR_TYPE_HAND_JOINTS_LOCATE_INFO_EXT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrHandJointsLocateInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrHandJointsMotionRangeInfoEXT} value to the {@code next} chain. */
+    public XrHandJointsLocateInfoEXT next(XrHandJointsMotionRangeInfoEXT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrHandTrackingAimStateFB} value to the {@code next} chain. */
+    public XrHandJointsLocateInfoEXT next(XrHandTrackingAimStateFB value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrHandTrackingCapsulesStateFB} value to the {@code next} chain. */
+    public XrHandJointsLocateInfoEXT next(XrHandTrackingCapsulesStateFB value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrHandTrackingScaleFB} value to the {@code next} chain. */
+    public XrHandJointsLocateInfoEXT next(XrHandTrackingScaleFB value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #baseSpace} field. */
     public XrHandJointsLocateInfoEXT baseSpace(XrSpace value) { nbaseSpace(address(), value); return this; }
     /** Sets the specified value to the {@link #time} field. */
@@ -336,6 +344,14 @@ public class XrHandJointsLocateInfoEXT extends Struct implements NativeResource 
         public XrHandJointsLocateInfoEXT.Buffer type$Default() { return type(EXTHandTracking.XR_TYPE_HAND_JOINTS_LOCATE_INFO_EXT); }
         /** Sets the specified value to the {@link XrHandJointsLocateInfoEXT#next} field. */
         public XrHandJointsLocateInfoEXT.Buffer next(@NativeType("void const *") long value) { XrHandJointsLocateInfoEXT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrHandJointsMotionRangeInfoEXT} value to the {@code next} chain. */
+        public XrHandJointsLocateInfoEXT.Buffer next(XrHandJointsMotionRangeInfoEXT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrHandTrackingAimStateFB} value to the {@code next} chain. */
+        public XrHandJointsLocateInfoEXT.Buffer next(XrHandTrackingAimStateFB value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrHandTrackingCapsulesStateFB} value to the {@code next} chain. */
+        public XrHandJointsLocateInfoEXT.Buffer next(XrHandTrackingCapsulesStateFB value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrHandTrackingScaleFB} value to the {@code next} chain. */
+        public XrHandJointsLocateInfoEXT.Buffer next(XrHandTrackingScaleFB value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrHandJointsLocateInfoEXT#baseSpace} field. */
         public XrHandJointsLocateInfoEXT.Buffer baseSpace(XrSpace value) { XrHandJointsLocateInfoEXT.nbaseSpace(address(), value); return this; }
         /** Sets the specified value to the {@link XrHandJointsLocateInfoEXT#time} field. */

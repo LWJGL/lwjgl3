@@ -98,6 +98,12 @@ public class XrSceneComponentsGetInfoMSFT extends Struct implements NativeResour
     public XrSceneComponentsGetInfoMSFT type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_COMPONENTS_GET_INFO_MSFT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSceneComponentsGetInfoMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSceneComponentParentFilterInfoMSFT} value to the {@code next} chain. */
+    public XrSceneComponentsGetInfoMSFT next(XrSceneComponentParentFilterInfoMSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSceneObjectTypesFilterInfoMSFT} value to the {@code next} chain. */
+    public XrSceneComponentsGetInfoMSFT next(XrSceneObjectTypesFilterInfoMSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrScenePlaneAlignmentFilterInfoMSFT} value to the {@code next} chain. */
+    public XrSceneComponentsGetInfoMSFT next(XrScenePlaneAlignmentFilterInfoMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #componentType} field. */
     public XrSceneComponentsGetInfoMSFT componentType(@NativeType("XrSceneComponentTypeMSFT") int value) { ncomponentType(address(), value); return this; }
 
@@ -308,6 +314,12 @@ public class XrSceneComponentsGetInfoMSFT extends Struct implements NativeResour
         public XrSceneComponentsGetInfoMSFT.Buffer type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_COMPONENTS_GET_INFO_MSFT); }
         /** Sets the specified value to the {@link XrSceneComponentsGetInfoMSFT#next} field. */
         public XrSceneComponentsGetInfoMSFT.Buffer next(@NativeType("void const *") long value) { XrSceneComponentsGetInfoMSFT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSceneComponentParentFilterInfoMSFT} value to the {@code next} chain. */
+        public XrSceneComponentsGetInfoMSFT.Buffer next(XrSceneComponentParentFilterInfoMSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSceneObjectTypesFilterInfoMSFT} value to the {@code next} chain. */
+        public XrSceneComponentsGetInfoMSFT.Buffer next(XrSceneObjectTypesFilterInfoMSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrScenePlaneAlignmentFilterInfoMSFT} value to the {@code next} chain. */
+        public XrSceneComponentsGetInfoMSFT.Buffer next(XrScenePlaneAlignmentFilterInfoMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrSceneComponentsGetInfoMSFT#componentType} field. */
         public XrSceneComponentsGetInfoMSFT.Buffer componentType(@NativeType("XrSceneComponentTypeMSFT") int value) { XrSceneComponentsGetInfoMSFT.ncomponentType(address(), value); return this; }
 

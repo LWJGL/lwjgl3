@@ -112,6 +112,10 @@ public class XrCompositionLayerProjectionView extends Struct implements NativeRe
     public XrCompositionLayerProjectionView type$Default() { return type(XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW); }
     /** Sets the specified value to the {@link #next} field. */
     public XrCompositionLayerProjectionView next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrCompositionLayerDepthInfoKHR} value to the {@code next} chain. */
+    public XrCompositionLayerProjectionView next(XrCompositionLayerDepthInfoKHR value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrCompositionLayerSpaceWarpInfoFB} value to the {@code next} chain. */
+    public XrCompositionLayerProjectionView next(XrCompositionLayerSpaceWarpInfoFB value) { return this.next(value.next(this.next()).address()); }
     /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
     public XrCompositionLayerProjectionView pose(XrPosef value) { npose(address(), value); return this; }
     /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -356,6 +360,10 @@ public class XrCompositionLayerProjectionView extends Struct implements NativeRe
         public XrCompositionLayerProjectionView.Buffer type$Default() { return type(XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW); }
         /** Sets the specified value to the {@link XrCompositionLayerProjectionView#next} field. */
         public XrCompositionLayerProjectionView.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerProjectionView.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrCompositionLayerDepthInfoKHR} value to the {@code next} chain. */
+        public XrCompositionLayerProjectionView.Buffer next(XrCompositionLayerDepthInfoKHR value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrCompositionLayerSpaceWarpInfoFB} value to the {@code next} chain. */
+        public XrCompositionLayerProjectionView.Buffer next(XrCompositionLayerSpaceWarpInfoFB value) { return this.next(value.next(this.next()).address()); }
         /** Copies the specified {@link XrPosef} to the {@link XrCompositionLayerProjectionView#pose} field. */
         public XrCompositionLayerProjectionView.Buffer pose(XrPosef value) { XrCompositionLayerProjectionView.npose(address(), value); return this; }
         /** Passes the {@link XrCompositionLayerProjectionView#pose} field to the specified {@link java.util.function.Consumer Consumer}. */

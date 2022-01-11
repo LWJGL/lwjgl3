@@ -113,6 +113,8 @@ public class XrSwapchainImageVulkanKHR extends Struct implements NativeResource 
     public XrSwapchainImageVulkanKHR type$Default() { return type(KHRVulkanEnable.XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSwapchainImageVulkanKHR next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSwapchainImageFoveationVulkanFB} value to the {@code next} chain. */
+    public XrSwapchainImageVulkanKHR next(XrSwapchainImageFoveationVulkanFB value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #image} field. */
     public XrSwapchainImageVulkanKHR image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
 
@@ -323,6 +325,8 @@ public class XrSwapchainImageVulkanKHR extends Struct implements NativeResource 
         public XrSwapchainImageVulkanKHR.Buffer type$Default() { return type(KHRVulkanEnable.XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR); }
         /** Sets the specified value to the {@link XrSwapchainImageVulkanKHR#next} field. */
         public XrSwapchainImageVulkanKHR.Buffer next(@NativeType("void *") long value) { XrSwapchainImageVulkanKHR.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSwapchainImageFoveationVulkanFB} value to the {@code next} chain. */
+        public XrSwapchainImageVulkanKHR.Buffer next(XrSwapchainImageFoveationVulkanFB value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrSwapchainImageVulkanKHR#image} field. */
         public XrSwapchainImageVulkanKHR.Buffer image(@NativeType("VkImage") long value) { XrSwapchainImageVulkanKHR.nimage(address(), value); return this; }
 

@@ -111,6 +111,24 @@ public class XrSessionCreateInfo extends Struct implements NativeResource {
     public XrSessionCreateInfo type$Default() { return type(XR10.XR_TYPE_SESSION_CREATE_INFO); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSessionCreateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrGraphicsBindingEGLMNDX} value to the {@code next} chain. */
+    public XrSessionCreateInfo next(XrGraphicsBindingEGLMNDX value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrGraphicsBindingOpenGLWaylandKHR} value to the {@code next} chain. */
+    public XrSessionCreateInfo next(XrGraphicsBindingOpenGLWaylandKHR value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrGraphicsBindingOpenGLWin32KHR} value to the {@code next} chain. */
+    public XrSessionCreateInfo next(XrGraphicsBindingOpenGLWin32KHR value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrGraphicsBindingOpenGLXcbKHR} value to the {@code next} chain. */
+    public XrSessionCreateInfo next(XrGraphicsBindingOpenGLXcbKHR value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrGraphicsBindingOpenGLXlibKHR} value to the {@code next} chain. */
+    public XrSessionCreateInfo next(XrGraphicsBindingOpenGLXlibKHR value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrGraphicsBindingVulkan2KHR} value to the {@code next} chain. */
+    public XrSessionCreateInfo next(XrGraphicsBindingVulkan2KHR value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrGraphicsBindingVulkanKHR} value to the {@code next} chain. */
+    public XrSessionCreateInfo next(XrGraphicsBindingVulkanKHR value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrHolographicWindowAttachmentMSFT} value to the {@code next} chain. */
+    public XrSessionCreateInfo next(XrHolographicWindowAttachmentMSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSessionCreateInfoOverlayEXTX} value to the {@code next} chain. */
+    public XrSessionCreateInfo next(XrSessionCreateInfoOverlayEXTX value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #createFlags} field. */
     public XrSessionCreateInfo createFlags(@NativeType("XrSessionCreateFlags") long value) { ncreateFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #systemId} field. */
@@ -332,6 +350,24 @@ public class XrSessionCreateInfo extends Struct implements NativeResource {
         public XrSessionCreateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_SESSION_CREATE_INFO); }
         /** Sets the specified value to the {@link XrSessionCreateInfo#next} field. */
         public XrSessionCreateInfo.Buffer next(@NativeType("void const *") long value) { XrSessionCreateInfo.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrGraphicsBindingEGLMNDX} value to the {@code next} chain. */
+        public XrSessionCreateInfo.Buffer next(XrGraphicsBindingEGLMNDX value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrGraphicsBindingOpenGLWaylandKHR} value to the {@code next} chain. */
+        public XrSessionCreateInfo.Buffer next(XrGraphicsBindingOpenGLWaylandKHR value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrGraphicsBindingOpenGLWin32KHR} value to the {@code next} chain. */
+        public XrSessionCreateInfo.Buffer next(XrGraphicsBindingOpenGLWin32KHR value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrGraphicsBindingOpenGLXcbKHR} value to the {@code next} chain. */
+        public XrSessionCreateInfo.Buffer next(XrGraphicsBindingOpenGLXcbKHR value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrGraphicsBindingOpenGLXlibKHR} value to the {@code next} chain. */
+        public XrSessionCreateInfo.Buffer next(XrGraphicsBindingOpenGLXlibKHR value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrGraphicsBindingVulkan2KHR} value to the {@code next} chain. */
+        public XrSessionCreateInfo.Buffer next(XrGraphicsBindingVulkan2KHR value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrGraphicsBindingVulkanKHR} value to the {@code next} chain. */
+        public XrSessionCreateInfo.Buffer next(XrGraphicsBindingVulkanKHR value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrHolographicWindowAttachmentMSFT} value to the {@code next} chain. */
+        public XrSessionCreateInfo.Buffer next(XrHolographicWindowAttachmentMSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSessionCreateInfoOverlayEXTX} value to the {@code next} chain. */
+        public XrSessionCreateInfo.Buffer next(XrSessionCreateInfoOverlayEXTX value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrSessionCreateInfo#createFlags} field. */
         public XrSessionCreateInfo.Buffer createFlags(@NativeType("XrSessionCreateFlags") long value) { XrSessionCreateInfo.ncreateFlags(address(), value); return this; }
         /** Sets the specified value to the {@link XrSessionCreateInfo#systemId} field. */

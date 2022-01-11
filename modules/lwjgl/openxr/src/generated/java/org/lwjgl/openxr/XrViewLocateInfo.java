@@ -119,6 +119,8 @@ public class XrViewLocateInfo extends Struct implements NativeResource {
     public XrViewLocateInfo type$Default() { return type(XR10.XR_TYPE_VIEW_LOCATE_INFO); }
     /** Sets the specified value to the {@code next} field. */
     public XrViewLocateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrViewLocateFoveatedRenderingVARJO} value to the {@code next} chain. */
+    public XrViewLocateInfo next(XrViewLocateFoveatedRenderingVARJO value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #viewConfigurationType} field. */
     public XrViewLocateInfo viewConfigurationType(@NativeType("XrViewConfigurationType") int value) { nviewConfigurationType(address(), value); return this; }
     /** Sets the specified value to the {@link #displayTime} field. */
@@ -360,6 +362,8 @@ public class XrViewLocateInfo extends Struct implements NativeResource {
         public XrViewLocateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_VIEW_LOCATE_INFO); }
         /** Sets the specified value to the {@code next} field. */
         public XrViewLocateInfo.Buffer next(@NativeType("void const *") long value) { XrViewLocateInfo.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrViewLocateFoveatedRenderingVARJO} value to the {@code next} chain. */
+        public XrViewLocateInfo.Buffer next(XrViewLocateFoveatedRenderingVARJO value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrViewLocateInfo#viewConfigurationType} field. */
         public XrViewLocateInfo.Buffer viewConfigurationType(@NativeType("XrViewConfigurationType") int value) { XrViewLocateInfo.nviewConfigurationType(address(), value); return this; }
         /** Sets the specified value to the {@link XrViewLocateInfo#displayTime} field. */

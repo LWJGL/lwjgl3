@@ -137,6 +137,12 @@ public class XrViewConfigurationView extends Struct implements NativeResource {
     public XrViewConfigurationView type$Default() { return type(XR10.XR_TYPE_VIEW_CONFIGURATION_VIEW); }
     /** Sets the specified value to the {@link #next} field. */
     public XrViewConfigurationView next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrFoveatedViewConfigurationViewVARJO} value to the {@code next} chain. */
+    public XrViewConfigurationView next(XrFoveatedViewConfigurationViewVARJO value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrViewConfigurationDepthRangeEXT} value to the {@code next} chain. */
+    public XrViewConfigurationView next(XrViewConfigurationDepthRangeEXT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrViewConfigurationViewFovEPIC} value to the {@code next} chain. */
+    public XrViewConfigurationView next(XrViewConfigurationViewFovEPIC value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #recommendedImageRectWidth} field. */
     public XrViewConfigurationView recommendedImageRectWidth(@NativeType("uint32_t") int value) { nrecommendedImageRectWidth(address(), value); return this; }
     /** Sets the specified value to the {@link #maxImageRectWidth} field. */
@@ -402,6 +408,12 @@ public class XrViewConfigurationView extends Struct implements NativeResource {
         public XrViewConfigurationView.Buffer type$Default() { return type(XR10.XR_TYPE_VIEW_CONFIGURATION_VIEW); }
         /** Sets the specified value to the {@link XrViewConfigurationView#next} field. */
         public XrViewConfigurationView.Buffer next(@NativeType("void *") long value) { XrViewConfigurationView.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrFoveatedViewConfigurationViewVARJO} value to the {@code next} chain. */
+        public XrViewConfigurationView.Buffer next(XrFoveatedViewConfigurationViewVARJO value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrViewConfigurationDepthRangeEXT} value to the {@code next} chain. */
+        public XrViewConfigurationView.Buffer next(XrViewConfigurationDepthRangeEXT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrViewConfigurationViewFovEPIC} value to the {@code next} chain. */
+        public XrViewConfigurationView.Buffer next(XrViewConfigurationViewFovEPIC value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrViewConfigurationView#recommendedImageRectWidth} field. */
         public XrViewConfigurationView.Buffer recommendedImageRectWidth(@NativeType("uint32_t") int value) { XrViewConfigurationView.nrecommendedImageRectWidth(address(), value); return this; }
         /** Sets the specified value to the {@link XrViewConfigurationView#maxImageRectWidth} field. */

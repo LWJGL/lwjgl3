@@ -120,6 +120,8 @@ public class XrFrameEndInfo extends Struct implements NativeResource {
     public XrFrameEndInfo type$Default() { return type(XR10.XR_TYPE_FRAME_END_INFO); }
     /** Sets the specified value to the {@link #next} field. */
     public XrFrameEndInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSecondaryViewConfigurationFrameEndInfoMSFT} value to the {@code next} chain. */
+    public XrFrameEndInfo next(XrSecondaryViewConfigurationFrameEndInfoMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #displayTime} field. */
     public XrFrameEndInfo displayTime(@NativeType("XrTime") long value) { ndisplayTime(address(), value); return this; }
     /** Sets the specified value to the {@link #environmentBlendMode} field. */
@@ -364,6 +366,8 @@ public class XrFrameEndInfo extends Struct implements NativeResource {
         public XrFrameEndInfo.Buffer type$Default() { return type(XR10.XR_TYPE_FRAME_END_INFO); }
         /** Sets the specified value to the {@link XrFrameEndInfo#next} field. */
         public XrFrameEndInfo.Buffer next(@NativeType("void const *") long value) { XrFrameEndInfo.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSecondaryViewConfigurationFrameEndInfoMSFT} value to the {@code next} chain. */
+        public XrFrameEndInfo.Buffer next(XrSecondaryViewConfigurationFrameEndInfoMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrFrameEndInfo#displayTime} field. */
         public XrFrameEndInfo.Buffer displayTime(@NativeType("XrTime") long value) { XrFrameEndInfo.ndisplayTime(address(), value); return this; }
         /** Sets the specified value to the {@link XrFrameEndInfo#environmentBlendMode} field. */

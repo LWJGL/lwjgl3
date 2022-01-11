@@ -108,6 +108,16 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
     public XrCompositionLayerBaseHeader type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
     /** Sets the specified value to the {@link #next} field. */
     public XrCompositionLayerBaseHeader next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrCompositionLayerAlphaBlendFB} value to the {@code next} chain. */
+    public XrCompositionLayerBaseHeader next(XrCompositionLayerAlphaBlendFB value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrCompositionLayerColorScaleBiasKHR} value to the {@code next} chain. */
+    public XrCompositionLayerBaseHeader next(XrCompositionLayerColorScaleBiasKHR value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrCompositionLayerImageLayoutFB} value to the {@code next} chain. */
+    public XrCompositionLayerBaseHeader next(XrCompositionLayerImageLayoutFB value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrCompositionLayerPassthroughFB} value to the {@code next} chain. */
+    public XrCompositionLayerBaseHeader next(XrCompositionLayerPassthroughFB value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrCompositionLayerSecureContentFB} value to the {@code next} chain. */
+    public XrCompositionLayerBaseHeader next(XrCompositionLayerSecureContentFB value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #layerFlags} field. */
     public XrCompositionLayerBaseHeader layerFlags(@NativeType("XrCompositionLayerFlags") long value) { nlayerFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #space} field. */
@@ -336,6 +346,16 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
         public XrCompositionLayerBaseHeader.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerBaseHeader.ntype(address(), value); return this; }
         /** Sets the specified value to the {@link XrCompositionLayerBaseHeader#next} field. */
         public XrCompositionLayerBaseHeader.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerBaseHeader.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrCompositionLayerAlphaBlendFB} value to the {@code next} chain. */
+        public XrCompositionLayerBaseHeader.Buffer next(XrCompositionLayerAlphaBlendFB value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrCompositionLayerColorScaleBiasKHR} value to the {@code next} chain. */
+        public XrCompositionLayerBaseHeader.Buffer next(XrCompositionLayerColorScaleBiasKHR value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrCompositionLayerImageLayoutFB} value to the {@code next} chain. */
+        public XrCompositionLayerBaseHeader.Buffer next(XrCompositionLayerImageLayoutFB value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrCompositionLayerPassthroughFB} value to the {@code next} chain. */
+        public XrCompositionLayerBaseHeader.Buffer next(XrCompositionLayerPassthroughFB value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrCompositionLayerSecureContentFB} value to the {@code next} chain. */
+        public XrCompositionLayerBaseHeader.Buffer next(XrCompositionLayerSecureContentFB value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrCompositionLayerBaseHeader#layerFlags} field. */
         public XrCompositionLayerBaseHeader.Buffer layerFlags(@NativeType("XrCompositionLayerFlags") long value) { XrCompositionLayerBaseHeader.nlayerFlags(address(), value); return this; }
         /** Sets the specified value to the {@link XrCompositionLayerBaseHeader#space} field. */

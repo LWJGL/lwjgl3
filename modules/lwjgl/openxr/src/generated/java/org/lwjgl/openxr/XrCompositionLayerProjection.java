@@ -129,6 +129,12 @@ public class XrCompositionLayerProjection extends Struct implements NativeResour
     public XrCompositionLayerProjection type$Default() { return type(XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION); }
     /** Sets the specified value to the {@link #next} field. */
     public XrCompositionLayerProjection next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrCompositionLayerDepthTestVARJO} value to the {@code next} chain. */
+    public XrCompositionLayerProjection next(XrCompositionLayerDepthTestVARJO value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrCompositionLayerReprojectionInfoMSFT} value to the {@code next} chain. */
+    public XrCompositionLayerProjection next(XrCompositionLayerReprojectionInfoMSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrCompositionLayerReprojectionPlaneOverrideMSFT} value to the {@code next} chain. */
+    public XrCompositionLayerProjection next(XrCompositionLayerReprojectionPlaneOverrideMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #layerFlags} field. */
     public XrCompositionLayerProjection layerFlags(@NativeType("XrCompositionLayerFlags") long value) { nlayerFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #space} field. */
@@ -381,6 +387,12 @@ public class XrCompositionLayerProjection extends Struct implements NativeResour
         public XrCompositionLayerProjection.Buffer type$Default() { return type(XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION); }
         /** Sets the specified value to the {@link XrCompositionLayerProjection#next} field. */
         public XrCompositionLayerProjection.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerProjection.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrCompositionLayerDepthTestVARJO} value to the {@code next} chain. */
+        public XrCompositionLayerProjection.Buffer next(XrCompositionLayerDepthTestVARJO value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrCompositionLayerReprojectionInfoMSFT} value to the {@code next} chain. */
+        public XrCompositionLayerProjection.Buffer next(XrCompositionLayerReprojectionInfoMSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrCompositionLayerReprojectionPlaneOverrideMSFT} value to the {@code next} chain. */
+        public XrCompositionLayerProjection.Buffer next(XrCompositionLayerReprojectionPlaneOverrideMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrCompositionLayerProjection#layerFlags} field. */
         public XrCompositionLayerProjection.Buffer layerFlags(@NativeType("XrCompositionLayerFlags") long value) { XrCompositionLayerProjection.nlayerFlags(address(), value); return this; }
         /** Sets the specified value to the {@link XrCompositionLayerProjection#space} field. */

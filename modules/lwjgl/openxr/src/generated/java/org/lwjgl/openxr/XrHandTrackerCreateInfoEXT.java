@@ -106,6 +106,8 @@ public class XrHandTrackerCreateInfoEXT extends Struct implements NativeResource
     public XrHandTrackerCreateInfoEXT type$Default() { return type(EXTHandTracking.XR_TYPE_HAND_TRACKER_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrHandTrackerCreateInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrHandPoseTypeInfoMSFT} value to the {@code next} chain. */
+    public XrHandTrackerCreateInfoEXT next(XrHandPoseTypeInfoMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #hand} field. */
     public XrHandTrackerCreateInfoEXT hand(@NativeType("XrHandEXT") int value) { nhand(address(), value); return this; }
     /** Sets the specified value to the {@link #handJointSet} field. */
@@ -327,6 +329,8 @@ public class XrHandTrackerCreateInfoEXT extends Struct implements NativeResource
         public XrHandTrackerCreateInfoEXT.Buffer type$Default() { return type(EXTHandTracking.XR_TYPE_HAND_TRACKER_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link XrHandTrackerCreateInfoEXT#next} field. */
         public XrHandTrackerCreateInfoEXT.Buffer next(@NativeType("void const *") long value) { XrHandTrackerCreateInfoEXT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrHandPoseTypeInfoMSFT} value to the {@code next} chain. */
+        public XrHandTrackerCreateInfoEXT.Buffer next(XrHandPoseTypeInfoMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrHandTrackerCreateInfoEXT#hand} field. */
         public XrHandTrackerCreateInfoEXT.Buffer hand(@NativeType("XrHandEXT") int value) { XrHandTrackerCreateInfoEXT.nhand(address(), value); return this; }
         /** Sets the specified value to the {@link XrHandTrackerCreateInfoEXT#handJointSet} field. */

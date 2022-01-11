@@ -97,6 +97,8 @@ public class XrSessionBeginInfo extends Struct implements NativeResource {
     public XrSessionBeginInfo type$Default() { return type(XR10.XR_TYPE_SESSION_BEGIN_INFO); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSessionBeginInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSecondaryViewConfigurationSessionBeginInfoMSFT} value to the {@code next} chain. */
+    public XrSessionBeginInfo next(XrSecondaryViewConfigurationSessionBeginInfoMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #primaryViewConfigurationType} field. */
     public XrSessionBeginInfo primaryViewConfigurationType(@NativeType("XrViewConfigurationType") int value) { nprimaryViewConfigurationType(address(), value); return this; }
 
@@ -307,6 +309,8 @@ public class XrSessionBeginInfo extends Struct implements NativeResource {
         public XrSessionBeginInfo.Buffer type$Default() { return type(XR10.XR_TYPE_SESSION_BEGIN_INFO); }
         /** Sets the specified value to the {@link XrSessionBeginInfo#next} field. */
         public XrSessionBeginInfo.Buffer next(@NativeType("void const *") long value) { XrSessionBeginInfo.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSecondaryViewConfigurationSessionBeginInfoMSFT} value to the {@code next} chain. */
+        public XrSessionBeginInfo.Buffer next(XrSecondaryViewConfigurationSessionBeginInfoMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrSessionBeginInfo#primaryViewConfigurationType} field. */
         public XrSessionBeginInfo.Buffer primaryViewConfigurationType(@NativeType("XrViewConfigurationType") int value) { XrSessionBeginInfo.nprimaryViewConfigurationType(address(), value); return this; }
 

@@ -154,6 +154,10 @@ public class XrSwapchainCreateInfo extends Struct implements NativeResource {
     public XrSwapchainCreateInfo type$Default() { return type(XR10.XR_TYPE_SWAPCHAIN_CREATE_INFO); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSwapchainCreateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT} value to the {@code next} chain. */
+    public XrSwapchainCreateInfo next(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSwapchainCreateInfoFoveationFB} value to the {@code next} chain. */
+    public XrSwapchainCreateInfo next(XrSwapchainCreateInfoFoveationFB value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #createFlags} field. */
     public XrSwapchainCreateInfo createFlags(@NativeType("XrSwapchainCreateFlags") long value) { ncreateFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #usageFlags} field. */
@@ -452,6 +456,10 @@ public class XrSwapchainCreateInfo extends Struct implements NativeResource {
         public XrSwapchainCreateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_SWAPCHAIN_CREATE_INFO); }
         /** Sets the specified value to the {@link XrSwapchainCreateInfo#next} field. */
         public XrSwapchainCreateInfo.Buffer next(@NativeType("void const *") long value) { XrSwapchainCreateInfo.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT} value to the {@code next} chain. */
+        public XrSwapchainCreateInfo.Buffer next(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSwapchainCreateInfoFoveationFB} value to the {@code next} chain. */
+        public XrSwapchainCreateInfo.Buffer next(XrSwapchainCreateInfoFoveationFB value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrSwapchainCreateInfo#createFlags} field. */
         public XrSwapchainCreateInfo.Buffer createFlags(@NativeType("XrSwapchainCreateFlags") long value) { XrSwapchainCreateInfo.ncreateFlags(address(), value); return this; }
         /** Sets the specified value to the {@link XrSwapchainCreateInfo#usageFlags} field. */

@@ -137,6 +137,8 @@ public class XrInstanceCreateInfo extends Struct implements NativeResource {
     public XrInstanceCreateInfo type$Default() { return type(XR10.XR_TYPE_INSTANCE_CREATE_INFO); }
     /** Sets the specified value to the {@link #next} field. */
     public XrInstanceCreateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrDebugUtilsMessengerCreateInfoEXT} value to the {@code next} chain. */
+    public XrInstanceCreateInfo next(XrDebugUtilsMessengerCreateInfoEXT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #createFlags} field. */
     public XrInstanceCreateInfo createFlags(@NativeType("XrInstanceCreateFlags") long value) { ncreateFlags(address(), value); return this; }
     /** Copies the specified {@link XrApplicationInfo} to the {@link #applicationInfo} field. */
@@ -411,6 +413,8 @@ public class XrInstanceCreateInfo extends Struct implements NativeResource {
         public XrInstanceCreateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_INSTANCE_CREATE_INFO); }
         /** Sets the specified value to the {@link XrInstanceCreateInfo#next} field. */
         public XrInstanceCreateInfo.Buffer next(@NativeType("void const *") long value) { XrInstanceCreateInfo.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrDebugUtilsMessengerCreateInfoEXT} value to the {@code next} chain. */
+        public XrInstanceCreateInfo.Buffer next(XrDebugUtilsMessengerCreateInfoEXT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrInstanceCreateInfo#createFlags} field. */
         public XrInstanceCreateInfo.Buffer createFlags(@NativeType("XrInstanceCreateFlags") long value) { XrInstanceCreateInfo.ncreateFlags(address(), value); return this; }
         /** Copies the specified {@link XrApplicationInfo} to the {@link XrInstanceCreateInfo#applicationInfo} field. */

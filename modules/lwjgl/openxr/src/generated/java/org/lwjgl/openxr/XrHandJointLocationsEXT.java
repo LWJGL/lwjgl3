@@ -128,6 +128,8 @@ public class XrHandJointLocationsEXT extends Struct implements NativeResource {
     public XrHandJointLocationsEXT type$Default() { return type(EXTHandTracking.XR_TYPE_HAND_JOINT_LOCATIONS_EXT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrHandJointLocationsEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrHandJointVelocitiesEXT} value to the {@code next} chain. */
+    public XrHandJointLocationsEXT next(XrHandJointVelocitiesEXT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #isActive} field. */
     public XrHandJointLocationsEXT isActive(@NativeType("XrBool32") boolean value) { nisActive(address(), value ? 1 : 0); return this; }
     /** Sets the address of the specified {@link XrHandJointLocationEXT.Buffer} to the {@link #jointLocations} field. */
@@ -365,6 +367,8 @@ public class XrHandJointLocationsEXT extends Struct implements NativeResource {
         public XrHandJointLocationsEXT.Buffer type$Default() { return type(EXTHandTracking.XR_TYPE_HAND_JOINT_LOCATIONS_EXT); }
         /** Sets the specified value to the {@link XrHandJointLocationsEXT#next} field. */
         public XrHandJointLocationsEXT.Buffer next(@NativeType("void *") long value) { XrHandJointLocationsEXT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrHandJointVelocitiesEXT} value to the {@code next} chain. */
+        public XrHandJointLocationsEXT.Buffer next(XrHandJointVelocitiesEXT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrHandJointLocationsEXT#isActive} field. */
         public XrHandJointLocationsEXT.Buffer isActive(@NativeType("XrBool32") boolean value) { XrHandJointLocationsEXT.nisActive(address(), value ? 1 : 0); return this; }
         /** Sets the address of the specified {@link XrHandJointLocationEXT.Buffer} to the {@link XrHandJointLocationsEXT#jointLocations} field. */

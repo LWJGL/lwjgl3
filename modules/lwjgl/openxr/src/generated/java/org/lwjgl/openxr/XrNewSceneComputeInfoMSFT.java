@@ -122,6 +122,8 @@ public class XrNewSceneComputeInfoMSFT extends Struct implements NativeResource 
     public XrNewSceneComputeInfoMSFT type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_NEW_SCENE_COMPUTE_INFO_MSFT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrNewSceneComputeInfoMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrVisualMeshComputeLodInfoMSFT} value to the {@code next} chain. */
+    public XrNewSceneComputeInfoMSFT next(XrVisualMeshComputeLodInfoMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #requestedFeatures} field. */
     public XrNewSceneComputeInfoMSFT requestedFeatures(@NativeType("XrSceneComputeFeatureMSFT const *") IntBuffer value) { nrequestedFeatures(address(), value); return this; }
     /** Sets the specified value to the {@link #consistency} field. */
@@ -372,6 +374,8 @@ public class XrNewSceneComputeInfoMSFT extends Struct implements NativeResource 
         public XrNewSceneComputeInfoMSFT.Buffer type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_NEW_SCENE_COMPUTE_INFO_MSFT); }
         /** Sets the specified value to the {@link XrNewSceneComputeInfoMSFT#next} field. */
         public XrNewSceneComputeInfoMSFT.Buffer next(@NativeType("void const *") long value) { XrNewSceneComputeInfoMSFT.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrVisualMeshComputeLodInfoMSFT} value to the {@code next} chain. */
+        public XrNewSceneComputeInfoMSFT.Buffer next(XrVisualMeshComputeLodInfoMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the address of the specified {@link IntBuffer} to the {@link XrNewSceneComputeInfoMSFT#requestedFeatures} field. */
         public XrNewSceneComputeInfoMSFT.Buffer requestedFeatures(@NativeType("XrSceneComputeFeatureMSFT const *") IntBuffer value) { XrNewSceneComputeInfoMSFT.nrequestedFeatures(address(), value); return this; }
         /** Sets the specified value to the {@link XrNewSceneComputeInfoMSFT#consistency} field. */

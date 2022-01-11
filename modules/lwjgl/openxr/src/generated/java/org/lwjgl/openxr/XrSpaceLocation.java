@@ -103,6 +103,10 @@ public class XrSpaceLocation extends Struct implements NativeResource {
     public XrSpaceLocation type$Default() { return type(XR10.XR_TYPE_SPACE_LOCATION); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSpaceLocation next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrEyeGazeSampleTimeEXT} value to the {@code next} chain. */
+    public XrSpaceLocation next(XrEyeGazeSampleTimeEXT value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrSpaceVelocity} value to the {@code next} chain. */
+    public XrSpaceLocation next(XrSpaceVelocity value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #locationFlags} field. */
     public XrSpaceLocation locationFlags(@NativeType("XrSpaceLocationFlags") long value) { nlocationFlags(address(), value); return this; }
     /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
@@ -325,6 +329,10 @@ public class XrSpaceLocation extends Struct implements NativeResource {
         public XrSpaceLocation.Buffer type$Default() { return type(XR10.XR_TYPE_SPACE_LOCATION); }
         /** Sets the specified value to the {@link XrSpaceLocation#next} field. */
         public XrSpaceLocation.Buffer next(@NativeType("void *") long value) { XrSpaceLocation.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrEyeGazeSampleTimeEXT} value to the {@code next} chain. */
+        public XrSpaceLocation.Buffer next(XrEyeGazeSampleTimeEXT value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrSpaceVelocity} value to the {@code next} chain. */
+        public XrSpaceLocation.Buffer next(XrSpaceVelocity value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrSpaceLocation#locationFlags} field. */
         public XrSpaceLocation.Buffer locationFlags(@NativeType("XrSpaceLocationFlags") long value) { XrSpaceLocation.nlocationFlags(address(), value); return this; }
         /** Copies the specified {@link XrPosef} to the {@link XrSpaceLocation#pose} field. */

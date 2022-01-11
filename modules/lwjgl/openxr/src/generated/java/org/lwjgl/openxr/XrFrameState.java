@@ -116,6 +116,8 @@ public class XrFrameState extends Struct implements NativeResource {
     public XrFrameState type$Default() { return type(XR10.XR_TYPE_FRAME_STATE); }
     /** Sets the specified value to the {@link #next} field. */
     public XrFrameState next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrSecondaryViewConfigurationFrameStateMSFT} value to the {@code next} chain. */
+    public XrFrameState next(XrSecondaryViewConfigurationFrameStateMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #predictedDisplayTime} field. */
     public XrFrameState predictedDisplayTime(@NativeType("XrTime") long value) { npredictedDisplayTime(address(), value); return this; }
     /** Sets the specified value to the {@link #predictedDisplayPeriod} field. */
@@ -348,6 +350,8 @@ public class XrFrameState extends Struct implements NativeResource {
         public XrFrameState.Buffer type$Default() { return type(XR10.XR_TYPE_FRAME_STATE); }
         /** Sets the specified value to the {@link XrFrameState#next} field. */
         public XrFrameState.Buffer next(@NativeType("void *") long value) { XrFrameState.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrSecondaryViewConfigurationFrameStateMSFT} value to the {@code next} chain. */
+        public XrFrameState.Buffer next(XrSecondaryViewConfigurationFrameStateMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrFrameState#predictedDisplayTime} field. */
         public XrFrameState.Buffer predictedDisplayTime(@NativeType("XrTime") long value) { XrFrameState.npredictedDisplayTime(address(), value); return this; }
         /** Sets the specified value to the {@link XrFrameState#predictedDisplayPeriod} field. */

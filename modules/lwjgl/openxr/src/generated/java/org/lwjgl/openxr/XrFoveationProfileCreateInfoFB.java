@@ -90,6 +90,8 @@ public class XrFoveationProfileCreateInfoFB extends Struct implements NativeReso
     public XrFoveationProfileCreateInfoFB type$Default() { return type(FBFoveation.XR_TYPE_FOVEATION_PROFILE_CREATE_INFO_FB); }
     /** Sets the specified value to the {@link #next} field. */
     public XrFoveationProfileCreateInfoFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrFoveationLevelProfileCreateInfoFB} value to the {@code next} chain. */
+    public XrFoveationProfileCreateInfoFB next(XrFoveationLevelProfileCreateInfoFB value) { return this.next(value.next(this.next()).address()); }
 
     /** Initializes this struct with the specified values. */
     public XrFoveationProfileCreateInfoFB set(
@@ -289,6 +291,8 @@ public class XrFoveationProfileCreateInfoFB extends Struct implements NativeReso
         public XrFoveationProfileCreateInfoFB.Buffer type$Default() { return type(FBFoveation.XR_TYPE_FOVEATION_PROFILE_CREATE_INFO_FB); }
         /** Sets the specified value to the {@link XrFoveationProfileCreateInfoFB#next} field. */
         public XrFoveationProfileCreateInfoFB.Buffer next(@NativeType("void *") long value) { XrFoveationProfileCreateInfoFB.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrFoveationLevelProfileCreateInfoFB} value to the {@code next} chain. */
+        public XrFoveationProfileCreateInfoFB.Buffer next(XrFoveationLevelProfileCreateInfoFB value) { return this.next(value.next(this.next()).address()); }
 
     }
 
