@@ -26,13 +26,13 @@ val jemalloc = "JEmalloc".nativeClass(Module.JEMALLOC, prefixMethod = "je_", bin
 
     IntConstant("The major version.", "JEMALLOC_VERSION_MAJOR".."5")
     IntConstant("The minor version.", "JEMALLOC_VERSION_MINOR".."2")
-    IntConstant("The bugfix version.", "JEMALLOC_VERSION_BUGFIX".."0")
+    IntConstant("The bugfix version.", "JEMALLOC_VERSION_BUGFIX".."1")
     IntConstant("The revision number.", "JEMALLOC_VERSION_NREV".."0")
 
     StringConstant(
         "The globally unique identifier (git commit hash).",
 
-        "JEMALLOC_VERSION_GID".."b0b3e49a54ec29e32636f4577d9d5a896d67fd20"
+        "JEMALLOC_VERSION_GID".."ea6b3e973b477b8061e0076bb257dbd7f3faa756"
     )
 
     StringConstant(

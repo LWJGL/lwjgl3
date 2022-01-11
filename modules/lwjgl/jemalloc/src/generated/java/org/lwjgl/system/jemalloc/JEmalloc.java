@@ -74,13 +74,13 @@ public class JEmalloc {
     public static final int JEMALLOC_VERSION_MINOR = 2;
 
     /** The bugfix version. */
-    public static final int JEMALLOC_VERSION_BUGFIX = 0;
+    public static final int JEMALLOC_VERSION_BUGFIX = 1;
 
     /** The revision number. */
     public static final int JEMALLOC_VERSION_NREV = 0;
 
     /** The globally unique identifier (git commit hash). */
-    public static final String JEMALLOC_VERSION_GID = "b0b3e49a54ec29e32636f4577d9d5a896d67fd20";
+    public static final String JEMALLOC_VERSION_GID = "ea6b3e973b477b8061e0076bb257dbd7f3faa756";
 
     /** The version string. */
     public static final String JEMALLOC_VERSION = JEMALLOC_VERSION_MAJOR + "." + JEMALLOC_VERSION_MINOR + "." + JEMALLOC_VERSION_BUGFIX + "-" + JEMALLOC_VERSION_NREV + "-g" + JEMALLOC_VERSION_GID;
