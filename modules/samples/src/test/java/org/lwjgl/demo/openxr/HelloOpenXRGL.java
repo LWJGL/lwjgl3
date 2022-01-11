@@ -17,6 +17,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.openxr.EXTDebugUtils.*;
 import static org.lwjgl.openxr.KHROpenGLEnable.*;
 import static org.lwjgl.openxr.XR10.*;
 import static org.lwjgl.system.MemoryStack.*;
@@ -39,6 +40,8 @@ public class HelloOpenXRGL {
     XrInstance                     xrInstance;
     long                           systemID;
     XrSession                      xrSession;
+    boolean                        missingXrDebug;
+    XrDebugUtilsMessengerEXT       xrDebugMessenger;
     XrSpace                        xrAppSpace;  //The real world space in which the program runs
     long                           glColorFormat;
     XrView.Buffer                  views;       //Each view reperesents an eye in the headset with views[0] being left and views[1] being right
@@ -93,13 +96,24 @@ public class HelloOpenXRGL {
             }
         }
 
+        // Wait until idle
+        glFinish();
+
         // Destroy OpenXR
         helloOpenXR.eventDataBuffer.free();
         helloOpenXR.views.free();
         helloOpenXR.viewConfigs.free();
         for (Swapchain swapchain : helloOpenXR.swapchains) {
+            xrDestroySwapchain(swapchain.handle);
             swapchain.images.free();
         }
+
+        xrDestroySpace(helloOpenXR.xrAppSpace);
+        if (helloOpenXR.xrDebugMessenger != null) {
+            xrDestroyDebugUtilsMessengerEXT(helloOpenXR.xrDebugMessenger);
+        }
+        xrDestroySession(helloOpenXR.xrSession);
+        xrDestroyInstance(helloOpenXR.xrInstance);
 
         //Destroy OpenGL
         for (int texture : helloOpenXR.depthTextures.values()) {
@@ -122,6 +136,24 @@ public class HelloOpenXRGL {
         try (MemoryStack stack = stackPush()) {
             IntBuffer pi = stack.mallocInt(1);
 
+            boolean hasCoreValidationLayer = false;
+            check(xrEnumerateApiLayerProperties(pi, null));
+            int numLayers = pi.get(0);
+
+            XrApiLayerProperties.Buffer pLayers = XRHelper.prepareApiLayerProperties(stack, numLayers);
+            check(xrEnumerateApiLayerProperties(pi, pLayers));
+            System.out.println(numLayers + " XR layers are available:");
+            for (int index = 0; index < numLayers; index++) {
+                XrApiLayerProperties layer = pLayers.get(index);
+
+                String layerName = layer.layerNameString();
+                System.out.println(layerName);
+                if (layerName.equals("XR_APILAYER_LUNARG_core_validation")) {
+                    hasCoreValidationLayer = true;
+                }
+            }
+            System.out.println("-----------");
+
             check(xrEnumerateInstanceExtensionProperties((ByteBuffer)null, pi, null));
             int numExtensions = pi.get(0);
 
@@ -132,23 +164,38 @@ public class HelloOpenXRGL {
             System.out.printf("OpenXR loaded with %d extensions:%n", numExtensions);
             System.out.println("~~~~~~~~~~~~~~~~~~");
 
-            PointerBuffer extensions = stack.mallocPointer(numExtensions);
+            PointerBuffer extensions = stack.mallocPointer(2);
 
             boolean missingOpenGL = true;
+            missingXrDebug = true;
             for (int i = 0; i < numExtensions; i++) {
                 XrExtensionProperties prop = properties.get(i);
-                extensions.put(i, prop.extensionName());
 
                 String extensionName = prop.extensionNameString();
                 System.out.println(extensionName);
                 if (extensionName.equals(XR_KHR_OPENGL_ENABLE_EXTENSION_NAME)) {
                     missingOpenGL = false;
+                    extensions.put(prop.extensionName());
+                }
+                if (extensionName.equals(XR_EXT_DEBUG_UTILS_EXTENSION_NAME)) {
+                    missingXrDebug = false;
+                    extensions.put(prop.extensionName());
                 }
             }
+            extensions.flip();
             System.out.println("~~~~~~~~~~~~~~~~~~");
 
             if (missingOpenGL) {
                 throw new IllegalStateException("OpenXR library does not provide required extension: " + XR_KHR_OPENGL_ENABLE_EXTENSION_NAME);
+            }
+
+            PointerBuffer wantedLayers;
+            if (hasCoreValidationLayer) {
+                wantedLayers = stack.callocPointer(1);
+                wantedLayers.put(0, stack.UTF8("XR_APILAYER_LUNARG_core_validation"));
+                System.out.println("Enabling XR core validation");
+            } else {
+                wantedLayers = null;
             }
 
             XrInstanceCreateInfo createInfo = XrInstanceCreateInfo.malloc(stack)
@@ -158,7 +205,7 @@ public class HelloOpenXRGL {
                 .applicationInfo(XrApplicationInfo.calloc(stack)
                     .applicationName(stack.UTF8("HelloOpenXR"))
                     .apiVersion(XR_CURRENT_API_VERSION))
-                .enabledApiLayerNames(null)
+                .enabledApiLayerNames(wantedLayers)
                 .enabledExtensionNames(extensions);
 
             PointerBuffer pp = stack.mallocPointer(1);
@@ -213,10 +260,28 @@ public class HelloOpenXRGL {
             glfwMakeContextCurrent(window);
             GL.createCapabilities();
 
-            //Check if OpenGL ver is supported by OpenXR ver
-            if (graphicsRequirements.minApiVersionSupported() >= XR_MAKE_VERSION(glGetInteger(GL_MAJOR_VERSION), glGetInteger(GL_MINOR_VERSION), 0)) {
-                //throw new IllegalStateException("Runtime does not support desired Graphics API and/or version");]
-                System.err.println("Runtime does not support desired Graphics API and/or version");
+            // Check if OpenGL version is supported by OpenXR runtime
+            int actualMajorVersion = glGetInteger(GL_MAJOR_VERSION);
+            int actualMinorVersion = glGetInteger(GL_MINOR_VERSION);
+
+            int minMajorVersion = XR_VERSION_MAJOR(graphicsRequirements.minApiVersionSupported());
+            int minMinorVersion = XR_VERSION_MINOR(graphicsRequirements.minApiVersionSupported());
+
+            int maxMajorVersion = XR_VERSION_MAJOR(graphicsRequirements.maxApiVersionSupported());
+            int maxMinorVersion = XR_VERSION_MINOR(graphicsRequirements.maxApiVersionSupported());
+
+            if (minMajorVersion > actualMajorVersion || (minMajorVersion == actualMajorVersion && minMinorVersion > actualMinorVersion)) {
+                throw new IllegalStateException(
+                    "The OpenXR runtime supports only OpenGL " + minMajorVersion + "." + minMinorVersion +
+                    " and later, but we got OpenGL " + actualMajorVersion + "." + actualMinorVersion
+                );
+            }
+
+            if (actualMajorVersion > maxMajorVersion || (actualMajorVersion == maxMajorVersion && actualMinorVersion > maxMinorVersion)) {
+                throw new IllegalStateException(
+                    "The OpenXR runtime supports only OpenGL " + maxMajorVersion + "." + minMajorVersion +
+                    " and earlier, but we got OpenGL " + actualMajorVersion + "." + actualMinorVersion
+                );
             }
 
             //Bind the OpenGL context to the OpenXR instance and create the session
@@ -235,6 +300,31 @@ public class HelloOpenXRGL {
             ));
 
             xrSession = new XrSession(pp.get(0), xrInstance);
+
+            if (!missingXrDebug) {
+                XrDebugUtilsMessengerCreateInfoEXT ciDebugUtils = XrDebugUtilsMessengerCreateInfoEXT.calloc(stack)
+                    .type$Default()
+                    .messageSeverities(
+                        XR_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT |
+                        XR_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
+                        XR_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT
+                    )
+                    .messageTypes(
+                        XR_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+                        XR_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT |
+                        XR_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT |
+                        XR_DEBUG_UTILS_MESSAGE_TYPE_CONFORMANCE_BIT_EXT
+                    )
+                    .userCallback((messageSeverity, messageTypes, pCallbackData, userData) -> {
+                        XrDebugUtilsMessengerCallbackDataEXT callbackData = XrDebugUtilsMessengerCallbackDataEXT.create(pCallbackData);
+                        System.out.println("XR Debug Utils: " + callbackData.messageString());
+                        return 0;
+                    });
+
+                System.out.println("Enabling OpenXR debug utils");
+                check(xrCreateDebugUtilsMessengerEXT(xrInstance, ciDebugUtils, pp));
+                xrDebugMessenger = new XrDebugUtilsMessengerEXT(pp.get(0), xrInstance);
+            }
         }
     }
 
@@ -264,11 +354,12 @@ public class HelloOpenXRGL {
 
     public void createXRSwapchains() {
         try (MemoryStack stack = stackPush()) {
-            XrSystemProperties systemProperties = XrSystemProperties.calloc(stack);
+            XrSystemProperties systemProperties = XrSystemProperties.calloc(stack)
+                .type$Default();
             check(xrGetSystemProperties(xrInstance, systemID, systemProperties));
 
             System.out.printf("Headset name:%s vendor:%d \n",
-                memUTF8(systemProperties.systemName()),
+                memUTF8(memAddress(systemProperties.systemName())),
                 systemProperties.vendorId());
 
             XrSystemTrackingProperties trackingProperties = systemProperties.trackingProperties();
@@ -286,7 +377,7 @@ public class HelloOpenXRGL {
 
             check(xrEnumerateViewConfigurationViews(xrInstance, systemID, viewConfigType, pi, null));
             viewConfigs = XRHelper.fill(
-                XrViewConfigurationView.malloc(pi.get(0)),
+                XrViewConfigurationView.calloc(pi.get(0)),
                 XrViewConfigurationView.TYPE,
                 XR_TYPE_VIEW_CONFIGURATION_VIEW
             );
@@ -295,7 +386,7 @@ public class HelloOpenXRGL {
             int viewCountNumber = pi.get(0);
 
             views = XRHelper.fill(
-                XrView.malloc(viewCountNumber),
+                XrView.calloc(viewCountNumber),
                 XrView.TYPE,
                 XR_TYPE_VIEW
             );
@@ -548,14 +639,16 @@ public class HelloOpenXRGL {
 
             PointerBuffer layers = stack.callocPointer(1);
 
+            boolean didRender = false;
             if (frameState.shouldRender()) {
-                if (renderLayerOpenXR(frameState.predictedDisplayTime(), layerProjection)) {
+                if (renderLayerOpenXR(stack, frameState.predictedDisplayTime(), layerProjection)) {
                     layers.put(0, layerProjection.address());
+                    didRender = true;
+                } else {
+                    System.out.println("Didn't render");
                 }
-            }
-
-            if (layers.limit() > 0) {
-                layerProjection.views().free(); // These values were allocated in a child function so they must be freed manually as we could not use the stack
+            } else {
+                System.out.println("Shouldn't render");
             }
 
             check(xrEndFrame(
@@ -565,95 +658,93 @@ public class HelloOpenXRGL {
                     .next(NULL)
                     .displayTime(frameState.predictedDisplayTime())
                     .environmentBlendMode(XR_ENVIRONMENT_BLEND_MODE_OPAQUE)
-                    .layerCount(layers.limit())
-                    .layers(layers)
+                    .layers(didRender ? layers : null)
+                    .layerCount(didRender ? layers.remaining() : 0)
             ));
         }
     }
 
-    private boolean renderLayerOpenXR(long predictedDisplayTime, XrCompositionLayerProjection layer) {
-        try (MemoryStack stack = stackPush()) {
-            XrViewState viewState = XrViewState.calloc(stack)
-                .type$Default();
+    private boolean renderLayerOpenXR(MemoryStack stack, long predictedDisplayTime, XrCompositionLayerProjection layer) {
+        XrViewState viewState = XrViewState.calloc(stack)
+            .type$Default();
 
-            IntBuffer pi = stack.mallocInt(1);
-            check(xrLocateViews(
-                xrSession,
-                XrViewLocateInfo.malloc(stack)
+        IntBuffer pi = stack.mallocInt(1);
+        check(xrLocateViews(
+            xrSession,
+            XrViewLocateInfo.malloc(stack)
+                .type$Default()
+                .next(NULL)
+                .viewConfigurationType(viewConfigType)
+                .displayTime(predictedDisplayTime)
+                .space(xrAppSpace),
+            viewState,
+            pi,
+            views
+        ));
+
+        if ((viewState.viewStateFlags() & XR_VIEW_STATE_POSITION_VALID_BIT) == 0 ||
+            (viewState.viewStateFlags() & XR_VIEW_STATE_ORIENTATION_VALID_BIT) == 0) {
+            return false;  // There is no valid tracking poses for the views.
+        }
+
+        int viewCountOutput = pi.get(0);
+        assert (viewCountOutput == views.capacity());
+        assert (viewCountOutput == viewConfigs.capacity());
+        assert (viewCountOutput == swapchains.length);
+
+        XrCompositionLayerProjectionView.Buffer projectionLayerViews = XRHelper.fill(
+            XrCompositionLayerProjectionView.calloc(viewCountOutput, stack),
+            XrCompositionLayerProjectionView.TYPE,
+            XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW
+        );
+
+        // Render view to the appropriate part of the swapchain image.
+        for (int viewIndex = 0; viewIndex < viewCountOutput; viewIndex++) {
+            // Each view has a separate swapchain which is acquired, rendered to, and released.
+            Swapchain viewSwapchain = swapchains[viewIndex];
+
+            check(xrAcquireSwapchainImage(
+                viewSwapchain.handle,
+                XrSwapchainImageAcquireInfo.calloc(stack)
+                    .type$Default(),
+                pi
+            ));
+            int swapchainImageIndex = pi.get(0);
+
+            check(xrWaitSwapchainImage(
+                viewSwapchain.handle,
+                XrSwapchainImageWaitInfo.malloc(stack)
                     .type$Default()
                     .next(NULL)
-                    .viewConfigurationType(viewConfigType)
-                    .displayTime(predictedDisplayTime)
-                    .space(xrAppSpace),
-                viewState,
-                pi,
-                views
+                    .timeout(XR_INFINITE_DURATION)
             ));
 
-            if ((viewState.viewStateFlags() & XR_VIEW_STATE_POSITION_VALID_BIT) == 0 ||
-                (viewState.viewStateFlags() & XR_VIEW_STATE_ORIENTATION_VALID_BIT) == 0) {
-                return false;  // There is no valid tracking poses for the views.
-            }
+            XrCompositionLayerProjectionView projectionLayerView = projectionLayerViews.get(viewIndex)
+                .pose(views.get(viewIndex).pose())
+                .fov(views.get(viewIndex).fov())
+                .subImage(si -> si
+                    .swapchain(viewSwapchain.handle)
+                    .imageRect(rect -> rect
+                        .offset(offset -> offset
+                            .x(0)
+                            .y(0))
+                        .extent(extent -> extent
+                            .width(viewSwapchain.width)
+                            .height(viewSwapchain.height)
+                        )));
 
-            int viewCountOutput = pi.get(0);
-            assert (viewCountOutput == views.capacity());
-            assert (viewCountOutput == viewConfigs.capacity());
-            assert (viewCountOutput == swapchains.length);
+            OpenGLRenderView(projectionLayerView, viewSwapchain.images.get(swapchainImageIndex), viewIndex);
 
-            XrCompositionLayerProjectionView.Buffer projectionLayerViews = XRHelper.fill(
-                XrCompositionLayerProjectionView.malloc(viewCountOutput),
-                XrCompositionLayerProjectionView.TYPE,
-                XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW
-            );
-
-            // Render view to the appropriate part of the swapchain image.
-            for (int viewIndex = 0; viewIndex < viewCountOutput; viewIndex++) {
-                // Each view has a separate swapchain which is acquired, rendered to, and released.
-                Swapchain viewSwapchain = swapchains[viewIndex];
-
-                check(xrAcquireSwapchainImage(
-                    viewSwapchain.handle,
-                    XrSwapchainImageAcquireInfo.calloc(stack)
-                        .type$Default(),
-                    pi
-                ));
-                int swapchainImageIndex = pi.get(0);
-
-                check(xrWaitSwapchainImage(
-                    viewSwapchain.handle,
-                    XrSwapchainImageWaitInfo.malloc(stack)
-                        .type$Default()
-                        .next(NULL)
-                        .timeout(XR_INFINITE_DURATION)
-                ));
-
-                XrCompositionLayerProjectionView projectionLayerView = projectionLayerViews.get(viewIndex)
-                    .pose(views.get(viewIndex).pose())
-                    .fov(views.get(viewIndex).fov())
-                    .subImage(si -> si
-                        .swapchain(viewSwapchain.handle)
-                        .imageRect(rect -> rect
-                            .offset(offset -> offset
-                                .x(0)
-                                .y(0))
-                            .extent(extent -> extent
-                                .width(viewSwapchain.width)
-                                .height(viewSwapchain.height)
-                            )));
-
-                OpenGLRenderView(projectionLayerView, viewSwapchain.images.get(swapchainImageIndex), viewIndex);
-
-                check(xrReleaseSwapchainImage(
-                    viewSwapchain.handle,
-                    XrSwapchainImageReleaseInfo.calloc(stack)
-                        .type$Default()
-                ));
-            }
-
-            layer.space(xrAppSpace);
-            layer.views(projectionLayerViews);
-            return true;
+            check(xrReleaseSwapchainImage(
+                viewSwapchain.handle,
+                XrSwapchainImageReleaseInfo.calloc(stack)
+                    .type$Default()
+            ));
         }
+
+        layer.space(xrAppSpace);
+        layer.views(projectionLayerViews);
+        return true;
     }
 
     private static Matrix4f modelviewMatrix  = new Matrix4f();

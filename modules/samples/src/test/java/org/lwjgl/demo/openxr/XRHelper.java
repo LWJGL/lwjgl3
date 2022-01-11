@@ -53,7 +53,7 @@ final class XRHelper {
      */
     static XrApiLayerProperties.Buffer prepareApiLayerProperties(MemoryStack stack, int numLayers) {
         return fill(
-            XrApiLayerProperties.malloc(numLayers, stack),
+            XrApiLayerProperties.calloc(numLayers, stack),
             XrApiLayerProperties.TYPE,
             XR_TYPE_API_LAYER_PROPERTIES
         );
@@ -72,7 +72,7 @@ final class XRHelper {
      */
     static XrExtensionProperties.Buffer prepareExtensionProperties(MemoryStack stack, int numExtensions) {
         return fill(
-            XrExtensionProperties.malloc(numExtensions, stack),
+            XrExtensionProperties.calloc(numExtensions, stack),
             XrExtensionProperties.TYPE,
             XR_TYPE_EXTENSION_PROPERTIES
         );
