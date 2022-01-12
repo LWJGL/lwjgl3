@@ -779,9 +779,7 @@ public class HelloOpenXRGL {
         XrPosef       pose        = layerView.pose();
         XrVector3f    pos         = pose.position$();
         XrQuaternionf orientation = pose.orientation();
-        try (MemoryStack stack = stackPush()) {
-            projectionMatrix.set(XRHelper.createProjectionMatrixBuffer(stack, layerView.fov(), 0.1f, 100f, false));
-        }
+        XRHelper.applyProjectionToMatrix(projectionMatrix.identity(), layerView.fov(), 0.1f, 100f, false);
         viewMatrix.translationRotateScaleInvert(
             pos.x(), pos.y(), pos.z(),
             orientation.x(), orientation.y(), orientation.z(), orientation.w(),

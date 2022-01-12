@@ -1975,7 +1975,7 @@ public class HelloOpenXRVK {
                                 XrCompositionLayerProjectionView projectionView = projectionViews.get(swapchainIndex);
 
                                 Matrix4f projectionMatrix = new Matrix4f();
-                                projectionMatrix.set(XRHelper.createProjectionMatrixBuffer(stack, projectionView.fov(), 0.01f, 100f, true));
+                                XRHelper.applyProjectionToMatrix(projectionMatrix, projectionView.fov(), 0.01f, 100f, true);
 
                                 Matrix4f viewMatrix = new Matrix4f();
 

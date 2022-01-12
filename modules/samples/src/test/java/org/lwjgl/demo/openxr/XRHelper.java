@@ -4,11 +4,11 @@
  */
 package org.lwjgl.demo.openxr;
 
+import org.joml.Math;
+import org.joml.Matrix4f;
 import org.lwjgl.openxr.*;
 import org.lwjgl.system.*;
 import org.lwjgl.system.linux.*;
-
-import java.nio.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWNativeGLX.*;
@@ -79,11 +79,11 @@ final class XRHelper {
     }
 
     /**
-     * Allocates a {@link FloatBuffer} onto the given stack and fills it such that it can be used as parameter
-     * to the <b>set</b> method of <b>Matrix4f</b>. The buffer will be filled such that it represents a projection
-     * matrix with the given <b>fov</b>, <b>nearZ</b> (a.k.a. near plane), <b>farZ</b> (a.k.a. far plane).
+     * Applies an off-center asymmetric perspective projection transformation to the given {@link Matrix4f},
+     * such that it represents a projection matrix with the given <b>fov</b>, <b>nearZ</b> (a.k.a. near plane),
+     * <b>farZ</b> (a.k.a. far plane).
      *
-     * @param stack      The stack onto which the buffer should be allocated
+     * @param m          The matrix to apply the perspective projection transformation to
      * @param fov        The desired Field of View for the projection matrix. You should normally use the value of
      *                   {@link XrCompositionLayerProjectionView#fov}.
      * @param nearZ      The nearest Z value that the user should see (also known as the near plane)
@@ -91,50 +91,14 @@ final class XRHelper {
      * @param zZeroToOne True if the z-axis of the coordinate system goes from 0 to 1 (Vulkan).
      *                   False if the z-axis of the coordinate system goes from -1 to 1 (OpenGL).
      *
-     * @return A {@link FloatBuffer} that contains the matrix data of the desired projection matrix. Use the
-     * <b>set</b> method of a <b>Matrix4f</b> instance to copy the buffer values to that matrix.
+     * @return the provided matrix
      */
-    static FloatBuffer createProjectionMatrixBuffer(MemoryStack stack, XrFovf fov, float nearZ, float farZ, boolean zZeroToOne) {
-        float tanLeft       = (float)Math.tan(fov.angleLeft());
-        float tanRight      = (float)Math.tan(fov.angleRight());
-        float tanDown       = (float)Math.tan(fov.angleDown());
-        float tanUp         = (float)Math.tan(fov.angleUp());
-        float tanAngleWidth = tanRight - tanLeft;
-        float tanAngleHeight;
-        if (zZeroToOne) {
-            tanAngleHeight = tanDown - tanUp;
-        } else {
-            tanAngleHeight = tanUp - tanDown;
-        }
-
-        FloatBuffer m = stack.mallocFloat(16);
-
-        m.put(0, 2.0f / tanAngleWidth);
-        m.put(4, 0.0f);
-        m.put(8, (tanRight + tanLeft) / tanAngleWidth);
-        m.put(12, 0.0f);
-
-        m.put(1, 0.0f);
-        m.put(5, 2.0f / tanAngleHeight);
-        m.put(9, (tanUp + tanDown) / tanAngleHeight);
-        m.put(13, 0.0f);
-
-        m.put(2, 0.0f);
-        m.put(6, 0.0f);
-        if (zZeroToOne) {
-            m.put(10, -farZ / (farZ - nearZ));
-            m.put(14, -(farZ * nearZ) / (farZ - nearZ));
-        } else {
-            m.put(10, -(farZ + nearZ) / (farZ - nearZ));
-            m.put(14, -(farZ * (nearZ + nearZ)) / (farZ - nearZ));
-        }
-
-        m.put(3, 0.0f);
-        m.put(7, 0.0f);
-        m.put(11, -1.0f);
-        m.put(15, 0.0f);
-
-        return m;
+    static Matrix4f applyProjectionToMatrix(Matrix4f m, XrFovf fov, float nearZ, float farZ, boolean zZeroToOne) {
+        float distToLeftPlane   = Math.tan(fov.angleLeft());
+        float distToRightPlane  = Math.tan(fov.angleRight());
+        float distToBottomPlane = Math.tan(fov.angleDown());
+        float distToTopPlane    = Math.tan(fov.angleUp());
+        return m.frustum(distToLeftPlane, distToRightPlane, distToBottomPlane, distToTopPlane, nearZ, farZ, zZeroToOne);
     }
 
     /**
