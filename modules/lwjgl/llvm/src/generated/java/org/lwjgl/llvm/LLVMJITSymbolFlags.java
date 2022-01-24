@@ -173,7 +173,6 @@ public class LLVMJITSymbolFlags extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code LLVMJITSymbolFlags} instance allocated on the specified {@link MemoryStack}.
      *

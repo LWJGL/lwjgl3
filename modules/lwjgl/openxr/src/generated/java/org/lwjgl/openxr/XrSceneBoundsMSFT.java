@@ -257,7 +257,6 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSceneBoundsMSFT} instance allocated on the specified {@link MemoryStack}.
      *

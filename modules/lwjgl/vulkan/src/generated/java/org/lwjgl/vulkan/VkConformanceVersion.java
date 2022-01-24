@@ -199,7 +199,6 @@ public class VkConformanceVersion extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkConformanceVersion} instance allocated on the specified {@link MemoryStack}.
      *

@@ -193,7 +193,6 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkQueryPoolPerformanceQueryCreateInfoINTEL} instance allocated on the specified {@link MemoryStack}.
      *

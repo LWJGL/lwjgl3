@@ -306,7 +306,6 @@ public class VkPhysicalDeviceVulkan11Properties extends Struct implements Native
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceVulkan11Properties} instance allocated on the specified {@link MemoryStack}.
      *

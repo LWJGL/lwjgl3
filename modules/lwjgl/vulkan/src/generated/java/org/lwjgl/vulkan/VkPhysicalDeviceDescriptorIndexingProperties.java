@@ -346,7 +346,6 @@ public class VkPhysicalDeviceDescriptorIndexingProperties extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceDescriptorIndexingProperties} instance allocated on the specified {@link MemoryStack}.
      *

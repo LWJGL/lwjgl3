@@ -252,7 +252,6 @@ public class VkVideoEncodeH264NaluSliceEXT extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoEncodeH264NaluSliceEXT} instance allocated on the specified {@link MemoryStack}.
      *

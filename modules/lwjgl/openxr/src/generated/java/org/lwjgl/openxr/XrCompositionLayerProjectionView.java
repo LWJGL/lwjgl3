@@ -231,7 +231,6 @@ public class XrCompositionLayerProjectionView extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrCompositionLayerProjectionView} instance allocated on the specified {@link MemoryStack}.
      *

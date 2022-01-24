@@ -233,7 +233,6 @@ public class VkTimelineSemaphoreSubmitInfo extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkTimelineSemaphoreSubmitInfo} instance allocated on the specified {@link MemoryStack}.
      *

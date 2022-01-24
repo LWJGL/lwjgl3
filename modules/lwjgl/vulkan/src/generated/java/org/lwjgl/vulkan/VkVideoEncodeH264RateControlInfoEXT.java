@@ -245,7 +245,6 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoEncodeH264RateControlInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

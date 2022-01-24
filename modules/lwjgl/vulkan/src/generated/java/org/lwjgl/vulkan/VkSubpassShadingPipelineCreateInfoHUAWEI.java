@@ -201,7 +201,6 @@ public class VkSubpassShadingPipelineCreateInfoHUAWEI extends Struct implements 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkSubpassShadingPipelineCreateInfoHUAWEI} instance allocated on the specified {@link MemoryStack}.
      *

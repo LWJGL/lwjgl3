@@ -214,7 +214,6 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkWriteDescriptorSetAccelerationStructureKHR} instance allocated on the specified {@link MemoryStack}.
      *

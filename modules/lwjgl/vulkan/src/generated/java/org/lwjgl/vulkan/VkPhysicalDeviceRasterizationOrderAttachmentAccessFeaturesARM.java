@@ -218,7 +218,6 @@ public class VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM exten
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM} instance allocated on the specified {@link MemoryStack}.
      *

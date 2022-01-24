@@ -210,7 +210,6 @@ public class VkAccelerationStructureVersionInfoKHR extends Struct implements Nat
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkAccelerationStructureVersionInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

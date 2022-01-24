@@ -192,7 +192,6 @@ public class VkDescriptorSetVariableDescriptorCountLayoutSupport extends Struct 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkDescriptorSetVariableDescriptorCountLayoutSupport} instance allocated on the specified {@link MemoryStack}.
      *

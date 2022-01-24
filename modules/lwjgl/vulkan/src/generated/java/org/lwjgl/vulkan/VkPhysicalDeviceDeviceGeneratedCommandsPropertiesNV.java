@@ -248,7 +248,6 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends Struct 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV} instance allocated on the specified {@link MemoryStack}.
      *

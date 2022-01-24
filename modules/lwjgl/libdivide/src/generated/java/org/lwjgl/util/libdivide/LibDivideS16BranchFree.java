@@ -172,7 +172,6 @@ public class LibDivideS16BranchFree extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code LibDivideS16BranchFree} instance allocated on the specified {@link MemoryStack}.
      *

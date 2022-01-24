@@ -230,7 +230,6 @@ public class XrFoveatedViewConfigurationViewVARJO extends Struct implements Nati
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrFoveatedViewConfigurationViewVARJO} instance allocated on the specified {@link MemoryStack}.
      *

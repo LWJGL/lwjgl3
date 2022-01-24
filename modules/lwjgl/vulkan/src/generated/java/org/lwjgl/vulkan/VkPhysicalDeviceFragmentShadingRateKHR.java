@@ -199,7 +199,6 @@ public class VkPhysicalDeviceFragmentShadingRateKHR extends Struct implements Na
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceFragmentShadingRateKHR} instance allocated on the specified {@link MemoryStack}.
      *

@@ -151,7 +151,6 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkBufferDeviceAddressInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

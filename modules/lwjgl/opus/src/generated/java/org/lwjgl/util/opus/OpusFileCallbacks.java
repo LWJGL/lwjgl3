@@ -204,7 +204,6 @@ public class OpusFileCallbacks extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code OpusFileCallbacks} instance allocated on the specified {@link MemoryStack}.
      *

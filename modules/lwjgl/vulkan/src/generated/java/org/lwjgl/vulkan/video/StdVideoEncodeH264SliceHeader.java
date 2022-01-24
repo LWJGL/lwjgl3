@@ -283,7 +283,6 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoEncodeH264SliceHeader} instance allocated on the specified {@link MemoryStack}.
      *

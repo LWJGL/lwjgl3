@@ -151,7 +151,6 @@ public class VkMemoryOpaqueCaptureAddressAllocateInfoKHR extends VkMemoryOpaqueC
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkMemoryOpaqueCaptureAddressAllocateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

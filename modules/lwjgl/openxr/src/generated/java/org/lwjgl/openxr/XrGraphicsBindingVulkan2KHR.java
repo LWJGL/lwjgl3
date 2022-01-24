@@ -178,7 +178,6 @@ public class XrGraphicsBindingVulkan2KHR extends XrGraphicsBindingVulkanKHR {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrGraphicsBindingVulkan2KHR} instance allocated on the specified {@link MemoryStack}.
      *

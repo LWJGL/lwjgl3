@@ -216,7 +216,6 @@ public class IOURingRSRCUpdate2 extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code IOURingRSRCUpdate2} instance allocated on the specified {@link MemoryStack}.
      *

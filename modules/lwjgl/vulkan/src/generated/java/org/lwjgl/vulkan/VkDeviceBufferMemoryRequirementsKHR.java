@@ -199,7 +199,6 @@ public class VkDeviceBufferMemoryRequirementsKHR extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkDeviceBufferMemoryRequirementsKHR} instance allocated on the specified {@link MemoryStack}.
      *

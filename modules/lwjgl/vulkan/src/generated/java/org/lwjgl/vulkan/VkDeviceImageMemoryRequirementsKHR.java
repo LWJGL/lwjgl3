@@ -221,7 +221,6 @@ public class VkDeviceImageMemoryRequirementsKHR extends Struct implements Native
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkDeviceImageMemoryRequirementsKHR} instance allocated on the specified {@link MemoryStack}.
      *

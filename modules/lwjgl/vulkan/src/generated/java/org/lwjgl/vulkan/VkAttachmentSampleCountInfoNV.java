@@ -163,7 +163,6 @@ public class VkAttachmentSampleCountInfoNV extends VkAttachmentSampleCountInfoAM
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkAttachmentSampleCountInfoNV} instance allocated on the specified {@link MemoryStack}.
      *

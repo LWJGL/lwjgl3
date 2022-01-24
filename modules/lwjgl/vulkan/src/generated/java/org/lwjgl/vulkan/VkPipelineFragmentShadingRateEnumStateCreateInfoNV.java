@@ -229,7 +229,6 @@ public class VkPipelineFragmentShadingRateEnumStateCreateInfoNV extends Struct i
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPipelineFragmentShadingRateEnumStateCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
      *

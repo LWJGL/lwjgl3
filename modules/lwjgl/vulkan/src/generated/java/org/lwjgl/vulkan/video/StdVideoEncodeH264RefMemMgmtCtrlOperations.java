@@ -228,7 +228,6 @@ public class StdVideoEncodeH264RefMemMgmtCtrlOperations extends Struct implement
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoEncodeH264RefMemMgmtCtrlOperations} instance allocated on the specified {@link MemoryStack}.
      *

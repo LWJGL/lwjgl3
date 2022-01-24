@@ -208,7 +208,6 @@ public class XrCompositionLayerSecureContentFB extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrCompositionLayerSecureContentFB} instance allocated on the specified {@link MemoryStack}.
      *

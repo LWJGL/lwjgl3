@@ -218,7 +218,6 @@ public class VkPhysicalDevice8BitStorageFeatures extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDevice8BitStorageFeatures} instance allocated on the specified {@link MemoryStack}.
      *

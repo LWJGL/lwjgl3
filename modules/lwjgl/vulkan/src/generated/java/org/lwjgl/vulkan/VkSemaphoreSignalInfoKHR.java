@@ -157,7 +157,6 @@ public class VkSemaphoreSignalInfoKHR extends VkSemaphoreSignalInfo {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkSemaphoreSignalInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

@@ -227,7 +227,6 @@ public class ParOctasphereMesh extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code ParOctasphereMesh} instance allocated on the specified {@link MemoryStack}.
      *

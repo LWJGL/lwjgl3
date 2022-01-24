@@ -287,7 +287,6 @@ public class VkIndirectCommandsLayoutCreateInfoNV extends Struct implements Nati
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkIndirectCommandsLayoutCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
      *

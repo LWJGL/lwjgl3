@@ -172,7 +172,6 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code SpvcHLSLResourceBindingMapping} instance allocated on the specified {@link MemoryStack}.
      *

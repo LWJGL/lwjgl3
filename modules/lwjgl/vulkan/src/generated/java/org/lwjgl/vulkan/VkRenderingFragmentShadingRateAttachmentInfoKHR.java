@@ -240,7 +240,6 @@ public class VkRenderingFragmentShadingRateAttachmentInfoKHR extends Struct impl
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkRenderingFragmentShadingRateAttachmentInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

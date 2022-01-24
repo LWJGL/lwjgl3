@@ -185,7 +185,6 @@ public class CUDA_EXT_SEM_WAIT_NODE_PARAMS extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code CUDA_EXT_SEM_WAIT_NODE_PARAMS} instance allocated on the specified {@link MemoryStack}.
      *

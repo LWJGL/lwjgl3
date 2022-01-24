@@ -208,7 +208,6 @@ public class XrPassthroughCreateInfoFB extends Struct implements NativeResource 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrPassthroughCreateInfoFB} instance allocated on the specified {@link MemoryStack}.
      *

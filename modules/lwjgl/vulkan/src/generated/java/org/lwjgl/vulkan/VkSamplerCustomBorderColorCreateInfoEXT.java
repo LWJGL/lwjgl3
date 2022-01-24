@@ -217,7 +217,6 @@ public class VkSamplerCustomBorderColorCreateInfoEXT extends Struct implements N
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkSamplerCustomBorderColorCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

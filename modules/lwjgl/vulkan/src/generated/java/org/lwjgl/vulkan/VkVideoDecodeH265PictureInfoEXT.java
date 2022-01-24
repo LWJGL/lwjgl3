@@ -216,7 +216,6 @@ public class VkVideoDecodeH265PictureInfoEXT extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoDecodeH265PictureInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

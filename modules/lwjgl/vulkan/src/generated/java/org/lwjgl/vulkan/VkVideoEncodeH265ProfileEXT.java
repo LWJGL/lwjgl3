@@ -194,7 +194,6 @@ public class VkVideoEncodeH265ProfileEXT extends Struct implements NativeResourc
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoEncodeH265ProfileEXT} instance allocated on the specified {@link MemoryStack}.
      *

@@ -153,7 +153,6 @@ public class XrSwapchainImageVulkan2KHR extends XrSwapchainImageVulkanKHR {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSwapchainImageVulkan2KHR} instance allocated on the specified {@link MemoryStack}.
      *

@@ -196,7 +196,6 @@ public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends Struct
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *

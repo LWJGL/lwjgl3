@@ -254,7 +254,6 @@ public class VkPipelineRenderingCreateInfoKHR extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPipelineRenderingCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

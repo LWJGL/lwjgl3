@@ -203,7 +203,6 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrEventDataBuffer} instance allocated on the specified {@link MemoryStack}.
      *

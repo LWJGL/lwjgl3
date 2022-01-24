@@ -196,7 +196,6 @@ public class VkPhysicalDevicePrivateDataFeaturesEXT extends Struct implements Na
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDevicePrivateDataFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

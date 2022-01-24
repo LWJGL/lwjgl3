@@ -196,7 +196,6 @@ public class VkPhysicalDeviceTimelineSemaphoreFeatures extends Struct implements
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceTimelineSemaphoreFeatures} instance allocated on the specified {@link MemoryStack}.
      *

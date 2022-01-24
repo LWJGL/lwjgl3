@@ -220,7 +220,6 @@ public class XrHandMeshVertexBufferMSFT extends Struct implements NativeResource
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrHandMeshVertexBufferMSFT} instance allocated on the specified {@link MemoryStack}.
      *

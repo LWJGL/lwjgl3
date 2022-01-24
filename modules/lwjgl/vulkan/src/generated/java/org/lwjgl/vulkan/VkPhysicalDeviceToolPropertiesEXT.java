@@ -235,7 +235,6 @@ public class VkPhysicalDeviceToolPropertiesEXT extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceToolPropertiesEXT} instance allocated on the specified {@link MemoryStack}.
      *

@@ -199,7 +199,6 @@ public class VkSamplerReductionModeCreateInfo extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkSamplerReductionModeCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *

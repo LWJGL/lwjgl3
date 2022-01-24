@@ -202,7 +202,6 @@ public class VkPerformanceQuerySubmitInfoKHR extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPerformanceQuerySubmitInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

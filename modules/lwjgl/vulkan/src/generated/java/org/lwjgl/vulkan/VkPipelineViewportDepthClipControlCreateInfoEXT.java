@@ -198,7 +198,6 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPipelineViewportDepthClipControlCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

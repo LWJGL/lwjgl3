@@ -222,7 +222,6 @@ public class XrSceneMeshIndicesUint16MSFT extends Struct implements NativeResour
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSceneMeshIndicesUint16MSFT} instance allocated on the specified {@link MemoryStack}.
      *

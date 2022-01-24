@@ -211,7 +211,6 @@ public class XrSwapchainImageOpenGLESKHR extends Struct implements NativeResourc
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSwapchainImageOpenGLESKHR} instance allocated on the specified {@link MemoryStack}.
      *

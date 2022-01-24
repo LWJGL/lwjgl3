@@ -204,7 +204,6 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoDecodeH264CapabilitiesEXT} instance allocated on the specified {@link MemoryStack}.
      *

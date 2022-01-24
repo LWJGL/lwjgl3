@@ -223,7 +223,6 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDevice4444FormatsFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

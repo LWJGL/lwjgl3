@@ -198,7 +198,6 @@ public class XrSystemFoveatedRenderingPropertiesVARJO extends Struct implements 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSystemFoveatedRenderingPropertiesVARJO} instance allocated on the specified {@link MemoryStack}.
      *

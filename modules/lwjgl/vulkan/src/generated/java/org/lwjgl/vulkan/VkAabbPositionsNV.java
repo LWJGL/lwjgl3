@@ -166,7 +166,6 @@ public class VkAabbPositionsNV extends VkAabbPositionsKHR {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkAabbPositionsNV} instance allocated on the specified {@link MemoryStack}.
      *

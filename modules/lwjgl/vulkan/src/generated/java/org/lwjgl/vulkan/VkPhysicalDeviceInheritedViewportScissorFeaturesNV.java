@@ -196,7 +196,6 @@ public class VkPhysicalDeviceInheritedViewportScissorFeaturesNV extends Struct i
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceInheritedViewportScissorFeaturesNV} instance allocated on the specified {@link MemoryStack}.
      *

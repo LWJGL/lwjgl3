@@ -207,7 +207,6 @@ public class CUDA_MEM_ALLOC_NODE_PARAMS extends Struct implements NativeResource
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code CUDA_MEM_ALLOC_NODE_PARAMS} instance allocated on the specified {@link MemoryStack}.
      *

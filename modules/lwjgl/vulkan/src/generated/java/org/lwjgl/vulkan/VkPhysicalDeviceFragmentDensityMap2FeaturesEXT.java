@@ -196,7 +196,6 @@ public class VkPhysicalDeviceFragmentDensityMap2FeaturesEXT extends Struct imple
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceFragmentDensityMap2FeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

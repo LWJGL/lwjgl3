@@ -184,7 +184,6 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrLoaderInitInfoBaseHeaderKHR} instance allocated on the specified {@link MemoryStack}.
      *

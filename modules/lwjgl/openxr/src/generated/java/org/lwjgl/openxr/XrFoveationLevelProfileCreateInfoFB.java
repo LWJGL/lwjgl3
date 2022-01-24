@@ -217,7 +217,6 @@ public class XrFoveationLevelProfileCreateInfoFB extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrFoveationLevelProfileCreateInfoFB} instance allocated on the specified {@link MemoryStack}.
      *

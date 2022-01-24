@@ -207,7 +207,6 @@ public class VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT extends Struct im
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

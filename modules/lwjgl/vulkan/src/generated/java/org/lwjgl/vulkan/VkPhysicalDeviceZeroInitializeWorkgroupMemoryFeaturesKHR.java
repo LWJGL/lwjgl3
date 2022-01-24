@@ -196,7 +196,6 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *

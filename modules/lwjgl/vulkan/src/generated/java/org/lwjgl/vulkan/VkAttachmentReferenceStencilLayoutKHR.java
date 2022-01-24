@@ -151,7 +151,6 @@ public class VkAttachmentReferenceStencilLayoutKHR extends VkAttachmentReference
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkAttachmentReferenceStencilLayoutKHR} instance allocated on the specified {@link MemoryStack}.
      *

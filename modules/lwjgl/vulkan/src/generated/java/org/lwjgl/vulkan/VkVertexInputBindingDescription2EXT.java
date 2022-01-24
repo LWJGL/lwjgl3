@@ -241,7 +241,6 @@ public class VkVertexInputBindingDescription2EXT extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVertexInputBindingDescription2EXT} instance allocated on the specified {@link MemoryStack}.
      *

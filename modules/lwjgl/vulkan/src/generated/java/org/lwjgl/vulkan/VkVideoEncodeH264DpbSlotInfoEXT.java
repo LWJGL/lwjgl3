@@ -212,7 +212,6 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoEncodeH264DpbSlotInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

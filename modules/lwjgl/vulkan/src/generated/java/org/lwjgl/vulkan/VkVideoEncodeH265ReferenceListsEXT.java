@@ -241,7 +241,6 @@ public class VkVideoEncodeH265ReferenceListsEXT extends Struct implements Native
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoEncodeH265ReferenceListsEXT} instance allocated on the specified {@link MemoryStack}.
      *

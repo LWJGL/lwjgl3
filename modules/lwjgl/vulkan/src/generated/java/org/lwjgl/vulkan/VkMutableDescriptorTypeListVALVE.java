@@ -184,7 +184,6 @@ public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkMutableDescriptorTypeListVALVE} instance allocated on the specified {@link MemoryStack}.
      *

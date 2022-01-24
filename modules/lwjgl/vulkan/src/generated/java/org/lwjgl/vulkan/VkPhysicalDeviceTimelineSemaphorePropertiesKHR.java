@@ -146,7 +146,6 @@ public class VkPhysicalDeviceTimelineSemaphorePropertiesKHR extends VkPhysicalDe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceTimelineSemaphorePropertiesKHR} instance allocated on the specified {@link MemoryStack}.
      *

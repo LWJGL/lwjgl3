@@ -194,7 +194,6 @@ public class XrSystemEyeGazeInteractionPropertiesEXT extends Struct implements N
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSystemEyeGazeInteractionPropertiesEXT} instance allocated on the specified {@link MemoryStack}.
      *

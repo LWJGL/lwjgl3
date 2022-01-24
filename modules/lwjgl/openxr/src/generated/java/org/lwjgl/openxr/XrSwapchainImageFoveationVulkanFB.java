@@ -210,7 +210,6 @@ public class XrSwapchainImageFoveationVulkanFB extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSwapchainImageFoveationVulkanFB} instance allocated on the specified {@link MemoryStack}.
      *

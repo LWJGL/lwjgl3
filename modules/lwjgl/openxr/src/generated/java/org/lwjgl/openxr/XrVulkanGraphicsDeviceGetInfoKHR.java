@@ -213,7 +213,6 @@ public class XrVulkanGraphicsDeviceGetInfoKHR extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrVulkanGraphicsDeviceGetInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

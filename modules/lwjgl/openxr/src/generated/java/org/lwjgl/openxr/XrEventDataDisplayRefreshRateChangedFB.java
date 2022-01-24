@@ -207,7 +207,6 @@ public class XrEventDataDisplayRefreshRateChangedFB extends Struct implements Na
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrEventDataDisplayRefreshRateChangedFB} instance allocated on the specified {@link MemoryStack}.
      *

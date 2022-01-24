@@ -235,7 +235,6 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct implements Nati
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrEventDataMarkerTrackingUpdateVARJO} instance allocated on the specified {@link MemoryStack}.
      *

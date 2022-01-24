@@ -368,7 +368,6 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoH265SpsFlags} instance allocated on the specified {@link MemoryStack}.
      *

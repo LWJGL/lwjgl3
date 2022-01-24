@@ -240,7 +240,6 @@ public class VkGraphicsShaderGroupCreateInfoNV extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkGraphicsShaderGroupCreateInfoNV} instance allocated on the specified {@link MemoryStack}.
      *

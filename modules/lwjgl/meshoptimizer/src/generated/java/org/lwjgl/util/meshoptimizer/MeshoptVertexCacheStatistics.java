@@ -156,7 +156,6 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code MeshoptVertexCacheStatistics} instance allocated on the specified {@link MemoryStack}.
      *

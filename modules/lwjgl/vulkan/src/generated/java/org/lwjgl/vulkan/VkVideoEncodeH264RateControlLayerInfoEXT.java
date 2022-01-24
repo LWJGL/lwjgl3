@@ -303,7 +303,6 @@ public class VkVideoEncodeH264RateControlLayerInfoEXT extends Struct implements 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoEncodeH264RateControlLayerInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

@@ -272,7 +272,6 @@ public class StdVideoH264PictureParameterSet extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoH264PictureParameterSet} instance allocated on the specified {@link MemoryStack}.
      *

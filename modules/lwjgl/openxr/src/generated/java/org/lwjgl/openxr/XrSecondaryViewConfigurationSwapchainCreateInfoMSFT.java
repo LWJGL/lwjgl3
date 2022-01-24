@@ -205,7 +205,6 @@ public class XrSecondaryViewConfigurationSwapchainCreateInfoMSFT extends Struct 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSecondaryViewConfigurationSwapchainCreateInfoMSFT} instance allocated on the specified {@link MemoryStack}.
      *

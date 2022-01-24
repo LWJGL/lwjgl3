@@ -325,7 +325,6 @@ public class VkAccelerationStructureBuildGeometryInfoKHR extends Struct implemen
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkAccelerationStructureBuildGeometryInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

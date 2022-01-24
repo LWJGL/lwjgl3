@@ -404,7 +404,6 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoH265SequenceParameterSetVui} instance allocated on the specified {@link MemoryStack}.
      *

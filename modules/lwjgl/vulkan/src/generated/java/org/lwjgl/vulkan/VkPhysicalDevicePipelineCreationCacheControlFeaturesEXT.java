@@ -214,7 +214,6 @@ public class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends Str
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

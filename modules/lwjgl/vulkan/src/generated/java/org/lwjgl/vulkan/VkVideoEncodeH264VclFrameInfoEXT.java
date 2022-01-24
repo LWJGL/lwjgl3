@@ -262,7 +262,6 @@ public class VkVideoEncodeH264VclFrameInfoEXT extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoEncodeH264VclFrameInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

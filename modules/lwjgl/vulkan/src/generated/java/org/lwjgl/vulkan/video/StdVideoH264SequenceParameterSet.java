@@ -409,7 +409,6 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoH264SequenceParameterSet} instance allocated on the specified {@link MemoryStack}.
      *

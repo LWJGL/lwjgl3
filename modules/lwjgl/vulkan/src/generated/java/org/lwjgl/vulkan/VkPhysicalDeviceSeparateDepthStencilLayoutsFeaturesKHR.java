@@ -151,7 +151,6 @@ public class VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR extends VkPh
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *

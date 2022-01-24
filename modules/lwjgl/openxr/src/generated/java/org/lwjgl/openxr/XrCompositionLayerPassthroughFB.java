@@ -236,7 +236,6 @@ public class XrCompositionLayerPassthroughFB extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrCompositionLayerPassthroughFB} instance allocated on the specified {@link MemoryStack}.
      *

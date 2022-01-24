@@ -201,7 +201,6 @@ public class XrColor4f extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrColor4f} instance allocated on the specified {@link MemoryStack}.
      *

@@ -196,7 +196,6 @@ public class VkPhysicalDeviceDeviceMemoryReportFeaturesEXT extends Struct implem
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceDeviceMemoryReportFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

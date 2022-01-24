@@ -196,7 +196,6 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends Struct implemen
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceSynchronization2FeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *

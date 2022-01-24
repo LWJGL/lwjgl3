@@ -182,7 +182,6 @@ public class StdVideoEncodeH264RefListModEntry extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoEncodeH264RefListModEntry} instance allocated on the specified {@link MemoryStack}.
      *

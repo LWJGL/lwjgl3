@@ -207,7 +207,6 @@ public class VmaVirtualAllocationCreateInfo extends Struct implements NativeReso
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VmaVirtualAllocationCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *

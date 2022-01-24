@@ -246,7 +246,6 @@ public class VkAttachmentReference2 extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkAttachmentReference2} instance allocated on the specified {@link MemoryStack}.
      *

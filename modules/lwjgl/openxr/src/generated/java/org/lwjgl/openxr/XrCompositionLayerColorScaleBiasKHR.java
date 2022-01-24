@@ -217,7 +217,6 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrCompositionLayerColorScaleBiasKHR} instance allocated on the specified {@link MemoryStack}.
      *

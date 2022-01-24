@@ -208,7 +208,6 @@ public class XrSwapchainStateFoveationFB extends Struct implements NativeResourc
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSwapchainStateFoveationFB} instance allocated on the specified {@link MemoryStack}.
      *

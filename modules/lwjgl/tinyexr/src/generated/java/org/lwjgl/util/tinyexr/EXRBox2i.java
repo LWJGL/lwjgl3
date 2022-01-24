@@ -189,7 +189,6 @@ public class EXRBox2i extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code EXRBox2i} instance allocated on the specified {@link MemoryStack}.
      *

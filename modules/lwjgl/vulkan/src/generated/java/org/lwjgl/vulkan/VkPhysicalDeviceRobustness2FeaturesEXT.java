@@ -224,7 +224,6 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct implements Na
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceRobustness2FeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

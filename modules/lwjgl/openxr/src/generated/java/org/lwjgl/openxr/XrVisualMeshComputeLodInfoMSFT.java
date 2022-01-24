@@ -199,7 +199,6 @@ public class XrVisualMeshComputeLodInfoMSFT extends Struct implements NativeReso
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrVisualMeshComputeLodInfoMSFT} instance allocated on the specified {@link MemoryStack}.
      *

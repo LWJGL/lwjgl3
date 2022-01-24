@@ -213,7 +213,6 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceFragmentDensityMap2PropertiesEXT} instance allocated on the specified {@link MemoryStack}.
      *

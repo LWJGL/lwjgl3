@@ -184,7 +184,6 @@ public class XrActionSuggestedBinding extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrActionSuggestedBinding} instance allocated on the specified {@link MemoryStack}.
      *

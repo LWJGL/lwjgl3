@@ -196,7 +196,6 @@ public class VkPhysicalDeviceInvocationMaskFeaturesHUAWEI extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceInvocationMaskFeaturesHUAWEI} instance allocated on the specified {@link MemoryStack}.
      *

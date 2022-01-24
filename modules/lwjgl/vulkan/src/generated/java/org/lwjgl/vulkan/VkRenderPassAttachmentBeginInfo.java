@@ -210,7 +210,6 @@ public class VkRenderPassAttachmentBeginInfo extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkRenderPassAttachmentBeginInfo} instance allocated on the specified {@link MemoryStack}.
      *

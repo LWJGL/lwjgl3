@@ -159,7 +159,6 @@ public class VkSetStateFlagsIndirectCommandNV extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkSetStateFlagsIndirectCommandNV} instance allocated on the specified {@link MemoryStack}.
      *

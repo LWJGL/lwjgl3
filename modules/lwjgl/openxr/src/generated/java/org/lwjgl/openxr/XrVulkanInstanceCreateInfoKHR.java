@@ -250,7 +250,6 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrVulkanInstanceCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

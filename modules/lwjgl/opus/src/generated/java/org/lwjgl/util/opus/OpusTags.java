@@ -177,7 +177,6 @@ public class OpusTags extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code OpusTags} instance allocated on the specified {@link MemoryStack}.
      *

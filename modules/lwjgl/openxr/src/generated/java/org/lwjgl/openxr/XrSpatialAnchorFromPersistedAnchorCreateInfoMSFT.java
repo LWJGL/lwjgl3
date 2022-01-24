@@ -217,7 +217,6 @@ public class XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT extends Struct imp
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT} instance allocated on the specified {@link MemoryStack}.
      *

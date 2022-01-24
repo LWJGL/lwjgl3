@@ -216,7 +216,6 @@ public class XrHandMeshUpdateInfoMSFT extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrHandMeshUpdateInfoMSFT} instance allocated on the specified {@link MemoryStack}.
      *

@@ -316,7 +316,6 @@ public class StdVideoDecodeH264MvcElement extends Struct implements NativeResour
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoDecodeH264MvcElement} instance allocated on the specified {@link MemoryStack}.
      *

@@ -199,7 +199,6 @@ public class VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV extends Struct
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV} instance allocated on the specified {@link MemoryStack}.
      *

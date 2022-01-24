@@ -187,7 +187,6 @@ public class XrSceneObserverCreateInfoMSFT extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSceneObserverCreateInfoMSFT} instance allocated on the specified {@link MemoryStack}.
      *

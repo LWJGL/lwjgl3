@@ -163,7 +163,6 @@ public class VkPhysicalDeviceBufferDeviceAddressFeaturesKHR extends VkPhysicalDe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceBufferDeviceAddressFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *

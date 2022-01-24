@@ -200,7 +200,6 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct implements Native
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoDecodeH264PictureInfoFlags} instance allocated on the specified {@link MemoryStack}.
      *

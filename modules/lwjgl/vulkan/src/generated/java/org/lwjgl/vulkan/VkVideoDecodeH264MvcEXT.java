@@ -200,7 +200,6 @@ public class VkVideoDecodeH264MvcEXT extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoDecodeH264MvcEXT} instance allocated on the specified {@link MemoryStack}.
      *

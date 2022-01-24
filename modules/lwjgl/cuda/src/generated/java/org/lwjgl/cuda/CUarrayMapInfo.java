@@ -378,7 +378,6 @@ public class CUarrayMapInfo extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code CUarrayMapInfo} instance allocated on the specified {@link MemoryStack}.
      *

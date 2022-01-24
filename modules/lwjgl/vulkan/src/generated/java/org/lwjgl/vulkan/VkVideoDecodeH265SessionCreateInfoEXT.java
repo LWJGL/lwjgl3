@@ -214,7 +214,6 @@ public class VkVideoDecodeH265SessionCreateInfoEXT extends Struct implements Nat
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoDecodeH265SessionCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

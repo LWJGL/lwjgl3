@@ -189,7 +189,6 @@ public class XrSwapchainStateBaseHeaderFB extends Struct implements NativeResour
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSwapchainStateBaseHeaderFB} instance allocated on the specified {@link MemoryStack}.
      *

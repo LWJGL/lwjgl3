@@ -198,7 +198,6 @@ public class SpvcHlslRootConstants extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code SpvcHlslRootConstants} instance allocated on the specified {@link MemoryStack}.
      *

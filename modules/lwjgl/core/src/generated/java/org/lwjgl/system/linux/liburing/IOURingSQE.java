@@ -460,7 +460,6 @@ public class IOURingSQE extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code IOURingSQE} instance allocated on the specified {@link MemoryStack}.
      *

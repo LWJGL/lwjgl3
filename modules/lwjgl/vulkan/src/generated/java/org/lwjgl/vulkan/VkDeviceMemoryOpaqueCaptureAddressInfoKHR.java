@@ -151,7 +151,6 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfoKHR extends VkDeviceMemoryOpa
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkDeviceMemoryOpaqueCaptureAddressInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

@@ -200,7 +200,6 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceVideoFormatInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

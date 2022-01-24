@@ -265,7 +265,6 @@ public class VkDependencyInfoKHR extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkDependencyInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

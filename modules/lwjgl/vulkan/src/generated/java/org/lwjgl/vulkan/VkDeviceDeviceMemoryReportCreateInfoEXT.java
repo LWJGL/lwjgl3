@@ -233,7 +233,6 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct implements N
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkDeviceDeviceMemoryReportCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

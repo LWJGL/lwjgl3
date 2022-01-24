@@ -219,7 +219,6 @@ public class VkSamplerBorderColorComponentMappingCreateInfoEXT extends Struct im
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkSamplerBorderColorComponentMappingCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

@@ -196,7 +196,6 @@ public class VmaVirtualBlockCreateInfo extends Struct implements NativeResource 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VmaVirtualBlockCreateInfo} instance allocated on the specified {@link MemoryStack}.
      *

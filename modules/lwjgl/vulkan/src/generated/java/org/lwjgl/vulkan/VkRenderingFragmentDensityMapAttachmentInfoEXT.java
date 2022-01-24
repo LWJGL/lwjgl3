@@ -217,7 +217,6 @@ public class VkRenderingFragmentDensityMapAttachmentInfoEXT extends Struct imple
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkRenderingFragmentDensityMapAttachmentInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

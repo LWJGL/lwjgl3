@@ -227,7 +227,6 @@ public class StdVideoH265SubLayerHrdParameters extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoH265SubLayerHrdParameters} instance allocated on the specified {@link MemoryStack}.
      *

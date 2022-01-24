@@ -220,7 +220,6 @@ public class SpvcReflectedResource extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code SpvcReflectedResource} instance allocated on the specified {@link MemoryStack}.
      *

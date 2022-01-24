@@ -200,7 +200,6 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoDecodeH264ReferenceInfo} instance allocated on the specified {@link MemoryStack}.
      *

@@ -215,7 +215,6 @@ public class XrScenePlaneAlignmentFilterInfoMSFT extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrScenePlaneAlignmentFilterInfoMSFT} instance allocated on the specified {@link MemoryStack}.
      *

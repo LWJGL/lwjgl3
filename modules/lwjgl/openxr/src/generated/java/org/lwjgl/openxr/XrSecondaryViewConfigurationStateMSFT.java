@@ -218,7 +218,6 @@ public class XrSecondaryViewConfigurationStateMSFT extends Struct implements Nat
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSecondaryViewConfigurationStateMSFT} instance allocated on the specified {@link MemoryStack}.
      *

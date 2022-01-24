@@ -160,7 +160,6 @@ public class VkBindShaderGroupIndirectCommandNV extends Struct implements Native
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkBindShaderGroupIndirectCommandNV} instance allocated on the specified {@link MemoryStack}.
      *

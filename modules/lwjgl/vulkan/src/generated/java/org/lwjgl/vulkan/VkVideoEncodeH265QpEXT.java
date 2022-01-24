@@ -188,7 +188,6 @@ public class VkVideoEncodeH265QpEXT extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoEncodeH265QpEXT} instance allocated on the specified {@link MemoryStack}.
      *

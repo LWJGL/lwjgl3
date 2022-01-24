@@ -192,7 +192,6 @@ public class VkDevicePrivateDataCreateInfoEXT extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkDevicePrivateDataCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

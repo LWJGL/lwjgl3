@@ -214,7 +214,6 @@ public class XrSpaceLocation extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSpaceLocation} instance allocated on the specified {@link MemoryStack}.
      *

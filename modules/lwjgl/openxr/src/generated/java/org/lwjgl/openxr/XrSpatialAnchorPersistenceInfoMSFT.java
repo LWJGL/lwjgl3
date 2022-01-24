@@ -213,7 +213,6 @@ public class XrSpatialAnchorPersistenceInfoMSFT extends Struct implements Native
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSpatialAnchorPersistenceInfoMSFT} instance allocated on the specified {@link MemoryStack}.
      *

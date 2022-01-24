@@ -223,7 +223,6 @@ public class VkRayTracingPipelineInterfaceCreateInfoKHR extends Struct implement
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkRayTracingPipelineInterfaceCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

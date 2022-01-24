@@ -240,7 +240,6 @@ public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct implements NativeResour
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code CUDA_ARRAY_SPARSE_PROPERTIES} instance allocated on the specified {@link MemoryStack}.
      *

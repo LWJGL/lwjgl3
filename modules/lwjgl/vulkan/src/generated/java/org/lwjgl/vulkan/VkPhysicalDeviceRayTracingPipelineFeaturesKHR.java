@@ -246,7 +246,6 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceRayTracingPipelineFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *

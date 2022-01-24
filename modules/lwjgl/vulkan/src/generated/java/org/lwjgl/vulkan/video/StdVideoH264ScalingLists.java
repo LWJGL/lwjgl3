@@ -212,7 +212,6 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoH264ScalingLists} instance allocated on the specified {@link MemoryStack}.
      *

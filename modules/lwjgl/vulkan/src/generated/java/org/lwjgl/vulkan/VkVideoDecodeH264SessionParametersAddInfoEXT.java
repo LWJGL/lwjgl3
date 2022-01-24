@@ -249,7 +249,6 @@ public class VkVideoDecodeH264SessionParametersAddInfoEXT extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoDecodeH264SessionParametersAddInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

@@ -213,7 +213,6 @@ public class XrGraphicsRequirementsVulkanKHR extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrGraphicsRequirementsVulkanKHR} instance allocated on the specified {@link MemoryStack}.
      *

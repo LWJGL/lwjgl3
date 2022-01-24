@@ -377,7 +377,6 @@ public class VkRayTracingPipelineCreateInfoKHR extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkRayTracingPipelineCreateInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

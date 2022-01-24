@@ -207,7 +207,6 @@ public class VkPhysicalDeviceBorderColorSwizzleFeaturesEXT extends Struct implem
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceBorderColorSwizzleFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

@@ -317,7 +317,6 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

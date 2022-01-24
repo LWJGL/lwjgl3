@@ -169,7 +169,6 @@ public class VkAccelerationStructureInstanceNV extends VkAccelerationStructureIn
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkAccelerationStructureInstanceNV} instance allocated on the specified {@link MemoryStack}.
      *

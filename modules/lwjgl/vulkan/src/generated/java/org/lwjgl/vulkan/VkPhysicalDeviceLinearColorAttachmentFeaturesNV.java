@@ -196,7 +196,6 @@ public class VkPhysicalDeviceLinearColorAttachmentFeaturesNV extends Struct impl
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceLinearColorAttachmentFeaturesNV} instance allocated on the specified {@link MemoryStack}.
      *

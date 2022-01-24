@@ -195,7 +195,6 @@ public class VkStridedDeviceAddressRegionKHR extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkStridedDeviceAddressRegionKHR} instance allocated on the specified {@link MemoryStack}.
      *

@@ -205,7 +205,6 @@ public class VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT extends Struct imp
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

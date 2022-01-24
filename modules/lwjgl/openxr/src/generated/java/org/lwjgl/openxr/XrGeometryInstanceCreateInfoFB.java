@@ -261,7 +261,6 @@ public class XrGeometryInstanceCreateInfoFB extends Struct implements NativeReso
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrGeometryInstanceCreateInfoFB} instance allocated on the specified {@link MemoryStack}.
      *

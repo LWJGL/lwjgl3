@@ -199,7 +199,6 @@ public class XrSerializedSceneFragmentDataGetInfoMSFT extends Struct implements 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrSerializedSceneFragmentDataGetInfoMSFT} instance allocated on the specified {@link MemoryStack}.
      *

@@ -196,7 +196,6 @@ public class VkPhysicalDeviceScalarBlockLayoutFeatures extends Struct implements
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceScalarBlockLayoutFeatures} instance allocated on the specified {@link MemoryStack}.
      *

@@ -192,7 +192,6 @@ public class VkQueueFamilyQueryResultStatusProperties2KHR extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkQueueFamilyQueryResultStatusProperties2KHR} instance allocated on the specified {@link MemoryStack}.
      *

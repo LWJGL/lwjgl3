@@ -196,7 +196,6 @@ public class VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures extends Struct 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures} instance allocated on the specified {@link MemoryStack}.
      *

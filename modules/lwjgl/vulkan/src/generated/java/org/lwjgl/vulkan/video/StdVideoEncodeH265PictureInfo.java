@@ -216,7 +216,6 @@ public class StdVideoEncodeH265PictureInfo extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoEncodeH265PictureInfo} instance allocated on the specified {@link MemoryStack}.
      *

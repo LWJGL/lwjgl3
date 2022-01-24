@@ -175,7 +175,6 @@ public class LARGE_INTEGER extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code LARGE_INTEGER} instance allocated on the specified {@link MemoryStack}.
      *

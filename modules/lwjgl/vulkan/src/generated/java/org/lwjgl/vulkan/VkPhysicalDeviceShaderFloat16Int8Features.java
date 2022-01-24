@@ -207,7 +207,6 @@ public class VkPhysicalDeviceShaderFloat16Int8Features extends Struct implements
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceShaderFloat16Int8Features} instance allocated on the specified {@link MemoryStack}.
      *

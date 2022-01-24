@@ -232,7 +232,6 @@ public class OpusHead extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code OpusHead} instance allocated on the specified {@link MemoryStack}.
      *

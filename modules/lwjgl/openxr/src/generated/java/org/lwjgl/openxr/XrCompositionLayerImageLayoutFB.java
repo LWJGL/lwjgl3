@@ -205,7 +205,6 @@ public class XrCompositionLayerImageLayoutFB extends Struct implements NativeRes
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrCompositionLayerImageLayoutFB} instance allocated on the specified {@link MemoryStack}.
      *

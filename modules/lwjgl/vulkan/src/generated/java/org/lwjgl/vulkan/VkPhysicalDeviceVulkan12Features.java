@@ -702,7 +702,6 @@ public class VkPhysicalDeviceVulkan12Features extends Struct implements NativeRe
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceVulkan12Features} instance allocated on the specified {@link MemoryStack}.
      *

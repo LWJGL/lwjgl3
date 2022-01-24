@@ -188,7 +188,6 @@ public class VkVideoEncodeH265FrameSizeEXT extends Struct implements NativeResou
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoEncodeH265FrameSizeEXT} instance allocated on the specified {@link MemoryStack}.
      *

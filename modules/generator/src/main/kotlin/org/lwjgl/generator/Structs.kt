@@ -1149,9 +1149,9 @@ $indentation}"""
     /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
     @Deprecated public static $className.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }""")
                 }
+                println()
             }
             print("""
-
     /**
      * Returns a new {@code $className} instance allocated on the specified {@link MemoryStack}.
      *

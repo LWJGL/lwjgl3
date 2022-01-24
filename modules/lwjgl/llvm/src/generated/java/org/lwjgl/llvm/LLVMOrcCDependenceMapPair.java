@@ -175,7 +175,6 @@ public class LLVMOrcCDependenceMapPair extends Struct implements NativeResource 
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code LLVMOrcCDependenceMapPair} instance allocated on the specified {@link MemoryStack}.
      *

@@ -157,7 +157,6 @@ public class XrGraphicsRequirementsVulkan2KHR extends XrGraphicsRequirementsVulk
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrGraphicsRequirementsVulkan2KHR} instance allocated on the specified {@link MemoryStack}.
      *

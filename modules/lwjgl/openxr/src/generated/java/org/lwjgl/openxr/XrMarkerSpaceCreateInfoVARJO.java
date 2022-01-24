@@ -210,7 +210,6 @@ public class XrMarkerSpaceCreateInfoVARJO extends Struct implements NativeResour
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code XrMarkerSpaceCreateInfoVARJO} instance allocated on the specified {@link MemoryStack}.
      *

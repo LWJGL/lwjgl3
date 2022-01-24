@@ -230,7 +230,6 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkCopyAccelerationStructureToMemoryInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

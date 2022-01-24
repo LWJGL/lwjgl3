@@ -192,7 +192,6 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkQueueFamilyCheckpointProperties2NV} instance allocated on the specified {@link MemoryStack}.
      *

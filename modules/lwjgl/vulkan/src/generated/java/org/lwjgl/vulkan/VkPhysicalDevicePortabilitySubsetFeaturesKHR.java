@@ -350,7 +350,6 @@ public class VkPhysicalDevicePortabilitySubsetFeaturesKHR extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDevicePortabilitySubsetFeaturesKHR} instance allocated on the specified {@link MemoryStack}.
      *

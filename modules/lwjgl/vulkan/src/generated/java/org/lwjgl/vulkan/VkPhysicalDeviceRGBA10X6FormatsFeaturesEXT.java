@@ -196,7 +196,6 @@ public class VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT extends Struct implement
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

@@ -296,7 +296,6 @@ public class VkCopyBufferToImageInfo2KHR extends Struct implements NativeResourc
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkCopyBufferToImageInfo2KHR} instance allocated on the specified {@link MemoryStack}.
      *

@@ -196,7 +196,6 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceColorWriteEnableFeaturesEXT} instance allocated on the specified {@link MemoryStack}.
      *

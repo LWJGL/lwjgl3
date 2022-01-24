@@ -203,7 +203,6 @@ public class Flock extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code Flock} instance allocated on the specified {@link MemoryStack}.
      *

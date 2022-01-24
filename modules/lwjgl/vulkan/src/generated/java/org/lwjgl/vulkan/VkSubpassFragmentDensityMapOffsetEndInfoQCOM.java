@@ -228,7 +228,6 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkSubpassFragmentDensityMapOffsetEndInfoQCOM} instance allocated on the specified {@link MemoryStack}.
      *

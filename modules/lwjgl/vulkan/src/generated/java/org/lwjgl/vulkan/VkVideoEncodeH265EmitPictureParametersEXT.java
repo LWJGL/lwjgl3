@@ -246,7 +246,6 @@ public class VkVideoEncodeH265EmitPictureParametersEXT extends Struct implements
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkVideoEncodeH265EmitPictureParametersEXT} instance allocated on the specified {@link MemoryStack}.
      *

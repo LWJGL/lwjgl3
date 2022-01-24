@@ -170,7 +170,6 @@ public class VkSemaphoreWaitInfoKHR extends VkSemaphoreWaitInfo {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkSemaphoreWaitInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

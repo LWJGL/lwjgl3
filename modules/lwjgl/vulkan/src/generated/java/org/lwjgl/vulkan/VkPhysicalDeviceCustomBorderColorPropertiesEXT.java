@@ -192,7 +192,6 @@ public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct imple
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceCustomBorderColorPropertiesEXT} instance allocated on the specified {@link MemoryStack}.
      *

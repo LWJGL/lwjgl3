@@ -198,7 +198,6 @@ public class VkAccelerationStructureDeviceAddressInfoKHR extends Struct implemen
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkAccelerationStructureDeviceAddressInfoKHR} instance allocated on the specified {@link MemoryStack}.
      *

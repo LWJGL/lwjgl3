@@ -248,7 +248,6 @@ public class VkDeviceMemoryReportCallbackDataEXT extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkDeviceMemoryReportCallbackDataEXT} instance allocated on the specified {@link MemoryStack}.
      *

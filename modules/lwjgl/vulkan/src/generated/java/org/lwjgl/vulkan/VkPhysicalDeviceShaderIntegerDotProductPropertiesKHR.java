@@ -522,7 +522,6 @@ public class VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR extends Struct
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR} instance allocated on the specified {@link MemoryStack}.
      *

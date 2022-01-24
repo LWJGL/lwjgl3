@@ -200,7 +200,6 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoH265DecPicBufMgr} instance allocated on the specified {@link MemoryStack}.
      *

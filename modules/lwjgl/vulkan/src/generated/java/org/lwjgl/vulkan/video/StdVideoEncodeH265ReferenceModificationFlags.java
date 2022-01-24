@@ -168,7 +168,6 @@ public class StdVideoEncodeH265ReferenceModificationFlags extends Struct impleme
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoEncodeH265ReferenceModificationFlags} instance allocated on the specified {@link MemoryStack}.
      *

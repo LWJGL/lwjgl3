@@ -168,7 +168,6 @@ public class StdVideoDecodeH265ReferenceInfoFlags extends Struct implements Nati
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code StdVideoDecodeH265ReferenceInfoFlags} instance allocated on the specified {@link MemoryStack}.
      *

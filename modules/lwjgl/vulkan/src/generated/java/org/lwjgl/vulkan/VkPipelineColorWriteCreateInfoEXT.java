@@ -222,7 +222,6 @@ public class VkPipelineColorWriteCreateInfoEXT extends Struct implements NativeR
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code VkPipelineColorWriteCreateInfoEXT} instance allocated on the specified {@link MemoryStack}.
      *

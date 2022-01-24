@@ -322,7 +322,6 @@ public class IOURingParams extends Struct implements NativeResource {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-
     /**
      * Returns a new {@code IOURingParams} instance allocated on the specified {@link MemoryStack}.
      *
