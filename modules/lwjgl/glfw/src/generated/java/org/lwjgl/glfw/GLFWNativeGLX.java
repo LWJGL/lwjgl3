@@ -26,8 +26,9 @@ public class GLFWNativeGLX {
 
         /** Function address. */
         public static final long
-            GetGLXContext = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXContext"),
-            GetGLXWindow  = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXWindow");
+            GetGLXContext  = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXContext"),
+            GetGLXWindow   = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXWindow"),
+            GetGLXFBConfig = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetGLXFBConfig");
 
     }
 
@@ -77,6 +78,30 @@ public class GLFWNativeGLX {
     @NativeType("GLXWindow")
     public static long glfwGetGLXWindow(@NativeType("GLFWwindow *") long window) {
         long __functionAddress = Functions.GetGLXWindow;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePP(window, __functionAddress);
+    }
+
+    // --- [ glfwGetGLXFBConfig ] ---
+
+    /**
+     * Returns the {@code GLXFBConfig} that was chosen to create the specified window.
+     * 
+     * <p>This function may be called from any thread. Access is not synchronized.</p>
+     *
+     * @param window a GLFW window
+     *
+     * @return the {@code GLXFBConfig} that was chosen to create the specified window, or {@code NULL} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
+     *
+     * @since version 3.4
+     */
+    @NativeType("GLXWindow")
+    public static long glfwGetGLXFBConfig(@NativeType("GLFWwindow *") long window) {
+        long __functionAddress = Functions.GetGLXFBConfig;
         if (CHECKS) {
             check(window);
         }
