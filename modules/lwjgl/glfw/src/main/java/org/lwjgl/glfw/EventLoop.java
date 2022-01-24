@@ -43,7 +43,7 @@ final class EventLoop {
     }
 
     private static boolean isMainThread() {
-        if (!Configuration.GLFW_CHECK_THREAD0.get(true)) {
+        if (!Configuration.GLFW_CHECK_THREAD0.get(true) || Configuration.GLFW_LIBRARY_NAME.get("").contains("glfw_async")) {
             return true;
         }
 
