@@ -248,7 +248,7 @@ val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = f
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code type} <b>must</b> be #TYPE_SYSTEM_PROPERTIES</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSystemColorSpacePropertiesFB, ##XrSystemEyeGazeInteractionPropertiesEXT, ##XrSystemFoveatedRenderingPropertiesVARJO, ##XrSystemHandTrackingMeshPropertiesMSFT, ##XrSystemHandTrackingPropertiesEXT, ##XrSystemMarkerTrackingPropertiesVARJO, ##XrSystemPassthroughPropertiesFB, ##XrSystemSpaceWarpPropertiesFB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSystemColorSpacePropertiesFB, ##XrSystemEyeGazeInteractionPropertiesEXT, ##XrSystemFacialTrackingPropertiesHTC, ##XrSystemFoveatedRenderingPropertiesVARJO, ##XrSystemHandTrackingMeshPropertiesMSFT, ##XrSystemHandTrackingPropertiesEXT, ##XrSystemKeyboardTrackingPropertiesFB, ##XrSystemMarkerTrackingPropertiesVARJO, ##XrSystemPassthroughPropertiesFB, ##XrSystemRenderModelPropertiesFB, ##XrSystemSpaceWarpPropertiesFB</li>
         </ul>
 
         <h5>See Also</h5>
@@ -257,7 +257,7 @@ val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = f
 
     Expression("#TYPE_SYSTEM_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
     PointerSetter(
-        "XrSystemColorSpacePropertiesFB", "XrSystemEyeGazeInteractionPropertiesEXT", "XrSystemFoveatedRenderingPropertiesVARJO", "XrSystemHandTrackingMeshPropertiesMSFT", "XrSystemHandTrackingPropertiesEXT", "XrSystemMarkerTrackingPropertiesVARJO", "XrSystemPassthroughPropertiesFB", "XrSystemSpaceWarpPropertiesFB",
+        "XrSystemColorSpacePropertiesFB", "XrSystemEyeGazeInteractionPropertiesEXT", "XrSystemFacialTrackingPropertiesHTC", "XrSystemFoveatedRenderingPropertiesVARJO", "XrSystemHandTrackingMeshPropertiesMSFT", "XrSystemHandTrackingPropertiesEXT", "XrSystemKeyboardTrackingPropertiesFB", "XrSystemMarkerTrackingPropertiesVARJO", "XrSystemPassthroughPropertiesFB", "XrSystemRenderModelPropertiesFB", "XrSystemSpaceWarpPropertiesFB",
         prepend = true
     )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     XrSystemId("systemId", "the {@code XrSystemId} identifying the system.")
@@ -307,7 +307,7 @@ val XrVector3f = struct(Module.OPENXR, "XrVector3f") {
         If used to represent physical distances (rather than e.g. velocity or angular velocity) and not otherwise specified, values <b>must</b> be in meters.
 
         <h5>See Also</h5>
-        ##XrCompositionLayerReprojectionPlaneOverrideMSFT, ##XrGeometryInstanceCreateInfoFB, ##XrGeometryInstanceTransformFB, ##XrHandCapsuleFB, ##XrHandJointVelocityEXT, ##XrHandMeshVertexMSFT, ##XrHandTrackingMeshFB, ##XrPosef, ##XrQuaternionf, ##XrSceneMeshVertexBufferMSFT, ##XrSceneOrientedBoxBoundMSFT, ##XrSceneSphereBoundMSFT, ##XrSpaceVelocity, ##XrTriangleMeshCreateInfoFB, ##XrVector2f, ##XrVector4f, #TriangleMeshGetVertexBufferFB()
+        ##XrCompositionLayerReprojectionPlaneOverrideMSFT, ##XrGeometryInstanceCreateInfoFB, ##XrGeometryInstanceTransformFB, ##XrHandCapsuleFB, ##XrHandJointVelocityEXT, ##XrHandMeshVertexMSFT, ##XrHandTrackingMeshFB, ##XrKeyboardTrackingDescriptionFB, ##XrPosef, ##XrQuaternionf, ##XrSceneMeshVertexBufferMSFT, ##XrSceneOrientedBoxBoundMSFT, ##XrSceneSphereBoundMSFT, ##XrSpaceVelocity, ##XrTriangleMeshCreateInfoFB, ##XrVector2f, ##XrVector4f, #TriangleMeshGetVertexBufferFB()
         """
 
     float("x", "the x coordinate of the vector.")
@@ -1602,7 +1602,7 @@ val XrEventDataInstanceLossPending = struct(Module.OPENXR, "XrEventDataInstanceL
         Event indicating instance loss will occur.
 
         <h5>Description</h5>
-        After the application has destroyed all of its instances and their children and waited past the specified time, it may then re-try #CreateInstance() in a loop waiting for whatever maintenance the runtime is performing to complete. The runtime will return #ERROR_INSTANCE_LOST from #CreateInstance() as long as it is unable to create the instance. Once the runtime has returned and is able to continue, it <b>must</b> resume returning #SUCCESS from #CreateInstance() if valid data is passed in.
+        After the application has destroyed all of its instances and their children and waited past the specified time, it may then re-try #CreateInstance() in a loop waiting for whatever maintenance the runtime is performing to complete. The runtime will return #ERROR_RUNTIME_UNAVAILABLE from #CreateInstance() as long as it is unable to create the instance. Once the runtime has returned and is able to continue, it <b>must</b> resume returning #SUCCESS from #CreateInstance() if valid data is passed in.
 
         <h5>Member Descriptions</h5>
         <ul>

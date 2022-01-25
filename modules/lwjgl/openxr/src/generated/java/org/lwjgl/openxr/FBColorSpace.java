@@ -37,9 +37,9 @@ public class FBColorSpace {
      * 
      * <ul>
      * <li>{@link #XR_COLOR_SPACE_UNMANAGED_FB COLOR_SPACE_UNMANAGED_FB}. No color correction, not recommended for production use.</li>
-     * <li>{@link #XR_COLOR_SPACE_REC2020_FB COLOR_SPACE_REC2020_FB}. Standard Rec. 2020 chromacities. This is the preferred color space for standardized color across all Oculus HMDs with D65 white point.</li>
+     * <li>{@link #XR_COLOR_SPACE_REC2020_FB COLOR_SPACE_REC2020_FB}. Standard Rec. 2020 chromacities with D65 white point.</li>
      * <li>{@link #XR_COLOR_SPACE_REC709_FB COLOR_SPACE_REC709_FB}. Standard Rec. 709 chromaticities, similar to sRGB.</li>
-     * <li>{@link #XR_COLOR_SPACE_RIFT_CV1_FB COLOR_SPACE_RIFT_CV1_FB}. Unique color space, between P3 and Adobe RGB using D75 white point.
+     * <li>{@link #XR_COLOR_SPACE_RIFT_CV1_FB COLOR_SPACE_RIFT_CV1_FB}. Unique color space, between P3 and Adobe RGB using D75 white point. This is the preferred color space for standardized color across all Oculus HMDs.
      * Color Space Details with Chromacity Primaries in CIE 1931 xy:
      * 
      * <ul>
@@ -195,6 +195,10 @@ public class FBColorSpace {
      * <h5>Description</h5>
      * 
      * <p>{@link #xrSetColorSpaceFB SetColorSpaceFB} provides a mechanism for an application to specify the color space used in the final rendered frame. If this function is not called, the session will use the color space deemed appropriate by the runtime. Oculus HMDs for both PC and Mobile product lines default to {@link #XR_COLOR_SPACE_RIFT_CV1_FB COLOR_SPACE_RIFT_CV1_FB}. The runtime <b>must</b> return {@link #XR_ERROR_COLOR_SPACE_UNSUPPORTED_FB ERROR_COLOR_SPACE_UNSUPPORTED_FB} if {@code colorSpace} is not one of the values enumerated by {@link #xrEnumerateColorSpacesFB EnumerateColorSpacesFB}.</p>
+     * 
+     * <p>Formal definitions of color spaces contain a number of aspects such as gamma correction, max luminance and more. However, {@link #xrSetColorSpaceFB SetColorSpaceFB} will only affect the color gamut of the output by transforming the color gamut from the source (defined by the {@code colorSpace} parameter) to the HMD display’s color gamut (defined by the hardware internally). This call will not affect gamma correction, leaving that to follow the GPU texture format standards. Luminance, tonemapping, and other aspects of the color space will also remain unaffected.</p>
+     * 
+     * <p>For more info on color management in Oculus HMDs, please refer to this guide: <a target="_blank" href="https://developer.oculus.com/resources/color-management-guide/">Color Management in Oculus Headsets</a></p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

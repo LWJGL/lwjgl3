@@ -48,6 +48,7 @@ fun templateCustomization() {
     generateDispatchableHandle(XrActionSet, XrInstance)
     generateDispatchableHandle(XrAction, XrActionSet)
     generateDispatchableHandle(XrDebugUtilsMessengerEXT, XrInstance)
+    generateDispatchableHandle(XrFacialTrackerHTC, XrSession)
     generateDispatchableHandle(XrFoveationProfileFB, XrSession)
     generateDispatchableHandle(XrGeometryInstanceFB, XrSession)
     generateDispatchableHandle(XrHandTrackerEXT, XrSession)
@@ -61,6 +62,7 @@ fun templateCustomization() {
     generateDispatchableHandle(XrSpatialAnchorStoreConnectionMSFT, XrSession)
     generateDispatchableHandle(XrSwapchain, XrSession)
     generateDispatchableHandle(XrTriangleMeshFB, XrSession)
+
 
     XR10.apply {
         LongConstant(
@@ -209,6 +211,23 @@ fun templateCustomization() {
             "API Constants",
 
             "NULL_CONTROLLER_MODEL_KEY_MSFT"..0L
+        )
+    }
+
+    FB_render_model.apply {
+        LongConstant(
+            "API Constants",
+
+            "NULL_RENDER_MODEL_KEY_FB"..0L
+        )
+    }
+
+    HTC_facial_tracking.apply {
+        IntConstant(
+            "API Constants",
+
+            "FACIAL_EXPRESSION_EYE_COUNT_HTC"..14,
+            "FACIAL_EXPRESSION_LIP_COUNT_HTC"..37
         )
     }
 }

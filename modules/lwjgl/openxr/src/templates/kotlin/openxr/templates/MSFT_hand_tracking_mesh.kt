@@ -17,7 +17,7 @@ val MSFT_hand_tracking_mesh = "MSFTHandTrackingMesh".nativeClassXR("MSFT_hand_tr
     IntConstant(
         "The extension specification version.",
 
-        "MSFT_hand_tracking_mesh_SPEC_VERSION".."3"
+        "MSFT_hand_tracking_mesh_SPEC_VERSION".."4"
     )
 
     StringConstant(

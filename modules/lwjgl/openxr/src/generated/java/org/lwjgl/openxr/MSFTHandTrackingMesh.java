@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class MSFTHandTrackingMesh {
 
     /** The extension specification version. */
-    public static final int XR_MSFT_hand_tracking_mesh_SPEC_VERSION = 3;
+    public static final int XR_MSFT_hand_tracking_mesh_SPEC_VERSION = 4;
 
     /** The extension name. */
     public static final String XR_MSFT_HAND_TRACKING_MESH_EXTENSION_NAME = "XR_MSFT_hand_tracking_mesh";

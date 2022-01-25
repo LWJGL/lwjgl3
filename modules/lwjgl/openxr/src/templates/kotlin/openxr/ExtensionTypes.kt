@@ -18,6 +18,7 @@ val XrSpatialAnchorMSFT = XR_DEFINE_HANDLE("XrSpatialAnchorMSFT")
 val XrHandTrackerEXT = XR_DEFINE_HANDLE("XrHandTrackerEXT")
 val XrSceneObserverMSFT = XR_DEFINE_HANDLE("XrSceneObserverMSFT")
 val XrSceneMSFT = XR_DEFINE_HANDLE("XrSceneMSFT")
+val XrFacialTrackerHTC = XR_DEFINE_HANDLE("XrFacialTrackerHTC")
 val XrFoveationProfileFB = XR_DEFINE_HANDLE("XrFoveationProfileFB")
 val XrTriangleMeshFB = XR_DEFINE_HANDLE("XrTriangleMeshFB")
 val XrPassthroughFB = XR_DEFINE_HANDLE("XrPassthroughFB")
@@ -47,6 +48,9 @@ val XrSceneComponentTypeMSFT = "XrSceneComponentTypeMSFT".enumType
 val XrSceneObjectTypeMSFT = "XrSceneObjectTypeMSFT".enumType
 val XrScenePlaneAlignmentTypeMSFT = "XrScenePlaneAlignmentTypeMSFT".enumType
 val XrSceneComputeStateMSFT = "XrSceneComputeStateMSFT".enumType
+val XrEyeExpressionHTC = "XrEyeExpressionHTC".enumType
+val XrLipExpressionHTC = "XrLipExpressionHTC".enumType
+val XrFacialTrackingTypeHTC = "XrFacialTrackingTypeHTC".enumType
 val XrColorSpaceFB = "XrColorSpaceFB".enumType
 val XrFoveationLevelFB = "XrFoveationLevelFB".enumType
 val XrFoveationDynamicFB = "XrFoveationDynamicFB".enumType
@@ -65,10 +69,14 @@ val XrVulkanDeviceCreateFlagsKHR = typedef(XrFlags64, "XrVulkanDeviceCreateFlags
 val XrHandTrackingAimFlagsFB = typedef(XrFlags64, "XrHandTrackingAimFlagsFB")
 val XrSwapchainCreateFoveationFlagsFB = typedef(XrFlags64, "XrSwapchainCreateFoveationFlagsFB")
 val XrSwapchainStateFoveationFlagsFB = typedef(XrFlags64, "XrSwapchainStateFoveationFlagsFB")
+val XrKeyboardTrackingFlagsFB = typedef(XrFlags64, "XrKeyboardTrackingFlagsFB")
+val XrKeyboardTrackingQueryFlagsFB = typedef(XrFlags64, "XrKeyboardTrackingQueryFlagsFB")
 val XrTriangleMeshFlagsFB = typedef(XrFlags64, "XrTriangleMeshFlagsFB")
 val XrPassthroughFlagsFB = typedef(XrFlags64, "XrPassthroughFlagsFB")
 val XrPassthroughStateChangedFlagsFB = typedef(XrFlags64, "XrPassthroughStateChangedFlagsFB")
+val XrRenderModelFlagsFB = typedef(XrFlags64, "XrRenderModelFlagsFB")
 val XrCompositionLayerSpaceWarpInfoFlagsFB = typedef(XrFlags64, "XrCompositionLayerSpaceWarpInfoFlagsFB")
+val XrDigitalLensControlFlagsALMALENCE = typedef(XrFlags64, "XrDigitalLensControlFlagsALMALENCE")
 
 // Function pointer types
 val _XrDebugUtilsMessengerCallbackDataEXT = struct(Module.OPENXR, "XrDebugUtilsMessengerCallbackDataEXT")
@@ -1513,7 +1521,7 @@ val XrHandMeshMSFT = struct(Module.OPENXR, "XrHandMeshMSFT") {
 
         When the returned {@code isActive} value is #TRUE, the hand tracking mesh represented in {@code indexBuffer} and {@code vertexBuffer} are updated to the latest data of the {@code time} given to the #UpdateHandMeshMSFT() function. The runtime <b>must</b> set {@code indexBufferChanged} and {@code vertexBufferChanged} to reflect whether the index or vertex buffer’s content are changed during the update. In this way, the application can easily avoid unnecessary processing of buffers when there’s no new data.
 
-        The hand mesh is represented in triangle lists and each triangle’s vertices are in counter-clockwise order when looking from outside of the hand. When hand tracking is active, i.e. when {@code isActive} is returned as #TRUE, the returned {@code indexBuffer.indexCountOutput} value <b>must</b> be positive and multiple of 3, and {@code vertexBuffer.vertexCountOutput} value <b>must</b> be equal to or larger than 3.
+        The hand mesh is represented in triangle lists and each triangle’s vertices are in clockwise order when looking from outside of the hand. When hand tracking is active, i.e. when {@code isActive} is returned as #TRUE, the returned {@code indexBuffer.indexCountOutput} value <b>must</b> be positive and multiple of 3, and {@code vertexBuffer.vertexCountOutput} value <b>must</b> be equal to or larger than 3.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -3093,6 +3101,95 @@ val XrEventDataViveTrackerConnectedHTCX = struct(Module.OPENXR, "XrEventDataVive
     XrViveTrackerPathsHTCX.p("paths", "contains two paths of the connected VIVE tracker.")
 }
 
+val XrSystemFacialTrackingPropertiesHTC = struct(Module.OPENXR, "XrSystemFacialTrackingPropertiesHTC") {
+    documentation =
+        """
+        System property for facial tracking.
+
+        <h5>Description</h5>
+        An application <b>can</b> inspect whether the system is capable of two of the facial tracking by extending the ##XrSystemProperties with ##XrSystemFacialTrackingPropertiesHTC structure when calling #GetSystemProperties().
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link HTCFacialTracking XR_HTC_facial_tracking} extension <b>must</b> be enabled prior to using ##XrSystemFacialTrackingPropertiesHTC</li>
+            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        If a runtime returns #FALSE for {@code supportEyeFacialTracking}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFacialTrackerHTC() with #FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC set for {@code XrFacialTrackingTypeHTC} in ##XrFacialTrackerCreateInfoHTC. Similarly, if a runtime returns #FALSE for {@code supportLipFacialTracking} the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFacialTrackerHTC() with #FACIAL_TRACKING_TYPE_LIP_DEFAULT_HTC set for {@code XrFacialTrackingTypeHTC} in ##XrFacialTrackerCreateInfoHTC.
+        """
+
+    Expression("#TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    XrBool32("supportEyeFacialTracking", "indicates if the current system is capable of generating eye expressions.")
+    XrBool32("supportLipFacialTracking", "indicates if the current system is capable of generating lip expressions.")
+}
+
+val XrFacialExpressionsHTC = struct(Module.OPENXR, "XrFacialExpressionsHTC") {
+    documentation =
+        """
+        Returns the expression data.
+
+        <h5>Description</h5>
+        ##XrFacialExpressionsHTC structure returns data of a lip facial expression or an eye facial expression.
+
+        An application <b>must</b> preallocate the output {@code expressionWeightings} array that can contain at least {@code expressionCount} of {@code float}. {@code expressionCount} <b>must</b> be at least #FACIAL_EXPRESSION_LIP_COUNT_HTC for #FACIAL_TRACKING_TYPE_LIP_DEFAULT_HTC, and at least #FACIAL_EXPRESSION_EYE_COUNT_HTC for #FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC.
+
+        The application <b>must</b> set {@code expressionCount} as described by the {@code XrFacialTrackingTypeHTC} when creating the {@code XrFacialTrackerHTC} otherwise the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
+
+        The runtime <b>must</b> update the {@code expressionWeightings} array ordered so that the application can index elements using the corresponding facial tracker enum (e.g. {@code XrEyeExpressionHTC} or {@code XrLipExpressionHTC}) as described by {@code XrFacialTrackingTypeHTC} when creating the {@code XrFacialTrackerHTC}. For example, when the {@code XrFacialTrackerHTC} is created with {@code facialTrackingType} set to #FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC, the application <b>must</b> set the {@code expressionCount} to #FACIAL_EXPRESSION_EYE_COUNT_HTC, and the runtime <b>must</b> fill the {@code expressionWeightings} array ordered with eye expression data so that it can be indexed by the {@code XrEyeExpressionHTC} enum.
+
+        If the returned {@code isActive} is true, the runtime <b>must</b> fill the {@code expressionWeightings} array ordered.
+
+        If the returned {@code isActive} is false, it indicates the facial tracker did not detect the corresponding facial input or the application lost input focus.
+
+        If the input {@code expressionCount} is not sufficient to contain all output indices, the runtime <b>must</b> return #ERROR_SIZE_INSUFFICIENT on calls to #GetFacialExpressionsHTC() and not change the content in {@code expressionWeightings}.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link HTCFacialTracking XR_HTC_facial_tracking} extension <b>must</b> be enabled prior to using ##XrFacialExpressionsHTC</li>
+            <li>{@code type} <b>must</b> be #TYPE_FACIAL_EXPRESSIONS_HTC</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code expressionWeightings} <b>must</b> be a pointer to a {@code float} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetFacialExpressionsHTC()
+        """
+
+    Expression("#TYPE_FACIAL_EXPRESSIONS_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    XrBool32("isActive", "an {@code XrBool32} indicating if the facial tracker is active.")
+    XrTime("sampleTime", "when in time the expression is expressed.")
+    uint32_t("expressionCount", "a {@code uint32_t} describing the count of elements in {@code expressionWeightings} array.")
+    float.p("expressionWeightings", "a {@code float} array filled in by the runtime, specifying the weightings for each blend shape.")
+}
+
+val XrFacialTrackerCreateInfoHTC = struct(Module.OPENXR, "XrFacialTrackerCreateInfoHTC") {
+    documentation =
+        """
+        Information to create a facial tracker handle.
+
+        <h5>Description</h5>
+        The ##XrFacialTrackerCreateInfoHTC structure describes the information to create an {@code XrFacialTrackerHTC} handle.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link HTCFacialTracking XR_HTC_facial_tracking} extension <b>must</b> be enabled prior to using ##XrFacialTrackerCreateInfoHTC</li>
+            <li>{@code type} <b>must</b> be #TYPE_FACIAL_TRACKER_CREATE_INFO_HTC</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code facialTrackingType} <b>must</b> be a valid {@code XrFacialTrackingTypeHTC} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CreateFacialTrackerHTC()
+        """
+
+    Expression("#TYPE_FACIAL_TRACKER_CREATE_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    XrFacialTrackingTypeHTC("facialTrackingType", "an {@code XrFacialTrackingTypeHTC} which describes which type of facial tracking should be used for this handle.")
+}
+
 val XrSystemColorSpacePropertiesFB = struct(Module.OPENXR, "XrSystemColorSpacePropertiesFB") {
     documentation =
         """
@@ -3371,6 +3468,104 @@ val XrFoveationLevelProfileCreateInfoFB = struct(Module.OPENXR, "XrFoveationLeve
     XrFoveationLevelFB("level", "the maximum desired foveation level.")
     float("verticalOffset", "the desired vertical offset in degrees for the center of the foveation pattern.")
     XrFoveationDynamicFB("dynamic", "the desired dynamic foveation setting.")
+}
+
+val XrSystemKeyboardTrackingPropertiesFB = struct(Module.OPENXR, "XrSystemKeyboardTrackingPropertiesFB") {
+    documentation =
+        """
+        Information from the system about tracked keyboard support.
+
+        <h5>Description</h5>
+        ##XrSystemKeyboardTrackingPropertiesFB is populated with information from the system about tracked keyboard support.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBKeyboardTracking XR_FB_keyboard_tracking} extension <b>must</b> be enabled prior to using ##XrSystemKeyboardTrackingPropertiesFB</li>
+            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrSystemProperties
+        """
+
+    Expression("#TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrBool32("supportsKeyboardTracking", "defines whether the system supports the tracked keyboard feature.")
+}
+
+val XrKeyboardTrackingDescriptionFB = struct(Module.OPENXR, "XrKeyboardTrackingDescriptionFB", mutable = false) {
+    javaImport("static org.lwjgl.openxr.FBKeyboardTracking.*")
+    documentation =
+        """
+        Description of a trackable keyboard.
+
+        <h5>Description</h5>
+        ##XrKeyboardTrackingDescriptionFB describes a trackable keyboard and its associated metadata.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBKeyboardTracking XR_FB_keyboard_tracking} extension <b>must</b> be enabled prior to using ##XrKeyboardTrackingDescriptionFB</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrVector3f, #QuerySystemTrackedKeyboardFB()
+        """
+
+    uint64_t("trackedKeyboardId", "abstract identifier describing the type of keyboard.")
+    XrVector3f("size", "bounding box.")
+    XrKeyboardTrackingFlagsFB("flags", "additional information on the type of keyboard available. If #KEYBOARD_TRACKING_EXISTS_BIT_FB is not set there is no keyboard.")
+    charUTF8("name", "human readable keyboard identifier.")["XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB"]
+}
+
+val XrKeyboardSpaceCreateInfoFB = struct(Module.OPENXR, "XrKeyboardSpaceCreateInfoFB") {
+    documentation =
+        """
+        Input data needed by the system to start tracking a keyboard.
+
+        <h5>Description</h5>
+        ##XrKeyboardSpaceCreateInfoFB describes a request for the system needed to create a trackable {@code XrSpace} associated with the keyboard.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBKeyboardTracking XR_FB_keyboard_tracking} extension <b>must</b> be enabled prior to using ##XrKeyboardSpaceCreateInfoFB</li>
+            <li>{@code type} <b>must</b> be #TYPE_KEYBOARD_SPACE_CREATE_INFO_FB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        #CreateKeyboardSpaceFB()
+        """
+
+    Expression("#TYPE_KEYBOARD_SPACE_CREATE_INFO_FB")..XrStructureType("type", "")
+    nullable..opaque_p("next", "")
+    uint64_t("trackedKeyboardId", "abstract identifier describing the type of keyboard to track.")
+}
+
+val XrKeyboardTrackingQueryFB = struct(Module.OPENXR, "XrKeyboardTrackingQueryFB") {
+    documentation =
+        """
+        Input data needed to determine which type of tracked keyboard to query for.
+
+        <h5>Description</h5>
+        ##XrKeyboardTrackingQueryFB specifies input data needed to determine which type of tracked keyboard to query for.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBKeyboardTracking XR_FB_keyboard_tracking} extension <b>must</b> be enabled prior to using ##XrKeyboardTrackingQueryFB</li>
+            <li>{@code type} <b>must</b> be #TYPE_KEYBOARD_TRACKING_QUERY_FB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code XrKeyboardTrackingQueryFlagBitsFB} values</li>
+            <li>{@code flags} <b>must</b> not be 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #QuerySystemTrackedKeyboardFB()
+        """
+
+    Expression("#TYPE_KEYBOARD_TRACKING_QUERY_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrKeyboardTrackingQueryFlagsFB("flags", "a bitmask of {@code XrKeyboardTrackingQueryFlagsFB}.")
 }
 
 val XrTriangleMeshCreateInfoFB = struct(Module.OPENXR, "XrTriangleMeshCreateInfoFB") {
@@ -3719,6 +3914,157 @@ val XrEventDataPassthroughStateChangedFB = struct(Module.OPENXR, "XrEventDataPas
     Expression("#TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB")..XrStructureType("type", "")
     nullable..opaque_const_p("next", "")
     XrPassthroughStateChangedFlagsFB("flags", "")
+}
+
+val XrRenderModelPathInfoFB = struct(Module.OPENXR, "XrRenderModelPathInfoFB") {
+    documentation =
+        """
+        Supported model paths.
+
+        <h5>Description</h5>
+        ##XrRenderModelPathInfoFB contains a model path supported by the device when returned from #EnumerateRenderModelPathsFB(). This path can be used to request information about the render model for the connected device that the path represents using #GetRenderModelPropertiesFB().
+
+        <h5>Possible Render Model Paths</h5>
+        <ul>
+            <li>
+                Controller models with origin at the grip pose.
+                <ul>
+                    <li>pathname:/model_fb/controller/left</li>
+                    <li>pathname:/model_fb/controller/right</li>
+                </ul>
+            </li>
+            <li>
+                Keyboard models with origin at the center of its bounding box.
+                <ul>
+                    <li>pathname:/model_fb/keyboard/local</li>
+                    <li>pathname:/model_fb/keyboard/remote</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrRenderModelPathInfoFB</li>
+            <li>{@code type} <b>must</b> be #TYPE_RENDER_MODEL_PATH_INFO_FB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        #EnumerateRenderModelPathsFB()
+        """
+
+    Expression("#TYPE_RENDER_MODEL_PATH_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    XrPath("path", "a valid {@code XrPath} used for retrieving model properties from #GetRenderModelPropertiesFB().")
+}
+
+val XrRenderModelPropertiesFB = struct(Module.OPENXR, "XrRenderModelPropertiesFB") {
+    javaImport("static org.lwjgl.openxr.FBRenderModel.*")
+    documentation =
+        """
+        The information about the render model.
+
+        <h5>Description</h5>
+        ##XrRenderModelPropertiesFB contains information about the render model for a device. ##XrRenderModelPropertiesFB <b>must</b> be provided when calling #GetRenderModelPropertiesFB(). The {@code XrRenderModelKeyFB} included in the properties is a unique key for each render model that is valid across multiple instances and installs.
+
+        If the application decides to cache or save the render model in any way, {@code modelVersion} can be used to determine if the render model has changed. The application <b>should</b> then update its cached or saved version.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrRenderModelPropertiesFB</li>
+            <li>{@code type} <b>must</b> be #TYPE_RENDER_MODEL_PROPERTIES_FB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code modelName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to XR_MAX_RENDER_MODEL_NAME_SIZE_FB</li>
+            <li>{@code flags} <b>must</b> be 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetRenderModelPropertiesFB()
+        """
+
+    Expression("#TYPE_RENDER_MODEL_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    uint32_t("vendorId", "the vendor id of the model.")
+    charUTF8("modelName", "the name of the model.")["XR_MAX_RENDER_MODEL_NAME_SIZE_FB"]
+    XrRenderModelKeyFB("modelKey", "the unique model key used to load the model in #LoadRenderModelFB().")
+    uint32_t("modelVersion", "the version number of the model.")
+    XrRenderModelFlagsFB("flags", "a bitmask of {@code XrRenderModelFlagsFB}.")
+}
+
+val XrRenderModelBufferFB = struct(Module.OPENXR, "XrRenderModelBufferFB") {
+    documentation =
+        """
+        The buffer containing the data for the render model.
+
+        <h5>Description</h5>
+        ##XrRenderModelBufferFB is used when loading the binary data for a render model. ##XrRenderModelBufferFB <b>must</b> be provided when calling #LoadRenderModelFB().
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrRenderModelBufferFB</li>
+            <li>{@code type} <b>must</b> be #TYPE_RENDER_MODEL_BUFFER_FB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>If {@code bufferCapacityInput} is not 0, {@code buffer} <b>must</b> be a pointer to an array of {@code bufferCapacityInput} {@code uint8_t} values</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #LoadRenderModelFB()
+        """
+
+    Expression("#TYPE_RENDER_MODEL_BUFFER_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    AutoSize("buffer", optional = true)..uint32_t("bufferCapacityInput", "the capacity of the {@code buffer}, or 0 to retrieve the required capacity.")
+    uint32_t("bufferCountOutput", "the count of {@code uint8_t} {@code buffer} written, or the required capacity in the case that {@code bufferCapacityInput} is 0.")
+    nullable..uint8_t.p("buffer", "a pointer to an application-allocated array that will be filled with the render model binary data.")
+}
+
+val XrRenderModelLoadInfoFB = struct(Module.OPENXR, "XrRenderModelLoadInfoFB") {
+    documentation =
+        """
+        The information for which render model to load.
+
+        <h5>Description</h5>
+        ##XrRenderModelLoadInfoFB is used to provide information about which render model to load. ##XrRenderModelLoadInfoFB <b>must</b> be provided when calling #LoadRenderModelFB().
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrRenderModelLoadInfoFB</li>
+            <li>{@code type} <b>must</b> be #TYPE_RENDER_MODEL_LOAD_INFO_FB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        #LoadRenderModelFB()
+        """
+
+    Expression("#TYPE_RENDER_MODEL_LOAD_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    XrRenderModelKeyFB("modelKey", "the unique model key for a connected device.")
+}
+
+val XrSystemRenderModelPropertiesFB = struct(Module.OPENXR, "XrSystemRenderModelPropertiesFB") {
+    documentation =
+        """
+        A render model system property.
+
+        <h5>Member Descriptions</h5>
+        <ul>
+            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
+            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
+            <li>{@code supportsRenderModelLoading} defines whether the system supports loading render models.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrSystemRenderModelPropertiesFB</li>
+            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+        """
+
+    Expression("#TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB")..XrStructureType("type", "")
+    nullable..opaque_p("next", "")
+    XrBool32("supportsRenderModelLoading", "")
 }
 
 val XrBindingModificationBaseHeaderKHR = struct(Module.OPENXR, "XrBindingModificationBaseHeaderKHR") {
@@ -4211,4 +4557,74 @@ val XrSystemSpaceWarpPropertiesFB = struct(Module.OPENXR, "XrSystemSpaceWarpProp
     nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
     uint32_t("recommendedMotionVectorImageRectWidth", "recommended motion vector and depth image width")
     uint32_t("recommendedMotionVectorImageRectHeight", "recommended motion vector and depth image height")
+}
+
+val XrDigitalLensControlALMALENCE = struct(Module.OPENXR, "XrDigitalLensControlALMALENCE") {
+    documentation =
+        """
+        The digital lens control structure to be passed to change state of DLVR API Layer.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link ALMALENCEDigitalLensControl XR_ALMALENCE_digital_lens_control} extension <b>must</b> be enabled prior to using ##XrDigitalLensControlALMALENCE</li>
+            <li>{@code type} <b>must</b> be #TYPE_DIGITAL_LENS_CONTROL_ALMALENCE</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code XrDigitalLensControlFlagBitsALMALENCE} values</li>
+            <li>{@code flags} <b>must</b> not be 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #SetDigitalLensControlALMALENCE()
+        """
+
+    Expression("#TYPE_DIGITAL_LENS_CONTROL_ALMALENCE")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "must be {@code NULL}. No such structures are defined in core OpenXR or this extension.")
+    XrDigitalLensControlFlagsALMALENCE("flags", "a bitmask of {@code XrDigitalLensControlFlagBitsALMALENCE} indicating various characteristics desired for the Digital Lens.")
+}
+
+val XrPassthroughKeyboardHandsIntensityFB = struct(Module.OPENXR, "XrPassthroughKeyboardHandsIntensityFB") {
+    documentation =
+        """
+        A struct for setting the level of intensity for hands in the passthrough layer.
+
+        <h5>Description</h5>
+        ##XrPassthroughKeyboardHandsIntensityFB describes intensities of passthrough hands, and is used as a parameter to #PassthroughLayerSetKeyboardHandsIntensityFB().
+
+        Each of the intensity values {@code leftHandIntensity} and {@code rightHandIntensity} <b>must</b> be in the range [0.0, 1.0]. The hand intensity value represents the level of visibility of rendered hand, the minimal value of the intensity 0.0 represents the fully transparent hand (not visible), the maximal value of 1.0 represented fully opaque hands (maximal visibility).
+
+        If either {@code leftHandIntensity} or {@code rightHandIntensity} is outside the range [0.0, 1.0], the runtime must return #ERROR_VALIDATION_FAILURE.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBPassthroughKeyboardHands XR_FB_passthrough_keyboard_hands} extension <b>must</b> be enabled prior to using ##XrPassthroughKeyboardHandsIntensityFB</li>
+            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+
+        <h5>See Also</h5>
+        #PassthroughLayerSetKeyboardHandsIntensityFB()
+        """
+
+    Expression("#TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    float("leftHandIntensity", "defines an intensity for the left tracked hand.")
+    float("rightHandIntensity", "defines an intensity for the right tracked hand.")
+}
+
+val XrUuidEXT = struct(Module.OPENXR, "XrUuidEXT") {
+    javaImport("static org.lwjgl.openxr.EXTUUIUD.*")
+    documentation =
+        """
+        Universally Unique Identifier.
+
+        <h5>Description</h5>
+        The structure is composed of 16 octets, with the size and order of the fields defined in <a target="_blank" href="https://www.rfc-editor.org/rfc/rfc4122.html\#section-4.1.2">RFC 4122 section 4.1.2</a>.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link EXTUUIUD XR_EXT_uuid} extension <b>must</b> be enabled prior to using ##XrUuidEXT</li>
+        </ul>
+        """
+
+    uint8_t("data", "a 128-bit Universally Unique Identifier.")["XR_UUID_SIZE_EXT"]
 }

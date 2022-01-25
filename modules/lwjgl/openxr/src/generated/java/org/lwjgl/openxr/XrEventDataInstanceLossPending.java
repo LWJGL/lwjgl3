@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>After the application has destroyed all of its instances and their children and waited past the specified time, it may then re-try {@link XR10#xrCreateInstance CreateInstance} in a loop waiting for whatever maintenance the runtime is performing to complete. The runtime will return {@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST} from {@link XR10#xrCreateInstance CreateInstance} as long as it is unable to create the instance. Once the runtime has returned and is able to continue, it <b>must</b> resume returning {@link XR10#XR_SUCCESS SUCCESS} from {@link XR10#xrCreateInstance CreateInstance} if valid data is passed in.</p>
+ * <p>After the application has destroyed all of its instances and their children and waited past the specified time, it may then re-try {@link XR10#xrCreateInstance CreateInstance} in a loop waiting for whatever maintenance the runtime is performing to complete. The runtime will return {@link XR10#XR_ERROR_RUNTIME_UNAVAILABLE ERROR_RUNTIME_UNAVAILABLE} from {@link XR10#xrCreateInstance CreateInstance} as long as it is unable to create the instance. Once the runtime has returned and is able to continue, it <b>must</b> resume returning {@link XR10#XR_SUCCESS SUCCESS} from {@link XR10#xrCreateInstance CreateInstance} if valid data is passed in.</p>
  * 
  * <h5>Member Descriptions</h5>
  * 
