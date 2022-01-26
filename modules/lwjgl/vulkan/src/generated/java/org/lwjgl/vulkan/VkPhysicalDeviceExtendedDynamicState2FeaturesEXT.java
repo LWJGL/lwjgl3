@@ -97,9 +97,9 @@ public class VkPhysicalDeviceExtendedDynamicState2FeaturesEXT extends Struct imp
      * indicates that the implementation supports the following dynamic states:
      * 
      * <ul>
-     * <li>{@link EXTExtendedDynamicState2#VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT}</li>
-     * <li>{@link EXTExtendedDynamicState2#VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT}</li>
-     * <li>{@link EXTExtendedDynamicState2#VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT}</li>
+     * <li>{@link VK13#VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE DYNAMIC_STATE_DEPTH_BIAS_ENABLE}</li>
+     * <li>{@link VK13#VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE}</li>
+     * <li>{@link VK13#VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE}</li>
      * </ul>
      */
     @NativeType("VkBool32")

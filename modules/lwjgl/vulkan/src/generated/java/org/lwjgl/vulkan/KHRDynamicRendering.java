@@ -15,6 +15,10 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>This extension also incorporates {@link #VK_ATTACHMENT_STORE_OP_NONE_KHR ATTACHMENT_STORE_OP_NONE_KHR} from {@link QCOMRenderPassStoreOps VK_QCOM_render_pass_store_ops}, enabling applications to avoid unnecessary synchronization when an attachment is not written during a render pass.</p>
  * 
+ * <h5>Promotion to Vulkan 1.3</h5>
+ * 
+ * <p>Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
  * <h5>VK_KHR_dynamic_rendering</h5>
  * 
  * <dl>
@@ -31,6 +35,10 @@ import static org.lwjgl.system.JNI.*;
  * <li>Requires Vulkan 1.0</li>
  * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.3-promotions">Vulkan 1.3</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_dynamic_rendering]%20@tobski%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_dynamic_rendering%20extension%3E%3E">tobski</a></li>
@@ -44,6 +52,10 @@ import static org.lwjgl.system.JNI.*;
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2021-10-06</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.3 Core</li>
+ * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Tobias Hector, AMD</li>
@@ -94,6 +106,22 @@ public class KHRDynamicRendering {
     public static final int VK_ATTACHMENT_STORE_OP_NONE_KHR = 1000301000;
 
     /**
+     * Extends {@code VkRenderingFlagBits}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR}</li>
+     * <li>{@link #VK_RENDERING_SUSPENDING_BIT_KHR RENDERING_SUSPENDING_BIT_KHR}</li>
+     * <li>{@link #VK_RENDERING_RESUMING_BIT_KHR RENDERING_RESUMING_BIT_KHR}</li>
+     * </ul>
+     */
+    public static final int
+        VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR = 0x1,
+        VK_RENDERING_SUSPENDING_BIT_KHR                         = 0x2,
+        VK_RENDERING_RESUMING_BIT_KHR                           = 0x4;
+
+    /**
      * Extends {@code VkPipelineCreateFlagBits}.
      * 
      * <h5>Enum values:</h5>
@@ -136,24 +164,6 @@ public class KHRDynamicRendering {
     /** Extends {@code VkStructureType}. */
     public static final int VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX = 1000044009;
 
-    /**
-     * VkRenderingFlagBitsKHR - Bitmask specifying additional properties of a dynamic render pass instance
-     * 
-     * <h5>Description</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR} specifies that draw calls for the render pass instance will be recorded in secondary command buffers.</li>
-     * <li>{@link #VK_RENDERING_RESUMING_BIT_KHR RENDERING_RESUMING_BIT_KHR} specifies that the render pass instance is resuming an earlier suspended render pass instance.</li>
-     * <li>{@link #VK_RENDERING_SUSPENDING_BIT_KHR RENDERING_SUSPENDING_BIT_KHR} specifies that the render pass instance will be suspended.</li>
-     * </ul>
-     * 
-     * <p>The contents of {@code pRenderingInfo} <b>must</b> match between suspended render pass instances and the render pass instances that resume them, other than the presence or absence of the {@link #VK_RENDERING_RESUMING_BIT_KHR RENDERING_RESUMING_BIT_KHR}, {@link #VK_RENDERING_SUSPENDING_BIT_KHR RENDERING_SUSPENDING_BIT_KHR}, and {@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR} flags. No action or synchronization commands, or other render pass instances, are allowed between suspending and resuming render pass instances.</p>
-     */
-    public static final int
-        VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR = 0x1,
-        VK_RENDERING_SUSPENDING_BIT_KHR                         = 0x2,
-        VK_RENDERING_RESUMING_BIT_KHR                           = 0x4;
-
     protected KHRDynamicRendering() {
         throw new UnsupportedOperationException();
     }
@@ -165,117 +175,25 @@ public class KHRDynamicRendering {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBeginRenderingKHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkRenderingInfoKHR.validate(pRenderingInfo);
+            VkRenderingInfo.validate(pRenderingInfo);
         }
         callPPV(commandBuffer.address(), pRenderingInfo, __functionAddress);
     }
 
     /**
-     * Begin a dynamic render pass instance.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To begin a render pass instance, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdBeginRenderingKHR(
-     *     VkCommandBuffer                             commandBuffer,
-     *     const VkRenderingInfoKHR*                   pRenderingInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>After beginning a render pass instance, the command buffer is ready to record <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#drawing">draw commands</a>.</p>
-     * 
-     * <p>If {@code pRenderingInfo→flags} includes {@link #VK_RENDERING_RESUMING_BIT_KHR RENDERING_RESUMING_BIT_KHR} then this render pass is resumed from a render pass instance that has been suspended earlier in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-submission-order">submission order</a>.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-dynamicRendering">{@code dynamicRendering}</a> feature <b>must</b> be enabled</li>
-     * <li>If {@code commandBuffer} is a secondary command buffer, {@code pRenderingInfo→flags} <b>must</b> not include {@link #VK_RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR RENDERING_CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR}</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pRenderingInfo} <b>must</b> be a valid pointer to a valid {@link VkRenderingInfoKHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Graphics</td></tr></tbody>
-     * </table>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkRenderingInfoKHR}</p>
+     * See {@link VK13#vkCmdBeginRendering CmdBeginRendering}.
      *
      * @param commandBuffer  the command buffer in which to record the command.
-     * @param pRenderingInfo a pointer to a {@link VkRenderingInfoKHR} structure specifying details of the render pass instance to begin.
+     * @param pRenderingInfo a pointer to a {@link VkRenderingInfo} structure specifying details of the render pass instance to begin.
      */
-    public static void vkCmdBeginRenderingKHR(VkCommandBuffer commandBuffer, @NativeType("VkRenderingInfoKHR const *") VkRenderingInfoKHR pRenderingInfo) {
+    public static void vkCmdBeginRenderingKHR(VkCommandBuffer commandBuffer, @NativeType("VkRenderingInfo const *") VkRenderingInfo pRenderingInfo) {
         nvkCmdBeginRenderingKHR(commandBuffer, pRenderingInfo.address());
     }
 
     // --- [ vkCmdEndRenderingKHR ] ---
 
     /**
-     * End a dynamic render pass instance.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To end a render pass instance, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdEndRenderingKHR(
-     *     VkCommandBuffer                             commandBuffer);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>If the value of {@code pRenderingInfo→flags} used to begin this render pass instance included {@link #VK_RENDERING_SUSPENDING_BIT_KHR RENDERING_SUSPENDING_BIT_KHR}, then this render pass is suspended and will be resumed later in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-submission-order">submission order</a>.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>The current render pass instance <b>must</b> have been begun with {@link #vkCmdBeginRenderingKHR CmdBeginRenderingKHR}</li>
-     * <li>The current render pass instance <b>must</b> have been begun in {@code commandBuffer}</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-     * <li>This command <b>must</b> only be called inside of a render pass instance</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Inside</td><td>Graphics</td></tr></tbody>
-     * </table>
+     * See {@link VK13#vkCmdEndRendering CmdEndRendering}.
      *
      * @param commandBuffer the command buffer in which to record the command.
      */

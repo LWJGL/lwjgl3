@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether global priority query can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTGlobalPriorityQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #globalPriorityQuery};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 globalPriorityQuery;
  * }</code></pre>
  */
-public class VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        GLOBALPRIORITYQUERY;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        GLOBALPRIORITYQUERY = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT extends VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR {
 
     /**
      * Creates a {@code VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -73,32 +36,24 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT extends Struct imple
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the ability to query global queue priorities. */
-    @NativeType("VkBool32")
-    public boolean globalPriorityQuery() { return nglobalPriorityQuery(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTGlobalPriorityQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT} value to the {@link #sType} field. */
-    public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT sType$Default() { return sType(EXTGlobalPriorityQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link KHRGlobalPriority#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT sType$Default() { return sType(KHRGlobalPriority.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #globalPriorityQuery} field. */
+    /** Sets the specified value to the {@code globalPriorityQuery} field. */
+    @Override
     public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT globalPriorityQuery(@NativeType("VkBool32") boolean value) { nglobalPriorityQuery(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT set(
         int sType,
         long pNext,
@@ -236,24 +191,8 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT extends Struct imple
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.PNEXT); }
-    /** Unsafe version of {@link #globalPriorityQuery}. */
-    public static int nglobalPriorityQuery(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.GLOBALPRIORITYQUERY); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #globalPriorityQuery(boolean) globalPriorityQuery}. */
-    public static void nglobalPriorityQuery(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.GLOBALPRIORITYQUERY, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.Buffer {
 
         private static final VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.create(-1L);
 
@@ -267,7 +206,7 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT extends Struct imple
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -288,23 +227,17 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT extends Struct imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT#globalPriorityQuery} field. */
-        @NativeType("VkBool32")
-        public boolean globalPriorityQuery() { return VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.nglobalPriorityQuery(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTGlobalPriorityQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT} value to the {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT#sType} field. */
-        public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.Buffer sType$Default() { return sType(EXTGlobalPriorityQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT#pNext} field. */
+        /** Sets the {@link KHRGlobalPriority#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.Buffer sType$Default() { return sType(KHRGlobalPriority.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT#globalPriorityQuery} field. */
+        /** Sets the specified value to the {@code globalPriorityQuery} field. */
+        @Override
         public VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.Buffer globalPriorityQuery(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.nglobalPriorityQuery(address(), value ? 1 : 0); return this; }
 
     }

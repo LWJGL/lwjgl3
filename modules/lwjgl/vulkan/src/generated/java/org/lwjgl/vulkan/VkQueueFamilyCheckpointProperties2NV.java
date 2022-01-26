@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkQueueFamilyCheckpointProperties2NV {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     VkPipelineStageFlags2KHR {@link #checkpointExecutionStageMask};
+ *     VkPipelineStageFlags2 {@link #checkpointExecutionStageMask};
  * }</code></pre>
  */
 public class VkQueueFamilyCheckpointProperties2NV extends Struct implements NativeResource {
@@ -86,7 +86,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** a mask indicating which pipeline stages the implementation can execute checkpoint markers in. */
-    @NativeType("VkPipelineStageFlags2KHR")
+    @NativeType("VkPipelineStageFlags2")
     public long checkpointExecutionStageMask() { return ncheckpointExecutionStageMask(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
@@ -289,7 +289,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
         @NativeType("void *")
         public long pNext() { return VkQueueFamilyCheckpointProperties2NV.npNext(address()); }
         /** @return the value of the {@link VkQueueFamilyCheckpointProperties2NV#checkpointExecutionStageMask} field. */
-        @NativeType("VkPipelineStageFlags2KHR")
+        @NativeType("VkPipelineStageFlags2")
         public long checkpointExecutionStageMask() { return VkQueueFamilyCheckpointProperties2NV.ncheckpointExecutionStageMask(address()); }
 
         /** Sets the specified value to the {@link VkQueueFamilyCheckpointProperties2NV#sType} field. */

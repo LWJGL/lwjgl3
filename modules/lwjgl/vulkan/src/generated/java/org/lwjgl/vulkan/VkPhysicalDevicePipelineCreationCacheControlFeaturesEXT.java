@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether pipeline cache control can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTPipelineCreationCacheControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT}</li>
- * </ul>
+ * See {@link VkPhysicalDevicePipelineCreationCacheControlFeatures}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #pipelineCreationCacheControl};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 pipelineCreationCacheControl;
  * }</code></pre>
  */
-public class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PIPELINECREATIONCACHECONTROL;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PIPELINECREATIONCACHECONTROL = layout.offsetof(2);
-    }
+public class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends VkPhysicalDevicePipelineCreationCacheControlFeatures {
 
     /**
      * Creates a {@code VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -73,50 +36,24 @@ public class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends Str
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /**
-     * indicates that the implementation supports:
-     * 
-     * <ul>
-     * <li>The following <b>can</b> be used in stext:Vk*PipelineCreateInfo{@code ::flags}:
-     * 
-     * <ul>
-     * <li>{@link EXTPipelineCreationCacheControl#VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT_EXT}</li>
-     * <li>{@link EXTPipelineCreationCacheControl#VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT}</li>
-     * </ul>
-     * </li>
-     * <li>The following <b>can</b> be used in {@link VkPipelineCacheCreateInfo}{@code ::flags}:
-     * 
-     * <ul>
-     * <li>{@link EXTPipelineCreationCacheControl#VK_PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT}</li>
-     * </ul>
-     * </li>
-     * </ul>
-     */
-    @NativeType("VkBool32")
-    public boolean pipelineCreationCacheControl() { return npipelineCreationCacheControl(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTPipelineCreationCacheControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT} value to the {@link #sType} field. */
-    public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT sType$Default() { return sType(EXTPipelineCreationCacheControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipelineCreationCacheControl} field. */
+    /** Sets the specified value to the {@code pipelineCreationCacheControl} field. */
+    @Override
     public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT pipelineCreationCacheControl(@NativeType("VkBool32") boolean value) { npipelineCreationCacheControl(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT set(
         int sType,
         long pNext,
@@ -254,24 +191,8 @@ public class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends Str
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.PNEXT); }
-    /** Unsafe version of {@link #pipelineCreationCacheControl}. */
-    public static int npipelineCreationCacheControl(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.PIPELINECREATIONCACHECONTROL); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #pipelineCreationCacheControl(boolean) pipelineCreationCacheControl}. */
-    public static void npipelineCreationCacheControl(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.PIPELINECREATIONCACHECONTROL, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDevicePipelineCreationCacheControlFeatures.Buffer {
 
         private static final VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT ELEMENT_FACTORY = VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.create(-1L);
 
@@ -285,7 +206,7 @@ public class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends Str
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -306,23 +227,17 @@ public class VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT extends Str
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#pipelineCreationCacheControl} field. */
-        @NativeType("VkBool32")
-        public boolean pipelineCreationCacheControl() { return VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.npipelineCreationCacheControl(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTPipelineCreationCacheControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT} value to the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#sType} field. */
-        public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.Buffer sType$Default() { return sType(EXTPipelineCreationCacheControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT#pipelineCreationCacheControl} field. */
+        /** Sets the specified value to the {@code pipelineCreationCacheControl} field. */
+        @Override
         public VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.Buffer pipelineCreationCacheControl(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.npipelineCreationCacheControl(address(), value ? 1 : 0); return this; }
 
     }

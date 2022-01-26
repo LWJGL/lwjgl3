@@ -13,6 +13,9 @@ val EXT_ycbcr_2plane_444_formats = "EXTYcbcr2plane444Formats".nativeClassVK("EXT
         """
         This extension adds some Y′C<sub>B</sub>C<sub>R</sub> formats that are in common use for video encode and decode, but were not part of the {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} extension.
 
+        <h5>Promotion to Vulkan 1.3</h5>
+        This extension has been partially promoted. The format enumerants introduced by the extension are included in core Vulkan 1.3, with the EXT suffix omitted. However, runtime support for these formats is optional in core Vulkan 1.3, while if this extension is supported, runtime support is mandatory. The feature structure is not promoted. The original enum names are still available as aliases of the core functionality.
+
         <h5>VK_EXT_ycbcr_2plane_444_formats</h5>
         <dl>
             <dt><b>Name String</b></dt>
@@ -33,6 +36,11 @@ val EXT_ycbcr_2plane_444_formats = "EXTYcbcr2plane444Formats".nativeClassVK("EXT
                 <li>Requires {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_ycbcr_2plane_444_formats]%20@tzlatinski%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_ycbcr_2plane_444_formats%20extension%3E%3E">tzlatinski</a></li>
@@ -43,6 +51,11 @@ val EXT_ycbcr_2plane_444_formats = "EXTYcbcr2plane444Formats".nativeClassVK("EXT
         <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2020-07-28</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.3 Core</li>
+            </ul></dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>

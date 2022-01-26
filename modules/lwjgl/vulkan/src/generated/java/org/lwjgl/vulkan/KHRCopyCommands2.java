@@ -15,6 +15,10 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>The following extensible copy commands are introduced with this extension: {@link #vkCmdCopyBuffer2KHR CmdCopyBuffer2KHR}, {@link #vkCmdCopyImage2KHR CmdCopyImage2KHR}, {@link #vkCmdCopyBufferToImage2KHR CmdCopyBufferToImage2KHR}, {@link #vkCmdCopyImageToBuffer2KHR CmdCopyImageToBuffer2KHR}, {@link #vkCmdBlitImage2KHR CmdBlitImage2KHR}, and {@link #vkCmdResolveImage2KHR CmdResolveImage2KHR}. Each command contains an stext:*Info2KHR structure parameter that includes {@code sType}/{@code pNext} members. Lower level structures describing each region to be copied are also extended with {@code sType}/{@code pNext} members.</p>
  * 
+ * <h5>Promotion to Vulkan 1.3</h5>
+ * 
+ * <p>Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
  * <h5>VK_KHR_copy_commands2</h5>
  * 
  * <dl>
@@ -30,6 +34,10 @@ import static org.lwjgl.system.JNI.*;
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.3-promotions">Vulkan 1.3</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Jeff Leger <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_copy_commands2]%20@jackohound%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_copy_commands2%20extension%3E%3E">jackohound</a></li>
@@ -41,6 +49,10 @@ import static org.lwjgl.system.JNI.*;
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2020-07-06</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.3 Core</li>
+ * </ul></dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>None</li>
@@ -105,67 +117,18 @@ public class KHRCopyCommands2 {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyBuffer2KHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkCopyBufferInfo2KHR.validate(pCopyBufferInfo);
+            VkCopyBufferInfo2.validate(pCopyBufferInfo);
         }
         callPPV(commandBuffer.address(), pCopyBufferInfo, __functionAddress);
     }
 
     /**
-     * Copy data between buffer regions.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To copy data between buffer objects, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdCopyBuffer2KHR(
-     *     VkCommandBuffer                             commandBuffer,
-     *     const VkCopyBufferInfo2KHR*                 pCopyBufferInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>This command is functionally identical to {@link VK10#vkCmdCopyBuffer CmdCopyBuffer}, but includes extensible sub-structures that include {@code sType} and {@code pNext} parameters, allowing them to be more easily extended.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcBuffer} <b>must</b> not be a protected buffer</li>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstBuffer} <b>must</b> not be a protected buffer</li>
-     * <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstBuffer} <b>must</b> not be an unprotected buffer</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pCopyBufferInfo} <b>must</b> be a valid pointer to a valid {@link VkCopyBufferInfo2KHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
-     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Transfer Graphics Compute</td></tr></tbody>
-     * </table>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkCopyBufferInfo2KHR}</p>
+     * See {@link VK13#vkCmdCopyBuffer2 CmdCopyBuffer2}.
      *
      * @param commandBuffer   the command buffer into which the command will be recorded.
-     * @param pCopyBufferInfo a pointer to a {@link VkCopyBufferInfo2KHR} structure describing the copy parameters.
+     * @param pCopyBufferInfo a pointer to a {@link VkCopyBufferInfo2} structure describing the copy parameters.
      */
-    public static void vkCmdCopyBuffer2KHR(VkCommandBuffer commandBuffer, @NativeType("VkCopyBufferInfo2KHR const *") VkCopyBufferInfo2KHR pCopyBufferInfo) {
+    public static void vkCmdCopyBuffer2KHR(VkCommandBuffer commandBuffer, @NativeType("VkCopyBufferInfo2 const *") VkCopyBufferInfo2 pCopyBufferInfo) {
         nvkCmdCopyBuffer2KHR(commandBuffer, pCopyBufferInfo.address());
     }
 
@@ -176,67 +139,18 @@ public class KHRCopyCommands2 {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyImage2KHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkCopyImageInfo2KHR.validate(pCopyImageInfo);
+            VkCopyImageInfo2.validate(pCopyImageInfo);
         }
         callPPV(commandBuffer.address(), pCopyImageInfo, __functionAddress);
     }
 
     /**
-     * Copy data between images.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To copy data between image objects, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdCopyImage2KHR(
-     *     VkCommandBuffer                             commandBuffer,
-     *     const VkCopyImageInfo2KHR*                  pCopyImageInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>This command is functionally identical to {@link VK10#vkCmdCopyImage CmdCopyImage}, but includes extensible sub-structures that include {@code sType} and {@code pNext} parameters, allowing them to be more easily extended.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcImage} <b>must</b> not be a protected image</li>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be a protected image</li>
-     * <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be an unprotected image</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pCopyImageInfo} <b>must</b> be a valid pointer to a valid {@link VkCopyImageInfo2KHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
-     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Transfer Graphics Compute</td></tr></tbody>
-     * </table>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkCopyImageInfo2KHR}</p>
+     * See {@link VK13#vkCmdCopyImage2 CmdCopyImage2}.
      *
      * @param commandBuffer  the command buffer into which the command will be recorded.
-     * @param pCopyImageInfo a pointer to a {@link VkCopyImageInfo2KHR} structure describing the copy parameters.
+     * @param pCopyImageInfo a pointer to a {@link VkCopyImageInfo2} structure describing the copy parameters.
      */
-    public static void vkCmdCopyImage2KHR(VkCommandBuffer commandBuffer, @NativeType("VkCopyImageInfo2KHR const *") VkCopyImageInfo2KHR pCopyImageInfo) {
+    public static void vkCmdCopyImage2KHR(VkCommandBuffer commandBuffer, @NativeType("VkCopyImageInfo2 const *") VkCopyImageInfo2 pCopyImageInfo) {
         nvkCmdCopyImage2KHR(commandBuffer, pCopyImageInfo.address());
     }
 
@@ -247,67 +161,18 @@ public class KHRCopyCommands2 {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyBufferToImage2KHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkCopyBufferToImageInfo2KHR.validate(pCopyBufferToImageInfo);
+            VkCopyBufferToImageInfo2.validate(pCopyBufferToImageInfo);
         }
         callPPV(commandBuffer.address(), pCopyBufferToImageInfo, __functionAddress);
     }
 
     /**
-     * Copy data from a buffer into an image.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To copy data from a buffer object to an image object, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdCopyBufferToImage2KHR(
-     *     VkCommandBuffer                             commandBuffer,
-     *     const VkCopyBufferToImageInfo2KHR*          pCopyBufferToImageInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>This command is functionally identical to {@link VK10#vkCmdCopyBufferToImage CmdCopyBufferToImage}, but includes extensible sub-structures that include {@code sType} and {@code pNext} parameters, allowing them to be more easily extended.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcBuffer} <b>must</b> not be a protected buffer</li>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be a protected image</li>
-     * <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be an unprotected image</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pCopyBufferToImageInfo} <b>must</b> be a valid pointer to a valid {@link VkCopyBufferToImageInfo2KHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
-     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Transfer Graphics Compute</td></tr></tbody>
-     * </table>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkCopyBufferToImageInfo2KHR}</p>
+     * See {@link VK13#vkCmdCopyBufferToImage2 CmdCopyBufferToImage2}.
      *
      * @param commandBuffer          the command buffer into which the command will be recorded.
-     * @param pCopyBufferToImageInfo a pointer to a {@link VkCopyBufferToImageInfo2KHR} structure describing the copy parameters.
+     * @param pCopyBufferToImageInfo a pointer to a {@link VkCopyBufferToImageInfo2} structure describing the copy parameters.
      */
-    public static void vkCmdCopyBufferToImage2KHR(VkCommandBuffer commandBuffer, @NativeType("VkCopyBufferToImageInfo2KHR const *") VkCopyBufferToImageInfo2KHR pCopyBufferToImageInfo) {
+    public static void vkCmdCopyBufferToImage2KHR(VkCommandBuffer commandBuffer, @NativeType("VkCopyBufferToImageInfo2 const *") VkCopyBufferToImageInfo2 pCopyBufferToImageInfo) {
         nvkCmdCopyBufferToImage2KHR(commandBuffer, pCopyBufferToImageInfo.address());
     }
 
@@ -318,67 +183,18 @@ public class KHRCopyCommands2 {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdCopyImageToBuffer2KHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkCopyImageToBufferInfo2KHR.validate(pCopyImageToBufferInfo);
+            VkCopyImageToBufferInfo2.validate(pCopyImageToBufferInfo);
         }
         callPPV(commandBuffer.address(), pCopyImageToBufferInfo, __functionAddress);
     }
 
     /**
-     * Copy image data into a buffer.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To copy data from an image object to a buffer object, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdCopyImageToBuffer2KHR(
-     *     VkCommandBuffer                             commandBuffer,
-     *     const VkCopyImageToBufferInfo2KHR*          pCopyImageToBufferInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>This command is functionally identical to {@link VK10#vkCmdCopyImageToBuffer CmdCopyImageToBuffer}, but includes extensible sub-structures that include {@code sType} and {@code pNext} parameters, allowing them to be more easily extended.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcImage} <b>must</b> not be a protected image</li>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstBuffer} <b>must</b> not be a protected buffer</li>
-     * <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstBuffer} <b>must</b> not be an unprotected buffer</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pCopyImageToBufferInfo} <b>must</b> be a valid pointer to a valid {@link VkCopyImageToBufferInfo2KHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support transfer, graphics, or compute operations</li>
-     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Transfer Graphics Compute</td></tr></tbody>
-     * </table>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkCopyImageToBufferInfo2KHR}</p>
+     * See {@link VK13#vkCmdCopyImageToBuffer2 CmdCopyImageToBuffer2}.
      *
      * @param commandBuffer          the command buffer into which the command will be recorded.
-     * @param pCopyImageToBufferInfo a pointer to a {@link VkCopyImageToBufferInfo2KHR} structure describing the copy parameters.
+     * @param pCopyImageToBufferInfo a pointer to a {@link VkCopyImageToBufferInfo2} structure describing the copy parameters.
      */
-    public static void vkCmdCopyImageToBuffer2KHR(VkCommandBuffer commandBuffer, @NativeType("VkCopyImageToBufferInfo2KHR const *") VkCopyImageToBufferInfo2KHR pCopyImageToBufferInfo) {
+    public static void vkCmdCopyImageToBuffer2KHR(VkCommandBuffer commandBuffer, @NativeType("VkCopyImageToBufferInfo2 const *") VkCopyImageToBufferInfo2 pCopyImageToBufferInfo) {
         nvkCmdCopyImageToBuffer2KHR(commandBuffer, pCopyImageToBufferInfo.address());
     }
 
@@ -389,67 +205,18 @@ public class KHRCopyCommands2 {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBlitImage2KHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkBlitImageInfo2KHR.validate(pBlitImageInfo);
+            VkBlitImageInfo2.validate(pBlitImageInfo);
         }
         callPPV(commandBuffer.address(), pBlitImageInfo, __functionAddress);
     }
 
     /**
-     * Copy regions of an image, potentially performing format conversion,.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To copy regions of a source image into a destination image, potentially performing format conversion, arbitrary scaling, and filtering, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdBlitImage2KHR(
-     *     VkCommandBuffer                             commandBuffer,
-     *     const VkBlitImageInfo2KHR*                  pBlitImageInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>This command is functionally identical to {@link VK10#vkCmdBlitImage CmdBlitImage}, but includes extensible sub-structures that include {@code sType} and {@code pNext} parameters, allowing them to be more easily extended.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcImage} <b>must</b> not be a protected image</li>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be a protected image</li>
-     * <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be an unprotected image</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pBlitImageInfo} <b>must</b> be a valid pointer to a valid {@link VkBlitImageInfo2KHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Graphics</td></tr></tbody>
-     * </table>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkBlitImageInfo2KHR}</p>
+     * See {@link VK13#vkCmdBlitImage2 CmdBlitImage2}.
      *
      * @param commandBuffer  the command buffer into which the command will be recorded.
-     * @param pBlitImageInfo a pointer to a {@link VkBlitImageInfo2KHR} structure describing the blit parameters.
+     * @param pBlitImageInfo a pointer to a {@link VkBlitImageInfo2} structure describing the blit parameters.
      */
-    public static void vkCmdBlitImage2KHR(VkCommandBuffer commandBuffer, @NativeType("VkBlitImageInfo2KHR const *") VkBlitImageInfo2KHR pBlitImageInfo) {
+    public static void vkCmdBlitImage2KHR(VkCommandBuffer commandBuffer, @NativeType("VkBlitImageInfo2 const *") VkBlitImageInfo2 pBlitImageInfo) {
         nvkCmdBlitImage2KHR(commandBuffer, pBlitImageInfo.address());
     }
 
@@ -460,67 +227,18 @@ public class KHRCopyCommands2 {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdResolveImage2KHR;
         if (CHECKS) {
             check(__functionAddress);
-            VkResolveImageInfo2KHR.validate(pResolveImageInfo);
+            VkResolveImageInfo2.validate(pResolveImageInfo);
         }
         callPPV(commandBuffer.address(), pResolveImageInfo, __functionAddress);
     }
 
     /**
-     * Resolve regions of an image.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To resolve a multisample image to a non-multisample image, call:</p>
-     * 
-     * <pre><code>
-     * void vkCmdResolveImage2KHR(
-     *     VkCommandBuffer                             commandBuffer,
-     *     const VkResolveImageInfo2KHR*               pResolveImageInfo);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>This command is functionally identical to {@link VK10#vkCmdResolveImage CmdResolveImage}, but includes extensible sub-structures that include {@code sType} and {@code pNext} parameters, allowing them to be more easily extended.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code srcImage} <b>must</b> not be a protected image</li>
-     * <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be a protected image</li>
-     * <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, {@code dstImage} <b>must</b> not be an unprotected image</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-     * <li>{@code pResolveImageInfo} <b>must</b> be a valid pointer to a valid {@link VkResolveImageInfo2KHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
-     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-     * <li>This command <b>must</b> only be called outside of a render pass instance</li>
-     * </ul>
-     * 
-     * <h5>Host Synchronization</h5>
-     * 
-     * <ul>
-     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Command Properties</h5>
-     * 
-     * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Graphics</td></tr></tbody>
-     * </table>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkResolveImageInfo2KHR}</p>
+     * See {@link VK13#vkCmdResolveImage2 CmdResolveImage2}.
      *
      * @param commandBuffer     the command buffer into which the command will be recorded.
-     * @param pResolveImageInfo a pointer to a {@link VkResolveImageInfo2KHR} structure describing the resolve parameters.
+     * @param pResolveImageInfo a pointer to a {@link VkResolveImageInfo2} structure describing the resolve parameters.
      */
-    public static void vkCmdResolveImage2KHR(VkCommandBuffer commandBuffer, @NativeType("VkResolveImageInfo2KHR const *") VkResolveImageInfo2KHR pResolveImageInfo) {
+    public static void vkCmdResolveImage2KHR(VkCommandBuffer commandBuffer, @NativeType("VkResolveImageInfo2 const *") VkResolveImageInfo2 pResolveImageInfo) {
         nvkCmdResolveImage2KHR(commandBuffer, pResolveImageInfo.address());
     }
 

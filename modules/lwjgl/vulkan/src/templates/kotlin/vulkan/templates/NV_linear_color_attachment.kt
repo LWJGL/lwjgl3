@@ -76,7 +76,7 @@ val NV_linear_color_attachment = "NVLinearColorAttachment".nativeClassVK("NV_lin
     )
 
     EnumConstantLong(
-        "Extends {@code VkFormatFeatureFlagBits2KHR}.",
+        "Extends {@code VkFormatFeatureFlagBits2}.",
 
         "FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV".enum(0x4000000000L)
     )

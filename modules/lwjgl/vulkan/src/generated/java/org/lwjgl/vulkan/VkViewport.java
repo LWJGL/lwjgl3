@@ -64,7 +64,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkCommandBufferInheritanceViewportScissorInfoNV}, {@link VkPipelineViewportStateCreateInfo}, {@link VK10#vkCmdSetViewport CmdSetViewport}, {@link EXTExtendedDynamicState#vkCmdSetViewportWithCountEXT CmdSetViewportWithCountEXT}</p>
+ * <p>{@link VkCommandBufferInheritanceViewportScissorInfoNV}, {@link VkPipelineViewportStateCreateInfo}, {@link VK10#vkCmdSetViewport CmdSetViewport}, {@link VK13#vkCmdSetViewportWithCount CmdSetViewportWithCount}, {@link EXTExtendedDynamicState#vkCmdSetViewportWithCountEXT CmdSetViewportWithCountEXT}</p>
  * 
  * <h3>Layout</h3>
  * 

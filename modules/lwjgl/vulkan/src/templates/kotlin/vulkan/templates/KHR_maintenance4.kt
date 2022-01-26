@@ -26,6 +26,9 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
             <li>Add a guarantee for buffer memory requirement that the size memory requirement is never greater than the result of aligning create size with the alignment memory requirement.</li>
         </ul>
 
+        <h5>Promotion to Vulkan 1.3</h5>
+        Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <h5>VK_KHR_maintenance4</h5>
         <dl>
             <dt><b>Name String</b></dt>
@@ -45,6 +48,11 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
                 <li>Requires Vulkan 1.1</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_maintenance4]%20@pdaniell-nv%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_maintenance4%20extension%3E%3E">pdaniell-nv</a></li>
@@ -58,6 +66,7 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
+                <li>Promoted to Vulkan 1.3 Core</li>
                 <li>Requires SPIR-V 1.2 for {@code LocalSizeId}</li>
             </ul></dd>
 
@@ -105,93 +114,28 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
 
     void(
         "GetDeviceBufferMemoryRequirementsKHR",
-        """
-        Returns the memory requirements for specified Vulkan object.
-
-        <h5>C Specification</h5>
-        To determine the memory requirements for a buffer resource without creating an object, call:
-
-        <pre><code>
-￿void vkGetDeviceBufferMemoryRequirementsKHR(
-￿    VkDevice                                    device,
-￿    const VkDeviceBufferMemoryRequirementsKHR*  pInfo,
-￿    VkMemoryRequirements2*                      pMemoryRequirements);</code></pre>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkDeviceBufferMemoryRequirementsKHR structure</li>
-            <li>{@code pMemoryRequirements} <b>must</b> be a valid pointer to a ##VkMemoryRequirements2 structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkDeviceBufferMemoryRequirementsKHR, ##VkMemoryRequirements2
-        """,
+        "See #GetDeviceBufferMemoryRequirements().",
 
         VkDevice("device", "the logical device intended to own the buffer."),
-        VkDeviceBufferMemoryRequirementsKHR.const.p("pInfo", "a pointer to a ##VkDeviceBufferMemoryRequirementsKHR structure containing parameters required for the memory requirements query."),
+        VkDeviceBufferMemoryRequirements.const.p("pInfo", "a pointer to a ##VkDeviceBufferMemoryRequirements structure containing parameters required for the memory requirements query."),
         VkMemoryRequirements2.p("pMemoryRequirements", "a pointer to a ##VkMemoryRequirements2 structure in which the memory requirements of the buffer object are returned.")
     )
 
     void(
         "GetDeviceImageMemoryRequirementsKHR",
-        """
-        Returns the memory requirements for specified Vulkan object.
-
-        <h5>C Specification</h5>
-        To determine the memory requirements for an image resource without creating an object, call:
-
-        <pre><code>
-￿void vkGetDeviceImageMemoryRequirementsKHR(
-￿    VkDevice                                    device,
-￿    const VkDeviceImageMemoryRequirementsKHR*   pInfo,
-￿    VkMemoryRequirements2*                      pMemoryRequirements);</code></pre>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkDeviceImageMemoryRequirementsKHR structure</li>
-            <li>{@code pMemoryRequirements} <b>must</b> be a valid pointer to a ##VkMemoryRequirements2 structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkDeviceImageMemoryRequirementsKHR, ##VkMemoryRequirements2
-        """,
+        "See #GetDeviceImageMemoryRequirements().",
 
         VkDevice("device", "the logical device intended to own the image."),
-        VkDeviceImageMemoryRequirementsKHR.const.p("pInfo", "a pointer to a ##VkDeviceImageMemoryRequirementsKHR structure containing parameters required for the memory requirements query."),
+        VkDeviceImageMemoryRequirements.const.p("pInfo", "a pointer to a ##VkDeviceImageMemoryRequirements structure containing parameters required for the memory requirements query."),
         VkMemoryRequirements2.p("pMemoryRequirements", "a pointer to a ##VkMemoryRequirements2 structure in which the memory requirements of the image object are returned.")
     )
 
     void(
         "GetDeviceImageSparseMemoryRequirementsKHR",
-        """
-        Query the memory requirements for a sparse image.
-
-        <h5>C Specification</h5>
-        To determine the sparse memory requirements for an image resource without creating an object, call:
-
-        <pre><code>
-￿void vkGetDeviceImageSparseMemoryRequirementsKHR(
-￿    VkDevice                                    device,
-￿    const VkDeviceImageMemoryRequirementsKHR*   pInfo,
-￿    uint32_t*                                   pSparseMemoryRequirementCount,
-￿    VkSparseImageMemoryRequirements2*           pSparseMemoryRequirements);</code></pre>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-            <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkDeviceImageMemoryRequirementsKHR structure</li>
-            <li>{@code pSparseMemoryRequirementCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
-            <li>If the value referenced by {@code pSparseMemoryRequirementCount} is not 0, and {@code pSparseMemoryRequirements} is not {@code NULL}, {@code pSparseMemoryRequirements} <b>must</b> be a valid pointer to an array of {@code pSparseMemoryRequirementCount} ##VkSparseImageMemoryRequirements2 structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkDeviceImageMemoryRequirementsKHR, ##VkSparseImageMemoryRequirements2
-        """,
+        "See #GetDeviceImageSparseMemoryRequirements().",
 
         VkDevice("device", "the logical device intended to own the image."),
-        VkDeviceImageMemoryRequirementsKHR.const.p("pInfo", "a pointer to a ##VkDeviceImageMemoryRequirementsKHR structure containing parameters required for the memory requirements query."),
+        VkDeviceImageMemoryRequirements.const.p("pInfo", "a pointer to a ##VkDeviceImageMemoryRequirements structure containing parameters required for the memory requirements query."),
         AutoSize("pSparseMemoryRequirements")..Check(1)..uint32_t.p("pSparseMemoryRequirementCount", "a pointer to an integer related to the number of sparse memory requirements available or queried, as described below."),
         nullable..VkSparseImageMemoryRequirements2.p("pSparseMemoryRequirements", "either {@code NULL} or a pointer to an array of ##VkSparseImageMemoryRequirements2 structures.")
     )

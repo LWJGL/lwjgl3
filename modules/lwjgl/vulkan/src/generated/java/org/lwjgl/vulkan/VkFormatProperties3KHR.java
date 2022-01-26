@@ -16,17 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying image format properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>The bits reported in {@code linearTilingFeatures}, {@code optimalTilingFeatures} and {@code bufferFeatures} <b>must</b> include the bits reported in the corresponding fields of {@link VkFormatProperties2}{@code ::formatProperties}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRFormatFeatureFlags2#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR}</li>
- * </ul>
+ * See {@link VkFormatProperties3}.
  * 
  * <h3>Layout</h3>
  * 
@@ -34,45 +24,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkFormatProperties3KHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkFormatFeatureFlags2KHR {@link #linearTilingFeatures};
- *     VkFormatFeatureFlags2KHR {@link #optimalTilingFeatures};
- *     VkFormatFeatureFlags2KHR {@link #bufferFeatures};
+ *     VkFormatFeatureFlags2 linearTilingFeatures;
+ *     VkFormatFeatureFlags2 optimalTilingFeatures;
+ *     VkFormatFeatureFlags2 bufferFeatures;
  * }</code></pre>
  */
-public class VkFormatProperties3KHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        LINEARTILINGFEATURES,
-        OPTIMALTILINGFEATURES,
-        BUFFERFEATURES;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8),
-            __member(8),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        LINEARTILINGFEATURES = layout.offsetof(2);
-        OPTIMALTILINGFEATURES = layout.offsetof(3);
-        BUFFERFEATURES = layout.offsetof(4);
-    }
+public class VkFormatProperties3KHR extends VkFormatProperties3 {
 
     /**
      * Creates a {@code VkFormatProperties3KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -81,36 +38,21 @@ public class VkFormatProperties3KHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkFormatProperties3KHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** @return the value of the {@code sType} field. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkFormatFeatureFlagBits2KHR} specifying features supported by images created with a {@code tiling} parameter of {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}. */
-    @NativeType("VkFormatFeatureFlags2KHR")
-    public long linearTilingFeatures() { return nlinearTilingFeatures(address()); }
-    /** a bitmask of {@code VkFormatFeatureFlagBits2KHR} specifying features supported by images created with a {@code tiling} parameter of {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}. */
-    @NativeType("VkFormatFeatureFlags2KHR")
-    public long optimalTilingFeatures() { return noptimalTilingFeatures(address()); }
-    /** a bitmask of {@code VkFormatFeatureFlagBits2KHR} specifying features supported by buffers. */
-    @NativeType("VkFormatFeatureFlags2KHR")
-    public long bufferFeatures() { return nbufferFeatures(address()); }
-
     /** Sets the specified value to the {@code sType} field. */
+    @Override
     public VkFormatProperties3KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRFormatFeatureFlags2#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR} value to the {@code sType} field. */
-    public VkFormatProperties3KHR sType$Default() { return sType(KHRFormatFeatureFlags2.VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR); }
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3 STRUCTURE_TYPE_FORMAT_PROPERTIES_3} value to the {@code sType} field. */
+    @Override
+    public VkFormatProperties3KHR sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3); }
     /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkFormatProperties3KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkFormatProperties3KHR set(
         int sType,
         long pNext
@@ -246,26 +188,8 @@ public class VkFormatProperties3KHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkFormatProperties3KHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkFormatProperties3KHR.PNEXT); }
-    /** Unsafe version of {@link #linearTilingFeatures}. */
-    public static long nlinearTilingFeatures(long struct) { return UNSAFE.getLong(null, struct + VkFormatProperties3KHR.LINEARTILINGFEATURES); }
-    /** Unsafe version of {@link #optimalTilingFeatures}. */
-    public static long noptimalTilingFeatures(long struct) { return UNSAFE.getLong(null, struct + VkFormatProperties3KHR.OPTIMALTILINGFEATURES); }
-    /** Unsafe version of {@link #bufferFeatures}. */
-    public static long nbufferFeatures(long struct) { return UNSAFE.getLong(null, struct + VkFormatProperties3KHR.BUFFERFEATURES); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkFormatProperties3KHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkFormatProperties3KHR.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkFormatProperties3KHR} structs. */
-    public static class Buffer extends StructBuffer<VkFormatProperties3KHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkFormatProperties3.Buffer {
 
         private static final VkFormatProperties3KHR ELEMENT_FACTORY = VkFormatProperties3KHR.create(-1L);
 
@@ -279,7 +203,7 @@ public class VkFormatProperties3KHR extends Struct implements NativeResource {
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -300,27 +224,14 @@ public class VkFormatProperties3KHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkFormatProperties3KHR.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkFormatProperties3KHR.npNext(address()); }
-        /** @return the value of the {@link VkFormatProperties3KHR#linearTilingFeatures} field. */
-        @NativeType("VkFormatFeatureFlags2KHR")
-        public long linearTilingFeatures() { return VkFormatProperties3KHR.nlinearTilingFeatures(address()); }
-        /** @return the value of the {@link VkFormatProperties3KHR#optimalTilingFeatures} field. */
-        @NativeType("VkFormatFeatureFlags2KHR")
-        public long optimalTilingFeatures() { return VkFormatProperties3KHR.noptimalTilingFeatures(address()); }
-        /** @return the value of the {@link VkFormatProperties3KHR#bufferFeatures} field. */
-        @NativeType("VkFormatFeatureFlags2KHR")
-        public long bufferFeatures() { return VkFormatProperties3KHR.nbufferFeatures(address()); }
-
         /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkFormatProperties3KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkFormatProperties3KHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRFormatFeatureFlags2#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR} value to the {@code sType} field. */
-        public VkFormatProperties3KHR.Buffer sType$Default() { return sType(KHRFormatFeatureFlags2.VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR); }
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3 STRUCTURE_TYPE_FORMAT_PROPERTIES_3} value to the {@code sType} field. */
+        @Override
+        public VkFormatProperties3KHR.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3); }
         /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkFormatProperties3KHR.Buffer pNext(@NativeType("void *") long value) { VkFormatProperties3KHR.npNext(address(), value); return this; }
 
     }

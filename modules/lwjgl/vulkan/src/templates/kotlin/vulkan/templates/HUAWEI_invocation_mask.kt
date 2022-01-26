@@ -112,7 +112,7 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
     )
 
     EnumConstantLong(
-        "Extends {@code VkAccessFlagBits2KHR}.",
+        "Extends {@code VkAccessFlagBits2}.",
 
         "ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI".enum(0x8000000000L)
     )
@@ -124,7 +124,7 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
     )
 
     EnumConstantLong(
-        "Extends {@code VkPipelineStageFlagBits2KHR}.",
+        "Extends {@code VkPipelineStageFlagBits2}.",
 
         "PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI".enum(0x10000000000L)
     )

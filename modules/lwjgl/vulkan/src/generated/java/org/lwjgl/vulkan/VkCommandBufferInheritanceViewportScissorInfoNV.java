@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@link VK10#VK_DYNAMIC_STATE_SCISSOR DYNAMIC_STATE_SCISSOR}</li>
- * <li>{@link EXTExtendedDynamicState#VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT}</li>
+ * <li>{@link VK13#VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT DYNAMIC_STATE_SCISSOR_WITH_COUNT}</li>
  * <li>{@link EXTDiscardRectangles#VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_EXT}</li>
  * </ul>
  * 
@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@link VK10#VK_DYNAMIC_STATE_VIEWPORT DYNAMIC_STATE_VIEWPORT}</li>
- * <li>{@link EXTExtendedDynamicState#VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT}</li>
+ * <li>{@link VK13#VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT DYNAMIC_STATE_VIEWPORT_WITH_COUNT}</li>
  * </ul>
  * 
  * <p>If {@code viewportScissor2D} is {@link VK10#VK_FALSE FALSE}, then the command buffer does not inherit the listed dynamic state, and <b>should</b> set this state itself. If this structure is not present, the behavior is as if {@code viewportScissor2D} is {@link VK10#VK_FALSE FALSE}.</p>

@@ -31,6 +31,10 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to {@link KHRGlobalPriority VK_KHR_global_priority} extension</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Andres Rodriguez <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_global_priority]%20@lostgoat%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_global_priority%20extension%3E%3E">lostgoat</a></li>
@@ -68,24 +72,37 @@ public final class EXTGlobalPriority {
     public static final int VK_ERROR_NOT_PERMITTED_EXT = -1000174001;
 
     /**
-     * VkQueueGlobalPriorityEXT - Values specifying a system-wide queue priority
+     * VkQueueGlobalPriorityKHR - Values specifying a system-wide queue priority
      * 
      * <h5>Description</h5>
      * 
      * <p>Priority values are sorted in ascending order. A comparison operation on the enum values can be used to determine the priority order.</p>
      * 
      * <ul>
-     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT QUEUE_GLOBAL_PRIORITY_LOW_EXT} is below the system default. Useful for non-interactive tasks.</li>
-     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT} is the system default priority.</li>
-     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT QUEUE_GLOBAL_PRIORITY_HIGH_EXT} is above the system default.</li>
-     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT QUEUE_GLOBAL_PRIORITY_REALTIME_EXT} is the highest priority. Useful for critical tasks.</li>
+     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR QUEUE_GLOBAL_PRIORITY_LOW_KHR} is below the system default. Useful for non-interactive tasks.</li>
+     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR} is the system default priority.</li>
+     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_HIGH_KHR QUEUE_GLOBAL_PRIORITY_HIGH_KHR} is above the system default.</li>
+     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_REALTIME_KHR QUEUE_GLOBAL_PRIORITY_REALTIME_KHR} is the highest priority. Useful for critical tasks.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkDeviceQueueGlobalPriorityCreateInfoEXT}, {@link VkQueueFamilyGlobalPriorityPropertiesEXT}</p>
+     * <p>{@link VkDeviceQueueGlobalPriorityCreateInfoKHR}, {@link VkQueueFamilyGlobalPriorityPropertiesKHR}</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT QUEUE_GLOBAL_PRIORITY_LOW_EXT}</li>
+     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT}</li>
+     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT QUEUE_GLOBAL_PRIORITY_HIGH_EXT}</li>
+     * <li>{@link #VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT QUEUE_GLOBAL_PRIORITY_REALTIME_EXT}</li>
+     * </ul>
      */
     public static final int
+        VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR      = 128,
+        VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR   = 256,
+        VK_QUEUE_GLOBAL_PRIORITY_HIGH_KHR     = 512,
+        VK_QUEUE_GLOBAL_PRIORITY_REALTIME_KHR = 1024,
         VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT      = 128,
         VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT   = 256,
         VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT     = 512,

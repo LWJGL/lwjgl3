@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkCheckpointData2NV {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     VkPipelineStageFlags2KHR {@link #stage};
+ *     VkPipelineStageFlags2 {@link #stage};
  *     void * {@link #pCheckpointMarker};
  * }</code></pre>
  */
@@ -93,7 +93,7 @@ public class VkCheckpointData2NV extends Struct implements NativeResource {
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates a single pipeline stage which the checkpoint marker data refers to. */
-    @NativeType("VkPipelineStageFlags2KHR")
+    @NativeType("VkPipelineStageFlags2")
     public long stage() { return nstage(address()); }
     /** contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to. */
     @NativeType("void *")
@@ -301,7 +301,7 @@ public class VkCheckpointData2NV extends Struct implements NativeResource {
         @NativeType("void *")
         public long pNext() { return VkCheckpointData2NV.npNext(address()); }
         /** @return the value of the {@link VkCheckpointData2NV#stage} field. */
-        @NativeType("VkPipelineStageFlags2KHR")
+        @NativeType("VkPipelineStageFlags2")
         public long stage() { return VkCheckpointData2NV.nstage(address()); }
         /** @return the value of the {@link VkCheckpointData2NV#pCheckpointMarker} field. */
         @NativeType("void *")

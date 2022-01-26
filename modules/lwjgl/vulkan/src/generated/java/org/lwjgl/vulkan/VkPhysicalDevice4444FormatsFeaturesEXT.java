@@ -28,6 +28,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXT4444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT}</li>
  * </ul>
  * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Although the formats defined by the {@link EXT4444Formats VK_EXT_4444_formats} extension were promoted to Vulkan 1.3 as optional formats, the {@link VkPhysicalDevice4444FormatsFeaturesEXT} structure was not promoted to Vulkan 1.3.</p>
+ * </div>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

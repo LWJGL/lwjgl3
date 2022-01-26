@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing support for zero initialization of workgroup memory by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRZeroInitializeWorkgroupMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderZeroInitializeWorkgroupMemory};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderZeroInitializeWorkgroupMemory;
  * }</code></pre>
  */
-public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SHADERZEROINITIALIZEWORKGROUPMEMORY;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SHADERZEROINITIALIZEWORKGROUPMEMORY = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {
 
     /**
      * Creates a {@code VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -73,32 +36,24 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** specifies whether the implementation supports initializing a variable in Workgroup storage class. */
-    @NativeType("VkBool32")
-    public boolean shaderZeroInitializeWorkgroupMemory() { return nshaderZeroInitializeWorkgroupMemory(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRZeroInitializeWorkgroupMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR} value to the {@link #sType} field. */
-    public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR sType$Default() { return sType(KHRZeroInitializeWorkgroupMemory.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderZeroInitializeWorkgroupMemory} field. */
+    /** Sets the specified value to the {@code shaderZeroInitializeWorkgroupMemory} field. */
+    @Override
     public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR shaderZeroInitializeWorkgroupMemory(@NativeType("VkBool32") boolean value) { nshaderZeroInitializeWorkgroupMemory(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR set(
         int sType,
         long pNext,
@@ -236,24 +191,8 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.PNEXT); }
-    /** Unsafe version of {@link #shaderZeroInitializeWorkgroupMemory}. */
-    public static int nshaderZeroInitializeWorkgroupMemory(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.SHADERZEROINITIALIZEWORKGROUPMEMORY); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #shaderZeroInitializeWorkgroupMemory(boolean) shaderZeroInitializeWorkgroupMemory}. */
-    public static void nshaderZeroInitializeWorkgroupMemory(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.SHADERZEROINITIALIZEWORKGROUPMEMORY, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.Buffer {
 
         private static final VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.create(-1L);
 
@@ -267,7 +206,7 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -288,23 +227,17 @@ public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends St
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#shaderZeroInitializeWorkgroupMemory} field. */
-        @NativeType("VkBool32")
-        public boolean shaderZeroInitializeWorkgroupMemory() { return VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.nshaderZeroInitializeWorkgroupMemory(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRZeroInitializeWorkgroupMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR} value to the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#sType} field. */
-        public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer sType$Default() { return sType(KHRZeroInitializeWorkgroupMemory.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR#shaderZeroInitializeWorkgroupMemory} field. */
+        /** Sets the specified value to the {@code shaderZeroInitializeWorkgroupMemory} field. */
+        @Override
         public VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.Buffer shaderZeroInitializeWorkgroupMemory(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.nshaderZeroInitializeWorkgroupMemory(address(), value ? 1 : 0); return this; }
 
     }

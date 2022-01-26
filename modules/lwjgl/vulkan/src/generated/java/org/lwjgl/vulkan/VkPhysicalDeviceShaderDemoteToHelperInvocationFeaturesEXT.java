@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the shader demote to helper invocations features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTShaderDemoteToHelperInvocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderDemoteToHelperInvocation};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderDemoteToHelperInvocation;
  * }</code></pre>
  */
-public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SHADERDEMOTETOHELPERINVOCATION;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SHADERDEMOTETOHELPERINVOCATION = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures {
 
     /**
      * Creates a {@code VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -73,32 +36,24 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends S
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the SPIR-V {@code DemoteToHelperInvocationEXT} capability. */
-    @NativeType("VkBool32")
-    public boolean shaderDemoteToHelperInvocation() { return nshaderDemoteToHelperInvocation(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTShaderDemoteToHelperInvocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT} value to the {@link #sType} field. */
-    public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT sType$Default() { return sType(EXTShaderDemoteToHelperInvocation.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderDemoteToHelperInvocation} field. */
+    /** Sets the specified value to the {@code shaderDemoteToHelperInvocation} field. */
+    @Override
     public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT shaderDemoteToHelperInvocation(@NativeType("VkBool32") boolean value) { nshaderDemoteToHelperInvocation(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT set(
         int sType,
         long pNext,
@@ -255,24 +210,8 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends S
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.PNEXT); }
-    /** Unsafe version of {@link #shaderDemoteToHelperInvocation}. */
-    public static int nshaderDemoteToHelperInvocation(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.SHADERDEMOTETOHELPERINVOCATION); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #shaderDemoteToHelperInvocation(boolean) shaderDemoteToHelperInvocation}. */
-    public static void nshaderDemoteToHelperInvocation(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.SHADERDEMOTETOHELPERINVOCATION, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.Buffer {
 
         private static final VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT ELEMENT_FACTORY = VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.create(-1L);
 
@@ -286,7 +225,7 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends S
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -307,23 +246,17 @@ public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends S
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#shaderDemoteToHelperInvocation} field. */
-        @NativeType("VkBool32")
-        public boolean shaderDemoteToHelperInvocation() { return VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.nshaderDemoteToHelperInvocation(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTShaderDemoteToHelperInvocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT} value to the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#sType} field. */
-        public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer sType$Default() { return sType(EXTShaderDemoteToHelperInvocation.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT#shaderDemoteToHelperInvocation} field. */
+        /** Sets the specified value to the {@code shaderDemoteToHelperInvocation} field. */
+        @Override
         public VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.Buffer shaderDemoteToHelperInvocation(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.nshaderDemoteToHelperInvocation(address(), value ? 1 : 0); return this; }
 
     }

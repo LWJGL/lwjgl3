@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_FORMAT_PROPERTIES_2}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDrmFormatModifierPropertiesList2EXT}, {@link VkDrmFormatModifierPropertiesListEXT}, {@link VkFormatProperties3KHR}, {@link VkVideoDecodeH264ProfileEXT}, {@link VkVideoDecodeH265ProfileEXT}, {@link VkVideoEncodeH264ProfileEXT}, {@link VkVideoEncodeH265ProfileEXT}, {@link VkVideoProfileKHR}, or {@link VkVideoProfilesKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDrmFormatModifierPropertiesList2EXT}, {@link VkDrmFormatModifierPropertiesListEXT}, {@link VkFormatProperties3}, {@link VkVideoDecodeH264ProfileEXT}, {@link VkVideoDecodeH265ProfileEXT}, {@link VkVideoEncodeH264ProfileEXT}, {@link VkVideoEncodeH265ProfileEXT}, {@link VkVideoProfileKHR}, or {@link VkVideoProfilesKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -100,6 +100,8 @@ public class VkFormatProperties2 extends Struct implements NativeResource {
     public VkFormatProperties2 pNext(VkDrmFormatModifierPropertiesList2EXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDrmFormatModifierPropertiesListEXT} value to the {@code pNext} chain. */
     public VkFormatProperties2 pNext(VkDrmFormatModifierPropertiesListEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkFormatProperties3} value to the {@code pNext} chain. */
+    public VkFormatProperties2 pNext(VkFormatProperties3 value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFormatProperties3KHR} value to the {@code pNext} chain. */
     public VkFormatProperties2 pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH264ProfileEXT} value to the {@code pNext} chain. */
@@ -339,6 +341,8 @@ public class VkFormatProperties2 extends Struct implements NativeResource {
         public VkFormatProperties2.Buffer pNext(VkDrmFormatModifierPropertiesList2EXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDrmFormatModifierPropertiesListEXT} value to the {@code pNext} chain. */
         public VkFormatProperties2.Buffer pNext(VkDrmFormatModifierPropertiesListEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkFormatProperties3} value to the {@code pNext} chain. */
+        public VkFormatProperties2.Buffer pNext(VkFormatProperties3 value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFormatProperties3KHR} value to the {@code pNext} chain. */
         public VkFormatProperties2.Buffer pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH264ProfileEXT} value to the {@code pNext} chain. */

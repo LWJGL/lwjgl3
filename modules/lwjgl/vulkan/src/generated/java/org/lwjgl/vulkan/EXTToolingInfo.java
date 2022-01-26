@@ -22,6 +22,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Typically, the expectation is that developers will simply print out this information for visual inspection when an issue occurs, however a small amount of semantic information about what the tool is doing is provided to help identify it programmatically. For example, if the advertised limits or features of an implementation are unexpected, is there a tool active which modifies these limits? Or if an application is providing debug markers, but the implementation is not actually doing anything with that information, this can quickly point that out.</p>
  * 
+ * <h5>Promotion to Vulkan 1.3</h5>
+ * 
+ * <p>Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
  * <h5>Examples</h5>
  * 
  * <pre><code>
@@ -62,6 +66,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.3-promotions">Vulkan 1.3</a></li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_tooling_info]%20@tobski%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_tooling_info%20extension%3E%3E">tobski</a></li>
@@ -73,6 +81,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
  * <dd>2018-11-05</dd>
+ * <dt><b>Interactions and External Dependencies</b></dt>
+ * <dd><ul>
+ * <li>Promoted to Vulkan 1.3 Core</li>
+ * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Rolando Caloca</li>
@@ -94,7 +106,27 @@ public class EXTToolingInfo {
     public static final int VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT = 1000245000;
 
     /**
-     * Extends {@code VkToolPurposeFlagBitsEXT}.
+     * Extends {@code VkToolPurposeFlagBits}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_TOOL_PURPOSE_VALIDATION_BIT_EXT TOOL_PURPOSE_VALIDATION_BIT_EXT}</li>
+     * <li>{@link #VK_TOOL_PURPOSE_PROFILING_BIT_EXT TOOL_PURPOSE_PROFILING_BIT_EXT}</li>
+     * <li>{@link #VK_TOOL_PURPOSE_TRACING_BIT_EXT TOOL_PURPOSE_TRACING_BIT_EXT}</li>
+     * <li>{@link #VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT}</li>
+     * <li>{@link #VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT}</li>
+     * </ul>
+     */
+    public static final int
+        VK_TOOL_PURPOSE_VALIDATION_BIT_EXT          = 0x1,
+        VK_TOOL_PURPOSE_PROFILING_BIT_EXT           = 0x2,
+        VK_TOOL_PURPOSE_TRACING_BIT_EXT             = 0x4,
+        VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT = 0x8,
+        VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT  = 0x10;
+
+    /**
+     * Extends {@code VkToolPurposeFlagBits}.
      * 
      * <h5>Enum values:</h5>
      * 
@@ -106,28 +138,6 @@ public class EXTToolingInfo {
     public static final int
         VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT = 0x20,
         VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT   = 0x40;
-
-    /**
-     * VkToolPurposeFlagBitsEXT - Bitmask specifying the purposes of an active tool
-     * 
-     * <h5>Description</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_TOOL_PURPOSE_VALIDATION_BIT_EXT TOOL_PURPOSE_VALIDATION_BIT_EXT} specifies that the tool provides validation of API usage.</li>
-     * <li>{@link #VK_TOOL_PURPOSE_PROFILING_BIT_EXT TOOL_PURPOSE_PROFILING_BIT_EXT} specifies that the tool provides profiling of API usage.</li>
-     * <li>{@link #VK_TOOL_PURPOSE_TRACING_BIT_EXT TOOL_PURPOSE_TRACING_BIT_EXT} specifies that the tool is capturing data about the application’s API usage, including anything from simple logging to capturing data for later replay.</li>
-     * <li>{@link #VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT} specifies that the tool provides additional API features/extensions on top of the underlying implementation.</li>
-     * <li>{@link #VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT} specifies that the tool modifies the API features/limits/extensions presented to the application.</li>
-     * <li>{@link #VK_TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT} specifies that the tool reports additional information to the application via callbacks specified by {@link EXTDebugReport#vkCreateDebugReportCallbackEXT CreateDebugReportCallbackEXT} or {@link EXTDebugUtils#vkCreateDebugUtilsMessengerEXT CreateDebugUtilsMessengerEXT}</li>
-     * <li>{@link #VK_TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT} specifies that the tool consumes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-debug-markers">debug markers</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-object-debug-annotation">object debug annotation</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-queue-labels">queue labels</a>, or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#debugging-command-buffer-labels">command buffer labels</a></li>
-     * </ul>
-     */
-    public static final int
-        VK_TOOL_PURPOSE_VALIDATION_BIT_EXT          = 0x1,
-        VK_TOOL_PURPOSE_PROFILING_BIT_EXT           = 0x2,
-        VK_TOOL_PURPOSE_TRACING_BIT_EXT             = 0x4,
-        VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT_EXT = 0x8,
-        VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT  = 0x10;
 
     protected EXTToolingInfo() {
         throw new UnsupportedOperationException();
@@ -149,56 +159,14 @@ public class EXTToolingInfo {
     }
 
     /**
-     * Reports properties of tools active on the specified physical device.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>Information about tools providing debugging, profiling, or similar services, active for a given physical device, can be obtained by calling:</p>
-     * 
-     * <pre><code>
-     * VkResult vkGetPhysicalDeviceToolPropertiesEXT(
-     *     VkPhysicalDevice                            physicalDevice,
-     *     uint32_t*                                   pToolCount,
-     *     VkPhysicalDeviceToolPropertiesEXT*          pToolProperties);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>If {@code pToolProperties} is {@code NULL}, then the number of tools currently active on {@code physicalDevice} is returned in {@code pToolCount}. Otherwise, {@code pToolCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pToolProperties} array, and on return the variable is overwritten with the number of structures actually written to {@code pToolProperties}. If {@code pToolCount} is less than the number of currently active tools, at most {@code pToolCount} structures will be written.</p>
-     * 
-     * <p>The count and properties of active tools <b>may</b> change in response to events outside the scope of the specification. An application <b>should</b> assume these properties might change at any given time.</p>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-     * <li>{@code pToolCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
-     * <li>If the value referenced by {@code pToolCount} is not 0, and {@code pToolProperties} is not {@code NULL}, {@code pToolProperties} <b>must</b> be a valid pointer to an array of {@code pToolCount} {@link VkPhysicalDeviceToolPropertiesEXT} structures</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
-     * <li>{@link VK10#VK_INCOMPLETE INCOMPLETE}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkPhysicalDeviceToolPropertiesEXT}</p>
+     * See {@link VK13#vkGetPhysicalDeviceToolProperties GetPhysicalDeviceToolProperties}.
      *
      * @param physicalDevice  the handle to the physical device to query for active tools.
      * @param pToolCount      a pointer to an integer describing the number of tools active on {@code physicalDevice}.
-     * @param pToolProperties either {@code NULL} or a pointer to an array of {@link VkPhysicalDeviceToolPropertiesEXT} structures.
+     * @param pToolProperties either {@code NULL} or a pointer to an array of {@link VkPhysicalDeviceToolProperties} structures.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceToolPropertiesEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pToolCount, @Nullable @NativeType("VkPhysicalDeviceToolPropertiesEXT *") VkPhysicalDeviceToolPropertiesEXT.Buffer pToolProperties) {
+    public static int vkGetPhysicalDeviceToolPropertiesEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") IntBuffer pToolCount, @Nullable @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.Buffer pToolProperties) {
         if (CHECKS) {
             check(pToolCount, 1);
             checkSafe(pToolProperties, pToolCount.get(pToolCount.position()));
@@ -208,7 +176,7 @@ public class EXTToolingInfo {
 
     /** Array version of: {@link #vkGetPhysicalDeviceToolPropertiesEXT GetPhysicalDeviceToolPropertiesEXT} */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceToolPropertiesEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pToolCount, @Nullable @NativeType("VkPhysicalDeviceToolPropertiesEXT *") VkPhysicalDeviceToolPropertiesEXT.Buffer pToolProperties) {
+    public static int vkGetPhysicalDeviceToolPropertiesEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t *") int[] pToolCount, @Nullable @NativeType("VkPhysicalDeviceToolProperties *") VkPhysicalDeviceToolProperties.Buffer pToolProperties) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceToolPropertiesEXT;
         if (CHECKS) {
             check(__functionAddress);

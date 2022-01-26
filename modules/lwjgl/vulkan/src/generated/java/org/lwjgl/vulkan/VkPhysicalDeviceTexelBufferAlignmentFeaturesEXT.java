@@ -85,7 +85,7 @@ public class VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT extends Struct impl
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation uses more specific alignment requirements advertised in {@link VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT} rather than {@link VkPhysicalDeviceLimits}{@code ::minTexelBufferOffsetAlignment}. */
+    /** indicates whether the implementation uses more specific alignment requirements advertised in {@link VkPhysicalDeviceTexelBufferAlignmentProperties} rather than {@link VkPhysicalDeviceLimits}{@code ::minTexelBufferOffsetAlignment}. */
     @NativeType("VkBool32")
     public boolean texelBufferAlignment() { return ntexelBufferAlignment(address()) != 0; }
 

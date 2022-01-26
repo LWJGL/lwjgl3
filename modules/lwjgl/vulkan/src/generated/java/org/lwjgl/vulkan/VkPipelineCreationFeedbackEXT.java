@@ -9,54 +9,24 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Feedback about the creation of a pipeline or pipeline stage.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link EXTPipelineCreationFeedback#VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT} is not set in {@code flags}, an implementation <b>must</b> not set any other bits in {@code flags}, and the values of all other {@link VkPipelineCreationFeedbackEXT} data members are undefined.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineCreationFeedbackCreateInfoEXT}</p>
+ * See {@link VkPipelineCreationFeedback}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPipelineCreationFeedbackEXT {
- *     VkPipelineCreationFeedbackFlagsEXT {@link #flags};
- *     uint64_t {@link #duration};
+ *     VkPipelineCreationFeedbackFlags flags;
+ *     uint64_t duration;
  * }</code></pre>
  */
-public class VkPipelineCreationFeedbackEXT extends Struct {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        FLAGS,
-        DURATION;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        FLAGS = layout.offsetof(0);
-        DURATION = layout.offsetof(1);
-    }
+public class VkPipelineCreationFeedbackEXT extends VkPipelineCreationFeedback {
 
     /**
      * Creates a {@code VkPipelineCreationFeedbackEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -65,20 +35,26 @@ public class VkPipelineCreationFeedbackEXT extends Struct {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPipelineCreationFeedbackEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
-    @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** a bitmask of {@code VkPipelineCreationFeedbackFlagBitsEXT} providing feedback about the creation of a pipeline or of a pipeline stage. */
-    @NativeType("VkPipelineCreationFeedbackFlagsEXT")
-    public int flags() { return nflags(address()); }
-    /** the duration spent creating a pipeline or pipeline stage in nanoseconds. */
-    @NativeType("uint64_t")
-    public long duration() { return nduration(address()); }
-
     // -----------------------------------
+
+    /** Returns a new {@code VkPipelineCreationFeedbackEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkPipelineCreationFeedbackEXT malloc() {
+        return wrap(VkPipelineCreationFeedbackEXT.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkPipelineCreationFeedbackEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkPipelineCreationFeedbackEXT calloc() {
+        return wrap(VkPipelineCreationFeedbackEXT.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkPipelineCreationFeedbackEXT} instance allocated with {@link BufferUtils}. */
+    public static VkPipelineCreationFeedbackEXT create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkPipelineCreationFeedbackEXT.class, memAddress(container), container);
+    }
 
     /** Returns a new {@code VkPipelineCreationFeedbackEXT} instance for the specified memory address. */
     public static VkPipelineCreationFeedbackEXT create(long address) {
@@ -89,6 +65,34 @@ public class VkPipelineCreationFeedbackEXT extends Struct {
     @Nullable
     public static VkPipelineCreationFeedbackEXT createSafe(long address) {
         return address == NULL ? null : wrap(VkPipelineCreationFeedbackEXT.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkPipelineCreationFeedbackEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPipelineCreationFeedbackEXT.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPipelineCreationFeedbackEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPipelineCreationFeedbackEXT.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPipelineCreationFeedbackEXT.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkPipelineCreationFeedbackEXT.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -109,15 +113,65 @@ public class VkPipelineCreationFeedbackEXT extends Struct {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #flags}. */
-    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCreationFeedbackEXT.FLAGS); }
-    /** Unsafe version of {@link #duration}. */
-    public static long nduration(long struct) { return UNSAFE.getLong(null, struct + VkPipelineCreationFeedbackEXT.DURATION); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPipelineCreationFeedbackEXT mallocStack() { return malloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPipelineCreationFeedbackEXT callocStack() { return calloc(stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(MemoryStack)} instead. */
+    @Deprecated public static VkPipelineCreationFeedbackEXT mallocStack(MemoryStack stack) { return malloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(MemoryStack)} instead. */
+    @Deprecated public static VkPipelineCreationFeedbackEXT callocStack(MemoryStack stack) { return calloc(stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPipelineCreationFeedbackEXT.Buffer mallocStack(int capacity) { return malloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPipelineCreationFeedbackEXT.Buffer callocStack(int capacity) { return calloc(capacity, stackGet()); }
+    /** Deprecated for removal in 3.4.0. Use {@link #malloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPipelineCreationFeedbackEXT.Buffer mallocStack(int capacity, MemoryStack stack) { return malloc(capacity, stack); }
+    /** Deprecated for removal in 3.4.0. Use {@link #calloc(int, MemoryStack)} instead. */
+    @Deprecated public static VkPipelineCreationFeedbackEXT.Buffer callocStack(int capacity, MemoryStack stack) { return calloc(capacity, stack); }
+
+    /**
+     * Returns a new {@code VkPipelineCreationFeedbackEXT} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPipelineCreationFeedbackEXT malloc(MemoryStack stack) {
+        return wrap(VkPipelineCreationFeedbackEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkPipelineCreationFeedbackEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkPipelineCreationFeedbackEXT calloc(MemoryStack stack) {
+        return wrap(VkPipelineCreationFeedbackEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkPipelineCreationFeedbackEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPipelineCreationFeedbackEXT.Buffer malloc(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkPipelineCreationFeedbackEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkPipelineCreationFeedbackEXT.Buffer calloc(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
 
     // -----------------------------------
 
     /** An array of {@link VkPipelineCreationFeedbackEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPipelineCreationFeedbackEXT, Buffer> {
+    public static class Buffer extends VkPipelineCreationFeedback.Buffer {
 
         private static final VkPipelineCreationFeedbackEXT ELEMENT_FACTORY = VkPipelineCreationFeedbackEXT.create(-1L);
 
@@ -131,7 +185,7 @@ public class VkPipelineCreationFeedbackEXT extends Struct {
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -151,13 +205,6 @@ public class VkPipelineCreationFeedbackEXT extends Struct {
         protected VkPipelineCreationFeedbackEXT getElementFactory() {
             return ELEMENT_FACTORY;
         }
-
-        /** @return the value of the {@link VkPipelineCreationFeedbackEXT#flags} field. */
-        @NativeType("VkPipelineCreationFeedbackFlagsEXT")
-        public int flags() { return VkPipelineCreationFeedbackEXT.nflags(address()); }
-        /** @return the value of the {@link VkPipelineCreationFeedbackEXT#duration} field. */
-        @NativeType("uint64_t")
-        public long duration() { return VkPipelineCreationFeedbackEXT.nduration(address()); }
 
     }
 

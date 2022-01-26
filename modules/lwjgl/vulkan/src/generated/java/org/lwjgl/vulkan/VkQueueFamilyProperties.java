@@ -115,7 +115,7 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
     /** the unsigned integer count of queues in this queue family. Each queue family <b>must</b> support at least one queue. */
     @NativeType("uint32_t")
     public int queueCount() { return nqueueCount(address()); }
-    /** the unsigned integer count of meaningful bits in the timestamps written via {@link KHRSynchronization2#vkCmdWriteTimestamp2KHR CmdWriteTimestamp2KHR} or {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp}. The valid range for the count is 36..64 bits, or a value of 0, indicating no support for timestamps. Bits outside the valid range are guaranteed to be zeros. */
+    /** the unsigned integer count of meaningful bits in the timestamps written via {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} or {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp}. The valid range for the count is 36..64 bits, or a value of 0, indicating no support for timestamps. Bits outside the valid range are guaranteed to be zeros. */
     @NativeType("uint32_t")
     public int timestampValidBits() { return ntimestampValidBits(address()); }
     /** the minimum granularity supported for image transfer operations on the queues in this queue family. */

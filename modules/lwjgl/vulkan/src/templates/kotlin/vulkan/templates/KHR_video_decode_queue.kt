@@ -88,13 +88,13 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
     )
 
     EnumConstantLong(
-        "Extends {@code VkPipelineStageFlagBits2KHR}.",
+        "Extends {@code VkPipelineStageFlagBits2}.",
 
         "PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR".enum(0x04000000L)
     )
 
     EnumConstantLong(
-        "Extends {@code VkAccessFlagBits2KHR}.",
+        "Extends {@code VkAccessFlagBits2}.",
 
         "ACCESS_2_VIDEO_DECODE_READ_BIT_KHR".enum(0x800000000L),
         "ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR".enum(0x1000000000L)
@@ -131,7 +131,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
     )
 
     EnumConstantLong(
-        "Extends {@code VkFormatFeatureFlagBits2KHR}.",
+        "Extends {@code VkFormatFeatureFlagBits2}.",
 
         "FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR".enum(0x02000000L),
         "FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR".enum(0x04000000L)

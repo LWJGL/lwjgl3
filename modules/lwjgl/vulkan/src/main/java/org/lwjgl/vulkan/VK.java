@@ -194,7 +194,7 @@ public final class VK {
         int minorVersion = VK_VERSION_MINOR(apiVersion);
 
         int[] VK_VERSIONS = {
-            2 // Vulkan 1.0 to 1.2
+            3 // Vulkan 1.0 to 1.3
         };
 
         int maxMajor = min(majorVersion, VK_VERSIONS.length);

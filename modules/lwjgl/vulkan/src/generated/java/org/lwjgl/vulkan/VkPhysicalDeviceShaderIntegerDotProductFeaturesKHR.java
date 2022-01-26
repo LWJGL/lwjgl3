@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing integer dot product features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRShaderIntegerDotProduct#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceShaderIntegerDotProductFeatures}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderIntegerDotProduct};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderIntegerDotProduct;
  * }</code></pre>
  */
-public class VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SHADERINTEGERDOTPRODUCT;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SHADERINTEGERDOTPRODUCT = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR extends VkPhysicalDeviceShaderIntegerDotProductFeatures {
 
     /**
      * Creates a {@code VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -73,32 +36,24 @@ public class VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR extends Struct i
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** specifies whether shader modules <b>can</b> declare the {@code DotProductInputAllKHR}, {@code DotProductInput4x8BitKHR}, {@code DotProductInput4x8BitPackedKHR} and {@code DotProductKHR} capabilities. */
-    @NativeType("VkBool32")
-    public boolean shaderIntegerDotProduct() { return nshaderIntegerDotProduct(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRShaderIntegerDotProduct#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR} value to the {@link #sType} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR sType$Default() { return sType(KHRShaderIntegerDotProduct.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderIntegerDotProduct} field. */
+    /** Sets the specified value to the {@code shaderIntegerDotProduct} field. */
+    @Override
     public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR shaderIntegerDotProduct(@NativeType("VkBool32") boolean value) { nshaderIntegerDotProduct(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR set(
         int sType,
         long pNext,
@@ -236,24 +191,8 @@ public class VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR extends Struct i
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.PNEXT); }
-    /** Unsafe version of {@link #shaderIntegerDotProduct}. */
-    public static int nshaderIntegerDotProduct(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.SHADERINTEGERDOTPRODUCT); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #shaderIntegerDotProduct(boolean) shaderIntegerDotProduct}. */
-    public static void nshaderIntegerDotProduct(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.SHADERINTEGERDOTPRODUCT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceShaderIntegerDotProductFeatures.Buffer {
 
         private static final VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.create(-1L);
 
@@ -267,7 +206,7 @@ public class VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR extends Struct i
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -288,23 +227,17 @@ public class VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR extends Struct i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR#shaderIntegerDotProduct} field. */
-        @NativeType("VkBool32")
-        public boolean shaderIntegerDotProduct() { return VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.nshaderIntegerDotProduct(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRShaderIntegerDotProduct#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR} value to the {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR#sType} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.Buffer sType$Default() { return sType(KHRShaderIntegerDotProduct.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR#shaderIntegerDotProduct} field. */
+        /** Sets the specified value to the {@code shaderIntegerDotProduct} field. */
+        @Override
         public VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.Buffer shaderIntegerDotProduct(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.nshaderIntegerDotProduct(address(), value ? 1 : 0); return this; }
 
     }

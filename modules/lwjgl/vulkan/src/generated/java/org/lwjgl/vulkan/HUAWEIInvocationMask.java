@@ -98,13 +98,13 @@ public class HUAWEIInvocationMask {
     /** Extends {@code VkStructureType}. */
     public static final int VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI = 1000370000;
 
-    /** Extends {@code VkAccessFlagBits2KHR}. */
+    /** Extends {@code VkAccessFlagBits2}. */
     public static final long VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI = 0x8000000000L;
 
     /** Extends {@code VkImageUsageFlagBits}. */
     public static final int VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI = 0x40000;
 
-    /** Extends {@code VkPipelineStageFlagBits2KHR}. */
+    /** Extends {@code VkPipelineStageFlagBits2}. */
     public static final long VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI = 0x10000000000L;
 
     protected HUAWEIInvocationMask() {

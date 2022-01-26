@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@code VkCommandBuffer} will not be executed within a render pass instance, or if the render pass instance was begun with {@link KHRDynamicRendering#vkCmdBeginRenderingKHR CmdBeginRenderingKHR}, {@code renderPass}, {@code subpass}, and {@code framebuffer} are ignored.</p>
+ * <p>If the {@code VkCommandBuffer} will not be executed within a render pass instance, or if the render pass instance was begun with {@link VK13#vkCmdBeginRendering CmdBeginRendering}, {@code renderPass}, {@code subpass}, and {@code framebuffer} are ignored.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAttachmentSampleCountInfoAMD}, {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT}, {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM}, {@link VkCommandBufferInheritanceRenderingInfoKHR}, {@link VkCommandBufferInheritanceViewportScissorInfoNV}, or {@link VkMultiviewPerViewAttributesInfoNVX}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAttachmentSampleCountInfoAMD}, {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT}, {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM}, {@link VkCommandBufferInheritanceRenderingInfo}, {@link VkCommandBufferInheritanceViewportScissorInfoNV}, or {@link VkMultiviewPerViewAttributesInfoNVX}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>Both of {@code framebuffer}, and {@code renderPass} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
  * </ul>
@@ -162,6 +162,8 @@ public class VkCommandBufferInheritanceInfo extends Struct implements NativeReso
     public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceConditionalRenderingInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceRenderPassTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkCommandBufferInheritanceRenderingInfo} value to the {@code pNext} chain. */
+    public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceRenderingInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkCommandBufferInheritanceRenderingInfoKHR} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkCommandBufferInheritanceRenderingInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkCommandBufferInheritanceViewportScissorInfoNV} value to the {@code pNext} chain. */
@@ -459,6 +461,8 @@ public class VkCommandBufferInheritanceInfo extends Struct implements NativeReso
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceConditionalRenderingInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceRenderPassTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkCommandBufferInheritanceRenderingInfo} value to the {@code pNext} chain. */
+        public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceRenderingInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkCommandBufferInheritanceRenderingInfoKHR} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkCommandBufferInheritanceRenderingInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkCommandBufferInheritanceViewportScissorInfoNV} value to the {@code pNext} chain. */

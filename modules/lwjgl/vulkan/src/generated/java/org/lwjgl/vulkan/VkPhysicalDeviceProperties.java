@@ -33,6 +33,8 @@ import static org.lwjgl.vulkan.VK10.*;
  * <p>The encoding of {@code driverVersion} is implementation-defined. It <b>may</b> not use the same encoding as {@code apiVersion}. Applications should follow information from the <em>vendor</em> on how to extract the version information from {@code driverVersion}.</p>
  * </div>
  * 
+ * <p>On implementations that claim support for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#roadmap-2022">Roadmap 2022</a> profile, the major and minor version expressed by {@code apiVersion} <b>must</b> be at least Vulkan 1.3.</p>
+ * 
  * <p>The {@code vendorID} and {@code deviceID} fields are provided to allow applications to adapt to device characteristics that are not adequately exposed by other Vulkan queries.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>

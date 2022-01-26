@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>{@code viewOffset} has the same effect for the described subpass dependency as {@link VkRenderPassMultiviewCreateInfo}{@code ::pViewOffsets} has on each corresponding subpass dependency.</p>
  * 
- * <p>If a {@link VkMemoryBarrier2KHR} structure is included in the {@code pNext} chain, {@code srcStageMask}, {@code dstStageMask}, {@code srcAccessMask}, and {@code dstAccessMask} parameters are ignored. The synchronization and access scopes instead are defined by the parameters of {@link VkMemoryBarrier2KHR}.</p>
+ * <p>If a {@link VkMemoryBarrier2} is included in the {@code pNext} chain, {@code srcStageMask}, {@code dstStageMask}, {@code srcAccessMask}, and {@code dstAccessMask} parameters are ignored. The synchronization and access scopes instead are defined by the parameters of {@link VkMemoryBarrier2}.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -66,7 +66,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2 STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkMemoryBarrier2KHR}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkMemoryBarrier2}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code srcStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
  * <li>{@code dstStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits} values</li>
@@ -195,6 +195,8 @@ public class VkSubpassDependency2 extends Struct implements NativeResource {
     public VkSubpassDependency2 sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSubpassDependency2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkMemoryBarrier2} value to the {@code pNext} chain. */
+    public VkSubpassDependency2 pNext(VkMemoryBarrier2 value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryBarrier2KHR} value to the {@code pNext} chain. */
     public VkSubpassDependency2 pNext(VkMemoryBarrier2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #srcSubpass} field. */
@@ -483,6 +485,8 @@ public class VkSubpassDependency2 extends Struct implements NativeResource {
         public VkSubpassDependency2.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2); }
         /** Sets the specified value to the {@link VkSubpassDependency2#pNext} field. */
         public VkSubpassDependency2.Buffer pNext(@NativeType("void const *") long value) { VkSubpassDependency2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkMemoryBarrier2} value to the {@code pNext} chain. */
+        public VkSubpassDependency2.Buffer pNext(VkMemoryBarrier2 value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryBarrier2KHR} value to the {@code pNext} chain. */
         public VkSubpassDependency2.Buffer pNext(VkMemoryBarrier2KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkSubpassDependency2#srcSubpass} field. */

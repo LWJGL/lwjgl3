@@ -28,6 +28,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTYcbcr2plane444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT}</li>
  * </ul>
  * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Although the formats defined by the {@link EXTYcbcr2plane444Formats VK_EXT_ycbcr_2plane_444_formats} were promoted to Vulkan 1.3 as optional formats, the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT} structure was not promoted to Vulkan 1.3.</p>
+ * </div>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -89,10 +94,10 @@ public class VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT extends Struct imp
      * indicates that the implementation supports the following 2-plane 444 Y′C<sub>B</sub>C<sub>R</sub> formats:
      * 
      * <ul>
-     * <li>{@link EXTYcbcr2plane444Formats#VK_FORMAT_G8_B8R8_2PLANE_444_UNORM_EXT FORMAT_G8_B8R8_2PLANE_444_UNORM_EXT}</li>
-     * <li>{@link EXTYcbcr2plane444Formats#VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16_EXT FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16_EXT}</li>
-     * <li>{@link EXTYcbcr2plane444Formats#VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16_EXT FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16_EXT}</li>
-     * <li>{@link EXTYcbcr2plane444Formats#VK_FORMAT_G16_B16R16_2PLANE_444_UNORM_EXT FORMAT_G16_B16R16_2PLANE_444_UNORM_EXT}</li>
+     * <li>{@link VK13#VK_FORMAT_G8_B8R8_2PLANE_444_UNORM FORMAT_G8_B8R8_2PLANE_444_UNORM}</li>
+     * <li>{@link VK13#VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16 FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16}</li>
+     * <li>{@link VK13#VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16 FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16}</li>
+     * <li>{@link VK13#VK_FORMAT_G16_B16R16_2PLANE_444_UNORM FORMAT_G16_B16R16_2PLANE_444_UNORM}</li>
      * </ul>
      */
     @NativeType("VkBool32")

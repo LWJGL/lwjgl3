@@ -13,6 +13,9 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
         """
         This extension adds some more dynamic state to support applications that need to reduce the number of pipeline state objects they compile and bind.
 
+        <h5>Promotion to Vulkan 1.3</h5>
+        This extension has been partially promoted. All dynamic state enumerants and entry points in this extension are included in core Vulkan 1.3, with the EXT suffix omitted. The feature structure is not promoted. Extension interfaces that were promoted remain available as aliases of the core functionality.
+
         <h5>VK_EXT_extended_dynamic_state</h5>
         <dl>
             <dt><b>Name String</b></dt>
@@ -33,6 +36,11 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
                 <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_extended_dynamic_state]%20@pdaniell-nv%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_extended_dynamic_state%20extension%3E%3E">pdaniell-nv</a></li>
@@ -43,6 +51,11 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
         <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-12-09</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.3 Core</li>
+            </ul></dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -100,45 +113,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetCullModeEXT",
-        """
-        Set cull mode dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the cull mode, call:
-
-        <pre><code>
-￿void vkCmdSetCullModeEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    VkCullModeFlags                             cullMode);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the cull mode for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_CULL_MODE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::cullMode} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code cullMode} <b>must</b> be a valid combination of {@code VkCullModeFlagBits} values</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdSetCullMode().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkCullModeFlags("cullMode", "specifies the cull mode property to use for drawing.")
@@ -146,45 +121,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetFrontFaceEXT",
-        """
-        Set front face orientation dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the front face orientation, call:
-
-        <pre><code>
-￿void vkCmdSetFrontFaceEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    VkFrontFace                                 frontFace);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the front face orientation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_FRONT_FACE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::frontFace} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code frontFace} <b>must</b> be a valid {@code VkFrontFace} value</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdSetFrontFace().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkFrontFace("frontFace", "a {@code VkFrontFace} value specifying the front-facing triangle orientation to be used for culling.")
@@ -192,45 +129,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetPrimitiveTopologyEXT",
-        """
-        Set primitive topology state dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> primitive topology, call:
-
-        <pre><code>
-￿void vkCmdSetPrimitiveTopologyEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    VkPrimitiveTopology                         primitiveTopology);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the primitive topology for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineInputAssemblyStateCreateInfo{@code ::topology} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code primitiveTopology} <b>must</b> be a valid {@code VkPrimitiveTopology} value</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdSetPrimitiveTopology().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkPrimitiveTopology("primitiveTopology", "specifies the primitive topology to use for drawing.")
@@ -238,53 +137,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetViewportWithCountEXT",
-        """
-        Set the viewport count and viewports dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the viewport count and viewports, call:
-
-        <pre><code>
-￿void vkCmdSetViewportWithCountEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    uint32_t                                    viewportCount,
-￿    const VkViewport*                           pViewports);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the viewport count and viewports state for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineViewportStateCreateInfo{@code ::viewportCount} and {@code pViewports} values used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-            <li>{@code viewportCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-multiViewport">multiple viewports</a> feature is not enabled, {@code viewportCount} <b>must</b> be 1</li>
-            <li>{@code commandBuffer} <b>must</b> not have ##VkCommandBufferInheritanceViewportScissorInfoNV{@code ::viewportScissor2D} enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pViewports} <b>must</b> be a valid pointer to an array of {@code viewportCount} valid ##VkViewport structures</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-            <li>{@code viewportCount} <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-
-        <h5>See Also</h5>
-        ##VkViewport
-        """,
+        "See #CmdSetViewportWithCount().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         AutoSize("pViewports")..uint32_t("viewportCount", "specifies the viewport count."),
@@ -293,56 +146,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetScissorWithCountEXT",
-        """
-        Set the scissor count and scissor rectangular bounds dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the scissor count and scissor rectangular bounds, call:
-
-        <pre><code>
-￿void vkCmdSetScissorWithCountEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    uint32_t                                    scissorCount,
-￿    const VkRect2D*                             pScissors);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the scissor count and scissor rectangular bounds state for subsequence drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineViewportStateCreateInfo{@code ::scissorCount} and {@code pScissors} values used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-            <li>{@code scissorCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-multiViewport">multiple viewports</a> feature is not enabled, {@code scissorCount} <b>must</b> be 1</li>
-            <li>The {@code x} and {@code y} members of {@code offset} member of any element of {@code pScissors} <b>must</b> be greater than or equal to 0</li>
-            <li>Evaluation of <code>(offset.x + extent.width)</code> <b>must</b> not cause a signed integer addition overflow for any element of {@code pScissors}</li>
-            <li>Evaluation of <code>(offset.y + extent.height)</code> <b>must</b> not cause a signed integer addition overflow for any element of {@code pScissors}</li>
-            <li>{@code commandBuffer} <b>must</b> not have ##VkCommandBufferInheritanceViewportScissorInfoNV{@code ::viewportScissor2D} enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pScissors} <b>must</b> be a valid pointer to an array of {@code scissorCount} ##VkRect2D structures</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-            <li>{@code scissorCount} <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-
-        <h5>See Also</h5>
-        ##VkRect2D
-        """,
+        "See #CmdSetScissorWithCount().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         AutoSize("pScissors")..uint32_t("scissorCount", "specifies the scissor count."),
@@ -351,68 +155,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdBindVertexBuffers2EXT",
-        """
-        Bind vertex buffers to a command buffer and dynamically set strides.
-
-        <h5>C Specification</h5>
-        Alternatively, to bind vertex buffers, along with their sizes and strides, to a command buffer for use in subsequent drawing commands, call:
-
-        <pre><code>
-￿void vkCmdBindVertexBuffers2EXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    uint32_t                                    firstBinding,
-￿    uint32_t                                    bindingCount,
-￿    const VkBuffer*                             pBuffers,
-￿    const VkDeviceSize*                         pOffsets,
-￿    const VkDeviceSize*                         pSizes,
-￿    const VkDeviceSize*                         pStrides);</code></pre>
-
-        <h5>Description</h5>
-        The values taken from elements <code>i</code> of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding <code>firstBinding + i</code>, for <code>i</code> in <code>[0, bindingCount)</code>. The vertex input binding is updated to start at the offset indicated by {@code pOffsets}[i] from the start of the buffer {@code pBuffers}[i]. If {@code pSizes} is not {@code NULL} then {@code pSizes}[i] specifies the bound size of the vertex buffer starting from the corresponding elements of {@code pBuffers}[i] plus {@code pOffsets}[i]. All vertex input attributes that use each of these bindings will use these updated addresses in their address calculations for subsequent drawing commands. If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-nullDescriptor">nullDescriptor</a> feature is enabled, elements of {@code pBuffers} <b>can</b> be #NULL_HANDLE, and <b>can</b> be used by the vertex shader. If a vertex input attribute is bound to a vertex input binding that is #NULL_HANDLE, the values taken from memory are considered to be zero, and missing G, B, or A components are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#fxvertex-input-extraction">filled with <code>(0,0,1)</code></a>.
-
-        This command also &lt;pipelines-dynamic-state, dynamically sets&gt;&gt; the byte strides between consecutive elements within buffer {@code pBuffers}[i] to the corresponding {@code pStrides}[i] value when the graphics pipeline is created with #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, strides are specified by the ##VkVertexInputBindingDescription{@code ::stride} values used to create the currently active pipeline.
-
-        If the bound pipeline state object was also created with the #DYNAMIC_STATE_VERTEX_INPUT_EXT dynamic state enabled then #CmdSetVertexInputEXT() <b>can</b> be used instead of {@code vkCmdBindVertexBuffers2EXT} to set the stride.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code firstBinding} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
-            <li>The sum of {@code firstBinding} and {@code bindingCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
-            <li>All elements of {@code pOffsets} <b>must</b> be less than the size of the corresponding element in {@code pBuffers}</li>
-            <li>If {@code pSizes} is not {@code NULL}, all elements of {@code pOffsets} plus {@code pSizes} <b>must</b> be less than or equal to the size of the corresponding element in {@code pBuffers}</li>
-            <li>All elements of {@code pBuffers} <b>must</b> have been created with the #BUFFER_USAGE_VERTEX_BUFFER_BIT flag</li>
-            <li>Each element of {@code pBuffers} that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-nullDescriptor">nullDescriptor</a> feature is not enabled, all elements of {@code pBuffers} <b>must</b> not be #NULL_HANDLE</li>
-            <li>If an element of {@code pBuffers} is #NULL_HANDLE, then the corresponding element of {@code pOffsets} <b>must</b> be zero</li>
-            <li>If {@code pStrides} is not {@code NULL} each element of {@code pStrides} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindingStride}</li>
-            <li>If {@code pStrides} is not {@code NULL} each element of {@code pStrides} <b>must</b> be either 0 or greater than or equal to the maximum extent of all vertex input attributes fetched from the corresponding binding, where the extent is calculated as the ##VkVertexInputAttributeDescription{@code ::offset} plus ##VkVertexInputAttributeDescription{@code ::format} size</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pBuffers} <b>must</b> be a valid pointer to an array of {@code bindingCount} valid or #NULL_HANDLE {@code VkBuffer} handles</li>
-            <li>{@code pOffsets} <b>must</b> be a valid pointer to an array of {@code bindingCount} {@code VkDeviceSize} values</li>
-            <li>If {@code pSizes} is not {@code NULL}, {@code pSizes} <b>must</b> be a valid pointer to an array of {@code bindingCount} {@code VkDeviceSize} values</li>
-            <li>If {@code pStrides} is not {@code NULL}, {@code pStrides} <b>must</b> be a valid pointer to an array of {@code bindingCount} {@code VkDeviceSize} values</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-            <li>If any of {@code pSizes}, or {@code pStrides} are not {@code NULL}, {@code bindingCount} <b>must</b> be greater than 0</li>
-            <li>Both of {@code commandBuffer}, and the elements of {@code pBuffers} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdBindVertexBuffers2().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
         uint32_t("firstBinding", "the index of the first vertex input binding whose state is updated by the command."),
@@ -425,44 +168,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetDepthTestEnableEXT",
-        """
-        Set depth test enable dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically enable or disable</a> the depth test, call:
-
-        <pre><code>
-￿void vkCmdSetDepthTestEnableEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    VkBool32                                    depthTestEnable);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the depth test enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthTestEnable} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdSetDepthTestEnable().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkBool32("depthTestEnable", "specifies if the depth test is enabled.")
@@ -470,44 +176,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetDepthWriteEnableEXT",
-        """
-        Set depth write enable dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the depth write enable, call:
-
-        <pre><code>
-￿void vkCmdSetDepthWriteEnableEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    VkBool32                                    depthWriteEnable);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the depth write enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthWriteEnable} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdSetDepthWriteEnable().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkBool32("depthWriteEnable", "specifies if depth writes are enabled.")
@@ -515,45 +184,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetDepthCompareOpEXT",
-        """
-        Set depth comparison operator dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the depth compare operator, call:
-
-        <pre><code>
-￿void vkCmdSetDepthCompareOpEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    VkCompareOp                                 depthCompareOp);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the depth comparison operator for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthCompareOp} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code depthCompareOp} <b>must</b> be a valid {@code VkCompareOp} value</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdSetDepthCompareOp().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkCompareOp("depthCompareOp", "specifies the depth comparison operator.")
@@ -561,44 +192,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetDepthBoundsTestEnableEXT",
-        """
-        Set depth bounds test enable dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically enable or disable</a> the depth bounds test, call:
-
-        <pre><code>
-￿void vkCmdSetDepthBoundsTestEnableEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    VkBool32                                    depthBoundsTestEnable);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the depth bounds enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthBoundsTestEnable} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdSetDepthBoundsTestEnable().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkBool32("depthBoundsTestEnable", "specifies if the depth bounds test is enabled.")
@@ -606,44 +200,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetStencilTestEnableEXT",
-        """
-        Set stencil test enable dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically enable or disable</a> the stencil test, call:
-
-        <pre><code>
-￿void vkCmdSetStencilTestEnableEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    VkBool32                                    stencilTestEnable);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the stencil test enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::stencilTestEnable} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdSetStencilTestEnable().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkBool32("stencilTestEnable", "specifies if the stencil test is enabled.")
@@ -651,54 +208,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
 
     void(
         "CmdSetStencilOpEXT",
-        """
-        Set stencil operation dynamically for a command buffer.
-
-        <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the stencil operation, call:
-
-        <pre><code>
-￿void vkCmdSetStencilOpEXT(
-￿    VkCommandBuffer                             commandBuffer,
-￿    VkStencilFaceFlags                          faceMask,
-￿    VkStencilOp                                 failOp,
-￿    VkStencilOp                                 passOp,
-￿    VkStencilOp                                 depthFailOp,
-￿    VkCompareOp                                 compareOp);</code></pre>
-
-        <h5>Description</h5>
-        This command sets the stencil operation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_OP_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineDepthStencilStateCreateInfo{@code ::failOp}, {@code passOp}, {@code depthFailOp}, and {@code compareOp} values used to create the currently active pipeline, for both front and back faces.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code faceMask} <b>must</b> be a valid combination of {@code VkStencilFaceFlagBits} values</li>
-            <li>{@code faceMask} <b>must</b> not be 0</li>
-            <li>{@code failOp} <b>must</b> be a valid {@code VkStencilOp} value</li>
-            <li>{@code passOp} <b>must</b> be a valid {@code VkStencilOp} value</li>
-            <li>{@code depthFailOp} <b>must</b> be a valid {@code VkStencilOp} value</li>
-            <li>{@code compareOp} <b>must</b> be a valid {@code VkCompareOp} value</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
-            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
-        </ul>
-
-        <h5>Host Synchronization</h5>
-        <ul>
-            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
-            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Command Properties</h5>
-        <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
-        </table>
-        """,
+        "See #CmdSetStencilOp().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkStencilFaceFlags("faceMask", "a bitmask of {@code VkStencilFaceFlagBits} specifying the set of stencil state for which to update the stencil operation."),

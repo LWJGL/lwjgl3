@@ -36,6 +36,9 @@ val EXT_pipeline_creation_cache_control = "EXTPipelineCreationCacheControl".nati
 
         The hope is that armed with this information application and engine developers can leverage existing asset streaming systems to recover from "just-in-time" pipeline creation stalls.
 
+        <h5>Promotion to Vulkan 1.3</h5>
+        Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <h5>VK_EXT_pipeline_creation_cache_control</h5>
         <dl>
             <dt><b>Name String</b></dt>
@@ -55,6 +58,11 @@ val EXT_pipeline_creation_cache_control = "EXTPipelineCreationCacheControl".nati
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Gregory Grebe <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_pipeline_creation_cache_control]%20@grgrebe_amd%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_pipeline_creation_cache_control%20extension%3E%3E">grgrebe_amd</a></li>
@@ -65,6 +73,11 @@ val EXT_pipeline_creation_cache_control = "EXTPipelineCreationCacheControl".nati
         <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2020-03-23</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.3 Core</li>
+            </ul></dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>

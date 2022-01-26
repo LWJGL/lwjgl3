@@ -192,7 +192,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
     )
 
     EnumConstantLong(
-        "Extends {@code VkFormatFeatureFlagBits2KHR}.",
+        "Extends {@code VkFormatFeatureFlagBits2}.",
 
         "FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR".enum(0x20000000L)
     )

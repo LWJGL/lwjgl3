@@ -16,70 +16,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a buffer copy operation.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The {@code size} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR STRUCTURE_TYPE_BUFFER_COPY_2_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkCopyBufferInfo2KHR}</p>
+ * See {@link VkBufferCopy2}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkBufferCopy2KHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceSize {@link #srcOffset};
- *     VkDeviceSize {@link #dstOffset};
- *     VkDeviceSize {@link #size};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceSize srcOffset;
+ *     VkDeviceSize dstOffset;
+ *     VkDeviceSize size;
  * }</code></pre>
  */
-public class VkBufferCopy2KHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SRCOFFSET,
-        DSTOFFSET,
-        SIZE;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8),
-            __member(8),
-            __member(8)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SRCOFFSET = layout.offsetof(2);
-        DSTOFFSET = layout.offsetof(3);
-        SIZE = layout.offsetof(4);
-    }
+public class VkBufferCopy2KHR extends VkBufferCopy2 {
 
     /**
      * Creates a {@code VkBufferCopy2KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -88,42 +38,30 @@ public class VkBufferCopy2KHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkBufferCopy2KHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** the starting offset in bytes from the start of {@code srcBuffer}. */
-    @NativeType("VkDeviceSize")
-    public long srcOffset() { return nsrcOffset(address()); }
-    /** the starting offset in bytes from the start of {@code dstBuffer}. */
-    @NativeType("VkDeviceSize")
-    public long dstOffset() { return ndstOffset(address()); }
-    /** the number of bytes to copy. */
-    @NativeType("VkDeviceSize")
-    public long size() { return nsize(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkBufferCopy2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR STRUCTURE_TYPE_BUFFER_COPY_2_KHR} value to the {@link #sType} field. */
-    public VkBufferCopy2KHR sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BUFFER_COPY_2 STRUCTURE_TYPE_BUFFER_COPY_2} value to the {@code sType} field. */
+    @Override
+    public VkBufferCopy2KHR sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BUFFER_COPY_2); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkBufferCopy2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcOffset} field. */
+    /** Sets the specified value to the {@code srcOffset} field. */
+    @Override
     public VkBufferCopy2KHR srcOffset(@NativeType("VkDeviceSize") long value) { nsrcOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstOffset} field. */
+    /** Sets the specified value to the {@code dstOffset} field. */
+    @Override
     public VkBufferCopy2KHR dstOffset(@NativeType("VkDeviceSize") long value) { ndstOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
+    @Override
     public VkBufferCopy2KHR size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkBufferCopy2KHR set(
         int sType,
         long pNext,
@@ -265,32 +203,8 @@ public class VkBufferCopy2KHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkBufferCopy2KHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkBufferCopy2KHR.PNEXT); }
-    /** Unsafe version of {@link #srcOffset}. */
-    public static long nsrcOffset(long struct) { return UNSAFE.getLong(null, struct + VkBufferCopy2KHR.SRCOFFSET); }
-    /** Unsafe version of {@link #dstOffset}. */
-    public static long ndstOffset(long struct) { return UNSAFE.getLong(null, struct + VkBufferCopy2KHR.DSTOFFSET); }
-    /** Unsafe version of {@link #size}. */
-    public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VkBufferCopy2KHR.SIZE); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkBufferCopy2KHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkBufferCopy2KHR.PNEXT, value); }
-    /** Unsafe version of {@link #srcOffset(long) srcOffset}. */
-    public static void nsrcOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferCopy2KHR.SRCOFFSET, value); }
-    /** Unsafe version of {@link #dstOffset(long) dstOffset}. */
-    public static void ndstOffset(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferCopy2KHR.DSTOFFSET, value); }
-    /** Unsafe version of {@link #size(long) size}. */
-    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkBufferCopy2KHR.SIZE, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkBufferCopy2KHR} structs. */
-    public static class Buffer extends StructBuffer<VkBufferCopy2KHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkBufferCopy2.Buffer {
 
         private static final VkBufferCopy2KHR ELEMENT_FACTORY = VkBufferCopy2KHR.create(-1L);
 
@@ -304,7 +218,7 @@ public class VkBufferCopy2KHR extends Struct implements NativeResource {
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -325,33 +239,23 @@ public class VkBufferCopy2KHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBufferCopy2KHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkBufferCopy2KHR.nsType(address()); }
-        /** @return the value of the {@link VkBufferCopy2KHR#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkBufferCopy2KHR.npNext(address()); }
-        /** @return the value of the {@link VkBufferCopy2KHR#srcOffset} field. */
-        @NativeType("VkDeviceSize")
-        public long srcOffset() { return VkBufferCopy2KHR.nsrcOffset(address()); }
-        /** @return the value of the {@link VkBufferCopy2KHR#dstOffset} field. */
-        @NativeType("VkDeviceSize")
-        public long dstOffset() { return VkBufferCopy2KHR.ndstOffset(address()); }
-        /** @return the value of the {@link VkBufferCopy2KHR#size} field. */
-        @NativeType("VkDeviceSize")
-        public long size() { return VkBufferCopy2KHR.nsize(address()); }
-
-        /** Sets the specified value to the {@link VkBufferCopy2KHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkBufferCopy2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferCopy2KHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR STRUCTURE_TYPE_BUFFER_COPY_2_KHR} value to the {@link VkBufferCopy2KHR#sType} field. */
-        public VkBufferCopy2KHR.Buffer sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR); }
-        /** Sets the specified value to the {@link VkBufferCopy2KHR#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BUFFER_COPY_2 STRUCTURE_TYPE_BUFFER_COPY_2} value to the {@code sType} field. */
+        @Override
+        public VkBufferCopy2KHR.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BUFFER_COPY_2); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkBufferCopy2KHR.Buffer pNext(@NativeType("void const *") long value) { VkBufferCopy2KHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferCopy2KHR#srcOffset} field. */
+        /** Sets the specified value to the {@code srcOffset} field. */
+        @Override
         public VkBufferCopy2KHR.Buffer srcOffset(@NativeType("VkDeviceSize") long value) { VkBufferCopy2KHR.nsrcOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferCopy2KHR#dstOffset} field. */
+        /** Sets the specified value to the {@code dstOffset} field. */
+        @Override
         public VkBufferCopy2KHR.Buffer dstOffset(@NativeType("VkDeviceSize") long value) { VkBufferCopy2KHR.ndstOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferCopy2KHR#size} field. */
+        /** Sets the specified value to the {@code size} field. */
+        @Override
         public VkBufferCopy2KHR.Buffer size(@NativeType("VkDeviceSize") long value) { VkBufferCopy2KHR.nsize(address(), value); return this; }
 
     }

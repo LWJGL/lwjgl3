@@ -70,11 +70,11 @@ public class KHRVideoEncodeQueue {
     /** The extension name. */
     public static final String VK_KHR_VIDEO_ENCODE_QUEUE_EXTENSION_NAME = "VK_KHR_video_encode_queue";
 
-    /** Extends {@code VkPipelineStageFlagBits2KHR}. */
+    /** Extends {@code VkPipelineStageFlagBits2}. */
     public static final long VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR = 0x8000000L;
 
     /**
-     * Extends {@code VkAccessFlagBits2KHR}.
+     * Extends {@code VkAccessFlagBits2}.
      * 
      * <h5>Enum values:</h5>
      * 
@@ -170,7 +170,7 @@ public class KHRVideoEncodeQueue {
     public static final int VK_QUERY_TYPE_VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR = 1000299000;
 
     /**
-     * Extends {@code VkFormatFeatureFlagBits2KHR}.
+     * Extends {@code VkFormatFeatureFlagBits2}.
      * 
      * <h5>Enum values:</h5>
      * 

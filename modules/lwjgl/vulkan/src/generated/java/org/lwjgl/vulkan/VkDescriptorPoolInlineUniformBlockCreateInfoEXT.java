@@ -16,51 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the maximum number of inline uniform block bindings of a newly created descriptor pool.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT}</li>
- * </ul>
+ * See {@link VkDescriptorPoolInlineUniformBlockCreateInfo}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDescriptorPoolInlineUniformBlockCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #maxInlineUniformBlockBindings};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t maxInlineUniformBlockBindings;
  * }</code></pre>
  */
-public class VkDescriptorPoolInlineUniformBlockCreateInfoEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        MAXINLINEUNIFORMBLOCKBINDINGS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        MAXINLINEUNIFORMBLOCKBINDINGS = layout.offsetof(2);
-    }
+public class VkDescriptorPoolInlineUniformBlockCreateInfoEXT extends VkDescriptorPoolInlineUniformBlockCreateInfo {
 
     /**
      * Creates a {@code VkDescriptorPoolInlineUniformBlockCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -69,32 +36,24 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfoEXT extends Struct impl
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDescriptorPoolInlineUniformBlockCreateInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** the number of inline uniform block bindings to allocate. */
-    @NativeType("uint32_t")
-    public int maxInlineUniformBlockBindings() { return nmaxInlineUniformBlockBindings(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkDescriptorPoolInlineUniformBlockCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT} value to the {@link #sType} field. */
-    public VkDescriptorPoolInlineUniformBlockCreateInfoEXT sType$Default() { return sType(EXTInlineUniformBlock.VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO} value to the {@code sType} field. */
+    @Override
+    public VkDescriptorPoolInlineUniformBlockCreateInfoEXT sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkDescriptorPoolInlineUniformBlockCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxInlineUniformBlockBindings} field. */
+    /** Sets the specified value to the {@code maxInlineUniformBlockBindings} field. */
+    @Override
     public VkDescriptorPoolInlineUniformBlockCreateInfoEXT maxInlineUniformBlockBindings(@NativeType("uint32_t") int value) { nmaxInlineUniformBlockBindings(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkDescriptorPoolInlineUniformBlockCreateInfoEXT set(
         int sType,
         long pNext,
@@ -251,24 +210,8 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfoEXT extends Struct impl
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolInlineUniformBlockCreateInfoEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkDescriptorPoolInlineUniformBlockCreateInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #maxInlineUniformBlockBindings}. */
-    public static int nmaxInlineUniformBlockBindings(long struct) { return UNSAFE.getInt(null, struct + VkDescriptorPoolInlineUniformBlockCreateInfoEXT.MAXINLINEUNIFORMBLOCKBINDINGS); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolInlineUniformBlockCreateInfoEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkDescriptorPoolInlineUniformBlockCreateInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #maxInlineUniformBlockBindings(int) maxInlineUniformBlockBindings}. */
-    public static void nmaxInlineUniformBlockBindings(long struct, int value) { UNSAFE.putInt(null, struct + VkDescriptorPoolInlineUniformBlockCreateInfoEXT.MAXINLINEUNIFORMBLOCKBINDINGS, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkDescriptorPoolInlineUniformBlockCreateInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkDescriptorPoolInlineUniformBlockCreateInfo.Buffer {
 
         private static final VkDescriptorPoolInlineUniformBlockCreateInfoEXT ELEMENT_FACTORY = VkDescriptorPoolInlineUniformBlockCreateInfoEXT.create(-1L);
 
@@ -282,7 +225,7 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfoEXT extends Struct impl
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -303,23 +246,17 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfoEXT extends Struct impl
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkDescriptorPoolInlineUniformBlockCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkDescriptorPoolInlineUniformBlockCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT#maxInlineUniformBlockBindings} field. */
-        @NativeType("uint32_t")
-        public int maxInlineUniformBlockBindings() { return VkDescriptorPoolInlineUniformBlockCreateInfoEXT.nmaxInlineUniformBlockBindings(address()); }
-
-        /** Sets the specified value to the {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkDescriptorPoolInlineUniformBlockCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorPoolInlineUniformBlockCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT} value to the {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT#sType} field. */
-        public VkDescriptorPoolInlineUniformBlockCreateInfoEXT.Buffer sType$Default() { return sType(EXTInlineUniformBlock.VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO} value to the {@code sType} field. */
+        @Override
+        public VkDescriptorPoolInlineUniformBlockCreateInfoEXT.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkDescriptorPoolInlineUniformBlockCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorPoolInlineUniformBlockCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorPoolInlineUniformBlockCreateInfoEXT#maxInlineUniformBlockBindings} field. */
+        /** Sets the specified value to the {@code maxInlineUniformBlockBindings} field. */
+        @Override
         public VkDescriptorPoolInlineUniformBlockCreateInfoEXT.Buffer maxInlineUniformBlockBindings(@NativeType("uint32_t") int value) { VkDescriptorPoolInlineUniformBlockCreateInfoEXT.nmaxInlineUniformBlockBindings(address(), value); return this; }
 
     }

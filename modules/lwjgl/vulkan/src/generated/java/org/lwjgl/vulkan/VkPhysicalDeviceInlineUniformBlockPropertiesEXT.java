@@ -16,71 +16,22 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing inline uniform block properties that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceInlineUniformBlockProperties}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceInlineUniformBlockPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #maxInlineUniformBlockSize};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t maxInlineUniformBlockSize;
  *     uint32_t maxPerStageDescriptorInlineUniformBlocks;
- *     uint32_t {@link #maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks};
- *     uint32_t {@link #maxDescriptorSetInlineUniformBlocks};
- *     uint32_t {@link #maxDescriptorSetUpdateAfterBindInlineUniformBlocks};
+ *     uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
+ *     uint32_t maxDescriptorSetInlineUniformBlocks;
+ *     uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
  * }</code></pre>
  */
-public class VkPhysicalDeviceInlineUniformBlockPropertiesEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        MAXINLINEUNIFORMBLOCKSIZE,
-        MAXPERSTAGEDESCRIPTORINLINEUNIFORMBLOCKS,
-        MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINLINEUNIFORMBLOCKS,
-        MAXDESCRIPTORSETINLINEUNIFORMBLOCKS,
-        MAXDESCRIPTORSETUPDATEAFTERBINDINLINEUNIFORMBLOCKS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        MAXINLINEUNIFORMBLOCKSIZE = layout.offsetof(2);
-        MAXPERSTAGEDESCRIPTORINLINEUNIFORMBLOCKS = layout.offsetof(3);
-        MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINLINEUNIFORMBLOCKS = layout.offsetof(4);
-        MAXDESCRIPTORSETINLINEUNIFORMBLOCKS = layout.offsetof(5);
-        MAXDESCRIPTORSETUPDATEAFTERBINDINLINEUNIFORMBLOCKS = layout.offsetof(6);
-    }
+public class VkPhysicalDeviceInlineUniformBlockPropertiesEXT extends VkPhysicalDeviceInlineUniformBlockProperties {
 
     /**
      * Creates a {@code VkPhysicalDeviceInlineUniformBlockPropertiesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -89,42 +40,21 @@ public class VkPhysicalDeviceInlineUniformBlockPropertiesEXT extends Struct impl
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceInlineUniformBlockPropertiesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** the maximum size in bytes of an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-inlineuniformblock">inline uniform block</a> binding. */
-    @NativeType("uint32_t")
-    public int maxInlineUniformBlockSize() { return nmaxInlineUniformBlockSize(address()); }
-    /** @return the value of the {@code maxPerStageDescriptorInlineUniformBlocks} field. */
-    @NativeType("uint32_t")
-    public int maxPerStageDescriptorInlineUniformBlocks() { return nmaxPerStageDescriptorInlineUniformBlocks(address()); }
-    /** similar to {@code maxPerStageDescriptorInlineUniformBlocks} but counts descriptor bindings from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
-    @NativeType("uint32_t")
-    public int maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks() { return nmaxPerStageDescriptorUpdateAfterBindInlineUniformBlocks(address()); }
-    /** the maximum number of inline uniform block bindings that <b>can</b> be included in descriptor bindings in a pipeline layout across all pipeline shader stages and descriptor set numbers. Descriptor bindings with a descriptor type of {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} count against this limit. Only descriptor bindings in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set count against this limit. */
-    @NativeType("uint32_t")
-    public int maxDescriptorSetInlineUniformBlocks() { return nmaxDescriptorSetInlineUniformBlocks(address()); }
-    /** similar to {@code maxDescriptorSetInlineUniformBlocks} but counts descriptor bindings from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
-    @NativeType("uint32_t")
-    public int maxDescriptorSetUpdateAfterBindInlineUniformBlocks() { return nmaxDescriptorSetUpdateAfterBindInlineUniformBlocks(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceInlineUniformBlockPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT} value to the {@link #sType} field. */
-    public VkPhysicalDeviceInlineUniformBlockPropertiesEXT sType$Default() { return sType(EXTInlineUniformBlock.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceInlineUniformBlockPropertiesEXT sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceInlineUniformBlockPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceInlineUniformBlockPropertiesEXT set(
         int sType,
         long pNext
@@ -279,30 +209,8 @@ public class VkPhysicalDeviceInlineUniformBlockPropertiesEXT extends Struct impl
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockPropertiesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceInlineUniformBlockPropertiesEXT.PNEXT); }
-    /** Unsafe version of {@link #maxInlineUniformBlockSize}. */
-    public static int nmaxInlineUniformBlockSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockPropertiesEXT.MAXINLINEUNIFORMBLOCKSIZE); }
-    /** Unsafe version of {@link #maxPerStageDescriptorInlineUniformBlocks}. */
-    public static int nmaxPerStageDescriptorInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockPropertiesEXT.MAXPERSTAGEDESCRIPTORINLINEUNIFORMBLOCKS); }
-    /** Unsafe version of {@link #maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks}. */
-    public static int nmaxPerStageDescriptorUpdateAfterBindInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockPropertiesEXT.MAXPERSTAGEDESCRIPTORUPDATEAFTERBINDINLINEUNIFORMBLOCKS); }
-    /** Unsafe version of {@link #maxDescriptorSetInlineUniformBlocks}. */
-    public static int nmaxDescriptorSetInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockPropertiesEXT.MAXDESCRIPTORSETINLINEUNIFORMBLOCKS); }
-    /** Unsafe version of {@link #maxDescriptorSetUpdateAfterBindInlineUniformBlocks}. */
-    public static int nmaxDescriptorSetUpdateAfterBindInlineUniformBlocks(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceInlineUniformBlockPropertiesEXT.MAXDESCRIPTORSETUPDATEAFTERBINDINLINEUNIFORMBLOCKS); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceInlineUniformBlockPropertiesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceInlineUniformBlockPropertiesEXT.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceInlineUniformBlockPropertiesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceInlineUniformBlockProperties.Buffer {
 
         private static final VkPhysicalDeviceInlineUniformBlockPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceInlineUniformBlockPropertiesEXT.create(-1L);
 
@@ -316,7 +224,7 @@ public class VkPhysicalDeviceInlineUniformBlockPropertiesEXT extends Struct impl
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -337,33 +245,14 @@ public class VkPhysicalDeviceInlineUniformBlockPropertiesEXT extends Struct impl
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceInlineUniformBlockPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceInlineUniformBlockPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT#maxInlineUniformBlockSize} field. */
-        @NativeType("uint32_t")
-        public int maxInlineUniformBlockSize() { return VkPhysicalDeviceInlineUniformBlockPropertiesEXT.nmaxInlineUniformBlockSize(address()); }
-        /** @return the value of the {@code maxPerStageDescriptorInlineUniformBlocks} field. */
-        @NativeType("uint32_t")
-        public int maxPerStageDescriptorInlineUniformBlocks() { return VkPhysicalDeviceInlineUniformBlockPropertiesEXT.nmaxPerStageDescriptorInlineUniformBlocks(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT#maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks} field. */
-        @NativeType("uint32_t")
-        public int maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks() { return VkPhysicalDeviceInlineUniformBlockPropertiesEXT.nmaxPerStageDescriptorUpdateAfterBindInlineUniformBlocks(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT#maxDescriptorSetInlineUniformBlocks} field. */
-        @NativeType("uint32_t")
-        public int maxDescriptorSetInlineUniformBlocks() { return VkPhysicalDeviceInlineUniformBlockPropertiesEXT.nmaxDescriptorSetInlineUniformBlocks(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT#maxDescriptorSetUpdateAfterBindInlineUniformBlocks} field. */
-        @NativeType("uint32_t")
-        public int maxDescriptorSetUpdateAfterBindInlineUniformBlocks() { return VkPhysicalDeviceInlineUniformBlockPropertiesEXT.nmaxDescriptorSetUpdateAfterBindInlineUniformBlocks(address()); }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceInlineUniformBlockPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceInlineUniformBlockPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT#sType} field. */
-        public VkPhysicalDeviceInlineUniformBlockPropertiesEXT.Buffer sType$Default() { return sType(EXTInlineUniformBlock.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceInlineUniformBlockPropertiesEXT#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceInlineUniformBlockPropertiesEXT.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceInlineUniformBlockPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceInlineUniformBlockPropertiesEXT.npNext(address(), value); return this; }
 
     }

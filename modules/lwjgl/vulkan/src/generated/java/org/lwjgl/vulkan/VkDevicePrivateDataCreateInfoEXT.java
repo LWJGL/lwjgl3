@@ -16,51 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Reserve private data slots.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTPrivateData#VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT}</li>
- * </ul>
+ * See {@link VkDevicePrivateDataCreateInfo}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDevicePrivateDataCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #privateDataSlotRequestCount};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t privateDataSlotRequestCount;
  * }</code></pre>
  */
-public class VkDevicePrivateDataCreateInfoEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PRIVATEDATASLOTREQUESTCOUNT;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PRIVATEDATASLOTREQUESTCOUNT = layout.offsetof(2);
-    }
+public class VkDevicePrivateDataCreateInfoEXT extends VkDevicePrivateDataCreateInfo {
 
     /**
      * Creates a {@code VkDevicePrivateDataCreateInfoEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -69,32 +36,24 @@ public class VkDevicePrivateDataCreateInfoEXT extends Struct implements NativeRe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDevicePrivateDataCreateInfoEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** the amount of slots to reserve. */
-    @NativeType("uint32_t")
-    public int privateDataSlotRequestCount() { return nprivateDataSlotRequestCount(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkDevicePrivateDataCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTPrivateData#VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT} value to the {@link #sType} field. */
-    public VkDevicePrivateDataCreateInfoEXT sType$Default() { return sType(EXTPrivateData.VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO} value to the {@code sType} field. */
+    @Override
+    public VkDevicePrivateDataCreateInfoEXT sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkDevicePrivateDataCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #privateDataSlotRequestCount} field. */
+    /** Sets the specified value to the {@code privateDataSlotRequestCount} field. */
+    @Override
     public VkDevicePrivateDataCreateInfoEXT privateDataSlotRequestCount(@NativeType("uint32_t") int value) { nprivateDataSlotRequestCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkDevicePrivateDataCreateInfoEXT set(
         int sType,
         long pNext,
@@ -232,24 +191,8 @@ public class VkDevicePrivateDataCreateInfoEXT extends Struct implements NativeRe
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDevicePrivateDataCreateInfoEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkDevicePrivateDataCreateInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #privateDataSlotRequestCount}. */
-    public static int nprivateDataSlotRequestCount(long struct) { return UNSAFE.getInt(null, struct + VkDevicePrivateDataCreateInfoEXT.PRIVATEDATASLOTREQUESTCOUNT); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDevicePrivateDataCreateInfoEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkDevicePrivateDataCreateInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #privateDataSlotRequestCount(int) privateDataSlotRequestCount}. */
-    public static void nprivateDataSlotRequestCount(long struct, int value) { UNSAFE.putInt(null, struct + VkDevicePrivateDataCreateInfoEXT.PRIVATEDATASLOTREQUESTCOUNT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkDevicePrivateDataCreateInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkDevicePrivateDataCreateInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkDevicePrivateDataCreateInfo.Buffer {
 
         private static final VkDevicePrivateDataCreateInfoEXT ELEMENT_FACTORY = VkDevicePrivateDataCreateInfoEXT.create(-1L);
 
@@ -263,7 +206,7 @@ public class VkDevicePrivateDataCreateInfoEXT extends Struct implements NativeRe
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -284,23 +227,17 @@ public class VkDevicePrivateDataCreateInfoEXT extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDevicePrivateDataCreateInfoEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkDevicePrivateDataCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDevicePrivateDataCreateInfoEXT#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkDevicePrivateDataCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkDevicePrivateDataCreateInfoEXT#privateDataSlotRequestCount} field. */
-        @NativeType("uint32_t")
-        public int privateDataSlotRequestCount() { return VkDevicePrivateDataCreateInfoEXT.nprivateDataSlotRequestCount(address()); }
-
-        /** Sets the specified value to the {@link VkDevicePrivateDataCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkDevicePrivateDataCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDevicePrivateDataCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTPrivateData#VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT} value to the {@link VkDevicePrivateDataCreateInfoEXT#sType} field. */
-        public VkDevicePrivateDataCreateInfoEXT.Buffer sType$Default() { return sType(EXTPrivateData.VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDevicePrivateDataCreateInfoEXT#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO} value to the {@code sType} field. */
+        @Override
+        public VkDevicePrivateDataCreateInfoEXT.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkDevicePrivateDataCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDevicePrivateDataCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDevicePrivateDataCreateInfoEXT#privateDataSlotRequestCount} field. */
+        /** Sets the specified value to the {@code privateDataSlotRequestCount} field. */
+        @Override
         public VkDevicePrivateDataCreateInfoEXT.Buffer privateDataSlotRequestCount(@NativeType("uint32_t") int value) { VkDevicePrivateDataCreateInfoEXT.nprivateDataSlotRequestCount(address(), value); return this; }
 
     }

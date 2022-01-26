@@ -17,91 +17,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a buffer copy command.
- * 
- * <h5>Description</h5>
- * 
- * <p>Members defined by this structure with the same name as parameters in {@link VK10#vkCmdCopyBuffer CmdCopyBuffer} have the identical effect to those parameters; the child structure {@link VkBufferCopy2KHR} is a variant of {@link VkBufferCopy} which includes {@code sType} and {@code pNext} parameters, allowing it to be extended.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The {@code srcOffset} member of each element of {@code pRegions} <b>must</b> be less than the size of {@code srcBuffer}</li>
- * <li>The {@code dstOffset} member of each element of {@code pRegions} <b>must</b> be less than the size of {@code dstBuffer}</li>
- * <li>The {@code size} member of each element of {@code pRegions} <b>must</b> be less than or equal to the size of {@code srcBuffer} minus {@code srcOffset}</li>
- * <li>The {@code size} member of each element of {@code pRegions} <b>must</b> be less than or equal to the size of {@code dstBuffer} minus {@code dstOffset}</li>
- * <li>The union of the source regions, and the union of the destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory</li>
- * <li>{@code srcBuffer} <b>must</b> have been created with {@link VK10#VK_BUFFER_USAGE_TRANSFER_SRC_BIT BUFFER_USAGE_TRANSFER_SRC_BIT} usage flag</li>
- * <li>If {@code srcBuffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>{@code dstBuffer} <b>must</b> have been created with {@link VK10#VK_BUFFER_USAGE_TRANSFER_DST_BIT BUFFER_USAGE_TRANSFER_DST_BIT} usage flag</li>
- * <li>If {@code dstBuffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code srcBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * <li>{@code dstBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * <li>{@code pRegions} <b>must</b> be a valid pointer to an array of {@code regionCount} valid {@link VkBufferCopy2KHR} structures</li>
- * <li>{@code regionCount} <b>must</b> be greater than 0</li>
- * <li>Both of {@code dstBuffer}, and {@code srcBuffer} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkBufferCopy2KHR}, {@link KHRCopyCommands2#vkCmdCopyBuffer2KHR CmdCopyBuffer2KHR}</p>
+ * See {@link VkCopyBufferInfo2}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCopyBufferInfo2KHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBuffer {@link #srcBuffer};
- *     VkBuffer {@link #dstBuffer};
- *     uint32_t {@link #regionCount};
- *     {@link VkBufferCopy2KHR VkBufferCopy2KHR} const * {@link #pRegions};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBuffer srcBuffer;
+ *     VkBuffer dstBuffer;
+ *     uint32_t regionCount;
+ *     {@link VkBufferCopy2 VkBufferCopy2} const * pRegions;
  * }</code></pre>
  */
-public class VkCopyBufferInfo2KHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SRCBUFFER,
-        DSTBUFFER,
-        REGIONCOUNT,
-        PREGIONS;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8),
-            __member(8),
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SRCBUFFER = layout.offsetof(2);
-        DSTBUFFER = layout.offsetof(3);
-        REGIONCOUNT = layout.offsetof(4);
-        PREGIONS = layout.offsetof(5);
-    }
+public class VkCopyBufferInfo2KHR extends VkCopyBufferInfo2 {
 
     /**
      * Creates a {@code VkCopyBufferInfo2KHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -110,51 +40,36 @@ public class VkCopyBufferInfo2KHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkCopyBufferInfo2KHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** the source buffer. */
-    @NativeType("VkBuffer")
-    public long srcBuffer() { return nsrcBuffer(address()); }
-    /** the destination buffer. */
-    @NativeType("VkBuffer")
-    public long dstBuffer() { return ndstBuffer(address()); }
-    /** the number of regions to copy. */
-    @NativeType("uint32_t")
-    public int regionCount() { return nregionCount(address()); }
-    /** a pointer to an array of {@link VkBufferCopy2KHR} structures specifying the regions to copy. */
-    @NativeType("VkBufferCopy2KHR const *")
-    public VkBufferCopy2KHR.Buffer pRegions() { return npRegions(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkCopyBufferInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR} value to the {@link #sType} field. */
-    public VkCopyBufferInfo2KHR sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2 STRUCTURE_TYPE_COPY_BUFFER_INFO_2} value to the {@code sType} field. */
+    @Override
+    public VkCopyBufferInfo2KHR sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkCopyBufferInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcBuffer} field. */
+    /** Sets the specified value to the {@code srcBuffer} field. */
+    @Override
     public VkCopyBufferInfo2KHR srcBuffer(@NativeType("VkBuffer") long value) { nsrcBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstBuffer} field. */
+    /** Sets the specified value to the {@code dstBuffer} field. */
+    @Override
     public VkCopyBufferInfo2KHR dstBuffer(@NativeType("VkBuffer") long value) { ndstBuffer(address(), value); return this; }
-    /** Sets the address of the specified {@link VkBufferCopy2KHR.Buffer} to the {@link #pRegions} field. */
-    public VkCopyBufferInfo2KHR pRegions(@NativeType("VkBufferCopy2KHR const *") VkBufferCopy2KHR.Buffer value) { npRegions(address(), value); return this; }
+    /** Sets the address of the specified {@link VkBufferCopy2.Buffer} to the {@code pRegions} field. */
+    @Override
+    public VkCopyBufferInfo2KHR pRegions(@NativeType("VkBufferCopy2 const *") VkBufferCopy2.Buffer value) { npRegions(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkCopyBufferInfo2KHR set(
         int sType,
         long pNext,
         long srcBuffer,
         long dstBuffer,
-        VkBufferCopy2KHR.Buffer pRegions
+        VkBufferCopy2.Buffer pRegions
     ) {
         sType(sType);
         pNext(pNext);
@@ -290,45 +205,8 @@ public class VkCopyBufferInfo2KHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCopyBufferInfo2KHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkCopyBufferInfo2KHR.PNEXT); }
-    /** Unsafe version of {@link #srcBuffer}. */
-    public static long nsrcBuffer(long struct) { return UNSAFE.getLong(null, struct + VkCopyBufferInfo2KHR.SRCBUFFER); }
-    /** Unsafe version of {@link #dstBuffer}. */
-    public static long ndstBuffer(long struct) { return UNSAFE.getLong(null, struct + VkCopyBufferInfo2KHR.DSTBUFFER); }
-    /** Unsafe version of {@link #regionCount}. */
-    public static int nregionCount(long struct) { return UNSAFE.getInt(null, struct + VkCopyBufferInfo2KHR.REGIONCOUNT); }
-    /** Unsafe version of {@link #pRegions}. */
-    public static VkBufferCopy2KHR.Buffer npRegions(long struct) { return VkBufferCopy2KHR.create(memGetAddress(struct + VkCopyBufferInfo2KHR.PREGIONS), nregionCount(struct)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyBufferInfo2KHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkCopyBufferInfo2KHR.PNEXT, value); }
-    /** Unsafe version of {@link #srcBuffer(long) srcBuffer}. */
-    public static void nsrcBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyBufferInfo2KHR.SRCBUFFER, value); }
-    /** Unsafe version of {@link #dstBuffer(long) dstBuffer}. */
-    public static void ndstBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkCopyBufferInfo2KHR.DSTBUFFER, value); }
-    /** Sets the specified value to the {@code regionCount} field of the specified {@code struct}. */
-    public static void nregionCount(long struct, int value) { UNSAFE.putInt(null, struct + VkCopyBufferInfo2KHR.REGIONCOUNT, value); }
-    /** Unsafe version of {@link #pRegions(VkBufferCopy2KHR.Buffer) pRegions}. */
-    public static void npRegions(long struct, VkBufferCopy2KHR.Buffer value) { memPutAddress(struct + VkCopyBufferInfo2KHR.PREGIONS, value.address()); nregionCount(struct, value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkCopyBufferInfo2KHR.PREGIONS));
-    }
-
-    // -----------------------------------
-
     /** An array of {@link VkCopyBufferInfo2KHR} structs. */
-    public static class Buffer extends StructBuffer<VkCopyBufferInfo2KHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkCopyBufferInfo2.Buffer {
 
         private static final VkCopyBufferInfo2KHR ELEMENT_FACTORY = VkCopyBufferInfo2KHR.create(-1L);
 
@@ -342,7 +220,7 @@ public class VkCopyBufferInfo2KHR extends Struct implements NativeResource {
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -363,37 +241,24 @@ public class VkCopyBufferInfo2KHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCopyBufferInfo2KHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkCopyBufferInfo2KHR.nsType(address()); }
-        /** @return the value of the {@link VkCopyBufferInfo2KHR#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkCopyBufferInfo2KHR.npNext(address()); }
-        /** @return the value of the {@link VkCopyBufferInfo2KHR#srcBuffer} field. */
-        @NativeType("VkBuffer")
-        public long srcBuffer() { return VkCopyBufferInfo2KHR.nsrcBuffer(address()); }
-        /** @return the value of the {@link VkCopyBufferInfo2KHR#dstBuffer} field. */
-        @NativeType("VkBuffer")
-        public long dstBuffer() { return VkCopyBufferInfo2KHR.ndstBuffer(address()); }
-        /** @return the value of the {@link VkCopyBufferInfo2KHR#regionCount} field. */
-        @NativeType("uint32_t")
-        public int regionCount() { return VkCopyBufferInfo2KHR.nregionCount(address()); }
-        /** @return a {@link VkBufferCopy2KHR.Buffer} view of the struct array pointed to by the {@link VkCopyBufferInfo2KHR#pRegions} field. */
-        @NativeType("VkBufferCopy2KHR const *")
-        public VkBufferCopy2KHR.Buffer pRegions() { return VkCopyBufferInfo2KHR.npRegions(address()); }
-
-        /** Sets the specified value to the {@link VkCopyBufferInfo2KHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkCopyBufferInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyBufferInfo2KHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRCopyCommands2#VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR} value to the {@link VkCopyBufferInfo2KHR#sType} field. */
-        public VkCopyBufferInfo2KHR.Buffer sType$Default() { return sType(KHRCopyCommands2.VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR); }
-        /** Sets the specified value to the {@link VkCopyBufferInfo2KHR#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2 STRUCTURE_TYPE_COPY_BUFFER_INFO_2} value to the {@code sType} field. */
+        @Override
+        public VkCopyBufferInfo2KHR.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkCopyBufferInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkCopyBufferInfo2KHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyBufferInfo2KHR#srcBuffer} field. */
+        /** Sets the specified value to the {@code srcBuffer} field. */
+        @Override
         public VkCopyBufferInfo2KHR.Buffer srcBuffer(@NativeType("VkBuffer") long value) { VkCopyBufferInfo2KHR.nsrcBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyBufferInfo2KHR#dstBuffer} field. */
+        /** Sets the specified value to the {@code dstBuffer} field. */
+        @Override
         public VkCopyBufferInfo2KHR.Buffer dstBuffer(@NativeType("VkBuffer") long value) { VkCopyBufferInfo2KHR.ndstBuffer(address(), value); return this; }
-        /** Sets the address of the specified {@link VkBufferCopy2KHR.Buffer} to the {@link VkCopyBufferInfo2KHR#pRegions} field. */
-        public VkCopyBufferInfo2KHR.Buffer pRegions(@NativeType("VkBufferCopy2KHR const *") VkBufferCopy2KHR.Buffer value) { VkCopyBufferInfo2KHR.npRegions(address(), value); return this; }
+        /** Sets the address of the specified {@link VkBufferCopy2.Buffer} to the {@code pRegions} field. */
+        @Override
+        public VkCopyBufferInfo2KHR.Buffer pRegions(@NativeType("VkBufferCopy2 const *") VkBufferCopy2.Buffer value) { VkCopyBufferInfo2KHR.npRegions(address(), value); return this; }
 
     }
 

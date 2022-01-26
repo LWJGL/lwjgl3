@@ -16,69 +16,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the control subgroup size properties of an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <p>If {@link VkPhysicalDeviceSubgroupProperties}{@code ::supportedOperations} includes <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-subgroup-quad">{@link VK11#VK_SUBGROUP_FEATURE_QUAD_BIT SUBGROUP_FEATURE_QUAD_BIT}</a>, {@code minSubgroupSize} <b>must</b> be greater than or equal to 4.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTSubgroupSizeControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceSubgroupSizeControlProperties}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceSubgroupSizeControlPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #minSubgroupSize};
- *     uint32_t {@link #maxSubgroupSize};
- *     uint32_t {@link #maxComputeWorkgroupSubgroups};
- *     VkShaderStageFlags {@link #requiredSubgroupSizeStages};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t minSubgroupSize;
+ *     uint32_t maxSubgroupSize;
+ *     uint32_t maxComputeWorkgroupSubgroups;
+ *     VkShaderStageFlags requiredSubgroupSizeStages;
  * }</code></pre>
  */
-public class VkPhysicalDeviceSubgroupSizeControlPropertiesEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        MINSUBGROUPSIZE,
-        MAXSUBGROUPSIZE,
-        MAXCOMPUTEWORKGROUPSUBGROUPS,
-        REQUIREDSUBGROUPSIZESTAGES;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        MINSUBGROUPSIZE = layout.offsetof(2);
-        MAXSUBGROUPSIZE = layout.offsetof(3);
-        MAXCOMPUTEWORKGROUPSUBGROUPS = layout.offsetof(4);
-        REQUIREDSUBGROUPSIZESTAGES = layout.offsetof(5);
-    }
+public class VkPhysicalDeviceSubgroupSizeControlPropertiesEXT extends VkPhysicalDeviceSubgroupSizeControlProperties {
 
     /**
      * Creates a {@code VkPhysicalDeviceSubgroupSizeControlPropertiesEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -87,39 +39,21 @@ public class VkPhysicalDeviceSubgroupSizeControlPropertiesEXT extends Struct imp
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceSubgroupSizeControlPropertiesEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** the minimum subgroup size supported by this device. {@code minSubgroupSize} is at least one if any of the physical device’s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code minSubgroupSize} is a power-of-two. {@code minSubgroupSize} is less than or equal to {@code maxSubgroupSize}. {@code minSubgroupSize} is less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-subgroup-size">subgroupSize</a>. */
-    @NativeType("uint32_t")
-    public int minSubgroupSize() { return nminSubgroupSize(address()); }
-    /** the maximum subgroup size supported by this device. {@code maxSubgroupSize} is at least one if any of the physical device’s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code maxSubgroupSize} is a power-of-two. {@code maxSubgroupSize} is greater than or equal to {@code minSubgroupSize}. {@code maxSubgroupSize} is greater than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-subgroup-size">subgroupSize</a>. */
-    @NativeType("uint32_t")
-    public int maxSubgroupSize() { return nmaxSubgroupSize(address()); }
-    /** the maximum number of subgroups supported by the implementation within a workgroup. */
-    @NativeType("uint32_t")
-    public int maxComputeWorkgroupSubgroups() { return nmaxComputeWorkgroupSubgroups(address()); }
-    /** a bitfield of what shader stages support having a required subgroup size specified. */
-    @NativeType("VkShaderStageFlags")
-    public int requiredSubgroupSizeStages() { return nrequiredSubgroupSizeStages(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSubgroupSizeControlPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSubgroupSizeControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT} value to the {@link #sType} field. */
-    public VkPhysicalDeviceSubgroupSizeControlPropertiesEXT sType$Default() { return sType(EXTSubgroupSizeControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceSubgroupSizeControlPropertiesEXT sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceSubgroupSizeControlPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceSubgroupSizeControlPropertiesEXT set(
         int sType,
         long pNext
@@ -274,28 +208,8 @@ public class VkPhysicalDeviceSubgroupSizeControlPropertiesEXT extends Struct imp
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.PNEXT); }
-    /** Unsafe version of {@link #minSubgroupSize}. */
-    public static int nminSubgroupSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.MINSUBGROUPSIZE); }
-    /** Unsafe version of {@link #maxSubgroupSize}. */
-    public static int nmaxSubgroupSize(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.MAXSUBGROUPSIZE); }
-    /** Unsafe version of {@link #maxComputeWorkgroupSubgroups}. */
-    public static int nmaxComputeWorkgroupSubgroups(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.MAXCOMPUTEWORKGROUPSUBGROUPS); }
-    /** Unsafe version of {@link #requiredSubgroupSizeStages}. */
-    public static int nrequiredSubgroupSizeStages(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.REQUIREDSUBGROUPSIZESTAGES); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.PNEXT, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceSubgroupSizeControlPropertiesEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceSubgroupSizeControlProperties.Buffer {
 
         private static final VkPhysicalDeviceSubgroupSizeControlPropertiesEXT ELEMENT_FACTORY = VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.create(-1L);
 
@@ -309,7 +223,7 @@ public class VkPhysicalDeviceSubgroupSizeControlPropertiesEXT extends Struct imp
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -330,30 +244,14 @@ public class VkPhysicalDeviceSubgroupSizeControlPropertiesEXT extends Struct imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT#minSubgroupSize} field. */
-        @NativeType("uint32_t")
-        public int minSubgroupSize() { return VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.nminSubgroupSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT#maxSubgroupSize} field. */
-        @NativeType("uint32_t")
-        public int maxSubgroupSize() { return VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.nmaxSubgroupSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT#maxComputeWorkgroupSubgroups} field. */
-        @NativeType("uint32_t")
-        public int maxComputeWorkgroupSubgroups() { return VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.nmaxComputeWorkgroupSubgroups(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT#requiredSubgroupSizeStages} field. */
-        @NativeType("VkShaderStageFlags")
-        public int requiredSubgroupSizeStages() { return VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.nrequiredSubgroupSizeStages(address()); }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSubgroupSizeControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT#sType} field. */
-        public VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.Buffer sType$Default() { return sType(EXTSubgroupSizeControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupSizeControlPropertiesEXT#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.npNext(address(), value); return this; }
 
     }

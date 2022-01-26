@@ -75,13 +75,13 @@ public class EXTCalibratedTimestamps {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} or {@link KHRSynchronization2#vkCmdWriteTimestamp2KHR CmdWriteTimestamp2KHR} and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
+     * <li>{@link #VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} or {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
      * <li>{@link #VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT TIME_DOMAIN_CLOCK_MONOTONIC_EXT} specifies the CLOCK_MONOTONIC time domain available on POSIX platforms. Timestamp values in this time domain are in units of nanoseconds and are comparable with platform timestamp values captured using the POSIX clock_gettime API as computed by this example:</li>
      * </ul>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>An implementation supporting {@link EXTCalibratedTimestamps VK_EXT_calibrated_timestamps} will use the same time domain for all its {@code VkQueue} so that timestamp values reported for {@link #VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} can be matched to any timestamp captured through {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} or {@link KHRSynchronization2#vkCmdWriteTimestamp2KHR CmdWriteTimestamp2KHR} .</p>
+     * <p>An implementation supporting {@link EXTCalibratedTimestamps VK_EXT_calibrated_timestamps} will use the same time domain for all its {@code VkQueue} so that timestamp values reported for {@link #VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} can be matched to any timestamp captured through {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} or {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} .</p>
      * </div>
      * 
      * <pre><code>

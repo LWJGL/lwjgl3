@@ -212,7 +212,7 @@ public class KHRAccelerationStructure {
         VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR = 0x80000,
         VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_STORAGE_BIT_KHR               = 0x100000;
 
-    /** Extends {@code VkFormatFeatureFlagBits2KHR}. */
+    /** Extends {@code VkFormatFeatureFlagBits2}. */
     public static final long VK_FORMAT_FEATURE_2_ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR = 0x20000000L;
 
     /**

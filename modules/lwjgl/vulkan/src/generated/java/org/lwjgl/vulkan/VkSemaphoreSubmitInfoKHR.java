@@ -16,91 +16,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a semaphore signal or wait operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>Whether this structure defines a semaphore wait or signal operation is defined by how it is used.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-geometryShader">geometry shaders</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT_KHR}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT_KHR} or {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT_KHR}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-conditionalRendering">conditional rendering</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-fragmentDensityMap">fragment density map</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-transformFeedback">transform feedback</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-meshShader">mesh shaders</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_NV PIPELINE_STAGE_2_MESH_SHADER_BIT_NV}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-taskShader">task shaders</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_NV PIPELINE_STAGE_2_TASK_SHADER_BIT_NV}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-shadingRateImage">shading rate image</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-subpassShading">subpass shading</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-invocationMask">invocation mask image</a> feature is not enabled, {@code stageMask} <b>must</b> not contain {@link HUAWEIInvocationMask#VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI}</li>
- * <li>If the {@code device} that {@code semaphore} was created on is not a device group, {@code deviceIndex} <b>must</b> be 0</li>
- * <li>If the {@code device} that {@code semaphore} was created on is a device group, {@code deviceIndex} <b>must</b> be a valid device index</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRSynchronization2#VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
- * <li>{@code stageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2KHR} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSubmitInfo2KHR}</p>
+ * See {@link VkSemaphoreSubmitInfo}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkSemaphoreSubmitInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSemaphore {@link #semaphore};
- *     uint64_t {@link #value};
- *     VkPipelineStageFlags2KHR {@link #stageMask};
- *     uint32_t {@link #deviceIndex};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSemaphore semaphore;
+ *     uint64_t value;
+ *     VkPipelineStageFlags2 stageMask;
+ *     uint32_t deviceIndex;
  * }</code></pre>
  */
-public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SEMAPHORE,
-        VALUE,
-        STAGEMASK,
-        DEVICEINDEX;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(8),
-            __member(8),
-            __member(8),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SEMAPHORE = layout.offsetof(2);
-        VALUE = layout.offsetof(3);
-        STAGEMASK = layout.offsetof(4);
-        DEVICEINDEX = layout.offsetof(5);
-    }
+public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
 
     /**
      * Creates a {@code VkSemaphoreSubmitInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -109,47 +39,33 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkSemaphoreSubmitInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** a {@code VkSemaphore} affected by this operation. */
-    @NativeType("VkSemaphore")
-    public long semaphore() { return nsemaphore(address()); }
-    /** either the value used to signal {@code semaphore} or the value waited on by {@code semaphore}, if {@code semaphore} is a timeline semaphore. Otherwise it is ignored. */
-    @NativeType("uint64_t")
-    public long value() { return nvalue(address()); }
-    /** a {@code VkPipelineStageFlags2KHR} mask of pipeline stages which limit the first synchronization scope of a semaphore signal operation, or second synchronization scope of a semaphore wait operation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-waiting">semaphore wait operation</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-signaling">semaphore signal operation</a> sections of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization">the synchronization chapter</a>. */
-    @NativeType("VkPipelineStageFlags2KHR")
-    public long stageMask() { return nstageMask(address()); }
-    /** the index of the device within a device group that executes the semaphore wait or signal operation. */
-    @NativeType("uint32_t")
-    public int deviceIndex() { return ndeviceIndex(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkSemaphoreSubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR} value to the {@link #sType} field. */
-    public VkSemaphoreSubmitInfoKHR sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO} value to the {@code sType} field. */
+    @Override
+    public VkSemaphoreSubmitInfoKHR sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkSemaphoreSubmitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #semaphore} field. */
+    /** Sets the specified value to the {@code semaphore} field. */
+    @Override
     public VkSemaphoreSubmitInfoKHR semaphore(@NativeType("VkSemaphore") long value) { nsemaphore(address(), value); return this; }
-    /** Sets the specified value to the {@link #value} field. */
+    /** Sets the specified value to the {@code value} field. */
+    @Override
     public VkSemaphoreSubmitInfoKHR value(@NativeType("uint64_t") long value) { nvalue(address(), value); return this; }
-    /** Sets the specified value to the {@link #stageMask} field. */
-    public VkSemaphoreSubmitInfoKHR stageMask(@NativeType("VkPipelineStageFlags2KHR") long value) { nstageMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceIndex} field. */
+    /** Sets the specified value to the {@code stageMask} field. */
+    @Override
+    public VkSemaphoreSubmitInfoKHR stageMask(@NativeType("VkPipelineStageFlags2") long value) { nstageMask(address(), value); return this; }
+    /** Sets the specified value to the {@code deviceIndex} field. */
+    @Override
     public VkSemaphoreSubmitInfoKHR deviceIndex(@NativeType("uint32_t") int value) { ndeviceIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkSemaphoreSubmitInfoKHR set(
         int sType,
         long pNext,
@@ -293,36 +209,8 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreSubmitInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkSemaphoreSubmitInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #semaphore}. */
-    public static long nsemaphore(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreSubmitInfoKHR.SEMAPHORE); }
-    /** Unsafe version of {@link #value}. */
-    public static long nvalue(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreSubmitInfoKHR.VALUE); }
-    /** Unsafe version of {@link #stageMask}. */
-    public static long nstageMask(long struct) { return UNSAFE.getLong(null, struct + VkSemaphoreSubmitInfoKHR.STAGEMASK); }
-    /** Unsafe version of {@link #deviceIndex}. */
-    public static int ndeviceIndex(long struct) { return UNSAFE.getInt(null, struct + VkSemaphoreSubmitInfoKHR.DEVICEINDEX); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreSubmitInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkSemaphoreSubmitInfoKHR.PNEXT, value); }
-    /** Unsafe version of {@link #semaphore(long) semaphore}. */
-    public static void nsemaphore(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreSubmitInfoKHR.SEMAPHORE, value); }
-    /** Unsafe version of {@link #value(long) value}. */
-    public static void nvalue(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreSubmitInfoKHR.VALUE, value); }
-    /** Unsafe version of {@link #stageMask(long) stageMask}. */
-    public static void nstageMask(long struct, long value) { UNSAFE.putLong(null, struct + VkSemaphoreSubmitInfoKHR.STAGEMASK, value); }
-    /** Unsafe version of {@link #deviceIndex(int) deviceIndex}. */
-    public static void ndeviceIndex(long struct, int value) { UNSAFE.putInt(null, struct + VkSemaphoreSubmitInfoKHR.DEVICEINDEX, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkSemaphoreSubmitInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkSemaphoreSubmitInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkSemaphoreSubmitInfo.Buffer {
 
         private static final VkSemaphoreSubmitInfoKHR ELEMENT_FACTORY = VkSemaphoreSubmitInfoKHR.create(-1L);
 
@@ -336,7 +224,7 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -357,38 +245,26 @@ public class VkSemaphoreSubmitInfoKHR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkSemaphoreSubmitInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkSemaphoreSubmitInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#semaphore} field. */
-        @NativeType("VkSemaphore")
-        public long semaphore() { return VkSemaphoreSubmitInfoKHR.nsemaphore(address()); }
-        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#value} field. */
-        @NativeType("uint64_t")
-        public long value() { return VkSemaphoreSubmitInfoKHR.nvalue(address()); }
-        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#stageMask} field. */
-        @NativeType("VkPipelineStageFlags2KHR")
-        public long stageMask() { return VkSemaphoreSubmitInfoKHR.nstageMask(address()); }
-        /** @return the value of the {@link VkSemaphoreSubmitInfoKHR#deviceIndex} field. */
-        @NativeType("uint32_t")
-        public int deviceIndex() { return VkSemaphoreSubmitInfoKHR.ndeviceIndex(address()); }
-
-        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkSemaphoreSubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreSubmitInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR} value to the {@link VkSemaphoreSubmitInfoKHR#sType} field. */
-        public VkSemaphoreSubmitInfoKHR.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR); }
-        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO} value to the {@code sType} field. */
+        @Override
+        public VkSemaphoreSubmitInfoKHR.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkSemaphoreSubmitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreSubmitInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#semaphore} field. */
+        /** Sets the specified value to the {@code semaphore} field. */
+        @Override
         public VkSemaphoreSubmitInfoKHR.Buffer semaphore(@NativeType("VkSemaphore") long value) { VkSemaphoreSubmitInfoKHR.nsemaphore(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#value} field. */
+        /** Sets the specified value to the {@code value} field. */
+        @Override
         public VkSemaphoreSubmitInfoKHR.Buffer value(@NativeType("uint64_t") long value) { VkSemaphoreSubmitInfoKHR.nvalue(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#stageMask} field. */
-        public VkSemaphoreSubmitInfoKHR.Buffer stageMask(@NativeType("VkPipelineStageFlags2KHR") long value) { VkSemaphoreSubmitInfoKHR.nstageMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSemaphoreSubmitInfoKHR#deviceIndex} field. */
+        /** Sets the specified value to the {@code stageMask} field. */
+        @Override
+        public VkSemaphoreSubmitInfoKHR.Buffer stageMask(@NativeType("VkPipelineStageFlags2") long value) { VkSemaphoreSubmitInfoKHR.nstageMask(address(), value); return this; }
+        /** Sets the specified value to the {@code deviceIndex} field. */
+        @Override
         public VkSemaphoreSubmitInfoKHR.Buffer deviceIndex(@NativeType("uint32_t") int value) { VkSemaphoreSubmitInfoKHR.ndeviceIndex(address(), value); return this; }
 
     }

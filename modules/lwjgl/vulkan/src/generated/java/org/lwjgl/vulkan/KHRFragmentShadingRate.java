@@ -129,7 +129,7 @@ public class KHRFragmentShadingRate {
     /** Extends {@code VkFormatFeatureFlagBits}. */
     public static final int VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x40000000;
 
-    /** Extends {@code VkFormatFeatureFlagBits2KHR}. */
+    /** Extends {@code VkFormatFeatureFlagBits2}. */
     public static final long VK_FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR = 0x40000000L;
 
     /**

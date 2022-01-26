@@ -144,7 +144,7 @@ val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_frag
     )
 
     EnumConstantLong(
-        "Extends {@code VkFormatFeatureFlagBits2KHR}.",
+        "Extends {@code VkFormatFeatureFlagBits2}.",
 
         "FORMAT_FEATURE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR".enum(0x40000000L)
     )

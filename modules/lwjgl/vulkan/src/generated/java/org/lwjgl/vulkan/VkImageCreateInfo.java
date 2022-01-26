@@ -218,7 +218,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkDeviceImageMemoryRequirementsKHR}, {@link VkExtent3D}, {@link VK10#vkCreateImage CreateImage}</p>
+ * <p>{@link VkDeviceImageMemoryRequirements}, {@link VkExtent3D}, {@link VK10#vkCreateImage CreateImage}</p>
  * 
  * <h3>Layout</h3>
  * 

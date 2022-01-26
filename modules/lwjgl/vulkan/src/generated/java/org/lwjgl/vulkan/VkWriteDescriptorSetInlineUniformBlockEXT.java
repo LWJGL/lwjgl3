@@ -17,63 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying inline uniform block data.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code dataSize} <b>must</b> be an integer multiple of 4</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT}</li>
- * <li>{@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
- * <li>{@code dataSize} <b>must</b> be greater than 0</li>
- * </ul>
+ * See {@link VkWriteDescriptorSetInlineUniformBlock}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkWriteDescriptorSetInlineUniformBlockEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #dataSize};
- *     void const * {@link #pData};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t dataSize;
+ *     void const * pData;
  * }</code></pre>
  */
-public class VkWriteDescriptorSetInlineUniformBlockEXT extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        DATASIZE,
-        PDATA;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        DATASIZE = layout.offsetof(2);
-        PDATA = layout.offsetof(3);
-    }
+public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptorSetInlineUniformBlock {
 
     /**
      * Creates a {@code VkWriteDescriptorSetInlineUniformBlockEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -82,35 +38,24 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends Struct implements
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkWriteDescriptorSetInlineUniformBlockEXT(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** the number of bytes of inline uniform block data pointed to by {@code pData}. */
-    @NativeType("uint32_t")
-    public int dataSize() { return ndataSize(address()); }
-    /** a pointer to {@code dataSize} number of bytes of data to write to the inline uniform block. */
-    @NativeType("void const *")
-    public ByteBuffer pData() { return npData(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkWriteDescriptorSetInlineUniformBlockEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT} value to the {@link #sType} field. */
-    public VkWriteDescriptorSetInlineUniformBlockEXT sType$Default() { return sType(EXTInlineUniformBlock.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK} value to the {@code sType} field. */
+    @Override
+    public VkWriteDescriptorSetInlineUniformBlockEXT sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkWriteDescriptorSetInlineUniformBlockEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pData} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
+    @Override
     public VkWriteDescriptorSetInlineUniformBlockEXT pData(@NativeType("void const *") ByteBuffer value) { npData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkWriteDescriptorSetInlineUniformBlockEXT set(
         int sType,
         long pNext,
@@ -267,37 +212,8 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends Struct implements
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSetInlineUniformBlockEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkWriteDescriptorSetInlineUniformBlockEXT.PNEXT); }
-    /** Unsafe version of {@link #dataSize}. */
-    public static int ndataSize(long struct) { return UNSAFE.getInt(null, struct + VkWriteDescriptorSetInlineUniformBlockEXT.DATASIZE); }
-    /** Unsafe version of {@link #pData() pData}. */
-    public static ByteBuffer npData(long struct) { return memByteBuffer(memGetAddress(struct + VkWriteDescriptorSetInlineUniformBlockEXT.PDATA), ndataSize(struct)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSetInlineUniformBlockEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkWriteDescriptorSetInlineUniformBlockEXT.PNEXT, value); }
-    /** Sets the specified value to the {@code dataSize} field of the specified {@code struct}. */
-    public static void ndataSize(long struct, int value) { UNSAFE.putInt(null, struct + VkWriteDescriptorSetInlineUniformBlockEXT.DATASIZE, value); }
-    /** Unsafe version of {@link #pData(ByteBuffer) pData}. */
-    public static void npData(long struct, ByteBuffer value) { memPutAddress(struct + VkWriteDescriptorSetInlineUniformBlockEXT.PDATA, memAddress(value)); ndataSize(struct, value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkWriteDescriptorSetInlineUniformBlockEXT.PDATA));
-    }
-
-    // -----------------------------------
-
     /** An array of {@link VkWriteDescriptorSetInlineUniformBlockEXT} structs. */
-    public static class Buffer extends StructBuffer<VkWriteDescriptorSetInlineUniformBlockEXT, Buffer> implements NativeResource {
+    public static class Buffer extends VkWriteDescriptorSetInlineUniformBlock.Buffer {
 
         private static final VkWriteDescriptorSetInlineUniformBlockEXT ELEMENT_FACTORY = VkWriteDescriptorSetInlineUniformBlockEXT.create(-1L);
 
@@ -311,7 +227,7 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends Struct implements
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -332,26 +248,17 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends Struct implements
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkWriteDescriptorSetInlineUniformBlockEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkWriteDescriptorSetInlineUniformBlockEXT.nsType(address()); }
-        /** @return the value of the {@link VkWriteDescriptorSetInlineUniformBlockEXT#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkWriteDescriptorSetInlineUniformBlockEXT.npNext(address()); }
-        /** @return the value of the {@link VkWriteDescriptorSetInlineUniformBlockEXT#dataSize} field. */
-        @NativeType("uint32_t")
-        public int dataSize() { return VkWriteDescriptorSetInlineUniformBlockEXT.ndataSize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkWriteDescriptorSetInlineUniformBlockEXT#pData} field. */
-        @NativeType("void const *")
-        public ByteBuffer pData() { return VkWriteDescriptorSetInlineUniformBlockEXT.npData(address()); }
-
-        /** Sets the specified value to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteDescriptorSetInlineUniformBlockEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTInlineUniformBlock#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT} value to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#sType} field. */
-        public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer sType$Default() { return sType(EXTInlineUniformBlock.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT); }
-        /** Sets the specified value to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK} value to the {@code sType} field. */
+        @Override
+        public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSetInlineUniformBlockEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkWriteDescriptorSetInlineUniformBlockEXT#pData} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
+        @Override
         public VkWriteDescriptorSetInlineUniformBlockEXT.Buffer pData(@NativeType("void const *") ByteBuffer value) { VkWriteDescriptorSetInlineUniformBlockEXT.npData(address(), value); return this; }
 
     }

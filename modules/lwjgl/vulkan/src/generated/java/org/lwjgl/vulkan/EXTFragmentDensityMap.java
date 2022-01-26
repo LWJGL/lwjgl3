@@ -117,7 +117,7 @@ public final class EXTFragmentDensityMap {
         VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT                       = 0x1,
         VK_SAMPLER_CREATE_SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT = 0x2;
 
-    /** Extends {@code VkFormatFeatureFlagBits2KHR}. */
+    /** Extends {@code VkFormatFeatureFlagBits2}. */
     public static final long VK_FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT = 0x1000000L;
 
     private EXTFragmentDensityMap() {}

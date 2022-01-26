@@ -13,6 +13,9 @@ val EXT_pipeline_creation_feedback = "EXTPipelineCreationFeedback".nativeClassVK
         """
         This extension adds a mechanism to provide feedback to an application about pipeline creation, with the specific goal of allowing a feedback loop between build systems and in-the-field application executions to ensure effective pipeline caches are shipped to customers.
 
+        <h5>Promotion to Vulkan 1.3</h5>
+        Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.
+
         <h5>VK_EXT_pipeline_creation_feedback</h5>
         <dl>
             <dt><b>Name String</b></dt>
@@ -32,6 +35,11 @@ val EXT_pipeline_creation_feedback = "EXTPipelineCreationFeedback".nativeClassVK
                 <li>Requires Vulkan 1.0</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+            </ul></dd>
+
             <dt><b>Special Use</b></dt>
             <dd><ul>
                 <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
@@ -47,6 +55,11 @@ val EXT_pipeline_creation_feedback = "EXTPipelineCreationFeedback".nativeClassVK
         <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2019-03-12</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.3 Core</li>
+            </ul></dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -86,33 +99,7 @@ val EXT_pipeline_creation_feedback = "EXTPipelineCreationFeedback".nativeClassVK
     )
 
     EnumConstant(
-        """
-        VkPipelineCreationFeedbackFlagBitsEXT - Bitmask specifying pipeline or pipeline stage creation feedback
-
-        <h5>Description</h5>
-        <ul>
-            <li>#PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT indicates that the feedback information is valid.</li>
-            <li>
-                #PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT indicates that a readily usable pipeline or pipeline stage was found in the {@code pipelineCache} specified by the application in the pipeline creation command.
-                An implementation <b>should</b> set the #PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT bit if it was able to avoid the large majority of pipeline or pipeline stage creation work by using the {@code pipelineCache} parameter of #CreateGraphicsPipelines(), #CreateRayTracingPipelinesKHR(), #CreateRayTracingPipelinesNV(), or #CreateComputePipelines(). When an implementation sets this bit for the entire pipeline, it <b>may</b> leave it unset for any stage.
-
-                <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        Implementations are encouraged to provide a meaningful signal to applications using this bit. The intention is to communicate to the application that the pipeline or pipeline stage was created "as fast as it gets" using the pipeline cache provided by the application. If an implementation uses an internal cache, it is discouraged from setting this bit as the feedback would be unactionable.
-                </div>
-            </li>
-            <li>
-                #PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT indicates that the base pipeline specified by the {@code basePipelineHandle} or {@code basePipelineIndex} member of the stext:Vk*PipelineCreateInfo structure was used to accelerate the creation of the pipeline.
-                An implementation <b>should</b> set the #PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT_EXT bit if it was able to avoid a significant amount of work by using the base pipeline.
-
-                <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        While "significant amount of work" is subjective, implementations are encouraged to provide a meaningful signal to applications using this bit. For example, a 1% reduction in duration may not warrant setting this bit, while a 50% reduction would.
-                </div>
-            </li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkPipelineCreationFeedbackCreateInfoEXT, ##VkPipelineCreationFeedbackEXT
-        """,
+        "Extends {@code VkPipelineCreationFeedbackFlagBits}.",
 
         "PIPELINE_CREATION_FEEDBACK_VALID_BIT_EXT".enum(0x00000001),
         "PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT".enum(0x00000002),

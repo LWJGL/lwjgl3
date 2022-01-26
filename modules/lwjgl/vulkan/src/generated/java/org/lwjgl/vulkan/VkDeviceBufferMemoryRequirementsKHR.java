@@ -17,57 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * (None).
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance4#VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid {@link VkBufferCreateInfo} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkBufferCreateInfo}, {@link KHRMaintenance4#vkGetDeviceBufferMemoryRequirementsKHR GetDeviceBufferMemoryRequirementsKHR}</p>
+ * See {@link VkDeviceBufferMemoryRequirements}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkDeviceBufferMemoryRequirementsKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkBufferCreateInfo VkBufferCreateInfo} const * {@link #pCreateInfo};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkBufferCreateInfo VkBufferCreateInfo} const * pCreateInfo;
  * }</code></pre>
  */
-public class VkDeviceBufferMemoryRequirementsKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        PCREATEINFO;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        PCREATEINFO = layout.offsetof(2);
-    }
+public class VkDeviceBufferMemoryRequirementsKHR extends VkDeviceBufferMemoryRequirements {
 
     /**
      * Creates a {@code VkDeviceBufferMemoryRequirementsKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -76,32 +37,24 @@ public class VkDeviceBufferMemoryRequirementsKHR extends Struct implements Nativ
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkDeviceBufferMemoryRequirementsKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** a pointer to a {@link VkBufferCreateInfo} structure containing parameters affecting creation of the buffer to query. */
-    @NativeType("VkBufferCreateInfo const *")
-    public VkBufferCreateInfo pCreateInfo() { return npCreateInfo(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkDeviceBufferMemoryRequirementsKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance4#VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR} value to the {@link #sType} field. */
-    public VkDeviceBufferMemoryRequirementsKHR sType$Default() { return sType(KHRMaintenance4.VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS} value to the {@code sType} field. */
+    @Override
+    public VkDeviceBufferMemoryRequirementsKHR sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkDeviceBufferMemoryRequirementsKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkBufferCreateInfo} to the {@link #pCreateInfo} field. */
+    /** Sets the address of the specified {@link VkBufferCreateInfo} to the {@code pCreateInfo} field. */
+    @Override
     public VkDeviceBufferMemoryRequirementsKHR pCreateInfo(@NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo value) { npCreateInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkDeviceBufferMemoryRequirementsKHR set(
         int sType,
         long pNext,
@@ -239,33 +192,8 @@ public class VkDeviceBufferMemoryRequirementsKHR extends Struct implements Nativ
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkDeviceBufferMemoryRequirementsKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkDeviceBufferMemoryRequirementsKHR.PNEXT); }
-    /** Unsafe version of {@link #pCreateInfo}. */
-    public static VkBufferCreateInfo npCreateInfo(long struct) { return VkBufferCreateInfo.create(memGetAddress(struct + VkDeviceBufferMemoryRequirementsKHR.PCREATEINFO)); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkDeviceBufferMemoryRequirementsKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkDeviceBufferMemoryRequirementsKHR.PNEXT, value); }
-    /** Unsafe version of {@link #pCreateInfo(VkBufferCreateInfo) pCreateInfo}. */
-    public static void npCreateInfo(long struct, VkBufferCreateInfo value) { memPutAddress(struct + VkDeviceBufferMemoryRequirementsKHR.PCREATEINFO, value.address()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkDeviceBufferMemoryRequirementsKHR.PCREATEINFO));
-    }
-
-    // -----------------------------------
-
     /** An array of {@link VkDeviceBufferMemoryRequirementsKHR} structs. */
-    public static class Buffer extends StructBuffer<VkDeviceBufferMemoryRequirementsKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkDeviceBufferMemoryRequirements.Buffer {
 
         private static final VkDeviceBufferMemoryRequirementsKHR ELEMENT_FACTORY = VkDeviceBufferMemoryRequirementsKHR.create(-1L);
 
@@ -279,7 +207,7 @@ public class VkDeviceBufferMemoryRequirementsKHR extends Struct implements Nativ
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -300,23 +228,17 @@ public class VkDeviceBufferMemoryRequirementsKHR extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceBufferMemoryRequirementsKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkDeviceBufferMemoryRequirementsKHR.nsType(address()); }
-        /** @return the value of the {@link VkDeviceBufferMemoryRequirementsKHR#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkDeviceBufferMemoryRequirementsKHR.npNext(address()); }
-        /** @return a {@link VkBufferCreateInfo} view of the struct pointed to by the {@link VkDeviceBufferMemoryRequirementsKHR#pCreateInfo} field. */
-        @NativeType("VkBufferCreateInfo const *")
-        public VkBufferCreateInfo pCreateInfo() { return VkDeviceBufferMemoryRequirementsKHR.npCreateInfo(address()); }
-
-        /** Sets the specified value to the {@link VkDeviceBufferMemoryRequirementsKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkDeviceBufferMemoryRequirementsKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceBufferMemoryRequirementsKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance4#VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR} value to the {@link VkDeviceBufferMemoryRequirementsKHR#sType} field. */
-        public VkDeviceBufferMemoryRequirementsKHR.Buffer sType$Default() { return sType(KHRMaintenance4.VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR); }
-        /** Sets the specified value to the {@link VkDeviceBufferMemoryRequirementsKHR#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS} value to the {@code sType} field. */
+        @Override
+        public VkDeviceBufferMemoryRequirementsKHR.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkDeviceBufferMemoryRequirementsKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceBufferMemoryRequirementsKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkBufferCreateInfo} to the {@link VkDeviceBufferMemoryRequirementsKHR#pCreateInfo} field. */
+        /** Sets the address of the specified {@link VkBufferCreateInfo} to the {@code pCreateInfo} field. */
+        @Override
         public VkDeviceBufferMemoryRequirementsKHR.Buffer pCreateInfo(@NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo value) { VkDeviceBufferMemoryRequirementsKHR.npCreateInfo(address(), value); return this; }
 
     }

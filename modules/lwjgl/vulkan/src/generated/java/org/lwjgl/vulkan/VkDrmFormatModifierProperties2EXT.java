@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * struct VkDrmFormatModifierProperties2EXT {
  *     uint64_t {@link #drmFormatModifier};
  *     uint32_t {@link #drmFormatModifierPlaneCount};
- *     VkFormatFeatureFlags2KHR {@link #drmFormatModifierTilingFeatures};
+ *     VkFormatFeatureFlags2 {@link #drmFormatModifierTilingFeatures};
  * }</code></pre>
  */
 public class VkDrmFormatModifierProperties2EXT extends Struct {
@@ -77,8 +77,8 @@ public class VkDrmFormatModifierProperties2EXT extends Struct {
     /** the number of <em>memory planes</em> in any image created with {@code format} and {@code drmFormatModifier}. An image’s <em>memory planecount</em> is distinct from its <em>format planecount</em>, as explained below. */
     @NativeType("uint32_t")
     public int drmFormatModifierPlaneCount() { return ndrmFormatModifierPlaneCount(address()); }
-    /** a bitmask of {@code VkFormatFeatureFlagBits2KHR} that are supported by any image created with {@code format} and {@code drmFormatModifier}. */
-    @NativeType("VkFormatFeatureFlags2KHR")
+    /** a bitmask of {@code VkFormatFeatureFlagBits2} that are supported by any image created with {@code format} and {@code drmFormatModifier}. */
+    @NativeType("VkFormatFeatureFlags2")
     public long drmFormatModifierTilingFeatures() { return ndrmFormatModifierTilingFeatures(address()); }
 
     // -----------------------------------
@@ -164,7 +164,7 @@ public class VkDrmFormatModifierProperties2EXT extends Struct {
         @NativeType("uint32_t")
         public int drmFormatModifierPlaneCount() { return VkDrmFormatModifierProperties2EXT.ndrmFormatModifierPlaneCount(address()); }
         /** @return the value of the {@link VkDrmFormatModifierProperties2EXT#drmFormatModifierTilingFeatures} field. */
-        @NativeType("VkFormatFeatureFlags2KHR")
+        @NativeType("VkFormatFeatureFlags2")
         public long drmFormatModifierTilingFeatures() { return VkDrmFormatModifierProperties2EXT.ndrmFormatModifierTilingFeatures(address()); }
 
     }

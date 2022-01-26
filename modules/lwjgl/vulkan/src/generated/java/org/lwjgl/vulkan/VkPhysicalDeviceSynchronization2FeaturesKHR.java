@@ -16,55 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether the implementation supports v2 synchronization commands.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceSynchronization2FeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceSynchronization2FeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRSynchronization2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR}</li>
- * </ul>
+ * See {@link VkPhysicalDeviceSynchronization2Features}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkPhysicalDeviceSynchronization2FeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #synchronization2};
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 synchronization2;
  * }</code></pre>
  */
-public class VkPhysicalDeviceSynchronization2FeaturesKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        SYNCHRONIZATION2;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        SYNCHRONIZATION2 = layout.offsetof(2);
-    }
+public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDeviceSynchronization2Features {
 
     /**
      * Creates a {@code VkPhysicalDeviceSynchronization2FeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -73,32 +36,24 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends Struct implemen
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkPhysicalDeviceSynchronization2FeaturesKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
-    public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the new set of synchronization commands introduced in {@link KHRSynchronization2 VK_KHR_synchronization2}. */
-    @NativeType("VkBool32")
-    public boolean synchronization2() { return nsynchronization2(address()) != 0; }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceSynchronization2FeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR} value to the {@link #sType} field. */
-    public VkPhysicalDeviceSynchronization2FeaturesKHR sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES} value to the {@code sType} field. */
+    @Override
+    public VkPhysicalDeviceSynchronization2FeaturesKHR sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkPhysicalDeviceSynchronization2FeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #synchronization2} field. */
+    /** Sets the specified value to the {@code synchronization2} field. */
+    @Override
     public VkPhysicalDeviceSynchronization2FeaturesKHR synchronization2(@NativeType("VkBool32") boolean value) { nsynchronization2(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkPhysicalDeviceSynchronization2FeaturesKHR set(
         int sType,
         long pNext,
@@ -236,24 +191,8 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends Struct implemen
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSynchronization2FeaturesKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceSynchronization2FeaturesKHR.PNEXT); }
-    /** Unsafe version of {@link #synchronization2}. */
-    public static int nsynchronization2(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceSynchronization2FeaturesKHR.SYNCHRONIZATION2); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSynchronization2FeaturesKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceSynchronization2FeaturesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #synchronization2(boolean) synchronization2}. */
-    public static void nsynchronization2(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceSynchronization2FeaturesKHR.SYNCHRONIZATION2, value); }
-
-    // -----------------------------------
-
     /** An array of {@link VkPhysicalDeviceSynchronization2FeaturesKHR} structs. */
-    public static class Buffer extends StructBuffer<VkPhysicalDeviceSynchronization2FeaturesKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkPhysicalDeviceSynchronization2Features.Buffer {
 
         private static final VkPhysicalDeviceSynchronization2FeaturesKHR ELEMENT_FACTORY = VkPhysicalDeviceSynchronization2FeaturesKHR.create(-1L);
 
@@ -267,7 +206,7 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends Struct implemen
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -288,23 +227,17 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkPhysicalDeviceSynchronization2FeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#pNext} field. */
-        @NativeType("void *")
-        public long pNext() { return VkPhysicalDeviceSynchronization2FeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#synchronization2} field. */
-        @NativeType("VkBool32")
-        public boolean synchronization2() { return VkPhysicalDeviceSynchronization2FeaturesKHR.nsynchronization2(address()) != 0; }
-
-        /** Sets the specified value to the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSynchronization2FeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR} value to the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#sType} field. */
-        public VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES} value to the {@code sType} field. */
+        @Override
+        public VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSynchronization2FeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSynchronization2FeaturesKHR#synchronization2} field. */
+        /** Sets the specified value to the {@code synchronization2} field. */
+        @Override
         public VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer synchronization2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceSynchronization2FeaturesKHR.nsynchronization2(address(), value ? 1 : 0); return this; }
 
     }

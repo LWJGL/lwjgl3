@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkBufferImageCopy}, {@link VkBufferImageCopy2KHR}, {@link VkImageBlit}, {@link VkImageBlit2KHR}, {@link VkImageCopy}, {@link VkImageCopy2KHR}, {@link VkImageResolve}, {@link VkImageResolve2KHR}</p>
+ * <p>{@link VkBufferImageCopy}, {@link VkBufferImageCopy2}, {@link VkImageBlit}, {@link VkImageBlit2}, {@link VkImageCopy}, {@link VkImageCopy2}, {@link VkImageResolve}, {@link VkImageResolve2}</p>
  * 
  * <h3>Layout</h3>
  * 

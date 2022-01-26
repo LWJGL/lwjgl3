@@ -83,12 +83,12 @@ val EXT_calibrated_timestamps = "EXTCalibratedTimestamps".nativeClassVK("EXT_cal
 
         <h5>Description</h5>
         <ul>
-            <li>#TIME_DOMAIN_DEVICE_EXT specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using #CmdWriteTimestamp() or #CmdWriteTimestamp2KHR() and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
+            <li>#TIME_DOMAIN_DEVICE_EXT specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using #CmdWriteTimestamp() or #CmdWriteTimestamp2() and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
             <li>#TIME_DOMAIN_CLOCK_MONOTONIC_EXT specifies the CLOCK_MONOTONIC time domain available on POSIX platforms. Timestamp values in this time domain are in units of nanoseconds and are comparable with platform timestamp values captured using the POSIX clock_gettime API as computed by this example:</li>
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        An implementation supporting {@link EXTCalibratedTimestamps VK_EXT_calibrated_timestamps} will use the same time domain for all its {@code VkQueue} so that timestamp values reported for #TIME_DOMAIN_DEVICE_EXT can be matched to any timestamp captured through #CmdWriteTimestamp() or #CmdWriteTimestamp2KHR() .
+        An implementation supporting {@link EXTCalibratedTimestamps VK_EXT_calibrated_timestamps} will use the same time domain for all its {@code VkQueue} so that timestamp values reported for #TIME_DOMAIN_DEVICE_EXT can be matched to any timestamp captured through #CmdWriteTimestamp() or #CmdWriteTimestamp2() .
         </div>
 
         <pre><code>

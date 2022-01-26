@@ -17,6 +17,9 @@ val EXT_4444_formats = "EXT4444Formats".nativeClassVK("EXT_4444_formats", type =
 
         When VK_EXT_custom_border_color is used, these formats are not subject to the same restrictions for border color without format as with VK_FORMAT_B4G4R4A4_UNORM_PACK16.
 
+        <h5>Promotion to Vulkan 1.3</h5>
+        This extension has been partially promoted. The format enumerants introduced by the extension are included in core Vulkan 1.3, with the EXT suffix omitted. However, runtime support for these formats is optional in core Vulkan 1.3, while if this extension is supported, runtime support is mandatory. The feature structure is not promoted. The original enum names are still available as aliases of the core functionality.
+
         <h5>VK_EXT_4444_formats</h5>
         <dl>
             <dt><b>Name String</b></dt>
@@ -37,6 +40,11 @@ val EXT_4444_formats = "EXT4444Formats".nativeClassVK("EXT_4444_formats", type =
                 <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
             </ul></dd>
 
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+            </ul></dd>
+
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Joshua Ashton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_4444_formats]%20@Joshua-Ashton%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_4444_formats%20extension%3E%3E">Joshua-Ashton</a></li>
@@ -47,6 +55,11 @@ val EXT_4444_formats = "EXT4444Formats".nativeClassVK("EXT_4444_formats", type =
         <dl>
             <dt><b>Last Modified Date</b></dt>
             <dd>2020-07-28</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Promoted to Vulkan 1.3 Core</li>
+            </ul></dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>

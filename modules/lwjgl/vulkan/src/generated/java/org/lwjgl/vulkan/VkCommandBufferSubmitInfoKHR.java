@@ -17,68 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a command buffer submission.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code commandBuffer} <b>must</b> not have been allocated with {@link VK10#VK_COMMAND_BUFFER_LEVEL_SECONDARY COMMAND_BUFFER_LEVEL_SECONDARY}</li>
- * <li>If {@code deviceMask} is not 0, it <b>must</b> be a valid device mask</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRSynchronization2#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSubmitInfo2KHR}</p>
+ * See {@link VkCommandBufferSubmitInfo}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkCommandBufferSubmitInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkCommandBuffer {@link #commandBuffer};
- *     uint32_t {@link #deviceMask};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkCommandBuffer commandBuffer;
+ *     uint32_t deviceMask;
  * }</code></pre>
  */
-public class VkCommandBufferSubmitInfoKHR extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        STYPE,
-        PNEXT,
-        COMMANDBUFFER,
-        DEVICEMASK;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
-            __member(POINTER_SIZE),
-            __member(4)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        COMMANDBUFFER = layout.offsetof(2);
-        DEVICEMASK = layout.offsetof(3);
-    }
+public class VkCommandBufferSubmitInfoKHR extends VkCommandBufferSubmitInfo {
 
     /**
      * Creates a {@code VkCommandBufferSubmitInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -87,37 +38,27 @@ public class VkCommandBufferSubmitInfoKHR extends Struct implements NativeResour
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkCommandBufferSubmitInfoKHR(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the specified value to the {@code sType} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
-    /** a {@code VkCommandBuffer} to be submitted for execution. */
-    @NativeType("VkCommandBuffer")
-    public long commandBuffer() { return ncommandBuffer(address()); }
-    /** a bitmask indicating which devices in a device group execute the command buffer. A {@code deviceMask} of 0 is equivalent to setting all bits corresponding to valid devices in the group to 1. */
-    @NativeType("uint32_t")
-    public int deviceMask() { return ndeviceMask(address()); }
-
-    /** Sets the specified value to the {@link #sType} field. */
     public VkCommandBufferSubmitInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR} value to the {@link #sType} field. */
-    public VkCommandBufferSubmitInfoKHR sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO} value to the {@code sType} field. */
+    @Override
+    public VkCommandBufferSubmitInfoKHR sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO); }
+    /** Sets the specified value to the {@code pNext} field. */
+    @Override
     public VkCommandBufferSubmitInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #commandBuffer} field. */
+    /** Sets the specified value to the {@code commandBuffer} field. */
+    @Override
     public VkCommandBufferSubmitInfoKHR commandBuffer(VkCommandBuffer value) { ncommandBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceMask} field. */
+    /** Sets the specified value to the {@code deviceMask} field. */
+    @Override
     public VkCommandBufferSubmitInfoKHR deviceMask(@NativeType("uint32_t") int value) { ndeviceMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
+    @Override
     public VkCommandBufferSubmitInfoKHR set(
         int sType,
         long pNext,
@@ -257,37 +198,8 @@ public class VkCommandBufferSubmitInfoKHR extends Struct implements NativeResour
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferSubmitInfoKHR.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkCommandBufferSubmitInfoKHR.PNEXT); }
-    /** Unsafe version of {@link #commandBuffer}. */
-    public static long ncommandBuffer(long struct) { return memGetAddress(struct + VkCommandBufferSubmitInfoKHR.COMMANDBUFFER); }
-    /** Unsafe version of {@link #deviceMask}. */
-    public static int ndeviceMask(long struct) { return UNSAFE.getInt(null, struct + VkCommandBufferSubmitInfoKHR.DEVICEMASK); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferSubmitInfoKHR.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkCommandBufferSubmitInfoKHR.PNEXT, value); }
-    /** Unsafe version of {@link #commandBuffer(VkCommandBuffer) commandBuffer}. */
-    public static void ncommandBuffer(long struct, VkCommandBuffer value) { memPutAddress(struct + VkCommandBufferSubmitInfoKHR.COMMANDBUFFER, value.address()); }
-    /** Unsafe version of {@link #deviceMask(int) deviceMask}. */
-    public static void ndeviceMask(long struct, int value) { UNSAFE.putInt(null, struct + VkCommandBufferSubmitInfoKHR.DEVICEMASK, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + VkCommandBufferSubmitInfoKHR.COMMANDBUFFER));
-    }
-
-    // -----------------------------------
-
     /** An array of {@link VkCommandBufferSubmitInfoKHR} structs. */
-    public static class Buffer extends StructBuffer<VkCommandBufferSubmitInfoKHR, Buffer> implements NativeResource {
+    public static class Buffer extends VkCommandBufferSubmitInfo.Buffer {
 
         private static final VkCommandBufferSubmitInfoKHR ELEMENT_FACTORY = VkCommandBufferSubmitInfoKHR.create(-1L);
 
@@ -301,7 +213,7 @@ public class VkCommandBufferSubmitInfoKHR extends Struct implements NativeResour
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -322,28 +234,20 @@ public class VkCommandBufferSubmitInfoKHR extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCommandBufferSubmitInfoKHR#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkCommandBufferSubmitInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkCommandBufferSubmitInfoKHR#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkCommandBufferSubmitInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkCommandBufferSubmitInfoKHR#commandBuffer} field. */
-        @NativeType("VkCommandBuffer")
-        public long commandBuffer() { return VkCommandBufferSubmitInfoKHR.ncommandBuffer(address()); }
-        /** @return the value of the {@link VkCommandBufferSubmitInfoKHR#deviceMask} field. */
-        @NativeType("uint32_t")
-        public int deviceMask() { return VkCommandBufferSubmitInfoKHR.ndeviceMask(address()); }
-
-        /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
+        @Override
         public VkCommandBufferSubmitInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferSubmitInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRSynchronization2#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR} value to the {@link VkCommandBufferSubmitInfoKHR#sType} field. */
-        public VkCommandBufferSubmitInfoKHR.Buffer sType$Default() { return sType(KHRSynchronization2.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR); }
-        /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#pNext} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO} value to the {@code sType} field. */
+        @Override
+        public VkCommandBufferSubmitInfoKHR.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO); }
+        /** Sets the specified value to the {@code pNext} field. */
+        @Override
         public VkCommandBufferSubmitInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferSubmitInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#commandBuffer} field. */
+        /** Sets the specified value to the {@code commandBuffer} field. */
+        @Override
         public VkCommandBufferSubmitInfoKHR.Buffer commandBuffer(VkCommandBuffer value) { VkCommandBufferSubmitInfoKHR.ncommandBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferSubmitInfoKHR#deviceMask} field. */
+        /** Sets the specified value to the {@code deviceMask} field. */
+        @Override
         public VkCommandBufferSubmitInfoKHR.Buffer deviceMask(@NativeType("uint32_t") int value) { VkCommandBufferSubmitInfoKHR.ndeviceMask(address(), value); return this; }
 
     }

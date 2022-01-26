@@ -71,11 +71,11 @@ public class KHRVideoDecodeQueue {
     /** Extends {@code VkQueueFlagBits}. */
     public static final int VK_QUEUE_VIDEO_DECODE_BIT_KHR = 0x20;
 
-    /** Extends {@code VkPipelineStageFlagBits2KHR}. */
+    /** Extends {@code VkPipelineStageFlagBits2}. */
     public static final long VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR = 0x4000000L;
 
     /**
-     * Extends {@code VkAccessFlagBits2KHR}.
+     * Extends {@code VkAccessFlagBits2}.
      * 
      * <h5>Enum values:</h5>
      * 
@@ -149,7 +149,7 @@ public class KHRVideoDecodeQueue {
         VK_IMAGE_LAYOUT_VIDEO_DECODE_DPB_KHR = 1000024002;
 
     /**
-     * Extends {@code VkFormatFeatureFlagBits2KHR}.
+     * Extends {@code VkFormatFeatureFlagBits2}.
      * 
      * <h5>Enum values:</h5>
      * 

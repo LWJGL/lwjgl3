@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Only one of {@code pImageInfo}, {@code pBufferInfo}, or {@code pTexelBufferView} members is used according to the descriptor type specified in the {@code descriptorType} member of the containing {@link VkWriteDescriptorSet} structure, or none of them in case {@code descriptorType} is {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT}, in which case the source data for the descriptor writes is taken from the {@link VkWriteDescriptorSetInlineUniformBlockEXT} structure included in the {@code pNext} chain of {@link VkWriteDescriptorSet}, or if {@code descriptorType} is {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR}, in which case the source data for the descriptor writes is taken from the {@link VkWriteDescriptorSetAccelerationStructureKHR} structure in the {@code pNext} chain of {@link VkWriteDescriptorSet}, or if {@code descriptorType} is {@link NVRayTracing#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV}, in which case the source data for the descriptor writes is taken from the {@link VkWriteDescriptorSetAccelerationStructureNV} structure in the {@code pNext} chain of {@link VkWriteDescriptorSet}, as specified below.</p>
+ * <p>Only one of {@code pImageInfo}, {@code pBufferInfo}, or {@code pTexelBufferView} members is used according to the descriptor type specified in the {@code descriptorType} member of the containing {@link VkWriteDescriptorSet} structure, or none of them in case {@code descriptorType} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, in which case the source data for the descriptor writes is taken from the {@link VkWriteDescriptorSetInlineUniformBlock} structure included in the {@code pNext} chain of {@link VkWriteDescriptorSet}, or if {@code descriptorType} is {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR}, in which case the source data for the descriptor writes is taken from the {@link VkWriteDescriptorSetAccelerationStructureKHR} structure in the {@code pNext} chain of {@link VkWriteDescriptorSet}, or if {@code descriptorType} is {@link NVRayTracing#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV}, in which case the source data for the descriptor writes is taken from the {@link VkWriteDescriptorSetAccelerationStructureNV} structure in the {@code pNext} chain of {@link VkWriteDescriptorSet}, as specified below.</p>
  * 
  * <p>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-nullDescriptor">nullDescriptor</a> feature is enabled, the buffer, acceleration structure, imageView, or bufferView <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}. Loads from a null descriptor return zero values and stores and atomics to a null descriptor are discarded. A null acceleration structure descriptor results in the miss shader being invoked.</p>
  * 
@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>The same behavior applies to bindings with a descriptor type of {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} where {@code descriptorCount} specifies the number of bytes to update while {@code dstArrayElement} specifies the starting byte offset, thus in this case if the {@code dstBinding} has a smaller byte size than the sum of {@code dstArrayElement} and {@code descriptorCount}, then the remainder will be used to update the subsequent binding - <code>dstBinding+1</code> starting at offset zero. This falls out as a special case of the above rule.</p>
+ * <p>The same behavior applies to bindings with a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} where {@code descriptorCount} specifies the number of bytes to update while {@code dstArrayElement} specifies the starting byte offset, thus in this case if the {@code dstBinding} has a smaller byte size than the sum of {@code dstArrayElement} and {@code descriptorCount}, then the remainder will be used to update the subsequent binding - <code>dstBinding+1</code> starting at offset zero. This falls out as a special case of the above rule.</p>
  * </div>
  * 
  * <h5>Valid Usage</h5>
@@ -43,15 +43,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code descriptorType} <b>must</b> match the type of {@code dstBinding} within {@code dstSet}</li>
  * <li>{@code dstSet} <b>must</b> be a valid {@code VkDescriptorSet} handle</li>
  * <li>The sum of {@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding specified by {@code dstBinding}, and all applicable consecutive bindings, as described by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-updates-consecutive">consecutive binding updates</a></li>
- * <li>If {@code descriptorType} is {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT}, {@code dstArrayElement} <b>must</b> be an integer multiple of 4</li>
- * <li>If {@code descriptorType} is {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT}, {@code descriptorCount} <b>must</b> be an integer multiple of 4</li>
+ * <li>If {@code descriptorType} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, {@code dstArrayElement} <b>must</b> be an integer multiple of 4</li>
+ * <li>If {@code descriptorType} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, {@code descriptorCount} <b>must</b> be an integer multiple of 4</li>
  * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}, each element of {@code pTexelBufferView} <b>must</b> be either a valid {@code VkBufferView} handle or {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} and the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-nullDescriptor">nullDescriptor</a> feature is not enabled, each element of {@code pTexelBufferView} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}, {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}, {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC}, or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC}, {@code pBufferInfo} <b>must</b> be a valid pointer to an array of {@code descriptorCount} valid {@link VkDescriptorBufferInfo} structures</li>
  * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER} or {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, and {@code dstSet} was not allocated with a layout that included immutable samplers for {@code dstBinding} with {@code descriptorType}, the {@code sampler} member of each element of {@code pImageInfo} <b>must</b> be a valid {@code VkSampler} object</li>
  * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, or {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT}, the {@code imageView} member of each element of {@code pImageInfo} <b>must</b> be either a valid {@code VkImageView} handle or {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, or {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT} and the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-nullDescriptor">nullDescriptor</a> feature is not enabled, the {@code imageView} member of each element of {@code pImageInfo} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code descriptorType} is {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT}, the {@code pNext} chain <b>must</b> include a {@link VkWriteDescriptorSetInlineUniformBlockEXT} structure whose {@code dataSize} member equals {@code descriptorCount}</li>
+ * <li>If {@code descriptorType} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, the {@code pNext} chain <b>must</b> include a {@link VkWriteDescriptorSetInlineUniformBlock} structure whose {@code dataSize} member equals {@code descriptorCount}</li>
  * <li>If {@code descriptorType} is {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR}, the {@code pNext} chain <b>must</b> include a {@link VkWriteDescriptorSetAccelerationStructureKHR} structure whose {@code accelerationStructureCount} member equals {@code descriptorCount}</li>
  * <li>If {@code descriptorType} is {@link NVRayTracing#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV}, the {@code pNext} chain <b>must</b> include a {@link VkWriteDescriptorSetAccelerationStructureNV} structure whose {@code accelerationStructureCount} member equals {@code descriptorCount}</li>
  * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, then the {@code imageView} member of each {@code pImageInfo} element <b>must</b> have been created without a {@link VkSamplerYcbcrConversionInfo} structure in its {@code pNext} chain</li>
@@ -83,7 +83,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkWriteDescriptorSetAccelerationStructureKHR}, {@link VkWriteDescriptorSetAccelerationStructureNV}, or {@link VkWriteDescriptorSetInlineUniformBlockEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkWriteDescriptorSetAccelerationStructureKHR}, {@link VkWriteDescriptorSetAccelerationStructureNV}, or {@link VkWriteDescriptorSetInlineUniformBlock}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code descriptorType} <b>must</b> be a valid {@code VkDescriptorType} value</li>
  * <li>{@code descriptorCount} <b>must</b> be greater than 0</li>
@@ -185,17 +185,17 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
     /** the descriptor binding within that set. */
     @NativeType("uint32_t")
     public int dstBinding() { return ndstBinding(address()); }
-    /** the starting element in that array. If the descriptor binding identified by {@code dstSet} and {@code dstBinding} has a descriptor type of {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT} then {@code dstArrayElement} specifies the starting byte offset within the binding. */
+    /** the starting element in that array. If the descriptor binding identified by {@code dstSet} and {@code dstBinding} has a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code dstArrayElement} specifies the starting byte offset within the binding. */
     @NativeType("uint32_t")
     public int dstArrayElement() { return ndstArrayElement(address()); }
     /**
-     * the number of descriptors to update. If the descriptor binding identified by {@code dstSet} and {@code dstBinding} has a descriptor type of {@link EXTInlineUniformBlock#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK_EXT}, then {@code descriptorCount} specifies the number of bytes to update. Otherwise, {@code descriptorCount} is one of
+     * the number of descriptors to update. If the descriptor binding identified by {@code dstSet} and {@code dstBinding} has a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, then {@code descriptorCount} specifies the number of bytes to update. Otherwise, {@code descriptorCount} is one of
      * 
      * <ul>
      * <li>the number of elements in {@code pImageInfo}</li>
      * <li>the number of elements in {@code pBufferInfo}</li>
      * <li>the number of elements in {@code pTexelBufferView}</li>
-     * <li>a value matching the {@code dataSize} member of a {@link VkWriteDescriptorSetInlineUniformBlockEXT} structure in the {@code pNext} chain</li>
+     * <li>a value matching the {@code dataSize} member of a {@link VkWriteDescriptorSetInlineUniformBlock} structure in the {@code pNext} chain</li>
      * <li>a value matching the {@code accelerationStructureCount} of a {@link VkWriteDescriptorSetAccelerationStructureKHR} structure in the {@code pNext} chain</li>
      * </ul>
      */
@@ -227,6 +227,8 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
     public VkWriteDescriptorSet pNext(VkWriteDescriptorSetAccelerationStructureKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkWriteDescriptorSetAccelerationStructureNV} value to the {@code pNext} chain. */
     public VkWriteDescriptorSet pNext(VkWriteDescriptorSetAccelerationStructureNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkWriteDescriptorSetInlineUniformBlock} value to the {@code pNext} chain. */
+    public VkWriteDescriptorSet pNext(VkWriteDescriptorSetInlineUniformBlock value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkWriteDescriptorSetInlineUniformBlockEXT} value to the {@code pNext} chain. */
     public VkWriteDescriptorSet pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #dstSet} field. */
@@ -541,6 +543,8 @@ public class VkWriteDescriptorSet extends Struct implements NativeResource {
         public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetAccelerationStructureKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkWriteDescriptorSetAccelerationStructureNV} value to the {@code pNext} chain. */
         public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetAccelerationStructureNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkWriteDescriptorSetInlineUniformBlock} value to the {@code pNext} chain. */
+        public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetInlineUniformBlock value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkWriteDescriptorSetInlineUniformBlockEXT} value to the {@code pNext} chain. */
         public VkWriteDescriptorSet.Buffer pNext(VkWriteDescriptorSetInlineUniformBlockEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkWriteDescriptorSet#dstSet} field. */

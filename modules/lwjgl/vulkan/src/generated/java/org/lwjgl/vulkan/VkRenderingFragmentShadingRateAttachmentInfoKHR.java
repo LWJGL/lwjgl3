@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>This structure can be included in the {@code pNext} chain of {@link VkRenderingInfoKHR} to define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a>. If {@code imageView} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, or if this structure is not specified, the implementation behaves as if a valid shading rate attachment was specified with all texels specifying a single pixel per fragment.</p>
+ * <p>This structure can be included in the {@code pNext} chain of {@link VkRenderingInfo} to define a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a>. If {@code imageView} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, or if this structure is not specified, the implementation behaves as if a valid shading rate attachment was specified with all texels specifying a single pixel per fragment.</p>
  * 
  * <h5>Valid Usage</h5>
  * 

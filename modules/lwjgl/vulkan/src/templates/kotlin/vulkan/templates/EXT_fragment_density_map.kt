@@ -139,7 +139,7 @@ val EXT_fragment_density_map = "EXTFragmentDensityMap".nativeClassVK("EXT_fragme
     )
 
     EnumConstantLong(
-        "Extends {@code VkFormatFeatureFlagBits2KHR}.",
+        "Extends {@code VkFormatFeatureFlagBits2}.",
 
         "FORMAT_FEATURE_2_FRAGMENT_DENSITY_MAP_BIT_EXT".enum(0x01000000L)
     )
