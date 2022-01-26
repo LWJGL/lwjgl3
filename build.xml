@@ -1492,6 +1492,9 @@
                 <get-release platform="linux" arch="arm64" file="libglfw.so"/>
                 <get-release platform="linux" arch="arm64" file="libglfw.so.git"/>
 
+                <get-release platform="linux" arch="arm32" file="libglfw.so"/>
+                <get-release platform="linux" arch="arm32" file="libglfw.so.git"/>
+
                 <get-release platform="macos" arch="x64" file="libglfw.dylib"/>
                 <get-release platform="macos" arch="x64" file="libglfw.dylib.git"/>
                 <get-release platform="macos" arch="x64" file="libglfw_async.dylib"/>
