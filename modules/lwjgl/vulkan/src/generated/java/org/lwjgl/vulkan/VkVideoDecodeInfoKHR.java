@@ -145,7 +145,7 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     /** the size of the srcBuffer with valid encoded bitstream, starting from {@code srcBufferOffset}. It <b>must</b> meet the alignment requirement {@code minBitstreamBufferSizeAlignment} within {@link VkVideoCapabilitiesKHR} queried with the {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} function. */
     @NativeType("VkDeviceSize")
     public long srcBufferRange() { return nsrcBufferRange(address()); }
-    /** the destination <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#decoded-output-picture">Decoded Output Picture</a> Resource. */
+    /** the destination <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#decoded-output-picture">Decoded Output Picture</a> Resource. */
     public VkVideoPictureResourceKHR dstPictureResource() { return ndstPictureResource(address()); }
     /** {@code NULL} or a pointer to a {@link VkVideoReferenceSlotKHR} structure used for generating a DPB reference slot and Picture Resource. {@code pSetupReferenceSlot→slotIndex} specifies the slot index number to use as a target for producing the DPB data. {@code slotIndex} <b>must</b> reference a valid entry as specified in {@link VkVideoBeginCodingInfoKHR} via the {@code pReferenceSlots} within the {@link KHRVideoQueue#vkCmdBeginVideoCodingKHR CmdBeginVideoCodingKHR} command that established the Vulkan Video Decode Context for this command. */
     @NativeType("VkVideoReferenceSlotKHR const *")

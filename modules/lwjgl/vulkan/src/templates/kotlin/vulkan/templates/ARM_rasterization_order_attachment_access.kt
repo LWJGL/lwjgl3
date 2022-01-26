@@ -11,11 +11,11 @@ import vulkan.*
 val ARM_rasterization_order_attachment_access = "ARMRasterizationOrderAttachmentAccess".nativeClassVK("ARM_rasterization_order_attachment_access", type = "device", postfix = "ARM") {
     documentation =
         """
-        Renderpasses, and specifically <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-barriers-subpass-self-dependencies">subpass self-dependencies</a> enable much of the same functionality as the framebuffer fetch and pixel local storage extensions did for OpenGL ES. But certain techniques such as programmable blending are awkward or impractical to implement with these alone, in part because a self-dependency is required every time a fragment will read a value at a given sample coordinate.
+        Renderpasses, and specifically <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-barriers-subpass-self-dependencies">subpass self-dependencies</a> enable much of the same functionality as the framebuffer fetch and pixel local storage extensions did for OpenGL ES. But certain techniques such as programmable blending are awkward or impractical to implement with these alone, in part because a self-dependency is required every time a fragment will read a value at a given sample coordinate.
 
         This extension extends the mechanism of input attachments to allow access to framebuffer attachments when used as both input and color, or depth/stencil, attachments from one fragment to the next, in rasterization order, without explicit synchronization.
 
-        See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#renderpass-feedbackloop">renderpass feedback loops</a> for more information.
+        See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-feedbackloop">renderpass feedback loops</a> for more information.
 
         <h5>Examples</h5>
         None.

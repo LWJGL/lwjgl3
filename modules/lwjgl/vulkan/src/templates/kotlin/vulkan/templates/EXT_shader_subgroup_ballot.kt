@@ -55,7 +55,7 @@ val EXT_shader_subgroup_ballot = "EXTShaderSubgroupBallot".nativeClassVK("EXT_sh
         </ul>
 
         <h5>Deprecated by Vulkan 1.2</h5>
-        Most of the functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkPhysicalDeviceSubgroupProperties">subgroup operations</a>. However, Vulkan 1.1 required the {@code OpGroupNonUniformBroadcast} “{@code Id}” to be constant. This restriction was removed in Vulkan 1.2 with the addition of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-subgroupBroadcastDynamicId">subgroupBroadcastDynamicId</a> feature.
+        Most of the functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkPhysicalDeviceSubgroupProperties">subgroup operations</a>. However, Vulkan 1.1 required the {@code OpGroupNonUniformBroadcast} “{@code Id}” to be constant. This restriction was removed in Vulkan 1.2 with the addition of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-subgroupBroadcastDynamicId">subgroupBroadcastDynamicId</a> feature.
 
         <h5>VK_EXT_shader_subgroup_ballot</h5>
         <dl>
@@ -78,7 +78,7 @@ val EXT_shader_subgroup_ballot = "EXTShaderSubgroupBallot".nativeClassVK("EXT_sh
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.2-new-features">Vulkan 1.2</a></li>
+                <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2-new-features">Vulkan 1.2</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

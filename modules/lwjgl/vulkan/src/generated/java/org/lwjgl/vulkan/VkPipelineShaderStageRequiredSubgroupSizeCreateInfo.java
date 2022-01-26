@@ -26,8 +26,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code requiredSubgroupSize} <b>must</b> be a power-of-two integer</li>
- * <li>{@code requiredSubgroupSize} <b>must</b> be greater or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-minSubgroupSize">minSubgroupSize</a></li>
- * <li>{@code requiredSubgroupSize} <b>must</b> be less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-maxSubgroupSize">maxSubgroupSize</a></li>
+ * <li>{@code requiredSubgroupSize} <b>must</b> be greater or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-minSubgroupSize">minSubgroupSize</a></li>
+ * <li>{@code requiredSubgroupSize} <b>must</b> be less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxSubgroupSize">maxSubgroupSize</a></li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

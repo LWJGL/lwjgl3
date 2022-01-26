@@ -23,9 +23,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code pVideoProfile} <b>must</b> be a pointer to a valid {@link VkVideoProfileKHR} structure whose {@code pNext} chain <b>must</b> include a valid codec-specific profile structure</li>
- * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> are required for use with the created video session, the {@code maxReferencePicturesSlotsCount} <b>must</b> be set to a value bigger than 0</li>
+ * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> are required for use with the created video session, the {@code maxReferencePicturesSlotsCount} <b>must</b> be set to a value bigger than 0</li>
  * <li>{@code maxReferencePicturesSlotsCount} <b>cannot</b> exceed the implementation reported {@link VkVideoCapabilitiesKHR}{@code ::maxReferencePicturesSlotsCount}</li>
- * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> are required for use with the created video session, the {@code maxReferencePicturesActiveCount} <b>must</b> be set to a value bigger than 0</li>
+ * <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> are required for use with the created video session, the {@code maxReferencePicturesActiveCount} <b>must</b> be set to a value bigger than 0</li>
  * <li>{@code maxReferencePicturesActiveCount} <b>cannot</b> exceed the implementation reported {@link VkVideoCapabilitiesKHR}{@code ::maxReferencePicturesActiveCount}</li>
  * <li>{@code maxReferencePicturesActiveCount} <b>cannot</b> exceed the {@code maxReferencePicturesSlotsCount}</li>
  * <li>{@code maxCodedExtent} <b>cannot</b> be smaller than {@link VkVideoCapabilitiesKHR}{@code ::minExtent} and bigger than {@link VkVideoCapabilitiesKHR}{@code ::maxExtent}</li>
@@ -144,18 +144,18 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     /** a pointer to a {@link VkVideoProfileKHR} structure. */
     @NativeType("VkVideoProfileKHR const *")
     public VkVideoProfileKHR pVideoProfile() { return npVideoProfile(address()); }
-    /** the format of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#resources-image-views">image views</a> representing decoded <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#decoded-output-picture">Output</a> or encoded <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#input-encode-picture">Input</a> pictures. */
+    /** the format of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-views">image views</a> representing decoded <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#decoded-output-picture">Output</a> or encoded <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#input-encode-picture">Input</a> pictures. */
     @NativeType("VkFormat")
     public int pictureFormat() { return npictureFormat(address()); }
     /** the maximum width and height of the coded pictures that this instance will be able to support. */
     public VkExtent2D maxCodedExtent() { return nmaxCodedExtent(address()); }
-    /** the format of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#dpb">DPB</a> image views representing the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#reference-picture">Reference Pictures</a>. */
+    /** the format of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#dpb">DPB</a> image views representing the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a>. */
     @NativeType("VkFormat")
     public int referencePicturesFormat() { return nreferencePicturesFormat(address()); }
-    /** the maximum number of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#dpb-slot">DPB Slots</a> that can be activated with associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#video-picture-resources">Video Picture Resources</a> for the created video session. */
+    /** the maximum number of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB Slots</a> that can be activated with associated <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#video-picture-resources">Video Picture Resources</a> for the created video session. */
     @NativeType("uint32_t")
     public int maxReferencePicturesSlotsCount() { return nmaxReferencePicturesSlotsCount(address()); }
-    /** the maximum number of active <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#dpb-slot">DPB Slots</a> that can be used as Dpb or Reconstructed <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> within a single decode or encode operation for the created video session. */
+    /** the maximum number of active <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB Slots</a> that can be used as Dpb or Reconstructed <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> within a single decode or encode operation for the created video session. */
     @NativeType("uint32_t")
     public int maxReferencePicturesActiveCount() { return nmaxReferencePicturesActiveCount(address()); }
 

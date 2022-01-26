@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-borderColorSwizzle">{@code borderColorSwizzle}</a> feature <b>must</b> be enabled.</li>
+ * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-borderColorSwizzle">{@code borderColorSwizzle}</a> feature <b>must</b> be enabled.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

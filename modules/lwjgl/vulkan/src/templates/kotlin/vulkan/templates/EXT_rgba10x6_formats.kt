@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_rgba10x6_formats = "EXTRgba10x6Formats".nativeClassVK("EXT_rgba10x6_formats", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension enables the #FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 format to be used without a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> enabled.
+        This extension enables the #FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 format to be used without a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> enabled.
 
         <h5>VK_EXT_rgba10x6_formats</h5>
         <dl>

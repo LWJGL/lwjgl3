@@ -101,7 +101,7 @@ public class VkPhysicalDeviceInlineUniformBlockProperties extends Struct impleme
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum size in bytes of an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#descriptorsets-inlineuniformblock">inline uniform block</a> binding. */
+    /** the maximum size in bytes of an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-inlineuniformblock">inline uniform block</a> binding. */
     @NativeType("uint32_t")
     public int maxInlineUniformBlockSize() { return nmaxInlineUniformBlockSize(address()); }
     /** @return the value of the {@code maxPerStageDescriptorInlineUniformBlocks} field. */

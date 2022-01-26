@@ -20,15 +20,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Each bit in the sample mask is associated with a unique <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">sample index</a> as defined for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">coverage mask</a>. Each bit <code>b</code> for mask word <code>w</code> in the sample mask corresponds to sample index <code>i</code>, where <code>i = 32 × w + b</code>. {@code pSampleMask} has a length equal to <code>⌈ rasterizationSamples / 32 ⌉</code> words.</p>
+ * <p>Each bit in the sample mask is associated with a unique <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">sample index</a> as defined for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-multisampling-coverage-mask">coverage mask</a>. Each bit <code>b</code> for mask word <code>w</code> in the sample mask corresponds to sample index <code>i</code>, where <code>i = 32 × w + b</code>. {@code pSampleMask} has a length equal to <code>⌈ rasterizationSamples / 32 ⌉</code> words.</p>
  * 
  * <p>If {@code pSampleMask} is {@code NULL}, it is treated as if the mask has all bits set to 1.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-sampleRateShading">sample rate shading</a> feature is not enabled, {@code sampleShadingEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-alphaToOne">alpha to one</a> feature is not enabled, {@code alphaToOneEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-sampleRateShading">sample rate shading</a> feature is not enabled, {@code sampleShadingEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-alphaToOne">alpha to one</a> feature is not enabled, {@code alphaToOneEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>{@code minSampleShading} <b>must</b> be in the range <code>[0,1]</code></li>
  * <li>If the {@link NVFramebufferMixedSamples VK_NV_framebuffer_mixed_samples} extension is enabled, and if the subpass has any color attachments and {@code rasterizationSamples} is greater than the number of color samples, then {@code sampleShadingEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * </ul>
@@ -135,7 +135,7 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
     /** a {@code VkSampleCountFlagBits} value specifying the number of samples used in rasterization. */
     @NativeType("VkSampleCountFlagBits")
     public int rasterizationSamples() { return nrasterizationSamples(address()); }
-    /** <b>can</b> be used to enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#primsrast-sampleshading">Sample Shading</a>. */
+    /** <b>can</b> be used to enable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-sampleshading">Sample Shading</a>. */
     @NativeType("VkBool32")
     public boolean sampleShadingEnable() { return nsampleShadingEnable(address()) != 0; }
     /** specifies a minimum fraction of sample shading if {@code sampleShadingEnable} is set to {@link VK10#VK_TRUE TRUE}. */
@@ -143,15 +143,15 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
     /**
      * @param capacity the number of elements in the returned buffer
      *
-     * @return a pointer to an array of {@code VkSampleMask} values used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-samplemask">sample mask test</a>.
+     * @return a pointer to an array of {@code VkSampleMask} values used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-samplemask">sample mask test</a>.
      */
     @Nullable
     @NativeType("VkSampleMask const *")
     public IntBuffer pSampleMask(int capacity) { return npSampleMask(address(), capacity); }
-    /** controls whether a temporary coverage value is generated based on the alpha component of the fragment’s first color output as specified in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a> section. */
+    /** controls whether a temporary coverage value is generated based on the alpha component of the fragment’s first color output as specified in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a> section. */
     @NativeType("VkBool32")
     public boolean alphaToCoverageEnable() { return nalphaToCoverageEnable(address()) != 0; }
-    /** controls whether the alpha component of the fragment’s first color output is replaced with one as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a>. */
+    /** controls whether the alpha component of the fragment’s first color output is replaced with one as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-covg">Multisample Coverage</a>. */
     @NativeType("VkBool32")
     public boolean alphaToOneEnable() { return nalphaToOneEnable(address()) != 0; }
 

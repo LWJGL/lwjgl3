@@ -63,7 +63,7 @@ public final class NVViewportSwizzle {
      * 
      * <h5>Description</h5>
      * 
-     * <p>These values are described in detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vertexpostproc-viewport-swizzle">Viewport Swizzle</a>.</p>
+     * <p>These values are described in detail in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#vertexpostproc-viewport-swizzle">Viewport Swizzle</a>.</p>
      * 
      * <h5>See Also</h5>
      * 

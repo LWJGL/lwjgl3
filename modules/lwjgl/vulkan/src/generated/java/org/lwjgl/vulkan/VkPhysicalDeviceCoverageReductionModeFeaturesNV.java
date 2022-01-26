@@ -85,7 +85,7 @@ public class VkPhysicalDeviceCoverageReductionModeFeaturesNV extends Struct impl
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports coverage reduction modes. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fragops-coverage-reduction">Coverage Reduction</a>. */
+    /** indicates whether the implementation supports coverage reduction modes. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-coverage-reduction">Coverage Reduction</a>. */
     @NativeType("VkBool32")
     public boolean coverageReductionMode() { return ncoverageReductionMode(address()) != 0; }
 

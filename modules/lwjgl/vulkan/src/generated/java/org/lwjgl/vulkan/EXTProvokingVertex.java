@@ -28,7 +28,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Special Use</b></dt>
  * <dd><ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -96,7 +96,7 @@ public final class EXTProvokingVertex {
      * <li>{@link #VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT} specifies that the provoking vertex is the last non-adjacency vertex in the list of vertices used by a primitive.</li>
      * </ul>
      * 
-     * <p>These modes are described more precisely in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#drawing-primitive-topologies">Primitive Topologies</a>.</p>
+     * <p>These modes are described more precisely in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-primitive-topologies">Primitive Topologies</a>.</p>
      * 
      * <h5>See Also</h5>
      * 

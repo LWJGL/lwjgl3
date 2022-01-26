@@ -33,7 +33,7 @@ import static org.lwjgl.system.JNI.*;
  * <li><em>Deprecated</em> by {@link KHRExternalMemoryCapabilities VK_KHR_external_memory_capabilities} extension
  * 
  * <ul>
- * <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
+ * <li>Which in turn was <em>promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
  * </ul>
  * </li>
  * </ul></dd>

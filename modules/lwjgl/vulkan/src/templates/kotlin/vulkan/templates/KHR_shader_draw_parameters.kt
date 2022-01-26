@@ -34,7 +34,7 @@ val KHR_shader_draw_parameters = "KHRShaderDrawParameters".nativeClassVK("KHR_sh
         </ul>
 
         <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, however a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-shaderDrawParameters">feature bit was added</a> to distinguish whether it is actually available or not.
+        All functionality in this extension is included in core Vulkan 1.1, however a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderDrawParameters">feature bit was added</a> to distinguish whether it is actually available or not.
 
         <h5>VK_KHR_shader_draw_parameters</h5>
         <dl>
@@ -57,7 +57,7 @@ val KHR_shader_draw_parameters = "KHRShaderDrawParameters".nativeClassVK("KHR_sh
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

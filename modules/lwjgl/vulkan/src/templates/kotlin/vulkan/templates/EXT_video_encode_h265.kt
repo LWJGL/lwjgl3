@@ -31,7 +31,7 @@ val EXT_video_encode_h265 = "EXTVideoEncodeH265".nativeClassVK("EXT_video_encode
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
                 <li>Requires {@link KHRVideoEncodeQueue VK_KHR_video_encode_queue}</li>
-                <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
+                <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

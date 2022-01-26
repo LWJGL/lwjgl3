@@ -89,7 +89,7 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
     /** reserved for future use. */
     @NativeType("VkPipelineRasterizationDepthClipStateCreateFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** controls whether depth clipping is enabled as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#vertexpostproc-clipping">Primitive Clipping</a>. */
+    /** controls whether depth clipping is enabled as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#vertexpostproc-clipping">Primitive Clipping</a>. */
     @NativeType("VkBool32")
     public boolean depthClipEnable() { return ndepthClipEnable(address()) != 0; }
 

@@ -84,7 +84,7 @@ val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type =
         Wait for presentation.
 
         <h5>C Specification</h5>
-        When the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-presentWait">{@code presentWait}</a> feature is enabled, an application <b>can</b> wait for an image to be presented to the user by first specifying a presentId for the target presentation by adding a ##VkPresentIdKHR structure to the {@code pNext} chain of the ##VkPresentInfoKHR structure and then waiting for that presentation to complete by calling:
+        When the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-presentWait">{@code presentWait}</a> feature is enabled, an application <b>can</b> wait for an image to be presented to the user by first specifying a presentId for the target presentation by adding a ##VkPresentIdKHR structure to the {@code pNext} chain of the ##VkPresentInfoKHR structure and then waiting for that presentation to complete by calling:
 
         <pre><code>
 ￿VkResult vkWaitForPresentKHR(
@@ -109,7 +109,7 @@ val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type =
         <h5>Valid Usage</h5>
         <ul>
             <li>{@code swapchain} <b>must</b> not be in the retired state</li>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-presentWait">{@code presentWait}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-presentWait">{@code presentWait}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

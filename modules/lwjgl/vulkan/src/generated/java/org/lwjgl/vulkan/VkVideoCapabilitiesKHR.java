@@ -133,7 +133,7 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
     /** the maximum number of DPB Slots supported by the implementation for a single video session instance. */
     @NativeType("uint32_t")
     public int maxReferencePicturesSlotsCount() { return nmaxReferencePicturesSlotsCount(address()); }
-    /** the maximum slots that can be used as <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> with a single decode or encode operation. */
+    /** the maximum slots that can be used as <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> with a single decode or encode operation. */
     @NativeType("uint32_t")
     public int maxReferencePicturesActiveCount() { return nmaxReferencePicturesActiveCount(address()); }
 

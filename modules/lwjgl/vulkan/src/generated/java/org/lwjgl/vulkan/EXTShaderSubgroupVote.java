@@ -56,7 +56,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Deprecated by Vulkan 1.1</h5>
  * 
- * <p>All functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkPhysicalDeviceSubgroupProperties">subgroup operations</a>.</p>
+ * <p>All functionality in this extension is superseded by the core Vulkan 1.1 <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#VkPhysicalDeviceSubgroupProperties">subgroup operations</a>.</p>
  * 
  * <h5>VK_EXT_shader_subgroup_vote</h5>
  * 
@@ -75,7 +75,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
- * <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.1-new-features">Vulkan 1.1</a></li>
+ * <li><em>Deprecated</em> by <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1-new-features">Vulkan 1.1</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

@@ -236,7 +236,7 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
         """,
 
         VkDevice("device", "the device which owns {@code operation}."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkDeferredOperationKHR.p("pDeferredOperation", "a pointer to a handle in which the created {@code VkDeferredOperationKHR} is returned.")
     )
 
@@ -280,7 +280,7 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
 
         VkDevice("device", "the device which owns {@code operation}."),
         VkDeferredOperationKHR("operation", "the completed operation to be destroyed."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     uint32_t(

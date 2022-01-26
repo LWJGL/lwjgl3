@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Special Use</b></dt>
  * <dd><ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
+ * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -174,7 +174,7 @@ public class KHRPipelineExecutableProperties {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> <b>must</b> be enabled</li>
+     * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> <b>must</b> be enabled</li>
      * <li>{@code pipeline} member of {@code pPipelineInfo} <b>must</b> have been created with {@code device}</li>
      * </ul>
      * 
@@ -256,7 +256,7 @@ public class KHRPipelineExecutableProperties {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> <b>must</b> be enabled</li>
+     * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> <b>must</b> be enabled</li>
      * <li>{@code pipeline} member of {@code pExecutableInfo} <b>must</b> have been created with {@code device}</li>
      * <li>{@code pipeline} member of {@code pExecutableInfo} <b>must</b> have been created with {@link #VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR}</li>
      * </ul>
@@ -341,7 +341,7 @@ public class KHRPipelineExecutableProperties {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> <b>must</b> be enabled</li>
+     * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineExecutableInfo">{@code pipelineExecutableInfo}</a> <b>must</b> be enabled</li>
      * <li>{@code pipeline} member of {@code pExecutableInfo} <b>must</b> have been created with {@code device}</li>
      * <li>{@code pipeline} member of {@code pExecutableInfo} <b>must</b> have been created with {@link #VK_PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR PIPELINE_CREATE_CAPTURE_INTERNAL_REPRESENTATIONS_BIT_KHR}</li>
      * </ul>

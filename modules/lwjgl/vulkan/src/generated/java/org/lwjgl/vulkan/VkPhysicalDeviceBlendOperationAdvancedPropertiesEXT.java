@@ -105,7 +105,7 @@ public class VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT extends Struct 
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** one greater than the highest color attachment index that <b>can</b> be used in a subpass, for a pipeline that uses an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#framebuffer-blend-advanced">advanced blend operation</a>. */
+    /** one greater than the highest color attachment index that <b>can</b> be used in a subpass, for a pipeline that uses an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#framebuffer-blend-advanced">advanced blend operation</a>. */
     @NativeType("uint32_t")
     public int advancedBlendMaxColorAttachments() { return nadvancedBlendMaxColorAttachments(address()); }
     /** specifies whether advanced blend operations <b>can</b> vary per-attachment. */

@@ -322,7 +322,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         <h5>Description</h5>
         <ul>
             <li>#GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR disables face culling for this instance.</li>
-            <li>#GEOMETRY_INSTANCE_TRIANGLE_FLIP_FACING_BIT_KHR indicates that the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#ray-traversal-culling-face">facing determination</a> for geometry in this instance is inverted. Because the facing is determined in object space, an instance transform does not change the winding, but a geometry transform does.</li>
+            <li>#GEOMETRY_INSTANCE_TRIANGLE_FLIP_FACING_BIT_KHR indicates that the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#ray-traversal-culling-face">facing determination</a> for geometry in this instance is inverted. Because the facing is determined in object space, an instance transform does not change the winding, but a geometry transform does.</li>
             <li>#GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR causes this instance to act as though #GEOMETRY_OPAQUE_BIT_KHR were specified on all geometries referenced by this instance. This behavior <b>can</b> be overridden by the SPIR-V {@code NoOpaqueKHR} ray flag.</li>
             <li>#GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_KHR causes this instance to act as though #GEOMETRY_OPAQUE_BIT_KHR were not specified on all geometries referenced by this instance. This behavior <b>can</b> be overridden by the SPIR-V {@code OpaqueKHR} ray flag.</li>
         </ul>
@@ -414,9 +414,9 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-accelerationStructure">{@code accelerationStructure}</a> feature <b>must</b> be enabled</li>
-            <li>If ##VkAccelerationStructureCreateInfoKHR{@code ::deviceAddress} is not zero, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-accelerationStructureCaptureReplay">{@code accelerationStructureCaptureReplay}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructure">{@code accelerationStructure}</a> feature <b>must</b> be enabled</li>
+            <li>If ##VkAccelerationStructureCreateInfoKHR{@code ::deviceAddress} is not zero, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructureCaptureReplay">{@code accelerationStructureCaptureReplay}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -447,7 +447,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         VkDevice("device", "the logical device that creates the acceleration structure object."),
         VkAccelerationStructureCreateInfoKHR.const.p("pCreateInfo", "a pointer to a ##VkAccelerationStructureCreateInfoKHR structure containing parameters affecting creation of the acceleration structure."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkAccelerationStructureKHR.p("pAccelerationStructure", "a pointer to a {@code VkAccelerationStructureKHR} handle in which the resulting acceleration structure object is returned.")
     )
 
@@ -491,7 +491,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         VkDevice("device", "the logical device that destroys the acceleration structure."),
         VkAccelerationStructureKHR("accelerationStructure", "the acceleration structure to destroy."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     void(
@@ -516,9 +516,9 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         This means that an application <b>cannot</b> build a top-level acceleration structure in the same #CmdBuildAccelerationStructuresKHR() call as the associated bottom-level or instance acceleration structures are being built. There also <b>cannot</b> be any memory aliasing between any acceleration structure memories or scratch memories being used by any of the builds.
         </div>
 
-        Accesses to the acceleration structure scratch buffers as identified by the ##VkAccelerationStructureBuildGeometryInfoKHR{@code ::scratchData} buffer device addresses <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR or #ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR. Similarly for accesses to each ##VkAccelerationStructureBuildGeometryInfoKHR{@code ::srcAccelerationStructure} and ##VkAccelerationStructureBuildGeometryInfoKHR{@code ::dstAccelerationStructure}.
+        Accesses to the acceleration structure scratch buffers as identified by the ##VkAccelerationStructureBuildGeometryInfoKHR{@code ::scratchData} buffer device addresses <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR or #ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR. Similarly for accesses to each ##VkAccelerationStructureBuildGeometryInfoKHR{@code ::srcAccelerationStructure} and ##VkAccelerationStructureBuildGeometryInfoKHR{@code ::dstAccelerationStructure}.
 
-        Accesses to other input buffers as identified by any used values of ##VkAccelerationStructureGeometryMotionTrianglesDataNV{@code ::vertexData}, ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::vertexData}, ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::indexData}, ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::transformData}, ##VkAccelerationStructureGeometryAabbsDataKHR{@code ::data}, and ##VkAccelerationStructureGeometryInstancesDataKHR{@code ::data} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_SHADER_READ_BIT.
+        Accesses to other input buffers as identified by any used values of ##VkAccelerationStructureGeometryMotionTrianglesDataNV{@code ::vertexData}, ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::vertexData}, ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::indexData}, ##VkAccelerationStructureGeometryTrianglesDataKHR{@code ::transformData}, ##VkAccelerationStructureGeometryAabbsDataKHR{@code ::data}, and ##VkAccelerationStructureGeometryInstancesDataKHR{@code ::data} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_SHADER_READ_BIT.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -530,8 +530,8 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>The {@code dstAccelerationStructure} member of any element of {@code pInfos} <b>must</b> be a valid {@code VkAccelerationStructureKHR} handle</li>
             <li>For each element of {@code pInfos}, if its {@code type} member is #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR, its {@code dstAccelerationStructure} member <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::type} equal to either #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR or #ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR</li>
             <li>For each element of {@code pInfos}, if its {@code type} member is #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR, its {@code dstAccelerationStructure} member <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::type} equal to either #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR or #ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR</li>
-            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive primitives</a> in its {@code srcAccelerationStructure} member <b>must</b> not be made active</li>
-            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, active primitives in its {@code srcAccelerationStructure} member <b>must</b> not be made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive</a></li>
+            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive primitives</a> in its {@code srcAccelerationStructure} member <b>must</b> not be made active</li>
+            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, active primitives in its {@code srcAccelerationStructure} member <b>must</b> not be made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive</a></li>
             <li>The {@code dstAccelerationStructure} member of any element of {@code pInfos} <b>must</b> not be referenced by the {@code geometry.instances.data} member of any element of {@code pGeometries} or {@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR in any other element of {@code pInfos}</li>
             <li>The range of memory backing the {@code dstAccelerationStructure} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing the {@code srcAccelerationStructure} member of any other element of {@code pInfos} with a {@code mode} equal to #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, which is accessed by this command</li>
             <li>The range of memory backing the {@code dstAccelerationStructure} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing the {@code dstAccelerationStructure} member of any other element of {@code pInfos}, which is accessed by this command</li>
@@ -540,7 +540,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>The range of memory backing the {@code scratchData} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing the {@code srcAccelerationStructure} member of any element of {@code pInfos} with a {@code mode} equal to #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR (including the same element), which is accessed by this command</li>
             <li>The range of memory backing the {@code dstAccelerationStructure} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing any acceleration structure referenced by the {@code geometry.instances.data} member of any element of {@code pGeometries} or {@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR in any other element of {@code pInfos}, which is accessed by this command</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code srcAccelerationStructure} member <b>must</b> have previously been constructed with #BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR set in ##VkAccelerationStructureBuildGeometryInfoKHR{@code ::flags} in the build</li>
-            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code srcAccelerationStructure} and {@code dstAccelerationStructure} members <b>must</b> either be the same {@code VkAccelerationStructureKHR}, or not have any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#resources-memory-aliasing">memory aliasing</a></li>
+            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code srcAccelerationStructure} and {@code dstAccelerationStructure} members <b>must</b> either be the same {@code VkAccelerationStructureKHR}, or not have any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-memory-aliasing">memory aliasing</a></li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code geometryCount} member <b>must</b> have the same value which was specified when {@code srcAccelerationStructure} was last built</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code flags} member <b>must</b> have the same value which was specified when {@code srcAccelerationStructure} was last built</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code type} member <b>must</b> have the same value which was specified when {@code srcAccelerationStructure} was last built</li>
@@ -598,7 +598,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>{@code pInfos} <b>must</b> be a valid pointer to an array of {@code infoCount} valid ##VkAccelerationStructureBuildGeometryInfoKHR structures</li>
             <li>{@code ppBuildRangeInfos} <b>must</b> be a valid pointer to an array of {@code infoCount} ##VkAccelerationStructureBuildRangeInfoKHR structures</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
             <li>This command <b>must</b> only be called outside of a render pass instance</li>
             <li>{@code infoCount} <b>must</b> be greater than 0</li>
@@ -612,7 +612,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
+            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
             <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td></tr></tbody>
         </table>
 
@@ -644,9 +644,9 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 ￿    const uint32_t* const*                      ppMaxPrimitiveCounts);</code></pre>
 
         <h5>Description</h5>
-        Accesses to acceleration structures, scratch buffers, vertex buffers, index buffers, and instance buffers must be synchronized as with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#acceleration-structure-scratch">vkCmdBuildAccelerationStructuresKHR</a>.
+        Accesses to acceleration structures, scratch buffers, vertex buffers, index buffers, and instance buffers must be synchronized as with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#acceleration-structure-scratch">vkCmdBuildAccelerationStructuresKHR</a>.
 
-        Accesses to any element of {@code pIndirectDeviceAddresses} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_INDIRECT_COMMAND_READ_BIT.
+        Accesses to any element of {@code pIndirectDeviceAddresses} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_INDIRECT_COMMAND_READ_BIT.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -658,8 +658,8 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>The {@code dstAccelerationStructure} member of any element of {@code pInfos} <b>must</b> be a valid {@code VkAccelerationStructureKHR} handle</li>
             <li>For each element of {@code pInfos}, if its {@code type} member is #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR, its {@code dstAccelerationStructure} member <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::type} equal to either #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR or #ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR</li>
             <li>For each element of {@code pInfos}, if its {@code type} member is #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR, its {@code dstAccelerationStructure} member <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::type} equal to either #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR or #ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR</li>
-            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive primitives</a> in its {@code srcAccelerationStructure} member <b>must</b> not be made active</li>
-            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, active primitives in its {@code srcAccelerationStructure} member <b>must</b> not be made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive</a></li>
+            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive primitives</a> in its {@code srcAccelerationStructure} member <b>must</b> not be made active</li>
+            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, active primitives in its {@code srcAccelerationStructure} member <b>must</b> not be made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive</a></li>
             <li>The {@code dstAccelerationStructure} member of any element of {@code pInfos} <b>must</b> not be referenced by the {@code geometry.instances.data} member of any element of {@code pGeometries} or {@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR in any other element of {@code pInfos}</li>
             <li>The range of memory backing the {@code dstAccelerationStructure} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing the {@code srcAccelerationStructure} member of any other element of {@code pInfos} with a {@code mode} equal to #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, which is accessed by this command</li>
             <li>The range of memory backing the {@code dstAccelerationStructure} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing the {@code dstAccelerationStructure} member of any other element of {@code pInfos}, which is accessed by this command</li>
@@ -668,7 +668,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>The range of memory backing the {@code scratchData} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing the {@code srcAccelerationStructure} member of any element of {@code pInfos} with a {@code mode} equal to #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR (including the same element), which is accessed by this command</li>
             <li>The range of memory backing the {@code dstAccelerationStructure} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing any acceleration structure referenced by the {@code geometry.instances.data} member of any element of {@code pGeometries} or {@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR in any other element of {@code pInfos}, which is accessed by this command</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code srcAccelerationStructure} member <b>must</b> have previously been constructed with #BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR set in ##VkAccelerationStructureBuildGeometryInfoKHR{@code ::flags} in the build</li>
-            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code srcAccelerationStructure} and {@code dstAccelerationStructure} members <b>must</b> either be the same {@code VkAccelerationStructureKHR}, or not have any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#resources-memory-aliasing">memory aliasing</a></li>
+            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code srcAccelerationStructure} and {@code dstAccelerationStructure} members <b>must</b> either be the same {@code VkAccelerationStructureKHR}, or not have any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-memory-aliasing">memory aliasing</a></li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code geometryCount} member <b>must</b> have the same value which was specified when {@code srcAccelerationStructure} was last built</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code flags} member <b>must</b> have the same value which was specified when {@code srcAccelerationStructure} was last built</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code type} member <b>must</b> have the same value which was specified when {@code srcAccelerationStructure} was last built</li>
@@ -720,7 +720,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>Each element of {@code pIndirectDeviceAddresses} <b>must</b> be a multiple of 4</li>
             <li>Each element of {@code pIndirectStrides} <b>must</b> be a multiple of 4</li>
             <li>{@code commandBuffer} <b>must</b> not be a protected command buffer</li>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-accelerationStructureIndirectBuild">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureIndirectBuild}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructureIndirectBuild">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureIndirectBuild}</a> feature <b>must</b> be enabled</li>
             <li>Each ##VkAccelerationStructureBuildRangeInfoKHR structure referenced by any element of {@code pIndirectDeviceAddresses} <b>must</b> be a valid ##VkAccelerationStructureBuildRangeInfoKHR structure</li>
             <li>{@code pInfos}[i].{@code dstAccelerationStructure} <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::size} greater than or equal to the memory size required by the build operation, as returned by #GetAccelerationStructureBuildSizesKHR() with <code>pBuildInfo = pInfos[i]</code> and <code>pMaxPrimitiveCounts = ppMaxPrimitiveCounts[i]</code></li>
             <li>Each {@code ppMaxPrimitiveCounts}[i][j] <b>must</b> be greater than or equal to the the {@code primitiveCount} value specified by the ##VkAccelerationStructureBuildRangeInfoKHR structure located at <code>pIndirectDeviceAddresses[i] + (j × pIndirectStrides[i])</code></li>
@@ -733,7 +733,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>{@code pIndirectDeviceAddresses} <b>must</b> be a valid pointer to an array of {@code infoCount} {@code VkDeviceAddress} values</li>
             <li>{@code pIndirectStrides} <b>must</b> be a valid pointer to an array of {@code infoCount} {@code uint32_t} values</li>
             <li>{@code ppMaxPrimitiveCounts} <b>must</b> be a valid pointer to an array of {@code infoCount} {@code uint32_t} values</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
             <li>This command <b>must</b> only be called outside of a render pass instance</li>
             <li>{@code infoCount} <b>must</b> be greater than 0</li>
@@ -747,7 +747,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
+            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
             <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td></tr></tbody>
         </table>
 
@@ -798,8 +798,8 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>The {@code dstAccelerationStructure} member of any element of {@code pInfos} <b>must</b> be a valid {@code VkAccelerationStructureKHR} handle</li>
             <li>For each element of {@code pInfos}, if its {@code type} member is #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR, its {@code dstAccelerationStructure} member <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::type} equal to either #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR or #ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR</li>
             <li>For each element of {@code pInfos}, if its {@code type} member is #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR, its {@code dstAccelerationStructure} member <b>must</b> have been created with a value of ##VkAccelerationStructureCreateInfoKHR{@code ::type} equal to either #ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR or #ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR</li>
-            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive primitives</a> in its {@code srcAccelerationStructure} member <b>must</b> not be made active</li>
-            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, active primitives in its {@code srcAccelerationStructure} member <b>must</b> not be made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive</a></li>
+            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive primitives</a> in its {@code srcAccelerationStructure} member <b>must</b> not be made active</li>
+            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, active primitives in its {@code srcAccelerationStructure} member <b>must</b> not be made <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#acceleration-structure-inactive-prims">inactive</a></li>
             <li>The {@code dstAccelerationStructure} member of any element of {@code pInfos} <b>must</b> not be referenced by the {@code geometry.instances.data} member of any element of {@code pGeometries} or {@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR in any other element of {@code pInfos}</li>
             <li>The range of memory backing the {@code dstAccelerationStructure} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing the {@code srcAccelerationStructure} member of any other element of {@code pInfos} with a {@code mode} equal to #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, which is accessed by this command</li>
             <li>The range of memory backing the {@code dstAccelerationStructure} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing the {@code dstAccelerationStructure} member of any other element of {@code pInfos}, which is accessed by this command</li>
@@ -808,7 +808,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>The range of memory backing the {@code scratchData} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing the {@code srcAccelerationStructure} member of any element of {@code pInfos} with a {@code mode} equal to #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR (including the same element), which is accessed by this command</li>
             <li>The range of memory backing the {@code dstAccelerationStructure} member of any element of {@code pInfos} that is accessed by this command <b>must</b> not overlap the memory backing any acceleration structure referenced by the {@code geometry.instances.data} member of any element of {@code pGeometries} or {@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR in any other element of {@code pInfos}, which is accessed by this command</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code srcAccelerationStructure} member <b>must</b> have previously been constructed with #BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR set in ##VkAccelerationStructureBuildGeometryInfoKHR{@code ::flags} in the build</li>
-            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code srcAccelerationStructure} and {@code dstAccelerationStructure} members <b>must</b> either be the same {@code VkAccelerationStructureKHR}, or not have any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#resources-memory-aliasing">memory aliasing</a></li>
+            <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code srcAccelerationStructure} and {@code dstAccelerationStructure} members <b>must</b> either be the same {@code VkAccelerationStructureKHR}, or not have any <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-memory-aliasing">memory aliasing</a></li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code geometryCount} member <b>must</b> have the same value which was specified when {@code srcAccelerationStructure} was last built</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code flags} member <b>must</b> have the same value which was specified when {@code srcAccelerationStructure} was last built</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, its {@code type} member <b>must</b> have the same value which was specified when {@code srcAccelerationStructure} was last built</li>
@@ -836,7 +836,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>For each element of {@code pInfos}, the {@code buffer} used to create its {@code dstAccelerationStructure} member <b>must</b> be bound to host-visible device memory</li>
             <li>For each element of {@code pInfos}, if its {@code mode} member is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR the {@code buffer} used to create its {@code srcAccelerationStructure} member <b>must</b> be bound to host-visible device memory</li>
             <li>For each element of {@code pInfos}, the {@code buffer} used to create each acceleration structure referenced by the {@code geometry.instances.data} member of any element of {@code pGeometries} or {@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR <b>must</b> be bound to host-visible device memory</li>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
             <li>If {@code pInfos}[i].{@code mode} is #BUILD_ACCELERATION_STRUCTURE_MODE_BUILD_KHR, all addresses between {@code pInfos}[i].{@code scratchData.hostAddress} and {@code pInfos}[i].{@code scratchData.hostAddress} + N - 1 <b>must</b> be valid host memory, where N is given by the {@code buildScratchSize} member of the ##VkAccelerationStructureBuildSizesInfoKHR structure returned from a call to #GetAccelerationStructureBuildSizesKHR() with an identical ##VkAccelerationStructureBuildGeometryInfoKHR structure and primitive count</li>
             <li>If {@code pInfos}[i].{@code mode} is #BUILD_ACCELERATION_STRUCTURE_MODE_UPDATE_KHR, all addresses between {@code pInfos}[i].{@code scratchData.hostAddress} and {@code pInfos}[i].{@code scratchData.hostAddress} + N - 1 <b>must</b> be valid host memory, where N is given by the {@code updateScratchSize} member of the ##VkAccelerationStructureBuildSizesInfoKHR structure returned from a call to #GetAccelerationStructureBuildSizesKHR() with an identical ##VkAccelerationStructureBuildGeometryInfoKHR structure and primitive count</li>
             <li>For any element of {@code pInfos}[i].{@code pGeometries} or {@code pInfos}[i].{@code ppGeometries} with a {@code geometryType} of #GEOMETRY_TYPE_TRIANGLES_KHR, {@code geometry.triangles.vertexData.hostAddress} <b>must</b> be a valid host address</li>
@@ -882,7 +882,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         """,
 
         VkDevice("device", "the {@code VkDevice} for which the acceleration structures are being built."),
-        VkDeferredOperationKHR("deferredOperation", "an optional {@code VkDeferredOperationKHR} to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#deferred-host-operations-requesting\">request deferral</a> for this command."),
+        VkDeferredOperationKHR("deferredOperation", "an optional {@code VkDeferredOperationKHR} to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#deferred-host-operations-requesting\">request deferral</a> for this command."),
         AutoSize("pInfos", "ppBuildRangeInfos")..uint32_t("infoCount", "the number of acceleration structures to build. It specifies the number of the {@code pInfos} structures and {@code ppBuildRangeInfos} pointers that <b>must</b> be provided."),
         VkAccelerationStructureBuildGeometryInfoKHR.const.p("pInfos", "a pointer to an array of {@code infoCount} ##VkAccelerationStructureBuildGeometryInfoKHR structures defining the geometry used to build each acceleration structure."),
         VkAccelerationStructureBuildRangeInfoKHR.const.p.const.p("ppBuildRangeInfos", "a pointer to an array of {@code infoCount} pointers to arrays of ##VkAccelerationStructureBuildRangeInfoKHR structures. Each {@code ppBuildRangeInfos}[i] is a pointer to an array of {@code pInfos}[i].{@code geometryCount} ##VkAccelerationStructureBuildRangeInfoKHR structures defining dynamic offsets to the addresses where geometry data is stored, as defined by {@code pInfos}[i].")
@@ -911,7 +911,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>Any previous deferred operation that was associated with {@code deferredOperation} <b>must</b> be complete</li>
             <li>The {@code buffer} used to create {@code pInfo→src} <b>must</b> be bound to host-visible device memory</li>
             <li>The {@code buffer} used to create {@code pInfo→dst} <b>must</b> be bound to host-visible device memory</li>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
             <li>The {@code buffer} used to create {@code pInfo→src} <b>must</b> be bound to memory that was not allocated with multiple instances</li>
             <li>The {@code buffer} used to create {@code pInfo→dst} <b>must</b> be bound to memory that was not allocated with multiple instances</li>
         </ul>
@@ -945,7 +945,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         """,
 
         VkDevice("device", "the device which owns the acceleration structures."),
-        VkDeferredOperationKHR("deferredOperation", "an optional {@code VkDeferredOperationKHR} to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#deferred-host-operations-requesting\">request deferral</a> for this command."),
+        VkDeferredOperationKHR("deferredOperation", "an optional {@code VkDeferredOperationKHR} to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#deferred-host-operations-requesting\">request deferral</a> for this command."),
         VkCopyAccelerationStructureInfoKHR.const.p("pInfo", "a pointer to a ##VkCopyAccelerationStructureInfoKHR structure defining the copy operation.")
     )
 
@@ -975,7 +975,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>The {@code buffer} used to create {@code pInfo→src} <b>must</b> be bound to host-visible device memory</li>
             <li>{@code pInfo→dst.hostAddress} <b>must</b> be a valid host pointer</li>
             <li>{@code pInfo→dst.hostAddress} <b>must</b> be aligned to 16 bytes</li>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
             <li>The {@code buffer} used to create {@code pInfo→src} <b>must</b> be bound to memory that was not allocated with multiple instances</li>
         </ul>
 
@@ -1008,7 +1008,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         """,
 
         VkDevice("device", "the device which owns {@code pInfo→src}."),
-        VkDeferredOperationKHR("deferredOperation", "an optional {@code VkDeferredOperationKHR} to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#deferred-host-operations-requesting\">request deferral</a> for this command."),
+        VkDeferredOperationKHR("deferredOperation", "an optional {@code VkDeferredOperationKHR} to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#deferred-host-operations-requesting\">request deferral</a> for this command."),
         VkCopyAccelerationStructureToMemoryInfoKHR.const.p("pInfo", "a pointer to a ##VkCopyAccelerationStructureToMemoryInfoKHR structure defining the copy operation.")
     )
 
@@ -1038,7 +1038,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>{@code pInfo→src.hostAddress} <b>must</b> be a valid host pointer</li>
             <li>{@code pInfo→src.hostAddress} <b>must</b> be aligned to 16 bytes</li>
             <li>The {@code buffer} used to create {@code pInfo→dst} <b>must</b> be bound to host-visible device memory</li>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
             <li>The {@code buffer} used to create {@code pInfo→dst} <b>must</b> be bound to memory that was not allocated with multiple instances</li>
         </ul>
 
@@ -1071,7 +1071,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         """,
 
         VkDevice("device", "the device which owns {@code pInfo→dst}."),
-        VkDeferredOperationKHR("deferredOperation", "an optional {@code VkDeferredOperationKHR} to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#deferred-host-operations-requesting\">request deferral</a> for this command."),
+        VkDeferredOperationKHR("deferredOperation", "an optional {@code VkDeferredOperationKHR} to <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#deferred-host-operations-requesting\">request deferral</a> for this command."),
         VkCopyMemoryToAccelerationStructureInfoKHR.const.p("pInfo", "a pointer to a ##VkCopyMemoryToAccelerationStructureInfoKHR structure defining the copy operation.")
     )
 
@@ -1107,7 +1107,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>If {@code queryType} is #QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR, then {@code data} <b>must</b> point to a {@code VkDeviceSize}</li>
             <li>{@code dataSize} <b>must</b> be greater than or equal to <code>accelerationStructureCount*stride</code></li>
             <li>The {@code buffer} used to create each acceleration structure in {@code pAccelerationStructures} <b>must</b> be bound to host-visible device memory</li>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-accelerationStructureHostCommands">##VkPhysicalDeviceAccelerationStructureFeaturesKHR{@code ::accelerationStructureHostCommands}</a> feature <b>must</b> be enabled</li>
             <li>The {@code buffer} used to create each acceleration structure in {@code pAccelerationStructures} <b>must</b> be bound to memory that was not allocated with multiple instances</li>
         </ul>
 
@@ -1162,7 +1162,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         <h5>Description</h5>
         This command copies the {@code pInfo→src} acceleration structure to the {@code pInfo→dst} acceleration structure in the manner specified by {@code pInfo→mode}.
 
-        Accesses to {@code pInfo→src} and {@code pInfo→dst} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR or #ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR as appropriate.
+        Accesses to {@code pInfo→src} and {@code pInfo→dst} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR or #ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR as appropriate.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1174,7 +1174,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkCopyAccelerationStructureInfoKHR structure</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
             <li>This command <b>must</b> only be called outside of a render pass instance</li>
         </ul>
@@ -1187,7 +1187,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
+            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
             <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td></tr></tbody>
         </table>
 
@@ -1213,7 +1213,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 ￿    const VkCopyAccelerationStructureToMemoryInfoKHR* pInfo);</code></pre>
 
         <h5>Description</h5>
-        Accesses to {@code pInfo→src} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR. Accesses to the buffer indicated by {@code pInfo→dst.deviceAddress} <b>must</b> be synchronized with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR pipeline stage and an access type of #ACCESS_TRANSFER_WRITE_BIT.
+        Accesses to {@code pInfo→src} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR. Accesses to the buffer indicated by {@code pInfo→dst.deviceAddress} <b>must</b> be synchronized with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR pipeline stage and an access type of #ACCESS_TRANSFER_WRITE_BIT.
 
         This command produces the same results as #CopyAccelerationStructureToMemoryKHR(), but writes its result to a device address, and is executed on the device rather than the host. The output <b>may</b> not necessarily be bit-for-bit identical, but it can be equally used by either #CmdCopyMemoryToAccelerationStructureKHR() or #CopyMemoryToAccelerationStructureKHR().
 
@@ -1241,7 +1241,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkCopyAccelerationStructureToMemoryInfoKHR structure</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
             <li>This command <b>must</b> only be called outside of a render pass instance</li>
         </ul>
@@ -1254,7 +1254,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
+            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
             <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td></tr></tbody>
         </table>
 
@@ -1280,7 +1280,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 ￿    const VkCopyMemoryToAccelerationStructureInfoKHR* pInfo);</code></pre>
 
         <h5>Description</h5>
-        Accesses to {@code pInfo→dst} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR. Accesses to the buffer indicated by {@code pInfo→src.deviceAddress} <b>must</b> be synchronized with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR pipeline stage and an access type of #ACCESS_TRANSFER_READ_BIT.
+        Accesses to {@code pInfo→dst} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_ACCELERATION_STRUCTURE_WRITE_BIT_KHR. Accesses to the buffer indicated by {@code pInfo→src.deviceAddress} <b>must</b> be synchronized with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR pipeline stage and an access type of #ACCESS_TRANSFER_READ_BIT.
 
         This command can accept acceleration structures produced by either #CmdCopyAccelerationStructureToMemoryKHR() or #CopyAccelerationStructureToMemoryKHR().
 
@@ -1298,7 +1298,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>{@code pInfo} <b>must</b> be a valid pointer to a valid ##VkCopyMemoryToAccelerationStructureInfoKHR structure</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
             <li>This command <b>must</b> only be called outside of a render pass instance</li>
         </ul>
@@ -1311,7 +1311,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
+            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
             <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td></tr></tbody>
         </table>
 
@@ -1349,7 +1349,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1384,7 +1384,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 ￿    uint32_t                                    firstQuery);</code></pre>
 
         <h5>Description</h5>
-        Accesses to any of the acceleration structures listed in {@code pAccelerationStructures} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR.
+        Accesses to any of the acceleration structures listed in {@code pAccelerationStructures} <b>must</b> be <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_ACCELERATION_STRUCTURE_READ_BIT_KHR.
 
         <ul>
             <li>If {@code queryType} is #QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR, then the value written out is the number of bytes required by a compacted acceleration structure.</li>
@@ -1411,7 +1411,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>{@code pAccelerationStructures} <b>must</b> be a valid pointer to an array of {@code accelerationStructureCount} valid {@code VkAccelerationStructureKHR} handles</li>
             <li>{@code queryType} <b>must</b> be a valid {@code VkQueryType} value</li>
             <li>{@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
             <li>This command <b>must</b> only be called outside of a render pass instance</li>
             <li>{@code accelerationStructureCount} <b>must</b> be greater than 0</li>
@@ -1426,7 +1426,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
+            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
             <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td></tr></tbody>
         </table>
         """,
@@ -1455,7 +1455,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-rayTracingPipeline">{@code rayTracingPipeline}</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-rayQuery">{@code rayQuery}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rayTracingPipeline">{@code rayTracingPipeline}</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rayQuery">{@code rayQuery}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1521,8 +1521,8 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-rayTracingPipeline">{@code rayTracingPipeline}</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-rayQuery">{@code rayQuery}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rayTracingPipeline">{@code rayTracingPipeline}</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rayQuery">{@code rayQuery}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
             <li>If {@code pBuildInfo→geometryCount} is not 0, {@code pMaxPrimitiveCounts} <b>must</b> be a valid pointer to an array of {@code pBuildInfo→geometryCount} {@code uint32_t} values</li>
             <li>If {@code pBuildInfo→pGeometries} or {@code pBuildInfo→ppGeometries} has a {@code geometryType} of #GEOMETRY_TYPE_INSTANCES_KHR, each {@code pMaxPrimitiveCounts}[i] <b>must</b> be less than or equal to ##VkPhysicalDeviceAccelerationStructurePropertiesKHR{@code ::maxInstanceCount}</li>
         </ul>

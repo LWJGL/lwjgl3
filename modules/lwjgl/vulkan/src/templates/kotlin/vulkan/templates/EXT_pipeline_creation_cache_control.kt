@@ -32,7 +32,7 @@ val EXT_pipeline_creation_cache_control = "EXTPipelineCreationCacheControl".nati
 
         By default {@code vkCreate*Pipelines} calls must attempt to create all pipelines before returning. Setting #PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT_EXT on stext:Vk*PipelineCreateInfo{@code ::flags} can be used as an escape hatch for batched pipeline creates.
 
-        Hidden locks also add to the unpredictability of the cost of pipeline creation. The most common case of locks inside the stext:vkCreate*Pipelines is internal synchronization of the {@code VkPipelineCache} object. #PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT can be set when calling #CreatePipelineCache() to state the cache is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#fundamentals-threadingbehavior">externally synchronized</a>.
+        Hidden locks also add to the unpredictability of the cost of pipeline creation. The most common case of locks inside the stext:vkCreate*Pipelines is internal synchronization of the {@code VkPipelineCache} object. #PIPELINE_CACHE_CREATE_EXTERNALLY_SYNCHRONIZED_BIT_EXT can be set when calling #CreatePipelineCache() to state the cache is <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-threadingbehavior">externally synchronized</a>.
 
         The hope is that armed with this information application and engine developers can leverage existing asset streaming systems to recover from "just-in-time" pipeline creation stalls.
 
@@ -60,7 +60,7 @@ val EXT_pipeline_creation_cache_control = "EXTPipelineCreationCacheControl".nati
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

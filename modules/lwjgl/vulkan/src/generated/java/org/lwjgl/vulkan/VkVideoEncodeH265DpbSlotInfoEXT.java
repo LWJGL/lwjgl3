@@ -94,7 +94,7 @@ public class VkVideoEncodeH265DpbSlotInfoEXT extends Struct implements NativeRes
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#dpb-slot">DPB Slot</a> index for this picture. */
+    /** the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB Slot</a> index for this picture. */
     @NativeType("int8_t")
     public byte slotIndex() { return nslotIndex(address()); }
     /** a pointer to a {@code StdVideoEncodeH265ReferenceInfo} structure specifying the syntax and other codec-specific information from the H.265 specification, associated with this reference picture. */

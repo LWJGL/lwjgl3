@@ -42,7 +42,7 @@ val EXT_private_data = "EXTPrivateData".nativeClassVK("EXT_private_data", type =
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -106,7 +106,7 @@ val EXT_private_data = "EXTPrivateData".nativeClassVK("EXT_private_data", type =
 
         VkDevice("device", "the logical device associated with the creation of the object(s) holding the private data slot."),
         VkPrivateDataSlotCreateInfo.const.p("pCreateInfo", "a pointer to a ##VkPrivateDataSlotCreateInfo"),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkPrivateDataSlot.p("pPrivateDataSlot", "a pointer to a {@code VkPrivateDataSlot} handle in which the resulting private data slot is returned")
     )
 
@@ -116,7 +116,7 @@ val EXT_private_data = "EXTPrivateData".nativeClassVK("EXT_private_data", type =
 
         VkDevice("device", "the logical device associated with the creation of the object(s) holding the private data slot."),
         VkPrivateDataSlot("privateDataSlot", "the private data slot to destroy."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     VkResult(

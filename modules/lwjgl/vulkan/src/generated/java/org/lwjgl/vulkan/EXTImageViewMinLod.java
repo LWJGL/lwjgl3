@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension allows applications to clamp the minimum LOD value during <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-image-level-selection">Image Level(s) Selection</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#textures-integer-coordinate-operations">Integer Texel Coordinate Operations</a> with a given {@code VkImageView} by {@link VkImageViewMinLodCreateInfoEXT}{@code ::minLod}.
+ * This extension allows applications to clamp the minimum LOD value during <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#textures-image-level-selection">Image Level(s) Selection</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#textures-integer-coordinate-operations">Integer Texel Coordinate Operations</a> with a given {@code VkImageView} by {@link VkImageViewMinLodCreateInfoEXT}{@code ::minLod}.
  * 
  * <p>This extension may be useful to restrict a {@code VkImageView} to only mips which have been uploaded, and the use of fractional {@code minLod} can be useful for smoothly introducing new mip levels when using linear mipmap filtering.</p>
  * 

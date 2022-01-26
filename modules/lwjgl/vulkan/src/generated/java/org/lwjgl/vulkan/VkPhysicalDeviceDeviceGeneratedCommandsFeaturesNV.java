@@ -85,7 +85,7 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV extends Struct im
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports functionality to generate commands on the device. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>. */
+    /** indicates whether the implementation supports functionality to generate commands on the device. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#device-generated-commands">Device-Generated Commands</a>. */
     @NativeType("VkBool32")
     public boolean deviceGeneratedCommands() { return ndeviceGeneratedCommands(address()) != 0; }
 

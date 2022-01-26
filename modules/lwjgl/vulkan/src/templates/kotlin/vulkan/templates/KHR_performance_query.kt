@@ -254,7 +254,7 @@ val KHR_performance_query = "KHRPerformanceQuery".nativeClassVK("KHR_performance
 
             <dt><b>Special Use</b></dt>
             <dd><ul>
-                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
+                <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

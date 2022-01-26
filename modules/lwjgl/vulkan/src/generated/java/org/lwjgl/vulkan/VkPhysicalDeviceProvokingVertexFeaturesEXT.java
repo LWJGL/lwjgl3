@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
- * <p>When {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} is in the {@code pNext} chain of {@link VkDeviceCreateInfo} but the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-transformFeedback">transform feedback feature</a> is not enabled, the value of {@code transformFeedbackPreservesProvokingVertex} is ignored.</p>
+ * <p>When {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} is in the {@code pNext} chain of {@link VkDeviceCreateInfo} but the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-transformFeedback">transform feedback feature</a> is not enabled, the value of {@code transformFeedbackPreservesProvokingVertex} is ignored.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -94,7 +94,7 @@ public class VkPhysicalDeviceProvokingVertexFeaturesEXT extends Struct implement
     /** indicates whether the implementation supports the {@link EXTProvokingVertex#VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT} provoking vertex mode ({@code VkProvokingVertexModeEXT}) for flat shading. */
     @NativeType("VkBool32")
     public boolean provokingVertexLast() { return nprovokingVertexLast(address()) != 0; }
-    /** indicates that the order of vertices within each primitive written by transform feedback will preserve the provoking vertex. This does not apply to triangle fan primitives when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#limits-transformFeedbackPreservesTriangleFanProvokingVertex">{@code transformFeedbackPreservesTriangleFanProvokingVertex}</a> is {@link VK10#VK_FALSE FALSE}. {@code transformFeedbackPreservesProvokingVertex} <b>must</b> be {@link VK10#VK_FALSE FALSE} when the {@link EXTTransformFeedback VK_EXT_transform_feedback} extension is not supported. */
+    /** indicates that the order of vertices within each primitive written by transform feedback will preserve the provoking vertex. This does not apply to triangle fan primitives when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-transformFeedbackPreservesTriangleFanProvokingVertex">{@code transformFeedbackPreservesTriangleFanProvokingVertex}</a> is {@link VK10#VK_FALSE FALSE}. {@code transformFeedbackPreservesProvokingVertex} <b>must</b> be {@link VK10#VK_FALSE FALSE} when the {@link EXTTransformFeedback VK_EXT_transform_feedback} extension is not supported. */
     @NativeType("VkBool32")
     public boolean transformFeedbackPreservesProvokingVertex() { return ntransformFeedbackPreservesProvokingVertex(address()) != 0; }
 
