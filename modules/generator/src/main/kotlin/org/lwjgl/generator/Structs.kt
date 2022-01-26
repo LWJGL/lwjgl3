@@ -1952,13 +1952,16 @@ ${validations.joinToString("\n")}
                 if (it.has<PointerSetter>()) {
                     val pointerSetter = it.get<PointerSetter>()
                     pointerSetter.types.forEach { type ->
+                        val hasOverrideAnnotation = overrides && alias != null && alias[member].let { member ->
+                            member.has<PointerSetter>() && member.get<PointerSetter>().types.contains(type)
+                        }
                         if (pointerSetter.prepend) {
                             printSetterJavadoc(accessMode, it, indent, "Prepends the specified {@link $type} value to the {@code $setter} chain.", setter)
-                            if (overrides) println("$indent@Override")
+                            if (hasOverrideAnnotation) println("$indent@Override")
                             println("${indent}public $returnType $setter($type value) { return this.$setter(value.${pointerSetter.targetSetter ?: setter}(this.$setter()).address()); }")
                         } else {
                             printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified {@link $type} value to the #member field.", setter)
-                            if (overrides) println("$indent@Override")
+                            if (hasOverrideAnnotation) println("$indent@Override")
                             println("${indent}public $returnType $setter($type value) { return $setter(value.address()); }")
                         }
                     }
