@@ -98,7 +98,7 @@ final class XRHelper {
         float distToRightPlane  = Math.tan(fov.angleRight());
         float distToBottomPlane = Math.tan(fov.angleDown());
         float distToTopPlane    = Math.tan(fov.angleUp());
-        return m.frustum(distToLeftPlane, distToRightPlane, distToBottomPlane, distToTopPlane, nearZ, farZ, zZeroToOne);
+        return m.frustum(distToLeftPlane*nearZ, distToRightPlane*nearZ, distToBottomPlane*nearZ, distToTopPlane*nearZ, nearZ, farZ, zZeroToOne);
     }
 
     /**
