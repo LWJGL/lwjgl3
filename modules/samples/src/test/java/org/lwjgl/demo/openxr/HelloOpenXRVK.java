@@ -1974,7 +1974,7 @@ public class HelloOpenXRVK {
                                 // If the position tracker is working, we should use it to create the camera matrix
                                 XrCompositionLayerProjectionView projectionView = projectionViews.get(swapchainIndex);
 
-                                Matrix4f projectionMatrix = new Matrix4f();
+                                Matrix4f projectionMatrix = new Matrix4f().scale(1f, -1f, 1f);
                                 XRHelper.applyProjectionToMatrix(projectionMatrix, projectionView.fov(), 0.01f, 100f, true);
 
                                 Matrix4f viewMatrix = new Matrix4f();
