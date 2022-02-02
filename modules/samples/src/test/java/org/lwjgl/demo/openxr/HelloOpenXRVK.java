@@ -1210,34 +1210,26 @@ public class HelloOpenXRVK {
             LongBuffer pl = stack.callocLong(1);
 
             ByteBuffer vertexBytes = getShaderResource("demo/openxr/vulkan/hello.vert.spv");
-            try {
-                vkCheck(vkCreateShaderModule(
-                    vkDevice,
-                    VkShaderModuleCreateInfo.calloc(stack)
-                        .sType$Default()
-                        .pCode(vertexBytes),
-                    null,
-                    pl
-                ), "CreateShaderModule (vertex)");
-                vertexModule = pl.get(0);
-            } finally {
-                memFree(vertexBytes);
-            }
+            vkCheck(vkCreateShaderModule(
+                vkDevice,
+                VkShaderModuleCreateInfo.calloc(stack)
+                    .sType$Default()
+                    .pCode(vertexBytes),
+                null,
+                pl
+            ), "CreateShaderModule (vertex)");
+            vertexModule = pl.get(0);
 
             ByteBuffer fragmentBytes = getShaderResource("demo/openxr/vulkan/hello.frag.spv");
-            try {
-                vkCheck(vkCreateShaderModule(
-                    vkDevice,
-                    VkShaderModuleCreateInfo.calloc(stack)
-                        .sType$Default()
-                        .pCode(fragmentBytes),
-                    null,
-                    pl
-                ), "CreateShaderModule (fragment)");
-                fragmentModule = pl.get(0);
-            } finally {
-                memFree(fragmentBytes);
-            }
+            vkCheck(vkCreateShaderModule(
+                vkDevice,
+                VkShaderModuleCreateInfo.calloc(stack)
+                    .sType$Default()
+                    .pCode(fragmentBytes),
+                null,
+                pl
+            ), "CreateShaderModule (fragment)");
+            fragmentModule = pl.get(0);
         }
 
         this.vkGraphicsPipelines = new long[this.swapchains.length];
