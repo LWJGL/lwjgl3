@@ -247,13 +247,35 @@ public class HelloOpenXRGL {
 
             xrGetOpenGLGraphicsRequirementsKHR(xrInstance, systemID, graphicsRequirements);
 
+            int minMajorVersion = XR_VERSION_MAJOR(graphicsRequirements.minApiVersionSupported());
+            int minMinorVersion = XR_VERSION_MINOR(graphicsRequirements.minApiVersionSupported());
+
+            int maxMajorVersion = XR_VERSION_MAJOR(graphicsRequirements.maxApiVersionSupported());
+            int maxMinorVersion = XR_VERSION_MINOR(graphicsRequirements.maxApiVersionSupported());
+
+            System.out.println("The OpenXR runtime supports OpenGL " + minMajorVersion + "." + minMinorVersion
+                               + " to OpenGL " + maxMajorVersion + "." + maxMinorVersion);
+
+            // This example needs at least OpenGL 4.0
+            if (maxMajorVersion < 4) {
+                throw new UnsupportedOperationException("This example requires at least OpenGL 4.0");
+            }
+            int majorVersionToRequest = 4;
+            int minorVersionToRequest = 0;
+
+            // But when the OpenXR runtime requires a later version, we should respect that.
+            // As a matter of fact, the runtime on my current laptop does, so this code is actually needed.
+            if (minMajorVersion == 4) {
+                minorVersionToRequest = 5;
+            }
+
             //Init glfw
             if (!glfwInit()) {
                 throw new IllegalStateException("Failed to initialize GLFW.");
             }
 
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, majorVersionToRequest);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minorVersionToRequest);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
             glfwWindowHint(GLFW_DOUBLEBUFFER, GL_FALSE);
             window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
@@ -263,12 +285,6 @@ public class HelloOpenXRGL {
             // Check if OpenGL version is supported by OpenXR runtime
             int actualMajorVersion = glGetInteger(GL_MAJOR_VERSION);
             int actualMinorVersion = glGetInteger(GL_MINOR_VERSION);
-
-            int minMajorVersion = XR_VERSION_MAJOR(graphicsRequirements.minApiVersionSupported());
-            int minMinorVersion = XR_VERSION_MINOR(graphicsRequirements.minApiVersionSupported());
-
-            int maxMajorVersion = XR_VERSION_MAJOR(graphicsRequirements.maxApiVersionSupported());
-            int maxMinorVersion = XR_VERSION_MINOR(graphicsRequirements.maxApiVersionSupported());
 
             if (minMajorVersion > actualMajorVersion || (minMajorVersion == actualMajorVersion && minMinorVersion > actualMinorVersion)) {
                 throw new IllegalStateException(
@@ -449,7 +465,7 @@ public class HelloOpenXRGL {
                     int imageCount = pi.get(0);
 
                     XrSwapchainImageOpenGLKHR.Buffer swapchainImageBuffer = XRHelper.fill(
-                        XrSwapchainImageOpenGLKHR.create(imageCount),
+                        XrSwapchainImageOpenGLKHR.calloc(imageCount),
                         XrSwapchainImageOpenGLKHR.TYPE,
                         XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR
                     );
