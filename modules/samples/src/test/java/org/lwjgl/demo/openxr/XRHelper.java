@@ -136,26 +136,14 @@ final class XRHelper {
                 int platform = glfwGetPlatform();
                 if (platform == GLFW_PLATFORM_X11) {
                     long display = glfwGetX11Display();
-
-                    /*
-                     * To continue, we need the GLXFBConfig that was used to create the GLFW window. Unfortunately,
-                     * GLFW doesn't expose this to us. I created a pull request for this:
-                     * https://github.com/glfw/glfw/pull/1925
-                     * Linux X11 support will be blocked until it is merged. When it is merged, the GLFW bindings of
-                     * GLFW will need to be updated as well.
-                     */
-                    long glxConfig = -1;
-                    // long glxConfig = glfwGetGLXFBConfig();
-
-                    if (glxConfig == -1) {
-                        throw new IllegalStateException("Linux X11 support is not finished");
-                    }
+                    long glxConfig = glfwGetGLXFBConfig(window);
 
                     XVisualInfo visualInfo = glXGetVisualFromFBConfig(display, glxConfig);
                     if (visualInfo == null) {
                         throw new IllegalStateException("Failed to get visual info");
                     }
                     long visualid = visualInfo.visualid();
+
                     return XrGraphicsBindingOpenGLXlibKHR.malloc(stack)
                         .type$Default()
                         .next(NULL)
