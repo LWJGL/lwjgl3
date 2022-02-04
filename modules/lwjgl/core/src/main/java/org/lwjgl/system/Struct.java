@@ -33,7 +33,7 @@ public abstract class Struct extends Pointer.Default {
 
     @SuppressWarnings({"unused", "FieldCanBeLocal"})
     @Nullable
-    private ByteBuffer container;
+    protected ByteBuffer container;
 
     protected Struct(long address, @Nullable ByteBuffer container) {
         super(address);
@@ -89,8 +89,12 @@ public abstract class Struct extends Pointer.Default {
         return struct;
     }
 
+    protected static <S extends Struct, T extends Struct> T wrap(Class<T> clazz, S value) {
+        return wrap(clazz, value.address, value.container);
+    }
+
     @SuppressWarnings("unchecked")
-    protected static <T extends Struct> T wrap(Class<T> clazz, long address, ByteBuffer container) {
+    protected static <T extends Struct> T wrap(Class<T> clazz, long address, @Nullable ByteBuffer container) {
         T struct;
         try {
             struct = (T)UNSAFE.allocateInstance(clazz);

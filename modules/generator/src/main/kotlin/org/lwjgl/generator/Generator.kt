@@ -132,13 +132,22 @@ class Generator(private val moduleRoot: String) {
         internal val functions = ConcurrentHashMap<Module, MutableMap<String, String>>()
 
         internal val structs = ConcurrentLinkedQueue<Struct>()
+        internal val structChildren = ConcurrentHashMap<Module, MutableMap<String, MutableList<Struct>>>()
+
         internal val callbacks = ConcurrentLinkedQueue<CallbackFunction>()
         internal val customClasses = ConcurrentLinkedQueue<GeneratorTarget>()
 
         /** Registers a struct definition. */
         fun register(struct: Struct): Struct {
-            if (struct.module.enabled)
+            if (struct.module.enabled) {
                 structs.add(struct)
+                if (struct.parentStruct != null) {
+                    structChildren
+                        .getOrPut(struct.module) { HashMap() }
+                        .getOrPut(struct.parentStruct.nativeName) { ArrayList() }
+                        .add(struct)
+                }
+            }
             return struct
         }
 

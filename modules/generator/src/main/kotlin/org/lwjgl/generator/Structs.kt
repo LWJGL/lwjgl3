@@ -148,6 +148,8 @@ class Struct(
     private val mutable: Boolean,
     /** if specified, this struct aliases it. */
     private val alias: Struct?,
+    /** if specified, this struct is a subtype of it. */
+    internal val parentStruct: Struct?,
     /** when true, the struct layout will be built using native code. */
     internal val nativeLayout: Boolean,
     /** when true, a nested StructBuffer subclass will be generated as well. */
@@ -312,6 +314,7 @@ class Struct(
                 true,
                 this@Struct.mutable,
                 this@Struct.alias,
+                this@Struct.parentStruct,
                 this@Struct.nativeLayout,
                 this@Struct.generateBuffer
             )
@@ -358,11 +361,12 @@ class Struct(
     fun struct(
         mutable: Boolean = this.mutable,
         alias: StructType? = null,
+        parentStruct: StructType? = null,
         nativeLayout: Boolean = false,
         skipBuffer: Boolean = false,
         init: Struct.() -> Unit
     ): StructMember {
-        val struct = Struct(module, ANONYMOUS, nativeSubPath, ANONYMOUS, false, true, mutable, alias?.definition, nativeLayout, !skipBuffer)
+        val struct = Struct(module, ANONYMOUS, nativeSubPath, ANONYMOUS, false, true, mutable, alias?.definition, parentStruct?.definition, nativeLayout, !skipBuffer)
         struct.init()
         return StructType(struct).invoke(ANONYMOUS, "")
     }
@@ -371,11 +375,12 @@ class Struct(
     fun union(
         mutable: Boolean = this.mutable,
         alias: StructType? = null,
+        parentStruct: StructType? = null,
         nativeLayout: Boolean = false,
         skipBuffer: Boolean = false,
         init: Struct.() -> Unit
     ): StructMember {
-        val struct = Struct(module, ANONYMOUS, nativeSubPath, ANONYMOUS, true, true, mutable, alias?.definition, nativeLayout, !skipBuffer)
+        val struct = Struct(module, ANONYMOUS, nativeSubPath, ANONYMOUS, true, true, mutable, alias?.definition, parentStruct?.definition, nativeLayout, !skipBuffer)
         struct.init()
         return StructType(struct).invoke(ANONYMOUS, "")
     }
@@ -1073,6 +1078,25 @@ $indentation}"""
         return address == NULL ? null : wrap($className.class, address);
     }
 """)
+        val subtypes = Generator.structChildren[module]?.get(this@Struct.nativeName)
+        subtypes?.forEach {
+            print("""
+    /** Upcasts the specified {@code ${it.className}} instance to {@code $className}. */
+    public static $className create(${it.className} value) {
+        return wrap($className.class, value);
+    }
+""")
+        }
+
+        if (parentStruct != null) {
+            print("""
+    /** Downcasts the specified {@code ${parentStruct.className}} instance to {@code $className}. */
+    public static $className create(${parentStruct.className} value) {
+        return wrap($className.class, value);
+    }
+""")
+        }
+
         if (generateBuffer) {
             if (mallocable) {
                 print("""
@@ -1123,6 +1147,23 @@ $indentation}"""
         return address == NULL ? null : wrap(Buffer.class, address, $BUFFER_CAPACITY_PARAM);
     }
 """)
+            subtypes?.forEach {
+                print("""
+    /** Upcasts the specified {@code ${it.className}.Buffer} instance to {@code $className.Buffer}. */
+    public static $className.Buffer create(${it.className}.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+""")
+            }
+
+            if (parentStruct != null) {
+                print("""
+    /** Downcasts the specified {@code ${parentStruct.className}.Buffer} instance to {@code $className.Buffer}. */
+    public static $className.Buffer create(${parentStruct.className}.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+""")
+            }
         }
 
         if (mallocable) {
@@ -2405,11 +2446,12 @@ fun struct(
     virtual: Boolean = false,
     mutable: Boolean = true,
     alias: StructType? = null,
+    parentStruct: StructType? = null,
     nativeLayout: Boolean = false,
     skipBuffer: Boolean = false,
     init: (Struct.() -> Unit)? = null
 ): StructType {
-    val struct = Struct(module, className, nativeSubPath, nativeName, false, virtual, mutable, alias?.definition, nativeLayout, !skipBuffer)
+    val struct = Struct(module, className, nativeSubPath, nativeName, false, virtual, mutable, alias?.definition, parentStruct?.definition, nativeLayout, !skipBuffer)
     if (init != null) {
         struct.init()
     }
@@ -2427,11 +2469,12 @@ fun union(
     virtual: Boolean = false,
     mutable: Boolean = true,
     alias: StructType? = null,
+    parentStruct: StructType? = null,
     nativeLayout: Boolean = false,
     skipBuffer: Boolean = false,
     init: (Struct.() -> Unit)? = null
 ): StructType {
-    val struct = Struct(module, className, nativeSubPath, nativeName, true, virtual, mutable, alias?.definition, nativeLayout, !skipBuffer)
+    val struct = Struct(module, className, nativeSubPath, nativeName, true, virtual, mutable, alias?.definition, parentStruct?.definition, nativeLayout, !skipBuffer)
     if (init != null) {
         struct.init()
         Generator.register(struct)

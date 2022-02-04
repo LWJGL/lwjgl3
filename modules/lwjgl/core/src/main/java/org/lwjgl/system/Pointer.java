@@ -134,8 +134,12 @@ public interface Pointer {
             return buffer;
         }
 
+        protected static <S extends CustomBuffer<?>, T extends CustomBuffer<?>> T wrap(Class<T> clazz, S buffer) {
+            return wrap(clazz, buffer.address(), buffer.remaining(), buffer.container);
+        }
+
         @SuppressWarnings("unchecked")
-        protected static <T extends CustomBuffer<?>> T wrap(Class<? extends T> clazz, long address, int capacity, ByteBuffer container) {
+        protected static <T extends CustomBuffer<?>> T wrap(Class<? extends T> clazz, long address, int capacity, @Nullable ByteBuffer container) {
             T buffer;
             try {
                 buffer = (T)UNSAFE.allocateInstance(clazz);
