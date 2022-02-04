@@ -165,6 +165,11 @@ public class XrEventDataInstanceLossPending extends Struct implements NativeReso
         return address == NULL ? null : wrap(XrEventDataInstanceLossPending.class, address);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataInstanceLossPending}. */
+    public static XrEventDataInstanceLossPending create(XrEventDataBaseHeader value) {
+        return wrap(XrEventDataInstanceLossPending.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataInstanceLossPending.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -207,6 +212,11 @@ public class XrEventDataInstanceLossPending extends Struct implements NativeReso
     @Nullable
     public static XrEventDataInstanceLossPending.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataInstanceLossPending.Buffer}. */
+    public static XrEventDataInstanceLossPending.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

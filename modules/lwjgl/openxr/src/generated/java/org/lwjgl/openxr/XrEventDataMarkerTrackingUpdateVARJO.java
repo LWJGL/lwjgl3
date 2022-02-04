@@ -191,6 +191,11 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct implements Nati
         return address == NULL ? null : wrap(XrEventDataMarkerTrackingUpdateVARJO.class, address);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataMarkerTrackingUpdateVARJO}. */
+    public static XrEventDataMarkerTrackingUpdateVARJO create(XrEventDataBaseHeader value) {
+        return wrap(XrEventDataMarkerTrackingUpdateVARJO.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataMarkerTrackingUpdateVARJO.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -233,6 +238,11 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct implements Nati
     @Nullable
     public static XrEventDataMarkerTrackingUpdateVARJO.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataMarkerTrackingUpdateVARJO.Buffer}. */
+    public static XrEventDataMarkerTrackingUpdateVARJO.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

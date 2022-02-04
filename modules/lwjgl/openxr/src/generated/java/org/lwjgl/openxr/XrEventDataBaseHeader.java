@@ -146,6 +146,61 @@ public class XrEventDataBaseHeader extends Struct implements NativeResource {
         return address == NULL ? null : wrap(XrEventDataBaseHeader.class, address);
     }
 
+    /** Upcasts the specified {@code XrEventDataEventsLost} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataEventsLost value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataInstanceLossPending} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataInstanceLossPending value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSessionStateChanged} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataSessionStateChanged value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataReferenceSpaceChangePending} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataReferenceSpaceChangePending value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataInteractionProfileChanged} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataInteractionProfileChanged value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataPerfSettingsEXT} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataPerfSettingsEXT value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataVisibilityMaskChangedKHR} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataVisibilityMaskChangedKHR value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataMainSessionVisibilityChangedEXTX} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataMainSessionVisibilityChangedEXTX value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataDisplayRefreshRateChangedFB} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataDisplayRefreshRateChangedFB value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataViveTrackerConnectedHTCX} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataViveTrackerConnectedHTCX value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataMarkerTrackingUpdateVARJO} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataMarkerTrackingUpdateVARJO value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataBaseHeader.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -188,6 +243,61 @@ public class XrEventDataBaseHeader extends Struct implements NativeResource {
     @Nullable
     public static XrEventDataBaseHeader.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Upcasts the specified {@code XrEventDataEventsLost.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataEventsLost.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataInstanceLossPending.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataInstanceLossPending.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSessionStateChanged.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataSessionStateChanged.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataReferenceSpaceChangePending.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataReferenceSpaceChangePending.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataInteractionProfileChanged.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataInteractionProfileChanged.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataPerfSettingsEXT.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataPerfSettingsEXT.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataVisibilityMaskChangedKHR.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataVisibilityMaskChangedKHR.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataMainSessionVisibilityChangedEXTX.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataMainSessionVisibilityChangedEXTX.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataDisplayRefreshRateChangedFB.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataDisplayRefreshRateChangedFB.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataViveTrackerConnectedHTCX.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataViveTrackerConnectedHTCX.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataMarkerTrackingUpdateVARJO.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataMarkerTrackingUpdateVARJO.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

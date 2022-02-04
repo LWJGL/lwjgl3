@@ -737,8 +737,7 @@ public class HelloOpenXRVK {
                         .physicalDevice(vkPhysicalDevice)
                         .device(vkDevice)
                         .queueFamilyIndex(vkQueueFamilyIndex)
-                        .queueIndex(vkQueueIndex)
-                        .address()),
+                        .queueIndex(vkQueueIndex)),
                 pp
             ), "CreateSession");
             xrVkSession = new XrSession(pp.get(0), xrInstance);
@@ -1065,7 +1064,7 @@ public class HelloOpenXRVK {
                     .pWaitSemaphores(null)
                     .pSignalSemaphores(null)
                     .pWaitDstStageMask(null)
-                    .pCommandBuffers(stack.pointers(copyCommandBuffer.address())),
+                    .pCommandBuffers(stack.pointers(copyCommandBuffer)),
                 fence
             ), "QueueSubmit");
             vkCheck(vkWaitForFences(vkDevice, pl, true, 1_000_000_000L), "WaitForFences");
@@ -1583,7 +1582,7 @@ public class HelloOpenXRVK {
 
                 xrCheck(xrEnumerateSwapchainImages(
                     swapchain, pi,
-                    XrSwapchainImageBaseHeader.create(swapchainColorImages.address(), swapchainColorImages.capacity())
+                    XrSwapchainImageBaseHeader.create(swapchainColorImages)
                 ), "EnumerateSwapchainImages");
 
                 vkCheck(vkCreateImage(
@@ -1931,7 +1930,7 @@ public class HelloOpenXRVK {
                         XrCompositionLayerProjectionView.Buffer projectionViews = createProjectionViews(stack, frameState.predictedDisplayTime());
                         if (projectionViews != null) {
                             layer.views(projectionViews);
-                            layers = stack.pointers(layer.address());
+                            layers = stack.pointers(layer);
                         }
 
                         HandStates handStates = getHandStates(stack, frameState.predictedDisplayTime());
@@ -2089,7 +2088,7 @@ public class HelloOpenXRVK {
                                 vkQueue,
                                 VkSubmitInfo.calloc(stack)
                                     .sType$Default()
-                                    .pCommandBuffers(stack.pointers(swapchain.commandBuffer.address())),
+                                    .pCommandBuffers(stack.pointers(swapchain.commandBuffer)),
                                 swapchain.fence
                             ), "QueueSubmit");
                         }

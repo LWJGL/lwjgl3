@@ -182,6 +182,11 @@ public class XrEventDataSessionStateChanged extends Struct implements NativeReso
         return address == NULL ? null : wrap(XrEventDataSessionStateChanged.class, address);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataSessionStateChanged}. */
+    public static XrEventDataSessionStateChanged create(XrEventDataBaseHeader value) {
+        return wrap(XrEventDataSessionStateChanged.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataSessionStateChanged.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -224,6 +229,11 @@ public class XrEventDataSessionStateChanged extends Struct implements NativeReso
     @Nullable
     public static XrEventDataSessionStateChanged.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataSessionStateChanged.Buffer}. */
+    public static XrEventDataSessionStateChanged.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

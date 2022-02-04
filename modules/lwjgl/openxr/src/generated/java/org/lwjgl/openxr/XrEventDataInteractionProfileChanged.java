@@ -161,6 +161,11 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
         return address == NULL ? null : wrap(XrEventDataInteractionProfileChanged.class, address);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataInteractionProfileChanged}. */
+    public static XrEventDataInteractionProfileChanged create(XrEventDataBaseHeader value) {
+        return wrap(XrEventDataInteractionProfileChanged.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataInteractionProfileChanged.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -203,6 +208,11 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
     @Nullable
     public static XrEventDataInteractionProfileChanged.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataInteractionProfileChanged.Buffer}. */
+    public static XrEventDataInteractionProfileChanged.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

@@ -167,6 +167,11 @@ public class XrSwapchainImageOpenGLESKHR extends Struct implements NativeResourc
         return address == NULL ? null : wrap(XrSwapchainImageOpenGLESKHR.class, address);
     }
 
+    /** Downcasts the specified {@code XrSwapchainImageBaseHeader} instance to {@code XrSwapchainImageOpenGLESKHR}. */
+    public static XrSwapchainImageOpenGLESKHR create(XrSwapchainImageBaseHeader value) {
+        return wrap(XrSwapchainImageOpenGLESKHR.class, value);
+    }
+
     /**
      * Returns a new {@link XrSwapchainImageOpenGLESKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -209,6 +214,11 @@ public class XrSwapchainImageOpenGLESKHR extends Struct implements NativeResourc
     @Nullable
     public static XrSwapchainImageOpenGLESKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrSwapchainImageBaseHeader.Buffer} instance to {@code XrSwapchainImageOpenGLESKHR.Buffer}. */
+    public static XrSwapchainImageOpenGLESKHR.Buffer create(XrSwapchainImageBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

@@ -5,7 +5,7 @@
 package org.lwjgl.demo.openxr;
 
 import org.joml.Math;
-import org.joml.Matrix4f;
+import org.joml.*;
 import org.lwjgl.openxr.*;
 import org.lwjgl.system.*;
 import org.lwjgl.system.linux.*;
@@ -98,7 +98,7 @@ final class XRHelper {
         float distToRightPlane  = Math.tan(fov.angleRight());
         float distToBottomPlane = Math.tan(fov.angleDown());
         float distToTopPlane    = Math.tan(fov.angleUp());
-        return m.frustum(distToLeftPlane*nearZ, distToRightPlane*nearZ, distToBottomPlane*nearZ, distToTopPlane*nearZ, nearZ, farZ, zZeroToOne);
+        return m.frustum(distToLeftPlane * nearZ, distToRightPlane * nearZ, distToBottomPlane * nearZ, distToTopPlane * nearZ, nearZ, farZ, zZeroToOne);
     }
 
     /**
@@ -125,7 +125,7 @@ final class XRHelper {
      *
      * @throws IllegalStateException If the current platform is not supported
      */
-    static Struct createGraphicsBindingOpenGL(MemoryStack stack, long window) throws IllegalStateException {
+    static XrSessionCreateInfo createGraphicsBindingOpenGL(XrSessionCreateInfo sessionCreateInfo, MemoryStack stack, long window) throws IllegalStateException {
         switch (Platform.get()) {
             case LINUX:
                 /*
@@ -135,7 +135,7 @@ final class XRHelper {
                  */
                 int platform = glfwGetPlatform();
                 if (platform == GLFW_PLATFORM_X11) {
-                    long display = glfwGetX11Display();
+                    long display   = glfwGetX11Display();
                     long glxConfig = glfwGetGLXFBConfig(window);
 
                     XVisualInfo visualInfo = glXGetVisualFromFBConfig(display, glxConfig);
@@ -144,28 +144,34 @@ final class XRHelper {
                     }
                     long visualid = visualInfo.visualid();
 
-                    return XrGraphicsBindingOpenGLXlibKHR.malloc(stack)
-                        .type$Default()
-                        .next(NULL)
-                        .xDisplay(display)
-                        .visualid((int)visualid)
-                        .glxFBConfig(glxConfig)
-                        .glxDrawable(glXGetCurrentDrawable())
-                        .glxContext(glfwGetGLXContext(window));
+                    return sessionCreateInfo.next(
+                        XrGraphicsBindingOpenGLXlibKHR.malloc(stack)
+                            .type$Default()
+                            .next(NULL)
+                            .xDisplay(display)
+                            .visualid((int)visualid)
+                            .glxFBConfig(glxConfig)
+                            .glxDrawable(glXGetCurrentDrawable())
+                            .glxContext(glfwGetGLXContext(window))
+                    );
                 } else if (platform == GLFW_PLATFORM_WAYLAND) {
-                    return XrGraphicsBindingOpenGLWaylandKHR.malloc(stack)
-                        .type$Default()
-                        .next(NULL)
-                        .display(glfwGetWaylandDisplay());
+                    return sessionCreateInfo.next(
+                        XrGraphicsBindingOpenGLWaylandKHR.malloc(stack)
+                            .type$Default()
+                            .next(NULL)
+                            .display(glfwGetWaylandDisplay())
+                    );
                 } else {
                     throw new IllegalStateException("Unsupported Linux windowing system. Only X11 and Wayland are supported");
                 }
             case WINDOWS:
-                return XrGraphicsBindingOpenGLWin32KHR.malloc(stack)
-                    .type$Default()
-                    .next(NULL)
-                    .hDC(GetDC(glfwGetWin32Window(window)))
-                    .hGLRC(glfwGetWGLContext(window));
+                return sessionCreateInfo.next(
+                    XrGraphicsBindingOpenGLWin32KHR.malloc(stack)
+                        .type$Default()
+                        .next(NULL)
+                        .hDC(GetDC(glfwGetWin32Window(window)))
+                        .hGLRC(glfwGetWGLContext(window))
+                );
             default:
                 throw new IllegalStateException("Unsupported operation system: " + Platform.get());
         }

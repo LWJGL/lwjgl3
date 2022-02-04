@@ -301,17 +301,17 @@ public class HelloOpenXRGL {
             }
 
             //Bind the OpenGL context to the OpenXR instance and create the session
-            Struct graphicsBinding = XRHelper.createGraphicsBindingOpenGL(stack, window);
-
             PointerBuffer pp = stack.mallocPointer(1);
-
             check(xrCreateSession(
                 xrInstance,
-                XrSessionCreateInfo.malloc(stack)
-                    .type$Default()
-                    .next(graphicsBinding.address())
-                    .createFlags(0)
-                    .systemId(systemID),
+                XRHelper.createGraphicsBindingOpenGL(
+                    XrSessionCreateInfo.malloc(stack)
+                        .type$Default()
+                        .createFlags(0)
+                        .systemId(systemID),
+                    stack,
+                    window
+                ),
                 pp
             ));
 
@@ -470,7 +470,7 @@ public class HelloOpenXRGL {
                         XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR
                     );
 
-                    check(xrEnumerateSwapchainImages(swapchainWrapper.handle, pi, XrSwapchainImageBaseHeader.create(swapchainImageBuffer.address(), swapchainImageBuffer.capacity())));
+                    check(xrEnumerateSwapchainImages(swapchainWrapper.handle, pi, XrSwapchainImageBaseHeader.create(swapchainImageBuffer)));
                     swapchainWrapper.images = swapchainImageBuffer;
                     swapchains[i] = swapchainWrapper;
                 }
@@ -542,13 +542,13 @@ public class HelloOpenXRGL {
         do {
             switch (event.type()) {
                 case XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING: {
-                    XrEventDataInstanceLossPending instanceLossPending = XrEventDataInstanceLossPending.create(event.address());
+                    XrEventDataInstanceLossPending instanceLossPending = XrEventDataInstanceLossPending.create(event);
                     System.err.printf("XrEventDataInstanceLossPending by %d\n", instanceLossPending.lossTime());
                     //*requestRestart = true;
                     return true;
                 }
                 case XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED: {
-                    XrEventDataSessionStateChanged sessionStateChangedEvent = XrEventDataSessionStateChanged.create(event.address());
+                    XrEventDataSessionStateChanged sessionStateChangedEvent = XrEventDataSessionStateChanged.create(event);
                     return OpenXRHandleSessionStateChangedEvent(sessionStateChangedEvent/*, requestRestart*/);
                 }
                 case XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED:
@@ -573,11 +573,12 @@ public class HelloOpenXRGL {
         eventDataBuffer.type$Default();
         int result = xrPollEvent(xrInstance, eventDataBuffer);
         if (result == XR_SUCCESS) {
-            if (eventDataBuffer.type() == XR_TYPE_EVENT_DATA_EVENTS_LOST) {
-                XrEventDataEventsLost dataEventsLost = XrEventDataEventsLost.create(eventDataBuffer.address());
+            XrEventDataBaseHeader header = XrEventDataBaseHeader.create(eventDataBuffer.address());
+            if (header.type() == XR_TYPE_EVENT_DATA_EVENTS_LOST) {
+                XrEventDataEventsLost dataEventsLost = XrEventDataEventsLost.create(header);
                 System.out.printf("%d events lost\n", dataEventsLost.lostEventCount());
             }
-            return XrEventDataBaseHeader.create(eventDataBuffer.address());
+            return header;
         }
         if (result == XR_EVENT_UNAVAILABLE) {
             return null;
@@ -658,7 +659,7 @@ public class HelloOpenXRGL {
             boolean didRender = false;
             if (frameState.shouldRender()) {
                 if (renderLayerOpenXR(stack, frameState.predictedDisplayTime(), layerProjection)) {
-                    layers.put(0, layerProjection.address());
+                    layers.put(0, layerProjection);
                     didRender = true;
                 } else {
                     System.out.println("Didn't render");

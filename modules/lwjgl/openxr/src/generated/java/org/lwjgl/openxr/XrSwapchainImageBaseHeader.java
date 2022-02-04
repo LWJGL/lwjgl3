@@ -144,6 +144,21 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
         return address == NULL ? null : wrap(XrSwapchainImageBaseHeader.class, address);
     }
 
+    /** Upcasts the specified {@code XrSwapchainImageOpenGLKHR} instance to {@code XrSwapchainImageBaseHeader}. */
+    public static XrSwapchainImageBaseHeader create(XrSwapchainImageOpenGLKHR value) {
+        return wrap(XrSwapchainImageBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrSwapchainImageOpenGLESKHR} instance to {@code XrSwapchainImageBaseHeader}. */
+    public static XrSwapchainImageBaseHeader create(XrSwapchainImageOpenGLESKHR value) {
+        return wrap(XrSwapchainImageBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrSwapchainImageVulkanKHR} instance to {@code XrSwapchainImageBaseHeader}. */
+    public static XrSwapchainImageBaseHeader create(XrSwapchainImageVulkanKHR value) {
+        return wrap(XrSwapchainImageBaseHeader.class, value);
+    }
+
     /**
      * Returns a new {@link XrSwapchainImageBaseHeader.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -186,6 +201,21 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
     @Nullable
     public static XrSwapchainImageBaseHeader.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Upcasts the specified {@code XrSwapchainImageOpenGLKHR.Buffer} instance to {@code XrSwapchainImageBaseHeader.Buffer}. */
+    public static XrSwapchainImageBaseHeader.Buffer create(XrSwapchainImageOpenGLKHR.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrSwapchainImageOpenGLESKHR.Buffer} instance to {@code XrSwapchainImageBaseHeader.Buffer}. */
+    public static XrSwapchainImageBaseHeader.Buffer create(XrSwapchainImageOpenGLESKHR.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrSwapchainImageVulkanKHR.Buffer} instance to {@code XrSwapchainImageBaseHeader.Buffer}. */
+    public static XrSwapchainImageBaseHeader.Buffer create(XrSwapchainImageVulkanKHR.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

@@ -160,6 +160,11 @@ public class XrEventDataViveTrackerConnectedHTCX extends Struct implements Nativ
         return address == NULL ? null : wrap(XrEventDataViveTrackerConnectedHTCX.class, address);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataViveTrackerConnectedHTCX}. */
+    public static XrEventDataViveTrackerConnectedHTCX create(XrEventDataBaseHeader value) {
+        return wrap(XrEventDataViveTrackerConnectedHTCX.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataViveTrackerConnectedHTCX.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -202,6 +207,11 @@ public class XrEventDataViveTrackerConnectedHTCX extends Struct implements Nativ
     @Nullable
     public static XrEventDataViveTrackerConnectedHTCX.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataViveTrackerConnectedHTCX.Buffer}. */
+    public static XrEventDataViveTrackerConnectedHTCX.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

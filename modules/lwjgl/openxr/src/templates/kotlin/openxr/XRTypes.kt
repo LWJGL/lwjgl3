@@ -1482,7 +1482,7 @@ val XrCompositionLayerProjectionView = struct(Module.OPENXR, "XrCompositionLayer
     XrSwapchainSubImage("subImage", "the image layer ##XrSwapchainSubImage to use.")
 }
 
-val XrCompositionLayerProjection = struct(Module.OPENXR, "XrCompositionLayerProjection") {
+val XrCompositionLayerProjection = struct(Module.OPENXR, "XrCompositionLayerProjection", parentStruct = XrCompositionLayerBaseHeader) {
     documentation =
         """
         Composition layer for projection.
@@ -1517,7 +1517,7 @@ val XrCompositionLayerProjection = struct(Module.OPENXR, "XrCompositionLayerProj
     XrCompositionLayerProjectionView.const.p("views", "the array of type ##XrCompositionLayerProjectionView containing each projection layer view.")
 }
 
-val XrCompositionLayerQuad = struct(Module.OPENXR, "XrCompositionLayerQuad") {
+val XrCompositionLayerQuad = struct(Module.OPENXR, "XrCompositionLayerQuad", parentStruct = XrCompositionLayerBaseHeader) {
     documentation =
         """
         Quad composition layer.
@@ -1573,7 +1573,7 @@ val XrEventDataBaseHeader = struct(Module.OPENXR, "XrEventDataBaseHeader") {
     nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
 }
 
-val XrEventDataEventsLost = struct(Module.OPENXR, "XrEventDataEventsLost") {
+val XrEventDataEventsLost = struct(Module.OPENXR, "XrEventDataEventsLost", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Event indicating events were lost.
@@ -1596,7 +1596,7 @@ val XrEventDataEventsLost = struct(Module.OPENXR, "XrEventDataEventsLost") {
     uint32_t("lostEventCount", "the number of events which have overflowed since the last call to #PollEvent().")
 }
 
-val XrEventDataInstanceLossPending = struct(Module.OPENXR, "XrEventDataInstanceLossPending") {
+val XrEventDataInstanceLossPending = struct(Module.OPENXR, "XrEventDataInstanceLossPending", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Event indicating instance loss will occur.
@@ -1626,7 +1626,7 @@ val XrEventDataInstanceLossPending = struct(Module.OPENXR, "XrEventDataInstanceL
     XrTime("lossTime", "")
 }
 
-val XrEventDataSessionStateChanged = struct(Module.OPENXR, "XrEventDataSessionStateChanged") {
+val XrEventDataSessionStateChanged = struct(Module.OPENXR, "XrEventDataSessionStateChanged", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Event indicating session state changed.
@@ -1653,7 +1653,7 @@ val XrEventDataSessionStateChanged = struct(Module.OPENXR, "XrEventDataSessionSt
     XrTime("time", "an {@code XrTime} which indicates the time of the state change.")
 }
 
-val XrEventDataReferenceSpaceChangePending = struct(Module.OPENXR, "XrEventDataReferenceSpaceChangePending") {
+val XrEventDataReferenceSpaceChangePending = struct(Module.OPENXR, "XrEventDataReferenceSpaceChangePending", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Notifies the application that a reference space is changing.
@@ -1679,7 +1679,7 @@ val XrEventDataReferenceSpaceChangePending = struct(Module.OPENXR, "XrEventDataR
     XrPosef("poseInPreviousSpace", "an ##XrPosef defining the position and orientation of the new reference space’s natural origin within the natural reference frame of its previous space.")
 }
 
-val XrEventDataInteractionProfileChanged = struct(Module.OPENXR, "XrEventDataInteractionProfileChanged") {
+val XrEventDataInteractionProfileChanged = struct(Module.OPENXR, "XrEventDataInteractionProfileChanged", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Notifies the application than the active interaction profile has changed.
@@ -1705,7 +1705,7 @@ val XrEventDataInteractionProfileChanged = struct(Module.OPENXR, "XrEventDataInt
     XrSession("session", "the {@code XrSession} for which at least one of the interaction profiles for a top level path has changed.")
 }
 
-val XrHapticVibration = struct(Module.OPENXR, "XrHapticVibration") {
+val XrHapticVibration = struct(Module.OPENXR, "XrHapticVibration", parentStruct = XrHapticBaseHeader) {
     documentation =
         """
         Base header for haptic feedback.

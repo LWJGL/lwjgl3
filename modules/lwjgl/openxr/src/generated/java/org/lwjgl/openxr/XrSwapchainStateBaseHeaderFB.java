@@ -145,6 +145,21 @@ public class XrSwapchainStateBaseHeaderFB extends Struct implements NativeResour
         return address == NULL ? null : wrap(XrSwapchainStateBaseHeaderFB.class, address);
     }
 
+    /** Upcasts the specified {@code XrSwapchainStateFoveationFB} instance to {@code XrSwapchainStateBaseHeaderFB}. */
+    public static XrSwapchainStateBaseHeaderFB create(XrSwapchainStateFoveationFB value) {
+        return wrap(XrSwapchainStateBaseHeaderFB.class, value);
+    }
+
+    /** Upcasts the specified {@code XrSwapchainStateSamplerOpenGLESFB} instance to {@code XrSwapchainStateBaseHeaderFB}. */
+    public static XrSwapchainStateBaseHeaderFB create(XrSwapchainStateSamplerOpenGLESFB value) {
+        return wrap(XrSwapchainStateBaseHeaderFB.class, value);
+    }
+
+    /** Upcasts the specified {@code XrSwapchainStateSamplerVulkanFB} instance to {@code XrSwapchainStateBaseHeaderFB}. */
+    public static XrSwapchainStateBaseHeaderFB create(XrSwapchainStateSamplerVulkanFB value) {
+        return wrap(XrSwapchainStateBaseHeaderFB.class, value);
+    }
+
     /**
      * Returns a new {@link XrSwapchainStateBaseHeaderFB.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -187,6 +202,21 @@ public class XrSwapchainStateBaseHeaderFB extends Struct implements NativeResour
     @Nullable
     public static XrSwapchainStateBaseHeaderFB.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Upcasts the specified {@code XrSwapchainStateFoveationFB.Buffer} instance to {@code XrSwapchainStateBaseHeaderFB.Buffer}. */
+    public static XrSwapchainStateBaseHeaderFB.Buffer create(XrSwapchainStateFoveationFB.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrSwapchainStateSamplerOpenGLESFB.Buffer} instance to {@code XrSwapchainStateBaseHeaderFB.Buffer}. */
+    public static XrSwapchainStateBaseHeaderFB.Buffer create(XrSwapchainStateSamplerOpenGLESFB.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrSwapchainStateSamplerVulkanFB.Buffer} instance to {@code XrSwapchainStateBaseHeaderFB.Buffer}. */
+    public static XrSwapchainStateBaseHeaderFB.Buffer create(XrSwapchainStateSamplerVulkanFB.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

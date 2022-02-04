@@ -225,6 +225,11 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct implements 
         return address == NULL ? null : wrap(XrInteractionProfileAnalogThresholdVALVE.class, address);
     }
 
+    /** Downcasts the specified {@code XrBindingModificationBaseHeaderKHR} instance to {@code XrInteractionProfileAnalogThresholdVALVE}. */
+    public static XrInteractionProfileAnalogThresholdVALVE create(XrBindingModificationBaseHeaderKHR value) {
+        return wrap(XrInteractionProfileAnalogThresholdVALVE.class, value);
+    }
+
     /**
      * Returns a new {@link XrInteractionProfileAnalogThresholdVALVE.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -267,6 +272,11 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct implements 
     @Nullable
     public static XrInteractionProfileAnalogThresholdVALVE.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrBindingModificationBaseHeaderKHR.Buffer} instance to {@code XrInteractionProfileAnalogThresholdVALVE.Buffer}. */
+    public static XrInteractionProfileAnalogThresholdVALVE.Buffer create(XrBindingModificationBaseHeaderKHR.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

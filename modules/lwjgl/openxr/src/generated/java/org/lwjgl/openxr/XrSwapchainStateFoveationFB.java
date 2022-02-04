@@ -164,6 +164,11 @@ public class XrSwapchainStateFoveationFB extends Struct implements NativeResourc
         return address == NULL ? null : wrap(XrSwapchainStateFoveationFB.class, address);
     }
 
+    /** Downcasts the specified {@code XrSwapchainStateBaseHeaderFB} instance to {@code XrSwapchainStateFoveationFB}. */
+    public static XrSwapchainStateFoveationFB create(XrSwapchainStateBaseHeaderFB value) {
+        return wrap(XrSwapchainStateFoveationFB.class, value);
+    }
+
     /**
      * Returns a new {@link XrSwapchainStateFoveationFB.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -206,6 +211,11 @@ public class XrSwapchainStateFoveationFB extends Struct implements NativeResourc
     @Nullable
     public static XrSwapchainStateFoveationFB.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrSwapchainStateBaseHeaderFB.Buffer} instance to {@code XrSwapchainStateFoveationFB.Buffer}. */
+    public static XrSwapchainStateFoveationFB.Buffer create(XrSwapchainStateBaseHeaderFB.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

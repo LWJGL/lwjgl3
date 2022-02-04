@@ -187,6 +187,11 @@ public class XrEventDataPerfSettingsEXT extends Struct implements NativeResource
         return address == NULL ? null : wrap(XrEventDataPerfSettingsEXT.class, address);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataPerfSettingsEXT}. */
+    public static XrEventDataPerfSettingsEXT create(XrEventDataBaseHeader value) {
+        return wrap(XrEventDataPerfSettingsEXT.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataPerfSettingsEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -229,6 +234,11 @@ public class XrEventDataPerfSettingsEXT extends Struct implements NativeResource
     @Nullable
     public static XrEventDataPerfSettingsEXT.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataPerfSettingsEXT.Buffer}. */
+    public static XrEventDataPerfSettingsEXT.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

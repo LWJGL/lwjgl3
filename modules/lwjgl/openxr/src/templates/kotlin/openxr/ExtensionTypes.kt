@@ -120,7 +120,7 @@ val PFN_xrDebugUtilsMessengerCallbackEXT = Module.OPENXR.callback {
 }
 
 // Struct types
-val XrCompositionLayerCubeKHR = struct(Module.OPENXR, "XrCompositionLayerCubeKHR") {
+val XrCompositionLayerCubeKHR = struct(Module.OPENXR, "XrCompositionLayerCubeKHR", parentStruct = XrCompositionLayerBaseHeader) {
     documentation =
         """
         Cube map layer composition info.
@@ -207,7 +207,7 @@ val XrVulkanSwapchainFormatListCreateInfoKHR = struct(Module.OPENXR, "XrVulkanSw
     VkFormat.const.p("viewFormats", "an array of {@code VkFormat}.")
 }
 
-val XrEventDataPerfSettingsEXT = struct(Module.OPENXR, "XrEventDataPerfSettingsEXT") {
+val XrEventDataPerfSettingsEXT = struct(Module.OPENXR, "XrEventDataPerfSettingsEXT", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         XrEventDataPerfSettingsEXT.
@@ -232,7 +232,7 @@ val XrEventDataPerfSettingsEXT = struct(Module.OPENXR, "XrEventDataPerfSettingsE
     XrPerfSettingsNotificationLevelEXT("toLevel", ": enumerated notification level which has been entered")
 }
 
-val XrCompositionLayerCylinderKHR = struct(Module.OPENXR, "XrCompositionLayerCylinderKHR") {
+val XrCompositionLayerCylinderKHR = struct(Module.OPENXR, "XrCompositionLayerCylinderKHR", parentStruct = XrCompositionLayerBaseHeader) {
     documentation =
         """
         Cylindrical layer composition info.
@@ -267,7 +267,7 @@ val XrCompositionLayerCylinderKHR = struct(Module.OPENXR, "XrCompositionLayerCyl
     float("aspectRatio", "the ratio of the visible cylinder section <code>width / height</code>. The height of the cylinder is given by: <code>(cylinder radius × cylinder angle) / aspectRatio</code>.")
 }
 
-val XrCompositionLayerEquirectKHR = struct(Module.OPENXR, "XrCompositionLayerEquirectKHR") {
+val XrCompositionLayerEquirectKHR = struct(Module.OPENXR, "XrCompositionLayerEquirectKHR", parentStruct = XrCompositionLayerBaseHeader) {
     documentation =
         """
         Equirectangular layer composition info.
@@ -570,7 +570,7 @@ val XrGraphicsBindingOpenGLWaylandKHR = struct(Module.OPENXR, "XrGraphicsBinding
     wl_display.p("display", "a valid Wayland {@code wl_display}.")
 }
 
-val XrSwapchainImageOpenGLKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLKHR") {
+val XrSwapchainImageOpenGLKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLKHR", parentStruct = XrSwapchainImageBaseHeader) {
     documentation =
         """
         OpenGL-specific swapchain image structure.
@@ -628,7 +628,7 @@ val XrGraphicsRequirementsOpenGLKHR = struct(Module.OPENXR, "XrGraphicsRequireme
     XrVersion("maxApiVersionSupported", "the maximum version of OpenGL that the runtime has been tested on and is known to support. Newer OpenGL versions might work if they are compatible. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
 }
 
-val XrSwapchainImageOpenGLESKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLESKHR") {
+val XrSwapchainImageOpenGLESKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLESKHR", parentStruct = XrSwapchainImageBaseHeader) {
     documentation =
         """
         OpenGL ES-specific swapchain image structure.
@@ -726,7 +726,7 @@ val XrGraphicsBindingVulkanKHR = struct(Module.OPENXR, "XrGraphicsBindingVulkanK
     uint32_t("queueIndex", "a valid queue index on {@code device} to be used for synchronization.")
 }
 
-val XrSwapchainImageVulkanKHR = struct(Module.OPENXR, "XrSwapchainImageVulkanKHR") {
+val XrSwapchainImageVulkanKHR = struct(Module.OPENXR, "XrSwapchainImageVulkanKHR", parentStruct = XrSwapchainImageBaseHeader) {
     javaImport("org.lwjgl.vulkan.*")
     documentation =
         """
@@ -853,7 +853,7 @@ val XrVisibilityMaskKHR = struct(Module.OPENXR, "XrVisibilityMaskKHR") {
     nullable..uint32_t.p("indices", "an array of indices filled in by the runtime, specifying the indices of the mask geometry in the {@code vertices} array.")
 }
 
-val XrEventDataVisibilityMaskChangedKHR = struct(Module.OPENXR, "XrEventDataVisibilityMaskChangedKHR") {
+val XrEventDataVisibilityMaskChangedKHR = struct(Module.OPENXR, "XrEventDataVisibilityMaskChangedKHR", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Visibility Mask.
@@ -895,7 +895,7 @@ val XrSessionCreateInfoOverlayEXTX = struct(Module.OPENXR, "XrSessionCreateInfoO
     uint32_t("sessionLayersPlacement", "a value indicating the desired placement of the session’s composition layers in terms of other sessions.")
 }
 
-val XrEventDataMainSessionVisibilityChangedEXTX = struct(Module.OPENXR, "XrEventDataMainSessionVisibilityChangedEXTX") {
+val XrEventDataMainSessionVisibilityChangedEXTX = struct(Module.OPENXR, "XrEventDataMainSessionVisibilityChangedEXTX", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Event representing main session visibility change.
@@ -2044,7 +2044,8 @@ val XrCompositionLayerSecureContentFB = struct(Module.OPENXR, "XrCompositionLaye
     XrCompositionLayerSecureContentFlagsFB("flags", "a bitmask of {@code XrCompositionLayerSecureContentFlagBitsFB}.")
 }
 
-val XrInteractionProfileAnalogThresholdVALVE = struct(Module.OPENXR, "XrInteractionProfileAnalogThresholdVALVE") {
+val _XrBindingModificationBaseHeaderKHR = struct(Module.OPENXR, "XrBindingModificationBaseHeaderKHR")
+val XrInteractionProfileAnalogThresholdVALVE = struct(Module.OPENXR, "XrInteractionProfileAnalogThresholdVALVE", parentStruct = _XrBindingModificationBaseHeaderKHR) {
     documentation =
         """
         Interaction profile dpad binding.
@@ -2242,7 +2243,7 @@ val XrGraphicsRequirementsVulkan2KHR = struct(Module.OPENXR, "XrGraphicsRequirem
     XrVersion("maxApiVersionSupported", "")
 }
 
-val XrCompositionLayerEquirect2KHR = struct(Module.OPENXR, "XrCompositionLayerEquirect2KHR") {
+val XrCompositionLayerEquirect2KHR = struct(Module.OPENXR, "XrCompositionLayerEquirect2KHR", parentStruct = XrCompositionLayerBaseHeader) {
     documentation =
         """
         Equirectangular layer composition info.
@@ -3029,7 +3030,7 @@ val XrSceneDeserializeInfoMSFT = struct(Module.OPENXR, "XrSceneDeserializeInfoMS
     nullable..XrDeserializeSceneFragmentMSFT.const.p("fragments", "an array of ##XrDeserializeSceneFragmentMSFT.")
 }
 
-val XrEventDataDisplayRefreshRateChangedFB = struct(Module.OPENXR, "XrEventDataDisplayRefreshRateChangedFB") {
+val XrEventDataDisplayRefreshRateChangedFB = struct(Module.OPENXR, "XrEventDataDisplayRefreshRateChangedFB", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Event representing display refresh rate change.
@@ -3076,7 +3077,7 @@ val XrViveTrackerPathsHTCX = struct(Module.OPENXR, "XrViveTrackerPathsHTCX", mut
     XrPath("rolePath", "the path of the VIVE tracker role. This <b>may</b> be #NULL_PATH if the role is not assigned.")
 }
 
-val XrEventDataViveTrackerConnectedHTCX = struct(Module.OPENXR, "XrEventDataViveTrackerConnectedHTCX") {
+val XrEventDataViveTrackerConnectedHTCX = struct(Module.OPENXR, "XrEventDataViveTrackerConnectedHTCX", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Event representing a new VIVE tracker connected.
@@ -3427,7 +3428,7 @@ val XrSwapchainCreateInfoFoveationFB = struct(Module.OPENXR, "XrSwapchainCreateI
     XrSwapchainCreateFoveationFlagsFB("flags", "a bitmask of {@code XrSwapchainCreateFoveationFlagBitsFB} which indicate various characteristics for how foveation is enabled on the swapchain.")
 }
 
-val XrSwapchainStateFoveationFB = struct(Module.OPENXR, "XrSwapchainStateFoveationFB") {
+val XrSwapchainStateFoveationFB = struct(Module.OPENXR, "XrSwapchainStateFoveationFB", parentStruct = XrSwapchainStateBaseHeaderFB) {
     documentation =
         """
         Foveation swapchain state,xrefs=.
@@ -4257,7 +4258,7 @@ val XrSystemMarkerTrackingPropertiesVARJO = struct(Module.OPENXR, "XrSystemMarke
     XrBool32("supportsMarkerTracking", "an {@code XrBool32}, indicating if current system is capable of performing marker tracking.")
 }
 
-val XrEventDataMarkerTrackingUpdateVARJO = struct(Module.OPENXR, "XrEventDataMarkerTrackingUpdateVARJO") {
+val XrEventDataMarkerTrackingUpdateVARJO = struct(Module.OPENXR, "XrEventDataMarkerTrackingUpdateVARJO", parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Structure representing marker tracking information.
@@ -4403,7 +4404,7 @@ val XrSwapchainImageFoveationVulkanFB = struct(Module.OPENXR, "XrSwapchainImageF
     uint32_t("height", "the vertical height in pixels of the image.")
 }
 
-val XrSwapchainStateSamplerOpenGLESFB = struct(Module.OPENXR, "XrSwapchainStateSamplerOpenGLESFB") {
+val XrSwapchainStateSamplerOpenGLESFB = struct(Module.OPENXR, "XrSwapchainStateSamplerOpenGLESFB", parentStruct = XrSwapchainStateBaseHeaderFB) {
     javaImport("org.lwjgl.egl.*")
     documentation =
         """
@@ -4455,7 +4456,7 @@ val XrSwapchainStateSamplerOpenGLESFB = struct(Module.OPENXR, "XrSwapchainStateS
     XrColor4f("borderColor", "an RGBA color to be used as border texels.")
 }
 
-val XrSwapchainStateSamplerVulkanFB = struct(Module.OPENXR, "XrSwapchainStateSamplerVulkanFB") {
+val XrSwapchainStateSamplerVulkanFB = struct(Module.OPENXR, "XrSwapchainStateSamplerVulkanFB", parentStruct = XrSwapchainStateBaseHeaderFB) {
     javaImport("org.lwjgl.vulkan.*")
     documentation =
         """

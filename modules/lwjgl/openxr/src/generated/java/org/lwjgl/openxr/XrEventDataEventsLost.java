@@ -157,6 +157,11 @@ public class XrEventDataEventsLost extends Struct implements NativeResource {
         return address == NULL ? null : wrap(XrEventDataEventsLost.class, address);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataEventsLost}. */
+    public static XrEventDataEventsLost create(XrEventDataBaseHeader value) {
+        return wrap(XrEventDataEventsLost.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataEventsLost.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -199,6 +204,11 @@ public class XrEventDataEventsLost extends Struct implements NativeResource {
     @Nullable
     public static XrEventDataEventsLost.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataEventsLost.Buffer}. */
+    public static XrEventDataEventsLost.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

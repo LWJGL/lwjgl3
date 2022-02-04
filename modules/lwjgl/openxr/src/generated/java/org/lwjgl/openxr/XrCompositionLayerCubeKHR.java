@@ -220,6 +220,11 @@ public class XrCompositionLayerCubeKHR extends Struct implements NativeResource 
         return address == NULL ? null : wrap(XrCompositionLayerCubeKHR.class, address);
     }
 
+    /** Downcasts the specified {@code XrCompositionLayerBaseHeader} instance to {@code XrCompositionLayerCubeKHR}. */
+    public static XrCompositionLayerCubeKHR create(XrCompositionLayerBaseHeader value) {
+        return wrap(XrCompositionLayerCubeKHR.class, value);
+    }
+
     /**
      * Returns a new {@link XrCompositionLayerCubeKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -262,6 +267,11 @@ public class XrCompositionLayerCubeKHR extends Struct implements NativeResource 
     @Nullable
     public static XrCompositionLayerCubeKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrCompositionLayerBaseHeader.Buffer} instance to {@code XrCompositionLayerCubeKHR.Buffer}. */
+    public static XrCompositionLayerCubeKHR.Buffer create(XrCompositionLayerBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

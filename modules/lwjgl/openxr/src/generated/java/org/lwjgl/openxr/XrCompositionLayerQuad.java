@@ -220,6 +220,11 @@ public class XrCompositionLayerQuad extends Struct implements NativeResource {
         return address == NULL ? null : wrap(XrCompositionLayerQuad.class, address);
     }
 
+    /** Downcasts the specified {@code XrCompositionLayerBaseHeader} instance to {@code XrCompositionLayerQuad}. */
+    public static XrCompositionLayerQuad create(XrCompositionLayerBaseHeader value) {
+        return wrap(XrCompositionLayerQuad.class, value);
+    }
+
     /**
      * Returns a new {@link XrCompositionLayerQuad.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -262,6 +267,11 @@ public class XrCompositionLayerQuad extends Struct implements NativeResource {
     @Nullable
     public static XrCompositionLayerQuad.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrCompositionLayerBaseHeader.Buffer} instance to {@code XrCompositionLayerQuad.Buffer}. */
+    public static XrCompositionLayerQuad.Buffer create(XrCompositionLayerBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

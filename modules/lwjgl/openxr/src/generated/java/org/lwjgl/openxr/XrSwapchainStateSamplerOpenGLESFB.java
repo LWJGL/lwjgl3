@@ -277,6 +277,11 @@ public class XrSwapchainStateSamplerOpenGLESFB extends Struct implements NativeR
         return address == NULL ? null : wrap(XrSwapchainStateSamplerOpenGLESFB.class, address);
     }
 
+    /** Downcasts the specified {@code XrSwapchainStateBaseHeaderFB} instance to {@code XrSwapchainStateSamplerOpenGLESFB}. */
+    public static XrSwapchainStateSamplerOpenGLESFB create(XrSwapchainStateBaseHeaderFB value) {
+        return wrap(XrSwapchainStateSamplerOpenGLESFB.class, value);
+    }
+
     /**
      * Returns a new {@link XrSwapchainStateSamplerOpenGLESFB.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -319,6 +324,11 @@ public class XrSwapchainStateSamplerOpenGLESFB extends Struct implements NativeR
     @Nullable
     public static XrSwapchainStateSamplerOpenGLESFB.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrSwapchainStateBaseHeaderFB.Buffer} instance to {@code XrSwapchainStateSamplerOpenGLESFB.Buffer}. */
+    public static XrSwapchainStateSamplerOpenGLESFB.Buffer create(XrSwapchainStateBaseHeaderFB.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

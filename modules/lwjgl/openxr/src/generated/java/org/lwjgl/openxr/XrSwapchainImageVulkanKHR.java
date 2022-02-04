@@ -172,6 +172,11 @@ public class XrSwapchainImageVulkanKHR extends Struct implements NativeResource 
         return address == NULL ? null : wrap(XrSwapchainImageVulkanKHR.class, address);
     }
 
+    /** Downcasts the specified {@code XrSwapchainImageBaseHeader} instance to {@code XrSwapchainImageVulkanKHR}. */
+    public static XrSwapchainImageVulkanKHR create(XrSwapchainImageBaseHeader value) {
+        return wrap(XrSwapchainImageVulkanKHR.class, value);
+    }
+
     /**
      * Returns a new {@link XrSwapchainImageVulkanKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -214,6 +219,11 @@ public class XrSwapchainImageVulkanKHR extends Struct implements NativeResource 
     @Nullable
     public static XrSwapchainImageVulkanKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrSwapchainImageBaseHeader.Buffer} instance to {@code XrSwapchainImageVulkanKHR.Buffer}. */
+    public static XrSwapchainImageVulkanKHR.Buffer create(XrSwapchainImageBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

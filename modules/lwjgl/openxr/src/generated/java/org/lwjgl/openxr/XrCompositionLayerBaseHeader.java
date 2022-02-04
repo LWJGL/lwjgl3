@@ -179,6 +179,36 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
         return address == NULL ? null : wrap(XrCompositionLayerBaseHeader.class, address);
     }
 
+    /** Upcasts the specified {@code XrCompositionLayerProjection} instance to {@code XrCompositionLayerBaseHeader}. */
+    public static XrCompositionLayerBaseHeader create(XrCompositionLayerProjection value) {
+        return wrap(XrCompositionLayerBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerQuad} instance to {@code XrCompositionLayerBaseHeader}. */
+    public static XrCompositionLayerBaseHeader create(XrCompositionLayerQuad value) {
+        return wrap(XrCompositionLayerBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerCubeKHR} instance to {@code XrCompositionLayerBaseHeader}. */
+    public static XrCompositionLayerBaseHeader create(XrCompositionLayerCubeKHR value) {
+        return wrap(XrCompositionLayerBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerCylinderKHR} instance to {@code XrCompositionLayerBaseHeader}. */
+    public static XrCompositionLayerBaseHeader create(XrCompositionLayerCylinderKHR value) {
+        return wrap(XrCompositionLayerBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerEquirectKHR} instance to {@code XrCompositionLayerBaseHeader}. */
+    public static XrCompositionLayerBaseHeader create(XrCompositionLayerEquirectKHR value) {
+        return wrap(XrCompositionLayerBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerEquirect2KHR} instance to {@code XrCompositionLayerBaseHeader}. */
+    public static XrCompositionLayerBaseHeader create(XrCompositionLayerEquirect2KHR value) {
+        return wrap(XrCompositionLayerBaseHeader.class, value);
+    }
+
     /**
      * Returns a new {@link XrCompositionLayerBaseHeader.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -221,6 +251,36 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
     @Nullable
     public static XrCompositionLayerBaseHeader.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerProjection.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
+    public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerProjection.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerQuad.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
+    public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerQuad.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerCubeKHR.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
+    public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerCubeKHR.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerCylinderKHR.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
+    public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerCylinderKHR.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerEquirectKHR.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
+    public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerEquirectKHR.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrCompositionLayerEquirect2KHR.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
+    public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerEquirect2KHR.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

@@ -201,6 +201,11 @@ public class XrEventDataReferenceSpaceChangePending extends Struct implements Na
         return address == NULL ? null : wrap(XrEventDataReferenceSpaceChangePending.class, address);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataReferenceSpaceChangePending}. */
+    public static XrEventDataReferenceSpaceChangePending create(XrEventDataBaseHeader value) {
+        return wrap(XrEventDataReferenceSpaceChangePending.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataReferenceSpaceChangePending.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -243,6 +248,11 @@ public class XrEventDataReferenceSpaceChangePending extends Struct implements Na
     @Nullable
     public static XrEventDataReferenceSpaceChangePending.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataReferenceSpaceChangePending.Buffer}. */
+    public static XrEventDataReferenceSpaceChangePending.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

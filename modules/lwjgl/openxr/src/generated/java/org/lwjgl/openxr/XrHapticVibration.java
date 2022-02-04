@@ -179,6 +179,11 @@ public class XrHapticVibration extends Struct implements NativeResource {
         return address == NULL ? null : wrap(XrHapticVibration.class, address);
     }
 
+    /** Downcasts the specified {@code XrHapticBaseHeader} instance to {@code XrHapticVibration}. */
+    public static XrHapticVibration create(XrHapticBaseHeader value) {
+        return wrap(XrHapticVibration.class, value);
+    }
+
     /**
      * Returns a new {@link XrHapticVibration.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -221,6 +226,11 @@ public class XrHapticVibration extends Struct implements NativeResource {
     @Nullable
     public static XrHapticVibration.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrHapticBaseHeader.Buffer} instance to {@code XrHapticVibration.Buffer}. */
+    public static XrHapticVibration.Buffer create(XrHapticBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

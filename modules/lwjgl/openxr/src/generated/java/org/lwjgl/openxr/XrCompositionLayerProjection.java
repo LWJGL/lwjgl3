@@ -200,6 +200,11 @@ public class XrCompositionLayerProjection extends Struct implements NativeResour
         return address == NULL ? null : wrap(XrCompositionLayerProjection.class, address);
     }
 
+    /** Downcasts the specified {@code XrCompositionLayerBaseHeader} instance to {@code XrCompositionLayerProjection}. */
+    public static XrCompositionLayerProjection create(XrCompositionLayerBaseHeader value) {
+        return wrap(XrCompositionLayerProjection.class, value);
+    }
+
     /**
      * Returns a new {@link XrCompositionLayerProjection.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -242,6 +247,11 @@ public class XrCompositionLayerProjection extends Struct implements NativeResour
     @Nullable
     public static XrCompositionLayerProjection.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrCompositionLayerBaseHeader.Buffer} instance to {@code XrCompositionLayerProjection.Buffer}. */
+    public static XrCompositionLayerProjection.Buffer create(XrCompositionLayerBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

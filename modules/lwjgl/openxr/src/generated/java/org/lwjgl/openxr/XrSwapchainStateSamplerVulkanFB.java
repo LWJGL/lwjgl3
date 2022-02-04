@@ -283,6 +283,11 @@ public class XrSwapchainStateSamplerVulkanFB extends Struct implements NativeRes
         return address == NULL ? null : wrap(XrSwapchainStateSamplerVulkanFB.class, address);
     }
 
+    /** Downcasts the specified {@code XrSwapchainStateBaseHeaderFB} instance to {@code XrSwapchainStateSamplerVulkanFB}. */
+    public static XrSwapchainStateSamplerVulkanFB create(XrSwapchainStateBaseHeaderFB value) {
+        return wrap(XrSwapchainStateSamplerVulkanFB.class, value);
+    }
+
     /**
      * Returns a new {@link XrSwapchainStateSamplerVulkanFB.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -325,6 +330,11 @@ public class XrSwapchainStateSamplerVulkanFB extends Struct implements NativeRes
     @Nullable
     public static XrSwapchainStateSamplerVulkanFB.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrSwapchainStateBaseHeaderFB.Buffer} instance to {@code XrSwapchainStateSamplerVulkanFB.Buffer}. */
+    public static XrSwapchainStateSamplerVulkanFB.Buffer create(XrSwapchainStateBaseHeaderFB.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

@@ -163,6 +163,11 @@ public class XrEventDataDisplayRefreshRateChangedFB extends Struct implements Na
         return address == NULL ? null : wrap(XrEventDataDisplayRefreshRateChangedFB.class, address);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataDisplayRefreshRateChangedFB}. */
+    public static XrEventDataDisplayRefreshRateChangedFB create(XrEventDataBaseHeader value) {
+        return wrap(XrEventDataDisplayRefreshRateChangedFB.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataDisplayRefreshRateChangedFB.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -205,6 +210,11 @@ public class XrEventDataDisplayRefreshRateChangedFB extends Struct implements Na
     @Nullable
     public static XrEventDataDisplayRefreshRateChangedFB.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataDisplayRefreshRateChangedFB.Buffer}. */
+    public static XrEventDataDisplayRefreshRateChangedFB.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

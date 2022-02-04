@@ -172,6 +172,11 @@ public class XrEventDataMainSessionVisibilityChangedEXTX extends Struct implemen
         return address == NULL ? null : wrap(XrEventDataMainSessionVisibilityChangedEXTX.class, address);
     }
 
+    /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataMainSessionVisibilityChangedEXTX}. */
+    public static XrEventDataMainSessionVisibilityChangedEXTX create(XrEventDataBaseHeader value) {
+        return wrap(XrEventDataMainSessionVisibilityChangedEXTX.class, value);
+    }
+
     /**
      * Returns a new {@link XrEventDataMainSessionVisibilityChangedEXTX.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -214,6 +219,11 @@ public class XrEventDataMainSessionVisibilityChangedEXTX extends Struct implemen
     @Nullable
     public static XrEventDataMainSessionVisibilityChangedEXTX.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataMainSessionVisibilityChangedEXTX.Buffer}. */
+    public static XrEventDataMainSessionVisibilityChangedEXTX.Buffer create(XrEventDataBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

@@ -239,6 +239,11 @@ public class XrCompositionLayerCylinderKHR extends Struct implements NativeResou
         return address == NULL ? null : wrap(XrCompositionLayerCylinderKHR.class, address);
     }
 
+    /** Downcasts the specified {@code XrCompositionLayerBaseHeader} instance to {@code XrCompositionLayerCylinderKHR}. */
+    public static XrCompositionLayerCylinderKHR create(XrCompositionLayerBaseHeader value) {
+        return wrap(XrCompositionLayerCylinderKHR.class, value);
+    }
+
     /**
      * Returns a new {@link XrCompositionLayerCylinderKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -281,6 +286,11 @@ public class XrCompositionLayerCylinderKHR extends Struct implements NativeResou
     @Nullable
     public static XrCompositionLayerCylinderKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrCompositionLayerBaseHeader.Buffer} instance to {@code XrCompositionLayerCylinderKHR.Buffer}. */
+    public static XrCompositionLayerCylinderKHR.Buffer create(XrCompositionLayerBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**

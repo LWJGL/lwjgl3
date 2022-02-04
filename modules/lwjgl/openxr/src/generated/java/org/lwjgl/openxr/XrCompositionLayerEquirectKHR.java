@@ -243,6 +243,11 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
         return address == NULL ? null : wrap(XrCompositionLayerEquirectKHR.class, address);
     }
 
+    /** Downcasts the specified {@code XrCompositionLayerBaseHeader} instance to {@code XrCompositionLayerEquirectKHR}. */
+    public static XrCompositionLayerEquirectKHR create(XrCompositionLayerBaseHeader value) {
+        return wrap(XrCompositionLayerEquirectKHR.class, value);
+    }
+
     /**
      * Returns a new {@link XrCompositionLayerEquirectKHR.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -285,6 +290,11 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
     @Nullable
     public static XrCompositionLayerEquirectKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Downcasts the specified {@code XrCompositionLayerBaseHeader.Buffer} instance to {@code XrCompositionLayerEquirectKHR.Buffer}. */
+    public static XrCompositionLayerEquirectKHR.Buffer create(XrCompositionLayerBaseHeader.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /**
