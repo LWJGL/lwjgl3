@@ -16,6 +16,7 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.vulkan.VK10.*;
+import static org.lwjgl.vulkan.VK11.*;
 
 /**
  * This class loads the Vulkan library into the JVM process.
@@ -131,19 +132,18 @@ public final class VK {
 
     /**
      * Returns a {@code uint32_t}, which is the version of Vulkan supported by instance-level functionality, encoded as described in the
-     * <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.0-extensions/html/vkspec.html#fundamentals-versionnum">API Version Numbers and
-     * Semantics</a> section.
+     * <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-coreversions-versionnumbers">
+     * Version Numbers</a> section.
      *
      * <p>This method can be called before creating a Vulkan instance. The returned value can be used to set the {@link VkApplicationInfo}{@code ::apiVersion}
      * member.</p>
      */
     public static int getInstanceVersionSupported() {
         long EnumerateInstanceVersion = getGlobalCommands().vkEnumerateInstanceVersion;
-        try (MemoryStack stack = stackPush()) {
-            if (EnumerateInstanceVersion != NULL) {
+        if (EnumerateInstanceVersion != NULL) {
+            try (MemoryStack stack = stackPush()) {
                 IntBuffer pi = stack.callocInt(1);
-                VK11.vkEnumerateInstanceVersion(pi);
-                if (callPI(memAddress(pi), EnumerateInstanceVersion) == VK_SUCCESS) {
+                if (vkEnumerateInstanceVersion(pi) == VK_SUCCESS) {
                     return pi.get(0);
                 }
             }

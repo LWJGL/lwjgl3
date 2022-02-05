@@ -52,8 +52,6 @@ public class VkImageBlit2KHR extends VkImageBlit2 {
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkImageBlit2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
-    public VkImageBlit2KHR pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Copies the specified {@link VkImageSubresourceLayers} to the {@code srcSubresource} field. */
     @Override
     public VkImageBlit2KHR srcSubresource(VkImageSubresourceLayers value) { nsrcSubresource(address(), value); return this; }
@@ -281,8 +279,6 @@ public class VkImageBlit2KHR extends VkImageBlit2 {
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkImageBlit2KHR.Buffer pNext(@NativeType("void const *") long value) { VkImageBlit2KHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
-        public VkImageBlit2KHR.Buffer pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Copies the specified {@link VkImageSubresourceLayers} to the {@code srcSubresource} field. */
         @Override
         public VkImageBlit2KHR.Buffer srcSubresource(VkImageSubresourceLayers value) { VkImageBlit2KHR.nsrcSubresource(address(), value); return this; }

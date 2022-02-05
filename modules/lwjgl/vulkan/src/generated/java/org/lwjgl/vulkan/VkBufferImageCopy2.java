@@ -34,7 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2 STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkCopyCommandTransformInfoQCOM}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code imageSubresource} <b>must</b> be a valid {@link VkImageSubresourceLayers} structure</li>
  * </ul>
  * 
@@ -141,6 +142,8 @@ public class VkBufferImageCopy2 extends Struct implements NativeResource {
     public VkBufferImageCopy2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkBufferImageCopy2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
+    public VkBufferImageCopy2 pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #bufferOffset} field. */
     public VkBufferImageCopy2 bufferOffset(@NativeType("VkDeviceSize") long value) { nbufferOffset(address(), value); return this; }
     /** Sets the specified value to the {@link #bufferRowLength} field. */
@@ -408,6 +411,8 @@ public class VkBufferImageCopy2 extends Struct implements NativeResource {
         public VkBufferImageCopy2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2); }
         /** Sets the specified value to the {@link VkBufferImageCopy2#pNext} field. */
         public VkBufferImageCopy2.Buffer pNext(@NativeType("void const *") long value) { VkBufferImageCopy2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
+        public VkBufferImageCopy2.Buffer pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkBufferImageCopy2#bufferOffset} field. */
         public VkBufferImageCopy2.Buffer bufferOffset(@NativeType("VkDeviceSize") long value) { VkBufferImageCopy2.nbufferOffset(address(), value); return this; }
         /** Sets the specified value to the {@link VkBufferImageCopy2#bufferRowLength} field. */

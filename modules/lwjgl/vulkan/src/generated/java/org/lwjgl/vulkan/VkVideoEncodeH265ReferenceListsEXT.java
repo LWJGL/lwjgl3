@@ -33,7 +33,7 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkVideoEncodeH265DpbSlotInfoEXT}, {@link VkVideoEncodeH265NaluSliceEXT}, {@link VkVideoEncodeH265VclFrameInfoEXT}</p>
+ * <p>{@link VkVideoEncodeH265DpbSlotInfoEXT}, {@link VkVideoEncodeH265NaluSliceSegmentEXT}, {@link VkVideoEncodeH265VclFrameInfoEXT}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -108,14 +108,14 @@ public class VkVideoEncodeH265ReferenceListsEXT extends Struct implements Native
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of reference pictures in reference list L0 and is identical to {@code StdVideoEncodeH265SliceHeader}{@code ::num_ref_idx_l0_active_minus1} + 1. */
+    /** the number of reference pictures in reference list L0 and is identical to {@code StdVideoEncodeH265SliceSegmentHeader}{@code ::num_ref_idx_l0_active_minus1} + 1. */
     @NativeType("uint8_t")
     public byte referenceList0EntryCount() { return nreferenceList0EntryCount(address()); }
     /** a pointer to an array of {@code referenceList0EntryCount} {@link VkVideoEncodeH265DpbSlotInfoEXT} structures specifying the reference list L0 entries for the current picture. */
     @Nullable
     @NativeType("VkVideoEncodeH265DpbSlotInfoEXT const *")
     public VkVideoEncodeH265DpbSlotInfoEXT.Buffer pReferenceList0Entries() { return npReferenceList0Entries(address()); }
-    /** the number of reference pictures in reference list L1 and is identical to {@code StdVideoEncodeH265SliceHeader}{@code ::num_ref_idx_l1_active_minus1} + 1. */
+    /** the number of reference pictures in reference list L1 and is identical to {@code StdVideoEncodeH265SliceSegmentHeader}{@code ::num_ref_idx_l1_active_minus1} + 1. */
     @NativeType("uint8_t")
     public byte referenceList1EntryCount() { return nreferenceList1EntryCount(address()); }
     /** a pointer to an array of {@code referenceList1EntryCount} {@link VkVideoEncodeH265DpbSlotInfoEXT} structures specifying the reference list L1 entries for the current picture. */

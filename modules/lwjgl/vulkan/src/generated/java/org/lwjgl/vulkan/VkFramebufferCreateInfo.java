@@ -20,20 +20,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Other than the exceptions listed below, applications <b>must</b> ensure that all accesses to memory that backs image subresources used as attachments in a given render pass instance either happen-before the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-store-ops">load operations</a> for those attachments, or happen-after the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-load-store-ops">store operations</a> for those attachments.</p>
- * 
- * <p>The exceptions to the general rule are:</p>
- * 
- * <ul>
- * <li>For depth/stencil attachments, an aspect <b>can</b> be used separately as attachment and non-attachment if both accesses are read-only.</li>
- * <li>For depth/stencil attachments, each aspect <b>can</b> be used separately as attachment and non-attachment as long as the non-attachment accesses are also via an image subresource in either the {@link VK11#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL} layout or the {@link VK11#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL} layout, and the attachment resource uses whichever of those two layouts the image accesses do not.</li>
- * </ul>
- * 
- * <p>Use of non-attachment aspects in these cases is only well defined if the attachment is used in the subpass where the non-attachment access is being made, or the layout of the image subresource is constant throughout the entire render pass instance, including the {@code initialLayout} and {@code finalLayout}.</p>
+ * <p>Applications <b>must</b> ensure that all non-attachment writes to memory backing image subresources that are used as attachments in a render pass instance happen-before or happen-after the render pass instance. If an image subresource is written during a render pass instance by anything other than load operations, store operations, and layout transitions, applications <b>must</b> ensure that all non-attachment reads from memory backing that image subresource happen-before or happen-after the render pass instance. For depth/stencil images, the aspects are not treated independently for the above guarantees - writes to either aspect <b>must</b> be synchronized with accesses to the other aspect.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>These restrictions mean that the render pass has full knowledge of all uses of all of the attachments, so that the implementation is able to make correct decisions about when and how to perform layout transitions, when to overlap execution of subpasses, etc.</p>
+ * <p>An image subresource can be used as read-only as both an attachment and a non-attachment during a render pass instance, but care must still be taken to avoid data races with load/store operations and layout transitions. The simplest way to achieve this is to keep the non-attachment and attachment accesses within the same subpass, or to avoid layout transitions and load/store operations that perform writes.</p>
  * </div>
  * 
  * <p>It is legal for a subpass to use no color or depth/stencil attachments, either because it has no attachment references or because all of them are {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}. This kind of subpass <b>can</b> use shader side effects such as image stores and atomics to produce an output. In this case, the subpass continues to use the {@code width}, {@code height}, and {@code layers} of the framebuffer to define the dimensions of the rendering area, and the {@code rasterizationSamples} from each pipeline’s {@link VkPipelineMultisampleStateCreateInfo} to define the number of samples used in rasterization; however, if {@link VkPhysicalDeviceFeatures}{@code ::variableMultisampleRate} is {@link VK10#VK_FALSE FALSE}, then all pipelines to be bound with the subpass <b>must</b> have the same value for {@link VkPipelineMultisampleStateCreateInfo}{@code ::rasterizationSamples}.</p>

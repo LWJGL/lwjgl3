@@ -2491,41 +2491,41 @@ val VkVideoEncodeH265ReferenceListsEXT = struct(Module.VULKAN, "VkVideoEncodeH26
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH265DpbSlotInfoEXT, ##VkVideoEncodeH265NaluSliceEXT, ##VkVideoEncodeH265VclFrameInfoEXT
+        ##VkVideoEncodeH265DpbSlotInfoEXT, ##VkVideoEncodeH265NaluSliceSegmentEXT, ##VkVideoEncodeH265VclFrameInfoEXT
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    AutoSize("pReferenceList0Entries", optional = true)..uint8_t("referenceList0EntryCount", "the number of reference pictures in reference list L0 and is identical to {@code StdVideoEncodeH265SliceHeader}{@code ::num_ref_idx_l0_active_minus1} + 1.")
+    AutoSize("pReferenceList0Entries", optional = true)..uint8_t("referenceList0EntryCount", "the number of reference pictures in reference list L0 and is identical to {@code StdVideoEncodeH265SliceSegmentHeader}{@code ::num_ref_idx_l0_active_minus1} + 1.")
     VkVideoEncodeH265DpbSlotInfoEXT.const.p("pReferenceList0Entries", "a pointer to an array of {@code referenceList0EntryCount} ##VkVideoEncodeH265DpbSlotInfoEXT structures specifying the reference list L0 entries for the current picture.")
-    AutoSize("pReferenceList1Entries", optional = true)..uint8_t("referenceList1EntryCount", "the number of reference pictures in reference list L1 and is identical to {@code StdVideoEncodeH265SliceHeader}{@code ::num_ref_idx_l1_active_minus1} + 1.")
+    AutoSize("pReferenceList1Entries", optional = true)..uint8_t("referenceList1EntryCount", "the number of reference pictures in reference list L1 and is identical to {@code StdVideoEncodeH265SliceSegmentHeader}{@code ::num_ref_idx_l1_active_minus1} + 1.")
     VkVideoEncodeH265DpbSlotInfoEXT.const.p("pReferenceList1Entries", "a pointer to an array of {@code referenceList1EntryCount} ##VkVideoEncodeH265DpbSlotInfoEXT structures specifying the reference list L1 entries for the current picture.")
     StdVideoEncodeH265ReferenceModifications.const.p("pReferenceModifications", "a pointer to a {@code StdVideoEncodeH265ReferenceModifications} structure specifying reference list modifications.")
 }
 
-val VkVideoEncodeH265NaluSliceEXT = struct(Module.VULKAN, "VkVideoEncodeH265NaluSliceEXT") {
+val VkVideoEncodeH265NaluSliceSegmentEXT = struct(Module.VULKAN, "VkVideoEncodeH265NaluSliceSegmentEXT") {
     javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
-        Structure specifies H.265 encode slice NALU parameters.
+        Structure specifies H.265 encode slice segment NALU parameters.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT</li>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_EXT</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
             <li>If {@code pReferenceFinalLists} is not {@code NULL}, {@code pReferenceFinalLists} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeH265ReferenceListsEXT structure</li>
-            <li>{@code pSliceHeaderStd} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH265SliceHeader} value</li>
+            <li>{@code pSliceSegmentHeaderStd} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH265SliceSegmentHeader} value</li>
         </ul>
 
         <h5>See Also</h5>
         ##VkVideoEncodeH265ReferenceListsEXT, ##VkVideoEncodeH265VclFrameInfoEXT
         """
 
-    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT")..VkStructureType("sType", "the type of this structure.")
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    uint32_t("ctbCount", "the number of CTBs in this slice.")
-    nullable..VkVideoEncodeH265ReferenceListsEXT.const.p("pReferenceFinalLists", "{@code NULL} or a pointer to a ##VkVideoEncodeH265ReferenceListsEXT structure specifying the reference lists to be used for the current slice. If {@code pReferenceFinalLists} is not {@code NULL}, these reference lists override the reference lists provided in ##VkVideoEncodeH265VclFrameInfoEXT{@code ::pReferenceFinalLists}.")
-    StdVideoEncodeH265SliceHeader.const.p("pSliceHeaderStd", "a pointer to a {@code StdVideoEncodeH265SliceHeader} structure specifying the slice header for the current slice.")
+    uint32_t("ctbCount", "the number of CTBs in this slice segment.")
+    nullable..VkVideoEncodeH265ReferenceListsEXT.const.p("pReferenceFinalLists", "{@code NULL} or a pointer to a ##VkVideoEncodeH265ReferenceListsEXT structure specifying the reference lists to be used for the current slice segment. If {@code pReferenceFinalLists} is not {@code NULL}, these reference lists override the reference lists provided in ##VkVideoEncodeH265VclFrameInfoEXT{@code ::pReferenceFinalLists}.")
+    StdVideoEncodeH265SliceSegmentHeader.const.p("pSliceSegmentHeaderStd", "a pointer to a {@code StdVideoEncodeH265SliceSegmentHeader} structure specifying the slice segment header for the current slice segment.")
 }
 
 val VkVideoEncodeH265VclFrameInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265VclFrameInfoEXT") {
@@ -2538,20 +2538,20 @@ val VkVideoEncodeH265VclFrameInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH265V
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT</li>
             <li>If {@code pReferenceFinalLists} is not {@code NULL}, {@code pReferenceFinalLists} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeH265ReferenceListsEXT structure</li>
-            <li>{@code pNaluSliceEntries} <b>must</b> be a valid pointer to an array of {@code naluSliceEntryCount} valid ##VkVideoEncodeH265NaluSliceEXT structures</li>
+            <li>{@code pNaluSliceSegmentEntries} <b>must</b> be a valid pointer to an array of {@code naluSliceSegmentEntryCount} valid ##VkVideoEncodeH265NaluSliceSegmentEXT structures</li>
             <li>{@code pCurrentPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH265PictureInfo} value</li>
-            <li>{@code naluSliceEntryCount} <b>must</b> be greater than 0</li>
+            <li>{@code naluSliceSegmentEntryCount} <b>must</b> be greater than 0</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH265NaluSliceEXT, ##VkVideoEncodeH265ReferenceListsEXT
+        ##VkVideoEncodeH265NaluSliceSegmentEXT, ##VkVideoEncodeH265ReferenceListsEXT
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     nullable..VkVideoEncodeH265ReferenceListsEXT.const.p("pReferenceFinalLists", "{@code NULL} or a pointer to a ##VkVideoEncodeH265ReferenceListsEXT structure specifying the reference lists to be used for the current picture.")
-    AutoSize("pNaluSliceEntries")..uint32_t("naluSliceEntryCount", "the number of slice NALUs in the frame.")
-    VkVideoEncodeH265NaluSliceEXT.const.p("pNaluSliceEntries", "a pointer to an array of ##VkVideoEncodeH265NaluSliceEXT structures specifying the division of the current picture into slices and the properties of these slices.")
+    AutoSize("pNaluSliceSegmentEntries")..uint32_t("naluSliceSegmentEntryCount", "the number of slice segment NALUs in the frame.")
+    VkVideoEncodeH265NaluSliceSegmentEXT.const.p("pNaluSliceSegmentEntries", "a pointer to an array of ##VkVideoEncodeH265NaluSliceSegmentEXT structures specifying the division of the current picture into slice segments and the properties of these slice segments.")
     StdVideoEncodeH265PictureInfo.const.p("pCurrentPictureInfo", "a pointer to a {@code StdVideoEncodeH265PictureInfo} structure specifying the syntax and other codec-specific information from the H.265 specification, associated with this picture.")
 }
 
@@ -2710,8 +2710,6 @@ val VkVideoDecodeH264ProfileEXT = struct(Module.VULKAN, "VkVideoDecodeH264Profil
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT</li>
-            <li>{@code pictureLayout} <b>must</b> be a valid combination of {@code VkVideoDecodeH264PictureLayoutFlagBitsEXT} values</li>
-            <li>{@code pictureLayout} <b>must</b> not be 0</li>
         </ul>
         """
 
@@ -3089,16 +3087,15 @@ val VkAttachmentSampleCountInfoAMD = struct(Module.VULKAN, "VkAttachmentSampleCo
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD</li>
-            <li>{@code pColorAttachmentSamples} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid or #NULL_HANDLE {@code VkSampleCountFlagBits} values</li>
+            <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachmentSamples} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid {@code VkSampleCountFlagBits} values</li>
             <li>If {@code depthStencilAttachmentSamples} is not 0, {@code depthStencilAttachmentSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
-            <li>{@code colorAttachmentCount} <b>must</b> be greater than 0</li>
         </ul>
         """
 
     Expression("#STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD")..VkStructureType("sType", "the type of this structure")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure")
     AutoSize("pColorAttachmentSamples", optional = true)..uint32_t("colorAttachmentCount", "the number of color attachments specified in a render pass instance.")
-    nullable..VkSampleCountFlagBits.const.p("pColorAttachmentSamples", "a pointer to an array of {@code VkSampleCountFlagBits} values defining the sample count of color attachments.")
+    VkSampleCountFlagBits.const.p("pColorAttachmentSamples", "a pointer to an array of {@code VkSampleCountFlagBits} values defining the sample count of color attachments.")
     VkSampleCountFlagBits("depthStencilAttachmentSamples", "a {@code VkSampleCountFlagBits} value defining the sample count of a depth/stencil attachment.")
 }
 
@@ -3108,7 +3105,7 @@ val VkAttachmentSampleCountInfoNV = struct(Module.VULKAN, "VkAttachmentSampleCou
     Expression("#STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD")..VkStructureType("sType", "")
     nullable..opaque_const_p("pNext", "")
     AutoSize("pColorAttachmentSamples", optional = true)..uint32_t("colorAttachmentCount", "")
-    nullable..VkSampleCountFlagBits.const.p("pColorAttachmentSamples", "")
+    VkSampleCountFlagBits.const.p("pColorAttachmentSamples", "")
     VkSampleCountFlagBits("depthStencilAttachmentSamples", "")
 }
 
@@ -8590,7 +8587,7 @@ val VkPipelineRepresentativeFragmentTestStateCreateInfoNV = struct(Module.VULKAN
         <h5>Description</h5>
         If this structure is not included in the {@code pNext} chain, {@code representativeFragmentTestEnable} is considered to be #FALSE, and the representative fragment test is disabled.
 
-        If the active fragment shader specifies the {@code EarlyFragmentTests} execution mode, the representative fragment shader test has no effect, even if enabled.
+        If the active fragment shader does not specify the {@code EarlyFragmentTests} execution mode, the representative fragment shader test has no effect, even if enabled.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -9080,6 +9077,8 @@ val VkQueueFamilyGlobalPriorityPropertiesKHR = struct(Module.VULKAN, "VkQueueFam
         Return structure for queue family global priority information query.
 
         <h5>Description</h5>
+        If the ##VkQueueFamilyGlobalPriorityPropertiesKHR structure is included in the {@code pNext} chain of the ##VkQueueFamilyProperties2 structure passed to #GetPhysicalDeviceQueueFamilyProperties2(), it is filled in with the list of supported global queue priorities for the indicated family.
+
         The valid elements of {@code priorities} <b>must</b> not contain any duplicate values.
 
         The valid elements of {@code priorities} <b>must</b> be a continuous sequence of {@code VkQueueGlobalPriorityKHR} enums in the ascending order.
@@ -11251,12 +11250,12 @@ val VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV = struct(Module.VULKAN, 
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     uint32_t("maxGraphicsShaderGroupCount", "the maximum number of shader groups in ##VkGraphicsPipelineShaderGroupsCreateInfoNV.")
     uint32_t("maxIndirectSequenceCount", "the maximum number of sequences in ##VkGeneratedCommandsInfoNV and in ##VkGeneratedCommandsMemoryRequirementsInfoNV.")
-    uint32_t("maxIndirectCommandsTokenCount", "")
+    uint32_t("maxIndirectCommandsTokenCount", "the maximum number of tokens in ##VkIndirectCommandsLayoutCreateInfoNV.")
     uint32_t("maxIndirectCommandsStreamCount", "the maximum number of streams in ##VkIndirectCommandsLayoutCreateInfoNV.")
     uint32_t("maxIndirectCommandsTokenOffset", "the maximum offset in ##VkIndirectCommandsLayoutTokenNV.")
     uint32_t("maxIndirectCommandsStreamStride", "the maximum stream stride in ##VkIndirectCommandsLayoutCreateInfoNV.")
-    uint32_t("minSequencesCountBufferOffsetAlignment", "")
-    uint32_t("minSequencesIndexBufferOffsetAlignment", "")
+    uint32_t("minSequencesCountBufferOffsetAlignment", "the minimum alignment for memory addresses which <b>can</b> be used in ##VkGeneratedCommandsInfoNV.")
+    uint32_t("minSequencesIndexBufferOffsetAlignment", "the minimum alignment for memory addresses which <b>can</b> be used in ##VkGeneratedCommandsInfoNV.")
     uint32_t("minIndirectCommandsBufferOffsetAlignment", "the minimum alignment for memory addresses used in ##VkIndirectCommandsStreamNV, and as preprocess buffer in ##VkGeneratedCommandsInfoNV.")
 }
 
@@ -12355,10 +12354,7 @@ val VkImageMemoryBarrier2KHR = struct(Module.VULKAN, "VkImageMemoryBarrier2KHR",
     documentation = "See ##VkImageMemoryBarrier2."
 
     Expression("#STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2")..VkStructureType("sType", "")
-    PointerSetter(
-        "VkSampleLocationsInfoEXT",
-        prepend = true
-    )..nullable..opaque_const_p("pNext", "")
+    nullable..opaque_const_p("pNext", "")
     VkPipelineStageFlags2("srcStageMask", "")
     VkAccessFlags2("srcAccessMask", "")
     VkPipelineStageFlags2("dstStageMask", "")
@@ -13074,10 +13070,7 @@ val VkImageBlit2KHR = struct(Module.VULKAN, "VkImageBlit2KHR", alias = VkImageBl
     documentation = "See ##VkImageBlit2."
 
     Expression("#STRUCTURE_TYPE_IMAGE_BLIT_2")..VkStructureType("sType", "")
-    PointerSetter(
-        "VkCopyCommandTransformInfoQCOM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext", "")
+    nullable..opaque_const_p("pNext", "")
     VkImageSubresourceLayers("srcSubresource", "")
     VkOffset3D("srcOffsets", "")[2]
     VkImageSubresourceLayers("dstSubresource", "")
@@ -13088,10 +13081,7 @@ val VkBufferImageCopy2KHR = struct(Module.VULKAN, "VkBufferImageCopy2KHR", alias
     documentation = "See ##VkBufferImageCopy2."
 
     Expression("#STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2")..VkStructureType("sType", "")
-    PointerSetter(
-        "VkCopyCommandTransformInfoQCOM",
-        prepend = true
-    )..nullable..opaque_const_p("pNext", "")
+    nullable..opaque_const_p("pNext", "")
     VkDeviceSize("bufferOffset", "")
     uint32_t("bufferRowLength", "")
     uint32_t("bufferImageHeight", "")
@@ -13163,7 +13153,7 @@ val VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM = struct(Modul
         """
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM")..VkStructureType("sType", "")
-    nullable..opaque_const_p("pNext", "")
+    nullable..opaque_p("pNext", "")
     VkBool32("rasterizationOrderColorAttachmentAccess", "indicates that rasterization order access to color and input attachments is supported by the implementation.")
     VkBool32("rasterizationOrderDepthAttachmentAccess", "indicates that rasterization order access to the depth aspect of depth/stencil and input attachments is supported by the implementation.")
     VkBool32("rasterizationOrderStencilAttachmentAccess", "indicates that rasterization order access to the stencil aspect of depth/stencil and input attachments is supported by the implementation.")

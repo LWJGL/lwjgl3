@@ -24,7 +24,10 @@ val KHR_buffer_device_address = "KHRBufferDeviceAddress".nativeClassVK("KHR_buff
         There are examples of usage in the <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_buffer_reference.txt">{@code GL_EXT_buffer_reference}</a> spec for how to use this in a high-level shading language such as GLSL. The <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_buffer_reference2.txt">{@code GL_EXT_buffer_reference2}</a> and <a target="_blank" href="https://github.com/KhronosGroup/GLSL/blob/master/extensions/ext/GLSL_EXT_buffer_reference_uvec2.txt">{@code GL_EXT_buffer_reference_uvec2}</a> extensions were also added to help cover a few additional edge cases.
 
         <h5>Promotion to Vulkan 1.2</h5>
-        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code bufferDeviceAddress} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.
+        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code bufferDeviceAddress} feature is optional. The original type, enum and command names are still available as aliases of the core functionality.
+
+        <h5>Promotion to Vulkan 1.3</h5>
+        Support for the {@code bufferDeviceAddress} feature is mandatory in Vulkan 1.3, regardless of whether this extension is supported.
 
         <h5>VK_KHR_buffer_device_address</h5>
         <dl>

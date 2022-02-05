@@ -57,8 +57,6 @@ public class VkImageMemoryBarrier2KHR extends VkImageMemoryBarrier2 {
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkImageMemoryBarrier2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
-    public VkImageMemoryBarrier2KHR pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@code srcStageMask} field. */
     @Override
     public VkImageMemoryBarrier2KHR srcStageMask(@NativeType("VkPipelineStageFlags2") long value) { nsrcStageMask(address(), value); return this; }
@@ -295,8 +293,6 @@ public class VkImageMemoryBarrier2KHR extends VkImageMemoryBarrier2 {
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkImageMemoryBarrier2KHR.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryBarrier2KHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
-        public VkImageMemoryBarrier2KHR.Buffer pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@code srcStageMask} field. */
         @Override
         public VkImageMemoryBarrier2KHR.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2") long value) { VkImageMemoryBarrier2KHR.nsrcStageMask(address(), value); return this; }

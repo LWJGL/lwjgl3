@@ -12,6 +12,7 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -50,9 +51,6 @@ public class VkAttachmentSampleCountInfoNV extends VkAttachmentSampleCountInfoAM
     /** Sets the specified value to the {@code pNext} field. */
     @Override
     public VkAttachmentSampleCountInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code colorAttachmentCount} field. */
-    @Override
-    public VkAttachmentSampleCountInfoNV colorAttachmentCount(@NativeType("uint32_t") int value) { ncolorAttachmentCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code pColorAttachmentSamples} field. */
     @Override
     public VkAttachmentSampleCountInfoNV pColorAttachmentSamples(@Nullable @NativeType("VkSampleCountFlagBits const *") IntBuffer value) { npColorAttachmentSamples(address(), value); return this; }
@@ -65,13 +63,11 @@ public class VkAttachmentSampleCountInfoNV extends VkAttachmentSampleCountInfoAM
     public VkAttachmentSampleCountInfoNV set(
         int sType,
         long pNext,
-        int colorAttachmentCount,
         @Nullable IntBuffer pColorAttachmentSamples,
         int depthStencilAttachmentSamples
     ) {
         sType(sType);
         pNext(pNext);
-        colorAttachmentCount(colorAttachmentCount);
         pColorAttachmentSamples(pColorAttachmentSamples);
         depthStencilAttachmentSamples(depthStencilAttachmentSamples);
 
@@ -248,9 +244,6 @@ public class VkAttachmentSampleCountInfoNV extends VkAttachmentSampleCountInfoAM
         /** Sets the specified value to the {@code pNext} field. */
         @Override
         public VkAttachmentSampleCountInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkAttachmentSampleCountInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code colorAttachmentCount} field. */
-        @Override
-        public VkAttachmentSampleCountInfoNV.Buffer colorAttachmentCount(@NativeType("uint32_t") int value) { VkAttachmentSampleCountInfoNV.ncolorAttachmentCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code pColorAttachmentSamples} field. */
         @Override
         public VkAttachmentSampleCountInfoNV.Buffer pColorAttachmentSamples(@Nullable @NativeType("VkSampleCountFlagBits const *") IntBuffer value) { VkAttachmentSampleCountInfoNV.npColorAttachmentSamples(address(), value); return this; }

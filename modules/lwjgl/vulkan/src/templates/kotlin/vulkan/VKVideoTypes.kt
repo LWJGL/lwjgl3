@@ -734,7 +734,7 @@ val StdVideoDecodeH265ReferenceInfo = struct(Module.VULKAN, "StdVideoDecodeH265R
 
 // vulkan_video_code_h265std_encode
 
-val StdVideoEncodeH265SliceHeaderFlags = struct(Module.VULKAN, "StdVideoEncodeH265SliceHeaderFlags") {
+val StdVideoEncodeH265SliceSegmentHeaderFlags = struct(Module.VULKAN, "StdVideoEncodeH265SliceSegmentHeaderFlags") {
     subpackage = "video"
 
     uint32_t("first_slice_segment_in_pic_flag", "", bits = 1)
@@ -758,7 +758,7 @@ val StdVideoEncodeH265SliceHeaderFlags = struct(Module.VULKAN, "StdVideoEncodeH2
     uint16_t("chroma_weight_l1_flag", "bit 0 - num_ref_idx_l1_active_minus1")
 }
 
-val StdVideoEncodeH265SliceHeader = struct(Module.VULKAN, "StdVideoEncodeH265SliceHeader") {
+val StdVideoEncodeH265SliceSegmentHeader = struct(Module.VULKAN, "StdVideoEncodeH265SliceSegmentHeader") {
     subpackage = "video"
     javaImport("static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*")
 
@@ -791,7 +791,7 @@ val StdVideoEncodeH265SliceHeader = struct(Module.VULKAN, "StdVideoEncodeH265Sli
     int8_t("slice_act_y_qp_offset", "")
     int8_t("slice_act_cb_qp_offset", "")
     int8_t("slice_act_cr_qp_offset", "")
-    StdVideoEncodeH265SliceHeaderFlags("flags", "")
+    StdVideoEncodeH265SliceSegmentHeaderFlags("flags", "")
 }
 
 val StdVideoEncodeH265ReferenceModificationFlags = struct(Module.VULKAN, "StdVideoEncodeH265ReferenceModificationFlags") {

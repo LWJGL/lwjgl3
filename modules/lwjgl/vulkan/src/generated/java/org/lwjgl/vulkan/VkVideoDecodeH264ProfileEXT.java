@@ -38,8 +38,6 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT}</li>
- * <li>{@code pictureLayout} <b>must</b> be a valid combination of {@code VkVideoDecodeH264PictureLayoutFlagBitsEXT} values</li>
- * <li>{@code pictureLayout} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h3>Layout</h3>

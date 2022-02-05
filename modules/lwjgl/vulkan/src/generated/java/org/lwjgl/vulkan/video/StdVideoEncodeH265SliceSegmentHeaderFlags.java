@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h3>Layout</h3>
  * 
  * <pre><code>
- * struct StdVideoEncodeH265SliceHeaderFlags {
+ * struct StdVideoEncodeH265SliceSegmentHeaderFlags {
  *     uint32_t first_slice_segment_in_pic_flag : 1;
  *     uint32_t no_output_of_prior_pics_flag : 1;
  *     uint32_t dependent_slice_segment_flag : 1;
@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t {@link #chroma_weight_l1_flag};
  * }</code></pre>
  */
-public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements NativeResource {
+public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -77,12 +77,12 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
     }
 
     /**
-     * Creates a {@code StdVideoEncodeH265SliceHeaderFlags} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * Creates a {@code StdVideoEncodeH265SliceSegmentHeaderFlags} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
      *
      * <p>The created instance holds a strong reference to the container object.</p>
      */
-    public StdVideoEncodeH265SliceHeaderFlags(ByteBuffer container) {
+    public StdVideoEncodeH265SliceSegmentHeaderFlags(ByteBuffer container) {
         super(memAddress(container), __checkContainer(container, SIZEOF));
     }
 
@@ -148,46 +148,46 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
     public short chroma_weight_l1_flag() { return nchroma_weight_l1_flag(address()); }
 
     /** Sets the specified value to the {@code first_slice_segment_in_pic_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags first_slice_segment_in_pic_flag(@NativeType("uint32_t") int value) { nfirst_slice_segment_in_pic_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags first_slice_segment_in_pic_flag(@NativeType("uint32_t") int value) { nfirst_slice_segment_in_pic_flag(address(), value); return this; }
     /** Sets the specified value to the {@code no_output_of_prior_pics_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags no_output_of_prior_pics_flag(@NativeType("uint32_t") int value) { nno_output_of_prior_pics_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags no_output_of_prior_pics_flag(@NativeType("uint32_t") int value) { nno_output_of_prior_pics_flag(address(), value); return this; }
     /** Sets the specified value to the {@code dependent_slice_segment_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags dependent_slice_segment_flag(@NativeType("uint32_t") int value) { ndependent_slice_segment_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags dependent_slice_segment_flag(@NativeType("uint32_t") int value) { ndependent_slice_segment_flag(address(), value); return this; }
     /** Sets the specified value to the {@code short_term_ref_pic_set_sps_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags short_term_ref_pic_set_sps_flag(@NativeType("uint32_t") int value) { nshort_term_ref_pic_set_sps_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags short_term_ref_pic_set_sps_flag(@NativeType("uint32_t") int value) { nshort_term_ref_pic_set_sps_flag(address(), value); return this; }
     /** Sets the specified value to the {@code slice_temporal_mvp_enable_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags slice_temporal_mvp_enable_flag(@NativeType("uint32_t") int value) { nslice_temporal_mvp_enable_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags slice_temporal_mvp_enable_flag(@NativeType("uint32_t") int value) { nslice_temporal_mvp_enable_flag(address(), value); return this; }
     /** Sets the specified value to the {@code slice_sao_luma_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags slice_sao_luma_flag(@NativeType("uint32_t") int value) { nslice_sao_luma_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags slice_sao_luma_flag(@NativeType("uint32_t") int value) { nslice_sao_luma_flag(address(), value); return this; }
     /** Sets the specified value to the {@code slice_sao_chroma_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags slice_sao_chroma_flag(@NativeType("uint32_t") int value) { nslice_sao_chroma_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags slice_sao_chroma_flag(@NativeType("uint32_t") int value) { nslice_sao_chroma_flag(address(), value); return this; }
     /** Sets the specified value to the {@code num_ref_idx_active_override_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags num_ref_idx_active_override_flag(@NativeType("uint32_t") int value) { nnum_ref_idx_active_override_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags num_ref_idx_active_override_flag(@NativeType("uint32_t") int value) { nnum_ref_idx_active_override_flag(address(), value); return this; }
     /** Sets the specified value to the {@code mvd_l1_zero_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags mvd_l1_zero_flag(@NativeType("uint32_t") int value) { nmvd_l1_zero_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags mvd_l1_zero_flag(@NativeType("uint32_t") int value) { nmvd_l1_zero_flag(address(), value); return this; }
     /** Sets the specified value to the {@code cabac_init_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags cabac_init_flag(@NativeType("uint32_t") int value) { ncabac_init_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags cabac_init_flag(@NativeType("uint32_t") int value) { ncabac_init_flag(address(), value); return this; }
     /** Sets the specified value to the {@code slice_deblocking_filter_disable_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags slice_deblocking_filter_disable_flag(@NativeType("uint32_t") int value) { nslice_deblocking_filter_disable_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags slice_deblocking_filter_disable_flag(@NativeType("uint32_t") int value) { nslice_deblocking_filter_disable_flag(address(), value); return this; }
     /** Sets the specified value to the {@code collocated_from_l0_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags collocated_from_l0_flag(@NativeType("uint32_t") int value) { ncollocated_from_l0_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags collocated_from_l0_flag(@NativeType("uint32_t") int value) { ncollocated_from_l0_flag(address(), value); return this; }
     /** Sets the specified value to the {@code slice_loop_filter_across_slices_enabled_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags slice_loop_filter_across_slices_enabled_flag(@NativeType("uint32_t") int value) { nslice_loop_filter_across_slices_enabled_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags slice_loop_filter_across_slices_enabled_flag(@NativeType("uint32_t") int value) { nslice_loop_filter_across_slices_enabled_flag(address(), value); return this; }
     /** Sets the specified value to the {@code bLastSliceInPic} field. */
-    public StdVideoEncodeH265SliceHeaderFlags bLastSliceInPic(@NativeType("uint32_t") int value) { nbLastSliceInPic(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags bLastSliceInPic(@NativeType("uint32_t") int value) { nbLastSliceInPic(address(), value); return this; }
     /** Sets the specified value to the {@code reservedBits} field. */
-    public StdVideoEncodeH265SliceHeaderFlags reservedBits(@NativeType("uint32_t") int value) { nreservedBits(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags reservedBits(@NativeType("uint32_t") int value) { nreservedBits(address(), value); return this; }
     /** Sets the specified value to the {@link #luma_weight_l0_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags luma_weight_l0_flag(@NativeType("uint16_t") short value) { nluma_weight_l0_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags luma_weight_l0_flag(@NativeType("uint16_t") short value) { nluma_weight_l0_flag(address(), value); return this; }
     /** Sets the specified value to the {@link #chroma_weight_l0_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags chroma_weight_l0_flag(@NativeType("uint16_t") short value) { nchroma_weight_l0_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags chroma_weight_l0_flag(@NativeType("uint16_t") short value) { nchroma_weight_l0_flag(address(), value); return this; }
     /** Sets the specified value to the {@link #luma_weight_l1_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags luma_weight_l1_flag(@NativeType("uint16_t") short value) { nluma_weight_l1_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags luma_weight_l1_flag(@NativeType("uint16_t") short value) { nluma_weight_l1_flag(address(), value); return this; }
     /** Sets the specified value to the {@link #chroma_weight_l1_flag} field. */
-    public StdVideoEncodeH265SliceHeaderFlags chroma_weight_l1_flag(@NativeType("uint16_t") short value) { nchroma_weight_l1_flag(address(), value); return this; }
+    public StdVideoEncodeH265SliceSegmentHeaderFlags chroma_weight_l1_flag(@NativeType("uint16_t") short value) { nchroma_weight_l1_flag(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
-    public StdVideoEncodeH265SliceHeaderFlags set(
+    public StdVideoEncodeH265SliceSegmentHeaderFlags set(
         int first_slice_segment_in_pic_flag,
         int no_output_of_prior_pics_flag,
         int dependent_slice_segment_flag,
@@ -238,125 +238,125 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
      *
      * @return this struct
      */
-    public StdVideoEncodeH265SliceHeaderFlags set(StdVideoEncodeH265SliceHeaderFlags src) {
+    public StdVideoEncodeH265SliceSegmentHeaderFlags set(StdVideoEncodeH265SliceSegmentHeaderFlags src) {
         memCopy(src.address(), address(), SIZEOF);
         return this;
     }
 
     // -----------------------------------
 
-    /** Returns a new {@code StdVideoEncodeH265SliceHeaderFlags} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
-    public static StdVideoEncodeH265SliceHeaderFlags malloc() {
-        return wrap(StdVideoEncodeH265SliceHeaderFlags.class, nmemAllocChecked(SIZEOF));
+    /** Returns a new {@code StdVideoEncodeH265SliceSegmentHeaderFlags} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags malloc() {
+        return wrap(StdVideoEncodeH265SliceSegmentHeaderFlags.class, nmemAllocChecked(SIZEOF));
     }
 
-    /** Returns a new {@code StdVideoEncodeH265SliceHeaderFlags} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
-    public static StdVideoEncodeH265SliceHeaderFlags calloc() {
-        return wrap(StdVideoEncodeH265SliceHeaderFlags.class, nmemCallocChecked(1, SIZEOF));
+    /** Returns a new {@code StdVideoEncodeH265SliceSegmentHeaderFlags} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags calloc() {
+        return wrap(StdVideoEncodeH265SliceSegmentHeaderFlags.class, nmemCallocChecked(1, SIZEOF));
     }
 
-    /** Returns a new {@code StdVideoEncodeH265SliceHeaderFlags} instance allocated with {@link BufferUtils}. */
-    public static StdVideoEncodeH265SliceHeaderFlags create() {
+    /** Returns a new {@code StdVideoEncodeH265SliceSegmentHeaderFlags} instance allocated with {@link BufferUtils}. */
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(StdVideoEncodeH265SliceHeaderFlags.class, memAddress(container), container);
+        return wrap(StdVideoEncodeH265SliceSegmentHeaderFlags.class, memAddress(container), container);
     }
 
-    /** Returns a new {@code StdVideoEncodeH265SliceHeaderFlags} instance for the specified memory address. */
-    public static StdVideoEncodeH265SliceHeaderFlags create(long address) {
-        return wrap(StdVideoEncodeH265SliceHeaderFlags.class, address);
+    /** Returns a new {@code StdVideoEncodeH265SliceSegmentHeaderFlags} instance for the specified memory address. */
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags create(long address) {
+        return wrap(StdVideoEncodeH265SliceSegmentHeaderFlags.class, address);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
-    public static StdVideoEncodeH265SliceHeaderFlags createSafe(long address) {
-        return address == NULL ? null : wrap(StdVideoEncodeH265SliceHeaderFlags.class, address);
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags createSafe(long address) {
+        return address == NULL ? null : wrap(StdVideoEncodeH265SliceSegmentHeaderFlags.class, address);
     }
 
     /**
-     * Returns a new {@link StdVideoEncodeH265SliceHeaderFlags.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     * Returns a new {@link StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
      * @param capacity the buffer capacity
      */
-    public static StdVideoEncodeH265SliceHeaderFlags.Buffer malloc(int capacity) {
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer malloc(int capacity) {
         return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
-     * Returns a new {@link StdVideoEncodeH265SliceHeaderFlags.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     * Returns a new {@link StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
      *
      * @param capacity the buffer capacity
      */
-    public static StdVideoEncodeH265SliceHeaderFlags.Buffer calloc(int capacity) {
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer calloc(int capacity) {
         return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
-     * Returns a new {@link StdVideoEncodeH265SliceHeaderFlags.Buffer} instance allocated with {@link BufferUtils}.
+     * Returns a new {@link StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer} instance allocated with {@link BufferUtils}.
      *
      * @param capacity the buffer capacity
      */
-    public static StdVideoEncodeH265SliceHeaderFlags.Buffer create(int capacity) {
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
         return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
-     * Create a {@link StdVideoEncodeH265SliceHeaderFlags.Buffer} instance at the specified memory.
+     * Create a {@link StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer} instance at the specified memory.
      *
      * @param address  the memory address
      * @param capacity the buffer capacity
      */
-    public static StdVideoEncodeH265SliceHeaderFlags.Buffer create(long address, int capacity) {
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer create(long address, int capacity) {
         return wrap(Buffer.class, address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
-    public static StdVideoEncodeH265SliceHeaderFlags.Buffer createSafe(long address, int capacity) {
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
     /**
-     * Returns a new {@code StdVideoEncodeH265SliceHeaderFlags} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@code StdVideoEncodeH265SliceSegmentHeaderFlags} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoEncodeH265SliceHeaderFlags malloc(MemoryStack stack) {
-        return wrap(StdVideoEncodeH265SliceHeaderFlags.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags malloc(MemoryStack stack) {
+        return wrap(StdVideoEncodeH265SliceSegmentHeaderFlags.class, stack.nmalloc(ALIGNOF, SIZEOF));
     }
 
     /**
-     * Returns a new {@code StdVideoEncodeH265SliceHeaderFlags} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@code StdVideoEncodeH265SliceSegmentHeaderFlags} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack the stack from which to allocate
      */
-    public static StdVideoEncodeH265SliceHeaderFlags calloc(MemoryStack stack) {
-        return wrap(StdVideoEncodeH265SliceHeaderFlags.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags calloc(MemoryStack stack) {
+        return wrap(StdVideoEncodeH265SliceSegmentHeaderFlags.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
     }
 
     /**
-     * Returns a new {@link StdVideoEncodeH265SliceHeaderFlags.Buffer} instance allocated on the specified {@link MemoryStack}.
+     * Returns a new {@link StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer} instance allocated on the specified {@link MemoryStack}.
      *
      * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoEncodeH265SliceHeaderFlags.Buffer malloc(int capacity, MemoryStack stack) {
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer malloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
-     * Returns a new {@link StdVideoEncodeH265SliceHeaderFlags.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     * Returns a new {@link StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
      *
      * @param stack    the stack from which to allocate
      * @param capacity the buffer capacity
      */
-    public static StdVideoEncodeH265SliceHeaderFlags.Buffer calloc(int capacity, MemoryStack stack) {
+    public static StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer calloc(int capacity, MemoryStack stack) {
         return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
 
-    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH265SliceHeaderFlags.BITFIELD0); }
+    public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD0); }
     /** Unsafe version of {@link #first_slice_segment_in_pic_flag}. */
     public static int nfirst_slice_segment_in_pic_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #no_output_of_prior_pics_flag}. */
@@ -388,15 +388,15 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
     /** Unsafe version of {@link #reservedBits}. */
     public static int nreservedBits(long struct) { return nbitfield0(struct) >>> 14; }
     /** Unsafe version of {@link #luma_weight_l0_flag}. */
-    public static short nluma_weight_l0_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265SliceHeaderFlags.LUMA_WEIGHT_L0_FLAG); }
+    public static short nluma_weight_l0_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.LUMA_WEIGHT_L0_FLAG); }
     /** Unsafe version of {@link #chroma_weight_l0_flag}. */
-    public static short nchroma_weight_l0_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265SliceHeaderFlags.CHROMA_WEIGHT_L0_FLAG); }
+    public static short nchroma_weight_l0_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.CHROMA_WEIGHT_L0_FLAG); }
     /** Unsafe version of {@link #luma_weight_l1_flag}. */
-    public static short nluma_weight_l1_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265SliceHeaderFlags.LUMA_WEIGHT_L1_FLAG); }
+    public static short nluma_weight_l1_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.LUMA_WEIGHT_L1_FLAG); }
     /** Unsafe version of {@link #chroma_weight_l1_flag}. */
-    public static short nchroma_weight_l1_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265SliceHeaderFlags.CHROMA_WEIGHT_L1_FLAG); }
+    public static short nchroma_weight_l1_flag(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.CHROMA_WEIGHT_L1_FLAG); }
 
-    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265SliceHeaderFlags.BITFIELD0, value); }
+    public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #first_slice_segment_in_pic_flag(int) first_slice_segment_in_pic_flag}. */
     public static void nfirst_slice_segment_in_pic_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #no_output_of_prior_pics_flag(int) no_output_of_prior_pics_flag}. */
@@ -428,27 +428,27 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
     /** Unsafe version of {@link #reservedBits(int) reservedBits}. */
     public static void nreservedBits(long struct, int value) { nbitfield0(struct, (value << 14) | (nbitfield0(struct) & 0x00_00_3F_FF)); }
     /** Unsafe version of {@link #luma_weight_l0_flag(short) luma_weight_l0_flag}. */
-    public static void nluma_weight_l0_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265SliceHeaderFlags.LUMA_WEIGHT_L0_FLAG, value); }
+    public static void nluma_weight_l0_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.LUMA_WEIGHT_L0_FLAG, value); }
     /** Unsafe version of {@link #chroma_weight_l0_flag(short) chroma_weight_l0_flag}. */
-    public static void nchroma_weight_l0_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265SliceHeaderFlags.CHROMA_WEIGHT_L0_FLAG, value); }
+    public static void nchroma_weight_l0_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.CHROMA_WEIGHT_L0_FLAG, value); }
     /** Unsafe version of {@link #luma_weight_l1_flag(short) luma_weight_l1_flag}. */
-    public static void nluma_weight_l1_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265SliceHeaderFlags.LUMA_WEIGHT_L1_FLAG, value); }
+    public static void nluma_weight_l1_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.LUMA_WEIGHT_L1_FLAG, value); }
     /** Unsafe version of {@link #chroma_weight_l1_flag(short) chroma_weight_l1_flag}. */
-    public static void nchroma_weight_l1_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265SliceHeaderFlags.CHROMA_WEIGHT_L1_FLAG, value); }
+    public static void nchroma_weight_l1_flag(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.CHROMA_WEIGHT_L1_FLAG, value); }
 
     // -----------------------------------
 
-    /** An array of {@link StdVideoEncodeH265SliceHeaderFlags} structs. */
-    public static class Buffer extends StructBuffer<StdVideoEncodeH265SliceHeaderFlags, Buffer> implements NativeResource {
+    /** An array of {@link StdVideoEncodeH265SliceSegmentHeaderFlags} structs. */
+    public static class Buffer extends StructBuffer<StdVideoEncodeH265SliceSegmentHeaderFlags, Buffer> implements NativeResource {
 
-        private static final StdVideoEncodeH265SliceHeaderFlags ELEMENT_FACTORY = StdVideoEncodeH265SliceHeaderFlags.create(-1L);
+        private static final StdVideoEncodeH265SliceSegmentHeaderFlags ELEMENT_FACTORY = StdVideoEncodeH265SliceSegmentHeaderFlags.create(-1L);
 
         /**
-         * Creates a new {@code StdVideoEncodeH265SliceHeaderFlags.Buffer} instance backed by the specified container.
+         * Creates a new {@code StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer} instance backed by the specified container.
          *
          * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link StdVideoEncodeH265SliceHeaderFlags#SIZEOF}, and its mark will be undefined.
+         * by {@link StdVideoEncodeH265SliceSegmentHeaderFlags#SIZEOF}, and its mark will be undefined.
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
@@ -470,106 +470,106 @@ public class StdVideoEncodeH265SliceHeaderFlags extends Struct implements Native
         }
 
         @Override
-        protected StdVideoEncodeH265SliceHeaderFlags getElementFactory() {
+        protected StdVideoEncodeH265SliceSegmentHeaderFlags getElementFactory() {
             return ELEMENT_FACTORY;
         }
 
         /** @return the value of the {@code first_slice_segment_in_pic_flag} field. */
         @NativeType("uint32_t")
-        public int first_slice_segment_in_pic_flag() { return StdVideoEncodeH265SliceHeaderFlags.nfirst_slice_segment_in_pic_flag(address()); }
+        public int first_slice_segment_in_pic_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nfirst_slice_segment_in_pic_flag(address()); }
         /** @return the value of the {@code no_output_of_prior_pics_flag} field. */
         @NativeType("uint32_t")
-        public int no_output_of_prior_pics_flag() { return StdVideoEncodeH265SliceHeaderFlags.nno_output_of_prior_pics_flag(address()); }
+        public int no_output_of_prior_pics_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nno_output_of_prior_pics_flag(address()); }
         /** @return the value of the {@code dependent_slice_segment_flag} field. */
         @NativeType("uint32_t")
-        public int dependent_slice_segment_flag() { return StdVideoEncodeH265SliceHeaderFlags.ndependent_slice_segment_flag(address()); }
+        public int dependent_slice_segment_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.ndependent_slice_segment_flag(address()); }
         /** @return the value of the {@code short_term_ref_pic_set_sps_flag} field. */
         @NativeType("uint32_t")
-        public int short_term_ref_pic_set_sps_flag() { return StdVideoEncodeH265SliceHeaderFlags.nshort_term_ref_pic_set_sps_flag(address()); }
+        public int short_term_ref_pic_set_sps_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nshort_term_ref_pic_set_sps_flag(address()); }
         /** @return the value of the {@code slice_temporal_mvp_enable_flag} field. */
         @NativeType("uint32_t")
-        public int slice_temporal_mvp_enable_flag() { return StdVideoEncodeH265SliceHeaderFlags.nslice_temporal_mvp_enable_flag(address()); }
+        public int slice_temporal_mvp_enable_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_temporal_mvp_enable_flag(address()); }
         /** @return the value of the {@code slice_sao_luma_flag} field. */
         @NativeType("uint32_t")
-        public int slice_sao_luma_flag() { return StdVideoEncodeH265SliceHeaderFlags.nslice_sao_luma_flag(address()); }
+        public int slice_sao_luma_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_sao_luma_flag(address()); }
         /** @return the value of the {@code slice_sao_chroma_flag} field. */
         @NativeType("uint32_t")
-        public int slice_sao_chroma_flag() { return StdVideoEncodeH265SliceHeaderFlags.nslice_sao_chroma_flag(address()); }
+        public int slice_sao_chroma_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_sao_chroma_flag(address()); }
         /** @return the value of the {@code num_ref_idx_active_override_flag} field. */
         @NativeType("uint32_t")
-        public int num_ref_idx_active_override_flag() { return StdVideoEncodeH265SliceHeaderFlags.nnum_ref_idx_active_override_flag(address()); }
+        public int num_ref_idx_active_override_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nnum_ref_idx_active_override_flag(address()); }
         /** @return the value of the {@code mvd_l1_zero_flag} field. */
         @NativeType("uint32_t")
-        public int mvd_l1_zero_flag() { return StdVideoEncodeH265SliceHeaderFlags.nmvd_l1_zero_flag(address()); }
+        public int mvd_l1_zero_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nmvd_l1_zero_flag(address()); }
         /** @return the value of the {@code cabac_init_flag} field. */
         @NativeType("uint32_t")
-        public int cabac_init_flag() { return StdVideoEncodeH265SliceHeaderFlags.ncabac_init_flag(address()); }
+        public int cabac_init_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.ncabac_init_flag(address()); }
         /** @return the value of the {@code slice_deblocking_filter_disable_flag} field. */
         @NativeType("uint32_t")
-        public int slice_deblocking_filter_disable_flag() { return StdVideoEncodeH265SliceHeaderFlags.nslice_deblocking_filter_disable_flag(address()); }
+        public int slice_deblocking_filter_disable_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_deblocking_filter_disable_flag(address()); }
         /** @return the value of the {@code collocated_from_l0_flag} field. */
         @NativeType("uint32_t")
-        public int collocated_from_l0_flag() { return StdVideoEncodeH265SliceHeaderFlags.ncollocated_from_l0_flag(address()); }
+        public int collocated_from_l0_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.ncollocated_from_l0_flag(address()); }
         /** @return the value of the {@code slice_loop_filter_across_slices_enabled_flag} field. */
         @NativeType("uint32_t")
-        public int slice_loop_filter_across_slices_enabled_flag() { return StdVideoEncodeH265SliceHeaderFlags.nslice_loop_filter_across_slices_enabled_flag(address()); }
+        public int slice_loop_filter_across_slices_enabled_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_loop_filter_across_slices_enabled_flag(address()); }
         /** @return the value of the {@code bLastSliceInPic} field. */
         @NativeType("uint32_t")
-        public int bLastSliceInPic() { return StdVideoEncodeH265SliceHeaderFlags.nbLastSliceInPic(address()); }
+        public int bLastSliceInPic() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nbLastSliceInPic(address()); }
         /** @return the value of the {@code reservedBits} field. */
         @NativeType("uint32_t")
-        public int reservedBits() { return StdVideoEncodeH265SliceHeaderFlags.nreservedBits(address()); }
-        /** @return the value of the {@link StdVideoEncodeH265SliceHeaderFlags#luma_weight_l0_flag} field. */
+        public int reservedBits() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nreservedBits(address()); }
+        /** @return the value of the {@link StdVideoEncodeH265SliceSegmentHeaderFlags#luma_weight_l0_flag} field. */
         @NativeType("uint16_t")
-        public short luma_weight_l0_flag() { return StdVideoEncodeH265SliceHeaderFlags.nluma_weight_l0_flag(address()); }
-        /** @return the value of the {@link StdVideoEncodeH265SliceHeaderFlags#chroma_weight_l0_flag} field. */
+        public short luma_weight_l0_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nluma_weight_l0_flag(address()); }
+        /** @return the value of the {@link StdVideoEncodeH265SliceSegmentHeaderFlags#chroma_weight_l0_flag} field. */
         @NativeType("uint16_t")
-        public short chroma_weight_l0_flag() { return StdVideoEncodeH265SliceHeaderFlags.nchroma_weight_l0_flag(address()); }
-        /** @return the value of the {@link StdVideoEncodeH265SliceHeaderFlags#luma_weight_l1_flag} field. */
+        public short chroma_weight_l0_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nchroma_weight_l0_flag(address()); }
+        /** @return the value of the {@link StdVideoEncodeH265SliceSegmentHeaderFlags#luma_weight_l1_flag} field. */
         @NativeType("uint16_t")
-        public short luma_weight_l1_flag() { return StdVideoEncodeH265SliceHeaderFlags.nluma_weight_l1_flag(address()); }
-        /** @return the value of the {@link StdVideoEncodeH265SliceHeaderFlags#chroma_weight_l1_flag} field. */
+        public short luma_weight_l1_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nluma_weight_l1_flag(address()); }
+        /** @return the value of the {@link StdVideoEncodeH265SliceSegmentHeaderFlags#chroma_weight_l1_flag} field. */
         @NativeType("uint16_t")
-        public short chroma_weight_l1_flag() { return StdVideoEncodeH265SliceHeaderFlags.nchroma_weight_l1_flag(address()); }
+        public short chroma_weight_l1_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nchroma_weight_l1_flag(address()); }
 
         /** Sets the specified value to the {@code first_slice_segment_in_pic_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer first_slice_segment_in_pic_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nfirst_slice_segment_in_pic_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer first_slice_segment_in_pic_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nfirst_slice_segment_in_pic_flag(address(), value); return this; }
         /** Sets the specified value to the {@code no_output_of_prior_pics_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer no_output_of_prior_pics_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nno_output_of_prior_pics_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer no_output_of_prior_pics_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nno_output_of_prior_pics_flag(address(), value); return this; }
         /** Sets the specified value to the {@code dependent_slice_segment_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer dependent_slice_segment_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.ndependent_slice_segment_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer dependent_slice_segment_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.ndependent_slice_segment_flag(address(), value); return this; }
         /** Sets the specified value to the {@code short_term_ref_pic_set_sps_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer short_term_ref_pic_set_sps_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nshort_term_ref_pic_set_sps_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer short_term_ref_pic_set_sps_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nshort_term_ref_pic_set_sps_flag(address(), value); return this; }
         /** Sets the specified value to the {@code slice_temporal_mvp_enable_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer slice_temporal_mvp_enable_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nslice_temporal_mvp_enable_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer slice_temporal_mvp_enable_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_temporal_mvp_enable_flag(address(), value); return this; }
         /** Sets the specified value to the {@code slice_sao_luma_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer slice_sao_luma_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nslice_sao_luma_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer slice_sao_luma_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_sao_luma_flag(address(), value); return this; }
         /** Sets the specified value to the {@code slice_sao_chroma_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer slice_sao_chroma_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nslice_sao_chroma_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer slice_sao_chroma_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_sao_chroma_flag(address(), value); return this; }
         /** Sets the specified value to the {@code num_ref_idx_active_override_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer num_ref_idx_active_override_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nnum_ref_idx_active_override_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer num_ref_idx_active_override_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nnum_ref_idx_active_override_flag(address(), value); return this; }
         /** Sets the specified value to the {@code mvd_l1_zero_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer mvd_l1_zero_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nmvd_l1_zero_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer mvd_l1_zero_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nmvd_l1_zero_flag(address(), value); return this; }
         /** Sets the specified value to the {@code cabac_init_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer cabac_init_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.ncabac_init_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer cabac_init_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.ncabac_init_flag(address(), value); return this; }
         /** Sets the specified value to the {@code slice_deblocking_filter_disable_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer slice_deblocking_filter_disable_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nslice_deblocking_filter_disable_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer slice_deblocking_filter_disable_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_deblocking_filter_disable_flag(address(), value); return this; }
         /** Sets the specified value to the {@code collocated_from_l0_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer collocated_from_l0_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.ncollocated_from_l0_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer collocated_from_l0_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.ncollocated_from_l0_flag(address(), value); return this; }
         /** Sets the specified value to the {@code slice_loop_filter_across_slices_enabled_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer slice_loop_filter_across_slices_enabled_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nslice_loop_filter_across_slices_enabled_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer slice_loop_filter_across_slices_enabled_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_loop_filter_across_slices_enabled_flag(address(), value); return this; }
         /** Sets the specified value to the {@code bLastSliceInPic} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer bLastSliceInPic(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nbLastSliceInPic(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer bLastSliceInPic(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nbLastSliceInPic(address(), value); return this; }
         /** Sets the specified value to the {@code reservedBits} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer reservedBits(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceHeaderFlags.nreservedBits(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoEncodeH265SliceHeaderFlags#luma_weight_l0_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer luma_weight_l0_flag(@NativeType("uint16_t") short value) { StdVideoEncodeH265SliceHeaderFlags.nluma_weight_l0_flag(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoEncodeH265SliceHeaderFlags#chroma_weight_l0_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer chroma_weight_l0_flag(@NativeType("uint16_t") short value) { StdVideoEncodeH265SliceHeaderFlags.nchroma_weight_l0_flag(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoEncodeH265SliceHeaderFlags#luma_weight_l1_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer luma_weight_l1_flag(@NativeType("uint16_t") short value) { StdVideoEncodeH265SliceHeaderFlags.nluma_weight_l1_flag(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoEncodeH265SliceHeaderFlags#chroma_weight_l1_flag} field. */
-        public StdVideoEncodeH265SliceHeaderFlags.Buffer chroma_weight_l1_flag(@NativeType("uint16_t") short value) { StdVideoEncodeH265SliceHeaderFlags.nchroma_weight_l1_flag(address(), value); return this; }
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer reservedBits(@NativeType("uint32_t") int value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nreservedBits(address(), value); return this; }
+        /** Sets the specified value to the {@link StdVideoEncodeH265SliceSegmentHeaderFlags#luma_weight_l0_flag} field. */
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer luma_weight_l0_flag(@NativeType("uint16_t") short value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nluma_weight_l0_flag(address(), value); return this; }
+        /** Sets the specified value to the {@link StdVideoEncodeH265SliceSegmentHeaderFlags#chroma_weight_l0_flag} field. */
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer chroma_weight_l0_flag(@NativeType("uint16_t") short value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nchroma_weight_l0_flag(address(), value); return this; }
+        /** Sets the specified value to the {@link StdVideoEncodeH265SliceSegmentHeaderFlags#luma_weight_l1_flag} field. */
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer luma_weight_l1_flag(@NativeType("uint16_t") short value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nluma_weight_l1_flag(address(), value); return this; }
+        /** Sets the specified value to the {@link StdVideoEncodeH265SliceSegmentHeaderFlags#chroma_weight_l1_flag} field. */
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer chroma_weight_l1_flag(@NativeType("uint16_t") short value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nchroma_weight_l1_flag(address(), value); return this; }
 
     }
 

@@ -36,12 +36,12 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * {@link #pNext};
  *     uint32_t {@link #maxGraphicsShaderGroupCount};
  *     uint32_t {@link #maxIndirectSequenceCount};
- *     uint32_t maxIndirectCommandsTokenCount;
+ *     uint32_t {@link #maxIndirectCommandsTokenCount};
  *     uint32_t {@link #maxIndirectCommandsStreamCount};
  *     uint32_t {@link #maxIndirectCommandsTokenOffset};
  *     uint32_t {@link #maxIndirectCommandsStreamStride};
- *     uint32_t minSequencesCountBufferOffsetAlignment;
- *     uint32_t minSequencesIndexBufferOffsetAlignment;
+ *     uint32_t {@link #minSequencesCountBufferOffsetAlignment};
+ *     uint32_t {@link #minSequencesIndexBufferOffsetAlignment};
  *     uint32_t {@link #minIndirectCommandsBufferOffsetAlignment};
  * }</code></pre>
  */
@@ -123,7 +123,7 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends Struct 
     /** the maximum number of sequences in {@link VkGeneratedCommandsInfoNV} and in {@link VkGeneratedCommandsMemoryRequirementsInfoNV}. */
     @NativeType("uint32_t")
     public int maxIndirectSequenceCount() { return nmaxIndirectSequenceCount(address()); }
-    /** @return the value of the {@code maxIndirectCommandsTokenCount} field. */
+    /** the maximum number of tokens in {@link VkIndirectCommandsLayoutCreateInfoNV}. */
     @NativeType("uint32_t")
     public int maxIndirectCommandsTokenCount() { return nmaxIndirectCommandsTokenCount(address()); }
     /** the maximum number of streams in {@link VkIndirectCommandsLayoutCreateInfoNV}. */
@@ -135,10 +135,10 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends Struct 
     /** the maximum stream stride in {@link VkIndirectCommandsLayoutCreateInfoNV}. */
     @NativeType("uint32_t")
     public int maxIndirectCommandsStreamStride() { return nmaxIndirectCommandsStreamStride(address()); }
-    /** @return the value of the {@code minSequencesCountBufferOffsetAlignment} field. */
+    /** the minimum alignment for memory addresses which <b>can</b> be used in {@link VkGeneratedCommandsInfoNV}. */
     @NativeType("uint32_t")
     public int minSequencesCountBufferOffsetAlignment() { return nminSequencesCountBufferOffsetAlignment(address()); }
-    /** @return the value of the {@code minSequencesIndexBufferOffsetAlignment} field. */
+    /** the minimum alignment for memory addresses which <b>can</b> be used in {@link VkGeneratedCommandsInfoNV}. */
     @NativeType("uint32_t")
     public int minSequencesIndexBufferOffsetAlignment() { return nminSequencesIndexBufferOffsetAlignment(address()); }
     /** the minimum alignment for memory addresses used in {@link VkIndirectCommandsStreamNV}, and as preprocess buffer in {@link VkGeneratedCommandsInfoNV}. */
@@ -366,7 +366,7 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends Struct 
         /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV#maxIndirectSequenceCount} field. */
         @NativeType("uint32_t")
         public int maxIndirectSequenceCount() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.nmaxIndirectSequenceCount(address()); }
-        /** @return the value of the {@code maxIndirectCommandsTokenCount} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV#maxIndirectCommandsTokenCount} field. */
         @NativeType("uint32_t")
         public int maxIndirectCommandsTokenCount() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.nmaxIndirectCommandsTokenCount(address()); }
         /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV#maxIndirectCommandsStreamCount} field. */
@@ -378,10 +378,10 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV extends Struct 
         /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV#maxIndirectCommandsStreamStride} field. */
         @NativeType("uint32_t")
         public int maxIndirectCommandsStreamStride() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.nmaxIndirectCommandsStreamStride(address()); }
-        /** @return the value of the {@code minSequencesCountBufferOffsetAlignment} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV#minSequencesCountBufferOffsetAlignment} field. */
         @NativeType("uint32_t")
         public int minSequencesCountBufferOffsetAlignment() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.nminSequencesCountBufferOffsetAlignment(address()); }
-        /** @return the value of the {@code minSequencesIndexBufferOffsetAlignment} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV#minSequencesIndexBufferOffsetAlignment} field. */
         @NativeType("uint32_t")
         public int minSequencesIndexBufferOffsetAlignment() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.nminSequencesIndexBufferOffsetAlignment(address()); }
         /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV#minIndirectCommandsBufferOffsetAlignment} field. */

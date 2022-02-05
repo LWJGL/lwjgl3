@@ -23,6 +23,8 @@ import static org.lwjgl.vulkan.KHRGlobalPriority.*;
  * 
  * <h5>Description</h5>
  * 
+ * <p>If the {@link VkQueueFamilyGlobalPriorityPropertiesKHR} structure is included in the {@code pNext} chain of the {@link VkQueueFamilyProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}, it is filled in with the list of supported global queue priorities for the indicated family.</p>
+ * 
  * <p>The valid elements of {@code priorities} <b>must</b> not contain any duplicate values.</p>
  * 
  * <p>The valid elements of {@code priorities} <b>must</b> be a continuous sequence of {@code VkQueueGlobalPriorityKHR} enums in the ascending order.</p>

@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>40</dd>
  * <dt><b>Revision</b></dt>
- * <dd>3</dd>
+ * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2021-12-08</dd>
+ * <dd>2022-01-11</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -53,7 +53,7 @@ package org.lwjgl.vulkan;
 public final class EXTVideoEncodeH265 {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VIDEO_ENCODE_H265_SPEC_VERSION = 3;
+    public static final int VK_EXT_VIDEO_ENCODE_H265_SPEC_VERSION = 4;
 
     /** The extension name. */
     public static final String VK_EXT_VIDEO_ENCODE_H265_EXTENSION_NAME = "VK_EXT_video_encode_h265";
@@ -70,7 +70,7 @@ public final class EXTVideoEncodeH265 {
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_EMIT_PICTURE_PARAMETERS_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_EMIT_PICTURE_PARAMETERS_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT}</li>
@@ -85,7 +85,7 @@ public final class EXTVideoEncodeH265 {
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT    = 1000039003,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT                 = 1000039004,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT                  = 1000039005,
-        VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT                     = 1000039006,
+        VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_EXT             = 1000039006,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_EMIT_PICTURE_PARAMETERS_EXT        = 1000039007,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_EXT                        = 1000039008,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT                = 1000039009,
@@ -102,16 +102,16 @@ public final class EXTVideoEncodeH265 {
      * 
      * <ul>
      * <li>{@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_FRAME_BIT_EXT} indicates that a single command buffer <b>must</b> at least encode an entire frame. Any non-VCL NALUs <b>must</b> be encoded using the same command buffer as the frame if {@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_SLICE_BIT_EXT} indicates that a single command buffer <b>must</b> at least encode a single slice. Any non-VCL NALUs <b>must</b> be encoded using the same command buffer as the first slice of the frame if {@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_SLICE_SEGMENT_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_SLICE_SEGMENT_BIT_EXT} indicates that a single command buffer <b>must</b> at least encode a single slice segment. Any non-VCL NALUs <b>must</b> be encoded using the same command buffer as the first slice segment of the frame if {@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
      * <li>{@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_NON_VCL_BIT_EXT} indicates that a single command buffer <b>may</b> encode a non-VCL NALU by itself.</li>
      * </ul>
      * 
-     * <p>An implementation <b>must</b> support at least one of {@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_FRAME_BIT_EXT} or {@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_SLICE_BIT_EXT}.</p>
+     * <p>An implementation <b>must</b> support at least one of {@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_FRAME_BIT_EXT} or {@link #VK_VIDEO_ENCODE_H265_INPUT_MODE_SLICE_SEGMENT_BIT_EXT VIDEO_ENCODE_H265_INPUT_MODE_SLICE_SEGMENT_BIT_EXT}.</p>
      */
     public static final int
-        VK_VIDEO_ENCODE_H265_INPUT_MODE_FRAME_BIT_EXT   = 0x1,
-        VK_VIDEO_ENCODE_H265_INPUT_MODE_SLICE_BIT_EXT   = 0x2,
-        VK_VIDEO_ENCODE_H265_INPUT_MODE_NON_VCL_BIT_EXT = 0x4;
+        VK_VIDEO_ENCODE_H265_INPUT_MODE_FRAME_BIT_EXT         = 0x1,
+        VK_VIDEO_ENCODE_H265_INPUT_MODE_SLICE_SEGMENT_BIT_EXT = 0x2,
+        VK_VIDEO_ENCODE_H265_INPUT_MODE_NON_VCL_BIT_EXT       = 0x4;
 
     /**
      * VkVideoEncodeH265OutputModeFlagBitsEXT - Video encode H.265 output modes
@@ -120,34 +120,34 @@ public final class EXTVideoEncodeH265 {
      * 
      * <ul>
      * <li>{@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_FRAME_BIT_EXT} indicates that calls to generate all NALUs of a frame <b>must</b> be included within a single begin/end pair. Any non-VCL NALUs <b>must</b> be encoded within the same begin/end pair if {@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_SLICE_BIT_EXT} indicates that each begin/end pair <b>must</b> encode at least one slice. Any non-VCL NALUs <b>must</b> be encoded within the same begin/end pair as the first slice of the frame if {@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT} indicates that each begin/end pair <b>may</b> encode only a non-VCL NALU by itself. An implementation <b>must</b> support at least one of {@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_FRAME_BIT_EXT} or {@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_SLICE_BIT_EXT}.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_SLICE_SEGMENT_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_SLICE_SEGMENT_BIT_EXT} indicates that each begin/end pair <b>must</b> encode at least one slice segment. Any non-VCL NALUs <b>must</b> be encoded within the same begin/end pair as the first slice segment of the frame if {@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT} indicates that each begin/end pair <b>may</b> encode only a non-VCL NALU by itself. An implementation <b>must</b> support at least one of {@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_FRAME_BIT_EXT} or {@link #VK_VIDEO_ENCODE_H265_OUTPUT_MODE_SLICE_SEGMENT_BIT_EXT VIDEO_ENCODE_H265_OUTPUT_MODE_SLICE_SEGMENT_BIT_EXT}.</li>
      * </ul>
      * 
      * <p>A single begin/end pair <b>must</b> not encode more than a single frame.</p>
      * 
      * <p>The bitstreams of NALUs generated within a single begin/end pair are written continuously into the same bitstream buffer (any padding between the NALUs <b>must</b> be compliant to the H.265 standard).</p>
      * 
-     * <p>The supported input modes <b>must</b> be coarser or equal to the supported output modes. For example, it is illegal to report slice input is supported but only frame output is supported.</p>
+     * <p>The supported input modes <b>must</b> be coarser or equal to the supported output modes. For example, it is illegal to report slice segment input is supported but only frame output is supported.</p>
      * 
      * <p>An implementation <b>must</b> report one of the following combinations of input/output modes:</p>
      * 
      * <ul>
      * <li>Input: Frame, Output: Frame</li>
      * <li>Input: Frame, Output: Frame and Non-VCL</li>
-     * <li>Input: Frame, Output: Slice</li>
-     * <li>Input: Frame, Output: Slice and Non-VCL</li>
-     * <li>Input: Slice, Output: Slice</li>
-     * <li>Input: Slice, Output: Slice and Non-VCL</li>
+     * <li>Input: Frame, Output: Slice Segment</li>
+     * <li>Input: Frame, Output: Slice Segment and Non-VCL</li>
+     * <li>Input: Slice Segment, Output: Slice Segment</li>
+     * <li>Input: Slice Segment, Output: Slice Segment and Non-VCL</li>
      * <li>Input: Frame and Non-VCL, Output: Frame and Non-VCL</li>
-     * <li>Input: Frame and Non-VCL, Output: Slice and Non-VCL</li>
-     * <li>Input: Slice and Non-VCL, Output: Slice and Non-VCL</li>
+     * <li>Input: Frame and Non-VCL, Output: Slice Segment and Non-VCL</li>
+     * <li>Input: Slice Segment and Non-VCL, Output: Slice Segment and Non-VCL</li>
      * </ul>
      */
     public static final int
-        VK_VIDEO_ENCODE_H265_OUTPUT_MODE_FRAME_BIT_EXT   = 0x1,
-        VK_VIDEO_ENCODE_H265_OUTPUT_MODE_SLICE_BIT_EXT   = 0x2,
-        VK_VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT = 0x4;
+        VK_VIDEO_ENCODE_H265_OUTPUT_MODE_FRAME_BIT_EXT         = 0x1,
+        VK_VIDEO_ENCODE_H265_OUTPUT_MODE_SLICE_SEGMENT_BIT_EXT = 0x2,
+        VK_VIDEO_ENCODE_H265_OUTPUT_MODE_NON_VCL_BIT_EXT       = 0x4;
 
     /**
      * VkVideoEncodeH265CtbSizeFlagBitsEXT - Supported CTB sizes for H.265 video encode

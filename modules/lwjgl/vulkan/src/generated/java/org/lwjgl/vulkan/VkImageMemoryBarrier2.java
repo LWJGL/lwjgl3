@@ -178,7 +178,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2 STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkSampleLocationsInfoEXT}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code srcStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2} values</li>
  * <li>{@code srcAccessMask} <b>must</b> be a valid combination of {@code VkAccessFlagBits2} values</li>
  * <li>{@code dstStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2} values</li>
@@ -322,6 +323,8 @@ public class VkImageMemoryBarrier2 extends Struct implements NativeResource {
     public VkImageMemoryBarrier2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageMemoryBarrier2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
+    public VkImageMemoryBarrier2 pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #srcStageMask} field. */
     public VkImageMemoryBarrier2 srcStageMask(@NativeType("VkPipelineStageFlags2") long value) { nsrcStageMask(address(), value); return this; }
     /** Sets the specified value to the {@link #srcAccessMask} field. */
@@ -631,6 +634,8 @@ public class VkImageMemoryBarrier2 extends Struct implements NativeResource {
         public VkImageMemoryBarrier2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2); }
         /** Sets the specified value to the {@link VkImageMemoryBarrier2#pNext} field. */
         public VkImageMemoryBarrier2.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryBarrier2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
+        public VkImageMemoryBarrier2.Buffer pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkImageMemoryBarrier2#srcStageMask} field. */
         public VkImageMemoryBarrier2.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2") long value) { VkImageMemoryBarrier2.nsrcStageMask(address(), value); return this; }
         /** Sets the specified value to the {@link VkImageMemoryBarrier2#srcAccessMask} field. */

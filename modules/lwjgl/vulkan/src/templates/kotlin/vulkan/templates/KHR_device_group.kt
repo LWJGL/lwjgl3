@@ -82,6 +82,7 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
 
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
+                <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/KHR/SPV_KHR_device_group.html">{@code SPV_KHR_device_group}</a></li>
                 <li>Promoted to Vulkan 1.1 Core</li>
             </ul></dd>
 

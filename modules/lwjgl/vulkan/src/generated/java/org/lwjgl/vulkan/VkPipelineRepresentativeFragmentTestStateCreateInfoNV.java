@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If this structure is not included in the {@code pNext} chain, {@code representativeFragmentTestEnable} is considered to be {@link VK10#VK_FALSE FALSE}, and the representative fragment test is disabled.</p>
  * 
- * <p>If the active fragment shader specifies the {@code EarlyFragmentTests} execution mode, the representative fragment shader test has no effect, even if enabled.</p>
+ * <p>If the active fragment shader does not specify the {@code EarlyFragmentTests} execution mode, the representative fragment shader test has no effect, even if enabled.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

@@ -103,7 +103,7 @@ val EXT_vertex_input_dynamic_state = "EXTVertexInputDynamicState".nativeClassVK(
         <h5>Description</h5>
         This command sets the vertex input attribute and vertex input binding descriptions state for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_VERTEX_INPUT_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkGraphicsPipelineCreateInfo{@code ::pVertexInputState} values used to create the currently active pipeline.
 
-        If the bound pipeline state object was also created with the #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT dynamic state enabled, then #CmdBindVertexBuffers2EXT() can be used instead of {@code vkCmdSetVertexInputEXT} to dynamically set the stride.
+        If the bound pipeline state object was also created with the #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE dynamic state enabled, then #CmdBindVertexBuffers2() can be used instead of {@code vkCmdSetVertexInputEXT} to dynamically set the stride.
 
         <h5>Valid Usage</h5>
         <ul>

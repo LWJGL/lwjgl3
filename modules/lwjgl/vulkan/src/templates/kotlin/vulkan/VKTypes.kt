@@ -2518,7 +2518,7 @@ val VkImageCreateInfo = struct(Module.VULKAN, "VkImageCreateInfo") {
                 <ul>
                     <li>If {@code tiling} is #IMAGE_TILING_LINEAR, then {@code imageCreateFormatFeatures} is the value of ##VkFormatProperties{@code ::linearTilingFeatures} found by calling #GetPhysicalDeviceFormatProperties() with parameter {@code format} equal to ##VkImageCreateInfo{@code ::format}.</li>
                     <li>If {@code tiling} is #IMAGE_TILING_OPTIMAL, then {@code imageCreateFormatFeatures} is the value of ##VkFormatProperties{@code ::optimalTilingFeatures} found by calling #GetPhysicalDeviceFormatProperties() with parameter {@code format} equal to ##VkImageCreateInfo{@code ::format}.</li>
-                    <li>If {@code tiling} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, then the value of {@code imageCreateFormatFeatures} is found by calling #GetPhysicalDeviceFormatProperties2() with ##VkImageFormatProperties{@code ::format} equal to ##VkImageCreateInfo{@code ::format} and with ##VkDrmFormatModifierPropertiesListEXT chained into ##VkImageFormatProperties2; by collecting all members of the returned array ##VkDrmFormatModifierPropertiesListEXT{@code ::pDrmFormatModifierProperties} whose {@code drmFormatModifier} belongs to {@code imageCreateDrmFormatModifiers}; and by taking the bitwise intersection, over the collected array members, of {@code drmFormatModifierTilingFeatures}. (The resultant {@code imageCreateFormatFeatures} <b>may</b> be empty).</li>
+                    <li>If {@code tiling} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, then the value of {@code imageCreateFormatFeatures} is found by calling #GetPhysicalDeviceFormatProperties2() with ##VkImageFormatProperties{@code ::format} equal to ##VkImageCreateInfo{@code ::format} and with ##VkDrmFormatModifierPropertiesListEXT chained into ##VkFormatProperties2; by collecting all members of the returned array ##VkDrmFormatModifierPropertiesListEXT{@code ::pDrmFormatModifierProperties} whose {@code drmFormatModifier} belongs to {@code imageCreateDrmFormatModifiers}; and by taking the bitwise intersection, over the collected array members, of {@code drmFormatModifierTilingFeatures}. (The resultant {@code imageCreateFormatFeatures} <b>may</b> be empty).</li>
                 </ul>
             </li>
             <li>
@@ -2791,7 +2791,7 @@ val VkImageViewCreateInfo = struct(Module.VULKAN, "VkImageViewCreateInfo") {
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-imageCubeArray">image cube map arrays</a> feature is not enabled, {@code viewType} <b>must</b> not be #IMAGE_VIEW_TYPE_CUBE_ARRAY</li>
             <li>If {@code image} was created with #IMAGE_TYPE_3D but without #IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT set then {@code viewType} <b>must</b> not be #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY</li>
             <li>If {@code image} was created with #IMAGE_TYPE_3D and {@code viewType} is #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY then {@code subresourceRange.levelCount} <b>must</b> be 1</li>
-            <li>If {@code image} was created with #IMAGE_TYPE_3D and {@code viewType} is #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY then {@code flags} <b>must</b> not contain any of #IMAGE_CREATE_SPARSE_BINDING_BIT, #IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and #IMAGE_CREATE_SPARSE_ALIASED_BIT</li>
+            <li>If {@code image} was created with #IMAGE_TYPE_3D and {@code viewType} is #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY then ##VkImageCreateInfo{@code ::flags} <b>must</b> not contain any of #IMAGE_CREATE_SPARSE_BINDING_BIT, #IMAGE_CREATE_SPARSE_RESIDENCY_BIT, and #IMAGE_CREATE_SPARSE_ALIASED_BIT</li>
             <li>If {@code image} was created with a {@code samples} value not equal to #SAMPLE_COUNT_1_BIT then {@code viewType} <b>must</b> be either #IMAGE_VIEW_TYPE_2D or #IMAGE_VIEW_TYPE_2D_ARRAY</li>
             <li>{@code image} <b>must</b> have been created with a {@code usage} value containing at least one of the usages defined in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#valid-imageview-imageusage">valid image usage</a> list for image views</li>
             <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> of the resultant image view <b>must</b> contain at least one bit</li>
@@ -4690,19 +4690,10 @@ val VkFramebufferCreateInfo = struct(Module.VULKAN, "VkFramebufferCreateInfo") {
         Structure specifying parameters of a newly created framebuffer.
 
         <h5>Description</h5>
-        Other than the exceptions listed below, applications <b>must</b> ensure that all accesses to memory that backs image subresources used as attachments in a given render pass instance either happen-before the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-load-store-ops">load operations</a> for those attachments, or happen-after the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-load-store-ops">store operations</a> for those attachments.
-
-        The exceptions to the general rule are:
-
-        <ul>
-            <li>For depth/stencil attachments, an aspect <b>can</b> be used separately as attachment and non-attachment if both accesses are read-only.</li>
-            <li>For depth/stencil attachments, each aspect <b>can</b> be used separately as attachment and non-attachment as long as the non-attachment accesses are also via an image subresource in either the #IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL layout or the #IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL layout, and the attachment resource uses whichever of those two layouts the image accesses do not.</li>
-        </ul>
-
-        Use of non-attachment aspects in these cases is only well defined if the attachment is used in the subpass where the non-attachment access is being made, or the layout of the image subresource is constant throughout the entire render pass instance, including the {@code initialLayout} and {@code finalLayout}.
+        Applications <b>must</b> ensure that all non-attachment writes to memory backing image subresources that are used as attachments in a render pass instance happen-before or happen-after the render pass instance. If an image subresource is written during a render pass instance by anything other than load operations, store operations, and layout transitions, applications <b>must</b> ensure that all non-attachment reads from memory backing that image subresource happen-before or happen-after the render pass instance. For depth/stencil images, the aspects are not treated independently for the above guarantees - writes to either aspect <b>must</b> be synchronized with accesses to the other aspect.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        These restrictions mean that the render pass has full knowledge of all uses of all of the attachments, so that the implementation is able to make correct decisions about when and how to perform layout transitions, when to overlap execution of subpasses, etc.
+        An image subresource can be used as read-only as both an attachment and a non-attachment during a render pass instance, but care must still be taken to avoid data races with load/store operations and layout transitions. The simplest way to achieve this is to keep the non-attachment and attachment accesses within the same subpass, or to avoid layout transitions and load/store operations that perform writes.
         </div>
 
         It is legal for a subpass to use no color or depth/stencil attachments, either because it has no attachment references or because all of them are #ATTACHMENT_UNUSED. This kind of subpass <b>can</b> use shader side effects such as image stores and atomics to produce an output. In this case, the subpass continues to use the {@code width}, {@code height}, and {@code layers} of the framebuffer to define the dimensions of the rendering area, and the {@code rasterizationSamples} from each pipeline’s ##VkPipelineMultisampleStateCreateInfo to define the number of samples used in rasterization; however, if ##VkPhysicalDeviceFeatures{@code ::variableMultisampleRate} is #FALSE, then all pipelines to be bound with the subpass <b>must</b> have the same value for ##VkPipelineMultisampleStateCreateInfo{@code ::rasterizationSamples}.
@@ -9870,7 +9861,8 @@ val VkImageMemoryBarrier2 = struct(Module.VULKAN, "VkImageMemoryBarrier2") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkSampleLocationsInfoEXT</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code srcStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2} values</li>
             <li>{@code srcAccessMask} <b>must</b> be a valid combination of {@code VkAccessFlagBits2} values</li>
             <li>{@code dstStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2} values</li>
@@ -9886,7 +9878,10 @@ val VkImageMemoryBarrier2 = struct(Module.VULKAN, "VkImageMemoryBarrier2") {
         """
 
     Expression("#STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkSampleLocationsInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineStageFlags2("srcStageMask", "a {@code VkPipelineStageFlags2} mask of pipeline stages to be included in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#synchronization-dependencies-scopes\">first synchronization scope</a>.")
     VkAccessFlags2("srcAccessMask", "a {@code VkAccessFlags2} mask of access flags to be included in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#synchronization-dependencies-access-scopes\">first access scope</a>.")
     VkPipelineStageFlags2("dstStageMask", "a {@code VkPipelineStageFlags2} mask of pipeline stages to be included in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#synchronization-dependencies-scopes\">second synchronization scope</a>.")
@@ -10323,7 +10318,8 @@ val VkBufferImageCopy2 = struct(Module.VULKAN, "VkBufferImageCopy2") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkCopyCommandTransformInfoQCOM</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code imageSubresource} <b>must</b> be a valid ##VkImageSubresourceLayers structure</li>
         </ul>
 
@@ -10332,7 +10328,10 @@ val VkBufferImageCopy2 = struct(Module.VULKAN, "VkBufferImageCopy2") {
         """
 
     Expression("#STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkCopyCommandTransformInfoQCOM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkDeviceSize("bufferOffset", "the offset in bytes from the start of the buffer object where the image data is copied from or to.")
     uint32_t("bufferRowLength", "{@code bufferRowLength} and {@code bufferImageHeight} specify in texels a subregion of a larger two- or three-dimensional image in buffer memory, and control the addressing calculations. If either of these values is zero, that aspect of the buffer memory is considered to be tightly packed according to the {@code imageExtent}.")
     uint32_t("bufferImageHeight", "see {@code bufferRowLength}")
@@ -10519,7 +10518,8 @@ val VkImageBlit2 = struct(Module.VULKAN, "VkImageBlit2") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_BLIT_2</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkCopyCommandTransformInfoQCOM</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code srcSubresource} <b>must</b> be a valid ##VkImageSubresourceLayers structure</li>
             <li>{@code dstSubresource} <b>must</b> be a valid ##VkImageSubresourceLayers structure</li>
         </ul>
@@ -10529,7 +10529,10 @@ val VkImageBlit2 = struct(Module.VULKAN, "VkImageBlit2") {
         """
 
     Expression("#STRUCTURE_TYPE_IMAGE_BLIT_2")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    PointerSetter(
+        "VkCopyCommandTransformInfoQCOM",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageSubresourceLayers("srcSubresource", "the subresource to blit from.")
     VkOffset3D("srcOffsets", "a pointer to an array of two ##VkOffset3D structures specifying the bounds of the source region within {@code srcSubresource}.")[2]
     VkImageSubresourceLayers("dstSubresource", "the subresource to blit into.")
@@ -11379,10 +11382,9 @@ val VkDeviceImageMemoryRequirements = struct(Module.VULKAN, "VkDeviceImageMemory
         <h5>Valid Usage</h5>
         <ul>
             <li>The {@code pCreateInfo}{@code ::pNext} chain <b>must</b> not contain a ##VkImageSwapchainCreateInfoKHR structure</li>
-            <li>If {@code pCreateInfo}{@code ::flags} has #IMAGE_CREATE_DISJOINT_BIT set then {@code planeAspect} <b>must</b> not be #IMAGE_ASPECT_NONE_KHR</li>
-            <li>If {@code pCreateInfo}{@code ::flags} has #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT set then {@code planeAspect} <b>must</b> not be #IMAGE_ASPECT_NONE_KHR</li>
+            <li>If {@code pCreateInfo}{@code ::format} specifies a <em>multi-planar</em> format and {@code pCreateInfo}{@code ::flags} has #IMAGE_CREATE_DISJOINT_BIT set then {@code planeAspect} <b>must</b> not be #IMAGE_ASPECT_NONE_KHR</li>
             <li>If {@code pCreateInfo}{@code ::flags} has #IMAGE_CREATE_DISJOINT_BIT set and if the {@code pCreateInfo}{@code ::tiling} is #IMAGE_TILING_LINEAR or #IMAGE_TILING_OPTIMAL, then {@code planeAspect} <b>must</b> be a single valid <em>format plane</em> for the image (that is, for a two-plane image {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT or #IMAGE_ASPECT_PLANE_1_BIT, and for a three-plane image {@code planeAspect} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT or #IMAGE_ASPECT_PLANE_2_BIT)</li>
-            <li>If {@code pCreateInfo}{@code ::flags} has #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT set and the {@code pCreateInfo}{@code ::tiling} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, then {@code planeAspect} <b>must</b> be a single valid <em>memory plane</em> for the image (that is, {@code aspectMask} <b>must</b> specify a plane index that is less than the ##VkDrmFormatModifierPropertiesEXT{@code ::drmFormatModifierPlaneCount} associated with the image’s {@code format} and ##VkImageDrmFormatModifierPropertiesEXT{@code ::drmFormatModifier})</li>
+            <li>If {@code pCreateInfo}{@code ::tiling} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, then {@code planeAspect} <b>must</b> be a single valid <em>memory plane</em> for the image (that is, {@code aspectMask} <b>must</b> specify a plane index that is less than the ##VkDrmFormatModifierPropertiesEXT{@code ::drmFormatModifierPlaneCount} associated with the image’s {@code format} and ##VkImageDrmFormatModifierPropertiesEXT{@code ::drmFormatModifier})</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -11400,5 +11402,5 @@ val VkDeviceImageMemoryRequirements = struct(Module.VULKAN, "VkDeviceImageMemory
     Expression("#STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkImageCreateInfo.const.p("pCreateInfo", "a pointer to a ##VkImageCreateInfo structure containing parameters affecting creation of the image to query.")
-    VkImageAspectFlagBits("planeAspect", "a {@code VkImageAspectFlagBits} value specifying the aspect corresponding to the image plane to query. This parameter is ignored unless {@code pCreateInfo}{@code ::flags} has #IMAGE_CREATE_DISJOINT_BIT or #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT set.")
+    VkImageAspectFlagBits("planeAspect", "a {@code VkImageAspectFlagBits} value specifying the aspect corresponding to the image plane to query. This parameter is ignored unless {@code pCreateInfo}{@code ::tiling} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, or {@code pCreateInfo}{@code ::flags} has #IMAGE_CREATE_DISJOINT_BIT set.")
 }

@@ -25,7 +25,11 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <h5>Promotion to Vulkan 1.2</h5>
  * 
- * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code bufferDeviceAddress} capability is optional. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * <p>All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, the {@code bufferDeviceAddress} feature is optional. The original type, enum and command names are still available as aliases of the core functionality.</p>
+ * 
+ * <h5>Promotion to Vulkan 1.3</h5>
+ * 
+ * <p>Support for the {@code bufferDeviceAddress} feature is mandatory in Vulkan 1.3, regardless of whether this extension is supported.</p>
  * 
  * <h5>VK_KHR_buffer_device_address</h5>
  * 

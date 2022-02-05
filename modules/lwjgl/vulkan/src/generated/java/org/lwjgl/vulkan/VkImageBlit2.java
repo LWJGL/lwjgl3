@@ -34,7 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_IMAGE_BLIT_2 STRUCTURE_TYPE_IMAGE_BLIT_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkCopyCommandTransformInfoQCOM}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code srcSubresource} <b>must</b> be a valid {@link VkImageSubresourceLayers} structure</li>
  * <li>{@code dstSubresource} <b>must</b> be a valid {@link VkImageSubresourceLayers} structure</li>
  * </ul>
@@ -133,6 +134,8 @@ public class VkImageBlit2 extends Struct implements NativeResource {
     public VkImageBlit2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_IMAGE_BLIT_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageBlit2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
+    public VkImageBlit2 pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Copies the specified {@link VkImageSubresourceLayers} to the {@link #srcSubresource} field. */
     public VkImageBlit2 srcSubresource(VkImageSubresourceLayers value) { nsrcSubresource(address(), value); return this; }
     /** Passes the {@link #srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -415,6 +418,8 @@ public class VkImageBlit2 extends Struct implements NativeResource {
         public VkImageBlit2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_IMAGE_BLIT_2); }
         /** Sets the specified value to the {@link VkImageBlit2#pNext} field. */
         public VkImageBlit2.Buffer pNext(@NativeType("void const *") long value) { VkImageBlit2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
+        public VkImageBlit2.Buffer pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Copies the specified {@link VkImageSubresourceLayers} to the {@link VkImageBlit2#srcSubresource} field. */
         public VkImageBlit2.Buffer srcSubresource(VkImageSubresourceLayers value) { VkImageBlit2.nsrcSubresource(address(), value); return this; }
         /** Passes the {@link VkImageBlit2#srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
