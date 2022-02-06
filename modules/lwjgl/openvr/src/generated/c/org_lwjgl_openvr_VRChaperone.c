@@ -24,8 +24,8 @@ typedef void (APIENTRY *VRChaperone_SetSceneColorPROC) (HmdColor_t);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_openvr_VRChaperone_nVRChaperone_1SetSceneColor(JNIEnv *__env, jclass clazz, jlong colorAddress, jlong __functionAddress) {
-    VRChaperone_SetSceneColorPROC VRChaperone_SetSceneColor = (VRChaperone_SetSceneColorPROC)(intptr_t)__functionAddress;
-    HmdColor_t *color = (HmdColor_t *)(intptr_t)colorAddress;
+    VRChaperone_SetSceneColorPROC VRChaperone_SetSceneColor = (VRChaperone_SetSceneColorPROC)(uintptr_t)__functionAddress;
+    HmdColor_t *color = (HmdColor_t *)(uintptr_t)colorAddress;
     UNUSED_PARAMS(__env, clazz)
     VRChaperone_SetSceneColor(*color);
 }

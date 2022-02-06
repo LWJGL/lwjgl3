@@ -7,10 +7,10 @@
 #include "opengles.h"
 
 typedef jint (APIENTRY *glGetGraphicsResetStatusKHRPROC) (void);
-typedef void (APIENTRY *glReadnPixelsKHRPROC) (jint, jint, jint, jint, jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glGetnUniformfvKHRPROC) (jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glGetnUniformivKHRPROC) (jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glGetnUniformuivKHRPROC) (jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glReadnPixelsKHRPROC) (jint, jint, jint, jint, jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetnUniformfvKHRPROC) (jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetnUniformivKHRPROC) (jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetnUniformuivKHRPROC) (jint, jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -22,28 +22,28 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_KHRRobustness_glGetGraphicsResetS
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRRobustness_nglReadnPixelsKHR__IIIIIIIJ(JNIEnv *__env, jclass clazz, jint x, jint y, jint width, jint height, jint format, jint type, jint bufSize, jlong pixelsAddress) {
     glReadnPixelsKHRPROC glReadnPixelsKHR = (glReadnPixelsKHRPROC)tlsGetFunction(588);
-    intptr_t pixels = (intptr_t)pixelsAddress;
+    uintptr_t pixels = (uintptr_t)pixelsAddress;
     UNUSED_PARAM(clazz)
     glReadnPixelsKHR(x, y, width, height, format, type, bufSize, pixels);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRRobustness_nglGetnUniformfvKHR__IIIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jint bufSize, jlong paramsAddress) {
     glGetnUniformfvKHRPROC glGetnUniformfvKHR = (glGetnUniformfvKHRPROC)tlsGetFunction(589);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetnUniformfvKHR(program, location, bufSize, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRRobustness_nglGetnUniformivKHR__IIIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jint bufSize, jlong paramsAddress) {
     glGetnUniformivKHRPROC glGetnUniformivKHR = (glGetnUniformivKHRPROC)tlsGetFunction(590);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetnUniformivKHR(program, location, bufSize, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRRobustness_nglGetnUniformuivKHR__IIIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jint bufSize, jlong paramsAddress) {
     glGetnUniformuivKHRPROC glGetnUniformuivKHR = (glGetnUniformuivKHRPROC)tlsGetFunction(591);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetnUniformuivKHR(program, location, bufSize, params);
 }

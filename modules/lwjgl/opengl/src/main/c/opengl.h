@@ -11,4 +11,4 @@
     #define APIENTRY
 #endif
 
-#define tlsGetFunction(index) (intptr_t)((void **)(*__env)->reserved3)[index]
+#define tlsGetFunction(index) (uintptr_t)((void **)(*__env)->reserved3)[index]

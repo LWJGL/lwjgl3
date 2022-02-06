@@ -7,7 +7,7 @@
 #include "opengl.h"
 
 typedef void (APIENTRY *glDrawVkImageNVPROC) (jlong, jint, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat);
-typedef intptr_t (APIENTRY *glGetVkProcAddrNVPROC) (intptr_t);
+typedef uintptr_t (APIENTRY *glGetVkProcAddrNVPROC) (uintptr_t);
 typedef void (APIENTRY *glWaitVkSemaphoreNVPROC) (jlong);
 typedef void (APIENTRY *glSignalVkSemaphoreNVPROC) (jlong);
 typedef void (APIENTRY *glSignalVkFenceNVPROC) (jlong);
@@ -22,7 +22,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVDrawVulkanImage_glDrawVkImageNV(J
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_NVDrawVulkanImage_nglGetVkProcAddrNV(JNIEnv *__env, jclass clazz, jlong nameAddress) {
     glGetVkProcAddrNVPROC glGetVkProcAddrNV = (glGetVkProcAddrNVPROC)tlsGetFunction(1955);
-    intptr_t name = (intptr_t)nameAddress;
+    uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     return (jlong)glGetVkProcAddrNV(name);
 }

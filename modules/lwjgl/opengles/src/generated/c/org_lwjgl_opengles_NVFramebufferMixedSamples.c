@@ -6,22 +6,22 @@
 #include "common_tools.h"
 #include "opengles.h"
 
-typedef void (APIENTRY *glCoverageModulationTableNVPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetCoverageModulationTableNVPROC) (jint, intptr_t);
+typedef void (APIENTRY *glCoverageModulationTableNVPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetCoverageModulationTableNVPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glCoverageModulationNVPROC) (jint);
 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVFramebufferMixedSamples_nglCoverageModulationTableNV__IJ(JNIEnv *__env, jclass clazz, jint n, jlong vAddress) {
     glCoverageModulationTableNVPROC glCoverageModulationTableNV = (glCoverageModulationTableNVPROC)tlsGetFunction(635);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glCoverageModulationTableNV(n, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVFramebufferMixedSamples_nglGetCoverageModulationTableNV__IJ(JNIEnv *__env, jclass clazz, jint bufsize, jlong vAddress) {
     glGetCoverageModulationTableNVPROC glGetCoverageModulationTableNV = (glGetCoverageModulationTableNVPROC)tlsGetFunction(636);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glGetCoverageModulationTableNV(bufsize, v);
 }

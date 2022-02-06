@@ -12,14 +12,14 @@ typedef jboolean (APIENTRY *glIsBufferResidentNVPROC) (jint);
 typedef void (APIENTRY *glMakeNamedBufferResidentNVPROC) (jint, jint);
 typedef void (APIENTRY *glMakeNamedBufferNonResidentNVPROC) (jint);
 typedef jboolean (APIENTRY *glIsNamedBufferResidentNVPROC) (jint);
-typedef void (APIENTRY *glGetBufferParameterui64vNVPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetNamedBufferParameterui64vNVPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetIntegerui64vNVPROC) (jint, intptr_t);
+typedef void (APIENTRY *glGetBufferParameterui64vNVPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetNamedBufferParameterui64vNVPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetIntegerui64vNVPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glUniformui64NVPROC) (jint, jlong);
-typedef void (APIENTRY *glUniformui64vNVPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetUniformui64vNVPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniformui64vNVPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetUniformui64vNVPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glProgramUniformui64NVPROC) (jint, jint, jlong);
-typedef void (APIENTRY *glProgramUniformui64vNVPROC) (jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glProgramUniformui64vNVPROC) (jint, jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -61,21 +61,21 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glIsNamedBuf
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglGetBufferParameterui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetBufferParameterui64vNVPROC glGetBufferParameterui64vNV = (glGetBufferParameterui64vNVPROC)tlsGetFunction(2132);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetBufferParameterui64vNV(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglGetNamedBufferParameterui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint buffer, jint pname, jlong paramsAddress) {
     glGetNamedBufferParameterui64vNVPROC glGetNamedBufferParameterui64vNV = (glGetNamedBufferParameterui64vNVPROC)tlsGetFunction(2133);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetNamedBufferParameterui64vNV(buffer, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglGetIntegerui64vNV__IJ(JNIEnv *__env, jclass clazz, jint value, jlong resultAddress) {
     glGetIntegerui64vNVPROC glGetIntegerui64vNV = (glGetIntegerui64vNVPROC)tlsGetFunction(2134);
-    intptr_t result = (intptr_t)resultAddress;
+    uintptr_t result = (uintptr_t)resultAddress;
     UNUSED_PARAM(clazz)
     glGetIntegerui64vNV(value, result);
 }
@@ -88,14 +88,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glUniformui64NV(
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglUniformui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniformui64vNVPROC glUniformui64vNV = (glUniformui64vNVPROC)tlsGetFunction(2136);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformui64vNV(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglGetUniformui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jlong paramsAddress) {
     glGetUniformui64vNVPROC glGetUniformui64vNV = (glGetUniformui64vNVPROC)tlsGetFunction(1075);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetUniformui64vNV(program, location, params);
 }
@@ -108,7 +108,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glProgramUniform
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglProgramUniformui64vNV__IIIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jint count, jlong valueAddress) {
     glProgramUniformui64vNVPROC glProgramUniformui64vNV = (glProgramUniformui64vNVPROC)tlsGetFunction(2138);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glProgramUniformui64vNV(program, location, count, value);
 }

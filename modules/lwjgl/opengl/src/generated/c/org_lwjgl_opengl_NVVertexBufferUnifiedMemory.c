@@ -6,7 +6,7 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glBufferAddressRangeNVPROC) (jint, jint, jlong, intptr_t);
+typedef void (APIENTRY *glBufferAddressRangeNVPROC) (jint, jint, jlong, uintptr_t);
 typedef void (APIENTRY *glVertexFormatNVPROC) (jint, jint, jint);
 typedef void (APIENTRY *glNormalFormatNVPROC) (jint, jint);
 typedef void (APIENTRY *glColorFormatNVPROC) (jint, jint, jint);
@@ -17,14 +17,14 @@ typedef void (APIENTRY *glSecondaryColorFormatNVPROC) (jint, jint, jint);
 typedef void (APIENTRY *glFogCoordFormatNVPROC) (jint, jint);
 typedef void (APIENTRY *glVertexAttribFormatNVPROC) (jint, jint, jint, jboolean, jint);
 typedef void (APIENTRY *glVertexAttribIFormatNVPROC) (jint, jint, jint, jint);
-typedef void (APIENTRY *glGetIntegerui64i_vNVPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetIntegerui64i_vNVPROC) (jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glBufferAddressRangeNV(JNIEnv *__env, jclass clazz, jint pname, jint index, jlong address, jlong length) {
     glBufferAddressRangeNVPROC glBufferAddressRangeNV = (glBufferAddressRangeNVPROC)tlsGetFunction(2196);
     UNUSED_PARAM(clazz)
-    glBufferAddressRangeNV(pname, index, address, (intptr_t)length);
+    glBufferAddressRangeNV(pname, index, address, (uintptr_t)length);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glVertexFormatNV(JNIEnv *__env, jclass clazz, jint size, jint type, jint stride) {
@@ -89,7 +89,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_glVerte
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVVertexBufferUnifiedMemory_nglGetIntegerui64i_1vNV__IIJ(JNIEnv *__env, jclass clazz, jint value, jint index, jlong resultAddress) {
     glGetIntegerui64i_vNVPROC glGetIntegerui64i_vNV = (glGetIntegerui64i_vNVPROC)tlsGetFunction(2207);
-    intptr_t result = (intptr_t)resultAddress;
+    uintptr_t result = (uintptr_t)resultAddress;
     UNUSED_PARAM(clazz)
     glGetIntegerui64i_vNV(value, index, result);
 }

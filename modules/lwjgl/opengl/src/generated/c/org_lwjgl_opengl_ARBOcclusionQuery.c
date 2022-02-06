@@ -6,27 +6,27 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glGenQueriesARBPROC) (jint, intptr_t);
-typedef void (APIENTRY *glDeleteQueriesARBPROC) (jint, intptr_t);
+typedef void (APIENTRY *glGenQueriesARBPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glDeleteQueriesARBPROC) (jint, uintptr_t);
 typedef jboolean (APIENTRY *glIsQueryARBPROC) (jint);
 typedef void (APIENTRY *glBeginQueryARBPROC) (jint, jint);
 typedef void (APIENTRY *glEndQueryARBPROC) (jint);
-typedef void (APIENTRY *glGetQueryivARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetQueryObjectivARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetQueryObjectuivARBPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetQueryivARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetQueryObjectivARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetQueryObjectuivARBPROC) (jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBOcclusionQuery_nglGenQueriesARB__IJ(JNIEnv *__env, jclass clazz, jint n, jlong idsAddress) {
     glGenQueriesARBPROC glGenQueriesARB = (glGenQueriesARBPROC)tlsGetFunction(1281);
-    intptr_t ids = (intptr_t)idsAddress;
+    uintptr_t ids = (uintptr_t)idsAddress;
     UNUSED_PARAM(clazz)
     glGenQueriesARB(n, ids);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBOcclusionQuery_nglDeleteQueriesARB__IJ(JNIEnv *__env, jclass clazz, jint n, jlong idsAddress) {
     glDeleteQueriesARBPROC glDeleteQueriesARB = (glDeleteQueriesARBPROC)tlsGetFunction(1282);
-    intptr_t ids = (intptr_t)idsAddress;
+    uintptr_t ids = (uintptr_t)idsAddress;
     UNUSED_PARAM(clazz)
     glDeleteQueriesARB(n, ids);
 }
@@ -51,21 +51,21 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBOcclusionQuery_glEndQueryARB(JNI
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBOcclusionQuery_nglGetQueryivARB__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetQueryivARBPROC glGetQueryivARB = (glGetQueryivARBPROC)tlsGetFunction(1286);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetQueryivARB(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBOcclusionQuery_nglGetQueryObjectivARB__IIJ(JNIEnv *__env, jclass clazz, jint id, jint pname, jlong paramsAddress) {
     glGetQueryObjectivARBPROC glGetQueryObjectivARB = (glGetQueryObjectivARBPROC)tlsGetFunction(1287);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetQueryObjectivARB(id, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBOcclusionQuery_nglGetQueryObjectuivARB__IIJ(JNIEnv *__env, jclass clazz, jint id, jint pname, jlong paramsAddress) {
     glGetQueryObjectuivARBPROC glGetQueryObjectuivARB = (glGetQueryObjectuivARBPROC)tlsGetFunction(1288);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetQueryObjectuivARB(id, pname, params);
 }

@@ -32,7 +32,7 @@ val MemoryAccessJNI = "MemoryAccessJNI".nativeClass(Module.CORE) {
         Triple(float, "Float", "a float value"),
         Triple(double, "Double", "a double value"),
 
-        Triple(intptr_t, "Address", "a pointer address")
+        Triple(uintptr_t, "Address", "a pointer address")
     )
 
     nativeDirective(
@@ -89,7 +89,7 @@ ${primitives
     }
 
     Code(
-        nativeCall = "${t}return (jlong)(intptr_t)&__aligned_alloc;"
+        nativeCall = "${t}return (jlong)(uintptr_t)&__aligned_alloc;"
     )..macro..Address.."void * (*) (size_t, size_t)".handle(
         "aligned_alloc",
         "Returns the address of the stdlib {@code aligned_alloc} function.",
@@ -97,7 +97,7 @@ ${primitives
     )
 
     Code(
-        nativeCall = "${t}return (jlong)(intptr_t)&__aligned_free;"
+        nativeCall = "${t}return (jlong)(uintptr_t)&__aligned_free;"
     )..macro..Address.."void (*) (void *)".handle(
         "aligned_free",
         "Returns the address of the stdlib {@code aligned_free} function.",

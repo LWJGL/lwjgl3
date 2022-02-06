@@ -16,24 +16,24 @@ EXTERN_C_ENTER
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_OUI_uiCreateContext(JNIEnv *__env, jclass clazz, jint item_capacity, jint buffer_capacity) {
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)uiCreateContext((unsigned int)item_capacity, (unsigned int)buffer_capacity);
+    return (jlong)(uintptr_t)uiCreateContext((unsigned int)item_capacity, (unsigned int)buffer_capacity);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_uiMakeCurrent(JNIEnv *__env, jclass clazz, jlong ctxAddress) {
-    UIcontext *ctx = (UIcontext *)(intptr_t)ctxAddress;
+    UIcontext *ctx = (UIcontext *)(uintptr_t)ctxAddress;
     UNUSED_PARAMS(__env, clazz)
     uiMakeCurrent(ctx);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiDestroyContext(JNIEnv *__env, jclass clazz, jlong ctxAddress) {
-    UIcontext *ctx = (UIcontext *)(intptr_t)ctxAddress;
+    UIcontext *ctx = (UIcontext *)(uintptr_t)ctxAddress;
     UNUSED_PARAMS(__env, clazz)
     uiDestroyContext(ctx);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_OUI_uiGetContext(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)uiGetContext();
+    return (jlong)(uintptr_t)uiGetContext();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_uiSetCursor(JNIEnv *__env, jclass clazz, jint x, jint y) {
@@ -43,22 +43,22 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_uiSetCursor(JNIEnv *__env, jcla
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiGetCursor(JNIEnv *__env, jclass clazz, jlong __result) {
     UNUSED_PARAMS(__env, clazz)
-    *((UIvec2*)(intptr_t)__result) = uiGetCursor();
+    *((UIvec2*)(uintptr_t)__result) = uiGetCursor();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiGetCursorDelta(JNIEnv *__env, jclass clazz, jlong __result) {
     UNUSED_PARAMS(__env, clazz)
-    *((UIvec2*)(intptr_t)__result) = uiGetCursorDelta();
+    *((UIvec2*)(uintptr_t)__result) = uiGetCursorDelta();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiGetCursorStart(JNIEnv *__env, jclass clazz, jlong __result) {
     UNUSED_PARAMS(__env, clazz)
-    *((UIvec2*)(intptr_t)__result) = uiGetCursorStart();
+    *((UIvec2*)(uintptr_t)__result) = uiGetCursorStart();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiGetCursorStartDelta(JNIEnv *__env, jclass clazz, jlong __result) {
     UNUSED_PARAMS(__env, clazz)
-    *((UIvec2*)(intptr_t)__result) = uiGetCursorStartDelta();
+    *((UIvec2*)(uintptr_t)__result) = uiGetCursorStartDelta();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiSetButton(JNIEnv *__env, jclass clazz, jint button, jint mod, jint enabled) {
@@ -93,7 +93,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_uiSetScroll(JNIEnv *__env, jcla
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiGetScroll(JNIEnv *__env, jclass clazz, jlong __result) {
     UNUSED_PARAMS(__env, clazz)
-    *((UIvec2*)(intptr_t)__result) = uiGetScroll();
+    *((UIvec2*)(uintptr_t)__result) = uiGetScroll();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_uiBeginLayout(JNIEnv *__env, jclass clazz) {
@@ -132,18 +132,18 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiSetFrozen(JNIEnv *__env, jcl
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_uiSetHandle(JNIEnv *__env, jclass clazz, jint item, jlong handleAddress) {
-    void *handle = (void *)(intptr_t)handleAddress;
+    void *handle = (void *)(uintptr_t)handleAddress;
     UNUSED_PARAMS(__env, clazz)
     uiSetHandle(item, handle);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_OUI_nuiAllocHandle(JNIEnv *__env, jclass clazz, jint item, jint size) {
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)uiAllocHandle(item, (unsigned int)size);
+    return (jlong)(uintptr_t)uiAllocHandle(item, (unsigned int)size);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiSetHandler(JNIEnv *__env, jclass clazz, jlong handlerAddress) {
-    UIhandler handler = (UIhandler)(intptr_t)handlerAddress;
+    UIhandler handler = (UIhandler)(uintptr_t)handlerAddress;
     UNUSED_PARAMS(__env, clazz)
     uiSetHandler(handler);
 }
@@ -230,7 +230,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_OUI_uiGetState(JNIEnv *__env, jclas
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_OUI_uiGetHandle(JNIEnv *__env, jclass clazz, jint item) {
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)uiGetHandle(item);
+    return (jlong)(uintptr_t)uiGetHandle(item);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_OUI_uiGetHotItem(JNIEnv *__env, jclass clazz) {
@@ -250,7 +250,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_OUI_uiFindItem(JNIEnv *__env, jclas
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_nanovg_OUI_nuiGetHandler(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)(intptr_t)uiGetHandler();
+    return (jlong)(uintptr_t)uiGetHandler();
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_OUI_uiGetEvents(JNIEnv *__env, jclass clazz, jint item) {
@@ -275,7 +275,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_OUI_uiGetModifier(JNIEnv *__env, jc
 
 JNIEXPORT void JNICALL Java_org_lwjgl_nanovg_OUI_nuiGetRect(JNIEnv *__env, jclass clazz, jint item, jlong __result) {
     UNUSED_PARAMS(__env, clazz)
-    *((UIrect*)(intptr_t)__result) = uiGetRect(item);
+    *((UIrect*)(uintptr_t)__result) = uiGetRect(item);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_nanovg_OUI_nuiContains(JNIEnv *__env, jclass clazz, jint item, jint x, jint y) {

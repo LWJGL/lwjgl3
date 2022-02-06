@@ -7,7 +7,7 @@
 #include "opengles.h"
 
 typedef void (APIENTRY *glTexBufferOESPROC) (jint, jint, jint);
-typedef void (APIENTRY *glTexBufferRangeOESPROC) (jint, jint, jint, intptr_t, intptr_t);
+typedef void (APIENTRY *glTexBufferRangeOESPROC) (jint, jint, jint, uintptr_t, uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESTextureBuffer_glTexBufferOES(J
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESTextureBuffer_glTexBufferRangeOES(JNIEnv *__env, jclass clazz, jint target, jint internalformat, jint buffer, jlong offset, jlong size) {
     glTexBufferRangeOESPROC glTexBufferRangeOES = (glTexBufferRangeOESPROC)tlsGetFunction(820);
     UNUSED_PARAM(clazz)
-    glTexBufferRangeOES(target, internalformat, buffer, (intptr_t)offset, (intptr_t)size);
+    glTexBufferRangeOES(target, internalformat, buffer, (uintptr_t)offset, (uintptr_t)size);
 }
 
 EXTERN_C_EXIT

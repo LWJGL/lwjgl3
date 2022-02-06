@@ -6,9 +6,9 @@
 #include "common_tools.h"
 #include "opengles.h"
 
-typedef intptr_t (APIENTRY *glMapBufferOESPROC) (jint, jint);
+typedef uintptr_t (APIENTRY *glMapBufferOESPROC) (jint, jint);
 typedef jboolean (APIENTRY *glUnmapBufferOESPROC) (jint);
-typedef void (APIENTRY *glGetBufferPointervOESPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetBufferPointervOESPROC) (jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -26,7 +26,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_OESMapbuffer_glUnmapBufferOES
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESMapbuffer_nglGetBufferPointervOES(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetBufferPointervOESPROC glGetBufferPointervOES = (glGetBufferPointervOESPROC)tlsGetFunction(801);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetBufferPointervOES(target, pname, params);
 }

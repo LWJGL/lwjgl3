@@ -6,26 +6,26 @@
 #include "common_tools.h"
 #include "opengles.h"
 
-typedef void (APIENTRY *glGenQueriesEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glDeleteQueriesEXTPROC) (jint, intptr_t);
+typedef void (APIENTRY *glGenQueriesEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glDeleteQueriesEXTPROC) (jint, uintptr_t);
 typedef jboolean (APIENTRY *glIsQueryEXTPROC) (jint);
 typedef void (APIENTRY *glBeginQueryEXTPROC) (jint, jint);
 typedef void (APIENTRY *glEndQueryEXTPROC) (jint);
-typedef void (APIENTRY *glGetQueryivEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetQueryObjectuivEXTPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetQueryivEXTPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetQueryObjectuivEXTPROC) (jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTOcclusionQueryBoolean_nglGenQueriesEXT__IJ(JNIEnv *__env, jclass clazz, jint n, jlong idsAddress) {
     glGenQueriesEXTPROC glGenQueriesEXT = (glGenQueriesEXTPROC)tlsGetFunction(406);
-    intptr_t ids = (intptr_t)idsAddress;
+    uintptr_t ids = (uintptr_t)idsAddress;
     UNUSED_PARAM(clazz)
     glGenQueriesEXT(n, ids);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTOcclusionQueryBoolean_nglDeleteQueriesEXT__IJ(JNIEnv *__env, jclass clazz, jint n, jlong idsAddress) {
     glDeleteQueriesEXTPROC glDeleteQueriesEXT = (glDeleteQueriesEXTPROC)tlsGetFunction(407);
-    intptr_t ids = (intptr_t)idsAddress;
+    uintptr_t ids = (uintptr_t)idsAddress;
     UNUSED_PARAM(clazz)
     glDeleteQueriesEXT(n, ids);
 }
@@ -50,14 +50,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTOcclusionQueryBoolean_glEndQue
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTOcclusionQueryBoolean_nglGetQueryivEXT__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetQueryivEXTPROC glGetQueryivEXT = (glGetQueryivEXTPROC)tlsGetFunction(411);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetQueryivEXT(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTOcclusionQueryBoolean_nglGetQueryObjectuivEXT__IIJ(JNIEnv *__env, jclass clazz, jint id, jint pname, jlong paramsAddress) {
     glGetQueryObjectuivEXTPROC glGetQueryObjectuivEXT = (glGetQueryObjectuivEXTPROC)tlsGetFunction(412);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetQueryObjectuivEXT(id, pname, params);
 }

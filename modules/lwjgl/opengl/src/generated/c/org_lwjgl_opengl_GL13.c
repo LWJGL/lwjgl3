@@ -11,38 +11,38 @@ typedef void (APIENTRY *glMultiTexCoord1fPROC) (jint, jfloat);
 typedef void (APIENTRY *glMultiTexCoord1sPROC) (jint, jshort);
 typedef void (APIENTRY *glMultiTexCoord1iPROC) (jint, jint);
 typedef void (APIENTRY *glMultiTexCoord1dPROC) (jint, jdouble);
-typedef void (APIENTRY *glMultiTexCoord1fvPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord1svPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord1ivPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord1dvPROC) (jint, intptr_t);
+typedef void (APIENTRY *glMultiTexCoord1fvPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord1svPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord1ivPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord1dvPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glMultiTexCoord2fPROC) (jint, jfloat, jfloat);
 typedef void (APIENTRY *glMultiTexCoord2sPROC) (jint, jshort, jshort);
 typedef void (APIENTRY *glMultiTexCoord2iPROC) (jint, jint, jint);
 typedef void (APIENTRY *glMultiTexCoord2dPROC) (jint, jdouble, jdouble);
-typedef void (APIENTRY *glMultiTexCoord2fvPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord2svPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord2ivPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord2dvPROC) (jint, intptr_t);
+typedef void (APIENTRY *glMultiTexCoord2fvPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord2svPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord2ivPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord2dvPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glMultiTexCoord3fPROC) (jint, jfloat, jfloat, jfloat);
 typedef void (APIENTRY *glMultiTexCoord3sPROC) (jint, jshort, jshort, jshort);
 typedef void (APIENTRY *glMultiTexCoord3iPROC) (jint, jint, jint, jint);
 typedef void (APIENTRY *glMultiTexCoord3dPROC) (jint, jdouble, jdouble, jdouble);
-typedef void (APIENTRY *glMultiTexCoord3fvPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord3svPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord3ivPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord3dvPROC) (jint, intptr_t);
+typedef void (APIENTRY *glMultiTexCoord3fvPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord3svPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord3ivPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord3dvPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glMultiTexCoord4fPROC) (jint, jfloat, jfloat, jfloat, jfloat);
 typedef void (APIENTRY *glMultiTexCoord4sPROC) (jint, jshort, jshort, jshort, jshort);
 typedef void (APIENTRY *glMultiTexCoord4iPROC) (jint, jint, jint, jint, jint);
 typedef void (APIENTRY *glMultiTexCoord4dPROC) (jint, jdouble, jdouble, jdouble, jdouble);
-typedef void (APIENTRY *glMultiTexCoord4fvPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord4svPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord4ivPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMultiTexCoord4dvPROC) (jint, intptr_t);
-typedef void (APIENTRY *glLoadTransposeMatrixfPROC) (intptr_t);
-typedef void (APIENTRY *glLoadTransposeMatrixdPROC) (intptr_t);
-typedef void (APIENTRY *glMultTransposeMatrixfPROC) (intptr_t);
-typedef void (APIENTRY *glMultTransposeMatrixdPROC) (intptr_t);
+typedef void (APIENTRY *glMultiTexCoord4fvPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord4svPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord4ivPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMultiTexCoord4dvPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glLoadTransposeMatrixfPROC) (uintptr_t);
+typedef void (APIENTRY *glLoadTransposeMatrixdPROC) (uintptr_t);
+typedef void (APIENTRY *glMultTransposeMatrixfPROC) (uintptr_t);
+typedef void (APIENTRY *glMultTransposeMatrixdPROC) (uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -78,28 +78,28 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_glMultiTexCoord1d(JNIEnv *__en
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord1fv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord1fvPROC glMultiTexCoord1fv = (glMultiTexCoord1fvPROC)tlsGetFunction(354);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord1fv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord1sv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord1svPROC glMultiTexCoord1sv = (glMultiTexCoord1svPROC)tlsGetFunction(355);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord1sv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord1iv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord1ivPROC glMultiTexCoord1iv = (glMultiTexCoord1ivPROC)tlsGetFunction(356);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord1iv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord1dv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord1dvPROC glMultiTexCoord1dv = (glMultiTexCoord1dvPROC)tlsGetFunction(357);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord1dv(texture, v);
 }
@@ -130,28 +130,28 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_glMultiTexCoord2d(JNIEnv *__en
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord2fv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord2fvPROC glMultiTexCoord2fv = (glMultiTexCoord2fvPROC)tlsGetFunction(362);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord2fv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord2sv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord2svPROC glMultiTexCoord2sv = (glMultiTexCoord2svPROC)tlsGetFunction(363);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord2sv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord2iv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord2ivPROC glMultiTexCoord2iv = (glMultiTexCoord2ivPROC)tlsGetFunction(364);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord2iv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord2dv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord2dvPROC glMultiTexCoord2dv = (glMultiTexCoord2dvPROC)tlsGetFunction(365);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord2dv(texture, v);
 }
@@ -182,28 +182,28 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_glMultiTexCoord3d(JNIEnv *__en
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord3fv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord3fvPROC glMultiTexCoord3fv = (glMultiTexCoord3fvPROC)tlsGetFunction(370);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord3fv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord3sv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord3svPROC glMultiTexCoord3sv = (glMultiTexCoord3svPROC)tlsGetFunction(371);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord3sv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord3iv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord3ivPROC glMultiTexCoord3iv = (glMultiTexCoord3ivPROC)tlsGetFunction(372);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord3iv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord3dv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord3dvPROC glMultiTexCoord3dv = (glMultiTexCoord3dvPROC)tlsGetFunction(373);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord3dv(texture, v);
 }
@@ -234,56 +234,56 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_glMultiTexCoord4d(JNIEnv *__en
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord4fv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord4fvPROC glMultiTexCoord4fv = (glMultiTexCoord4fvPROC)tlsGetFunction(378);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord4fv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord4sv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord4svPROC glMultiTexCoord4sv = (glMultiTexCoord4svPROC)tlsGetFunction(379);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord4sv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord4iv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord4ivPROC glMultiTexCoord4iv = (glMultiTexCoord4ivPROC)tlsGetFunction(380);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord4iv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultiTexCoord4dv__IJ(JNIEnv *__env, jclass clazz, jint texture, jlong vAddress) {
     glMultiTexCoord4dvPROC glMultiTexCoord4dv = (glMultiTexCoord4dvPROC)tlsGetFunction(381);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMultiTexCoord4dv(texture, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglLoadTransposeMatrixf__J(JNIEnv *__env, jclass clazz, jlong mAddress) {
     glLoadTransposeMatrixfPROC glLoadTransposeMatrixf = (glLoadTransposeMatrixfPROC)tlsGetFunction(382);
-    intptr_t m = (intptr_t)mAddress;
+    uintptr_t m = (uintptr_t)mAddress;
     UNUSED_PARAM(clazz)
     glLoadTransposeMatrixf(m);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglLoadTransposeMatrixd__J(JNIEnv *__env, jclass clazz, jlong mAddress) {
     glLoadTransposeMatrixdPROC glLoadTransposeMatrixd = (glLoadTransposeMatrixdPROC)tlsGetFunction(383);
-    intptr_t m = (intptr_t)mAddress;
+    uintptr_t m = (uintptr_t)mAddress;
     UNUSED_PARAM(clazz)
     glLoadTransposeMatrixd(m);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultTransposeMatrixf__J(JNIEnv *__env, jclass clazz, jlong mAddress) {
     glMultTransposeMatrixfPROC glMultTransposeMatrixf = (glMultTransposeMatrixfPROC)tlsGetFunction(384);
-    intptr_t m = (intptr_t)mAddress;
+    uintptr_t m = (uintptr_t)mAddress;
     UNUSED_PARAM(clazz)
     glMultTransposeMatrixf(m);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL13_nglMultTransposeMatrixd__J(JNIEnv *__env, jclass clazz, jlong mAddress) {
     glMultTransposeMatrixdPROC glMultTransposeMatrixd = (glMultTransposeMatrixdPROC)tlsGetFunction(385);
-    intptr_t m = (intptr_t)mAddress;
+    uintptr_t m = (uintptr_t)mAddress;
     UNUSED_PARAM(clazz)
     glMultTransposeMatrixd(m);
 }

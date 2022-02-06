@@ -6,14 +6,14 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glPixelDataRangeNVPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glPixelDataRangeNVPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glFlushPixelDataRangeNVPROC) (jint);
 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVPixelDataRange_nglPixelDataRangeNV(JNIEnv *__env, jclass clazz, jint target, jint length, jlong pointerAddress) {
     glPixelDataRangeNVPROC glPixelDataRangeNV = (glPixelDataRangeNVPROC)tlsGetFunction(2111);
-    intptr_t pointer = (intptr_t)pointerAddress;
+    uintptr_t pointer = (uintptr_t)pointerAddress;
     UNUSED_PARAM(clazz)
     glPixelDataRangeNV(target, length, pointer);
 }

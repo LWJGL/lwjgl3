@@ -76,7 +76,7 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
     )
 
     Code(
-        nativeCall = "${t}return (jlong)(intptr_t)__aligned_alloc((size_t)alignment, (size_t)size);"
+        nativeCall = "${t}return (jlong)(uintptr_t)__aligned_alloc((size_t)alignment, (size_t)size);"
     )..void.p(
         "aligned_alloc",
         """

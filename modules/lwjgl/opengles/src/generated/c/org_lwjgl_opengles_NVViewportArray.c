@@ -6,15 +6,15 @@
 #include "common_tools.h"
 #include "opengles.h"
 
-typedef void (APIENTRY *glViewportArrayvNVPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glViewportArrayvNVPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glViewportIndexedfNVPROC) (jint, jfloat, jfloat, jfloat, jfloat);
-typedef void (APIENTRY *glViewportIndexedfvNVPROC) (jint, intptr_t);
-typedef void (APIENTRY *glScissorArrayvNVPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glViewportIndexedfvNVPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glScissorArrayvNVPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glScissorIndexedNVPROC) (jint, jint, jint, jint, jint);
-typedef void (APIENTRY *glScissorIndexedvNVPROC) (jint, intptr_t);
-typedef void (APIENTRY *glDepthRangeArrayfvNVPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glScissorIndexedvNVPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glDepthRangeArrayfvNVPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glDepthRangeIndexedfNVPROC) (jint, jfloat, jfloat);
-typedef void (APIENTRY *glGetFloati_vNVPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetFloati_vNVPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glEnableiNVPROC) (jint, jint);
 typedef void (APIENTRY *glDisableiNVPROC) (jint, jint);
 typedef jboolean (APIENTRY *glIsEnablediNVPROC) (jint, jint);
@@ -23,7 +23,7 @@ EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportArray_nglViewportArrayvNV__IIJ(JNIEnv *__env, jclass clazz, jint first, jint count, jlong vAddress) {
     glViewportArrayvNVPROC glViewportArrayvNV = (glViewportArrayvNVPROC)tlsGetFunction(768);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glViewportArrayvNV(first, count, v);
 }
@@ -36,14 +36,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportArray_glViewportIndexed
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportArray_nglViewportIndexedfvNV__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glViewportIndexedfvNVPROC glViewportIndexedfvNV = (glViewportIndexedfvNVPROC)tlsGetFunction(770);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glViewportIndexedfvNV(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportArray_nglScissorArrayvNV__IIJ(JNIEnv *__env, jclass clazz, jint first, jint count, jlong vAddress) {
     glScissorArrayvNVPROC glScissorArrayvNV = (glScissorArrayvNVPROC)tlsGetFunction(771);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glScissorArrayvNV(first, count, v);
 }
@@ -56,14 +56,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportArray_glScissorIndexedN
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportArray_nglScissorIndexedvNV__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glScissorIndexedvNVPROC glScissorIndexedvNV = (glScissorIndexedvNVPROC)tlsGetFunction(773);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glScissorIndexedvNV(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportArray_nglDepthRangeArrayfvNV__IIJ(JNIEnv *__env, jclass clazz, jint first, jint count, jlong vAddress) {
     glDepthRangeArrayfvNVPROC glDepthRangeArrayfvNV = (glDepthRangeArrayfvNVPROC)tlsGetFunction(774);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glDepthRangeArrayfvNV(first, count, v);
 }
@@ -76,7 +76,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportArray_glDepthRangeIndex
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportArray_nglGetFloati_1vNV__IIJ(JNIEnv *__env, jclass clazz, jint target, jint index, jlong dataAddress) {
     glGetFloati_vNVPROC glGetFloati_vNV = (glGetFloati_vNVPROC)tlsGetFunction(776);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glGetFloati_vNV(target, index, data);
 }

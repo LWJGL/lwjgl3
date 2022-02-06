@@ -6,22 +6,22 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glInsertEventMarkerEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glPushGroupMarkerEXTPROC) (jint, intptr_t);
+typedef void (APIENTRY *glInsertEventMarkerEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glPushGroupMarkerEXTPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glPopGroupMarkerEXTPROC) (void);
 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDebugMarker_nglInsertEventMarkerEXT(JNIEnv *__env, jclass clazz, jint length, jlong markerAddress) {
     glInsertEventMarkerEXTPROC glInsertEventMarkerEXT = (glInsertEventMarkerEXTPROC)tlsGetFunction(1504);
-    intptr_t marker = (intptr_t)markerAddress;
+    uintptr_t marker = (uintptr_t)markerAddress;
     UNUSED_PARAM(clazz)
     glInsertEventMarkerEXT(length, marker);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDebugMarker_nglPushGroupMarkerEXT(JNIEnv *__env, jclass clazz, jint length, jlong markerAddress) {
     glPushGroupMarkerEXTPROC glPushGroupMarkerEXT = (glPushGroupMarkerEXTPROC)tlsGetFunction(1505);
-    intptr_t marker = (intptr_t)markerAddress;
+    uintptr_t marker = (uintptr_t)markerAddress;
     UNUSED_PARAM(clazz)
     glPushGroupMarkerEXT(length, marker);
 }

@@ -7,17 +7,17 @@
 #include "opengl.h"
 
 typedef void (APIENTRY *glRenderGpuMaskNVPROC) (jint);
-typedef void (APIENTRY *glMulticastBufferSubDataNVPROC) (jint, jint, intptr_t, intptr_t, intptr_t);
-typedef void (APIENTRY *glMulticastCopyBufferSubDataNVPROC) (jint, jint, jint, jint, intptr_t, intptr_t, intptr_t);
+typedef void (APIENTRY *glMulticastBufferSubDataNVPROC) (jint, jint, uintptr_t, uintptr_t, uintptr_t);
+typedef void (APIENTRY *glMulticastCopyBufferSubDataNVPROC) (jint, jint, jint, jint, uintptr_t, uintptr_t, uintptr_t);
 typedef void (APIENTRY *glMulticastCopyImageSubDataNVPROC) (jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint);
 typedef void (APIENTRY *glMulticastBlitFramebufferNVPROC) (jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint, jint);
-typedef void (APIENTRY *glMulticastFramebufferSampleLocationsfvNVPROC) (jint, jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glMulticastFramebufferSampleLocationsfvNVPROC) (jint, jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glMulticastBarrierNVPROC) (void);
 typedef void (APIENTRY *glMulticastWaitSyncNVPROC) (jint, jint);
-typedef void (APIENTRY *glMulticastGetQueryObjectivNVPROC) (jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glMulticastGetQueryObjectuivNVPROC) (jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glMulticastGetQueryObjecti64vNVPROC) (jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glMulticastGetQueryObjectui64vNVPROC) (jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glMulticastGetQueryObjectivNVPROC) (jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glMulticastGetQueryObjectuivNVPROC) (jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glMulticastGetQueryObjecti64vNVPROC) (jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glMulticastGetQueryObjectui64vNVPROC) (jint, jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -29,15 +29,15 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_glRenderGpuMaskNV(JN
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_nglMulticastBufferSubDataNV__IIJJJ(JNIEnv *__env, jclass clazz, jint gpuMask, jint buffer, jlong offset, jlong size, jlong dataAddress) {
     glMulticastBufferSubDataNVPROC glMulticastBufferSubDataNV = (glMulticastBufferSubDataNVPROC)tlsGetFunction(1975);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
-    glMulticastBufferSubDataNV(gpuMask, buffer, (intptr_t)offset, (intptr_t)size, data);
+    glMulticastBufferSubDataNV(gpuMask, buffer, (uintptr_t)offset, (uintptr_t)size, data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_glMulticastCopyBufferSubDataNV(JNIEnv *__env, jclass clazz, jint readGpu, jint writeGpuMask, jint readBuffer, jint writeBuffer, jlong readOffset, jlong writeOffset, jlong size) {
     glMulticastCopyBufferSubDataNVPROC glMulticastCopyBufferSubDataNV = (glMulticastCopyBufferSubDataNVPROC)tlsGetFunction(1976);
     UNUSED_PARAM(clazz)
-    glMulticastCopyBufferSubDataNV(readGpu, writeGpuMask, readBuffer, writeBuffer, (intptr_t)readOffset, (intptr_t)writeOffset, (intptr_t)size);
+    glMulticastCopyBufferSubDataNV(readGpu, writeGpuMask, readBuffer, writeBuffer, (uintptr_t)readOffset, (uintptr_t)writeOffset, (uintptr_t)size);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_glMulticastCopyImageSubDataNV(JNIEnv *__env, jclass clazz, jint srcGpu, jint dstGpuMask, jint srcName, jint srcTarget, jint srcLevel, jint srcX, jint srxY, jint srcZ, jint dstName, jint dstTarget, jint dstLevel, jint dstX, jint dstY, jint dstZ, jint srcWidth, jint srcHeight, jint srcDepth) {
@@ -54,7 +54,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_glMulticastBlitFrame
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_nglMulticastFramebufferSampleLocationsfvNV__IIIIJ(JNIEnv *__env, jclass clazz, jint gpu, jint framebuffer, jint start, jint count, jlong vAddress) {
     glMulticastFramebufferSampleLocationsfvNVPROC glMulticastFramebufferSampleLocationsfvNV = (glMulticastFramebufferSampleLocationsfvNVPROC)tlsGetFunction(1979);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glMulticastFramebufferSampleLocationsfvNV(gpu, framebuffer, start, count, v);
 }
@@ -73,28 +73,28 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_glMulticastWaitSyncN
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_nglMulticastGetQueryObjectivNV__IIIJ(JNIEnv *__env, jclass clazz, jint gpu, jint id, jint pname, jlong paramsAddress) {
     glMulticastGetQueryObjectivNVPROC glMulticastGetQueryObjectivNV = (glMulticastGetQueryObjectivNVPROC)tlsGetFunction(1982);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glMulticastGetQueryObjectivNV(gpu, id, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_nglMulticastGetQueryObjectuivNV__IIIJ(JNIEnv *__env, jclass clazz, jint gpu, jint id, jint pname, jlong paramsAddress) {
     glMulticastGetQueryObjectuivNVPROC glMulticastGetQueryObjectuivNV = (glMulticastGetQueryObjectuivNVPROC)tlsGetFunction(1983);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glMulticastGetQueryObjectuivNV(gpu, id, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_nglMulticastGetQueryObjecti64vNV__IIIJ(JNIEnv *__env, jclass clazz, jint gpu, jint id, jint pname, jlong paramsAddress) {
     glMulticastGetQueryObjecti64vNVPROC glMulticastGetQueryObjecti64vNV = (glMulticastGetQueryObjecti64vNVPROC)tlsGetFunction(1984);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glMulticastGetQueryObjecti64vNV(gpu, id, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVGPUMulticast_nglMulticastGetQueryObjectui64vNV__IIIJ(JNIEnv *__env, jclass clazz, jint gpu, jint id, jint pname, jlong paramsAddress) {
     glMulticastGetQueryObjectui64vNVPROC glMulticastGetQueryObjectui64vNV = (glMulticastGetQueryObjectui64vNVPROC)tlsGetFunction(1985);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glMulticastGetQueryObjectui64vNV(gpu, id, pname, params);
 }

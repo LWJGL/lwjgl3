@@ -43,7 +43,7 @@ class ReturnValue private constructor(override val nativeType: NativeType) : Qua
             nativeType.name
         } else {
             if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType<*>)
-                "intptr_t"
+                "uintptr_t"
             else
                 nativeType.jniFunctionType
         }
@@ -109,7 +109,7 @@ class Parameter(
                 if (pointerMode && nativeType is StructType) "$it *" else it
             }
         else if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType<*>)
-            "intptr_t"
+            "uintptr_t"
         else
             nativeType.jniFunctionType
 

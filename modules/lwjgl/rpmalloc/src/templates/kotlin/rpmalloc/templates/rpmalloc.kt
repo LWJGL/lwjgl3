@@ -57,7 +57,7 @@ ENABLE_WARNINGS()""")
         "free",
         "aligned_alloc"
     ).forEach {
-        Code(nativeCall = "${t}return (jlong)(intptr_t)&rp$it;")..internal..opaque_p("${it}_address", "The #$it() function address.", void())
+        Code(nativeCall = "${t}return (jlong)(uintptr_t)&rp$it;")..internal..opaque_p("${it}_address", "The #$it() function address.", void())
     }
 
     intb("malloc_initialize", "Initializes allocator with default configuration.", void())

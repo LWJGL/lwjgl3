@@ -39,8 +39,8 @@ static void cbHandler(ffi_cif *cif, void *ret, void **args, void *user_data) {
     (*env)->CallVoidMethod(env,
         (jobject)user_data,
         javaCallback,
-        (jlong)(intptr_t)ret,
-        (jlong)(intptr_t)args
+        (jlong)(uintptr_t)ret,
+        (jlong)(uintptr_t)args
     );
 
     // Check for exception

@@ -7,8 +7,8 @@
 #include "opengl.h"
 
 typedef void (APIENTRY *glColorMaskIndexedEXTPROC) (jint, jboolean, jboolean, jboolean, jboolean);
-typedef void (APIENTRY *glGetBooleanIndexedvEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetIntegerIndexedvEXTPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetBooleanIndexedvEXTPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetIntegerIndexedvEXTPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glEnableIndexedEXTPROC) (jint, jint);
 typedef void (APIENTRY *glDisableIndexedEXTPROC) (jint, jint);
 typedef jboolean (APIENTRY *glIsEnabledIndexedEXTPROC) (jint, jint);
@@ -23,14 +23,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDrawBuffers2_glColorMaskIndexedE
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDrawBuffers2_nglGetBooleanIndexedvEXT(JNIEnv *__env, jclass clazz, jint target, jint index, jlong dataAddress) {
     glGetBooleanIndexedvEXTPROC glGetBooleanIndexedvEXT = (glGetBooleanIndexedvEXTPROC)tlsGetFunction(1596);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glGetBooleanIndexedvEXT(target, index, data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDrawBuffers2_nglGetIntegerIndexedvEXT__IIJ(JNIEnv *__env, jclass clazz, jint target, jint index, jlong dataAddress) {
     glGetIntegerIndexedvEXTPROC glGetIntegerIndexedvEXT = (glGetIntegerIndexedvEXTPROC)tlsGetFunction(1595);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glGetIntegerIndexedvEXT(target, index, data);
 }

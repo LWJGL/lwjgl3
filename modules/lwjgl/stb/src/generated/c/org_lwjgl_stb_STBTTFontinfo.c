@@ -17,7 +17,7 @@ ENABLE_WARNINGS()
 EXTERN_C_ENTER
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_stb_STBTTFontinfo_offsets(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
-    jint *buffer = (jint *)(intptr_t)bufferAddress;
+    jint *buffer = (jint *)(uintptr_t)bufferAddress;
 
     UNUSED_PARAMS(__env, clazz)
 

@@ -7,8 +7,8 @@
 #include "opengl.h"
 
 typedef void (APIENTRY *glBindTransformFeedbackNVPROC) (jint, jint);
-typedef void (APIENTRY *glDeleteTransformFeedbacksNVPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGenTransformFeedbacksNVPROC) (jint, intptr_t);
+typedef void (APIENTRY *glDeleteTransformFeedbacksNVPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGenTransformFeedbacksNVPROC) (jint, uintptr_t);
 typedef jboolean (APIENTRY *glIsTransformFeedbackNVPROC) (jint);
 typedef void (APIENTRY *glPauseTransformFeedbackNVPROC) (void);
 typedef void (APIENTRY *glResumeTransformFeedbackNVPROC) (void);
@@ -24,14 +24,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVTransformFeedback2_glBindTransfor
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVTransformFeedback2_nglDeleteTransformFeedbacksNV__IJ(JNIEnv *__env, jclass clazz, jint n, jlong idsAddress) {
     glDeleteTransformFeedbacksNVPROC glDeleteTransformFeedbacksNV = (glDeleteTransformFeedbacksNVPROC)tlsGetFunction(2169);
-    intptr_t ids = (intptr_t)idsAddress;
+    uintptr_t ids = (uintptr_t)idsAddress;
     UNUSED_PARAM(clazz)
     glDeleteTransformFeedbacksNV(n, ids);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVTransformFeedback2_nglGenTransformFeedbacksNV__IJ(JNIEnv *__env, jclass clazz, jint n, jlong idsAddress) {
     glGenTransformFeedbacksNVPROC glGenTransformFeedbacksNV = (glGenTransformFeedbacksNVPROC)tlsGetFunction(2170);
-    intptr_t ids = (intptr_t)idsAddress;
+    uintptr_t ids = (uintptr_t)idsAddress;
     UNUSED_PARAM(clazz)
     glGenTransformFeedbacksNV(n, ids);
 }

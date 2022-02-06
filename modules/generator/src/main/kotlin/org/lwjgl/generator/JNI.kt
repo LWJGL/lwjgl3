@@ -97,7 +97,7 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
 
     private val NativeType.nativeType
         get() = if (this.isPointer)
-            "intptr_t"
+            "uintptr_t"
         else if (this.mapping == PrimitiveMapping.CLONG)
             "long"
         else
@@ -134,10 +134,10 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
             print("((${it.returnType.nativeType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
             print(it.arguments.asSequence()
                 .joinToString(", ", prefix = "(", postfix = ")") { arg -> arg.nativeType })
-            print(")(intptr_t)$FUNCTION_ADDRESS)(")
+            print(")(uintptr_t)$FUNCTION_ADDRESS)(")
             print(it.arguments.asSequence()
                 .mapIndexed { i, param -> if (param.isPointer)
-                    "(intptr_t)param$i"
+                    "(uintptr_t)param$i"
                 else if (param.mapping === PrimitiveMapping.CLONG)
                     "(long)param$i"
                 else
@@ -170,12 +170,12 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
             print("((${it.returnType.nativeType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
             print(it.arguments.asSequence()
                 .joinToString(", ", prefix = "(", postfix = ")") { arg -> arg.nativeType })
-            print(")(intptr_t)$FUNCTION_ADDRESS)(")
+            print(")(uintptr_t)$FUNCTION_ADDRESS)(")
             print(it.arguments.asSequence()
                 .mapIndexed { i, param -> if (param is ArrayType<*>)
-                    "(intptr_t)paramArray$i"
+                    "(uintptr_t)paramArray$i"
                 else if (param.isPointer)
-                    "(intptr_t)param$i"
+                    "(uintptr_t)param$i"
                 else if (param.mapping === PrimitiveMapping.CLONG)
                     "(long)param$i"
                 else

@@ -6,20 +6,20 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glCreateStatesNVPROC) (jint, intptr_t);
-typedef void (APIENTRY *glDeleteStatesNVPROC) (jint, intptr_t);
+typedef void (APIENTRY *glCreateStatesNVPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glDeleteStatesNVPROC) (jint, uintptr_t);
 typedef jboolean (APIENTRY *glIsStateNVPROC) (jint);
 typedef void (APIENTRY *glStateCaptureNVPROC) (jint, jint);
 typedef jint (APIENTRY *glGetCommandHeaderNVPROC) (jint, jint);
 typedef jshort (APIENTRY *glGetStageIndexNVPROC) (jint);
-typedef void (APIENTRY *glDrawCommandsNVPROC) (jint, jint, intptr_t, intptr_t, jint);
-typedef void (APIENTRY *glDrawCommandsAddressNVPROC) (jint, intptr_t, intptr_t, jint);
-typedef void (APIENTRY *glDrawCommandsStatesNVPROC) (jint, intptr_t, intptr_t, intptr_t, intptr_t, jint);
-typedef void (APIENTRY *glDrawCommandsStatesAddressNVPROC) (intptr_t, intptr_t, intptr_t, intptr_t, jint);
-typedef void (APIENTRY *glCreateCommandListsNVPROC) (jint, intptr_t);
-typedef void (APIENTRY *glDeleteCommandListsNVPROC) (jint, intptr_t);
+typedef void (APIENTRY *glDrawCommandsNVPROC) (jint, jint, uintptr_t, uintptr_t, jint);
+typedef void (APIENTRY *glDrawCommandsAddressNVPROC) (jint, uintptr_t, uintptr_t, jint);
+typedef void (APIENTRY *glDrawCommandsStatesNVPROC) (jint, uintptr_t, uintptr_t, uintptr_t, uintptr_t, jint);
+typedef void (APIENTRY *glDrawCommandsStatesAddressNVPROC) (uintptr_t, uintptr_t, uintptr_t, uintptr_t, jint);
+typedef void (APIENTRY *glCreateCommandListsNVPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glDeleteCommandListsNVPROC) (jint, uintptr_t);
 typedef jboolean (APIENTRY *glIsCommandListNVPROC) (jint);
-typedef void (APIENTRY *glListDrawCommandsStatesClientNVPROC) (jint, jint, intptr_t, intptr_t, intptr_t, intptr_t, jint);
+typedef void (APIENTRY *glListDrawCommandsStatesClientNVPROC) (jint, jint, uintptr_t, uintptr_t, uintptr_t, uintptr_t, jint);
 typedef void (APIENTRY *glCommandListSegmentsNVPROC) (jint, jint);
 typedef void (APIENTRY *glCompileCommandListNVPROC) (jint);
 typedef void (APIENTRY *glCallCommandListNVPROC) (jint);
@@ -28,14 +28,14 @@ EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVCommandList_nglCreateStatesNV__IJ(JNIEnv *__env, jclass clazz, jint n, jlong statesAddress) {
     glCreateStatesNVPROC glCreateStatesNV = (glCreateStatesNVPROC)tlsGetFunction(1927);
-    intptr_t states = (intptr_t)statesAddress;
+    uintptr_t states = (uintptr_t)statesAddress;
     UNUSED_PARAM(clazz)
     glCreateStatesNV(n, states);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVCommandList_nglDeleteStatesNV__IJ(JNIEnv *__env, jclass clazz, jint n, jlong statesAddress) {
     glDeleteStatesNVPROC glDeleteStatesNV = (glDeleteStatesNVPROC)tlsGetFunction(1928);
-    intptr_t states = (intptr_t)statesAddress;
+    uintptr_t states = (uintptr_t)statesAddress;
     UNUSED_PARAM(clazz)
     glDeleteStatesNV(n, states);
 }
@@ -66,50 +66,50 @@ JNIEXPORT jshort JNICALL Java_org_lwjgl_opengl_NVCommandList_glGetStageIndexNV(J
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVCommandList_nglDrawCommandsNV__IIJJI(JNIEnv *__env, jclass clazz, jint primitiveMode, jint buffer, jlong indirectsAddress, jlong sizesAddress, jint count) {
     glDrawCommandsNVPROC glDrawCommandsNV = (glDrawCommandsNVPROC)tlsGetFunction(1933);
-    intptr_t indirects = (intptr_t)indirectsAddress;
-    intptr_t sizes = (intptr_t)sizesAddress;
+    uintptr_t indirects = (uintptr_t)indirectsAddress;
+    uintptr_t sizes = (uintptr_t)sizesAddress;
     UNUSED_PARAM(clazz)
     glDrawCommandsNV(primitiveMode, buffer, indirects, sizes, count);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVCommandList_nglDrawCommandsAddressNV__IJJI(JNIEnv *__env, jclass clazz, jint primitiveMode, jlong indirectsAddress, jlong sizesAddress, jint count) {
     glDrawCommandsAddressNVPROC glDrawCommandsAddressNV = (glDrawCommandsAddressNVPROC)tlsGetFunction(1934);
-    intptr_t indirects = (intptr_t)indirectsAddress;
-    intptr_t sizes = (intptr_t)sizesAddress;
+    uintptr_t indirects = (uintptr_t)indirectsAddress;
+    uintptr_t sizes = (uintptr_t)sizesAddress;
     UNUSED_PARAM(clazz)
     glDrawCommandsAddressNV(primitiveMode, indirects, sizes, count);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVCommandList_nglDrawCommandsStatesNV__IJJJJI(JNIEnv *__env, jclass clazz, jint buffer, jlong indirectsAddress, jlong sizesAddress, jlong statesAddress, jlong fbosAddress, jint count) {
     glDrawCommandsStatesNVPROC glDrawCommandsStatesNV = (glDrawCommandsStatesNVPROC)tlsGetFunction(1935);
-    intptr_t indirects = (intptr_t)indirectsAddress;
-    intptr_t sizes = (intptr_t)sizesAddress;
-    intptr_t states = (intptr_t)statesAddress;
-    intptr_t fbos = (intptr_t)fbosAddress;
+    uintptr_t indirects = (uintptr_t)indirectsAddress;
+    uintptr_t sizes = (uintptr_t)sizesAddress;
+    uintptr_t states = (uintptr_t)statesAddress;
+    uintptr_t fbos = (uintptr_t)fbosAddress;
     UNUSED_PARAM(clazz)
     glDrawCommandsStatesNV(buffer, indirects, sizes, states, fbos, count);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVCommandList_nglDrawCommandsStatesAddressNV__JJJJI(JNIEnv *__env, jclass clazz, jlong indirectsAddress, jlong sizesAddress, jlong statesAddress, jlong fbosAddress, jint count) {
     glDrawCommandsStatesAddressNVPROC glDrawCommandsStatesAddressNV = (glDrawCommandsStatesAddressNVPROC)tlsGetFunction(1936);
-    intptr_t indirects = (intptr_t)indirectsAddress;
-    intptr_t sizes = (intptr_t)sizesAddress;
-    intptr_t states = (intptr_t)statesAddress;
-    intptr_t fbos = (intptr_t)fbosAddress;
+    uintptr_t indirects = (uintptr_t)indirectsAddress;
+    uintptr_t sizes = (uintptr_t)sizesAddress;
+    uintptr_t states = (uintptr_t)statesAddress;
+    uintptr_t fbos = (uintptr_t)fbosAddress;
     UNUSED_PARAM(clazz)
     glDrawCommandsStatesAddressNV(indirects, sizes, states, fbos, count);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVCommandList_nglCreateCommandListsNV__IJ(JNIEnv *__env, jclass clazz, jint n, jlong listsAddress) {
     glCreateCommandListsNVPROC glCreateCommandListsNV = (glCreateCommandListsNVPROC)tlsGetFunction(1937);
-    intptr_t lists = (intptr_t)listsAddress;
+    uintptr_t lists = (uintptr_t)listsAddress;
     UNUSED_PARAM(clazz)
     glCreateCommandListsNV(n, lists);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVCommandList_nglDeleteCommandListsNV__IJ(JNIEnv *__env, jclass clazz, jint n, jlong listsAddress) {
     glDeleteCommandListsNVPROC glDeleteCommandListsNV = (glDeleteCommandListsNVPROC)tlsGetFunction(1938);
-    intptr_t lists = (intptr_t)listsAddress;
+    uintptr_t lists = (uintptr_t)listsAddress;
     UNUSED_PARAM(clazz)
     glDeleteCommandListsNV(n, lists);
 }
@@ -122,10 +122,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_NVCommandList_glIsCommandListNV
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVCommandList_nglListDrawCommandsStatesClientNV__IIJJJJI(JNIEnv *__env, jclass clazz, jint list, jint segment, jlong indirectsAddress, jlong sizesAddress, jlong statesAddress, jlong fbosAddress, jint count) {
     glListDrawCommandsStatesClientNVPROC glListDrawCommandsStatesClientNV = (glListDrawCommandsStatesClientNVPROC)tlsGetFunction(1940);
-    intptr_t indirects = (intptr_t)indirectsAddress;
-    intptr_t sizes = (intptr_t)sizesAddress;
-    intptr_t states = (intptr_t)statesAddress;
-    intptr_t fbos = (intptr_t)fbosAddress;
+    uintptr_t indirects = (uintptr_t)indirectsAddress;
+    uintptr_t sizes = (uintptr_t)sizesAddress;
+    uintptr_t states = (uintptr_t)statesAddress;
+    uintptr_t fbos = (uintptr_t)fbosAddress;
     UNUSED_PARAM(clazz)
     glListDrawCommandsStatesClientNV(list, segment, indirects, sizes, states, fbos, count);
 }

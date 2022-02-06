@@ -21,24 +21,24 @@ typedef void (APIENTRY *glDepthMaskPROC) (jboolean);
 typedef void (APIENTRY *glDepthRangePROC) (jdouble, jdouble);
 typedef void (APIENTRY *glDrawArraysPROC) (jint, jint, jint);
 typedef void (APIENTRY *glDrawBufferPROC) (jint);
-typedef void (APIENTRY *glDrawElementsPROC) (jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glDrawElementsPROC) (jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glFinishPROC) (void);
 typedef void (APIENTRY *glFlushPROC) (void);
 typedef void (APIENTRY *glFrontFacePROC) (jint);
-typedef void (APIENTRY *glGenTexturesPROC) (jint, intptr_t);
-typedef void (APIENTRY *glDeleteTexturesPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetBooleanvPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetFloatvPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetIntegervPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetDoublevPROC) (jint, intptr_t);
+typedef void (APIENTRY *glGenTexturesPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glDeleteTexturesPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetBooleanvPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetFloatvPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetIntegervPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetDoublevPROC) (jint, uintptr_t);
 typedef jint (APIENTRY *glGetErrorPROC) (void);
-typedef void (APIENTRY *glGetPointervPROC) (jint, intptr_t);
-typedef intptr_t (APIENTRY *glGetStringPROC) (jint);
-typedef void (APIENTRY *glGetTexImagePROC) (jint, jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glGetTexLevelParameterivPROC) (jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glGetTexLevelParameterfvPROC) (jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glGetTexParameterivPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetTexParameterfvPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetPointervPROC) (jint, uintptr_t);
+typedef uintptr_t (APIENTRY *glGetStringPROC) (jint);
+typedef void (APIENTRY *glGetTexImagePROC) (jint, jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetTexLevelParameterivPROC) (jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetTexLevelParameterfvPROC) (jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetTexParameterivPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetTexParameterfvPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glHintPROC) (jint, jint);
 typedef jboolean (APIENTRY *glIsEnabledPROC) (jint);
 typedef jboolean (APIENTRY *glIsTexturePROC) (jint);
@@ -50,23 +50,23 @@ typedef void (APIENTRY *glPointSizePROC) (jfloat);
 typedef void (APIENTRY *glPolygonModePROC) (jint, jint);
 typedef void (APIENTRY *glPolygonOffsetPROC) (jfloat, jfloat);
 typedef void (APIENTRY *glReadBufferPROC) (jint);
-typedef void (APIENTRY *glReadPixelsPROC) (jint, jint, jint, jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glReadPixelsPROC) (jint, jint, jint, jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glScissorPROC) (jint, jint, jint, jint);
 typedef void (APIENTRY *glStencilFuncPROC) (jint, jint, jint);
 typedef void (APIENTRY *glStencilMaskPROC) (jint);
 typedef void (APIENTRY *glStencilOpPROC) (jint, jint, jint);
-typedef void (APIENTRY *glTexImage1DPROC) (jint, jint, jint, jint, jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glTexImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glTexImage1DPROC) (jint, jint, jint, jint, jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glTexImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glCopyTexImage1DPROC) (jint, jint, jint, jint, jint, jint, jint);
 typedef void (APIENTRY *glCopyTexImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint);
 typedef void (APIENTRY *glCopyTexSubImage1DPROC) (jint, jint, jint, jint, jint, jint);
 typedef void (APIENTRY *glCopyTexSubImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint);
 typedef void (APIENTRY *glTexParameteriPROC) (jint, jint, jint);
-typedef void (APIENTRY *glTexParameterivPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glTexParameterivPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glTexParameterfPROC) (jint, jint, jfloat);
-typedef void (APIENTRY *glTexParameterfvPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glTexSubImage1DPROC) (jint, jint, jint, jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glTexSubImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glTexParameterfvPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glTexSubImage1DPROC) (jint, jint, jint, jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glTexSubImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glViewportPROC) (jint, jint, jint, jint);
 
 EXTERN_C_ENTER
@@ -163,7 +163,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_glDrawBuffer(JNIEnv *__env, j
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglDrawElements(JNIEnv *__env, jclass clazz, jint mode, jint count, jint type, jlong indicesAddress) {
     glDrawElementsPROC glDrawElements = (glDrawElementsPROC)tlsGetFunction(63);
-    intptr_t indices = (intptr_t)indicesAddress;
+    uintptr_t indices = (uintptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
     glDrawElements(mode, count, type, indices);
 }
@@ -188,42 +188,42 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_glFrontFace(JNIEnv *__env, jc
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGenTextures__IJ(JNIEnv *__env, jclass clazz, jint n, jlong texturesAddress) {
     glGenTexturesPROC glGenTextures = (glGenTexturesPROC)tlsGetFunction(91);
-    intptr_t textures = (intptr_t)texturesAddress;
+    uintptr_t textures = (uintptr_t)texturesAddress;
     UNUSED_PARAM(clazz)
     glGenTextures(n, textures);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglDeleteTextures__IJ(JNIEnv *__env, jclass clazz, jint n, jlong texturesAddress) {
     glDeleteTexturesPROC glDeleteTextures = (glDeleteTexturesPROC)tlsGetFunction(92);
-    intptr_t textures = (intptr_t)texturesAddress;
+    uintptr_t textures = (uintptr_t)texturesAddress;
     UNUSED_PARAM(clazz)
     glDeleteTextures(n, textures);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetBooleanv(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
     glGetBooleanvPROC glGetBooleanv = (glGetBooleanvPROC)tlsGetFunction(94);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetBooleanv(pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetFloatv__IJ(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
     glGetFloatvPROC glGetFloatv = (glGetFloatvPROC)tlsGetFunction(95);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetFloatv(pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetIntegerv__IJ(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
     glGetIntegervPROC glGetIntegerv = (glGetIntegervPROC)tlsGetFunction(96);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetIntegerv(pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetDoublev__IJ(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
     glGetDoublevPROC glGetDoublev = (glGetDoublevPROC)tlsGetFunction(97);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetDoublev(pname, params);
 }
@@ -236,7 +236,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL11C_glGetError(JNIEnv *__env, jcl
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetPointerv(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
     glGetPointervPROC glGetPointerv = (glGetPointervPROC)tlsGetFunction(109);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetPointerv(pname, params);
 }
@@ -249,35 +249,35 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_GL11C_nglGetString(JNIEnv *__env, 
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetTexImage__IIIIJ(JNIEnv *__env, jclass clazz, jint tex, jint level, jint format, jint type, jlong pixelsAddress) {
     glGetTexImagePROC glGetTexImage = (glGetTexImagePROC)tlsGetFunction(117);
-    intptr_t pixels = (intptr_t)pixelsAddress;
+    uintptr_t pixels = (uintptr_t)pixelsAddress;
     UNUSED_PARAM(clazz)
     glGetTexImage(tex, level, format, type, pixels);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetTexLevelParameteriv__IIIJ(JNIEnv *__env, jclass clazz, jint target, jint level, jint pname, jlong paramsAddress) {
     glGetTexLevelParameterivPROC glGetTexLevelParameteriv = (glGetTexLevelParameterivPROC)tlsGetFunction(118);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetTexLevelParameteriv(target, level, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetTexLevelParameterfv__IIIJ(JNIEnv *__env, jclass clazz, jint target, jint level, jint pname, jlong paramsAddress) {
     glGetTexLevelParameterfvPROC glGetTexLevelParameterfv = (glGetTexLevelParameterfvPROC)tlsGetFunction(119);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetTexLevelParameterfv(target, level, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetTexParameteriv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetTexParameterivPROC glGetTexParameteriv = (glGetTexParameterivPROC)tlsGetFunction(120);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetTexParameteriv(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetTexParameterfv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetTexParameterfvPROC glGetTexParameterfv = (glGetTexParameterfvPROC)tlsGetFunction(121);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetTexParameterfv(target, pname, params);
 }
@@ -350,7 +350,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_glReadBuffer(JNIEnv *__env, j
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglReadPixels__IIIIIIJ(JNIEnv *__env, jclass clazz, jint x, jint y, jint width, jint height, jint format, jint type, jlong pixelsAddress) {
     glReadPixelsPROC glReadPixels = (glReadPixelsPROC)tlsGetFunction(233);
-    intptr_t pixels = (intptr_t)pixelsAddress;
+    uintptr_t pixels = (uintptr_t)pixelsAddress;
     UNUSED_PARAM(clazz)
     glReadPixels(x, y, width, height, format, type, pixels);
 }
@@ -381,14 +381,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_glStencilOp(JNIEnv *__env, jc
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglTexImage1D__IIIIIIIJ(JNIEnv *__env, jclass clazz, jint target, jint level, jint internalformat, jint width, jint border, jint format, jint type, jlong pixelsAddress) {
     glTexImage1DPROC glTexImage1D = (glTexImage1DPROC)tlsGetFunction(296);
-    intptr_t pixels = (intptr_t)pixelsAddress;
+    uintptr_t pixels = (uintptr_t)pixelsAddress;
     UNUSED_PARAM(clazz)
     glTexImage1D(target, level, internalformat, width, border, format, type, pixels);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglTexImage2D__IIIIIIIIJ(JNIEnv *__env, jclass clazz, jint target, jint level, jint internalformat, jint width, jint height, jint border, jint format, jint type, jlong pixelsAddress) {
     glTexImage2DPROC glTexImage2D = (glTexImage2DPROC)tlsGetFunction(297);
-    intptr_t pixels = (intptr_t)pixelsAddress;
+    uintptr_t pixels = (uintptr_t)pixelsAddress;
     UNUSED_PARAM(clazz)
     glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
 }
@@ -425,7 +425,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_glTexParameteri(JNIEnv *__env
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglTexParameteriv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glTexParameterivPROC glTexParameteriv = (glTexParameterivPROC)tlsGetFunction(303);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glTexParameteriv(target, pname, params);
 }
@@ -438,21 +438,21 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_glTexParameterf(JNIEnv *__env
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglTexParameterfv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glTexParameterfvPROC glTexParameterfv = (glTexParameterfvPROC)tlsGetFunction(305);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glTexParameterfv(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglTexSubImage1D__IIIIIIJ(JNIEnv *__env, jclass clazz, jint target, jint level, jint xoffset, jint width, jint format, jint type, jlong pixelsAddress) {
     glTexSubImage1DPROC glTexSubImage1D = (glTexSubImage1DPROC)tlsGetFunction(306);
-    intptr_t pixels = (intptr_t)pixelsAddress;
+    uintptr_t pixels = (uintptr_t)pixelsAddress;
     UNUSED_PARAM(clazz)
     glTexSubImage1D(target, level, xoffset, width, format, type, pixels);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglTexSubImage2D__IIIIIIIIJ(JNIEnv *__env, jclass clazz, jint target, jint level, jint xoffset, jint yoffset, jint width, jint height, jint format, jint type, jlong pixelsAddress) {
     glTexSubImage2DPROC glTexSubImage2D = (glTexSubImage2DPROC)tlsGetFunction(307);
-    intptr_t pixels = (intptr_t)pixelsAddress;
+    uintptr_t pixels = (uintptr_t)pixelsAddress;
     UNUSED_PARAM(clazz)
     glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels);
 }

@@ -6,43 +6,43 @@
 #include "common_tools.h"
 #include "opengles.h"
 
-typedef void (APIENTRY *glGetUnsignedBytevEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetUnsignedBytei_vEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glDeleteMemoryObjectsEXTPROC) (jint, intptr_t);
+typedef void (APIENTRY *glGetUnsignedBytevEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetUnsignedBytei_vEXTPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glDeleteMemoryObjectsEXTPROC) (jint, uintptr_t);
 typedef jboolean (APIENTRY *glIsMemoryObjectEXTPROC) (jint);
-typedef void (APIENTRY *glCreateMemoryObjectsEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glMemoryObjectParameterivEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetMemoryObjectParameterivEXTPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glCreateMemoryObjectsEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glMemoryObjectParameterivEXTPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetMemoryObjectParameterivEXTPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glTexStorageMem2DEXTPROC) (jint, jint, jint, jint, jint, jint, jlong);
 typedef void (APIENTRY *glTexStorageMem2DMultisampleEXTPROC) (jint, jint, jint, jint, jint, jboolean, jint, jlong);
 typedef void (APIENTRY *glTexStorageMem3DEXTPROC) (jint, jint, jint, jint, jint, jint, jint, jlong);
 typedef void (APIENTRY *glTexStorageMem3DMultisampleEXTPROC) (jint, jint, jint, jint, jint, jint, jboolean, jint, jlong);
-typedef void (APIENTRY *glBufferStorageMemEXTPROC) (jint, intptr_t, jint, jlong);
+typedef void (APIENTRY *glBufferStorageMemEXTPROC) (jint, uintptr_t, jint, jlong);
 typedef void (APIENTRY *glTextureStorageMem2DEXTPROC) (jint, jint, jint, jint, jint, jint, jlong);
 typedef void (APIENTRY *glTextureStorageMem2DMultisampleEXTPROC) (jint, jint, jint, jint, jint, jboolean, jint, jlong);
 typedef void (APIENTRY *glTextureStorageMem3DEXTPROC) (jint, jint, jint, jint, jint, jint, jint, jlong);
 typedef void (APIENTRY *glTextureStorageMem3DMultisampleEXTPROC) (jint, jint, jint, jint, jint, jint, jboolean, jint, jlong);
-typedef void (APIENTRY *glNamedBufferStorageMemEXTPROC) (jint, intptr_t, jint, jlong);
+typedef void (APIENTRY *glNamedBufferStorageMemEXTPROC) (jint, uintptr_t, jint, jlong);
 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_nglGetUnsignedBytevEXT(JNIEnv *__env, jclass clazz, jint pname, jlong dataAddress) {
     glGetUnsignedBytevEXTPROC glGetUnsignedBytevEXT = (glGetUnsignedBytevEXTPROC)tlsGetFunction(443);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glGetUnsignedBytevEXT(pname, data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_nglGetUnsignedBytei_1vEXT(JNIEnv *__env, jclass clazz, jint target, jint index, jlong dataAddress) {
     glGetUnsignedBytei_vEXTPROC glGetUnsignedBytei_vEXT = (glGetUnsignedBytei_vEXTPROC)tlsGetFunction(444);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glGetUnsignedBytei_vEXT(target, index, data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_nglDeleteMemoryObjectsEXT__IJ(JNIEnv *__env, jclass clazz, jint n, jlong memoryObjectsAddress) {
     glDeleteMemoryObjectsEXTPROC glDeleteMemoryObjectsEXT = (glDeleteMemoryObjectsEXTPROC)tlsGetFunction(445);
-    intptr_t memoryObjects = (intptr_t)memoryObjectsAddress;
+    uintptr_t memoryObjects = (uintptr_t)memoryObjectsAddress;
     UNUSED_PARAM(clazz)
     glDeleteMemoryObjectsEXT(n, memoryObjects);
 }
@@ -55,21 +55,21 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_glIsMemoryObj
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_nglCreateMemoryObjectsEXT__IJ(JNIEnv *__env, jclass clazz, jint n, jlong memoryObjectsAddress) {
     glCreateMemoryObjectsEXTPROC glCreateMemoryObjectsEXT = (glCreateMemoryObjectsEXTPROC)tlsGetFunction(447);
-    intptr_t memoryObjects = (intptr_t)memoryObjectsAddress;
+    uintptr_t memoryObjects = (uintptr_t)memoryObjectsAddress;
     UNUSED_PARAM(clazz)
     glCreateMemoryObjectsEXT(n, memoryObjects);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_nglMemoryObjectParameterivEXT__IIJ(JNIEnv *__env, jclass clazz, jint memoryObject, jint pname, jlong paramsAddress) {
     glMemoryObjectParameterivEXTPROC glMemoryObjectParameterivEXT = (glMemoryObjectParameterivEXTPROC)tlsGetFunction(448);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glMemoryObjectParameterivEXT(memoryObject, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_nglGetMemoryObjectParameterivEXT__IIJ(JNIEnv *__env, jclass clazz, jint memoryObject, jint pname, jlong paramsAddress) {
     glGetMemoryObjectParameterivEXTPROC glGetMemoryObjectParameterivEXT = (glGetMemoryObjectParameterivEXTPROC)tlsGetFunction(449);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetMemoryObjectParameterivEXT(memoryObject, pname, params);
 }
@@ -101,7 +101,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_glTexStorageMem3D
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_glBufferStorageMemEXT(JNIEnv *__env, jclass clazz, jint target, jlong size, jint memory, jlong offset) {
     glBufferStorageMemEXTPROC glBufferStorageMemEXT = (glBufferStorageMemEXTPROC)tlsGetFunction(454);
     UNUSED_PARAM(clazz)
-    glBufferStorageMemEXT(target, (intptr_t)size, memory, offset);
+    glBufferStorageMemEXT(target, (uintptr_t)size, memory, offset);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_glTextureStorageMem2DEXT(JNIEnv *__env, jclass clazz, jint texture, jint levels, jint internalFormat, jint width, jint height, jint memory, jlong offset) {
@@ -131,7 +131,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_glTextureStorageM
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTMemoryObject_glNamedBufferStorageMemEXT(JNIEnv *__env, jclass clazz, jint buffer, jlong size, jint memory, jlong offset) {
     glNamedBufferStorageMemEXTPROC glNamedBufferStorageMemEXT = (glNamedBufferStorageMemEXTPROC)tlsGetFunction(459);
     UNUSED_PARAM(clazz)
-    glNamedBufferStorageMemEXT(buffer, (intptr_t)size, memory, offset);
+    glNamedBufferStorageMemEXT(buffer, (uintptr_t)size, memory, offset);
 }
 
 EXTERN_C_EXIT

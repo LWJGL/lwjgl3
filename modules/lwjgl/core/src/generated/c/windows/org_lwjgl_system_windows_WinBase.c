@@ -20,17 +20,17 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_WinBase_getLastError(JNIEnv
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_windows_WinBase_nGetModuleHandle(JNIEnv *__env, jclass clazz, jlong moduleNameAddress) {
-    LPCTSTR moduleName = (LPCTSTR)(intptr_t)moduleNameAddress;
+    LPCTSTR moduleName = (LPCTSTR)(uintptr_t)moduleNameAddress;
     jlong __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jlong)(intptr_t)GetModuleHandle(moduleName);
+    __result = (jlong)(uintptr_t)GetModuleHandle(moduleName);
     saveLastError();
     return __result;
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_WinBase_nGetModuleFileName(JNIEnv *__env, jclass clazz, jlong hModuleAddress, jlong lpFilenameAddress, jint nSize) {
-    HMODULE hModule = (HMODULE)(intptr_t)hModuleAddress;
-    LPTSTR lpFilename = (LPTSTR)(intptr_t)lpFilenameAddress;
+    HMODULE hModule = (HMODULE)(uintptr_t)hModuleAddress;
+    LPTSTR lpFilename = (LPTSTR)(uintptr_t)lpFilenameAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jint)GetModuleFileName(hModule, lpFilename, (DWORD)nSize);
@@ -39,26 +39,26 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_WinBase_nGetModuleFileName(
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_windows_WinBase_nLoadLibrary(JNIEnv *__env, jclass clazz, jlong nameAddress) {
-    LPCTSTR name = (LPCTSTR)(intptr_t)nameAddress;
+    LPCTSTR name = (LPCTSTR)(uintptr_t)nameAddress;
     jlong __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jlong)(intptr_t)LoadLibrary(name);
+    __result = (jlong)(uintptr_t)LoadLibrary(name);
     saveLastError();
     return __result;
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_windows_WinBase_nGetProcAddress(JNIEnv *__env, jclass clazz, jlong handleAddress, jlong nameAddress) {
-    HMODULE handle = (HMODULE)(intptr_t)handleAddress;
-    LPCSTR name = (LPCSTR)(intptr_t)nameAddress;
+    HMODULE handle = (HMODULE)(uintptr_t)handleAddress;
+    LPCSTR name = (LPCSTR)(uintptr_t)nameAddress;
     jlong __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jlong)(intptr_t)GetProcAddress(handle, name);
+    __result = (jlong)(uintptr_t)GetProcAddress(handle, name);
     saveLastError();
     return __result;
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_WinBase_nFreeLibrary(JNIEnv *__env, jclass clazz, jlong handleAddress) {
-    HMODULE handle = (HMODULE)(intptr_t)handleAddress;
+    HMODULE handle = (HMODULE)(uintptr_t)handleAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jint)FreeLibrary(handle);

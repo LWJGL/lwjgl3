@@ -6,14 +6,14 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef intptr_t (APIENTRY *glCreateSyncFromCLeventARBPROC) (intptr_t, intptr_t, jint);
+typedef uintptr_t (APIENTRY *glCreateSyncFromCLeventARBPROC) (uintptr_t, uintptr_t, jint);
 
 EXTERN_C_ENTER
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_ARBCLEvent_nglCreateSyncFromCLeventARB(JNIEnv *__env, jclass clazz, jlong contextAddress, jlong eventAddress, jint flags) {
     glCreateSyncFromCLeventARBPROC glCreateSyncFromCLeventARB = (glCreateSyncFromCLeventARBPROC)tlsGetFunction(1128);
-    intptr_t context = (intptr_t)contextAddress;
-    intptr_t event = (intptr_t)eventAddress;
+    uintptr_t context = (uintptr_t)contextAddress;
+    uintptr_t event = (uintptr_t)eventAddress;
     UNUSED_PARAM(clazz)
     return (jlong)glCreateSyncFromCLeventARB(context, event, flags);
 }

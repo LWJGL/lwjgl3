@@ -6,7 +6,7 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glGetMemoryObjectDetachedResourcesuivNVPROC) (jint, jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glGetMemoryObjectDetachedResourcesuivNVPROC) (jint, jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glResetMemoryObjectParameterNVPROC) (jint, jint);
 typedef void (APIENTRY *glTexAttachMemoryNVPROC) (jint, jint, jlong);
 typedef void (APIENTRY *glBufferAttachMemoryNVPROC) (jint, jint, jlong);
@@ -17,7 +17,7 @@ EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMemoryAttachment_nglGetMemoryObjectDetachedResourcesuivNV__IIIIJ(JNIEnv *__env, jclass clazz, jint memory, jint pname, jint first, jint count, jlong paramsAddress) {
     glGetMemoryObjectDetachedResourcesuivNVPROC glGetMemoryObjectDetachedResourcesuivNV = (glGetMemoryObjectDetachedResourcesuivNVPROC)tlsGetFunction(2033);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetMemoryObjectDetachedResourcesuivNV(memory, pname, first, count, params);
 }

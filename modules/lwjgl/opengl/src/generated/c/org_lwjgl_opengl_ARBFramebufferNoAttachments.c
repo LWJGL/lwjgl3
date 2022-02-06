@@ -7,7 +7,7 @@
 #include "opengl.h"
 
 typedef void (APIENTRY *glNamedFramebufferParameteriEXTPROC) (jint, jint, jint);
-typedef void (APIENTRY *glGetNamedFramebufferParameterivEXTPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetNamedFramebufferParameterivEXTPROC) (jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -19,7 +19,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBFramebufferNoAttachments_glNamed
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBFramebufferNoAttachments_nglGetNamedFramebufferParameterivEXT__IIJ(JNIEnv *__env, jclass clazz, jint framebuffer, jint pname, jlong paramsAddress) {
     glGetNamedFramebufferParameterivEXTPROC glGetNamedFramebufferParameterivEXT = (glGetNamedFramebufferParameterivEXTPROC)tlsGetFunction(1146);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetNamedFramebufferParameterivEXT(framebuffer, pname, params);
 }

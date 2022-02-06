@@ -14,32 +14,32 @@ typedef void (APIENTRY *glVertexAttribI1uiEXTPROC) (jint, jint);
 typedef void (APIENTRY *glVertexAttribI2uiEXTPROC) (jint, jint, jint);
 typedef void (APIENTRY *glVertexAttribI3uiEXTPROC) (jint, jint, jint, jint);
 typedef void (APIENTRY *glVertexAttribI4uiEXTPROC) (jint, jint, jint, jint, jint);
-typedef void (APIENTRY *glVertexAttribI1ivEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI2ivEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI3ivEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI4ivEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI1uivEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI2uivEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI3uivEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI4uivEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI4bvEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI4svEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI4ubvEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribI4usvEXTPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribIPointerEXTPROC) (jint, jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glGetVertexAttribIivEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetVertexAttribIuivEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetUniformuivEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glBindFragDataLocationEXTPROC) (jint, jint, intptr_t);
-typedef jint (APIENTRY *glGetFragDataLocationEXTPROC) (jint, intptr_t);
+typedef void (APIENTRY *glVertexAttribI1ivEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI2ivEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI3ivEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI4ivEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI1uivEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI2uivEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI3uivEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI4uivEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI4bvEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI4svEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI4ubvEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribI4usvEXTPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribIPointerEXTPROC) (jint, jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetVertexAttribIivEXTPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetVertexAttribIuivEXTPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetUniformuivEXTPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glBindFragDataLocationEXTPROC) (jint, jint, uintptr_t);
+typedef jint (APIENTRY *glGetFragDataLocationEXTPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glUniform1uiEXTPROC) (jint, jint);
 typedef void (APIENTRY *glUniform2uiEXTPROC) (jint, jint, jint);
 typedef void (APIENTRY *glUniform3uiEXTPROC) (jint, jint, jint, jint);
 typedef void (APIENTRY *glUniform4uiEXTPROC) (jint, jint, jint, jint, jint);
-typedef void (APIENTRY *glUniform1uivEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniform2uivEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniform3uivEXTPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniform4uivEXTPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniform1uivEXTPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniform2uivEXTPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniform3uivEXTPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniform4uivEXTPROC) (jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -93,126 +93,126 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_glVertexAttribI4uiEXT
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI1ivEXT__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI1ivEXTPROC glVertexAttribI1ivEXT = (glVertexAttribI1ivEXTPROC)tlsGetFunction(1765);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI1ivEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI2ivEXT__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI2ivEXTPROC glVertexAttribI2ivEXT = (glVertexAttribI2ivEXTPROC)tlsGetFunction(1766);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI2ivEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI3ivEXT__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI3ivEXTPROC glVertexAttribI3ivEXT = (glVertexAttribI3ivEXTPROC)tlsGetFunction(1767);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI3ivEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI4ivEXT__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI4ivEXTPROC glVertexAttribI4ivEXT = (glVertexAttribI4ivEXTPROC)tlsGetFunction(1768);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI4ivEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI1uivEXT__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI1uivEXTPROC glVertexAttribI1uivEXT = (glVertexAttribI1uivEXTPROC)tlsGetFunction(1769);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI1uivEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI2uivEXT__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI2uivEXTPROC glVertexAttribI2uivEXT = (glVertexAttribI2uivEXTPROC)tlsGetFunction(1770);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI2uivEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI3uivEXT__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI3uivEXTPROC glVertexAttribI3uivEXT = (glVertexAttribI3uivEXTPROC)tlsGetFunction(1771);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI3uivEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI4uivEXT__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI4uivEXTPROC glVertexAttribI4uivEXT = (glVertexAttribI4uivEXTPROC)tlsGetFunction(1772);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI4uivEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI4bvEXT(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI4bvEXTPROC glVertexAttribI4bvEXT = (glVertexAttribI4bvEXTPROC)tlsGetFunction(1773);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI4bvEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI4svEXT__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI4svEXTPROC glVertexAttribI4svEXT = (glVertexAttribI4svEXTPROC)tlsGetFunction(1774);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI4svEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI4ubvEXT(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI4ubvEXTPROC glVertexAttribI4ubvEXT = (glVertexAttribI4ubvEXTPROC)tlsGetFunction(1775);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI4ubvEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribI4usvEXT__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribI4usvEXTPROC glVertexAttribI4usvEXT = (glVertexAttribI4usvEXTPROC)tlsGetFunction(1776);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribI4usvEXT(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglVertexAttribIPointerEXT__IIIIJ(JNIEnv *__env, jclass clazz, jint index, jint size, jint type, jint stride, jlong pointerAddress) {
     glVertexAttribIPointerEXTPROC glVertexAttribIPointerEXT = (glVertexAttribIPointerEXTPROC)tlsGetFunction(1777);
-    intptr_t pointer = (intptr_t)pointerAddress;
+    uintptr_t pointer = (uintptr_t)pointerAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribIPointerEXT(index, size, type, stride, pointer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglGetVertexAttribIivEXT__IIJ(JNIEnv *__env, jclass clazz, jint index, jint pname, jlong paramsAddress) {
     glGetVertexAttribIivEXTPROC glGetVertexAttribIivEXT = (glGetVertexAttribIivEXTPROC)tlsGetFunction(1778);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetVertexAttribIivEXT(index, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglGetVertexAttribIuivEXT__IIJ(JNIEnv *__env, jclass clazz, jint index, jint pname, jlong paramsAddress) {
     glGetVertexAttribIuivEXTPROC glGetVertexAttribIuivEXT = (glGetVertexAttribIuivEXTPROC)tlsGetFunction(1779);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetVertexAttribIuivEXT(index, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglGetUniformuivEXT__IIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jlong paramsAddress) {
     glGetUniformuivEXTPROC glGetUniformuivEXT = (glGetUniformuivEXTPROC)tlsGetFunction(1780);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetUniformuivEXT(program, location, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglBindFragDataLocationEXT(JNIEnv *__env, jclass clazz, jint program, jint color, jlong nameAddress) {
     glBindFragDataLocationEXTPROC glBindFragDataLocationEXT = (glBindFragDataLocationEXTPROC)tlsGetFunction(1781);
-    intptr_t name = (intptr_t)nameAddress;
+    uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     glBindFragDataLocationEXT(program, color, name);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglGetFragDataLocationEXT(JNIEnv *__env, jclass clazz, jint program, jlong nameAddress) {
     glGetFragDataLocationEXTPROC glGetFragDataLocationEXT = (glGetFragDataLocationEXTPROC)tlsGetFunction(1782);
-    intptr_t name = (intptr_t)nameAddress;
+    uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     return (jint)glGetFragDataLocationEXT(program, name);
 }
@@ -243,28 +243,28 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_glUniform4uiEXT(JNIEn
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglUniform1uivEXT__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform1uivEXTPROC glUniform1uivEXT = (glUniform1uivEXTPROC)tlsGetFunction(1787);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform1uivEXT(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglUniform2uivEXT__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform2uivEXTPROC glUniform2uivEXT = (glUniform2uivEXTPROC)tlsGetFunction(1788);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform2uivEXT(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglUniform3uivEXT__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform3uivEXTPROC glUniform3uivEXT = (glUniform3uivEXTPROC)tlsGetFunction(1789);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform3uivEXT(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglUniform4uivEXT__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform4uivEXTPROC glUniform4uivEXT = (glUniform4uivEXTPROC)tlsGetFunction(1790);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform4uivEXT(location, count, value);
 }

@@ -24,9 +24,9 @@ typedef HmdColor_t (APIENTRY *VRCompositor_GetCurrentFadeColorPROC) (jboolean);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_openvr_VRCompositor_nVRCompositor_1GetCurrentFadeColor(JNIEnv *__env, jclass clazz, jboolean bBackground, jlong __functionAddress, jlong __result) {
-    VRCompositor_GetCurrentFadeColorPROC VRCompositor_GetCurrentFadeColor = (VRCompositor_GetCurrentFadeColorPROC)(intptr_t)__functionAddress;
+    VRCompositor_GetCurrentFadeColorPROC VRCompositor_GetCurrentFadeColor = (VRCompositor_GetCurrentFadeColorPROC)(uintptr_t)__functionAddress;
     UNUSED_PARAMS(__env, clazz)
-    *((HmdColor_t*)(intptr_t)__result) = VRCompositor_GetCurrentFadeColor(bBackground);
+    *((HmdColor_t*)(uintptr_t)__result) = VRCompositor_GetCurrentFadeColor(bBackground);
 }
 
 EXTERN_C_EXIT

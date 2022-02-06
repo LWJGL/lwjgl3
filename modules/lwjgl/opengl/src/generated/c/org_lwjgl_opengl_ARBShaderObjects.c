@@ -10,7 +10,7 @@ typedef void (APIENTRY *glDeleteObjectARBPROC) (jint);
 typedef jint (APIENTRY *glGetHandleARBPROC) (jint);
 typedef void (APIENTRY *glDetachObjectARBPROC) (jint, jint);
 typedef jint (APIENTRY *glCreateShaderObjectARBPROC) (jint);
-typedef void (APIENTRY *glShaderSourceARBPROC) (jint, jint, intptr_t, intptr_t);
+typedef void (APIENTRY *glShaderSourceARBPROC) (jint, jint, uintptr_t, uintptr_t);
 typedef void (APIENTRY *glCompileShaderARBPROC) (jint);
 typedef jint (APIENTRY *glCreateProgramObjectARBPROC) (void);
 typedef void (APIENTRY *glAttachObjectARBPROC) (jint, jint);
@@ -25,26 +25,26 @@ typedef void (APIENTRY *glUniform1iARBPROC) (jint, jint);
 typedef void (APIENTRY *glUniform2iARBPROC) (jint, jint, jint);
 typedef void (APIENTRY *glUniform3iARBPROC) (jint, jint, jint, jint);
 typedef void (APIENTRY *glUniform4iARBPROC) (jint, jint, jint, jint, jint);
-typedef void (APIENTRY *glUniform1fvARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniform2fvARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniform3fvARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniform4fvARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniform1ivARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniform2ivARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniform3ivARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniform4ivARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniformMatrix2fvARBPROC) (jint, jint, jboolean, intptr_t);
-typedef void (APIENTRY *glUniformMatrix3fvARBPROC) (jint, jint, jboolean, intptr_t);
-typedef void (APIENTRY *glUniformMatrix4fvARBPROC) (jint, jint, jboolean, intptr_t);
-typedef void (APIENTRY *glGetObjectParameterfvARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetObjectParameterivARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetInfoLogARBPROC) (jint, jint, intptr_t, intptr_t);
-typedef void (APIENTRY *glGetAttachedObjectsARBPROC) (jint, jint, intptr_t, intptr_t);
-typedef jint (APIENTRY *glGetUniformLocationARBPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetActiveUniformARBPROC) (jint, jint, jint, intptr_t, intptr_t, intptr_t, intptr_t);
-typedef void (APIENTRY *glGetUniformfvARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetUniformivARBPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetShaderSourceARBPROC) (jint, jint, intptr_t, intptr_t);
+typedef void (APIENTRY *glUniform1fvARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniform2fvARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniform3fvARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniform4fvARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniform1ivARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniform2ivARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniform3ivARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniform4ivARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniformMatrix2fvARBPROC) (jint, jint, jboolean, uintptr_t);
+typedef void (APIENTRY *glUniformMatrix3fvARBPROC) (jint, jint, jboolean, uintptr_t);
+typedef void (APIENTRY *glUniformMatrix4fvARBPROC) (jint, jint, jboolean, uintptr_t);
+typedef void (APIENTRY *glGetObjectParameterfvARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetObjectParameterivARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetInfoLogARBPROC) (jint, jint, uintptr_t, uintptr_t);
+typedef void (APIENTRY *glGetAttachedObjectsARBPROC) (jint, jint, uintptr_t, uintptr_t);
+typedef jint (APIENTRY *glGetUniformLocationARBPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetActiveUniformARBPROC) (jint, jint, jint, uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+typedef void (APIENTRY *glGetUniformfvARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetUniformivARBPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetShaderSourceARBPROC) (jint, jint, uintptr_t, uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -74,8 +74,8 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_glCreateShaderObje
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglShaderSourceARB__IIJJ(JNIEnv *__env, jclass clazz, jint shaderObj, jint count, jlong stringAddress, jlong lengthAddress) {
     glShaderSourceARBPROC glShaderSourceARB = (glShaderSourceARBPROC)tlsGetFunction(1320);
-    intptr_t string = (intptr_t)stringAddress;
-    intptr_t length = (intptr_t)lengthAddress;
+    uintptr_t string = (uintptr_t)stringAddress;
+    uintptr_t length = (uintptr_t)lengthAddress;
     UNUSED_PARAM(clazz)
     glShaderSourceARB(shaderObj, count, string, length);
 }
@@ -166,146 +166,146 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_glUniform4iARB(JNI
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniform1fvARB__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform1fvARBPROC glUniform1fvARB = (glUniform1fvARBPROC)tlsGetFunction(1335);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform1fvARB(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniform2fvARB__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform2fvARBPROC glUniform2fvARB = (glUniform2fvARBPROC)tlsGetFunction(1336);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform2fvARB(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniform3fvARB__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform3fvARBPROC glUniform3fvARB = (glUniform3fvARBPROC)tlsGetFunction(1337);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform3fvARB(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniform4fvARB__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform4fvARBPROC glUniform4fvARB = (glUniform4fvARBPROC)tlsGetFunction(1338);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform4fvARB(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniform1ivARB__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform1ivARBPROC glUniform1ivARB = (glUniform1ivARBPROC)tlsGetFunction(1339);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform1ivARB(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniform2ivARB__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform2ivARBPROC glUniform2ivARB = (glUniform2ivARBPROC)tlsGetFunction(1340);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform2ivARB(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniform3ivARB__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform3ivARBPROC glUniform3ivARB = (glUniform3ivARBPROC)tlsGetFunction(1341);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform3ivARB(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniform4ivARB__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform4ivARBPROC glUniform4ivARB = (glUniform4ivARBPROC)tlsGetFunction(1342);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform4ivARB(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniformMatrix2fvARB__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
     glUniformMatrix2fvARBPROC glUniformMatrix2fvARB = (glUniformMatrix2fvARBPROC)tlsGetFunction(1343);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix2fvARB(location, count, transpose, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniformMatrix3fvARB__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
     glUniformMatrix3fvARBPROC glUniformMatrix3fvARB = (glUniformMatrix3fvARBPROC)tlsGetFunction(1344);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix3fvARB(location, count, transpose, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglUniformMatrix4fvARB__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
     glUniformMatrix4fvARBPROC glUniformMatrix4fvARB = (glUniformMatrix4fvARBPROC)tlsGetFunction(1345);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix4fvARB(location, count, transpose, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglGetObjectParameterfvARB__IIJ(JNIEnv *__env, jclass clazz, jint obj, jint pname, jlong paramsAddress) {
     glGetObjectParameterfvARBPROC glGetObjectParameterfvARB = (glGetObjectParameterfvARBPROC)tlsGetFunction(1346);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetObjectParameterfvARB(obj, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglGetObjectParameterivARB__IIJ(JNIEnv *__env, jclass clazz, jint obj, jint pname, jlong paramsAddress) {
     glGetObjectParameterivARBPROC glGetObjectParameterivARB = (glGetObjectParameterivARBPROC)tlsGetFunction(1347);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetObjectParameterivARB(obj, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglGetInfoLogARB__IIJJ(JNIEnv *__env, jclass clazz, jint obj, jint maxLength, jlong lengthAddress, jlong infoLogAddress) {
     glGetInfoLogARBPROC glGetInfoLogARB = (glGetInfoLogARBPROC)tlsGetFunction(1348);
-    intptr_t length = (intptr_t)lengthAddress;
-    intptr_t infoLog = (intptr_t)infoLogAddress;
+    uintptr_t length = (uintptr_t)lengthAddress;
+    uintptr_t infoLog = (uintptr_t)infoLogAddress;
     UNUSED_PARAM(clazz)
     glGetInfoLogARB(obj, maxLength, length, infoLog);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglGetAttachedObjectsARB__IIJJ(JNIEnv *__env, jclass clazz, jint containerObj, jint maxCount, jlong countAddress, jlong objAddress) {
     glGetAttachedObjectsARBPROC glGetAttachedObjectsARB = (glGetAttachedObjectsARBPROC)tlsGetFunction(1349);
-    intptr_t count = (intptr_t)countAddress;
-    intptr_t obj = (intptr_t)objAddress;
+    uintptr_t count = (uintptr_t)countAddress;
+    uintptr_t obj = (uintptr_t)objAddress;
     UNUSED_PARAM(clazz)
     glGetAttachedObjectsARB(containerObj, maxCount, count, obj);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglGetUniformLocationARB(JNIEnv *__env, jclass clazz, jint programObj, jlong nameAddress) {
     glGetUniformLocationARBPROC glGetUniformLocationARB = (glGetUniformLocationARBPROC)tlsGetFunction(1350);
-    intptr_t name = (intptr_t)nameAddress;
+    uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     return (jint)glGetUniformLocationARB(programObj, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglGetActiveUniformARB__IIIJJJJ(JNIEnv *__env, jclass clazz, jint programObj, jint index, jint maxLength, jlong lengthAddress, jlong sizeAddress, jlong typeAddress, jlong nameAddress) {
     glGetActiveUniformARBPROC glGetActiveUniformARB = (glGetActiveUniformARBPROC)tlsGetFunction(1351);
-    intptr_t length = (intptr_t)lengthAddress;
-    intptr_t size = (intptr_t)sizeAddress;
-    intptr_t type = (intptr_t)typeAddress;
-    intptr_t name = (intptr_t)nameAddress;
+    uintptr_t length = (uintptr_t)lengthAddress;
+    uintptr_t size = (uintptr_t)sizeAddress;
+    uintptr_t type = (uintptr_t)typeAddress;
+    uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     glGetActiveUniformARB(programObj, index, maxLength, length, size, type, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglGetUniformfvARB__IIJ(JNIEnv *__env, jclass clazz, jint programObj, jint location, jlong paramsAddress) {
     glGetUniformfvARBPROC glGetUniformfvARB = (glGetUniformfvARBPROC)tlsGetFunction(1352);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetUniformfvARB(programObj, location, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglGetUniformivARB__IIJ(JNIEnv *__env, jclass clazz, jint programObj, jint location, jlong paramsAddress) {
     glGetUniformivARBPROC glGetUniformivARB = (glGetUniformivARBPROC)tlsGetFunction(1353);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetUniformivARB(programObj, location, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShaderObjects_nglGetShaderSourceARB__IIJJ(JNIEnv *__env, jclass clazz, jint obj, jint maxLength, jlong lengthAddress, jlong sourceAddress) {
     glGetShaderSourceARBPROC glGetShaderSourceARB = (glGetShaderSourceARBPROC)tlsGetFunction(1354);
-    intptr_t length = (intptr_t)lengthAddress;
-    intptr_t source = (intptr_t)sourceAddress;
+    uintptr_t length = (uintptr_t)lengthAddress;
+    uintptr_t source = (uintptr_t)sourceAddress;
     UNUSED_PARAM(clazz)
     glGetShaderSourceARB(obj, maxLength, length, source);
 }

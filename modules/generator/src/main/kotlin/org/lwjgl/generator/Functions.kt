@@ -1940,7 +1940,7 @@ class Func(
 
         if (nativeClass.binding != null) {
             if (hasFunctionAddressParam) {
-                println("$t${nativeName}PROC $nativeName = (${nativeName}PROC)(intptr_t)$FUNCTION_ADDRESS;")
+                println("$t${nativeName}PROC $nativeName = (${nativeName}PROC)(uintptr_t)$FUNCTION_ADDRESS;")
             } else
                 println("$t${nativeName}PROC $nativeName = (${nativeName}PROC)tlsGetFunction(${nativeClass.binding.getFunctionOrdinal(this@Func)});")
         }
@@ -1972,7 +1972,7 @@ class Func(
                         } else {
                             "($variableType)"
                         }
-                        }${if (variableType != "intptr_t") "(intptr_t)" else ""}${it.name}$POINTER_POSTFIX;"
+                        }${if (variableType != "uintptr_t") "(uintptr_t)" else ""}${it.name}$POINTER_POSTFIX;"
                     )
                 }
         }
@@ -2016,7 +2016,7 @@ class Func(
                     nativeCall = "$t$callPrefix${JNI_NAME(hasArrays = true, critical = true, ignoreArrayType = true)}(${getNativeParams()
                         .map {
                             if (it.nativeType is ArrayType<*>)
-                                "(intptr_t)${it.name}"
+                                "(uintptr_t)${it.name}"
                             else
                                 "${it.name}${if (it.nativeType is PointerType<*> || it.nativeType is StructType) POINTER_POSTFIX else ""}"
                         }
@@ -2047,7 +2047,7 @@ class Func(
                         print(if (it != null)
                             "*$it = "
                         else
-                            "*((${returns.nativeType.name}*)(intptr_t)$RESULT) = "
+                            "*((${returns.nativeType.name}*)(uintptr_t)$RESULT) = "
                         )
                     }
                 } else if (!returns.isVoid) {
@@ -2055,7 +2055,7 @@ class Func(
                     if (returns.jniFunctionType != returns.nativeType.name)
                         print("(${returns.jniFunctionType})")
                     if (returns.nativeType is PointerType<*> && nativeClass.binding == null)
-                        print("(intptr_t)")
+                        print("(uintptr_t)")
                     if (has<Address>())
                         print('&')
                 }

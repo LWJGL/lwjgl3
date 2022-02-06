@@ -14,14 +14,14 @@ typedef jlong (APIENTRY *glGetImageHandleARBPROC) (jint, jint, jboolean, jint, j
 typedef void (APIENTRY *glMakeImageHandleResidentARBPROC) (jlong, jint);
 typedef void (APIENTRY *glMakeImageHandleNonResidentARBPROC) (jlong);
 typedef void (APIENTRY *glUniformHandleui64ARBPROC) (jint, jlong);
-typedef void (APIENTRY *glUniformHandleui64vARBPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniformHandleui64vARBPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glProgramUniformHandleui64ARBPROC) (jint, jint, jlong);
-typedef void (APIENTRY *glProgramUniformHandleui64vARBPROC) (jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glProgramUniformHandleui64vARBPROC) (jint, jint, jint, uintptr_t);
 typedef jboolean (APIENTRY *glIsTextureHandleResidentARBPROC) (jlong);
 typedef jboolean (APIENTRY *glIsImageHandleResidentARBPROC) (jlong);
 typedef void (APIENTRY *glVertexAttribL1ui64ARBPROC) (jint, jlong);
-typedef void (APIENTRY *glVertexAttribL1ui64vARBPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetVertexAttribLui64vARBPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glVertexAttribL1ui64vARBPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetVertexAttribLui64vARBPROC) (jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -75,7 +75,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glUniformHandleu
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_nglUniformHandleui64vARB__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valuesAddress) {
     glUniformHandleui64vARBPROC glUniformHandleui64vARB = (glUniformHandleui64vARBPROC)tlsGetFunction(1119);
-    intptr_t values = (intptr_t)valuesAddress;
+    uintptr_t values = (uintptr_t)valuesAddress;
     UNUSED_PARAM(clazz)
     glUniformHandleui64vARB(location, count, values);
 }
@@ -88,7 +88,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glProgramUniform
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_nglProgramUniformHandleui64vARB__IIIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jint count, jlong valuesAddress) {
     glProgramUniformHandleui64vARBPROC glProgramUniformHandleui64vARB = (glProgramUniformHandleui64vARBPROC)tlsGetFunction(1121);
-    intptr_t values = (intptr_t)valuesAddress;
+    uintptr_t values = (uintptr_t)valuesAddress;
     UNUSED_PARAM(clazz)
     glProgramUniformHandleui64vARB(program, location, count, values);
 }
@@ -113,14 +113,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glVertexAttribL1
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_nglVertexAttribL1ui64vARB__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttribL1ui64vARBPROC glVertexAttribL1ui64vARB = (glVertexAttribL1ui64vARBPROC)tlsGetFunction(1125);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribL1ui64vARB(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_nglGetVertexAttribLui64vARB__IIJ(JNIEnv *__env, jclass clazz, jint index, jint pname, jlong paramsAddress) {
     glGetVertexAttribLui64vARBPROC glGetVertexAttribLui64vARB = (glGetVertexAttribLui64vARBPROC)tlsGetFunction(1126);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetVertexAttribLui64vARB(index, pname, params);
 }

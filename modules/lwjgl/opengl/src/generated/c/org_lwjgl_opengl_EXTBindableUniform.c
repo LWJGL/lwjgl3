@@ -8,7 +8,7 @@
 
 typedef void (APIENTRY *glUniformBufferEXTPROC) (jint, jint, jint);
 typedef jint (APIENTRY *glGetUniformBufferSizeEXTPROC) (jint, jint);
-typedef intptr_t (APIENTRY *glGetUniformOffsetEXTPROC) (jint, jint);
+typedef uintptr_t (APIENTRY *glGetUniformOffsetEXTPROC) (jint, jint);
 
 EXTERN_C_ENTER
 

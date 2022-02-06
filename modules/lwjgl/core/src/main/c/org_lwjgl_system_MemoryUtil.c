@@ -11,7 +11,7 @@ JNIEXPORT jobject JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefToObject(
     jlong globalRef
 ) {
     UNUSED_PARAMS(env, clazz)
-    return (jobject)(intptr_t)globalRef;
+    return (jobject)(uintptr_t)globalRef;
 }
 
 EXTERN_C_EXIT

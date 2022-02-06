@@ -7,7 +7,7 @@
 #include "opengles.h"
 
 typedef void (APIENTRY *glDrawArraysInstancedNVPROC) (jint, jint, jint, jint);
-typedef void (APIENTRY *glDrawElementsInstancedNVPROC) (jint, jint, jint, intptr_t, jint);
+typedef void (APIENTRY *glDrawElementsInstancedNVPROC) (jint, jint, jint, uintptr_t, jint);
 
 EXTERN_C_ENTER
 
@@ -19,7 +19,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVDrawInstanced_glDrawArraysInsta
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVDrawInstanced_nglDrawElementsInstancedNV(JNIEnv *__env, jclass clazz, jint mode, jint count, jint type, jlong indicesAddress, jint primcount) {
     glDrawElementsInstancedNVPROC glDrawElementsInstancedNV = (glDrawElementsInstancedNVPROC)tlsGetFunction(620);
-    intptr_t indices = (intptr_t)indicesAddress;
+    uintptr_t indices = (uintptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
     glDrawElementsInstancedNV(mode, count, type, indices, primcount);
 }

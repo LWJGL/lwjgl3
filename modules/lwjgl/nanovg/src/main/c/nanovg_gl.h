@@ -1860,7 +1860,7 @@ NVGcontext* EXT(nvgCreate)(JNIEnv* env, int flags)
 	if (gl == NULL) goto error;
 	memset(gl, 0, sizeof(GLNVGcontext));
 
-	(*env)->CallStaticVoidMethod(env, NanoVGGLConfig, config, (jlong)(intptr_t)&gl->ActiveTexture);
+	(*env)->CallStaticVoidMethod(env, NanoVGGLConfig, config, (jlong)(uintptr_t)&gl->ActiveTexture);
 	if ( (*env)->ExceptionCheck(env) )
 		goto error;
 

@@ -8,7 +8,7 @@
 
 typedef void (APIENTRY *glActiveTexturePROC) (jint);
 typedef void (APIENTRY *glAttachShaderPROC) (jint, jint);
-typedef void (APIENTRY *glBindAttribLocationPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glBindAttribLocationPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glBindBufferPROC) (jint, jint);
 typedef void (APIENTRY *glBindFramebufferPROC) (jint, jint);
 typedef void (APIENTRY *glBindRenderbufferPROC) (jint, jint);
@@ -18,8 +18,8 @@ typedef void (APIENTRY *glBlendEquationPROC) (jint);
 typedef void (APIENTRY *glBlendEquationSeparatePROC) (jint, jint);
 typedef void (APIENTRY *glBlendFuncPROC) (jint, jint);
 typedef void (APIENTRY *glBlendFuncSeparatePROC) (jint, jint, jint, jint);
-typedef void (APIENTRY *glBufferDataPROC) (jint, intptr_t, intptr_t, jint);
-typedef void (APIENTRY *glBufferSubDataPROC) (jint, intptr_t, intptr_t, intptr_t);
+typedef void (APIENTRY *glBufferDataPROC) (jint, uintptr_t, uintptr_t, jint);
+typedef void (APIENTRY *glBufferSubDataPROC) (jint, uintptr_t, uintptr_t, uintptr_t);
 typedef jint (APIENTRY *glCheckFramebufferStatusPROC) (jint);
 typedef void (APIENTRY *glClearPROC) (jint);
 typedef void (APIENTRY *glClearColorPROC) (jfloat, jfloat, jfloat, jfloat);
@@ -27,19 +27,19 @@ typedef void (APIENTRY *glClearDepthfPROC) (jfloat);
 typedef void (APIENTRY *glClearStencilPROC) (jint);
 typedef void (APIENTRY *glColorMaskPROC) (jboolean, jboolean, jboolean, jboolean);
 typedef void (APIENTRY *glCompileShaderPROC) (jint);
-typedef void (APIENTRY *glCompressedTexImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glCompressedTexSubImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glCompressedTexImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glCompressedTexSubImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glCopyTexImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint);
 typedef void (APIENTRY *glCopyTexSubImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint);
 typedef jint (APIENTRY *glCreateProgramPROC) (void);
 typedef jint (APIENTRY *glCreateShaderPROC) (jint);
 typedef void (APIENTRY *glCullFacePROC) (jint);
-typedef void (APIENTRY *glDeleteBuffersPROC) (jint, intptr_t);
-typedef void (APIENTRY *glDeleteFramebuffersPROC) (jint, intptr_t);
+typedef void (APIENTRY *glDeleteBuffersPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glDeleteFramebuffersPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glDeleteProgramPROC) (jint);
-typedef void (APIENTRY *glDeleteRenderbuffersPROC) (jint, intptr_t);
+typedef void (APIENTRY *glDeleteRenderbuffersPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glDeleteShaderPROC) (jint);
-typedef void (APIENTRY *glDeleteTexturesPROC) (jint, intptr_t);
+typedef void (APIENTRY *glDeleteTexturesPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glDepthFuncPROC) (jint);
 typedef void (APIENTRY *glDepthMaskPROC) (jboolean);
 typedef void (APIENTRY *glDepthRangefPROC) (jfloat, jfloat);
@@ -47,7 +47,7 @@ typedef void (APIENTRY *glDetachShaderPROC) (jint, jint);
 typedef void (APIENTRY *glDisablePROC) (jint);
 typedef void (APIENTRY *glDisableVertexAttribArrayPROC) (jint);
 typedef void (APIENTRY *glDrawArraysPROC) (jint, jint, jint);
-typedef void (APIENTRY *glDrawElementsPROC) (jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glDrawElementsPROC) (jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glEnablePROC) (jint);
 typedef void (APIENTRY *glEnableVertexAttribArrayPROC) (jint);
 typedef void (APIENTRY *glFinishPROC) (void);
@@ -55,37 +55,37 @@ typedef void (APIENTRY *glFlushPROC) (void);
 typedef void (APIENTRY *glFramebufferRenderbufferPROC) (jint, jint, jint, jint);
 typedef void (APIENTRY *glFramebufferTexture2DPROC) (jint, jint, jint, jint, jint);
 typedef void (APIENTRY *glFrontFacePROC) (jint);
-typedef void (APIENTRY *glGenBuffersPROC) (jint, intptr_t);
+typedef void (APIENTRY *glGenBuffersPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glGenerateMipmapPROC) (jint);
-typedef void (APIENTRY *glGenFramebuffersPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGenRenderbuffersPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGenTexturesPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetActiveAttribPROC) (jint, jint, jint, intptr_t, intptr_t, intptr_t, intptr_t);
-typedef void (APIENTRY *glGetActiveUniformPROC) (jint, jint, jint, intptr_t, intptr_t, intptr_t, intptr_t);
-typedef void (APIENTRY *glGetAttachedShadersPROC) (jint, jint, intptr_t, intptr_t);
-typedef jint (APIENTRY *glGetAttribLocationPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetBooleanvPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetBufferParameterivPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGenFramebuffersPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGenRenderbuffersPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGenTexturesPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetActiveAttribPROC) (jint, jint, jint, uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+typedef void (APIENTRY *glGetActiveUniformPROC) (jint, jint, jint, uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+typedef void (APIENTRY *glGetAttachedShadersPROC) (jint, jint, uintptr_t, uintptr_t);
+typedef jint (APIENTRY *glGetAttribLocationPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetBooleanvPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetBufferParameterivPROC) (jint, jint, uintptr_t);
 typedef jint (APIENTRY *glGetErrorPROC) (void);
-typedef void (APIENTRY *glGetFloatvPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetFramebufferAttachmentParameterivPROC) (jint, jint, jint, intptr_t);
-typedef void (APIENTRY *glGetIntegervPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetProgramivPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetProgramInfoLogPROC) (jint, jint, intptr_t, intptr_t);
-typedef void (APIENTRY *glGetRenderbufferParameterivPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetShaderivPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetShaderInfoLogPROC) (jint, jint, intptr_t, intptr_t);
-typedef void (APIENTRY *glGetShaderPrecisionFormatPROC) (jint, jint, intptr_t, intptr_t);
-typedef void (APIENTRY *glGetShaderSourcePROC) (jint, jint, intptr_t, intptr_t);
-typedef intptr_t (APIENTRY *glGetStringPROC) (jint);
-typedef void (APIENTRY *glGetTexParameterfvPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetTexParameterivPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetUniformfvPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetUniformivPROC) (jint, jint, intptr_t);
-typedef jint (APIENTRY *glGetUniformLocationPROC) (jint, intptr_t);
-typedef void (APIENTRY *glGetVertexAttribfvPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetVertexAttribivPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glGetVertexAttribPointervPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetFloatvPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetFramebufferAttachmentParameterivPROC) (jint, jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetIntegervPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetProgramivPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetProgramInfoLogPROC) (jint, jint, uintptr_t, uintptr_t);
+typedef void (APIENTRY *glGetRenderbufferParameterivPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetShaderivPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetShaderInfoLogPROC) (jint, jint, uintptr_t, uintptr_t);
+typedef void (APIENTRY *glGetShaderPrecisionFormatPROC) (jint, jint, uintptr_t, uintptr_t);
+typedef void (APIENTRY *glGetShaderSourcePROC) (jint, jint, uintptr_t, uintptr_t);
+typedef uintptr_t (APIENTRY *glGetStringPROC) (jint);
+typedef void (APIENTRY *glGetTexParameterfvPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetTexParameterivPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetUniformfvPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetUniformivPROC) (jint, jint, uintptr_t);
+typedef jint (APIENTRY *glGetUniformLocationPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glGetVertexAttribfvPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetVertexAttribivPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glGetVertexAttribPointervPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glHintPROC) (jint, jint);
 typedef jboolean (APIENTRY *glIsBufferPROC) (jint);
 typedef jboolean (APIENTRY *glIsEnabledPROC) (jint);
@@ -98,55 +98,55 @@ typedef void (APIENTRY *glLineWidthPROC) (jfloat);
 typedef void (APIENTRY *glLinkProgramPROC) (jint);
 typedef void (APIENTRY *glPixelStoreiPROC) (jint, jint);
 typedef void (APIENTRY *glPolygonOffsetPROC) (jfloat, jfloat);
-typedef void (APIENTRY *glReadPixelsPROC) (jint, jint, jint, jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glReadPixelsPROC) (jint, jint, jint, jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glReleaseShaderCompilerPROC) (void);
 typedef void (APIENTRY *glRenderbufferStoragePROC) (jint, jint, jint, jint);
 typedef void (APIENTRY *glSampleCoveragePROC) (jfloat, jboolean);
 typedef void (APIENTRY *glScissorPROC) (jint, jint, jint, jint);
-typedef void (APIENTRY *glShaderBinaryPROC) (jint, intptr_t, jint, intptr_t, jint);
-typedef void (APIENTRY *glShaderSourcePROC) (jint, jint, intptr_t, intptr_t);
+typedef void (APIENTRY *glShaderBinaryPROC) (jint, uintptr_t, jint, uintptr_t, jint);
+typedef void (APIENTRY *glShaderSourcePROC) (jint, jint, uintptr_t, uintptr_t);
 typedef void (APIENTRY *glStencilFuncPROC) (jint, jint, jint);
 typedef void (APIENTRY *glStencilFuncSeparatePROC) (jint, jint, jint, jint);
 typedef void (APIENTRY *glStencilMaskPROC) (jint);
 typedef void (APIENTRY *glStencilMaskSeparatePROC) (jint, jint);
 typedef void (APIENTRY *glStencilOpPROC) (jint, jint, jint);
 typedef void (APIENTRY *glStencilOpSeparatePROC) (jint, jint, jint, jint);
-typedef void (APIENTRY *glTexImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glTexImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glTexParameterfPROC) (jint, jint, jfloat);
-typedef void (APIENTRY *glTexParameterfvPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glTexParameterfvPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glTexParameteriPROC) (jint, jint, jint);
-typedef void (APIENTRY *glTexParameterivPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glTexSubImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glTexParameterivPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glTexSubImage2DPROC) (jint, jint, jint, jint, jint, jint, jint, jint, uintptr_t);
 typedef void (APIENTRY *glUniform1fPROC) (jint, jfloat);
-typedef void (APIENTRY *glUniform1fvPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniform1fvPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glUniform1iPROC) (jint, jint);
-typedef void (APIENTRY *glUniform1ivPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniform1ivPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glUniform2fPROC) (jint, jfloat, jfloat);
-typedef void (APIENTRY *glUniform2fvPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniform2fvPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glUniform2iPROC) (jint, jint, jint);
-typedef void (APIENTRY *glUniform2ivPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniform2ivPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glUniform3fPROC) (jint, jfloat, jfloat, jfloat);
-typedef void (APIENTRY *glUniform3fvPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniform3fvPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glUniform3iPROC) (jint, jint, jint, jint);
-typedef void (APIENTRY *glUniform3ivPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniform3ivPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glUniform4fPROC) (jint, jfloat, jfloat, jfloat, jfloat);
-typedef void (APIENTRY *glUniform4fvPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniform4fvPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glUniform4iPROC) (jint, jint, jint, jint, jint);
-typedef void (APIENTRY *glUniform4ivPROC) (jint, jint, intptr_t);
-typedef void (APIENTRY *glUniformMatrix2fvPROC) (jint, jint, jboolean, intptr_t);
-typedef void (APIENTRY *glUniformMatrix3fvPROC) (jint, jint, jboolean, intptr_t);
-typedef void (APIENTRY *glUniformMatrix4fvPROC) (jint, jint, jboolean, intptr_t);
+typedef void (APIENTRY *glUniform4ivPROC) (jint, jint, uintptr_t);
+typedef void (APIENTRY *glUniformMatrix2fvPROC) (jint, jint, jboolean, uintptr_t);
+typedef void (APIENTRY *glUniformMatrix3fvPROC) (jint, jint, jboolean, uintptr_t);
+typedef void (APIENTRY *glUniformMatrix4fvPROC) (jint, jint, jboolean, uintptr_t);
 typedef void (APIENTRY *glUseProgramPROC) (jint);
 typedef void (APIENTRY *glValidateProgramPROC) (jint);
 typedef void (APIENTRY *glVertexAttrib1fPROC) (jint, jfloat);
-typedef void (APIENTRY *glVertexAttrib1fvPROC) (jint, intptr_t);
+typedef void (APIENTRY *glVertexAttrib1fvPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glVertexAttrib2fPROC) (jint, jfloat, jfloat);
-typedef void (APIENTRY *glVertexAttrib2fvPROC) (jint, intptr_t);
+typedef void (APIENTRY *glVertexAttrib2fvPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glVertexAttrib3fPROC) (jint, jfloat, jfloat, jfloat);
-typedef void (APIENTRY *glVertexAttrib3fvPROC) (jint, intptr_t);
+typedef void (APIENTRY *glVertexAttrib3fvPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glVertexAttrib4fPROC) (jint, jfloat, jfloat, jfloat, jfloat);
-typedef void (APIENTRY *glVertexAttrib4fvPROC) (jint, intptr_t);
-typedef void (APIENTRY *glVertexAttribPointerPROC) (jint, jint, jint, jboolean, jint, intptr_t);
+typedef void (APIENTRY *glVertexAttrib4fvPROC) (jint, uintptr_t);
+typedef void (APIENTRY *glVertexAttribPointerPROC) (jint, jint, jint, jboolean, jint, uintptr_t);
 typedef void (APIENTRY *glViewportPROC) (jint, jint, jint, jint);
 
 EXTERN_C_ENTER
@@ -165,7 +165,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glAttachShader(JNIEnv *__e
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglBindAttribLocation(JNIEnv *__env, jclass clazz, jint program, jint index, jlong nameAddress) {
     glBindAttribLocationPROC glBindAttribLocation = (glBindAttribLocationPROC)tlsGetFunction(2);
-    intptr_t name = (intptr_t)nameAddress;
+    uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     glBindAttribLocation(program, index, name);
 }
@@ -226,16 +226,16 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glBlendFuncSeparate(JNIEnv
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglBufferData__IJJI(JNIEnv *__env, jclass clazz, jint target, jlong size, jlong dataAddress, jint usage) {
     glBufferDataPROC glBufferData = (glBufferDataPROC)tlsGetFunction(12);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
-    glBufferData(target, (intptr_t)size, data, usage);
+    glBufferData(target, (uintptr_t)size, data, usage);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglBufferSubData__IJJJ(JNIEnv *__env, jclass clazz, jint target, jlong offset, jlong size, jlong dataAddress) {
     glBufferSubDataPROC glBufferSubData = (glBufferSubDataPROC)tlsGetFunction(13);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
-    glBufferSubData(target, (intptr_t)offset, (intptr_t)size, data);
+    glBufferSubData(target, (uintptr_t)offset, (uintptr_t)size, data);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_GLES20_glCheckFramebufferStatus(JNIEnv *__env, jclass clazz, jint target) {
@@ -282,14 +282,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glCompileShader(JNIEnv *__
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglCompressedTexImage2D(JNIEnv *__env, jclass clazz, jint target, jint level, jint internalformat, jint width, jint height, jint border, jint imageSize, jlong dataAddress) {
     glCompressedTexImage2DPROC glCompressedTexImage2D = (glCompressedTexImage2DPROC)tlsGetFunction(21);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglCompressedTexSubImage2D(JNIEnv *__env, jclass clazz, jint target, jint level, jint xoffset, jint yoffset, jint width, jint height, jint format, jint imageSize, jlong dataAddress) {
     glCompressedTexSubImage2DPROC glCompressedTexSubImage2D = (glCompressedTexSubImage2DPROC)tlsGetFunction(22);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data);
 }
@@ -326,14 +326,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glCullFace(JNIEnv *__env, 
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglDeleteBuffers__IJ(JNIEnv *__env, jclass clazz, jint n, jlong buffersAddress) {
     glDeleteBuffersPROC glDeleteBuffers = (glDeleteBuffersPROC)tlsGetFunction(28);
-    intptr_t buffers = (intptr_t)buffersAddress;
+    uintptr_t buffers = (uintptr_t)buffersAddress;
     UNUSED_PARAM(clazz)
     glDeleteBuffers(n, buffers);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglDeleteFramebuffers__IJ(JNIEnv *__env, jclass clazz, jint n, jlong framebuffersAddress) {
     glDeleteFramebuffersPROC glDeleteFramebuffers = (glDeleteFramebuffersPROC)tlsGetFunction(29);
-    intptr_t framebuffers = (intptr_t)framebuffersAddress;
+    uintptr_t framebuffers = (uintptr_t)framebuffersAddress;
     UNUSED_PARAM(clazz)
     glDeleteFramebuffers(n, framebuffers);
 }
@@ -346,7 +346,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glDeleteProgram(JNIEnv *__
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglDeleteRenderbuffers__IJ(JNIEnv *__env, jclass clazz, jint n, jlong renderbuffersAddress) {
     glDeleteRenderbuffersPROC glDeleteRenderbuffers = (glDeleteRenderbuffersPROC)tlsGetFunction(31);
-    intptr_t renderbuffers = (intptr_t)renderbuffersAddress;
+    uintptr_t renderbuffers = (uintptr_t)renderbuffersAddress;
     UNUSED_PARAM(clazz)
     glDeleteRenderbuffers(n, renderbuffers);
 }
@@ -359,7 +359,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glDeleteShader(JNIEnv *__e
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglDeleteTextures__IJ(JNIEnv *__env, jclass clazz, jint n, jlong texturesAddress) {
     glDeleteTexturesPROC glDeleteTextures = (glDeleteTexturesPROC)tlsGetFunction(33);
-    intptr_t textures = (intptr_t)texturesAddress;
+    uintptr_t textures = (uintptr_t)texturesAddress;
     UNUSED_PARAM(clazz)
     glDeleteTextures(n, textures);
 }
@@ -408,7 +408,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glDrawArrays(JNIEnv *__env
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglDrawElements(JNIEnv *__env, jclass clazz, jint mode, jint count, jint type, jlong indicesAddress) {
     glDrawElementsPROC glDrawElements = (glDrawElementsPROC)tlsGetFunction(41);
-    intptr_t indices = (intptr_t)indicesAddress;
+    uintptr_t indices = (uintptr_t)indicesAddress;
     UNUSED_PARAM(clazz)
     glDrawElements(mode, count, type, indices);
 }
@@ -457,7 +457,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glFrontFace(JNIEnv *__env,
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGenBuffers__IJ(JNIEnv *__env, jclass clazz, jint n, jlong buffersAddress) {
     glGenBuffersPROC glGenBuffers = (glGenBuffersPROC)tlsGetFunction(49);
-    intptr_t buffers = (intptr_t)buffersAddress;
+    uintptr_t buffers = (uintptr_t)buffersAddress;
     UNUSED_PARAM(clazz)
     glGenBuffers(n, buffers);
 }
@@ -470,70 +470,70 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glGenerateMipmap(JNIEnv *_
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGenFramebuffers__IJ(JNIEnv *__env, jclass clazz, jint n, jlong framebuffersAddress) {
     glGenFramebuffersPROC glGenFramebuffers = (glGenFramebuffersPROC)tlsGetFunction(51);
-    intptr_t framebuffers = (intptr_t)framebuffersAddress;
+    uintptr_t framebuffers = (uintptr_t)framebuffersAddress;
     UNUSED_PARAM(clazz)
     glGenFramebuffers(n, framebuffers);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGenRenderbuffers__IJ(JNIEnv *__env, jclass clazz, jint n, jlong renderbuffersAddress) {
     glGenRenderbuffersPROC glGenRenderbuffers = (glGenRenderbuffersPROC)tlsGetFunction(52);
-    intptr_t renderbuffers = (intptr_t)renderbuffersAddress;
+    uintptr_t renderbuffers = (uintptr_t)renderbuffersAddress;
     UNUSED_PARAM(clazz)
     glGenRenderbuffers(n, renderbuffers);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGenTextures__IJ(JNIEnv *__env, jclass clazz, jint n, jlong texturesAddress) {
     glGenTexturesPROC glGenTextures = (glGenTexturesPROC)tlsGetFunction(53);
-    intptr_t textures = (intptr_t)texturesAddress;
+    uintptr_t textures = (uintptr_t)texturesAddress;
     UNUSED_PARAM(clazz)
     glGenTextures(n, textures);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetActiveAttrib__IIIJJJJ(JNIEnv *__env, jclass clazz, jint program, jint index, jint bufSize, jlong lengthAddress, jlong sizeAddress, jlong typeAddress, jlong nameAddress) {
     glGetActiveAttribPROC glGetActiveAttrib = (glGetActiveAttribPROC)tlsGetFunction(54);
-    intptr_t length = (intptr_t)lengthAddress;
-    intptr_t size = (intptr_t)sizeAddress;
-    intptr_t type = (intptr_t)typeAddress;
-    intptr_t name = (intptr_t)nameAddress;
+    uintptr_t length = (uintptr_t)lengthAddress;
+    uintptr_t size = (uintptr_t)sizeAddress;
+    uintptr_t type = (uintptr_t)typeAddress;
+    uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     glGetActiveAttrib(program, index, bufSize, length, size, type, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetActiveUniform__IIIJJJJ(JNIEnv *__env, jclass clazz, jint program, jint index, jint bufSize, jlong lengthAddress, jlong sizeAddress, jlong typeAddress, jlong nameAddress) {
     glGetActiveUniformPROC glGetActiveUniform = (glGetActiveUniformPROC)tlsGetFunction(55);
-    intptr_t length = (intptr_t)lengthAddress;
-    intptr_t size = (intptr_t)sizeAddress;
-    intptr_t type = (intptr_t)typeAddress;
-    intptr_t name = (intptr_t)nameAddress;
+    uintptr_t length = (uintptr_t)lengthAddress;
+    uintptr_t size = (uintptr_t)sizeAddress;
+    uintptr_t type = (uintptr_t)typeAddress;
+    uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     glGetActiveUniform(program, index, bufSize, length, size, type, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetAttachedShaders__IIJJ(JNIEnv *__env, jclass clazz, jint program, jint maxCount, jlong countAddress, jlong shadersAddress) {
     glGetAttachedShadersPROC glGetAttachedShaders = (glGetAttachedShadersPROC)tlsGetFunction(56);
-    intptr_t count = (intptr_t)countAddress;
-    intptr_t shaders = (intptr_t)shadersAddress;
+    uintptr_t count = (uintptr_t)countAddress;
+    uintptr_t shaders = (uintptr_t)shadersAddress;
     UNUSED_PARAM(clazz)
     glGetAttachedShaders(program, maxCount, count, shaders);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_GLES20_nglGetAttribLocation(JNIEnv *__env, jclass clazz, jint program, jlong nameAddress) {
     glGetAttribLocationPROC glGetAttribLocation = (glGetAttribLocationPROC)tlsGetFunction(57);
-    intptr_t name = (intptr_t)nameAddress;
+    uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     return (jint)glGetAttribLocation(program, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetBooleanv(JNIEnv *__env, jclass clazz, jint pname, jlong dataAddress) {
     glGetBooleanvPROC glGetBooleanv = (glGetBooleanvPROC)tlsGetFunction(58);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glGetBooleanv(pname, data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetBufferParameteriv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetBufferParameterivPROC glGetBufferParameteriv = (glGetBufferParameterivPROC)tlsGetFunction(59);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetBufferParameteriv(target, pname, params);
 }
@@ -546,74 +546,74 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_GLES20_glGetError(JNIEnv *__env, 
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetFloatv__IJ(JNIEnv *__env, jclass clazz, jint pname, jlong dataAddress) {
     glGetFloatvPROC glGetFloatv = (glGetFloatvPROC)tlsGetFunction(61);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glGetFloatv(pname, data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetFramebufferAttachmentParameteriv__IIIJ(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint pname, jlong paramsAddress) {
     glGetFramebufferAttachmentParameterivPROC glGetFramebufferAttachmentParameteriv = (glGetFramebufferAttachmentParameterivPROC)tlsGetFunction(62);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetIntegerv__IJ(JNIEnv *__env, jclass clazz, jint pname, jlong dataAddress) {
     glGetIntegervPROC glGetIntegerv = (glGetIntegervPROC)tlsGetFunction(63);
-    intptr_t data = (intptr_t)dataAddress;
+    uintptr_t data = (uintptr_t)dataAddress;
     UNUSED_PARAM(clazz)
     glGetIntegerv(pname, data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetProgramiv__IIJ(JNIEnv *__env, jclass clazz, jint program, jint pname, jlong paramsAddress) {
     glGetProgramivPROC glGetProgramiv = (glGetProgramivPROC)tlsGetFunction(64);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetProgramiv(program, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetProgramInfoLog__IIJJ(JNIEnv *__env, jclass clazz, jint program, jint bufSize, jlong lengthAddress, jlong infoLogAddress) {
     glGetProgramInfoLogPROC glGetProgramInfoLog = (glGetProgramInfoLogPROC)tlsGetFunction(65);
-    intptr_t length = (intptr_t)lengthAddress;
-    intptr_t infoLog = (intptr_t)infoLogAddress;
+    uintptr_t length = (uintptr_t)lengthAddress;
+    uintptr_t infoLog = (uintptr_t)infoLogAddress;
     UNUSED_PARAM(clazz)
     glGetProgramInfoLog(program, bufSize, length, infoLog);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetRenderbufferParameteriv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetRenderbufferParameterivPROC glGetRenderbufferParameteriv = (glGetRenderbufferParameterivPROC)tlsGetFunction(66);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetRenderbufferParameteriv(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetShaderiv__IIJ(JNIEnv *__env, jclass clazz, jint shader, jint pname, jlong paramsAddress) {
     glGetShaderivPROC glGetShaderiv = (glGetShaderivPROC)tlsGetFunction(67);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetShaderiv(shader, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetShaderInfoLog__IIJJ(JNIEnv *__env, jclass clazz, jint shader, jint bufSize, jlong lengthAddress, jlong infoLogAddress) {
     glGetShaderInfoLogPROC glGetShaderInfoLog = (glGetShaderInfoLogPROC)tlsGetFunction(68);
-    intptr_t length = (intptr_t)lengthAddress;
-    intptr_t infoLog = (intptr_t)infoLogAddress;
+    uintptr_t length = (uintptr_t)lengthAddress;
+    uintptr_t infoLog = (uintptr_t)infoLogAddress;
     UNUSED_PARAM(clazz)
     glGetShaderInfoLog(shader, bufSize, length, infoLog);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetShaderPrecisionFormat__IIJJ(JNIEnv *__env, jclass clazz, jint shadertype, jint precisiontype, jlong rangeAddress, jlong precisionAddress) {
     glGetShaderPrecisionFormatPROC glGetShaderPrecisionFormat = (glGetShaderPrecisionFormatPROC)tlsGetFunction(69);
-    intptr_t range = (intptr_t)rangeAddress;
-    intptr_t precision = (intptr_t)precisionAddress;
+    uintptr_t range = (uintptr_t)rangeAddress;
+    uintptr_t precision = (uintptr_t)precisionAddress;
     UNUSED_PARAM(clazz)
     glGetShaderPrecisionFormat(shadertype, precisiontype, range, precision);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetShaderSource__IIJJ(JNIEnv *__env, jclass clazz, jint shader, jint bufSize, jlong lengthAddress, jlong sourceAddress) {
     glGetShaderSourcePROC glGetShaderSource = (glGetShaderSourcePROC)tlsGetFunction(70);
-    intptr_t length = (intptr_t)lengthAddress;
-    intptr_t source = (intptr_t)sourceAddress;
+    uintptr_t length = (uintptr_t)lengthAddress;
+    uintptr_t source = (uintptr_t)sourceAddress;
     UNUSED_PARAM(clazz)
     glGetShaderSource(shader, bufSize, length, source);
 }
@@ -626,56 +626,56 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_opengles_GLES20_nglGetString(JNIEnv *__en
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetTexParameterfv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetTexParameterfvPROC glGetTexParameterfv = (glGetTexParameterfvPROC)tlsGetFunction(72);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetTexParameterfv(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetTexParameteriv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetTexParameterivPROC glGetTexParameteriv = (glGetTexParameterivPROC)tlsGetFunction(73);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetTexParameteriv(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetUniformfv__IIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jlong paramsAddress) {
     glGetUniformfvPROC glGetUniformfv = (glGetUniformfvPROC)tlsGetFunction(74);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetUniformfv(program, location, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetUniformiv__IIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jlong paramsAddress) {
     glGetUniformivPROC glGetUniformiv = (glGetUniformivPROC)tlsGetFunction(75);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetUniformiv(program, location, params);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_GLES20_nglGetUniformLocation(JNIEnv *__env, jclass clazz, jint program, jlong nameAddress) {
     glGetUniformLocationPROC glGetUniformLocation = (glGetUniformLocationPROC)tlsGetFunction(76);
-    intptr_t name = (intptr_t)nameAddress;
+    uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
     return (jint)glGetUniformLocation(program, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetVertexAttribfv__IIJ(JNIEnv *__env, jclass clazz, jint index, jint pname, jlong paramsAddress) {
     glGetVertexAttribfvPROC glGetVertexAttribfv = (glGetVertexAttribfvPROC)tlsGetFunction(77);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetVertexAttribfv(index, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetVertexAttribiv__IIJ(JNIEnv *__env, jclass clazz, jint index, jint pname, jlong paramsAddress) {
     glGetVertexAttribivPROC glGetVertexAttribiv = (glGetVertexAttribivPROC)tlsGetFunction(78);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetVertexAttribiv(index, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglGetVertexAttribPointerv(JNIEnv *__env, jclass clazz, jint index, jint pname, jlong pointerAddress) {
     glGetVertexAttribPointervPROC glGetVertexAttribPointerv = (glGetVertexAttribPointervPROC)tlsGetFunction(79);
-    intptr_t pointer = (intptr_t)pointerAddress;
+    uintptr_t pointer = (uintptr_t)pointerAddress;
     UNUSED_PARAM(clazz)
     glGetVertexAttribPointerv(index, pname, pointer);
 }
@@ -754,7 +754,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glPolygonOffset(JNIEnv *__
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglReadPixels__IIIIIIJ(JNIEnv *__env, jclass clazz, jint x, jint y, jint width, jint height, jint format, jint type, jlong pixelsAddress) {
     glReadPixelsPROC glReadPixels = (glReadPixelsPROC)tlsGetFunction(92);
-    intptr_t pixels = (intptr_t)pixelsAddress;
+    uintptr_t pixels = (uintptr_t)pixelsAddress;
     UNUSED_PARAM(clazz)
     glReadPixels(x, y, width, height, format, type, pixels);
 }
@@ -785,16 +785,16 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glScissor(JNIEnv *__env, j
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglShaderBinary__IJIJI(JNIEnv *__env, jclass clazz, jint count, jlong shadersAddress, jint binaryformat, jlong binaryAddress, jint length) {
     glShaderBinaryPROC glShaderBinary = (glShaderBinaryPROC)tlsGetFunction(97);
-    intptr_t shaders = (intptr_t)shadersAddress;
-    intptr_t binary = (intptr_t)binaryAddress;
+    uintptr_t shaders = (uintptr_t)shadersAddress;
+    uintptr_t binary = (uintptr_t)binaryAddress;
     UNUSED_PARAM(clazz)
     glShaderBinary(count, shaders, binaryformat, binary, length);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglShaderSource__IIJJ(JNIEnv *__env, jclass clazz, jint shader, jint count, jlong stringAddress, jlong lengthAddress) {
     glShaderSourcePROC glShaderSource = (glShaderSourcePROC)tlsGetFunction(98);
-    intptr_t string = (intptr_t)stringAddress;
-    intptr_t length = (intptr_t)lengthAddress;
+    uintptr_t string = (uintptr_t)stringAddress;
+    uintptr_t length = (uintptr_t)lengthAddress;
     UNUSED_PARAM(clazz)
     glShaderSource(shader, count, string, length);
 }
@@ -837,7 +837,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glStencilOpSeparate(JNIEnv
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglTexImage2D__IIIIIIIIJ(JNIEnv *__env, jclass clazz, jint target, jint level, jint internalformat, jint width, jint height, jint border, jint format, jint type, jlong pixelsAddress) {
     glTexImage2DPROC glTexImage2D = (glTexImage2DPROC)tlsGetFunction(105);
-    intptr_t pixels = (intptr_t)pixelsAddress;
+    uintptr_t pixels = (uintptr_t)pixelsAddress;
     UNUSED_PARAM(clazz)
     glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
 }
@@ -850,7 +850,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glTexParameterf(JNIEnv *__
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglTexParameterfv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glTexParameterfvPROC glTexParameterfv = (glTexParameterfvPROC)tlsGetFunction(107);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glTexParameterfv(target, pname, params);
 }
@@ -863,14 +863,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glTexParameteri(JNIEnv *__
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglTexParameteriv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glTexParameterivPROC glTexParameteriv = (glTexParameterivPROC)tlsGetFunction(109);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glTexParameteriv(target, pname, params);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglTexSubImage2D__IIIIIIIIJ(JNIEnv *__env, jclass clazz, jint target, jint level, jint xoffset, jint yoffset, jint width, jint height, jint format, jint type, jlong pixelsAddress) {
     glTexSubImage2DPROC glTexSubImage2D = (glTexSubImage2DPROC)tlsGetFunction(110);
-    intptr_t pixels = (intptr_t)pixelsAddress;
+    uintptr_t pixels = (uintptr_t)pixelsAddress;
     UNUSED_PARAM(clazz)
     glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels);
 }
@@ -883,7 +883,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glUniform1f(JNIEnv *__env,
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniform1fv__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform1fvPROC glUniform1fv = (glUniform1fvPROC)tlsGetFunction(112);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform1fv(location, count, value);
 }
@@ -896,7 +896,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glUniform1i(JNIEnv *__env,
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniform1iv__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform1ivPROC glUniform1iv = (glUniform1ivPROC)tlsGetFunction(114);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform1iv(location, count, value);
 }
@@ -909,7 +909,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glUniform2f(JNIEnv *__env,
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniform2fv__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform2fvPROC glUniform2fv = (glUniform2fvPROC)tlsGetFunction(116);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform2fv(location, count, value);
 }
@@ -922,7 +922,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glUniform2i(JNIEnv *__env,
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniform2iv__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform2ivPROC glUniform2iv = (glUniform2ivPROC)tlsGetFunction(118);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform2iv(location, count, value);
 }
@@ -935,7 +935,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glUniform3f(JNIEnv *__env,
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniform3fv__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform3fvPROC glUniform3fv = (glUniform3fvPROC)tlsGetFunction(120);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform3fv(location, count, value);
 }
@@ -948,7 +948,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glUniform3i(JNIEnv *__env,
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniform3iv__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform3ivPROC glUniform3iv = (glUniform3ivPROC)tlsGetFunction(122);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform3iv(location, count, value);
 }
@@ -961,7 +961,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glUniform4f(JNIEnv *__env,
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniform4fv__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform4fvPROC glUniform4fv = (glUniform4fvPROC)tlsGetFunction(124);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform4fv(location, count, value);
 }
@@ -974,28 +974,28 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glUniform4i(JNIEnv *__env,
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniform4iv__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valueAddress) {
     glUniform4ivPROC glUniform4iv = (glUniform4ivPROC)tlsGetFunction(126);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniform4iv(location, count, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniformMatrix2fv__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
     glUniformMatrix2fvPROC glUniformMatrix2fv = (glUniformMatrix2fvPROC)tlsGetFunction(127);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix2fv(location, count, transpose, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniformMatrix3fv__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
     glUniformMatrix3fvPROC glUniformMatrix3fv = (glUniformMatrix3fvPROC)tlsGetFunction(128);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix3fv(location, count, transpose, value);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglUniformMatrix4fv__IIZJ(JNIEnv *__env, jclass clazz, jint location, jint count, jboolean transpose, jlong valueAddress) {
     glUniformMatrix4fvPROC glUniformMatrix4fv = (glUniformMatrix4fvPROC)tlsGetFunction(129);
-    intptr_t value = (intptr_t)valueAddress;
+    uintptr_t value = (uintptr_t)valueAddress;
     UNUSED_PARAM(clazz)
     glUniformMatrix4fv(location, count, transpose, value);
 }
@@ -1020,7 +1020,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glVertexAttrib1f(JNIEnv *_
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglVertexAttrib1fv__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttrib1fvPROC glVertexAttrib1fv = (glVertexAttrib1fvPROC)tlsGetFunction(133);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttrib1fv(index, v);
 }
@@ -1033,7 +1033,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glVertexAttrib2f(JNIEnv *_
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglVertexAttrib2fv__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttrib2fvPROC glVertexAttrib2fv = (glVertexAttrib2fvPROC)tlsGetFunction(135);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttrib2fv(index, v);
 }
@@ -1046,7 +1046,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glVertexAttrib3f(JNIEnv *_
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglVertexAttrib3fv__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttrib3fvPROC glVertexAttrib3fv = (glVertexAttrib3fvPROC)tlsGetFunction(137);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttrib3fv(index, v);
 }
@@ -1059,14 +1059,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_glVertexAttrib4f(JNIEnv *_
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglVertexAttrib4fv__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
     glVertexAttrib4fvPROC glVertexAttrib4fv = (glVertexAttrib4fvPROC)tlsGetFunction(139);
-    intptr_t v = (intptr_t)vAddress;
+    uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glVertexAttrib4fv(index, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES20_nglVertexAttribPointer(JNIEnv *__env, jclass clazz, jint index, jint size, jint type, jboolean normalized, jint stride, jlong pointerAddress) {
     glVertexAttribPointerPROC glVertexAttribPointer = (glVertexAttribPointerPROC)tlsGetFunction(140);
-    intptr_t pointer = (intptr_t)pointerAddress;
+    uintptr_t pointer = (uintptr_t)pointerAddress;
     UNUSED_PARAM(clazz)
     glVertexAttribPointer(index, size, type, normalized, stride, pointer);
 }

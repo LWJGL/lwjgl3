@@ -168,8 +168,8 @@ EXTERN_C_ENTER
 JNIEXPORT int JNICALL Java_org_lwjgl_system_SharedLibraryUtil_getLibraryPath(JNIEnv *env, jclass clazz, jlong pLibAddress, jlong sOutAddress, int bufSize)
 {
   UNUSED_PARAMS(env, clazz)
-  void *pLib = (void *)(intptr_t)pLibAddress;
-  char *sOut = (char *)(intptr_t)sOutAddress;
+  void *pLib = (void *)(uintptr_t)pLibAddress;
+  char *sOut = (char *)(uintptr_t)sOutAddress;
 
   struct link_map* p = NULL;
   int l = -1;
@@ -192,8 +192,8 @@ EXTERN_C_ENTER
 JNIEXPORT int JNICALL Java_org_lwjgl_system_SharedLibraryUtil_getLibraryPath(JNIEnv *env, jclass clazz, jlong pLibAddress, jlong sOutAddress, jint bufSize)
 {
   UNUSED_PARAMS(env, clazz)
-  void *pLib = (void *)(intptr_t)pLibAddress;
-  char *sOut = (char *)(intptr_t)sOutAddress;
+  void *pLib = (void *)(uintptr_t)pLibAddress;
+  char *sOut = (char *)(uintptr_t)sOutAddress;
 
   uint32_t i;
   int l = -1;
@@ -297,8 +297,8 @@ EXTERN_C_ENTER
 JNIEXPORT int JNICALL Java_org_lwjgl_system_SharedLibraryUtil_getLibraryPath(JNIEnv *env, jclass clazz, jlong pLibAddress, jlong sOutAddress, jint bufSize)
 {
   UNUSED_PARAMS(env, clazz)
-  void *pLib = (void *)(intptr_t)pLibAddress;
-  char *sOut = (char *)(intptr_t)sOutAddress;
+  void *pLib = (void *)(uintptr_t)pLibAddress;
+  char *sOut = (char *)(uintptr_t)sOutAddress;
 
   iter_phdr_data d = { pLib, sOut, bufSize };
   return dl_iterate_phdr(iter_phdr_cb, &d);
@@ -329,8 +329,8 @@ EXTERN_C_ENTER
 JNIEXPORT int JNICALL Java_org_lwjgl_system_SharedLibraryUtil_getLibraryPath(JNIEnv *env, jclass clazz, jlong pLibAddress, jlong sOutAddress, jint bufSize)
 {
   UNUSED_PARAMS(env, clazz)
-  void *pLib = (void *)(intptr_t)pLibAddress;
-  char *sOut = (char *)(intptr_t)sOutAddress;
+  void *pLib = (void *)(uintptr_t)pLibAddress;
+  char *sOut = (char *)(uintptr_t)sOutAddress;
 
 /*@@@ missing handler for pLib == NULL*/
   /* cross fingers that shared object is standard ELF and look for _fini */

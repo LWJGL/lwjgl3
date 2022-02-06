@@ -2314,7 +2314,7 @@ ${validations.joinToString("\n")}
 EXTERN_C_ENTER
 
 JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress) {
-    jint *buffer = (jint *)(intptr_t)bufferAddress;
+    jint *buffer = (jint *)(uintptr_t)bufferAddress;
 
     UNUSED_PARAMS($JNIENV, clazz)
 """)
@@ -2385,7 +2385,7 @@ EXTERN_C_EXIT""")
 
 JNIEXPORT ${it.nativeType.jniFunctionType} JNICALL Java_$signature(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress) {
     UNUSED_PARAMS($JNIENV, clazz)
-    $nativeName *buffer = ($nativeName *)(intptr_t)bufferAddress;
+    $nativeName *buffer = ($nativeName *)(uintptr_t)bufferAddress;
     return (${it.nativeType.jniFunctionType})buffer->$prefix${it.name};
 }""")
             }
@@ -2407,7 +2407,7 @@ JNIEXPORT ${it.nativeType.jniFunctionType} JNICALL Java_$signature(JNIEnv *$JNIE
 
 JNIEXPORT void JNICALL Java_$signature(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress, ${it.nativeType.jniFunctionType} value) {
     UNUSED_PARAMS($JNIENV, clazz)
-    $nativeName *buffer = ($nativeName *)(intptr_t)bufferAddress;
+    $nativeName *buffer = ($nativeName *)(uintptr_t)bufferAddress;
     buffer->$prefix${it.name} = (${it.nativeType.name})value;
 }""")
             }

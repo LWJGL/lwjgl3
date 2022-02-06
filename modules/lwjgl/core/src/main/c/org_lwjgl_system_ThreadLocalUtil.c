@@ -34,7 +34,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_getThreadJNIEnv(JN
 // getFunctionMissingAbort()J
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_ThreadLocalUtil_getFunctionMissingAbort(JNIEnv *env, jclass clazz) {
     UNUSED_PARAMS(env, clazz)
-    return (jlong)(intptr_t)functionMissingAbort;
+    return (jlong)(uintptr_t)functionMissingAbort;
 }
 
 extern EnvData* tlsCreateEnvDataWithCopy(JNIEnv* env);

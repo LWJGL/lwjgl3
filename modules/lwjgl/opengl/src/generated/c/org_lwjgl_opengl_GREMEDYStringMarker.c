@@ -6,13 +6,13 @@
 #include "common_tools.h"
 #include "opengl.h"
 
-typedef void (APIENTRY *glStringMarkerGREMEDYPROC) (jint, intptr_t);
+typedef void (APIENTRY *glStringMarkerGREMEDYPROC) (jint, uintptr_t);
 
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GREMEDYStringMarker_nglStringMarkerGREMEDY(JNIEnv *__env, jclass clazz, jint len, jlong stringAddress) {
     glStringMarkerGREMEDYPROC glStringMarkerGREMEDY = (glStringMarkerGREMEDYPROC)tlsGetFunction(1887);
-    intptr_t string = (intptr_t)stringAddress;
+    uintptr_t string = (uintptr_t)stringAddress;
     UNUSED_PARAM(clazz)
     glStringMarkerGREMEDY(len, string);
 }

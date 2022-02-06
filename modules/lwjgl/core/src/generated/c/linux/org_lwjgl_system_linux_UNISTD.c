@@ -26,7 +26,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UNISTD_sysconf(JNIEnv *__env
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UNISTD_nread(JNIEnv *__env, jclass clazz, jint fd, jlong bufAddress, jlong count) {
-    void *buf = (void *)(intptr_t)bufAddress;
+    void *buf = (void *)(uintptr_t)bufAddress;
     jlong __result;
     UNUSED_PARAMS(__env, clazz)
     __result = (jlong)read(fd, buf, (size_t)count);

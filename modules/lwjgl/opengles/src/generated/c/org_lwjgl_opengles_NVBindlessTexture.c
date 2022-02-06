@@ -14,9 +14,9 @@ typedef jlong (APIENTRY *glGetImageHandleNVPROC) (jint, jint, jboolean, jint, ji
 typedef void (APIENTRY *glMakeImageHandleResidentNVPROC) (jlong, jint);
 typedef void (APIENTRY *glMakeImageHandleNonResidentNVPROC) (jlong);
 typedef void (APIENTRY *glUniformHandleui64NVPROC) (jint, jlong);
-typedef void (APIENTRY *glUniformHandleui64vNVPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glUniformHandleui64vNVPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glProgramUniformHandleui64NVPROC) (jint, jint, jlong);
-typedef void (APIENTRY *glProgramUniformHandleui64vNVPROC) (jint, jint, jint, intptr_t);
+typedef void (APIENTRY *glProgramUniformHandleui64vNVPROC) (jint, jint, jint, uintptr_t);
 typedef jboolean (APIENTRY *glIsTextureHandleResidentNVPROC) (jlong);
 typedef jboolean (APIENTRY *glIsImageHandleResidentNVPROC) (jlong);
 
@@ -72,7 +72,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glUniformHandle
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_nglUniformHandleui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint location, jint count, jlong valuesAddress) {
     glUniformHandleui64vNVPROC glUniformHandleui64vNV = (glUniformHandleui64vNVPROC)tlsGetFunction(603);
-    intptr_t values = (intptr_t)valuesAddress;
+    uintptr_t values = (uintptr_t)valuesAddress;
     UNUSED_PARAM(clazz)
     glUniformHandleui64vNV(location, count, values);
 }
@@ -85,7 +85,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_glProgramUnifor
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVBindlessTexture_nglProgramUniformHandleui64vNV__IIIJ(JNIEnv *__env, jclass clazz, jint program, jint location, jint count, jlong valuesAddress) {
     glProgramUniformHandleui64vNVPROC glProgramUniformHandleui64vNV = (glProgramUniformHandleui64vNVPROC)tlsGetFunction(605);
-    intptr_t values = (intptr_t)valuesAddress;
+    uintptr_t values = (uintptr_t)valuesAddress;
     UNUSED_PARAM(clazz)
     glProgramUniformHandleui64vNV(program, location, count, values);
 }

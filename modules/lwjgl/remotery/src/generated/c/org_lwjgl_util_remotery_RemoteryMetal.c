@@ -18,7 +18,7 @@ ENABLE_WARNINGS()
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryMetal_nrmt_1BindMetal(JNIEnv *__env, jclass clazz, jlong command_bufferAddress) {
-    id command_buffer = (id)(intptr_t)command_bufferAddress;
+    id command_buffer = (id)(uintptr_t)command_bufferAddress;
     UNUSED_PARAMS(__env, clazz)
     rmt_BindMetal(command_buffer);
 }
@@ -29,8 +29,8 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryMetal_rmt_1UnbindMet
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_remotery_RemoteryMetal_nrmt_1BeginMetalSample(JNIEnv *__env, jclass clazz, jlong nameAddress, jlong hash_cacheAddress) {
-    rmtPStr name = (rmtPStr)(intptr_t)nameAddress;
-    rmtU32 *hash_cache = (rmtU32 *)(intptr_t)hash_cacheAddress;
+    rmtPStr name = (rmtPStr)(uintptr_t)nameAddress;
+    rmtU32 *hash_cache = (rmtU32 *)(uintptr_t)hash_cacheAddress;
     UNUSED_PARAMS(__env, clazz)
     _rmt_BeginMetalSample(name, hash_cache);
 }

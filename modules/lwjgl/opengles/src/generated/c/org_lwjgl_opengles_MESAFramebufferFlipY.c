@@ -7,7 +7,7 @@
 #include "opengles.h"
 
 typedef void (APIENTRY *glFramebufferParameteriMESAPROC) (jint, jint, jint);
-typedef void (APIENTRY *glGetFramebufferParameterivMESAPROC) (jint, jint, intptr_t);
+typedef void (APIENTRY *glGetFramebufferParameterivMESAPROC) (jint, jint, uintptr_t);
 
 EXTERN_C_ENTER
 
@@ -19,7 +19,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_MESAFramebufferFlipY_glFramebuffe
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_MESAFramebufferFlipY_nglGetFramebufferParameterivMESA__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
     glGetFramebufferParameterivMESAPROC glGetFramebufferParameterivMESA = (glGetFramebufferParameterivMESAPROC)tlsGetFunction(593);
-    intptr_t params = (intptr_t)paramsAddress;
+    uintptr_t params = (uintptr_t)paramsAddress;
     UNUSED_PARAM(clazz)
     glGetFramebufferParameterivMESA(target, pname, params);
 }

@@ -186,7 +186,7 @@ final class MemoryAccessJNI {
      *
      * @param ptr the memory address to read
      */
-    @NativeType("intptr_t")
+    @NativeType("uintptr_t")
     static long getAddress(@NativeType("void *") long ptr) {
         if (CHECKS) {
             check(ptr);
@@ -313,7 +313,7 @@ final class MemoryAccessJNI {
      * @param ptr   the memory address to write
      * @param value the value to write
      */
-    static void putAddress(@NativeType("void *") long ptr, @NativeType("intptr_t") long value) {
+    static void putAddress(@NativeType("void *") long ptr, @NativeType("uintptr_t") long value) {
         if (CHECKS) {
             check(ptr);
         }

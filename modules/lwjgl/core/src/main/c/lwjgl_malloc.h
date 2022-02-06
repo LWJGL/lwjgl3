@@ -41,13 +41,13 @@ JNIEXPORT void JNICALL Java_##classPath##_setupMalloc( \
 ) { \
     UNUSED_PARAMS(env, clazz) \
  \
-    org_lwjgl_malloc = (mallocPROC)(intptr_t)malloc; \
-    org_lwjgl_calloc = (callocPROC)(intptr_t)calloc; \
-    org_lwjgl_realloc = (reallocPROC)(intptr_t)realloc; \
-    org_lwjgl_free = (freePROC)(intptr_t)free; \
+    org_lwjgl_malloc = (mallocPROC)(uintptr_t)malloc; \
+    org_lwjgl_calloc = (callocPROC)(uintptr_t)calloc; \
+    org_lwjgl_realloc = (reallocPROC)(uintptr_t)realloc; \
+    org_lwjgl_free = (freePROC)(uintptr_t)free; \
  \
-    org_lwjgl_aligned_alloc = (aligned_allocPROC)(intptr_t)aligned_alloc; \
-    org_lwjgl_aligned_free = (aligned_freePROC)(intptr_t)aligned_free; \
+    org_lwjgl_aligned_alloc = (aligned_allocPROC)(uintptr_t)aligned_alloc; \
+    org_lwjgl_aligned_free = (aligned_freePROC)(uintptr_t)aligned_free; \
 }
 
 mallocPROC        org_lwjgl_malloc;

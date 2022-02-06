@@ -12,9 +12,9 @@
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_meow_MeowC_nMeowHash_1C(JNIEnv *__env, jclass clazz, jlong Seed, jlong TotalLengthInBytes, jlong SourceInitAddress, jlong __result) {
-    void *SourceInit = (void *)(intptr_t)SourceInitAddress;
+    void *SourceInit = (void *)(uintptr_t)SourceInitAddress;
     UNUSED_PARAMS(__env, clazz)
-    *((meow_hash*)(intptr_t)__result) = MeowHash_C((meow_u64)Seed, (meow_u64)TotalLengthInBytes, SourceInit);
+    *((meow_hash*)(uintptr_t)__result) = MeowHash_C((meow_u64)Seed, (meow_u64)TotalLengthInBytes, SourceInit);
 }
 
 EXTERN_C_EXIT
