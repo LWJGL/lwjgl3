@@ -40,7 +40,7 @@ public class MemSetTest {
 
             arrays[i] = new byte[len];
             buffers.put(i, nmemAlloc(len));
-            offsets[i] = i % 16 != 0 ? 0 : rand.nextInt(8); // 25% unaligned head
+            offsets[i] = i % 4 != 0 ? 0 : (1 + rand.nextInt(7)); // 25% unaligned head
         }
     }
 

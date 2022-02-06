@@ -1783,17 +1783,22 @@ public final class MemoryUtil {
         - The native memset becomes fastest at bigger sizes, when the JNI overhead becomes negligible.
          */
 
-        //UNSAFE.setMemory(dst, bytes, (byte)(value & 0xFF));
-        if (bytes < 256L && ((int)ptr & 7) == 0) {
-            int length = (int)bytes & 0xFF;
+        //UNSAFE.setMemory(ptr, bytes, (byte)(value & 0xFF));
+        if (bytes < 256L) {
+            int p = (int)ptr;
             if (BITS64) {
-                memSet64(ptr, value, length);
+                if ((p & 7) == 0) {
+                    memSet64(ptr, value, (int)bytes & 0xFF);
+                    return;
+                }
             } else {
-                memSet32((int)ptr, value, length);
+                if ((p & 3) == 0) {
+                    memSet32(p, value, (int)bytes & 0xFF);
+                    return;
+                }
             }
-        } else {
-            nmemset(ptr, value, bytes);
         }
+        nmemset(ptr, value, bytes);
     }
     private static void memSet64(long ptr, int value, int bytes) {
         long fill = (value & 0xFF) * FILL_PATTERN_64;
