@@ -408,6 +408,9 @@
                 <arg value="-I${module.lwjgl.rel}/vulkan/src/main/c"/>
                 <fileset dir="." includes="${src.generated}/*.cpp"/>
             </source>
+            <link if:set="build.arch.arm">
+                <arg value="-latomic"/>
+            </link>
         </build>
 
         <!-- xxHash -->
