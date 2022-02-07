@@ -287,14 +287,14 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Calls {@link #nmalloc(int, int)} with {@code alignment} equal to 1.
+     * Calls {@link #nmalloc(int, int)} with {@code alignment} equal to {@link Pointer#POINTER_SIZE POINTER_SIZE}.
      *
      * @param size the allocation size
      *
      * @return the memory address on the stack for the requested allocation
      */
     public long nmalloc(int size) {
-        return nmalloc(1, size);
+        return nmalloc(POINTER_SIZE, size);
     }
 
     /**
@@ -360,18 +360,18 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Allocates a {@link ByteBuffer} on the stack.
+     * Allocates a {@link ByteBuffer} on the stack with {@code alignment} equal to {@link Pointer#POINTER_SIZE POINTER_SIZE}.
      *
      * @param size the number of elements in the buffer
      *
      * @return the allocated buffer
      */
     public ByteBuffer malloc(int size) {
-        return MemoryUtil.wrap(BUFFER_BYTE, nmalloc(1, size), size).order(NATIVE_ORDER);
+        return MemoryUtil.wrap(BUFFER_BYTE, nmalloc(POINTER_SIZE, size), size).order(NATIVE_ORDER);
     }
     /** Calloc version of {@link #malloc(int)}. */
     public ByteBuffer calloc(int size) {
-        return MemoryUtil.wrap(BUFFER_BYTE, ncalloc(1, size, 1), size).order(NATIVE_ORDER);
+        return MemoryUtil.wrap(BUFFER_BYTE, ncalloc(POINTER_SIZE, size, 1), size).order(NATIVE_ORDER);
     }
 
     /** Unsafe version of {@link #bytes(byte)}. */
@@ -381,16 +381,16 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
         return a;
     }
     /** Single value version of {@link #malloc}. */
-    public ByteBuffer bytes(byte x) { return malloc(1).put(0, x); }
+    public ByteBuffer bytes(byte x) { return malloc(1, 1).put(0, x); }
     /** Two value version of {@link #malloc}. */
-    public ByteBuffer bytes(byte x, byte y) { return malloc(2).put(0, x).put(1, y); }
+    public ByteBuffer bytes(byte x, byte y) { return malloc(1, 2).put(0, x).put(1, y); }
     /** Three value version of {@link #malloc}. */
-    public ByteBuffer bytes(byte x, byte y, byte z) { return malloc(3).put(0, x).put(1, y).put(2, z); }
+    public ByteBuffer bytes(byte x, byte y, byte z) { return malloc(1, 3).put(0, x).put(1, y).put(2, z); }
     /** Four value version of {@link #malloc}. */
-    public ByteBuffer bytes(byte x, byte y, byte z, byte w) { return malloc(4).put(0, x).put(1, y).put(2, z).put(3, w); }
+    public ByteBuffer bytes(byte x, byte y, byte z, byte w) { return malloc(1, 4).put(0, x).put(1, y).put(2, z).put(3, w); }
     /** Vararg version of {@link #malloc}. */
     public ByteBuffer bytes(byte... values) {
-        ByteBuffer buffer = malloc(values.length).put(values);
+        ByteBuffer buffer = malloc(1, values.length).put(values);
         buffer.flip();
         return buffer;
     }
@@ -693,7 +693,10 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     // -------------------------------------------------
 
     /**
-     * Encodes the specified text on the stack using ASCII encoding and returns a ByteBuffer that points to the encoded text, including a null-terminator.
+     * Encodes the specified text on the stack using ASCII encoding and returns a {@code ByteBuffer} that points to the encoded text, including a
+     * null-terminator.
+     *
+     * <p>The buffer will have {@code alignment} equal to {@link Pointer#POINTER_SIZE POINTER_SIZE}.</p>
      *
      * @param text the text to encode
      */
@@ -702,14 +705,16 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Encodes the specified text on the stack using ASCII encoding and returns a ByteBuffer that points to the encoded text.
+     * Encodes the specified text on the stack using ASCII encoding and returns a {@code ByteBuffer} that points to the encoded text.
+     *
+     * <p>The buffer will have {@code alignment} equal to {@link Pointer#POINTER_SIZE POINTER_SIZE}.</p>
      *
      * @param text           the text to encode
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public ByteBuffer ASCII(CharSequence text, boolean nullTerminated) {
         int  length = memLengthASCII(text, nullTerminated);
-        long target = nmalloc(1, length);
+        long target = nmalloc(POINTER_SIZE, length);
         encodeASCIIUnsafe(text, nullTerminated, target);
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
@@ -717,13 +722,14 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     /**
      * Encodes the specified text on the stack using ASCII encoding and returns the encoded text length, in bytes.
      *
-     * <p>Use {@link #getPointerAddress} immediately after this method to get the encoded text address.</p>
+     * <p>Use {@link #getPointerAddress} immediately after this method to get the encoded text address, which will have {@code alignment} equal to
+     * {@link Pointer#POINTER_SIZE POINTER_SIZE}.</p>
      *
      * @param text           the text to encode
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public int nASCII(CharSequence text, boolean nullTerminated) {
-        long target = nmalloc(1, memLengthASCII(text, nullTerminated));
+        long target = nmalloc(POINTER_SIZE, memLengthASCII(text, nullTerminated));
         return encodeASCIIUnsafe(text, nullTerminated, target);
     }
 
@@ -745,7 +751,10 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Encodes the specified text on the stack using UTF8 encoding and returns a ByteBuffer that points to the encoded text, including a null-terminator.
+     * Encodes the specified text on the stack using UTF8 encoding and returns a {@code ByteBuffer} that points to the encoded text, including a
+     * null-terminator.
+     *
+     * <p>The buffer will have {@code alignment} equal to {@link Pointer#POINTER_SIZE POINTER_SIZE}.</p>
      *
      * @param text the text to encode
      */
@@ -754,14 +763,16 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Encodes the specified text on the stack using UTF8 encoding and returns a ByteBuffer that points to the encoded text.
+     * Encodes the specified text on the stack using UTF8 encoding and returns a {@code ByteBuffer} that points to the encoded text.
+     *
+     * <p>The buffer will have {@code alignment} equal to {@link Pointer#POINTER_SIZE POINTER_SIZE}.</p>
      *
      * @param text           the text to encode
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public ByteBuffer UTF8(CharSequence text, boolean nullTerminated) {
         int  length = memLengthUTF8(text, nullTerminated);
-        long target = nmalloc(1, length);
+        long target = nmalloc(POINTER_SIZE, length);
         encodeUTF8Unsafe(text, nullTerminated, target);
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
@@ -769,13 +780,14 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     /**
      * Encodes the specified text on the stack using UTF8 encoding and returns the encoded text length, in bytes.
      *
-     * <p>Use {@link #getPointerAddress} immediately after this method to get the encoded text address.</p>
+     * <p>Use {@link #getPointerAddress} immediately after this method to get the encoded text address, which will have {@code alignment} equal to
+     * {@link Pointer#POINTER_SIZE POINTER_SIZE}.</p>
      *
      * @param text           the text to encode
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public int nUTF8(CharSequence text, boolean nullTerminated) {
-        long target = nmalloc(1, memLengthUTF8(text, nullTerminated));
+        long target = nmalloc(POINTER_SIZE, memLengthUTF8(text, nullTerminated));
         return encodeUTF8Unsafe(text, nullTerminated, target);
     }
 
@@ -797,7 +809,10 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Encodes the specified text on the stack using UTF16 encoding and returns a ByteBuffer that points to the encoded text, including a null-terminator.
+     * Encodes the specified text on the stack using UTF16 encoding and returns a {@code ByteBuffer} that points to the encoded text, including a
+     * null-terminator.
+     *
+     * <p>The buffer will have {@code alignment} equal to {@link Pointer#POINTER_SIZE POINTER_SIZE}.</p>
      *
      * @param text the text to encode
      */
@@ -806,14 +821,16 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     }
 
     /**
-     * Encodes the specified text on the stack using UTF16 encoding and returns a ByteBuffer that points to the encoded text.
+     * Encodes the specified text on the stack using UTF16 encoding and returns a {@code ByteBuffer} that points to the encoded text.
+     *
+     * <p>The buffer will have {@code alignment} equal to {@link Pointer#POINTER_SIZE POINTER_SIZE}.</p>
      *
      * @param text           the text to encode
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public ByteBuffer UTF16(CharSequence text, boolean nullTerminated) {
         int  length = memLengthUTF16(text, nullTerminated);
-        long target = nmalloc(2, length);
+        long target = nmalloc(POINTER_SIZE, length);
         encodeUTF16Unsafe(text, nullTerminated, target);
         return MemoryUtil.wrap(BUFFER_BYTE, target, length).order(NATIVE_ORDER);
     }
@@ -821,13 +838,14 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     /**
      * Encodes the specified text on the stack using UTF16 encoding and returns the encoded text length, in bytes.
      *
-     * <p>Use {@link #getPointerAddress} immediately after this method to get the encoded text address.</p>
+     * <p>Use {@link #getPointerAddress} immediately after this method to get the encoded text address, which will have {@code alignment} equal to
+     * {@link Pointer#POINTER_SIZE POINTER_SIZE}.</p>
      *
      * @param text           the text to encode
      * @param nullTerminated if true, a null-terminator is included at the end of the encoded text
      */
     public int nUTF16(CharSequence text, boolean nullTerminated) {
-        long target = nmalloc(2, memLengthUTF16(text, nullTerminated));
+        long target = nmalloc(POINTER_SIZE, memLengthUTF16(text, nullTerminated));
         return encodeUTF16Unsafe(text, nullTerminated, target);
     }
 
