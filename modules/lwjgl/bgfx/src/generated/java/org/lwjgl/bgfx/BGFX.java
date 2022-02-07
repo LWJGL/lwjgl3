@@ -4307,7 +4307,7 @@ public class BGFX {
     /**
      * Reserves {@code _num} matrices in internal matrix cache.
      * 
-     * <p>Pointer returned can be modifed until {@link #bgfx_frame frame} is called.</p>
+     * <p>Pointer returned can be modified until {@link #bgfx_frame frame} is called.</p>
      *
      * @param _this      the encoder
      * @param _transform pointer to {@link BGFXTransform} structure
@@ -4615,7 +4615,7 @@ public class BGFX {
     // --- [ bgfx_encoder_set_vertex_count ] ---
 
     /**
-     * Set number of vertices for auto generated vertices use in conjuction with {@code gl_VertexID}.
+     * Set number of vertices for auto generated vertices use in conjunction with {@code gl_VertexID}.
      * 
      * <p>Availability depends on: {@link #BGFX_CAPS_VERTEX_ID CAPS_VERTEX_ID}.</p>
      *
@@ -5318,7 +5318,7 @@ public class BGFX {
     /**
      * Reserves {@code _num} matrices in internal matrix cache.
      * 
-     * <p>Pointer returned can be modifed until {@link #bgfx_frame frame} is called.</p>
+     * <p>Pointer returned can be modified until {@link #bgfx_frame frame} is called.</p>
      *
      * @param _transform pointer to {@link BGFXTransform} structure
      * @param _num       number of matrices
@@ -5586,7 +5586,7 @@ public class BGFX {
     // --- [ bgfx_set_vertex_count ] ---
 
     /**
-     * Set number of vertices for auto generated vertices use in conjuction with {@code gl_VertexID}.
+     * Set number of vertices for auto generated vertices use in conjunction with {@code gl_VertexID}.
      * 
      * <p>Availability depends on: {@link #BGFX_CAPS_VERTEX_ID CAPS_VERTEX_ID}.</p>
      *
@@ -5650,7 +5650,7 @@ public class BGFX {
     // --- [ bgfx_set_instance_count ] ---
 
     /**
-     * Sets number of instances for auto generated instances use in conjuction with {@code gl_InstanceID}.
+     * Sets number of instances for auto generated instances use in conjunction with {@code gl_InstanceID}.
      * 
      * <p>Availability depends on: {@link #BGFX_CAPS_VERTEX_ID CAPS_VERTEX_ID}.</p>
      *

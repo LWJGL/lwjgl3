@@ -2205,7 +2205,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         """
         Reserves {@code _num} matrices in internal matrix cache.
 
-        Pointer returned can be modifed until #frame() is called.
+        Pointer returned can be modified until #frame() is called.
         """,
 
         bgfx_encoder_s.p("_this", "the encoder"),
@@ -2342,7 +2342,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     void(
         "encoder_set_vertex_count",
         """
-        Set number of vertices for auto generated vertices use in conjuction with {@code gl_VertexID}.
+        Set number of vertices for auto generated vertices use in conjunction with {@code gl_VertexID}.
 
         Availability depends on: #CAPS_VERTEX_ID.
         """,
@@ -2693,7 +2693,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         """
         Reserves {@code _num} matrices in internal matrix cache.
 
-        Pointer returned can be modifed until #frame() is called.
+        Pointer returned can be modified until #frame() is called.
         """,
 
         bgfx_transform_t.p("_transform", "pointer to ##BGFXTransform structure"),
@@ -2819,7 +2819,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     void(
         "set_vertex_count",
         """
-        Set number of vertices for auto generated vertices use in conjuction with {@code gl_VertexID}.
+        Set number of vertices for auto generated vertices use in conjunction with {@code gl_VertexID}.
 
         Availability depends on: #CAPS_VERTEX_ID.
         """,
@@ -2857,7 +2857,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
     void(
         "set_instance_count",
         """
-        Sets number of instances for auto generated instances use in conjuction with {@code gl_InstanceID}.
+        Sets number of instances for auto generated instances use in conjunction with {@code gl_InstanceID}.
 
         Availability depends on: #CAPS_VERTEX_ID.
         """,
