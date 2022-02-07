@@ -107,6 +107,7 @@ public class Shaderc {
      * <li>{@link #shaderc_env_version_vulkan_1_0 env_version_vulkan_1_0}</li>
      * <li>{@link #shaderc_env_version_vulkan_1_1 env_version_vulkan_1_1}</li>
      * <li>{@link #shaderc_env_version_vulkan_1_2 env_version_vulkan_1_2}</li>
+     * <li>{@link #shaderc_env_version_vulkan_1_3 env_version_vulkan_1_3}</li>
      * <li>{@link #shaderc_env_version_opengl_4_5 env_version_opengl_4_5}</li>
      * <li>{@link #shaderc_env_version_webgpu env_version_webgpu} - deprecated, WebGPU env never defined versions</li>
      * </ul>
@@ -115,6 +116,7 @@ public class Shaderc {
         shaderc_env_version_vulkan_1_0 = ((1 << 22)),
         shaderc_env_version_vulkan_1_1 = ((1 << 22) | (1 << 12)),
         shaderc_env_version_vulkan_1_2 = ((1 << 22) | (2 << 12)),
+        shaderc_env_version_vulkan_1_3 = ((1 << 22) | (3 << 12)),
         shaderc_env_version_opengl_4_5 = 450,
         shaderc_env_version_webgpu     = 451;
 
@@ -130,6 +132,7 @@ public class Shaderc {
      * <li>{@link #shaderc_spirv_version_1_3 spirv_version_1_3}</li>
      * <li>{@link #shaderc_spirv_version_1_4 spirv_version_1_4}</li>
      * <li>{@link #shaderc_spirv_version_1_5 spirv_version_1_5}</li>
+     * <li>{@link #shaderc_spirv_version_1_6 spirv_version_1_6}</li>
      * </ul>
      */
     public static final int
@@ -138,7 +141,8 @@ public class Shaderc {
         shaderc_spirv_version_1_2 = 0x10200,
         shaderc_spirv_version_1_3 = 0x10300,
         shaderc_spirv_version_1_4 = 0x10400,
-        shaderc_spirv_version_1_5 = 0x10500;
+        shaderc_spirv_version_1_5 = 0x10500,
+        shaderc_spirv_version_1_6 = 0x10600;
 
     /**
      * Indicate the status of a compilation. ({@code shaderc_compilation_status})

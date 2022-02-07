@@ -32,6 +32,7 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
         "env_version_vulkan_1_0".enum("", "((1 << 22))"),
         "env_version_vulkan_1_1".enum("", "((1 << 22) | (1 << 12))"),
         "env_version_vulkan_1_2".enum("", "((1 << 22) | (2 << 12))"),
+        "env_version_vulkan_1_3".enum("", "((1 << 22) | (3 << 12))"),
         "env_version_opengl_4_5".enum("", "450"),
         "env_version_webgpu".enum("deprecated, WebGPU env never defined versions")
     )
@@ -44,7 +45,8 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
         "spirv_version_1_2".enum("", 0x010200),
         "spirv_version_1_3".enum("", 0x010300),
         "spirv_version_1_4".enum("", 0x010400),
-        "spirv_version_1_5".enum("", 0x010500)
+        "spirv_version_1_5".enum("", 0x010500),
+        "spirv_version_1_6".enum("", 0x010600)
     )
 
     EnumConstant(
