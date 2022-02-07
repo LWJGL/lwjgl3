@@ -21,7 +21,7 @@ ENABLE_WARNINGS()""")
         <h4>Why should I use a dictionary?</h4>
 
         Zstd can use dictionaries to improve compression ratio of small data. Traditionally small files don't compress well because there is very little
-        repetion in a single sample, since it is small. But, if you are compressing many similar files, like a bunch of JSON records that share the same
+        repetition in a single sample, since it is small. But, if you are compressing many similar files, like a bunch of JSON records that share the same
         structure, you can train a dictionary on ahead of time on some samples of these files. Then, zstd can use the dictionary to find repetitions that are
         present across samples. This can vastly improve compression ratio.
  
@@ -325,7 +325,6 @@ zstd -b1e3 -r /path/to/my/files -D /path/to/my/dictionary""")}
 
         Notes:
         ${ul(
-            "{@code dictContentSize} must be &ge; #CONTENTSIZE_MIN bytes.",
             "{@code maxDictSize} must be &ge; {@code dictContentSize}, and must be &ge; #DICTSIZE_MIN bytes.",
             "{@code ZDICT_finalizeDictionary()} will push notifications into {@code stderr} if instructed to, using {@code notificationLevel>0}.",
             "{@code dictBuffer} and {@code dictContent} can overlap."

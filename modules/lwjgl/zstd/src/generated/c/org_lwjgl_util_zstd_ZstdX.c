@@ -59,6 +59,20 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1writeSkippableFram
     return (jlong)ZSTD_writeSkippableFrame(dst, (size_t)dstCapacity, src, (size_t)srcSize, (unsigned)magicVariant);
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1readSkippableFrame(JNIEnv *__env, jclass clazz, jlong dstAddress, jlong dstCapacity, jlong magicVariantAddress, jlong srcAddress, jlong srcSize) {
+    void *dst = (void *)(uintptr_t)dstAddress;
+    unsigned *magicVariant = (unsigned *)(uintptr_t)magicVariantAddress;
+    void const *src = (void const *)(uintptr_t)srcAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)ZSTD_readSkippableFrame(dst, (size_t)dstCapacity, magicVariant, src, (size_t)srcSize);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1isSkippableFrame(JNIEnv *__env, jclass clazz, jlong bufferAddress, jlong size) {
+    void const *buffer = (void const *)(uintptr_t)bufferAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)ZSTD_isSkippableFrame(buffer, (size_t)size);
+}
+
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_ZSTD_1estimateCCtxSize(JNIEnv *__env, jclass clazz, jint compressionLevel) {
     UNUSED_PARAMS(__env, clazz)
     return (jlong)ZSTD_estimateCCtxSize(compressionLevel);

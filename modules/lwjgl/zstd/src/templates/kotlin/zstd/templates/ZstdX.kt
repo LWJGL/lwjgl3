@@ -90,7 +90,7 @@ ENABLE_WARNINGS()""")
     public static int ZSTD_FRAMEHEADERSIZE_PREFIX(int format) {
         return format == ZSTD_f_zstd1 ? 5 : 1;
     }
-    
+
     public static int ZSTD_FRAMEHEADERSIZE_MIN(int format) {
         return format == ZSTD_f_zstd1 ? 6 : 2;
     }""")
@@ -127,7 +127,6 @@ ENABLE_WARNINGS()""")
     IntConstant("", "TARGETCBLOCKSIZE_MAX".."ZSTD_BLOCKSIZE_MAX")
     IntConstant("", "SRCSIZEHINT_MIN".."0")
     IntConstant("", "SRCSIZEHINT_MAX".."Integer.MAX_VALUE")
-    IntConstant("", "HASHLOG3_MAX".."17")
 
     IntConstant(
         """
@@ -172,9 +171,15 @@ ENABLE_WARNINGS()""")
     )
     IntConstant(
         """
-        Controls how the literals are compressed (default is {@code auto}).
+        Controlled with {@code ZSTD_paramSwitch_e} enum.
+        ${ul(
+            "Default is #ps_auto.",
+            "Set to #ps_disable to never compress literals.",
+            "Set to #ps_enable to always compress literals. (Note: uncompressed literals may still be emitted if huffman is not beneficial to use.)"
+        )}
 
-        The value must be of type {@code ZSTD_literalCompressionMode_e}.
+        By default, in {@code ZSTD_ps_auto}, the library will decide at runtime whether to use literals compression based on the compression parameters -
+        specifically, negative compression levels do not use literal compression.
         """,
         "c_literalCompressionMode".."ZSTD_c_experimentalParam5"
     )
@@ -232,7 +237,7 @@ ENABLE_WARNINGS()""")
         #lazy, and #lazy2.
 
         Note that this means that the {@code CDict} tables can no longer be copied into the {@code CCtx}, so the {@code dict} attachment mode #dictForceCopy
-        will no longer be useable. The dictionary can only be attached or reloaded.
+        will no longer be usable. The dictionary can only be attached or reloaded.
 
         In general, you should expect compression to be faster--sometimes very much so--and {@code CDict} creation to be slightly slower. Eventually, we will
         probably make this mode the default.
@@ -252,7 +257,7 @@ ENABLE_WARNINGS()""")
         When this flag is enabled zstd won't allocate an input window buffer, because the user guarantees it can reference the {@code ZSTD_inBuffer} until the
         frame is complete. But, it will still allocate an output buffer large enough to fit a block (see #c_stableOutBuffer). This will also avoid the
         {@code memcpy()} from the input buffer to the input window buffer.
-    
+
         NOTE: #compressStream2() will error if {@code ZSTD_e_end} is not used. That means this flag cannot be used with {@code ZSTD_compressStream*()}.
 
         NOTE: So long as the {@code ZSTD_inBuffer} always points to valid memory, using this flag is ALWAYS memory safe, and will never access out-of-bounds
@@ -311,21 +316,29 @@ ENABLE_WARNINGS()""")
     )
     IntConstant(
         """
-        Default is {@code 0 == disabled}. Set to 1 to enable block splitting.
- 
-        Will attempt to split blocks in order to improve compression ratio at the cost of speed.       
+        Controlled with {@code ZSTD_paramSwitch_e} enum.
+        ${ul(
+            "Default is #ps_auto.",
+            "Set to #ps_disable to never use block splitter.",
+            "Set to #ps_enable to always use block splitter."
+        )}
+
+        By default, in {@code ZSTD_ps_auto}, the library will decide at runtime whether to use block splitting based on the compression parameters.       
         """,
 
-        "c_splitBlocks".."ZSTD_c_experimentalParam13"
+        "c_useBlockSplitter".."ZSTD_c_experimentalParam13"
     )
     IntConstant(
         """
-        Default is #urm_auto. Controlled with {@code ZSTD_useRowMatchFinderMode_e} enum.
- 
-        By default, in {@code ZSTD_urm_auto}, when finalizing the compression parameters, the library will decide at runtime whether to use the row-based
-        matchfinder based on support for SIMD instructions as well as the {@code windowLog}.
- 
-        Set to #urm_disableRowMatchFinder to never use row-based matchfinder. Set to #urm_enableRowMatchFinder to force usage of row-based matchfinder.
+        Controlled with {@code ZSTD_paramSwitch_e} enum.
+        ${ul(
+            "Default is #ps_auto.",
+            "Set to #ps_disable to never use row-based matchfinder.",
+            "Set to #ps_enable to force usage of row-based matchfinder."
+        )}
+
+        By default, in {@code ZSTD_ps_auto}, the library will decide at runtime whether to use the row-based matchfinder based on support for SIMD instructions
+        and the window log. Note that this only pertains to compression strategies: {@code greedy}, {@code lazy}, and {@code lazy2}.
         """,
 
         "c_useRowMatchFinder".."ZSTD_c_experimentalParam14"
@@ -333,12 +346,12 @@ ENABLE_WARNINGS()""")
     IntConstant(
         """
         Default is {@code 0 == disabled}. Set to 1 to enable.
- 
+
         Zstd produces different results for prefix compression when the prefix is directly adjacent to the data about to be compressed vs. when it isn't. This
         is because zstd detects that the two buffers are contiguous and it can use a more efficient match finding algorithm. However, this produces different
         results than when the two buffers are non-contiguous. This flag forces zstd to always load the prefix in non-contiguous mode, even if it happens to be
         adjacent to the data, to guarantee determinism.
- 
+
         If you really care about determinism when using a dictionary or prefix, like when doing delta compression, you should select this option. It comes at a
         speed penalty of about ~2.5% if the dictionary and data happened to be contiguous, and is free if they weren't contiguous. We don't expect that
         intentionally making the dictionary and data contiguous will be worth the cost to {@code memcpy()} the data.
@@ -349,7 +362,7 @@ ENABLE_WARNINGS()""")
     IntConstant(
         """
         Experimental parameter.
-            
+
         Allows selection between {@code ZSTD_format_e} input compression formats.
         """,
         "d_format".."ZSTD_d_experimentalParam1"
@@ -362,14 +375,14 @@ ENABLE_WARNINGS()""")
         {@code pos} (the caller must not modify {@code pos}). This is checked by the decompressor, and decompression will fail if it ever changes. Therefore
         the {@code ZSTD_outBuffer} MUST be large enough to fit the entire decompressed frame. This will be checked when the frame content size is known. The
         data in the {@code ZSTD_outBuffer} in the range {@code [dst, dst + pos)} MUST not be modified during decompression or you will get data corruption.
- 
+
         When this flags is enabled zstd won't allocate an output buffer, because it can write directly to the {@code ZSTD_outBuffer}, but it will still
         allocate an input buffer large enough to fit any compressed block. This will also avoid the {@code memcpy()} from the internal output buffer to the
         {@code ZSTD_outBuffer}. If you need to avoid the input buffer allocation use the buffer-less streaming API.
- 
+
         NOTE: So long as the {@code ZSTD_outBuffer} always points to valid memory, using this flag is ALWAYS memory safe, and will never access out-of-bounds
         memory. However, decompression WILL fail if you violate the preconditions.
- 
+
         WARNING: The data in the {@code ZSTD_outBuffer} in the range {@code [dst, dst + pos)} MUST not be modified during decompression or you will get data
         corruption. This is because zstd needs to reference data in the {@code ZSTD_outBuffer} to regenerate matches. Normally zstd maintains its own buffer
         for this purpose, but passing this flag tells zstd to use the user provided buffer.
@@ -422,11 +435,16 @@ ENABLE_WARNINGS()""")
     )
 
     EnumConstant(
-        "{@code ZSTD_useRowMatchFinderMode_e}",
+        """
+        {@code ZSTD_paramSwitch_e}
 
-        "urm_auto".enum("Automatically determine whether or not we use row matchfinder.", "0"),
-        "urm_disableRowMatchFinder".enum("Never use row matchfinder."),
-        "urm_enableRowMatchFinder".enum("Always use row matchfinder when applicable.")
+        This enum controls features which are conditionally beneficial. Zstd typically will make a final decision on whether or not to enable the feature
+        ({@code ZSTD_ps_auto}), but setting the switch to {@code ZSTD_ps_enable} or {@code ZSTD_ps_disable} allow for a force enable/disable the feature.
+        """,
+
+        "ps_auto".enum("Let the library automatically determine whether the feature shall be enabled.", "0"),
+        "ps_enable".enum("Force-enable the feature."),
+        "ps_disable".enum("Do not use the feature.")
     )
 
     unsigned_long_long(
@@ -545,7 +563,7 @@ ENABLE_WARNINGS()""")
         "compressSequences",
         """
         Compress an array of {@code ZSTD_Sequence}, generated from the original source buffer, into {@code dst}.
-        
+
         If a dictionary is included, then the {@code cctx} should reference the {@code dict}. (see: #CCtx_refCDict(), #CCtx_loadDictionary(), etc.) The entire
         source is compressed into a single frame.
 
@@ -578,7 +596,7 @@ ENABLE_WARNINGS()""")
         )}
 
         Note: Repcodes are, as of now, always re-calculated within this function, so {@code ZSTD_Sequence::rep} is unused.
-        
+
         Note 2: Once we integrate ability to ingest repcodes, the explicit block delims mode must respect those repcodes exactly, and cannot emit an RLE block
         that disagrees with the {@code repcode} history.
         """,
@@ -617,22 +635,50 @@ ENABLE_WARNINGS()""")
     )
 
     size_t(
+        "readSkippableFrame",
+        """
+        Retrieves a zstd skippable frame containing data given by {@code src}, and writes it to {@code dst} buffer.
+
+        The parameter {@code magicVariant} will receive the {@code magicVariant} that was supplied when the frame was written, i.e.
+        {@code magicNumber - ZSTD_MAGIC_SKIPPABLE_START}. This can be #NULL if the caller is not interested in the {@code magicVariant}.
+
+        Returns an error if destination buffer is not large enough, or if the frame is not skippable.
+        """,
+
+        void.p("dst", ""),
+        AutoSize("dst")..size_t("dstCapacity", ""),
+        Check(1)..nullable..unsigned.p("magicVariant", ""),
+        void.const.p("src", ""),
+        AutoSize("src")..size_t("srcSize", ""),
+
+        returnDoc = "number of bytes written or a ZSTD error"
+    )
+
+    unsignedb(
+        "isSkippableFrame",
+        "Tells if the content of {@code buffer} starts with a valid Frame Identifier for a skippable frame.",
+
+        void.const.p("buffer", ""),
+        AutoSize("buffer")..size_t("size", "")
+    )
+
+    size_t(
         "estimateCCtxSize",
         """
         Estimages memory usage of a future {@code CCtx}, before its creation.
 
         {@code ZSTD_estimateCCtxSize()} will provide a memory budget large enough for any compression level up to selected one.
-   
+
         Note: Unlike {@code ZSTD_estimateCStreamSize*()}, this estimate does not include space for a window buffer. Therefore, the estimation is only
         guaranteed for single-shot compressions, not streaming.
-   
+
         The estimate will assume the input may be arbitrarily large, which is the worst case.
-        
+
          When {@code srcSize} can be bound by a known and rather "small" value, this fact can be used to provide a tighter estimation because the CCtx
         compression context will need less memory. This tighter estimation can be provided by more advanced functions #estimateCCtxSize_usingCParams(), which
         can be used in tandem with #getCParams(), and #estimateCCtxSize_usingCCtxParams(), which can be used in tandem with #CCtxParams_setParameter(). Both
         can be used to estimate memory using custom compression parameters and arbitrary {@code srcSize} limits.
- 
+
         Note 2: only single-threaded compression is supported. #estimateCCtxSize_usingCCtxParams() will return an error code if #c_nbWorkers is &ge; 1.
         """,
 
@@ -799,7 +845,7 @@ ENABLE_WARNINGS()""")
         "createThreadPool",
         """
         Creates a new thread pool with a given number of threads.
- 
+
         Note that the lifetime of such pool must exist while being used.
         """,
 
@@ -851,7 +897,7 @@ ENABLE_WARNINGS()""")
 
         As a consequence, {@code dictBuffer} <b>must</b> outlive {@code CDict}, and its content must remain unmodified throughout the lifetime of
         {@code CDict}.
-        
+
         Note: equivalent to #createCDict_advanced(), with {@code dictLoadMethod==ZSTD_dlm_byRef}.
         """,
 
@@ -1017,7 +1063,7 @@ ENABLE_WARNINGS()""")
         "CCtx_setParametersUsingCCtxParams",
         """
         Applies a set of {@code ZSTD_CCtx_params} to the compression context.
-        
+
         This can be done even after compression is started, if {@code nbWorkers==0}, this will have no impact until a new compression is started. If
         {@code nbWorkers} &ge; 1, new parameters will be picked up at next job, with a few restrictions (windowLog, pledgedSrcSize, nbWorkers, jobSize, and
         overlapLog are not updated).

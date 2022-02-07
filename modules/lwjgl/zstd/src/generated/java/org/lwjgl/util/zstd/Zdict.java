@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <h4>Why should I use a dictionary?</h4>
  * 
  * <p>Zstd can use dictionaries to improve compression ratio of small data. Traditionally small files don't compress well because there is very little
- * repetion in a single sample, since it is small. But, if you are compressing many similar files, like a bunch of JSON records that share the same
+ * repetition in a single sample, since it is small. But, if you are compressing many similar files, like a bunch of JSON records that share the same
  * structure, you can train a dictionary on ahead of time on some samples of these files. Then, zstd can use the dictionary to find repetitions that are
  * present across samples. This can vastly improve compression ratio.</p>
  * 
@@ -342,7 +342,6 @@ public class Zdict {
      * <p>Notes:</p>
      * 
      * <ul>
-     * <li>{@code dictContentSize} must be &ge; {@link #ZDICT_CONTENTSIZE_MIN CONTENTSIZE_MIN} bytes.</li>
      * <li>{@code maxDictSize} must be &ge; {@code dictContentSize}, and must be &ge; {@link #ZDICT_DICTSIZE_MIN DICTSIZE_MIN} bytes.</li>
      * <li>{@code ZDICT_finalizeDictionary()} will push notifications into {@code stderr} if instructed to, using {@code notificationLevel>0}.</li>
      * <li>{@code dictBuffer} and {@code dictContent} can overlap.</li>
