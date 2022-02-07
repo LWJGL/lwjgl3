@@ -65,7 +65,7 @@ public abstract class GLFWErrorCallback extends Callback implements GLFWErrorCal
     }
 
     /**
-     * Converts the specified {@link GLFWErrorCallback} argument to a String.
+     * Converts the specified {@code GLFWErrorCallback} argument to a String.
      *
      * <p>This method may only be used inside a GLFWErrorCallback invocation.</p>
      *
@@ -78,7 +78,7 @@ public abstract class GLFWErrorCallback extends Callback implements GLFWErrorCal
     }
 
     /**
-     * Returns a {@link GLFWErrorCallback} instance that prints the error to the {@link APIUtil#DEBUG_STREAM}.
+     * Returns a {@code GLFWErrorCallback} instance that prints the error to the {@link APIUtil#DEBUG_STREAM}.
      *
      * @return the GLFWerrorCallback
      */
@@ -87,7 +87,7 @@ public abstract class GLFWErrorCallback extends Callback implements GLFWErrorCal
     }
 
     /**
-     * Returns a {@link GLFWErrorCallback} instance that prints the error in the specified {@link PrintStream}.
+     * Returns a {@code GLFWErrorCallback} instance that prints the error in the specified {@link PrintStream}.
      *
      * @param stream the PrintStream to use
      *
@@ -114,7 +114,7 @@ public abstract class GLFWErrorCallback extends Callback implements GLFWErrorCal
     }
 
     /**
-     * Returns a {@link GLFWErrorCallback} instance that throws an {@link IllegalStateException} when an error occurs.
+     * Returns a {@code GLFWErrorCallback} instance that throws an {@link IllegalStateException} when an error occurs.
      *
      * @return the GLFWerrorCallback
      */

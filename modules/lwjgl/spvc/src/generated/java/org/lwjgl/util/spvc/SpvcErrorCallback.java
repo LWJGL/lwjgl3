@@ -57,6 +57,19 @@ public abstract class SpvcErrorCallback extends Callback implements SpvcErrorCal
         super(functionPointer);
     }
 
+    /**
+     * Converts the specified {@code spvc_error_callback} argument to a String.
+     *
+     * <p>This method may only be used inside a {@code SpvcErrorCallback} invocation.</p>
+     *
+     * @param error the error argument to decode
+     *
+     * @return the error message as a String
+     */
+    public static String getError(long error) {
+        return memUTF8(error);
+    }
+
     private static final class Container extends SpvcErrorCallback {
 
         private final SpvcErrorCallbackI delegate;

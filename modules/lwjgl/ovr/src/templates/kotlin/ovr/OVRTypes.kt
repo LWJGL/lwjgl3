@@ -48,19 +48,19 @@ val ovrLogCallback = Module.OVR.callback {
     ) {
         documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
         additionalCode = """
-        /**
-         * Converts the specified {@link OVRLogCallback} argument to a String.
-         *
-         * <p>This method may only be used inside a OVRLogCallback invocation.</p>
-         *
-         * @param message the OVRLogCallback {@code message} argument
-         *
-         * @return the message as a String
-         */
-        public static String getMessage(long message) {
-            return memUTF8(message);
-        }
-        """
+    /**
+     * Converts the specified {@link OVRLogCallback} argument to a String.
+     *
+     * <p>This method may only be used inside a OVRLogCallback invocation.</p>
+     *
+     * @param message the OVRLogCallback {@code message} argument
+     *
+     * @return the message as a String
+     */
+    public static String getMessage(long message) {
+        return memUTF8(message);
+    }
+    """
     }
 }
 
@@ -753,7 +753,7 @@ val ovrLayerEyeFovDepth = struct(Module.OVR, "OVRLayerEyeFovDepth", nativeName =
 }
 
 val ovrTextureLayoutOctilinear = struct(Module.OVR, "OVRTextureLayoutOctilinear", nativeName = "ovrTextureLayoutOctilinear") {
-    documentation = 
+    documentation =
         """
         Multiresolution descriptor for Octilinear.
 
@@ -808,7 +808,7 @@ and the scissor rectangle for quadrant 1 will be:
     float("WarpRight", "right W warping")
     float("WarpUp", "up W warping")
     float("WarpDown", "down W warping")
-    
+
     float("SizeLeft", "left W quadrant size")
     float("SizeRight", "right W quadrant size")
     float("SizeUp", "up W quadrant size")

@@ -273,5 +273,19 @@ val spvc_error_callback = Module.SPVC.callback {
         nativeType = "spvc_error_callback"
     ) {
         documentation = "Instances of this interface may be passed to the #context_set_error_callback() method."
+        additionalCode = """
+    /**
+     * Converts the specified {@code spvc_error_callback} argument to a String.
+     *
+     * <p>This method may only be used inside a {@code SpvcErrorCallback} invocation.</p>
+     *
+     * @param error the error argument to decode
+     *
+     * @return the error message as a String
+     */
+    public static String getError(long error) {
+        return memUTF8(error);
+    }
+    """
     }
 }

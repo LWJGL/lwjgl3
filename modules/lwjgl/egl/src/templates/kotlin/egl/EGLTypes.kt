@@ -84,8 +84,7 @@ val EGLDEBUGPROCKHR = Module.EGL.callback {
         nativeType = "EGLDEBUGPROCKHR"
     ) {
         documentation = "Instances of this interface may be passed to the #DebugMessageControlKHR() method."
-        additionalCode =
-        """
+        additionalCode = """
     /**
      * Converts the specified {@link EGLDebugMessageKHRCallback} argument to a String.
      *

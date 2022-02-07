@@ -154,10 +154,10 @@ val GLFWdeallocatefun = Module.GLFW.callback {
 
         nativeType = "GLFWdeallocatefun"
     ) {
-        documentation = 
+        documentation =
             """
             The function pointer type for memory deallocation callbacks.
-            
+
             This is the function pointer type for memory deallocation callbacks. A memory deallocation callback function has the following signature:
             ${codeBlock("""
 void function_name(void* block, void* user)""")}
@@ -198,7 +198,7 @@ val GLFWerrorfun = Module.GLFW.callback {
         )
         additionalCode = """
     /**
-     * Converts the specified {@link GLFWErrorCallback} argument to a String.
+     * Converts the specified {@code GLFWErrorCallback} argument to a String.
      *
      * <p>This method may only be used inside a GLFWErrorCallback invocation.</p>
      *
@@ -211,7 +211,7 @@ val GLFWerrorfun = Module.GLFW.callback {
     }
 
     /**
-     * Returns a {@link GLFWErrorCallback} instance that prints the error to the {@link APIUtil#DEBUG_STREAM}.
+     * Returns a {@code GLFWErrorCallback} instance that prints the error to the {@link APIUtil#DEBUG_STREAM}.
      *
      * @return the GLFWerrorCallback
      */
@@ -220,7 +220,7 @@ val GLFWerrorfun = Module.GLFW.callback {
     }
 
     /**
-     * Returns a {@link GLFWErrorCallback} instance that prints the error in the specified {@link PrintStream}.
+     * Returns a {@code GLFWErrorCallback} instance that prints the error in the specified {@link PrintStream}.
      *
      * @param stream the PrintStream to use
      *
@@ -247,7 +247,7 @@ val GLFWerrorfun = Module.GLFW.callback {
     }
 
     /**
-     * Returns a {@link GLFWErrorCallback} instance that throws an {@link IllegalStateException} when an error occurs.
+     * Returns a {@code GLFWErrorCallback} instance that throws an {@link IllegalStateException} when an error occurs.
      *
      * @return the GLFWerrorCallback
      */
