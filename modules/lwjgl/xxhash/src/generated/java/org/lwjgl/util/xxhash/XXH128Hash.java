@@ -16,12 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * The return value from 128-bit hashes.
+ * 
+ * <p>Stored in little endian order, although the fields themselves are in native endianness.</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct XXH128_hash_t {
- *     XXH32_hash_t low64;
- *     XXH32_hash_t high64;
+ *     XXH64_hash_t {@link #low64};
+ *     XXH64_hash_t {@link #high64};
  * }</code></pre>
  */
 @NativeType("struct XXH128_hash_t")
@@ -64,11 +68,11 @@ public class XXH128Hash extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code low64} field. */
-    @NativeType("XXH32_hash_t")
+    /** {@code value & 0xFFFFFFFFFFFFFFFF} */
+    @NativeType("XXH64_hash_t")
     public long low64() { return nlow64(address()); }
-    /** @return the value of the {@code high64} field. */
-    @NativeType("XXH32_hash_t")
+    /** {@code value >> 64} */
+    @NativeType("XXH64_hash_t")
     public long high64() { return nhigh64(address()); }
 
     // -----------------------------------
@@ -246,11 +250,11 @@ public class XXH128Hash extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code low64} field. */
-        @NativeType("XXH32_hash_t")
+        /** @return the value of the {@link XXH128Hash#low64} field. */
+        @NativeType("XXH64_hash_t")
         public long low64() { return XXH128Hash.nlow64(address()); }
-        /** @return the value of the {@code high64} field. */
-        @NativeType("XXH32_hash_t")
+        /** @return the value of the {@link XXH128Hash#high64} field. */
+        @NativeType("XXH64_hash_t")
         public long high64() { return XXH128Hash.nhigh64(address()); }
 
     }

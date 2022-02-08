@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * 32-bit canonical representation.
+ * Canonical (big endian) representation of {@code XXH32_hash_t}.
  * 
  * <h3>Layout</h3>
  * 
@@ -63,10 +63,10 @@ public class XXH32Canonical extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the digest in canonical representation */
+    /** hash bytes, big endian */
     @NativeType("unsigned char[4]")
     public ByteBuffer digest() { return ndigest(address()); }
-    /** the digest in canonical representation */
+    /** hash bytes, big endian */
     @NativeType("unsigned char")
     public byte digest(int index) { return ndigest(address(), index); }
 

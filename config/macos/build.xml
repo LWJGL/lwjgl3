@@ -330,13 +330,7 @@
         </build>
 
         <!-- xxHash -->
-        <build module="xxhash" if:true="${binding.xxhash}">
-            <source>
-                <arg value="-I${src.main.rel}"/>
-                <fileset dir="." includes="${src.generated}/*.c"/>
-                <fileset dir="." includes="${src.main}/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
-            </source>
-        </build>
+        <build_simple module="xxhash"/>
 
         <!-- yoga -->
         <build module="yoga" simple="true" lang="c++" if:true="${binding.yoga}">

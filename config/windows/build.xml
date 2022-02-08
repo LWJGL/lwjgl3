@@ -377,14 +377,7 @@ EXPORTS
         </build>
 
         <!-- xxHash -->
-        <build module="xxhash" if:true="${binding.xxhash}">
-            <compileargs>
-                <arg value="/I${src.main}"/>
-            </compileargs>
-            <source>
-                <fileset dir="." includes="${src.generated}/*.c"/>
-            </source>
-        </build>
+        <build_simple module="xxhash"/>
 
         <!-- yoga -->
         <build module="yoga" simple="true" if:true="${binding.yoga}">

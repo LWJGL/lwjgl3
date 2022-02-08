@@ -261,9 +261,7 @@ abstract class GeneratorTarget(
                                 classElement.lastIndexOf('(') + 2
                             )
                         } else {
-                            check(module === Module.VULKAN) {
-                                "Failed to resolve link: ${match.value} in ${this.className}"
-                            }
+                            throw IllegalStateException("Failed to resolve link: ${match.value} in ${this.className}")
                         }
                     } else {
                         if (classElement.startsWith(prefix))

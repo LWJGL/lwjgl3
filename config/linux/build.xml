@@ -414,19 +414,7 @@
         </build>
 
         <!-- xxHash -->
-        <sequential if:true="${binding.xxhash}">
-            <local name="xxhash.flags"/>
-            <condition property="xxhash.flags" value="" else="-mavx512f">
-                <isset property="build.arch.arm"/>
-            </condition>
-            <build module="xxhash" flags="-Werror -Wfatal-errors ${xxhash.flags}">
-                <source>
-                    <arg value="-I${src.main.rel}"/>
-                    <fileset dir="." includes="${src.generated}/*.c"/>
-                    <fileset dir="." includes="${src.main}/xxh_x86dispatch.c" unless:set="build.arch.arm"/>
-                </source>
-            </build>
-        </sequential>
+        <build_simple module="xxhash"/>
 
         <!-- yoga -->
         <build module="yoga" simple="true" lang="c++" if:true="${binding.yoga}">
