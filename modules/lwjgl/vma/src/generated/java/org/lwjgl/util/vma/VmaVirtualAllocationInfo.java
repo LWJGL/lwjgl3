@@ -22,6 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VmaVirtualAllocationInfo {
+ *     VkDeviceSize {@link #offset};
  *     VkDeviceSize {@link #size};
  *     void * {@link #pUserData};
  * }</code></pre>
@@ -36,11 +37,13 @@ public class VmaVirtualAllocationInfo extends Struct implements NativeResource {
 
     /** The struct member offsets. */
     public static final int
+        OFFSET,
         SIZE,
         PUSERDATA;
 
     static {
         Layout layout = __struct(
+            __member(8),
             __member(8),
             __member(POINTER_SIZE)
         );
@@ -48,8 +51,9 @@ public class VmaVirtualAllocationInfo extends Struct implements NativeResource {
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        SIZE = layout.offsetof(0);
-        PUSERDATA = layout.offsetof(1);
+        OFFSET = layout.offsetof(0);
+        SIZE = layout.offsetof(1);
+        PUSERDATA = layout.offsetof(2);
     }
 
     /**
@@ -65,6 +69,13 @@ public class VmaVirtualAllocationInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /**
+     * offset of the allocation.
+     * 
+     * <p>Offset at which the allocation was made.</p>
+     */
+    @NativeType("VkDeviceSize")
+    public long offset() { return noffset(address()); }
     /**
      * size of the allocation.
      * 
@@ -193,6 +204,8 @@ public class VmaVirtualAllocationInfo extends Struct implements NativeResource {
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #offset}. */
+    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VmaVirtualAllocationInfo.OFFSET); }
     /** Unsafe version of {@link #size}. */
     public static long nsize(long struct) { return UNSAFE.getLong(null, struct + VmaVirtualAllocationInfo.SIZE); }
     /** Unsafe version of {@link #pUserData}. */
@@ -236,6 +249,9 @@ public class VmaVirtualAllocationInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
+        /** @return the value of the {@link VmaVirtualAllocationInfo#offset} field. */
+        @NativeType("VkDeviceSize")
+        public long offset() { return VmaVirtualAllocationInfo.noffset(address()); }
         /** @return the value of the {@link VmaVirtualAllocationInfo#size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VmaVirtualAllocationInfo.nsize(address()); }

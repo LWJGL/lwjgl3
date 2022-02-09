@@ -29,7 +29,6 @@ import org.lwjgl.vulkan.*;
  *     VkDeviceSize {@link #blockSize};
  *     size_t {@link #minBlockCount};
  *     size_t {@link #maxBlockCount};
- *     uint32_t {@link #frameInUseCount};
  *     float {@link #priority};
  *     VkDeviceSize {@link #minAllocationAlignment};
  *     void * {@link #pMemoryAllocateNext};
@@ -50,7 +49,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         BLOCKSIZE,
         MINBLOCKCOUNT,
         MAXBLOCKCOUNT,
-        FRAMEINUSECOUNT,
         PRIORITY,
         MINALLOCATIONALIGNMENT,
         PMEMORYALLOCATENEXT;
@@ -62,7 +60,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
             __member(8),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
-            __member(4),
             __member(4),
             __member(8),
             __member(POINTER_SIZE)
@@ -76,10 +73,9 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         BLOCKSIZE = layout.offsetof(2);
         MINBLOCKCOUNT = layout.offsetof(3);
         MAXBLOCKCOUNT = layout.offsetof(4);
-        FRAMEINUSECOUNT = layout.offsetof(5);
-        PRIORITY = layout.offsetof(6);
-        MINALLOCATIONALIGNMENT = layout.offsetof(7);
-        PMEMORYALLOCATENEXT = layout.offsetof(8);
+        PRIORITY = layout.offsetof(5);
+        MINALLOCATIONALIGNMENT = layout.offsetof(6);
+        PMEMORYALLOCATENEXT = layout.offsetof(7);
     }
 
     /**
@@ -98,14 +94,14 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     /** Vulkan memory type index to allocate this pool from */
     @NativeType("uint32_t")
     public int memoryTypeIndex() { return nmemoryTypeIndex(address()); }
-    /** Use combination of {@code VmaPoolCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT}</td><td>{@link Vma#VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT}</td></tr><tr><td>{@link Vma#VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT}</td><td>{@link Vma#VMA_POOL_CREATE_ALGORITHM_MASK POOL_CREATE_ALGORITHM_MASK}</td></tr></table> */
+    /** Use combination of {@code VmaPoolCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT}</td><td>{@link Vma#VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT}</td></tr><tr><td>{@link Vma#VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT}</td><td>{@link Vma#VMA_POOL_CREATE_TLSF_ALGORITHM_BIT POOL_CREATE_TLSF_ALGORITHM_BIT}</td></tr><tr><td>{@link Vma#VMA_POOL_CREATE_ALGORITHM_MASK POOL_CREATE_ALGORITHM_MASK}</td></tr></table> */
     @NativeType("VmaPoolCreateFlags")
     public int flags() { return nflags(address()); }
     /**
      * size of a single {@code VkDeviceMemory} block to be allocated as part of this pool, in bytes. Optional.
      * 
      * <p>Specify nonzero to set explicit, constant size of memory blocks used by this pool. Leave 0 to use default and let the library manage block sizes
-     * automatically. Sizes of particular blocks may vary.</p>
+     * automatically. Sizes of particular blocks may vary. In this case, the pool will also support dedicated allocations.</p>
      */
     @NativeType("VkDeviceSize")
     public long blockSize() { return nblockSize(address()); }
@@ -124,19 +120,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
      */
     @NativeType("size_t")
     public long maxBlockCount() { return nmaxBlockCount(address()); }
-    /**
-     * maximum number of additional frames that are in use at the same time as current frame.
-     * 
-     * <p>This value is used only when you make allocations with {@link Vma#VMA_ALLOCATION_CREATE_CAN_BECOME_LOST_BIT ALLOCATION_CREATE_CAN_BECOME_LOST_BIT} flag. Such allocation cannot become  lost if
-     * {@code allocation.lastUseFrameIndex >= allocator.currentFrameIndex - frameInUseCount}.</p>
-     * 
-     * <p>For example, if you double-buffer your command buffers, so resources used for rendering in previous frame may still be in use by the GPU at the moment
-     * you allocate resources needed for the current frame, set this value to 1.</p>
-     * 
-     * <p>If you want to allow any allocations other than used in the current frame to become lost, set this value to 0.</p>
-     */
-    @NativeType("uint32_t")
-    public int frameInUseCount() { return nframeInUseCount(address()); }
     /**
      * A floating-point value between 0 and 1, indicating the priority of the allocations in this pool relative to other memory allocations.
      * 
@@ -175,8 +158,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     public VmaPoolCreateInfo minBlockCount(@NativeType("size_t") long value) { nminBlockCount(address(), value); return this; }
     /** Sets the specified value to the {@link #maxBlockCount} field. */
     public VmaPoolCreateInfo maxBlockCount(@NativeType("size_t") long value) { nmaxBlockCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #frameInUseCount} field. */
-    public VmaPoolCreateInfo frameInUseCount(@NativeType("uint32_t") int value) { nframeInUseCount(address(), value); return this; }
     /** Sets the specified value to the {@link #priority} field. */
     public VmaPoolCreateInfo priority(float value) { npriority(address(), value); return this; }
     /** Sets the specified value to the {@link #minAllocationAlignment} field. */
@@ -225,7 +206,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         long blockSize,
         long minBlockCount,
         long maxBlockCount,
-        int frameInUseCount,
         float priority,
         long minAllocationAlignment,
         long pMemoryAllocateNext
@@ -235,7 +215,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         blockSize(blockSize);
         minBlockCount(minBlockCount);
         maxBlockCount(maxBlockCount);
-        frameInUseCount(frameInUseCount);
         priority(priority);
         minAllocationAlignment(minAllocationAlignment);
         pMemoryAllocateNext(pMemoryAllocateNext);
@@ -397,8 +376,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     public static long nminBlockCount(long struct) { return memGetAddress(struct + VmaPoolCreateInfo.MINBLOCKCOUNT); }
     /** Unsafe version of {@link #maxBlockCount}. */
     public static long nmaxBlockCount(long struct) { return memGetAddress(struct + VmaPoolCreateInfo.MAXBLOCKCOUNT); }
-    /** Unsafe version of {@link #frameInUseCount}. */
-    public static int nframeInUseCount(long struct) { return UNSAFE.getInt(null, struct + VmaPoolCreateInfo.FRAMEINUSECOUNT); }
     /** Unsafe version of {@link #priority}. */
     public static float npriority(long struct) { return UNSAFE.getFloat(null, struct + VmaPoolCreateInfo.PRIORITY); }
     /** Unsafe version of {@link #minAllocationAlignment}. */
@@ -416,8 +393,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     public static void nminBlockCount(long struct, long value) { memPutAddress(struct + VmaPoolCreateInfo.MINBLOCKCOUNT, value); }
     /** Unsafe version of {@link #maxBlockCount(long) maxBlockCount}. */
     public static void nmaxBlockCount(long struct, long value) { memPutAddress(struct + VmaPoolCreateInfo.MAXBLOCKCOUNT, value); }
-    /** Unsafe version of {@link #frameInUseCount(int) frameInUseCount}. */
-    public static void nframeInUseCount(long struct, int value) { UNSAFE.putInt(null, struct + VmaPoolCreateInfo.FRAMEINUSECOUNT, value); }
     /** Unsafe version of {@link #priority(float) priority}. */
     public static void npriority(long struct, float value) { UNSAFE.putFloat(null, struct + VmaPoolCreateInfo.PRIORITY, value); }
     /** Unsafe version of {@link #minAllocationAlignment(long) minAllocationAlignment}. */
@@ -478,9 +453,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         /** @return the value of the {@link VmaPoolCreateInfo#maxBlockCount} field. */
         @NativeType("size_t")
         public long maxBlockCount() { return VmaPoolCreateInfo.nmaxBlockCount(address()); }
-        /** @return the value of the {@link VmaPoolCreateInfo#frameInUseCount} field. */
-        @NativeType("uint32_t")
-        public int frameInUseCount() { return VmaPoolCreateInfo.nframeInUseCount(address()); }
         /** @return the value of the {@link VmaPoolCreateInfo#priority} field. */
         public float priority() { return VmaPoolCreateInfo.npriority(address()); }
         /** @return the value of the {@link VmaPoolCreateInfo#minAllocationAlignment} field. */
@@ -500,8 +472,6 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         public VmaPoolCreateInfo.Buffer minBlockCount(@NativeType("size_t") long value) { VmaPoolCreateInfo.nminBlockCount(address(), value); return this; }
         /** Sets the specified value to the {@link VmaPoolCreateInfo#maxBlockCount} field. */
         public VmaPoolCreateInfo.Buffer maxBlockCount(@NativeType("size_t") long value) { VmaPoolCreateInfo.nmaxBlockCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaPoolCreateInfo#frameInUseCount} field. */
-        public VmaPoolCreateInfo.Buffer frameInUseCount(@NativeType("uint32_t") int value) { VmaPoolCreateInfo.nframeInUseCount(address(), value); return this; }
         /** Sets the specified value to the {@link VmaPoolCreateInfo#priority} field. */
         public VmaPoolCreateInfo.Buffer priority(float value) { VmaPoolCreateInfo.npriority(address(), value); return this; }
         /** Sets the specified value to the {@link VmaPoolCreateInfo#minAllocationAlignment} field. */

@@ -27,6 +27,8 @@ import org.lwjgl.vulkan.*;
  * 
  * <pre><code>
  * struct VmaVulkanFunctions {
+ *     PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr;
+ *     PFN_vkGetDeviceProcAddr vkGetDeviceProcAddr;
  *     PFN_vkGetPhysicalDeviceProperties vkGetPhysicalDeviceProperties;
  *     PFN_vkGetPhysicalDeviceMemoryProperties vkGetPhysicalDeviceMemoryProperties;
  *     PFN_vkAllocateMemory vkAllocateMemory;
@@ -61,6 +63,8 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
 
     /** The struct member offsets. */
     public static final int
+        VKGETINSTANCEPROCADDR,
+        VKGETDEVICEPROCADDR,
         VKGETPHYSICALDEVICEPROPERTIES,
         VKGETPHYSICALDEVICEMEMORYPROPERTIES,
         VKALLOCATEMEMORY,
@@ -107,34 +111,38 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        VKGETPHYSICALDEVICEPROPERTIES = layout.offsetof(0);
-        VKGETPHYSICALDEVICEMEMORYPROPERTIES = layout.offsetof(1);
-        VKALLOCATEMEMORY = layout.offsetof(2);
-        VKFREEMEMORY = layout.offsetof(3);
-        VKMAPMEMORY = layout.offsetof(4);
-        VKUNMAPMEMORY = layout.offsetof(5);
-        VKFLUSHMAPPEDMEMORYRANGES = layout.offsetof(6);
-        VKINVALIDATEMAPPEDMEMORYRANGES = layout.offsetof(7);
-        VKBINDBUFFERMEMORY = layout.offsetof(8);
-        VKBINDIMAGEMEMORY = layout.offsetof(9);
-        VKGETBUFFERMEMORYREQUIREMENTS = layout.offsetof(10);
-        VKGETIMAGEMEMORYREQUIREMENTS = layout.offsetof(11);
-        VKCREATEBUFFER = layout.offsetof(12);
-        VKDESTROYBUFFER = layout.offsetof(13);
-        VKCREATEIMAGE = layout.offsetof(14);
-        VKDESTROYIMAGE = layout.offsetof(15);
-        VKCMDCOPYBUFFER = layout.offsetof(16);
-        VKGETBUFFERMEMORYREQUIREMENTS2KHR = layout.offsetof(17);
-        VKGETIMAGEMEMORYREQUIREMENTS2KHR = layout.offsetof(18);
-        VKBINDBUFFERMEMORY2KHR = layout.offsetof(19);
-        VKBINDIMAGEMEMORY2KHR = layout.offsetof(20);
-        VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR = layout.offsetof(21);
+        VKGETINSTANCEPROCADDR = layout.offsetof(0);
+        VKGETDEVICEPROCADDR = layout.offsetof(1);
+        VKGETPHYSICALDEVICEPROPERTIES = layout.offsetof(2);
+        VKGETPHYSICALDEVICEMEMORYPROPERTIES = layout.offsetof(3);
+        VKALLOCATEMEMORY = layout.offsetof(4);
+        VKFREEMEMORY = layout.offsetof(5);
+        VKMAPMEMORY = layout.offsetof(6);
+        VKUNMAPMEMORY = layout.offsetof(7);
+        VKFLUSHMAPPEDMEMORYRANGES = layout.offsetof(8);
+        VKINVALIDATEMAPPEDMEMORYRANGES = layout.offsetof(9);
+        VKBINDBUFFERMEMORY = layout.offsetof(10);
+        VKBINDIMAGEMEMORY = layout.offsetof(11);
+        VKGETBUFFERMEMORYREQUIREMENTS = layout.offsetof(12);
+        VKGETIMAGEMEMORYREQUIREMENTS = layout.offsetof(13);
+        VKCREATEBUFFER = layout.offsetof(14);
+        VKDESTROYBUFFER = layout.offsetof(15);
+        VKCREATEIMAGE = layout.offsetof(16);
+        VKDESTROYIMAGE = layout.offsetof(17);
+        VKCMDCOPYBUFFER = layout.offsetof(18);
+        VKGETBUFFERMEMORYREQUIREMENTS2KHR = layout.offsetof(19);
+        VKGETIMAGEMEMORYREQUIREMENTS2KHR = layout.offsetof(20);
+        VKBINDBUFFERMEMORY2KHR = layout.offsetof(21);
+        VKBINDIMAGEMEMORY2KHR = layout.offsetof(22);
+        VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR = layout.offsetof(23);
     }
 
     /**
@@ -150,6 +158,12 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** @return the value of the {@code vkGetInstanceProcAddr} field. */
+    @NativeType("PFN_vkGetInstanceProcAddr")
+    public long vkGetInstanceProcAddr() { return nvkGetInstanceProcAddr(address()); }
+    /** @return the value of the {@code vkGetDeviceProcAddr} field. */
+    @NativeType("PFN_vkGetDeviceProcAddr")
+    public long vkGetDeviceProcAddr() { return nvkGetDeviceProcAddr(address()); }
     /** @return the value of the {@code vkGetPhysicalDeviceProperties} field. */
     @NativeType("PFN_vkGetPhysicalDeviceProperties")
     public long vkGetPhysicalDeviceProperties() { return nvkGetPhysicalDeviceProperties(address()); }
@@ -223,6 +237,10 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     @NativeType("PFN_vkGetPhysicalDeviceMemoryProperties2KHR")
     public long vkGetPhysicalDeviceMemoryProperties2KHR() { return nvkGetPhysicalDeviceMemoryProperties2KHR(address()); }
 
+    /** Sets the specified value to the {@code vkGetInstanceProcAddr} field. */
+    public VmaVulkanFunctions vkGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddr") long value) { nvkGetInstanceProcAddr(address(), value); return this; }
+    /** Sets the specified value to the {@code vkGetDeviceProcAddr} field. */
+    public VmaVulkanFunctions vkGetDeviceProcAddr(@NativeType("PFN_vkGetDeviceProcAddr") long value) { nvkGetDeviceProcAddr(address(), value); return this; }
     /** Sets the specified value to the {@code vkGetPhysicalDeviceProperties} field. */
     public VmaVulkanFunctions vkGetPhysicalDeviceProperties(@NativeType("PFN_vkGetPhysicalDeviceProperties") long value) { nvkGetPhysicalDeviceProperties(address(), value); return this; }
     /** Sets the specified value to the {@code vkGetPhysicalDeviceMemoryProperties} field. */
@@ -270,6 +288,8 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
 
     /** Initializes this struct with the specified values. */
     public VmaVulkanFunctions set(
+        long vkGetInstanceProcAddr,
+        long vkGetDeviceProcAddr,
         long vkGetPhysicalDeviceProperties,
         long vkGetPhysicalDeviceMemoryProperties,
         long vkAllocateMemory,
@@ -293,6 +313,8 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         long vkBindImageMemory2KHR,
         long vkGetPhysicalDeviceMemoryProperties2KHR
     ) {
+        vkGetInstanceProcAddr(vkGetInstanceProcAddr);
+        vkGetDeviceProcAddr(vkGetDeviceProcAddr);
         vkGetPhysicalDeviceProperties(vkGetPhysicalDeviceProperties);
         vkGetPhysicalDeviceMemoryProperties(vkGetPhysicalDeviceMemoryProperties);
         vkAllocateMemory(vkAllocateMemory);
@@ -392,6 +414,10 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #vkGetInstanceProcAddr}. */
+    public static long nvkGetInstanceProcAddr(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETINSTANCEPROCADDR); }
+    /** Unsafe version of {@link #vkGetDeviceProcAddr}. */
+    public static long nvkGetDeviceProcAddr(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETDEVICEPROCADDR); }
     /** Unsafe version of {@link #vkGetPhysicalDeviceProperties}. */
     public static long nvkGetPhysicalDeviceProperties(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETPHYSICALDEVICEPROPERTIES); }
     /** Unsafe version of {@link #vkGetPhysicalDeviceMemoryProperties}. */
@@ -437,6 +463,10 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     /** Unsafe version of {@link #vkGetPhysicalDeviceMemoryProperties2KHR}. */
     public static long nvkGetPhysicalDeviceMemoryProperties2KHR(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR); }
 
+    /** Unsafe version of {@link #vkGetInstanceProcAddr(long) vkGetInstanceProcAddr}. */
+    public static void nvkGetInstanceProcAddr(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETINSTANCEPROCADDR, value); }
+    /** Unsafe version of {@link #vkGetDeviceProcAddr(long) vkGetDeviceProcAddr}. */
+    public static void nvkGetDeviceProcAddr(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETDEVICEPROCADDR, value); }
     /** Unsafe version of {@link #vkGetPhysicalDeviceProperties(long) vkGetPhysicalDeviceProperties}. */
     public static void nvkGetPhysicalDeviceProperties(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETPHYSICALDEVICEPROPERTIES, check(value)); }
     /** Unsafe version of {@link #vkGetPhysicalDeviceMemoryProperties(long) vkGetPhysicalDeviceMemoryProperties}. */
@@ -517,6 +547,8 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         VKCapabilitiesInstance ic = instance.getCapabilities();
         VKCapabilitiesDevice   dc = device.getCapabilities();
         this
+            .vkGetInstanceProcAddr(NULL)
+            .vkGetDeviceProcAddr(NULL)
             .vkGetPhysicalDeviceProperties(ic.vkGetPhysicalDeviceProperties)
             .vkGetPhysicalDeviceMemoryProperties(ic.vkGetPhysicalDeviceMemoryProperties)
             .vkAllocateMemory(dc.vkAllocateMemory)

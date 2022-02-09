@@ -93,9 +93,7 @@ public class VmaAllocationInfo extends Struct implements NativeResource {
      * 
      * <p>Same memory object can be shared by multiple allocations.</p>
      * 
-     * <p>It can change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function, or if allocation is lost.</p>
-     * 
-     * <p>If the allocation is lost, it is equal to {@code VK_NULL_HANDLE}.</p>
+     * <p>It can change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function.</p>
      */
     @NativeType("VkDeviceMemory")
     public long deviceMemory() { return ndeviceMemory(address()); }
@@ -106,14 +104,14 @@ public class VmaAllocationInfo extends Struct implements NativeResource {
      * {@link Vma#vmaCreateImage CreateImage}, functions that operate on these resources refer to the beginning of the buffer or image, not entire device memory block. Functions like
      * {@link Vma#vmaMapMemory MapMemory}, {@link Vma#vmaBindBufferMemory BindBufferMemory} also refer to the beginning of the allocation and apply this offset automatically.</p>
      * 
-     * <p>It can change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function, or if allocation is lost.</p>
+     * <p>It can change after call to {@link Vma#vmaDefragment Defragment} if this allocation is passed to the function.</p>
      */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
     /**
      * size of this allocation, in bytes.
      * 
-     * <p>It never changes, unless allocation is lost.</p>
+     * <p>It never changes.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 

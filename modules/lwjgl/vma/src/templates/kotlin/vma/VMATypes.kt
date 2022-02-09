@@ -11,6 +11,7 @@ val VmaAllocation = "VmaAllocation".handle
 val VmaAllocator = "VmaAllocator".handle
 val VmaDefragmentationContext = "VmaDefragmentationContext".handle
 val VmaPool = "VmaPool".handle
+val VmaVirtualAllocation = "VmaVirtualAllocation".handle
 val VmaVirtualBlock = "VmaVirtualBlock".handle
 
 val VmaAllocationCreateFlags = "VmaAllocationCreateFlags".enumType
@@ -18,7 +19,6 @@ val VmaAllocatorCreateFlags = "VmaAllocatorCreateFlags".enumType
 val VmaDefragmentationFlags = "VmaDefragmentationFlags".enumType
 val VmaMemoryUsage = "VmaMemoryUsage".enumType
 val VmaPoolCreateFlags = "VmaPoolCreateFlags".enumType
-val VmaRecordFlags = "VmaRecordFlags".enumType
 val VmaVirtualAllocationCreateFlags = typedef(VkFlags, "VmaVirtualAllocationCreateFlags")
 val VmaVirtualBlockCreateFlagBits = "VmaVirtualBlockCreateFlagBits".enumType
 
@@ -79,6 +79,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
         Used in ##VmaAllocatorCreateInfo{@code ::pVulkanFunctions}.
         """
 
+    nullable.."PFN_vkGetInstanceProcAddr".handle("vkGetInstanceProcAddr", "")
+    nullable.."PFN_vkGetDeviceProcAddr".handle("vkGetDeviceProcAddr", "")
     "PFN_vkGetPhysicalDeviceProperties".handle("vkGetPhysicalDeviceProperties", "")
     "PFN_vkGetPhysicalDeviceMemoryProperties".handle("vkGetPhysicalDeviceMemoryProperties", "")
     "PFN_vkAllocateMemory".handle("vkAllocateMemory", "")
@@ -131,6 +133,8 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
         VKCapabilitiesInstance ic = instance.getCapabilities();
         VKCapabilitiesDevice   dc = device.getCapabilities();
         this
+            .vkGetInstanceProcAddr(NULL)
+            .vkGetDeviceProcAddr(NULL)
             .vkGetPhysicalDeviceProperties(ic.vkGetPhysicalDeviceProperties)
             .vkGetPhysicalDeviceMemoryProperties(ic.vkGetPhysicalDeviceMemoryProperties)
             .vkAllocateMemory(dc.vkAllocateMemory)
@@ -157,21 +161,6 @@ val VmaVulkanFunctions = struct(Module.VMA, "VmaVulkanFunctions", skipBuffer = t
     }""")
 }
 
-val VmaRecordSettings = struct(Module.VMA, "VmaRecordSettings") {
-    documentation = "Parameters for recording calls to VMA functions. To be used in ##VmaAllocatorCreateInfo{@code ::pRecordSettings}."
-
-    VmaRecordFlags("flags", "flags for recording").links("RECORD_\\w+")
-    charASCII.const.p(
-        "pFilePath",
-        """
-        path to the file that should be written by the recording.
-
-        Suggested extension: "csv". If the file already exists, it will be overwritten. It will be opened for the whole time {@code VmaAllocator} object is
-        alive. If opening this file fails, creation of the whole allocator object fails.
-        """
-    )
-}
-
 val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBuffer = true) {
     javaImport("org.lwjgl.vulkan.*")
     documentation = "Description of an Allocator to be created."
@@ -193,20 +182,6 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
     nullable..VmaDeviceMemoryCallbacks.const.p(
         "pDeviceMemoryCallbacks",
         "informative callbacks for {@code vkAllocateMemory}, {@code vkFreeMemory}. Optional."
-    )
-    uint32_t(
-        "frameInUseCount",
-        """
-        Maximum number of additional frames that are in use at the same time as current frame.
-
-        This value is used only when you make allocations with #ALLOCATION_CREATE_CAN_BECOME_LOST_BIT flag. Such allocation cannot become lost if
-        {@code allocation.lastUseFrameIndex >= allocator.currentFrameIndex - frameInUseCount}.
-
-        For example, if you double-buffer your command buffers, so resources used for rendering in previous frame may still be in use by the GPU at the moment
-        you allocate resources needed for the current frame, set this value to 1.
-
-        If you want to allow any allocations other than used in the current frame to become lost, set this value to 0.
-        """
     )
     nullable..VkDeviceSize.const.p(
         "pHeapSizeLimit",
@@ -234,15 +209,6 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
         """
     )
     VmaVulkanFunctions.const.p("pVulkanFunctions", "pointers to Vulkan functions")
-    nullable..VmaRecordSettings.const.p(
-        "pRecordSettings",
-        """
-        parameters for recording of VMA calls. Can be null.
-
-        If not null, it enables recording of calls to VMA functions to a file. If support for recording is not enabled using {@code VMA_RECORDING_ENABLED}
-        macro, creation of the allocator object fails with {@code VK_ERROR_FEATURE_NOT_PRESENT}.
-        """
-    )
     VkInstance("instance", "handle to Vulkan instance object.")
     uint32_t(
         "vulkanApiVersion",
@@ -251,9 +217,9 @@ val VmaAllocatorCreateInfo = struct(Module.VMA, "VmaAllocatorCreateInfo", skipBu
 
         It must be a value in the format as created by macro {@code VK_MAKE_VERSION} or a constant like: {@code VK_API_VERSION_1_1},
         {@code VK_API_VERSION_1_0}. The patch version number specified is ignored. Only the major and minor versions are considered. It must be less or equal
-        (preferably equal) to value as passed to {@code vkCreateInstance} as {@code VkApplicationInfo::apiVersion}. Only versions 1.0, 1.1 and 1.2 are supported by
-        the current implementation.
-    
+        (preferably equal) to value as passed to {@code vkCreateInstance} as {@code VkApplicationInfo::apiVersion}. Only versions 1.0, 1.1, 1.2 and 1.3 are
+        supported by the current implementation.
+
         Leaving it initialized to zero is equivalent to {@code VK_API_VERSION_1_0}.
         """
     )
@@ -278,7 +244,7 @@ val VmaAllocatorInfo = struct(Module.VMA, "VmaAllocatorInfo", mutable = false) {
         "instance",
         """
         Handle to Vulkan instance object.
-        
+
         This is the same value as has been passed through ##VmaAllocatorCreateInfo{@code ::instance}.
         """
     )
@@ -286,7 +252,7 @@ val VmaAllocatorInfo = struct(Module.VMA, "VmaAllocatorInfo", mutable = false) {
         "physicalDevice",
         """
         Handle to Vulkan physical device object.
-        
+
         This is the same value as has been passed through ##VmaAllocatorCreateInfo{@code ::physicalDevice}.
         """
     )
@@ -294,7 +260,7 @@ val VmaAllocatorInfo = struct(Module.VMA, "VmaAllocatorInfo", mutable = false) {
         "device",
         """
         Handle to Vulkan device object.
-        
+
         This is the same value as has been passed through ##VmaAllocatorCreateInfo{@code ::device}.
         """
     )
@@ -339,8 +305,6 @@ val VmaBudget = struct(Module.VMA, "VmaBudget", mutable = false) {
 
         Usually less or equal than {@code blockBytes}. Difference {@code blockBytes - allocationBytes} is the amount of memory allocated but unused - available
         for new allocations or wasted due to fragmentation.
-
-        It might be greater than {@code blockBytes} if there are some allocations in lost state, as they account to this value as well.
         """
     )
     VkDeviceSize(
@@ -446,7 +410,7 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
         size of a single {@code VkDeviceMemory} block to be allocated as part of this pool, in bytes. Optional.
 
         Specify nonzero to set explicit, constant size of memory blocks used by this pool. Leave 0 to use default and let the library manage block sizes
-        automatically. Sizes of particular blocks may vary.
+        automatically. Sizes of particular blocks may vary. In this case, the pool will also support dedicated allocations.
         """
     )
     size_t(
@@ -464,20 +428,6 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
 
         Set to 0 to use default, which is {@code SIZE_MAX}, which means no limit. Set to same value as ##VmaPoolCreateInfo{@code ::minBlockCount} to have fixed
         amount of memory allocated throughout whole lifetime of this pool.
-        """
-    )
-    uint32_t(
-        "frameInUseCount",
-        """
-        maximum number of additional frames that are in use at the same time as current frame.
-
-        This value is used only when you make allocations with #ALLOCATION_CREATE_CAN_BECOME_LOST_BIT flag. Such allocation cannot become  lost if
-        {@code allocation.lastUseFrameIndex >= allocator.currentFrameIndex - frameInUseCount}.
-
-        For example, if you double-buffer your command buffers, so resources used for rendering in previous frame may still be in use by the GPU at the moment
-        you allocate resources needed for the current frame, set this value to 1.
-
-        If you want to allow any allocations other than used in the current frame to become lost, set this value to 0.
         """
     )
     float(
@@ -521,17 +471,8 @@ val VmaPoolStats = struct(Module.VMA, "VmaPoolStats", mutable = false) {
     documentation = "Describes parameter of existing {@code VmaPool}."
     VkDeviceSize("size", "total amount of {@code VkDeviceMemory} allocated from Vulkan for this pool, in bytes")
     VkDeviceSize("unusedSize", "total number of bytes in the pool not used by any {@code VmaAllocation}")
-    size_t("allocationCount", "number of {@code VmaAllocation} objects created from this pool that were not destroyed or lost")
+    size_t("allocationCount", "number of {@code VmaAllocation} objects created from this pool that were not destroyed")
     size_t("unusedRangeCount", "number of continuous memory ranges in the pool not used by any {@code VmaAllocation}")
-    VkDeviceSize(
-        "unusedRangeSizeMax",
-        """
-        size of the largest continuous free memory region available for new allocation.
-
-        Making a new allocation of that size is not guaranteed to succeed because of possible additional margin required to respect alignment and buffer/imag
-        granularity.
-        """
-    )
     size_t("blockCount", "number of {@code VkDeviceMemory} blocks allocated for this pool")
 }
 
@@ -553,9 +494,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
 
         Same memory object can be shared by multiple allocations.
 
-        It can change after call to #Defragment() if this allocation is passed to the function, or if allocation is lost.
-
-        If the allocation is lost, it is equal to {@code VK_NULL_HANDLE}.
+        It can change after call to #Defragment() if this allocation is passed to the function.
         """
     )
     VkDeviceSize(
@@ -567,7 +506,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         #CreateImage(), functions that operate on these resources refer to the beginning of the buffer or image, not entire device memory block. Functions like
         #MapMemory(), #BindBufferMemory() also refer to the beginning of the allocation and apply this offset automatically.
 
-        It can change after call to #Defragment() if this allocation is passed to the function, or if allocation is lost.
+        It can change after call to #Defragment() if this allocation is passed to the function.
         """
     )
     VkDeviceSize(
@@ -575,8 +514,8 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         """
         size of this allocation, in bytes.
 
-        It never changes, unless allocation is lost.
-        
+        It never changes.
+
         ${note("""
         Allocation size returned in this variable may be greater than the size requested for the resource e.g. as {@code VkBufferCreateInfo::size}. Whole size
         of the allocation is accessible for operations on memory e.g. using a pointer after mapping with #MapMemory(), but operations on the resource e.g.
@@ -617,11 +556,10 @@ val VmaDefragmentationInfo2 = struct(Module.VMA, "VmaDefragmentationInfo2") {
     VmaAllocation.p(
         "pAllocations",
         """
-        Pointer to array of allocations that can be defragmented.
+        pointer to array of allocations that can be defragmented.
 
         The array should have {@code allocationCount} elements. The array should not contain nulls. Elements in the array should be unique - same allocation
-        cannot occur twice. It is safe to pass allocations that are in the lost state - they are ignored. All allocations not present in this array are
-        considered non-moveable during this defragmentation.
+        cannot occur twice. All allocations not present in this array are considered non-moveable during this defragmentation.
         """
     )
     nullable..VkBool32.p(
@@ -651,7 +589,7 @@ val VmaDefragmentationInfo2 = struct(Module.VMA, "VmaDefragmentationInfo2") {
     VkDeviceSize(
         "maxCpuBytesToMove",
         """
-        Maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on CPU side, like {@code memcpy()},
+        maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on CPU side, like {@code memcpy()},
         {@code memmove()}.
 
         {@code VK_WHOLE_SIZE} means no limit.
@@ -660,7 +598,7 @@ val VmaDefragmentationInfo2 = struct(Module.VMA, "VmaDefragmentationInfo2") {
     uint32_t(
         "maxCpuAllocationsToMove",
         """
-        Maximum number of allocations that can be moved to a different place using transfers on CPU side, like {@code memcpy()}, {@code memmove()}.
+        maximum number of allocations that can be moved to a different place using transfers on CPU side, like {@code memcpy()}, {@code memmove()}.
 
         {@code UINT32_MAX} means no limit.
         """
@@ -668,7 +606,7 @@ val VmaDefragmentationInfo2 = struct(Module.VMA, "VmaDefragmentationInfo2") {
     VkDeviceSize(
         "maxGpuBytesToMove",
         """
-        Maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on GPU side, posted to
+        maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on GPU side, posted to
         {@code commandBuffer}.
 
         {@code VK_WHOLE_SIZE} means no limit.
@@ -677,7 +615,7 @@ val VmaDefragmentationInfo2 = struct(Module.VMA, "VmaDefragmentationInfo2") {
     uint32_t(
         "maxGpuAllocationsToMove",
         """
-        Maximum number of allocations that can be moved to a different place using transfers on GPU side, posted to {@code commandBuffer}.
+        maximum number of allocations that can be moved to a different place using transfers on GPU side, posted to {@code commandBuffer}.
 
         {@code UINT32_MAX} means no limit.
         """
@@ -685,7 +623,7 @@ val VmaDefragmentationInfo2 = struct(Module.VMA, "VmaDefragmentationInfo2") {
     nullable..VkCommandBuffer(
         "commandBuffer",
         """
-        Optional. Command buffer where GPU copy commands will be posted.
+        command buffer where GPU copy commands will be posted. Optional.
 
         If not null, it must be a valid command buffer handle that supports Transfer queue type. It must be in the recording state and outside of a render pass
         instance. You need to submit it and make sure it finished execution before calling #DefragmentationEnd().
@@ -705,7 +643,7 @@ val VmaDefragmentationPassInfo = struct(Module.VMA, "VmaDefragmentationPassInfo"
     documentation =
         """
         Parameters for incremental defragmentation steps.
-        
+
         To be used with function #BeginDefragmentationPass().
         """
 
@@ -744,7 +682,7 @@ val VmaDefragmentationStats = struct(Module.VMA, "VmaDefragmentationStats", muta
 
     VkDeviceSize("bytesMoved", "total number of bytes that have been copied while moving allocations to different places")
     VkDeviceSize("bytesFreed", "total number of bytes that have been released to the system by freeing empty {@code VkDeviceMemory} objects")
-    uint32_t("allocationsMoved", "tumber of allocations that have been moved to different places")
+    uint32_t("allocationsMoved", "number of allocations that have been moved to different places")
     uint32_t("deviceMemoryBlocksFreed", "number of empty {@code VkDeviceMemory} objects that have been released to the system")
 }
 
@@ -805,6 +743,14 @@ val VmaVirtualAllocationCreateInfo = struct(Module.VMA, "VmaVirtualAllocationCre
 val VmaVirtualAllocationInfo = struct(Module.VMA, "VmaVirtualAllocationInfo", mutable = false) {
     documentation = "Parameters of an existing virtual allocation, returned by #GetVirtualAllocationInfo()."
 
+    VkDeviceSize(
+        "offset",
+        """
+        offset of the allocation.
+
+        Offset at which the allocation was made.
+        """
+    )
     VkDeviceSize(
         "size",
         """

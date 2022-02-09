@@ -14,7 +14,7 @@ DISABLE_WARNINGS()
 #define VMA_DYNAMIC_VULKAN_FUNCTIONS 0
 #define VMA_SYSTEM_ALIGNED_MALLOC(size, alignment) org_lwjgl_aligned_alloc((alignment), (size))
 #define VMA_SYSTEM_ALIGNED_FREE(ptr) org_lwjgl_aligned_free(ptr)
-#define VMA_VULKAN_VERSION 1001000
+#define VMA_VULKAN_VERSION 1003000
 #define VMA_DEDICATED_ALLOCATION 1
 #define VMA_BIND_MEMORY2 1
 #define VMA_MEMORY_BUDGET 1
@@ -79,25 +79,11 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCalculateStats(JNIEnv *__
     vmaCalculateStats(allocator, pStats);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetBudget(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pBudgetAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetHeapBudgets(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pBudgetAddress) {
     VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
     VmaBudget *pBudget = (VmaBudget *)(uintptr_t)pBudgetAddress;
     UNUSED_PARAMS(__env, clazz)
-    vmaGetBudget(allocator, pBudget);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaBuildStatsString(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong ppStatsStringAddress, jint detailedMap) {
-    VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
-    char **ppStatsString = (char **)(uintptr_t)ppStatsStringAddress;
-    UNUSED_PARAMS(__env, clazz)
-    vmaBuildStatsString(allocator, ppStatsString, (VkBool32)detailedMap);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaFreeStatsString(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pStatsStringAddress) {
-    VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
-    char *pStatsString = (char *)(uintptr_t)pStatsStringAddress;
-    UNUSED_PARAMS(__env, clazz)
-    vmaFreeStatsString(allocator, pStatsString);
+    vmaGetHeapBudgets(allocator, pBudget);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaFindMemoryTypeIndex(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jint memoryTypeBits, jlong pAllocationCreateInfoAddress, jlong pMemoryTypeIndexAddress) {
@@ -147,14 +133,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetPoolStats(JNIEnv *__en
     VmaPoolStats *pPoolStats = (VmaPoolStats *)(uintptr_t)pPoolStatsAddress;
     UNUSED_PARAMS(__env, clazz)
     vmaGetPoolStats(allocator, pool, pPoolStats);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaMakePoolAllocationsLost(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong poolAddress, jlong pLostAllocationCountAddress) {
-    VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
-    VmaPool pool = (VmaPool)(uintptr_t)poolAddress;
-    size_t *pLostAllocationCount = (size_t *)(uintptr_t)pLostAllocationCountAddress;
-    UNUSED_PARAMS(__env, clazz)
-    vmaMakePoolAllocationsLost(allocator, pool, pLostAllocationCount);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCheckPoolCorruption(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong poolAddress) {
@@ -240,13 +218,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetAllocationInfo(JNIEnv 
     vmaGetAllocationInfo(allocator, allocation, pAllocationInfo);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaTouchAllocation(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress) {
-    VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
-    VmaAllocation allocation = (VmaAllocation)(uintptr_t)allocationAddress;
-    UNUSED_PARAMS(__env, clazz)
-    return (jint)vmaTouchAllocation(allocator, allocation);
-}
-
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaSetAllocationUserData(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong pUserDataAddress) {
     VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
     VmaAllocation allocation = (VmaAllocation)(uintptr_t)allocationAddress;
@@ -255,11 +226,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaSetAllocationUserData(JNI
     vmaSetAllocationUserData(allocator, allocation, pUserData);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCreateLostAllocation(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pAllocationAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetAllocationMemoryProperties(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong pFlagsAddress) {
     VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
-    VmaAllocation *pAllocation = (VmaAllocation *)(uintptr_t)pAllocationAddress;
+    VmaAllocation allocation = (VmaAllocation)(uintptr_t)allocationAddress;
+    VkMemoryPropertyFlags *pFlags = (VkMemoryPropertyFlags *)(uintptr_t)pFlagsAddress;
     UNUSED_PARAMS(__env, clazz)
-    vmaCreateLostAllocation(allocator, pAllocation);
+    vmaGetAllocationMemoryProperties(allocator, allocation, pFlags);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaMapMemory(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong allocationAddress, jlong ppDataAddress) {
@@ -452,25 +424,28 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaIsVirtualBlockEmpty(JNIEn
     return (jint)vmaIsVirtualBlockEmpty(virtualBlock);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetVirtualAllocationInfo(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong offset, jlong pVirtualAllocInfoAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaGetVirtualAllocationInfo(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong allocationAddress, jlong pVirtualAllocInfoAddress) {
     VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(uintptr_t)virtualBlockAddress;
+    VmaVirtualAllocation allocation = (VmaVirtualAllocation)(uintptr_t)allocationAddress;
     VmaVirtualAllocationInfo *pVirtualAllocInfo = (VmaVirtualAllocationInfo *)(uintptr_t)pVirtualAllocInfoAddress;
     UNUSED_PARAMS(__env, clazz)
-    vmaGetVirtualAllocationInfo(virtualBlock, (VkDeviceSize)offset, pVirtualAllocInfo);
+    vmaGetVirtualAllocationInfo(virtualBlock, allocation, pVirtualAllocInfo);
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaVirtualAllocate(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong pCreateInfoAddress, jlong pOffsetAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_vma_Vma_nvmaVirtualAllocate(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong pCreateInfoAddress, jlong pAllocationAddress, jlong pOffsetAddress) {
     VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(uintptr_t)virtualBlockAddress;
     VmaVirtualAllocationCreateInfo const *pCreateInfo = (VmaVirtualAllocationCreateInfo const *)(uintptr_t)pCreateInfoAddress;
+    VmaVirtualAllocation *pAllocation = (VmaVirtualAllocation *)(uintptr_t)pAllocationAddress;
     VkDeviceSize *pOffset = (VkDeviceSize *)(uintptr_t)pOffsetAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)vmaVirtualAllocate(virtualBlock, pCreateInfo, pOffset);
+    return (jint)vmaVirtualAllocate(virtualBlock, pCreateInfo, pAllocation, pOffset);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaVirtualFree(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong offset) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaVirtualFree(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong allocationAddress) {
     VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(uintptr_t)virtualBlockAddress;
+    VmaVirtualAllocation allocation = (VmaVirtualAllocation)(uintptr_t)allocationAddress;
     UNUSED_PARAMS(__env, clazz)
-    vmaVirtualFree(virtualBlock, (VkDeviceSize)offset);
+    vmaVirtualFree(virtualBlock, allocation);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaClearVirtualBlock(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress) {
@@ -479,11 +454,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaClearVirtualBlock(JNIEnv 
     vmaClearVirtualBlock(virtualBlock);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaSetVirtualAllocationUserData(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong offset, jlong pUserDataAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaSetVirtualAllocationUserData(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong allocationAddress, jlong pUserDataAddress) {
     VmaVirtualBlock virtualBlock = (VmaVirtualBlock)(uintptr_t)virtualBlockAddress;
+    VmaVirtualAllocation allocation = (VmaVirtualAllocation)(uintptr_t)allocationAddress;
     void *pUserData = (void *)(uintptr_t)pUserDataAddress;
     UNUSED_PARAMS(__env, clazz)
-    vmaSetVirtualAllocationUserData(virtualBlock, (VkDeviceSize)offset, pUserData);
+    vmaSetVirtualAllocationUserData(virtualBlock, allocation, pUserData);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaCalculateVirtualBlockStats(JNIEnv *__env, jclass clazz, jlong virtualBlockAddress, jlong pStatInfoAddress) {
@@ -505,6 +481,20 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaFreeVirtualBlockStatsStri
     char *pStatsString = (char *)(uintptr_t)pStatsStringAddress;
     UNUSED_PARAMS(__env, clazz)
     vmaFreeVirtualBlockStatsString(virtualBlock, pStatsString);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaBuildStatsString(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong ppStatsStringAddress, jint detailedMap) {
+    VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
+    char **ppStatsString = (char **)(uintptr_t)ppStatsStringAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaBuildStatsString(allocator, ppStatsString, (VkBool32)detailedMap);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_util_vma_Vma_nvmaFreeStatsString(JNIEnv *__env, jclass clazz, jlong allocatorAddress, jlong pStatsStringAddress) {
+    VmaAllocator allocator = (VmaAllocator)(uintptr_t)allocatorAddress;
+    char *pStatsString = (char *)(uintptr_t)pStatsStringAddress;
+    UNUSED_PARAMS(__env, clazz)
+    vmaFreeStatsString(allocator, pStatsString);
 }
 
 EXTERN_C_EXIT

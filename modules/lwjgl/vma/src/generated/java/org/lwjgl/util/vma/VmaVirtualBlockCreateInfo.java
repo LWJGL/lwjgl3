@@ -79,7 +79,7 @@ public class VmaVirtualBlockCreateInfo extends Struct implements NativeResource 
      */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** use combination of {@code VmaVirtualBlockCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT}</td><td>{@link Vma#VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK}</td></tr></table> */
+    /** use combination of {@code VmaVirtualBlockCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT}</td><td>{@link Vma#VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_BLOCK_CREATE_TLSF_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_TLSF_ALGORITHM_BIT}</td><td>{@link Vma#VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK}</td></tr></table> */
     @NativeType("VmaVirtualBlockCreateFlagBits")
     public int flags() { return nflags(address()); }
     /**

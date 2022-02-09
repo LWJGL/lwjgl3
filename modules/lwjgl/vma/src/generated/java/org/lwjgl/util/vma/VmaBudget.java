@@ -81,8 +81,6 @@ public class VmaBudget extends Struct implements NativeResource {
      * 
      * <p>Usually less or equal than {@code blockBytes}. Difference {@code blockBytes - allocationBytes} is the amount of memory allocated but unused - available
      * for new allocations or wasted due to fragmentation.</p>
-     * 
-     * <p>It might be greater than {@code blockBytes} if there are some allocations in lost state, as they account to this value as well.</p>
      */
     @NativeType("VkDeviceSize")
     public long allocationBytes() { return nallocationBytes(address()); }

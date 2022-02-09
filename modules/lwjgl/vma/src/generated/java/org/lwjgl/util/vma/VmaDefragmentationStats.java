@@ -79,7 +79,7 @@ public class VmaDefragmentationStats extends Struct implements NativeResource {
     /** total number of bytes that have been released to the system by freeing empty {@code VkDeviceMemory} objects */
     @NativeType("VkDeviceSize")
     public long bytesFreed() { return nbytesFreed(address()); }
-    /** tumber of allocations that have been moved to different places */
+    /** number of allocations that have been moved to different places */
     @NativeType("uint32_t")
     public int allocationsMoved() { return nallocationsMoved(address()); }
     /** number of empty {@code VkDeviceMemory} objects that have been released to the system */

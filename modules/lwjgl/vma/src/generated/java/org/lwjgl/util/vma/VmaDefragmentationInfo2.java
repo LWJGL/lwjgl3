@@ -113,11 +113,10 @@ public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
     @NativeType("uint32_t")
     public int allocationCount() { return nallocationCount(address()); }
     /**
-     * Pointer to array of allocations that can be defragmented.
+     * pointer to array of allocations that can be defragmented.
      * 
      * <p>The array should have {@code allocationCount} elements. The array should not contain nulls. Elements in the array should be unique - same allocation
-     * cannot occur twice. It is safe to pass allocations that are in the lost state - they are ignored. All allocations not present in this array are
-     * considered non-moveable during this defragmentation.</p>
+     * cannot occur twice. All allocations not present in this array are considered non-moveable during this defragmentation.</p>
      */
     @NativeType("VmaAllocation *")
     public PointerBuffer pAllocations() { return npAllocations(address()); }
@@ -148,7 +147,7 @@ public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
     @NativeType("VmaPool const *")
     public PointerBuffer pPools() { return npPools(address()); }
     /**
-     * Maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on CPU side, like {@code memcpy()},
+     * maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on CPU side, like {@code memcpy()},
      * {@code memmove()}.
      * 
      * <p>{@code VK_WHOLE_SIZE} means no limit.</p>
@@ -156,14 +155,14 @@ public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
     @NativeType("VkDeviceSize")
     public long maxCpuBytesToMove() { return nmaxCpuBytesToMove(address()); }
     /**
-     * Maximum number of allocations that can be moved to a different place using transfers on CPU side, like {@code memcpy()}, {@code memmove()}.
+     * maximum number of allocations that can be moved to a different place using transfers on CPU side, like {@code memcpy()}, {@code memmove()}.
      * 
      * <p>{@code UINT32_MAX} means no limit.</p>
      */
     @NativeType("uint32_t")
     public int maxCpuAllocationsToMove() { return nmaxCpuAllocationsToMove(address()); }
     /**
-     * Maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on GPU side, posted to
+     * maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on GPU side, posted to
      * {@code commandBuffer}.
      * 
      * <p>{@code VK_WHOLE_SIZE} means no limit.</p>
@@ -171,14 +170,14 @@ public class VmaDefragmentationInfo2 extends Struct implements NativeResource {
     @NativeType("VkDeviceSize")
     public long maxGpuBytesToMove() { return nmaxGpuBytesToMove(address()); }
     /**
-     * Maximum number of allocations that can be moved to a different place using transfers on GPU side, posted to {@code commandBuffer}.
+     * maximum number of allocations that can be moved to a different place using transfers on GPU side, posted to {@code commandBuffer}.
      * 
      * <p>{@code UINT32_MAX} means no limit.</p>
      */
     @NativeType("uint32_t")
     public int maxGpuAllocationsToMove() { return nmaxGpuAllocationsToMove(address()); }
     /**
-     * Optional. Command buffer where GPU copy commands will be posted.
+     * command buffer where GPU copy commands will be posted. Optional.
      * 
      * <p>If not null, it must be a valid command buffer handle that supports Transfer queue type. It must be in the recording state and outside of a render pass
      * instance. You need to submit it and make sure it finished execution before calling {@link Vma#vmaDefragmentationEnd DefragmentationEnd}.</p>
