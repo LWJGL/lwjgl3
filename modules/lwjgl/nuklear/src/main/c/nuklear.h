@@ -147,7 +147,7 @@
 /// NK_ASSERT   | If you don't define this, nuklear will use <assert.h> with assert().
 /// NK_MEMSET   | You can define this to 'memset' or your own memset implementation replacement. If not nuklear will use its own version.
 /// NK_MEMCPY   | You can define this to 'memcpy' or your own memcpy implementation replacement. If not nuklear will use its own version.
-/// NK_SQRT     | You can define this to 'sqrt' or your own sqrt implementation replacement. If not nuklear will use its own slow and not highly accurate version.
+/// NK_INV_SQRT | You can define this to your own inverse sqrt implementation replacement. If not nuklear will use its own slow and not highly accurate version.
 /// NK_SIN      | You can define this to 'sinf' or your own sine implementation replacement. If not nuklear will use its own approximation implementation.
 /// NK_COS      | You can define this to 'cosf' or your own cosine implementation replacement. If not nuklear will use its own approximation implementation.
 /// NK_STRTOD   | You can define this to `strtod` or your own string to double conversion implementation replacement. If not defined nuklear will use its own imprecise and possibly unsafe version (does not handle nan or infinity!).
@@ -5838,7 +5838,9 @@ NK_GLOBAL const struct nk_color nk_yellow = {255,255,0,255};
     else (*(s)) = NK_WIDGET_STATE_INACTIVE;
 
 /* math */
+#ifndef NK_INV_SQRT
 NK_LIB float nk_inv_sqrt(float n);
+#endif
 #ifndef NK_SIN
 NK_LIB float nk_sin(float x);
 #endif
@@ -6106,6 +6108,8 @@ NK_LIB void nk_property(struct nk_context *ctx, const char *name, struct nk_prop
     (it can actually approximate a lot more functions) can be
     found here: www.lolengine.net/wiki/oss/lolremez
 */
+#ifndef NK_INV_SQRT
+#define NK_INV_SQRT nk_inv_sqrt
 NK_LIB float
 nk_inv_sqrt(float n)
 {
@@ -6118,6 +6122,7 @@ nk_inv_sqrt(float n)
     conv.f = conv.f * (threehalfs - (x2 * conv.f * conv.f));
     return conv.f;
 }
+#endif
 #ifndef NK_SIN
 #define NK_SIN nk_sin
 NK_LIB float
@@ -9828,7 +9833,7 @@ nk_draw_list_stroke_poly_line(struct nk_draw_list *list, const struct nk_vec2 *p
             /* vec2 inverted length  */
             len = nk_vec2_len_sqr(diff);
             if (len != 0.0f)
-                len = nk_inv_sqrt(len);
+                len = NK_INV_SQRT(len);
             else len = 1.0f;
 
             diff = nk_vec2_muls(diff, len);
@@ -9979,7 +9984,7 @@ nk_draw_list_stroke_poly_line(struct nk_draw_list *list, const struct nk_vec2 *p
             /* vec2 inverted length  */
             len = nk_vec2_len_sqr(diff);
             if (len != 0.0f)
-                len = nk_inv_sqrt(len);
+                len = NK_INV_SQRT(len);
             else len = 1.0f;
             diff = nk_vec2_muls(diff, len);
 
@@ -10069,7 +10074,7 @@ nk_draw_list_fill_poly_convex(struct nk_draw_list *list,
             /* vec2 inverted length  */
             float len = nk_vec2_len_sqr(diff);
             if (len != 0.0f)
-                len = nk_inv_sqrt(len);
+                len = NK_INV_SQRT(len);
             else len = 1.0f;
             diff = nk_vec2_muls(diff, len);
 
@@ -12445,8 +12450,6 @@ nk_panel_begin(struct nk_context *ctx, const char *title, enum nk_panel_type pan
     layout->bounds = win->bounds;
     layout->bounds.x += panel_padding.x;
     layout->bounds.w -= 2*panel_padding.x;
-    layout->bounds.y += panel_padding.y;
-    layout->bounds.h -= 2*panel_padding.y;
     if (win->flags & NK_WINDOW_BORDER) {
         layout->border = nk_panel_get_border(style, win->flags, panel_type);
         layout->bounds = nk_shrink_rect(layout->bounds, layout->border);
@@ -22524,8 +22527,10 @@ nk_tooltipfv(struct nk_context *ctx, const char *fmt, va_list args)
 ///   - [y]: Minor version with non-breaking API and library changes
 ///   - [z]: Patch version with no direct changes to the API
 ///
+/// - 2022/02/03 (4.9.6)  - Allow overriding the NK_INV_SQRT function, similar to NK_SIN and NK_COS
+/// - 2021/12/22 (4.9.5)  - Revert layout bounds not accounting for padding due to regressions
 /// - 2021/12/22 (4.9.4)  - Fix checking hovering when window is minimized
-/// - 2021/12/22 (4.09.3) - Fix layout bounds not accounting for padding.
+/// - 2021/12/22 (4.09.3) - Fix layout bounds not accounting for padding
 /// - 2021/12/19 (4.09.2) - Update to stb_rect_pack.h v1.01 and stb_truetype.h v1.26
 /// - 2021/12/16 (4.09.1) - Fix the majority of GCC warnings
 /// - 2021/10/16 (4.09.0) - Added nk_spacer() widget

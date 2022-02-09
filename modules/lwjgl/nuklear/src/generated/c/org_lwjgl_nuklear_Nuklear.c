@@ -19,7 +19,7 @@ DISABLE_WARNINGS()
 #define NK_IMPLEMENTATION
 #define NK_MEMSET memset
 #define NK_MEMCPY memcpy
-#define NK_SQRT sqrt
+#define NK_INV_SQRT(expr) (1.0f / sqrt(expr))
 #define NK_SIN sinf
 #define NK_COS cosf
 #include <math.h>
