@@ -145,12 +145,13 @@
         <echo message="Compiling Kotlin generator..." level="info" taskname="Generator" unless:set="generator-uptodate"/>
         <mkdir dir="${bin.generator}"/>
         <kotlinc moduleName="generator" output="${bin.generator}" printVersion="true" unless:set="generator-uptodate">
-            <compilerarg line="-jvm-target 1.8"/>
+            <compilerarg value="-progressive"/>
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
             <compilerarg value="-Xlambdas=indy"/>
             <compilerarg value="-Xreport-perf"/>
-            <compilerarg value="-progressive"/>
+            <compilerarg value="-Xbackend-threads=${backend-threads}" if:set="backend-threads"/>
+            <compilerarg line="-jvm-target 1.8"/>
 
             <src path="${src.generator}/kotlin"/>
         </kotlinc>
@@ -210,12 +211,13 @@
                 <pathelement location="${bin.generator}"/>
             </classpath>
 
-            <compilerarg line="-jvm-target 1.8"/>
+            <compilerarg value="-progressive"/>
             <compilerarg value="-Xno-call-assertions"/>
             <compilerarg value="-Xno-param-assertions"/>
             <compilerarg value="-Xlambdas=indy"/>
             <compilerarg value="-Xreport-perf"/>
-            <compilerarg value="-progressive"/>
+            <compilerarg value="-Xbackend-threads=${backend-threads}" if:set="backend-threads"/>
+            <compilerarg line="-jvm-target 1.8"/>
 
             <src path="${core.kotlin.path}/jni"/>
             <src path="${core.kotlin.path}/libc"/>

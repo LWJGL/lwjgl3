@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Kotlin2JvmCompilerArguments">
-    <option name="jvmTarget" value="1.8" />
-  </component>
-  <component name="KotlinCommonCompilerArguments">
-    <option name="apiVersion" value="1.5" />
-    <option name="languageVersion" value="1.5" />
-  </component>
   <component name="KotlinCompilerSettings">
-    <option name="additionalArguments" value="-version -progressive -Xno-call-assertions -Xno-param-assertions -Xlambdas=indy" />
+    <option name="additionalArguments" value="-version -progressive -Xno-call-assertions -Xno-param-assertions -Xlambdas=indy -Xbackend-threads=0" />
     <option name="copyJsLibraryFiles" value="false" />
   </component>
 </project>
