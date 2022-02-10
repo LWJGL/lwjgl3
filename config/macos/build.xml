@@ -31,8 +31,8 @@
 
             <mkdir dir="@{dest}"/>
             <apply dir="@{dest}" executable="${clang}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-                <arg line="-c -std=c11 -ObjC" unless:set="cpp"/>
-                <arg line="-c -std=c++11" if:set="cpp"/>
+                <arg line="-c -ObjC" unless:set="cpp"/>
+                <arg line="-c -std=c++14" if:set="cpp"/>
                 <arg line="-O3 -flto -fPIC @{flags} -DNDEBUG -DLWJGL_MACOS -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
                 <arg line="-target aarch64-apple-darwin -arch arm64" if:set="build.arch.arm"/>
 
@@ -345,7 +345,7 @@
         <!-- zstd -->
         <build module="zstd" simple="true" if:true="${binding.zstd}">
             <beforeCompile>
-                <compile flags="-DZSTD_MULTITHREAD">
+                <compile flags="-DZSTD_MULTITHREAD -DZSTD_DISABLE_ASM">
                     <arg value="-I${module.lwjgl.rel}/xxhash/src/main/c"/>
                     <fileset dir="." includes="${src.main}/common/*.c"/>
                     <fileset dir="." includes="${src.main}/compress/*.c"/>

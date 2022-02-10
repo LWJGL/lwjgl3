@@ -34,8 +34,8 @@
             <condition property="gcc" value="@{gcc.exec}" else="@{gpp.exec}"><equals arg1="@{lang}" arg2="c"/></condition>
             <mkdir dir="@{dest}"/>
             <apply dir="@{dest}" executable="${gcc}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-                <arg line="-c -std=gnu11" unless:set="cpp"/>
-                <arg line="-c -std=gnu++11" if:set="cpp"/>
+                <arg line="-c" unless:set="cpp"/>
+                <arg line="-c -std=gnu++14" if:set="cpp"/>
                 <arg line="-m64" if:set="build.arch.x64"/>
                 <arg line="-m32 -mfpmath=sse -msse -msse2" if:set="build.arch.x86"/>
                 <arg line="-O3 @{lto} -fPIC @{flags} -pthread -DNDEBUG -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
@@ -53,7 +53,7 @@
                 <source/>
                 <fileset dir="." includes="${src.generated}/*" if:true="@{simple}"/>
 
-                <regexpmapper from="(\w+)\.c(?:c|pp)?$" to="\1.o"/>
+                <regexpmapper from="(\w+)\.(?:c|cc|cpp|S)$" to="\1.o"/>
             </apply>
         </sequential>
     </macrodef>
@@ -434,6 +434,7 @@
                     <fileset dir="." includes="${src.main}/common/*.c"/>
                     <fileset dir="." includes="${src.main}/compress/*.c"/>
                     <fileset dir="." includes="${src.main}/decompress/*.c"/>
+                    <fileset dir="." includes="${src.main}/decompress/*.S" unless:set="build.arch.arm"/>
                     <fileset dir="." includes="${src.main}/dictBuilder/*.c"/>
                     <fileset dir="." includes="${module.lwjgl}/xxhash/src/main/c/xxhash.c"/>
                 </compile>

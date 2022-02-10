@@ -183,7 +183,7 @@ float FanVertLinSort(int* piIndexBufferIn, int* piIndexBufferOut, int iNumFaces,
 
     for (i = 0; i < iNumFaces3; i++)
     {
-        register int ind = piIndexBufferIn[i];
+        int ind = piIndexBufferIn[i];
         piFanPos[ind]++;
 
         if (piFanPos[ind] == 1)

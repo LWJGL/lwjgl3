@@ -3064,7 +3064,7 @@ class VmaAllocationObjectAllocator;
 // Returns number of bits set to 1 in (v).
 static inline uint32_t VmaCountBitsSet(uint32_t v)
 {
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && !defined(LWJGL_arm64)
     return __popcnt(v);
 #elif defined __GNUC__ || defined __clang__
     return static_cast<uint32_t>(__builtin_popcount(v));
