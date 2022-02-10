@@ -12,14 +12,14 @@ typedef void (APIENTRY *glScissorExclusiveNVPROC) (jint, jint, jint, jint);
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVScissorExclusive_nglScissorExclusiveArrayvNV__IIJ(JNIEnv *__env, jclass clazz, jint first, jint count, jlong vAddress) {
-    glScissorExclusiveArrayvNVPROC glScissorExclusiveArrayvNV = (glScissorExclusiveArrayvNVPROC)tlsGetFunction(756);
+    glScissorExclusiveArrayvNVPROC glScissorExclusiveArrayvNV = (glScissorExclusiveArrayvNVPROC)tlsGetFunction(758);
     uintptr_t v = (uintptr_t)vAddress;
     UNUSED_PARAM(clazz)
     glScissorExclusiveArrayvNV(first, count, v);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVScissorExclusive_glScissorExclusiveNV(JNIEnv *__env, jclass clazz, jint x, jint y, jint width, jint height) {
-    glScissorExclusiveNVPROC glScissorExclusiveNV = (glScissorExclusiveNVPROC)tlsGetFunction(757);
+    glScissorExclusiveNVPROC glScissorExclusiveNV = (glScissorExclusiveNVPROC)tlsGetFunction(759);
     UNUSED_PARAM(clazz)
     glScissorExclusiveNV(x, y, width, height);
 }
