@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>An {@code EGLStream} consists of a sequence of image frames. This extension allows these frames to be acquired as {@code EGLImages}. Frames from the
  * stream would be used as the content for the EGLImage.</p>
  * 
- * <p>Requires {@link KHRStream KHR_stream} and {@link KHRReusableSync KHR_reusable_sync}.</p>
+ * <p>Requires {@link KHRStream KHR_stream} and {@link EXTSyncReuse EXT_sync_reuse}.</p>
  */
 public class NVStreamConsumerEGLImage {
 
@@ -53,7 +53,7 @@ public class NVStreamConsumerEGLImage {
     }
 
     @NativeType("EGLBoolean")
-    public static boolean eglStreamImageConsumerConnectNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLuint64KHR *") LongBuffer modifiers, @Nullable @NativeType("EGLAttrib *") PointerBuffer attrib_list) {
+    public static boolean eglStreamImageConsumerConnectNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLuint64KHR const *") LongBuffer modifiers, @Nullable @NativeType("EGLAttrib const *") PointerBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list, EGL10.EGL_NONE);
         }
@@ -119,7 +119,7 @@ public class NVStreamConsumerEGLImage {
 
     /** Array version of: {@link #eglStreamImageConsumerConnectNV StreamImageConsumerConnectNV} */
     @NativeType("EGLBoolean")
-    public static boolean eglStreamImageConsumerConnectNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLuint64KHR *") long[] modifiers, @Nullable @NativeType("EGLAttrib *") PointerBuffer attrib_list) {
+    public static boolean eglStreamImageConsumerConnectNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLuint64KHR const *") long[] modifiers, @Nullable @NativeType("EGLAttrib const *") PointerBuffer attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglStreamImageConsumerConnectNV;
         if (CHECKS) {
             check(__functionAddress);

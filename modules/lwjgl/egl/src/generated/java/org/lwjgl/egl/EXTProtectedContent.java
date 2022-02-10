@@ -23,7 +23,10 @@ package org.lwjgl.egl;
  */
 public final class EXTProtectedContent {
 
-    /** {@code EGLSurface} attribute name. */
+    /**
+     * Accepted as an attribute name in the {@code attrib_list} parameter of {@link EGL10#eglCreateContext CreateContext}, {@link EGL10#eglCreateWindowSurface CreateWindowSurface}, and {@link KHRImageBase#eglCreateImageKHR CreateImageKHR}; and as an
+     * parameter of {@link EGL10#eglQuerySurface QuerySurface} and {@link EGL10#eglQueryContext QueryContext}.
+     */
     public static final int EGL_PROTECTED_CONTENT_EXT = 0x32C0;
 
     private EXTProtectedContent() {}

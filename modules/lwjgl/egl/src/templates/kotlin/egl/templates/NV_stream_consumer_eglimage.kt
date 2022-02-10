@@ -15,7 +15,7 @@ val NV_stream_consumer_eglimage = "NVStreamConsumerEGLImage".nativeClassEGL("NV_
         An {@code EGLStream} consists of a sequence of image frames. This extension allows these frames to be acquired as {@code EGLImages}. Frames from the
         stream would be used as the content for the EGLImage.
 
-        Requires ${KHR_stream.link} and ${KHR_reusable_sync.link}.
+        Requires ${KHR_stream.link} and ${EXT_sync_reuse.link}.
         """
 
     IntConstant(
@@ -39,8 +39,8 @@ val NV_stream_consumer_eglimage = "NVStreamConsumerEGLImage".nativeClassEGL("NV_
         EGLDisplay("dpy", ""),
         EGLStreamKHR("stream", ""),
         AutoSize("modifiers")..EGLint("num_modifiers", ""),
-        EGLuint64KHR.p("modifiers", ""),
-        nullable..noneTerminated..EGLAttrib.p("attrib_list", "")
+        EGLuint64KHR.const.p("modifiers", ""),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
     )
 
     EGLint(

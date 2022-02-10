@@ -27,7 +27,10 @@ val EXT_protected_content = "EXTProtectedContent".nativeClassEGL("EXT_protected_
         """
 
     IntConstant(
-        "{@code EGLSurface} attribute name.",
+        """
+        Accepted as an attribute name in the {@code attrib_list} parameter of #CreateContext(), #CreateWindowSurface(), and #CreateImageKHR(); and as an
+        parameter of #QuerySurface() and #QueryContext().
+        """,
 
         "PROTECTED_CONTENT_EXT"..0x32C0
     )

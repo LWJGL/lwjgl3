@@ -92,6 +92,7 @@ public class EGLCapabilities {
         eglCreatePlatformWindowSurfaceEXT,
         eglCreatePlatformPixmapSurfaceEXT,
         eglStreamConsumerOutputEXT,
+        eglQuerySupportedCompressionRatesEXT,
         eglSwapBuffersWithDamageEXT,
         eglUnsignalSyncEXT,
         eglCreatePixmapSurfaceHI,
@@ -312,6 +313,8 @@ public class EGLCapabilities {
     public final boolean EGL_EXT_protected_surface;
     /** When true, {@link EXTStreamConsumerEGLOutput} is supported. */
     public final boolean EGL_EXT_stream_consumer_egloutput;
+    /** When true, {@link EXTSurfaceCompression} is supported. */
+    public final boolean EGL_EXT_surface_compression;
     /** When true, {@link EXTSurfaceCTA861_3Metadata} is supported. */
     public final boolean EGL_EXT_surface_CTA861_3_metadata;
     /** When true, {@link EXTSurfaceSMPTE2086Metadata} is supported. */
@@ -644,6 +647,7 @@ public class EGLCapabilities {
             provider.getFunctionAddress("eglCreatePlatformWindowSurfaceEXT"),
             provider.getFunctionAddress("eglCreatePlatformPixmapSurfaceEXT"),
             provider.getFunctionAddress("eglStreamConsumerOutputEXT"),
+            provider.getFunctionAddress("eglQuerySupportedCompressionRatesEXT"),
             provider.getFunctionAddress("eglSwapBuffersWithDamageEXT"),
             provider.getFunctionAddress("eglUnsignalSyncEXT"),
             provider.getFunctionAddress("eglCreatePixmapSurfaceHI"),
@@ -796,6 +800,7 @@ public class EGLCapabilities {
             caps.eglCreatePlatformWindowSurfaceEXT,
             caps.eglCreatePlatformPixmapSurfaceEXT,
             caps.eglStreamConsumerOutputEXT,
+            caps.eglQuerySupportedCompressionRatesEXT,
             caps.eglSwapBuffersWithDamageEXT,
             caps.eglUnsignalSyncEXT,
             caps.eglCreatePixmapSurfaceHI,
@@ -947,76 +952,77 @@ public class EGLCapabilities {
         eglCreatePlatformWindowSurfaceEXT = functions[74];
         eglCreatePlatformPixmapSurfaceEXT = functions[75];
         eglStreamConsumerOutputEXT = functions[76];
-        eglSwapBuffersWithDamageEXT = functions[77];
-        eglUnsignalSyncEXT = functions[78];
-        eglCreatePixmapSurfaceHI = functions[79];
-        eglCreateSync64KHR = functions[80];
-        eglDebugMessageControlKHR = functions[81];
-        eglQueryDebugKHR = functions[82];
-        eglLabelObjectKHR = functions[83];
-        eglQueryDisplayAttribKHR = functions[84];
-        eglCreateImageKHR = functions[85];
-        eglDestroyImageKHR = functions[86];
-        eglLockSurfaceKHR = functions[87];
-        eglUnlockSurfaceKHR = functions[88];
-        eglQuerySurface64KHR = functions[89];
-        eglSetDamageRegionKHR = functions[90];
-        eglCreateSyncKHR = functions[91];
-        eglDestroySyncKHR = functions[92];
-        eglClientWaitSyncKHR = functions[93];
-        eglSignalSyncKHR = functions[94];
-        eglGetSyncAttribKHR = functions[95];
-        eglCreateStreamKHR = functions[96];
-        eglDestroyStreamKHR = functions[97];
-        eglStreamAttribKHR = functions[98];
-        eglQueryStreamKHR = functions[99];
-        eglQueryStreamu64KHR = functions[100];
-        eglCreateStreamAttribKHR = functions[101];
-        eglSetStreamAttribKHR = functions[102];
-        eglQueryStreamAttribKHR = functions[103];
-        eglStreamConsumerAcquireAttribKHR = functions[104];
-        eglStreamConsumerReleaseAttribKHR = functions[105];
-        eglStreamConsumerGLTextureExternalKHR = functions[106];
-        eglStreamConsumerAcquireKHR = functions[107];
-        eglStreamConsumerReleaseKHR = functions[108];
-        eglGetStreamFileDescriptorKHR = functions[109];
-        eglCreateStreamFromFileDescriptorKHR = functions[110];
-        eglQueryStreamTimeKHR = functions[111];
-        eglCreateStreamProducerSurfaceKHR = functions[112];
-        eglSwapBuffersWithDamageKHR = functions[113];
-        eglWaitSyncKHR = functions[114];
-        eglCreateDRMImageMESA = functions[115];
-        eglExportDRMImageMESA = functions[116];
-        eglExportDMABUFImageQueryMESA = functions[117];
-        eglExportDMABUFImageMESA = functions[118];
-        eglSwapBuffersRegion2NOK = functions[119];
-        eglQueryNativeDisplayNV = functions[120];
-        eglQueryNativeWindowNV = functions[121];
-        eglQueryNativePixmapNV = functions[122];
-        eglPostSubBufferNV = functions[123];
-        eglStreamImageConsumerConnectNV = functions[124];
-        eglQueryStreamConsumerEventNV = functions[125];
-        eglStreamAcquireImageNV = functions[126];
-        eglStreamReleaseImageNV = functions[127];
-        eglStreamConsumerGLTextureExternalAttribsNV = functions[128];
-        eglStreamFlush = functions[129];
-        eglQueryDisplayAttribNV = functions[130];
-        eglSetStreamMetadataNV = functions[131];
-        eglQueryStreamMetadataNV = functions[132];
-        eglResetStreamNV = functions[133];
-        eglCreateStreamSyncNV = functions[134];
-        eglCreateFenceSyncNV = functions[135];
-        eglDestroySyncNV = functions[136];
-        eglFenceNV = functions[137];
-        eglClientWaitSyncNV = functions[138];
-        eglSignalSyncNV = functions[139];
-        eglGetSyncAttribNV = functions[140];
-        eglGetSystemTimeFrequencyNV = functions[141];
-        eglGetSystemTimeNV = functions[142];
-        eglBindWaylandDisplayWL = functions[143];
-        eglUnbindWaylandDisplayWL = functions[144];
-        eglQueryWaylandBufferWL = functions[145];
-        eglCreateWaylandBufferFromImageWL = functions[146];
+        eglQuerySupportedCompressionRatesEXT = functions[77];
+        eglSwapBuffersWithDamageEXT = functions[78];
+        eglUnsignalSyncEXT = functions[79];
+        eglCreatePixmapSurfaceHI = functions[80];
+        eglCreateSync64KHR = functions[81];
+        eglDebugMessageControlKHR = functions[82];
+        eglQueryDebugKHR = functions[83];
+        eglLabelObjectKHR = functions[84];
+        eglQueryDisplayAttribKHR = functions[85];
+        eglCreateImageKHR = functions[86];
+        eglDestroyImageKHR = functions[87];
+        eglLockSurfaceKHR = functions[88];
+        eglUnlockSurfaceKHR = functions[89];
+        eglQuerySurface64KHR = functions[90];
+        eglSetDamageRegionKHR = functions[91];
+        eglCreateSyncKHR = functions[92];
+        eglDestroySyncKHR = functions[93];
+        eglClientWaitSyncKHR = functions[94];
+        eglSignalSyncKHR = functions[95];
+        eglGetSyncAttribKHR = functions[96];
+        eglCreateStreamKHR = functions[97];
+        eglDestroyStreamKHR = functions[98];
+        eglStreamAttribKHR = functions[99];
+        eglQueryStreamKHR = functions[100];
+        eglQueryStreamu64KHR = functions[101];
+        eglCreateStreamAttribKHR = functions[102];
+        eglSetStreamAttribKHR = functions[103];
+        eglQueryStreamAttribKHR = functions[104];
+        eglStreamConsumerAcquireAttribKHR = functions[105];
+        eglStreamConsumerReleaseAttribKHR = functions[106];
+        eglStreamConsumerGLTextureExternalKHR = functions[107];
+        eglStreamConsumerAcquireKHR = functions[108];
+        eglStreamConsumerReleaseKHR = functions[109];
+        eglGetStreamFileDescriptorKHR = functions[110];
+        eglCreateStreamFromFileDescriptorKHR = functions[111];
+        eglQueryStreamTimeKHR = functions[112];
+        eglCreateStreamProducerSurfaceKHR = functions[113];
+        eglSwapBuffersWithDamageKHR = functions[114];
+        eglWaitSyncKHR = functions[115];
+        eglCreateDRMImageMESA = functions[116];
+        eglExportDRMImageMESA = functions[117];
+        eglExportDMABUFImageQueryMESA = functions[118];
+        eglExportDMABUFImageMESA = functions[119];
+        eglSwapBuffersRegion2NOK = functions[120];
+        eglQueryNativeDisplayNV = functions[121];
+        eglQueryNativeWindowNV = functions[122];
+        eglQueryNativePixmapNV = functions[123];
+        eglPostSubBufferNV = functions[124];
+        eglStreamImageConsumerConnectNV = functions[125];
+        eglQueryStreamConsumerEventNV = functions[126];
+        eglStreamAcquireImageNV = functions[127];
+        eglStreamReleaseImageNV = functions[128];
+        eglStreamConsumerGLTextureExternalAttribsNV = functions[129];
+        eglStreamFlush = functions[130];
+        eglQueryDisplayAttribNV = functions[131];
+        eglSetStreamMetadataNV = functions[132];
+        eglQueryStreamMetadataNV = functions[133];
+        eglResetStreamNV = functions[134];
+        eglCreateStreamSyncNV = functions[135];
+        eglCreateFenceSyncNV = functions[136];
+        eglDestroySyncNV = functions[137];
+        eglFenceNV = functions[138];
+        eglClientWaitSyncNV = functions[139];
+        eglSignalSyncNV = functions[140];
+        eglGetSyncAttribNV = functions[141];
+        eglGetSystemTimeFrequencyNV = functions[142];
+        eglGetSystemTimeNV = functions[143];
+        eglBindWaylandDisplayWL = functions[144];
+        eglUnbindWaylandDisplayWL = functions[145];
+        eglQueryWaylandBufferWL = functions[146];
+        eglCreateWaylandBufferFromImageWL = functions[147];
 
         EGL10 = check_EGL10(ext);
         EGL11 = check_EGL11(ext);
@@ -1080,6 +1086,7 @@ public class EGLCapabilities {
         EGL_EXT_protected_content = ext.contains("EGL_EXT_protected_content");
         EGL_EXT_protected_surface = ext.contains("EGL_EXT_protected_surface");
         EGL_EXT_stream_consumer_egloutput = check_EXT_stream_consumer_egloutput(ext);
+        EGL_EXT_surface_compression = check_EXT_surface_compression(ext);
         EGL_EXT_surface_CTA861_3_metadata = ext.contains("EGL_EXT_surface_CTA861_3_metadata");
         EGL_EXT_surface_SMPTE2086_metadata = ext.contains("EGL_EXT_surface_SMPTE2086_metadata");
         EGL_EXT_swap_buffers_with_damage = check_EXT_swap_buffers_with_damage(ext);
@@ -1309,6 +1316,12 @@ public class EGLCapabilities {
     private boolean check_EXT_stream_consumer_egloutput(Set<String> ext) {
         return ext.contains("EGL_EXT_stream_consumer_egloutput") && checkExtension("EGL_EXT_stream_consumer_egloutput", checkFunctions(
             eglStreamConsumerOutputEXT
+        ));
+    }
+
+    private boolean check_EXT_surface_compression(Set<String> ext) {
+        return ext.contains("EGL_EXT_surface_compression") && checkExtension("EGL_EXT_surface_compression", checkFunctions(
+            eglQuerySupportedCompressionRatesEXT
         ));
     }
 
