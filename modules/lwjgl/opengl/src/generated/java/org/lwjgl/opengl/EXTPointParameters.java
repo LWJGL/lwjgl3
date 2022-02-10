@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * Here we simplify the raster brightness to be a function of the rasterized point area and point transparency.</p>
  * 
  * <pre><code>
- *             brightness(Pe)      brightness(Pe) &gt;= Threshold_Area
+ *             brightness(Pe)      brightness(Pe) &ge; Threshold_Area
  * area(Pe) =
  *             Threshold_Area      Otherwise
  * 

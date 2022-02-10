@@ -72,7 +72,7 @@ View( uint id );""")}
 for( int i = 0; i < numViews; i++ ) {
     FramebufferTextureLayer( target, attachment, texture, level, baseViewIndex + i );
     View( i );
-    &lt;drawing-command&gt;
+    <drawing-command>
 }""")}
         The result is that every drawing command is broadcast into every active view. The shader uses {@code gl_ViewID_OVR} to compute view dependent outputs.
 

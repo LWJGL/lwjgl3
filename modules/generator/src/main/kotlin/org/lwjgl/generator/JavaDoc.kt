@@ -310,13 +310,15 @@ enum class LinkMode {
 
 infix fun String.mergeLargeLiteral(other: String): String = this.plus(other)
 
-private val HTML_ESCAPE_PATTERN = """[<>]|&(?![A-Za-z0-9#]+;)""".toRegex()
+private val HTML_ESCAPE_PATTERN = """[<>]=?|&(?!#|(?:amp|hellip|ge|gt|le|lt);)""".toRegex()
 
 private val String.htmlEscaped: String
     get() = this.replace(HTML_ESCAPE_PATTERN) {
         when (it.value) {
             "<"  -> "&lt;"
+            "<="  -> "&le;"
             ">"  -> "&gt;"
+            ">="  -> "&ge;"
             "&"  -> "&amp;"
             else -> throw IllegalStateException()
         }

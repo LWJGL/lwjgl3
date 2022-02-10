@@ -23,8 +23,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>Size of W quadrants:</p>
  * 
  * <pre><code>
- * SizeLeft + SizeRight &lt;= Viewport.Size.w
- * SizeUp   + sizeDown  &lt;= Viewport.Size.h
+ * SizeLeft + SizeRight &le; Viewport.Size.w
+ * SizeUp   + sizeDown  &le; Viewport.Size.h
  * 
  * Clip space (0,0) is located at Viewport.Pos + (SizeLeft,SizeUp) where
  * Viewport is given in the layer description.

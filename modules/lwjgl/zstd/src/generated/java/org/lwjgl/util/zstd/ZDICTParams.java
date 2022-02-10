@@ -80,8 +80,8 @@ public class ZDICTParams extends Struct implements NativeResource {
      * a public dictionary registry in the future. These dictionary IDs are:</p>
      * 
      * <pre><code>
-     * - low range  : &lt;= 32767
-     * - high range : &gt;= (2^31)</code></pre>
+     * - low range  : &le; 32767
+     * - high range : &ge; (2^31)</code></pre>
      */
     @NativeType("unsigned")
     public int dictID() { return ndictID(address()); }

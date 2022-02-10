@@ -156,7 +156,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *    glBindTexture(GL_TEXTURE_2D, ftex);
  *    glBegin(GL_QUADS);
  *    while (*text) {
- *       if (*text &gt;= 32 &amp;&amp; *text &lt; 128) {
+ *       if (*text &ge; 32 &amp;&amp; *text &lt; 128) {
  *          stbtt_aligned_quad q;
  *          stbtt_GetBakedQuad(cdata, 512,512, *text-32, &amp;x,&amp;y,&amp;q,1);//1=opengl &amp; d3d10+,0=d3d9
  *          glTexCoord2f(q.s0,q.t1); glVertex2f(q.x0,q.y0);

@@ -1121,7 +1121,7 @@ delete (CustomAllocData*)allocInfo.pUserData;
 
 vmaVirtualFree(block, alloc);""")}
 
-        <h4>Alignment and units<h4>
+        <h4>Alignment and units</h4>
 
         It feels natural to express sizes and offsets in bytes. If an offset of an allocation needs to be aligned to a multiply of some number (e.g. 4 bytes),
         you can fill optional member {@code VmaVirtualAllocationCreateInfo::alignment} to request it. Example:
@@ -1663,19 +1663,6 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             """
         )}
         """
-
-    EnumConstant(
-        "Flags to be used in ##VmaRecordSettings{@code ::flags}.",
-
-        "RECORD_FLUSH_AFTER_CALL_BIT".enum(
-            """
-            Enables flush after recording every function call.
-
-            Enable it if you expect your application to crash, which may leave recording file truncated. It may degrade performance though.
-            """,
-            0x00000001
-        )
-    )
 
     EnumConstant(
         "Flags for created {@code VmaAllocator}. ({@code VmaAllocatorCreateFlagBits})",

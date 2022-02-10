@@ -84,8 +84,8 @@ public class EXTWindowRectangles {
      * equations are satisfied for all {@code i} less than {@code n}:</p>
      * 
      * <pre><code>
-     * x_i &lt;= xw &lt; x_i+w_i
-     * y_i &lt;= yw &lt; y_i+h_i</code></pre>
+     * x_i &le; xw &lt; x_i+w_i
+     * y_i &le; yw &lt; y_i+h_i</code></pre>
      * 
      * <p>When the window rectangles mode is {@link #GL_INCLUSIVE_EXT INCLUSIVE_EXT} mode and the bound framebuffer object is non-zero, a fragment passes the window rectangles test if
      * the fragment's window-space position is within at least one of the current {@code n} active window rectangles; otherwise the window rectangles test

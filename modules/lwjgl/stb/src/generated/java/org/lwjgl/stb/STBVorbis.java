@@ -678,7 +678,7 @@ public class STBVorbis {
      * 1    k      sum(Ck) for all k
      * 2    *      stereo L, stereo R
      * k    l      k &gt; l, the first l channels, then 0s
-     * k    l      k &lt;= l, the first k channels</code></pre>
+     * k    l      k &le; l, the first k channels</code></pre>
      * 
      * <p>Note that this is not <b>good</b> surround etc. mixing at all! It's just so you get something useful.</p>
      *

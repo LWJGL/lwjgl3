@@ -35,15 +35,15 @@ import org.lwjgl.vulkan.*;
  * 
  * <pre><code>
  * VmaVulkanFunctions vulkanFunctions = {};
- * vulkanFunctions.vkGetInstanceProcAddr = &vkGetInstanceProcAddr;
- * vulkanFunctions.vkGetDeviceProcAddr = &vkGetDeviceProcAddr;
+ * vulkanFunctions.vkGetInstanceProcAddr = &amp;vkGetInstanceProcAddr;
+ * vulkanFunctions.vkGetDeviceProcAddr = &amp;vkGetDeviceProcAddr;
  * 
  * VmaAllocatorCreateInfo allocatorCreateInfo = {};
  * allocatorCreateInfo.vulkanApiVersion = VK_API_VERSION_1_2;
  * allocatorCreateInfo.physicalDevice = physicalDevice;
  * allocatorCreateInfo.device = device;
  * allocatorCreateInfo.instance = instance;
- * allocatorCreateInfo.pVulkanFunctions = &vulkanFunctions;
+ * allocatorCreateInfo.pVulkanFunctions = &amp;vulkanFunctions;
  * 
  * VmaAllocator allocator;
  * vmaCreateAllocator(&amp;allocatorCreateInfo, &amp;allocator);</code></pre>
@@ -1077,8 +1077,10 @@ import org.lwjgl.vulkan.*;
  * 
  * vmaVirtualFree(block, alloc);</code></pre>
  * 
- * <h4>Alignment and units<h4>It feels natural to express sizes and offsets in bytes. If an offset of an allocation needs to be aligned to a multiply of some number (e.g. 4 bytes),
- * you can fill optional member {@code VmaVirtualAllocationCreateInfo::alignment} to request it. Example:
+ * <h4>Alignment and units</h4>
+ * 
+ * <p>It feels natural to express sizes and offsets in bytes. If an offset of an allocation needs to be aligned to a multiply of some number (e.g. 4 bytes),
+ * you can fill optional member {@code VmaVirtualAllocationCreateInfo::alignment} to request it. Example:</p>
  * 
  * <pre><code>
  * VmaVirtualAllocationCreateInfo allocCreateInfo = {};
@@ -1573,21 +1575,6 @@ import org.lwjgl.vulkan.*;
 public class Vma {
 
     static { LibVma.initialize(); }
-
-    /**
-     * Flags to be used in {@link VmaRecordSettings}{@code ::flags}.
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #VMA_RECORD_FLUSH_AFTER_CALL_BIT RECORD_FLUSH_AFTER_CALL_BIT} - 
-     * Enables flush after recording every function call.
-     * 
-     * <p>Enable it if you expect your application to crash, which may leave recording file truncated. It may degrade performance though.</p>
-     * </li>
-     * </ul>
-     */
-    public static final int VMA_RECORD_FLUSH_AFTER_CALL_BIT = 0x1;
 
     /**
      * Flags for created {@code VmaAllocator}. ({@code VmaAllocatorCreateFlagBits})
