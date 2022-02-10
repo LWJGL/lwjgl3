@@ -25,6 +25,26 @@
 })
 #endif
 
+void *__uring_malloc(size_t len);
+void __uring_free(void *p);
+
+static inline void *uring_malloc(size_t len)
+{
+#ifdef CONFIG_NOLIBC
+	return __uring_malloc(len);
+#else
+	return malloc(len);
+#endif
+}
+
+static inline void uring_free(void *ptr)
+{
+#ifdef CONFIG_NOLIBC
+	__uring_free(ptr);
+#else
+	free(ptr);
+#endif
+}
 
 static inline long get_page_size(void)
 {

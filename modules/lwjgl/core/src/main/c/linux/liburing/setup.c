@@ -178,7 +178,7 @@ struct io_uring_probe *io_uring_get_probe_ring(struct io_uring *ring)
 	int r;
 
 	len = sizeof(*probe) + 256 * sizeof(struct io_uring_probe_op);
-	probe = malloc(len);
+	probe = uring_malloc(len);
 	if (!probe)
 		return NULL;
 	memset(probe, 0, len);
@@ -187,7 +187,7 @@ struct io_uring_probe *io_uring_get_probe_ring(struct io_uring *ring)
 	if (r >= 0)
 		return probe;
 
-	free(probe);
+	uring_free(probe);
 	return NULL;
 }
 
@@ -208,7 +208,7 @@ struct io_uring_probe *io_uring_get_probe(void)
 
 void io_uring_free_probe(struct io_uring_probe *probe)
 {
-	free(probe);
+	uring_free(probe);
 }
 
 static inline int __fls(int x)

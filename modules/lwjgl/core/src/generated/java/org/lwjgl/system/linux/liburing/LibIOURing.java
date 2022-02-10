@@ -237,12 +237,13 @@ public class LibIOURing {
      * <li>{@link #IOSQE_IO_LINK IOSQE_IO_LINK} - 
      * When this flag is specified, it forms a link with the next SQE in the submission ring.
      * 
-     * <p>That next SQE will not be started before this one completes. This, in effect, forms a chain of SQEs, which can be arbitrarily long. The tail of the
-     * chain is denoted by the first SQE that does not have this flag set. This flag has no effect on previous SQE submissions, nor does it impact SQEs
-     * that are outside of the chain tail. This means that multiple chains can be executing in parallel, or chains and individual SQEs. Only members
-     * inside the chain are serialized. A chain of SQEs will be broken, if any request in that chain ends in error. {@code io_uring} considers any
-     * unexpected result an error. This means that, eg, a short read will also terminate the remainder of the chain. If a chain of SQE links is broken,
-     * the remaining unstarted part of the chain will be terminated and completed with {@code -ECANCELED} as the error code.</p>
+     * <p>That next SQE will not be started before the previous request completes. This, in effect, forms a chain of SQEs, which can be arbitrarily long. The
+     * tail of the chain is denoted by the first SQE that does not have this flag set. Chains are not supported across submission boundaries. Even if the
+     * last SQE in a submission has this flag set, it will still terminate the current chain. This flag has no effect on previous SQE submissions, nor
+     * does it impact SQEs that are outside of the chain tail. This means that multiple chains can be executing in parallel, or chains and individual
+     * SQEs. Only members inside the chain are serialized. A chain of SQEs will be broken, if any request in that chain ends in error. {@code io_uring}
+     * considers any unexpected result an error. This means that, eg, a short read will also terminate the remainder of the chain. If a chain of SQE links
+     * is broken, the remaining unstarted part of the chain will be terminated and completed with {@code -ECANCELED} as the error code.</p>
      * 
      * <p>Available since 5.3.</p>
      * </li>
@@ -502,7 +503,7 @@ public class LibIOURing {
      * slot, it will be replaced, similar to {@link #IORING_OP_FILES_UPDATE OP_FILES_UPDATE}. Please note that only {@code io_uring} has access to such files and no other syscall can
      * use them. See {@link #IOSQE_FIXED_FILE} and {@link #IORING_REGISTER_FILES REGISTER_FILES}.</p>
      * 
-     * <p>Available since 5.15.</p>
+     * <p>Available since 5.5.</p>
      * </li>
      * <li>{@link #IORING_OP_ASYNC_CANCEL OP_ASYNC_CANCEL} - 
      * Attempt to cancel an already issued request.
@@ -751,11 +752,6 @@ public class LibIOURing {
      * 
      * <p>Available since 5.15.</p>
      * </li>
-     * <li>{@link #IORING_OP_GETDENTS OP_GETDENTS} - 
-     * Issue the equivalent of a {@code getdents64(2)} system call.
-     * 
-     * <p>Available since 5.17.</p>
-     * </li>
      * <li>{@link #IORING_OP_LAST OP_LAST}</li>
      * </ul>
      */
@@ -800,8 +796,7 @@ public class LibIOURing {
         IORING_OP_MKDIRAT         = 37,
         IORING_OP_SYMLINKAT       = 38,
         IORING_OP_LINKAT          = 39,
-        IORING_OP_GETDENTS        = 40,
-        IORING_OP_LAST            = 41;
+        IORING_OP_LAST            = 40;
 
     /** {@code sqe->fsync_flags} */
     public static final int IORING_FSYNC_DATASYNC = 1 << 0;

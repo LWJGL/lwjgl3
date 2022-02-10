@@ -52,7 +52,11 @@ public class LibURing {
     /** Unsafe version of: {@link #io_uring_get_probe get_probe} */
     public static native long nio_uring_get_probe();
 
-    /** Same as {@link #io_uring_get_probe_ring get_probe_ring}, but takes care of ring init and teardown. */
+    /**
+     * Returns an allocated {@code io_uring_probe} structure to the caller.
+     * 
+     * <p>The caller is responsible for freeing the structure with the function {@link #io_uring_free_probe free_probe}.</p>
+     */
     @Nullable
     @NativeType("struct io_uring_probe *")
     public static IOURingProbe io_uring_get_probe() {
@@ -65,15 +69,21 @@ public class LibURing {
     /** Unsafe version of: {@link #io_uring_free_probe free_probe} */
     public static native void nio_uring_free_probe(long probe);
 
-    /** Frees a probe allocated through {@link #io_uring_get_probe get_probe} or {@link #io_uring_get_probe_ring get_probe_ring}. */
+    /** Frees the {@code probe} instance allocated with the {@link #io_uring_get_probe get_probe} function. */
     public static void io_uring_free_probe(@NativeType("struct io_uring_probe *") IOURingProbe probe) {
         nio_uring_free_probe(probe.address());
     }
 
     // --- [ io_uring_opcode_supported ] ---
 
+    /** Unsafe version of: {@link #io_uring_opcode_supported opcode_supported} */
     public static native int nio_uring_opcode_supported(long p, int op);
 
+    /**
+     * Allows the caller to determine if the passed in {@code opcode} belonging to the {@code probe} param is supported.
+     * 
+     * <p>An instance of the {@code io_uring_probe} instance can be obtained by calling the function {@link #io_uring_get_probe get_probe}.</p>
+     */
     public static int io_uring_opcode_supported(@NativeType("struct io_uring_probe const *") IOURingProbe p, int op) {
         return nio_uring_opcode_supported(p.address(), op);
     }
@@ -564,8 +574,14 @@ public class LibURing {
 
     // --- [ io_uring_sqe_set_flags ] ---
 
+    /** Unsafe version of: {@link #io_uring_sqe_set_flags sqe_set_flags} */
     public static native void nio_uring_sqe_set_flags(long sqe, int flags);
 
+    /**
+     * Allows the caller to change the behavior of the submission queue entry by specifying flags.
+     * 
+     * <p>It enables the {@code flags} belonging to the {@code sqe} submission queue entry param.</p>
+     */
     public static void io_uring_sqe_set_flags(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("unsigned int") int flags) {
         nio_uring_sqe_set_flags(sqe.address(), flags);
     }
@@ -1243,29 +1259,12 @@ public class LibURing {
         }
     }
 
-    // --- [ io_uring_prep_getdents ] ---
-
-    /** Unsafe version of: {@link #io_uring_prep_getdents prep_getdents} */
-    public static native void nio_uring_prep_getdents(long sqe, int fd, long buf, int count, long offset);
-
-    /**
-     * Prepares a {@code getdents64} request.
-     * 
-     * <p>The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing up to {@code count} bytes into the buffer
-     * {@code buf} starting at {@code offset}.</p>
-     * 
-     * <p>After the {@code getdents} call has been prepared it can be submitted with one of the submit functions.</p>
-     */
-    public static void io_uring_prep_getdents(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void *") ByteBuffer buf, @NativeType("uint64_t") long offset) {
-        nio_uring_prep_getdents(sqe.address(), fd, memAddress(buf), buf.remaining(), offset);
-    }
-
     // --- [ io_uring_sq_ready ] ---
 
     /** Unsafe version of: {@link #io_uring_sq_ready sq_ready} */
     public static native int nio_uring_sq_ready(long ring);
 
-    /** Returns number of unconsumed (if {@code SQPOLL}) or unsubmitted entries exist in the SQ ring. */
+    /** Returns the number of unconsumed (if {@code SQPOLL}) or unsubmitted entries that exist in the SQ ring belonging to the {@code ring} param. */
     @NativeType("unsigned int")
     public static int io_uring_sq_ready(@NativeType("struct io_uring const *") IOURing ring) {
         if (CHECKS) {
@@ -1279,7 +1278,7 @@ public class LibURing {
     /** Unsafe version of: {@link #io_uring_sq_space_left sq_space_left} */
     public static native int nio_uring_sq_space_left(long ring);
 
-    /** Returns how much space is left in the SQ ring. */
+    /** Returns how much space is left in the SQ ring belonging to the {@code ring} param. */
     @NativeType("unsigned int")
     public static int io_uring_sq_space_left(@NativeType("struct io_uring const *") IOURing ring) {
         if (CHECKS) {
@@ -1294,10 +1293,12 @@ public class LibURing {
     public static native int nio_uring_sqring_wait(long ring);
 
     /**
-     * Only applicable when using {@code SQPOLL} - allows the caller to wait for space to free up in the SQ ring, which happens when the kernel side thread
-     * has consumed one or more entries.
+     * Allows the caller to wait for space to free up in the SQ ring belonging to the {@code ring} param, which happens when the kernel side thread has
+     * consumed one or more entries.
      * 
-     * <p>If the SQ ring is currently non-full, no action is taken. Note: may return {@code -EINVAL} if the kernel doesn't support this feature.</p>
+     * <p>If the SQ ring is currently non-full, no action is taken.</p>
+     * 
+     * <p>This feature can only be used when {@code SQPOLL} is enabled.</p>
      */
     public static int io_uring_sqring_wait(@NativeType("struct io_uring *") IOURing ring) {
         return nio_uring_sqring_wait(ring.address());
@@ -1308,7 +1309,7 @@ public class LibURing {
     /** Unsafe version of: {@link #io_uring_cq_ready cq_ready} */
     public static native int nio_uring_cq_ready(long ring);
 
-    /** Returns how many unconsumed entries are ready in the CQ ring. */
+    /** Retuns the number of unconsumed entries that are ready belonging to the {@code ring} param. */
     @NativeType("unsigned int")
     public static int io_uring_cq_ready(@NativeType("struct io_uring const *") IOURing ring) {
         if (CHECKS) {

@@ -237,12 +237,13 @@ atomic_store_release(cqring->head, head);""")}
             """
             When this flag is specified, it forms a link with the next SQE in the submission ring.
 
-            That next SQE will not be started before this one completes. This, in effect, forms a chain of SQEs, which can be arbitrarily long. The tail of the
-            chain is denoted by the first SQE that does not have this flag set. This flag has no effect on previous SQE submissions, nor does it impact SQEs
-            that are outside of the chain tail. This means that multiple chains can be executing in parallel, or chains and individual SQEs. Only members
-            inside the chain are serialized. A chain of SQEs will be broken, if any request in that chain ends in error. {@code io_uring} considers any
-            unexpected result an error. This means that, eg, a short read will also terminate the remainder of the chain. If a chain of SQE links is broken,
-            the remaining unstarted part of the chain will be terminated and completed with {@code -ECANCELED} as the error code.
+            That next SQE will not be started before the previous request completes. This, in effect, forms a chain of SQEs, which can be arbitrarily long. The
+            tail of the chain is denoted by the first SQE that does not have this flag set. Chains are not supported across submission boundaries. Even if the
+            last SQE in a submission has this flag set, it will still terminate the current chain. This flag has no effect on previous SQE submissions, nor
+            does it impact SQEs that are outside of the chain tail. This means that multiple chains can be executing in parallel, or chains and individual
+            SQEs. Only members inside the chain are serialized. A chain of SQEs will be broken, if any request in that chain ends in error. {@code io_uring}
+            considers any unexpected result an error. This means that, eg, a short read will also terminate the remainder of the chain. If a chain of SQE links
+            is broken, the remaining unstarted part of the chain will be terminated and completed with {@code -ECANCELED} as the error code.
 
             Available since 5.3.
             """,
@@ -532,7 +533,7 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             slot, it will be replaced, similar to #OP_FILES_UPDATE. Please note that only {@code io_uring} has access to such files and no other syscall can
             use them. See #IOSQE_FIXED_FILE and #REGISTER_FILES.
 
-            Available since 5.15.
+            Available since 5.5.
             """
         ),
         "OP_ASYNC_CANCEL".enumByte(
@@ -832,13 +833,13 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             Available since 5.15.
             """
         ),
-        "OP_GETDENTS".enumByte(
+        /*"OP_GETDENTS".enumByte(
             """
             Issue the equivalent of a {@code getdents64(2)} system call.
 
             Available since 5.17.
             """
-        ),
+        ),*/
         "OP_LAST".enumByte
     )
 

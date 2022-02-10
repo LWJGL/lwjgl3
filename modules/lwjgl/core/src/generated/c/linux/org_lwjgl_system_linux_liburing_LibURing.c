@@ -627,13 +627,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_prep_linkat(sqe, olddfd, oldpath, newdfd, newpath, flags);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1getdents(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint fd, jlong bufAddress, jint count, jlong offset) {
-    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
-    void *buf = (void *)(uintptr_t)bufAddress;
-    UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_getdents(sqe, fd, buf, (unsigned int)count, (uint64_t)offset);
-}
-
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1sq_1ready(JNIEnv *__env, jclass clazz, jlong ringAddress) {
     struct io_uring const *ring = (struct io_uring const *)(uintptr_t)ringAddress;
     UNUSED_PARAMS(__env, clazz)

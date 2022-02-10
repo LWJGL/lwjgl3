@@ -32,21 +32,29 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
 
     io_uring_probe.p(
         "get_probe",
-        "Same as #get_probe_ring(), but takes care of ring init and teardown.",
+        """
+        Returns an allocated {@code io_uring_probe} structure to the caller.
+
+        The caller is responsible for freeing the structure with the function #free_probe().
+        """,
 
         void()
     )
 
     void(
         "free_probe",
-        "Frees a probe allocated through #get_probe() or #get_probe_ring().",
+        "Frees the {@code probe} instance allocated with the #get_probe() function.",
 
         io_uring_probe.p("probe", "")
     )
 
     int(
         "opcode_supported",
-        "",
+        """
+        Allows the caller to determine if the passed in {@code opcode} belonging to the {@code probe} param is supported.
+        
+        An instance of the {@code io_uring_probe} instance can be obtained by calling the function #get_probe().
+        """,
 
         io_uring_probe.const.p("p", ""),
         int("op", "")
@@ -470,7 +478,11 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
 
     void(
         "sqe_set_flags",
-        "",
+        """
+        Allows the caller to change the behavior of the submission queue entry by specifying flags.
+        
+        It enables the {@code flags} belonging to the {@code sqe} submission queue entry param.
+        """,
 
         io_uring_sqe.p("sqe", ""),
         unsigned_int("flags", "")
@@ -1093,11 +1105,11 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
     )
 
     // TODO: add readdir(3)
-    void(
+    /*void(
         "prep_getdents",
         """
         Prepares a {@code getdents64} request.
-        
+
         The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing up to {@code count} bytes into the buffer
         {@code buf} starting at {@code offset}.
 
@@ -1109,18 +1121,18 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         void.p("buf", ""),
         AutoSize("buf")..unsigned_int("count", ""),
         uint64_t("offset", "")
-    )
+    )*/
 
     unsigned_int(
         "sq_ready",
-        "Returns number of unconsumed (if {@code SQPOLL}) or unsubmitted entries exist in the SQ ring.",
+        "Returns the number of unconsumed (if {@code SQPOLL}) or unsubmitted entries that exist in the SQ ring belonging to the {@code ring} param.",
 
         io_uring.const.p("ring", "")
     )
 
     unsigned_int(
         "sq_space_left",
-        "Returns how much space is left in the SQ ring.",
+        "Returns how much space is left in the SQ ring belonging to the {@code ring} param.",
 
         io_uring.const.p("ring", "")
     )
@@ -1128,10 +1140,12 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
     int(
         "sqring_wait",
         """
-        Only applicable when using {@code SQPOLL} - allows the caller to wait for space to free up in the SQ ring, which happens when the kernel side thread
-        has consumed one or more entries.
+        Allows the caller to wait for space to free up in the SQ ring belonging to the {@code ring} param, which happens when the kernel side thread has
+        consumed one or more entries.
 
-        If the SQ ring is currently non-full, no action is taken. Note: may return {@code -EINVAL} if the kernel doesn't support this feature.
+        If the SQ ring is currently non-full, no action is taken.
+
+        This feature can only be used when {@code SQPOLL} is enabled.
         """,
 
         io_uring.p("ring", "")
@@ -1139,7 +1153,7 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
 
     unsigned_int(
         "cq_ready",
-        "Returns how many unconsumed entries are ready in the CQ ring.",
+        "Retuns the number of unconsumed entries that are ready belonging to the {@code ring} param.",
 
         io_uring.const.p("ring", "")
     )

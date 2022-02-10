@@ -700,12 +700,6 @@ static inline void io_uring_prep_linkat(struct io_uring_sqe *sqe, int olddfd,
 	sqe->hardlink_flags = (__u32) flags;
 }
 
-static inline void io_uring_prep_getdents(struct io_uring_sqe *sqe, int fd,
-					  void *buf, unsigned int count, uint64_t offset)
-{
-	io_uring_prep_rw(IORING_OP_GETDENTS, sqe, fd, buf, count, offset);
-}
-
 /*
  * Returns number of unconsumed (if SQPOLL) or unsubmitted entries exist in
  * the SQ ring
