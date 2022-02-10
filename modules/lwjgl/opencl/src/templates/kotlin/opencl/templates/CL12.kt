@@ -888,7 +888,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             will be converted to the appropriate image channel format and order associated with {@code image}.
             """
         ),
-        Check(1)..size_t.const.p(
+        Check(3)..size_t.const.p(
             "origin",
             """
             the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the {@code (x)}
@@ -898,7 +898,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
             describes the image index in the 2D image array.
             """
         ),
-        Check(1)..size_t.const.p(
+        Check(3)..size_t.const.p(
             "region",
             """
             the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number

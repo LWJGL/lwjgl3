@@ -488,7 +488,9 @@ val cl_mipmap_filter_mode_img = typedef(cl_uint, "cl_mipmap_filter_mode_img")
 val cl_accelerator_intel = "cl_accelerator_intel".handle
 val cl_accelerator_type_intel = typedef(cl_uint, "cl_accelerator_type_intel")
 val cl_accelerator_info_intel = typedef(cl_uint, "cl_accelerator_info_intel")
+val cl_mem_info_intel = typedef(cl_uint, "cl_mem_info_intel")
 
+val cl_mem_advice_intel = typedef(cl_bitfield, "cl_mem_advice_intel")
 val cl_mem_properties_intel = typedef(cl_bitfield, "cl_mem_properties_intel")
 
 val cl_va_api_device_source_intel = typedef(cl_uint, "cl_va_api_device_source_intel")
@@ -499,15 +501,19 @@ val cl_command_queue_capabilities_intel = typedef(cl_bitfield, "cl_command_queue
 
 // KHR
 
-val cl_queue_properties_khr = typedef(cl_properties, "cl_queue_properties_khr")
-
+val cl_command_buffer_khr = "cl_command_buffer_khr".handle
+val cl_mutable_command_khr = "cl_mutable_command_khr".handle
 val cl_semaphore_khr = "cl_semaphore_khr".handle
 
+val cl_command_buffer_info_khr = typedef(cl_uint, "cl_command_buffer_info_khr")
+val cl_command_buffer_properties_khr = typedef(cl_properties, "cl_command_buffer_properties_khr")
+val cl_ndrange_kernel_command_properties_khr = typedef(cl_properties, "cl_ndrange_kernel_command_properties_khr")
+val cl_queue_properties_khr = typedef(cl_properties, "cl_queue_properties_khr")
 val cl_semaphore_properties_khr = typedef(cl_properties, "cl_semaphore_properties_khr")
 val cl_semaphore_info_khr = typedef(cl_uint, "cl_semaphore_info_khr")
 val cl_semaphore_type_khr = typedef(cl_uint, "cl_semaphore_type_khr")
 val cl_semaphore_payload_khr = typedef(cl_ulong, "cl_semaphore_payload_khr")
-
+val cl_sync_point_khr = typedef(cl_uint, "cl_sync_point_khr")
 val cl_version_khr = typedef(cl_uint, "cl_version_khr")
 
 // NV

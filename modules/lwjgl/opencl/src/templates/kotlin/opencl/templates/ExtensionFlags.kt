@@ -57,6 +57,26 @@ val khr_device_enqueue_local_arg_types = EXT_FLAG.nativeClassCL("khr_device_enqu
         """
 }
 
+val khr_expect_assume = EXT_FLAG.nativeClassCL("khr_expect_assume", KHR) {
+    documentation =
+        """
+        When true, the $extensionLink extension is supported.
+
+        This extension adds mechanisms to provide information to the compiler that may improve the performance of some kernels. Specifically, this extension
+        adds the ability to:
+        ${ul(
+            "Tell the compiler the <i>expected</i> value of a variable.",
+            "Allow the compiler to <i>assume</i> a condition is true."
+        )}
+
+        These functions are not required for functional correctness.
+
+        The initial version of this extension extends the OpenCL SPIR-V environment to support new instructions for offline compilation tool chains. Similar
+        functionality may be provided by some OpenCL C online compilation tool chains, but formal support in OpenCL C is not required by the initial version of
+        the extension.
+        """
+}
+
 val khr_extended_async_copies = EXT_FLAG.nativeClassCL("khr_extended_async_copies", KHR) {
     documentation =
         """

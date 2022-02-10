@@ -12,11 +12,11 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
         """
         Native bindings to the $extensionLink extension.
 
-        This extension enables the device side printf built in function for OpenCL C versions prior to 1.2. It also extends the cl_context_properties
-        enumeration to allow a user defined printf callback and/or printf buffer size.
+        This extension enables the device side printf built in function for OpenCL C versions prior to 1.2. It also extends the {@code cl_context_properties}
+        enumeration to allow a user defined {@code printf} callback and/or {@code printf} buffer size.
 
-        The printf built in function should be used for debugging purposes only and may have a significant negative impact on the performance of an OpenCL
-        application.
+        The {@code printf} built in function should be used for debugging purposes only and may have a significant negative impact on the performance of an
+        OpenCL application.
         """
 
     IntConstant(

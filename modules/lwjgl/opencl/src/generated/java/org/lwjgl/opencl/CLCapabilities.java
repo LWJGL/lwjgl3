@@ -167,10 +167,36 @@ public class CLCapabilities {
         clCreateBufferWithPropertiesINTEL,
         clGetSupportedGLTextureFormatsINTEL,
         clGetSupportedVA_APIMediaSurfaceFormatsINTEL,
+        clHostMemAllocINTEL,
+        clDeviceMemAllocINTEL,
+        clSharedMemAllocINTEL,
+        clMemFreeINTEL,
+        clMemBlockingFreeINTEL,
+        clGetMemAllocInfoINTEL,
+        clSetKernelArgMemPointerINTEL,
+        clEnqueueMemFillINTEL,
+        clEnqueueMemcpyINTEL,
+        clEnqueueMigrateMemINTEL,
+        clEnqueueMemAdviseINTEL,
         clGetDeviceIDsFromVA_APIMediaAdapterINTEL,
         clCreateFromVA_APIMediaSurfaceINTEL,
         clEnqueueAcquireVA_APIMediaSurfacesINTEL,
         clEnqueueReleaseVA_APIMediaSurfacesINTEL,
+        clCreateCommandBufferKHR,
+        clRetainCommandBufferKHR,
+        clReleaseCommandBufferKHR,
+        clFinalizeCommandBufferKHR,
+        clEnqueueCommandBufferKHR,
+        clCommandBarrierWithWaitListKHR,
+        clCommandCopyBufferKHR,
+        clCommandCopyBufferRectKHR,
+        clCommandCopyBufferToImageKHR,
+        clCommandCopyImageKHR,
+        clCommandCopyImageToBufferKHR,
+        clCommandFillBufferKHR,
+        clCommandFillImageKHR,
+        clCommandNDRangeKernelKHR,
+        clGetCommandBufferInfoKHR,
         clCreateCommandQueueWithPropertiesKHR,
         clCreateEventFromEGLSyncKHR,
         clCreateFromEGLImageKHR,
@@ -650,6 +676,8 @@ public class CLCapabilities {
     public final boolean cl_arm_non_uniform_work_group_size;
     /** When true, {@link ARMPrintf} is supported. */
     public final boolean cl_arm_printf;
+    /** When true, {@link ARMProtectedMemoryAllocation} is supported. */
+    public final boolean cl_arm_protected_memory_allocation;
     /** When true, {@link ARMSchedulingControls} is supported. */
     public final boolean cl_arm_scheduling_controls;
     /**
@@ -675,6 +703,8 @@ public class CLCapabilities {
     public final boolean cl_ext_cxx_for_opencl;
     /** When true, {@link EXTDeviceFission} is supported. */
     public final boolean cl_ext_device_fission;
+    /** When true, {@link EXTFloatAtomics} is supported. */
+    public final boolean cl_ext_float_atomics;
     /** When true, {@link EXTMigrateMemobject} is supported. */
     public final boolean cl_ext_migrate_memobject;
     /** When true, {@link IMGCachedAllocations} is supported. */
@@ -693,6 +723,8 @@ public class CLCapabilities {
     public final boolean cl_intel_command_queue_families;
     /** When true, {@link INTELCreateBufferWithProperties} is supported. */
     public final boolean cl_intel_create_buffer_with_properties;
+    /** When true, {@link INTELDeviceAttributeQuery} is supported. */
+    public final boolean cl_intel_device_attribute_query;
     /** When true, {@link INTELDevicePartitionByNames} is supported. */
     public final boolean cl_intel_device_partition_by_names;
     /** When true, {@link INTELDeviceSideAVCMotionEstimation} is supported. */
@@ -715,6 +747,8 @@ public class CLCapabilities {
      * needed.</p>
      */
     public final boolean cl_intel_media_block_io;
+    /** When true, {@link INTELMemAllocBufferLocation} is supported. */
+    public final boolean cl_intel_mem_alloc_buffer_location;
     /** When true, {@link INTELMemChannelProperty} is supported. */
     public final boolean cl_intel_mem_channel_property;
     /** When true, {@link INTELMemForceHostMemory} is supported. */
@@ -795,6 +829,8 @@ public class CLCapabilities {
      * <p>Requires {@link CL12 OpenCL 1.2} and {@link INTELSubgroups intel_subgroups}.</p>
      */
     public final boolean cl_intel_subgroups_short;
+    /** When true, {@link INTELUnifiedSharedMemory} is supported. */
+    public final boolean cl_intel_unified_shared_memory;
     /** When true, {@link INTELVAAPIMediaSharing} is supported. */
     public final boolean cl_intel_va_api_media_sharing;
     /**
@@ -815,6 +851,8 @@ public class CLCapabilities {
      * <p>This extension eliminates the restriction of not allowing writes to a pointer (or array elements) of types less than 32-bit wide in kernel program.</p>
      */
     public final boolean cl_khr_byte_addressable_store;
+    /** When true, {@link KHRCommandBuffer} is supported. */
+    public final boolean cl_khr_command_buffer;
     /** When true, {@link KHRCreateCommandQueue} is supported. */
     public final boolean cl_khr_create_command_queue;
     /** When true, {@link KHRDepthImages} is supported. */
@@ -832,6 +870,24 @@ public class CLCapabilities {
     public final boolean cl_khr_egl_event;
     /** When true, {@link KHREGLImage} is supported. */
     public final boolean cl_khr_egl_image;
+    /**
+     * When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_expect_assume.txt">khr_expect_assume</a> extension is supported.
+     * 
+     * <p>This extension adds mechanisms to provide information to the compiler that may improve the performance of some kernels. Specifically, this extension
+     * adds the ability to:</p>
+     * 
+     * <ul>
+     * <li>Tell the compiler the <i>expected</i> value of a variable.</li>
+     * <li>Allow the compiler to <i>assume</i> a condition is true.</li>
+     * </ul>
+     * 
+     * <p>These functions are not required for functional correctness.</p>
+     * 
+     * <p>The initial version of this extension extends the OpenCL SPIR-V environment to support new instructions for offline compilation tool chains. Similar
+     * functionality may be provided by some OpenCL C online compilation tool chains, but formal support in OpenCL C is not required by the initial version of
+     * the extension.</p>
+     */
+    public final boolean cl_khr_expect_assume;
     /**
      * When true, the <a target="_blank" href="http://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_extended_async_copies.txt">khr_extended_async_copies</a> extension is supported.
      * 
@@ -1259,10 +1315,36 @@ public class CLCapabilities {
             provider.getFunctionAddress("clCreateBufferWithPropertiesINTEL"),
             provider.getFunctionAddress("clGetSupportedGLTextureFormatsINTEL"),
             provider.getFunctionAddress("clGetSupportedVA_APIMediaSurfaceFormatsINTEL"),
+            provider.getFunctionAddress("clHostMemAllocINTEL"),
+            provider.getFunctionAddress("clDeviceMemAllocINTEL"),
+            provider.getFunctionAddress("clSharedMemAllocINTEL"),
+            provider.getFunctionAddress("clMemFreeINTEL"),
+            provider.getFunctionAddress("clMemBlockingFreeINTEL"),
+            provider.getFunctionAddress("clGetMemAllocInfoINTEL"),
+            provider.getFunctionAddress("clSetKernelArgMemPointerINTEL"),
+            provider.getFunctionAddress("clEnqueueMemFillINTEL"),
+            provider.getFunctionAddress("clEnqueueMemcpyINTEL"),
+            provider.getFunctionAddress("clEnqueueMigrateMemINTEL"),
+            provider.getFunctionAddress("clEnqueueMemAdviseINTEL"),
             provider.getFunctionAddress("clGetDeviceIDsFromVA_APIMediaAdapterINTEL"),
             provider.getFunctionAddress("clCreateFromVA_APIMediaSurfaceINTEL"),
             provider.getFunctionAddress("clEnqueueAcquireVA_APIMediaSurfacesINTEL"),
             provider.getFunctionAddress("clEnqueueReleaseVA_APIMediaSurfacesINTEL"),
+            provider.getFunctionAddress("clCreateCommandBufferKHR"),
+            provider.getFunctionAddress("clRetainCommandBufferKHR"),
+            provider.getFunctionAddress("clReleaseCommandBufferKHR"),
+            provider.getFunctionAddress("clFinalizeCommandBufferKHR"),
+            provider.getFunctionAddress("clEnqueueCommandBufferKHR"),
+            provider.getFunctionAddress("clCommandBarrierWithWaitListKHR"),
+            provider.getFunctionAddress("clCommandCopyBufferKHR"),
+            provider.getFunctionAddress("clCommandCopyBufferRectKHR"),
+            provider.getFunctionAddress("clCommandCopyBufferToImageKHR"),
+            provider.getFunctionAddress("clCommandCopyImageKHR"),
+            provider.getFunctionAddress("clCommandCopyImageToBufferKHR"),
+            provider.getFunctionAddress("clCommandFillBufferKHR"),
+            provider.getFunctionAddress("clCommandFillImageKHR"),
+            provider.getFunctionAddress("clCommandNDRangeKernelKHR"),
+            provider.getFunctionAddress("clGetCommandBufferInfoKHR"),
             provider.getFunctionAddress("clCreateCommandQueueWithPropertiesKHR"),
             provider.getFunctionAddress("clCreateEventFromEGLSyncKHR"),
             provider.getFunctionAddress("clCreateFromEGLImageKHR"),
@@ -1435,10 +1517,36 @@ public class CLCapabilities {
             caps.clCreateBufferWithPropertiesINTEL,
             caps.clGetSupportedGLTextureFormatsINTEL,
             caps.clGetSupportedVA_APIMediaSurfaceFormatsINTEL,
+            caps.clHostMemAllocINTEL,
+            caps.clDeviceMemAllocINTEL,
+            caps.clSharedMemAllocINTEL,
+            caps.clMemFreeINTEL,
+            caps.clMemBlockingFreeINTEL,
+            caps.clGetMemAllocInfoINTEL,
+            caps.clSetKernelArgMemPointerINTEL,
+            caps.clEnqueueMemFillINTEL,
+            caps.clEnqueueMemcpyINTEL,
+            caps.clEnqueueMigrateMemINTEL,
+            caps.clEnqueueMemAdviseINTEL,
             caps.clGetDeviceIDsFromVA_APIMediaAdapterINTEL,
             caps.clCreateFromVA_APIMediaSurfaceINTEL,
             caps.clEnqueueAcquireVA_APIMediaSurfacesINTEL,
             caps.clEnqueueReleaseVA_APIMediaSurfacesINTEL,
+            caps.clCreateCommandBufferKHR,
+            caps.clRetainCommandBufferKHR,
+            caps.clReleaseCommandBufferKHR,
+            caps.clFinalizeCommandBufferKHR,
+            caps.clEnqueueCommandBufferKHR,
+            caps.clCommandBarrierWithWaitListKHR,
+            caps.clCommandCopyBufferKHR,
+            caps.clCommandCopyBufferRectKHR,
+            caps.clCommandCopyBufferToImageKHR,
+            caps.clCommandCopyImageKHR,
+            caps.clCommandCopyImageToBufferKHR,
+            caps.clCommandFillBufferKHR,
+            caps.clCommandFillImageKHR,
+            caps.clCommandNDRangeKernelKHR,
+            caps.clGetCommandBufferInfoKHR,
             caps.clCreateCommandQueueWithPropertiesKHR,
             caps.clCreateEventFromEGLSyncKHR,
             caps.clCreateFromEGLImageKHR,
@@ -1610,32 +1718,58 @@ public class CLCapabilities {
         clCreateBufferWithPropertiesINTEL = functions[142];
         clGetSupportedGLTextureFormatsINTEL = functions[143];
         clGetSupportedVA_APIMediaSurfaceFormatsINTEL = functions[144];
-        clGetDeviceIDsFromVA_APIMediaAdapterINTEL = functions[145];
-        clCreateFromVA_APIMediaSurfaceINTEL = functions[146];
-        clEnqueueAcquireVA_APIMediaSurfacesINTEL = functions[147];
-        clEnqueueReleaseVA_APIMediaSurfacesINTEL = functions[148];
-        clCreateCommandQueueWithPropertiesKHR = functions[149];
-        clCreateEventFromEGLSyncKHR = functions[150];
-        clCreateFromEGLImageKHR = functions[151];
-        clEnqueueAcquireEGLObjectsKHR = functions[152];
-        clEnqueueReleaseEGLObjectsKHR = functions[153];
-        clEnqueueAcquireExternalMemObjectsKHR = functions[154];
-        clEnqueueReleaseExternalMemObjectsKHR = functions[155];
-        clCreateEventFromGLsyncKHR = functions[156];
-        clGetGLContextInfoKHR = functions[157];
-        clCreateProgramWithILKHR = functions[158];
-        clCreateSemaphoreWithPropertiesKHR = functions[159];
-        clEnqueueWaitSemaphoresKHR = functions[160];
-        clEnqueueSignalSemaphoresKHR = functions[161];
-        clGetSemaphoreInfoKHR = functions[162];
-        clReleaseSemaphoreKHR = functions[163];
-        clRetainSemaphoreKHR = functions[164];
-        clGetKernelSubGroupInfoKHR = functions[165];
-        clGetKernelSuggestedLocalWorkSizeKHR = functions[166];
-        clTerminateContextKHR = functions[167];
-        clCreateBufferNV = functions[168];
-        clSetContentSizeBufferPoCL = functions[169];
-        clGetDeviceImageInfoQCOM = functions[170];
+        clHostMemAllocINTEL = functions[145];
+        clDeviceMemAllocINTEL = functions[146];
+        clSharedMemAllocINTEL = functions[147];
+        clMemFreeINTEL = functions[148];
+        clMemBlockingFreeINTEL = functions[149];
+        clGetMemAllocInfoINTEL = functions[150];
+        clSetKernelArgMemPointerINTEL = functions[151];
+        clEnqueueMemFillINTEL = functions[152];
+        clEnqueueMemcpyINTEL = functions[153];
+        clEnqueueMigrateMemINTEL = functions[154];
+        clEnqueueMemAdviseINTEL = functions[155];
+        clGetDeviceIDsFromVA_APIMediaAdapterINTEL = functions[156];
+        clCreateFromVA_APIMediaSurfaceINTEL = functions[157];
+        clEnqueueAcquireVA_APIMediaSurfacesINTEL = functions[158];
+        clEnqueueReleaseVA_APIMediaSurfacesINTEL = functions[159];
+        clCreateCommandBufferKHR = functions[160];
+        clRetainCommandBufferKHR = functions[161];
+        clReleaseCommandBufferKHR = functions[162];
+        clFinalizeCommandBufferKHR = functions[163];
+        clEnqueueCommandBufferKHR = functions[164];
+        clCommandBarrierWithWaitListKHR = functions[165];
+        clCommandCopyBufferKHR = functions[166];
+        clCommandCopyBufferRectKHR = functions[167];
+        clCommandCopyBufferToImageKHR = functions[168];
+        clCommandCopyImageKHR = functions[169];
+        clCommandCopyImageToBufferKHR = functions[170];
+        clCommandFillBufferKHR = functions[171];
+        clCommandFillImageKHR = functions[172];
+        clCommandNDRangeKernelKHR = functions[173];
+        clGetCommandBufferInfoKHR = functions[174];
+        clCreateCommandQueueWithPropertiesKHR = functions[175];
+        clCreateEventFromEGLSyncKHR = functions[176];
+        clCreateFromEGLImageKHR = functions[177];
+        clEnqueueAcquireEGLObjectsKHR = functions[178];
+        clEnqueueReleaseEGLObjectsKHR = functions[179];
+        clEnqueueAcquireExternalMemObjectsKHR = functions[180];
+        clEnqueueReleaseExternalMemObjectsKHR = functions[181];
+        clCreateEventFromGLsyncKHR = functions[182];
+        clGetGLContextInfoKHR = functions[183];
+        clCreateProgramWithILKHR = functions[184];
+        clCreateSemaphoreWithPropertiesKHR = functions[185];
+        clEnqueueWaitSemaphoresKHR = functions[186];
+        clEnqueueSignalSemaphoresKHR = functions[187];
+        clGetSemaphoreInfoKHR = functions[188];
+        clReleaseSemaphoreKHR = functions[189];
+        clRetainSemaphoreKHR = functions[190];
+        clGetKernelSubGroupInfoKHR = functions[191];
+        clGetKernelSuggestedLocalWorkSizeKHR = functions[192];
+        clTerminateContextKHR = functions[193];
+        clCreateBufferNV = functions[194];
+        clSetContentSizeBufferPoCL = functions[195];
+        clGetDeviceImageInfoQCOM = functions[196];
 
         OpenCL10 = check_CL10(ext);
         OpenCL10GL = check_CL10GL(ext);
@@ -1683,6 +1817,7 @@ public class CLCapabilities {
         cl_arm_job_slot_selection = ext.contains("cl_arm_job_slot_selection");
         cl_arm_non_uniform_work_group_size = ext.contains("cl_arm_non_uniform_work_group_size");
         cl_arm_printf = ext.contains("cl_arm_printf");
+        cl_arm_protected_memory_allocation = ext.contains("cl_arm_protected_memory_allocation");
         cl_arm_scheduling_controls = ext.contains("cl_arm_scheduling_controls");
         cl_arm_thread_limit_hint = ext.contains("cl_arm_thread_limit_hint");
         cl_cl_arm_import_memory_android_hardware_buffer = ext.contains("cl_cl_arm_import_memory_android_hardware_buffer");
@@ -1693,6 +1828,7 @@ public class CLCapabilities {
         cl_ext_atomic_counters_64 = ext.contains("cl_ext_atomic_counters_64");
         cl_ext_cxx_for_opencl = ext.contains("cl_ext_cxx_for_opencl");
         cl_ext_device_fission = check_ext_device_fission(ext);
+        cl_ext_float_atomics = ext.contains("cl_ext_float_atomics");
         cl_ext_migrate_memobject = check_ext_migrate_memobject(ext);
         cl_img_cached_allocations = ext.contains("cl_img_cached_allocations");
         cl_img_generate_mipmap = check_img_generate_mipmap(ext);
@@ -1702,12 +1838,14 @@ public class CLCapabilities {
         cl_intel_advanced_motion_estimation = ext.contains("cl_intel_advanced_motion_estimation");
         cl_intel_command_queue_families = ext.contains("cl_intel_command_queue_families");
         cl_intel_create_buffer_with_properties = check_intel_create_buffer_with_properties(ext);
+        cl_intel_device_attribute_query = ext.contains("cl_intel_device_attribute_query");
         cl_intel_device_partition_by_names = ext.contains("cl_intel_device_partition_by_names");
         cl_intel_device_side_avc_motion_estimation = ext.contains("cl_intel_device_side_avc_motion_estimation");
         cl_intel_driver_diagnostics = ext.contains("cl_intel_driver_diagnostics");
         cl_intel_egl_image_yuv = ext.contains("cl_intel_egl_image_yuv");
         cl_intel_exec_by_local_thread = ext.contains("cl_intel_exec_by_local_thread");
         cl_intel_media_block_io = ext.contains("cl_intel_media_block_io");
+        cl_intel_mem_alloc_buffer_location = ext.contains("cl_intel_mem_alloc_buffer_location");
         cl_intel_mem_channel_property = ext.contains("cl_intel_mem_channel_property");
         cl_intel_mem_force_host_memory = ext.contains("cl_intel_mem_force_host_memory");
         cl_intel_motion_estimation = ext.contains("cl_intel_motion_estimation");
@@ -1724,16 +1862,19 @@ public class CLCapabilities {
         cl_intel_subgroups_char = ext.contains("cl_intel_subgroups_char");
         cl_intel_subgroups_long = ext.contains("cl_intel_subgroups_long");
         cl_intel_subgroups_short = ext.contains("cl_intel_subgroups_short");
+        cl_intel_unified_shared_memory = check_intel_unified_shared_memory(ext);
         cl_intel_va_api_media_sharing = check_intel_va_api_media_sharing(ext);
         cl_khr_3d_image_writes = ext.contains("cl_khr_3d_image_writes");
         cl_khr_async_work_group_copy_fence = ext.contains("cl_khr_async_work_group_copy_fence");
         cl_khr_byte_addressable_store = ext.contains("cl_khr_byte_addressable_store");
+        cl_khr_command_buffer = check_khr_command_buffer(ext);
         cl_khr_create_command_queue = check_khr_create_command_queue(ext);
         cl_khr_depth_images = ext.contains("cl_khr_depth_images");
         cl_khr_device_enqueue_local_arg_types = ext.contains("cl_khr_device_enqueue_local_arg_types");
         cl_khr_device_uuid = ext.contains("cl_khr_device_uuid");
         cl_khr_egl_event = check_khr_egl_event(ext);
         cl_khr_egl_image = check_khr_egl_image(ext);
+        cl_khr_expect_assume = ext.contains("cl_khr_expect_assume");
         cl_khr_extended_async_copies = ext.contains("cl_khr_extended_async_copies");
         cl_khr_extended_bit_ops = ext.contains("cl_khr_extended_bit_ops");
         cl_khr_extended_versioning = check_khr_extended_versioning(ext);
@@ -1945,10 +2086,25 @@ public class CLCapabilities {
         ));
     }
 
+    private boolean check_intel_unified_shared_memory(Set<String> ext) {
+        return ext.contains("cl_intel_unified_shared_memory") && checkExtension("cl_intel_unified_shared_memory", checkFunctions(
+            clHostMemAllocINTEL, clDeviceMemAllocINTEL, clSharedMemAllocINTEL, clMemFreeINTEL, clMemBlockingFreeINTEL, clGetMemAllocInfoINTEL, 
+            clSetKernelArgMemPointerINTEL, clEnqueueMemFillINTEL, clEnqueueMemcpyINTEL, clEnqueueMigrateMemINTEL, clEnqueueMemAdviseINTEL
+        ));
+    }
+
     private boolean check_intel_va_api_media_sharing(Set<String> ext) {
         return ext.contains("cl_intel_va_api_media_sharing") && checkExtension("cl_intel_va_api_media_sharing", checkFunctions(
             clGetDeviceIDsFromVA_APIMediaAdapterINTEL, clCreateFromVA_APIMediaSurfaceINTEL, clEnqueueAcquireVA_APIMediaSurfacesINTEL, 
             clEnqueueReleaseVA_APIMediaSurfacesINTEL
+        ));
+    }
+
+    private boolean check_khr_command_buffer(Set<String> ext) {
+        return ext.contains("cl_khr_command_buffer") && checkExtension("cl_khr_command_buffer", checkFunctions(
+            clCreateCommandBufferKHR, clRetainCommandBufferKHR, clReleaseCommandBufferKHR, clFinalizeCommandBufferKHR, clEnqueueCommandBufferKHR, 
+            clCommandBarrierWithWaitListKHR, clCommandCopyBufferKHR, clCommandCopyBufferRectKHR, clCommandCopyBufferToImageKHR, clCommandCopyImageKHR, 
+            clCommandCopyImageToBufferKHR, clCommandFillBufferKHR, clCommandFillImageKHR, clCommandNDRangeKernelKHR, clGetCommandBufferInfoKHR
         ));
     }
 

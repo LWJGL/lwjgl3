@@ -313,6 +313,7 @@ public final class CL {
             new int[][] {
                 {0, 1, 2}, // 10, 11, 12
                 {0, 1, 2}, // 20, 21, 22
+                {0}        // 30
             }
         );
 
@@ -321,8 +322,7 @@ public final class CL {
             addCLVersions(
                 MAJOR, MINOR, supportedExtensions, "GL",
                 new int[][] {
-                    {0, 2},    // 10GL, 12GL
-                    {}
+                    {0, 2} // 10GL, 12GL
                 }
             );
         }

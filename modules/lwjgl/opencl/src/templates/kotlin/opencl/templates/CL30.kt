@@ -469,8 +469,7 @@ CL_DEVICE_ATOMIC_SCOPE_WORK_GROUP
 
             The list is terminated with the special property 0. If no properties are required, {@code properties} may be #NULL.
             """
-        )
-        ,
+        ),
         cl_mem_flags(
             "flags",
             "a bit-field that is used to specify allocation and usage information about the image memory object being created",

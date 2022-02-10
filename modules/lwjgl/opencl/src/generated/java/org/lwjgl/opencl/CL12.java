@@ -1562,8 +1562,8 @@ public class CL12 extends CL11 {
     public static int clEnqueueFillImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") ByteBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
             check(fill_color, 16);
-            check(origin, 1);
-            check(region, 1);
+            check(origin, 3);
+            check(region, 3);
             checkSafe(event, 1);
         }
         return nclEnqueueFillImage(command_queue, image, memAddress(fill_color), memAddress(origin), memAddress(region), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
@@ -1622,8 +1622,8 @@ public class CL12 extends CL11 {
     public static int clEnqueueFillImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") IntBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
             check(fill_color, 16 >> 2);
-            check(origin, 1);
-            check(region, 1);
+            check(origin, 3);
+            check(region, 3);
             checkSafe(event, 1);
         }
         return nclEnqueueFillImage(command_queue, image, memAddress(fill_color), memAddress(origin), memAddress(region), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
@@ -1682,8 +1682,8 @@ public class CL12 extends CL11 {
     public static int clEnqueueFillImage(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") FloatBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @Nullable @NativeType("cl_event const *") PointerBuffer event_wait_list, @Nullable @NativeType("cl_event *") PointerBuffer event) {
         if (CHECKS) {
             check(fill_color, 16 >> 2);
-            check(origin, 1);
-            check(region, 1);
+            check(origin, 3);
+            check(region, 3);
             checkSafe(event, 1);
         }
         return nclEnqueueFillImage(command_queue, image, memAddress(fill_color), memAddress(origin), memAddress(region), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
@@ -2070,8 +2070,8 @@ public class CL12 extends CL11 {
             check(command_queue);
             check(image);
             check(fill_color, 16 >> 2);
-            check(origin, 1);
-            check(region, 1);
+            check(origin, 3);
+            check(region, 3);
             checkSafe(event, 1);
         }
         return callPPPPPPPI(command_queue, image, fill_color, memAddress(origin), memAddress(region), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
@@ -2090,8 +2090,8 @@ public class CL12 extends CL11 {
             check(command_queue);
             check(image);
             check(fill_color, 16 >> 2);
-            check(origin, 1);
-            check(region, 1);
+            check(origin, 3);
+            check(region, 3);
             checkSafe(event, 1);
         }
         return callPPPPPPPI(command_queue, image, fill_color, memAddress(origin), memAddress(region), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event), __functionAddress);
