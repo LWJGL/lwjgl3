@@ -14,7 +14,7 @@
     <property name="testng" value="7.4.0"/>
         <property name="jcommander" value="1.78"/>
         <property name="jquery" value="3.5.1"/>
-    <property name="joml" value="1.10.2"/>
+    <property name="joml" value="1.10.4"/>
     <property name="kotlinc-version" value="1.6.20-M1"/>
     <property name="kotlinc-build" value="1.6.20-M1-release-203"/>
     <property name="jmh-core" value="1.33"/>
