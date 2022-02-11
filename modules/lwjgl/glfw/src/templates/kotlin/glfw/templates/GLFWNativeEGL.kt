@@ -30,7 +30,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
         returnDoc =
         """
         the {@code EGLDisplay} used by GLFW, or EGL10#EGL_NO_DISPLAY if an error occured.
-        
+
         Possible errors include #NOT_INITIALIZED.
         """,
         since = "version 3.0"
@@ -49,7 +49,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
         returnDoc =
         """
         the {@code EGLContext} of the specified window, or EGL10#EGL_NO_CONTEXT if an error occurred.
-        
+
         Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
         """,
         since = "version 3.0"
@@ -68,10 +68,29 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
         returnDoc =
         """
         the {@code EGLSurface} of the specified window, or EGL10#EGL_NO_SURFACE if an error occurred.
-        
+
         Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
         """,
         since = "version 3.0"
+    )
+
+    EGLConfig(
+        "GetEGLConfig",
+        """
+        Returns the {@code EGLConfig} of the specified window.
+
+        This function may be called from any thread. Access is not synchronized.
+        """,
+
+        GLFWwindow.p("window", ""),
+
+        returnDoc =
+        """
+        the {@code EGLConfig} of the specified window, or EGL10#EGL_NO_SURFACE if an error occurred.
+
+        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
+        """,
+        since = "version 3.4"
     )
 
     customMethod("""
@@ -113,7 +132,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
             apiLog("GLFW EGL path override not set: Could not resolve override symbol.");
         }
     }
-    
+
     /**
      * Calls {@link #setGLESPath(String)} with the path of the specified {@link SharedLibrary}.
      * 
@@ -152,7 +171,7 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
             apiLog("GLFW OpenGL ES path override not set: Could not resolve override symbol.");
         }
     }
-    
+
     private static boolean override(String symbol, @Nullable String path) {
         long override = GLFW.getLibrary().getFunctionAddress(symbol);
         if (override == NULL) {

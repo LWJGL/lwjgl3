@@ -30,7 +30,8 @@ public class GLFWNativeEGL {
         public static final long
             GetEGLDisplay = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLDisplay"),
             GetEGLContext = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLContext"),
-            GetEGLSurface = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLSurface");
+            GetEGLSurface = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLSurface"),
+            GetEGLConfig  = apiGetFunctionAddress(GLFW.getLibrary(), "glfwGetEGLConfig");
 
     }
 
@@ -103,6 +104,28 @@ public class GLFWNativeEGL {
         return invokePP(window, __functionAddress);
     }
 
+    // --- [ glfwGetEGLConfig ] ---
+
+    /**
+     * Returns the {@code EGLConfig} of the specified window.
+     * 
+     * <p>This function may be called from any thread. Access is not synchronized.</p>
+     *
+     * @return the {@code EGLConfig} of the specified window, or {@link EGL10#EGL_NO_SURFACE} if an error occurred.
+     *         
+     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
+     *
+     * @since version 3.4
+     */
+    @NativeType("EGLConfig")
+    public static long glfwGetEGLConfig(@NativeType("GLFWwindow *") long window) {
+        long __functionAddress = Functions.GetEGLConfig;
+        if (CHECKS) {
+            check(window);
+        }
+        return invokePP(window, __functionAddress);
+    }
+
     /**
      * Calls {@link #setEGLPath(String)} with the path of the specified {@link SharedLibrary}.
      * 
@@ -141,7 +164,7 @@ public class GLFWNativeEGL {
             apiLog("GLFW EGL path override not set: Could not resolve override symbol.");
         }
     }
-    
+
     /**
      * Calls {@link #setGLESPath(String)} with the path of the specified {@link SharedLibrary}.
      * 
@@ -180,7 +203,7 @@ public class GLFWNativeEGL {
             apiLog("GLFW OpenGL ES path override not set: Could not resolve override symbol.");
         }
     }
-    
+
     private static boolean override(String symbol, @Nullable String path) {
         long override = GLFW.getLibrary().getFunctionAddress(symbol);
         if (override == NULL) {
