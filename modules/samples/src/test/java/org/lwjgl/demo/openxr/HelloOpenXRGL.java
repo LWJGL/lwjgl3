@@ -307,6 +307,7 @@ public class HelloOpenXRGL {
                 XRHelper.createGraphicsBindingOpenGL(
                     XrSessionCreateInfo.malloc(stack)
                         .type$Default()
+                        .next(NULL)
                         .createFlags(0)
                         .systemId(systemID),
                     stack,

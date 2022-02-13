@@ -147,7 +147,6 @@ final class XRHelper {
                     return sessionCreateInfo.next(
                         XrGraphicsBindingOpenGLXlibKHR.malloc(stack)
                             .type$Default()
-                            .next(NULL)
                             .xDisplay(display)
                             .visualid((int)visualid)
                             .glxFBConfig(glxConfig)
@@ -158,7 +157,6 @@ final class XRHelper {
                     return sessionCreateInfo.next(
                         XrGraphicsBindingOpenGLWaylandKHR.malloc(stack)
                             .type$Default()
-                            .next(NULL)
                             .display(glfwGetWaylandDisplay())
                     );
                 } else {
@@ -168,7 +166,6 @@ final class XRHelper {
                 return sessionCreateInfo.next(
                     XrGraphicsBindingOpenGLWin32KHR.malloc(stack)
                         .type$Default()
-                        .next(NULL)
                         .hDC(GetDC(glfwGetWin32Window(window)))
                         .hGLRC(glfwGetWGLContext(window))
                 );
