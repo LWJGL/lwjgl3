@@ -19,18 +19,11 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.openxr.EXTDebugUtils.*;
 import static org.lwjgl.openxr.KHROpenGLEnable.*;
+import static org.lwjgl.openxr.MNDXEGLEnable.*;
 import static org.lwjgl.openxr.XR10.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Slightly tweaked combination of
- * https://github.com/maluoi/OpenXRSamples/blob/master/SingleFileExample
- * and
- * https://github.com/ReliaSolve/OpenXR-OpenGL-Example
- * Missing actions (xr input) and can only run on windows.
- * Requires a stereo headset and an install of the OpenXR runtime to run.
- */
 public class HelloOpenXRGL {
 
     long window;
@@ -41,6 +34,7 @@ public class HelloOpenXRGL {
     long                           systemID;
     XrSession                      xrSession;
     boolean                        missingXrDebug;
+    boolean                        useEglGraphicsBinding;
     XrDebugUtilsMessengerEXT       xrDebugMessenger;
     XrSpace                        xrAppSpace;  //The real world space in which the program runs
     long                           glColorFormat;
@@ -136,7 +130,60 @@ public class HelloOpenXRGL {
         try (MemoryStack stack = stackPush()) {
             IntBuffer pi = stack.mallocInt(1);
 
-            boolean hasCoreValidationLayer = false;
+            check(xrEnumerateInstanceExtensionProperties((ByteBuffer)null, pi, null));
+            int numExtensions = pi.get(0);
+
+            XrExtensionProperties.Buffer properties = XRHelper.prepareExtensionProperties(stack, numExtensions);
+
+            check(xrEnumerateInstanceExtensionProperties((ByteBuffer)null, pi, properties));
+
+            System.out.printf("OpenXR loaded with %d extensions:%n", numExtensions);
+            System.out.println("~~~~~~~~~~~~~~~~~~");
+
+            boolean missingOpenGL = true;
+            missingXrDebug = true;
+
+            useEglGraphicsBinding = false;
+            for (int i = 0; i < numExtensions; i++) {
+                XrExtensionProperties prop = properties.get(i);
+
+                String extensionName = prop.extensionNameString();
+                System.out.println(extensionName);
+
+                if (extensionName.equals(XR_KHR_OPENGL_ENABLE_EXTENSION_NAME)) {
+                    missingOpenGL = false;
+                }
+                if (extensionName.equals(XR_EXT_DEBUG_UTILS_EXTENSION_NAME)) {
+                    missingXrDebug = false;
+                }
+                if (extensionName.equals(XR_MNDX_EGL_ENABLE_EXTENSION_NAME)) {
+                    useEglGraphicsBinding = true;
+                }
+            }
+
+            if (missingOpenGL) {
+                throw new IllegalStateException("OpenXR library does not provide required extension: " + XR_KHR_OPENGL_ENABLE_EXTENSION_NAME);
+            }
+
+            if (useEglGraphicsBinding) {
+                System.out.println("Going to use cross-platform experimental EGL for session creation");
+            } else {
+                System.out.println("Going to use platform-specific session creation");
+            }
+
+            PointerBuffer extensions = stack.mallocPointer(2);
+            extensions.put(stack.UTF8(XR_KHR_OPENGL_ENABLE_EXTENSION_NAME));
+            if (useEglGraphicsBinding) {
+                extensions.put(stack.UTF8(XR_MNDX_EGL_ENABLE_EXTENSION_NAME));
+            } else if (!missingXrDebug) {
+                // At the time of writing this, the OpenXR validation layers don't like EGL
+                extensions.put(stack.UTF8(XR_EXT_DEBUG_UTILS_EXTENSION_NAME));
+            }
+            extensions.flip();
+            System.out.println("~~~~~~~~~~~~~~~~~~");
+
+            boolean useValidationLayer = false;
+
             check(xrEnumerateApiLayerProperties(pi, null));
             int numLayers = pi.get(0);
 
@@ -148,53 +195,21 @@ public class HelloOpenXRGL {
 
                 String layerName = layer.layerNameString();
                 System.out.println(layerName);
-                if (layerName.equals("XR_APILAYER_LUNARG_core_validation")) {
-                    hasCoreValidationLayer = true;
+
+                // At the time of wring this, the OpenXR validation layers don't like EGL
+                if (!useEglGraphicsBinding && layerName.equals("XR_APILAYER_LUNARG_core_validation")) {
+                    useValidationLayer = true;
                 }
             }
             System.out.println("-----------");
 
-            check(xrEnumerateInstanceExtensionProperties((ByteBuffer)null, pi, null));
-            int numExtensions = pi.get(0);
-
-            XrExtensionProperties.Buffer properties = XRHelper.prepareExtensionProperties(stack, numExtensions);
-
-            check(xrEnumerateInstanceExtensionProperties((ByteBuffer)null, pi, properties));
-
-            System.out.printf("OpenXR loaded with %d extensions:%n", numExtensions);
-            System.out.println("~~~~~~~~~~~~~~~~~~");
-
-            PointerBuffer extensions = stack.mallocPointer(2);
-
-            boolean missingOpenGL = true;
-            missingXrDebug = true;
-            for (int i = 0; i < numExtensions; i++) {
-                XrExtensionProperties prop = properties.get(i);
-
-                String extensionName = prop.extensionNameString();
-                System.out.println(extensionName);
-                if (extensionName.equals(XR_KHR_OPENGL_ENABLE_EXTENSION_NAME)) {
-                    missingOpenGL = false;
-                    extensions.put(prop.extensionName());
-                }
-                if (extensionName.equals(XR_EXT_DEBUG_UTILS_EXTENSION_NAME)) {
-                    missingXrDebug = false;
-                    extensions.put(prop.extensionName());
-                }
-            }
-            extensions.flip();
-            System.out.println("~~~~~~~~~~~~~~~~~~");
-
-            if (missingOpenGL) {
-                throw new IllegalStateException("OpenXR library does not provide required extension: " + XR_KHR_OPENGL_ENABLE_EXTENSION_NAME);
-            }
-
             PointerBuffer wantedLayers;
-            if (hasCoreValidationLayer) {
+            if (useValidationLayer) {
                 wantedLayers = stack.callocPointer(1);
                 wantedLayers.put(0, stack.UTF8("XR_APILAYER_LUNARG_core_validation"));
                 System.out.println("Enabling XR core validation");
             } else {
+                System.out.println("Running without validation layers");
                 wantedLayers = null;
             }
 
@@ -209,8 +224,10 @@ public class HelloOpenXRGL {
                 .enabledExtensionNames(extensions);
 
             PointerBuffer pp = stack.mallocPointer(1);
+            System.out.println("Creating OpenXR instance...");
             check(xrCreateInstance(createInfo, pp));
             xrInstance = new XrInstance(pp.get(0), createInfo);
+            System.out.println("Created OpenXR instance");
         }
     }
 
@@ -278,6 +295,9 @@ public class HelloOpenXRGL {
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minorVersionToRequest);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
             glfwWindowHint(GLFW_DOUBLEBUFFER, GL_FALSE);
+            if (useEglGraphicsBinding) {
+                glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+            }
             window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
             glfwMakeContextCurrent(window);
             GL.createCapabilities();
@@ -311,14 +331,15 @@ public class HelloOpenXRGL {
                         .createFlags(0)
                         .systemId(systemID),
                     stack,
-                    window
+                    window,
+                    useEglGraphicsBinding
                 ),
                 pp
             ));
 
             xrSession = new XrSession(pp.get(0), xrInstance);
 
-            if (!missingXrDebug) {
+            if (!missingXrDebug && !useEglGraphicsBinding) {
                 XrDebugUtilsMessengerCreateInfoEXT ciDebugUtils = XrDebugUtilsMessengerCreateInfoEXT.calloc(stack)
                     .type$Default()
                     .messageSeverities(
