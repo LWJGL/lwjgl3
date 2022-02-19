@@ -56,9 +56,11 @@ val VkVideoEncodeH264InputModeFlagBitsEXT = "VkVideoEncodeH264InputModeFlagBitsE
 val VkVideoEncodeH264OutputModeFlagBitsEXT = "VkVideoEncodeH264OutputModeFlagBitsEXT".enumType
 val VkVideoEncodeH264CreateFlagBitsEXT = "VkVideoEncodeH264CreateFlagBitsEXT".enumType
 val VkVideoEncodeH264RateControlStructureFlagBitsEXT = "VkVideoEncodeH264RateControlStructureFlagBitsEXT".enumType
+val VkVideoEncodeH265CapabilityFlagBitsEXT = "VkVideoEncodeH265CapabilityFlagBitsEXT".enumType
 val VkVideoEncodeH265InputModeFlagBitsEXT = "VkVideoEncodeH265InputModeFlagBitsEXT".enumType
 val VkVideoEncodeH265OutputModeFlagBitsEXT = "VkVideoEncodeH265OutputModeFlagBitsEXT".enumType
 val VkVideoEncodeH265CtbSizeFlagBitsEXT = "VkVideoEncodeH265CtbSizeFlagBitsEXT".enumType
+val VkVideoEncodeH265TransformBlockSizeFlagBitsEXT = "VkVideoEncodeH265TransformBlockSizeFlagBitsEXT".enumType
 val VkVideoEncodeH265RateControlStructureFlagBitsEXT = "VkVideoEncodeH265RateControlStructureFlagBitsEXT".enumType
 val VkVideoDecodeH264PictureLayoutFlagBitsEXT = "VkVideoDecodeH264PictureLayoutFlagBitsEXT".enumType
 val VkShaderInfoTypeAMD = "VkShaderInfoTypeAMD".enumType
@@ -124,6 +126,7 @@ val VkIndirectCommandsLayoutUsageFlagBitsNV = "VkIndirectCommandsLayoutUsageFlag
 val VkDeviceMemoryReportEventTypeEXT = "VkDeviceMemoryReportEventTypeEXT".enumType
 val VkPipelineCacheCreateFlagBits = "VkPipelineCacheCreateFlagBits".enumType
 val VkVideoEncodeFlagBitsKHR = "VkVideoEncodeFlagBitsKHR".enumType
+val VkVideoEncodeCapabilityFlagBitsKHR = "VkVideoEncodeCapabilityFlagBitsKHR".enumType
 val VkVideoEncodeRateControlFlagBitsKHR = "VkVideoEncodeRateControlFlagBitsKHR".enumType
 val VkVideoEncodeRateControlModeFlagBitsKHR = "VkVideoEncodeRateControlModeFlagBitsKHR".enumType
 val VkDeviceDiagnosticsConfigFlagBitsNV = "VkDeviceDiagnosticsConfigFlagBitsNV".enumType
@@ -166,6 +169,7 @@ val VkVideoEncodeH265InputModeFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265Inpu
 val VkVideoEncodeH265OutputModeFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265OutputModeFlagsEXT")
 val VkVideoEncodeH265CreateFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265CreateFlagsEXT")
 val VkVideoEncodeH265CtbSizeFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265CtbSizeFlagsEXT")
+val VkVideoEncodeH265TransformBlockSizeFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265TransformBlockSizeFlagsEXT")
 val VkVideoEncodeH265RateControlStructureFlagsEXT = typedef(VkFlags, "VkVideoEncodeH265RateControlStructureFlagsEXT")
 val VkVideoDecodeH264PictureLayoutFlagsEXT = typedef(VkFlags, "VkVideoDecodeH264PictureLayoutFlagsEXT")
 val VkVideoDecodeH264CreateFlagsEXT = typedef(VkFlags, "VkVideoDecodeH264CreateFlagsEXT")
@@ -223,8 +227,9 @@ val VkIndirectCommandsLayoutUsageFlagsNV = typedef(VkFlags, "VkIndirectCommandsL
 val VkDeviceMemoryReportFlagsEXT = typedef(VkFlags, "VkDeviceMemoryReportFlagsEXT")
 val VkPrivateDataSlotCreateFlagsEXT = typedef(VkFlags, "VkPrivateDataSlotCreateFlagsEXT")
 val VkVideoEncodeFlagsKHR = typedef(VkFlags, "VkVideoEncodeFlagsKHR")
-val VkVideoEncodeRateControlFlagsKHR = typedef(VkFlags, "VkVideoEncodeRateControlFlagsKHR")
+val VkVideoEncodeCapabilityFlagsKHR = typedef(VkFlags, "VkVideoEncodeCapabilityFlagsKHR")
 val VkVideoEncodeRateControlModeFlagsKHR = typedef(VkFlags, "VkVideoEncodeRateControlModeFlagsKHR")
+val VkVideoEncodeRateControlFlagsKHR = typedef(VkFlags, "VkVideoEncodeRateControlFlagsKHR")
 val VkDeviceDiagnosticsConfigFlagsNV = typedef(VkFlags, "VkDeviceDiagnosticsConfigFlagsNV")
 val VkPipelineStageFlags2KHR = typedef(VkFlags64, "VkPipelineStageFlags2KHR")
 val VkAccessFlags2KHR = typedef(VkFlags64, "VkAccessFlags2KHR")
@@ -1287,7 +1292,7 @@ val VkVideoCapabilitiesKHR = struct(Module.VULKAN, "VkVideoCapabilitiesKHR", mut
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR</li>
-            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeH264CapabilitiesEXT, ##VkVideoDecodeH265CapabilitiesEXT, ##VkVideoEncodeH264CapabilitiesEXT, or ##VkVideoEncodeH265CapabilitiesEXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkVideoDecodeH264CapabilitiesEXT, ##VkVideoDecodeH265CapabilitiesEXT, or ##VkVideoEncodeCapabilitiesKHR</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
         </ul>
 
@@ -1297,7 +1302,7 @@ val VkVideoCapabilitiesKHR = struct(Module.VULKAN, "VkVideoCapabilitiesKHR", mut
 
     Expression("#STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR")..VkStructureType("sType", "the type of this structure.").mutable()
     PointerSetter(
-        "VkVideoDecodeH264CapabilitiesEXT", "VkVideoDecodeH265CapabilitiesEXT", "VkVideoEncodeH264CapabilitiesEXT", "VkVideoEncodeH265CapabilitiesEXT",
+        "VkVideoDecodeH264CapabilitiesEXT", "VkVideoDecodeH265CapabilitiesEXT", "VkVideoEncodeCapabilitiesKHR",
         prepend = true
     )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkVideoCapabilityFlagsKHR("capabilityFlags", "a bitmask of {@code VkVideoCapabilityFlagBitsKHR} specifying capability flags.")
@@ -1980,8 +1985,6 @@ val VkVideoEncodeH264CapabilitiesEXT = struct(Module.VULKAN, "VkVideoEncodeH264C
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH264CapabilityFlagBitsEXT} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
             <li>{@code inputModeFlags} <b>must</b> be a valid combination of {@code VkVideoEncodeH264InputModeFlagBitsEXT} values</li>
             <li>{@code inputModeFlags} <b>must</b> not be 0</li>
             <li>{@code outputModeFlags} <b>must</b> be a valid combination of {@code VkVideoEncodeH264OutputModeFlagBitsEXT} values</li>
@@ -1990,7 +1993,7 @@ val VkVideoEncodeH264CapabilitiesEXT = struct(Module.VULKAN, "VkVideoEncodeH264C
         </ul>
 
         <h5>See Also</h5>
-        ##VkExtensionProperties, ##VkExtent2D
+        ##VkExtensionProperties
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT")..VkStructureType("sType", "the type of this structure.")
@@ -1998,13 +2001,14 @@ val VkVideoEncodeH264CapabilitiesEXT = struct(Module.VULKAN, "VkVideoEncodeH264C
     VkVideoEncodeH264CapabilityFlagsEXT("flags", "a bitmask of {@code VkVideoEncodeH264CapabilityFlagBitsEXT} describing supported encoding tools.")
     VkVideoEncodeH264InputModeFlagsEXT("inputModeFlags", "a bitmask of {@code VkVideoEncodeH264InputModeFlagBitsEXT} describing supported command buffer input granularities/modes.")
     VkVideoEncodeH264OutputModeFlagsEXT("outputModeFlags", "a bitmask of {@code VkVideoEncodeH264OutputModeFlagBitsEXT} describing supported output (bitstream size reporting) granularities/modes.")
-    VkExtent2D("minPictureSizeInMbs", "reports the minimum encoded picture width and height in Macroblocks.")
-    VkExtent2D("maxPictureSizeInMbs", "reports the maximum encoded picture width and height in Macroblocks.")
-    VkExtent2D("inputImageDataAlignment", "reports alignment of data that <b>must</b> be filled in the input image horizontally and vertically in pixels. Max is 16: Data <b>must</b> be filled up to Macroblock boundary (no extrapolation/filling is supported by implementation). Min is 1: The implementation will take care of all needed extrapolation/filling up to the next Macroblock boundary.")
-    uint8_t("maxNumL0ReferenceForP", "reports the maximum number of reference pictures the encoder supports as list0 references for P pictures.")
-    uint8_t("maxNumL0ReferenceForB", "reports the maximum number of reference pictures the encoder supports as list0 references for B pictures. Reports 0 if B pictures are not supported.")
-    uint8_t("maxNumL1Reference", "reports the maximum number of reference pictures the encoder supports as list1 references if B pictures are supported. Reports 0 if B pictures are not supported.")
-    uint8_t("qualityLevelCount", "the number of discrete quality levels supported.")
+    uint8_t("maxPPictureL0ReferenceCount", "reports the maximum number of reference pictures the implementation supports in the reference list L0 for P pictures.")
+    uint8_t("maxBPictureL0ReferenceCount", "reports the maximum number of reference pictures the implementation supports in the reference list L0 for B pictures. The reported value is 0 if encoding of B pictures is not supported.")
+    uint8_t("maxL1ReferenceCount", "reports the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of B pictures is supported. The reported value is 0 if encoding of B pictures is not supported.")
+    VkBool32("motionVectorsOverPicBoundariesFlag", "if #TRUE, indicates motion_vectors_over_pic_boundaries_flag will be enabled if bitstream_restriction_flag is enabled in StdVideoH264SpsVuiFlags.")
+    uint32_t("maxBytesPerPicDenom", "reports the value that will be used for max_bytes_per_pic_denom if bitstream_restriction_flag is enabled in StdVideoH264SpsVuiFlags.")
+    uint32_t("maxBitsPerMbDenom", "reports the value that will be used for max_bits_per_mb_denom if bitstream_restriction_flag is enabled in StdVideoH264SpsVuiFlags.")
+    uint32_t("log2MaxMvLengthHorizontal", "reports the value that will be used for log2_max_mv_length_horizontal if bitstream_restriction_flag is enabled in StdVideoH264SpsVuiFlags.")
+    uint32_t("log2MaxMvLengthVertical", "reports the value that will be used for log2_max_mv_length_vertical if bitstream_restriction_flag is enabled in StdVideoH264SpsVuiFlags.")
     VkExtensionProperties("stdExtensionVersion", "the specific H.264 extension name and version supported by this implementation.")
 }
 
@@ -2108,17 +2112,45 @@ val VkVideoEncodeH264DpbSlotInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264Dp
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code pStdPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH264PictureInfo} value</li>
+            <li>{@code pStdReferenceInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH264ReferenceInfo} value</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264NaluSliceEXT, ##VkVideoEncodeH264VclFrameInfoEXT
+        ##VkVideoEncodeH264ReferenceListsEXT
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    int8_t("slotIndex", "the slot index for this picture. {@code slotIndex} <b>must</b> match the {@code slotIndex} in {@code pSetupReferenceSlot} of ##VkVideoEncodeInfoKHR in the command used to encode the corresponding picture.")
-    StdVideoEncodeH264PictureInfo.const.p("pStdPictureInfo", "a pointer to a {@code StdVideoEncodeH264PictureInfo} structure specifying codec standard specific syntax/information associated with this picture from the H.264 specification.")
+    int8_t("slotIndex", "the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#dpb-slot\">DPB Slot</a> index for this picture. {@code slotIndex} <b>must</b> match the {@code slotIndex} in {@code pSetupReferenceSlot} of ##VkVideoEncodeInfoKHR in the command used to encode the corresponding picture.")
+    StdVideoEncodeH264ReferenceInfo.const.p("pStdReferenceInfo", "a pointer to a {@code StdVideoEncodeH264ReferenceInfo} structure specifying the syntax and other codec-specific information from the H.264 specification associated with this reference picture.")
+}
+
+val VkVideoEncodeH264ReferenceListsEXT = struct(Module.VULKAN, "VkVideoEncodeH264ReferenceListsEXT") {
+    javaImport("org.lwjgl.vulkan.video.*")
+    documentation =
+        """
+        Structure specifies H.264 reference frame lists.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>If {@code referenceList0EntryCount} is not 0, {@code pReferenceList0Entries} <b>must</b> be a valid pointer to an array of {@code referenceList0EntryCount} valid ##VkVideoEncodeH264DpbSlotInfoEXT structures</li>
+            <li>If {@code referenceList1EntryCount} is not 0, {@code pReferenceList1Entries} <b>must</b> be a valid pointer to an array of {@code referenceList1EntryCount} valid ##VkVideoEncodeH264DpbSlotInfoEXT structures</li>
+            <li>{@code pMemMgmtCtrlOperations} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH264RefMemMgmtCtrlOperations} value</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkVideoEncodeH264DpbSlotInfoEXT, ##VkVideoEncodeH264NaluSliceEXT, ##VkVideoEncodeH264VclFrameInfoEXT
+        """
+
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pReferenceList0Entries", optional = true)..uint8_t("referenceList0EntryCount", "the number of reference pictures in reference list L0 and is identical to {@code StdVideoEncodeH264SliceHeader}{@code ::num_ref_idx_l0_active_minus1} + 1.")
+    VkVideoEncodeH264DpbSlotInfoEXT.const.p("pReferenceList0Entries", "a pointer to an array of {@code referenceList0EntryCount} ##VkVideoEncodeH264DpbSlotInfoEXT structures specifying the reference list L0 entries for the current picture. The entries provided <b>must</b> be ordered after all reference list L0 modification operations are applied (i.e. final list order). The entries provided <b>must</b> not reflect decoded picture marking operations in this frame that are applicable to references; the impact of such operations <b>must</b> be reflected in future frame encode commands. The slot index in each entry <b>must</b> match one of the slot indexes provided in the {@code pReferenceSlots} of the parent ##VkVideoEncodeInfoKHR structure.")
+    AutoSize("pReferenceList1Entries", optional = true)..uint8_t("referenceList1EntryCount", "the number of reference pictures in reference list L1 and is identical to {@code StdVideoEncodeH264SliceHeader}{@code ::num_ref_idx_l1_active_minus1} + 1.")
+    VkVideoEncodeH264DpbSlotInfoEXT.const.p("pReferenceList1Entries", "a pointer to an array of {@code referenceList1EntryCount} ##VkVideoEncodeH264DpbSlotInfoEXT structures specifying the reference list L1 entries for the current picture. The entries provided <b>must</b> be ordered after all reference list L1 modification operations are applied (i.e. final list order). The entries provided <b>must</b> not reflect decoded picture marking operations in this frame that are applicable to references; the impact of such operations <b>must</b> be reflected in future frame encode commands. The slot index in each entry <b>must</b> match one of the slot indexes provided in the {@code pReferenceSlots} of the parent ##VkVideoEncodeInfoKHR structure.")
+    StdVideoEncodeH264RefMemMgmtCtrlOperations.const.p("pMemMgmtCtrlOperations", "a pointer to a {@code StdVideoEncodeH264RefMemMgmtCtrlOperations} structure specifying reference lists modifications and decoded picture marking operations.")
 }
 
 val VkVideoEncodeH264NaluSliceEXT = struct(Module.VULKAN, "VkVideoEncodeH264NaluSliceEXT") {
@@ -2131,60 +2163,46 @@ val VkVideoEncodeH264NaluSliceEXT = struct(Module.VULKAN, "VkVideoEncodeH264Nalu
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>If {@code pReferenceFinalLists} is not {@code NULL}, {@code pReferenceFinalLists} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeH264ReferenceListsEXT structure</li>
             <li>{@code pSliceHeaderStd} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH264SliceHeader} value</li>
-            <li>{@code pRefFinalList0Entries} <b>must</b> be a valid pointer to an array of {@code refFinalList0EntryCount} valid ##VkVideoEncodeH264DpbSlotInfoEXT structures</li>
-            <li>{@code pRefFinalList1Entries} <b>must</b> be a valid pointer to an array of {@code refFinalList1EntryCount} valid ##VkVideoEncodeH264DpbSlotInfoEXT structures</li>
-            <li>{@code refFinalList0EntryCount} <b>must</b> be greater than 0</li>
-            <li>{@code refFinalList1EntryCount} <b>must</b> be greater than 0</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264DpbSlotInfoEXT, ##VkVideoEncodeH264VclFrameInfoEXT
+        ##VkVideoEncodeH264ReferenceListsEXT, ##VkVideoEncodeH264VclFrameInfoEXT
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    StdVideoEncodeH264SliceHeader.const.p("pSliceHeaderStd", "a pointer to a {@code StdVideoEncodeH264SliceHeader} specifying the standard slice header from the H.264 specification.")
     uint32_t("mbCount", "the number of macroblocks in this slice.")
-    AutoSize("pRefFinalList0Entries")..uint8_t("refFinalList0EntryCount", "the number of active references in List0. If zero, the default frame List0 provided in the enclosing ##VkVideoEncodeH264VclFrameInfoEXT is used. If non-zero, it overrides the default frame List0 for this slice.")
-    VkVideoEncodeH264DpbSlotInfoEXT.const.p("pRefFinalList0Entries", "a pointer to a ##VkVideoEncodeH264DpbSlotInfoEXT specifying DPB information for the active List0 references. The same restrictions related to order of entries and decoded picture marking operations described for List0 in ##VkVideoEncodeH264VclFrameInfoEXT apply here.")
-    AutoSize("pRefFinalList1Entries")..uint8_t("refFinalList1EntryCount", "the number of active references in List1. If zero, the default frame List1 provided in the enclosing ##VkVideoEncodeH264VclFrameInfoEXT is used. If non-zero, it overrides the default frame List1 for this slice.")
-    VkVideoEncodeH264DpbSlotInfoEXT.const.p("pRefFinalList1Entries", "a pointer to a ##VkVideoEncodeH264DpbSlotInfoEXT structure specifying DPB information for the active List1 references. The same restrictions related to order of entries and decoded picture marking operations described for List1 in ##VkVideoEncodeH264VclFrameInfoEXT apply here.")
+    nullable..VkVideoEncodeH264ReferenceListsEXT.const.p("pReferenceFinalLists", "{@code NULL} or a pointer to a ##VkVideoEncodeH264ReferenceListsEXT structure specifying the reference lists to be used for the current slice. If {@code pReferenceFinalLists} is not {@code NULL}, these reference lists override the reference lists provided in ##VkVideoEncodeH264VclFrameInfoEXT{@code ::pReferenceFinalLists}.")
+    StdVideoEncodeH264SliceHeader.const.p("pSliceHeaderStd", "a pointer to a {@code StdVideoEncodeH264SliceHeader} structure specifying the slice header for the current slice.")
 }
 
 val VkVideoEncodeH264VclFrameInfoEXT = struct(Module.VULKAN, "VkVideoEncodeH264VclFrameInfoEXT") {
+    javaImport("org.lwjgl.vulkan.video.*")
     documentation =
         """
         Structure specifies H.264 encode frame parameters.
 
-        <h5>Description</h5>
-        In order to encode a frame, add a ##VkVideoEncodeH264VclFrameInfoEXT structure to the {@code pNext} chain of the ##VkVideoEncodeInfoKHR structure passed to the #CmdEncodeVideoKHR() command.
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT</li>
-            <li>{@code pRefDefaultFinalList0Entries} <b>must</b> be a valid pointer to an array of {@code refDefaultFinalList0EntryCount} valid ##VkVideoEncodeH264DpbSlotInfoEXT structures</li>
-            <li>{@code pRefDefaultFinalList1Entries} <b>must</b> be a valid pointer to an array of {@code refDefaultFinalList1EntryCount} valid ##VkVideoEncodeH264DpbSlotInfoEXT structures</li>
+            <li>If {@code pReferenceFinalLists} is not {@code NULL}, {@code pReferenceFinalLists} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeH264ReferenceListsEXT structure</li>
             <li>{@code pNaluSliceEntries} <b>must</b> be a valid pointer to an array of {@code naluSliceEntryCount} valid ##VkVideoEncodeH264NaluSliceEXT structures</li>
-            <li>{@code pCurrentPictureInfo} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeH264DpbSlotInfoEXT structure</li>
-            <li>{@code refDefaultFinalList0EntryCount} <b>must</b> be greater than 0</li>
-            <li>{@code refDefaultFinalList1EntryCount} <b>must</b> be greater than 0</li>
+            <li>{@code pCurrentPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH264PictureInfo} value</li>
             <li>{@code naluSliceEntryCount} <b>must</b> be greater than 0</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoEncodeH264DpbSlotInfoEXT, ##VkVideoEncodeH264NaluSliceEXT
+        ##VkVideoEncodeH264NaluSliceEXT, ##VkVideoEncodeH264ReferenceListsEXT
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    AutoSize("pRefDefaultFinalList0Entries")..uint8_t("refDefaultFinalList0EntryCount", "the default number of reference List0 entries for all slices of this frame. Each slice <b>may</b> override this by providing its own List0 entries.")
-    VkVideoEncodeH264DpbSlotInfoEXT.const.p("pRefDefaultFinalList0Entries", "a pointer to an array of ##VkVideoEncodeH264DpbSlotInfoEXT structures providing information for each reference List0 entry. The entries provided <b>must</b> be ordered after all reference List0 modification operations are applied (i.e. final list order). The entires provided <b>must</b> not reflect decoded picture marking operations in this frame that are applicable to references; the impact of such operations <b>must</b> be reflected in future frame encode cmds. The slot index in each entry <b>must</b> match one of the slot indexes provided in {@code pReferenceSlots} of the ##VkVideoEncodeInfoKHR structure to which this structure is chained.")
-    AutoSize("pRefDefaultFinalList1Entries")..uint8_t("refDefaultFinalList1EntryCount", "the default number of reference List1 entries for all slices of this frame. Each slice <b>may</b> override this by providing its own List1 entries.")
-    VkVideoEncodeH264DpbSlotInfoEXT.const.p("pRefDefaultFinalList1Entries", "a pointer to an array of ##VkVideoEncodeH264DpbSlotInfoEXT structures providing information related to each reference List1 entry. The entries provided <b>must</b> be ordered after all reference List1 modification operations are applied (i.e. final list order). The entires provided <b>must</b> not reflect decoded picture marking operations in this frame that are applicable to references; the impact of such operations <b>must</b> be reflected in future frame encode cmds. The slot index in each entry <b>must</b> match one of the slot indexes provided in {@code pReferenceSlots} of the ##VkVideoEncodeInfoKHR structure to which this structure is chained.")
-    AutoSize("pNaluSliceEntries")..uint32_t("naluSliceEntryCount", "the number of NALUs in this frame.")
-    VkVideoEncodeH264NaluSliceEXT.const.p("pNaluSliceEntries", "a pointer to an array of {@code naluCount} ##VkVideoEncodeH264NaluSliceEXT structures that make up the frame. This is an ordered sequence; the NALUs are generated consecutively in the bitstream buffer (provided in {@code bitstreamBuffer} in ##VkVideoBeginCodingInfoKHR) in the same order as in this array.")
-    VkVideoEncodeH264DpbSlotInfoEXT.const.p("pCurrentPictureInfo", "a pointer to a ##VkVideoEncodeH264DpbSlotInfoEXT structure specifying information for the reconstructed picture for this frame. Info provided <b>must</b> reflect decoded picture marking operations in this frame that are applicable to this frame. The slot index in pCurrentPictureInfo <b>must</b> match the slot index provided in {@code pSetupReferenceSlot} of ##VkVideoEncodeInfoKHR structure to which this structure is chained to.")
+    nullable..VkVideoEncodeH264ReferenceListsEXT.const.p("pReferenceFinalLists", "{@code NULL} or a pointer to a ##VkVideoEncodeH264ReferenceListsEXT structure specifying the reference lists to be used for the current picture.")
+    AutoSize("pNaluSliceEntries")..uint32_t("naluSliceEntryCount", "the number of slice NALUs in the frame.")
+    VkVideoEncodeH264NaluSliceEXT.const.p("pNaluSliceEntries", "a pointer to an array of {@code naluSliceEntryCount} ##VkVideoEncodeH264NaluSliceEXT structures specifying the division of the current picture into slices and the properties of these slices. This is an ordered sequence; the NALUs are generated consecutively in ##VkVideoEncodeInfoKHR{@code ::dstBitstreamBuffer} in the same order as in this array.")
+    StdVideoEncodeH264PictureInfo.const.p("pCurrentPictureInfo", "a pointer to a {@code StdVideoEncodeH264PictureInfo} structure specifying the syntax and other codec-specific information from the H.264 specification associated with this picture. The information provided <b>must</b> reflect the decoded picture marking operations that are applicable to this frame.")
 }
 
 val VkVideoEncodeH264EmitPictureParametersEXT = struct(Module.VULKAN, "VkVideoEncodeH264EmitPictureParametersEXT") {
@@ -2332,32 +2350,43 @@ val VkVideoEncodeH265CapabilitiesEXT = struct(Module.VULKAN, "VkVideoEncodeH265C
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT</li>
-            <li>{@code flags} <b>must</b> be 0</li>
             <li>{@code inputModeFlags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265InputModeFlagBitsEXT} values</li>
             <li>{@code inputModeFlags} <b>must</b> not be 0</li>
             <li>{@code outputModeFlags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265OutputModeFlagBitsEXT} values</li>
             <li>{@code outputModeFlags} <b>must</b> not be 0</li>
             <li>{@code ctbSizes} <b>must</b> be a valid combination of {@code VkVideoEncodeH265CtbSizeFlagBitsEXT} values</li>
             <li>{@code ctbSizes} <b>must</b> not be 0</li>
+            <li>{@code transformBlockSizes} <b>must</b> be a valid combination of {@code VkVideoEncodeH265TransformBlockSizeFlagBitsEXT} values</li>
+            <li>{@code transformBlockSizes} <b>must</b> not be 0</li>
             <li>{@code stdExtensionVersion} <b>must</b> be a valid ##VkExtensionProperties structure</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkExtensionProperties, ##VkExtent2D
+        ##VkExtensionProperties
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkVideoEncodeH265CapabilityFlagsEXT("flags", "reserved for future use.")
+    VkVideoEncodeH265CapabilityFlagsEXT("flags", "a bitmask of {@code VkVideoEncodeH265CapabilityFlagBitsEXT} describing supported encoding tools.")
     VkVideoEncodeH265InputModeFlagsEXT("inputModeFlags", "a bitmask of {@code VkVideoEncodeH265InputModeFlagBitsEXT} describing the command buffer input granularities/modes supported by the implementation.")
     VkVideoEncodeH265OutputModeFlagsEXT("outputModeFlags", "a bitmask of {@code VkVideoEncodeH265OutputModeFlagBitsEXT} describing the output (bitstream size reporting) granularities/modes supported by the implementation.")
     VkVideoEncodeH265CtbSizeFlagsEXT("ctbSizes", "a bitmask of {@code VkVideoEncodeH265CtbSizeFlagBitsEXT} describing the supported CTB sizes.")
-    VkExtent2D("inputImageDataAlignment", "reports the alignment, in pixels, for the width and height of the picture data within the images used in video encoding.")
-    uint8_t("maxNumL0ReferenceForP", "reports the maximum number of reference pictures the implementation supports in the reference list L0 for P pictures.")
-    uint8_t("maxNumL0ReferenceForB", "reports the maximum number of reference pictures the implementation supports in the reference list L0 for B pictures. The reported value is 0 if encoding of B pictures is not supported.")
-    uint8_t("maxNumL1Reference", "reports the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of B pictures is supported. The reported value is 0 if encoding of B pictures is not supported.")
-    uint8_t("maxNumSubLayers", "reports the maximum number of sublayers.")
-    uint8_t("qualityLevelCount", "the number of quality levels supported.")
+    VkVideoEncodeH265TransformBlockSizeFlagsEXT("transformBlockSizes", "a bitmask of {@code VkVideoEncodeH265TransformBlockSizeFlagBitsEXT} describing the supported transform block sizes.")
+    uint8_t("maxPPictureL0ReferenceCount", "reports the maximum number of reference pictures the implementation supports in the reference list L0 for P pictures.")
+    uint8_t("maxBPictureL0ReferenceCount", "reports the maximum number of reference pictures the implementation supports in the reference list L0 for B pictures. The reported value is 0 if encoding of B pictures is not supported.")
+    uint8_t("maxL1ReferenceCount", "reports the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of B pictures is supported. The reported value is 0 if encoding of B pictures is not supported.")
+    uint8_t("maxSubLayersCount", "reports the maximum number of sublayers.")
+    uint8_t("minLog2MinLumaCodingBlockSizeMinus3", "reports the minimum value that may be set for log2_min_luma_coding_block_size_minus3 in StdVideoH265SequenceParameterSet.")
+    uint8_t("maxLog2MinLumaCodingBlockSizeMinus3", "reports the maximum value that may be set for log2_min_luma_coding_block_size_minus3 in StdVideoH265SequenceParameterSet.")
+    uint8_t("minLog2MinLumaTransformBlockSizeMinus2", "reports the minimum value that may be set for log2_min_luma_transform_block_size_minus2 in StdVideoH265SequenceParameterSet.")
+    uint8_t("maxLog2MinLumaTransformBlockSizeMinus2", "reports the maximum value that may be set for log2_min_luma_transform_block_size_minus2 in StdVideoH265SequenceParameterSet.")
+    uint8_t("minMaxTransformHierarchyDepthInter", "reports the minimum value that may be set for max_transform_hierarchy_depth_inter in StdVideoH265SequenceParameterSet.")
+    uint8_t("maxMaxTransformHierarchyDepthInter", "reports the maximum value that may be set for max_transform_hierarchy_depth_inter in StdVideoH265SequenceParameterSet.")
+    uint8_t("minMaxTransformHierarchyDepthIntra", "reports the minimum value that may be set for max_transform_hierarchy_depth_intra in StdVideoH265SequenceParameterSet.")
+    uint8_t("maxMaxTransformHierarchyDepthIntra", "reports the maximum value that may be set for max_transform_hierarchy_depth_intra in StdVideoH265SequenceParameterSet.")
+    uint8_t("maxDiffCuQpDeltaDepth", "reports the maximum value that may be set for diff_cu_qp_delta_depth in StdVideoH265PictureParameterSet.")
+    uint8_t("minMaxNumMergeCand", "reports the minimum value that may be set for MaxNumMergeCand in StdVideoEncodeH265SliceHeader.")
+    uint8_t("maxMaxNumMergeCand", "reports the maximum value that may be set for MaxNumMergeCand in StdVideoEncodeH265SliceHeader.")
     VkExtensionProperties("stdExtensionVersion", "a ##VkExtensionProperties structure in which the H.265 extension name and version supported by the implementation are returned.")
 }
 
@@ -7189,6 +7218,7 @@ val VkRayTracingPipelineCreateInfoKHR = struct(Module.VULKAN, "VkRayTracingPipel
             <li>If {@code flags} includes #PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR, for any element of {@code pGroups} with a {@code type} of #RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR or #RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR, the {@code closestHitShader} of that element <b>must</b> not be #SHADER_UNUSED_KHR</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rayTraversalPrimitiveCulling">{@code rayTraversalPrimitiveCulling}</a> feature is not enabled, {@code flags} <b>must</b> not include #PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rayTraversalPrimitiveCulling">{@code rayTraversalPrimitiveCulling}</a> feature is not enabled, {@code flags} <b>must</b> not include #PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR</li>
+            <li>{@code flags} <b>must</b> not include both #PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR and #PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR</li>
             <li>If {@code flags} includes #PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rayTracingPipelineShaderGroupHandleCaptureReplay">{@code rayTracingPipelineShaderGroupHandleCaptureReplay}</a> <b>must</b> be enabled</li>
             <li>If ##VkPhysicalDeviceRayTracingPipelineFeaturesKHR{@code ::rayTracingPipelineShaderGroupHandleCaptureReplay} is #TRUE and the {@code pShaderGroupCaptureReplayHandle} member of any element of {@code pGroups} is not {@code NULL}, {@code flags} <b>must</b> include #PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR</li>
             <li>If {@code pLibraryInfo} is not {@code NULL} and its {@code libraryCount} is 0, {@code stageCount} <b>must</b> not be 0</li>
@@ -11754,11 +11784,11 @@ val VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR = struct(Module.VULKAN, "
     VkBool32("shaderIntegerDotProduct", "")
 }
 
-val VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR", alias = VkPhysicalDeviceShaderIntegerDotProductProperties) {
+val VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR", mutable = false, alias = VkPhysicalDeviceShaderIntegerDotProductProperties) {
     documentation = "See ##VkPhysicalDeviceShaderIntegerDotProductProperties."
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES")..VkStructureType("sType", "").mutable()
+    nullable..opaque_p("pNext", "").mutable()
     VkBool32("integerDotProduct8BitUnsignedAccelerated", "")
     VkBool32("integerDotProduct8BitSignedAccelerated", "")
     VkBool32("integerDotProduct8BitMixedSignednessAccelerated", "")
@@ -12204,6 +12234,37 @@ val VkVideoEncodeInfoKHR = struct(Module.VULKAN, "VkVideoEncodeInfoKHR") {
     AutoSize("pReferenceSlots", optional = true)..uint32_t("referenceSlotCount", "the number of Reconstructed Reference Pictures that will be used when this encoding operation is executing.")
     VkVideoReferenceSlotKHR.const.p("pReferenceSlots", "{@code NULL} or a pointer to an array of ##VkVideoReferenceSlotKHR structures that will be used when this encoding operation is executing. Each entry in {@code pReferenceSlots} <b>must</b> be one of the entries provided in ##VkVideoBeginCodingInfoKHR via the {@code pReferenceSlots} within the #CmdBeginVideoCodingKHR() command that established the Vulkan Video Encode Context for this command.")
     uint32_t("precedingExternallyEncodedBytes", "the number of bytes externally encoded for insertion in the active video encode session overall bitstream prior to the bitstream that will be generated by the implementation for this instance of ##VkVideoEncodeInfoKHR. Valid when ##VkVideoEncodeRateControlInfoKHR{@code ::rateControlMode} is not #VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR. The value provided is used to update the implementation’s rate control algorithm for the rate control layer this instance of ##VkVideoEncodeInfoKHR belongs to, by accounting for the bitrate budget consumed by these externally encoded bytes. See ##VkVideoEncodeRateControlInfoKHR for additional information about encode rate control.")
+}
+
+val VkVideoEncodeCapabilitiesKHR = struct(Module.VULKAN, "VkVideoEncodeCapabilitiesKHR") {
+    documentation =
+        """
+        Structure specifying encode capabilities.
+
+        <h5>Description</h5>
+        The input content and encode resolution (specified in ##VkVideoEncodeInfoKHR{@code ::codedExtent}) may not be aligned with the codec-specific coding block size. For example, the input content may be 1920x1080 and the coding block size may be 16x16 pixel blocks. In this example, the content is horizontally aligned with the coding block size, but not vertically aligned with the coding block size. Encoding of the last row of blocks may be impacted by contents of the input image in pixel rows 1081 to 1088 (the next vertical alignment with the coding block size). In general, to ensure efficient encoding for the last row/column of blocks, and/or to ensure consistent encoding results between repeated encoding of the same input content, these extra pixel rows/columns should be filled to known values up to the coding block size alignment before encoding operations are performed. Some implementations support performing auto-fill of unaligned pixels beyond a specific alignment, which is reported in {@code inputImageDataFillAlignment}. For example, if an implementation reports 1x1 in {@code inputImageDataFillAlignment}, then the implementation will perform auto-fill for any unaligned pixels beyond the encode resolution up to the next coding block size. For a coding block size of 16x16, if the implementation reports 16x16 in {@code inputImageDataFillAlignment}, then it is the application’s responsibility to fill any unaligned pixels, if desired. If not, it may impact the encoding efficiency, but it will not affect the validity of the generated bitstream. If the implementation reports 8x8 in {@code inputImageDataFillAlignment}, then for the 1920x1080 example, since the content is aligned to 8 pixels vertically, the implementation will auto-fill pixel rows 1081 to 1088 (up to the 16x16 coding block size in the example). The auto-fill value(s) are implementation-specific. The auto-fill value(s) are not written to the input image memory, but are used as part of the encoding operation on the input image.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR</li>
+            <li>{@code rateControlModes} <b>must</b> be a valid combination of {@code VkVideoEncodeRateControlModeFlagBitsKHR} values</li>
+            <li>{@code rateControlModes} <b>must</b> not be 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkExtent2D
+        """
+
+    Expression("#STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR")..VkStructureType("sType", "the type of this structure.")
+    PointerSetter(
+        "VkVideoEncodeH264CapabilitiesEXT", "VkVideoEncodeH265CapabilitiesEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkVideoEncodeCapabilityFlagsKHR("flags", "a bitmask of {@code VkVideoEncodeCapabilityFlagBitsKHR} describing supported encoding features.")
+    VkVideoEncodeRateControlModeFlagsKHR("rateControlModes", "a bitmask of {@code VkVideoEncodeRateControlModeFlagBitsKHR} describing supported rate control modes. All implementations <b>must</b> support #VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR.")
+    uint8_t("rateControlLayerCount", "reports the maximum number of rate control layers supported. Implementations <b>must</b> report at least 1.")
+    uint8_t("qualityLevelCount", "the number of discrete quality levels supported. Implementations <b>must</b> report at least 1.")
+    VkExtent2D("inputImageDataFillAlignment", "reports alignment of data that should be filled in the input image horizontally and vertically in pixels before encode operations are performed on the input image.")
 }
 
 val VkVideoEncodeRateControlLayerInfoKHR = struct(Module.VULKAN, "VkVideoEncodeRateControlLayerInfoKHR") {

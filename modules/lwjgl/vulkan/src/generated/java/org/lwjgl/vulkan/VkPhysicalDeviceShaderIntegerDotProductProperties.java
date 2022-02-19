@@ -305,134 +305,14 @@ public class VkPhysicalDeviceShaderIntegerDotProductProperties extends Struct im
     public VkPhysicalDeviceShaderIntegerDotProductProperties sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderIntegerDotProductProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct8BitUnsignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct8BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct8BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct8BitSignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct8BitSignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct8BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct8BitMixedSignednessAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct8BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct8BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct4x8BitPackedUnsignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct4x8BitPackedUnsignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct4x8BitPackedUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct4x8BitPackedSignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct4x8BitPackedSignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct4x8BitPackedSignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct4x8BitPackedMixedSignednessAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct4x8BitPackedMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct4x8BitPackedMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct16BitUnsignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct16BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct16BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct16BitSignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct16BitSignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct16BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct16BitMixedSignednessAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct16BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct16BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct32BitUnsignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct32BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct32BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct32BitSignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct32BitSignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct32BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct32BitMixedSignednessAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct32BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct32BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct64BitUnsignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct64BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct64BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct64BitSignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct64BitSignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct64BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProduct64BitMixedSignednessAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProduct64BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProduct64BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating8BitUnsignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating8BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating8BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating8BitSignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating8BitSignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating8BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating16BitUnsignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating16BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating16BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating16BitSignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating16BitSignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating16BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating32BitUnsignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating32BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating32BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating32BitSignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating32BitSignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating32BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating64BitUnsignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating64BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating64BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating64BitSignedAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating64BitSignedAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating64BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated} field. */
-    public VkPhysicalDeviceShaderIntegerDotProductProperties integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { nintegerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPhysicalDeviceShaderIntegerDotProductProperties set(
         int sType,
-        long pNext,
-        boolean integerDotProduct8BitUnsignedAccelerated,
-        boolean integerDotProduct8BitSignedAccelerated,
-        boolean integerDotProduct8BitMixedSignednessAccelerated,
-        boolean integerDotProduct4x8BitPackedUnsignedAccelerated,
-        boolean integerDotProduct4x8BitPackedSignedAccelerated,
-        boolean integerDotProduct4x8BitPackedMixedSignednessAccelerated,
-        boolean integerDotProduct16BitUnsignedAccelerated,
-        boolean integerDotProduct16BitSignedAccelerated,
-        boolean integerDotProduct16BitMixedSignednessAccelerated,
-        boolean integerDotProduct32BitUnsignedAccelerated,
-        boolean integerDotProduct32BitSignedAccelerated,
-        boolean integerDotProduct32BitMixedSignednessAccelerated,
-        boolean integerDotProduct64BitUnsignedAccelerated,
-        boolean integerDotProduct64BitSignedAccelerated,
-        boolean integerDotProduct64BitMixedSignednessAccelerated,
-        boolean integerDotProductAccumulatingSaturating8BitUnsignedAccelerated,
-        boolean integerDotProductAccumulatingSaturating8BitSignedAccelerated,
-        boolean integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated,
-        boolean integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated,
-        boolean integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated,
-        boolean integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated,
-        boolean integerDotProductAccumulatingSaturating16BitUnsignedAccelerated,
-        boolean integerDotProductAccumulatingSaturating16BitSignedAccelerated,
-        boolean integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated,
-        boolean integerDotProductAccumulatingSaturating32BitUnsignedAccelerated,
-        boolean integerDotProductAccumulatingSaturating32BitSignedAccelerated,
-        boolean integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated,
-        boolean integerDotProductAccumulatingSaturating64BitUnsignedAccelerated,
-        boolean integerDotProductAccumulatingSaturating64BitSignedAccelerated,
-        boolean integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        integerDotProduct8BitUnsignedAccelerated(integerDotProduct8BitUnsignedAccelerated);
-        integerDotProduct8BitSignedAccelerated(integerDotProduct8BitSignedAccelerated);
-        integerDotProduct8BitMixedSignednessAccelerated(integerDotProduct8BitMixedSignednessAccelerated);
-        integerDotProduct4x8BitPackedUnsignedAccelerated(integerDotProduct4x8BitPackedUnsignedAccelerated);
-        integerDotProduct4x8BitPackedSignedAccelerated(integerDotProduct4x8BitPackedSignedAccelerated);
-        integerDotProduct4x8BitPackedMixedSignednessAccelerated(integerDotProduct4x8BitPackedMixedSignednessAccelerated);
-        integerDotProduct16BitUnsignedAccelerated(integerDotProduct16BitUnsignedAccelerated);
-        integerDotProduct16BitSignedAccelerated(integerDotProduct16BitSignedAccelerated);
-        integerDotProduct16BitMixedSignednessAccelerated(integerDotProduct16BitMixedSignednessAccelerated);
-        integerDotProduct32BitUnsignedAccelerated(integerDotProduct32BitUnsignedAccelerated);
-        integerDotProduct32BitSignedAccelerated(integerDotProduct32BitSignedAccelerated);
-        integerDotProduct32BitMixedSignednessAccelerated(integerDotProduct32BitMixedSignednessAccelerated);
-        integerDotProduct64BitUnsignedAccelerated(integerDotProduct64BitUnsignedAccelerated);
-        integerDotProduct64BitSignedAccelerated(integerDotProduct64BitSignedAccelerated);
-        integerDotProduct64BitMixedSignednessAccelerated(integerDotProduct64BitMixedSignednessAccelerated);
-        integerDotProductAccumulatingSaturating8BitUnsignedAccelerated(integerDotProductAccumulatingSaturating8BitUnsignedAccelerated);
-        integerDotProductAccumulatingSaturating8BitSignedAccelerated(integerDotProductAccumulatingSaturating8BitSignedAccelerated);
-        integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated);
-        integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated);
-        integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated);
-        integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated);
-        integerDotProductAccumulatingSaturating16BitUnsignedAccelerated(integerDotProductAccumulatingSaturating16BitUnsignedAccelerated);
-        integerDotProductAccumulatingSaturating16BitSignedAccelerated(integerDotProductAccumulatingSaturating16BitSignedAccelerated);
-        integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated);
-        integerDotProductAccumulatingSaturating32BitUnsignedAccelerated(integerDotProductAccumulatingSaturating32BitUnsignedAccelerated);
-        integerDotProductAccumulatingSaturating32BitSignedAccelerated(integerDotProductAccumulatingSaturating32BitSignedAccelerated);
-        integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated);
-        integerDotProductAccumulatingSaturating64BitUnsignedAccelerated(integerDotProductAccumulatingSaturating64BitUnsignedAccelerated);
-        integerDotProductAccumulatingSaturating64BitSignedAccelerated(integerDotProductAccumulatingSaturating64BitSignedAccelerated);
-        integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated);
 
         return this;
     }
@@ -631,66 +511,6 @@ public class VkPhysicalDeviceShaderIntegerDotProductProperties extends Struct im
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkPhysicalDeviceShaderIntegerDotProductProperties.PNEXT, value); }
-    /** Unsafe version of {@link #integerDotProduct8BitUnsignedAccelerated(boolean) integerDotProduct8BitUnsignedAccelerated}. */
-    public static void nintegerDotProduct8BitUnsignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT8BITUNSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct8BitSignedAccelerated(boolean) integerDotProduct8BitSignedAccelerated}. */
-    public static void nintegerDotProduct8BitSignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT8BITSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct8BitMixedSignednessAccelerated(boolean) integerDotProduct8BitMixedSignednessAccelerated}. */
-    public static void nintegerDotProduct8BitMixedSignednessAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT8BITMIXEDSIGNEDNESSACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct4x8BitPackedUnsignedAccelerated(boolean) integerDotProduct4x8BitPackedUnsignedAccelerated}. */
-    public static void nintegerDotProduct4x8BitPackedUnsignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT4X8BITPACKEDUNSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct4x8BitPackedSignedAccelerated(boolean) integerDotProduct4x8BitPackedSignedAccelerated}. */
-    public static void nintegerDotProduct4x8BitPackedSignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT4X8BITPACKEDSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct4x8BitPackedMixedSignednessAccelerated(boolean) integerDotProduct4x8BitPackedMixedSignednessAccelerated}. */
-    public static void nintegerDotProduct4x8BitPackedMixedSignednessAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT4X8BITPACKEDMIXEDSIGNEDNESSACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct16BitUnsignedAccelerated(boolean) integerDotProduct16BitUnsignedAccelerated}. */
-    public static void nintegerDotProduct16BitUnsignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT16BITUNSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct16BitSignedAccelerated(boolean) integerDotProduct16BitSignedAccelerated}. */
-    public static void nintegerDotProduct16BitSignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT16BITSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct16BitMixedSignednessAccelerated(boolean) integerDotProduct16BitMixedSignednessAccelerated}. */
-    public static void nintegerDotProduct16BitMixedSignednessAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT16BITMIXEDSIGNEDNESSACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct32BitUnsignedAccelerated(boolean) integerDotProduct32BitUnsignedAccelerated}. */
-    public static void nintegerDotProduct32BitUnsignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT32BITUNSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct32BitSignedAccelerated(boolean) integerDotProduct32BitSignedAccelerated}. */
-    public static void nintegerDotProduct32BitSignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT32BITSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct32BitMixedSignednessAccelerated(boolean) integerDotProduct32BitMixedSignednessAccelerated}. */
-    public static void nintegerDotProduct32BitMixedSignednessAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT32BITMIXEDSIGNEDNESSACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct64BitUnsignedAccelerated(boolean) integerDotProduct64BitUnsignedAccelerated}. */
-    public static void nintegerDotProduct64BitUnsignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT64BITUNSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct64BitSignedAccelerated(boolean) integerDotProduct64BitSignedAccelerated}. */
-    public static void nintegerDotProduct64BitSignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT64BITSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProduct64BitMixedSignednessAccelerated(boolean) integerDotProduct64BitMixedSignednessAccelerated}. */
-    public static void nintegerDotProduct64BitMixedSignednessAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCT64BITMIXEDSIGNEDNESSACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating8BitUnsignedAccelerated(boolean) integerDotProductAccumulatingSaturating8BitUnsignedAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating8BitUnsignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITUNSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating8BitSignedAccelerated(boolean) integerDotProductAccumulatingSaturating8BitSignedAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating8BitSignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(boolean) integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING8BITMIXEDSIGNEDNESSACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(boolean) integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDUNSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(boolean) integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(boolean) integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING4X8BITPACKEDMIXEDSIGNEDNESSACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating16BitUnsignedAccelerated(boolean) integerDotProductAccumulatingSaturating16BitUnsignedAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating16BitUnsignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITUNSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating16BitSignedAccelerated(boolean) integerDotProductAccumulatingSaturating16BitSignedAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating16BitSignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(boolean) integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING16BITMIXEDSIGNEDNESSACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating32BitUnsignedAccelerated(boolean) integerDotProductAccumulatingSaturating32BitUnsignedAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating32BitUnsignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITUNSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating32BitSignedAccelerated(boolean) integerDotProductAccumulatingSaturating32BitSignedAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating32BitSignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(boolean) integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING32BITMIXEDSIGNEDNESSACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating64BitUnsignedAccelerated(boolean) integerDotProductAccumulatingSaturating64BitUnsignedAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating64BitUnsignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITUNSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating64BitSignedAccelerated(boolean) integerDotProductAccumulatingSaturating64BitSignedAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating64BitSignedAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITSIGNEDACCELERATED, value); }
-    /** Unsafe version of {@link #integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(boolean) integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated}. */
-    public static void nintegerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceShaderIntegerDotProductProperties.INTEGERDOTPRODUCTACCUMULATINGSATURATING64BITMIXEDSIGNEDNESSACCELERATED, value); }
 
     // -----------------------------------
 
@@ -833,66 +653,6 @@ public class VkPhysicalDeviceShaderIntegerDotProductProperties extends Struct im
         public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES); }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#pNext} field. */
         public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderIntegerDotProductProperties.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct8BitUnsignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct8BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct8BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct8BitSignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct8BitSignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct8BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct8BitMixedSignednessAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct8BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct8BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct4x8BitPackedUnsignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct4x8BitPackedUnsignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct4x8BitPackedUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct4x8BitPackedSignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct4x8BitPackedSignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct4x8BitPackedSignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct4x8BitPackedMixedSignednessAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct4x8BitPackedMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct4x8BitPackedMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct16BitUnsignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct16BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct16BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct16BitSignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct16BitSignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct16BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct16BitMixedSignednessAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct16BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct16BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct32BitUnsignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct32BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct32BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct32BitSignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct32BitSignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct32BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct32BitMixedSignednessAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct32BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct32BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct64BitUnsignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct64BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct64BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct64BitSignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct64BitSignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct64BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct64BitMixedSignednessAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProduct64BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct64BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating8BitUnsignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating8BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating8BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating8BitSignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating8BitSignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating8BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating16BitUnsignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating16BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating16BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating16BitSignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating16BitSignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating16BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating32BitUnsignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating32BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating32BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating32BitSignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating32BitSignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating32BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating64BitUnsignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating64BitUnsignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating64BitUnsignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating64BitSignedAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating64BitSignedAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating64BitSignedAccelerated(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated} field. */
-        public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(address(), value ? 1 : 0); return this; }
 
     }
 

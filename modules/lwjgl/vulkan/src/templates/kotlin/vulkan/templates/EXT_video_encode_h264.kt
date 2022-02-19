@@ -25,7 +25,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
             <dd>39</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>3</dd>
+            <dd>5</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -43,7 +43,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-12-08</dd>
+            <dd>2022-02-10</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -66,7 +66,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VIDEO_ENCODE_H264_SPEC_VERSION".."3"
+        "EXT_VIDEO_ENCODE_H264_SPEC_VERSION".."5"
     )
 
     StringConstant(
@@ -88,7 +88,8 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         "STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT".."1000038007",
         "STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT".."1000038008",
         "STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT".."1000038009",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT".."1000038010"
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT".."1000038010",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT".."1000038011"
     )
 
     EnumConstant(
@@ -103,31 +104,55 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
 
         <h5>Description</h5>
         <ul>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_DIRECT_8X8_INFERENCE_BIT_EXT reports if enabling direct_8x8_inference_flag in StdVideoH264SpsFlags is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_SEPARATE_COLOUR_PLANE_BIT_EXT reports if enabling separate_colour_plane_flag in StdVideoH264SpsFlags is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_QPPRIME_Y_ZERO_TRANSFORM_BYPASS_BIT_EXT reports if enabling qpprime_y_zero_transform_bypass_flag in StdVideoH264SpsFlags is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_SCALING_LISTS_BIT_EXT reports if enabling seq_scaling_matrix_present_flag in StdVideoH264SpsFlags or pic_scaling_matrix_present_flag in StdVideoH264PpsFlags are supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_HRD_COMPLIANCE_BIT_EXT reports if the implementation guarantees generating a HRD compliant bitstream if nal_hrd_parameters_present_flag or vcl_hrd_parameters_present_flag are enabled in StdVideoH264SpsVuiFlags.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_CHROMA_QP_OFFSET_BIT_EXT reports if setting non-zero chroma_qp_index_offset in StdVideoH264PictureParameterSet is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_SECOND_CHROMA_QP_OFFSET_BIT_EXT reports if setting non-zero second_chroma_qp_index_offset in StdVideoH264PictureParameterSet is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_PIC_INIT_QP_MINUS26_BIT_EXT reports if setting non-zero pic_init_qp_minus26 in StdVideoH264PictureParameterSet is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_PRED_BIT_EXT reports if enabling weighted_pred_flag in StdVideoH264PpsFlags is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BIPRED_EXPLICIT_BIT_EXT reports if using STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_EXPLICIT from StdVideoH264WeightedBipredIdc is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BIPRED_IMPLICIT_BIT_EXT reports if using STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_IMPLICIT from StdVideoH264WeightedBipredIdc is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_PRED_NO_TABLE_BIT_EXT reports that when weighted_pred_flag is enabled or STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_EXPLICIT from StdVideoH264WeightedBipredIdc is used, the implementation is able to internally decide syntax for pred_weight_table.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_TRANSFORM_8X8_BIT_EXT reports if enabling transform_8x8_mode_flag in StdVideoH264PpsFlags is supported.</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_CABAC_BIT_EXT reports if CABAC entropy coding is supported.</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_CAVLC_BIT_EXT reports if CAVLC entropy coding is supported. An implementation <b>must</b> support at least one entropy coding mode.</li>
-            <li>#VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BI_PRED_IMPLICIT_BIT_EXT reports if using weighted_bipred_idc_flag from StdVideoH264PpsFlags is supported.</li>
-            <li>#VIDEO_ENCODE_H264_CAPABILITY_TRANSFORM_8X8_BIT_EXT reports if enabling transform_8x8_mode_flag in StdVideoH264PpsFlags is supported.</li>
-            <li>#VIDEO_ENCODE_H264_CAPABILITY_CHROMA_QP_OFFSET_BIT_EXT reports if setting chroma_qp_index_offset in StdVideoH264PictureParameterSet is supported.</li>
-            <li>#VIDEO_ENCODE_H264_CAPABILITY_SECOND_CHROMA_QP_OFFSET_BIT_EXT reports if setting second_chroma_qp_index_offset in StdVideoH264PictureParameterSet is supported.</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED_BIT_EXT reports if using STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_DISABLED from StdVideoH264DisableDeblockingFilterIdc is supported.</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED_BIT_EXT reports if using STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_ENABLED from StdVideoH264DisableDeblockingFilterIdc is supported.</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT reports if using STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_PARTIAL from StdVideoH264DisableDeblockingFilterIdc is supported. An implementation <b>must</b> support at least one deblocking filter mode.</li>
-            <li>#VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT</li>
-            <li>#VIDEO_ENCODE_H264_CAPABILITY_EVENLY_DISTRIBUTED_SLICE_SIZE_BIT_EXT</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_DISABLE_DIRECT_SPATIAL_MV_PRED_BIT_EXT reports if disabling {@code StdVideoEncodeH264SliceHeaderFlags}::direct_spatial_mv_pred_flag is supported when it is present in the slice header.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT reports if encoding multiple slices per frame is supported. If not set, the implementation is only able to encode a single slice for the entire frame.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_SLICE_MB_COUNT_BIT_EXT reports support for configuring ##VkVideoEncodeH264NaluSliceEXT{@code ::mbCount} and first_mb_in_slice in StdVideoEncodeH264SliceHeader for each slice in a frame with multiple slices. If not supported, the implementation decides the number of macroblocks in each slice based on ##VkVideoEncodeH264VclFrameInfoEXT{@code ::naluSliceEntryCount}.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_ROW_UNALIGNED_SLICE_BIT_EXT reports that each slice in a frame with multiple slices may begin or finish at any offset in a macroblock row. If not supported, all slices in the frame <b>must</b> begin at the start of a macroblock row (and hence each slice <b>must</b> finish at the end of a macroblock row).</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_EXT reports that when #VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT is supported and a frame is encoded with multiple slices, the implementation allows encoding each slice with a different {@code StdVideoEncodeH264SliceHeader}::slice_type. If not supported, all slices of the frame <b>must</b> be encoded with the same {@code slice_type} which corresponds to the picture type of the frame. For example, all slices of a P-frame would be encoded as P-slices.</li>
         </ul>
         """,
 
-        "VIDEO_ENCODE_H264_CAPABILITY_CABAC_BIT_EXT".enum(0x00000001),
-        "VIDEO_ENCODE_H264_CAPABILITY_CAVLC_BIT_EXT".enum(0x00000002),
-        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BI_PRED_IMPLICIT_BIT_EXT".enum(0x00000004),
-        "VIDEO_ENCODE_H264_CAPABILITY_TRANSFORM_8X8_BIT_EXT".enum(0x00000008),
-        "VIDEO_ENCODE_H264_CAPABILITY_CHROMA_QP_OFFSET_BIT_EXT".enum(0x00000010),
-        "VIDEO_ENCODE_H264_CAPABILITY_SECOND_CHROMA_QP_OFFSET_BIT_EXT".enum(0x00000020),
-        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED_BIT_EXT".enum(0x00000040),
-        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED_BIT_EXT".enum(0x00000080),
-        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT".enum(0x00000100),
-        "VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT".enum(0x00000200),
-        "VIDEO_ENCODE_H264_CAPABILITY_EVENLY_DISTRIBUTED_SLICE_SIZE_BIT_EXT".enum(0x00000400)
+        "VIDEO_ENCODE_H264_CAPABILITY_DIRECT_8X8_INFERENCE_BIT_EXT".enum(0x00000001),
+        "VIDEO_ENCODE_H264_CAPABILITY_SEPARATE_COLOUR_PLANE_BIT_EXT".enum(0x00000002),
+        "VIDEO_ENCODE_H264_CAPABILITY_QPPRIME_Y_ZERO_TRANSFORM_BYPASS_BIT_EXT".enum(0x00000004),
+        "VIDEO_ENCODE_H264_CAPABILITY_SCALING_LISTS_BIT_EXT".enum(0x00000008),
+        "VIDEO_ENCODE_H264_CAPABILITY_HRD_COMPLIANCE_BIT_EXT".enum(0x00000010),
+        "VIDEO_ENCODE_H264_CAPABILITY_CHROMA_QP_OFFSET_BIT_EXT".enum(0x00000020),
+        "VIDEO_ENCODE_H264_CAPABILITY_SECOND_CHROMA_QP_OFFSET_BIT_EXT".enum(0x00000040),
+        "VIDEO_ENCODE_H264_CAPABILITY_PIC_INIT_QP_MINUS26_BIT_EXT".enum(0x00000080),
+        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_PRED_BIT_EXT".enum(0x00000100),
+        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BIPRED_EXPLICIT_BIT_EXT".enum(0x00000200),
+        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BIPRED_IMPLICIT_BIT_EXT".enum(0x00000400),
+        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_PRED_NO_TABLE_BIT_EXT".enum(0x00000800),
+        "VIDEO_ENCODE_H264_CAPABILITY_TRANSFORM_8X8_BIT_EXT".enum(0x00001000),
+        "VIDEO_ENCODE_H264_CAPABILITY_CABAC_BIT_EXT".enum(0x00002000),
+        "VIDEO_ENCODE_H264_CAPABILITY_CAVLC_BIT_EXT".enum(0x00004000),
+        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED_BIT_EXT".enum(0x00008000),
+        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED_BIT_EXT".enum(0x00010000),
+        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT".enum(0x00020000),
+        "VIDEO_ENCODE_H264_CAPABILITY_DISABLE_DIRECT_SPATIAL_MV_PRED_BIT_EXT".enum(0x00040000),
+        "VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT".enum(0x00080000),
+        "VIDEO_ENCODE_H264_CAPABILITY_SLICE_MB_COUNT_BIT_EXT".enum(0x00100000),
+        "VIDEO_ENCODE_H264_CAPABILITY_ROW_UNALIGNED_SLICE_BIT_EXT".enum(0x00200000),
+        "VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_EXT".enum(0x00400000)
     )
 
     EnumConstant(
@@ -142,6 +167,8 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         </ul>
 
         An implementation <b>must</b> support at least one of #VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT or #VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT.
+
+        If #VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT is not supported, the following two additional restrictions apply for frames encoded with multiple slices. First, all frame slices <b>must</b> have the same pRefList0ModOperations and the same pRefList1ModOperations. Second, the order in which slices appear in ##VkVideoEncodeH264VclFrameInfoEXT{@code ::pNaluSliceEntries} or in the command buffer <b>must</b> match the placement order of the slices in the frame.
         """,
 
         "VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT".enum(0x00000001),

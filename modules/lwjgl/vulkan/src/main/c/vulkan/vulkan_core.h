@@ -72,7 +72,7 @@ extern "C" {
 #define VK_API_VERSION_1_0 VK_MAKE_API_VERSION(0, 1, 0, 0)// Patch version should always be set to 0
 
 // Version of this file
-#define VK_HEADER_VERSION 205
+#define VK_HEADER_VERSION 206
 
 // Complete version of this file
 #define VK_HEADER_VERSION_COMPLETE VK_MAKE_API_VERSION(0, 1, 3, VK_HEADER_VERSION)
@@ -523,6 +523,9 @@ typedef enum VkStructureType {
     VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT = 1000038010,
 #endif
 #ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT = 1000038011,
+#endif
+#ifdef VK_ENABLE_BETA_EXTENSIONS
     VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT = 1000039000,
 #endif
 #ifdef VK_ENABLE_BETA_EXTENSIONS
@@ -871,6 +874,9 @@ typedef enum VkStructureType {
 #endif
 #ifdef VK_ENABLE_BETA_EXTENSIONS
     VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR = 1000299002,
+#endif
+#ifdef VK_ENABLE_BETA_EXTENSIONS
+    VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR = 1000299003,
 #endif
     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV = 1000300000,
     VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV = 1000300001,
@@ -6260,10 +6266,6 @@ typedef enum VkToolPurposeFlagBits {
     VK_TOOL_PURPOSE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
 } VkToolPurposeFlagBits;
 typedef VkFlags VkToolPurposeFlags;
-
-typedef enum VkPrivateDataSlotCreateFlagBits {
-    VK_PRIVATE_DATA_SLOT_CREATE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
-} VkPrivateDataSlotCreateFlagBits;
 typedef VkFlags VkPrivateDataSlotCreateFlags;
 typedef VkFlags64 VkPipelineStageFlags2;
 
@@ -13127,8 +13129,6 @@ typedef VkPrivateDataSlot VkPrivateDataSlotEXT;
 #define VK_EXT_PRIVATE_DATA_SPEC_VERSION  1
 #define VK_EXT_PRIVATE_DATA_EXTENSION_NAME "VK_EXT_private_data"
 typedef VkPrivateDataSlotCreateFlags VkPrivateDataSlotCreateFlagsEXT;
-
-typedef VkPrivateDataSlotCreateFlagBits VkPrivateDataSlotCreateFlagBitsEXT;
 
 typedef VkPhysicalDevicePrivateDataFeatures VkPhysicalDevicePrivateDataFeaturesEXT;
 

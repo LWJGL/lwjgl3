@@ -1990,11 +1990,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         <h5>Description</h5>
         This command sets the cull mode for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_CULL_MODE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::cullMode} value used to create the currently active pipeline.
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
@@ -2043,11 +2038,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         <h5>Description</h5>
         This command sets the front face orientation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_FRONT_FACE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::frontFace} value used to create the currently active pipeline.
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
@@ -2095,11 +2085,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 
         <h5>Description</h5>
         This command sets the primitive topology for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_PRIMITIVE_TOPOLOGY set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineInputAssemblyStateCreateInfo{@code ::topology} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2153,7 +2138,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
             <li>{@code viewportCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiViewport">multiple viewports</a> feature is not enabled, {@code viewportCount} <b>must</b> be 1</li>
             <li>{@code commandBuffer} <b>must</b> not have ##VkCommandBufferInheritanceViewportScissorInfoNV{@code ::viewportScissor2D} enabled</li>
@@ -2216,7 +2200,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
             <li>{@code scissorCount} <b>must</b> be between 1 and ##VkPhysicalDeviceLimits{@code ::maxViewports}, inclusive</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiViewport">multiple viewports</a> feature is not enabled, {@code scissorCount} <b>must</b> be 1</li>
             <li>The {@code x} and {@code y} members of {@code offset} member of any element of {@code pScissors} <b>must</b> be greater than or equal to 0</li>
@@ -2364,11 +2347,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         <h5>Description</h5>
         This command sets the depth test enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_TEST_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthTestEnable} value used to create the currently active pipeline.
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
@@ -2416,11 +2394,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         <h5>Description</h5>
         This command sets the depth write enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_WRITE_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthWriteEnable} value used to create the currently active pipeline.
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
@@ -2467,11 +2440,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 
         <h5>Description</h5>
         This command sets the depth comparison operator for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_COMPARE_OP set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthCompareOp} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2521,11 +2489,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         <h5>Description</h5>
         This command sets the depth bounds enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthBoundsTestEnable} value used to create the currently active pipeline.
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
@@ -2572,11 +2535,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 
         <h5>Description</h5>
         This command sets the stencil test enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_TEST_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::stencilTestEnable} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2632,11 +2590,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 
         <h5>Description</h5>
         This command sets the stencil operation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_OP set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineDepthStencilStateCreateInfo{@code ::failOp}, {@code passOp}, {@code depthFailOp}, and {@code compareOp} values used to create the currently active pipeline, for both front and back faces.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature <b>must</b> be enabled</li>
-        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2697,11 +2650,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         <h5>Description</h5>
         This command sets the discard enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::rasterizerDiscardEnable} value used to create the currently active pipeline.
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState2">extendedDynamicState2</a> feature <b>must</b> be enabled</li>
-        </ul>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
@@ -2749,11 +2697,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         <h5>Description</h5>
         This command sets the depth bias enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BIAS_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::depthBiasEnable} value used to create the currently active pipeline.
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState2">extendedDynamicState2</a> feature <b>must</b> be enabled</li>
-        </ul>
-
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
@@ -2800,11 +2743,6 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 
         <h5>Description</h5>
         This command sets the primitive restart enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineInputAssemblyStateCreateInfo{@code ::primitiveRestartEnable} value used to create the currently active pipeline.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState2">extendedDynamicState2</a> feature <b>must</b> be enabled</li>
-        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

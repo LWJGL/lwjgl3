@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264CapabilitiesEXT}, {@link VkVideoDecodeH265CapabilitiesEXT}, {@link VkVideoEncodeH264CapabilitiesEXT}, or {@link VkVideoEncodeH265CapabilitiesEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264CapabilitiesEXT}, {@link VkVideoDecodeH265CapabilitiesEXT}, or {@link VkVideoEncodeCapabilitiesKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -147,10 +147,8 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
     public VkVideoCapabilitiesKHR pNext(VkVideoDecodeH264CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH265CapabilitiesEXT} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoDecodeH265CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH264CapabilitiesEXT} value to the {@code pNext} chain. */
-    public VkVideoCapabilitiesKHR pNext(VkVideoEncodeH264CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH265CapabilitiesEXT} value to the {@code pNext} chain. */
-    public VkVideoCapabilitiesKHR pNext(VkVideoEncodeH265CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeCapabilitiesKHR} value to the {@code pNext} chain. */
+    public VkVideoCapabilitiesKHR pNext(VkVideoEncodeCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkVideoCapabilitiesKHR set(
@@ -390,10 +388,8 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeH264CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH265CapabilitiesEXT} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeH265CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH264CapabilitiesEXT} value to the {@code pNext} chain. */
-        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeH264CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH265CapabilitiesEXT} value to the {@code pNext} chain. */
-        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeH265CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeCapabilitiesKHR} value to the {@code pNext} chain. */
+        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

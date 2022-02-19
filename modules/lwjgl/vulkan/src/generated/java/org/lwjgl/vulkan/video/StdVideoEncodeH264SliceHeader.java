@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -22,6 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct StdVideoEncodeH264SliceHeader {
  *     {@link StdVideoEncodeH264SliceHeaderFlags StdVideoEncodeH264SliceHeaderFlags} flags;
+ *     uint32_t first_mb_in_slice;
  *     StdVideoH264SliceType slice_type;
  *     uint8_t seq_parameter_set_id;
  *     uint8_t pic_parameter_set_id;
@@ -32,7 +32,6 @@ import static org.lwjgl.system.MemoryStack.*;
  *     StdVideoH264DisableDeblockingFilterIdc disable_deblocking_filter_idc;
  *     int8_t slice_alpha_c0_offset_div2;
  *     int8_t slice_beta_offset_div2;
- *     {@link StdVideoEncodeH264RefMemMgmtCtrlOperations StdVideoEncodeH264RefMemMgmtCtrlOperations} * pMemMgmtCtrlOperations;
  * }</code></pre>
  */
 public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResource {
@@ -46,6 +45,7 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
     /** The struct member offsets. */
     public static final int
         FLAGS,
+        FIRST_MB_IN_SLICE,
         SLICE_TYPE,
         SEQ_PARAMETER_SET_ID,
         PIC_PARAMETER_SET_ID,
@@ -55,12 +55,12 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         CABAC_INIT_IDC,
         DISABLE_DEBLOCKING_FILTER_IDC,
         SLICE_ALPHA_C0_OFFSET_DIV2,
-        SLICE_BETA_OFFSET_DIV2,
-        PMEMMGMTCTRLOPERATIONS;
+        SLICE_BETA_OFFSET_DIV2;
 
     static {
         Layout layout = __struct(
             __member(StdVideoEncodeH264SliceHeaderFlags.SIZEOF, StdVideoEncodeH264SliceHeaderFlags.ALIGNOF),
+            __member(4),
             __member(4),
             __member(1),
             __member(1),
@@ -70,25 +70,24 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
             __member(4),
             __member(4),
             __member(1),
-            __member(1),
-            __member(POINTER_SIZE)
+            __member(1)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
         FLAGS = layout.offsetof(0);
-        SLICE_TYPE = layout.offsetof(1);
-        SEQ_PARAMETER_SET_ID = layout.offsetof(2);
-        PIC_PARAMETER_SET_ID = layout.offsetof(3);
-        IDR_PIC_ID = layout.offsetof(4);
-        NUM_REF_IDX_L0_ACTIVE_MINUS1 = layout.offsetof(5);
-        NUM_REF_IDX_L1_ACTIVE_MINUS1 = layout.offsetof(6);
-        CABAC_INIT_IDC = layout.offsetof(7);
-        DISABLE_DEBLOCKING_FILTER_IDC = layout.offsetof(8);
-        SLICE_ALPHA_C0_OFFSET_DIV2 = layout.offsetof(9);
-        SLICE_BETA_OFFSET_DIV2 = layout.offsetof(10);
-        PMEMMGMTCTRLOPERATIONS = layout.offsetof(11);
+        FIRST_MB_IN_SLICE = layout.offsetof(1);
+        SLICE_TYPE = layout.offsetof(2);
+        SEQ_PARAMETER_SET_ID = layout.offsetof(3);
+        PIC_PARAMETER_SET_ID = layout.offsetof(4);
+        IDR_PIC_ID = layout.offsetof(5);
+        NUM_REF_IDX_L0_ACTIVE_MINUS1 = layout.offsetof(6);
+        NUM_REF_IDX_L1_ACTIVE_MINUS1 = layout.offsetof(7);
+        CABAC_INIT_IDC = layout.offsetof(8);
+        DISABLE_DEBLOCKING_FILTER_IDC = layout.offsetof(9);
+        SLICE_ALPHA_C0_OFFSET_DIV2 = layout.offsetof(10);
+        SLICE_BETA_OFFSET_DIV2 = layout.offsetof(11);
     }
 
     /**
@@ -106,6 +105,9 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
 
     /** @return a {@link StdVideoEncodeH264SliceHeaderFlags} view of the {@code flags} field. */
     public StdVideoEncodeH264SliceHeaderFlags flags() { return nflags(address()); }
+    /** @return the value of the {@code first_mb_in_slice} field. */
+    @NativeType("uint32_t")
+    public int first_mb_in_slice() { return nfirst_mb_in_slice(address()); }
     /** @return the value of the {@code slice_type} field. */
     @NativeType("StdVideoH264SliceType")
     public int slice_type() { return nslice_type(address()); }
@@ -136,14 +138,13 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
     /** @return the value of the {@code slice_beta_offset_div2} field. */
     @NativeType("int8_t")
     public byte slice_beta_offset_div2() { return nslice_beta_offset_div2(address()); }
-    /** @return a {@link StdVideoEncodeH264RefMemMgmtCtrlOperations} view of the struct pointed to by the {@code pMemMgmtCtrlOperations} field. */
-    @NativeType("StdVideoEncodeH264RefMemMgmtCtrlOperations *")
-    public StdVideoEncodeH264RefMemMgmtCtrlOperations pMemMgmtCtrlOperations() { return npMemMgmtCtrlOperations(address()); }
 
     /** Copies the specified {@link StdVideoEncodeH264SliceHeaderFlags} to the {@code flags} field. */
     public StdVideoEncodeH264SliceHeader flags(StdVideoEncodeH264SliceHeaderFlags value) { nflags(address(), value); return this; }
     /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
     public StdVideoEncodeH264SliceHeader flags(java.util.function.Consumer<StdVideoEncodeH264SliceHeaderFlags> consumer) { consumer.accept(flags()); return this; }
+    /** Sets the specified value to the {@code first_mb_in_slice} field. */
+    public StdVideoEncodeH264SliceHeader first_mb_in_slice(@NativeType("uint32_t") int value) { nfirst_mb_in_slice(address(), value); return this; }
     /** Sets the specified value to the {@code slice_type} field. */
     public StdVideoEncodeH264SliceHeader slice_type(@NativeType("StdVideoH264SliceType") int value) { nslice_type(address(), value); return this; }
     /** Sets the specified value to the {@code seq_parameter_set_id} field. */
@@ -164,12 +165,11 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
     public StdVideoEncodeH264SliceHeader slice_alpha_c0_offset_div2(@NativeType("int8_t") byte value) { nslice_alpha_c0_offset_div2(address(), value); return this; }
     /** Sets the specified value to the {@code slice_beta_offset_div2} field. */
     public StdVideoEncodeH264SliceHeader slice_beta_offset_div2(@NativeType("int8_t") byte value) { nslice_beta_offset_div2(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoEncodeH264RefMemMgmtCtrlOperations} to the {@code pMemMgmtCtrlOperations} field. */
-    public StdVideoEncodeH264SliceHeader pMemMgmtCtrlOperations(@NativeType("StdVideoEncodeH264RefMemMgmtCtrlOperations *") StdVideoEncodeH264RefMemMgmtCtrlOperations value) { npMemMgmtCtrlOperations(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoEncodeH264SliceHeader set(
         StdVideoEncodeH264SliceHeaderFlags flags,
+        int first_mb_in_slice,
         int slice_type,
         byte seq_parameter_set_id,
         byte pic_parameter_set_id,
@@ -179,10 +179,10 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         int cabac_init_idc,
         int disable_deblocking_filter_idc,
         byte slice_alpha_c0_offset_div2,
-        byte slice_beta_offset_div2,
-        StdVideoEncodeH264RefMemMgmtCtrlOperations pMemMgmtCtrlOperations
+        byte slice_beta_offset_div2
     ) {
         flags(flags);
+        first_mb_in_slice(first_mb_in_slice);
         slice_type(slice_type);
         seq_parameter_set_id(seq_parameter_set_id);
         pic_parameter_set_id(pic_parameter_set_id);
@@ -193,7 +193,6 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         disable_deblocking_filter_idc(disable_deblocking_filter_idc);
         slice_alpha_c0_offset_div2(slice_alpha_c0_offset_div2);
         slice_beta_offset_div2(slice_beta_offset_div2);
-        pMemMgmtCtrlOperations(pMemMgmtCtrlOperations);
 
         return this;
     }
@@ -325,6 +324,8 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
 
     /** Unsafe version of {@link #flags}. */
     public static StdVideoEncodeH264SliceHeaderFlags nflags(long struct) { return StdVideoEncodeH264SliceHeaderFlags.create(struct + StdVideoEncodeH264SliceHeader.FLAGS); }
+    /** Unsafe version of {@link #first_mb_in_slice}. */
+    public static int nfirst_mb_in_slice(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264SliceHeader.FIRST_MB_IN_SLICE); }
     /** Unsafe version of {@link #slice_type}. */
     public static int nslice_type(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264SliceHeader.SLICE_TYPE); }
     /** Unsafe version of {@link #seq_parameter_set_id}. */
@@ -345,11 +346,11 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
     public static byte nslice_alpha_c0_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_ALPHA_C0_OFFSET_DIV2); }
     /** Unsafe version of {@link #slice_beta_offset_div2}. */
     public static byte nslice_beta_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2); }
-    /** Unsafe version of {@link #pMemMgmtCtrlOperations}. */
-    public static StdVideoEncodeH264RefMemMgmtCtrlOperations npMemMgmtCtrlOperations(long struct) { return StdVideoEncodeH264RefMemMgmtCtrlOperations.create(memGetAddress(struct + StdVideoEncodeH264SliceHeader.PMEMMGMTCTRLOPERATIONS)); }
 
     /** Unsafe version of {@link #flags(StdVideoEncodeH264SliceHeaderFlags) flags}. */
     public static void nflags(long struct, StdVideoEncodeH264SliceHeaderFlags value) { memCopy(value.address(), struct + StdVideoEncodeH264SliceHeader.FLAGS, StdVideoEncodeH264SliceHeaderFlags.SIZEOF); }
+    /** Unsafe version of {@link #first_mb_in_slice(int) first_mb_in_slice}. */
+    public static void nfirst_mb_in_slice(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264SliceHeader.FIRST_MB_IN_SLICE, value); }
     /** Unsafe version of {@link #slice_type(int) slice_type}. */
     public static void nslice_type(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264SliceHeader.SLICE_TYPE, value); }
     /** Unsafe version of {@link #seq_parameter_set_id(byte) seq_parameter_set_id}. */
@@ -370,19 +371,6 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
     public static void nslice_alpha_c0_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_ALPHA_C0_OFFSET_DIV2, value); }
     /** Unsafe version of {@link #slice_beta_offset_div2(byte) slice_beta_offset_div2}. */
     public static void nslice_beta_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2, value); }
-    /** Unsafe version of {@link #pMemMgmtCtrlOperations(StdVideoEncodeH264RefMemMgmtCtrlOperations) pMemMgmtCtrlOperations}. */
-    public static void npMemMgmtCtrlOperations(long struct, StdVideoEncodeH264RefMemMgmtCtrlOperations value) { memPutAddress(struct + StdVideoEncodeH264SliceHeader.PMEMMGMTCTRLOPERATIONS, value.address()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        long pMemMgmtCtrlOperations = memGetAddress(struct + StdVideoEncodeH264SliceHeader.PMEMMGMTCTRLOPERATIONS);
-        check(pMemMgmtCtrlOperations);
-        StdVideoEncodeH264RefMemMgmtCtrlOperations.validate(pMemMgmtCtrlOperations);
-    }
 
     // -----------------------------------
 
@@ -424,6 +412,9 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
 
         /** @return a {@link StdVideoEncodeH264SliceHeaderFlags} view of the {@code flags} field. */
         public StdVideoEncodeH264SliceHeaderFlags flags() { return StdVideoEncodeH264SliceHeader.nflags(address()); }
+        /** @return the value of the {@code first_mb_in_slice} field. */
+        @NativeType("uint32_t")
+        public int first_mb_in_slice() { return StdVideoEncodeH264SliceHeader.nfirst_mb_in_slice(address()); }
         /** @return the value of the {@code slice_type} field. */
         @NativeType("StdVideoH264SliceType")
         public int slice_type() { return StdVideoEncodeH264SliceHeader.nslice_type(address()); }
@@ -454,14 +445,13 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         /** @return the value of the {@code slice_beta_offset_div2} field. */
         @NativeType("int8_t")
         public byte slice_beta_offset_div2() { return StdVideoEncodeH264SliceHeader.nslice_beta_offset_div2(address()); }
-        /** @return a {@link StdVideoEncodeH264RefMemMgmtCtrlOperations} view of the struct pointed to by the {@code pMemMgmtCtrlOperations} field. */
-        @NativeType("StdVideoEncodeH264RefMemMgmtCtrlOperations *")
-        public StdVideoEncodeH264RefMemMgmtCtrlOperations pMemMgmtCtrlOperations() { return StdVideoEncodeH264SliceHeader.npMemMgmtCtrlOperations(address()); }
 
         /** Copies the specified {@link StdVideoEncodeH264SliceHeaderFlags} to the {@code flags} field. */
         public StdVideoEncodeH264SliceHeader.Buffer flags(StdVideoEncodeH264SliceHeaderFlags value) { StdVideoEncodeH264SliceHeader.nflags(address(), value); return this; }
         /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
         public StdVideoEncodeH264SliceHeader.Buffer flags(java.util.function.Consumer<StdVideoEncodeH264SliceHeaderFlags> consumer) { consumer.accept(flags()); return this; }
+        /** Sets the specified value to the {@code first_mb_in_slice} field. */
+        public StdVideoEncodeH264SliceHeader.Buffer first_mb_in_slice(@NativeType("uint32_t") int value) { StdVideoEncodeH264SliceHeader.nfirst_mb_in_slice(address(), value); return this; }
         /** Sets the specified value to the {@code slice_type} field. */
         public StdVideoEncodeH264SliceHeader.Buffer slice_type(@NativeType("StdVideoH264SliceType") int value) { StdVideoEncodeH264SliceHeader.nslice_type(address(), value); return this; }
         /** Sets the specified value to the {@code seq_parameter_set_id} field. */
@@ -482,8 +472,6 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         public StdVideoEncodeH264SliceHeader.Buffer slice_alpha_c0_offset_div2(@NativeType("int8_t") byte value) { StdVideoEncodeH264SliceHeader.nslice_alpha_c0_offset_div2(address(), value); return this; }
         /** Sets the specified value to the {@code slice_beta_offset_div2} field. */
         public StdVideoEncodeH264SliceHeader.Buffer slice_beta_offset_div2(@NativeType("int8_t") byte value) { StdVideoEncodeH264SliceHeader.nslice_beta_offset_div2(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoEncodeH264RefMemMgmtCtrlOperations} to the {@code pMemMgmtCtrlOperations} field. */
-        public StdVideoEncodeH264SliceHeader.Buffer pMemMgmtCtrlOperations(@NativeType("StdVideoEncodeH264RefMemMgmtCtrlOperations *") StdVideoEncodeH264RefMemMgmtCtrlOperations value) { StdVideoEncodeH264SliceHeader.npMemMgmtCtrlOperations(address(), value); return this; }
 
     }
 

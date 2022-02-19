@@ -20,11 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct StdVideoEncodeH264SliceHeaderFlags {
- *     uint32_t idr_flag : 1;
- *     uint32_t is_reference_flag : 1;
+ *     uint32_t direct_spatial_mv_pred_flag : 1;
  *     uint32_t num_ref_idx_active_override_flag : 1;
  *     uint32_t no_output_of_prior_pics_flag : 1;
- *     uint32_t long_term_reference_flag : 1;
  *     uint32_t adaptive_ref_pic_marking_mode_flag : 1;
  *     uint32_t no_prior_references_available_flag : 1;
  * }</code></pre>
@@ -65,21 +63,15 @@ public class StdVideoEncodeH264SliceHeaderFlags extends Struct implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code idr_flag} field. */
+    /** @return the value of the {@code direct_spatial_mv_pred_flag} field. */
     @NativeType("uint32_t")
-    public boolean idr_flag() { return nidr_flag(address()) != 0; }
-    /** @return the value of the {@code is_reference_flag} field. */
-    @NativeType("uint32_t")
-    public boolean is_reference_flag() { return nis_reference_flag(address()) != 0; }
+    public boolean direct_spatial_mv_pred_flag() { return ndirect_spatial_mv_pred_flag(address()) != 0; }
     /** @return the value of the {@code num_ref_idx_active_override_flag} field. */
     @NativeType("uint32_t")
     public boolean num_ref_idx_active_override_flag() { return nnum_ref_idx_active_override_flag(address()) != 0; }
     /** @return the value of the {@code no_output_of_prior_pics_flag} field. */
     @NativeType("uint32_t")
     public boolean no_output_of_prior_pics_flag() { return nno_output_of_prior_pics_flag(address()) != 0; }
-    /** @return the value of the {@code long_term_reference_flag} field. */
-    @NativeType("uint32_t")
-    public boolean long_term_reference_flag() { return nlong_term_reference_flag(address()) != 0; }
     /** @return the value of the {@code adaptive_ref_pic_marking_mode_flag} field. */
     @NativeType("uint32_t")
     public boolean adaptive_ref_pic_marking_mode_flag() { return nadaptive_ref_pic_marking_mode_flag(address()) != 0; }
@@ -87,16 +79,12 @@ public class StdVideoEncodeH264SliceHeaderFlags extends Struct implements Native
     @NativeType("uint32_t")
     public boolean no_prior_references_available_flag() { return nno_prior_references_available_flag(address()) != 0; }
 
-    /** Sets the specified value to the {@code idr_flag} field. */
-    public StdVideoEncodeH264SliceHeaderFlags idr_flag(@NativeType("uint32_t") boolean value) { nidr_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code is_reference_flag} field. */
-    public StdVideoEncodeH264SliceHeaderFlags is_reference_flag(@NativeType("uint32_t") boolean value) { nis_reference_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code direct_spatial_mv_pred_flag} field. */
+    public StdVideoEncodeH264SliceHeaderFlags direct_spatial_mv_pred_flag(@NativeType("uint32_t") boolean value) { ndirect_spatial_mv_pred_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code num_ref_idx_active_override_flag} field. */
     public StdVideoEncodeH264SliceHeaderFlags num_ref_idx_active_override_flag(@NativeType("uint32_t") boolean value) { nnum_ref_idx_active_override_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code no_output_of_prior_pics_flag} field. */
     public StdVideoEncodeH264SliceHeaderFlags no_output_of_prior_pics_flag(@NativeType("uint32_t") boolean value) { nno_output_of_prior_pics_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code long_term_reference_flag} field. */
-    public StdVideoEncodeH264SliceHeaderFlags long_term_reference_flag(@NativeType("uint32_t") boolean value) { nlong_term_reference_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code adaptive_ref_pic_marking_mode_flag} field. */
     public StdVideoEncodeH264SliceHeaderFlags adaptive_ref_pic_marking_mode_flag(@NativeType("uint32_t") boolean value) { nadaptive_ref_pic_marking_mode_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code no_prior_references_available_flag} field. */
@@ -104,19 +92,15 @@ public class StdVideoEncodeH264SliceHeaderFlags extends Struct implements Native
 
     /** Initializes this struct with the specified values. */
     public StdVideoEncodeH264SliceHeaderFlags set(
-        boolean idr_flag,
-        boolean is_reference_flag,
+        boolean direct_spatial_mv_pred_flag,
         boolean num_ref_idx_active_override_flag,
         boolean no_output_of_prior_pics_flag,
-        boolean long_term_reference_flag,
         boolean adaptive_ref_pic_marking_mode_flag,
         boolean no_prior_references_available_flag
     ) {
-        idr_flag(idr_flag);
-        is_reference_flag(is_reference_flag);
+        direct_spatial_mv_pred_flag(direct_spatial_mv_pred_flag);
         num_ref_idx_active_override_flag(num_ref_idx_active_override_flag);
         no_output_of_prior_pics_flag(no_output_of_prior_pics_flag);
-        long_term_reference_flag(long_term_reference_flag);
         adaptive_ref_pic_marking_mode_flag(adaptive_ref_pic_marking_mode_flag);
         no_prior_references_available_flag(no_prior_references_available_flag);
 
@@ -249,36 +233,28 @@ public class StdVideoEncodeH264SliceHeaderFlags extends Struct implements Native
     // -----------------------------------
 
     public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264SliceHeaderFlags.BITFIELD0); }
-    /** Unsafe version of {@link #idr_flag}. */
-    public static int nidr_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
-    /** Unsafe version of {@link #is_reference_flag}. */
-    public static int nis_reference_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
+    /** Unsafe version of {@link #direct_spatial_mv_pred_flag}. */
+    public static int ndirect_spatial_mv_pred_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #num_ref_idx_active_override_flag}. */
-    public static int nnum_ref_idx_active_override_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
+    public static int nnum_ref_idx_active_override_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
     /** Unsafe version of {@link #no_output_of_prior_pics_flag}. */
-    public static int nno_output_of_prior_pics_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
-    /** Unsafe version of {@link #long_term_reference_flag}. */
-    public static int nlong_term_reference_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
+    public static int nno_output_of_prior_pics_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
     /** Unsafe version of {@link #adaptive_ref_pic_marking_mode_flag}. */
-    public static int nadaptive_ref_pic_marking_mode_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_20) >>> 5; }
+    public static int nadaptive_ref_pic_marking_mode_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
     /** Unsafe version of {@link #no_prior_references_available_flag}. */
-    public static int nno_prior_references_available_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_40) >>> 6; }
+    public static int nno_prior_references_available_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264SliceHeaderFlags.BITFIELD0, value); }
-    /** Unsafe version of {@link #idr_flag(boolean) idr_flag}. */
-    public static void nidr_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
-    /** Unsafe version of {@link #is_reference_flag(boolean) is_reference_flag}. */
-    public static void nis_reference_flag(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
+    /** Unsafe version of {@link #direct_spatial_mv_pred_flag(boolean) direct_spatial_mv_pred_flag}. */
+    public static void ndirect_spatial_mv_pred_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #num_ref_idx_active_override_flag(boolean) num_ref_idx_active_override_flag}. */
-    public static void nnum_ref_idx_active_override_flag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
+    public static void nnum_ref_idx_active_override_flag(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
     /** Unsafe version of {@link #no_output_of_prior_pics_flag(boolean) no_output_of_prior_pics_flag}. */
-    public static void nno_output_of_prior_pics_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
-    /** Unsafe version of {@link #long_term_reference_flag(boolean) long_term_reference_flag}. */
-    public static void nlong_term_reference_flag(long struct, int value) { nbitfield0(struct, ((value << 4) & 0x00_00_00_10) | (nbitfield0(struct) & 0xFF_FF_FF_EF)); }
+    public static void nno_output_of_prior_pics_flag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
     /** Unsafe version of {@link #adaptive_ref_pic_marking_mode_flag(boolean) adaptive_ref_pic_marking_mode_flag}. */
-    public static void nadaptive_ref_pic_marking_mode_flag(long struct, int value) { nbitfield0(struct, ((value << 5) & 0x00_00_00_20) | (nbitfield0(struct) & 0xFF_FF_FF_DF)); }
+    public static void nadaptive_ref_pic_marking_mode_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
     /** Unsafe version of {@link #no_prior_references_available_flag(boolean) no_prior_references_available_flag}. */
-    public static void nno_prior_references_available_flag(long struct, int value) { nbitfield0(struct, ((value << 6) & 0x00_00_00_40) | (nbitfield0(struct) & 0xFF_FF_FF_BF)); }
+    public static void nno_prior_references_available_flag(long struct, int value) { nbitfield0(struct, ((value << 4) & 0x00_00_00_10) | (nbitfield0(struct) & 0xFF_FF_FF_EF)); }
 
     // -----------------------------------
 
@@ -318,21 +294,15 @@ public class StdVideoEncodeH264SliceHeaderFlags extends Struct implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code idr_flag} field. */
+        /** @return the value of the {@code direct_spatial_mv_pred_flag} field. */
         @NativeType("uint32_t")
-        public boolean idr_flag() { return StdVideoEncodeH264SliceHeaderFlags.nidr_flag(address()) != 0; }
-        /** @return the value of the {@code is_reference_flag} field. */
-        @NativeType("uint32_t")
-        public boolean is_reference_flag() { return StdVideoEncodeH264SliceHeaderFlags.nis_reference_flag(address()) != 0; }
+        public boolean direct_spatial_mv_pred_flag() { return StdVideoEncodeH264SliceHeaderFlags.ndirect_spatial_mv_pred_flag(address()) != 0; }
         /** @return the value of the {@code num_ref_idx_active_override_flag} field. */
         @NativeType("uint32_t")
         public boolean num_ref_idx_active_override_flag() { return StdVideoEncodeH264SliceHeaderFlags.nnum_ref_idx_active_override_flag(address()) != 0; }
         /** @return the value of the {@code no_output_of_prior_pics_flag} field. */
         @NativeType("uint32_t")
         public boolean no_output_of_prior_pics_flag() { return StdVideoEncodeH264SliceHeaderFlags.nno_output_of_prior_pics_flag(address()) != 0; }
-        /** @return the value of the {@code long_term_reference_flag} field. */
-        @NativeType("uint32_t")
-        public boolean long_term_reference_flag() { return StdVideoEncodeH264SliceHeaderFlags.nlong_term_reference_flag(address()) != 0; }
         /** @return the value of the {@code adaptive_ref_pic_marking_mode_flag} field. */
         @NativeType("uint32_t")
         public boolean adaptive_ref_pic_marking_mode_flag() { return StdVideoEncodeH264SliceHeaderFlags.nadaptive_ref_pic_marking_mode_flag(address()) != 0; }
@@ -340,16 +310,12 @@ public class StdVideoEncodeH264SliceHeaderFlags extends Struct implements Native
         @NativeType("uint32_t")
         public boolean no_prior_references_available_flag() { return StdVideoEncodeH264SliceHeaderFlags.nno_prior_references_available_flag(address()) != 0; }
 
-        /** Sets the specified value to the {@code idr_flag} field. */
-        public StdVideoEncodeH264SliceHeaderFlags.Buffer idr_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264SliceHeaderFlags.nidr_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code is_reference_flag} field. */
-        public StdVideoEncodeH264SliceHeaderFlags.Buffer is_reference_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264SliceHeaderFlags.nis_reference_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code direct_spatial_mv_pred_flag} field. */
+        public StdVideoEncodeH264SliceHeaderFlags.Buffer direct_spatial_mv_pred_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264SliceHeaderFlags.ndirect_spatial_mv_pred_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code num_ref_idx_active_override_flag} field. */
         public StdVideoEncodeH264SliceHeaderFlags.Buffer num_ref_idx_active_override_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264SliceHeaderFlags.nnum_ref_idx_active_override_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code no_output_of_prior_pics_flag} field. */
         public StdVideoEncodeH264SliceHeaderFlags.Buffer no_output_of_prior_pics_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264SliceHeaderFlags.nno_output_of_prior_pics_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code long_term_reference_flag} field. */
-        public StdVideoEncodeH264SliceHeaderFlags.Buffer long_term_reference_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264SliceHeaderFlags.nlong_term_reference_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code adaptive_ref_pic_marking_mode_flag} field. */
         public StdVideoEncodeH264SliceHeaderFlags.Buffer adaptive_ref_pic_marking_mode_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264SliceHeaderFlags.nadaptive_ref_pic_marking_mode_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code no_prior_references_available_flag} field. */

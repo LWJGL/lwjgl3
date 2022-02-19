@@ -67,7 +67,6 @@ typedef struct StdVideoEncodeH265SliceSegmentHeader {
     int8_t                                       delta_chroma_weight_l1[STD_VIDEO_ENCODE_H265_CHROMA_LIST_SIZE][STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
     int8_t                                       delta_chroma_offset_l1[STD_VIDEO_ENCODE_H265_CHROMA_LIST_SIZE][STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
     uint8_t                                      MaxNumMergeCand;
-    int8_t                                       slice_qp_delta;
     int8_t                                       slice_cb_qp_offset;
     int8_t                                       slice_cr_qp_offset;
     int8_t                                       slice_beta_offset_div2;

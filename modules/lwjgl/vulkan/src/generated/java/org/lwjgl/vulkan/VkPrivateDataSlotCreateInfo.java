@@ -87,7 +87,7 @@ public class VkPrivateDataSlotCreateInfo extends Struct implements NativeResourc
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkPrivateDataSlotCreateFlags} specifying additional parameters of the new private data slot */
+    /** reserved for future use. */
     @NativeType("VkPrivateDataSlotCreateFlags")
     public int flags() { return nflags(address()); }
 

@@ -25,7 +25,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>300</dd>
  * <dt><b>Revision</b></dt>
- * <dd>3</dd>
+ * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -35,7 +35,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li><a target="_blank" href="mailto:ahmed.abdelkalek@amd.com">ahmed.abdelkalek@amd.com</a></li>
+ * <li>Ahmed Abdelkhalek <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_encode_queue]%20@aabdelkh%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_video_encode_queue%20extension%3E%3E">aabdelkh</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -43,7 +43,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2021-09-30</dd>
+ * <dd>2022-02-10</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -65,7 +65,7 @@ import static org.lwjgl.system.JNI.*;
 public class KHRVideoEncodeQueue {
 
     /** The extension specification version. */
-    public static final int VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION = 3;
+    public static final int VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION = 4;
 
     /** The extension name. */
     public static final String VK_KHR_VIDEO_ENCODE_QUEUE_EXTENSION_NAME = "VK_KHR_video_encode_queue";
@@ -96,12 +96,14 @@ public class KHRVideoEncodeQueue {
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR}</li>
      * </ul>
      */
     public static final int
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR                    = 1000299000,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR       = 1000299001,
-        VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR = 1000299002;
+        VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR = 1000299002,
+        VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR            = 1000299003;
 
     /** Extends {@code VkQueueFlagBits}. */
     public static final int VK_QUEUE_VIDEO_ENCODE_BIT_KHR = 0x40;
@@ -203,22 +205,23 @@ public class KHRVideoEncodeQueue {
         VK_VIDEO_ENCODE_RESERVED_0_BIT_KHR = 0x1;
 
     /**
-     * VkVideoEncodeRateControlFlagBitsKHR - Reserved for future use
+     * VkVideoEncodeCapabilityFlagBitsKHR - Video encode capability flags
      * 
      * <h5>Description</h5>
      * 
-     * <p>{@code VkVideoEncodeRateControlFlagBitsKHR} defines bits which may be set in a {@code VkVideoEncodeRateControlFlagsKHR} value, but is currently unused.</p>
+     * <ul>
+     * <li>{@link #VK_VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR} reports that the implementation supports use of {@link VkVideoEncodeInfoKHR}{@code ::precedingExternallyEncodedBytes}.</li>
+     * </ul>
      * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR}</li>
-     * <li>{@link #VK_VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR}</li>
+     * <li>{@link #VK_VIDEO_ENCODE_CAPABILITY_DEFAULT_KHR VIDEO_ENCODE_CAPABILITY_DEFAULT_KHR}</li>
      * </ul>
      */
     public static final int
-        VK_VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR        = 0,
-        VK_VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR = 0x1;
+        VK_VIDEO_ENCODE_CAPABILITY_DEFAULT_KHR                                = 0,
+        VK_VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR = 0x1;
 
     /**
      * VkVideoEncodeRateControlModeFlagBitsKHR - Video encode rate control modes
@@ -239,6 +242,24 @@ public class KHRVideoEncodeQueue {
         VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR = 0,
         VK_VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR  = 1,
         VK_VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR  = 2;
+
+    /**
+     * VkVideoEncodeRateControlFlagBitsKHR - Reserved for future use
+     * 
+     * <h5>Description</h5>
+     * 
+     * <p>{@code VkVideoEncodeRateControlFlagBitsKHR} defines bits which may be set in a {@code VkVideoEncodeRateControlFlagsKHR} value, but is currently unused.</p>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR}</li>
+     * <li>{@link #VK_VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR}</li>
+     * </ul>
+     */
+    public static final int
+        VK_VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR        = 0,
+        VK_VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR = 0x1;
 
     protected KHRVideoEncodeQueue() {
         throw new UnsupportedOperationException();

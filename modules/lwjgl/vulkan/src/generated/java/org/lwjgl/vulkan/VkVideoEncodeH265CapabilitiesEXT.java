@@ -22,19 +22,20 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code inputModeFlags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265InputModeFlagBitsEXT} values</li>
  * <li>{@code inputModeFlags} <b>must</b> not be 0</li>
  * <li>{@code outputModeFlags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265OutputModeFlagBitsEXT} values</li>
  * <li>{@code outputModeFlags} <b>must</b> not be 0</li>
  * <li>{@code ctbSizes} <b>must</b> be a valid combination of {@code VkVideoEncodeH265CtbSizeFlagBitsEXT} values</li>
  * <li>{@code ctbSizes} <b>must</b> not be 0</li>
+ * <li>{@code transformBlockSizes} <b>must</b> be a valid combination of {@code VkVideoEncodeH265TransformBlockSizeFlagBitsEXT} values</li>
+ * <li>{@code transformBlockSizes} <b>must</b> not be 0</li>
  * <li>{@code stdExtensionVersion} <b>must</b> be a valid {@link VkExtensionProperties} structure</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkExtensionProperties}, {@link VkExtent2D}</p>
+ * <p>{@link VkExtensionProperties}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -46,12 +47,22 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkVideoEncodeH265InputModeFlagsEXT {@link #inputModeFlags};
  *     VkVideoEncodeH265OutputModeFlagsEXT {@link #outputModeFlags};
  *     VkVideoEncodeH265CtbSizeFlagsEXT {@link #ctbSizes};
- *     {@link VkExtent2D VkExtent2D} {@link #inputImageDataAlignment};
- *     uint8_t {@link #maxNumL0ReferenceForP};
- *     uint8_t {@link #maxNumL0ReferenceForB};
- *     uint8_t {@link #maxNumL1Reference};
- *     uint8_t {@link #maxNumSubLayers};
- *     uint8_t {@link #qualityLevelCount};
+ *     VkVideoEncodeH265TransformBlockSizeFlagsEXT {@link #transformBlockSizes};
+ *     uint8_t {@link #maxPPictureL0ReferenceCount};
+ *     uint8_t {@link #maxBPictureL0ReferenceCount};
+ *     uint8_t {@link #maxL1ReferenceCount};
+ *     uint8_t {@link #maxSubLayersCount};
+ *     uint8_t {@link #minLog2MinLumaCodingBlockSizeMinus3};
+ *     uint8_t {@link #maxLog2MinLumaCodingBlockSizeMinus3};
+ *     uint8_t {@link #minLog2MinLumaTransformBlockSizeMinus2};
+ *     uint8_t {@link #maxLog2MinLumaTransformBlockSizeMinus2};
+ *     uint8_t {@link #minMaxTransformHierarchyDepthInter};
+ *     uint8_t {@link #maxMaxTransformHierarchyDepthInter};
+ *     uint8_t {@link #minMaxTransformHierarchyDepthIntra};
+ *     uint8_t {@link #maxMaxTransformHierarchyDepthIntra};
+ *     uint8_t {@link #maxDiffCuQpDeltaDepth};
+ *     uint8_t {@link #minMaxNumMergeCand};
+ *     uint8_t {@link #maxMaxNumMergeCand};
  *     {@link VkExtensionProperties VkExtensionProperties} {@link #stdExtensionVersion};
  * }</code></pre>
  */
@@ -71,12 +82,22 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
         INPUTMODEFLAGS,
         OUTPUTMODEFLAGS,
         CTBSIZES,
-        INPUTIMAGEDATAALIGNMENT,
-        MAXNUML0REFERENCEFORP,
-        MAXNUML0REFERENCEFORB,
-        MAXNUML1REFERENCE,
-        MAXNUMSUBLAYERS,
-        QUALITYLEVELCOUNT,
+        TRANSFORMBLOCKSIZES,
+        MAXPPICTUREL0REFERENCECOUNT,
+        MAXBPICTUREL0REFERENCECOUNT,
+        MAXL1REFERENCECOUNT,
+        MAXSUBLAYERSCOUNT,
+        MINLOG2MINLUMACODINGBLOCKSIZEMINUS3,
+        MAXLOG2MINLUMACODINGBLOCKSIZEMINUS3,
+        MINLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2,
+        MAXLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2,
+        MINMAXTRANSFORMHIERARCHYDEPTHINTER,
+        MAXMAXTRANSFORMHIERARCHYDEPTHINTER,
+        MINMAXTRANSFORMHIERARCHYDEPTHINTRA,
+        MAXMAXTRANSFORMHIERARCHYDEPTHINTRA,
+        MAXDIFFCUQPDELTADEPTH,
+        MINMAXNUMMERGECAND,
+        MAXMAXNUMMERGECAND,
         STDEXTENSIONVERSION;
 
     static {
@@ -87,7 +108,17 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
             __member(4),
             __member(4),
             __member(4),
-            __member(VkExtent2D.SIZEOF, VkExtent2D.ALIGNOF),
+            __member(4),
+            __member(1),
+            __member(1),
+            __member(1),
+            __member(1),
+            __member(1),
+            __member(1),
+            __member(1),
+            __member(1),
+            __member(1),
+            __member(1),
             __member(1),
             __member(1),
             __member(1),
@@ -105,13 +136,23 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
         INPUTMODEFLAGS = layout.offsetof(3);
         OUTPUTMODEFLAGS = layout.offsetof(4);
         CTBSIZES = layout.offsetof(5);
-        INPUTIMAGEDATAALIGNMENT = layout.offsetof(6);
-        MAXNUML0REFERENCEFORP = layout.offsetof(7);
-        MAXNUML0REFERENCEFORB = layout.offsetof(8);
-        MAXNUML1REFERENCE = layout.offsetof(9);
-        MAXNUMSUBLAYERS = layout.offsetof(10);
-        QUALITYLEVELCOUNT = layout.offsetof(11);
-        STDEXTENSIONVERSION = layout.offsetof(12);
+        TRANSFORMBLOCKSIZES = layout.offsetof(6);
+        MAXPPICTUREL0REFERENCECOUNT = layout.offsetof(7);
+        MAXBPICTUREL0REFERENCECOUNT = layout.offsetof(8);
+        MAXL1REFERENCECOUNT = layout.offsetof(9);
+        MAXSUBLAYERSCOUNT = layout.offsetof(10);
+        MINLOG2MINLUMACODINGBLOCKSIZEMINUS3 = layout.offsetof(11);
+        MAXLOG2MINLUMACODINGBLOCKSIZEMINUS3 = layout.offsetof(12);
+        MINLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2 = layout.offsetof(13);
+        MAXLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2 = layout.offsetof(14);
+        MINMAXTRANSFORMHIERARCHYDEPTHINTER = layout.offsetof(15);
+        MAXMAXTRANSFORMHIERARCHYDEPTHINTER = layout.offsetof(16);
+        MINMAXTRANSFORMHIERARCHYDEPTHINTRA = layout.offsetof(17);
+        MAXMAXTRANSFORMHIERARCHYDEPTHINTRA = layout.offsetof(18);
+        MAXDIFFCUQPDELTADEPTH = layout.offsetof(19);
+        MINMAXNUMMERGECAND = layout.offsetof(20);
+        MAXMAXNUMMERGECAND = layout.offsetof(21);
+        STDEXTENSIONVERSION = layout.offsetof(22);
     }
 
     /**
@@ -133,7 +174,7 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** a bitmask of {@code VkVideoEncodeH265CapabilityFlagBitsEXT} describing supported encoding tools. */
     @NativeType("VkVideoEncodeH265CapabilityFlagsEXT")
     public int flags() { return nflags(address()); }
     /** a bitmask of {@code VkVideoEncodeH265InputModeFlagBitsEXT} describing the command buffer input granularities/modes supported by the implementation. */
@@ -145,23 +186,54 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
     /** a bitmask of {@code VkVideoEncodeH265CtbSizeFlagBitsEXT} describing the supported CTB sizes. */
     @NativeType("VkVideoEncodeH265CtbSizeFlagsEXT")
     public int ctbSizes() { return nctbSizes(address()); }
-    /** reports the alignment, in pixels, for the width and height of the picture data within the images used in video encoding. */
-    public VkExtent2D inputImageDataAlignment() { return ninputImageDataAlignment(address()); }
+    /** a bitmask of {@code VkVideoEncodeH265TransformBlockSizeFlagBitsEXT} describing the supported transform block sizes. */
+    @NativeType("VkVideoEncodeH265TransformBlockSizeFlagsEXT")
+    public int transformBlockSizes() { return ntransformBlockSizes(address()); }
     /** reports the maximum number of reference pictures the implementation supports in the reference list L0 for P pictures. */
     @NativeType("uint8_t")
-    public byte maxNumL0ReferenceForP() { return nmaxNumL0ReferenceForP(address()); }
+    public byte maxPPictureL0ReferenceCount() { return nmaxPPictureL0ReferenceCount(address()); }
     /** reports the maximum number of reference pictures the implementation supports in the reference list L0 for B pictures. The reported value is 0 if encoding of B pictures is not supported. */
     @NativeType("uint8_t")
-    public byte maxNumL0ReferenceForB() { return nmaxNumL0ReferenceForB(address()); }
+    public byte maxBPictureL0ReferenceCount() { return nmaxBPictureL0ReferenceCount(address()); }
     /** reports the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of B pictures is supported. The reported value is 0 if encoding of B pictures is not supported. */
     @NativeType("uint8_t")
-    public byte maxNumL1Reference() { return nmaxNumL1Reference(address()); }
+    public byte maxL1ReferenceCount() { return nmaxL1ReferenceCount(address()); }
     /** reports the maximum number of sublayers. */
     @NativeType("uint8_t")
-    public byte maxNumSubLayers() { return nmaxNumSubLayers(address()); }
-    /** the number of quality levels supported. */
+    public byte maxSubLayersCount() { return nmaxSubLayersCount(address()); }
+    /** reports the minimum value that may be set for log2_min_luma_coding_block_size_minus3 in StdVideoH265SequenceParameterSet. */
     @NativeType("uint8_t")
-    public byte qualityLevelCount() { return nqualityLevelCount(address()); }
+    public byte minLog2MinLumaCodingBlockSizeMinus3() { return nminLog2MinLumaCodingBlockSizeMinus3(address()); }
+    /** reports the maximum value that may be set for log2_min_luma_coding_block_size_minus3 in StdVideoH265SequenceParameterSet. */
+    @NativeType("uint8_t")
+    public byte maxLog2MinLumaCodingBlockSizeMinus3() { return nmaxLog2MinLumaCodingBlockSizeMinus3(address()); }
+    /** reports the minimum value that may be set for log2_min_luma_transform_block_size_minus2 in StdVideoH265SequenceParameterSet. */
+    @NativeType("uint8_t")
+    public byte minLog2MinLumaTransformBlockSizeMinus2() { return nminLog2MinLumaTransformBlockSizeMinus2(address()); }
+    /** reports the maximum value that may be set for log2_min_luma_transform_block_size_minus2 in StdVideoH265SequenceParameterSet. */
+    @NativeType("uint8_t")
+    public byte maxLog2MinLumaTransformBlockSizeMinus2() { return nmaxLog2MinLumaTransformBlockSizeMinus2(address()); }
+    /** reports the minimum value that may be set for max_transform_hierarchy_depth_inter in StdVideoH265SequenceParameterSet. */
+    @NativeType("uint8_t")
+    public byte minMaxTransformHierarchyDepthInter() { return nminMaxTransformHierarchyDepthInter(address()); }
+    /** reports the maximum value that may be set for max_transform_hierarchy_depth_inter in StdVideoH265SequenceParameterSet. */
+    @NativeType("uint8_t")
+    public byte maxMaxTransformHierarchyDepthInter() { return nmaxMaxTransformHierarchyDepthInter(address()); }
+    /** reports the minimum value that may be set for max_transform_hierarchy_depth_intra in StdVideoH265SequenceParameterSet. */
+    @NativeType("uint8_t")
+    public byte minMaxTransformHierarchyDepthIntra() { return nminMaxTransformHierarchyDepthIntra(address()); }
+    /** reports the maximum value that may be set for max_transform_hierarchy_depth_intra in StdVideoH265SequenceParameterSet. */
+    @NativeType("uint8_t")
+    public byte maxMaxTransformHierarchyDepthIntra() { return nmaxMaxTransformHierarchyDepthIntra(address()); }
+    /** reports the maximum value that may be set for diff_cu_qp_delta_depth in StdVideoH265PictureParameterSet. */
+    @NativeType("uint8_t")
+    public byte maxDiffCuQpDeltaDepth() { return nmaxDiffCuQpDeltaDepth(address()); }
+    /** reports the minimum value that may be set for MaxNumMergeCand in StdVideoEncodeH265SliceHeader. */
+    @NativeType("uint8_t")
+    public byte minMaxNumMergeCand() { return nminMaxNumMergeCand(address()); }
+    /** reports the maximum value that may be set for MaxNumMergeCand in StdVideoEncodeH265SliceHeader. */
+    @NativeType("uint8_t")
+    public byte maxMaxNumMergeCand() { return nmaxMaxNumMergeCand(address()); }
     /** a {@link VkExtensionProperties} structure in which the H.265 extension name and version supported by the implementation are returned. */
     public VkExtensionProperties stdExtensionVersion() { return nstdExtensionVersion(address()); }
 
@@ -179,20 +251,38 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
     public VkVideoEncodeH265CapabilitiesEXT outputModeFlags(@NativeType("VkVideoEncodeH265OutputModeFlagsEXT") int value) { noutputModeFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #ctbSizes} field. */
     public VkVideoEncodeH265CapabilitiesEXT ctbSizes(@NativeType("VkVideoEncodeH265CtbSizeFlagsEXT") int value) { nctbSizes(address(), value); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@link #inputImageDataAlignment} field. */
-    public VkVideoEncodeH265CapabilitiesEXT inputImageDataAlignment(VkExtent2D value) { ninputImageDataAlignment(address(), value); return this; }
-    /** Passes the {@link #inputImageDataAlignment} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkVideoEncodeH265CapabilitiesEXT inputImageDataAlignment(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(inputImageDataAlignment()); return this; }
-    /** Sets the specified value to the {@link #maxNumL0ReferenceForP} field. */
-    public VkVideoEncodeH265CapabilitiesEXT maxNumL0ReferenceForP(@NativeType("uint8_t") byte value) { nmaxNumL0ReferenceForP(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxNumL0ReferenceForB} field. */
-    public VkVideoEncodeH265CapabilitiesEXT maxNumL0ReferenceForB(@NativeType("uint8_t") byte value) { nmaxNumL0ReferenceForB(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxNumL1Reference} field. */
-    public VkVideoEncodeH265CapabilitiesEXT maxNumL1Reference(@NativeType("uint8_t") byte value) { nmaxNumL1Reference(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxNumSubLayers} field. */
-    public VkVideoEncodeH265CapabilitiesEXT maxNumSubLayers(@NativeType("uint8_t") byte value) { nmaxNumSubLayers(address(), value); return this; }
-    /** Sets the specified value to the {@link #qualityLevelCount} field. */
-    public VkVideoEncodeH265CapabilitiesEXT qualityLevelCount(@NativeType("uint8_t") byte value) { nqualityLevelCount(address(), value); return this; }
+    /** Sets the specified value to the {@link #transformBlockSizes} field. */
+    public VkVideoEncodeH265CapabilitiesEXT transformBlockSizes(@NativeType("VkVideoEncodeH265TransformBlockSizeFlagsEXT") int value) { ntransformBlockSizes(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxPPictureL0ReferenceCount} field. */
+    public VkVideoEncodeH265CapabilitiesEXT maxPPictureL0ReferenceCount(@NativeType("uint8_t") byte value) { nmaxPPictureL0ReferenceCount(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxBPictureL0ReferenceCount} field. */
+    public VkVideoEncodeH265CapabilitiesEXT maxBPictureL0ReferenceCount(@NativeType("uint8_t") byte value) { nmaxBPictureL0ReferenceCount(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxL1ReferenceCount} field. */
+    public VkVideoEncodeH265CapabilitiesEXT maxL1ReferenceCount(@NativeType("uint8_t") byte value) { nmaxL1ReferenceCount(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxSubLayersCount} field. */
+    public VkVideoEncodeH265CapabilitiesEXT maxSubLayersCount(@NativeType("uint8_t") byte value) { nmaxSubLayersCount(address(), value); return this; }
+    /** Sets the specified value to the {@link #minLog2MinLumaCodingBlockSizeMinus3} field. */
+    public VkVideoEncodeH265CapabilitiesEXT minLog2MinLumaCodingBlockSizeMinus3(@NativeType("uint8_t") byte value) { nminLog2MinLumaCodingBlockSizeMinus3(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxLog2MinLumaCodingBlockSizeMinus3} field. */
+    public VkVideoEncodeH265CapabilitiesEXT maxLog2MinLumaCodingBlockSizeMinus3(@NativeType("uint8_t") byte value) { nmaxLog2MinLumaCodingBlockSizeMinus3(address(), value); return this; }
+    /** Sets the specified value to the {@link #minLog2MinLumaTransformBlockSizeMinus2} field. */
+    public VkVideoEncodeH265CapabilitiesEXT minLog2MinLumaTransformBlockSizeMinus2(@NativeType("uint8_t") byte value) { nminLog2MinLumaTransformBlockSizeMinus2(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxLog2MinLumaTransformBlockSizeMinus2} field. */
+    public VkVideoEncodeH265CapabilitiesEXT maxLog2MinLumaTransformBlockSizeMinus2(@NativeType("uint8_t") byte value) { nmaxLog2MinLumaTransformBlockSizeMinus2(address(), value); return this; }
+    /** Sets the specified value to the {@link #minMaxTransformHierarchyDepthInter} field. */
+    public VkVideoEncodeH265CapabilitiesEXT minMaxTransformHierarchyDepthInter(@NativeType("uint8_t") byte value) { nminMaxTransformHierarchyDepthInter(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxMaxTransformHierarchyDepthInter} field. */
+    public VkVideoEncodeH265CapabilitiesEXT maxMaxTransformHierarchyDepthInter(@NativeType("uint8_t") byte value) { nmaxMaxTransformHierarchyDepthInter(address(), value); return this; }
+    /** Sets the specified value to the {@link #minMaxTransformHierarchyDepthIntra} field. */
+    public VkVideoEncodeH265CapabilitiesEXT minMaxTransformHierarchyDepthIntra(@NativeType("uint8_t") byte value) { nminMaxTransformHierarchyDepthIntra(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxMaxTransformHierarchyDepthIntra} field. */
+    public VkVideoEncodeH265CapabilitiesEXT maxMaxTransformHierarchyDepthIntra(@NativeType("uint8_t") byte value) { nmaxMaxTransformHierarchyDepthIntra(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxDiffCuQpDeltaDepth} field. */
+    public VkVideoEncodeH265CapabilitiesEXT maxDiffCuQpDeltaDepth(@NativeType("uint8_t") byte value) { nmaxDiffCuQpDeltaDepth(address(), value); return this; }
+    /** Sets the specified value to the {@link #minMaxNumMergeCand} field. */
+    public VkVideoEncodeH265CapabilitiesEXT minMaxNumMergeCand(@NativeType("uint8_t") byte value) { nminMaxNumMergeCand(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxMaxNumMergeCand} field. */
+    public VkVideoEncodeH265CapabilitiesEXT maxMaxNumMergeCand(@NativeType("uint8_t") byte value) { nmaxMaxNumMergeCand(address(), value); return this; }
     /** Copies the specified {@link VkExtensionProperties} to the {@link #stdExtensionVersion} field. */
     public VkVideoEncodeH265CapabilitiesEXT stdExtensionVersion(VkExtensionProperties value) { nstdExtensionVersion(address(), value); return this; }
 
@@ -204,12 +294,22 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
         int inputModeFlags,
         int outputModeFlags,
         int ctbSizes,
-        VkExtent2D inputImageDataAlignment,
-        byte maxNumL0ReferenceForP,
-        byte maxNumL0ReferenceForB,
-        byte maxNumL1Reference,
-        byte maxNumSubLayers,
-        byte qualityLevelCount,
+        int transformBlockSizes,
+        byte maxPPictureL0ReferenceCount,
+        byte maxBPictureL0ReferenceCount,
+        byte maxL1ReferenceCount,
+        byte maxSubLayersCount,
+        byte minLog2MinLumaCodingBlockSizeMinus3,
+        byte maxLog2MinLumaCodingBlockSizeMinus3,
+        byte minLog2MinLumaTransformBlockSizeMinus2,
+        byte maxLog2MinLumaTransformBlockSizeMinus2,
+        byte minMaxTransformHierarchyDepthInter,
+        byte maxMaxTransformHierarchyDepthInter,
+        byte minMaxTransformHierarchyDepthIntra,
+        byte maxMaxTransformHierarchyDepthIntra,
+        byte maxDiffCuQpDeltaDepth,
+        byte minMaxNumMergeCand,
+        byte maxMaxNumMergeCand,
         VkExtensionProperties stdExtensionVersion
     ) {
         sType(sType);
@@ -218,12 +318,22 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
         inputModeFlags(inputModeFlags);
         outputModeFlags(outputModeFlags);
         ctbSizes(ctbSizes);
-        inputImageDataAlignment(inputImageDataAlignment);
-        maxNumL0ReferenceForP(maxNumL0ReferenceForP);
-        maxNumL0ReferenceForB(maxNumL0ReferenceForB);
-        maxNumL1Reference(maxNumL1Reference);
-        maxNumSubLayers(maxNumSubLayers);
-        qualityLevelCount(qualityLevelCount);
+        transformBlockSizes(transformBlockSizes);
+        maxPPictureL0ReferenceCount(maxPPictureL0ReferenceCount);
+        maxBPictureL0ReferenceCount(maxBPictureL0ReferenceCount);
+        maxL1ReferenceCount(maxL1ReferenceCount);
+        maxSubLayersCount(maxSubLayersCount);
+        minLog2MinLumaCodingBlockSizeMinus3(minLog2MinLumaCodingBlockSizeMinus3);
+        maxLog2MinLumaCodingBlockSizeMinus3(maxLog2MinLumaCodingBlockSizeMinus3);
+        minLog2MinLumaTransformBlockSizeMinus2(minLog2MinLumaTransformBlockSizeMinus2);
+        maxLog2MinLumaTransformBlockSizeMinus2(maxLog2MinLumaTransformBlockSizeMinus2);
+        minMaxTransformHierarchyDepthInter(minMaxTransformHierarchyDepthInter);
+        maxMaxTransformHierarchyDepthInter(maxMaxTransformHierarchyDepthInter);
+        minMaxTransformHierarchyDepthIntra(minMaxTransformHierarchyDepthIntra);
+        maxMaxTransformHierarchyDepthIntra(maxMaxTransformHierarchyDepthIntra);
+        maxDiffCuQpDeltaDepth(maxDiffCuQpDeltaDepth);
+        minMaxNumMergeCand(minMaxNumMergeCand);
+        maxMaxNumMergeCand(maxMaxNumMergeCand);
         stdExtensionVersion(stdExtensionVersion);
 
         return this;
@@ -366,18 +476,38 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
     public static int noutputModeFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.OUTPUTMODEFLAGS); }
     /** Unsafe version of {@link #ctbSizes}. */
     public static int nctbSizes(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.CTBSIZES); }
-    /** Unsafe version of {@link #inputImageDataAlignment}. */
-    public static VkExtent2D ninputImageDataAlignment(long struct) { return VkExtent2D.create(struct + VkVideoEncodeH265CapabilitiesEXT.INPUTIMAGEDATAALIGNMENT); }
-    /** Unsafe version of {@link #maxNumL0ReferenceForP}. */
-    public static byte nmaxNumL0ReferenceForP(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXNUML0REFERENCEFORP); }
-    /** Unsafe version of {@link #maxNumL0ReferenceForB}. */
-    public static byte nmaxNumL0ReferenceForB(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXNUML0REFERENCEFORB); }
-    /** Unsafe version of {@link #maxNumL1Reference}. */
-    public static byte nmaxNumL1Reference(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXNUML1REFERENCE); }
-    /** Unsafe version of {@link #maxNumSubLayers}. */
-    public static byte nmaxNumSubLayers(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXNUMSUBLAYERS); }
-    /** Unsafe version of {@link #qualityLevelCount}. */
-    public static byte nqualityLevelCount(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.QUALITYLEVELCOUNT); }
+    /** Unsafe version of {@link #transformBlockSizes}. */
+    public static int ntransformBlockSizes(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.TRANSFORMBLOCKSIZES); }
+    /** Unsafe version of {@link #maxPPictureL0ReferenceCount}. */
+    public static byte nmaxPPictureL0ReferenceCount(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXPPICTUREL0REFERENCECOUNT); }
+    /** Unsafe version of {@link #maxBPictureL0ReferenceCount}. */
+    public static byte nmaxBPictureL0ReferenceCount(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXBPICTUREL0REFERENCECOUNT); }
+    /** Unsafe version of {@link #maxL1ReferenceCount}. */
+    public static byte nmaxL1ReferenceCount(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXL1REFERENCECOUNT); }
+    /** Unsafe version of {@link #maxSubLayersCount}. */
+    public static byte nmaxSubLayersCount(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXSUBLAYERSCOUNT); }
+    /** Unsafe version of {@link #minLog2MinLumaCodingBlockSizeMinus3}. */
+    public static byte nminLog2MinLumaCodingBlockSizeMinus3(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINLOG2MINLUMACODINGBLOCKSIZEMINUS3); }
+    /** Unsafe version of {@link #maxLog2MinLumaCodingBlockSizeMinus3}. */
+    public static byte nmaxLog2MinLumaCodingBlockSizeMinus3(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXLOG2MINLUMACODINGBLOCKSIZEMINUS3); }
+    /** Unsafe version of {@link #minLog2MinLumaTransformBlockSizeMinus2}. */
+    public static byte nminLog2MinLumaTransformBlockSizeMinus2(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2); }
+    /** Unsafe version of {@link #maxLog2MinLumaTransformBlockSizeMinus2}. */
+    public static byte nmaxLog2MinLumaTransformBlockSizeMinus2(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2); }
+    /** Unsafe version of {@link #minMaxTransformHierarchyDepthInter}. */
+    public static byte nminMaxTransformHierarchyDepthInter(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINMAXTRANSFORMHIERARCHYDEPTHINTER); }
+    /** Unsafe version of {@link #maxMaxTransformHierarchyDepthInter}. */
+    public static byte nmaxMaxTransformHierarchyDepthInter(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXMAXTRANSFORMHIERARCHYDEPTHINTER); }
+    /** Unsafe version of {@link #minMaxTransformHierarchyDepthIntra}. */
+    public static byte nminMaxTransformHierarchyDepthIntra(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINMAXTRANSFORMHIERARCHYDEPTHINTRA); }
+    /** Unsafe version of {@link #maxMaxTransformHierarchyDepthIntra}. */
+    public static byte nmaxMaxTransformHierarchyDepthIntra(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXMAXTRANSFORMHIERARCHYDEPTHINTRA); }
+    /** Unsafe version of {@link #maxDiffCuQpDeltaDepth}. */
+    public static byte nmaxDiffCuQpDeltaDepth(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXDIFFCUQPDELTADEPTH); }
+    /** Unsafe version of {@link #minMaxNumMergeCand}. */
+    public static byte nminMaxNumMergeCand(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINMAXNUMMERGECAND); }
+    /** Unsafe version of {@link #maxMaxNumMergeCand}. */
+    public static byte nmaxMaxNumMergeCand(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXMAXNUMMERGECAND); }
     /** Unsafe version of {@link #stdExtensionVersion}. */
     public static VkExtensionProperties nstdExtensionVersion(long struct) { return VkExtensionProperties.create(struct + VkVideoEncodeH265CapabilitiesEXT.STDEXTENSIONVERSION); }
 
@@ -393,18 +523,38 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
     public static void noutputModeFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.OUTPUTMODEFLAGS, value); }
     /** Unsafe version of {@link #ctbSizes(int) ctbSizes}. */
     public static void nctbSizes(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.CTBSIZES, value); }
-    /** Unsafe version of {@link #inputImageDataAlignment(VkExtent2D) inputImageDataAlignment}. */
-    public static void ninputImageDataAlignment(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkVideoEncodeH265CapabilitiesEXT.INPUTIMAGEDATAALIGNMENT, VkExtent2D.SIZEOF); }
-    /** Unsafe version of {@link #maxNumL0ReferenceForP(byte) maxNumL0ReferenceForP}. */
-    public static void nmaxNumL0ReferenceForP(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXNUML0REFERENCEFORP, value); }
-    /** Unsafe version of {@link #maxNumL0ReferenceForB(byte) maxNumL0ReferenceForB}. */
-    public static void nmaxNumL0ReferenceForB(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXNUML0REFERENCEFORB, value); }
-    /** Unsafe version of {@link #maxNumL1Reference(byte) maxNumL1Reference}. */
-    public static void nmaxNumL1Reference(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXNUML1REFERENCE, value); }
-    /** Unsafe version of {@link #maxNumSubLayers(byte) maxNumSubLayers}. */
-    public static void nmaxNumSubLayers(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXNUMSUBLAYERS, value); }
-    /** Unsafe version of {@link #qualityLevelCount(byte) qualityLevelCount}. */
-    public static void nqualityLevelCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.QUALITYLEVELCOUNT, value); }
+    /** Unsafe version of {@link #transformBlockSizes(int) transformBlockSizes}. */
+    public static void ntransformBlockSizes(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265CapabilitiesEXT.TRANSFORMBLOCKSIZES, value); }
+    /** Unsafe version of {@link #maxPPictureL0ReferenceCount(byte) maxPPictureL0ReferenceCount}. */
+    public static void nmaxPPictureL0ReferenceCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXPPICTUREL0REFERENCECOUNT, value); }
+    /** Unsafe version of {@link #maxBPictureL0ReferenceCount(byte) maxBPictureL0ReferenceCount}. */
+    public static void nmaxBPictureL0ReferenceCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXBPICTUREL0REFERENCECOUNT, value); }
+    /** Unsafe version of {@link #maxL1ReferenceCount(byte) maxL1ReferenceCount}. */
+    public static void nmaxL1ReferenceCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXL1REFERENCECOUNT, value); }
+    /** Unsafe version of {@link #maxSubLayersCount(byte) maxSubLayersCount}. */
+    public static void nmaxSubLayersCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXSUBLAYERSCOUNT, value); }
+    /** Unsafe version of {@link #minLog2MinLumaCodingBlockSizeMinus3(byte) minLog2MinLumaCodingBlockSizeMinus3}. */
+    public static void nminLog2MinLumaCodingBlockSizeMinus3(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINLOG2MINLUMACODINGBLOCKSIZEMINUS3, value); }
+    /** Unsafe version of {@link #maxLog2MinLumaCodingBlockSizeMinus3(byte) maxLog2MinLumaCodingBlockSizeMinus3}. */
+    public static void nmaxLog2MinLumaCodingBlockSizeMinus3(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXLOG2MINLUMACODINGBLOCKSIZEMINUS3, value); }
+    /** Unsafe version of {@link #minLog2MinLumaTransformBlockSizeMinus2(byte) minLog2MinLumaTransformBlockSizeMinus2}. */
+    public static void nminLog2MinLumaTransformBlockSizeMinus2(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2, value); }
+    /** Unsafe version of {@link #maxLog2MinLumaTransformBlockSizeMinus2(byte) maxLog2MinLumaTransformBlockSizeMinus2}. */
+    public static void nmaxLog2MinLumaTransformBlockSizeMinus2(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXLOG2MINLUMATRANSFORMBLOCKSIZEMINUS2, value); }
+    /** Unsafe version of {@link #minMaxTransformHierarchyDepthInter(byte) minMaxTransformHierarchyDepthInter}. */
+    public static void nminMaxTransformHierarchyDepthInter(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINMAXTRANSFORMHIERARCHYDEPTHINTER, value); }
+    /** Unsafe version of {@link #maxMaxTransformHierarchyDepthInter(byte) maxMaxTransformHierarchyDepthInter}. */
+    public static void nmaxMaxTransformHierarchyDepthInter(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXMAXTRANSFORMHIERARCHYDEPTHINTER, value); }
+    /** Unsafe version of {@link #minMaxTransformHierarchyDepthIntra(byte) minMaxTransformHierarchyDepthIntra}. */
+    public static void nminMaxTransformHierarchyDepthIntra(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINMAXTRANSFORMHIERARCHYDEPTHINTRA, value); }
+    /** Unsafe version of {@link #maxMaxTransformHierarchyDepthIntra(byte) maxMaxTransformHierarchyDepthIntra}. */
+    public static void nmaxMaxTransformHierarchyDepthIntra(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXMAXTRANSFORMHIERARCHYDEPTHINTRA, value); }
+    /** Unsafe version of {@link #maxDiffCuQpDeltaDepth(byte) maxDiffCuQpDeltaDepth}. */
+    public static void nmaxDiffCuQpDeltaDepth(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXDIFFCUQPDELTADEPTH, value); }
+    /** Unsafe version of {@link #minMaxNumMergeCand(byte) minMaxNumMergeCand}. */
+    public static void nminMaxNumMergeCand(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MINMAXNUMMERGECAND, value); }
+    /** Unsafe version of {@link #maxMaxNumMergeCand(byte) maxMaxNumMergeCand}. */
+    public static void nmaxMaxNumMergeCand(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265CapabilitiesEXT.MAXMAXNUMMERGECAND, value); }
     /** Unsafe version of {@link #stdExtensionVersion(VkExtensionProperties) stdExtensionVersion}. */
     public static void nstdExtensionVersion(long struct, VkExtensionProperties value) { memCopy(value.address(), struct + VkVideoEncodeH265CapabilitiesEXT.STDEXTENSIONVERSION, VkExtensionProperties.SIZEOF); }
 
@@ -464,23 +614,54 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
         /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#ctbSizes} field. */
         @NativeType("VkVideoEncodeH265CtbSizeFlagsEXT")
         public int ctbSizes() { return VkVideoEncodeH265CapabilitiesEXT.nctbSizes(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoEncodeH265CapabilitiesEXT#inputImageDataAlignment} field. */
-        public VkExtent2D inputImageDataAlignment() { return VkVideoEncodeH265CapabilitiesEXT.ninputImageDataAlignment(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxNumL0ReferenceForP} field. */
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#transformBlockSizes} field. */
+        @NativeType("VkVideoEncodeH265TransformBlockSizeFlagsEXT")
+        public int transformBlockSizes() { return VkVideoEncodeH265CapabilitiesEXT.ntransformBlockSizes(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxPPictureL0ReferenceCount} field. */
         @NativeType("uint8_t")
-        public byte maxNumL0ReferenceForP() { return VkVideoEncodeH265CapabilitiesEXT.nmaxNumL0ReferenceForP(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxNumL0ReferenceForB} field. */
+        public byte maxPPictureL0ReferenceCount() { return VkVideoEncodeH265CapabilitiesEXT.nmaxPPictureL0ReferenceCount(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxBPictureL0ReferenceCount} field. */
         @NativeType("uint8_t")
-        public byte maxNumL0ReferenceForB() { return VkVideoEncodeH265CapabilitiesEXT.nmaxNumL0ReferenceForB(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxNumL1Reference} field. */
+        public byte maxBPictureL0ReferenceCount() { return VkVideoEncodeH265CapabilitiesEXT.nmaxBPictureL0ReferenceCount(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxL1ReferenceCount} field. */
         @NativeType("uint8_t")
-        public byte maxNumL1Reference() { return VkVideoEncodeH265CapabilitiesEXT.nmaxNumL1Reference(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxNumSubLayers} field. */
+        public byte maxL1ReferenceCount() { return VkVideoEncodeH265CapabilitiesEXT.nmaxL1ReferenceCount(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxSubLayersCount} field. */
         @NativeType("uint8_t")
-        public byte maxNumSubLayers() { return VkVideoEncodeH265CapabilitiesEXT.nmaxNumSubLayers(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#qualityLevelCount} field. */
+        public byte maxSubLayersCount() { return VkVideoEncodeH265CapabilitiesEXT.nmaxSubLayersCount(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minLog2MinLumaCodingBlockSizeMinus3} field. */
         @NativeType("uint8_t")
-        public byte qualityLevelCount() { return VkVideoEncodeH265CapabilitiesEXT.nqualityLevelCount(address()); }
+        public byte minLog2MinLumaCodingBlockSizeMinus3() { return VkVideoEncodeH265CapabilitiesEXT.nminLog2MinLumaCodingBlockSizeMinus3(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxLog2MinLumaCodingBlockSizeMinus3} field. */
+        @NativeType("uint8_t")
+        public byte maxLog2MinLumaCodingBlockSizeMinus3() { return VkVideoEncodeH265CapabilitiesEXT.nmaxLog2MinLumaCodingBlockSizeMinus3(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minLog2MinLumaTransformBlockSizeMinus2} field. */
+        @NativeType("uint8_t")
+        public byte minLog2MinLumaTransformBlockSizeMinus2() { return VkVideoEncodeH265CapabilitiesEXT.nminLog2MinLumaTransformBlockSizeMinus2(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxLog2MinLumaTransformBlockSizeMinus2} field. */
+        @NativeType("uint8_t")
+        public byte maxLog2MinLumaTransformBlockSizeMinus2() { return VkVideoEncodeH265CapabilitiesEXT.nmaxLog2MinLumaTransformBlockSizeMinus2(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minMaxTransformHierarchyDepthInter} field. */
+        @NativeType("uint8_t")
+        public byte minMaxTransformHierarchyDepthInter() { return VkVideoEncodeH265CapabilitiesEXT.nminMaxTransformHierarchyDepthInter(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxMaxTransformHierarchyDepthInter} field. */
+        @NativeType("uint8_t")
+        public byte maxMaxTransformHierarchyDepthInter() { return VkVideoEncodeH265CapabilitiesEXT.nmaxMaxTransformHierarchyDepthInter(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minMaxTransformHierarchyDepthIntra} field. */
+        @NativeType("uint8_t")
+        public byte minMaxTransformHierarchyDepthIntra() { return VkVideoEncodeH265CapabilitiesEXT.nminMaxTransformHierarchyDepthIntra(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxMaxTransformHierarchyDepthIntra} field. */
+        @NativeType("uint8_t")
+        public byte maxMaxTransformHierarchyDepthIntra() { return VkVideoEncodeH265CapabilitiesEXT.nmaxMaxTransformHierarchyDepthIntra(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxDiffCuQpDeltaDepth} field. */
+        @NativeType("uint8_t")
+        public byte maxDiffCuQpDeltaDepth() { return VkVideoEncodeH265CapabilitiesEXT.nmaxDiffCuQpDeltaDepth(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#minMaxNumMergeCand} field. */
+        @NativeType("uint8_t")
+        public byte minMaxNumMergeCand() { return VkVideoEncodeH265CapabilitiesEXT.nminMaxNumMergeCand(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265CapabilitiesEXT#maxMaxNumMergeCand} field. */
+        @NativeType("uint8_t")
+        public byte maxMaxNumMergeCand() { return VkVideoEncodeH265CapabilitiesEXT.nmaxMaxNumMergeCand(address()); }
         /** @return a {@link VkExtensionProperties} view of the {@link VkVideoEncodeH265CapabilitiesEXT#stdExtensionVersion} field. */
         public VkExtensionProperties stdExtensionVersion() { return VkVideoEncodeH265CapabilitiesEXT.nstdExtensionVersion(address()); }
 
@@ -498,20 +679,38 @@ public class VkVideoEncodeH265CapabilitiesEXT extends Struct implements NativeRe
         public VkVideoEncodeH265CapabilitiesEXT.Buffer outputModeFlags(@NativeType("VkVideoEncodeH265OutputModeFlagsEXT") int value) { VkVideoEncodeH265CapabilitiesEXT.noutputModeFlags(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#ctbSizes} field. */
         public VkVideoEncodeH265CapabilitiesEXT.Buffer ctbSizes(@NativeType("VkVideoEncodeH265CtbSizeFlagsEXT") int value) { VkVideoEncodeH265CapabilitiesEXT.nctbSizes(address(), value); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@link VkVideoEncodeH265CapabilitiesEXT#inputImageDataAlignment} field. */
-        public VkVideoEncodeH265CapabilitiesEXT.Buffer inputImageDataAlignment(VkExtent2D value) { VkVideoEncodeH265CapabilitiesEXT.ninputImageDataAlignment(address(), value); return this; }
-        /** Passes the {@link VkVideoEncodeH265CapabilitiesEXT#inputImageDataAlignment} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkVideoEncodeH265CapabilitiesEXT.Buffer inputImageDataAlignment(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(inputImageDataAlignment()); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxNumL0ReferenceForP} field. */
-        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxNumL0ReferenceForP(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxNumL0ReferenceForP(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxNumL0ReferenceForB} field. */
-        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxNumL0ReferenceForB(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxNumL0ReferenceForB(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxNumL1Reference} field. */
-        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxNumL1Reference(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxNumL1Reference(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxNumSubLayers} field. */
-        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxNumSubLayers(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxNumSubLayers(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#qualityLevelCount} field. */
-        public VkVideoEncodeH265CapabilitiesEXT.Buffer qualityLevelCount(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nqualityLevelCount(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#transformBlockSizes} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer transformBlockSizes(@NativeType("VkVideoEncodeH265TransformBlockSizeFlagsEXT") int value) { VkVideoEncodeH265CapabilitiesEXT.ntransformBlockSizes(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxPPictureL0ReferenceCount} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxPPictureL0ReferenceCount(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxPPictureL0ReferenceCount(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxBPictureL0ReferenceCount} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxBPictureL0ReferenceCount(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxBPictureL0ReferenceCount(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxL1ReferenceCount} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxL1ReferenceCount(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxL1ReferenceCount(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxSubLayersCount} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxSubLayersCount(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxSubLayersCount(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#minLog2MinLumaCodingBlockSizeMinus3} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer minLog2MinLumaCodingBlockSizeMinus3(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nminLog2MinLumaCodingBlockSizeMinus3(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxLog2MinLumaCodingBlockSizeMinus3} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxLog2MinLumaCodingBlockSizeMinus3(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxLog2MinLumaCodingBlockSizeMinus3(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#minLog2MinLumaTransformBlockSizeMinus2} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer minLog2MinLumaTransformBlockSizeMinus2(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nminLog2MinLumaTransformBlockSizeMinus2(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxLog2MinLumaTransformBlockSizeMinus2} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxLog2MinLumaTransformBlockSizeMinus2(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxLog2MinLumaTransformBlockSizeMinus2(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#minMaxTransformHierarchyDepthInter} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer minMaxTransformHierarchyDepthInter(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nminMaxTransformHierarchyDepthInter(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxMaxTransformHierarchyDepthInter} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxMaxTransformHierarchyDepthInter(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxMaxTransformHierarchyDepthInter(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#minMaxTransformHierarchyDepthIntra} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer minMaxTransformHierarchyDepthIntra(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nminMaxTransformHierarchyDepthIntra(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxMaxTransformHierarchyDepthIntra} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxMaxTransformHierarchyDepthIntra(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxMaxTransformHierarchyDepthIntra(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxDiffCuQpDeltaDepth} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxDiffCuQpDeltaDepth(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxDiffCuQpDeltaDepth(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#minMaxNumMergeCand} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer minMaxNumMergeCand(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nminMaxNumMergeCand(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265CapabilitiesEXT#maxMaxNumMergeCand} field. */
+        public VkVideoEncodeH265CapabilitiesEXT.Buffer maxMaxNumMergeCand(@NativeType("uint8_t") byte value) { VkVideoEncodeH265CapabilitiesEXT.nmaxMaxNumMergeCand(address(), value); return this; }
         /** Copies the specified {@link VkExtensionProperties} to the {@link VkVideoEncodeH265CapabilitiesEXT#stdExtensionVersion} field. */
         public VkVideoEncodeH265CapabilitiesEXT.Buffer stdExtensionVersion(VkExtensionProperties value) { VkVideoEncodeH265CapabilitiesEXT.nstdExtensionVersion(address(), value); return this; }
 

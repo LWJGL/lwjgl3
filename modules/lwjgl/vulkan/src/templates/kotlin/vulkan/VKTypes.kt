@@ -140,7 +140,6 @@ val VkSemaphoreType = "VkSemaphoreType".enumType
 val VkSemaphoreWaitFlagBits = "VkSemaphoreWaitFlagBits".enumType
 val VkPipelineCreationFeedbackFlagBits = "VkPipelineCreationFeedbackFlagBits".enumType
 val VkToolPurposeFlagBits = "VkToolPurposeFlagBits".enumType
-val VkPrivateDataSlotCreateFlagBits = "VkPrivateDataSlotCreateFlagBits".enumType
 val VkPipelineStageFlagBits2 = "VkPipelineStageFlagBits2".enumType
 val VkAccessFlagBits2 = "VkAccessFlagBits2".enumType
 val VkSubmitFlagBits = "VkSubmitFlagBits".enumType
@@ -432,7 +431,7 @@ val VkExtent2D = struct(Module.VULKAN, "VkExtent2D") {
         Structure specifying a two-dimensional extent.
 
         <h5>See Also</h5>
-        ##VkDisplayModeParametersKHR, ##VkDisplayPlaneCapabilitiesKHR, ##VkDisplayPropertiesKHR, ##VkDisplaySurfaceCreateInfoKHR, ##VkFragmentShadingRateAttachmentInfoKHR, ##VkMultisamplePropertiesEXT, ##VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM, ##VkPhysicalDeviceFragmentDensityMapPropertiesEXT, ##VkPhysicalDeviceFragmentShadingRateKHR, ##VkPhysicalDeviceFragmentShadingRatePropertiesKHR, ##VkPhysicalDeviceSampleLocationsPropertiesEXT, ##VkPhysicalDeviceShadingRateImagePropertiesNV, ##VkPipelineFragmentShadingRateStateCreateInfoKHR, ##VkRect2D, ##VkRectLayerKHR, ##VkRenderingFragmentShadingRateAttachmentInfoKHR, ##VkSampleLocationsInfoEXT, ##VkSurfaceCapabilities2EXT, ##VkSurfaceCapabilitiesKHR, ##VkSwapchainCreateInfoKHR, ##VkVideoCapabilitiesKHR, ##VkVideoDecodeInfoKHR, ##VkVideoEncodeH264CapabilitiesEXT, ##VkVideoEncodeH264SessionCreateInfoEXT, ##VkVideoEncodeH265CapabilitiesEXT, ##VkVideoEncodeInfoKHR, ##VkVideoPictureResourceKHR, ##VkVideoSessionCreateInfoKHR, #CmdSetFragmentShadingRateKHR(), #GetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(), #GetRenderAreaGranularity()
+        ##VkDisplayModeParametersKHR, ##VkDisplayPlaneCapabilitiesKHR, ##VkDisplayPropertiesKHR, ##VkDisplaySurfaceCreateInfoKHR, ##VkFragmentShadingRateAttachmentInfoKHR, ##VkMultisamplePropertiesEXT, ##VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM, ##VkPhysicalDeviceFragmentDensityMapPropertiesEXT, ##VkPhysicalDeviceFragmentShadingRateKHR, ##VkPhysicalDeviceFragmentShadingRatePropertiesKHR, ##VkPhysicalDeviceSampleLocationsPropertiesEXT, ##VkPhysicalDeviceShadingRateImagePropertiesNV, ##VkPipelineFragmentShadingRateStateCreateInfoKHR, ##VkRect2D, ##VkRectLayerKHR, ##VkRenderingFragmentShadingRateAttachmentInfoKHR, ##VkSampleLocationsInfoEXT, ##VkSurfaceCapabilities2EXT, ##VkSurfaceCapabilitiesKHR, ##VkSwapchainCreateInfoKHR, ##VkVideoCapabilitiesKHR, ##VkVideoDecodeInfoKHR, ##VkVideoEncodeCapabilitiesKHR, ##VkVideoEncodeH264SessionCreateInfoEXT, ##VkVideoEncodeInfoKHR, ##VkVideoPictureResourceKHR, ##VkVideoSessionCreateInfoKHR, #CmdSetFragmentShadingRateKHR(), #GetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(), #GetRenderAreaGranularity()
         """
 
     uint32_t("width", "the width of the extent.")
@@ -3817,12 +3816,10 @@ val VkGraphicsPipelineCreateInfo = struct(Module.VULKAN, "VkGraphicsPipelineCrea
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR</li>
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR</li>
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState">extendedDynamicState</a> feature is not enabled, there <b>must</b> be no element of the {@code pDynamicStates} member of {@code pDynamicState} set to #DYNAMIC_STATE_CULL_MODE, #DYNAMIC_STATE_FRONT_FACE, #DYNAMIC_STATE_PRIMITIVE_TOPOLOGY, #DYNAMIC_STATE_VIEWPORT_WITH_COUNT, #DYNAMIC_STATE_SCISSOR_WITH_COUNT, #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE, #DYNAMIC_STATE_DEPTH_TEST_ENABLE, #DYNAMIC_STATE_DEPTH_WRITE_ENABLE, #DYNAMIC_STATE_DEPTH_COMPARE_OP, #DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE, #DYNAMIC_STATE_STENCIL_TEST_ENABLE, or #DYNAMIC_STATE_STENCIL_OP</li>
             <li>If the pipeline is being created with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#pipeline-graphics-subsets-pre-rasterization">pre-rasterization shader state</a>, and #DYNAMIC_STATE_VIEWPORT_WITH_COUNT is included in the {@code pDynamicStates} array then {@code viewportCount} <b>must</b> be zero</li>
             <li>If the pipeline is being created with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#pipeline-graphics-subsets-pre-rasterization">pre-rasterization shader state</a>, and #DYNAMIC_STATE_SCISSOR_WITH_COUNT is included in the {@code pDynamicStates} array then {@code scissorCount} <b>must</b> be zero</li>
             <li>If the pipeline is being created with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#pipeline-graphics-subsets-pre-rasterization">pre-rasterization shader state</a>, and #DYNAMIC_STATE_VIEWPORT_WITH_COUNT is included in the {@code pDynamicStates} array then #DYNAMIC_STATE_VIEWPORT <b>must</b> not be present</li>
             <li>If the pipeline is being created with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#pipeline-graphics-subsets-pre-rasterization">pre-rasterization shader state</a>, and #DYNAMIC_STATE_SCISSOR_WITH_COUNT is included in the {@code pDynamicStates} array then #DYNAMIC_STATE_SCISSOR <b>must</b> not be present</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState2">extendedDynamicState2</a> feature is not enabled, there <b>must</b> be no element of the {@code pDynamicStates} member of {@code pDynamicState} set to #DYNAMIC_STATE_DEPTH_BIAS_ENABLE, #DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE, or #DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState2LogicOp">extendedDynamicState2LogicOp</a> feature is not enabled, there <b>must</b> be no element of the {@code pDynamicStates} member of {@code pDynamicState} set to #DYNAMIC_STATE_LOGIC_OP_EXT</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState2PatchControlPoints">extendedDynamicState2PatchControlPoints</a> feature is not enabled, there <b>must</b> be no element of the {@code pDynamicStates} member of {@code pDynamicState} set to #DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT</li>
             <li>If {@code flags} includes #PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedCommands">##VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV{@code ::deviceGeneratedCommands}</a> feature <b>must</b> be enabled</li>
@@ -9378,7 +9375,7 @@ val VkPrivateDataSlotCreateInfo = struct(Module.VULKAN, "VkPrivateDataSlotCreate
 
     Expression("#STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkPrivateDataSlotCreateFlags("flags", "a bitmask of {@code VkPrivateDataSlotCreateFlags} specifying additional parameters of the new private data slot")
+    VkPrivateDataSlotCreateFlags("flags", "reserved for future use.")
 }
 
 val VkPhysicalDevicePipelineCreationCacheControlFeatures = struct(Module.VULKAN, "VkPhysicalDevicePipelineCreationCacheControlFeatures") {
@@ -11013,7 +11010,9 @@ val VkRenderingInfo = struct(Module.VULKAN, "VkRenderingInfo") {
             <li>If neither {@code pDepthAttachment} or {@code pStencilAttachment} are {@code NULL} and the {@code imageView} member of either structure is not #NULL_HANDLE, the {@code imageView} member of each structure <b>must</b> be the same</li>
             <li>If neither {@code pDepthAttachment} or {@code pStencilAttachment} are {@code NULL}, and the {@code resolveMode} member of each is not #RESOLVE_MODE_NONE, the {@code resolveImageView} member of each structure <b>must</b> be the same</li>
             <li>If {@code colorAttachmentCount} is not 0 and the {@code imageView} member of an element of {@code pColorAttachments} is not #NULL_HANDLE, that {@code imageView} <b>must</b> have been created with #IMAGE_USAGE_COLOR_ATTACHMENT_BIT</li>
+            <li>If {@code pDepthAttachment} is not {@code NULL} and {@code pDepthAttachment→imageView} is not #NULL_HANDLE, {@code pDepthAttachment→imageView} <b>must</b> have been created with a format that includes a depth aspect</li>
             <li>If {@code pDepthAttachment} is not {@code NULL} and {@code pDepthAttachment→imageView} is not #NULL_HANDLE, {@code pDepthAttachment→imageView} <b>must</b> have been created with #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
+            <li>If {@code pStencilAttachment} is not {@code NULL} and {@code pStencilAttachment→imageView} is not #NULL_HANDLE, {@code pStencilAttachment→imageView} <b>must</b> have been created with a format that includes a stencil aspect</li>
             <li>If {@code pStencilAttachment} is not {@code NULL} and {@code pStencilAttachment→imageView} is not #NULL_HANDLE, {@code pStencilAttachment→imageView} <b>must</b> have been created with a stencil usage including #IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
             <li>If {@code colorAttachmentCount} is not 0 and the {@code imageView} member of an element of {@code pColorAttachments} is not #NULL_HANDLE, the {@code layout} member of that element of {@code pColorAttachments} <b>must</b> not be #IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</li>
             <li>If {@code colorAttachmentCount} is not 0 and the {@code imageView} member of an element of {@code pColorAttachments} is not #NULL_HANDLE, if the {@code resolveMode} member of that element of {@code pColorAttachments} is not #RESOLVE_MODE_NONE, its {@code resolveImageLayout} member <b>must</b> not be #IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL or #IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL</li>
@@ -11095,6 +11094,8 @@ val VkPipelineRenderingCreateInfo = struct(Module.VULKAN, "VkPipelineRenderingCr
         <h5>Valid Usage</h5>
         <ul>
             <li>If any element of {@code pColorAttachmentFormats} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that includes either #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT or #FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV</li>
+            <li>If {@code depthAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format that includes a depth aspect</li>
+            <li>If {@code stencilAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format that includes a stencil aspect</li>
             <li>If {@code depthAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
             <li>If {@code stencilAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
             <li>If {@code depthAttachmentFormat} is not #FORMAT_UNDEFINED and {@code stencilAttachmentFormat} is not #FORMAT_UNDEFINED, {@code depthAttachmentFormat} <b>must</b> equal {@code stencilAttachmentFormat}</li>
@@ -11156,8 +11157,10 @@ val VkCommandBufferInheritanceRenderingInfo = struct(Module.VULKAN, "VkCommandBu
             <li>If {@code colorAttachmentCount} is not 0, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-variableMultisampleRate">{@code variableMultisampleRate}</a> feature is not enabled, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
             <li>If any element of {@code pColorAttachmentFormats} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_COLOR_ATTACHMENT_BIT</li>
+            <li>If {@code depthAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format that includes a depth aspect</li>
             <li>If {@code depthAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
             <li>When rendering to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#glossary">Linear Color attachment</a>, if any element of {@code pColorAttachmentFormats} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV</li>
+            <li>If {@code stencilAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format that includes a stencil aspect</li>
             <li>If {@code stencilAttachmentFormat} is not #FORMAT_UNDEFINED, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#potential-format-features">potential format features</a> that include #FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT</li>
             <li>If {@code depthAttachmentFormat} is not #FORMAT_UNDEFINED and {@code stencilAttachmentFormat} is not #FORMAT_UNDEFINED, {@code depthAttachmentFormat} <b>must</b> equal {@code stencilAttachmentFormat}</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiview">{@code multiview}</a> feature is not enabled, {@code viewMask} <b>must</b> be 0</li>
@@ -11205,7 +11208,7 @@ val VkPhysicalDeviceShaderIntegerDotProductFeatures = struct(Module.VULKAN, "VkP
     VkBool32("shaderIntegerDotProduct", "specifies whether shader modules <b>can</b> declare the {@code DotProductInputAllKHR}, {@code DotProductInput4x8BitKHR}, {@code DotProductInput4x8BitPackedKHR} and {@code DotProductKHR} capabilities.")
 }
 
-val VkPhysicalDeviceShaderIntegerDotProductProperties = struct(Module.VULKAN, "VkPhysicalDeviceShaderIntegerDotProductProperties") {
+val VkPhysicalDeviceShaderIntegerDotProductProperties = struct(Module.VULKAN, "VkPhysicalDeviceShaderIntegerDotProductProperties", mutable = false) {
     documentation =
         """
         Structure containing information about integer dot product support for a physical device.
@@ -11225,8 +11228,8 @@ val VkPhysicalDeviceShaderIntegerDotProductProperties = struct(Module.VULKAN, "V
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES")..VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
     VkBool32("integerDotProduct8BitUnsignedAccelerated", "a boolean that will be #TRUE if the support for 8-bit unsigned dot product operations using the {@code OpUDotKHR} SPIR-V instruction is accelerated <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#devsandqueues-integer-dot-product-accelerated\">as defined below</a>.")
     VkBool32("integerDotProduct8BitSignedAccelerated", "a boolean that will be #TRUE if the support for 8-bit signed dot product operations using the {@code OpSDotKHR} SPIR-V instruction is accelerated <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#devsandqueues-integer-dot-product-accelerated\">as defined below</a>.")
     VkBool32("integerDotProduct8BitMixedSignednessAccelerated", "a boolean that will be #TRUE if the support for 8-bit mixed signedness dot product operations using the {@code OpSUDotKHR} SPIR-V instruction is accelerated <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#devsandqueues-integer-dot-product-accelerated\">as defined below</a>.")

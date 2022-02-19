@@ -27,7 +27,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
             <dd>300</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>3</dd>
+            <dd>4</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -39,14 +39,14 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li><a target="_blank" href="mailto:ahmed.abdelkalek@amd.com">ahmed.abdelkalek@amd.com</a></li>
+                <li>Ahmed Abdelkhalek <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_encode_queue]%20@aabdelkh%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_video_encode_queue%20extension%3E%3E">aabdelkh</a></li>
             </ul></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-09-30</dd>
+            <dd>2022-02-10</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -71,7 +71,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."3"
+        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."4"
     )
 
     StringConstant(
@@ -98,7 +98,8 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
         "STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR".."1000299000",
         "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR".."1000299001",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR".."1000299002"
+        "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR".."1000299002",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR".."1000299003"
     )
 
     EnumConstant(
@@ -166,14 +167,16 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
     EnumConstant(
         """
-        VkVideoEncodeRateControlFlagBitsKHR - Reserved for future use
+        VkVideoEncodeCapabilityFlagBitsKHR - Video encode capability flags
 
         <h5>Description</h5>
-        {@code VkVideoEncodeRateControlFlagBitsKHR} defines bits which may be set in a {@code VkVideoEncodeRateControlFlagsKHR} value, but is currently unused.
+        <ul>
+            <li>#VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR reports that the implementation supports use of ##VkVideoEncodeInfoKHR{@code ::precedingExternallyEncodedBytes}.</li>
+        </ul>
         """,
 
-        "VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR".."0",
-        "VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR".enum(0x00000001)
+        "VIDEO_ENCODE_CAPABILITY_DEFAULT_KHR".."0",
+        "VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR".enum(0x00000001)
     )
 
     EnumConstant(
@@ -194,6 +197,18 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         "VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR".."0",
         "VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR".."1",
         "VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR".."2"
+    )
+
+    EnumConstant(
+        """
+        VkVideoEncodeRateControlFlagBitsKHR - Reserved for future use
+
+        <h5>Description</h5>
+        {@code VkVideoEncodeRateControlFlagBitsKHR} defines bits which may be set in a {@code VkVideoEncodeRateControlFlagsKHR} value, but is currently unused.
+        """,
+
+        "VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR".."0",
+        "VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR".enum(0x00000001)
     )
 
     void(

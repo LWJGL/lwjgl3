@@ -44,7 +44,6 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     int8_t delta_chroma_weight_l1[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
  *     int8_t delta_chroma_offset_l1[STD_VIDEO_ENCODE_H265_CHROMA_LISTS_NUM];
  *     uint8_t MaxNumMergeCand;
- *     int8_t slice_qp_delta;
  *     int8_t {@link #slice_cb_qp_offset};
  *     int8_t {@link #slice_cr_qp_offset};
  *     int8_t {@link #slice_beta_offset_div2};
@@ -86,7 +85,6 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
         DELTA_CHROMA_WEIGHT_L1,
         DELTA_CHROMA_OFFSET_L1,
         MAXNUMMERGECAND,
-        SLICE_QP_DELTA,
         SLICE_CB_QP_OFFSET,
         SLICE_CR_QP_OFFSET,
         SLICE_BETA_OFFSET_DIV2,
@@ -126,7 +124,6 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
             __member(1),
             __member(1),
             __member(1),
-            __member(1),
             __member(StdVideoEncodeH265SliceSegmentHeaderFlags.SIZEOF, StdVideoEncodeH265SliceSegmentHeaderFlags.ALIGNOF)
         );
 
@@ -154,15 +151,14 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
         DELTA_CHROMA_WEIGHT_L1 = layout.offsetof(18);
         DELTA_CHROMA_OFFSET_L1 = layout.offsetof(19);
         MAXNUMMERGECAND = layout.offsetof(20);
-        SLICE_QP_DELTA = layout.offsetof(21);
-        SLICE_CB_QP_OFFSET = layout.offsetof(22);
-        SLICE_CR_QP_OFFSET = layout.offsetof(23);
-        SLICE_BETA_OFFSET_DIV2 = layout.offsetof(24);
-        SLICE_TC_OFFSET_DIV2 = layout.offsetof(25);
-        SLICE_ACT_Y_QP_OFFSET = layout.offsetof(26);
-        SLICE_ACT_CB_QP_OFFSET = layout.offsetof(27);
-        SLICE_ACT_CR_QP_OFFSET = layout.offsetof(28);
-        FLAGS = layout.offsetof(29);
+        SLICE_CB_QP_OFFSET = layout.offsetof(21);
+        SLICE_CR_QP_OFFSET = layout.offsetof(22);
+        SLICE_BETA_OFFSET_DIV2 = layout.offsetof(23);
+        SLICE_TC_OFFSET_DIV2 = layout.offsetof(24);
+        SLICE_ACT_Y_QP_OFFSET = layout.offsetof(25);
+        SLICE_ACT_CB_QP_OFFSET = layout.offsetof(26);
+        SLICE_ACT_CR_QP_OFFSET = layout.offsetof(27);
+        FLAGS = layout.offsetof(28);
     }
 
     /**
@@ -265,9 +261,6 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
     /** @return the value of the {@code MaxNumMergeCand} field. */
     @NativeType("uint8_t")
     public byte MaxNumMergeCand() { return nMaxNumMergeCand(address()); }
-    /** @return the value of the {@code slice_qp_delta} field. */
-    @NativeType("int8_t")
-    public byte slice_qp_delta() { return nslice_qp_delta(address()); }
     /** [-12, 12] */
     @NativeType("int8_t")
     public byte slice_cb_qp_offset() { return nslice_cb_qp_offset(address()); }
@@ -350,8 +343,6 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
     public StdVideoEncodeH265SliceSegmentHeader delta_chroma_offset_l1(int index, @NativeType("int8_t") byte value) { ndelta_chroma_offset_l1(address(), index, value); return this; }
     /** Sets the specified value to the {@code MaxNumMergeCand} field. */
     public StdVideoEncodeH265SliceSegmentHeader MaxNumMergeCand(@NativeType("uint8_t") byte value) { nMaxNumMergeCand(address(), value); return this; }
-    /** Sets the specified value to the {@code slice_qp_delta} field. */
-    public StdVideoEncodeH265SliceSegmentHeader slice_qp_delta(@NativeType("int8_t") byte value) { nslice_qp_delta(address(), value); return this; }
     /** Sets the specified value to the {@link #slice_cb_qp_offset} field. */
     public StdVideoEncodeH265SliceSegmentHeader slice_cb_qp_offset(@NativeType("int8_t") byte value) { nslice_cb_qp_offset(address(), value); return this; }
     /** Sets the specified value to the {@link #slice_cr_qp_offset} field. */
@@ -394,7 +385,6 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
         ByteBuffer delta_chroma_weight_l1,
         ByteBuffer delta_chroma_offset_l1,
         byte MaxNumMergeCand,
-        byte slice_qp_delta,
         byte slice_cb_qp_offset,
         byte slice_cr_qp_offset,
         byte slice_beta_offset_div2,
@@ -425,7 +415,6 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
         delta_chroma_weight_l1(delta_chroma_weight_l1);
         delta_chroma_offset_l1(delta_chroma_offset_l1);
         MaxNumMergeCand(MaxNumMergeCand);
-        slice_qp_delta(slice_qp_delta);
         slice_cb_qp_offset(slice_cb_qp_offset);
         slice_cr_qp_offset(slice_cr_qp_offset);
         slice_beta_offset_div2(slice_beta_offset_div2);
@@ -637,8 +626,6 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
     }
     /** Unsafe version of {@link #MaxNumMergeCand}. */
     public static byte nMaxNumMergeCand(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceSegmentHeader.MAXNUMMERGECAND); }
-    /** Unsafe version of {@link #slice_qp_delta}. */
-    public static byte nslice_qp_delta(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceSegmentHeader.SLICE_QP_DELTA); }
     /** Unsafe version of {@link #slice_cb_qp_offset}. */
     public static byte nslice_cb_qp_offset(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265SliceSegmentHeader.SLICE_CB_QP_OFFSET); }
     /** Unsafe version of {@link #slice_cr_qp_offset}. */
@@ -754,8 +741,6 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
     }
     /** Unsafe version of {@link #MaxNumMergeCand(byte) MaxNumMergeCand}. */
     public static void nMaxNumMergeCand(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceSegmentHeader.MAXNUMMERGECAND, value); }
-    /** Unsafe version of {@link #slice_qp_delta(byte) slice_qp_delta}. */
-    public static void nslice_qp_delta(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceSegmentHeader.SLICE_QP_DELTA, value); }
     /** Unsafe version of {@link #slice_cb_qp_offset(byte) slice_cb_qp_offset}. */
     public static void nslice_cb_qp_offset(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265SliceSegmentHeader.SLICE_CB_QP_OFFSET, value); }
     /** Unsafe version of {@link #slice_cr_qp_offset(byte) slice_cr_qp_offset}. */
@@ -898,9 +883,6 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
         /** @return the value of the {@code MaxNumMergeCand} field. */
         @NativeType("uint8_t")
         public byte MaxNumMergeCand() { return StdVideoEncodeH265SliceSegmentHeader.nMaxNumMergeCand(address()); }
-        /** @return the value of the {@code slice_qp_delta} field. */
-        @NativeType("int8_t")
-        public byte slice_qp_delta() { return StdVideoEncodeH265SliceSegmentHeader.nslice_qp_delta(address()); }
         /** @return the value of the {@link StdVideoEncodeH265SliceSegmentHeader#slice_cb_qp_offset} field. */
         @NativeType("int8_t")
         public byte slice_cb_qp_offset() { return StdVideoEncodeH265SliceSegmentHeader.nslice_cb_qp_offset(address()); }
@@ -983,8 +965,6 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct implements Nati
         public StdVideoEncodeH265SliceSegmentHeader.Buffer delta_chroma_offset_l1(int index, @NativeType("int8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.ndelta_chroma_offset_l1(address(), index, value); return this; }
         /** Sets the specified value to the {@code MaxNumMergeCand} field. */
         public StdVideoEncodeH265SliceSegmentHeader.Buffer MaxNumMergeCand(@NativeType("uint8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.nMaxNumMergeCand(address(), value); return this; }
-        /** Sets the specified value to the {@code slice_qp_delta} field. */
-        public StdVideoEncodeH265SliceSegmentHeader.Buffer slice_qp_delta(@NativeType("int8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.nslice_qp_delta(address(), value); return this; }
         /** Sets the specified value to the {@link StdVideoEncodeH265SliceSegmentHeader#slice_cb_qp_offset} field. */
         public StdVideoEncodeH265SliceSegmentHeader.Buffer slice_cb_qp_offset(@NativeType("int8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.nslice_cb_qp_offset(address(), value); return this; }
         /** Sets the specified value to the {@link StdVideoEncodeH265SliceSegmentHeader#slice_cr_qp_offset} field. */
