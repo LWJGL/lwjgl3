@@ -100,13 +100,13 @@ static int increase_rlimit_nofile(unsigned nr)
 	int ret;
 	struct rlimit rlim;
 
-	ret = uring_getrlimit(RLIMIT_NOFILE, &rlim);
+	ret = __sys_getrlimit(RLIMIT_NOFILE, &rlim);
 	if (ret < 0)
 		return ret;
 
 	if (rlim.rlim_cur < nr) {
 		rlim.rlim_cur += nr;
-		uring_setrlimit(RLIMIT_NOFILE, &rlim);
+		__sys_setrlimit(RLIMIT_NOFILE, &rlim);
 	}
 
 	return 0;

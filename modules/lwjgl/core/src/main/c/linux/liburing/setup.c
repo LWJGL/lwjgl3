@@ -10,9 +10,9 @@
 
 static void io_uring_unmap_rings(struct io_uring_sq *sq, struct io_uring_cq *cq)
 {
-	uring_munmap(sq->ring_ptr, sq->ring_sz);
+	__sys_munmap(sq->ring_ptr, sq->ring_sz);
 	if (cq->ring_ptr && cq->ring_ptr != sq->ring_ptr)
-		uring_munmap(cq->ring_ptr, cq->ring_sz);
+		__sys_munmap(cq->ring_ptr, cq->ring_sz);
 }
 
 static int io_uring_mmap(int fd, struct io_uring_params *p,
@@ -29,7 +29,7 @@ static int io_uring_mmap(int fd, struct io_uring_params *p,
 			sq->ring_sz = cq->ring_sz;
 		cq->ring_sz = sq->ring_sz;
 	}
-	sq->ring_ptr = uring_mmap(0, sq->ring_sz, PROT_READ | PROT_WRITE,
+	sq->ring_ptr = __sys_mmap(0, sq->ring_sz, PROT_READ | PROT_WRITE,
 				  MAP_SHARED | MAP_POPULATE, fd,
 				  IORING_OFF_SQ_RING);
 	if (IS_ERR(sq->ring_ptr))
@@ -38,7 +38,7 @@ static int io_uring_mmap(int fd, struct io_uring_params *p,
 	if (p->features & IORING_FEAT_SINGLE_MMAP) {
 		cq->ring_ptr = sq->ring_ptr;
 	} else {
-		cq->ring_ptr = uring_mmap(0, cq->ring_sz, PROT_READ | PROT_WRITE,
+		cq->ring_ptr = __sys_mmap(0, cq->ring_sz, PROT_READ | PROT_WRITE,
 					  MAP_SHARED | MAP_POPULATE, fd,
 					  IORING_OFF_CQ_RING);
 		if (IS_ERR(cq->ring_ptr)) {
@@ -57,7 +57,7 @@ static int io_uring_mmap(int fd, struct io_uring_params *p,
 	sq->array = sq->ring_ptr + p->sq_off.array;
 
 	size = p->sq_entries * sizeof(struct io_uring_sqe);
-	sq->sqes = uring_mmap(0, size, PROT_READ | PROT_WRITE,
+	sq->sqes = __sys_mmap(0, size, PROT_READ | PROT_WRITE,
 			      MAP_SHARED | MAP_POPULATE, fd, IORING_OFF_SQES);
 	if (IS_ERR(sq->sqes)) {
 		ret = PTR_ERR(sq->sqes);
@@ -109,18 +109,18 @@ int io_uring_ring_dontfork(struct io_uring *ring)
 		return -EINVAL;
 
 	len = *ring->sq.kring_entries * sizeof(struct io_uring_sqe);
-	ret = uring_madvise(ring->sq.sqes, len, MADV_DONTFORK);
+	ret = __sys_madvise(ring->sq.sqes, len, MADV_DONTFORK);
 	if (ret < 0)
 		return ret;
 
 	len = ring->sq.ring_sz;
-	ret = uring_madvise(ring->sq.ring_ptr, len, MADV_DONTFORK);
+	ret = __sys_madvise(ring->sq.ring_ptr, len, MADV_DONTFORK);
 	if (ret < 0)
 		return ret;
 
 	if (ring->cq.ring_ptr != ring->sq.ring_ptr) {
 		len = ring->cq.ring_sz;
-		ret = uring_madvise(ring->cq.ring_ptr, len, MADV_DONTFORK);
+		ret = __sys_madvise(ring->cq.ring_ptr, len, MADV_DONTFORK);
 		if (ret < 0)
 			return ret;
 	}
@@ -139,7 +139,7 @@ int io_uring_queue_init_params(unsigned entries, struct io_uring *ring,
 
 	ret = io_uring_queue_mmap(fd, p, ring);
 	if (ret) {
-		uring_close(fd);
+		__sys_close(fd);
 		return ret;
 	}
 
@@ -166,9 +166,9 @@ void io_uring_queue_exit(struct io_uring *ring)
 	struct io_uring_sq *sq = &ring->sq;
 	struct io_uring_cq *cq = &ring->cq;
 
-	uring_munmap(sq->sqes, *sq->kring_entries * sizeof(struct io_uring_sqe));
+	__sys_munmap(sq->sqes, *sq->kring_entries * sizeof(struct io_uring_sqe));
 	io_uring_unmap_rings(sq, cq);
-	uring_close(ring->ring_fd);
+	__sys_close(ring->ring_fd);
 }
 
 struct io_uring_probe *io_uring_get_probe_ring(struct io_uring *ring)

@@ -36,6 +36,8 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         Returns an allocated {@code io_uring_probe} structure to the caller.
 
         The caller is responsible for freeing the structure with the function #free_probe().
+
+        Note: Earlier versions of the Linux kernel (&le; 5.5) do not support probe. If the kernel doesn't support probe, this function will return #NULL.
         """,
 
         void()
@@ -229,6 +231,10 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         Registers {@code nr_iovecs} number of buffers defined by the array {@code iovecs} belonging to the {@code ring}.
 
         After the caller has registered the buffers, they can be used with one of the fixed buffers functions.
+
+        Registered buffers is an optimization that is useful in conjunction with {@code O_DIRECT} reads and writes, where maps the specified range into the
+        kernel once when the buffer is registered, rather than doing a map and unmap for each IO every time IO is performed to that region. Additionally, it
+        also avoids manipulating the page reference counts for each IO.
         """,
 
         io_uring.p("ring", ""),
@@ -585,7 +591,18 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
 
     void(
         "prep_read_fixed",
-        "",
+        """
+        Prepares an IO read request with a previously registered IO buffer.
+        
+        The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start reading {@code nbytes} into the buffer {@code buf} at
+        the specified {@code offset}, and with the buffer matching the registered index of {@code buf_index}.
+
+        This work just like  #prep_read() except it requires the user of buffers that have been registered with #register_buffers(). The {@code buf} and
+        {@code nbytes} arguments must fall within a region specificed by {@code buf_index} in the previously registered buffer. The buffer need not be aligned
+        with the start of the registered buffer.
+
+        After the read has been prepared it can be submitted with one of the submit functions.
+        """,
 
         io_uring_sqe.p("sqe", ""),
         int("fd", ""),
@@ -653,7 +670,18 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
 
     void(
         "prep_write_fixed",
-        "",
+        """
+        Prepares an IO write request with a previously registered IO buffer.
+        
+        The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing {@code nbytes} from the buffer {@code buf} at
+        the specified {@code offset}, and with the buffer matching the registered index of {@code buf_index}.
+
+        This work just like #prep_write() except it requires the user of buffers that have been registered with #register_buffers(). The {@code buf} and
+        {@code nbytes} arguments must fall within a region specificed by {@code buf_index} in the previously registered buffer. The buffer need not be aligned
+        with the start of the registered buffer.
+
+        After the read has been prepared it can be submitted with one of the submit functions.
+        """,
 
         io_uring_sqe.p("sqe", ""),
         int("fd", ""),

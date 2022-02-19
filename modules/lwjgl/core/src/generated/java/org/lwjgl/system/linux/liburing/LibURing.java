@@ -56,6 +56,8 @@ public class LibURing {
      * Returns an allocated {@code io_uring_probe} structure to the caller.
      * 
      * <p>The caller is responsible for freeing the structure with the function {@link #io_uring_free_probe free_probe}.</p>
+     * 
+     * <p>Note: Earlier versions of the Linux kernel (&le; 5.5) do not support probe. If the kernel doesn't support probe, this function will return {@code NULL}.</p>
      */
     @Nullable
     @NativeType("struct io_uring_probe *")
@@ -297,6 +299,10 @@ public class LibURing {
      * Registers {@code nr_iovecs} number of buffers defined by the array {@code iovecs} belonging to the {@code ring}.
      * 
      * <p>After the caller has registered the buffers, they can be used with one of the fixed buffers functions.</p>
+     * 
+     * <p>Registered buffers is an optimization that is useful in conjunction with {@code O_DIRECT} reads and writes, where maps the specified range into the
+     * kernel once when the buffer is registered, rather than doing a map and unmap for each IO every time IO is performed to that region. Additionally, it
+     * also avoids manipulating the page reference counts for each IO.</p>
      *
      * @return 0 on success. On failure it returns {@code -errno}.
      */
@@ -674,8 +680,21 @@ public class LibURing {
 
     // --- [ io_uring_prep_read_fixed ] ---
 
+    /** Unsafe version of: {@link #io_uring_prep_read_fixed prep_read_fixed} */
     public static native void nio_uring_prep_read_fixed(long sqe, int fd, long buf, int nbytes, int offset, int buf_index);
 
+    /**
+     * Prepares an IO read request with a previously registered IO buffer.
+     * 
+     * <p>The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start reading {@code nbytes} into the buffer {@code buf} at
+     * the specified {@code offset}, and with the buffer matching the registered index of {@code buf_index}.</p>
+     * 
+     * <p>This work just like  {@link #io_uring_prep_read prep_read} except it requires the user of buffers that have been registered with {@link #io_uring_register_buffers register_buffers}. The {@code buf} and
+     * {@code nbytes} arguments must fall within a region specificed by {@code buf_index} in the previously registered buffer. The buffer need not be aligned
+     * with the start of the registered buffer.</p>
+     * 
+     * <p>After the read has been prepared it can be submitted with one of the submit functions.</p>
+     */
     public static void io_uring_prep_read_fixed(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void *") ByteBuffer buf, int offset, int buf_index) {
         nio_uring_prep_read_fixed(sqe.address(), fd, memAddress(buf), buf.remaining(), offset, buf_index);
     }
@@ -736,8 +755,21 @@ public class LibURing {
 
     // --- [ io_uring_prep_write_fixed ] ---
 
+    /** Unsafe version of: {@link #io_uring_prep_write_fixed prep_write_fixed} */
     public static native void nio_uring_prep_write_fixed(long sqe, int fd, long buf, int nbytes, int offset, int buf_index);
 
+    /**
+     * Prepares an IO write request with a previously registered IO buffer.
+     * 
+     * <p>The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing {@code nbytes} from the buffer {@code buf} at
+     * the specified {@code offset}, and with the buffer matching the registered index of {@code buf_index}.</p>
+     * 
+     * <p>This work just like {@link #io_uring_prep_write prep_write} except it requires the user of buffers that have been registered with {@link #io_uring_register_buffers register_buffers}. The {@code buf} and
+     * {@code nbytes} arguments must fall within a region specificed by {@code buf_index} in the previously registered buffer. The buffer need not be aligned
+     * with the start of the registered buffer.</p>
+     * 
+     * <p>After the read has been prepared it can be submitted with one of the submit functions.</p>
+     */
     public static void io_uring_prep_write_fixed(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int fd, @NativeType("void const *") ByteBuffer buf, int offset, int buf_index) {
         nio_uring_prep_write_fixed(sqe.address(), fd, memAddress(buf), buf.remaining(), offset, buf_index);
     }
