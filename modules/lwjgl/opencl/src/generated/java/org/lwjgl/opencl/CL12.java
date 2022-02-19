@@ -170,10 +170,10 @@ public class CL12 extends CL11 {
 
     /** cl_kernel_arg_address_qualifier */
     public static final int
-        CL_KERNEL_ARG_ADDRESS_GLOBAL   = 0x119A,
-        CL_KERNEL_ARG_ADDRESS_LOCAL    = 0x119B,
-        CL_KERNEL_ARG_ADDRESS_CONSTANT = 0x119C,
-        CL_KERNEL_ARG_ADDRESS_PRIVATE  = 0x119D;
+        CL_KERNEL_ARG_ADDRESS_GLOBAL   = 0x119B,
+        CL_KERNEL_ARG_ADDRESS_LOCAL    = 0x119C,
+        CL_KERNEL_ARG_ADDRESS_CONSTANT = 0x119D,
+        CL_KERNEL_ARG_ADDRESS_PRIVATE  = 0x119E;
 
     /** cl_kernel_arg_access_qualifier */
     public static final int

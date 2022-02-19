@@ -222,10 +222,10 @@ val CL12 = "CL12".nativeClassCL("CL12") {
     IntConstant(
         "cl_kernel_arg_address_qualifier",
 
-        "KERNEL_ARG_ADDRESS_GLOBAL"..0x119A,
-        "KERNEL_ARG_ADDRESS_LOCAL"..0x119B,
-        "KERNEL_ARG_ADDRESS_CONSTANT"..0x119C,
-        "KERNEL_ARG_ADDRESS_PRIVATE"..0x119D
+        "KERNEL_ARG_ADDRESS_GLOBAL"..0x119B,
+        "KERNEL_ARG_ADDRESS_LOCAL"..0x119C,
+        "KERNEL_ARG_ADDRESS_CONSTANT"..0x119D,
+        "KERNEL_ARG_ADDRESS_PRIVATE"..0x119E
     )
 
     IntConstant(
