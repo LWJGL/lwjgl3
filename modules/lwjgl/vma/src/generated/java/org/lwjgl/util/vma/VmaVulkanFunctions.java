@@ -51,6 +51,8 @@ import org.lwjgl.vulkan.*;
  *     PFN_vkBindBufferMemory2KHR {@link #vkBindBufferMemory2KHR};
  *     PFN_vkBindImageMemory2KHR {@link #vkBindImageMemory2KHR};
  *     PFN_vkGetPhysicalDeviceMemoryProperties2KHR vkGetPhysicalDeviceMemoryProperties2KHR;
+ *     PFN_vkGetDeviceBufferMemoryRequirements vkGetDeviceBufferMemoryRequirements;
+ *     PFN_vkGetDeviceImageMemoryRequirements vkGetDeviceImageMemoryRequirements;
  * }</code></pre>
  */
 public class VmaVulkanFunctions extends Struct implements NativeResource {
@@ -86,10 +88,14 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         VKGETIMAGEMEMORYREQUIREMENTS2KHR,
         VKBINDBUFFERMEMORY2KHR,
         VKBINDIMAGEMEMORY2KHR,
-        VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR;
+        VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR,
+        VKGETDEVICEBUFFERMEMORYREQUIREMENTS,
+        VKGETDEVICEIMAGEMEMORYREQUIREMENTS;
 
     static {
         Layout layout = __struct(
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
@@ -143,6 +149,8 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         VKBINDBUFFERMEMORY2KHR = layout.offsetof(21);
         VKBINDIMAGEMEMORY2KHR = layout.offsetof(22);
         VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR = layout.offsetof(23);
+        VKGETDEVICEBUFFERMEMORYREQUIREMENTS = layout.offsetof(24);
+        VKGETDEVICEIMAGEMEMORYREQUIREMENTS = layout.offsetof(25);
     }
 
     /**
@@ -236,6 +244,12 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     /** @return the value of the {@code vkGetPhysicalDeviceMemoryProperties2KHR} field. */
     @NativeType("PFN_vkGetPhysicalDeviceMemoryProperties2KHR")
     public long vkGetPhysicalDeviceMemoryProperties2KHR() { return nvkGetPhysicalDeviceMemoryProperties2KHR(address()); }
+    /** @return the value of the {@code vkGetDeviceBufferMemoryRequirements} field. */
+    @NativeType("PFN_vkGetDeviceBufferMemoryRequirements")
+    public long vkGetDeviceBufferMemoryRequirements() { return nvkGetDeviceBufferMemoryRequirements(address()); }
+    /** @return the value of the {@code vkGetDeviceImageMemoryRequirements} field. */
+    @NativeType("PFN_vkGetDeviceImageMemoryRequirements")
+    public long vkGetDeviceImageMemoryRequirements() { return nvkGetDeviceImageMemoryRequirements(address()); }
 
     /** Sets the specified value to the {@code vkGetInstanceProcAddr} field. */
     public VmaVulkanFunctions vkGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddr") long value) { nvkGetInstanceProcAddr(address(), value); return this; }
@@ -285,6 +299,10 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     public VmaVulkanFunctions vkBindImageMemory2KHR(@NativeType("PFN_vkBindImageMemory2KHR") long value) { nvkBindImageMemory2KHR(address(), value); return this; }
     /** Sets the specified value to the {@code vkGetPhysicalDeviceMemoryProperties2KHR} field. */
     public VmaVulkanFunctions vkGetPhysicalDeviceMemoryProperties2KHR(@NativeType("PFN_vkGetPhysicalDeviceMemoryProperties2KHR") long value) { nvkGetPhysicalDeviceMemoryProperties2KHR(address(), value); return this; }
+    /** Sets the specified value to the {@code vkGetDeviceBufferMemoryRequirements} field. */
+    public VmaVulkanFunctions vkGetDeviceBufferMemoryRequirements(@NativeType("PFN_vkGetDeviceBufferMemoryRequirements") long value) { nvkGetDeviceBufferMemoryRequirements(address(), value); return this; }
+    /** Sets the specified value to the {@code vkGetDeviceImageMemoryRequirements} field. */
+    public VmaVulkanFunctions vkGetDeviceImageMemoryRequirements(@NativeType("PFN_vkGetDeviceImageMemoryRequirements") long value) { nvkGetDeviceImageMemoryRequirements(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaVulkanFunctions set(
@@ -311,7 +329,9 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         long vkGetImageMemoryRequirements2KHR,
         long vkBindBufferMemory2KHR,
         long vkBindImageMemory2KHR,
-        long vkGetPhysicalDeviceMemoryProperties2KHR
+        long vkGetPhysicalDeviceMemoryProperties2KHR,
+        long vkGetDeviceBufferMemoryRequirements,
+        long vkGetDeviceImageMemoryRequirements
     ) {
         vkGetInstanceProcAddr(vkGetInstanceProcAddr);
         vkGetDeviceProcAddr(vkGetDeviceProcAddr);
@@ -337,6 +357,8 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
         vkBindBufferMemory2KHR(vkBindBufferMemory2KHR);
         vkBindImageMemory2KHR(vkBindImageMemory2KHR);
         vkGetPhysicalDeviceMemoryProperties2KHR(vkGetPhysicalDeviceMemoryProperties2KHR);
+        vkGetDeviceBufferMemoryRequirements(vkGetDeviceBufferMemoryRequirements);
+        vkGetDeviceImageMemoryRequirements(vkGetDeviceImageMemoryRequirements);
 
         return this;
     }
@@ -462,6 +484,10 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     public static long nvkBindImageMemory2KHR(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKBINDIMAGEMEMORY2KHR); }
     /** Unsafe version of {@link #vkGetPhysicalDeviceMemoryProperties2KHR}. */
     public static long nvkGetPhysicalDeviceMemoryProperties2KHR(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR); }
+    /** Unsafe version of {@link #vkGetDeviceBufferMemoryRequirements}. */
+    public static long nvkGetDeviceBufferMemoryRequirements(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETDEVICEBUFFERMEMORYREQUIREMENTS); }
+    /** Unsafe version of {@link #vkGetDeviceImageMemoryRequirements}. */
+    public static long nvkGetDeviceImageMemoryRequirements(long struct) { return memGetAddress(struct + VmaVulkanFunctions.VKGETDEVICEIMAGEMEMORYREQUIREMENTS); }
 
     /** Unsafe version of {@link #vkGetInstanceProcAddr(long) vkGetInstanceProcAddr}. */
     public static void nvkGetInstanceProcAddr(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETINSTANCEPROCADDR, value); }
@@ -511,6 +537,10 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
     public static void nvkBindImageMemory2KHR(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKBINDIMAGEMEMORY2KHR, value); }
     /** Unsafe version of {@link #vkGetPhysicalDeviceMemoryProperties2KHR(long) vkGetPhysicalDeviceMemoryProperties2KHR}. */
     public static void nvkGetPhysicalDeviceMemoryProperties2KHR(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETPHYSICALDEVICEMEMORYPROPERTIES2KHR, value); }
+    /** Unsafe version of {@link #vkGetDeviceBufferMemoryRequirements(long) vkGetDeviceBufferMemoryRequirements}. */
+    public static void nvkGetDeviceBufferMemoryRequirements(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETDEVICEBUFFERMEMORYREQUIREMENTS, value); }
+    /** Unsafe version of {@link #vkGetDeviceImageMemoryRequirements(long) vkGetDeviceImageMemoryRequirements}. */
+    public static void nvkGetDeviceImageMemoryRequirements(long struct, long value) { memPutAddress(struct + VmaVulkanFunctions.VKGETDEVICEIMAGEMEMORYREQUIREMENTS, value); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -570,7 +600,9 @@ public class VmaVulkanFunctions extends Struct implements NativeResource {
             .vkGetImageMemoryRequirements2KHR(dc.vkGetImageMemoryRequirements2 != NULL ? dc.vkGetImageMemoryRequirements2 : dc.vkGetImageMemoryRequirements2KHR)
             .vkBindBufferMemory2KHR(dc.vkBindBufferMemory2 != NULL ? dc.vkBindBufferMemory2 : dc.vkBindBufferMemory2KHR)
             .vkBindImageMemory2KHR(dc.vkBindImageMemory2 != NULL ? dc.vkBindImageMemory2 : dc.vkBindImageMemory2KHR)
-            .vkGetPhysicalDeviceMemoryProperties2KHR(ic.vkGetPhysicalDeviceMemoryProperties2 != NULL ? ic.vkGetPhysicalDeviceMemoryProperties2 : ic.vkGetPhysicalDeviceMemoryProperties2KHR);
+            .vkGetPhysicalDeviceMemoryProperties2KHR(ic.vkGetPhysicalDeviceMemoryProperties2 != NULL ? ic.vkGetPhysicalDeviceMemoryProperties2 : ic.vkGetPhysicalDeviceMemoryProperties2KHR)
+            .vkGetDeviceBufferMemoryRequirements(dc.vkGetDeviceBufferMemoryRequirements != NULL ? dc.vkGetDeviceBufferMemoryRequirements : dc.vkGetDeviceBufferMemoryRequirementsKHR)
+            .vkGetDeviceImageMemoryRequirements(dc.vkGetDeviceImageMemoryRequirements != NULL ? dc.vkGetDeviceImageMemoryRequirements : dc.vkGetDeviceImageMemoryRequirementsKHR);
         return this;
     }
 

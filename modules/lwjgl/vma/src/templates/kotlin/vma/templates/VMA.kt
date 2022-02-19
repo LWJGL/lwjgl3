@@ -26,6 +26,7 @@ DISABLE_WARNINGS()
 #define VMA_MEMORY_BUDGET 1
 #define VMA_BUFFER_DEVICE_ADDRESS 1
 #define VMA_MEMORY_PRIORITY 1
+#define VMA_EXTERNAL_MEMORY 1
 #include "vk_mem_alloc.h"
 ENABLE_WARNINGS()"""
     )
@@ -88,7 +89,7 @@ bufferInfo.size = 65536;
 bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 
 VmaAllocationCreateInfo allocInfo = {};
-allocInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
+allocInfo.usage = VMA_MEMORY_USAGE_AUTO;
 
 VkBuffer buffer;
 VmaAllocation allocation;
@@ -110,8 +111,8 @@ vmaDestroyAllocator(allocator);"""
         below. You can also combine multiple methods.
         ${ol(
             """
-            If you just want to find memory type index that meets your requirements, you can use function: #FindMemoryTypeIndex(),
-            #FindMemoryTypeIndexForBufferInfo(), #FindMemoryTypeIndexForImageInfo().
+            If you just want to find memory type index that meets your requirements, you can use function: #FindMemoryTypeIndexForBufferInfo(), 
+            #FindMemoryTypeIndexForImageInfo(), #FindMemoryTypeIndex().
             """,
             """
             If you want to allocate a region of device memory without association with any specific image or buffer, you can use function #AllocateMemory().
@@ -124,8 +125,8 @@ vmaDestroyAllocator(allocator);"""
             extended versions: #BindBufferMemory2(), #BindImageMemory2().
             """,
             """
-            If you want to create a buffer or an image, allocate memory for it and bind them together, all in one call, you can use function #CreateBuffer(),
-            #CreateImage(). This is the easiest and recommended way to use this library.
+            <b>This is the easiest and recommended way to use this library:</b> If you want to create a buffer or an image, allocate memory for it and bind
+            them together, all in one call, you can use function #CreateBuffer(), #CreateImage().
             """
         )}
         When using 3. or 4., the library internally queries Vulkan for memory types supported for that buffer or image (function
@@ -139,10 +140,12 @@ vmaDestroyAllocator(allocator);"""
         <h4>Usage</h4>
 
         The easiest way to specify memory requirements is to fill member ##VmaAllocationCreateInfo{@code ::usage} using one of the values of enum
-        {@code VmaMemoryUsage}. It defines high level, common usage types. For more details, see description of this enum.
+        {@code VmaMemoryUsage}. It defines high level, common usage types. Since version 3 of the library, it is recommended to use #MEMORY_USAGE_AUTO to let
+        it select best memory type for your resource automatically.
 
-        For example, if you want to create a uniform buffer that will be filled using transfer only once or infrequently and used for rendering every frame,
-        you can do it using following code:
+        For example, if you want to create a uniform buffer that will be filled using transfer only once or infrequently and then used for rendering every
+        frame as a uniform buffer, you can do it using following code. The buffer will most likely end up in a memory type with
+        {@code VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT} to be fast to access by the GPU device.
 
         ${codeBlock("""
 VkBufferCreateInfo bufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
@@ -150,11 +153,44 @@ bufferInfo.size = 65536;
 bufferInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 
 VmaAllocationCreateInfo allocInfo = {};
-allocInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
+allocInfo.usage = VMA_MEMORY_USAGE_AUTO;
 
 VkBuffer buffer;
 VmaAllocation allocation;
 vmaCreateBuffer(allocator, &bufferInfo, &allocInfo, &buffer, &allocation, nullptr);""")}
+
+        If you have a preference for putting the resource in GPU (device) memory or CPU (host) memory on systems with discrete graphics card that have the
+        memories separate, you can use #MEMORY_USAGE_AUTO_PREFER_DEVICE or #MEMORY_USAGE_AUTO_PREFER_HOST.
+
+        When using {@code VMA_MEMORY_USAGE_AUTO*} while you want to map the allocated memory, you also need to specify one of the host access flags:
+        #ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT or #ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT. This will help the library decide about preferred
+        memory type to ensure it has {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT} so you can map it.
+
+        For example, a staging buffer that will be filled via mapped pointer and then used as a source of transfer to the buffer decribed previously can be
+        created like this. It will likely and up in a memory type that is {@code HOST_VISIBLE} and {@code HOST_COHERENT} but not {@code HOST_CACHED} (meaning
+        uncached, write-combined) and not {@code DEVICE_LOCAL} (meaning system RAM).
+
+        ${codeBlock("""
+VkBufferCreateInfo stagingBufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+stagingBufferInfo.size = 65536;
+stagingBufferInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+
+VmaAllocationCreateInfo stagingAllocInfo = {};
+stagingAllocInfo.usage = VMA_MEMORY_USAGE_AUTO;
+stagingAllocInfo.flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT;
+
+VkBuffer stagingBuffer;
+VmaAllocation stagingAllocation;
+vmaCreateBuffer(allocator, &stagingBufferInfo, &stagingAllocInfo, &stagingBuffer, &stagingAllocation, nullptr);""")}
+
+        Usage values {@code VMA_MEMORY_USAGE_AUTO*} are legal to use only when the library knows about the resource being created by having
+        {@code VkBufferCreateInfo} / {@code VkImageCreateInfo} passed, so they work with functions like: #CreateBuffer(), #CreateImage(),
+        #FindMemoryTypeIndexForBufferInfo() etc. If you allocate raw memory using function #AllocateMemory(), you have to use other means of selecting memory
+        type, as decribed below.
+
+        ${note("""
+        Old usage values (#MEMORY_USAGE_GPU_ONLY, #MEMORY_USAGE_CPU_ONLY, #MEMORY_USAGE_CPU_TO_GPU, #MEMORY_USAGE_GPU_TO_CPU, #MEMORY_USAGE_CPU_COPY) are still
+        available and work same way as in previous versions of the library for backward compatibility, but they are not recommended.""")}
 
         <h4>Required and preferred flags</h4>
 
@@ -167,7 +203,7 @@ vmaCreateBuffer(allocator, &bufferInfo, &allocInfo, &buffer, &allocation, nullpt
 VmaAllocationCreateInfo allocInfo = {};
 allocInfo.requiredFlags = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT;
 allocInfo.preferredFlags = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_CACHED_BIT;
-allocInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
+allocInfo.flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT | VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
 VkBuffer buffer;
 VmaAllocation allocation;
@@ -175,7 +211,8 @@ vmaCreateBuffer(allocator, &bufferInfo, &allocInfo, &buffer, &allocation, nullpt
 
         A memory type is chosen that has all the required flags and as many preferred flags set as possible.
 
-        If you use ##VmaAllocationCreateInfo{@code ::usage}, it is just internally converted to a set of required and preferred flags.
+        Value passed in ##VmaAllocationCreateInfo{@code ::usage} is internally converted to a set of required and preferred flags, plus some extra "magic"
+        (heuristics).
 
         <h4>Explicit memory types</h4>
 
@@ -227,6 +264,13 @@ vmaCreateBuffer(allocator, &bufferInfo, &allocInfo, &buffer, &allocation, nullpt
         includes mapping disjoint regions. Mapping is not reference-counted internally by Vulkan. Because of this, Vulkan Memory Allocator provides following
         facilities:
 
+        ${note("""
+        If you want to be able to map an allocation, you need to specify one of the flags #ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT or
+        #ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT in ##VmaAllocationCreateInfo{@code ::flags}. These flags are required for an allocation to be mappable when
+        using #MEMORY_USAGE_AUTO or other {@code VMA_MEMORY_USAGE_AUTO*} enum values. For other usage values they are ignored and every such allocation made in
+        {@code HOST_VISIBLE} memory type is mappable, but they can still be used for consistency.
+        """)}
+
         <h4>Mapping functions</h4>
 
         The library provides following functions for mapping of a specific {@code VmaAllocation}: #MapMemory(), #UnmapMemory(). They are safer and more
@@ -237,16 +281,15 @@ vmaCreateBuffer(allocator, &bufferInfo, &allocInfo, &buffer, &allocation, nullpt
 
         ${codeBlock("""
 // Having these objects initialized:
-
 struct ConstantBuffer
 {
     ...
 };
-ConstantBuffer constantBufferData;
+ConstantBuffer constantBufferData = ...
 
-VmaAllocator allocator;
-VkBuffer constantBuffer;
-VmaAllocation constantBufferAllocation;
+VmaAllocator allocator = ...
+VkBuffer constantBuffer = ...
+VmaAllocation constantBufferAllocation = ...
 
 // You can map and fill your buffer using following code:
 
@@ -275,8 +318,9 @@ bufCreateInfo.size = sizeof(ConstantBuffer);
 bufCreateInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
 
 VmaAllocationCreateInfo allocCreateInfo = {};
-allocCreateInfo.usage = VMA_MEMORY_USAGE_CPU_ONLY;
-allocCreateInfo.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
+allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
+allocCreateInfo.flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT |
+    VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
 VkBuffer buf;
 VmaAllocation alloc;
@@ -286,17 +330,10 @@ vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allo
 // Buffer is already mapped. You can access its memory.
 memcpy(allocInfo.pMappedData, &constantBufferData, sizeof(constantBufferData));""")}
 
-        There are some exceptions though, when you should consider mapping memory only for a short period of time:
-        ${ul(
-            """
-            When operating system is Windows 7 or 8.x (Windows 10 is not affected because it uses WDDM2), device is discrete AMD GPU, and memory type is the
-            special 256 MiB pool of {@code DEVICE_LOCAL + HOST_VISIBLE} memory (selected when you use #MEMORY_USAGE_CPU_TO_GPU), then whenever a memory block
-            allocated from this memory type stays mapped for the time of any call to {@code vkQueueSubmit()} or {@code vkQueuePresentKHR()}, this block is
-            migrated by WDDM to system RAM, which degrades performance. It doesn't matter if that particular memory block is actually used by the command
-            buffer being submitted.
-            """,
-            "Keeping many large memory blocks mapped may impact performance or stability of some debugging tools."
-        )}
+        ${note("""
+        #ALLOCATION_CREATE_MAPPED_BIT by itself doesn't guarantee that the allocation will end up in a mappable memory type. For this, you need to also specify
+        #ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT or #ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT. #ALLOCATION_CREATE_MAPPED_BIT only guarantees that if
+        the memory is {@code HOST_VISIBLE}, the allocation will be mapped on creation.""")}
 
         <h4>Cache flush and invalidate</h4>
 
@@ -312,8 +349,8 @@ memcpy(allocInfo.pMappedData, &constantBufferData, sizeof(constantBufferData));"
 
         Please note that memory allocated with #MEMORY_USAGE_CPU_ONLY is guaranteed to be {@code HOST_COHERENT}.
 
-        Also, Windows drivers from all 3 <b>PC</b> GPU vendors (AMD, Intel, NVIDIA) currently provide {@code HOST_COHERENT} flag on all memory types that are
-        {@code HOST_VISIBLE}, so on this platform you may not need to bother.
+        Also, Windows drivers from all 3 PC GPU vendors (AMD, Intel, NVIDIA) currently provide {@code HOST_COHERENT} flag on all memory types that are 
+        {@code HOST_VISIBLE}, so on PC you may not need to bother.
 
         <h4>Finding out if memory is mappable</h4>
 
@@ -505,7 +542,7 @@ finalMemReq.memoryTypeBits = img1MemReq.memoryTypeBits & img2MemReq.memoryTypeBi
 // Validate if(finalMemReq.memoryTypeBits != 0)
 
 VmaAllocationCreateInfo allocCreateInfo = {};
-allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
+allocCreateInfo.preferredFlags = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT;
 
 VmaAllocation alloc;
 res = vmaAllocateMemory(allocator, &finalMemReq, &allocCreateInfo, &alloc, nullptr);
@@ -533,7 +570,7 @@ vkDestroyImage(allocator, img1, nullptr);""")}
             """
             You can create more complex layout where different images and buffers are bound at different offsets inside one large allocation. For example, one
             can imagine a big texture used in some render passes, aliasing with a set of many small buffers used between in some further passes. To bind a
-            resource at non-zero offset of an allocation, use #BindBufferMemory2() / #BindImageMemory2().
+            resource at non-zero offset in an allocation, use #BindBufferMemory2() / #BindImageMemory2().
             """,
             """
             Before allocating memory for the resources you want to alias, check {@code memoryTypeBits} returned in memory requirements of each resource to make
@@ -556,7 +593,8 @@ vkDestroyImage(allocator, img1, nullptr);""")}
             """
             Use extra parameters for a set of your allocations that are available in ##VmaPoolCreateInfo but not in ##VmaAllocationCreateInfo - e.g., custom
             minimum alignment, custom {@code pNext} chain.
-            """
+            """,
+            "Perform defragmentation on a specific subset of your allocations."
         )}
 
         To use custom memory pools:
@@ -603,6 +641,13 @@ vmaDestroyPool(allocator, pool);""")}
         To use this feature, set {@code VmaAllocationCreateInfo::pool} to the pointer to your custom pool and {@code VmaAllocationCreateInfo::flags} to
         #ALLOCATION_CREATE_DEDICATED_MEMORY_BIT.
 
+        ${note("""
+        Excessive use of custom pools is a common mistake when using this library. Custom pools may be useful for special purposes - when you want to keep
+        certain type of resources separate e.g. to reserve minimum amount of memory for them or limit maximum amount of memory they can occupy. For most
+        resources this is not needed and so it is not recommended to create {@code VmaPool} objects and allocations out of them. Allocating from the default
+        pool is sufficient.
+        """)}
+
         <h4>Choosing memory type index</h4>
 
         When creating a pool, you must explicitly specify memory type index. To find the one suitable for your buffers or images, you can use helper functions
@@ -611,11 +656,11 @@ vmaDestroyPool(allocator, pool);""")}
 
         ${codeBlock("""
 VkBufferCreateInfo exampleBufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
-exampleBufCreateInfo.size = 1024; // Whatever.
-exampleBufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT; // Change if needed.
+exampleBufCreateInfo.size = 1024; // Doesn't matter
+exampleBufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 
 VmaAllocationCreateInfo allocCreateInfo = {};
-allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY; // Change if needed.
+allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
 
 uint32_t memTypeIndex;
 vmaFindMemoryTypeIndexForBufferInfo(allocator, &exampleBufCreateInfo, &allocCreateInfo, &memTypeIndex);
@@ -966,18 +1011,17 @@ for(uint32_t i = 0; i < allocCount; ++i)
         any other value that would associate the allocation with your custom metadata.
 
         ${codeBlock("""
-VkBufferCreateInfo bufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
-// Fill bufferInfo...
+VkBufferCreateInfo bufCreateInfo = ...
 
 MyBufferMetadata* pMetadata = CreateBufferMetadata();
 
 VmaAllocationCreateInfo allocCreateInfo = {};
-allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
+allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
 allocCreateInfo.pUserData = pMetadata;
 
 VkBuffer buffer;
 VmaAllocation allocation;
-vmaCreateBuffer(allocator, &bufferInfo, &allocCreateInfo, &buffer, &allocation, nullptr);""")}
+vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buffer, &allocation, nullptr);""")}
 
         The pointer may be later retrieved as ##VmaAllocationInfo{@code ::pUserData}:
 
@@ -988,25 +1032,24 @@ MyBufferMetadata* pMetadata = (MyBufferMetadata*)allocInfo.pUserData;""")}
 
         It can also be changed using function #SetAllocationUserData().
 
-        Values of (non-zero) allocations' {@code pUserData} are printed in JSON report created by #BuildStatsString(), in hexadecimal form.
+        Values of (non-zero) allocations' {@code pUserData} are printed in JSON report created by #BuildStatsString() in hexadecimal form.
 
         <h4>Allocation names</h4>
 
         There is alternative mode available where {@code pUserData} pointer is used to point to a null-terminated string, giving a name to the allocation. To
         use this mode, set #ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT flag in ##VmaAllocationCreateInfo{@code ::flags}. Then {@code pUserData} passed as
-        ##VmaAllocationCreateInfo{@code ::pUserData} or argument to #SetAllocationUserData() must be either null or pointer to a null-terminated string. The
+        ##VmaAllocationCreateInfo{@code ::pUserData} or argument to #SetAllocationUserData() must be either null or a pointer to a null-terminated string. The
         library creates internal copy of the string, so the pointer you pass doesn't need to be valid for whole lifetime of the allocation. You can free it
         after the call.
 
         ${codeBlock("""
-VkImageCreateInfo imageInfo = { VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO };
-// Fill imageInfo...
+VkImageCreateInfo imageInfo = ...
 
 std::string imageName = "Texture: ";
 imageName += fileName;
 
 VmaAllocationCreateInfo allocCreateInfo = {};
-allocCreateInfo.usage = VMA_MEMORY_USAGE_GPU_ONLY;
+allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
 allocCreateInfo.flags = VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT;
 allocCreateInfo.pUserData = imageName.c_str();
 
@@ -1266,126 +1309,221 @@ printf("My virtual block has %llu bytes used by %u virtual allocations\n",
 
         <h3>Recommended usage patterns</h3>
 
+        Vulkan gives great flexibility in memory allocation. This chapter shows the most common patterns.
+
         See also slides from talk: <a href="https://www.gdcvault.com/play/1025458/Advanced-Graphics-Techniques-Tutorial-New">Sawicki, Adam. Advanced Graphics
         Techniques Tutorial: Memory management in Vulkan and DX12. Game Developers Conference, 2018</a>
 
-        <h4>Common mistakes</h4> 
-
-        <b>Use of {@code CPU_TO_GPU} instead of {@code CPU_ONLY} memory</b>
-
-        #MEMORY_USAGE_CPU_TO_GPU is recommended only for resources that will be mapped and written by the CPU, as well as read directly by the GPU - like some
-        buffers or textures updated every frame (dynamic). If you create a staging copy of a resource to be written by CPU and then used as a source of
-        transfer to another resource placed in the GPU memory, that staging resource should be created with #MEMORY_USAGE_CPU_ONLY. Please read the
-        descriptions of these enums carefully for details.
-
-        <b>Unnecessary use of custom pools</b>
-
-        Custom memory pools may be useful for special purposes - when you want to keep certain type of resources separate e.g. to reserve minimum amount of
-        memory for them or limit maximum amount of memory they can occupy. For most resources this is not needed and so it is not recommended to create
-        {@code VmaPool} objects and allocations out of them. Allocating from the default pool is sufficient.
-
-        <h4>Simple patterns</h4>
-
-        <h5>Render targets</h5>
+        <h4>GPU-only resource</h4> 
 
         <b>When:</b> Any resources that you frequently write and read on GPU, e.g. images used as color attachments (aka "render targets"), depth-stencil
         attachments, images/buffers used as storage image/buffer (aka "Unordered Access View (UAV)").
 
-        <b>What to do:</b> Create them in video memory that is fastest to access from GPU using #MEMORY_USAGE_GPU_ONLY.
+        <b>What to do:</b> Let the library select the optimal memory type, which will likely have {@code VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT}.
+        ${codeBlock("""
+VkImageCreateInfo imgCreateInfo = { VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO };
+imgCreateInfo.imageType = VK_IMAGE_TYPE_2D;
+imgCreateInfo.extent.width = 3840;
+imgCreateInfo.extent.height = 2160;
+imgCreateInfo.extent.depth = 1;
+imgCreateInfo.mipLevels = 1;
+imgCreateInfo.arrayLayers = 1;
+imgCreateInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
+imgCreateInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+imgCreateInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+imgCreateInfo.usage = VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+imgCreateInfo.samples = VK_SAMPLE_COUNT_1_BIT;
 
-        Consider using {@code VK_KHR_dedicated_allocation} extension and/or manually creating them as dedicated allocations using
-        #ALLOCATION_CREATE_DEDICATED_MEMORY_BIT, especially if they are large or if you plan to destroy and recreate them e.g. when display resolution changes.
-        Prefer to create such resources first and all other GPU resources (like textures and vertex buffers) later.
+VmaAllocationCreateInfo allocCreateInfo = {};
+allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
+allocCreateInfo.flags = VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT;
 
-        <h5>Immutable resources</h5>
+VkImage img;
+VmaAllocation alloc;
+vmaCreateImage(allocator, &imgCreateInfo, &allocCreateInfo, &img, &alloc, nullptr);""")}
 
-        <b>When:</b> Any resources that you fill on CPU only once (aka "immutable") or infrequently and then read frequently on GPU, e.g. textures, vertex and
-        index buffers, constant buffers that don't change often.
+        <b>Also consider:</b> creating them as dedicated allocations using #ALLOCATION_CREATE_DEDICATED_MEMORY_BIT, especially if they are large or if you plan
+        to destroy and recreate them with different sizes e.g. when display resolution changes. Prefer to create such resources first and all other GPU
+        resources (like textures and vertex buffers) later.
 
-        <b>What to do:</b> Create them in video memory that is fastest to access from GPU using #MEMORY_USAGE_GPU_ONLY.
+        <h4>Staging copy for upload</h4>
 
-        To initialize content of such resource, create a CPU-side (aka "staging") copy of it in system memory - #MEMORY_USAGE_CPU_ONLY, map it, fill it, and
-        submit a transfer from it to the GPU resource. You can keep the staging copy if you need it for another upload transfer in the future. If you don't,
-        you can destroy it or reuse this buffer for uploading different resource after the transfer finishes.
+        <b>When:</b> A "staging" buffer than you want to map and fill from CPU code, then use as a source od transfer to some GPU resource.
 
-        Prefer to create just buffers in system memory rather than images, even for uploading textures. Use {@code vkCmdCopyBufferToImage()}. Dont use images
-        with {@code VK_IMAGE_TILING_LINEA}R.
+        <b>What to do:</b> Use flag #ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT. Let the library select the optimal memory type, which will always have
+        {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT}.
 
-        <h5>Dynamic resources</h5>
+        ${codeBlock("""
+VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+bufCreateInfo.size = 65536;
+bufCreateInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
 
-        <b>When:</b> Any resources that change frequently (aka "dynamic"), e.g. every frame or every draw call, written on CPU, read on GPU.
+VmaAllocationCreateInfo allocCreateInfo = {};
+allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
+allocCreateInfo.flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT |
+    VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
-        <b>What to do:</b> Create them using #MEMORY_USAGE_CPU_TO_GPU. You can map it and write to it directly on CPU, as well as read from it on GPU.
+VkBuffer buf;
+VmaAllocation alloc;
+VmaAllocationInfo allocInfo;
+vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allocInfo);
 
-        This is a more complex situation. Different solutions are possible, and the best one depends on specific GPU type, but you can use this simple approach
-        for the start. Prefer to write to such resource sequentially (e.g. using {@code memcpy}). Don't perform random access or any reads from it on CPU, as
-        it may be very slow. Also note that textures written directly from the host through a mapped pointer need to be in {@code LINEAR} not {@code OPTIMAL}
-        layout.
+...
 
-        <h5>Readback</h5>
+memcpy(allocInfo.pMappedData, myData, myDataSize);""")}
 
-        <b>When:</b> Resources that contain data written by GPU that you want to read back on CPU, e.g. results of some computations.
+        <b>Also consider:</b> You can map the allocation using #MapMemory() or you can create it as persistenly mapped using #ALLOCATION_CREATE_MAPPED_BIT, as
+        in the example above.
 
-        <b>What to do:</b> Create them using #MEMORY_USAGE_GPU_TO_CPU. You can write to them directly on GPU, as well as map and read them on CPU.
+        <h4>Readback</h4>
 
-        <h4>Advanced patterns</h4>
+        <b>When:</b> Buffers for data written by or transferred from the GPU that you want to read back on the CPU, e.g. results of some computations.
 
-        <h5>Detecting integrated graphics</h5>
+        <b>What to do:</b> Use flag #ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT. Let the library select the optimal memory type, which will always have
+        {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT} and {@code VK_MEMORY_PROPERTY_HOST_CACHED_BIT}.
 
-        You can support integrated graphics (like Intel HD Graphics, AMD APU) better by detecting it in Vulkan. To do it, call
-        {@code vkGetPhysicalDeviceProperties()}, inspect {@code VkPhysicalDeviceProperties::deviceType} and look for
-        {@code VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU}. When you find it, you can assume that memory is unified and all memory types are comparably fast to
-        access from GPU, regardless of {@code VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT}.
+        ${codeBlock("""
+VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+bufCreateInfo.size = 65536;
+bufCreateInfo.usage = VK_BUFFER_USAGE_TRANSFER_DST_BIT;
 
-        You can then sum up sizes of all available memory heaps and treat them as useful for your GPU resources, instead of only {@code DEVICE_LOCAL} ones. You
-        can also prefer to create your resources in memory types that are {@code HOST_VISIBLE} to map them directly instead of submitting explicit transfer
-        (see below).
+VmaAllocationCreateInfo allocCreateInfo = {};
+allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
+allocCreateInfo.flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT |
+    VMA_ALLOCATION_CREATE_MAPPED_BIT;
 
-        <h5>Direct access versus transfer</h5>
+VkBuffer buf;
+VmaAllocation alloc;
+VmaAllocationInfo allocInfo;
+vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allocInfo);
 
-        For resources that you frequently write on CPU and read on GPU, many solutions are possible:
+...
 
-        ${ol(
-            """
-            Create one copy in video memory using #MEMORY_USAGE_GPU_ONLY, second copy in system memory using #MEMORY_USAGE_CPU_ONLY and submit explicit
-            transfer each time.
-            """,
-            "Create just a single copy using #MEMORY_USAGE_CPU_TO_GPU, map it and fill it on CPU, read it directly on GPU.",
-            "Create just a single copy using #MEMORY_USAGE_CPU_ONLY, map it and fill it on CPU, read it directly on GPU."
-        )}
+const float* downloadedData = (const float*)allocInfo.pMappedData;""")}
 
-        Which solution is the most efficient depends on your resource and especially on the GPU. It is best to measure it and then make the decision. Some
-        general recommendations:
+        <h4>Advanced data uploading</h4>
+
+        For resources that you frequently write on CPU via mapped pointer and frequently read on GPU e.g. as a uniform buffer (also called "dynamic"), multiple
+        options are possible:
 
         ${ul(
-            "On integrated graphics use (2) or (3) to avoid unnecessary time and memory overhead related to using a second copy and making transfer.",
             """
-            For small resources (e.g. constant buffers) use (2). Discrete AMD cards have special 256 MiB pool of video memory that is directly mappable. Even
-            if the resource ends up in system memory, its data may be cached on GPU after first fetch over PCIe bus.
+            Easiest solution is to have one copy of the resource in {@code HOST_VISIBLE} memory, even if it means system RAM (not {@code DEVICE_LOCAL}) on
+            systems with a discrete graphics card, and make the device reach out to that resource directly. Reads performed by the device will then go through
+            PCI Express bus. The performace of this access may be limited, but it may be fine depending on the size of this resource (whether it is small
+            enough to quickly end up in GPU cache) and the sparsity of access.
             """,
             """
-            For larger resources (e.g. textures), decide between (1) and (2). You may want to differentiate NVIDIA and AMD, e.g. by looking for memory type
-            that is both {@code DEVICE_LOCAL} and {@code HOST_VISIBLE}. When you find it, use (2), otherwise use (1).
+            On systems with unified memory (e.g. AMD APU or Intel integrated graphics, mobile chips), a memory type may be available that is both
+            {@code HOST_VISIBLE} (available for mapping) and {@code DEVICE_LOCAL} (fast to access from the GPU). Then, it is likely the best choice for such
+            type of resource.
+            """,
+            """
+            Systems with a discrete graphics card and separate video memory may or may not expose a memory type that is both {@code HOST_VISIBLE} and
+            {@code DEVICE_LOCAL}, also known as Base Address Register (BAR). If they do, it represents a piece of VRAM (or entire VRAM, if ReBAR is enabled in
+            the motherboard BIOS) that is available to CPU for mapping. Writes performed by the host to that memory go through PCI Express bus. The performance
+            of these writes may be limited, but it may be fine, especially on PCIe 4.0, as long as rules of using uncached and write-combined memory are
+            followed - only sequential writes and no reads.
+            """,
+            """
+            Finally, you may need or prefer to create a separate copy of the resource in {@code DEVICE_LOCAL} memory, a separate "staging" copy in
+            {@code HOST_VISIBLE} memory and perform an explicit transfer command between them.
             """
         )}
 
-        Similarly, for resources that you frequently write on GPU and read on CPU, multiple solutions are possible:
+        Thankfully, VMA offers an aid to create and use such resources in the the way optimal for the current Vulkan device. To help the library make the best
+        choice, use flag #ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT together with #ALLOCATION_CREATE_HOST_ACCESS_ALLOW_TRANSFER_INSTEAD_BIT. It will
+        then prefer a memory type that is both {@code DEVICE_LOCAL} and {@code HOST_VISIBLE} (integrated memory or BAR), but if no such memory type is
+        available or allocation from it fails (PC graphics cards have only 256 MB of BAR by default, unless ReBAR is supported and enabled in BIOS), it will
+        fall back to {@code DEVICE_LOCAL} memory for fast GPU access. It is then up to you to detect that the allocation ended up in a memory type that is not
+        {@code HOST_VISIBLE}, so you need to create another "staging" allocation and perform explicit transfers.
 
-        ${ol(
+        ${codeBlock("""
+VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+bufCreateInfo.size = 65536;
+bufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+
+VmaAllocationCreateInfo allocCreateInfo = {};
+allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
+allocCreateInfo.flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT |
+    VMA_ALLOCATION_CREATE_HOST_ACCESS_ALLOW_TRANSFER_INSTEAD_BIT |
+    VMA_ALLOCATION_CREATE_MAPPED_BIT;
+
+VkBuffer buf;
+VmaAllocation alloc;
+VmaAllocationInfo allocInfo;
+vmaCreateBuffer(allocator, &bufCreateInfo, &allocCreateInfo, &buf, &alloc, &allocInfo);
+
+VkMemoryPropertyFlags memPropFlags;
+vmaGetAllocationMemoryProperties(allocator, alloc, &memPropFlags);
+
+if(memPropFlags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT)
+{
+    // Allocation ended up in a mappable memory and is already mapped - write to it directly.
+
+    // [Executed in runtime]:
+    memcpy(allocInfo.pMappedData, myData, myDataSize);
+}
+else
+{
+    // Allocation ended up in a non-mappable memory - need to transfer.
+    VkBufferCreateInfo stagingBufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+    stagingBufCreateInfo.size = 65536;
+    stagingBufCreateInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
+
+    VmaAllocationCreateInfo stagingAllocCreateInfo = {};
+    stagingAllocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
+    stagingAllocCreateInfo.flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT |
+        VMA_ALLOCATION_CREATE_MAPPED_BIT;
+
+    VkBuffer stagingBuf;
+    VmaAllocation stagingAlloc;
+    VmaAllocationInfo stagingAllocInfo;
+    vmaCreateBuffer(allocator, &stagingBufCreateInfo, &stagingAllocCreateInfo,
+        &stagingBuf, &stagingAlloc, stagingAllocInfo);
+
+    // [Executed in runtime]:
+    memcpy(stagingAllocInfo.pMappedData, myData, myDataSize);
+    VkBufferCopy bufCopy = {
+        0, // srcOffset
+        0, // dstOffset,
+        myDataSize); // size
+    vkCmdCopyBuffer(cmdBuf, stagingBuf, buf, 1, &bufCopy);
+}""")}
+
+        <h4>Other use cases</h4>
+
+        Here are some other, less obvious use cases and their recommended settings:
+        ${ul(
             """
-            Create one copy in video memory using #MEMORY_USAGE_GPU_ONLY, second copy in system memory using #MEMORY_USAGE_GPU_TO_CPU and submit explicit
-            transfer each time.
+            An image that is used only as transfer source and destination, but it should stay on the device, as it is used to temporarily store a copy of some
+            texture, e.g. from the current to the next frame, for temporal antialiasing or other temporal effects.
+            ${ul(
+                "Use {@code VkImageCreateInfo::usage = VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT}",
+                "Use {@code VmaAllocationCreateInfo::usage = VMA_MEMORY_USAGE_AUTO}"
+            )}
             """,
-            "Create just single copy using #MEMORY_USAGE_GPU_TO_CPU, write to it directly on GPU, map it and read it on CPU."
+            """
+            An image that is used only as transfer source and destination, but it should be placed in the system RAM despite it doesn't need to be mapped,
+            because it serves as a "swap" copy to evict least recently used textures from VRAM.
+            ${ul(
+                "Use {@code VkImageCreateInfo::usage = VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT}",
+                """
+                Use {@code VmaAllocationCreateInfo::usage = VMA_MEMORY_USAGE_AUTO_PREFER_HOST}, as VMA needs a hint here to differentiate from the previous
+                case.
+                """
+            )}
+            """,
+            """
+            A buffer that you want to map and write from the CPU, directly read from the GPU (e.g. as a uniform or vertex buffer), but you have a clear
+            preference to place it in device or host memory due to its large size.
+            ${ul(
+                "Use {@code VkBufferCreateInfo::usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT}",
+                "Use {@code VmaAllocationCreateInfo::usage = VMA_MEMORY_USAGE_AUTO_PREFER_DEVICE or VMA_MEMORY_USAGE_AUTO_PREFER_HOST}",
+                "Use {@code VmaAllocationCreateInfo::flags = VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT}"
+            )}
+            """
         )}
-
-        You should take some measurements to decide which option is faster in case of your specific resource.
-
-        Note that textures accessed directly from the host through a mapped pointer need to be in {@code LINEAR} layout, which may slow down their usage on the
-        device. Textures accessed only by the device and transfer operations can use {@code OPTIMAL} layout.
-
-        If you don't want to specialize your code for specific types of GPUs, you can still make an simple optimization for cases when your resource ends up in
-        mappable memory to use it directly in this case instead of creating CPU-side staging copy. For details see <em>Finding out if memory is mappable</em>.
 
         <h3>Configuration</h3>
 
@@ -1416,9 +1554,13 @@ printf("My virtual block has %llu bytes used by %u virtual allocations\n",
 
         {@code VK_KHR_dedicated_allocation} is a Vulkan extension which can be used to improve performance on some GPUs. It augments Vulkan API with
         possibility to query driver whether it prefers particular buffer or image to have its own, dedicated allocation (separate {@code VkDeviceMemory} block)
-        for better efficiency - to be able to do some internal optimizations.
+        for better efficiency - to be able to do some internal optimizations. The extension is supported by this library. It will be used automatically when
+        enabled.
 
-        The extension is supported by this library. It will be used automatically when enabled. To enable it:
+        It has been promoted to core Vulkan 1.1, so if you use eligible Vulkan version and inform VMA about it by setting
+        ##VmaAllocatorCreateInfo{@code ::vulkanApiVersion}, you are all set.
+
+        Otherwise, if you want to use it as an extension:
 
         1 . When creating Vulkan device, check if following 2 device extensions are supported (call {@code vkEnumerateDeviceExtensionProperties()}). If yes,
         enable them (fill ##VkDeviceCreateInfo{@code ::ppEnabledExtensionNames}).
@@ -1497,7 +1639,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         {@code DEVICE_UNCACHED} memory types on eligible devices. There are multiple ways to do it, for example:
         ${ul(
             """
-            You can request or prefer to allocate out of such memory types by adding {@code VK_MEMORY_PROPERTY_DEVICE_COHERENT_BIT_AMD} to
+            You can request or prefer to allocate out of such memory types by adding {@code VK_MEMORY_PROPERTY_DEVICE_UNCACHED_BIT_AMD} to
             ##VmaAllocationCreateInfo{@code ::requiredFlags} or {@code VmaAllocationCreateInfo::preferredFlags}. Those flags can be freely mixed with other
             ways of choosing memory type, like setting {@code VmaAllocationCreateInfo::usage}.
             """,
@@ -1516,7 +1658,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
 
         <h4>Enabling buffer device address</h4>
 
-        Device extension {@code VK_KHR_buffer_device_address} allows to fetch raw GPU pointer to a buffer and pass it for usage in a shader code. It is
+        Device extension {@code VK_KHR_buffer_device_address} allows to fetch raw GPU pointer to a buffer and pass it for usage in a shader code. It has been
         promoted to core Vulkan 1.2.
 
         If you want to use this feature in connection with VMA, follow these steps:
@@ -1585,7 +1727,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             Access to a {@code VmaAllocation} object must be externally synchronized. For example, you must not call #GetAllocationInfo() and #MapMemory() from
             different threads at the same time if you pass the same {@code VmaAllocation} object to these functions.
             """,
-            "{@code VmaVirtualBlock} is also not safe to be used from multiple threads simultaneously."
+            "{@code VmaVirtualBlock} is not safe to be used from multiple threads simultaneously."
         )}
 
         <h4>Validation layer warnings</h4>
@@ -1622,7 +1764,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         ${ol(
             "Try to find free range of memory in existing blocks.",
             "If failed, try to create a new block of {@code VkDeviceMemor}y, with preferred block size.",
-            "If failed, try to create such block with size/2, size/4, size/8.",
+            "If failed, try to create such block with {@code size / 2}, {@code size / 4}, {@code size / 8}.",
             "If failed, try to allocate separate {@code VkDeviceMemory} for this allocation, just like when you use #ALLOCATION_CREATE_DEDICATED_MEMORY_BIT.",
             "If failed, choose other memory type that meets the requirements specified in ##VmaAllocationCreateInfo and go to point 1.",
             "If failed, return {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}."
@@ -1637,10 +1779,10 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             responsibility of the user.
 
             Defining some "texture" object that would automatically stream its data from a staging copy in CPU memory to GPU memory would rather be a feature
-            of another, higher-level library implemented on top of VMA.
+            of another, higher-level library implemented on top of VMA. VMA doesn't record any commands to a {@code VkCommandBuffer}. It just allocates memory.
             """,
             """
-            <b>Recreation of buffers and images</b>. Although the library has functions for buffer and image creation (#CreateBuffer(), #CreateImage()), you
+            <b>Recreation of buffers and images</b>. Although the library has functions for buffer and image creation: #CreateBuffer(), #CreateImage(), you
             need to recreate these objects yourself after defragmentation. That is because the big structures {@code VkBufferCreateInfo},
             {@code VkImageCreateInfo} are not stored in {@code VmaAllocation} object.
             """,
@@ -1796,65 +1938,37 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         ),
         "MEMORY_USAGE_GPU_ONLY".enum(
             """
-            Memory will be used on device only, so fast access from the device is preferred.
+            Obsolete, preserved for backward compatibility.
 
-            It usually means device-local GPU (video) memory. No need to be mappable on host. It is roughly equivalent of {@code D3D12_HEAP_TYPE_DEFAULT}.
-
-            Usage:
-            ${ul(
-                "Resources written and read by device, e.g. images used as attachments.",
-                """
-                Resources transferred from host once (immutable) or infrequently and read by device multiple times, e.g. textures to be sampled, vertex
-                buffers, uniform (constant) buffers, and majority of other types of resources used on GPU.
-                """
-            )}
-            Allocation may still end up in {@code HOST_VISIBLE} memory on some implementations. In such case, you are free to map it. You can use
-            #ALLOCATION_CREATE_MAPPED_BIT with this usage type.
+            Prefers {@code VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT}.
             """
         ),
         "MEMORY_USAGE_CPU_ONLY".enum(
             """
-            Memory will be mappable on host.
+            Obsolete, preserved for backward compatibility.
 
-            It usually means CPU (system) memory. Guarantees to be {@code HOST_VISIBLE} and {@code HOST_COHERENT}. CPU access is typically uncached. Writes may
-            be write-combined. Resources created in this pool may still be accessible to the device, but access to them can be slow. It is roughly equivalent
-            of {@code D3D12_HEAP_TYPE_UPLOAD}.
-
-            Usage: Staging copy of resources used as transfer source.
+            Guarantees {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT} and {@code VK_MEMORY_PROPERTY_HOST_COHERENT_BIT}.
             """
         ),
         "MEMORY_USAGE_CPU_TO_GPU".enum(
             """
-            Memory that is both mappable on host (guarantees to be {@code HOST_VISIBLE}) and preferably fast to access by GPU.
+            Obsolete, preserved for backward compatibility.
 
-            CPU access is typically uncached. Writes may be write-combined.
-
-            Usage: Resources written frequently by host (dynamic), read by device. E.g. textures (with LINEAR layout), vertex buffers, uniform buffers updated
-            every frame or every draw call.
+            Guarantees {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT}, prefers {@code VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT}.
             """
         ),
         "MEMORY_USAGE_GPU_TO_CPU".enum(
             """
-            Memory mappable on host (guarantees to be {@code HOST_VISIBLE}) and cached.
+            Obsolete, preserved for backward compatibility.
 
-            It is roughly equivalent of {@code D3D12_HEAP_TYPE_READBACK}.
-
-            Usage:
-            ${ul(
-                "Resources written by device, read by host - results of some computations, e.g. screen capture, average scene luminance for HDR tone mapping.",
-                """
-                Any resources read or accessed randomly on host, e.g. CPU-side copy of vertex buffer used as source of transfer, but also used for collision
-                detection.
-                """
-            )}
+            Guarantees {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT}, prefers {@code VK_MEMORY_PROPERTY_HOST_CACHED_BIT}.
             """
         ),
         "MEMORY_USAGE_CPU_COPY".enum(
             """
-            CPU memory - memory that is preferably not {@code DEVICE_LOCAL}, but also not guaranteed to be {@code HOST_VISIBLE}.
+            Obsolete, preserved for backward compatibility.
 
-            Usage: Staging copy of resources moved from GPU memory to CPU memory as part of custom paging/residency mechanism, to be moved back to GPU memory
-            when needed.
+            Prefers not {@code VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT}.
             """
         ),
         "MEMORY_USAGE_GPU_LAZILY_ALLOCATED".enum(
@@ -1867,6 +1981,39 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             {@code VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT}.
 
             Allocations with this usage are always created as dedicated - it implies #ALLOCATION_CREATE_DEDICATED_MEMORY_BIT.
+            """
+        ),
+        "MEMORY_USAGE_AUTO".enum(
+            """
+            Selects best memory type automatically. This flag is recommended for most common use cases.
+
+            When using this flag, if you want to map the allocation (using #MapMemory() or #ALLOCATION_CREATE_MAPPED_BIT), you must pass one of the flags:
+            #ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT or #ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT in ##VmaAllocationCreateInfo{@code ::flags}.
+
+            It can be used only with functions that let the library know {@code VkBufferCreateInfo} or {@code VkImageCreateInfo}, e.g. #CreateBuffer(),
+            #CreateImage(), #FindMemoryTypeIndexForBufferInfo(), #FindMemoryTypeIndexForImageInfo() and not with generic memory allocation functions.
+            """
+        ),
+        "MEMORY_USAGE_AUTO_PREFER_DEVICE".enum(
+            """
+            Selects best memory type automatically with preference for GPU (device) memory.
+
+            When using this flag, if you want to map the allocation (using #MapMemory() or #ALLOCATION_CREATE_MAPPED_BIT), you must pass one of the flags:
+            #ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT or #ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT in ##VmaAllocationCreateInfo{@code ::flags}.
+
+            It can be used only with functions that let the library know {@code VkBufferCreateInfo} or {@code VkImageCreateInfo}, e.g. #CreateBuffer(),
+            #CreateImage(), #FindMemoryTypeIndexForBufferInfo(), #FindMemoryTypeIndexForImageInfo() and not with generic memory allocation functions.
+            """
+        ),
+        "MEMORY_USAGE_AUTO_PREFER_HOST".enum(
+            """
+            Selects best memory type automatically with preference for CPU (host) memory.
+
+            When using this flag, if you want to map the allocation (using #MapMemory() or #ALLOCATION_CREATE_MAPPED_BIT), you must pass one of the flags:
+            #ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT or #ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT in ##VmaAllocationCreateInfo{@code ::flags}.
+
+            It can be used only with functions that let the library know {@code VkBufferCreateInfo} or {@code VkImageCreateInfo}, e.g. #CreateBuffer(),
+            #CreateImage(), #FindMemoryTypeIndexForBufferInfo(), #FindMemoryTypeIndexForImageInfo() and not with generic memory allocation functions.
             """
         )
     )
@@ -1950,6 +2097,60 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
             Otherwise created dedicated memory will not be suitable for aliasing resources, resulting in Vulkan Validation Layer errors.
             """,
             "0x00000200"
+        ),
+        "ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT".enum(
+            """
+            Requests possibility to map the allocation (using #MapMemory() or #ALLOCATION_CREATE_MAPPED_BIT).
+
+            ${ul(
+                """
+                If you use #MEMORY_USAGE_AUTO or other {@code VMA_MEMORY_USAGE_AUTO*} value, you must use this flag to be able to map the allocation.
+                Otherwise, mapping is incorrect.
+                """,
+                """
+                If you use other value of {@code VmaMemoryUsage}, this flag is ignored and mapping is always possible in memory types that are
+                {@code HOST_VISIBLE}. This includes allocations created in custom memory pools.
+                """
+            )}
+
+            Declares that mapped memory will only be written sequentially, e.g. using {@code memcpy()} or a loop writing number-by-number, never read or
+            accessed randomly, so a memory type can be selected that is uncached and write-combined.
+
+            Warning: Violating this declaration may work correctly, but will likely be very slow. Watch out for implicit reads introduces by doing e.g.
+            {@code pMappedData[i] += x;}. Better prepare your data in a local variable and {@code memcpy()} it to the mapped pointer all at once.
+            """,
+            "0x00000400"
+        ),
+        "ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT".enum(
+            """
+            Requests possibility to map the allocation (using MapMemory() or #ALLOCATION_CREATE_MAPPED_BIT).
+
+            ${ul(
+                """
+                If you use #MEMORY_USAGE_AUTO or other {@code VMA_MEMORY_USAGE_AUTO*} value, you must use this flag to be able to map the allocation.
+                Otherwise, mapping is incorrect.
+                """,
+                """
+                If you use other value of {@code VmaMemoryUsage}, this flag is ignored and mapping is always possible in memory types that are
+                {@code HOST_VISIBLE}. This includes allocations created in custom memory pools.
+                """
+            )}
+
+            Declares that mapped memory can be read, written, and accessed in random order, so a {@code HOST_CACHED} memory type is preferred.
+            """,
+            "0x00000800"
+        ),
+        "ALLOCATION_CREATE_HOST_ACCESS_ALLOW_TRANSFER_INSTEAD_BIT".enum(
+            """
+            Together with #ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT or #ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT, it says that despite request for
+            host access, a not-{@code HOST_VISIBLE} memory type can be selected if it may improve performance.
+
+            By using this flag, you declare that you will check if the allocation ended up in a {@code HOST_VISIBLE} memory type (e.g. using
+            #GetAllocationMemoryProperties()) and if not, you will create some "staging" buffer and issue an explicit transfer to write/read your data. To
+            prepare for this possibility, don't forget to add appropriate flags like {@code VK_BUFFER_USAGE_TRANSFER_DST_BIT},
+            {@code VK_BUFFER_USAGE_TRANSFER_SRC_BIT} to the parameters of created buffer or image.
+            """,
+            "0x00001000"
         ),
         "ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT".enum(
             """
@@ -2252,14 +2453,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         Helps to find {@code memoryTypeIndex}, given {@code VkBufferCreateInfo} and ##VmaAllocationCreateInfo.
 
         It can be useful e.g. to determine value to be used as ##VmaPoolCreateInfo{@code ::memoryTypeIndex}. It internally creates a temporary, dummy buffer
-        that never has memory bound. It is just a convenience function, equivalent to calling:
-
-        ${ul(
-            "{@code vkCreateBuffer}",
-            "{@code vkGetBufferMemoryRequirements}",
-            "#FindMemoryTypeIndex()",
-            "{@code vkDestroyBuffer}"
-        )}
+        that never has memory bound.
         """,
 
         VmaAllocator("allocator", ""),
@@ -2274,14 +2468,7 @@ vkBindBufferMemory(): Binding memory to buffer 0x33 but vkGetBufferMemoryRequire
         Helps to find {@code memoryTypeIndex}, given {@code VkImageCreateInfo} and ##VmaAllocationCreateInfo.
 
         It can be useful e.g. to determine value to be used as ##VmaPoolCreateInfo{@code ::memoryTypeIndex}. It internally creates a temporary, dummy image
-        that never has memory bound. It is just a convenience function, equivalent to calling:
-
-        ${ul(
-            "{@code vkCreateImage}",
-            "{@code vkGetImageMemoryRequirements}",
-            "#FindMemoryTypeIndex()",
-            "{@code vkDestroyImage}"
-        )}
+        that never has memory bound.
         """,
 
         VmaAllocator("allocator", ""),
