@@ -1665,7 +1665,8 @@ public class Assimp {
         _AI_MATKEY_MAPPINGMODE_V_BASE         = "$tex.mapmodev",
         _AI_MATKEY_TEXMAP_AXIS_BASE           = "$tex.mapaxis",
         _AI_MATKEY_UVTRANSFORM_BASE           = "$tex.uvtrafo",
-        _AI_MATKEY_TEXFLAGS_BASE              = "$tex.flags";
+        _AI_MATKEY_TEXFLAGS_BASE              = "$tex.flags",
+        _AI_MATKEY_OBJ_BUMPMULT_BASE          = "$tex.bumpmult";
 
     public static final int AI_MATKEY_GLTF_PBRMETALLICROUGHNESS_METALLICROUGHNESS_TEXTURE = aiTextureType_UNKNOWN;
 
