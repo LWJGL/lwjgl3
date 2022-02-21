@@ -154,7 +154,7 @@ static inline int __sys_munmap(void *addr, size_t length)
 
 static inline int __sys_madvise(void *addr, size_t length, int advice)
 {
-	return (int) __do_syscall2(__NR_madvise, addr, length);
+	return (int) __do_syscall3(__NR_madvise, addr, length, advice);
 }
 
 static inline int __sys_getrlimit(int resource, struct rlimit *rlim)

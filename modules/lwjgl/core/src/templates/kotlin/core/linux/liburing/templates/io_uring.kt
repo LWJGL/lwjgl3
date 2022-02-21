@@ -9,10 +9,13 @@ import core.linux.*
 import core.linux.liburing.*
 
 val LibIOURing = "LibIOURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath = "linux", prefixConstant = "IORING_", prefixMethod = "io_uring_") {
-    nativeImport(
-        "liburing/io_uring.h",
-        "syscall.h"
-    )
+    nativeImport("liburing/io_uring.h")
+    nativeDirective(
+        """DISABLE_WARNINGS()
+_Pragma("GCC diagnostic ignored \"-Wpedantic\"")
+#include "syscall.h"
+ENABLE_WARNINGS()""")
+
     documentation =
         """
         Native bindings to ${url("https://github.com/axboe/liburing", "io_uring")}, a Linux-specific API for asynchronous I/O.
@@ -289,7 +292,7 @@ atomic_store_release(cqring->head, head);""")}
         "IOSQE_CQE_SKIP_SUCCESS".enum(
             """
             Don't generate a CQE if the request completes successfully.
-            
+
             If the request fails, an appropriate CQE will be posted as usual and if there is no #IOSQE_IO_HARDLINK, CQEs for all linked requests will be
             omitted. The notion of failure/success is {@code opcode} specific and is the same as with breaking chains of #IOSQE_IO_LINK. One special case is
             when the request has a linked timeout, then the CQE generation for the linked timeout is decided solely by whether it has

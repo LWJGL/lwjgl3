@@ -5,7 +5,10 @@
  */
 #include "common_tools.h"
 #include "liburing/io_uring.h"
+DISABLE_WARNINGS()
+_Pragma("GCC diagnostic ignored \"-Wpedantic\"")
 #include "syscall.h"
+ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 

@@ -54,7 +54,7 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         "opcode_supported",
         """
         Allows the caller to determine if the passed in {@code opcode} belonging to the {@code probe} param is supported.
-        
+
         An instance of the {@code io_uring_probe} instance can be obtained by calling the function #get_probe().
         """,
 
@@ -467,7 +467,7 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         "sqe_set_data64",
         """
         Assign a 64-bit value to this {@code sqe}, which can get retrieved at completion time with #cqe_get_data64().
-        
+
         Just like the non-64 variants, except these store a 64-bit type rather than a data pointer.
         """,
 
@@ -486,7 +486,7 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         "sqe_set_flags",
         """
         Allows the caller to change the behavior of the submission queue entry by specifying flags.
-        
+
         It enables the {@code flags} belonging to the {@code sqe} submission queue entry param.
         """,
 
@@ -593,7 +593,7 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         "prep_read_fixed",
         """
         Prepares an IO read request with a previously registered IO buffer.
-        
+
         The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start reading {@code nbytes} into the buffer {@code buf} at
         the specified {@code offset}, and with the buffer matching the registered index of {@code buf_index}.
 
@@ -672,7 +672,7 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         "prep_write_fixed",
         """
         Prepares an IO write request with a previously registered IO buffer.
-        
+
         The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing {@code nbytes} from the buffer {@code buf} at
         the specified {@code offset}, and with the buffer matching the registered index of {@code buf_index}.
 

@@ -19,9 +19,9 @@
 
 const char INIT_FAIL_MSG[] = "gtk_init_check failed to initilaize GTK+";
 
-#ifdef __GNUC__
-#    pragma GCC diagnostic ignored "-Wstringop-truncation"
-#endif
+//#ifdef __GNUC__
+//#    pragma GCC diagnostic ignored "-Wstringop-truncation"
+//#endif
 
 static void
 AddTypeToFilterName(const char* typebuf, char* filterName, size_t bufsize)

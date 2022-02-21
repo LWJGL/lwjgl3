@@ -892,6 +892,7 @@ public class HelloOpenXRGL {
         throw new XrResultException("XR method returned " + result);
     }
 
+    @SuppressWarnings("serial")
     public static class XrResultException extends RuntimeException {
         public XrResultException(String s) {
             super(s);
