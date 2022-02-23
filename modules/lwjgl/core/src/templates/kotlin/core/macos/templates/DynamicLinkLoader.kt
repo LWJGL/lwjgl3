@@ -97,7 +97,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_MACOS, nativeSubPath = "
         )
     )
 
-    charASCII.const.p(
+    charUTF8.const.p(
         "dlerror",
         """
         Provides diagnostic information corresponding to problems with calls to #dlopen(), #dlsym(), and #dlclose() in the same thread.

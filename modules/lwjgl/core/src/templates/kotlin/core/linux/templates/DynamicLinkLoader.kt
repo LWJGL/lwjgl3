@@ -56,7 +56,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(Module.CORE_LINUX, nativeSubPath = "
         int("mode", "a bitfield", Modes, LinkMode.BITFIELD)
     )
 
-    charASCII.p(
+    charUTF8.p(
         "dlerror",
         """
         Returns a human readable string describing the most recent error that occurred from #dlopen(), #dlsym() or #dlclose() since
