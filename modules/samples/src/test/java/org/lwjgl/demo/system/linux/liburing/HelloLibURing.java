@@ -39,7 +39,7 @@ public class HelloLibURing {
         File f = new File(filePath);
         System.out.println("Reading: " + f.getAbsolutePath());
         if (args.length == 0) {
-            System.out.println("\tUse 'ant demo -Dclass=org.lwjgl.demo.system.linux.HelloLibURing -Dargs=<path>' to cat a different file.");
+            System.out.println("\tUse 'ant demo -Dclass=org.lwjgl.demo.system.linux.liburing.HelloLibURing -Dargs=<path>' to cat a different file.");
         }
 
         int fileLength = (int)f.length();
@@ -67,8 +67,9 @@ public class HelloLibURing {
                 params.sq_thread_idle(1000);
                 params.cq_entries(QUEUE_DEPTH);
 
-                if (io_uring_queue_init_params(QUEUE_DEPTH, uring, params) != 0) {
-                    throw new IllegalStateException("Failed io_uring_queue_init_params: " + strerror(getErrno()));
+                int errno = io_uring_queue_init_params(QUEUE_DEPTH, uring, params);
+                if (errno != 0) {
+                    throw new IllegalStateException("Failed io_uring_queue_init_params: " + strerror(errno));
                 }
 
                 /*System.out.println("io_uring features: (supported by current kernel)");
@@ -94,15 +95,15 @@ public class HelloLibURing {
 
         public void registerFile(int fileFD) {
             try (MemoryStack stack = stackPush()) {
-                int ret;
+                int errno;
                 if (registeredFiles == 0) {
-                    ret = io_uring_register_files(uring, stack.ints(fileFD));
+                    errno = io_uring_register_files(uring, stack.ints(fileFD));
                     registeredFiles = 1;
                 } else {
-                    ret = io_uring_register_files_update(uring, 0, stack.ints(fileFD));
+                    errno = io_uring_register_files_update(uring, 0, stack.ints(fileFD));
                 }
-                if (ret == -1) {
-                    throw new IllegalStateException("Failed to register file: " + strerror(getErrno()));
+                if (errno < 0) {
+                    throw new IllegalStateException("Failed to register file: " + strerror(-errno));
                 }
             }
         }
@@ -124,8 +125,9 @@ public class HelloLibURing {
                     .iov_base(buffer)
                     .iov_len(buffer.capacity());
 
-                if (io_uring_register_buffers(container.uring, IOVECS) != 0) {
-                    throw new IllegalStateException("Failed to register buffers: " + strerror(getErrno()));
+                int errno = io_uring_register_buffers(container.uring, IOVECS);
+                if (errno != 0) {
+                    throw new IllegalStateException("Failed to register buffers: " + strerror(-errno));
                 }
             }
 
@@ -145,8 +147,9 @@ public class HelloLibURing {
             t = System.nanoTime() - t;
             System.out.println("liburing:\n\t" + (t / BENCH_ITERS));
 
-            if (io_uring_unregister_buffers(container.uring) != 0) {
-                System.err.println("Failed to unregister buffers: " + strerror(getErrno()));
+            int errno = io_uring_unregister_buffers(container.uring);
+            if (errno != 0) {
+                System.err.println("Failed to unregister buffers: " + strerror(-errno));
             }
         } finally {
             memAlignedFree(buffer);
@@ -180,8 +183,9 @@ public class HelloLibURing {
                     io_uring_prep_read_fixed(sqe, 0, block, offset, 0);
                     io_uring_sqe_set_flags(sqe, IOSQE_FIXED_FILE | IOSQE_ASYNC);
                     io_uring_sqe_set_data(sqe, memAddress(block));
-                    if (io_uring_submit(container.uring) < 1) {
-                        throw new IllegalStateException("Failed io_uring_submit: " + strerror(getErrno()));
+                    int errno = io_uring_submit(container.uring);
+                    if (errno < 1) {
+                        throw new IllegalStateException("Failed io_uring_submit: " + strerror(-errno));
                     }
 
                     offset += block.limit();
@@ -199,15 +203,16 @@ public class HelloLibURing {
                     IOURingCQE cqe;
                     try (MemoryStack stack = stackPush()) {
                         PointerBuffer pp = stack.mallocPointer(1);
-                        if (io_uring_wait_cqe(container.uring, pp) != 0) {
-                            throw new IllegalStateException("Failed io_uring_wait_cqe: " + strerror(getErrno()));
+                        int errno = io_uring_wait_cqe(container.uring, pp);
+                        if (errno != 0) {
+                            throw new IllegalStateException("Failed io_uring_wait_cqe: " + strerror(-errno));
                         }
                         cqe = IOURingCQE.create(pp.get(0));
                     }
 
                     int result = cqe.res(); // result of read(2) call
                     if (result < 0) {
-                        throw new IllegalStateException("Submission failed: " + strerror(abs(cqe.res())));
+                        throw new IllegalStateException("Submission failed: " + strerror(-result));
                     }
 
                     io_uring_cqe_seen(container.uring, cqe);

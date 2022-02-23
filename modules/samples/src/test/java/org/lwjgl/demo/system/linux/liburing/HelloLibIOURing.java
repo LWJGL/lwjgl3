@@ -46,7 +46,7 @@ public class HelloLibIOURing {
         File f = new File(filePath);
         System.out.println("Reading: " + f.getAbsolutePath());
         if (args.length == 0) {
-            System.out.println("\tUse 'ant demo -Dclass=org.lwjgl.demo.system.linux.HelloLibIOURing -Dargs=<path>' to cat a different file.");
+            System.out.println("\tUse 'ant demo -Dclass=org.lwjgl.demo.system.linux.liburing.HelloLibIOURing -Dargs=<path>' to cat a different file.");
         }
 
         int fileLength = (int)f.length();
