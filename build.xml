@@ -1033,7 +1033,6 @@
     </target>
 
     <macrodef name="get-release-offline">
-        <attribute name="arch"/>
         <attribute name="file"/>
 
         <sequential>
@@ -1042,7 +1041,7 @@
 
             <echo message="release: ${lib.native}/${module.path}/@{file} is missing" level="warning" unless:set="available"/>
             <quiet if:set="available">
-                <copy file="${lib.native}/${module.path}/@{file}" todir="${release}/${module}/native/${platform}/@{arch}/${module.path}"/>
+                <copy file="${lib.native}/${module.path}/@{file}" todir="${destination}"/>
             </quiet>
         </sequential>
     </macrodef>
@@ -1053,16 +1052,34 @@
         <attribute name="file"/>
 
         <sequential>
-            <quiet>
-                <mkdir dir="${release}/${module}/native/@{platform}/@{arch}/${module.path}"/>
-            </quiet>
-            <get
-                src="https://build.lwjgl.org/${build.type}/${platform.@{platform}.remote}/@{arch}/@{file}"
-                dest="${release}/${module}/native/@{platform}/@{arch}/${module.path}"
-                usetimestamp="true"
-                unless:true="${build.offline}"
-            />
-            <get-release-offline arch="@{arch}" file="@{file}" if:true="${build.offline}"/>
+            <!-- Skip .git files in offline mode -->
+            <local name="skip.git"/>
+            <condition property="skip.git">
+                <and>
+                    <istrue value="${build.offline}"/>
+                    <matches string="@{file}" pattern="^.+\.git$"/>
+                </and>
+            </condition>
+
+            <sequential unless:set="skip.git">
+                <local name="destination"/>
+                <condition property="destination"
+                   value="${release}/${module}/META-INF/@{platform}/@{arch}/${module.path}"
+                    else="${release}/${module}/native/@{platform}/@{arch}/${module.path}"
+                >
+                    <matches string="@{file}" pattern="^.+\.git$"/>
+                </condition>
+                <quiet>
+                    <mkdir dir="${destination}"/>
+                </quiet>
+                <get
+                    src="https://build.lwjgl.org/${build.type}/${platform.@{platform}.remote}/@{arch}/@{file}"
+                    dest="${destination}"
+                    usetimestamp="true"
+                    unless:true="${build.offline}"
+                />
+                <get-release-offline file="@{file}" if:true="${build.offline}"/>
+            </sequential>
         </sequential>
     </macrodef>
 
@@ -1107,6 +1124,7 @@
             </condition>
 
             <lwjgl-jar destfile="${release}/${module}/${module}-natives-@{platform}.jar" platform="@{path}" title="@{title}" unless:set="platform.skip">
+                <fileset dir="${release}/${module}" includes="META-INF/@{path}/${module.path}/*.@{type}*"/>
                 <fileset dir="${release}/${module}/native" includes="@{path}/${module.path}/*.@{type}*"/>
                 <fileset dir="${release}/${module}/native/@{path}" includes="META-INF/versions/9/module-info.class" if:set="jdk9"/>
                 <content/>
@@ -1184,7 +1202,8 @@
                 </and>
             </condition>
 
-            <checksum algorithm="SHA-1" fileext=".sha1" unless:set="checksum.skip">
+            <mkdir dir="${release}/${module}/META-INF" unless:set="checksum.skip"/>
+            <checksum algorithm="SHA-1" fileext=".sha1" todir="${release}/${module}/META-INF" unless:set="checksum.skip">
                 <fileset dir="${release}/${module}/native">
                     <include name="**/*.dll"/>
                     <include name="**/*.dylib"/>
@@ -1276,11 +1295,12 @@
 
             <!-- Bundle classes -->
             <lwjgl-jar destfile="${release}/${module}/${module}.jar" title="@{title}">
-                <fileset dir="${release}/${module}/native" includes="*.sha1" unless:set="java-only.binding.@{name}"/>
+                <fileset dir="${release}/${module}" includes="META-INF/**/*.sha1" unless:set="java-only.binding.@{name}"/>
                 <fileset dir="${bin.lwjgl}/@{name}" includes="**"/>
             </lwjgl-jar>
             <quiet>
                 <delete dir="${release}/${module}/native" unless:set="java-only.binding.@{name}"/>
+                <delete dir="${release}/${module}/META-INF" unless:set="java-only.binding.@{name}"/>
             </quiet>
 
             <local name="hasMain"/>

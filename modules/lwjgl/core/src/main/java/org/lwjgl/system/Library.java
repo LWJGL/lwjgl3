@@ -150,7 +150,9 @@ public final class Library {
             Path libFile = javaLibraryPath == null ? null : findFile(javaLibraryPath, module, libName, bundledWithLWJGL);
             if (libFile != null) {
                 apiLog(String.format("\tLoaded from %s: %s", JAVA_LIBRARY_PATH, libFile));
-                checkHash(context, libFile);
+                if (bundledWithLWJGL) {
+                    checkHash(context, libFile, module, libName);
+                }
             } else {
                 apiLog("\tLoaded from a ClassLoader provided path.");
             }
@@ -178,7 +180,9 @@ public final class Library {
 
         load.accept(libFile.toAbsolutePath().toString());
         apiLog(String.format("\tLoaded from %s: %s", property, libFile));
-        checkHash(context, libFile);
+        if (bundledWithLWJGL) {
+            checkHash(context, libFile, module, libName);
+        }
         return true;
     }
 
@@ -362,7 +366,9 @@ public final class Library {
 
         SharedLibrary lib = apiCreateLibrary(libFile.toAbsolutePath().toString());
         apiLog(String.format("\tLoaded from %s: %s", property, libFile));
-        checkHash(context, libFile);
+        if (bundledWithLWJGL) {
+            checkHash(context, libFile, module, libName);
+        }
         return lib;
     }
 
@@ -555,7 +561,7 @@ public final class Library {
      * @param context the class to use to discover the shared library hash in the classpath
      * @param libFile the library file loaded
      */
-    private static void checkHash(Class<?> context, Path libFile) {
+    private static void checkHash(Class<?> context, Path libFile, String module, String libName) {
         if (!CHECKS) {
             return;
         }
@@ -564,7 +570,7 @@ public final class Library {
             URL classesURL = null;
             URL nativesURL = null;
 
-            Enumeration<URL> resources = context.getClassLoader().getResources(libFile.getFileName() + ".sha1");
+            Enumeration<URL> resources = context.getClassLoader().getResources("META-INF/" + getBundledPath(module, libName) + ".sha1");
             while (resources.hasMoreElements()) {
                 URL url = resources.nextElement();
                 if (NATIVES_JAR.matcher(url.toExternalForm()).find()) {
