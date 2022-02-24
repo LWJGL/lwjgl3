@@ -1032,20 +1032,6 @@
         </apply>
     </target>
 
-    <macrodef name="get-release-offline">
-        <attribute name="file"/>
-
-        <sequential>
-            <local name="available"/>
-            <available file="${lib.native}/${module.path}/@{file}" property="available"/>
-
-            <echo message="release: ${lib.native}/${module.path}/@{file} is missing" level="warning" unless:set="available"/>
-            <quiet if:set="available">
-                <copy file="${lib.native}/${module.path}/@{file}" todir="${destination}"/>
-            </quiet>
-        </sequential>
-    </macrodef>
-
     <macrodef name="get-release">
         <attribute name="platform"/>
         <attribute name="arch"/>
@@ -1069,16 +1055,33 @@
                 >
                     <matches string="@{file}" pattern="^.+\.git$"/>
                 </condition>
-                <quiet>
-                    <mkdir dir="${destination}"/>
-                </quiet>
-                <get
-                    src="https://build.lwjgl.org/${build.type}/${platform.@{platform}.remote}/@{arch}/@{file}"
-                    dest="${destination}"
-                    usetimestamp="true"
-                    unless:true="${build.offline}"
-                />
-                <get-release-offline file="@{file}" if:true="${build.offline}"/>
+
+                <!-- Online build -->
+                <sequential unless:true="${build.offline}">
+                    <quiet>
+                        <mkdir dir="${destination}"/>
+                    </quiet>
+                    <get
+                        src="https://build.lwjgl.org/${build.type}/${platform.@{platform}.remote}/@{arch}/@{file}"
+                        dest="${destination}"
+                        usetimestamp="true"
+                    />
+                </sequential>
+
+                <!-- Offline build -->
+                <sequential if:true="${build.offline}">
+                    <local name="source"/>
+                    <property name="source" value="${lib}/native/@{platform}/@{arch}/${module.path}/@{file}"/>
+
+                    <local name="available"/>
+                    <available file="${source}" property="available"/>
+
+                    <echo message="Missing offline artifact: ${source}" level="warning" unless:set="available"/>
+                    <quiet if:set="available">
+                        <mkdir dir="${destination}"/>
+                        <copy file="${source}" todir="${destination}"/>
+                    </quiet>
+                </sequential>
             </sequential>
         </sequential>
     </macrodef>
@@ -1119,7 +1122,7 @@
             <local name="platform.skip"/>
             <condition property="platform.skip">
                 <resourcecount when="eq" count="0">
-                    <fileset dir="${release}/${module}/native" includes="@{path}/${module.path}/*.@{type}"/>
+                    <fileset dir="${release}/${module}" includes="native/@{path}/${module.path}/*.@{type}"/>
                 </resourcecount>
             </condition>
 
@@ -1188,70 +1191,72 @@
                 <content/>
             </parallel>
 
-            <local name="checksum.skip"/>
-            <condition property="checksum.skip">
+            <local name="missing-natives"/>
+            <condition property="missing-natives">
                 <and>
                     <istrue value="${build.offline}"/>
                     <resourcecount when="eq" count="0">
-                        <fileset dir="${release}/${module}/native">
-                            <include name="**/*.dll"/>
-                            <include name="**/*.dylib"/>
-                            <include name="**/*.so"/>
+                        <fileset dir="${release}/${module}">
+                            <include name="native/**/*.dll"/>
+                            <include name="native/**/*.dylib"/>
+                            <include name="native/**/*.so"/>
                         </fileset>
                     </resourcecount>
                 </and>
             </condition>
 
-            <mkdir dir="${release}/${module}/META-INF" unless:set="checksum.skip"/>
-            <checksum algorithm="SHA-1" fileext=".sha1" todir="${release}/${module}/META-INF" unless:set="checksum.skip">
-                <fileset dir="${release}/${module}/native">
-                    <include name="**/*.dll"/>
-                    <include name="**/*.dylib"/>
-                    <include name="**/*.so"/>
-                </fileset>
-            </checksum>
+            <sequential unless:set="missing-natives">
+                <mkdir dir="${release}/${module}/META-INF"/>
+                <checksum algorithm="SHA-1" fileext=".sha1" todir="${release}/${module}/META-INF">
+                    <fileset dir="${release}/${module}/native">
+                        <include name="**/*.dll"/>
+                        <include name="**/*.dylib"/>
+                        <include name="**/*.so"/>
+                    </fileset>
+                </checksum>
 
-            <!-- Generate module-info classes -->
-            <java
-                classpath="bin/classes/generator"
-                classname="org.lwjgl.generator.util.ModuleInfoGen"
-                fork="true"
-                failonerror="true"
-                taskname="module-info-gen :: native :: ${module}"
-                if:set="jdk9"
-            >
-                <jvmarg value="-Dmodule.name.source=${module.name}"/>
-                <jvmarg value="-Dmodule.name.release=${module}"/>
-                <jvmarg value="-Dmodule.version=${module.version}"/>
-            </java>
+                <!-- Generate module-info classes -->
+                <java
+                    classpath="bin/classes/generator"
+                    classname="org.lwjgl.generator.util.ModuleInfoGen"
+                    fork="true"
+                    failonerror="true"
+                    taskname="module-info-gen :: native :: ${module}"
+                    if:set="jdk9"
+                >
+                    <jvmarg value="-Dmodule.name.source=${module.name}"/>
+                    <jvmarg value="-Dmodule.name.release=${module}"/>
+                    <jvmarg value="-Dmodule.version=${module.version}"/>
+                </java>
 
-            <!-- Create native jar files -->
-            <parallel threadsPerProcessor="1" failonany="true">
-                <natives-jar name="@{name}" title="@{title}" platform="linux" path="linux/x64" type="so">
-                    <linux-content/>
-                </natives-jar>
-                <natives-jar name="@{name}" title="@{title}" platform="linux-arm64" path="linux/arm64" type="so">
-                    <linux-arm64-content/>
-                </natives-jar>
-                <natives-jar name="@{name}" title="@{title}" platform="linux-arm32" path="linux/arm32" type="so">
-                    <linux-arm32-content/>
-                </natives-jar>
-                <natives-jar name="@{name}" title="@{title}" platform="macos" path="macos/x64" type="dylib">
-                    <macos-content/>
-                </natives-jar>
-                <natives-jar name="@{name}" title="@{title}" platform="macos-arm64" path="macos/arm64" type="dylib">
-                    <macos-arm64-content/>
-                </natives-jar>
-                <natives-jar name="@{name}" title="@{title}" platform="windows" path="windows/x64" type="dll">
-                    <windows-content/>
-                </natives-jar>
-                <natives-jar name="@{name}" title="@{title}" platform="windows-x86" path="windows/x86" type="dll">
-                    <windows-x86-content/>
-                </natives-jar>
-                <natives-jar name="@{name}" title="@{title}" platform="windows-arm64" path="windows/arm64" type="dll">
-                    <windows-arm64-content/>
-                </natives-jar>
-            </parallel>
+                <!-- Create native jar files -->
+                <parallel threadsPerProcessor="1" failonany="true">
+                    <natives-jar name="@{name}" title="@{title}" platform="linux" path="linux/x64" type="so">
+                        <linux-content/>
+                    </natives-jar>
+                    <natives-jar name="@{name}" title="@{title}" platform="linux-arm64" path="linux/arm64" type="so">
+                        <linux-arm64-content/>
+                    </natives-jar>
+                    <natives-jar name="@{name}" title="@{title}" platform="linux-arm32" path="linux/arm32" type="so">
+                        <linux-arm32-content/>
+                    </natives-jar>
+                    <natives-jar name="@{name}" title="@{title}" platform="macos" path="macos/x64" type="dylib">
+                        <macos-content/>
+                    </natives-jar>
+                    <natives-jar name="@{name}" title="@{title}" platform="macos-arm64" path="macos/arm64" type="dylib">
+                        <macos-arm64-content/>
+                    </natives-jar>
+                    <natives-jar name="@{name}" title="@{title}" platform="windows" path="windows/x64" type="dll">
+                        <windows-content/>
+                    </natives-jar>
+                    <natives-jar name="@{name}" title="@{title}" platform="windows-x86" path="windows/x86" type="dll">
+                        <windows-x86-content/>
+                    </natives-jar>
+                    <natives-jar name="@{name}" title="@{title}" platform="windows-arm64" path="windows/arm64" type="dll">
+                        <windows-arm64-content/>
+                    </natives-jar>
+                </parallel>
+            </sequential>
         </sequential>
     </macrodef>
 
@@ -1279,6 +1284,10 @@
 
             <local name="module.path"/>
             <property name="module.path" value="${module.@{name}.path}"/>
+
+            <quiet>
+                <mkdir dir="${release}/${module}"/>
+            </quiet>
 
             <!-- Bundle natives -->
             <release-natives name="@{name}" title="@{title}" native-library="@{native-library}" unless:set="java-only.binding.@{name}">
