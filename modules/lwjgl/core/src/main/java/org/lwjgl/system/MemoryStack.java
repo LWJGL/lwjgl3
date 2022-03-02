@@ -693,6 +693,27 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
     // -------------------------------------------------
 
     /**
+     * Allocates a new {@link PointerBuffer} of size {@code buffer.remaining()}
+     * and fills it with the addresses of the values within the provided {@link CustomBuffer}
+     * starting at {@code buffer.position()}.
+     *
+     * @param buffer the {@link CustomBuffer} to obtain its element addresses of
+     * @return a {@link PointerBuffer} containing the buffer's element addresses
+     */
+    public PointerBuffer pointersOfElements(CustomBuffer<?> buffer) {
+        int remaining = buffer.remaining();
+        long addr = buffer.address();
+        long sizeof = buffer.sizeof();
+        PointerBuffer pointerBuffer = mallocPointer(remaining);
+        for (int i = 0; i < remaining; i++) {
+            pointerBuffer.put(i, addr + sizeof * i);
+        }
+        return pointerBuffer;
+    }
+
+    // -------------------------------------------------
+
+    /**
      * Encodes the specified text on the stack using ASCII encoding and returns a {@code ByteBuffer} that points to the encoded text, including a
      * null-terminator.
      *
