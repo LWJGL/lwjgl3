@@ -101,7 +101,7 @@ fun templateCustomization() {
             noPrefix = true
         )
 
-        macro(expression = "(version >>> 22) & 0xFFF")..uint32_t(
+        macro(expression = "version & 0xFFF")..uint32_t(
             "VK_API_VERSION_PATCH",
             "Extracts the API patch version number from a packed version number.",
 
