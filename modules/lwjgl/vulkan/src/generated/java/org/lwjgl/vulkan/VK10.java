@@ -15491,7 +15491,7 @@ public class VK10 {
      */
     @NativeType("uint32_t")
     public static int VK_API_VERSION_PATCH(@NativeType("uint32_t") int version) {
-        return (version >>> 22) & 0xFFF;
+        return version & 0xFFF;
     }
 
     // --- [ VK_MAKE_VERSION ] ---
