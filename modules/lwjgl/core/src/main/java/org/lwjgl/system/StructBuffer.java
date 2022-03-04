@@ -216,6 +216,26 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
         }
     }
 
+    /**
+     * Calls the provided {@link ObjIntConsumer} for each element in this buffer and its iteration index,
+     * starting at the buffer's {@link #position()} until the buffer's {@link #limit()}.
+     *
+     * <p>The index of the calls to the {@link ObjIntConsumer} will always start at 0,
+     * regardless of the {@link #position()} of this buffer.</p>
+     *
+     * <p>This method does not modify this buffer's position, limit or mark</p>
+     *
+     * @return This buffer
+     */
+    public SELF applyEachIndexed(ObjIntConsumer<? super T> action) {
+        Objects.requireNonNull(action);
+        T factory = getElementFactory();
+        for (int i = position, j = 0, fence = limit; i < fence; i++, j++) {
+            action.accept(factory.<T>wrap(address, i, container), j);
+        }
+        return self();
+    }
+
     @Override
     public Spliterator<T> spliterator() {
         return new StructSpliterator<>(address, container, getElementFactory(), position, limit);
