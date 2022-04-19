@@ -77,4 +77,9 @@ public class VkDevice extends DispatchableHandleDevice {
         }, physicalDevice.getCapabilities(), apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()));
     }
 
+    @Override
+    public VKCapabilitiesInstance getCapabilitiesInstance() {
+        return getPhysicalDevice().getCapabilities();
+    }
+
 }

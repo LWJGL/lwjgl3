@@ -369,7 +369,7 @@ public class EXTDebugUtils {
 
     /** Unsafe version of: {@link #vkSetDebugUtilsObjectNameEXT SetDebugUtilsObjectNameEXT} */
     public static int nvkSetDebugUtilsObjectNameEXT(VkDevice device, long pNameInfo) {
-        long __functionAddress = device.getCapabilities().vkSetDebugUtilsObjectNameEXT;
+        long __functionAddress = device.getCapabilitiesInstance().vkSetDebugUtilsObjectNameEXT;
         if (CHECKS) {
             check(__functionAddress);
         }
@@ -436,7 +436,7 @@ public class EXTDebugUtils {
 
     /** Unsafe version of: {@link #vkSetDebugUtilsObjectTagEXT SetDebugUtilsObjectTagEXT} */
     public static int nvkSetDebugUtilsObjectTagEXT(VkDevice device, long pTagInfo) {
-        long __functionAddress = device.getCapabilities().vkSetDebugUtilsObjectTagEXT;
+        long __functionAddress = device.getCapabilitiesInstance().vkSetDebugUtilsObjectTagEXT;
         if (CHECKS) {
             check(__functionAddress);
             VkDebugUtilsObjectTagInfoEXT.validate(pTagInfo);
@@ -497,7 +497,7 @@ public class EXTDebugUtils {
 
     /** Unsafe version of: {@link #vkQueueBeginDebugUtilsLabelEXT QueueBeginDebugUtilsLabelEXT} */
     public static void nvkQueueBeginDebugUtilsLabelEXT(VkQueue queue, long pLabelInfo) {
-        long __functionAddress = queue.getCapabilities().vkQueueBeginDebugUtilsLabelEXT;
+        long __functionAddress = queue.getCapabilitiesInstance().vkQueueBeginDebugUtilsLabelEXT;
         if (CHECKS) {
             check(__functionAddress);
             VkDebugUtilsLabelEXT.validate(pLabelInfo);
@@ -581,7 +581,7 @@ public class EXTDebugUtils {
      * @param queue the queue in which a debug label region should be closed.
      */
     public static void vkQueueEndDebugUtilsLabelEXT(VkQueue queue) {
-        long __functionAddress = queue.getCapabilities().vkQueueEndDebugUtilsLabelEXT;
+        long __functionAddress = queue.getCapabilitiesInstance().vkQueueEndDebugUtilsLabelEXT;
         if (CHECKS) {
             check(__functionAddress);
         }
@@ -592,7 +592,7 @@ public class EXTDebugUtils {
 
     /** Unsafe version of: {@link #vkQueueInsertDebugUtilsLabelEXT QueueInsertDebugUtilsLabelEXT} */
     public static void nvkQueueInsertDebugUtilsLabelEXT(VkQueue queue, long pLabelInfo) {
-        long __functionAddress = queue.getCapabilities().vkQueueInsertDebugUtilsLabelEXT;
+        long __functionAddress = queue.getCapabilitiesInstance().vkQueueInsertDebugUtilsLabelEXT;
         if (CHECKS) {
             check(__functionAddress);
             VkDebugUtilsLabelEXT.validate(pLabelInfo);
@@ -641,7 +641,7 @@ public class EXTDebugUtils {
 
     /** Unsafe version of: {@link #vkCmdBeginDebugUtilsLabelEXT CmdBeginDebugUtilsLabelEXT} */
     public static void nvkCmdBeginDebugUtilsLabelEXT(VkCommandBuffer commandBuffer, long pLabelInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdBeginDebugUtilsLabelEXT;
+        long __functionAddress = commandBuffer.getCapabilitiesInstance().vkCmdBeginDebugUtilsLabelEXT;
         if (CHECKS) {
             check(__functionAddress);
             VkDebugUtilsLabelEXT.validate(pLabelInfo);
@@ -746,7 +746,7 @@ public class EXTDebugUtils {
      * @param commandBuffer the command buffer into which the command is recorded.
      */
     public static void vkCmdEndDebugUtilsLabelEXT(VkCommandBuffer commandBuffer) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdEndDebugUtilsLabelEXT;
+        long __functionAddress = commandBuffer.getCapabilitiesInstance().vkCmdEndDebugUtilsLabelEXT;
         if (CHECKS) {
             check(__functionAddress);
         }
@@ -757,7 +757,7 @@ public class EXTDebugUtils {
 
     /** Unsafe version of: {@link #vkCmdInsertDebugUtilsLabelEXT CmdInsertDebugUtilsLabelEXT} */
     public static void nvkCmdInsertDebugUtilsLabelEXT(VkCommandBuffer commandBuffer, long pLabelInfo) {
-        long __functionAddress = commandBuffer.getCapabilities().vkCmdInsertDebugUtilsLabelEXT;
+        long __functionAddress = commandBuffer.getCapabilitiesInstance().vkCmdInsertDebugUtilsLabelEXT;
         if (CHECKS) {
             check(__functionAddress);
             VkDebugUtilsLabelEXT.validate(pLabelInfo);

@@ -15,9 +15,12 @@ abstract class DispatchableHandleDevice extends Pointer.Default {
         this.capabilities = capabilities;
     }
 
-    /** Returns the {@link VKCapabilitiesInstance} instance associated with this dispatchable handle. */
+    /** Returns the {@link VKCapabilitiesDevice} instance associated with this dispatchable handle. */
     public VKCapabilitiesDevice getCapabilities() {
         return capabilities;
     }
+
+    /** Returns the {@link VKCapabilitiesInstance} instance associated with this dispatchable handle. */
+    public abstract VKCapabilitiesInstance getCapabilitiesInstance();
 
 }
