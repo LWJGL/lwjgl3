@@ -46,7 +46,7 @@
         <ant antfile="update-dependencies.xml" target="check-dependencies" inheritAll="false"/>
 
         <taskdef resource="org/jetbrains/kotlin/ant/antlib.xml" classpath="${kotlinc}/lib/kotlin-ant.jar"/>
-        <taskdef resource="testngtasks" classpath="${lib}/java/testng.jar"/>
+        <taskdef resource="testngtasks" classpath="${lib}/java/testng.jar;${lib}/java/slf4j-api.jar;${lib}/java/slf4j-jdk14.jar"/>
     </target>
 
     <target name="init-wiki" description="Initializes the lwjgl3-wiki git repository in /wiki. [Optional]">
@@ -862,6 +862,8 @@
                 <pathelement path="${bin.test}"/>
                 <pathelement path="${lib}/java/jcommander.jar"/>
                 <pathelement path="${lib}/java/jquery.jar"/>
+                <pathelement path="${lib}/java/slf4j-api.jar"/>
+                <pathelement path="${lib}/java/slf4j-jdk14.jar"/>
                 <pathelement path="${lib}/native"/>
             </classpath>
 

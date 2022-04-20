@@ -3,6 +3,8 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/bin/libs/java/testng.jar!/" />
       <root url="jar://$PROJECT_DIR$/bin/libs/java/jcommander.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/slf4j-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/libs/java/slf4j-jdk14.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
