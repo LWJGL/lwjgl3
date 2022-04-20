@@ -992,6 +992,19 @@ public final class MemoryUtil {
     }
 
     /**
+     * Creates a {@link ByteBuffer} instance as a view of the specified {@link Struct}.
+     *
+     * <p>The returned {@code ByteBuffer} instance will be set to the native {@link ByteOrder}.</p>
+     *
+     * @param value the struct value
+     *
+     * @return the {@code ByteBuffer} view
+     */
+    public static ByteBuffer memByteBuffer(Struct value) {
+        return wrap(BUFFER_BYTE, value.address, value.sizeof()).order(NATIVE_ORDER);
+    }
+
+    /**
      * Creates a new direct ShortBuffer that starts at the specified memory address and has the specified capacity.
      *
      * <p>The {@code address} specified must be aligned to 2 bytes. If not, use {@code memByteBuffer(address, capacity * 2).asShortBuffer()}.</p>
