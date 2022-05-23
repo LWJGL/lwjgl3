@@ -286,7 +286,7 @@ public class Assimp {
             QuaternionMultiply                             = apiGetFunctionAddress(ASSIMP, "aiQuaternionMultiply"),
             QuaternionInterpolate                          = apiGetFunctionAddress(ASSIMP, "aiQuaternionInterpolate"),
             GetImporterDesc                                = apiGetFunctionAddress(ASSIMP, "aiGetImporterDesc"),
-            TextureTypeToString                            = apiGetFunctionAddress(ASSIMP, "TextureTypeToString"),
+            TextureTypeToString                            = apiGetFunctionAddress(ASSIMP, "aiTextureTypeToString"),
             GetMaterialProperty                            = apiGetFunctionAddress(ASSIMP, "aiGetMaterialProperty"),
             GetMaterialFloatArray                          = apiGetFunctionAddress(ASSIMP, "aiGetMaterialFloatArray"),
             GetMaterialIntegerArray                        = apiGetFunctionAddress(ASSIMP, "aiGetMaterialIntegerArray"),
@@ -1656,6 +1656,7 @@ public class Assimp {
         AI_MATKEY_USE_EMISSIVE_MAP            = "$mat.useEmissiveMap",
         AI_MATKEY_EMISSIVE_INTENSITY          = "$mat.emissiveIntensity",
         AI_MATKEY_USE_AO_MAP                  = "$mat.useAOMap",
+        AI_MATKEY_OBJ_ILLUM                   = "$mat.illum",
         _AI_MATKEY_TEXTURE_BASE               = "$tex.file",
         _AI_MATKEY_UVWSRC_BASE                = "$tex.uvwsrc",
         _AI_MATKEY_TEXOP_BASE                 = "$tex.op",
@@ -5180,10 +5181,10 @@ public class Assimp {
         }
     }
 
-    // --- [ TextureTypeToString ] ---
+    // --- [ aiTextureTypeToString ] ---
 
-    /** Unsafe version of: {@link #TextureTypeToString} */
-    public static long nTextureTypeToString(int in) {
+    /** Unsafe version of: {@link #aiTextureTypeToString TextureTypeToString} */
+    public static long naiTextureTypeToString(int in) {
         long __functionAddress = Functions.TextureTypeToString;
         return invokeP(in, __functionAddress);
     }
@@ -5191,8 +5192,8 @@ public class Assimp {
     /** Get a string for a given {@code aiTextureType}. */
     @Nullable
     @NativeType("char const *")
-    public static String TextureTypeToString(@NativeType("aiTextureType") int in) {
-        long __result = nTextureTypeToString(in);
+    public static String aiTextureTypeToString(@NativeType("aiTextureType") int in) {
+        long __result = naiTextureTypeToString(in);
         return memASCIISafe(__result);
     }
 

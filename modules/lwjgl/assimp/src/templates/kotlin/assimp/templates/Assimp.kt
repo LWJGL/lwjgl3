@@ -2869,6 +2869,7 @@ aiAttachLogStream(&c);""")}
         "AI_MATKEY_USE_EMISSIVE_MAP".."\$mat.useEmissiveMap",
         "AI_MATKEY_EMISSIVE_INTENSITY".."\$mat.emissiveIntensity",
         "AI_MATKEY_USE_AO_MAP".."\$mat.useAOMap",
+        "AI_MATKEY_OBJ_ILLUM".."\$mat.illum",
 
         "_AI_MATKEY_TEXTURE_BASE".."\$tex.file",
         "_AI_MATKEY_UVWSRC_BASE".."\$tex.uvwsrc",
@@ -2906,9 +2907,7 @@ aiAttachLogStream(&c);""")}
         "TextureTypeToString",
         "Get a string for a given {@code aiTextureType}.",
 
-        aiTextureType("in", ""),
-
-        noPrefix = true
+        aiTextureType("in", "")
     )
 
     val GetMaterialProperty = aiReturn(
