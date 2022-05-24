@@ -33,7 +33,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         """
 
     IntConstant("", "C_API_VERSION_MAJOR".."0")
-    IntConstant("", "C_API_VERSION_MINOR".."48")
+    IntConstant("", "C_API_VERSION_MINOR".."49")
     IntConstant("", "C_API_VERSION_PATCH".."0")
 
     IntConstant("", "COMPILER_OPTION_COMMON_BIT"..0x1000000)
@@ -496,7 +496,8 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_MSL_FIXED_SUBGROUP_SIZE".enum("", "74 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING".enum("", "75 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE".enum("", "76 | SPVC_COMPILER_OPTION_MSL_BIT"),
-        "COMPILER_OPTION_GLSL_OVR_MULTIVIEW_VIEW_COUNT".enum("", "77 | SPVC_COMPILER_OPTION_GLSL_BIT")
+        "COMPILER_OPTION_GLSL_OVR_MULTIVIEW_VIEW_COUNT".enum("", "77 | SPVC_COMPILER_OPTION_GLSL_BIT"),
+        "COMPILER_OPTION_RELAX_NAN_CHECKS".enum("", "78 | SPVC_COMPILER_OPTION_COMMON_BIT")
     )
 
     void(
