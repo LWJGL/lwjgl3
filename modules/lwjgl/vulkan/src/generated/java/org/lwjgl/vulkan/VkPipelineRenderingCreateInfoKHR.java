@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -56,6 +55,9 @@ public class VkPipelineRenderingCreateInfoKHR extends VkPipelineRenderingCreateI
     /** Sets the specified value to the {@code viewMask} field. */
     @Override
     public VkPipelineRenderingCreateInfoKHR viewMask(@NativeType("uint32_t") int value) { nviewMask(address(), value); return this; }
+    /** Sets the specified value to the {@code colorAttachmentCount} field. */
+    @Override
+    public VkPipelineRenderingCreateInfoKHR colorAttachmentCount(@NativeType("uint32_t") int value) { ncolorAttachmentCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code pColorAttachmentFormats} field. */
     @Override
     public VkPipelineRenderingCreateInfoKHR pColorAttachmentFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { npColorAttachmentFormats(address(), value); return this; }
@@ -72,6 +74,7 @@ public class VkPipelineRenderingCreateInfoKHR extends VkPipelineRenderingCreateI
         int sType,
         long pNext,
         int viewMask,
+        int colorAttachmentCount,
         @Nullable IntBuffer pColorAttachmentFormats,
         int depthAttachmentFormat,
         int stencilAttachmentFormat
@@ -79,6 +82,7 @@ public class VkPipelineRenderingCreateInfoKHR extends VkPipelineRenderingCreateI
         sType(sType);
         pNext(pNext);
         viewMask(viewMask);
+        colorAttachmentCount(colorAttachmentCount);
         pColorAttachmentFormats(pColorAttachmentFormats);
         depthAttachmentFormat(depthAttachmentFormat);
         stencilAttachmentFormat(stencilAttachmentFormat);
@@ -259,6 +263,9 @@ public class VkPipelineRenderingCreateInfoKHR extends VkPipelineRenderingCreateI
         /** Sets the specified value to the {@code viewMask} field. */
         @Override
         public VkPipelineRenderingCreateInfoKHR.Buffer viewMask(@NativeType("uint32_t") int value) { VkPipelineRenderingCreateInfoKHR.nviewMask(address(), value); return this; }
+        /** Sets the specified value to the {@code colorAttachmentCount} field. */
+        @Override
+        public VkPipelineRenderingCreateInfoKHR.Buffer colorAttachmentCount(@NativeType("uint32_t") int value) { VkPipelineRenderingCreateInfoKHR.ncolorAttachmentCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code pColorAttachmentFormats} field. */
         @Override
         public VkPipelineRenderingCreateInfoKHR.Buffer pColorAttachmentFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { VkPipelineRenderingCreateInfoKHR.npColorAttachmentFormats(address(), value); return this; }

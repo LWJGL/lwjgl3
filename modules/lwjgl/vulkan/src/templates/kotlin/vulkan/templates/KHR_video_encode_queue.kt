@@ -27,7 +27,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
             <dd>300</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>4</dd>
+            <dd>5</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -46,7 +46,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-02-10</dd>
+            <dd>2022-03-31</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -71,7 +71,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."4"
+        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."5"
     )
 
     StringConstant(

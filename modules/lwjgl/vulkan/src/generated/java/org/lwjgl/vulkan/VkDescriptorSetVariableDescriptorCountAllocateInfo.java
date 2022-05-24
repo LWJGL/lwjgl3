@@ -21,13 +21,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@code descriptorSetCount} is zero or this structure is not included in the {@code pNext} chain, then the variable lengths are considered to be zero. Otherwise, {@code pDescriptorCounts}[i] is the number of descriptors in the variable count descriptor binding in the corresponding descriptor set layout. If the variable count descriptor binding in the corresponding descriptor set layout has a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code pDescriptorCounts}[i] specifies the binding’s capacity in bytes. If {@link VkDescriptorSetAllocateInfo}{@code ::pSetLayouts}[i] does not include a variable count descriptor binding, then {@code pDescriptorCounts}[i] is ignored.</p>
+ * <p>If {@code descriptorSetCount} is zero or this structure is not included in the {@code pNext} chain, then the variable lengths are considered to be zero. Otherwise, {@code pDescriptorCounts}[i] is the number of descriptors in the variable-sized descriptor binding in the corresponding descriptor set layout. If the variable-sized descriptor binding in the corresponding descriptor set layout has a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code pDescriptorCounts}[i] specifies the binding’s capacity in bytes. If {@link VkDescriptorSetAllocateInfo}{@code ::pSetLayouts}[i] does not include a variable-sized descriptor binding, then {@code pDescriptorCounts}[i] is ignored.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
  * <li>If {@code descriptorSetCount} is not zero, {@code descriptorSetCount} <b>must</b> equal {@link VkDescriptorSetAllocateInfo}{@code ::descriptorSetCount}</li>
- * <li>If {@link VkDescriptorSetAllocateInfo}{@code ::pSetLayouts}[i] has a variable descriptor count binding, then {@code pDescriptorCounts}[i] <b>must</b> be less than or equal to the descriptor count specified for that binding when the descriptor set layout was created</li>
+ * <li>If {@link VkDescriptorSetAllocateInfo}{@code ::pSetLayouts}[i] has a variable-sized descriptor binding, then {@code pDescriptorCounts}[i] <b>must</b> be less than or equal to the descriptor count specified for that binding when the descriptor set layout was created</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -101,7 +101,7 @@ public class VkDescriptorSetVariableDescriptorCountAllocateInfo extends Struct i
     /** zero or the number of elements in {@code pDescriptorCounts}. */
     @NativeType("uint32_t")
     public int descriptorSetCount() { return ndescriptorSetCount(address()); }
-    /** a pointer to an array of descriptor counts, with each member specifying the number of descriptors in a variable descriptor count binding in the corresponding descriptor set being allocated. */
+    /** a pointer to an array of descriptor counts, with each member specifying the number of descriptors in a variable-sized descriptor binding in the corresponding descriptor set being allocated. */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pDescriptorCounts() { return npDescriptorCounts(address()); }

@@ -23,7 +23,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR STRUCTURE_TYPE_VIDEO_PROFILES_KHR}</li>
- * <li>{@code pProfiles} <b>must</b> be a valid pointer to a valid {@link VkVideoProfileKHR} structure</li>
+ * <li>{@code pProfiles} <b>must</b> be a valid pointer to an array of {@code profileCount} valid {@link VkVideoProfileKHR} structures</li>
+ * <li>{@code profileCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -96,7 +97,7 @@ public class VkVideoProfilesKHR extends Struct implements NativeResource {
     public int profileCount() { return nprofileCount(address()); }
     /** a pointer to an array of {@link VkVideoProfileKHR} structures. Each {@link VkVideoProfileKHR} structure <b>must</b> chain the corresponding codec-operation specific extension video profile structure. */
     @NativeType("VkVideoProfileKHR const *")
-    public VkVideoProfileKHR pProfiles() { return npProfiles(address()); }
+    public VkVideoProfileKHR.Buffer pProfiles() { return npProfiles(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoProfilesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -104,21 +105,17 @@ public class VkVideoProfilesKHR extends Struct implements NativeResource {
     public VkVideoProfilesKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoProfilesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #profileCount} field. */
-    public VkVideoProfilesKHR profileCount(@NativeType("uint32_t") int value) { nprofileCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVideoProfileKHR} to the {@link #pProfiles} field. */
-    public VkVideoProfilesKHR pProfiles(@NativeType("VkVideoProfileKHR const *") VkVideoProfileKHR value) { npProfiles(address(), value); return this; }
+    /** Sets the address of the specified {@link VkVideoProfileKHR.Buffer} to the {@link #pProfiles} field. */
+    public VkVideoProfilesKHR pProfiles(@NativeType("VkVideoProfileKHR const *") VkVideoProfileKHR.Buffer value) { npProfiles(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoProfilesKHR set(
         int sType,
         long pNext,
-        int profileCount,
-        VkVideoProfileKHR pProfiles
+        VkVideoProfileKHR.Buffer pProfiles
     ) {
         sType(sType);
         pNext(pNext);
-        profileCount(profileCount);
         pProfiles(pProfiles);
 
         return this;
@@ -256,16 +253,16 @@ public class VkVideoProfilesKHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #profileCount}. */
     public static int nprofileCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoProfilesKHR.PROFILECOUNT); }
     /** Unsafe version of {@link #pProfiles}. */
-    public static VkVideoProfileKHR npProfiles(long struct) { return VkVideoProfileKHR.create(memGetAddress(struct + VkVideoProfilesKHR.PPROFILES)); }
+    public static VkVideoProfileKHR.Buffer npProfiles(long struct) { return VkVideoProfileKHR.create(memGetAddress(struct + VkVideoProfilesKHR.PPROFILES), nprofileCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoProfilesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoProfilesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #profileCount(int) profileCount}. */
+    /** Sets the specified value to the {@code profileCount} field of the specified {@code struct}. */
     public static void nprofileCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoProfilesKHR.PROFILECOUNT, value); }
-    /** Unsafe version of {@link #pProfiles(VkVideoProfileKHR) pProfiles}. */
-    public static void npProfiles(long struct, VkVideoProfileKHR value) { memPutAddress(struct + VkVideoProfilesKHR.PPROFILES, value.address()); }
+    /** Unsafe version of {@link #pProfiles(VkVideoProfileKHR.Buffer) pProfiles}. */
+    public static void npProfiles(long struct, VkVideoProfileKHR.Buffer value) { memPutAddress(struct + VkVideoProfilesKHR.PPROFILES, value.address()); nprofileCount(struct, value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -323,9 +320,9 @@ public class VkVideoProfilesKHR extends Struct implements NativeResource {
         /** @return the value of the {@link VkVideoProfilesKHR#profileCount} field. */
         @NativeType("uint32_t")
         public int profileCount() { return VkVideoProfilesKHR.nprofileCount(address()); }
-        /** @return a {@link VkVideoProfileKHR} view of the struct pointed to by the {@link VkVideoProfilesKHR#pProfiles} field. */
+        /** @return a {@link VkVideoProfileKHR.Buffer} view of the struct array pointed to by the {@link VkVideoProfilesKHR#pProfiles} field. */
         @NativeType("VkVideoProfileKHR const *")
-        public VkVideoProfileKHR pProfiles() { return VkVideoProfilesKHR.npProfiles(address()); }
+        public VkVideoProfileKHR.Buffer pProfiles() { return VkVideoProfilesKHR.npProfiles(address()); }
 
         /** Sets the specified value to the {@link VkVideoProfilesKHR#sType} field. */
         public VkVideoProfilesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoProfilesKHR.nsType(address(), value); return this; }
@@ -333,10 +330,8 @@ public class VkVideoProfilesKHR extends Struct implements NativeResource {
         public VkVideoProfilesKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR); }
         /** Sets the specified value to the {@link VkVideoProfilesKHR#pNext} field. */
         public VkVideoProfilesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoProfilesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoProfilesKHR#profileCount} field. */
-        public VkVideoProfilesKHR.Buffer profileCount(@NativeType("uint32_t") int value) { VkVideoProfilesKHR.nprofileCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVideoProfileKHR} to the {@link VkVideoProfilesKHR#pProfiles} field. */
-        public VkVideoProfilesKHR.Buffer pProfiles(@NativeType("VkVideoProfileKHR const *") VkVideoProfileKHR value) { VkVideoProfilesKHR.npProfiles(address(), value); return this; }
+        /** Sets the address of the specified {@link VkVideoProfileKHR.Buffer} to the {@link VkVideoProfilesKHR#pProfiles} field. */
+        public VkVideoProfilesKHR.Buffer pProfiles(@NativeType("VkVideoProfileKHR const *") VkVideoProfileKHR.Buffer value) { VkVideoProfilesKHR.npProfiles(address(), value); return this; }
 
     }
 

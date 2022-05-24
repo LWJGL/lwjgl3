@@ -18,22 +18,18 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Sample Code</h5>
  * 
- * <p>Example of ray query in a GLSL shader</p>
+ * <p>Example of ray query in a GLSL shader, illustrating how to use ray queries to determine whether a given position (at ray origin) is in shadow or not, by tracing a ray towards the light, and checking for any intersections with geometry occluding the light.</p>
  * 
  * <pre><code>
  * rayQueryEXT rq;
  * 
- * rayQueryInitializeEXT(rq, accStruct, gl_RayFlagsNoneEXT, 0, origin, tMin, direction, tMax);
+ * rayQueryInitializeEXT(rq, accStruct, gl_RayFlagsTerminateOnFirstHitEXT, cullMask, origin, tMin, direction, tMax);
  * 
- * while(rayQueryProceedEXT(rq)) {
- *     if (rayQueryGetIntersectionTypeEXT(rq, false) == gl_RayQueryCandidateIntersectionTriangleEXT) {
- *         //...
- *         rayQueryConfirmIntersectionEXT(rq);
- *     }
- * }
+ * // Traverse the acceleration structure and store information about the first intersection (if any)
+ * rayQueryProceedEXT(rq);
  * 
  * if (rayQueryGetIntersectionTypeEXT(rq, true) == gl_RayQueryCommittedIntersectionNoneEXT) {
- *     //...
+ *     // Not in shadow
  * }</code></pre>
  * 
  * <h5>VK_KHR_ray_query</h5>

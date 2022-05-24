@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -25,26 +24,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@code depthAttachmentFormat}, {@code stencilAttachmentFormat}, or any element of {@code pColorAttachmentFormats} is {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it indicates that the corresponding attachment is unused within the render pass. Valid formats indicate that an attachment <b>can</b> be used - but it is still valid to set the attachment to {@code NULL} when beginning rendering.</p>
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If any element of {@code pColorAttachmentFormats} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> that includes either {@link VK10#VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT FORMAT_FEATURE_COLOR_ATTACHMENT_BIT} or {@link NVLinearColorAttachment#VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV}</li>
- * <li>If {@code depthAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format that includes a depth aspect</li>
- * <li>If {@code stencilAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format that includes a stencil aspect</li>
- * <li>If {@code depthAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> that include {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code stencilAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> that include {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code depthAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} and {@code stencilAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, {@code depthAttachmentFormat} <b>must</b> equal {@code stencilAttachmentFormat}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiview">{@code multiview}</a> feature is not enabled, {@code viewMask} <b>must</b> be 0</li>
- * <li>The index of the most significant bit in {@code viewMask} <b>must</b> be less than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxMultiviewViewCount">{@code maxMultiviewViewCount}</a></li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO}</li>
- * <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachmentFormats} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid {@code VkFormat} values</li>
- * <li>{@code depthAttachmentFormat} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>{@code stencilAttachmentFormat} <b>must</b> be a valid {@code VkFormat} value</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -145,6 +128,8 @@ public class VkPipelineRenderingCreateInfo extends Struct implements NativeResou
     public VkPipelineRenderingCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #viewMask} field. */
     public VkPipelineRenderingCreateInfo viewMask(@NativeType("uint32_t") int value) { nviewMask(address(), value); return this; }
+    /** Sets the specified value to the {@link #colorAttachmentCount} field. */
+    public VkPipelineRenderingCreateInfo colorAttachmentCount(@NativeType("uint32_t") int value) { ncolorAttachmentCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pColorAttachmentFormats} field. */
     public VkPipelineRenderingCreateInfo pColorAttachmentFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { npColorAttachmentFormats(address(), value); return this; }
     /** Sets the specified value to the {@link #depthAttachmentFormat} field. */
@@ -157,6 +142,7 @@ public class VkPipelineRenderingCreateInfo extends Struct implements NativeResou
         int sType,
         long pNext,
         int viewMask,
+        int colorAttachmentCount,
         @Nullable IntBuffer pColorAttachmentFormats,
         int depthAttachmentFormat,
         int stencilAttachmentFormat
@@ -164,6 +150,7 @@ public class VkPipelineRenderingCreateInfo extends Struct implements NativeResou
         sType(sType);
         pNext(pNext);
         viewMask(viewMask);
+        colorAttachmentCount(colorAttachmentCount);
         pColorAttachmentFormats(pColorAttachmentFormats);
         depthAttachmentFormat(depthAttachmentFormat);
         stencilAttachmentFormat(stencilAttachmentFormat);
@@ -320,22 +307,11 @@ public class VkPipelineRenderingCreateInfo extends Struct implements NativeResou
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
     public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRenderingCreateInfo.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachmentFormats(IntBuffer) pColorAttachmentFormats}. */
-    public static void npColorAttachmentFormats(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkPipelineRenderingCreateInfo.PCOLORATTACHMENTFORMATS, memAddressSafe(value)); ncolorAttachmentCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npColorAttachmentFormats(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkPipelineRenderingCreateInfo.PCOLORATTACHMENTFORMATS, memAddressSafe(value)); if (value != null) { ncolorAttachmentCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #depthAttachmentFormat(int) depthAttachmentFormat}. */
     public static void ndepthAttachmentFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRenderingCreateInfo.DEPTHATTACHMENTFORMAT, value); }
     /** Unsafe version of {@link #stencilAttachmentFormat(int) stencilAttachmentFormat}. */
     public static void nstencilAttachmentFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineRenderingCreateInfo.STENCILATTACHMENTFORMAT, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (ncolorAttachmentCount(struct) != 0) {
-            check(memGetAddress(struct + VkPipelineRenderingCreateInfo.PCOLORATTACHMENTFORMATS));
-        }
-    }
 
     // -----------------------------------
 
@@ -406,6 +382,8 @@ public class VkPipelineRenderingCreateInfo extends Struct implements NativeResou
         public VkPipelineRenderingCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRenderingCreateInfo.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineRenderingCreateInfo#viewMask} field. */
         public VkPipelineRenderingCreateInfo.Buffer viewMask(@NativeType("uint32_t") int value) { VkPipelineRenderingCreateInfo.nviewMask(address(), value); return this; }
+        /** Sets the specified value to the {@link VkPipelineRenderingCreateInfo#colorAttachmentCount} field. */
+        public VkPipelineRenderingCreateInfo.Buffer colorAttachmentCount(@NativeType("uint32_t") int value) { VkPipelineRenderingCreateInfo.ncolorAttachmentCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkPipelineRenderingCreateInfo#pColorAttachmentFormats} field. */
         public VkPipelineRenderingCreateInfo.Buffer pColorAttachmentFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { VkPipelineRenderingCreateInfo.npColorAttachmentFormats(address(), value); return this; }
         /** Sets the specified value to the {@link VkPipelineRenderingCreateInfo#depthAttachmentFormat} field. */

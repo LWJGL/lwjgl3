@@ -29,9 +29,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link NVFragmentShadingRateEnums#VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV}</li>
- * <li>{@code shadingRateType} <b>must</b> be a valid {@code VkFragmentShadingRateTypeNV} value</li>
- * <li>{@code shadingRate} <b>must</b> be a valid {@code VkFragmentShadingRateNV} value</li>
- * <li>Any given element of {@code combinerOps} <b>must</b> be a valid {@code VkFragmentShadingRateCombinerOpKHR} value</li>
  * </ul>
  * 
  * <h3>Layout</h3>

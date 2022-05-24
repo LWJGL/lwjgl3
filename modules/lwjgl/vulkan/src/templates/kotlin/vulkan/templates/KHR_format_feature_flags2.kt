@@ -19,7 +19,7 @@ val KHR_format_feature_flags2 = "KHRFormatFeatureFlags2".nativeClassVK("KHR_form
 
         <ul>
             <li>#FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR and #FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR indicate that an implementation supports respectively reading and writing a given {@code VkFormat} through storage operations without specifying the format in the shader.</li>
-            <li>#FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR indicates that an implementation supports depth comparison performed by {@code OpImage*Dref} instructions on a given {@code VkFormat}. Previously the result of executing a {@code OpImage*Dref*} instruction on an image view, where the {@code format} was not one of the depth/stencil formats with a depth component, was undefined. This bit clarifies on which formats such instructions can be used.</li>
+            <li>#FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR indicates that an implementation supports depth comparison performed by {@code OpImage*Dref*} instructions on a given {@code VkFormat}. Previously the result of executing a {@code OpImage*Dref*} instruction on an image view, where the {@code format} was not one of the depth/stencil formats with a depth component, was undefined. This bit clarifies on which formats such instructions can be used.</li>
         </ul>
 
         <h5>Promotion to Vulkan 1.3</h5>

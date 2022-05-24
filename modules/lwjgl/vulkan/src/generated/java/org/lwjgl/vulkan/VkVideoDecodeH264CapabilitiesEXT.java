@@ -15,6 +15,8 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import org.lwjgl.vulkan.video.*;
+
 /**
  * Structure specifying H.264 decode capabilities.
  * 
@@ -26,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkExtensionProperties}, {@link VkOffset2D}</p>
+ * <p>{@link VkOffset2D}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -34,9 +36,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkVideoDecodeH264CapabilitiesEXT {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     uint32_t {@link #maxLevel};
+ *     StdVideoH264Level {@link #maxLevel};
  *     {@link VkOffset2D VkOffset2D} {@link #fieldOffsetGranularity};
- *     {@link VkExtensionProperties VkExtensionProperties} {@link #stdExtensionVersion};
  * }</code></pre>
  */
 public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeResource {
@@ -52,16 +53,14 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
         STYPE,
         PNEXT,
         MAXLEVEL,
-        FIELDOFFSETGRANULARITY,
-        STDEXTENSIONVERSION;
+        FIELDOFFSETGRANULARITY;
 
     static {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
             __member(4),
-            __member(VkOffset2D.SIZEOF, VkOffset2D.ALIGNOF),
-            __member(VkExtensionProperties.SIZEOF, VkExtensionProperties.ALIGNOF)
+            __member(VkOffset2D.SIZEOF, VkOffset2D.ALIGNOF)
         );
 
         SIZEOF = layout.getSize();
@@ -71,7 +70,6 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
         PNEXT = layout.offsetof(1);
         MAXLEVEL = layout.offsetof(2);
         FIELDOFFSETGRANULARITY = layout.offsetof(3);
-        STDEXTENSIONVERSION = layout.offsetof(4);
     }
 
     /**
@@ -94,12 +92,10 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** the maximum H.264 level supported by the device. */
-    @NativeType("uint32_t")
+    @NativeType("StdVideoH264Level")
     public int maxLevel() { return nmaxLevel(address()); }
     /** - if Interlaced Video Content is suported, the maximum field offset granularity supported for the picture resource. */
     public VkOffset2D fieldOffsetGranularity() { return nfieldOffsetGranularity(address()); }
-    /** a {@link VkExtensionProperties} structure specifying the H.264 extension name and version supported by this implementation. */
-    public VkExtensionProperties stdExtensionVersion() { return nstdExtensionVersion(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH264CapabilitiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -252,8 +248,6 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
     public static int nmaxLevel(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264CapabilitiesEXT.MAXLEVEL); }
     /** Unsafe version of {@link #fieldOffsetGranularity}. */
     public static VkOffset2D nfieldOffsetGranularity(long struct) { return VkOffset2D.create(struct + VkVideoDecodeH264CapabilitiesEXT.FIELDOFFSETGRANULARITY); }
-    /** Unsafe version of {@link #stdExtensionVersion}. */
-    public static VkExtensionProperties nstdExtensionVersion(long struct) { return VkExtensionProperties.create(struct + VkVideoDecodeH264CapabilitiesEXT.STDEXTENSIONVERSION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264CapabilitiesEXT.STYPE, value); }
@@ -305,12 +299,10 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
         @NativeType("void *")
         public long pNext() { return VkVideoDecodeH264CapabilitiesEXT.npNext(address()); }
         /** @return the value of the {@link VkVideoDecodeH264CapabilitiesEXT#maxLevel} field. */
-        @NativeType("uint32_t")
+        @NativeType("StdVideoH264Level")
         public int maxLevel() { return VkVideoDecodeH264CapabilitiesEXT.nmaxLevel(address()); }
         /** @return a {@link VkOffset2D} view of the {@link VkVideoDecodeH264CapabilitiesEXT#fieldOffsetGranularity} field. */
         public VkOffset2D fieldOffsetGranularity() { return VkVideoDecodeH264CapabilitiesEXT.nfieldOffsetGranularity(address()); }
-        /** @return a {@link VkExtensionProperties} view of the {@link VkVideoDecodeH264CapabilitiesEXT#stdExtensionVersion} field. */
-        public VkExtensionProperties stdExtensionVersion() { return VkVideoDecodeH264CapabilitiesEXT.nstdExtensionVersion(address()); }
 
         /** Sets the specified value to the {@link VkVideoDecodeH264CapabilitiesEXT#sType} field. */
         public VkVideoDecodeH264CapabilitiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH264CapabilitiesEXT.nsType(address(), value); return this; }

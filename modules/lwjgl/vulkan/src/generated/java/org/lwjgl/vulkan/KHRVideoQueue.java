@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>24</dd>
  * <dt><b>Revision</b></dt>
- * <dd>2</dd>
+ * <dd>3</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2021-03-29</dd>
+ * <dd>2022-03-16</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -67,7 +67,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class KHRVideoQueue {
 
     /** The extension specification version. */
-    public static final int VK_KHR_VIDEO_QUEUE_SPEC_VERSION = 2;
+    public static final int VK_KHR_VIDEO_QUEUE_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String VK_KHR_VIDEO_QUEUE_EXTENSION_NAME = "VK_KHR_video_queue";
@@ -382,6 +382,10 @@ public class KHRVideoQueue {
      * <h5>Description</h5>
      * 
      * <p>If {@code pVideoFormatProperties} is {@code NULL}, then the number of video format properties supported for the given {@code physicalDevice} is returned in {@code pVideoFormatPropertyCount}. Otherwise, {@code pVideoFormatPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pVideoFormatProperties} array, and on return the variable is overwritten with the number of values actually written to {@code pVideoFormatProperties}. If the value of {@code pVideoFormatPropertyCount} is less than the number of video format properties supported, at most {@code pVideoFormatPropertyCount} values will be written to {@code pVideoFormatProperties}, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all the available values were returned.</p>
+     * 
+     * <p>If an implementation reports {@link KHRVideoDecodeQueue#VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR} is supported but {@link KHRVideoDecodeQueue#VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR} is not supported in {@link VkVideoDecodeCapabilitiesKHR}{@code ::flags}, then to query for video format properties for decode DPB or output, {@code imageUsage} <b>must</b> have both {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR} and {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR} set. Otherwise, the call will fail with {@link VK10#VK_ERROR_FORMAT_NOT_SUPPORTED ERROR_FORMAT_NOT_SUPPORTED}.</p>
+     * 
+     * <p>If an implementation reports {@link KHRVideoDecodeQueue#VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR} is supported but {@link KHRVideoDecodeQueue#VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR} is not supported in {@link VkVideoDecodeCapabilitiesKHR}{@code ::flags}, then to query for video format properties for decode DPB, {@code imageUsage} <b>must</b> have {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR} set and {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR} not set. Otherwise, the call will fail with {@link VK10#VK_ERROR_FORMAT_NOT_SUPPORTED ERROR_FORMAT_NOT_SUPPORTED}. Similarly, to query for video format properties for decode output, {@code imageUsage} <b>must</b> have {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR} set and {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR} not set. Otherwise, the call will fail with {@link VK10#VK_ERROR_FORMAT_NOT_SUPPORTED ERROR_FORMAT_NOT_SUPPORTED}.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -811,7 +815,7 @@ public class KHRVideoQueue {
      * <p>{@link VkVideoSessionParametersUpdateInfoKHR}</p>
      *
      * @param device                 the logical device that was used for the creation of the video session object.
-     * @param videoSessionParameters the video session object that is going to be updated.
+     * @param videoSessionParameters the video session parameters object that is going to be updated.
      * @param pUpdateInfo            a pointer to a {@link VkVideoSessionParametersUpdateInfoKHR} structure containing the session parameters update information.
      */
     @NativeType("VkResult")
@@ -835,7 +839,7 @@ public class KHRVideoQueue {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To destroy a video session object, call:</p>
+     * <p>To destroy a video session parameters object, call:</p>
      * 
      * <pre><code>
      * void vkDestroyVideoSessionParametersKHR(
@@ -855,7 +859,7 @@ public class KHRVideoQueue {
      * 
      * <p>{@link VkAllocationCallbacks}</p>
      *
-     * @param device                 the device the video session was created with.
+     * @param device                 the device the video session parameters object was created with.
      * @param videoSessionParameters the video session parameters object to be destroyed.
      * @param pAllocator             controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */

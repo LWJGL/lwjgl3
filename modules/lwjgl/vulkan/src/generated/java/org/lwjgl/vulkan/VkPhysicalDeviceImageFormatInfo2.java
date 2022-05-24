@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkImageFormatListCreateInfo}, {@link VkImageStencilUsageCreateInfo}, {@link VkPhysicalDeviceExternalImageFormatInfo}, {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}, or {@link VkPhysicalDeviceImageViewImageFormatInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkImageCompressionControlEXT}, {@link VkImageFormatListCreateInfo}, {@link VkImageStencilUsageCreateInfo}, {@link VkPhysicalDeviceExternalImageFormatInfo}, {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}, or {@link VkPhysicalDeviceImageViewImageFormatInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
  * <li>{@code type} <b>must</b> be a valid {@code VkImageType} value</li>
@@ -142,6 +142,8 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct implements NativeRe
     public VkPhysicalDeviceImageFormatInfo2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkImageCompressionControlEXT} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageCompressionControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageFormatListCreateInfo} value to the {@code pNext} chain. */
     public VkPhysicalDeviceImageFormatInfo2 pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
@@ -430,6 +432,8 @@ public class VkPhysicalDeviceImageFormatInfo2 extends Struct implements NativeRe
         public VkPhysicalDeviceImageFormatInfo2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2); }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageFormatInfo2#pNext} field. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceImageFormatInfo2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkImageCompressionControlEXT} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageCompressionControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageFormatListCreateInfo} value to the {@code pNext} chain. */
         public VkPhysicalDeviceImageFormatInfo2.Buffer pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */

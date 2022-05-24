@@ -22,12 +22,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>When dynamic render pass instances are being used, instead of specifying {@link NVXMultiviewPerViewAttributes#VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX} or {@link NVXMultiviewPerViewAttributes#VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX} in the subpass description flags, the per-attibute properties of the render pass instance <b>must</b> be specified by the {@link VkMultiviewPerViewAttributesInfoNVX} structure Include the {@link VkMultiviewPerViewAttributesInfoNVX} structure in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo} when creating a graphics pipeline for dynamic rendering, {@link VkRenderingInfo} when starting a dynamic render pass instance, and {@link VkCommandBufferInheritanceInfo} when specifying the dynamic render pass instance parameters for secondary command buffers.</p>
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code perViewAttributesPositionXOnly} is {@link VK10#VK_TRUE TRUE} then {@code perViewAttributes} <b>must</b> also be {@link VK10#VK_TRUE TRUE}</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

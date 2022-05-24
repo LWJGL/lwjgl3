@@ -28,6 +28,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code bufferRowLength} <b>must</b> be 0, or greater than or equal to the {@code width} member of {@code imageExtent}</li>
  * <li>{@code bufferImageHeight} <b>must</b> be 0, or greater than or equal to the {@code height} member of {@code imageExtent}</li>
  * <li>The {@code aspectMask} member of {@code imageSubresource} <b>must</b> only have a single bit set</li>
+ * <li>{@code imageExtent.width} <b>must</b> not be 0</li>
+ * <li>{@code imageExtent.height} <b>must</b> not be 0</li>
+ * <li>{@code imageExtent.depth} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

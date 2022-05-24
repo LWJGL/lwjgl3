@@ -9,18 +9,14 @@ import static org.lwjgl.vulkan.video.STDVulkanVideo.*;
 
 public final class STDVulkanVideoCodecH264 {
 
-    /** The extension specification version. */
-    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 5);
-
-    /** The extension name. */
-    public static final String VK_STD_VULKAN_VIDEO_CODEC_H264_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h264";
-
     public static final int
         STD_VIDEO_H264_CPB_CNT_LIST_SIZE             = 32,
         STD_VIDEO_H264_SCALING_LIST_4X4_NUM_LISTS    = 6,
         STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS = 16,
         STD_VIDEO_H264_SCALING_LIST_8X8_NUM_LISTS    = 2,
-        STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS = 64;
+        STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS = 64,
+        STD_VIDEO_H264_MAX_NUM_LIST_REF              = 32,
+        STD_VIDEO_H264_MAX_CHROMA_PLANES             = 2;
 
     /**
      * {@code StdVideoH264ChromaFormatIdc}
@@ -342,6 +338,12 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_NON_VCL_NALU_TYPE_PRECODED        = 6,
         STD_VIDEO_H264_NON_VCL_NALU_TYPE_INVALID         = 0x7FFFFFFF;
 
+    /** The extension specification version. */
+    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 6);
+
+    /** The extension name. */
+    public static final String VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h264_decode";
+
     public static final int STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE = 2;
 
     public static final int STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE = 15;
@@ -361,6 +363,12 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_TOP     = 0,
         STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_BOTTOM  = 1,
         STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_INVALID = 0x7FFFFFFF;
+
+    /** The extension specification version. */
+    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 6);
+
+    /** The extension name. */
+    public static final String VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h264_encode";
 
     private STDVulkanVideoCodecH264() {}
 

@@ -297,7 +297,9 @@ public class VkVideoEncodeH264NaluSliceEXT extends Struct implements NativeResou
         if (pReferenceFinalLists != NULL) {
             VkVideoEncodeH264ReferenceListsEXT.validate(pReferenceFinalLists);
         }
-        check(memGetAddress(struct + VkVideoEncodeH264NaluSliceEXT.PSLICEHEADERSTD));
+        long pSliceHeaderStd = memGetAddress(struct + VkVideoEncodeH264NaluSliceEXT.PSLICEHEADERSTD);
+        check(pSliceHeaderStd);
+        StdVideoEncodeH264SliceHeader.validate(pSliceHeaderStd);
     }
 
     // -----------------------------------

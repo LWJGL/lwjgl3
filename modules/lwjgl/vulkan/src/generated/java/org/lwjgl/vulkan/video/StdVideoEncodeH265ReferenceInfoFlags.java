@@ -20,8 +20,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct StdVideoEncodeH265ReferenceInfoFlags {
- *     uint32_t is_long_term : 1;
- *     uint32_t isUsedFlag : 1;
+ *     uint32_t used_for_long_term_reference : 1;
+ *     uint32_t unused_for_reference : 1;
  * }</code></pre>
  */
 public class StdVideoEncodeH265ReferenceInfoFlags extends Struct implements NativeResource {
@@ -60,25 +60,25 @@ public class StdVideoEncodeH265ReferenceInfoFlags extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code is_long_term} field. */
+    /** @return the value of the {@code used_for_long_term_reference} field. */
     @NativeType("uint32_t")
-    public int is_long_term() { return nis_long_term(address()); }
-    /** @return the value of the {@code isUsedFlag} field. */
+    public boolean used_for_long_term_reference() { return nused_for_long_term_reference(address()) != 0; }
+    /** @return the value of the {@code unused_for_reference} field. */
     @NativeType("uint32_t")
-    public int isUsedFlag() { return nisUsedFlag(address()); }
+    public boolean unused_for_reference() { return nunused_for_reference(address()) != 0; }
 
-    /** Sets the specified value to the {@code is_long_term} field. */
-    public StdVideoEncodeH265ReferenceInfoFlags is_long_term(@NativeType("uint32_t") int value) { nis_long_term(address(), value); return this; }
-    /** Sets the specified value to the {@code isUsedFlag} field. */
-    public StdVideoEncodeH265ReferenceInfoFlags isUsedFlag(@NativeType("uint32_t") int value) { nisUsedFlag(address(), value); return this; }
+    /** Sets the specified value to the {@code used_for_long_term_reference} field. */
+    public StdVideoEncodeH265ReferenceInfoFlags used_for_long_term_reference(@NativeType("uint32_t") boolean value) { nused_for_long_term_reference(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code unused_for_reference} field. */
+    public StdVideoEncodeH265ReferenceInfoFlags unused_for_reference(@NativeType("uint32_t") boolean value) { nunused_for_reference(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoEncodeH265ReferenceInfoFlags set(
-        int is_long_term,
-        int isUsedFlag
+        boolean used_for_long_term_reference,
+        boolean unused_for_reference
     ) {
-        is_long_term(is_long_term);
-        isUsedFlag(isUsedFlag);
+        used_for_long_term_reference(used_for_long_term_reference);
+        unused_for_reference(unused_for_reference);
 
         return this;
     }
@@ -209,16 +209,16 @@ public class StdVideoEncodeH265ReferenceInfoFlags extends Struct implements Nati
     // -----------------------------------
 
     public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH265ReferenceInfoFlags.BITFIELD0); }
-    /** Unsafe version of {@link #is_long_term}. */
-    public static int nis_long_term(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
-    /** Unsafe version of {@link #isUsedFlag}. */
-    public static int nisUsedFlag(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
+    /** Unsafe version of {@link #used_for_long_term_reference}. */
+    public static int nused_for_long_term_reference(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
+    /** Unsafe version of {@link #unused_for_reference}. */
+    public static int nunused_for_reference(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265ReferenceInfoFlags.BITFIELD0, value); }
-    /** Unsafe version of {@link #is_long_term(int) is_long_term}. */
-    public static void nis_long_term(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
-    /** Unsafe version of {@link #isUsedFlag(int) isUsedFlag}. */
-    public static void nisUsedFlag(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
+    /** Unsafe version of {@link #used_for_long_term_reference(boolean) used_for_long_term_reference}. */
+    public static void nused_for_long_term_reference(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
+    /** Unsafe version of {@link #unused_for_reference(boolean) unused_for_reference}. */
+    public static void nunused_for_reference(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
 
     // -----------------------------------
 
@@ -258,17 +258,17 @@ public class StdVideoEncodeH265ReferenceInfoFlags extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code is_long_term} field. */
+        /** @return the value of the {@code used_for_long_term_reference} field. */
         @NativeType("uint32_t")
-        public int is_long_term() { return StdVideoEncodeH265ReferenceInfoFlags.nis_long_term(address()); }
-        /** @return the value of the {@code isUsedFlag} field. */
+        public boolean used_for_long_term_reference() { return StdVideoEncodeH265ReferenceInfoFlags.nused_for_long_term_reference(address()) != 0; }
+        /** @return the value of the {@code unused_for_reference} field. */
         @NativeType("uint32_t")
-        public int isUsedFlag() { return StdVideoEncodeH265ReferenceInfoFlags.nisUsedFlag(address()); }
+        public boolean unused_for_reference() { return StdVideoEncodeH265ReferenceInfoFlags.nunused_for_reference(address()) != 0; }
 
-        /** Sets the specified value to the {@code is_long_term} field. */
-        public StdVideoEncodeH265ReferenceInfoFlags.Buffer is_long_term(@NativeType("uint32_t") int value) { StdVideoEncodeH265ReferenceInfoFlags.nis_long_term(address(), value); return this; }
-        /** Sets the specified value to the {@code isUsedFlag} field. */
-        public StdVideoEncodeH265ReferenceInfoFlags.Buffer isUsedFlag(@NativeType("uint32_t") int value) { StdVideoEncodeH265ReferenceInfoFlags.nisUsedFlag(address(), value); return this; }
+        /** Sets the specified value to the {@code used_for_long_term_reference} field. */
+        public StdVideoEncodeH265ReferenceInfoFlags.Buffer used_for_long_term_reference(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265ReferenceInfoFlags.nused_for_long_term_reference(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code unused_for_reference} field. */
+        public StdVideoEncodeH265ReferenceInfoFlags.Buffer unused_for_reference(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265ReferenceInfoFlags.nunused_for_reference(address(), value ? 1 : 0); return this; }
 
     }
 

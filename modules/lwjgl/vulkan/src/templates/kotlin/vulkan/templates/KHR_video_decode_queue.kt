@@ -27,7 +27,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
             <dd>25</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>4</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -46,13 +46,14 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-09-30</dd>
+            <dd>2022-03-31</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
+                <li>Ahmed Abdelkhalek, AMD</li>
                 <li>Jake Beju, AMD</li>
                 <li>Olivier Lapicque, NVIDIA</li>
                 <li>Peter Fang, AMD</li>
@@ -66,7 +67,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION".."2"
+        "KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION".."4"
     )
 
     StringConstant(
@@ -78,7 +79,8 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR".."1000024000"
+        "STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR".."1000024000",
+        "STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR".."1000024001"
     )
 
     EnumConstant(
@@ -135,6 +137,28 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
 
         "FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR".enum(0x02000000L),
         "FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR".enum(0x04000000L)
+    )
+
+    EnumConstant(
+        """
+        VkVideoDecodeCapabilityFlagBitsKHR - Video decode capability flags
+
+        <h5>Description</h5>
+        <ul>
+            <li>#VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR - reports the implementation supports using the same <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resources">Video Picture Resource</a> for decode DPB and decode output.</li>
+            <li>#VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR - reports the implementation supports using distinct <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resources">Video Picture Resources</a> for decode DPB and decode output.</li>
+        </ul>
+
+        An implementation <b>must</b> report at least one of #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR or #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR as supported.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+        If both #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR and #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR are supported, an application <b>may</b> choose to create separate images for decode DPB and decode output in the case where linear tiling is required for output but optimal tiling <b>must</b> still be used for DPB. This avoids scheduling layout transitions at the expense of extra overhead during decoding to write both images and the additional memory requirements.
+        </div>
+        """,
+
+        "VIDEO_DECODE_CAPABILITY_DEFAULT_KHR".."0",
+        "VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR".enum(0x00000001),
+        "VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR".enum(0x00000002)
     )
 
     EnumConstant(

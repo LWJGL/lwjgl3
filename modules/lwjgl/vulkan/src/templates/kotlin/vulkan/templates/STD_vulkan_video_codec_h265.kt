@@ -12,18 +12,6 @@ val STD_vulkan_video_codec_h265 = "STDVulkanVideoCodecH265".nativeClassVK("STD_v
     javaImport("static org.lwjgl.vulkan.video.STDVulkanVideo.*")
 
     IntConstant(
-        "The extension specification version.",
-
-        "VK_STD_VULKAN_VIDEO_CODEC_H265_SPEC_VERSION".."VK_MAKE_VIDEO_STD_VERSION(0, 9, 5)"
-    ).noPrefix()
-
-    StringConstant(
-        "The extension name.",
-
-        "VK_STD_VULKAN_VIDEO_CODEC_H265_EXTENSION_NAME".."VK_STD_vulkan_video_codec_h265"
-    ).noPrefix()
-
-    IntConstant(
         "",
 
         "VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE".."7",
@@ -41,6 +29,8 @@ val STD_vulkan_video_codec_h265 = "STDVulkanVideoCodecH265".nativeClassVK("STD_v
         "VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE".."19",
         "VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE".."21",
         "VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE".."6",
+        "VIDEO_H265_MAX_NUM_LIST_REF".."15",
+        "VIDEO_H265_MAX_CHROMA_PLANES".."2"
     )
 
     EnumConstant(
@@ -105,12 +95,36 @@ val STD_vulkan_video_codec_h265 = "STDVulkanVideoCodecH265".nativeClassVK("STD_v
     // vulkan_video_codec_h265std_decode.h
 
     IntConstant(
+        "The extension specification version.",
+
+        "VK_STD_VULKAN_VIDEO_CODEC_H265_DECODE_SPEC_VERSION".."VK_MAKE_VIDEO_STD_VERSION(0, 9, 7)"
+    ).noPrefix()
+
+    StringConstant(
+        "The extension name.",
+
+        "VK_STD_VULKAN_VIDEO_CODEC_H265_DECODE_EXTENSION_NAME".."VK_STD_vulkan_video_codec_h265_decode"
+    ).noPrefix()
+
+    IntConstant(
         "",
 
         "VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE".."8"
     )
 
     // vulkan_video_code_h265std_encode.h
+
+    IntConstant(
+        "The extension specification version.",
+
+        "VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION".."VK_MAKE_VIDEO_STD_VERSION(0, 9, 7)"
+    ).noPrefix()
+
+    StringConstant(
+        "The extension name.",
+
+        "VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_EXTENSION_NAME".."VK_STD_vulkan_video_codec_h265_encode"
+    ).noPrefix()
 
     IntConstant(
         "",

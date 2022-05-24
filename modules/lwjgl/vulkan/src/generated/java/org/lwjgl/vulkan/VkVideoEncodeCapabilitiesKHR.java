@@ -26,8 +26,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR}</li>
- * <li>{@code rateControlModes} <b>must</b> be a valid combination of {@code VkVideoEncodeRateControlModeFlagBitsKHR} values</li>
- * <li>{@code rateControlModes} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -39,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkVideoEncodeCapabilitiesKHR {
  *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
+ *     void * {@link #pNext};
  *     VkVideoEncodeCapabilityFlagsKHR {@link #flags};
  *     VkVideoEncodeRateControlModeFlagsKHR {@link #rateControlModes};
  *     uint8_t {@link #rateControlLayerCount};
@@ -105,7 +103,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** a bitmask of {@code VkVideoEncodeCapabilityFlagBitsKHR} describing supported encoding features. */
     @NativeType("VkVideoEncodeCapabilityFlagsKHR")
@@ -127,41 +125,19 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
     /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR} value to the {@link #sType} field. */
     public VkVideoEncodeCapabilitiesKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkVideoEncodeCapabilitiesKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    public VkVideoEncodeCapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoEncodeH264CapabilitiesEXT} value to the {@code pNext} chain. */
     public VkVideoEncodeCapabilitiesKHR pNext(VkVideoEncodeH264CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265CapabilitiesEXT} value to the {@code pNext} chain. */
     public VkVideoEncodeCapabilitiesKHR pNext(VkVideoEncodeH265CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
-    public VkVideoEncodeCapabilitiesKHR flags(@NativeType("VkVideoEncodeCapabilityFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #rateControlModes} field. */
-    public VkVideoEncodeCapabilitiesKHR rateControlModes(@NativeType("VkVideoEncodeRateControlModeFlagsKHR") int value) { nrateControlModes(address(), value); return this; }
-    /** Sets the specified value to the {@link #rateControlLayerCount} field. */
-    public VkVideoEncodeCapabilitiesKHR rateControlLayerCount(@NativeType("uint8_t") byte value) { nrateControlLayerCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #qualityLevelCount} field. */
-    public VkVideoEncodeCapabilitiesKHR qualityLevelCount(@NativeType("uint8_t") byte value) { nqualityLevelCount(address(), value); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@link #inputImageDataFillAlignment} field. */
-    public VkVideoEncodeCapabilitiesKHR inputImageDataFillAlignment(VkExtent2D value) { ninputImageDataFillAlignment(address(), value); return this; }
-    /** Passes the {@link #inputImageDataFillAlignment} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkVideoEncodeCapabilitiesKHR inputImageDataFillAlignment(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(inputImageDataFillAlignment()); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoEncodeCapabilitiesKHR set(
         int sType,
-        long pNext,
-        int flags,
-        int rateControlModes,
-        byte rateControlLayerCount,
-        byte qualityLevelCount,
-        VkExtent2D inputImageDataFillAlignment
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        flags(flags);
-        rateControlModes(rateControlModes);
-        rateControlLayerCount(rateControlLayerCount);
-        qualityLevelCount(qualityLevelCount);
-        inputImageDataFillAlignment(inputImageDataFillAlignment);
 
         return this;
     }
@@ -310,16 +286,6 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeCapabilitiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeCapabilitiesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeCapabilitiesKHR.FLAGS, value); }
-    /** Unsafe version of {@link #rateControlModes(int) rateControlModes}. */
-    public static void nrateControlModes(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeCapabilitiesKHR.RATECONTROLMODES, value); }
-    /** Unsafe version of {@link #rateControlLayerCount(byte) rateControlLayerCount}. */
-    public static void nrateControlLayerCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeCapabilitiesKHR.RATECONTROLLAYERCOUNT, value); }
-    /** Unsafe version of {@link #qualityLevelCount(byte) qualityLevelCount}. */
-    public static void nqualityLevelCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeCapabilitiesKHR.QUALITYLEVELCOUNT, value); }
-    /** Unsafe version of {@link #inputImageDataFillAlignment(VkExtent2D) inputImageDataFillAlignment}. */
-    public static void ninputImageDataFillAlignment(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkVideoEncodeCapabilitiesKHR.INPUTIMAGEDATAFILLALIGNMENT, VkExtent2D.SIZEOF); }
 
     // -----------------------------------
 
@@ -363,7 +329,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeCapabilitiesKHR.nsType(address()); }
         /** @return the value of the {@link VkVideoEncodeCapabilitiesKHR#pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkVideoEncodeCapabilitiesKHR.npNext(address()); }
         /** @return the value of the {@link VkVideoEncodeCapabilitiesKHR#flags} field. */
         @NativeType("VkVideoEncodeCapabilityFlagsKHR")
@@ -385,23 +351,11 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
         /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR} value to the {@link VkVideoEncodeCapabilitiesKHR#sType} field. */
         public VkVideoEncodeCapabilitiesKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR); }
         /** Sets the specified value to the {@link VkVideoEncodeCapabilitiesKHR#pNext} field. */
-        public VkVideoEncodeCapabilitiesKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeCapabilitiesKHR.npNext(address(), value); return this; }
+        public VkVideoEncodeCapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoEncodeCapabilitiesKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoEncodeH264CapabilitiesEXT} value to the {@code pNext} chain. */
         public VkVideoEncodeCapabilitiesKHR.Buffer pNext(VkVideoEncodeH264CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265CapabilitiesEXT} value to the {@code pNext} chain. */
         public VkVideoEncodeCapabilitiesKHR.Buffer pNext(VkVideoEncodeH265CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkVideoEncodeCapabilitiesKHR#flags} field. */
-        public VkVideoEncodeCapabilitiesKHR.Buffer flags(@NativeType("VkVideoEncodeCapabilityFlagsKHR") int value) { VkVideoEncodeCapabilitiesKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeCapabilitiesKHR#rateControlModes} field. */
-        public VkVideoEncodeCapabilitiesKHR.Buffer rateControlModes(@NativeType("VkVideoEncodeRateControlModeFlagsKHR") int value) { VkVideoEncodeCapabilitiesKHR.nrateControlModes(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeCapabilitiesKHR#rateControlLayerCount} field. */
-        public VkVideoEncodeCapabilitiesKHR.Buffer rateControlLayerCount(@NativeType("uint8_t") byte value) { VkVideoEncodeCapabilitiesKHR.nrateControlLayerCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeCapabilitiesKHR#qualityLevelCount} field. */
-        public VkVideoEncodeCapabilitiesKHR.Buffer qualityLevelCount(@NativeType("uint8_t") byte value) { VkVideoEncodeCapabilitiesKHR.nqualityLevelCount(address(), value); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@link VkVideoEncodeCapabilitiesKHR#inputImageDataFillAlignment} field. */
-        public VkVideoEncodeCapabilitiesKHR.Buffer inputImageDataFillAlignment(VkExtent2D value) { VkVideoEncodeCapabilitiesKHR.ninputImageDataFillAlignment(address(), value); return this; }
-        /** Passes the {@link VkVideoEncodeCapabilitiesKHR#inputImageDataFillAlignment} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkVideoEncodeCapabilitiesKHR.Buffer inputImageDataFillAlignment(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(inputImageDataFillAlignment()); return this; }
 
     }
 

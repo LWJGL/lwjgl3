@@ -29,7 +29,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRPipelineLibrary#VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * <li>If {@code libraryCount} is not 0, {@code pLibraries} <b>must</b> be a valid pointer to an array of {@code libraryCount} valid {@code VkPipeline} handles</li>
  * </ul>
  * 

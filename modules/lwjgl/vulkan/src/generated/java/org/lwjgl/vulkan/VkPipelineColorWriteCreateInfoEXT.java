@@ -37,6 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-colorWriteEnable">colorWriteEnable</a> feature is not enabled, all elements of {@code pColorWriteEnables} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
  * <li>{@code attachmentCount} <b>must</b> be equal to the {@code attachmentCount} member of the {@link VkPipelineColorBlendStateCreateInfo} structure specified during pipeline creation</li>
+ * <li>{@code attachmentCount} <b>must</b> be less than or equal to the {@code maxColorAttachments} member of {@link VkPhysicalDeviceLimits}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

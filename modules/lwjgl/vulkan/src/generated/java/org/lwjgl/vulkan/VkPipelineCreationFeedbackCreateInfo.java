@@ -30,22 +30,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>When chained to {@link VkRayTracingPipelineCreateInfoKHR}, {@link VkRayTracingPipelineCreateInfoNV}, or {@link VkGraphicsPipelineCreateInfo}, the {@code i} element of {@code pPipelineStageCreationFeedbacks} corresponds to the {@code i} element of {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages}, {@link VkRayTracingPipelineCreateInfoNV}{@code ::pStages}, or {@link VkGraphicsPipelineCreateInfo}{@code ::pStages}. When chained to {@link VkComputePipelineCreateInfo}, the first element of {@code pPipelineStageCreationFeedbacks} corresponds to {@link VkComputePipelineCreateInfo}{@code ::stage}.</p>
  * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>When chained to {@link VkGraphicsPipelineCreateInfo}, {@link VkPipelineCreationFeedback}{@code ::pipelineStageCreationFeedbackCount} <b>must</b> equal {@link VkGraphicsPipelineCreateInfo}{@code ::stageCount}</li>
- * <li>When chained to {@link VkComputePipelineCreateInfo}, {@link VkPipelineCreationFeedback}{@code ::pipelineStageCreationFeedbackCount} <b>must</b> equal 1</li>
- * <li>When chained to {@link VkRayTracingPipelineCreateInfoKHR}, {@link VkPipelineCreationFeedback}{@code ::pipelineStageCreationFeedbackCount} <b>must</b> equal {@link VkRayTracingPipelineCreateInfoKHR}{@code ::stageCount}</li>
- * <li>When chained to {@link VkRayTracingPipelineCreateInfoNV}, {@link VkPipelineCreationFeedback}{@code ::pipelineStageCreationFeedbackCount} <b>must</b> equal {@link VkRayTracingPipelineCreateInfoNV}{@code ::stageCount}</li>
- * </ul>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO}</li>
  * <li>{@code pPipelineCreationFeedback} <b>must</b> be a valid pointer to a {@link VkPipelineCreationFeedback} structure</li>
- * <li>{@code pPipelineStageCreationFeedbacks} <b>must</b> be a valid pointer to an array of {@code pipelineStageCreationFeedbackCount} {@link VkPipelineCreationFeedback} structures</li>
- * <li>{@code pipelineStageCreationFeedbackCount} <b>must</b> be greater than 0</li>
+ * <li>If {@code pipelineStageCreationFeedbackCount} is not 0, {@code pPipelineStageCreationFeedbacks} <b>must</b> be a valid pointer to an array of {@code pipelineStageCreationFeedbackCount} {@link VkPipelineCreationFeedback} structures</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -124,6 +114,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
     @NativeType("uint32_t")
     public int pipelineStageCreationFeedbackCount() { return npipelineStageCreationFeedbackCount(address()); }
     /** a pointer to an array of {@code pipelineStageCreationFeedbackCount} {@link VkPipelineCreationFeedback} structures. */
+    @Nullable
     @NativeType("VkPipelineCreationFeedback *")
     public VkPipelineCreationFeedback.Buffer pPipelineStageCreationFeedbacks() { return npPipelineStageCreationFeedbacks(address()); }
 
@@ -136,14 +127,14 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
     /** Sets the address of the specified {@link VkPipelineCreationFeedback} to the {@link #pPipelineCreationFeedback} field. */
     public VkPipelineCreationFeedbackCreateInfo pPipelineCreationFeedback(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback value) { npPipelineCreationFeedback(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineCreationFeedback.Buffer} to the {@link #pPipelineStageCreationFeedbacks} field. */
-    public VkPipelineCreationFeedbackCreateInfo pPipelineStageCreationFeedbacks(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.Buffer value) { npPipelineStageCreationFeedbacks(address(), value); return this; }
+    public VkPipelineCreationFeedbackCreateInfo pPipelineStageCreationFeedbacks(@Nullable @NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.Buffer value) { npPipelineStageCreationFeedbacks(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkPipelineCreationFeedbackCreateInfo set(
         int sType,
         long pNext,
         VkPipelineCreationFeedback pPipelineCreationFeedback,
-        VkPipelineCreationFeedback.Buffer pPipelineStageCreationFeedbacks
+        @Nullable VkPipelineCreationFeedback.Buffer pPipelineStageCreationFeedbacks
     ) {
         sType(sType);
         pNext(pNext);
@@ -287,7 +278,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
     /** Unsafe version of {@link #pipelineStageCreationFeedbackCount}. */
     public static int npipelineStageCreationFeedbackCount(long struct) { return UNSAFE.getInt(null, struct + VkPipelineCreationFeedbackCreateInfo.PIPELINESTAGECREATIONFEEDBACKCOUNT); }
     /** Unsafe version of {@link #pPipelineStageCreationFeedbacks}. */
-    public static VkPipelineCreationFeedback.Buffer npPipelineStageCreationFeedbacks(long struct) { return VkPipelineCreationFeedback.create(memGetAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINESTAGECREATIONFEEDBACKS), npipelineStageCreationFeedbackCount(struct)); }
+    @Nullable public static VkPipelineCreationFeedback.Buffer npPipelineStageCreationFeedbacks(long struct) { return VkPipelineCreationFeedback.createSafe(memGetAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINESTAGECREATIONFEEDBACKS), npipelineStageCreationFeedbackCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCreationFeedbackCreateInfo.STYPE, value); }
@@ -298,7 +289,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
     /** Sets the specified value to the {@code pipelineStageCreationFeedbackCount} field of the specified {@code struct}. */
     public static void npipelineStageCreationFeedbackCount(long struct, int value) { UNSAFE.putInt(null, struct + VkPipelineCreationFeedbackCreateInfo.PIPELINESTAGECREATIONFEEDBACKCOUNT, value); }
     /** Unsafe version of {@link #pPipelineStageCreationFeedbacks(VkPipelineCreationFeedback.Buffer) pPipelineStageCreationFeedbacks}. */
-    public static void npPipelineStageCreationFeedbacks(long struct, VkPipelineCreationFeedback.Buffer value) { memPutAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINESTAGECREATIONFEEDBACKS, value.address()); npipelineStageCreationFeedbackCount(struct, value.remaining()); }
+    public static void npPipelineStageCreationFeedbacks(long struct, @Nullable VkPipelineCreationFeedback.Buffer value) { memPutAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINESTAGECREATIONFEEDBACKS, memAddressSafe(value)); npipelineStageCreationFeedbackCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -307,7 +298,9 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINECREATIONFEEDBACK));
-        check(memGetAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINESTAGECREATIONFEEDBACKS));
+        if (npipelineStageCreationFeedbackCount(struct) != 0) {
+            check(memGetAddress(struct + VkPipelineCreationFeedbackCreateInfo.PPIPELINESTAGECREATIONFEEDBACKS));
+        }
     }
 
     // -----------------------------------
@@ -361,6 +354,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
         @NativeType("uint32_t")
         public int pipelineStageCreationFeedbackCount() { return VkPipelineCreationFeedbackCreateInfo.npipelineStageCreationFeedbackCount(address()); }
         /** @return a {@link VkPipelineCreationFeedback.Buffer} view of the struct array pointed to by the {@link VkPipelineCreationFeedbackCreateInfo#pPipelineStageCreationFeedbacks} field. */
+        @Nullable
         @NativeType("VkPipelineCreationFeedback *")
         public VkPipelineCreationFeedback.Buffer pPipelineStageCreationFeedbacks() { return VkPipelineCreationFeedbackCreateInfo.npPipelineStageCreationFeedbacks(address()); }
 
@@ -373,7 +367,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
         /** Sets the address of the specified {@link VkPipelineCreationFeedback} to the {@link VkPipelineCreationFeedbackCreateInfo#pPipelineCreationFeedback} field. */
         public VkPipelineCreationFeedbackCreateInfo.Buffer pPipelineCreationFeedback(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback value) { VkPipelineCreationFeedbackCreateInfo.npPipelineCreationFeedback(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineCreationFeedback.Buffer} to the {@link VkPipelineCreationFeedbackCreateInfo#pPipelineStageCreationFeedbacks} field. */
-        public VkPipelineCreationFeedbackCreateInfo.Buffer pPipelineStageCreationFeedbacks(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.Buffer value) { VkPipelineCreationFeedbackCreateInfo.npPipelineStageCreationFeedbacks(address(), value); return this; }
+        public VkPipelineCreationFeedbackCreateInfo.Buffer pPipelineStageCreationFeedbacks(@Nullable @NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.Buffer value) { VkPipelineCreationFeedbackCreateInfo.npPipelineStageCreationFeedbacks(address(), value); return this; }
 
     }
 

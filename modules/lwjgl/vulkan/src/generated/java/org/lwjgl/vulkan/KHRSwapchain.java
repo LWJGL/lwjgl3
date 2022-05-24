@@ -210,7 +210,40 @@ public class KHRSwapchain {
      * 
      * <h5>Description</h5>
      * 
-     * <p>If the {@code oldSwapchain} parameter of {@code pCreateInfo} is a valid swapchain, which has exclusive full-screen access, that access is released from {@code oldSwapchain}. If the command succeeds in this case, the newly created swapchain will automatically acquire exclusive full-screen access from {@code oldSwapchain}.</p>
+     * <p>As mentioned above, if {@code vkCreateSwapchainKHR} succeeds, it will return a handle to a swapchain containing an array of at least {@code pCreateInfo→minImageCount} presentable images.</p>
+     * 
+     * <p>While acquired by the application, presentable images <b>can</b> be used in any way that equivalent non-presentable images <b>can</b> be used. A presentable image is equivalent to a non-presentable image created with the following {@link VkImageCreateInfo} parameters:</p>
+     * 
+     * <table class="lwjgl">
+     * <thead><tr><th>{@link VkImageCreateInfo} Field</th><th>Value</th></tr></thead>
+     * <tbody>
+     * <tr><td>{@code flags}</td><td>{@link VK11#VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT} is set if {@link #VK_SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR} is set {@link VK11#VK_IMAGE_CREATE_PROTECTED_BIT IMAGE_CREATE_PROTECTED_BIT} is set if {@link #VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR SWAPCHAIN_CREATE_PROTECTED_BIT_KHR} is set {@link VK10#VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT IMAGE_CREATE_MUTABLE_FORMAT_BIT} and {@link KHRMaintenance2#VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR} are both set if {@link KHRSwapchainMutableFormat#VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR} is set all other bits are unset</td></tr>
+     * <tr><td>{@code imageType}</td><td>{@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</td></tr>
+     * <tr><td>{@code format}</td><td>{@code pCreateInfo→imageFormat}</td></tr>
+     * <tr><td>{@code extent}</td><td>{{@code pCreateInfo→imageExtent.width}, {@code pCreateInfo→imageExtent.height}, 1}</td></tr>
+     * <tr><td>{@code mipLevels}</td><td>1</td></tr>
+     * <tr><td>{@code arrayLayers}</td><td>{@code pCreateInfo→imageArrayLayers}</td></tr>
+     * <tr><td>{@code samples}</td><td>{@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}</td></tr>
+     * <tr><td>{@code tiling}</td><td>{@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}</td></tr>
+     * <tr><td>{@code usage}</td><td>{@code pCreateInfo→imageUsage}</td></tr>
+     * <tr><td>{@code sharingMode}</td><td>{@code pCreateInfo→imageSharingMode}</td></tr>
+     * <tr><td>{@code queueFamilyIndexCount}</td><td>{@code pCreateInfo→queueFamilyIndexCount}</td></tr>
+     * <tr><td>{@code pQueueFamilyIndices}</td><td>{@code pCreateInfo→pQueueFamilyIndices}</td></tr>
+     * <tr><td>{@code initialLayout}</td><td>{@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED}</td></tr>
+     * </tbody>
+     * </table>
+     * 
+     * <p>The {@code pCreateInfo→surface} <b>must</b> not be destroyed until after the swapchain is destroyed.</p>
+     * 
+     * <p>If {@code pCreateInfo→oldSwapchain} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, and the native window referred to by {@code pCreateInfo→surface} is already associated with a Vulkan swapchain, {@link KHRSurface#VK_ERROR_NATIVE_WINDOW_IN_USE_KHR ERROR_NATIVE_WINDOW_IN_USE_KHR} <b>must</b> be returned.</p>
+     * 
+     * <p>If the native window referred to by {@code pCreateInfo→surface} is already associated with a non-Vulkan graphics API surface, {@link KHRSurface#VK_ERROR_NATIVE_WINDOW_IN_USE_KHR ERROR_NATIVE_WINDOW_IN_USE_KHR} <b>must</b> be returned.</p>
+     * 
+     * <p>The native window referred to by {@code pCreateInfo→surface} <b>must</b> not become associated with a non-Vulkan graphics API surface before all associated Vulkan swapchains have been destroyed.</p>
+     * 
+     * <p>{@code vkCreateSwapchainKHR} will return {@link VK10#VK_ERROR_DEVICE_LOST ERROR_DEVICE_LOST} if the logical device was lost. The {@code VkSwapchainKHR} is a child of the {@code device}, and <b>must</b> be destroyed before the {@code device}. However, {@code VkSurfaceKHR} is not a child of any {@code VkDevice} and is not affected by the lost device. After successfully recreating a {@code VkDevice}, the same {@code VkSurfaceKHR} <b>can</b> be used to create a new {@code VkSwapchainKHR}, provided the previous one was destroyed.</p>
+     * 
+     * <p>If the {@code oldSwapchain} parameter of {@code pCreateInfo} is a valid swapchain, which has exclusive full-screen access, that access is released from {@code pCreateInfo→oldSwapchain}. If the command succeeds in this case, the newly created swapchain will automatically acquire exclusive full-screen access from {@code pCreateInfo→oldSwapchain}.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
@@ -257,6 +290,7 @@ public class KHRSwapchain {
      * <li>{@link KHRSurface#VK_ERROR_SURFACE_LOST_KHR ERROR_SURFACE_LOST_KHR}</li>
      * <li>{@link KHRSurface#VK_ERROR_NATIVE_WINDOW_IN_USE_KHR ERROR_NATIVE_WINDOW_IN_USE_KHR}</li>
      * <li>{@link VK10#VK_ERROR_INITIALIZATION_FAILED ERROR_INITIALIZATION_FAILED}</li>
+     * <li>{@link EXTImageCompressionControl#VK_ERROR_COMPRESSION_EXHAUSTED_EXT ERROR_COMPRESSION_EXHAUSTED_EXT}</li>
      * </ul></dd>
      * </dl>
      * 

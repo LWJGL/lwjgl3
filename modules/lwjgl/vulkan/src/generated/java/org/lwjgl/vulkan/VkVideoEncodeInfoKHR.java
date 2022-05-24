@@ -21,6 +21,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
+ * <p>The coded size of the encode operation is specified in {@code codedExtent} of {@code srcPictureResource}.</p>
+ * 
  * <p>Multiple {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} commands <b>may</b> be recorded within a Vulkan Video Encode Context. The execution of each {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} command will result in generating codec-specific bitstream units. These bitstream units are generated consecutively into the bitstream buffer specified in {@code dstBitstreamBuffer} of a {@link VkVideoEncodeInfoKHR} structure within the {@link KHRVideoQueue#vkCmdBeginVideoCodingKHR CmdBeginVideoCodingKHR} command. The produced bitstream is the sum of all these bitstream units, including any padding between the bitstream units. Any bitstream padding <b>must</b> be filled with data compliant to the codec standard so as not to cause any syntax errors during decoding of the bitstream units with the padding included. The range of the bitstream buffer written <b>can</b> be queried via <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#queries-video-encode-bitstream-buffer-range">video encode bitstream buffer range queries</a>.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -38,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkExtent2D}, {@link VkVideoPictureResourceKHR}, {@link VkVideoReferenceSlotKHR}, {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR}</p>
+ * <p>{@link VkVideoPictureResourceKHR}, {@link VkVideoReferenceSlotKHR}, {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -48,7 +50,6 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * {@link #pNext};
  *     VkVideoEncodeFlagsKHR {@link #flags};
  *     uint32_t {@link #qualityLevel};
- *     {@link VkExtent2D VkExtent2D} {@link #codedExtent};
  *     VkBuffer {@link #dstBitstreamBuffer};
  *     VkDeviceSize {@link #dstBitstreamBufferOffset};
  *     VkDeviceSize {@link #dstBitstreamBufferMaxRange};
@@ -73,7 +74,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         PNEXT,
         FLAGS,
         QUALITYLEVEL,
-        CODEDEXTENT,
         DSTBITSTREAMBUFFER,
         DSTBITSTREAMBUFFEROFFSET,
         DSTBITSTREAMBUFFERMAXRANGE,
@@ -89,7 +89,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
             __member(POINTER_SIZE),
             __member(4),
             __member(4),
-            __member(VkExtent2D.SIZEOF, VkExtent2D.ALIGNOF),
             __member(8),
             __member(8),
             __member(8),
@@ -107,15 +106,14 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         PNEXT = layout.offsetof(1);
         FLAGS = layout.offsetof(2);
         QUALITYLEVEL = layout.offsetof(3);
-        CODEDEXTENT = layout.offsetof(4);
-        DSTBITSTREAMBUFFER = layout.offsetof(5);
-        DSTBITSTREAMBUFFEROFFSET = layout.offsetof(6);
-        DSTBITSTREAMBUFFERMAXRANGE = layout.offsetof(7);
-        SRCPICTURERESOURCE = layout.offsetof(8);
-        PSETUPREFERENCESLOT = layout.offsetof(9);
-        REFERENCESLOTCOUNT = layout.offsetof(10);
-        PREFERENCESLOTS = layout.offsetof(11);
-        PRECEDINGEXTERNALLYENCODEDBYTES = layout.offsetof(12);
+        DSTBITSTREAMBUFFER = layout.offsetof(4);
+        DSTBITSTREAMBUFFEROFFSET = layout.offsetof(5);
+        DSTBITSTREAMBUFFERMAXRANGE = layout.offsetof(6);
+        SRCPICTURERESOURCE = layout.offsetof(7);
+        PSETUPREFERENCESLOT = layout.offsetof(8);
+        REFERENCESLOTCOUNT = layout.offsetof(9);
+        PREFERENCESLOTS = layout.offsetof(10);
+        PRECEDINGEXTERNALLYENCODEDBYTES = layout.offsetof(11);
     }
 
     /**
@@ -143,8 +141,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     /** the coding quality level of the encoding. It is defined by the codec-specific extensions. */
     @NativeType("uint32_t")
     public int qualityLevel() { return nqualityLevel(address()); }
-    /** the coded size of the encode operations. */
-    public VkExtent2D codedExtent() { return ncodedExtent(address()); }
     /** the buffer where the encoded bitstream output will be produced. */
     @NativeType("VkBuffer")
     public long dstBitstreamBuffer() { return ndstBitstreamBuffer(address()); }
@@ -188,10 +184,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     public VkVideoEncodeInfoKHR flags(@NativeType("VkVideoEncodeFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #qualityLevel} field. */
     public VkVideoEncodeInfoKHR qualityLevel(@NativeType("uint32_t") int value) { nqualityLevel(address(), value); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@link #codedExtent} field. */
-    public VkVideoEncodeInfoKHR codedExtent(VkExtent2D value) { ncodedExtent(address(), value); return this; }
-    /** Passes the {@link #codedExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkVideoEncodeInfoKHR codedExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(codedExtent()); return this; }
     /** Sets the specified value to the {@link #dstBitstreamBuffer} field. */
     public VkVideoEncodeInfoKHR dstBitstreamBuffer(@NativeType("VkBuffer") long value) { ndstBitstreamBuffer(address(), value); return this; }
     /** Sets the specified value to the {@link #dstBitstreamBufferOffset} field. */
@@ -215,7 +207,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         long pNext,
         int flags,
         int qualityLevel,
-        VkExtent2D codedExtent,
         long dstBitstreamBuffer,
         long dstBitstreamBufferOffset,
         long dstBitstreamBufferMaxRange,
@@ -228,7 +219,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         pNext(pNext);
         flags(flags);
         qualityLevel(qualityLevel);
-        codedExtent(codedExtent);
         dstBitstreamBuffer(dstBitstreamBuffer);
         dstBitstreamBufferOffset(dstBitstreamBufferOffset);
         dstBitstreamBufferMaxRange(dstBitstreamBufferMaxRange);
@@ -373,8 +363,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeInfoKHR.FLAGS); }
     /** Unsafe version of {@link #qualityLevel}. */
     public static int nqualityLevel(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeInfoKHR.QUALITYLEVEL); }
-    /** Unsafe version of {@link #codedExtent}. */
-    public static VkExtent2D ncodedExtent(long struct) { return VkExtent2D.create(struct + VkVideoEncodeInfoKHR.CODEDEXTENT); }
     /** Unsafe version of {@link #dstBitstreamBuffer}. */
     public static long ndstBitstreamBuffer(long struct) { return UNSAFE.getLong(null, struct + VkVideoEncodeInfoKHR.DSTBITSTREAMBUFFER); }
     /** Unsafe version of {@link #dstBitstreamBufferOffset}. */
@@ -400,8 +388,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #qualityLevel(int) qualityLevel}. */
     public static void nqualityLevel(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeInfoKHR.QUALITYLEVEL, value); }
-    /** Unsafe version of {@link #codedExtent(VkExtent2D) codedExtent}. */
-    public static void ncodedExtent(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkVideoEncodeInfoKHR.CODEDEXTENT, VkExtent2D.SIZEOF); }
     /** Unsafe version of {@link #dstBitstreamBuffer(long) dstBitstreamBuffer}. */
     public static void ndstBitstreamBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkVideoEncodeInfoKHR.DSTBITSTREAMBUFFER, value); }
     /** Unsafe version of {@link #dstBitstreamBufferOffset(long) dstBitstreamBufferOffset}. */
@@ -486,8 +472,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         /** @return the value of the {@link VkVideoEncodeInfoKHR#qualityLevel} field. */
         @NativeType("uint32_t")
         public int qualityLevel() { return VkVideoEncodeInfoKHR.nqualityLevel(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoEncodeInfoKHR#codedExtent} field. */
-        public VkExtent2D codedExtent() { return VkVideoEncodeInfoKHR.ncodedExtent(address()); }
         /** @return the value of the {@link VkVideoEncodeInfoKHR#dstBitstreamBuffer} field. */
         @NativeType("VkBuffer")
         public long dstBitstreamBuffer() { return VkVideoEncodeInfoKHR.ndstBitstreamBuffer(address()); }
@@ -531,10 +515,6 @@ public class VkVideoEncodeInfoKHR extends Struct implements NativeResource {
         public VkVideoEncodeInfoKHR.Buffer flags(@NativeType("VkVideoEncodeFlagsKHR") int value) { VkVideoEncodeInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#qualityLevel} field. */
         public VkVideoEncodeInfoKHR.Buffer qualityLevel(@NativeType("uint32_t") int value) { VkVideoEncodeInfoKHR.nqualityLevel(address(), value); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@link VkVideoEncodeInfoKHR#codedExtent} field. */
-        public VkVideoEncodeInfoKHR.Buffer codedExtent(VkExtent2D value) { VkVideoEncodeInfoKHR.ncodedExtent(address(), value); return this; }
-        /** Passes the {@link VkVideoEncodeInfoKHR#codedExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkVideoEncodeInfoKHR.Buffer codedExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(codedExtent()); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#dstBitstreamBuffer} field. */
         public VkVideoEncodeInfoKHR.Buffer dstBitstreamBuffer(@NativeType("VkBuffer") long value) { VkVideoEncodeInfoKHR.ndstBitstreamBuffer(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeInfoKHR#dstBitstreamBufferOffset} field. */

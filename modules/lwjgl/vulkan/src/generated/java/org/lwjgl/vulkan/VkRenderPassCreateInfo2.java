@@ -61,7 +61,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2 STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkRenderPassFragmentDensityMapCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkRenderPassCreationControlEXT}, {@link VkRenderPassCreationFeedbackInfoEXT}, or {@link VkRenderPassFragmentDensityMapCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkRenderPassCreateFlagBits} values</li>
  * <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid {@link VkAttachmentDescription2} structures</li>
@@ -201,6 +201,10 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
     public VkRenderPassCreateInfo2 sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkRenderPassCreateInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkRenderPassCreationControlEXT} value to the {@code pNext} chain. */
+    public VkRenderPassCreateInfo2 pNext(VkRenderPassCreationControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassCreationFeedbackInfoEXT} value to the {@code pNext} chain. */
+    public VkRenderPassCreateInfo2 pNext(VkRenderPassCreationFeedbackInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderPassFragmentDensityMapCreateInfoEXT} value to the {@code pNext} chain. */
     public VkRenderPassCreateInfo2 pNext(VkRenderPassFragmentDensityMapCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
@@ -508,6 +512,10 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
         public VkRenderPassCreateInfo2.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2); }
         /** Sets the specified value to the {@link VkRenderPassCreateInfo2#pNext} field. */
         public VkRenderPassCreateInfo2.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassCreateInfo2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkRenderPassCreationControlEXT} value to the {@code pNext} chain. */
+        public VkRenderPassCreateInfo2.Buffer pNext(VkRenderPassCreationControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassCreationFeedbackInfoEXT} value to the {@code pNext} chain. */
+        public VkRenderPassCreateInfo2.Buffer pNext(VkRenderPassCreationFeedbackInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderPassFragmentDensityMapCreateInfoEXT} value to the {@code pNext} chain. */
         public VkRenderPassCreateInfo2.Buffer pNext(VkRenderPassFragmentDensityMapCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkRenderPassCreateInfo2#flags} field. */

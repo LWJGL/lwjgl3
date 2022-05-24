@@ -7,7 +7,7 @@ package org.lwjgl.vulkan;
 
 /**
  * <ul>
- * <li>Extending {@link VkVideoCapabilitiesKHR}:
+ * <li>Extending {@link VkVideoDecodeCapabilitiesKHR}:
  * 
  * <ul>
  * <li>{@link VkVideoDecodeH265CapabilitiesEXT}</li>
@@ -29,12 +29,6 @@ package org.lwjgl.vulkan;
  * 
  * <ul>
  * <li>{@link VkVideoDecodeH265DpbSlotInfoEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoSessionCreateInfoKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoDecodeH265SessionCreateInfoEXT}</li>
  * </ul>
  * </li>
  * <li>Extending {@link VkVideoSessionParametersCreateInfoKHR}:
@@ -61,7 +55,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>188</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>3</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -78,11 +72,12 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2021-03-29</dd>
+ * <dd>2022-03-31</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
+ * <li>Ahmed Abdelkhalek, AMD</li>
  * <li>HoHin Lau, AMD</li>
  * <li>Jake Beju, AMD</li>
  * <li>Peter Fang, AMD</li>
@@ -95,7 +90,7 @@ package org.lwjgl.vulkan;
 public final class EXTVideoDecodeH265 {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VIDEO_DECODE_H265_SPEC_VERSION = 1;
+    public static final int VK_EXT_VIDEO_DECODE_H265_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String VK_EXT_VIDEO_DECODE_H265_EXTENSION_NAME = "VK_EXT_video_decode_h265";
@@ -107,7 +102,6 @@ public final class EXTVideoDecodeH265 {
      * 
      * <ul>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT}</li>
@@ -117,12 +111,11 @@ public final class EXTVideoDecodeH265 {
      */
     public static final int
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT                   = 1000187000,
-        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT            = 1000187001,
-        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT = 1000187002,
-        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT    = 1000187003,
-        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT                        = 1000187004,
-        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT                   = 1000187005,
-        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_DPB_SLOT_INFO_EXT                  = 1000187006;
+        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT = 1000187001,
+        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT    = 1000187002,
+        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT                        = 1000187003,
+        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT                   = 1000187004,
+        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_DPB_SLOT_INFO_EXT                  = 1000187005;
 
     /** Extends {@code VkVideoCodecOperationFlagBitsKHR}. */
     public static final int VK_VIDEO_CODEC_OPERATION_DECODE_H265_BIT_EXT = 0x2;

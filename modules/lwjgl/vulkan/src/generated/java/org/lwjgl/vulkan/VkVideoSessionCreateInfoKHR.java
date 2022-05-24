@@ -38,17 +38,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionCreateInfoEXT}, {@link VkVideoDecodeH265SessionCreateInfoEXT}, {@link VkVideoEncodeH264SessionCreateInfoEXT}, or {@link VkVideoEncodeH265SessionCreateInfoEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoSessionCreateFlagBitsKHR} values</li>
  * <li>{@code pVideoProfile} <b>must</b> be a valid pointer to a valid {@link VkVideoProfileKHR} structure</li>
  * <li>{@code pictureFormat} <b>must</b> be a valid {@code VkFormat} value</li>
  * <li>{@code referencePicturesFormat} <b>must</b> be a valid {@code VkFormat} value</li>
+ * <li>{@code pStdHeaderVersion} <b>must</b> be a valid pointer to a valid {@link VkExtensionProperties} structure</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkExtent2D}, {@link VkVideoProfileKHR}, {@link KHRVideoQueue#vkCreateVideoSessionKHR CreateVideoSessionKHR}</p>
+ * <p>{@link VkExtensionProperties}, {@link VkExtent2D}, {@link VkVideoProfileKHR}, {@link KHRVideoQueue#vkCreateVideoSessionKHR CreateVideoSessionKHR}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -64,6 +64,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkFormat {@link #referencePicturesFormat};
  *     uint32_t {@link #maxReferencePicturesSlotsCount};
  *     uint32_t {@link #maxReferencePicturesActiveCount};
+ *     {@link VkExtensionProperties VkExtensionProperties} const * {@link #pStdHeaderVersion};
  * }</code></pre>
  */
 public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResource {
@@ -85,7 +86,8 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         MAXCODEDEXTENT,
         REFERENCEPICTURESFORMAT,
         MAXREFERENCEPICTURESSLOTSCOUNT,
-        MAXREFERENCEPICTURESACTIVECOUNT;
+        MAXREFERENCEPICTURESACTIVECOUNT,
+        PSTDHEADERVERSION;
 
     static {
         Layout layout = __struct(
@@ -98,7 +100,8 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
             __member(VkExtent2D.SIZEOF, VkExtent2D.ALIGNOF),
             __member(4),
             __member(4),
-            __member(4)
+            __member(4),
+            __member(POINTER_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -114,6 +117,7 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         REFERENCEPICTURESFORMAT = layout.offsetof(7);
         MAXREFERENCEPICTURESSLOTSCOUNT = layout.offsetof(8);
         MAXREFERENCEPICTURESACTIVECOUNT = layout.offsetof(9);
+        PSTDHEADERVERSION = layout.offsetof(10);
     }
 
     /**
@@ -158,6 +162,9 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     /** the maximum number of active <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB Slots</a> that can be used as Dpb or Reconstructed <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> within a single decode or encode operation for the created video session. */
     @NativeType("uint32_t")
     public int maxReferencePicturesActiveCount() { return nmaxReferencePicturesActiveCount(address()); }
+    /** a pointer to a {@link VkExtensionProperties} structure requesting the Video Std header version to use for {@code codecOperation} in {@code pVideoProfile}. */
+    @NativeType("VkExtensionProperties const *")
+    public VkExtensionProperties pStdHeaderVersion() { return npStdHeaderVersion(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoSessionCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -165,14 +172,6 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public VkVideoSessionCreateInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoSessionCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkVideoDecodeH264SessionCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoSessionCreateInfoKHR pNext(VkVideoDecodeH264SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoDecodeH265SessionCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoSessionCreateInfoKHR pNext(VkVideoDecodeH265SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH264SessionCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH264SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH265SessionCreateInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoSessionCreateInfoKHR pNext(VkVideoEncodeH265SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #queueFamilyIndex} field. */
     public VkVideoSessionCreateInfoKHR queueFamilyIndex(@NativeType("uint32_t") int value) { nqueueFamilyIndex(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
@@ -191,6 +190,8 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public VkVideoSessionCreateInfoKHR maxReferencePicturesSlotsCount(@NativeType("uint32_t") int value) { nmaxReferencePicturesSlotsCount(address(), value); return this; }
     /** Sets the specified value to the {@link #maxReferencePicturesActiveCount} field. */
     public VkVideoSessionCreateInfoKHR maxReferencePicturesActiveCount(@NativeType("uint32_t") int value) { nmaxReferencePicturesActiveCount(address(), value); return this; }
+    /** Sets the address of the specified {@link VkExtensionProperties} to the {@link #pStdHeaderVersion} field. */
+    public VkVideoSessionCreateInfoKHR pStdHeaderVersion(@NativeType("VkExtensionProperties const *") VkExtensionProperties value) { npStdHeaderVersion(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoSessionCreateInfoKHR set(
@@ -203,7 +204,8 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         VkExtent2D maxCodedExtent,
         int referencePicturesFormat,
         int maxReferencePicturesSlotsCount,
-        int maxReferencePicturesActiveCount
+        int maxReferencePicturesActiveCount,
+        VkExtensionProperties pStdHeaderVersion
     ) {
         sType(sType);
         pNext(pNext);
@@ -215,6 +217,7 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         referencePicturesFormat(referencePicturesFormat);
         maxReferencePicturesSlotsCount(maxReferencePicturesSlotsCount);
         maxReferencePicturesActiveCount(maxReferencePicturesActiveCount);
+        pStdHeaderVersion(pStdHeaderVersion);
 
         return this;
     }
@@ -364,6 +367,8 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public static int nmaxReferencePicturesSlotsCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.MAXREFERENCEPICTURESSLOTSCOUNT); }
     /** Unsafe version of {@link #maxReferencePicturesActiveCount}. */
     public static int nmaxReferencePicturesActiveCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.MAXREFERENCEPICTURESACTIVECOUNT); }
+    /** Unsafe version of {@link #pStdHeaderVersion}. */
+    public static VkExtensionProperties npStdHeaderVersion(long struct) { return VkExtensionProperties.create(memGetAddress(struct + VkVideoSessionCreateInfoKHR.PSTDHEADERVERSION)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.STYPE, value); }
@@ -385,6 +390,8 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public static void nmaxReferencePicturesSlotsCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.MAXREFERENCEPICTURESSLOTSCOUNT, value); }
     /** Unsafe version of {@link #maxReferencePicturesActiveCount(int) maxReferencePicturesActiveCount}. */
     public static void nmaxReferencePicturesActiveCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.MAXREFERENCEPICTURESACTIVECOUNT, value); }
+    /** Unsafe version of {@link #pStdHeaderVersion(VkExtensionProperties) pStdHeaderVersion}. */
+    public static void npStdHeaderVersion(long struct, VkExtensionProperties value) { memPutAddress(struct + VkVideoSessionCreateInfoKHR.PSTDHEADERVERSION, value.address()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -393,6 +400,7 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + VkVideoSessionCreateInfoKHR.PVIDEOPROFILE));
+        check(memGetAddress(struct + VkVideoSessionCreateInfoKHR.PSTDHEADERVERSION));
     }
 
     // -----------------------------------
@@ -462,6 +470,9 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         /** @return the value of the {@link VkVideoSessionCreateInfoKHR#maxReferencePicturesActiveCount} field. */
         @NativeType("uint32_t")
         public int maxReferencePicturesActiveCount() { return VkVideoSessionCreateInfoKHR.nmaxReferencePicturesActiveCount(address()); }
+        /** @return a {@link VkExtensionProperties} view of the struct pointed to by the {@link VkVideoSessionCreateInfoKHR#pStdHeaderVersion} field. */
+        @NativeType("VkExtensionProperties const *")
+        public VkExtensionProperties pStdHeaderVersion() { return VkVideoSessionCreateInfoKHR.npStdHeaderVersion(address()); }
 
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#sType} field. */
         public VkVideoSessionCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoSessionCreateInfoKHR.nsType(address(), value); return this; }
@@ -469,14 +480,6 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         public VkVideoSessionCreateInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#pNext} field. */
         public VkVideoSessionCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoSessionCreateInfoKHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkVideoDecodeH264SessionCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoDecodeH264SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoDecodeH265SessionCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoDecodeH265SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH264SessionCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH265SessionCreateInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoSessionCreateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#queueFamilyIndex} field. */
         public VkVideoSessionCreateInfoKHR.Buffer queueFamilyIndex(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nqueueFamilyIndex(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#flags} field. */
@@ -495,6 +498,8 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         public VkVideoSessionCreateInfoKHR.Buffer maxReferencePicturesSlotsCount(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nmaxReferencePicturesSlotsCount(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#maxReferencePicturesActiveCount} field. */
         public VkVideoSessionCreateInfoKHR.Buffer maxReferencePicturesActiveCount(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nmaxReferencePicturesActiveCount(address(), value); return this; }
+        /** Sets the address of the specified {@link VkExtensionProperties} to the {@link VkVideoSessionCreateInfoKHR#pStdHeaderVersion} field. */
+        public VkVideoSessionCreateInfoKHR.Buffer pStdHeaderVersion(@NativeType("VkExtensionProperties const *") VkExtensionProperties value) { VkVideoSessionCreateInfoKHR.npStdHeaderVersion(address(), value); return this; }
 
     }
 

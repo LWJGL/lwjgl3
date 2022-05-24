@@ -56,7 +56,7 @@ public class VkPipelineCreationFeedbackCreateInfoEXT extends VkPipelineCreationF
     public VkPipelineCreationFeedbackCreateInfoEXT pPipelineCreationFeedback(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback value) { npPipelineCreationFeedback(address(), value); return this; }
     /** Sets the address of the specified {@link VkPipelineCreationFeedback.Buffer} to the {@code pPipelineStageCreationFeedbacks} field. */
     @Override
-    public VkPipelineCreationFeedbackCreateInfoEXT pPipelineStageCreationFeedbacks(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.Buffer value) { npPipelineStageCreationFeedbacks(address(), value); return this; }
+    public VkPipelineCreationFeedbackCreateInfoEXT pPipelineStageCreationFeedbacks(@Nullable @NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.Buffer value) { npPipelineStageCreationFeedbacks(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
@@ -64,7 +64,7 @@ public class VkPipelineCreationFeedbackCreateInfoEXT extends VkPipelineCreationF
         int sType,
         long pNext,
         VkPipelineCreationFeedback pPipelineCreationFeedback,
-        VkPipelineCreationFeedback.Buffer pPipelineStageCreationFeedbacks
+        @Nullable VkPipelineCreationFeedback.Buffer pPipelineStageCreationFeedbacks
     ) {
         sType(sType);
         pNext(pNext);
@@ -268,7 +268,7 @@ public class VkPipelineCreationFeedbackCreateInfoEXT extends VkPipelineCreationF
         public VkPipelineCreationFeedbackCreateInfoEXT.Buffer pPipelineCreationFeedback(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback value) { VkPipelineCreationFeedbackCreateInfoEXT.npPipelineCreationFeedback(address(), value); return this; }
         /** Sets the address of the specified {@link VkPipelineCreationFeedback.Buffer} to the {@code pPipelineStageCreationFeedbacks} field. */
         @Override
-        public VkPipelineCreationFeedbackCreateInfoEXT.Buffer pPipelineStageCreationFeedbacks(@NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.Buffer value) { VkPipelineCreationFeedbackCreateInfoEXT.npPipelineStageCreationFeedbacks(address(), value); return this; }
+        public VkPipelineCreationFeedbackCreateInfoEXT.Buffer pPipelineStageCreationFeedbacks(@Nullable @NativeType("VkPipelineCreationFeedback *") VkPipelineCreationFeedback.Buffer value) { VkPipelineCreationFeedbackCreateInfoEXT.npPipelineStageCreationFeedbacks(address(), value); return this; }
 
     }
 

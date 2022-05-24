@@ -43,6 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t high_precision_offsets_enabled_flag : 1;
  *     uint32_t persistent_rice_adaptation_enabled_flag : 1;
  *     uint32_t cabac_bypass_alignment_enabled_flag : 1;
+ *     uint32_t sps_scc_extension_flag : 1;
  *     uint32_t {@link #sps_curr_pic_ref_enabled_flag} : 1;
  *     uint32_t palette_mode_enabled_flag : 1;
  *     uint32_t sps_palette_predictor_initializer_present_flag : 1;
@@ -154,6 +155,9 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
     /** @return the value of the {@code cabac_bypass_alignment_enabled_flag} field. */
     @NativeType("uint32_t")
     public boolean cabac_bypass_alignment_enabled_flag() { return ncabac_bypass_alignment_enabled_flag(address()) != 0; }
+    /** @return the value of the {@code sps_scc_extension_flag} field. */
+    @NativeType("uint32_t")
+    public boolean sps_scc_extension_flag() { return nsps_scc_extension_flag(address()) != 0; }
     /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS} is set */
     @NativeType("uint32_t")
     public boolean sps_curr_pic_ref_enabled_flag() { return nsps_curr_pic_ref_enabled_flag(address()) != 0; }
@@ -213,6 +217,8 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
     public StdVideoH265SpsFlags persistent_rice_adaptation_enabled_flag(@NativeType("uint32_t") boolean value) { npersistent_rice_adaptation_enabled_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code cabac_bypass_alignment_enabled_flag} field. */
     public StdVideoH265SpsFlags cabac_bypass_alignment_enabled_flag(@NativeType("uint32_t") boolean value) { ncabac_bypass_alignment_enabled_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code sps_scc_extension_flag} field. */
+    public StdVideoH265SpsFlags sps_scc_extension_flag(@NativeType("uint32_t") boolean value) { nsps_scc_extension_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@link #sps_curr_pic_ref_enabled_flag} field. */
     public StdVideoH265SpsFlags sps_curr_pic_ref_enabled_flag(@NativeType("uint32_t") boolean value) { nsps_curr_pic_ref_enabled_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code palette_mode_enabled_flag} field. */
@@ -247,6 +253,7 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         boolean high_precision_offsets_enabled_flag,
         boolean persistent_rice_adaptation_enabled_flag,
         boolean cabac_bypass_alignment_enabled_flag,
+        boolean sps_scc_extension_flag,
         boolean sps_curr_pic_ref_enabled_flag,
         boolean palette_mode_enabled_flag,
         boolean sps_palette_predictor_initializer_present_flag,
@@ -275,6 +282,7 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         high_precision_offsets_enabled_flag(high_precision_offsets_enabled_flag);
         persistent_rice_adaptation_enabled_flag(persistent_rice_adaptation_enabled_flag);
         cabac_bypass_alignment_enabled_flag(cabac_bypass_alignment_enabled_flag);
+        sps_scc_extension_flag(sps_scc_extension_flag);
         sps_curr_pic_ref_enabled_flag(sps_curr_pic_ref_enabled_flag);
         palette_mode_enabled_flag(palette_mode_enabled_flag);
         sps_palette_predictor_initializer_present_flag(sps_palette_predictor_initializer_present_flag);
@@ -455,14 +463,16 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
     public static int npersistent_rice_adaptation_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_20_00_00) >>> 21; }
     /** Unsafe version of {@link #cabac_bypass_alignment_enabled_flag}. */
     public static int ncabac_bypass_alignment_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_40_00_00) >>> 22; }
+    /** Unsafe version of {@link #sps_scc_extension_flag}. */
+    public static int nsps_scc_extension_flag(long struct) { return (nbitfield0(struct) & 0x00_80_00_00) >>> 23; }
     /** Unsafe version of {@link #sps_curr_pic_ref_enabled_flag}. */
-    public static int nsps_curr_pic_ref_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_80_00_00) >>> 23; }
+    public static int nsps_curr_pic_ref_enabled_flag(long struct) { return (nbitfield0(struct) & 0x01_00_00_00) >>> 24; }
     /** Unsafe version of {@link #palette_mode_enabled_flag}. */
-    public static int npalette_mode_enabled_flag(long struct) { return (nbitfield0(struct) & 0x01_00_00_00) >>> 24; }
+    public static int npalette_mode_enabled_flag(long struct) { return (nbitfield0(struct) & 0x02_00_00_00) >>> 25; }
     /** Unsafe version of {@link #sps_palette_predictor_initializer_present_flag}. */
-    public static int nsps_palette_predictor_initializer_present_flag(long struct) { return (nbitfield0(struct) & 0x02_00_00_00) >>> 25; }
+    public static int nsps_palette_predictor_initializer_present_flag(long struct) { return (nbitfield0(struct) & 0x04_00_00_00) >>> 26; }
     /** Unsafe version of {@link #intra_boundary_filtering_disabled_flag}. */
-    public static int nintra_boundary_filtering_disabled_flag(long struct) { return (nbitfield0(struct) & 0x04_00_00_00) >>> 26; }
+    public static int nintra_boundary_filtering_disabled_flag(long struct) { return (nbitfield0(struct) & 0x08_00_00_00) >>> 27; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265SpsFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #sps_temporal_id_nesting_flag(boolean) sps_temporal_id_nesting_flag}. */
@@ -511,14 +521,16 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
     public static void npersistent_rice_adaptation_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 21) & 0x00_20_00_00) | (nbitfield0(struct) & 0xFF_DF_FF_FF)); }
     /** Unsafe version of {@link #cabac_bypass_alignment_enabled_flag(boolean) cabac_bypass_alignment_enabled_flag}. */
     public static void ncabac_bypass_alignment_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 22) & 0x00_40_00_00) | (nbitfield0(struct) & 0xFF_BF_FF_FF)); }
+    /** Unsafe version of {@link #sps_scc_extension_flag(boolean) sps_scc_extension_flag}. */
+    public static void nsps_scc_extension_flag(long struct, int value) { nbitfield0(struct, ((value << 23) & 0x00_80_00_00) | (nbitfield0(struct) & 0xFF_7F_FF_FF)); }
     /** Unsafe version of {@link #sps_curr_pic_ref_enabled_flag(boolean) sps_curr_pic_ref_enabled_flag}. */
-    public static void nsps_curr_pic_ref_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 23) & 0x00_80_00_00) | (nbitfield0(struct) & 0xFF_7F_FF_FF)); }
+    public static void nsps_curr_pic_ref_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 24) & 0x01_00_00_00) | (nbitfield0(struct) & 0xFE_FF_FF_FF)); }
     /** Unsafe version of {@link #palette_mode_enabled_flag(boolean) palette_mode_enabled_flag}. */
-    public static void npalette_mode_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 24) & 0x01_00_00_00) | (nbitfield0(struct) & 0xFE_FF_FF_FF)); }
+    public static void npalette_mode_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 25) & 0x02_00_00_00) | (nbitfield0(struct) & 0xFD_FF_FF_FF)); }
     /** Unsafe version of {@link #sps_palette_predictor_initializer_present_flag(boolean) sps_palette_predictor_initializer_present_flag}. */
-    public static void nsps_palette_predictor_initializer_present_flag(long struct, int value) { nbitfield0(struct, ((value << 25) & 0x02_00_00_00) | (nbitfield0(struct) & 0xFD_FF_FF_FF)); }
+    public static void nsps_palette_predictor_initializer_present_flag(long struct, int value) { nbitfield0(struct, ((value << 26) & 0x04_00_00_00) | (nbitfield0(struct) & 0xFB_FF_FF_FF)); }
     /** Unsafe version of {@link #intra_boundary_filtering_disabled_flag(boolean) intra_boundary_filtering_disabled_flag}. */
-    public static void nintra_boundary_filtering_disabled_flag(long struct, int value) { nbitfield0(struct, ((value << 26) & 0x04_00_00_00) | (nbitfield0(struct) & 0xFB_FF_FF_FF)); }
+    public static void nintra_boundary_filtering_disabled_flag(long struct, int value) { nbitfield0(struct, ((value << 27) & 0x08_00_00_00) | (nbitfield0(struct) & 0xF7_FF_FF_FF)); }
 
     // -----------------------------------
 
@@ -627,6 +639,9 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         /** @return the value of the {@code cabac_bypass_alignment_enabled_flag} field. */
         @NativeType("uint32_t")
         public boolean cabac_bypass_alignment_enabled_flag() { return StdVideoH265SpsFlags.ncabac_bypass_alignment_enabled_flag(address()) != 0; }
+        /** @return the value of the {@code sps_scc_extension_flag} field. */
+        @NativeType("uint32_t")
+        public boolean sps_scc_extension_flag() { return StdVideoH265SpsFlags.nsps_scc_extension_flag(address()) != 0; }
         /** @return the value of the {@link StdVideoH265SpsFlags#sps_curr_pic_ref_enabled_flag} field. */
         @NativeType("uint32_t")
         public boolean sps_curr_pic_ref_enabled_flag() { return StdVideoH265SpsFlags.nsps_curr_pic_ref_enabled_flag(address()) != 0; }
@@ -686,6 +701,8 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         public StdVideoH265SpsFlags.Buffer persistent_rice_adaptation_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.npersistent_rice_adaptation_enabled_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code cabac_bypass_alignment_enabled_flag} field. */
         public StdVideoH265SpsFlags.Buffer cabac_bypass_alignment_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.ncabac_bypass_alignment_enabled_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code sps_scc_extension_flag} field. */
+        public StdVideoH265SpsFlags.Buffer sps_scc_extension_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_scc_extension_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@link StdVideoH265SpsFlags#sps_curr_pic_ref_enabled_flag} field. */
         public StdVideoH265SpsFlags.Buffer sps_curr_pic_ref_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_curr_pic_ref_enabled_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code palette_mode_enabled_flag} field. */

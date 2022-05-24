@@ -25,7 +25,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
             <dd>39</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>5</dd>
+            <dd>7</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -43,7 +43,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-02-10</dd>
+            <dd>2022-04-06</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -66,7 +66,7 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VIDEO_ENCODE_H264_SPEC_VERSION".."5"
+        "EXT_VIDEO_ENCODE_H264_SPEC_VERSION".."7"
     )
 
     StringConstant(
@@ -79,17 +79,16 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         "Extends {@code VkStructureType}.",
 
         "STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT".."1000038000",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT".."1000038001",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT".."1000038002",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT".."1000038003",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT".."1000038004",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT".."1000038005",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT".."1000038006",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT".."1000038007",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT".."1000038008",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT".."1000038009",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT".."1000038010",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT".."1000038011"
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT".."1000038001",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT".."1000038002",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT".."1000038003",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT".."1000038004",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT".."1000038005",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT".."1000038006",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT".."1000038007",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT".."1000038008",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT".."1000038009",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT".."1000038010"
     )
 
     EnumConstant(
@@ -104,7 +103,8 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_ENCODE_H264_CAPABILITY_DIRECT_8X8_INFERENCE_BIT_EXT reports if enabling direct_8x8_inference_flag in StdVideoH264SpsFlags is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_DIRECT_8X8_INFERENCE_ENABLED_BIT_EXT reports if enabling direct_8x8_inference_flag in StdVideoH264SpsFlags is supported.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_DIRECT_8X8_INFERENCE_DISABLED_BIT_EXT reports if disabling direct_8x8_inference_flag in StdVideoH264SpsFlags is supported.</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_SEPARATE_COLOUR_PLANE_BIT_EXT reports if enabling separate_colour_plane_flag in StdVideoH264SpsFlags is supported.</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_QPPRIME_Y_ZERO_TRANSFORM_BYPASS_BIT_EXT reports if enabling qpprime_y_zero_transform_bypass_flag in StdVideoH264SpsFlags is supported.</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_SCALING_LISTS_BIT_EXT reports if enabling seq_scaling_matrix_present_flag in StdVideoH264SpsFlags or pic_scaling_matrix_present_flag in StdVideoH264PpsFlags are supported.</li>
@@ -127,32 +127,35 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
             <li>#VIDEO_ENCODE_H264_CAPABILITY_SLICE_MB_COUNT_BIT_EXT reports support for configuring ##VkVideoEncodeH264NaluSliceEXT{@code ::mbCount} and first_mb_in_slice in StdVideoEncodeH264SliceHeader for each slice in a frame with multiple slices. If not supported, the implementation decides the number of macroblocks in each slice based on ##VkVideoEncodeH264VclFrameInfoEXT{@code ::naluSliceEntryCount}.</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_ROW_UNALIGNED_SLICE_BIT_EXT reports that each slice in a frame with multiple slices may begin or finish at any offset in a macroblock row. If not supported, all slices in the frame <b>must</b> begin at the start of a macroblock row (and hence each slice <b>must</b> finish at the end of a macroblock row).</li>
             <li>#VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_EXT reports that when #VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT is supported and a frame is encoded with multiple slices, the implementation allows encoding each slice with a different {@code StdVideoEncodeH264SliceHeader}::slice_type. If not supported, all slices of the frame <b>must</b> be encoded with the same {@code slice_type} which corresponds to the picture type of the frame. For example, all slices of a P-frame would be encoded as P-slices.</li>
+            <li>#VIDEO_ENCODE_H264_CAPABILITY_B_FRAME_IN_L1_LIST_BIT_EXT reports support for using a B frame as L1 reference.</li>
         </ul>
         """,
 
-        "VIDEO_ENCODE_H264_CAPABILITY_DIRECT_8X8_INFERENCE_BIT_EXT".enum(0x00000001),
-        "VIDEO_ENCODE_H264_CAPABILITY_SEPARATE_COLOUR_PLANE_BIT_EXT".enum(0x00000002),
-        "VIDEO_ENCODE_H264_CAPABILITY_QPPRIME_Y_ZERO_TRANSFORM_BYPASS_BIT_EXT".enum(0x00000004),
-        "VIDEO_ENCODE_H264_CAPABILITY_SCALING_LISTS_BIT_EXT".enum(0x00000008),
-        "VIDEO_ENCODE_H264_CAPABILITY_HRD_COMPLIANCE_BIT_EXT".enum(0x00000010),
-        "VIDEO_ENCODE_H264_CAPABILITY_CHROMA_QP_OFFSET_BIT_EXT".enum(0x00000020),
-        "VIDEO_ENCODE_H264_CAPABILITY_SECOND_CHROMA_QP_OFFSET_BIT_EXT".enum(0x00000040),
-        "VIDEO_ENCODE_H264_CAPABILITY_PIC_INIT_QP_MINUS26_BIT_EXT".enum(0x00000080),
-        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_PRED_BIT_EXT".enum(0x00000100),
-        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BIPRED_EXPLICIT_BIT_EXT".enum(0x00000200),
-        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BIPRED_IMPLICIT_BIT_EXT".enum(0x00000400),
-        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_PRED_NO_TABLE_BIT_EXT".enum(0x00000800),
-        "VIDEO_ENCODE_H264_CAPABILITY_TRANSFORM_8X8_BIT_EXT".enum(0x00001000),
-        "VIDEO_ENCODE_H264_CAPABILITY_CABAC_BIT_EXT".enum(0x00002000),
-        "VIDEO_ENCODE_H264_CAPABILITY_CAVLC_BIT_EXT".enum(0x00004000),
-        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED_BIT_EXT".enum(0x00008000),
-        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED_BIT_EXT".enum(0x00010000),
-        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT".enum(0x00020000),
-        "VIDEO_ENCODE_H264_CAPABILITY_DISABLE_DIRECT_SPATIAL_MV_PRED_BIT_EXT".enum(0x00040000),
-        "VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT".enum(0x00080000),
-        "VIDEO_ENCODE_H264_CAPABILITY_SLICE_MB_COUNT_BIT_EXT".enum(0x00100000),
-        "VIDEO_ENCODE_H264_CAPABILITY_ROW_UNALIGNED_SLICE_BIT_EXT".enum(0x00200000),
-        "VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_EXT".enum(0x00400000)
+        "VIDEO_ENCODE_H264_CAPABILITY_DIRECT_8X8_INFERENCE_ENABLED_BIT_EXT".enum(0x00000001),
+        "VIDEO_ENCODE_H264_CAPABILITY_DIRECT_8X8_INFERENCE_DISABLED_BIT_EXT".enum(0x00000002),
+        "VIDEO_ENCODE_H264_CAPABILITY_SEPARATE_COLOUR_PLANE_BIT_EXT".enum(0x00000004),
+        "VIDEO_ENCODE_H264_CAPABILITY_QPPRIME_Y_ZERO_TRANSFORM_BYPASS_BIT_EXT".enum(0x00000008),
+        "VIDEO_ENCODE_H264_CAPABILITY_SCALING_LISTS_BIT_EXT".enum(0x00000010),
+        "VIDEO_ENCODE_H264_CAPABILITY_HRD_COMPLIANCE_BIT_EXT".enum(0x00000020),
+        "VIDEO_ENCODE_H264_CAPABILITY_CHROMA_QP_OFFSET_BIT_EXT".enum(0x00000040),
+        "VIDEO_ENCODE_H264_CAPABILITY_SECOND_CHROMA_QP_OFFSET_BIT_EXT".enum(0x00000080),
+        "VIDEO_ENCODE_H264_CAPABILITY_PIC_INIT_QP_MINUS26_BIT_EXT".enum(0x00000100),
+        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_PRED_BIT_EXT".enum(0x00000200),
+        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BIPRED_EXPLICIT_BIT_EXT".enum(0x00000400),
+        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BIPRED_IMPLICIT_BIT_EXT".enum(0x00000800),
+        "VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_PRED_NO_TABLE_BIT_EXT".enum(0x00001000),
+        "VIDEO_ENCODE_H264_CAPABILITY_TRANSFORM_8X8_BIT_EXT".enum(0x00002000),
+        "VIDEO_ENCODE_H264_CAPABILITY_CABAC_BIT_EXT".enum(0x00004000),
+        "VIDEO_ENCODE_H264_CAPABILITY_CAVLC_BIT_EXT".enum(0x00008000),
+        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED_BIT_EXT".enum(0x00010000),
+        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED_BIT_EXT".enum(0x00020000),
+        "VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT".enum(0x00040000),
+        "VIDEO_ENCODE_H264_CAPABILITY_DISABLE_DIRECT_SPATIAL_MV_PRED_BIT_EXT".enum(0x00080000),
+        "VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT".enum(0x00100000),
+        "VIDEO_ENCODE_H264_CAPABILITY_SLICE_MB_COUNT_BIT_EXT".enum(0x00200000),
+        "VIDEO_ENCODE_H264_CAPABILITY_ROW_UNALIGNED_SLICE_BIT_EXT".enum(0x00400000),
+        "VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_EXT".enum(0x00800000),
+        "VIDEO_ENCODE_H264_CAPABILITY_B_FRAME_IN_L1_LIST_BIT_EXT".enum(0x01000000)
     )
 
     EnumConstant(
@@ -211,21 +214,6 @@ val EXT_video_encode_h264 = "EXTVideoEncodeH264".nativeClassVK("EXT_video_encode
         "VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT".enum(0x00000001),
         "VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT".enum(0x00000002),
         "VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT".enum(0x00000004)
-    )
-
-    EnumConstant(
-        """
-        VkVideoEncodeH264CreateFlagBitsEXT - Video encode session creation flags
-
-        <h5>Description</h5>
-        <ul>
-            <li>#VIDEO_ENCODE_H264_CREATE_DEFAULT_EXT is 0, and specifies no additional creation flags.</li>
-            <li>#VIDEO_ENCODE_H264_CREATE_RESERVED_0_BIT_EXT The current version of the specification has reserved this value for future use.</li>
-        </ul>
-        """,
-
-        "VIDEO_ENCODE_H264_CREATE_DEFAULT_EXT".."0",
-        "VIDEO_ENCODE_H264_CREATE_RESERVED_0_BIT_EXT".enum(0x00000001)
     )
 
     EnumConstant(

@@ -15,6 +15,8 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import org.lwjgl.vulkan.video.*;
+
 /**
  * Structure specifies H.265 decode capabilities parameters when decoding a frame.
  * 
@@ -24,18 +26,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link EXTVideoDecodeH265#VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT}</li>
  * </ul>
  * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtensionProperties}</p>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkVideoDecodeH265CapabilitiesEXT {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     uint32_t {@link #maxLevel};
- *     {@link VkExtensionProperties VkExtensionProperties} {@link #stdExtensionVersion};
+ *     StdVideoH265Level {@link #maxLevel};
  * }</code></pre>
  */
 public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeResource {
@@ -50,15 +47,13 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
     public static final int
         STYPE,
         PNEXT,
-        MAXLEVEL,
-        STDEXTENSIONVERSION;
+        MAXLEVEL;
 
     static {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
-            __member(4),
-            __member(VkExtensionProperties.SIZEOF, VkExtensionProperties.ALIGNOF)
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -67,7 +62,6 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         MAXLEVEL = layout.offsetof(2);
-        STDEXTENSIONVERSION = layout.offsetof(3);
     }
 
     /**
@@ -90,10 +84,8 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** the maximum H.265 level supported by the device. */
-    @NativeType("uint32_t")
+    @NativeType("StdVideoH265Level")
     public int maxLevel() { return nmaxLevel(address()); }
-    /** a {@link VkExtensionProperties} structure specifying the H.265 extension name and version supported by this implementation. */
-    public VkExtensionProperties stdExtensionVersion() { return nstdExtensionVersion(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH265CapabilitiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -244,8 +236,6 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH265CapabilitiesEXT.PNEXT); }
     /** Unsafe version of {@link #maxLevel}. */
     public static int nmaxLevel(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265CapabilitiesEXT.MAXLEVEL); }
-    /** Unsafe version of {@link #stdExtensionVersion}. */
-    public static VkExtensionProperties nstdExtensionVersion(long struct) { return VkExtensionProperties.create(struct + VkVideoDecodeH265CapabilitiesEXT.STDEXTENSIONVERSION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH265CapabilitiesEXT.STYPE, value); }
@@ -297,10 +287,8 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
         @NativeType("void *")
         public long pNext() { return VkVideoDecodeH265CapabilitiesEXT.npNext(address()); }
         /** @return the value of the {@link VkVideoDecodeH265CapabilitiesEXT#maxLevel} field. */
-        @NativeType("uint32_t")
+        @NativeType("StdVideoH265Level")
         public int maxLevel() { return VkVideoDecodeH265CapabilitiesEXT.nmaxLevel(address()); }
-        /** @return a {@link VkExtensionProperties} view of the {@link VkVideoDecodeH265CapabilitiesEXT#stdExtensionVersion} field. */
-        public VkExtensionProperties stdExtensionVersion() { return VkVideoDecodeH265CapabilitiesEXT.nstdExtensionVersion(address()); }
 
         /** Sets the specified value to the {@link VkVideoDecodeH265CapabilitiesEXT#sType} field. */
         public VkVideoDecodeH265CapabilitiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH265CapabilitiesEXT.nsType(address(), value); return this; }

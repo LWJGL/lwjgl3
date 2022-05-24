@@ -20,7 +20,18 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>The queue returned by {@code vkGetDeviceQueue2} <b>must</b> have the same {@code flags} value from this structure as that used at device creation time in a {@link VkDeviceQueueCreateInfo} structure. If no matching {@code flags} were specified at device creation time, then the handle returned in {@code pQueue} <b>must</b> be {@code NULL}.</p>
+ * <p>The queue returned by {@code vkGetDeviceQueue2} <b>must</b> have the same {@code flags} value from this structure as that used at device creation time in a {@link VkDeviceQueueCreateInfo} structure.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>Normally, if you create both protected-capable and non-protected-capable queues with the same family, they are treated as separate lists of queues and {@code queueIndex} is relative to the start of the list of queues specified by both {@code queueFamilyIndex} and {@code flags}. However, for historical reasons, some implementations may exhibit different behavior. These divergent implementations instead concatenate the lists of queues and treat {@code queueIndex} as relative to the start of the first list of queues with the given {@code queueFamilyIndex}. This only matters in cases where an application has created both protected-capable and non-protected-capable queues from the same queue family.</p>
+ * 
+ * <p>For such divergent implementations, the maximum value of {@code queueIndex} is equal to the sum of {@link VkDeviceQueueCreateInfo}{@code ::queueCount} minus one, for all {@link VkDeviceQueueCreateInfo} structures that share a common {@code queueFamilyIndex}.</p>
+ * 
+ * <p>Such implementations will return {@code NULL} for either the protected or unprotected queues when calling {@code vkGetDeviceQueue2} with {@code queueIndex} in the range zero to {@link VkDeviceQueueCreateInfo}{@code ::queueCount} minus one. In cases where these implementations returned {@code NULL}, the corresponding queues are instead located in the extended range described in the preceding two paragraphs.</p>
+ * 
+ * <p>This behaviour will not be observed on any driver that has passed Vulkan conformance test suite version 1.3.3.0, or any subsequent version. This information can be found by querying {@link VkPhysicalDeviceDriverProperties}{@code ::conformanceVersion}.</p>
+ * </div>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -113,7 +124,7 @@ public class VkDeviceQueueInfo2 extends Struct implements NativeResource {
     /** the index of the queue family to which the queue belongs. */
     @NativeType("uint32_t")
     public int queueFamilyIndex() { return nqueueFamilyIndex(address()); }
-    /** the index within this queue family of the queue to retrieve. */
+    /** the index of the queue to retrieve from within the set of queues that share both the queue family and flags specified. */
     @NativeType("uint32_t")
     public int queueIndex() { return nqueueIndex(address()); }
 

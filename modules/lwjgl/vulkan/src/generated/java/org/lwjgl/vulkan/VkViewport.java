@@ -32,10 +32,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * <dl>
  * <dd><code>o<sub>x</sub> = x + width / 2</code></dd>
  * <dd><code>o<sub>y</sub> = y + height / 2</code></dd>
- * <dd><code>o<sub>z</sub> = minDepth</code></dd>
+ * <dd><code>o<sub>z</sub> = minDepth</code> (or <code>(maxDepth + minDepth) / 2</code> if {@link VkPipelineViewportDepthClipControlCreateInfoEXT}{@code ::negativeOneToOne} is {@link VK10#VK_TRUE TRUE})</dd>
  * <dd><code>p<sub>x</sub> = width</code></dd>
  * <dd><code>p<sub>y</sub> = height</code></dd>
- * <dd><code>p<sub>z</sub> = maxDepth - minDepth</code>.</dd>
+ * <dd><code>p<sub>z</sub> = maxDepth - minDepth</code> (or <code>(maxDepth - minDepth) / 2</code> if {@link VkPipelineViewportDepthClipControlCreateInfoEXT}{@code ::negativeOneToOne} is {@link VK10#VK_TRUE TRUE})</dd>
  * </dl>
  * 
  * <p>If a render pass transform is enabled, the values <code>(p<sub>x</sub>,p<sub>y</sub>)</code> and <code>(o<sub>x</sub>, o<sub>y</sub>)</code> defining the viewport are transformed as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#vertexpostproc-renderpass-transform">render pass transform</a> before participating in the viewport transform.</p>

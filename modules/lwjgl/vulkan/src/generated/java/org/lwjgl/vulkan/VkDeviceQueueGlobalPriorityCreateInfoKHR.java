@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>A queue created without specifying {@link VkDeviceQueueGlobalPriorityCreateInfoKHR} will default to {@link EXTGlobalPriority#VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR}.</p>
+ * <p>Queues created without specifying {@link VkDeviceQueueGlobalPriorityCreateInfoKHR} will default to {@link EXTGlobalPriority#VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR QUEUE_GLOBAL_PRIORITY_MEDIUM_KHR}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -86,7 +86,7 @@ public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends Struct implements 
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the system-wide priority associated to this queue as specified by {@code VkQueueGlobalPriorityEXT} */
+    /** the system-wide priority associated to these queues as specified by {@code VkQueueGlobalPriorityEXT} */
     @NativeType("VkQueueGlobalPriorityKHR")
     public int globalPriority() { return nglobalPriority(address()); }
 

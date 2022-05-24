@@ -173,7 +173,40 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
 ￿    VkSwapchainKHR*                             pSwapchain);</code></pre>
 
         <h5>Description</h5>
-        If the {@code oldSwapchain} parameter of {@code pCreateInfo} is a valid swapchain, which has exclusive full-screen access, that access is released from {@code oldSwapchain}. If the command succeeds in this case, the newly created swapchain will automatically acquire exclusive full-screen access from {@code oldSwapchain}.
+        As mentioned above, if {@code vkCreateSwapchainKHR} succeeds, it will return a handle to a swapchain containing an array of at least {@code pCreateInfo→minImageCount} presentable images.
+
+        While acquired by the application, presentable images <b>can</b> be used in any way that equivalent non-presentable images <b>can</b> be used. A presentable image is equivalent to a non-presentable image created with the following ##VkImageCreateInfo parameters:
+
+        <table class="lwjgl">
+            <thead><tr><th>##VkImageCreateInfo Field</th><th>Value</th></tr></thead>
+            <tbody>
+                <tr><td>{@code flags}</td><td>#IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT is set if #SWAPCHAIN_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR is set #IMAGE_CREATE_PROTECTED_BIT is set if #SWAPCHAIN_CREATE_PROTECTED_BIT_KHR is set #IMAGE_CREATE_MUTABLE_FORMAT_BIT and #IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR are both set if #SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR is set all other bits are unset</td></tr>
+                <tr><td>{@code imageType}</td><td>#IMAGE_TYPE_2D</td></tr>
+                <tr><td>{@code format}</td><td>{@code pCreateInfo→imageFormat}</td></tr>
+                <tr><td>{@code extent}</td><td>{{@code pCreateInfo→imageExtent.width}, {@code pCreateInfo→imageExtent.height}, 1}</td></tr>
+                <tr><td>{@code mipLevels}</td><td>1</td></tr>
+                <tr><td>{@code arrayLayers}</td><td>{@code pCreateInfo→imageArrayLayers}</td></tr>
+                <tr><td>{@code samples}</td><td>#SAMPLE_COUNT_1_BIT</td></tr>
+                <tr><td>{@code tiling}</td><td>#IMAGE_TILING_OPTIMAL</td></tr>
+                <tr><td>{@code usage}</td><td>{@code pCreateInfo→imageUsage}</td></tr>
+                <tr><td>{@code sharingMode}</td><td>{@code pCreateInfo→imageSharingMode}</td></tr>
+                <tr><td>{@code queueFamilyIndexCount}</td><td>{@code pCreateInfo→queueFamilyIndexCount}</td></tr>
+                <tr><td>{@code pQueueFamilyIndices}</td><td>{@code pCreateInfo→pQueueFamilyIndices}</td></tr>
+                <tr><td>{@code initialLayout}</td><td>#IMAGE_LAYOUT_UNDEFINED</td></tr>
+            </tbody>
+        </table>
+
+        The {@code pCreateInfo→surface} <b>must</b> not be destroyed until after the swapchain is destroyed.
+
+        If {@code pCreateInfo→oldSwapchain} is #NULL_HANDLE, and the native window referred to by {@code pCreateInfo→surface} is already associated with a Vulkan swapchain, #ERROR_NATIVE_WINDOW_IN_USE_KHR <b>must</b> be returned.
+
+        If the native window referred to by {@code pCreateInfo→surface} is already associated with a non-Vulkan graphics API surface, #ERROR_NATIVE_WINDOW_IN_USE_KHR <b>must</b> be returned.
+
+        The native window referred to by {@code pCreateInfo→surface} <b>must</b> not become associated with a non-Vulkan graphics API surface before all associated Vulkan swapchains have been destroyed.
+
+        {@code vkCreateSwapchainKHR} will return #ERROR_DEVICE_LOST if the logical device was lost. The {@code VkSwapchainKHR} is a child of the {@code device}, and <b>must</b> be destroyed before the {@code device}. However, {@code VkSurfaceKHR} is not a child of any {@code VkDevice} and is not affected by the lost device. After successfully recreating a {@code VkDevice}, the same {@code VkSurfaceKHR} <b>can</b> be used to create a new {@code VkSwapchainKHR}, provided the previous one was destroyed.
+
+        If the {@code oldSwapchain} parameter of {@code pCreateInfo} is a valid swapchain, which has exclusive full-screen access, that access is released from {@code pCreateInfo→oldSwapchain}. If the command succeeds in this case, the newly created swapchain will automatically acquire exclusive full-screen access from {@code pCreateInfo→oldSwapchain}.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         This implicit transfer is intended to avoid exiting and entering full-screen exclusive mode, which may otherwise cause unwanted visual updates to the display.
@@ -216,6 +249,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
                 <li>#ERROR_SURFACE_LOST_KHR</li>
                 <li>#ERROR_NATIVE_WINDOW_IN_USE_KHR</li>
                 <li>#ERROR_INITIALIZATION_FAILED</li>
+                <li>#ERROR_COMPRESSION_EXHAUSTED_EXT</li>
             </ul></dd>
         </dl>
 

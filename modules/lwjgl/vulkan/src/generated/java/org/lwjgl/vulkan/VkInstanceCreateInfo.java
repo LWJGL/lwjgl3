@@ -28,6 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkDebugReportCallbackCreateInfoEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link EXTDebugReport VK_EXT_debug_report}</li>
  * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkDebugUtilsMessengerCreateInfoEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link EXTDebugUtils VK_EXT_debug_utils}</li>
+ * <li>If {@code flags} has the {@link KHRPortabilityEnumeration#VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR} bit set, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link KHRPortabilityEnumeration VK_KHR_portability_enumeration}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -36,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO STRUCTURE_TYPE_INSTANCE_CREATE_INFO}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDebugReportCallbackCreateInfoEXT}, {@link VkDebugUtilsMessengerCreateInfoEXT}, {@link VkValidationFeaturesEXT}, or {@link VkValidationFlagsEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkDebugUtilsMessengerCreateInfoEXT}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code VkInstanceCreateFlagBits} values</li>
  * <li>If {@code pApplicationInfo} is not {@code NULL}, {@code pApplicationInfo} <b>must</b> be a valid pointer to a valid {@link VkApplicationInfo} structure</li>
  * <li>If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} <b>must</b> be a valid pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings</li>
  * <li>If {@code enabledExtensionCount} is not 0, {@code ppEnabledExtensionNames} <b>must</b> be a valid pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings</li>
@@ -123,7 +124,7 @@ public class VkInstanceCreateInfo extends Struct implements NativeResource {
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** a bitmask of {@code VkInstanceCreateFlagBits} indicating the behavior of the instance. */
     @NativeType("VkInstanceCreateFlags")
     public int flags() { return nflags(address()); }
     /** {@code NULL} or a pointer to a {@link VkApplicationInfo} structure. If not {@code NULL}, this information helps implementations recognize behavior inherent to classes of applications. {@link VkApplicationInfo} is defined in detail below. */

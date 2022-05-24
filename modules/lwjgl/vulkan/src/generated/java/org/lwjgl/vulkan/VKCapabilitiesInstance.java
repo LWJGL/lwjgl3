@@ -270,6 +270,8 @@ public class VKCapabilitiesInstance {
     public final boolean VK_KHR_get_physical_device_properties2;
     /** When true, {@link KHRGetSurfaceCapabilities2} is supported. */
     public final boolean VK_KHR_get_surface_capabilities2;
+    /** When true, {@link KHRPortabilityEnumeration} is supported. */
+    public final boolean VK_KHR_portability_enumeration;
     /** When true, {@link KHRSurface} is supported. */
     public final boolean VK_KHR_surface;
     /** When true, {@link KHRSurfaceProtectedCapabilities} is supported. */
@@ -321,6 +323,7 @@ public class VKCapabilitiesInstance {
         VK_KHR_get_physical_device_properties2 = check_KHR_get_physical_device_properties2(provider, caps, ext);
         VK_KHR_get_surface_capabilities2 = check_KHR_get_surface_capabilities2(provider, caps, ext);
         check_KHR_performance_query(provider, caps, deviceExt);
+        VK_KHR_portability_enumeration = ext.contains("VK_KHR_portability_enumeration");
         VK_KHR_surface = check_KHR_surface(provider, caps, ext);
         VK_KHR_surface_protected_capabilities = ext.contains("VK_KHR_surface_protected_capabilities");
         check_KHR_swapchain(provider, caps, deviceExt);

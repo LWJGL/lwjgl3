@@ -20,8 +20,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct StdVideoDecodeH265ReferenceInfo {
- *     int32_t PicOrderCntVal;
  *     {@link StdVideoDecodeH265ReferenceInfoFlags StdVideoDecodeH265ReferenceInfoFlags} flags;
+ *     int32_t PicOrderCntVal;
  * }</code></pre>
  */
 public class StdVideoDecodeH265ReferenceInfo extends Struct implements NativeResource {
@@ -34,20 +34,20 @@ public class StdVideoDecodeH265ReferenceInfo extends Struct implements NativeRes
 
     /** The struct member offsets. */
     public static final int
-        PICORDERCNTVAL,
-        FLAGS;
+        FLAGS,
+        PICORDERCNTVAL;
 
     static {
         Layout layout = __struct(
-            __member(4),
-            __member(StdVideoDecodeH265ReferenceInfoFlags.SIZEOF, StdVideoDecodeH265ReferenceInfoFlags.ALIGNOF)
+            __member(StdVideoDecodeH265ReferenceInfoFlags.SIZEOF, StdVideoDecodeH265ReferenceInfoFlags.ALIGNOF),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        PICORDERCNTVAL = layout.offsetof(0);
-        FLAGS = layout.offsetof(1);
+        FLAGS = layout.offsetof(0);
+        PICORDERCNTVAL = layout.offsetof(1);
     }
 
     /**
@@ -63,26 +63,26 @@ public class StdVideoDecodeH265ReferenceInfo extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** @return a {@link StdVideoDecodeH265ReferenceInfoFlags} view of the {@code flags} field. */
+    public StdVideoDecodeH265ReferenceInfoFlags flags() { return nflags(address()); }
     /** @return the value of the {@code PicOrderCntVal} field. */
     @NativeType("int32_t")
     public int PicOrderCntVal() { return nPicOrderCntVal(address()); }
-    /** @return a {@link StdVideoDecodeH265ReferenceInfoFlags} view of the {@code flags} field. */
-    public StdVideoDecodeH265ReferenceInfoFlags flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@code PicOrderCntVal} field. */
-    public StdVideoDecodeH265ReferenceInfo PicOrderCntVal(@NativeType("int32_t") int value) { nPicOrderCntVal(address(), value); return this; }
     /** Copies the specified {@link StdVideoDecodeH265ReferenceInfoFlags} to the {@code flags} field. */
     public StdVideoDecodeH265ReferenceInfo flags(StdVideoDecodeH265ReferenceInfoFlags value) { nflags(address(), value); return this; }
     /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
     public StdVideoDecodeH265ReferenceInfo flags(java.util.function.Consumer<StdVideoDecodeH265ReferenceInfoFlags> consumer) { consumer.accept(flags()); return this; }
+    /** Sets the specified value to the {@code PicOrderCntVal} field. */
+    public StdVideoDecodeH265ReferenceInfo PicOrderCntVal(@NativeType("int32_t") int value) { nPicOrderCntVal(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoDecodeH265ReferenceInfo set(
-        int PicOrderCntVal,
-        StdVideoDecodeH265ReferenceInfoFlags flags
+        StdVideoDecodeH265ReferenceInfoFlags flags,
+        int PicOrderCntVal
     ) {
-        PicOrderCntVal(PicOrderCntVal);
         flags(flags);
+        PicOrderCntVal(PicOrderCntVal);
 
         return this;
     }
@@ -212,15 +212,15 @@ public class StdVideoDecodeH265ReferenceInfo extends Struct implements NativeRes
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #PicOrderCntVal}. */
-    public static int nPicOrderCntVal(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeH265ReferenceInfo.PICORDERCNTVAL); }
     /** Unsafe version of {@link #flags}. */
     public static StdVideoDecodeH265ReferenceInfoFlags nflags(long struct) { return StdVideoDecodeH265ReferenceInfoFlags.create(struct + StdVideoDecodeH265ReferenceInfo.FLAGS); }
+    /** Unsafe version of {@link #PicOrderCntVal}. */
+    public static int nPicOrderCntVal(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeH265ReferenceInfo.PICORDERCNTVAL); }
 
-    /** Unsafe version of {@link #PicOrderCntVal(int) PicOrderCntVal}. */
-    public static void nPicOrderCntVal(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH265ReferenceInfo.PICORDERCNTVAL, value); }
     /** Unsafe version of {@link #flags(StdVideoDecodeH265ReferenceInfoFlags) flags}. */
     public static void nflags(long struct, StdVideoDecodeH265ReferenceInfoFlags value) { memCopy(value.address(), struct + StdVideoDecodeH265ReferenceInfo.FLAGS, StdVideoDecodeH265ReferenceInfoFlags.SIZEOF); }
+    /** Unsafe version of {@link #PicOrderCntVal(int) PicOrderCntVal}. */
+    public static void nPicOrderCntVal(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH265ReferenceInfo.PICORDERCNTVAL, value); }
 
     // -----------------------------------
 
@@ -260,18 +260,18 @@ public class StdVideoDecodeH265ReferenceInfo extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
+        /** @return a {@link StdVideoDecodeH265ReferenceInfoFlags} view of the {@code flags} field. */
+        public StdVideoDecodeH265ReferenceInfoFlags flags() { return StdVideoDecodeH265ReferenceInfo.nflags(address()); }
         /** @return the value of the {@code PicOrderCntVal} field. */
         @NativeType("int32_t")
         public int PicOrderCntVal() { return StdVideoDecodeH265ReferenceInfo.nPicOrderCntVal(address()); }
-        /** @return a {@link StdVideoDecodeH265ReferenceInfoFlags} view of the {@code flags} field. */
-        public StdVideoDecodeH265ReferenceInfoFlags flags() { return StdVideoDecodeH265ReferenceInfo.nflags(address()); }
 
-        /** Sets the specified value to the {@code PicOrderCntVal} field. */
-        public StdVideoDecodeH265ReferenceInfo.Buffer PicOrderCntVal(@NativeType("int32_t") int value) { StdVideoDecodeH265ReferenceInfo.nPicOrderCntVal(address(), value); return this; }
         /** Copies the specified {@link StdVideoDecodeH265ReferenceInfoFlags} to the {@code flags} field. */
         public StdVideoDecodeH265ReferenceInfo.Buffer flags(StdVideoDecodeH265ReferenceInfoFlags value) { StdVideoDecodeH265ReferenceInfo.nflags(address(), value); return this; }
         /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
         public StdVideoDecodeH265ReferenceInfo.Buffer flags(java.util.function.Consumer<StdVideoDecodeH265ReferenceInfoFlags> consumer) { consumer.accept(flags()); return this; }
+        /** Sets the specified value to the {@code PicOrderCntVal} field. */
+        public StdVideoDecodeH265ReferenceInfo.Buffer PicOrderCntVal(@NativeType("int32_t") int value) { StdVideoDecodeH265ReferenceInfo.nPicOrderCntVal(address(), value); return this; }
 
     }
 

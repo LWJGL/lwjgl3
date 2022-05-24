@@ -104,7 +104,7 @@ public class VkImageFormatProperties extends Struct implements NativeResource {
      * <li>{@code vkGetPhysicalDeviceImageFormatProperties}{@code ::tiling} was {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
      * <li>{@link VkPhysicalDeviceImageFormatInfo2}{@code ::tiling} was {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}</li>
      * <li>the {@link VkPhysicalDeviceImageFormatInfo2}{@code ::pNext} chain included a {@link VkPhysicalDeviceExternalImageFormatInfo} structure with a handle type included in the {@code handleTypes} member for which mipmap image support is not required</li>
-     * <li>image {@code format} is one of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">formats that require a sampler Y’C<sub>B</sub>C<sub>R</sub> conversion</a></li>
+     * <li>image {@code format} is one of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">formats that require a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a></li>
      * <li>{@code flags} contains {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
      * </ul>
      */
@@ -116,7 +116,7 @@ public class VkImageFormatProperties extends Struct implements NativeResource {
      * <ul>
      * <li>{@code tiling} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
      * <li>{@code tiling} is {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL} and {@code type} is {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</li>
-     * <li>{@code format} is one of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">formats that require a sampler Y’C<sub>B</sub>C<sub>R</sub> conversion</a></li>
+     * <li>{@code format} is one of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">formats that require a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a></li>
      * <li>If {@code tiling} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then {@code maxArrayLayers} <b>must</b> not be 0.</li>
      * </ul>
      */

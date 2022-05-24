@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct StdVideoDecodeH264Mvc {
  *     uint32_t viewId0;
  *     uint32_t mvcElementCount;
- *     {@link StdVideoDecodeH264MvcElement StdVideoDecodeH264MvcElement} * pMvcElements;
+ *     {@link StdVideoDecodeH264MvcElement StdVideoDecodeH264MvcElement} const * pMvcElements;
  * }</code></pre>
  */
 public class StdVideoDecodeH264Mvc extends Struct implements NativeResource {
@@ -74,25 +74,21 @@ public class StdVideoDecodeH264Mvc extends Struct implements NativeResource {
     /** @return the value of the {@code mvcElementCount} field. */
     @NativeType("uint32_t")
     public int mvcElementCount() { return nmvcElementCount(address()); }
-    /** @return a {@link StdVideoDecodeH264MvcElement} view of the struct pointed to by the {@code pMvcElements} field. */
-    @NativeType("StdVideoDecodeH264MvcElement *")
-    public StdVideoDecodeH264MvcElement pMvcElements() { return npMvcElements(address()); }
+    /** @return a {@link StdVideoDecodeH264MvcElement.Buffer} view of the struct array pointed to by the {@code pMvcElements} field. */
+    @NativeType("StdVideoDecodeH264MvcElement const *")
+    public StdVideoDecodeH264MvcElement.Buffer pMvcElements() { return npMvcElements(address()); }
 
     /** Sets the specified value to the {@code viewId0} field. */
     public StdVideoDecodeH264Mvc viewId0(@NativeType("uint32_t") int value) { nviewId0(address(), value); return this; }
-    /** Sets the specified value to the {@code mvcElementCount} field. */
-    public StdVideoDecodeH264Mvc mvcElementCount(@NativeType("uint32_t") int value) { nmvcElementCount(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoDecodeH264MvcElement} to the {@code pMvcElements} field. */
-    public StdVideoDecodeH264Mvc pMvcElements(@NativeType("StdVideoDecodeH264MvcElement *") StdVideoDecodeH264MvcElement value) { npMvcElements(address(), value); return this; }
+    /** Sets the address of the specified {@link StdVideoDecodeH264MvcElement.Buffer} to the {@code pMvcElements} field. */
+    public StdVideoDecodeH264Mvc pMvcElements(@NativeType("StdVideoDecodeH264MvcElement const *") StdVideoDecodeH264MvcElement.Buffer value) { npMvcElements(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoDecodeH264Mvc set(
         int viewId0,
-        int mvcElementCount,
-        StdVideoDecodeH264MvcElement pMvcElements
+        StdVideoDecodeH264MvcElement.Buffer pMvcElements
     ) {
         viewId0(viewId0);
-        mvcElementCount(mvcElementCount);
         pMvcElements(pMvcElements);
 
         return this;
@@ -228,14 +224,14 @@ public class StdVideoDecodeH264Mvc extends Struct implements NativeResource {
     /** Unsafe version of {@link #mvcElementCount}. */
     public static int nmvcElementCount(long struct) { return UNSAFE.getInt(null, struct + StdVideoDecodeH264Mvc.MVCELEMENTCOUNT); }
     /** Unsafe version of {@link #pMvcElements}. */
-    public static StdVideoDecodeH264MvcElement npMvcElements(long struct) { return StdVideoDecodeH264MvcElement.create(memGetAddress(struct + StdVideoDecodeH264Mvc.PMVCELEMENTS)); }
+    public static StdVideoDecodeH264MvcElement.Buffer npMvcElements(long struct) { return StdVideoDecodeH264MvcElement.create(memGetAddress(struct + StdVideoDecodeH264Mvc.PMVCELEMENTS), nmvcElementCount(struct)); }
 
     /** Unsafe version of {@link #viewId0(int) viewId0}. */
     public static void nviewId0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH264Mvc.VIEWID0, value); }
-    /** Unsafe version of {@link #mvcElementCount(int) mvcElementCount}. */
+    /** Sets the specified value to the {@code mvcElementCount} field of the specified {@code struct}. */
     public static void nmvcElementCount(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH264Mvc.MVCELEMENTCOUNT, value); }
-    /** Unsafe version of {@link #pMvcElements(StdVideoDecodeH264MvcElement) pMvcElements}. */
-    public static void npMvcElements(long struct, StdVideoDecodeH264MvcElement value) { memPutAddress(struct + StdVideoDecodeH264Mvc.PMVCELEMENTS, value.address()); }
+    /** Unsafe version of {@link #pMvcElements(StdVideoDecodeH264MvcElement.Buffer) pMvcElements}. */
+    public static void npMvcElements(long struct, StdVideoDecodeH264MvcElement.Buffer value) { memPutAddress(struct + StdVideoDecodeH264Mvc.PMVCELEMENTS, value.address()); nmvcElementCount(struct, value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -290,16 +286,14 @@ public class StdVideoDecodeH264Mvc extends Struct implements NativeResource {
         /** @return the value of the {@code mvcElementCount} field. */
         @NativeType("uint32_t")
         public int mvcElementCount() { return StdVideoDecodeH264Mvc.nmvcElementCount(address()); }
-        /** @return a {@link StdVideoDecodeH264MvcElement} view of the struct pointed to by the {@code pMvcElements} field. */
-        @NativeType("StdVideoDecodeH264MvcElement *")
-        public StdVideoDecodeH264MvcElement pMvcElements() { return StdVideoDecodeH264Mvc.npMvcElements(address()); }
+        /** @return a {@link StdVideoDecodeH264MvcElement.Buffer} view of the struct array pointed to by the {@code pMvcElements} field. */
+        @NativeType("StdVideoDecodeH264MvcElement const *")
+        public StdVideoDecodeH264MvcElement.Buffer pMvcElements() { return StdVideoDecodeH264Mvc.npMvcElements(address()); }
 
         /** Sets the specified value to the {@code viewId0} field. */
         public StdVideoDecodeH264Mvc.Buffer viewId0(@NativeType("uint32_t") int value) { StdVideoDecodeH264Mvc.nviewId0(address(), value); return this; }
-        /** Sets the specified value to the {@code mvcElementCount} field. */
-        public StdVideoDecodeH264Mvc.Buffer mvcElementCount(@NativeType("uint32_t") int value) { StdVideoDecodeH264Mvc.nmvcElementCount(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoDecodeH264MvcElement} to the {@code pMvcElements} field. */
-        public StdVideoDecodeH264Mvc.Buffer pMvcElements(@NativeType("StdVideoDecodeH264MvcElement *") StdVideoDecodeH264MvcElement value) { StdVideoDecodeH264Mvc.npMvcElements(address(), value); return this; }
+        /** Sets the address of the specified {@link StdVideoDecodeH264MvcElement.Buffer} to the {@code pMvcElements} field. */
+        public StdVideoDecodeH264Mvc.Buffer pMvcElements(@NativeType("StdVideoDecodeH264MvcElement const *") StdVideoDecodeH264MvcElement.Buffer value) { StdVideoDecodeH264Mvc.npMvcElements(address(), value); return this; }
 
     }
 

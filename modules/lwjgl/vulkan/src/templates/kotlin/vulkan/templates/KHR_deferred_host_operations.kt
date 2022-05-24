@@ -14,7 +14,7 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
         The {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations} extension defines the infrastructure and usage patterns for deferrable commands, but does not specify any commands as deferrable. This is left to additional dependent extensions. Commands <b>must</b> not be deferred unless the deferral is specifically allowed by another extension which depends on {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations}.
 
         <h5>Code Examples</h5>
-        The following examples will illustrate the concept of deferrable operations using a hypothetical example. The command {@code vkDoSomethingExpensiveEXT} denotes a deferrable command. The structure stext:VkExpensiveOperationArgsEXT represents the arguments which it would normally accept.
+        The following examples will illustrate the concept of deferrable operations using a hypothetical example. The command {@code vkDoSomethingExpensive} denotes a deferrable command.
 
         The following example illustrates how a vulkan application might request deferral of an expensive operation:
 
@@ -65,7 +65,7 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
 ￿                // in a job system, a return of VK_THREAD_IDLE_KHR should queue another
 ￿                // job, but it is not functionally required
 ￿    }
-￿  );
+￿  ));
 ￿}
 ￿
 ￿for (auto &amp;f : joins) {

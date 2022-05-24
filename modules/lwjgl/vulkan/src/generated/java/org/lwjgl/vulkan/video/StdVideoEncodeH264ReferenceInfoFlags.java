@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct StdVideoEncodeH264ReferenceInfoFlags {
- *     uint32_t is_long_term : 1;
+ *     uint32_t used_for_long_term_reference : 1;
  * }</code></pre>
  */
 public class StdVideoEncodeH264ReferenceInfoFlags extends Struct implements NativeResource {
@@ -59,12 +59,12 @@ public class StdVideoEncodeH264ReferenceInfoFlags extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code is_long_term} field. */
+    /** @return the value of the {@code used_for_long_term_reference} field. */
     @NativeType("uint32_t")
-    public boolean is_long_term() { return nis_long_term(address()) != 0; }
+    public boolean used_for_long_term_reference() { return nused_for_long_term_reference(address()) != 0; }
 
-    /** Sets the specified value to the {@code is_long_term} field. */
-    public StdVideoEncodeH264ReferenceInfoFlags is_long_term(@NativeType("uint32_t") boolean value) { nis_long_term(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code used_for_long_term_reference} field. */
+    public StdVideoEncodeH264ReferenceInfoFlags used_for_long_term_reference(@NativeType("uint32_t") boolean value) { nused_for_long_term_reference(address(), value ? 1 : 0); return this; }
 
     /**
      * Copies the specified struct data to this struct.
@@ -192,12 +192,12 @@ public class StdVideoEncodeH264ReferenceInfoFlags extends Struct implements Nati
     // -----------------------------------
 
     public static int nbitfield0(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264ReferenceInfoFlags.BITFIELD0); }
-    /** Unsafe version of {@link #is_long_term}. */
-    public static int nis_long_term(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
+    /** Unsafe version of {@link #used_for_long_term_reference}. */
+    public static int nused_for_long_term_reference(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264ReferenceInfoFlags.BITFIELD0, value); }
-    /** Unsafe version of {@link #is_long_term(boolean) is_long_term}. */
-    public static void nis_long_term(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
+    /** Unsafe version of {@link #used_for_long_term_reference(boolean) used_for_long_term_reference}. */
+    public static void nused_for_long_term_reference(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
 
     // -----------------------------------
 
@@ -237,12 +237,12 @@ public class StdVideoEncodeH264ReferenceInfoFlags extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code is_long_term} field. */
+        /** @return the value of the {@code used_for_long_term_reference} field. */
         @NativeType("uint32_t")
-        public boolean is_long_term() { return StdVideoEncodeH264ReferenceInfoFlags.nis_long_term(address()) != 0; }
+        public boolean used_for_long_term_reference() { return StdVideoEncodeH264ReferenceInfoFlags.nused_for_long_term_reference(address()) != 0; }
 
-        /** Sets the specified value to the {@code is_long_term} field. */
-        public StdVideoEncodeH264ReferenceInfoFlags.Buffer is_long_term(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264ReferenceInfoFlags.nis_long_term(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code used_for_long_term_reference} field. */
+        public StdVideoEncodeH264ReferenceInfoFlags.Buffer used_for_long_term_reference(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264ReferenceInfoFlags.nused_for_long_term_reference(address(), value ? 1 : 0); return this; }
 
     }
 

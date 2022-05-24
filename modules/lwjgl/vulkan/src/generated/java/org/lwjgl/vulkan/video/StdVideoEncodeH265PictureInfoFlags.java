@@ -23,6 +23,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t is_reference_flag : 1;
  *     uint32_t IrapPicFlag : 1;
  *     uint32_t long_term_flag : 1;
+ *     uint32_t discardable_flag : 1;
+ *     uint32_t cross_layer_bla_flag : 1;
  * }</code></pre>
  */
 public class StdVideoEncodeH265PictureInfoFlags extends Struct implements NativeResource {
@@ -63,30 +65,44 @@ public class StdVideoEncodeH265PictureInfoFlags extends Struct implements Native
 
     /** @return the value of the {@code is_reference_flag} field. */
     @NativeType("uint32_t")
-    public int is_reference_flag() { return nis_reference_flag(address()); }
+    public boolean is_reference_flag() { return nis_reference_flag(address()) != 0; }
     /** @return the value of the {@code IrapPicFlag} field. */
     @NativeType("uint32_t")
-    public int IrapPicFlag() { return nIrapPicFlag(address()); }
+    public boolean IrapPicFlag() { return nIrapPicFlag(address()) != 0; }
     /** @return the value of the {@code long_term_flag} field. */
     @NativeType("uint32_t")
-    public int long_term_flag() { return nlong_term_flag(address()); }
+    public boolean long_term_flag() { return nlong_term_flag(address()) != 0; }
+    /** @return the value of the {@code discardable_flag} field. */
+    @NativeType("uint32_t")
+    public boolean discardable_flag() { return ndiscardable_flag(address()) != 0; }
+    /** @return the value of the {@code cross_layer_bla_flag} field. */
+    @NativeType("uint32_t")
+    public boolean cross_layer_bla_flag() { return ncross_layer_bla_flag(address()) != 0; }
 
     /** Sets the specified value to the {@code is_reference_flag} field. */
-    public StdVideoEncodeH265PictureInfoFlags is_reference_flag(@NativeType("uint32_t") int value) { nis_reference_flag(address(), value); return this; }
+    public StdVideoEncodeH265PictureInfoFlags is_reference_flag(@NativeType("uint32_t") boolean value) { nis_reference_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code IrapPicFlag} field. */
-    public StdVideoEncodeH265PictureInfoFlags IrapPicFlag(@NativeType("uint32_t") int value) { nIrapPicFlag(address(), value); return this; }
+    public StdVideoEncodeH265PictureInfoFlags IrapPicFlag(@NativeType("uint32_t") boolean value) { nIrapPicFlag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code long_term_flag} field. */
-    public StdVideoEncodeH265PictureInfoFlags long_term_flag(@NativeType("uint32_t") int value) { nlong_term_flag(address(), value); return this; }
+    public StdVideoEncodeH265PictureInfoFlags long_term_flag(@NativeType("uint32_t") boolean value) { nlong_term_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code discardable_flag} field. */
+    public StdVideoEncodeH265PictureInfoFlags discardable_flag(@NativeType("uint32_t") boolean value) { ndiscardable_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code cross_layer_bla_flag} field. */
+    public StdVideoEncodeH265PictureInfoFlags cross_layer_bla_flag(@NativeType("uint32_t") boolean value) { ncross_layer_bla_flag(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoEncodeH265PictureInfoFlags set(
-        int is_reference_flag,
-        int IrapPicFlag,
-        int long_term_flag
+        boolean is_reference_flag,
+        boolean IrapPicFlag,
+        boolean long_term_flag,
+        boolean discardable_flag,
+        boolean cross_layer_bla_flag
     ) {
         is_reference_flag(is_reference_flag);
         IrapPicFlag(IrapPicFlag);
         long_term_flag(long_term_flag);
+        discardable_flag(discardable_flag);
+        cross_layer_bla_flag(cross_layer_bla_flag);
 
         return this;
     }
@@ -223,14 +239,22 @@ public class StdVideoEncodeH265PictureInfoFlags extends Struct implements Native
     public static int nIrapPicFlag(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
     /** Unsafe version of {@link #long_term_flag}. */
     public static int nlong_term_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
+    /** Unsafe version of {@link #discardable_flag}. */
+    public static int ndiscardable_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
+    /** Unsafe version of {@link #cross_layer_bla_flag}. */
+    public static int ncross_layer_bla_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265PictureInfoFlags.BITFIELD0, value); }
-    /** Unsafe version of {@link #is_reference_flag(int) is_reference_flag}. */
+    /** Unsafe version of {@link #is_reference_flag(boolean) is_reference_flag}. */
     public static void nis_reference_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
-    /** Unsafe version of {@link #IrapPicFlag(int) IrapPicFlag}. */
+    /** Unsafe version of {@link #IrapPicFlag(boolean) IrapPicFlag}. */
     public static void nIrapPicFlag(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
-    /** Unsafe version of {@link #long_term_flag(int) long_term_flag}. */
+    /** Unsafe version of {@link #long_term_flag(boolean) long_term_flag}. */
     public static void nlong_term_flag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
+    /** Unsafe version of {@link #discardable_flag(boolean) discardable_flag}. */
+    public static void ndiscardable_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
+    /** Unsafe version of {@link #cross_layer_bla_flag(boolean) cross_layer_bla_flag}. */
+    public static void ncross_layer_bla_flag(long struct, int value) { nbitfield0(struct, ((value << 4) & 0x00_00_00_10) | (nbitfield0(struct) & 0xFF_FF_FF_EF)); }
 
     // -----------------------------------
 
@@ -272,20 +296,30 @@ public class StdVideoEncodeH265PictureInfoFlags extends Struct implements Native
 
         /** @return the value of the {@code is_reference_flag} field. */
         @NativeType("uint32_t")
-        public int is_reference_flag() { return StdVideoEncodeH265PictureInfoFlags.nis_reference_flag(address()); }
+        public boolean is_reference_flag() { return StdVideoEncodeH265PictureInfoFlags.nis_reference_flag(address()) != 0; }
         /** @return the value of the {@code IrapPicFlag} field. */
         @NativeType("uint32_t")
-        public int IrapPicFlag() { return StdVideoEncodeH265PictureInfoFlags.nIrapPicFlag(address()); }
+        public boolean IrapPicFlag() { return StdVideoEncodeH265PictureInfoFlags.nIrapPicFlag(address()) != 0; }
         /** @return the value of the {@code long_term_flag} field. */
         @NativeType("uint32_t")
-        public int long_term_flag() { return StdVideoEncodeH265PictureInfoFlags.nlong_term_flag(address()); }
+        public boolean long_term_flag() { return StdVideoEncodeH265PictureInfoFlags.nlong_term_flag(address()) != 0; }
+        /** @return the value of the {@code discardable_flag} field. */
+        @NativeType("uint32_t")
+        public boolean discardable_flag() { return StdVideoEncodeH265PictureInfoFlags.ndiscardable_flag(address()) != 0; }
+        /** @return the value of the {@code cross_layer_bla_flag} field. */
+        @NativeType("uint32_t")
+        public boolean cross_layer_bla_flag() { return StdVideoEncodeH265PictureInfoFlags.ncross_layer_bla_flag(address()) != 0; }
 
         /** Sets the specified value to the {@code is_reference_flag} field. */
-        public StdVideoEncodeH265PictureInfoFlags.Buffer is_reference_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265PictureInfoFlags.nis_reference_flag(address(), value); return this; }
+        public StdVideoEncodeH265PictureInfoFlags.Buffer is_reference_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265PictureInfoFlags.nis_reference_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code IrapPicFlag} field. */
-        public StdVideoEncodeH265PictureInfoFlags.Buffer IrapPicFlag(@NativeType("uint32_t") int value) { StdVideoEncodeH265PictureInfoFlags.nIrapPicFlag(address(), value); return this; }
+        public StdVideoEncodeH265PictureInfoFlags.Buffer IrapPicFlag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265PictureInfoFlags.nIrapPicFlag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code long_term_flag} field. */
-        public StdVideoEncodeH265PictureInfoFlags.Buffer long_term_flag(@NativeType("uint32_t") int value) { StdVideoEncodeH265PictureInfoFlags.nlong_term_flag(address(), value); return this; }
+        public StdVideoEncodeH265PictureInfoFlags.Buffer long_term_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265PictureInfoFlags.nlong_term_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code discardable_flag} field. */
+        public StdVideoEncodeH265PictureInfoFlags.Buffer discardable_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265PictureInfoFlags.ndiscardable_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code cross_layer_bla_flag} field. */
+        public StdVideoEncodeH265PictureInfoFlags.Buffer cross_layer_bla_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265PictureInfoFlags.ncross_layer_bla_flag(address(), value ? 1 : 0); return this; }
 
     }
 

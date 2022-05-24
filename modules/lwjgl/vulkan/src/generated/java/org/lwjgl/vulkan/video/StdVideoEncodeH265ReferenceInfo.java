@@ -20,9 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct StdVideoEncodeH265ReferenceInfo {
+ *     {@link StdVideoEncodeH265ReferenceInfoFlags StdVideoEncodeH265ReferenceInfoFlags} flags;
  *     int32_t PicOrderCntVal;
  *     uint8_t TemporalId;
- *     {@link StdVideoEncodeH265ReferenceInfoFlags StdVideoEncodeH265ReferenceInfoFlags} flags;
  * }</code></pre>
  */
 public class StdVideoEncodeH265ReferenceInfo extends Struct implements NativeResource {
@@ -35,23 +35,23 @@ public class StdVideoEncodeH265ReferenceInfo extends Struct implements NativeRes
 
     /** The struct member offsets. */
     public static final int
+        FLAGS,
         PICORDERCNTVAL,
-        TEMPORALID,
-        FLAGS;
+        TEMPORALID;
 
     static {
         Layout layout = __struct(
+            __member(StdVideoEncodeH265ReferenceInfoFlags.SIZEOF, StdVideoEncodeH265ReferenceInfoFlags.ALIGNOF),
             __member(4),
-            __member(1),
-            __member(StdVideoEncodeH265ReferenceInfoFlags.SIZEOF, StdVideoEncodeH265ReferenceInfoFlags.ALIGNOF)
+            __member(1)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        PICORDERCNTVAL = layout.offsetof(0);
-        TEMPORALID = layout.offsetof(1);
-        FLAGS = layout.offsetof(2);
+        FLAGS = layout.offsetof(0);
+        PICORDERCNTVAL = layout.offsetof(1);
+        TEMPORALID = layout.offsetof(2);
     }
 
     /**
@@ -67,33 +67,33 @@ public class StdVideoEncodeH265ReferenceInfo extends Struct implements NativeRes
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** @return a {@link StdVideoEncodeH265ReferenceInfoFlags} view of the {@code flags} field. */
+    public StdVideoEncodeH265ReferenceInfoFlags flags() { return nflags(address()); }
     /** @return the value of the {@code PicOrderCntVal} field. */
     @NativeType("int32_t")
     public int PicOrderCntVal() { return nPicOrderCntVal(address()); }
     /** @return the value of the {@code TemporalId} field. */
     @NativeType("uint8_t")
     public byte TemporalId() { return nTemporalId(address()); }
-    /** @return a {@link StdVideoEncodeH265ReferenceInfoFlags} view of the {@code flags} field. */
-    public StdVideoEncodeH265ReferenceInfoFlags flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@code PicOrderCntVal} field. */
-    public StdVideoEncodeH265ReferenceInfo PicOrderCntVal(@NativeType("int32_t") int value) { nPicOrderCntVal(address(), value); return this; }
-    /** Sets the specified value to the {@code TemporalId} field. */
-    public StdVideoEncodeH265ReferenceInfo TemporalId(@NativeType("uint8_t") byte value) { nTemporalId(address(), value); return this; }
     /** Copies the specified {@link StdVideoEncodeH265ReferenceInfoFlags} to the {@code flags} field. */
     public StdVideoEncodeH265ReferenceInfo flags(StdVideoEncodeH265ReferenceInfoFlags value) { nflags(address(), value); return this; }
     /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
     public StdVideoEncodeH265ReferenceInfo flags(java.util.function.Consumer<StdVideoEncodeH265ReferenceInfoFlags> consumer) { consumer.accept(flags()); return this; }
+    /** Sets the specified value to the {@code PicOrderCntVal} field. */
+    public StdVideoEncodeH265ReferenceInfo PicOrderCntVal(@NativeType("int32_t") int value) { nPicOrderCntVal(address(), value); return this; }
+    /** Sets the specified value to the {@code TemporalId} field. */
+    public StdVideoEncodeH265ReferenceInfo TemporalId(@NativeType("uint8_t") byte value) { nTemporalId(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoEncodeH265ReferenceInfo set(
+        StdVideoEncodeH265ReferenceInfoFlags flags,
         int PicOrderCntVal,
-        byte TemporalId,
-        StdVideoEncodeH265ReferenceInfoFlags flags
+        byte TemporalId
     ) {
+        flags(flags);
         PicOrderCntVal(PicOrderCntVal);
         TemporalId(TemporalId);
-        flags(flags);
 
         return this;
     }
@@ -223,19 +223,19 @@ public class StdVideoEncodeH265ReferenceInfo extends Struct implements NativeRes
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #flags}. */
+    public static StdVideoEncodeH265ReferenceInfoFlags nflags(long struct) { return StdVideoEncodeH265ReferenceInfoFlags.create(struct + StdVideoEncodeH265ReferenceInfo.FLAGS); }
     /** Unsafe version of {@link #PicOrderCntVal}. */
     public static int nPicOrderCntVal(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH265ReferenceInfo.PICORDERCNTVAL); }
     /** Unsafe version of {@link #TemporalId}. */
     public static byte nTemporalId(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceInfo.TEMPORALID); }
-    /** Unsafe version of {@link #flags}. */
-    public static StdVideoEncodeH265ReferenceInfoFlags nflags(long struct) { return StdVideoEncodeH265ReferenceInfoFlags.create(struct + StdVideoEncodeH265ReferenceInfo.FLAGS); }
 
+    /** Unsafe version of {@link #flags(StdVideoEncodeH265ReferenceInfoFlags) flags}. */
+    public static void nflags(long struct, StdVideoEncodeH265ReferenceInfoFlags value) { memCopy(value.address(), struct + StdVideoEncodeH265ReferenceInfo.FLAGS, StdVideoEncodeH265ReferenceInfoFlags.SIZEOF); }
     /** Unsafe version of {@link #PicOrderCntVal(int) PicOrderCntVal}. */
     public static void nPicOrderCntVal(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265ReferenceInfo.PICORDERCNTVAL, value); }
     /** Unsafe version of {@link #TemporalId(byte) TemporalId}. */
     public static void nTemporalId(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceInfo.TEMPORALID, value); }
-    /** Unsafe version of {@link #flags(StdVideoEncodeH265ReferenceInfoFlags) flags}. */
-    public static void nflags(long struct, StdVideoEncodeH265ReferenceInfoFlags value) { memCopy(value.address(), struct + StdVideoEncodeH265ReferenceInfo.FLAGS, StdVideoEncodeH265ReferenceInfoFlags.SIZEOF); }
 
     // -----------------------------------
 
@@ -275,23 +275,23 @@ public class StdVideoEncodeH265ReferenceInfo extends Struct implements NativeRes
             return ELEMENT_FACTORY;
         }
 
+        /** @return a {@link StdVideoEncodeH265ReferenceInfoFlags} view of the {@code flags} field. */
+        public StdVideoEncodeH265ReferenceInfoFlags flags() { return StdVideoEncodeH265ReferenceInfo.nflags(address()); }
         /** @return the value of the {@code PicOrderCntVal} field. */
         @NativeType("int32_t")
         public int PicOrderCntVal() { return StdVideoEncodeH265ReferenceInfo.nPicOrderCntVal(address()); }
         /** @return the value of the {@code TemporalId} field. */
         @NativeType("uint8_t")
         public byte TemporalId() { return StdVideoEncodeH265ReferenceInfo.nTemporalId(address()); }
-        /** @return a {@link StdVideoEncodeH265ReferenceInfoFlags} view of the {@code flags} field. */
-        public StdVideoEncodeH265ReferenceInfoFlags flags() { return StdVideoEncodeH265ReferenceInfo.nflags(address()); }
 
-        /** Sets the specified value to the {@code PicOrderCntVal} field. */
-        public StdVideoEncodeH265ReferenceInfo.Buffer PicOrderCntVal(@NativeType("int32_t") int value) { StdVideoEncodeH265ReferenceInfo.nPicOrderCntVal(address(), value); return this; }
-        /** Sets the specified value to the {@code TemporalId} field. */
-        public StdVideoEncodeH265ReferenceInfo.Buffer TemporalId(@NativeType("uint8_t") byte value) { StdVideoEncodeH265ReferenceInfo.nTemporalId(address(), value); return this; }
         /** Copies the specified {@link StdVideoEncodeH265ReferenceInfoFlags} to the {@code flags} field. */
         public StdVideoEncodeH265ReferenceInfo.Buffer flags(StdVideoEncodeH265ReferenceInfoFlags value) { StdVideoEncodeH265ReferenceInfo.nflags(address(), value); return this; }
         /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
         public StdVideoEncodeH265ReferenceInfo.Buffer flags(java.util.function.Consumer<StdVideoEncodeH265ReferenceInfoFlags> consumer) { consumer.accept(flags()); return this; }
+        /** Sets the specified value to the {@code PicOrderCntVal} field. */
+        public StdVideoEncodeH265ReferenceInfo.Buffer PicOrderCntVal(@NativeType("int32_t") int value) { StdVideoEncodeH265ReferenceInfo.nPicOrderCntVal(address(), value); return this; }
+        /** Sets the specified value to the {@code TemporalId} field. */
+        public StdVideoEncodeH265ReferenceInfo.Buffer TemporalId(@NativeType("uint8_t") byte value) { StdVideoEncodeH265ReferenceInfo.nTemporalId(address(), value); return this; }
 
     }
 

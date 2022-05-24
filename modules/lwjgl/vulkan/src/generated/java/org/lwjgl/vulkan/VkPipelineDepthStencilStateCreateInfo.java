@@ -144,7 +144,7 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct implements Nat
     /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth-write">depth writes</a> are enabled when {@code depthTestEnable} is {@link VK10#VK_TRUE TRUE}. Depth writes are always disabled when {@code depthTestEnable} is {@link VK10#VK_FALSE FALSE}. */
     @NativeType("VkBool32")
     public boolean depthWriteEnable() { return ndepthWriteEnable(address()) != 0; }
-    /** the comparison operator used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth">depth test</a>. */
+    /** a {@code VkCompareOp} value specifying the comparison operator to use in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth-comparison">Depth Comparison</a> step of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth">depth test</a>. */
     @NativeType("VkCompareOp")
     public int depthCompareOp() { return ndepthCompareOp(address()); }
     /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-dbt">depth bounds testing</a> is enabled. */

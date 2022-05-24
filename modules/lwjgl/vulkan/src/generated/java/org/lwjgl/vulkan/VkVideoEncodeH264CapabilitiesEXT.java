@@ -26,23 +26,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT}</li>
- * <li>{@code inputModeFlags} <b>must</b> be a valid combination of {@code VkVideoEncodeH264InputModeFlagBitsEXT} values</li>
- * <li>{@code inputModeFlags} <b>must</b> not be 0</li>
- * <li>{@code outputModeFlags} <b>must</b> be a valid combination of {@code VkVideoEncodeH264OutputModeFlagBitsEXT} values</li>
- * <li>{@code outputModeFlags} <b>must</b> not be 0</li>
- * <li>{@code stdExtensionVersion} <b>must</b> be a valid {@link VkExtensionProperties} structure</li>
  * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtensionProperties}</p>
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkVideoEncodeH264CapabilitiesEXT {
  *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
+ *     void * {@link #pNext};
  *     VkVideoEncodeH264CapabilityFlagsEXT {@link #flags};
  *     VkVideoEncodeH264InputModeFlagsEXT {@link #inputModeFlags};
  *     VkVideoEncodeH264OutputModeFlagsEXT {@link #outputModeFlags};
@@ -54,7 +45,6 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #maxBitsPerMbDenom};
  *     uint32_t {@link #log2MaxMvLengthHorizontal};
  *     uint32_t {@link #log2MaxMvLengthVertical};
- *     {@link VkExtensionProperties VkExtensionProperties} {@link #stdExtensionVersion};
  * }</code></pre>
  */
 public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeResource {
@@ -79,8 +69,7 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
         MAXBYTESPERPICDENOM,
         MAXBITSPERMBDENOM,
         LOG2MAXMVLENGTHHORIZONTAL,
-        LOG2MAXMVLENGTHVERTICAL,
-        STDEXTENSIONVERSION;
+        LOG2MAXMVLENGTHVERTICAL;
 
     static {
         Layout layout = __struct(
@@ -96,8 +85,7 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
             __member(4),
             __member(4),
             __member(4),
-            __member(4),
-            __member(VkExtensionProperties.SIZEOF, VkExtensionProperties.ALIGNOF)
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -116,7 +104,6 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
         MAXBITSPERMBDENOM = layout.offsetof(10);
         LOG2MAXMVLENGTHHORIZONTAL = layout.offsetof(11);
         LOG2MAXMVLENGTHVERTICAL = layout.offsetof(12);
-        STDEXTENSIONVERSION = layout.offsetof(13);
     }
 
     /**
@@ -136,7 +123,7 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void const *")
+    @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** a bitmask of {@code VkVideoEncodeH264CapabilityFlagBitsEXT} describing supported encoding tools. */
     @NativeType("VkVideoEncodeH264CapabilityFlagsEXT")
@@ -171,71 +158,21 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
     /** reports the value that will be used for log2_max_mv_length_vertical if bitstream_restriction_flag is enabled in StdVideoH264SpsVuiFlags. */
     @NativeType("uint32_t")
     public int log2MaxMvLengthVertical() { return nlog2MaxMvLengthVertical(address()); }
-    /** the specific H.264 extension name and version supported by this implementation. */
-    public VkExtensionProperties stdExtensionVersion() { return nstdExtensionVersion(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoEncodeH264CapabilitiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT} value to the {@link #sType} field. */
     public VkVideoEncodeH264CapabilitiesEXT sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkVideoEncodeH264CapabilitiesEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
-    public VkVideoEncodeH264CapabilitiesEXT flags(@NativeType("VkVideoEncodeH264CapabilityFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #inputModeFlags} field. */
-    public VkVideoEncodeH264CapabilitiesEXT inputModeFlags(@NativeType("VkVideoEncodeH264InputModeFlagsEXT") int value) { ninputModeFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #outputModeFlags} field. */
-    public VkVideoEncodeH264CapabilitiesEXT outputModeFlags(@NativeType("VkVideoEncodeH264OutputModeFlagsEXT") int value) { noutputModeFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxPPictureL0ReferenceCount} field. */
-    public VkVideoEncodeH264CapabilitiesEXT maxPPictureL0ReferenceCount(@NativeType("uint8_t") byte value) { nmaxPPictureL0ReferenceCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxBPictureL0ReferenceCount} field. */
-    public VkVideoEncodeH264CapabilitiesEXT maxBPictureL0ReferenceCount(@NativeType("uint8_t") byte value) { nmaxBPictureL0ReferenceCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxL1ReferenceCount} field. */
-    public VkVideoEncodeH264CapabilitiesEXT maxL1ReferenceCount(@NativeType("uint8_t") byte value) { nmaxL1ReferenceCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #motionVectorsOverPicBoundariesFlag} field. */
-    public VkVideoEncodeH264CapabilitiesEXT motionVectorsOverPicBoundariesFlag(@NativeType("VkBool32") boolean value) { nmotionVectorsOverPicBoundariesFlag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #maxBytesPerPicDenom} field. */
-    public VkVideoEncodeH264CapabilitiesEXT maxBytesPerPicDenom(@NativeType("uint32_t") int value) { nmaxBytesPerPicDenom(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxBitsPerMbDenom} field. */
-    public VkVideoEncodeH264CapabilitiesEXT maxBitsPerMbDenom(@NativeType("uint32_t") int value) { nmaxBitsPerMbDenom(address(), value); return this; }
-    /** Sets the specified value to the {@link #log2MaxMvLengthHorizontal} field. */
-    public VkVideoEncodeH264CapabilitiesEXT log2MaxMvLengthHorizontal(@NativeType("uint32_t") int value) { nlog2MaxMvLengthHorizontal(address(), value); return this; }
-    /** Sets the specified value to the {@link #log2MaxMvLengthVertical} field. */
-    public VkVideoEncodeH264CapabilitiesEXT log2MaxMvLengthVertical(@NativeType("uint32_t") int value) { nlog2MaxMvLengthVertical(address(), value); return this; }
-    /** Copies the specified {@link VkExtensionProperties} to the {@link #stdExtensionVersion} field. */
-    public VkVideoEncodeH264CapabilitiesEXT stdExtensionVersion(VkExtensionProperties value) { nstdExtensionVersion(address(), value); return this; }
+    public VkVideoEncodeH264CapabilitiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoEncodeH264CapabilitiesEXT set(
         int sType,
-        long pNext,
-        int flags,
-        int inputModeFlags,
-        int outputModeFlags,
-        byte maxPPictureL0ReferenceCount,
-        byte maxBPictureL0ReferenceCount,
-        byte maxL1ReferenceCount,
-        boolean motionVectorsOverPicBoundariesFlag,
-        int maxBytesPerPicDenom,
-        int maxBitsPerMbDenom,
-        int log2MaxMvLengthHorizontal,
-        int log2MaxMvLengthVertical,
-        VkExtensionProperties stdExtensionVersion
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        flags(flags);
-        inputModeFlags(inputModeFlags);
-        outputModeFlags(outputModeFlags);
-        maxPPictureL0ReferenceCount(maxPPictureL0ReferenceCount);
-        maxBPictureL0ReferenceCount(maxBPictureL0ReferenceCount);
-        maxL1ReferenceCount(maxL1ReferenceCount);
-        motionVectorsOverPicBoundariesFlag(motionVectorsOverPicBoundariesFlag);
-        maxBytesPerPicDenom(maxBytesPerPicDenom);
-        maxBitsPerMbDenom(maxBitsPerMbDenom);
-        log2MaxMvLengthHorizontal(log2MaxMvLengthHorizontal);
-        log2MaxMvLengthVertical(log2MaxMvLengthVertical);
-        stdExtensionVersion(stdExtensionVersion);
 
         return this;
     }
@@ -391,37 +328,11 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
     public static int nlog2MaxMvLengthHorizontal(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.LOG2MAXMVLENGTHHORIZONTAL); }
     /** Unsafe version of {@link #log2MaxMvLengthVertical}. */
     public static int nlog2MaxMvLengthVertical(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.LOG2MAXMVLENGTHVERTICAL); }
-    /** Unsafe version of {@link #stdExtensionVersion}. */
-    public static VkExtensionProperties nstdExtensionVersion(long struct) { return VkExtensionProperties.create(struct + VkVideoEncodeH264CapabilitiesEXT.STDEXTENSIONVERSION); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH264CapabilitiesEXT.PNEXT, value); }
-    /** Unsafe version of {@link #flags(int) flags}. */
-    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.FLAGS, value); }
-    /** Unsafe version of {@link #inputModeFlags(int) inputModeFlags}. */
-    public static void ninputModeFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.INPUTMODEFLAGS, value); }
-    /** Unsafe version of {@link #outputModeFlags(int) outputModeFlags}. */
-    public static void noutputModeFlags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.OUTPUTMODEFLAGS, value); }
-    /** Unsafe version of {@link #maxPPictureL0ReferenceCount(byte) maxPPictureL0ReferenceCount}. */
-    public static void nmaxPPictureL0ReferenceCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXPPICTUREL0REFERENCECOUNT, value); }
-    /** Unsafe version of {@link #maxBPictureL0ReferenceCount(byte) maxBPictureL0ReferenceCount}. */
-    public static void nmaxBPictureL0ReferenceCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXBPICTUREL0REFERENCECOUNT, value); }
-    /** Unsafe version of {@link #maxL1ReferenceCount(byte) maxL1ReferenceCount}. */
-    public static void nmaxL1ReferenceCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXL1REFERENCECOUNT, value); }
-    /** Unsafe version of {@link #motionVectorsOverPicBoundariesFlag(boolean) motionVectorsOverPicBoundariesFlag}. */
-    public static void nmotionVectorsOverPicBoundariesFlag(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.MOTIONVECTORSOVERPICBOUNDARIESFLAG, value); }
-    /** Unsafe version of {@link #maxBytesPerPicDenom(int) maxBytesPerPicDenom}. */
-    public static void nmaxBytesPerPicDenom(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXBYTESPERPICDENOM, value); }
-    /** Unsafe version of {@link #maxBitsPerMbDenom(int) maxBitsPerMbDenom}. */
-    public static void nmaxBitsPerMbDenom(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXBITSPERMBDENOM, value); }
-    /** Unsafe version of {@link #log2MaxMvLengthHorizontal(int) log2MaxMvLengthHorizontal}. */
-    public static void nlog2MaxMvLengthHorizontal(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.LOG2MAXMVLENGTHHORIZONTAL, value); }
-    /** Unsafe version of {@link #log2MaxMvLengthVertical(int) log2MaxMvLengthVertical}. */
-    public static void nlog2MaxMvLengthVertical(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.LOG2MAXMVLENGTHVERTICAL, value); }
-    /** Unsafe version of {@link #stdExtensionVersion(VkExtensionProperties) stdExtensionVersion}. */
-    public static void nstdExtensionVersion(long struct, VkExtensionProperties value) { memCopy(value.address(), struct + VkVideoEncodeH264CapabilitiesEXT.STDEXTENSIONVERSION, VkExtensionProperties.SIZEOF); }
 
     // -----------------------------------
 
@@ -465,7 +376,7 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH264CapabilitiesEXT.nsType(address()); }
         /** @return the value of the {@link VkVideoEncodeH264CapabilitiesEXT#pNext} field. */
-        @NativeType("void const *")
+        @NativeType("void *")
         public long pNext() { return VkVideoEncodeH264CapabilitiesEXT.npNext(address()); }
         /** @return the value of the {@link VkVideoEncodeH264CapabilitiesEXT#flags} field. */
         @NativeType("VkVideoEncodeH264CapabilityFlagsEXT")
@@ -500,39 +411,13 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
         /** @return the value of the {@link VkVideoEncodeH264CapabilitiesEXT#log2MaxMvLengthVertical} field. */
         @NativeType("uint32_t")
         public int log2MaxMvLengthVertical() { return VkVideoEncodeH264CapabilitiesEXT.nlog2MaxMvLengthVertical(address()); }
-        /** @return a {@link VkExtensionProperties} view of the {@link VkVideoEncodeH264CapabilitiesEXT#stdExtensionVersion} field. */
-        public VkExtensionProperties stdExtensionVersion() { return VkVideoEncodeH264CapabilitiesEXT.nstdExtensionVersion(address()); }
 
         /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#sType} field. */
         public VkVideoEncodeH264CapabilitiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264CapabilitiesEXT.nsType(address(), value); return this; }
         /** Sets the {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT} value to the {@link VkVideoEncodeH264CapabilitiesEXT#sType} field. */
         public VkVideoEncodeH264CapabilitiesEXT.Buffer sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT); }
         /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#pNext} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH264CapabilitiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#flags} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer flags(@NativeType("VkVideoEncodeH264CapabilityFlagsEXT") int value) { VkVideoEncodeH264CapabilitiesEXT.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#inputModeFlags} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer inputModeFlags(@NativeType("VkVideoEncodeH264InputModeFlagsEXT") int value) { VkVideoEncodeH264CapabilitiesEXT.ninputModeFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#outputModeFlags} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer outputModeFlags(@NativeType("VkVideoEncodeH264OutputModeFlagsEXT") int value) { VkVideoEncodeH264CapabilitiesEXT.noutputModeFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#maxPPictureL0ReferenceCount} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer maxPPictureL0ReferenceCount(@NativeType("uint8_t") byte value) { VkVideoEncodeH264CapabilitiesEXT.nmaxPPictureL0ReferenceCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#maxBPictureL0ReferenceCount} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer maxBPictureL0ReferenceCount(@NativeType("uint8_t") byte value) { VkVideoEncodeH264CapabilitiesEXT.nmaxBPictureL0ReferenceCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#maxL1ReferenceCount} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer maxL1ReferenceCount(@NativeType("uint8_t") byte value) { VkVideoEncodeH264CapabilitiesEXT.nmaxL1ReferenceCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#motionVectorsOverPicBoundariesFlag} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer motionVectorsOverPicBoundariesFlag(@NativeType("VkBool32") boolean value) { VkVideoEncodeH264CapabilitiesEXT.nmotionVectorsOverPicBoundariesFlag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#maxBytesPerPicDenom} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer maxBytesPerPicDenom(@NativeType("uint32_t") int value) { VkVideoEncodeH264CapabilitiesEXT.nmaxBytesPerPicDenom(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#maxBitsPerMbDenom} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer maxBitsPerMbDenom(@NativeType("uint32_t") int value) { VkVideoEncodeH264CapabilitiesEXT.nmaxBitsPerMbDenom(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#log2MaxMvLengthHorizontal} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer log2MaxMvLengthHorizontal(@NativeType("uint32_t") int value) { VkVideoEncodeH264CapabilitiesEXT.nlog2MaxMvLengthHorizontal(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesEXT#log2MaxMvLengthVertical} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer log2MaxMvLengthVertical(@NativeType("uint32_t") int value) { VkVideoEncodeH264CapabilitiesEXT.nlog2MaxMvLengthVertical(address(), value); return this; }
-        /** Copies the specified {@link VkExtensionProperties} to the {@link VkVideoEncodeH264CapabilitiesEXT#stdExtensionVersion} field. */
-        public VkVideoEncodeH264CapabilitiesEXT.Buffer stdExtensionVersion(VkExtensionProperties value) { VkVideoEncodeH264CapabilitiesEXT.nstdExtensionVersion(address(), value); return this; }
+        public VkVideoEncodeH264CapabilitiesEXT.Buffer pNext(@NativeType("void *") long value) { VkVideoEncodeH264CapabilitiesEXT.npNext(address(), value); return this; }
 
     }
 

@@ -501,7 +501,7 @@ public class VK13 extends VK12 {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>Implementations are encouraged to provide a meaningful signal to applications using this bit. The intention is to communicate to the application that the pipeline or pipeline stage was created "as fast as it gets" using the pipeline cache provided by the application. If an implementation uses an internal cache, it is discouraged from setting this bit as the feedback would be unactionable.</p>
+     * <p>Implementations are encouraged to provide a meaningful signal to applications using this bit. The intention is to communicate to the application that the pipeline or pipeline stage was created “{@code as fast as it gets}” using the pipeline cache provided by the application. If an implementation uses an internal cache, it is discouraged from setting this bit as the feedback would be unactionable.</p>
      * </div>
      * </li>
      * <li>{@link #VK_PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT PIPELINE_CREATION_FEEDBACK_BASE_PIPELINE_ACCELERATION_BIT} indicates that the base pipeline specified by the {@code basePipelineHandle} or {@code basePipelineIndex} member of the stext:Vk*PipelineCreateInfo structure was used to accelerate the creation of the pipeline.
@@ -509,7 +509,7 @@ public class VK13 extends VK12 {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>While "significant amount of work" is subjective, implementations are encouraged to provide a meaningful signal to applications using this bit. For example, a 1% reduction in duration may not warrant setting this bit, while a 50% reduction would.</p>
+     * <p>While “{@code significant amount of work}” is subjective, implementations are encouraged to provide a meaningful signal to applications using this bit. For example, a 1% reduction in duration may not warrant setting this bit, while a 50% reduction would.</p>
      * </div>
      * </li>
      * </ul>
@@ -596,10 +596,12 @@ public class VK13 extends VK12 {
      * <li>{@link #VK_PIPELINE_STAGE_2_BLIT_BIT PIPELINE_STAGE_2_BLIT_BIT}</li>
      * <li>{@link #VK_PIPELINE_STAGE_2_RESOLVE_BIT PIPELINE_STAGE_2_RESOLVE_BIT}</li>
      * <li>{@link #VK_PIPELINE_STAGE_2_CLEAR_BIT PIPELINE_STAGE_2_CLEAR_BIT}</li>
+     * <li>{@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR}</li>
      * </ul>
      * </li>
      * <li>{@link KHRSynchronization2#VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR} specifies the execution of the ray tracing shader stages.</li>
      * <li>{@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR} specifies the execution of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#acceleration-structure">acceleration structure commands</a>.</li>
+     * <li>{@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR} specifies the execution of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#acceleration-structure-copying">acceleration structure copy commands</a>.</li>
      * <li>{@link #VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT} specifies the execution of all graphics pipeline stages, and is equivalent to the logical OR of:
      * 
      * <ul>
@@ -689,12 +691,14 @@ public class VK13 extends VK12 {
      * <li>{@link #VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT ACCESS_2_INPUT_ATTACHMENT_READ_BIT} specifies read access to an <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass">input attachment</a> within a render pass during subpass shading or fragment shading. Such access occurs in the {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI} or {@link #VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT} pipeline stage.</li>
      * <li>{@link #VK_ACCESS_2_SHADER_SAMPLED_READ_BIT ACCESS_2_SHADER_SAMPLED_READ_BIT} specifies read access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-uniformtexelbuffer">uniform texel buffer</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-sampledimage">sampled image</a> in any shader pipeline stage.</li>
      * <li>{@link #VK_ACCESS_2_SHADER_STORAGE_READ_BIT ACCESS_2_SHADER_STORAGE_READ_BIT} specifies read access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storagebuffer">storage buffer</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-physical-storage-buffer">physical storage buffer</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storagetexelbuffer">storage texel buffer</a>, or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storageimage">storage image</a> in any shader pipeline stage.</li>
-     * <li>{@link #VK_ACCESS_2_SHADER_READ_BIT ACCESS_2_SHADER_READ_BIT} specifies read access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#shader-binding-table">shader binding table</a> in any shader pipeline. In addition, it is equivalent to the logical OR of:
+     * <li>{@link KHRRayTracingMaintenance1#VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR} specifies read access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#shader-binding-table">shader binding table</a> in any shader pipeline stage.</li>
+     * <li>{@link #VK_ACCESS_2_SHADER_READ_BIT ACCESS_2_SHADER_READ_BIT} is equivalent to the logical OR of:
      * 
      * <ul>
      * <li>{@link #VK_ACCESS_2_UNIFORM_READ_BIT ACCESS_2_UNIFORM_READ_BIT}</li>
      * <li>{@link #VK_ACCESS_2_SHADER_SAMPLED_READ_BIT ACCESS_2_SHADER_SAMPLED_READ_BIT}</li>
      * <li>{@link #VK_ACCESS_2_SHADER_STORAGE_READ_BIT ACCESS_2_SHADER_STORAGE_READ_BIT}</li>
+     * <li>{@link KHRRayTracingMaintenance1#VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR}</li>
      * </ul>
      * </li>
      * <li>{@link #VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT ACCESS_2_SHADER_STORAGE_WRITE_BIT} specifies write access to a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storagebuffer">storage buffer</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-physical-storage-buffer">physical storage buffer</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storagetexelbuffer">storage texel buffer</a>, or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storageimage">storage image</a> in any shader pipeline stage.</li>
@@ -826,7 +830,7 @@ public class VK13 extends VK12 {
      * <li>{@link KHRVideoEncodeQueue#VK_FORMAT_FEATURE_2_VIDEO_ENCODE_DPB_BIT_KHR FORMAT_FEATURE_2_VIDEO_ENCODE_DPB_BIT_KHR} specifies that an image view with this format <b>can</b> be used as a DPB for <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#video-encode-operations">video encode operations</a></li>
      * <li>{@link #VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT} specifies that image views created with this format <b>can</b> be used as <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storageimage">storage images</a> for read operations without specifying a format.</li>
      * <li>{@link #VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT} specifies that image views created with this format <b>can</b> be used as <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storageimage">storage images</a> for write operations without specifying a format.</li>
-     * <li>{@link #VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT} specifies that image views created with this format <b>can</b> be used for depth comparison performed by {@code OpImage*Dref} instructions.</li>
+     * <li>{@link #VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT} specifies that image views created with this format <b>can</b> be used for depth comparison performed by {@code OpImage*Dref*} instructions.</li>
      * <li>{@link NVLinearColorAttachment#VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV} specifies that the format is supported as a renderable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#glossary">Linear Color Attachment</a>. This bit will be set for renderable color formats in the {@code linearTilingFeatures}. This <b>must</b> not be set in the {@code optimalTilingFeatures} or {@code bufferFeatures} members.</li>
      * </ul>
      * 
@@ -1654,7 +1658,7 @@ public class VK13 extends VK12 {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To request a timestamp, call:</p>
+     * <p>To request a timestamp and write the value to memory, call:</p>
      * 
      * <pre><code>
      * void vkCmdWriteTimestamp2(
@@ -1684,7 +1688,7 @@ public class VK13 extends VK12 {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>If an implementation is unable to detect completion and latch the timer at any specific stage of the pipeline, it <b>may</b> instead do so at any logically later stage.</p>
+     * <p>If an implementation is unable to detect completion and latch the timer immediately after {@code stage} has completed, it <b>may</b> instead do so at any logically later stage.</p>
      * </div>
      * 
      * <p>Comparisons between timestamps are not meaningful if the timestamps are written by commands submitted to different queues.</p>
@@ -3120,7 +3124,7 @@ public class VK13 extends VK12 {
      * </table>
      *
      * @param commandBuffer  the command buffer into which the command will be recorded.
-     * @param depthCompareOp specifies the depth comparison operator.
+     * @param depthCompareOp a {@code VkCompareOp} value specifying the comparison operator used for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth-comparison">Depth Comparison</a> step of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth">depth test</a>.
      */
     public static void vkCmdSetDepthCompareOp(VkCommandBuffer commandBuffer, @NativeType("VkCompareOp") int depthCompareOp) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetDepthCompareOp;

@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@code pVideoProfiles} provided in input structure {@code pVideoFormatInfo} are not supported, {@link VK10#VK_ERROR_FORMAT_NOT_SUPPORTED ERROR_FORMAT_NOT_SUPPORTED} is returned. If the implementation requires an opaque video decode or encode DPB, then when querying with the corresponding video decode or encode DPB image usage in {@code imageUsage}, only one image format is returned: {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}.</p>
+ * <p>If the {@code pVideoProfiles} or {@code imageUsage} provided in input structure {@code pVideoFormatInfo} are not supported, {@link VK10#VK_ERROR_FORMAT_NOT_SUPPORTED ERROR_FORMAT_NOT_SUPPORTED} is returned.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

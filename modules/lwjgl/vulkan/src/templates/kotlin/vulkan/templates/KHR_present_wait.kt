@@ -130,6 +130,7 @@ val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type =
             <dd><ul>
                 <li>#SUCCESS</li>
                 <li>#TIMEOUT</li>
+                <li>#SUBOPTIMAL_KHR</li>
             </ul></dd>
 
             <dt>On failure, this command returns</dt>
@@ -137,6 +138,9 @@ val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type =
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
                 <li>#ERROR_DEVICE_LOST</li>
+                <li>#ERROR_OUT_OF_DATE_KHR</li>
+                <li>#ERROR_SURFACE_LOST_KHR</li>
+                <li>#ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT</li>
             </ul></dd>
         </dl>
         """,

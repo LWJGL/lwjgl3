@@ -19,6 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of decoding a frame.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>The coded size of the decode operation is specified in {@code codedExtent} of {@code dstPictureResource}.</p>
+ * 
+ * <p>The coded offset of the decode operation is specified in {@code codedOffset} of {@code dstPictureResource}. The purpose of this field is interpreted based on the codec extension. When decoding content in H.264 field mode, {@code codedOffset} specifies the line or picture field’s offset within the image.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -34,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkExtent2D}, {@link VkOffset2D}, {@link VkVideoPictureResourceKHR}, {@link VkVideoReferenceSlotKHR}, {@link KHRVideoDecodeQueue#vkCmdDecodeVideoKHR CmdDecodeVideoKHR}</p>
+ * <p>{@link VkVideoPictureResourceKHR}, {@link VkVideoReferenceSlotKHR}, {@link KHRVideoDecodeQueue#vkCmdDecodeVideoKHR CmdDecodeVideoKHR}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -43,8 +49,6 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
  *     VkVideoDecodeFlagsKHR {@link #flags};
- *     {@link VkOffset2D VkOffset2D} {@link #codedOffset};
- *     {@link VkExtent2D VkExtent2D} {@link #codedExtent};
  *     VkBuffer {@link #srcBuffer};
  *     VkDeviceSize {@link #srcBufferOffset};
  *     VkDeviceSize {@link #srcBufferRange};
@@ -67,8 +71,6 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         STYPE,
         PNEXT,
         FLAGS,
-        CODEDOFFSET,
-        CODEDEXTENT,
         SRCBUFFER,
         SRCBUFFEROFFSET,
         SRCBUFFERRANGE,
@@ -82,8 +84,6 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
             __member(4),
             __member(POINTER_SIZE),
             __member(4),
-            __member(VkOffset2D.SIZEOF, VkOffset2D.ALIGNOF),
-            __member(VkExtent2D.SIZEOF, VkExtent2D.ALIGNOF),
             __member(8),
             __member(8),
             __member(8),
@@ -99,15 +99,13 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         FLAGS = layout.offsetof(2);
-        CODEDOFFSET = layout.offsetof(3);
-        CODEDEXTENT = layout.offsetof(4);
-        SRCBUFFER = layout.offsetof(5);
-        SRCBUFFEROFFSET = layout.offsetof(6);
-        SRCBUFFERRANGE = layout.offsetof(7);
-        DSTPICTURERESOURCE = layout.offsetof(8);
-        PSETUPREFERENCESLOT = layout.offsetof(9);
-        REFERENCESLOTCOUNT = layout.offsetof(10);
-        PREFERENCESLOTS = layout.offsetof(11);
+        SRCBUFFER = layout.offsetof(3);
+        SRCBUFFEROFFSET = layout.offsetof(4);
+        SRCBUFFERRANGE = layout.offsetof(5);
+        DSTPICTURERESOURCE = layout.offsetof(6);
+        PSETUPREFERENCESLOT = layout.offsetof(7);
+        REFERENCESLOTCOUNT = layout.offsetof(8);
+        PREFERENCESLOTS = layout.offsetof(9);
     }
 
     /**
@@ -132,10 +130,6 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     /** a bitmask of {@code VkVideoDecodeFlagBitsKHR} specifying decode flags, reserved for future versions of this specification. */
     @NativeType("VkVideoDecodeFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** the coded offset of the decode operations. The purpose of this field is interpreted based on the codec extension. When decoding content in H.264 field mode, the {@code codedOffset} specifies the line or picture field’s offset within the image. */
-    public VkOffset2D codedOffset() { return ncodedOffset(address()); }
-    /** the coded size of the decode operations. */
-    public VkExtent2D codedExtent() { return ncodedExtent(address()); }
     /** the source buffer that holds the encoded bitstream. */
     @NativeType("VkBuffer")
     public long srcBuffer() { return nsrcBuffer(address()); }
@@ -170,14 +164,6 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH265PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkVideoDecodeInfoKHR flags(@NativeType("VkVideoDecodeFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Copies the specified {@link VkOffset2D} to the {@link #codedOffset} field. */
-    public VkVideoDecodeInfoKHR codedOffset(VkOffset2D value) { ncodedOffset(address(), value); return this; }
-    /** Passes the {@link #codedOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkVideoDecodeInfoKHR codedOffset(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(codedOffset()); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@link #codedExtent} field. */
-    public VkVideoDecodeInfoKHR codedExtent(VkExtent2D value) { ncodedExtent(address(), value); return this; }
-    /** Passes the {@link #codedExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public VkVideoDecodeInfoKHR codedExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(codedExtent()); return this; }
     /** Sets the specified value to the {@link #srcBuffer} field. */
     public VkVideoDecodeInfoKHR srcBuffer(@NativeType("VkBuffer") long value) { nsrcBuffer(address(), value); return this; }
     /** Sets the specified value to the {@link #srcBufferOffset} field. */
@@ -198,8 +184,6 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         int sType,
         long pNext,
         int flags,
-        VkOffset2D codedOffset,
-        VkExtent2D codedExtent,
         long srcBuffer,
         long srcBufferOffset,
         long srcBufferRange,
@@ -210,8 +194,6 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         sType(sType);
         pNext(pNext);
         flags(flags);
-        codedOffset(codedOffset);
-        codedExtent(codedExtent);
         srcBuffer(srcBuffer);
         srcBufferOffset(srcBufferOffset);
         srcBufferRange(srcBufferRange);
@@ -353,10 +335,6 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeInfoKHR.PNEXT); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeInfoKHR.FLAGS); }
-    /** Unsafe version of {@link #codedOffset}. */
-    public static VkOffset2D ncodedOffset(long struct) { return VkOffset2D.create(struct + VkVideoDecodeInfoKHR.CODEDOFFSET); }
-    /** Unsafe version of {@link #codedExtent}. */
-    public static VkExtent2D ncodedExtent(long struct) { return VkExtent2D.create(struct + VkVideoDecodeInfoKHR.CODEDEXTENT); }
     /** Unsafe version of {@link #srcBuffer}. */
     public static long nsrcBuffer(long struct) { return UNSAFE.getLong(null, struct + VkVideoDecodeInfoKHR.SRCBUFFER); }
     /** Unsafe version of {@link #srcBufferOffset}. */
@@ -378,10 +356,6 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeInfoKHR.PNEXT, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeInfoKHR.FLAGS, value); }
-    /** Unsafe version of {@link #codedOffset(VkOffset2D) codedOffset}. */
-    public static void ncodedOffset(long struct, VkOffset2D value) { memCopy(value.address(), struct + VkVideoDecodeInfoKHR.CODEDOFFSET, VkOffset2D.SIZEOF); }
-    /** Unsafe version of {@link #codedExtent(VkExtent2D) codedExtent}. */
-    public static void ncodedExtent(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkVideoDecodeInfoKHR.CODEDEXTENT, VkExtent2D.SIZEOF); }
     /** Unsafe version of {@link #srcBuffer(long) srcBuffer}. */
     public static void nsrcBuffer(long struct, long value) { UNSAFE.putLong(null, struct + VkVideoDecodeInfoKHR.SRCBUFFER, value); }
     /** Unsafe version of {@link #srcBufferOffset(long) srcBufferOffset}. */
@@ -461,10 +435,6 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         /** @return the value of the {@link VkVideoDecodeInfoKHR#flags} field. */
         @NativeType("VkVideoDecodeFlagsKHR")
         public int flags() { return VkVideoDecodeInfoKHR.nflags(address()); }
-        /** @return a {@link VkOffset2D} view of the {@link VkVideoDecodeInfoKHR#codedOffset} field. */
-        public VkOffset2D codedOffset() { return VkVideoDecodeInfoKHR.ncodedOffset(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoDecodeInfoKHR#codedExtent} field. */
-        public VkExtent2D codedExtent() { return VkVideoDecodeInfoKHR.ncodedExtent(address()); }
         /** @return the value of the {@link VkVideoDecodeInfoKHR#srcBuffer} field. */
         @NativeType("VkBuffer")
         public long srcBuffer() { return VkVideoDecodeInfoKHR.nsrcBuffer(address()); }
@@ -499,14 +469,6 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH265PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#flags} field. */
         public VkVideoDecodeInfoKHR.Buffer flags(@NativeType("VkVideoDecodeFlagsKHR") int value) { VkVideoDecodeInfoKHR.nflags(address(), value); return this; }
-        /** Copies the specified {@link VkOffset2D} to the {@link VkVideoDecodeInfoKHR#codedOffset} field. */
-        public VkVideoDecodeInfoKHR.Buffer codedOffset(VkOffset2D value) { VkVideoDecodeInfoKHR.ncodedOffset(address(), value); return this; }
-        /** Passes the {@link VkVideoDecodeInfoKHR#codedOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkVideoDecodeInfoKHR.Buffer codedOffset(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(codedOffset()); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@link VkVideoDecodeInfoKHR#codedExtent} field. */
-        public VkVideoDecodeInfoKHR.Buffer codedExtent(VkExtent2D value) { VkVideoDecodeInfoKHR.ncodedExtent(address(), value); return this; }
-        /** Passes the {@link VkVideoDecodeInfoKHR#codedExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public VkVideoDecodeInfoKHR.Buffer codedExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(codedExtent()); return this; }
         /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#srcBuffer} field. */
         public VkVideoDecodeInfoKHR.Buffer srcBuffer(@NativeType("VkBuffer") long value) { VkVideoDecodeInfoKHR.nsrcBuffer(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#srcBufferOffset} field. */

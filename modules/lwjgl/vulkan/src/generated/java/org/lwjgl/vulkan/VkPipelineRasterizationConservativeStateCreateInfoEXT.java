@@ -18,6 +18,17 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying conservative raster state.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If this structure is not included in the {@code pNext} chain, {@code conservativeRasterizationMode} is considered to be {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT}, and and conservative rasterization is disabled.</p>
+ * 
+ * <p>Polygon rasterization <b>can</b> be made conservative by setting {@code conservativeRasterizationMode} to {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT} or {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT} in {@link VkPipelineRasterizationConservativeStateCreateInfoEXT}.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-conservativePointAndLineRasterization">{@code conservativePointAndLineRasterization}</a> is supported, conservative rasterization can be applied to line and point primitives, otherwise it must be disabled.</p>
+ * </div>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
@@ -103,7 +114,7 @@ public class VkPipelineRasterizationConservativeStateCreateInfoEXT extends Struc
     /** the conservative rasterization mode to use. */
     @NativeType("VkConservativeRasterizationModeEXT")
     public int conservativeRasterizationMode() { return nconservativeRasterizationMode(address()); }
-    /** the extra size in pixels to increase the generating primitive during conservative rasterization at each of its edges in {@code X} and {@code Y} equally in screen space beyond the base overestimation specified in {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::primitiveOverestimationSize}. */
+    /** the extra size in pixels to increase the generating primitive during conservative rasterization at each of its edges in {@code X} and {@code Y} equally in screen space beyond the base overestimation specified in {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT}{@code ::primitiveOverestimationSize}. If {@code conservativeRasterizationMode} is not {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT}, this value is ignored. */
     public float extraPrimitiveOverestimationSize() { return nextraPrimitiveOverestimationSize(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

@@ -21,6 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct StdVideoH265SequenceParameterSetVui {
+ *     {@link StdVideoH265SpsVuiFlags StdVideoH265SpsVuiFlags} flags;
  *     uint8_t aspect_ratio_idc;
  *     uint16_t sar_width;
  *     uint16_t sar_height;
@@ -37,13 +38,12 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t vui_num_units_in_tick;
  *     uint32_t vui_time_scale;
  *     uint32_t vui_num_ticks_poc_diff_one_minus1;
- *     {@link StdVideoH265HrdParameters StdVideoH265HrdParameters} * pHrdParameters;
+ *     {@link StdVideoH265HrdParameters StdVideoH265HrdParameters} const * pHrdParameters;
  *     uint16_t min_spatial_segmentation_idc;
  *     uint8_t max_bytes_per_pic_denom;
  *     uint8_t max_bits_per_min_cu_denom;
  *     uint8_t log2_max_mv_length_horizontal;
  *     uint8_t log2_max_mv_length_vertical;
- *     {@link StdVideoH265SpsVuiFlags StdVideoH265SpsVuiFlags} flags;
  * }</code></pre>
  */
 public class StdVideoH265SequenceParameterSetVui extends Struct implements NativeResource {
@@ -56,6 +56,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
 
     /** The struct member offsets. */
     public static final int
+        FLAGS,
         ASPECT_RATIO_IDC,
         SAR_WIDTH,
         SAR_HEIGHT,
@@ -77,11 +78,11 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         MAX_BYTES_PER_PIC_DENOM,
         MAX_BITS_PER_MIN_CU_DENOM,
         LOG2_MAX_MV_LENGTH_HORIZONTAL,
-        LOG2_MAX_MV_LENGTH_VERTICAL,
-        FLAGS;
+        LOG2_MAX_MV_LENGTH_VERTICAL;
 
     static {
         Layout layout = __struct(
+            __member(StdVideoH265SpsVuiFlags.SIZEOF, StdVideoH265SpsVuiFlags.ALIGNOF),
             __member(1),
             __member(2),
             __member(2),
@@ -103,36 +104,35 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
             __member(1),
             __member(1),
             __member(1),
-            __member(1),
-            __member(StdVideoH265SpsVuiFlags.SIZEOF, StdVideoH265SpsVuiFlags.ALIGNOF)
+            __member(1)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        ASPECT_RATIO_IDC = layout.offsetof(0);
-        SAR_WIDTH = layout.offsetof(1);
-        SAR_HEIGHT = layout.offsetof(2);
-        VIDEO_FORMAT = layout.offsetof(3);
-        COLOUR_PRIMARIES = layout.offsetof(4);
-        TRANSFER_CHARACTERISTICS = layout.offsetof(5);
-        MATRIX_COEFFS = layout.offsetof(6);
-        CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD = layout.offsetof(7);
-        CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD = layout.offsetof(8);
-        DEF_DISP_WIN_LEFT_OFFSET = layout.offsetof(9);
-        DEF_DISP_WIN_RIGHT_OFFSET = layout.offsetof(10);
-        DEF_DISP_WIN_TOP_OFFSET = layout.offsetof(11);
-        DEF_DISP_WIN_BOTTOM_OFFSET = layout.offsetof(12);
-        VUI_NUM_UNITS_IN_TICK = layout.offsetof(13);
-        VUI_TIME_SCALE = layout.offsetof(14);
-        VUI_NUM_TICKS_POC_DIFF_ONE_MINUS1 = layout.offsetof(15);
-        PHRDPARAMETERS = layout.offsetof(16);
-        MIN_SPATIAL_SEGMENTATION_IDC = layout.offsetof(17);
-        MAX_BYTES_PER_PIC_DENOM = layout.offsetof(18);
-        MAX_BITS_PER_MIN_CU_DENOM = layout.offsetof(19);
-        LOG2_MAX_MV_LENGTH_HORIZONTAL = layout.offsetof(20);
-        LOG2_MAX_MV_LENGTH_VERTICAL = layout.offsetof(21);
-        FLAGS = layout.offsetof(22);
+        FLAGS = layout.offsetof(0);
+        ASPECT_RATIO_IDC = layout.offsetof(1);
+        SAR_WIDTH = layout.offsetof(2);
+        SAR_HEIGHT = layout.offsetof(3);
+        VIDEO_FORMAT = layout.offsetof(4);
+        COLOUR_PRIMARIES = layout.offsetof(5);
+        TRANSFER_CHARACTERISTICS = layout.offsetof(6);
+        MATRIX_COEFFS = layout.offsetof(7);
+        CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD = layout.offsetof(8);
+        CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD = layout.offsetof(9);
+        DEF_DISP_WIN_LEFT_OFFSET = layout.offsetof(10);
+        DEF_DISP_WIN_RIGHT_OFFSET = layout.offsetof(11);
+        DEF_DISP_WIN_TOP_OFFSET = layout.offsetof(12);
+        DEF_DISP_WIN_BOTTOM_OFFSET = layout.offsetof(13);
+        VUI_NUM_UNITS_IN_TICK = layout.offsetof(14);
+        VUI_TIME_SCALE = layout.offsetof(15);
+        VUI_NUM_TICKS_POC_DIFF_ONE_MINUS1 = layout.offsetof(16);
+        PHRDPARAMETERS = layout.offsetof(17);
+        MIN_SPATIAL_SEGMENTATION_IDC = layout.offsetof(18);
+        MAX_BYTES_PER_PIC_DENOM = layout.offsetof(19);
+        MAX_BITS_PER_MIN_CU_DENOM = layout.offsetof(20);
+        LOG2_MAX_MV_LENGTH_HORIZONTAL = layout.offsetof(21);
+        LOG2_MAX_MV_LENGTH_VERTICAL = layout.offsetof(22);
     }
 
     /**
@@ -148,6 +148,8 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** @return a {@link StdVideoH265SpsVuiFlags} view of the {@code flags} field. */
+    public StdVideoH265SpsVuiFlags flags() { return nflags(address()); }
     /** @return the value of the {@code aspect_ratio_idc} field. */
     @NativeType("uint8_t")
     public byte aspect_ratio_idc() { return naspect_ratio_idc(address()); }
@@ -197,7 +199,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
     @NativeType("uint32_t")
     public int vui_num_ticks_poc_diff_one_minus1() { return nvui_num_ticks_poc_diff_one_minus1(address()); }
     /** @return a {@link StdVideoH265HrdParameters} view of the struct pointed to by the {@code pHrdParameters} field. */
-    @NativeType("StdVideoH265HrdParameters *")
+    @NativeType("StdVideoH265HrdParameters const *")
     public StdVideoH265HrdParameters pHrdParameters() { return npHrdParameters(address()); }
     /** @return the value of the {@code min_spatial_segmentation_idc} field. */
     @NativeType("uint16_t")
@@ -214,9 +216,11 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
     /** @return the value of the {@code log2_max_mv_length_vertical} field. */
     @NativeType("uint8_t")
     public byte log2_max_mv_length_vertical() { return nlog2_max_mv_length_vertical(address()); }
-    /** @return a {@link StdVideoH265SpsVuiFlags} view of the {@code flags} field. */
-    public StdVideoH265SpsVuiFlags flags() { return nflags(address()); }
 
+    /** Copies the specified {@link StdVideoH265SpsVuiFlags} to the {@code flags} field. */
+    public StdVideoH265SequenceParameterSetVui flags(StdVideoH265SpsVuiFlags value) { nflags(address(), value); return this; }
+    /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public StdVideoH265SequenceParameterSetVui flags(java.util.function.Consumer<StdVideoH265SpsVuiFlags> consumer) { consumer.accept(flags()); return this; }
     /** Sets the specified value to the {@code aspect_ratio_idc} field. */
     public StdVideoH265SequenceParameterSetVui aspect_ratio_idc(@NativeType("uint8_t") byte value) { naspect_ratio_idc(address(), value); return this; }
     /** Sets the specified value to the {@code sar_width} field. */
@@ -250,7 +254,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
     /** Sets the specified value to the {@code vui_num_ticks_poc_diff_one_minus1} field. */
     public StdVideoH265SequenceParameterSetVui vui_num_ticks_poc_diff_one_minus1(@NativeType("uint32_t") int value) { nvui_num_ticks_poc_diff_one_minus1(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoH265HrdParameters} to the {@code pHrdParameters} field. */
-    public StdVideoH265SequenceParameterSetVui pHrdParameters(@NativeType("StdVideoH265HrdParameters *") StdVideoH265HrdParameters value) { npHrdParameters(address(), value); return this; }
+    public StdVideoH265SequenceParameterSetVui pHrdParameters(@NativeType("StdVideoH265HrdParameters const *") StdVideoH265HrdParameters value) { npHrdParameters(address(), value); return this; }
     /** Sets the specified value to the {@code min_spatial_segmentation_idc} field. */
     public StdVideoH265SequenceParameterSetVui min_spatial_segmentation_idc(@NativeType("uint16_t") short value) { nmin_spatial_segmentation_idc(address(), value); return this; }
     /** Sets the specified value to the {@code max_bytes_per_pic_denom} field. */
@@ -261,13 +265,10 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
     public StdVideoH265SequenceParameterSetVui log2_max_mv_length_horizontal(@NativeType("uint8_t") byte value) { nlog2_max_mv_length_horizontal(address(), value); return this; }
     /** Sets the specified value to the {@code log2_max_mv_length_vertical} field. */
     public StdVideoH265SequenceParameterSetVui log2_max_mv_length_vertical(@NativeType("uint8_t") byte value) { nlog2_max_mv_length_vertical(address(), value); return this; }
-    /** Copies the specified {@link StdVideoH265SpsVuiFlags} to the {@code flags} field. */
-    public StdVideoH265SequenceParameterSetVui flags(StdVideoH265SpsVuiFlags value) { nflags(address(), value); return this; }
-    /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public StdVideoH265SequenceParameterSetVui flags(java.util.function.Consumer<StdVideoH265SpsVuiFlags> consumer) { consumer.accept(flags()); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoH265SequenceParameterSetVui set(
+        StdVideoH265SpsVuiFlags flags,
         byte aspect_ratio_idc,
         short sar_width,
         short sar_height,
@@ -289,9 +290,9 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         byte max_bytes_per_pic_denom,
         byte max_bits_per_min_cu_denom,
         byte log2_max_mv_length_horizontal,
-        byte log2_max_mv_length_vertical,
-        StdVideoH265SpsVuiFlags flags
+        byte log2_max_mv_length_vertical
     ) {
+        flags(flags);
         aspect_ratio_idc(aspect_ratio_idc);
         sar_width(sar_width);
         sar_height(sar_height);
@@ -314,7 +315,6 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         max_bits_per_min_cu_denom(max_bits_per_min_cu_denom);
         log2_max_mv_length_horizontal(log2_max_mv_length_horizontal);
         log2_max_mv_length_vertical(log2_max_mv_length_vertical);
-        flags(flags);
 
         return this;
     }
@@ -444,6 +444,8 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #flags}. */
+    public static StdVideoH265SpsVuiFlags nflags(long struct) { return StdVideoH265SpsVuiFlags.create(struct + StdVideoH265SequenceParameterSetVui.FLAGS); }
     /** Unsafe version of {@link #aspect_ratio_idc}. */
     public static byte naspect_ratio_idc(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265SequenceParameterSetVui.ASPECT_RATIO_IDC); }
     /** Unsafe version of {@link #sar_width}. */
@@ -488,9 +490,9 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
     public static byte nlog2_max_mv_length_horizontal(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265SequenceParameterSetVui.LOG2_MAX_MV_LENGTH_HORIZONTAL); }
     /** Unsafe version of {@link #log2_max_mv_length_vertical}. */
     public static byte nlog2_max_mv_length_vertical(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265SequenceParameterSetVui.LOG2_MAX_MV_LENGTH_VERTICAL); }
-    /** Unsafe version of {@link #flags}. */
-    public static StdVideoH265SpsVuiFlags nflags(long struct) { return StdVideoH265SpsVuiFlags.create(struct + StdVideoH265SequenceParameterSetVui.FLAGS); }
 
+    /** Unsafe version of {@link #flags(StdVideoH265SpsVuiFlags) flags}. */
+    public static void nflags(long struct, StdVideoH265SpsVuiFlags value) { memCopy(value.address(), struct + StdVideoH265SequenceParameterSetVui.FLAGS, StdVideoH265SpsVuiFlags.SIZEOF); }
     /** Unsafe version of {@link #aspect_ratio_idc(byte) aspect_ratio_idc}. */
     public static void naspect_ratio_idc(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265SequenceParameterSetVui.ASPECT_RATIO_IDC, value); }
     /** Unsafe version of {@link #sar_width(short) sar_width}. */
@@ -535,8 +537,6 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
     public static void nlog2_max_mv_length_horizontal(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265SequenceParameterSetVui.LOG2_MAX_MV_LENGTH_HORIZONTAL, value); }
     /** Unsafe version of {@link #log2_max_mv_length_vertical(byte) log2_max_mv_length_vertical}. */
     public static void nlog2_max_mv_length_vertical(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265SequenceParameterSetVui.LOG2_MAX_MV_LENGTH_VERTICAL, value); }
-    /** Unsafe version of {@link #flags(StdVideoH265SpsVuiFlags) flags}. */
-    public static void nflags(long struct, StdVideoH265SpsVuiFlags value) { memCopy(value.address(), struct + StdVideoH265SequenceParameterSetVui.FLAGS, StdVideoH265SpsVuiFlags.SIZEOF); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -587,6 +587,8 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
+        /** @return a {@link StdVideoH265SpsVuiFlags} view of the {@code flags} field. */
+        public StdVideoH265SpsVuiFlags flags() { return StdVideoH265SequenceParameterSetVui.nflags(address()); }
         /** @return the value of the {@code aspect_ratio_idc} field. */
         @NativeType("uint8_t")
         public byte aspect_ratio_idc() { return StdVideoH265SequenceParameterSetVui.naspect_ratio_idc(address()); }
@@ -636,7 +638,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         @NativeType("uint32_t")
         public int vui_num_ticks_poc_diff_one_minus1() { return StdVideoH265SequenceParameterSetVui.nvui_num_ticks_poc_diff_one_minus1(address()); }
         /** @return a {@link StdVideoH265HrdParameters} view of the struct pointed to by the {@code pHrdParameters} field. */
-        @NativeType("StdVideoH265HrdParameters *")
+        @NativeType("StdVideoH265HrdParameters const *")
         public StdVideoH265HrdParameters pHrdParameters() { return StdVideoH265SequenceParameterSetVui.npHrdParameters(address()); }
         /** @return the value of the {@code min_spatial_segmentation_idc} field. */
         @NativeType("uint16_t")
@@ -653,9 +655,11 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         /** @return the value of the {@code log2_max_mv_length_vertical} field. */
         @NativeType("uint8_t")
         public byte log2_max_mv_length_vertical() { return StdVideoH265SequenceParameterSetVui.nlog2_max_mv_length_vertical(address()); }
-        /** @return a {@link StdVideoH265SpsVuiFlags} view of the {@code flags} field. */
-        public StdVideoH265SpsVuiFlags flags() { return StdVideoH265SequenceParameterSetVui.nflags(address()); }
 
+        /** Copies the specified {@link StdVideoH265SpsVuiFlags} to the {@code flags} field. */
+        public StdVideoH265SequenceParameterSetVui.Buffer flags(StdVideoH265SpsVuiFlags value) { StdVideoH265SequenceParameterSetVui.nflags(address(), value); return this; }
+        /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public StdVideoH265SequenceParameterSetVui.Buffer flags(java.util.function.Consumer<StdVideoH265SpsVuiFlags> consumer) { consumer.accept(flags()); return this; }
         /** Sets the specified value to the {@code aspect_ratio_idc} field. */
         public StdVideoH265SequenceParameterSetVui.Buffer aspect_ratio_idc(@NativeType("uint8_t") byte value) { StdVideoH265SequenceParameterSetVui.naspect_ratio_idc(address(), value); return this; }
         /** Sets the specified value to the {@code sar_width} field. */
@@ -689,7 +693,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         /** Sets the specified value to the {@code vui_num_ticks_poc_diff_one_minus1} field. */
         public StdVideoH265SequenceParameterSetVui.Buffer vui_num_ticks_poc_diff_one_minus1(@NativeType("uint32_t") int value) { StdVideoH265SequenceParameterSetVui.nvui_num_ticks_poc_diff_one_minus1(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoH265HrdParameters} to the {@code pHrdParameters} field. */
-        public StdVideoH265SequenceParameterSetVui.Buffer pHrdParameters(@NativeType("StdVideoH265HrdParameters *") StdVideoH265HrdParameters value) { StdVideoH265SequenceParameterSetVui.npHrdParameters(address(), value); return this; }
+        public StdVideoH265SequenceParameterSetVui.Buffer pHrdParameters(@NativeType("StdVideoH265HrdParameters const *") StdVideoH265HrdParameters value) { StdVideoH265SequenceParameterSetVui.npHrdParameters(address(), value); return this; }
         /** Sets the specified value to the {@code min_spatial_segmentation_idc} field. */
         public StdVideoH265SequenceParameterSetVui.Buffer min_spatial_segmentation_idc(@NativeType("uint16_t") short value) { StdVideoH265SequenceParameterSetVui.nmin_spatial_segmentation_idc(address(), value); return this; }
         /** Sets the specified value to the {@code max_bytes_per_pic_denom} field. */
@@ -700,10 +704,6 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         public StdVideoH265SequenceParameterSetVui.Buffer log2_max_mv_length_horizontal(@NativeType("uint8_t") byte value) { StdVideoH265SequenceParameterSetVui.nlog2_max_mv_length_horizontal(address(), value); return this; }
         /** Sets the specified value to the {@code log2_max_mv_length_vertical} field. */
         public StdVideoH265SequenceParameterSetVui.Buffer log2_max_mv_length_vertical(@NativeType("uint8_t") byte value) { StdVideoH265SequenceParameterSetVui.nlog2_max_mv_length_vertical(address(), value); return this; }
-        /** Copies the specified {@link StdVideoH265SpsVuiFlags} to the {@code flags} field. */
-        public StdVideoH265SequenceParameterSetVui.Buffer flags(StdVideoH265SpsVuiFlags value) { StdVideoH265SequenceParameterSetVui.nflags(address(), value); return this; }
-        /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public StdVideoH265SequenceParameterSetVui.Buffer flags(java.util.function.Consumer<StdVideoH265SpsVuiFlags> consumer) { consumer.accept(flags()); return this; }
 
     }
 

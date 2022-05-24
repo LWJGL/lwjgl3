@@ -128,7 +128,7 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct implements Nati
     /** the denominator of the frame rate. Valid when rate control mode is not {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}. */
     @NativeType("uint32_t")
     public int frameRateDenominator() { return nframeRateDenominator(address()); }
-    /** the leaky bucket model virtual buffer size in milliseconds, with respect to peak bitrate. Valid when rate control mode is not {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}. For example, virtual buffer size is ({@code virtualBufferSizeInMs} * {@code maxBitrate} / 1000). */
+    /** the leaky bucket model virtual buffer size in milliseconds, with respect to peak bitrate. Valid when rate control mode is not {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}. For example, virtual buffer size is ({@code virtualBufferSizeInMs} × {@code maxBitrate} / 1000). */
     @NativeType("uint32_t")
     public int virtualBufferSizeInMs() { return nvirtualBufferSizeInMs(address()); }
     /** the initial occupancy in milliseconds of the virtual buffer in the leaky bucket model. Valid when the rate control mode is not {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}. */

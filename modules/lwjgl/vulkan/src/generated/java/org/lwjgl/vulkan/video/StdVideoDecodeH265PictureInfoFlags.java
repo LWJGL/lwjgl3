@@ -64,32 +64,32 @@ public class StdVideoDecodeH265PictureInfoFlags extends Struct implements Native
 
     /** @return the value of the {@code IrapPicFlag} field. */
     @NativeType("uint32_t")
-    public int IrapPicFlag() { return nIrapPicFlag(address()); }
+    public boolean IrapPicFlag() { return nIrapPicFlag(address()) != 0; }
     /** @return the value of the {@code IdrPicFlag} field. */
     @NativeType("uint32_t")
-    public int IdrPicFlag() { return nIdrPicFlag(address()); }
+    public boolean IdrPicFlag() { return nIdrPicFlag(address()) != 0; }
     /** @return the value of the {@code IsReference} field. */
     @NativeType("uint32_t")
-    public int IsReference() { return nIsReference(address()); }
+    public boolean IsReference() { return nIsReference(address()) != 0; }
     /** @return the value of the {@code short_term_ref_pic_set_sps_flag} field. */
     @NativeType("uint32_t")
-    public int short_term_ref_pic_set_sps_flag() { return nshort_term_ref_pic_set_sps_flag(address()); }
+    public boolean short_term_ref_pic_set_sps_flag() { return nshort_term_ref_pic_set_sps_flag(address()) != 0; }
 
     /** Sets the specified value to the {@code IrapPicFlag} field. */
-    public StdVideoDecodeH265PictureInfoFlags IrapPicFlag(@NativeType("uint32_t") int value) { nIrapPicFlag(address(), value); return this; }
+    public StdVideoDecodeH265PictureInfoFlags IrapPicFlag(@NativeType("uint32_t") boolean value) { nIrapPicFlag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code IdrPicFlag} field. */
-    public StdVideoDecodeH265PictureInfoFlags IdrPicFlag(@NativeType("uint32_t") int value) { nIdrPicFlag(address(), value); return this; }
+    public StdVideoDecodeH265PictureInfoFlags IdrPicFlag(@NativeType("uint32_t") boolean value) { nIdrPicFlag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code IsReference} field. */
-    public StdVideoDecodeH265PictureInfoFlags IsReference(@NativeType("uint32_t") int value) { nIsReference(address(), value); return this; }
+    public StdVideoDecodeH265PictureInfoFlags IsReference(@NativeType("uint32_t") boolean value) { nIsReference(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code short_term_ref_pic_set_sps_flag} field. */
-    public StdVideoDecodeH265PictureInfoFlags short_term_ref_pic_set_sps_flag(@NativeType("uint32_t") int value) { nshort_term_ref_pic_set_sps_flag(address(), value); return this; }
+    public StdVideoDecodeH265PictureInfoFlags short_term_ref_pic_set_sps_flag(@NativeType("uint32_t") boolean value) { nshort_term_ref_pic_set_sps_flag(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoDecodeH265PictureInfoFlags set(
-        int IrapPicFlag,
-        int IdrPicFlag,
-        int IsReference,
-        int short_term_ref_pic_set_sps_flag
+        boolean IrapPicFlag,
+        boolean IdrPicFlag,
+        boolean IsReference,
+        boolean short_term_ref_pic_set_sps_flag
     ) {
         IrapPicFlag(IrapPicFlag);
         IdrPicFlag(IdrPicFlag);
@@ -235,13 +235,13 @@ public class StdVideoDecodeH265PictureInfoFlags extends Struct implements Native
     public static int nshort_term_ref_pic_set_sps_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoDecodeH265PictureInfoFlags.BITFIELD0, value); }
-    /** Unsafe version of {@link #IrapPicFlag(int) IrapPicFlag}. */
+    /** Unsafe version of {@link #IrapPicFlag(boolean) IrapPicFlag}. */
     public static void nIrapPicFlag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
-    /** Unsafe version of {@link #IdrPicFlag(int) IdrPicFlag}. */
+    /** Unsafe version of {@link #IdrPicFlag(boolean) IdrPicFlag}. */
     public static void nIdrPicFlag(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
-    /** Unsafe version of {@link #IsReference(int) IsReference}. */
+    /** Unsafe version of {@link #IsReference(boolean) IsReference}. */
     public static void nIsReference(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
-    /** Unsafe version of {@link #short_term_ref_pic_set_sps_flag(int) short_term_ref_pic_set_sps_flag}. */
+    /** Unsafe version of {@link #short_term_ref_pic_set_sps_flag(boolean) short_term_ref_pic_set_sps_flag}. */
     public static void nshort_term_ref_pic_set_sps_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
 
     // -----------------------------------
@@ -284,25 +284,25 @@ public class StdVideoDecodeH265PictureInfoFlags extends Struct implements Native
 
         /** @return the value of the {@code IrapPicFlag} field. */
         @NativeType("uint32_t")
-        public int IrapPicFlag() { return StdVideoDecodeH265PictureInfoFlags.nIrapPicFlag(address()); }
+        public boolean IrapPicFlag() { return StdVideoDecodeH265PictureInfoFlags.nIrapPicFlag(address()) != 0; }
         /** @return the value of the {@code IdrPicFlag} field. */
         @NativeType("uint32_t")
-        public int IdrPicFlag() { return StdVideoDecodeH265PictureInfoFlags.nIdrPicFlag(address()); }
+        public boolean IdrPicFlag() { return StdVideoDecodeH265PictureInfoFlags.nIdrPicFlag(address()) != 0; }
         /** @return the value of the {@code IsReference} field. */
         @NativeType("uint32_t")
-        public int IsReference() { return StdVideoDecodeH265PictureInfoFlags.nIsReference(address()); }
+        public boolean IsReference() { return StdVideoDecodeH265PictureInfoFlags.nIsReference(address()) != 0; }
         /** @return the value of the {@code short_term_ref_pic_set_sps_flag} field. */
         @NativeType("uint32_t")
-        public int short_term_ref_pic_set_sps_flag() { return StdVideoDecodeH265PictureInfoFlags.nshort_term_ref_pic_set_sps_flag(address()); }
+        public boolean short_term_ref_pic_set_sps_flag() { return StdVideoDecodeH265PictureInfoFlags.nshort_term_ref_pic_set_sps_flag(address()) != 0; }
 
         /** Sets the specified value to the {@code IrapPicFlag} field. */
-        public StdVideoDecodeH265PictureInfoFlags.Buffer IrapPicFlag(@NativeType("uint32_t") int value) { StdVideoDecodeH265PictureInfoFlags.nIrapPicFlag(address(), value); return this; }
+        public StdVideoDecodeH265PictureInfoFlags.Buffer IrapPicFlag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH265PictureInfoFlags.nIrapPicFlag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code IdrPicFlag} field. */
-        public StdVideoDecodeH265PictureInfoFlags.Buffer IdrPicFlag(@NativeType("uint32_t") int value) { StdVideoDecodeH265PictureInfoFlags.nIdrPicFlag(address(), value); return this; }
+        public StdVideoDecodeH265PictureInfoFlags.Buffer IdrPicFlag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH265PictureInfoFlags.nIdrPicFlag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code IsReference} field. */
-        public StdVideoDecodeH265PictureInfoFlags.Buffer IsReference(@NativeType("uint32_t") int value) { StdVideoDecodeH265PictureInfoFlags.nIsReference(address(), value); return this; }
+        public StdVideoDecodeH265PictureInfoFlags.Buffer IsReference(@NativeType("uint32_t") boolean value) { StdVideoDecodeH265PictureInfoFlags.nIsReference(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code short_term_ref_pic_set_sps_flag} field. */
-        public StdVideoDecodeH265PictureInfoFlags.Buffer short_term_ref_pic_set_sps_flag(@NativeType("uint32_t") int value) { StdVideoDecodeH265PictureInfoFlags.nshort_term_ref_pic_set_sps_flag(address(), value); return this; }
+        public StdVideoDecodeH265PictureInfoFlags.Buffer short_term_ref_pic_set_sps_flag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH265PictureInfoFlags.nshort_term_ref_pic_set_sps_flag(address(), value ? 1 : 0); return this; }
 
     }
 

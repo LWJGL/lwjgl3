@@ -23,6 +23,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  * 
  * <pre><code>
  * struct StdVideoH265HrdParameters {
+ *     {@link StdVideoH265HrdFlags StdVideoH265HrdFlags} flags;
  *     uint8_t tick_divisor_minus2;
  *     uint8_t du_cpb_removal_delay_increment_length_minus1;
  *     uint8_t dpb_output_delay_du_length_minus1;
@@ -34,9 +35,8 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint8_t dpb_output_delay_length_minus1;
  *     uint8_t cpb_cnt_minus1[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE];
  *     uint16_t elemental_duration_in_tc_minus1[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE];
- *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} * {@link #pSubLayerHrdParametersNal}[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE];
- *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} * {@link #pSubLayerHrdParametersVcl}[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE];
- *     {@link StdVideoH265HrdFlags StdVideoH265HrdFlags} flags;
+ *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} const * {@link #pSubLayerHrdParametersNal}[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE];
+ *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} const * {@link #pSubLayerHrdParametersVcl}[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE];
  * }</code></pre>
  */
 public class StdVideoH265HrdParameters extends Struct implements NativeResource {
@@ -49,6 +49,7 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
 
     /** The struct member offsets. */
     public static final int
+        FLAGS,
         TICK_DIVISOR_MINUS2,
         DU_CPB_REMOVAL_DELAY_INCREMENT_LENGTH_MINUS1,
         DPB_OUTPUT_DELAY_DU_LENGTH_MINUS1,
@@ -61,11 +62,11 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
         CPB_CNT_MINUS1,
         ELEMENTAL_DURATION_IN_TC_MINUS1,
         PSUBLAYERHRDPARAMETERSNAL,
-        PSUBLAYERHRDPARAMETERSVCL,
-        FLAGS;
+        PSUBLAYERHRDPARAMETERSVCL;
 
     static {
         Layout layout = __struct(
+            __member(StdVideoH265HrdFlags.SIZEOF, StdVideoH265HrdFlags.ALIGNOF),
             __member(1),
             __member(1),
             __member(1),
@@ -78,27 +79,26 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
             __array(1, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE),
             __array(2, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE),
             __array(POINTER_SIZE, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE),
-            __array(POINTER_SIZE, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE),
-            __member(StdVideoH265HrdFlags.SIZEOF, StdVideoH265HrdFlags.ALIGNOF)
+            __array(POINTER_SIZE, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        TICK_DIVISOR_MINUS2 = layout.offsetof(0);
-        DU_CPB_REMOVAL_DELAY_INCREMENT_LENGTH_MINUS1 = layout.offsetof(1);
-        DPB_OUTPUT_DELAY_DU_LENGTH_MINUS1 = layout.offsetof(2);
-        BIT_RATE_SCALE = layout.offsetof(3);
-        CPB_SIZE_SCALE = layout.offsetof(4);
-        CPB_SIZE_DU_SCALE = layout.offsetof(5);
-        INITIAL_CPB_REMOVAL_DELAY_LENGTH_MINUS1 = layout.offsetof(6);
-        AU_CPB_REMOVAL_DELAY_LENGTH_MINUS1 = layout.offsetof(7);
-        DPB_OUTPUT_DELAY_LENGTH_MINUS1 = layout.offsetof(8);
-        CPB_CNT_MINUS1 = layout.offsetof(9);
-        ELEMENTAL_DURATION_IN_TC_MINUS1 = layout.offsetof(10);
-        PSUBLAYERHRDPARAMETERSNAL = layout.offsetof(11);
-        PSUBLAYERHRDPARAMETERSVCL = layout.offsetof(12);
-        FLAGS = layout.offsetof(13);
+        FLAGS = layout.offsetof(0);
+        TICK_DIVISOR_MINUS2 = layout.offsetof(1);
+        DU_CPB_REMOVAL_DELAY_INCREMENT_LENGTH_MINUS1 = layout.offsetof(2);
+        DPB_OUTPUT_DELAY_DU_LENGTH_MINUS1 = layout.offsetof(3);
+        BIT_RATE_SCALE = layout.offsetof(4);
+        CPB_SIZE_SCALE = layout.offsetof(5);
+        CPB_SIZE_DU_SCALE = layout.offsetof(6);
+        INITIAL_CPB_REMOVAL_DELAY_LENGTH_MINUS1 = layout.offsetof(7);
+        AU_CPB_REMOVAL_DELAY_LENGTH_MINUS1 = layout.offsetof(8);
+        DPB_OUTPUT_DELAY_LENGTH_MINUS1 = layout.offsetof(9);
+        CPB_CNT_MINUS1 = layout.offsetof(10);
+        ELEMENTAL_DURATION_IN_TC_MINUS1 = layout.offsetof(11);
+        PSUBLAYERHRDPARAMETERSNAL = layout.offsetof(12);
+        PSUBLAYERHRDPARAMETERSVCL = layout.offsetof(13);
     }
 
     /**
@@ -114,6 +114,8 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** @return a {@link StdVideoH265HrdFlags} view of the {@code flags} field. */
+    public StdVideoH265HrdFlags flags() { return nflags(address()); }
     /** @return the value of the {@code tick_divisor_minus2} field. */
     @NativeType("uint8_t")
     public byte tick_divisor_minus2() { return ntick_divisor_minus2(address()); }
@@ -154,20 +156,22 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
     @NativeType("uint16_t")
     public short elemental_duration_in_tc_minus1(int index) { return nelemental_duration_in_tc_minus1(address(), index); }
     /** NAL per layer {@code ptr} to {@code sub_layer_hrd_parameters} */
-    @NativeType("StdVideoH265SubLayerHrdParameters *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
+    @NativeType("StdVideoH265SubLayerHrdParameters const *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
     public PointerBuffer pSubLayerHrdParametersNal() { return npSubLayerHrdParametersNal(address()); }
     /** NAL per layer {@code ptr} to {@code sub_layer_hrd_parameters} */
-    @NativeType("StdVideoH265SubLayerHrdParameters *")
+    @NativeType("StdVideoH265SubLayerHrdParameters const *")
     public StdVideoH265SubLayerHrdParameters pSubLayerHrdParametersNal(int index) { return npSubLayerHrdParametersNal(address(), index); }
     /** VCL per layer {@code ptr} to {@code sub_layer_hrd_parameters} */
-    @NativeType("StdVideoH265SubLayerHrdParameters *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
+    @NativeType("StdVideoH265SubLayerHrdParameters const *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
     public PointerBuffer pSubLayerHrdParametersVcl() { return npSubLayerHrdParametersVcl(address()); }
     /** VCL per layer {@code ptr} to {@code sub_layer_hrd_parameters} */
-    @NativeType("StdVideoH265SubLayerHrdParameters *")
+    @NativeType("StdVideoH265SubLayerHrdParameters const *")
     public StdVideoH265SubLayerHrdParameters pSubLayerHrdParametersVcl(int index) { return npSubLayerHrdParametersVcl(address(), index); }
-    /** @return a {@link StdVideoH265HrdFlags} view of the {@code flags} field. */
-    public StdVideoH265HrdFlags flags() { return nflags(address()); }
 
+    /** Copies the specified {@link StdVideoH265HrdFlags} to the {@code flags} field. */
+    public StdVideoH265HrdParameters flags(StdVideoH265HrdFlags value) { nflags(address(), value); return this; }
+    /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public StdVideoH265HrdParameters flags(java.util.function.Consumer<StdVideoH265HrdFlags> consumer) { consumer.accept(flags()); return this; }
     /** Sets the specified value to the {@code tick_divisor_minus2} field. */
     public StdVideoH265HrdParameters tick_divisor_minus2(@NativeType("uint8_t") byte value) { ntick_divisor_minus2(address(), value); return this; }
     /** Sets the specified value to the {@code du_cpb_removal_delay_increment_length_minus1} field. */
@@ -195,24 +199,21 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
     /** Sets the specified value at the specified index of the {@code elemental_duration_in_tc_minus1} field. */
     public StdVideoH265HrdParameters elemental_duration_in_tc_minus1(int index, @NativeType("uint16_t") short value) { nelemental_duration_in_tc_minus1(address(), index, value); return this; }
     /** Copies the specified {@link PointerBuffer} to the {@link #pSubLayerHrdParametersNal} field. */
-    public StdVideoH265HrdParameters pSubLayerHrdParametersNal(@NativeType("StdVideoH265SubLayerHrdParameters *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") PointerBuffer value) { npSubLayerHrdParametersNal(address(), value); return this; }
+    public StdVideoH265HrdParameters pSubLayerHrdParametersNal(@NativeType("StdVideoH265SubLayerHrdParameters const *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") PointerBuffer value) { npSubLayerHrdParametersNal(address(), value); return this; }
     /** Copies the address of the specified {@link StdVideoH265SubLayerHrdParameters} at the specified index of the {@link #pSubLayerHrdParametersNal} field. */
-    public StdVideoH265HrdParameters pSubLayerHrdParametersNal(int index, @NativeType("StdVideoH265SubLayerHrdParameters *") StdVideoH265SubLayerHrdParameters value) { npSubLayerHrdParametersNal(address(), index, value); return this; }
+    public StdVideoH265HrdParameters pSubLayerHrdParametersNal(int index, @NativeType("StdVideoH265SubLayerHrdParameters const *") StdVideoH265SubLayerHrdParameters value) { npSubLayerHrdParametersNal(address(), index, value); return this; }
     /** Passes the element at {@code index} of the {@link #pSubLayerHrdParametersNal} field to the specified {@link java.util.function.Consumer Consumer}. */
     public StdVideoH265HrdParameters pSubLayerHrdParametersNal(int index, java.util.function.Consumer<StdVideoH265SubLayerHrdParameters> consumer) { consumer.accept(pSubLayerHrdParametersNal(index)); return this; }
     /** Copies the specified {@link PointerBuffer} to the {@link #pSubLayerHrdParametersVcl} field. */
-    public StdVideoH265HrdParameters pSubLayerHrdParametersVcl(@NativeType("StdVideoH265SubLayerHrdParameters *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") PointerBuffer value) { npSubLayerHrdParametersVcl(address(), value); return this; }
+    public StdVideoH265HrdParameters pSubLayerHrdParametersVcl(@NativeType("StdVideoH265SubLayerHrdParameters const *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") PointerBuffer value) { npSubLayerHrdParametersVcl(address(), value); return this; }
     /** Copies the address of the specified {@link StdVideoH265SubLayerHrdParameters} at the specified index of the {@link #pSubLayerHrdParametersVcl} field. */
-    public StdVideoH265HrdParameters pSubLayerHrdParametersVcl(int index, @NativeType("StdVideoH265SubLayerHrdParameters *") StdVideoH265SubLayerHrdParameters value) { npSubLayerHrdParametersVcl(address(), index, value); return this; }
+    public StdVideoH265HrdParameters pSubLayerHrdParametersVcl(int index, @NativeType("StdVideoH265SubLayerHrdParameters const *") StdVideoH265SubLayerHrdParameters value) { npSubLayerHrdParametersVcl(address(), index, value); return this; }
     /** Passes the element at {@code index} of the {@link #pSubLayerHrdParametersVcl} field to the specified {@link java.util.function.Consumer Consumer}. */
     public StdVideoH265HrdParameters pSubLayerHrdParametersVcl(int index, java.util.function.Consumer<StdVideoH265SubLayerHrdParameters> consumer) { consumer.accept(pSubLayerHrdParametersVcl(index)); return this; }
-    /** Copies the specified {@link StdVideoH265HrdFlags} to the {@code flags} field. */
-    public StdVideoH265HrdParameters flags(StdVideoH265HrdFlags value) { nflags(address(), value); return this; }
-    /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public StdVideoH265HrdParameters flags(java.util.function.Consumer<StdVideoH265HrdFlags> consumer) { consumer.accept(flags()); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoH265HrdParameters set(
+        StdVideoH265HrdFlags flags,
         byte tick_divisor_minus2,
         byte du_cpb_removal_delay_increment_length_minus1,
         byte dpb_output_delay_du_length_minus1,
@@ -225,9 +226,9 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
         ByteBuffer cpb_cnt_minus1,
         ShortBuffer elemental_duration_in_tc_minus1,
         PointerBuffer pSubLayerHrdParametersNal,
-        PointerBuffer pSubLayerHrdParametersVcl,
-        StdVideoH265HrdFlags flags
+        PointerBuffer pSubLayerHrdParametersVcl
     ) {
+        flags(flags);
         tick_divisor_minus2(tick_divisor_minus2);
         du_cpb_removal_delay_increment_length_minus1(du_cpb_removal_delay_increment_length_minus1);
         dpb_output_delay_du_length_minus1(dpb_output_delay_du_length_minus1);
@@ -241,7 +242,6 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
         elemental_duration_in_tc_minus1(elemental_duration_in_tc_minus1);
         pSubLayerHrdParametersNal(pSubLayerHrdParametersNal);
         pSubLayerHrdParametersVcl(pSubLayerHrdParametersVcl);
-        flags(flags);
 
         return this;
     }
@@ -371,6 +371,8 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #flags}. */
+    public static StdVideoH265HrdFlags nflags(long struct) { return StdVideoH265HrdFlags.create(struct + StdVideoH265HrdParameters.FLAGS); }
     /** Unsafe version of {@link #tick_divisor_minus2}. */
     public static byte ntick_divisor_minus2(long struct) { return UNSAFE.getByte(null, struct + StdVideoH265HrdParameters.TICK_DIVISOR_MINUS2); }
     /** Unsafe version of {@link #du_cpb_removal_delay_increment_length_minus1}. */
@@ -413,9 +415,9 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
     public static StdVideoH265SubLayerHrdParameters npSubLayerHrdParametersVcl(long struct, int index) {
         return StdVideoH265SubLayerHrdParameters.create(memGetAddress(struct + StdVideoH265HrdParameters.PSUBLAYERHRDPARAMETERSVCL + check(index, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE) * POINTER_SIZE));
     }
-    /** Unsafe version of {@link #flags}. */
-    public static StdVideoH265HrdFlags nflags(long struct) { return StdVideoH265HrdFlags.create(struct + StdVideoH265HrdParameters.FLAGS); }
 
+    /** Unsafe version of {@link #flags(StdVideoH265HrdFlags) flags}. */
+    public static void nflags(long struct, StdVideoH265HrdFlags value) { memCopy(value.address(), struct + StdVideoH265HrdParameters.FLAGS, StdVideoH265HrdFlags.SIZEOF); }
     /** Unsafe version of {@link #tick_divisor_minus2(byte) tick_divisor_minus2}. */
     public static void ntick_divisor_minus2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH265HrdParameters.TICK_DIVISOR_MINUS2, value); }
     /** Unsafe version of {@link #du_cpb_removal_delay_increment_length_minus1(byte) du_cpb_removal_delay_increment_length_minus1}. */
@@ -470,8 +472,6 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
     public static void npSubLayerHrdParametersVcl(long struct, int index, StdVideoH265SubLayerHrdParameters value) {
         memPutAddress(struct + StdVideoH265HrdParameters.PSUBLAYERHRDPARAMETERSVCL + check(index, STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE) * POINTER_SIZE, value.address());
     }
-    /** Unsafe version of {@link #flags(StdVideoH265HrdFlags) flags}. */
-    public static void nflags(long struct, StdVideoH265HrdFlags value) { memCopy(value.address(), struct + StdVideoH265HrdParameters.FLAGS, StdVideoH265HrdFlags.SIZEOF); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -521,6 +521,8 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
             return ELEMENT_FACTORY;
         }
 
+        /** @return a {@link StdVideoH265HrdFlags} view of the {@code flags} field. */
+        public StdVideoH265HrdFlags flags() { return StdVideoH265HrdParameters.nflags(address()); }
         /** @return the value of the {@code tick_divisor_minus2} field. */
         @NativeType("uint8_t")
         public byte tick_divisor_minus2() { return StdVideoH265HrdParameters.ntick_divisor_minus2(address()); }
@@ -561,20 +563,22 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
         @NativeType("uint16_t")
         public short elemental_duration_in_tc_minus1(int index) { return StdVideoH265HrdParameters.nelemental_duration_in_tc_minus1(address(), index); }
         /** @return a {@link PointerBuffer} view of the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersNal} field. */
-        @NativeType("StdVideoH265SubLayerHrdParameters *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
+        @NativeType("StdVideoH265SubLayerHrdParameters const *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
         public PointerBuffer pSubLayerHrdParametersNal() { return StdVideoH265HrdParameters.npSubLayerHrdParametersNal(address()); }
         /** @return a {@link StdVideoH265SubLayerHrdParameters} view of the pointer at the specified index of the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersNal} field. */
-        @NativeType("StdVideoH265SubLayerHrdParameters *")
+        @NativeType("StdVideoH265SubLayerHrdParameters const *")
         public StdVideoH265SubLayerHrdParameters pSubLayerHrdParametersNal(int index) { return StdVideoH265HrdParameters.npSubLayerHrdParametersNal(address(), index); }
         /** @return a {@link PointerBuffer} view of the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersVcl} field. */
-        @NativeType("StdVideoH265SubLayerHrdParameters *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
+        @NativeType("StdVideoH265SubLayerHrdParameters const *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]")
         public PointerBuffer pSubLayerHrdParametersVcl() { return StdVideoH265HrdParameters.npSubLayerHrdParametersVcl(address()); }
         /** @return a {@link StdVideoH265SubLayerHrdParameters} view of the pointer at the specified index of the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersVcl} field. */
-        @NativeType("StdVideoH265SubLayerHrdParameters *")
+        @NativeType("StdVideoH265SubLayerHrdParameters const *")
         public StdVideoH265SubLayerHrdParameters pSubLayerHrdParametersVcl(int index) { return StdVideoH265HrdParameters.npSubLayerHrdParametersVcl(address(), index); }
-        /** @return a {@link StdVideoH265HrdFlags} view of the {@code flags} field. */
-        public StdVideoH265HrdFlags flags() { return StdVideoH265HrdParameters.nflags(address()); }
 
+        /** Copies the specified {@link StdVideoH265HrdFlags} to the {@code flags} field. */
+        public StdVideoH265HrdParameters.Buffer flags(StdVideoH265HrdFlags value) { StdVideoH265HrdParameters.nflags(address(), value); return this; }
+        /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public StdVideoH265HrdParameters.Buffer flags(java.util.function.Consumer<StdVideoH265HrdFlags> consumer) { consumer.accept(flags()); return this; }
         /** Sets the specified value to the {@code tick_divisor_minus2} field. */
         public StdVideoH265HrdParameters.Buffer tick_divisor_minus2(@NativeType("uint8_t") byte value) { StdVideoH265HrdParameters.ntick_divisor_minus2(address(), value); return this; }
         /** Sets the specified value to the {@code du_cpb_removal_delay_increment_length_minus1} field. */
@@ -602,21 +606,17 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
         /** Sets the specified value at the specified index of the {@code elemental_duration_in_tc_minus1} field. */
         public StdVideoH265HrdParameters.Buffer elemental_duration_in_tc_minus1(int index, @NativeType("uint16_t") short value) { StdVideoH265HrdParameters.nelemental_duration_in_tc_minus1(address(), index, value); return this; }
         /** Copies the specified {@link PointerBuffer} to the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersNal} field. */
-        public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersNal(@NativeType("StdVideoH265SubLayerHrdParameters *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") PointerBuffer value) { StdVideoH265HrdParameters.npSubLayerHrdParametersNal(address(), value); return this; }
+        public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersNal(@NativeType("StdVideoH265SubLayerHrdParameters const *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") PointerBuffer value) { StdVideoH265HrdParameters.npSubLayerHrdParametersNal(address(), value); return this; }
         /** Copies the address of the specified {@link StdVideoH265SubLayerHrdParameters} at the specified index of the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersNal} field. */
-        public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersNal(int index, @NativeType("StdVideoH265SubLayerHrdParameters *") StdVideoH265SubLayerHrdParameters value) { StdVideoH265HrdParameters.npSubLayerHrdParametersNal(address(), index, value); return this; }
+        public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersNal(int index, @NativeType("StdVideoH265SubLayerHrdParameters const *") StdVideoH265SubLayerHrdParameters value) { StdVideoH265HrdParameters.npSubLayerHrdParametersNal(address(), index, value); return this; }
         /** Passes the element at {@code index} of the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersNal} field to the specified {@link java.util.function.Consumer Consumer}. */
         public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersNal(int index, java.util.function.Consumer<StdVideoH265SubLayerHrdParameters> consumer) { consumer.accept(pSubLayerHrdParametersNal(index)); return this; }
         /** Copies the specified {@link PointerBuffer} to the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersVcl} field. */
-        public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersVcl(@NativeType("StdVideoH265SubLayerHrdParameters *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") PointerBuffer value) { StdVideoH265HrdParameters.npSubLayerHrdParametersVcl(address(), value); return this; }
+        public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersVcl(@NativeType("StdVideoH265SubLayerHrdParameters const *[STD_VIDEO_H265_SUBLAYERS_MINUS1_LIST_SIZE]") PointerBuffer value) { StdVideoH265HrdParameters.npSubLayerHrdParametersVcl(address(), value); return this; }
         /** Copies the address of the specified {@link StdVideoH265SubLayerHrdParameters} at the specified index of the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersVcl} field. */
-        public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersVcl(int index, @NativeType("StdVideoH265SubLayerHrdParameters *") StdVideoH265SubLayerHrdParameters value) { StdVideoH265HrdParameters.npSubLayerHrdParametersVcl(address(), index, value); return this; }
+        public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersVcl(int index, @NativeType("StdVideoH265SubLayerHrdParameters const *") StdVideoH265SubLayerHrdParameters value) { StdVideoH265HrdParameters.npSubLayerHrdParametersVcl(address(), index, value); return this; }
         /** Passes the element at {@code index} of the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersVcl} field to the specified {@link java.util.function.Consumer Consumer}. */
         public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersVcl(int index, java.util.function.Consumer<StdVideoH265SubLayerHrdParameters> consumer) { consumer.accept(pSubLayerHrdParametersVcl(index)); return this; }
-        /** Copies the specified {@link StdVideoH265HrdFlags} to the {@code flags} field. */
-        public StdVideoH265HrdParameters.Buffer flags(StdVideoH265HrdFlags value) { StdVideoH265HrdParameters.nflags(address(), value); return this; }
-        /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public StdVideoH265HrdParameters.Buffer flags(java.util.function.Consumer<StdVideoH265HrdFlags> consumer) { consumer.accept(flags()); return this; }
 
     }
 

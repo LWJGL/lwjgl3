@@ -22,6 +22,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>The number of slices of the {@code extent} (for 3D) or layers of the {@code srcSubresource} (for non-3D) <b>must</b> match the number of slices of the {@code extent} (for 3D) or layers of the {@code dstSubresource} (for non-3D)</li>
+ * <li>{@code extent.width} <b>must</b> not be 0</li>
+ * <li>{@code extent.height} <b>must</b> not be 0</li>
+ * <li>{@code extent.depth} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

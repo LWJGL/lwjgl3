@@ -297,7 +297,9 @@ public class VkVideoEncodeH265NaluSliceSegmentEXT extends Struct implements Nati
         if (pReferenceFinalLists != NULL) {
             VkVideoEncodeH265ReferenceListsEXT.validate(pReferenceFinalLists);
         }
-        check(memGetAddress(struct + VkVideoEncodeH265NaluSliceSegmentEXT.PSLICESEGMENTHEADERSTD));
+        long pSliceSegmentHeaderStd = memGetAddress(struct + VkVideoEncodeH265NaluSliceSegmentEXT.PSLICESEGMENTHEADERSTD);
+        check(pSliceSegmentHeaderStd);
+        StdVideoEncodeH265SliceSegmentHeader.validate(pSliceSegmentHeaderStd);
     }
 
     // -----------------------------------

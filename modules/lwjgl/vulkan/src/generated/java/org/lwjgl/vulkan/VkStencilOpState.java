@@ -116,7 +116,7 @@ public class VkStencilOpState extends Struct implements NativeResource {
     /** selects the bits of the unsigned integer stencil values updated by the stencil test in the stencil framebuffer attachment. */
     @NativeType("uint32_t")
     public int writeMask() { return nwriteMask(address()); }
-    /** an integer reference value that is used in the unsigned stencil comparison. */
+    /** an integer stencil reference value that is used in the unsigned stencil comparison. */
     @NativeType("uint32_t")
     public int reference() { return nreference(address()); }
 

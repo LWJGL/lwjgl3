@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h5>Code Examples</h5>
  * 
- * <p>The following examples will illustrate the concept of deferrable operations using a hypothetical example. The command {@code vkDoSomethingExpensiveEXT} denotes a deferrable command. The structure stext:VkExpensiveOperationArgsEXT represents the arguments which it would normally accept.</p>
+ * <p>The following examples will illustrate the concept of deferrable operations using a hypothetical example. The command {@code vkDoSomethingExpensive} denotes a deferrable command.</p>
  * 
  * <p>The following example illustrates how a vulkan application might request deferral of an expensive operation:</p>
  * 
@@ -71,7 +71,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *                 // in a job system, a return of VK_THREAD_IDLE_KHR should queue another
  *                 // job, but it is not functionally required
  *     }
- *   );
+ *   ));
  * }
  * 
  * for (auto &amp;f : joins) {

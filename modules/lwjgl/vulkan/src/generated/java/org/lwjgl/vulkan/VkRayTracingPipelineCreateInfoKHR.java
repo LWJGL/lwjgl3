@@ -68,6 +68,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code pLibraryInfo} is not {@code NULL} and its {@code libraryCount} is 0, {@code stageCount} <b>must</b> not be 0</li>
  * <li>If {@code pLibraryInfo} is not {@code NULL} and its {@code libraryCount} is 0, {@code groupCount} <b>must</b> not be 0</li>
  * <li>Any element of the {@code pDynamicStates} member of {@code pDynamicState} <b>must</b> be {@link KHRRayTracingPipeline#VK_DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR}</li>
+ * <li>If {@link VkPipelineCreationFeedbackCreateInfo}{@code ::pipelineStageCreationFeedbackCount} is not 0, it <b>must</b> be equal to {@code stageCount}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

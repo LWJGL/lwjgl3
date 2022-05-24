@@ -34,6 +34,9 @@ val NV_fragment_shader_barycentric = "NVFragmentShaderBarycentric".nativeClassVK
 
         GLSL variables declared using the {@code __pervertexNV} GLSL qualifier are expected to be decorated with {@code PerVertexNV} in SPIR-V.
 
+        <h5>Promotion to {@code VK_KHR_fragment_shader_barycentric}</h5>
+        All functionality in this extension is included in {@link KHRFragmentShaderBarycentric VK_KHR_fragment_shader_barycentric}, with the suffix changed to KHR.
+
         <h5>VK_NV_fragment_shader_barycentric</h5>
         <dl>
             <dt><b>Name String</b></dt>
@@ -52,6 +55,11 @@ val NV_fragment_shader_barycentric = "NVFragmentShaderBarycentric".nativeClassVK
             <dd><ul>
                 <li>Requires Vulkan 1.0</li>
                 <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
+            </ul></dd>
+
+            <dt><b>Deprecation state</b></dt>
+            <dd><ul>
+                <li><em>Promoted</em> to {@link KHRFragmentShaderBarycentric VK_KHR_fragment_shader_barycentric} extension</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

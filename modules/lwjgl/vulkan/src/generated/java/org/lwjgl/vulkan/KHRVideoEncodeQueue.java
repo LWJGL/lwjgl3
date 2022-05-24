@@ -25,7 +25,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>300</dd>
  * <dt><b>Revision</b></dt>
- * <dd>4</dd>
+ * <dd>5</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -43,7 +43,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2022-02-10</dd>
+ * <dd>2022-03-31</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -65,7 +65,7 @@ import static org.lwjgl.system.JNI.*;
 public class KHRVideoEncodeQueue {
 
     /** The extension specification version. */
-    public static final int VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION = 4;
+    public static final int VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION = 5;
 
     /** The extension name. */
     public static final String VK_KHR_VIDEO_ENCODE_QUEUE_EXTENSION_NAME = "VK_KHR_video_encode_queue";

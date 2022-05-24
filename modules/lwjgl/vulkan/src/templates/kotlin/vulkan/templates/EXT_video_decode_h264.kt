@@ -13,7 +13,7 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
         """
         <ul>
             <li>
-                Extending ##VkVideoCapabilitiesKHR:
+                Extending ##VkVideoDecodeCapabilitiesKHR:
                 <ul>
                     <li>##VkVideoDecodeH264CapabilitiesEXT</li>
                 </ul>
@@ -43,12 +43,6 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
                 </ul>
             </li>
             <li>
-                Extending ##VkVideoSessionCreateInfoKHR:
-                <ul>
-                    <li>##VkVideoDecodeH264SessionCreateInfoEXT</li>
-                </ul>
-            </li>
-            <li>
                 Extending ##VkVideoSessionParametersCreateInfoKHR:
                 <ul>
                     <li>##VkVideoDecodeH264SessionParametersCreateInfoEXT</li>
@@ -74,7 +68,7 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
             <dd>41</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>3</dd>
+            <dd>5</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -92,13 +86,14 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-03-29</dd>
+            <dd>2022-03-31</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
+                <li>Ahmed Abdelkhalek, AMD</li>
                 <li>Chunbo Chen, Intel</li>
                 <li>HoHin Lau, AMD</li>
                 <li>Jake Beju, AMD</li>
@@ -113,7 +108,7 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VIDEO_DECODE_H264_SPEC_VERSION".."3"
+        "EXT_VIDEO_DECODE_H264_SPEC_VERSION".."5"
     )
 
     StringConstant(
@@ -126,13 +121,12 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
         "Extends {@code VkStructureType}.",
 
         "STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT".."1000040000",
-        "STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_CREATE_INFO_EXT".."1000040001",
-        "STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT".."1000040002",
-        "STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_EXT".."1000040003",
-        "STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT".."1000040004",
-        "STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT".."1000040005",
-        "STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT".."1000040006",
-        "STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT".."1000040007"
+        "STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT".."1000040001",
+        "STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_EXT".."1000040002",
+        "STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT".."1000040003",
+        "STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT".."1000040004",
+        "STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT".."1000040005",
+        "STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT".."1000040006"
     )
 
     EnumConstant(

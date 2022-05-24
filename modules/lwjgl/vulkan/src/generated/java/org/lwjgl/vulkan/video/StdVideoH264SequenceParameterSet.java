@@ -21,6 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct StdVideoH264SequenceParameterSet {
+ *     {@link StdVideoH264SpsFlags StdVideoH264SpsFlags} flags;
  *     StdVideoH264ProfileIdc profile_idc;
  *     StdVideoH264Level level_idc;
  *     uint8_t seq_parameter_set_id;
@@ -40,10 +41,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t frame_crop_right_offset;
  *     uint32_t frame_crop_top_offset;
  *     uint32_t frame_crop_bottom_offset;
- *     {@link StdVideoH264SpsFlags StdVideoH264SpsFlags} flags;
- *     int32_t * {@link #pOffsetForRefFrame};
- *     {@link StdVideoH264ScalingLists StdVideoH264ScalingLists} * {@link #pScalingLists};
- *     {@link StdVideoH264SequenceParameterSetVui StdVideoH264SequenceParameterSetVui} * {@link #pSequenceParameterSetVui};
+ *     int32_t const * {@link #pOffsetForRefFrame};
+ *     {@link StdVideoH264ScalingLists StdVideoH264ScalingLists} const * {@link #pScalingLists};
+ *     {@link StdVideoH264SequenceParameterSetVui StdVideoH264SequenceParameterSetVui} const * {@link #pSequenceParameterSetVui};
  * }</code></pre>
  */
 public class StdVideoH264SequenceParameterSet extends Struct implements NativeResource {
@@ -56,6 +56,7 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
 
     /** The struct member offsets. */
     public static final int
+        FLAGS,
         PROFILE_IDC,
         LEVEL_IDC,
         SEQ_PARAMETER_SET_ID,
@@ -75,33 +76,32 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
         FRAME_CROP_RIGHT_OFFSET,
         FRAME_CROP_TOP_OFFSET,
         FRAME_CROP_BOTTOM_OFFSET,
-        FLAGS,
         POFFSETFORREFFRAME,
         PSCALINGLISTS,
         PSEQUENCEPARAMETERSETVUI;
 
     static {
         Layout layout = __struct(
-            __member(4),
-            __member(4),
-            __member(1),
-            __member(4),
-            __member(1),
-            __member(1),
-            __member(1),
-            __member(4),
-            __member(1),
-            __member(4),
-            __member(4),
-            __member(1),
-            __member(1),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
-            __member(4),
             __member(StdVideoH264SpsFlags.SIZEOF, StdVideoH264SpsFlags.ALIGNOF),
+            __member(4),
+            __member(4),
+            __member(1),
+            __member(4),
+            __member(1),
+            __member(1),
+            __member(1),
+            __member(4),
+            __member(1),
+            __member(4),
+            __member(4),
+            __member(1),
+            __member(1),
+            __member(4),
+            __member(4),
+            __member(4),
+            __member(4),
+            __member(4),
+            __member(4),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE),
             __member(POINTER_SIZE)
@@ -110,26 +110,26 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        PROFILE_IDC = layout.offsetof(0);
-        LEVEL_IDC = layout.offsetof(1);
-        SEQ_PARAMETER_SET_ID = layout.offsetof(2);
-        CHROMA_FORMAT_IDC = layout.offsetof(3);
-        BIT_DEPTH_LUMA_MINUS8 = layout.offsetof(4);
-        BIT_DEPTH_CHROMA_MINUS8 = layout.offsetof(5);
-        LOG2_MAX_FRAME_NUM_MINUS4 = layout.offsetof(6);
-        PIC_ORDER_CNT_TYPE = layout.offsetof(7);
-        LOG2_MAX_PIC_ORDER_CNT_LSB_MINUS4 = layout.offsetof(8);
-        OFFSET_FOR_NON_REF_PIC = layout.offsetof(9);
-        OFFSET_FOR_TOP_TO_BOTTOM_FIELD = layout.offsetof(10);
-        NUM_REF_FRAMES_IN_PIC_ORDER_CNT_CYCLE = layout.offsetof(11);
-        MAX_NUM_REF_FRAMES = layout.offsetof(12);
-        PIC_WIDTH_IN_MBS_MINUS1 = layout.offsetof(13);
-        PIC_HEIGHT_IN_MAP_UNITS_MINUS1 = layout.offsetof(14);
-        FRAME_CROP_LEFT_OFFSET = layout.offsetof(15);
-        FRAME_CROP_RIGHT_OFFSET = layout.offsetof(16);
-        FRAME_CROP_TOP_OFFSET = layout.offsetof(17);
-        FRAME_CROP_BOTTOM_OFFSET = layout.offsetof(18);
-        FLAGS = layout.offsetof(19);
+        FLAGS = layout.offsetof(0);
+        PROFILE_IDC = layout.offsetof(1);
+        LEVEL_IDC = layout.offsetof(2);
+        SEQ_PARAMETER_SET_ID = layout.offsetof(3);
+        CHROMA_FORMAT_IDC = layout.offsetof(4);
+        BIT_DEPTH_LUMA_MINUS8 = layout.offsetof(5);
+        BIT_DEPTH_CHROMA_MINUS8 = layout.offsetof(6);
+        LOG2_MAX_FRAME_NUM_MINUS4 = layout.offsetof(7);
+        PIC_ORDER_CNT_TYPE = layout.offsetof(8);
+        LOG2_MAX_PIC_ORDER_CNT_LSB_MINUS4 = layout.offsetof(9);
+        OFFSET_FOR_NON_REF_PIC = layout.offsetof(10);
+        OFFSET_FOR_TOP_TO_BOTTOM_FIELD = layout.offsetof(11);
+        NUM_REF_FRAMES_IN_PIC_ORDER_CNT_CYCLE = layout.offsetof(12);
+        MAX_NUM_REF_FRAMES = layout.offsetof(13);
+        PIC_WIDTH_IN_MBS_MINUS1 = layout.offsetof(14);
+        PIC_HEIGHT_IN_MAP_UNITS_MINUS1 = layout.offsetof(15);
+        FRAME_CROP_LEFT_OFFSET = layout.offsetof(16);
+        FRAME_CROP_RIGHT_OFFSET = layout.offsetof(17);
+        FRAME_CROP_TOP_OFFSET = layout.offsetof(18);
+        FRAME_CROP_BOTTOM_OFFSET = layout.offsetof(19);
         POFFSETFORREFFRAME = layout.offsetof(20);
         PSCALINGLISTS = layout.offsetof(21);
         PSEQUENCEPARAMETERSETVUI = layout.offsetof(22);
@@ -148,6 +148,8 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** @return a {@link StdVideoH264SpsFlags} view of the {@code flags} field. */
+    public StdVideoH264SpsFlags flags() { return nflags(address()); }
     /** @return the value of the {@code profile_idc} field. */
     @NativeType("StdVideoH264ProfileIdc")
     public int profile_idc() { return nprofile_idc(address()); }
@@ -205,23 +207,25 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
     /** @return the value of the {@code frame_crop_bottom_offset} field. */
     @NativeType("uint32_t")
     public int frame_crop_bottom_offset() { return nframe_crop_bottom_offset(address()); }
-    /** @return a {@link StdVideoH264SpsFlags} view of the {@code flags} field. */
-    public StdVideoH264SpsFlags flags() { return nflags(address()); }
     /**
      * a pointer representing the {@code offset_for_ref_frame} array with {@code num_ref_frames_in_pic_order_cnt_cycle} number of elements.
      * 
      * <p>If {@code pOffsetForRefFrame} has {@code nullptr} value, then {@code num_ref_frames_in_pic_order_cnt_cycle} must also be "0".</p>
      */
     @Nullable
-    @NativeType("int32_t *")
+    @NativeType("int32_t const *")
     public IntBuffer pOffsetForRefFrame() { return npOffsetForRefFrame(address()); }
     /** must be a valid pointer if scaling_matrix_present_flag is set */
-    @NativeType("StdVideoH264ScalingLists *")
+    @NativeType("StdVideoH264ScalingLists const *")
     public StdVideoH264ScalingLists pScalingLists() { return npScalingLists(address()); }
     /** must be a valid pointer if StdVideoH264SpsFlags:vui_parameters_present_flag is set */
-    @NativeType("StdVideoH264SequenceParameterSetVui *")
+    @NativeType("StdVideoH264SequenceParameterSetVui const *")
     public StdVideoH264SequenceParameterSetVui pSequenceParameterSetVui() { return npSequenceParameterSetVui(address()); }
 
+    /** Copies the specified {@link StdVideoH264SpsFlags} to the {@code flags} field. */
+    public StdVideoH264SequenceParameterSet flags(StdVideoH264SpsFlags value) { nflags(address(), value); return this; }
+    /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public StdVideoH264SequenceParameterSet flags(java.util.function.Consumer<StdVideoH264SpsFlags> consumer) { consumer.accept(flags()); return this; }
     /** Sets the specified value to the {@code profile_idc} field. */
     public StdVideoH264SequenceParameterSet profile_idc(@NativeType("StdVideoH264ProfileIdc") int value) { nprofile_idc(address(), value); return this; }
     /** Sets the specified value to the {@code level_idc} field. */
@@ -260,19 +264,16 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
     public StdVideoH264SequenceParameterSet frame_crop_top_offset(@NativeType("uint32_t") int value) { nframe_crop_top_offset(address(), value); return this; }
     /** Sets the specified value to the {@code frame_crop_bottom_offset} field. */
     public StdVideoH264SequenceParameterSet frame_crop_bottom_offset(@NativeType("uint32_t") int value) { nframe_crop_bottom_offset(address(), value); return this; }
-    /** Copies the specified {@link StdVideoH264SpsFlags} to the {@code flags} field. */
-    public StdVideoH264SequenceParameterSet flags(StdVideoH264SpsFlags value) { nflags(address(), value); return this; }
-    /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public StdVideoH264SequenceParameterSet flags(java.util.function.Consumer<StdVideoH264SpsFlags> consumer) { consumer.accept(flags()); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pOffsetForRefFrame} field. */
-    public StdVideoH264SequenceParameterSet pOffsetForRefFrame(@Nullable @NativeType("int32_t *") IntBuffer value) { npOffsetForRefFrame(address(), value); return this; }
+    public StdVideoH264SequenceParameterSet pOffsetForRefFrame(@Nullable @NativeType("int32_t const *") IntBuffer value) { npOffsetForRefFrame(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoH264ScalingLists} to the {@link #pScalingLists} field. */
-    public StdVideoH264SequenceParameterSet pScalingLists(@NativeType("StdVideoH264ScalingLists *") StdVideoH264ScalingLists value) { npScalingLists(address(), value); return this; }
+    public StdVideoH264SequenceParameterSet pScalingLists(@NativeType("StdVideoH264ScalingLists const *") StdVideoH264ScalingLists value) { npScalingLists(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoH264SequenceParameterSetVui} to the {@link #pSequenceParameterSetVui} field. */
-    public StdVideoH264SequenceParameterSet pSequenceParameterSetVui(@NativeType("StdVideoH264SequenceParameterSetVui *") StdVideoH264SequenceParameterSetVui value) { npSequenceParameterSetVui(address(), value); return this; }
+    public StdVideoH264SequenceParameterSet pSequenceParameterSetVui(@NativeType("StdVideoH264SequenceParameterSetVui const *") StdVideoH264SequenceParameterSetVui value) { npSequenceParameterSetVui(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoH264SequenceParameterSet set(
+        StdVideoH264SpsFlags flags,
         int profile_idc,
         int level_idc,
         byte seq_parameter_set_id,
@@ -292,11 +293,11 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
         int frame_crop_right_offset,
         int frame_crop_top_offset,
         int frame_crop_bottom_offset,
-        StdVideoH264SpsFlags flags,
         @Nullable IntBuffer pOffsetForRefFrame,
         StdVideoH264ScalingLists pScalingLists,
         StdVideoH264SequenceParameterSetVui pSequenceParameterSetVui
     ) {
+        flags(flags);
         profile_idc(profile_idc);
         level_idc(level_idc);
         seq_parameter_set_id(seq_parameter_set_id);
@@ -316,7 +317,6 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
         frame_crop_right_offset(frame_crop_right_offset);
         frame_crop_top_offset(frame_crop_top_offset);
         frame_crop_bottom_offset(frame_crop_bottom_offset);
-        flags(flags);
         pOffsetForRefFrame(pOffsetForRefFrame);
         pScalingLists(pScalingLists);
         pSequenceParameterSetVui(pSequenceParameterSetVui);
@@ -449,6 +449,8 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
 
     // -----------------------------------
 
+    /** Unsafe version of {@link #flags}. */
+    public static StdVideoH264SpsFlags nflags(long struct) { return StdVideoH264SpsFlags.create(struct + StdVideoH264SequenceParameterSet.FLAGS); }
     /** Unsafe version of {@link #profile_idc}. */
     public static int nprofile_idc(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.PROFILE_IDC); }
     /** Unsafe version of {@link #level_idc}. */
@@ -487,8 +489,6 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
     public static int nframe_crop_top_offset(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_TOP_OFFSET); }
     /** Unsafe version of {@link #frame_crop_bottom_offset}. */
     public static int nframe_crop_bottom_offset(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_BOTTOM_OFFSET); }
-    /** Unsafe version of {@link #flags}. */
-    public static StdVideoH264SpsFlags nflags(long struct) { return StdVideoH264SpsFlags.create(struct + StdVideoH264SequenceParameterSet.FLAGS); }
     /** Unsafe version of {@link #pOffsetForRefFrame() pOffsetForRefFrame}. */
     @Nullable public static IntBuffer npOffsetForRefFrame(long struct) { return memIntBufferSafe(memGetAddress(struct + StdVideoH264SequenceParameterSet.POFFSETFORREFFRAME), Byte.toUnsignedInt(nnum_ref_frames_in_pic_order_cnt_cycle(struct))); }
     /** Unsafe version of {@link #pScalingLists}. */
@@ -496,6 +496,8 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
     /** Unsafe version of {@link #pSequenceParameterSetVui}. */
     public static StdVideoH264SequenceParameterSetVui npSequenceParameterSetVui(long struct) { return StdVideoH264SequenceParameterSetVui.create(memGetAddress(struct + StdVideoH264SequenceParameterSet.PSEQUENCEPARAMETERSETVUI)); }
 
+    /** Unsafe version of {@link #flags(StdVideoH264SpsFlags) flags}. */
+    public static void nflags(long struct, StdVideoH264SpsFlags value) { memCopy(value.address(), struct + StdVideoH264SequenceParameterSet.FLAGS, StdVideoH264SpsFlags.SIZEOF); }
     /** Unsafe version of {@link #profile_idc(int) profile_idc}. */
     public static void nprofile_idc(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.PROFILE_IDC, value); }
     /** Unsafe version of {@link #level_idc(int) level_idc}. */
@@ -534,8 +536,6 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
     public static void nframe_crop_top_offset(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_TOP_OFFSET, value); }
     /** Unsafe version of {@link #frame_crop_bottom_offset(int) frame_crop_bottom_offset}. */
     public static void nframe_crop_bottom_offset(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSet.FRAME_CROP_BOTTOM_OFFSET, value); }
-    /** Unsafe version of {@link #flags(StdVideoH264SpsFlags) flags}. */
-    public static void nflags(long struct, StdVideoH264SpsFlags value) { memCopy(value.address(), struct + StdVideoH264SequenceParameterSet.FLAGS, StdVideoH264SpsFlags.SIZEOF); }
     /** Unsafe version of {@link #pOffsetForRefFrame(IntBuffer) pOffsetForRefFrame}. */
     public static void npOffsetForRefFrame(long struct, @Nullable IntBuffer value) { memPutAddress(struct + StdVideoH264SequenceParameterSet.POFFSETFORREFFRAME, memAddressSafe(value)); nnum_ref_frames_in_pic_order_cnt_cycle(struct, value == null ? 0 : (byte)value.remaining()); }
     /** Unsafe version of {@link #pScalingLists(StdVideoH264ScalingLists) pScalingLists}. */
@@ -593,6 +593,8 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
+        /** @return a {@link StdVideoH264SpsFlags} view of the {@code flags} field. */
+        public StdVideoH264SpsFlags flags() { return StdVideoH264SequenceParameterSet.nflags(address()); }
         /** @return the value of the {@code profile_idc} field. */
         @NativeType("StdVideoH264ProfileIdc")
         public int profile_idc() { return StdVideoH264SequenceParameterSet.nprofile_idc(address()); }
@@ -650,19 +652,21 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
         /** @return the value of the {@code frame_crop_bottom_offset} field. */
         @NativeType("uint32_t")
         public int frame_crop_bottom_offset() { return StdVideoH264SequenceParameterSet.nframe_crop_bottom_offset(address()); }
-        /** @return a {@link StdVideoH264SpsFlags} view of the {@code flags} field. */
-        public StdVideoH264SpsFlags flags() { return StdVideoH264SequenceParameterSet.nflags(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@link StdVideoH264SequenceParameterSet#pOffsetForRefFrame} field. */
         @Nullable
-        @NativeType("int32_t *")
+        @NativeType("int32_t const *")
         public IntBuffer pOffsetForRefFrame() { return StdVideoH264SequenceParameterSet.npOffsetForRefFrame(address()); }
         /** @return a {@link StdVideoH264ScalingLists} view of the struct pointed to by the {@link StdVideoH264SequenceParameterSet#pScalingLists} field. */
-        @NativeType("StdVideoH264ScalingLists *")
+        @NativeType("StdVideoH264ScalingLists const *")
         public StdVideoH264ScalingLists pScalingLists() { return StdVideoH264SequenceParameterSet.npScalingLists(address()); }
         /** @return a {@link StdVideoH264SequenceParameterSetVui} view of the struct pointed to by the {@link StdVideoH264SequenceParameterSet#pSequenceParameterSetVui} field. */
-        @NativeType("StdVideoH264SequenceParameterSetVui *")
+        @NativeType("StdVideoH264SequenceParameterSetVui const *")
         public StdVideoH264SequenceParameterSetVui pSequenceParameterSetVui() { return StdVideoH264SequenceParameterSet.npSequenceParameterSetVui(address()); }
 
+        /** Copies the specified {@link StdVideoH264SpsFlags} to the {@code flags} field. */
+        public StdVideoH264SequenceParameterSet.Buffer flags(StdVideoH264SpsFlags value) { StdVideoH264SequenceParameterSet.nflags(address(), value); return this; }
+        /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public StdVideoH264SequenceParameterSet.Buffer flags(java.util.function.Consumer<StdVideoH264SpsFlags> consumer) { consumer.accept(flags()); return this; }
         /** Sets the specified value to the {@code profile_idc} field. */
         public StdVideoH264SequenceParameterSet.Buffer profile_idc(@NativeType("StdVideoH264ProfileIdc") int value) { StdVideoH264SequenceParameterSet.nprofile_idc(address(), value); return this; }
         /** Sets the specified value to the {@code level_idc} field. */
@@ -701,16 +705,12 @@ public class StdVideoH264SequenceParameterSet extends Struct implements NativeRe
         public StdVideoH264SequenceParameterSet.Buffer frame_crop_top_offset(@NativeType("uint32_t") int value) { StdVideoH264SequenceParameterSet.nframe_crop_top_offset(address(), value); return this; }
         /** Sets the specified value to the {@code frame_crop_bottom_offset} field. */
         public StdVideoH264SequenceParameterSet.Buffer frame_crop_bottom_offset(@NativeType("uint32_t") int value) { StdVideoH264SequenceParameterSet.nframe_crop_bottom_offset(address(), value); return this; }
-        /** Copies the specified {@link StdVideoH264SpsFlags} to the {@code flags} field. */
-        public StdVideoH264SequenceParameterSet.Buffer flags(StdVideoH264SpsFlags value) { StdVideoH264SequenceParameterSet.nflags(address(), value); return this; }
-        /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public StdVideoH264SequenceParameterSet.Buffer flags(java.util.function.Consumer<StdVideoH264SpsFlags> consumer) { consumer.accept(flags()); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link StdVideoH264SequenceParameterSet#pOffsetForRefFrame} field. */
-        public StdVideoH264SequenceParameterSet.Buffer pOffsetForRefFrame(@Nullable @NativeType("int32_t *") IntBuffer value) { StdVideoH264SequenceParameterSet.npOffsetForRefFrame(address(), value); return this; }
+        public StdVideoH264SequenceParameterSet.Buffer pOffsetForRefFrame(@Nullable @NativeType("int32_t const *") IntBuffer value) { StdVideoH264SequenceParameterSet.npOffsetForRefFrame(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoH264ScalingLists} to the {@link StdVideoH264SequenceParameterSet#pScalingLists} field. */
-        public StdVideoH264SequenceParameterSet.Buffer pScalingLists(@NativeType("StdVideoH264ScalingLists *") StdVideoH264ScalingLists value) { StdVideoH264SequenceParameterSet.npScalingLists(address(), value); return this; }
+        public StdVideoH264SequenceParameterSet.Buffer pScalingLists(@NativeType("StdVideoH264ScalingLists const *") StdVideoH264ScalingLists value) { StdVideoH264SequenceParameterSet.npScalingLists(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoH264SequenceParameterSetVui} to the {@link StdVideoH264SequenceParameterSet#pSequenceParameterSetVui} field. */
-        public StdVideoH264SequenceParameterSet.Buffer pSequenceParameterSetVui(@NativeType("StdVideoH264SequenceParameterSetVui *") StdVideoH264SequenceParameterSetVui value) { StdVideoH264SequenceParameterSet.npSequenceParameterSetVui(address(), value); return this; }
+        public StdVideoH264SequenceParameterSet.Buffer pSequenceParameterSetVui(@NativeType("StdVideoH264SequenceParameterSetVui const *") StdVideoH264SequenceParameterSetVui value) { StdVideoH264SequenceParameterSet.npSequenceParameterSetVui(address(), value); return this; }
 
     }
 

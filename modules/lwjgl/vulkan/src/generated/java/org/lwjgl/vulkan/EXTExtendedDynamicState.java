@@ -293,7 +293,7 @@ public class EXTExtendedDynamicState {
      * See {@link VK13#vkCmdSetDepthCompareOp CmdSetDepthCompareOp}.
      *
      * @param commandBuffer  the command buffer into which the command will be recorded.
-     * @param depthCompareOp specifies the depth comparison operator.
+     * @param depthCompareOp a {@code VkCompareOp} value specifying the comparison operator used for the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth-comparison">Depth Comparison</a> step of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth">depth test</a>.
      */
     public static void vkCmdSetDepthCompareOpEXT(VkCommandBuffer commandBuffer, @NativeType("VkCompareOp") int depthCompareOp) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetDepthCompareOpEXT;

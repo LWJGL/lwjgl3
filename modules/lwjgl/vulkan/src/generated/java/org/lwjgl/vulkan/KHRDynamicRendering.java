@@ -33,6 +33,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
+ * <li>Requires {@link KHRDepthStencilResolve VK_KHR_depth_stencil_resolve}</li>
  * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>

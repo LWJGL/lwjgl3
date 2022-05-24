@@ -28,7 +28,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <dd>24</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>3</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -47,7 +47,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2021-03-29</dd>
+            <dd>2022-03-16</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -68,7 +68,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_QUEUE_SPEC_VERSION".."2"
+        "KHR_VIDEO_QUEUE_SPEC_VERSION".."3"
     )
 
     StringConstant(
@@ -320,6 +320,10 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
         <h5>Description</h5>
         If {@code pVideoFormatProperties} is {@code NULL}, then the number of video format properties supported for the given {@code physicalDevice} is returned in {@code pVideoFormatPropertyCount}. Otherwise, {@code pVideoFormatPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pVideoFormatProperties} array, and on return the variable is overwritten with the number of values actually written to {@code pVideoFormatProperties}. If the value of {@code pVideoFormatPropertyCount} is less than the number of video format properties supported, at most {@code pVideoFormatPropertyCount} values will be written to {@code pVideoFormatProperties}, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available values were returned.
+
+        If an implementation reports #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR is supported but #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR is not supported in ##VkVideoDecodeCapabilitiesKHR{@code ::flags}, then to query for video format properties for decode DPB or output, {@code imageUsage} <b>must</b> have both #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR and #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR set. Otherwise, the call will fail with #ERROR_FORMAT_NOT_SUPPORTED.
+
+        If an implementation reports #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR is supported but #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR is not supported in ##VkVideoDecodeCapabilitiesKHR{@code ::flags}, then to query for video format properties for decode DPB, {@code imageUsage} <b>must</b> have #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR set and #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR not set. Otherwise, the call will fail with #ERROR_FORMAT_NOT_SUPPORTED. Similarly, to query for video format properties for decode output, {@code imageUsage} <b>must</b> have #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR set and #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR not set. Otherwise, the call will fail with #ERROR_FORMAT_NOT_SUPPORTED.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -634,7 +638,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         """,
 
         VkDevice("device", "the logical device that was used for the creation of the video session object."),
-        VkVideoSessionParametersKHR("videoSessionParameters", "the video session object that is going to be updated."),
+        VkVideoSessionParametersKHR("videoSessionParameters", "the video session parameters object that is going to be updated."),
         VkVideoSessionParametersUpdateInfoKHR.const.p("pUpdateInfo", "a pointer to a ##VkVideoSessionParametersUpdateInfoKHR structure containing the session parameters update information.")
     )
 
@@ -644,7 +648,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         Destroy video session parameters object.
 
         <h5>C Specification</h5>
-        To destroy a video session object, call:
+        To destroy a video session parameters object, call:
 
         <pre><code>
 ￿void vkDestroyVideoSessionParametersKHR(
@@ -663,7 +667,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkAllocationCallbacks
         """,
 
-        VkDevice("device", "the device the video session was created with."),
+        VkDevice("device", "the device the video session parameters object was created with."),
         VkVideoSessionParametersKHR("videoSessionParameters", "the video session parameters object to be destroyed."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )

@@ -22,7 +22,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkVideoDecodeH264CapabilitiesEXT}, {@link VkVideoDecodeH264SessionCreateInfoEXT}, {@link VkVideoDecodeH265CapabilitiesEXT}, {@link VkVideoDecodeH265SessionCreateInfoEXT}, {@link VkVideoEncodeH264CapabilitiesEXT}, {@link VkVideoEncodeH264SessionCreateInfoEXT}, {@link VkVideoEncodeH265CapabilitiesEXT}, {@link VkVideoEncodeH265SessionCreateInfoEXT}, {@link VK10#vkEnumerateDeviceExtensionProperties EnumerateDeviceExtensionProperties}, {@link VK10#vkEnumerateInstanceExtensionProperties EnumerateInstanceExtensionProperties}</p>
+ * <p>{@link VkVideoCapabilitiesKHR}, {@link VkVideoSessionCreateInfoKHR}, {@link VK10#vkEnumerateDeviceExtensionProperties EnumerateDeviceExtensionProperties}, {@link VK10#vkEnumerateInstanceExtensionProperties EnumerateInstanceExtensionProperties}</p>
  * 
  * <h3>Layout</h3>
  * 

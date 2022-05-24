@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing a Win32 handle semaphore export operation.
+ * Structure describing a Win32 handle memory export operation.
  * 
  * <h5>Description</h5>
  * 

@@ -45,13 +45,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code flags} does not contain {@link KHRSwapchainMutableFormat#VK_SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR} and the {@code pNext} chain include a {@link VkImageFormatListCreateInfo} structure then {@link VkImageFormatListCreateInfo}{@code ::viewFormatCount} <b>must</b> be 0 or 1</li>
  * <li>If {@code flags} contains {@link KHRSwapchain#VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR SWAPCHAIN_CREATE_PROTECTED_BIT_KHR}, then {@link VkSurfaceProtectedCapabilitiesKHR}{@code ::supportsProtected} <b>must</b> be {@link VK10#VK_TRUE TRUE} in the {@link VkSurfaceProtectedCapabilitiesKHR} structure returned by {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR} for {@code surface}</li>
  * <li>If the {@code pNext} chain includes a {@link VkSurfaceFullScreenExclusiveInfoEXT} structure with its {@code fullScreenExclusive} member set to {@link EXTFullScreenExclusive#VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT}, and {@code surface} was created using {@link KHRWin32Surface#vkCreateWin32SurfaceKHR CreateWin32SurfaceKHR}, a {@link VkSurfaceFullScreenExclusiveWin32InfoEXT} structure <b>must</b> be included in the {@code pNext} chain</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-imageCompressionControlSwapchain">imageCompressionControlSwapchain</a> feature is not enabled, the {@code pNext} chain <b>must</b> not include an {@link VkImageCompressionControlEXT} structure</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRSwapchain#VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupSwapchainCreateInfoKHR}, {@link VkImageFormatListCreateInfo}, {@link VkSurfaceFullScreenExclusiveInfoEXT}, {@link VkSurfaceFullScreenExclusiveWin32InfoEXT}, {@link VkSwapchainCounterCreateInfoEXT}, or {@link VkSwapchainDisplayNativeHdrCreateInfoAMD}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupSwapchainCreateInfoKHR}, {@link VkImageCompressionControlEXT}, {@link VkImageFormatListCreateInfo}, {@link VkSurfaceFullScreenExclusiveInfoEXT}, {@link VkSurfaceFullScreenExclusiveWin32InfoEXT}, {@link VkSwapchainCounterCreateInfoEXT}, or {@link VkSwapchainDisplayNativeHdrCreateInfoAMD}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkSwapchainCreateFlagBitsKHR} values</li>
  * <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
@@ -281,6 +282,8 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     public VkSwapchainCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDeviceGroupSwapchainCreateInfoKHR} value to the {@code pNext} chain. */
     public VkSwapchainCreateInfoKHR pNext(VkDeviceGroupSwapchainCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageCompressionControlEXT} value to the {@code pNext} chain. */
+    public VkSwapchainCreateInfoKHR pNext(VkImageCompressionControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageFormatListCreateInfo} value to the {@code pNext} chain. */
     public VkSwapchainCreateInfoKHR pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */
@@ -690,6 +693,8 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
         public VkSwapchainCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainCreateInfoKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDeviceGroupSwapchainCreateInfoKHR} value to the {@code pNext} chain. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkDeviceGroupSwapchainCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageCompressionControlEXT} value to the {@code pNext} chain. */
+        public VkSwapchainCreateInfoKHR.Buffer pNext(VkImageCompressionControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageFormatListCreateInfo} value to the {@code pNext} chain. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkImageFormatListCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageFormatListCreateInfoKHR} value to the {@code pNext} chain. */

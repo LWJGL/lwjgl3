@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct StdVideoEncodeH264PictureInfoFlags {
  *     uint32_t idr_flag : 1;
  *     uint32_t is_reference_flag : 1;
- *     uint32_t long_term_reference_flag : 1;
+ *     uint32_t used_for_long_term_reference : 1;
  * }</code></pre>
  */
 public class StdVideoEncodeH264PictureInfoFlags extends Struct implements NativeResource {
@@ -67,26 +67,26 @@ public class StdVideoEncodeH264PictureInfoFlags extends Struct implements Native
     /** @return the value of the {@code is_reference_flag} field. */
     @NativeType("uint32_t")
     public boolean is_reference_flag() { return nis_reference_flag(address()) != 0; }
-    /** @return the value of the {@code long_term_reference_flag} field. */
+    /** @return the value of the {@code used_for_long_term_reference} field. */
     @NativeType("uint32_t")
-    public boolean long_term_reference_flag() { return nlong_term_reference_flag(address()) != 0; }
+    public boolean used_for_long_term_reference() { return nused_for_long_term_reference(address()) != 0; }
 
     /** Sets the specified value to the {@code idr_flag} field. */
     public StdVideoEncodeH264PictureInfoFlags idr_flag(@NativeType("uint32_t") boolean value) { nidr_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code is_reference_flag} field. */
     public StdVideoEncodeH264PictureInfoFlags is_reference_flag(@NativeType("uint32_t") boolean value) { nis_reference_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code long_term_reference_flag} field. */
-    public StdVideoEncodeH264PictureInfoFlags long_term_reference_flag(@NativeType("uint32_t") boolean value) { nlong_term_reference_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code used_for_long_term_reference} field. */
+    public StdVideoEncodeH264PictureInfoFlags used_for_long_term_reference(@NativeType("uint32_t") boolean value) { nused_for_long_term_reference(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoEncodeH264PictureInfoFlags set(
         boolean idr_flag,
         boolean is_reference_flag,
-        boolean long_term_reference_flag
+        boolean used_for_long_term_reference
     ) {
         idr_flag(idr_flag);
         is_reference_flag(is_reference_flag);
-        long_term_reference_flag(long_term_reference_flag);
+        used_for_long_term_reference(used_for_long_term_reference);
 
         return this;
     }
@@ -221,16 +221,16 @@ public class StdVideoEncodeH264PictureInfoFlags extends Struct implements Native
     public static int nidr_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #is_reference_flag}. */
     public static int nis_reference_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
-    /** Unsafe version of {@link #long_term_reference_flag}. */
-    public static int nlong_term_reference_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
+    /** Unsafe version of {@link #used_for_long_term_reference}. */
+    public static int nused_for_long_term_reference(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264PictureInfoFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #idr_flag(boolean) idr_flag}. */
     public static void nidr_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #is_reference_flag(boolean) is_reference_flag}. */
     public static void nis_reference_flag(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
-    /** Unsafe version of {@link #long_term_reference_flag(boolean) long_term_reference_flag}. */
-    public static void nlong_term_reference_flag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
+    /** Unsafe version of {@link #used_for_long_term_reference(boolean) used_for_long_term_reference}. */
+    public static void nused_for_long_term_reference(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
 
     // -----------------------------------
 
@@ -276,16 +276,16 @@ public class StdVideoEncodeH264PictureInfoFlags extends Struct implements Native
         /** @return the value of the {@code is_reference_flag} field. */
         @NativeType("uint32_t")
         public boolean is_reference_flag() { return StdVideoEncodeH264PictureInfoFlags.nis_reference_flag(address()) != 0; }
-        /** @return the value of the {@code long_term_reference_flag} field. */
+        /** @return the value of the {@code used_for_long_term_reference} field. */
         @NativeType("uint32_t")
-        public boolean long_term_reference_flag() { return StdVideoEncodeH264PictureInfoFlags.nlong_term_reference_flag(address()) != 0; }
+        public boolean used_for_long_term_reference() { return StdVideoEncodeH264PictureInfoFlags.nused_for_long_term_reference(address()) != 0; }
 
         /** Sets the specified value to the {@code idr_flag} field. */
         public StdVideoEncodeH264PictureInfoFlags.Buffer idr_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264PictureInfoFlags.nidr_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code is_reference_flag} field. */
         public StdVideoEncodeH264PictureInfoFlags.Buffer is_reference_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264PictureInfoFlags.nis_reference_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code long_term_reference_flag} field. */
-        public StdVideoEncodeH264PictureInfoFlags.Buffer long_term_reference_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264PictureInfoFlags.nlong_term_reference_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code used_for_long_term_reference} field. */
+        public StdVideoEncodeH264PictureInfoFlags.Buffer used_for_long_term_reference(@NativeType("uint32_t") boolean value) { StdVideoEncodeH264PictureInfoFlags.nused_for_long_term_reference(address(), value ? 1 : 0); return this; }
 
     }
 

@@ -62,20 +62,20 @@ public class StdVideoEncodeH265ReferenceModificationFlags extends Struct impleme
 
     /** @return the value of the {@code ref_pic_list_modification_flag_l0} field. */
     @NativeType("uint32_t")
-    public int ref_pic_list_modification_flag_l0() { return nref_pic_list_modification_flag_l0(address()); }
+    public boolean ref_pic_list_modification_flag_l0() { return nref_pic_list_modification_flag_l0(address()) != 0; }
     /** @return the value of the {@code ref_pic_list_modification_flag_l1} field. */
     @NativeType("uint32_t")
-    public int ref_pic_list_modification_flag_l1() { return nref_pic_list_modification_flag_l1(address()); }
+    public boolean ref_pic_list_modification_flag_l1() { return nref_pic_list_modification_flag_l1(address()) != 0; }
 
     /** Sets the specified value to the {@code ref_pic_list_modification_flag_l0} field. */
-    public StdVideoEncodeH265ReferenceModificationFlags ref_pic_list_modification_flag_l0(@NativeType("uint32_t") int value) { nref_pic_list_modification_flag_l0(address(), value); return this; }
+    public StdVideoEncodeH265ReferenceModificationFlags ref_pic_list_modification_flag_l0(@NativeType("uint32_t") boolean value) { nref_pic_list_modification_flag_l0(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code ref_pic_list_modification_flag_l1} field. */
-    public StdVideoEncodeH265ReferenceModificationFlags ref_pic_list_modification_flag_l1(@NativeType("uint32_t") int value) { nref_pic_list_modification_flag_l1(address(), value); return this; }
+    public StdVideoEncodeH265ReferenceModificationFlags ref_pic_list_modification_flag_l1(@NativeType("uint32_t") boolean value) { nref_pic_list_modification_flag_l1(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoEncodeH265ReferenceModificationFlags set(
-        int ref_pic_list_modification_flag_l0,
-        int ref_pic_list_modification_flag_l1
+        boolean ref_pic_list_modification_flag_l0,
+        boolean ref_pic_list_modification_flag_l1
     ) {
         ref_pic_list_modification_flag_l0(ref_pic_list_modification_flag_l0);
         ref_pic_list_modification_flag_l1(ref_pic_list_modification_flag_l1);
@@ -215,9 +215,9 @@ public class StdVideoEncodeH265ReferenceModificationFlags extends Struct impleme
     public static int nref_pic_list_modification_flag_l1(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265ReferenceModificationFlags.BITFIELD0, value); }
-    /** Unsafe version of {@link #ref_pic_list_modification_flag_l0(int) ref_pic_list_modification_flag_l0}. */
+    /** Unsafe version of {@link #ref_pic_list_modification_flag_l0(boolean) ref_pic_list_modification_flag_l0}. */
     public static void nref_pic_list_modification_flag_l0(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
-    /** Unsafe version of {@link #ref_pic_list_modification_flag_l1(int) ref_pic_list_modification_flag_l1}. */
+    /** Unsafe version of {@link #ref_pic_list_modification_flag_l1(boolean) ref_pic_list_modification_flag_l1}. */
     public static void nref_pic_list_modification_flag_l1(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
 
     // -----------------------------------
@@ -260,15 +260,15 @@ public class StdVideoEncodeH265ReferenceModificationFlags extends Struct impleme
 
         /** @return the value of the {@code ref_pic_list_modification_flag_l0} field. */
         @NativeType("uint32_t")
-        public int ref_pic_list_modification_flag_l0() { return StdVideoEncodeH265ReferenceModificationFlags.nref_pic_list_modification_flag_l0(address()); }
+        public boolean ref_pic_list_modification_flag_l0() { return StdVideoEncodeH265ReferenceModificationFlags.nref_pic_list_modification_flag_l0(address()) != 0; }
         /** @return the value of the {@code ref_pic_list_modification_flag_l1} field. */
         @NativeType("uint32_t")
-        public int ref_pic_list_modification_flag_l1() { return StdVideoEncodeH265ReferenceModificationFlags.nref_pic_list_modification_flag_l1(address()); }
+        public boolean ref_pic_list_modification_flag_l1() { return StdVideoEncodeH265ReferenceModificationFlags.nref_pic_list_modification_flag_l1(address()) != 0; }
 
         /** Sets the specified value to the {@code ref_pic_list_modification_flag_l0} field. */
-        public StdVideoEncodeH265ReferenceModificationFlags.Buffer ref_pic_list_modification_flag_l0(@NativeType("uint32_t") int value) { StdVideoEncodeH265ReferenceModificationFlags.nref_pic_list_modification_flag_l0(address(), value); return this; }
+        public StdVideoEncodeH265ReferenceModificationFlags.Buffer ref_pic_list_modification_flag_l0(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265ReferenceModificationFlags.nref_pic_list_modification_flag_l0(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code ref_pic_list_modification_flag_l1} field. */
-        public StdVideoEncodeH265ReferenceModificationFlags.Buffer ref_pic_list_modification_flag_l1(@NativeType("uint32_t") int value) { StdVideoEncodeH265ReferenceModificationFlags.nref_pic_list_modification_flag_l1(address(), value); return this; }
+        public StdVideoEncodeH265ReferenceModificationFlags.Buffer ref_pic_list_modification_flag_l1(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265ReferenceModificationFlags.nref_pic_list_modification_flag_l1(address(), value ? 1 : 0); return this; }
 
     }
 

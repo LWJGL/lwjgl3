@@ -49,6 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
+ * <li>The parameters <b>must</b> not define more than one <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-import-operation">import operation</a></li>
  * <li>{@code allocationSize} <b>must</b> be greater than 0</li>
  * <li>If the {@code pNext} chain includes a {@link VkExportMemoryAllocateInfo} structure, and any of the handle types specified in {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} require a dedicated allocation, as reported by {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} in {@link VkExternalImageFormatProperties}{@code ::externalMemoryProperties.externalMemoryFeatures} or {@link VkExternalBufferProperties}{@code ::externalMemoryProperties.externalMemoryFeatures}, the {@code pNext} chain <b>must</b> include a {@link VkMemoryDedicatedAllocateInfo} or {@link VkDedicatedAllocationMemoryAllocateInfoNV} structure with either its {@code image} or {@code buffer} member set to a value other than {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * <li>If the {@code pNext} chain includes a {@link VkExportMemoryAllocateInfo} structure, it <b>must</b> not include a {@link VkExportMemoryAllocateInfoNV} or {@link VkExportMemoryWin32HandleInfoNV} structure</li>

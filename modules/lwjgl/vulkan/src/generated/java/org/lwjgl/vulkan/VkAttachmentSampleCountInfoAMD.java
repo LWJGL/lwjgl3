@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -29,8 +28,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRDynamicRendering#VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD}</li>
- * <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachmentSamples} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid {@code VkSampleCountFlagBits} values</li>
- * <li>If {@code depthStencilAttachmentSamples} is not 0, {@code depthStencilAttachmentSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -115,6 +112,8 @@ public class VkAttachmentSampleCountInfoAMD extends Struct implements NativeReso
     public VkAttachmentSampleCountInfoAMD sType$Default() { return sType(KHRDynamicRendering.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAttachmentSampleCountInfoAMD pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@link #colorAttachmentCount} field. */
+    public VkAttachmentSampleCountInfoAMD colorAttachmentCount(@NativeType("uint32_t") int value) { ncolorAttachmentCount(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pColorAttachmentSamples} field. */
     public VkAttachmentSampleCountInfoAMD pColorAttachmentSamples(@Nullable @NativeType("VkSampleCountFlagBits const *") IntBuffer value) { npColorAttachmentSamples(address(), value); return this; }
     /** Sets the specified value to the {@link #depthStencilAttachmentSamples} field. */
@@ -124,11 +123,13 @@ public class VkAttachmentSampleCountInfoAMD extends Struct implements NativeReso
     public VkAttachmentSampleCountInfoAMD set(
         int sType,
         long pNext,
+        int colorAttachmentCount,
         @Nullable IntBuffer pColorAttachmentSamples,
         int depthStencilAttachmentSamples
     ) {
         sType(sType);
         pNext(pNext);
+        colorAttachmentCount(colorAttachmentCount);
         pColorAttachmentSamples(pColorAttachmentSamples);
         depthStencilAttachmentSamples(depthStencilAttachmentSamples);
 
@@ -278,20 +279,9 @@ public class VkAttachmentSampleCountInfoAMD extends Struct implements NativeReso
     /** Sets the specified value to the {@code colorAttachmentCount} field of the specified {@code struct}. */
     public static void ncolorAttachmentCount(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentSampleCountInfoAMD.COLORATTACHMENTCOUNT, value); }
     /** Unsafe version of {@link #pColorAttachmentSamples(IntBuffer) pColorAttachmentSamples}. */
-    public static void npColorAttachmentSamples(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkAttachmentSampleCountInfoAMD.PCOLORATTACHMENTSAMPLES, memAddressSafe(value)); ncolorAttachmentCount(struct, value == null ? 0 : value.remaining()); }
+    public static void npColorAttachmentSamples(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkAttachmentSampleCountInfoAMD.PCOLORATTACHMENTSAMPLES, memAddressSafe(value)); if (value != null) { ncolorAttachmentCount(struct, value.remaining()); } }
     /** Unsafe version of {@link #depthStencilAttachmentSamples(int) depthStencilAttachmentSamples}. */
     public static void ndepthStencilAttachmentSamples(long struct, int value) { UNSAFE.putInt(null, struct + VkAttachmentSampleCountInfoAMD.DEPTHSTENCILATTACHMENTSAMPLES, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (ncolorAttachmentCount(struct) != 0) {
-            check(memGetAddress(struct + VkAttachmentSampleCountInfoAMD.PCOLORATTACHMENTSAMPLES));
-        }
-    }
 
     // -----------------------------------
 
@@ -354,6 +344,8 @@ public class VkAttachmentSampleCountInfoAMD extends Struct implements NativeReso
         public VkAttachmentSampleCountInfoAMD.Buffer sType$Default() { return sType(KHRDynamicRendering.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD); }
         /** Sets the specified value to the {@link VkAttachmentSampleCountInfoAMD#pNext} field. */
         public VkAttachmentSampleCountInfoAMD.Buffer pNext(@NativeType("void const *") long value) { VkAttachmentSampleCountInfoAMD.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@link VkAttachmentSampleCountInfoAMD#colorAttachmentCount} field. */
+        public VkAttachmentSampleCountInfoAMD.Buffer colorAttachmentCount(@NativeType("uint32_t") int value) { VkAttachmentSampleCountInfoAMD.ncolorAttachmentCount(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkAttachmentSampleCountInfoAMD#pColorAttachmentSamples} field. */
         public VkAttachmentSampleCountInfoAMD.Buffer pColorAttachmentSamples(@Nullable @NativeType("VkSampleCountFlagBits const *") IntBuffer value) { VkAttachmentSampleCountInfoAMD.npColorAttachmentSamples(address(), value); return this; }
         /** Sets the specified value to the {@link VkAttachmentSampleCountInfoAMD#depthStencilAttachmentSamples} field. */

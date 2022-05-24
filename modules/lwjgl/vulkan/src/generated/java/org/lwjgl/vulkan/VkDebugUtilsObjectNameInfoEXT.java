@@ -23,6 +23,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Applications <b>may</b> change the name associated with an object simply by calling {@code vkSetDebugUtilsObjectNameEXT} again with a new string. If {@code pObjectName} is either {@code NULL} or an empty string, then any previously set name is removed.</p>
  * 
+ * <p>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-graphicsPipelineLibrary">{@code graphicsPipelineLibrary}</a> feature allows the specification of pipelines without the creation of {@code VkShaderModule} objects beforehand. In order to continue to allow naming these shaders independently, {@link VkDebugUtilsObjectNameInfoEXT} <b>can</b> be included in the {@code pNext} chain of {@link VkPipelineShaderStageCreateInfo}, which associates a static name with that particular shader.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
@@ -34,7 +36,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * <li>{@code objectType} <b>must</b> be a valid {@code VkObjectType} value</li>
  * <li>If {@code pObjectName} is not {@code NULL}, {@code pObjectName} <b>must</b> be a null-terminated UTF-8 string</li>
  * </ul>

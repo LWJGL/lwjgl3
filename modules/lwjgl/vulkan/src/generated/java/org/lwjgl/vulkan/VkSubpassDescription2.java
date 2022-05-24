@@ -57,13 +57,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the {@code attachment} member of any element of {@code pInputAttachments} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, then the {@code aspectMask} member <b>must</b> not include {@link VK10#VK_IMAGE_ASPECT_METADATA_BIT IMAGE_ASPECT_METADATA_BIT}</li>
  * <li>If the {@code attachment} member of any element of {@code pInputAttachments} is not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}, then the {@code aspectMask} member <b>must</b> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code> for any index <em>i</em></li>
  * <li>An attachment <b>must</b> not be used in both {@code pDepthStencilAttachment} and {@code pColorAttachments}</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiview">{@code multiview}</a> feature is not enabled, {@code viewMask} <b>must</b> be 0</li>
+ * <li>The index of the most significant bit in {@code viewMask} <b>must</b> be less than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxMultiviewViewCount">{@code maxMultiviewViewCount}</a></li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2 STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkFragmentShadingRateAttachmentInfoKHR} or {@link VkSubpassDescriptionDepthStencilResolve}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkFragmentShadingRateAttachmentInfoKHR}, {@link VkRenderPassCreationControlEXT}, {@link VkRenderPassSubpassFeedbackInfoEXT}, or {@link VkSubpassDescriptionDepthStencilResolve}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkSubpassDescriptionFlagBits} values</li>
  * <li>{@code pipelineBindPoint} <b>must</b> be a valid {@code VkPipelineBindPoint} value</li>
@@ -222,6 +224,10 @@ public class VkSubpassDescription2 extends Struct implements NativeResource {
     public VkSubpassDescription2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkFragmentShadingRateAttachmentInfoKHR} value to the {@code pNext} chain. */
     public VkSubpassDescription2 pNext(VkFragmentShadingRateAttachmentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassCreationControlEXT} value to the {@code pNext} chain. */
+    public VkSubpassDescription2 pNext(VkRenderPassCreationControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkRenderPassSubpassFeedbackInfoEXT} value to the {@code pNext} chain. */
+    public VkSubpassDescription2 pNext(VkRenderPassSubpassFeedbackInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSubpassDescriptionDepthStencilResolve} value to the {@code pNext} chain. */
     public VkSubpassDescription2 pNext(VkSubpassDescriptionDepthStencilResolve value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSubpassDescriptionDepthStencilResolveKHR} value to the {@code pNext} chain. */
@@ -561,6 +567,10 @@ public class VkSubpassDescription2 extends Struct implements NativeResource {
         public VkSubpassDescription2.Buffer pNext(@NativeType("void const *") long value) { VkSubpassDescription2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkFragmentShadingRateAttachmentInfoKHR} value to the {@code pNext} chain. */
         public VkSubpassDescription2.Buffer pNext(VkFragmentShadingRateAttachmentInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassCreationControlEXT} value to the {@code pNext} chain. */
+        public VkSubpassDescription2.Buffer pNext(VkRenderPassCreationControlEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkRenderPassSubpassFeedbackInfoEXT} value to the {@code pNext} chain. */
+        public VkSubpassDescription2.Buffer pNext(VkRenderPassSubpassFeedbackInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSubpassDescriptionDepthStencilResolve} value to the {@code pNext} chain. */
         public VkSubpassDescription2.Buffer pNext(VkSubpassDescriptionDepthStencilResolve value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSubpassDescriptionDepthStencilResolveKHR} value to the {@code pNext} chain. */

@@ -25,7 +25,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>25</dd>
  * <dt><b>Revision</b></dt>
- * <dd>2</dd>
+ * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires Vulkan 1.0</li>
@@ -43,11 +43,12 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2021-09-30</dd>
+ * <dd>2022-03-31</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
+ * <li>Ahmed Abdelkhalek, AMD</li>
  * <li>Jake Beju, AMD</li>
  * <li>Olivier Lapicque, NVIDIA</li>
  * <li>Peter Fang, AMD</li>
@@ -60,13 +61,24 @@ import static org.lwjgl.system.JNI.*;
 public class KHRVideoDecodeQueue {
 
     /** The extension specification version. */
-    public static final int VK_KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION = 2;
+    public static final int VK_KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION = 4;
 
     /** The extension name. */
     public static final String VK_KHR_VIDEO_DECODE_QUEUE_EXTENSION_NAME = "VK_KHR_video_decode_queue";
 
-    /** Extends {@code VkStructureType}. */
-    public static final int VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR = 1000024000;
+    /**
+     * Extends {@code VkStructureType}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR}</li>
+     * </ul>
+     */
+    public static final int
+        VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR         = 1000024000,
+        VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR = 1000024001;
 
     /** Extends {@code VkQueueFlagBits}. */
     public static final int VK_QUEUE_VIDEO_DECODE_BIT_KHR = 0x20;
@@ -161,6 +173,34 @@ public class KHRVideoDecodeQueue {
     public static final long
         VK_FORMAT_FEATURE_2_VIDEO_DECODE_OUTPUT_BIT_KHR = 0x2000000L,
         VK_FORMAT_FEATURE_2_VIDEO_DECODE_DPB_BIT_KHR    = 0x4000000L;
+
+    /**
+     * VkVideoDecodeCapabilityFlagBitsKHR - Video decode capability flags
+     * 
+     * <h5>Description</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR} - reports the implementation supports using the same <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#video-picture-resources">Video Picture Resource</a> for decode DPB and decode output.</li>
+     * <li>{@link #VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR} - reports the implementation supports using distinct <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#video-picture-resources">Video Picture Resources</a> for decode DPB and decode output.</li>
+     * </ul>
+     * 
+     * <p>An implementation <b>must</b> report at least one of {@link #VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR} or {@link #VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR} as supported.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+     * 
+     * <p>If both {@link #VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR} and {@link #VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR} are supported, an application <b>may</b> choose to create separate images for decode DPB and decode output in the case where linear tiling is required for output but optimal tiling <b>must</b> still be used for DPB. This avoids scheduling layout transitions at the expense of extra overhead during decoding to write both images and the additional memory requirements.</p>
+     * </div>
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_VIDEO_DECODE_CAPABILITY_DEFAULT_KHR VIDEO_DECODE_CAPABILITY_DEFAULT_KHR}</li>
+     * </ul>
+     */
+    public static final int
+        VK_VIDEO_DECODE_CAPABILITY_DEFAULT_KHR                     = 0,
+        VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR = 0x1,
+        VK_VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR = 0x2;
 
     /**
      * VkVideoDecodeFlagBitsKHR - Video Decode Command Flags

@@ -187,7 +187,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
         "See #CmdSetDepthCompareOp().",
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkCompareOp("depthCompareOp", "specifies the depth comparison operator.")
+        VkCompareOp("depthCompareOp", "a {@code VkCompareOp} value specifying the comparison operator used for the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#fragops-depth-comparison\">Depth Comparison</a> step of the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#fragops-depth\">depth test</a>.")
     )
 
     void(

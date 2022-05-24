@@ -41,6 +41,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>Each view index <b>must</b> not be set in more than one element of {@code pCorrelationMasks}</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiview">{@code multiview}</a> feature is not enabled, each element of {@code pViewMasks} <b>must</b> be 0</li>
+ * <li>The index of the most significant bit in each element of {@code pViewMasks} <b>must</b> be less than <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxMultiviewViewCount">{@code maxMultiviewViewCount}</a></li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
