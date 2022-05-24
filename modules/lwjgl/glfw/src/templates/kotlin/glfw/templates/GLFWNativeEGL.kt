@@ -24,6 +24,8 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
         """
         Returns the {@code EGLDisplay} used by GLFW.
 
+        Because EGL is initialized on demand, this function will return EGL10#EGL_NO_DISPLAY until the first context has been created via EGL.
+
         This function may be called from any thread. Access is not synchronized.
         """,
 

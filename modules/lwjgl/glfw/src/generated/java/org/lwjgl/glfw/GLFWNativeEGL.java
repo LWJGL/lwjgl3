@@ -44,6 +44,8 @@ public class GLFWNativeEGL {
     /**
      * Returns the {@code EGLDisplay} used by GLFW.
      * 
+     * <p>Because EGL is initialized on demand, this function will return {@link EGL10#EGL_NO_DISPLAY} until the first context has been created via EGL.</p>
+     * 
      * <p>This function may be called from any thread. Access is not synchronized.</p>
      *
      * @return the {@code EGLDisplay} used by GLFW, or {@link EGL10#EGL_NO_DISPLAY} if an error occured.
