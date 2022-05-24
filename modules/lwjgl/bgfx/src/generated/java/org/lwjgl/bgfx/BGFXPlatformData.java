@@ -81,16 +81,16 @@ public class BGFXPlatformData extends Struct implements NativeResource {
     /** native display type (*nix specific) */
     @NativeType("void *")
     public long ndt() { return nndt(address()); }
-    /** native window handle. If {@code NULL} bgfx will create headless context/device if renderer API supports it. */
+    /** native window handle. If {@code NULL}, bgfx will create a headless context/device, provided the rendering API supports it. */
     @NativeType("void *")
     public long nwh() { return nnwh(address()); }
-    /** GL context, or D3D device. If {@code NULL}, bgfx will create context/device. */
+    /** GL context, D3D device, or Vulkan device. If {@code NULL}, bgfx will create context/device. */
     @NativeType("void *")
     public long context() { return ncontext(address()); }
     /** GL back-buffer, or D3D render target view. If {@code NULL} bgfx will create back-buffer color surface. */
     @NativeType("void *")
     public long backBuffer() { return nbackBuffer(address()); }
-    /** backbuffer depth/stencil. If {@code NULL} bgfx will create back-buffer depth/stencil surface. */
+    /** backbuffer depth/stencil. If {@code NULL}, bgfx will create a back-buffer depth/stencil surface. */
     @NativeType("void *")
     public long backBufferDS() { return nbackBufferDS(address()); }
 

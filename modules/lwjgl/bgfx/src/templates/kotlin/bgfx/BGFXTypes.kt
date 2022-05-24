@@ -559,10 +559,10 @@ val bgfx_platform_data_t = struct(Module.BGFX, "BGFXPlatformData", nativeName = 
     documentation = "Platform data."
 
     nullable..opaque_p("ndt", "native display type (*nix specific)")
-    nullable..opaque_p("nwh", "native window handle. If #NULL bgfx will create headless context/device if renderer API supports it.")
-    nullable..opaque_p("context", "GL context, or D3D device. If #NULL, bgfx will create context/device.")
+    nullable..opaque_p("nwh", "native window handle. If #NULL, bgfx will create a headless context/device, provided the rendering API supports it.")
+    nullable..opaque_p("context", "GL context, D3D device, or Vulkan device. If #NULL, bgfx will create context/device.")
     nullable..opaque_p("backBuffer", "GL back-buffer, or D3D render target view. If #NULL bgfx will create back-buffer color surface.")
-    nullable..opaque_p("backBufferDS", "backbuffer depth/stencil. If #NULL bgfx will create back-buffer depth/stencil surface.")
+    nullable..opaque_p("backBufferDS", "backbuffer depth/stencil. If #NULL, bgfx will create a back-buffer depth/stencil surface.")
 }
 
 val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", skipBuffer = true) {

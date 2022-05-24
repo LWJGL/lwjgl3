@@ -1037,7 +1037,7 @@ RGBA16S
 
     bool(
         "init",
-        "Initializes bgfx library.",
+        "Initializes the bgfx library.",
 
         bgfx_init_t.const.p("_init", "initialization parameters"),
 
@@ -1054,7 +1054,7 @@ RGBA16S
         """
         Resets graphic settings and back-buffer size.
 
-        This call doesn't actually change window size, it just resizes back-buffer. Windowing code has to change window size.
+        This call doesn’t change the window size, it just resizes the back-buffer. Your windowing code controls the window size.
         """,
 
         uint32_t("_width", "back-buffer width"),
@@ -1283,7 +1283,7 @@ RGBA16S
 
     bgfx_dynamic_index_buffer_handle_t(
         "create_dynamic_index_buffer_mem",
-        "Creates dynamic index buffer and initializes it.",
+        "Creates a dynamic index buffer and initializes it.",
 
         bgfx_memory_t.const.p("_mem", "index buffer data"),
         MapToInt..uint16_t("_flags", "buffer creation flags", BufferFlags, LinkMode.BITFIELD)
@@ -1510,7 +1510,7 @@ RGBA16S
         bgfx_texture_format_t("_format", "texture format", TextureFormat),
         uint64_t("_flags", "texture flags", TextureFlags, LinkMode.BITFIELD),
 
-        returnDoc = "true if texture can be successfully created"
+        returnDoc = "true if a texture with the same parameters can be created"
     )
 
     bool(
@@ -1520,7 +1520,7 @@ RGBA16S
         MapToInt..uint8_t("_num", "number of attachments"),
         bgfx_attachment_t.const.p("_attachment", "attachment texture info"),
 
-        returnDoc = "true if frame buffer can be successfully created"
+        returnDoc = "true if a frame buffer with the same parameters can be created"
     )
 
     void(
@@ -1576,7 +1576,7 @@ RGBA16S
 
     bgfx_texture_handle_t(
         "create_texture_2d_scaled",
-        "Creates texture with size based on backbuffer ratio. Texture will maintain ratio if back buffer resolution changes.",
+        "Creates texture with size based on back-buffer ratio. Texture will maintain ratio if back buffer resolution changes.",
 
         bgfx_backbuffer_ratio_t("_ratio", "frame buffer size in respect to back-buffer size", BackbufferRatio),
         bool("_hasMips", "indicates that texture contains full mip-map chain"),
@@ -1783,7 +1783,7 @@ RGBA16S
 
     bgfx_frame_buffer_handle_t(
         "create_frame_buffer_scaled",
-        "Creates frame buffer with size based on backbuffer ratio. Frame buffer will maintain ratio if back buffer resolution changes.",
+        "Creates frame buffer with size based on back-buffer ratio. Frame buffer will maintain ratio if back buffer resolution changes.",
 
         bgfx_backbuffer_ratio_t("_ratio", "frame buffer size in respect to back-buffer size", BackbufferRatio),
         bgfx_texture_format_t("_format", "texture format", TextureFormat),
@@ -2017,7 +2017,7 @@ RGBA16S
 
     void(
         "set_view_clear_mrt",
-        "Sets view clear flags with different clear color for each frame buffer texture. Must use #set_palette_color() to setup clear color palette.",
+        "Sets view clear flags with different clear color for each frame buffer texture. #set_palette_color() must be used to set up a clear color palette.",
 
         MapToInt..bgfx_view_id_t("_id", "view id"),
         MapToInt..uint16_t("_flags", "clear flags. Use #CLEAR_NONE to remove any clear operation.", ClearFlags, LinkMode.BITFIELD),
@@ -2058,7 +2058,7 @@ RGBA16S
 
     void(
         "set_view_transform",
-        "Sets view view and projection matrices, all draw primitives in this view will use these matrices.",
+        "Sets view's view matrix and projection matrix, all draw primitives in this view will use these two matrices.",
 
         MapToInt..bgfx_view_id_t("_id", "view id"),
         MultiType(
@@ -2117,7 +2117,7 @@ RGBA16S
         Remarks:
         ${ol(
             """
-            To setup more complex states use:
+            To set up more complex states use:
             ${codeBlock("""
 BGFX_STATE_ALPHA_REF(_ref),
 BGFX_STATE_POINT_SIZE(_size),
@@ -2612,7 +2612,7 @@ BGFX_STATE_BLEND_EQUATION_SEPARATE(_equationRGB, _equationA)""")}
         Remarks:
         ${ol(
             """
-            To setup more complex states use:
+            To set up more complex states use:
             ${codeBlock("""
 BGFX_STATE_ALPHA_REF(_ref),
 BGFX_STATE_POINT_SIZE(_size),
