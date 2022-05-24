@@ -160,5 +160,5 @@ private val ALBinding = Generator.register(object : APIBinding(
 fun String.nativeClassAL(templateName: String, prefixTemplate: String = "AL", postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
     nativeClass(Module.OPENAL, templateName, prefix = "AL", prefixTemplate = prefixTemplate, postfix = postfix, binding = ALBinding, init = init)
 
-val NativeClass.specLinkOpenALSoft: String get() = url("http://kcat.strangesoft.net/openal-extensions/$templateName.txt", templateName)
+val NativeClass.specLinkOpenALSoft: String get() = url("https://openal-soft.org/openal-extensions/$templateName.txt", templateName)
 val NativeClass.extensionName: String get() = "{@code ${prefixTemplate}_$templateName}"

@@ -7,7 +7,7 @@ package openal.templates
 import org.lwjgl.generator.*
 import openal.*
 
-val AL_SOFT_bformat_ex = "SOFTBformatEx".nativeClassAL("AL_SOFT_bformat_ex") {
+val AL_SOFT_bformat_ex = "SOFTBformatEx".nativeClassAL("SOFT_bformat_ex") {
     documentation =
         """
         Native bindings to the $specLinkOpenALSoft extension.

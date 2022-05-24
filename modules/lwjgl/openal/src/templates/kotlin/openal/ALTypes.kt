@@ -29,3 +29,31 @@ val ALenum = IntegerType("ALenum", PrimitiveMapping.INT)
 
 val ALcharASCII = CharType("ALchar", CharMapping.ASCII)
 val ALcharUTF8 = CharType("ALchar", CharMapping.UTF8)
+
+// AL_SOFT_callback_buffer
+
+val ALBUFFERCALLBACKTYPESOFT = Module.OPENAL.callback {
+    void.p(
+        "SOFTCallbackBufferType",
+        "",
+
+        "ALvoid".opaque.p("userptr", "the same pointer provided to #BufferCallbackSOFT()"),
+        ALvoid.p("sampledata", "a pointer to the sample data buffer that should be filled in by the function"),
+        AutoSize("sampledata")..ALsizei(
+            "numbytes",
+            """
+            the number of bytes needed to fill the sample data buffer for this invocation.
+
+            Guaranteed to be greater than 0 and a multiple of the frame size for the format.
+            """
+        ),
+
+        returnDoc =
+        """
+        the number of bytes actually written, which must be equal to or less than {@code numbytes}.
+
+        If the return value is less than {@code numbytes}, it's treated as the end of the buffer and the source will play any complete samples before stopping.
+        """,
+        nativeType = "ALBUFFERCALLBACKTYPESOFT"
+    )
+}
