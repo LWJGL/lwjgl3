@@ -242,13 +242,13 @@ public final class EGL {
             {0, 1, 2, 3, 4, 5} // 10, 11, 12, 13, 14, 15
         };
 
-        for (int major = 1; major <= min(MAJOR, versions.length); major++) {
-            for (int minor : versions[major - 1]) {
-                if (major == MAJOR && MINOR < minor) {
+        for (int M = 1; M <= min(MAJOR, versions.length); M++) {
+            for (int m : versions[M - 1]) {
+                if (M == MAJOR && MINOR < m) {
                     break;
                 }
 
-                supportedExtensions.add(String.format("EGL%d%d%s", major, minor, ""));
+                supportedExtensions.add("EGL" + M + m);
             }
         }
     }

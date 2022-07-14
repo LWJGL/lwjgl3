@@ -419,7 +419,7 @@ public final class GL {
             }
 
             for (int m = M == 1 ? 1 : 0; m <= maxMinor; m++) {
-                supportedExtensions.add(String.format("OpenGL%d%d", M, m));
+                supportedExtensions.add("OpenGL" + M + m);
             }
         }
 

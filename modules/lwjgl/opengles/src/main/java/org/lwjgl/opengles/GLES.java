@@ -327,7 +327,7 @@ public final class GLES {
             }
 
             for (int m = 0; m <= maxMinor; m++) {
-                supportedExtensions.add(String.format("GLES%d%d", M, m));
+                supportedExtensions.add("GLES" + M + m);
             }
         }
 

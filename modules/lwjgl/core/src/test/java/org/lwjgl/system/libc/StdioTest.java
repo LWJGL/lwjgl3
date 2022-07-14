@@ -10,6 +10,7 @@ import org.lwjgl.system.libffi.*;
 import org.testng.annotations.*;
 
 import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -29,7 +30,7 @@ public class StdioTest {
     }
 
     public void testScanf() {
-        String INPUT  = String.format("%s = %d", MESSAGE, ANSWER);
+        String INPUT  = String.format(Locale.US, "%s = %d", MESSAGE, ANSWER);
         String FORMAT = "%[A-Za-z ]%*[= ]%d";
 
         try (MemoryStack stack = stackPush()) {
@@ -131,7 +132,7 @@ public class StdioTest {
             int chars = rvalue.get(0);
 
             // validate
-            String expected = String.format(FORMAT, MESSAGE, ANSWER);
+            String expected = String.format(Locale.US, FORMAT, MESSAGE, ANSWER);
 
             assertEquals(chars, expected.length());
             assertEquals(memUTF8(buffer, chars), expected);

@@ -163,7 +163,7 @@ public final class XR {
                 maxMinor = min(minorVersion, maxMinor);
             }
             for (int m = 0; m <= maxMinor; m++) {
-                enabledExtensions.add(String.format("OpenXR%d%d", M, m));
+                enabledExtensions.add("OpenXR" + M + m);
             }
         }
 

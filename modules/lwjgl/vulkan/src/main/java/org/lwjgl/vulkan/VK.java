@@ -204,7 +204,7 @@ public final class VK {
                 maxMinor = min(minorVersion, maxMinor);
             }
             for (int m = 0; m <= maxMinor; m++) {
-                enabledExtensions.add(String.format("Vulkan%d%d", M, m));
+                enabledExtensions.add("Vulkan" + M + m);
             }
         }
 

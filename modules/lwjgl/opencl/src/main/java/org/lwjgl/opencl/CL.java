@@ -329,13 +329,13 @@ public final class CL {
     }
 
     private static void addCLVersions(int MAJOR, int MINOR, Set<String> supportedExtensions, String postfix, int[][] versions) {
-        for (int major = 1; major <= min(MAJOR, versions.length); major++) {
-            for (int minor : versions[major - 1]) {
-                if (major == MAJOR && MINOR < minor) {
+        for (int M = 1; M <= min(MAJOR, versions.length); M++) {
+            for (int m : versions[M - 1]) {
+                if (M == MAJOR && MINOR < m) {
                     break;
                 }
 
-                supportedExtensions.add(String.format("OpenCL%d%d%s", major, minor, postfix));
+                supportedExtensions.add("OpenCL" + M + m + postfix);
             }
         }
     }
