@@ -2746,7 +2746,8 @@ public class GLFW {
     /**
      * Iconifies (minimizes) the specified window if it was previously restored. If the window is already iconified, this function does nothing.
      * 
-     * <p>If the specified window is a full screen window, the original monitor resolution is restored until the window is restored.</p>
+     * <p>If the specified window is a full screen window, GLFW restores the original video mode of the monitor. The window's desired video mode is set again
+     * when the window is restored.</p>
      * 
      * <p>Notes:</p>
      * 
@@ -2772,7 +2773,7 @@ public class GLFW {
     /**
      * Restores the specified window if it was previously iconified (minimized) or maximized. If the window is already restored, this function does nothing.
      * 
-     * <p>If the specified window is a full screen window, the resolution chosen for the window is restored on the selected monitor.</p>
+     * <p>If the specified window is an iconified full screen window, its desired video mode is set again for its monitor when the window is restored.</p>
      * 
      * <p>This function must only be called from the main thread.</p>
      *
@@ -2995,6 +2996,8 @@ public class GLFW {
      * 
      * <p>Zero is a valid value for many window and context related attributes so you cannot use a return value of zero as an indication of errors. However, this
      * function should not fail as long as it is passed valid arguments and the library has been initialized.</p>
+     * 
+     * <p><b>Wayland</b>: The Wayland protocol provides no way to check whether a window is iconfied, so {@link #GLFW_ICONIFIED ICONIFIED} always returns {@link #GLFW_FALSE FALSE}.</p>
      *
      * @param window the window to query
      * @param attrib the <a href="http://www.glfw.org/docs/latest/window.html#window_attribs">window attribute</a> whose value to return. One of:<br><table><tr><td>{@link #GLFW_FOCUSED FOCUSED}</td><td>{@link #GLFW_ICONIFIED ICONIFIED}</td><td>{@link #GLFW_RESIZABLE RESIZABLE}</td><td>{@link #GLFW_VISIBLE VISIBLE}</td><td>{@link #GLFW_DECORATED DECORATED}</td></tr><tr><td>{@link #GLFW_FLOATING FLOATING}</td><td>{@link #GLFW_MAXIMIZED MAXIMIZED}</td><td>{@link #GLFW_CENTER_CURSOR CENTER_CURSOR}</td><td>{@link #GLFW_TRANSPARENT_FRAMEBUFFER TRANSPARENT_FRAMEBUFFER}</td><td>{@link #GLFW_HOVERED HOVERED}</td></tr><tr><td>{@link #GLFW_FOCUS_ON_SHOW FOCUS_ON_SHOW}</td><td>{@link #GLFW_MOUSE_PASSTHROUGH MOUSE_PASSTHROUGH}</td><td>{@link #GLFW_CLIENT_API CLIENT_API}</td><td>{@link #GLFW_CONTEXT_VERSION_MAJOR CONTEXT_VERSION_MAJOR}</td><td>{@link #GLFW_CONTEXT_VERSION_MINOR CONTEXT_VERSION_MINOR}</td></tr><tr><td>{@link #GLFW_CONTEXT_REVISION CONTEXT_REVISION}</td><td>{@link #GLFW_CONTEXT_ROBUSTNESS CONTEXT_ROBUSTNESS}</td><td>{@link #GLFW_OPENGL_FORWARD_COMPAT OPENGL_FORWARD_COMPAT}</td><td>{@link #GLFW_CONTEXT_DEBUG CONTEXT_DEBUG}</td><td>{@link #GLFW_OPENGL_DEBUG_CONTEXT OPENGL_DEBUG_CONTEXT}</td></tr><tr><td>{@link #GLFW_OPENGL_PROFILE OPENGL_PROFILE}</td><td>{@link #GLFW_CONTEXT_RELEASE_BEHAVIOR CONTEXT_RELEASE_BEHAVIOR}</td><td>{@link #GLFW_CONTEXT_NO_ERROR CONTEXT_NO_ERROR}</td><td>{@link #GLFW_CONTEXT_CREATION_API CONTEXT_CREATION_API}</td><td>{@link #GLFW_SCALE_TO_MONITOR SCALE_TO_MONITOR}</td></tr></table>
@@ -3675,8 +3678,8 @@ public class GLFW {
     // --- [ glfwGetKey ] ---
 
     /**
-     * Returns the last state reported for the specified key to the specified window. The returned state is one of {@link #GLFW_PRESS PRESS} or {@link #GLFW_RELEASE RELEASE}. The higher-level action
-     * {@link #GLFW_REPEAT REPEAT} is only reported to the key callback.
+     * Returns the last state reported for the specified key to the specified window. The returned state is one of {@link #GLFW_PRESS PRESS} or {@link #GLFW_RELEASE RELEASE}. The action {@link #GLFW_REPEAT REPEAT} is
+     * only reported to the key callback.
      * 
      * <p>If the {@link #GLFW_STICKY_KEYS STICKY_KEYS} input mode is enabled, this function returns {@link #GLFW_PRESS PRESS} the first time you call it for a key that was pressed, even if that
      * key has already been released.</p>

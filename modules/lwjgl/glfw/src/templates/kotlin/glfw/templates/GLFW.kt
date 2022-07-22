@@ -2132,7 +2132,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """
         Iconifies (minimizes) the specified window if it was previously restored. If the window is already iconified, this function does nothing.
 
-        If the specified window is a full screen window, the original monitor resolution is restored until the window is restored.
+        If the specified window is a full screen window, GLFW restores the original video mode of the monitor. The window's desired video mode is set again
+        when the window is restored.
 
         Notes:
         ${ul(
@@ -2151,7 +2152,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """
         Restores the specified window if it was previously iconified (minimized) or maximized. If the window is already restored, this function does nothing.
 
-        If the specified window is a full screen window, the resolution chosen for the window is restored on the selected monitor.
+        If the specified window is an iconified full screen window, its desired video mode is set again for its monitor when the window is restored.
 
         This function must only be called from the main thread.
         """,
@@ -2321,6 +2322,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         Zero is a valid value for many window and context related attributes so you cannot use a return value of zero as an indication of errors. However, this
         function should not fail as long as it is passed valid arguments and the library has been initialized.
+
+        <b>Wayland</b>: The Wayland protocol provides no way to check whether a window is iconfied, so #ICONIFIED always returns #FALSE.
         """,
 
         GLFWwindow.p("window", "the window to query"),
@@ -2802,8 +2805,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     int(
         "GetKey",
         """
-        Returns the last state reported for the specified key to the specified window. The returned state is one of #PRESS or #RELEASE. The higher-level action
-        #REPEAT is only reported to the key callback.
+        Returns the last state reported for the specified key to the specified window. The returned state is one of #PRESS or #RELEASE. The action #REPEAT is
+        only reported to the key callback.
 
         If the #STICKY_KEYS input mode is enabled, this function returns #PRESS the first time you call it for a key that was pressed, even if that
         key has already been released.
