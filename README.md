@@ -215,3 +215,13 @@ Our gold sponsors:
 <a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/7/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/8/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/9/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/9/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/10/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/10/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/11/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/11/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/12/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/12/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/13/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/13/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/14/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/14/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/15/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/15/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/16/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/16/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/17/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/17/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/18/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/18/avatar.svg"></a>
+<a href="https://opencollective.com/lwjgl/tiers/gold-sponsor/19/website" target="_blank"><img src="https://opencollective.com/lwjgl/tiers/gold-sponsor/19/avatar.svg"></a>
