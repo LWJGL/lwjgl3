@@ -673,6 +673,18 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Will enable the skeleton structo to store bone data.
+
+        This will decouple the bone coupling to the mesh. This feature is experimental.
+
+        Property type: bool. The default value is false (0)
+        """,
+
+        "AI_CONFIG_FBX_USE_SKELETON_BONE_CONTAINER".."AI_CONFIG_FBX_USE_SKELETON_BONE_CONTAINER"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Set the vertex animation keyframe to be imported.
 
         ASSIMP does not support vertex keyframes (only bone animation is supported). The library reads only one frame of models with vertex animations. By

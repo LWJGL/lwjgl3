@@ -528,6 +528,47 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
     )
 }
 
+val aiSkeletonBone = struct(Module.ASSIMP, "AISkeletonBone", nativeName = "struct aiSkeletonBone") {
+    int("mParent", "the parent bone index, is -1 one if this bone represents the root bone")
+    nullable..aiNode.p(
+        "mArmature",
+        """
+        The bone armature node - used for skeleton conversion.
+
+        You must enable #Process_PopulateArmatureData to populate this.
+        """
+    )
+    nullable..aiNode.p(
+        "mNode",
+        """
+        The bone node in the scene - used for skeleton conversion.
+
+        You must enable #Process_PopulateArmatureData to populate this.
+        """
+    )
+    AutoSize("mMeshId", "mWeights")..unsigned_int("mNumnWeights", "the number of weights");
+    aiMesh.p("mMeshId", "the mesh index, which will get influenced by the weight")
+    aiVertexWeight.p("mWeights", "the influence weights of this bone, by vertex index")
+    aiMatrix4x4(
+        "mOffsetMatrix",
+        """
+        Matrix that transforms from bone space to mesh space in bind pose.
+
+        This matrix describes the position of the mesh in the local space of this bone when the skeleton was bound. Thus it can be used directly to determine a
+        desired vertex position, given the world-space transform of the bone when animated, and the position of the vertex in mesh space.
+
+        It is sometimes called an inverse-bind matrix, or inverse bind pose matrix.
+        """
+    )
+    aiMatrix4x4("mLocalMatrix", "matrix that transforms the local bone in bind pose")
+}
+
+val aiSkeleton = struct(Module.ASSIMP, "AISkeleton", nativeName = "struct aiSkeleton") {
+    aiString("mName", "")
+    AutoSize("mBones")..unsigned_int("mNumBones", "")
+    aiSkeletonBone.p.p("mBones", "");
+}
+
 val aiUVTransform = struct(Module.ASSIMP, "AIUVTransform", nativeName = "struct aiUVTransform", mutable = false) {
     documentation =
         """
@@ -1030,6 +1071,9 @@ val aiScene = struct(Module.ASSIMP, "AIScene", nativeName = "struct aiScene") {
         """
     )
     aiString("mName", "The name of the scene itself.")
+
+    unsigned_int("mNumSkeletons", "")
+    aiSkeleton.p.p("mSkeletons", "")
 
     char.p("mPrivate", "Internal use only, do not touch!").private()
 }
