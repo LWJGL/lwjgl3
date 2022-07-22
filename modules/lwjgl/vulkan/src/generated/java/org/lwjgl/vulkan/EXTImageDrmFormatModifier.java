@@ -88,11 +88,11 @@ import static org.lwjgl.system.JNI.*;
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link KHRBindMemory2 VK_KHR_bind_memory2}</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
- * <li>Requires {@link KHRImageFormatList VK_KHR_image_format_list}</li>
- * <li>Requires {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link KHRBindMemory2 VK_KHR_bind_memory2} to be enabled for any device-level functionality</li>
+ * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
+ * <li>Requires {@link KHRImageFormatList VK_KHR_image_format_list} to be enabled for any device-level functionality</li>
+ * <li>Requires {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

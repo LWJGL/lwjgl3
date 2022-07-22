@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>25</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
+ * <li>Requires support for Vulkan 1.0</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -207,6 +207,11 @@ public class KHRSurface {
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
      * <p>In older versions of this extension {@link EXTSwapchainColorspace#VK_COLOR_SPACE_DISPLAY_P3_LINEAR_EXT COLOR_SPACE_DISPLAY_P3_LINEAR_EXT} was misnamed {@link EXTSwapchainColorspace#VK_COLOR_SPACE_DCI_P3_LINEAR_EXT COLOR_SPACE_DCI_P3_LINEAR_EXT}. This has been updated to indicate that it uses RGB color encoding, not XYZ. The old name is deprecated but is maintained for backwards compatibility.</p>
+     * </div>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>For a traditional "Linear" or non-gamma transfer function color space use {@link EXTSwapchainColorspace#VK_COLOR_SPACE_PASS_THROUGH_EXT COLOR_SPACE_PASS_THROUGH_EXT}.</p>
      * </div>
      * 
      * <p>The color components of non-linear color space swap chain images <b>must</b> have had the appropriate transfer function applied. The color space selected for the swap chain image will not affect the processing of data written into the image by the implementation. Vulkan requires that all implementations support the sRGB transfer function by use of an SRGB pixel format. Other transfer functions, such as SMPTE 170M or SMPTE2084, <b>can</b> be performed by the application shader. This extension defines enums for {@code VkColorSpaceKHR} that correspond to the following color spaces:</p>

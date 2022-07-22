@@ -23,7 +23,7 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.1</li>
+ * <li>Requires support for Vulkan 1.1</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

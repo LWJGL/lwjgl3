@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceLinearColorAttachmentFeaturesNV {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #linearColorAttachment};
  * }</code></pre>
  */
@@ -79,21 +79,21 @@ public class VkPhysicalDeviceLinearColorAttachmentFeaturesNV extends Struct impl
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates whether the implementation supports renderable <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#glossary">Linear Color Attachment</a> */
     @NativeType("VkBool32")
     public boolean linearColorAttachment() { return nlinearColorAttachment(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceLinearColorAttachmentFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVLinearColorAttachment#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV} value to the {@code sType} field. */
+    /** Sets the {@link NVLinearColorAttachment#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV} value to the {@link #sType} field. */
     public VkPhysicalDeviceLinearColorAttachmentFeaturesNV sType$Default() { return sType(NVLinearColorAttachment.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceLinearColorAttachmentFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #linearColorAttachment} field. */
     public VkPhysicalDeviceLinearColorAttachmentFeaturesNV linearColorAttachment(@NativeType("VkBool32") boolean value) { nlinearColorAttachment(address(), value ? 1 : 0); return this; }
@@ -288,21 +288,21 @@ public class VkPhysicalDeviceLinearColorAttachmentFeaturesNV extends Struct impl
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceLinearColorAttachmentFeaturesNV#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceLinearColorAttachmentFeaturesNV.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceLinearColorAttachmentFeaturesNV#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceLinearColorAttachmentFeaturesNV.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceLinearColorAttachmentFeaturesNV#linearColorAttachment} field. */
         @NativeType("VkBool32")
         public boolean linearColorAttachment() { return VkPhysicalDeviceLinearColorAttachmentFeaturesNV.nlinearColorAttachment(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceLinearColorAttachmentFeaturesNV#sType} field. */
         public VkPhysicalDeviceLinearColorAttachmentFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceLinearColorAttachmentFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVLinearColorAttachment#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV} value to the {@code sType} field. */
+        /** Sets the {@link NVLinearColorAttachment#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV} value to the {@link VkPhysicalDeviceLinearColorAttachmentFeaturesNV#sType} field. */
         public VkPhysicalDeviceLinearColorAttachmentFeaturesNV.Buffer sType$Default() { return sType(NVLinearColorAttachment.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceLinearColorAttachmentFeaturesNV#pNext} field. */
         public VkPhysicalDeviceLinearColorAttachmentFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceLinearColorAttachmentFeaturesNV.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceLinearColorAttachmentFeaturesNV#linearColorAttachment} field. */
         public VkPhysicalDeviceLinearColorAttachmentFeaturesNV.Buffer linearColorAttachment(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceLinearColorAttachmentFeaturesNV.nlinearColorAttachment(address(), value ? 1 : 0); return this; }

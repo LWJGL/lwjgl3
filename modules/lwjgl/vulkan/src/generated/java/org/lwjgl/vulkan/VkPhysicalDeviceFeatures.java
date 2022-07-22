@@ -357,7 +357,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * <li>If a vertex input attribute is out of bounds, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fxvertex-input-extraction">raw data</a> extracted are zero values, and missing G, B, or A components are <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fxvertex-input-extraction">filled with <code>(0,0,1)</code></a>.</li>
      * </ul>
      * </li>
-     * <li>If {@code robustBufferAccess} is not enabled, applications <b>must</b> not perform out of bounds accesses.</li>
+     * <li>If {@code robustBufferAccess} is not enabled, applications <b>must</b> not perform out of bounds accesses except under the conditions enabled by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> feature. .</li>
      * </ul>
      */
     @NativeType("VkBool32")

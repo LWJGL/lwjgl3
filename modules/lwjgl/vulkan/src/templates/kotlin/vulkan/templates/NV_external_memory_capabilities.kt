@@ -29,7 +29,7 @@ val NV_external_memory_capabilities = "NVExternalMemoryCapabilities".nativeClass
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Deprecation state</b></dt>

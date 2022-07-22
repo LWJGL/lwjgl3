@@ -31,8 +31,8 @@ val KHR_external_fence_win32 = "KHRExternalFenceWin32".nativeClassVK("KHR_extern
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRExternalFence VK_KHR_external_fence}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRExternalFence VK_KHR_external_fence} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

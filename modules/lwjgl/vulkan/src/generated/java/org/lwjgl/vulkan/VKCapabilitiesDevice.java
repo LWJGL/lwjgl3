@@ -318,6 +318,10 @@ public class VKCapabilitiesDevice {
     public final long
         vkCmdSetLineStippleEXT;
 
+    // EXT_metal_objects
+    public final long
+        vkExportMetalObjectsEXT;
+
     // EXT_multi_draw
     public final long
         vkCmdDrawMultiEXT,
@@ -341,6 +345,11 @@ public class VKCapabilitiesDevice {
     // EXT_sample_locations
     public final long
         vkCmdSetSampleLocationsEXT;
+
+    // EXT_shader_module_identifier
+    public final long
+        vkGetShaderModuleIdentifierEXT,
+        vkGetShaderModuleCreateInfoIdentifierEXT;
 
     // EXT_transform_feedback
     public final long
@@ -688,6 +697,11 @@ public class VKCapabilitiesDevice {
         vkGetImageViewHandleNVX,
         vkGetImageViewAddressNVX;
 
+    // QCOM_tile_properties
+    public final long
+        vkGetFramebufferTilePropertiesQCOM,
+        vkGetDynamicRenderingTilePropertiesQCOM;
+
     // VALVE_descriptor_set_host_mapping
     public final long
         vkGetDescriptorSetLayoutHostMappingInfoVALVE,
@@ -838,8 +852,14 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_memory_budget;
     /** When true, {@link EXTMemoryPriority} is supported. */
     public final boolean VK_EXT_memory_priority;
+    /** When true, {@link EXTMetalObjects} is supported. */
+    public final boolean VK_EXT_metal_objects;
     /** When true, {@link EXTMultiDraw} is supported. */
     public final boolean VK_EXT_multi_draw;
+    /** When true, {@link EXTMultisampledRenderToSingleSampled} is supported. */
+    public final boolean VK_EXT_multisampled_render_to_single_sampled;
+    /** When true, {@link EXTNonSeamlessCubeMap} is supported. */
+    public final boolean VK_EXT_non_seamless_cube_map;
     /** When true, {@link EXTPageableDeviceLocalMemory} is supported. */
     public final boolean VK_EXT_pageable_device_local_memory;
     /** When true, {@link EXTPciBusInfo} is supported. */
@@ -852,6 +872,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_pipeline_creation_feedback;
     /** When true, {@link EXTPipelineProperties} is supported. */
     public final boolean VK_EXT_pipeline_properties;
+    /** When true, {@link EXTPipelineRobustness} is supported. */
+    public final boolean VK_EXT_pipeline_robustness;
     /** When true, {@link EXTPostDepthCoverage} is supported. */
     public final boolean VK_EXT_post_depth_coverage;
     /** When true, {@link EXTPrimitiveTopologyListRestart} is supported. */
@@ -884,6 +906,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_EXT_shader_demote_to_helper_invocation;
     /** When true, {@link EXTShaderImageAtomicInt64} is supported. */
     public final boolean VK_EXT_shader_image_atomic_int64;
+    /** When true, {@link EXTShaderModuleIdentifier} is supported. */
+    public final boolean VK_EXT_shader_module_identifier;
     /** When true, {@link EXTShaderStencilExport} is supported. */
     public final boolean VK_EXT_shader_stencil_export;
     /** When true, {@link EXTShaderSubgroupBallot} is supported. */
@@ -1178,6 +1202,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_NVX_multiview_per_view_attributes;
     /** When true, {@link QCOMFragmentDensityMapOffset} is supported. */
     public final boolean VK_QCOM_fragment_density_map_offset;
+    /** When true, {@link QCOMImageProcessing} is supported. */
+    public final boolean VK_QCOM_image_processing;
     /** When true, {@link QCOMRenderPassShaderResolve} is supported. */
     public final boolean VK_QCOM_render_pass_shader_resolve;
     /** When true, {@link QCOMRenderPassStoreOps} is supported. */
@@ -1186,6 +1212,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_QCOM_render_pass_transform;
     /** When true, {@link QCOMRotatedCopyCommands} is supported. */
     public final boolean VK_QCOM_rotated_copy_commands;
+    /** When true, {@link QCOMTileProperties} is supported. */
+    public final boolean VK_QCOM_tile_properties;
     /** When true, {@code STD_vulkan_video_codec_h264} is supported. */
     public final boolean STD_vulkan_video_codec_h264;
     /** When true, {@code STD_vulkan_video_codec_h265} is supported. */
@@ -1198,7 +1226,7 @@ public class VKCapabilitiesDevice {
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, int apiVersion, Set<String> ext) {
         this.apiVersion = apiVersion;
 
-        long[] caps = new long[424];
+        long[] caps = new long[429];
 
         Vulkan10 = check_VK10(provider, caps, ext);
         Vulkan11 = check_VK11(provider, caps, ext);
@@ -1271,13 +1299,17 @@ public class VKCapabilitiesDevice {
         VK_EXT_load_store_op_none = ext.contains("VK_EXT_load_store_op_none");
         VK_EXT_memory_budget = ext.contains("VK_EXT_memory_budget");
         VK_EXT_memory_priority = ext.contains("VK_EXT_memory_priority");
+        VK_EXT_metal_objects = check_EXT_metal_objects(provider, caps, ext);
         VK_EXT_multi_draw = check_EXT_multi_draw(provider, caps, ext);
+        VK_EXT_multisampled_render_to_single_sampled = ext.contains("VK_EXT_multisampled_render_to_single_sampled");
+        VK_EXT_non_seamless_cube_map = ext.contains("VK_EXT_non_seamless_cube_map");
         VK_EXT_pageable_device_local_memory = check_EXT_pageable_device_local_memory(provider, caps, ext);
         VK_EXT_pci_bus_info = ext.contains("VK_EXT_pci_bus_info");
         VK_EXT_physical_device_drm = ext.contains("VK_EXT_physical_device_drm");
         VK_EXT_pipeline_creation_cache_control = ext.contains("VK_EXT_pipeline_creation_cache_control");
         VK_EXT_pipeline_creation_feedback = ext.contains("VK_EXT_pipeline_creation_feedback");
         VK_EXT_pipeline_properties = check_EXT_pipeline_properties(provider, caps, ext);
+        VK_EXT_pipeline_robustness = ext.contains("VK_EXT_pipeline_robustness");
         VK_EXT_post_depth_coverage = ext.contains("VK_EXT_post_depth_coverage");
         VK_EXT_primitive_topology_list_restart = ext.contains("VK_EXT_primitive_topology_list_restart");
         VK_EXT_primitives_generated_query = ext.contains("VK_EXT_primitives_generated_query");
@@ -1294,6 +1326,7 @@ public class VKCapabilitiesDevice {
         VK_EXT_shader_atomic_float2 = ext.contains("VK_EXT_shader_atomic_float2");
         VK_EXT_shader_demote_to_helper_invocation = ext.contains("VK_EXT_shader_demote_to_helper_invocation");
         VK_EXT_shader_image_atomic_int64 = ext.contains("VK_EXT_shader_image_atomic_int64");
+        VK_EXT_shader_module_identifier = check_EXT_shader_module_identifier(provider, caps, ext);
         VK_EXT_shader_stencil_export = ext.contains("VK_EXT_shader_stencil_export");
         VK_EXT_shader_subgroup_ballot = ext.contains("VK_EXT_shader_subgroup_ballot");
         VK_EXT_shader_subgroup_vote = ext.contains("VK_EXT_shader_subgroup_vote");
@@ -1441,10 +1474,12 @@ public class VKCapabilitiesDevice {
         VK_NVX_image_view_handle = check_NVX_image_view_handle(provider, caps, ext);
         VK_NVX_multiview_per_view_attributes = ext.contains("VK_NVX_multiview_per_view_attributes");
         VK_QCOM_fragment_density_map_offset = ext.contains("VK_QCOM_fragment_density_map_offset");
+        VK_QCOM_image_processing = ext.contains("VK_QCOM_image_processing");
         VK_QCOM_render_pass_shader_resolve = ext.contains("VK_QCOM_render_pass_shader_resolve");
         VK_QCOM_render_pass_store_ops = ext.contains("VK_QCOM_render_pass_store_ops");
         VK_QCOM_render_pass_transform = ext.contains("VK_QCOM_render_pass_transform");
         VK_QCOM_rotated_copy_commands = ext.contains("VK_QCOM_rotated_copy_commands");
+        VK_QCOM_tile_properties = check_QCOM_tile_properties(provider, caps, ext);
         STD_vulkan_video_codec_h264 = ext.contains("STD_vulkan_video_codec_h264");
         STD_vulkan_video_codec_h265 = ext.contains("STD_vulkan_video_codec_h265");
         VK_VALVE_descriptor_set_host_mapping = check_VALVE_descriptor_set_host_mapping(provider, caps, ext);
@@ -1682,198 +1717,203 @@ public class VKCapabilitiesDevice {
         vkGetImageSubresourceLayout2EXT = caps[229];
         vkGetImageDrmFormatModifierPropertiesEXT = caps[230];
         vkCmdSetLineStippleEXT = caps[231];
-        vkCmdDrawMultiEXT = caps[232];
-        vkCmdDrawMultiIndexedEXT = caps[233];
-        vkSetDeviceMemoryPriorityEXT = caps[234];
-        vkGetPipelinePropertiesEXT = caps[235];
-        vkCreatePrivateDataSlotEXT = caps[236];
-        vkDestroyPrivateDataSlotEXT = caps[237];
-        vkSetPrivateDataEXT = caps[238];
-        vkGetPrivateDataEXT = caps[239];
-        vkCmdSetSampleLocationsEXT = caps[240];
-        vkCmdBindTransformFeedbackBuffersEXT = caps[241];
-        vkCmdBeginTransformFeedbackEXT = caps[242];
-        vkCmdEndTransformFeedbackEXT = caps[243];
-        vkCmdBeginQueryIndexedEXT = caps[244];
-        vkCmdEndQueryIndexedEXT = caps[245];
-        vkCmdDrawIndirectByteCountEXT = caps[246];
-        vkCreateValidationCacheEXT = caps[247];
-        vkDestroyValidationCacheEXT = caps[248];
-        vkMergeValidationCachesEXT = caps[249];
-        vkGetValidationCacheDataEXT = caps[250];
-        vkCmdSetVertexInputEXT = caps[251];
-        vkGetRefreshCycleDurationGOOGLE = caps[252];
-        vkGetPastPresentationTimingGOOGLE = caps[253];
-        vkCmdBindInvocationMaskHUAWEI = caps[254];
-        vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = caps[255];
-        vkCmdSubpassShadingHUAWEI = caps[256];
-        vkInitializePerformanceApiINTEL = caps[257];
-        vkUninitializePerformanceApiINTEL = caps[258];
-        vkCmdSetPerformanceMarkerINTEL = caps[259];
-        vkCmdSetPerformanceStreamMarkerINTEL = caps[260];
-        vkCmdSetPerformanceOverrideINTEL = caps[261];
-        vkAcquirePerformanceConfigurationINTEL = caps[262];
-        vkReleasePerformanceConfigurationINTEL = caps[263];
-        vkQueueSetPerformanceConfigurationINTEL = caps[264];
-        vkGetPerformanceParameterINTEL = caps[265];
-        vkCreateAccelerationStructureKHR = caps[266];
-        vkDestroyAccelerationStructureKHR = caps[267];
-        vkCmdBuildAccelerationStructuresKHR = caps[268];
-        vkCmdBuildAccelerationStructuresIndirectKHR = caps[269];
-        vkBuildAccelerationStructuresKHR = caps[270];
-        vkCopyAccelerationStructureKHR = caps[271];
-        vkCopyAccelerationStructureToMemoryKHR = caps[272];
-        vkCopyMemoryToAccelerationStructureKHR = caps[273];
-        vkWriteAccelerationStructuresPropertiesKHR = caps[274];
-        vkCmdCopyAccelerationStructureKHR = caps[275];
-        vkCmdCopyAccelerationStructureToMemoryKHR = caps[276];
-        vkCmdCopyMemoryToAccelerationStructureKHR = caps[277];
-        vkGetAccelerationStructureDeviceAddressKHR = caps[278];
-        vkCmdWriteAccelerationStructuresPropertiesKHR = caps[279];
-        vkGetDeviceAccelerationStructureCompatibilityKHR = caps[280];
-        vkGetAccelerationStructureBuildSizesKHR = caps[281];
-        vkBindBufferMemory2KHR = caps[282];
-        vkBindImageMemory2KHR = caps[283];
-        vkGetBufferDeviceAddressKHR = caps[284];
-        vkGetBufferOpaqueCaptureAddressKHR = caps[285];
-        vkGetDeviceMemoryOpaqueCaptureAddressKHR = caps[286];
-        vkCmdCopyBuffer2KHR = caps[287];
-        vkCmdCopyImage2KHR = caps[288];
-        vkCmdCopyBufferToImage2KHR = caps[289];
-        vkCmdCopyImageToBuffer2KHR = caps[290];
-        vkCmdBlitImage2KHR = caps[291];
-        vkCmdResolveImage2KHR = caps[292];
-        vkCreateRenderPass2KHR = caps[293];
-        vkCmdBeginRenderPass2KHR = caps[294];
-        vkCmdNextSubpass2KHR = caps[295];
-        vkCmdEndRenderPass2KHR = caps[296];
-        vkCreateDeferredOperationKHR = caps[297];
-        vkDestroyDeferredOperationKHR = caps[298];
-        vkGetDeferredOperationMaxConcurrencyKHR = caps[299];
-        vkGetDeferredOperationResultKHR = caps[300];
-        vkDeferredOperationJoinKHR = caps[301];
-        vkCreateDescriptorUpdateTemplateKHR = caps[302];
-        vkDestroyDescriptorUpdateTemplateKHR = caps[303];
-        vkUpdateDescriptorSetWithTemplateKHR = caps[304];
-        vkCmdPushDescriptorSetWithTemplateKHR = caps[305];
-        vkGetDeviceGroupPeerMemoryFeaturesKHR = caps[306];
-        vkCmdSetDeviceMaskKHR = caps[307];
-        vkCmdDispatchBaseKHR = caps[308];
-        vkGetDeviceGroupPresentCapabilitiesKHR = caps[309];
-        vkGetDeviceGroupSurfacePresentModesKHR = caps[310];
-        vkAcquireNextImage2KHR = caps[311];
-        vkCreateSharedSwapchainsKHR = caps[312];
-        vkCmdDrawIndirectCountKHR = caps[313];
-        vkCmdDrawIndexedIndirectCountKHR = caps[314];
-        vkCmdBeginRenderingKHR = caps[315];
-        vkCmdEndRenderingKHR = caps[316];
-        vkImportFenceFdKHR = caps[317];
-        vkGetFenceFdKHR = caps[318];
-        vkImportFenceWin32HandleKHR = caps[319];
-        vkGetFenceWin32HandleKHR = caps[320];
-        vkGetMemoryFdKHR = caps[321];
-        vkGetMemoryFdPropertiesKHR = caps[322];
-        vkGetMemoryWin32HandleKHR = caps[323];
-        vkGetMemoryWin32HandlePropertiesKHR = caps[324];
-        vkImportSemaphoreFdKHR = caps[325];
-        vkGetSemaphoreFdKHR = caps[326];
-        vkImportSemaphoreWin32HandleKHR = caps[327];
-        vkGetSemaphoreWin32HandleKHR = caps[328];
-        vkCmdSetFragmentShadingRateKHR = caps[329];
-        vkGetImageMemoryRequirements2KHR = caps[330];
-        vkGetBufferMemoryRequirements2KHR = caps[331];
-        vkGetImageSparseMemoryRequirements2KHR = caps[332];
-        vkTrimCommandPoolKHR = caps[333];
-        vkGetDescriptorSetLayoutSupportKHR = caps[334];
-        vkGetDeviceBufferMemoryRequirementsKHR = caps[335];
-        vkGetDeviceImageMemoryRequirementsKHR = caps[336];
-        vkGetDeviceImageSparseMemoryRequirementsKHR = caps[337];
-        vkAcquireProfilingLockKHR = caps[338];
-        vkReleaseProfilingLockKHR = caps[339];
-        vkGetPipelineExecutablePropertiesKHR = caps[340];
-        vkGetPipelineExecutableStatisticsKHR = caps[341];
-        vkGetPipelineExecutableInternalRepresentationsKHR = caps[342];
-        vkWaitForPresentKHR = caps[343];
-        vkCmdPushDescriptorSetKHR = caps[344];
-        vkCmdTraceRaysIndirect2KHR = caps[345];
-        vkCmdTraceRaysKHR = caps[346];
-        vkCreateRayTracingPipelinesKHR = caps[347];
-        vkGetRayTracingShaderGroupHandlesKHR = caps[348];
-        vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = caps[349];
-        vkCmdTraceRaysIndirectKHR = caps[350];
-        vkGetRayTracingShaderGroupStackSizeKHR = caps[351];
-        vkCmdSetRayTracingPipelineStackSizeKHR = caps[352];
-        vkCreateSamplerYcbcrConversionKHR = caps[353];
-        vkDestroySamplerYcbcrConversionKHR = caps[354];
-        vkGetSwapchainStatusKHR = caps[355];
-        vkCreateSwapchainKHR = caps[356];
-        vkDestroySwapchainKHR = caps[357];
-        vkGetSwapchainImagesKHR = caps[358];
-        vkAcquireNextImageKHR = caps[359];
-        vkQueuePresentKHR = caps[360];
-        vkCmdSetEvent2KHR = caps[361];
-        vkCmdResetEvent2KHR = caps[362];
-        vkCmdWaitEvents2KHR = caps[363];
-        vkCmdPipelineBarrier2KHR = caps[364];
-        vkCmdWriteTimestamp2KHR = caps[365];
-        vkQueueSubmit2KHR = caps[366];
-        vkCmdWriteBufferMarker2AMD = caps[367];
-        vkGetQueueCheckpointData2NV = caps[368];
-        vkGetSemaphoreCounterValueKHR = caps[369];
-        vkWaitSemaphoresKHR = caps[370];
-        vkSignalSemaphoreKHR = caps[371];
-        vkCmdDecodeVideoKHR = caps[372];
-        vkCmdEncodeVideoKHR = caps[373];
-        vkCreateVideoSessionKHR = caps[374];
-        vkDestroyVideoSessionKHR = caps[375];
-        vkGetVideoSessionMemoryRequirementsKHR = caps[376];
-        vkBindVideoSessionMemoryKHR = caps[377];
-        vkCreateVideoSessionParametersKHR = caps[378];
-        vkUpdateVideoSessionParametersKHR = caps[379];
-        vkDestroyVideoSessionParametersKHR = caps[380];
-        vkCmdBeginVideoCodingKHR = caps[381];
-        vkCmdEndVideoCodingKHR = caps[382];
-        vkCmdControlVideoCodingKHR = caps[383];
-        vkCmdSetViewportWScalingNV = caps[384];
-        vkCmdSetCheckpointNV = caps[385];
-        vkGetQueueCheckpointDataNV = caps[386];
-        vkGetGeneratedCommandsMemoryRequirementsNV = caps[387];
-        vkCmdPreprocessGeneratedCommandsNV = caps[388];
-        vkCmdExecuteGeneratedCommandsNV = caps[389];
-        vkCmdBindPipelineShaderGroupNV = caps[390];
-        vkCreateIndirectCommandsLayoutNV = caps[391];
-        vkDestroyIndirectCommandsLayoutNV = caps[392];
-        vkGetMemoryRemoteAddressNV = caps[393];
-        vkGetMemoryWin32HandleNV = caps[394];
-        vkCmdSetFragmentShadingRateEnumNV = caps[395];
-        vkCmdDrawMeshTasksNV = caps[396];
-        vkCmdDrawMeshTasksIndirectNV = caps[397];
-        vkCmdDrawMeshTasksIndirectCountNV = caps[398];
-        vkCreateAccelerationStructureNV = caps[399];
-        vkDestroyAccelerationStructureNV = caps[400];
-        vkGetAccelerationStructureMemoryRequirementsNV = caps[401];
-        vkBindAccelerationStructureMemoryNV = caps[402];
-        vkCmdBuildAccelerationStructureNV = caps[403];
-        vkCmdCopyAccelerationStructureNV = caps[404];
-        vkCmdTraceRaysNV = caps[405];
-        vkCreateRayTracingPipelinesNV = caps[406];
-        vkGetRayTracingShaderGroupHandlesNV = caps[407];
-        vkGetAccelerationStructureHandleNV = caps[408];
-        vkCmdWriteAccelerationStructuresPropertiesNV = caps[409];
-        vkCompileDeferredNV = caps[410];
-        vkCmdSetExclusiveScissorNV = caps[411];
-        vkCmdBindShadingRateImageNV = caps[412];
-        vkCmdSetViewportShadingRatePaletteNV = caps[413];
-        vkCmdSetCoarseSampleOrderNV = caps[414];
-        vkCreateCuModuleNVX = caps[415];
-        vkCreateCuFunctionNVX = caps[416];
-        vkDestroyCuModuleNVX = caps[417];
-        vkDestroyCuFunctionNVX = caps[418];
-        vkCmdCuLaunchKernelNVX = caps[419];
-        vkGetImageViewHandleNVX = caps[420];
-        vkGetImageViewAddressNVX = caps[421];
-        vkGetDescriptorSetLayoutHostMappingInfoVALVE = caps[422];
-        vkGetDescriptorSetHostMappingVALVE = caps[423];
+        vkExportMetalObjectsEXT = caps[232];
+        vkCmdDrawMultiEXT = caps[233];
+        vkCmdDrawMultiIndexedEXT = caps[234];
+        vkSetDeviceMemoryPriorityEXT = caps[235];
+        vkGetPipelinePropertiesEXT = caps[236];
+        vkCreatePrivateDataSlotEXT = caps[237];
+        vkDestroyPrivateDataSlotEXT = caps[238];
+        vkSetPrivateDataEXT = caps[239];
+        vkGetPrivateDataEXT = caps[240];
+        vkCmdSetSampleLocationsEXT = caps[241];
+        vkGetShaderModuleIdentifierEXT = caps[242];
+        vkGetShaderModuleCreateInfoIdentifierEXT = caps[243];
+        vkCmdBindTransformFeedbackBuffersEXT = caps[244];
+        vkCmdBeginTransformFeedbackEXT = caps[245];
+        vkCmdEndTransformFeedbackEXT = caps[246];
+        vkCmdBeginQueryIndexedEXT = caps[247];
+        vkCmdEndQueryIndexedEXT = caps[248];
+        vkCmdDrawIndirectByteCountEXT = caps[249];
+        vkCreateValidationCacheEXT = caps[250];
+        vkDestroyValidationCacheEXT = caps[251];
+        vkMergeValidationCachesEXT = caps[252];
+        vkGetValidationCacheDataEXT = caps[253];
+        vkCmdSetVertexInputEXT = caps[254];
+        vkGetRefreshCycleDurationGOOGLE = caps[255];
+        vkGetPastPresentationTimingGOOGLE = caps[256];
+        vkCmdBindInvocationMaskHUAWEI = caps[257];
+        vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = caps[258];
+        vkCmdSubpassShadingHUAWEI = caps[259];
+        vkInitializePerformanceApiINTEL = caps[260];
+        vkUninitializePerformanceApiINTEL = caps[261];
+        vkCmdSetPerformanceMarkerINTEL = caps[262];
+        vkCmdSetPerformanceStreamMarkerINTEL = caps[263];
+        vkCmdSetPerformanceOverrideINTEL = caps[264];
+        vkAcquirePerformanceConfigurationINTEL = caps[265];
+        vkReleasePerformanceConfigurationINTEL = caps[266];
+        vkQueueSetPerformanceConfigurationINTEL = caps[267];
+        vkGetPerformanceParameterINTEL = caps[268];
+        vkCreateAccelerationStructureKHR = caps[269];
+        vkDestroyAccelerationStructureKHR = caps[270];
+        vkCmdBuildAccelerationStructuresKHR = caps[271];
+        vkCmdBuildAccelerationStructuresIndirectKHR = caps[272];
+        vkBuildAccelerationStructuresKHR = caps[273];
+        vkCopyAccelerationStructureKHR = caps[274];
+        vkCopyAccelerationStructureToMemoryKHR = caps[275];
+        vkCopyMemoryToAccelerationStructureKHR = caps[276];
+        vkWriteAccelerationStructuresPropertiesKHR = caps[277];
+        vkCmdCopyAccelerationStructureKHR = caps[278];
+        vkCmdCopyAccelerationStructureToMemoryKHR = caps[279];
+        vkCmdCopyMemoryToAccelerationStructureKHR = caps[280];
+        vkGetAccelerationStructureDeviceAddressKHR = caps[281];
+        vkCmdWriteAccelerationStructuresPropertiesKHR = caps[282];
+        vkGetDeviceAccelerationStructureCompatibilityKHR = caps[283];
+        vkGetAccelerationStructureBuildSizesKHR = caps[284];
+        vkBindBufferMemory2KHR = caps[285];
+        vkBindImageMemory2KHR = caps[286];
+        vkGetBufferDeviceAddressKHR = caps[287];
+        vkGetBufferOpaqueCaptureAddressKHR = caps[288];
+        vkGetDeviceMemoryOpaqueCaptureAddressKHR = caps[289];
+        vkCmdCopyBuffer2KHR = caps[290];
+        vkCmdCopyImage2KHR = caps[291];
+        vkCmdCopyBufferToImage2KHR = caps[292];
+        vkCmdCopyImageToBuffer2KHR = caps[293];
+        vkCmdBlitImage2KHR = caps[294];
+        vkCmdResolveImage2KHR = caps[295];
+        vkCreateRenderPass2KHR = caps[296];
+        vkCmdBeginRenderPass2KHR = caps[297];
+        vkCmdNextSubpass2KHR = caps[298];
+        vkCmdEndRenderPass2KHR = caps[299];
+        vkCreateDeferredOperationKHR = caps[300];
+        vkDestroyDeferredOperationKHR = caps[301];
+        vkGetDeferredOperationMaxConcurrencyKHR = caps[302];
+        vkGetDeferredOperationResultKHR = caps[303];
+        vkDeferredOperationJoinKHR = caps[304];
+        vkCreateDescriptorUpdateTemplateKHR = caps[305];
+        vkDestroyDescriptorUpdateTemplateKHR = caps[306];
+        vkUpdateDescriptorSetWithTemplateKHR = caps[307];
+        vkCmdPushDescriptorSetWithTemplateKHR = caps[308];
+        vkGetDeviceGroupPeerMemoryFeaturesKHR = caps[309];
+        vkCmdSetDeviceMaskKHR = caps[310];
+        vkCmdDispatchBaseKHR = caps[311];
+        vkGetDeviceGroupPresentCapabilitiesKHR = caps[312];
+        vkGetDeviceGroupSurfacePresentModesKHR = caps[313];
+        vkAcquireNextImage2KHR = caps[314];
+        vkCreateSharedSwapchainsKHR = caps[315];
+        vkCmdDrawIndirectCountKHR = caps[316];
+        vkCmdDrawIndexedIndirectCountKHR = caps[317];
+        vkCmdBeginRenderingKHR = caps[318];
+        vkCmdEndRenderingKHR = caps[319];
+        vkImportFenceFdKHR = caps[320];
+        vkGetFenceFdKHR = caps[321];
+        vkImportFenceWin32HandleKHR = caps[322];
+        vkGetFenceWin32HandleKHR = caps[323];
+        vkGetMemoryFdKHR = caps[324];
+        vkGetMemoryFdPropertiesKHR = caps[325];
+        vkGetMemoryWin32HandleKHR = caps[326];
+        vkGetMemoryWin32HandlePropertiesKHR = caps[327];
+        vkImportSemaphoreFdKHR = caps[328];
+        vkGetSemaphoreFdKHR = caps[329];
+        vkImportSemaphoreWin32HandleKHR = caps[330];
+        vkGetSemaphoreWin32HandleKHR = caps[331];
+        vkCmdSetFragmentShadingRateKHR = caps[332];
+        vkGetImageMemoryRequirements2KHR = caps[333];
+        vkGetBufferMemoryRequirements2KHR = caps[334];
+        vkGetImageSparseMemoryRequirements2KHR = caps[335];
+        vkTrimCommandPoolKHR = caps[336];
+        vkGetDescriptorSetLayoutSupportKHR = caps[337];
+        vkGetDeviceBufferMemoryRequirementsKHR = caps[338];
+        vkGetDeviceImageMemoryRequirementsKHR = caps[339];
+        vkGetDeviceImageSparseMemoryRequirementsKHR = caps[340];
+        vkAcquireProfilingLockKHR = caps[341];
+        vkReleaseProfilingLockKHR = caps[342];
+        vkGetPipelineExecutablePropertiesKHR = caps[343];
+        vkGetPipelineExecutableStatisticsKHR = caps[344];
+        vkGetPipelineExecutableInternalRepresentationsKHR = caps[345];
+        vkWaitForPresentKHR = caps[346];
+        vkCmdPushDescriptorSetKHR = caps[347];
+        vkCmdTraceRaysIndirect2KHR = caps[348];
+        vkCmdTraceRaysKHR = caps[349];
+        vkCreateRayTracingPipelinesKHR = caps[350];
+        vkGetRayTracingShaderGroupHandlesKHR = caps[351];
+        vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = caps[352];
+        vkCmdTraceRaysIndirectKHR = caps[353];
+        vkGetRayTracingShaderGroupStackSizeKHR = caps[354];
+        vkCmdSetRayTracingPipelineStackSizeKHR = caps[355];
+        vkCreateSamplerYcbcrConversionKHR = caps[356];
+        vkDestroySamplerYcbcrConversionKHR = caps[357];
+        vkGetSwapchainStatusKHR = caps[358];
+        vkCreateSwapchainKHR = caps[359];
+        vkDestroySwapchainKHR = caps[360];
+        vkGetSwapchainImagesKHR = caps[361];
+        vkAcquireNextImageKHR = caps[362];
+        vkQueuePresentKHR = caps[363];
+        vkCmdSetEvent2KHR = caps[364];
+        vkCmdResetEvent2KHR = caps[365];
+        vkCmdWaitEvents2KHR = caps[366];
+        vkCmdPipelineBarrier2KHR = caps[367];
+        vkCmdWriteTimestamp2KHR = caps[368];
+        vkQueueSubmit2KHR = caps[369];
+        vkCmdWriteBufferMarker2AMD = caps[370];
+        vkGetQueueCheckpointData2NV = caps[371];
+        vkGetSemaphoreCounterValueKHR = caps[372];
+        vkWaitSemaphoresKHR = caps[373];
+        vkSignalSemaphoreKHR = caps[374];
+        vkCmdDecodeVideoKHR = caps[375];
+        vkCmdEncodeVideoKHR = caps[376];
+        vkCreateVideoSessionKHR = caps[377];
+        vkDestroyVideoSessionKHR = caps[378];
+        vkGetVideoSessionMemoryRequirementsKHR = caps[379];
+        vkBindVideoSessionMemoryKHR = caps[380];
+        vkCreateVideoSessionParametersKHR = caps[381];
+        vkUpdateVideoSessionParametersKHR = caps[382];
+        vkDestroyVideoSessionParametersKHR = caps[383];
+        vkCmdBeginVideoCodingKHR = caps[384];
+        vkCmdEndVideoCodingKHR = caps[385];
+        vkCmdControlVideoCodingKHR = caps[386];
+        vkCmdSetViewportWScalingNV = caps[387];
+        vkCmdSetCheckpointNV = caps[388];
+        vkGetQueueCheckpointDataNV = caps[389];
+        vkGetGeneratedCommandsMemoryRequirementsNV = caps[390];
+        vkCmdPreprocessGeneratedCommandsNV = caps[391];
+        vkCmdExecuteGeneratedCommandsNV = caps[392];
+        vkCmdBindPipelineShaderGroupNV = caps[393];
+        vkCreateIndirectCommandsLayoutNV = caps[394];
+        vkDestroyIndirectCommandsLayoutNV = caps[395];
+        vkGetMemoryRemoteAddressNV = caps[396];
+        vkGetMemoryWin32HandleNV = caps[397];
+        vkCmdSetFragmentShadingRateEnumNV = caps[398];
+        vkCmdDrawMeshTasksNV = caps[399];
+        vkCmdDrawMeshTasksIndirectNV = caps[400];
+        vkCmdDrawMeshTasksIndirectCountNV = caps[401];
+        vkCreateAccelerationStructureNV = caps[402];
+        vkDestroyAccelerationStructureNV = caps[403];
+        vkGetAccelerationStructureMemoryRequirementsNV = caps[404];
+        vkBindAccelerationStructureMemoryNV = caps[405];
+        vkCmdBuildAccelerationStructureNV = caps[406];
+        vkCmdCopyAccelerationStructureNV = caps[407];
+        vkCmdTraceRaysNV = caps[408];
+        vkCreateRayTracingPipelinesNV = caps[409];
+        vkGetRayTracingShaderGroupHandlesNV = caps[410];
+        vkGetAccelerationStructureHandleNV = caps[411];
+        vkCmdWriteAccelerationStructuresPropertiesNV = caps[412];
+        vkCompileDeferredNV = caps[413];
+        vkCmdSetExclusiveScissorNV = caps[414];
+        vkCmdBindShadingRateImageNV = caps[415];
+        vkCmdSetViewportShadingRatePaletteNV = caps[416];
+        vkCmdSetCoarseSampleOrderNV = caps[417];
+        vkCreateCuModuleNVX = caps[418];
+        vkCreateCuFunctionNVX = caps[419];
+        vkDestroyCuModuleNVX = caps[420];
+        vkDestroyCuFunctionNVX = caps[421];
+        vkCmdCuLaunchKernelNVX = caps[422];
+        vkGetImageViewHandleNVX = caps[423];
+        vkGetImageViewAddressNVX = caps[424];
+        vkGetFramebufferTilePropertiesQCOM = caps[425];
+        vkGetDynamicRenderingTilePropertiesQCOM = caps[426];
+        vkGetDescriptorSetLayoutHostMappingInfoVALVE = caps[427];
+        vkGetDescriptorSetHostMappingVALVE = caps[428];
     }
 
     private static boolean check_VK10(FunctionProvider provider, long[] caps, Set<String> ext) {
@@ -2204,13 +2244,25 @@ public class VKCapabilitiesDevice {
         ) || reportMissing("VK", "VK_EXT_line_rasterization");
     }
 
+    private static boolean check_EXT_metal_objects(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_metal_objects")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            232
+        },
+            "vkExportMetalObjectsEXT"
+        ) || reportMissing("VK", "VK_EXT_metal_objects");
+    }
+
     private static boolean check_EXT_multi_draw(FunctionProvider provider, long[] caps, Set<String> ext) {
         if (!ext.contains("VK_EXT_multi_draw")) {
             return false;
         }
 
         return checkFunctions(provider, caps, new int[] {
-            232, 233
+            233, 234
         },
             "vkCmdDrawMultiEXT", "vkCmdDrawMultiIndexedEXT"
         ) || reportMissing("VK", "VK_EXT_multi_draw");
@@ -2222,7 +2274,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            234
+            235
         },
             "vkSetDeviceMemoryPriorityEXT"
         ) || reportMissing("VK", "VK_EXT_pageable_device_local_memory");
@@ -2234,7 +2286,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            235
+            236
         },
             "vkGetPipelinePropertiesEXT"
         ) || reportMissing("VK", "VK_EXT_pipeline_properties");
@@ -2246,7 +2298,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            236, 237, 238, 239
+            237, 238, 239, 240
         },
             "vkCreatePrivateDataSlotEXT", "vkDestroyPrivateDataSlotEXT", "vkSetPrivateDataEXT", "vkGetPrivateDataEXT"
         ) || reportMissing("VK", "VK_EXT_private_data");
@@ -2258,10 +2310,22 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            240
+            241
         },
             "vkCmdSetSampleLocationsEXT"
         ) || reportMissing("VK", "VK_EXT_sample_locations");
+    }
+
+    private static boolean check_EXT_shader_module_identifier(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_EXT_shader_module_identifier")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            242, 243
+        },
+            "vkGetShaderModuleIdentifierEXT", "vkGetShaderModuleCreateInfoIdentifierEXT"
+        ) || reportMissing("VK", "VK_EXT_shader_module_identifier");
     }
 
     private static boolean check_EXT_transform_feedback(FunctionProvider provider, long[] caps, Set<String> ext) {
@@ -2270,7 +2334,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            241, 242, 243, 244, 245, 246
+            244, 245, 246, 247, 248, 249
         },
             "vkCmdBindTransformFeedbackBuffersEXT", "vkCmdBeginTransformFeedbackEXT", "vkCmdEndTransformFeedbackEXT", "vkCmdBeginQueryIndexedEXT", 
             "vkCmdEndQueryIndexedEXT", "vkCmdDrawIndirectByteCountEXT"
@@ -2283,7 +2347,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            247, 248, 249, 250
+            250, 251, 252, 253
         },
             "vkCreateValidationCacheEXT", "vkDestroyValidationCacheEXT", "vkMergeValidationCachesEXT", "vkGetValidationCacheDataEXT"
         ) || reportMissing("VK", "VK_EXT_validation_cache");
@@ -2295,7 +2359,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            251
+            254
         },
             "vkCmdSetVertexInputEXT"
         ) || reportMissing("VK", "VK_EXT_vertex_input_dynamic_state");
@@ -2307,7 +2371,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            252, 253
+            255, 256
         },
             "vkGetRefreshCycleDurationGOOGLE", "vkGetPastPresentationTimingGOOGLE"
         ) || reportMissing("VK", "VK_GOOGLE_display_timing");
@@ -2319,7 +2383,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            254
+            257
         },
             "vkCmdBindInvocationMaskHUAWEI"
         ) || reportMissing("VK", "VK_HUAWEI_invocation_mask");
@@ -2331,7 +2395,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            255, 256
+            258, 259
         },
             "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI", "vkCmdSubpassShadingHUAWEI"
         ) || reportMissing("VK", "VK_HUAWEI_subpass_shading");
@@ -2343,7 +2407,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            257, 258, 259, 260, 261, 262, 263, 264, 265
+            260, 261, 262, 263, 264, 265, 266, 267, 268
         },
             "vkInitializePerformanceApiINTEL", "vkUninitializePerformanceApiINTEL", "vkCmdSetPerformanceMarkerINTEL", "vkCmdSetPerformanceStreamMarkerINTEL", 
             "vkCmdSetPerformanceOverrideINTEL", "vkAcquirePerformanceConfigurationINTEL", "vkReleasePerformanceConfigurationINTEL", 
@@ -2357,7 +2421,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281
+            269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284
         },
             "vkCreateAccelerationStructureKHR", "vkDestroyAccelerationStructureKHR", "vkCmdBuildAccelerationStructuresKHR", 
             "vkCmdBuildAccelerationStructuresIndirectKHR", "vkBuildAccelerationStructuresKHR", "vkCopyAccelerationStructureKHR", 
@@ -2374,7 +2438,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            282, 283
+            285, 286
         },
             "vkBindBufferMemory2KHR", "vkBindImageMemory2KHR"
         ) || reportMissing("VK", "VK_KHR_bind_memory2");
@@ -2386,7 +2450,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            284, 285, 286
+            287, 288, 289
         },
             "vkGetBufferDeviceAddressKHR", "vkGetBufferOpaqueCaptureAddressKHR", "vkGetDeviceMemoryOpaqueCaptureAddressKHR"
         ) || reportMissing("VK", "VK_KHR_buffer_device_address");
@@ -2398,7 +2462,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            287, 288, 289, 290, 291, 292
+            290, 291, 292, 293, 294, 295
         },
             "vkCmdCopyBuffer2KHR", "vkCmdCopyImage2KHR", "vkCmdCopyBufferToImage2KHR", "vkCmdCopyImageToBuffer2KHR", "vkCmdBlitImage2KHR", 
             "vkCmdResolveImage2KHR"
@@ -2411,7 +2475,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            293, 294, 295, 296
+            296, 297, 298, 299
         },
             "vkCreateRenderPass2KHR", "vkCmdBeginRenderPass2KHR", "vkCmdNextSubpass2KHR", "vkCmdEndRenderPass2KHR"
         ) || reportMissing("VK", "VK_KHR_create_renderpass2");
@@ -2423,7 +2487,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            297, 298, 299, 300, 301
+            300, 301, 302, 303, 304
         },
             "vkCreateDeferredOperationKHR", "vkDestroyDeferredOperationKHR", "vkGetDeferredOperationMaxConcurrencyKHR", "vkGetDeferredOperationResultKHR", 
             "vkDeferredOperationJoinKHR"
@@ -2438,7 +2502,7 @@ public class VKCapabilitiesDevice {
         int flag0 = ext.contains("VK_KHR_push_descriptor") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
-            302, 303, 304, flag0 + 305
+            305, 306, 307, flag0 + 308
         },
             "vkCreateDescriptorUpdateTemplateKHR", "vkDestroyDescriptorUpdateTemplateKHR", "vkUpdateDescriptorSetWithTemplateKHR", 
             "vkCmdPushDescriptorSetWithTemplateKHR"
@@ -2454,7 +2518,7 @@ public class VKCapabilitiesDevice {
         int flag2 = ext.contains("VK_KHR_swapchain") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
-            306, 307, 308, flag0 + 309, flag0 + 310, flag2 + 311
+            309, 310, 311, flag0 + 312, flag0 + 313, flag2 + 314
         },
             "vkGetDeviceGroupPeerMemoryFeaturesKHR", "vkCmdSetDeviceMaskKHR", "vkCmdDispatchBaseKHR", "vkGetDeviceGroupPresentCapabilitiesKHR", 
             "vkGetDeviceGroupSurfacePresentModesKHR", "vkAcquireNextImage2KHR"
@@ -2467,7 +2531,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            312
+            315
         },
             "vkCreateSharedSwapchainsKHR"
         ) || reportMissing("VK", "VK_KHR_display_swapchain");
@@ -2479,7 +2543,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            313, 314
+            316, 317
         },
             "vkCmdDrawIndirectCountKHR", "vkCmdDrawIndexedIndirectCountKHR"
         ) || reportMissing("VK", "VK_KHR_draw_indirect_count");
@@ -2491,7 +2555,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            315, 316
+            318, 319
         },
             "vkCmdBeginRenderingKHR", "vkCmdEndRenderingKHR"
         ) || reportMissing("VK", "VK_KHR_dynamic_rendering");
@@ -2503,7 +2567,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            317, 318
+            320, 321
         },
             "vkImportFenceFdKHR", "vkGetFenceFdKHR"
         ) || reportMissing("VK", "VK_KHR_external_fence_fd");
@@ -2515,7 +2579,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            319, 320
+            322, 323
         },
             "vkImportFenceWin32HandleKHR", "vkGetFenceWin32HandleKHR"
         ) || reportMissing("VK", "VK_KHR_external_fence_win32");
@@ -2527,7 +2591,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            321, 322
+            324, 325
         },
             "vkGetMemoryFdKHR", "vkGetMemoryFdPropertiesKHR"
         ) || reportMissing("VK", "VK_KHR_external_memory_fd");
@@ -2539,7 +2603,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            323, 324
+            326, 327
         },
             "vkGetMemoryWin32HandleKHR", "vkGetMemoryWin32HandlePropertiesKHR"
         ) || reportMissing("VK", "VK_KHR_external_memory_win32");
@@ -2551,7 +2615,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            325, 326
+            328, 329
         },
             "vkImportSemaphoreFdKHR", "vkGetSemaphoreFdKHR"
         ) || reportMissing("VK", "VK_KHR_external_semaphore_fd");
@@ -2563,7 +2627,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            327, 328
+            330, 331
         },
             "vkImportSemaphoreWin32HandleKHR", "vkGetSemaphoreWin32HandleKHR"
         ) || reportMissing("VK", "VK_KHR_external_semaphore_win32");
@@ -2575,7 +2639,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            329
+            332
         },
             "vkCmdSetFragmentShadingRateKHR"
         ) || reportMissing("VK", "VK_KHR_fragment_shading_rate");
@@ -2587,7 +2651,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            330, 331, 332
+            333, 334, 335
         },
             "vkGetImageMemoryRequirements2KHR", "vkGetBufferMemoryRequirements2KHR", "vkGetImageSparseMemoryRequirements2KHR"
         ) || reportMissing("VK", "VK_KHR_get_memory_requirements2");
@@ -2599,7 +2663,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            333
+            336
         },
             "vkTrimCommandPoolKHR"
         ) || reportMissing("VK", "VK_KHR_maintenance1");
@@ -2611,7 +2675,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            334
+            337
         },
             "vkGetDescriptorSetLayoutSupportKHR"
         ) || reportMissing("VK", "VK_KHR_maintenance3");
@@ -2623,7 +2687,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            335, 336, 337
+            338, 339, 340
         },
             "vkGetDeviceBufferMemoryRequirementsKHR", "vkGetDeviceImageMemoryRequirementsKHR", "vkGetDeviceImageSparseMemoryRequirementsKHR"
         ) || reportMissing("VK", "VK_KHR_maintenance4");
@@ -2635,7 +2699,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            338, 339
+            341, 342
         },
             "vkAcquireProfilingLockKHR", "vkReleaseProfilingLockKHR"
         ) || reportMissing("VK", "VK_KHR_performance_query");
@@ -2647,7 +2711,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            340, 341, 342
+            343, 344, 345
         },
             "vkGetPipelineExecutablePropertiesKHR", "vkGetPipelineExecutableStatisticsKHR", "vkGetPipelineExecutableInternalRepresentationsKHR"
         ) || reportMissing("VK", "VK_KHR_pipeline_executable_properties");
@@ -2659,7 +2723,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            343
+            346
         },
             "vkWaitForPresentKHR"
         ) || reportMissing("VK", "VK_KHR_present_wait");
@@ -2673,7 +2737,7 @@ public class VKCapabilitiesDevice {
         int flag0 = ext.contains("Vulkan11") || ext.contains("VK_KHR_descriptor_update_template") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
-            344, flag0 + 305
+            347, flag0 + 308
         },
             "vkCmdPushDescriptorSetKHR", "vkCmdPushDescriptorSetWithTemplateKHR"
         ) || reportMissing("VK", "VK_KHR_push_descriptor");
@@ -2687,7 +2751,7 @@ public class VKCapabilitiesDevice {
         int flag0 = ext.contains("VK_KHR_ray_tracing_pipeline") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
-            flag0 + 345
+            flag0 + 348
         },
             "vkCmdTraceRaysIndirect2KHR"
         ) || reportMissing("VK", "VK_KHR_ray_tracing_maintenance1");
@@ -2699,7 +2763,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            346, 347, 348, 349, 350, 351, 352
+            349, 350, 351, 352, 353, 354, 355
         },
             "vkCmdTraceRaysKHR", "vkCreateRayTracingPipelinesKHR", "vkGetRayTracingShaderGroupHandlesKHR", "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", 
             "vkCmdTraceRaysIndirectKHR", "vkGetRayTracingShaderGroupStackSizeKHR", "vkCmdSetRayTracingPipelineStackSizeKHR"
@@ -2712,7 +2776,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            353, 354
+            356, 357
         },
             "vkCreateSamplerYcbcrConversionKHR", "vkDestroySamplerYcbcrConversionKHR"
         ) || reportMissing("VK", "VK_KHR_sampler_ycbcr_conversion");
@@ -2724,7 +2788,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            355
+            358
         },
             "vkGetSwapchainStatusKHR"
         ) || reportMissing("VK", "VK_KHR_shared_presentable_image");
@@ -2738,7 +2802,7 @@ public class VKCapabilitiesDevice {
         int flag0 = ext.contains("Vulkan11") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
-            356, 357, 358, 359, 360, flag0 + 309, flag0 + 310, flag0 + 311
+            359, 360, 361, 362, 363, flag0 + 312, flag0 + 313, flag0 + 314
         },
             "vkCreateSwapchainKHR", "vkDestroySwapchainKHR", "vkGetSwapchainImagesKHR", "vkAcquireNextImageKHR", "vkQueuePresentKHR", 
             "vkGetDeviceGroupPresentCapabilitiesKHR", "vkGetDeviceGroupSurfacePresentModesKHR", "vkAcquireNextImage2KHR"
@@ -2754,7 +2818,7 @@ public class VKCapabilitiesDevice {
         int flag1 = ext.contains("VK_NV_device_diagnostic_checkpoints") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
-            361, 362, 363, 364, 365, 366, flag0 + 367, flag1 + 368
+            364, 365, 366, 367, 368, 369, flag0 + 370, flag1 + 371
         },
             "vkCmdSetEvent2KHR", "vkCmdResetEvent2KHR", "vkCmdWaitEvents2KHR", "vkCmdPipelineBarrier2KHR", "vkCmdWriteTimestamp2KHR", "vkQueueSubmit2KHR", 
             "vkCmdWriteBufferMarker2AMD", "vkGetQueueCheckpointData2NV"
@@ -2767,7 +2831,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            369, 370, 371
+            372, 373, 374
         },
             "vkGetSemaphoreCounterValueKHR", "vkWaitSemaphoresKHR", "vkSignalSemaphoreKHR"
         ) || reportMissing("VK", "VK_KHR_timeline_semaphore");
@@ -2779,7 +2843,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            372
+            375
         },
             "vkCmdDecodeVideoKHR"
         ) || reportMissing("VK", "VK_KHR_video_decode_queue");
@@ -2791,7 +2855,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            373
+            376
         },
             "vkCmdEncodeVideoKHR"
         ) || reportMissing("VK", "VK_KHR_video_encode_queue");
@@ -2803,7 +2867,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            374, 375, 376, 377, 378, 379, 380, 381, 382, 383
+            377, 378, 379, 380, 381, 382, 383, 384, 385, 386
         },
             "vkCreateVideoSessionKHR", "vkDestroyVideoSessionKHR", "vkGetVideoSessionMemoryRequirementsKHR", "vkBindVideoSessionMemoryKHR", 
             "vkCreateVideoSessionParametersKHR", "vkUpdateVideoSessionParametersKHR", "vkDestroyVideoSessionParametersKHR", "vkCmdBeginVideoCodingKHR", 
@@ -2817,7 +2881,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            384
+            387
         },
             "vkCmdSetViewportWScalingNV"
         ) || reportMissing("VK", "VK_NV_clip_space_w_scaling");
@@ -2829,7 +2893,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            385, 386
+            388, 389
         },
             "vkCmdSetCheckpointNV", "vkGetQueueCheckpointDataNV"
         ) || reportMissing("VK", "VK_NV_device_diagnostic_checkpoints");
@@ -2841,7 +2905,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            387, 388, 389, 390, 391, 392
+            390, 391, 392, 393, 394, 395
         },
             "vkGetGeneratedCommandsMemoryRequirementsNV", "vkCmdPreprocessGeneratedCommandsNV", "vkCmdExecuteGeneratedCommandsNV", 
             "vkCmdBindPipelineShaderGroupNV", "vkCreateIndirectCommandsLayoutNV", "vkDestroyIndirectCommandsLayoutNV"
@@ -2854,7 +2918,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            393
+            396
         },
             "vkGetMemoryRemoteAddressNV"
         ) || reportMissing("VK", "VK_NV_external_memory_rdma");
@@ -2866,7 +2930,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            394
+            397
         },
             "vkGetMemoryWin32HandleNV"
         ) || reportMissing("VK", "VK_NV_external_memory_win32");
@@ -2878,7 +2942,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            395
+            398
         },
             "vkCmdSetFragmentShadingRateEnumNV"
         ) || reportMissing("VK", "VK_NV_fragment_shading_rate_enums");
@@ -2890,7 +2954,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            396, 397, 398
+            399, 400, 401
         },
             "vkCmdDrawMeshTasksNV", "vkCmdDrawMeshTasksIndirectNV", "vkCmdDrawMeshTasksIndirectCountNV"
         ) || reportMissing("VK", "VK_NV_mesh_shader");
@@ -2902,7 +2966,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410
+            402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413
         },
             "vkCreateAccelerationStructureNV", "vkDestroyAccelerationStructureNV", "vkGetAccelerationStructureMemoryRequirementsNV", 
             "vkBindAccelerationStructureMemoryNV", "vkCmdBuildAccelerationStructureNV", "vkCmdCopyAccelerationStructureNV", "vkCmdTraceRaysNV", 
@@ -2917,7 +2981,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            411
+            414
         },
             "vkCmdSetExclusiveScissorNV"
         ) || reportMissing("VK", "VK_NV_scissor_exclusive");
@@ -2929,7 +2993,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            412, 413, 414
+            415, 416, 417
         },
             "vkCmdBindShadingRateImageNV", "vkCmdSetViewportShadingRatePaletteNV", "vkCmdSetCoarseSampleOrderNV"
         ) || reportMissing("VK", "VK_NV_shading_rate_image");
@@ -2941,7 +3005,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            415, 416, 417, 418, 419
+            418, 419, 420, 421, 422
         },
             "vkCreateCuModuleNVX", "vkCreateCuFunctionNVX", "vkDestroyCuModuleNVX", "vkDestroyCuFunctionNVX", "vkCmdCuLaunchKernelNVX"
         ) || reportMissing("VK", "VK_NVX_binary_import");
@@ -2953,10 +3017,22 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            420, 421
+            423, 424
         },
             "vkGetImageViewHandleNVX", "vkGetImageViewAddressNVX"
         ) || reportMissing("VK", "VK_NVX_image_view_handle");
+    }
+
+    private static boolean check_QCOM_tile_properties(FunctionProvider provider, long[] caps, Set<String> ext) {
+        if (!ext.contains("VK_QCOM_tile_properties")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            425, 426
+        },
+            "vkGetFramebufferTilePropertiesQCOM", "vkGetDynamicRenderingTilePropertiesQCOM"
+        ) || reportMissing("VK", "VK_QCOM_tile_properties");
     }
 
     private static boolean check_VALVE_descriptor_set_host_mapping(FunctionProvider provider, long[] caps, Set<String> ext) {
@@ -2965,7 +3041,7 @@ public class VKCapabilitiesDevice {
         }
 
         return checkFunctions(provider, caps, new int[] {
-            422, 423
+            427, 428
         },
             "vkGetDescriptorSetLayoutHostMappingInfoVALVE", "vkGetDescriptorSetHostMappingVALVE"
         ) || reportMissing("VK", "VK_VALVE_descriptor_set_host_mapping");

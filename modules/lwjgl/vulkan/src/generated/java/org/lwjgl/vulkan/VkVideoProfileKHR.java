@@ -18,6 +18,17 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying the codec video profile.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>When a {@link VkVideoProfileKHR} structure is specified through the {@code pProfiles} member of an {@link VkVideoProfilesKHR} structure in the {@code pNext} chain of the input parameter of a query command such as {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR}, {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR}, or {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2}, the following error codes indicate specific causes of the failure of the query operation:</p>
+ * 
+ * <ul>
+ * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR} The requested video picture layout (e.g. through the {@code pictureLayout} member of a {@link VkVideoDecodeH264ProfileEXT} structure included in the {@code pNext} chain of {@link VkVideoProfileKHR}) is not supported.</li>
+ * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR} A video profile operation specified by {@code videoCodecOperation} is not supported.</li>
+ * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR} Format parameters specified by {@code chromaSubsampling}, {@code lumaBitDepth}, or {@code chromaBitDepth} are not supported.</li>
+ * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR} Codec-specific parameters corresponding to the {@code videoCodecOperation} are not provided through the {@code pNext} chain of {@link VkVideoProfileKHR}, or the specified parameters are not supported.</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -40,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkVideoProfileKHR {
  *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
+ *     void const * {@link #pNext};
  *     VkVideoCodecOperationFlagBitsKHR {@link #videoCodecOperation};
  *     VkVideoChromaSubsamplingFlagsKHR {@link #chromaSubsampling};
  *     VkVideoComponentBitDepthFlagsKHR {@link #lumaBitDepth};
@@ -102,7 +113,7 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
+    @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** a {@code VkVideoCodecOperationFlagBitsKHR} value specifying a video codec operation. */
     @NativeType("VkVideoCodecOperationFlagBitsKHR")
@@ -122,7 +133,7 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
     /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR STRUCTURE_TYPE_VIDEO_PROFILE_KHR} value to the {@link #sType} field. */
     public VkVideoProfileKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkVideoProfileKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkVideoProfileKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoDecodeH264ProfileEXT} value to the {@code pNext} chain. */
     public VkVideoProfileKHR pNext(VkVideoDecodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeH265ProfileEXT} value to the {@code pNext} chain. */
@@ -352,7 +363,7 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
         @NativeType("VkStructureType")
         public int sType() { return VkVideoProfileKHR.nsType(address()); }
         /** @return the value of the {@link VkVideoProfileKHR#pNext} field. */
-        @NativeType("void *")
+        @NativeType("void const *")
         public long pNext() { return VkVideoProfileKHR.npNext(address()); }
         /** @return the value of the {@link VkVideoProfileKHR#videoCodecOperation} field. */
         @NativeType("VkVideoCodecOperationFlagBitsKHR")
@@ -372,7 +383,7 @@ public class VkVideoProfileKHR extends Struct implements NativeResource {
         /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR STRUCTURE_TYPE_VIDEO_PROFILE_KHR} value to the {@link VkVideoProfileKHR#sType} field. */
         public VkVideoProfileKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR); }
         /** Sets the specified value to the {@link VkVideoProfileKHR#pNext} field. */
-        public VkVideoProfileKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoProfileKHR.npNext(address(), value); return this; }
+        public VkVideoProfileKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoProfileKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoDecodeH264ProfileEXT} value to the {@code pNext} chain. */
         public VkVideoProfileKHR.Buffer pNext(VkVideoDecodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeH265ProfileEXT} value to the {@code pNext} chain. */

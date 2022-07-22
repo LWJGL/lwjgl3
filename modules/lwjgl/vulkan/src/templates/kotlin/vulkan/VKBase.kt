@@ -20,3 +20,12 @@ val PFN_vkVoidFunction = "PFN_vkVoidFunction".handle
 val PFN_vkGetInstanceProcAddr = "PFN_vkGetInstanceProcAddr".handle
 
 val VkRemoteAddressNV = "VkRemoteAddressNV".handle
+
+// Metal interop types
+val CAMetalLayer = "CAMetalLayer".handle
+val MTLDevice_id = "MTLDevice_id".handle
+val MTLCommandQueue_id = "MTLCommandQueue_id".handle
+val MTLBuffer_id = "MTLBuffer_id".handle
+val MTLTexture_id = "MTLTexture_id".handle
+val MTLSharedEvent_id = "MTLSharedEvent_id".handle
+val IOSurfaceRef = "IOSurfaceRef".handle

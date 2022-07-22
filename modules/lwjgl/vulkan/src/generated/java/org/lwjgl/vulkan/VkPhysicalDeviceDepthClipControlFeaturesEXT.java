@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceDepthClipControlFeaturesEXT {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #depthClipControl};
  * }</code></pre>
  */
@@ -79,21 +79,21 @@ public class VkPhysicalDeviceDepthClipControlFeaturesEXT extends Struct implemen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates that the implementation supports setting {@link VkPipelineViewportDepthClipControlCreateInfoEXT}{@code ::negativeOneToOne} to {@link VK10#VK_TRUE TRUE}. */
     @NativeType("VkBool32")
     public boolean depthClipControl() { return ndepthClipControl(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceDepthClipControlFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDepthClipControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT} value to the {@code sType} field. */
+    /** Sets the {@link EXTDepthClipControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT} value to the {@link #sType} field. */
     public VkPhysicalDeviceDepthClipControlFeaturesEXT sType$Default() { return sType(EXTDepthClipControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceDepthClipControlFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #depthClipControl} field. */
     public VkPhysicalDeviceDepthClipControlFeaturesEXT depthClipControl(@NativeType("VkBool32") boolean value) { ndepthClipControl(address(), value ? 1 : 0); return this; }
@@ -288,21 +288,21 @@ public class VkPhysicalDeviceDepthClipControlFeaturesEXT extends Struct implemen
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDepthClipControlFeaturesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDepthClipControlFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceDepthClipControlFeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDepthClipControlFeaturesEXT.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceDepthClipControlFeaturesEXT#depthClipControl} field. */
         @NativeType("VkBool32")
         public boolean depthClipControl() { return VkPhysicalDeviceDepthClipControlFeaturesEXT.ndepthClipControl(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDepthClipControlFeaturesEXT#sType} field. */
         public VkPhysicalDeviceDepthClipControlFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDepthClipControlFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDepthClipControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT} value to the {@code sType} field. */
+        /** Sets the {@link EXTDepthClipControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT} value to the {@link VkPhysicalDeviceDepthClipControlFeaturesEXT#sType} field. */
         public VkPhysicalDeviceDepthClipControlFeaturesEXT.Buffer sType$Default() { return sType(EXTDepthClipControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceDepthClipControlFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceDepthClipControlFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDepthClipControlFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceDepthClipControlFeaturesEXT#depthClipControl} field. */
         public VkPhysicalDeviceDepthClipControlFeaturesEXT.Buffer depthClipControl(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDepthClipControlFeaturesEXT.ndepthClipControl(address(), value ? 1 : 0); return this; }

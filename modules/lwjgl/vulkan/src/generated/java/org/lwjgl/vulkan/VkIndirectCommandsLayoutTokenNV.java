@@ -24,6 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code stream} <b>must</b> be smaller than {@link VkIndirectCommandsLayoutCreateInfoNV}{@code ::streamCount}</li>
  * <li>{@code offset} <b>must</b> be less than or equal to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV}{@code ::maxIndirectCommandsTokenOffset}</li>
+ * <li>{@code offset} <b>must</b> be aligned to the scalar alignment of {@code tokenType} or {@code minIndirectCommandsBufferOffsetAlignment}, whichever is lower</li>
  * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NV INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NV}, {@code vertexBindingUnit} <b>must</b> stay within device supported limits for the appropriate commands</li>
  * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, {@code pushconstantPipelineLayout} <b>must</b> be valid</li>
  * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, {@code pushconstantOffset} <b>must</b> be a multiple of 4</li>

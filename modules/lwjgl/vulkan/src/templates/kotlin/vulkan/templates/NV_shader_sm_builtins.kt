@@ -33,7 +33,7 @@ val NV_shader_sm_builtins = "NVShaderSmBuiltins".nativeClassVK("NV_shader_sm_bui
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.1</li>
+                <li>Requires support for Vulkan 1.1</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

@@ -114,7 +114,7 @@ public class VkPhysicalDeviceLineRasterizationFeaturesEXT extends Struct impleme
     /** indicates whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-lines-smooth">smooth line rasterization</a>. */
     @NativeType("VkBool32")
     public boolean smoothLines() { return nsmoothLines(address()) != 0; }
-    /** indicates whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-lines-stipple">stippled line rasterization</a> with {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT LINE_RASTERIZATION_MODE_RECTANGULAR_EXT} lines, or with {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT LINE_RASTERIZATION_MODE_DEFAULT_EXT} lines if {@link VkPhysicalDeviceLimits}{@code ::strictLines} is {@link VK10#VK_TRUE TRUE}. */
+    /** indicates whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-lines-stipple">stippled line rasterization</a> with {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_EXT LINE_RASTERIZATION_MODE_RECTANGULAR_EXT} lines. */
     @NativeType("VkBool32")
     public boolean stippledRectangularLines() { return nstippledRectangularLines(address()) != 0; }
     /** indicates whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-lines-stipple">stippled line rasterization</a> with {@link EXTLineRasterization#VK_LINE_RASTERIZATION_MODE_BRESENHAM_EXT LINE_RASTERIZATION_MODE_BRESENHAM_EXT} lines. */

@@ -30,7 +30,7 @@ package org.lwjgl.vulkan;
  * 
  * <h5>Promotion to Vulkan 1.1</h5>
  * 
- * <p>All functionality in this extension is included in core Vulkan 1.1, however a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderDrawParameters">feature bit was added</a> to distinguish whether it is actually available or not.</p>
+ * <p>All functionality in this extension is included in core Vulkan 1.1. However, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderDrawParameters">{@code shaderDrawParameters}</a> feature bit was added to distinguish whether it is actually available or not.</p>
  * 
  * <h5>VK_KHR_shader_draw_parameters</h5>
  * 
@@ -45,7 +45,7 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
+ * <li>Requires support for Vulkan 1.0</li>
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>

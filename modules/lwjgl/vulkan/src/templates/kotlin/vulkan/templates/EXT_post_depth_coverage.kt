@@ -19,7 +19,7 @@ val EXT_post_depth_coverage = "EXTPostDepthCoverage".nativeClassVK("EXT_post_dep
 
         which allows the fragment shader to control whether values in the {@code SampleMask} built-in input variable reflect the coverage after early <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#fragops-depth">depth</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#fragops-stencil">stencil</a> tests are applied.
 
-        This extension adds a new {@code PostDepthCoverage} execution mode under the {@code SampleMaskPostDepthCoverage} capability. When this mode is specified along with {@code EarlyFragmentTests}, the value of an input variable decorated with the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces-builtin-variables-samplemask">{@code SampleMask}</a> built-in reflects the coverage after the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-fragment-earlytest">early fragment tests</a> are applied. Otherwise, it reflects the coverage before the depth and stencil tests.
+        This extension adds a new {@code PostDepthCoverage} execution mode under the {@code SampleMaskPostDepthCoverage} capability. When this mode is specified along with {@code EarlyFragmentTests}, the value of an input variable decorated with the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces-builtin-variables-samplemask">{@code SampleMask}</a> built-in reflects the coverage after the early fragment tests are applied. Otherwise, it reflects the coverage before the depth and stencil tests.
 
         When using GLSL source-based shading languages, the {@code post_depth_coverage} layout qualifier from GL_ARB_post_depth_coverage or GL_EXT_post_depth_coverage maps to the {@code PostDepthCoverage} execution mode.
 
@@ -39,7 +39,7 @@ val EXT_post_depth_coverage = "EXTPostDepthCoverage".nativeClassVK("EXT_post_dep
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

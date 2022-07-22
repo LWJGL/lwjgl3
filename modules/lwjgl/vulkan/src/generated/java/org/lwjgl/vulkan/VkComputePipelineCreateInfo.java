@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineCompilerControlCreateInfoAMD}, {@link VkPipelineCreationFeedbackCreateInfo}, or {@link VkSubpassShadingPipelineCreateInfoHUAWEI}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineCompilerControlCreateInfoAMD}, {@link VkPipelineCreationFeedbackCreateInfo}, {@link VkPipelineRobustnessCreateInfoEXT}, or {@link VkSubpassShadingPipelineCreateInfoHUAWEI}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
  * <li>{@code stage} <b>must</b> be a valid {@link VkPipelineShaderStageCreateInfo} structure</li>
@@ -163,6 +163,8 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
     public VkComputePipelineCreateInfo pNext(VkPipelineCreationFeedbackCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfoEXT} value to the {@code pNext} chain. */
     public VkComputePipelineCreateInfo pNext(VkPipelineCreationFeedbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPipelineRobustnessCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkComputePipelineCreateInfo pNext(VkPipelineRobustnessCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSubpassShadingPipelineCreateInfoHUAWEI} value to the {@code pNext} chain. */
     public VkComputePipelineCreateInfo pNext(VkSubpassShadingPipelineCreateInfoHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
@@ -453,6 +455,8 @@ public class VkComputePipelineCreateInfo extends Struct implements NativeResourc
         public VkComputePipelineCreateInfo.Buffer pNext(VkPipelineCreationFeedbackCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfoEXT} value to the {@code pNext} chain. */
         public VkComputePipelineCreateInfo.Buffer pNext(VkPipelineCreationFeedbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPipelineRobustnessCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkComputePipelineCreateInfo.Buffer pNext(VkPipelineRobustnessCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSubpassShadingPipelineCreateInfoHUAWEI} value to the {@code pNext} chain. */
         public VkComputePipelineCreateInfo.Buffer pNext(VkSubpassShadingPipelineCreateInfoHUAWEI value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkComputePipelineCreateInfo#flags} field. */

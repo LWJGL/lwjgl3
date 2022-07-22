@@ -18,10 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure enumerating the video image formats.
  * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pVideoProfiles} or {@code imageUsage} provided in input structure {@code pVideoFormatInfo} are not supported, {@link VK10#VK_ERROR_FORMAT_NOT_SUPPORTED ERROR_FORMAT_NOT_SUPPORTED} is returned.</p>
- * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -31,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR}</p>
+ * <p>{@link VkComponentMapping}, {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -40,6 +36,11 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
  *     VkFormat {@link #format};
+ *     {@link VkComponentMapping VkComponentMapping} {@link #componentMapping};
+ *     VkImageCreateFlags {@link #imageCreateFlags};
+ *     VkImageType {@link #imageType};
+ *     VkImageTiling {@link #imageTiling};
+ *     VkImageUsageFlags {@link #imageUsageFlags};
  * }</code></pre>
  */
 public class VkVideoFormatPropertiesKHR extends Struct implements NativeResource {
@@ -54,12 +55,22 @@ public class VkVideoFormatPropertiesKHR extends Struct implements NativeResource
     public static final int
         STYPE,
         PNEXT,
-        FORMAT;
+        FORMAT,
+        COMPONENTMAPPING,
+        IMAGECREATEFLAGS,
+        IMAGETYPE,
+        IMAGETILING,
+        IMAGEUSAGEFLAGS;
 
     static {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
+            __member(4),
+            __member(VkComponentMapping.SIZEOF, VkComponentMapping.ALIGNOF),
+            __member(4),
+            __member(4),
+            __member(4),
             __member(4)
         );
 
@@ -69,6 +80,11 @@ public class VkVideoFormatPropertiesKHR extends Struct implements NativeResource
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         FORMAT = layout.offsetof(2);
+        COMPONENTMAPPING = layout.offsetof(3);
+        IMAGECREATEFLAGS = layout.offsetof(4);
+        IMAGETYPE = layout.offsetof(5);
+        IMAGETILING = layout.offsetof(6);
+        IMAGEUSAGEFLAGS = layout.offsetof(7);
     }
 
     /**
@@ -90,9 +106,23 @@ public class VkVideoFormatPropertiesKHR extends Struct implements NativeResource
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** one of the supported formats reported by the implementation. */
+    /** a {@code VkFormat} that specifies the format that <b>can</b> be used with the specified video profiles and image usages. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
+    /** defines the color channel order used for the format. {@code format} along with {@code componentMapping} describe how the color channels are ordered when producing video decoder output or are expected to be ordered in video encoder input, when applicable. If the {@code format} reported does not require component swizzling then all members of {@code componentMapping} will be set to {@link VK10#VK_COMPONENT_SWIZZLE_IDENTITY COMPONENT_SWIZZLE_IDENTITY}. */
+    public VkComponentMapping componentMapping() { return ncomponentMapping(address()); }
+    /** a bitmask of {@code VkImageCreateFlagBits} specifying the supported image creation flags for the format. */
+    @NativeType("VkImageCreateFlags")
+    public int imageCreateFlags() { return nimageCreateFlags(address()); }
+    /** a {@code VkImageType} that specifies the image type the format <b>can</b> be used with. */
+    @NativeType("VkImageType")
+    public int imageType() { return nimageType(address()); }
+    /** a {@code VkImageTiling} that specifies the image tiling the format <b>can</b> be used with. */
+    @NativeType("VkImageTiling")
+    public int imageTiling() { return nimageTiling(address()); }
+    /** a bitmask of {@code VkImageUsageFlagBits} specifying the supported image usage flags for the format. */
+    @NativeType("VkImageUsageFlags")
+    public int imageUsageFlags() { return nimageUsageFlags(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoFormatPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -243,6 +273,16 @@ public class VkVideoFormatPropertiesKHR extends Struct implements NativeResource
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoFormatPropertiesKHR.PNEXT); }
     /** Unsafe version of {@link #format}. */
     public static int nformat(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.FORMAT); }
+    /** Unsafe version of {@link #componentMapping}. */
+    public static VkComponentMapping ncomponentMapping(long struct) { return VkComponentMapping.create(struct + VkVideoFormatPropertiesKHR.COMPONENTMAPPING); }
+    /** Unsafe version of {@link #imageCreateFlags}. */
+    public static int nimageCreateFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.IMAGECREATEFLAGS); }
+    /** Unsafe version of {@link #imageType}. */
+    public static int nimageType(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.IMAGETYPE); }
+    /** Unsafe version of {@link #imageTiling}. */
+    public static int nimageTiling(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.IMAGETILING); }
+    /** Unsafe version of {@link #imageUsageFlags}. */
+    public static int nimageUsageFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoFormatPropertiesKHR.IMAGEUSAGEFLAGS); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoFormatPropertiesKHR.STYPE, value); }
@@ -296,6 +336,20 @@ public class VkVideoFormatPropertiesKHR extends Struct implements NativeResource
         /** @return the value of the {@link VkVideoFormatPropertiesKHR#format} field. */
         @NativeType("VkFormat")
         public int format() { return VkVideoFormatPropertiesKHR.nformat(address()); }
+        /** @return a {@link VkComponentMapping} view of the {@link VkVideoFormatPropertiesKHR#componentMapping} field. */
+        public VkComponentMapping componentMapping() { return VkVideoFormatPropertiesKHR.ncomponentMapping(address()); }
+        /** @return the value of the {@link VkVideoFormatPropertiesKHR#imageCreateFlags} field. */
+        @NativeType("VkImageCreateFlags")
+        public int imageCreateFlags() { return VkVideoFormatPropertiesKHR.nimageCreateFlags(address()); }
+        /** @return the value of the {@link VkVideoFormatPropertiesKHR#imageType} field. */
+        @NativeType("VkImageType")
+        public int imageType() { return VkVideoFormatPropertiesKHR.nimageType(address()); }
+        /** @return the value of the {@link VkVideoFormatPropertiesKHR#imageTiling} field. */
+        @NativeType("VkImageTiling")
+        public int imageTiling() { return VkVideoFormatPropertiesKHR.nimageTiling(address()); }
+        /** @return the value of the {@link VkVideoFormatPropertiesKHR#imageUsageFlags} field. */
+        @NativeType("VkImageUsageFlags")
+        public int imageUsageFlags() { return VkVideoFormatPropertiesKHR.nimageUsageFlags(address()); }
 
         /** Sets the specified value to the {@link VkVideoFormatPropertiesKHR#sType} field. */
         public VkVideoFormatPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoFormatPropertiesKHR.nsType(address(), value); return this; }

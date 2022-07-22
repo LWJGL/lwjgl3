@@ -29,8 +29,8 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRFragmentShadingRate VK_KHR_fragment_shading_rate}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRFragmentShadingRate VK_KHR_fragment_shading_rate} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -156,10 +156,10 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
             <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a> is not enabled, {@code shadingRate} <b>must</b> be #FRAGMENT_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV</li>
             <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-supersampleFragmentShadingRates">{@code supersampleFragmentShadingRates}</a> is not enabled, {@code shadingRate} <b>must</b> not be #FRAGMENT_SHADING_RATE_2_INVOCATIONS_PER_PIXEL_NV, #FRAGMENT_SHADING_RATE_4_INVOCATIONS_PER_PIXEL_NV, #FRAGMENT_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV, or #FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV</li>
             <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-noInvocationFragmentShadingRates">{@code noInvocationFragmentShadingRates}</a> is not enabled, {@code shadingRate} <b>must</b> not be #FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV</li>
-            <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-fragmentShadingRateEnums">{@code fragmentShadingRateEnums}</a> <b>must</b> be enabled</li>
-            <li>One of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate}</a>, or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> <b>must</b> be enabled</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate} feature</a> is not enabled, {@code combinerOps}[0] <b>must</b> be #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate} feature</a> is not enabled, {@code combinerOps}[1] <b>must</b> be #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-fragmentShadingRateEnums">{@code fragmentShadingRateEnums}</a> feature <b>must</b> be enabled</li>
+            <li>One of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate}</a>, or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> features <b>must</b> be enabled</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate}</a> feature is not enabled, {@code combinerOps}[0] <b>must</b> be #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> feature is not enabled, {@code combinerOps}[1] <b>must</b> be #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR</li>
             <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-fragmentShadingRateNonTrivialCombinerOps">{@code fragmentSizeNonTrivialCombinerOps}</a> limit is not supported, elements of {@code combinerOps} <b>must</b> be either #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR or #FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR</li>
         </ul>
 

@@ -34,11 +34,11 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRMaintenance1 VK_KHR_maintenance1}</li>
-                <li>Requires {@link KHRBindMemory2 VK_KHR_bind_memory2}</li>
-                <li>Requires {@link KHRGetMemoryRequirements2 VK_KHR_get_memory_requirements2}</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRMaintenance1 VK_KHR_maintenance1} to be enabled for any device-level functionality</li>
+                <li>Requires {@link KHRBindMemory2 VK_KHR_bind_memory2} to be enabled for any device-level functionality</li>
+                <li>Requires {@link KHRGetMemoryRequirements2 VK_KHR_get_memory_requirements2} to be enabled for any device-level functionality</li>
+                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Deprecation state</b></dt>

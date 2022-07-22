@@ -21,7 +21,7 @@ package org.lwjgl.vulkan;
  * 
  * <p>All functionality in this extension is included in core Vulkan 1.2.</p>
  * 
- * <p>The single {@code ShaderViewportIndexLayerEXT} capability from the {@code SPV_EXT_shader_viewport_index_layer} extension is replaced by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#spirvenv-capabilities-table-ShaderViewportIndex">{@code ShaderViewportIndex}</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#spirvenv-capabilities-table-ShaderLayer">{@code ShaderLayer}</a> capabilities from SPIR-V 1.5 which are enabled by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderOutputViewportIndex">shaderOutputViewportIndex</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderOutputLayer">shaderOutputLayer</a> features, respectively. Additionally, if Vulkan 1.2 is supported but this extension is not, these capabilities are optional.</p>
+ * <p>The single {@code ShaderViewportIndexLayerEXT} capability from the {@code SPV_EXT_shader_viewport_index_layer} extension is replaced by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#spirvenv-capabilities-table-ShaderViewportIndex">{@code ShaderViewportIndex}</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#spirvenv-capabilities-table-ShaderLayer">{@code ShaderLayer}</a> capabilities from SPIR-V 1.5 which are enabled by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderOutputViewportIndex">{@code shaderOutputViewportIndex}</a> and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderOutputLayer">{@code shaderOutputLayer}</a> features, respectively. Additionally, if Vulkan 1.2 is supported but this extension is not, these capabilities are optional.</p>
  * 
  * <p>Enabling both features is equivalent to enabling the {@code VK_EXT_shader_viewport_index_layer} extension.</p>
  * 
@@ -38,7 +38,7 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
+ * <li>Requires support for Vulkan 1.0</li>
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>

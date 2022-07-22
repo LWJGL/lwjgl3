@@ -21,8 +21,8 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link EXTShaderAtomicFloat VK_EXT_shader_atomic_float}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link EXTShaderAtomicFloat VK_EXT_shader_atomic_float} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

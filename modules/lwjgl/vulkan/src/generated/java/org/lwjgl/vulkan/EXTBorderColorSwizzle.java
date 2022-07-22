@@ -25,8 +25,8 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link EXTCustomBorderColor VK_EXT_custom_border_color}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link EXTCustomBorderColor VK_EXT_custom_border_color} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Special Uses</b></dt>
  * <dd><ul>

@@ -36,8 +36,8 @@ val KHR_depth_stencil_resolve = "KHRDepthStencilResolve".nativeClassVK("KHR_dept
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRCreateRenderpass2 VK_KHR_create_renderpass2}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRCreateRenderpass2 VK_KHR_create_renderpass2} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Deprecation state</b></dt>

@@ -104,13 +104,13 @@ public class VkPhysicalDeviceTexelBufferAlignmentProperties extends Struct imple
     /** a byte alignment that is sufficient for a storage texel buffer of any format. The value <b>must</b> be a power of two. */
     @NativeType("VkDeviceSize")
     public long storageTexelBufferOffsetAlignmentBytes() { return nstorageTexelBufferOffsetAlignmentBytes(address()); }
-    /** indicates whether single texel alignment is sufficient for a storage texel buffer of any format. The value <b>must</b> be a power of two. */
+    /** indicates whether single texel alignment is sufficient for a storage texel buffer of any format. */
     @NativeType("VkBool32")
     public boolean storageTexelBufferOffsetSingleTexelAlignment() { return nstorageTexelBufferOffsetSingleTexelAlignment(address()) != 0; }
     /** a byte alignment that is sufficient for a uniform texel buffer of any format. The value <b>must</b> be a power of two. */
     @NativeType("VkDeviceSize")
     public long uniformTexelBufferOffsetAlignmentBytes() { return nuniformTexelBufferOffsetAlignmentBytes(address()); }
-    /** indicates whether single texel alignment is sufficient for a uniform texel buffer of any format. The value <b>must</b> be a power of two. */
+    /** indicates whether single texel alignment is sufficient for a uniform texel buffer of any format. */
     @NativeType("VkBool32")
     public boolean uniformTexelBufferOffsetSingleTexelAlignment() { return nuniformTexelBufferOffsetSingleTexelAlignment(address()) != 0; }
 

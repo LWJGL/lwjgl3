@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-sparseResidencyAliased">sparse aliased residency</a> feature is not enabled, and if any other resources are bound to ranges of {@code memory}, the range of {@code memory} being bound <b>must</b> not overlap with those bound ranges</li>
+ * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-sparseResidencyAliased">{@code sparseResidencyAliased}</a> feature is not enabled, and if any other resources are bound to ranges of {@code memory}, the range of {@code memory} being bound <b>must</b> not overlap with those bound ranges</li>
  * <li>{@code memory} and {@code memoryOffset} <b>must</b> match the memory requirements of the calling command’s {@code image}, as described in section <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#resources-association">Resource Memory Association</a></li>
  * <li>{@code subresource} <b>must</b> be a valid image subresource for {@code image} (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-views">Image Views</a>)</li>
  * <li>{@code offset.x} <b>must</b> be a multiple of the sparse image block width ({@link VkSparseImageFormatProperties}{@code ::imageGranularity.width}) of the image</li>

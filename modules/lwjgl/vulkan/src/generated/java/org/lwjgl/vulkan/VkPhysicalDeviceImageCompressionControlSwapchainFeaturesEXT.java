@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #imageCompressionControlSwapchain};
  * }</code></pre>
  */
@@ -79,21 +79,21 @@ public class VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT extends
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** indicates that the implementation supports controlling image controls per swapchain and querying image compression properties per surface. */
     @NativeType("VkBool32")
     public boolean imageCompressionControlSwapchain() { return nimageCompressionControlSwapchain(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTImageCompressionControlSwapchain#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT} value to the {@code sType} field. */
+    /** Sets the {@link EXTImageCompressionControlSwapchain#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT} value to the {@link #sType} field. */
     public VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT sType$Default() { return sType(EXTImageCompressionControlSwapchain.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #imageCompressionControlSwapchain} field. */
     public VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT imageCompressionControlSwapchain(@NativeType("VkBool32") boolean value) { nimageCompressionControlSwapchain(address(), value ? 1 : 0); return this; }
@@ -288,21 +288,21 @@ public class VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT extends
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT#imageCompressionControlSwapchain} field. */
         @NativeType("VkBool32")
         public boolean imageCompressionControlSwapchain() { return VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.nimageCompressionControlSwapchain(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT#sType} field. */
         public VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTImageCompressionControlSwapchain#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT} value to the {@code sType} field. */
+        /** Sets the {@link EXTImageCompressionControlSwapchain#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT} value to the {@link VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT#sType} field. */
         public VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.Buffer sType$Default() { return sType(EXTImageCompressionControlSwapchain.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT#pNext} field. */
         public VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT#imageCompressionControlSwapchain} field. */
         public VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.Buffer imageCompressionControlSwapchain(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.nimageCompressionControlSwapchain(address(), value ? 1 : 0); return this; }

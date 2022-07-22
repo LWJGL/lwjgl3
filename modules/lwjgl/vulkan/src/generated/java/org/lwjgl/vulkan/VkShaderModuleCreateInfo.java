@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VK10#vkCreateShaderModule CreateShaderModule}</p>
+ * <p>{@link VK10#vkCreateShaderModule CreateShaderModule}, {@link EXTShaderModuleIdentifier#vkGetShaderModuleCreateInfoIdentifierEXT GetShaderModuleCreateInfoIdentifierEXT}</p>
  * 
  * <h3>Layout</h3>
  * 

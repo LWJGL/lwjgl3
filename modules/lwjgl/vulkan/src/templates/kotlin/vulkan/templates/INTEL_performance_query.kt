@@ -166,7 +166,7 @@ val INTEL_performance_query = "INTELPerformanceQuery".nativeClassVK("INTEL_perfo
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Special Use</b></dt>

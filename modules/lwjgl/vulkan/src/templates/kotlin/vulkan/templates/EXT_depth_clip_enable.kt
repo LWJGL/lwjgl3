@@ -31,7 +31,7 @@ val EXT_depth_clip_enable = "EXTDepthClipEnable".nativeClassVK("EXT_depth_clip_e
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Special Use</b></dt>

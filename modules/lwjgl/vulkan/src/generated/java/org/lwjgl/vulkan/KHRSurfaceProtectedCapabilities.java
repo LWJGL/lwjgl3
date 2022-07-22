@@ -25,8 +25,8 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.1</li>
- * <li>Requires {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2}</li>
+ * <li>Requires support for Vulkan 1.1</li>
+ * <li>Requires {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} to be enabled</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

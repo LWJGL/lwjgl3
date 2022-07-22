@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
  * 
- * <p>When {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} is in the {@code pNext} chain of {@link VkDeviceCreateInfo} but the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-transformFeedback">transform feedback feature</a> is not enabled, the value of {@code transformFeedbackPreservesProvokingVertex} is ignored.</p>
+ * <p>When {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} is in the {@code pNext} chain of {@link VkDeviceCreateInfo} but the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-transformFeedback">{@code transformFeedback}</a> feature is not enabled, the value of {@code transformFeedbackPreservesProvokingVertex} is ignored.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

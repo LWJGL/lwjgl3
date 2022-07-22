@@ -29,7 +29,7 @@ val EXT_index_type_uint8 = "EXTIndexTypeUint8".nativeClassVK("EXT_index_type_uin
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

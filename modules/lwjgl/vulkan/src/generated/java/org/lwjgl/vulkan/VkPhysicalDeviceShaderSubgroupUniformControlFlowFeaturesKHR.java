@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #shaderSubgroupUniformControlFlow};
  * }</code></pre>
  */
@@ -79,21 +79,21 @@ public class VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR extends
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** specifies whether the implementation supports the shader execution mode {@code SubgroupUniformControlFlowKHR} */
     @NativeType("VkBool32")
     public boolean shaderSubgroupUniformControlFlow() { return nshaderSubgroupUniformControlFlow(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRShaderSubgroupUniformControlFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR} value to the {@code sType} field. */
+    /** Sets the {@link KHRShaderSubgroupUniformControlFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR} value to the {@link #sType} field. */
     public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR sType$Default() { return sType(KHRShaderSubgroupUniformControlFlow.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #shaderSubgroupUniformControlFlow} field. */
     public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR shaderSubgroupUniformControlFlow(@NativeType("VkBool32") boolean value) { nshaderSubgroupUniformControlFlow(address(), value ? 1 : 0); return this; }
@@ -288,21 +288,21 @@ public class VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR extends
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR#shaderSubgroupUniformControlFlow} field. */
         @NativeType("VkBool32")
         public boolean shaderSubgroupUniformControlFlow() { return VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.nshaderSubgroupUniformControlFlow(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR#sType} field. */
         public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRShaderSubgroupUniformControlFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR} value to the {@code sType} field. */
+        /** Sets the {@link KHRShaderSubgroupUniformControlFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR} value to the {@link VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR#sType} field. */
         public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.Buffer sType$Default() { return sType(KHRShaderSubgroupUniformControlFlow.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR#pNext} field. */
         public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR#shaderSubgroupUniformControlFlow} field. */
         public VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.Buffer shaderSubgroupUniformControlFlow(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.nshaderSubgroupUniformControlFlow(address(), value ? 1 : 0); return this; }

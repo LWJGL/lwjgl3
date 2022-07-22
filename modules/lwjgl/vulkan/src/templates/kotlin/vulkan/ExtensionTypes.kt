@@ -67,6 +67,8 @@ val VkShaderInfoTypeAMD = "VkShaderInfoTypeAMD".enumType
 val VkExternalMemoryHandleTypeFlagBitsNV = "VkExternalMemoryHandleTypeFlagBitsNV".enumType
 val VkExternalMemoryFeatureFlagBitsNV = "VkExternalMemoryFeatureFlagBitsNV".enumType
 val VkValidationCheckEXT = "VkValidationCheckEXT".enumType
+val VkPipelineRobustnessBufferBehaviorEXT = "VkPipelineRobustnessBufferBehaviorEXT".enumType
+val VkPipelineRobustnessImageBehaviorEXT = "VkPipelineRobustnessImageBehaviorEXT".enumType
 val VkConditionalRenderingFlagBitsEXT = "VkConditionalRenderingFlagBitsEXT".enumType
 val VkSurfaceCounterFlagBitsEXT = "VkSurfaceCounterFlagBitsEXT".enumType
 val VkDisplayPowerStateEXT = "VkDisplayPowerStateEXT".enumType
@@ -130,6 +132,7 @@ val VkVideoEncodeCapabilityFlagBitsKHR = "VkVideoEncodeCapabilityFlagBitsKHR".en
 val VkVideoEncodeRateControlFlagBitsKHR = "VkVideoEncodeRateControlFlagBitsKHR".enumType
 val VkVideoEncodeRateControlModeFlagBitsKHR = "VkVideoEncodeRateControlModeFlagBitsKHR".enumType
 val VkDeviceDiagnosticsConfigFlagBitsNV = "VkDeviceDiagnosticsConfigFlagBitsNV".enumType
+val VkExportMetalObjectTypeFlagBitsEXT = "VkExportMetalObjectTypeFlagBitsEXT".enumType
 val VkGraphicsPipelineLibraryFlagBitsEXT = "VkGraphicsPipelineLibraryFlagBitsEXT".enumType
 val VkPipelineLayoutCreateFlagBits = "VkPipelineLayoutCreateFlagBits".enumType
 val VkFragmentShadingRateTypeNV = "VkFragmentShadingRateTypeNV".enumType
@@ -233,6 +236,7 @@ val VkVideoEncodeCapabilityFlagsKHR = typedef(VkFlags, "VkVideoEncodeCapabilityF
 val VkVideoEncodeRateControlModeFlagsKHR = typedef(VkFlags, "VkVideoEncodeRateControlModeFlagsKHR")
 val VkVideoEncodeRateControlFlagsKHR = typedef(VkFlags, "VkVideoEncodeRateControlFlagsKHR")
 val VkDeviceDiagnosticsConfigFlagsNV = typedef(VkFlags, "VkDeviceDiagnosticsConfigFlagsNV")
+val VkExportMetalObjectTypeFlagsEXT = typedef(VkFlags, "VkExportMetalObjectTypeFlagsEXT")
 val VkPipelineStageFlags2KHR = typedef(VkFlags64, "VkPipelineStageFlags2KHR")
 val VkAccessFlags2KHR = typedef(VkFlags64, "VkAccessFlags2KHR")
 val VkSubmitFlagsKHR = typedef(VkFlags, "VkSubmitFlagsKHR")
@@ -439,7 +443,7 @@ val VkSwapchainCreateInfoKHR = struct(Module.VULKAN, "VkSwapchainCreateInfoKHR")
             <li>If {@code flags} does not contain #SWAPCHAIN_CREATE_MUTABLE_FORMAT_BIT_KHR and the {@code pNext} chain include a ##VkImageFormatListCreateInfo structure then ##VkImageFormatListCreateInfo{@code ::viewFormatCount} <b>must</b> be 0 or 1</li>
             <li>If {@code flags} contains #SWAPCHAIN_CREATE_PROTECTED_BIT_KHR, then ##VkSurfaceProtectedCapabilitiesKHR{@code ::supportsProtected} <b>must</b> be #TRUE in the ##VkSurfaceProtectedCapabilitiesKHR structure returned by #GetPhysicalDeviceSurfaceCapabilities2KHR() for {@code surface}</li>
             <li>If the {@code pNext} chain includes a ##VkSurfaceFullScreenExclusiveInfoEXT structure with its {@code fullScreenExclusive} member set to #FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT, and {@code surface} was created using #CreateWin32SurfaceKHR(), a ##VkSurfaceFullScreenExclusiveWin32InfoEXT structure <b>must</b> be included in the {@code pNext} chain</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-imageCompressionControlSwapchain">imageCompressionControlSwapchain</a> feature is not enabled, the {@code pNext} chain <b>must</b> not include an ##VkImageCompressionControlEXT structure</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-imageCompressionControlSwapchain">{@code imageCompressionControlSwapchain}</a> feature is not enabled, the {@code pNext} chain <b>must</b> not include an ##VkImageCompressionControlEXT structure</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -1217,7 +1221,7 @@ val VkQueueFamilyQueryResultStatusProperties2KHR = struct(Module.VULKAN, "VkQueu
 
     Expression("#STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("supported", "reports #TRUE if query type #QUERY_TYPE_RESULT_STATUS_ONLY_KHR and use of #QUERY_RESULT_WITH_STATUS_BIT_KHR are supported.")
+    VkBool32("queryResultStatusSupport", "reports #TRUE if query type #QUERY_TYPE_RESULT_STATUS_ONLY_KHR and use of #QUERY_RESULT_WITH_STATUS_BIT_KHR are supported.")
 }
 
 val VkVideoQueueFamilyProperties2KHR = struct(Module.VULKAN, "VkVideoQueueFamilyProperties2KHR") {
@@ -1243,6 +1247,16 @@ val VkVideoProfileKHR = struct(Module.VULKAN, "VkVideoProfileKHR") {
         """
         Structure specifying the codec video profile.
 
+        <h5>Description</h5>
+        When a ##VkVideoProfileKHR structure is specified through the {@code pProfiles} member of an ##VkVideoProfilesKHR structure in the {@code pNext} chain of the input parameter of a query command such as #GetPhysicalDeviceVideoCapabilitiesKHR(), #GetPhysicalDeviceVideoFormatPropertiesKHR(), or #GetPhysicalDeviceImageFormatProperties2(), the following error codes indicate specific causes of the failure of the query operation:
+
+        <ul>
+            <li>#ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR The requested video picture layout (e.g. through the {@code pictureLayout} member of a ##VkVideoDecodeH264ProfileEXT structure included in the {@code pNext} chain of ##VkVideoProfileKHR) is not supported.</li>
+            <li>#ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR A video profile operation specified by {@code videoCodecOperation} is not supported.</li>
+            <li>#ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR Format parameters specified by {@code chromaSubsampling}, {@code lumaBitDepth}, or {@code chromaBitDepth} are not supported.</li>
+            <li>#ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR Codec-specific parameters corresponding to the {@code videoCodecOperation} are not provided through the {@code pNext} chain of ##VkVideoProfileKHR, or the specified parameters are not supported.</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_PROFILE_KHR</li>
@@ -1263,7 +1277,7 @@ val VkVideoProfileKHR = struct(Module.VULKAN, "VkVideoProfileKHR") {
     PointerSetter(
         "VkVideoDecodeH264ProfileEXT", "VkVideoDecodeH265ProfileEXT", "VkVideoEncodeH264ProfileEXT", "VkVideoEncodeH265ProfileEXT",
         prepend = true
-    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkVideoCodecOperationFlagBitsKHR("videoCodecOperation", "a {@code VkVideoCodecOperationFlagBitsKHR} value specifying a video codec operation.")
     VkVideoChromaSubsamplingFlagsKHR("chromaSubsampling", "a bitmask of {@code VkVideoChromaSubsamplingFlagBitsKHR} specifying video chroma subsampling information.")
     VkVideoComponentBitDepthFlagsKHR("lumaBitDepth", "a bitmask of {@code VkVideoComponentBitDepthFlagBitsKHR} specifying video luma bit depth information.")
@@ -1275,20 +1289,27 @@ val VkVideoProfilesKHR = struct(Module.VULKAN, "VkVideoProfilesKHR") {
         """
         Structure enumerating the video profiles.
 
+        <h5>Description</h5>
+        Video transcoding is an example of a use case that necessitates numerous profiles. When the application provides one or more video decode and encode profiles in the list of profiles, the implementation ensures that the video formats and parameters reported produce video resources suitable for the transcoding use cases without the need for manual transformation.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the {@code pProfiles} list contains more than one ##VkVideoProfileKHR entry, then it <b>must</b> not contain more than one entry whose {@code videoCodecOperation} member specifies a decode operation</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_VIDEO_PROFILES_KHR</li>
-            <li>{@code pProfiles} <b>must</b> be a valid pointer to an array of {@code profileCount} valid ##VkVideoProfileKHR structures</li>
-            <li>{@code profileCount} <b>must</b> be greater than 0</li>
+            <li>If {@code profileCount} is not 0, {@code pProfiles} <b>must</b> be a valid pointer to an array of {@code profileCount} valid ##VkVideoProfileKHR structures</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkPhysicalDeviceVideoFormatInfoKHR, ##VkVideoProfileKHR
+        ##VkVideoProfileKHR
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_PROFILES_KHR")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    AutoSize("pProfiles")..uint32_t("profileCount", "an integer which holds the number of video profiles included in {@code pProfiles}.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pProfiles", optional = true)..uint32_t("profileCount", "an integer which holds the number of video profiles included in {@code pProfiles}.")
     VkVideoProfileKHR.const.p("pProfiles", "a pointer to an array of ##VkVideoProfileKHR structures. Each ##VkVideoProfileKHR structure <b>must</b> chain the corresponding codec-operation specific extension video profile structure.")
 }
 
@@ -1324,7 +1345,7 @@ val VkVideoCapabilitiesKHR = struct(Module.VULKAN, "VkVideoCapabilitiesKHR", mut
     VkExtensionProperties("stdHeaderVersion", "a ##VkExtensionProperties structure reporting the Video Std header version supported for the {@code codecOperation} requested in {@code vkGetPhysicalDeviceVideoCapabilitiesKHR}{@code ::pVideoProfile}.")
 }
 
-val VkPhysicalDeviceVideoFormatInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceVideoFormatInfoKHR", mutable = false) {
+val VkPhysicalDeviceVideoFormatInfoKHR = struct(Module.VULKAN, "VkPhysicalDeviceVideoFormatInfoKHR") {
     documentation =
         """
         Structure specifying the codec video format.
@@ -1332,26 +1353,28 @@ val VkPhysicalDeviceVideoFormatInfoKHR = struct(Module.VULKAN, "VkPhysicalDevice
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkVideoProfilesKHR</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code imageUsage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
+            <li>{@code imageUsage} <b>must</b> not be 0</li>
         </ul>
 
         <h5>See Also</h5>
-        ##VkVideoProfilesKHR, #GetPhysicalDeviceVideoFormatPropertiesKHR()
+        #GetPhysicalDeviceVideoFormatPropertiesKHR()
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR")..VkStructureType("sType", "the type of this structure.").mutable()
-    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkImageUsageFlags("imageUsage", "a bitmask of {@code VkImageUsageFlagBits} specifying intended video image usages.")
-    VkVideoProfilesKHR.const.p("pVideoProfiles", "a pointer to a ##VkVideoProfilesKHR structure providing the video profile(s) of video session(s) that will use the image. For most use cases, the image is used by a single video session and a single video profile is provided. For a use case such as transcode, where a decode session output image <b>may</b> be used as encode input for one or more encode sessions, multiple video profiles representing the video sessions that will share the image <b>may</b> be provided.")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
+    PointerSetter(
+        "VkVideoProfilesKHR",
+        prepend = true
+    )..nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkImageUsageFlags("imageUsage", "a bitmask of {@code VkImageUsageFlagBits} specifying the intended usage of the video images.")
 }
 
 val VkVideoFormatPropertiesKHR = struct(Module.VULKAN, "VkVideoFormatPropertiesKHR", mutable = false) {
     documentation =
         """
         Structure enumerating the video image formats.
-
-        <h5>Description</h5>
-        If the {@code pVideoProfiles} or {@code imageUsage} provided in input structure {@code pVideoFormatInfo} are not supported, #ERROR_FORMAT_NOT_SUPPORTED is returned.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -1360,12 +1383,17 @@ val VkVideoFormatPropertiesKHR = struct(Module.VULKAN, "VkVideoFormatPropertiesK
         </ul>
 
         <h5>See Also</h5>
-        #GetPhysicalDeviceVideoFormatPropertiesKHR()
+        ##VkComponentMapping, #GetPhysicalDeviceVideoFormatPropertiesKHR()
         """
 
     Expression("#STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkFormat("format", "one of the supported formats reported by the implementation.")
+    VkFormat("format", "a {@code VkFormat} that specifies the format that <b>can</b> be used with the specified video profiles and image usages.")
+    VkComponentMapping("componentMapping", "defines the color channel order used for the format. {@code format} along with {@code componentMapping} describe how the color channels are ordered when producing video decoder output or are expected to be ordered in video encoder input, when applicable. If the {@code format} reported does not require component swizzling then all members of {@code componentMapping} will be set to #COMPONENT_SWIZZLE_IDENTITY.")
+    VkImageCreateFlags("imageCreateFlags", "a bitmask of {@code VkImageCreateFlagBits} specifying the supported image creation flags for the format.")
+    VkImageType("imageType", "a {@code VkImageType} that specifies the image type the format <b>can</b> be used with.")
+    VkImageTiling("imageTiling", "a {@code VkImageTiling} that specifies the image tiling the format <b>can</b> be used with.")
+    VkImageUsageFlags("imageUsageFlags", "a bitmask of {@code VkImageUsageFlagBits} specifying the supported image usage flags for the format.")
 }
 
 val VkVideoPictureResourceKHR = struct(Module.VULKAN, "VkVideoPictureResourceKHR") {
@@ -1478,9 +1506,10 @@ val VkVideoSessionCreateInfoKHR = struct(Module.VULKAN, "VkVideoSessionCreateInf
             <li>{@code maxReferencePicturesActiveCount} <b>cannot</b> exceed the implementation reported ##VkVideoCapabilitiesKHR{@code ::maxReferencePicturesActiveCount}</li>
             <li>{@code maxReferencePicturesActiveCount} <b>cannot</b> exceed the {@code maxReferencePicturesSlotsCount}</li>
             <li>{@code maxCodedExtent} <b>cannot</b> be smaller than ##VkVideoCapabilitiesKHR{@code ::minExtent} and bigger than ##VkVideoCapabilitiesKHR{@code ::maxExtent}</li>
-            <li>{@code referencePicturesFormat} <b>must</b> be one of the supported formats in ##VkVideoFormatPropertiesKHR {@code format} returned by the #GetPhysicalDeviceVideoFormatPropertiesKHR() when the ##VkPhysicalDeviceVideoFormatInfoKHR {@code imageUsage} contains #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR or #IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR depending on the session codec operation</li>
-            <li>{@code pictureFormat} for decode output <b>must</b> be one of the supported formats in ##VkVideoFormatPropertiesKHR {@code format} returned by the #GetPhysicalDeviceVideoFormatPropertiesKHR() when the ##VkPhysicalDeviceVideoFormatInfoKHR {@code imageUsage} contains #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR</li>
-            <li>{@code pictureFormat} targeting encode operations <b>must</b> be one of the supported formats in ##VkVideoFormatPropertiesKHR {@code format} returned by the #GetPhysicalDeviceVideoFormatPropertiesKHR() when the ##VkPhysicalDeviceVideoFormatInfoKHR {@code imageUsage} contains #IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR</li>
+            <li>If the {@code videoCodecOperation} member of {@code pVideoProfile} specifies a decode operation then {@code referencePicturesFormat} <b>must</b> be one of the supported decode DPB formats as reported by #GetPhysicalDeviceVideoFormatPropertiesKHR() in the {@code format} member of ##VkVideoFormatPropertiesKHR when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR, and with a ##VkVideoProfilesKHR structure chained to its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an entry matching {@code pVideoProfile}</li>
+            <li>If the {@code videoCodecOperation} member of {@code pVideoProfile} specifies an encode operation then {@code referencePicturesFormat} <b>must</b> be one of the supported encode DPB formats as reported by #GetPhysicalDeviceVideoFormatPropertiesKHR() in the {@code format} member of ##VkVideoFormatPropertiesKHR when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing #IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR, and with a ##VkVideoProfilesKHR structure chained to its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an entry matching {@code pVideoProfile}</li>
+            <li>If the {@code videoCodecOperation} member of {@code pVideoProfile} specifies a decode operation then {@code pictureFormat} <b>must</b> be one of the supported decode output formats as reported by #GetPhysicalDeviceVideoFormatPropertiesKHR() in the {@code format} member of ##VkVideoFormatPropertiesKHR when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR, and with a ##VkVideoProfilesKHR structure chained to its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an entry matching {@code pVideoProfile}</li>
+            <li>If the {@code videoCodecOperation} member of {@code pVideoProfile} specifies an encode operation then {@code pictureFormat} <b>must</b> be one of the supported encode input formats as reported by #GetPhysicalDeviceVideoFormatPropertiesKHR() in the {@code format} member of ##VkVideoFormatPropertiesKHR when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing #IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR, and with a ##VkVideoProfilesKHR structure chained to its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an entry matching {@code pVideoProfile}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -3078,7 +3107,7 @@ val VkMultiviewPerViewAttributesInfoNVX = struct(Module.VULKAN, "VkMultiviewPerV
         Structure specifying the multiview per-attribute properties.
 
         <h5>Description</h5>
-        When dynamic render pass instances are being used, instead of specifying #SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX or #SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX in the subpass description flags, the per-attibute properties of the render pass instance <b>must</b> be specified by the ##VkMultiviewPerViewAttributesInfoNVX structure Include the ##VkMultiviewPerViewAttributesInfoNVX structure in the {@code pNext} chain of ##VkGraphicsPipelineCreateInfo when creating a graphics pipeline for dynamic rendering, ##VkRenderingInfo when starting a dynamic render pass instance, and ##VkCommandBufferInheritanceInfo when specifying the dynamic render pass instance parameters for secondary command buffers.
+        When dynamic render pass instances are being used, instead of specifying #SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX or #SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX in the subpass description flags, the per-attribute properties of the render pass instance <b>must</b> be specified by the ##VkMultiviewPerViewAttributesInfoNVX structure Include the ##VkMultiviewPerViewAttributesInfoNVX structure in the {@code pNext} chain of ##VkGraphicsPipelineCreateInfo when creating a graphics pipeline for dynamic rendering, ##VkRenderingInfo when starting a dynamic render pass instance, and ##VkCommandBufferInheritanceInfo when specifying the dynamic render pass instance parameters for secondary command buffers.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -3172,7 +3201,7 @@ val VkExternalMemoryImageCreateInfoNV = struct(Module.VULKAN, "VkExternalMemoryI
 
     Expression("#STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkExternalMemoryHandleTypeFlagsNV("handleTypes", "zero, or a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more external memory handle types.")
+    VkExternalMemoryHandleTypeFlagsNV("handleTypes", "zero or a bitmask of {@code VkExternalMemoryHandleTypeFlagBitsNV} specifying one or more external memory handle types.")
 }
 
 val VkExportMemoryAllocateInfoNV = struct(Module.VULKAN, "VkExportMemoryAllocateInfoNV") {
@@ -3497,6 +3526,101 @@ val VkPhysicalDeviceASTCDecodeFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDev
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("decodeModeSharedExponent", "indicates whether the implementation supports decoding ASTC compressed formats to #FORMAT_E5B9G9R9_UFLOAT_PACK32 internal precision.")
+}
+
+val VkPhysicalDevicePipelineRobustnessFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDevicePipelineRobustnessFeaturesEXT") {
+    documentation =
+        """
+        Structure describing whether an implementation supports robustness requests on a per-pipeline stage granularity.
+
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Enabling <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineRobustness">{@code pipelineRobustness}</a> may, on some platforms, incur a minor performance cost when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> is disabled, even for pipelines which do not make use of any robustness features. If robustness is not needed, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineRobustness">{@code pipelineRobustness}</a> should not be enabled by an application.
+        </div>
+
+        If the ##VkPhysicalDevicePipelineRobustnessFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDevicePipelineRobustnessFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("pipelineRobustness", "indicates that robustness <b>can</b> be requested on a per-pipeline-stage granularity.")
+}
+
+val VkPhysicalDevicePipelineRobustnessPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDevicePipelineRobustnessPropertiesEXT", mutable = false) {
+    documentation =
+        """
+        Structure describing the default robustness behavior of a physical device.
+
+        <h5>Description</h5>
+        Some implementations of Vulkan may be able to guarantee that certain types of accesses are always performed with robustness even when the Vulkan API’s robustness features are not explicitly enabled.
+
+        Even when an implementation reports that accesses to a given resource type are robust by default, it remains invalid to make an out of bounds access without requesting the appropriate robustness feature.
+
+        If the ##VkPhysicalDevicePipelineRobustnessPropertiesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES_EXT")..VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    VkPipelineRobustnessBufferBehaviorEXT("defaultRobustnessStorageBuffers", "describes the behaviour of out of bounds accesses made to storage buffers when no robustness features are enabled")
+    VkPipelineRobustnessBufferBehaviorEXT("defaultRobustnessUniformBuffers", "describes the behaviour of out of bounds accesses made to uniform buffers when no robustness features are enabled")
+    VkPipelineRobustnessBufferBehaviorEXT("defaultRobustnessVertexInputs", "describes the behaviour of out of bounds accesses made to vertex input attributes when no robustness features are enabled")
+    VkPipelineRobustnessImageBehaviorEXT("defaultRobustnessImages", "describes the behaviour of out of bounds accesses made to images when no robustness features are enabled")
+}
+
+val VkPipelineRobustnessCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRobustnessCreateInfoEXT") {
+    documentation =
+        """
+        Structure controlling the robustness of a newly created pipeline shader stage.
+
+        <h5>Description</h5>
+        The scope of the effect of ##VkPipelineRobustnessCreateInfoEXT depends on which structure’s {@code pNext} chain it is included in.
+
+        <ul>
+            <li>##VkGraphicsPipelineCreateInfo, ##VkComputePipelineCreateInfo, ##VkRayTracingPipelineCreateInfoKHR The robustness behavior described by ##VkPipelineRobustnessCreateInfoEXT applies to all accesses through this pipeline</li>
+            <li>##VkPipelineShaderStageCreateInfo The robustness behavior described by ##VkPipelineRobustnessCreateInfoEXT applies to all accesses emanating from the shader code of this shader stage</li>
+        </ul>
+
+        If ##VkPipelineRobustnessCreateInfoEXT is specified for both a pipeline and a pipeline stage, the ##VkPipelineRobustnessCreateInfoEXT specified for the pipeline stage will take precedence.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code storageBuffers} <b>must</b> be #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code uniformBuffers} <b>must</b> be #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code vertexInputs} <b>must</b> be #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code images} <b>must</b> be #PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_DEVICE_DEFAULT_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustImageAccess">{@code robustImageAccess}</a> feature is not supported, {@code images} <b>must</b> not be #PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is not supported, {@code storageBuffers} <b>must</b> not be #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is not supported, {@code uniformBuffers} <b>must</b> not be #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is not supported, {@code vertexInputs} <b>must</b> not be #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustImageAccess2">{@code robustImageAccess2}</a> feature is not supported, {@code images} <b>must</b> not be #PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_2_EXT</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT</li>
+            <li>{@code storageBuffers} <b>must</b> be a valid {@code VkPipelineRobustnessBufferBehaviorEXT} value</li>
+            <li>{@code uniformBuffers} <b>must</b> be a valid {@code VkPipelineRobustnessBufferBehaviorEXT} value</li>
+            <li>{@code vertexInputs} <b>must</b> be a valid {@code VkPipelineRobustnessBufferBehaviorEXT} value</li>
+            <li>{@code images} <b>must</b> be a valid {@code VkPipelineRobustnessImageBehaviorEXT} value</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT")..VkStructureType("sType", "")
+    nullable..opaque_const_p("pNext", "")
+    VkPipelineRobustnessBufferBehaviorEXT("storageBuffers", "")
+    VkPipelineRobustnessBufferBehaviorEXT("uniformBuffers", "")
+    VkPipelineRobustnessBufferBehaviorEXT("vertexInputs", "")
+    VkPipelineRobustnessImageBehaviorEXT("images", "")
 }
 
 val VkPhysicalDeviceGroupPropertiesKHR = struct(Module.VULKAN, "VkPhysicalDeviceGroupPropertiesKHR", mutable = false, alias = VkPhysicalDeviceGroupProperties) {
@@ -4241,7 +4365,7 @@ val VkCommandBufferInheritanceConditionalRenderingInfoEXT = struct(Module.VULKAN
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-inheritedConditionalRendering">inherited conditional rendering</a> feature is not enabled, {@code conditionalRenderingEnable} <b>must</b> be #FALSE</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-inheritedConditionalRendering">{@code inheritedConditionalRendering}</a> feature is not enabled, {@code conditionalRenderingEnable} <b>must</b> be #FALSE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -5556,7 +5680,7 @@ val VkSurfaceFormat2KHR = struct(Module.VULKAN, "VkSurfaceFormat2KHR", mutable =
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-imageCompressionControlSwapchain">imageCompressionControlSwapchain</a> feature is not enabled, the {@code pNext} chain <b>must</b> not include an ##VkImageCompressionPropertiesEXT structure</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-imageCompressionControlSwapchain">{@code imageCompressionControlSwapchain}</a> feature is not enabled, the {@code pNext} chain <b>must</b> not include an ##VkImageCompressionPropertiesEXT structure</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -6785,7 +6909,7 @@ val VkWriteDescriptorSetAccelerationStructureKHR = struct(Module.VULKAN, "VkWrit
         <ul>
             <li>{@code accelerationStructureCount} <b>must</b> be equal to {@code descriptorCount} in the extended structure</li>
             <li>Each acceleration structure in {@code pAccelerationStructures} <b>must</b> have been created with a {@code type} of #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR or #ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-nullDescriptor">nullDescriptor</a> feature is not enabled, each element of {@code pAccelerationStructures} <b>must</b> not be #NULL_HANDLE</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, each element of {@code pAccelerationStructures} <b>must</b> not be #NULL_HANDLE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -7068,6 +7192,7 @@ val VkPipelineLibraryCreateInfoKHR = struct(Module.VULKAN, "VkPipelineLibraryCre
         <h5>Valid Usage</h5>
         <ul>
             <li>Each element of {@code pLibraries} <b>must</b> have been created with #PIPELINE_CREATE_LIBRARY_BIT_KHR</li>
+            <li>If any library in {@code pLibraries} was created with a shader stage with ##VkPipelineShaderStageModuleIdentifierCreateInfoEXT and {@code identifierSize} not equal to 0, the pipeline <b>must</b> be created with the #PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT flag set</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -7172,12 +7297,13 @@ val VkRayTracingPipelineCreateInfoKHR = struct(Module.VULKAN, "VkRayTracingPipel
             <li>If {@code pLibraryInfo} is not {@code NULL} and its {@code libraryCount} is 0, {@code groupCount} <b>must</b> not be 0</li>
             <li>Any element of the {@code pDynamicStates} member of {@code pDynamicState} <b>must</b> be #DYNAMIC_STATE_RAY_TRACING_PIPELINE_STACK_SIZE_KHR</li>
             <li>If ##VkPipelineCreationFeedbackCreateInfo{@code ::pipelineStageCreationFeedbackCount} is not 0, it <b>must</b> be equal to {@code stageCount}</li>
+            <li>The {@code stage} value in all {@code pStages} elements <b>must</b> be one of #SHADER_STAGE_RAYGEN_BIT_KHR, #SHADER_STAGE_ANY_HIT_BIT_KHR, #SHADER_STAGE_CLOSEST_HIT_BIT_KHR, #SHADER_STAGE_MISS_BIT_KHR, #SHADER_STAGE_INTERSECTION_BIT_KHR, or #SHADER_STAGE_CALLABLE_BIT_KHR</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR</li>
-            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineCreationFeedbackCreateInfo</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkPipelineCreationFeedbackCreateInfo or ##VkPipelineRobustnessCreateInfoEXT</li>
             <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
             <li>If {@code stageCount} is not 0, {@code pStages} <b>must</b> be a valid pointer to an array of {@code stageCount} valid ##VkPipelineShaderStageCreateInfo structures</li>
@@ -7195,7 +7321,7 @@ val VkRayTracingPipelineCreateInfoKHR = struct(Module.VULKAN, "VkRayTracingPipel
 
     Expression("#STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
     PointerSetter(
-        "VkPipelineCreationFeedbackCreateInfo", "VkPipelineCreationFeedbackCreateInfoEXT",
+        "VkPipelineCreationFeedbackCreateInfo", "VkPipelineCreationFeedbackCreateInfoEXT", "VkPipelineRobustnessCreateInfoEXT",
         prepend = true
     )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkPipelineCreateFlags("flags", "a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated.")
@@ -7861,9 +7987,9 @@ val VkPhysicalDevicePortabilitySubsetFeaturesKHR = struct(Module.VULKAN, "VkPhys
     VkBool32("pointPolygons", "indicates whether this implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast\">Rasterization</a> using a <em>point</em> <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-polygonmode\">Polygon Mode</a>.")
     VkBool32("samplerMipLodBias", "indicates whether this implementation supports setting a <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#samplers-mipLodBias\">mipmap LOD bias value</a> when <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#samplers\">creating a sampler</a>.")
     VkBool32("separateStencilMaskRef", "indicates whether this implementation supports separate front and back <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#fragops-stencil\">Stencil Test</a> reference values.")
-    VkBool32("shaderSampleRateInterpolationFunctions", "indicates whether this implementation supports fragment shaders which use the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#spirvenv-capabilities-table-InterpolationFunction\">{@code InterpolationFunction}</a> capability and the extended instructions {@code InterpolateAtCentroid}, {@code InterpolateAtOffset}, and {@code InterpolateAtSample} from the {@code GLSL.std.450} extended instruction set. This member is only meaningful if the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-sampleRateShading\">sampleRateShading</a> feature is supported.")
-    VkBool32("tessellationIsolines", "indicates whether this implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#tessellation-isoline-tessellation\">isoline output</a> from the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#tessellation\">Tessellation</a> stage of a graphics pipeline. This member is only meaningful if <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-tessellationShader\">tessellation shaders</a> are supported.")
-    VkBool32("tessellationPointMode", "indicates whether this implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#tessellation-point-mode\">point output</a> from the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#tessellation\">Tessellation</a> stage of a graphics pipeline. This member is only meaningful if <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-tessellationShader\">tessellation shaders</a> are supported.")
+    VkBool32("shaderSampleRateInterpolationFunctions", "indicates whether this implementation supports fragment shaders which use the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#spirvenv-capabilities-table-InterpolationFunction\">{@code InterpolationFunction}</a> capability and the extended instructions {@code InterpolateAtCentroid}, {@code InterpolateAtOffset}, and {@code InterpolateAtSample} from the {@code GLSL.std.450} extended instruction set. This member is only meaningful if the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-sampleRateShading\">{@code sampleRateShading}</a> feature is supported.")
+    VkBool32("tessellationIsolines", "indicates whether this implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#tessellation-isoline-tessellation\">isoline output</a> from the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#tessellation\">Tessellation</a> stage of a graphics pipeline. This member is only meaningful if <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-tessellationShader\">{@code tessellationShader}</a> are supported.")
+    VkBool32("tessellationPointMode", "indicates whether this implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#tessellation-point-mode\">point output</a> from the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#tessellation\">Tessellation</a> stage of a graphics pipeline. This member is only meaningful if <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-tessellationShader\">{@code tessellationShader}</a> are supported.")
     VkBool32("triangleFans", "indicates whether this implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#drawing-triangle-fans\">Triangle Fans</a> primitive topology.")
     VkBool32("vertexAttributeAccessBeyondStride", "indicates whether this implementation supports accessing a vertex input attribute beyond the stride of the corresponding vertex input binding.")
 }
@@ -7921,7 +8047,7 @@ val VkPipelineViewportShadingRateImageStateCreateInfoNV = struct(Module.VULKAN, 
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiViewport">multiple viewports</a> feature is not enabled, {@code viewportCount} <b>must</b> be 0 or 1</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiViewport">{@code multiViewport}</a> feature is not enabled, {@code viewportCount} <b>must</b> be 0 or 1</li>
             <li>{@code viewportCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxViewports}</li>
             <li>If {@code shadingRateImageEnable} is #TRUE, {@code viewportCount} <b>must</b> be greater or equal to the {@code viewportCount} member of ##VkPipelineViewportStateCreateInfo</li>
         </ul>
@@ -8150,6 +8276,7 @@ val VkRayTracingPipelineCreateInfoNV = struct(Module.VULKAN, "VkRayTracingPipeli
             <li>{@code flags} <b>must</b> not include #PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV</li>
             <li>{@code flags} <b>must</b> not include both #PIPELINE_CREATE_DEFER_COMPILE_BIT_NV and #PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT at the same time</li>
             <li>If ##VkPipelineCreationFeedbackCreateInfo{@code ::pipelineStageCreationFeedbackCount} is not 0, it <b>must</b> be equal to {@code stageCount}</li>
+            <li>The {@code stage} value in all {@code pStages} elements <b>must</b> be one of #SHADER_STAGE_RAYGEN_BIT_KHR, #SHADER_STAGE_ANY_HIT_BIT_KHR, #SHADER_STAGE_CLOSEST_HIT_BIT_KHR, #SHADER_STAGE_MISS_BIT_KHR, #SHADER_STAGE_INTERSECTION_BIT_KHR, or #SHADER_STAGE_CALLABLE_BIT_KHR</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -8350,7 +8477,7 @@ val VkAccelerationStructureInfoNV = struct(Module.VULKAN, "VkAccelerationStructu
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_NV</li>
             <li>{@code pNext} <b>must</b> be {@code NULL}</li>
-            <li>{@code type} <b>must</b> be a valid {@code VkAccelerationStructureTypeKHR} value</li>
+            <li>{@code type} <b>must</b> be a valid {@code VkAccelerationStructureTypeNV} value</li>
             <li>{@code flags} <b>must</b> be a valid combination of {@code VkBuildAccelerationStructureFlagBitsNV} values</li>
             <li>If {@code geometryCount} is not 0, {@code pGeometries} <b>must</b> be a valid pointer to an array of {@code geometryCount} valid ##VkGeometryNV structures</li>
         </ul>
@@ -8441,7 +8568,7 @@ val VkWriteDescriptorSetAccelerationStructureNV = struct(Module.VULKAN, "VkWrite
         <ul>
             <li>{@code accelerationStructureCount} <b>must</b> be equal to {@code descriptorCount} in the extended structure</li>
             <li>Each acceleration structure in {@code pAccelerationStructures} <b>must</b> have been created with #ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-nullDescriptor">nullDescriptor</a> feature is not enabled, each member of {@code pAccelerationStructures} <b>must</b> not be #NULL_HANDLE</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, each member of {@code pAccelerationStructures} <b>must</b> not be #NULL_HANDLE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -9380,7 +9507,7 @@ val VkPipelineViewportExclusiveScissorStateCreateInfoNV = struct(Module.VULKAN, 
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiViewport">multiple viewports</a> feature is not enabled, {@code exclusiveScissorCount} <b>must</b> be 0 or 1</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiViewport">{@code multiViewport}</a> feature is not enabled, {@code exclusiveScissorCount} <b>must</b> be 0 or 1</li>
             <li>{@code exclusiveScissorCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxViewports}</li>
             <li>{@code exclusiveScissorCount} <b>must</b> be 0 or greater than or equal to the {@code viewportCount} member of ##VkPipelineViewportStateCreateInfo</li>
         </ul>
@@ -10612,7 +10739,7 @@ val VkPhysicalDeviceProvokingVertexFeaturesEXT = struct(Module.VULKAN, "VkPhysic
         <h5>Description</h5>
         If the ##VkPhysicalDeviceProvokingVertexFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceProvokingVertexFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
 
-        When ##VkPhysicalDeviceProvokingVertexFeaturesEXT is in the {@code pNext} chain of ##VkDeviceCreateInfo but the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-transformFeedback">transform feedback feature</a> is not enabled, the value of {@code transformFeedbackPreservesProvokingVertex} is ignored.
+        When ##VkPhysicalDeviceProvokingVertexFeaturesEXT is in the {@code pNext} chain of ##VkDeviceCreateInfo but the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-transformFeedback">{@code transformFeedback}</a> feature is not enabled, the value of {@code transformFeedbackPreservesProvokingVertex} is ignored.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -10654,11 +10781,11 @@ val VkPipelineRasterizationProvokingVertexStateCreateInfoEXT = struct(Module.VUL
         <h5>Description</h5>
         If this struct is not provided when creating the pipeline, the pipeline will use the #PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT mode.
 
-        If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-provokingVertexModePerPipeline">provokingVertexModePerPipeline</a> limit is #FALSE, then all pipelines bound within a render pass instance <b>must</b> have the same {@code provokingVertexMode}.
+        If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-provokingVertexModePerPipeline">{@code provokingVertexModePerPipeline}</a> limit is #FALSE, then all pipelines bound within a render pass instance <b>must</b> have the same {@code provokingVertexMode}.
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code provokingVertexMode} is #PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-provokingVertexLast">provokingVertexLast</a> feature <b>must</b> be enabled</li>
+            <li>If {@code provokingVertexMode} is #PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-provokingVertexLast">{@code provokingVertexLast}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -10827,7 +10954,7 @@ val VkPhysicalDeviceLineRasterizationFeaturesEXT = struct(Module.VULKAN, "VkPhys
     VkBool32("rectangularLines", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines\">rectangular line rasterization</a>.")
     VkBool32("bresenhamLines", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-bresenham\">Bresenham-style line rasterization</a>.")
     VkBool32("smoothLines", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-smooth\">smooth line rasterization</a>.")
-    VkBool32("stippledRectangularLines", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a> with #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT lines, or with #LINE_RASTERIZATION_MODE_DEFAULT_EXT lines if ##VkPhysicalDeviceLimits{@code ::strictLines} is #TRUE.")
+    VkBool32("stippledRectangularLines", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a> with #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT lines.")
     VkBool32("stippledBresenhamLines", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a> with #LINE_RASTERIZATION_MODE_BRESENHAM_EXT lines.")
     VkBool32("stippledSmoothLines", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-lines-stipple\">stippled line rasterization</a> with #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT lines.")
 }
@@ -10861,13 +10988,13 @@ val VkPipelineRasterizationLineStateCreateInfoEXT = struct(Module.VULKAN, "VkPip
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rectangularLines">rectangularLines</a> feature <b>must</b> be enabled</li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bresenhamLines">bresenhamLines</a> feature <b>must</b> be enabled</li>
-            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bresenhamLines">smoothLines</a> feature <b>must</b> be enabled</li>
-            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledRectangularLines">stippledRectangularLines</a> feature <b>must</b> be enabled</li>
-            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledBresenhamLines">stippledBresenhamLines</a> feature <b>must</b> be enabled</li>
-            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledSmoothLines">stippledSmoothLines</a> feature <b>must</b> be enabled</li>
-            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_DEFAULT_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledRectangularLines">stippledRectangularLines</a> feature <b>must</b> be enabled and ##VkPhysicalDeviceLimits{@code ::strictLines} <b>must</b> be #TRUE</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-rectangularLines">{@code rectangularLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bresenhamLines">{@code bresenhamLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledRectangularLines">{@code stippledRectangularLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_BRESENHAM_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledBresenhamLines">{@code stippledBresenhamLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledSmoothLines">{@code stippledSmoothLines}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code stippledLineEnable} is #TRUE and {@code lineRasterizationMode} is #LINE_RASTERIZATION_MODE_DEFAULT_EXT, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-stippledRectangularLines">{@code stippledRectangularLines}</a> feature <b>must</b> be enabled and ##VkPhysicalDeviceLimits{@code ::strictLines} <b>must</b> be #TRUE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -11008,7 +11135,7 @@ val VkPipelineInfoKHR = struct(Module.VULKAN, "VkPipelineInfoKHR") {
         </ul>
 
         <h5>See Also</h5>
-        #GetPipelineExecutablePropertiesKHR()
+        #GetPipelineExecutablePropertiesKHR(), #GetPipelinePropertiesEXT()
         """
 
     Expression("#STRUCTURE_TYPE_PIPELINE_INFO_KHR")..VkStructureType("sType", "the type of this structure.")
@@ -11275,7 +11402,7 @@ val VkGraphicsPipelineShaderGroupsCreateInfoNV = struct(Module.VULKAN, "VkGraphi
             <li>All elements of {@code pGroups} <b>must</b> use the same shader stage combinations unless any mesh shader stage is used, then either combination of task and mesh or just mesh shader is valid</li>
             <li>Mesh and regular primitive shading stages cannot be mixed across {@code pGroups}</li>
             <li>Each element of {@code pPipelines} <b>must</b> have been created with identical state to the pipeline currently created except the state that can be overridden by ##VkGraphicsShaderGroupCreateInfoNV</li>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedCommands">##VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV{@code ::deviceGeneratedCommands}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-deviceGeneratedCommands">{@code deviceGeneratedCommands}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -11399,6 +11526,7 @@ val VkIndirectCommandsLayoutTokenNV = struct(Module.VULKAN, "VkIndirectCommandsL
         <ul>
             <li>{@code stream} <b>must</b> be smaller than ##VkIndirectCommandsLayoutCreateInfoNV{@code ::streamCount}</li>
             <li>{@code offset} <b>must</b> be less than or equal to ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV{@code ::maxIndirectCommandsTokenOffset}</li>
+            <li>{@code offset} <b>must</b> be aligned to the scalar alignment of {@code tokenType} or {@code minIndirectCommandsBufferOffsetAlignment}, whichever is lower</li>
             <li>If {@code tokenType} is #INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NV, {@code vertexBindingUnit} <b>must</b> stay within device supported limits for the appropriate commands</li>
             <li>If {@code tokenType} is #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV, {@code pushconstantPipelineLayout} <b>must</b> be valid</li>
             <li>If {@code tokenType} is #INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV, {@code pushconstantOffset} <b>must</b> be a multiple of 4</li>
@@ -11469,6 +11597,12 @@ val VkIndirectCommandsLayoutCreateInfoNV = struct(Module.VULKAN, "VkIndirectComm
 ￿    cmdProcessSequence( cmd, pipeline, indirectCommandsLayout, pIndirectCommandsTokens, sUsed );
 ￿  }
 ￿}</code></pre>
+
+        When tokens are consumed, an offset is computed based on token offset and stream stride. The resulting offset is required to be aligned. The alignment for a specific token is equal to the scalar alignment of the data type as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces-alignment-requirements">Alignment Requirements</a>, or ##VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV{@code ::minIndirectCommandsBufferOffsetAlignment}, whichever is lower.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        A {@code minIndirectCommandsBufferOffsetAlignment} of 4 allows {@code VkDeviceAddress} to be packed as {@code uvec2} with scalar layout instead of {@code uint64_t} with 8 byte alignment. This enables direct compatibility with D3D12 command signature layouts.
+        </div>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -11562,7 +11696,7 @@ val VkGeneratedCommandsInfoNV = struct(Module.VULKAN, "VkGeneratedCommandsInfoNV
     AutoSize("pStreams")..uint32_t("streamCount", "defines the number of input streams")
     VkIndirectCommandsStreamNV.const.p("pStreams", "a pointer to an array of {@code streamCount} ##VkIndirectCommandsStreamNV structures providing the input data for the tokens used in {@code indirectCommandsLayout}.")
     uint32_t("sequencesCount", "the maximum number of sequences to reserve. If {@code sequencesCountBuffer} is #NULL_HANDLE, this is also the actual number of sequences generated.")
-    VkBuffer("preprocessBuffer", "the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with #CmdExecuteGeneratedCommandsNV() with its {@code isPreprocessed} set to {@code VK_TRUE}, then the preprocessing step is skipped and data is only read from this buffer.")
+    VkBuffer("preprocessBuffer", "the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with #CmdExecuteGeneratedCommandsNV() with its {@code isPreprocessed} set to {@code VK_TRUE}, then the preprocessing step is skipped and data is only read from this buffer. The contents and the layout of this buffer is opaque to applications and <b>must</b> not be modified or copied to another buffer for reuse.")
     VkDeviceSize("preprocessOffset", "the byte offset into {@code preprocessBuffer} where the preprocessed data is stored.")
     VkDeviceSize("preprocessSize", "the maximum byte size within the {@code preprocessBuffer} after the {@code preprocessOffset} that is available for preprocessing.")
     VkBuffer("sequencesCountBuffer", "a {@code VkBuffer} in which the actual number of sequences is provided as single {@code uint32_t} value.")
@@ -11667,8 +11801,8 @@ val VkCommandBufferInheritanceViewportScissorInfoNV = struct(Module.VULKAN, "VkC
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-inheritedViewportScissor2D">inherited viewport scissor</a> feature is not enabled, {@code viewportScissor2D} <b>must</b> be #FALSE</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiViewport">multiple viewports</a> feature is not enabled and {@code viewportScissor2D} is #TRUE, then {@code viewportDepthCount} <b>must</b> be 1</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-inheritedViewportScissor2D">{@code inheritedViewportScissor2D}</a> feature is not enabled, {@code viewportScissor2D} <b>must</b> be #FALSE</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-multiViewport">{@code multiViewport}</a> feature is not enabled and {@code viewportScissor2D} is #TRUE, then {@code viewportDepthCount} <b>must</b> be 1</li>
             <li>If {@code viewportScissor2D} is #TRUE, then {@code viewportDepthCount} <b>must</b> be greater than 0</li>
             <li>If {@code viewportScissor2D} is #TRUE, then {@code pViewportDepths} <b>must</b> be a valid pointer to an array of {@code viewportDepthCount} valid ##VkViewport structures, except any requirements on {@code x}, {@code y}, {@code width}, and {@code height} do not apply</li>
             <li>If {@code viewportScissor2D} is #TRUE, then the command buffer <b>must</b> be recorded with the #COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT</li>
@@ -11926,8 +12060,8 @@ val VkPhysicalDeviceRobustness2FeaturesEXT = struct(Module.VULKAN, "VkPhysicalDe
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
-    VkBool32("robustBufferAccess2", "indicates whether buffer accesses are tightly bounds-checked against the range of the descriptor. Uniform buffers <b>must</b> be bounds-checked to the range of the descriptor, where the range is rounded up to a multiple of <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#limits-robustUniformBufferAccessSizeAlignment\">robustUniformBufferAccessSizeAlignment</a>. Storage buffers <b>must</b> be bounds-checked to the range of the descriptor, where the range is rounded up to a multiple of <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#limits-robustStorageBufferAccessSizeAlignment\">robustStorageBufferAccessSizeAlignment</a>. Out of bounds buffer loads will return zero values, and formatted loads will have <code>(0,0,1)</code> values inserted for missing G, B, or A components based on the format.")
-    VkBool32("robustImageAccess2", "indicates whether image accesses are tightly bounds-checked against the dimensions of the image view. Out of bounds image loads will return zero values, with <code>(0,0,1)</code> values <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#textures-conversion-to-rgba\">inserted for missing G, B, or A components</a> based on the format.")
+    VkBool32("robustBufferAccess2", "indicates whether buffer accesses are tightly bounds-checked against the range of the descriptor. Uniform buffers <b>must</b> be bounds-checked to the range of the descriptor, where the range is rounded up to a multiple of <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#limits-robustUniformBufferAccessSizeAlignment\">robustUniformBufferAccessSizeAlignment</a>. Storage buffers <b>must</b> be bounds-checked to the range of the descriptor, where the range is rounded up to a multiple of <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#limits-robustStorageBufferAccessSizeAlignment\">robustStorageBufferAccessSizeAlignment</a>. Out of bounds buffer loads will return zero values, and <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#textures\">image load, sample, and atomic operations</a> from texel buffers will have <code>(0,0,1)</code> values <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#textures-conversion-to-rgba\">inserted for missing G, B, or A components</a> based on the format.")
+    VkBool32("robustImageAccess2", "indicates whether image accesses are tightly bounds-checked against the dimensions of the image view. Out of bounds <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#textures\">image load, sample, and atomic operations</a> from images will return zero values, with <code>(0,0,1)</code> values <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#textures-conversion-to-rgba\">inserted for missing G, B, or A components</a> based on the format.")
     VkBool32("nullDescriptor", "indicates whether descriptors <b>can</b> be written with a #NULL_HANDLE resource or view, which are considered valid to access and act as if the descriptor were bound to nothing.")
 }
 
@@ -11947,8 +12081,8 @@ val VkPhysicalDeviceRobustness2PropertiesEXT = struct(Module.VULKAN, "VkPhysical
 
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT")..VkStructureType("sType", "the type of this structure.").mutable()
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
-    VkDeviceSize("robustStorageBufferAccessSizeAlignment", "the number of bytes that the range of a storage buffer descriptor is rounded up to when used for bounds-checking when <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-robustBufferAccess2\">{@code robustBufferAccess2}</a> is enabled. This value <b>must</b> be either 1 or 4.")
-    VkDeviceSize("robustUniformBufferAccessSizeAlignment", "the number of bytes that the range of a uniform buffer descriptor is rounded up to when used for bounds-checking when <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-robustBufferAccess2\">{@code robustBufferAccess2}</a> is enabled. This value <b>must</b> be a power of two in the range [1, 256].")
+    VkDeviceSize("robustStorageBufferAccessSizeAlignment", "the number of bytes that the range of a storage buffer descriptor is rounded up to when used for bounds-checking when the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-robustBufferAccess2\">{@code robustBufferAccess2}</a> feature is enabled. This value <b>must</b> be either 1 or 4.")
+    VkDeviceSize("robustUniformBufferAccessSizeAlignment", "the number of bytes that the range of a uniform buffer descriptor is rounded up to when used for bounds-checking when the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-robustBufferAccess2\">{@code robustBufferAccess2}</a> feature is enabled. This value <b>must</b> be a power of two in the range [1, 256].")
 }
 
 val VkSamplerCustomBorderColorCreateInfoEXT = struct(Module.VULKAN, "VkSamplerCustomBorderColorCreateInfoEXT") {
@@ -11959,7 +12093,7 @@ val VkSamplerCustomBorderColorCreateInfoEXT = struct(Module.VULKAN, "VkSamplerCu
         <h5>Valid Usage</h5>
         <ul>
             <li>If provided {@code format} is not #FORMAT_UNDEFINED then the ##VkSamplerCreateInfo{@code ::borderColor} type <b>must</b> match the sampled type of the provided {@code format}, as shown in the <em>SPIR-V Sampled Type</em> column of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-numericformat">Interpretation of Numeric Format</a> table</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-customBorderColorWithoutFormat">customBorderColorWithoutFormat</a> feature is not enabled then {@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-customBorderColorWithoutFormat">{@code customBorderColorWithoutFormat}</a> feature is not enabled then {@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
             <li>If the sampler is used to sample an image view of #FORMAT_B4G4R4A4_UNORM_PACK16, #FORMAT_B5G6R5_UNORM_PACK16, or #FORMAT_B5G5R5A1_UNORM_PACK16 format then {@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
         </ul>
 
@@ -11976,7 +12110,7 @@ val VkSamplerCustomBorderColorCreateInfoEXT = struct(Module.VULKAN, "VkSamplerCu
     Expression("#STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkClearColorValue("customBorderColor", "a ##VkClearColorValue representing the desired custom sampler border color.")
-    VkFormat("format", "a {@code VkFormat} representing the format of the sampled image view(s). This field may be #FORMAT_UNDEFINED if the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-customBorderColorWithoutFormat\">customBorderColorWithoutFormat</a> feature is enabled.")
+    VkFormat("format", "a {@code VkFormat} representing the format of the sampled image view(s). This field may be #FORMAT_UNDEFINED if the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-customBorderColorWithoutFormat\">{@code customBorderColorWithoutFormat}</a> feature is enabled.")
 }
 
 val VkPhysicalDeviceCustomBorderColorPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceCustomBorderColorPropertiesEXT", mutable = false) {
@@ -12297,6 +12431,262 @@ val VkDeviceDiagnosticsConfigCreateInfoNV = struct(Module.VULKAN, "VkDeviceDiagn
     VkDeviceDiagnosticsConfigFlagsNV("flags", "a bitmask of {@code VkDeviceDiagnosticsConfigFlagBitsNV} specifying addtional parameters for configuring diagnostic tools.")
 }
 
+val VkExportMetalObjectCreateInfoEXT = struct(Module.VULKAN, "VkExportMetalObjectCreateInfoEXT") {
+    documentation =
+        """
+        Structure that identifies the Metal objects that can be exported from Vulkan objects.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_METAL_OBJECT_CREATE_INFO_EXT</li>
+            <li>If {@code exportObjectType} is not 0, {@code exportObjectType} <b>must</b> be a valid {@code VkExportMetalObjectTypeFlagBitsEXT} value</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_EXPORT_METAL_OBJECT_CREATE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkExportMetalObjectTypeFlagBitsEXT("exportObjectType", "a {@code VkExportMetalObjectTypeFlagBitsEXT} indicating the type of Metal object that the application may request to be exported from the Vulkan object.")
+}
+
+val VkExportMetalObjectsInfoEXT = struct(Module.VULKAN, "VkExportMetalObjectsInfoEXT") {
+    documentation =
+        """
+        Structure whose pNext chain identifies Vulkan objects and corresponding Metal objects.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalDeviceInfoEXT structure, the {@code VkInstance} <b>must</b> have been created with #EXPORT_METAL_OBJECT_TYPE_METAL_DEVICE_BIT_EXT in the {@code exportObjectType} member of a ##VkExportMetalObjectCreateInfoEXT structure in the {@code pNext} chain of the ##VkInstanceCreateInfo structure in the #CreateInstance() command.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalCommandQueueInfoEXT structure, the {@code VkInstance} <b>must</b> have been created with #EXPORT_METAL_OBJECT_TYPE_METAL_COMMAND_QUEUE_BIT_EXT in the {@code exportObjectType} member of a ##VkExportMetalObjectCreateInfoEXT structure in the {@code pNext} chain of the ##VkInstanceCreateInfo structure in the #CreateInstance() command.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalBufferInfoEXT structure, the {@code VkDeviceMemory} in its {@code memory} member <b>must</b> have been allocated with #EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT in the {@code exportObjectType} member of a ##VkExportMetalObjectCreateInfoEXT structure in the {@code pNext} chain of the ##VkMemoryAllocateInfo structure in the #AllocateMemory() command.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalTextureInfoEXT structure, exactly one of its {@code image}, {@code imageView}, or {@code bufferView} members <b>must</b> not be #NULL_HANDLE.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalTextureInfoEXT structure, and its {@code image} member is not #NULL_HANDLE, the {@code VkImage} in its {@code image} member <b>must</b> have been created with #EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT in the {@code exportObjectType} member of a ##VkExportMetalObjectCreateInfoEXT structure in the {@code pNext} chain of the ##VkImageCreateInfo structure in the #CreateImage() command.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalTextureInfoEXT structure, and its {@code imageView} member is not #NULL_HANDLE, the {@code VkImageView} in its {@code imageView} member <b>must</b> have been created with #EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT in the {@code exportObjectType} member of a ##VkExportMetalObjectCreateInfoEXT structure in the {@code pNext} chain of the ##VkImageViewCreateInfo structure in the #CreateImageView() command.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalTextureInfoEXT structure, and its {@code bufferView} member is not #NULL_HANDLE, the {@code VkBufferView} in its {@code bufferView} member <b>must</b> have been created with #EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT in the {@code exportObjectType} member of a ##VkExportMetalObjectCreateInfoEXT structure in the {@code pNext} chain of the ##VkBufferViewCreateInfo structure in the #CreateBufferView() command.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalTextureInfoEXT structure, and if either its {@code image} or {@code imageView} member is not #NULL_HANDLE, then {@code plane} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT, or #IMAGE_ASPECT_PLANE_2_BIT.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalTextureInfoEXT structure, and if the {@code VkImage} in its {@code image} member does not have a multi-planar format, then its {@code plane} member <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalTextureInfoEXT structure, and if the {@code VkImage} in its {@code image} member has a multi-planar format with only two planes, then its {@code plane} member <b>must</b> not be #IMAGE_ASPECT_PLANE_2_BIT</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalTextureInfoEXT structure, and if the {@code VkImageView} in its {@code imageView} member does not have a multi-planar format, then its {@code plane} member <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalTextureInfoEXT structure, and if the {@code VkImageView} in its {@code imageView} member has a multi-planar format with only two planes, then its {@code plane} member <b>must</b> not be #IMAGE_ASPECT_PLANE_2_BIT</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalIOSurfaceInfoEXT structure, the {@code VkImage} in its {@code image} member <b>must</b> have been created with #EXPORT_METAL_OBJECT_TYPE_METAL_IOSURFACE_BIT_EXT in the {@code exportObjectType} member of a ##VkExportMetalObjectCreateInfoEXT structure in the {@code pNext} chain of the ##VkImageCreateInfo structure in the #CreateImage() command.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalSharedEventInfoEXT structure, exactly one of its {@code semaphore} or {@code event} members <b>must</b> not be #NULL_HANDLE.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalSharedEventInfoEXT structure, and its {@code semaphore} member is not #NULL_HANDLE, the {@code VkSemaphore} in its {@code semaphore} member <b>must</b> have been created with #EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT in the {@code exportObjectType} member of a ##VkExportMetalObjectCreateInfoEXT structure in the {@code pNext} chain of the ##VkSemaphoreCreateInfo structure in the #CreateSemaphore() command.</li>
+            <li>If the {@code pNext} chain includes a ##VkExportMetalSharedEventInfoEXT structure, and its {@code event} member is not #NULL_HANDLE, the {@code VkEvent} in its {@code event} member <b>must</b> have been created with #EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT in the {@code exportObjectType} member of a ##VkExportMetalObjectCreateInfoEXT structure in the {@code pNext} chain of the ##VkEventCreateInfo structure in the #CreateEvent() command.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_METAL_OBJECTS_INFO_EXT</li>
+            <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of ##VkExportMetalBufferInfoEXT, ##VkExportMetalCommandQueueInfoEXT, ##VkExportMetalDeviceInfoEXT, ##VkExportMetalIOSurfaceInfoEXT, ##VkExportMetalSharedEventInfoEXT, or ##VkExportMetalTextureInfoEXT</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type ##VkExportMetalBufferInfoEXT, ##VkExportMetalCommandQueueInfoEXT, ##VkExportMetalIOSurfaceInfoEXT, ##VkExportMetalSharedEventInfoEXT, or ##VkExportMetalTextureInfoEXT</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #ExportMetalObjectsEXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_EXPORT_METAL_OBJECTS_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    PointerSetter(
+        "VkExportMetalBufferInfoEXT", "VkExportMetalCommandQueueInfoEXT", "VkExportMetalDeviceInfoEXT", "VkExportMetalIOSurfaceInfoEXT", "VkExportMetalSharedEventInfoEXT", "VkExportMetalTextureInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+}
+
+val VkExportMetalDeviceInfoEXT = struct(Module.VULKAN, "VkExportMetalDeviceInfoEXT") {
+    documentation =
+        """
+        Structure that identifies a VkDevice object and corresponding Metal MTLDevice object.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    MTLDevice_id("mtlDevice", "the Metal {@code id&lt;MTLDevice&gt;} object underlying the {@code VkPhysicalDevice} associated with the {@code VkDevice} object identified in the call. The implementation will return the {@code MTLDevice} in this member, or it will return {@code NULL} if no {@code MTLDevice} could be found underlying the {@code VkPhysicalDevice} object.")
+}
+
+val VkExportMetalCommandQueueInfoEXT = struct(Module.VULKAN, "VkExportMetalCommandQueueInfoEXT") {
+    documentation =
+        """
+        Structure that identifies a VkQueue object and corresponding Metal MTLCommandQueue object.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_METAL_COMMAND_QUEUE_INFO_EXT</li>
+            <li>{@code queue} <b>must</b> be a valid {@code VkQueue} handle</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_EXPORT_METAL_COMMAND_QUEUE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkQueue("queue", "a {@code VkQueue}.")
+    MTLCommandQueue_id("mtlCommandQueue", "the Metal {@code id&lt;MTLCommandQueue&gt;} object underlying the {@code VkQueue} object in {@code queue}. The implementation will return the {@code MTLCommandQueue} in this member, or it will return {@code NULL} if no {@code MTLCommandQueue} could be found underlying the {@code VkQueue} object.")
+}
+
+val VkExportMetalBufferInfoEXT = struct(Module.VULKAN, "VkExportMetalBufferInfoEXT") {
+    documentation =
+        """
+        Structure that identifies a VkDeviceMemory object and corresponding Metal MTLBuffer object.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_METAL_BUFFER_INFO_EXT</li>
+            <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_EXPORT_METAL_BUFFER_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkDeviceMemory("memory", "a {@code VkDeviceMemory}.")
+    MTLBuffer_id("mtlBuffer", "the Metal {@code id&lt;MTLBuffer&gt;} object underlying the {@code VkDeviceMemory} object in {@code memory}. The implementation will return the {@code MTLBuffer} in this member, or it will return {@code NULL} if no {@code MTLBuffer} could be found underlying the {@code VkDeviceMemory} object.")
+}
+
+val VkImportMetalBufferInfoEXT = struct(Module.VULKAN, "VkImportMetalBufferInfoEXT") {
+    documentation =
+        """
+        Structure that identifies a Metal MTLBuffer object to use when creating a VkDeviceMemory object.
+
+        <h5>Description</h5>
+        The app <b>must</b> ensure that the configuration of the {@code id&lt;MTLBuffer&gt;} object is compatible with the configuration of the {@code VkDeviceMemory}. Failure to do so results in undefined behavior.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    MTLBuffer_id("mtlBuffer", "the Metal {@code id&lt;MTLBuffer&gt;} object that is to underlie the {@code VkDeviceMemory}.")
+}
+
+val VkExportMetalTextureInfoEXT = struct(Module.VULKAN, "VkExportMetalTextureInfoEXT") {
+    documentation =
+        """
+        Structure that identifies a VkImage, VkImageView, or VkBufferView object and corresponding Metal MTLTexture object.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_METAL_TEXTURE_INFO_EXT</li>
+            <li>If {@code image} is not #NULL_HANDLE, {@code image} <b>must</b> be a valid {@code VkImage} handle</li>
+            <li>If {@code imageView} is not #NULL_HANDLE, {@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
+            <li>If {@code bufferView} is not #NULL_HANDLE, {@code bufferView} <b>must</b> be a valid {@code VkBufferView} handle</li>
+            <li>{@code plane} <b>must</b> be a valid {@code VkImageAspectFlagBits} value</li>
+            <li>Each of {@code bufferView}, {@code image}, and {@code imageView} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_EXPORT_METAL_TEXTURE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkImage("image", "#NULL_HANDLE or a {@code VkImage}.")
+    VkImageView("imageView", "#NULL_HANDLE or a {@code VkImageView}.")
+    VkBufferView("bufferView", "#NULL_HANDLE or a {@code VkBufferView}.")
+    VkImageAspectFlagBits("plane", "indicates the plane of a multi-planar {@code VkImage} or {@code VkImageView}.")
+    MTLTexture_id("mtlTexture", "the Metal {@code id&lt;MTLTexture&gt;} object underlying the {@code VkImage}, {@code VkImageView}, or {@code VkBufferView} object in {@code image}, {@code imageView}, or {@code bufferView}, respectively, at the plane indicated in {@code aspectMask}. The implementation will return the {@code MTLTexture} in this member, or it will return {@code NULL} if no {@code MTLTexture} could be found underlying the {@code VkImage}, {@code VkImageView}, or {@code VkBufferView} object, at the plane indicated in {@code aspectMask}.")
+}
+
+val VkImportMetalTextureInfoEXT = struct(Module.VULKAN, "VkImportMetalTextureInfoEXT") {
+    documentation =
+        """
+        Structure that identifies Metal MTLTexture objects to use when creating a VkImage.
+
+        <h5>Description</h5>
+        The {@code pNext} chain <b>must</b> include one ##VkImportMetalTextureInfoEXT structure for each plane in the {@code VkImage}. The app <b>must</b> ensure that the configuration of the Metal {@code id&lt;MTLTexture&gt;} objects are compatible with the configuration of the {@code VkImage}. Failure to do so results in undefined behavior.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_METAL_TEXTURE_INFO_EXT</li>
+            <li>{@code plane} <b>must</b> be a valid {@code VkImageAspectFlagBits} value</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_IMPORT_METAL_TEXTURE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkImageAspectFlagBits("plane", "indicates the plane of the {@code VkImage} that the {@code id&lt;MTLTexture&gt;} object should be attached to.")
+    MTLTexture_id("mtlTexture", "a the Metal {@code id&lt;MTLTexture&gt;} object that is to underlie the {@code VkImage} plane.")
+}
+
+val VkExportMetalIOSurfaceInfoEXT = struct(Module.VULKAN, "VkExportMetalIOSurfaceInfoEXT") {
+    documentation =
+        """
+        Structure that identifies a VkImage object and corresponding Metal IOSurfaceRef object.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_METAL_IO_SURFACE_INFO_EXT</li>
+            <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_EXPORT_METAL_IO_SURFACE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkImage("image", "a {@code VkImage}.")
+    IOSurfaceRef("ioSurface", "the Metal {@code IOSurfaceRef} object underlying the {@code VkImage} object in {@code image}. The implementation will return the {@code IOSurfaceRef} in this member, or it will return {@code NULL} if no {@code IOSurfaceRef} could be found underlying the {@code VkImage} object.")
+}
+
+val VkImportMetalIOSurfaceInfoEXT = struct(Module.VULKAN, "VkImportMetalIOSurfaceInfoEXT") {
+    documentation =
+        """
+        Structure that identifies a VkImage object and corresponding Metal IOSurfaceRef object to use.
+
+        <h5>Description</h5>
+        If {@code ioSurface} is not #NULL_HANDLE, it will be used to underlie the {@code VkImage}. If {@code ioSurface} is #NULL_HANDLE, the implementation will create a new {@code IOSurface} to underlie the {@code VkImage}.
+
+        If provided, the app <b>must</b> ensure that the configuration of the {@code IOSurfaceRef} object is compatible with the configuration of the {@code VkImage}. Failure to do so results in undefined behavior.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    IOSurfaceRef("ioSurface", "#NULL_HANDLE or the Metal {@code IOSurfaceRef} object that is to underlie the {@code VkImage}.")
+}
+
+val VkExportMetalSharedEventInfoEXT = struct(Module.VULKAN, "VkExportMetalSharedEventInfoEXT") {
+    documentation =
+        """
+        Structure that identifies a VkSemaphore or VkEvent object and corresponding Metal MTLSharedEvent object.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT</li>
+            <li>If {@code semaphore} is not #NULL_HANDLE, {@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
+            <li>If {@code event} is not #NULL_HANDLE, {@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
+            <li>Both of {@code event}, and {@code semaphore} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkSemaphore("semaphore", "#NULL_HANDLE or a {@code VkSemaphore}.")
+    VkEvent("event", "#NULL_HANDLE or a {@code VkEvent}.")
+    MTLSharedEvent_id("mtlSharedEvent", "the Metal {@code id&lt;MTLSharedEvent&gt;} object underlying the {@code VkSemaphore} or {@code VkEvent} object in {@code semaphore} or {@code event}, respectively. The implementation will return the {@code MTLSharedEvent} in this member, or it will return {@code NULL} if no {@code MTLSharedEvent} could be found underlying the {@code VkSemaphore} or {@code VkEvent} object.")
+}
+
+val VkImportMetalSharedEventInfoEXT = struct(Module.VULKAN, "VkImportMetalSharedEventInfoEXT") {
+    documentation =
+        """
+        Structure that identifies a VkSemaphore or VkEvent object and corresponding Metal Shared Event object to use.
+
+        <h5>Description</h5>
+        If the {@code pNext} chain of the ##VkSemaphoreCreateInfo structure includes both ##VkImportMetalSharedEventInfoEXT and ##VkSemaphoreTypeCreateInfo, the {@code signaledValue} property of the imported {@code MTLSharedEvent} object will be set to {@code initialValue} of ##VkSemaphoreTypeCreateInfo.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMPORT_METAL_SHARED_EVENT_INFO_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_IMPORT_METAL_SHARED_EVENT_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    MTLSharedEvent_id("mtlSharedEvent", "the Metal {@code id&lt;MTLSharedEvent&gt;} object that is to underlie the {@code VkSemaphore} or {@code VkEvent}.")
+}
+
 val VkMemoryBarrier2KHR = struct(Module.VULKAN, "VkMemoryBarrier2KHR", alias = VkMemoryBarrier2) {
     documentation = "See ##VkMemoryBarrier2."
 
@@ -12574,8 +12964,8 @@ val VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR = struct(Module.
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("shaderSubgroupUniformControlFlow", "specifies whether the implementation supports the shader execution mode {@code SubgroupUniformControlFlowKHR}")
 }
 
@@ -13208,8 +13598,8 @@ val VkPhysicalDeviceImageCompressionControlFeaturesEXT = struct(Module.VULKAN, "
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("imageCompressionControl", "indicates that the implementation supports providing controls for image compression at image creation time.")
 }
 
@@ -13348,7 +13738,7 @@ val VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM = struct(Modul
         Structure describing whether rasterization order attachment access can be supported by an implementation.
 
         <h5>Description</h5>
-        If the ##VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM structure is included in the {@code pNext} chain of ##VkPhysicalDeviceFeatures2, it is filled with values indicating whether the feature is supported. ##VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to enable features.
+        If the ##VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -13356,8 +13746,8 @@ val VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM = struct(Modul
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("rasterizationOrderColorAttachmentAccess", "indicates that rasterization order access to color and input attachments is supported by the implementation.")
     VkBool32("rasterizationOrderDepthAttachmentAccess", "indicates that rasterization order access to the depth aspect of depth/stencil and input attachments is supported by the implementation.")
     VkBool32("rasterizationOrderStencilAttachmentAccess", "indicates that rasterization order access to the stencil aspect of depth/stencil and input attachments is supported by the implementation.")
@@ -13505,8 +13895,8 @@ val VkVertexInputBindingDescription2EXT = struct(Module.VULKAN, "VkVertexInputBi
         <ul>
             <li>{@code binding} <b>must</b> be less than ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
             <li>{@code stride} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindingStride}</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-vertexAttributeInstanceRateZeroDivisor">vertexAttributeInstanceRateZeroDivisor</a> feature is not enabled, {@code divisor} <b>must</b> not be 0</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-vertexAttributeInstanceRateDivisor">vertexAttributeInstanceRateDivisor</a> feature is not enabled, {@code divisor} <b>must</b> be 1</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-vertexAttributeInstanceRateZeroDivisor">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is not enabled, {@code divisor} <b>must</b> not be 0</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-vertexAttributeInstanceRateDivisor">{@code vertexAttributeInstanceRateDivisor}</a> feature is not enabled, {@code divisor} <b>must</b> be 1</li>
             <li>{@code divisor} <b>must</b> be a value between 0 and ##VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{@code ::maxVertexAttribDivisor}, inclusive</li>
             <li>If {@code divisor} is not 1 then {@code inputRate} <b>must</b> be of type #VERTEX_INPUT_RATE_INSTANCE</li>
         </ul>
@@ -13526,7 +13916,7 @@ val VkVertexInputBindingDescription2EXT = struct(Module.VULKAN, "VkVertexInputBi
     uint32_t("binding", "the binding number that this structure describes.")
     uint32_t("stride", "the byte stride between consecutive elements within the buffer.")
     VkVertexInputRate("inputRate", "a {@code VkVertexInputRate} value specifying whether vertex attribute addressing is a function of the vertex index or of the instance index.")
-    uint32_t("divisor", "the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. This member <b>can</b> be set to a value other than 1 if the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-vertexAttributeInstanceRateDivisor\">vertexAttributeInstanceRateDivisor</a> feature is enabled. For example, if the divisor is N, the same vertex attribute will be applied to N successive instances before moving on to the next vertex attribute. The maximum value of {@code divisor} is implementation-dependent and can be queried using ##VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{@code ::maxVertexAttribDivisor}. A value of 0 <b>can</b> be used for the divisor if the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-vertexAttributeInstanceRateZeroDivisor\">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is enabled. In this case, the same vertex attribute will be applied to all instances.")
+    uint32_t("divisor", "the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. This member <b>can</b> be set to a value other than 1 if the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-vertexAttributeInstanceRateDivisor\">{@code vertexAttributeInstanceRateDivisor}</a> feature is enabled. For example, if the divisor is N, the same vertex attribute will be applied to N successive instances before moving on to the next vertex attribute. The maximum value of {@code divisor} is implementation-dependent and can be queried using ##VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{@code ::maxVertexAttribDivisor}. A value of 0 <b>can</b> be used for the divisor if the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#features-vertexAttributeInstanceRateZeroDivisor\">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is enabled. In this case, the same vertex attribute will be applied to all instances.")
 }
 
 val VkVertexInputAttributeDescription2EXT = struct(Module.VULKAN, "VkVertexInputAttributeDescription2EXT") {
@@ -13601,8 +13991,8 @@ val VkPhysicalDeviceDepthClipControlFeaturesEXT = struct(Module.VULKAN, "VkPhysi
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("depthClipControl", "indicates that the implementation supports setting ##VkPipelineViewportDepthClipControlCreateInfoEXT{@code ::negativeOneToOne} to #TRUE.")
 }
 
@@ -13613,7 +14003,7 @@ val VkPipelineViewportDepthClipControlCreateInfoEXT = struct(Module.VULKAN, "VkP
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-depthClipControl">depthClipControl</a> is not enabled, {@code negativeOneToOne} <b>must</b> be #FALSE</li>
+            <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-depthClipControl">{@code depthClipControl}</a> is not enabled, {@code negativeOneToOne} <b>must</b> be #FALSE</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -13800,6 +14190,7 @@ val VkPipelinePropertiesIdentifierEXT = struct(Module.VULKAN, "VkPipelinePropert
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
         </ul>
         """
 
@@ -13825,6 +14216,69 @@ val VkPhysicalDevicePipelinePropertiesFeaturesEXT = struct(Module.VULKAN, "VkPhy
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("pipelinePropertiesIdentifier", "indicates that the implementation supports querying a unique pipeline identifier.")
+}
+
+val VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT") {
+    documentation =
+        """
+        Structure describing whether multisampled rendering to single-sampled attachments is supported.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("multisampledRenderToSingleSampled", "indicates that the implementation supports multisampled rendering to single-sampled render pass attachments.")
+}
+
+val VkSubpassResolvePerformanceQueryEXT = struct(Module.VULKAN, "VkSubpassResolvePerformanceQueryEXT", mutable = false) {
+    documentation =
+        """
+        Structure specifying the efficiency of subpass resolve for an attachment with a format.
+
+        <h5>Description</h5>
+        If {@code optimal} is #FALSE for a {@code VkFormat}, using a subpass resolve operation on a multisampled attachment with this format can incur additional costs, including additional memory bandwidth usage and a higher memory footprint. If an attachment with such a format is used in a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#subpass-multisampledrendertosinglesampled">multisampled-render-to-single-sampled</a> subpass, the additional memory and memory bandwidth usage can nullify the benefits of using the {@link EXTMultisampledRenderToSingleSampled VK_EXT_multisampled_render_to_single_sampled} extension.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT")..VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    VkBool32("optimal", "specifies that a subpass resolve operation is optimally performed.")
+}
+
+val VkMultisampledRenderToSingleSampledInfoEXT = struct(Module.VULKAN, "VkMultisampledRenderToSingleSampledInfoEXT") {
+    documentation =
+        """
+        Structure containing info for multisampled rendering to single-sampled attachments in a subpass.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The value of {@code rasterizationSamples} <b>must</b> not be #SAMPLE_COUNT_1_BIT</li>
+            <li>If added to the {@code pNext} chain of ##VkSubpassDescription2, each render pass attachment in ##VkRenderPassCreateInfo2{@code ::pAttachments} that is referenced by this subpass <b>must</b> have a format that supports the sample count specified in {@code rasterizationSamples}</li>
+            <li>If added to the {@code pNext} chain of ##VkRenderingInfo, each {@code imageView} member of any element of ##VkRenderingInfo{@code ::pColorAttachments}, ##VkRenderingInfo{@code ::pDepthAttachment}, or ##VkRenderingInfo{@code ::pStencilAttachment} that is not #NULL_HANDLE <b>must</b> have a format that supports the sample count specified in {@code rasterizationSamples}</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_INFO_EXT</li>
+            <li>{@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("multisampledRenderToSingleSampledEnable", "controls whether multisampled rendering to single-sampled attachments is performed as described <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#multisampled-render-to-single-sampled\">below</a>.")
+    VkSampleCountFlagBits("rasterizationSamples", "a VkSampleCountFlagBits specifying the number of samples used in rasterization.")
 }
 
 val VkPhysicalDeviceExtendedDynamicState2FeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceExtendedDynamicState2FeaturesEXT") {
@@ -13889,7 +14343,7 @@ val VkPipelineColorWriteCreateInfoEXT = struct(Module.VULKAN, "VkPipelineColorWr
         <h5>Description</h5>
         When this structure is included in the {@code pNext} chain of ##VkPipelineColorBlendStateCreateInfo, it defines per-attachment color write state. If this structure is not included in the {@code pNext} chain, it is equivalent to specifying this structure with {@code attachmentCount} equal to the {@code attachmentCount} member of ##VkPipelineColorBlendStateCreateInfo, and {@code pColorWriteEnables} pointing to an array of as many #TRUE values.
 
-        If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-colorWriteEnable">colorWriteEnable</a> feature is not enabled on the device, all {@code VkBool32} elements in the {@code pColorWriteEnables} array <b>must</b> be #TRUE.
+        If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-colorWriteEnable">{@code colorWriteEnable}</a> feature is not enabled on the device, all {@code VkBool32} elements in the {@code pColorWriteEnables} array <b>must</b> be #TRUE.
 
         Color Write Enable interacts with the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#framebuffer-color-write-mask">Color Write Mask</a> as follows:
 
@@ -13900,7 +14354,7 @@ val VkPipelineColorWriteCreateInfoEXT = struct(Module.VULKAN, "VkPipelineColorWr
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-colorWriteEnable">colorWriteEnable</a> feature is not enabled, all elements of {@code pColorWriteEnables} <b>must</b> be #TRUE</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-colorWriteEnable">{@code colorWriteEnable}</a> feature is not enabled, all elements of {@code pColorWriteEnables} <b>must</b> be #TRUE</li>
             <li>{@code attachmentCount} <b>must</b> be equal to the {@code attachmentCount} member of the ##VkPipelineColorBlendStateCreateInfo structure specified during pipeline creation</li>
             <li>{@code attachmentCount} <b>must</b> be less than or equal to the {@code maxColorAttachments} member of ##VkPhysicalDeviceLimits</li>
         </ul>
@@ -14062,8 +14516,8 @@ val VkPhysicalDeviceImageViewMinLodFeaturesEXT = struct(Module.VULKAN, "VkPhysic
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("minLod", "indicates whether the implementation supports clamping the minimum LOD value during <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#textures-image-level-selection\">Image Level(s) Selection</a> and <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#textures-integer-coordinate-operations\">Integer Texel Coordinate Operations</a> with a given {@code VkImageView} by ##VkImageViewMinLodCreateInfoEXT{@code ::minLod}.")
 }
 
@@ -14174,8 +14628,8 @@ val VkPhysicalDeviceImage2DViewOf3DFeaturesEXT = struct(Module.VULKAN, "VkPhysic
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("image2DViewOf3D", "indicates that the implementation supports using a 2D view of a 3D image in a descriptor of type #DESCRIPTOR_TYPE_STORAGE_IMAGE if the image is created using #IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT.")
     VkBool32("sampler2DViewOf3D", "indicates that the implementation supports using a 2D view of a 3D image in a descriptor of type #DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER if the image is created using #IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT.")
 }
@@ -14340,6 +14794,25 @@ val VkDescriptorSetLayoutHostMappingInfoVALVE = struct(Module.VULKAN, "VkDescrip
     uint32_t("descriptorSize", "")
 }
 
+val VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT") {
+    documentation =
+        """
+        Structure describing features to disable seamless cube maps.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("nonSeamlessCubeMap", "indicates that the implementation supports #SAMPLER_CREATE_NON_SEAMLESS_CUBE_MAP_BIT_EXT.")
+}
+
 val VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM = struct(Module.VULKAN, "VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM") {
     documentation =
         """
@@ -14436,8 +14909,8 @@ val VkPhysicalDeviceLinearColorAttachmentFeaturesNV = struct(Module.VULKAN, "VkP
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("linearColorAttachment", "indicates whether the implementation supports renderable <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#glossary\">Linear Color Attachment</a>")
 }
 
@@ -14455,9 +14928,91 @@ val VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT = struct(Module.
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("imageCompressionControlSwapchain", "indicates that the implementation supports controlling image controls per swapchain and querying image compression properties per surface.")
+}
+
+val VkImageViewSampleWeightCreateInfoQCOM = struct(Module.VULKAN, "VkImageViewSampleWeightCreateInfoQCOM") {
+    documentation =
+        """
+        Structure describing weight sampling parameters for image view.
+
+        <h5>Description</h5>
+        The {@code filterCenter} specifies the origin or center of the filter kernel, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-weightimage-filteroperation">Weight Sampling Operation</a>. The {@code numPhases} describes the number of sub-pixel filter phases as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-weightimage-filterphases">Weight Sampling Phases</a>.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code filterSize.width} <b>must</b> be less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-weightfilter-maxdimension">##VkPhysicalDeviceImageProcessingPropertiesQCOM{@code ::maxWeightFilterDimension.width}</a></li>
+            <li>{@code filterSize.height} <b>must</b> be less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-weightfilter-maxdimension">##VkPhysicalDeviceImageProcessingPropertiesQCOM{@code ::maxWeightFilterDimension.height}</a></li>
+            <li>{@code filterCenter.x} <b>must</b> be less than or equal to <code>(filterSize.width - 1)</code></li>
+            <li>{@code filterCenter.y} <b>must</b> be less than or equal to <code>(filterSize.height - 1)</code></li>
+            <li>{@code numPhases} <b>must</b> be a power of two squared value (i.e., 1, 4, 16, 64, 256, etc.)</li>
+            <li>{@code numPhases} <b>must</b> be less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-weightfilter-phases">##VkPhysicalDeviceImageProcessingPropertiesQCOM{@code ::maxWeightFilterPhases}</a></li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_IMAGE_VIEW_SAMPLE_WEIGHT_CREATE_INFO_QCOM</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkExtent2D, ##VkOffset2D
+        """
+
+    Expression("#STRUCTURE_TYPE_IMAGE_VIEW_SAMPLE_WEIGHT_CREATE_INFO_QCOM")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkOffset2D("filterCenter", "a ##VkOffset2D describing the location of the weight filter origin.")
+    VkExtent2D("filterSize", "a ##VkExtent2D specifying weight filter dimensions.")
+    uint32_t("numPhases", "number of sub-pixel filter phases.")
+}
+
+val VkPhysicalDeviceImageProcessingFeaturesQCOM = struct(Module.VULKAN, "VkPhysicalDeviceImageProcessingFeaturesQCOM") {
+    documentation =
+        """
+        Structure describing image processing features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceImageProcessingFeaturesQCOM structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceImageProcessingFeaturesQCOM <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("textureSampleWeighted", "indicates that the implementation supports shader modules that declare the {@code TextureSampleWeightedQCOM} capability.")
+    VkBool32("textureBoxFilter", "indicates that the implementation supports shader modules that declare the {@code TextureBoxFilterQCOM} capability.")
+    VkBool32("textureBlockMatch", "indicates that the implementation supports shader modules that declare the {@code TextureBlockMatchQCOM} capability.")
+}
+
+val VkPhysicalDeviceImageProcessingPropertiesQCOM = struct(Module.VULKAN, "VkPhysicalDeviceImageProcessingPropertiesQCOM", mutable = false) {
+    documentation =
+        """
+        Structure containing image processing properties.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceImageProcessingPropertiesQCOM structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        These are properties of the image processing information of a physical device.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkExtent2D
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM")..VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    uint32_t("maxWeightFilterPhases", "the maximum value that <b>can</b> be specified for ##VkImageViewSampleWeightCreateInfoQCOM{@code ::numPhases}. in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#textures-weightimage-filterphases\">weight image sampling</a> operations.")
+    VkExtent2D("maxWeightFilterDimension", "a ##VkExtent2D describing the largest dimensions ({@code width} and {@code height}) that <b>can</b> be specified for ##VkImageViewSampleWeightCreateInfoQCOM{@code ::filterSize}.")
+    VkExtent2D("maxBlockMatchRegion", "a ##VkExtent2D describing the largest dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blockSize} in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#textures-blockmatch\">block matching</a> operations.")
+    VkExtent2D("maxBoxFilterBlockSize", "a ##VkExtent2D describing the the maximum dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blocksize} in <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#textures-boxfilter\">box filter sampling</a> operations.")
 }
 
 val VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT") {
@@ -14474,8 +15029,8 @@ val VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT = struct(Module.VULKAN, "VkP
         </ul>
         """
 
-    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT")..VkStructureType("sType", "")
-    nullable..opaque_p("pNext", "")
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("subpassMergeFeedback", "indicates whether the implementation supports feedback of subpass merging.")
 }
 
@@ -14497,58 +15052,225 @@ val VkRenderPassCreationControlEXT = struct(Module.VULKAN, "VkRenderPassCreation
         """
 
     Expression("#STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT")..VkStructureType("sType", "the type of this structure.")
-    PointerSetter(
-        "VkRenderPassCreationFeedbackInfoEXT", "VkRenderPassSubpassFeedbackInfoEXT",
-        prepend = true
-    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkBool32("disallowMerging", "a boolean value indicating whether subpass merging will be disabled.")
 }
 
-val VkRenderPassCreationFeedbackInfoEXT = struct(Module.VULKAN, "VkRenderPassCreationFeedbackInfoEXT") {
+val VkRenderPassCreationFeedbackInfoEXT = struct(Module.VULKAN, "VkRenderPassCreationFeedbackInfoEXT", mutable = false) {
     documentation =
         """
-        Feedback about the creation of render pass.
-
-        <h5>Description</h5>
-        The subpass count after merging is written to {@code postMergeSubpassCount}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT</li>
-        </ul>
+        Feedback about the creation of a render pass.
 
         <h5>See Also</h5>
-        ##VkRenderPassCreateInfo2, ##VkRenderPassCreationControlEXT, #CreateRenderPass2()
+        ##VkRenderPassCreationFeedbackCreateInfoEXT
         """
 
-    Expression("#STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     uint32_t("postMergeSubpassCount", "the subpass count after merge.")
 }
 
-val VkRenderPassSubpassFeedbackInfoEXT = struct(Module.VULKAN, "VkRenderPassSubpassFeedbackInfoEXT") {
+val VkRenderPassCreationFeedbackCreateInfoEXT = struct(Module.VULKAN, "VkRenderPassCreationFeedbackCreateInfoEXT") {
+    documentation =
+        """
+        Request feedback about the creation of render pass.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT</li>
+            <li>{@code pRenderPassFeedback} <b>must</b> be a valid pointer to a ##VkRenderPassCreationFeedbackInfoEXT structure</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkRenderPassCreateInfo2, ##VkRenderPassCreationControlEXT, ##VkRenderPassCreationFeedbackInfoEXT, #CreateRenderPass2()
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkRenderPassCreationFeedbackInfoEXT.p("pRenderPassFeedback", "a pointer to a ##VkRenderPassCreationFeedbackInfoEXT structure in which feedback is returned.")
+}
+
+val VkRenderPassSubpassFeedbackInfoEXT = struct(Module.VULKAN, "VkRenderPassSubpassFeedbackInfoEXT", mutable = false) {
     javaImport("static org.lwjgl.vulkan.VK10.*")
     documentation =
         """
         Feedback about the creation of subpass.
 
-        <h5>Description</h5>
-        An implementation writes the proper value to {@code subpassMergeStatus}. Subpasses merged will have the same {@code postMergeIndex}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT</li>
-            <li>{@code subpassMergeStatus} <b>must</b> be a valid {@code VkSubpassMergeStatusEXT} value</li>
-            <li>{@code description} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to VK_MAX_DESCRIPTION_SIZE</li>
-        </ul>
-
         <h5>See Also</h5>
-        ##VkRenderPassCreateInfo2, ##VkRenderPassCreationControlEXT, ##VkSubpassDescription2, #CreateRenderPass2()
+        ##VkRenderPassSubpassFeedbackCreateInfoEXT
         """
 
-    Expression("#STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
-    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
     VkSubpassMergeStatusEXT("subpassMergeStatus", "a {@code VkSubpassMergeStatusEXT} value specifying information about whether the subpass is merged with previous subpass and the reason why it is not merged.")
     charUTF8("description", "an array of #MAX_DESCRIPTION_SIZE {@code char} containing a null-terminated UTF-8 string which provides additional details.")["VK_MAX_DESCRIPTION_SIZE"]
     uint32_t("postMergeIndex", "the subpass index after the subpass merging.")
+}
+
+val VkRenderPassSubpassFeedbackCreateInfoEXT = struct(Module.VULKAN, "VkRenderPassSubpassFeedbackCreateInfoEXT") {
+    documentation =
+        """
+        Request for feedback about the creation of subpass.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT</li>
+            <li>{@code pSubpassFeedback} <b>must</b> be a valid pointer to a ##VkRenderPassSubpassFeedbackInfoEXT structure</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkRenderPassCreateInfo2, ##VkRenderPassCreationControlEXT, ##VkRenderPassSubpassFeedbackInfoEXT, ##VkSubpassDescription2, #CreateRenderPass2()
+        """
+
+    Expression("#STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to an extension-specific structure.")
+    VkRenderPassSubpassFeedbackInfoEXT.p("pSubpassFeedback", "a pointer to a ##VkRenderPassSubpassFeedbackInfoEXT structure in which feedback is returned.")
+}
+
+val VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT") {
+    documentation =
+        """
+        Structure describing whether querying and providing an identifier of a shader module is supported by the implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("shaderModuleIdentifier", "indicates whether the implementation supports querying an identifier of a {@code VkShaderModule} or ##VkShaderModuleCreateInfo structure, and creating pipelines from identifiers only.")
+}
+
+val VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT", mutable = false) {
+    javaImport("static org.lwjgl.vulkan.VK10.*")
+    documentation =
+        """
+        Structure describing shader module identifier properties of an implementation.
+
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The algorithm UUID may be the same in different ICDs if the algorithms are guaranteed to produce the same results. This may happen in driver stacks which support different kinds of hardware with shared code.
+
+        Khronos' conformance testing can not guarantee that {@code shaderModuleIdentifierAlgorithmUUID} values are actually unique, so implementors should make their own best efforts to ensure that their UUID is unlikely to conflict with other implementations which may use a different algorithm. In particular, hard-coded values which easily conflict, such as all-0 bits, <b>should</b> never be used. Hard-coded values are acceptable if best effort is ensured that the value will not accidentally conflict.
+        </div>
+
+        If the ##VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_PROPERTIES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_PROPERTIES_EXT")..VkStructureType("sType", "").mutable()
+    nullable..opaque_p("pNext", "").mutable()
+    uint8_t("shaderModuleIdentifierAlgorithmUUID", "an array of #UUID_SIZE {@code uint8_t} values which uniquely represents the algorithm used to compute an identifier in #GetShaderModuleIdentifierEXT() and #GetShaderModuleCreateInfoIdentifierEXT(). Implementations <b>should</b> not change this value in different driver versions if the algorithm used to compute an identifier is the same.")["VK_UUID_SIZE"]
+}
+
+val VkPipelineShaderStageModuleIdentifierCreateInfoEXT = struct(Module.VULKAN, "VkPipelineShaderStageModuleIdentifierCreateInfoEXT") {
+    documentation =
+        """
+        Structure specifying an identifier for a shader module.
+
+        <h5>Description</h5>
+        Any identifier <b>can</b> be used. If the pipeline being created with identifier requires compilation to complete the pipeline creation call, pipeline compilation <b>must</b> fail as defined by #PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT.
+
+        {@code pIdentifier} and {@code identifierSize} <b>can</b> be obtained from an ##VkShaderModuleIdentifierEXT queried earlier.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If this structure is included in a {@code pNext} chain and {@code identifierSize} is not equal to 0, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderModuleIdentifier">{@code shaderModuleIdentifier}</a> feature <b>must</b> be enabled</li>
+            <li>If this struct is included in a {@code pNext} chain of ##VkPipelineShaderStageCreateInfo and {@code identifierSize} is not equal to 0, the pipeline <b>must</b> be created with the #PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT flag set</li>
+            <li>{@code identifierSize} <b>must</b> be less-or-equal to #MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_MODULE_IDENTIFIER_CREATE_INFO_EXT</li>
+            <li>If {@code identifierSize} is not 0, {@code pIdentifier} <b>must</b> be a valid pointer to an array of {@code identifierSize} {@code uint8_t} values</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_MODULE_IDENTIFIER_CREATE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    AutoSize("pIdentifier", optional = true)..uint32_t("identifierSize", "the size, in bytes, of the buffer pointed to by {@code pIdentifier}.")
+    uint8_t.const.p("pIdentifier", "points to a buffer of opaque data specifying an identifier.")
+}
+
+val VkShaderModuleIdentifierEXT = struct(Module.VULKAN, "VkShaderModuleIdentifierEXT", mutable = false) {
+    javaImport("static org.lwjgl.vulkan.EXTShaderModuleIdentifier.*")
+    documentation =
+        """
+        A unique identifier for a shader module.
+
+        <h5>Description</h5>
+        Any returned values beyond the first {@code identifierSize} bytes are undefined. Implementations <b>must</b> return an {@code identifierSize} greater than 0, and less-or-equal to #MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT.
+
+        Two identifiers are considered equal if {@code identifierSize} is equal and the first {@code identifierSize} bytes of {@code identifier} compare equal.
+
+        Implementations <b>may</b> return a different {@code identifierSize} for different modules. Implementations <b>should</b> ensure that {@code identifierSize} is large enough to uniquely define a shader module.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SHADER_MODULE_IDENTIFIER_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetShaderModuleCreateInfoIdentifierEXT(), #GetShaderModuleIdentifierEXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_SHADER_MODULE_IDENTIFIER_EXT")..VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    uint32_t("identifierSize", "the size, in bytes, of valid data returned in {@code identifier}.")
+    uint8_t("identifier", "a buffer of opaque data specifying an identifier.")["VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT"]
+}
+
+val VkPhysicalDeviceTilePropertiesFeaturesQCOM = struct(Module.VULKAN, "VkPhysicalDeviceTilePropertiesFeaturesQCOM") {
+    documentation =
+        """
+        Structure describing tile properties features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceTilePropertiesFeaturesQCOM structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceTilePropertiesFeaturesQCOM <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("tileProperties", "indicates that the implementation supports queries for returning tile properties.")
+}
+
+val VkTilePropertiesQCOM = struct(Module.VULKAN, "VkTilePropertiesQCOM") {
+    documentation =
+        """
+        Structure holding availabe tile properties.
+
+        <h5>Description</h5>
+        All tiles will be tightly packed around the first tile, with edges being multiples of tile width and/or height from the origin.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Reported value for {@code apronSize} will be zero and its functionality will be described in a future extension.
+        </div>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_TILE_PROPERTIES_QCOM</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkExtent2D, ##VkExtent3D, ##VkOffset2D, #GetDynamicRenderingTilePropertiesQCOM(), #GetFramebufferTilePropertiesQCOM()
+        """
+
+    Expression("#STRUCTURE_TYPE_TILE_PROPERTIES_QCOM")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkExtent3D("tileSize", "the dimensions of a tile, with width and height describing the width and height of a tile in pixels, and depth corresponding to the number of slices the tile spans.")
+    VkExtent2D("apronSize", "the dimension of the apron.")
+    VkOffset2D("origin", "the top-left corner of the first tile in attachment space.")
 }

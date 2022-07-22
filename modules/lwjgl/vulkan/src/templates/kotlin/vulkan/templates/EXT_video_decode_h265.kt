@@ -25,7 +25,7 @@ val EXT_video_decode_h265 = "EXTVideoDecodeH265".nativeClassVK("EXT_video_decode
                 </ul>
             </li>
             <li>
-                Extending ##VkVideoProfileKHR, ##VkQueryPoolCreateInfo, ##VkFormatProperties2, ##VkImageCreateInfo, ##VkImageViewCreateInfo, ##VkBufferCreateInfo:
+                Extending ##VkVideoProfileKHR, ##VkQueryPoolCreateInfo:
                 <ul>
                     <li>##VkVideoDecodeH265ProfileEXT</li>
                 </ul>
@@ -66,8 +66,8 @@ val EXT_video_decode_h265 = "EXTVideoDecodeH265".nativeClassVK("EXT_video_decode
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRVideoDecodeQueue VK_KHR_video_decode_queue}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRVideoDecodeQueue VK_KHR_video_decode_queue} to be enabled for any device-level functionality</li>
                 <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
             </ul></dd>
 

@@ -45,7 +45,7 @@ val KHR_maintenance4 = "KHRMaintenance4".nativeClassVK("KHR_maintenance4", type 
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.1</li>
+                <li>Requires support for Vulkan 1.1</li>
             </ul></dd>
 
             <dt><b>Deprecation state</b></dt>

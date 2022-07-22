@@ -57,8 +57,8 @@ val KHR_device_group = "KHRDeviceGroup".nativeClassVK("KHR_device_group", type =
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRDeviceGroupCreation VK_KHR_device_group_creation}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRDeviceGroupCreation VK_KHR_device_group_creation} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Deprecation state</b></dt>

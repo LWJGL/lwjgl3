@@ -35,8 +35,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link KHRSurface VK_KHR_surface}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link KHRSurface VK_KHR_surface} to be enabled</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

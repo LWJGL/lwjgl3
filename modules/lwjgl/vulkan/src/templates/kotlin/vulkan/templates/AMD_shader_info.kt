@@ -87,7 +87,7 @@ val AMD_shader_info = "AMDShaderInfo".nativeClassVK("AMD_shader_info", type = "d
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Special Use</b></dt>

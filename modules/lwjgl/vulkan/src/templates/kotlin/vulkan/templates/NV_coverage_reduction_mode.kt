@@ -38,8 +38,8 @@ val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_cov
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link NVFramebufferMixedSamples VK_NV_framebuffer_mixed_samples}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link NVFramebufferMixedSamples VK_NV_framebuffer_mixed_samples} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

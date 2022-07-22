@@ -29,8 +29,8 @@ val KHR_get_display_properties2 = "KHRGetDisplayProperties2".nativeClassVK("KHR_
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRDisplay VK_KHR_display}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRDisplay VK_KHR_display} to be enabled</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

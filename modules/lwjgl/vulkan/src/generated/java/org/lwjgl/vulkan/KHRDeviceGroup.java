@@ -60,8 +60,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link KHRDeviceGroupCreation VK_KHR_device_group_creation}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link KHRDeviceGroupCreation VK_KHR_device_group_creation} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>

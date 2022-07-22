@@ -42,6 +42,13 @@ import static org.lwjgl.system.MemoryStack.*;
  *   }
  * }</code></pre>
  * 
+ * <p>When tokens are consumed, an offset is computed based on token offset and stream stride. The resulting offset is required to be aligned. The alignment for a specific token is equal to the scalar alignment of the data type as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-alignment-requirements">Alignment Requirements</a>, or {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV}{@code ::minIndirectCommandsBufferOffsetAlignment}, whichever is lower.</p>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>A {@code minIndirectCommandsBufferOffsetAlignment} of 4 allows {@code VkDeviceAddress} to be packed as {@code uvec2} with scalar layout instead of {@code uint64_t} with 8 byte alignment. This enables direct compatibility with D3D12 command signature layouts.</p>
+ * </div>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

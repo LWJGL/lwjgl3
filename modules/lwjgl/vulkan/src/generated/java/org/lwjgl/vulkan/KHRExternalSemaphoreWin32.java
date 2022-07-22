@@ -31,8 +31,8 @@ import org.lwjgl.system.windows.*;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link KHRExternalSemaphore VK_KHR_external_semaphore}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link KHRExternalSemaphore VK_KHR_external_semaphore} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

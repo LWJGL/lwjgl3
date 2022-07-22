@@ -9,39 +9,25 @@ import javax.annotation.*;
 
 import java.nio.*;
 
-import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Feedback about the creation of render pass.
- * 
- * <h5>Description</h5>
- * 
- * <p>The subpass count after merging is written to {@code postMergeSubpassCount}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT}</li>
- * </ul>
+ * Feedback about the creation of a render pass.
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkRenderPassCreateInfo2}, {@link VkRenderPassCreationControlEXT}, {@link VK12#vkCreateRenderPass2 CreateRenderPass2}</p>
+ * <p>{@link VkRenderPassCreationFeedbackCreateInfoEXT}</p>
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkRenderPassCreationFeedbackInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
  *     uint32_t {@link #postMergeSubpassCount};
  * }</code></pre>
  */
-public class VkRenderPassCreationFeedbackInfoEXT extends Struct implements NativeResource {
+public class VkRenderPassCreationFeedbackInfoEXT extends Struct {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -51,23 +37,17 @@ public class VkRenderPassCreationFeedbackInfoEXT extends Struct implements Nativ
 
     /** The struct member offsets. */
     public static final int
-        STYPE,
-        PNEXT,
         POSTMERGESUBPASSCOUNT;
 
     static {
         Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE),
             __member(4)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        STYPE = layout.offsetof(0);
-        PNEXT = layout.offsetof(1);
-        POSTMERGESUBPASSCOUNT = layout.offsetof(2);
+        POSTMERGESUBPASSCOUNT = layout.offsetof(0);
     }
 
     /**
@@ -83,67 +63,11 @@ public class VkRenderPassCreationFeedbackInfoEXT extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure. */
-    @NativeType("VkStructureType")
-    public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to an extension-specific structure. */
-    @NativeType("void const *")
-    public long pNext() { return npNext(address()); }
     /** the subpass count after merge. */
     @NativeType("uint32_t")
     public int postMergeSubpassCount() { return npostMergeSubpassCount(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
-    public VkRenderPassCreationFeedbackInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT} value to the {@link #sType} field. */
-    public VkRenderPassCreationFeedbackInfoEXT sType$Default() { return sType(EXTSubpassMergeFeedback.VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
-    public VkRenderPassCreationFeedbackInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #postMergeSubpassCount} field. */
-    public VkRenderPassCreationFeedbackInfoEXT postMergeSubpassCount(@NativeType("uint32_t") int value) { npostMergeSubpassCount(address(), value); return this; }
-
-    /** Initializes this struct with the specified values. */
-    public VkRenderPassCreationFeedbackInfoEXT set(
-        int sType,
-        long pNext,
-        int postMergeSubpassCount
-    ) {
-        sType(sType);
-        pNext(pNext);
-        postMergeSubpassCount(postMergeSubpassCount);
-
-        return this;
-    }
-
-    /**
-     * Copies the specified struct data to this struct.
-     *
-     * @param src the source struct
-     *
-     * @return this struct
-     */
-    public VkRenderPassCreationFeedbackInfoEXT set(VkRenderPassCreationFeedbackInfoEXT src) {
-        memCopy(src.address(), address(), SIZEOF);
-        return this;
-    }
-
     // -----------------------------------
-
-    /** Returns a new {@code VkRenderPassCreationFeedbackInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
-    public static VkRenderPassCreationFeedbackInfoEXT malloc() {
-        return wrap(VkRenderPassCreationFeedbackInfoEXT.class, nmemAllocChecked(SIZEOF));
-    }
-
-    /** Returns a new {@code VkRenderPassCreationFeedbackInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
-    public static VkRenderPassCreationFeedbackInfoEXT calloc() {
-        return wrap(VkRenderPassCreationFeedbackInfoEXT.class, nmemCallocChecked(1, SIZEOF));
-    }
-
-    /** Returns a new {@code VkRenderPassCreationFeedbackInfoEXT} instance allocated with {@link BufferUtils}. */
-    public static VkRenderPassCreationFeedbackInfoEXT create() {
-        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkRenderPassCreationFeedbackInfoEXT.class, memAddress(container), container);
-    }
 
     /** Returns a new {@code VkRenderPassCreationFeedbackInfoEXT} instance for the specified memory address. */
     public static VkRenderPassCreationFeedbackInfoEXT create(long address) {
@@ -154,34 +78,6 @@ public class VkRenderPassCreationFeedbackInfoEXT extends Struct implements Nativ
     @Nullable
     public static VkRenderPassCreationFeedbackInfoEXT createSafe(long address) {
         return address == NULL ? null : wrap(VkRenderPassCreationFeedbackInfoEXT.class, address);
-    }
-
-    /**
-     * Returns a new {@link VkRenderPassCreationFeedbackInfoEXT.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkRenderPassCreationFeedbackInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkRenderPassCreationFeedbackInfoEXT.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkRenderPassCreationFeedbackInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkRenderPassCreationFeedbackInfoEXT.Buffer} instance allocated with {@link BufferUtils}.
-     *
-     * @param capacity the buffer capacity
-     */
-    public static VkRenderPassCreationFeedbackInfoEXT.Buffer create(int capacity) {
-        ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -200,64 +96,15 @@ public class VkRenderPassCreationFeedbackInfoEXT extends Struct implements Nativ
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
-    /**
-     * Returns a new {@code VkRenderPassCreationFeedbackInfoEXT} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkRenderPassCreationFeedbackInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkRenderPassCreationFeedbackInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@code VkRenderPassCreationFeedbackInfoEXT} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack the stack from which to allocate
-     */
-    public static VkRenderPassCreationFeedbackInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkRenderPassCreationFeedbackInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
-    }
-
-    /**
-     * Returns a new {@link VkRenderPassCreationFeedbackInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack}.
-     *
-     * @param stack    the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkRenderPassCreationFeedbackInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
-    }
-
-    /**
-     * Returns a new {@link VkRenderPassCreationFeedbackInfoEXT.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
-     *
-     * @param stack    the stack from which to allocate
-     * @param capacity the buffer capacity
-     */
-    public static VkRenderPassCreationFeedbackInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
-    }
-
     // -----------------------------------
 
-    /** Unsafe version of {@link #sType}. */
-    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassCreationFeedbackInfoEXT.STYPE); }
-    /** Unsafe version of {@link #pNext}. */
-    public static long npNext(long struct) { return memGetAddress(struct + VkRenderPassCreationFeedbackInfoEXT.PNEXT); }
     /** Unsafe version of {@link #postMergeSubpassCount}. */
     public static int npostMergeSubpassCount(long struct) { return UNSAFE.getInt(null, struct + VkRenderPassCreationFeedbackInfoEXT.POSTMERGESUBPASSCOUNT); }
-
-    /** Unsafe version of {@link #sType(int) sType}. */
-    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassCreationFeedbackInfoEXT.STYPE, value); }
-    /** Unsafe version of {@link #pNext(long) pNext}. */
-    public static void npNext(long struct, long value) { memPutAddress(struct + VkRenderPassCreationFeedbackInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #postMergeSubpassCount(int) postMergeSubpassCount}. */
-    public static void npostMergeSubpassCount(long struct, int value) { UNSAFE.putInt(null, struct + VkRenderPassCreationFeedbackInfoEXT.POSTMERGESUBPASSCOUNT, value); }
 
     // -----------------------------------
 
     /** An array of {@link VkRenderPassCreationFeedbackInfoEXT} structs. */
-    public static class Buffer extends StructBuffer<VkRenderPassCreationFeedbackInfoEXT, Buffer> implements NativeResource {
+    public static class Buffer extends StructBuffer<VkRenderPassCreationFeedbackInfoEXT, Buffer> {
 
         private static final VkRenderPassCreationFeedbackInfoEXT ELEMENT_FACTORY = VkRenderPassCreationFeedbackInfoEXT.create(-1L);
 
@@ -292,24 +139,9 @@ public class VkRenderPassCreationFeedbackInfoEXT extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderPassCreationFeedbackInfoEXT#sType} field. */
-        @NativeType("VkStructureType")
-        public int sType() { return VkRenderPassCreationFeedbackInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkRenderPassCreationFeedbackInfoEXT#pNext} field. */
-        @NativeType("void const *")
-        public long pNext() { return VkRenderPassCreationFeedbackInfoEXT.npNext(address()); }
         /** @return the value of the {@link VkRenderPassCreationFeedbackInfoEXT#postMergeSubpassCount} field. */
         @NativeType("uint32_t")
         public int postMergeSubpassCount() { return VkRenderPassCreationFeedbackInfoEXT.npostMergeSubpassCount(address()); }
-
-        /** Sets the specified value to the {@link VkRenderPassCreationFeedbackInfoEXT#sType} field. */
-        public VkRenderPassCreationFeedbackInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassCreationFeedbackInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT} value to the {@link VkRenderPassCreationFeedbackInfoEXT#sType} field. */
-        public VkRenderPassCreationFeedbackInfoEXT.Buffer sType$Default() { return sType(EXTSubpassMergeFeedback.VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT); }
-        /** Sets the specified value to the {@link VkRenderPassCreationFeedbackInfoEXT#pNext} field. */
-        public VkRenderPassCreationFeedbackInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassCreationFeedbackInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderPassCreationFeedbackInfoEXT#postMergeSubpassCount} field. */
-        public VkRenderPassCreationFeedbackInfoEXT.Buffer postMergeSubpassCount(@NativeType("uint32_t") int value) { VkRenderPassCreationFeedbackInfoEXT.npostMergeSubpassCount(address(), value); return this; }
 
     }
 

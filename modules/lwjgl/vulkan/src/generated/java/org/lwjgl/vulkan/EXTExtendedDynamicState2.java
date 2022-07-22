@@ -30,8 +30,8 @@ import static org.lwjgl.system.JNI.*;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
@@ -118,7 +118,7 @@ public class EXTExtendedDynamicState2 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2PatchControlPoints">extendedDynamicState2PatchControlPoints</a> feature <b>must</b> be enabled</li>
+     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2PatchControlPoints">{@code extendedDynamicState2PatchControlPoints}</a> feature <b>must</b> be enabled</li>
      * <li>{@code patchControlPoints} <b>must</b> be greater than zero and less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxTessellationPatchSize}</li>
      * </ul>
      * 
@@ -208,7 +208,7 @@ public class EXTExtendedDynamicState2 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2LogicOp">extendedDynamicState2LogicOp</a> feature <b>must</b> be enabled</li>
+     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState2LogicOp">{@code extendedDynamicState2LogicOp}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

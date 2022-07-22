@@ -229,7 +229,7 @@ val NVX_binary_import = "NVXBinaryImport".nativeClassVK("NVX_binary_import", typ
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

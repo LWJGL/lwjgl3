@@ -18,10 +18,10 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>459</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
+ * <li>Requires support for Vulkan 1.0</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2022-03-10</dd>
+ * <dd>2022-05-24</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -49,7 +49,7 @@ package org.lwjgl.vulkan;
 public final class EXTSubpassMergeFeedback {
 
     /** The extension specification version. */
-    public static final int VK_EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION = 1;
+    public static final int VK_EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION_NAME = "VK_EXT_subpass_merge_feedback";
@@ -62,15 +62,15 @@ public final class EXTSubpassMergeFeedback {
      * <ul>
      * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT}</li>
      * </ul>
      */
     public static final int
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT = 1000458000,
         VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT                    = 1000458001,
-        VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT              = 1000458002,
-        VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT               = 1000458003;
+        VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT       = 1000458002,
+        VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT        = 1000458003;
 
     /**
      * VkSubpassMergeStatusEXT - Specify a subpass merging status

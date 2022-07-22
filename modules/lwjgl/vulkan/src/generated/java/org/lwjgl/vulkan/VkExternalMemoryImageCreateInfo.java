@@ -82,7 +82,7 @@ public class VkExternalMemoryImageCreateInfo extends Struct implements NativeRes
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** zero, or a bitmask of {@code VkExternalMemoryHandleTypeFlagBits} specifying one or more external memory handle types. */
+    /** zero or a bitmask of {@code VkExternalMemoryHandleTypeFlagBits} specifying one or more external memory handle types. */
     @NativeType("VkExternalMemoryHandleTypeFlags")
     public int handleTypes() { return nhandleTypes(address()); }
 

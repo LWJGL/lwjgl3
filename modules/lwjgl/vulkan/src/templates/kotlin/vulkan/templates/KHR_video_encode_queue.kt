@@ -31,9 +31,9 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRVideoQueue VK_KHR_video_queue}</li>
-                <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRVideoQueue VK_KHR_video_queue} to be enabled for any device-level functionality</li>
+                <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2} to be enabled for any device-level functionality</li>
                 <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
             </ul></dd>
 

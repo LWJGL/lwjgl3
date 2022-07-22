@@ -34,9 +34,9 @@ val KHR_imageless_framebuffer = "KHRImagelessFramebuffer".nativeClassVK("KHR_ima
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRMaintenance2 VK_KHR_maintenance2}</li>
-                <li>Requires {@link KHRImageFormatList VK_KHR_image_format_list}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRMaintenance2 VK_KHR_maintenance2} to be enabled for any device-level functionality</li>
+                <li>Requires {@link KHRImageFormatList VK_KHR_image_format_list} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Deprecation state</b></dt>

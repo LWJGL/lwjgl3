@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkQueueFamilyQueryResultStatusProperties2KHR {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     VkBool32 {@link #supported};
+ *     VkBool32 {@link #queryResultStatusSupport};
  * }</code></pre>
  */
 public class VkQueueFamilyQueryResultStatusProperties2KHR extends Struct implements NativeResource {
@@ -45,7 +45,7 @@ public class VkQueueFamilyQueryResultStatusProperties2KHR extends Struct impleme
     public static final int
         STYPE,
         PNEXT,
-        SUPPORTED;
+        QUERYRESULTSTATUSSUPPORT;
 
     static {
         Layout layout = __struct(
@@ -59,7 +59,7 @@ public class VkQueueFamilyQueryResultStatusProperties2KHR extends Struct impleme
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        SUPPORTED = layout.offsetof(2);
+        QUERYRESULTSTATUSSUPPORT = layout.offsetof(2);
     }
 
     /**
@@ -83,7 +83,7 @@ public class VkQueueFamilyQueryResultStatusProperties2KHR extends Struct impleme
     public long pNext() { return npNext(address()); }
     /** reports {@link VK10#VK_TRUE TRUE} if query type {@link KHRVideoQueue#VK_QUERY_TYPE_RESULT_STATUS_ONLY_KHR QUERY_TYPE_RESULT_STATUS_ONLY_KHR} and use of {@link KHRVideoQueue#VK_QUERY_RESULT_WITH_STATUS_BIT_KHR QUERY_RESULT_WITH_STATUS_BIT_KHR} are supported. */
     @NativeType("VkBool32")
-    public boolean supported() { return nsupported(address()) != 0; }
+    public boolean queryResultStatusSupport() { return nqueryResultStatusSupport(address()) != 0; }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkQueueFamilyQueryResultStatusProperties2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -91,18 +91,18 @@ public class VkQueueFamilyQueryResultStatusProperties2KHR extends Struct impleme
     public VkQueueFamilyQueryResultStatusProperties2KHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyQueryResultStatusProperties2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #supported} field. */
-    public VkQueueFamilyQueryResultStatusProperties2KHR supported(@NativeType("VkBool32") boolean value) { nsupported(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@link #queryResultStatusSupport} field. */
+    public VkQueueFamilyQueryResultStatusProperties2KHR queryResultStatusSupport(@NativeType("VkBool32") boolean value) { nqueryResultStatusSupport(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkQueueFamilyQueryResultStatusProperties2KHR set(
         int sType,
         long pNext,
-        boolean supported
+        boolean queryResultStatusSupport
     ) {
         sType(sType);
         pNext(pNext);
-        supported(supported);
+        queryResultStatusSupport(queryResultStatusSupport);
 
         return this;
     }
@@ -236,15 +236,15 @@ public class VkQueueFamilyQueryResultStatusProperties2KHR extends Struct impleme
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyQueryResultStatusProperties2KHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkQueueFamilyQueryResultStatusProperties2KHR.PNEXT); }
-    /** Unsafe version of {@link #supported}. */
-    public static int nsupported(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyQueryResultStatusProperties2KHR.SUPPORTED); }
+    /** Unsafe version of {@link #queryResultStatusSupport}. */
+    public static int nqueryResultStatusSupport(long struct) { return UNSAFE.getInt(null, struct + VkQueueFamilyQueryResultStatusProperties2KHR.QUERYRESULTSTATUSSUPPORT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyQueryResultStatusProperties2KHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueueFamilyQueryResultStatusProperties2KHR.PNEXT, value); }
-    /** Unsafe version of {@link #supported(boolean) supported}. */
-    public static void nsupported(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyQueryResultStatusProperties2KHR.SUPPORTED, value); }
+    /** Unsafe version of {@link #queryResultStatusSupport(boolean) queryResultStatusSupport}. */
+    public static void nqueryResultStatusSupport(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyQueryResultStatusProperties2KHR.QUERYRESULTSTATUSSUPPORT, value); }
 
     // -----------------------------------
 
@@ -290,9 +290,9 @@ public class VkQueueFamilyQueryResultStatusProperties2KHR extends Struct impleme
         /** @return the value of the {@link VkQueueFamilyQueryResultStatusProperties2KHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkQueueFamilyQueryResultStatusProperties2KHR.npNext(address()); }
-        /** @return the value of the {@link VkQueueFamilyQueryResultStatusProperties2KHR#supported} field. */
+        /** @return the value of the {@link VkQueueFamilyQueryResultStatusProperties2KHR#queryResultStatusSupport} field. */
         @NativeType("VkBool32")
-        public boolean supported() { return VkQueueFamilyQueryResultStatusProperties2KHR.nsupported(address()) != 0; }
+        public boolean queryResultStatusSupport() { return VkQueueFamilyQueryResultStatusProperties2KHR.nqueryResultStatusSupport(address()) != 0; }
 
         /** Sets the specified value to the {@link VkQueueFamilyQueryResultStatusProperties2KHR#sType} field. */
         public VkQueueFamilyQueryResultStatusProperties2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkQueueFamilyQueryResultStatusProperties2KHR.nsType(address(), value); return this; }
@@ -300,8 +300,8 @@ public class VkQueueFamilyQueryResultStatusProperties2KHR extends Struct impleme
         public VkQueueFamilyQueryResultStatusProperties2KHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR); }
         /** Sets the specified value to the {@link VkQueueFamilyQueryResultStatusProperties2KHR#pNext} field. */
         public VkQueueFamilyQueryResultStatusProperties2KHR.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyQueryResultStatusProperties2KHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkQueueFamilyQueryResultStatusProperties2KHR#supported} field. */
-        public VkQueueFamilyQueryResultStatusProperties2KHR.Buffer supported(@NativeType("VkBool32") boolean value) { VkQueueFamilyQueryResultStatusProperties2KHR.nsupported(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@link VkQueueFamilyQueryResultStatusProperties2KHR#queryResultStatusSupport} field. */
+        public VkQueueFamilyQueryResultStatusProperties2KHR.Buffer queryResultStatusSupport(@NativeType("VkBool32") boolean value) { VkQueueFamilyQueryResultStatusProperties2KHR.nqueryResultStatusSupport(address(), value ? 1 : 0); return this; }
 
     }
 

@@ -88,7 +88,7 @@ public class VkExportMemoryAllocateInfo extends Struct implements NativeResource
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkExternalMemoryHandleTypeFlagBits} specifying one or more memory handle types the application <b>can</b> export from the resulting allocation. The application <b>can</b> request multiple handle types for the same allocation. */
+    /** zero or a bitmask of {@code VkExternalMemoryHandleTypeFlagBits} specifying one or more memory handle types the application <b>can</b> export from the resulting allocation. The application <b>can</b> request multiple handle types for the same allocation. */
     @NativeType("VkExternalMemoryHandleTypeFlags")
     public int handleTypes() { return nhandleTypes(address()); }
 

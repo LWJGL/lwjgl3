@@ -81,7 +81,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>10</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
+ * <li>Requires support for Vulkan 1.0</li>
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>

@@ -61,8 +61,8 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Deprecation state</b></dt>
@@ -422,16 +422,16 @@ val KHR_synchronization2 = "KHRSynchronization2".nativeClassVK("KHR_synchronizat
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-geometryShader">geometry shaders</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-tessellationShader">tessellation shaders</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-conditionalRendering">conditional rendering</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-fragmentDensityMap">fragment density map</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-transformFeedback">transform feedback</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-meshShader">mesh shaders</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_MESH_SHADER_BIT_NV</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-taskShader">task shaders</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_TASK_SHADER_BIT_NV</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shadingRateImage">shading rate image</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-subpassShading">subpass shading</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-invocationMask">invocation mask image</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT or #PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-conditionalRendering">{@code conditionalRendering}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-fragmentDensityMap">{@code fragmentDensityMap}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-transformFeedback">{@code transformFeedback}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-meshShader">{@code meshShader}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_MESH_SHADER_BIT_NV</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-taskShader">{@code taskShader}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_TASK_SHADER_BIT_NV</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shadingRateImage">{@code shadingRateImage}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-subpassShading">{@code subpassShading}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_SUBPASS_SHADING_BIT_HUAWEI</li>
+            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-invocationMask">{@code invocationMask}</a> feature is not enabled, {@code stage} <b>must</b> not contain #PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI</li>
             <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-synchronization2">{@code synchronization2}</a> feature <b>must</b> be enabled</li>
             <li>{@code stage} <b>must</b> include only a single pipeline stage</li>
             <li>{@code stage} <b>must</b> include only stages that are valid for the queue family that was used to create the command pool that {@code commandBuffer} was allocated from</li>

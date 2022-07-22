@@ -36,7 +36,7 @@ val EXT_robustness2 = "EXTRobustness2".nativeClassVK("EXT_robustness2", type = "
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

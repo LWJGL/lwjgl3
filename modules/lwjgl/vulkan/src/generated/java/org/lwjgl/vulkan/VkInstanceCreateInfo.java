@@ -28,6 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkDebugReportCallbackCreateInfoEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link EXTDebugReport VK_EXT_debug_report}</li>
  * <li>If the {@code pNext} chain of {@link VkInstanceCreateInfo} includes a {@link VkDebugUtilsMessengerCreateInfoEXT} structure, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link EXTDebugUtils VK_EXT_debug_utils}</li>
+ * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be either {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_DEVICE_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_DEVICE_BIT_EXT} or {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_COMMAND_QUEUE_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_COMMAND_QUEUE_BIT_EXT}.</li>
  * <li>If {@code flags} has the {@link KHRPortabilityEnumeration#VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR} bit set, the list of enabled extensions in {@code ppEnabledExtensionNames} <b>must</b> contain {@link KHRPortabilityEnumeration VK_KHR_portability_enumeration}</li>
  * </ul>
  * 
@@ -35,8 +36,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO STRUCTURE_TYPE_INSTANCE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDebugReportCallbackCreateInfoEXT}, {@link VkDebugUtilsMessengerCreateInfoEXT}, {@link VkValidationFeaturesEXT}, or {@link VkValidationFlagsEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkDebugUtilsMessengerCreateInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDebugReportCallbackCreateInfoEXT}, {@link VkDebugUtilsMessengerCreateInfoEXT}, {@link VkExportMetalObjectCreateInfoEXT}, {@link VkValidationFeaturesEXT}, or {@link VkValidationFlagsEXT}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkDebugUtilsMessengerCreateInfoEXT} or {@link VkExportMetalObjectCreateInfoEXT}</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkInstanceCreateFlagBits} values</li>
  * <li>If {@code pApplicationInfo} is not {@code NULL}, {@code pApplicationInfo} <b>must</b> be a valid pointer to a valid {@link VkApplicationInfo} structure</li>
  * <li>If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} <b>must</b> be a valid pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings</li>
@@ -156,6 +157,8 @@ public class VkInstanceCreateInfo extends Struct implements NativeResource {
     public VkInstanceCreateInfo pNext(VkDebugReportCallbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDebugUtilsMessengerCreateInfoEXT} value to the {@code pNext} chain. */
     public VkInstanceCreateInfo pNext(VkDebugUtilsMessengerCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkInstanceCreateInfo pNext(VkExportMetalObjectCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkValidationFeaturesEXT} value to the {@code pNext} chain. */
     public VkInstanceCreateInfo pNext(VkValidationFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkValidationFlagsEXT} value to the {@code pNext} chain. */
@@ -456,6 +459,8 @@ public class VkInstanceCreateInfo extends Struct implements NativeResource {
         public VkInstanceCreateInfo.Buffer pNext(VkDebugReportCallbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDebugUtilsMessengerCreateInfoEXT} value to the {@code pNext} chain. */
         public VkInstanceCreateInfo.Buffer pNext(VkDebugUtilsMessengerCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkInstanceCreateInfo.Buffer pNext(VkExportMetalObjectCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkValidationFeaturesEXT} value to the {@code pNext} chain. */
         public VkInstanceCreateInfo.Buffer pNext(VkValidationFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkValidationFlagsEXT} value to the {@code pNext} chain. */

@@ -32,8 +32,8 @@ import static org.lwjgl.system.JNI.*;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link EXTMemoryPriority VK_EXT_memory_priority}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link EXTMemoryPriority VK_EXT_memory_priority} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

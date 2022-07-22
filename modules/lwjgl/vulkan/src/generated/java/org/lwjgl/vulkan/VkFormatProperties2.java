@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_FORMAT_PROPERTIES_2}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDrmFormatModifierPropertiesList2EXT}, {@link VkDrmFormatModifierPropertiesListEXT}, {@link VkFormatProperties3}, {@link VkVideoDecodeH264ProfileEXT}, {@link VkVideoDecodeH265ProfileEXT}, {@link VkVideoEncodeH264ProfileEXT}, {@link VkVideoEncodeH265ProfileEXT}, {@link VkVideoProfileKHR}, or {@link VkVideoProfilesKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDrmFormatModifierPropertiesList2EXT}, {@link VkDrmFormatModifierPropertiesListEXT}, {@link VkFormatProperties3}, or {@link VkSubpassResolvePerformanceQueryEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -104,18 +104,8 @@ public class VkFormatProperties2 extends Struct implements NativeResource {
     public VkFormatProperties2 pNext(VkFormatProperties3 value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFormatProperties3KHR} value to the {@code pNext} chain. */
     public VkFormatProperties2 pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoDecodeH264ProfileEXT} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkVideoDecodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoDecodeH265ProfileEXT} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkVideoDecodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH264ProfileEXT} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkVideoEncodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH265ProfileEXT} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkVideoEncodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
-    public VkFormatProperties2 pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSubpassResolvePerformanceQueryEXT} value to the {@code pNext} chain. */
+    public VkFormatProperties2 pNext(VkSubpassResolvePerformanceQueryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkFormatProperties2 set(
@@ -345,18 +335,8 @@ public class VkFormatProperties2 extends Struct implements NativeResource {
         public VkFormatProperties2.Buffer pNext(VkFormatProperties3 value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFormatProperties3KHR} value to the {@code pNext} chain. */
         public VkFormatProperties2.Buffer pNext(VkFormatProperties3KHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoDecodeH264ProfileEXT} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkVideoDecodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoDecodeH265ProfileEXT} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkVideoDecodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH264ProfileEXT} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkVideoEncodeH264ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH265ProfileEXT} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkVideoEncodeH265ProfileEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoProfileKHR} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkVideoProfileKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
-        public VkFormatProperties2.Buffer pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSubpassResolvePerformanceQueryEXT} value to the {@code pNext} chain. */
+        public VkFormatProperties2.Buffer pNext(VkSubpassResolvePerformanceQueryEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

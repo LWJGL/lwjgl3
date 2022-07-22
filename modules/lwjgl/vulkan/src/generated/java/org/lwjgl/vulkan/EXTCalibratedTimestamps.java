@@ -31,8 +31,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -75,7 +75,7 @@ public class EXTCalibratedTimestamps {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} or {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-timestampPeriod">timestampPeriod</a> of the device.</li>
+     * <li>{@link #VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} or {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-timestampPeriod">{@code timestampPeriod}</a> of the device.</li>
      * <li>{@link #VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT TIME_DOMAIN_CLOCK_MONOTONIC_EXT} specifies the CLOCK_MONOTONIC time domain available on POSIX platforms. Timestamp values in this time domain are in units of nanoseconds and are comparable with platform timestamp values captured using the POSIX clock_gettime API as computed by this example:</li>
      * </ul>
      * 

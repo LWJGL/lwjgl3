@@ -118,8 +118,8 @@ import static org.lwjgl.system.JNI.*;
  * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link EXTDebugReport VK_EXT_debug_report}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link EXTDebugReport VK_EXT_debug_report} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>

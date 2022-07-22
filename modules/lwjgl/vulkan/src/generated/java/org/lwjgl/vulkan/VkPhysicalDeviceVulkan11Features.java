@@ -156,7 +156,7 @@ public class VkPhysicalDeviceVulkan11Features extends Struct implements NativeRe
     /** specifies whether the implementation supports the SPIR-V {@code VariablePointers} capability. When this feature is not enabled, shader modules <b>must</b> not declare the {@code VariablePointers} capability. */
     @NativeType("VkBool32")
     public boolean variablePointers() { return nvariablePointers(address()) != 0; }
-    /** specifies whether protected memory is supported. */
+    /** specifies whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-protected-memory">protected memory</a> is supported. */
     @NativeType("VkBool32")
     public boolean protectedMemory() { return nprotectedMemory(address()) != 0; }
     /** specifies whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>. If {@code samplerYcbcrConversion} is {@link VK10#VK_FALSE FALSE}, sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is not supported, and samplers using sampler Y′C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> not be used. */

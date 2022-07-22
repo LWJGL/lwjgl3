@@ -31,8 +31,8 @@ val EXT_vertex_input_dynamic_state = "EXTVertexInputDynamicState".nativeClassVK(
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -107,7 +107,7 @@ val EXT_vertex_input_dynamic_state = "EXTVertexInputDynamicState".nativeClassVK(
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-vertexInputDynamicState">vertexInputDynamicState</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-vertexInputDynamicState">{@code vertexInputDynamicState}</a> feature <b>must</b> be enabled</li>
             <li>{@code vertexBindingDescriptionCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
             <li>{@code vertexAttributeDescriptionCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputAttributes}</li>
             <li>For every {@code binding} specified by each element of {@code pVertexAttributeDescriptions}, a ##VkVertexInputBindingDescription2EXT <b>must</b> exist in {@code pVertexBindingDescriptions} with the same value of {@code binding}</li>

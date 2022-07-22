@@ -25,11 +25,11 @@ val EXT_subpass_merge_feedback = "EXTSubpassMergeFeedback".nativeClassVK("EXT_su
             <dd>459</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -44,7 +44,7 @@ val EXT_subpass_merge_feedback = "EXTSubpassMergeFeedback".nativeClassVK("EXT_su
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-03-10</dd>
+            <dd>2022-05-24</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -61,7 +61,7 @@ val EXT_subpass_merge_feedback = "EXTSubpassMergeFeedback".nativeClassVK("EXT_su
     IntConstant(
         "The extension specification version.",
 
-        "EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION".."1"
+        "EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -75,8 +75,8 @@ val EXT_subpass_merge_feedback = "EXTSubpassMergeFeedback".nativeClassVK("EXT_su
 
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT".."1000458000",
         "STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT".."1000458001",
-        "STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_INFO_EXT".."1000458002",
-        "STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT".."1000458003"
+        "STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT".."1000458002",
+        "STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT".."1000458003"
     )
 
     EnumConstant(

@@ -29,7 +29,7 @@ val GOOGLE_hlsl_functionality1 = "GOOGLEHlslFunctionality1".nativeClassVK("GOOGL
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

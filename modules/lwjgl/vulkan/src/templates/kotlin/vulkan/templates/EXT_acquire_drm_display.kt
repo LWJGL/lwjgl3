@@ -29,8 +29,8 @@ val EXT_acquire_drm_display = "EXTAcquireDrmDisplay".nativeClassVK("EXT_acquire_
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link EXTDirectModeDisplay VK_EXT_direct_mode_display}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link EXTDirectModeDisplay VK_EXT_direct_mode_display} to be enabled</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

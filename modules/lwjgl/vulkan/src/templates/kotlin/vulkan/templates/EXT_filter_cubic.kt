@@ -31,7 +31,7 @@ val EXT_filter_cubic = "EXTFilterCubic".nativeClassVK("EXT_filter_cubic", type =
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
@@ -76,7 +76,7 @@ val EXT_filter_cubic = "EXTFilterCubic".nativeClassVK("EXT_filter_cubic", type =
     EnumConstant(
         "Extends {@code VkFilter}.",
 
-        "FILTER_CUBIC_EXT".."1000170000"
+        "FILTER_CUBIC_EXT".."1000015000"
     )
 
     EnumConstant(

@@ -38,7 +38,7 @@ val EXT_custom_border_color = "EXTCustomBorderColor".nativeClassVK("EXT_custom_b
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
+                <li>Requires support for Vulkan 1.0</li>
             </ul></dd>
 
             <dt><b>Special Uses</b></dt>

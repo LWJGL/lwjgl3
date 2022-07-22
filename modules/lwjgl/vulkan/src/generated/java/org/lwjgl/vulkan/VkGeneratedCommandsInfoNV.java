@@ -185,7 +185,7 @@ public class VkGeneratedCommandsInfoNV extends Struct implements NativeResource 
     /** the maximum number of sequences to reserve. If {@code sequencesCountBuffer} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, this is also the actual number of sequences generated. */
     @NativeType("uint32_t")
     public int sequencesCount() { return nsequencesCount(address()); }
-    /** the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with {@link NVDeviceGeneratedCommands#vkCmdExecuteGeneratedCommandsNV CmdExecuteGeneratedCommandsNV} with its {@code isPreprocessed} set to {@code VK_TRUE}, then the preprocessing step is skipped and data is only read from this buffer. */
+    /** the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with {@link NVDeviceGeneratedCommands#vkCmdExecuteGeneratedCommandsNV CmdExecuteGeneratedCommandsNV} with its {@code isPreprocessed} set to {@code VK_TRUE}, then the preprocessing step is skipped and data is only read from this buffer. The contents and the layout of this buffer is opaque to applications and <b>must</b> not be modified or copied to another buffer for reuse. */
     @NativeType("VkBuffer")
     public long preprocessBuffer() { return npreprocessBuffer(address()); }
     /** the byte offset into {@code preprocessBuffer} where the preprocessed data is stored. */

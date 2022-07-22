@@ -265,10 +265,10 @@ public class VkPhysicalDeviceVulkan13Properties extends Struct implements Native
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the minimum subgroup size supported by this device. {@code minSubgroupSize} is at least one if any of the physical device’s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code minSubgroupSize} is a power-of-two. {@code minSubgroupSize} is less than or equal to {@code maxSubgroupSize}. {@code minSubgroupSize} is less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-subgroup-size">subgroupSize</a>. */
+    /** the minimum subgroup size supported by this device. {@code minSubgroupSize} is at least one if any of the physical device’s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code minSubgroupSize} is a power-of-two. {@code minSubgroupSize} is less than or equal to {@code maxSubgroupSize}. {@code minSubgroupSize} is less than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-subgroup-size">{@code subgroupSize}</a>. */
     @NativeType("uint32_t")
     public int minSubgroupSize() { return nminSubgroupSize(address()); }
-    /** the maximum subgroup size supported by this device. {@code maxSubgroupSize} is at least one if any of the physical device’s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code maxSubgroupSize} is a power-of-two. {@code maxSubgroupSize} is greater than or equal to {@code minSubgroupSize}. {@code maxSubgroupSize} is greater than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-subgroup-size">subgroupSize</a>. */
+    /** the maximum subgroup size supported by this device. {@code maxSubgroupSize} is at least one if any of the physical device’s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code maxSubgroupSize} is a power-of-two. {@code maxSubgroupSize} is greater than or equal to {@code minSubgroupSize}. {@code maxSubgroupSize} is greater than or equal to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-subgroup-size">{@code subgroupSize}</a>. */
     @NativeType("uint32_t")
     public int maxSubgroupSize() { return nmaxSubgroupSize(address()); }
     /** the maximum number of subgroups supported by the implementation within a workgroup. */
@@ -388,13 +388,13 @@ public class VkPhysicalDeviceVulkan13Properties extends Struct implements Native
     /** a byte alignment that is sufficient for a storage texel buffer of any format. The value <b>must</b> be a power of two. */
     @NativeType("VkDeviceSize")
     public long storageTexelBufferOffsetAlignmentBytes() { return nstorageTexelBufferOffsetAlignmentBytes(address()); }
-    /** indicates whether single texel alignment is sufficient for a storage texel buffer of any format. The value <b>must</b> be a power of two. */
+    /** indicates whether single texel alignment is sufficient for a storage texel buffer of any format. */
     @NativeType("VkBool32")
     public boolean storageTexelBufferOffsetSingleTexelAlignment() { return nstorageTexelBufferOffsetSingleTexelAlignment(address()) != 0; }
     /** a byte alignment that is sufficient for a uniform texel buffer of any format. The value <b>must</b> be a power of two. */
     @NativeType("VkDeviceSize")
     public long uniformTexelBufferOffsetAlignmentBytes() { return nuniformTexelBufferOffsetAlignmentBytes(address()); }
-    /** indicates whether single texel alignment is sufficient for a uniform texel buffer of any format. The value <b>must</b> be a power of two. */
+    /** indicates whether single texel alignment is sufficient for a uniform texel buffer of any format. */
     @NativeType("VkBool32")
     public boolean uniformTexelBufferOffsetSingleTexelAlignment() { return nuniformTexelBufferOffsetSingleTexelAlignment(address()) != 0; }
     /** the maximum size {@code VkBuffer} that <b>can</b> be created. */

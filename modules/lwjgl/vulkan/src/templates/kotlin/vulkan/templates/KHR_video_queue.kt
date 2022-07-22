@@ -28,13 +28,13 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <dd>24</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>3</dd>
+            <dd>4</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
-                <li>Requires {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion}</li>
+                <li>Requires support for Vulkan 1.1</li>
+                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
+                <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2} to be enabled for any device-level functionality</li>
                 <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
             </ul></dd>
 
@@ -47,7 +47,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-03-16</dd>
+            <dd>2022-05-30</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -61,6 +61,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
                 <li>Srinath Kumarapuram, NVIDIA</li>
                 <li>Tobias Hector, AMD</li>
                 <li>Tony Zlatinski, NVIDIA</li>
+                <li>Daniel Rakos, RasterGrid</li>
             </ul></dd>
         </dl>
         """
@@ -68,7 +69,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_QUEUE_SPEC_VERSION".."3"
+        "KHR_VIDEO_QUEUE_SPEC_VERSION".."4"
     )
 
     StringConstant(
@@ -116,6 +117,17 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         "Extends {@code VkQueryResultFlagBits}.",
 
         "QUERY_RESULT_WITH_STATUS_BIT_KHR".enum(0x00000010)
+    )
+
+    EnumConstant(
+        "Extends {@code VkResult}.",
+
+        "ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR".."-1000023000",
+        "ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR".."-1000023001",
+        "ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR".."-1000023002",
+        "ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR".."-1000023003",
+        "ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR".."-1000023004",
+        "ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR".."-1000023005"
     )
 
     EnumConstant(
@@ -287,10 +299,12 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
-                <li>#ERROR_EXTENSION_NOT_PRESENT</li>
-                <li>#ERROR_INITIALIZATION_FAILED</li>
-                <li>#ERROR_FEATURE_NOT_PRESENT</li>
-                <li>#ERROR_FORMAT_NOT_SUPPORTED</li>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+                <li>#ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR</li>
+                <li>#ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR</li>
+                <li>#ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR</li>
+                <li>#ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR</li>
             </ul></dd>
         </dl>
 
@@ -321,18 +335,44 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         <h5>Description</h5>
         If {@code pVideoFormatProperties} is {@code NULL}, then the number of video format properties supported for the given {@code physicalDevice} is returned in {@code pVideoFormatPropertyCount}. Otherwise, {@code pVideoFormatPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pVideoFormatProperties} array, and on return the variable is overwritten with the number of values actually written to {@code pVideoFormatProperties}. If the value of {@code pVideoFormatPropertyCount} is less than the number of video format properties supported, at most {@code pVideoFormatPropertyCount} values will be written to {@code pVideoFormatProperties}, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available values were returned.
 
-        If an implementation reports #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR is supported but #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR is not supported in ##VkVideoDecodeCapabilitiesKHR{@code ::flags}, then to query for video format properties for decode DPB or output, {@code imageUsage} <b>must</b> have both #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR and #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR set. Otherwise, the call will fail with #ERROR_FORMAT_NOT_SUPPORTED.
+        If an implementation reports #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR is supported but #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR is not supported in ##VkVideoDecodeCapabilitiesKHR{@code ::flags}, then to query for video format properties for decode DPB or output, ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} <b>must</b> have both #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR and #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR set. Otherwise, the call will fail with #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
 
-        If an implementation reports #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR is supported but #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR is not supported in ##VkVideoDecodeCapabilitiesKHR{@code ::flags}, then to query for video format properties for decode DPB, {@code imageUsage} <b>must</b> have #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR set and #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR not set. Otherwise, the call will fail with #ERROR_FORMAT_NOT_SUPPORTED. Similarly, to query for video format properties for decode output, {@code imageUsage} <b>must</b> have #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR set and #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR not set. Otherwise, the call will fail with #ERROR_FORMAT_NOT_SUPPORTED.
+        If an implementation reports #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR is supported but #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR is not supported in ##VkVideoDecodeCapabilitiesKHR{@code ::flags}, then to query for video format properties for decode DPB, ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} <b>must</b> have #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR set and #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR not set. Otherwise, the call will fail with #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR. Similarly, to query for video format properties for decode output, ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} <b>must</b> have #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR set and #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR not set. Otherwise, the call will fail with #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
 
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>The {@code imageUsage} enum of ##VkPhysicalDeviceVideoFormatInfoKHR <b>must</b> contain at least one of the following video image usage bit(s): #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR, #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR, #IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR, or #IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR</li>
-        </ul>
+        The {@code imageUsage} member of the ##VkPhysicalDeviceVideoFormatInfoKHR structure specifies the expected video usage flags that the returned video formats <b>must</b> support. Correspondingly, the {@code imageUsageFlags} member of each ##VkVideoFormatPropertiesKHR structure returned will contain at least the same set of image usage flags.
+
+        If the implementation supports using video input, output, or DPB images of a particular format in operations other than video decode/encode then the {@code imageUsageFlags} member of the corresponding ##VkVideoFormatPropertiesKHR structure returned will include additional image usage flags indicating that.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
         For most use cases, only decode or encode related usage flags are going to be specified. For a use case such as transcode, if the image were to be shared between decode and encode session(s), then both decode and encode related usage flags <b>can</b> be set.
         </div>
+
+        Video format properties are always queried with respect to a specific set of video profiles, as defined by the ##VkVideoProfileKHR structure. These are specified by chaining the ##VkVideoProfilesKHR structure to {@code pVideoFormatInfo}.
+
+        For most use cases, the images are used by a single video session and a single video profile is provided. For a use case such as transcode, where a decode session output image <b>can</b> be used as encode input in one or more encode sessions, multiple video profiles corresponding to the video sessions that will share the image <b>must</b> be provided.
+
+        If any of the profiles specified via ##VkVideoProfilesKHR{@code ::pProfiles} are not supported, then {@code vkGetPhysicalDeviceVideoFormatPropertiesKHR} returns one of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profile-error-codes">video-profile-specific error codes</a>. Furthermore, if ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} includes any image usage flags not supported by the specified video profiles then {@code vkGetPhysicalDeviceVideoFormatPropertiesKHR} returns #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
+
+        Multiple ##VkVideoFormatPropertiesKHR entries <b>may</b> be returned with the same {@code format} member with different {@code componentMapping}, {@code imageType}, or {@code imageTiling} values, as described later.
+
+        In addition, a different set of ##VkVideoFormatPropertiesKHR entries <b>may</b> be returned depending on the {@code imageUsage} member of the ##VkPhysicalDeviceVideoFormatInfoKHR structure, even for the same set of video profiles, for example, based on whether encode input, encode DPB, decode output, and/or decode DPB usage is requested.
+
+        The application <b>can</b> select the parameters returned in the ##VkVideoFormatPropertiesKHR entries and use compatible parameters when creating the input, output, and DPB images. The implementation will report all image creation and usage flags that are valid for images used with the requested video profiles but applications <b>should</b> create images only with those that are necessary for the particular use case.
+
+        Before creating an image, the application <b>can</b> obtain the complete set of supported image format features by calling #GetPhysicalDeviceImageFormatProperties2() using parameters derived from the members of one of the reported ##VkVideoFormatPropertiesKHR entries and adding the same ##VkVideoProfilesKHR structure to the {@code pNext} chain of ##VkPhysicalDeviceImageFormatInfo2.
+
+        The {@code componentMapping} member of ##VkVideoFormatPropertiesKHR defines the ordering of the Y′C<sub>B</sub>C<sub>R</sub> color channels from the perspective of the video codec operations specified in ##VkVideoProfilesKHR. For example, if the implementation produces video decode output with the format #FORMAT_G8_B8R8_2PLANE_420_UNORM where the blue and red chrominance channels are swapped then the {@code componentMapping} member of the corresponding ##VkVideoFormatPropertiesKHR structure will have the following member values:
+
+        <pre><code>
+￿components.r = VK_COMPONENT_SWIZZLE_B;        // Cb component
+￿components.g = VK_COMPONENT_SWIZZLE_IDENTITY; // Y component
+￿components.b = VK_COMPONENT_SWIZZLE_R;        // Cr component
+￿components.a = VK_COMPONENT_SWIZZLE_IDENTITY; // unused, defaults to 1.0</code></pre>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The {@code pNext} chain of {@code pVideoFormatInfo} <b>must</b> include a valid ##VkVideoProfilesKHR structure with {@code profileCount} greater than 0</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -352,9 +392,13 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
-                <li>#ERROR_EXTENSION_NOT_PRESENT</li>
-                <li>#ERROR_INITIALIZATION_FAILED</li>
-                <li>#ERROR_FORMAT_NOT_SUPPORTED</li>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+                <li>#ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR</li>
+                <li>#ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR</li>
+                <li>#ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR</li>
+                <li>#ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR</li>
+                <li>#ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR</li>
             </ul></dd>
         </dl>
 
@@ -365,7 +409,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         VkPhysicalDevice("physicalDevice", "the physical device being queried."),
         VkPhysicalDeviceVideoFormatInfoKHR.const.p("pVideoFormatInfo", "a pointer to a ##VkPhysicalDeviceVideoFormatInfoKHR structure specifying the codec and video profile for which information is returned."),
         AutoSize("pVideoFormatProperties")..Check(1)..uint32_t.p("pVideoFormatPropertyCount", "a pointer to an integer related to the number of video format properties available or queried, as described below."),
-        nullable..VkVideoFormatPropertiesKHR.p("pVideoFormatProperties", "a pointer to an array of ##VkVideoFormatPropertiesKHR structures in which supported formats are returned.")
+        nullable..VkVideoFormatPropertiesKHR.p("pVideoFormatProperties", "a pointer to an array of ##VkVideoFormatPropertiesKHR structures in which supported formats and image parameters are returned.")
     )
 
     VkResult(
@@ -403,8 +447,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
                 <li>#ERROR_INITIALIZATION_FAILED</li>
-                <li>#ERROR_INCOMPATIBLE_DRIVER</li>
-                <li>#ERROR_FEATURE_NOT_PRESENT</li>
+                <li>#ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR</li>
             </ul></dd>
         </dl>
 

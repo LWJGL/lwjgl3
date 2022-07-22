@@ -18,12 +18,18 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of a newly created semaphore.
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT}.</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExportSemaphoreCreateInfo}, {@link VkExportSemaphoreWin32HandleInfoKHR}, or {@link VkSemaphoreTypeCreateInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExportMetalObjectCreateInfoEXT}, {@link VkExportSemaphoreCreateInfo}, {@link VkExportSemaphoreWin32HandleInfoKHR}, {@link VkImportMetalSharedEventInfoEXT}, or {@link VkSemaphoreTypeCreateInfo}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkExportMetalObjectCreateInfoEXT}</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * </ul>
  * 
@@ -98,12 +104,16 @@ public class VkSemaphoreCreateInfo extends Struct implements NativeResource {
     public VkSemaphoreCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSemaphoreCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkSemaphoreCreateInfo pNext(VkExportMetalObjectCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportSemaphoreCreateInfo} value to the {@code pNext} chain. */
     public VkSemaphoreCreateInfo pNext(VkExportSemaphoreCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportSemaphoreCreateInfoKHR} value to the {@code pNext} chain. */
     public VkSemaphoreCreateInfo pNext(VkExportSemaphoreCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportSemaphoreWin32HandleInfoKHR} value to the {@code pNext} chain. */
     public VkSemaphoreCreateInfo pNext(VkExportSemaphoreWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImportMetalSharedEventInfoEXT} value to the {@code pNext} chain. */
+    public VkSemaphoreCreateInfo pNext(VkImportMetalSharedEventInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSemaphoreTypeCreateInfo} value to the {@code pNext} chain. */
     public VkSemaphoreCreateInfo pNext(VkSemaphoreTypeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSemaphoreTypeCreateInfoKHR} value to the {@code pNext} chain. */
@@ -336,12 +346,16 @@ public class VkSemaphoreCreateInfo extends Struct implements NativeResource {
         public VkSemaphoreCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO); }
         /** Sets the specified value to the {@link VkSemaphoreCreateInfo#pNext} field. */
         public VkSemaphoreCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkSemaphoreCreateInfo.Buffer pNext(VkExportMetalObjectCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportSemaphoreCreateInfo} value to the {@code pNext} chain. */
         public VkSemaphoreCreateInfo.Buffer pNext(VkExportSemaphoreCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportSemaphoreCreateInfoKHR} value to the {@code pNext} chain. */
         public VkSemaphoreCreateInfo.Buffer pNext(VkExportSemaphoreCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportSemaphoreWin32HandleInfoKHR} value to the {@code pNext} chain. */
         public VkSemaphoreCreateInfo.Buffer pNext(VkExportSemaphoreWin32HandleInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImportMetalSharedEventInfoEXT} value to the {@code pNext} chain. */
+        public VkSemaphoreCreateInfo.Buffer pNext(VkImportMetalSharedEventInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSemaphoreTypeCreateInfo} value to the {@code pNext} chain. */
         public VkSemaphoreCreateInfo.Buffer pNext(VkSemaphoreTypeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSemaphoreTypeCreateInfoKHR} value to the {@code pNext} chain. */

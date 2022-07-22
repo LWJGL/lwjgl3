@@ -37,8 +37,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.0</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</li>
+ * <li>Requires support for Vulkan 1.0</li>
+ * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -120,9 +120,9 @@ public class EXTPipelineProperties {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code pipeline} member of {@code pPipelineInfo} must have been created with {@code device}</li>
+     * <li>The {@code pipeline} member of {@code pPipelineInfo} must have been created with {@code device}</li>
      * <li>{@code pPipelineProperties} <b>must</b> be a valid pointer to a {@link VkPipelinePropertiesIdentifierEXT} structure</li>
-     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelinePropertiesIdentifier">pipelinePropertiesIdentifier</a> feature <b>must</b> be enabled</li>
+     * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelinePropertiesIdentifier">{@code pipelinePropertiesIdentifier}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

@@ -25,6 +25,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTPipelineProperties#VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * </ul>
  * 
  * <h3>Layout</h3>

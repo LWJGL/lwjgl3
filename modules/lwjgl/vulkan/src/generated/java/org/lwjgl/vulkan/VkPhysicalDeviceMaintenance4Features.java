@@ -32,8 +32,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPhysicalDeviceMaintenance4Features {
- *     VkStructureType sType;
- *     void * pNext;
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
  *     VkBool32 {@link #maintenance4};
  * }</code></pre>
  */
@@ -79,10 +79,10 @@ public class VkPhysicalDeviceMaintenance4Features extends Struct implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /**
@@ -100,11 +100,11 @@ public class VkPhysicalDeviceMaintenance4Features extends Struct implements Nati
     @NativeType("VkBool32")
     public boolean maintenance4() { return nmaintenance4(address()) != 0; }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceMaintenance4Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES} value to the {@code sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES} value to the {@link #sType} field. */
     public VkPhysicalDeviceMaintenance4Features sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPhysicalDeviceMaintenance4Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #maintenance4} field. */
     public VkPhysicalDeviceMaintenance4Features maintenance4(@NativeType("VkBool32") boolean value) { nmaintenance4(address(), value ? 1 : 0); return this; }
@@ -299,21 +299,21 @@ public class VkPhysicalDeviceMaintenance4Features extends Struct implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMaintenance4Features#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMaintenance4Features.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPhysicalDeviceMaintenance4Features#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMaintenance4Features.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceMaintenance4Features#maintenance4} field. */
         @NativeType("VkBool32")
         public boolean maintenance4() { return VkPhysicalDeviceMaintenance4Features.nmaintenance4(address()) != 0; }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance4Features#sType} field. */
         public VkPhysicalDeviceMaintenance4Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMaintenance4Features.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES} value to the {@code sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES} value to the {@link VkPhysicalDeviceMaintenance4Features#sType} field. */
         public VkPhysicalDeviceMaintenance4Features.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance4Features#pNext} field. */
         public VkPhysicalDeviceMaintenance4Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMaintenance4Features.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance4Features#maintenance4} field. */
         public VkPhysicalDeviceMaintenance4Features.Buffer maintenance4(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMaintenance4Features.nmaintenance4(address(), value ? 1 : 0); return this; }

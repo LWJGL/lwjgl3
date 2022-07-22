@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link KHRPipelineExecutableProperties#vkGetPipelineExecutablePropertiesKHR GetPipelineExecutablePropertiesKHR}</p>
+ * <p>{@link KHRPipelineExecutableProperties#vkGetPipelineExecutablePropertiesKHR GetPipelineExecutablePropertiesKHR}, {@link EXTPipelineProperties#vkGetPipelinePropertiesEXT GetPipelinePropertiesEXT}</p>
  * 
  * <h3>Layout</h3>
  * 

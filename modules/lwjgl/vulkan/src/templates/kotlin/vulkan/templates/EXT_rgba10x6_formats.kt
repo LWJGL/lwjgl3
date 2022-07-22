@@ -29,8 +29,8 @@ val EXT_rgba10x6_formats = "EXTRgba10x6Formats".nativeClassVK("EXT_rgba10x6_form
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>

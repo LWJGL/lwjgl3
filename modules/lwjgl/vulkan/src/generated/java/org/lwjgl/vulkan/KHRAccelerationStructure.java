@@ -41,10 +41,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dd>13</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.1</li>
- * <li>Requires {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing}</li>
- * <li>Requires {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address}</li>
- * <li>Requires {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations}</li>
+ * <li>Requires support for Vulkan 1.1</li>
+ * <li>Requires {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing} to be enabled for any device-level functionality</li>
+ * <li>Requires {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} to be enabled for any device-level functionality</li>
+ * <li>Requires {@link KHRDeferredHostOperations VK_KHR_deferred_host_operations} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -452,7 +452,7 @@ public class KHRAccelerationStructure {
      * <ul>
      * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-accelerationStructure">{@code accelerationStructure}</a> feature <b>must</b> be enabled</li>
      * <li>If {@link VkAccelerationStructureCreateInfoKHR}{@code ::deviceAddress} is not zero, the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-accelerationStructureCaptureReplay">{@code accelerationStructureCaptureReplay}</a> feature <b>must</b> be enabled</li>
-     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1625,7 +1625,7 @@ public class KHRAccelerationStructure {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1835,6 +1835,7 @@ public class KHRAccelerationStructure {
      * <li>Its {@code type}, and {@code flags} members are equal to {@code pBuildInfo→type} and {@code pBuildInfo→flags}, respectively.</li>
      * <li>{@code geometryCount} is less than or equal to {@code pBuildInfo→geometryCount}.</li>
      * <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, its {@code geometryType} member is equal to {@code pBuildInfo→geometryType}.</li>
+     * <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, its {@code flags} member is equal to the corresponding member of the same element in {@code pBuildInfo}.</li>
      * <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to {@link #VK_GEOMETRY_TYPE_TRIANGLES_KHR GEOMETRY_TYPE_TRIANGLES_KHR}, the {@code vertexFormat} and {@code indexType} members of {@code geometry.triangles} are equal to the corresponding members of the same element in {@code pBuildInfo}.</li>
      * <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to {@link #VK_GEOMETRY_TYPE_TRIANGLES_KHR GEOMETRY_TYPE_TRIANGLES_KHR}, the {@code maxVertex} member of {@code geometry.triangles} is less than or equal to the corresponding member of the same element in {@code pBuildInfo}.</li>
      * <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to {@link #VK_GEOMETRY_TYPE_TRIANGLES_KHR GEOMETRY_TYPE_TRIANGLES_KHR}, if the applicable address in the {@code transformData} member of {@code geometry.triangles} is not {@code NULL}, the corresponding {@code transformData.hostAddress} parameter in {@code pBuildInfo} is not {@code NULL}.</li>
@@ -1854,7 +1855,7 @@ public class KHRAccelerationStructure {
      * 
      * <ul>
      * <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-rayTracingPipeline">{@code rayTracingPipeline}</a> or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-rayQuery">{@code rayQuery}</a> feature <b>must</b> be enabled</li>
-     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
      * <li>If {@code pBuildInfo→geometryCount} is not 0, {@code pMaxPrimitiveCounts} <b>must</b> be a valid pointer to an array of {@code pBuildInfo→geometryCount} {@code uint32_t} values</li>
      * <li>If {@code pBuildInfo→pGeometries} or {@code pBuildInfo→ppGeometries} has a {@code geometryType} of {@link #VK_GEOMETRY_TYPE_INSTANCES_KHR GEOMETRY_TYPE_INSTANCES_KHR}, each {@code pMaxPrimitiveCounts}[i] <b>must</b> be less than or equal to {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR}{@code ::maxInstanceCount}</li>
      * </ul>

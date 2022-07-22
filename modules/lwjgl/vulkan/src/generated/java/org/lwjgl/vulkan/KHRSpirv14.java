@@ -29,8 +29,8 @@ package org.lwjgl.vulkan;
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
- * <li>Requires Vulkan 1.1</li>
- * <li>Requires {@link KHRShaderFloatControls VK_KHR_shader_float_controls}</li>
+ * <li>Requires support for Vulkan 1.1</li>
+ * <li>Requires {@link KHRShaderFloatControls VK_KHR_shader_float_controls} to be enabled for any device-level functionality</li>
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>

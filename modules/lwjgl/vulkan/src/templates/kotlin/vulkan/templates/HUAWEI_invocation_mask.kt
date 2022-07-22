@@ -61,14 +61,14 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
-                <li>Requires Vulkan 1.0</li>
-                <li>Requires {@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline}</li>
-                <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2}</li>
+                <li>Requires support for Vulkan 1.0</li>
+                <li>Requires {@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline} to be enabled for any device-level functionality</li>
+                <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2} to be enabled for any device-level functionality</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Yunpeng Zhu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_HUAWEI_invocation_mask]%20@yunxingzhu%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_HUAWEI_invocation_mask%20extension%3E%3E">yunxingzhu</a></li>
+                <li>Pan Gao <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_HUAWEI_invocation_mask]%20@PanGao-h%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_HUAWEI_invocation_mask%20extension%3E%3E">PanGao-h</a></li>
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>
@@ -88,7 +88,11 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
-                <li>Yunpeng Zhu, HuaWei</li>
+                <li>Yunpeng Zhu</li>
+                <li>Juntao Li, Huawei</li>
+                <li>Liang Chen, Huawei</li>
+                <li>Shaozhuang Shi, Huawei</li>
+                <li>Hailong Chu, Huawei</li>
             </ul></dd>
         </dl>
         """
@@ -145,7 +149,7 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-invocationMask">invocation mask image</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-invocationMask">{@code invocationMask}</a> feature <b>must</b> be enabled</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> be a valid {@code VkImageView} handle of type #IMAGE_VIEW_TYPE_2D</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have a format of #FORMAT_R8_UINT</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have been created with #IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI set</li>
