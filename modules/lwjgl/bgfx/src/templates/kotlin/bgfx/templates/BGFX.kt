@@ -437,7 +437,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "RESET_HDR10"..0x00010000,
         "RESET_HIDPI"..0x00020000,
         "RESET_DEPTH_CLAMP"..0x00040000,
-        "RESET_SUSPEND"..0x00080000
+        "RESET_SUSPEND"..0x00080000,
+        "RESET_TRANSPARENT_BACKBUFFER"..0x00100000
     ).javaDocLinks
 
     IntConstant(
@@ -469,16 +470,17 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "CAPS_TEXTURE_2D_ARRAY"..0x0000000000010000L,
         "CAPS_TEXTURE_3D"..0x0000000000020000L,
         "CAPS_TEXTURE_BLIT"..0x0000000000040000L,
-        "CAPS_TEXTURE_COMPARE_RESERVED"..0x0000000000080000L,
-        "CAPS_TEXTURE_COMPARE_LEQUAL"..0x0000000000100000L,
+        "CAPS_TRANSPARENT_BACKBUFFER"..0x0000000000080000L,
+        "CAPS_TEXTURE_COMPARE_RESERVED"..0x0000000000100000L,
+        "CAPS_TEXTURE_COMPARE_LEQUAL"..0x0000000000200000L,
         "CAPS_TEXTURE_COMPARE_ALL".."BGFX_CAPS_TEXTURE_COMPARE_RESERVED | BGFX_CAPS_TEXTURE_COMPARE_LEQUAL",
-        "CAPS_TEXTURE_CUBE_ARRAY"..0x0000000000200000L,
-        "CAPS_TEXTURE_DIRECT_ACCESS"..0x0000000000400000L,
-        "CAPS_TEXTURE_READ_BACK"..0x0000000000800000L,
-        "CAPS_VERTEX_ATTRIB_HALF"..0x0000000001000000L,
-        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000002000000L,
-        "CAPS_VERTEX_ID"..0x0000000004000000L,
-        "CAPS_VIEWPORT_LAYER_ARRAY"..0x0000000008000000L
+        "CAPS_TEXTURE_CUBE_ARRAY"..0x0000000000400000L,
+        "CAPS_TEXTURE_DIRECT_ACCESS"..0x0000000000800000L,
+        "CAPS_TEXTURE_READ_BACK"..0x0000000001000000L,
+        "CAPS_VERTEX_ATTRIB_HALF"..0x0000000002000000L,
+        "CAPS_VERTEX_ATTRIB_UINT10"..0x0000000004000000L,
+        "CAPS_VERTEX_ID"..0x0000000008000000L,
+        "CAPS_VIEWPORT_LAYER_ARRAY"..0x0000000010000000L
     )
 
     IntConstant(
@@ -519,7 +521,8 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
         "PCI_ID_APPLE"..0x106b.s,
         "PCI_ID_INTEL".."(short)0x8086",
         "PCI_ID_NVIDIA"..0x10de.s,
-        "PCI_ID_MICROSOFT"..0x1414.s
+        "PCI_ID_MICROSOFT"..0x1414.s,
+        "PCI_ID_ARM"..0x13b5.s
     )
 
     val CubeMapSides = ByteConstant(
@@ -1369,7 +1372,7 @@ RGBA16S
 
         bgfx_transient_index_buffer_t.p(
             "_tib",
-            "##BGFXTransientIndexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
+            "##BGFXTransientIndexBuffer structure will be filled, and will be valid for the duration of frame, and can be reused for multiple draw"
         ),
         uint32_t("_num", "number of indices to allocate"),
         bool("_index32", "set to {@code true} if input indices will be 32-bit")
@@ -1381,7 +1384,7 @@ RGBA16S
 
         bgfx_transient_vertex_buffer_t.p(
             "_tvb",
-            "##BGFXTransientVertexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
+            "##BGFXTransientVertexBuffer structure will be filled, and will be valid for the duration of frame, and can be reused for multiple draw"
         ),
         uint32_t("_num", "number of vertices to allocate"),
         bgfx_vertex_layout_t.const.p("_layout", "vertex layout")
@@ -1393,13 +1396,13 @@ RGBA16S
 
         bgfx_transient_vertex_buffer_t.p(
             "_tvb",
-            "##BGFXTransientVertexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
+            "##BGFXTransientVertexBuffer structure will be filled, and will be valid for the duration of frame, and can be reused for multiple draw"
         ),
         bgfx_vertex_layout_t.const.p("_layout", "vertex layout"),
         uint32_t("_numVertices", "number of vertices to allocate"),
         bgfx_transient_index_buffer_t.p(
             "_tib",
-            "##BGFXTransientIndexBuffer structure is filled and is valid for the duration of frame, and it can be reused for multiple draw calls"
+            "##BGFXTransientIndexBuffer structure will be filled, and will be valid for the duration of frame, and can be reused for multiple draw"
         ),
         uint32_t("_numIndices", "number of indices to allocate"),
         bool("_index32", "set to {@code true} if input indices will be 32-bit")
@@ -1411,7 +1414,7 @@ RGBA16S
 
         bgfx_instance_data_buffer_t.p(
             "_idb",
-            "##BGFXInstanceDataBuffer structure is filled and is valid for duration of frame, and it can be reused for multiple draw calls"
+            "##BGFXInstanceDataBuffer structure will be filled, and will be valid for duration of frame, and can be reused for multiple draw"
         ),
         uint32_t("_num", "number of instances"),
         MapToInt..uint16_t("_stride", "instance stride. Must be multiple of 16")
