@@ -596,6 +596,14 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
     )
 
     void(
+        "compile_options_set_hlsl_16bit_types",
+        "Sets whether 16-bit types are supported in HLSL or not.",
+
+        shaderc_compile_options_t("options", ""),
+        bool("enable", "")
+    )
+
+    void(
         "compile_options_set_invert_y",
         "Sets whether the compiler should invert {@code position.Y} output in vertex shader.",
 

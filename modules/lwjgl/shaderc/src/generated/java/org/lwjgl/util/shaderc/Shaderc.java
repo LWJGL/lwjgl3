@@ -55,6 +55,7 @@ public class Shaderc {
             compile_options_set_hlsl_register_set_and_binding_for_stage = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding_for_stage"),
             compile_options_set_hlsl_register_set_and_binding           = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding"),
             compile_options_set_hlsl_functionality1                     = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_functionality1"),
+            compile_options_set_hlsl_16bit_types                        = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_16bit_types"),
             compile_options_set_invert_y                                = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_invert_y"),
             compile_options_set_nan_clamp                               = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_nan_clamp"),
             compile_into_spv                                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_into_spv"),
@@ -999,6 +1000,17 @@ public class Shaderc {
     /** Sets whether the compiler should enable extension {@code SPV_GOOGLE_hlsl_functionality1}. */
     public static void shaderc_compile_options_set_hlsl_functionality1(@NativeType("shaderc_compile_options_t") long options, @NativeType("bool") boolean enable) {
         long __functionAddress = Functions.compile_options_set_hlsl_functionality1;
+        if (CHECKS) {
+            check(options);
+        }
+        invokePV(options, enable, __functionAddress);
+    }
+
+    // --- [ shaderc_compile_options_set_hlsl_16bit_types ] ---
+
+    /** Sets whether 16-bit types are supported in HLSL or not. */
+    public static void shaderc_compile_options_set_hlsl_16bit_types(@NativeType("shaderc_compile_options_t") long options, @NativeType("bool") boolean enable) {
+        long __functionAddress = Functions.compile_options_set_hlsl_16bit_types;
         if (CHECKS) {
             check(options);
         }
