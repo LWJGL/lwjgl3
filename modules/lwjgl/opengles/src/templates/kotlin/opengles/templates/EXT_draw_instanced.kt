@@ -17,6 +17,6 @@ val EXT_draw_instanced = "EXTDrawInstanced".nativeClassGLES("EXT_draw_instanced"
         the vertex program to compute per-instance values, typically an object's transform.
         """
 
-    EXT_instanced_arrays reuse "DrawArraysInstancedEXT"
-    EXT_instanced_arrays reuse "DrawElementsInstancedEXT"
+    reuse(EXT_instanced_arrays, "DrawArraysInstancedEXT")
+    reuse(EXT_instanced_arrays, "DrawElementsInstancedEXT")
 }

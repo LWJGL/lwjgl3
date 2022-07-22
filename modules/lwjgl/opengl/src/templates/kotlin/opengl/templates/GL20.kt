@@ -84,48 +84,48 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         "SAMPLER_2D_SHADOW"..0x8B62
     )
 
-    GL20C reuse "CreateProgram"
-    GL20C reuse "DeleteProgram"
-    GL20C reuse "IsProgram"
-    GL20C reuse "CreateShader"
-    GL20C reuse "DeleteShader"
-    GL20C reuse "IsShader"
-    GL20C reuse "AttachShader"
-    GL20C reuse "DetachShader"
-    GL20C reuse "ShaderSource"
-    GL20C reuse "CompileShader"
-    GL20C reuse "LinkProgram"
-    GL20C reuse "UseProgram"
-    GL20C reuse "ValidateProgram"
-    GL20C reuse "Uniform1f"
-    GL20C reuse "Uniform2f"
-    GL20C reuse "Uniform3f"
-    GL20C reuse "Uniform4f"
-    GL20C reuse "Uniform1i"
-    GL20C reuse "Uniform2i"
-    GL20C reuse "Uniform3i"
-    GL20C reuse "Uniform4i"
-    GL20C reuse "Uniform1fv"
-    GL20C reuse "Uniform2fv"
-    GL20C reuse "Uniform3fv"
-    GL20C reuse "Uniform4fv"
-    GL20C reuse "Uniform1iv"
-    GL20C reuse "Uniform2iv"
-    GL20C reuse "Uniform3iv"
-    GL20C reuse "Uniform4iv"
-    GL20C reuse "UniformMatrix2fv"
-    GL20C reuse "UniformMatrix3fv"
-    GL20C reuse "UniformMatrix4fv"
-    GL20C reuse "GetShaderiv"
-    GL20C reuse "GetProgramiv"
-    GL20C reuse "GetShaderInfoLog"
-    GL20C reuse "GetProgramInfoLog"
-    GL20C reuse "GetAttachedShaders"
-    GL20C reuse "GetUniformLocation"
-    GL20C reuse "GetActiveUniform"
-    GL20C reuse "GetUniformfv"
-    GL20C reuse "GetUniformiv"
-    GL20C reuse "GetShaderSource"
+    reuse(GL20C, "CreateProgram")
+    reuse(GL20C, "DeleteProgram")
+    reuse(GL20C, "IsProgram")
+    reuse(GL20C, "CreateShader")
+    reuse(GL20C, "DeleteShader")
+    reuse(GL20C, "IsShader")
+    reuse(GL20C, "AttachShader")
+    reuse(GL20C, "DetachShader")
+    reuse(GL20C, "ShaderSource")
+    reuse(GL20C, "CompileShader")
+    reuse(GL20C, "LinkProgram")
+    reuse(GL20C, "UseProgram")
+    reuse(GL20C, "ValidateProgram")
+    reuse(GL20C, "Uniform1f")
+    reuse(GL20C, "Uniform2f")
+    reuse(GL20C, "Uniform3f")
+    reuse(GL20C, "Uniform4f")
+    reuse(GL20C, "Uniform1i")
+    reuse(GL20C, "Uniform2i")
+    reuse(GL20C, "Uniform3i")
+    reuse(GL20C, "Uniform4i")
+    reuse(GL20C, "Uniform1fv")
+    reuse(GL20C, "Uniform2fv")
+    reuse(GL20C, "Uniform3fv")
+    reuse(GL20C, "Uniform4fv")
+    reuse(GL20C, "Uniform1iv")
+    reuse(GL20C, "Uniform2iv")
+    reuse(GL20C, "Uniform3iv")
+    reuse(GL20C, "Uniform4iv")
+    reuse(GL20C, "UniformMatrix2fv")
+    reuse(GL20C, "UniformMatrix3fv")
+    reuse(GL20C, "UniformMatrix4fv")
+    reuse(GL20C, "GetShaderiv")
+    reuse(GL20C, "GetProgramiv")
+    reuse(GL20C, "GetShaderInfoLog")
+    reuse(GL20C, "GetProgramInfoLog")
+    reuse(GL20C, "GetAttachedShaders")
+    reuse(GL20C, "GetUniformLocation")
+    reuse(GL20C, "GetActiveUniform")
+    reuse(GL20C, "GetUniformfv")
+    reuse(GL20C, "GetUniformiv")
+    reuse(GL20C, "GetShaderSource")
 
     // ARB_vertex_shader
 
@@ -174,52 +174,52 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         "VERTEX_ATTRIB_ARRAY_POINTER"..0x8645
     )
 
-    GL20C reuse "VertexAttrib1f"
-    GL20C reuse "VertexAttrib1s"
-    GL20C reuse "VertexAttrib1d"
-    GL20C reuse "VertexAttrib2f"
-    GL20C reuse "VertexAttrib2s"
-    GL20C reuse "VertexAttrib2d"
-    GL20C reuse "VertexAttrib3f"
-    GL20C reuse "VertexAttrib3s"
-    GL20C reuse "VertexAttrib3d"
-    GL20C reuse "VertexAttrib4f"
-    GL20C reuse "VertexAttrib4s"
-    GL20C reuse "VertexAttrib4d"
-    GL20C reuse "VertexAttrib4Nub"
-    GL20C reuse "VertexAttrib1fv"
-    GL20C reuse "VertexAttrib1sv"
-    GL20C reuse "VertexAttrib1dv"
-    GL20C reuse "VertexAttrib2fv"
-    GL20C reuse "VertexAttrib2sv"
-    GL20C reuse "VertexAttrib2dv"
-    GL20C reuse "VertexAttrib3fv"
-    GL20C reuse "VertexAttrib3sv"
-    GL20C reuse "VertexAttrib3dv"
-    GL20C reuse "VertexAttrib4fv"
-    GL20C reuse "VertexAttrib4sv"
-    GL20C reuse "VertexAttrib4dv"
-    GL20C reuse "VertexAttrib4iv"
-    GL20C reuse "VertexAttrib4bv"
-    GL20C reuse "VertexAttrib4ubv"
-    GL20C reuse "VertexAttrib4usv"
-    GL20C reuse "VertexAttrib4uiv"
-    GL20C reuse "VertexAttrib4Nbv"
-    GL20C reuse "VertexAttrib4Nsv"
-    GL20C reuse "VertexAttrib4Niv"
-    GL20C reuse "VertexAttrib4Nubv"
-    GL20C reuse "VertexAttrib4Nusv"
-    GL20C reuse "VertexAttrib4Nuiv"
-    GL20C reuse "VertexAttribPointer"
-    GL20C reuse "EnableVertexAttribArray"
-    GL20C reuse "DisableVertexAttribArray"
-    GL20C reuse "BindAttribLocation"
-    GL20C reuse "GetActiveAttrib"
-    GL20C reuse "GetAttribLocation"
-    GL20C reuse "GetVertexAttribiv"
-    GL20C reuse "GetVertexAttribfv"
-    GL20C reuse "GetVertexAttribdv"
-    GL20C reuse "GetVertexAttribPointerv"
+    reuse(GL20C, "VertexAttrib1f")
+    reuse(GL20C, "VertexAttrib1s")
+    reuse(GL20C, "VertexAttrib1d")
+    reuse(GL20C, "VertexAttrib2f")
+    reuse(GL20C, "VertexAttrib2s")
+    reuse(GL20C, "VertexAttrib2d")
+    reuse(GL20C, "VertexAttrib3f")
+    reuse(GL20C, "VertexAttrib3s")
+    reuse(GL20C, "VertexAttrib3d")
+    reuse(GL20C, "VertexAttrib4f")
+    reuse(GL20C, "VertexAttrib4s")
+    reuse(GL20C, "VertexAttrib4d")
+    reuse(GL20C, "VertexAttrib4Nub")
+    reuse(GL20C, "VertexAttrib1fv")
+    reuse(GL20C, "VertexAttrib1sv")
+    reuse(GL20C, "VertexAttrib1dv")
+    reuse(GL20C, "VertexAttrib2fv")
+    reuse(GL20C, "VertexAttrib2sv")
+    reuse(GL20C, "VertexAttrib2dv")
+    reuse(GL20C, "VertexAttrib3fv")
+    reuse(GL20C, "VertexAttrib3sv")
+    reuse(GL20C, "VertexAttrib3dv")
+    reuse(GL20C, "VertexAttrib4fv")
+    reuse(GL20C, "VertexAttrib4sv")
+    reuse(GL20C, "VertexAttrib4dv")
+    reuse(GL20C, "VertexAttrib4iv")
+    reuse(GL20C, "VertexAttrib4bv")
+    reuse(GL20C, "VertexAttrib4ubv")
+    reuse(GL20C, "VertexAttrib4usv")
+    reuse(GL20C, "VertexAttrib4uiv")
+    reuse(GL20C, "VertexAttrib4Nbv")
+    reuse(GL20C, "VertexAttrib4Nsv")
+    reuse(GL20C, "VertexAttrib4Niv")
+    reuse(GL20C, "VertexAttrib4Nubv")
+    reuse(GL20C, "VertexAttrib4Nusv")
+    reuse(GL20C, "VertexAttrib4Nuiv")
+    reuse(GL20C, "VertexAttribPointer")
+    reuse(GL20C, "EnableVertexAttribArray")
+    reuse(GL20C, "DisableVertexAttribArray")
+    reuse(GL20C, "BindAttribLocation")
+    reuse(GL20C, "GetActiveAttrib")
+    reuse(GL20C, "GetAttribLocation")
+    reuse(GL20C, "GetVertexAttribiv")
+    reuse(GL20C, "GetVertexAttribfv")
+    reuse(GL20C, "GetVertexAttribdv")
+    reuse(GL20C, "GetVertexAttribPointerv")
 
     // ARB_fragment_shader
 
@@ -265,7 +265,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         "DRAW_BUFFER15"..0x8834
     )
 
-    GL20C reuse "DrawBuffers"
+    reuse(GL20C, "DrawBuffers")
 
     // ARB_point_sprite
 
@@ -309,7 +309,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         "BLEND_EQUATION_ALPHA"..0x883D
     )
 
-    GL20C reuse "BlendEquationSeparate"
+    reuse(GL20C, "BlendEquationSeparate")
 
     // ATI_separate_stencil
 
@@ -325,7 +325,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
         "STENCIL_BACK_WRITEMASK"..0x8CA5
     )
 
-    GL20C reuse "StencilOpSeparate"
-    GL20C reuse "StencilFuncSeparate"
-    GL20C reuse "StencilMaskSeparate"
+    reuse(GL20C, "StencilOpSeparate")
+    reuse(GL20C, "StencilFuncSeparate")
+    reuse(GL20C, "StencilMaskSeparate")
 }

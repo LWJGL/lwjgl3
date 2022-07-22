@@ -65,11 +65,11 @@ val GL41 = "GL41".nativeClassGL("GL41") {
         "RGB565"..0x8D62
     )
 
-    GL41C reuse "ReleaseShaderCompiler"
-    GL41C reuse "ShaderBinary"
-    GL41C reuse "GetShaderPrecisionFormat"
-    GL41C reuse "DepthRangef"
-    GL41C reuse "ClearDepthf"
+    reuse(GL41C, "ReleaseShaderCompiler")
+    reuse(GL41C, "ShaderBinary")
+    reuse(GL41C, "GetShaderPrecisionFormat")
+    reuse(GL41C, "DepthRangef")
+    reuse(GL41C, "ClearDepthf")
 
     // ARB_get_program_binary
 
@@ -92,9 +92,9 @@ val GL41 = "GL41".nativeClassGL("GL41") {
         "PROGRAM_BINARY_FORMATS"..0x87FF
     )
 
-    GL41C reuse "GetProgramBinary"
-    GL41C reuse "ProgramBinary"
-    GL41C reuse "ProgramParameteri"
+    reuse(GL41C, "GetProgramBinary")
+    reuse(GL41C, "ProgramBinary")
+    reuse(GL41C, "ProgramParameteri")
 
     // ARB_separate_shader_objects
 
@@ -127,79 +127,79 @@ val GL41 = "GL41".nativeClassGL("GL41") {
         "PROGRAM_PIPELINE_BINDING"..0x825A
     )
 
-    GL41C reuse "UseProgramStages"
-    GL41C reuse "ActiveShaderProgram"
-    GL41C reuse "CreateShaderProgramv"
-    GL41C reuse "BindProgramPipeline"
-    GL41C reuse "DeleteProgramPipelines"
-    GL41C reuse "GenProgramPipelines"
-    GL41C reuse "IsProgramPipeline"
-    GL41C reuse "GetProgramPipelineiv"
-    GL41C reuse "ProgramUniform1i"
-    GL41C reuse "ProgramUniform2i"
-    GL41C reuse "ProgramUniform3i"
-    GL41C reuse "ProgramUniform4i"
-    GL41C reuse "ProgramUniform1ui"
-    GL41C reuse "ProgramUniform2ui"
-    GL41C reuse "ProgramUniform3ui"
-    GL41C reuse "ProgramUniform4ui"
-    GL41C reuse "ProgramUniform1f"
-    GL41C reuse "ProgramUniform2f"
-    GL41C reuse "ProgramUniform3f"
-    GL41C reuse "ProgramUniform4f"
-    GL41C reuse "ProgramUniform1d"
-    GL41C reuse "ProgramUniform2d"
-    GL41C reuse "ProgramUniform3d"
-    GL41C reuse "ProgramUniform4d"
-    GL41C reuse "ProgramUniform1iv"
-    GL41C reuse "ProgramUniform2iv"
-    GL41C reuse "ProgramUniform3iv"
-    GL41C reuse "ProgramUniform4iv"
-    GL41C reuse "ProgramUniform1uiv"
-    GL41C reuse "ProgramUniform2uiv"
-    GL41C reuse "ProgramUniform3uiv"
-    GL41C reuse "ProgramUniform4uiv"
-    GL41C reuse "ProgramUniform1fv"
-    GL41C reuse "ProgramUniform2fv"
-    GL41C reuse "ProgramUniform3fv"
-    GL41C reuse "ProgramUniform4fv"
-    GL41C reuse "ProgramUniform1dv"
-    GL41C reuse "ProgramUniform2dv"
-    GL41C reuse "ProgramUniform3dv"
-    GL41C reuse "ProgramUniform4dv"
-    GL41C reuse "ProgramUniformMatrix2fv"
-    GL41C reuse "ProgramUniformMatrix3fv"
-    GL41C reuse "ProgramUniformMatrix4fv"
-    GL41C reuse "ProgramUniformMatrix2dv"
-    GL41C reuse "ProgramUniformMatrix3dv"
-    GL41C reuse "ProgramUniformMatrix4dv"
-    GL41C reuse "ProgramUniformMatrix2x3fv"
-    GL41C reuse "ProgramUniformMatrix3x2fv"
-    GL41C reuse "ProgramUniformMatrix2x4fv"
-    GL41C reuse "ProgramUniformMatrix4x2fv"
-    GL41C reuse "ProgramUniformMatrix3x4fv"
-    GL41C reuse "ProgramUniformMatrix4x3fv"
-    GL41C reuse "ProgramUniformMatrix2x3dv"
-    GL41C reuse "ProgramUniformMatrix3x2dv"
-    GL41C reuse "ProgramUniformMatrix2x4dv"
-    GL41C reuse "ProgramUniformMatrix4x2dv"
-    GL41C reuse "ProgramUniformMatrix3x4dv"
-    GL41C reuse "ProgramUniformMatrix4x3dv"
-    GL41C reuse "ValidateProgramPipeline"
-    GL41C reuse "GetProgramPipelineInfoLog"
+    reuse(GL41C, "UseProgramStages")
+    reuse(GL41C, "ActiveShaderProgram")
+    reuse(GL41C, "CreateShaderProgramv")
+    reuse(GL41C, "BindProgramPipeline")
+    reuse(GL41C, "DeleteProgramPipelines")
+    reuse(GL41C, "GenProgramPipelines")
+    reuse(GL41C, "IsProgramPipeline")
+    reuse(GL41C, "GetProgramPipelineiv")
+    reuse(GL41C, "ProgramUniform1i")
+    reuse(GL41C, "ProgramUniform2i")
+    reuse(GL41C, "ProgramUniform3i")
+    reuse(GL41C, "ProgramUniform4i")
+    reuse(GL41C, "ProgramUniform1ui")
+    reuse(GL41C, "ProgramUniform2ui")
+    reuse(GL41C, "ProgramUniform3ui")
+    reuse(GL41C, "ProgramUniform4ui")
+    reuse(GL41C, "ProgramUniform1f")
+    reuse(GL41C, "ProgramUniform2f")
+    reuse(GL41C, "ProgramUniform3f")
+    reuse(GL41C, "ProgramUniform4f")
+    reuse(GL41C, "ProgramUniform1d")
+    reuse(GL41C, "ProgramUniform2d")
+    reuse(GL41C, "ProgramUniform3d")
+    reuse(GL41C, "ProgramUniform4d")
+    reuse(GL41C, "ProgramUniform1iv")
+    reuse(GL41C, "ProgramUniform2iv")
+    reuse(GL41C, "ProgramUniform3iv")
+    reuse(GL41C, "ProgramUniform4iv")
+    reuse(GL41C, "ProgramUniform1uiv")
+    reuse(GL41C, "ProgramUniform2uiv")
+    reuse(GL41C, "ProgramUniform3uiv")
+    reuse(GL41C, "ProgramUniform4uiv")
+    reuse(GL41C, "ProgramUniform1fv")
+    reuse(GL41C, "ProgramUniform2fv")
+    reuse(GL41C, "ProgramUniform3fv")
+    reuse(GL41C, "ProgramUniform4fv")
+    reuse(GL41C, "ProgramUniform1dv")
+    reuse(GL41C, "ProgramUniform2dv")
+    reuse(GL41C, "ProgramUniform3dv")
+    reuse(GL41C, "ProgramUniform4dv")
+    reuse(GL41C, "ProgramUniformMatrix2fv")
+    reuse(GL41C, "ProgramUniformMatrix3fv")
+    reuse(GL41C, "ProgramUniformMatrix4fv")
+    reuse(GL41C, "ProgramUniformMatrix2dv")
+    reuse(GL41C, "ProgramUniformMatrix3dv")
+    reuse(GL41C, "ProgramUniformMatrix4dv")
+    reuse(GL41C, "ProgramUniformMatrix2x3fv")
+    reuse(GL41C, "ProgramUniformMatrix3x2fv")
+    reuse(GL41C, "ProgramUniformMatrix2x4fv")
+    reuse(GL41C, "ProgramUniformMatrix4x2fv")
+    reuse(GL41C, "ProgramUniformMatrix3x4fv")
+    reuse(GL41C, "ProgramUniformMatrix4x3fv")
+    reuse(GL41C, "ProgramUniformMatrix2x3dv")
+    reuse(GL41C, "ProgramUniformMatrix3x2dv")
+    reuse(GL41C, "ProgramUniformMatrix2x4dv")
+    reuse(GL41C, "ProgramUniformMatrix4x2dv")
+    reuse(GL41C, "ProgramUniformMatrix3x4dv")
+    reuse(GL41C, "ProgramUniformMatrix4x3dv")
+    reuse(GL41C, "ValidateProgramPipeline")
+    reuse(GL41C, "GetProgramPipelineInfoLog")
 
     // ARB_vertex_attrib_64bit
 
-    GL41C reuse "VertexAttribL1d"
-    GL41C reuse "VertexAttribL2d"
-    GL41C reuse "VertexAttribL3d"
-    GL41C reuse "VertexAttribL4d"
-    GL41C reuse "VertexAttribL1dv"
-    GL41C reuse "VertexAttribL2dv"
-    GL41C reuse "VertexAttribL3dv"
-    GL41C reuse "VertexAttribL4dv"
-    GL41C reuse "VertexAttribLPointer"
-    GL41C reuse "GetVertexAttribLdv"
+    reuse(GL41C, "VertexAttribL1d")
+    reuse(GL41C, "VertexAttribL2d")
+    reuse(GL41C, "VertexAttribL3d")
+    reuse(GL41C, "VertexAttribL4d")
+    reuse(GL41C, "VertexAttribL1dv")
+    reuse(GL41C, "VertexAttribL2dv")
+    reuse(GL41C, "VertexAttribL3dv")
+    reuse(GL41C, "VertexAttribL4dv")
+    reuse(GL41C, "VertexAttribLPointer")
+    reuse(GL41C, "GetVertexAttribLdv")
 
     // ARB_viewport_array
 
@@ -219,14 +219,14 @@ val GL41 = "GL41".nativeClassGL("GL41") {
         "UNDEFINED_VERTEX"..0x8260
     )
 
-    GL41C reuse "ViewportArrayv"
-    GL41C reuse "ViewportIndexedf"
-    GL41C reuse "ViewportIndexedfv"
-    GL41C reuse "ScissorArrayv"
-    GL41C reuse "ScissorIndexed"
-    GL41C reuse "ScissorIndexedv"
-    GL41C reuse "DepthRangeArrayv"
-    GL41C reuse "DepthRangeIndexed"
-    GL41C reuse "GetFloati_v"
-    GL41C reuse "GetDoublei_v"
+    reuse(GL41C, "ViewportArrayv")
+    reuse(GL41C, "ViewportIndexedf")
+    reuse(GL41C, "ViewportIndexedfv")
+    reuse(GL41C, "ScissorArrayv")
+    reuse(GL41C, "ScissorIndexed")
+    reuse(GL41C, "ScissorIndexedv")
+    reuse(GL41C, "DepthRangeArrayv")
+    reuse(GL41C, "DepthRangeIndexed")
+    reuse(GL41C, "GetFloati_v")
+    reuse(GL41C, "GetDoublei_v")
 }

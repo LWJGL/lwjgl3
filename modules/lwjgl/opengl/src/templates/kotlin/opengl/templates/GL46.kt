@@ -49,8 +49,8 @@ val GL46 = "GL46".nativeClassGL("GL46") {
         "PARAMETER_BUFFER_BINDING"..0x80EF
     )
 
-    GL46C reuse "MultiDrawArraysIndirectCount"
-    GL46C reuse "MultiDrawElementsIndirectCount"
+    reuse(GL46C, "MultiDrawArraysIndirectCount")
+    reuse(GL46C, "MultiDrawElementsIndirectCount")
 
     // ARB_pipeline_statistics_query
 
@@ -80,7 +80,7 @@ val GL46 = "GL46".nativeClassGL("GL46") {
         "POLYGON_OFFSET_CLAMP"..0x8E1B
     )
 
-    GL46C reuse "PolygonOffsetClamp"
+    reuse(GL46C, "PolygonOffsetClamp")
 
     // KHR_no_error
 
@@ -104,7 +104,7 @@ val GL46 = "GL46".nativeClassGL("GL46") {
         "SPIR_V_BINARY"..0x9552
     )
 
-    GL46C reuse "SpecializeShader"
+    reuse(GL46C, "SpecializeShader")
 
     // ARB_spirv_extensions
 

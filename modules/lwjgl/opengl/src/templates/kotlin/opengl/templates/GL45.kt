@@ -47,7 +47,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         "CLIP_DEPTH_MODE"..0x935D
     )
 
-    GL45C reuse "ClipControl"
+    reuse(GL45C, "ClipControl")
 
     // ARB_conditional_render_inverted
 
@@ -83,116 +83,116 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         "QUERY_TARGET"..0x82EA
     )
 
-    GL45C reuse "CreateTransformFeedbacks"
-    GL45C reuse "TransformFeedbackBufferBase"
-    GL45C reuse "TransformFeedbackBufferRange"
-    GL45C reuse "GetTransformFeedbackiv"
-    GL45C reuse "GetTransformFeedbacki_v"
-    GL45C reuse "GetTransformFeedbacki64_v"
-    GL45C reuse "CreateBuffers"
-    GL45C reuse "NamedBufferStorage"
-    GL45C reuse "NamedBufferData"
-    GL45C reuse "NamedBufferSubData"
-    GL45C reuse "CopyNamedBufferSubData"
-    GL45C reuse "ClearNamedBufferData"
-    GL45C reuse "ClearNamedBufferSubData"
-    GL45C reuse "MapNamedBuffer"
-    GL45C reuse "MapNamedBufferRange"
-    GL45C reuse "UnmapNamedBuffer"
-    GL45C reuse "FlushMappedNamedBufferRange"
-    GL45C reuse "GetNamedBufferParameteriv"
-    GL45C reuse "GetNamedBufferParameteri64v"
-    GL45C reuse "GetNamedBufferPointerv"
-    GL45C reuse "GetNamedBufferSubData"
-    GL45C reuse "CreateFramebuffers"
-    GL45C reuse "NamedFramebufferRenderbuffer"
-    GL45C reuse "NamedFramebufferParameteri"
-    GL45C reuse "NamedFramebufferTexture"
-    GL45C reuse "NamedFramebufferTextureLayer"
-    GL45C reuse "NamedFramebufferDrawBuffer"
-    GL45C reuse "NamedFramebufferDrawBuffers"
-    GL45C reuse "NamedFramebufferReadBuffer"
-    GL45C reuse "InvalidateNamedFramebufferData"
-    GL45C reuse "InvalidateNamedFramebufferSubData"
-    GL45C reuse "ClearNamedFramebufferiv"
-    GL45C reuse "ClearNamedFramebufferuiv"
-    GL45C reuse "ClearNamedFramebufferfv"
-    GL45C reuse "ClearNamedFramebufferfi"
-    GL45C reuse "BlitNamedFramebuffer"
-    GL45C reuse "CheckNamedFramebufferStatus"
-    GL45C reuse "GetNamedFramebufferParameteriv"
-    GL45C reuse "GetNamedFramebufferAttachmentParameteriv"
-    GL45C reuse "CreateRenderbuffers"
-    GL45C reuse "NamedRenderbufferStorage"
-    GL45C reuse "NamedRenderbufferStorageMultisample"
-    GL45C reuse "GetNamedRenderbufferParameteriv"
-    GL45C reuse "CreateTextures"
-    GL45C reuse "TextureBuffer"
-    GL45C reuse "TextureBufferRange"
-    GL45C reuse "TextureStorage1D"
-    GL45C reuse "TextureStorage2D"
-    GL45C reuse "TextureStorage3D"
-    GL45C reuse "TextureStorage2DMultisample"
-    GL45C reuse "TextureStorage3DMultisample"
-    GL45C reuse "TextureSubImage1D"
-    GL45C reuse "TextureSubImage2D"
-    GL45C reuse "TextureSubImage3D"
-    GL45C reuse "CompressedTextureSubImage1D"
-    GL45C reuse "CompressedTextureSubImage2D"
-    GL45C reuse "CompressedTextureSubImage3D"
-    GL45C reuse "CopyTextureSubImage1D"
-    GL45C reuse "CopyTextureSubImage2D"
-    GL45C reuse "CopyTextureSubImage3D"
-    GL45C reuse "TextureParameterf"
-    GL45C reuse "TextureParameterfv"
-    GL45C reuse "TextureParameteri"
-    GL45C reuse "TextureParameterIiv"
-    GL45C reuse "TextureParameterIuiv"
-    GL45C reuse "TextureParameteriv"
-    GL45C reuse "GenerateTextureMipmap"
-    GL45C reuse "BindTextureUnit"
-    GL45C reuse "GetTextureImage"
-    GL45C reuse "GetCompressedTextureImage"
-    GL45C reuse "GetTextureLevelParameterfv"
-    GL45C reuse "GetTextureLevelParameteriv"
-    GL45C reuse "GetTextureParameterfv"
-    GL45C reuse "GetTextureParameterIiv"
-    GL45C reuse "GetTextureParameterIuiv"
-    GL45C reuse "GetTextureParameteriv"
-    GL45C reuse "CreateVertexArrays"
-    GL45C reuse "DisableVertexArrayAttrib"
-    GL45C reuse "EnableVertexArrayAttrib"
-    GL45C reuse "VertexArrayElementBuffer"
-    GL45C reuse "VertexArrayVertexBuffer"
-    GL45C reuse "VertexArrayVertexBuffers"
-    GL45C reuse "VertexArrayAttribFormat"
-    GL45C reuse "VertexArrayAttribIFormat"
-    GL45C reuse "VertexArrayAttribLFormat"
-    GL45C reuse "VertexArrayAttribBinding"
-    GL45C reuse "VertexArrayBindingDivisor"
-    GL45C reuse "GetVertexArrayiv"
-    GL45C reuse "GetVertexArrayIndexediv"
-    GL45C reuse "GetVertexArrayIndexed64iv"
-    GL45C reuse "CreateSamplers"
-    GL45C reuse "CreateProgramPipelines"
-    GL45C reuse "CreateQueries"
-    GL45C reuse "GetQueryBufferObjectiv"
-    GL45C reuse "GetQueryBufferObjectuiv"
-    GL45C reuse "GetQueryBufferObjecti64v"
-    GL45C reuse "GetQueryBufferObjectui64v"
+    reuse(GL45C, "CreateTransformFeedbacks")
+    reuse(GL45C, "TransformFeedbackBufferBase")
+    reuse(GL45C, "TransformFeedbackBufferRange")
+    reuse(GL45C, "GetTransformFeedbackiv")
+    reuse(GL45C, "GetTransformFeedbacki_v")
+    reuse(GL45C, "GetTransformFeedbacki64_v")
+    reuse(GL45C, "CreateBuffers")
+    reuse(GL45C, "NamedBufferStorage")
+    reuse(GL45C, "NamedBufferData")
+    reuse(GL45C, "NamedBufferSubData")
+    reuse(GL45C, "CopyNamedBufferSubData")
+    reuse(GL45C, "ClearNamedBufferData")
+    reuse(GL45C, "ClearNamedBufferSubData")
+    reuse(GL45C, "MapNamedBuffer")
+    reuse(GL45C, "MapNamedBufferRange")
+    reuse(GL45C, "UnmapNamedBuffer")
+    reuse(GL45C, "FlushMappedNamedBufferRange")
+    reuse(GL45C, "GetNamedBufferParameteriv")
+    reuse(GL45C, "GetNamedBufferParameteri64v")
+    reuse(GL45C, "GetNamedBufferPointerv")
+    reuse(GL45C, "GetNamedBufferSubData")
+    reuse(GL45C, "CreateFramebuffers")
+    reuse(GL45C, "NamedFramebufferRenderbuffer")
+    reuse(GL45C, "NamedFramebufferParameteri")
+    reuse(GL45C, "NamedFramebufferTexture")
+    reuse(GL45C, "NamedFramebufferTextureLayer")
+    reuse(GL45C, "NamedFramebufferDrawBuffer")
+    reuse(GL45C, "NamedFramebufferDrawBuffers")
+    reuse(GL45C, "NamedFramebufferReadBuffer")
+    reuse(GL45C, "InvalidateNamedFramebufferData")
+    reuse(GL45C, "InvalidateNamedFramebufferSubData")
+    reuse(GL45C, "ClearNamedFramebufferiv")
+    reuse(GL45C, "ClearNamedFramebufferuiv")
+    reuse(GL45C, "ClearNamedFramebufferfv")
+    reuse(GL45C, "ClearNamedFramebufferfi")
+    reuse(GL45C, "BlitNamedFramebuffer")
+    reuse(GL45C, "CheckNamedFramebufferStatus")
+    reuse(GL45C, "GetNamedFramebufferParameteriv")
+    reuse(GL45C, "GetNamedFramebufferAttachmentParameteriv")
+    reuse(GL45C, "CreateRenderbuffers")
+    reuse(GL45C, "NamedRenderbufferStorage")
+    reuse(GL45C, "NamedRenderbufferStorageMultisample")
+    reuse(GL45C, "GetNamedRenderbufferParameteriv")
+    reuse(GL45C, "CreateTextures")
+    reuse(GL45C, "TextureBuffer")
+    reuse(GL45C, "TextureBufferRange")
+    reuse(GL45C, "TextureStorage1D")
+    reuse(GL45C, "TextureStorage2D")
+    reuse(GL45C, "TextureStorage3D")
+    reuse(GL45C, "TextureStorage2DMultisample")
+    reuse(GL45C, "TextureStorage3DMultisample")
+    reuse(GL45C, "TextureSubImage1D")
+    reuse(GL45C, "TextureSubImage2D")
+    reuse(GL45C, "TextureSubImage3D")
+    reuse(GL45C, "CompressedTextureSubImage1D")
+    reuse(GL45C, "CompressedTextureSubImage2D")
+    reuse(GL45C, "CompressedTextureSubImage3D")
+    reuse(GL45C, "CopyTextureSubImage1D")
+    reuse(GL45C, "CopyTextureSubImage2D")
+    reuse(GL45C, "CopyTextureSubImage3D")
+    reuse(GL45C, "TextureParameterf")
+    reuse(GL45C, "TextureParameterfv")
+    reuse(GL45C, "TextureParameteri")
+    reuse(GL45C, "TextureParameterIiv")
+    reuse(GL45C, "TextureParameterIuiv")
+    reuse(GL45C, "TextureParameteriv")
+    reuse(GL45C, "GenerateTextureMipmap")
+    reuse(GL45C, "BindTextureUnit")
+    reuse(GL45C, "GetTextureImage")
+    reuse(GL45C, "GetCompressedTextureImage")
+    reuse(GL45C, "GetTextureLevelParameterfv")
+    reuse(GL45C, "GetTextureLevelParameteriv")
+    reuse(GL45C, "GetTextureParameterfv")
+    reuse(GL45C, "GetTextureParameterIiv")
+    reuse(GL45C, "GetTextureParameterIuiv")
+    reuse(GL45C, "GetTextureParameteriv")
+    reuse(GL45C, "CreateVertexArrays")
+    reuse(GL45C, "DisableVertexArrayAttrib")
+    reuse(GL45C, "EnableVertexArrayAttrib")
+    reuse(GL45C, "VertexArrayElementBuffer")
+    reuse(GL45C, "VertexArrayVertexBuffer")
+    reuse(GL45C, "VertexArrayVertexBuffers")
+    reuse(GL45C, "VertexArrayAttribFormat")
+    reuse(GL45C, "VertexArrayAttribIFormat")
+    reuse(GL45C, "VertexArrayAttribLFormat")
+    reuse(GL45C, "VertexArrayAttribBinding")
+    reuse(GL45C, "VertexArrayBindingDivisor")
+    reuse(GL45C, "GetVertexArrayiv")
+    reuse(GL45C, "GetVertexArrayIndexediv")
+    reuse(GL45C, "GetVertexArrayIndexed64iv")
+    reuse(GL45C, "CreateSamplers")
+    reuse(GL45C, "CreateProgramPipelines")
+    reuse(GL45C, "CreateQueries")
+    reuse(GL45C, "GetQueryBufferObjectiv")
+    reuse(GL45C, "GetQueryBufferObjectuiv")
+    reuse(GL45C, "GetQueryBufferObjecti64v")
+    reuse(GL45C, "GetQueryBufferObjectui64v")
 
     // ARB_ES3_1_compatibility
 
-    GL45C reuse "MemoryBarrierByRegion"
+    reuse(GL45C, "MemoryBarrierByRegion")
 
     // ARB_get_texture_sub_image
 
-    GL45C reuse "GetTextureSubImage"
-    GL45C reuse "GetCompressedTextureSubImage"
+    reuse(GL45C, "GetTextureSubImage")
+    reuse(GL45C, "GetCompressedTextureSubImage")
 
     // ARB_texture_barrier
 
-    GL45C reuse "TextureBarrier"
+    reuse(GL45C, "TextureBarrier")
 
     // KHR_context_flush_control
 
@@ -243,7 +243,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         "CONTEXT_LOST"..0x0507
     )
 
-    GL45C reuse "GetGraphicsResetStatus"
+    reuse(GL45C, "GetGraphicsResetStatus")
 
     var src = GL11["GetMapdv"]
     DependsOn("provider.getFunctionAddress(\"glGetMapdv\") != NULL")..IgnoreMissing..void(
@@ -317,8 +317,8 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         RawPointer..GLubyte.p("pattern", "a buffer in which to place the returned pattern")
     )
 
-    GL45C reuse "GetnTexImage"
-    GL45C reuse "ReadnPixels"
+    reuse(GL45C, "GetnTexImage")
+    reuse(GL45C, "ReadnPixels")
 
     src = ARB_imaging["GetColorTable"]
     DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetColorTable\") != NULL")..IgnoreMissing..void(
@@ -385,9 +385,9 @@ val GL45 = "GL45".nativeClassGL("GL45") {
         RawPointer..void.p("values", "a buffer in which to place the returned data")
     )
 
-    GL45C reuse "GetnCompressedTexImage"
-    GL45C reuse "GetnUniformfv"
-    GL45C reuse "GetnUniformdv"
-    GL45C reuse "GetnUniformiv"
-    GL45C reuse "GetnUniformuiv"
+    reuse(GL45C, "GetnCompressedTexImage")
+    reuse(GL45C, "GetnUniformfv")
+    reuse(GL45C, "GetnUniformdv")
+    reuse(GL45C, "GetnUniformiv")
+    reuse(GL45C, "GetnUniformuiv")
 }

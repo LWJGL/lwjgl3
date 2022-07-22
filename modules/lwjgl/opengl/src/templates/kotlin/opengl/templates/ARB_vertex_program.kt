@@ -178,56 +178,56 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         "MATRIX31_ARB"..0x88DF
     )
 
-    ARB_vertex_shader reuse "VertexAttrib1sARB"
-    ARB_vertex_shader reuse "VertexAttrib1fARB"
-    ARB_vertex_shader reuse "VertexAttrib1dARB"
+    reuse(ARB_vertex_shader, "VertexAttrib1sARB")
+    reuse(ARB_vertex_shader, "VertexAttrib1fARB")
+    reuse(ARB_vertex_shader, "VertexAttrib1dARB")
 
-    ARB_vertex_shader reuse "VertexAttrib2sARB"
-    ARB_vertex_shader reuse "VertexAttrib2fARB"
-    ARB_vertex_shader reuse "VertexAttrib2dARB"
+    reuse(ARB_vertex_shader, "VertexAttrib2sARB")
+    reuse(ARB_vertex_shader, "VertexAttrib2fARB")
+    reuse(ARB_vertex_shader, "VertexAttrib2dARB")
 
-    ARB_vertex_shader reuse "VertexAttrib3sARB"
-    ARB_vertex_shader reuse "VertexAttrib3fARB"
-    ARB_vertex_shader reuse "VertexAttrib3dARB"
+    reuse(ARB_vertex_shader, "VertexAttrib3sARB")
+    reuse(ARB_vertex_shader, "VertexAttrib3fARB")
+    reuse(ARB_vertex_shader, "VertexAttrib3dARB")
 
-    ARB_vertex_shader reuse "VertexAttrib4sARB"
-    ARB_vertex_shader reuse "VertexAttrib4fARB"
-    ARB_vertex_shader reuse "VertexAttrib4dARB"
-    ARB_vertex_shader reuse "VertexAttrib4NubARB"
+    reuse(ARB_vertex_shader, "VertexAttrib4sARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4fARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4dARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4NubARB")
 
-    ARB_vertex_shader reuse "VertexAttrib1svARB"
-    ARB_vertex_shader reuse "VertexAttrib1fvARB"
-    ARB_vertex_shader reuse "VertexAttrib1dvARB"
+    reuse(ARB_vertex_shader, "VertexAttrib1svARB")
+    reuse(ARB_vertex_shader, "VertexAttrib1fvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib1dvARB")
 
-    ARB_vertex_shader reuse "VertexAttrib2svARB"
-    ARB_vertex_shader reuse "VertexAttrib2fvARB"
-    ARB_vertex_shader reuse "VertexAttrib2dvARB"
+    reuse(ARB_vertex_shader, "VertexAttrib2svARB")
+    reuse(ARB_vertex_shader, "VertexAttrib2fvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib2dvARB")
 
-    ARB_vertex_shader reuse "VertexAttrib3svARB"
-    ARB_vertex_shader reuse "VertexAttrib3fvARB"
-    ARB_vertex_shader reuse "VertexAttrib3dvARB"
+    reuse(ARB_vertex_shader, "VertexAttrib3svARB")
+    reuse(ARB_vertex_shader, "VertexAttrib3fvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib3dvARB")
 
-    ARB_vertex_shader reuse "VertexAttrib4fvARB"
-    ARB_vertex_shader reuse "VertexAttrib4bvARB"
-    ARB_vertex_shader reuse "VertexAttrib4svARB"
-    ARB_vertex_shader reuse "VertexAttrib4ivARB"
-    ARB_vertex_shader reuse "VertexAttrib4ubvARB"
-    ARB_vertex_shader reuse "VertexAttrib4usvARB"
-    ARB_vertex_shader reuse "VertexAttrib4uivARB"
-    ARB_vertex_shader reuse "VertexAttrib4dvARB"
+    reuse(ARB_vertex_shader, "VertexAttrib4fvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4bvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4svARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4ivARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4ubvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4usvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4uivARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4dvARB")
 
-    ARB_vertex_shader reuse "VertexAttrib4NbvARB"
-    ARB_vertex_shader reuse "VertexAttrib4NsvARB"
-    ARB_vertex_shader reuse "VertexAttrib4NivARB"
+    reuse(ARB_vertex_shader, "VertexAttrib4NbvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4NsvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4NivARB")
 
-    ARB_vertex_shader reuse "VertexAttrib4NubvARB"
-    ARB_vertex_shader reuse "VertexAttrib4NusvARB"
-    ARB_vertex_shader reuse "VertexAttrib4NuivARB"
+    reuse(ARB_vertex_shader, "VertexAttrib4NubvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4NusvARB")
+    reuse(ARB_vertex_shader, "VertexAttrib4NuivARB")
 
-    ARB_vertex_shader reuse "VertexAttribPointerARB"
+    reuse(ARB_vertex_shader, "VertexAttribPointerARB")
 
-    ARB_vertex_shader reuse "EnableVertexAttribArrayARB"
-    ARB_vertex_shader reuse "DisableVertexAttribArrayARB"
+    reuse(ARB_vertex_shader, "EnableVertexAttribArrayARB")
+    reuse(ARB_vertex_shader, "DisableVertexAttribArrayARB")
 
     val TARGET = GLenum("target", "the program target", "#VERTEX_PROGRAM_ARB #FRAGMENT_PROGRAM_ARB")
 
@@ -396,10 +396,10 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
         Check("glGetProgramiARB(target, GL_PROGRAM_LENGTH_ARB)", debug = true)..void.p("string", "an array in which to place the program string")
     )
 
-    ARB_vertex_shader reuse "GetVertexAttribfvARB"
-    ARB_vertex_shader reuse "GetVertexAttribdvARB"
-    ARB_vertex_shader reuse "GetVertexAttribivARB"
-    ARB_vertex_shader reuse "GetVertexAttribPointervARB"
+    reuse(ARB_vertex_shader, "GetVertexAttribfvARB")
+    reuse(ARB_vertex_shader, "GetVertexAttribdvARB")
+    reuse(ARB_vertex_shader, "GetVertexAttribivARB")
+    reuse(ARB_vertex_shader, "GetVertexAttribPointervARB")
 
     GLboolean(
         "IsProgramARB",

@@ -49,8 +49,8 @@ val GL33 = "GL33".nativeClassGL("GL33") {
         "MAX_DUAL_SOURCE_DRAW_BUFFERS"..0x88FC
     )
 
-    GL33C reuse "BindFragDataLocationIndexed"
-    GL33C reuse "GetFragDataIndex"
+    reuse(GL33C, "BindFragDataLocationIndexed")
+    reuse(GL33C, "GetFragDataIndex")
 
     // ARB_occlusion_query2
 
@@ -68,20 +68,20 @@ val GL33 = "GL33".nativeClassGL("GL33") {
         "SAMPLER_BINDING"..0x8919
     )
 
-    GL33C reuse "GenSamplers"
-    GL33C reuse "DeleteSamplers"
-    GL33C reuse "IsSampler"
-    GL33C reuse "BindSampler"
-    GL33C reuse "SamplerParameteri"
-    GL33C reuse "SamplerParameterf"
-    GL33C reuse "SamplerParameteriv"
-    GL33C reuse "SamplerParameterfv"
-    GL33C reuse "SamplerParameterIiv"
-    GL33C reuse "SamplerParameterIuiv"
-    GL33C reuse "GetSamplerParameteriv"
-    GL33C reuse "GetSamplerParameterfv"
-    GL33C reuse "GetSamplerParameterIiv"
-    GL33C reuse "GetSamplerParameterIuiv"
+    reuse(GL33C, "GenSamplers")
+    reuse(GL33C, "DeleteSamplers")
+    reuse(GL33C, "IsSampler")
+    reuse(GL33C, "BindSampler")
+    reuse(GL33C, "SamplerParameteri")
+    reuse(GL33C, "SamplerParameterf")
+    reuse(GL33C, "SamplerParameteriv")
+    reuse(GL33C, "SamplerParameterfv")
+    reuse(GL33C, "SamplerParameterIiv")
+    reuse(GL33C, "SamplerParameterIuiv")
+    reuse(GL33C, "GetSamplerParameteriv")
+    reuse(GL33C, "GetSamplerParameterfv")
+    reuse(GL33C, "GetSamplerParameterIiv")
+    reuse(GL33C, "GetSamplerParameterIuiv")
 
     // ARB_texture_rgb10_a2ui
 
@@ -128,9 +128,9 @@ val GL33 = "GL33".nativeClassGL("GL33") {
         "TIMESTAMP"..0x8E28
     )
 
-    GL33C reuse "QueryCounter"
-    GL33C reuse "GetQueryObjecti64v"
-    GL33C reuse "GetQueryObjectui64v"
+    reuse(GL33C, "QueryCounter")
+    reuse(GL33C, "GetQueryObjecti64v")
+    reuse(GL33C, "GetQueryObjectui64v")
 
     // ARB_instanced_arrays
 
@@ -140,7 +140,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
         "VERTEX_ATTRIB_ARRAY_DIVISOR"..0x88FE
     )
 
-    GL33C reuse "VertexAttribDivisor"
+    reuse(GL33C, "VertexAttribDivisor")
 
     // ARB_vertex_type_2_10_10_10_rev
 
@@ -201,13 +201,13 @@ val GL33 = "GL33".nativeClassGL("GL33") {
     DeprecatedGL..void("SecondaryColorP3ui", "Packed component version of #SecondaryColor3f().", GLenum("type", packedType, packedTypes), GLuint("color", packedValue))
     DeprecatedGL..void("SecondaryColorP3uiv", "Pointer version of #SecondaryColorP3ui().", GLenum("type", packedType, packedTypes), Check(1)..GLuint.const.p("color", packedValue))
 
-    GL33C reuse "VertexAttribP1ui"
-    GL33C reuse "VertexAttribP2ui"
-    GL33C reuse "VertexAttribP3ui"
-    GL33C reuse "VertexAttribP4ui"
+    reuse(GL33C, "VertexAttribP1ui")
+    reuse(GL33C, "VertexAttribP2ui")
+    reuse(GL33C, "VertexAttribP3ui")
+    reuse(GL33C, "VertexAttribP4ui")
 
-    GL33C reuse "VertexAttribP1uiv"
-    GL33C reuse "VertexAttribP2uiv"
-    GL33C reuse "VertexAttribP3uiv"
-    GL33C reuse "VertexAttribP4uiv"
+    reuse(GL33C, "VertexAttribP1uiv")
+    reuse(GL33C, "VertexAttribP2uiv")
+    reuse(GL33C, "VertexAttribP3uiv")
+    reuse(GL33C, "VertexAttribP4uiv")
 }

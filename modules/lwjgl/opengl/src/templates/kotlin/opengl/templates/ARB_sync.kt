@@ -82,12 +82,12 @@ val ARB_sync = "ARBSync".nativeClassGL("ARB_sync") {
         "WAIT_FAILED"..0x911D
     )
 
-    GL32C reuse "FenceSync"
-    GL32C reuse "IsSync"
-    GL32C reuse "DeleteSync"
-    GL32C reuse "ClientWaitSync"
-    GL32C reuse "WaitSync"
-    GL32C reuse "GetInteger64v"
-    GL32C reuse "GetSynciv"
+    reuse(GL32C, "FenceSync")
+    reuse(GL32C, "IsSync")
+    reuse(GL32C, "DeleteSync")
+    reuse(GL32C, "ClientWaitSync")
+    reuse(GL32C, "WaitSync")
+    reuse(GL32C, "GetInteger64v")
+    reuse(GL32C, "GetSynciv")
 
 }

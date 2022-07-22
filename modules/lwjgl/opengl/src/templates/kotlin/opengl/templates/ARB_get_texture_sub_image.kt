@@ -16,6 +16,6 @@ val ARB_get_texture_sub_image = "ARBGetTextureSubImage".nativeClassGL("ARB_get_t
         Requires ${GL20.core}. ${GL45.promoted}
         """
 
-    GL45C reuse "GetTextureSubImage"
-    GL45C reuse "GetCompressedTextureSubImage"
+    reuse(GL45C, "GetTextureSubImage")
+    reuse(GL45C, "GetCompressedTextureSubImage")
 }

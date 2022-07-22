@@ -65,42 +65,42 @@ val AMD_gpu_shader_int64 = "AMDGPUShaderInt64".nativeClassGL("AMD_gpu_shader_int
         "FLOAT16_VEC4_NV"..0x8FFB
     )
 
-    NV_gpu_shader5 reuse "Uniform1i64NV"
-    NV_gpu_shader5 reuse "Uniform2i64NV"
-    NV_gpu_shader5 reuse "Uniform3i64NV"
-    NV_gpu_shader5 reuse "Uniform4i64NV"
-    NV_gpu_shader5 reuse "Uniform1i64vNV"
-    NV_gpu_shader5 reuse "Uniform2i64vNV"
-    NV_gpu_shader5 reuse "Uniform3i64vNV"
-    NV_gpu_shader5 reuse "Uniform4i64vNV"
+    reuse(NV_gpu_shader5, "Uniform1i64NV")
+    reuse(NV_gpu_shader5, "Uniform2i64NV")
+    reuse(NV_gpu_shader5, "Uniform3i64NV")
+    reuse(NV_gpu_shader5, "Uniform4i64NV")
+    reuse(NV_gpu_shader5, "Uniform1i64vNV")
+    reuse(NV_gpu_shader5, "Uniform2i64vNV")
+    reuse(NV_gpu_shader5, "Uniform3i64vNV")
+    reuse(NV_gpu_shader5, "Uniform4i64vNV")
 
-    NV_gpu_shader5 reuse "Uniform1ui64NV"
-    NV_gpu_shader5 reuse "Uniform2ui64NV"
-    NV_gpu_shader5 reuse "Uniform3ui64NV"
-    NV_gpu_shader5 reuse "Uniform4ui64NV"
-    NV_gpu_shader5 reuse "Uniform1ui64vNV"
-    NV_gpu_shader5 reuse "Uniform2ui64vNV"
-    NV_gpu_shader5 reuse "Uniform3ui64vNV"
-    NV_gpu_shader5 reuse "Uniform4ui64vNV"
+    reuse(NV_gpu_shader5, "Uniform1ui64NV")
+    reuse(NV_gpu_shader5, "Uniform2ui64NV")
+    reuse(NV_gpu_shader5, "Uniform3ui64NV")
+    reuse(NV_gpu_shader5, "Uniform4ui64NV")
+    reuse(NV_gpu_shader5, "Uniform1ui64vNV")
+    reuse(NV_gpu_shader5, "Uniform2ui64vNV")
+    reuse(NV_gpu_shader5, "Uniform3ui64vNV")
+    reuse(NV_gpu_shader5, "Uniform4ui64vNV")
 
-    NV_gpu_shader5 reuse "GetUniformi64vNV"
-    NV_shader_buffer_load reuse "GetUniformui64vNV"
+    reuse(NV_gpu_shader5, "GetUniformi64vNV")
+    reuse(NV_shader_buffer_load, "GetUniformui64vNV")
 
-    NV_gpu_shader5 reuse "ProgramUniform1i64NV"
-    NV_gpu_shader5 reuse "ProgramUniform2i64NV"
-    NV_gpu_shader5 reuse "ProgramUniform3i64NV"
-    NV_gpu_shader5 reuse "ProgramUniform4i64NV"
-    NV_gpu_shader5 reuse "ProgramUniform1i64vNV"
-    NV_gpu_shader5 reuse "ProgramUniform2i64vNV"
-    NV_gpu_shader5 reuse "ProgramUniform3i64vNV"
-    NV_gpu_shader5 reuse "ProgramUniform4i64vNV"
+    reuse(NV_gpu_shader5, "ProgramUniform1i64NV")
+    reuse(NV_gpu_shader5, "ProgramUniform2i64NV")
+    reuse(NV_gpu_shader5, "ProgramUniform3i64NV")
+    reuse(NV_gpu_shader5, "ProgramUniform4i64NV")
+    reuse(NV_gpu_shader5, "ProgramUniform1i64vNV")
+    reuse(NV_gpu_shader5, "ProgramUniform2i64vNV")
+    reuse(NV_gpu_shader5, "ProgramUniform3i64vNV")
+    reuse(NV_gpu_shader5, "ProgramUniform4i64vNV")
 
-    NV_gpu_shader5 reuse "ProgramUniform1ui64NV"
-    NV_gpu_shader5 reuse "ProgramUniform2ui64NV"
-    NV_gpu_shader5 reuse "ProgramUniform3ui64NV"
-    NV_gpu_shader5 reuse "ProgramUniform4ui64NV"
-    NV_gpu_shader5 reuse "ProgramUniform1ui64vNV"
-    NV_gpu_shader5 reuse "ProgramUniform2ui64vNV"
-    NV_gpu_shader5 reuse "ProgramUniform3ui64vNV"
-    NV_gpu_shader5 reuse "ProgramUniform4ui64vNV"
+    reuse(NV_gpu_shader5, "ProgramUniform1ui64NV")
+    reuse(NV_gpu_shader5, "ProgramUniform2ui64NV")
+    reuse(NV_gpu_shader5, "ProgramUniform3ui64NV")
+    reuse(NV_gpu_shader5, "ProgramUniform4ui64NV")
+    reuse(NV_gpu_shader5, "ProgramUniform1ui64vNV")
+    reuse(NV_gpu_shader5, "ProgramUniform2ui64vNV")
+    reuse(NV_gpu_shader5, "ProgramUniform3ui64vNV")
+    reuse(NV_gpu_shader5, "ProgramUniform4ui64vNV")
 }

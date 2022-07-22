@@ -27,5 +27,5 @@ val ARB_copy_buffer = "ARBCopyBuffer".nativeClassGL("ARB_copy_buffer") {
         "COPY_WRITE_BUFFER"..0x8F37
     )
 
-    GL31C reuse "CopyBufferSubData"
+    reuse(GL31C, "CopyBufferSubData")
 }

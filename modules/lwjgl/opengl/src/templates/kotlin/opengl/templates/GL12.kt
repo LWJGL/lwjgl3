@@ -99,9 +99,9 @@ val GL12 = "GL12".nativeClassGL("GL12") {
         "MAX_3D_TEXTURE_SIZE"..0x8073
     )
 
-    GL12C reuse "TexImage3D"
-    GL12C reuse "TexSubImage3D"
-    GL12C reuse "CopyTexSubImage3D"
+    reuse(GL12C, "TexImage3D")
+    reuse(GL12C, "TexSubImage3D")
+    reuse(GL12C, "CopyTexSubImage3D")
 
     // EXT_bgra
 
@@ -194,5 +194,5 @@ val GL12 = "GL12".nativeClassGL("GL12") {
         "MAX_ELEMENTS_INDICES"..0x80E9
     )
 
-    GL12C reuse "DrawRangeElements"
+    reuse(GL12C, "DrawRangeElements")
 }

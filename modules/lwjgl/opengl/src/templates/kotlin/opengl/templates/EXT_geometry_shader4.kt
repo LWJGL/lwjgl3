@@ -107,7 +107,7 @@ val EXT_geometry_shader4 = "EXTGeometryShader4".nativeClassGL("EXT_geometry_shad
         GLint("level", "")
     )
 
-    EXT_texture_array reuse "FramebufferTextureLayerEXT"
+    reuse(EXT_texture_array, "FramebufferTextureLayerEXT")
 
     void(
         "FramebufferTextureFaceEXT",

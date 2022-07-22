@@ -99,10 +99,10 @@ val ARB_program_interface_query = "ARBProgramInterfaceQuery".nativeClassGL("ARB_
         "IS_PER_PATCH"..0x92E7
     )
 
-    GL43C reuse "GetProgramInterfaceiv"
-    GL43C reuse "GetProgramResourceIndex"
-    GL43C reuse "GetProgramResourceName"
-    GL43C reuse "GetProgramResourceiv"
-    GL43C reuse "GetProgramResourceLocation"
-    GL43C reuse "GetProgramResourceLocationIndex"
+    reuse(GL43C, "GetProgramInterfaceiv")
+    reuse(GL43C, "GetProgramResourceIndex")
+    reuse(GL43C, "GetProgramResourceName")
+    reuse(GL43C, "GetProgramResourceiv")
+    reuse(GL43C, "GetProgramResourceLocation")
+    reuse(GL43C, "GetProgramResourceLocationIndex")
 }

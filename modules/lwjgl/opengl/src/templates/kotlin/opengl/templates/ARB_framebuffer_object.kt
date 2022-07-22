@@ -373,24 +373,24 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
         "TEXTURE_STENCIL_SIZE"..0x88F1
     )
 
-    GL30C reuse "IsRenderbuffer"
-    GL30C reuse "BindRenderbuffer"
-    GL30C reuse "DeleteRenderbuffers"
-    GL30C reuse "GenRenderbuffers"
-    GL30C reuse "RenderbufferStorage"
-    GL30C reuse "RenderbufferStorageMultisample"
-    GL30C reuse "GetRenderbufferParameteriv"
-    GL30C reuse "IsFramebuffer"
-    GL30C reuse "BindFramebuffer"
-    GL30C reuse "DeleteFramebuffers"
-    GL30C reuse "GenFramebuffers"
-    GL30C reuse "CheckFramebufferStatus"
-    GL30C reuse "FramebufferTexture1D"
-    GL30C reuse "FramebufferTexture2D"
-    GL30C reuse "FramebufferTexture3D"
-    GL30C reuse "FramebufferTextureLayer"
-    GL30C reuse "FramebufferRenderbuffer"
-    GL30C reuse "GetFramebufferAttachmentParameteriv"
-    GL30C reuse "BlitFramebuffer"
-    GL30C reuse "GenerateMipmap"
+    reuse(GL30C, "IsRenderbuffer")
+    reuse(GL30C, "BindRenderbuffer")
+    reuse(GL30C, "DeleteRenderbuffers")
+    reuse(GL30C, "GenRenderbuffers")
+    reuse(GL30C, "RenderbufferStorage")
+    reuse(GL30C, "RenderbufferStorageMultisample")
+    reuse(GL30C, "GetRenderbufferParameteriv")
+    reuse(GL30C, "IsFramebuffer")
+    reuse(GL30C, "BindFramebuffer")
+    reuse(GL30C, "DeleteFramebuffers")
+    reuse(GL30C, "GenFramebuffers")
+    reuse(GL30C, "CheckFramebufferStatus")
+    reuse(GL30C, "FramebufferTexture1D")
+    reuse(GL30C, "FramebufferTexture2D")
+    reuse(GL30C, "FramebufferTexture3D")
+    reuse(GL30C, "FramebufferTextureLayer")
+    reuse(GL30C, "FramebufferRenderbuffer")
+    reuse(GL30C, "GetFramebufferAttachmentParameteriv")
+    reuse(GL30C, "BlitFramebuffer")
+    reuse(GL30C, "GenerateMipmap")
 }

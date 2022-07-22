@@ -74,7 +74,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
         "CLIENT_MAPPED_BUFFER_BARRIER_BIT"..0x00004000
     )
 
-    GL44C reuse "BufferStorage"
+    reuse(GL44C, "BufferStorage")
 
     // ARB_clear_texture
 
@@ -84,8 +84,8 @@ val GL44 = "GL44".nativeClassGL("GL44") {
         "CLEAR_TEXTURE"..0x9365
     )
 
-    GL44C reuse "ClearTexSubImage"
-    GL44C reuse "ClearTexImage"
+    reuse(GL44C, "ClearTexSubImage")
+    reuse(GL44C, "ClearTexImage")
 
     // ARB_enhanced_layouts
 
@@ -99,12 +99,12 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 
     // ARB_multi_bind
 
-    GL44C reuse "BindBuffersBase"
-    GL44C reuse "BindBuffersRange"
-    GL44C reuse "BindTextures"
-    GL44C reuse "BindSamplers"
-    GL44C reuse "BindImageTextures"
-    GL44C reuse "BindVertexBuffers"
+    reuse(GL44C, "BindBuffersBase")
+    reuse(GL44C, "BindBuffersRange")
+    reuse(GL44C, "BindTextures")
+    reuse(GL44C, "BindSamplers")
+    reuse(GL44C, "BindImageTextures")
+    reuse(GL44C, "BindVertexBuffers")
 
     // ARB_query_buffer_object
 

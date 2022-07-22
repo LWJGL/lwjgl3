@@ -130,17 +130,17 @@ val GL15 = "GL15".nativeClassGL("GL15") {
         "BUFFER_MAP_POINTER"..0x88BD
     )
 
-    GL15C reuse "BindBuffer"
-    GL15C reuse "DeleteBuffers"
-    GL15C reuse "GenBuffers"
-    GL15C reuse "IsBuffer"
-    GL15C reuse "BufferData"
-    GL15C reuse "BufferSubData"
-    GL15C reuse "GetBufferSubData"
-    GL15C reuse "MapBuffer"
-    GL15C reuse "UnmapBuffer"
-    GL15C reuse "GetBufferParameteriv"
-    GL15C reuse "GetBufferPointerv"
+    reuse(GL15C, "BindBuffer")
+    reuse(GL15C, "DeleteBuffers")
+    reuse(GL15C, "GenBuffers")
+    reuse(GL15C, "IsBuffer")
+    reuse(GL15C, "BufferData")
+    reuse(GL15C, "BufferSubData")
+    reuse(GL15C, "GetBufferSubData")
+    reuse(GL15C, "MapBuffer")
+    reuse(GL15C, "UnmapBuffer")
+    reuse(GL15C, "GetBufferParameteriv")
+    reuse(GL15C, "GetBufferPointerv")
 
     // ARB_occlusion_query
 
@@ -164,12 +164,12 @@ val GL15 = "GL15".nativeClassGL("GL15") {
         "QUERY_RESULT_AVAILABLE"..0x8867
     )
 
-    GL15C reuse "GenQueries"
-    GL15C reuse "DeleteQueries"
-    GL15C reuse "IsQuery"
-    GL15C reuse "BeginQuery"
-    GL15C reuse "EndQuery"
-    GL15C reuse "GetQueryiv"
-    GL15C reuse "GetQueryObjectiv"
-    GL15C reuse "GetQueryObjectuiv"
+    reuse(GL15C, "GenQueries")
+    reuse(GL15C, "DeleteQueries")
+    reuse(GL15C, "IsQuery")
+    reuse(GL15C, "BeginQuery")
+    reuse(GL15C, "EndQuery")
+    reuse(GL15C, "GetQueryiv")
+    reuse(GL15C, "GetQueryObjectiv")
+    reuse(GL15C, "GetQueryObjectuiv")
 }

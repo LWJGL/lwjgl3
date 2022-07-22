@@ -22,8 +22,8 @@ val ARB_texture_storage_multisample = "ARBTextureStorageMultisample".nativeClass
         Requires ${GL42.core} or ${ARB_texture_storage.link}. ${GL43.promoted}
         """
 
-    GL43C reuse "TexStorage2DMultisample"
-    GL43C reuse "TexStorage3DMultisample"
+    reuse(GL43C, "TexStorage2DMultisample")
+    reuse(GL43C, "TexStorage3DMultisample")
 
     var src = GL43["TexStorage2DMultisample"]
     DependsOn("GL_EXT_direct_state_access")..void(

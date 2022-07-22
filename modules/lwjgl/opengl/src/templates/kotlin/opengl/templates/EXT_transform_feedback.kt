@@ -163,6 +163,6 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
             : ARBShaderObjects.glGetObjectParameteriARB(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)""")..GLcharASCII.p("name", "")
     )
 
-    EXT_draw_buffers2 reuse "GetIntegerIndexedvEXT"
-    EXT_draw_buffers2 reuse "GetBooleanIndexedvEXT"
+    reuse(EXT_draw_buffers2, "GetIntegerIndexedvEXT")
+    reuse(EXT_draw_buffers2, "GetBooleanIndexedvEXT")
 }

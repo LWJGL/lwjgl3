@@ -69,26 +69,26 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
         "DOUBLE_MAT4x3"..0x8F4E
     )
 
-    GL40C reuse "Uniform1d"
-    GL40C reuse "Uniform2d"
-    GL40C reuse "Uniform3d"
-    GL40C reuse "Uniform4d"
-    GL40C reuse "Uniform1dv"
-    GL40C reuse "Uniform2dv"
-    GL40C reuse "Uniform3dv"
-    GL40C reuse "Uniform4dv"
+    reuse(GL40C, "Uniform1d")
+    reuse(GL40C, "Uniform2d")
+    reuse(GL40C, "Uniform3d")
+    reuse(GL40C, "Uniform4d")
+    reuse(GL40C, "Uniform1dv")
+    reuse(GL40C, "Uniform2dv")
+    reuse(GL40C, "Uniform3dv")
+    reuse(GL40C, "Uniform4dv")
 
-    GL40C reuse "UniformMatrix2dv"
-    GL40C reuse "UniformMatrix3dv"
-    GL40C reuse "UniformMatrix4dv"
-    GL40C reuse "UniformMatrix2x3dv"
-    GL40C reuse "UniformMatrix2x4dv"
-    GL40C reuse "UniformMatrix3x2dv"
-    GL40C reuse "UniformMatrix3x4dv"
-    GL40C reuse "UniformMatrix4x2dv"
-    GL40C reuse "UniformMatrix4x3dv"
+    reuse(GL40C, "UniformMatrix2dv")
+    reuse(GL40C, "UniformMatrix3dv")
+    reuse(GL40C, "UniformMatrix4dv")
+    reuse(GL40C, "UniformMatrix2x3dv")
+    reuse(GL40C, "UniformMatrix2x4dv")
+    reuse(GL40C, "UniformMatrix3x2dv")
+    reuse(GL40C, "UniformMatrix3x4dv")
+    reuse(GL40C, "UniformMatrix4x2dv")
+    reuse(GL40C, "UniformMatrix4x3dv")
 
-    GL40C reuse "GetUniformdv"
+    reuse(GL40C, "GetUniformdv")
 
     val program = GLuint("program", "the program object to update")
 

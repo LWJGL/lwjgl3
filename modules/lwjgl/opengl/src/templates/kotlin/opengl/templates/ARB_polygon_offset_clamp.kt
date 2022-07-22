@@ -26,5 +26,5 @@ val ARB_polygon_offset_clamp = "ARBPolygonOffsetClamp".nativeClassGL("ARB_polygo
         "POLYGON_OFFSET_CLAMP"..0x8E1B
     )
 
-    GL46C reuse "PolygonOffsetClamp"
+    reuse(GL46C, "PolygonOffsetClamp")
 }

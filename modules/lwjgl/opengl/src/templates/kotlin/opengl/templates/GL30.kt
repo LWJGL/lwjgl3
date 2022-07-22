@@ -75,11 +75,11 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "MAX_VARYING_COMPONENTS".."GL20.GL_MAX_VARYING_FLOATS"
     )
 
-    GL30C reuse "GetStringi"
-    GL30C reuse "ClearBufferiv"
-    GL30C reuse "ClearBufferuiv"
-    GL30C reuse "ClearBufferfv"
-    GL30C reuse "ClearBufferfi"
+    reuse(GL30C, "GetStringi")
+    reuse(GL30C, "ClearBufferiv")
+    reuse(GL30C, "ClearBufferuiv")
+    reuse(GL30C, "ClearBufferfv")
+    reuse(GL30C, "ClearBufferfi")
 
     // EXT_gpu_shader4
 
@@ -123,40 +123,40 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "MAX_PROGRAM_TEXEL_OFFSET"..0x8905
     )
 
-    GL30C reuse "VertexAttribI1i"
-    GL30C reuse "VertexAttribI2i"
-    GL30C reuse "VertexAttribI3i"
-    GL30C reuse "VertexAttribI4i"
-    GL30C reuse "VertexAttribI1ui"
-    GL30C reuse "VertexAttribI2ui"
-    GL30C reuse "VertexAttribI3ui"
-    GL30C reuse "VertexAttribI4ui"
-    GL30C reuse "VertexAttribI1iv"
-    GL30C reuse "VertexAttribI2iv"
-    GL30C reuse "VertexAttribI3iv"
-    GL30C reuse "VertexAttribI4iv"
-    GL30C reuse "VertexAttribI1uiv"
-    GL30C reuse "VertexAttribI2uiv"
-    GL30C reuse "VertexAttribI3uiv"
-    GL30C reuse "VertexAttribI4uiv"
-    GL30C reuse "VertexAttribI4bv"
-    GL30C reuse "VertexAttribI4sv"
-    GL30C reuse "VertexAttribI4ubv"
-    GL30C reuse "VertexAttribI4usv"
-    GL30C reuse "VertexAttribIPointer"
-    GL30C reuse "GetVertexAttribIiv"
-    GL30C reuse "GetVertexAttribIuiv"
-    GL30C reuse "Uniform1ui"
-    GL30C reuse "Uniform2ui"
-    GL30C reuse "Uniform3ui"
-    GL30C reuse "Uniform4ui"
-    GL30C reuse "Uniform1uiv"
-    GL30C reuse "Uniform2uiv"
-    GL30C reuse "Uniform3uiv"
-    GL30C reuse "Uniform4uiv"
-    GL30C reuse "GetUniformuiv"
-    GL30C reuse "BindFragDataLocation"
-    GL30C reuse "GetFragDataLocation"
+    reuse(GL30C, "VertexAttribI1i")
+    reuse(GL30C, "VertexAttribI2i")
+    reuse(GL30C, "VertexAttribI3i")
+    reuse(GL30C, "VertexAttribI4i")
+    reuse(GL30C, "VertexAttribI1ui")
+    reuse(GL30C, "VertexAttribI2ui")
+    reuse(GL30C, "VertexAttribI3ui")
+    reuse(GL30C, "VertexAttribI4ui")
+    reuse(GL30C, "VertexAttribI1iv")
+    reuse(GL30C, "VertexAttribI2iv")
+    reuse(GL30C, "VertexAttribI3iv")
+    reuse(GL30C, "VertexAttribI4iv")
+    reuse(GL30C, "VertexAttribI1uiv")
+    reuse(GL30C, "VertexAttribI2uiv")
+    reuse(GL30C, "VertexAttribI3uiv")
+    reuse(GL30C, "VertexAttribI4uiv")
+    reuse(GL30C, "VertexAttribI4bv")
+    reuse(GL30C, "VertexAttribI4sv")
+    reuse(GL30C, "VertexAttribI4ubv")
+    reuse(GL30C, "VertexAttribI4usv")
+    reuse(GL30C, "VertexAttribIPointer")
+    reuse(GL30C, "GetVertexAttribIiv")
+    reuse(GL30C, "GetVertexAttribIuiv")
+    reuse(GL30C, "Uniform1ui")
+    reuse(GL30C, "Uniform2ui")
+    reuse(GL30C, "Uniform3ui")
+    reuse(GL30C, "Uniform4ui")
+    reuse(GL30C, "Uniform1uiv")
+    reuse(GL30C, "Uniform2uiv")
+    reuse(GL30C, "Uniform3uiv")
+    reuse(GL30C, "Uniform4uiv")
+    reuse(GL30C, "GetUniformuiv")
+    reuse(GL30C, "BindFragDataLocation")
+    reuse(GL30C, "GetFragDataLocation")
 
     // NV_conditional_render
 
@@ -169,8 +169,8 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "QUERY_BY_REGION_NO_WAIT"..0x8E16
     )
 
-    GL30C reuse "BeginConditionalRender"
-    GL30C reuse "EndConditionalRender"
+    reuse(GL30C, "BeginConditionalRender")
+    reuse(GL30C, "EndConditionalRender")
 
     // ARB_map_buffer_range
 
@@ -193,8 +193,8 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "BUFFER_MAP_OFFSET"..0x9121
     )
 
-    GL30C reuse "MapBufferRange"
-    GL30C reuse "FlushMappedBufferRange"
+    reuse(GL30C, "MapBufferRange")
+    reuse(GL30C, "FlushMappedBufferRange")
 
     // ARB_color_buffer_float
 
@@ -212,7 +212,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "FIXED_ONLY"..0x891D
     )
 
-    GL30C reuse "ClampColor"
+    reuse(GL30C, "ClampColor")
 
     // ARB_depth_buffer_float
 
@@ -487,26 +487,26 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "TEXTURE_STENCIL_SIZE"..0x88F1
     )
 
-    GL30C reuse "IsRenderbuffer"
-    GL30C reuse "BindRenderbuffer"
-    GL30C reuse "DeleteRenderbuffers"
-    GL30C reuse "GenRenderbuffers"
-    GL30C reuse "RenderbufferStorage"
-    GL30C reuse "RenderbufferStorageMultisample"
-    GL30C reuse "GetRenderbufferParameteriv"
-    GL30C reuse "IsFramebuffer"
-    GL30C reuse "BindFramebuffer"
-    GL30C reuse "DeleteFramebuffers"
-    GL30C reuse "GenFramebuffers"
-    GL30C reuse "CheckFramebufferStatus"
-    GL30C reuse "FramebufferTexture1D"
-    GL30C reuse "FramebufferTexture2D"
-    GL30C reuse "FramebufferTexture3D"
-    GL30C reuse "FramebufferTextureLayer"
-    GL30C reuse "FramebufferRenderbuffer"
-    GL30C reuse "GetFramebufferAttachmentParameteriv"
-    GL30C reuse "BlitFramebuffer"
-    GL30C reuse "GenerateMipmap"
+    reuse(GL30C, "IsRenderbuffer")
+    reuse(GL30C, "BindRenderbuffer")
+    reuse(GL30C, "DeleteRenderbuffers")
+    reuse(GL30C, "GenRenderbuffers")
+    reuse(GL30C, "RenderbufferStorage")
+    reuse(GL30C, "RenderbufferStorageMultisample")
+    reuse(GL30C, "GetRenderbufferParameteriv")
+    reuse(GL30C, "IsFramebuffer")
+    reuse(GL30C, "BindFramebuffer")
+    reuse(GL30C, "DeleteFramebuffers")
+    reuse(GL30C, "GenFramebuffers")
+    reuse(GL30C, "CheckFramebufferStatus")
+    reuse(GL30C, "FramebufferTexture1D")
+    reuse(GL30C, "FramebufferTexture2D")
+    reuse(GL30C, "FramebufferTexture3D")
+    reuse(GL30C, "FramebufferTextureLayer")
+    reuse(GL30C, "FramebufferRenderbuffer")
+    reuse(GL30C, "GetFramebufferAttachmentParameteriv")
+    reuse(GL30C, "BlitFramebuffer")
+    reuse(GL30C, "GenerateMipmap")
 
     // ARB_half_float_pixel & ARB_half_float_vertex
 
@@ -557,10 +557,10 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "BGRA_INTEGER"..0x8D9B
     )
 
-    GL30C reuse "TexParameterIiv"
-    GL30C reuse "TexParameterIuiv"
-    GL30C reuse "GetTexParameterIiv"
-    GL30C reuse "GetTexParameterIuiv"
+    reuse(GL30C, "TexParameterIiv")
+    reuse(GL30C, "TexParameterIuiv")
+    reuse(GL30C, "GetTexParameterIiv")
+    reuse(GL30C, "GetTexParameterIuiv")
 
     // EXT_texture_array
 
@@ -596,12 +596,12 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
     // EXT_draw_buffers2
 
-    GL30C reuse "ColorMaski"
-    GL30C reuse "GetBooleani_v"
-    GL30C reuse "GetIntegeri_v"
-    GL30C reuse "Enablei"
-    GL30C reuse "Disablei"
-    GL30C reuse "IsEnabledi"
+    reuse(GL30C, "ColorMaski")
+    reuse(GL30C, "GetBooleani_v")
+    reuse(GL30C, "GetIntegeri_v")
+    reuse(GL30C, "Enablei")
+    reuse(GL30C, "Disablei")
+    reuse(GL30C, "IsEnabledi")
 
     // EXT_texture_compression_rgtc
 
@@ -719,12 +719,12 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH"..0x8C76
     )
 
-    GL30C reuse "BindBufferRange"
-    GL30C reuse "BindBufferBase"
-    GL30C reuse "BeginTransformFeedback"
-    GL30C reuse "EndTransformFeedback"
-    GL30C reuse "TransformFeedbackVaryings"
-    GL30C reuse "GetTransformFeedbackVarying"
+    reuse(GL30C, "BindBufferRange")
+    reuse(GL30C, "BindBufferBase")
+    reuse(GL30C, "BeginTransformFeedback")
+    reuse(GL30C, "EndTransformFeedback")
+    reuse(GL30C, "TransformFeedbackVaryings")
+    reuse(GL30C, "GetTransformFeedbackVarying")
 
     // ARB_vertex_array_object
 
@@ -734,10 +734,10 @@ val GL30 = "GL30".nativeClassGL("GL30") {
         "VERTEX_ARRAY_BINDING"..0x85B5
     )
 
-    GL30C reuse "BindVertexArray"
-    GL30C reuse "DeleteVertexArrays"
-    GL30C reuse "GenVertexArrays"
-    GL30C reuse "IsVertexArray"
+    reuse(GL30C, "BindVertexArray")
+    reuse(GL30C, "DeleteVertexArrays")
+    reuse(GL30C, "GenVertexArrays")
+    reuse(GL30C, "IsVertexArray")
 
     // ARB_framebuffer_sRGB
 

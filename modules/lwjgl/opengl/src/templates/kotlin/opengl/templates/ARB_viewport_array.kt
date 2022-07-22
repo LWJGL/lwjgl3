@@ -44,14 +44,14 @@ val ARB_viewport_array = "ARBViewportArray".nativeClassGL("ARB_viewport_array") 
         "UNDEFINED_VERTEX"..0x8260
     )
 
-    GL41C reuse "ViewportArrayv"
-    GL41C reuse "ViewportIndexedf"
-    GL41C reuse "ViewportIndexedfv"
-    GL41C reuse "ScissorArrayv"
-    GL41C reuse "ScissorIndexed"
-    GL41C reuse "ScissorIndexedv"
-    GL41C reuse "DepthRangeArrayv"
-    GL41C reuse "DepthRangeIndexed"
-    GL41C reuse "GetFloati_v"
-    GL41C reuse "GetDoublei_v"
+    reuse(GL41C, "ViewportArrayv")
+    reuse(GL41C, "ViewportIndexedf")
+    reuse(GL41C, "ViewportIndexedfv")
+    reuse(GL41C, "ScissorArrayv")
+    reuse(GL41C, "ScissorIndexed")
+    reuse(GL41C, "ScissorIndexedv")
+    reuse(GL41C, "DepthRangeArrayv")
+    reuse(GL41C, "DepthRangeIndexed")
+    reuse(GL41C, "GetFloati_v")
+    reuse(GL41C, "GetDoublei_v")
 }

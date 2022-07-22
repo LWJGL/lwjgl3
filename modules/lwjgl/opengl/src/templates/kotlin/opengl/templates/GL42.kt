@@ -143,7 +143,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "UNSIGNED_INT_ATOMIC_COUNTER"..0x92DB
     )
 
-    GL42C reuse "GetActiveAtomicCounterBufferiv"
+    reuse(GL42C, "GetActiveAtomicCounterBufferiv")
 
     // ARB_texture_storage
 
@@ -153,20 +153,20 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "TEXTURE_IMMUTABLE_FORMAT"..0x912F
     )
 
-    GL42C reuse "TexStorage1D"
-    GL42C reuse "TexStorage2D"
-    GL42C reuse "TexStorage3D"
+    reuse(GL42C, "TexStorage1D")
+    reuse(GL42C, "TexStorage2D")
+    reuse(GL42C, "TexStorage3D")
 
     // ARB_transform_feedback_instanced
 
-    GL42C reuse "DrawTransformFeedbackInstanced"
-    GL42C reuse "DrawTransformFeedbackStreamInstanced"
+    reuse(GL42C, "DrawTransformFeedbackInstanced")
+    reuse(GL42C, "DrawTransformFeedbackStreamInstanced")
 
     // ARB_base_instance
 
-    GL42C reuse "DrawArraysInstancedBaseInstance"
-    GL42C reuse "DrawElementsInstancedBaseInstance"
-    GL42C reuse "DrawElementsInstancedBaseVertexBaseInstance"
+    reuse(GL42C, "DrawArraysInstancedBaseInstance")
+    reuse(GL42C, "DrawElementsInstancedBaseInstance")
+    reuse(GL42C, "DrawElementsInstancedBaseVertexBaseInstance")
 
     // ARB_shader_image_load_store
 
@@ -267,8 +267,8 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "IMAGE_FORMAT_COMPATIBILITY_BY_CLASS"..0x90C9
     )
 
-    GL42C reuse "BindImageTexture"
-    GL42C reuse "MemoryBarrier"
+    reuse(GL42C, "BindImageTexture")
+    reuse(GL42C, "MemoryBarrier")
 
     // ARB_internal_format_query
 
@@ -278,7 +278,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
         "NUM_SAMPLE_COUNTS"..0x9380
     )
 
-    GL42C reuse "GetInternalformativ"
+    reuse(GL42C, "GetInternalformativ")
 
     // ARB_map_buffer_alignment
 

@@ -35,10 +35,10 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 
     // ARB_draw_buffers_blend
 
-    GL40C reuse "BlendEquationi"
-    GL40C reuse "BlendEquationSeparatei"
-    GL40C reuse "BlendFunci"
-    GL40C reuse "BlendFuncSeparatei"
+    reuse(GL40C, "BlendEquationi")
+    reuse(GL40C, "BlendEquationSeparatei")
+    reuse(GL40C, "BlendFunci")
+    reuse(GL40C, "BlendFuncSeparatei")
 
     // ARB_draw_indirect
 
@@ -57,8 +57,8 @@ val GL40 = "GL40".nativeClassGL("GL40") {
         "DRAW_INDIRECT_BUFFER_BINDING"..0x8F43
     )
 
-    GL40C reuse "DrawArraysIndirect"
-    GL40C reuse "DrawElementsIndirect"
+    reuse(GL40C, "DrawArraysIndirect")
+    reuse(GL40C, "DrawElementsIndirect")
 
     // ARB_gpu_shader5
 
@@ -96,24 +96,24 @@ val GL40 = "GL40".nativeClassGL("GL40") {
         "DOUBLE_MAT4x3"..0x8F4E
     )
 
-    GL40C reuse "Uniform1d"
-    GL40C reuse "Uniform2d"
-    GL40C reuse "Uniform3d"
-    GL40C reuse "Uniform4d"
-    GL40C reuse "Uniform1dv"
-    GL40C reuse "Uniform2dv"
-    GL40C reuse "Uniform3dv"
-    GL40C reuse "Uniform4dv"
-    GL40C reuse "UniformMatrix2dv"
-    GL40C reuse "UniformMatrix3dv"
-    GL40C reuse "UniformMatrix4dv"
-    GL40C reuse "UniformMatrix2x3dv"
-    GL40C reuse "UniformMatrix2x4dv"
-    GL40C reuse "UniformMatrix3x2dv"
-    GL40C reuse "UniformMatrix3x4dv"
-    GL40C reuse "UniformMatrix4x2dv"
-    GL40C reuse "UniformMatrix4x3dv"
-    GL40C reuse "GetUniformdv"
+    reuse(GL40C, "Uniform1d")
+    reuse(GL40C, "Uniform2d")
+    reuse(GL40C, "Uniform3d")
+    reuse(GL40C, "Uniform4d")
+    reuse(GL40C, "Uniform1dv")
+    reuse(GL40C, "Uniform2dv")
+    reuse(GL40C, "Uniform3dv")
+    reuse(GL40C, "Uniform4dv")
+    reuse(GL40C, "UniformMatrix2dv")
+    reuse(GL40C, "UniformMatrix3dv")
+    reuse(GL40C, "UniformMatrix4dv")
+    reuse(GL40C, "UniformMatrix2x3dv")
+    reuse(GL40C, "UniformMatrix2x4dv")
+    reuse(GL40C, "UniformMatrix3x2dv")
+    reuse(GL40C, "UniformMatrix3x4dv")
+    reuse(GL40C, "UniformMatrix4x2dv")
+    reuse(GL40C, "UniformMatrix4x3dv")
+    reuse(GL40C, "GetUniformdv")
 
     // ARB_sample_shading
 
@@ -132,7 +132,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
         "MIN_SAMPLE_SHADING_VALUE"..0x8C37
     )
 
-    GL40C reuse "MinSampleShading"
+    reuse(GL40C, "MinSampleShading")
 
     // ARB_shader_subroutine
 
@@ -160,14 +160,14 @@ val GL40 = "GL40".nativeClassGL("GL40") {
         "COMPATIBLE_SUBROUTINES"..0x8E4B
     )
 
-    GL40C reuse "GetSubroutineUniformLocation"
-    GL40C reuse "GetSubroutineIndex"
-    GL40C reuse "GetActiveSubroutineUniformiv"
-    GL40C reuse "GetActiveSubroutineUniformName"
-    GL40C reuse "GetActiveSubroutineName"
-    GL40C reuse "UniformSubroutinesuiv"
-    GL40C reuse "GetUniformSubroutineuiv"
-    GL40C reuse "GetProgramStageiv"
+    reuse(GL40C, "GetSubroutineUniformLocation")
+    reuse(GL40C, "GetSubroutineIndex")
+    reuse(GL40C, "GetActiveSubroutineUniformiv")
+    reuse(GL40C, "GetActiveSubroutineUniformName")
+    reuse(GL40C, "GetActiveSubroutineName")
+    reuse(GL40C, "UniformSubroutinesuiv")
+    reuse(GL40C, "GetUniformSubroutineuiv")
+    reuse(GL40C, "GetProgramStageiv")
 
     // ARB_tesselation_shader
 
@@ -248,8 +248,8 @@ val GL40 = "GL40".nativeClassGL("GL40") {
         "TESS_CONTROL_SHADER"..0x8E88
     )
 
-    GL40C reuse "PatchParameteri"
-    GL40C reuse "PatchParameterfv"
+    reuse(GL40C, "PatchParameteri")
+    reuse(GL40C, "PatchParameterfv")
 
     // ARB_texture_cube_map_array
 
@@ -305,13 +305,13 @@ val GL40 = "GL40".nativeClassGL("GL40") {
         "TRANSFORM_FEEDBACK_BINDING"..0x8E25
     )
 
-    GL40C reuse "BindTransformFeedback"
-    GL40C reuse "DeleteTransformFeedbacks"
-    GL40C reuse "GenTransformFeedbacks"
-    GL40C reuse "IsTransformFeedback"
-    GL40C reuse "PauseTransformFeedback"
-    GL40C reuse "ResumeTransformFeedback"
-    GL40C reuse "DrawTransformFeedback"
+    reuse(GL40C, "BindTransformFeedback")
+    reuse(GL40C, "DeleteTransformFeedbacks")
+    reuse(GL40C, "GenTransformFeedbacks")
+    reuse(GL40C, "IsTransformFeedback")
+    reuse(GL40C, "PauseTransformFeedback")
+    reuse(GL40C, "ResumeTransformFeedback")
+    reuse(GL40C, "DrawTransformFeedback")
 
     // ARB_transform_feedback3
 
@@ -322,8 +322,8 @@ val GL40 = "GL40".nativeClassGL("GL40") {
         "MAX_VERTEX_STREAMS"..0x8E71
     )
 
-    GL40C reuse "DrawTransformFeedbackStream"
-    GL40C reuse "BeginQueryIndexed"
-    GL40C reuse "EndQueryIndexed"
-    GL40C reuse "GetQueryIndexediv"
+    reuse(GL40C, "DrawTransformFeedbackStream")
+    reuse(GL40C, "BeginQueryIndexed")
+    reuse(GL40C, "EndQueryIndexed")
+    reuse(GL40C, "GetQueryIndexediv")
 }

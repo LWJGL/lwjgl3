@@ -33,7 +33,7 @@ val ARB_texture_buffer_range = "ARBTextureBufferRange".nativeClassGL("ARB_textur
         "TEXTURE_BUFFER_OFFSET_ALIGNMENT"..0x919F
     )
 
-    val src = GL43C reuse "TexBufferRange"
+    val src = reuse(GL43C, "TexBufferRange")
 
     DependsOn("GL_EXT_direct_state_access")..void(
         "TextureBufferRangeEXT",

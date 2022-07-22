@@ -61,12 +61,10 @@ class CallbackFunction internal constructor(
             else
                 "apiCreate${if (this.definition.union) "Union" else "Struct"}(${
                     this.definition.members.joinToString(", ") { member ->
-                        member.nativeType.libffi.let {
-                            if (member is StructMemberArray) {
-                                "apiCreateArray($it, ${member.size})"
-                            } else {
-                                it
-                            }
+                        if (member is StructMemberArray) {
+                            "apiCreateArray(${member.nativeType.libffi}, ${member.size})"
+                        } else {
+                            member.nativeType.libffi
                         }
                     }
                 })"

@@ -62,13 +62,13 @@ val EXT_disjoint_timer_query = "EXTDisjointTimerQuery".nativeClassGLES("EXT_disj
         "GPU_DISJOINT_EXT"..0x8FBB
     )
 
-    EXT_occlusion_query_boolean reuse "GenQueriesEXT"
-    EXT_occlusion_query_boolean reuse "DeleteQueriesEXT"
-    EXT_occlusion_query_boolean reuse "IsQueryEXT"
-    EXT_occlusion_query_boolean reuse "BeginQueryEXT"
-    EXT_occlusion_query_boolean reuse "EndQueryEXT"
-    EXT_occlusion_query_boolean reuse "GetQueryivEXT"
-    EXT_occlusion_query_boolean reuse "GetQueryObjectuivEXT"
+    reuse(EXT_occlusion_query_boolean, "GenQueriesEXT")
+    reuse(EXT_occlusion_query_boolean, "DeleteQueriesEXT")
+    reuse(EXT_occlusion_query_boolean, "IsQueryEXT")
+    reuse(EXT_occlusion_query_boolean, "BeginQueryEXT")
+    reuse(EXT_occlusion_query_boolean, "EndQueryEXT")
+    reuse(EXT_occlusion_query_boolean, "GetQueryivEXT")
+    reuse(EXT_occlusion_query_boolean, "GetQueryObjectuivEXT")
 
     void(
         "QueryCounterEXT",

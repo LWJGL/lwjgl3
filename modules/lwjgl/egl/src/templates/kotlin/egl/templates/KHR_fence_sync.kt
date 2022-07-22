@@ -40,8 +40,8 @@ val KHR_fence_sync = "KHRFenceSync".nativeClassEGL("KHR_fence_sync", postfix = K
         "SYNC_FENCE_KHR"..0x30F9
     )
 
-    KHR_reusable_sync reuse "CreateSyncKHR"
-    KHR_reusable_sync reuse "DestroySyncKHR"
-    KHR_reusable_sync reuse "ClientWaitSyncKHR"
-    KHR_reusable_sync reuse "GetSyncAttribKHR"
+    reuse(KHR_reusable_sync, "CreateSyncKHR")
+    reuse(KHR_reusable_sync, "DestroySyncKHR")
+    reuse(KHR_reusable_sync, "ClientWaitSyncKHR")
+    reuse(KHR_reusable_sync, "GetSyncAttribKHR")
 }

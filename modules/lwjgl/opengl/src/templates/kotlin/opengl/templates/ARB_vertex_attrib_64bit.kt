@@ -55,18 +55,18 @@ val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_a
         "DOUBLE_MAT4x3"..0x8F4E
     )
 
-    GL41C reuse "VertexAttribL1d"
-    GL41C reuse "VertexAttribL2d"
-    GL41C reuse "VertexAttribL3d"
-    GL41C reuse "VertexAttribL4d"
-    GL41C reuse "VertexAttribL1dv"
-    GL41C reuse "VertexAttribL2dv"
-    GL41C reuse "VertexAttribL3dv"
-    GL41C reuse "VertexAttribL4dv"
+    reuse(GL41C, "VertexAttribL1d")
+    reuse(GL41C, "VertexAttribL2d")
+    reuse(GL41C, "VertexAttribL3d")
+    reuse(GL41C, "VertexAttribL4d")
+    reuse(GL41C, "VertexAttribL1dv")
+    reuse(GL41C, "VertexAttribL2dv")
+    reuse(GL41C, "VertexAttribL3dv")
+    reuse(GL41C, "VertexAttribL4dv")
 
-    GL41C reuse "VertexAttribLPointer"
+    reuse(GL41C, "VertexAttribLPointer")
 
-    GL41C reuse "GetVertexAttribLdv"
+    reuse(GL41C, "GetVertexAttribLdv")
 
     DependsOn("GL_EXT_direct_state_access")..void(
         "VertexArrayVertexAttribLOffsetEXT",

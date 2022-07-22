@@ -26,5 +26,5 @@ val ARB_copy_image = "ARBCopyImage".nativeClassGL("ARB_copy_image") {
         ${GL43.promoted}
         """
 
-    GL43C reuse "CopyImageSubData"
+    reuse(GL43C, "CopyImageSubData")
 }

@@ -39,12 +39,12 @@ val GL21 = "GL21".nativeClassGL("GL21") {
         "FLOAT_MAT4x3"..0x8B6A
     )
 
-    GL21C reuse "UniformMatrix2x3fv"
-    GL21C reuse "UniformMatrix3x2fv"
-    GL21C reuse "UniformMatrix2x4fv"
-    GL21C reuse "UniformMatrix4x2fv"
-    GL21C reuse "UniformMatrix3x4fv"
-    GL21C reuse "UniformMatrix4x3fv"
+    reuse(GL21C, "UniformMatrix2x3fv")
+    reuse(GL21C, "UniformMatrix3x2fv")
+    reuse(GL21C, "UniformMatrix2x4fv")
+    reuse(GL21C, "UniformMatrix4x2fv")
+    reuse(GL21C, "UniformMatrix3x4fv")
+    reuse(GL21C, "UniformMatrix4x3fv")
 
     // ARB_pixel_buffer_object
 

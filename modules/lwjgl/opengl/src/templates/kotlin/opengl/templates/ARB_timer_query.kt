@@ -42,7 +42,7 @@ val ARB_timer_query = "ARBTimerQuery".nativeClassGL("ARB_timer_query") {
         "TIMESTAMP"..0x8E28
     )
 
-    GL33C reuse "QueryCounter"
-    GL33C reuse "GetQueryObjecti64v"
-    GL33C reuse "GetQueryObjectui64v"
+    reuse(GL33C, "QueryCounter")
+    reuse(GL33C, "GetQueryObjecti64v")
+    reuse(GL33C, "GetQueryObjectui64v")
 }

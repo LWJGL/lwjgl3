@@ -34,18 +34,18 @@ val ARB_sampler_objects = "ARBSamplerObjects".nativeClassGL("ARB_sampler_objects
         "SAMPLER_BINDING"..0x8919
     )
 
-    GL33C reuse "GenSamplers"
-    GL33C reuse "DeleteSamplers"
-    GL33C reuse "IsSampler"
-    GL33C reuse "BindSampler"
-    GL33C reuse "SamplerParameteri"
-    GL33C reuse "SamplerParameterf"
-    GL33C reuse "SamplerParameteriv"
-    GL33C reuse "SamplerParameterfv"
-    GL33C reuse "SamplerParameterIiv"
-    GL33C reuse "SamplerParameterIuiv"
-    GL33C reuse "GetSamplerParameteriv"
-    GL33C reuse "GetSamplerParameterfv"
-    GL33C reuse "GetSamplerParameterIiv"
-    GL33C reuse "GetSamplerParameterIuiv"
+    reuse(GL33C, "GenSamplers")
+    reuse(GL33C, "DeleteSamplers")
+    reuse(GL33C, "IsSampler")
+    reuse(GL33C, "BindSampler")
+    reuse(GL33C, "SamplerParameteri")
+    reuse(GL33C, "SamplerParameterf")
+    reuse(GL33C, "SamplerParameteriv")
+    reuse(GL33C, "SamplerParameterfv")
+    reuse(GL33C, "SamplerParameterIiv")
+    reuse(GL33C, "SamplerParameterIuiv")
+    reuse(GL33C, "GetSamplerParameteriv")
+    reuse(GL33C, "GetSamplerParameterfv")
+    reuse(GL33C, "GetSamplerParameterIiv")
+    reuse(GL33C, "GetSamplerParameterIuiv")
 }

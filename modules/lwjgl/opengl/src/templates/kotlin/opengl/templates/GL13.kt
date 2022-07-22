@@ -60,13 +60,13 @@ val GL13 = "GL13".nativeClassGL("GL13") {
         "COMPRESSED_TEXTURE_FORMATS"..0x86A3
     )
 
-    GL13C reuse "CompressedTexImage3D"
-    GL13C reuse "CompressedTexImage2D"
-    GL13C reuse "CompressedTexImage1D"
-    GL13C reuse "CompressedTexSubImage3D"
-    GL13C reuse "CompressedTexSubImage2D"
-    GL13C reuse "CompressedTexSubImage1D"
-    GL13C reuse "GetCompressedTexImage"
+    reuse(GL13C, "CompressedTexImage3D")
+    reuse(GL13C, "CompressedTexImage2D")
+    reuse(GL13C, "CompressedTexImage1D")
+    reuse(GL13C, "CompressedTexSubImage3D")
+    reuse(GL13C, "CompressedTexSubImage2D")
+    reuse(GL13C, "CompressedTexSubImage1D")
+    reuse(GL13C, "GetCompressedTexImage")
 
     // ARB_texture_cube_map
 
@@ -149,7 +149,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
         "SAMPLE_COVERAGE_INVERT"..0x80AB
     )
 
-    GL13C reuse "SampleCoverage"
+    reuse(GL13C, "SampleCoverage")
 
     // ARB_multitexture
 
@@ -198,7 +198,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
         "MAX_TEXTURE_UNITS"..0x84E2
     )
 
-    GL13C reuse "ActiveTexture"
+    reuse(GL13C, "ActiveTexture")
 
     DeprecatedGL..void(
         "ClientActiveTexture",

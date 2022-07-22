@@ -1183,12 +1183,12 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     commands and queries for multitexture
      */
 
-    DependsOn("OpenGL13")..(EXT_draw_buffers2 reuse "EnableIndexedEXT")
-    DependsOn("OpenGL13")..(EXT_draw_buffers2 reuse "DisableIndexedEXT")
-    DependsOn("OpenGL13")..(EXT_draw_buffers2 reuse "IsEnabledIndexedEXT")
+    DependsOn("OpenGL13")..(reuse(EXT_draw_buffers2, "EnableIndexedEXT"))
+    DependsOn("OpenGL13")..(reuse(EXT_draw_buffers2, "DisableIndexedEXT"))
+    DependsOn("OpenGL13")..(reuse(EXT_draw_buffers2, "IsEnabledIndexedEXT"))
 
-    DependsOn("OpenGL13")..(EXT_draw_buffers2 reuse "GetIntegerIndexedvEXT")
-    DependsOn("OpenGL13")..(EXT_draw_buffers2 reuse "GetBooleanIndexedvEXT")
+    DependsOn("OpenGL13")..(reuse(EXT_draw_buffers2, "GetIntegerIndexedvEXT"))
+    DependsOn("OpenGL13")..(reuse(EXT_draw_buffers2, "GetBooleanIndexedvEXT"))
 
     /*
     ARB_vertex_program: New program commands and queries add "Named"

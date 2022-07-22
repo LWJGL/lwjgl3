@@ -65,12 +65,12 @@ val ARB_vertex_attrib_binding = "ARBVertexAttribBinding".nativeClassGL("ARB_vert
         "MAX_VERTEX_ATTRIB_BINDINGS"..0x82DA
     )
 
-    GL43C reuse "BindVertexBuffer"
-    GL43C reuse "VertexAttribFormat"
-    GL43C reuse "VertexAttribIFormat"
-    GL43C reuse "VertexAttribLFormat"
-    GL43C reuse "VertexAttribBinding"
-    GL43C reuse "VertexBindingDivisor"
+    reuse(GL43C, "BindVertexBuffer")
+    reuse(GL43C, "VertexAttribFormat")
+    reuse(GL43C, "VertexAttribIFormat")
+    reuse(GL43C, "VertexAttribLFormat")
+    reuse(GL43C, "VertexAttribBinding")
+    reuse(GL43C, "VertexBindingDivisor")
 
     val vaobj = GLuint("vaobj", "the vertex array object")
     var src = GL43["BindVertexBuffer"]

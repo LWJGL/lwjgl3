@@ -837,19 +837,19 @@ class NativeClass internal constructor(
 
     operator fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: $templateName.$functionName")
 
-    infix fun NativeClass.reuse(functionName: String): Func {
-        val reference = this[functionName]
+    fun reuse(nativeClass: NativeClass, functionName: String) : Func {
+        val reference = nativeClass[functionName]
 
-        val func = Reuse(this)..Func(
+        val func = Reuse(nativeClass)..Func(
             returns = reference.returns,
             simpleName = reference.simpleName,
             name = reference.name,
-            documentation = { this@NativeClass.convertDocumentation(this, reference.name, reference.documentation(it)) },
-            nativeClass = this@NativeClass,
+            documentation = { this.convertDocumentation(nativeClass, reference.name, reference.documentation(it)) },
+            nativeClass = this,
             parameters = reference.parameters
         ).copyModifiers(reference)
 
-        this@NativeClass._functions[functionName] = func
+        this._functions[functionName] = func
         return func
     }
 

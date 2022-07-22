@@ -100,8 +100,8 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 
     // ARB_clear_buffer_object
 
-    GL43C reuse "ClearBufferData"
-    GL43C reuse "ClearBufferSubData"
+    reuse(GL43C, "ClearBufferData")
+    reuse(GL43C, "ClearBufferSubData")
 
     // ARB_compute_shader
 
@@ -169,12 +169,12 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
 
-    GL43C reuse "DispatchCompute"
-    GL43C reuse "DispatchComputeIndirect"
+    reuse(GL43C, "DispatchCompute")
+    reuse(GL43C, "DispatchComputeIndirect")
 
     // ARB_copy_image
 
-    GL43C reuse "CopyImageSubData"
+    reuse(GL43C, "CopyImageSubData")
 
     // KHR_debug
 
@@ -272,16 +272,16 @@ val GL43 = "GL43".nativeClassGL("GL43") {
         "DISPLAY_LIST"..0x82E7
     )
 
-    GL43C reuse "DebugMessageControl"
-    GL43C reuse "DebugMessageInsert"
-    GL43C reuse "DebugMessageCallback"
-    GL43C reuse "GetDebugMessageLog"
-    GL43C reuse "PushDebugGroup"
-    GL43C reuse "PopDebugGroup"
-    GL43C reuse "ObjectLabel"
-    GL43C reuse "GetObjectLabel"
-    GL43C reuse "ObjectPtrLabel"
-    GL43C reuse "GetObjectPtrLabel"
+    reuse(GL43C, "DebugMessageControl")
+    reuse(GL43C, "DebugMessageInsert")
+    reuse(GL43C, "DebugMessageCallback")
+    reuse(GL43C, "GetDebugMessageLog")
+    reuse(GL43C, "PushDebugGroup")
+    reuse(GL43C, "PopDebugGroup")
+    reuse(GL43C, "ObjectLabel")
+    reuse(GL43C, "GetObjectLabel")
+    reuse(GL43C, "ObjectPtrLabel")
+    reuse(GL43C, "GetObjectPtrLabel")
 
     // ARB_explicit_uniform_location
 
@@ -315,8 +315,8 @@ val GL43 = "GL43".nativeClassGL("GL43") {
         "MAX_FRAMEBUFFER_SAMPLES"..0x9318
     )
 
-    GL43C reuse "FramebufferParameteri"
-    GL43C reuse "GetFramebufferParameteriv"
+    reuse(GL43C, "FramebufferParameteri")
+    reuse(GL43C, "GetFramebufferParameteriv")
 
     // ARB_internalformat_query2
 
@@ -428,21 +428,21 @@ val GL43 = "GL43".nativeClassGL("GL43") {
         "VIEW_CLASS_BPTC_FLOAT"..0x82D3
     )
 
-    GL43C reuse "GetInternalformati64v"
+    reuse(GL43C, "GetInternalformati64v")
 
     // ARB_invalidate_subdata
 
-    GL43C reuse "InvalidateTexSubImage"
-    GL43C reuse "InvalidateTexImage"
-    GL43C reuse "InvalidateBufferSubData"
-    GL43C reuse "InvalidateBufferData"
-    GL43C reuse "InvalidateFramebuffer"
-    GL43C reuse "InvalidateSubFramebuffer"
+    reuse(GL43C, "InvalidateTexSubImage")
+    reuse(GL43C, "InvalidateTexImage")
+    reuse(GL43C, "InvalidateBufferSubData")
+    reuse(GL43C, "InvalidateBufferData")
+    reuse(GL43C, "InvalidateFramebuffer")
+    reuse(GL43C, "InvalidateSubFramebuffer")
 
     // ARB_multi_draw_indirect
 
-    GL43C reuse "MultiDrawArraysIndirect"
-    GL43C reuse "MultiDrawElementsIndirect"
+    reuse(GL43C, "MultiDrawArraysIndirect")
+    reuse(GL43C, "MultiDrawElementsIndirect")
 
     // ARB_program_interface_query
 
@@ -511,12 +511,12 @@ val GL43 = "GL43".nativeClassGL("GL43") {
         "IS_PER_PATCH"..0x92E7
     )
 
-    GL43C reuse "GetProgramInterfaceiv"
-    GL43C reuse "GetProgramResourceIndex"
-    GL43C reuse "GetProgramResourceName"
-    GL43C reuse "GetProgramResourceiv"
-    GL43C reuse "GetProgramResourceLocation"
-    GL43C reuse "GetProgramResourceLocationIndex"
+    reuse(GL43C, "GetProgramInterfaceiv")
+    reuse(GL43C, "GetProgramResourceIndex")
+    reuse(GL43C, "GetProgramResourceName")
+    reuse(GL43C, "GetProgramResourceiv")
+    reuse(GL43C, "GetProgramResourceLocation")
+    reuse(GL43C, "GetProgramResourceLocationIndex")
 
     // ARB_shader_storage_buffer_object
 
@@ -569,7 +569,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
         "MAX_COMBINED_SHADER_OUTPUT_RESOURCES"..0x8F39
     )
 
-    GL43C reuse "ShaderStorageBlockBinding"
+    reuse(GL43C, "ShaderStorageBlockBinding")
 
     // ARB_stencil_texturing
 
@@ -594,12 +594,12 @@ val GL43 = "GL43".nativeClassGL("GL43") {
         "TEXTURE_BUFFER_OFFSET_ALIGNMENT"..0x919F
     )
 
-    GL43C reuse "TexBufferRange"
+    reuse(GL43C, "TexBufferRange")
 
     // ARB_texture_storage_multisample
 
-    GL43C reuse "TexStorage2DMultisample"
-    GL43C reuse "TexStorage3DMultisample"
+    reuse(GL43C, "TexStorage2DMultisample")
+    reuse(GL43C, "TexStorage3DMultisample")
 
     // ARB_texture_view
 
@@ -612,7 +612,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
         "TEXTURE_VIEW_NUM_LAYERS"..0x82DE
     )
 
-    GL43C reuse "TextureView"
+    reuse(GL43C, "TextureView")
 
     // ARB_vertex_attrib_binding
 
@@ -639,10 +639,10 @@ val GL43 = "GL43".nativeClassGL("GL43") {
         "MAX_VERTEX_ATTRIB_BINDINGS"..0x82DA
     )
 
-    GL43C reuse "BindVertexBuffer"
-    GL43C reuse "VertexAttribFormat"
-    GL43C reuse "VertexAttribIFormat"
-    GL43C reuse "VertexAttribLFormat"
-    GL43C reuse "VertexAttribBinding"
-    GL43C reuse "VertexBindingDivisor"
+    reuse(GL43C, "BindVertexBuffer")
+    reuse(GL43C, "VertexAttribFormat")
+    reuse(GL43C, "VertexAttribIFormat")
+    reuse(GL43C, "VertexAttribLFormat")
+    reuse(GL43C, "VertexAttribBinding")
+    reuse(GL43C, "VertexBindingDivisor")
 }

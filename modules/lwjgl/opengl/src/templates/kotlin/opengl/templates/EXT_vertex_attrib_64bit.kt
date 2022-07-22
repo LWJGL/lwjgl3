@@ -145,5 +145,5 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
         Check(4)..GLdouble.p("params", "")
     )
 
-    ARB_vertex_attrib_64bit reuse "VertexArrayVertexAttribLOffsetEXT"
+    reuse(ARB_vertex_attrib_64bit, "VertexArrayVertexAttribLOffsetEXT")
 }

@@ -173,14 +173,14 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
         "DISPLAY_LIST"..0x82E7
     )
 
-    GL43C reuse "DebugMessageControl"
-    GL43C reuse "DebugMessageInsert"
-    GL43C reuse "DebugMessageCallback"
-    GL43C reuse "GetDebugMessageLog"
-    GL43C reuse "PushDebugGroup"
-    GL43C reuse "PopDebugGroup"
-    GL43C reuse "ObjectLabel"
-    GL43C reuse "GetObjectLabel"
-    GL43C reuse "ObjectPtrLabel"
-    GL43C reuse "GetObjectPtrLabel"
+    reuse(GL43C, "DebugMessageControl")
+    reuse(GL43C, "DebugMessageInsert")
+    reuse(GL43C, "DebugMessageCallback")
+    reuse(GL43C, "GetDebugMessageLog")
+    reuse(GL43C, "PushDebugGroup")
+    reuse(GL43C, "PopDebugGroup")
+    reuse(GL43C, "ObjectLabel")
+    reuse(GL43C, "GetObjectLabel")
+    reuse(GL43C, "ObjectPtrLabel")
+    reuse(GL43C, "GetObjectPtrLabel")
 }

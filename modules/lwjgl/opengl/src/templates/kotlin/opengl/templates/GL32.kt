@@ -51,14 +51,14 @@ val GL32 = "GL32".nativeClassGL("GL32") {
         "MAX_FRAGMENT_INPUT_COMPONENTS"..0x9125
     )
 
-    GL32C reuse "GetBufferParameteri64v"
+    reuse(GL32C, "GetBufferParameteri64v")
 
     // ARB_draw_elements_base_vertex
 
-    GL32C reuse "DrawElementsBaseVertex"
-    GL32C reuse "DrawRangeElementsBaseVertex"
-    GL32C reuse "DrawElementsInstancedBaseVertex"
-    GL32C reuse "MultiDrawElementsBaseVertex"
+    reuse(GL32C, "DrawElementsBaseVertex")
+    reuse(GL32C, "DrawRangeElementsBaseVertex")
+    reuse(GL32C, "DrawElementsInstancedBaseVertex")
+    reuse(GL32C, "MultiDrawElementsBaseVertex")
 
     // ARB_provoking_vertex
 
@@ -76,7 +76,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
         "QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION"..0x8E4C
     )
 
-    GL32C reuse "ProvokingVertex"
+    reuse(GL32C, "ProvokingVertex")
 
     // ARB_seamless_cube_map
 
@@ -165,10 +165,10 @@ val GL32 = "GL32".nativeClassGL("GL32") {
         "UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910D
     )
 
-    GL32C reuse "TexImage2DMultisample"
-    GL32C reuse "TexImage3DMultisample"
-    GL32C reuse "GetMultisamplefv"
-    GL32C reuse "SampleMaski"
+    reuse(GL32C, "TexImage2DMultisample")
+    reuse(GL32C, "TexImage3DMultisample")
+    reuse(GL32C, "GetMultisamplefv")
+    reuse(GL32C, "SampleMaski")
 
     // ARB_depth_clamp
 
@@ -236,7 +236,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
         "PROGRAM_POINT_SIZE"..0x8642
     )
 
-    GL32C reuse "FramebufferTexture"
+    reuse(GL32C, "FramebufferTexture")
 
     // ARB_sync
 
@@ -295,12 +295,12 @@ val GL32 = "GL32".nativeClassGL("GL32") {
         "WAIT_FAILED"..0x911D
     )
 
-    GL32C reuse "FenceSync"
-    GL32C reuse "IsSync"
-    GL32C reuse "DeleteSync"
-    GL32C reuse "ClientWaitSync"
-    GL32C reuse "WaitSync"
-    GL32C reuse "GetInteger64v"
-    GL32C reuse "GetInteger64i_v"
-    GL32C reuse "GetSynciv"
+    reuse(GL32C, "FenceSync")
+    reuse(GL32C, "IsSync")
+    reuse(GL32C, "DeleteSync")
+    reuse(GL32C, "ClientWaitSync")
+    reuse(GL32C, "WaitSync")
+    reuse(GL32C, "GetInteger64v")
+    reuse(GL32C, "GetInteger64i_v")
+    reuse(GL32C, "GetSynciv")
 }

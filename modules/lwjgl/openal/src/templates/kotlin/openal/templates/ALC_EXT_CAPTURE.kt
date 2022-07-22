@@ -29,9 +29,9 @@ val ALC_EXT_CAPTURE = "EXTCapture".nativeClassALC("EXT_CAPTURE") {
         "CAPTURE_SAMPLES"..0x312
     )
 
-    ALC11 reuse "CaptureOpenDevice"
-    ALC11 reuse "CaptureCloseDevice"
-    ALC11 reuse "CaptureStart"
-    ALC11 reuse "CaptureStop"
-    ALC11 reuse "CaptureSamples"
+    reuse(ALC11, "CaptureOpenDevice")
+    reuse(ALC11, "CaptureCloseDevice")
+    reuse(ALC11, "CaptureStart")
+    reuse(ALC11, "CaptureStop")
+    reuse(ALC11, "CaptureSamples")
 }

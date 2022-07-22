@@ -34,9 +34,9 @@ val ARB_texture_storage = "ARBTextureStorage".nativeClassGL("ARB_texture_storage
         "TEXTURE_IMMUTABLE_FORMAT"..0x912F
     )
 
-    GL42C reuse "TexStorage1D"
-    GL42C reuse "TexStorage2D"
-    GL42C reuse "TexStorage3D"
+    reuse(GL42C, "TexStorage1D")
+    reuse(GL42C, "TexStorage2D")
+    reuse(GL42C, "TexStorage3D")
 
     var src = GL42C["TexStorage1D"]
     val texture = GLuint("texture", "the texture object to update")

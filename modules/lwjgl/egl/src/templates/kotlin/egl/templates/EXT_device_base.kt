@@ -34,8 +34,8 @@ val EXT_device_base = "EXTDeviceBase".nativeClassEGL("EXT_device_base", postfix 
         "NO_DEVICE_EXT"..0L
     )
 
-    EXT_device_query reuse "QueryDeviceAttribEXT"
-    EXT_device_query reuse "QueryDeviceStringEXT"
-    EXT_device_query reuse "QueryDisplayAttribEXT"
-    EXT_device_enumeration reuse "QueryDevicesEXT"
+    reuse(EXT_device_query, "QueryDeviceAttribEXT")
+    reuse(EXT_device_query, "QueryDeviceStringEXT")
+    reuse(EXT_device_query, "QueryDisplayAttribEXT")
+    reuse(EXT_device_enumeration, "QueryDevicesEXT")
 }

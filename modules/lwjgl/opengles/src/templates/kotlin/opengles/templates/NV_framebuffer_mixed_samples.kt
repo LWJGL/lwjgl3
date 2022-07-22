@@ -69,7 +69,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGLES("
         "COVERAGE_MODULATION_TABLE_SIZE_NV"..0x9333
     )
 
-    EXT_raster_multisample reuse "RasterSamplesEXT"
+    reuse(EXT_raster_multisample, "RasterSamplesEXT")
 
     void(
         "CoverageModulationTableNV",

@@ -55,8 +55,8 @@ val ARB_draw_elements_base_vertex = "ARBDrawElementsBaseVertex".nativeClassGL("A
         ${GL32.promoted}
         """
 
-    GL32C reuse "DrawElementsBaseVertex"
-    GL32C reuse "DrawRangeElementsBaseVertex"
-    GL32C reuse "DrawElementsInstancedBaseVertex"
-    GL32C reuse "MultiDrawElementsBaseVertex"
+    reuse(GL32C, "DrawElementsBaseVertex")
+    reuse(GL32C, "DrawRangeElementsBaseVertex")
+    reuse(GL32C, "DrawElementsInstancedBaseVertex")
+    reuse(GL32C, "MultiDrawElementsBaseVertex")
 }

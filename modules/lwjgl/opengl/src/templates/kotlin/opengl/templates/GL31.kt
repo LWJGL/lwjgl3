@@ -57,8 +57,8 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
     // ARB_draw_instanced
 
-    GL31C reuse "DrawArraysInstanced"
-    GL31C reuse "DrawElementsInstanced"
+    reuse(GL31C, "DrawArraysInstanced")
+    reuse(GL31C, "DrawElementsInstanced")
 
     // ARB_copy_buffer
 
@@ -72,7 +72,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
         "COPY_WRITE_BUFFER"..0x8F37
     )
 
-    GL31C reuse "CopyBufferSubData"
+    reuse(GL31C, "CopyBufferSubData")
 
     // NV_primitive_restart
 
@@ -88,7 +88,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
         "PRIMITIVE_RESTART_INDEX"..0x8F9E
     )
 
-    GL31C reuse "PrimitiveRestartIndex"
+    reuse(GL31C, "PrimitiveRestartIndex")
 
     // ARB_texture_buffer_object
 
@@ -110,7 +110,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
         "TEXTURE_BUFFER_DATA_STORE_BINDING"..0x8C2D
     )
 
-    GL31C reuse "TexBuffer"
+    reuse(GL31C, "TexBuffer")
 
     // ARB_texture_rectangle
 
@@ -232,11 +232,11 @@ val GL31 = "GL31".nativeClassGL("GL31") {
         "INVALID_INDEX"..0xFFFFFFFF.i
     )
 
-    GL31C reuse "GetUniformIndices"
-    GL31C reuse "GetActiveUniformsiv"
-    GL31C reuse "GetActiveUniformName"
-    GL31C reuse "GetUniformBlockIndex"
-    GL31C reuse "GetActiveUniformBlockiv"
-    GL31C reuse "GetActiveUniformBlockName"
-    GL31C reuse "UniformBlockBinding"
+    reuse(GL31C, "GetUniformIndices")
+    reuse(GL31C, "GetActiveUniformsiv")
+    reuse(GL31C, "GetActiveUniformName")
+    reuse(GL31C, "GetUniformBlockIndex")
+    reuse(GL31C, "GetActiveUniformBlockiv")
+    reuse(GL31C, "GetActiveUniformBlockName")
+    reuse(GL31C, "UniformBlockBinding")
 }
