@@ -160,7 +160,7 @@ val FB_color_space = "FBColorSpace".nativeClassXR("FB_color_space", type = "inst
 
         XrSession("session", "the session that enumerates the supported color spaces."),
         AutoSize("colorSpaces")..uint32_t("colorSpaceCapacityInput", "the capacity of the {@code colorSpaces} array, or 0 to retrieve the required capacity."),
-        Check(1)..uint32_t.p("colorSpaceCountOutput", "a pointer to the count of {@code XrColorSpaceFB} {@code colorSpaces} written, or a pointer to the required capacity in the case that {@code colorSpaceCapacityInput} is 0."),
+        Check(1)..uint32_t.p("colorSpaceCountOutput", "a pointer to the count of {@code XrColorSpaceFB} {@code colorSpaces} written, or a pointer to the required capacity in the case that {@code colorSpaceCapacityInput} is insufficient."),
         nullable..XrColorSpaceFB.p("colorSpaces", "a pointer to an array of {@code XrColorSpaceFB} color spaces, but <b>can</b> be {@code NULL} if {@code colorSpaceCapacityInput} is 0.")
     )
 

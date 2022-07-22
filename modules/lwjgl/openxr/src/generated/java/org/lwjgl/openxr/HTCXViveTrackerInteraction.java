@@ -107,7 +107,7 @@ public class HTCXViveTrackerInteraction {
      * <p>{@link XrViveTrackerPathsHTCX}</p>
      *
      * @param instance         an instance previously created.
-     * @param pathsCountOutput a pointer to the count of {@link XrViveTrackerPathsHTCX} {@code viveTrackerPaths} written, or a pointer to the required capacity in the case that {@code pathsCapacityInput} is 0.
+     * @param pathsCountOutput a pointer to the count of {@link XrViveTrackerPathsHTCX} {@code viveTrackerPaths} written, or a pointer to the required capacity in the case that {@code pathsCapacityInput} is insufficient.
      * @param viveTrackerPaths a pointer to an array of {@link XrViveTrackerPathsHTCX} VIVE tracker paths, but <b>can</b> be {@code NULL} if {@code pathsCapacityInput} is 0.
      */
     @NativeType("XrResult")

@@ -144,6 +144,11 @@ public class XrBindingModificationBaseHeaderKHR extends Struct implements Native
         return address == NULL ? null : wrap(XrBindingModificationBaseHeaderKHR.class, address);
     }
 
+    /** Upcasts the specified {@code XrInteractionProfileDpadBindingEXT} instance to {@code XrBindingModificationBaseHeaderKHR}. */
+    public static XrBindingModificationBaseHeaderKHR create(XrInteractionProfileDpadBindingEXT value) {
+        return wrap(XrBindingModificationBaseHeaderKHR.class, value);
+    }
+
     /** Upcasts the specified {@code XrInteractionProfileAnalogThresholdVALVE} instance to {@code XrBindingModificationBaseHeaderKHR}. */
     public static XrBindingModificationBaseHeaderKHR create(XrInteractionProfileAnalogThresholdVALVE value) {
         return wrap(XrBindingModificationBaseHeaderKHR.class, value);
@@ -191,6 +196,11 @@ public class XrBindingModificationBaseHeaderKHR extends Struct implements Native
     @Nullable
     public static XrBindingModificationBaseHeaderKHR.Buffer createSafe(long address, int capacity) {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /** Upcasts the specified {@code XrInteractionProfileDpadBindingEXT.Buffer} instance to {@code XrBindingModificationBaseHeaderKHR.Buffer}. */
+    public static XrBindingModificationBaseHeaderKHR.Buffer create(XrInteractionProfileDpadBindingEXT.Buffer value) {
+        return wrap(Buffer.class, value);
     }
 
     /** Upcasts the specified {@code XrInteractionProfileAnalogThresholdVALVE.Buffer} instance to {@code XrBindingModificationBaseHeaderKHR.Buffer}. */

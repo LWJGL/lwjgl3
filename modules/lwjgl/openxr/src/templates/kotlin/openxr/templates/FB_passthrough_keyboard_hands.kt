@@ -17,7 +17,7 @@ val FB_passthrough_keyboard_hands = "FBPassthroughKeyboardHands".nativeClassXR("
     IntConstant(
         "The extension specification version.",
 
-        "FB_passthrough_keyboard_hands_SPEC_VERSION".."1"
+        "FB_passthrough_keyboard_hands_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -29,7 +29,8 @@ val FB_passthrough_keyboard_hands = "FBPassthroughKeyboardHands".nativeClassXR("
     EnumConstant(
         "Extends {@code XrPassthroughLayerPurposeFB}.",
 
-        "PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_HANDS_FB".."1000203001"
+        "PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_HANDS_FB".."1000203001",
+        "PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_MASKED_HANDS_FB".."1000203002"
     )
 
     EnumConstant(

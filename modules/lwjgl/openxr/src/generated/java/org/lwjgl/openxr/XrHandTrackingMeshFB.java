@@ -165,7 +165,7 @@ public class XrHandTrackingMeshFB extends Struct implements NativeResource {
     /** the capacity of the joint data arrays in this structure, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int jointCapacityInput() { return njointCapacityInput(address()); }
-    /** filled in by the runtime with the count of joint data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is 0. */
+    /** filled in by the runtime with the count of joint data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int jointCountOutput() { return njointCountOutput(address()); }
     /** an array of poses that matches what is returned by {@link EXTHandTracking#xrLocateHandJointsEXT LocateHandJointsEXT} which describes the hand skeleton’s bind pose. */
@@ -180,7 +180,7 @@ public class XrHandTrackingMeshFB extends Struct implements NativeResource {
     /** the capacity of the vertex data arrays in this structure, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int vertexCapacityInput() { return nvertexCapacityInput(address()); }
-    /** filled in by the runtime with the count of vertex data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is 0. */
+    /** filled in by the runtime with the count of vertex data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
     /** an array of 3D vertex positions. */
@@ -201,7 +201,7 @@ public class XrHandTrackingMeshFB extends Struct implements NativeResource {
     /** the capacity of the index data arrays in this structure, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int indexCapacityInput() { return nindexCapacityInput(address()); }
-    /** filled in by the runtime with the count of index data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is 0. */
+    /** filled in by the runtime with the count of index data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int indexCountOutput() { return nindexCountOutput(address()); }
     /** an array of triangle indices. */

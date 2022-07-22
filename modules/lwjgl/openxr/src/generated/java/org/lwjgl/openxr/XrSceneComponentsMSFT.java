@@ -99,7 +99,7 @@ public class XrSceneComponentsMSFT extends Struct implements NativeResource {
     /** the capacity of the array, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int componentCapacityInput() { return ncomponentCapacityInput(address()); }
-    /** a pointer to the count of components, or a pointer to the required capacity in the case that {@code componentCapacityInput} is 0. */
+    /** a pointer to the count of components, or a pointer to the required capacity in the case that {@code componentCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int componentCountOutput() { return ncomponentCountOutput(address()); }
     /** an array of {@link XrSceneComponentMSFT}. */

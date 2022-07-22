@@ -194,7 +194,7 @@ public class MSFTControllerModel {
      *
      * @param session           the specified {@code XrSession}.
      * @param modelKey          the model key corresponding to the controller render model being queried.
-     * @param bufferCountOutput filled in by the runtime with the count of elements in {@code buffer} array, or returns the required capacity in the case that {@code bufferCapacityInput} is 0.
+     * @param bufferCountOutput filled in by the runtime with the count of elements in {@code buffer} array, or returns the required capacity in the case that {@code bufferCapacityInput} is insufficient.
      * @param buffer            a pointer to an application-allocated array of the model for the device that will be filled with the {@code uint8_t} values by the runtime. It <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0.
      */
     @NativeType("XrResult")

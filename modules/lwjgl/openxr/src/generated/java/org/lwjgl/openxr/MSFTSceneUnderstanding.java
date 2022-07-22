@@ -348,7 +348,7 @@ public class MSFTSceneUnderstanding {
      *
      * @param instance           a handle to an {@code XrInstance}.
      * @param systemId           the {@code XrSystemId} whose scene compute features will be enumerated.
-     * @param featureCountOutput a pointer to the count of scene compute features, or a pointer to the required capacity in the case that {@code featureCapacityInput} is 0.
+     * @param featureCountOutput a pointer to the count of scene compute features, or a pointer to the required capacity in the case that {@code featureCapacityInput} is insufficient.
      * @param features           an array of {@code XrSceneComputeFeatureMSFT}.
      */
     @NativeType("XrResult")

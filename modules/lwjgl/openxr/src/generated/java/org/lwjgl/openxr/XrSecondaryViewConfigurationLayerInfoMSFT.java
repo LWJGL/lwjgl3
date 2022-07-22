@@ -120,7 +120,7 @@ public class XrSecondaryViewConfigurationLayerInfoMSFT extends Struct implements
     /** the {@code XrEnvironmentBlendMode} value representing the desired <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#environment_blend_mode">environment blend mode</a> for this view configuration. */
     @NativeType("XrEnvironmentBlendMode")
     public int environmentBlendMode() { return nenvironmentBlendMode(address()); }
-    /** the number of composition layers in this frame for the secondary view configuration type. The maximum supported layer count is identified by {@link XrSystemGraphicsProperties}::maxLayerCount. If layerCount is greater than the maximum supported layer count then {@link XR10#XR_ERROR_LAYER_LIMIT_EXCEEDED ERROR_LAYER_LIMIT_EXCEEDED} is returned. The runtime <b>must</b> support at least {@link XR10#XR_MIN_COMPOSITION_LAYERS_SUPPORTED MIN_COMPOSITION_LAYERS_SUPPORTED} layers. */
+    /** the number of composition layers in this frame for the secondary view configuration type. The maximum supported layer count is identified by {@link XrSystemGraphicsProperties}::maxLayerCount. If layerCount is greater than the maximum supported layer count then {@link XR10#XR_ERROR_LAYER_LIMIT_EXCEEDED ERROR_LAYER_LIMIT_EXCEEDED} is returned. */
     @NativeType("uint32_t")
     public int layerCount() { return nlayerCount(address()); }
     /** a pointer to an array of {@link XrCompositionLayerBaseHeader} pointers. */

@@ -20,7 +20,23 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>{@link XrCompositionLayerDepthInfoKHR} contains the information needed to specify an extra layer with depth information. When submitting depth buffers along with projection layers, add the {@link XrCompositionLayerDepthInfoKHR} to the {@code next} chain for all {@link XrCompositionLayerProjectionView} structures in the given layer.</p>
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>The window space depth values {@code minDepth} and {@code maxDepth} are akin to the parameters of {@code glDepthRange} that specify the mapping from normalized device coordinates into window space.</p>
+ * </div>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>A reversed mapping of depth, such that points closer to the view have a window space depth that is greater than points further away can be achieved by making nearZ &gt; farZ.</p>
+ * </div>
+ * 
+ * <p>{@link XrCompositionLayerDepthInfoKHR} contains the information needed to associate depth with the color information in a projection layer. When submitting depth images along with projection layers, add the {@link XrCompositionLayerDepthInfoKHR} to the {@code next} chain for all {@link XrCompositionLayerProjectionView} structures in the given layer.</p>
+ * 
+ * <p>The homogeneous transform from view space z to window space depth is given by the following matrix, where a = minDepth, b = maxDepth, n = nearZ, and f = farZ.</p>
+ * 
+ * <p>Homogeneous values are constructed from real values by appending a w component with value 1.0.</p>
+ * 
+ * <p>General homogeneous values are projected back to real space by dividing by the w component.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -108,15 +124,15 @@ public class XrCompositionLayerDepthInfoKHR extends Struct implements NativeReso
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** identifies the depth image {@link XrSwapchainSubImage} to be associated with the color swapchain. The contained {@code imageRect} specifies the valid portion of the depth image to use, in pixels. It also implicitly defines the transform from normalized image coordinates into pixel coordinates. The contained {@code imageArrayIndex} is the depth image array index, with 0 meaning the first or only array element. */
+    /** identifies the depth image {@link XrSwapchainSubImage} to be associated with the color swapchain. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
-    /** {@code minDepth} and {@code maxDepth} are the range of depth values the {@code depthSwapchain} could have, in the range of <code>[0.0,1.0]</code>. This is akin to min and max values of OpenGL’s {@code glDepthRange}, but with the requirement here that <code>maxDepth ≥ minDepth</code>. */
+    /** {@code minDepth} and {@code maxDepth} are the window space depths that correspond to the near and far frustum planes, respectively. {@code minDepth} must be less than {@code maxDepth}. {@code minDepth} and {@code maxDepth} must be in the range [0, 1]. */
     public float minDepth() { return nminDepth(address()); }
     /** see {@code minDepth} */
     public float maxDepth() { return nmaxDepth(address()); }
-    /** the positive distance in meters of the {@code minDepth} value in the depth swapchain. Applications <b>may</b> use a {@code nearZ} that is greater than {@code farZ} to indicate depth values are reversed. {@code nearZ} can be infinite. */
+    /** {@code nearZ} and {@code farZ} are the positive distances in meters to the near and far frustum planes, respectively. {@code nearZ} and {@code farZ} <b>must</b> not be equal. {@code nearZ} and {@code farZ} <b>must</b> be in the range (0, +infinity]. */
     public float nearZ() { return nnearZ(address()); }
-    /** the positive distance in meters of the {@code maxDepth} value in the depth swapchain. {@code farZ} can be infinite. Applications <b>must</b> not use the same value as {@code nearZ}. */
+    /** see {@code nearZ} */
     public float farZ() { return nfarZ(address()); }
 
     /** Sets the specified value to the {@link #type} field. */

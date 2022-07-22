@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrExtent2Df}, {@link XrOffset2Df}</p>
+ * <p>{@link XrExtent2Df}, {@link XrOffset2Df}, {@link FBScene#xrGetSpaceBoundingBox2DFB GetSpaceBoundingBox2DFB}</p>
  * 
  * <h3>Layout</h3>
  * 

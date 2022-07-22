@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrHapticVibration}, {@link XrInteractionProfileAnalogThresholdVALVE}, {@link XR10#xrApplyHapticFeedback ApplyHapticFeedback}</p>
+ * <p>{@link XrHapticVibration}, {@link XrInteractionProfileAnalogThresholdVALVE}, {@link XrInteractionProfileDpadBindingEXT}, {@link XR10#xrApplyHapticFeedback ApplyHapticFeedback}</p>
  * 
  * <h3>Layout</h3>
  * 

@@ -90,7 +90,7 @@ val FB_display_refresh_rate = "FBDisplayRefreshRate".nativeClassXR("FB_display_r
 
         XrSession("session", "the session that enumerates the supported display refresh rates."),
         AutoSize("displayRefreshRates")..uint32_t("displayRefreshRateCapacityInput", "the capacity of the {@code displayRefreshRates}, or 0 to retrieve the required capacity."),
-        Check(1)..uint32_t.p("displayRefreshRateCountOutput", "a pointer to the count of {@code float} {@code displayRefreshRates} written, or a pointer to the required capacity in the case that {@code displayRefreshRateCapacityInput} is 0."),
+        Check(1)..uint32_t.p("displayRefreshRateCountOutput", "a pointer to the count of {@code float} {@code displayRefreshRates} written, or a pointer to the required capacity in the case that {@code displayRefreshRateCapacityInput} is insufficient."),
         nullable..float.p("displayRefreshRates", "a pointer to an array of {@code float} display refresh rates, but <b>can</b> be {@code NULL} if {@code displayRefreshRateCapacityInput} is 0.")
     )
 

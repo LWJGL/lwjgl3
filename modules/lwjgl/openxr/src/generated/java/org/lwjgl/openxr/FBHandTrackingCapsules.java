@@ -9,7 +9,7 @@ package org.lwjgl.openxr;
 public final class FBHandTrackingCapsules {
 
     /** The extension specification version. */
-    public static final int XR_FB_hand_tracking_capsules_SPEC_VERSION = 2;
+    public static final int XR_FB_hand_tracking_capsules_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String XR_FB_HAND_TRACKING_CAPSULES_EXTENSION_NAME = "XR_FB_hand_tracking_capsules";

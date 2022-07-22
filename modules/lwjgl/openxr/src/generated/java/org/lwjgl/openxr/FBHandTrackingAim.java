@@ -9,7 +9,7 @@ package org.lwjgl.openxr;
 public final class FBHandTrackingAim {
 
     /** The extension specification version. */
-    public static final int XR_FB_hand_tracking_aim_SPEC_VERSION = 1;
+    public static final int XR_FB_hand_tracking_aim_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_FB_HAND_TRACKING_AIM_EXTENSION_NAME = "XR_FB_hand_tracking_aim";

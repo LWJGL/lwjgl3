@@ -287,7 +287,7 @@ val MSFT_scene_understanding = "MSFTSceneUnderstanding".nativeClassXR("MSFT_scen
         XrInstance("instance", "a handle to an {@code XrInstance}."),
         XrSystemId("systemId", "the {@code XrSystemId} whose scene compute features will be enumerated."),
         AutoSize("features")..uint32_t("featureCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity."),
-        Check(1)..uint32_t.p("featureCountOutput", "a pointer to the count of scene compute features, or a pointer to the required capacity in the case that {@code featureCapacityInput} is 0."),
+        Check(1)..uint32_t.p("featureCountOutput", "a pointer to the count of scene compute features, or a pointer to the required capacity in the case that {@code featureCapacityInput} is insufficient."),
         nullable..XrSceneComputeFeatureMSFT.p("features", "an array of {@code XrSceneComputeFeatureMSFT}.")
     )
 

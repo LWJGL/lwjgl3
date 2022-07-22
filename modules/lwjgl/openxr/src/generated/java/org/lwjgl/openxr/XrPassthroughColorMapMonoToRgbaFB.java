@@ -21,13 +21,11 @@ import static org.lwjgl.openxr.FBPassthrough.*;
 /**
  * A layer color map.
  * 
- * <h5>Member Descriptions</h5>
+ * <h5>Description</h5>
  * 
- * <ul>
- * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
- * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
- * <li>{@code textureColorMap} is the array of {@link XrColor4f} colors that map to intensity values.</li>
- * </ul>
+ * <p>{@link XrPassthroughColorMapMonoToRgbaFB} lets applications define a map which replaces each input luminance value in the passthrough imagery with an RGBA color value. The map is applied before any additional effects (such as edges) are rendered on top.</p>
+ * 
+ * <p>{@link XrPassthroughColorMapMonoToRgbaFB} is provided in the {@code next} chain of {@link XrPassthroughStyleFB}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -45,9 +43,9 @@ import static org.lwjgl.openxr.FBPassthrough.*;
  * 
  * <pre><code>
  * struct XrPassthroughColorMapMonoToRgbaFB {
- *     XrStructureType type;
- *     void const * next;
- *     {@link XrColor4f XrColor4f} textureColorMap[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB];
+ *     XrStructureType {@link #type};
+ *     void const * {@link #next};
+ *     {@link XrColor4f XrColor4f} {@link #textureColorMap}[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB];
  * }</code></pre>
  */
 public class XrPassthroughColorMapMonoToRgbaFB extends Struct implements NativeResource {
@@ -92,31 +90,31 @@ public class XrPassthroughColorMapMonoToRgbaFB extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code type} field. */
+    /** the {@code XrStructureType} of this structure. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code next} field. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** @return a {@link XrColor4f}.Buffer view of the {@code textureColorMap} field. */
+    /** an array of {@link XrColor4f} colors to which the passthrough imagery luminance values are mapped. */
     @NativeType("XrColor4f[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB]")
     public XrColor4f.Buffer textureColorMap() { return ntextureColorMap(address()); }
-    /** @return a {@link XrColor4f} view of the struct at the specified index of the {@code textureColorMap} field. */
+    /** an array of {@link XrColor4f} colors to which the passthrough imagery luminance values are mapped. */
     public XrColor4f textureColorMap(int index) { return ntextureColorMap(address(), index); }
 
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public XrPassthroughColorMapMonoToRgbaFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB} value to the {@code type} field. */
+    /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB} value to the {@link #type} field. */
     public XrPassthroughColorMapMonoToRgbaFB type$Default() { return type(FBPassthrough.XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB); }
-    /** Sets the specified value to the {@code next} field. */
+    /** Sets the specified value to the {@link #next} field. */
     public XrPassthroughColorMapMonoToRgbaFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrColor4f.Buffer} to the {@code textureColorMap} field. */
+    /** Copies the specified {@link XrColor4f.Buffer} to the {@link #textureColorMap} field. */
     public XrPassthroughColorMapMonoToRgbaFB textureColorMap(@NativeType("XrColor4f[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB]") XrColor4f.Buffer value) { ntextureColorMap(address(), value); return this; }
-    /** Copies the specified {@link XrColor4f} at the specified index of the {@code textureColorMap} field. */
+    /** Copies the specified {@link XrColor4f} at the specified index of the {@link #textureColorMap} field. */
     public XrPassthroughColorMapMonoToRgbaFB textureColorMap(int index, XrColor4f value) { ntextureColorMap(address(), index, value); return this; }
-    /** Passes the {@code textureColorMap} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@link #textureColorMap} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrPassthroughColorMapMonoToRgbaFB textureColorMap(java.util.function.Consumer<XrColor4f.Buffer> consumer) { consumer.accept(textureColorMap()); return this; }
-    /** Passes the element at {@code index} of the {@code textureColorMap} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the element at {@code index} of the {@link #textureColorMap} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrPassthroughColorMapMonoToRgbaFB textureColorMap(int index, java.util.function.Consumer<XrColor4f> consumer) { consumer.accept(textureColorMap(index)); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,31 +318,31 @@ public class XrPassthroughColorMapMonoToRgbaFB extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code type} field. */
+        /** @return the value of the {@link XrPassthroughColorMapMonoToRgbaFB#type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPassthroughColorMapMonoToRgbaFB.ntype(address()); }
-        /** @return the value of the {@code next} field. */
+        /** @return the value of the {@link XrPassthroughColorMapMonoToRgbaFB#next} field. */
         @NativeType("void const *")
         public long next() { return XrPassthroughColorMapMonoToRgbaFB.nnext(address()); }
-        /** @return a {@link XrColor4f}.Buffer view of the {@code textureColorMap} field. */
+        /** @return a {@link XrColor4f}.Buffer view of the {@link XrPassthroughColorMapMonoToRgbaFB#textureColorMap} field. */
         @NativeType("XrColor4f[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB]")
         public XrColor4f.Buffer textureColorMap() { return XrPassthroughColorMapMonoToRgbaFB.ntextureColorMap(address()); }
-        /** @return a {@link XrColor4f} view of the struct at the specified index of the {@code textureColorMap} field. */
+        /** @return a {@link XrColor4f} view of the struct at the specified index of the {@link XrPassthroughColorMapMonoToRgbaFB#textureColorMap} field. */
         public XrColor4f textureColorMap(int index) { return XrPassthroughColorMapMonoToRgbaFB.ntextureColorMap(address(), index); }
 
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link XrPassthroughColorMapMonoToRgbaFB#type} field. */
         public XrPassthroughColorMapMonoToRgbaFB.Buffer type(@NativeType("XrStructureType") int value) { XrPassthroughColorMapMonoToRgbaFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB} value to the {@code type} field. */
+        /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB} value to the {@link XrPassthroughColorMapMonoToRgbaFB#type} field. */
         public XrPassthroughColorMapMonoToRgbaFB.Buffer type$Default() { return type(FBPassthrough.XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB); }
-        /** Sets the specified value to the {@code next} field. */
+        /** Sets the specified value to the {@link XrPassthroughColorMapMonoToRgbaFB#next} field. */
         public XrPassthroughColorMapMonoToRgbaFB.Buffer next(@NativeType("void const *") long value) { XrPassthroughColorMapMonoToRgbaFB.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrColor4f.Buffer} to the {@code textureColorMap} field. */
+        /** Copies the specified {@link XrColor4f.Buffer} to the {@link XrPassthroughColorMapMonoToRgbaFB#textureColorMap} field. */
         public XrPassthroughColorMapMonoToRgbaFB.Buffer textureColorMap(@NativeType("XrColor4f[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB]") XrColor4f.Buffer value) { XrPassthroughColorMapMonoToRgbaFB.ntextureColorMap(address(), value); return this; }
-        /** Copies the specified {@link XrColor4f} at the specified index of the {@code textureColorMap} field. */
+        /** Copies the specified {@link XrColor4f} at the specified index of the {@link XrPassthroughColorMapMonoToRgbaFB#textureColorMap} field. */
         public XrPassthroughColorMapMonoToRgbaFB.Buffer textureColorMap(int index, XrColor4f value) { XrPassthroughColorMapMonoToRgbaFB.ntextureColorMap(address(), index, value); return this; }
-        /** Passes the {@code textureColorMap} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@link XrPassthroughColorMapMonoToRgbaFB#textureColorMap} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrPassthroughColorMapMonoToRgbaFB.Buffer textureColorMap(java.util.function.Consumer<XrColor4f.Buffer> consumer) { consumer.accept(textureColorMap()); return this; }
-        /** Passes the element at {@code index} of the {@code textureColorMap} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the element at {@code index} of the {@link XrPassthroughColorMapMonoToRgbaFB#textureColorMap} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrPassthroughColorMapMonoToRgbaFB.Buffer textureColorMap(int index, java.util.function.Consumer<XrColor4f> consumer) { consumer.accept(textureColorMap(index)); return this; }
 
     }

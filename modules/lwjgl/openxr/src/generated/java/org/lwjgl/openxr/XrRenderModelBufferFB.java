@@ -103,7 +103,7 @@ public class XrRenderModelBufferFB extends Struct implements NativeResource {
     /** the capacity of the {@code buffer}, or 0 to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int bufferCapacityInput() { return nbufferCapacityInput(address()); }
-    /** the count of {@code uint8_t} {@code buffer} written, or the required capacity in the case that {@code bufferCapacityInput} is 0. */
+    /** the count of {@code uint8_t} {@code buffer} written, or the required capacity in the case that {@code bufferCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int bufferCountOutput() { return nbufferCountOutput(address()); }
     /** a pointer to an application-allocated array that will be filled with the render model binary data. */

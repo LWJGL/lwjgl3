@@ -17,7 +17,7 @@ val EXT_eye_gaze_interaction = "EXTEyeGazeInteraction".nativeClassXR("EXT_eye_ga
     IntConstant(
         "The extension specification version.",
 
-        "EXT_eye_gaze_interaction_SPEC_VERSION".."1"
+        "EXT_eye_gaze_interaction_SPEC_VERSION".."2"
     )
 
     StringConstant(

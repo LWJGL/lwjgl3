@@ -17,7 +17,7 @@ val FB_render_model = "FBRenderModel".nativeClassXR("FB_render_model", type = "i
     IntConstant(
         "The extension specification version.",
 
-        "FB_render_model_SPEC_VERSION".."1"
+        "FB_render_model_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -39,7 +39,8 @@ val FB_render_model = "FBRenderModel".nativeClassXR("FB_render_model", type = "i
         "TYPE_RENDER_MODEL_PROPERTIES_FB".."1000119001",
         "TYPE_RENDER_MODEL_BUFFER_FB".."1000119002",
         "TYPE_RENDER_MODEL_LOAD_INFO_FB".."1000119003",
-        "TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB".."1000119004"
+        "TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB".."1000119004",
+        "TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB".."1000119005"
     )
 
     EnumConstant(
@@ -47,6 +48,13 @@ val FB_render_model = "FBRenderModel".nativeClassXR("FB_render_model", type = "i
 
         "ERROR_RENDER_MODEL_KEY_INVALID_FB".."-1000119000",
         "RENDER_MODEL_UNAVAILABLE_FB".."1000119020"
+    )
+
+    EnumConstant(
+        "XrRenderModelFlagBitsFB",
+
+        "RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB".enum(0x00000001),
+        "RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_2_BIT_FB".enum(0x00000002)
     )
 
     XrResult(
@@ -100,7 +108,7 @@ val FB_render_model = "FBRenderModel".nativeClassXR("FB_render_model", type = "i
 
         XrSession("session", "the specified {@code XrSession}."),
         AutoSize("paths")..uint32_t("pathCapacityInput", "the capacity of the {@code paths}, or 0 to retrieve the required capacity."),
-        Check(1)..uint32_t.p("pathCountOutput", "a pointer to the count of {@code float} {@code paths} written, or a pointer to the required capacity in the case that {@code pathCapacityInput} is 0."),
+        Check(1)..uint32_t.p("pathCountOutput", "a pointer to the count of {@code float} {@code paths} written, or a pointer to the required capacity in the case that {@code pathCapacityInput} is insufficient."),
         nullable..XrRenderModelPathInfoFB.p("paths", "a pointer to an application-allocated array that will be filled with ##XrRenderModelPathInfoFB values that are supported by the runtime, but <b>can</b> be {@code NULL} if {@code pathCapacityInput} is 0")
     )
 

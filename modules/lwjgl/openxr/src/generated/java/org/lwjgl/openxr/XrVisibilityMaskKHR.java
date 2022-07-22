@@ -112,7 +112,7 @@ public class XrVisibilityMaskKHR extends Struct implements NativeResource {
     /** the capacity of the {@code vertices} array, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int vertexCapacityInput() { return nvertexCapacityInput(address()); }
-    /** filled in by the runtime with the count of vertices written or the required capacity in the case that {@code vertexCapacityInput} or {@code indexCapacityInput} is 0. */
+    /** filled in by the runtime with the count of vertices written or the required capacity in the case that {@code vertexCapacityInput} or {@code indexCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
     /** an array of vertices filled in by the runtime that specifies mask coordinates in the z=-1 plane of the rendered view—​i.e. one meter in front of the view. When rendering the mask for use in a projection layer, these vertices must be transformed by the application’s projection matrix used for the respective {@link XrCompositionLayerProjectionView}. */
@@ -122,7 +122,7 @@ public class XrVisibilityMaskKHR extends Struct implements NativeResource {
     /** the capacity of the {@code indices} array, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int indexCapacityInput() { return nindexCapacityInput(address()); }
-    /** filled in by the runtime with the count of indices written or the required capacity in the case that {@code vertexCapacityInput} or {@code indexCapacityInput} is 0. */
+    /** filled in by the runtime with the count of indices written or the required capacity in the case that {@code vertexCapacityInput} or {@code indexCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int indexCountOutput() { return nindexCountOutput(address()); }
     /** an array of indices filled in by the runtime, specifying the indices of the mask geometry in the {@code vertices} array. */

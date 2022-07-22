@@ -117,6 +117,10 @@ public class XR10 {
      * <tr><td>{@link MSFTSceneUnderstanding#XR_ERROR_SCENE_COMPUTE_CONSISTENCY_MISMATCH_MSFT ERROR_SCENE_COMPUTE_CONSISTENCY_MISMATCH_MSFT}</td><td>Scene compute consistency mismatch. (Added by the {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension)</td></tr>
      * <tr><td>{@link FBDisplayRefreshRate#XR_ERROR_DISPLAY_REFRESH_RATE_UNSUPPORTED_FB ERROR_DISPLAY_REFRESH_RATE_UNSUPPORTED_FB}</td><td>The display refresh rate is not supported by the platform. (Added by the {@link FBDisplayRefreshRate XR_FB_display_refresh_rate} extension)</td></tr>
      * <tr><td>{@link FBColorSpace#XR_ERROR_COLOR_SPACE_UNSUPPORTED_FB ERROR_COLOR_SPACE_UNSUPPORTED_FB}</td><td>The color space is not supported by the runtime. (Added by the {@link FBColorSpace XR_FB_color_space} extension)</td></tr>
+     * <tr><td>{@link FBSpatialEntity#XR_ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB}</td><td>The component type is not supported for this space. (Added by the {@link FBSpatialEntity XR_FB_spatial_entity} extension)</td></tr>
+     * <tr><td>{@link FBSpatialEntity#XR_ERROR_SPACE_COMPONENT_NOT_ENABLED_FB ERROR_SPACE_COMPONENT_NOT_ENABLED_FB}</td><td>The required component is not enabled for this space. (Added by the {@link FBSpatialEntity XR_FB_spatial_entity} extension)</td></tr>
+     * <tr><td>{@link FBSpatialEntity#XR_ERROR_SPACE_COMPONENT_STATUS_PENDING_FB ERROR_SPACE_COMPONENT_STATUS_PENDING_FB}</td><td>A request to set the component’s status is currently pending. (Added by the {@link FBSpatialEntity XR_FB_spatial_entity} extension)</td></tr>
+     * <tr><td>{@link FBSpatialEntity#XR_ERROR_SPACE_COMPONENT_STATUS_ALREADY_SET_FB ERROR_SPACE_COMPONENT_STATUS_ALREADY_SET_FB}</td><td>The component is already set to the requested value. (Added by the {@link FBSpatialEntity XR_FB_spatial_entity} extension)</td></tr>
      * <tr><td>{@link FBPassthrough#XR_ERROR_UNEXPECTED_STATE_PASSTHROUGH_FB ERROR_UNEXPECTED_STATE_PASSTHROUGH_FB}</td><td>The object state is unexpected for the issued command. (Added by the {@link FBPassthrough XR_FB_passthrough} extension)</td></tr>
      * <tr><td>{@link FBPassthrough#XR_ERROR_FEATURE_ALREADY_CREATED_PASSTHROUGH_FB ERROR_FEATURE_ALREADY_CREATED_PASSTHROUGH_FB}</td><td>Trying to create an MR feature when one was already created and only one instance is allowed. (Added by the {@link FBPassthrough XR_FB_passthrough} extension)</td></tr>
      * <tr><td>{@link FBPassthrough#XR_ERROR_FEATURE_REQUIRED_PASSTHROUGH_FB ERROR_FEATURE_REQUIRED_PASSTHROUGH_FB}</td><td>Requested functionality requires a feature to be created first. (Added by the {@link FBPassthrough XR_FB_passthrough} extension)</td></tr>
@@ -133,7 +137,7 @@ public class XR10 {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link #xrResultToString ResultToString}</p>
+     * <p>{@link XrEventDataSpaceEraseCompleteFB}, {@link XrEventDataSpaceQueryCompleteFB}, {@link XrEventDataSpaceSaveCompleteFB}, {@link XrEventDataSpaceSetStatusCompleteFB}, {@link XrEventDataSpatialAnchorCreateCompleteFB}, {@link #xrResultToString ResultToString}</p>
      */
     public static final int
         XR_SUCCESS                                   = 0,
@@ -203,7 +207,7 @@ public class XR10 {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link XrActionCreateInfo}, {@link XrActionSetCreateInfo}, {@link XrActionSpaceCreateInfo}, {@link XrActionStateBoolean}, {@link XrActionStateFloat}, {@link XrActionStateGetInfo}, {@link XrActionStatePose}, {@link XrActionStateVector2f}, {@link XrActionsSyncInfo}, {@link XrApiLayerProperties}, {@link XrBaseInStructure}, {@link XrBaseOutStructure}, {@link XrBindingModificationBaseHeaderKHR}, {@link XrBindingModificationsKHR}, {@link XrBoundSourcesForActionEnumerateInfo}, {@link XrCompositionLayerAlphaBlendFB}, {@link XrCompositionLayerBaseHeader}, {@link XrCompositionLayerColorScaleBiasKHR}, {@link XrCompositionLayerCubeKHR}, {@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerDepthInfoKHR}, {@link XrCompositionLayerDepthTestVARJO}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerImageLayoutFB}, {@link XrCompositionLayerPassthroughFB}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerProjectionView}, {@link XrCompositionLayerQuad}, {@link XrCompositionLayerReprojectionInfoMSFT}, {@link XrCompositionLayerReprojectionPlaneOverrideMSFT}, {@link XrCompositionLayerSecureContentFB}, {@link XrCompositionLayerSpaceWarpInfoFB}, {@link XrControllerModelKeyStateMSFT}, {@link XrControllerModelNodePropertiesMSFT}, {@link XrControllerModelNodeStateMSFT}, {@link XrControllerModelPropertiesMSFT}, {@link XrControllerModelStateMSFT}, {@link XrDebugUtilsLabelEXT}, {@link XrDebugUtilsMessengerCallbackDataEXT}, {@link XrDebugUtilsMessengerCreateInfoEXT}, {@link XrDebugUtilsObjectNameInfoEXT}, {@link XrDigitalLensControlALMALENCE}, {@link XrEventDataBaseHeader}, {@link XrEventDataBuffer}, {@link XrEventDataDisplayRefreshRateChangedFB}, {@link XrEventDataEventsLost}, {@link XrEventDataInstanceLossPending}, {@link XrEventDataInteractionProfileChanged}, {@link XrEventDataMainSessionVisibilityChangedEXTX}, {@link XrEventDataMarkerTrackingUpdateVARJO}, {@link XrEventDataPassthroughStateChangedFB}, {@link XrEventDataPerfSettingsEXT}, {@link XrEventDataReferenceSpaceChangePending}, {@link XrEventDataSessionStateChanged}, {@link XrEventDataVisibilityMaskChangedKHR}, {@link XrEventDataViveTrackerConnectedHTCX}, {@link XrExtensionProperties}, {@link XrEyeGazeSampleTimeEXT}, {@link XrFacialExpressionsHTC}, {@link XrFacialTrackerCreateInfoHTC}, {@link XrFoveatedViewConfigurationViewVARJO}, {@link XrFoveationLevelProfileCreateInfoFB}, {@link XrFoveationProfileCreateInfoFB}, {@link XrFrameBeginInfo}, {@link XrFrameEndInfo}, {@link XrFrameState}, {@link XrFrameWaitInfo}, {@link XrGeometryInstanceCreateInfoFB}, {@link XrGeometryInstanceTransformFB}, {@link XrGraphicsBindingEGLMNDX}, {@link XrGraphicsBindingOpenGLWaylandKHR}, {@link XrGraphicsBindingOpenGLWin32KHR}, {@link XrGraphicsBindingOpenGLXcbKHR}, {@link XrGraphicsBindingOpenGLXlibKHR}, {@link XrGraphicsBindingVulkanKHR}, {@link XrGraphicsRequirementsOpenGLESKHR}, {@link XrGraphicsRequirementsOpenGLKHR}, {@link XrGraphicsRequirementsVulkanKHR}, {@link XrHandJointLocationsEXT}, {@link XrHandJointVelocitiesEXT}, {@link XrHandJointsLocateInfoEXT}, {@link XrHandJointsMotionRangeInfoEXT}, {@link XrHandMeshMSFT}, {@link XrHandMeshSpaceCreateInfoMSFT}, {@link XrHandMeshUpdateInfoMSFT}, {@link XrHandPoseTypeInfoMSFT}, {@link XrHandTrackerCreateInfoEXT}, {@link XrHandTrackingAimStateFB}, {@link XrHandTrackingCapsulesStateFB}, {@link XrHandTrackingMeshFB}, {@link XrHandTrackingScaleFB}, {@link XrHapticActionInfo}, {@link XrHapticBaseHeader}, {@link XrHapticVibration}, {@link XrHolographicWindowAttachmentMSFT}, {@link XrInputSourceLocalizedNameGetInfo}, {@link XrInstanceCreateInfo}, {@link XrInstanceProperties}, {@link XrInteractionProfileAnalogThresholdVALVE}, {@link XrInteractionProfileState}, {@link XrInteractionProfileSuggestedBinding}, {@link XrKeyboardSpaceCreateInfoFB}, {@link XrKeyboardTrackingQueryFB}, {@link XrLoaderInitInfoBaseHeaderKHR}, {@link XrMarkerSpaceCreateInfoVARJO}, {@link XrNewSceneComputeInfoMSFT}, {@link XrPassthroughColorMapMonoToMonoFB}, {@link XrPassthroughColorMapMonoToRgbaFB}, {@link XrPassthroughCreateInfoFB}, {@link XrPassthroughKeyboardHandsIntensityFB}, {@link XrPassthroughLayerCreateInfoFB}, {@link XrPassthroughStyleFB}, {@link XrReferenceSpaceCreateInfo}, {@link XrRenderModelBufferFB}, {@link XrRenderModelLoadInfoFB}, {@link XrRenderModelPathInfoFB}, {@link XrRenderModelPropertiesFB}, {@link XrSceneComponentLocationsMSFT}, {@link XrSceneComponentParentFilterInfoMSFT}, {@link XrSceneComponentsGetInfoMSFT}, {@link XrSceneComponentsLocateInfoMSFT}, {@link XrSceneComponentsMSFT}, {@link XrSceneCreateInfoMSFT}, {@link XrSceneDeserializeInfoMSFT}, {@link XrSceneMeshBuffersGetInfoMSFT}, {@link XrSceneMeshBuffersMSFT}, {@link XrSceneMeshIndicesUint16MSFT}, {@link XrSceneMeshIndicesUint32MSFT}, {@link XrSceneMeshVertexBufferMSFT}, {@link XrSceneMeshesMSFT}, {@link XrSceneObjectTypesFilterInfoMSFT}, {@link XrSceneObjectsMSFT}, {@link XrSceneObserverCreateInfoMSFT}, {@link XrScenePlaneAlignmentFilterInfoMSFT}, {@link XrScenePlanesMSFT}, {@link XrSecondaryViewConfigurationFrameEndInfoMSFT}, {@link XrSecondaryViewConfigurationFrameStateMSFT}, {@link XrSecondaryViewConfigurationLayerInfoMSFT}, {@link XrSecondaryViewConfigurationSessionBeginInfoMSFT}, {@link XrSecondaryViewConfigurationStateMSFT}, {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT}, {@link XrSerializedSceneFragmentDataGetInfoMSFT}, {@link XrSessionActionSetsAttachInfo}, {@link XrSessionBeginInfo}, {@link XrSessionCreateInfo}, {@link XrSessionCreateInfoOverlayEXTX}, {@link XrSpaceLocation}, {@link XrSpaceVelocity}, {@link XrSpatialAnchorCreateInfoMSFT}, {@link XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT}, {@link XrSpatialAnchorPersistenceInfoMSFT}, {@link XrSpatialAnchorSpaceCreateInfoMSFT}, {@link XrSpatialGraphNodeSpaceCreateInfoMSFT}, {@link XrSwapchainCreateInfo}, {@link XrSwapchainCreateInfoFoveationFB}, {@link XrSwapchainImageAcquireInfo}, {@link XrSwapchainImageBaseHeader}, {@link XrSwapchainImageFoveationVulkanFB}, {@link XrSwapchainImageOpenGLESKHR}, {@link XrSwapchainImageOpenGLKHR}, {@link XrSwapchainImageReleaseInfo}, {@link XrSwapchainImageVulkanKHR}, {@link XrSwapchainImageWaitInfo}, {@link XrSwapchainStateBaseHeaderFB}, {@link XrSwapchainStateFoveationFB}, {@link XrSwapchainStateSamplerOpenGLESFB}, {@link XrSwapchainStateSamplerVulkanFB}, {@link XrSystemColorSpacePropertiesFB}, {@link XrSystemEyeGazeInteractionPropertiesEXT}, {@link XrSystemFacialTrackingPropertiesHTC}, {@link XrSystemFoveatedRenderingPropertiesVARJO}, {@link XrSystemGetInfo}, {@link XrSystemHandTrackingMeshPropertiesMSFT}, {@link XrSystemHandTrackingPropertiesEXT}, {@link XrSystemKeyboardTrackingPropertiesFB}, {@link XrSystemMarkerTrackingPropertiesVARJO}, {@link XrSystemPassthroughPropertiesFB}, {@link XrSystemProperties}, {@link XrSystemRenderModelPropertiesFB}, {@link XrSystemSpaceWarpPropertiesFB}, {@link XrTriangleMeshCreateInfoFB}, {@link XrView}, {@link XrViewConfigurationDepthRangeEXT}, {@link XrViewConfigurationProperties}, {@link XrViewConfigurationView}, {@link XrViewConfigurationViewFovEPIC}, {@link XrViewLocateFoveatedRenderingVARJO}, {@link XrViewLocateInfo}, {@link XrViewState}, {@link XrVisibilityMaskKHR}, {@link XrVisualMeshComputeLodInfoMSFT}, {@link XrViveTrackerPathsHTCX}, {@link XrVulkanDeviceCreateInfoKHR}, {@link XrVulkanGraphicsDeviceGetInfoKHR}, {@link XrVulkanInstanceCreateInfoKHR}, {@link XrVulkanSwapchainFormatListCreateInfoKHR}, {@link #xrStructureTypeToString StructureTypeToString}</p>
+     * <p>{@link XrActionCreateInfo}, {@link XrActionSetCreateInfo}, {@link XrActionSpaceCreateInfo}, {@link XrActionStateBoolean}, {@link XrActionStateFloat}, {@link XrActionStateGetInfo}, {@link XrActionStatePose}, {@link XrActionStateVector2f}, {@link XrActionsSyncInfo}, {@link XrApiLayerProperties}, {@link XrBaseInStructure}, {@link XrBaseOutStructure}, {@link XrBindingModificationBaseHeaderKHR}, {@link XrBindingModificationsKHR}, {@link XrBoundSourcesForActionEnumerateInfo}, {@link XrBoundary2DFB}, {@link XrCompositionLayerAlphaBlendFB}, {@link XrCompositionLayerBaseHeader}, {@link XrCompositionLayerColorScaleBiasKHR}, {@link XrCompositionLayerCubeKHR}, {@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerDepthInfoKHR}, {@link XrCompositionLayerDepthTestVARJO}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerImageLayoutFB}, {@link XrCompositionLayerPassthroughFB}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerProjectionView}, {@link XrCompositionLayerQuad}, {@link XrCompositionLayerReprojectionInfoMSFT}, {@link XrCompositionLayerReprojectionPlaneOverrideMSFT}, {@link XrCompositionLayerSecureContentFB}, {@link XrCompositionLayerSettingsFB}, {@link XrCompositionLayerSpaceWarpInfoFB}, {@link XrControllerModelKeyStateMSFT}, {@link XrControllerModelNodePropertiesMSFT}, {@link XrControllerModelNodeStateMSFT}, {@link XrControllerModelPropertiesMSFT}, {@link XrControllerModelStateMSFT}, {@link XrDebugUtilsLabelEXT}, {@link XrDebugUtilsMessengerCallbackDataEXT}, {@link XrDebugUtilsMessengerCreateInfoEXT}, {@link XrDebugUtilsObjectNameInfoEXT}, {@link XrDigitalLensControlALMALENCE}, {@link XrEventDataBaseHeader}, {@link XrEventDataBuffer}, {@link XrEventDataDisplayRefreshRateChangedFB}, {@link XrEventDataEventsLost}, {@link XrEventDataInstanceLossPending}, {@link XrEventDataInteractionProfileChanged}, {@link XrEventDataMainSessionVisibilityChangedEXTX}, {@link XrEventDataMarkerTrackingUpdateVARJO}, {@link XrEventDataPassthroughStateChangedFB}, {@link XrEventDataPerfSettingsEXT}, {@link XrEventDataReferenceSpaceChangePending}, {@link XrEventDataSessionStateChanged}, {@link XrEventDataSpaceEraseCompleteFB}, {@link XrEventDataSpaceQueryCompleteFB}, {@link XrEventDataSpaceQueryResultsAvailableFB}, {@link XrEventDataSpaceSaveCompleteFB}, {@link XrEventDataSpaceSetStatusCompleteFB}, {@link XrEventDataSpatialAnchorCreateCompleteFB}, {@link XrEventDataVisibilityMaskChangedKHR}, {@link XrEventDataViveTrackerConnectedHTCX}, {@link XrExtensionProperties}, {@link XrEyeGazeSampleTimeEXT}, {@link XrFacialExpressionsHTC}, {@link XrFacialTrackerCreateInfoHTC}, {@link XrFoveatedViewConfigurationViewVARJO}, {@link XrFoveationLevelProfileCreateInfoFB}, {@link XrFoveationProfileCreateInfoFB}, {@link XrFrameBeginInfo}, {@link XrFrameEndInfo}, {@link XrFrameState}, {@link XrFrameWaitInfo}, {@link XrGeometryInstanceCreateInfoFB}, {@link XrGeometryInstanceTransformFB}, {@link XrGraphicsBindingEGLMNDX}, {@link XrGraphicsBindingOpenGLWaylandKHR}, {@link XrGraphicsBindingOpenGLWin32KHR}, {@link XrGraphicsBindingOpenGLXcbKHR}, {@link XrGraphicsBindingOpenGLXlibKHR}, {@link XrGraphicsBindingVulkanKHR}, {@link XrGraphicsRequirementsOpenGLESKHR}, {@link XrGraphicsRequirementsOpenGLKHR}, {@link XrGraphicsRequirementsVulkanKHR}, {@link XrHandJointLocationsEXT}, {@link XrHandJointVelocitiesEXT}, {@link XrHandJointsLocateInfoEXT}, {@link XrHandJointsMotionRangeInfoEXT}, {@link XrHandMeshMSFT}, {@link XrHandMeshSpaceCreateInfoMSFT}, {@link XrHandMeshUpdateInfoMSFT}, {@link XrHandPoseTypeInfoMSFT}, {@link XrHandTrackerCreateInfoEXT}, {@link XrHandTrackingAimStateFB}, {@link XrHandTrackingCapsulesStateFB}, {@link XrHandTrackingMeshFB}, {@link XrHandTrackingScaleFB}, {@link XrHapticActionInfo}, {@link XrHapticBaseHeader}, {@link XrHapticVibration}, {@link XrHolographicWindowAttachmentMSFT}, {@link XrInputSourceLocalizedNameGetInfo}, {@link XrInstanceCreateInfo}, {@link XrInstanceProperties}, {@link XrInteractionProfileAnalogThresholdVALVE}, {@link XrInteractionProfileDpadBindingEXT}, {@link XrInteractionProfileState}, {@link XrInteractionProfileSuggestedBinding}, {@link XrKeyboardSpaceCreateInfoFB}, {@link XrKeyboardTrackingQueryFB}, {@link XrLoaderInitInfoBaseHeaderKHR}, {@link XrMarkerSpaceCreateInfoVARJO}, {@link XrNewSceneComputeInfoMSFT}, {@link XrPassthroughBrightnessContrastSaturationFB}, {@link XrPassthroughColorMapMonoToMonoFB}, {@link XrPassthroughColorMapMonoToRgbaFB}, {@link XrPassthroughCreateInfoFB}, {@link XrPassthroughKeyboardHandsIntensityFB}, {@link XrPassthroughLayerCreateInfoFB}, {@link XrPassthroughStyleFB}, {@link XrPerformanceMetricsCounterMETA}, {@link XrPerformanceMetricsStateMETA}, {@link XrReferenceSpaceCreateInfo}, {@link XrRenderModelBufferFB}, {@link XrRenderModelCapabilitiesRequestFB}, {@link XrRenderModelLoadInfoFB}, {@link XrRenderModelPathInfoFB}, {@link XrRenderModelPropertiesFB}, {@link XrRoomLayoutFB}, {@link XrSceneComponentLocationsMSFT}, {@link XrSceneComponentParentFilterInfoMSFT}, {@link XrSceneComponentsGetInfoMSFT}, {@link XrSceneComponentsLocateInfoMSFT}, {@link XrSceneComponentsMSFT}, {@link XrSceneCreateInfoMSFT}, {@link XrSceneDeserializeInfoMSFT}, {@link XrSceneMeshBuffersGetInfoMSFT}, {@link XrSceneMeshBuffersMSFT}, {@link XrSceneMeshIndicesUint16MSFT}, {@link XrSceneMeshIndicesUint32MSFT}, {@link XrSceneMeshVertexBufferMSFT}, {@link XrSceneMeshesMSFT}, {@link XrSceneObjectTypesFilterInfoMSFT}, {@link XrSceneObjectsMSFT}, {@link XrSceneObserverCreateInfoMSFT}, {@link XrScenePlaneAlignmentFilterInfoMSFT}, {@link XrScenePlanesMSFT}, {@link XrSecondaryViewConfigurationFrameEndInfoMSFT}, {@link XrSecondaryViewConfigurationFrameStateMSFT}, {@link XrSecondaryViewConfigurationLayerInfoMSFT}, {@link XrSecondaryViewConfigurationSessionBeginInfoMSFT}, {@link XrSecondaryViewConfigurationStateMSFT}, {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT}, {@link XrSemanticLabelsFB}, {@link XrSerializedSceneFragmentDataGetInfoMSFT}, {@link XrSessionActionSetsAttachInfo}, {@link XrSessionBeginInfo}, {@link XrSessionCreateInfo}, {@link XrSessionCreateInfoOverlayEXTX}, {@link XrSpaceComponentFilterInfoFB}, {@link XrSpaceComponentStatusFB}, {@link XrSpaceComponentStatusSetInfoFB}, {@link XrSpaceContainerFB}, {@link XrSpaceEraseInfoFB}, {@link XrSpaceFilterInfoBaseHeaderFB}, {@link XrSpaceLocation}, {@link XrSpaceQueryInfoBaseHeaderFB}, {@link XrSpaceQueryInfoFB}, {@link XrSpaceQueryResultsFB}, {@link XrSpaceSaveInfoFB}, {@link XrSpaceStorageLocationFilterInfoFB}, {@link XrSpaceUuidFilterInfoFB}, {@link XrSpaceVelocity}, {@link XrSpatialAnchorCreateInfoFB}, {@link XrSpatialAnchorCreateInfoMSFT}, {@link XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT}, {@link XrSpatialAnchorPersistenceInfoMSFT}, {@link XrSpatialAnchorSpaceCreateInfoMSFT}, {@link XrSpatialGraphNodeBindingPropertiesGetInfoMSFT}, {@link XrSpatialGraphNodeBindingPropertiesMSFT}, {@link XrSpatialGraphNodeSpaceCreateInfoMSFT}, {@link XrSpatialGraphStaticNodeBindingCreateInfoMSFT}, {@link XrSwapchainCreateInfo}, {@link XrSwapchainCreateInfoFoveationFB}, {@link XrSwapchainImageAcquireInfo}, {@link XrSwapchainImageBaseHeader}, {@link XrSwapchainImageFoveationVulkanFB}, {@link XrSwapchainImageOpenGLESKHR}, {@link XrSwapchainImageOpenGLKHR}, {@link XrSwapchainImageReleaseInfo}, {@link XrSwapchainImageVulkanKHR}, {@link XrSwapchainImageWaitInfo}, {@link XrSwapchainStateBaseHeaderFB}, {@link XrSwapchainStateFoveationFB}, {@link XrSwapchainStateSamplerOpenGLESFB}, {@link XrSwapchainStateSamplerVulkanFB}, {@link XrSystemColorSpacePropertiesFB}, {@link XrSystemEyeGazeInteractionPropertiesEXT}, {@link XrSystemFacialTrackingPropertiesHTC}, {@link XrSystemFoveatedRenderingPropertiesVARJO}, {@link XrSystemGetInfo}, {@link XrSystemHandTrackingMeshPropertiesMSFT}, {@link XrSystemHandTrackingPropertiesEXT}, {@link XrSystemKeyboardTrackingPropertiesFB}, {@link XrSystemMarkerTrackingPropertiesVARJO}, {@link XrSystemPassthroughPropertiesFB}, {@link XrSystemProperties}, {@link XrSystemRenderModelPropertiesFB}, {@link XrSystemSpaceWarpPropertiesFB}, {@link XrSystemSpatialEntityPropertiesFB}, {@link XrTriangleMeshCreateInfoFB}, {@link XrView}, {@link XrViewConfigurationDepthRangeEXT}, {@link XrViewConfigurationProperties}, {@link XrViewConfigurationView}, {@link XrViewConfigurationViewFovEPIC}, {@link XrViewLocateFoveatedRenderingVARJO}, {@link XrViewLocateInfo}, {@link XrViewState}, {@link XrVisibilityMaskKHR}, {@link XrVisualMeshComputeLodInfoMSFT}, {@link XrViveTrackerPathsHTCX}, {@link XrVulkanDeviceCreateInfoKHR}, {@link XrVulkanGraphicsDeviceGetInfoKHR}, {@link XrVulkanInstanceCreateInfoKHR}, {@link XrVulkanSwapchainCreateInfoMETA}, {@link XrVulkanSwapchainFormatListCreateInfoKHR}, {@link #xrStructureTypeToString StructureTypeToString}</p>
      * 
      * <h5>Enum values:</h5>
      * 
@@ -674,7 +678,7 @@ public class XR10 {
         XR_OBJECT_TYPE_ACTION     = 6;
 
     /** OpenXR current version number. */
-    public static final long XR_CURRENT_API_VERSION = XR_MAKE_VERSION(1, 0, 20);
+    public static final long XR_CURRENT_API_VERSION = XR_MAKE_VERSION(1, 0, 24);
 
     /** Compile-time symbols, ignore. */
     public static final int
@@ -993,7 +997,7 @@ public class XR10 {
      * 
      * <p>{@link XrApiLayerProperties}</p>
      *
-     * @param propertyCountOutput a pointer to the count of properties written, or a pointer to the required capacity in the case that propertyCapacityInput is 0.
+     * @param propertyCountOutput a pointer to the count of properties written, or a pointer to the required capacity in the case that propertyCapacityInput is insufficient.
      * @param properties          a pointer to an array of {@link XrApiLayerProperties} structures, but <b>can</b> be {@code NULL} if propertyCapacityInput is 0.
      */
     @NativeType("XrResult")
@@ -1067,7 +1071,7 @@ public class XR10 {
      * <p>{@link XrExtensionProperties}</p>
      *
      * @param layerName           either {@code NULL} or a pointer to a string naming the API layer to retrieve extensions from, as returned by {@link #xrEnumerateApiLayerProperties EnumerateApiLayerProperties}.
-     * @param propertyCountOutput a pointer to the count of properties written, or a pointer to the required capacity in the case that {@code propertyCapacityInput} is 0.
+     * @param propertyCountOutput a pointer to the count of properties written, or a pointer to the required capacity in the case that {@code propertyCapacityInput} is insufficient.
      * @param properties          a pointer to an array of {@link XrExtensionProperties} structures, but <b>can</b> be {@code NULL} if {@code propertyCapacityInput} is 0.
      */
     @NativeType("XrResult")
@@ -1130,7 +1134,7 @@ public class XR10 {
      * <p>{@link XrExtensionProperties}</p>
      *
      * @param layerName           either {@code NULL} or a pointer to a string naming the API layer to retrieve extensions from, as returned by {@link #xrEnumerateApiLayerProperties EnumerateApiLayerProperties}.
-     * @param propertyCountOutput a pointer to the count of properties written, or a pointer to the required capacity in the case that {@code propertyCapacityInput} is 0.
+     * @param propertyCountOutput a pointer to the count of properties written, or a pointer to the required capacity in the case that {@code propertyCapacityInput} is insufficient.
      * @param properties          a pointer to an array of {@link XrExtensionProperties} structures, but <b>can</b> be {@code NULL} if {@code propertyCapacityInput} is 0.
      */
     @NativeType("XrResult")
@@ -1751,7 +1755,7 @@ public class XR10 {
      * @param instance                        the instance from which {@code systemId} was retrieved.
      * @param systemId                        the {@code XrSystemId} whose environment blend modes will be enumerated.
      * @param viewConfigurationType           the {@code XrViewConfigurationType} to enumerate.
-     * @param environmentBlendModeCountOutput a pointer to the count of {@code environmentBlendModes} written, or a pointer to the required capacity in the case that {@code environmentBlendModeCapacityInput} is 0.
+     * @param environmentBlendModeCountOutput a pointer to the count of {@code environmentBlendModes} written, or a pointer to the required capacity in the case that {@code environmentBlendModeCapacityInput} is insufficient.
      * @param environmentBlendModes           a pointer to an array of {@code XrEnvironmentBlendMode} values, but <b>can</b> be {@code NULL} if {@code environmentBlendModeCapacityInput} is 0.
      */
     @NativeType("XrResult")
@@ -1953,7 +1957,7 @@ public class XR10 {
      * </dl>
      *
      * @param session          a handle to an {@code XrSession} previously created with {@link #xrCreateSession CreateSession}.
-     * @param spaceCountOutput a pointer to the count of spaces written, or a pointer to the required capacity in the case that {@code spaceCapacityInput} is 0.
+     * @param spaceCountOutput a pointer to the count of spaces written, or a pointer to the required capacity in the case that {@code spaceCapacityInput} is insufficient.
      * @param spaces           a pointer to an application-allocated array that will be filled with the enumerant of each supported reference space. It <b>can</b> be {@code NULL} if {@code spaceCapacityInput} is 0.
      */
     @NativeType("XrResult")
@@ -2400,7 +2404,7 @@ public class XR10 {
      *
      * @param instance                          the instance from which {@code systemId} was retrieved.
      * @param systemId                          the {@code XrSystemId} whose view configurations will be enumerated.
-     * @param viewConfigurationsTypeCountOutput a pointer to the count of {@code viewConfigurations} written, or a pointer to the required capacity in the case that {@code viewConfigurationsTypeCapacityInput} is 0.
+     * @param viewConfigurationsTypeCountOutput a pointer to the count of {@code viewConfigurations} written, or a pointer to the required capacity in the case that {@code viewConfigurationsTypeCapacityInput} is insufficient.
      * @param viewConfigurationsTypes           a pointer to an array of {@code XrViewConfigurationType} values, but <b>can</b> be {@code NULL} if {@code viewConfigurationsTypeCapacityInput} is 0.
      */
     @NativeType("XrResult")
@@ -2621,7 +2625,7 @@ public class XR10 {
      * <p>{@link #xrCreateSwapchain CreateSwapchain}</p>
      *
      * @param session           the session that enumerates the supported formats.
-     * @param formatCountOutput a pointer to the count of {@code uint64_t} formats written, or a pointer to the required capacity in the case that {@code formatCapacityInput} is 0.
+     * @param formatCountOutput a pointer to the count of {@code uint64_t} formats written, or a pointer to the required capacity in the case that {@code formatCapacityInput} is insufficient.
      * @param formats           a pointer to an array of {@code int64_t} format ids, but <b>can</b> be {@code NULL} if {@code formatCapacityInput} is 0. The format ids are specific to the specified graphics API.
      */
     @NativeType("XrResult")
@@ -2830,7 +2834,7 @@ public class XR10 {
      * <p>{@link XrSwapchainImageBaseHeader}, {@link #xrCreateSwapchain CreateSwapchain}</p>
      *
      * @param swapchain        the {@code XrSwapchain} to get images from.
-     * @param imageCountOutput a pointer to the count of {@code images} written, or a pointer to the required capacity in the case that {@code imageCapacityInput} is 0.
+     * @param imageCountOutput a pointer to the count of {@code images} written, or a pointer to the required capacity in the case that {@code imageCapacityInput} is insufficient.
      * @param images           a pointer to an array of graphics API-specific {@code XrSwapchainImage} structures, all of the same type, based on {@link XrSwapchainImageBaseHeader}. It <b>can</b> be {@code NULL} if {@code imageCapacityInput} is 0.
      */
     @NativeType("XrResult")
@@ -3362,6 +3366,12 @@ public class XR10 {
      * <li>If {@code frameBeginInfo} is not {@code NULL}, {@code frameBeginInfo} <b>must</b> be a pointer to a valid {@link XrFrameBeginInfo} structure</li>
      * </ul>
      * 
+     * <h5>Thread Safety</h5>
+     * 
+     * <ul>
+     * <li>Access to the {@code session} parameter by any other {@link #xrBeginFrame BeginFrame} or {@link #xrEndFrame EndFrame} call <b>must</b> be externally synchronized</li>
+     * </ul>
+     * 
      * <h5>Return Codes</h5>
      * 
      * <dl>
@@ -3450,6 +3460,12 @@ public class XR10 {
      * <ul>
      * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
      * <li>{@code frameEndInfo} <b>must</b> be a pointer to a valid {@link XrFrameEndInfo} structure</li>
+     * </ul>
+     * 
+     * <h5>Thread Safety</h5>
+     * 
+     * <ul>
+     * <li>Access to the {@code session} parameter by any other {@link #xrBeginFrame BeginFrame} or {@link #xrEndFrame EndFrame} call <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -3779,7 +3795,7 @@ public class XR10 {
      *
      * @param instance          an instance previously created.
      * @param path              the valid {@code XrPath} value to retrieve the path string for.
-     * @param bufferCountOutput a pointer to the count of characters written (including the terminating '\0'), or a pointer to the required capacity in the case that {@code bufferCapacityInput} is 0.
+     * @param bufferCountOutput a pointer to the count of characters written (including the terminating '\0'), or a pointer to the required capacity in the case that {@code bufferCapacityInput} is insufficient.
      * @param buffer            a pointer to an application-allocated buffer that will be filled with the semantic path string. It <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0.
      */
     @NativeType("XrResult")
@@ -4682,7 +4698,7 @@ public class XR10 {
      *
      * @param session           the {@code XrSession} being queried.
      * @param enumerateInfo     an {@link XrBoundSourcesForActionEnumerateInfo} providing the query information.
-     * @param sourceCountOutput a pointer to the count of sources, or a pointer to the required capacity in the case that {@code sourceCapacityInput} is 0.
+     * @param sourceCountOutput a pointer to the count of sources, or a pointer to the required capacity in the case that {@code sourceCapacityInput} is insufficient.
      * @param sources           a pointer to an application-allocated array that will be filled with the {@code XrPath} values for all sources. It <b>can</b> be {@code NULL} if {@code sourceCapacityInput} is 0.
      */
     @NativeType("XrResult")
@@ -4763,7 +4779,7 @@ public class XR10 {
      *
      * @param session           a handle to the {@code XrSession} associated with the action that reported this source.
      * @param getInfo           an {@link XrInputSourceLocalizedNameGetInfo} providing the query information.
-     * @param bufferCountOutput a pointer to the count of name characters written (including the terminating {@code \0}), or a pointer to the required capacity in the case that {@code bufferCapacityInput} is 0.
+     * @param bufferCountOutput a pointer to the count of name characters written (including the terminating {@code \0}), or a pointer to the required capacity in the case that {@code bufferCapacityInput} is insufficient.
      * @param buffer            a pointer to an application-allocated buffer that will be filled with the source name. It <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0.
      */
     @NativeType("XrResult")
@@ -4800,7 +4816,7 @@ public class XR10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Triggers a haptic event through the specified action of type {@link #XR_TYPE_HAPTIC_VIBRATION TYPE_HAPTIC_VIBRATION}. The runtime <b>should</b> deliver this request to the appropriate device, but exactly which device, if any, this event is sent to is up to the runtime to decide. If an appropriate device is unavailable the runtime <b>may</b> ignore this request for haptic feedback.</p>
+     * <p>Triggers a haptic event through the specified action of type {@link #XR_ACTION_TYPE_VIBRATION_OUTPUT ACTION_TYPE_VIBRATION_OUTPUT}. The runtime <b>should</b> deliver this request to the appropriate device, but exactly which device, if any, this event is sent to is up to the runtime to decide. If an appropriate device is unavailable the runtime <b>may</b> ignore this request for haptic feedback.</p>
      * 
      * <p>If {@code session} is not focused, the runtime <b>must</b> return {@link #XR_SESSION_NOT_FOCUSED SESSION_NOT_FOCUSED}, and not trigger a haptic event.</p>
      * 

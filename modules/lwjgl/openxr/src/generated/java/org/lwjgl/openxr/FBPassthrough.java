@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class FBPassthrough {
 
     /** The extension specification version. */
-    public static final int XR_FB_passthrough_SPEC_VERSION = 1;
+    public static final int XR_FB_passthrough_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_FB_PASSTHROUGH_EXTENSION_NAME = "XR_FB_passthrough";
@@ -37,20 +37,22 @@ public class FBPassthrough {
      * <li>{@link #XR_TYPE_PASSTHROUGH_STYLE_FB TYPE_PASSTHROUGH_STYLE_FB}</li>
      * <li>{@link #XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB}</li>
      * <li>{@link #XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB}</li>
+     * <li>{@link #XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB}</li>
      * <li>{@link #XR_TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB}</li>
      * </ul>
      */
     public static final int
-        XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB        = 1000118000,
-        XR_TYPE_PASSTHROUGH_CREATE_INFO_FB              = 1000118001,
-        XR_TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB        = 1000118002,
-        XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB        = 1000118003,
-        XR_TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB        = 1000118004,
-        XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB          = 1000118005,
-        XR_TYPE_PASSTHROUGH_STYLE_FB                    = 1000118020,
-        XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB   = 1000118021,
-        XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB   = 1000118022,
-        XR_TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB = 1000118030;
+        XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB              = 1000118000,
+        XR_TYPE_PASSTHROUGH_CREATE_INFO_FB                    = 1000118001,
+        XR_TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB              = 1000118002,
+        XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB              = 1000118003,
+        XR_TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB              = 1000118004,
+        XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB                = 1000118005,
+        XR_TYPE_PASSTHROUGH_STYLE_FB                          = 1000118020,
+        XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB         = 1000118021,
+        XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB         = 1000118022,
+        XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB = 1000118023,
+        XR_TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB       = 1000118030;
 
     /**
      * Extends {@code XrResult}.
@@ -105,6 +107,7 @@ public class FBPassthrough {
      * <li>{@link #XR_PASSTHROUGH_LAYER_PURPOSE_RECONSTRUCTION_FB PASSTHROUGH_LAYER_PURPOSE_RECONSTRUCTION_FB} — Reconstruction passthrough (full screen environment)</li>
      * <li>{@link #XR_PASSTHROUGH_LAYER_PURPOSE_PROJECTED_FB PASSTHROUGH_LAYER_PURPOSE_PROJECTED_FB} — Projected passthrough (using a custom surface)</li>
      * <li>{@link FBPassthroughKeyboardHands#XR_PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_HANDS_FB PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_HANDS_FB} — Passthrough layer purpose for keyboard hands presence.</li>
+     * <li>{@link FBPassthroughKeyboardHands#XR_PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_MASKED_HANDS_FB PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_MASKED_HANDS_FB} — Passthrough layer purpose for keyboard hands presence with keyboard masked hand transitions (i.e passthrough hands rendered only when they are over the keyboard).</li>
      * </ul>
      * 
      * <h5>See Also</h5>

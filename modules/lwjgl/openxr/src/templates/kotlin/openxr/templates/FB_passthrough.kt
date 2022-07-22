@@ -17,7 +17,7 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
     IntConstant(
         "The extension specification version.",
 
-        "FB_passthrough_SPEC_VERSION".."1"
+        "FB_passthrough_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -38,6 +38,7 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
         "TYPE_PASSTHROUGH_STYLE_FB".."1000118020",
         "TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB".."1000118021",
         "TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB".."1000118022",
+        "TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB".."1000118023",
         "TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB".."1000118030"
     )
 
@@ -81,6 +82,7 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
             <li>#PASSTHROUGH_LAYER_PURPOSE_RECONSTRUCTION_FB — Reconstruction passthrough (full screen environment)</li>
             <li>#PASSTHROUGH_LAYER_PURPOSE_PROJECTED_FB — Projected passthrough (using a custom surface)</li>
             <li>#PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_HANDS_FB — Passthrough layer purpose for keyboard hands presence.</li>
+            <li>#PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_MASKED_HANDS_FB — Passthrough layer purpose for keyboard hands presence with keyboard masked hand transitions (i.e passthrough hands rendered only when they are over the keyboard).</li>
         </ul>
 
         <h5>See Also</h5>

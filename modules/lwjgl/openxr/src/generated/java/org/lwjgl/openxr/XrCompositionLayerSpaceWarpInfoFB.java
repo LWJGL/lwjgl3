@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@link FBSpaceWarp XR_FB_space_warp} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerSpaceWarpInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBSpaceWarp#XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code layerFlags} <b>must</b> be 0</li>
+ * <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerSpaceWarpInfoFlagBitsFB} values</li>
  * <li>{@code motionVectorSubImage} <b>must</b> be a valid {@link XrSwapchainSubImage} structure</li>
  * <li>{@code depthSubImage} <b>must</b> be a valid {@link XrSwapchainSubImage} structure</li>
  * </ul>

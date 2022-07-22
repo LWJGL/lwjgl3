@@ -167,7 +167,7 @@ public class FBColorSpace {
      * <p>{@link #xrSetColorSpaceFB SetColorSpaceFB}</p>
      *
      * @param session               the session that enumerates the supported color spaces.
-     * @param colorSpaceCountOutput a pointer to the count of {@code XrColorSpaceFB} {@code colorSpaces} written, or a pointer to the required capacity in the case that {@code colorSpaceCapacityInput} is 0.
+     * @param colorSpaceCountOutput a pointer to the count of {@code XrColorSpaceFB} {@code colorSpaces} written, or a pointer to the required capacity in the case that {@code colorSpaceCapacityInput} is insufficient.
      * @param colorSpaces           a pointer to an array of {@code XrColorSpaceFB} color spaces, but <b>can</b> be {@code NULL} if {@code colorSpaceCapacityInput} is 0.
      */
     @NativeType("XrResult")

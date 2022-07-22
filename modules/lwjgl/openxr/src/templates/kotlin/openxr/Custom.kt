@@ -60,15 +60,15 @@ fun templateCustomization() {
     generateDispatchableHandle(XrSpace, XrSession)
     generateDispatchableHandle(XrSpatialAnchorMSFT, XrSession)
     generateDispatchableHandle(XrSpatialAnchorStoreConnectionMSFT, XrSession)
+    generateDispatchableHandle(XrSpatialGraphNodeBindingMSFT, XrSession)
     generateDispatchableHandle(XrSwapchain, XrSession)
     generateDispatchableHandle(XrTriangleMeshFB, XrSession)
-
 
     XR10.apply {
         LongConstant(
             "OpenXR current version number.",
 
-            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 0, 20)"
+            "CURRENT_API_VERSION".."XR_MAKE_VERSION(1, 0, 24)"
         )
 
         macro(expression = "((major & 0xFFFFL) << 48) | ((minor & 0xFFFFL) << 32) | (patch & 0xFFFF_FFFFL)")..uint64_t(

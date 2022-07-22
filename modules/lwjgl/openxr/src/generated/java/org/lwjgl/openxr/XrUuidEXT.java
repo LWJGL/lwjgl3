@@ -28,8 +28,12 @@ import static org.lwjgl.openxr.EXTUUIUD.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>The {@link EXTUUIUD XR_EXT_uuid} extension <b>must</b> be enabled prior to using {@link XrUuidEXT}</li>
+ * <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using {@link XrUuidEXT}</li>
  * </ul>
+ * 
+ * <h5>See Also</h5>
+ * 
+ * <p>{@link XrEventDataSpaceEraseCompleteFB}, {@link XrEventDataSpaceSaveCompleteFB}, {@link XrEventDataSpaceSetStatusCompleteFB}, {@link XrEventDataSpatialAnchorCreateCompleteFB}, {@link XrRoomLayoutFB}, {@link XrSpaceContainerFB}, {@link XrSpaceQueryResultFB}, {@link XrSpaceUuidFilterInfoFB}, {@link FBSpatialEntity#xrGetSpaceUuidFB GetSpaceUuidFB}</p>
  * 
  * <h3>Layout</h3>
  * 

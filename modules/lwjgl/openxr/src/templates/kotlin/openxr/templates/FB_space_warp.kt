@@ -17,7 +17,7 @@ val FB_space_warp = "FBSpaceWarp".nativeClassXR("FB_space_warp", type = "instanc
     IntConstant(
         "The extension specification version.",
 
-        "FB_space_warp_SPEC_VERSION".."1"
+        "FB_space_warp_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -31,5 +31,11 @@ val FB_space_warp = "FBSpaceWarp".nativeClassXR("FB_space_warp", type = "instanc
 
         "TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB".."1000171000",
         "TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB".."1000171001"
+    )
+
+    EnumConstant(
+        "XrCompositionLayerSpaceWarpInfoFlagBitsFB",
+
+        "COMPOSITION_LAYER_SPACE_WARP_INFO_FRAME_SKIP_BIT_FB".enum(0x00000001)
     )
 }

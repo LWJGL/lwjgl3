@@ -41,7 +41,7 @@ import static org.lwjgl.openxr.FBHandTrackingCapsules.*;
  * 
  * <pre><code>
  * struct XrHandCapsuleFB {
- *     {@link XrVector3f XrVector3f} points[XR_FB_HAND_TRACKING_CAPSULE_POINT_COUNT];
+ *     {@link XrVector3f XrVector3f} points[XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB];
  *     float radius;
  *     XrHandJointEXT joint;
  * }</code></pre>
@@ -62,7 +62,7 @@ public class XrHandCapsuleFB extends Struct {
 
     static {
         Layout layout = __struct(
-            __array(XrVector3f.SIZEOF, XrVector3f.ALIGNOF, XR_FB_HAND_TRACKING_CAPSULE_POINT_COUNT),
+            __array(XrVector3f.SIZEOF, XrVector3f.ALIGNOF, XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB),
             __member(4),
             __member(4)
         );
@@ -89,7 +89,7 @@ public class XrHandCapsuleFB extends Struct {
     public int sizeof() { return SIZEOF; }
 
     /** @return a {@link XrVector3f}.Buffer view of the {@code points} field. */
-    @NativeType("XrVector3f[XR_FB_HAND_TRACKING_CAPSULE_POINT_COUNT]")
+    @NativeType("XrVector3f[XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB]")
     public XrVector3f.Buffer points() { return npoints(address()); }
     /** @return a {@link XrVector3f} view of the struct at the specified index of the {@code points} field. */
     public XrVector3f points(int index) { return npoints(address(), index); }
@@ -131,10 +131,10 @@ public class XrHandCapsuleFB extends Struct {
     // -----------------------------------
 
     /** Unsafe version of {@link #points}. */
-    public static XrVector3f.Buffer npoints(long struct) { return XrVector3f.create(struct + XrHandCapsuleFB.POINTS, XR_FB_HAND_TRACKING_CAPSULE_POINT_COUNT); }
+    public static XrVector3f.Buffer npoints(long struct) { return XrVector3f.create(struct + XrHandCapsuleFB.POINTS, XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB); }
     /** Unsafe version of {@link #points(int) points}. */
     public static XrVector3f npoints(long struct, int index) {
-        return XrVector3f.create(struct + XrHandCapsuleFB.POINTS + check(index, XR_FB_HAND_TRACKING_CAPSULE_POINT_COUNT) * XrVector3f.SIZEOF);
+        return XrVector3f.create(struct + XrHandCapsuleFB.POINTS + check(index, XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB) * XrVector3f.SIZEOF);
     }
     /** Unsafe version of {@link #radius}. */
     public static float nradius(long struct) { return UNSAFE.getFloat(null, struct + XrHandCapsuleFB.RADIUS); }
@@ -180,7 +180,7 @@ public class XrHandCapsuleFB extends Struct {
         }
 
         /** @return a {@link XrVector3f}.Buffer view of the {@code points} field. */
-        @NativeType("XrVector3f[XR_FB_HAND_TRACKING_CAPSULE_POINT_COUNT]")
+        @NativeType("XrVector3f[XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB]")
         public XrVector3f.Buffer points() { return XrHandCapsuleFB.npoints(address()); }
         /** @return a {@link XrVector3f} view of the struct at the specified index of the {@code points} field. */
         public XrVector3f points(int index) { return XrHandCapsuleFB.npoints(address(), index); }

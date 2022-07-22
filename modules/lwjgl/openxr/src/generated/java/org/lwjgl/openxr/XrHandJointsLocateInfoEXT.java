@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using {@link XrHandJointsLocateInfoEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTHandTracking#XR_TYPE_HAND_JOINTS_LOCATE_INFO_EXT TYPE_HAND_JOINTS_LOCATE_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrHandJointsMotionRangeInfoEXT}, {@link XrHandTrackingAimStateFB}, {@link XrHandTrackingCapsulesStateFB}, {@link XrHandTrackingScaleFB}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrHandJointsMotionRangeInfoEXT}</li>
  * <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
  * </ul>
  * 
@@ -108,12 +108,6 @@ public class XrHandJointsLocateInfoEXT extends Struct implements NativeResource 
     public XrHandJointsLocateInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrHandJointsMotionRangeInfoEXT} value to the {@code next} chain. */
     public XrHandJointsLocateInfoEXT next(XrHandJointsMotionRangeInfoEXT value) { return this.next(value.next(this.next()).address()); }
-    /** Prepends the specified {@link XrHandTrackingAimStateFB} value to the {@code next} chain. */
-    public XrHandJointsLocateInfoEXT next(XrHandTrackingAimStateFB value) { return this.next(value.next(this.next()).address()); }
-    /** Prepends the specified {@link XrHandTrackingCapsulesStateFB} value to the {@code next} chain. */
-    public XrHandJointsLocateInfoEXT next(XrHandTrackingCapsulesStateFB value) { return this.next(value.next(this.next()).address()); }
-    /** Prepends the specified {@link XrHandTrackingScaleFB} value to the {@code next} chain. */
-    public XrHandJointsLocateInfoEXT next(XrHandTrackingScaleFB value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #baseSpace} field. */
     public XrHandJointsLocateInfoEXT baseSpace(XrSpace value) { nbaseSpace(address(), value); return this; }
     /** Sets the specified value to the {@link #time} field. */
@@ -345,12 +339,6 @@ public class XrHandJointsLocateInfoEXT extends Struct implements NativeResource 
         public XrHandJointsLocateInfoEXT.Buffer next(@NativeType("void const *") long value) { XrHandJointsLocateInfoEXT.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrHandJointsMotionRangeInfoEXT} value to the {@code next} chain. */
         public XrHandJointsLocateInfoEXT.Buffer next(XrHandJointsMotionRangeInfoEXT value) { return this.next(value.next(this.next()).address()); }
-        /** Prepends the specified {@link XrHandTrackingAimStateFB} value to the {@code next} chain. */
-        public XrHandJointsLocateInfoEXT.Buffer next(XrHandTrackingAimStateFB value) { return this.next(value.next(this.next()).address()); }
-        /** Prepends the specified {@link XrHandTrackingCapsulesStateFB} value to the {@code next} chain. */
-        public XrHandJointsLocateInfoEXT.Buffer next(XrHandTrackingCapsulesStateFB value) { return this.next(value.next(this.next()).address()); }
-        /** Prepends the specified {@link XrHandTrackingScaleFB} value to the {@code next} chain. */
-        public XrHandJointsLocateInfoEXT.Buffer next(XrHandTrackingScaleFB value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrHandJointsLocateInfoEXT#baseSpace} field. */
         public XrHandJointsLocateInfoEXT.Buffer baseSpace(XrSpace value) { XrHandJointsLocateInfoEXT.nbaseSpace(address(), value); return this; }
         /** Sets the specified value to the {@link XrHandJointsLocateInfoEXT#time} field. */

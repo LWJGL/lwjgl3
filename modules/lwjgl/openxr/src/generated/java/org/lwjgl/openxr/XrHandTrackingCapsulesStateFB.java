@@ -39,7 +39,7 @@ import static org.lwjgl.openxr.FBHandTrackingCapsules.*;
  * struct XrHandTrackingCapsulesStateFB {
  *     XrStructureType {@link #type};
  *     void * {@link #next};
- *     {@link XrHandCapsuleFB XrHandCapsuleFB} {@link #capsules}[XR_FB_HAND_TRACKING_CAPSULE_COUNT];
+ *     {@link XrHandCapsuleFB XrHandCapsuleFB} {@link #capsules}[XR_HAND_TRACKING_CAPSULE_COUNT_FB];
  * }</code></pre>
  */
 public class XrHandTrackingCapsulesStateFB extends Struct implements NativeResource {
@@ -60,7 +60,7 @@ public class XrHandTrackingCapsulesStateFB extends Struct implements NativeResou
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
-            __array(XrHandCapsuleFB.SIZEOF, XrHandCapsuleFB.ALIGNOF, XR_FB_HAND_TRACKING_CAPSULE_COUNT)
+            __array(XrHandCapsuleFB.SIZEOF, XrHandCapsuleFB.ALIGNOF, XR_HAND_TRACKING_CAPSULE_COUNT_FB)
         );
 
         SIZEOF = layout.getSize();
@@ -91,7 +91,7 @@ public class XrHandTrackingCapsulesStateFB extends Struct implements NativeResou
     @NativeType("void *")
     public long next() { return nnext(address()); }
     /** an array of capsules. */
-    @NativeType("XrHandCapsuleFB[XR_FB_HAND_TRACKING_CAPSULE_COUNT]")
+    @NativeType("XrHandCapsuleFB[XR_HAND_TRACKING_CAPSULE_COUNT_FB]")
     public XrHandCapsuleFB.Buffer capsules() { return ncapsules(address()); }
     /** an array of capsules. */
     public XrHandCapsuleFB capsules(int index) { return ncapsules(address(), index); }
@@ -244,10 +244,10 @@ public class XrHandTrackingCapsulesStateFB extends Struct implements NativeResou
     /** Unsafe version of {@link #next}. */
     public static long nnext(long struct) { return memGetAddress(struct + XrHandTrackingCapsulesStateFB.NEXT); }
     /** Unsafe version of {@link #capsules}. */
-    public static XrHandCapsuleFB.Buffer ncapsules(long struct) { return XrHandCapsuleFB.create(struct + XrHandTrackingCapsulesStateFB.CAPSULES, XR_FB_HAND_TRACKING_CAPSULE_COUNT); }
+    public static XrHandCapsuleFB.Buffer ncapsules(long struct) { return XrHandCapsuleFB.create(struct + XrHandTrackingCapsulesStateFB.CAPSULES, XR_HAND_TRACKING_CAPSULE_COUNT_FB); }
     /** Unsafe version of {@link #capsules(int) capsules}. */
     public static XrHandCapsuleFB ncapsules(long struct, int index) {
-        return XrHandCapsuleFB.create(struct + XrHandTrackingCapsulesStateFB.CAPSULES + check(index, XR_FB_HAND_TRACKING_CAPSULE_COUNT) * XrHandCapsuleFB.SIZEOF);
+        return XrHandCapsuleFB.create(struct + XrHandTrackingCapsulesStateFB.CAPSULES + check(index, XR_HAND_TRACKING_CAPSULE_COUNT_FB) * XrHandCapsuleFB.SIZEOF);
     }
 
     /** Unsafe version of {@link #type(int) type}. */
@@ -300,7 +300,7 @@ public class XrHandTrackingCapsulesStateFB extends Struct implements NativeResou
         @NativeType("void *")
         public long next() { return XrHandTrackingCapsulesStateFB.nnext(address()); }
         /** @return a {@link XrHandCapsuleFB}.Buffer view of the {@link XrHandTrackingCapsulesStateFB#capsules} field. */
-        @NativeType("XrHandCapsuleFB[XR_FB_HAND_TRACKING_CAPSULE_COUNT]")
+        @NativeType("XrHandCapsuleFB[XR_HAND_TRACKING_CAPSULE_COUNT_FB]")
         public XrHandCapsuleFB.Buffer capsules() { return XrHandTrackingCapsulesStateFB.ncapsules(address()); }
         /** @return a {@link XrHandCapsuleFB} view of the struct at the specified index of the {@link XrHandTrackingCapsulesStateFB#capsules} field. */
         public XrHandCapsuleFB capsules(int index) { return XrHandTrackingCapsulesStateFB.ncapsules(address(), index); }

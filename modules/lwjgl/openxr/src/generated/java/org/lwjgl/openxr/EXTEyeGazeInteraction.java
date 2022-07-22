@@ -9,7 +9,7 @@ package org.lwjgl.openxr;
 public final class EXTEyeGazeInteraction {
 
     /** The extension specification version. */
-    public static final int XR_EXT_eye_gaze_interaction_SPEC_VERSION = 1;
+    public static final int XR_EXT_eye_gaze_interaction_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_EXT_EYE_GAZE_INTERACTION_EXTENSION_NAME = "XR_EXT_eye_gaze_interaction";

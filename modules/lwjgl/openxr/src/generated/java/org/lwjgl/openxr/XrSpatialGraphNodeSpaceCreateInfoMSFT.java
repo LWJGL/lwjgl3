@@ -16,6 +16,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import static org.lwjgl.openxr.MSFTSpatialGraphBridge.*;
+
 /**
  * The information to create space from a spatial graph node.
  * 
@@ -39,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrStructureType {@link #type};
  *     void const * {@link #next};
  *     XrSpatialGraphNodeTypeMSFT {@link #nodeType};
- *     uint8_t {@link #nodeId}[16];
+ *     uint8_t {@link #nodeId}[XR_GUID_SIZE_MSFT];
  *     {@link XrPosef XrPosef} {@link #pose};
  * }</code></pre>
  */
@@ -64,7 +66,7 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct implements Nat
             __member(4),
             __member(POINTER_SIZE),
             __member(4),
-            __array(1, 16),
+            __array(1, XR_GUID_SIZE_MSFT),
             __member(XrPosef.SIZEOF, XrPosef.ALIGNOF)
         );
 
@@ -101,7 +103,7 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct implements Nat
     @NativeType("XrSpatialGraphNodeTypeMSFT")
     public int nodeType() { return nnodeType(address()); }
     /** a global unique identifier (a.k.a. GUID or 16 byte array), representing the spatial node that is being tracked. */
-    @NativeType("uint8_t[16]")
+    @NativeType("uint8_t[XR_GUID_SIZE_MSFT]")
     public ByteBuffer nodeId() { return nnodeId(address()); }
     /** a global unique identifier (a.k.a. GUID or 16 byte array), representing the spatial node that is being tracked. */
     @NativeType("uint8_t")
@@ -118,7 +120,7 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct implements Nat
     /** Sets the specified value to the {@link #nodeType} field. */
     public XrSpatialGraphNodeSpaceCreateInfoMSFT nodeType(@NativeType("XrSpatialGraphNodeTypeMSFT") int value) { nnodeType(address(), value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@link #nodeId} field. */
-    public XrSpatialGraphNodeSpaceCreateInfoMSFT nodeId(@NativeType("uint8_t[16]") ByteBuffer value) { nnodeId(address(), value); return this; }
+    public XrSpatialGraphNodeSpaceCreateInfoMSFT nodeId(@NativeType("uint8_t[XR_GUID_SIZE_MSFT]") ByteBuffer value) { nnodeId(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@link #nodeId} field. */
     public XrSpatialGraphNodeSpaceCreateInfoMSFT nodeId(int index, @NativeType("uint8_t") byte value) { nnodeId(address(), index, value); return this; }
     /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
@@ -275,10 +277,10 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct implements Nat
     /** Unsafe version of {@link #nodeType}. */
     public static int nnodeType(long struct) { return UNSAFE.getInt(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODETYPE); }
     /** Unsafe version of {@link #nodeId}. */
-    public static ByteBuffer nnodeId(long struct) { return memByteBuffer(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID, 16); }
+    public static ByteBuffer nnodeId(long struct) { return memByteBuffer(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID, XR_GUID_SIZE_MSFT); }
     /** Unsafe version of {@link #nodeId(int) nodeId}. */
     public static byte nnodeId(long struct, int index) {
-        return UNSAFE.getByte(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID + check(index, 16) * 1);
+        return UNSAFE.getByte(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID + check(index, XR_GUID_SIZE_MSFT) * 1);
     }
     /** Unsafe version of {@link #pose}. */
     public static XrPosef npose(long struct) { return XrPosef.create(struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.POSE); }
@@ -291,12 +293,12 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct implements Nat
     public static void nnodeType(long struct, int value) { UNSAFE.putInt(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODETYPE, value); }
     /** Unsafe version of {@link #nodeId(ByteBuffer) nodeId}. */
     public static void nnodeId(long struct, ByteBuffer value) {
-        if (CHECKS) { checkGT(value, 16); }
+        if (CHECKS) { checkGT(value, XR_GUID_SIZE_MSFT); }
         memCopy(memAddress(value), struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID, value.remaining() * 1);
     }
     /** Unsafe version of {@link #nodeId(int, byte) nodeId}. */
     public static void nnodeId(long struct, int index, byte value) {
-        UNSAFE.putByte(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID + check(index, 16) * 1, value);
+        UNSAFE.putByte(null, struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.NODEID + check(index, XR_GUID_SIZE_MSFT) * 1, value);
     }
     /** Unsafe version of {@link #pose(XrPosef) pose}. */
     public static void npose(long struct, XrPosef value) { memCopy(value.address(), struct + XrSpatialGraphNodeSpaceCreateInfoMSFT.POSE, XrPosef.SIZEOF); }
@@ -349,7 +351,7 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct implements Nat
         @NativeType("XrSpatialGraphNodeTypeMSFT")
         public int nodeType() { return XrSpatialGraphNodeSpaceCreateInfoMSFT.nnodeType(address()); }
         /** @return a {@link ByteBuffer} view of the {@link XrSpatialGraphNodeSpaceCreateInfoMSFT#nodeId} field. */
-        @NativeType("uint8_t[16]")
+        @NativeType("uint8_t[XR_GUID_SIZE_MSFT]")
         public ByteBuffer nodeId() { return XrSpatialGraphNodeSpaceCreateInfoMSFT.nnodeId(address()); }
         /** @return the value at the specified index of the {@link XrSpatialGraphNodeSpaceCreateInfoMSFT#nodeId} field. */
         @NativeType("uint8_t")
@@ -366,7 +368,7 @@ public class XrSpatialGraphNodeSpaceCreateInfoMSFT extends Struct implements Nat
         /** Sets the specified value to the {@link XrSpatialGraphNodeSpaceCreateInfoMSFT#nodeType} field. */
         public XrSpatialGraphNodeSpaceCreateInfoMSFT.Buffer nodeType(@NativeType("XrSpatialGraphNodeTypeMSFT") int value) { XrSpatialGraphNodeSpaceCreateInfoMSFT.nnodeType(address(), value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@link XrSpatialGraphNodeSpaceCreateInfoMSFT#nodeId} field. */
-        public XrSpatialGraphNodeSpaceCreateInfoMSFT.Buffer nodeId(@NativeType("uint8_t[16]") ByteBuffer value) { XrSpatialGraphNodeSpaceCreateInfoMSFT.nnodeId(address(), value); return this; }
+        public XrSpatialGraphNodeSpaceCreateInfoMSFT.Buffer nodeId(@NativeType("uint8_t[XR_GUID_SIZE_MSFT]") ByteBuffer value) { XrSpatialGraphNodeSpaceCreateInfoMSFT.nnodeId(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@link XrSpatialGraphNodeSpaceCreateInfoMSFT#nodeId} field. */
         public XrSpatialGraphNodeSpaceCreateInfoMSFT.Buffer nodeId(int index, @NativeType("uint8_t") byte value) { XrSpatialGraphNodeSpaceCreateInfoMSFT.nnodeId(address(), index, value); return this; }
         /** Copies the specified {@link XrPosef} to the {@link XrSpatialGraphNodeSpaceCreateInfoMSFT#pose} field. */

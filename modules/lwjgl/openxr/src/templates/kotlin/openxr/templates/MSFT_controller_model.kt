@@ -156,7 +156,7 @@ val MSFT_controller_model = "MSFTControllerModel".nativeClassXR("MSFT_controller
         XrSession("session", "the specified {@code XrSession}."),
         XrControllerModelKeyMSFT("modelKey", "the model key corresponding to the controller render model being queried."),
         AutoSize("buffer")..uint32_t("bufferCapacityInput", "the capacity of the {@code buffer} array, or 0 to indicate a request to retrieve the required capacity."),
-        Check(1)..uint32_t.p("bufferCountOutput", "filled in by the runtime with the count of elements in {@code buffer} array, or returns the required capacity in the case that {@code bufferCapacityInput} is 0."),
+        Check(1)..uint32_t.p("bufferCountOutput", "filled in by the runtime with the count of elements in {@code buffer} array, or returns the required capacity in the case that {@code bufferCapacityInput} is insufficient."),
         nullable..uint8_t.p("buffer", "a pointer to an application-allocated array of the model for the device that will be filled with the {@code uint8_t} values by the runtime. It <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0.")
     )
 

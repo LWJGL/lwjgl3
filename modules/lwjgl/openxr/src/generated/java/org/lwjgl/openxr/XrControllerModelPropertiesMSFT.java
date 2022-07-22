@@ -99,7 +99,7 @@ public class XrControllerModelPropertiesMSFT extends Struct implements NativeRes
     /** the capacity of the {@code nodeProperties} array, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int nodeCapacityInput() { return nnodeCapacityInput(address()); }
-    /** filled in by the runtime with the count of elements in {@code nodeProperties} array, or returns the required capacity in the case that {@code nodeCapacityInput} is 0. */
+    /** filled in by the runtime with the count of elements in {@code nodeProperties} array, or returns the required capacity in the case that {@code nodeCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int nodeCountOutput() { return nnodeCountOutput(address()); }
     /** a pointer to an application-allocated array that will be filled with the {@link XrControllerModelNodePropertiesMSFT} values. It <b>can</b> be {@code NULL} if {@code nodeCapacityInput} is 0. */

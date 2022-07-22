@@ -9,6 +9,7 @@ import org.lwjgl.generator.*
 fun XR_DEFINE_HANDLE(name: String) = WrappedPointerType(name)
 fun XR_DEFINE_ATOM(name: String) = typedef(uint64_t, name)
 
+val XrAsyncRequestIdFB = XR_DEFINE_ATOM("XrAsyncRequestIdFB")
 val XrBool32 = PrimitiveType("XrBool32", PrimitiveMapping.BOOLEAN4)
 val XrControllerModelKeyMSFT = XR_DEFINE_ATOM("XrControllerModelKeyMSFT")
 val XrDuration = typedef(uint64_t, "XrDuration")

@@ -14,13 +14,24 @@ import static org.lwjgl.system.JNI.*;
 public class FBPassthroughKeyboardHands {
 
     /** The extension specification version. */
-    public static final int XR_FB_passthrough_keyboard_hands_SPEC_VERSION = 1;
+    public static final int XR_FB_passthrough_keyboard_hands_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_FB_PASSTHROUGH_KEYBOARD_HANDS_EXTENSION_NAME = "XR_FB_passthrough_keyboard_hands";
 
-    /** Extends {@code XrPassthroughLayerPurposeFB}. */
-    public static final int XR_PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_HANDS_FB = 1000203001;
+    /**
+     * Extends {@code XrPassthroughLayerPurposeFB}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_HANDS_FB PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_HANDS_FB}</li>
+     * <li>{@link #XR_PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_MASKED_HANDS_FB PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_MASKED_HANDS_FB}</li>
+     * </ul>
+     */
+    public static final int
+        XR_PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_HANDS_FB        = 1000203001,
+        XR_PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_MASKED_HANDS_FB = 1000203002;
 
     /** Extends {@code XrStructureType}. */
     public static final int XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB = 1000203002;

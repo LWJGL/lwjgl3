@@ -307,7 +307,7 @@ public class MSFTSpatialAnchorPersistence {
      * <p>{@link XrSpatialAnchorPersistenceNameMSFT}</p>
      *
      * @param spatialAnchorStore            the {@code XrSpatialAnchorStoreConnectionMSFT} anchor store to perform the enumeration operation on.
-     * @param spatialAnchorNamesCountOutput filled in by the runtime with the count of anchor names written or the required capacity in the case that {@code spatialAnchorNamesCapacityInput} is 0.
+     * @param spatialAnchorNamesCountOutput filled in by the runtime with the count of anchor names written or the required capacity in the case that {@code spatialAnchorNamesCapacityInput} is insufficient.
      * @param persistedAnchorNames          a pointer to an array of {@link XrSpatialAnchorPersistenceNameMSFT} structures, but <b>can</b> be {@code NULL} if propertyCapacityInput is 0.
      */
     @NativeType("XrResult")

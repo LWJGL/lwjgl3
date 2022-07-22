@@ -21,13 +21,11 @@ import static org.lwjgl.openxr.FBPassthrough.*;
 /**
  * A layer color map.
  * 
- * <h5>Member Descriptions</h5>
+ * <h5>Description</h5>
  * 
- * <ul>
- * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
- * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
- * <li>{@code textureColorMap} is the array of {@code uint8_t} intensity values that map to original intensity values.</li>
- * </ul>
+ * <p>{@link XrPassthroughColorMapMonoToMonoFB} lets applications define a map which replaces each input luminance value in the passthrough imagery with a grayscale color value defined in {@code textureColorMap}. The map is applied before any additional effects (such as edges) are rendered on top.</p>
+ * 
+ * <p>{@link XrPassthroughColorMapMonoToMonoFB} is provided in the {@code next} chain of {@link XrPassthroughStyleFB}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -41,9 +39,9 @@ import static org.lwjgl.openxr.FBPassthrough.*;
  * 
  * <pre><code>
  * struct XrPassthroughColorMapMonoToMonoFB {
- *     XrStructureType type;
- *     void const * next;
- *     uint8_t textureColorMap[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB];
+ *     XrStructureType {@link #type};
+ *     void const * {@link #next};
+ *     uint8_t {@link #textureColorMap}[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB];
  * }</code></pre>
  */
 public class XrPassthroughColorMapMonoToMonoFB extends Struct implements NativeResource {
@@ -88,28 +86,28 @@ public class XrPassthroughColorMapMonoToMonoFB extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code type} field. */
+    /** the {@code XrStructureType} of this structure. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code next} field. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** @return a {@link ByteBuffer} view of the {@code textureColorMap} field. */
+    /** an array of {@code uint8_t} grayscale color values to which the passthrough luminance values are mapped. */
     @NativeType("uint8_t[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB]")
     public ByteBuffer textureColorMap() { return ntextureColorMap(address()); }
-    /** @return the value at the specified index of the {@code textureColorMap} field. */
+    /** an array of {@code uint8_t} grayscale color values to which the passthrough luminance values are mapped. */
     @NativeType("uint8_t")
     public byte textureColorMap(int index) { return ntextureColorMap(address(), index); }
 
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public XrPassthroughColorMapMonoToMonoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB} value to the {@code type} field. */
+    /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB} value to the {@link #type} field. */
     public XrPassthroughColorMapMonoToMonoFB type$Default() { return type(FBPassthrough.XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB); }
-    /** Sets the specified value to the {@code next} field. */
+    /** Sets the specified value to the {@link #next} field. */
     public XrPassthroughColorMapMonoToMonoFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@code textureColorMap} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@link #textureColorMap} field. */
     public XrPassthroughColorMapMonoToMonoFB textureColorMap(@NativeType("uint8_t[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB]") ByteBuffer value) { ntextureColorMap(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@code textureColorMap} field. */
+    /** Sets the specified value at the specified index of the {@link #textureColorMap} field. */
     public XrPassthroughColorMapMonoToMonoFB textureColorMap(int index, @NativeType("uint8_t") byte value) { ntextureColorMap(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,28 +311,28 @@ public class XrPassthroughColorMapMonoToMonoFB extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code type} field. */
+        /** @return the value of the {@link XrPassthroughColorMapMonoToMonoFB#type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPassthroughColorMapMonoToMonoFB.ntype(address()); }
-        /** @return the value of the {@code next} field. */
+        /** @return the value of the {@link XrPassthroughColorMapMonoToMonoFB#next} field. */
         @NativeType("void const *")
         public long next() { return XrPassthroughColorMapMonoToMonoFB.nnext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@code textureColorMap} field. */
+        /** @return a {@link ByteBuffer} view of the {@link XrPassthroughColorMapMonoToMonoFB#textureColorMap} field. */
         @NativeType("uint8_t[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB]")
         public ByteBuffer textureColorMap() { return XrPassthroughColorMapMonoToMonoFB.ntextureColorMap(address()); }
-        /** @return the value at the specified index of the {@code textureColorMap} field. */
+        /** @return the value at the specified index of the {@link XrPassthroughColorMapMonoToMonoFB#textureColorMap} field. */
         @NativeType("uint8_t")
         public byte textureColorMap(int index) { return XrPassthroughColorMapMonoToMonoFB.ntextureColorMap(address(), index); }
 
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link XrPassthroughColorMapMonoToMonoFB#type} field. */
         public XrPassthroughColorMapMonoToMonoFB.Buffer type(@NativeType("XrStructureType") int value) { XrPassthroughColorMapMonoToMonoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB} value to the {@code type} field. */
+        /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB} value to the {@link XrPassthroughColorMapMonoToMonoFB#type} field. */
         public XrPassthroughColorMapMonoToMonoFB.Buffer type$Default() { return type(FBPassthrough.XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB); }
-        /** Sets the specified value to the {@code next} field. */
+        /** Sets the specified value to the {@link XrPassthroughColorMapMonoToMonoFB#next} field. */
         public XrPassthroughColorMapMonoToMonoFB.Buffer next(@NativeType("void const *") long value) { XrPassthroughColorMapMonoToMonoFB.nnext(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@code textureColorMap} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@link XrPassthroughColorMapMonoToMonoFB#textureColorMap} field. */
         public XrPassthroughColorMapMonoToMonoFB.Buffer textureColorMap(@NativeType("uint8_t[XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB]") ByteBuffer value) { XrPassthroughColorMapMonoToMonoFB.ntextureColorMap(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@code textureColorMap} field. */
+        /** Sets the specified value at the specified index of the {@link XrPassthroughColorMapMonoToMonoFB#textureColorMap} field. */
         public XrPassthroughColorMapMonoToMonoFB.Buffer textureColorMap(int index, @NativeType("uint8_t") byte value) { XrPassthroughColorMapMonoToMonoFB.ntextureColorMap(address(), index, value); return this; }
 
     }

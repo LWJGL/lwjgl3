@@ -99,7 +99,7 @@ public class XrSceneMeshVertexBufferMSFT extends Struct implements NativeResourc
     /** the capacity of the array, or 0 to indicate a request to retrieve the required capacity. */
     @NativeType("uint32_t")
     public int vertexCapacityInput() { return nvertexCapacityInput(address()); }
-    /** a pointer to the count of vertices, or a pointer to the required capacity in the case that {@code vertexCapacityInput} is 0. */
+    /** a pointer to the count of vertices, or a pointer to the required capacity in the case that {@code vertexCapacityInput} is insufficient. */
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
     /** an array of {@link XrVector3f} filled in by the runtime returns the position of vertices in the mesh component’s space. */

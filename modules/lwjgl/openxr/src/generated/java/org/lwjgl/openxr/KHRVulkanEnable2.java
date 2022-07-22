@@ -111,7 +111,7 @@ public class KHRVulkanEnable2 {
      * <p>{@link XrVulkanInstanceCreateInfoKHR}, {@link #xrCreateVulkanDeviceKHR CreateVulkanDeviceKHR}</p>
      *
      * @param instance       an {@code XrInstance} handle previously created with {@link XR10#xrCreateInstance CreateInstance}.
-     * @param createInfo     extensible input struct of type {@code XrCreateVulkanInstanceCreateInfoKHR}
+     * @param createInfo     extensible input struct of type {@link XrVulkanInstanceCreateInfoKHR}
      * @param vulkanInstance points to a {@code VkInstance} handle to populate with the new Vulkan instance.
      * @param vulkanResult   points to a {@code VkResult} to populate with the result of the {@code vkCreateInstance} operation as returned by {@code pfnGetInstanceProcAddr}.
      */

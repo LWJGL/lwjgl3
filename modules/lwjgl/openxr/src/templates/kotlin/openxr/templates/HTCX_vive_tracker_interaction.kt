@@ -83,7 +83,7 @@ val HTCX_vive_tracker_interaction = "HTCXViveTrackerInteraction".nativeClassXR("
 
         XrInstance("instance", "an instance previously created."),
         AutoSize("viveTrackerPaths")..uint32_t("pathsCapacityInput", "the capacity of the {@code viveTrackerPaths}, or 0 to retrieve the required capacity."),
-        Check(1)..uint32_t.p("pathsCountOutput", "a pointer to the count of ##XrViveTrackerPathsHTCX {@code viveTrackerPaths} written, or a pointer to the required capacity in the case that {@code pathsCapacityInput} is 0."),
+        Check(1)..uint32_t.p("pathsCountOutput", "a pointer to the count of ##XrViveTrackerPathsHTCX {@code viveTrackerPaths} written, or a pointer to the required capacity in the case that {@code pathsCapacityInput} is insufficient."),
         nullable..XrViveTrackerPathsHTCX.p("viveTrackerPaths", "a pointer to an array of ##XrViveTrackerPathsHTCX VIVE tracker paths, but <b>can</b> be {@code NULL} if {@code pathsCapacityInput} is 0.")
     )
 }

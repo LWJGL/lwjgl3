@@ -84,7 +84,7 @@ val KHR_vulkan_enable = "KHRVulkanEnable".nativeClassXR("KHR_vulkan_enable", typ
         XrInstance("instance", "an {@code XrInstance} handle previously created with #CreateInstance()."),
         XrSystemId("systemId", "an {@code XrSystemId} handle for the system which will be used to create a session."),
         AutoSize("buffer")..uint32_t("bufferCapacityInput", "the capacity of the {@code buffer}, or 0 to indicate a request to retrieve the required capacity."),
-        Check(1)..uint32_t.p("bufferCountOutput", "a pointer to the count of characters written (including terminating {@code \\0}), or a pointer to the required capacity in the case that {@code bufferCapacityInput} is 0."),
+        Check(1)..uint32_t.p("bufferCountOutput", "a pointer to the count of characters written (including terminating {@code \\0}), or a pointer to the required capacity in the case that {@code bufferCapacityInput} is insufficient."),
         nullable..char.p("buffer", "a pointer to an array of characters, but <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0. The format of the output is a single space (ASCII {@code 0x20}) delimited string of extension names.")
     )
 
@@ -136,7 +136,7 @@ val KHR_vulkan_enable = "KHRVulkanEnable".nativeClassXR("KHR_vulkan_enable", typ
         XrInstance("instance", "an {@code XrInstance} handle previously created with #CreateInstance()."),
         XrSystemId("systemId", "an {@code XrSystemId} handle for the system which will be used to create a session."),
         AutoSize("buffer")..uint32_t("bufferCapacityInput", "the capacity of the {@code buffer}, or 0 to indicate a request to retrieve the required capacity."),
-        Check(1)..uint32_t.p("bufferCountOutput", "a pointer to the count of characters written (including terminating {@code \\0}), or a pointer to the required capacity in the case that {@code bufferCapacityInput} is 0."),
+        Check(1)..uint32_t.p("bufferCountOutput", "a pointer to the count of characters written (including terminating {@code \\0}), or a pointer to the required capacity in the case that {@code bufferCapacityInput} is insufficient."),
         nullable..char.p("buffer", "a pointer to an array of characters, but <b>can</b> be {@code NULL} if {@code bufferCapacityInput} is 0. The format of the output is a single space (ASCII {@code 0x20}) delimited string of extension names.")
     )
 

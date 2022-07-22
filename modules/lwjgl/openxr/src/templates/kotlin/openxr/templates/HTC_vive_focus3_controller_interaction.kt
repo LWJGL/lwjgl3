@@ -17,7 +17,7 @@ val HTC_vive_focus3_controller_interaction = "HTCViveFocus3ControllerInteraction
     IntConstant(
         "The extension specification version.",
 
-        "HTC_vive_focus3_controller_interaction_SPEC_VERSION".."1"
+        "HTC_vive_focus3_controller_interaction_SPEC_VERSION".."2"
     )
 
     StringConstant(

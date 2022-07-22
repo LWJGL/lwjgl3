@@ -238,7 +238,7 @@ val MSFT_spatial_anchor_persistence = "MSFTSpatialAnchorPersistence".nativeClass
 
         XrSpatialAnchorStoreConnectionMSFT("spatialAnchorStore", "the {@code XrSpatialAnchorStoreConnectionMSFT} anchor store to perform the enumeration operation on."),
         AutoSize("persistedAnchorNames")..uint32_t("spatialAnchorNamesCapacityInput", "the capacity of the {@code spatialAnchorNames} array, or 0 to indicate a request to retrieve the required capacity."),
-        Check(1)..nullable..uint32_t.p("spatialAnchorNamesCountOutput", "filled in by the runtime with the count of anchor names written or the required capacity in the case that {@code spatialAnchorNamesCapacityInput} is 0."),
+        Check(1)..nullable..uint32_t.p("spatialAnchorNamesCountOutput", "filled in by the runtime with the count of anchor names written or the required capacity in the case that {@code spatialAnchorNamesCapacityInput} is insufficient."),
         nullable..XrSpatialAnchorPersistenceNameMSFT.p("persistedAnchorNames", "a pointer to an array of ##XrSpatialAnchorPersistenceNameMSFT structures, but <b>can</b> be {@code NULL} if propertyCapacityInput is 0.")
     )
 

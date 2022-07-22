@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>{@code type} <b>must</b> be one of the following XrStructureType values: {@link FBDisplayRefreshRate#XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB}, {@link XR10#XR_TYPE_EVENT_DATA_EVENTS_LOST TYPE_EVENT_DATA_EVENTS_LOST}, {@link XR10#XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING}, {@link XR10#XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED}, {@link EXTXOverlay#XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX}, {@link VARJOMarkerTracking#XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO}, {@link EXTPerformanceSettings#XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT TYPE_EVENT_DATA_PERF_SETTINGS_EXT}, {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING}, {@link XR10#XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED TYPE_EVENT_DATA_SESSION_STATE_CHANGED}, {@link KHRVisibilityMask#XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR}, {@link HTCXViveTrackerInteraction#XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX}</li>
+ * <li>{@code type} <b>must</b> be one of the following XrStructureType values: {@link FBDisplayRefreshRate#XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB}, {@link XR10#XR_TYPE_EVENT_DATA_EVENTS_LOST TYPE_EVENT_DATA_EVENTS_LOST}, {@link XR10#XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING}, {@link XR10#XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED}, {@link EXTXOverlay#XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX}, {@link VARJOMarkerTracking#XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO}, {@link EXTPerformanceSettings#XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT TYPE_EVENT_DATA_PERF_SETTINGS_EXT}, {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING}, {@link XR10#XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED TYPE_EVENT_DATA_SESSION_STATE_CHANGED}, {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB}, {@link FBSpatialEntityQuery#XR_TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB}, {@link FBSpatialEntityQuery#XR_TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB}, {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB}, {@link FBSpatialEntity#XR_TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB}, {@link FBSpatialEntity#XR_TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB}, {@link KHRVisibilityMask#XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR}, {@link HTCXViveTrackerInteraction#XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
@@ -196,8 +196,38 @@ public class XrEventDataBaseHeader extends Struct implements NativeResource {
         return wrap(XrEventDataBaseHeader.class, value);
     }
 
+    /** Upcasts the specified {@code XrEventDataSpatialAnchorCreateCompleteFB} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataSpatialAnchorCreateCompleteFB value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceSetStatusCompleteFB} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataSpaceSetStatusCompleteFB value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
     /** Upcasts the specified {@code XrEventDataMarkerTrackingUpdateVARJO} instance to {@code XrEventDataBaseHeader}. */
     public static XrEventDataBaseHeader create(XrEventDataMarkerTrackingUpdateVARJO value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceQueryResultsAvailableFB} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataSpaceQueryResultsAvailableFB value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceQueryCompleteFB} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataSpaceQueryCompleteFB value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceSaveCompleteFB} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataSpaceSaveCompleteFB value) {
+        return wrap(XrEventDataBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceEraseCompleteFB} instance to {@code XrEventDataBaseHeader}. */
+    public static XrEventDataBaseHeader create(XrEventDataSpaceEraseCompleteFB value) {
         return wrap(XrEventDataBaseHeader.class, value);
     }
 
@@ -295,8 +325,38 @@ public class XrEventDataBaseHeader extends Struct implements NativeResource {
         return wrap(Buffer.class, value);
     }
 
+    /** Upcasts the specified {@code XrEventDataSpatialAnchorCreateCompleteFB.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataSpatialAnchorCreateCompleteFB.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceSetStatusCompleteFB.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataSpaceSetStatusCompleteFB.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
     /** Upcasts the specified {@code XrEventDataMarkerTrackingUpdateVARJO.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
     public static XrEventDataBaseHeader.Buffer create(XrEventDataMarkerTrackingUpdateVARJO.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceQueryResultsAvailableFB.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataSpaceQueryResultsAvailableFB.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceQueryCompleteFB.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataSpaceQueryCompleteFB.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceSaveCompleteFB.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataSpaceSaveCompleteFB.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrEventDataSpaceEraseCompleteFB.Buffer} instance to {@code XrEventDataBaseHeader.Buffer}. */
+    public static XrEventDataBaseHeader.Buffer create(XrEventDataSpaceEraseCompleteFB.Buffer value) {
         return wrap(Buffer.class, value);
     }
 

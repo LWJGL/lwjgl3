@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SWAPCHAIN_CREATE_INFO TYPE_SWAPCHAIN_CREATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT}, {@link XrSwapchainCreateInfoFoveationFB}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT}, {@link XrSwapchainCreateInfoFoveationFB}, {@link XrVulkanSwapchainCreateInfoMETA}</li>
  * <li>{@code createFlags} <b>must</b> be 0 or a valid combination of {@code XrSwapchainCreateFlagBits} values</li>
  * <li>{@code usageFlags} <b>must</b> be 0 or a valid combination of {@code XrSwapchainUsageFlagBits} values</li>
  * </ul>
@@ -158,6 +158,8 @@ public class XrSwapchainCreateInfo extends Struct implements NativeResource {
     public XrSwapchainCreateInfo next(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSwapchainCreateInfoFoveationFB} value to the {@code next} chain. */
     public XrSwapchainCreateInfo next(XrSwapchainCreateInfoFoveationFB value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrVulkanSwapchainCreateInfoMETA} value to the {@code next} chain. */
+    public XrSwapchainCreateInfo next(XrVulkanSwapchainCreateInfoMETA value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #createFlags} field. */
     public XrSwapchainCreateInfo createFlags(@NativeType("XrSwapchainCreateFlags") long value) { ncreateFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #usageFlags} field. */
@@ -459,6 +461,8 @@ public class XrSwapchainCreateInfo extends Struct implements NativeResource {
         public XrSwapchainCreateInfo.Buffer next(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSwapchainCreateInfoFoveationFB} value to the {@code next} chain. */
         public XrSwapchainCreateInfo.Buffer next(XrSwapchainCreateInfoFoveationFB value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrVulkanSwapchainCreateInfoMETA} value to the {@code next} chain. */
+        public XrSwapchainCreateInfo.Buffer next(XrVulkanSwapchainCreateInfoMETA value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrSwapchainCreateInfo#createFlags} field. */
         public XrSwapchainCreateInfo.Buffer createFlags(@NativeType("XrSwapchainCreateFlags") long value) { XrSwapchainCreateInfo.ncreateFlags(address(), value); return this; }
         /** Sets the specified value to the {@link XrSwapchainCreateInfo#usageFlags} field. */

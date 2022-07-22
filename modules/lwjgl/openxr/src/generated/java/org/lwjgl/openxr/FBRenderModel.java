@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class FBRenderModel {
 
     /** The extension specification version. */
-    public static final int XR_FB_render_model_SPEC_VERSION = 1;
+    public static final int XR_FB_render_model_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_FB_RENDER_MODEL_EXTENSION_NAME = "XR_FB_render_model";
@@ -38,14 +38,16 @@ public class FBRenderModel {
      * <li>{@link #XR_TYPE_RENDER_MODEL_BUFFER_FB TYPE_RENDER_MODEL_BUFFER_FB}</li>
      * <li>{@link #XR_TYPE_RENDER_MODEL_LOAD_INFO_FB TYPE_RENDER_MODEL_LOAD_INFO_FB}</li>
      * <li>{@link #XR_TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB}</li>
+     * <li>{@link #XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB}</li>
      * </ul>
      */
     public static final int
-        XR_TYPE_RENDER_MODEL_PATH_INFO_FB         = 1000119000,
-        XR_TYPE_RENDER_MODEL_PROPERTIES_FB        = 1000119001,
-        XR_TYPE_RENDER_MODEL_BUFFER_FB            = 1000119002,
-        XR_TYPE_RENDER_MODEL_LOAD_INFO_FB         = 1000119003,
-        XR_TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB = 1000119004;
+        XR_TYPE_RENDER_MODEL_PATH_INFO_FB            = 1000119000,
+        XR_TYPE_RENDER_MODEL_PROPERTIES_FB           = 1000119001,
+        XR_TYPE_RENDER_MODEL_BUFFER_FB               = 1000119002,
+        XR_TYPE_RENDER_MODEL_LOAD_INFO_FB            = 1000119003,
+        XR_TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB    = 1000119004,
+        XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB = 1000119005;
 
     /**
      * Extends {@code XrResult}.
@@ -60,6 +62,20 @@ public class FBRenderModel {
     public static final int
         XR_ERROR_RENDER_MODEL_KEY_INVALID_FB = -1000119000,
         XR_RENDER_MODEL_UNAVAILABLE_FB       = 1000119020;
+
+    /**
+     * XrRenderModelFlagBitsFB
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB}</li>
+     * <li>{@link #XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_2_BIT_FB RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_2_BIT_FB}</li>
+     * </ul>
+     */
+    public static final int
+        XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB = 0x1,
+        XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_2_BIT_FB = 0x2;
 
     /** API Constants */
     public static final long XR_NULL_RENDER_MODEL_KEY_FB = 0x0L;
@@ -134,7 +150,7 @@ public class FBRenderModel {
      * <p>{@link XrRenderModelPathInfoFB}</p>
      *
      * @param session         the specified {@code XrSession}.
-     * @param pathCountOutput a pointer to the count of {@code float} {@code paths} written, or a pointer to the required capacity in the case that {@code pathCapacityInput} is 0.
+     * @param pathCountOutput a pointer to the count of {@code float} {@code paths} written, or a pointer to the required capacity in the case that {@code pathCapacityInput} is insufficient.
      * @param paths           a pointer to an application-allocated array that will be filled with {@link XrRenderModelPathInfoFB} values that are supported by the runtime, but <b>can</b> be {@code NULL} if {@code pathCapacityInput} is 0
      */
     @NativeType("XrResult")

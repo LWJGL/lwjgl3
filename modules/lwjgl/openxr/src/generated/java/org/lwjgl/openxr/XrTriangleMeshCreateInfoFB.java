@@ -20,7 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>Mesh buffers can be updated between {@link FBTriangleMesh#xrTriangleMeshBeginUpdateFB TriangleMeshBeginUpdateFB} and {@link FBTriangleMesh#xrTriangleMeshEndUpdateFB TriangleMeshEndUpdateFB} calls.</p>
+ * <p>Mesh buffers <b>can</b> be updated between {@link FBTriangleMesh#xrTriangleMeshBeginUpdateFB TriangleMeshBeginUpdateFB} and {@link FBTriangleMesh#xrTriangleMeshEndUpdateFB TriangleMeshEndUpdateFB} calls.</p>
+ * 
+ * <p>If the mesh is non-mutable, {@code vertexBuffer} <b>must</b> be a pointer to an array of {@code vertexCount} {@link XrVector3f} structures. If the mesh is non-mutable, {@code indexBuffer} <b>must</b> be a pointer to an array of 3 * {@code triangleCount} {@code uint32_t} vertex indices.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -28,11 +30,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@link FBTriangleMesh XR_FB_triangle_mesh} extension <b>must</b> be enabled prior to using {@link XrTriangleMeshCreateInfoFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBTriangleMesh#XR_TYPE_TRIANGLE_MESH_CREATE_INFO_FB TYPE_TRIANGLE_MESH_CREATE_INFO_FB}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code XrTriangleMeshFlagBitsFB} values</li>
- * <li>{@code flags} <b>must</b> not be 0</li>
+ * <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrTriangleMeshFlagBitsFB} values</li>
  * <li>{@code windingOrder} <b>must</b> be a valid {@code XrWindingOrderFB} value</li>
- * <li>If {@code vertexBuffer} is not {@code NULL}, {@code vertexBuffer} <b>must</b> be a pointer to a valid {@link XrVector3f} structure</li>
- * <li>If {@code indexBuffer} is not {@code NULL}, {@code indexBuffer} <b>must</b> be a pointer to a valid {@code uint32_t} value</li>
  * </ul>
  * 
  * <h5>See Also</h5>

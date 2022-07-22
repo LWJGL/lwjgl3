@@ -34,7 +34,8 @@ import static org.lwjgl.openxr.FBRenderModel.*;
  * <li>{@code type} <b>must</b> be {@link FBRenderModel#XR_TYPE_RENDER_MODEL_PROPERTIES_FB TYPE_RENDER_MODEL_PROPERTIES_FB}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * <li>{@code modelName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link FBRenderModel#XR_MAX_RENDER_MODEL_NAME_SIZE_FB MAX_RENDER_MODEL_NAME_SIZE_FB}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
+ * <li>{@code flags} <b>must</b> be a valid combination of {@code XrRenderModelFlagBitsFB} values</li>
+ * <li>{@code flags} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -111,7 +112,7 @@ public class XrRenderModelPropertiesFB extends Struct implements NativeResource 
     /** the {@code XrStructureType} of this structure. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain. {@link XrRenderModelCapabilitiesRequestFB} is a structure in this structure chain and <b>should</b> be linked when this structure is passed to {@link FBRenderModel#xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB}. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
     /** the vendor id of the model. */
@@ -129,7 +130,7 @@ public class XrRenderModelPropertiesFB extends Struct implements NativeResource 
     /** the version number of the model. */
     @NativeType("uint32_t")
     public int modelVersion() { return nmodelVersion(address()); }
-    /** a bitmask of {@code XrRenderModelFlagsFB}. */
+    /** a bitmask of {@code XrRenderModelFlagsFB}. After a successful call to {@link FBRenderModel#xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB}, flags must contain the support level of the model and no other support levels. */
     @NativeType("XrRenderModelFlagsFB")
     public long flags() { return nflags(address()); }
 

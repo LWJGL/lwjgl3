@@ -101,7 +101,7 @@ public class FBDisplayRefreshRate {
      * <p>{@link #xrGetDisplayRefreshRateFB GetDisplayRefreshRateFB}, {@link #xrRequestDisplayRefreshRateFB RequestDisplayRefreshRateFB}</p>
      *
      * @param session                       the session that enumerates the supported display refresh rates.
-     * @param displayRefreshRateCountOutput a pointer to the count of {@code float} {@code displayRefreshRates} written, or a pointer to the required capacity in the case that {@code displayRefreshRateCapacityInput} is 0.
+     * @param displayRefreshRateCountOutput a pointer to the count of {@code float} {@code displayRefreshRates} written, or a pointer to the required capacity in the case that {@code displayRefreshRateCapacityInput} is insufficient.
      * @param displayRefreshRates           a pointer to an array of {@code float} display refresh rates, but <b>can</b> be {@code NULL} if {@code displayRefreshRateCapacityInput} is 0.
      */
     @NativeType("XrResult")

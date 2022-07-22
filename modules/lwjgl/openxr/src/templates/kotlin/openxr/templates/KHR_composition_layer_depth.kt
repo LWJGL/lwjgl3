@@ -17,7 +17,7 @@ val KHR_composition_layer_depth = "KHRCompositionLayerDepth".nativeClassXR("KHR_
     IntConstant(
         "The extension specification version.",
 
-        "KHR_composition_layer_depth_SPEC_VERSION".."5"
+        "KHR_composition_layer_depth_SPEC_VERSION".."6"
     )
 
     StringConstant(

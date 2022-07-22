@@ -9,7 +9,7 @@ package org.lwjgl.openxr;
 public final class KHRCompositionLayerDepth {
 
     /** The extension specification version. */
-    public static final int XR_KHR_composition_layer_depth_SPEC_VERSION = 5;
+    public static final int XR_KHR_composition_layer_depth_SPEC_VERSION = 6;
 
     /** The extension name. */
     public static final String XR_KHR_COMPOSITION_LAYER_DEPTH_EXTENSION_NAME = "XR_KHR_composition_layer_depth";
