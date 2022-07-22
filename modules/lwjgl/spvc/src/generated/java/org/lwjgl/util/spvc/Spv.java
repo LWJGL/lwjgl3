@@ -35,6 +35,7 @@ public final class Spv {
      * <li>{@link #SpvSourceLanguageOpenCL_CPP SourceLanguageOpenCL_CPP}</li>
      * <li>{@link #SpvSourceLanguageHLSL SourceLanguageHLSL}</li>
      * <li>{@link #SpvSourceLanguageCPP_for_OpenCL SourceLanguageCPP_for_OpenCL}</li>
+     * <li>{@link #SpvSourceLanguageSYCL SourceLanguageSYCL}</li>
      * <li>{@link #SpvSourceLanguageMax SourceLanguageMax}</li>
      * </ul>
      */
@@ -46,6 +47,7 @@ public final class Spv {
         SpvSourceLanguageOpenCL_CPP     = 4,
         SpvSourceLanguageHLSL           = 5,
         SpvSourceLanguageCPP_for_OpenCL = 6,
+        SpvSourceLanguageSYCL           = 7,
         SpvSourceLanguageMax            = 0x7fffffff;
 
     /**
@@ -219,6 +221,7 @@ public final class Spv {
      * <li>{@link #SpvExecutionModeNoGlobalOffsetINTEL ExecutionModeNoGlobalOffsetINTEL}</li>
      * <li>{@link #SpvExecutionModeNumSIMDWorkitemsINTEL ExecutionModeNumSIMDWorkitemsINTEL}</li>
      * <li>{@link #SpvExecutionModeSchedulerTargetFmaxMhzINTEL ExecutionModeSchedulerTargetFmaxMhzINTEL}</li>
+     * <li>{@link #SpvExecutionModeNamedBarrierCountINTEL ExecutionModeNamedBarrierCountINTEL}</li>
      * <li>{@link #SpvExecutionModeMax ExecutionModeMax}</li>
      * </ul>
      */
@@ -290,6 +293,7 @@ public final class Spv {
         SpvExecutionModeNoGlobalOffsetINTEL              = 5895,
         SpvExecutionModeNumSIMDWorkitemsINTEL            = 5896,
         SpvExecutionModeSchedulerTargetFmaxMhzINTEL      = 5903,
+        SpvExecutionModeNamedBarrierCountINTEL           = 6417,
         SpvExecutionModeMax                              = 0x7fffffff;
 
     /**
@@ -971,6 +975,8 @@ public final class Spv {
      * <li>{@link #SpvDecorationPrefetchINTEL DecorationPrefetchINTEL}</li>
      * <li>{@link #SpvDecorationStallEnableINTEL DecorationStallEnableINTEL}</li>
      * <li>{@link #SpvDecorationFuseLoopsInFunctionINTEL DecorationFuseLoopsInFunctionINTEL}</li>
+     * <li>{@link #SpvDecorationAliasScopeINTEL DecorationAliasScopeINTEL}</li>
+     * <li>{@link #SpvDecorationNoAliasINTEL DecorationNoAliasINTEL}</li>
      * <li>{@link #SpvDecorationBufferLocationINTEL DecorationBufferLocationINTEL}</li>
      * <li>{@link #SpvDecorationIOPipeStorageINTEL DecorationIOPipeStorageINTEL}</li>
      * <li>{@link #SpvDecorationFunctionFloatingPointModeINTEL DecorationFunctionFloatingPointModeINTEL}</li>
@@ -1084,6 +1090,8 @@ public final class Spv {
         SpvDecorationPrefetchINTEL                      = 5902,
         SpvDecorationStallEnableINTEL                   = 5905,
         SpvDecorationFuseLoopsInFunctionINTEL           = 5907,
+        SpvDecorationAliasScopeINTEL                    = 5914,
+        SpvDecorationNoAliasINTEL                       = 5915,
         SpvDecorationBufferLocationINTEL                = 5921,
         SpvDecorationIOPipeStorageINTEL                 = 5944,
         SpvDecorationFunctionFloatingPointModeINTEL     = 6080,
@@ -1219,6 +1227,7 @@ public final class Spv {
      * <li>{@link #SpvBuiltInSMCountNV BuiltInSMCountNV}</li>
      * <li>{@link #SpvBuiltInWarpIDNV BuiltInWarpIDNV}</li>
      * <li>{@link #SpvBuiltInSMIDNV BuiltInSMIDNV}</li>
+     * <li>{@link #SpvBuiltInCullMaskKHR BuiltInCullMaskKHR}</li>
      * <li>{@link #SpvBuiltInMax BuiltInMax}</li>
      * </ul>
      */
@@ -1344,6 +1353,7 @@ public final class Spv {
         SpvBuiltInSMCountNV                   = 5375,
         SpvBuiltInWarpIDNV                    = 5376,
         SpvBuiltInSMIDNV                      = 5377,
+        SpvBuiltInCullMaskKHR                 = 6021,
         SpvBuiltInMax                         = 0x7fffffff;
 
     /**
@@ -1621,6 +1631,8 @@ public final class Spv {
      * <li>{@link #SpvMemoryAccessMakePointerVisibleKHRShift MemoryAccessMakePointerVisibleKHRShift}</li>
      * <li>{@link #SpvMemoryAccessNonPrivatePointerShift MemoryAccessNonPrivatePointerShift}</li>
      * <li>{@link #SpvMemoryAccessNonPrivatePointerKHRShift MemoryAccessNonPrivatePointerKHRShift}</li>
+     * <li>{@link #SpvMemoryAccessAliasScopeINTELMaskShift MemoryAccessAliasScopeINTELMaskShift}</li>
+     * <li>{@link #SpvMemoryAccessNoAliasINTELMaskShift MemoryAccessNoAliasINTELMaskShift}</li>
      * <li>{@link #SpvMemoryAccessMax MemoryAccessMax}</li>
      * </ul>
      */
@@ -1634,6 +1646,8 @@ public final class Spv {
         SpvMemoryAccessMakePointerVisibleKHRShift   = 4,
         SpvMemoryAccessNonPrivatePointerShift       = 5,
         SpvMemoryAccessNonPrivatePointerKHRShift    = 5,
+        SpvMemoryAccessAliasScopeINTELMaskShift     = 16,
+        SpvMemoryAccessNoAliasINTELMaskShift        = 17,
         SpvMemoryAccessMax                          = 0x7fffffff;
 
     /**
@@ -1652,6 +1666,8 @@ public final class Spv {
      * <li>{@link #SpvMemoryAccessMakePointerVisibleKHRMask MemoryAccessMakePointerVisibleKHRMask}</li>
      * <li>{@link #SpvMemoryAccessNonPrivatePointerMask MemoryAccessNonPrivatePointerMask}</li>
      * <li>{@link #SpvMemoryAccessNonPrivatePointerKHRMask MemoryAccessNonPrivatePointerKHRMask}</li>
+     * <li>{@link #SpvMemoryAccessAliasScopeINTELMaskMask MemoryAccessAliasScopeINTELMaskMask}</li>
+     * <li>{@link #SpvMemoryAccessNoAliasINTELMaskMask MemoryAccessNoAliasINTELMaskMask}</li>
      * </ul>
      */
     public static final int
@@ -1664,7 +1680,9 @@ public final class Spv {
         SpvMemoryAccessMakePointerVisibleMask      = 0x00000010,
         SpvMemoryAccessMakePointerVisibleKHRMask   = 0x00000010,
         SpvMemoryAccessNonPrivatePointerMask       = 0x00000020,
-        SpvMemoryAccessNonPrivatePointerKHRMask    = 0x00000020;
+        SpvMemoryAccessNonPrivatePointerKHRMask    = 0x00000020,
+        SpvMemoryAccessAliasScopeINTELMaskMask     = 0x00010000,
+        SpvMemoryAccessNoAliasINTELMaskMask        = 0x00020000;
 
     /**
      * {@code SpvScope}
@@ -1970,6 +1988,7 @@ public final class Spv {
      * <li>{@link #SpvCapabilityFPGAMemoryAccessesINTEL CapabilityFPGAMemoryAccessesINTEL}</li>
      * <li>{@link #SpvCapabilityFPGAClusterAttributesINTEL CapabilityFPGAClusterAttributesINTEL}</li>
      * <li>{@link #SpvCapabilityLoopFuseINTEL CapabilityLoopFuseINTEL}</li>
+     * <li>{@link #SpvCapabilityMemoryAccessAliasingINTEL CapabilityMemoryAccessAliasingINTEL}</li>
      * <li>{@link #SpvCapabilityFPGABufferLocationINTEL CapabilityFPGABufferLocationINTEL}</li>
      * <li>{@link #SpvCapabilityArbitraryPrecisionFixedPointINTEL CapabilityArbitraryPrecisionFixedPointINTEL}</li>
      * <li>{@link #SpvCapabilityUSMStorageClassesINTEL CapabilityUSMStorageClassesINTEL}</li>
@@ -1984,13 +2003,17 @@ public final class Spv {
      * <li>{@link #SpvCapabilityDotProductInput4x8BitPackedKHR CapabilityDotProductInput4x8BitPackedKHR}</li>
      * <li>{@link #SpvCapabilityDotProduct CapabilityDotProduct}</li>
      * <li>{@link #SpvCapabilityDotProductKHR CapabilityDotProductKHR}</li>
+     * <li>{@link #SpvCapabilityRayCullMaskKHR CapabilityRayCullMaskKHR}</li>
      * <li>{@link #SpvCapabilityBitInstructions CapabilityBitInstructions}</li>
+     * <li>{@link #SpvCapabilityGroupNonUniformRotateKHR CapabilityGroupNonUniformRotateKHR}</li>
      * <li>{@link #SpvCapabilityAtomicFloat32AddEXT CapabilityAtomicFloat32AddEXT}</li>
      * <li>{@link #SpvCapabilityAtomicFloat64AddEXT CapabilityAtomicFloat64AddEXT}</li>
      * <li>{@link #SpvCapabilityLongConstantCompositeINTEL CapabilityLongConstantCompositeINTEL}</li>
      * <li>{@link #SpvCapabilityOptNoneINTEL CapabilityOptNoneINTEL}</li>
      * <li>{@link #SpvCapabilityAtomicFloat16AddEXT CapabilityAtomicFloat16AddEXT}</li>
      * <li>{@link #SpvCapabilityDebugInfoModuleINTEL CapabilityDebugInfoModuleINTEL}</li>
+     * <li>{@link #SpvCapabilitySplitBarrierINTEL CapabilitySplitBarrierINTEL}</li>
+     * <li>{@link #SpvCapabilityGroupUniformArithmeticKHR CapabilityGroupUniformArithmeticKHR}</li>
      * <li>{@link #SpvCapabilityMax CapabilityMax}</li>
      * </ul>
      */
@@ -2193,6 +2216,7 @@ public final class Spv {
         SpvCapabilityFPGAMemoryAccessesINTEL                      = 5898,
         SpvCapabilityFPGAClusterAttributesINTEL                   = 5904,
         SpvCapabilityLoopFuseINTEL                                = 5906,
+        SpvCapabilityMemoryAccessAliasingINTEL                    = 5910,
         SpvCapabilityFPGABufferLocationINTEL                      = 5920,
         SpvCapabilityArbitraryPrecisionFixedPointINTEL            = 5922,
         SpvCapabilityUSMStorageClassesINTEL                       = 5935,
@@ -2207,13 +2231,17 @@ public final class Spv {
         SpvCapabilityDotProductInput4x8BitPackedKHR               = 6018,
         SpvCapabilityDotProduct                                   = 6019,
         SpvCapabilityDotProductKHR                                = 6019,
+        SpvCapabilityRayCullMaskKHR                               = 6020,
         SpvCapabilityBitInstructions                              = 6025,
+        SpvCapabilityGroupNonUniformRotateKHR                     = 6026,
         SpvCapabilityAtomicFloat32AddEXT                          = 6033,
         SpvCapabilityAtomicFloat64AddEXT                          = 6034,
         SpvCapabilityLongConstantCompositeINTEL                   = 6089,
         SpvCapabilityOptNoneINTEL                                 = 6094,
         SpvCapabilityAtomicFloat16AddEXT                          = 6095,
         SpvCapabilityDebugInfoModuleINTEL                         = 6114,
+        SpvCapabilitySplitBarrierINTEL                            = 6141,
+        SpvCapabilityGroupUniformArithmeticKHR                    = 6400,
         SpvCapabilityMax                                          = 0x7fffffff;
 
     /**
@@ -2822,6 +2850,7 @@ public final class Spv {
      * <li>{@link #SpvOpSubgroupAllKHR OpSubgroupAllKHR}</li>
      * <li>{@link #SpvOpSubgroupAnyKHR OpSubgroupAnyKHR}</li>
      * <li>{@link #SpvOpSubgroupAllEqualKHR OpSubgroupAllEqualKHR}</li>
+     * <li>{@link #SpvOpGroupNonUniformRotateKHR OpGroupNonUniformRotateKHR}</li>
      * <li>{@link #SpvOpSubgroupReadInvocationKHR OpSubgroupReadInvocationKHR}</li>
      * <li>{@link #SpvOpTraceRayKHR OpTraceRayKHR}</li>
      * <li>{@link #SpvOpExecuteCallableKHR OpExecuteCallableKHR}</li>
@@ -3088,6 +3117,9 @@ public final class Spv {
      * <li>{@link #SpvOpArbitraryFloatPowRINTEL OpArbitraryFloatPowRINTEL}</li>
      * <li>{@link #SpvOpArbitraryFloatPowNINTEL OpArbitraryFloatPowNINTEL}</li>
      * <li>{@link #SpvOpLoopControlINTEL OpLoopControlINTEL}</li>
+     * <li>{@link #SpvOpAliasDomainDeclINTEL OpAliasDomainDeclINTEL}</li>
+     * <li>{@link #SpvOpAliasScopeDeclINTEL OpAliasScopeDeclINTEL}</li>
+     * <li>{@link #SpvOpAliasScopeListDeclINTEL OpAliasScopeListDeclINTEL}</li>
      * <li>{@link #SpvOpFixedSqrtINTEL OpFixedSqrtINTEL}</li>
      * <li>{@link #SpvOpFixedRecipINTEL OpFixedRecipINTEL}</li>
      * <li>{@link #SpvOpFixedRsqrtINTEL OpFixedRsqrtINTEL}</li>
@@ -3126,6 +3158,16 @@ public final class Spv {
      * <li>{@link #SpvOpTypeStructContinuedINTEL OpTypeStructContinuedINTEL}</li>
      * <li>{@link #SpvOpConstantCompositeContinuedINTEL OpConstantCompositeContinuedINTEL}</li>
      * <li>{@link #SpvOpSpecConstantCompositeContinuedINTEL OpSpecConstantCompositeContinuedINTEL}</li>
+     * <li>{@link #SpvOpControlBarrierArriveINTEL OpControlBarrierArriveINTEL}</li>
+     * <li>{@link #SpvOpControlBarrierWaitINTEL OpControlBarrierWaitINTEL}</li>
+     * <li>{@link #SpvOpGroupIMulKHR OpGroupIMulKHR}</li>
+     * <li>{@link #SpvOpGroupFMulKHR OpGroupFMulKHR}</li>
+     * <li>{@link #SpvOpGroupBitwiseAndKHR OpGroupBitwiseAndKHR}</li>
+     * <li>{@link #SpvOpGroupBitwiseOrKHR OpGroupBitwiseOrKHR}</li>
+     * <li>{@link #SpvOpGroupBitwiseXorKHR OpGroupBitwiseXorKHR}</li>
+     * <li>{@link #SpvOpGroupLogicalAndKHR OpGroupLogicalAndKHR}</li>
+     * <li>{@link #SpvOpGroupLogicalOrKHR OpGroupLogicalOrKHR}</li>
+     * <li>{@link #SpvOpGroupLogicalXorKHR OpGroupLogicalXorKHR}</li>
      * <li>{@link #SpvOpMax OpMax}</li>
      * </ul>
      */
@@ -3480,6 +3522,7 @@ public final class Spv {
         SpvOpSubgroupAllKHR                                                        = 4428,
         SpvOpSubgroupAnyKHR                                                        = 4429,
         SpvOpSubgroupAllEqualKHR                                                   = 4430,
+        SpvOpGroupNonUniformRotateKHR                                              = 4431,
         SpvOpSubgroupReadInvocationKHR                                             = 4432,
         SpvOpTraceRayKHR                                                           = 4445,
         SpvOpExecuteCallableKHR                                                    = 4446,
@@ -3746,6 +3789,9 @@ public final class Spv {
         SpvOpArbitraryFloatPowRINTEL                                               = 5881,
         SpvOpArbitraryFloatPowNINTEL                                               = 5882,
         SpvOpLoopControlINTEL                                                      = 5887,
+        SpvOpAliasDomainDeclINTEL                                                  = 5911,
+        SpvOpAliasScopeDeclINTEL                                                   = 5912,
+        SpvOpAliasScopeListDeclINTEL                                               = 5913,
         SpvOpFixedSqrtINTEL                                                        = 5923,
         SpvOpFixedRecipINTEL                                                       = 5924,
         SpvOpFixedRsqrtINTEL                                                       = 5925,
@@ -3784,6 +3830,16 @@ public final class Spv {
         SpvOpTypeStructContinuedINTEL                                              = 6090,
         SpvOpConstantCompositeContinuedINTEL                                       = 6091,
         SpvOpSpecConstantCompositeContinuedINTEL                                   = 6092,
+        SpvOpControlBarrierArriveINTEL                                             = 6142,
+        SpvOpControlBarrierWaitINTEL                                               = 6143,
+        SpvOpGroupIMulKHR                                                          = 6401,
+        SpvOpGroupFMulKHR                                                          = 6402,
+        SpvOpGroupBitwiseAndKHR                                                    = 6403,
+        SpvOpGroupBitwiseOrKHR                                                     = 6404,
+        SpvOpGroupBitwiseXorKHR                                                    = 6405,
+        SpvOpGroupLogicalAndKHR                                                    = 6406,
+        SpvOpGroupLogicalOrKHR                                                     = 6407,
+        SpvOpGroupLogicalXorKHR                                                    = 6408,
         SpvOpMax                                                                   = 0x7fffffff;
 
     private Spv() {}
