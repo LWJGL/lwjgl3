@@ -19,7 +19,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     IntConstant(
         """
         The major version number of the GLFW header.
-        
+
         This is incremented when the API is changed in non-compatible ways.
         """,
 
@@ -29,7 +29,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     IntConstant(
         """
         The minor version number of the GLFW header.
-        
+
         This is incremented when features are added to the API but it remains backward-compatible.
         """,
 
@@ -39,7 +39,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     IntConstant(
         """
         The revision number of the GLFW header.
-        
+
         This is incremented when a bug fix release is made that does not contain any API changes.
         """,
 
@@ -420,10 +420,10 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "FEATURE_UNAVAILABLE".enum(
             """
             The requested feature is not provided by the platform.
- 
+
             The requested feature is not provided by the platform, so GLFW is unable to implement it. The documentation for each function notes if it could
             emit this error.
- 
+
             Platform or platform version limitation. The error can be ignored unless the feature is critical to the application.
 
             A function call that emits this error has no effect other than the error and updating any existing out parameters.
@@ -569,7 +569,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         "CURSOR_NORMAL"..0x00034001,
         "CURSOR_HIDDEN"..0x00034002,
-        "CURSOR_DISABLED"..0x00034003
+        "CURSOR_DISABLED"..0x00034003,
+        "CURSOR_CAPTURED"..0x00034004
     )
 
     IntConstant("The regular arrow cursor shape.", "ARROW_CURSOR"..0x00036001)
@@ -579,7 +580,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     IntConstant(
         """
         The horizontal resize/move arrow shape.
-        
+
         This is usually a horizontal double-headed arrow.
         """,
 
@@ -638,7 +639,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         The operation-not-allowed shape.
 
         This is usually a circle with a diagonal line through it.
- 
+
         ${note(ul(
             "<b>X11</b>: This shape is provided by a newer standard not supported by all cursor themes.",
             "<b>Wayland</b>: This shape is provided by a newer standard not supported by all cursor themes."
@@ -661,7 +662,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     IntConstant(
         """
         Joystick hat buttons init hint.
-        
+
         Specifies whether to also expose joystick hats as buttons, for compatibility with earlier versions of GLFW that did not have #GetJoystickHats().
         Possible values are #TRUE and #FALSE.
         """,
@@ -672,7 +673,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     IntConstant(
         """
         ANGLE rendering backend init hint.
-        
+
         Specifies the platform type (rendering backend) to request when using OpenGL ES and EGL via ${url(
             "https://chromium.googlesource.com/angle/angle/", 
             "ANGLE")
@@ -693,7 +694,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     IntConstant(
         """
         macOS specific init hint.
-        
+
         Specifies whether to set the current directory to the application to the {@code Contents/Resources} subdirectory of the application's bundle, if
         present. Possible values are #TRUE` and #FALSE`. This is ignored on other platforms.
         """,
@@ -704,7 +705,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     IntConstant(
         """
         macOS specific init hint.
-        
+
         Specifies whether to create the menu bar and dock icon when GLFW is initialized. This applies whether the menu bar is created from a nib or manually by
         GLFW. Possible values are #TRUE and #FALSE. This is ignored on other platforms.
         """,
@@ -898,15 +899,20 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     ).javaDocLinks
 
     IntConstant(
-        "Specifies whether to use full resolution framebuffers on Retina displays. This is ignored on other platforms.",
+        """
+        Specifies whether to use full resolution framebuffers on Retina displays.
+
+        This is ignored on other platforms.
+        """,
 
         "COCOA_RETINA_FRAMEBUFFER"..0x00023001
     )
 
     IntConstant(
         """
-        Specifies the UTF-8 encoded name to use for autosaving the window frame, or if empty disables frame autosaving for the window. This is ignored on other
-        platforms. This is set with #WindowHintString().
+        Specifies the UTF-8 encoded name to use for autosaving the window frame, or if empty disables frame autosaving for the window.
+
+        This is ignored on other platforms.
         """,
 
         "COCOA_FRAME_NAME"..0x00023002
@@ -916,6 +922,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """
         Specifies whether to enable Automatic Graphics Switching, i.e. to allow the system to choose the integrated GPU for the OpenGL context and move it
         between GPUs if necessary or whether to force it to always run on the discrete GPU. This only affects systems with both integrated and discrete GPUs.
+
         This is ignored on other platforms.
         """,
 
@@ -923,7 +930,11 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
-        "The desired ASCII encoded class and instance parts of the ICCCM {@code WM_CLASS} window property. These are set with #WindowHintString().",
+        """
+        The desired ASCII encoded class and instance parts of the ICCCM {@code WM_CLASS} window property.
+
+        These are ignored on other platforms.
+        """,
 
         "X11_CLASS_NAME"..0x00024001,
         "X11_INSTANCE_NAME"..0x00024002
@@ -937,6 +948,16 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         "WIN32_KEYBOARD_MENU"..0x00025001
+    )
+
+    IntConstant(
+        """
+        Allows specification of the Wayland {@code app_id}.
+
+        This is ignored on other platforms.
+        """,
+
+        "WAYLAND_APP_ID"..0x00026001
     )
 
     val ClientAPIValues = IntConstant(
@@ -1002,7 +1023,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         If this function fails, it calls #Terminate() before returning. If it succeeds, you should call #Terminate() before the application exits.
 
         Additional calls to this function after successful initialization but before termination will return #TRUE immediately.
-        
+
         The #PLATFORM init hint controls which platforms are considered during initialization. This also depends on which platforms the library was compiled to
         support.
 
@@ -1028,7 +1049,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         returnDoc =
         """
         #TRUE if successful, or #FALSE if an error occurred.
-        
+
         Possible errors include #PLATFORM_UNAVAILABLE and #PLATFORM_ERROR.
         """,
         since = "version 1.0"
@@ -1038,13 +1059,13 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "Terminate",
         """
         Terminates the GLFW library.
-        
+
         This function destroys all remaining windows and cursors, restores any modified gamma ramps and frees any other allocated resources. Once this function
         is called, you must again call #Init() successfully before you will be able to use most GLFW functions.
 
         If GLFW has been successfully initialized, this function should be called before the application exits. If initialization fails, there is no need to
         call this function, as it is called by #Init() before it returns failure.
-        
+
         This function has no effect if GLFW is not initialized.
 
         ${note(ul(
@@ -1093,7 +1114,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         If you specify an allocator struct, every member must be a valid function pointer. If any member is #NULL, this function emits #INVALID_VALUE and the
         init allocator is unchanged.
-        
+
         ${note(ul(
             "Possible errors include #INVALID_VALUE.",
             "The specified allocator is copied before this function returns.",
@@ -1134,7 +1155,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         <b>Do not use the version string</b> to parse the GLFW library version. The #GetVersion() function already provides the version of the library binary
         in numerical format.
-        
+
         <b>Do not use the version string</b> to parse what platforms are supported. The #PlatformSupported() function lets you query platform support.
 
         ${note(ul(
@@ -1215,7 +1236,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         returnDoc =
         """
         the currently selected platform, or zero if an error occurred.
-        
+
         Possible errors include #NOT_INITIALIZED.
         """,
         since = "version 3.4"
@@ -1227,9 +1248,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Returns whether the library includes support for the specified platform.
 
         This function returns whether the library was compiled with support for the specified platform.
- 
+
         This function may be called before #Init().
-        
+
         This function may be called from any thread.
         """,
 
@@ -1238,7 +1259,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         returnDoc =
         """
         #TRUE if the platform is supported, or #FALSE otherwise.
-        
+
         Possible errors include #INVALID_ENUM.
         """,
         since = "version 3.4"
@@ -1437,7 +1458,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "GetVideoModes",
         """
         Returns an array of all video modes supported by the specified monitor.
-        
+
         The returned array is sorted in ascending order, first by color bit depth (the sum of all channel depths), then by resolution area (the product of
         width and height), then resolution width and finally by refresh rate.
 
@@ -1619,7 +1640,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             tr(td("#OPENGL_FORWARD_COMPAT"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#OPENGL_DEBUG_CONTEXT"), td("#FALSE"), td("#TRUE or #FALSE")),
             tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues)),
-            
+
             tr(td("#WIN32_KEYBOARD_MENU"), td("#FALSE"), td("#TRUE or #FALSE")),
 
             tr(td("#COCOA_RETINA_FRAMEBUFFER"), td("#TRUE"), td("#TRUE or #FALSE")),
@@ -1663,13 +1684,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
             tr(td("#COCOA_FRAME_NAME"), td("\"\""), td("A UTF-8 encoded frame autosave name")),
             tr(td("#X11_CLASS_NAME"), td("\"\""), td("An ASCII encoded {@code WM_CLASS} class name")),
-            tr(td("#X11_INSTANCE_NAME"), td("\"\""), td("An ASCII encoded {@code WM_CLASS} instance name"))
+            tr(td("#X11_INSTANCE_NAME"), td("\"\""), td("An ASCII encoded {@code WM_CLASS} instance name")),
+            tr(td("#WAYLAND_APP_ID"), td("\"\""), td("An ASCII encoded Wayland {@code app_id} name"))
         )}
 
         This function must only be called from the main thread.
         """,
 
-        int("hint", "the window hint to set", "#COCOA_FRAME_NAME #X11_CLASS_NAME #X11_INSTANCE_NAME"),
+        int("hint", "the window hint to set", "#COCOA_FRAME_NAME #X11_CLASS_NAME #X11_INSTANCE_NAME #WAYLAND_APP_ID"),
         charUTF8.const.p("value", "the new value of the window hint. The specified string is copied before this function returns."),
 
         since = "version 3.3"
@@ -2678,7 +2700,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             """
             #CURSOR_DISABLED hides and grabs the cursor, providing virtual and unlimited cursor movement. This is useful for implementing for example 3D camera
             controls.
-            """
+            """,
+            "#CURSOR_CAPTURED makes the cursor visible and confines it to the content area of the window."
         )}
 
         If the {@code mode} is #STICKY_KEYS, the value must be either #TRUE to enable sticky keys, or #FALSE to disable it. If sticky keys are enabled, a key
@@ -2771,7 +2794,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         language and should be localized along with other user interface text.
 
         The contents of the returned string may change when a keyboard layout change event is received.
- 
+
         The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the library is terminated.
 
         This function must only be called from the main thread.
@@ -2945,14 +2968,14 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
             tr(td("#RESIZE_ALL_CURSOR"), td("Yes"), td("Yes"), td("Yes"), td("Yes")),
             tr(td("#NOT_ALLOWED_CURSOR"), td("Yes"), td("Yes"), td("Maybe<sup>2</sup>"), td("Maybe<sup>2</sup>"))
         )}
-        
+
         ${note(
             ol(
                 "This uses a private system API and may fail in the future.",
                 "This uses a newer standard that not all cursor themes support."
             )
         )}
- 
+
         If the requested shape is not available, this function emits a #CURSOR_UNAVAILABLE error and returns #NULL.
 
         This function must only be called from the main thread.

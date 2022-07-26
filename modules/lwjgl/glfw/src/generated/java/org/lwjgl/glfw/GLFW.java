@@ -657,7 +657,8 @@ public class GLFW {
     public static final int
         GLFW_CURSOR_NORMAL   = 0x34001,
         GLFW_CURSOR_HIDDEN   = 0x34002,
-        GLFW_CURSOR_DISABLED = 0x34003;
+        GLFW_CURSOR_DISABLED = 0x34003,
+        GLFW_CURSOR_CAPTURED = 0x34004;
 
     /** The regular arrow cursor shape. */
     public static final int GLFW_ARROW_CURSOR = 0x36001;
@@ -935,23 +936,33 @@ public class GLFW {
         GLFW_CONTEXT_CREATION_API     = 0x2200B,
         GLFW_SCALE_TO_MONITOR         = 0x2200C;
 
-    /** Specifies whether to use full resolution framebuffers on Retina displays. This is ignored on other platforms. */
+    /**
+     * Specifies whether to use full resolution framebuffers on Retina displays.
+     * 
+     * <p>This is ignored on other platforms.</p>
+     */
     public static final int GLFW_COCOA_RETINA_FRAMEBUFFER = 0x23001;
 
     /**
-     * Specifies the UTF-8 encoded name to use for autosaving the window frame, or if empty disables frame autosaving for the window. This is ignored on other
-     * platforms. This is set with {@link #glfwWindowHintString WindowHintString}.
+     * Specifies the UTF-8 encoded name to use for autosaving the window frame, or if empty disables frame autosaving for the window.
+     * 
+     * <p>This is ignored on other platforms.</p>
      */
     public static final int GLFW_COCOA_FRAME_NAME = 0x23002;
 
     /**
      * Specifies whether to enable Automatic Graphics Switching, i.e. to allow the system to choose the integrated GPU for the OpenGL context and move it
      * between GPUs if necessary or whether to force it to always run on the discrete GPU. This only affects systems with both integrated and discrete GPUs.
-     * This is ignored on other platforms.
+     * 
+     * <p>This is ignored on other platforms.</p>
      */
     public static final int GLFW_COCOA_GRAPHICS_SWITCHING = 0x23003;
 
-    /** The desired ASCII encoded class and instance parts of the ICCCM {@code WM_CLASS} window property. These are set with {@link #glfwWindowHintString WindowHintString}. */
+    /**
+     * The desired ASCII encoded class and instance parts of the ICCCM {@code WM_CLASS} window property.
+     * 
+     * <p>These are ignored on other platforms.</p>
+     */
     public static final int
         GLFW_X11_CLASS_NAME    = 0x24001,
         GLFW_X11_INSTANCE_NAME = 0x24002;
@@ -962,6 +973,13 @@ public class GLFW {
      * <p>This is ignored on other platforms.</p>
      */
     public static final int GLFW_WIN32_KEYBOARD_MENU = 0x25001;
+
+    /**
+     * Allows specification of the Wayland {@code app_id}.
+     * 
+     * <p>This is ignored on other platforms.</p>
+     */
+    public static final int GLFW_WAYLAND_APP_ID = 0x26001;
 
     /** Values for the {@link #GLFW_CLIENT_API CLIENT_API} hint. */
     public static final int
@@ -1959,11 +1977,12 @@ public class GLFW {
      * <tr><td>{@link #GLFW_COCOA_FRAME_NAME COCOA_FRAME_NAME}</td><td>""</td><td>A UTF-8 encoded frame autosave name</td></tr>
      * <tr><td>{@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME}</td><td>""</td><td>An ASCII encoded {@code WM_CLASS} class name</td></tr>
      * <tr><td>{@link #GLFW_X11_INSTANCE_NAME X11_INSTANCE_NAME}</td><td>""</td><td>An ASCII encoded {@code WM_CLASS} instance name</td></tr>
+     * <tr><td>{@link #GLFW_WAYLAND_APP_ID WAYLAND_APP_ID}</td><td>""</td><td>An ASCII encoded Wayland {@code app_id} name</td></tr>
      * </table>
      * 
      * <p>This function must only be called from the main thread.</p>
      *
-     * @param hint  the window hint to set. One of:<br><table><tr><td>{@link #GLFW_COCOA_FRAME_NAME COCOA_FRAME_NAME}</td><td>{@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME}</td><td>{@link #GLFW_X11_INSTANCE_NAME X11_INSTANCE_NAME}</td></tr></table>
+     * @param hint  the window hint to set. One of:<br><table><tr><td>{@link #GLFW_COCOA_FRAME_NAME COCOA_FRAME_NAME}</td><td>{@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME}</td><td>{@link #GLFW_X11_INSTANCE_NAME X11_INSTANCE_NAME}</td><td>{@link #GLFW_WAYLAND_APP_ID WAYLAND_APP_ID}</td></tr></table>
      * @param value the new value of the window hint. The specified string is copied before this function returns.
      *
      * @since version 3.3
@@ -1996,11 +2015,12 @@ public class GLFW {
      * <tr><td>{@link #GLFW_COCOA_FRAME_NAME COCOA_FRAME_NAME}</td><td>""</td><td>A UTF-8 encoded frame autosave name</td></tr>
      * <tr><td>{@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME}</td><td>""</td><td>An ASCII encoded {@code WM_CLASS} class name</td></tr>
      * <tr><td>{@link #GLFW_X11_INSTANCE_NAME X11_INSTANCE_NAME}</td><td>""</td><td>An ASCII encoded {@code WM_CLASS} instance name</td></tr>
+     * <tr><td>{@link #GLFW_WAYLAND_APP_ID WAYLAND_APP_ID}</td><td>""</td><td>An ASCII encoded Wayland {@code app_id} name</td></tr>
      * </table>
      * 
      * <p>This function must only be called from the main thread.</p>
      *
-     * @param hint  the window hint to set. One of:<br><table><tr><td>{@link #GLFW_COCOA_FRAME_NAME COCOA_FRAME_NAME}</td><td>{@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME}</td><td>{@link #GLFW_X11_INSTANCE_NAME X11_INSTANCE_NAME}</td></tr></table>
+     * @param hint  the window hint to set. One of:<br><table><tr><td>{@link #GLFW_COCOA_FRAME_NAME COCOA_FRAME_NAME}</td><td>{@link #GLFW_X11_CLASS_NAME X11_CLASS_NAME}</td><td>{@link #GLFW_X11_INSTANCE_NAME X11_INSTANCE_NAME}</td><td>{@link #GLFW_WAYLAND_APP_ID WAYLAND_APP_ID}</td></tr></table>
      * @param value the new value of the window hint. The specified string is copied before this function returns.
      *
      * @since version 3.3
@@ -3525,6 +3545,7 @@ public class GLFW {
      * <li>{@link #GLFW_CURSOR_HIDDEN CURSOR_HIDDEN} makes the cursor invisible when it is over the content area of the window but does not restrict the cursor from leaving.</li>
      * <li>{@link #GLFW_CURSOR_DISABLED CURSOR_DISABLED} hides and grabs the cursor, providing virtual and unlimited cursor movement. This is useful for implementing for example 3D camera
      * controls.</li>
+     * <li>{@link #GLFW_CURSOR_CAPTURED CURSOR_CAPTURED} makes the cursor visible and confines it to the content area of the window.</li>
      * </ul>
      * 
      * <p>If the {@code mode} is {@link #GLFW_STICKY_KEYS STICKY_KEYS}, the value must be either {@link #GLFW_TRUE TRUE} to enable sticky keys, or {@link #GLFW_FALSE FALSE} to disable it. If sticky keys are enabled, a key
