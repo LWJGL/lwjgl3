@@ -876,7 +876,7 @@ public class Opus {
      *
      * @param st         decoder state
      * @param data       input payload (Use a {@code NULL} pointer to indicate packet loss)
-     * @param pcm        output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)}
+     * @param pcm        output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(float)}
      * @param frame_size number of samples per channel of available space in pcm.
      *                   
      *                   <p>If this is less than the maximum packet duration (120ms; 5760 for 48kHz), this function will not be capable of decoding some packets. In the case
@@ -888,7 +888,7 @@ public class Opus {
      *
      * @return number of decoded samples or a negative error code
      */
-    public static int opus_decode_float(@NativeType("OpusDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("opus_int16 *") ShortBuffer pcm, int frame_size, int decode_fec) {
+    public static int opus_decode_float(@NativeType("OpusDecoder *") long st, @Nullable @NativeType("unsigned char const *") ByteBuffer data, @NativeType("float *") FloatBuffer pcm, int frame_size, int decode_fec) {
         if (CHECKS) {
             check(pcm, frame_size * memGetInt(st + 8));
         }

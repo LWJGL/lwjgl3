@@ -622,7 +622,7 @@ if (nb_packets > 0)
         Check(
             // Reading OpusDecoder internal state here
             "frame_size * memGetInt(st + 8)"
-        )..opus_int16.p("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(opus_int16)}"),
+        )..float.p("pcm", "output signal (interleaved if 2 channels) (length is {@code frame_size*channels*sizeof(float)}"),
         int(
             "frame_size",
             """
