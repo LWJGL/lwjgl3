@@ -67,7 +67,7 @@ public class Configuration<T> {
 
     /**
      * Changes the temporary directory name created by LWJGL when extracting shared libraries from JAR files. If this option is not set, it defaults to
-     * <code>lwjgl&lt;user name&gt;</code>.
+     * <code>lwjgl_&lt;user name&gt;</code>.
      *
      * <p style="font-family: monospace">
      * Property: <b>org.lwjgl.system.SharedLibraryExtractDirectory</b><br>
@@ -83,9 +83,9 @@ public class Configuration<T> {
      * successful will be used:
      *
      * <ul>
-     * <li>{@code System.getProperty("java.io.tmpdir")}/extractDir/version/</li>
-     * <li>&lt;working directory&gt;/.extractDir/version/</li>
-     * <li>{@code System.getProperty("user.home")}/.extractDir/version/</li>
+     * <li>{@code System.getProperty("java.io.tmpdir")}/extractDir/version/arch/</li>
+     * <li>&lt;working directory&gt;/.extractDir/version/arch/</li>
+     * <li>{@code System.getProperty("user.home")}/.extractDir/version/arch/</li>
      * <li>{@code Files.createTempDirectory("lwjgl", "")}</li>
      * </ul>
      *
@@ -106,7 +106,20 @@ public class Configuration<T> {
     );
 
     /**
-     * EXPERIMENTAL: Emulates {@link System#loadLibrary} behavior in {@link Library#loadNative}.
+     * When enabled, shared libraries found as regular files (not inside a JAR file) in the classpath will first be copied to the
+     * {@link #SHARED_LIBRARY_EXTRACT_PATH}, then loaded from there.
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.system.SharedLibraryExtractForce</b><br>
+     * &nbsp; &nbsp;Usage: Dynamic</p>
+     */
+    public static final Configuration<Boolean> SHARED_LIBRARY_EXTRACT_FORCE = new Configuration<>(
+        "org.lwjgl.system.SharedLibraryExtractForce",
+        StateInit.BOOLEAN
+    );
+
+    /**
+     * EXPERIMENTAL: Emulates {@link System#loadLibrary} behavior in {@link Library#loadNative(Class, String, String, boolean) Library.loadNative}.
      *
      * <p style="font-family: monospace">
      * Property: <b>org.lwjgl.system.EmulateSystemLoadLibrary</b><br>
@@ -206,7 +219,7 @@ public class Configuration<T> {
     public static final Configuration<Boolean> DEBUG = new Configuration<>("org.lwjgl.util.Debug", StateInit.BOOLEAN);
 
     /**
-     * When enabled, ShaderLibraryLoader exceptions will be printed to the {@link #DEBUG_STREAM}.
+     * When enabled, {@code SharedLibraryLoader} exceptions will be printed to the {@link #DEBUG_STREAM}.
      *
      * <p>This option requires {@link #DEBUG} to be enabled.</p>
      *

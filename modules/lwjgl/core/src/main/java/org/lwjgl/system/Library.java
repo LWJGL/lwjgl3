@@ -105,17 +105,19 @@ public final class Library {
                 return;
             }
         } else {
-            // Always use the SLL if the library is found in the classpath,
-            // so that newer versions can be detected.
             boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
             try {
-                String regular = getRegularFilePath(libURL);
-                if (regular != null) {
-                    load.accept(regular);
-                    apiLog("\tLoaded from classpath: " + regular);
-                    return;
+                if (!Configuration.SHARED_LIBRARY_EXTRACT_FORCE.get(false)) {
+                    String regular = getRegularFilePath(libURL);
+                    if (regular != null) {
+                        load.accept(regular);
+                        apiLog("\tLoaded from classpath: " + regular);
+                        return;
+                    }
                 }
 
+                // Always use the SLL if the library is found in the classpath,
+                // so that newer versions can be detected.
                 if (debugLoader) {
                     apiLog("\tUsing SharedLibraryLoader...");
                 }
@@ -253,11 +255,13 @@ public final class Library {
         } else {
             boolean debugLoader = Configuration.DEBUG_LOADER.get(false);
             try {
-                String regular = getRegularFilePath(libURL);
-                if (regular != null) {
-                    lib = apiCreateLibrary(regular);
-                    apiLog("\tLoaded from classpath: " + regular);
-                    return lib;
+                if (!Configuration.SHARED_LIBRARY_EXTRACT_FORCE.get(false)) {
+                    String regular = getRegularFilePath(libURL);
+                    if (regular != null) {
+                        lib = apiCreateLibrary(regular);
+                        apiLog("\tLoaded from classpath: " + regular);
+                        return lib;
+                    }
                 }
 
                 // Always use the SLL if the library is found in the classpath,

@@ -132,15 +132,16 @@ final class SharedLibraryLoader {
         }
 
         String version = Version.getVersion().replace(' ', '-');
+        String arch    = Platform.getArchitecture().name().toLowerCase();
 
         // Temp directory with username in path
         file = (root = Paths.get(System.getProperty("java.io.tmpdir")))
-            .resolve(Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl" + System.getProperty("user.name")), version, filename));
+            .resolve(Paths.get(Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl_" + System.getProperty("user.name").trim()), version, arch, filename));
         if (canWrite(root, file, resource, load)) {
             return file;
         }
 
-        Path lwjgl_version_filename = Paths.get("." + Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl"), version, filename);
+        Path lwjgl_version_filename = Paths.get("." + Configuration.SHARED_LIBRARY_EXTRACT_DIRECTORY.get("lwjgl"), version, arch, filename);
 
         // Working directory
         file = (root = Paths.get("").toAbsolutePath()).resolve(lwjgl_version_filename);
