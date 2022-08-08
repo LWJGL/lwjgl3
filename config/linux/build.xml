@@ -461,6 +461,7 @@
             <parallel threadsPerProcessor="4" failonany="true">
 
             <update-dependency module="assimp" artifact="libassimp.so"/>
+            <update-dependency module="assimp" artifact="libdraco.so"/>
             <update-dependency module="bgfx" artifact="libbgfx.so"/>
             <update-dependency module="jemalloc" artifact="libjemalloc.so"/>
             <update-dependency module="glfw" artifact="libglfw.so"/>

@@ -165,6 +165,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class Assimp {
 
+    private static final SharedLibrary DRACO = Library.loadNative(Assimp.class, "org.lwjgl.assimp", Configuration.ASSIMP_DRACO_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("draco")), true);
     private static final SharedLibrary ASSIMP = Library.loadNative(Assimp.class, "org.lwjgl.assimp", Configuration.ASSIMP_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("assimp")), true);
 
     /** Contains the function pointers loaded from the assimp {@link SharedLibrary}. */
@@ -308,6 +309,11 @@ public class Assimp {
     /** Returns the assimp {@link SharedLibrary}. */
     public static SharedLibrary getLibrary() {
         return ASSIMP;
+    }
+
+    /** Returns the Draco {@link SharedLibrary}. */
+    public static SharedLibrary getDraco() {
+        return DRACO;
     }
 
     /**

@@ -1485,7 +1485,41 @@
         </sequential>
 
         <!-- Assimp -->
-        <release-module name="assimp" native-library="assimp" title="assimp" if:true="${binding.assimp}"/>
+        <release-module name="assimp" title="assimp" if:true="${binding.assimp}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="libassimp.so"/>
+                <get-release platform="linux" arch="x64" file="libassimp.so.git"/>
+                <get-release platform="linux" arch="x64" file="libdraco.so"/>
+
+                <get-release platform="linux" arch="arm64" file="libassimp.so"/>
+                <get-release platform="linux" arch="arm64" file="libassimp.so.git"/>
+                <get-release platform="linux" arch="arm64" file="libdraco.so"/>
+
+                <get-release platform="linux" arch="arm32" file="libassimp.so"/>
+                <get-release platform="linux" arch="arm32" file="libassimp.so.git"/>
+                <get-release platform="linux" arch="arm32" file="libdraco.so"/>
+
+                <get-release platform="macos" arch="x64" file="libassimp.dylib"/>
+                <get-release platform="macos" arch="x64" file="libassimp.dylib.git"/>
+                <get-release platform="macos" arch="x64" file="libdraco.dylib"/>
+
+                <get-release platform="macos" arch="arm64" file="libassimp.dylib"/>
+                <get-release platform="macos" arch="arm64" file="libassimp.dylib.git"/>
+                <get-release platform="macos" arch="arm64" file="libdraco.dylib"/>
+
+                <get-release platform="windows" arch="x64" file="assimp.dll"/>
+                <get-release platform="windows" arch="x64" file="assimp.dll.git"/>
+                <get-release platform="windows" arch="x64" file="draco.dll"/>
+
+                <get-release platform="windows" arch="x86" file="assimp.dll"/>
+                <get-release platform="windows" arch="x86" file="assimp.dll.git"/>
+                <get-release platform="windows" arch="x86" file="draco.dll"/>
+
+                <get-release platform="windows" arch="arm64" file="assimp.dll"/>
+                <get-release platform="windows" arch="arm64" file="assimp.dll.git"/>
+                <get-release platform="windows" arch="arm64" file="draco.dll"/>
+            </natives>
+        </release-module>
 
         <!-- bgfx -->
         <release-module name="bgfx" title="bgfx" if:true="${binding.bgfx}">

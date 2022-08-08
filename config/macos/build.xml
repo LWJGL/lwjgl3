@@ -376,6 +376,7 @@
             <parallel threadsPerProcessor="4" failonany="true">
 
             <update-dependency module="assimp" artifact="libassimp.dylib"/>
+            <update-dependency module="assimp" artifact="libdraco.dylib"/>
             <update-dependency module="bgfx" artifact="libbgfx.dylib"/>
             <update-dependency module="jemalloc" artifact="libjemalloc.dylib"/>
             <update-dependency module="glfw" artifact="libglfw.dylib"/>

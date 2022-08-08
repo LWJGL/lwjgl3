@@ -166,7 +166,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         Global setting to disable generation of skeleton dummy meshes
 
         Skeleton dummy meshes are generated as a visualization aid in cases which the input data contains no geometry, but only animation data.
-        
+
         Property data type: bool. Default value: false
         """,
 
@@ -207,7 +207,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         Source UV channel for tangent space computation.
 
         The specified channel must exist or an error will be raised.
-        
+
         Property type: integer. Default value: 0
         """,
 
@@ -220,7 +220,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
         Sometimes referred to as 'crease angle'. This applies to the #Process_GenSmoothNormals step. The angle is specified in degrees, so 180 is PI. The
         default value is 175 degrees (all vertex normals are smoothed). The maximum value is 175, too.
-        
+
         Property type: float.
 
         Warning: setting this option may cause a severe loss of performance. The performance is unaffected if the #AI_CONFIG_FAVOUR_SPEED flag is set but the
@@ -253,7 +253,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
         This option might be useful if you are using some magic material names to pass additional semantics through the content pipeline. This ensures they
         won't be optimized away, but a general optimization is still performed for materials not contained in the list.
-        
+
         Property type: String. Default value: n/a
 
         ${note("Linefeeds, tabs or carriage returns are treated as whitespace. Material names are case sensitive.")}
@@ -289,7 +289,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     StringConstant(
         """
         Configures the #Process_PreTransformVertices step to use a users defined matrix as the scene root node transformation before transforming vertices.
-        
+
         Property type: bool. Default value: false.
         """,
 
@@ -397,7 +397,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         Lower the deboning threshold in order to remove more bones.
 
         This is used by the #Process_Debone PostProcess-Step.
-        
+
         Property type: float.
 
          ${note("The default value is #AI_DEBONE_THRESHOLD")}
@@ -453,7 +453,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
         This is a bitwise combination of the {@code aiPrimitiveType} flags. Specifying all of them is illegal, of course. A typical use would be to exclude
         all line and point meshes from the import.
-        
+
         This is an integer property, its default value is 0.
         """,
 
@@ -463,11 +463,11 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     StringConstant(
         """
         Input parameter to the #Process_FindInvalidData step: Specifies the floating-point accuracy for animation values.
-        
+
         The step checks for animation tracks where all frame values are absolutely equal and removes them. This tweakable controls the epsilon for
         floating-point comparisons - two keys are considered equal if the invariant {@code abs(n0-n1)>epsilon} holds true for all vector respectively
         quaternion components.
-        
+
         The default value is 0.f - comparisons are exact then.
         """,
 
@@ -544,7 +544,6 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
         "AI_CONFIG_IMPORT_FBX_READ_ALL_MATERIALS".."IMPORT_FBX_READ_ALL_MATERIALS"
     ).noPrefix()
-
 
     StringConstant(
         """
@@ -763,7 +762,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     StringConstant(
         """
         Set whether the MDL (HL1) importer will read animation events.
-        
+
         This property requires #AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS to be set to true.
 
         Property type: bool. Default value: true.
@@ -775,7 +774,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     StringConstant(
         """
         Set whether the MDL (HL1) importer will read blend controllers.
-        
+
         This property requires #AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS to be set to true.
 
         Property type: bool. Default value: true.
@@ -787,7 +786,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     StringConstant(
         """
         Set whether the MDL (HL1) importer will read sequence transition graph.
-        
+
         This property requires #AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS to be set to true.
 
         Property type: bool. Default value: true.
@@ -870,7 +869,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     StringConstant(
         """
         Configures the UNREAL 3D loader to separate faces with different surface flags (e.g. two-sided vs. single-sided).
-        
+
         Property type: bool. Default value: true.
         """,
 
@@ -908,7 +907,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
         These models usually consist of 3 files, lower.md3, upper.md3 and head.md3. If this property is set to true, Assimp will try to load and * combine all
         three files if one of them is loaded.
-        
+
         Property type: bool. Default value: true.
         """,
 
@@ -931,7 +930,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
     StringConstant(
         """
         Specify if to try load Quake 3 shader files.
-        
+
         This also controls  original surface name handling: when disabled it will be used unchanged.
 
         Property type: bool. Default value: true.
@@ -2706,7 +2705,7 @@ aiAttachLogStream(&c);""")}
         "TextureType_SHEEN".enum(
             """
             Generally used to simulate textiles that are covered in a layer of microfibers eg velvet.
-            
+
             ${url("https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_sheen", "KHR_materials_sheen")})
             """,
             "19"
@@ -2714,7 +2713,7 @@ aiAttachLogStream(&c);""")}
         "TextureType_CLEARCOAT".enum(
             """
             Simulates a layer of 'polish' or 'laquer' layered on top of a PBR substrate.
-            
+
             ${url("https://autodesk.github.io/standard-surface/\\#closures/coating", "coating")},
             ${url("https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_clearcoat", "KHR_materials_clearcoat")}
             """,
@@ -2723,7 +2722,7 @@ aiAttachLogStream(&c);""")}
         "TextureType_TRANSMISSION".enum(
             """
             Simulates transmission through the surface.
- 
+
             May include further information such as wall thickness.
             """,
             "21"
@@ -2740,7 +2739,7 @@ aiAttachLogStream(&c);""")}
     EnumConstant(
         """
         Defines all shading models supported by the library. ({@code aiShadingMode})
-        
+
         Property: #AI_MATKEY_SHADING_MODEL
 
         The list of shading modes has been taken from Blender. See Blender documentation for more information. The API does not distinguish between "specular"
@@ -3131,9 +3130,9 @@ aiAttachLogStream(&c);""")}
 
             NGON encoding is a special encoding that tells whether 2 or more consecutive triangles should be considered as a triangle fan. This is identified
             by looking at the first vertex index. 2 consecutive triangles with the same 1st vertex index are part of the same NGON.
-     
+
             At the moment, only quads (concave or convex) are supported, meaning that polygons are 'seen' as triangles, as usual after a triangulation pass.
-     
+
             To get an NGON encoded mesh, please use the #Process_Triangulate post process.
             """,
             0x10
@@ -3167,7 +3166,7 @@ aiAttachLogStream(&c);""")}
     StringConstant(
         """
         Scene metadata holding the name of the importer which loaded the source asset.
-        
+
         This is always present if the scene was created from an imported asset.
         """,
 
@@ -3329,7 +3328,7 @@ aiAttachLogStream(&c);""")}
             If the resulting scene can be reduced to a single mesh, with a single material, no lights, and no cameras, then the output scene will contain only
             a root node (with no children) that references the single mesh. Otherwise, the output scene will be reduced to a root node with a single level of
             child nodes, each one referencing one mesh, and each mesh referencing one material. 
-    
+
             In either case, for rendering, you can simply render all meshes in order - you don't need to pay attention to local transformations and the node
             hierarchy. Animations are removed during this step.
 

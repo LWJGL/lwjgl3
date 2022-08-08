@@ -423,6 +423,7 @@ EXPORTS
             <parallel threadsPerProcessor="4" failonany="true">
 
             <update-dependency module="assimp" artifact="assimp.dll"/>
+            <update-dependency module="assimp" artifact="draco.dll"/>
             <update-dependency module="bgfx" artifact="bgfx.dll"/>
             <update-dependency module="jemalloc" artifact="jemalloc.dll"/>
             <update-dependency module="glfw" artifact="glfw.dll"/>

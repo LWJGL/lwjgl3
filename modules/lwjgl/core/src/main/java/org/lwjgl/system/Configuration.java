@@ -286,6 +286,9 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the AssImp library (<b>org.lwjgl.assimp.libname</b>). */
     public static final Configuration<String> ASSIMP_LIBRARY_NAME = new Configuration<>("org.lwjgl.assimp.libname", StateInit.STRING);
 
+    /** Similar to {@link #LIBRARY_NAME} for the Draco library (<b>org.lwjgl.assimp.draco.libname</b>). */
+    public static final Configuration<String> ASSIMP_DRACO_LIBRARY_NAME = new Configuration<>("org.lwjgl.assimp.draco.libname", StateInit.STRING);
+
     // -- BGFX
 
     /** Similar to {@link #LIBRARY_NAME} for the BGFX library (<b>org.lwjgl.bgfx.libname</b>). */

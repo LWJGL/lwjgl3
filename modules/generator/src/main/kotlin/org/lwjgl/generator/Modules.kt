@@ -785,8 +785,8 @@ float h = layout.dimensions(YGDimensionHeight);""")}
     val enabled
         get() = key.startsWith("core") || System.getProperty("binding.$key", "false")!!.toBoolean()
 
-    internal val path = if (name.startsWith("CORE_")) "core" else name.lowercase()
-    internal val java = if (name.startsWith("CORE_")) "org.lwjgl" else "org.lwjgl.${name.lowercase()}"
+    val path = if (name.startsWith("CORE_")) "core" else name.lowercase()
+    val java = if (name.startsWith("CORE_")) "org.lwjgl" else "org.lwjgl.${name.lowercase()}"
 
     internal val packageKotlin
         get() = name.let {
