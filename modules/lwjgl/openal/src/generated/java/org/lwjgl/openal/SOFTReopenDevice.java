@@ -52,12 +52,12 @@ public class SOFTReopenDevice {
      * @param attribs    an attribute list to configure the device with, with the same attribute list that would be passed to {@link ALC10#alcCreateContext CreateContext}.
      */
     @NativeType("ALCboolean")
-    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @NativeType("ALCchar const *") ByteBuffer deviceName, @Nullable @NativeType("ALCint const *") IntBuffer attribs) {
+    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @Nullable @NativeType("ALCchar const *") ByteBuffer deviceName, @Nullable @NativeType("ALCint const *") IntBuffer attribs) {
         if (CHECKS) {
-            checkNT1(deviceName);
+            checkNT1Safe(deviceName);
             checkNTSafe(attribs);
         }
-        return nalcReopenDeviceSOFT(device, memAddress(deviceName), memAddressSafe(attribs));
+        return nalcReopenDeviceSOFT(device, memAddressSafe(deviceName), memAddressSafe(attribs));
     }
 
     /**
@@ -69,14 +69,14 @@ public class SOFTReopenDevice {
      * @param attribs    an attribute list to configure the device with, with the same attribute list that would be passed to {@link ALC10#alcCreateContext CreateContext}.
      */
     @NativeType("ALCboolean")
-    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @NativeType("ALCchar const *") CharSequence deviceName, @Nullable @NativeType("ALCint const *") IntBuffer attribs) {
+    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @Nullable @NativeType("ALCchar const *") CharSequence deviceName, @Nullable @NativeType("ALCint const *") IntBuffer attribs) {
         if (CHECKS) {
             checkNTSafe(attribs);
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nUTF8(deviceName, true);
-            long deviceNameEncoded = stack.getPointerAddress();
+            stack.nUTF8Safe(deviceName, true);
+            long deviceNameEncoded = deviceName == null ? NULL : stack.getPointerAddress();
             return nalcReopenDeviceSOFT(device, deviceNameEncoded, memAddressSafe(attribs));
         } finally {
             stack.setPointer(stackPointer);
@@ -85,20 +85,20 @@ public class SOFTReopenDevice {
 
     /** Array version of: {@link #alcReopenDeviceSOFT ReopenDeviceSOFT} */
     @NativeType("ALCboolean")
-    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @NativeType("ALCchar const *") ByteBuffer deviceName, @Nullable @NativeType("ALCint const *") int[] attribs) {
+    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @Nullable @NativeType("ALCchar const *") ByteBuffer deviceName, @Nullable @NativeType("ALCint const *") int[] attribs) {
 		long __functionAddress = ALC.getICD().alcReopenDeviceSOFT;
         if (CHECKS) {
             check(__functionAddress);
             check(device);
-            checkNT1(deviceName);
+            checkNT1Safe(deviceName);
             checkNTSafe(attribs);
         }
-        return invokePPPZ(device, memAddress(deviceName), attribs, __functionAddress);
+        return invokePPPZ(device, memAddressSafe(deviceName), attribs, __functionAddress);
     }
 
     /** Array version of: {@link #alcReopenDeviceSOFT ReopenDeviceSOFT} */
     @NativeType("ALCboolean")
-    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @NativeType("ALCchar const *") CharSequence deviceName, @Nullable @NativeType("ALCint const *") int[] attribs) {
+    public static boolean alcReopenDeviceSOFT(@NativeType("ALCdevice *") long device, @Nullable @NativeType("ALCchar const *") CharSequence deviceName, @Nullable @NativeType("ALCint const *") int[] attribs) {
 		long __functionAddress = ALC.getICD().alcReopenDeviceSOFT;
         if (CHECKS) {
             check(__functionAddress);
@@ -107,8 +107,8 @@ public class SOFTReopenDevice {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nUTF8(deviceName, true);
-            long deviceNameEncoded = stack.getPointerAddress();
+            stack.nUTF8Safe(deviceName, true);
+            long deviceNameEncoded = deviceName == null ? NULL : stack.getPointerAddress();
             return invokePPPZ(device, deviceNameEncoded, attribs, __functionAddress);
         } finally {
             stack.setPointer(stackPointer);

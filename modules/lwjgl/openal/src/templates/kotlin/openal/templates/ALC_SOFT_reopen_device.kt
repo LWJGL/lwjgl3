@@ -27,7 +27,7 @@ val ALC_SOFT_reopen_device = "SOFTReopenDevice".nativeClassALC("SOFT_reopen_devi
         """,
 
         ALCdevice.p("device", "a non-#NULL handle for an existing device"),
-        ALCcharUTF8.const.p("deviceName", "the device name to open, or #NULL for the default (same as would be passed to #OpenDevice())"),
+        nullable..ALCcharUTF8.const.p("deviceName", "the device name to open, or #NULL for the default (same as would be passed to #OpenDevice())"),
         nullable..NullTerminated..ALCint.const.p(
             "attribs",
             "an attribute list to configure the device with, with the same attribute list that would be passed to #CreateContext()."
