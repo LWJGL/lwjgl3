@@ -488,6 +488,10 @@ public final class Library {
     }
 
     private static void detectPlatformMismatch(Class<?> context, String module) {
+        if (!module.startsWith("org.lwjgl")) {
+            return;
+        }
+
         String moduleTitle = module.equals("org.lwjgl") ? "lwjgl" : "lwjgl-" + module.substring("org.lwjgl.".length());
 
         List<String> platforms = new ArrayList<>(8);
