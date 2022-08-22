@@ -121,9 +121,9 @@ public final class ExampleBGFX extends Demo {
                         .profiler_begin((_this, _name, _abgr, _filePath, _line) -> { throw new UnsupportedOperationException(); })
                         .profiler_begin_literal((_this, _name, _abgr, _filePath, _line) -> { throw new UnsupportedOperationException(); })
                         .profiler_end(_this -> { throw new UnsupportedOperationException(); })
-                        .cache_read_size((_this, _id) -> { throw new UnsupportedOperationException(); })
-                        .cache_read((_this, _id, _data, _size) -> { throw new UnsupportedOperationException(); })
-                        .cache_write((_this, _id, _data, _size) -> { throw new UnsupportedOperationException(); })
+                        .cache_read_size((_this, _id) -> 0)
+                        .cache_read((_this, _id, _data, _size) -> false)
+                        .cache_write((_this, _id, _data, _size) -> { /* intentionally empty */ })
                         .screen_shot((_this, _filePath, _width, _height, _pitch, _data, _size, _yflip) -> {
                             ByteBuffer image = memByteBuffer(_data, _size);
 
