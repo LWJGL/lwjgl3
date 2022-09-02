@@ -31,7 +31,7 @@ val NSVGpaint = struct(Module.NANOVG, "NSVGPaint", nativeName = "NSVGpaint", mut
 private val _NSVGpath = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutable = false)
 val NSVGpath = struct(Module.NANOVG, "NSVGPath", nativeName = "NSVGpath", mutable = false) {
     float.p("pts", "cubic bezier points: {@code x0,y0, [cpx1,cpx1,cpx2,cpy2,x1,y1], ...}")
-    AutoSize("pts")..int("npts", "total number of bezier points")
+    AutoSizeShl("1", "pts")..int("npts", "total number of bezier points")
     char("closed", "flag indicating if shapes should be treated as closed")
     float("bounds", "tight bounding box of the shape {@code [minx,miny,maxx,maxy]}")[4]
     _NSVGpath.p("next", "pointer to next path, or #NULL if last element")

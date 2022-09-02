@@ -124,7 +124,7 @@ public class NSVGPath extends Struct {
     // -----------------------------------
 
     /** Unsafe version of {@link #pts() pts}. */
-    public static FloatBuffer npts(long struct) { return memFloatBuffer(memGetAddress(struct + NSVGPath.PTS), nnpts(struct)); }
+    public static FloatBuffer npts(long struct) { return memFloatBuffer(memGetAddress(struct + NSVGPath.PTS), (nnpts(struct) << 1)); }
     /** Unsafe version of {@link #npts}. */
     public static int nnpts(long struct) { return UNSAFE.getInt(null, struct + NSVGPath.NPTS); }
     /** Unsafe version of {@link #closed}. */
