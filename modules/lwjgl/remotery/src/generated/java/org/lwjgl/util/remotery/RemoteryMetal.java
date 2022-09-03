@@ -57,7 +57,7 @@ public class RemoteryMetal {
         }
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
-            stack.nASCII(name, true);
+            stack.nUTF8(name, true);
             long nameEncoded = stack.getPointerAddress();
             nrmt_BeginMetalSample(nameEncoded, memAddressSafe(hash_cache));
         } finally {

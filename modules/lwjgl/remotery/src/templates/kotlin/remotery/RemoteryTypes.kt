@@ -38,13 +38,31 @@ val rmtS16 = typedef(int16_t, "rmtS16")
 val rmtS32 = typedef(int32_t, "rmtS32")
 val rmtS64 = typedef(int64_t, "rmtS64")
 
+// float types
+val rmtF32 = typedef(float, "rmtF32")
+val rmtF64 = typedef(double, "rmtF64")
+
 // Const, null-terminated string pointer
-val rmtPStr = typedef(charASCII.const.p, "rmtPStr")
+val rmtPStr = typedef(charUTF8.const.p, "rmtPStr")
+
+// Opaque pointer for a sample graph tree
+val rmtSampleTree = "rmtSampleTree".opaque
+
+// Opaque pointer to a node in the sample graph tree
+val rmtSample = "rmtSample".opaque
 
 // Handle to the main remotery instance
 val Remotery = "Remotery".opaque
 
+// Forward declaration
+val _rmtProperty = struct(Module.REMOTERY, "RMTProperty", nativeName = "rmtProperty")
+
+val rmtSampleType = "rmtSampleType".enumType
+
 val rmtError = "rmtError".enumType
+
+val rmtPropertyType = "rmtPropertyType".enumType
+val rmtPropertyFlags = "rmtPropertyFlags".enumType
 
 // Callback function pointer types
 val rmtMallocPtr = Module.REMOTERY.callback {
@@ -85,10 +103,32 @@ val rmtInputHandlerPtr = Module.REMOTERY.callback {
     opaque_p(
         "RMTInputHandler", "",
 
-        charASCII.const.p("text", ""),
+        charUTF8.const.p("text", ""),
         opaque_p("context", ""),
 
         nativeType = "rmtInputHandlerPtr"
+    )
+}
+
+val rmtSampleTreeHandlerPtr = Module.REMOTERY.callback {
+    void(
+        "RMTSampleTreeHandler", "",
+
+        nullable..opaque_p("cbk_context", ""),
+        rmtSampleTree.p("sample_tree", ""),
+
+        nativeType = "rmtSampleTreeHandlerPtr"
+    )
+}
+
+val rmtPropertyHandlerPtr = Module.REMOTERY.callback {
+    void(
+        "RMTPropertyHandler", "",
+
+        nullable..opaque_p("cbk_context", ""),
+        _rmtProperty.p("root", ""),
+
+        nativeType = "rmtPropertyHandlerPtr"
     )
 }
 
@@ -135,12 +175,83 @@ val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettin
     rmtMallocPtr("_malloc", "callback pointer for memory allocation")
     rmtReallocPtr("realloc", "callback pointer for memory allocation")
     rmtFreePtr("_free", "callback pointer for memory allocation")
-    opaque_p("mm_context", "memory allocation context pointer")
+    nullable..opaque_p("mm_context", "memory allocation context pointer")
 
-    rmtInputHandlerPtr("input_handler", "callback pointer for receiving input from the Remotery console")
-    opaque_p("input_handler_context", "context pointer that gets sent to Remotery console callback function")
+    nullable..rmtInputHandlerPtr("input_handler", "callback pointer for receiving input from the Remotery console")
 
-    rmtPStr("logPath", "")
+    nullable..rmtSampleTreeHandlerPtr("sampletree_handler", "callback pointer for traversing the sample tree graph")
+    nullable..opaque_p("sampletree_context", "")
+
+    nullable..rmtPropertyHandlerPtr("snapshot_callback", "callback pointer for traversing the property graph")
+    nullable..opaque_p("snapshot_context", "")
+
+    nullable..opaque_p("input_handler_context", "context pointer that gets sent to Remotery console callback function")
+
+    nullable..rmtPStr("logPath", "")
 }
+
+val rmtPropertyValue = union(Module.REMOTERY, "RMTPropertyValue", nativeName = "rmtPropertyValue") {
+    documentation = "A property value as a union of all its possible types."
+
+    rmtBool("Bool", "")
+    rmtS32("S32", "")
+    rmtU32("U32", "")
+    rmtF32("F32", "")
+    rmtS64("S64", "")
+    rmtU64("U64", "")
+    rmtF64("F64", "")
+}
+
+val rmtProperty = struct(Module.REMOTERY, "RMTProperty", nativeName = "rmtProperty") {
+    documentation =
+        """
+        Definition of a property that should be stored globally.
+
+        Note: Use the callback api and the {@code rmt_PropertyGetxxx} accessors to traverse this structure.
+        """
+
+    rmtBool("initialised", "gets set to #TRUE after a property has been modified, when it gets initialised for the first time")
+
+    rmtPropertyType("type", "runtime description")
+    rmtPropertyFlags("flags", "")
+
+    rmtPropertyValue("value", "current value")
+
+    rmtPropertyValue("lastFrameValue", "last frame value to see if previous value needs to be updated")
+
+    rmtPropertyValue("prevValue", "previous value only if it's different from the current value, and when it changed")
+    rmtU32("prevValueFrame", "")
+
+    charUTF8.const.p("name", "text description")
+    charUTF8.const.p("description", "")
+
+    rmtPropertyValue("defaultValue", "default value for Reset calls")
+
+    nullable.._rmtProperty.p("parent", "parent link specifically placed after default value so that variadic macro can initialise it")
+
+    nullable.._rmtProperty.p("firstChild", "links within the property tree")
+    nullable.._rmtProperty.p("lastChild", "links within the property tree")
+    nullable.._rmtProperty.p("nextSibling", "links within the property tree")
+
+    rmtU32("nameHash", "hash for efficient sending of properties to the viewer")
+
+    rmtU32("uniqueID", "unique, persistent ID among all properties")
+}
+
+val rmtSampleIterator = struct(Module.REMOTERY, "RMTSampleIterator", nativeName = "rmtSampleIterator", mutable = false, skipBuffer = true) {
+    documentation = "Struct to hold iterator info."
+
+    rmtSample.p("sample", "")
+    rmtSample.p("initial", "").private()
+}
+
+val rmtPropertyIterator = struct(Module.REMOTERY, "RMTPropertyIterator", nativeName = "rmtPropertyIterator", mutable = false, skipBuffer = true) {
+    documentation = "Struct to hold iterator info."
+
+    rmtProperty.p("property", "")
+    rmtProperty.p("initial", "").private()
+}
+
+// Metal
 
 val id = "id".handle

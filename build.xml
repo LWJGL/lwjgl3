@@ -837,6 +837,7 @@
             <include name="org/lwjgl/demo/util/meshoptimizer/**" if:true="${binding.meshoptimizer}"/>
             <include name="org/lwjgl/demo/util/nfd/**" if:set="test.nfd"/>
             <include name="org/lwjgl/demo/util/par/**" if:set="test.par"/>
+            <include name="org/lwjgl/demo/util/remotery/**" if:true="${binding.remotery}"/>
             <include name="org/lwjgl/demo/util/tinyexr/**" if:set="test.tinyexr"/>
             <include name="org/lwjgl/demo/util/tinyfd/**" if:set="test.tinyfd"/>
             <include name="org/lwjgl/demo/util/tootle/**" if:set="test.tootle"/>
