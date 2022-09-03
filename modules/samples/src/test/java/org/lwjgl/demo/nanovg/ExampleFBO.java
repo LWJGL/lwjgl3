@@ -116,11 +116,11 @@ public final class ExampleFBO extends Demo {
 
     private static int loadFonts(long vg) {
         int font;
-        font = nvgCreateFontMem(vg, "sans", RobotoRegular, 0);
+        font = nvgCreateFontMem(vg, "sans", RobotoRegular, false);
         if (font == -1) {
             throw new RuntimeException("Could not add font regular.");
         }
-        font = nvgCreateFontMem(vg, "sans-bold", RobotoBold, 0);
+        font = nvgCreateFontMem(vg, "sans-bold", RobotoBold, false);
         if (font == -1) {
             throw new RuntimeException("Could not add font bold.");
         }

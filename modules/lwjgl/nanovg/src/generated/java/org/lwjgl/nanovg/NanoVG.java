@@ -1941,12 +1941,12 @@ public class NanoVG {
      *
      * @return a handle to the font
      */
-    public static int nvgCreateFontMem(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") ByteBuffer name, @NativeType("unsigned char *") ByteBuffer data, int freeData) {
+    public static int nvgCreateFontMem(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") ByteBuffer name, @NativeType("unsigned char *") ByteBuffer data, @NativeType("int") boolean freeData) {
         if (CHECKS) {
             check(ctx);
             checkNT1(name);
         }
-        return nnvgCreateFontMem(ctx, memAddress(name), memAddress(data), data.remaining(), freeData);
+        return nnvgCreateFontMem(ctx, memAddress(name), memAddress(data), data.remaining(), freeData ? 1 : 0);
     }
 
     /**
@@ -1961,7 +1961,7 @@ public class NanoVG {
      *
      * @return a handle to the font
      */
-    public static int nvgCreateFontMem(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") CharSequence name, @NativeType("unsigned char *") ByteBuffer data, int freeData) {
+    public static int nvgCreateFontMem(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") CharSequence name, @NativeType("unsigned char *") ByteBuffer data, @NativeType("int") boolean freeData) {
         if (CHECKS) {
             check(ctx);
         }
@@ -1969,7 +1969,7 @@ public class NanoVG {
         try {
             stack.nASCII(name, true);
             long nameEncoded = stack.getPointerAddress();
-            return nnvgCreateFontMem(ctx, nameEncoded, memAddress(data), data.remaining(), freeData);
+            return nnvgCreateFontMem(ctx, nameEncoded, memAddress(data), data.remaining(), freeData ? 1 : 0);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -1997,12 +1997,12 @@ public class NanoVG {
      *
      * @return a handle to the font
      */
-    public static int nvgCreateFontMemAtIndex(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") ByteBuffer name, @NativeType("unsigned char *") ByteBuffer data, int freeData, int fontIndex) {
+    public static int nvgCreateFontMemAtIndex(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") ByteBuffer name, @NativeType("unsigned char *") ByteBuffer data, @NativeType("int") boolean freeData, int fontIndex) {
         if (CHECKS) {
             check(ctx);
             checkNT1(name);
         }
-        return nnvgCreateFontMemAtIndex(ctx, memAddress(name), memAddress(data), data.remaining(), freeData, fontIndex);
+        return nnvgCreateFontMemAtIndex(ctx, memAddress(name), memAddress(data), data.remaining(), freeData ? 1 : 0, fontIndex);
     }
 
     /**
@@ -2018,7 +2018,7 @@ public class NanoVG {
      *
      * @return a handle to the font
      */
-    public static int nvgCreateFontMemAtIndex(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") CharSequence name, @NativeType("unsigned char *") ByteBuffer data, int freeData, int fontIndex) {
+    public static int nvgCreateFontMemAtIndex(@NativeType("NVGcontext *") long ctx, @NativeType("char const *") CharSequence name, @NativeType("unsigned char *") ByteBuffer data, @NativeType("int") boolean freeData, int fontIndex) {
         if (CHECKS) {
             check(ctx);
         }
@@ -2026,7 +2026,7 @@ public class NanoVG {
         try {
             stack.nASCII(name, true);
             long nameEncoded = stack.getPointerAddress();
-            return nnvgCreateFontMemAtIndex(ctx, nameEncoded, memAddress(data), data.remaining(), freeData, fontIndex);
+            return nnvgCreateFontMemAtIndex(ctx, nameEncoded, memAddress(data), data.remaining(), freeData ? 1 : 0, fontIndex);
         } finally {
             stack.setPointer(stackPointer);
         }

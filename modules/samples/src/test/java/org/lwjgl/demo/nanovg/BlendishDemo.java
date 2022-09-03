@@ -157,7 +157,7 @@ public final class BlendishDemo {
     }
 
     private static void initBlendish(long vg) {
-        bndSetFont(nvgCreateFontMem(vg, "system", font, 0));
+        bndSetFont(nvgCreateFontMem(vg, "system", font, false));
 
         System.out.println("Downloading Blender icons...");
         long t = System.nanoTime();
