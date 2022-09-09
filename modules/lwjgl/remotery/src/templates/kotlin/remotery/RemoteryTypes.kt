@@ -89,7 +89,7 @@ val rmtReallocPtr = Module.REMOTERY.callback {
 }
 
 val rmtFreePtr = Module.REMOTERY.callback {
-    opaque_p(
+    void(
         "RMTFree", "",
 
         opaque_p("mm_context", ""),

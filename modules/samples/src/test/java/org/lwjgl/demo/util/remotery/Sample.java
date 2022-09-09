@@ -8,9 +8,11 @@ import org.lwjgl.*;
 import org.lwjgl.system.*;
 import org.openjdk.jmh.infra.*;
 
+import java.util.*;
 import java.util.concurrent.*;
 
 import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.remotery.Remotery.*;
 
 /** This sample was ported to Java/LWJGL from {@code sample/sample.c} in the Remotery repository. */
@@ -60,32 +62,40 @@ public class Sample {
             }
         }));
 
-        long rmt;
-        try (MemoryStack stack = stackPush()) {
-            PointerBuffer pp = stack.mallocPointer(1);
+        Objects.requireNonNull(rmt_Settings())
+            .reuse_open_port(true);
 
-            int error = rmt_CreateGlobalInstance(pp);
-            if (RMT_ERROR_NONE != error) {
-                throw new IllegalStateException("Error launching Remotery " + error);
+        long rmt = NULL;
+        try {
+            try (MemoryStack stack = stackPush()) {
+                PointerBuffer pp = stack.mallocPointer(1);
+
+                int error = rmt_CreateGlobalInstance(pp);
+                if (RMT_ERROR_NONE != error) {
+                    throw new IllegalStateException("Error launching Remotery [" + error + "]: " + rmt_GetLastErrorMessage());
+                }
+
+                rmt = pp.get(0);
             }
 
-            rmt = pp.get(0);
+            rmt_SetCurrentThreadName("Sample - Main Thread");
+
+            while (shutdownSignal.getCount() != 0) {
+                long tokens = ThreadLocalRandom.current().nextLong(10_000L, 100_000L);
+
+                rmt_LogText("root begin - " + tokens);
+                root(tokens);
+                rmt_LogText("root end");
+            }
+        } finally {
+            if (rmt != NULL) {
+                rmt_DestroyGlobalInstance(rmt);
+            }
+
+            System.out.println("Cleaned up and quit");
+
+            cleanupSignal.countDown();
         }
-
-        rmt_SetCurrentThreadName("Sample - Main Thread");
-
-        while (shutdownSignal.getCount() != 0) {
-            long tokens = ThreadLocalRandom.current().nextLong(10_000L, 100_000L);
-
-            rmt_LogText("root begin - " + tokens);
-            root(tokens);
-            rmt_LogText("root end");
-        }
-
-        rmt_DestroyGlobalInstance(rmt);
-        System.out.println("Cleaned up and quit");
-
-        cleanupSignal.countDown();
     }
 
 }

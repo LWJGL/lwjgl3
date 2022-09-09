@@ -194,55 +194,66 @@ public class Dump {
             }
         }));
 
-        long rmt;
-        try (MemoryStack stack = stackPush()) {
-            PointerBuffer pp = stack.mallocPointer(1);
+        Objects.requireNonNull(rmt_Settings())
+            .reuse_open_port(true)
+            .sampletree_handler(Dump::dumpTree)
+            .sampletree_context(NULL)
+            .snapshot_callback(Dump::dumpProperties)
+            .snapshot_context(NULL);
 
-            Objects.requireNonNull(rmt_Settings())
-                .sampletree_handler(Dump::dumpTree)
-                .sampletree_context(NULL)
-                .snapshot_callback(Dump::dumpProperties)
-                .snapshot_context(NULL);
+        long rmt = NULL;
+        try {
+            try (MemoryStack stack = stackPush()) {
+                PointerBuffer pp = stack.mallocPointer(1);
 
-            int error = rmt_CreateGlobalInstance(pp);
-            if (RMT_ERROR_NONE != error) {
-                throw new IllegalStateException("Error launching Remotery " + error);
-            }
-
-            rmt = pp.get(0);
-        }
-
-        rmt_SetCurrentThreadName("Dump - Main Thread");
-
-        try (MemoryStack stack = stackPush()) {
-            RMTProperty game           = rmt_PropertyDefine_Group("Game", "Game Properties", null, stack);
-            RMTProperty wasUpdated     = rmt_PropertyDefine_Bool("WasUpdated", false, RMT_PropertyFlags_FrameReset, "Was the game updated this frame?", game, stack);
-            RMTProperty recursiveDepth = rmt_PropertyDefine_U32("RecursiveDepth", 0, RMT_PropertyFlags_FrameReset, "How deep did we go in recursiveFunction?", game, stack);
-            RMTProperty accumulated    = rmt_PropertyDefine_F32("Accumulated", 0.0f, RMT_PropertyFlags_FrameReset, "What was the latest value?", game, stack);
-            RMTProperty frameCounter   = rmt_PropertyDefine_U32("FrameCounter", 0, RMT_PropertyFlags_NoFlags, "What is the current frame number?", game, stack);
-
-            int MAX_COUNT = 5;
-            while (shutdownSignal.getCount() != 0 && --MAX_COUNT > 0) {
-                long tokens = ThreadLocalRandom.current().nextLong(10_000L, 100_000L);
-
-                rmt_LogText("root begin - " + tokens);
-                root(stack, tokens, recursiveDepth, accumulated);
-                rmt_LogText("root end");
-
-                rmt_PropertySet_Bool(wasUpdated, true);
-                try (MemoryStack frame = stackPush()) {
-                    rmt_PropertyAdd_U32(frameCounter, 1, frame);
+                int error = rmt_CreateGlobalInstance(pp);
+                if (RMT_ERROR_NONE != error) {
+                    throw new IllegalStateException("Error launching Remotery [" + error + "]: " + rmt_GetLastErrorMessage());
                 }
 
-                rmt_PropertySnapshotAll();
-                rmt_PropertyFrameResetAll();
+                rmt = pp.get(0);
             }
+
+            rmt_SetCurrentThreadName("Dump - Main Thread");
+
+            try (MemoryStack stack = stackPush()) {
+                RMTProperty game           = rmt_PropertyDefine_Group("Game", "Game Properties", null, stack);
+                RMTProperty wasUpdated     = rmt_PropertyDefine_Bool("WasUpdated", false, RMT_PropertyFlags_FrameReset, "Was the game updated this frame?", game, stack);
+                RMTProperty recursiveDepth = rmt_PropertyDefine_U32("RecursiveDepth", 0, RMT_PropertyFlags_FrameReset, "How deep did we go in recursiveFunction?", game, stack);
+                RMTProperty accumulated    = rmt_PropertyDefine_F32("Accumulated", 0.0f, RMT_PropertyFlags_FrameReset, "What was the latest value?", game, stack);
+                RMTProperty frameCounter   = rmt_PropertyDefine_U32("FrameCounter", 0, RMT_PropertyFlags_NoFlags, "What is the current frame number?", game, stack);
+
+                int MAX_COUNT = 5;
+                while (shutdownSignal.getCount() != 0 && --MAX_COUNT > 0) {
+                    long tokens = ThreadLocalRandom.current().nextLong(10_000L, 100_000L);
+
+                    rmt_LogText("root begin - " + tokens);
+                    root(stack, tokens, recursiveDepth, accumulated);
+                    rmt_LogText("root end");
+
+                    rmt_PropertySet_Bool(wasUpdated, true);
+                    try (MemoryStack frame = stackPush()) {
+                        rmt_PropertyAdd_U32(frameCounter, 1, frame);
+                    }
+
+                    rmt_PropertySnapshotAll();
+                    rmt_PropertyFrameResetAll();
+                }
+            }
+        } finally {
+            if (rmt != NULL) {
+                rmt_DestroyGlobalInstance(rmt);
+            }
+
+            RMTSettings settings = rmt_Settings();
+
+            Objects.requireNonNull(settings.sampletree_handler()).free();
+            Objects.requireNonNull(settings.snapshot_callback()).free();
+
+            System.out.println("Cleaned up and quit");
+
+            cleanupSignal.countDown();
         }
-
-        rmt_DestroyGlobalInstance(rmt);
-        System.out.println("Cleaned up and quit");
-
-        cleanupSignal.countDown();
     }
 
 }

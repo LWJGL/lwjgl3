@@ -16,7 +16,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * <h3>Type</h3>
  * 
  * <pre><code>
- * void * (*{@link #invoke}) (
+ * void (*{@link #invoke}) (
  *     void *mm_context,
  *     void *ptr
  * )</code></pre>
@@ -27,7 +27,7 @@ public interface RMTFreeI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
         FFI_DEFAULT_ABI,
-        ffi_type_pointer,
+        ffi_type_void,
         ffi_type_pointer, ffi_type_pointer
     );
 
@@ -36,13 +36,12 @@ public interface RMTFreeI extends CallbackI {
 
     @Override
     default void callback(long ret, long args) {
-        long __result = invoke(
+        invoke(
             memGetAddress(memGetAddress(args)),
             memGetAddress(memGetAddress(args + POINTER_SIZE))
         );
-        apiClosureRetP(ret, __result);
     }
 
-    @NativeType("void *") long invoke(@NativeType("void *") long mm_context, @NativeType("void *") long ptr);
+    void invoke(@NativeType("void *") long mm_context, @NativeType("void *") long ptr);
 
 }
