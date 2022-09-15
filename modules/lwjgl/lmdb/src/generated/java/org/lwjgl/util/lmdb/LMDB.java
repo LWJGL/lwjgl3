@@ -130,6 +130,24 @@ public class LMDB {
 
     static { LibLMDB.initialize(); }
 
+    /** Library major version. */
+    public static final int MDB_VERSION_MAJOR = 0;
+
+    /** Library minor version. */
+    public static final int MDB_VERSION_MINOR = 9;
+
+    /** Library patch version. */
+    public static final int MDB_VERSION_PATCH = 29;
+
+    /** The full library version as a single integer. */
+    public static final int MDB_VERSION_FULL = (MDB_VERSION_MAJOR << 24) | (MDB_VERSION_MINOR << 16) | MDB_VERSION_PATCH;
+
+    /** The release date of this library version. */
+    public static final String MDB_VERSION_DATE = "March 16, 2021";
+
+    /** The full library version as a string. */
+    public static final String MDB_VERSION_STRING = String.format("LMDB %d.%d.%d: (%s)", MDB_VERSION_MAJOR, MDB_VERSION_MINOR, MDB_VERSION_PATCH, MDB_VERSION_DATE);
+
     /**
      * Environment flags.
      * 

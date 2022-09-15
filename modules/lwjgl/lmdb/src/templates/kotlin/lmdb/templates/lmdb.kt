@@ -128,6 +128,18 @@ ENABLE_WARNINGS()""")
         It is very rarely necessary to close a database handle, and in general they should just be left open.
         """
 
+    IntConstant("Library major version.", "VERSION_MAJOR".."0")
+    IntConstant("Library minor version.", "VERSION_MINOR".."9")
+    IntConstant("Library patch version.", "VERSION_PATCH".."29")
+
+    IntConstant("The full library version as a single integer.", "VERSION_FULL".."(MDB_VERSION_MAJOR << 24) | (MDB_VERSION_MINOR << 16) | MDB_VERSION_PATCH")
+
+    StringConstant("The release date of this library version.", "VERSION_DATE".."March 16, 2021")
+    StringConstant(
+        "The full library version as a string.",
+        "VERSION_STRING".expr("String.format(\"LMDB %d.%d.%d: (%s)\", MDB_VERSION_MAJOR, MDB_VERSION_MINOR, MDB_VERSION_PATCH, MDB_VERSION_DATE)")
+    )
+
     EnumConstant(
         "Environment flags.",
 
