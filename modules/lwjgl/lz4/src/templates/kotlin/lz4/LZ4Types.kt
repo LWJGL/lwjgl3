@@ -70,9 +70,65 @@ val LZ4F_compressOptions_t = struct(Module.LZ4, "LZ4FCompressOptions", nativeNam
 val LZ4F_decompressOptions_t = struct(Module.LZ4, "LZ4FDecompressOptions", nativeName = "LZ4F_decompressOptions_t") {
     unsigned(
         "stableDst",
-        "pledges that last 64KB decompressed data will remain available unmodified. This optimization skips storage operations in tmp buffers."
+        """
+        pledges that last 64KB decompressed data will remain available unmodified between invocations.
+
+        This optimization skips storage operations in tmp buffers.
+        """
     )
-    unsigned("reserved", "must be set to zero for forward compatibility")[3]
+  unsigned(
+      "skipChecksums",
+      """
+      disable checksum calculation and verification, even when one is present in frame, to save CPU time.
+      
+      Setting this option to 1 once disables all checksums for the rest of the frame.
+      """
+  )
+  unsigned("reserved1", "must be set to zero for forward compatibility")
+  unsigned("reserved0", "idem")
+}
+
+val LZ4F_AllocFunction = Module.LZ4.callback {
+    void.p(
+        "LZ4FAllocFunction",
+        "",
+
+        opaque_p("opaqueState", ""),
+        size_t("size", ""),
+
+        nativeType = "LZ4F_AllocFunction"
+    )
+}
+
+val LZ4F_CallocFunction = Module.LZ4.callback {
+    void.p(
+        "LZ4FCallocFunction",
+        "",
+
+        opaque_p("opaqueState", ""),
+        size_t("size", ""),
+
+        nativeType = "LZ4F_CallocFunction"
+    )
+}
+
+val LZ4F_FreeFunction = Module.LZ4.callback {
+    void.p(
+        "LZ4FFreeFunction",
+        "",
+
+        opaque_p("opaqueState", ""),
+        void.p("address", ""),
+
+        nativeType = "LZ4F_FreeFunction"
+    )
+}
+
+val LZ4F_CustomMem = struct(Module.LZ4, "LZ4FCustomMem", nativeName = "LZ4F_CustomMem") {
+    LZ4F_AllocFunction("customAlloc", "")
+    nullable..LZ4F_CallocFunction("customCalloc", "optional; when not defined, uses {@code customAlloc} + {@code memset}")
+    LZ4F_FreeFunction("customFree", "")
+    opaque_p("opaqueState", "");
 }
 
 // lz4frame_static.h

@@ -24,8 +24,8 @@ import static org.lwjgl.util.lz4.LZ4HC.*;
  *     LZ4_u32 hashTable[LZ4HC_HASHTABLESIZE];
  *     LZ4_u16 chainTable[LZ4HC_MAXD];
  *     LZ4_byte const * {@link #end};
- *     LZ4_byte const * {@link #base};
- *     LZ4_byte const * {@link #dictBase};
+ *     LZ4_byte const * {@link #prefixStart};
+ *     LZ4_byte const * {@link #dictStart};
  *     LZ4_u32 {@link #dictLimit};
  *     LZ4_u32 {@link #lowLimit};
  *     LZ4_u32 {@link #nextToUpdate};
@@ -49,8 +49,8 @@ public class LZ4HCCCtxInternal extends Struct {
         HASHTABLE,
         CHAINTABLE,
         END,
-        BASE,
-        DICTBASE,
+        PREFIXSTART,
+        DICTSTART,
         DICTLIMIT,
         LOWLIMIT,
         NEXTTOUPDATE,
@@ -81,8 +81,8 @@ public class LZ4HCCCtxInternal extends Struct {
         HASHTABLE = layout.offsetof(0);
         CHAINTABLE = layout.offsetof(1);
         END = layout.offsetof(2);
-        BASE = layout.offsetof(3);
-        DICTBASE = layout.offsetof(4);
+        PREFIXSTART = layout.offsetof(3);
+        DICTSTART = layout.offsetof(4);
         DICTLIMIT = layout.offsetof(5);
         LOWLIMIT = layout.offsetof(6);
         NEXTTOUPDATE = layout.offsetof(7);
@@ -127,17 +127,17 @@ public class LZ4HCCCtxInternal extends Struct {
     /**
      * @param capacity the number of elements in the returned buffer
      *
-     * @return All index relative to this position
+     * @return Indexes relative to this position
      */
     @NativeType("LZ4_byte const *")
-    public ByteBuffer base(int capacity) { return nbase(address(), capacity); }
+    public ByteBuffer prefixStart(int capacity) { return nprefixStart(address(), capacity); }
     /**
      * @param capacity the number of elements in the returned buffer
      *
-     * @return alternate base for {@code extDict}
+     * @return alternate reference for {@code extDict}
      */
     @NativeType("LZ4_byte const *")
-    public ByteBuffer dictBase(int capacity) { return ndictBase(address(), capacity); }
+    public ByteBuffer dictStart(int capacity) { return ndictStart(address(), capacity); }
     /** below that point, need {@code extDict} */
     @NativeType("LZ4_u32")
     public int dictLimit() { return ndictLimit(address()); }
@@ -204,10 +204,10 @@ public class LZ4HCCCtxInternal extends Struct {
     }
     /** Unsafe version of {@link #end(int) end}. */
     public static ByteBuffer nend(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4HCCCtxInternal.END), capacity); }
-    /** Unsafe version of {@link #base(int) base}. */
-    public static ByteBuffer nbase(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4HCCCtxInternal.BASE), capacity); }
-    /** Unsafe version of {@link #dictBase(int) dictBase}. */
-    public static ByteBuffer ndictBase(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4HCCCtxInternal.DICTBASE), capacity); }
+    /** Unsafe version of {@link #prefixStart(int) prefixStart}. */
+    public static ByteBuffer nprefixStart(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4HCCCtxInternal.PREFIXSTART), capacity); }
+    /** Unsafe version of {@link #dictStart(int) dictStart}. */
+    public static ByteBuffer ndictStart(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + LZ4HCCCtxInternal.DICTSTART), capacity); }
     /** Unsafe version of {@link #dictLimit}. */
     public static int ndictLimit(long struct) { return UNSAFE.getInt(null, struct + LZ4HCCCtxInternal.DICTLIMIT); }
     /** Unsafe version of {@link #lowLimit}. */
@@ -281,19 +281,19 @@ public class LZ4HCCCtxInternal extends Struct {
         @NativeType("LZ4_byte const *")
         public ByteBuffer end(int capacity) { return LZ4HCCCtxInternal.nend(address(), capacity); }
         /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@link LZ4HCCCtxInternal#base} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link LZ4HCCCtxInternal#prefixStart} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("LZ4_byte const *")
-        public ByteBuffer base(int capacity) { return LZ4HCCCtxInternal.nbase(address(), capacity); }
+        public ByteBuffer prefixStart(int capacity) { return LZ4HCCCtxInternal.nprefixStart(address(), capacity); }
         /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@link LZ4HCCCtxInternal#dictBase} field.
+         * @return a {@link ByteBuffer} view of the data pointed to by the {@link LZ4HCCCtxInternal#dictStart} field.
          *
          * @param capacity the number of elements in the returned buffer
          */
         @NativeType("LZ4_byte const *")
-        public ByteBuffer dictBase(int capacity) { return LZ4HCCCtxInternal.ndictBase(address(), capacity); }
+        public ByteBuffer dictStart(int capacity) { return LZ4HCCCtxInternal.ndictStart(address(), capacity); }
         /** @return the value of the {@link LZ4HCCCtxInternal#dictLimit} field. */
         @NativeType("LZ4_u32")
         public int dictLimit() { return LZ4HCCCtxInternal.ndictLimit(address()); }

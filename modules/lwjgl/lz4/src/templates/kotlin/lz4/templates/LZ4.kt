@@ -36,7 +36,7 @@ ENABLE_WARNINGS()""")
         
         <h3>In-place compression and decompression</h3>
 
-        It's possible to have input and output sharing the same buffer, for highly contrained memory environments. In both cases, it requires input to lay at
+        It's possible to have input and output sharing the same buffer, for highly constrained memory environments. In both cases, it requires input to lay at
         the end of the buffer, and decompression to start at beginning of the buffer. Buffer size must feature some margin, hence be larger than final size.
         ${codeBlock("""
 |<------------------------buffer--------------------------------->|
@@ -80,7 +80,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."9",
-        "VERSION_RELEASE".."3"
+        "VERSION_RELEASE".."4"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(LZ4_VERSION_MAJOR *100*100 + LZ4_VERSION_MINOR *100 + LZ4_VERSION_RELEASE)")
@@ -89,31 +89,39 @@ ENABLE_WARNINGS()""")
     int("versionNumber", "Returns the version number.", void())
     Nonnull..charASCII.const.p("versionString", "Returns the version string.", void())
 
+   IntConstant(
+       "Tuning parameters.",
+
+       "MEMORY_USAGE_MIN".."10",
+       "MEMORY_USAGE_DEFAULT".."14",
+       "MEMORY_USAGE_MAX".."20"
+   )
+
+    IntConstant(
+        """
+        Memory usage formula : {@code N->2^N} Bytes (examples : {@code 10 -> 1KB; 12 -> 4KB ; 16 -> 64KB; 20 -> 1MB;} )
+
+        Increasing memory usage improves compression ratio, at the cost of speed. Reduced memory usage may improve speed at the cost of ratio, thanks to better
+        cache locality.
+        
+        Default value is 14, for 16KB, which nicely fits into Intel x86 L1 cache.
+        """,
+
+        "MEMORY_USAGE".."LZ4_MEMORY_USAGE_DEFAULT"
+    )
+
     IntConstant(
         "Maximum input size.",
 
         "MAX_INPUT_SIZE"..0x7E000000
     )
 
-    IntConstant(
-        """
-        Memory usage formula : {@code N->2^N} Bytes (examples: {@code 10 -> 1KB; 12 -> 4KB ; 16 -> 64KB; 20 -> 1MB;} etc.)
-
-        Increasing memory usage improves compression ratio. Reduced memory usage may improve speed, thanks to better cache locality. Default value is 14, for
-        16KB, which nicely fits into Intel x86 L1 cache.
-        """,
-        "MEMORY_USAGE".."14"
-    )
-
     IntConstant("", "HASHLOG".."(LZ4_MEMORY_USAGE - 2)")
     IntConstant("", "HASHTABLESIZE".."(1 << LZ4_MEMORY_USAGE)")
     IntConstant("", "HASH_SIZE_U32".."(1 << LZ4_HASHLOG)")
 
-    IntConstant("", "STREAMSIZE".."16416")
-    IntConstant("", "STREAMSIZE_VOIDP".."LZ4_STREAMSIZE / Pointer.POINTER_SIZE")
-
-    IntConstant("", "STREAMDECODESIZE_U64".."4 + (Pointer.POINTER_SIZE == 16 ? 2 : 0)")
-    IntConstant("", "STREAMDECODESIZE".."(LZ4_STREAMDECODESIZE_U64 * Long.BYTES)")
+    IntConstant("", "STREAM_MINSIZE".."(1 << LZ4_MEMORY_USAGE) + 32")
+    IntConstant("", "STREAMDECODE_MINSIZE".."32")
 
     IntConstant("History window size; can be user-defined at compile time.", "DISTANCE_MAX".."64")
 
@@ -499,6 +507,19 @@ ENABLE_WARNINGS()""")
         char.p("dst", ""),
         AutoSize("src")..int("srcSize", ""),
         AutoSize("dst")..int("dstCapacity", ""),
+        char.const.p("dictStart", ""),
+        AutoSize("dictStart")..int("dictSize", "")
+    )
+
+    int(
+        "decompress_safe_partial_usingDict",
+        "See #decompress_safe_usingDict().",
+
+        char.const.p("src", ""),
+        char.p("dst", ""),
+        AutoSize("src")..int("compressedSize", ""),
+        int("targetOutputSize", ""),
+        AutoSize("dst")..int("maxOutputSize", ""),
         char.const.p("dictStart", ""),
         AutoSize("dictStart")..int("dictSize", "")
     )

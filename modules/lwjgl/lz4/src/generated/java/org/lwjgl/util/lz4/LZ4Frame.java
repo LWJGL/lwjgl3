@@ -130,6 +130,12 @@ public class LZ4Frame {
         LZ4F_frame          = 0,
         LZ4F_skippableFrame = 1;
 
+    public static final int LZ4F_MAGICNUMBER = 0x184D2204;
+
+    public static final int LZ4F_MAGIC_SKIPPABLE_START = 0x184D2A50;
+
+    public static final int LZ4F_MIN_SIZE_TO_KNOW_HEADER_LENGTH = 5;
+
     /**
      * Error code.
      * 
@@ -156,31 +162,35 @@ public class LZ4Frame {
      * <li>{@link #LZ4F_ERROR_headerChecksum_invalid ERROR_headerChecksum_invalid}</li>
      * <li>{@link #LZ4F_ERROR_contentChecksum_invalid ERROR_contentChecksum_invalid}</li>
      * <li>{@link #LZ4F_ERROR_frameDecoding_alreadyStarted ERROR_frameDecoding_alreadyStarted}</li>
+     * <li>{@link #LZ4F_ERROR_compressionState_uninitialized ERROR_compressionState_uninitialized}</li>
+     * <li>{@link #LZ4F_ERROR_parameter_null ERROR_parameter_null}</li>
      * <li>{@link #LZ4F_ERROR_maxCode ERROR_maxCode}</li>
      * </ul>
      */
     public static final int
-        LZ4F_OK_NoError                         = 0,
-        LZ4F_ERROR_GENERIC                      = 1,
-        LZ4F_ERROR_maxBlockSize_invalid         = 2,
-        LZ4F_ERROR_blockMode_invalid            = 3,
-        LZ4F_ERROR_contentChecksumFlag_invalid  = 4,
-        LZ4F_ERROR_compressionLevel_invalid     = 5,
-        LZ4F_ERROR_headerVersion_wrong          = 6,
-        LZ4F_ERROR_blockChecksum_invalid        = 7,
-        LZ4F_ERROR_reservedFlag_set             = 8,
-        LZ4F_ERROR_allocation_failed            = 9,
-        LZ4F_ERROR_srcSize_tooLarge             = 10,
-        LZ4F_ERROR_dstMaxSize_tooSmall          = 11,
-        LZ4F_ERROR_frameHeader_incomplete       = 12,
-        LZ4F_ERROR_frameType_unknown            = 13,
-        LZ4F_ERROR_frameSize_wrong              = 14,
-        LZ4F_ERROR_srcPtr_wrong                 = 15,
-        LZ4F_ERROR_decompressionFailed          = 16,
-        LZ4F_ERROR_headerChecksum_invalid       = 17,
-        LZ4F_ERROR_contentChecksum_invalid      = 18,
-        LZ4F_ERROR_frameDecoding_alreadyStarted = 19,
-        LZ4F_ERROR_maxCode                      = 20;
+        LZ4F_OK_NoError                           = 0,
+        LZ4F_ERROR_GENERIC                        = 1,
+        LZ4F_ERROR_maxBlockSize_invalid           = 2,
+        LZ4F_ERROR_blockMode_invalid              = 3,
+        LZ4F_ERROR_contentChecksumFlag_invalid    = 4,
+        LZ4F_ERROR_compressionLevel_invalid       = 5,
+        LZ4F_ERROR_headerVersion_wrong            = 6,
+        LZ4F_ERROR_blockChecksum_invalid          = 7,
+        LZ4F_ERROR_reservedFlag_set               = 8,
+        LZ4F_ERROR_allocation_failed              = 9,
+        LZ4F_ERROR_srcSize_tooLarge               = 10,
+        LZ4F_ERROR_dstMaxSize_tooSmall            = 11,
+        LZ4F_ERROR_frameHeader_incomplete         = 12,
+        LZ4F_ERROR_frameType_unknown              = 13,
+        LZ4F_ERROR_frameSize_wrong                = 14,
+        LZ4F_ERROR_srcPtr_wrong                   = 15,
+        LZ4F_ERROR_decompressionFailed            = 16,
+        LZ4F_ERROR_headerChecksum_invalid         = 17,
+        LZ4F_ERROR_contentChecksum_invalid        = 18,
+        LZ4F_ERROR_frameDecoding_alreadyStarted   = 19,
+        LZ4F_ERROR_compressionState_uninitialized = 20,
+        LZ4F_ERROR_parameter_null                 = 21,
+        LZ4F_ERROR_maxCode                        = 22;
 
     protected LZ4Frame() {
         throw new UnsupportedOperationException();
@@ -227,7 +237,9 @@ public class LZ4Frame {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>this result is only usable with {@link #LZ4F_compressFrame compressFrame}. It may also be used with {@link #LZ4F_compressUpdate compressUpdate} <b>if no {@code {@link #LZ4F_flush flush}} operation</b> is performed.</p></div>
+     * <p>this result is only usable with {@link #LZ4F_compressFrame compressFrame}. It may also be relevant to {@link #LZ4F_compressUpdate compressUpdate} <b>only if</b> no {@link #LZ4F_flush flush} operation is ever
+     * performed.</p>
+     * </div>
      */
     @NativeType("size_t")
     public static long LZ4F_compressFrameBound(@NativeType("size_t") long srcSize, @Nullable @NativeType("LZ4F_preferences_t const *") LZ4FPreferences preferencesPtr) {
@@ -266,14 +278,19 @@ public class LZ4Frame {
     public static native long nLZ4F_createCompressionContext(long cctxPtr, int version);
 
     /**
-     * The first thing to do is to create a {@code compressionContext} object, which will be used in all compression operations. This is achieved using
-     * {@code LZ4F_createCompressionContext()}, which takes as argument a version.
+     * The first thing to do is to create a {@code compressionContext} object, which will keep track of operation state during streaming compression. This is
+     * achieved using {@code LZ4F_createCompressionContext()}, which takes as argument a version, and a pointer to {@code LZ4F_cctx*}, to write the
+     * resulting pointer into.
      * 
-     * <p>The function will provide a pointer to a fully allocated {@code LZ4F_cctx} object. Object can release its memory using {@link #LZ4F_freeCompressionContext freeCompressionContext};</p>
+     * <p>The function provides a pointer to a fully allocated {@code LZ4F_cctx} object.</p>
+     * 
+     * <p>A created compression context can be employed multiple times for consecutive streaming operations. Once all streaming compression jobs are completed,
+     * the state object can be released using {@link #LZ4F_freeCompressionContext freeCompressionContext}.</p>
      *
+     * @param cctxPtr MUST be != {@code NULL}
      * @param version MUST be {@link #LZ4F_VERSION VERSION}. It is intended to track potential version mismatch, notably when using DLL. Must be:<br><table><tr><td>{@link #LZ4F_VERSION VERSION}</td></tr></table>
      *
-     * @return if {@code != zero}, there was an error during context creation.
+     * @return if {@code != zero}, context creation failed.
      */
     @NativeType("LZ4F_errorCode_t")
     public static long LZ4F_createCompressionContext(@NativeType("LZ4F_cctx **") PointerBuffer cctxPtr, @NativeType("unsigned") int version) {
@@ -285,15 +302,17 @@ public class LZ4Frame {
 
     // --- [ LZ4F_freeCompressionContext ] ---
 
-    public static native long nLZ4F_freeCompressionContext(long cctx);
-
+    /**
+     * Frees an {@code LZ4F_cctx} object.
+     * Notes:
+     * 
+     * <ul>
+     * <li>{@code LZ4F_freeCompressionContext()} is always successful. Its return value can be ignored.</li>
+     * <li>{@code LZ4F_freeCompressionContext()} works fine with {@code NULL} input pointers (do nothing).</li>
+     * </ul>
+     */
     @NativeType("LZ4F_errorCode_t")
-    public static long LZ4F_freeCompressionContext(@NativeType("LZ4F_cctx *") long cctx) {
-        if (CHECKS) {
-            check(cctx);
-        }
-        return nLZ4F_freeCompressionContext(cctx);
-    }
+    public static native long LZ4F_freeCompressionContext(@NativeType("LZ4F_cctx *") long cctx);
 
     // --- [ LZ4F_compressBegin ] ---
 
@@ -355,7 +374,8 @@ public class LZ4Frame {
      * <p>Important rule: {@code dstCapacity} MUST be large enough to ensure operation success even in worst case situations. This value is provided by
      * {@link #LZ4F_compressBound compressBound}. If this condition is not respected, {@code LZ4F_compress()} will fail (result is an {@code errorCode}).</p>
      * 
-     * <p>{@code LZ4F_compressUpdate()} doesn't guarantee error recovery. When an error occurs, compression context must be freed or resized.</p>
+     * <p>After an error, the state is left in a UB state, and must be re-initialized or freed. If previously an uncompressed block was written, buffered data is
+     * flushed before appending compressed data is continued.</p>
      *
      * @param cOptPtr optional: {@code NULL} can be provided, in which case all options are set to default
      *
@@ -427,9 +447,10 @@ public class LZ4Frame {
     /**
      * Create an {@code LZ4F_dctx} object, to track all decompression operations.
      * 
-     * <p>The function provides a pointer to an allocated and initialized {@code LZ4F_dctx} object. {@code dctx} memory can be released using
-     * {@link #LZ4F_freeDecompressionContext freeDecompressionContext}.</p>
+     * <p>The function fills {@code dctxPtr} with the value of a pointer to an allocated and initialized {@code LZ4F_dctx} object.{@code dctx} memory can be
+     * released using {@link #LZ4F_freeDecompressionContext freeDecompressionContext}.</p>
      *
+     * @param dctxPtr MUST be valid
      * @param version must be:<br><table><tr><td>{@link #LZ4F_VERSION VERSION}</td></tr></table>
      *
      * @return an errorCode, which can be tested using {@link #LZ4F_isError isError}
@@ -463,13 +484,35 @@ public class LZ4Frame {
         return nLZ4F_freeDecompressionContext(dctx);
     }
 
+    // --- [ LZ4F_headerSize ] ---
+
+    /**
+     * Unsafe version of: {@link #LZ4F_headerSize headerSize}
+     *
+     * @param srcSize must be &ge; {@link #LZ4F_MIN_SIZE_TO_KNOW_HEADER_LENGTH MIN_SIZE_TO_KNOW_HEADER_LENGTH}, which is enough to decode the header length
+     */
+    public static native long nLZ4F_headerSize(long src, long srcSize);
+
+    /**
+     * Provide the header size of a frame starting at {@code src}.
+     * 
+     * <p>Note: Frame header size is variable, but is guaranteed to be &ge; {@link #LZ4F_HEADER_SIZE_MIN HEADER_SIZE_MIN} bytes, and &le; {@link #LZ4F_HEADER_SIZE_MAX HEADER_SIZE_MAX} bytes.</p>
+     *
+     * @return size of frame header or an error code, which can be tested using {@link #LZ4F_isError isError}
+     */
+    @NativeType("size_t")
+    public static long LZ4F_headerSize(@NativeType("void const *") ByteBuffer src) {
+        return nLZ4F_headerSize(memAddress(src), src.remaining());
+    }
+
     // --- [ LZ4F_getFrameInfo ] ---
 
     /** Unsafe version of: {@link #LZ4F_getFrameInfo getFrameInfo} */
     public static native long nLZ4F_getFrameInfo(long dctx, long frameInfoPtr, long srcBuffer, long srcSizePtr);
 
     /**
-     * This function extracts frame parameters (max {@code blockSize}, {@code dictID}, etc.). Its usage is optional.
+     * This function extracts frame parameters (max {@code blockSize}, {@code dictID}, etc.). Its usage is optional: user can also invoke {@link #LZ4F_decompress decompress}
+     * directly.
      * 
      * <p>Extracted information is typically useful for allocation and dictionary. This function works in 2 situations:</p>
      * 
@@ -576,6 +619,38 @@ public class LZ4Frame {
     @NativeType("LZ4F_errorCodes")
     public static native int LZ4F_getErrorCode(@NativeType("size_t") long functionResult);
 
+    // --- [ LZ4F_getBlockSize ] ---
+
+    /** Return, in scalar format ({@code size_t}), the maximum block size associated with {@code blockSizeID}. */
+    @NativeType("size_t")
+    public static native long LZ4F_getBlockSize(@NativeType("LZ4F_blockSizeID_t") int blockSizeID);
+
+    // --- [ LZ4F_uncompressedUpdate ] ---
+
+    /** Unsafe version of: {@link #LZ4F_uncompressedUpdate uncompressedUpdate} */
+    public static native long nLZ4F_uncompressedUpdate(long cctx, long dstBuffer, long dstCapacity, long srcBuffer, long srcSize, long cOptPtr);
+
+    /**
+     * Can be called repetitively to add as much data uncompressed data as necessary.
+     * 
+     * <p>Important rule: {@code dstCapacity} MUST be large enough to store the entire source buffer as no compression is done for this operation. If this
+     * condition is not respected, {@code LZ4F_uncompressedUpdate()} will fail (result is an {@code errorCode}). After an error, the state is left in a UB
+     * state, and must be re-initialized or freed. If previously a compressed block was written, buffered data is flushed before appending uncompressed data
+     * is continued. This is only supported when {@link #LZ4F_blockIndependent blockIndependent} is used.</p>
+     *
+     * @param cOptPtr optional : {@code NULL} can be provided, in which case all options are set to default
+     *
+     * @return number of bytes written into {@code dstBuffer} (it can be zero, meaning input data was just buffered), or an error code if it fails (which can be
+     *         tested using {@link #LZ4F_isError isError})"
+     */
+    @NativeType("size_t")
+    public static long LZ4F_uncompressedUpdate(@NativeType("LZ4F_cctx *") long cctx, @NativeType("void *") ByteBuffer dstBuffer, @NativeType("void const *") ByteBuffer srcBuffer, @Nullable @NativeType("LZ4F_compressOptions_t const *") LZ4FCompressOptions cOptPtr) {
+        if (CHECKS) {
+            check(cctx);
+        }
+        return nLZ4F_uncompressedUpdate(cctx, memAddress(dstBuffer), dstBuffer.remaining(), memAddress(srcBuffer), srcBuffer.remaining(), memAddressSafe(cOptPtr));
+    }
+
     // --- [ LZ4F_createCDict ] ---
 
     /** Unsafe version of: {@link #LZ4F_createCDict createCDict} */
@@ -673,6 +748,61 @@ public class LZ4Frame {
             check(srcBuffer, srcSizePtr.get(srcSizePtr.position()));
         }
         return nLZ4F_decompress_usingDict(dctxPtr, memAddress(dstBuffer), memAddress(dstSizePtr), memAddress(srcBuffer), memAddress(srcSizePtr), memAddress(dict), dict.remaining(), decompressOptionsPtr.address());
+    }
+
+    // --- [ LZ4F_defaultCMem ] ---
+
+    private static native void nLZ4F_defaultCMem(long __result);
+
+    @NativeType("LZ4F_CustomMem")
+    private static LZ4FCustomMem LZ4F_defaultCMem(@NativeType("LZ4F_CustomMem") LZ4FCustomMem __result) {
+        nLZ4F_defaultCMem(__result.address());
+        return __result;
+    }
+
+    /** This constant defers to stdlib's functions */
+    public static final LZ4FCustomMem LZ4F_defaultCMem = LZ4F_defaultCMem(LZ4FCustomMem.create());
+
+    // --- [ LZ4F_createCompressionContext_advanced ] ---
+
+    /** Unsafe version of: {@link #LZ4F_createCompressionContext_advanced createCompressionContext_advanced} */
+    public static native long nLZ4F_createCompressionContext_advanced(long customMem, int version);
+
+    /** {@link #LZ4F_createCompressionContext createCompressionContext} with custom allocation/free functions. */
+    @NativeType("LZ4F_cctx *")
+    public static long LZ4F_createCompressionContext_advanced(@NativeType("LZ4F_CustomMem") LZ4FCustomMem customMem, @NativeType("unsigned") int version) {
+        if (CHECKS) {
+            LZ4FCustomMem.validate(customMem.address());
+        }
+        return nLZ4F_createCompressionContext_advanced(customMem.address(), version);
+    }
+
+    // --- [ LZ4F_createDecompressionContext_advanced ] ---
+
+    /** Unsafe version of: {@link #LZ4F_createDecompressionContext_advanced createDecompressionContext_advanced} */
+    public static native long nLZ4F_createDecompressionContext_advanced(long customMem, int version);
+
+    /** {@link #LZ4F_createDecompressionContext createDecompressionContext} with custom allocation/free functions. */
+    @NativeType("LZ4F_dctx *")
+    public static long LZ4F_createDecompressionContext_advanced(@NativeType("LZ4F_CustomMem") LZ4FCustomMem customMem, @NativeType("unsigned") int version) {
+        if (CHECKS) {
+            LZ4FCustomMem.validate(customMem.address());
+        }
+        return nLZ4F_createDecompressionContext_advanced(customMem.address(), version);
+    }
+
+    // --- [ LZ4F_createCDict_advanced ] ---
+
+    /** Unsafe version of: {@link #LZ4F_createCDict_advanced createCDict_advanced} */
+    public static native long nLZ4F_createCDict_advanced(long customMem, long dictBuffer, long dictSize);
+
+    /** {@link #LZ4F_createCDict createCDict} with custom allocation/free functions. */
+    @NativeType("LZ4F_CDict *")
+    public static long LZ4F_createCDict_advanced(@NativeType("LZ4F_CustomMem") LZ4FCustomMem customMem, @NativeType("void const *") ByteBuffer dictBuffer) {
+        if (CHECKS) {
+            LZ4FCustomMem.validate(customMem.address());
+        }
+        return nLZ4F_createCDict_advanced(customMem.address(), memAddress(dictBuffer), dictBuffer.remaining());
     }
 
 }

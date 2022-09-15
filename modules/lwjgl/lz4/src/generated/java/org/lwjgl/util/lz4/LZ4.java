@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <h3>In-place compression and decompression</h3>
  * 
- * <p>It's possible to have input and output sharing the same buffer, for highly contrained memory environments. In both cases, it requires input to lay at
+ * <p>It's possible to have input and output sharing the same buffer, for highly constrained memory environments. In both cases, it requires input to lay at
  * the end of the buffer, and decompression to start at beginning of the buffer. Buffer size must feature some margin, hence be larger than final size.</p>
  * 
  * <pre><code>
@@ -78,7 +78,7 @@ public class LZ4 {
     public static final int
         LZ4_VERSION_MAJOR   = 1,
         LZ4_VERSION_MINOR   = 9,
-        LZ4_VERSION_RELEASE = 3;
+        LZ4_VERSION_RELEASE = 4;
 
     /** Version number. */
     public static final int LZ4_VERSION_NUMBER = (LZ4_VERSION_MAJOR *100*100 + LZ4_VERSION_MINOR *100 + LZ4_VERSION_RELEASE);
@@ -86,16 +86,24 @@ public class LZ4 {
     /** Version string. */
     public static final String LZ4_VERSION_STRING = LZ4_VERSION_MAJOR + "." + LZ4_VERSION_MINOR + "." + LZ4_VERSION_RELEASE;
 
-    /** Maximum input size. */
-    public static final int LZ4_MAX_INPUT_SIZE = 0x7E000000;
+    /** Tuning parameters. */
+    public static final int
+        LZ4_MEMORY_USAGE_MIN     = 10,
+        LZ4_MEMORY_USAGE_DEFAULT = 14,
+        LZ4_MEMORY_USAGE_MAX     = 20;
 
     /**
-     * Memory usage formula : {@code N->2^N} Bytes (examples: {@code 10 -> 1KB; 12 -> 4KB ; 16 -> 64KB; 20 -> 1MB;} etc.)
+     * Memory usage formula : {@code N->2^N} Bytes (examples : {@code 10 -> 1KB; 12 -> 4KB ; 16 -> 64KB; 20 -> 1MB;} )
      * 
-     * <p>Increasing memory usage improves compression ratio. Reduced memory usage may improve speed, thanks to better cache locality. Default value is 14, for
-     * 16KB, which nicely fits into Intel x86 L1 cache.</p>
+     * <p>Increasing memory usage improves compression ratio, at the cost of speed. Reduced memory usage may improve speed at the cost of ratio, thanks to better
+     * cache locality.</p>
+     * 
+     * <p>Default value is 14, for 16KB, which nicely fits into Intel x86 L1 cache.</p>
      */
-    public static final int LZ4_MEMORY_USAGE = 14;
+    public static final int LZ4_MEMORY_USAGE = LZ4_MEMORY_USAGE_DEFAULT;
+
+    /** Maximum input size. */
+    public static final int LZ4_MAX_INPUT_SIZE = 0x7E000000;
 
     public static final int LZ4_HASHLOG = (LZ4_MEMORY_USAGE - 2);
 
@@ -103,13 +111,9 @@ public class LZ4 {
 
     public static final int LZ4_HASH_SIZE_U32 = (1 << LZ4_HASHLOG);
 
-    public static final int LZ4_STREAMSIZE = 16416;
+    public static final int LZ4_STREAM_MINSIZE = (1 << LZ4_MEMORY_USAGE) + 32;
 
-    public static final int LZ4_STREAMSIZE_VOIDP = LZ4_STREAMSIZE / Pointer.POINTER_SIZE;
-
-    public static final int LZ4_STREAMDECODESIZE_U64 = 4 + (Pointer.POINTER_SIZE == 16 ? 2 : 0);
-
-    public static final int LZ4_STREAMDECODESIZE = (LZ4_STREAMDECODESIZE_U64 * Long.BYTES);
+    public static final int LZ4_STREAMDECODE_MINSIZE = 32;
 
     /** History window size; can be user-defined at compile time. */
     public static final int LZ4_DISTANCE_MAX = 64;
@@ -540,6 +544,16 @@ public class LZ4 {
      */
     public static int LZ4_decompress_safe_usingDict(@NativeType("char const *") ByteBuffer src, @NativeType("char *") ByteBuffer dst, @NativeType("char const *") ByteBuffer dictStart) {
         return nLZ4_decompress_safe_usingDict(memAddress(src), memAddress(dst), src.remaining(), dst.remaining(), memAddress(dictStart), dictStart.remaining());
+    }
+
+    // --- [ LZ4_decompress_safe_partial_usingDict ] ---
+
+    /** Unsafe version of: {@link #LZ4_decompress_safe_partial_usingDict decompress_safe_partial_usingDict} */
+    public static native int nLZ4_decompress_safe_partial_usingDict(long src, long dst, int compressedSize, int targetOutputSize, int maxOutputSize, long dictStart, int dictSize);
+
+    /** See {@link #LZ4_decompress_safe_usingDict decompress_safe_usingDict}. */
+    public static int LZ4_decompress_safe_partial_usingDict(@NativeType("char const *") ByteBuffer src, @NativeType("char *") ByteBuffer dst, int targetOutputSize, @NativeType("char const *") ByteBuffer dictStart) {
+        return nLZ4_decompress_safe_partial_usingDict(memAddress(src), memAddress(dst), src.remaining(), targetOutputSize, dst.remaining(), memAddress(dictStart), dictStart.remaining());
     }
 
     // --- [ LZ4_compress_fast_extState_fastReset ] ---

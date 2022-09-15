@@ -111,7 +111,10 @@ ENABLE_WARNINGS()""")
         replaced by #NULL, in which case, the function will assume default preferences.
 
         ${note(
-            "this result is only usable with #compressFrame(). It may also be used with #compressUpdate() <b>if no {@code #flush()} operation</b> is performed."
+            """
+            this result is only usable with #compressFrame(). It may also be relevant to #compressUpdate() <b>only if</b> no #flush() operation is ever
+            performed.
+            """
         )}
         """,
 
@@ -141,23 +144,34 @@ ENABLE_WARNINGS()""")
     LZ4F_errorCode_t(
         "createCompressionContext",
         """
-        The first thing to do is to create a {@code compressionContext} object, which will be used in all compression operations. This is achieved using
-        {@code LZ4F_createCompressionContext()}, which takes as argument a version.
+        The first thing to do is to create a {@code compressionContext} object, which will keep track of operation state during streaming compression. This is
+        achieved using {@code LZ4F_createCompressionContext()}, which takes as argument a version, and a pointer to {@code LZ4F_cctx*}, to write the
+        resulting pointer into.
 
-        The function will provide a pointer to a fully allocated {@code LZ4F_cctx} object. Object can release its memory using #freeCompressionContext();
+        The function provides a pointer to a fully allocated {@code LZ4F_cctx} object.
+
+        A created compression context can be employed multiple times for consecutive streaming operations. Once all streaming compression jobs are completed,
+        the state object can be released using #freeCompressionContext().
         """,
 
-        Check(1)..LZ4F_cctx.p.p("cctxPtr", ""),
+        Check(1)..LZ4F_cctx.p.p("cctxPtr", "MUST be != #NULL"),
         unsigned("version", "MUST be #VERSION. It is intended to track potential version mismatch, notably when using DLL.", "#VERSION"),
 
-        returnDoc = "if {@code != zero}, there was an error during context creation."
+        returnDoc = "if {@code != zero}, context creation failed."
     )
 
     LZ4F_errorCode_t(
         "freeCompressionContext",
-        "",
+        """
+        Frees an {@code LZ4F_cctx} object.
+        Notes:
+        ${ul(
+            "{@code LZ4F_freeCompressionContext()} is always successful. Its return value can be ignored.",
+            "{@code LZ4F_freeCompressionContext()} works fine with #NULL input pointers (do nothing)."
+        )}
+        """,
 
-        LZ4F_cctx.p("cctx", "")
+        nullable..LZ4F_cctx.p("cctx", "")
     )
 
     size_t(
@@ -203,7 +217,8 @@ ENABLE_WARNINGS()""")
         Important rule: {@code dstCapacity} MUST be large enough to ensure operation success even in worst case situations. This value is provided by
         #compressBound(). If this condition is not respected, {@code LZ4F_compress()} will fail (result is an {@code errorCode}).
 
-        {@code LZ4F_compressUpdate()} doesn't guarantee error recovery. When an error occurs, compression context must be freed or resized.
+        After an error, the state is left in a UB state, and must be re-initialized or freed. If previously an uncompressed block was written, buffered data is
+        flushed before appending compressed data is continued.
         """,
 
         LZ4F_cctx.p("cctx", ""),
@@ -264,11 +279,11 @@ ENABLE_WARNINGS()""")
         """
         Create an {@code LZ4F_dctx} object, to track all decompression operations.
 
-        The function provides a pointer to an allocated and initialized {@code LZ4F_dctx} object. {@code dctx} memory can be released using
-        #freeDecompressionContext().
+        The function fills {@code dctxPtr} with the value of a pointer to an allocated and initialized {@code LZ4F_dctx} object.{@code dctx} memory can be
+        released using #freeDecompressionContext().
         """,
 
-        Check(1)..LZ4F_dctx.p.p("dctxPtr", ""),
+        Check(1)..LZ4F_dctx.p.p("dctxPtr", "MUST be valid"),
         unsigned("version", "", "#VERSION"),
 
         returnDoc = "an errorCode, which can be tested using #isError()"
@@ -291,10 +306,29 @@ ENABLE_WARNINGS()""")
         """
     )
 
+    IntConstant("", "MAGICNUMBER"..0x184D2204)
+    IntConstant("", "MAGIC_SKIPPABLE_START"..0x184D2A50)
+    IntConstant("", "MIN_SIZE_TO_KNOW_HEADER_LENGTH".."5")
+
+    size_t(
+        "headerSize",
+        """
+        Provide the header size of a frame starting at {@code src}.
+
+        Note: Frame header size is variable, but is guaranteed to be &ge; #HEADER_SIZE_MIN bytes, and &le; #HEADER_SIZE_MAX bytes.
+        """,
+
+        void.const.p("src", ""),
+        AutoSize("src")..size_t("srcSize", "must be &ge; #MIN_SIZE_TO_KNOW_HEADER_LENGTH, which is enough to decode the header length"),
+
+        returnDoc = "size of frame header or an error code, which can be tested using #isError()"
+    )
+
     size_t(
         "getFrameInfo",
         """
-        This function extracts frame parameters (max {@code blockSize}, {@code dictID}, etc.). Its usage is optional.
+        This function extracts frame parameters (max {@code blockSize}, {@code dictID}, etc.). Its usage is optional: user can also invoke #decompress()
+        directly.
 
         Extracted information is typically useful for allocation and dictionary. This function works in 2 situations:
         ${ul(
@@ -408,6 +442,8 @@ ENABLE_WARNINGS()""")
         "ERROR_headerChecksum_invalid".enum,
         "ERROR_contentChecksum_invalid".enum,
         "ERROR_frameDecoding_alreadyStarted".enum,
+        "ERROR_compressionState_uninitialized".enum,
+        "ERROR_parameter_null".enum,
         "ERROR_maxCode".enum
     )
 
@@ -416,6 +452,38 @@ ENABLE_WARNINGS()""")
         "",
 
         size_t("functionResult", "")
+    )
+
+    size_t(
+        "getBlockSize",
+        "Return, in scalar format ({@code size_t}), the maximum block size associated with {@code blockSizeID}.",
+
+        LZ4F_blockSizeID_t("blockSizeID", "")
+    )
+
+    size_t(
+        "uncompressedUpdate",
+        """
+        Can be called repetitively to add as much data uncompressed data as necessary.
+        
+        Important rule: {@code dstCapacity} MUST be large enough to store the entire source buffer as no compression is done for this operation. If this
+        condition is not respected, {@code LZ4F_uncompressedUpdate()} will fail (result is an {@code errorCode}). After an error, the state is left in a UB
+        state, and must be re-initialized or freed. If previously a compressed block was written, buffered data is flushed before appending uncompressed data
+        is continued. This is only supported when #blockIndependent is used.
+        """,
+
+        LZ4F_cctx.p("cctx", ""),
+        void.p("dstBuffer", ""),
+        AutoSize("dstBuffer")..size_t("dstCapacity", ""),
+        void.const.p("srcBuffer", ""),
+        AutoSize("srcBuffer")..size_t("srcSize", ""),
+        nullable..LZ4F_compressOptions_t.const.p("cOptPtr", "optional : #NULL can be provided, in which case all options are set to default"),
+
+        returnDoc =
+        """
+        number of bytes written into {@code dstBuffer} (it can be zero, meaning input data was just buffered), or an error code if it fails (which can be
+        tested using #isError())"
+        """
     )
 
     LZ4F_CDict.p(
@@ -499,5 +567,32 @@ ENABLE_WARNINGS()""")
         void.const.p("dict", ""),
         AutoSize("dict")..size_t("dictSize", ""),
         LZ4F_decompressOptions_t.const.p("decompressOptionsPtr", "")
+    )
+
+    macro..LZ4F_CustomMem("defaultCMem", "This constant defers to stdlib's functions", void())
+
+    LZ4F_cctx.p(
+        "createCompressionContext_advanced",
+        "#createCompressionContext() with custom allocation/free functions.",
+
+        LZ4F_CustomMem("customMem", ""),
+        unsigned("version", "")
+    )
+
+    LZ4F_dctx.p(
+        "createDecompressionContext_advanced",
+        "#createDecompressionContext() with custom allocation/free functions.",
+
+        LZ4F_CustomMem("customMem", ""),
+        unsigned("version", "")
+    )
+
+    LZ4F_CDict.p(
+        "createCDict_advanced",
+        "#createCDict() with custom allocation/free functions.",
+
+        LZ4F_CustomMem("customMem", ""),
+        void.const.p("dictBuffer", ""),
+        AutoSize("dictBuffer")..size_t("dictSize", "")
     )
 }

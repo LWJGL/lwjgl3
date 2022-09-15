@@ -153,6 +153,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1decompress_1safe_1using
     return (jint)LZ4_decompress_safe_usingDict(src, dst, srcSize, dstCapacity, dictStart, dictSize);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1decompress_1safe_1partial_1usingDict(JNIEnv *__env, jclass clazz, jlong srcAddress, jlong dstAddress, jint compressedSize, jint targetOutputSize, jint maxOutputSize, jlong dictStartAddress, jint dictSize) {
+    char const *src = (char const *)(uintptr_t)srcAddress;
+    char *dst = (char *)(uintptr_t)dstAddress;
+    char const *dictStart = (char const *)(uintptr_t)dictStartAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)LZ4_decompress_safe_partial_usingDict(src, dst, compressedSize, targetOutputSize, maxOutputSize, dictStart, dictSize);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_lz4_LZ4_nLZ4_1compress_1fast_1extState_1fastReset(JNIEnv *__env, jclass clazz, jlong stateAddress, jlong srcAddress, jlong dstAddress, jint srcSize, jint dstCapacity, jint acceleration) {
     void *state = (void *)(uintptr_t)stateAddress;
     char const *src = (char const *)(uintptr_t)srcAddress;
