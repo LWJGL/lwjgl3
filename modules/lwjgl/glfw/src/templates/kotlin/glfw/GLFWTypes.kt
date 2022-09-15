@@ -84,14 +84,14 @@ void* function_name(size_t size, void* user)""")}
 
             This function must return either a memory block at least {@code size} bytes long, or #NULL if allocation failed. Note that not all parts of GLFW
             handle allocation failures gracefully yet.
-    
+
             This function may be called during #Init() but before the library is flagged as initialized, as well as during #Terminate() after the library is no
             longer flagged as initialized.
-    
+
             Any memory allocated by this function will be deallocated during library termination or earlier.
-    
+
             The size will always be greater than zero. Allocations of size zero are filtered out before reaching the custom allocator.
-        
+
             ${note(ul(
                 "The returned memory block must be valid at least until it is deallocated.",
                 "This function should not call any GLFW function.",
@@ -101,7 +101,6 @@ void* function_name(size_t size, void* user)""")}
         since = "version 3.4"
     }
 }
-
 
 val GLFWreallocatefun = Module.GLFW.callback {
     void.p(

@@ -551,7 +551,13 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
             {@code GetWindowAttrib}: Indicates whether the window is transparent to mouse input.
             """,
-            0x0002000D)
+            0x0002000D),
+        "POSITION_X".enum(
+            "{@code WindowHint}: Initial position x-coordinate window hint.",
+            0x0002000E),
+        "POSITION_Y".enum(
+            "{@code WindowHint}: Initial position y-coordinate window hint.",
+            0x0002000F)
     ).javaDocLinks
 
     val InputModes = IntConstant(
@@ -683,6 +689,12 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         """,
 
         "ANGLE_PLATFORM_TYPE"..0x00050002
+    )
+
+    IntConstant(
+        "",
+
+        "ANY_POSITION"..0x80000000.i
     )
 
     IntConstant(
@@ -1722,9 +1734,8 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Once you have created the window, you can switch it between windowed and full screen mode with #SetWindowMonitor(). If the window has an OpenGL or
         OpenGL ES context, it will be unaffected.
 
-        By default, newly created windows use the placement recommended by the window system. To create the window at a specific position, make it initially
-        invisible using the #VISIBLE window hint, set its ${url("http://www.glfw.org/docs/latest/window.html\\#window_pos", "position")} and then
-        ${url("http://www.glfw.org/docs/latest/window.html\\#window_hide", "show")} it.
+        By default, newly created windows use the placement recommended by the window system. To create the window at a specific position, set the #POSITION_X
+        and #POSITION_Y window hints before creation. To restore the default behavior, set either or both hints back to #ANY_POSITION.
 
         As long as at least one full screen window is not iconified, the screensaver is prohibited from starting.
 
