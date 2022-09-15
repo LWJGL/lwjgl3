@@ -25,6 +25,7 @@ import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL31C.*;
+import static org.lwjgl.opengl.GL33C.*;
 import static org.lwjgl.stb.STBEasyFont.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -1406,7 +1407,7 @@ public final class HelloTootle {
             if (!supported) {
                 return;
             }
-            glBeginQuery(GL33C.GL_TIME_ELAPSED, queries.get(cur % GPU_QUERY_COUNT));
+            glBeginQuery(GL_TIME_ELAPSED, queries.get(cur % GPU_QUERY_COUNT));
             cur++;
         }
 
@@ -1415,20 +1416,20 @@ public final class HelloTootle {
                 return 0;
             }
 
-            glEndQuery(GL33C.GL_TIME_ELAPSED);
+            glEndQuery(GL_TIME_ELAPSED);
 
             int n = 0;
             try (MemoryStack stack = stackPush()) {
                 IntBuffer available = stack.ints(1);
+                LongBuffer timeElapsed = stack.mallocLong(1);
                 while (available.get(0) != 0 && ret <= cur) {
                     // check for results if there are any
                     glGetQueryObjectiv(queries.get(ret % GPU_QUERY_COUNT), GL_QUERY_RESULT_AVAILABLE, available);
                     if (available.get(0) != 0) {
-                        LongBuffer timeElapsed = stack.mallocLong(1);
-                        GL33C.glGetQueryObjectui64v(queries.get(ret % GPU_QUERY_COUNT), GL_QUERY_RESULT, timeElapsed);
+                        glGetQueryObjectui64v(queries.get(ret % GPU_QUERY_COUNT), GL_QUERY_RESULT, timeElapsed);
                         ret++;
                         if (n < maxTimes) {
-                            times.put(n, (float)((double)timeElapsed.get(0) * 1e-9));
+                            times.put(n, (float)(timeElapsed.get(0) * 1e-9));
                             n++;
                         }
                     }

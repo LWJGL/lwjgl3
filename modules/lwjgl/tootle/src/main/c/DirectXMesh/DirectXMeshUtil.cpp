@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshUtil.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Utilities
 //
 // Copyright (c) Microsoft Corporation.
@@ -118,7 +118,7 @@ bool DirectX::IsValid(const D3D11_INPUT_ELEMENT_DESC* vbDecl, size_t nDecl) noex
         return false;
     }
 
-    if (nDecl > D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT)
+    if (nDecl > 32 /* D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT */)
     {
         // The upper-limit depends on feature level, so we assume highest value here
         return false;
@@ -126,7 +126,7 @@ bool DirectX::IsValid(const D3D11_INPUT_ELEMENT_DESC* vbDecl, size_t nDecl) noex
 
     for (size_t j = 0; j < nDecl; ++j)
     {
-        size_t bpe = BytesPerElement(vbDecl[j].Format);
+        const size_t bpe = BytesPerElement(vbDecl[j].Format);
         if (!bpe)
         {
             // Not a valid DXGI format or it's not valid for VB usage
@@ -288,7 +288,7 @@ void DirectX::ComputeInputLayout(
             continue;
         }
 
-        size_t bpe = BytesPerElement(vbDecl[j].Format);
+        const size_t bpe = BytesPerElement(vbDecl[j].Format);
         if (!bpe)
         {
             // ignore invalid format
@@ -318,7 +318,7 @@ void DirectX::ComputeInputLayout(
 
         if (strides)
         {
-            uint32_t istride = uint32_t(alignedByteOffset + bpe);
+            const uint32_t istride = uint32_t(alignedByteOffset + bpe);
             strides[slot] = std::max<uint32_t>(strides[slot], istride);
         }
 

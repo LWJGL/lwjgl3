@@ -47,14 +47,14 @@ namespace
                 || i2 >= nVerts)
                 return E_UNEXPECTED;
 
-            XMVECTOR p1 = XMLoadFloat3(&positions[i0]);
-            XMVECTOR p2 = XMLoadFloat3(&positions[i1]);
-            XMVECTOR p3 = XMLoadFloat3(&positions[i2]);
+            const XMVECTOR p1 = XMLoadFloat3(&positions[i0]);
+            const XMVECTOR p2 = XMLoadFloat3(&positions[i1]);
+            const XMVECTOR p3 = XMLoadFloat3(&positions[i2]);
 
-            XMVECTOR u = XMVectorSubtract(p2, p1);
-            XMVECTOR v = XMVectorSubtract(p3, p1);
+            const XMVECTOR u = XMVectorSubtract(p2, p1);
+            const XMVECTOR v = XMVectorSubtract(p3, p1);
 
-            XMVECTOR faceNormal = XMVector3Normalize(XMVector3Cross(u, v));
+            const XMVECTOR faceNormal = XMVector3Normalize(XMVector3Cross(u, v));
 
             vertNormals[i0] = XMVectorAdd(vertNormals[i0], faceNormal);
             vertNormals[i1] = XMVectorAdd(vertNormals[i1], faceNormal);
@@ -75,7 +75,7 @@ namespace
         {
             for (size_t vert = 0; vert < nVerts; ++vert)
             {
-                XMVECTOR n = XMVector3Normalize(vertNormals[vert]);
+                const XMVECTOR n = XMVector3Normalize(vertNormals[vert]);
                 XMStoreFloat3(&normals[vert], n);
             }
         }
@@ -116,32 +116,32 @@ namespace
                 || i2 >= nVerts)
                 return E_UNEXPECTED;
 
-            XMVECTOR p0 = XMLoadFloat3(&positions[i0]);
-            XMVECTOR p1 = XMLoadFloat3(&positions[i1]);
-            XMVECTOR p2 = XMLoadFloat3(&positions[i2]);
+            const XMVECTOR p0 = XMLoadFloat3(&positions[i0]);
+            const XMVECTOR p1 = XMLoadFloat3(&positions[i1]);
+            const XMVECTOR p2 = XMLoadFloat3(&positions[i2]);
 
-            XMVECTOR u = XMVectorSubtract(p1, p0);
-            XMVECTOR v = XMVectorSubtract(p2, p0);
+            const XMVECTOR u = XMVectorSubtract(p1, p0);
+            const XMVECTOR v = XMVectorSubtract(p2, p0);
 
-            XMVECTOR faceNormal = XMVector3Normalize(XMVector3Cross(u, v));
+            const XMVECTOR faceNormal = XMVector3Normalize(XMVector3Cross(u, v));
 
             // Corner 0 -> 1 - 0, 2 - 0
-            XMVECTOR a = XMVector3Normalize(u);
-            XMVECTOR b = XMVector3Normalize(v);
+            const XMVECTOR a = XMVector3Normalize(u);
+            const XMVECTOR b = XMVector3Normalize(v);
             XMVECTOR w0 = XMVector3Dot(a, b);
             w0 = XMVectorClamp(w0, g_XMNegativeOne, g_XMOne);
             w0 = XMVectorACos(w0);
 
             // Corner 1 -> 2 - 1, 0 - 1
-            XMVECTOR c = XMVector3Normalize(XMVectorSubtract(p2, p1));
-            XMVECTOR d = XMVector3Normalize(XMVectorSubtract(p0, p1));
+            const XMVECTOR c = XMVector3Normalize(XMVectorSubtract(p2, p1));
+            const XMVECTOR d = XMVector3Normalize(XMVectorSubtract(p0, p1));
             XMVECTOR w1 = XMVector3Dot(c, d);
             w1 = XMVectorClamp(w1, g_XMNegativeOne, g_XMOne);
             w1 = XMVectorACos(w1);
 
             // Corner 2 -> 0 - 2, 1 - 2
-            XMVECTOR e = XMVector3Normalize(XMVectorSubtract(p0, p2));
-            XMVECTOR f = XMVector3Normalize(XMVectorSubtract(p1, p2));
+            const XMVECTOR e = XMVector3Normalize(XMVectorSubtract(p0, p2));
+            const XMVECTOR f = XMVector3Normalize(XMVectorSubtract(p1, p2));
             XMVECTOR w2 = XMVector3Dot(e, f);
             w2 = XMVectorClamp(w2, g_XMNegativeOne, g_XMOne);
             w2 = XMVectorACos(w2);
@@ -165,7 +165,7 @@ namespace
         {
             for (size_t vert = 0; vert < nVerts; ++vert)
             {
-                XMVECTOR n = XMVector3Normalize(vertNormals[vert]);
+                const XMVECTOR n = XMVector3Normalize(vertNormals[vert]);
                 XMStoreFloat3(&normals[vert], n);
             }
         }
@@ -206,28 +206,28 @@ namespace
                 || i2 >= nVerts)
                 return E_UNEXPECTED;
 
-            XMVECTOR p0 = XMLoadFloat3(&positions[i0]);
-            XMVECTOR p1 = XMLoadFloat3(&positions[i1]);
-            XMVECTOR p2 = XMLoadFloat3(&positions[i2]);
+            const XMVECTOR p0 = XMLoadFloat3(&positions[i0]);
+            const XMVECTOR p1 = XMLoadFloat3(&positions[i1]);
+            const XMVECTOR p2 = XMLoadFloat3(&positions[i2]);
 
-            XMVECTOR u = XMVectorSubtract(p1, p0);
-            XMVECTOR v = XMVectorSubtract(p2, p0);
+            const XMVECTOR u = XMVectorSubtract(p1, p0);
+            const XMVECTOR v = XMVectorSubtract(p2, p0);
 
-            XMVECTOR faceNormal = XMVector3Normalize(XMVector3Cross(u, v));
+            const XMVECTOR faceNormal = XMVector3Normalize(XMVector3Cross(u, v));
 
             // Corner 0 -> 1 - 0, 2 - 0
             XMVECTOR w0 = XMVector3Cross(u, v);
             w0 = XMVector3Length(w0);
 
             // Corner 1 -> 2 - 1, 0 - 1
-            XMVECTOR c = XMVectorSubtract(p2, p1);
-            XMVECTOR d = XMVectorSubtract(p0, p1);
+            const XMVECTOR c = XMVectorSubtract(p2, p1);
+            const XMVECTOR d = XMVectorSubtract(p0, p1);
             XMVECTOR w1 = XMVector3Cross(c, d);
             w1 = XMVector3Length(w1);
 
             // Corner 2 -> 0 - 2, 1 - 2
-            XMVECTOR e = XMVectorSubtract(p0, p2);
-            XMVECTOR f = XMVectorSubtract(p1, p2);
+            const XMVECTOR e = XMVectorSubtract(p0, p2);
+            const XMVECTOR f = XMVectorSubtract(p1, p2);
             XMVECTOR w2 = XMVector3Cross(e, f);
             w2 = XMVector3Length(w2);
 
@@ -250,7 +250,7 @@ namespace
         {
             for (size_t vert = 0; vert < nVerts; ++vert)
             {
-                XMVECTOR n = XMVector3Normalize(vertNormals[vert]);
+                const XMVECTOR n = XMVector3Normalize(vertNormals[vert]);
                 XMStoreFloat3(&normals[vert], n);
             }
         }
@@ -282,7 +282,7 @@ HRESULT DirectX::ComputeNormals(
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
         return HRESULT_E_ARITHMETIC_OVERFLOW;
 
-    bool cw = (flags & CNORM_WIND_CW) ? true : false;
+    const bool cw = (flags & CNORM_WIND_CW) ? true : false;
 
     if (flags & CNORM_WEIGHT_BY_AREA)
     {
@@ -316,7 +316,7 @@ HRESULT DirectX::ComputeNormals(
     if ((uint64_t(nFaces) * 3) >= UINT32_MAX)
         return HRESULT_E_ARITHMETIC_OVERFLOW;
 
-    bool cw = (flags & CNORM_WIND_CW) ? true : false;
+    const bool cw = (flags & CNORM_WIND_CW) ? true : false;
 
     if (flags & CNORM_WEIGHT_BY_AREA)
     {

@@ -114,9 +114,9 @@ HRESULT DirectX::AttributeSort(
     }
 
     std::stable_sort(list.begin(), list.end(), [](const intpair_t& a, const intpair_t& b) noexcept -> bool
-    {
-        return (a.first < b.first);
-    });
+        {
+            return (a.first < b.first);
+        });
 
     auto it = list.begin();
     for (uint32_t j = 0; j < nFaces; ++j, ++it)

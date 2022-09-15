@@ -14,7 +14,7 @@
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 
-#ifndef WIN32
+#ifndef _WIN32
 #define _stricmp strcasecmp
 #endif
 
@@ -158,8 +158,8 @@ HRESULT VBReader::Impl::Initialize(const InputElementDesc* vbDecl, size_t nDecl)
     if (!IsValid(reinterpret_cast<const D3D11_INPUT_ELEMENT_DESC*>(vbDecl), nDecl))
         return E_INVALIDARG;
 
-    assert(nDecl <= D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT);
-    _Analysis_assume_(nDecl <= D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT);
+    assert(nDecl <= 32 /*D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT*/);
+    _Analysis_assume_(nDecl <= 32 /*D3D11_IA_VERTEX_INPUT_STRUCTURE_ELEMENT_COUNT*/);
 
     ComputeInputLayout(reinterpret_cast<const D3D11_INPUT_ELEMENT_DESC*>(vbDecl), nDecl, offsets, mDefaultStrides);
 #endif
@@ -255,7 +255,7 @@ HRESULT VBReader::Impl::AddStream(const void* vb, size_t nVerts, size_t inputSlo
             XMVECTOR v = func(reinterpret_cast<const type*>(ptr));\
             if (x2bias)\
             {\
-                XMVECTOR v2 = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);\
+                const XMVECTOR v2 = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);\
                 v = XMVectorSelect(v, v2, g_XMSelect1110);\
             }\
             *buffer++ = v;\
@@ -271,7 +271,7 @@ HRESULT VBReader::Impl::AddStream(const void* vb, size_t nVerts, size_t inputSlo
             XMVECTOR v = func(reinterpret_cast<const type*>(ptr));\
             if (x2bias)\
             {\
-                XMVECTOR v2 = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);\
+                const XMVECTOR v2 = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);\
                 v = XMVectorSelect(v, v2, g_XMSelect1100);\
             }\
             *buffer++ = v;\
@@ -297,7 +297,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
     if (it == range.second)
         return HRESULT_E_INVALID_NAME;
 
-    uint32_t inputSlot = mInputDesc[it->second].InputSlot;
+    const uint32_t inputSlot = mInputDesc[it->second].InputSlot;
 
     auto vb = static_cast<const uint8_t*>(mBuffers[inputSlot]);
     if (!vb)
@@ -306,7 +306,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
     if (count > mVerts[inputSlot])
         return E_BOUNDS;
 
-    uint32_t stride = mStrides[inputSlot];
+    const uint32_t stride = mStrides[inputSlot];
     if (!stride)
         return E_UNEXPECTED;
 
@@ -401,7 +401,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         {
             if ((ptr + sizeof(uint32_t)) > eptr)
                 return E_UNEXPECTED;
-            XMVECTOR v = XMLoadInt(reinterpret_cast<const uint32_t*>(ptr));
+            const XMVECTOR v = XMLoadInt(reinterpret_cast<const uint32_t*>(ptr));
             *buffer++ = XMConvertVectorUIntToFloat(v, 0);
             ptr += stride;
         }
@@ -412,7 +412,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         {
             if ((ptr + sizeof(int32_t)) > eptr)
                 return E_UNEXPECTED;
-            XMVECTOR v = XMLoadInt(reinterpret_cast<const uint32_t*>(ptr));
+            const XMVECTOR v = XMLoadInt(reinterpret_cast<const uint32_t*>(ptr));
             *buffer++ = XMConvertVectorIntToFloat(v, 0);
             ptr += stride;
         }
@@ -435,7 +435,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         {
             if ((ptr + sizeof(HALF)) > eptr)
                 return E_UNEXPECTED;
-            float v = XMConvertHalfToFloat(*reinterpret_cast<const HALF*>(ptr));
+            const float v = XMConvertHalfToFloat(*reinterpret_cast<const HALF*>(ptr));
             *buffer++ = XMVectorSet(v, 0.f, 0.f, 0.f);
             ptr += stride;
         }
@@ -446,7 +446,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         {
             if ((ptr + sizeof(uint16_t)) > eptr)
                 return E_UNEXPECTED;
-            auto i = *reinterpret_cast<const uint16_t*>(ptr);
+            auto const i = *reinterpret_cast<const uint16_t*>(ptr);
             float f = static_cast<float>(i) / 65535.f;
             if (x2bias)
             {
@@ -463,7 +463,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         {
             if ((ptr + sizeof(uint16_t)) > eptr)
                 return E_UNEXPECTED;
-            auto i = *reinterpret_cast<const uint16_t*>(ptr);
+            auto const i = *reinterpret_cast<const uint16_t*>(ptr);
             *buffer++ = XMVectorSet(static_cast<float>(i), 0.f, 0.f, 0.f);
             ptr += stride;
         }
@@ -474,7 +474,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         {
             if ((ptr + sizeof(int16_t)) > eptr)
                 return E_UNEXPECTED;
-            auto i = *reinterpret_cast<const int16_t*>(ptr);
+            auto const i = *reinterpret_cast<const int16_t*>(ptr);
             *buffer++ = XMVectorSet(static_cast<float>(i) / 32767.f, 0.f, 0.f, 0.f);
             ptr += stride;
         }
@@ -485,7 +485,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         {
             if ((ptr + sizeof(int16_t)) > eptr)
                 return E_UNEXPECTED;
-            auto i = *reinterpret_cast<const int16_t*>(ptr);
+            auto const i = *reinterpret_cast<const int16_t*>(ptr);
             *buffer++ = XMVectorSet(static_cast<float>(i), 0.f, 0.f, 0.f);
             ptr += stride;
         }
@@ -524,7 +524,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         {
             if ((ptr + sizeof(int8_t)) > eptr)
                 return E_UNEXPECTED;
-            auto i = *reinterpret_cast<const int8_t*>(ptr);
+            auto const i = *reinterpret_cast<const int8_t*>(ptr);
             *buffer++ = XMVectorSet(static_cast<float>(i) / 127.f, 0.f, 0.f, 0.f);
             ptr += stride;
         }
@@ -535,51 +535,51 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         {
             if ((ptr + sizeof(int8_t)) > eptr)
                 return E_UNEXPECTED;
-            auto i = *reinterpret_cast<const int8_t*>(ptr);
+            auto const i = *reinterpret_cast<const int8_t*>(ptr);
             *buffer++ = XMVectorSet(static_cast<float>(i), 0.f, 0.f, 0.f);
             ptr += stride;
         }
         break;
 
     case DXGI_FORMAT_B5G6R5_UNORM:
-    {
-        static const XMVECTORF32 s_Scale = { { { 1.f / 31.f, 1.f / 63.f, 1.f / 31.f, 1.f } } };
-        for (size_t icount = 0; icount < count; ++icount)
         {
-            if ((ptr + sizeof(XMU565)) > eptr)
-                return E_UNEXPECTED;
-            XMVECTOR v = XMLoadU565(reinterpret_cast<const XMU565*>(ptr));
-            v = XMVectorMultiply(v, s_Scale);
-            if (x2bias)
+            static const XMVECTORF32 s_Scale = { { { 1.f / 31.f, 1.f / 63.f, 1.f / 31.f, 1.f } } };
+            for (size_t icount = 0; icount < count; ++icount)
             {
-                XMVECTOR v2 = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);
-                v = XMVectorSelect(v, v2, g_XMSelect1110);
+                if ((ptr + sizeof(XMU565)) > eptr)
+                    return E_UNEXPECTED;
+                XMVECTOR v = XMLoadU565(reinterpret_cast<const XMU565*>(ptr));
+                v = XMVectorMultiply(v, s_Scale);
+                if (x2bias)
+                {
+                    const XMVECTOR v2 = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);
+                    v = XMVectorSelect(v, v2, g_XMSelect1110);
+                }
+                *buffer++ = XMVectorSwizzle<2, 1, 0, 3>(v);
+                ptr += stride;
             }
-            *buffer++ = XMVectorSwizzle<2, 1, 0, 3>(v);
-            ptr += stride;
         }
-    }
-    break;
+        break;
 
     case DXGI_FORMAT_B5G5R5A1_UNORM:
-    {
-        static const XMVECTORF32 s_Scale = { { { 1.f / 31.f, 1.f / 31.f, 1.f / 31.f, 1.f } } };
-        for (size_t icount = 0; icount < count; ++icount)
         {
-            if ((ptr + sizeof(XMU555)) > eptr)
-                return E_UNEXPECTED;
-            XMVECTOR v = XMLoadU555(reinterpret_cast<const XMU555*>(ptr));
-            v = XMVectorMultiply(v, s_Scale);
-            if (x2bias)
+            static const XMVECTORF32 s_Scale = { { { 1.f / 31.f, 1.f / 31.f, 1.f / 31.f, 1.f } } };
+            for (size_t icount = 0; icount < count; ++icount)
             {
-                XMVECTOR v2 = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);
-                v = XMVectorSelect(v, v2, g_XMSelect1110);
+                if ((ptr + sizeof(XMU555)) > eptr)
+                    return E_UNEXPECTED;
+                XMVECTOR v = XMLoadU555(reinterpret_cast<const XMU555*>(ptr));
+                v = XMVectorMultiply(v, s_Scale);
+                if (x2bias)
+                {
+                    const XMVECTOR v2 = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);
+                    v = XMVectorSelect(v, v2, g_XMSelect1110);
+                }
+                *buffer++ = XMVectorSwizzle<2, 1, 0, 3>(v);
+                ptr += stride;
             }
-            *buffer++ = XMVectorSwizzle<2, 1, 0, 3>(v);
-            ptr += stride;
         }
-    }
-    break;
+        break;
 
     case DXGI_FORMAT_B8G8R8A8_UNORM:
         for (size_t icount = 0; icount < count; ++icount)
@@ -604,7 +604,7 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
             XMVECTOR v = XMLoadUByteN4(reinterpret_cast<const XMUBYTEN4*>(ptr));
             if (x2bias)
             {
-                XMVECTOR v2 = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);
+                const XMVECTOR v2 = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);
                 v = XMVectorSelect(v, v2, g_XMSelect1110);
             }
             v = XMVectorSwizzle<2, 1, 0, 3>(v);
@@ -614,23 +614,23 @@ HRESULT VBReader::Impl::Read(XMVECTOR* buffer, const char* semanticName, unsigne
         break;
 
     case DXGI_FORMAT_B4G4R4A4_UNORM:
-    {
-        static const XMVECTORF32 s_Scale = { { { 1.f / 15.f, 1.f / 15.f, 1.f / 15.f, 1.f / 15.f } } };
-        for (size_t icount = 0; icount < count; ++icount)
         {
-            if ((ptr + sizeof(XMUNIBBLE4)) > eptr)
-                return E_UNEXPECTED;
-            XMVECTOR v = XMLoadUNibble4(reinterpret_cast<const XMUNIBBLE4*>(ptr));
-            v = XMVectorMultiply(v, s_Scale);
-            if (x2bias)
+            static const XMVECTORF32 s_Scale = { { { 1.f / 15.f, 1.f / 15.f, 1.f / 15.f, 1.f / 15.f } } };
+            for (size_t icount = 0; icount < count; ++icount)
             {
-                v = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);
+                if ((ptr + sizeof(XMUNIBBLE4)) > eptr)
+                    return E_UNEXPECTED;
+                XMVECTOR v = XMLoadUNibble4(reinterpret_cast<const XMUNIBBLE4*>(ptr));
+                v = XMVectorMultiply(v, s_Scale);
+                if (x2bias)
+                {
+                    v = XMVectorMultiplyAdd(v, g_XMTwo, g_XMNegativeOne);
+                }
+                *buffer++ = XMVectorSwizzle<2, 1, 0, 3>(v);
+                ptr += stride;
             }
-            *buffer++ = XMVectorSwizzle<2, 1, 0, 3>(v);
-            ptr += stride;
         }
-    }
-    break;
+        break;
 
     case XBOX_DXGI_FORMAT_R10G10B10_SNORM_A2_UNORM:
         // Xbox One specific format
@@ -706,7 +706,7 @@ HRESULT VBReader::Read(float* buffer, const char* semanticName, unsigned int sem
     float* dptr = buffer;
     for (size_t j = 0; j < count; ++j)
     {
-        XMVECTOR v = *(temp)++;
+        const XMVECTOR v = *(temp)++;
         XMStoreFloat(dptr++, v);
     }
 
@@ -727,7 +727,7 @@ HRESULT VBReader::Read(XMFLOAT2* buffer, const char* semanticName, unsigned int 
     XMFLOAT2* dptr = buffer;
     for (size_t j = 0; j < count; ++j)
     {
-        XMVECTOR v = *(temp)++;
+        const XMVECTOR v = *(temp)++;
         XMStoreFloat2(dptr++, v);
     }
 
@@ -748,7 +748,7 @@ HRESULT VBReader::Read(XMFLOAT3* buffer, const char* semanticName, unsigned int 
     XMFLOAT3* dptr = buffer;
     for (size_t j = 0; j < count; ++j)
     {
-        XMVECTOR v = *(temp)++;
+        const XMVECTOR v = *(temp)++;
         XMStoreFloat3(dptr++, v);
     }
 
@@ -769,7 +769,7 @@ HRESULT VBReader::Read(XMFLOAT4* buffer, const char* semanticName, unsigned int 
     XMFLOAT4* dptr = buffer;
     for (size_t j = 0; j < count; ++j)
     {
-        XMVECTOR v = *(temp)++;
+        const XMVECTOR v = *(temp)++;
         XMStoreFloat4(dptr++, v);
     }
 

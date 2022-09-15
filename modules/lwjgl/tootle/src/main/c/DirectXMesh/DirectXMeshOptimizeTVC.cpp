@@ -44,9 +44,9 @@ namespace
             if (!mPhysicalNeighbors)
                 return E_OUTOFMEMORY;
 
-#ifdef _DEBUG
+        #ifdef _DEBUG
             memset(mPhysicalNeighbors.get(), 0xcd, sizeof(neighborInfo) * nFaces);
-#endif
+        #endif
 
             mFaceOffset = 0;
             mFaceCount = 0;
@@ -63,8 +63,8 @@ namespace
                     mMaxSubset = it.second;
                 }
 
-                uint32_t faceOffset = uint32_t(it.first);
-                uint32_t faceMax = uint32_t(it.first + it.second);
+                const uint32_t faceOffset = uint32_t(it.first);
+                const uint32_t faceMax = uint32_t(it.first + it.second);
 
                 for (uint32_t face = faceOffset; face < faceMax; ++face)
                 {
@@ -85,7 +85,7 @@ namespace
                         // unused and degenerate faces should not have neighbors
                         for (uint32_t point = 0; point < 3; ++point)
                         {
-                            uint32_t k = adjacency[face * 3 + point];
+                            const uint32_t k = adjacency[face * 3 + point];
 
                             if (k != UNUSED32)
                             {
@@ -122,7 +122,7 @@ namespace
                                 }
                                 else
                                 {
-                                    uint32_t edgeBack = find_edge<uint32_t>(&adjacency[neighbor * 3], face);
+                                    const uint32_t edgeBack = find_edge<uint32_t>(&adjacency[neighbor * 3], face);
                                     if (edgeBack < 3)
                                     {
                                         index_t p1 = indices[face * 3 + n];
@@ -176,7 +176,7 @@ namespace
             if ((uint64_t(faceOffset) + uint64_t(faceCount)) >= UINT32_MAX)
                 return HRESULT_E_ARITHMETIC_OVERFLOW;
 
-            uint32_t faceMax = uint32_t(faceOffset + faceCount);
+            const uint32_t faceMax = uint32_t(faceOffset + faceCount);
 
             if (faceMax > nFaces)
                 return E_UNEXPECTED;
@@ -216,7 +216,7 @@ namespace
                     }
                 }
 
-                uint32_t faceIndex = uint32_t(face - faceOffset);
+                const uint32_t faceIndex = uint32_t(face - faceOffset);
                 mListElements[faceIndex].processed = false;
                 mListElements[faceIndex].unprocessed = unprocessed;
 
@@ -256,7 +256,7 @@ namespace
             assert(face < mTotalFaces);
             assert((face >= mFaceOffset) || (face < (mFaceOffset + mFaceCount)));
 
-            uint32_t faceIndex = uint32_t(face - mFaceOffset);
+            const uint32_t faceIndex = uint32_t(face - mFaceOffset);
 
             assert(!mListElements[faceIndex].processed);
             mListElements[faceIndex].processed = true;
@@ -265,7 +265,7 @@ namespace
 
             for (uint32_t n = 0; n < 3; ++n)
             {
-                uint32_t neighbor = mPhysicalNeighbors[face].neighbors[n];
+                const uint32_t neighbor = mPhysicalNeighbors[face].neighbors[n];
                 if ((neighbor != UNUSED32) && !isprocessed(neighbor))
                 {
                     decrement(neighbor);
@@ -284,24 +284,24 @@ namespace
 
             for (uint32_t n = 0; n < 3; ++n)
             {
-                uint32_t neighbor = mPhysicalNeighbors[face].neighbors[n];
+                const uint32_t neighbor = mPhysicalNeighbors[face].neighbors[n];
 
                 if ((neighbor == UNUSED32) || isprocessed(neighbor))
                     continue;
 
-                uint32_t unprocessed = unprocessed_count(neighbor);
+                const uint32_t unprocessed = unprocessed_count(neighbor);
                 assert(unprocessed < 3);
 
                 uint32_t mintemp = UNUSED32;
 
                 for (uint32_t nt = 0; nt < 3; ++nt)
                 {
-                    uint32_t neighborTemp = mPhysicalNeighbors[neighbor].neighbors[nt];
+                    const uint32_t neighborTemp = mPhysicalNeighbors[neighbor].neighbors[nt];
 
                     if ((neighborTemp == UNUSED32) || isprocessed(neighborTemp))
                         continue;
 
-                    uint32_t next_count = unprocessed_count(neighborTemp);
+                    const uint32_t next_count = unprocessed_count(neighborTemp);
                     if (next_count < mintemp)
                         mintemp = next_count;
                 }
@@ -347,7 +347,7 @@ namespace
 
             uint32_t unprocessed = mListElements[faceIndex].unprocessed;
 
-            uint32_t head = mUnprocessed[unprocessed];
+            const uint32_t head = mUnprocessed[unprocessed];
             mListElements[faceIndex].next = head;
 
             if (head != UNUSED32)
@@ -366,8 +366,8 @@ namespace
             {
                 assert(mUnprocessed[mListElements[faceIndex].unprocessed] != faceIndex);
 
-                uint32_t prev = mListElements[faceIndex].prev;
-                uint32_t next = mListElements[faceIndex].next;
+                const uint32_t prev = mListElements[faceIndex].prev;
+                const uint32_t next = mListElements[faceIndex].next;
 
                 mListElements[prev].next = next;
 
@@ -401,7 +401,7 @@ namespace
             assert((face >= mFaceOffset) || (face < (mFaceOffset + mFaceCount)));
             assert(!isprocessed(face));
 
-            uint32_t faceIndex = uint32_t(face - mFaceOffset);
+            const uint32_t faceIndex = uint32_t(face - mFaceOffset);
 
             assert((mListElements[faceIndex].unprocessed >= 1) && (mListElements[faceIndex].unprocessed <= 3));
 
@@ -439,10 +439,10 @@ namespace
     using facecorner_t = std::pair<uint32_t, uint32_t>;
 
     template<class index_t>
-    inline facecorner_t counterclockwise_corner(facecorner_t corner, mesh_status<index_t>& status) noexcept
+    inline facecorner_t counterclockwise_corner(facecorner_t corner, const mesh_status<index_t>& status) noexcept
     {
         assert(corner.second != UNUSED32);
-        uint32_t edge = (corner.second + 2) % 3;
+        const uint32_t edge = (corner.second + 2) % 3;
         uint32_t neighbor = status.get_neighbors(corner.first, edge);
         uint32_t point = (neighbor == UNUSED32) ? UNUSED32 : find_edge(status.get_neighborsPtr(neighbor), corner.first);
         return facecorner_t(neighbor, point);
@@ -613,7 +613,7 @@ namespace
         memset(faceRemapInverse.get(), 0xff, sizeof(uint32_t) * nFaces);
 
         assert(vertexCache >= restart);
-        uint32_t desired = vertexCache - restart;
+        const uint32_t desired = vertexCache - restart;
 
         for (const auto& it : subsets)
         {
@@ -637,14 +637,14 @@ namespace
                 if (curCorner.first == UNUSED32)
                     break;
 
-                uint32_t n0 = status.get_neighbors(curCorner.first, 0);
+                const uint32_t n0 = status.get_neighbors(curCorner.first, 0);
                 if ((n0 != UNUSED32) && !status.isprocessed(n0))
                 {
                     curCorner.second = 1;
                 }
                 else
                 {
-                    uint32_t n1 = status.get_neighbors(curCorner.first, 1);
+                    const uint32_t n1 = status.get_neighbors(curCorner.first, 1);
                     if ((n1 != UNUSED32) && !status.isprocessed(n1))
                     {
                         curCorner.second = 2;
@@ -667,7 +667,7 @@ namespace
                         uint32_t nf = 0;
                         for (facecorner_t temp = curCorner; ; )
                         {
-                            facecorner_t next = counterclockwise_corner<index_t>(temp, status);
+                            const facecorner_t next = counterclockwise_corner<index_t>(temp, status);
                             if ((next.first == UNUSED32) || status.isprocessed(next.first))
                                 break;
                             ++nf;
@@ -706,11 +706,11 @@ namespace
                         if (!vcache.access(indices[curCorner.first * 3 + 2]))
                             locnext += 1;
 
-                        facecorner_t intCorner = counterclockwise_corner<index_t>(curCorner, status);
-                        bool interiornei = (intCorner.first != UNUSED32) && !status.isprocessed(intCorner.first);
+                        const facecorner_t intCorner = counterclockwise_corner<index_t>(curCorner, status);
+                        const bool interiornei = (intCorner.first != UNUSED32) && !status.isprocessed(intCorner.first);
 
-                        facecorner_t extCorner = counterclockwise_corner<index_t>(facecorner_t(curCorner.first, (curCorner.second + 2) % 3), status);
-                        bool exteriornei = (extCorner.first != UNUSED32) && !status.isprocessed(extCorner.first);
+                        const facecorner_t extCorner = counterclockwise_corner<index_t>(facecorner_t(curCorner.first, (curCorner.second + 2) % 3), status);
+                        const bool exteriornei = (extCorner.first != UNUSED32) && !status.isprocessed(extCorner.first);
 
                         if (interiornei)
                         {

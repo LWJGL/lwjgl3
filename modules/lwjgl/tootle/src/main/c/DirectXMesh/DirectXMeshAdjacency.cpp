@@ -54,7 +54,7 @@ namespace
                 // Percolate down
                 uint32_t iulI = vert;
                 uint32_t iulJ = vert + vert + 1;
-                uint32_t ulT = index[iulI];
+                const uint32_t ulT = index[iulI];
 
                 while (iulJ < iulLim)
                 {
@@ -62,7 +62,7 @@ namespace
 
                     if (iulJ + 1 < iulLim)
                     {
-                        uint32_t ulJ1 = index[iulJ + 1];
+                        const uint32_t ulJ1 = index[iulJ + 1];
                         if (positions[ulJ1].x <= positions[ulJ].x)
                         {
                             iulJ++;
@@ -84,7 +84,7 @@ namespace
             // Sort the heap
             while (--iulLim != uint32_t(-1))
             {
-                uint32_t ulT = index[iulLim];
+                const uint32_t ulT = index[iulLim];
                 index[iulLim] = index[0];
 
                 // Percolate down
@@ -98,7 +98,7 @@ namespace
 
                     if (iulJ + 1 < iulLim)
                     {
-                        uint32_t ulJ1 = index[iulJ + 1];
+                        const uint32_t ulJ1 = index[iulJ + 1];
                         if (positions[ulJ1].x <= positions[ulJ].x)
                         {
                             iulJ++;
@@ -177,7 +177,7 @@ namespace
                 auto px = reinterpret_cast<const uint32_t*>(&positions[vert].x);
                 auto py = reinterpret_cast<const uint32_t*>(&positions[vert].y);
                 auto pz = reinterpret_cast<const uint32_t*>(&positions[vert].z);
-                uint32_t hashKey = (*px + *py + *pz) % uint32_t(hashSize);
+                const uint32_t hashKey = (*px + *py + *pz) % uint32_t(hashSize);
 
                 uint32_t found = UNUSED32;
 
@@ -193,7 +193,7 @@ namespace
 
                         while (head != UNUSED32)
                         {
-                            uint32_t face = head / 3;
+                            const uint32_t face = head / 3;
                             assert(face < nFaces);
                             _Analysis_assume_(face < nFaces);
 
@@ -252,7 +252,7 @@ namespace
 
             memset(pointRep, 0xff, sizeof(uint32_t) * nVerts);
 
-            XMVECTOR vepsilon = XMVectorReplicate(epsilon * epsilon);
+            const XMVECTOR vepsilon = XMVectorReplicate(epsilon * epsilon);
 
             uint32_t head = 0;
             uint32_t tail = 0;
@@ -274,7 +274,7 @@ namespace
                 {
                     pointRep[tailIndex] = tailIndex;
 
-                    XMVECTOR outer = XMLoadFloat3(&positions[tailIndex]);
+                    const XMVECTOR outer = XMLoadFloat3(&positions[tailIndex]);
 
                     for (uint32_t current = tail + 1; current < head; ++current)
                     {
@@ -285,9 +285,9 @@ namespace
                         // if the point is already assigned, ignore it
                         if (pointRep[curIndex] == UNUSED32)
                         {
-                            XMVECTOR inner = XMLoadFloat3(&positions[curIndex]);
+                            const XMVECTOR inner = XMLoadFloat3(&positions[curIndex]);
 
-                            XMVECTOR diff = XMVector3LengthSq(XMVectorSubtract(inner, outer));
+                            const XMVECTOR diff = XMVector3LengthSq(XMVectorSubtract(inner, outer));
 
                             if (XMVector2Less(diff, vepsilon))
                             {
@@ -297,7 +297,7 @@ namespace
 
                                 while (headvc != UNUSED32)
                                 {
-                                    uint32_t face = headvc / 3;
+                                    const uint32_t face = headvc / 3;
                                     assert(face < nFaces);
                                     _Analysis_assume_(face < nFaces);
 
@@ -370,9 +370,9 @@ namespace
                 || i2 >= nVerts)
                 return E_UNEXPECTED;
 
-            uint32_t v1 = pointRep[i0];
-            uint32_t v2 = pointRep[i1];
-            uint32_t v3 = pointRep[i2];
+            const uint32_t v1 = pointRep[i0];
+            const uint32_t v2 = pointRep[i1];
+            const uint32_t v3 = pointRep[i2];
 
             // filter out degenerate triangles
             if (v1 == v2 || v1 == v3 || v2 == v3)
@@ -380,11 +380,11 @@ namespace
 
             for (uint32_t point = 0; point < 3; ++point)
             {
-                uint32_t va = pointRep[indices[face * 3 + point]];
-                uint32_t vb = pointRep[indices[face * 3 + ((point + 1) % 3)]];
-                uint32_t vOther = pointRep[indices[face * 3 + ((point + 2) % 3)]];
+                const uint32_t va = pointRep[indices[face * 3 + point]];
+                const uint32_t vb = pointRep[indices[face * 3 + ((point + 1) % 3)]];
+                const uint32_t vOther = pointRep[indices[face * 3 + ((point + 2) % 3)]];
 
-                uint32_t hashKey = va % hashSize;
+                const uint32_t hashKey = va % hashSize;
 
                 assert(freeEntry < (3 * nFaces));
                 _Analysis_assume_(freeEntry < (3 * nFaces));
@@ -425,9 +425,9 @@ namespace
             _Analysis_assume_(i1 < nVerts);
             _Analysis_assume_(i2 < nVerts);
 
-            uint32_t v1 = pointRep[i0];
-            uint32_t v2 = pointRep[i1];
-            uint32_t v3 = pointRep[i2];
+            const uint32_t v1 = pointRep[i0];
+            const uint32_t v2 = pointRep[i1];
+            const uint32_t v3 = pointRep[i2];
 
             // filter out degenerate triangles
             if (v1 == v2 || v1 == v3 || v2 == v3)
@@ -439,11 +439,11 @@ namespace
                     continue;
 
                 // see if edge already entered, if not then enter it
-                uint32_t va = pointRep[indices[face * 3 + ((point + 1) % 3)]];
-                uint32_t vb = pointRep[indices[face * 3 + point]];
-                uint32_t vOther = pointRep[indices[face * 3 + ((point + 2) % 3)]];
+                const uint32_t va = pointRep[indices[face * 3 + ((point + 1) % 3)]];
+                const uint32_t vb = pointRep[indices[face * 3 + point]];
+                const uint32_t vOther = pointRep[indices[face * 3 + ((point + 2) % 3)]];
 
-                uint32_t hashKey = va % hashSize;
+                const uint32_t hashKey = va % hashSize;
 
                 edgeHashEntry* current = hashTable[hashKey];
                 edgeHashEntry* prev = nullptr;
@@ -478,39 +478,39 @@ namespace
                     {
                         if ((current->v2 == vb) && (current->v1 == va))
                         {
-                            XMVECTOR pB1 = XMLoadFloat3(&positions[vb]);
-                            XMVECTOR pB2 = XMLoadFloat3(&positions[va]);
-                            XMVECTOR pB3 = XMLoadFloat3(&positions[vOther]);
+                            const XMVECTOR pB1 = XMLoadFloat3(&positions[vb]);
+                            const XMVECTOR pB2 = XMLoadFloat3(&positions[va]);
+                            const XMVECTOR pB3 = XMLoadFloat3(&positions[vOther]);
 
                             XMVECTOR v12 = XMVectorSubtract(pB1, pB2);
                             XMVECTOR v13 = XMVectorSubtract(pB1, pB3);
 
-                            XMVECTOR bnormal = XMVector3Normalize(XMVector3Cross(v12, v13));
+                            const XMVECTOR bnormal = XMVector3Normalize(XMVector3Cross(v12, v13));
 
                             if (bestDiff == -2.f)
                             {
-                                XMVECTOR pA1 = XMLoadFloat3(&positions[found->v1]);
-                                XMVECTOR pA2 = XMLoadFloat3(&positions[found->v2]);
-                                XMVECTOR pA3 = XMLoadFloat3(&positions[found->vOther]);
+                                const XMVECTOR pA1 = XMLoadFloat3(&positions[found->v1]);
+                                const XMVECTOR pA2 = XMLoadFloat3(&positions[found->v2]);
+                                const XMVECTOR pA3 = XMLoadFloat3(&positions[found->vOther]);
 
                                 v12 = XMVectorSubtract(pA1, pA2);
                                 v13 = XMVectorSubtract(pA1, pA3);
 
-                                XMVECTOR anormal = XMVector3Normalize(XMVector3Cross(v12, v13));
+                                const XMVECTOR anormal = XMVector3Normalize(XMVector3Cross(v12, v13));
 
                                 bestDiff = XMVectorGetX(XMVector3Dot(anormal, bnormal));
                             }
 
-                            XMVECTOR pA1 = XMLoadFloat3(&positions[current->v1]);
-                            XMVECTOR pA2 = XMLoadFloat3(&positions[current->v2]);
-                            XMVECTOR pA3 = XMLoadFloat3(&positions[current->vOther]);
+                            const XMVECTOR pA1 = XMLoadFloat3(&positions[current->v1]);
+                            const XMVECTOR pA2 = XMLoadFloat3(&positions[current->v2]);
+                            const XMVECTOR pA3 = XMLoadFloat3(&positions[current->vOther]);
 
                             v12 = XMVectorSubtract(pA1, pA2);
                             v13 = XMVectorSubtract(pA1, pA3);
 
-                            XMVECTOR anormal = XMVector3Normalize(XMVector3Cross(v12, v13));
+                            const XMVECTOR anormal = XMVector3Normalize(XMVector3Cross(v12, v13));
 
-                            float diff = XMVectorGetX(XMVector3Dot(anormal, bnormal));
+                            const float diff = XMVectorGetX(XMVector3Dot(anormal, bnormal));
 
                             // if face normals are closer, use new match
                             if (diff > bestDiff)
@@ -545,7 +545,7 @@ namespace
                     adjacency[face * 3 + point] = foundFace;
 
                     // Check for other edge
-                    uint32_t hashKey2 = vb % hashSize;
+                    const uint32_t hashKey2 = vb % hashSize;
 
                     current = hashTable[hashKey2];
                     prev = nullptr;
@@ -601,11 +601,11 @@ namespace
 
                         if (point2 < 3)
                         {
-#ifndef NDEBUG
+                        #ifndef NDEBUG
                             uint32_t testPoint = indices[foundFace * 3 + ((point2 + 1) % 3)];
                             testPoint = pointRep[testPoint];
                             assert(testPoint == vb);
-#endif
+                        #endif
                             assert(adjacency[foundFace * 3 + point2] == UNUSED32);
 
                             // update neighbor to point back to this face match edge

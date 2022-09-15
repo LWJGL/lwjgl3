@@ -66,9 +66,9 @@ namespace
                 || i2 >= nVerts)
                 return E_UNEXPECTED;
 
-            XMVECTOR t0 = XMLoadFloat2(&texcoords[i0]);
-            XMVECTOR t1 = XMLoadFloat2(&texcoords[i1]);
-            XMVECTOR t2 = XMLoadFloat2(&texcoords[i2]);
+            const XMVECTOR t0 = XMLoadFloat2(&texcoords[i0]);
+            const XMVECTOR t1 = XMLoadFloat2(&texcoords[i1]);
+            const XMVECTOR t2 = XMLoadFloat2(&texcoords[i2]);
 
             XMVECTOR s = XMVectorMergeXY(XMVectorSubtract(t1, t0), XMVectorSubtract(t2, t0));
 
@@ -85,8 +85,8 @@ namespace
             m0.r[1] = XMVectorPermute<1, 0, 4, 5>(s, g_XMZero);
             m0.r[2] = m0.r[3] = g_XMZero;
 
-            XMVECTOR p0 = XMLoadFloat3(&positions[i0]);
-            XMVECTOR p1 = XMLoadFloat3(&positions[i1]);
+            const XMVECTOR p0 = XMLoadFloat3(&positions[i0]);
+            const XMVECTOR p1 = XMLoadFloat3(&positions[i1]);
             XMVECTOR p2 = XMLoadFloat3(&positions[i2]);
 
             XMMATRIX m1;
@@ -94,7 +94,7 @@ namespace
             m1.r[1] = XMVectorSubtract(p2, p0);
             m1.r[2] = m1.r[3] = g_XMZero;
 
-            XMMATRIX uv = XMMatrixMultiply(m0, m1);
+            const XMMATRIX uv = XMMatrixMultiply(m0, m1);
 
             tangent1[i0] = XMVectorAdd(tangent1[i0], uv.r[0]);
             tangent1[i1] = XMVectorAdd(tangent1[i1], uv.r[0]);
@@ -111,17 +111,17 @@ namespace
             XMVECTOR b0 = XMLoadFloat3(&normals[j]);
             b0 = XMVector3Normalize(b0);
 
-            XMVECTOR tan1 = tangent1[j];
+            const XMVECTOR tan1 = tangent1[j];
             XMVECTOR b1 = XMVectorSubtract(tan1, XMVectorMultiply(XMVector3Dot(b0, tan1), b0));
             b1 = XMVector3Normalize(b1);
 
-            XMVECTOR tan2 = tangent2[j];
+            const XMVECTOR tan2 = tangent2[j];
             XMVECTOR b2 = XMVectorSubtract(XMVectorSubtract(tan2, XMVectorMultiply(XMVector3Dot(b0, tan2), b0)), XMVectorMultiply(XMVector3Dot(b1, tan2), b1));
             b2 = XMVector3Normalize(b2);
 
             // handle degenerate vectors
-            float len1 = XMVectorGetX(XMVector3Length(b1));
-            float len2 = XMVectorGetY(XMVector3Length(b2));
+            const float len1 = XMVectorGetX(XMVector3Length(b1));
+            const float len2 = XMVectorGetY(XMVector3Length(b2));
 
             if ((len1 <= EPSILON) || (len2 <= EPSILON))
             {
@@ -140,9 +140,9 @@ namespace
                     // Reset both tangent and bi-tangent from normal
                     XMVECTOR axis;
 
-                    float d0 = fabsf(XMVectorGetX(XMVector3Dot(g_XMIdentityR0, b0)));
-                    float d1 = fabsf(XMVectorGetX(XMVector3Dot(g_XMIdentityR1, b0)));
-                    float d2 = fabsf(XMVectorGetX(XMVector3Dot(g_XMIdentityR2, b0)));
+                    const float d0 = fabsf(XMVectorGetX(XMVector3Dot(g_XMIdentityR0, b0)));
+                    const float d1 = fabsf(XMVectorGetX(XMVector3Dot(g_XMIdentityR1, b0)));
+                    const float d2 = fabsf(XMVectorGetX(XMVector3Dot(g_XMIdentityR2, b0)));
                     if (d0 < d1)
                     {
                         axis = (d0 < d2) ? g_XMIdentityR0 : g_XMIdentityR2;
@@ -169,7 +169,7 @@ namespace
             if (tangents4)
             {
                 XMVECTOR bi = XMVector3Cross(b0, tan1);
-                float w = XMVector3Less(XMVector3Dot(bi, tan2), g_XMZero) ? -1.f : 1.f;
+                const float w = XMVector3Less(XMVector3Dot(bi, tan2), g_XMZero) ? -1.f : 1.f;
 
                 bi = XMVectorSetW(b1, w);
                 XMStoreFloat4(&tangents4[j], bi);

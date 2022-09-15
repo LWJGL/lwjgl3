@@ -59,7 +59,7 @@ namespace
                 assert(outputi < (nFaces * 6));
                 _Analysis_assume_(outputi < (nFaces * 6));
 
-                uint32_t a = adjacency[face * 3 + point];
+                const uint32_t a = adjacency[face * 3 + point];
                 if (a == UNUSED32)
                 {
                     indicesAdj[outputi] = indices[face * 3 + ((point + 2) % 3)];
@@ -89,7 +89,7 @@ namespace
                         {
                             assert(a < nFaces);
                             _Analysis_assume_(a < nFaces);
-                            uint32_t ak = indices[a * 3 + k];
+                            const uint32_t ak = indices[a * 3 + k];
                             if (ak == index_t(-1))
                                 break;
 

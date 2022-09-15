@@ -12,7 +12,7 @@
 #pragma once
 
 // Off by default warnings
-#pragma warning(disable : 4619 4616 4061 4365 4514 4571 4623 4625 4626 4628 4668 4710 4711 4746 4774 4820 4987 5026 5027 5031 5032 5039 5045 5219 26812)
+#pragma warning(disable : 4619 4616 4061 4365 4514 4571 4623 4625 4626 4628 4668 4710 4711 4746 4774 4820 4987 5026 5027 5031 5032 5039 5045 5219 5246 26812)
 // C4619/4616 #pragma warning warnings
 // C4061 enumerator 'X' in switch of enum 'X' is not explicitly handled by a case label
 // C4365 signed/unsigned mismatch
@@ -35,6 +35,7 @@
 // C5039 pointer or reference to potentially throwing function passed to extern C function under - EHc
 // C5045 Spectre mitigation warning
 // C5219 implicit conversion from 'int' to 'float', possible loss of data
+// C5246 the initialization of a subobject should be wrapped in braces
 // 26812: The enum type 'x' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).
 
 // Windows 8.1 SDK related Off by default warnings
@@ -57,14 +58,14 @@
 #pragma clang diagnostic ignored "-Wreserved-id-macro"
 #endif
 
-#if defined(WIN32) || defined(_WIN32)
+#ifdef _WIN32
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
 
 #pragma warning(push)
 #pragma warning(disable : 4005)
-#define NOMINMAX
+#define NOMINMAX 1
 #define NODRAWTEXT
 #define NOGDI
 #define NOBITMAP
@@ -74,6 +75,10 @@
 #pragma warning(pop)
 
 #include <Windows.h>
+
+#ifdef __MINGW32__
+#include <unknwn.h>
+#endif
 
 #ifndef _WIN32_WINNT_WIN10
 #define _WIN32_WINNT_WIN10 0x0A00
@@ -123,7 +128,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <mutex>
 #endif
 
@@ -158,7 +163,7 @@ namespace DirectX
     //---------------------------------------------------------------------------------
     constexpr uint32_t UNUSED32 = uint32_t(-1);
 
-#if defined(__d3d11_h__) || defined(__d3d11_x_h__)
+#if (defined(__d3d11_h__) || defined(__d3d11_x_h__)) && !defined(__MINGW32__)
     static_assert(D3D11_16BIT_INDEX_STRIP_CUT_VALUE == uint16_t(-1), "Mismatch with Direct3D11");
     static_assert(D3D11_16BIT_INDEX_STRIP_CUT_VALUE == UINT16_MAX, "Mismatch with Direct3D11");
 
@@ -198,7 +203,9 @@ namespace DirectX
             m_indices(indices),
             m_nFaces(nFaces),
             m_clockWise(false),
-            m_stopOnBoundary(false) {}
+            m_stopOnBoundary(false)
+        {
+        }
 
         void initialize(uint32_t face, uint32_t point, WalkType wtype) noexcept
         {
@@ -239,12 +246,12 @@ namespace DirectX
         {
             assert(!done());
 
-            uint32_t ret = m_currentFace;
+            const uint32_t ret = m_currentFace;
             m_currentEdge = m_nextEdge;
 
             for (;;)
             {
-                uint32_t prevFace = m_currentFace;
+                const uint32_t prevFace = m_currentFace;
 
                 assert((size_t(m_currentFace) * 3 + m_nextEdge) < (m_nFaces * 3));
                 _Analysis_assume_((size_t(m_currentFace) * 3 + m_nextEdge) < (m_nFaces * 3));
@@ -313,7 +320,7 @@ namespace DirectX
             m_currentFace = m_face;
 
             m_nextEdge = find(m_currentFace, m_pointIndex);
-            uint32_t initialNextEdge = m_nextEdge;
+            const uint32_t initialNextEdge = m_nextEdge;
             assert(m_nextEdge < 3);
             _Analysis_assume_(m_nextEdge < 3);
 
@@ -341,7 +348,8 @@ namespace DirectX
 
                     m_nextEdge = (m_nextEdge + 2) % 3;
                 }
-            } while ((m_currentFace != m_face) && (m_currentFace != UNUSED32));
+            }
+            while ((m_currentFace != m_face) && (m_currentFace != UNUSED32));
 
             if (m_currentFace == UNUSED32)
             {

@@ -45,7 +45,7 @@ namespace
 
         for (size_t j = 0; j < nFaces; ++j)
         {
-            uint32_t src = faceRemap[j];
+            const uint32_t src = faceRemap[j];
 
             if (src == UNUSED32)
                 continue;
@@ -136,9 +136,9 @@ namespace
 
                 if (adj)
                 {
-                    uint32_t a0 = adj[dest * 3];
-                    uint32_t a1 = adj[dest * 3 + 1];
-                    uint32_t a2 = adj[dest * 3 + 2];
+                    const uint32_t a0 = adj[dest * 3];
+                    const uint32_t a1 = adj[dest * 3 + 1];
+                    const uint32_t a2 = adj[dest * 3 + 2];
 
                     adj[dest * 3] = adj[j * 3];
                     adj[dest * 3 + 1] = adj[j * 3 + 1];
@@ -220,22 +220,22 @@ namespace
             while (dest != j)
             {
                 // Swap vertex
-#ifdef _PREFAST_
-#pragma prefast(push)
-#pragma prefast(disable : 26019, "PREfast noise: Esp:1307")
-#endif
+            #ifdef _PREFAST_
+            #pragma prefast(push)
+            #pragma prefast(disable : 26019, "PREfast noise: Esp:1307")
+            #endif
                 memcpy(vbtemp, ptr + dest*stride, stride);
                 memcpy(ptr + dest*stride, ptr + j*stride, stride);
                 memcpy(ptr + j*stride, vbtemp, stride);
-#ifdef _PREFAST_
-#pragma prefast(pop)
-#endif
+            #ifdef _PREFAST_
+            #pragma prefast(pop)
+            #endif
 
                 if (pointRep)
                 {
                     std::swap(pointRep[dest], pointRep[j]);
                     // Remap
-                    uint32_t pr = pointRep[dest];
+                    const uint32_t pr = pointRep[dest];
                     if (pr < nVerts)
                     {
                         pointRep[dest] = vertexRemapInverse[pr];
@@ -262,7 +262,7 @@ namespace
             if (pointRep)
             {
                 // Remap
-                uint32_t pr = pointRep[j];
+                const uint32_t pr = pointRep[j];
                 if (pr < nVerts)
                 {
                     pointRep[j] = vertexRemapInverse[pr];
@@ -319,7 +319,7 @@ namespace
             if (i >= nVerts)
                 return E_UNEXPECTED;
 
-            uint32_t dest = vertexRemapInverse[i];
+            const uint32_t dest = vertexRemapInverse[i];
             if (dest == UNUSED32)
             {
                 ibout[j] = i;
@@ -379,7 +379,7 @@ namespace
             if (i >= nVerts)
                 return E_UNEXPECTED;
 
-            uint32_t dest = vertexRemapInverse[i];
+            const uint32_t dest = vertexRemapInverse[i];
             if (dest == UNUSED32)
                 continue;
 
@@ -641,7 +641,7 @@ HRESULT DirectX::FinalizeVB(
     if (vbin == vbout)
         return HRESULT_E_NOT_SUPPORTED;
 
-    size_t newVerts = nVerts + nDupVerts;
+    const size_t newVerts = nVerts + nDupVerts;
 
     auto sptr = static_cast<const uint8_t*>(vbin);
     auto dptr = static_cast<uint8_t*>(vbout);
@@ -652,7 +652,7 @@ HRESULT DirectX::FinalizeVB(
 
     for (size_t j = 0; j < newVerts; ++j)
     {
-        uint32_t src = (vertexRemap) ? vertexRemap[j] : uint32_t(j);
+        const uint32_t src = (vertexRemap) ? vertexRemap[j] : uint32_t(j);
 
         if (src == UNUSED32)
         {
@@ -668,7 +668,7 @@ HRESULT DirectX::FinalizeVB(
         }
         else if (dupVerts)
         {
-            uint32_t dup = dupVerts[src - nVerts];
+            const uint32_t dup = dupVerts[src - nVerts];
             memcpy(dptr, sptr + dup * stride, stride);
         }
         else
@@ -739,7 +739,7 @@ HRESULT DirectX::FinalizeVBAndPointReps(
     if (vbin == vbout)
         return HRESULT_E_NOT_SUPPORTED;
 
-    size_t newVerts = nVerts + nDupVerts;
+    const size_t newVerts = nVerts + nDupVerts;
 
     std::unique_ptr<uint32_t[]> vertexRemapInverse;
     if (vertexRemap)
@@ -782,7 +782,7 @@ HRESULT DirectX::FinalizeVBAndPointReps(
 
     for (size_t j = 0; j < newVerts; ++j)
     {
-        uint32_t src = (vertexRemap) ? vertexRemap[j] : uint32_t(j);
+        const uint32_t src = (vertexRemap) ? vertexRemap[j] : uint32_t(j);
 
         if (src == UNUSED32)
         {
@@ -796,7 +796,7 @@ HRESULT DirectX::FinalizeVBAndPointReps(
         {
             memcpy(dptr, sptr + src * stride, stride);
 
-            uint32_t pr = pointRep[src];
+            const uint32_t pr = pointRep[src];
             if (pr < newVerts)
             {
                 prout[j] = (vertexRemapInverse) ? vertexRemapInverse[pr] : pr;
@@ -804,10 +804,10 @@ HRESULT DirectX::FinalizeVBAndPointReps(
         }
         else if (dupVerts)
         {
-            uint32_t dup = dupVerts[src - nVerts];
+            const uint32_t dup = dupVerts[src - nVerts];
             memcpy(dptr, sptr + dup * stride, stride);
 
-            uint32_t pr = pointRep[src];
+            const uint32_t pr = pointRep[src];
             if (pr < newVerts)
             {
                 prout[j] = (vertexRemapInverse) ? vertexRemapInverse[pr] : pr;
@@ -892,7 +892,7 @@ HRESULT DirectX::CompactVB(
     if (vbin == vbout)
         return HRESULT_E_NOT_SUPPORTED;
 
-    size_t newVerts = nVerts - trailingUnused;
+    const size_t newVerts = nVerts - trailingUnused;
 
     auto sptr = static_cast<const uint8_t*>(vbin);
     auto dptr = static_cast<uint8_t*>(vbout);
@@ -903,7 +903,7 @@ HRESULT DirectX::CompactVB(
 
     for (size_t j = 0; j < newVerts; ++j)
     {
-        uint32_t src = vertexRemap[j];
+        const uint32_t src = vertexRemap[j];
 
         if (src == UNUSED32)
         {

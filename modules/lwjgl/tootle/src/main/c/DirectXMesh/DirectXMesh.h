@@ -19,7 +19,7 @@
 #include <utility>
 #include <vector>
 
-#if defined(WIN32) || defined(_WIN32)
+#ifdef _WIN32
 #if !defined(__d3d11_h__) && !defined(__d3d11_x_h__) && !defined(__d3d12_h__) && !defined(__d3d12_x_h__) && !defined(__XBOX_D3D12_X__)
 #ifdef _GAMING_XBOX_SCARLETT
 #include <d3d12_xs.h>
@@ -40,7 +40,7 @@
 #include <DirectXCollision.h>
 #include <DirectXPackedVector.h>
 
-#define DIRECTX_MESH_VERSION 161
+#define DIRECTX_MESH_VERSION 163
 
 
 namespace DirectX
@@ -246,17 +246,17 @@ namespace DirectX
 
     enum CNORM_FLAGS : unsigned long
     {
-        CNORM_DEFAULT                   = 0x0,
-            // Default is to compute normals using weight-by-angle
+        CNORM_DEFAULT = 0x0,
+        // Default is to compute normals using weight-by-angle
 
-        CNORM_WEIGHT_BY_AREA            = 0x1,
-            // Computes normals using weight-by-area
+        CNORM_WEIGHT_BY_AREA = 0x1,
+        // Computes normals using weight-by-area
 
-        CNORM_WEIGHT_EQUAL              = 0x2,
-            // Compute normals with equal weights
+        CNORM_WEIGHT_EQUAL = 0x2,
+        // Compute normals with equal weights
 
-        CNORM_WIND_CW                   = 0x4,
-            // Vertices are clock-wise (defaults to CCW)
+        CNORM_WIND_CW = 0x4,
+        // Vertices are clock-wise (defaults to CCW)
     };
 
     HRESULT __cdecl ComputeNormals(
@@ -318,22 +318,22 @@ namespace DirectX
 
     enum VALIDATE_FLAGS : unsigned long
     {
-        VALIDATE_DEFAULT                = 0x0,
+        VALIDATE_DEFAULT = 0x0,
 
-        VALIDATE_BACKFACING             = 0x1,
-            // Check for duplicate neighbor from triangle (requires adjacency)
+        VALIDATE_BACKFACING = 0x1,
+        // Check for duplicate neighbor from triangle (requires adjacency)
 
-        VALIDATE_BOWTIES                = 0x2,
-            // Check for two fans of triangles using the same vertex (requires adjacency)
+        VALIDATE_BOWTIES = 0x2,
+        // Check for two fans of triangles using the same vertex (requires adjacency)
 
-        VALIDATE_DEGENERATE             = 0x4,
-            // Check for degenerate triangles
+        VALIDATE_DEGENERATE = 0x4,
+        // Check for degenerate triangles
 
-        VALIDATE_UNUSED                 = 0x8,
-            // Check for issues with 'unused' triangles
+        VALIDATE_UNUSED = 0x8,
+        // Check for issues with 'unused' triangles
 
-        VALIDATE_ASYMMETRIC_ADJ         = 0x10,
-            // Checks that neighbors are symmetric (requires adjacency)
+        VALIDATE_ASYMMETRIC_ADJ = 0x10,
+        // Checks that neighbors are symmetric (requires adjacency)
     };
 
     HRESULT __cdecl Validate(
@@ -392,15 +392,15 @@ namespace DirectX
 
     enum OPTFACES : uint32_t
     {
-        OPTFACES_V_DEFAULT      = 12,
-        OPTFACES_R_DEFAULT      = 7,
-            // Default vertex cache size and restart threshold which is considered 'device independent'
+        OPTFACES_V_DEFAULT = 12,
+        OPTFACES_R_DEFAULT = 7,
+        // Default vertex cache size and restart threshold which is considered 'device independent'
 
-        OPTFACES_LRU_DEFAULT    = 32,
-            // Default vertex cache size for the LRU algorithm
+        OPTFACES_LRU_DEFAULT = 32,
+        // Default vertex cache size for the LRU algorithm
 
-        OPTFACES_V_STRIPORDER   = 0,
-            // Indicates no vertex cache optimization, only reordering into strips
+        OPTFACES_V_STRIPORDER = 0,
+        // Indicates no vertex cache optimization, only reordering into strips
     };
 
     HRESULT __cdecl OptimizeFaces(
@@ -554,7 +554,7 @@ namespace DirectX
         MESHLET_DEFAULT = 0x0,
 
         MESHLET_WIND_CW = 0x1,
-            // Vertices are clock-wise (defaults to CCW)
+        // Vertices are clock-wise (defaults to CCW)
     };
 
     struct Meshlet

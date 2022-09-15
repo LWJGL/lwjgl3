@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // DirectXMeshletGenerator.cpp
-//  
+//
 // DirectX Mesh Geometry Library - Meshlet Computation
 //
 // Copyright (c) Microsoft Corporation.
@@ -84,12 +84,12 @@ namespace
     //---------------------------------------------------------------------------------
     inline XMVECTOR XM_CALLCONV ComputeNormal(_In_reads_(3) const XMFLOAT3* tri) noexcept
     {
-        XMVECTOR p0 = XMLoadFloat3(&tri[0]);
-        XMVECTOR p1 = XMLoadFloat3(&tri[1]);
-        XMVECTOR p2 = XMLoadFloat3(&tri[2]);
+        const XMVECTOR p0 = XMLoadFloat3(&tri[0]);
+        const XMVECTOR p1 = XMLoadFloat3(&tri[1]);
+        const XMVECTOR p2 = XMLoadFloat3(&tri[2]);
 
-        XMVECTOR v01 = XMVectorSubtract(p0, p1);
-        XMVECTOR v02 = XMVectorSubtract(p0, p2);
+        const XMVECTOR v01 = XMVectorSubtract(p0, p1);
+        const XMVECTOR v02 = XMVectorSubtract(p0, p2);
 
         return XMVector3Normalize(XMVector3Cross(v01, v02));
     }
@@ -134,29 +134,29 @@ namespace
         constexpr float c_wtLocation = 0.333f;
         constexpr float c_wtOrientation = 1.0f - (c_wtReuse + c_wtLocation);
 
-        // Vertex reuse - 
-        uint8_t reuse = ComputeReuse(meshlet, triIndices);
-        float scrReuse = 1.0f - (float(reuse) / 3.0f);
+        // Vertex reuse -
+        const uint8_t reuse = ComputeReuse(meshlet, triIndices);
+        const float scrReuse = 1.0f - (float(reuse) / 3.0f);
 
         // Distance from center point - log falloff to preserve normalization where it needs it
         float maxSq = 0;
         for (size_t i = 0; i < 3u; ++i)
         {
-            XMVECTOR pos = XMLoadFloat3(&triVerts[i]);
-            XMVECTOR v = XMVectorSubtract(sphere, pos);
+            const XMVECTOR pos = XMLoadFloat3(&triVerts[i]);
+            const XMVECTOR v = XMVectorSubtract(sphere, pos);
 
-            float distSq = XMVectorGetX(XMVector3Dot(v, v));
+            const float distSq = XMVectorGetX(XMVector3Dot(v, v));
             maxSq = std::max(maxSq, distSq);
         }
 
-        float r = XMVectorGetW(sphere);
-        float r2 = r * r;
-        float scrLocation = std::max(0.0f, log2f(maxSq / (r2 + FLT_EPSILON) + FLT_EPSILON));
+        const float r = XMVectorGetW(sphere);
+        const float r2 = r * r;
+        const float scrLocation = std::max(0.0f, log2f(maxSq / (r2 + FLT_EPSILON) + FLT_EPSILON));
 
         // Angle between normal and meshlet cone axis - cosine falloff
-        XMVECTOR n = ComputeNormal(triVerts);
-        float d = XMVectorGetX(XMVector3Dot(n, normal));
-        float scrOrientation = (1.0f - d) * 0.5f;
+        const XMVECTOR n = ComputeNormal(triVerts);
+        const float d = XMVectorGetX(XMVector3Dot(n, normal));
+        const float scrOrientation = (1.0f - d) * 0.5f;
 
         // Weighted sum of scores
         return c_wtReuse * scrReuse + c_wtLocation * scrLocation + c_wtOrientation * scrOrientation;
@@ -214,7 +214,7 @@ namespace
             }
         }
 
-        // Add the new primitive 
+        // Add the new primitive
         MeshletTriangle mtri = { indices[0], indices[1], indices[2] };
         meshlet.PrimitiveIndices.emplace_back(mtri);
 
@@ -316,7 +316,7 @@ namespace
                 checklist[index - startIndex] = true;
 
                 // Add positions & normal to list
-                XMFLOAT3 points[3] =
+                const XMFLOAT3 points[3] =
                 {
                     positions[tri[0]],
                     positions[tri[1]],
@@ -335,8 +335,8 @@ namespace
                 BoundingSphere::CreateFromPoints(positionBounds, vertices.size(), vertices.data(), sizeof(XMFLOAT3));
                 BoundingSphere::CreateFromPoints(normalBounds, normals.size(), normals.data(), sizeof(XMFLOAT3));
 
-                XMVECTOR psphere = XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&positionBounds));
-                XMVECTOR normal = XMVector3Normalize(XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&normalBounds)));
+                const XMVECTOR psphere = XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&positionBounds));
+                const XMVECTOR normal = XMVector3Normalize(XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&normalBounds)));
 
                 // Find and add all applicable adjacent triangles to candidate list
                 const uint32_t adjIndex = index * 3;
@@ -389,7 +389,7 @@ namespace
                         return E_UNEXPECTED;
                     }
 
-                    XMFLOAT3 triVerts[3] =
+                    const XMFLOAT3 triVerts[3] =
                     {
                         positions[triIndices[0]],
                         positions[triIndices[1]],
@@ -524,7 +524,7 @@ namespace
             size_t primitiveIndexCount = startPrimCount;
 
             // Resize the meshlet output array to hold the newly formed meshlets.
-            size_t meshletCount = meshlets.size();
+            const size_t meshletCount = meshlets.size();
             meshlets.resize(meshletCount + newMeshlets.size());
 
             Meshlet* dest = &meshlets[meshletCount];
@@ -605,7 +605,7 @@ namespace
                     return E_UNEXPECTED;
                 }
 
-                uint32_t vIndex = uniqueVertexIndices[m.VertOffset + i];
+                const uint32_t vIndex = uniqueVertexIndices[m.VertOffset + i];
 
                 if (vIndex >= nVerts)
                 {
@@ -625,7 +625,7 @@ namespace
 
                 auto primitive = primitiveIndices[m.PrimOffset + i];
 
-                XMFLOAT3 triangle[3]
+                const XMFLOAT3 triangle[3]
                 {
                     vertices[primitive.i0],
                     vertices[primitive.i1],
@@ -640,7 +640,7 @@ namespace
 
             // Calculate spatial bounds
             BoundingSphere::CreateFromPoints(c.BoundingSphere, m.VertCount, vertices, sizeof(XMFLOAT3));
-            XMVECTOR positionBounds = XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&c.BoundingSphere));
+            const XMVECTOR positionBounds = XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&c.BoundingSphere));
 
             // Calculate the normal cone
             // 1. Normalized center point of minimum bounding sphere of unit normals == conic axis
@@ -648,13 +648,13 @@ namespace
             BoundingSphere::CreateFromPoints(nsphere, m.PrimCount, normals, sizeof(XMFLOAT3));
 
             // 2. Calculate dot product of all normals to conic axis, selecting minimum
-            XMVECTOR normalBounds = XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&nsphere));
-            XMVECTOR axis = XMVectorSetW(XMVector3Normalize(normalBounds), 0);
+            const XMVECTOR normalBounds = XMLoadFloat4(reinterpret_cast<XMFLOAT4*>(&nsphere));
+            const XMVECTOR axis = XMVectorSetW(XMVector3Normalize(normalBounds), 0);
 
             XMVECTOR minDot = g_XMOne;
             for (size_t i = 0; i < m.PrimCount; ++i)
             {
-                XMVECTOR dot = XMVector3Dot(axis, XMLoadFloat3(&normals[i]));
+                const XMVECTOR dot = XMVector3Dot(axis, XMLoadFloat3(&normals[i]));
                 minDot = XMVectorMin(minDot, dot);
             }
 
@@ -674,15 +674,15 @@ namespace
                     return E_UNEXPECTED;
                 }
 
-                auto primitive = primitiveIndices[m.PrimOffset + i];
+                auto const primitive = primitiveIndices[m.PrimOffset + i];
 
-                XMVECTOR p0 = XMLoadFloat3(&vertices[primitive.i0]);
+                const XMVECTOR p0 = XMLoadFloat3(&vertices[primitive.i0]);
 
-                XMVECTOR center = XMVectorSubtract(positionBounds, p0);
-                XMVECTOR normal = XMLoadFloat3(&normals[i]);
+                const XMVECTOR center = XMVectorSubtract(positionBounds, p0);
+                const XMVECTOR normal = XMLoadFloat3(&normals[i]);
 
-                float dc = XMVectorGetX(XMVector3Dot(center, normal));
-                float dn = XMVectorGetX(XMVector3Dot(axis, normal));
+                const float dc = XMVectorGetX(XMVector3Dot(center, normal));
+                const float dn = XMVectorGetX(XMVector3Dot(axis, normal));
 
                 // dn should be larger than mindp cutoff above
                 if (dn <= 0.0f)
@@ -690,7 +690,7 @@ namespace
                     return E_UNEXPECTED;
                 }
 
-                float t = dc / dn;
+                const float t = dc / dn;
                 maxt = (t > maxt) ? t : maxt;
             }
 
@@ -699,7 +699,7 @@ namespace
 
             // cos(a) for normal cone is minDot; we need to add 90 degrees on both sides and invert the cone
             // which gives us -cos(a+90) = -(-sin(a)) = sin(a) = sqrt(1 - cos^2(a))
-            XMVECTOR minDotSq = XMVectorMultiply(minDot, minDot);
+            const XMVECTOR minDotSq = XMVectorMultiply(minDot, minDot);
             XMVECTOR coneCutoff = XMVectorSqrt(XMVectorSubtract(g_XMOne, minDotSq));
 
             // Quantize normal vector to uint8
@@ -711,8 +711,8 @@ namespace
             c.NormalCone.z = uint8_t(int16_t(snquant.z) + 128);
 
             // Calculate error bias from quantization
-            XMVECTOR dequant = XMLoadByteN4(&snquant);
-            XMVECTOR error = XMVectorSum(XMVectorAbs(XMVectorSubtract(dequant, axis)));
+            const XMVECTOR dequant = XMLoadByteN4(&snquant);
+            const XMVECTOR error = XMVectorSum(XMVectorAbs(XMVectorSubtract(dequant, axis)));
 
             // Add error bias to cone cutoff
             coneCutoff = XMVectorAdd(coneCutoff, error);
@@ -747,7 +747,7 @@ HRESULT DirectX::ComputeMeshlets(
     size_t maxVerts,
     size_t maxPrims)
 {
-    std::pair<size_t, size_t> s = { 0, nFaces };
+    const std::pair<size_t, size_t> s = { 0, nFaces };
     std::pair<size_t, size_t> subset;
 
     return ComputeMeshletsInternal<uint16_t>(
@@ -774,7 +774,7 @@ HRESULT DirectX::ComputeMeshlets(
     size_t maxVerts,
     size_t maxPrims)
 {
-    std::pair<size_t, size_t> s = { 0, nFaces };
+    const std::pair<size_t, size_t> s = { 0, nFaces };
     std::pair<size_t, size_t> subset;
 
     return ComputeMeshletsInternal<uint32_t>(
