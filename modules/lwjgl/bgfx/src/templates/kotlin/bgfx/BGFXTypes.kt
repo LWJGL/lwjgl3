@@ -573,7 +573,7 @@ val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", sk
         "select rendering backend. When set to #RENDERER_TYPE_COUNT a default rendering backend will be selected appropriate to the platform."
     ).links("RENDERER_TYPE_\\w+")
     uint16_t("vendorId", "vendor PCI id. If set to #PCI_ID_NONE it will select the first device.").links("PCI_ID_\\w+")
-    uint16_t("deviceId", "device id. If set to 0 it will select first device, or device with matching id.")
+    uint16_t("deviceId", "device ID. If set to 0 it will select first device, or device with matching ID.")
     uint64_t("capabilities", "capabilities initialization mask (default: {@code UINT64_MAX})")
     bool("debug", "enable device for debugging")
     bool("profile", "enable device for profiling")
