@@ -16,9 +16,7 @@ val nuklear = "Nuklear".nativeClass(Module.NUKLEAR, prefix = "NK", prefixMethod 
 #define NK_INCLUDE_STANDARD_BOOL
 #define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
 #define NK_INCLUDE_COMMAND_USERDATA
-#ifdef LWJGL_WINDOWS
-    #define NK_BUTTON_TRIGGER_ON_RELEASE
-#endif
+#define NK_BUTTON_TRIGGER_ON_RELEASE
 #define NK_ZERO_COMMAND_MEMORY
 #define NK_ASSERT(expr)
 #define NK_IMPLEMENTATION
@@ -4543,6 +4541,15 @@ nk_style_pop_vec2(ctx);""")}
 
         nk_bool(
             "input_has_mouse_click_in_rect",
+            "",
+
+            nk_input.const.p("i", ""),
+            nk_buttons("id", "", Buttons),
+            nk_rect("rect", "")
+        )
+
+        nk_bool(
+            "input_has_mouse_click_in_button_rect",
             "",
 
             nk_input.const.p("i", ""),

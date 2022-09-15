@@ -9120,6 +9120,17 @@ public class Nuklear {
         return nnk_input_has_mouse_click_in_rect(i.address(), id, rect.address());
     }
 
+    // --- [ nk_input_has_mouse_click_in_button_rect ] ---
+
+    /** Unsafe version of: {@link #nk_input_has_mouse_click_in_button_rect input_has_mouse_click_in_button_rect} */
+    public static native boolean nnk_input_has_mouse_click_in_button_rect(long i, int id, long rect);
+
+    /** @param id one of:<br><table><tr><td>{@link #NK_BUTTON_LEFT BUTTON_LEFT}</td><td>{@link #NK_BUTTON_MIDDLE BUTTON_MIDDLE}</td><td>{@link #NK_BUTTON_RIGHT BUTTON_RIGHT}</td><td>{@link #NK_BUTTON_DOUBLE BUTTON_DOUBLE}</td></tr></table> */
+    @NativeType("nk_bool")
+    public static boolean nk_input_has_mouse_click_in_button_rect(@NativeType("struct nk_input const *") NkInput i, @NativeType("enum nk_buttons") int id, @NativeType("struct nk_rect") NkRect rect) {
+        return nnk_input_has_mouse_click_in_button_rect(i.address(), id, rect.address());
+    }
+
     // --- [ nk_input_has_mouse_click_down_in_rect ] ---
 
     /** Unsafe version of: {@link #nk_input_has_mouse_click_down_in_rect input_has_mouse_click_down_in_rect} */

@@ -23,6 +23,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_BUTTON_MAX;
  * struct nk_mouse {
  *     {@link NkMouseButton struct nk_mouse_button} buttons[NK_BUTTON_MAX];
  *     {@link NkVec2 struct nk_vec2} pos;
+ *     {@link NkVec2 struct nk_vec2} down_pos;
  *     {@link NkVec2 struct nk_vec2} prev;
  *     {@link NkVec2 struct nk_vec2} delta;
  *     {@link NkVec2 struct nk_vec2} scroll_delta;
@@ -44,6 +45,7 @@ public class NkMouse extends Struct {
     public static final int
         BUTTONS,
         POS,
+        DOWN_POS,
         PREV,
         DELTA,
         SCROLL_DELTA,
@@ -58,6 +60,7 @@ public class NkMouse extends Struct {
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
             __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
+            __member(NkVec2.SIZEOF, NkVec2.ALIGNOF),
             __member(1),
             __member(1),
             __member(1)
@@ -68,12 +71,13 @@ public class NkMouse extends Struct {
 
         BUTTONS = layout.offsetof(0);
         POS = layout.offsetof(1);
-        PREV = layout.offsetof(2);
-        DELTA = layout.offsetof(3);
-        SCROLL_DELTA = layout.offsetof(4);
-        GRAB = layout.offsetof(5);
-        GRABBED = layout.offsetof(6);
-        UNGRAB = layout.offsetof(7);
+        DOWN_POS = layout.offsetof(2);
+        PREV = layout.offsetof(3);
+        DELTA = layout.offsetof(4);
+        SCROLL_DELTA = layout.offsetof(5);
+        GRAB = layout.offsetof(6);
+        GRABBED = layout.offsetof(7);
+        UNGRAB = layout.offsetof(8);
     }
 
     /**
@@ -98,6 +102,9 @@ public class NkMouse extends Struct {
     /** @return a {@link NkVec2} view of the {@code pos} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 pos() { return npos(address()); }
+    /** @return a {@link NkVec2} view of the {@code down_pos} field. */
+    @NativeType("struct nk_vec2")
+    public NkVec2 down_pos() { return ndown_pos(address()); }
     /** @return a {@link NkVec2} view of the {@code prev} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 prev() { return nprev(address()); }
@@ -156,6 +163,8 @@ public class NkMouse extends Struct {
     }
     /** Unsafe version of {@link #pos}. */
     public static NkVec2 npos(long struct) { return NkVec2.create(struct + NkMouse.POS); }
+    /** Unsafe version of {@link #down_pos}. */
+    public static NkVec2 ndown_pos(long struct) { return NkVec2.create(struct + NkMouse.DOWN_POS); }
     /** Unsafe version of {@link #prev}. */
     public static NkVec2 nprev(long struct) { return NkVec2.create(struct + NkMouse.PREV); }
     /** Unsafe version of {@link #delta}. */
@@ -216,6 +225,9 @@ public class NkMouse extends Struct {
         /** @return a {@link NkVec2} view of the {@code pos} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 pos() { return NkMouse.npos(address()); }
+        /** @return a {@link NkVec2} view of the {@code down_pos} field. */
+        @NativeType("struct nk_vec2")
+        public NkVec2 down_pos() { return NkMouse.ndown_pos(address()); }
         /** @return a {@link NkVec2} view of the {@code prev} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 prev() { return NkMouse.nprev(address()); }

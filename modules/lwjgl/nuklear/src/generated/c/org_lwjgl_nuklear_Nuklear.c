@@ -11,9 +11,7 @@ DISABLE_WARNINGS()
 #define NK_INCLUDE_STANDARD_BOOL
 #define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
 #define NK_INCLUDE_COMMAND_USERDATA
-#ifdef LWJGL_WINDOWS
-    #define NK_BUTTON_TRIGGER_ON_RELEASE
-#endif
+#define NK_BUTTON_TRIGGER_ON_RELEASE
 #define NK_ZERO_COMMAND_MEMORY
 #define NK_ASSERT(expr)
 #define NK_IMPLEMENTATION
@@ -3087,6 +3085,13 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1input_1has_1mouse
     struct nk_rect *rect = (struct nk_rect *)(uintptr_t)rectAddress;
     UNUSED_PARAMS(__env, clazz)
     return (jboolean)nk_input_has_mouse_click_in_rect(i, (enum nk_buttons)id, *rect);
+}
+
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1input_1has_1mouse_1click_1in_1button_1rect(JNIEnv *__env, jclass clazz, jlong iAddress, jint id, jlong rectAddress) {
+    struct nk_input const *i = (struct nk_input const *)(uintptr_t)iAddress;
+    struct nk_rect *rect = (struct nk_rect *)(uintptr_t)rectAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jboolean)nk_input_has_mouse_click_in_button_rect(i, (enum nk_buttons)id, *rect);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1input_1has_1mouse_1click_1down_1in_1rect(JNIEnv *__env, jclass clazz, jlong iAddress, jint id, jlong rectAddress, jboolean down) {

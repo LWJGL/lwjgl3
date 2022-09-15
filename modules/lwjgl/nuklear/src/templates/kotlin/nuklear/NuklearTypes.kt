@@ -582,6 +582,7 @@ val nk_mouse = struct(Module.NUKLEAR, "NkMouse", nativeName = "struct nk_mouse",
 
     nk_mouse_button("buttons", "")["NK_BUTTON_MAX"]
     nk_vec2("pos", "")
+    nk_vec2("down_pos", "")
     nk_vec2("prev", "")
     nk_vec2("delta", "")
     nk_vec2("scroll_delta", "")
