@@ -168,6 +168,8 @@ val spvc_msl_vertex_attribute = struct(Module.SPVC, "SpvcMslVertexAttribute", na
         Defines MSL characteristics of a vertex attribute at a particular location.
 
         After compilation, it is possible to query whether or not this location was used.
+
+        Deprecated; use ##SpvcMslShaderInterfaceVar.
         """
 
     unsigned_int("location", "")
@@ -179,7 +181,7 @@ val spvc_msl_vertex_attribute = struct(Module.SPVC, "SpvcMslVertexAttribute", na
     SpvBuiltIn("builtin", "")
 }
 
-val spvc_msl_shader_input = struct(Module.SPVC, "SpvcMslShaderInput", nativeName = "spvc_msl_shader_input") {
+val spvc_msl_shader_interface_var = struct(Module.SPVC, "SpvcMslShaderInterfaceVar", nativeName = "spvc_msl_shader_interface_var") {
     documentation =
         """
         Defines MSL characteristics of an input variable at a particular location.
@@ -193,6 +195,7 @@ val spvc_msl_shader_input = struct(Module.SPVC, "SpvcMslShaderInput", nativeName
 	SpvBuiltIn("builtin", "")
 	unsigned("vecsize", "")
 }
+val spvc_msl_shader_input = typedef(spvc_msl_shader_interface_var, "spvc_msl_shader_input", "SpvcMslShaderInput")
 
 val spvc_msl_resource_binding = struct(Module.SPVC, "SpvcMslResourceBinding", nativeName = "spvc_msl_resource_binding") {
     documentation =

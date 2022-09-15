@@ -20,6 +20,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>After compilation, it is possible to query whether or not this location was used.</p>
  * 
+ * <p>Deprecated; use {@link SpvcMslShaderInterfaceVar}.</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

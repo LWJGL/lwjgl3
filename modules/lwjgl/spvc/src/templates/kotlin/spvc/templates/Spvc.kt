@@ -204,26 +204,32 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
         Currently limited to specifying if the input is an 8-bit unsigned integer, 16-bit unsigned integer, or some other format.
 
-        ({@code spvc_msl_shader_input_format})
+        ({@code spvc_msl_shader_variable_format})
         """,
 
-        "MSL_SHADER_INPUT_FORMAT_OTHER".enum("", "0"),
-        "MSL_SHADER_INPUT_FORMAT_UINT8".enum,
-        "MSL_SHADER_INPUT_FORMAT_UINT16".enum,
-        "MSL_SHADER_INPUT_FORMAT_ANY16".enum,
-        "MSL_SHADER_INPUT_FORMAT_ANY32".enum
+        "MSL_SHADER_VARIABLE_FORMAT_OTHER".enum("", "0"),
+        "MSL_SHADER_VARIABLE_FORMAT_UINT8".enum,
+        "MSL_SHADER_VARIABLE_FORMAT_UINT16".enum,
+        "MSL_SHADER_VARIABLE_FORMAT_ANY16".enum,
+        "MSL_SHADER_VARIABLE_FORMAT_ANY32".enum
     )
 
     EnumConstant(
-        """
-        Deprecated.
+        "Deprecated. ({@code spvc_msl_vertex_format})",
 
-        ({@code spvc_msl_vertex_format})
-        """,
+        "MSL_VERTEX_FORMAT_OTHER".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_OTHER"),
+        "MSL_VERTEX_FORMAT_UINT8".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_UINT8"),
+        "MSL_VERTEX_FORMAT_UINT16".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_UINT16")
+    )
 
-        "MSL_VERTEX_FORMAT_OTHER".enum("", "SPVC_MSL_SHADER_INPUT_FORMAT_OTHER"),
-        "MSL_VERTEX_FORMAT_UINT8".enum("", "SPVC_MSL_SHADER_INPUT_FORMAT_UINT8"),
-        "MSL_VERTEX_FORMAT_UINT16".enum("", "SPVC_MSL_SHADER_INPUT_FORMAT_UINT16")
+    EnumConstant(
+        "Deprecated. ({@code spvc_msl_input_format})",
+
+        "MSL_SHADER_INPUT_FORMAT_OTHER".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_OTHER"),
+        "MSL_SHADER_INPUT_FORMAT_UINT8".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_UINT8"),
+        "MSL_SHADER_INPUT_FORMAT_UINT16".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_UINT16"),
+        "MSL_SHADER_INPUT_FORMAT_ANY16".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_ANY16"),
+        "MSL_SHADER_INPUT_FORMAT_ANY32".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_ANY32")
     )
 
     EnumConstant(
@@ -524,8 +530,15 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
     )
 
     void(
-        "msl_shader_input_init",
+        "msl_shader_interface_var_init",
         "Initializes the shader input struct.",
+
+        spvc_msl_shader_interface_var.p("var", "")
+    )
+
+    void(
+        "msl_shader_input_init",
+        "Deprecated. Use #msl_shader_interface_var_init().",
 
         spvc_msl_shader_input.p("input", "")
     )
@@ -850,7 +863,15 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "",
 
         spvc_compiler("compiler", ""),
-        spvc_msl_shader_input.const.p("input", "")
+        spvc_msl_shader_interface_var.const.p("input", "")
+    )
+
+    spvc_result(
+        "compiler_msl_add_shader_output",
+        "",
+
+        spvc_compiler("compiler", ""),
+        spvc_msl_shader_interface_var.const.p("output", "")
     )
 
     spvc_result(
@@ -880,6 +901,14 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
     spvc_bool(
         "compiler_msl_is_shader_input_used",
+        "",
+
+        spvc_compiler("compiler", ""),
+        unsigned("location", "")
+    )
+
+    spvc_bool(
+        "compiler_msl_is_shader_output_used",
         "",
 
         spvc_compiler("compiler", ""),

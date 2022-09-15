@@ -77,6 +77,8 @@ public final class Spv {
      * <li>{@link #SpvExecutionModelMissNV ExecutionModelMissNV}</li>
      * <li>{@link #SpvExecutionModelCallableKHR ExecutionModelCallableKHR}</li>
      * <li>{@link #SpvExecutionModelCallableNV ExecutionModelCallableNV}</li>
+     * <li>{@link #SpvExecutionModelTaskEXT ExecutionModelTaskEXT}</li>
+     * <li>{@link #SpvExecutionModelMeshEXT ExecutionModelMeshEXT}</li>
      * <li>{@link #SpvExecutionModelMax ExecutionModelMax}</li>
      * </ul>
      */
@@ -102,6 +104,8 @@ public final class Spv {
         SpvExecutionModelMissNV                 = 5317,
         SpvExecutionModelCallableKHR            = 5318,
         SpvExecutionModelCallableNV             = 5318,
+        SpvExecutionModelTaskEXT                = 5364,
+        SpvExecutionModelMeshEXT                = 5365,
         SpvExecutionModelMax                    = 0x7fffffff;
 
     /**
@@ -199,11 +203,21 @@ public final class Spv {
      * <li>{@link #SpvExecutionModeSignedZeroInfNanPreserve ExecutionModeSignedZeroInfNanPreserve}</li>
      * <li>{@link #SpvExecutionModeRoundingModeRTE ExecutionModeRoundingModeRTE}</li>
      * <li>{@link #SpvExecutionModeRoundingModeRTZ ExecutionModeRoundingModeRTZ}</li>
+     * <li>{@link #SpvExecutionModeEarlyAndLateFragmentTestsAMD ExecutionModeEarlyAndLateFragmentTestsAMD}</li>
      * <li>{@link #SpvExecutionModeStencilRefReplacingEXT ExecutionModeStencilRefReplacingEXT}</li>
+     * <li>{@link #SpvExecutionModeStencilRefUnchangedFrontAMD ExecutionModeStencilRefUnchangedFrontAMD}</li>
+     * <li>{@link #SpvExecutionModeStencilRefGreaterFrontAMD ExecutionModeStencilRefGreaterFrontAMD}</li>
+     * <li>{@link #SpvExecutionModeStencilRefLessFrontAMD ExecutionModeStencilRefLessFrontAMD}</li>
+     * <li>{@link #SpvExecutionModeStencilRefUnchangedBackAMD ExecutionModeStencilRefUnchangedBackAMD}</li>
+     * <li>{@link #SpvExecutionModeStencilRefGreaterBackAMD ExecutionModeStencilRefGreaterBackAMD}</li>
+     * <li>{@link #SpvExecutionModeStencilRefLessBackAMD ExecutionModeStencilRefLessBackAMD}</li>
+     * <li>{@link #SpvExecutionModeOutputLinesEXT ExecutionModeOutputLinesEXT}</li>
      * <li>{@link #SpvExecutionModeOutputLinesNV ExecutionModeOutputLinesNV}</li>
+     * <li>{@link #SpvExecutionModeOutputPrimitivesEXT ExecutionModeOutputPrimitivesEXT}</li>
      * <li>{@link #SpvExecutionModeOutputPrimitivesNV ExecutionModeOutputPrimitivesNV}</li>
      * <li>{@link #SpvExecutionModeDerivativeGroupQuadsNV ExecutionModeDerivativeGroupQuadsNV}</li>
      * <li>{@link #SpvExecutionModeDerivativeGroupLinearNV ExecutionModeDerivativeGroupLinearNV}</li>
+     * <li>{@link #SpvExecutionModeOutputTrianglesEXT ExecutionModeOutputTrianglesEXT}</li>
      * <li>{@link #SpvExecutionModeOutputTrianglesNV ExecutionModeOutputTrianglesNV}</li>
      * <li>{@link #SpvExecutionModePixelInterlockOrderedEXT ExecutionModePixelInterlockOrderedEXT}</li>
      * <li>{@link #SpvExecutionModePixelInterlockUnorderedEXT ExecutionModePixelInterlockUnorderedEXT}</li>
@@ -271,11 +285,21 @@ public final class Spv {
         SpvExecutionModeSignedZeroInfNanPreserve         = 4461,
         SpvExecutionModeRoundingModeRTE                  = 4462,
         SpvExecutionModeRoundingModeRTZ                  = 4463,
+        SpvExecutionModeEarlyAndLateFragmentTestsAMD     = 5017,
         SpvExecutionModeStencilRefReplacingEXT           = 5027,
+        SpvExecutionModeStencilRefUnchangedFrontAMD      = 5079,
+        SpvExecutionModeStencilRefGreaterFrontAMD        = 5080,
+        SpvExecutionModeStencilRefLessFrontAMD           = 5081,
+        SpvExecutionModeStencilRefUnchangedBackAMD       = 5082,
+        SpvExecutionModeStencilRefGreaterBackAMD         = 5083,
+        SpvExecutionModeStencilRefLessBackAMD            = 5084,
+        SpvExecutionModeOutputLinesEXT                   = 5269,
         SpvExecutionModeOutputLinesNV                    = 5269,
+        SpvExecutionModeOutputPrimitivesEXT              = 5270,
         SpvExecutionModeOutputPrimitivesNV               = 5270,
         SpvExecutionModeDerivativeGroupQuadsNV           = 5289,
         SpvExecutionModeDerivativeGroupLinearNV          = 5290,
+        SpvExecutionModeOutputTrianglesEXT               = 5298,
         SpvExecutionModeOutputTrianglesNV                = 5298,
         SpvExecutionModePixelInterlockOrderedEXT         = 5366,
         SpvExecutionModePixelInterlockUnorderedEXT       = 5367,
@@ -329,6 +353,7 @@ public final class Spv {
      * <li>{@link #SpvStorageClassShaderRecordBufferNV StorageClassShaderRecordBufferNV}</li>
      * <li>{@link #SpvStorageClassPhysicalStorageBuffer StorageClassPhysicalStorageBuffer}</li>
      * <li>{@link #SpvStorageClassPhysicalStorageBufferEXT StorageClassPhysicalStorageBufferEXT}</li>
+     * <li>{@link #SpvStorageClassTaskPayloadWorkgroupEXT StorageClassTaskPayloadWorkgroupEXT}</li>
      * <li>{@link #SpvStorageClassCodeSectionINTEL StorageClassCodeSectionINTEL}</li>
      * <li>{@link #SpvStorageClassDeviceOnlyINTEL StorageClassDeviceOnlyINTEL}</li>
      * <li>{@link #SpvStorageClassHostOnlyINTEL StorageClassHostOnlyINTEL}</li>
@@ -363,6 +388,7 @@ public final class Spv {
         SpvStorageClassShaderRecordBufferNV     = 5343,
         SpvStorageClassPhysicalStorageBuffer    = 5349,
         SpvStorageClassPhysicalStorageBufferEXT = 5349,
+        SpvStorageClassTaskPayloadWorkgroupEXT  = 5402,
         SpvStorageClassCodeSectionINTEL         = 5605,
         SpvStorageClassDeviceOnlyINTEL          = 5936,
         SpvStorageClassHostOnlyINTEL            = 5937,
@@ -926,6 +952,7 @@ public final class Spv {
      * <li>{@link #SpvDecorationPassthroughNV DecorationPassthroughNV}</li>
      * <li>{@link #SpvDecorationViewportRelativeNV DecorationViewportRelativeNV}</li>
      * <li>{@link #SpvDecorationSecondaryViewportRelativeNV DecorationSecondaryViewportRelativeNV}</li>
+     * <li>{@link #SpvDecorationPerPrimitiveEXT DecorationPerPrimitiveEXT}</li>
      * <li>{@link #SpvDecorationPerPrimitiveNV DecorationPerPrimitiveNV}</li>
      * <li>{@link #SpvDecorationPerViewNV DecorationPerViewNV}</li>
      * <li>{@link #SpvDecorationPerTaskNV DecorationPerTaskNV}</li>
@@ -1041,6 +1068,7 @@ public final class Spv {
         SpvDecorationPassthroughNV                      = 5250,
         SpvDecorationViewportRelativeNV                 = 5252,
         SpvDecorationSecondaryViewportRelativeNV        = 5256,
+        SpvDecorationPerPrimitiveEXT                    = 5271,
         SpvDecorationPerPrimitiveNV                     = 5271,
         SpvDecorationPerViewNV                          = 5272,
         SpvDecorationPerTaskNV                          = 5273,
@@ -1194,6 +1222,10 @@ public final class Spv {
      * <li>{@link #SpvBuiltInFragmentSizeNV BuiltInFragmentSizeNV}</li>
      * <li>{@link #SpvBuiltInFragInvocationCountEXT BuiltInFragInvocationCountEXT}</li>
      * <li>{@link #SpvBuiltInInvocationsPerPixelNV BuiltInInvocationsPerPixelNV}</li>
+     * <li>{@link #SpvBuiltInPrimitivePointIndicesEXT BuiltInPrimitivePointIndicesEXT}</li>
+     * <li>{@link #SpvBuiltInPrimitiveLineIndicesEXT BuiltInPrimitiveLineIndicesEXT}</li>
+     * <li>{@link #SpvBuiltInPrimitiveTriangleIndicesEXT BuiltInPrimitiveTriangleIndicesEXT}</li>
+     * <li>{@link #SpvBuiltInCullPrimitiveEXT BuiltInCullPrimitiveEXT}</li>
      * <li>{@link #SpvBuiltInLaunchIdKHR BuiltInLaunchIdKHR}</li>
      * <li>{@link #SpvBuiltInLaunchIdNV BuiltInLaunchIdNV}</li>
      * <li>{@link #SpvBuiltInLaunchSizeKHR BuiltInLaunchSizeKHR}</li>
@@ -1320,6 +1352,10 @@ public final class Spv {
         SpvBuiltInFragmentSizeNV              = 5292,
         SpvBuiltInFragInvocationCountEXT      = 5293,
         SpvBuiltInInvocationsPerPixelNV       = 5293,
+        SpvBuiltInPrimitivePointIndicesEXT    = 5294,
+        SpvBuiltInPrimitiveLineIndicesEXT     = 5295,
+        SpvBuiltInPrimitiveTriangleIndicesEXT = 5296,
+        SpvBuiltInCullPrimitiveEXT            = 5299,
         SpvBuiltInLaunchIdKHR                 = 5319,
         SpvBuiltInLaunchIdNV                  = 5319,
         SpvBuiltInLaunchSizeKHR               = 5320,
@@ -1908,6 +1944,7 @@ public final class Spv {
      * <li>{@link #SpvCapabilityFragmentFullyCoveredEXT CapabilityFragmentFullyCoveredEXT}</li>
      * <li>{@link #SpvCapabilityMeshShadingNV CapabilityMeshShadingNV}</li>
      * <li>{@link #SpvCapabilityImageFootprintNV CapabilityImageFootprintNV}</li>
+     * <li>{@link #SpvCapabilityMeshShadingEXT CapabilityMeshShadingEXT}</li>
      * <li>{@link #SpvCapabilityFragmentBarycentricKHR CapabilityFragmentBarycentricKHR}</li>
      * <li>{@link #SpvCapabilityFragmentBarycentricNV CapabilityFragmentBarycentricNV}</li>
      * <li>{@link #SpvCapabilityComputeDerivativeGroupQuadsNV CapabilityComputeDerivativeGroupQuadsNV}</li>
@@ -2136,6 +2173,7 @@ public final class Spv {
         SpvCapabilityFragmentFullyCoveredEXT                      = 5265,
         SpvCapabilityMeshShadingNV                                = 5266,
         SpvCapabilityImageFootprintNV                             = 5282,
+        SpvCapabilityMeshShadingEXT                               = 5283,
         SpvCapabilityFragmentBarycentricKHR                       = 5284,
         SpvCapabilityFragmentBarycentricNV                        = 5284,
         SpvCapabilityComputeDerivativeGroupQuadsNV                = 5288,
@@ -2888,6 +2926,8 @@ public final class Spv {
      * <li>{@link #SpvOpFragmentFetchAMD OpFragmentFetchAMD}</li>
      * <li>{@link #SpvOpReadClockKHR OpReadClockKHR}</li>
      * <li>{@link #SpvOpImageSampleFootprintNV OpImageSampleFootprintNV}</li>
+     * <li>{@link #SpvOpEmitMeshTasksEXT OpEmitMeshTasksEXT}</li>
+     * <li>{@link #SpvOpSetMeshOutputsEXT OpSetMeshOutputsEXT}</li>
      * <li>{@link #SpvOpGroupNonUniformPartitionNV OpGroupNonUniformPartitionNV}</li>
      * <li>{@link #SpvOpWritePackedPrimitiveIndices4x8NV OpWritePackedPrimitiveIndices4x8NV}</li>
      * <li>{@link #SpvOpReportIntersectionKHR OpReportIntersectionKHR}</li>
@@ -3560,6 +3600,8 @@ public final class Spv {
         SpvOpFragmentFetchAMD                                                      = 5012,
         SpvOpReadClockKHR                                                          = 5056,
         SpvOpImageSampleFootprintNV                                                = 5283,
+        SpvOpEmitMeshTasksEXT                                                      = 5294,
+        SpvOpSetMeshOutputsEXT                                                     = 5295,
         SpvOpGroupNonUniformPartitionNV                                            = 5296,
         SpvOpWritePackedPrimitiveIndices4x8NV                                      = 5299,
         SpvOpReportIntersectionKHR                                                 = 5334,
