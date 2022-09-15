@@ -332,7 +332,7 @@ val aiBone = struct(Module.ASSIMP, "AIBone", nativeName = "struct aiBone") {
     aiMatrix4x4(
         "mOffsetMatrix",
         """
-        matrix that transforms from bone space to mesh space in bind pose.
+        matrix that transforms from mesh space to bone space in bind pose.
 
         This matrix describes the position of the mesh in the local space of this bone when the skeleton was bound. Thus it can be used directly to determine a
         desired vertex position, given the world-space transform of the bone when animated, and the position of the vertex in mesh space.
