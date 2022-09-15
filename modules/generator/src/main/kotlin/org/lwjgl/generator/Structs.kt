@@ -179,35 +179,84 @@ class Struct(
             .toHashSet()
     }
 
-    val nativeType get() = StructType(this)
-
     /* Output parameter or function result by value */
     private var usageOutput = false
-
-    fun hasUsageOutput() {
-        usageOutput = true
-    }
-
     /* Input parameter */
     private var usageInput = false
-
-    fun hasUsageInput() {
-        usageInput = true
-    }
-
     /* Function result by reference */
     private var usageResultPointer = false
 
-    fun hasUsageResultPointer() {
+    private var static: String? = null
+    private var pack: String? = null
+    // TODO: add alignas support to non-struct members if necessary
+    private var alignas: String? = null
+
+    private val customMethods = ArrayList<String>()
+    private val customMethodsBuffer = ArrayList<String>()
+
+    internal val members = ArrayList<StructMember>()
+
+    internal fun init(setup: (Struct.() -> Unit)? = null): StructType {
+        if (setup != null) {
+            this.setup()
+        }
+        if (setup != null || nativeLayout) {
+            Generator.register(this)
+        }
+        return nativeType
+    }
+
+    internal fun copy(className: String, nativeName: String = className, virtual: Boolean = this.virtual): Struct {
+        val copy = Struct(
+            module,
+            className,
+            nativeSubPath,
+            nativeName,
+            union,
+            virtual,
+            mutable,
+            alias,
+            parentStruct,
+            nativeLayout,
+            generateBuffer
+        )
+
+        copy.documentation = documentation
+
+        copy.static = static
+        copy.alignas = alignas
+        copy.pack = pack
+
+        //copy.usageInput = usageInput
+        //copy.usageOutput = usageOutput
+        //copy.usageResultPointer = usageResultPointer
+
+        copy.customMethods.addAll(customMethods)
+        copy.customMethodsBuffer.addAll(customMethodsBuffer)
+
+        copy.members.addAll(members)
+
+        return copy
+    }
+
+    val nativeType get() = StructType(this)
+
+    fun setUsageOutput() {
+        usageOutput = true
+    }
+
+    fun setUsageInput() {
+        usageInput = true
+    }
+
+    fun setUsageResultPointer() {
         usageResultPointer = true
     }
 
-    private var static: String? = null
     fun static(expression: String) {
         static = expression
     }
 
-    private var pack: String? = null
     fun pack(expression: String) {
         pack = expression
     }
@@ -215,19 +264,12 @@ class Struct(
         pack = alignment.toString()
     }
 
-    // TODO: add alignas support to non-struct members if necessary
-    private var alignas: String? = null
     fun alignas(expression: String) {
         alignas = expression
     }
     fun alignas(alignment: Int) {
         alignas = alignment.toString()
     }
-
-    private val customMethods = ArrayList<String>()
-    private val customMethodsBuffer = ArrayList<String>()
-
-    internal val members = ArrayList<StructMember>()
 
     private val visibleMembers
         get() = members.asSequence().filter { it !is StructMemberPadding }
@@ -303,34 +345,13 @@ class Struct(
         this@Struct.members.remove(this)
 
         val nativeType = if (isNestedStructDefinition) {
-            val definition = (this.nativeType as StructType).definition
-
-            val copy = Struct(
-                this@Struct.module,
-                this.name,
-                this@Struct.nativeSubPath,
-                ANONYMOUS,
-                this@Struct.union,
-                true,
-                this@Struct.mutable,
-                this@Struct.alias,
-                this@Struct.parentStruct,
-                this@Struct.nativeLayout,
-                this@Struct.generateBuffer
-            )
-
-            copy.documentation = definition.documentation
-            copy.customMethods.addAll(definition.customMethods)
-            copy.customMethodsBuffer.addAll(definition.customMethodsBuffer)
-            copy.members.addAll(definition.members)
-            copy.usageInput = definition.usageInput
-            copy.usageOutput = definition.usageOutput
-            copy.usageResultPointer = definition.usageResultPointer
-            copy.static = definition.static
-            copy.alignas = definition.alignas
-            copy.pack = definition.pack
-
-            copy.nativeType
+            (this.nativeType as StructType)
+                .definition.copy(
+                    className = this.name,
+                    nativeName = ANONYMOUS,
+                    virtual = true
+                )
+                .nativeType
         } else
             this.nativeType
 
@@ -364,10 +385,10 @@ class Struct(
         parentStruct: StructType? = null,
         nativeLayout: Boolean = false,
         skipBuffer: Boolean = false,
-        init: Struct.() -> Unit
+        setup: Struct.() -> Unit
     ): StructMember {
         val struct = Struct(module, ANONYMOUS, nativeSubPath, ANONYMOUS, false, true, mutable, alias?.definition, parentStruct?.definition, nativeLayout, !skipBuffer)
-        struct.init()
+        struct.setup()
         return StructType(struct).invoke(ANONYMOUS, "")
     }
 
@@ -378,10 +399,10 @@ class Struct(
         parentStruct: StructType? = null,
         nativeLayout: Boolean = false,
         skipBuffer: Boolean = false,
-        init: Struct.() -> Unit
+        setup: Struct.() -> Unit
     ): StructMember {
         val struct = Struct(module, ANONYMOUS, nativeSubPath, ANONYMOUS, true, true, mutable, alias?.definition, parentStruct?.definition, nativeLayout, !skipBuffer)
-        struct.init()
+        struct.setup()
         return StructType(struct).invoke(ANONYMOUS, "")
     }
 
@@ -776,7 +797,7 @@ $indentation}"""
         if (mallocable) {
             members.forEach {
                 if (it.nativeType is PointerType<*> && it.nativeType.elementType is StructType)
-                    it.nativeType.elementType.definition.hasUsageInput()
+                    it.nativeType.elementType.definition.setUsageInput()
             }
         }
 
@@ -2449,17 +2470,12 @@ fun struct(
     parentStruct: StructType? = null,
     nativeLayout: Boolean = false,
     skipBuffer: Boolean = false,
-    init: (Struct.() -> Unit)? = null
-): StructType {
-    val struct = Struct(module, className, nativeSubPath, nativeName, false, virtual, mutable, alias?.definition, parentStruct?.definition, nativeLayout, !skipBuffer)
-    if (init != null) {
-        struct.init()
-    }
-    if (init != null || nativeLayout) {
-        Generator.register(struct)
-    }
-    return struct.nativeType
-}
+    setup: (Struct.() -> Unit)? = null
+): StructType =
+    Struct(
+        module, className, nativeSubPath, nativeName, false,
+        virtual, mutable, alias?.definition, parentStruct?.definition, nativeLayout, !skipBuffer
+    ).init(setup)
 
 fun union(
     module: Module,
@@ -2472,12 +2488,9 @@ fun union(
     parentStruct: StructType? = null,
     nativeLayout: Boolean = false,
     skipBuffer: Boolean = false,
-    init: (Struct.() -> Unit)? = null
-): StructType {
-    val struct = Struct(module, className, nativeSubPath, nativeName, true, virtual, mutable, alias?.definition, parentStruct?.definition, nativeLayout, !skipBuffer)
-    if (init != null) {
-        struct.init()
-        Generator.register(struct)
-    }
-    return struct.nativeType
-}
+    setup: (Struct.() -> Unit)? = null
+): StructType =
+    Struct(
+        module, className, nativeSubPath, nativeName, true,
+        virtual, mutable, alias?.definition, parentStruct?.definition, nativeLayout, !skipBuffer
+    ).init(setup)

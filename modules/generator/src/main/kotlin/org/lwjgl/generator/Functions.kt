@@ -283,9 +283,9 @@ class Func(
     private fun validate() {
         returns.nativeType.let {
             if (it is StructType)
-                it.definition.hasUsageOutput()
+                it.definition.setUsageOutput()
             else if (it is PointerType<*> && it.elementType is StructType)
-                it.elementType.definition.hasUsageResultPointer()
+                it.elementType.definition.setUsageResultPointer()
         }
 
         var returnCount = 0
@@ -294,9 +294,9 @@ class Func(
             it.nativeType.dereference.let { type ->
                 if (type is StructType) {
                     if (it.isInput)
-                        type.definition.hasUsageInput()
+                        type.definition.setUsageInput()
                     else
-                        type.definition.hasUsageOutput()
+                        type.definition.setUsageOutput()
                 }
             }
 

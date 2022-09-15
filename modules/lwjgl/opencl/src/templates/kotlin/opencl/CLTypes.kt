@@ -209,7 +209,7 @@ fun config() {
     struct(Module.OPENCL, "CLNameVersion", nativeName = "cl_name_version", mutable = false) {
         cl_version("version", "")
         charASCII("name", "")[CL_NAME_VERSION_MAX_NAME_SIZE]
-    }.definition.hasUsageOutput()
+    }.definition.setUsageOutput()
 
     union(Module.OPENCL, "CLDeviceTopologyAMD", nativeName = "cl_device_topology_amd", mutable = false) {
         documentation =
@@ -226,7 +226,7 @@ fun config() {
             cl_char("device", "")
             cl_char("function", "")
         }("pcie", "")
-    }.definition.hasUsageOutput()
+    }.definition.setUsageOutput()
 
     struct(Module.OPENCL, "CLMotionEstimationDescINTEL", nativeName = "cl_motion_estimation_desc_intel") {
         documentation = "Describes the configuration of the motion estimation algorithm."
@@ -242,7 +242,7 @@ fun config() {
             radius from the current source pixel block location (optionally offset by the predicted motion vector)
             """
         )
-    }.definition.hasUsageInput()
+    }.definition.setUsageInput()
 
     val CL_QUEUE_FAMILY_MAX_NAME_SIZE_INTEL = 64
     struct(Module.OPENCL, "CLQueueFamilyPropertiesINTEL", nativeName = "cl_queue_family_properties_intel", mutable = false) {
@@ -250,14 +250,14 @@ fun config() {
         cl_command_queue_capabilities_intel("capabilities", "")
         cl_uint("count", "")
         charASCII("name", "")[CL_QUEUE_FAMILY_MAX_NAME_SIZE_INTEL]
-    }.definition.hasUsageOutput()
+    }.definition.setUsageOutput()
 
     struct(Module.OPENCL, "CLDevicePCIBusInfoKHR", nativeName = "cl_device_pci_bus_info_khr", mutable = false) {
         cl_uint("pci_domain", "")
         cl_uint("pci_bus", "")
         cl_uint("pci_device", "")
         cl_uint("pci_function", "")
-    }.definition.hasUsageOutput()
+    }.definition.setUsageOutput()
 
     struct(Module.OPENCL, "CLDeviceIntegerDotProductAccelerationPropertiesKHR", nativeName = "cl_device_integer_dot_product_acceleration_properties_khr", mutable = false) {
         documentation =
@@ -285,7 +285,7 @@ fun config() {
             "accumulating_saturating_mixed_signedness_accelerated",
             "is #TRUE when accumulating saturating mixed signedness dot product operations are accelerated, #FALSE otherwise"
         )
-    }.definition.hasUsageOutput()
+    }.definition.setUsageOutput()
 
     val CL_NAME_VERSION_MAX_NAME_SIZE_KHR = 64
     struct(Module.OPENCL, "CLNameVersionKHR", nativeName = "cl_name_version_khr", mutable = false) {
@@ -293,7 +293,7 @@ fun config() {
 
         cl_version_khr("version", "")
         charASCII("name", "")[CL_NAME_VERSION_MAX_NAME_SIZE_KHR]
-    }.definition.hasUsageOutput()
+    }.definition.setUsageOutput()
 }
 
 // callback functions
