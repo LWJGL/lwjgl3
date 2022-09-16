@@ -263,6 +263,21 @@ public class EGLCapabilities {
     public final boolean EGL_EXT_device_query;
     /** When true, {@link EXTDeviceQueryName} is supported. */
     public final boolean EGL_EXT_device_query_name;
+    /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_explicit_device.txt">EXT_explicit_device</a> extension is supported.
+     * 
+     * <p>A system may support rendering with multiple devices for the same windowing system. In that case, an EGL implementation must select a default device
+     * based on the native display.</p>
+     * 
+     * <p>This extension allows an application to explicitly request a device to use for rendering instead of the implementation's default.</p>
+     * 
+     * <p>This differs from {@link EXTPlatformDevice EXT_platform_device} in that {@code EGL_EXT_platform_device} uses an {@code EGLDeviceEXT} instead of a native display. Thus,
+     * {@code EGL_EXT_platform_device} allows offscreen rendering to a pbuffer or FBO, but it does not require or use a windowing system, and thus does not
+     * allow pixmap or window surfaces.</p>
+     * 
+     * <p>Using {@code EGL_EXT_explicit_device} with {@code EGL_MESA_platform_surfaceless} is functionally identical to {@code EGL_EXT_platform_device}.</p>
+     */
+    public final boolean EGL_EXT_explicit_device;
     /** When true, {@link EXTGLColorspaceBT2020Linear} is supported. */
     public final boolean EGL_EXT_gl_colorspace_bt2020_linear;
     /** When true, {@link EXTGLColorspaceBT2020PQ} is supported. */
@@ -1061,6 +1076,7 @@ public class EGLCapabilities {
         EGL_EXT_device_persistent_id = check_EXT_device_persistent_id(ext);
         EGL_EXT_device_query = check_EXT_device_query(ext);
         EGL_EXT_device_query_name = ext.contains("EGL_EXT_device_query_name");
+        EGL_EXT_explicit_device = ext.contains("EGL_EXT_explicit_device");
         EGL_EXT_gl_colorspace_bt2020_linear = ext.contains("EGL_EXT_gl_colorspace_bt2020_linear");
         EGL_EXT_gl_colorspace_bt2020_pq = ext.contains("EGL_EXT_gl_colorspace_bt2020_pq");
         EGL_EXT_gl_colorspace_display_p3 = ext.contains("EGL_EXT_gl_colorspace_display_p3");
