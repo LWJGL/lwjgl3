@@ -48,21 +48,21 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Supported GPU Profiling APIs:</p>
  * 
  * <ul>
- * <li><strike>D3D 11/12</strike></li>
+ * <li><s>D3D 11/12</s></li>
  * <li>OpenGL</li>
- * <li><strike>CUDA</strike></li>
+ * <li><s>CUDA</s></li>
  * <li>Metal</li>
  * </ul>
  * 
  * <p><b>LWJGL</b>: The current version of the Remotery bindings is compatible with commit
- * <a href="https://github.com/Celtoys/Remotery/tree/2c952223f0befbd29dfd8251010062133569e6db/vis">2c95222</a>. Run the following commands to clone the
+ * <a href="https://github.com/Celtoys/Remotery/tree/cc32849f1075154c087fccdfff829662be69a23f/vis">cc32849</a>. Run the following commands to clone the
  * Remotery repository at that commit:</p>
  * 
  * <pre><code>
  * git clone --depth=1 https://github.com/Celtoys/Remotery.git
  * cd Remotery
- * git fetch --depth=1 origin 2c952223f0befbd29dfd8251010062133569e6db
- * git branch --no-track lwjgl 2c952223f0befbd29dfd8251010062133569e6db
+ * git fetch --depth=1 origin cc32849f1075154c087fccdfff829662be69a23f
+ * git branch --no-track lwjgl cc32849f1075154c087fccdfff829662be69a23f
  * git checkout lwjgl
  * git branch -D @{-1}</code></pre>
  * 

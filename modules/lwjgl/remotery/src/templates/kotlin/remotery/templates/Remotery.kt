@@ -11,7 +11,7 @@ import remotery.*
 val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_") {
     remoteryIncludes("c")
 
-    val COMMIT = "2c952223f0befbd29dfd8251010062133569e6db"
+    val COMMIT = "cc32849f1075154c087fccdfff829662be69a23f"
     documentation =
         """
         Bindings to ${url("https://github.com/Celtoys/Remotery", "Remotery")}, a realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in
@@ -41,9 +41,9 @@ val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_") {
 
         Supported GPU Profiling APIs:
         ${ul(
-            "<strike>D3D 11/12</strike>",
+            "<s>D3D 11/12</s>",
             "OpenGL",
-            "<strike>CUDA</strike>",
+            "<s>CUDA</s>",
             "Metal"
         )}
 
