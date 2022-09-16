@@ -34,8 +34,9 @@ ENABLE_WARNINGS()""")
         "ERROR_INVALID_HEADER".."-9",
         "ERROR_UNSUPPORTED_FEATURE".."-10",
         "ERROR_CANT_WRITE_FILE".."-11",
-        "ERROR_SERIALZATION_FAILED".."-12",
-        "ERROR_LAYER_NOT_FOUND".."-13"
+        "ERROR_SERIALIZATION_FAILED".."-12",
+        "ERROR_LAYER_NOT_FOUND".."-13",
+        "ERROR_DATA_TOO_LARGE".."-14"
     )
 
     IntConstant(
@@ -120,6 +121,20 @@ ENABLE_WARNINGS()""")
         Check(1)..charASCII.const.p.p("err", "Error string(will be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value."),
 
         returnDoc = "#SUCCESS upon success."
+    )
+
+    int(
+        "IsEXRFromMemory",
+        """
+        Checks if given data is a EXR image (by just looking up a header section).
+
+        Simple wrapper API for #ParseEXRHeaderFromMemory().
+        """,
+
+        unsigned_char.const.p("memory", ""),
+        AutoSize("memory")..size_t("size", ""),
+
+        returnDoc = "#SUCCESS for EXR image, #ERROR_INVALID_HEADER for others"
     )
 
     int(

@@ -30,6 +30,12 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRLayers(JNIEnv *__
     return (jint)EXRLayers(filename, layer_names, num_layers, err);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nIsEXRFromMemory(JNIEnv *__env, jclass clazz, jlong memoryAddress, jlong size) {
+    unsigned char const *memory = (unsigned char const *)(uintptr_t)memoryAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)IsEXRFromMemory(memory, (size_t)size);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_tinyexr_TinyEXR_nEXRNumLevels(JNIEnv *__env, jclass clazz, jlong exr_imageAddress) {
     EXRImage const *exr_image = (EXRImage const *)(uintptr_t)exr_imageAddress;
     UNUSED_PARAMS(__env, clazz)

@@ -38,8 +38,9 @@ public class TinyEXR {
         TINYEXR_ERROR_INVALID_HEADER       = -9,
         TINYEXR_ERROR_UNSUPPORTED_FEATURE  = -10,
         TINYEXR_ERROR_CANT_WRITE_FILE      = -11,
-        TINYEXR_ERROR_SERIALZATION_FAILED  = -12,
-        TINYEXR_ERROR_LAYER_NOT_FOUND      = -13;
+        TINYEXR_ERROR_SERIALIZATION_FAILED = -12,
+        TINYEXR_ERROR_LAYER_NOT_FOUND      = -13,
+        TINYEXR_ERROR_DATA_TOO_LARGE       = -14;
 
     /** Pixel types. */
     public static final int
@@ -182,6 +183,22 @@ public class TinyEXR {
         } finally {
             stack.setPointer(stackPointer);
         }
+    }
+
+    // --- [ IsEXRFromMemory ] ---
+
+    /** Unsafe version of: {@link #IsEXRFromMemory} */
+    public static native int nIsEXRFromMemory(long memory, long size);
+
+    /**
+     * Checks if given data is a EXR image (by just looking up a header section).
+     * 
+     * <p>Simple wrapper API for {@link #ParseEXRHeaderFromMemory}.</p>
+     *
+     * @return {@link #TINYEXR_SUCCESS SUCCESS} for EXR image, {@link #TINYEXR_ERROR_INVALID_HEADER ERROR_INVALID_HEADER} for others
+     */
+    public static int IsEXRFromMemory(@NativeType("unsigned char const *") ByteBuffer memory) {
+        return nIsEXRFromMemory(memAddress(memory), memory.remaining());
     }
 
     // --- [ EXRNumLevels ] ---
