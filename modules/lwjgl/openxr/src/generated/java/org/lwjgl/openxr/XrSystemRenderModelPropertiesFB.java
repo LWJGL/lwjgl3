@@ -101,18 +101,14 @@ public class XrSystemRenderModelPropertiesFB extends Struct implements NativeRes
     public XrSystemRenderModelPropertiesFB type$Default() { return type(FBRenderModel.XR_TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB); }
     /** Sets the specified value to the {@code next} field. */
     public XrSystemRenderModelPropertiesFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code supportsRenderModelLoading} field. */
-    public XrSystemRenderModelPropertiesFB supportsRenderModelLoading(@NativeType("XrBool32") boolean value) { nsupportsRenderModelLoading(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSystemRenderModelPropertiesFB set(
         int type,
-        long next,
-        boolean supportsRenderModelLoading
+        long next
     ) {
         type(type);
         next(next);
-        supportsRenderModelLoading(supportsRenderModelLoading);
 
         return this;
     }
@@ -253,8 +249,6 @@ public class XrSystemRenderModelPropertiesFB extends Struct implements NativeRes
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemRenderModelPropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemRenderModelPropertiesFB.NEXT, value); }
-    /** Unsafe version of {@link #supportsRenderModelLoading(boolean) supportsRenderModelLoading}. */
-    public static void nsupportsRenderModelLoading(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemRenderModelPropertiesFB.SUPPORTSRENDERMODELLOADING, value); }
 
     // -----------------------------------
 
@@ -310,8 +304,6 @@ public class XrSystemRenderModelPropertiesFB extends Struct implements NativeRes
         public XrSystemRenderModelPropertiesFB.Buffer type$Default() { return type(FBRenderModel.XR_TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB); }
         /** Sets the specified value to the {@code next} field. */
         public XrSystemRenderModelPropertiesFB.Buffer next(@NativeType("void *") long value) { XrSystemRenderModelPropertiesFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code supportsRenderModelLoading} field. */
-        public XrSystemRenderModelPropertiesFB.Buffer supportsRenderModelLoading(@NativeType("XrBool32") boolean value) { XrSystemRenderModelPropertiesFB.nsupportsRenderModelLoading(address(), value ? 1 : 0); return this; }
 
     }
 

@@ -100,18 +100,14 @@ public class XrEventDataEventsLost extends Struct implements NativeResource {
     public XrEventDataEventsLost type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_EVENTS_LOST); }
     /** Sets the specified value to the {@link #next} field. */
     public XrEventDataEventsLost next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #lostEventCount} field. */
-    public XrEventDataEventsLost lostEventCount(@NativeType("uint32_t") int value) { nlostEventCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataEventsLost set(
         int type,
-        long next,
-        int lostEventCount
+        long next
     ) {
         type(type);
         next(next);
-        lostEventCount(lostEventCount);
 
         return this;
     }
@@ -262,8 +258,6 @@ public class XrEventDataEventsLost extends Struct implements NativeResource {
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataEventsLost.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataEventsLost.NEXT, value); }
-    /** Unsafe version of {@link #lostEventCount(int) lostEventCount}. */
-    public static void nlostEventCount(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataEventsLost.LOSTEVENTCOUNT, value); }
 
     // -----------------------------------
 
@@ -319,8 +313,6 @@ public class XrEventDataEventsLost extends Struct implements NativeResource {
         public XrEventDataEventsLost.Buffer type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_EVENTS_LOST); }
         /** Sets the specified value to the {@link XrEventDataEventsLost#next} field. */
         public XrEventDataEventsLost.Buffer next(@NativeType("void const *") long value) { XrEventDataEventsLost.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataEventsLost#lostEventCount} field. */
-        public XrEventDataEventsLost.Buffer lostEventCount(@NativeType("uint32_t") int value) { XrEventDataEventsLost.nlostEventCount(address(), value); return this; }
 
     }
 

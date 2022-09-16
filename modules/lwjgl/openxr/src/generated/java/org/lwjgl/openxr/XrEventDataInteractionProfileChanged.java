@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -30,7 +29,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -104,18 +102,14 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
     public XrEventDataInteractionProfileChanged type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED); }
     /** Sets the specified value to the {@link #next} field. */
     public XrEventDataInteractionProfileChanged next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #session} field. */
-    public XrEventDataInteractionProfileChanged session(XrSession value) { nsession(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataInteractionProfileChanged set(
         int type,
-        long next,
-        XrSession session
+        long next
     ) {
         type(type);
         next(next);
-        session(session);
 
         return this;
     }
@@ -266,17 +260,6 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataInteractionProfileChanged.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataInteractionProfileChanged.NEXT, value); }
-    /** Unsafe version of {@link #session(XrSession) session}. */
-    public static void nsession(long struct, XrSession value) { memPutAddress(struct + XrEventDataInteractionProfileChanged.SESSION, value.address()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataInteractionProfileChanged.SESSION));
-    }
 
     // -----------------------------------
 
@@ -332,8 +315,6 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
         public XrEventDataInteractionProfileChanged.Buffer type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED); }
         /** Sets the specified value to the {@link XrEventDataInteractionProfileChanged#next} field. */
         public XrEventDataInteractionProfileChanged.Buffer next(@NativeType("void const *") long value) { XrEventDataInteractionProfileChanged.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataInteractionProfileChanged#session} field. */
-        public XrEventDataInteractionProfileChanged.Buffer session(XrSession value) { XrEventDataInteractionProfileChanged.nsession(address(), value); return this; }
 
     }
 

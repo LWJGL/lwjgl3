@@ -111,30 +111,14 @@ public class XrHandTrackingScaleFB extends Struct implements NativeResource {
     public XrHandTrackingScaleFB type$Default() { return type(FBHandTrackingMesh.XR_TYPE_HAND_TRACKING_SCALE_FB); }
     /** Sets the specified value to the {@link #next} field. */
     public XrHandTrackingScaleFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #sensorOutput} field. */
-    public XrHandTrackingScaleFB sensorOutput(float value) { nsensorOutput(address(), value); return this; }
-    /** Sets the specified value to the {@link #currentOutput} field. */
-    public XrHandTrackingScaleFB currentOutput(float value) { ncurrentOutput(address(), value); return this; }
-    /** Sets the specified value to the {@link #overrideHandScale} field. */
-    public XrHandTrackingScaleFB overrideHandScale(@NativeType("XrBool32") boolean value) { noverrideHandScale(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #overrideValueInput} field. */
-    public XrHandTrackingScaleFB overrideValueInput(float value) { noverrideValueInput(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrHandTrackingScaleFB set(
         int type,
-        long next,
-        float sensorOutput,
-        float currentOutput,
-        boolean overrideHandScale,
-        float overrideValueInput
+        long next
     ) {
         type(type);
         next(next);
-        sensorOutput(sensorOutput);
-        currentOutput(currentOutput);
-        overrideHandScale(overrideHandScale);
-        overrideValueInput(overrideValueInput);
 
         return this;
     }
@@ -281,14 +265,6 @@ public class XrHandTrackingScaleFB extends Struct implements NativeResource {
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingScaleFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrHandTrackingScaleFB.NEXT, value); }
-    /** Unsafe version of {@link #sensorOutput(float) sensorOutput}. */
-    public static void nsensorOutput(long struct, float value) { UNSAFE.putFloat(null, struct + XrHandTrackingScaleFB.SENSOROUTPUT, value); }
-    /** Unsafe version of {@link #currentOutput(float) currentOutput}. */
-    public static void ncurrentOutput(long struct, float value) { UNSAFE.putFloat(null, struct + XrHandTrackingScaleFB.CURRENTOUTPUT, value); }
-    /** Unsafe version of {@link #overrideHandScale(boolean) overrideHandScale}. */
-    public static void noverrideHandScale(long struct, int value) { UNSAFE.putInt(null, struct + XrHandTrackingScaleFB.OVERRIDEHANDSCALE, value); }
-    /** Unsafe version of {@link #overrideValueInput(float) overrideValueInput}. */
-    public static void noverrideValueInput(long struct, float value) { UNSAFE.putFloat(null, struct + XrHandTrackingScaleFB.OVERRIDEVALUEINPUT, value); }
 
     // -----------------------------------
 
@@ -350,14 +326,6 @@ public class XrHandTrackingScaleFB extends Struct implements NativeResource {
         public XrHandTrackingScaleFB.Buffer type$Default() { return type(FBHandTrackingMesh.XR_TYPE_HAND_TRACKING_SCALE_FB); }
         /** Sets the specified value to the {@link XrHandTrackingScaleFB#next} field. */
         public XrHandTrackingScaleFB.Buffer next(@NativeType("void *") long value) { XrHandTrackingScaleFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHandTrackingScaleFB#sensorOutput} field. */
-        public XrHandTrackingScaleFB.Buffer sensorOutput(float value) { XrHandTrackingScaleFB.nsensorOutput(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHandTrackingScaleFB#currentOutput} field. */
-        public XrHandTrackingScaleFB.Buffer currentOutput(float value) { XrHandTrackingScaleFB.ncurrentOutput(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHandTrackingScaleFB#overrideHandScale} field. */
-        public XrHandTrackingScaleFB.Buffer overrideHandScale(@NativeType("XrBool32") boolean value) { XrHandTrackingScaleFB.noverrideHandScale(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrHandTrackingScaleFB#overrideValueInput} field. */
-        public XrHandTrackingScaleFB.Buffer overrideValueInput(float value) { XrHandTrackingScaleFB.noverrideValueInput(address(), value); return this; }
 
     }
 

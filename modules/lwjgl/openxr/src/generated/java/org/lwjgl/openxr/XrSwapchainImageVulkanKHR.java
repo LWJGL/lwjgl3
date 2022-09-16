@@ -39,7 +39,6 @@ import org.lwjgl.vulkan.*;
  * <li>The {@link KHRVulkanEnable XR_KHR_vulkan_enable} extension <b>must</b> be enabled prior to using {@link XrSwapchainImageVulkanKHR}</li>
  * <li>{@code type} <b>must</b> be {@link KHRVulkanEnable#XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSwapchainImageFoveationVulkanFB}</li>
- * <li>{@code image} <b>must</b> be a valid {@code VkImage} value</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -115,18 +114,14 @@ public class XrSwapchainImageVulkanKHR extends Struct implements NativeResource 
     public XrSwapchainImageVulkanKHR next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrSwapchainImageFoveationVulkanFB} value to the {@code next} chain. */
     public XrSwapchainImageVulkanKHR next(XrSwapchainImageFoveationVulkanFB value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #image} field. */
-    public XrSwapchainImageVulkanKHR image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSwapchainImageVulkanKHR set(
         int type,
-        long next,
-        long image
+        long next
     ) {
         type(type);
         next(next);
-        image(image);
 
         return this;
     }
@@ -277,8 +272,6 @@ public class XrSwapchainImageVulkanKHR extends Struct implements NativeResource 
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainImageVulkanKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainImageVulkanKHR.NEXT, value); }
-    /** Unsafe version of {@link #image(long) image}. */
-    public static void nimage(long struct, long value) { UNSAFE.putLong(null, struct + XrSwapchainImageVulkanKHR.IMAGE, value); }
 
     // -----------------------------------
 
@@ -336,8 +329,6 @@ public class XrSwapchainImageVulkanKHR extends Struct implements NativeResource 
         public XrSwapchainImageVulkanKHR.Buffer next(@NativeType("void *") long value) { XrSwapchainImageVulkanKHR.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrSwapchainImageFoveationVulkanFB} value to the {@code next} chain. */
         public XrSwapchainImageVulkanKHR.Buffer next(XrSwapchainImageFoveationVulkanFB value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrSwapchainImageVulkanKHR#image} field. */
-        public XrSwapchainImageVulkanKHR.Buffer image(@NativeType("VkImage") long value) { XrSwapchainImageVulkanKHR.nimage(address(), value); return this; }
 
     }
 

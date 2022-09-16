@@ -103,18 +103,14 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
     public XrSystemMarkerTrackingPropertiesVARJO type$Default() { return type(VARJOMarkerTracking.XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSystemMarkerTrackingPropertiesVARJO next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #supportsMarkerTracking} field. */
-    public XrSystemMarkerTrackingPropertiesVARJO supportsMarkerTracking(@NativeType("XrBool32") boolean value) { nsupportsMarkerTracking(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSystemMarkerTrackingPropertiesVARJO set(
         int type,
-        long next,
-        boolean supportsMarkerTracking
+        long next
     ) {
         type(type);
         next(next);
-        supportsMarkerTracking(supportsMarkerTracking);
 
         return this;
     }
@@ -255,8 +251,6 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemMarkerTrackingPropertiesVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemMarkerTrackingPropertiesVARJO.NEXT, value); }
-    /** Unsafe version of {@link #supportsMarkerTracking(boolean) supportsMarkerTracking}. */
-    public static void nsupportsMarkerTracking(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemMarkerTrackingPropertiesVARJO.SUPPORTSMARKERTRACKING, value); }
 
     // -----------------------------------
 
@@ -312,8 +306,6 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
         public XrSystemMarkerTrackingPropertiesVARJO.Buffer type$Default() { return type(VARJOMarkerTracking.XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO); }
         /** Sets the specified value to the {@link XrSystemMarkerTrackingPropertiesVARJO#next} field. */
         public XrSystemMarkerTrackingPropertiesVARJO.Buffer next(@NativeType("void *") long value) { XrSystemMarkerTrackingPropertiesVARJO.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemMarkerTrackingPropertiesVARJO#supportsMarkerTracking} field. */
-        public XrSystemMarkerTrackingPropertiesVARJO.Buffer supportsMarkerTracking(@NativeType("XrBool32") boolean value) { XrSystemMarkerTrackingPropertiesVARJO.nsupportsMarkerTracking(address(), value ? 1 : 0); return this; }
 
     }
 

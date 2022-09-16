@@ -17,7 +17,7 @@ val MSFT_scene_understanding_serialization = "MSFTSceneUnderstandingSerializatio
     IntConstant(
         "The extension specification version.",
 
-        "MSFT_scene_understanding_serialization_SPEC_VERSION".."1"
+        "MSFT_scene_understanding_serialization_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -61,6 +61,8 @@ val MSFT_scene_understanding_serialization = "MSFTSceneUnderstandingSerializatio
         <h5>Description</h5>
         The #DeserializeSceneMSFT() function begins deserializing a list of serialized scene fragments. The runtime <b>must</b> return quickly without waiting for the deserialization to complete. The application <b>should</b> use #GetSceneComputeStateMSFT() to inspect the completeness of the deserialization.
 
+        The runtime <b>must</b> return #ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT if #DeserializeSceneMSFT() is called while the scene computation is in progress.
+
         The #GetSceneComputeStateMSFT() function <b>must</b> return #SCENE_COMPUTE_STATE_UPDATING_MSFT while the deserialization is in progress, and #SCENE_COMPUTE_STATE_COMPLETED_MSFT when the deserialization has completed successfully. If the runtime fails to deserialize the binary stream, #GetSceneComputeStateMSFT() <b>must</b> return #SCENE_COMPUTE_STATE_COMPLETED_WITH_ERROR_MSFT to indicate that the deserialization has completed but an error occurred.
 
         When #GetSceneComputeStateMSFT() returns #SCENE_COMPUTE_STATE_COMPLETED_MSFT, the application <b>may</b> call #CreateSceneMSFT() to create the {@code XrSceneMSFT} handle. If #CreateSceneMSFT() is called while #GetSceneComputeStateMSFT() returns #SCENE_COMPUTE_STATE_COMPLETED_WITH_ERROR_MSFT, a valid {@code XrSceneMSFT} handle <b>must</b> be returned, but that handle <b>must</b> contain zero scene components.
@@ -89,6 +91,7 @@ val MSFT_scene_understanding_serialization = "MSFTSceneUnderstandingSerializatio
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
                 <li>#ERROR_OUT_OF_MEMORY</li>
+                <li>#ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT</li>
             </ul></dd>
         </dl>
 
@@ -148,6 +151,7 @@ val MSFT_scene_understanding_serialization = "MSFTSceneUnderstandingSerializatio
                 <li>#ERROR_SESSION_LOST</li>
                 <li>#ERROR_OUT_OF_MEMORY</li>
                 <li>#ERROR_SIZE_INSUFFICIENT</li>
+                <li>#ERROR_SCENE_COMPONENT_ID_INVALID_MSFT</li>
             </ul></dd>
         </dl>
 

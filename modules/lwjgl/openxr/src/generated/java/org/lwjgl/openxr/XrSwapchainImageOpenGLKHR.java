@@ -110,18 +110,14 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
     public XrSwapchainImageOpenGLKHR type$Default() { return type(KHROpenGLEnable.XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSwapchainImageOpenGLKHR next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #image} field. */
-    public XrSwapchainImageOpenGLKHR image(@NativeType("uint32_t") int value) { nimage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSwapchainImageOpenGLKHR set(
         int type,
-        long next,
-        int image
+        long next
     ) {
         type(type);
         next(next);
-        image(image);
 
         return this;
     }
@@ -272,8 +268,6 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainImageOpenGLKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSwapchainImageOpenGLKHR.NEXT, value); }
-    /** Unsafe version of {@link #image(int) image}. */
-    public static void nimage(long struct, int value) { UNSAFE.putInt(null, struct + XrSwapchainImageOpenGLKHR.IMAGE, value); }
 
     // -----------------------------------
 
@@ -329,8 +323,6 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
         public XrSwapchainImageOpenGLKHR.Buffer type$Default() { return type(KHROpenGLEnable.XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR); }
         /** Sets the specified value to the {@link XrSwapchainImageOpenGLKHR#next} field. */
         public XrSwapchainImageOpenGLKHR.Buffer next(@NativeType("void *") long value) { XrSwapchainImageOpenGLKHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainImageOpenGLKHR#image} field. */
-        public XrSwapchainImageOpenGLKHR.Buffer image(@NativeType("uint32_t") int value) { XrSwapchainImageOpenGLKHR.nimage(address(), value); return this; }
 
     }
 

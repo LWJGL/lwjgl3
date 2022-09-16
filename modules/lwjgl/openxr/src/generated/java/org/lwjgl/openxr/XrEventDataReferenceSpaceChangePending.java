@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -24,8 +23,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
- * <li>{@code referenceSpaceType} <b>must</b> be a valid {@code XrReferenceSpaceType} value</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -126,36 +123,14 @@ public class XrEventDataReferenceSpaceChangePending extends Struct implements Na
     public XrEventDataReferenceSpaceChangePending type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING); }
     /** Sets the specified value to the {@link #next} field. */
     public XrEventDataReferenceSpaceChangePending next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #session} field. */
-    public XrEventDataReferenceSpaceChangePending session(XrSession value) { nsession(address(), value); return this; }
-    /** Sets the specified value to the {@link #referenceSpaceType} field. */
-    public XrEventDataReferenceSpaceChangePending referenceSpaceType(@NativeType("XrReferenceSpaceType") int value) { nreferenceSpaceType(address(), value); return this; }
-    /** Sets the specified value to the {@link #changeTime} field. */
-    public XrEventDataReferenceSpaceChangePending changeTime(@NativeType("XrTime") long value) { nchangeTime(address(), value); return this; }
-    /** Sets the specified value to the {@link #poseValid} field. */
-    public XrEventDataReferenceSpaceChangePending poseValid(@NativeType("XrBool32") boolean value) { nposeValid(address(), value ? 1 : 0); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #poseInPreviousSpace} field. */
-    public XrEventDataReferenceSpaceChangePending poseInPreviousSpace(XrPosef value) { nposeInPreviousSpace(address(), value); return this; }
-    /** Passes the {@link #poseInPreviousSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public XrEventDataReferenceSpaceChangePending poseInPreviousSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInPreviousSpace()); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataReferenceSpaceChangePending set(
         int type,
-        long next,
-        XrSession session,
-        int referenceSpaceType,
-        long changeTime,
-        boolean poseValid,
-        XrPosef poseInPreviousSpace
+        long next
     ) {
         type(type);
         next(next);
-        session(session);
-        referenceSpaceType(referenceSpaceType);
-        changeTime(changeTime);
-        poseValid(poseValid);
-        poseInPreviousSpace(poseInPreviousSpace);
 
         return this;
     }
@@ -314,25 +289,6 @@ public class XrEventDataReferenceSpaceChangePending extends Struct implements Na
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataReferenceSpaceChangePending.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataReferenceSpaceChangePending.NEXT, value); }
-    /** Unsafe version of {@link #session(XrSession) session}. */
-    public static void nsession(long struct, XrSession value) { memPutAddress(struct + XrEventDataReferenceSpaceChangePending.SESSION, value.address()); }
-    /** Unsafe version of {@link #referenceSpaceType(int) referenceSpaceType}. */
-    public static void nreferenceSpaceType(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataReferenceSpaceChangePending.REFERENCESPACETYPE, value); }
-    /** Unsafe version of {@link #changeTime(long) changeTime}. */
-    public static void nchangeTime(long struct, long value) { UNSAFE.putLong(null, struct + XrEventDataReferenceSpaceChangePending.CHANGETIME, value); }
-    /** Unsafe version of {@link #poseValid(boolean) poseValid}. */
-    public static void nposeValid(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataReferenceSpaceChangePending.POSEVALID, value); }
-    /** Unsafe version of {@link #poseInPreviousSpace(XrPosef) poseInPreviousSpace}. */
-    public static void nposeInPreviousSpace(long struct, XrPosef value) { memCopy(value.address(), struct + XrEventDataReferenceSpaceChangePending.POSEINPREVIOUSSPACE, XrPosef.SIZEOF); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataReferenceSpaceChangePending.SESSION));
-    }
 
     // -----------------------------------
 
@@ -399,18 +355,6 @@ public class XrEventDataReferenceSpaceChangePending extends Struct implements Na
         public XrEventDataReferenceSpaceChangePending.Buffer type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING); }
         /** Sets the specified value to the {@link XrEventDataReferenceSpaceChangePending#next} field. */
         public XrEventDataReferenceSpaceChangePending.Buffer next(@NativeType("void const *") long value) { XrEventDataReferenceSpaceChangePending.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataReferenceSpaceChangePending#session} field. */
-        public XrEventDataReferenceSpaceChangePending.Buffer session(XrSession value) { XrEventDataReferenceSpaceChangePending.nsession(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataReferenceSpaceChangePending#referenceSpaceType} field. */
-        public XrEventDataReferenceSpaceChangePending.Buffer referenceSpaceType(@NativeType("XrReferenceSpaceType") int value) { XrEventDataReferenceSpaceChangePending.nreferenceSpaceType(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataReferenceSpaceChangePending#changeTime} field. */
-        public XrEventDataReferenceSpaceChangePending.Buffer changeTime(@NativeType("XrTime") long value) { XrEventDataReferenceSpaceChangePending.nchangeTime(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataReferenceSpaceChangePending#poseValid} field. */
-        public XrEventDataReferenceSpaceChangePending.Buffer poseValid(@NativeType("XrBool32") boolean value) { XrEventDataReferenceSpaceChangePending.nposeValid(address(), value ? 1 : 0); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrEventDataReferenceSpaceChangePending#poseInPreviousSpace} field. */
-        public XrEventDataReferenceSpaceChangePending.Buffer poseInPreviousSpace(XrPosef value) { XrEventDataReferenceSpaceChangePending.nposeInPreviousSpace(address(), value); return this; }
-        /** Passes the {@link XrEventDataReferenceSpaceChangePending#poseInPreviousSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public XrEventDataReferenceSpaceChangePending.Buffer poseInPreviousSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInPreviousSpace()); return this; }
 
     }
 

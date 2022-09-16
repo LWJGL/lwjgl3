@@ -17,7 +17,7 @@ val MSFT_scene_understanding = "MSFTSceneUnderstanding".nativeClassXR("MSFT_scen
     IntConstant(
         "The extension specification version.",
 
-        "MSFT_scene_understanding_SPEC_VERSION".."1"
+        "MSFT_scene_understanding_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -429,6 +429,7 @@ val MSFT_scene_understanding = "MSFTSceneUnderstanding".nativeClassXR("MSFT_scen
                 <li>#ERROR_SESSION_LOST</li>
                 <li>#ERROR_OUT_OF_MEMORY</li>
                 <li>#ERROR_LIMIT_REACHED</li>
+                <li>#ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT</li>
             </ul></dd>
         </dl>
 
@@ -596,7 +597,10 @@ val MSFT_scene_understanding = "MSFTSceneUnderstanding".nativeClassXR("MSFT_scen
                 <li>#ERROR_SESSION_LOST</li>
                 <li>#ERROR_OUT_OF_MEMORY</li>
                 <li>#ERROR_TIME_INVALID</li>
+                <li>#ERROR_SCENE_COMPUTE_FEATURE_INCOMPATIBLE_MSFT</li>
+                <li>#ERROR_SCENE_COMPUTE_CONSISTENCY_MISMATCH_MSFT</li>
                 <li>#ERROR_POSE_INVALID</li>
+                <li>#ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT</li>
             </ul></dd>
         </dl>
 
@@ -699,6 +703,7 @@ val MSFT_scene_understanding = "MSFTSceneUnderstanding".nativeClassXR("MSFT_scen
                 <li>#ERROR_SESSION_LOST</li>
                 <li>#ERROR_OUT_OF_MEMORY</li>
                 <li>#ERROR_SIZE_INSUFFICIENT</li>
+                <li>#ERROR_SCENE_COMPONENT_TYPE_MISMATCH_MSFT</li>
             </ul></dd>
         </dl>
 
@@ -827,6 +832,7 @@ val MSFT_scene_understanding = "MSFTSceneUnderstanding".nativeClassXR("MSFT_scen
                 <li>#ERROR_INSTANCE_LOST</li>
                 <li>#ERROR_SESSION_LOST</li>
                 <li>#ERROR_OUT_OF_MEMORY</li>
+                <li>#ERROR_SCENE_MESH_BUFFER_ID_INVALID_MSFT</li>
                 <li>#ERROR_SCENE_COMPONENT_ID_INVALID_MSFT</li>
             </ul></dd>
         </dl>

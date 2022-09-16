@@ -248,7 +248,7 @@ val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = f
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code type} <b>must</b> be #TYPE_SYSTEM_PROPERTIES</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrRenderModelCapabilitiesRequestFB, ##XrSystemColorSpacePropertiesFB, ##XrSystemEyeGazeInteractionPropertiesEXT, ##XrSystemFacialTrackingPropertiesHTC, ##XrSystemFoveatedRenderingPropertiesVARJO, ##XrSystemHandTrackingMeshPropertiesMSFT, ##XrSystemHandTrackingPropertiesEXT, ##XrSystemKeyboardTrackingPropertiesFB, ##XrSystemMarkerTrackingPropertiesVARJO, ##XrSystemPassthroughPropertiesFB, ##XrSystemRenderModelPropertiesFB, ##XrSystemSpaceWarpPropertiesFB, ##XrSystemSpatialEntityPropertiesFB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrRenderModelCapabilitiesRequestFB, ##XrSystemColorSpacePropertiesFB, ##XrSystemEyeGazeInteractionPropertiesEXT, ##XrSystemFacialTrackingPropertiesHTC, ##XrSystemFoveatedRenderingPropertiesVARJO, ##XrSystemHandTrackingMeshPropertiesMSFT, ##XrSystemHandTrackingPropertiesEXT, ##XrSystemKeyboardTrackingPropertiesFB, ##XrSystemMarkerTrackingPropertiesVARJO, ##XrSystemPassthroughProperties2FB, ##XrSystemPassthroughPropertiesFB, ##XrSystemRenderModelPropertiesFB, ##XrSystemSpaceWarpPropertiesFB, ##XrSystemSpatialEntityPropertiesFB</li>
         </ul>
 
         <h5>See Also</h5>
@@ -257,7 +257,7 @@ val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = f
 
     Expression("#TYPE_SYSTEM_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
     PointerSetter(
-        "XrRenderModelCapabilitiesRequestFB", "XrSystemColorSpacePropertiesFB", "XrSystemEyeGazeInteractionPropertiesEXT", "XrSystemFacialTrackingPropertiesHTC", "XrSystemFoveatedRenderingPropertiesVARJO", "XrSystemHandTrackingMeshPropertiesMSFT", "XrSystemHandTrackingPropertiesEXT", "XrSystemKeyboardTrackingPropertiesFB", "XrSystemMarkerTrackingPropertiesVARJO", "XrSystemPassthroughPropertiesFB", "XrSystemRenderModelPropertiesFB", "XrSystemSpaceWarpPropertiesFB", "XrSystemSpatialEntityPropertiesFB",
+        "XrRenderModelCapabilitiesRequestFB", "XrSystemColorSpacePropertiesFB", "XrSystemEyeGazeInteractionPropertiesEXT", "XrSystemFacialTrackingPropertiesHTC", "XrSystemFoveatedRenderingPropertiesVARJO", "XrSystemHandTrackingMeshPropertiesMSFT", "XrSystemHandTrackingPropertiesEXT", "XrSystemKeyboardTrackingPropertiesFB", "XrSystemMarkerTrackingPropertiesVARJO", "XrSystemPassthroughProperties2FB", "XrSystemPassthroughPropertiesFB", "XrSystemRenderModelPropertiesFB", "XrSystemSpaceWarpPropertiesFB", "XrSystemSpatialEntityPropertiesFB",
         prepend = true
     )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     XrSystemId("systemId", "the {@code XrSystemId} identifying the system.")
@@ -545,7 +545,7 @@ val XrSwapchainCreateInfo = struct(Module.OPENXR, "XrSwapchainCreateInfo") {
     uint32_t("mipCount", "describes the number of levels of detail available for minified sampling of the image, <b>must</b> not be 0 or greater than the graphics API’s maximum limit.")
 }
 
-val XrSwapchainImageBaseHeader = struct(Module.OPENXR, "XrSwapchainImageBaseHeader") {
+val XrSwapchainImageBaseHeader = struct(Module.OPENXR, "XrSwapchainImageBaseHeader", mutable = false) {
     documentation =
         """
         Image base header for a swapchain image.
@@ -555,7 +555,7 @@ val XrSwapchainImageBaseHeader = struct(Module.OPENXR, "XrSwapchainImageBaseHead
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code type} <b>must</b> be one of the following XrStructureType values: #TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR, #TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR, #TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR</li>
+            <li>{@code type} <b>must</b> be one of the following XrStructureType values: #TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR, #TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
         </ul>
 
@@ -563,8 +563,8 @@ val XrSwapchainImageBaseHeader = struct(Module.OPENXR, "XrSwapchainImageBaseHead
         #EnumerateSwapchainImages()
         """
 
-    XrStructureType("type", "the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    XrStructureType("type", "the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
 }
 
 val XrSwapchainImageAcquireInfo = struct(Module.OPENXR, "XrSwapchainImageAcquireInfo") {
@@ -1288,6 +1288,9 @@ val XrInputSourceLocalizedNameGetInfo = struct(Module.OPENXR, "XrInputSourceLoca
         """
         Information to query the bound input sources for an action.
 
+        <h5>Description</h5>
+        The result of passing an {@code XrPath} {@code source} <b>not</b> retrieved from #EnumerateBoundSourcesForAction() is not specified.
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code type} <b>must</b> be #TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO</li>
@@ -1549,7 +1552,7 @@ val XrCompositionLayerQuad = struct(Module.OPENXR, "XrCompositionLayerQuad", par
     XrExtent2Df("size", "the width and height of the quad in meters.")
 }
 
-val XrEventDataBaseHeader = struct(Module.OPENXR, "XrEventDataBaseHeader") {
+val XrEventDataBaseHeader = struct(Module.OPENXR, "XrEventDataBaseHeader", mutable = false) {
     documentation =
         """
         Base header for an event.
@@ -1569,11 +1572,11 @@ val XrEventDataBaseHeader = struct(Module.OPENXR, "XrEventDataBaseHeader") {
         #PollEvent()
         """
 
-    XrStructureType("type", "the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    XrStructureType("type", "the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value.").mutable()
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
 }
 
-val XrEventDataEventsLost = struct(Module.OPENXR, "XrEventDataEventsLost", parentStruct = XrEventDataBaseHeader) {
+val XrEventDataEventsLost = struct(Module.OPENXR, "XrEventDataEventsLost", mutable = false, parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Event indicating events were lost.
@@ -1591,12 +1594,12 @@ val XrEventDataEventsLost = struct(Module.OPENXR, "XrEventDataEventsLost", paren
         ##XrEventDataBaseHeader, #PollEvent()
         """
 
-    Expression("#TYPE_EVENT_DATA_EVENTS_LOST")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_EVENT_DATA_EVENTS_LOST")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     uint32_t("lostEventCount", "the number of events which have overflowed since the last call to #PollEvent().")
 }
 
-val XrEventDataInstanceLossPending = struct(Module.OPENXR, "XrEventDataInstanceLossPending", parentStruct = XrEventDataBaseHeader) {
+val XrEventDataInstanceLossPending = struct(Module.OPENXR, "XrEventDataInstanceLossPending", mutable = false, parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Event indicating instance loss will occur.
@@ -1621,12 +1624,12 @@ val XrEventDataInstanceLossPending = struct(Module.OPENXR, "XrEventDataInstanceL
         ##XrEventDataBaseHeader, #PollEvent()
         """
 
-    Expression("#TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
+    Expression("#TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING")..XrStructureType("type", "").mutable()
+    nullable..opaque_const_p("next", "").mutable()
     XrTime("lossTime", "")
 }
 
-val XrEventDataSessionStateChanged = struct(Module.OPENXR, "XrEventDataSessionStateChanged", parentStruct = XrEventDataBaseHeader) {
+val XrEventDataSessionStateChanged = struct(Module.OPENXR, "XrEventDataSessionStateChanged", mutable = false, parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Event indicating session state changed.
@@ -1638,22 +1641,20 @@ val XrEventDataSessionStateChanged = struct(Module.OPENXR, "XrEventDataSessionSt
         <ul>
             <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SESSION_STATE_CHANGED</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-            <li>{@code state} <b>must</b> be a valid {@code XrSessionState} value</li>
         </ul>
 
         <h5>See Also</h5>
         ##XrEventDataBaseHeader, #PollEvent()
         """
 
-    Expression("#TYPE_EVENT_DATA_SESSION_STATE_CHANGED")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_EVENT_DATA_SESSION_STATE_CHANGED")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     XrSession("session", "the {@code XrSession} which has changed state.")
     XrSessionState("state", "the current {@code XrSessionState} of the {@code session}.")
     XrTime("time", "an {@code XrTime} which indicates the time of the state change.")
 }
 
-val XrEventDataReferenceSpaceChangePending = struct(Module.OPENXR, "XrEventDataReferenceSpaceChangePending", parentStruct = XrEventDataBaseHeader) {
+val XrEventDataReferenceSpaceChangePending = struct(Module.OPENXR, "XrEventDataReferenceSpaceChangePending", mutable = false, parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Notifies the application that a reference space is changing.
@@ -1662,16 +1663,14 @@ val XrEventDataReferenceSpaceChangePending = struct(Module.OPENXR, "XrEventDataR
         <ul>
             <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-            <li>{@code referenceSpaceType} <b>must</b> be a valid {@code XrReferenceSpaceType} value</li>
         </ul>
 
         <h5>See Also</h5>
         ##XrPosef, #CreateReferenceSpace()
         """
 
-    Expression("#TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     XrSession("session", "the {@code XrSession} for which the reference space is changing.")
     XrReferenceSpaceType("referenceSpaceType", "the {@code XrReferenceSpaceType} that is changing.")
     XrTime("changeTime", "the target {@code XrTime} after which #LocateSpace() or #LocateViews() will return values that respect this change.")
@@ -1679,7 +1678,7 @@ val XrEventDataReferenceSpaceChangePending = struct(Module.OPENXR, "XrEventDataR
     XrPosef("poseInPreviousSpace", "an ##XrPosef defining the position and orientation of the new reference space’s natural origin within the natural reference frame of its previous space.")
 }
 
-val XrEventDataInteractionProfileChanged = struct(Module.OPENXR, "XrEventDataInteractionProfileChanged", parentStruct = XrEventDataBaseHeader) {
+val XrEventDataInteractionProfileChanged = struct(Module.OPENXR, "XrEventDataInteractionProfileChanged", mutable = false, parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Notifies the application than the active interaction profile has changed.
@@ -1693,15 +1692,14 @@ val XrEventDataInteractionProfileChanged = struct(Module.OPENXR, "XrEventDataInt
         <ul>
             <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
         </ul>
 
         <h5>See Also</h5>
         #GetCurrentInteractionProfile(), #SuggestInteractionProfileBindings()
         """
 
-    Expression("#TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     XrSession("session", "the {@code XrSession} for which at least one of the interaction profiles for a top level path has changed.")
 }
 

@@ -108,18 +108,14 @@ public class XrEventDataInstanceLossPending extends Struct implements NativeReso
     public XrEventDataInstanceLossPending type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING); }
     /** Sets the specified value to the {@code next} field. */
     public XrEventDataInstanceLossPending next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code lossTime} field. */
-    public XrEventDataInstanceLossPending lossTime(@NativeType("XrTime") long value) { nlossTime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataInstanceLossPending set(
         int type,
-        long next,
-        long lossTime
+        long next
     ) {
         type(type);
         next(next);
-        lossTime(lossTime);
 
         return this;
     }
@@ -270,8 +266,6 @@ public class XrEventDataInstanceLossPending extends Struct implements NativeReso
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataInstanceLossPending.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataInstanceLossPending.NEXT, value); }
-    /** Unsafe version of {@link #lossTime(long) lossTime}. */
-    public static void nlossTime(long struct, long value) { UNSAFE.putLong(null, struct + XrEventDataInstanceLossPending.LOSSTIME, value); }
 
     // -----------------------------------
 
@@ -327,8 +321,6 @@ public class XrEventDataInstanceLossPending extends Struct implements NativeReso
         public XrEventDataInstanceLossPending.Buffer type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING); }
         /** Sets the specified value to the {@code next} field. */
         public XrEventDataInstanceLossPending.Buffer next(@NativeType("void const *") long value) { XrEventDataInstanceLossPending.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code lossTime} field. */
-        public XrEventDataInstanceLossPending.Buffer lossTime(@NativeType("XrTime") long value) { XrEventDataInstanceLossPending.nlossTime(address(), value); return this; }
 
     }
 

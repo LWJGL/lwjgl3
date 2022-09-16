@@ -102,22 +102,14 @@ public class XrEventDataDisplayRefreshRateChangedFB extends Struct implements Na
     public XrEventDataDisplayRefreshRateChangedFB type$Default() { return type(FBDisplayRefreshRate.XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB); }
     /** Sets the specified value to the {@link #next} field. */
     public XrEventDataDisplayRefreshRateChangedFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #fromDisplayRefreshRate} field. */
-    public XrEventDataDisplayRefreshRateChangedFB fromDisplayRefreshRate(float value) { nfromDisplayRefreshRate(address(), value); return this; }
-    /** Sets the specified value to the {@link #toDisplayRefreshRate} field. */
-    public XrEventDataDisplayRefreshRateChangedFB toDisplayRefreshRate(float value) { ntoDisplayRefreshRate(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataDisplayRefreshRateChangedFB set(
         int type,
-        long next,
-        float fromDisplayRefreshRate,
-        float toDisplayRefreshRate
+        long next
     ) {
         type(type);
         next(next);
-        fromDisplayRefreshRate(fromDisplayRefreshRate);
-        toDisplayRefreshRate(toDisplayRefreshRate);
 
         return this;
     }
@@ -270,10 +262,6 @@ public class XrEventDataDisplayRefreshRateChangedFB extends Struct implements Na
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataDisplayRefreshRateChangedFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataDisplayRefreshRateChangedFB.NEXT, value); }
-    /** Unsafe version of {@link #fromDisplayRefreshRate(float) fromDisplayRefreshRate}. */
-    public static void nfromDisplayRefreshRate(long struct, float value) { UNSAFE.putFloat(null, struct + XrEventDataDisplayRefreshRateChangedFB.FROMDISPLAYREFRESHRATE, value); }
-    /** Unsafe version of {@link #toDisplayRefreshRate(float) toDisplayRefreshRate}. */
-    public static void ntoDisplayRefreshRate(long struct, float value) { UNSAFE.putFloat(null, struct + XrEventDataDisplayRefreshRateChangedFB.TODISPLAYREFRESHRATE, value); }
 
     // -----------------------------------
 
@@ -330,10 +318,6 @@ public class XrEventDataDisplayRefreshRateChangedFB extends Struct implements Na
         public XrEventDataDisplayRefreshRateChangedFB.Buffer type$Default() { return type(FBDisplayRefreshRate.XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB); }
         /** Sets the specified value to the {@link XrEventDataDisplayRefreshRateChangedFB#next} field. */
         public XrEventDataDisplayRefreshRateChangedFB.Buffer next(@NativeType("void const *") long value) { XrEventDataDisplayRefreshRateChangedFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataDisplayRefreshRateChangedFB#fromDisplayRefreshRate} field. */
-        public XrEventDataDisplayRefreshRateChangedFB.Buffer fromDisplayRefreshRate(float value) { XrEventDataDisplayRefreshRateChangedFB.nfromDisplayRefreshRate(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataDisplayRefreshRateChangedFB#toDisplayRefreshRate} field. */
-        public XrEventDataDisplayRefreshRateChangedFB.Buffer toDisplayRefreshRate(float value) { XrEventDataDisplayRefreshRateChangedFB.ntoDisplayRefreshRate(address(), value); return this; }
 
     }
 

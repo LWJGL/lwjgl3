@@ -101,18 +101,14 @@ public class XrSystemKeyboardTrackingPropertiesFB extends Struct implements Nati
     public XrSystemKeyboardTrackingPropertiesFB type$Default() { return type(FBKeyboardTracking.XR_TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSystemKeyboardTrackingPropertiesFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #supportsKeyboardTracking} field. */
-    public XrSystemKeyboardTrackingPropertiesFB supportsKeyboardTracking(@NativeType("XrBool32") boolean value) { nsupportsKeyboardTracking(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSystemKeyboardTrackingPropertiesFB set(
         int type,
-        long next,
-        boolean supportsKeyboardTracking
+        long next
     ) {
         type(type);
         next(next);
-        supportsKeyboardTracking(supportsKeyboardTracking);
 
         return this;
     }
@@ -253,8 +249,6 @@ public class XrSystemKeyboardTrackingPropertiesFB extends Struct implements Nati
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemKeyboardTrackingPropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemKeyboardTrackingPropertiesFB.NEXT, value); }
-    /** Unsafe version of {@link #supportsKeyboardTracking(boolean) supportsKeyboardTracking}. */
-    public static void nsupportsKeyboardTracking(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemKeyboardTrackingPropertiesFB.SUPPORTSKEYBOARDTRACKING, value); }
 
     // -----------------------------------
 
@@ -310,8 +304,6 @@ public class XrSystemKeyboardTrackingPropertiesFB extends Struct implements Nati
         public XrSystemKeyboardTrackingPropertiesFB.Buffer type$Default() { return type(FBKeyboardTracking.XR_TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB); }
         /** Sets the specified value to the {@link XrSystemKeyboardTrackingPropertiesFB#next} field. */
         public XrSystemKeyboardTrackingPropertiesFB.Buffer next(@NativeType("void *") long value) { XrSystemKeyboardTrackingPropertiesFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemKeyboardTrackingPropertiesFB#supportsKeyboardTracking} field. */
-        public XrSystemKeyboardTrackingPropertiesFB.Buffer supportsKeyboardTracking(@NativeType("XrBool32") boolean value) { XrSystemKeyboardTrackingPropertiesFB.nsupportsKeyboardTracking(address(), value ? 1 : 0); return this; }
 
     }
 

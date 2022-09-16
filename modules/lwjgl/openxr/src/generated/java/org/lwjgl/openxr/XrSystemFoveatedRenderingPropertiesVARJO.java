@@ -97,18 +97,14 @@ public class XrSystemFoveatedRenderingPropertiesVARJO extends Struct implements 
     public XrSystemFoveatedRenderingPropertiesVARJO type$Default() { return type(VARJOFoveatedRendering.XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSystemFoveatedRenderingPropertiesVARJO next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #supportsFoveatedRendering} field. */
-    public XrSystemFoveatedRenderingPropertiesVARJO supportsFoveatedRendering(@NativeType("XrBool32") boolean value) { nsupportsFoveatedRendering(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSystemFoveatedRenderingPropertiesVARJO set(
         int type,
-        long next,
-        boolean supportsFoveatedRendering
+        long next
     ) {
         type(type);
         next(next);
-        supportsFoveatedRendering(supportsFoveatedRendering);
 
         return this;
     }
@@ -249,8 +245,6 @@ public class XrSystemFoveatedRenderingPropertiesVARJO extends Struct implements 
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFoveatedRenderingPropertiesVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemFoveatedRenderingPropertiesVARJO.NEXT, value); }
-    /** Unsafe version of {@link #supportsFoveatedRendering(boolean) supportsFoveatedRendering}. */
-    public static void nsupportsFoveatedRendering(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFoveatedRenderingPropertiesVARJO.SUPPORTSFOVEATEDRENDERING, value); }
 
     // -----------------------------------
 
@@ -306,8 +300,6 @@ public class XrSystemFoveatedRenderingPropertiesVARJO extends Struct implements 
         public XrSystemFoveatedRenderingPropertiesVARJO.Buffer type$Default() { return type(VARJOFoveatedRendering.XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO); }
         /** Sets the specified value to the {@link XrSystemFoveatedRenderingPropertiesVARJO#next} field. */
         public XrSystemFoveatedRenderingPropertiesVARJO.Buffer next(@NativeType("void *") long value) { XrSystemFoveatedRenderingPropertiesVARJO.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemFoveatedRenderingPropertiesVARJO#supportsFoveatedRendering} field. */
-        public XrSystemFoveatedRenderingPropertiesVARJO.Buffer supportsFoveatedRendering(@NativeType("XrBool32") boolean value) { XrSystemFoveatedRenderingPropertiesVARJO.nsupportsFoveatedRendering(address(), value ? 1 : 0); return this; }
 
     }
 

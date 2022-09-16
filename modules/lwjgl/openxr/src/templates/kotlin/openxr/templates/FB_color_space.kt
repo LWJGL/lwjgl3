@@ -17,7 +17,7 @@ val FB_color_space = "FBColorSpace".nativeClassXR("FB_color_space", type = "inst
     IntConstant(
         "The extension specification version.",
 
-        "FB_color_space_SPEC_VERSION".."2"
+        "FB_color_space_SPEC_VERSION".."3"
     )
 
     StringConstant(

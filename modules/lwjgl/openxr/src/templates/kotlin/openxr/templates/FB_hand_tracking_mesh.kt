@@ -17,7 +17,7 @@ val FB_hand_tracking_mesh = "FBHandTrackingMesh".nativeClassXR("FB_hand_tracking
     IntConstant(
         "The extension specification version.",
 
-        "FB_hand_tracking_mesh_SPEC_VERSION".."2"
+        "FB_hand_tracking_mesh_SPEC_VERSION".."3"
     )
 
     StringConstant(

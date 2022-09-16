@@ -14,7 +14,7 @@ import static org.lwjgl.system.JNI.*;
 public class FBHandTrackingMesh {
 
     /** The extension specification version. */
-    public static final int XR_FB_hand_tracking_mesh_SPEC_VERSION = 2;
+    public static final int XR_FB_hand_tracking_mesh_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String XR_FB_HAND_TRACKING_MESH_EXTENSION_NAME = "XR_FB_hand_tracking_mesh";

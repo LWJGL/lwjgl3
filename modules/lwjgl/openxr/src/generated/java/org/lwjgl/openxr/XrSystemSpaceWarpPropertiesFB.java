@@ -104,22 +104,14 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
     public XrSystemSpaceWarpPropertiesFB type$Default() { return type(FBSpaceWarp.XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSystemSpaceWarpPropertiesFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #recommendedMotionVectorImageRectWidth} field. */
-    public XrSystemSpaceWarpPropertiesFB recommendedMotionVectorImageRectWidth(@NativeType("uint32_t") int value) { nrecommendedMotionVectorImageRectWidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #recommendedMotionVectorImageRectHeight} field. */
-    public XrSystemSpaceWarpPropertiesFB recommendedMotionVectorImageRectHeight(@NativeType("uint32_t") int value) { nrecommendedMotionVectorImageRectHeight(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSystemSpaceWarpPropertiesFB set(
         int type,
-        long next,
-        int recommendedMotionVectorImageRectWidth,
-        int recommendedMotionVectorImageRectHeight
+        long next
     ) {
         type(type);
         next(next);
-        recommendedMotionVectorImageRectWidth(recommendedMotionVectorImageRectWidth);
-        recommendedMotionVectorImageRectHeight(recommendedMotionVectorImageRectHeight);
 
         return this;
     }
@@ -262,10 +254,6 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemSpaceWarpPropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemSpaceWarpPropertiesFB.NEXT, value); }
-    /** Unsafe version of {@link #recommendedMotionVectorImageRectWidth(int) recommendedMotionVectorImageRectWidth}. */
-    public static void nrecommendedMotionVectorImageRectWidth(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemSpaceWarpPropertiesFB.RECOMMENDEDMOTIONVECTORIMAGERECTWIDTH, value); }
-    /** Unsafe version of {@link #recommendedMotionVectorImageRectHeight(int) recommendedMotionVectorImageRectHeight}. */
-    public static void nrecommendedMotionVectorImageRectHeight(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemSpaceWarpPropertiesFB.RECOMMENDEDMOTIONVECTORIMAGERECTHEIGHT, value); }
 
     // -----------------------------------
 
@@ -324,10 +312,6 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
         public XrSystemSpaceWarpPropertiesFB.Buffer type$Default() { return type(FBSpaceWarp.XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB); }
         /** Sets the specified value to the {@link XrSystemSpaceWarpPropertiesFB#next} field. */
         public XrSystemSpaceWarpPropertiesFB.Buffer next(@NativeType("void *") long value) { XrSystemSpaceWarpPropertiesFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemSpaceWarpPropertiesFB#recommendedMotionVectorImageRectWidth} field. */
-        public XrSystemSpaceWarpPropertiesFB.Buffer recommendedMotionVectorImageRectWidth(@NativeType("uint32_t") int value) { XrSystemSpaceWarpPropertiesFB.nrecommendedMotionVectorImageRectWidth(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemSpaceWarpPropertiesFB#recommendedMotionVectorImageRectHeight} field. */
-        public XrSystemSpaceWarpPropertiesFB.Buffer recommendedMotionVectorImageRectHeight(@NativeType("uint32_t") int value) { XrSystemSpaceWarpPropertiesFB.nrecommendedMotionVectorImageRectHeight(address(), value); return this; }
 
     }
 

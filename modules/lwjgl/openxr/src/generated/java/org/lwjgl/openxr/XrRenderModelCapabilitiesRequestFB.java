@@ -28,8 +28,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using {@link XrRenderModelCapabilitiesRequestFB}</li>
  * <li>{@code type} <b>must</b> be {@link FBRenderModel#XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code XrRenderModelFlagBitsFB} values</li>
- * <li>{@code flags} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -99,18 +97,14 @@ public class XrRenderModelCapabilitiesRequestFB extends Struct implements Native
     public XrRenderModelCapabilitiesRequestFB type$Default() { return type(FBRenderModel.XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB); }
     /** Sets the specified value to the {@link #next} field. */
     public XrRenderModelCapabilitiesRequestFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
-    public XrRenderModelCapabilitiesRequestFB flags(@NativeType("XrRenderModelFlagsFB") long value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrRenderModelCapabilitiesRequestFB set(
         int type,
-        long next,
-        long flags
+        long next
     ) {
         type(type);
         next(next);
-        flags(flags);
 
         return this;
     }
@@ -251,8 +245,6 @@ public class XrRenderModelCapabilitiesRequestFB extends Struct implements Native
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrRenderModelCapabilitiesRequestFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrRenderModelCapabilitiesRequestFB.NEXT, value); }
-    /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrRenderModelCapabilitiesRequestFB.FLAGS, value); }
 
     // -----------------------------------
 
@@ -308,8 +300,6 @@ public class XrRenderModelCapabilitiesRequestFB extends Struct implements Native
         public XrRenderModelCapabilitiesRequestFB.Buffer type$Default() { return type(FBRenderModel.XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB); }
         /** Sets the specified value to the {@link XrRenderModelCapabilitiesRequestFB#next} field. */
         public XrRenderModelCapabilitiesRequestFB.Buffer next(@NativeType("void *") long value) { XrRenderModelCapabilitiesRequestFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrRenderModelCapabilitiesRequestFB#flags} field. */
-        public XrRenderModelCapabilitiesRequestFB.Buffer flags(@NativeType("XrRenderModelFlagsFB") long value) { XrRenderModelCapabilitiesRequestFB.nflags(address(), value); return this; }
 
     }
 

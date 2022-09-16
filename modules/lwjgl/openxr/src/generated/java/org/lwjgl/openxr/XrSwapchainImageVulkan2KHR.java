@@ -50,20 +50,15 @@ public class XrSwapchainImageVulkan2KHR extends XrSwapchainImageVulkanKHR {
     /** Sets the specified value to the {@code next} field. */
     @Override
     public XrSwapchainImageVulkan2KHR next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code image} field. */
-    @Override
-    public XrSwapchainImageVulkan2KHR image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     @Override
     public XrSwapchainImageVulkan2KHR set(
         int type,
-        long next,
-        long image
+        long next
     ) {
         type(type);
         next(next);
-        image(image);
 
         return this;
     }
@@ -238,9 +233,6 @@ public class XrSwapchainImageVulkan2KHR extends XrSwapchainImageVulkanKHR {
         /** Sets the specified value to the {@code next} field. */
         @Override
         public XrSwapchainImageVulkan2KHR.Buffer next(@NativeType("void *") long value) { XrSwapchainImageVulkan2KHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code image} field. */
-        @Override
-        public XrSwapchainImageVulkan2KHR.Buffer image(@NativeType("VkImage") long value) { XrSwapchainImageVulkan2KHR.nimage(address(), value); return this; }
 
     }
 

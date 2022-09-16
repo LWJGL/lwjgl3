@@ -95,18 +95,14 @@ public class XrSystemHandTrackingPropertiesEXT extends Struct implements NativeR
     public XrSystemHandTrackingPropertiesEXT type$Default() { return type(EXTHandTracking.XR_TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSystemHandTrackingPropertiesEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #supportsHandTracking} field. */
-    public XrSystemHandTrackingPropertiesEXT supportsHandTracking(@NativeType("XrBool32") boolean value) { nsupportsHandTracking(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSystemHandTrackingPropertiesEXT set(
         int type,
-        long next,
-        boolean supportsHandTracking
+        long next
     ) {
         type(type);
         next(next);
-        supportsHandTracking(supportsHandTracking);
 
         return this;
     }
@@ -247,8 +243,6 @@ public class XrSystemHandTrackingPropertiesEXT extends Struct implements NativeR
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemHandTrackingPropertiesEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemHandTrackingPropertiesEXT.NEXT, value); }
-    /** Unsafe version of {@link #supportsHandTracking(boolean) supportsHandTracking}. */
-    public static void nsupportsHandTracking(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemHandTrackingPropertiesEXT.SUPPORTSHANDTRACKING, value); }
 
     // -----------------------------------
 
@@ -304,8 +298,6 @@ public class XrSystemHandTrackingPropertiesEXT extends Struct implements NativeR
         public XrSystemHandTrackingPropertiesEXT.Buffer type$Default() { return type(EXTHandTracking.XR_TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link XrSystemHandTrackingPropertiesEXT#next} field. */
         public XrSystemHandTrackingPropertiesEXT.Buffer next(@NativeType("void *") long value) { XrSystemHandTrackingPropertiesEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemHandTrackingPropertiesEXT#supportsHandTracking} field. */
-        public XrSystemHandTrackingPropertiesEXT.Buffer supportsHandTracking(@NativeType("XrBool32") boolean value) { XrSystemHandTrackingPropertiesEXT.nsupportsHandTracking(address(), value ? 1 : 0); return this; }
 
     }
 

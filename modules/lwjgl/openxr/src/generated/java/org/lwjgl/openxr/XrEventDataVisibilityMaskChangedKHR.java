@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -25,8 +24,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@link KHRVisibilityMask XR_KHR_visibility_mask} extension <b>must</b> be enabled prior to using {@link XrEventDataVisibilityMaskChangedKHR}</li>
  * <li>{@code type} <b>must</b> be {@link KHRVisibilityMask#XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
- * <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -110,26 +107,14 @@ public class XrEventDataVisibilityMaskChangedKHR extends Struct implements Nativ
     public XrEventDataVisibilityMaskChangedKHR type$Default() { return type(KHRVisibilityMask.XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR); }
     /** Sets the specified value to the {@link #next} field. */
     public XrEventDataVisibilityMaskChangedKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #session} field. */
-    public XrEventDataVisibilityMaskChangedKHR session(XrSession value) { nsession(address(), value); return this; }
-    /** Sets the specified value to the {@link #viewConfigurationType} field. */
-    public XrEventDataVisibilityMaskChangedKHR viewConfigurationType(@NativeType("XrViewConfigurationType") int value) { nviewConfigurationType(address(), value); return this; }
-    /** Sets the specified value to the {@link #viewIndex} field. */
-    public XrEventDataVisibilityMaskChangedKHR viewIndex(@NativeType("uint32_t") int value) { nviewIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataVisibilityMaskChangedKHR set(
         int type,
-        long next,
-        XrSession session,
-        int viewConfigurationType,
-        int viewIndex
+        long next
     ) {
         type(type);
         next(next);
-        session(session);
-        viewConfigurationType(viewConfigurationType);
-        viewIndex(viewIndex);
 
         return this;
     }
@@ -284,21 +269,6 @@ public class XrEventDataVisibilityMaskChangedKHR extends Struct implements Nativ
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataVisibilityMaskChangedKHR.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataVisibilityMaskChangedKHR.NEXT, value); }
-    /** Unsafe version of {@link #session(XrSession) session}. */
-    public static void nsession(long struct, XrSession value) { memPutAddress(struct + XrEventDataVisibilityMaskChangedKHR.SESSION, value.address()); }
-    /** Unsafe version of {@link #viewConfigurationType(int) viewConfigurationType}. */
-    public static void nviewConfigurationType(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataVisibilityMaskChangedKHR.VIEWCONFIGURATIONTYPE, value); }
-    /** Unsafe version of {@link #viewIndex(int) viewIndex}. */
-    public static void nviewIndex(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataVisibilityMaskChangedKHR.VIEWINDEX, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataVisibilityMaskChangedKHR.SESSION));
-    }
 
     // -----------------------------------
 
@@ -360,12 +330,6 @@ public class XrEventDataVisibilityMaskChangedKHR extends Struct implements Nativ
         public XrEventDataVisibilityMaskChangedKHR.Buffer type$Default() { return type(KHRVisibilityMask.XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR); }
         /** Sets the specified value to the {@link XrEventDataVisibilityMaskChangedKHR#next} field. */
         public XrEventDataVisibilityMaskChangedKHR.Buffer next(@NativeType("void const *") long value) { XrEventDataVisibilityMaskChangedKHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataVisibilityMaskChangedKHR#session} field. */
-        public XrEventDataVisibilityMaskChangedKHR.Buffer session(XrSession value) { XrEventDataVisibilityMaskChangedKHR.nsession(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataVisibilityMaskChangedKHR#viewConfigurationType} field. */
-        public XrEventDataVisibilityMaskChangedKHR.Buffer viewConfigurationType(@NativeType("XrViewConfigurationType") int value) { XrEventDataVisibilityMaskChangedKHR.nviewConfigurationType(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataVisibilityMaskChangedKHR#viewIndex} field. */
-        public XrEventDataVisibilityMaskChangedKHR.Buffer viewIndex(@NativeType("uint32_t") int value) { XrEventDataVisibilityMaskChangedKHR.nviewIndex(address(), value); return this; }
 
     }
 

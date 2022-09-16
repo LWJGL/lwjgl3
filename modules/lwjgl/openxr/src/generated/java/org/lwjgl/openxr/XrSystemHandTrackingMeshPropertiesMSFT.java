@@ -117,26 +117,14 @@ public class XrSystemHandTrackingMeshPropertiesMSFT extends Struct implements Na
     public XrSystemHandTrackingMeshPropertiesMSFT type$Default() { return type(MSFTHandTrackingMesh.XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSystemHandTrackingMeshPropertiesMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #supportsHandTrackingMesh} field. */
-    public XrSystemHandTrackingMeshPropertiesMSFT supportsHandTrackingMesh(@NativeType("XrBool32") boolean value) { nsupportsHandTrackingMesh(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #maxHandMeshIndexCount} field. */
-    public XrSystemHandTrackingMeshPropertiesMSFT maxHandMeshIndexCount(@NativeType("uint32_t") int value) { nmaxHandMeshIndexCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxHandMeshVertexCount} field. */
-    public XrSystemHandTrackingMeshPropertiesMSFT maxHandMeshVertexCount(@NativeType("uint32_t") int value) { nmaxHandMeshVertexCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSystemHandTrackingMeshPropertiesMSFT set(
         int type,
-        long next,
-        boolean supportsHandTrackingMesh,
-        int maxHandMeshIndexCount,
-        int maxHandMeshVertexCount
+        long next
     ) {
         type(type);
         next(next);
-        supportsHandTrackingMesh(supportsHandTrackingMesh);
-        maxHandMeshIndexCount(maxHandMeshIndexCount);
-        maxHandMeshVertexCount(maxHandMeshVertexCount);
 
         return this;
     }
@@ -281,12 +269,6 @@ public class XrSystemHandTrackingMeshPropertiesMSFT extends Struct implements Na
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemHandTrackingMeshPropertiesMSFT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemHandTrackingMeshPropertiesMSFT.NEXT, value); }
-    /** Unsafe version of {@link #supportsHandTrackingMesh(boolean) supportsHandTrackingMesh}. */
-    public static void nsupportsHandTrackingMesh(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemHandTrackingMeshPropertiesMSFT.SUPPORTSHANDTRACKINGMESH, value); }
-    /** Unsafe version of {@link #maxHandMeshIndexCount(int) maxHandMeshIndexCount}. */
-    public static void nmaxHandMeshIndexCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemHandTrackingMeshPropertiesMSFT.MAXHANDMESHINDEXCOUNT, value); }
-    /** Unsafe version of {@link #maxHandMeshVertexCount(int) maxHandMeshVertexCount}. */
-    public static void nmaxHandMeshVertexCount(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemHandTrackingMeshPropertiesMSFT.MAXHANDMESHVERTEXCOUNT, value); }
 
     // -----------------------------------
 
@@ -348,12 +330,6 @@ public class XrSystemHandTrackingMeshPropertiesMSFT extends Struct implements Na
         public XrSystemHandTrackingMeshPropertiesMSFT.Buffer type$Default() { return type(MSFTHandTrackingMesh.XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT); }
         /** Sets the specified value to the {@link XrSystemHandTrackingMeshPropertiesMSFT#next} field. */
         public XrSystemHandTrackingMeshPropertiesMSFT.Buffer next(@NativeType("void *") long value) { XrSystemHandTrackingMeshPropertiesMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemHandTrackingMeshPropertiesMSFT#supportsHandTrackingMesh} field. */
-        public XrSystemHandTrackingMeshPropertiesMSFT.Buffer supportsHandTrackingMesh(@NativeType("XrBool32") boolean value) { XrSystemHandTrackingMeshPropertiesMSFT.nsupportsHandTrackingMesh(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrSystemHandTrackingMeshPropertiesMSFT#maxHandMeshIndexCount} field. */
-        public XrSystemHandTrackingMeshPropertiesMSFT.Buffer maxHandMeshIndexCount(@NativeType("uint32_t") int value) { XrSystemHandTrackingMeshPropertiesMSFT.nmaxHandMeshIndexCount(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemHandTrackingMeshPropertiesMSFT#maxHandMeshVertexCount} field. */
-        public XrSystemHandTrackingMeshPropertiesMSFT.Buffer maxHandMeshVertexCount(@NativeType("uint32_t") int value) { XrSystemHandTrackingMeshPropertiesMSFT.nmaxHandMeshVertexCount(address(), value); return this; }
 
     }
 

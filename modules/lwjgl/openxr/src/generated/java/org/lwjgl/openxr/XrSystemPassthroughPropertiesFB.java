@@ -101,18 +101,14 @@ public class XrSystemPassthroughPropertiesFB extends Struct implements NativeRes
     public XrSystemPassthroughPropertiesFB type$Default() { return type(FBPassthrough.XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB); }
     /** Sets the specified value to the {@code next} field. */
     public XrSystemPassthroughPropertiesFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code supportsPassthrough} field. */
-    public XrSystemPassthroughPropertiesFB supportsPassthrough(@NativeType("XrBool32") boolean value) { nsupportsPassthrough(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSystemPassthroughPropertiesFB set(
         int type,
-        long next,
-        boolean supportsPassthrough
+        long next
     ) {
         type(type);
         next(next);
-        supportsPassthrough(supportsPassthrough);
 
         return this;
     }
@@ -253,8 +249,6 @@ public class XrSystemPassthroughPropertiesFB extends Struct implements NativeRes
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemPassthroughPropertiesFB.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemPassthroughPropertiesFB.NEXT, value); }
-    /** Unsafe version of {@link #supportsPassthrough(boolean) supportsPassthrough}. */
-    public static void nsupportsPassthrough(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemPassthroughPropertiesFB.SUPPORTSPASSTHROUGH, value); }
 
     // -----------------------------------
 
@@ -310,8 +304,6 @@ public class XrSystemPassthroughPropertiesFB extends Struct implements NativeRes
         public XrSystemPassthroughPropertiesFB.Buffer type$Default() { return type(FBPassthrough.XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB); }
         /** Sets the specified value to the {@code next} field. */
         public XrSystemPassthroughPropertiesFB.Buffer next(@NativeType("void const *") long value) { XrSystemPassthroughPropertiesFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code supportsPassthrough} field. */
-        public XrSystemPassthroughPropertiesFB.Buffer supportsPassthrough(@NativeType("XrBool32") boolean value) { XrSystemPassthroughPropertiesFB.nsupportsPassthrough(address(), value ? 1 : 0); return this; }
 
     }
 

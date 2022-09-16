@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class MSFTSceneUnderstandingSerialization {
 
     /** The extension specification version. */
-    public static final int XR_MSFT_scene_understanding_serialization_SPEC_VERSION = 1;
+    public static final int XR_MSFT_scene_understanding_serialization_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_MSFT_SCENE_UNDERSTANDING_SERIALIZATION_EXTENSION_NAME = "XR_MSFT_scene_understanding_serialization";
@@ -75,6 +75,8 @@ public class MSFTSceneUnderstandingSerialization {
      * 
      * <p>The {@link #xrDeserializeSceneMSFT DeserializeSceneMSFT} function begins deserializing a list of serialized scene fragments. The runtime <b>must</b> return quickly without waiting for the deserialization to complete. The application <b>should</b> use {@link MSFTSceneUnderstanding#xrGetSceneComputeStateMSFT GetSceneComputeStateMSFT} to inspect the completeness of the deserialization.</p>
      * 
+     * <p>The runtime <b>must</b> return {@link MSFTSceneUnderstanding#XR_ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT} if {@link #xrDeserializeSceneMSFT DeserializeSceneMSFT} is called while the scene computation is in progress.</p>
+     * 
      * <p>The {@link MSFTSceneUnderstanding#xrGetSceneComputeStateMSFT GetSceneComputeStateMSFT} function <b>must</b> return {@link MSFTSceneUnderstanding#XR_SCENE_COMPUTE_STATE_UPDATING_MSFT SCENE_COMPUTE_STATE_UPDATING_MSFT} while the deserialization is in progress, and {@link MSFTSceneUnderstanding#XR_SCENE_COMPUTE_STATE_COMPLETED_MSFT SCENE_COMPUTE_STATE_COMPLETED_MSFT} when the deserialization has completed successfully. If the runtime fails to deserialize the binary stream, {@link MSFTSceneUnderstanding#xrGetSceneComputeStateMSFT GetSceneComputeStateMSFT} <b>must</b> return {@link MSFTSceneUnderstanding#XR_SCENE_COMPUTE_STATE_COMPLETED_WITH_ERROR_MSFT SCENE_COMPUTE_STATE_COMPLETED_WITH_ERROR_MSFT} to indicate that the deserialization has completed but an error occurred.</p>
      * 
      * <p>When {@link MSFTSceneUnderstanding#xrGetSceneComputeStateMSFT GetSceneComputeStateMSFT} returns {@link MSFTSceneUnderstanding#XR_SCENE_COMPUTE_STATE_COMPLETED_MSFT SCENE_COMPUTE_STATE_COMPLETED_MSFT}, the application <b>may</b> call {@link MSFTSceneUnderstanding#xrCreateSceneMSFT CreateSceneMSFT} to create the {@code XrSceneMSFT} handle. If {@link MSFTSceneUnderstanding#xrCreateSceneMSFT CreateSceneMSFT} is called while {@link MSFTSceneUnderstanding#xrGetSceneComputeStateMSFT GetSceneComputeStateMSFT} returns {@link MSFTSceneUnderstanding#XR_SCENE_COMPUTE_STATE_COMPLETED_WITH_ERROR_MSFT SCENE_COMPUTE_STATE_COMPLETED_WITH_ERROR_MSFT}, a valid {@code XrSceneMSFT} handle <b>must</b> be returned, but that handle <b>must</b> contain zero scene components.</p>
@@ -104,6 +106,7 @@ public class MSFTSceneUnderstandingSerialization {
      * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
      * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
      * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
+     * <li>{@link MSFTSceneUnderstanding#XR_ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT}</li>
      * </ul></dd>
      * </dl>
      * 
@@ -183,6 +186,7 @@ public class MSFTSceneUnderstandingSerialization {
      * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
      * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
      * <li>{@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT}</li>
+     * <li>{@link MSFTSceneUnderstanding#XR_ERROR_SCENE_COMPONENT_ID_INVALID_MSFT ERROR_SCENE_COMPONENT_ID_INVALID_MSFT}</li>
      * </ul></dd>
      * </dl>
      * 

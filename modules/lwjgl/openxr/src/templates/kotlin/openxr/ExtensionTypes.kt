@@ -79,6 +79,7 @@ val XrSwapchainStateFoveationFlagsFB = typedef(XrFlags64, "XrSwapchainStateFovea
 val XrKeyboardTrackingFlagsFB = typedef(XrFlags64, "XrKeyboardTrackingFlagsFB")
 val XrKeyboardTrackingQueryFlagsFB = typedef(XrFlags64, "XrKeyboardTrackingQueryFlagsFB")
 val XrTriangleMeshFlagsFB = typedef(XrFlags64, "XrTriangleMeshFlagsFB")
+val XrPassthroughCapabilityFlagsFB = typedef(XrFlags64, "XrPassthroughCapabilityFlagsFB")
 val XrPassthroughFlagsFB = typedef(XrFlags64, "XrPassthroughFlagsFB")
 val XrPassthroughStateChangedFlagsFB = typedef(XrFlags64, "XrPassthroughStateChangedFlagsFB")
 val XrRenderModelFlagsFB = typedef(XrFlags64, "XrRenderModelFlagsFB")
@@ -593,7 +594,7 @@ val XrGraphicsBindingOpenGLWaylandKHR = struct(Module.OPENXR, "XrGraphicsBinding
     wl_display.p("display", "a valid Wayland {@code wl_display}.")
 }
 
-val XrSwapchainImageOpenGLKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLKHR", parentStruct = XrSwapchainImageBaseHeader) {
+val XrSwapchainImageOpenGLKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLKHR", mutable = false, parentStruct = XrSwapchainImageBaseHeader) {
     documentation =
         """
         OpenGL-specific swapchain image structure.
@@ -621,8 +622,8 @@ val XrSwapchainImageOpenGLKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLKHR
         ##XrSwapchainImageBaseHeader
         """
 
-    Expression("#TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     uint32_t("image", "the OpenGL texture handle associated with this swapchain image.")
 }
 
@@ -649,64 +650,6 @@ val XrGraphicsRequirementsOpenGLKHR = struct(Module.OPENXR, "XrGraphicsRequireme
     nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
     XrVersion("minApiVersionSupported", "the minimum version of OpenGL that the runtime supports. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
     XrVersion("maxApiVersionSupported", "the maximum version of OpenGL that the runtime has been tested on and is known to support. Newer OpenGL versions might work if they are compatible. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
-}
-
-val XrSwapchainImageOpenGLESKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLESKHR", parentStruct = XrSwapchainImageBaseHeader) {
-    documentation =
-        """
-        OpenGL ES-specific swapchain image structure.
-
-        <h5>Description</h5>
-        If a given session was created with a stext:XrGraphicsBindingOpenGLES*KHR, the following conditions <b>must</b> apply.
-
-        <ul>
-            <li>Calls to #EnumerateSwapchainImages() on an {@code XrSwapchain} in that session <b>must</b> return an array of ##XrSwapchainImageOpenGLESKHR structures.</li>
-            <li>Whenever an OpenXR function accepts an ##XrSwapchainImageBaseHeader pointer as a parameter in that session, the runtime <b>must</b> also accept a pointer to an ##XrSwapchainImageOpenGLESKHR structure.</li>
-        </ul>
-
-        The OpenXR runtime <b>must</b> interpret the bottom-left corner of the swapchain image as the coordinate origin unless specified otherwise by extension functionality.
-
-        The OpenXR runtime <b>must</b> interpret the swapchain images in a clip space of positive Y pointing up, near Z plane at -1, and far Z plane at 1.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHROpenGLESEnable XR_KHR_opengl_es_enable} extension <b>must</b> be enabled prior to using ##XrSwapchainImageOpenGLESKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSwapchainImageBaseHeader
-        """
-
-    Expression("#TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    uint32_t("image", "an index indicating the current OpenGL ES swapchain image to use.")
-}
-
-val XrGraphicsRequirementsOpenGLESKHR = struct(Module.OPENXR, "XrGraphicsRequirementsOpenGLESKHR") {
-    documentation =
-        """
-        OpenGL ES API version requirements.
-
-        <h5>Description</h5>
-        ##XrGraphicsRequirementsOpenGLESKHR is populated by #GetOpenGLESGraphicsRequirementsKHR() with the runtime’s OpenGL ES API version requirements.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHROpenGLESEnable XR_KHR_opengl_es_enable} extension <b>must</b> be enabled prior to using ##XrGraphicsRequirementsOpenGLESKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetOpenGLESGraphicsRequirementsKHR()
-        """
-
-    Expression("#TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVersion("minApiVersionSupported", "the minimum version of OpenGL ES that the runtime supports. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
-    XrVersion("maxApiVersionSupported", "the maximum version of OpenGL ES that the runtime has been tested on and is known to support. Newer OpenGL ES versions might work if they are compatible. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
 }
 
 val XrGraphicsBindingVulkanKHR = struct(Module.OPENXR, "XrGraphicsBindingVulkanKHR") {
@@ -749,7 +692,7 @@ val XrGraphicsBindingVulkanKHR = struct(Module.OPENXR, "XrGraphicsBindingVulkanK
     uint32_t("queueIndex", "a valid queue index on {@code device} to be used for synchronization.")
 }
 
-val XrSwapchainImageVulkanKHR = struct(Module.OPENXR, "XrSwapchainImageVulkanKHR", parentStruct = XrSwapchainImageBaseHeader) {
+val XrSwapchainImageVulkanKHR = struct(Module.OPENXR, "XrSwapchainImageVulkanKHR", mutable = false, parentStruct = XrSwapchainImageBaseHeader) {
     javaImport("org.lwjgl.vulkan.*")
     documentation =
         """
@@ -772,18 +715,17 @@ val XrSwapchainImageVulkanKHR = struct(Module.OPENXR, "XrSwapchainImageVulkanKHR
             <li>The {@link KHRVulkanEnable XR_KHR_vulkan_enable} extension <b>must</b> be enabled prior to using ##XrSwapchainImageVulkanKHR</li>
             <li>{@code type} <b>must</b> be #TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSwapchainImageFoveationVulkanFB</li>
-            <li>{@code image} <b>must</b> be a valid {@code VkImage} value</li>
         </ul>
 
         <h5>See Also</h5>
         ##XrSwapchainImageBaseHeader
         """
 
-    Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
     PointerSetter(
         "XrSwapchainImageFoveationVulkanFB",
         prepend = true
-    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     VkImage("image", "a valid Vulkan {@code VkImage} to use.")
 }
 
@@ -812,7 +754,7 @@ val XrGraphicsRequirementsVulkanKHR = struct(Module.OPENXR, "XrGraphicsRequireme
     XrVersion("maxApiVersionSupported", "the maximum Vulkan Instance API version that the runtime has been tested on and is known to support. Newer Vulkan Instance API versions might work if they are compatible. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
 }
 
-val XrSystemEyeGazeInteractionPropertiesEXT = struct(Module.OPENXR, "XrSystemEyeGazeInteractionPropertiesEXT") {
+val XrSystemEyeGazeInteractionPropertiesEXT = struct(Module.OPENXR, "XrSystemEyeGazeInteractionPropertiesEXT", mutable = false) {
     documentation =
         """
         Eye gaze interaction system properties.
@@ -825,8 +767,8 @@ val XrSystemEyeGazeInteractionPropertiesEXT = struct(Module.OPENXR, "XrSystemEye
         </ul>
         """
 
-    Expression("#TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     XrBool32("supportsEyeGazeInteraction", "the runtime <b>must</b> set this value to #TRUE when eye gaze sufficient for use cases such as aiming or targeting is supported by the current device, otherwise the runtime <b>must</b> set this to #FALSE.")
 }
 
@@ -876,7 +818,7 @@ val XrVisibilityMaskKHR = struct(Module.OPENXR, "XrVisibilityMaskKHR") {
     nullable..uint32_t.p("indices", "an array of indices filled in by the runtime, specifying the indices of the mask geometry in the {@code vertices} array.")
 }
 
-val XrEventDataVisibilityMaskChangedKHR = struct(Module.OPENXR, "XrEventDataVisibilityMaskChangedKHR", parentStruct = XrEventDataBaseHeader) {
+val XrEventDataVisibilityMaskChangedKHR = struct(Module.OPENXR, "XrEventDataVisibilityMaskChangedKHR", mutable = false, parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Visibility Mask.
@@ -886,13 +828,11 @@ val XrEventDataVisibilityMaskChangedKHR = struct(Module.OPENXR, "XrEventDataVisi
             <li>The {@link KHRVisibilityMask XR_KHR_visibility_mask} extension <b>must</b> be enabled prior to using ##XrEventDataVisibilityMaskChangedKHR</li>
             <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-            <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
         </ul>
         """
 
-    Expression("#TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     XrSession("session", "the {@code XrSession} for which the view mask has changed.")
     XrViewConfigurationType("viewConfigurationType", "the view configuration whose mask has changed.")
     uint32_t("viewIndex", "the individual view within the view configuration to which the change refers.")
@@ -1234,7 +1174,7 @@ val XrSpatialGraphNodeBindingPropertiesMSFT = struct(Module.OPENXR, "XrSpatialGr
     XrPosef("poseInNodeSpace", "an ##XrPosef defining the pose in the underlying node’s space.")
 }
 
-val XrSystemHandTrackingPropertiesEXT = struct(Module.OPENXR, "XrSystemHandTrackingPropertiesEXT") {
+val XrSystemHandTrackingPropertiesEXT = struct(Module.OPENXR, "XrSystemHandTrackingPropertiesEXT", mutable = false) {
     documentation =
         """
         System property for hand tracking.
@@ -1249,8 +1189,8 @@ val XrSystemHandTrackingPropertiesEXT = struct(Module.OPENXR, "XrSystemHandTrack
         If a runtime returns #FALSE for {@code supportsHandTracking}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateHandTrackerEXT().
         """
 
-    Expression("#TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     XrBool32("supportsHandTracking", "an {@code XrBool32}, indicating if current system is capable of hand tracking input.")
 }
 
@@ -1429,7 +1369,7 @@ val XrHandJointVelocitiesEXT = struct(Module.OPENXR, "XrHandJointVelocitiesEXT")
     XrHandJointVelocityEXT.p("jointVelocities", "an array of ##XrHandJointVelocityEXT receiving the returned hand joint velocities.")
 }
 
-val XrSystemHandTrackingMeshPropertiesMSFT = struct(Module.OPENXR, "XrSystemHandTrackingMeshPropertiesMSFT") {
+val XrSystemHandTrackingMeshPropertiesMSFT = struct(Module.OPENXR, "XrSystemHandTrackingMeshPropertiesMSFT", mutable = false) {
     documentation =
         """
         System property for hand tracking mesh.
@@ -1450,8 +1390,8 @@ val XrSystemHandTrackingMeshPropertiesMSFT = struct(Module.OPENXR, "XrSystemHand
         ##XrSystemProperties, #GetSystemProperties()
         """
 
-    Expression("#TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     XrBool32("supportsHandTrackingMesh", "an {@code XrBool32}, indicating if current system is capable of hand tracking mesh input.")
     uint32_t("maxHandMeshIndexCount", "a {@code uint32_t} returns the maximum count of indices that will be returned from the hand tracker.")
     uint32_t("maxHandMeshVertexCount", "a {@code uint32_t} returns the maximum count of vertices that will be returned from the hand tracker.")
@@ -2375,12 +2315,12 @@ val XrVulkanGraphicsDeviceGetInfoKHR = struct(Module.OPENXR, "XrVulkanGraphicsDe
     VkInstance("vulkanInstance", "a valid Vulkan {@code VkInstance}.")
 }
 
-val XrSwapchainImageVulkan2KHR = struct(Module.OPENXR, "XrSwapchainImageVulkan2KHR", alias = XrSwapchainImageVulkanKHR) {
+val XrSwapchainImageVulkan2KHR = struct(Module.OPENXR, "XrSwapchainImageVulkan2KHR", mutable = false, alias = XrSwapchainImageVulkanKHR) {
     javaImport("org.lwjgl.vulkan.*")
     documentation = "See ##XrSwapchainImageVulkanKHR."
 
-    Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type", "")
-    nullable..opaque_p("next", "")
+    Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type", "").mutable()
+    nullable..opaque_p("next", "").mutable()
     VkImage("image", "")
 }
 
@@ -3180,7 +3120,7 @@ val XrSceneDeserializeInfoMSFT = struct(Module.OPENXR, "XrSceneDeserializeInfoMS
     nullable..XrDeserializeSceneFragmentMSFT.const.p("fragments", "an array of ##XrDeserializeSceneFragmentMSFT.")
 }
 
-val XrEventDataDisplayRefreshRateChangedFB = struct(Module.OPENXR, "XrEventDataDisplayRefreshRateChangedFB", parentStruct = XrEventDataBaseHeader) {
+val XrEventDataDisplayRefreshRateChangedFB = struct(Module.OPENXR, "XrEventDataDisplayRefreshRateChangedFB", mutable = false, parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Event representing display refresh rate change.
@@ -3196,8 +3136,8 @@ val XrEventDataDisplayRefreshRateChangedFB = struct(Module.OPENXR, "XrEventDataD
         #GetDisplayRefreshRateFB()
         """
 
-    Expression("#TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     float("fromDisplayRefreshRate", "the previous display refresh rate.")
     float("toDisplayRefreshRate", "the new display refresh rate.")
 }
@@ -3252,7 +3192,7 @@ val XrEventDataViveTrackerConnectedHTCX = struct(Module.OPENXR, "XrEventDataVive
     XrViveTrackerPathsHTCX.p("paths", "contains two paths of the connected VIVE tracker.")
 }
 
-val XrSystemFacialTrackingPropertiesHTC = struct(Module.OPENXR, "XrSystemFacialTrackingPropertiesHTC") {
+val XrSystemFacialTrackingPropertiesHTC = struct(Module.OPENXR, "XrSystemFacialTrackingPropertiesHTC", mutable = false) {
     documentation =
         """
         System property for facial tracking.
@@ -3270,8 +3210,8 @@ val XrSystemFacialTrackingPropertiesHTC = struct(Module.OPENXR, "XrSystemFacialT
         If a runtime returns #FALSE for {@code supportEyeFacialTracking}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFacialTrackerHTC() with #FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC set for {@code XrFacialTrackingTypeHTC} in ##XrFacialTrackerCreateInfoHTC. Similarly, if a runtime returns #FALSE for {@code supportLipFacialTracking} the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFacialTrackerHTC() with #FACIAL_TRACKING_TYPE_LIP_DEFAULT_HTC set for {@code XrFacialTrackingTypeHTC} in ##XrFacialTrackerCreateInfoHTC.
         """
 
-    Expression("#TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     XrBool32("supportEyeFacialTracking", "indicates if the current system is capable of generating eye expressions.")
     XrBool32("supportLipFacialTracking", "indicates if the current system is capable of generating lip expressions.")
 }
@@ -3341,7 +3281,7 @@ val XrFacialTrackerCreateInfoHTC = struct(Module.OPENXR, "XrFacialTrackerCreateI
     XrFacialTrackingTypeHTC("facialTrackingType", "an {@code XrFacialTrackingTypeHTC} which describes which type of facial tracking should be used for this handle.")
 }
 
-val XrSystemColorSpacePropertiesFB = struct(Module.OPENXR, "XrSystemColorSpacePropertiesFB") {
+val XrSystemColorSpacePropertiesFB = struct(Module.OPENXR, "XrSystemColorSpacePropertiesFB", mutable = false) {
     documentation =
         """
         System property for color space.
@@ -3351,12 +3291,11 @@ val XrSystemColorSpacePropertiesFB = struct(Module.OPENXR, "XrSystemColorSpacePr
             <li>The {@link FBColorSpace XR_FB_color_space} extension <b>must</b> be enabled prior to using ##XrSystemColorSpacePropertiesFB</li>
             <li>{@code type} <b>must</b> be #TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code colorSpace} <b>must</b> be a valid {@code XrColorSpaceFB} value</li>
         </ul>
         """
 
-    Expression("#TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     XrColorSpaceFB("colorSpace", "the native color space of the XR device.")
 }
 
@@ -3403,18 +3342,15 @@ val XrHandTrackingMeshFB = struct(Module.OPENXR, "XrHandTrackingMeshFB") {
             <li>The {@link FBHandTrackingMesh XR_FB_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrHandTrackingMeshFB</li>
             <li>{@code type} <b>must</b> be #TYPE_HAND_TRACKING_MESH_FB</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code jointBindPoses} <b>must</b> be a pointer to an array of {@code jointCapacityInput} ##XrPosef structures</li>
-            <li>{@code jointRadii} <b>must</b> be a pointer to an array of {@code jointCapacityInput} {@code float} values</li>
-            <li>{@code jointParents} <b>must</b> be a pointer to an array of {@code jointCapacityInput} {@code XrHandJointEXT} values</li>
-            <li>{@code vertexPositions} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector3f structures</li>
-            <li>{@code vertexNormals} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector3f structures</li>
-            <li>{@code vertexUVs} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector2f structures</li>
-            <li>{@code vertexBlendIndices} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector4sFB structures</li>
-            <li>{@code vertexBlendWeights} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector4f structures</li>
-            <li>{@code indices} <b>must</b> be a pointer to an array of {@code indexCapacityInput} {@code int16_t} values</li>
-            <li>The {@code jointCapacityInput} parameter <b>must</b> be greater than 0</li>
-            <li>The {@code vertexCapacityInput} parameter <b>must</b> be greater than 0</li>
-            <li>The {@code indexCapacityInput} parameter <b>must</b> be greater than 0</li>
+            <li>If {@code jointCapacityInput} is not 0, {@code jointBindPoses} <b>must</b> be a pointer to an array of {@code jointCapacityInput} ##XrPosef structures</li>
+            <li>If {@code jointCapacityInput} is not 0, {@code jointRadii} <b>must</b> be a pointer to an array of {@code jointCapacityInput} {@code float} values</li>
+            <li>If {@code jointCapacityInput} is not 0, {@code jointParents} <b>must</b> be a pointer to an array of {@code jointCapacityInput} {@code XrHandJointEXT} values</li>
+            <li>If {@code vertexCapacityInput} is not 0, {@code vertexPositions} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector3f structures</li>
+            <li>If {@code vertexCapacityInput} is not 0, {@code vertexNormals} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector3f structures</li>
+            <li>If {@code vertexCapacityInput} is not 0, {@code vertexUVs} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector2f structures</li>
+            <li>If {@code vertexCapacityInput} is not 0, {@code vertexBlendIndices} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector4sFB structures</li>
+            <li>If {@code vertexCapacityInput} is not 0, {@code vertexBlendWeights} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector4f structures</li>
+            <li>If {@code indexCapacityInput} is not 0, {@code indices} <b>must</b> be a pointer to an array of {@code indexCapacityInput} {@code int16_t} values</li>
         </ul>
 
         <h5>See Also</h5>
@@ -3423,24 +3359,24 @@ val XrHandTrackingMeshFB = struct(Module.OPENXR, "XrHandTrackingMeshFB") {
 
     Expression("#TYPE_HAND_TRACKING_MESH_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
     nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("jointBindPoses", "jointRadii", "jointParents")..uint32_t("jointCapacityInput", "the capacity of the joint data arrays in this structure, or 0 to indicate a request to retrieve the required capacity.")
+    AutoSize("jointBindPoses", "jointRadii", "jointParents", optional = true)..uint32_t("jointCapacityInput", "the capacity of the joint data arrays in this structure, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("jointCountOutput", "filled in by the runtime with the count of joint data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is insufficient.")
-    XrPosef.p("jointBindPoses", "an array of poses that matches what is returned by #LocateHandJointsEXT() which describes the hand skeleton’s bind pose.")
-    float.p("jointRadii", "an array of joint radii at bind pose.")
-    XrHandJointEXT.p("jointParents", "an array of joint parents to define a bone hierarchy for the hand skeleton.")
-    AutoSize("vertexPositions", "vertexNormals", "vertexUVs", "vertexBlendIndices", "vertexBlendWeights")..uint32_t("vertexCapacityInput", "the capacity of the vertex data arrays in this structure, or 0 to indicate a request to retrieve the required capacity.")
+    nullable..XrPosef.p("jointBindPoses", "an array of poses that matches what is returned by #LocateHandJointsEXT() which describes the hand skeleton’s bind pose.")
+    nullable..float.p("jointRadii", "an array of joint radii at bind pose.")
+    nullable..XrHandJointEXT.p("jointParents", "an array of joint parents to define a bone hierarchy for the hand skeleton.")
+    AutoSize("vertexPositions", "vertexNormals", "vertexUVs", "vertexBlendIndices", "vertexBlendWeights", optional = true)..uint32_t("vertexCapacityInput", "the capacity of the vertex data arrays in this structure, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("vertexCountOutput", "filled in by the runtime with the count of vertex data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is insufficient.")
-    XrVector3f.p("vertexPositions", "an array of 3D vertex positions.")
-    XrVector3f.p("vertexNormals", "an array of 3D vertex normals.")
-    XrVector2f.p("vertexUVs", "an array of texture coordinates for this vertex.")
-    XrVector4sFB.p("vertexBlendIndices", "an array of bone blend indices.")
-    XrVector4f.p("vertexBlendWeights", "an array of bone blend weights.")
-    AutoSize("indices")..uint32_t("indexCapacityInput", "the capacity of the index data arrays in this structure, or 0 to indicate a request to retrieve the required capacity.")
+    nullable..XrVector3f.p("vertexPositions", "an array of 3D vertex positions.")
+    nullable..XrVector3f.p("vertexNormals", "an array of 3D vertex normals.")
+    nullable..XrVector2f.p("vertexUVs", "an array of texture coordinates for this vertex.")
+    nullable..XrVector4sFB.p("vertexBlendIndices", "an array of bone blend indices.")
+    nullable..XrVector4f.p("vertexBlendWeights", "an array of bone blend weights.")
+    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput", "the capacity of the index data arrays in this structure, or 0 to indicate a request to retrieve the required capacity.")
     uint32_t("indexCountOutput", "filled in by the runtime with the count of index data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is insufficient.")
-    int16_t.p("indices", "an array of triangle indices.")
+    nullable..int16_t.p("indices", "an array of triangle indices.")
 }
 
-val XrHandTrackingScaleFB = struct(Module.OPENXR, "XrHandTrackingScaleFB") {
+val XrHandTrackingScaleFB = struct(Module.OPENXR, "XrHandTrackingScaleFB", mutable = false) {
     documentation =
         """
         The information to query and modify hand joint overall scale.
@@ -3453,8 +3389,8 @@ val XrHandTrackingScaleFB = struct(Module.OPENXR, "XrHandTrackingScaleFB") {
         </ul>
         """
 
-    Expression("#TYPE_HAND_TRACKING_SCALE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_HAND_TRACKING_SCALE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     float("sensorOutput", "an output value: the currently measured scale as would be applied without passing this structure.")
     float("currentOutput", "an output value: the effective output that the bind skeleton is getting on the current call, which may be subject to filtering, scaling, or validation.")
     XrBool32("overrideHandScale", "indicates whether the runtime should scale the output of this #LocateHandJointsEXT() call according to {@code overrideValueInput}")
@@ -3803,7 +3739,7 @@ val XrFoveationLevelProfileCreateInfoFB = struct(Module.OPENXR, "XrFoveationLeve
     XrFoveationDynamicFB("dynamic", "the desired dynamic foveation setting.")
 }
 
-val XrSystemKeyboardTrackingPropertiesFB = struct(Module.OPENXR, "XrSystemKeyboardTrackingPropertiesFB") {
+val XrSystemKeyboardTrackingPropertiesFB = struct(Module.OPENXR, "XrSystemKeyboardTrackingPropertiesFB", mutable = false) {
     documentation =
         """
         Information from the system about tracked keyboard support.
@@ -3822,8 +3758,8 @@ val XrSystemKeyboardTrackingPropertiesFB = struct(Module.OPENXR, "XrSystemKeyboa
         ##XrSystemProperties
         """
 
-    Expression("#TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    Expression("#TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
     XrBool32("supportsKeyboardTracking", "defines whether the system supports the tracked keyboard feature.")
 }
 
@@ -3934,7 +3870,7 @@ val XrTriangleMeshCreateInfoFB = struct(Module.OPENXR, "XrTriangleMeshCreateInfo
     nullable..uint32_t.const.p("indexBuffer", "the triangle indices. The size of the array must be {@code triangleCount} elements. When the mesh is mutable ({@code ({@code flags} &amp; #TRIANGLE_MESH_MUTABLE_BIT_FB) != 0}), the {@code indexBuffer} parameter <b>must</b> be {@code NULL} and mesh data <b>must</b> be populated separately.")
 }
 
-val XrSystemPassthroughPropertiesFB = struct(Module.OPENXR, "XrSystemPassthroughPropertiesFB") {
+val XrSystemPassthroughPropertiesFB = struct(Module.OPENXR, "XrSystemPassthroughPropertiesFB", mutable = false) {
     documentation =
         """
         A passthrough system property.
@@ -3954,9 +3890,34 @@ val XrSystemPassthroughPropertiesFB = struct(Module.OPENXR, "XrSystemPassthrough
         </ul>
         """
 
-    Expression("#TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
+    Expression("#TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB")..XrStructureType("type", "").mutable()
+    nullable..opaque_const_p("next", "").mutable()
     XrBool32("supportsPassthrough", "")
+}
+
+val XrSystemPassthroughProperties2FB = struct(Module.OPENXR, "XrSystemPassthroughProperties2FB", mutable = false) {
+    documentation =
+        """
+        Passthrough system properties.
+
+        <h5>Member Descriptions</h5>
+        <ul>
+            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
+            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
+            <li>{@code capabilities} defines a set of features supported by the passthrough system.</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrSystemPassthroughProperties2FB</li>
+            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+        </ul>
+        """
+
+    Expression("#TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB")..XrStructureType("type", "").mutable()
+    nullable..opaque_const_p("next", "").mutable()
+    XrPassthroughCapabilityFlagsFB("capabilities", "")
 }
 
 val XrPassthroughCreateInfoFB = struct(Module.OPENXR, "XrPassthroughCreateInfoFB") {
@@ -4403,7 +4364,7 @@ val XrRenderModelLoadInfoFB = struct(Module.OPENXR, "XrRenderModelLoadInfoFB") {
     XrRenderModelKeyFB("modelKey", "the unique model key for a connected device.")
 }
 
-val XrSystemRenderModelPropertiesFB = struct(Module.OPENXR, "XrSystemRenderModelPropertiesFB") {
+val XrSystemRenderModelPropertiesFB = struct(Module.OPENXR, "XrSystemRenderModelPropertiesFB", mutable = false) {
     documentation =
         """
         A render model system property.
@@ -4423,12 +4384,12 @@ val XrSystemRenderModelPropertiesFB = struct(Module.OPENXR, "XrSystemRenderModel
         </ul>
         """
 
-    Expression("#TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB")..XrStructureType("type", "")
-    nullable..opaque_p("next", "")
+    Expression("#TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB")..XrStructureType("type", "").mutable()
+    nullable..opaque_p("next", "").mutable()
     XrBool32("supportsRenderModelLoading", "")
 }
 
-val XrRenderModelCapabilitiesRequestFB = struct(Module.OPENXR, "XrRenderModelCapabilitiesRequestFB") {
+val XrRenderModelCapabilitiesRequestFB = struct(Module.OPENXR, "XrRenderModelCapabilitiesRequestFB", mutable = false) {
     documentation =
         """
         A render model system property.
@@ -4441,13 +4402,11 @@ val XrRenderModelCapabilitiesRequestFB = struct(Module.OPENXR, "XrRenderModelCap
             <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrRenderModelCapabilitiesRequestFB</li>
             <li>{@code type} <b>must</b> be #TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrRenderModelFlagBitsFB} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
         </ul>
         """
 
-    Expression("#TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     XrRenderModelFlagsFB("flags", "a bit mask of the model complexities that the application is able to support.")
 }
 
@@ -4572,7 +4531,7 @@ val XrFoveatedViewConfigurationViewVARJO = struct(Module.OPENXR, "XrFoveatedView
     XrBool32("foveatedRenderingActive", "an {@code XrBool32}, indicating if the runtime should return foveated view configuration view.")
 }
 
-val XrSystemFoveatedRenderingPropertiesVARJO = struct(Module.OPENXR, "XrSystemFoveatedRenderingPropertiesVARJO") {
+val XrSystemFoveatedRenderingPropertiesVARJO = struct(Module.OPENXR, "XrSystemFoveatedRenderingPropertiesVARJO", mutable = false) {
     documentation =
         """
         System property for foveated rendering.
@@ -4588,8 +4547,8 @@ val XrSystemFoveatedRenderingPropertiesVARJO = struct(Module.OPENXR, "XrSystemFo
         </ul>
         """
 
-    Expression("#TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     XrBool32("supportsFoveatedRendering", "an {@code XrBool32}, indicating if current system is capable of performoning foveated rendering.")
 }
 
@@ -4615,7 +4574,7 @@ val XrCompositionLayerDepthTestVARJO = struct(Module.OPENXR, "XrCompositionLayer
     float("depthTestRangeFarZ", "a positive distance in meters that specifies the upper bound of the range where depth testing should be performed. Must be greater than {@code depthTestRangeNearZ}. Value of floating point positive infinity means that there is no upper bound.")
 }
 
-val XrSystemMarkerTrackingPropertiesVARJO = struct(Module.OPENXR, "XrSystemMarkerTrackingPropertiesVARJO") {
+val XrSystemMarkerTrackingPropertiesVARJO = struct(Module.OPENXR, "XrSystemMarkerTrackingPropertiesVARJO", mutable = false) {
     documentation =
         """
         System property for marker tracking.
@@ -4636,12 +4595,12 @@ val XrSystemMarkerTrackingPropertiesVARJO = struct(Module.OPENXR, "XrSystemMarke
         ##XrSystemProperties, #GetSystemProperties()
         """
 
-    Expression("#TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    Expression("#TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
     XrBool32("supportsMarkerTracking", "an {@code XrBool32}, indicating if current system is capable of performing marker tracking.")
 }
 
-val XrEventDataMarkerTrackingUpdateVARJO = struct(Module.OPENXR, "XrEventDataMarkerTrackingUpdateVARJO", parentStruct = XrEventDataBaseHeader) {
+val XrEventDataMarkerTrackingUpdateVARJO = struct(Module.OPENXR, "XrEventDataMarkerTrackingUpdateVARJO", mutable = false, parentStruct = XrEventDataBaseHeader) {
     documentation =
         """
         Structure representing marker tracking information.
@@ -4660,8 +4619,8 @@ val XrEventDataMarkerTrackingUpdateVARJO = struct(Module.OPENXR, "XrEventDataMar
         #PollEvent()
         """
 
-    Expression("#TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
     uint64_t("markerId", "unique identifier of the marker that has been updated.")
     XrBool32("isActive", "the tracking state of the marker.")
     XrBool32("isPredicted", "")
@@ -5275,7 +5234,7 @@ val XrCompositionLayerSpaceWarpInfoFB = struct(Module.OPENXR, "XrCompositionLaye
     float("farZ", "the positive distance in meters of the {@code maxDepth} value in the depth swapchain. {@code farZ} can be infinite.")
 }
 
-val XrSystemSpaceWarpPropertiesFB = struct(Module.OPENXR, "XrSystemSpaceWarpPropertiesFB") {
+val XrSystemSpaceWarpPropertiesFB = struct(Module.OPENXR, "XrSystemSpaceWarpPropertiesFB", mutable = false) {
     documentation =
         """
         Composition Layer Space Warp structure.
@@ -5291,8 +5250,8 @@ val XrSystemSpaceWarpPropertiesFB = struct(Module.OPENXR, "XrSystemSpaceWarpProp
         ##XrSystemProperties
         """
 
-    Expression("#TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    Expression("#TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
     uint32_t("recommendedMotionVectorImageRectWidth", "recommended motion vector and depth image width")
     uint32_t("recommendedMotionVectorImageRectHeight", "recommended motion vector and depth image height")
 }

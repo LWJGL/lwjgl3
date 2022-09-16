@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Information to query the bound input sources for an action.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>The result of passing an {@code XrPath} {@code source} <b>not</b> retrieved from {@link XR10#xrEnumerateBoundSourcesForAction EnumerateBoundSourcesForAction} is not specified.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

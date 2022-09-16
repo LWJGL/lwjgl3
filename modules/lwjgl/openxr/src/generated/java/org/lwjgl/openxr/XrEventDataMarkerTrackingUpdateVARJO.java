@@ -122,30 +122,14 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct implements Nati
     public XrEventDataMarkerTrackingUpdateVARJO type$Default() { return type(VARJOMarkerTracking.XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO); }
     /** Sets the specified value to the {@link #next} field. */
     public XrEventDataMarkerTrackingUpdateVARJO next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #markerId} field. */
-    public XrEventDataMarkerTrackingUpdateVARJO markerId(@NativeType("uint64_t") long value) { nmarkerId(address(), value); return this; }
-    /** Sets the specified value to the {@link #isActive} field. */
-    public XrEventDataMarkerTrackingUpdateVARJO isActive(@NativeType("XrBool32") boolean value) { nisActive(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code isPredicted} field. */
-    public XrEventDataMarkerTrackingUpdateVARJO isPredicted(@NativeType("XrBool32") boolean value) { nisPredicted(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #time} field. */
-    public XrEventDataMarkerTrackingUpdateVARJO time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataMarkerTrackingUpdateVARJO set(
         int type,
-        long next,
-        long markerId,
-        boolean isActive,
-        boolean isPredicted,
-        long time
+        long next
     ) {
         type(type);
         next(next);
-        markerId(markerId);
-        isActive(isActive);
-        isPredicted(isPredicted);
-        time(time);
 
         return this;
     }
@@ -302,14 +286,6 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct implements Nati
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataMarkerTrackingUpdateVARJO.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataMarkerTrackingUpdateVARJO.NEXT, value); }
-    /** Unsafe version of {@link #markerId(long) markerId}. */
-    public static void nmarkerId(long struct, long value) { UNSAFE.putLong(null, struct + XrEventDataMarkerTrackingUpdateVARJO.MARKERID, value); }
-    /** Unsafe version of {@link #isActive(boolean) isActive}. */
-    public static void nisActive(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataMarkerTrackingUpdateVARJO.ISACTIVE, value); }
-    /** Unsafe version of {@link #isPredicted(boolean) isPredicted}. */
-    public static void nisPredicted(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataMarkerTrackingUpdateVARJO.ISPREDICTED, value); }
-    /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrEventDataMarkerTrackingUpdateVARJO.TIME, value); }
 
     // -----------------------------------
 
@@ -374,14 +350,6 @@ public class XrEventDataMarkerTrackingUpdateVARJO extends Struct implements Nati
         public XrEventDataMarkerTrackingUpdateVARJO.Buffer type$Default() { return type(VARJOMarkerTracking.XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO); }
         /** Sets the specified value to the {@link XrEventDataMarkerTrackingUpdateVARJO#next} field. */
         public XrEventDataMarkerTrackingUpdateVARJO.Buffer next(@NativeType("void const *") long value) { XrEventDataMarkerTrackingUpdateVARJO.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataMarkerTrackingUpdateVARJO#markerId} field. */
-        public XrEventDataMarkerTrackingUpdateVARJO.Buffer markerId(@NativeType("uint64_t") long value) { XrEventDataMarkerTrackingUpdateVARJO.nmarkerId(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataMarkerTrackingUpdateVARJO#isActive} field. */
-        public XrEventDataMarkerTrackingUpdateVARJO.Buffer isActive(@NativeType("XrBool32") boolean value) { XrEventDataMarkerTrackingUpdateVARJO.nisActive(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code isPredicted} field. */
-        public XrEventDataMarkerTrackingUpdateVARJO.Buffer isPredicted(@NativeType("XrBool32") boolean value) { XrEventDataMarkerTrackingUpdateVARJO.nisPredicted(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrEventDataMarkerTrackingUpdateVARJO#time} field. */
-        public XrEventDataMarkerTrackingUpdateVARJO.Buffer time(@NativeType("XrTime") long value) { XrEventDataMarkerTrackingUpdateVARJO.ntime(address(), value); return this; }
 
     }
 

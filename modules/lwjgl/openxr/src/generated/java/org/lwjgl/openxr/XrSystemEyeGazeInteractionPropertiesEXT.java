@@ -93,18 +93,14 @@ public class XrSystemEyeGazeInteractionPropertiesEXT extends Struct implements N
     public XrSystemEyeGazeInteractionPropertiesEXT type$Default() { return type(EXTEyeGazeInteraction.XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSystemEyeGazeInteractionPropertiesEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #supportsEyeGazeInteraction} field. */
-    public XrSystemEyeGazeInteractionPropertiesEXT supportsEyeGazeInteraction(@NativeType("XrBool32") boolean value) { nsupportsEyeGazeInteraction(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSystemEyeGazeInteractionPropertiesEXT set(
         int type,
-        long next,
-        boolean supportsEyeGazeInteraction
+        long next
     ) {
         type(type);
         next(next);
-        supportsEyeGazeInteraction(supportsEyeGazeInteraction);
 
         return this;
     }
@@ -245,8 +241,6 @@ public class XrSystemEyeGazeInteractionPropertiesEXT extends Struct implements N
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemEyeGazeInteractionPropertiesEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemEyeGazeInteractionPropertiesEXT.NEXT, value); }
-    /** Unsafe version of {@link #supportsEyeGazeInteraction(boolean) supportsEyeGazeInteraction}. */
-    public static void nsupportsEyeGazeInteraction(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemEyeGazeInteractionPropertiesEXT.SUPPORTSEYEGAZEINTERACTION, value); }
 
     // -----------------------------------
 
@@ -302,8 +296,6 @@ public class XrSystemEyeGazeInteractionPropertiesEXT extends Struct implements N
         public XrSystemEyeGazeInteractionPropertiesEXT.Buffer type$Default() { return type(EXTEyeGazeInteraction.XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT); }
         /** Sets the specified value to the {@link XrSystemEyeGazeInteractionPropertiesEXT#next} field. */
         public XrSystemEyeGazeInteractionPropertiesEXT.Buffer next(@NativeType("void *") long value) { XrSystemEyeGazeInteractionPropertiesEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemEyeGazeInteractionPropertiesEXT#supportsEyeGazeInteraction} field. */
-        public XrSystemEyeGazeInteractionPropertiesEXT.Buffer supportsEyeGazeInteraction(@NativeType("XrBool32") boolean value) { XrSystemEyeGazeInteractionPropertiesEXT.nsupportsEyeGazeInteraction(address(), value ? 1 : 0); return this; }
 
     }
 

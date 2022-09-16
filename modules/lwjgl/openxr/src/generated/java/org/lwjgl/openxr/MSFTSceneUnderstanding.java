@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class MSFTSceneUnderstanding {
 
     /** The extension specification version. */
-    public static final int XR_MSFT_scene_understanding_SPEC_VERSION = 1;
+    public static final int XR_MSFT_scene_understanding_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_MSFT_SCENE_UNDERSTANDING_EXTENSION_NAME = "XR_MSFT_scene_understanding";
@@ -537,6 +537,7 @@ public class MSFTSceneUnderstanding {
      * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
      * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
      * <li>{@link XR10#XR_ERROR_LIMIT_REACHED ERROR_LIMIT_REACHED}</li>
+     * <li>{@link #XR_ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT}</li>
      * </ul></dd>
      * </dl>
      * 
@@ -735,7 +736,10 @@ public class MSFTSceneUnderstanding {
      * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
      * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
      * <li>{@link XR10#XR_ERROR_TIME_INVALID ERROR_TIME_INVALID}</li>
+     * <li>{@link #XR_ERROR_SCENE_COMPUTE_FEATURE_INCOMPATIBLE_MSFT ERROR_SCENE_COMPUTE_FEATURE_INCOMPATIBLE_MSFT}</li>
+     * <li>{@link #XR_ERROR_SCENE_COMPUTE_CONSISTENCY_MISMATCH_MSFT ERROR_SCENE_COMPUTE_CONSISTENCY_MISMATCH_MSFT}</li>
      * <li>{@link XR10#XR_ERROR_POSE_INVALID ERROR_POSE_INVALID}</li>
+     * <li>{@link #XR_ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT ERROR_COMPUTE_NEW_SCENE_NOT_COMPLETED_MSFT}</li>
      * </ul></dd>
      * </dl>
      * 
@@ -870,6 +874,7 @@ public class MSFTSceneUnderstanding {
      * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
      * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
      * <li>{@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT}</li>
+     * <li>{@link #XR_ERROR_SCENE_COMPONENT_TYPE_MISMATCH_MSFT ERROR_SCENE_COMPONENT_TYPE_MISMATCH_MSFT}</li>
      * </ul></dd>
      * </dl>
      * 
@@ -1033,6 +1038,7 @@ public class MSFTSceneUnderstanding {
      * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
      * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
      * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
+     * <li>{@link #XR_ERROR_SCENE_MESH_BUFFER_ID_INVALID_MSFT ERROR_SCENE_MESH_BUFFER_ID_INVALID_MSFT}</li>
      * <li>{@link #XR_ERROR_SCENE_COMPONENT_ID_INVALID_MSFT ERROR_SCENE_COMPONENT_ID_INVALID_MSFT}</li>
      * </ul></dd>
      * </dl>

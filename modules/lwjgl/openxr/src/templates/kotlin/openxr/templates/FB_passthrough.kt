@@ -17,7 +17,7 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
     IntConstant(
         "The extension specification version.",
 
-        "FB_passthrough_SPEC_VERSION".."2"
+        "FB_passthrough_SPEC_VERSION".."3"
     )
 
     StringConstant(
@@ -35,6 +35,7 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
         "TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB".."1000118003",
         "TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB".."1000118004",
         "TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB".."1000118005",
+        "TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB".."1000118006",
         "TYPE_PASSTHROUGH_STYLE_FB".."1000118020",
         "TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB".."1000118021",
         "TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB".."1000118022",
@@ -68,9 +69,18 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
     )
 
     EnumConstant(
+        "XrPassthroughCapabilityFlagBitsFB",
+
+        "PASSTHROUGH_CAPABILITY_BIT_FB".enum(0x00000001),
+        "PASSTHROUGH_CAPABILITY_COLOR_BIT_FB".enum(0x00000002),
+        "PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB".enum(0x00000004)
+    )
+
+    EnumConstant(
         "XrPassthroughFlagBitsFB",
 
-        "PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB".enum(0x00000001)
+        "PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB".enum(0x00000001),
+        "PASSTHROUGH_LAYER_DEPTH_BIT_FB".enum(0x00000002)
     )
 
     EnumConstant(

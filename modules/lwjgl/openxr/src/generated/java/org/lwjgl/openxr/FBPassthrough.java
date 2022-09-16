@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class FBPassthrough {
 
     /** The extension specification version. */
-    public static final int XR_FB_passthrough_SPEC_VERSION = 2;
+    public static final int XR_FB_passthrough_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String XR_FB_PASSTHROUGH_EXTENSION_NAME = "XR_FB_passthrough";
@@ -34,6 +34,7 @@ public class FBPassthrough {
      * <li>{@link #XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB}</li>
      * <li>{@link #XR_TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB}</li>
      * <li>{@link #XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB}</li>
+     * <li>{@link #XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB}</li>
      * <li>{@link #XR_TYPE_PASSTHROUGH_STYLE_FB TYPE_PASSTHROUGH_STYLE_FB}</li>
      * <li>{@link #XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB}</li>
      * <li>{@link #XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB}</li>
@@ -48,6 +49,7 @@ public class FBPassthrough {
         XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB              = 1000118003,
         XR_TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB              = 1000118004,
         XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB                = 1000118005,
+        XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB             = 1000118006,
         XR_TYPE_PASSTHROUGH_STYLE_FB                          = 1000118020,
         XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB         = 1000118021,
         XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB         = 1000118022,
@@ -95,8 +97,35 @@ public class FBPassthrough {
         XR_OBJECT_TYPE_PASSTHROUGH_LAYER_FB = 1000118002,
         XR_OBJECT_TYPE_GEOMETRY_INSTANCE_FB = 1000118004;
 
-    /** XrPassthroughFlagBitsFB */
-    public static final int XR_PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB = 0x1;
+    /**
+     * XrPassthroughCapabilityFlagBitsFB
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_PASSTHROUGH_CAPABILITY_BIT_FB PASSTHROUGH_CAPABILITY_BIT_FB}</li>
+     * <li>{@link #XR_PASSTHROUGH_CAPABILITY_COLOR_BIT_FB PASSTHROUGH_CAPABILITY_COLOR_BIT_FB}</li>
+     * <li>{@link #XR_PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB}</li>
+     * </ul>
+     */
+    public static final int
+        XR_PASSTHROUGH_CAPABILITY_BIT_FB             = 0x1,
+        XR_PASSTHROUGH_CAPABILITY_COLOR_BIT_FB       = 0x2,
+        XR_PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB = 0x4;
+
+    /**
+     * XrPassthroughFlagBitsFB
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB}</li>
+     * <li>{@link #XR_PASSTHROUGH_LAYER_DEPTH_BIT_FB PASSTHROUGH_LAYER_DEPTH_BIT_FB}</li>
+     * </ul>
+     */
+    public static final int
+        XR_PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB = 0x1,
+        XR_PASSTHROUGH_LAYER_DEPTH_BIT_FB            = 0x2;
 
     /**
      * XrPassthroughLayerPurposeFB - Layer purpose

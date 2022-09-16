@@ -106,22 +106,14 @@ public class XrSystemFacialTrackingPropertiesHTC extends Struct implements Nativ
     public XrSystemFacialTrackingPropertiesHTC type$Default() { return type(HTCFacialTracking.XR_TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC); }
     /** Sets the specified value to the {@link #next} field. */
     public XrSystemFacialTrackingPropertiesHTC next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #supportEyeFacialTracking} field. */
-    public XrSystemFacialTrackingPropertiesHTC supportEyeFacialTracking(@NativeType("XrBool32") boolean value) { nsupportEyeFacialTracking(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #supportLipFacialTracking} field. */
-    public XrSystemFacialTrackingPropertiesHTC supportLipFacialTracking(@NativeType("XrBool32") boolean value) { nsupportLipFacialTracking(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrSystemFacialTrackingPropertiesHTC set(
         int type,
-        long next,
-        boolean supportEyeFacialTracking,
-        boolean supportLipFacialTracking
+        long next
     ) {
         type(type);
         next(next);
-        supportEyeFacialTracking(supportEyeFacialTracking);
-        supportLipFacialTracking(supportLipFacialTracking);
 
         return this;
     }
@@ -264,10 +256,6 @@ public class XrSystemFacialTrackingPropertiesHTC extends Struct implements Nativ
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFacialTrackingPropertiesHTC.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrSystemFacialTrackingPropertiesHTC.NEXT, value); }
-    /** Unsafe version of {@link #supportEyeFacialTracking(boolean) supportEyeFacialTracking}. */
-    public static void nsupportEyeFacialTracking(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFacialTrackingPropertiesHTC.SUPPORTEYEFACIALTRACKING, value); }
-    /** Unsafe version of {@link #supportLipFacialTracking(boolean) supportLipFacialTracking}. */
-    public static void nsupportLipFacialTracking(long struct, int value) { UNSAFE.putInt(null, struct + XrSystemFacialTrackingPropertiesHTC.SUPPORTLIPFACIALTRACKING, value); }
 
     // -----------------------------------
 
@@ -326,10 +314,6 @@ public class XrSystemFacialTrackingPropertiesHTC extends Struct implements Nativ
         public XrSystemFacialTrackingPropertiesHTC.Buffer type$Default() { return type(HTCFacialTracking.XR_TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC); }
         /** Sets the specified value to the {@link XrSystemFacialTrackingPropertiesHTC#next} field. */
         public XrSystemFacialTrackingPropertiesHTC.Buffer next(@NativeType("void *") long value) { XrSystemFacialTrackingPropertiesHTC.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemFacialTrackingPropertiesHTC#supportEyeFacialTracking} field. */
-        public XrSystemFacialTrackingPropertiesHTC.Buffer supportEyeFacialTracking(@NativeType("XrBool32") boolean value) { XrSystemFacialTrackingPropertiesHTC.nsupportEyeFacialTracking(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrSystemFacialTrackingPropertiesHTC#supportLipFacialTracking} field. */
-        public XrSystemFacialTrackingPropertiesHTC.Buffer supportLipFacialTracking(@NativeType("XrBool32") boolean value) { XrSystemFacialTrackingPropertiesHTC.nsupportLipFacialTracking(address(), value ? 1 : 0); return this; }
 
     }
 

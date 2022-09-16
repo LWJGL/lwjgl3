@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class FBColorSpace {
 
     /** The extension specification version. */
-    public static final int XR_FB_color_space_SPEC_VERSION = 2;
+    public static final int XR_FB_color_space_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String XR_FB_COLOR_SPACE_EXTENSION_NAME = "XR_FB_color_space";

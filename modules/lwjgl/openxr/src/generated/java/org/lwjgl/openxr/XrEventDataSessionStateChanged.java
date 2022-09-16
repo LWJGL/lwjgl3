@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -28,8 +27,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED TYPE_EVENT_DATA_SESSION_STATE_CHANGED}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
- * <li>{@code state} <b>must</b> be a valid {@code XrSessionState} value</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -117,26 +114,14 @@ public class XrEventDataSessionStateChanged extends Struct implements NativeReso
     public XrEventDataSessionStateChanged type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED); }
     /** Sets the specified value to the {@link #next} field. */
     public XrEventDataSessionStateChanged next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #session} field. */
-    public XrEventDataSessionStateChanged session(XrSession value) { nsession(address(), value); return this; }
-    /** Sets the specified value to the {@link #state} field. */
-    public XrEventDataSessionStateChanged state(@NativeType("XrSessionState") int value) { nstate(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
-    public XrEventDataSessionStateChanged time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataSessionStateChanged set(
         int type,
-        long next,
-        XrSession session,
-        int state,
-        long time
+        long next
     ) {
         type(type);
         next(next);
-        session(session);
-        state(state);
-        time(time);
 
         return this;
     }
@@ -291,21 +276,6 @@ public class XrEventDataSessionStateChanged extends Struct implements NativeReso
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataSessionStateChanged.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataSessionStateChanged.NEXT, value); }
-    /** Unsafe version of {@link #session(XrSession) session}. */
-    public static void nsession(long struct, XrSession value) { memPutAddress(struct + XrEventDataSessionStateChanged.SESSION, value.address()); }
-    /** Unsafe version of {@link #state(int) state}. */
-    public static void nstate(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataSessionStateChanged.STATE, value); }
-    /** Unsafe version of {@link #time(long) time}. */
-    public static void ntime(long struct, long value) { UNSAFE.putLong(null, struct + XrEventDataSessionStateChanged.TIME, value); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataSessionStateChanged.SESSION));
-    }
 
     // -----------------------------------
 
@@ -367,12 +337,6 @@ public class XrEventDataSessionStateChanged extends Struct implements NativeReso
         public XrEventDataSessionStateChanged.Buffer type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED); }
         /** Sets the specified value to the {@link XrEventDataSessionStateChanged#next} field. */
         public XrEventDataSessionStateChanged.Buffer next(@NativeType("void const *") long value) { XrEventDataSessionStateChanged.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataSessionStateChanged#session} field. */
-        public XrEventDataSessionStateChanged.Buffer session(XrSession value) { XrEventDataSessionStateChanged.nsession(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataSessionStateChanged#state} field. */
-        public XrEventDataSessionStateChanged.Buffer state(@NativeType("XrSessionState") int value) { XrEventDataSessionStateChanged.nstate(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataSessionStateChanged#time} field. */
-        public XrEventDataSessionStateChanged.Buffer time(@NativeType("XrTime") long value) { XrEventDataSessionStateChanged.ntime(address(), value); return this; }
 
     }
 
