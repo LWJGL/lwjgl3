@@ -26,6 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t {@link #unHeight};
  *     uint8_t const * {@link #rubTextureMapData};
  *     EVRRenderModelTextureFormat {@link #format};
+ *     uint16_t unMipLevels;
  * }</code></pre>
  */
 @NativeType("struct RenderModel_TextureMap_t")
@@ -42,7 +43,8 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
         UNWIDTH,
         UNHEIGHT,
         RUBTEXTUREMAPDATA,
-        FORMAT;
+        FORMAT,
+        UNMIPLEVELS;
 
     static {
         Layout layout = __struct(
@@ -50,7 +52,8 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
             __member(2),
             __member(2),
             __member(POINTER_SIZE),
-            __member(4)
+            __member(4),
+            __member(2)
         );
 
         SIZEOF = layout.getSize();
@@ -60,6 +63,7 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
         UNHEIGHT = layout.offsetof(1);
         RUBTEXTUREMAPDATA = layout.offsetof(2);
         FORMAT = layout.offsetof(3);
+        UNMIPLEVELS = layout.offsetof(4);
     }
 
     /**
@@ -88,9 +92,12 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
      */
     @NativeType("uint8_t const *")
     public ByteBuffer rubTextureMapData(int capacity) { return nrubTextureMapData(address(), capacity); }
-    /** one of:<br><table><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_RGBA8_SRGB}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC2}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC4}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC7}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC7_SRGB}</td></tr></table> */
+    /** one of:<br><table><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_RGBA8_SRGB}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC2}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC4}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC7}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC7_SRGB}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_RGBA16_FLOAT}</td></tr></table> */
     @NativeType("EVRRenderModelTextureFormat")
     public int format() { return nformat(address()); }
+    /** @return the value of the {@code unMipLevels} field. */
+    @NativeType("uint16_t")
+    public short unMipLevels() { return nunMipLevels(address()); }
 
     // -----------------------------------
 
@@ -232,6 +239,8 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
     public static ByteBuffer nrubTextureMapData(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + RenderModelTextureMap.RUBTEXTUREMAPDATA), capacity); }
     /** Unsafe version of {@link #format}. */
     public static int nformat(long struct) { return UNSAFE.getInt(null, struct + RenderModelTextureMap.FORMAT); }
+    /** Unsafe version of {@link #unMipLevels}. */
+    public static short nunMipLevels(long struct) { return UNSAFE.getShort(null, struct + RenderModelTextureMap.UNMIPLEVELS); }
 
     // -----------------------------------
 
@@ -287,6 +296,9 @@ public class RenderModelTextureMap extends Struct implements NativeResource {
         /** @return the value of the {@link RenderModelTextureMap#format} field. */
         @NativeType("EVRRenderModelTextureFormat")
         public int format() { return RenderModelTextureMap.nformat(address()); }
+        /** @return the value of the {@code unMipLevels} field. */
+        @NativeType("uint16_t")
+        public short unMipLevels() { return RenderModelTextureMap.nunMipLevels(address()); }
 
     }
 

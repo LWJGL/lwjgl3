@@ -138,7 +138,7 @@ public class VRCompositor {
      * <p>OpenGL dirty state: glBindTexture</p>
      *
      * @param eEye         one of:<br><table><tr><td>{@link VR#EVREye_Eye_Left}</td><td>{@link VR#EVREye_Eye_Right}</td></tr></table>
-     * @param nSubmitFlags one of:<br><table><tr><td>{@link VR#EVRSubmitFlags_Submit_Default}</td><td>{@link VR#EVRSubmitFlags_Submit_LensDistortionAlreadyApplied}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_GlRenderBuffer}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_TextureWithDepth}</td><td>{@link VR#EVRSubmitFlags_Submit_FrameDiscontinuty}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_VulkanTextureWithArrayData}</td><td>{@link VR#EVRSubmitFlags_Submit_GlArrayTexture}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_Reserved2}</td></tr></table>
+     * @param nSubmitFlags one of:<br><table><tr><td>{@link VR#EVRSubmitFlags_Submit_Default}</td><td>{@link VR#EVRSubmitFlags_Submit_LensDistortionAlreadyApplied}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_GlRenderBuffer}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_TextureWithDepth}</td><td>{@link VR#EVRSubmitFlags_Submit_FrameDiscontinuty}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_VulkanTextureWithArrayData}</td><td>{@link VR#EVRSubmitFlags_Submit_GlArrayTexture}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_Reserved2}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved3}</td></tr></table>
      *
      * @return return codes:
      *         

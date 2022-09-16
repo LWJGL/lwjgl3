@@ -275,6 +275,22 @@ typedef struct HmdRect2_t
     )
 
     EVROverlayError(
+        "SetOverlayPreCurvePitch",
+        "",
+
+        VROverlayHandle_t("ulOverlayHandle", ""),
+        float("fRadians", "")
+    )
+
+    EVROverlayError(
+        "GetOverlayPreCurvePitch",
+        "",
+
+        VROverlayHandle_t("ulOverlayHandle", ""),
+        Check(1)..float.p("pfRadians", "")
+    )
+
+    EVROverlayError(
         "SetOverlayTextureColorSpace",
         """
         Sets the colorspace the overlay texture's data is in. Defaults to 'auto'. If the texture needs to be resolved, you should call #SetOverlayTexture()
@@ -456,6 +472,13 @@ typedef struct HmdRect2_t
         ETrackingUniverseOrigin("eTrackingOrigin", "", "ETrackingUniverseOrigin_\\w+"),
         HmdVector2_t("coordinatesInOverlay", ""),
         HmdMatrix34_t.p("pmatTransform", "")
+    )
+
+    EVROverlayError(
+        "WaitFrameSync",
+        "",
+
+        uint32_t("nTimeoutMs", "")
     )
 
     bool(

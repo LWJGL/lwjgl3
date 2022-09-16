@@ -819,7 +819,7 @@ val SpatialAnchorPose_t = struct(Module.OPENVR, "SpatialAnchorPose", nativeName 
 	HmdMatrix34_t("mAnchorToAbsoluteTracking", "")
 }
 
-/*val PropertyWrite_t = struct(Module.OPENVR, "PropertyWrite", nativeName = "PropertyWrite_t") {
+val PropertyWrite_t = struct(Module.OPENVR, "PropertyWrite", nativeName = "PropertyWrite_t") {
     ETrackedDeviceProperty("prop", "").links("ETrackedDeviceProperty_\\w+")
     EPropertyWriteType("writeType", "").links("EPropertyWriteType_\\w+")
     ETrackedPropertyError("eSetError", "").links("ETrackedPropertyError_\\w+")
@@ -838,9 +838,11 @@ val PropertyRead_t = struct(Module.OPENVR, "PropertyRead", nativeName = "Propert
     ETrackedPropertyError("eError", "").links("ETrackedPropertyError_\\w+")
 }
 
+/*
 val CVRPropertyHelpers = struct(Module.OPENVR, "CVRPropertyHelpers", mutable = false) {
     intptr_t("m_pProperties", "")
 }
+*/
 
 val PathWrite_t = struct(Module.OPENVR, "PathWrite", nativeName = "PathWrite_t") {
     PathHandle_t("ulPath", "")
@@ -861,7 +863,7 @@ val PathRead_t = struct(Module.OPENVR, "PathRead", nativeName = "PathRead_t") {
     uint32_t("unRequiredBufferSize", "")
     ETrackedPropertyError("eError", "").links("ETrackedPropertyError_\\w+")
     charASCII.p("pszPath", "")
-}*/
+}
 
 val RenderModel_Vertex_t = struct(Module.OPENVR, "RenderModelVertex", nativeName = "RenderModel_Vertex_t", mutable = false) {
     documentation = "A single vertex in a render model."
@@ -893,6 +895,7 @@ val RenderModel_TextureMap_t = struct(Module.OPENVR, "RenderModelTextureMap", na
     uint16_t("unHeight", "width and height of the texture map in pixels")
     uint8_t.const.p("rubTextureMapData", "Map texture data.")
     EVRRenderModelTextureFormat("format", "").links("EVRRenderModelTextureFormat_\\w+")
+    uint16_t("unMipLevels", "")
 }
 
 val RenderModel_ControllerMode_State_t = struct(Module.OPENVR, "RenderModelControllerModeState", nativeName = "RenderModel_ControllerMode_State_t") {

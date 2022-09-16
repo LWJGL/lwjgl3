@@ -39,6 +39,9 @@ public final class OpenVR {
     @Nullable public static IVRSpatialAnchors VRSpatialAnchors;
     @Nullable public static IVRDebug VRDebug;
     @Nullable public static IVRNotifications VRNotifications;
+    @Nullable public static IVRProperties VRProperties;
+    @Nullable public static IVRPaths VRPaths;
+    @Nullable public static IVRBlockQueue VRBlockQueue;
 
     private static int token;
 
@@ -77,6 +80,9 @@ public final class OpenVR {
         VRSpatialAnchors = getGenericInterface(IVRSpatialAnchors_Version, IVRSpatialAnchors::new);
         VRDebug = getGenericInterface(IVRDebug_Version, IVRDebug::new);
         VRNotifications = getGenericInterface(IVRNotifications_Version, IVRNotifications::new);
+        VRProperties = getGenericInterface(IVRProperties_Version, IVRProperties::new);
+        VRPaths = getGenericInterface(IVRPaths_Version, IVRPaths::new);
+        VRBlockQueue = getGenericInterface(IVRBlockQueue_Version, IVRBlockQueue::new);
     }
 
     @Nullable
@@ -123,6 +129,9 @@ public final class OpenVR {
         VRSpatialAnchors = null;
         VRDebug = null;
         VRNotifications = null;
+        VRProperties = null;
+        VRPaths = null;
+        VRBlockQueue = null;
     }
 
     public static final class IVRSystem {
@@ -473,6 +482,8 @@ public final class OpenVR {
             GetOverlayWidthInMeters,
             SetOverlayCurvature,
             GetOverlayCurvature,
+            SetOverlayPreCurvePitch,
+            GetOverlayPreCurvePitch,
             SetOverlayTextureColorSpace,
             GetOverlayTextureColorSpace,
             SetOverlayTextureBounds,
@@ -493,6 +504,7 @@ public final class OpenVR {
             HideOverlay,
             IsOverlayVisible,
             GetTransformForOverlayCoordinates,
+            WaitFrameSync,
             PollNextOverlayEvent,
             GetOverlayInputMethod,
             SetOverlayInputMethod,
@@ -529,7 +541,7 @@ public final class OpenVR {
             CloseMessageOverlay;
 
         public IVROverlay(long tableAddress) {
-            PointerBuffer table = memPointerBuffer(tableAddress, 79);
+            PointerBuffer table = memPointerBuffer(tableAddress, 82);
             FindOverlay = table.get(0);
             CreateOverlay = table.get(1);
             DestroyOverlay = table.get(2);
@@ -555,60 +567,63 @@ public final class OpenVR {
             GetOverlayWidthInMeters = table.get(22);
             SetOverlayCurvature = table.get(23);
             GetOverlayCurvature = table.get(24);
-            SetOverlayTextureColorSpace = table.get(25);
-            GetOverlayTextureColorSpace = table.get(26);
-            SetOverlayTextureBounds = table.get(27);
-            GetOverlayTextureBounds = table.get(28);
-            GetOverlayTransformType = table.get(29);
-            SetOverlayTransformAbsolute = table.get(30);
-            GetOverlayTransformAbsolute = table.get(31);
-            SetOverlayTransformTrackedDeviceRelative = table.get(32);
-            GetOverlayTransformTrackedDeviceRelative = table.get(33);
-            SetOverlayTransformTrackedDeviceComponent = table.get(34);
-            GetOverlayTransformTrackedDeviceComponent = table.get(35);
-            GetOverlayTransformOverlayRelative = table.get(36);
-            SetOverlayTransformOverlayRelative = table.get(37);
-            SetOverlayTransformCursor = table.get(38);
-            GetOverlayTransformCursor = table.get(39);
-            SetOverlayTransformProjection = table.get(40);
-            ShowOverlay = table.get(41);
-            HideOverlay = table.get(42);
-            IsOverlayVisible = table.get(43);
-            GetTransformForOverlayCoordinates = table.get(44);
-            PollNextOverlayEvent = table.get(45);
-            GetOverlayInputMethod = table.get(46);
-            SetOverlayInputMethod = table.get(47);
-            GetOverlayMouseScale = table.get(48);
-            SetOverlayMouseScale = table.get(49);
-            ComputeOverlayIntersection = table.get(50);
-            IsHoverTargetOverlay = table.get(51);
-            SetOverlayIntersectionMask = table.get(52);
-            TriggerLaserMouseHapticVibration = table.get(53);
-            SetOverlayCursor = table.get(54);
-            SetOverlayCursorPositionOverride = table.get(55);
-            ClearOverlayCursorPositionOverride = table.get(56);
-            SetOverlayTexture = table.get(57);
-            ClearOverlayTexture = table.get(58);
-            SetOverlayRaw = table.get(59);
-            SetOverlayFromFile = table.get(60);
-            GetOverlayTexture = table.get(61);
-            ReleaseNativeOverlayHandle = table.get(62);
-            GetOverlayTextureSize = table.get(63);
-            CreateDashboardOverlay = table.get(64);
-            IsDashboardVisible = table.get(65);
-            IsActiveDashboardOverlay = table.get(66);
-            SetDashboardOverlaySceneProcess = table.get(67);
-            GetDashboardOverlaySceneProcess = table.get(68);
-            ShowDashboard = table.get(69);
-            GetPrimaryDashboardDevice = table.get(70);
-            ShowKeyboard = table.get(71);
-            ShowKeyboardForOverlay = table.get(72);
-            GetKeyboardText = table.get(73);
-            HideKeyboard = table.get(74);
-            SetKeyboardTransformAbsolute = table.get(75);
-            SetKeyboardPositionForOverlay = table.get(76);
-            ShowMessageOverlay = table.get(77);
-            CloseMessageOverlay = table.get(78);
+            SetOverlayPreCurvePitch = table.get(25);
+            GetOverlayPreCurvePitch = table.get(26);
+            SetOverlayTextureColorSpace = table.get(27);
+            GetOverlayTextureColorSpace = table.get(28);
+            SetOverlayTextureBounds = table.get(29);
+            GetOverlayTextureBounds = table.get(30);
+            GetOverlayTransformType = table.get(31);
+            SetOverlayTransformAbsolute = table.get(32);
+            GetOverlayTransformAbsolute = table.get(33);
+            SetOverlayTransformTrackedDeviceRelative = table.get(34);
+            GetOverlayTransformTrackedDeviceRelative = table.get(35);
+            SetOverlayTransformTrackedDeviceComponent = table.get(36);
+            GetOverlayTransformTrackedDeviceComponent = table.get(37);
+            GetOverlayTransformOverlayRelative = table.get(38);
+            SetOverlayTransformOverlayRelative = table.get(39);
+            SetOverlayTransformCursor = table.get(40);
+            GetOverlayTransformCursor = table.get(41);
+            SetOverlayTransformProjection = table.get(42);
+            ShowOverlay = table.get(43);
+            HideOverlay = table.get(44);
+            IsOverlayVisible = table.get(45);
+            GetTransformForOverlayCoordinates = table.get(46);
+            WaitFrameSync = table.get(47);
+            PollNextOverlayEvent = table.get(48);
+            GetOverlayInputMethod = table.get(49);
+            SetOverlayInputMethod = table.get(50);
+            GetOverlayMouseScale = table.get(51);
+            SetOverlayMouseScale = table.get(52);
+            ComputeOverlayIntersection = table.get(53);
+            IsHoverTargetOverlay = table.get(54);
+            SetOverlayIntersectionMask = table.get(55);
+            TriggerLaserMouseHapticVibration = table.get(56);
+            SetOverlayCursor = table.get(57);
+            SetOverlayCursorPositionOverride = table.get(58);
+            ClearOverlayCursorPositionOverride = table.get(59);
+            SetOverlayTexture = table.get(60);
+            ClearOverlayTexture = table.get(61);
+            SetOverlayRaw = table.get(62);
+            SetOverlayFromFile = table.get(63);
+            GetOverlayTexture = table.get(64);
+            ReleaseNativeOverlayHandle = table.get(65);
+            GetOverlayTextureSize = table.get(66);
+            CreateDashboardOverlay = table.get(67);
+            IsDashboardVisible = table.get(68);
+            IsActiveDashboardOverlay = table.get(69);
+            SetDashboardOverlaySceneProcess = table.get(70);
+            GetDashboardOverlaySceneProcess = table.get(71);
+            ShowDashboard = table.get(72);
+            GetPrimaryDashboardDevice = table.get(73);
+            ShowKeyboard = table.get(74);
+            ShowKeyboardForOverlay = table.get(75);
+            GetKeyboardText = table.get(76);
+            HideKeyboard = table.get(77);
+            SetKeyboardTransformAbsolute = table.get(78);
+            SetKeyboardPositionForOverlay = table.get(79);
+            ShowMessageOverlay = table.get(80);
+            CloseMessageOverlay = table.get(81);
         }
 
     }
@@ -1031,6 +1046,70 @@ public final class OpenVR {
             PointerBuffer table = memPointerBuffer(tableAddress, 2);
             CreateNotification = table.get(0);
             RemoveNotification = table.get(1);
+        }
+
+    }
+
+    public static final class IVRProperties {
+
+        public final long
+            ReadPropertyBatch,
+            WritePropertyBatch,
+            GetPropErrorNameFromEnum,
+            TrackedDeviceToPropertyContainer;
+
+        public IVRProperties(long tableAddress) {
+            PointerBuffer table = memPointerBuffer(tableAddress, 4);
+            ReadPropertyBatch = table.get(0);
+            WritePropertyBatch = table.get(1);
+            GetPropErrorNameFromEnum = table.get(2);
+            TrackedDeviceToPropertyContainer = table.get(3);
+        }
+
+    }
+
+    public static final class IVRPaths {
+
+        public final long
+            ReadPathBatch,
+            WritePathBatch,
+            StringToHandle,
+            HandleToString;
+
+        public IVRPaths(long tableAddress) {
+            PointerBuffer table = memPointerBuffer(tableAddress, 4);
+            ReadPathBatch = table.get(0);
+            WritePathBatch = table.get(1);
+            StringToHandle = table.get(2);
+            HandleToString = table.get(3);
+        }
+
+    }
+
+    public static final class IVRBlockQueue {
+
+        public final long
+            Create,
+            Connect,
+            Destroy,
+            AcquireWriteOnlyBlock,
+            ReleaseWriteOnlyBlock,
+            WaitAndAcquireReadOnlyBlock,
+            AcquireReadOnlyBlock,
+            ReleaseReadOnlyBlock,
+            QueueHasReader;
+
+        public IVRBlockQueue(long tableAddress) {
+            PointerBuffer table = memPointerBuffer(tableAddress, 9);
+            Create = table.get(0);
+            Connect = table.get(1);
+            Destroy = table.get(2);
+            AcquireWriteOnlyBlock = table.get(3);
+            ReleaseWriteOnlyBlock = table.get(4);
+            WaitAndAcquireReadOnlyBlock = table.get(5);
+            AcquireReadOnlyBlock = table.get(6);
+            ReleaseReadOnlyBlock = table.get(7);
+            QueueHasReader = table.get(8);
         }
 
     }
