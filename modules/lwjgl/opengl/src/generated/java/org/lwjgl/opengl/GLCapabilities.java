@@ -4120,6 +4120,33 @@ public final class GLCapabilities {
      */
     public final boolean GL_EXT_shader_integer_mix;
     /**
+     * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shader_samples_identical.txt">EXT_shader_samples_identical</a> extension is supported.
+     * 
+     * <p>Multisampled antialiasing has become a common method for improving the quality of rendered images. Multisampling differs from supersampling in that the
+     * color of a primitive that covers all or part of a pixel is resolved once, regardless of the number of samples covered. If a large polygon is rendered,
+     * the colors of all samples in each interior pixel will be the same. This suggests a simple compression scheme that can reduce the necessary memory
+     * bandwidth requirements. In one such scheme, each sample is stored in a separate slice of the multisample surface. An additional multisample control
+     * surface (MCS) contains a mapping from pixel samples to slices.</p>
+     * 
+     * <p>If all the values stored in the MCS for a particular pixel are the same, then all the samples have the same value. Applications can take advantage of
+     * this information to reduce the bandwidth of reading multisample textures. A custom multisample resolve filter could optimize resolving pixels where
+     * every sample is identical by reading the color once.</p>
+     * 
+     * <pre><code>
+     * color = texelFetch(sampler, coordinate, 0);
+     * if (!textureSamplesIdenticalEXT(sampler, coordinate)) {
+     *     for (int i = 1; i &lt; MAX_SAMPLES; i++) {
+     *         vec4 c = texelFetch(sampler, coordinate, i);
+     * 
+     *         //... accumulate c into color
+     * 
+     *     }
+     * }</code></pre>
+     * 
+     * <p>Requires {@link GL32 OpenGL 3.2} or {@link ARBTextureMultisample ARB_texture_multisample}.</p>
+     */
+    public final boolean GL_EXT_shader_samples_identical;
+    /**
      * When true, the <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_shadow_funcs.txt">EXT_shadow_funcs</a> extension is supported.
      * 
      * <p>This extension generalizes the {@link #GL_ARB_shadow ARB_shadow} extension to support all eight binary texture comparison functions rather than just {@link GL11#GL_LEQUAL LEQUAL} and
@@ -5073,6 +5100,7 @@ public final class GLCapabilities {
         GL_EXT_shader_image_load_formatted = ext.contains("GL_EXT_shader_image_load_formatted");
         GL_EXT_shader_image_load_store = check_EXT_shader_image_load_store(provider, caps, ext);
         GL_EXT_shader_integer_mix = ext.contains("GL_EXT_shader_integer_mix");
+        GL_EXT_shader_samples_identical = ext.contains("GL_EXT_shader_samples_identical");
         GL_EXT_shadow_funcs = ext.contains("GL_EXT_shadow_funcs");
         GL_EXT_shared_texture_palette = ext.contains("GL_EXT_shared_texture_palette");
         GL_EXT_sparse_texture2 = ext.contains("GL_EXT_sparse_texture2");

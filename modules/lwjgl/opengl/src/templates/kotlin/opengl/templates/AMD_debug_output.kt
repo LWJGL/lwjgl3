@@ -17,12 +17,12 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 
         These events are represented in the form of enumerable messages with an included human-readable translation. Examples of debug events include incorrect
         use of the GL, warnings of undefined behavior, and performance warnings.
-  
+
         A message is uniquely identified by a category and an implementation-dependent ID within that category. Message categories are general and are used to
         organize large groups of similar messages together. Examples of categories include GL errors, performance warnings, and deprecated functionality
         warnings. Each message is also assigned a severity level that denotes roughly how "important" that message is in comparison to other messages across all
         categories. For example, notification of a GL error would have a higher severity than a performance warning due to redundant state changes.
-  
+
         Messages are communicated to the application through an application-defined callback function that is called by the GL implementation on each debug
         message. The motivation for the callback routine is to free application developers from actively having to query whether any GL error or other
         debuggable event has happened after each call to a GL function. With a callback, developers can keep their code free of debug checks, and only have to
@@ -31,13 +31,13 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 
         To control the volume of debug output, messages can be disabled either individually by ID, or entire groups of messages can be turned off based on
         category or severity.
-  
+
         The only requirement on the minimum quantity and type of messages that implementations of this extension must support is that a message must be sent
         notifying the application whenever any GL error occurs. Any further messages are left to the implementation. Implementations do not have to output
         messages from all categories listed by this extension in order to support this extension, and new categories can be added by other extensions.
 
         This extension places no restrictions or requirements on any additional functionality provided by the debug context flag through other extensions.
-     
+
         Requires ${WGL_ARB_create_context.link} or ${GLX_ARB_create_context.link}.
         """
 
@@ -50,7 +50,10 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
     )
 
     val Severities = IntConstant(
-        "Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, DebugMessageInsertAMD, and DEBUGPROCAMD callback function for {@code severity}.",
+        """
+        Tokens accepted by #DebugMessageEnableAMD(), #GetDebugMessageLogAMD(), #DebugMessageInsertAMD(), and {@code DEBUGPROCAMD} callback function for
+        {@code severity}.
+        """,
 
         "DEBUG_SEVERITY_HIGH_AMD"..0x9146,
         "DEBUG_SEVERITY_MEDIUM_AMD"..0x9147,
@@ -58,7 +61,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
     ).javaDocLinks
 
     val Categories = IntConstant(
-        "Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, and DEBUGPROCAMD callback function for {@code category}.",
+        "Tokens accepted by #DebugMessageEnableAMD(), #GetDebugMessageLogAMD(), and {@code DEBUGPROCAMD} callback function for {@code category}.",
 
         "DEBUG_CATEGORY_API_ERROR_AMD"..0x9149,
         "DEBUG_CATEGORY_WINDOW_SYSTEM_AMD"..0x914A,
@@ -100,11 +103,11 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
         {@code severity} is non-zero and is an invalid severity level, the error #INVALID_ENUM is generated. If {@code count} is less than zero, the error
         #INVALID_VALUE is generated. If the parameters do not fall into one of the cases defined above, the error #INVALID_VALUE is generated. The error
         #INVALID_OPERATION is generated if this command is called in a non-debug context.
-  
+
         Although messages are grouped into categories and severities, and entire groups of messages can be turned off with a single call, there is no explicit
         per-category or per-severity enabled state. Instead the enabled state is stored individually for each message. There is no difference between disabling
         a category of messages with a single call, and enumerating all messages of that category and individually disabling each of them by their ID.
-  
+
         All messages of severity level #DEBUG_SEVERITY_MEDIUM_AMD and #DEBUG_SEVERITY_HIGH_AMD in all categories are initially enabled, and all messages at
         #DEBUG_SEVERITY_LOW_AMD are initially disabled.
         """,
@@ -194,7 +197,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
         GLuint("count", "the number of debug messages to retrieve from the log"),
         AutoSize("messageLog")..GLsizei("bufsize", "the maximum number of characters that can be written in the {@code message} array"),
         Check("count")..nullable..GLenum.p("categories", "an array of variables to receive the categories of the retrieved messages"),
-        Check("count")..nullable..GLuint.p("severities", "an array of variables to receive the severities of the retrieved messages"),
+        Check("count")..nullable..GLenum.p("severities", "an array of variables to receive the severities of the retrieved messages"),
         Check("count")..nullable..GLuint.p("ids", "an array of variables to receive the ids of the retrieved messages"),
         Check("count")..nullable..GLsizei.p("lengths", "an array of variables to receive the lengths of the retrieved messages"),
         nullable..GLcharUTF8.p("messageLog", "an array of characters that will receive the messages")

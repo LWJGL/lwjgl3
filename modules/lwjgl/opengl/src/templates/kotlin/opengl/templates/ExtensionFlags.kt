@@ -756,7 +756,7 @@ val EXT_EGL_sync = EXT_FLAG.nativeClassGL("EXT_EGL_sync", postfix = EXT) {
     documentation =
         """
         When true, the $registryLink extension is supported.
-        
+
         This extension extends {@code EGL_KHR_fence_sync} with client API support for OpenGL (compatibility or core profiles) as an EXT extension.
 
         The {@code "GL_EXT_EGL_sync"} string indicates that a fence sync object can be created in association with a fence command placed in the command stream
@@ -771,7 +771,7 @@ val EXT_multiview_timer_query = EXT_FLAG.nativeClassGL("EXT_multiview_timer_quer
 
         This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of timer queries during multiview rendering.
         {@code OVR_multiview} does not specify defined behavior for such usage.
-    
+
         Requires ${GL40.core} and ${OVR_multiview.link}.
         """
 }
@@ -796,7 +796,7 @@ val EXT_multiview_texture_multisample = EXT_FLAG.nativeClassGL("EXT_multiview_te
 
         This extension supports the first multisampling style with multiview rendering; the {@code OVR_multiview_multisampled_render_to_texture} extension
         supports the second style. Note that support for one of these multiview extensions does not imply support for the other.
-    
+
         Requires ${GL40.core} and ${OVR_multiview.link}.
         """
 }
@@ -817,7 +817,7 @@ val EXT_multiview_tessellation_geometry_shader = EXT_FLAG.nativeClassGL("EXT_mul
         {@code OVR_multiview2} extends {@code OVR_multiview} by allowing view-dependent values for any vertex attributes instead of just the position. This new
         extension does not imply the availability of {@code OVR_multiview2}, but if both are available, view-dependent values for any vertex attributes are
         also allowed in tessellation control, tessellation evaluation, and geometry shaders.
-    
+
         Requires ${GL40.core} and ${OVR_multiview.link}.
         """
 }
@@ -857,6 +857,35 @@ val EXT_shader_integer_mix = "EXTShaderIntegerMix".nativeClassGL("EXT_shader_int
         extension extends mix() to select between int, uint, and bool components.
 
         Requires ${GL30.core}.
+        """
+}
+
+val EXT_shader_samples_identical = EXT_FLAG.nativeClassGL("EXT_shader_samples_identical", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        Multisampled antialiasing has become a common method for improving the quality of rendered images. Multisampling differs from supersampling in that the
+        color of a primitive that covers all or part of a pixel is resolved once, regardless of the number of samples covered. If a large polygon is rendered,
+        the colors of all samples in each interior pixel will be the same. This suggests a simple compression scheme that can reduce the necessary memory
+        bandwidth requirements. In one such scheme, each sample is stored in a separate slice of the multisample surface. An additional multisample control
+        surface (MCS) contains a mapping from pixel samples to slices.
+
+        If all the values stored in the MCS for a particular pixel are the same, then all the samples have the same value. Applications can take advantage of
+        this information to reduce the bandwidth of reading multisample textures. A custom multisample resolve filter could optimize resolving pixels where
+        every sample is identical by reading the color once.
+        ${codeBlock("""
+color = texelFetch(sampler, coordinate, 0);
+if (!textureSamplesIdenticalEXT(sampler, coordinate)) {
+    for (int i = 1; i < MAX_SAMPLES; i++) {
+        vec4 c = texelFetch(sampler, coordinate, i);
+
+        //... accumulate c into color
+
+    }
+}""")}
+
+        Requires ${GL32.core} or ${ARB_texture_multisample.link}.
         """
 }
 
@@ -906,12 +935,12 @@ val EXT_texture_shadow_lod = EXT_FLAG.nativeClassGL("EXT_texture_shadow_lod", po
     documentation =
         """
         This extension adds support for various shadow sampler types with texture functions having interactions with the LOD of texture lookups.
-        
+
         Modern shading languages support LOD queries for shadow sampler types, but until now the OpenGL Shading Language Specification has excluded multiple
         texture function overloads involving LOD calculations with various shadow samplers. Shading languages for other APIs do support the equivalent
         LOD-based texture sampling functions for these types which has made porting between those shading languages to GLSL cumbersome and has required the
         usage of sub-optimal workarounds.
-        
+
         Requires ${GL20.core} and ${EXT_gpu_shader4.link} or equivalent functionality.
         """
 }
@@ -1231,7 +1260,7 @@ val MESA_tile_raster_order = EXT_FLAG.nativeClassGL("MESA_tile_raster_order", po
         This extension extends the sampling-from-the-framebuffer behavior provided by {@code GL_ARB_texture_barrier} to allow setting the rasterization order
         of the scene, so that overlapping blits can be implemented. This can be used for scrolling or window movement within in 2D scenes, without first
         copying to a temporary.
-    
+
         Requires ${ARB_texture_barrier.link} or ${NV_texture_barrier.link}.
         """
 }

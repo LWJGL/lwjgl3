@@ -157,6 +157,24 @@ val EXT_float_blend = EXT_FLAG.nativeClassGLES("EXT_float_blend", postfix = EXT)
         """
 }
 
+val EXT_fragment_shading_rate_attachment = EXT_FLAG.nativeClassGLES("EXT_fragment_shading_rate_attachment", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        See ${EXT_fragment_shading_rate.link} for more information.
+        """
+}
+
+val EXT_fragment_shading_rate_primitive = EXT_FLAG.nativeClassGLES("EXT_fragment_shading_rate_primitive", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        See ${EXT_fragment_shading_rate.link} for more information.
+        """
+}
+
 val EXT_gpu_shader5 = EXT_FLAG.nativeClassGLES("EXT_gpu_shader5", postfix = EXT) {
     documentation =
         """
@@ -214,7 +232,7 @@ val EXT_multiview_timer_query = EXT_FLAG.nativeClassGLES("EXT_multiview_timer_qu
 
         This extension removes one of the limitations of the {@code OVR_multiview} extension by allowing the use of timer queries during multiview rendering.
         {@code OVR_multiview} does not specify defined behavior for such usage (if ${EXT_disjoint_timer_query.link} is present).
-    
+
         Requires ${GLES32.core} and ${OVR_multiview.link}.
         """
 }
@@ -239,7 +257,7 @@ val EXT_multiview_texture_multisample = EXT_FLAG.nativeClassGLES("EXT_multiview_
 
         This extension supports the first multisampling style with multiview rendering; the ${OVR_multiview_multisampled_render_to_texture.link} extension
         supports the second style. Note that support for one of these multiview extensions does not imply support for the other.
-    
+
         Requires ${GLES32.core} and ${OVR_multiview.link}.
         """
 }
@@ -260,7 +278,7 @@ val EXT_multiview_tessellation_geometry_shader = EXT_FLAG.nativeClassGLES("EXT_m
         {@code OVR_multiview2} extends {@code OVR_multiview} by allowing view-dependent values for any vertex attributes instead of just the position. This new
         extension does not imply the availability of {@code OVR_multiview2}, but if both are available, view-dependent values for any vertex attributes are
         also allowed in tessellation control, tessellation evaluation, and geometry shaders.
-    
+
         Requires ${GLES32.core} and ${OVR_multiview.link}.
         """
 }
@@ -278,6 +296,15 @@ val EXT_post_depth_coverage = EXT_FLAG.nativeClassGLES("EXT_post_depth_coverage"
         ${codeBlock("""
     layout(early_fragment_tests) in;""")}
         Requires {@link \#GL_OES_sample_variables OES_sample_variables}.
+        """
+}
+
+val EXT_separate_depth_stencil = EXT_FLAG.nativeClassGLES("EXT_separate_depth_stencil", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        This extension adds support for binding a different image to the depth and stencil attachments of a framebuffer object.
         """
 }
 
@@ -372,6 +399,35 @@ val EXT_shader_non_constant_global_initializers = EXT_FLAG.nativeClassGLES("EXT_
 
         This extension adds the ability to use non-constant initializers for global variables in the OpenGL ES Shading Language specifications. This
         functionality is already present in the OpenGL Shading language specification.
+        """
+}
+
+val EXT_shader_samples_identical = EXT_FLAG.nativeClassGLES("EXT_shader_samples_identical", postfix = EXT) {
+    documentation =
+        """
+        When true, the $registryLink extension is supported.
+
+        Multisampled antialiasing has become a common method for improving the quality of rendered images. Multisampling differs from supersampling in that the
+        color of a primitive that covers all or part of a pixel is resolved once, regardless of the number of samples covered. If a large polygon is rendered,
+        the colors of all samples in each interior pixel will be the same. This suggests a simple compression scheme that can reduce the necessary memory
+        bandwidth requirements. In one such scheme, each sample is stored in a separate slice of the multisample surface. An additional multisample control
+        surface (MCS) contains a mapping from pixel samples to slices.
+
+        If all the values stored in the MCS for a particular pixel are the same, then all the samples have the same value. Applications can take advantage of
+        this information to reduce the bandwidth of reading multisample textures. A custom multisample resolve filter could optimize resolving pixels where
+        every sample is identical by reading the color once.
+        ${codeBlock("""
+color = texelFetch(sampler, coordinate, 0);
+if (!textureSamplesIdenticalEXT(sampler, coordinate)) {
+    for (int i = 1; i < MAX_SAMPLES; i++) {
+        vec4 c = texelFetch(sampler, coordinate, i);
+
+        //... accumulate c into color
+
+    }
+}""")}
+
+        Requires ${GLES31.core}.
         """
 }
 
@@ -486,12 +542,12 @@ val EXT_texture_shadow_lod = EXT_FLAG.nativeClassGLES("EXT_texture_shadow_lod", 
     documentation =
         """
         This extension adds support for various shadow sampler types with texture functions having interactions with the LOD of texture lookups.
-        
+
         Modern shading languages support LOD queries for shadow sampler types, but until now the OpenGL Shading Language Specification has excluded multiple
         texture function overloads involving LOD calculations with various shadow samplers. Shading languages for other APIs do support the equivalent
         LOD-based texture sampling functions for these types which has made porting between those shading languages to GLSL cumbersome and has required the
         usage of sub-optimal workarounds.
-        
+
         Requires ${GLES30.core} and {@code EXT_gpu_shader4} or equivalent functionality.
         """
 }
@@ -549,7 +605,7 @@ val MESA_tile_raster_order = EXT_FLAG.nativeClassGLES("MESA_tile_raster_order", 
         This extension extends the sampling-from-the-framebuffer behavior provided by {@code GL_NV_texture_barrier} to allow setting the rasterization order of
         the scene, so that overlapping blits can be implemented. This can be used for scrolling or window movement within in 2D scenes, without first copying
         to a temporary.
-    
+
         Requires ${NV_texture_barrier.link}.
         """
 }
