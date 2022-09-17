@@ -11,7 +11,9 @@ import openxr.*
 val MSFT_spatial_anchor_persistence = "MSFTSpatialAnchorPersistence".nativeClassXR("MSFT_spatial_anchor_persistence", type = "instance", postfix = "MSFT") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MSFT_spatial_anchor_persistence">XR_MSFT_spatial_anchor_persistence</a> extension.
+
+        This extension allows persistence and retrieval of spatial anchors sharing and localization across application sessions on a device. Spatial anchors persisted during an application session on a device will only be able to be retrieved during sessions of that same application on the same device. This extension requires {@link MSFTSpatialAnchor XR_MSFT_spatial_anchor} to also be enabled.
         """
 
     IntConstant(

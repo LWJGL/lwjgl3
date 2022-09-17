@@ -11,7 +11,13 @@ import openxr.*
 val VARJO_environment_depth_estimation = "VARJOEnvironmentDepthEstimation".nativeClassXR("VARJO_environment_depth_estimation", type = "instance", postfix = "VARJO") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_VARJO_environment_depth_estimation">XR_VARJO_environment_depth_estimation</a> extension.
+
+        This extension provides a mechanism for enabling depth estimation of the environment in the runtime-supplied compositor. This is an extension to #ENVIRONMENT_BLEND_MODE_ALPHA_BLEND mode to not only use the color but also depth for composition of the final image.
+
+        Mixed reality applications might want to mix real and virtual content based on the depth information for proper occlusion. XR hardware and runtime may offer various ways to estimate the depth of the environment inside the compositor. When this estimation is enabled, the compositor can generate properly occluded final image when layers are submitted with depth information (both {@link KHRCompositionLayerDepth XR_KHR_composition_layer_depth} and {@link VARJOCompositionLayerDepthTest XR_VARJO_composition_layer_depth_test}).
+
+        This extension defines a new function, #SetEnvironmentDepthEstimationVARJO(), which <b>can</b> be used to toggle environment depth estimation in the compositor. Toggling depth estimation is an asynchronous operation and the feature <b>may</b> not be activated immediately. Function can be called immediately after the session is created. Composition of the environment layer follows the rules as described in {@link VARJOCompositionLayerDepthTest XR_VARJO_composition_layer_depth_test}.
         """
 
     IntConstant(

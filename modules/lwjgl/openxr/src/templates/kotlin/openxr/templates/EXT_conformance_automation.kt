@@ -11,7 +11,24 @@ import openxr.*
 val EXT_conformance_automation = "EXTConformanceAutomation".nativeClassXR("EXT_conformance_automation", type = "instance", postfix = "EXT") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_conformance_automation">XR_EXT_conformance_automation</a> extension.
+
+        The XR_EXT_conformance_automation allows conformance test and runtime developers to provide hints to the underlying runtime as to what input the test is expecting. This enables runtime authors to automate the testing of their runtime conformance. This is useful for achieving rapidly iterative runtime development whilst maintaining conformance for runtime releases.
+
+        This extension provides the following capabilities:
+
+        <ul>
+            <li>The ability to toggle the active state of an input device.</li>
+            <li>The ability to set the state of an input device button or other input component.</li>
+            <li>The ability to set the location of the input device.</li>
+        </ul>
+
+        Applications <b>may</b> call these functions at any time. The runtime <b>must</b> do its best to honor the request of applications calling these functions, however it does not guarantee that any state change will be reflected immediately, at all, or with the exact value that was requested. Applications are thus advised to wait for the state change to be observable and to not assume that the value they requested will be the value observed. If any of the functions of this extension are called, control over input <b>must</b> be removed from the physical hardware of the system.
+
+        <h5>Warning</h5>
+        This extension is <b>not</b> intended for use by non-conformance-test applications. A runtime <b>may</b> require a runtime-specified configuration such as a "developer mode" to be enabled before reporting support for this extension or providing a non-stub implementation of it.
+
+        <b>Do not</b> use this functionality in a non-conformance-test application!
         """
 
     IntConstant(

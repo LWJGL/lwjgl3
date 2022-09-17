@@ -10,7 +10,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/** The KHR_loader_init extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_loader_init">XR_KHR_loader_init</a> extension.
+ * 
+ * <p>On some platforms, before loading can occur the loader must be initialized with platform-specific parameters. Unlike other extensions, the presence of this extension is signaled by a successful call to {@link XR10#xrGetInstanceProcAddr GetInstanceProcAddr} to retrieve the function pointer for {@link #xrInitializeLoaderKHR InitializeLoaderKHR} using a null instance handle. If this extension is supported, its use may be required on some platforms and the use of the {@link #xrInitializeLoaderKHR InitializeLoaderKHR} function must precede other OpenXR calls except {@link XR10#xrGetInstanceProcAddr GetInstanceProcAddr}. This function exists as part of the loader library that the application is using.</p>
+ */
 public class KHRLoaderInit {
 
     /** The extension specification version. */

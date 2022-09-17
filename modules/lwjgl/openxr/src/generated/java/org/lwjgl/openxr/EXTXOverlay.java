@@ -5,7 +5,32 @@
  */
 package org.lwjgl.openxr;
 
-/** The EXTX_overlay extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXTX_overlay">XR_EXTX_overlay</a> extension.
+ * 
+ * <p>Application developers may desire to implement an OpenXR application that renders content on top of another OpenXR application. These additional applications will execute in a separate process, create a separate session, generate separate content, but want the OpenXR runtime to composite their content on top of the main OpenXR application. Examples of these applications might include:</p>
+ * 
+ * <ul>
+ * <li>A debug environment outputting additional content</li>
+ * <li>A Store application that hovers to one side of the user’s view</li>
+ * <li>A interactive HUD designed to expose additional chat features</li>
+ * </ul>
+ * 
+ * <p>This extension introduces the concept of "Overlay Sessions" in order to expose this usage model.</p>
+ * 
+ * <p>This extension allows:</p>
+ * 
+ * <ul>
+ * <li>An application to identify when the current sessions composition layers will be applied during composition</li>
+ * <li>The ability for an overlay session to get information about what is going on with the main application</li>
+ * </ul>
+ * 
+ * <p>To enable the functionality of this extension, an application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * 
+ * <p>To create an overlay session, an application <b>must</b> pass an {@link XrSessionCreateInfoOverlayEXTX} structure to {@link XR10#xrCreateSession CreateSession} via the {@link XrSessionCreateInfo} structure’s {@code next} parameter.</p>
+ * 
+ * <p>An overlay application should not assume that the values returned to it by {@link XR10#xrWaitFrame WaitFrame} in {@code predictedDisplayTime} in {@link XrFrameState} will be the same as the values returned to the main application or even correlated.</p>
+ */
 public final class EXTXOverlay {
 
     /** The extension specification version. */

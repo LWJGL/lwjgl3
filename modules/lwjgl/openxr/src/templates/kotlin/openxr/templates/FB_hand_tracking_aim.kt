@@ -11,7 +11,15 @@ import openxr.*
 val FB_hand_tracking_aim = "FBHandTrackingAim".nativeClassXR("FB_hand_tracking_aim", type = "instance", postfix = "FB") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_hand_tracking_aim">XR_FB_hand_tracking_aim</a> extension.
+
+        The {@link EXTHandTracking XR_EXT_hand_tracking} extension provides a list of hand joint poses which represent the current configuration of the tracked hands. This extension adds a layer of gesture recognition that is used by the system.
+
+        This extension allows:
+
+        <ul>
+            <li>An application to get a set of basic gesture states for the hand when using the {@link EXTHandTracking XR_EXT_hand_tracking} extension.</li>
+        </ul>
         """
 
     IntConstant(

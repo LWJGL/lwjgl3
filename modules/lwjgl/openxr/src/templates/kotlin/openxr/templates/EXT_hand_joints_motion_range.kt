@@ -11,7 +11,11 @@ import openxr.*
 val EXT_hand_joints_motion_range = "EXTHandJointsMotionRange".nativeClassXR("EXT_hand_joints_motion_range", type = "instance", postfix = "EXT") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_hand_joints_motion_range">XR_EXT_hand_joints_motion_range</a> extension.
+
+        This extension augments the {@link EXTHandTracking XR_EXT_hand_tracking} extension to enable applications to request that the ##XrHandJointLocationsEXT returned by #LocateHandJointsEXT() should return hand joint locations conforming to a range of motion specified by the application.
+
+        The application <b>must</b> enable the {@link EXTHandTracking XR_EXT_hand_tracking} extension in order to use this extension.
         """
 
     IntConstant(

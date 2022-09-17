@@ -5,7 +5,15 @@
  */
 package org.lwjgl.openxr;
 
-/** The MNDX_egl_enable extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_MNDX_egl_enable">XR_MNDX_egl_enable</a> extension.
+ * 
+ * <p>This extension must be provided by runtimes supporting applications using the EGL API to create rendering contexts.</p>
+ * 
+ * <ul>
+ * <li>{@link XR10#XR_USE_PLATFORM_EGL USE_PLATFORM_EGL}</li>
+ * </ul>
+ */
 public final class MNDXEGLEnable {
 
     /** The extension specification version. */

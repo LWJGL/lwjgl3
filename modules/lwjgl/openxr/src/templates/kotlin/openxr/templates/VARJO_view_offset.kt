@@ -11,7 +11,17 @@ import openxr.*
 val VARJO_view_offset = "VARJOViewOffset".nativeClassXR("VARJO_view_offset", type = "instance", postfix = "VARJO") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_VARJO_view_offset">XR_VARJO_view_offset</a> extension.
+
+        Varjo headsets use video pass-through cameras to create the mixed reality (MR) image. The cameras are located around 10 cm (3.9 inches) in front of the user’s eyes, which leads to an offset in depth perception so that real-world objects in the video pass-through image appear larger than they are in real life. The image below gives a visualization of the difference between what the camera sees and what the user would see in real life.
+
+        
+
+        This magnification effect is pronounced for objects that are close to the user – for example, their hands may appear unnaturally large in the image. The effect decreases with distance, so that objects at a distance of 2 meters already appear close to their actual size, and the sizes eventually converge at infinity. Note that while the objects' sizes may differ, their geometry, relative sizes, locations, etc. remain accurate. The extent of the magnification effect ultimately depends both on the application itself and the user’s physiology, as the human visual system is highly adaptive in this type of setting.
+
+        When blending the video pass-through image with virtual content, it is important that their relative geometries – position, size, and disparity – match one another. To achieve this, Varjo’s runtime automatically places the virtual reality cameras in the same position as the physical cameras when the video pass-through feature is enabled (see #ENVIRONMENT_BLEND_MODE_ALPHA_BLEND). This allows virtual and real-world content to appear at the same distance and on the same plane when viewed together. While this can be observed as an apparent jump in the location of virtual objects compared to VR-only content, this does not cause any distortion in the object geometry or location; it is only the viewer’s location that changes.
+
+        In some cases, moving the VR content to match the real-world position may not be desirable. This extension enable the application to control where the VR content is rendered from the location of the user’s eyes while the video pass-through image uses the camera locations. For example, if the virtual object is close the user, or if the application is switching between VR and MR modes. Offset values between 0.0 and 1.0 are supported. You can use this to create a smooth, animated transition between the two rendering positions in case you need to change from one to the other during a session.
         """
 
     IntConstant(

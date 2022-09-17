@@ -13,7 +13,13 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The OCULUS_audio_device_guid extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_OCULUS_audio_device_guid">XR_OCULUS_audio_device_guid</a> extension.
+ * 
+ * <p>This extension enables the querying of audio device information associated with an OpenXR instance.</p>
+ * 
+ * <p>On Windows, there may be multiple audio devices available on the system. This extensions allows applications to query the runtime for the appropriate audio devices for the active HMD.</p>
+ */
 public class OCULUSAudioDeviceGuid {
 
     /** The extension specification version. */

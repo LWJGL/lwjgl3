@@ -11,7 +11,9 @@ import openxr.*
 val EXT_thermal_query = "EXTThermalQuery".nativeClassXR("EXT_thermal_query", type = "instance", postfix = "EXT") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_thermal_query">XR_EXT_thermal_query</a> extension.
+
+        This extension provides an API to query a domain’s current thermal warning level and current thermal trend.
         """
 
     IntConstant(

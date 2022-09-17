@@ -10,7 +10,18 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/** The FB_hand_tracking_mesh extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_hand_tracking_mesh">XR_FB_hand_tracking_mesh</a> extension.
+ * 
+ * <p>The {@link EXTHandTracking XR_EXT_hand_tracking} extension provides a list of hand joint poses but no mechanism to render a skinned hand mesh.</p>
+ * 
+ * <p>This extension allows:</p>
+ * 
+ * <ul>
+ * <li>An application to get a skinned hand mesh and a bind pose skeleton that can be used to render a hand object driven by the joints from the {@link EXTHandTracking XR_EXT_hand_tracking} extension.</li>
+ * <li>Control the scale of the hand joints returned by {@link EXTHandTracking XR_EXT_hand_tracking}.</li>
+ * </ul>
+ */
 public class FBHandTrackingMesh {
 
     /** The extension specification version. */

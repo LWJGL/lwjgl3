@@ -13,7 +13,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The KHR_convert_timespec_time extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_convert_timespec_time">XR_KHR_convert_timespec_time</a> extension.
+ * 
+ * <p>This extension provides two functions for converting between timespec monotonic time and {@code XrTime}. The {@link #xrConvertTimespecTimeToTimeKHR ConvertTimespecTimeToTimeKHR} function converts from timespec time to {@code XrTime}, while the {@link #xrConvertTimeToTimespecTimeKHR ConvertTimeToTimespecTimeKHR} function converts {@code XrTime} to timespec monotonic time. The primary use case for this functionality is to be able to synchronize events between the local system and the OpenXR system.</p>
+ */
 public class KHRConvertTimespecTime {
 
     /** The extension specification version. */

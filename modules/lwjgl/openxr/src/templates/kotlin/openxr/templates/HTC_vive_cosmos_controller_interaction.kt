@@ -11,7 +11,9 @@ import openxr.*
 val HTC_vive_cosmos_controller_interaction = "HTCViveCosmosControllerInteraction".nativeClassXR("HTC_vive_cosmos_controller_interaction", type = "instance", postfix = "HTC") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_HTC_vive_cosmos_controller_interaction">XR_HTC_vive_cosmos_controller_interaction</a> extension.
+
+        This extension defines a new interaction profile for the VIVE Cosmos Controller.
         """
 
     IntConstant(

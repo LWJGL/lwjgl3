@@ -11,7 +11,9 @@ import openxr.*
 val HTC_facial_tracking = "HTCFacialTracking".nativeClassXR("HTC_facial_tracking", type = "instance", postfix = "HTC") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_HTC_facial_tracking">XR_HTC_facial_tracking</a> extension.
+
+        This extension allows an application to track and integrate users' eye and lip movements, empowering developers to read intention and model facial expressions.
         """
 
     IntConstant(

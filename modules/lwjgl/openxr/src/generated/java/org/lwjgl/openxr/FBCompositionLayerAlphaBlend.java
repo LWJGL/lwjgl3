@@ -5,7 +5,19 @@
  */
 package org.lwjgl.openxr;
 
-/** The FB_composition_layer_alpha_blend extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_composition_layer_alpha_blend">XR_FB_composition_layer_alpha_blend</a> extension.
+ * 
+ * <p>This extension provides explicit control over source and destination blend factors, with separate controls for color and alpha. When specified, these blend controls supersede the behavior of {@link XR10#XR_COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT}.</p>
+ * 
+ * <p>When {@link XR10#XR_COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT} is specified, the source color is unpremultiplied alpha.</p>
+ * 
+ * <p>Like color, destination alpha is initialized to 0 before composition begins.</p>
+ * 
+ * <p>In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * 
+ * <p>These blend factors are specified by attaching a {@link XrCompositionLayerAlphaBlendFB} structure to the {@code next} chain of a {@link XrCompositionLayerBaseHeader}-derived layer structure.</p>
+ */
 public final class FBCompositionLayerAlphaBlend {
 
     /** The extension specification version. */

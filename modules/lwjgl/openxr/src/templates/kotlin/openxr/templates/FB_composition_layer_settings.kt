@@ -11,7 +11,11 @@ import openxr.*
 val FB_composition_layer_settings = "FBCompositionLayerSettings".nativeClassXR("FB_composition_layer_settings", type = "instance", postfix = "FB") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_composition_layer_settings">XR_FB_composition_layer_settings</a> extension.
+
+        This extension allows applications to request the use of processing options such as sharpening or super-sampling on a composition layer.
+
+        In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
         """
 
     IntConstant(

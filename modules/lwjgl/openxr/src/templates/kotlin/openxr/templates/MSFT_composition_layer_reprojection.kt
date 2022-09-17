@@ -11,7 +11,9 @@ import openxr.*
 val MSFT_composition_layer_reprojection = "MSFTCompositionLayerReprojection".nativeClassXR("MSFT_composition_layer_reprojection", type = "instance", postfix = "MSFT") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MSFT_composition_layer_reprojection">XR_MSFT_composition_layer_reprojection</a> extension.
+
+        This extension enables an application to provide additional reprojection information for a projection composition layer to help the runtime produce better hologram stability and visual quality.
         """
 
     IntConstant(

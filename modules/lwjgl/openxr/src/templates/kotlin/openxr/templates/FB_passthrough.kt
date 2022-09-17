@@ -11,7 +11,24 @@ import openxr.*
 val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "instance", postfix = "FB") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_passthrough">XR_FB_passthrough</a> extension.
+
+        Passthrough is a way to show a user their physical environment in a light-blocking VR headset. Applications may use passthrough in a multitude of ways, including:
+
+        <ul>
+            <li>Creating AR-like experiences, where virtual objects augment the user’s environment.</li>
+            <li>Bringing real objects into a VR experience.</li>
+            <li>Mapping the playspace such that a VR experience is customized to it.</li>
+        </ul>
+
+        This extension allows:
+
+        <ul>
+            <li>An application to request passthrough to be composited with the application content.</li>
+            <li>An application to specify the compositing and blending rules between passthrough and VR content.</li>
+            <li>An application to apply styles, such as color mapping and edge rendering, to passthrough.</li>
+            <li>An application to provide a geometry to be used in place of the user’s physical environment. Camera images will be projected onto the surface provided by the application. In some cases where a part of the environment, such as a desk, can be approximated well, this provides better visual experience.</li>
+        </ul>
         """
 
     IntConstant(

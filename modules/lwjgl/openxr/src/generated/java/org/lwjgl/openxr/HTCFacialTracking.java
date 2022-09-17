@@ -13,7 +13,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The HTC_facial_tracking extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_HTC_facial_tracking">XR_HTC_facial_tracking</a> extension.
+ * 
+ * <p>This extension allows an application to track and integrate users' eye and lip movements, empowering developers to read intention and model facial expressions.</p>
+ */
 public class HTCFacialTracking {
 
     /** The extension specification version. */

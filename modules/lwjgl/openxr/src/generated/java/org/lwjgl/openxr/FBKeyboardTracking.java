@@ -13,7 +13,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The FB_keyboard_tracking extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_keyboard_tracking">XR_FB_keyboard_tracking</a> extension.
+ * 
+ * <p>This extension allows the application to query the system for a supported trackable keyboard type and obtain an {@code XrSpace} handle to track it. It also provides relevant metadata about the keyboard itself, including bounds and a human readable identifier.</p>
+ */
 public class FBKeyboardTracking {
 
     /** The extension specification version. */

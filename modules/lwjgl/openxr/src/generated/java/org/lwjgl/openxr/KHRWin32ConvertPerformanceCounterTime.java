@@ -15,7 +15,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import org.lwjgl.system.windows.*;
 
-/** The KHR_win32_convert_performance_counter_time extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_win32_convert_performance_counter_time">XR_KHR_win32_convert_performance_counter_time</a> extension.
+ * 
+ * <p>This extension provides two functions for converting between the Windows performance counter (QPC) time stamps and {@code XrTime}. The {@link #xrConvertWin32PerformanceCounterToTimeKHR ConvertWin32PerformanceCounterToTimeKHR} function converts from Windows performance counter time stamps to {@code XrTime}, while the {@link #xrConvertTimeToWin32PerformanceCounterKHR ConvertTimeToWin32PerformanceCounterKHR} function converts {@code XrTime} to Windows performance counter time stamps. The primary use case for this functionality is to be able to synchronize events between the local system and the OpenXR system.</p>
+ */
 public class KHRWin32ConvertPerformanceCounterTime {
 
     /** The extension specification version. */

@@ -13,7 +13,19 @@ val KHR_vulkan_enable2 = "KHRVulkanEnable2".nativeClassXR("KHR_vulkan_enable2", 
     javaImport("org.lwjgl.vulkan.*")
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_vulkan_enable2">XR_KHR_vulkan_enable2</a> extension.
+
+        This extension enables the use of the Vulkan graphics API in an OpenXR runtime. Without this extension, the OpenXR runtime may not be able to use any Vulkan swapchain images.
+
+        This extension provides the mechanisms necessary for an application to generate a valid ##XrGraphicsBindingVulkan2KHR structure in order to create a Vulkan-based {@code XrSession}.
+
+        This extension also provides mechanisms for the application to interact with images acquired by calling #EnumerateSwapchainImages().
+
+        In order to expose the structures, types, and functions of this extension, you <b>must</b> define #USE_GRAPHICS_API_VULKAN before including the OpenXR platform header {@code openxr_platform.h}, in all portions of your library or application that include it.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        This extension is intended as an alternative to {@link KHRVulkanEnable XR_KHR_vulkan_enable}, and does not depend on it.
+        </div>
         """
 
     IntConstant(

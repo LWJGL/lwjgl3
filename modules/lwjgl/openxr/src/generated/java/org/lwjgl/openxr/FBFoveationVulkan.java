@@ -5,7 +5,19 @@
  */
 package org.lwjgl.openxr;
 
-/** The FB_foveation_vulkan extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_foveation_vulkan">XR_FB_foveation_vulkan</a> extension.
+ * 
+ * <p>The Vulkan graphics API requires an image to be applied to the swapchain to apply a foveation pattern.</p>
+ * 
+ * <p>This extension allows:</p>
+ * 
+ * <ul>
+ * <li>An application to obtain foveation textures or constructs needed for foveated rendering in Vulkan.</li>
+ * </ul>
+ * 
+ * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo} {@code enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ */
 public final class FBFoveationVulkan {
 
     /** The extension specification version. */

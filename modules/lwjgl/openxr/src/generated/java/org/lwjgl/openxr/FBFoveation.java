@@ -13,7 +13,20 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The FB_foveation extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_foveation">XR_FB_foveation</a> extension.
+ * 
+ * <p>Foveation in the context of XR is a rendering technique that allows the area of an image near the focal point or fovea of the eye to be displayed at higher resolution than areas in the periphery. This trades some visual fidelity in the periphery, where it is less noticeable for the user, for improved rendering performance, most notably regarding the fragment shader, as fewer pixels or subpixels in the periphery need to be shaded and processed. On platforms which support foveation patterns and features tailored towards the optical properties, performance profiles, and hardware support of specific HMDs, application developers may request and use available foveation profiles from the runtime. Foveation profiles refer to a set of properties describing how, when, and where foveation will be applied.</p>
+ * 
+ * <p>This extension allows:</p>
+ * 
+ * <ul>
+ * <li>An application to create swapchains that can support foveation for its graphics API.</li>
+ * <li>An application to request foveation profiles supported by the runtime and apply them to foveation-supported swapchains.</li>
+ * </ul>
+ * 
+ * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo} {@code enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ */
 public class FBFoveation {
 
     /** The extension specification version. */

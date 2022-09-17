@@ -13,7 +13,13 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The FB_spatial_entity_storage extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_spatial_entity_storage">XR_FB_spatial_entity_storage</a> extension.
+ * 
+ * <p>This extension enables spatial entities to be stored and persisted across sessions. If the {@link FBSpatialEntity#XR_SPACE_COMPONENT_TYPE_STORABLE_FB SPACE_COMPONENT_TYPE_STORABLE_FB} component has been enabled on the spatial entity, application developers <b>may</b> save, load, and erase persisted {@code XrSpace} entities.</p>
+ * 
+ * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ */
 public class FBSpatialEntityStorage {
 
     /** The extension specification version. */

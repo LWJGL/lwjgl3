@@ -11,7 +11,9 @@ import openxr.*
 val HTC_vive_wrist_tracker_interaction = "HTCViveWristTrackerInteraction".nativeClassXR("HTC_vive_wrist_tracker_interaction", type = "instance", postfix = "HTC") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_HTC_vive_wrist_tracker_interaction">XR_HTC_vive_wrist_tracker_interaction</a> extension.
+
+        This extension provides an {@code XrPath} for getting device input from a VIVE wrist tracker to enable its interactions. VIVE wrist tracker is a tracked device mainly worn on user’s wrist for pose tracking. Besides this use case, user also can tie it to a physical object to track its object pose, e.g. tie on a gun.
         """
 
     IntConstant(

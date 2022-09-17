@@ -11,7 +11,9 @@ import openxr.*
 val KHR_swapchain_usage_input_attachment_bit = "KHRSwapchainUsageInputAttachmentBit".nativeClassXR("KHR_swapchain_usage_input_attachment_bit", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_swapchain_usage_input_attachment_bit">XR_KHR_swapchain_usage_input_attachment_bit</a> extension.
+
+        This extension enables an application to specify that swapchain images should be created in a way so that they can be used as input attachments. At the time of writing this bit only affects Vulkan swapchains.
         """
 
     IntConstant(

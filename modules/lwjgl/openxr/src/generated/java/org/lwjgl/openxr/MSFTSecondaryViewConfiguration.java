@@ -5,7 +5,24 @@
  */
 package org.lwjgl.openxr;
 
-/** The MSFT_secondary_view_configuration extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_MSFT_secondary_view_configuration">XR_MSFT_secondary_view_configuration</a> extension.
+ * 
+ * <p>This extension allows an application to enable support for one or more <b>secondary view configurations</b>. A secondary view configuration is a well-known set of views that the runtime can make active while a session is running. In a frame where a secondary view configuration is active, the application’s single frame loop should additionally render into those active secondary views, sharing the frame waiting logic and update loop with the primary view configuration for that running session.</p>
+ * 
+ * <p>A proper secondary view configuration support includes following steps:</p>
+ * 
+ * <ul>
+ * <li>When calling {@link XR10#xrCreateInstance CreateInstance}, enable the {@link MSFTSecondaryViewConfiguration XR_MSFT_secondary_view_configuration} extension and the extension defines a concrete secondary view configuration type, for example, {@link MSFTFirstPersonObserver XR_MSFT_first_person_observer}.</li>
+ * <li>Inspect supported secondary view configurations using the {@link XR10#xrEnumerateViewConfigurations EnumerateViewConfigurations} function.</li>
+ * <li>Enable supported secondary view configurations using the {@link XR10#xrBeginSession BeginSession} function with an {@link XrSecondaryViewConfigurationSessionBeginInfoMSFT} chained extension structure.</li>
+ * <li>Inspect if an enabled secondary view configuration is activated by the system or the user using the {@link XR10#xrWaitFrame WaitFrame} function with an {@link XrSecondaryViewConfigurationFrameStateMSFT} chained extension structure.</li>
+ * <li>When a secondary view configuration is changed to active, get the latest view configuration properties using the {@link XR10#xrGetViewConfigurationProperties GetViewConfigurationProperties} and {@link XR10#xrEnumerateViewConfigurationViews EnumerateViewConfigurationViews} functions.</li>
+ * <li>Create the swapchain images for the active secondary view configuration using the {@link XR10#xrCreateSwapchain CreateSwapchain} function with an {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT} chained extension structure using {@code recommendedImageRectWidth} and {@code recommendedImageRectHeight} in the corresponding {@link XrViewConfigurationView} structure returned from {@link XR10#xrEnumerateViewConfigurationViews EnumerateViewConfigurationViews}.</li>
+ * <li>Locate the secondary view configuration views using the {@link XR10#xrLocateViews LocateViews} function with the active secondary view configuration type.</li>
+ * <li>Submit the composition layers using the swapchain images for an active secondary view configuration using the {@link XR10#xrEndFrame EndFrame} function with the {@link XrSecondaryViewConfigurationFrameEndInfoMSFT} chained extension structure.</li>
+ * </ul>
+ */
 public final class MSFTSecondaryViewConfiguration {
 
     /** The extension specification version. */

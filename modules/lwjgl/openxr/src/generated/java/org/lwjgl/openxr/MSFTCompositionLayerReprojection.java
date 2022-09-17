@@ -15,7 +15,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The MSFT_composition_layer_reprojection extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_MSFT_composition_layer_reprojection">XR_MSFT_composition_layer_reprojection</a> extension.
+ * 
+ * <p>This extension enables an application to provide additional reprojection information for a projection composition layer to help the runtime produce better hologram stability and visual quality.</p>
+ */
 public class MSFTCompositionLayerReprojection {
 
     /** The extension specification version. */

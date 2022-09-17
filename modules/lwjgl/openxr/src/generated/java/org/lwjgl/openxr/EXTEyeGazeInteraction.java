@@ -5,7 +5,21 @@
  */
 package org.lwjgl.openxr;
 
-/** The EXT_eye_gaze_interaction extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_eye_gaze_interaction">XR_EXT_eye_gaze_interaction</a> extension.
+ * 
+ * <p>This extension provides an {@code XrPath} for getting eye gaze input from an eye tracker to enable eye gaze interactions.</p>
+ * 
+ * <p>The intended use for this extension is to provide:</p>
+ * 
+ * <ul>
+ * <li>system properties to inform if eye gaze interaction is supported by the current device.</li>
+ * <li>an {@code XrPath} for real time eye tracking that exposes an accurate and precise eye gaze pose to be used to enable eye gaze interactions.</li>
+ * <li>a structure {@link XrEyeGazeSampleTimeEXT} that allows for an application to retrieve more information regarding the eye tracking samples.</li>
+ * </ul>
+ * 
+ * <p>With these building blocks, an application can discover if the XR runtime has access to an eye tracker, bind the eye gaze pose to the action system, determine if the eye tracker is actively tracking the users eye gaze, and use the eye gaze pose as an input signal to build eye gaze interactions.</p>
+ */
 public final class EXTEyeGazeInteraction {
 
     /** The extension specification version. */

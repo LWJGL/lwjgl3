@@ -11,7 +11,18 @@ import openxr.*
 val FB_passthrough_keyboard_hands = "FBPassthroughKeyboardHands".nativeClassXR("FB_passthrough_keyboard_hands", type = "instance", postfix = "FB") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_passthrough_keyboard_hands">XR_FB_passthrough_keyboard_hands</a> extension.
+
+        This extension enables applications to show passthrough hands when hands are placed over the tracked keyboard. It enables users to see their hands over the keyboard in a mixed reality application. This extension is dependent on {@link FBPassthrough XR_FB_passthrough} extension which can be used to create a passthrough layer for hand presence use-case.
+
+        The extension supports a single pair of hands (one left and one right hand), multiple pair of hands are not supported.
+
+        This extension allows:
+
+        <ul>
+            <li>Creation of keyboard hands passthrough layer using #CreatePassthroughLayerFB()</li>
+            <li>Setting the level of intensity for the hand mask in a passthrough layer with purpose {@code XrPassthroughLayerPurposeFB} as #PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_HANDS_FB or #PASSTHROUGH_LAYER_PURPOSE_TRACKED_KEYBOARD_MASKED_HANDS_FB</li>
+        </ul>
         """
 
     IntConstant(

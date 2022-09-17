@@ -5,7 +5,13 @@
  */
 package org.lwjgl.openxr;
 
-/** The VALVE_analog_threshold extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_VALVE_analog_threshold">XR_VALVE_analog_threshold</a> extension.
+ * 
+ * <p>This extension allows the application to control the threshold and haptic feedback applied to an analog to digital conversion. See {@link XrInteractionProfileAnalogThresholdVALVE} for more information.</p>
+ * 
+ * <p>Applications <b>should</b> also enable the {@link KHRBindingModification XR_KHR_binding_modification} extension to be able to define multiple thresholds.</p>
+ */
 public final class VALVEAnalogThreshold {
 
     /** The extension specification version. */

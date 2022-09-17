@@ -13,7 +13,13 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The MSFT_hand_tracking_mesh extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_MSFT_hand_tracking_mesh">XR_MSFT_hand_tracking_mesh</a> extension.
+ * 
+ * <p>This extension enables hand tracking inputs represented as a dynamic hand mesh. It enables applications to render hands in XR experiences and interact with virtual objects using hand meshes.</p>
+ * 
+ * <p>The application <b>must</b> also enable the {@link EXTHandTracking XR_EXT_hand_tracking} extension in order to use this extension.</p>
+ */
 public class MSFTHandTrackingMesh {
 
     /** The extension specification version. */

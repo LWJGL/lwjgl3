@@ -5,7 +5,11 @@
  */
 package org.lwjgl.openxr;
 
-/** The HTC_vive_cosmos_controller_interaction extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_HTC_vive_cosmos_controller_interaction">XR_HTC_vive_cosmos_controller_interaction</a> extension.
+ * 
+ * <p>This extension defines a new interaction profile for the VIVE Cosmos Controller.</p>
+ */
 public final class HTCViveCosmosControllerInteraction {
 
     /** The extension specification version. */

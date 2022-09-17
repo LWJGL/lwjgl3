@@ -5,7 +5,11 @@
  */
 package org.lwjgl.openxr;
 
-/** The KHR_swapchain_usage_input_attachment_bit extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_swapchain_usage_input_attachment_bit">XR_KHR_swapchain_usage_input_attachment_bit</a> extension.
+ * 
+ * <p>This extension enables an application to specify that swapchain images should be created in a way so that they can be used as input attachments. At the time of writing this bit only affects Vulkan swapchains.</p>
+ */
 public final class KHRSwapchainUsageInputAttachmentBit {
 
     /** The extension specification version. */

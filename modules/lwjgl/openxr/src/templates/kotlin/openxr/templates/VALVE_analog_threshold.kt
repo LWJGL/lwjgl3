@@ -11,7 +11,11 @@ import openxr.*
 val VALVE_analog_threshold = "VALVEAnalogThreshold".nativeClassXR("VALVE_analog_threshold", type = "instance", postfix = "VALVE") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_VALVE_analog_threshold">XR_VALVE_analog_threshold</a> extension.
+
+        This extension allows the application to control the threshold and haptic feedback applied to an analog to digital conversion. See ##XrInteractionProfileAnalogThresholdVALVE for more information.
+
+        Applications <b>should</b> also enable the {@link KHRBindingModification XR_KHR_binding_modification} extension to be able to define multiple thresholds.
         """
 
     IntConstant(

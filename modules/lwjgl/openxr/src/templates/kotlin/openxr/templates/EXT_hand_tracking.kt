@@ -11,7 +11,9 @@ import openxr.*
 val EXT_hand_tracking = "EXTHandTracking".nativeClassXR("EXT_hand_tracking", type = "instance", postfix = "EXT") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_EXT_hand_tracking">XR_EXT_hand_tracking</a> extension.
+
+        This extension enables applications to locate the individual joints of hand tracking inputs. It enables applications to render hands in XR experiences and interact with virtual objects using hand joints.
         """
 
     IntConstant(

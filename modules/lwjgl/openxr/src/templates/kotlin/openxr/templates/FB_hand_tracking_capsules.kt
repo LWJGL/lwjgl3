@@ -11,7 +11,15 @@ import openxr.*
 val FB_hand_tracking_capsules = "FBHandTrackingCapsules".nativeClassXR("FB_hand_tracking_capsules", type = "instance", postfix = "FB") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_hand_tracking_capsules">XR_FB_hand_tracking_capsules</a> extension.
+
+        The {@link EXTHandTracking XR_EXT_hand_tracking} extension provides a list of hand joint poses which include a collision sphere for each joint. However some physics systems prefer to use capsules as a collision stand in for the hands.
+
+        This extension allows:
+
+        <ul>
+            <li>An application to get a list of capsules that represent the volume of the hand when using the {@link EXTHandTracking XR_EXT_hand_tracking} extension.</li>
+        </ul>
         """
 
     IntConstant(

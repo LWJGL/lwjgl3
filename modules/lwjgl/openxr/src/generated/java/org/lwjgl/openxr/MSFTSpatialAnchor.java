@@ -13,7 +13,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The MSFT_spatial_anchor extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_MSFT_spatial_anchor">XR_MSFT_spatial_anchor</a> extension.
+ * 
+ * <p>This extension allows an application to create a <b>spatial anchor</b>, an arbitrary freespace point in the user’s physical environment that will then be tracked by the runtime. The runtime <b>should</b> then adjust the position and orientation of that anchor’s origin over time as needed, independently of all other spaces and anchors, to ensure that it maintains its original mapping to the real world.</p>
+ */
 public class MSFTSpatialAnchor {
 
     /** The extension specification version. */

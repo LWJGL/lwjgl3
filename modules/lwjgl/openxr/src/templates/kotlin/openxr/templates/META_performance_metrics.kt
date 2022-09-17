@@ -11,7 +11,31 @@ import openxr.*
 val META_performance_metrics = "METAPerformanceMetrics".nativeClassXR("META_performance_metrics", type = "instance", postfix = "META") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_META_performance_metrics">XR_META_performance_metrics</a> extension.
+
+        This extension provides APIs to enumerate and query performance metrics counters of the current XR device and XR application. Developers <b>can</b> perform performance analysis and do targeted optimization to the XR application using the performance metrics counters being collected. The application <b>should</b> not change its behavior based on the counter reads.
+
+        The performance metrics counters are organized into predefined {@code XrPath}, under the root path pathname:/perfmetrics_meta. You <b>can</b> query the available counters through #EnumeratePerformanceMetricsCounterPathsMETA(). Here is a list of the performance metrics counter paths that <b>may</b> be provided on Meta devices:
+
+        <ul>
+            <li>pathname:/perfmetrics_meta/app/cpu_frametime</li>
+            <li>pathname:/perfmetrics_meta/app/gpu_frametime</li>
+            <li>pathname:/perfmetrics_meta/app/motion_to_photon_latency</li>
+            <li>pathname:/perfmetrics_meta/compositor/cpu_frametime</li>
+            <li>pathname:/perfmetrics_meta/compositor/gpu_frametime</li>
+            <li>pathname:/perfmetrics_meta/compositor/dropped_frame_count</li>
+            <li>pathname:/perfmetrics_meta/compositor/spacewarp_mode</li>
+            <li>pathname:/perfmetrics_meta/device/cpu_utilization_average</li>
+            <li>pathname:/perfmetrics_meta/device/cpu_utilization_worst</li>
+            <li>pathname:/perfmetrics_meta/device/gpu_utilization</li>
+            <li>pathname:/perfmetrics_meta/device/cpu0_utilization through pathname:/perfmetrics_meta/device/cpuX_utilization</li>
+        </ul>
+
+        After a session is created, you <b>can</b> use #SetPerformanceMetricsStateMETA() to enable the performance metrics system for that session. You <b>can</b> use #QueryPerformanceMetricsCounterMETA() to query performance metrics counter on a session that has performance metrics system enabled, or use #GetPerformanceMetricsStateMETA() to get the enablement state.
+
+        Note: the measurement intervals of individual performance metrics counters are defined by the OpenXR runtime. The application <b>must</b> not make assumptions or change its behavior at runtime by measuring them.
+
+        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
         """
 
     IntConstant(

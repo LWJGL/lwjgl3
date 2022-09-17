@@ -11,7 +11,11 @@ import openxr.*
 val FB_spatial_entity_storage = "FBSpatialEntityStorage".nativeClassXR("FB_spatial_entity_storage", type = "instance", postfix = "FB") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_spatial_entity_storage">XR_FB_spatial_entity_storage</a> extension.
+
+        This extension enables spatial entities to be stored and persisted across sessions. If the #SPACE_COMPONENT_TYPE_STORABLE_FB component has been enabled on the spatial entity, application developers <b>may</b> save, load, and erase persisted {@code XrSpace} entities.
+
+        In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
         """
 
     IntConstant(

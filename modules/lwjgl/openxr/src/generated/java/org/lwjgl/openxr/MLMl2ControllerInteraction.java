@@ -5,7 +5,11 @@
  */
 package org.lwjgl.openxr;
 
-/** The ML_ml2_controller_interaction extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_ML_ml2_controller_interaction">XR_ML_ml2_controller_interaction</a> extension.
+ * 
+ * <p>This extension defines the interaction profile for the Magic Leap 2 Controller.</p>
+ */
 public final class MLMl2ControllerInteraction {
 
     /** The extension specification version. */

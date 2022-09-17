@@ -15,7 +15,53 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The HTCX_vive_tracker_interaction extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_HTCX_vive_tracker_interaction">XR_HTCX_vive_tracker_interaction</a> extension.
+ * 
+ * <p>This extension defines a new interaction profile for HTC VIVE Tracker. HTC VIVE Tracker is a generic tracked device which can be attached to anything to make them trackable. For example, it can be attached to user’s hands or feet to track the motion of human body. It can also be attached to any other devices the user wants to track and interact with.</p>
+ * 
+ * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo} {@code enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * 
+ * <p>This extension allows:</p>
+ * 
+ * <ul>
+ * <li>An application to enumerate the subpaths of all current connected VIVE trackers.</li>
+ * <li>An application to receive notification of the top level paths of a VIVE tracker when it is connected.</li>
+ * </ul>
+ * 
+ * <p>The paths of a VIVE tracker contains two paths below:</p>
+ * 
+ * <ul>
+ * <li>VIVE tracker persistent path indicate a specific tracker whose lifetime lasts longer than an instance, which means it <b>must</b> not change during its hardware lifetime. The format of this path string is unspecified and should be treated as an opaque string.</li>
+ * <li>VIVE tracker role path <b>may</b> be constructed as "/user/vive_tracker_htcx/role/<em>ROLE_VALUE</em>", where <em>ROLE_VALUE</em> takes one of the following values. The role path <b>may</b> be assigned from the tool provided by the runtime and is {@link XR10#XR_NULL_PATH NULL_PATH} if it has not been assigned. If this role path refers to more than one tracker, the runtime <b>should</b> choose one of them to be currently active. The role path <b>may</b> be changed during the lifetime of instance. Whenever it is changed, the runtime <b>must</b> send event {@link #XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX} to provide the new role path of that tracker.
+ * 
+ * <dl>
+ * <dt>ROLE_VALUE</dt>
+ * <dd><ul>
+ * <li>{@code XR_NULL_PATH}</li>
+ * <li>{@code handheld_object}</li>
+ * <li>{@code left_foot}</li>
+ * <li>{@code right_foot}</li>
+ * <li>{@code left_shoulder}</li>
+ * <li>{@code right_shoulder}</li>
+ * <li>{@code left_elbow}</li>
+ * <li>{@code right_elbow}</li>
+ * <li>{@code left_knee}</li>
+ * <li>{@code right_knee}</li>
+ * <li>{@code waist}</li>
+ * <li>{@code chest}</li>
+ * <li>{@code camera}</li>
+ * <li>{@code keyboard}</li>
+ * </ul></dd>
+ * </dl>
+ * </li>
+ * <li>Either the persistent path or the role path can be be passed as a subaction path to indicate a specific tracker. For example, {@link XrActionCreateInfo}{@code ::subactionPath} into function {@link XR10#xrCreateAction CreateAction} or {@link XrActionSpaceCreateInfo}{@code ::subactionPath} into function {@link XR10#xrCreateActionSpace CreateActionSpace}. Please see Example 1 below.</li>
+ * </ul>
+ * 
+ * <p><a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#input-suggested-bindings">As with other controllers</a>, if a VIVE tracker is connected and bound to a top-level user path, or disconnected while bound to top-level user path, the runtime <b>must</b> send event {@link XR10#XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED}, and the application <b>may</b> call {@link XR10#xrGetCurrentInteractionProfile GetCurrentInteractionProfile} to check if the tracker is active or not.</p>
+ * 
+ * <p>The device that a tracker is attached to probably has a different motion model than what the tracker assumes. The motion tracking might not be as expected in this case.</p>
+ */
 public class HTCXViveTrackerInteraction {
 
     /** The extension specification version. */

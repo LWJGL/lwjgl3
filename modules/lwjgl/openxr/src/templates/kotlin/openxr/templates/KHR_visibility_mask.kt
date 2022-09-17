@@ -11,7 +11,9 @@ import openxr.*
 val KHR_visibility_mask = "KHRVisibilityMask".nativeClassXR("KHR_visibility_mask", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_visibility_mask">XR_KHR_visibility_mask</a> extension.
+
+        This extension support the providing of a per-view drawing mask for applications. The primary purpose of this is to enable performance improvements that result from avoiding drawing on areas that aren’t visible to the user. A common occurrence in head-mounted VR hardware is that the optical system’s frustum doesn’t intersect precisely with the rectangular display it is viewing. As a result, it may be that there are parts of the display that aren’t visible to the user, such as the corners of the display. In such cases it would be unnecessary for the application to draw into those parts.
         """
 
     IntConstant(

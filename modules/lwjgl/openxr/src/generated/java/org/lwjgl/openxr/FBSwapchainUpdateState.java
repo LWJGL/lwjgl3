@@ -10,7 +10,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/** The FB_swapchain_update_state extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_swapchain_update_state">XR_FB_swapchain_update_state</a> extension.
+ * 
+ * <p>This extension enables the application to modify and query specific mutable state associated with a swapchain.</p>
+ * 
+ * <p>In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ */
 public class FBSwapchainUpdateState {
 
     /** The extension specification version. */

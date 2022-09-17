@@ -13,7 +13,18 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The EXT_debug_utils extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_debug_utils">XR_EXT_debug_utils</a> extension.
+ * 
+ * <p>Due to the nature of the OpenXR interface, there is very little error information available to the developer and application. By using the {@link EXTDebugUtils XR_EXT_debug_utils} extension, developers <b>can</b> obtain more information. When combined with validation layers, even more detailed feedback on the application’s use of OpenXR will be provided.</p>
+ * 
+ * <p>This extension provides the following capabilities:</p>
+ * 
+ * <ul>
+ * <li>The ability to create a debug messenger which will pass along debug messages to an application supplied callback.</li>
+ * <li>The ability to identify specific OpenXR handles using a name to improve tracking.</li>
+ * </ul>
+ */
 public class EXTDebugUtils {
 
     /** The extension specification version. */

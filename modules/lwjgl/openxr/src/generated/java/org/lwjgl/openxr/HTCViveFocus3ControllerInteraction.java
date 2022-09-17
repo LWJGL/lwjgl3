@@ -5,7 +5,11 @@
  */
 package org.lwjgl.openxr;
 
-/** The HTC_vive_focus3_controller_interaction extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_HTC_vive_focus3_controller_interaction">XR_HTC_vive_focus3_controller_interaction</a> extension.
+ * 
+ * <p>This extension defines a new interaction profile for the VIVE Focus 3 Controller.</p>
+ */
 public final class HTCViveFocus3ControllerInteraction {
 
     /** The extension specification version. */

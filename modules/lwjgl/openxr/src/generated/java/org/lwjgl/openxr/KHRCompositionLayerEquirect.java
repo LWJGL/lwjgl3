@@ -5,7 +5,15 @@
  */
 package org.lwjgl.openxr;
 
-/** The KHR_composition_layer_equirect extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_KHR_composition_layer_equirect">XR_KHR_composition_layer_equirect</a> extension.
+ * 
+ * <p>This extension adds an additional layer type where the XR runtime must map an equirectangular coded image stemming from a swapchain onto the inside of a sphere.</p>
+ * 
+ * <p>The equirect layer type provides most of the same benefits as a cubemap, but from an equirect 2D image source. This image source is appealing mostly because equirect environment maps are very common, and the highest quality you can get from them is by sampling them directly in the compositor.</p>
+ * 
+ * <p>This is not a projection type of layer but rather an object-in-world type of layer, similar to {@link XrCompositionLayerQuad}. Only the interior of the sphere surface <b>must</b> be visible; the exterior of the sphere is not visible and <b>must</b> not be drawn by the runtime.</p>
+ */
 public final class KHRCompositionLayerEquirect {
 
     /** The extension specification version. */

@@ -11,7 +11,24 @@ import openxr.*
 val FB_display_refresh_rate = "FBDisplayRefreshRate".nativeClassXR("FB_display_refresh_rate", type = "instance", postfix = "FB") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_FB_display_refresh_rate">XR_FB_display_refresh_rate</a> extension.
+
+        On platforms which support dynamically adjusting the display refresh rate, application developers may request a specific display refresh rate in order to improve the overall user experience, examples include:
+
+        <ul>
+            <li>A video application may choose a display refresh rate which better matches the video content playback rate in order to achieve smoother video frames.</li>
+            <li>An application which can support a higher frame rate may choose to render at the higher rate to improve the overall perceptual quality, for example, lower latency and less flicker.</li>
+        </ul>
+
+        This extension allows:
+
+        <ul>
+            <li>An application to identify what display refresh rates the session supports and the current display refresh rate.</li>
+            <li>An application to request a display refresh rate to indicate its preference to the runtime.</li>
+            <li>An application to receive notification of changes to the display refresh rate which are delivered via events.</li>
+        </ul>
+
+        In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into #CreateInstance() via the ##XrInstanceCreateInfo{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#extensions">extensions</a> section.
         """
 
     IntConstant(

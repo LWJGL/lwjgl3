@@ -11,7 +11,11 @@ import openxr.*
 val KHR_composition_layer_cube = "KHRCompositionLayerCube".nativeClassXR("KHR_composition_layer_cube", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_composition_layer_cube">XR_KHR_composition_layer_cube</a> extension.
+
+        This extension adds an additional layer type that enables direct sampling from cubemaps.
+
+        The cube layer is the natural layer type for hardware accelerated environment maps. Without updating the image source, the user can look all around, and the compositor can display what they are looking at without intervention from the application.
         """
 
     IntConstant(

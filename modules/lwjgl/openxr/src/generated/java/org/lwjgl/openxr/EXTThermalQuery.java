@@ -13,7 +13,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The EXT_thermal_query extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_EXT_thermal_query">XR_EXT_thermal_query</a> extension.
+ * 
+ * <p>This extension provides an API to query a domain’s current thermal warning level and current thermal trend.</p>
+ */
 public class EXTThermalQuery {
 
     /** The extension specification version. */

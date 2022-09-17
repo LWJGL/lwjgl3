@@ -15,7 +15,24 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The FB_spatial_entity extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_spatial_entity">XR_FB_spatial_entity</a> extension.
+ * 
+ * <p>This extension enables applications to use spatial entities to specify world-locked frames of reference. It enables applications to persist the real world location of content over time and contains definitions for the Entity-Component System. All Facebook spatial entity and scene extensions are dependent on this one.</p>
+ * 
+ * <p>We use OpenXR {@code XrSpace} handles to give applications access to spatial entities such as Spatial Anchors. In other words, any operation which involves spatial entities uses {@code XrSpace} handles to identify the affected spatial entities.</p>
+ * 
+ * <p>In order to enable the functionality of this extension, you <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ * 
+ * <p>This extension allows:</p>
+ * 
+ * <ul>
+ * <li>An application to create a Spatial Anchor (a type of spatial entity).</li>
+ * <li>An application to enumerate supported components for a given spatial entity.</li>
+ * <li>An application to enable or disable a component for a given spatial entity.</li>
+ * <li>An application to get the status of a component for a given spatial entity.</li>
+ * </ul>
+ */
 public class FBSpatialEntity {
 
     /** The extension specification version. */

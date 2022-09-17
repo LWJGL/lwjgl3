@@ -15,7 +15,26 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The FB_display_refresh_rate extension. */
+/**
+ * The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#XR_FB_display_refresh_rate">XR_FB_display_refresh_rate</a> extension.
+ * 
+ * <p>On platforms which support dynamically adjusting the display refresh rate, application developers may request a specific display refresh rate in order to improve the overall user experience, examples include:</p>
+ * 
+ * <ul>
+ * <li>A video application may choose a display refresh rate which better matches the video content playback rate in order to achieve smoother video frames.</li>
+ * <li>An application which can support a higher frame rate may choose to render at the higher rate to improve the overall perceptual quality, for example, lower latency and less flicker.</li>
+ * </ul>
+ * 
+ * <p>This extension allows:</p>
+ * 
+ * <ul>
+ * <li>An application to identify what display refresh rates the session supports and the current display refresh rate.</li>
+ * <li>An application to request a display refresh rate to indicate its preference to the runtime.</li>
+ * <li>An application to receive notification of changes to the display refresh rate which are delivered via events.</li>
+ * </ul>
+ * 
+ * <p>In order to enable the functionality of this extension, the application <b>must</b> pass the name of the extension into {@link XR10#xrCreateInstance CreateInstance} via the {@link XrInstanceCreateInfo}{@code ::enabledExtensionNames} parameter as indicated in the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#extensions">extensions</a> section.</p>
+ */
 public class FBDisplayRefreshRate {
 
     /** The extension specification version. */

@@ -11,7 +11,30 @@ import openxr.*
 val MSFT_scene_understanding = "MSFTSceneUnderstanding".nativeClassXR("MSFT_scene_understanding", type = "instance", postfix = "MSFT") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_MSFT_scene_understanding">XR_MSFT_scene_understanding</a> extension.
+
+        Scene understanding provides applications with a structured, high-level representation of the planes, meshes, and objects in the user’s environment, enabling the development of spatially-aware applications.
+
+        The application requests computation of a scene, receiving the list of scene components observed in the environment around the user. These scene components contain information such as:
+
+        <ul>
+            <li>The type of the discovered objects (wall, floor, ceiling, or other surface type).</li>
+            <li>The planes and their bounds that represent the object.</li>
+            <li>The visual and collider triangle meshes that represent the object.</li>
+        </ul>
+
+        The application can use this information to reason about the structure and location of the environment, to place holograms on surfaces, or render clues for grounding objects.
+
+        An application typically uses this extension in the following steps:
+
+        <ul>
+            <li>Create an {@code XrSceneObserverMSFT} handle to manage the system resource of the scene understanding compute.</li>
+            <li>Start the scene compute by calling #ComputeNewSceneMSFT() with ##XrSceneBoundsMSFT to specify the scan range and a list of {@code XrSceneComputeFeatureMSFT} features.</li>
+            <li>Inspect the completion of computation by polling #GetSceneComputeStateMSFT().</li>
+            <li>Once compute is completed, create an {@code XrSceneMSFT} handle to the result by calling #CreateSceneMSFT().</li>
+            <li>Get properties of scene components using #GetSceneComponentsMSFT().</li>
+            <li>Locate scene components using #LocateSceneComponentsMSFT().</li>
+        </ul>
         """
 
     IntConstant(

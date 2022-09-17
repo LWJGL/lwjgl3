@@ -11,7 +11,26 @@ import openxr.*
 val KHR_opengl_enable = "KHROpenGLEnable".nativeClassXR("KHR_opengl_enable", type = "instance", postfix = "KHR") {
     documentation =
         """
-        The $templateName extension.
+        The <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#XR_KHR_opengl_enable">XR_KHR_opengl_enable</a> extension.
+
+        This extension enables the use of the OpenGL graphics API in an OpenXR runtime. Without this extension, the OpenXR runtime <b>may</b> not be able to provide any OpenGL swapchain images.
+
+        This extension provides the mechanisms necessary for an application to generate a valid stext:XrGraphicsBindingOpenGL*KHR structure in order to create an OpenGL-based {@code XrSession}. Note that during this process the application is responsible for creating an OpenGL context to be used for rendering. The runtime however will provide the OpenGL textures to render into in the form of a swapchain.
+
+        This extension provides mechanisms for the application to interact with images acquired by calling #EnumerateSwapchainImages().
+
+        In order to expose the structures, types, and functions of this extension, the application <b>must</b> define #USE_GRAPHICS_API_OPENGL, as well as an appropriate <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#window-system-header-control">window system define</a> supported by this extension, before including the OpenXR platform header {@code openxr_platform.h}, in all portions of the library or application that include it. The window system defines currently supported by this extension are:
+
+        <ul>
+            <li>#USE_PLATFORM_WIN32</li>
+            <li>#USE_PLATFORM_XLIB</li>
+            <li>#USE_PLATFORM_XCB</li>
+            <li>#USE_PLATFORM_WAYLAND</li>
+        </ul>
+
+        Note that a runtime implementation of this extension is only required to support the structs introduced by this extension which belong to the platform it is running on.
+
+        Note that the OpenGL context given to the call #CreateSession() <b>must</b> not be bound in another thread when calling the functions: #CreateSession(), #DestroySession(), #BeginFrame(), #EndFrame(), #CreateSwapchain(), #DestroySwapchain(), #EnumerateSwapchainImages(), #AcquireSwapchainImage(), #WaitSwapchainImage() and #ReleaseSwapchainImage(). It <b>may</b> be bound in the thread calling those functions. The runtime <b>must</b> not access the context from any other function. In particular the application must be able to call #WaitFrame() from a different thread than the rendering thread.
         """
 
     IntConstant(
