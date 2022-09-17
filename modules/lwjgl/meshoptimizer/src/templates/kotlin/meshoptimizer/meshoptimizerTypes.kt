@@ -9,9 +9,9 @@ import org.lwjgl.generator.*
 val meshopt_Stream = struct(Module.MESHOPTIMIZER, "MeshoptStream", nativeName = "struct meshopt_Stream") {
     documentation =
         """
-        Vertex attribute stream, similar to {@code glVertexPointer}.
-        
-        Each element takes {@code size} bytes, with {@code stride} controlling the spacing between successive elements.
+        Vertex attribute stream.
+
+        Each element takes size bytes, beginning at data, with stride controlling the spacing between successive elements ({@code stride} &ge; {@code size}).
         """
 
     void.const.p("data", "")

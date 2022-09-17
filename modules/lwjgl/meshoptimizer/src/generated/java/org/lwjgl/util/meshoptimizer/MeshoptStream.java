@@ -17,9 +17,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Vertex attribute stream, similar to {@code glVertexPointer}.
+ * Vertex attribute stream.
  * 
- * <p>Each element takes {@code size} bytes, with {@code stride} controlling the spacing between successive elements.</p>
+ * <p>Each element takes size bytes, beginning at data, with stride controlling the spacing between successive elements ({@code stride} &ge; {@code size}).</p>
  * 
  * <h3>Layout</h3>
  * 

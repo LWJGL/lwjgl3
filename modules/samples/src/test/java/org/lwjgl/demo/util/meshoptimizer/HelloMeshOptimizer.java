@@ -31,6 +31,11 @@ public class HelloMeshOptimizer {
         FloatBuffer vertexBuffer = mesh.points(mesh.npoints() * 3);
         FloatBuffer normalBuffer = Objects.requireNonNull(mesh.normals(mesh.npoints() * 3));
 
+        nmeshopt_setAllocator(
+            MemoryUtil.getAllocator().getMalloc(),
+            MemoryUtil.getAllocator().getFree()
+        );
+
         MeshoptStream.Buffer streams = MeshoptStream.create(2)
             .apply(0, it -> it
                 .data(memByteBuffer(vertexBuffer))
@@ -66,6 +71,8 @@ public class HelloMeshOptimizer {
         System.out.println("AFTER:");
         System.out.println("------");
         printStats(mesh);
+
+        par_shapes_free_mesh(mesh);
     }
 
     private static void remap(FloatBuffer vertexBuffer, IntBuffer indexBuffer, FloatBuffer normalBuffer, IntBuffer remap) {

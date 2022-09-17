@@ -325,7 +325,22 @@ public class MeshOptimizer {
 
     static { LibMeshOptimizer.initialize(); }
 
-    public static final int MESHOPTIMIZER_VERSION = 170;
+    public static final int MESHOPTIMIZER_VERSION = 180;
+
+    /**
+     * Simplification options.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #MESHOPTIMIZER_SimplifyLockBorder SimplifyLockBorder} - 
+     * Do not move vertices that are located on the topological border (vertices on triangle edges that don't have a paired triangle).
+     * 
+     * <p>Useful for simplifying portions of the larger mesh.</p>
+     * </li>
+     * </ul>
+     */
+    public static final int MESHOPTIMIZER_SimplifyLockBorder = 1 << 0;
 
     protected MeshOptimizer() {
         throw new UnsupportedOperationException();
@@ -485,7 +500,7 @@ public class MeshOptimizer {
      * implement algorithms like silhouette detection/expansion and other forms of GS-driven rendering.</p>
      *
      * @param destination      must contain enough space for the resulting index buffer ({@code index_count*2} elements)
-     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}
+     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      */
     public static void meshopt_generateAdjacencyIndexBuffer(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride) {
         if (CHECKS) {
@@ -517,7 +532,7 @@ public class MeshOptimizer {
      * GDC 2011) for implementation details.</p>
      *
      * @param destination      must contain enough space for the resulting index buffer ({@code index_count*4} elements)
-     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}
+     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      */
     public static void meshopt_generateTessellationIndexBuffer(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride) {
         if (CHECKS) {
@@ -600,7 +615,7 @@ public class MeshOptimizer {
      *
      * @param destination      must contain enough space for the resulting index buffer ({@code index_count} elements)
      * @param indices          must contain index data that is the result of {@link #meshopt_optimizeVertexCache optimizeVertexCache} (<b>not</b> the original mesh indices!)
-     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}
+     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      * @param threshold        indicates how much the overdraw optimizer can degrade vertex cache efficiency (1.05 = up to 5%) to reduce overdraw more efficiently
      */
     public static void meshopt_optimizeOverdraw(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, float threshold) {
@@ -1001,10 +1016,10 @@ public class MeshOptimizer {
     // --- [ meshopt_simplify ] ---
 
     /** Unsafe version of: {@link #meshopt_simplify simplify} */
-    public static native long nmeshopt_simplify(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long target_index_count, float target_error, long result_error);
+    public static native long nmeshopt_simplify(long destination, long indices, long index_count, long vertex_positions, long vertex_count, long vertex_positions_stride, long target_index_count, float target_error, int options, long result_error);
 
     /**
-     * Experimental: Mesh simplifier. Reduces the number of triangles in the mesh, attempting to preserve mesh appearance as much as possible.
+     * Mesh simplifier. Reduces the number of triangles in the mesh, attempting to preserve mesh appearance as much as possible.
      * 
      * <p>The algorithm tries to preserve mesh topology and can stop short of the target goal based on topology constraints or target error. If not all
      * attributes from the input mesh are required, it's recommended to reindex the mesh using {@link #meshopt_generateShadowIndexBuffer generateShadowIndexBuffer} prior to simplification. Returns
@@ -1012,18 +1027,19 @@ public class MeshOptimizer {
      * original vertex buffer. If the original vertex data isn't required, creating a compact vertex buffer using {@link #meshopt_optimizeVertexFetch optimizeVertexFetch} is recommended.</p>
      *
      * @param destination      must contain enough space for the target index buffer, worst case is {@code index_count} elements (<b>not</b> {@code target_index_count})!
-     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}
+     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      * @param target_error     represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}
+     * @param options          must be a bitmask composed of {@code meshopt_SimplifyX} options; 0 is a safe default
      * @param result_error     can be {@code NULL}; when it's not {@code NULL}, it will contain the resulting (relative) error after simplification
      */
     @NativeType("size_t")
-    public static long meshopt_simplify(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_index_count, float target_error, @Nullable @NativeType("float *") FloatBuffer result_error) {
+    public static long meshopt_simplify(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_index_count, float target_error, @NativeType("unsigned int") int options, @Nullable @NativeType("float *") FloatBuffer result_error) {
         if (CHECKS) {
             check(indices, destination.remaining());
             check(vertex_positions, vertex_count * (vertex_positions_stride >>> 2));
             checkSafe(result_error, 1);
         }
-        return nmeshopt_simplify(memAddress(destination), memAddress(indices), destination.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, target_index_count, target_error, memAddressSafe(result_error));
+        return nmeshopt_simplify(memAddress(destination), memAddress(indices), destination.remaining(), memAddress(vertex_positions), vertex_count, vertex_positions_stride, target_index_count, target_error, options, memAddressSafe(result_error));
     }
 
     // --- [ meshopt_simplifySloppy ] ---
@@ -1039,7 +1055,7 @@ public class MeshOptimizer {
      * original vertex data isn't required, creating a compact vertex buffer using {@link #meshopt_optimizeVertexFetch optimizeVertexFetch} is recommended.</p>
      *
      * @param destination      must contain enough space for the target index buffer, worst case is {@code index_count} elements (<b>not</b> {@code target_index_count})!
-     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}
+     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      * @param target_error     represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}
      * @param result_error     can be {@code NULL}; when it's not {@code NULL}, it will contain the resulting (relative) error after simplification
      */
@@ -1066,7 +1082,7 @@ public class MeshOptimizer {
      * recommended.</p>
      *
      * @param destination      must contain enough space for the target index buffer ({@code target_vertex_count} elements)
-     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}
+     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      */
     @NativeType("size_t")
     public static long meshopt_simplifyPoints(@NativeType("unsigned int *") IntBuffer destination, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("size_t") long target_vertex_count) {
@@ -1083,7 +1099,7 @@ public class MeshOptimizer {
     public static native float nmeshopt_simplifyScale(long vertex_positions, long vertex_count, long vertex_positions_stride);
 
     /**
-     * Experimental: Returns the error scaling factor used by the simplifier to convert between absolute and relative extents.
+     * Returns the error scaling factor used by the simplifier to convert between absolute and relative extents.
      * 
      * <p>Absolute error must be <b>divided</b> by the scaling factor before passing it to {@link #meshopt_simplify simplify} as {@code target_error}. Relative error returned by
      * {@code meshopt_simplify} via {@code result_error} must be <b>multiplied</b> by the scaling factor to get absolute error.</p>
@@ -1169,7 +1185,7 @@ public class MeshOptimizer {
      * 
      * <p>Results may not match actual GPU performance.</p>
      *
-     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}
+     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      */
     @NativeType("struct meshopt_OverdrawStatistics")
     public static MeshoptOverdrawStatistics meshopt_analyzeOverdraw(@NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("struct meshopt_OverdrawStatistics") MeshoptOverdrawStatistics __result) {
@@ -1212,7 +1228,7 @@ public class MeshOptimizer {
      * @param meshlets          must contain enough space for all meshlets, worst case size can be computed with {@link #meshopt_buildMeshletsBound buildMeshletsBound}
      * @param meshlet_vertices  must contain enough space for all meshlets, worst case size is equal to {@code max_meshlets * max_vertices}
      * @param meshlet_triangles must contain enough space for all meshlets, worst case size is equal to {@code max_meshlets * max_triangles * 3}
-     * @param vertex_positions  should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}
+     * @param vertex_positions  should have {@code float3} position in the first 12 bytes of each vertex
      * @param max_vertices      must not exceed implementation limits ({@code max_vertices} &le; 255 - not 256!)
      * @param max_triangles     must not exceed implementation limits ({@code max_triangles} &le; 512)
      * @param cone_weight       should be set to 0 when cone culling is not used, and a value between 0 and 1 otherwise to balance between cluster size and cone culling efficiency
@@ -1273,7 +1289,7 @@ public class MeshOptimizer {
      * <p>The formula that uses the apex is slightly more accurate but needs the apex; if you are already using bounding sphere to do frustum/occlusion culling,
      * the formula that doesn't use the apex may be preferable.</p>
      *
-     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}
+     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      */
     @NativeType("struct meshopt_Bounds")
     public static MeshoptBounds meshopt_computeClusterBounds(@NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride, @NativeType("struct meshopt_Bounds") MeshoptBounds __result) {
@@ -1331,7 +1347,7 @@ public class MeshOptimizer {
      * <p>The resulting index buffer can be used with other functions like {@link #meshopt_optimizeVertexCache optimizeVertexCache}.</p>
      *
      * @param destination      must contain enough space for the resulting index buffer ({@code index_count} elements)
-     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}
+     * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      */
     public static void meshopt_spatialSortTriangles(@NativeType("unsigned int *") IntBuffer destination, @NativeType("unsigned int const *") IntBuffer indices, @NativeType("float const *") FloatBuffer vertex_positions, @NativeType("size_t") long vertex_count, @NativeType("size_t") long vertex_positions_stride) {
         if (CHECKS) {

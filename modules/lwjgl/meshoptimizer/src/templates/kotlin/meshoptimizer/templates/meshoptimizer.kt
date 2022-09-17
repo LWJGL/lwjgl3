@@ -301,7 +301,7 @@ nmeshopt_setAllocator(
 );""")}
         """
 
-    IntConstant("", "VERSION".."170")
+    IntConstant("", "VERSION".."180")
 
     size_t(
         "generateVertexRemap",
@@ -325,7 +325,7 @@ nmeshopt_setAllocator(
         "generateVertexRemapMulti",
         """
         Generates a vertex remap table from multiple vertex streams and an optional index buffer and returns number of unique vertices.
-         
+
         As a result, all vertices that are binary equivalent map to the same (new) location, with no gaps in the resulting sequence. Resulting remap table maps
         old vertices to new vertices and can be used in #remapVertexBuffer()/#remapIndexBuffer(). To remap vertex buffers, you will need to call
         {@code meshopt_remapVertexBuffer} for each vertex stream. Note that binary equivalence considers all size bytes in each stream, including padding which
@@ -424,7 +424,7 @@ nmeshopt_setAllocator(
         AutoSize("indices")..size_t("index_count", ""),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
-            "should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}"
+            "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
@@ -453,7 +453,7 @@ nmeshopt_setAllocator(
         AutoSize("indices")..size_t("index_count", ""),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
-            "should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}"
+            "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
@@ -520,7 +520,7 @@ nmeshopt_setAllocator(
         AutoSize("destination", "indices")..size_t("index_count", ""),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
-            "should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}"
+            "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
@@ -788,11 +788,24 @@ nmeshopt_setAllocator(
         Check("count * (stride >> 2)")..float.const.p("data", "")
     )
 
+    EnumConstant(
+        "Simplification options.",
+
+        "SimplifyLockBorder".enum(
+            """
+            Do not move vertices that are located on the topological border (vertices on triangle edges that don't have a paired triangle).
+
+            Useful for simplifying portions of the larger mesh.
+            """,
+            "1 << 0"
+        )
+    )
+
     size_t(
         "simplify",
         """
-        Experimental: Mesh simplifier. Reduces the number of triangles in the mesh, attempting to preserve mesh appearance as much as possible.
-         
+        Mesh simplifier. Reduces the number of triangles in the mesh, attempting to preserve mesh appearance as much as possible.
+
         The algorithm tries to preserve mesh topology and can stop short of the target goal based on topology constraints or target error. If not all
         attributes from the input mesh are required, it's recommended to reindex the mesh using #generateShadowIndexBuffer() prior to simplification. Returns
         the number of indices after simplification, with destination containing new index data. The resulting index buffer references vertices from the
@@ -807,12 +820,13 @@ nmeshopt_setAllocator(
         AutoSize("destination", "indices")..size_t("index_count", ""),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
-            "should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}"
+            "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
         size_t("target_index_count", ""),
         float("target_error", "represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}"),
+        unsigned_int("options", "must be a bitmask composed of {@code meshopt_SimplifyX} options; 0 is a safe default"),
         Check(1)..nullable..float.p("result_error", "can be #NULL; when it's not #NULL, it will contain the resulting (relative) error after simplification")
     )
 
@@ -834,7 +848,7 @@ nmeshopt_setAllocator(
         AutoSize("destination", "indices")..size_t("index_count", ""),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
-            "should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}"
+            "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
@@ -859,7 +873,7 @@ nmeshopt_setAllocator(
         ),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
-            "should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}"
+            "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
@@ -869,7 +883,7 @@ nmeshopt_setAllocator(
     float(
         "simplifyScale",
         """
-        Experimental: Returns the error scaling factor used by the simplifier to convert between absolute and relative extents.
+        Returns the error scaling factor used by the simplifier to convert between absolute and relative extents.
      
         Absolute error must be <b>divided</b> by the scaling factor before passing it to #simplify() as {@code target_error}. Relative error returned by
         {@code meshopt_simplify} via {@code result_error} must be <b>multiplied</b> by the scaling factor to get absolute error.
@@ -954,7 +968,7 @@ nmeshopt_setAllocator(
         AutoSize("indices")..size_t("index_count", ""),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
-            "should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}"
+            "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
@@ -998,7 +1012,7 @@ nmeshopt_setAllocator(
         AutoSize("indices")..size_t("index_count", ""),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
-            "should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}"
+            "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
@@ -1061,7 +1075,7 @@ nmeshopt_setAllocator(
         ),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
-            "should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}"
+            "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
@@ -1106,7 +1120,7 @@ nmeshopt_setAllocator(
         AutoSize("destination", "indices")..size_t("index_count", ""),
         Check("vertex_count * (vertex_positions_stride >>> 2)")..float.const.p(
             "vertex_positions",
-            "should have {@code float3} position in the first 12 bytes of each vertex - similar to {@code glVertexPointer}"
+            "should have {@code float3} position in the first 12 bytes of each vertex"
         ),
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", "")
