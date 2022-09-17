@@ -35,7 +35,7 @@ val EXT_external_memory_dma_buf = "EXTExternalMemoryDmaBuf".nativeClassVK("EXT_e
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_external_memory_dma_buf]%20@chadversary%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_external_memory_dma_buf%20extension%3E%3E">chadversary</a></li>
+                <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_external_memory_dma_buf]%20@chadversary%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_external_memory_dma_buf%20extension*">chadversary</a></li>
             </ul></dd>
         </dl>
 

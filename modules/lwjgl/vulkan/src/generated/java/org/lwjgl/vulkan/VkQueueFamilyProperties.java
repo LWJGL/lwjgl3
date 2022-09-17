@@ -46,9 +46,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Queues supporting graphics and/or compute operations <b>must</b> report <code>(1,1,1)</code> in {@code minImageTransferGranularity}, meaning that there are no additional restrictions on the granularity of image transfer operations for these queues. Other queues supporting image transfer operations are only <b>required</b> to support whole mip level transfers, thus {@code minImageTransferGranularity} for queues belonging to such queue families <b>may</b> be <code>(0,0,0)</code>.</p>
  * 
- * <p>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-device">Device Memory</a> section describes memory properties queried from the physical device.</p>
+ * <p>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-device">Device Memory</a> section describes memory properties queried from the physical device.</p>
  * 
- * <p>For physical device feature queries see the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features">Features</a> chapter.</p>
+ * <p>For physical device feature queries see the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features">Features</a> chapter.</p>
  * 
  * <h5>See Also</h5>
  * 
@@ -115,7 +115,7 @@ public class VkQueueFamilyProperties extends Struct implements NativeResource {
     /** the unsigned integer count of queues in this queue family. Each queue family <b>must</b> support at least one queue. */
     @NativeType("uint32_t")
     public int queueCount() { return nqueueCount(address()); }
-    /** the unsigned integer count of meaningful bits in the timestamps written via {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} or {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp}. The valid range for the count is 36..64 bits, or a value of 0, indicating no support for timestamps. Bits outside the valid range are guaranteed to be zeros. */
+    /** the unsigned integer count of meaningful bits in the timestamps written via {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} or {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp}. The valid range for the count is 36 to 64 bits, or a value of 0, indicating no support for timestamps. Bits outside the valid range are guaranteed to be zeros. */
     @NativeType("uint32_t")
     public int timestampValidBits() { return ntimestampValidBits(address()); }
     /** the minimum granularity supported for image transfer operations on the queues in this queue family. */

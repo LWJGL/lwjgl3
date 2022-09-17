@@ -21,10 +21,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-depthBounds">{@code depthBounds}</a> feature is not enabled, {@code depthBoundsTestEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-depthBounds">{@code depthBounds}</a> feature is not enabled, {@code depthBoundsTestEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, and {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR}{@code ::separateStencilMaskRef} is {@link VK10#VK_FALSE FALSE}, and the value of {@link VkPipelineDepthStencilStateCreateInfo}{@code ::stencilTestEnable} is {@link VK10#VK_TRUE TRUE}, and the value of {@link VkPipelineRasterizationStateCreateInfo}{@code ::cullMode} is {@link VK10#VK_CULL_MODE_NONE CULL_MODE_NONE}, the value of {@code reference} in each of the {@link VkStencilOpState} structs in {@code front} and {@code back} <b>must</b> be the same</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-rasterizationOrderDepthAttachmentAccess">{@code rasterizationOrderDepthAttachmentAccess}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link ARMRasterizationOrderAttachmentAccess#VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-rasterizationOrderStencilAttachmentAccess">{@code rasterizationOrderStencilAttachmentAccess}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link ARMRasterizationOrderAttachmentAccess#VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-rasterizationOrderDepthAttachmentAccess">{@code rasterizationOrderDepthAttachmentAccess}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link EXTRasterizationOrderAttachmentAccess#VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_EXT PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_EXT}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-rasterizationOrderStencilAttachmentAccess">{@code rasterizationOrderStencilAttachmentAccess}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link EXTRasterizationOrderAttachmentAccess#VK_PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_EXT PIPELINE_DEPTH_STENCIL_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_EXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -138,28 +138,28 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct implements Nat
     /** a bitmask of {@code VkPipelineDepthStencilStateCreateFlagBits} specifying additional depth/stencil state information. */
     @NativeType("VkPipelineDepthStencilStateCreateFlags")
     public int flags() { return nflags(address()); }
-    /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth">depth testing</a> is enabled. */
+    /** controls whether <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth">depth testing</a> is enabled. */
     @NativeType("VkBool32")
     public boolean depthTestEnable() { return ndepthTestEnable(address()) != 0; }
-    /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth-write">depth writes</a> are enabled when {@code depthTestEnable} is {@link VK10#VK_TRUE TRUE}. Depth writes are always disabled when {@code depthTestEnable} is {@link VK10#VK_FALSE FALSE}. */
+    /** controls whether <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth-write">depth writes</a> are enabled when {@code depthTestEnable} is {@link VK10#VK_TRUE TRUE}. Depth writes are always disabled when {@code depthTestEnable} is {@link VK10#VK_FALSE FALSE}. */
     @NativeType("VkBool32")
     public boolean depthWriteEnable() { return ndepthWriteEnable(address()) != 0; }
-    /** a {@code VkCompareOp} value specifying the comparison operator to use in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth-comparison">Depth Comparison</a> step of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth">depth test</a>. */
+    /** a {@code VkCompareOp} value specifying the comparison operator to use in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth-comparison">Depth Comparison</a> step of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-depth">depth test</a>. */
     @NativeType("VkCompareOp")
     public int depthCompareOp() { return ndepthCompareOp(address()); }
-    /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-dbt">depth bounds testing</a> is enabled. */
+    /** controls whether <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-dbt">depth bounds testing</a> is enabled. */
     @NativeType("VkBool32")
     public boolean depthBoundsTestEnable() { return ndepthBoundsTestEnable(address()) != 0; }
-    /** controls whether <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-stencil">stencil testing</a> is enabled. */
+    /** controls whether <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-stencil">stencil testing</a> is enabled. */
     @NativeType("VkBool32")
     public boolean stencilTestEnable() { return nstencilTestEnable(address()) != 0; }
-    /** {@code front} and {@code back} control the parameters of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-stencil">stencil test</a>. */
+    /** {@code front} and {@code back} control the parameters of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-stencil">stencil test</a>. */
     public VkStencilOpState front() { return nfront(address()); }
     /** see {@code front} */
     public VkStencilOpState back() { return nback(address()); }
-    /** the minimum depth bound used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-dbt">depth bounds test</a>. */
+    /** the minimum depth bound used in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-dbt">depth bounds test</a>. */
     public float minDepthBounds() { return nminDepthBounds(address()); }
-    /** the maximum depth bound used in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-dbt">depth bounds test</a>. */
+    /** the maximum depth bound used in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-dbt">depth bounds test</a>. */
     public float maxDepthBounds() { return nmaxDepthBounds(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

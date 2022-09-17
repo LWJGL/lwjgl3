@@ -99,7 +99,7 @@ public class VkRenderingFragmentDensityMapAttachmentInfoEXT extends Struct imple
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the image view that will be used as a fragment shading rate attachment. */
+    /** the image view that will be used as a fragment density map attachment. */
     @NativeType("VkImageView")
     public long imageView() { return nimageView(address()); }
     /** the layout that {@code imageView} will be in during rendering. */

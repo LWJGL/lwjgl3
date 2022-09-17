@@ -35,7 +35,7 @@ val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fen
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_external_fence_fd]%20@critsec%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_external_fence_fd%20extension%3E%3E">critsec</a></li>
+                <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_external_fence_fd]%20@critsec%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_external_fence_fd%20extension*">critsec</a></li>
             </ul></dd>
         </dl>
 
@@ -153,7 +153,7 @@ val KHR_external_fence_fd = "KHRExternalFenceFd".nativeClassVK("KHR_external_fen
 
         Where supported by the operating system, the implementation <b>must</b> set the file descriptor to be closed automatically when an {@code execve} system call is made.
 
-        Exporting a file descriptor from a fence <b>may</b> have side effects depending on the transference of the specified handle type, as described in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence State</a>.
+        Exporting a file descriptor from a fence <b>may</b> have side effects depending on the transference of the specified handle type, as described in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-fences-importing">Importing Fence State</a>.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

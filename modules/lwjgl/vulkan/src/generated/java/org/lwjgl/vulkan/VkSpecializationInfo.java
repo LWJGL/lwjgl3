@@ -96,7 +96,7 @@ public class VkSpecializationInfo extends Struct implements NativeResource {
     /** the number of entries in the {@code pMapEntries} array. */
     @NativeType("uint32_t")
     public int mapEntryCount() { return nmapEntryCount(address()); }
-    /** a pointer to an array of {@link VkSpecializationMapEntry} structures which map constant IDs to offsets in {@code pData}. */
+    /** a pointer to an array of {@link VkSpecializationMapEntry} structures, which map constant IDs to offsets in {@code pData}. */
     @Nullable
     @NativeType("VkSpecializationMapEntry const *")
     public VkSpecializationMapEntry.Buffer pMapEntries() { return npMapEntries(address()); }

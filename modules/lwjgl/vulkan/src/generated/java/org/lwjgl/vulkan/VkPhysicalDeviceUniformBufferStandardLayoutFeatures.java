@@ -85,7 +85,7 @@ public class VkPhysicalDeviceUniformBufferStandardLayoutFeatures extends Struct 
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports the same layouts for uniform buffers as for storage and other kinds of buffers. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-resources-standard-layout">Standard Buffer Layout</a>. */
+    /** indicates that the implementation supports the same layouts for uniform buffers as for storage and other kinds of buffers. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-resources-standard-layout">Standard Buffer Layout</a>. */
     @NativeType("VkBool32")
     public boolean uniformBufferStandardLayout() { return nuniformBufferStandardLayout(address()) != 0; }
 

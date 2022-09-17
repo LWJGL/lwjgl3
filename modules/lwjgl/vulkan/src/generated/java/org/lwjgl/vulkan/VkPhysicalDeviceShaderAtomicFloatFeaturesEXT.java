@@ -141,16 +141,16 @@ public class VkPhysicalDeviceShaderAtomicFloatFeaturesEXT extends Struct impleme
     /** indicates whether shaders <b>can</b> perform 64-bit floating-point add atomic operations on storage buffers. */
     @NativeType("VkBool32")
     public boolean shaderBufferFloat64AtomicAdd() { return nshaderBufferFloat64AtomicAdd(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 32-bit floating-point load, store and exchange atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 32-bit floating-point load, store and exchange atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat32Atomics() { return nshaderSharedFloat32Atomics(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 32-bit floating-point add atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 32-bit floating-point add atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat32AtomicAdd() { return nshaderSharedFloat32AtomicAdd(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 64-bit floating-point load, store and exchange atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 64-bit floating-point load, store and exchange atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat64Atomics() { return nshaderSharedFloat64Atomics(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 64-bit floating-point add atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 64-bit floating-point add atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat64AtomicAdd() { return nshaderSharedFloat64AtomicAdd(address()) != 0; }
     /** indicates whether shaders <b>can</b> perform 32-bit floating-point load, store and exchange atomic image operations. */

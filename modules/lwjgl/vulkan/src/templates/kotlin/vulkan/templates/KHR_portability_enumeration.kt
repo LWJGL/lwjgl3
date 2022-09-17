@@ -36,7 +36,7 @@ val KHR_portability_enumeration = "KHRPortabilityEnumeration".nativeClassVK("KHR
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Charles Giessen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_portability_enumeration]%20@charles-lunarg%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_portability_enumeration%20extension%3E%3E">charles-lunarg</a></li>
+                <li>Charles Giessen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_portability_enumeration]%20@charles-lunarg%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_portability_enumeration%20extension*">charles-lunarg</a></li>
             </ul></dd>
         </dl>
 

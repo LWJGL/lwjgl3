@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure holding availabe tile properties.
+ * Structure holding available tile properties.
  * 
  * <h5>Description</h5>
  * 

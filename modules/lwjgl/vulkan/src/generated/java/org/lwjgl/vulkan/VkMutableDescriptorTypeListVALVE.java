@@ -17,63 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing descriptor types that a given descriptor may mutate to.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code descriptorTypeCount} <b>must</b> not be 0 if the corresponding binding is of {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}</li>
- * <li>{@code pDescriptorTypes} <b>must</b> be a valid pointer to an array of {@code descriptorTypeCount} valid, unique {@code VkDescriptorType} values if the given binding is of {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} type</li>
- * <li>{@code descriptorTypeCount} <b>must</b> be 0 if the corresponding binding is not of {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}</li>
- * <li>{@code pDescriptorTypes} <b>must</b> not contain {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE}</li>
- * <li>{@code pDescriptorTypes} <b>must</b> not contain {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC}</li>
- * <li>{@code pDescriptorTypes} <b>must</b> not contain {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC}</li>
- * <li>{@code pDescriptorTypes} <b>must</b> not contain {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>If {@code descriptorTypeCount} is not 0, {@code pDescriptorTypes} <b>must</b> be a valid pointer to an array of {@code descriptorTypeCount} valid {@code VkDescriptorType} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkMutableDescriptorTypeCreateInfoVALVE}</p>
+ * See {@link VkMutableDescriptorTypeListEXT}.
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VkMutableDescriptorTypeListVALVE {
- *     uint32_t {@link #descriptorTypeCount};
- *     VkDescriptorType const * {@link #pDescriptorTypes};
+ *     uint32_t descriptorTypeCount;
+ *     VkDescriptorType const * pDescriptorTypes;
  * }</code></pre>
  */
-public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeResource {
-
-    /** The struct size in bytes. */
-    public static final int SIZEOF;
-
-    /** The struct alignment in bytes. */
-    public static final int ALIGNOF;
-
-    /** The struct member offsets. */
-    public static final int
-        DESCRIPTORTYPECOUNT,
-        PDESCRIPTORTYPES;
-
-    static {
-        Layout layout = __struct(
-            __member(4),
-            __member(POINTER_SIZE)
-        );
-
-        SIZEOF = layout.getSize();
-        ALIGNOF = layout.getAlignment();
-
-        DESCRIPTORTYPECOUNT = layout.offsetof(0);
-        PDESCRIPTORTYPES = layout.offsetof(1);
-    }
+public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeListEXT {
 
     /**
      * Creates a {@code VkMutableDescriptorTypeListVALVE} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
@@ -82,21 +36,11 @@ public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeRe
      * <p>The created instance holds a strong reference to the container object.</p>
      */
     public VkMutableDescriptorTypeListVALVE(ByteBuffer container) {
-        super(memAddress(container), __checkContainer(container, SIZEOF));
+        super(container);
     }
 
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pDescriptorTypes} field. */
     @Override
-    public int sizeof() { return SIZEOF; }
-
-    /** the number of elements in {@code pDescriptorTypes}. */
-    @NativeType("uint32_t")
-    public int descriptorTypeCount() { return ndescriptorTypeCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@code descriptorTypeCount} {@code VkDescriptorType} values defining which descriptor types a given binding may mutate to. */
-    @Nullable
-    @NativeType("VkDescriptorType const *")
-    public IntBuffer pDescriptorTypes() { return npDescriptorTypes(address()); }
-
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pDescriptorTypes} field. */
     public VkMutableDescriptorTypeListVALVE pDescriptorTypes(@Nullable @NativeType("VkDescriptorType const *") IntBuffer value) { npDescriptorTypes(address(), value); return this; }
 
     /**
@@ -224,31 +168,8 @@ public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeRe
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #descriptorTypeCount}. */
-    public static int ndescriptorTypeCount(long struct) { return UNSAFE.getInt(null, struct + VkMutableDescriptorTypeListVALVE.DESCRIPTORTYPECOUNT); }
-    /** Unsafe version of {@link #pDescriptorTypes() pDescriptorTypes}. */
-    @Nullable public static IntBuffer npDescriptorTypes(long struct) { return memIntBufferSafe(memGetAddress(struct + VkMutableDescriptorTypeListVALVE.PDESCRIPTORTYPES), ndescriptorTypeCount(struct)); }
-
-    /** Sets the specified value to the {@code descriptorTypeCount} field of the specified {@code struct}. */
-    public static void ndescriptorTypeCount(long struct, int value) { UNSAFE.putInt(null, struct + VkMutableDescriptorTypeListVALVE.DESCRIPTORTYPECOUNT, value); }
-    /** Unsafe version of {@link #pDescriptorTypes(IntBuffer) pDescriptorTypes}. */
-    public static void npDescriptorTypes(long struct, @Nullable IntBuffer value) { memPutAddress(struct + VkMutableDescriptorTypeListVALVE.PDESCRIPTORTYPES, memAddressSafe(value)); ndescriptorTypeCount(struct, value == null ? 0 : value.remaining()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        if (ndescriptorTypeCount(struct) != 0) {
-            check(memGetAddress(struct + VkMutableDescriptorTypeListVALVE.PDESCRIPTORTYPES));
-        }
-    }
-
-    // -----------------------------------
-
     /** An array of {@link VkMutableDescriptorTypeListVALVE} structs. */
-    public static class Buffer extends StructBuffer<VkMutableDescriptorTypeListVALVE, Buffer> implements NativeResource {
+    public static class Buffer extends VkMutableDescriptorTypeListEXT.Buffer {
 
         private static final VkMutableDescriptorTypeListVALVE ELEMENT_FACTORY = VkMutableDescriptorTypeListVALVE.create(-1L);
 
@@ -262,7 +183,7 @@ public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeRe
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
         public Buffer(ByteBuffer container) {
-            super(container, container.remaining() / SIZEOF);
+            super(container);
         }
 
         public Buffer(long address, int cap) {
@@ -283,15 +204,8 @@ public class VkMutableDescriptorTypeListVALVE extends Struct implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMutableDescriptorTypeListVALVE#descriptorTypeCount} field. */
-        @NativeType("uint32_t")
-        public int descriptorTypeCount() { return VkMutableDescriptorTypeListVALVE.ndescriptorTypeCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkMutableDescriptorTypeListVALVE#pDescriptorTypes} field. */
-        @Nullable
-        @NativeType("VkDescriptorType const *")
-        public IntBuffer pDescriptorTypes() { return VkMutableDescriptorTypeListVALVE.npDescriptorTypes(address()); }
-
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkMutableDescriptorTypeListVALVE#pDescriptorTypes} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pDescriptorTypes} field. */
+        @Override
         public VkMutableDescriptorTypeListVALVE.Buffer pDescriptorTypes(@Nullable @NativeType("VkDescriptorType const *") IntBuffer value) { VkMutableDescriptorTypeListVALVE.npDescriptorTypes(address(), value); return this; }
 
     }

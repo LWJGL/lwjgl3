@@ -68,11 +68,11 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Pan Gao <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_HUAWEI_invocation_mask]%20@PanGao-h%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_HUAWEI_invocation_mask%20extension%3E%3E">PanGao-h</a></li>
+                <li>Pan Gao <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_HUAWEI_invocation_mask]%20@PanGao-h%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_HUAWEI_invocation_mask%20extension*">PanGao-h</a></li>
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>
-            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_HUAWEI_invocation_mask.asciidoc">VK_HUAWEI_invocation_mask</a></dd>
+            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_HUAWEI_invocation_mask.adoc">VK_HUAWEI_invocation_mask</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
@@ -149,7 +149,7 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-invocationMask">{@code invocationMask}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-invocationMask">{@code invocationMask}</a> feature <b>must</b> be enabled</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> be a valid {@code VkImageView} handle of type #IMAGE_VIEW_TYPE_2D</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have a format of #FORMAT_R8_UINT</li>
             <li>If {@code imageView} is not #NULL_HANDLE, it <b>must</b> have been created with #IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI set</li>
@@ -164,9 +164,10 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>If {@code imageView} is not #NULL_HANDLE, {@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
             <li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
             <li>This command <b>must</b> only be called outside of a render pass instance</li>
+            <li>This command <b>must</b> only be called outside of a video coding scope</li>
             <li>Both of {@code commandBuffer}, and {@code imageView} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
         </ul>
 
@@ -178,8 +179,8 @@ val HUAWEI_invocation_mask = "HUAWEIInvocationMask".nativeClassVK("HUAWEI_invoca
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Compute</td></tr></tbody>
+            <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <tbody><tr><td>Primary Secondary</td><td>Outside</td><td>Outside</td><td>Compute</td><td>State</td></tr></tbody>
         </table>
         """,
 

@@ -89,10 +89,10 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct implements Nati
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the task shader stage is supported. */
+    /** specifies whether task shaders are supported. If this feature is not enabled, the {@link NVMeshShader#VK_SHADER_STAGE_TASK_BIT_NV SHADER_STAGE_TASK_BIT_NV} and {@link NVMeshShader#VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV PIPELINE_STAGE_TASK_SHADER_BIT_NV} enum values <b>must</b> not be used. */
     @NativeType("VkBool32")
     public boolean taskShader() { return ntaskShader(address()) != 0; }
-    /** indicates whether the mesh shader stage is supported. */
+    /** specifies whether mesh shaders are supported. If this feature is not enabled, the {@link NVMeshShader#VK_SHADER_STAGE_MESH_BIT_NV SHADER_STAGE_MESH_BIT_NV} and {@link NVMeshShader#VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV PIPELINE_STAGE_MESH_SHADER_BIT_NV} enum values <b>must</b> not be used. */
     @NativeType("VkBool32")
     public boolean meshShader() { return nmeshShader(address()) != 0; }
 

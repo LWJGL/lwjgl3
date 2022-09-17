@@ -29,7 +29,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Kedarnath Thangudu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_representative_fragment_test]%20@kthangudu%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_representative_fragment_test%20extension%3E%3E">kthangudu</a></li>
+ * <li>Kedarnath Thangudu <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_representative_fragment_test]%20@kthangudu%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_representative_fragment_test%20extension*">kthangudu</a></li>
  * </ul></dd>
  * </dl>
  * 

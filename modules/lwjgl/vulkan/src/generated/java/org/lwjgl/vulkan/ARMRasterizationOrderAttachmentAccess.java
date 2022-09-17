@@ -6,11 +6,11 @@
 package org.lwjgl.vulkan;
 
 /**
- * Renderpasses, and specifically <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-pipeline-barriers-subpass-self-dependencies">subpass self-dependencies</a> enable much of the same functionality as the framebuffer fetch and pixel local storage extensions did for OpenGL ES. But certain techniques such as programmable blending are awkward or impractical to implement with these alone, in part because a self-dependency is required every time a fragment will read a value at a given sample coordinate.
+ * Renderpasses, and specifically <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-pipeline-barriers-subpass-self-dependencies">subpass self-dependencies</a> enable much of the same functionality as the framebuffer fetch and pixel local storage extensions did for OpenGL ES. But certain techniques such as programmable blending are awkward or impractical to implement with these alone, in part because a self-dependency is required every time a fragment will read a value at a given sample coordinate.
  * 
  * <p>This extension extends the mechanism of input attachments to allow access to framebuffer attachments when used as both input and color, or depth/stencil, attachments from one fragment to the next, in rasterization order, without explicit synchronization.</p>
  * 
- * <p>See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-feedbackloop">renderpass feedback loops</a> for more information.</p>
+ * <p>See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#renderpass-feedbackloop">renderpass feedback loops</a> for more information.</p>
  * 
  * <h5>Examples</h5>
  * 
@@ -32,9 +32,13 @@ package org.lwjgl.vulkan;
  * <li>Requires support for Vulkan 1.0</li>
  * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
  * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Promoted</em> to {@link EXTRasterizationOrderAttachmentAccess VK_EXT_rasterization_order_attachment_access} extension</li>
+ * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_ARM_rasterization_order_attachment_access]%20@janharaldfredriksen-arm%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_ARM_rasterization_order_attachment_access%20extension%3E%3E">janharaldfredriksen-arm</a></li>
+ * <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_ARM_rasterization_order_attachment_access]%20@janharaldfredriksen-arm%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_ARM_rasterization_order_attachment_access%20extension*">janharaldfredriksen-arm</a></li>
  * </ul></dd>
  * </dl>
  * 

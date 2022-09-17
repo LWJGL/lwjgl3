@@ -20,9 +20,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If a {@link VkGraphicsPipelineLibraryCreateInfoEXT} structure is included in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}, it specifies the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#pipeline-graphics-subsets">subsets of the graphics pipeline</a> being created.</p>
+ * <p>If a {@link VkGraphicsPipelineLibraryCreateInfoEXT} structure is included in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}, it specifies the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-graphics-subsets">subsets of the graphics pipeline</a> being created.</p>
  * 
- * <p>If this structure is omitted, and either {@link VkGraphicsPipelineCreateInfo}{@code ::flags} includes {@link KHRPipelineLibrary#VK_PIPELINE_CREATE_LIBRARY_BIT_KHR PIPELINE_CREATE_LIBRARY_BIT_KHR} or the {@link VkGraphicsPipelineCreateInfo}{@code ::pNext} chain includes a {@link VkPipelineLibraryCreateInfoKHR} structure with a {@code libraryCount} greater than 0, it is as if {@code flags} is 0. Otherwise if this structure is omitted, it is as if {@code flags} includes all possible subsets of the graphics pipeline (i.e. a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#pipeline-graphics-subsets-complete">complete graphics pipeline</a>).</p>
+ * <p>If this structure is omitted, and either {@link VkGraphicsPipelineCreateInfo}{@code ::flags} includes {@link KHRPipelineLibrary#VK_PIPELINE_CREATE_LIBRARY_BIT_KHR PIPELINE_CREATE_LIBRARY_BIT_KHR} or the {@link VkGraphicsPipelineCreateInfo}{@code ::pNext} chain includes a {@link VkPipelineLibraryCreateInfoKHR} structure with a {@code libraryCount} greater than 0, it is as if {@code flags} is 0. Otherwise if this structure is omitted, it is as if {@code flags} includes all possible subsets of the graphics pipeline (i.e. a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-graphics-subsets-complete">complete graphics pipeline</a>).</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

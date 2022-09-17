@@ -96,7 +96,7 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
     /** indicates whether the implementation supports the {@link EXTPrimitivesGeneratedQuery#VK_QUERY_TYPE_PRIMITIVES_GENERATED_EXT QUERY_TYPE_PRIMITIVES_GENERATED_EXT} query type. */
     @NativeType("VkBool32")
     public boolean primitivesGeneratedQuery() { return nprimitivesGeneratedQuery(address()) != 0; }
-    /** indicates whether the implementation supports this query when <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-discard">rasterization discard</a> is enabled. */
+    /** indicates whether the implementation supports this query when <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-discard">rasterization discard</a> is enabled. */
     @NativeType("VkBool32")
     public boolean primitivesGeneratedQueryWithRasterizerDiscard() { return nprimitivesGeneratedQueryWithRasterizerDiscard(address()) != 0; }
     /** indicates whether the implementation supports this query with a non-zero index in {@link EXTTransformFeedback#vkCmdBeginQueryIndexedEXT CmdBeginQueryIndexedEXT}. */

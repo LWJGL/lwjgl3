@@ -39,7 +39,7 @@ val EXT_fragment_shader_interlock = "EXTFragmentShaderInterlock".nativeClassVK("
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_fragment_shader_interlock]%20@pdaniell-nv%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_fragment_shader_interlock%20extension%3E%3E">pdaniell-nv</a></li>
+                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_fragment_shader_interlock]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_fragment_shader_interlock%20extension*">pdaniell-nv</a></li>
             </ul></dd>
         </dl>
 
@@ -51,7 +51,7 @@ val EXT_fragment_shader_interlock = "EXTFragmentShaderInterlock".nativeClassVK("
             <dt><b>Interactions and External Dependencies</b></dt>
             <dd><ul>
                 <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_fragment_shader_interlock.html">{@code SPV_EXT_fragment_shader_interlock}</a></li>
-                <li>This extension provides API support for <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_fragment_shader_interlock.txt">{@code GL_ARB_fragment_shader_interlock}</a></li>
+                <li>This extension provides API support for <a target="_blank" href="https://registry.khronos.org/OpenGL/extensions/ARB/ARB_fragment_shader_interlock.txt">{@code GL_ARB_fragment_shader_interlock}</a></li>
             </ul></dd>
 
             <dt><b>Contributors</b></dt>

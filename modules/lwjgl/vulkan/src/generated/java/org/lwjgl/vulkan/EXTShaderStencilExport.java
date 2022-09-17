@@ -25,7 +25,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Dominik Witczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_stencil_export]%20@dominikwitczakamd%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_shader_stencil_export%20extension%3E%3E">dominikwitczakamd</a></li>
+ * <li>Dominik Witczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_stencil_export]%20@dominikwitczakamd%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_shader_stencil_export%20extension*">dominikwitczakamd</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -39,7 +39,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>This extension requires <a target="_blank" href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_shader_stencil_export.html">{@code SPV_EXT_shader_stencil_export}</a></li>
- * <li>This extension provides API support for <a target="_blank" href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_shader_stencil_export.txt">{@code GL_ARB_shader_stencil_export}</a></li>
+ * <li>This extension provides API support for <a target="_blank" href="https://registry.khronos.org/OpenGL/extensions/ARB/ARB_shader_stencil_export.txt">{@code GL_ARB_shader_stencil_export}</a></li>
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>

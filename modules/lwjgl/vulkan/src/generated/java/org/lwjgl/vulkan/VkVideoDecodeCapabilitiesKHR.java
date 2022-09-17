@@ -91,10 +91,6 @@ public class VkVideoDecodeCapabilitiesKHR extends Struct implements NativeResour
     public VkVideoDecodeCapabilitiesKHR sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeCapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkVideoDecodeH264CapabilitiesEXT} value to the {@code pNext} chain. */
-    public VkVideoDecodeCapabilitiesKHR pNext(VkVideoDecodeH264CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoDecodeH265CapabilitiesEXT} value to the {@code pNext} chain. */
-    public VkVideoDecodeCapabilitiesKHR pNext(VkVideoDecodeH265CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     /** Initializes this struct with the specified values. */
     public VkVideoDecodeCapabilitiesKHR set(
@@ -298,10 +294,6 @@ public class VkVideoDecodeCapabilitiesKHR extends Struct implements NativeResour
         public VkVideoDecodeCapabilitiesKHR.Buffer sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR); }
         /** Sets the specified value to the {@link VkVideoDecodeCapabilitiesKHR#pNext} field. */
         public VkVideoDecodeCapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoDecodeCapabilitiesKHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkVideoDecodeH264CapabilitiesEXT} value to the {@code pNext} chain. */
-        public VkVideoDecodeCapabilitiesKHR.Buffer pNext(VkVideoDecodeH264CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoDecodeH265CapabilitiesEXT} value to the {@code pNext} chain. */
-        public VkVideoDecodeCapabilitiesKHR.Buffer pNext(VkVideoDecodeH265CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
 
     }
 

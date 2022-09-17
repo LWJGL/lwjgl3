@@ -80,7 +80,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #vulkanMemoryModelAvailabilityVisibilityChains};
  *     VkBool32 {@link #shaderOutputViewportIndex};
  *     VkBool32 {@link #shaderOutputLayer};
- *     VkBool32 {@link #subgroupBroadcastDynamicId};
+ *     VkBool32 subgroupBroadcastDynamicId;
  * }</code></pre>
  */
 public class VkPhysicalDeviceVulkan12Features extends Struct implements NativeResource {
@@ -287,7 +287,7 @@ public class VkPhysicalDeviceVulkan12Features extends Struct implements NativeRe
     /** indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on buffers. */
     @NativeType("VkBool32")
     public boolean shaderBufferInt64Atomics() { return nshaderBufferInt64Atomics(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedInt64Atomics() { return nshaderSharedInt64Atomics(address()) != 0; }
     /** indicates whether 16-bit floats (halfs) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Float16} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Float16} SPIR-V capability: Declaring and using 16-bit floats in the {@code Private}, {@code Workgroup} (for non-Block variables), and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled. */
@@ -296,7 +296,7 @@ public class VkPhysicalDeviceVulkan12Features extends Struct implements NativeRe
     /** indicates whether 8-bit integers (signed and unsigned) are supported in shader code. This also indicates whether shader modules <b>can</b> declare the {@code Int8} capability. However, this only enables a subset of the storage classes that SPIR-V allows for the {@code Int8} SPIR-V capability: Declaring and using 8-bit integers in the {@code Private}, {@code Workgroup} (for non-Block variables), and {@code Function} storage classes is enabled, while declaring them in the interface storage classes (e.g., {@code UniformConstant}, {@code Uniform}, {@code StorageBuffer}, {@code Input}, {@code Output}, and {@code PushConstant}) is not enabled. */
     @NativeType("VkBool32")
     public boolean shaderInt8() { return nshaderInt8(address()) != 0; }
-    /** indicates whether the implementation supports the minimum set of descriptor indexing features as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-requirements">Feature Requirements</a> section. Enabling the {@code descriptorIndexing} member when {@link VK10#vkCreateDevice CreateDevice} is called does not imply the other minimum descriptor indexing features are also enabled. Those other descriptor indexing features <b>must</b> be enabled individually as needed by the application. */
+    /** indicates whether the implementation supports the minimum set of descriptor indexing features as described in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-requirements">Feature Requirements</a> section. Enabling the {@code descriptorIndexing} member when {@link VK10#vkCreateDevice CreateDevice} is called does not imply the other minimum descriptor indexing features are also enabled. Those other descriptor indexing features <b>must</b> be enabled individually as needed by the application. */
     @NativeType("VkBool32")
     public boolean descriptorIndexing() { return ndescriptorIndexing(address()) != 0; }
     /** indicates whether arrays of input attachments <b>can</b> be indexed by dynamically uniform integer expressions in shader code. If this feature is not enabled, resources with a descriptor type of {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT} <b>must</b> be indexed only by constant integral expressions when aggregated into arrays in shader code. This also indicates whether shader modules <b>can</b> declare the {@code InputAttachmentArrayDynamicIndexing} capability. */
@@ -359,19 +359,19 @@ public class VkPhysicalDeviceVulkan12Features extends Struct implements NativeRe
     /** indicates whether the implementation supports the SPIR-V {@code RuntimeDescriptorArray} capability. If this feature is not enabled, descriptors <b>must</b> not be declared in runtime arrays. */
     @NativeType("VkBool32")
     public boolean runtimeDescriptorArray() { return nruntimeDescriptorArray(address()) != 0; }
-    /** indicates whether the implementation supports a minimum set of required formats supporting min/max filtering as defined by the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-filterMinmaxSingleComponentFormats-minimum-requirements">{@code filterMinmaxSingleComponentFormats}</a> property minimum requirements. If this feature is not enabled, then {@link VkSamplerReductionModeCreateInfo} <b>must</b> only use {@link VK12#VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE}. */
+    /** indicates whether the implementation supports a minimum set of required formats supporting min/max filtering as defined by the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-filterMinmaxSingleComponentFormats-minimum-requirements">{@code filterMinmaxSingleComponentFormats}</a> property minimum requirements. If this feature is not enabled, then {@link VkSamplerReductionModeCreateInfo} <b>must</b> only use {@link VK12#VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE}. */
     @NativeType("VkBool32")
     public boolean samplerFilterMinmax() { return nsamplerFilterMinmax(address()) != 0; }
-    /** indicates that the implementation supports the layout of resource blocks in shaders using <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-alignment-requirements">scalar alignment</a>. */
+    /** indicates that the implementation supports the layout of resource blocks in shaders using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-alignment-requirements">scalar alignment</a>. */
     @NativeType("VkBool32")
     public boolean scalarBlockLayout() { return nscalarBlockLayout(address()) != 0; }
     /** indicates that the implementation supports specifying the image view for attachments at render pass begin time via {@link VkRenderPassAttachmentBeginInfo}. */
     @NativeType("VkBool32")
     public boolean imagelessFramebuffer() { return nimagelessFramebuffer(address()) != 0; }
-    /** indicates that the implementation supports the same layouts for uniform buffers as for storage and other kinds of buffers. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-resources-standard-layout">Standard Buffer Layout</a>. */
+    /** indicates that the implementation supports the same layouts for uniform buffers as for storage and other kinds of buffers. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#interfaces-resources-standard-layout">Standard Buffer Layout</a>. */
     @NativeType("VkBool32")
     public boolean uniformBufferStandardLayout() { return nuniformBufferStandardLayout(address()) != 0; }
-    /** a boolean specifying whether subgroup operations can use 8-bit integer, 16-bit integer, 64-bit integer, 16-bit floating-point, and vectors of these types in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-group-operations">group operations</a> with <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-scope-subgroup">subgroup scope</a>, if the implementation supports the types. */
+    /** a boolean specifying whether subgroup operations can use 8-bit integer, 16-bit integer, 64-bit integer, 16-bit floating-point, and vectors of these types in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-group-operations">group operations</a> with <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-scope-subgroup">subgroup scope</a>, if the implementation supports the types. */
     @NativeType("VkBool32")
     public boolean shaderSubgroupExtendedTypes() { return nshaderSubgroupExtendedTypes(address()) != 0; }
     /** indicates whether the implementation supports a {@link VkImageMemoryBarrier} for a depth/stencil image with only one of {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} or {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT} set, and whether {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL} can be used. */
@@ -392,22 +392,22 @@ public class VkPhysicalDeviceVulkan12Features extends Struct implements NativeRe
     /** indicates that the implementation supports the {@code bufferDeviceAddress} , {@code rayTracingPipeline} and {@code rayQuery} features for logical devices created with multiple physical devices. If this feature is not supported, buffer and acceleration structure addresses <b>must</b> not be queried on a logical device created with more than one physical device. */
     @NativeType("VkBool32")
     public boolean bufferDeviceAddressMultiDevice() { return nbufferDeviceAddressMultiDevice(address()) != 0; }
-    /** indicates whether the Vulkan Memory Model is supported, as defined in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-model">Vulkan Memory Model</a>. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModel} capability. */
+    /** indicates whether the Vulkan Memory Model is supported, as defined in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-model">Vulkan Memory Model</a>. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModel} capability. */
     @NativeType("VkBool32")
     public boolean vulkanMemoryModel() { return nvulkanMemoryModel(address()) != 0; }
     /** indicates whether the Vulkan Memory Model can use {@code Device} scope synchronization. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelDeviceScope} capability. */
     @NativeType("VkBool32")
     public boolean vulkanMemoryModelDeviceScope() { return nvulkanMemoryModelDeviceScope(address()) != 0; }
-    /** indicates whether the Vulkan Memory Model can use <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-model-availability-visibility">availability and visibility chains</a> with more than one element. */
+    /** indicates whether the Vulkan Memory Model can use <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-model-availability-visibility">availability and visibility chains</a> with more than one element. */
     @NativeType("VkBool32")
     public boolean vulkanMemoryModelAvailabilityVisibilityChains() { return nvulkanMemoryModelAvailabilityVisibilityChains(address()) != 0; }
-    /** indicates whether the implementation supports the {@code ShaderViewportIndex} SPIR-V capability enabling variables decorated with the {@code ViewportIndex} built-in to be exported from vertex or tessellation evaluation shaders. If this feature is not enabled, the {@code ViewportIndex} built-in decoration <b>must</b> not be used on outputs in vertex or tessellation evaluation shaders. */
+    /** indicates whether the implementation supports the {@code ShaderViewportIndex} SPIR-V capability enabling variables decorated with the {@code ViewportIndex} built-in to be exported from mesh, vertex or tessellation evaluation shaders. If this feature is not enabled, the {@code ViewportIndex} built-in decoration <b>must</b> not be used on outputs in mesh, vertex or tessellation evaluation shaders. */
     @NativeType("VkBool32")
     public boolean shaderOutputViewportIndex() { return nshaderOutputViewportIndex(address()) != 0; }
-    /** indicates whether the implementation supports the {@code ShaderLayer} SPIR-V capability enabling variables decorated with the {@code Layer} built-in to be exported from vertex or tessellation evaluation shaders. If this feature is not enabled, the {@code Layer} built-in decoration <b>must</b> not be used on outputs in vertex or tessellation evaluation shaders. */
+    /** indicates whether the implementation supports the {@code ShaderLayer} SPIR-V capability enabling variables decorated with the {@code Layer} built-in to be exported from mesh, vertex or tessellation evaluation shaders. If this feature is not enabled, the {@code Layer} built-in decoration <b>must</b> not be used on outputs in mesh, vertex or tessellation evaluation shaders. */
     @NativeType("VkBool32")
     public boolean shaderOutputLayer() { return nshaderOutputLayer(address()) != 0; }
-    /** if {@link VK10#VK_TRUE TRUE}, the “Id” operand of {@code OpGroupNonUniformBroadcast} <b>can</b> be dynamically uniform within a subgroup, and the “Index” operand of {@code OpGroupNonUniformQuadBroadcast} <b>can</b> be dynamically uniform within the derivative group. If it is {@link VK10#VK_FALSE FALSE}, these operands <b>must</b> be constants. */
+    /** @return the value of the {@code subgroupBroadcastDynamicId} field. */
     @NativeType("VkBool32")
     public boolean subgroupBroadcastDynamicId() { return nsubgroupBroadcastDynamicId(address()) != 0; }
 
@@ -509,7 +509,7 @@ public class VkPhysicalDeviceVulkan12Features extends Struct implements NativeRe
     public VkPhysicalDeviceVulkan12Features shaderOutputViewportIndex(@NativeType("VkBool32") boolean value) { nshaderOutputViewportIndex(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@link #shaderOutputLayer} field. */
     public VkPhysicalDeviceVulkan12Features shaderOutputLayer(@NativeType("VkBool32") boolean value) { nshaderOutputLayer(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #subgroupBroadcastDynamicId} field. */
+    /** Sets the specified value to the {@code subgroupBroadcastDynamicId} field. */
     public VkPhysicalDeviceVulkan12Features subgroupBroadcastDynamicId(@NativeType("VkBool32") boolean value) { nsubgroupBroadcastDynamicId(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -1122,7 +1122,7 @@ public class VkPhysicalDeviceVulkan12Features extends Struct implements NativeRe
         /** @return the value of the {@link VkPhysicalDeviceVulkan12Features#shaderOutputLayer} field. */
         @NativeType("VkBool32")
         public boolean shaderOutputLayer() { return VkPhysicalDeviceVulkan12Features.nshaderOutputLayer(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan12Features#subgroupBroadcastDynamicId} field. */
+        /** @return the value of the {@code subgroupBroadcastDynamicId} field. */
         @NativeType("VkBool32")
         public boolean subgroupBroadcastDynamicId() { return VkPhysicalDeviceVulkan12Features.nsubgroupBroadcastDynamicId(address()) != 0; }
 
@@ -1224,7 +1224,7 @@ public class VkPhysicalDeviceVulkan12Features extends Struct implements NativeRe
         public VkPhysicalDeviceVulkan12Features.Buffer shaderOutputViewportIndex(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Features.nshaderOutputViewportIndex(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceVulkan12Features#shaderOutputLayer} field. */
         public VkPhysicalDeviceVulkan12Features.Buffer shaderOutputLayer(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Features.nshaderOutputLayer(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan12Features#subgroupBroadcastDynamicId} field. */
+        /** Sets the specified value to the {@code subgroupBroadcastDynamicId} field. */
         public VkPhysicalDeviceVulkan12Features.Buffer subgroupBroadcastDynamicId(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan12Features.nsubgroupBroadcastDynamicId(address(), value ? 1 : 0); return this; }
 
     }

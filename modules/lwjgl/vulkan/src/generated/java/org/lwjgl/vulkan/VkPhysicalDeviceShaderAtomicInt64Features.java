@@ -92,7 +92,7 @@ public class VkPhysicalDeviceShaderAtomicInt64Features extends Struct implements
     /** indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on buffers. */
     @NativeType("VkBool32")
     public boolean shaderBufferInt64Atomics() { return nshaderBufferInt64Atomics(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedInt64Atomics() { return nshaderSharedInt64Atomics(address()) != 0; }
 

@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code flags} <b>must</b> be 0</li>
  * </ul>
  * 
- * <p>If {@code timeout} is 0, {@code vkAcquireProfilingLockKHR} will not block while attempting to acquire the profling lock. If {@code timeout} is {@code UINT64_MAX}, the function will not return until the profiling lock was acquired.</p>
+ * <p>If {@code timeout} is 0, {@code vkAcquireProfilingLockKHR} will not block while attempting to acquire the profiling lock. If {@code timeout} is {@code UINT64_MAX}, the function will not return until the profiling lock was acquired.</p>
  * 
  * <h5>See Also</h5>
  * 

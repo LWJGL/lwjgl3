@@ -13,7 +13,7 @@ import static org.lwjgl.system.JNI.*;
 /**
  * In a Vulkan implementation that is layered on top of Metal on Apple device platforms, this extension provides the ability to import and export the underlying Metal objects associated with specific Vulkan objects.
  * 
- * <p>As detailed in the <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_metal_objects.asciidoc">extension proposal document</a>, this extension adds one new Vulkan command, {@link #vkExportMetalObjectsEXT ExportMetalObjectsEXT}, to export underlying Metal objects from Vulkan objects, and supports importing the appropriate existing Metal objects when creating Vulkan objects of types {@code VkDeviceMemory}, {@code VkImage}, {@code VkSemaphore}, and {@code VkEvent},</p>
+ * <p>As detailed in the <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_metal_objects.adoc">extension proposal document</a>, this extension adds one new Vulkan command, {@link #vkExportMetalObjectsEXT ExportMetalObjectsEXT}, to export underlying Metal objects from Vulkan objects, and supports importing the appropriate existing Metal objects when creating Vulkan objects of types {@code VkDeviceMemory}, {@code VkImage}, {@code VkSemaphore}, and {@code VkEvent},</p>
  * 
  * <p>The intent is that this extension will be advertised and supported only on implementations that are layered on top of Metal on Apple device platforms.</p>
  * 
@@ -34,10 +34,10 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Bill Hollings <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_metal_objects]%20@billhollings%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_metal_objects%20extension%3E%3E">billhollings</a></li>
+ * <li>Bill Hollings <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_metal_objects]%20@billhollings%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_metal_objects%20extension*">billhollings</a></li>
  * </ul></dd>
  * <dt><b>Extension Proposal</b></dt>
- * <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_metal_objects.asciidoc">VK_EXT_metal_objects</a></dd>
+ * <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_metal_objects.adoc">VK_EXT_metal_objects</a></dd>
  * </dl>
  * 
  * <h5>Other Extension Metadata</h5>

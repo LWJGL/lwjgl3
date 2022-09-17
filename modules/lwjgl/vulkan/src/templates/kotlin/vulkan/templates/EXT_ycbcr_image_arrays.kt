@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_ycbcr_image_arrays = "EXTYcbcrImageArrays".nativeClassVK("EXT_ycbcr_image_arrays", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension allows images of a format that requires <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">Y′C<sub>B</sub>C<sub>R</sub> conversion</a> to be created with multiple array layers, which is otherwise restricted.
+        This extension allows images of a format that requires <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">Y′C<sub>B</sub>C<sub>R</sub> conversion</a> to be created with multiple array layers, which is otherwise restricted.
 
         <h5>VK_EXT_ycbcr_image_arrays</h5>
         <dl>
@@ -35,7 +35,7 @@ val EXT_ycbcr_image_arrays = "EXTYcbcrImageArrays".nativeClassVK("EXT_ycbcr_imag
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_ycbcr_image_arrays]%20@pdaniell-nv%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_ycbcr_image_arrays%20extension%3E%3E">pdaniell-nv</a></li>
+                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_ycbcr_image_arrays]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_ycbcr_image_arrays%20extension*">pdaniell-nv</a></li>
             </ul></dd>
         </dl>
 

@@ -11,9 +11,11 @@ import vulkan.*
 val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_encode_queue", type = "device", postfix = "KHR") {
     documentation =
         """
-        <ul>
-            <li>#CmdEncodeVideoKHR()</li>
-        </ul>
+        This extension builds upon the {@link KHRVideoQueue VK_KHR_video_queue} extension by adding common APIs specific to video encoding and thus enabling implementations to expose queue families supporting video encode operations.
+
+        More specifically, it adds video encode specific capabilities and a new command buffer command that allows recording video encode operations against a video session.
+
+        This extension is to be used in conjunction with other codec specific video encode extensions that enable encoding video sequences of specific video compression standards.
 
         <h5>VK_KHR_video_encode_queue</h5>
         <dl>
@@ -27,26 +29,26 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
             <dd>300</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>5</dd>
+            <dd>7</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires support for Vulkan 1.0</li>
                 <li>Requires {@link KHRVideoQueue VK_KHR_video_queue} to be enabled for any device-level functionality</li>
                 <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2} to be enabled for any device-level functionality</li>
-                <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
+                <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Ahmed Abdelkhalek <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_encode_queue]%20@aabdelkh%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_video_encode_queue%20extension%3E%3E">aabdelkh</a></li>
+                <li>Ahmed Abdelkhalek <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_encode_queue]%20@aabdelkh%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_video_encode_queue%20extension*">aabdelkh</a></li>
             </ul></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-03-31</dd>
+            <dd>2022-08-12</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -55,7 +57,6 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
             <dd><ul>
                 <li>Ahmed Abdelkhalek, AMD</li>
                 <li>Damien Kessler, NVIDIA</li>
-                <li>Daniel Rakos, AMD</li>
                 <li>George Hao, AMD</li>
                 <li>Jake Beju, AMD</li>
                 <li>Peter Fang, AMD</li>
@@ -64,6 +65,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
                 <li>Thomas J. Meier, NVIDIA</li>
                 <li>Tony Zlatinski, NVIDIA</li>
                 <li>Yang Liu, AMD</li>
+                <li>Daniel Rakos, RasterGrid</li>
             </ul></dd>
         </dl>
         """
@@ -71,7 +73,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."5"
+        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."7"
     )
 
     StringConstant(
@@ -99,13 +101,21 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         "STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR".."1000299000",
         "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR".."1000299001",
         "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR".."1000299002",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR".."1000299003"
+        "STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR".."1000299003",
+        "STRUCTURE_TYPE_VIDEO_ENCODE_USAGE_INFO_KHR".."1000299004"
     )
 
     EnumConstant(
         "Extends {@code VkQueueFlagBits}.",
 
         "QUEUE_VIDEO_ENCODE_BIT_KHR".enum(0x00000040)
+    )
+
+    EnumConstant(
+        "Extends {@code VkVideoCodingControlFlagBitsKHR}.",
+
+        "VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR".enum(0x00000002),
+        "VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR".enum(0x00000004)
     )
 
     EnumConstant(
@@ -153,20 +163,6 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
     EnumConstant(
         """
-        VkVideoEncodeFlagBitsKHR - Video Encode Command Flags
-
-        <h5>Description</h5>
-        <ul>
-            <li>#VIDEO_ENCODE_RESERVED_0_BIT_KHR The current version of the specification has reserved this value for future use.</li>
-        </ul>
-        """,
-
-        "VIDEO_ENCODE_DEFAULT_KHR".."0",
-        "VIDEO_ENCODE_RESERVED_0_BIT_KHR".enum(0x00000001)
-    )
-
-    EnumConstant(
-        """
         VkVideoEncodeCapabilityFlagBitsKHR - Video encode capability flags
 
         <h5>Description</h5>
@@ -175,7 +171,6 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         </ul>
         """,
 
-        "VIDEO_ENCODE_CAPABILITY_DEFAULT_KHR".."0",
         "VIDEO_ENCODE_CAPABILITY_PRECEDING_EXTERNALLY_ENCODED_BYTES_BIT_KHR".enum(0x00000001)
     )
 
@@ -201,14 +196,72 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
     EnumConstant(
         """
-        VkVideoEncodeRateControlFlagBitsKHR - Reserved for future use
+        VkVideoEncodeUsageFlagBitsKHR - Video encode usage flags
 
         <h5>Description</h5>
-        {@code VkVideoEncodeRateControlFlagBitsKHR} defines bits which may be set in a {@code VkVideoEncodeRateControlFlagsKHR} value, but is currently unused.
+        <ul>
+            <li>#VIDEO_ENCODE_USAGE_TRANSCODING_BIT_KHR specifies that video encoding is intended to be used in conjunction with video decoding to transcode a video bitstream with the same and/or different codecs.</li>
+            <li>#VIDEO_ENCODE_USAGE_STREAMING_BIT_KHR specifies that video encoding is intended to be used to produce a video bitstream that is expected to be sent as a continuous flow over network.</li>
+            <li>#VIDEO_ENCODE_USAGE_RECORDING_BIT_KHR specifies that video encoding is intended to be used for real-time recording for offline consumption.</li>
+            <li>#VIDEO_ENCODE_USAGE_CONFERENCING_BIT_KHR specifies that video encoding is intended to be used in a video conferencing scenario.</li>
+        </ul>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        There are no restrictions on the combination of bits that <b>can</b> be specified by the application. However, applications <b>should</b> use reasonable combinations in order for the implementation to be able to select the most appropriate mode of operation for the particular use case.
+        </div>
         """,
 
-        "VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR".."0",
-        "VIDEO_ENCODE_RATE_CONTROL_RESERVED_0_BIT_KHR".enum(0x00000001)
+        "VIDEO_ENCODE_USAGE_DEFAULT_KHR".."0",
+        "VIDEO_ENCODE_USAGE_TRANSCODING_BIT_KHR".enum(0x00000001),
+        "VIDEO_ENCODE_USAGE_STREAMING_BIT_KHR".enum(0x00000002),
+        "VIDEO_ENCODE_USAGE_RECORDING_BIT_KHR".enum(0x00000004),
+        "VIDEO_ENCODE_USAGE_CONFERENCING_BIT_KHR".enum(0x00000008)
+    )
+
+    EnumConstant(
+        """
+        VkVideoEncodeContentFlagBitsKHR - Video encode content flags
+
+        <h5>Description</h5>
+        <ul>
+            <li>#VIDEO_ENCODE_CONTENT_CAMERA_BIT_KHR specifies that video encoding is intended to be used to encode camera content.</li>
+            <li>#VIDEO_ENCODE_CONTENT_DESKTOP_BIT_KHR specifies that video encoding is intended to be used to encode desktop content.</li>
+            <li>#VIDEO_ENCODE_CONTENT_RENDERED_BIT_KHR specified that video encoding is intended to be used to encode rendered (e.g. game) content.</li>
+        </ul>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        There are no restrictions on the combination of bits that <b>can</b> be specified by the application. However, applications <b>should</b> use reasonable combinations in order for the implementation to be able to select the most appropriate mode of operation for the particular content type.
+        </div>
+        """,
+
+        "VIDEO_ENCODE_CONTENT_DEFAULT_KHR".."0",
+        "VIDEO_ENCODE_CONTENT_CAMERA_BIT_KHR".enum(0x00000001),
+        "VIDEO_ENCODE_CONTENT_DESKTOP_BIT_KHR".enum(0x00000002),
+        "VIDEO_ENCODE_CONTENT_RENDERED_BIT_KHR".enum(0x00000004)
+    )
+
+    EnumConstant(
+        """
+        VkVideoEncodeTuningModeKHR - Video encode tuning mode
+
+        <h5>Description</h5>
+        <ul>
+            <li>#VIDEO_ENCODE_TUNING_MODE_DEFAULT_KHR specifies the default tuning mode.</li>
+            <li>#VIDEO_ENCODE_TUNING_MODE_HIGH_QUALITY_KHR specifies that video encoding is tuned for high quality. When using this tuning mode, the implementation <b>may</b> compromise the latency of video encoding operations to improve quality.</li>
+            <li>#VIDEO_ENCODE_TUNING_MODE_LOW_LATENCY_KHR specifies that video encoding is tuned for low latency. When using this tuning mode, the implementation <b>may</b> compromise quality to increase the performance and lower the latency of video encode operations.</li>
+            <li>#VIDEO_ENCODE_TUNING_MODE_ULTRA_LOW_LATENCY_KHR specifies that video encoding is tuned for ultra-low latency. When using this tuning mode, the implementation <b>may</b> compromise quality to maximimize the performance and minimize the latency of video encoding operations.</li>
+            <li>#VIDEO_ENCODE_TUNING_MODE_LOSSLESS_KHR specifies that video encoding is tuned for lossless encoding. When using this tuning mode, video encode operations produce lossless output.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkVideoEncodeUsageInfoKHR
+        """,
+
+        "VIDEO_ENCODE_TUNING_MODE_DEFAULT_KHR".."0",
+        "VIDEO_ENCODE_TUNING_MODE_HIGH_QUALITY_KHR".."1",
+        "VIDEO_ENCODE_TUNING_MODE_LOW_LATENCY_KHR".."2",
+        "VIDEO_ENCODE_TUNING_MODE_ULTRA_LOW_LATENCY_KHR".."3",
+        "VIDEO_ENCODE_TUNING_MODE_LOSSLESS_KHR".."4"
     )
 
     void(
@@ -228,9 +281,10 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>{@code pEncodeInfo} <b>must</b> be a valid pointer to a valid ##VkVideoEncodeInfoKHR structure</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support encode operations</li>
             <li>This command <b>must</b> only be called outside of a render pass instance</li>
+            <li>This command <b>must</b> only be called inside of a video coding scope</li>
             <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
         </ul>
 
@@ -241,8 +295,8 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary</td><td>Outside</td><td>Encode</td></tr></tbody>
+            <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <tbody><tr><td>Primary</td><td>Outside</td><td>Inside</td><td>Encode</td><td>Action</td></tr></tbody>
         </table>
 
         <h5>See Also</h5>

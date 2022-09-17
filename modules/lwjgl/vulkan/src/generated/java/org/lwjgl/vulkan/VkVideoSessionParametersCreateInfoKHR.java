@@ -30,6 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR}</li>
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264SessionParametersCreateInfoEXT}, {@link VkVideoDecodeH265SessionParametersCreateInfoEXT}, {@link VkVideoEncodeH264SessionParametersCreateInfoEXT}, or {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+ * <li>{@code flags} <b>must</b> be 0</li>
  * <li>If {@code videoSessionParametersTemplate} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code videoSessionParametersTemplate} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
  * <li>{@code videoSession} <b>must</b> be a valid {@code VkVideoSessionKHR} handle</li>
  * <li>If {@code videoSessionParametersTemplate} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code videoSession}</li>
@@ -46,6 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkVideoSessionParametersCreateInfoKHR {
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
+ *     VkVideoSessionParametersCreateFlagsKHR {@link #flags};
  *     VkVideoSessionParametersKHR {@link #videoSessionParametersTemplate};
  *     VkVideoSessionKHR {@link #videoSession};
  * }</code></pre>
@@ -62,6 +64,7 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
     public static final int
         STYPE,
         PNEXT,
+        FLAGS,
         VIDEOSESSIONPARAMETERSTEMPLATE,
         VIDEOSESSION;
 
@@ -69,6 +72,7 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
+            __member(4),
             __member(8),
             __member(8)
         );
@@ -78,8 +82,9 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        VIDEOSESSIONPARAMETERSTEMPLATE = layout.offsetof(2);
-        VIDEOSESSION = layout.offsetof(3);
+        FLAGS = layout.offsetof(2);
+        VIDEOSESSIONPARAMETERSTEMPLATE = layout.offsetof(3);
+        VIDEOSESSION = layout.offsetof(4);
     }
 
     /**
@@ -101,6 +106,9 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
+    /** reserved for future use. */
+    @NativeType("VkVideoSessionParametersCreateFlagsKHR")
+    public int flags() { return nflags(address()); }
     /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a valid handle to a {@code VkVideoSessionParametersKHR} object. If this parameter represents a valid handle, then the underlying Video Session Parameters object will be used as a template for constructing the new video session parameters object. All of the template object’s current parameters will be inherited by the new object in such a case. Optionally, some of the template’s parameters can be updated or new parameters added to the newly constructed object via the extension-specific parameters. */
     @NativeType("VkVideoSessionParametersKHR")
     public long videoSessionParametersTemplate() { return nvideoSessionParametersTemplate(address()); }
@@ -122,6 +130,8 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
     public VkVideoSessionParametersCreateInfoKHR pNext(VkVideoEncodeH264SessionParametersCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265SessionParametersCreateInfoEXT} value to the {@code pNext} chain. */
     public VkVideoSessionParametersCreateInfoKHR pNext(VkVideoEncodeH265SessionParametersCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Sets the specified value to the {@link #flags} field. */
+    public VkVideoSessionParametersCreateInfoKHR flags(@NativeType("VkVideoSessionParametersCreateFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #videoSessionParametersTemplate} field. */
     public VkVideoSessionParametersCreateInfoKHR videoSessionParametersTemplate(@NativeType("VkVideoSessionParametersKHR") long value) { nvideoSessionParametersTemplate(address(), value); return this; }
     /** Sets the specified value to the {@link #videoSession} field. */
@@ -131,11 +141,13 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
     public VkVideoSessionParametersCreateInfoKHR set(
         int sType,
         long pNext,
+        int flags,
         long videoSessionParametersTemplate,
         long videoSession
     ) {
         sType(sType);
         pNext(pNext);
+        flags(flags);
         videoSessionParametersTemplate(videoSessionParametersTemplate);
         videoSession(videoSession);
 
@@ -271,6 +283,8 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionParametersCreateInfoKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoSessionParametersCreateInfoKHR.PNEXT); }
+    /** Unsafe version of {@link #flags}. */
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionParametersCreateInfoKHR.FLAGS); }
     /** Unsafe version of {@link #videoSessionParametersTemplate}. */
     public static long nvideoSessionParametersTemplate(long struct) { return UNSAFE.getLong(null, struct + VkVideoSessionParametersCreateInfoKHR.VIDEOSESSIONPARAMETERSTEMPLATE); }
     /** Unsafe version of {@link #videoSession}. */
@@ -280,6 +294,8 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionParametersCreateInfoKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoSessionParametersCreateInfoKHR.PNEXT, value); }
+    /** Unsafe version of {@link #flags(int) flags}. */
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionParametersCreateInfoKHR.FLAGS, value); }
     /** Unsafe version of {@link #videoSessionParametersTemplate(long) videoSessionParametersTemplate}. */
     public static void nvideoSessionParametersTemplate(long struct, long value) { UNSAFE.putLong(null, struct + VkVideoSessionParametersCreateInfoKHR.VIDEOSESSIONPARAMETERSTEMPLATE, value); }
     /** Unsafe version of {@link #videoSession(long) videoSession}. */
@@ -329,6 +345,9 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
         /** @return the value of the {@link VkVideoSessionParametersCreateInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoSessionParametersCreateInfoKHR.npNext(address()); }
+        /** @return the value of the {@link VkVideoSessionParametersCreateInfoKHR#flags} field. */
+        @NativeType("VkVideoSessionParametersCreateFlagsKHR")
+        public int flags() { return VkVideoSessionParametersCreateInfoKHR.nflags(address()); }
         /** @return the value of the {@link VkVideoSessionParametersCreateInfoKHR#videoSessionParametersTemplate} field. */
         @NativeType("VkVideoSessionParametersKHR")
         public long videoSessionParametersTemplate() { return VkVideoSessionParametersCreateInfoKHR.nvideoSessionParametersTemplate(address()); }
@@ -350,6 +369,8 @@ public class VkVideoSessionParametersCreateInfoKHR extends Struct implements Nat
         public VkVideoSessionParametersCreateInfoKHR.Buffer pNext(VkVideoEncodeH264SessionParametersCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265SessionParametersCreateInfoEXT} value to the {@code pNext} chain. */
         public VkVideoSessionParametersCreateInfoKHR.Buffer pNext(VkVideoEncodeH265SessionParametersCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Sets the specified value to the {@link VkVideoSessionParametersCreateInfoKHR#flags} field. */
+        public VkVideoSessionParametersCreateInfoKHR.Buffer flags(@NativeType("VkVideoSessionParametersCreateFlagsKHR") int value) { VkVideoSessionParametersCreateInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionParametersCreateInfoKHR#videoSessionParametersTemplate} field. */
         public VkVideoSessionParametersCreateInfoKHR.Buffer videoSessionParametersTemplate(@NativeType("VkVideoSessionParametersKHR") long value) { VkVideoSessionParametersCreateInfoKHR.nvideoSessionParametersTemplate(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionParametersCreateInfoKHR#videoSession} field. */

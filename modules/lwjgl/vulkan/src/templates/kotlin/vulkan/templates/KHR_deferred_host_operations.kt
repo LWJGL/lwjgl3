@@ -142,7 +142,7 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Josh Barczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_deferred_host_operations]%20@jbarczak%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_deferred_host_operations%20extension%3E%3E">jbarczak</a></li>
+                <li>Josh Barczak <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_deferred_host_operations]%20@jbarczak%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_deferred_host_operations%20extension*">jbarczak</a></li>
             </ul></dd>
         </dl>
 
@@ -236,7 +236,7 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
         """,
 
         VkDevice("device", "the device which owns {@code operation}."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
         Check(1)..VkDeferredOperationKHR.p("pDeferredOperation", "a pointer to a handle in which the created {@code VkDeferredOperationKHR} is returned.")
     )
 
@@ -280,7 +280,7 @@ val KHR_deferred_host_operations = "KHRDeferredHostOperations".nativeClassVK("KH
 
         VkDevice("device", "the device which owns {@code operation}."),
         VkDeferredOperationKHR("operation", "the completed operation to be destroyed."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     uint32_t(

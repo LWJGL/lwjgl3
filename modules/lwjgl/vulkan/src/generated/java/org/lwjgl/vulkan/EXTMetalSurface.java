@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Dzmitry Malyshau <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_metal_surface]%20@kvark%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_metal_surface%20extension%3E%3E">kvark</a></li>
+ * <li>Dzmitry Malyshau <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_metal_surface]%20@kvark%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_metal_surface%20extension*">kvark</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -123,7 +123,7 @@ public class EXTMetalSurface {
      *
      * @param instance    the instance with which to associate the surface.
      * @param pCreateInfo a pointer to a {@link VkMetalSurfaceCreateInfoEXT} structure specifying parameters affecting the creation of the surface object.
-     * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
+     * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a>).
      * @param pSurface    a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.
      */
     @NativeType("VkResult")

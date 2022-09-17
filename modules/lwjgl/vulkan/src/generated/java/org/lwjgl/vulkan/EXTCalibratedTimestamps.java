@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_calibrated_timestamps]%20@drakos-amd%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_calibrated_timestamps%20extension%3E%3E">drakos-amd</a></li>
+ * <li>Daniel Rakos <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_calibrated_timestamps]%20@drakos-amd%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_calibrated_timestamps%20extension*">drakos-amd</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -75,7 +75,7 @@ public class EXTCalibratedTimestamps {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} or {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} and are defined to be incrementing according to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-timestampPeriod">{@code timestampPeriod}</a> of the device.</li>
+     * <li>{@link #VK_TIME_DOMAIN_DEVICE_EXT TIME_DOMAIN_DEVICE_EXT} specifies the device time domain. Timestamp values in this time domain use the same units and are comparable with device timestamp values captured using {@link VK10#vkCmdWriteTimestamp CmdWriteTimestamp} or {@link VK13#vkCmdWriteTimestamp2 CmdWriteTimestamp2} and are defined to be incrementing according to the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-timestampPeriod">{@code timestampPeriod}</a> of the device.</li>
      * <li>{@link #VK_TIME_DOMAIN_CLOCK_MONOTONIC_EXT TIME_DOMAIN_CLOCK_MONOTONIC_EXT} specifies the CLOCK_MONOTONIC time domain available on POSIX platforms. Timestamp values in this time domain are in units of nanoseconds and are comparable with platform timestamp values captured using the POSIX clock_gettime API as computed by this example:</li>
      * </ul>
      * 
@@ -209,7 +209,7 @@ public class EXTCalibratedTimestamps {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>In order to be able to correlate the time a particular operation took place at on timelines of different time domains (e.g. a device operation vs a host operation), Vulkan allows querying calibrated timestamps from multiple time domains.</p>
+     * <p>In order to be able to correlate the time a particular operation took place at on timelines of different time domains (e.g. a device operation vs. a host operation), Vulkan allows querying calibrated timestamps from multiple time domains.</p>
      * 
      * <p>To query calibrated timestamps from a set of time domains, call:</p>
      * 
@@ -225,7 +225,7 @@ public class EXTCalibratedTimestamps {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>The maximum deviation <b>may</b> vary between calls to {@code vkGetCalibratedTimestampsEXT} even for the same set of time domains due to implementation and platform specific reasons. It is the application’s responsibility to assess whether the returned maximum deviation makes the timestamp values suitable for any particular purpose and <b>can</b> choose to re-issue the timestamp calibration call pursuing a lower devation value.</p>
+     * <p>The maximum deviation <b>may</b> vary between calls to {@code vkGetCalibratedTimestampsEXT} even for the same set of time domains due to implementation and platform specific reasons. It is the application’s responsibility to assess whether the returned maximum deviation makes the timestamp values suitable for any particular purpose and <b>can</b> choose to re-issue the timestamp calibration call pursuing a lower deviation value.</p>
      * </div>
      * 
      * <p>Calibrated timestamp values <b>can</b> be extrapolated to estimate future coinciding timestamp values, however, depending on the nature of the time domains and other properties of the platform extrapolating values over a sufficiently long period of time <b>may</b> no longer be accurate enough to fit any particular purpose, so applications are expected to re-calibrate the timestamps on a regular basis.</p>

@@ -22,7 +22,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>The value of {@code rasterizationSamples} <b>must</b> not be {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}</li>
- * <li>If added to the {@code pNext} chain of {@link VkSubpassDescription2}, each render pass attachment in {@link VkRenderPassCreateInfo2}{@code ::pAttachments} that is referenced by this subpass <b>must</b> have a format that supports the sample count specified in {@code rasterizationSamples}</li>
  * <li>If added to the {@code pNext} chain of {@link VkRenderingInfo}, each {@code imageView} member of any element of {@link VkRenderingInfo}{@code ::pColorAttachments}, {@link VkRenderingInfo}{@code ::pDepthAttachment}, or {@link VkRenderingInfo}{@code ::pStencilAttachment} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} <b>must</b> have a format that supports the sample count specified in {@code rasterizationSamples}</li>
  * </ul>
  * 
@@ -94,7 +93,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** controls whether multisampled rendering to single-sampled attachments is performed as described <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#multisampled-render-to-single-sampled">below</a>. */
+    /** controls whether multisampled rendering to single-sampled attachments is performed as described <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#multisampled-render-to-single-sampled">below</a>. */
     @NativeType("VkBool32")
     public boolean multisampledRenderToSingleSampledEnable() { return nmultisampledRenderToSingleSampledEnable(address()) != 0; }
     /** a VkSampleCountFlagBits specifying the number of samples used in rasterization. */

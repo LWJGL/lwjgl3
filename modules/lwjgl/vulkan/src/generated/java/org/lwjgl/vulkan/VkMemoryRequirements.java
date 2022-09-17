@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkMemoryRequirements2}, {@link VK10#vkGetBufferMemoryRequirements GetBufferMemoryRequirements}, {@link VK10#vkGetImageMemoryRequirements GetImageMemoryRequirements}</p>
+ * <p>{@link VkMemoryRequirements2}, {@link VkVideoSessionMemoryRequirementsKHR}, {@link VK10#vkGetBufferMemoryRequirements GetBufferMemoryRequirements}, {@link VK10#vkGetImageMemoryRequirements GetImageMemoryRequirements}</p>
  * 
  * <h3>Layout</h3>
  * 

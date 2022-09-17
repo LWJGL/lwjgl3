@@ -119,7 +119,7 @@ public class VkDeviceGroupPresentInfoKHR extends Struct implements NativeResourc
     /** zero or the number of elements in {@code pDeviceMasks}. */
     @NativeType("uint32_t")
     public int swapchainCount() { return nswapchainCount(address()); }
-    /** a pointer to an array of device masks, one for each element of {@link VkPresentInfoKHR}::pSwapchains. */
+    /** a pointer to an array of device masks, one for each element of {@link VkPresentInfoKHR}{@code ::pSwapchains}. */
     @Nullable
     @NativeType("uint32_t const *")
     public IntBuffer pDeviceMasks() { return npDeviceMasks(address()); }

@@ -60,7 +60,7 @@ val KHR_fragment_shader_barycentric = "KHRFragmentShaderBarycentric".nativeClass
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>
-            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_fragment_shader_barycentric.asciidoc">VK_KHR_fragment_shader_barycentric</a></dd>
+            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_fragment_shader_barycentric.adoc">VK_KHR_fragment_shader_barycentric</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>

@@ -20,11 +20,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
+ * <p>Resources bound as {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} will have the robustness behavior that covers its active descriptor type.</p>
+ * 
  * <p>The scope of the effect of {@link VkPipelineRobustnessCreateInfoEXT} depends on which structure’s {@code pNext} chain it is included in.</p>
  * 
  * <ul>
- * <li>{@link VkGraphicsPipelineCreateInfo}, {@link VkComputePipelineCreateInfo}, {@link VkRayTracingPipelineCreateInfoKHR} The robustness behavior described by {@link VkPipelineRobustnessCreateInfoEXT} applies to all accesses through this pipeline</li>
- * <li>{@link VkPipelineShaderStageCreateInfo} The robustness behavior described by {@link VkPipelineRobustnessCreateInfoEXT} applies to all accesses emanating from the shader code of this shader stage</li>
+ * <li>{@link VkGraphicsPipelineCreateInfo}, {@link VkRayTracingPipelineCreateInfoKHR}, {@link VkComputePipelineCreateInfo}: The robustness behavior described by {@link VkPipelineRobustnessCreateInfoEXT} applies to all accesses through this pipeline</li>
+ * <li>{@link VkPipelineShaderStageCreateInfo}: The robustness behavior described by {@link VkPipelineRobustnessCreateInfoEXT} applies to all accesses emanating from the shader code of this shader stage</li>
  * </ul>
  * 
  * <p>If {@link VkPipelineRobustnessCreateInfoEXT} is specified for both a pipeline and a pipeline stage, the {@link VkPipelineRobustnessCreateInfoEXT} specified for the pipeline stage will take precedence.</p>
@@ -32,15 +34,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code storageBuffers} <b>must</b> be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code uniformBuffers} <b>must</b> be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code vertexInputs} <b>must</b> be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code images} <b>must</b> be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_DEVICE_DEFAULT_EXT PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_DEVICE_DEFAULT_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustImageAccess">{@code robustImageAccess}</a> feature is not supported, {@code images} <b>must</b> not be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_EXT PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is not supported, {@code storageBuffers} <b>must</b> not be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is not supported, {@code uniformBuffers} <b>must</b> not be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is not supported, {@code vertexInputs} <b>must</b> not be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustImageAccess2">{@code robustImageAccess2}</a> feature is not supported, {@code images} <b>must</b> not be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_2_EXT PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_2_EXT}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code storageBuffers} <b>must</b> be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code uniformBuffers} <b>must</b> be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code vertexInputs} <b>must</b> be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code images} <b>must</b> be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_DEVICE_DEFAULT_EXT PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_DEVICE_DEFAULT_EXT}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustImageAccess">{@code robustImageAccess}</a> feature is not supported, {@code images} <b>must</b> not be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_EXT PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_EXT}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is not supported, {@code storageBuffers} <b>must</b> not be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is not supported, {@code uniformBuffers} <b>must</b> not be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is not supported, {@code vertexInputs} <b>must</b> not be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustImageAccess2">{@code robustImageAccess2}</a> feature is not supported, {@code images} <b>must</b> not be {@link EXTPipelineRobustness#VK_PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_2_EXT PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_2_EXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -57,12 +59,12 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <pre><code>
  * struct VkPipelineRobustnessCreateInfoEXT {
- *     VkStructureType sType;
- *     void const * pNext;
- *     VkPipelineRobustnessBufferBehaviorEXT storageBuffers;
- *     VkPipelineRobustnessBufferBehaviorEXT uniformBuffers;
- *     VkPipelineRobustnessBufferBehaviorEXT vertexInputs;
- *     VkPipelineRobustnessImageBehaviorEXT images;
+ *     VkStructureType {@link #sType};
+ *     void const * {@link #pNext};
+ *     VkPipelineRobustnessBufferBehaviorEXT {@link #storageBuffers};
+ *     VkPipelineRobustnessBufferBehaviorEXT {@link #uniformBuffers};
+ *     VkPipelineRobustnessBufferBehaviorEXT {@link #vertexInputs};
+ *     VkPipelineRobustnessImageBehaviorEXT {@link #images};
  * }</code></pre>
  */
 public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeResource {
@@ -116,38 +118,62 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code sType} field. */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** @return the value of the {@code storageBuffers} field. */
+    /**
+     * sets the behaviour of out of bounds accesses made to resources bound as:
+     * 
+     * <ul>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}</li>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}</li>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC}</li>
+     * </ul>
+     */
     @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
     public int storageBuffers() { return nstorageBuffers(address()); }
-    /** @return the value of the {@code uniformBuffers} field. */
+    /**
+     * describes the behaviour of out of bounds accesses made to resources bound as:
+     * 
+     * <ul>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}</li>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}</li>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC}</li>
+     * <li>{@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}</li>
+     * </ul>
+     */
     @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
     public int uniformBuffers() { return nuniformBuffers(address()); }
-    /** @return the value of the {@code vertexInputs} field. */
+    /** describes the behaviour of out of bounds accesses made to vertex input attributes */
     @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
     public int vertexInputs() { return nvertexInputs(address()); }
-    /** @return the value of the {@code images} field. */
+    /**
+     * describes the behaviour of out of bounds accesses made to resources bound as:
+     * 
+     * <ul>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}</li>
+     * <li>{@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}</li>
+     * </ul>
+     */
     @NativeType("VkPipelineRobustnessImageBehaviorEXT")
     public int images() { return nimages(address()); }
 
-    /** Sets the specified value to the {@code sType} field. */
+    /** Sets the specified value to the {@link #sType} field. */
     public VkPipelineRobustnessCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTPipelineRobustness#VK_STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT} value to the {@code sType} field. */
+    /** Sets the {@link EXTPipelineRobustness#VK_STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT} value to the {@link #sType} field. */
     public VkPipelineRobustnessCreateInfoEXT sType$Default() { return sType(EXTPipelineRobustness.VK_STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkPipelineRobustnessCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@code storageBuffers} field. */
+    /** Sets the specified value to the {@link #storageBuffers} field. */
     public VkPipelineRobustnessCreateInfoEXT storageBuffers(@NativeType("VkPipelineRobustnessBufferBehaviorEXT") int value) { nstorageBuffers(address(), value); return this; }
-    /** Sets the specified value to the {@code uniformBuffers} field. */
+    /** Sets the specified value to the {@link #uniformBuffers} field. */
     public VkPipelineRobustnessCreateInfoEXT uniformBuffers(@NativeType("VkPipelineRobustnessBufferBehaviorEXT") int value) { nuniformBuffers(address(), value); return this; }
-    /** Sets the specified value to the {@code vertexInputs} field. */
+    /** Sets the specified value to the {@link #vertexInputs} field. */
     public VkPipelineRobustnessCreateInfoEXT vertexInputs(@NativeType("VkPipelineRobustnessBufferBehaviorEXT") int value) { nvertexInputs(address(), value); return this; }
-    /** Sets the specified value to the {@code images} field. */
+    /** Sets the specified value to the {@link #images} field. */
     public VkPipelineRobustnessCreateInfoEXT images(@NativeType("VkPipelineRobustnessImageBehaviorEXT") int value) { nimages(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -358,38 +384,38 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code sType} field. */
+        /** @return the value of the {@link VkPipelineRobustnessCreateInfoEXT#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineRobustnessCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkPipelineRobustnessCreateInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineRobustnessCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@code storageBuffers} field. */
+        /** @return the value of the {@link VkPipelineRobustnessCreateInfoEXT#storageBuffers} field. */
         @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
         public int storageBuffers() { return VkPipelineRobustnessCreateInfoEXT.nstorageBuffers(address()); }
-        /** @return the value of the {@code uniformBuffers} field. */
+        /** @return the value of the {@link VkPipelineRobustnessCreateInfoEXT#uniformBuffers} field. */
         @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
         public int uniformBuffers() { return VkPipelineRobustnessCreateInfoEXT.nuniformBuffers(address()); }
-        /** @return the value of the {@code vertexInputs} field. */
+        /** @return the value of the {@link VkPipelineRobustnessCreateInfoEXT#vertexInputs} field. */
         @NativeType("VkPipelineRobustnessBufferBehaviorEXT")
         public int vertexInputs() { return VkPipelineRobustnessCreateInfoEXT.nvertexInputs(address()); }
-        /** @return the value of the {@code images} field. */
+        /** @return the value of the {@link VkPipelineRobustnessCreateInfoEXT#images} field. */
         @NativeType("VkPipelineRobustnessImageBehaviorEXT")
         public int images() { return VkPipelineRobustnessCreateInfoEXT.nimages(address()); }
 
-        /** Sets the specified value to the {@code sType} field. */
+        /** Sets the specified value to the {@link VkPipelineRobustnessCreateInfoEXT#sType} field. */
         public VkPipelineRobustnessCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRobustnessCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTPipelineRobustness#VK_STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT} value to the {@code sType} field. */
+        /** Sets the {@link EXTPipelineRobustness#VK_STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT} value to the {@link VkPipelineRobustnessCreateInfoEXT#sType} field. */
         public VkPipelineRobustnessCreateInfoEXT.Buffer sType$Default() { return sType(EXTPipelineRobustness.VK_STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkPipelineRobustnessCreateInfoEXT#pNext} field. */
         public VkPipelineRobustnessCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRobustnessCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@code storageBuffers} field. */
+        /** Sets the specified value to the {@link VkPipelineRobustnessCreateInfoEXT#storageBuffers} field. */
         public VkPipelineRobustnessCreateInfoEXT.Buffer storageBuffers(@NativeType("VkPipelineRobustnessBufferBehaviorEXT") int value) { VkPipelineRobustnessCreateInfoEXT.nstorageBuffers(address(), value); return this; }
-        /** Sets the specified value to the {@code uniformBuffers} field. */
+        /** Sets the specified value to the {@link VkPipelineRobustnessCreateInfoEXT#uniformBuffers} field. */
         public VkPipelineRobustnessCreateInfoEXT.Buffer uniformBuffers(@NativeType("VkPipelineRobustnessBufferBehaviorEXT") int value) { VkPipelineRobustnessCreateInfoEXT.nuniformBuffers(address(), value); return this; }
-        /** Sets the specified value to the {@code vertexInputs} field. */
+        /** Sets the specified value to the {@link VkPipelineRobustnessCreateInfoEXT#vertexInputs} field. */
         public VkPipelineRobustnessCreateInfoEXT.Buffer vertexInputs(@NativeType("VkPipelineRobustnessBufferBehaviorEXT") int value) { VkPipelineRobustnessCreateInfoEXT.nvertexInputs(address(), value); return this; }
-        /** Sets the specified value to the {@code images} field. */
+        /** Sets the specified value to the {@link VkPipelineRobustnessCreateInfoEXT#images} field. */
         public VkPipelineRobustnessCreateInfoEXT.Buffer images(@NativeType("VkPipelineRobustnessImageBehaviorEXT") int value) { VkPipelineRobustnessCreateInfoEXT.nimages(address(), value); return this; }
 
     }

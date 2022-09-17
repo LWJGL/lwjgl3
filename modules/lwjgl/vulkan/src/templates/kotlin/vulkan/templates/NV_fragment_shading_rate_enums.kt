@@ -35,7 +35,7 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_fragment_shading_rate_enums]%20@nvpbrown%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_fragment_shading_rate_enums%20extension%3E%3E">nvpbrown</a></li>
+                <li>Pat Brown <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_fragment_shading_rate_enums]%20@nvpbrown%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_fragment_shading_rate_enums%20extension*">nvpbrown</a></li>
             </ul></dd>
         </dl>
 
@@ -136,7 +136,7 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
         Set pipeline fragment shading rate dynamically for a command buffer using enums.
 
         <h5>C Specification</h5>
-        To <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the pipeline fragment shading rate and combiner operation, call:
+        To <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the pipeline fragment shading rate and combiner operation, call:
 
         <pre><code>
 ￿void vkCmdSetFragmentShadingRateEnumNV(
@@ -153,14 +153,14 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a> is not enabled, {@code shadingRate} <b>must</b> be #FRAGMENT_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV</li>
-            <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-supersampleFragmentShadingRates">{@code supersampleFragmentShadingRates}</a> is not enabled, {@code shadingRate} <b>must</b> not be #FRAGMENT_SHADING_RATE_2_INVOCATIONS_PER_PIXEL_NV, #FRAGMENT_SHADING_RATE_4_INVOCATIONS_PER_PIXEL_NV, #FRAGMENT_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV, or #FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV</li>
-            <li>If <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-noInvocationFragmentShadingRates">{@code noInvocationFragmentShadingRates}</a> is not enabled, {@code shadingRate} <b>must</b> not be #FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV</li>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-fragmentShadingRateEnums">{@code fragmentShadingRateEnums}</a> feature <b>must</b> be enabled</li>
-            <li>One of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a>, <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate}</a>, or <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> features <b>must</b> be enabled</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate}</a> feature is not enabled, {@code combinerOps}[0] <b>must</b> be #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> feature is not enabled, {@code combinerOps}[1] <b>must</b> be #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR</li>
-            <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-fragmentShadingRateNonTrivialCombinerOps">{@code fragmentSizeNonTrivialCombinerOps}</a> limit is not supported, elements of {@code combinerOps} <b>must</b> be either #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR or #FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR</li>
+            <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a> is not enabled, {@code shadingRate} <b>must</b> be #FRAGMENT_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV</li>
+            <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-supersampleFragmentShadingRates">{@code supersampleFragmentShadingRates}</a> is not enabled, {@code shadingRate} <b>must</b> not be #FRAGMENT_SHADING_RATE_2_INVOCATIONS_PER_PIXEL_NV, #FRAGMENT_SHADING_RATE_4_INVOCATIONS_PER_PIXEL_NV, #FRAGMENT_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV, or #FRAGMENT_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV</li>
+            <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-noInvocationFragmentShadingRates">{@code noInvocationFragmentShadingRates}</a> is not enabled, {@code shadingRate} <b>must</b> not be #FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV</li>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-fragmentShadingRateEnums">{@code fragmentShadingRateEnums}</a> feature <b>must</b> be enabled</li>
+            <li>One of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a>, <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate}</a>, or <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> features <b>must</b> be enabled</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate}</a> feature is not enabled, {@code combinerOps}[0] <b>must</b> be #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> feature is not enabled, {@code combinerOps}[1] <b>must</b> be #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-fragmentShadingRateNonTrivialCombinerOps">{@code fragmentSizeNonTrivialCombinerOps}</a> limit is not supported, elements of {@code combinerOps} <b>must</b> be either #FRAGMENT_SHADING_RATE_COMBINER_OP_KEEP_KHR or #FRAGMENT_SHADING_RATE_COMBINER_OP_REPLACE_KHR</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -168,8 +168,9 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
             <li>{@code shadingRate} <b>must</b> be a valid {@code VkFragmentShadingRateNV} value</li>
             <li>Any given element of {@code combinerOps} <b>must</b> be a valid {@code VkFragmentShadingRateCombinerOpKHR} value</li>
-            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+            <li>This command <b>must</b> only be called outside of a video coding scope</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -180,13 +181,13 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
 
         <h5>Command Properties</h5>
         <table class="lwjgl">
-            <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Graphics</td></tr></tbody>
+            <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
         </table>
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
         VkFragmentShadingRateNV("shadingRate", "specifies a {@code VkFragmentShadingRateNV} enum indicating the pipeline fragment shading rate for subsequent drawing commands."),
-        Check(2)..VkFragmentShadingRateCombinerOpKHR.const.p("combinerOps", "specifies a {@code VkFragmentShadingRateCombinerOpKHR} determining how the <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-fragment-shading-rate-pipeline\">pipeline</a>, <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-fragment-shading-rate-primitive\">primitive</a>, and <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-fragment-shading-rate-attachment\">attachment shading rates</a> are <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-fragment-shading-rate-combining\">combined</a> for fragments generated by subsequent drawing commands.")
+        Check(2)..VkFragmentShadingRateCombinerOpKHR.const.p("combinerOps", "specifies a {@code VkFragmentShadingRateCombinerOpKHR} determining how the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-fragment-shading-rate-pipeline\">pipeline</a>, <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-fragment-shading-rate-primitive\">primitive</a>, and <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-fragment-shading-rate-attachment\">attachment shading rates</a> are <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#primsrast-fragment-shading-rate-combining\">combined</a> for fragments generated by subsequent drawing commands.")
     )
 }

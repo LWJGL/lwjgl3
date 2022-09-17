@@ -144,19 +144,19 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
     /** indicates whether shaders <b>can</b> perform 64-bit floating-point min and max atomic operations on storage buffers. */
     @NativeType("VkBool32")
     public boolean shaderBufferFloat64AtomicMinMax() { return nshaderBufferFloat64AtomicMinMax(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 16-bit floating-point load, store and exchange atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 16-bit floating-point load, store and exchange atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat16Atomics() { return nshaderSharedFloat16Atomics(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 16-bit floating-point add atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 16-bit floating-point add atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat16AtomicAdd() { return nshaderSharedFloat16AtomicAdd(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 16-bit floating-point min and max atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 16-bit floating-point min and max atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat16AtomicMinMax() { return nshaderSharedFloat16AtomicMinMax(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 32-bit floating-point min and max atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 32-bit floating-point min and max atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat32AtomicMinMax() { return nshaderSharedFloat32AtomicMinMax(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 64-bit floating-point min and max atomic operations on shared memory. */
+    /** indicates whether shaders <b>can</b> perform 64-bit floating-point min and max atomic operations on shared and payload memory. */
     @NativeType("VkBool32")
     public boolean shaderSharedFloat64AtomicMinMax() { return nshaderSharedFloat64AtomicMinMax(address()) != 0; }
     /** indicates whether shaders <b>can</b> perform 32-bit floating-point min and max atomic image operations. */

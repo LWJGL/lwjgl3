@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If {@code robustBufferAccess2} is enabled then <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> <b>must</b> also be enabled</li>
+ * <li>If {@code robustBufferAccess2} is enabled then <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> <b>must</b> also be enabled</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * {@link #pNext};
  *     VkBool32 {@link #robustBufferAccess2};
  *     VkBool32 {@link #robustImageAccess2};
- *     VkBool32 {@link #nullDescriptor};
+ *     VkBool32 nullDescriptor;
  * }</code></pre>
  */
 public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct implements NativeResource {
@@ -99,13 +99,13 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct implements Na
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether buffer accesses are tightly bounds-checked against the range of the descriptor. Uniform buffers <b>must</b> be bounds-checked to the range of the descriptor, where the range is rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-robustUniformBufferAccessSizeAlignment">robustUniformBufferAccessSizeAlignment</a>. Storage buffers <b>must</b> be bounds-checked to the range of the descriptor, where the range is rounded up to a multiple of <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#limits-robustStorageBufferAccessSizeAlignment">robustStorageBufferAccessSizeAlignment</a>. Out of bounds buffer loads will return zero values, and <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#textures">image load, sample, and atomic operations</a> from texel buffers will have <code>(0,0,1)</code> values <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#textures-conversion-to-rgba">inserted for missing G, B, or A components</a> based on the format. */
+    /** indicates whether buffer accesses are tightly bounds-checked against the range of the descriptor. Uniform buffers <b>must</b> be bounds-checked to the range of the descriptor, where the range is rounded up to a multiple of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-robustUniformBufferAccessSizeAlignment">robustUniformBufferAccessSizeAlignment</a>. Storage buffers <b>must</b> be bounds-checked to the range of the descriptor, where the range is rounded up to a multiple of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-robustStorageBufferAccessSizeAlignment">robustStorageBufferAccessSizeAlignment</a>. Out of bounds buffer loads will return zero values, and <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures">image load, sample, and atomic operations</a> from texel buffers will have <code>(0,0,1)</code> values <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-conversion-to-rgba">inserted for missing G, B, or A components</a> based on the format. */
     @NativeType("VkBool32")
     public boolean robustBufferAccess2() { return nrobustBufferAccess2(address()) != 0; }
-    /** indicates whether image accesses are tightly bounds-checked against the dimensions of the image view. Out of bounds <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#textures">image load, sample, and atomic operations</a> from images will return zero values, with <code>(0,0,1)</code> values <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#textures-conversion-to-rgba">inserted for missing G, B, or A components</a> based on the format. */
+    /** indicates whether image accesses are tightly bounds-checked against the dimensions of the image view. Out of bounds <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures">image load, sample, and atomic operations</a> from images will return zero values, with <code>(0,0,1)</code> values <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-conversion-to-rgba">inserted for missing G, B, or A components</a> based on the format. */
     @NativeType("VkBool32")
     public boolean robustImageAccess2() { return nrobustImageAccess2(address()) != 0; }
-    /** indicates whether descriptors <b>can</b> be written with a {@link VK10#VK_NULL_HANDLE NULL_HANDLE} resource or view, which are considered valid to access and act as if the descriptor were bound to nothing. */
+    /** @return the value of the {@code nullDescriptor} field. */
     @NativeType("VkBool32")
     public boolean nullDescriptor() { return nnullDescriptor(address()) != 0; }
 
@@ -119,7 +119,7 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct implements Na
     public VkPhysicalDeviceRobustness2FeaturesEXT robustBufferAccess2(@NativeType("VkBool32") boolean value) { nrobustBufferAccess2(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@link #robustImageAccess2} field. */
     public VkPhysicalDeviceRobustness2FeaturesEXT robustImageAccess2(@NativeType("VkBool32") boolean value) { nrobustImageAccess2(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #nullDescriptor} field. */
+    /** Sets the specified value to the {@code nullDescriptor} field. */
     public VkPhysicalDeviceRobustness2FeaturesEXT nullDescriptor(@NativeType("VkBool32") boolean value) { nnullDescriptor(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,7 +336,7 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct implements Na
         /** @return the value of the {@link VkPhysicalDeviceRobustness2FeaturesEXT#robustImageAccess2} field. */
         @NativeType("VkBool32")
         public boolean robustImageAccess2() { return VkPhysicalDeviceRobustness2FeaturesEXT.nrobustImageAccess2(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceRobustness2FeaturesEXT#nullDescriptor} field. */
+        /** @return the value of the {@code nullDescriptor} field. */
         @NativeType("VkBool32")
         public boolean nullDescriptor() { return VkPhysicalDeviceRobustness2FeaturesEXT.nnullDescriptor(address()) != 0; }
 
@@ -350,7 +350,7 @@ public class VkPhysicalDeviceRobustness2FeaturesEXT extends Struct implements Na
         public VkPhysicalDeviceRobustness2FeaturesEXT.Buffer robustBufferAccess2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRobustness2FeaturesEXT.nrobustBufferAccess2(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@link VkPhysicalDeviceRobustness2FeaturesEXT#robustImageAccess2} field. */
         public VkPhysicalDeviceRobustness2FeaturesEXT.Buffer robustImageAccess2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRobustness2FeaturesEXT.nrobustImageAccess2(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceRobustness2FeaturesEXT#nullDescriptor} field. */
+        /** Sets the specified value to the {@code nullDescriptor} field. */
         public VkPhysicalDeviceRobustness2FeaturesEXT.Buffer nullDescriptor(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRobustness2FeaturesEXT.nnullDescriptor(address(), value ? 1 : 0); return this; }
 
     }

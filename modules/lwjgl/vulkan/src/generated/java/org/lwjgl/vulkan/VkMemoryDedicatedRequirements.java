@@ -33,7 +33,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>Constraints on the values returned for image resources are:</p>
  * 
  * <ul>
- * <li>{@code requiresDedicatedAllocation} <b>may</b> be {@link VK10#VK_TRUE TRUE} if the {@code pNext} chain of {@link VkImageCreateInfo} for the call to {@link VK10#vkCreateImage CreateImage} used to create the image being queried included a {@link VkExternalMemoryImageCreateInfo} structure, and any of the handle types specified in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} requires dedicated allocation, as reported by {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} in {@link VkExternalImageFormatProperties}{@code ::externalMemoryProperties.externalMemoryFeatures}. Otherwise, {@code requiresDedicatedAllocation} will be {@link VK10#VK_FALSE FALSE}.</li>
+ * <li>{@code requiresDedicatedAllocation} <b>may</b> be {@link VK10#VK_TRUE TRUE} if the {@code pNext} chain of {@link VkImageCreateInfo} for the call to {@link VK10#vkCreateImage CreateImage} used to create the image being queried included a {@link VkExternalMemoryImageCreateInfo} structure, and any of the handle types specified in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} requires dedicated allocation, as reported by {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} in {@link VkExternalImageFormatProperties}{@code ::externalMemoryProperties.externalMemoryFeatures}.</li>
+ * <li>{@code requiresDedicatedAllocation} <b>may</b> be {@link VK10#VK_TRUE TRUE} if the image’s tiling is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}.</li>
+ * <li>{@code requiresDedicatedAllocation} will otherwise be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If {@link VK10#VK_IMAGE_CREATE_SPARSE_BINDING_BIT IMAGE_CREATE_SPARSE_BINDING_BIT} was set in {@link VkImageCreateInfo}{@code ::flags} when {@code image} was created, then both {@code prefersDedicatedAllocation} and {@code requiresDedicatedAllocation} will be {@link VK10#VK_FALSE FALSE}.</li>
  * </ul>
  * 

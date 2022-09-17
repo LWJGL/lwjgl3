@@ -18,10 +18,26 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing the minimum lod of an image view.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@code pNext} chain includes a {@link VkImageViewMinLodCreateInfoEXT} structure, then that structure includes a parameter specifying a value to clamp the minimum LOD value during <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-image-level-selection">Image Level(s) Selection</a>, <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-gather">Texel Gathering</a> and <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-integer-coordinate-operations">Integer Texel Coordinate Operations</a>.</p>
+ * 
+ * <p>If the image view contains {@link VkImageViewMinLodCreateInfoEXT} and it is used as part of a sampling operation:</p>
+ * 
+ * <p><code>minLodFloat<sub>imageView</sub> = minLod</code></p>
+ * 
+ * <p>otherwise:</p>
+ * 
+ * <p><code>minLodFloat<sub>imageView</sub> = 0.0</code></p>
+ * 
+ * <p>An integer variant of this parameter is also defined for sampling operations which access integer mipmap levels:</p>
+ * 
+ * <p><code>minLodInteger<sub>imageView</sub> = ⌊minLodFloat<sub>imageView</sub>⌋</code></p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-minLod">{@code minLod}</a> feature is not enabled, {@code minLod} <b>must</b> be {@code 0.0}.</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-minLod">{@code minLod}</a> feature is not enabled, {@code minLod} <b>must</b> be {@code 0.0}.</li>
  * <li>{@code minLod} <b>must</b> be less or equal to the index of the last mipmap level accessible to the view.</li>
  * </ul>
  * 

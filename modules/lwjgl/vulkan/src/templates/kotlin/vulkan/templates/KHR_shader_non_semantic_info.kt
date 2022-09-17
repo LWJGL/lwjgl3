@@ -14,7 +14,7 @@ val KHR_shader_non_semantic_info = "KHRShaderNonSemanticInfo".nativeClassVK("KHR
         This extension allows the use of the {@code SPV_KHR_non_semantic_info} extension in SPIR-V shader modules.
 
         <h5>Promotion to Vulkan 1.3</h5>
-        Functionality in this extension is included in core Vulkan 1.3 Because the extension has no API controlling its functionality, this results only in a change to the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#spirvenv-extensions-table">SPIR-V Extensions table</a>.
+        Functionality in this extension is included in core Vulkan 1.3 Because the extension has no API controlling its functionality, this results only in a change to the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirvenv-extensions-table">SPIR-V Extensions table</a>.
 
         <h5>VK_KHR_shader_non_semantic_info</h5>
         <dl>
@@ -37,12 +37,12 @@ val KHR_shader_non_semantic_info = "KHRShaderNonSemanticInfo".nativeClassVK("KHR
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
-                <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
+                <li><em>Promoted</em> to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Baldur Karlsson <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_non_semantic_info]%20@baldurk%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shader_non_semantic_info%20extension%3E%3E">baldurk</a></li>
+                <li>Baldur Karlsson <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_non_semantic_info]%20@baldurk%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shader_non_semantic_info%20extension*">baldurk</a></li>
             </ul></dd>
         </dl>
 

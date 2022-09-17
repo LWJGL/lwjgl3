@@ -16,10 +16,16 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
+ * This extension provides common APIs to enable exposing queue families with support for video codec operations by introducing the following new object types and related functionalities:
+ * 
  * <ul>
- * <li>{@code VkVideoSessionKHR}</li>
- * <li>{@code VkVideoSessionParametersKHR}</li>
+ * <li>Video session objects that represent and maintain the state needed to perform video codec operations.</li>
+ * <li>Video session parameters objects that act as a container for codec specific parameters.</li>
  * </ul>
+ * 
+ * <p>In addition, it also introduces query commands that allow applications to determine video coding related capabilities, and command buffer commands that enable recording video coding operations against a video session.</p>
+ * 
+ * <p>This extension is to be used in conjunction with other extensions that enable specific video coding operations.</p>
  * 
  * <h5>VK_KHR_video_queue</h5>
  * 
@@ -31,17 +37,17 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>24</dd>
  * <dt><b>Revision</b></dt>
- * <dd>4</dd>
+ * <dd>5</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires support for Vulkan 1.1</li>
  * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
  * <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2} to be enabled for any device-level functionality</li>
- * <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
+ * <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_queue]%20@tzlatinski%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_video_queue%20extension%3E%3E">tzlatinski</a></li>
+ * <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_queue]%20@tzlatinski%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_video_queue%20extension*">tzlatinski</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -49,7 +55,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2022-05-30</dd>
+ * <dd>2022-08-11</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -68,7 +74,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class KHRVideoQueue {
 
     /** The extension specification version. */
-    public static final int VK_KHR_VIDEO_QUEUE_SPEC_VERSION = 4;
+    public static final int VK_KHR_VIDEO_QUEUE_SPEC_VERSION = 5;
 
     /** The extension name. */
     public static final String VK_KHR_VIDEO_QUEUE_EXTENSION_NAME = "VK_KHR_video_queue";
@@ -79,43 +85,43 @@ public class KHRVideoQueue {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR STRUCTURE_TYPE_VIDEO_PROFILE_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_BIND_MEMORY_KHR STRUCTURE_TYPE_VIDEO_BIND_MEMORY_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_INFO_KHR STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_INFO_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_SESSION_MEMORY_REQUIREMENTS_KHR STRUCTURE_TYPE_VIDEO_SESSION_MEMORY_REQUIREMENTS_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR STRUCTURE_TYPE_VIDEO_PROFILES_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_INFO_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_QUEUE_FAMILY_VIDEO_PROPERTIES_KHR STRUCTURE_TYPE_QUEUE_FAMILY_VIDEO_PROPERTIES_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_PROFILE_LIST_INFO_KHR STRUCTURE_TYPE_VIDEO_PROFILE_LIST_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR}</li>
      * </ul>
      */
     public static final int
-        VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR                                 = 1000023000,
-        VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR                            = 1000023001,
-        VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR                        = 1000023002,
-        VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR                   = 1000023003,
-        VK_STRUCTURE_TYPE_VIDEO_BIND_MEMORY_KHR                             = 1000023004,
-        VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR                     = 1000023005,
-        VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR          = 1000023006,
-        VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR          = 1000023007,
-        VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR                       = 1000023008,
-        VK_STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR                         = 1000023009,
-        VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR                     = 1000023010,
-        VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR                          = 1000023011,
-        VK_STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR               = 1000023012,
-        VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR                                = 1000023013,
-        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR             = 1000023014,
-        VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR                       = 1000023015,
-        VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR = 1000023016;
+        VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR                          = 1000023000,
+        VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR                          = 1000023001,
+        VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_INFO_KHR                 = 1000023002,
+        VK_STRUCTURE_TYPE_VIDEO_SESSION_MEMORY_REQUIREMENTS_KHR           = 1000023003,
+        VK_STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR              = 1000023004,
+        VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR                   = 1000023005,
+        VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR        = 1000023006,
+        VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR        = 1000023007,
+        VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR                     = 1000023008,
+        VK_STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR                       = 1000023009,
+        VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR                   = 1000023010,
+        VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_INFO_KHR                   = 1000023011,
+        VK_STRUCTURE_TYPE_QUEUE_FAMILY_VIDEO_PROPERTIES_KHR               = 1000023012,
+        VK_STRUCTURE_TYPE_VIDEO_PROFILE_LIST_INFO_KHR                     = 1000023013,
+        VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR           = 1000023014,
+        VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR                     = 1000023015,
+        VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR = 1000023016;
 
     /**
      * Extends {@code VkObjectType}.
@@ -167,17 +173,18 @@ public class KHRVideoQueue {
      * <p>Each decode or encode codec-specific extension extends this enumeration with the appropriate bit corresponding to the extension’s codec operation:</p>
      * 
      * <ul>
-     * <li>{@link #VK_VIDEO_CODEC_OPERATION_INVALID_BIT_KHR VIDEO_CODEC_OPERATION_INVALID_BIT_KHR} - No video operations are supported for this queue family.</li>
-     * <li>{@link EXTVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT} - H.264 video encode operations are supported by this queue family.</li>
-     * <li>{@link EXTVideoDecodeH264#VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_DECODE_H264_BIT_EXT} - H.264 video decode operations are supported by this queue family.</li>
-     * <li>{@link EXTVideoDecodeH265#VK_VIDEO_CODEC_OPERATION_DECODE_H265_BIT_EXT VIDEO_CODEC_OPERATION_DECODE_H265_BIT_EXT} - H.265 video decode operations are supported by this queue family.</li>
+     * <li>{@link #VK_VIDEO_CODEC_OPERATION_NONE_KHR VIDEO_CODEC_OPERATION_NONE_KHR} indicates no support for any video codec operations.</li>
+     * <li>{@link EXTVideoDecodeH264#VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_DECODE_H264_BIT_EXT} specifies support for H.264 video decode operations.</li>
+     * <li>{@link EXTVideoDecodeH265#VK_VIDEO_CODEC_OPERATION_DECODE_H265_BIT_EXT VIDEO_CODEC_OPERATION_DECODE_H265_BIT_EXT} specifies support for H.265 video decode operations.</li>
+     * <li>{@link EXTVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT} specifies support for H.264 video encode operations.</li>
+     * <li>{@link EXTVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT} specifies support for H.265 video encode operations.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkVideoProfileKHR}</p>
+     * <p>{@link VkVideoProfileInfoKHR}</p>
      */
-    public static final int VK_VIDEO_CODEC_OPERATION_INVALID_BIT_KHR = 0;
+    public static final int VK_VIDEO_CODEC_OPERATION_NONE_KHR = 0;
 
     /**
      * VkVideoChromaSubsamplingFlagBitsKHR - Video chroma subsampling
@@ -194,11 +201,11 @@ public class KHRVideoQueue {
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #VK_VIDEO_CHROMA_SUBSAMPLING_INVALID_BIT_KHR VIDEO_CHROMA_SUBSAMPLING_INVALID_BIT_KHR}</li>
+     * <li>{@link #VK_VIDEO_CHROMA_SUBSAMPLING_INVALID_KHR VIDEO_CHROMA_SUBSAMPLING_INVALID_KHR}</li>
      * </ul>
      */
     public static final int
-        VK_VIDEO_CHROMA_SUBSAMPLING_INVALID_BIT_KHR    = 0,
+        VK_VIDEO_CHROMA_SUBSAMPLING_INVALID_KHR        = 0,
         VK_VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR = 0x1,
         VK_VIDEO_CHROMA_SUBSAMPLING_420_BIT_KHR        = 0x2,
         VK_VIDEO_CHROMA_SUBSAMPLING_422_BIT_KHR        = 0x4,
@@ -249,48 +256,21 @@ public class KHRVideoQueue {
      * <ul>
      * <li>{@link #VK_VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR} - create the video session for use with protected video content</li>
      * </ul>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_VIDEO_SESSION_CREATE_DEFAULT_KHR VIDEO_SESSION_CREATE_DEFAULT_KHR}</li>
-     * </ul>
      */
-    public static final int
-        VK_VIDEO_SESSION_CREATE_DEFAULT_KHR               = 0,
-        VK_VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR = 0x1;
+    public static final int VK_VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR = 0x1;
 
     /**
-     * VkVideoCodingControlFlagBitsKHR - Video Coding Control Command Flags
+     * VkVideoCodingControlFlagBitsKHR - Video coding control flags
      * 
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_VIDEO_CODING_CONTROL_DEFAULT_KHR VIDEO_CODING_CONTROL_DEFAULT_KHR} indicates a request for the coding control paramaters to be applied to the current state of the bound video session.</li>
-     * <li>{@link #VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR} indicates a request for the bound video session device context to be reset before the coding control parameters are applied.</li>
-     * </ul>
-     * 
-     * <p>A newly created video session <b>must</b> be reset before use for video decode or encode operations. The reset operation returns all session DPB slots to the unused state (see <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#video-session-dpb-slot-states">DPB Slot States</a>). For encode sessions, the reset operation returns rate control configuration to implementation default settings. After decode or encode operations are performed on a session, the reset operation <b>may</b> be used to return the video session device context to the same initial state as after the reset of a newly created video session. This <b>may</b> be used when different video sequences are processed with the same session.</p>
-     */
-    public static final int
-        VK_VIDEO_CODING_CONTROL_DEFAULT_KHR   = 0,
-        VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR = 0x1;
-
-    /**
-     * VkVideoCodingQualityPresetFlagBitsKHR - Video codec profile types
-     * 
-     * <h5>Description</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_VIDEO_CODING_QUALITY_PRESET_NORMAL_BIT_KHR VIDEO_CODING_QUALITY_PRESET_NORMAL_BIT_KHR} defines normal decode case.</li>
-     * <li>{@link #VK_VIDEO_CODING_QUALITY_PRESET_POWER_BIT_KHR VIDEO_CODING_QUALITY_PRESET_POWER_BIT_KHR} defines power efficient case.</li>
-     * <li>{@link #VK_VIDEO_CODING_QUALITY_PRESET_QUALITY_BIT_KHR VIDEO_CODING_QUALITY_PRESET_QUALITY_BIT_KHR} defines quality focus case.</li>
+     * <li>{@link #VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR} indicates a request for the bound video session to be reset before other coding control parameters are applied.</li>
+     * <li>{@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR} indicates that the coding control parameters include video encode rate control parameters (see {@link VkVideoEncodeRateControlInfoKHR}).</li>
+     * <li>{@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR} indicates that the coding control parameters include video encode rate control layer parameters (see {@link VkVideoEncodeRateControlLayerInfoKHR}).</li>
      * </ul>
      */
-    public static final int
-        VK_VIDEO_CODING_QUALITY_PRESET_NORMAL_BIT_KHR  = 0x1,
-        VK_VIDEO_CODING_QUALITY_PRESET_POWER_BIT_KHR   = 0x2,
-        VK_VIDEO_CODING_QUALITY_PRESET_QUALITY_BIT_KHR = 0x4;
+    public static final int VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR = 0x1;
 
     /**
      * VkQueryResultStatusKHR - Specific status codes for operations
@@ -333,14 +313,14 @@ public class KHRVideoQueue {
      * <pre><code>
      * VkResult vkGetPhysicalDeviceVideoCapabilitiesKHR(
      *     VkPhysicalDevice                            physicalDevice,
-     *     const VkVideoProfileKHR*                    pVideoProfile,
+     *     const VkVideoProfileInfoKHR*                pVideoProfile,
      *     VkVideoCapabilitiesKHR*                     pCapabilities);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
      * <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-     * <li>{@code pVideoProfile} <b>must</b> be a valid pointer to a valid {@link VkVideoProfileKHR} structure</li>
+     * <li>{@code pVideoProfile} <b>must</b> be a valid pointer to a valid {@link VkVideoProfileInfoKHR} structure</li>
      * <li>{@code pCapabilities} <b>must</b> be a valid pointer to a {@link VkVideoCapabilitiesKHR} structure</li>
      * </ul>
      * 
@@ -364,14 +344,14 @@ public class KHRVideoQueue {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkVideoCapabilitiesKHR}, {@link VkVideoProfileKHR}</p>
+     * <p>{@link VkVideoCapabilitiesKHR}, {@link VkVideoProfileInfoKHR}</p>
      *
      * @param physicalDevice the physical device whose video decode or encode capabilities will be queried.
-     * @param pVideoProfile  a pointer to a {@link VkVideoProfileKHR} structure with a chained codec-operation specific video profile structure.
+     * @param pVideoProfile  a pointer to a {@link VkVideoProfileInfoKHR} structure with a chained codec-operation specific video profile structure.
      * @param pCapabilities  a pointer to a {@link VkVideoCapabilitiesKHR} structure in which the capabilities are returned.
      */
     @NativeType("VkResult")
-    public static int vkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkVideoProfileKHR const *") VkVideoProfileKHR pVideoProfile, @NativeType("VkVideoCapabilitiesKHR *") VkVideoCapabilitiesKHR pCapabilities) {
+    public static int vkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, @NativeType("VkVideoProfileInfoKHR const *") VkVideoProfileInfoKHR pVideoProfile, @NativeType("VkVideoCapabilitiesKHR *") VkVideoCapabilitiesKHR pCapabilities) {
         return nvkGetPhysicalDeviceVideoCapabilitiesKHR(physicalDevice, pVideoProfile.address(), pCapabilities.address());
     }
 
@@ -421,11 +401,11 @@ public class KHRVideoQueue {
      * <p>For most use cases, only decode or encode related usage flags are going to be specified. For a use case such as transcode, if the image were to be shared between decode and encode session(s), then both decode and encode related usage flags <b>can</b> be set.</p>
      * </div>
      * 
-     * <p>Video format properties are always queried with respect to a specific set of video profiles, as defined by the {@link VkVideoProfileKHR} structure. These are specified by chaining the {@link VkVideoProfilesKHR} structure to {@code pVideoFormatInfo}.</p>
+     * <p>Video format properties are always queried with respect to a specific set of video profiles, as defined by the {@link VkVideoProfileInfoKHR} structure. These are specified by chaining the {@link VkVideoProfileListInfoKHR} structure to {@code pVideoFormatInfo}.</p>
      * 
      * <p>For most use cases, the images are used by a single video session and a single video profile is provided. For a use case such as transcode, where a decode session output image <b>can</b> be used as encode input in one or more encode sessions, multiple video profiles corresponding to the video sessions that will share the image <b>must</b> be provided.</p>
      * 
-     * <p>If any of the profiles specified via {@link VkVideoProfilesKHR}{@code ::pProfiles} are not supported, then {@code vkGetPhysicalDeviceVideoFormatPropertiesKHR} returns one of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#video-profile-error-codes">video-profile-specific error codes</a>. Furthermore, if {@link VkPhysicalDeviceVideoFormatInfoKHR}{@code ::imageUsage} includes any image usage flags not supported by the specified video profiles then {@code vkGetPhysicalDeviceVideoFormatPropertiesKHR} returns {@link #VK_ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR}.</p>
+     * <p>If any of the profiles specified via {@link VkVideoProfileListInfoKHR}{@code ::pProfiles} are not supported, then {@code vkGetPhysicalDeviceVideoFormatPropertiesKHR} returns one of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-profile-error-codes">video-profile-specific error codes</a>. Furthermore, if {@link VkPhysicalDeviceVideoFormatInfoKHR}{@code ::imageUsage} includes any image usage flags not supported by the specified video profiles then {@code vkGetPhysicalDeviceVideoFormatPropertiesKHR} returns {@link #VK_ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR}.</p>
      * 
      * <p>Multiple {@link VkVideoFormatPropertiesKHR} entries <b>may</b> be returned with the same {@code format} member with different {@code componentMapping}, {@code imageType}, or {@code imageTiling} values, as described later.</p>
      * 
@@ -433,9 +413,9 @@ public class KHRVideoQueue {
      * 
      * <p>The application <b>can</b> select the parameters returned in the {@link VkVideoFormatPropertiesKHR} entries and use compatible parameters when creating the input, output, and DPB images. The implementation will report all image creation and usage flags that are valid for images used with the requested video profiles but applications <b>should</b> create images only with those that are necessary for the particular use case.</p>
      * 
-     * <p>Before creating an image, the application <b>can</b> obtain the complete set of supported image format features by calling {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} using parameters derived from the members of one of the reported {@link VkVideoFormatPropertiesKHR} entries and adding the same {@link VkVideoProfilesKHR} structure to the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2}.</p>
+     * <p>Before creating an image, the application <b>can</b> obtain the complete set of supported image format features by calling {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} using parameters derived from the members of one of the reported {@link VkVideoFormatPropertiesKHR} entries and adding the same {@link VkVideoProfileListInfoKHR} structure to the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2}.</p>
      * 
-     * <p>The {@code componentMapping} member of {@link VkVideoFormatPropertiesKHR} defines the ordering of the Y′C<sub>B</sub>C<sub>R</sub> color channels from the perspective of the video codec operations specified in {@link VkVideoProfilesKHR}. For example, if the implementation produces video decode output with the format {@link VK11#VK_FORMAT_G8_B8R8_2PLANE_420_UNORM FORMAT_G8_B8R8_2PLANE_420_UNORM} where the blue and red chrominance channels are swapped then the {@code componentMapping} member of the corresponding {@link VkVideoFormatPropertiesKHR} structure will have the following member values:</p>
+     * <p>The {@code componentMapping} member of {@link VkVideoFormatPropertiesKHR} defines the ordering of the Y′C<sub>B</sub>C<sub>R</sub> color channels from the perspective of the video codec operations specified in {@link VkVideoProfileListInfoKHR}. For example, if the implementation produces video decode output with the format {@link VK11#VK_FORMAT_G8_B8R8_2PLANE_420_UNORM FORMAT_G8_B8R8_2PLANE_420_UNORM} where the blue and red chrominance channels are swapped then the {@code componentMapping} member of the corresponding {@link VkVideoFormatPropertiesKHR} structure will have the following member values:</p>
      * 
      * <pre><code>
      * components.r = VK_COMPONENT_SWIZZLE_B;        // Cb component
@@ -446,7 +426,7 @@ public class KHRVideoQueue {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The {@code pNext} chain of {@code pVideoFormatInfo} <b>must</b> include a valid {@link VkVideoProfilesKHR} structure with {@code profileCount} greater than 0</li>
+     * <li>The {@code pNext} chain of {@code pVideoFormatInfo} <b>must</b> include a valid {@link VkVideoProfileListInfoKHR} structure with {@code profileCount} greater than 0</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -522,6 +502,10 @@ public class KHRVideoQueue {
      *     const VkAllocationCallbacks*                pAllocator,
      *     VkVideoSessionKHR*                          pVideoSession);</code></pre>
      * 
+     * <h5>Description</h5>
+     * 
+     * <p>Video session objects are created in <em>uninitialized</em> state. In order to transition the video session into <em>initial</em> state, the application <b>must</b> issue a {@link #vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} command with the {@code flags} member of {@link VkVideoCodingControlInfoKHR} including {@link #VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR}.</p>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -553,7 +537,7 @@ public class KHRVideoQueue {
      *
      * @param device        the logical device that creates the decode or encode session object.
      * @param pCreateInfo   a pointer to a {@link VkVideoSessionCreateInfoKHR} structure containing parameters specifying the creation of the decode or encode session.
-     * @param pAllocator    controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator    controls host memory allocation as described in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pVideoSession a pointer to a {@code VkVideoSessionKHR} structure specifying the decode or encode video session object which will be created by this function when it returns {@link VK10#VK_SUCCESS SUCCESS}
      */
     @NativeType("VkResult")
@@ -603,7 +587,7 @@ public class KHRVideoQueue {
      *
      * @param device       the device that was used for the creation of the video session.
      * @param videoSession the decode or encode video session to be destroyed.
-     * @param pAllocator   controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator   controls host memory allocation as described in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     public static void vkDestroyVideoSessionKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
         nvkDestroyVideoSessionKHR(device, videoSession, memAddressSafe(pAllocator));
@@ -614,14 +598,14 @@ public class KHRVideoQueue {
     /**
      * Unsafe version of: {@link #vkGetVideoSessionMemoryRequirementsKHR GetVideoSessionMemoryRequirementsKHR}
      *
-     * @param pVideoSessionMemoryRequirementsCount a pointer to an integer related to the number of memory heap requirements available or queried, as described below.
+     * @param pMemoryRequirementsCount a pointer to an integer related to the number of memory binding requirements available or queried, as described below.
      */
-    public static int nvkGetVideoSessionMemoryRequirementsKHR(VkDevice device, long videoSession, long pVideoSessionMemoryRequirementsCount, long pVideoSessionMemoryRequirements) {
+    public static int nvkGetVideoSessionMemoryRequirementsKHR(VkDevice device, long videoSession, long pMemoryRequirementsCount, long pMemoryRequirements) {
         long __functionAddress = device.getCapabilities().vkGetVideoSessionMemoryRequirementsKHR;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(device.address(), videoSession, pVideoSessionMemoryRequirementsCount, pVideoSessionMemoryRequirements, __functionAddress);
+        return callPJPPI(device.address(), videoSession, pMemoryRequirementsCount, pMemoryRequirements, __functionAddress);
     }
 
     /**
@@ -635,20 +619,20 @@ public class KHRVideoQueue {
      * VkResult vkGetVideoSessionMemoryRequirementsKHR(
      *     VkDevice                                    device,
      *     VkVideoSessionKHR                           videoSession,
-     *     uint32_t*                                   pVideoSessionMemoryRequirementsCount,
-     *     VkVideoGetMemoryPropertiesKHR*              pVideoSessionMemoryRequirements);</code></pre>
+     *     uint32_t*                                   pMemoryRequirementsCount,
+     *     VkVideoSessionMemoryRequirementsKHR*        pMemoryRequirements);</code></pre>
      * 
      * <h5>Description</h5>
      * 
-     * <p>If {@code pVideoSessionMemoryRequirements} is {@code NULL}, then the number of memory heap types required for the video session is returned in {@code pVideoSessionMemoryRequirementsCount}. Otherwise, {@code pVideoSessionMemoryRequirementsCount} <b>must</b> point to a variable set by the user with the number of elements in the {@code pVideoSessionMemoryRequirements} array, and on return the variable is overwritten with the number of formats actually written to {@code pVideoSessionMemoryRequirements}. If {@code pVideoSessionMemoryRequirementsCount} is less than the number of memory heap types required for the video session, then at most {@code pVideoSessionMemoryRequirementsCount} elements will be written to {@code pVideoSessionMemoryRequirements}, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned, instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all required memory heap types were returned.</p>
+     * <p>If {@code pMemoryRequirements} is {@code NULL}, then the number of memory bindings required for the video session is returned in {@code pMemoryRequirementsCount}. Otherwise, {@code pMemoryRequirementsCount} <b>must</b> point to a variable set by the user with the number of elements in the {@code pMemoryRequirements} array, and on return the variable is overwritten with the number of memory binding requirements actually written to {@code pMemoryRequirements}. If {@code pMemoryRequirementsCount} is less than the number of memory bindings required for the video session, then at most {@code pMemoryRequirementsCount} elements will be written to {@code pMemoryRequirements}, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned, instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all required memory binding requirements were returned.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>{@code videoSession} <b>must</b> be a valid {@code VkVideoSessionKHR} handle</li>
-     * <li>{@code pVideoSessionMemoryRequirementsCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
-     * <li>If the value referenced by {@code pVideoSessionMemoryRequirementsCount} is not 0, and {@code pVideoSessionMemoryRequirements} is not {@code NULL}, {@code pVideoSessionMemoryRequirements} <b>must</b> be a valid pointer to an array of {@code pVideoSessionMemoryRequirementsCount} {@link VkVideoGetMemoryPropertiesKHR} structures</li>
+     * <li>{@code pMemoryRequirementsCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+     * <li>If the value referenced by {@code pMemoryRequirementsCount} is not 0, and {@code pMemoryRequirements} is not {@code NULL}, {@code pMemoryRequirements} <b>must</b> be a valid pointer to an array of {@code pMemoryRequirementsCount} {@link VkVideoSessionMemoryRequirementsKHR} structures</li>
      * <li>{@code videoSession} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * </ul>
      * 
@@ -668,20 +652,20 @@ public class KHRVideoQueue {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkVideoGetMemoryPropertiesKHR}</p>
+     * <p>{@link VkVideoSessionMemoryRequirementsKHR}</p>
      *
-     * @param device                               the logical device that owns the video session.
-     * @param videoSession                         the video session to query.
-     * @param pVideoSessionMemoryRequirementsCount a pointer to an integer related to the number of memory heap requirements available or queried, as described below.
-     * @param pVideoSessionMemoryRequirements      {@code NULL} or a pointer to an array of {@link VkVideoGetMemoryPropertiesKHR} structures in which the memory heap requirements of the video session are returned.
+     * @param device                   the logical device that owns the video session.
+     * @param videoSession             the video session to query.
+     * @param pMemoryRequirementsCount a pointer to an integer related to the number of memory binding requirements available or queried, as described below.
+     * @param pMemoryRequirements      {@code NULL} or a pointer to an array of {@link VkVideoSessionMemoryRequirementsKHR} structures in which the memory binding requirements of the video session are returned.
      */
     @NativeType("VkResult")
-    public static int vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("uint32_t *") IntBuffer pVideoSessionMemoryRequirementsCount, @Nullable @NativeType("VkVideoGetMemoryPropertiesKHR *") VkVideoGetMemoryPropertiesKHR.Buffer pVideoSessionMemoryRequirements) {
+    public static int vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("uint32_t *") IntBuffer pMemoryRequirementsCount, @Nullable @NativeType("VkVideoSessionMemoryRequirementsKHR *") VkVideoSessionMemoryRequirementsKHR.Buffer pMemoryRequirements) {
         if (CHECKS) {
-            check(pVideoSessionMemoryRequirementsCount, 1);
-            checkSafe(pVideoSessionMemoryRequirements, pVideoSessionMemoryRequirementsCount.get(pVideoSessionMemoryRequirementsCount.position()));
+            check(pMemoryRequirementsCount, 1);
+            checkSafe(pMemoryRequirements, pMemoryRequirementsCount.get(pMemoryRequirementsCount.position()));
         }
-        return nvkGetVideoSessionMemoryRequirementsKHR(device, videoSession, memAddress(pVideoSessionMemoryRequirementsCount), memAddressSafe(pVideoSessionMemoryRequirements));
+        return nvkGetVideoSessionMemoryRequirementsKHR(device, videoSession, memAddress(pMemoryRequirementsCount), memAddressSafe(pMemoryRequirements));
     }
 
     // --- [ vkBindVideoSessionMemoryKHR ] ---
@@ -689,14 +673,14 @@ public class KHRVideoQueue {
     /**
      * Unsafe version of: {@link #vkBindVideoSessionMemoryKHR BindVideoSessionMemoryKHR}
      *
-     * @param videoSessionBindMemoryCount the number of {@code pVideoSessionBindMemories} to be bound.
+     * @param bindSessionMemoryInfoCount the number of elements in {@code pBindSessionMemoryInfos}.
      */
-    public static int nvkBindVideoSessionMemoryKHR(VkDevice device, long videoSession, int videoSessionBindMemoryCount, long pVideoSessionBindMemories) {
+    public static int nvkBindVideoSessionMemoryKHR(VkDevice device, long videoSession, int bindSessionMemoryInfoCount, long pBindSessionMemoryInfos) {
         long __functionAddress = device.getCapabilities().vkBindVideoSessionMemoryKHR;
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPI(device.address(), videoSession, videoSessionBindMemoryCount, pVideoSessionBindMemories, __functionAddress);
+        return callPJPI(device.address(), videoSession, bindSessionMemoryInfoCount, pBindSessionMemoryInfos, __functionAddress);
     }
 
     /**
@@ -710,16 +694,16 @@ public class KHRVideoQueue {
      * VkResult vkBindVideoSessionMemoryKHR(
      *     VkDevice                                    device,
      *     VkVideoSessionKHR                           videoSession,
-     *     uint32_t                                    videoSessionBindMemoryCount,
-     *     const VkVideoBindMemoryKHR*                 pVideoSessionBindMemories);</code></pre>
+     *     uint32_t                                    bindSessionMemoryInfoCount,
+     *     const VkBindVideoSessionMemoryInfoKHR*      pBindSessionMemoryInfos);</code></pre>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>{@code videoSession} <b>must</b> be a valid {@code VkVideoSessionKHR} handle</li>
-     * <li>{@code pVideoSessionBindMemories} <b>must</b> be a valid pointer to an array of {@code videoSessionBindMemoryCount} valid {@link VkVideoBindMemoryKHR} structures</li>
-     * <li>{@code videoSessionBindMemoryCount} <b>must</b> be greater than 0</li>
+     * <li>{@code pBindSessionMemoryInfos} <b>must</b> be a valid pointer to an array of {@code bindSessionMemoryInfoCount} valid {@link VkBindVideoSessionMemoryInfoKHR} structures</li>
+     * <li>{@code bindSessionMemoryInfoCount} <b>must</b> be greater than 0</li>
      * <li>{@code videoSession} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * </ul>
      * 
@@ -740,15 +724,15 @@ public class KHRVideoQueue {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkVideoBindMemoryKHR}</p>
+     * <p>{@link VkBindVideoSessionMemoryInfoKHR}</p>
      *
-     * @param device                    the logical device that owns the video session’s memory.
-     * @param videoSession              the video session to be bound with device memory.
-     * @param pVideoSessionBindMemories a pointer to an array of {@link VkVideoBindMemoryKHR} structures specifying memory regions to be bound to a device memory heap.
+     * @param device                  the logical device that owns the video session.
+     * @param videoSession            the video session to be bound with device memory.
+     * @param pBindSessionMemoryInfos a pointer to an array of {@code bindSessionMemoryInfoCount} {@link VkBindVideoSessionMemoryInfoKHR} structures specifying memory regions to be bound to specific memory bindings of the video session.
      */
     @NativeType("VkResult")
-    public static int vkBindVideoSessionMemoryKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("VkVideoBindMemoryKHR const *") VkVideoBindMemoryKHR.Buffer pVideoSessionBindMemories) {
-        return nvkBindVideoSessionMemoryKHR(device, videoSession, pVideoSessionBindMemories.remaining(), pVideoSessionBindMemories.address());
+    public static int vkBindVideoSessionMemoryKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("VkBindVideoSessionMemoryInfoKHR const *") VkBindVideoSessionMemoryInfoKHR.Buffer pBindSessionMemoryInfos) {
+        return nvkBindVideoSessionMemoryKHR(device, videoSession, pBindSessionMemoryInfos.remaining(), pBindSessionMemoryInfos.address());
     }
 
     // --- [ vkCreateVideoSessionParametersKHR ] ---
@@ -807,7 +791,7 @@ public class KHRVideoQueue {
      *
      * @param device                  the logical device that was used for the creation of the video session object.
      * @param pCreateInfo             a pointer to {@link VkVideoSessionParametersCreateInfoKHR} structure specifying the video session parameters.
-     * @param pAllocator              controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator              controls host memory allocation as described in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      * @param pVideoSessionParameters a pointer to a {@code VkVideoSessionParametersKHR} handle in which the video session parameters object is returned.
      */
     @NativeType("VkResult")
@@ -915,7 +899,7 @@ public class KHRVideoQueue {
      *
      * @param device                 the device the video session parameters object was created with.
      * @param videoSessionParameters the video session parameters object to be destroyed.
-     * @param pAllocator             controls host memory allocation as described in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
+     * @param pAllocator             controls host memory allocation as described in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-allocation">Memory Allocation</a> chapter.
      */
     public static void vkDestroyVideoSessionParametersKHR(VkDevice device, @NativeType("VkVideoSessionParametersKHR") long videoSessionParameters, @Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks pAllocator) {
         nvkDestroyVideoSessionParametersKHR(device, videoSessionParameters, memAddressSafe(pAllocator));
@@ -938,21 +922,26 @@ public class KHRVideoQueue {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To start video decode or encode operations, call:</p>
+     * <p>To begin a video coding scope, call:</p>
      * 
      * <pre><code>
      * void vkCmdBeginVideoCodingKHR(
      *     VkCommandBuffer                             commandBuffer,
      *     const VkVideoBeginCodingInfoKHR*            pBeginInfo);</code></pre>
      * 
+     * <h5>Description</h5>
+     * 
+     * <p>After beginning a video coding scope, the session object specified by the {@code videoSession} member of {@link VkVideoBeginCodingInfoKHR} is <em>bound</em> to the command buffer, and the command buffer is ready to record video coding operations.</p>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code pBeginInfo} <b>must</b> be a valid pointer to a valid {@link VkVideoBeginCodingInfoKHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support decode, or encode operations</li>
      * <li>This command <b>must</b> only be called outside of a render pass instance</li>
+     * <li>This command <b>must</b> only be called outside of a video coding scope</li>
      * <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
      * </ul>
      * 
@@ -965,8 +954,8 @@ public class KHRVideoQueue {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary</td><td>Outside</td><td>Decode Encode</td></tr></tbody>
+     * <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <tbody><tr><td>Primary</td><td>Outside</td><td>Outside</td><td>Decode Encode</td><td>Action State</td></tr></tbody>
      * </table>
      * 
      * <h5>See Also</h5>
@@ -996,21 +985,26 @@ public class KHRVideoQueue {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To end video decode or encode operations, call:</p>
+     * <p>To end a video coding scope, call:</p>
      * 
      * <pre><code>
      * void vkCmdEndVideoCodingKHR(
      *     VkCommandBuffer                             commandBuffer,
      *     const VkVideoEndCodingInfoKHR*              pEndCodingInfo);</code></pre>
      * 
+     * <h5>Description</h5>
+     * 
+     * <p>After ending a video coding scope, the session object previously bound by the corresponding {@link #vkCmdBeginVideoCodingKHR CmdBeginVideoCodingKHR} command is <em>unbound</em>.</p>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code pEndCodingInfo} <b>must</b> be a valid pointer to a valid {@link VkVideoEndCodingInfoKHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support decode, or encode operations</li>
      * <li>This command <b>must</b> only be called outside of a render pass instance</li>
+     * <li>This command <b>must</b> only be called inside of a video coding scope</li>
      * <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
      * </ul>
      * 
@@ -1023,8 +1017,8 @@ public class KHRVideoQueue {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary</td><td>Outside</td><td>Decode Encode</td></tr></tbody>
+     * <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <tbody><tr><td>Primary</td><td>Outside</td><td>Inside</td><td>Decode Encode</td><td>Action State</td></tr></tbody>
      * </table>
      * 
      * <h5>See Also</h5>
@@ -1054,7 +1048,7 @@ public class KHRVideoQueue {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To apply dynamic controls to video decode or video encode operations, call:</p>
+     * <p>To apply dynamic controls to the currently bound video session object, call:</p>
      * 
      * <pre><code>
      * void vkCmdControlVideoCodingKHR(
@@ -1066,9 +1060,10 @@ public class KHRVideoQueue {
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code pCodingControlInfo} <b>must</b> be a valid pointer to a valid {@link VkVideoCodingControlInfoKHR} structure</li>
-     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support decode, or encode operations</li>
      * <li>This command <b>must</b> only be called outside of a render pass instance</li>
+     * <li>This command <b>must</b> only be called inside of a video coding scope</li>
      * <li>{@code commandBuffer} <b>must</b> be a primary {@code VkCommandBuffer}</li>
      * </ul>
      * 
@@ -1081,8 +1076,8 @@ public class KHRVideoQueue {
      * <h5>Command Properties</h5>
      * 
      * <table class="lwjgl">
-     * <thead><tr><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th></tr></thead>
-     * <tbody><tr><td>Primary</td><td>Outside</td><td>Decode Encode</td></tr></tbody>
+     * <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <tbody><tr><td>Primary</td><td>Outside</td><td>Inside</td><td>Decode Encode</td><td>Action</td></tr></tbody>
      * </table>
      * 
      * <h5>See Also</h5>
@@ -1122,14 +1117,14 @@ public class KHRVideoQueue {
 
     /** Array version of: {@link #vkGetVideoSessionMemoryRequirementsKHR GetVideoSessionMemoryRequirementsKHR} */
     @NativeType("VkResult")
-    public static int vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("uint32_t *") int[] pVideoSessionMemoryRequirementsCount, @Nullable @NativeType("VkVideoGetMemoryPropertiesKHR *") VkVideoGetMemoryPropertiesKHR.Buffer pVideoSessionMemoryRequirements) {
+    public static int vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, @NativeType("VkVideoSessionKHR") long videoSession, @NativeType("uint32_t *") int[] pMemoryRequirementsCount, @Nullable @NativeType("VkVideoSessionMemoryRequirementsKHR *") VkVideoSessionMemoryRequirementsKHR.Buffer pMemoryRequirements) {
         long __functionAddress = device.getCapabilities().vkGetVideoSessionMemoryRequirementsKHR;
         if (CHECKS) {
             check(__functionAddress);
-            check(pVideoSessionMemoryRequirementsCount, 1);
-            checkSafe(pVideoSessionMemoryRequirements, pVideoSessionMemoryRequirementsCount[0]);
+            check(pMemoryRequirementsCount, 1);
+            checkSafe(pMemoryRequirements, pMemoryRequirementsCount[0]);
         }
-        return callPJPPI(device.address(), videoSession, pVideoSessionMemoryRequirementsCount, memAddressSafe(pVideoSessionMemoryRequirements), __functionAddress);
+        return callPJPPI(device.address(), videoSession, pMemoryRequirementsCount, memAddressSafe(pMemoryRequirements), __functionAddress);
     }
 
     /** Array version of: {@link #vkCreateVideoSessionParametersKHR CreateVideoSessionParametersKHR} */

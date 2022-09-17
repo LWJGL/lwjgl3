@@ -21,27 +21,19 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>In order to provide video encode stream rate control settings, add a {@link VkVideoEncodeRateControlInfoKHR} structure to the {@code pNext} chain of the {@link VkVideoCodingControlInfoKHR} structure passed to the {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} command.</p>
+ * <p>Including this structure in the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} and including {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR} in {@link VkVideoCodingControlInfoKHR}{@code ::flags} will define stream rate control settings for video encoding.</p>
  * 
- * <p>A codec-specific extension structure for further encode stream rate control parameter settings <b>may</b> be chained to {@link VkVideoEncodeRateControlInfoKHR}.</p>
+ * <p>Additional structures providing codec-specific rate control parameters <b>may</b> need to be included in the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} depending on the codec profile the bound video session was created with and the parameters specified in {@link VkVideoEncodeRateControlInfoKHR} (see <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-session-control">Video Session Control</a>).</p>
  * 
- * <p>To ensure that the video session is properly initalized with stream-level rate control settings, the application <b>must</b> call {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} with stream-level rate control settings at least once in execution order before the first {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} command that is executed after video session reset. If not provided, default implementation-specific stream rate control settings will be used.</p>
+ * <p>To ensure that the video session is properly initialized with stream-level rate control settings, the application <b>must</b> call {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} with stream-level rate control settings at least once in execution order before the first {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} command that is executed after video session reset. If not provided, default implementation-specific stream rate control settings will be used.</p>
  * 
  * <p>Stream rate control settings <b>can</b> also be re-initialized during an active video encoding session. The re-initialization takes effect whenever the {@link VkVideoEncodeRateControlInfoKHR} structure is included in the {@code pNext} chain of the {@link VkVideoCodingControlInfoKHR} structure in the call to {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR}, and only impacts {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} operations that follow in execution order.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@link VkVideoEncodeH264RateControlInfoEXT} <b>must</b> be included in the {@code pNext} chain of {@link VkVideoEncodeRateControlInfoKHR} if and only if {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is not {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR} and the bound video session was created with {@link VkVideoProfileKHR}{@code ::videoCodecOperation} set to {@link EXTVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT}.</li>
- * <li>If {@link VkVideoEncodeRateControlInfoKHR}{@code ::layerCount} is greater than 1, then {@link VkVideoEncodeH264RateControlInfoEXT}{@code ::temporalLayerCount} <b>must</b> be equal to {@code layerCount}.</li>
- * <li>{@link VkVideoEncodeH265RateControlInfoEXT} <b>must</b> be included in the {@code pNext} chain of {@link VkVideoEncodeRateControlInfoKHR} if and only if {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is not {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR} and the bound video session was created with {@link VkVideoProfileKHR}{@code ::videoCodecOperation} set to {@link EXTVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT}.</li>
- * <li>If {@link VkVideoEncodeRateControlInfoKHR}{@code ::layerCount} is greater than 1, then {@link VkVideoEncodeH265RateControlInfoEXT}{@code ::subLayerCount} <b>must</b> be equal to {@code layerCount}.</li>
- * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR}</li>
+ * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code rateControlMode} <b>must</b> be a valid {@code VkVideoEncodeRateControlModeFlagBitsKHR} value</li>
  * <li>{@code pLayerConfigs} <b>must</b> be a valid pointer to an array of {@code layerCount} valid {@link VkVideoEncodeRateControlLayerInfoKHR} structures</li>
  * <li>{@code layerCount} <b>must</b> be greater than 0</li>
@@ -120,7 +112,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoEncodeRateControlFlagBitsKHR} specifying encode rate control flags. */
+    /** reserved for future use. */
     @NativeType("VkVideoEncodeRateControlFlagsKHR")
     public int flags() { return nflags(address()); }
     /** a {@code VkVideoEncodeRateControlModeFlagBitsKHR} value specifying the encode stream rate control mode. */
@@ -139,10 +131,6 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
     public VkVideoEncodeRateControlInfoKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeRateControlInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkVideoEncodeH264RateControlInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoEncodeRateControlInfoKHR pNext(VkVideoEncodeH264RateControlInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoEncodeH265RateControlInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoEncodeRateControlInfoKHR pNext(VkVideoEncodeH265RateControlInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkVideoEncodeRateControlInfoKHR flags(@NativeType("VkVideoEncodeRateControlFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #rateControlMode} field. */
@@ -393,10 +381,6 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
         public VkVideoEncodeRateControlInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoEncodeRateControlInfoKHR#pNext} field. */
         public VkVideoEncodeRateControlInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeRateControlInfoKHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkVideoEncodeH264RateControlInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoEncodeRateControlInfoKHR.Buffer pNext(VkVideoEncodeH264RateControlInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoEncodeH265RateControlInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoEncodeRateControlInfoKHR.Buffer pNext(VkVideoEncodeH265RateControlInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoEncodeRateControlInfoKHR#flags} field. */
         public VkVideoEncodeRateControlInfoKHR.Buffer flags(@NativeType("VkVideoEncodeRateControlFlagsKHR") int value) { VkVideoEncodeRateControlInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeRateControlInfoKHR#rateControlMode} field. */

@@ -32,9 +32,9 @@ import static org.lwjgl.vulkan.VK10.*;
  * <p>{@code deviceUUID} and/or {@code driverUUID} <b>must</b> be used to determine whether a particular external object can be shared between driver components, where such a restriction exists as defined in the compatibility table for the particular object type:</p>
  * 
  * <ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#external-memory-handle-types-compatibility">External memory handle types compatibility</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#external-semaphore-handle-types-compatibility">External semaphore handle types compatibility</a></li>
- * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#external-fence-handle-types-compatibility">External fence handle types compatibility</a></li>
+ * <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#external-memory-handle-types-compatibility">External memory handle types compatibility</a></li>
+ * <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#external-semaphore-handle-types-compatibility">External semaphore handle types compatibility</a></li>
+ * <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#external-fence-handle-types-compatibility">External fence handle types compatibility</a></li>
  * </ul>
  * 
  * <p>If {@code deviceLUIDValid} is {@link VK10#VK_FALSE FALSE}, the values of {@code deviceLUID} and {@code deviceNodeMask} are undefined. If {@code deviceLUIDValid} is {@link VK10#VK_TRUE TRUE} and Vulkan is running on the Windows operating system, the contents of {@code deviceLUID} <b>can</b> be cast to an {@code LUID} object and <b>must</b> be equal to the locally unique identifier of a {@code IDXGIAdapter1} object that corresponds to {@code physicalDevice}. If {@code deviceLUIDValid} is {@link VK10#VK_TRUE TRUE}, {@code deviceNodeMask} <b>must</b> contain exactly one bit. If Vulkan is running on an operating system that supports the Direct3D 12 API and {@code physicalDevice} corresponds to an individual device in a linked device adapter, {@code deviceNodeMask} identifies the Direct3D 12 node corresponding to {@code physicalDevice}. Otherwise, {@code deviceNodeMask} <b>must</b> be 1.</p>
@@ -45,7 +45,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * 
  * <p>Implementations <b>should</b> return {@code deviceUUID} values which are likely to be unique even in the presence of multiple Vulkan implementations (such as a GPU driver and a software renderer; two drivers for different GPUs; or the same Vulkan driver running on two logically different devices).</p>
  * 
- * <p>Khronos' conformance testing can not guarantee that {@code deviceUUID} values are actually unique, so implementors should make their own best efforts to ensure this. In particular, hard-coded {@code deviceUUID} values, especially all-0 bits, <b>should</b> never be used.</p>
+ * <p>Khronos' conformance testing is unable to guarantee that {@code deviceUUID} values are actually unique, so implementors <b>should</b> make their own best efforts to ensure this. In particular, hard-coded {@code deviceUUID} values, especially all-0 bits, <b>should</b> never be used.</p>
  * 
  * <p>A combination of values unique to the vendor, the driver, and the hardware environment can be used to provide a {@code deviceUUID} which is unique to a high degree of certainty. Some possible inputs to such a computation are:</p>
  * 

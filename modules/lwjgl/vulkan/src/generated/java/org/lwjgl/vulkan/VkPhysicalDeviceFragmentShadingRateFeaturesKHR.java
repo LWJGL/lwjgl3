@@ -93,13 +93,13 @@ public class VkPhysicalDeviceFragmentShadingRateFeaturesKHR extends Struct imple
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-fragment-shading-rate-pipeline">pipeline fragment shading rate</a>. */
+    /** indicates that the implementation supports the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-fragment-shading-rate-pipeline">pipeline fragment shading rate</a>. */
     @NativeType("VkBool32")
     public boolean pipelineFragmentShadingRate() { return npipelineFragmentShadingRate(address()) != 0; }
-    /** indicates that the implementation supports the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-fragment-shading-rate-primitive">primitive fragment shading rate</a>. */
+    /** indicates that the implementation supports the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-fragment-shading-rate-primitive">primitive fragment shading rate</a>. */
     @NativeType("VkBool32")
     public boolean primitiveFragmentShadingRate() { return nprimitiveFragmentShadingRate(address()) != 0; }
-    /** indicates that the implementation supports the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-fragment-shading-rate-attachment">attachment fragment shading rate</a>. */
+    /** indicates that the implementation supports the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-fragment-shading-rate-attachment">attachment fragment shading rate</a>. */
     @NativeType("VkBool32")
     public boolean attachmentFragmentShadingRate() { return nattachmentFragmentShadingRate(address()) != 0; }
 

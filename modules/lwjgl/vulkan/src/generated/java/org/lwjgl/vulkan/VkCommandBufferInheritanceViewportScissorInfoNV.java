@@ -62,8 +62,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-inheritedViewportScissor2D">{@code inheritedViewportScissor2D}</a> feature is not enabled, {@code viewportScissor2D} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
- * <li>If the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiViewport">{@code multiViewport}</a> feature is not enabled and {@code viewportScissor2D} is {@link VK10#VK_TRUE TRUE}, then {@code viewportDepthCount} <b>must</b> be 1</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-inheritedViewportScissor2D">{@code inheritedViewportScissor2D}</a> feature is not enabled, {@code viewportScissor2D} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiViewport">{@code multiViewport}</a> feature is not enabled and {@code viewportScissor2D} is {@link VK10#VK_TRUE TRUE}, then {@code viewportDepthCount} <b>must</b> be 1</li>
  * <li>If {@code viewportScissor2D} is {@link VK10#VK_TRUE TRUE}, then {@code viewportDepthCount} <b>must</b> be greater than 0</li>
  * <li>If {@code viewportScissor2D} is {@link VK10#VK_TRUE TRUE}, then {@code pViewportDepths} <b>must</b> be a valid pointer to an array of {@code viewportDepthCount} valid {@link VkViewport} structures, except any requirements on {@code x}, {@code y}, {@code width}, and {@code height} do not apply</li>
  * <li>If {@code viewportScissor2D} is {@link VK10#VK_TRUE TRUE}, then the command buffer <b>must</b> be recorded with the {@link VK10#VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT}</li>

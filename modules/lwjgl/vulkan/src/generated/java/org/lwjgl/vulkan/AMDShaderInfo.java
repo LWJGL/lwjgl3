@@ -96,11 +96,11 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul></dd>
  * <dt><b>Special Use</b></dt>
  * <dd><ul>
- * <li><a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
+ * <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Developer tools</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jaakko Konttinen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_info]%20@jaakkoamd%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_shader_info%20extension%3E%3E">jaakkoamd</a></li>
+ * <li>Jaakko Konttinen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_AMD_shader_info]%20@jaakkoamd%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_AMD_shader_info%20extension*">jaakkoamd</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -133,7 +133,7 @@ public class AMDShaderInfo {
      * <ul>
      * <li>{@link #VK_SHADER_INFO_TYPE_STATISTICS_AMD SHADER_INFO_TYPE_STATISTICS_AMD} specifies that device resources used by a shader will be queried.</li>
      * <li>{@link #VK_SHADER_INFO_TYPE_BINARY_AMD SHADER_INFO_TYPE_BINARY_AMD} specifies that implementation-specific information will be queried.</li>
-     * <li>{@link #VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD SHADER_INFO_TYPE_DISASSEMBLY_AMD} specifies that human-readable dissassembly of a shader.</li>
+     * <li>{@link #VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD SHADER_INFO_TYPE_DISASSEMBLY_AMD} specifies that human-readable disassembly of a shader.</li>
      * </ul>
      * 
      * <h5>See Also</h5>

@@ -40,8 +40,8 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_display]%20@cubanismo%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_display%20extension%3E%3E">cubanismo</a></li>
-                <li>Norbert Nopper <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_display]%20@FslNopper%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_display%20extension%3E%3E">FslNopper</a></li>
+                <li>James Jones <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_display]%20@cubanismo%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_display%20extension*">cubanismo</a></li>
+                <li>Norbert Nopper <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_display]%20@FslNopper%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_display%20extension*">FslNopper</a></li>
             </ul></dd>
         </dl>
 
@@ -364,7 +364,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
         VkPhysicalDevice("physicalDevice", "the physical device associated with {@code display}."),
         VkDisplayKHR("display", "the display to create an additional mode for."),
         VkDisplayModeCreateInfoKHR.const.p("pCreateInfo", "a pointer to a ##VkDisplayModeCreateInfoKHR structure describing the new mode to create."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the display mode object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the display mode object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
         Check(1)..VkDisplayModeKHR.p("pMode", "a pointer to a {@code VkDisplayModeKHR} handle in which the mode created is returned.")
     )
 
@@ -462,7 +462,7 @@ val KHR_display = "KHRDisplay".nativeClassVK("KHR_display", type = "instance", p
 
         VkInstance("instance", "the instance corresponding to the physical device the targeted display is on."),
         VkDisplaySurfaceCreateInfoKHR.const.p("pCreateInfo", "a pointer to a ##VkDisplaySurfaceCreateInfoKHR structure specifying which mode, plane, and other parameters to use, as described below."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a>)."),
         Check(1)..VkSurfaceKHR.p("pSurface", "a pointer to a {@code VkSurfaceKHR} handle in which the created surface is returned.")
     )
 }

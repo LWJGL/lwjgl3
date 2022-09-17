@@ -17,6 +17,8 @@ package org.lwjgl.vulkan;
  * <li>{@link #VK_FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR} indicates that an implementation supports depth comparison performed by {@code OpImage*Dref*} instructions on a given {@code VkFormat}. Previously the result of executing a {@code OpImage*Dref*} instruction on an image view, where the {@code format} was not one of the depth/stencil formats with a depth component, was undefined. This bit clarifies on which formats such instructions can be used.</li>
  * </ul>
  * 
+ * <p>Prior to version 2 of this extension, implementations exposing the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderStorageImageReadWithoutFormat">shaderStorageImageReadWithoutFormat</a> and <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderStorageImageWriteWithoutFormat">shaderStorageImageWriteWithoutFormat</a> implementations may not report {@link #VK_FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR} and {@link #VK_FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR} in {@link VkFormatProperties3KHR}{@code ::bufferFeatures}. Despite this, buffer reads/writes are supported as intended by the original features.</p>
+ * 
  * <h5>Promotion to Vulkan 1.3</h5>
  * 
  * <p>Functionality in this extension is included in core Vulkan 1.3, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.</p>
@@ -31,7 +33,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>361</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires support for Vulkan 1.0</li>
@@ -39,11 +41,11 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
- * <li><em>Promoted</em> to <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3-promotions">Vulkan 1.3</a></li>
+ * <li><em>Promoted</em> to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.3-promotions">Vulkan 1.3</a></li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Lionel Landwerlin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_format_feature_flags2]%20@llandwerlin%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_format_feature_flags2%20extension%3E%3E">llandwerlin</a></li>
+ * <li>Lionel Landwerlin <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_format_feature_flags2]%20@llandwerlin%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_format_feature_flags2%20extension*">llandwerlin</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -72,7 +74,7 @@ package org.lwjgl.vulkan;
 public final class KHRFormatFeatureFlags2 {
 
     /** The extension specification version. */
-    public static final int VK_KHR_FORMAT_FEATURE_FLAGS_2_SPEC_VERSION = 1;
+    public static final int VK_KHR_FORMAT_FEATURE_FLAGS_2_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_KHR_FORMAT_FEATURE_FLAGS_2_EXTENSION_NAME = "VK_KHR_format_feature_flags2";

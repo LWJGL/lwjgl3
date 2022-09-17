@@ -94,7 +94,7 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
     /** the maximum H.264 level supported by the device. */
     @NativeType("StdVideoH264Level")
     public int maxLevel() { return nmaxLevel(address()); }
-    /** - if Interlaced Video Content is suported, the maximum field offset granularity supported for the picture resource. */
+    /** - if Interlaced Video Content is supported, the maximum field offset granularity supported for the picture resource. */
     public VkOffset2D fieldOffsetGranularity() { return nfieldOffsetGranularity(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

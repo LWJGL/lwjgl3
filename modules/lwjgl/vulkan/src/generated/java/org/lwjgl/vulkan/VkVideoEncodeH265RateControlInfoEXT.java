@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT}</li>
- * <li>{@code rateControlStructure} <b>must</b> be a valid {@code VkVideoEncodeH265RateControlStructureFlagBitsEXT} value</li>
+ * <li>{@code rateControlStructure} <b>must</b> be a valid {@code VkVideoEncodeH265RateControlStructureEXT} value</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #gopFrameCount};
  *     uint32_t {@link #idrPeriod};
  *     uint32_t {@link #consecutiveBFrameCount};
- *     VkVideoEncodeH265RateControlStructureFlagBitsEXT {@link #rateControlStructure};
+ *     VkVideoEncodeH265RateControlStructureEXT {@link #rateControlStructure};
  *     uint8_t {@link #subLayerCount};
  * }</code></pre>
  */
@@ -115,8 +115,8 @@ public class VkVideoEncodeH265RateControlInfoEXT extends Struct implements Nativ
     /** the number of consecutive B-frames between I- and/or P-frames within the GOP. */
     @NativeType("uint32_t")
     public int consecutiveBFrameCount() { return nconsecutiveBFrameCount(address()); }
-    /** a {@code VkVideoEncodeH265RateControlStructureFlagBitsEXT} value specifying the expected encode stream reference structure, to aid in rate control calculations. */
-    @NativeType("VkVideoEncodeH265RateControlStructureFlagBitsEXT")
+    /** a {@code VkVideoEncodeH265RateControlStructureEXT} value specifying the expected encode stream reference structure, to aid in rate control calculations. */
+    @NativeType("VkVideoEncodeH265RateControlStructureEXT")
     public int rateControlStructure() { return nrateControlStructure(address()); }
     /** specifies the number of sub layers enabled in the stream. */
     @NativeType("uint8_t")
@@ -135,7 +135,7 @@ public class VkVideoEncodeH265RateControlInfoEXT extends Struct implements Nativ
     /** Sets the specified value to the {@link #consecutiveBFrameCount} field. */
     public VkVideoEncodeH265RateControlInfoEXT consecutiveBFrameCount(@NativeType("uint32_t") int value) { nconsecutiveBFrameCount(address(), value); return this; }
     /** Sets the specified value to the {@link #rateControlStructure} field. */
-    public VkVideoEncodeH265RateControlInfoEXT rateControlStructure(@NativeType("VkVideoEncodeH265RateControlStructureFlagBitsEXT") int value) { nrateControlStructure(address(), value); return this; }
+    public VkVideoEncodeH265RateControlInfoEXT rateControlStructure(@NativeType("VkVideoEncodeH265RateControlStructureEXT") int value) { nrateControlStructure(address(), value); return this; }
     /** Sets the specified value to the {@link #subLayerCount} field. */
     public VkVideoEncodeH265RateControlInfoEXT subLayerCount(@NativeType("uint8_t") byte value) { nsubLayerCount(address(), value); return this; }
 
@@ -369,7 +369,7 @@ public class VkVideoEncodeH265RateControlInfoEXT extends Struct implements Nativ
         @NativeType("uint32_t")
         public int consecutiveBFrameCount() { return VkVideoEncodeH265RateControlInfoEXT.nconsecutiveBFrameCount(address()); }
         /** @return the value of the {@link VkVideoEncodeH265RateControlInfoEXT#rateControlStructure} field. */
-        @NativeType("VkVideoEncodeH265RateControlStructureFlagBitsEXT")
+        @NativeType("VkVideoEncodeH265RateControlStructureEXT")
         public int rateControlStructure() { return VkVideoEncodeH265RateControlInfoEXT.nrateControlStructure(address()); }
         /** @return the value of the {@link VkVideoEncodeH265RateControlInfoEXT#subLayerCount} field. */
         @NativeType("uint8_t")
@@ -388,7 +388,7 @@ public class VkVideoEncodeH265RateControlInfoEXT extends Struct implements Nativ
         /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoEXT#consecutiveBFrameCount} field. */
         public VkVideoEncodeH265RateControlInfoEXT.Buffer consecutiveBFrameCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265RateControlInfoEXT.nconsecutiveBFrameCount(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoEXT#rateControlStructure} field. */
-        public VkVideoEncodeH265RateControlInfoEXT.Buffer rateControlStructure(@NativeType("VkVideoEncodeH265RateControlStructureFlagBitsEXT") int value) { VkVideoEncodeH265RateControlInfoEXT.nrateControlStructure(address(), value); return this; }
+        public VkVideoEncodeH265RateControlInfoEXT.Buffer rateControlStructure(@NativeType("VkVideoEncodeH265RateControlStructureEXT") int value) { VkVideoEncodeH265RateControlInfoEXT.nrateControlStructure(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoEXT#subLayerCount} field. */
         public VkVideoEncodeH265RateControlInfoEXT.Buffer subLayerCount(@NativeType("uint8_t") byte value) { VkVideoEncodeH265RateControlInfoEXT.nsubLayerCount(address(), value); return this; }
 

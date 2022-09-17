@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkDisplayPlaneCapabilitiesKHR}, {@link VkImageViewSampleWeightCreateInfoQCOM}, {@link VkRect2D}, {@link VkRectLayerKHR}, {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM}, {@link VkTilePropertiesQCOM}, {@link VkVideoDecodeH264CapabilitiesEXT}, {@link VkVideoPictureResourceKHR}</p>
+ * <p>{@link VkDisplayPlaneCapabilitiesKHR}, {@link VkImageViewSampleWeightCreateInfoQCOM}, {@link VkRect2D}, {@link VkRectLayerKHR}, {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM}, {@link VkTilePropertiesQCOM}, {@link VkVideoDecodeH264CapabilitiesEXT}, {@link VkVideoPictureResourceInfoKHR}</p>
  * 
  * <h3>Layout</h3>
  * 

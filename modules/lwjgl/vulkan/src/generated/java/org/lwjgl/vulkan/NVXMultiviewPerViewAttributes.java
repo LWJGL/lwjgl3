@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * This extension adds a new way to write shaders to be used with multiview subpasses, where the attributes for all views are written out by a single invocation of the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#pipeline-graphics-subsets-pre-rasterization">pre-rasterization shader stages</a>. Related SPIR-V and GLSL extensions {@code SPV_NVX_multiview_per_view_attributes} and {@code GL_NVX_multiview_per_view_attributes} introduce per-view position and viewport mask attributes arrays, and this extension defines how those per-view attribute arrays are interpreted by Vulkan. Pipelines using per-view attributes <b>may</b> only execute the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#pipeline-graphics-subsets-pre-rasterization">pre-rasterization shader stages</a> once for all views rather than once per-view, which reduces redundant shading work.
+ * This extension adds a new way to write shaders to be used with multiview subpasses, where the attributes for all views are written out by a single invocation of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-graphics-subsets-pre-rasterization">pre-rasterization shader stages</a>. Related SPIR-V and GLSL extensions {@code SPV_NVX_multiview_per_view_attributes} and {@code GL_NVX_multiview_per_view_attributes} introduce per-view position and viewport mask attributes arrays, and this extension defines how those per-view attribute arrays are interpreted by Vulkan. Pipelines using per-view attributes <b>may</b> only execute the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-graphics-subsets-pre-rasterization">pre-rasterization shader stages</a> once for all views rather than once per-view, which reduces redundant shading work.
  * 
  * <p>A subpass creation flag controls whether the subpass uses this extension. A subpass <b>must</b> either exclusively use this extension or not use it at all.</p>
  * 
@@ -54,7 +54,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NVX_multiview_per_view_attributes]%20@jeffbolznv%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NVX_multiview_per_view_attributes%20extension%3E%3E">jeffbolznv</a></li>
+ * <li>Jeff Bolz <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NVX_multiview_per_view_attributes]%20@jeffbolznv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NVX_multiview_per_view_attributes%20extension*">jeffbolznv</a></li>
  * </ul></dd>
  * </dl>
  * 

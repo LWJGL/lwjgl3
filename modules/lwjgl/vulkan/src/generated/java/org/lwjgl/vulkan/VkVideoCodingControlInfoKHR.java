@@ -18,17 +18,35 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of coding control.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>A newly created video session <b>must</b> be reset before use for video decode or encode operations by including {@link KHRVideoQueue#VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR} in {@code flags}. The reset operation returns all session DPB slots to the unused state (see <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-session-dpb-slot-states">DPB Slot States</a>).</p>
+ * 
+ * <p>For encode sessions, the reset operation returns rate control configuration to implementation default settings.</p>
+ * 
+ * <p>After decode or encode operations are performed on a session, the reset operation <b>may</b> be used to return the video session object to the same <em>initial</em> state as after the reset of a newly created video session. This <b>may</b> be used when different video sequences are processed with the same video session object.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>The first command buffer submitted for a newly created video session <b>must</b> set the {@link KHRVideoQueue#VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR} bit in {@link VkVideoCodingControlInfoKHR}{@code ::flags} to reset the session device context before any video decode or encode operations are performed on the session.</li>
+ * <li>{@code flags} <b>must</b> include at least one bit</li>
+ * <li>If the bound video session object is in <em>uninitialized</em> state, then {@code flags} <b>must</b> include {@link KHRVideoQueue#VK_VIDEO_CODING_CONTROL_RESET_BIT_KHR VIDEO_CODING_CONTROL_RESET_BIT_KHR}</li>
+ * <li>If {@code flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a valid {@link VkVideoEncodeRateControlInfoKHR} structure</li>
+ * <li>If {@code flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a valid {@link VkVideoEncodeRateControlLayerInfoKHR} structure</li>
+ * <li>If {@code flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR}, then it <b>must</b> not also include {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR}</li>
+ * <li>If {@code flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR}, the {@code rateControlMode} member of {@link VkVideoEncodeRateControlInfoKHR} included in the {@code pNext} chain is not {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}, and the bound video session was created with {@link VkVideoProfileInfoKHR}{@code ::videoCodecOperation} set to {@link EXTVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoEncodeH264RateControlInfoEXT} structure</li>
+ * <li>If the {@code pNext} chain includes a {@link VkVideoEncodeRateControlInfoKHR}, and {@link VkVideoEncodeRateControlInfoKHR}{@code ::layerCount} is greater than 1, then {@link VkVideoEncodeH264RateControlInfoEXT}{@code ::temporalLayerCount} <b>must</b> be equal to {@code layerCount}</li>
+ * <li>If {@code flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR} and the bound video session was created with {@link VkVideoProfileInfoKHR}{@code ::videoCodecOperation} set to {@link EXTVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoEncodeH264RateControlLayerInfoEXT} structure</li>
+ * <li>If {@code flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR}, the {@code rateControlMode} member of {@link VkVideoEncodeRateControlInfoKHR} included in the {@code pNext} chain is not {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}, and the bound video session was created with {@link VkVideoProfileInfoKHR}{@code ::videoCodecOperation} set to {@link EXTVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoEncodeH265RateControlInfoEXT} structure</li>
+ * <li>If the {@code pNext} chain includes a {@link VkVideoEncodeRateControlInfoKHR}, and {@link VkVideoEncodeRateControlInfoKHR}{@code ::layerCount} is greater than 1, then {@link VkVideoEncodeH265RateControlInfoEXT}{@code ::subLayerCount} <b>must</b> be equal to {@code layerCount}</li>
+ * <li>If {@code flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_LAYER_BIT_KHR} and the bound video session was created with {@link VkVideoProfileInfoKHR}{@code ::videoCodecOperation} set to {@link EXTVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoEncodeH265RateControlLayerInfoEXT} structure</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeRateControlInfoKHR} or {@link VkVideoEncodeRateControlLayerInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264RateControlInfoEXT}, {@link VkVideoEncodeH264RateControlLayerInfoEXT}, {@link VkVideoEncodeH265RateControlInfoEXT}, {@link VkVideoEncodeH265RateControlLayerInfoEXT}, {@link VkVideoEncodeRateControlInfoKHR}, or {@link VkVideoEncodeRateControlLayerInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoCodingControlFlagBitsKHR} values</li>
  * </ul>
@@ -104,6 +122,14 @@ public class VkVideoCodingControlInfoKHR extends Struct implements NativeResourc
     public VkVideoCodingControlInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoCodingControlInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkVideoEncodeH264RateControlInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoCodingControlInfoKHR pNext(VkVideoEncodeH264RateControlInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH264RateControlLayerInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoCodingControlInfoKHR pNext(VkVideoEncodeH264RateControlLayerInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH265RateControlInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoCodingControlInfoKHR pNext(VkVideoEncodeH265RateControlInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoEncodeH265RateControlLayerInfoEXT} value to the {@code pNext} chain. */
+    public VkVideoCodingControlInfoKHR pNext(VkVideoEncodeH265RateControlLayerInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeRateControlInfoKHR} value to the {@code pNext} chain. */
     public VkVideoCodingControlInfoKHR pNext(VkVideoEncodeRateControlInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeRateControlLayerInfoKHR} value to the {@code pNext} chain. */
@@ -317,6 +343,14 @@ public class VkVideoCodingControlInfoKHR extends Struct implements NativeResourc
         public VkVideoCodingControlInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoCodingControlInfoKHR#pNext} field. */
         public VkVideoCodingControlInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoCodingControlInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkVideoEncodeH264RateControlInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoCodingControlInfoKHR.Buffer pNext(VkVideoEncodeH264RateControlInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH264RateControlLayerInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoCodingControlInfoKHR.Buffer pNext(VkVideoEncodeH264RateControlLayerInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH265RateControlInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoCodingControlInfoKHR.Buffer pNext(VkVideoEncodeH265RateControlInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoEncodeH265RateControlLayerInfoEXT} value to the {@code pNext} chain. */
+        public VkVideoCodingControlInfoKHR.Buffer pNext(VkVideoEncodeH265RateControlLayerInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeRateControlInfoKHR} value to the {@code pNext} chain. */
         public VkVideoCodingControlInfoKHR.Buffer pNext(VkVideoEncodeRateControlInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeRateControlLayerInfoKHR} value to the {@code pNext} chain. */

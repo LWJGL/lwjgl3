@@ -6,44 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * <ul>
- * <li>Extending {@link VkVideoDecodeCapabilitiesKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoDecodeH265CapabilitiesEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoDecodeInfoKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoDecodeH265PictureInfoEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoProfileKHR}, {@link VkQueryPoolCreateInfo}:
- * 
- * <ul>
- * <li>{@link VkVideoDecodeH265ProfileEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoReferenceSlotKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoDecodeH265DpbSlotInfoEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoSessionParametersCreateInfoKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoDecodeH265SessionParametersCreateInfoEXT}</li>
- * </ul>
- * </li>
- * <li>Extending {@link VkVideoSessionParametersUpdateInfoKHR}:
- * 
- * <ul>
- * <li>{@link VkVideoDecodeH265SessionParametersAddInfoEXT}</li>
- * </ul>
- * </li>
- * </ul>
+ * This extension builds upon the {@link KHRVideoDecodeQueue VK_KHR_video_decode_queue} extension by adding support for decoding elementary video stream sequences compliant with the H.265/HEVC video compression standard.
  * 
  * <h5>VK_EXT_video_decode_h265</h5>
  * 
@@ -55,12 +18,12 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>188</dd>
  * <dt><b>Revision</b></dt>
- * <dd>3</dd>
+ * <dd>4</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires support for Vulkan 1.0</li>
  * <li>Requires {@link KHRVideoDecodeQueue VK_KHR_video_decode_queue} to be enabled for any device-level functionality</li>
- * <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
+ * <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
@@ -72,7 +35,7 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2022-03-31</dd>
+ * <dd>2022-08-09</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -84,13 +47,14 @@ package org.lwjgl.vulkan;
  * <li>Ping Liu, Intel</li>
  * <li>Srinath Kumarapuram, NVIDIA</li>
  * <li>Tony Zlatinski, NVIDIA</li>
+ * <li>Daniel Rakos, RasterGrid</li>
  * </ul></dd>
  * </dl>
  */
 public final class EXTVideoDecodeH265 {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VIDEO_DECODE_H265_SPEC_VERSION = 3;
+    public static final int VK_EXT_VIDEO_DECODE_H265_SPEC_VERSION = 4;
 
     /** The extension name. */
     public static final String VK_EXT_VIDEO_DECODE_H265_EXTENSION_NAME = "VK_EXT_video_decode_h265";
@@ -104,7 +68,7 @@ public final class EXTVideoDecodeH265 {
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT}</li>
+     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_DPB_SLOT_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H265_DPB_SLOT_INFO_EXT}</li>
      * </ul>
@@ -113,7 +77,7 @@ public final class EXTVideoDecodeH265 {
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT                   = 1000187000,
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT = 1000187001,
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT    = 1000187002,
-        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT                        = 1000187003,
+        VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_INFO_EXT                   = 1000187003,
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT                   = 1000187004,
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_DPB_SLOT_INFO_EXT                  = 1000187005;
 

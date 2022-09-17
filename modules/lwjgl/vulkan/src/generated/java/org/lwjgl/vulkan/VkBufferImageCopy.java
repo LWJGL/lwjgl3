@@ -40,13 +40,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Copies are done layer by layer starting with image layer {@code baseArrayLayer} member of {@code imageSubresource}. {@code layerCount} layers are copied from the source image or to the destination image.</p>
  * 
- * <p>For purpose of valid usage statements here and in related copy commands, a <em>blocked image</em> is defined as:</p>
- * 
- * <ul>
- * <li>an image with a <em>single-plane</em>, “{@code _422}” format, which is treated as a format with a 2 × 1 compressed texel block, or</li>
- * <li>a compressed image.</li>
- * </ul>
- * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

@@ -82,7 +82,7 @@ public class VkDeviceDiagnosticsConfigCreateInfoNV extends Struct implements Nat
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkDeviceDiagnosticsConfigFlagBitsNV} specifying addtional parameters for configuring diagnostic tools. */
+    /** a bitmask of {@code VkDeviceDiagnosticsConfigFlagBitsNV} specifying additional parameters for configuring diagnostic tools. */
     @NativeType("VkDeviceDiagnosticsConfigFlagsNV")
     public int flags() { return nflags(address()); }
 

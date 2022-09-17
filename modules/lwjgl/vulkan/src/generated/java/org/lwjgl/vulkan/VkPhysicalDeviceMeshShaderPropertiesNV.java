@@ -134,7 +134,7 @@ public class VkPhysicalDeviceMeshShaderPropertiesNV extends Struct implements Na
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum number of local workgroups that <b>can</b> be launched by a single draw mesh tasks command. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-mesh-shading">Programmable Mesh Shading</a>. */
+    /** the maximum number of local workgroups that <b>can</b> be launched by a single draw mesh tasks command. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-mesh-shading">Programmable Mesh Shading</a>. */
     @NativeType("uint32_t")
     public int maxDrawMeshTasksCount() { return nmaxDrawMeshTasksCount(address()); }
     /** the maximum total number of task shader invocations in a single local workgroup. The product of the X, Y, and Z sizes, as specified by the {@code LocalSize} or {@code LocalSizeId} execution mode in shader modules or by the object decorated by the {@code WorkgroupSize} decoration, <b>must</b> be less than or equal to this limit. */
@@ -170,7 +170,7 @@ public class VkPhysicalDeviceMeshShaderPropertiesNV extends Struct implements Na
     /** the maximum number of primitives a mesh shader output can store. */
     @NativeType("uint32_t")
     public int maxMeshOutputPrimitives() { return nmaxMeshOutputPrimitives(address()); }
-    /** the maximum number of multi-view views a mesh shader can use. */
+    /** the maximum number of multiview views a mesh shader can use. */
     @NativeType("uint32_t")
     public int maxMeshMultiviewViewCount() { return nmaxMeshMultiviewViewCount(address()); }
     /** the granularity with which mesh vertex outputs are allocated. The value can be used to compute the memory size used by the mesh shader, which must be less than or equal to {@code maxMeshTotalMemorySize}. */

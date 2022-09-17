@@ -23,7 +23,7 @@ import org.lwjgl.system.windows.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If {@link VkExportFenceCreateInfo} is not inluded in the same {@code pNext} chain, this structure is ignored.</p>
+ * <p>If {@link VkExportFenceCreateInfo} is not included in the same {@code pNext} chain, this structure is ignored.</p>
  * 
  * <p>If {@link VkExportFenceCreateInfo} is included in the {@code pNext} chain of {@link VkFenceCreateInfo} with a Windows {@code handleType}, but either {@link VkExportFenceWin32HandleInfoKHR} is not included in the {@code pNext} chain, or if it is but {@code pAttributes} is set to {@code NULL}, default security descriptor values will be used, and child processes created by the application will not inherit the handle, as described in the MSDN documentation for “{@code Synchronization Object Security and Access Rights}”<sup>1</sup>. Further, if the structure is not present, the access rights will be</p>
  * 

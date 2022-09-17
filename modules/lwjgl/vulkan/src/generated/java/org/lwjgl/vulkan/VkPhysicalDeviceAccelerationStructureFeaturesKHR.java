@@ -101,7 +101,7 @@ public class VkPhysicalDeviceAccelerationStructureFeaturesKHR extends Struct imp
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the acceleration structure functionality. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#acceleration-structure">Acceleration Structures</a>. */
+    /** indicates whether the implementation supports the acceleration structure functionality. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#acceleration-structure">Acceleration Structures</a>. */
     @NativeType("VkBool32")
     public boolean accelerationStructure() { return naccelerationStructure(address()) != 0; }
     /** indicates whether the implementation supports saving and reusing acceleration structure device addresses, e.g. for trace capture and replay. */

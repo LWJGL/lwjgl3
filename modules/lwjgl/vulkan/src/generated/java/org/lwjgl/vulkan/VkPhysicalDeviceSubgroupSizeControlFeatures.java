@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
- * <p>The {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT} structure was added in version 2 of the {@link EXTSubgroupSizeControl VK_EXT_subgroup_size_control} extension. Version 1 implementations of this extension will not fill out the features structure but applications may assume that both {@code subgroupSizeControl} and {@code computeFullSubgroups} are supported if the extension is supported. (See also the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#features-requirements">Feature Requirements</a> section.) Applications are advised to add a {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT} structure to the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features regardless of the version of the extension supported by the implementation. If the implementation only supports version 1, it will safely ignore the {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT} structure.</p>
+ * <p>The {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT} structure was added in version 2 of the {@link EXTSubgroupSizeControl VK_EXT_subgroup_size_control} extension. Version 1 implementations of this extension will not fill out the features structure but applications may assume that both {@code subgroupSizeControl} and {@code computeFullSubgroups} are supported if the extension is supported. (See also the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-requirements">Feature Requirements</a> section.) Applications are advised to add a {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT} structure to the {@code pNext} chain of {@link VkDeviceCreateInfo} to enable the features regardless of the version of the extension supported by the implementation. If the implementation only supports version 1, it will safely ignore the {@link VkPhysicalDeviceSubgroupSizeControlFeaturesEXT} structure.</p>
  * 
  * <p>Vulkan 1.3 implementations always support the features structure.</p>
  * </div>
@@ -99,7 +99,7 @@ public class VkPhysicalDeviceSubgroupSizeControlFeatures extends Struct implemen
     /** indicates whether the implementation supports controlling shader subgroup sizes via the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT} flag and the {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure. */
     @NativeType("VkBool32")
     public boolean subgroupSizeControl() { return nsubgroupSizeControl(address()) != 0; }
-    /** indicates whether the implementation supports requiring full subgroups in compute shaders via the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT} flag. */
+    /** indicates whether the implementation supports requiring full subgroups in compute , mesh, or task shaders via the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT} flag. */
     @NativeType("VkBool32")
     public boolean computeFullSubgroups() { return ncomputeFullSubgroups(address()) != 0; }
 

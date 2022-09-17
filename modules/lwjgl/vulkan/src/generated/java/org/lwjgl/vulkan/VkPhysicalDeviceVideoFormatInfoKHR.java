@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkVideoProfilesKHR}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkVideoProfileListInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code imageUsage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
  * <li>{@code imageUsage} <b>must</b> not be 0</li>
@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkPhysicalDeviceVideoFormatInfoKHR {
  *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
+ *     void const * {@link #pNext};
  *     VkImageUsageFlags {@link #imageUsage};
  * }</code></pre>
  */
@@ -87,7 +87,7 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
+    @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** a bitmask of {@code VkImageUsageFlagBits} specifying the intended usage of the video images. */
     @NativeType("VkImageUsageFlags")
@@ -98,9 +98,9 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
     /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR} value to the {@link #sType} field. */
     public VkPhysicalDeviceVideoFormatInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkPhysicalDeviceVideoFormatInfoKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
-    public VkPhysicalDeviceVideoFormatInfoKHR pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    public VkPhysicalDeviceVideoFormatInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkVideoProfileListInfoKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceVideoFormatInfoKHR pNext(VkVideoProfileListInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #imageUsage} field. */
     public VkPhysicalDeviceVideoFormatInfoKHR imageUsage(@NativeType("VkImageUsageFlags") int value) { nimageUsage(address(), value); return this; }
 
@@ -298,7 +298,7 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVideoFormatInfoKHR.nsType(address()); }
         /** @return the value of the {@link VkPhysicalDeviceVideoFormatInfoKHR#pNext} field. */
-        @NativeType("void *")
+        @NativeType("void const *")
         public long pNext() { return VkPhysicalDeviceVideoFormatInfoKHR.npNext(address()); }
         /** @return the value of the {@link VkPhysicalDeviceVideoFormatInfoKHR#imageUsage} field. */
         @NativeType("VkImageUsageFlags")
@@ -309,9 +309,9 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
         /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR} value to the {@link VkPhysicalDeviceVideoFormatInfoKHR#sType} field. */
         public VkPhysicalDeviceVideoFormatInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR); }
         /** Sets the specified value to the {@link VkPhysicalDeviceVideoFormatInfoKHR#pNext} field. */
-        public VkPhysicalDeviceVideoFormatInfoKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVideoFormatInfoKHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkVideoProfilesKHR} value to the {@code pNext} chain. */
-        public VkPhysicalDeviceVideoFormatInfoKHR.Buffer pNext(VkVideoProfilesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        public VkPhysicalDeviceVideoFormatInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceVideoFormatInfoKHR.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkVideoProfileListInfoKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceVideoFormatInfoKHR.Buffer pNext(VkVideoProfileListInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkPhysicalDeviceVideoFormatInfoKHR#imageUsage} field. */
         public VkPhysicalDeviceVideoFormatInfoKHR.Buffer imageUsage(@NativeType("VkImageUsageFlags") int value) { VkPhysicalDeviceVideoFormatInfoKHR.nimageUsage(address(), value); return this; }
 

@@ -8,7 +8,7 @@ package org.lwjgl.vulkan;
 /**
  * This extension allows the use of the {@code SPV_KHR_subgroup_uniform_control_flow} SPIR-V extension in shader modules. {@code SPV_KHR_subgroup_uniform_control_flow} provides stronger guarantees that diverged subgroups will reconverge.
  * 
- * <p>Developers should utilize this extension if they use subgroup operations to reduce the work performed by a uniform subgroup. This extension will guarantee that uniform subgroup will reconverge in the same manner as invocation groups (see “{@code Uniform Control Flow}” in the <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#spirv-spec">Khronos SPIR-V Specification</a>).</p>
+ * <p>Developers should utilize this extension if they use subgroup operations to reduce the work performed by a uniform subgroup. This extension will guarantee that uniform subgroup will reconverge in the same manner as invocation groups (see “{@code Uniform Control Flow}” in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#spirv-spec">Khronos SPIR-V Specification</a>).</p>
  * 
  * <h5>VK_KHR_shader_subgroup_uniform_control_flow</h5>
  * 
@@ -27,7 +27,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Alan Baker <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_subgroup_uniform_control_flow]%20@alan-baker%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shader_subgroup_uniform_control_flow%20extension%3E%3E">alan-baker</a></li>
+ * <li>Alan Baker <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_subgroup_uniform_control_flow]%20@alan-baker%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shader_subgroup_uniform_control_flow%20extension*">alan-baker</a></li>
  * </ul></dd>
  * </dl>
  * 

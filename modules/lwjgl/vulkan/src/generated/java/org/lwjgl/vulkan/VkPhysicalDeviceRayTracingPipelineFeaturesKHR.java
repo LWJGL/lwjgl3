@@ -107,7 +107,7 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the ray tracing pipeline functionality. See <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#ray-tracing">Ray Tracing</a>. */
+    /** indicates whether the implementation supports the ray tracing pipeline functionality. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#ray-tracing">Ray Tracing</a>. */
     @NativeType("VkBool32")
     public boolean rayTracingPipeline() { return nrayTracingPipeline(address()) != 0; }
     /** indicates whether the implementation supports saving and reusing shader group handles, e.g. for trace capture and replay. */
@@ -119,7 +119,7 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
     /** indicates whether the implementation supports indirect ray tracing commands, e.g. {@link KHRRayTracingPipeline#vkCmdTraceRaysIndirectKHR CmdTraceRaysIndirectKHR}. */
     @NativeType("VkBool32")
     public boolean rayTracingPipelineTraceRaysIndirect() { return nrayTracingPipelineTraceRaysIndirect(address()) != 0; }
-    /** indicates whether the implementation supports <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#ray-traversal-culling-primitive">primitive culling during ray traversal</a>. */
+    /** indicates whether the implementation supports <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#ray-traversal-culling-primitive">primitive culling during ray traversal</a>. */
     @NativeType("VkBool32")
     public boolean rayTraversalPrimitiveCulling() { return nrayTraversalPrimitiveCulling(address()) != 0; }
 

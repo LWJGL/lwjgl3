@@ -18,6 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing capabilities of a surface.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is enabled and {@link VkPhysicalDeviceSurfaceInfo2KHR}{@code ::surface} in the {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR} call is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the values returned in {@code minImageCount}, {@code maxImageCount}, {@code currentExtent}, and {@code currentTransform} will not reflect that of any surface and will instead be as such:</p>
+ * 
+ * <ul>
+ * <li>{@code minImageCount} and {@code maxImageCount} will be <code>0xFFFFFFFF</code></li>
+ * <li>{@code currentExtent} will be <code>(0xFFFFFFFF, 0xFFFFFFFF)</code></li>
+ * <li>{@code currentTransform} will be {@link KHRSurface#VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR SURFACE_TRANSFORM_INHERIT_BIT_KHR}</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

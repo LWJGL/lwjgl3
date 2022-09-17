@@ -75,7 +75,7 @@ public class VkAccelerationStructureGeometryDataKHR extends Struct implements Na
 
     /** a {@link VkAccelerationStructureGeometryTrianglesDataKHR} structure. */
     public VkAccelerationStructureGeometryTrianglesDataKHR triangles() { return ntriangles(address()); }
-    /** a {@link VkAccelerationStructureGeometryAabbsDataKHR} struture. */
+    /** a {@link VkAccelerationStructureGeometryAabbsDataKHR} structure. */
     public VkAccelerationStructureGeometryAabbsDataKHR aabbs() { return naabbs(address()); }
     /** a {@link VkAccelerationStructureGeometryInstancesDataKHR} structure. */
     public VkAccelerationStructureGeometryInstancesDataKHR instances() { return ninstances(address()); }

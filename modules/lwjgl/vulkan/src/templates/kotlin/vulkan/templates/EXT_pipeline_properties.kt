@@ -43,7 +43,7 @@ val EXT_pipeline_properties = "EXTPipelineProperties".nativeClassVK("EXT_pipelin
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Mukund Keshava <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_pipeline_properties]%20@mkeshavanv%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_pipeline_properties%20extension%3E%3E">mkeshavanv</a></li>
+                <li>Mukund Keshava <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_pipeline_properties]%20@mkeshavanv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_pipeline_properties%20extension*">mkeshavanv</a></li>
             </ul></dd>
         </dl>
 
@@ -105,7 +105,7 @@ val EXT_pipeline_properties = "EXTPipelineProperties".nativeClassVK("EXT_pipelin
         <ul>
             <li>The {@code pipeline} member of {@code pPipelineInfo} must have been created with {@code device}</li>
             <li>{@code pPipelineProperties} <b>must</b> be a valid pointer to a ##VkPipelinePropertiesIdentifierEXT structure</li>
-            <li>The <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelinePropertiesIdentifier">{@code pipelinePropertiesIdentifier}</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelinePropertiesIdentifier">{@code pipelinePropertiesIdentifier}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

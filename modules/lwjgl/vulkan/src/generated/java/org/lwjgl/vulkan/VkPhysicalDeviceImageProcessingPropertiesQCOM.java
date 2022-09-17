@@ -103,14 +103,14 @@ public class VkPhysicalDeviceImageProcessingPropertiesQCOM extends Struct implem
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum value that <b>can</b> be specified for {@link VkImageViewSampleWeightCreateInfoQCOM}{@code ::numPhases}. in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#textures-weightimage-filterphases">weight image sampling</a> operations. */
+    /** the maximum value that <b>can</b> be specified for {@link VkImageViewSampleWeightCreateInfoQCOM}{@code ::numPhases}. in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-weightimage-filterphases">weight image sampling</a> operations. */
     @NativeType("uint32_t")
     public int maxWeightFilterPhases() { return nmaxWeightFilterPhases(address()); }
     /** a {@link VkExtent2D} describing the largest dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@link VkImageViewSampleWeightCreateInfoQCOM}{@code ::filterSize}. */
     public VkExtent2D maxWeightFilterDimension() { return nmaxWeightFilterDimension(address()); }
-    /** a {@link VkExtent2D} describing the largest dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blockSize} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#textures-blockmatch">block matching</a> operations. */
+    /** a {@link VkExtent2D} describing the largest dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blockSize} in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-blockmatch">block matching</a> operations. */
     public VkExtent2D maxBlockMatchRegion() { return nmaxBlockMatchRegion(address()); }
-    /** a {@link VkExtent2D} describing the the maximum dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blocksize} in <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#textures-boxfilter">box filter sampling</a> operations. */
+    /** a {@link VkExtent2D} describing the the maximum dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blocksize} in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-boxfilter">box filter sampling</a> operations. */
     public VkExtent2D maxBoxFilterBlockSize() { return nmaxBoxFilterBlockSize(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

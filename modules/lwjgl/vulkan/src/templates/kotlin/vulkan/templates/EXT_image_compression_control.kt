@@ -34,11 +34,11 @@ val EXT_image_compression_control = "EXTImageCompressionControl".nativeClassVK("
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_image_compression_control]%20@janharaldfredriksen-arm%250A%3C%3CHere%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_image_compression_control%20extension%3E%3E">janharaldfredriksen-arm</a></li>
+                <li>Jan-Harald Fredriksen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_image_compression_control]%20@janharaldfredriksen-arm%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_image_compression_control%20extension*">janharaldfredriksen-arm</a></li>
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>
-            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_image_compression_control.asciidoc">VK_EXT_image_compression_control</a></dd>
+            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_image_compression_control.adoc">VK_EXT_image_compression_control</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
@@ -136,7 +136,7 @@ val EXT_image_compression_control = "EXTImageCompressionControl".nativeClassVK("
 
         If the format has a different bit rate for different components, ##VkImageCompressionControlEXT{@code ::pFixedRateFlags} describes the rate of the component with the largest number of bits assigned to it, scaled pro rata. For example, to request that a #FORMAT_A2R10G10B10_UNORM_PACK32 format be stored at a rate of 8 bits per pixel, use #IMAGE_COMPRESSION_FIXED_RATE_2BPC_BIT_EXT (10 bits for the largest component, stored at quarter the original size, 2.5 bits, rounded down).
 
-        If {@code flags} includes #IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT, and multiple bits are set in ##VkImageCompressionControlEXT::pFixedRateFlags for a plane, implementations <b>should</b> apply the lowest allowed bitrate that is supported.
+        If {@code flags} includes #IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT, and multiple bits are set in ##VkImageCompressionControlEXT{@code ::pFixedRateFlags} for a plane, implementations <b>should</b> apply the lowest allowed bitrate that is supported.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         The choice of “{@code bits per component}” terminology was chosen so that the same compression rate describes the same degree of compression applied to formats that differ only in the number of components. For example, #FORMAT_R8G8_UNORM compressed to half its original size is a rate of 4 bits per component, 8 bits per pixel. #FORMAT_R8G8B8A8_UNORM compressed to half <em>its</em> original size is 4 bits per component, 16 bits per pixel. Both of these cases can be requested with #IMAGE_COMPRESSION_FIXED_RATE_4BPC_BIT_EXT.
@@ -198,8 +198,8 @@ val EXT_image_compression_control = "EXTImageCompressionControl".nativeClassVK("
             <li>If {@code format} has a depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain #IMAGE_ASPECT_DEPTH_BIT</li>
             <li>If {@code format} has a stencil component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> contain #IMAGE_ASPECT_STENCIL_BIT</li>
             <li>If {@code format} does not contain a stencil or depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> not contain #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT</li>
-            <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_LINEAR and its {@code format} is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a> with two planes, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT or #IMAGE_ASPECT_PLANE_1_BIT</li>
-            <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_LINEAR and its {@code format} is a <a target="_blank" href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a> with three planes, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT or #IMAGE_ASPECT_PLANE_2_BIT</li>
+            <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_LINEAR and its {@code format} is a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a> with two planes, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT or #IMAGE_ASPECT_PLANE_1_BIT</li>
+            <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_LINEAR and its {@code format} is a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a> with three planes, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT or #IMAGE_ASPECT_PLANE_2_BIT</li>
             <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code> and the index <em>i</em> <b>must</b> be less than the ##VkDrmFormatModifierPropertiesEXT{@code ::drmFormatModifierPlaneCount} associated with the image’s {@code format} and ##VkImageDrmFormatModifierPropertiesEXT{@code ::drmFormatModifier}</li>
         </ul>
 

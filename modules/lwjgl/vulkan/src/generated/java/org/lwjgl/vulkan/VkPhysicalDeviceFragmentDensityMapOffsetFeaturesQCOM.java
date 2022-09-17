@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing fragment density map offet features that can be supported by an implementation.
+ * Structure describing fragment density map offset features that can be supported by an implementation.
  * 
  * <h5>Description</h5>
  * 

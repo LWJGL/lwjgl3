@@ -40,6 +40,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code sequencesIndexBuffer} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, its usage flag <b>must</b> have the {@link VK10#VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT BUFFER_USAGE_INDIRECT_BUFFER_BIT} bit set</li>
  * <li>If {@code sequencesIndexBuffer} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code sequencesIndexOffset} <b>must</b> be aligned to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV}{@code ::minSequencesIndexBufferOffsetAlignment}</li>
  * <li>If {@code sequencesIndexBuffer} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} and is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
+ * <li>If the {@code indirectCommandsLayout} uses a token of {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV}, then the {@code pipeline} <b>must</b> contain a shader stage using the {@code MeshNV} {@code Execution} {@code Model}.</li>
+ * <li>If the {@code indirectCommandsLayout} uses a token of {@link EXTMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV}, then the {@code pipeline} <b>must</b> contain a shader stage using the {@code MeshEXT} {@code Execution} {@code Model}.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
