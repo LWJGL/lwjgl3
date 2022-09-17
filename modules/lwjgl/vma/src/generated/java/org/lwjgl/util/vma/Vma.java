@@ -138,8 +138,8 @@ import org.lwjgl.vulkan.*;
  * {@link #VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT} or {@link #VMA_ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT}. This will help the library decide about preferred
  * memory type to ensure it has {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT} so you can map it.</p>
  * 
- * <p>For example, a staging buffer that will be filled via mapped pointer and then used as a source of transfer to the buffer decribed previously can be
- * created like this. It will likely and up in a memory type that is {@code HOST_VISIBLE} and {@code HOST_COHERENT} but not {@code HOST_CACHED} (meaning
+ * <p>For example, a staging buffer that will be filled via mapped pointer and then used as a source of transfer to the buffer described previously can be
+ * created like this. It will likely end up in a memory type that is {@code HOST_VISIBLE} and {@code HOST_COHERENT} but not {@code HOST_CACHED} (meaning
  * uncached, write-combined) and not {@code DEVICE_LOCAL} (meaning system RAM).</p>
  * 
  * <pre><code>
@@ -158,7 +158,7 @@ import org.lwjgl.vulkan.*;
  * <p>Usage values {@code VMA_MEMORY_USAGE_AUTO*} are legal to use only when the library knows about the resource being created by having
  * {@code VkBufferCreateInfo} / {@code VkImageCreateInfo} passed, so they work with functions like: {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage},
  * {@link #vmaFindMemoryTypeIndexForBufferInfo FindMemoryTypeIndexForBufferInfo} etc. If you allocate raw memory using function {@link #vmaAllocateMemory AllocateMemory}, you have to use other means of selecting memory
- * type, as decribed below.</p>
+ * type, as described below.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
@@ -280,7 +280,7 @@ import org.lwjgl.vulkan.*;
  * 
  * <h4>Persistently mapped memory</h4>
  * 
- * <p>Kepping your memory persistently mapped is generally OK in Vulkan. You don't need to unmap it before using its data on the GPU. The library provides a
+ * <p>Keeping your memory persistently mapped is generally OK in Vulkan. You don't need to unmap it before using its data on the GPU. The library provides a
  * special feature designed for that: Allocations made with {@link #VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} flag set in {@link VmaAllocationCreateInfo}{@code ::flags} stay mapped
  * all the time, so you can just access CPU pointer to it any time without a need to call any "map" or "unmap" function. Example:</p>
  * 
@@ -411,9 +411,9 @@ import org.lwjgl.vulkan.*;
  * <p>To query for current memory usage and available budget, use function {@link #vmaGetHeapBudgets GetHeapBudgets}. Returned structure {@link VmaBudget} contains quantities expressed in
  * bytes, per Vulkan memory heap.</p>
  * 
- * <p>Please note that this function returns different information and works faster than {@link #vmaCalculateStats CalculateStats}. {@code vmaGetHeapBudgets()} can be called every
- * frame or even before every allocation, while {@code vmaCalculateStats()} is intended to be used rarely, only to obtain statistical information, e.g.
- * for debugging purposes.</p>
+ * <p>Please note that this function returns different information and works faster than {@link #vmaCalculateStatistics CalculateStatistics}. {@code vmaGetHeapBudgets()} can be called
+ * every frame or even before every allocation, while {@code vmaCalculateStatistics()} is intended to be used rarely, only to obtain statistical
+ * information, e.g. for debugging purposes.</p>
  * 
  * <p>It is recommended to use <b>VK_EXT_memory_budget</b> device extension to obtain information about the budget from Vulkan device. VMA is able to use
  * this extension automatically. When not enabled, the allocator behaves same way, but then it estimates current usage and available budget based on its
@@ -436,16 +436,20 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>If the size of the requested resource plus current memory usage is more than the budget, by default the library still tries to create it, leaving it to
  * the Vulkan implementation whether the allocation succeeds or fails. You can change this behavior by using {@link #VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT ALLOCATION_CREATE_WITHIN_BUDGET_BIT} flag.
- * With it, the allocation is not made if it would exceed the budget or if the budget is already exceeded. The allocation then fails with
- * {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}. Example usage pattern may be to pass the {@code VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT} flag when creating
- * resources that are not essential for the application (e.g. the texture of a specific object) and not to pass it when creating critically important
- * resources (e.g. render targets).</p>
+ * With it, the allocation is not made if it would exceed the budget or if the budget is already exceeded. VMA then tries to make the allocation from the
+ * next eligible Vulkan memory type. The all of them fail, the call then fails with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}. Example usage pattern may be to
+ * pass the {@code VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT} flag when creating resources that are not essential for the application (e.g. the texture of a
+ * specific object) and not to pass it when creating critically important resources (e.g. render targets).</p>
+ * 
+ * <p>On AMD graphics cards there is a custom vendor extension available: {@code VK_AMD_memory_overallocation_behavior} that allows to control the behavior
+ * of the Vulkan implementation in out-of-memory cases - whether it should fail with an error code or still allow the allocation. Usage of this extension
+ * involves only passing extra structure on Vulkan device creation, so it is out of scope of this library.</p>
  * 
  * <p>Finally, you can also use {@link #VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT ALLOCATION_CREATE_NEVER_ALLOCATE_BIT} flag to make sure a new allocation is created only when it fits inside one of the
  * existing memory blocks. If it would require to allocate a new block, if fails instead with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY}. This also ensures
  * that the function call is very fast because it never goes to Vulkan to obtain a new block.</p>
  * 
- * <p>Please note that creating custom memory pools with {@link VmaPoolCreateInfo}{@code ::minBlockCount} set to more than 0 will try to allocate memory blocks
+ * <p>Note: Creating custom memory pools with {@link VmaPoolCreateInfo}{@code ::minBlockCount} set to more than 0 will currently try to allocate memory blocks
  * without checking whether they fit within budget.</p>
  * 
  * <h3>Resource aliasing (overlap)</h3>
@@ -576,14 +580,28 @@ import org.lwjgl.vulkan.*;
  * <p>Example:</p>
  * 
  * <pre><code>
+ * // Find memoryTypeIndex for the pool.
+ * VkBufferCreateInfo sampleBufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
+ * sampleBufCreateInfo.size = 0x10000; // Doesn't matter.
+ * sampleBufCreateInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+ * 
+ * VmaAllocationCreateInfo sampleAllocCreateInfo = {};
+ * sampleAllocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
+ * 
+ * uint32_t memTypeIndex;
+ * VkResult res = vmaFindMemoryTypeIndexForBufferInfo(allocator,
+ *     &amp;sampleBufCreateInfo, &amp;sampleAllocCreateInfo, &amp;memTypeIndex);
+ * // Check res...
+ * 
  * // Create a pool that can have at most 2 blocks, 128 MiB each.
  * VmaPoolCreateInfo poolCreateInfo = {};
- * poolCreateInfo.memoryTypeIndex = ...
+ * poolCreateInfo.memoryTypeIndex = memTypeIndex
  * poolCreateInfo.blockSize = 128ull * 1024 * 1024;
  * poolCreateInfo.maxBlockCount = 2;
  * 
  * VmaPool pool;
- * vmaCreatePool(allocator, &amp;poolCreateInfo, &amp;pool);
+ * res = vmaCreatePool(allocator, &amp;poolCreateInfo, &amp;pool);
+ * // Check res...
  * 
  * // Allocate a buffer out of it.
  * VkBufferCreateInfo bufCreateInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
@@ -595,8 +613,8 @@ import org.lwjgl.vulkan.*;
  * 
  * VkBuffer buf;
  * VmaAllocation alloc;
- * VmaAllocationInfo allocInfo;
- * vmaCreateBuffer(allocator, &amp;bufCreateInfo, &amp;allocCreateInfo, &amp;buf, &amp;alloc, &amp;allocInfo);</code></pre>
+ * res = vmaCreateBuffer(allocator, &amp;bufCreateInfo, &amp;allocCreateInfo, &amp;buf, &amp;alloc, nullptr);
+ * // Check res...</code></pre>
  * 
  * <p>You have to free all allocations made from this pool before destroying it.</p>
  * 
@@ -700,30 +718,7 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>Ring buffer is available only in pools with one memory block - {@link VmaPoolCreateInfo}{@code ::maxBlockCount} must be 1. Otherwise behavior is undefined.</p>
  * 
- * <h4>Buddy allocation algorithm</h4>
- * 
- * <p>There is another allocation algorithm that can be used with custom pools, called "buddy". Its internal data structure is based on a tree of blocks,
- * each having size that is a power of two and a half of its parent's size. When you want to allocate memory of certain size, a free node in the tree is
- * located. If it is too large, it is recursively split into two halves (called "buddies"). However, if requested allocation size is not a power of two,
- * the size of a tree node is aligned up to the nearest power of two and the remaining space is wasted. When two buddy nodes become free, they are merged
- * back into one larger node.</p>
- * 
- * <p>The advantage of buddy allocation algorithm over default algorithm is faster allocation and deallocation, as well as smaller external fragmentation.
- * The disadvantage is more wasted space (internal fragmentation).</p>
- * 
- * <p>For more information, please search the Internet for "Buddy memory allocation" - sources that describe this concept in general.</p>
- * 
- * <p>To use buddy allocation algorithm with a custom pool, add flag {@link #VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT} to {@link VmaPoolCreateInfo}{@code ::flags} while creating
- * {@code VmaPool} object.</p>
- * 
- * <p>Several limitations apply to pools that use buddy algorithm:</p>
- * 
- * <ul>
- * <li>It is recommended to use {@link VmaPoolCreateInfo}{@code ::blockSize} that is a power of two. Otherwise, only largest power of two smaller than the size
- * is used for allocations. The remaining space always stays unused.</li>
- * <li>Margins and corruption detection don't work in such pools.</li>
- * <li>Defragmentation doesn't work with allocations made from such pool.</li>
- * </ul>
+ * <p>Note: defragmentation is not supported in custom pools created with {@link #VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT}.</p>
  * 
  * <h3>Defragmentation</h3>
  * 
@@ -731,218 +726,178 @@ import org.lwjgl.vulkan.*;
  * library is unable to find a continuous range of free memory for a new allocation despite there is enough free space, just scattered across many small
  * free ranges between existing allocations.</p>
  * 
- * <p>To mitigate this problem, you can use defragmentation feature: {@link VmaDefragmentationInfo2}, {@link #vmaDefragmentationBegin DefragmentationBegin}, {@link #vmaDefragmentationEnd DefragmentationEnd}. Given set of
- * allocations, this function can move them to compact used memory, ensure more continuous free space and possibly also free some {@code VkDeviceMemory}
- * blocks.</p>
- * 
- * <p>What the defragmentation does is:</p>
- * 
- * <ul>
- * <li>Updates {@code VmaAllocation} objects to point to new {@code VkDeviceMemory} and offset. After allocation has been moved, its
- * {@link VmaAllocationInfo}{@code ::deviceMemory} and/or {@code VmaAllocationInfo::offset} changes. You must query them again using {@link #vmaGetAllocationInfo GetAllocationInfo} if
- * you need them.</li>
- * <li>Moves actual data in memory.</li>
- * </ul>
- * 
- * <p>What it doesn't do, so you need to do it yourself:</p>
- * 
- * <ul>
- * <li>Recreate buffers and images that were bound to allocations that were defragmented and bind them with their new places in memory. You must use
- * {@code vkDestroyBuffer()}, {@code vkDestroyImage()}, {@code vkCreateBuffer()}, {@code vkCreateImage()}, {@link #vmaBindBufferMemory BindBufferMemory}, {@link #vmaBindImageMemory BindImageMemory} for
- * that purpose and NOT {@link #vmaDestroyBuffer DestroyBuffer}, {@link #vmaDestroyImage DestroyImage}, {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}, because you don't need to destroy or create allocation
- * objects!</li>
- * <li>Recreate views and update descriptors that point to these buffers and images.</li>
- * </ul>
- * 
- * <h4>Defragmenting CPU memory</h4>
- * 
- * <p>Following example demonstrates how you can run defragmentation on CPU. Only allocations created in memory types that are {@code HOST_VISIBLE} can be
- * defragmented. Others are ignored.</p>
- * 
- * <p>The way it works is:</p>
- * 
- * <ul>
- * <li>It temporarily maps entire memory blocks when necessary.</li>
- * <li>It moves data using {@code memmove()} function.</li>
- * </ul>
- * 
- * <pre><code>
- * // Given following variables already initialized:
- * VkDevice device;
- * VmaAllocator allocator;
- * std::vector&lt;VkBuffer&gt; buffers;
- * std::vector&lt;VmaAllocation&gt; allocations;
- * 
- * 
- * const uint32_t allocCount = (uint32_t)allocations.size();
- * std::vector&lt;VkBool32&gt; allocationsChanged(allocCount);
- * 
- * VmaDefragmentationInfo2 defragInfo = {};
- * defragInfo.allocationCount = allocCount;
- * defragInfo.pAllocations = allocations.data();
- * defragInfo.pAllocationsChanged = allocationsChanged.data();
- * defragInfo.maxCpuBytesToMove = VK_WHOLE_SIZE; // No limit.
- * defragInfo.maxCpuAllocationsToMove = UINT32_MAX; // No limit.
- * 
- * VmaDefragmentationContext defragCtx;
- * vmaDefragmentationBegin(allocator, &amp;defragInfo, nullptr, &amp;defragCtx);
- * vmaDefragmentationEnd(allocator, defragCtx);
- * 
- * for(uint32_t i = 0; i &lt; allocCount; ++i)
- * {
- *     if(allocationsChanged[i])
- *     {
- *         // Destroy buffer that is immutably bound to memory region which is no longer valid.
- *         vkDestroyBuffer(device, buffers[i], nullptr);
- * 
- *         // Create new buffer with same parameters.
- *         VkBufferCreateInfo bufferInfo = ...;
- *         vkCreateBuffer(device, &amp;bufferInfo, nullptr, &amp;buffers[i]);
- * 
- *         // You can make dummy call to vkGetBufferMemoryRequirements here to silence validation layer warning.
- * 
- *         // Bind new buffer to new memory region. Data contained in it is already moved.
- *         VmaAllocationInfo allocInfo;
- *         vmaGetAllocationInfo(allocator, allocations[i], &amp;allocInfo);
- *         vmaBindBufferMemory(allocator, allocations[i], buffers[i]);
- *     }
- * }</code></pre>
- * 
- * <p>Setting {@link VmaDefragmentationInfo2}{@code ::pAllocationsChanged} is optional. This output array tells whether particular allocation in
- * {@code VmaDefragmentationInfo2::pAllocations} at the same index has been modified during defragmentation. You can pass null, but you then need to query
- * every allocation passed to defragmentation for new parameters using {@link #vmaGetAllocationInfo GetAllocationInfo} if you might need to recreate and rebind a buffer or image
- * associated with it.</p>
- * 
- * <p>If you use {@code Custom memory pools}, you can fill {@code VmaDefragmentationInfo2::poolCount} and {@code VmaDefragmentationInfo2::pPools} instead of
- * {@code VmaDefragmentationInfo2::allocationCount} and {@code VmaDefragmentationInfo2::pAllocations} to defragment all allocations in given pools. You
- * cannot use {@code VmaDefragmentationInfo2::pAllocationsChanged} in that case. You can also combine both methods.</p>
- * 
- * <h4>Defragmenting GPU memory</h4>
- * 
- * <p>It is also possible to defragment allocations created in memory types that are not {@code HOST_VISIBLE}. To do that, you need to pass a command buffer
- * that meets requirements as described in {@code VmaDefragmentationInfo2::commandBuffer}. The way it works is:</p>
- * 
- * <ul>
- * <li>It creates temporary buffers and binds them to entire memory blocks when necessary.</li>
- * <li>It issues {@code vkCmdCopyBuffer()} to passed command buffer.</li>
- * </ul>
+ * <p>To mitigate this problem, you can use defragmentation feature. It doesn't happen automatically though and needs your cooperation, because VMA is a low
+ * level library that only allocates memory. It cannot recreate buffers and images in a new place as it doesn't remember the contents of
+ * {@code VkBufferCreateInfo} / {@code VkImageCreateInfo} structures. It cannot copy their contents as it doesn't record any commands to a command buffer.</p>
  * 
  * <p>Example:</p>
  * 
  * <pre><code>
- * // Given following variables already initialized:
- * VkDevice device;
- * VmaAllocator allocator;
- * VkCommandBuffer commandBuffer;
- * std::vector&lt;VkBuffer&gt; buffers;
- * std::vector&lt;VmaAllocation&gt; allocations;
- * 
- * 
- * const uint32_t allocCount = (uint32_t)allocations.size();
- * std::vector&lt;VkBool32&gt; allocationsChanged(allocCount);
- * 
- * VkCommandBufferBeginInfo cmdBufBeginInfo = ...;
- * vkBeginCommandBuffer(commandBuffer, &amp;cmdBufBeginInfo);
- * 
- * VmaDefragmentationInfo2 defragInfo = {};
- * defragInfo.allocationCount = allocCount;
- * defragInfo.pAllocations = allocations.data();
- * defragInfo.pAllocationsChanged = allocationsChanged.data();
- * defragInfo.maxGpuBytesToMove = VK_WHOLE_SIZE; // Notice it is "GPU" this time.
- * defragInfo.maxGpuAllocationsToMove = UINT32_MAX; // Notice it is "GPU" this time.
- * defragInfo.commandBuffer = commandBuffer;
+ * VmaDefragmentationInfo defragInfo = {};
+ * defragInfo.pool = myPool;
+ * defragInfo.flags = VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT;
  * 
  * VmaDefragmentationContext defragCtx;
- * vmaDefragmentationBegin(allocator, &amp;defragInfo, nullptr, &amp;defragCtx);
+ * VkResult res = vmaBeginDefragmentation(allocator, &amp;defragInfo, &amp;defragCtx);
+ * // Check res...
  * 
- * vkEndCommandBuffer(commandBuffer);
- * 
- * // Submit commandBuffer.
- * // Wait for a fence that ensures commandBuffer execution finished.
- * 
- * vmaDefragmentationEnd(allocator, defragCtx);
- * 
- * for(uint32_t i = 0; i &lt; allocCount; ++i)
+ * for(;;)
  * {
- *     if(allocationsChanged[i])
+ *     VmaDefragmentationPassMoveInfo pass;
+ *     res = vmaBeginDefragmentationPass(allocator, defragCtx, &amp;pass);
+ *     if(res == VK_SUCCESS)
+ *         break;
+ *     else if(res != VK_INCOMPLETE)
+ *         // Handle error...
+ * 
+ *     for(uint32_t i = 0; i &lt; pass.moveCount; ++i)
  *     {
- *         // Destroy buffer that is immutably bound to memory region which is no longer valid.
- *         vkDestroyBuffer(device, buffers[i], nullptr);
- * 
- *         // Create new buffer with same parameters.
- *         VkBufferCreateInfo bufferInfo = ...;
- *         vkCreateBuffer(device, &amp;bufferInfo, nullptr, &amp;buffers[i]);
- * 
- *         // You can make dummy call to vkGetBufferMemoryRequirements here to silence validation layer warning.
- * 
- *         // Bind new buffer to new memory region. Data contained in it is already moved.
+ *         // Inspect pass.pMoves[i].srcAllocation, identify what buffer/image it represents.
  *         VmaAllocationInfo allocInfo;
- *         vmaGetAllocationInfo(allocator, allocations[i], &amp;allocInfo);
- *         vmaBindBufferMemory(allocator, allocations[i], buffers[i]);
+ *         vmaGetAllocationInfo(allocator, pMoves[i].srcAllocation, &amp;allocInfo);
+ *         MyEngineResourceData* resData = (MyEngineResourceData*)allocInfo.pUserData;
+ * 
+ *         // Recreate and bind this buffer/image at: pass.pMoves[i].dstMemory, pass.pMoves[i].dstOffset.
+ *         VkImageCreateInfo imgCreateInfo = ...
+ *         VkImage newImg;
+ *         res = vkCreateImage(device, &amp;imgCreateInfo, nullptr, &amp;newImg);
+ *         // Check res...
+ *         res = vmaBindImageMemory(allocator, pMoves[i].dstTmpAllocation, newImg);
+ *         // Check res...
+ * 
+ *         // Issue a vkCmdCopyBuffer/vkCmdCopyImage to copy its content to the new place.
+ *         vkCmdCopyImage(cmdBuf, resData-&gt;img, ..., newImg, ...);
  *     }
- * }</code></pre>
  * 
- * <p>You can combine these two methods by specifying non-zero {@code maxGpu*} as well as {@code maxCpu*} parameters. The library automatically chooses best
- * method to defragment each memory pool.</p>
+ *     // Make sure the copy commands finished executing.
+ *     vkWaitForFences(...);
  * 
- * <p>You may try not to block your entire program to wait until defragmentation finishes, but do it in the background, as long as you carefully fullfill
- * requirements described in function {@link #vmaDefragmentationBegin DefragmentationBegin}.</p>
+ *     // Destroy old buffers/images bound with pass.pMoves[i].srcAllocation.
+ *     for(uint32_t i = 0; i &lt; pass.moveCount; ++i)
+ *     {
+ *         // ...
+ *         vkDestroyImage(device, resData-&gt;img, nullptr);
+ *     }
  * 
- * <h4>Additional notes</h4>
+ *     // Update appropriate descriptors to point to the new places...
  * 
- * <p>It is only legal to defragment allocations bound to:</p>
+ *     res = vmaEndDefragmentationPass(allocator, defragCtx, &amp;pass);
+ *     if(res == VK_SUCCESS)
+ *         break;
+ *     else if(res != VK_INCOMPLETE)
+ *         // Handle error...
+ * }
  * 
- * <ul>
- * <li>buffers</li>
- * <li>images created with {@code VK_IMAGE_CREATE_ALIAS_BIT}, {@code VK_IMAGE_TILING_LINEAR}, and being currently in {@code VK_IMAGE_LAYOUT_GENERAL} or
- * {@code VK_IMAGE_LAYOUT_PREINITIALIZED}.</li>
- * </ul>
+ * vmaEndDefragmentation(allocator, defragCtx, nullptr);</code></pre>
  * 
- * <p>Defragmentation of images created with {@code VK_IMAGE_TILING_OPTIMAL} or in any other layout may give undefined results.</p>
+ * <p>Although functions like {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}, {@link #vmaDestroyBuffer DestroyBuffer}, {@link #vmaDestroyImage DestroyImage} create/destroy an allocation and a buffer/image at once,
+ * these are just a shortcut for creating the resource, allocating memory, and binding them together. Defragmentation works on memory allocations only.
+ * You must handle the rest manually. Defragmentation is an iterative process that should repreat "passes" as long as related functions return
+ * {@code VK_INCOMPLETE} not {@code VK_SUCCESS}. In each pass:</p>
  * 
- * <p>If you defragment allocations bound to images, new images to be bound to new memory region after defragmentation should be created with
- * {@code VK_IMAGE_LAYOUT_PREINITIALIZED} and then transitioned to their original layout from before defragmentation if needed using an image memory
- * barrier.</p>
- * 
- * <p>While using defragmentation, you may experience validation layer warnings, which you just need to ignore.</p>
- * 
- * <p>Please don't expect memory to be fully compacted after defragmentation. Algorithms inside are based on some heuristics that try to maximize number of
- * Vulkan memory blocks to make totally empty to release them, as well as to maximize continuous empty space inside remaining blocks, while minimizing the
- * number and size of allocations that need to be moved. Some fragmentation may still remain - this is normal.</p>
- * 
- * <h4>Writing custom defragmentation algorithm</h4>
- * 
- * <p>If you want to implement your own, custom defragmentation algorithm, there is infrastructure prepared for that, but it is not exposed through the
- * library API - you need to hack its source code.</p>
- * 
- * <p>Here are steps needed to do this:</p>
+ * <ol>
+ * <li>{@link #vmaBeginDefragmentationPass BeginDefragmentationPass} function call:
  * 
  * <ul>
- * <li>Main thing you need to do is to define your own class derived from base abstract class {@code VmaDefragmentationAlgorithm} and implement your
- * version of its pure virtual methods. See definition and comments of this class for details.</li>
- * <li>Your code needs to interact with device memory block metadata. If you need more access to its data than it is provided by its public interface,
- * declare your new class as a friend class e.g. in class {@code VmaBlockMetadata_Generic}.</li>
- * <li>If you want to create a flag that would enable your algorithm or pass some additional flags to configure it, add them to
- * {@code VmaDefragmentationFlagBits} and use them in {@code VmaDefragmentationInfo2::flags}.</li>
- * <li>Modify function {@code VmaBlockVectorDefragmentationContext::Begin} to create object of your new class whenever needed.</li>
+ * <li>Calculates and returns the list of allocations to be moved in this pass. Note this can be a time-consuming process.</li>
+ * <li>Reserves destination memory for them by creating temporary destination allocations that you can query for their {@code VkDeviceMemory} +
+ * {@code offset} using {@link #vmaGetAllocationInfo GetAllocationInfo}.</li>
+ * </ul></li>
+ * <li>Inside the pass, <b>you should</b>:
+ * 
+ * <ul>
+ * <li>Inspect the returned list of allocations to be moved.</li>
+ * <li>Create new buffers/images and bind them at the returned destination temporary allocations.</li>
+ * <li>Copy data from source to destination resources if necessary.</li>
+ * <li>Destroy the source buffers/images, but NOT their allocations.</li>
+ * </ul></li>
+ * <li>{@link #vmaEndDefragmentationPass EndDefragmentationPass} function call:
+ * 
+ * <ul>
+ * <li>Frees the source memory reserved for the allocations that are moved.</li>
+ * <li>Modifies source {@code VmaAllocation} objects that are moved to point to the destination reserved memory.</li>
+ * <li>Frees {@code VkDeviceMemory} blocks that became empty.</li>
+ * </ul></li>
+ * </ol>
+ * 
+ * <p>Unlike in previous iterations of the defragmentation API, there is no list of "movable" allocations passed as a parameter. Defragmentation algorithm
+ * tries to move all suitable allocations. You can, however, refuse to move some of them inside a defragmentation pass, by setting
+ * {@code pass.pMoves[i].operation} to {@link #VMA_DEFRAGMENTATION_MOVE_OPERATION_IGNORE DEFRAGMENTATION_MOVE_OPERATION_IGNORE}. This is not recommended and may result in suboptimal packing of the
+ * allocations after defragmentation. If you cannot ensure any allocation can be moved, it is better to keep movable allocations separate in a custom
+ * pool.</p>
+ * 
+ * <p>Inside a pass, for each allocation that should be moved:</p>
+ * 
+ * <ul>
+ * <li>You should copy its data from the source to the destination place by calling e.g. {@code vkCmdCopyBuffer()}, {@code vkCmdCopyImage()}.
+ * 
+ * <p>You need to make sure these commands finished executing before destroying the source buffers/images and before calling {@link #vmaEndDefragmentationPass EndDefragmentationPass}.</p></li>
+ * <li>If a resource doesn't contain any meaningful data, e.g. it is a transient color attachment image to be cleared, filled, and used temporarily in
+ * each rendering frame, you can just recreate this image without copying its data.</li>
+ * <li>If the resource is in {@code HOST_VISIBLE} and {@code HOST_CACHED} memory, you can copy its data on the CPU using {@code memcpy()}.</li>
+ * <li>If you cannot move the allocation, you can set {@code pass.pMoves[i].operation} to {@link #VMA_DEFRAGMENTATION_MOVE_OPERATION_IGNORE DEFRAGMENTATION_MOVE_OPERATION_IGNORE}. This will cancel the
+ * move.
+ * 
+ * <p>{@link #vmaEndDefragmentationPass EndDefragmentationPass} will then free the destination memory not the source memory of the allocation, leaving it unchanged.</p></li>
+ * <li>If you decide the allocation is unimportant and can be destroyed instead of moved (e.g. it wasn't used for long time), you can set
+ * {@code pass.pMoves[i].operation} to {@link #VMA_DEFRAGMENTATION_MOVE_OPERATION_DESTROY DEFRAGMENTATION_MOVE_OPERATION_DESTROY}.
+ * 
+ * <p>{@link #vmaEndDefragmentationPass EndDefragmentationPass} will then free both source and destination memory, and will destroy the source {@code VmaAllocation} object.</p></li>
  * </ul>
+ * 
+ * <p>You can defragment a specific custom pool by setting {@link VmaDefragmentationInfo}{@code ::pool} (like in the example above) or all the default pools by
+ * setting this member to null.</p>
+ * 
+ * <p>Defragmentation is always performed in each pool separately. Allocations are never moved between different Vulkan memory types. The size of the
+ * destination memory reserved for a moved allocation is the same as the original one. Alignment of an allocation as it was determined using
+ * {@code vkGetBufferMemoryRequirements()} etc. is also respected after defragmentation. Buffers/images should be recreated with the same
+ * {@code VkBufferCreateInfo} / {@code VkImageCreateInfo} parameters as the original ones.</p>
+ * 
+ * <p>You can perform the defragmentation incrementally to limit the number of allocations and bytes to be moved in each pass, e.g. to call it in sync with
+ * render frames and not to experience too big hitches. See members: {@link VmaDefragmentationInfo}{@code ::maxBytesPerPass},
+ * {@link VmaDefragmentationInfo}{@code ::maxAllocationsPerPass}.</p>
+ * 
+ * <p>It is also safe to perform the defragmentation asynchronously to render frames and other Vulkan and VMA usage, possibly from multiple threads, with the
+ * exception that allocations returned in {@link VmaDefragmentationPassMoveInfo}{@code ::pMoves} shouldn't be destroyed until the defragmentation pass is ended.</p>
+ * 
+ * <p><b>Mapping</b> is preserved on allocations that are moved during defragmentation. Whether through {@link #VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} or {@link #vmaMapMemory MapMemory}, the
+ * allocations are mapped at their new place. Of course, pointer to the mapped data changes, so it needs to be queried using
+ * {@link VmaAllocationInfo}{@code ::pMappedData}.</p>
+ * 
+ * <p>Note: Defragmentation is not supported in custom pools created with {@link #VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT}.</p>
  * 
  * <h3>Statistics</h3>
  * 
- * <p>This library contains functions that return information about its internal state, especially the amount of memory allocated from Vulkan. Please keep in
- * mind that these functions need to traverse all internal data structures to gather these information, so they may be quite time-consuming. Don't call
- * them too often.</p>
+ * <p>This library contains several functions that return information about its internal state, especially the amount of memory allocated from Vulkan.</p>
  * 
  * <h4>Numeric statistics</h4>
  * 
- * <p>You can query for overall statistics of the allocator using function {@link #vmaCalculateStats CalculateStats}. Information are returned using structure {@link VmaStats}. It
- * contains {@link VmaStatInfo} - number of allocated blocks, number of allocations (occupied ranges in these blocks), number of unused (free) ranges in these
- * blocks, number of bytes used and unused (but still allocated from Vulkan) and other information. They are summed across memory heaps, memory types and
- * total for whole allocator.</p>
+ * <p>If you need to obtain basic statistics about memory usage per heap, together with current budget, you can call function {@link #vmaGetHeapBudgets GetHeapBudgets} and inspect
+ * structure {@link VmaBudget}. This is useful to keep track of memory usage and stay within budget. Example:</p>
  * 
- * <p>You can query for statistics of a custom pool using function {@link #vmaGetPoolStats GetPoolStats}. Information are returned using structure {@link VmaPoolStats}.</p>
+ * <pre><code>
+ * uint32_t heapIndex = ...
  * 
- * <p>You can query for information about specific allocation using function {@link #vmaGetAllocationInfo GetAllocationInfo}. It fill structure {@link VmaAllocationInfo}.</p>
+ * VmaBudget budgets[VK_MAX_MEMORY_HEAPS];
+ * vmaGetHeapBudgets(allocator, budgets);
+ * 
+ * printf("My heap currently has %u allocations taking %llu B,\n",
+ *     budgets[heapIndex].statistics.allocationCount,
+ *     budgets[heapIndex].statistics.allocationBytes);
+ * printf("allocated out of %u Vulkan device memory blocks taking %llu B,\n",
+ *     budgets[heapIndex].statistics.blockCount,
+ *     budgets[heapIndex].statistics.blockBytes);
+ * printf("Vulkan reports total usage %llu B with budget %llu B.\n",
+ *     budgets[heapIndex].usage,
+ *     budgets[heapIndex].budget);</code></pre>
+ * 
+ * <p>You can query for more detailed statistics per memory heap, type, and totals, including minimum and maximum allocation size and unused range size, by
+ * calling function {@link #vmaCalculateStatistics CalculateStatistics} and inspecting structure {@link VmaTotalStatistics}. This function is slower though, as it has to traverse all the
+ * internal data structures, so it should be used only for debugging purposes.</p>
+ * 
+ * <p>You can query for statistics of a custom pool using function {@link #vmaGetPoolStatistics GetPoolStatistics} or {@link #vmaCalculatePoolStatistics CalculatePoolStatistics}.</p>
+ * 
+ * <p>You can query for information about a specific allocation using function {@link #vmaGetAllocationInfo GetAllocationInfo}. It fills structure {@link VmaAllocationInfo}.</p>
  * 
  * <h3>JSON dump</h3>
  * 
@@ -953,8 +908,8 @@ import org.lwjgl.vulkan.*;
  * <p>The format of this JSON string is not part of official documentation of the library, but it will not change in backward-incompatible way without
  * increasing library major version number and appropriate mention in changelog.</p>
  * 
- * <p>The JSON string contains all the data that can be obtained using {@link #vmaCalculateStats CalculateStats}. It can also contain detailed map of allocated memory blocks and
- * their regions - free and occupied by allocations. This allows e.g. to visualize the memory or assess fragmentation.</p>
+ * <p>The JSON string contains all the data that can be obtained using {@link #vmaCalculateStatistics CalculateStatistics}. It can also contain detailed map of allocated memory blocks
+ * and their regions - free and occupied by allocations. This allows e.g. to visualize the memory or assess fragmentation.</p>
  * 
  * <h3>Allocation names and user data</h3>
  * 
@@ -962,7 +917,8 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>You can annotate allocations with your own information, e.g. for debugging purposes. To do that, fill {@link VmaAllocationCreateInfo}{@code ::pUserData}
  * field when creating an allocation. It is an opaque {@code void*} pointer. You can use it e.g. as a pointer, some handle, index, key, ordinal number or
- * any other value that would associate the allocation with your custom metadata.</p>
+ * any other value that would associate the allocation with your custom metadata. It is useful to identify appropriate data structures in your engine
+ * given {@code VmaAllocation}, e.g. when doing defragmentation.</p>
  * 
  * <pre><code>
  * VkBufferCreateInfo bufCreateInfo = ...
@@ -990,43 +946,18 @@ import org.lwjgl.vulkan.*;
  * 
  * <h4>Allocation names</h4>
  * 
- * <p>There is alternative mode available where {@code pUserData} pointer is used to point to a null-terminated string, giving a name to the allocation. To
- * use this mode, set {@link #VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT} flag in {@link VmaAllocationCreateInfo}{@code ::flags}. Then {@code pUserData} passed as
- * {@link VmaAllocationCreateInfo}{@code ::pUserData} or argument to {@link #vmaSetAllocationUserData SetAllocationUserData} must be either null or a pointer to a null-terminated string. The
- * library creates internal copy of the string, so the pointer you pass doesn't need to be valid for whole lifetime of the allocation. You can free it
- * after the call.</p>
+ * <p>An allocation can also carry a null-terminated string, giving a name to the allocation. To set it, call {@link #vmaSetAllocationName SetAllocationName}. The library creates
+ * internal copy of the string, so the pointer you pass doesn't need to be valid for whole lifetime of the allocation. You can free it after the call.</p>
  * 
  * <pre><code>
- * VkImageCreateInfo imageInfo = ...
- * 
  * std::string imageName = "Texture: ";
  * imageName += fileName;
+ * vmaSetAllocationName(allocator, allocation, imageName.c_str());</code></pre>
  * 
- * VmaAllocationCreateInfo allocCreateInfo = {};
- * allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
- * allocCreateInfo.flags = VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT;
- * allocCreateInfo.pUserData = imageName.c_str();
+ * <p>The string can be later retrieved by inspecting {@link VmaAllocationInfo}{@code ::pName}. It is also printed in JSON report created by {@link #vmaBuildStatsString BuildStatsString}.</p>
  * 
- * VkImage image;
- * VmaAllocation allocation;
- * vmaCreateImage(allocator, &amp;imageInfo, &amp;allocCreateInfo, &amp;image, &amp;allocation, nullptr);</code></pre>
- * 
- * <p>The value of {@code pUserData} pointer of the allocation will be different than the one you passed when setting allocation's name - pointing to a
- * buffer managed internally that holds copy of the string.</p>
- * 
- * <pre><code>
- * VmaAllocationInfo allocInfo;
- * vmaGetAllocationInfo(allocator, allocation, &amp;allocInfo);
- * const char* imageName = (const char*)allocInfo.pUserData;
- * printf("Image name: %s\n", imageName);</code></pre>
- * 
- * <p>That string is also printed in JSON report created by {@link #vmaBuildStatsString BuildStatsString}.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Passing string name to VMA allocation doesn't automatically set it to the Vulkan buffer or image created with it. You must do it manually using an
- * extension like {@code VK_EXT_debug_utils}, which is independent of this library.</p>
- * </div>
+ * <p>Note: Setting string name to VMA allocation doesn't automatically set it to the Vulkan buffer or image created with it. You must do it manually using
+ * an extension like {@code VK_EXT_debug_utils}, which is independent of this library.</p>
  * 
  * <h3>Virtual allocator</h3>
  * 
@@ -1057,7 +988,7 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>{@code VmaVirtualBlock} object contains internal data structure that keeps track of free and occupied regions using the same code as the main Vulkan
  * memory allocator. Similarly to {@code VmaAllocation} for standard GPU allocations, there is {@code VmaVirtualAllocation} type that represents an opaque
- * handle to an allocation withing the virtual block.</p>
+ * handle to an allocation within the virtual block.</p>
  * 
  * <p>In order to make such allocation:</p>
  * 
@@ -1149,14 +1080,15 @@ import org.lwjgl.vulkan.*;
  * 
  * <h4>Statistics</h4>
  * 
- * <p>You can obtain statistics of a virtual block using {@link #vmaCalculateVirtualBlockStats CalculateVirtualBlockStats}. The function fills structure {@code VmaStatInfo} - same as used by
- * the normal Vulkan memory allocator. Example:</p>
+ * <p>You can obtain statistics of a virtual block using {@link #vmaGetVirtualBlockStatistics GetVirtualBlockStatistics} (to get brief statistics that are fast to calculate) or 
+ * {@link #vmaCalculateVirtualBlockStatistics CalculateVirtualBlockStatistics} (to get more detailed statistics, slower to calculate). The functions fill structures {@link VmaStatistics},
+ * {@link VmaDetailedStatistics} respectively - same as used by the normal Vulkan memory allocator. Example:</p>
  * 
  * <pre><code>
- * VmaStatInfo statInfo;
- * vmaCalculateVirtualBlockStats(block, &amp;statInfo);
+ * VmaStatistics stats;
+ * vmaGetVirtualBlockStatistics(block, &amp;stats);
  * printf("My virtual block has %llu bytes used by %u virtual allocations\n",
- *     statInfo.usedBytes, statInfo.allocationCount);</code></pre>
+ *     stats.allocationBytes, stats.allocationCount);</code></pre>
  * 
  * <p>You can also request a full list of allocations and free regions as a string in JSON format by calling {@link #vmaBuildVirtualBlockStatsString BuildVirtualBlockStatsString}. Returned string
  * must be later freed using {@link #vmaFreeVirtualBlockStatsString FreeVirtualBlockStatsString}. The format of this string differs from the one returned by the main Vulkan allocator, but it
@@ -1184,13 +1116,14 @@ import org.lwjgl.vulkan.*;
  * <p>If you experience a bug with incorrect and nondeterministic data in your program and you suspect uninitialized memory to be used, you can enable
  * automatic memory initialization to verify this. To do it, define macro {@code VMA_DEBUG_INITIALIZE_ALLOCATIONS} to 1.</p>
  * 
- * <p>It makes memory of all new allocations initialized to bit pattern {@code 0xDCDCDCDC}. Before an allocation is destroyed, its memory is filled with bit
+ * <p>It makes memory of all allocations initialized to bit pattern {@code 0xDCDCDCDC}. Before an allocation is destroyed, its memory is filled with bit
  * pattern {@code 0xEFEFEFEF}. Memory is automatically mapped and unmapped if necessary.</p>
  * 
  * <p>If you find these values while debugging your program, good chances are that you incorrectly read Vulkan memory that is allocated but not initialized,
  * or already freed, respectively.</p>
  * 
- * <p>Memory initialization works only with memory types that are {@code HOST_VISIBLE}. It works also with dedicated allocations.</p>
+ * <p>Memory initialization works only with memory types that are {@code HOST_VISIBLE} and with allocations that can be mapped.. It works also with dedicated
+ * allocations.</p>
  * 
  * <h4>Margins</h4>
  * 
@@ -1209,8 +1142,7 @@ import org.lwjgl.vulkan.*;
  * 
  * <p>Margin is applied only to allocations made out of memory blocks and not to dedicated allocations, which have their own memory block of specific size.
  * It is thus not applied to allocations made using {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT} flag or those automatically decided to put into dedicated
- * allocations, e.g. due to its large size or recommended by {@code VK_KHR_dedicated_allocation} extension. Margins are also not active in custom pools
- * created with {@link #VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT} flag.</p>
+ * allocations, e.g. due to its large size or recommended by {@code VK_KHR_dedicated_allocation} extension.</p>
  * 
  * <p>Margins appear in JSON dump as part of free space.</p>
  * 
@@ -1301,6 +1233,7 @@ import org.lwjgl.vulkan.*;
  * VmaAllocationCreateInfo allocCreateInfo = {};
  * allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
  * allocCreateInfo.flags = VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT;
+ * allocCreateInfo.priority = 1.0f;
  * 
  * VkImage img;
  * VmaAllocation alloc;
@@ -1308,11 +1241,12 @@ import org.lwjgl.vulkan.*;
  * 
  * <p><b>Also consider:</b> creating them as dedicated allocations using {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT}, especially if they are large or if you plan
  * to destroy and recreate them with different sizes e.g. when display resolution changes. Prefer to create such resources first and all other GPU
- * resources (like textures and vertex buffers) later.</p>
+ * resources (like textures and vertex buffers) later. When {@code VK_EXT_memory_priority} extension is enabled, it is also worth setting high priority to
+ * such allocation to decrease chances to be evicted to system memory by the operating system.</p>
  * 
  * <h4>Staging copy for upload</h4>
  * 
- * <p><b>When:</b> A "staging" buffer than you want to map and fill from CPU code, then use as a source od transfer to some GPU resource.</p>
+ * <p><b>When:</b> A "staging" buffer than you want to map and fill from CPU code, then use as a source of transfer to some GPU resource.</p>
  * 
  * <p><b>What to do:</b> Use flag {@link #VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT}. Let the library select the optimal memory type, which will always have
  * {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT}.</p>
@@ -1373,7 +1307,7 @@ import org.lwjgl.vulkan.*;
  * <ul>
  * <li>Easiest solution is to have one copy of the resource in {@code HOST_VISIBLE} memory, even if it means system RAM (not {@code DEVICE_LOCAL}) on
  * systems with a discrete graphics card, and make the device reach out to that resource directly. Reads performed by the device will then go through
- * PCI Express bus. The performace of this access may be limited, but it may be fine depending on the size of this resource (whether it is small
+ * PCI Express bus. The performance of this access may be limited, but it may be fine depending on the size of this resource (whether it is small
  * enough to quickly end up in GPU cache) and the sparsity of access.</li>
  * <li>On systems with unified memory (e.g. AMD APU or Intel integrated graphics, mobile chips), a memory type may be available that is both
  * {@code HOST_VISIBLE} (available for mapping) and {@code DEVICE_LOCAL} (fast to access from the GPU). Then, it is likely the best choice for such
@@ -1440,6 +1374,7 @@ import org.lwjgl.vulkan.*;
  * 
  *     // [Executed in runtime]:
  *     memcpy(stagingAllocInfo.pMappedData, myData, myDataSize);
+ *     //vkCmdPipelineBarrier: VK_ACCESS_HOST_WRITE_BIT --&gt; VK_ACCESS_TRANSFER_READ_BIT
  *     VkBufferCopy bufCopy = {
  *         0, // srcOffset
  *         0, // dstOffset,
@@ -1547,6 +1482,83 @@ import org.lwjgl.vulkan.*;
  * <ul>
  * <li><a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap50.html#VK_KHR_dedicated_allocation">VK_KHR_dedicated_allocation in Vulkan specification</a></li>
  * <li><a href="http://asawicki.info/articles/VK_KHR_dedicated_allocation.php5">VK_KHR_dedicated_allocation unofficial manual</a></li>
+ * </ul>
+ * 
+ * <h4>VK_EXT_memory_priority</h4>
+ * 
+ * <p>{@code VK_EXT_memory_priority} is a device extension that allows to pass additional "priority" value to Vulkan memory allocations that the
+ * implementation may use prefer certain buffers and images that are critical for performance to stay in device-local memory in cases when the memory is
+ * over-subscribed, while some others may be moved to the system memory.</p>
+ * 
+ * <p>VMA offers convenient usage of this extension. If you enable it, you can pass "priority" parameter when creating allocations or custom pools and the
+ * library automatically passes the value to Vulkan using this extension.</p>
+ * 
+ * <p>If you want to use this extension in connection with VMA, follow these steps:</p>
+ * 
+ * <h5>Initialization</h5>
+ * 
+ * <ol>
+ * <li>Call {@code vkEnumerateDeviceExtensionProperties} for the physical device. Check if the extension is supported - if returned array of
+ * {@code VkExtensionProperties} contains {@code "VK_EXT_memory_priority"}.</li>
+ * <li>Call {@code vkGetPhysicalDeviceFeatures2} for the physical device instead of old {@code vkGetPhysicalDeviceFeatures}. Attach additional structure
+ * {@code VkPhysicalDeviceMemoryPriorityFeaturesEXT} to {@code VkPhysicalDeviceFeatures2::pNext} to be returned. Check if the device feature is really
+ * supported - check if {@code VkPhysicalDeviceMemoryPriorityFeaturesEXT::memoryPriority} is true.</li>
+ * <li>While creating device with {@code vkCreateDevice}, enable this extension - add {@code "VK_EXT_memory_priority"} to the list passed as
+ * {@code VkDeviceCreateInfo::ppEnabledExtensionNames}.</li>
+ * <li>While creating the device, also don't set {@code VkDeviceCreateInfo::pEnabledFeatures}. Fill in {@code VkPhysicalDeviceFeatures2} structure instead
+ * and pass it as {@code VkDeviceCreateInfo::pNext}. Enable this device feature - attach additional structure
+ * {@code VkPhysicalDeviceMemoryPriorityFeaturesEXT} to {@code VkPhysicalDeviceFeatures2::pNext} chain and set its member {@code memoryPriority} to
+ * {@code VK_TRUE}.</li>
+ * <li>While creating {@code VmaAllocator} with {@link #vmaCreateAllocator CreateAllocator} inform VMA that you have enabled this extension and feature - add
+ * {@link #VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT} to {@link VmaAllocatorCreateInfo}{@code ::flags}.</li>
+ * </ol>
+ * 
+ * <h5>Usage</h5>
+ * 
+ * <p>When using this extension, you should initialize following member:</p>
+ * 
+ * <ul>
+ * <li>{@link VmaAllocationCreateInfo}{@code ::priority} when creating a dedicated allocation with {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT}.</li>
+ * <li>{@link VmaPoolCreateInfo}{@code ::priority} when creating a custom pool.</li>
+ * </ul>
+ * 
+ * <p>It should be a floating-point value between {@code 0.0f} and {@code 1.0f}, where recommended default is {@code 0.5f}. Memory allocated with higher
+ * value can be treated by the Vulkan implementation as higher priority and so it can have lower chances of being pushed out to system memory,
+ * experiencing degraded performance.</p>
+ * 
+ * <p>It might be a good idea to create performance-critical resources like color-attachment or depth-stencil images as dedicated and set high priority to
+ * them. For example:</p>
+ * 
+ * <pre><code>
+ * VkImageCreateInfo imgCreateInfo = { VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO };
+ * imgCreateInfo.imageType = VK_IMAGE_TYPE_2D;
+ * imgCreateInfo.extent.width = 3840;
+ * imgCreateInfo.extent.height = 2160;
+ * imgCreateInfo.extent.depth = 1;
+ * imgCreateInfo.mipLevels = 1;
+ * imgCreateInfo.arrayLayers = 1;
+ * imgCreateInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
+ * imgCreateInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+ * imgCreateInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+ * imgCreateInfo.usage = VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+ * imgCreateInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+ * 
+ * VmaAllocationCreateInfo allocCreateInfo = {};
+ * allocCreateInfo.usage = VMA_MEMORY_USAGE_AUTO;
+ * allocCreateInfo.flags = VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT;
+ * allocCreateInfo.priority = 1.0f;
+ * 
+ * VkImage img;
+ * VmaAllocation alloc;
+ * vmaCreateImage(allocator, &amp;imgCreateInfo, &amp;allocCreateInfo, &amp;img, &amp;alloc, nullptr);</code></pre>
+ * 
+ * <p>{@code priority} member is ignored in the following situations:</p>
+ * 
+ * <ul>
+ * <li>Allocations created in custom pools: They inherit the priority, along with all other allocation parameters from the parameters passed in
+ * {@link VmaPoolCreateInfo} when the pool was created.</li>
+ * <li>Allocations created in default pools: They inherit the priority from the parameters VMA used when creating default pools, which means
+ * {@code priority == 0.5f}.</li>
  * </ul>
  * 
  * <h4>VK_AMD_device_coherent_memory</h4>
@@ -1936,8 +1948,6 @@ public class Vma {
      * <p>If new allocation cannot be placed in any of the existing blocks, allocation fails with {@code VK_ERROR_OUT_OF_DEVICE_MEMORY} error.</p>
      * 
      * <p>You should not use {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT} and {@link #VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT ALLOCATION_CREATE_NEVER_ALLOCATE_BIT} at the same time. It makes no sense.</p>
-     * 
-     * <p>If {@link VmaAllocationCreateInfo}{@code ::pool} is not null, this flag is implied and ignored.</p>
      * </li>
      * <li>{@link #VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} - 
      * Set this flag to use a memory that will be persistently mapped and retrieve pointer to it.
@@ -1948,13 +1958,12 @@ public class Vma {
      * mapped. This is useful if you need an allocation that is efficient to use on GPU ({@code DEVICE_LOCAL}) and still want to map it directly if
      * possible on platforms that support it (e.g. Intel GPU).</p>
      * </li>
-     * <li>{@link #VMA_ALLOCATION_CREATE_RESERVED_1_BIT ALLOCATION_CREATE_RESERVED_1_BIT} - Removed. Do not use.</li>
-     * <li>{@link #VMA_ALLOCATION_CREATE_RESERVED_2_BIT ALLOCATION_CREATE_RESERVED_2_BIT} - Removed. Do not use.</li>
      * <li>{@link #VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT} - 
-     * Set this flag to treat {@link VmaAllocationCreateInfo}{@code ::pUserData} as pointer to a null-terminated string.
+     * Preserved for backward compatibility. Consider using {@link #vmaSetAllocationName SetAllocationName} instead.
      * 
-     * <p>Instead of copying pointer value, a local copy of the string is made and stored in allocation's {@code pUserData}. The string is automatically
-     * freed together with the allocation. It is also used in {@link #vmaBuildStatsString BuildStatsString}.</p>
+     * <p>Set this flag to treat {@link VmaAllocationCreateInfo}{@code ::pUserData} as pointer to a null-terminated string. Instead of copying pointer value, a
+     * local copy of the string is made and stored in allocation's {@code pName}. The string is automatically freed together with the allocation. It is
+     * also used in {@link #vmaBuildStatsString BuildStatsString}.</p>
      * </li>
      * <li>{@link #VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT ALLOCATION_CREATE_UPPER_ADDRESS_BIT} - 
      * Allocation will be created from upper stack in a double stack pool.
@@ -1966,6 +1975,9 @@ public class Vma {
      * 
      * <p>It is useful when you want to bind yourself to do some more advanced binding, e.g. using some extensions. The flag is meaningful only with
      * functions that bind by default: {@link #vmaCreateBuffer CreateBuffer}, {@link #vmaCreateImage CreateImage}. Otherwise it is ignored.</p>
+     * 
+     * <p>If you want to make sure the new buffer/image is not tied to the new memory allocation through {@code VkMemoryDedicatedAllocateInfoKHR} structure
+     * in case the allocation ends up in its own memory block, use also flag {@link #VMA_ALLOCATION_CREATE_CAN_ALIAS_BIT ALLOCATION_CREATE_CAN_ALIAS_BIT}.</p>
      * </li>
      * <li>{@link #VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT ALLOCATION_CREATE_WITHIN_BUDGET_BIT} - 
      * Create allocation only if additional device memory required for it, if any, won't exceed memory budget.
@@ -1991,7 +2003,7 @@ public class Vma {
      * <p>Declares that mapped memory will only be written sequentially, e.g. using {@code memcpy()} or a loop writing number-by-number, never read or
      * accessed randomly, so a memory type can be selected that is uncached and write-combined.</p>
      * 
-     * <p>Warning: Violating this declaration may work correctly, but will likely be very slow. Watch out for implicit reads introduces by doing e.g.
+     * <p>Warning: Violating this declaration may work correctly, but will likely be very slow. Watch out for implicit reads introduced by doing e.g.
      * {@code pMappedData[i] += x;}. Better prepare your data in a local variable and {@code memcpy()} it to the mapped pointer all at once.</p>
      * </li>
      * <li>{@link #VMA_ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT} - 
@@ -2004,7 +2016,7 @@ public class Vma {
      * {@code HOST_VISIBLE}. This includes allocations created in custom memory pools.</li>
      * </ul>
      * 
-     * <p>Declares that mapped memory can be read, written, and accessed in random order, so a {@code HOST_CACHED} memory type is preferred.</p>
+     * <p>Declares that mapped memory can be read, written, and accessed in random order, so a {@code HOST_CACHED} memory type is required.</p>
      * </li>
      * <li>{@link #VMA_ALLOCATION_CREATE_HOST_ACCESS_ALLOW_TRANSFER_INSTEAD_BIT ALLOCATION_CREATE_HOST_ACCESS_ALLOW_TRANSFER_INSTEAD_BIT} - 
      * Together with {@link #VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT} or {@link #VMA_ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT}, it says that despite request for
@@ -2023,6 +2035,11 @@ public class Vma {
      * Allocation strategy that chooses first suitable free range for the allocation - not necessarily in terms of the smallest offset but the one that is
      * easiest and fastest to find to minimize allocation time, possibly at the expense of allocation quality.
      * </li>
+     * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT} - 
+     * Allocation strategy that chooses always the lowest offset in available space.
+     * 
+     * <p>This is not the most efficient strategy but achieves highly packed data. Used internally by defragmentation, not recommended in typical usage.</p>
+     * </li>
      * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT} - Alias to {@link #VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT}.</li>
      * <li>{@link #VMA_VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT} - Alias to {@link #VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT}.</li>
      * <li>{@link #VMA_ALLOCATION_CREATE_STRATEGY_MASK ALLOCATION_CREATE_STRATEGY_MASK} - A bit mask to extract only {@code STRATEGY} bits from entire set of flags.</li>
@@ -2032,8 +2049,6 @@ public class Vma {
         VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT                   = 0x00000001,
         VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT                     = 0x00000002,
         VMA_ALLOCATION_CREATE_MAPPED_BIT                             = 0x00000004,
-        VMA_ALLOCATION_CREATE_RESERVED_1_BIT                         = 0x00000008,
-        VMA_ALLOCATION_CREATE_RESERVED_2_BIT                         = 0x00000010,
         VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT              = 0x00000020,
         VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT                      = 0x00000040,
         VMA_ALLOCATION_CREATE_DONT_BIND_BIT                          = 0x00000080,
@@ -2044,9 +2059,10 @@ public class Vma {
         VMA_ALLOCATION_CREATE_HOST_ACCESS_ALLOW_TRANSFER_INSTEAD_BIT = 0x00001000,
         VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT                = 0x00010000,
         VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT                  = 0x00020000,
+        VMA_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT                = 0x00040000,
         VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT                  = VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT,
         VMA_VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT             = VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT,
-        VMA_ALLOCATION_CREATE_STRATEGY_MASK                          = VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT | VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT;
+        VMA_ALLOCATION_CREATE_STRATEGY_MASK                          = VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT | VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT | VMA_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT;
 
     /**
      * Flags to be passed as {@link VmaPoolCreateInfo}{@code ::flags}. ({@code VmaPoolCreateFlagBits})
@@ -2077,32 +2093,77 @@ public class Vma {
      * 
      * <p>By using this flag, you can achieve behavior of free-at-once, stack, ring buffer, and double stack.</p>
      * </li>
-     * <li>{@link #VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT} - 
-     * Enables alternative, buddy allocation algorithm in this pool.
-     * 
-     * <p>It operates on a tree of blocks, each having size that is a power of two and a half of its parent's size. Comparing to default algorithm, this one
-     * provides faster allocation and deallocation and decreased external fragmentation, at the expense of more memory wasted (internal fragmentation).</p>
-     * </li>
-     * <li>{@link #VMA_POOL_CREATE_TLSF_ALGORITHM_BIT POOL_CREATE_TLSF_ALGORITHM_BIT} - 
-     * Enables alternative, Two-Level Segregated Fit (TLSF) allocation algorithm in this pool.
-     * 
-     * <p>This algorithm is based on 2-level lists dividing address space into smaller chunks. The first level is aligned to power of two which serves as
-     * buckets for requested memory to fall into, and the second level is lineary subdivided into lists of free memory. This algorithm aims to achieve
-     * bounded response time even in the worst case scenario. Allocation time can be sometimes slightly longer than compared to other algorithms but in
-     * return the application can avoid stalls in case of fragmentation, giving predictable results, suitable for real-time use cases.</p>
-     * </li>
      * <li>{@link #VMA_POOL_CREATE_ALGORITHM_MASK POOL_CREATE_ALGORITHM_MASK} - Bit mask to extract only {@code ALGORITHM} bits from entire set of flags.</li>
      * </ul>
      */
     public static final int
         VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT = 0x2,
         VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT                = 0x4,
-        VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT                 = 0x8,
-        VMA_POOL_CREATE_TLSF_ALGORITHM_BIT                  = 0x10,
-        VMA_POOL_CREATE_ALGORITHM_MASK                      = VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT | VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT | VMA_POOL_CREATE_TLSF_ALGORITHM_BIT;
+        VMA_POOL_CREATE_ALGORITHM_MASK                      = VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT;
 
-    /** Flags to be used in {@link #vmaDefragmentationBegin DefragmentationBegin}. {@code VmaDefragmentationFlagBits} */
-    public static final int VMA_DEFRAGMENTATION_FLAG_INCREMENTAL = 0x1;
+    /**
+     * Flags to be passed as {@link VmaDefragmentationInfo}{@code ::flags}. {@code VmaDefragmentationFlagBits}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT} - 
+     * Use simple but fast algorithm for defragmentation.
+     * 
+     * <p>May not achieve best results but will require least time to compute and least allocations to copy.</p>
+     * </li>
+     * <li>{@link #VMA_DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED_BIT DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED_BIT} - 
+     * Default defragmentation algorithm, applied also when no {@code ALGORITHM} flag is specified.
+     * 
+     * <p>Offers a balance between defragmentation quality and the amount of allocations and bytes that need to be moved.</p>
+     * </li>
+     * <li>{@link #VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT} - 
+     * Perform full defragmentation of memory.
+     * 
+     * <p>Can result in notably more time to compute and allocations to copy, but will achieve best memory packing.</p>
+     * </li>
+     * <li>{@link #VMA_DEFRAGMENTATION_FLAG_ALGORITHM_EXTENSIVE_BIT DEFRAGMENTATION_FLAG_ALGORITHM_EXTENSIVE_BIT} - 
+     * Use the most roboust algorithm at the cost of time to compute and number of copies to make.
+     * 
+     * <p>Only available when {@code bufferImageGranularity} is greater than 1, since it aims to reduce alignment issues between different types of
+     * resources. Otherwise falls back to same behavior as {@link #VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT}.</p>
+     * </li>
+     * <li>{@link #VMA_DEFRAGMENTATION_FLAG_ALGORITHM_MASK DEFRAGMENTATION_FLAG_ALGORITHM_MASK} - A bit mask to extract only {@code ALGORITHM} bits from entire set of flags.</li>
+     * </ul>
+     */
+    public static final int
+        VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT      = 0x1,
+        VMA_DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED_BIT  = 0x2,
+        VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT      = 0x4,
+        VMA_DEFRAGMENTATION_FLAG_ALGORITHM_EXTENSIVE_BIT = 0x8,
+        VMA_DEFRAGMENTATION_FLAG_ALGORITHM_MASK          = VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT | VMA_DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED_BIT | VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT | VMA_DEFRAGMENTATION_FLAG_ALGORITHM_EXTENSIVE_BIT;
+
+    /**
+     * VmaDefragmentationMoveOperation
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VMA_DEFRAGMENTATION_MOVE_OPERATION_COPY DEFRAGMENTATION_MOVE_OPERATION_COPY} - 
+     * Buffer/image has been recreated at {@code dstTmpAllocation}, data has been copied, old buffer/image has been destroyed. {@code srcAllocation}
+     * should be changed to point to the new place. This is the default value set by {@link #vmaBeginDefragmentationPass BeginDefragmentationPass}.
+     * </li>
+     * <li>{@link #VMA_DEFRAGMENTATION_MOVE_OPERATION_IGNORE DEFRAGMENTATION_MOVE_OPERATION_IGNORE} - 
+     * Set this value if you cannot move the allocation.
+     * 
+     * <p>New place reserved at {@code dstTmpAllocation} will be freed. {@code srcAllocation} will remain unchanged.</p>
+     * </li>
+     * <li>{@link #VMA_DEFRAGMENTATION_MOVE_OPERATION_DESTROY DEFRAGMENTATION_MOVE_OPERATION_DESTROY} - 
+     * Set this value if you decide to abandon the allocation and you destroyed the buffer/image.
+     * 
+     * <p>New place reserved at {@code dstTmpAllocation} will be freed, along with {@code srcAllocation}, which will be destroyed.</p>
+     * </li>
+     * </ul>
+     */
+    public static final int
+        VMA_DEFRAGMENTATION_MOVE_OPERATION_COPY    = 0,
+        VMA_DEFRAGMENTATION_MOVE_OPERATION_IGNORE  = 1,
+        VMA_DEFRAGMENTATION_MOVE_OPERATION_DESTROY = 2;
 
     /**
      * Flags to be passed as {@link VmaVirtualBlockCreateInfo}{@code ::flags}. ({@code VmaVirtualBlockCreateFlagBits})
@@ -2119,28 +2180,12 @@ public class Vma {
      * 
      * <p>By using this flag, you can achieve behavior of free-at-once, stack, ring buffer, and double stack.</p>
      * </li>
-     * <li>{@link #VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT} - 
-     * Enables alternative, buddy allocation algorithm in this virtual block.
-     * 
-     * <p>It operates on a tree of blocks, each having size that is a power of two and a half of its parent's size. Comparing to default algorithm, this one
-     * provides faster allocation and deallocation and decreased external fragmentation, at the expense of more memory wasted (internal fragmentation).</p>
-     * </li>
-     * <li>{@link #VMA_VIRTUAL_BLOCK_CREATE_TLSF_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_TLSF_ALGORITHM_BIT} - 
-     * Enables alternative, TLSF allocation algorithm in virtual block.
-     * 
-     * <p>This algorithm is based on 2-level lists dividing address space into smaller chunks. The first level is aligned to power of two which serves as
-     * buckets for requested memory to fall into, and the second level is lineary subdivided into lists of free memory. This algorithm aims to achieve
-     * bounded response time even in the worst case scenario. Allocation time can be sometimes slightly longer than compared to other algorithms but in
-     * return the application can avoid stalls in case of fragmentation, giving predictable results, suitable for real-time use cases.</p>
-     * </li>
      * <li>{@link #VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK} - Bit mask to extract only {@code ALGORITHM} bits from entire set of flags.</li>
      * </ul>
      */
     public static final int
         VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT = 0x1,
-        VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT  = 0x2,
-        VMA_VIRTUAL_BLOCK_CREATE_TLSF_ALGORITHM_BIT   = 0x4,
-        VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK       = VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT | VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT | VMA_VIRTUAL_BLOCK_CREATE_TLSF_ALGORITHM_BIT;
+        VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK       = VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT;
 
     /**
      * Flags to be passed as {@link VmaVirtualAllocationCreateInfo}{@code ::flags}. ({@code VmaVirtualAllocationCreateFlagBits})
@@ -2155,6 +2200,11 @@ public class Vma {
      * </li>
      * <li>{@link #VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT} - Allocation strategy that tries to minimize memory usage.</li>
      * <li>{@link #VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT} - Allocation strategy that tries to minimize allocation time.</li>
+     * <li>{@link #VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT} - 
+     * Allocation strategy that chooses always the lowest offset in available space.
+     * 
+     * <p>This is not the most efficient strategy but achieves highly packed data.</p>
+     * </li>
      * <li>{@link #VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK} - 
      * A bit mask to extract only {@code STRATEGY} bits from entire set of flags.
      * 
@@ -2166,6 +2216,7 @@ public class Vma {
         VMA_VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT       = VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT,
         VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT = VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT,
         VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT   = VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT,
+        VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT = VMA_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT,
         VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK           = VMA_ALLOCATION_CREATE_STRATEGY_MASK;
 
     protected Vma() {
@@ -2287,24 +2338,24 @@ public class Vma {
         nvmaSetCurrentFrameIndex(allocator, frameIndex);
     }
 
-    // --- [ vmaCalculateStats ] ---
+    // --- [ vmaCalculateStatistics ] ---
 
-    /** Unsafe version of: {@link #vmaCalculateStats CalculateStats} */
-    public static native void nvmaCalculateStats(long allocator, long pStats);
+    /** Unsafe version of: {@link #vmaCalculateStatistics CalculateStatistics} */
+    public static native void nvmaCalculateStatistics(long allocator, long pStats);
 
     /**
      * Retrieves statistics from current state of the Allocator.
      * 
-     * <p>This function is called "calculate" not "get" because it has to traverse all internal data structures, so it may be quite slow. For faster but more
-     * brief statistics suitable to be called every frame or every allocation, use {@link #vmaGetHeapBudgets GetHeapBudgets}.</p>
+     * <p>This function is called "calculate" not "get" because it has to traverse all internal data structures, so it may be quite slow. Use it for debugging
+     * purposes. For faster but more brief statistics suitable to be called every frame or every allocation, use {@link #vmaGetHeapBudgets GetHeapBudgets}.</p>
      * 
      * <p>Note that when using allocator from multiple threads, returned information may immediately become outdated.</p>
      */
-    public static void vmaCalculateStats(@NativeType("VmaAllocator") long allocator, @NativeType("VmaStats *") VmaStats pStats) {
+    public static void vmaCalculateStatistics(@NativeType("VmaAllocator") long allocator, @NativeType("VmaTotalStatistics *") VmaTotalStatistics pStats) {
         if (CHECKS) {
             check(allocator);
         }
-        nvmaCalculateStats(allocator, pStats.address());
+        nvmaCalculateStatistics(allocator, pStats.address());
     }
 
     // --- [ vmaGetHeapBudgets ] ---
@@ -2313,10 +2364,10 @@ public class Vma {
     public static native void nvmaGetHeapBudgets(long allocator, long pBudget);
 
     /**
-     * Retrieves information about current memory budget for all memory heaps.
+     * Retrieves information about current memory usage and budget for all memory heaps.
      * 
      * <p>This function is called "get" not "calculate" because it is very fast, suitable to be called every frame or every allocation. For more detailed
-     * statistics use {@link #vmaCalculateStats CalculateStats}.</p>
+     * statistics use {@link #vmaCalculateStatistics CalculateStatistics}.</p>
      * 
      * <p>Note that when using allocator from multiple threads, returned information may immediately become outdated.</p>
      *
@@ -2436,10 +2487,10 @@ public class Vma {
         nvmaDestroyPool(allocator, pool);
     }
 
-    // --- [ vmaGetPoolStats ] ---
+    // --- [ vmaGetPoolStatistics ] ---
 
-    /** Unsafe version of: {@link #vmaGetPoolStats GetPoolStats} */
-    public static native void nvmaGetPoolStats(long allocator, long pool, long pPoolStats);
+    /** Unsafe version of: {@link #vmaGetPoolStatistics GetPoolStatistics} */
+    public static native void nvmaGetPoolStatistics(long allocator, long pool, long pPoolStats);
 
     /**
      * Retrieves statistics of existing VmaPool object.
@@ -2448,12 +2499,32 @@ public class Vma {
      * @param pool       pool object
      * @param pPoolStats statistics of specified pool
      */
-    public static void vmaGetPoolStats(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool, @NativeType("VmaPoolStats *") VmaPoolStats pPoolStats) {
+    public static void vmaGetPoolStatistics(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool, @NativeType("VmaStatistics *") VmaStatistics pPoolStats) {
         if (CHECKS) {
             check(allocator);
             check(pool);
         }
-        nvmaGetPoolStats(allocator, pool, pPoolStats.address());
+        nvmaGetPoolStatistics(allocator, pool, pPoolStats.address());
+    }
+
+    // --- [ vmaCalculatePoolStatistics ] ---
+
+    /** Unsafe version of: {@link #vmaCalculatePoolStatistics CalculatePoolStatistics} */
+    public static native void nvmaCalculatePoolStatistics(long allocator, long pool, long pPoolStats);
+
+    /**
+     * Retrieves detailed statistics of existing {@code VmaPool} object.
+     *
+     * @param allocator  allocator object
+     * @param pool       pool object
+     * @param pPoolStats statistics of specified pool
+     */
+    public static void vmaCalculatePoolStatistics(@NativeType("VmaAllocator") long allocator, @NativeType("VmaPool") long pool, @NativeType("VmaDetailedStatistics *") VmaDetailedStatistics pPoolStats) {
+        if (CHECKS) {
+            check(allocator);
+            check(pool);
+        }
+        nvmaCalculatePoolStatistics(allocator, pool, pPoolStats.address());
     }
 
     // --- [ vmaCheckPoolCorruption ] ---
@@ -2615,9 +2686,13 @@ public class Vma {
     public static native int nvmaAllocateMemoryForBuffer(long allocator, long buffer, long pCreateInfo, long pAllocation, long pAllocationInfo);
 
     /**
-     * Buffer memory allocation.
+     * Allocates memory suitable for given {@code VkBuffer}.
      * 
-     * <p>You should free the memory using {@link #vmaFreeMemory FreeMemory}.</p>
+     * <p>It only creates {@code VmaAllocation}. To bind the memory to the buffer, use {@link #vmaBindBufferMemory BindBufferMemory}.</p>
+     * 
+     * <p>This is a special-purpose function. In most cases you should use {@link #vmaCreateBuffer CreateBuffer}.</p>
+     * 
+     * <p>You must free the allocation using {@link #vmaFreeMemory FreeMemory} when no longer needed.</p>
      *
      * @param pAllocation     handle to allocated memory
      * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
@@ -2637,7 +2712,13 @@ public class Vma {
     public static native int nvmaAllocateMemoryForImage(long allocator, long image, long pCreateInfo, long pAllocation, long pAllocationInfo);
 
     /**
-     * Function similar to {@link #vmaAllocateMemoryForBuffer AllocateMemoryForBuffer}.
+     * Allocates memory suitable for given {@code VkImage}.
+     * 
+     * <p>It only creates {@code VmaAllocation}. To bind the memory to the buffer, use {@link #vmaBindImageMemory BindImageMemory}.</p>
+     * 
+     * <p>This is a special-purpose function. In most cases you should use {@link #vmaCreateImage CreateImage}.</p>
+     * 
+     * <p>You must free the allocation using {@link #vmaFreeMemory FreeMemory} when no longer needed.</p>
      *
      * @param pAllocation     handle to allocated memory
      * @param pAllocationInfo information about allocated memory. Optional. It can be later fetched using function {@link #vmaGetAllocationInfo GetAllocationInfo}.
@@ -2720,13 +2801,8 @@ public class Vma {
     /**
      * Sets {@code pUserData} in given allocation to new value.
      * 
-     * <p>If the allocation was created with {@link #VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT}, {@code pUserData} must be either null, or pointer to a null-terminated
-     * string. The function makes local copy of the string and sets it as allocation's {@code pUserData}. String passed as {@code pUserData} doesn't need to
-     * be valid for whole lifetime of the allocation - you can free it after this call. String previously pointed by allocation's {@code pUserData} is freed
-     * from memory.</p>
-     * 
-     * <p>If the flag was not used, the value of pointer {@code pUserData} is just copied to allocation's {@code pUserData}. It is opaque, so you can use it
-     * however you want - e.g. as a pointer, ordinal number or some handle to you own data.</p>
+     * <p>The value of pointer {@code pUserData} is copied to allocation's {@code pUserData}. It is opaque, so you can use it however you want - e.g. as a
+     * pointer, ordinal number or some handle to you own data.</p>
      */
     public static void vmaSetAllocationUserData(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("void *") long pUserData) {
         if (CHECKS) {
@@ -2734,6 +2810,51 @@ public class Vma {
             check(allocation);
         }
         nvmaSetAllocationUserData(allocator, allocation, pUserData);
+    }
+
+    // --- [ vmaSetAllocationName ] ---
+
+    /** Unsafe version of: {@link #vmaSetAllocationName SetAllocationName} */
+    public static native void nvmaSetAllocationName(long allocator, long allocation, long pName);
+
+    /**
+     * Sets {@code pName} in given allocation to new value.
+     *
+     * @param pName must be either null, or pointer to a null-terminated string.
+     *              
+     *              <p>The function makes local copy of the string and sets it as allocation's {@code pName}. String passed as {@code pName} doesn't need to be valid for
+     *              whole lifetime of the allocation - you can free it after this call. String previously pointed by allocation's {@code pName} is freed from memory.</p>
+     */
+    public static void vmaSetAllocationName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @Nullable @NativeType("char const *") ByteBuffer pName) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+            checkNT1Safe(pName);
+        }
+        nvmaSetAllocationName(allocator, allocation, memAddressSafe(pName));
+    }
+
+    /**
+     * Sets {@code pName} in given allocation to new value.
+     *
+     * @param pName must be either null, or pointer to a null-terminated string.
+     *              
+     *              <p>The function makes local copy of the string and sets it as allocation's {@code pName}. String passed as {@code pName} doesn't need to be valid for
+     *              whole lifetime of the allocation - you can free it after this call. String previously pointed by allocation's {@code pName} is freed from memory.</p>
+     */
+    public static void vmaSetAllocationName(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @Nullable @NativeType("char const *") CharSequence pName) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8Safe(pName, true);
+            long pNameEncoded = pName == null ? NULL : stack.getPointerAddress();
+            nvmaSetAllocationName(allocator, allocation, pNameEncoded);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ vmaGetAllocationMemoryProperties ] ---
@@ -2965,144 +3086,106 @@ public class Vma {
         return nvmaCheckCorruption(allocator, memoryTypeBits);
     }
 
-    // --- [ vmaDefragmentationBegin ] ---
+    // --- [ vmaBeginDefragmentation ] ---
 
-    /** Unsafe version of: {@link #vmaDefragmentationBegin DefragmentationBegin} */
-    public static native int nvmaDefragmentationBegin(long allocator, long pInfo, long pStats, long pContext);
+    /** Unsafe version of: {@link #vmaBeginDefragmentation BeginDefragmentation} */
+    public static native int nvmaBeginDefragmentation(long allocator, long pInfo, long pContext);
 
     /**
      * Begins defragmentation process.
-     * 
-     * <p>Use this function instead of old, deprecated {@link #vmaDefragment Defragment}.</p>
-     * 
-     * <p>Warning! Between the call to {@code vmaDefragmentationBegin} and {@link #vmaDefragmentationEnd DefragmentationEnd}:</p>
-     * 
-     * <ul>
-     * <li>You should not use any of allocations passed as {@code pInfo->pAllocations} or any allocations that belong to pools passed as
-     * {@code pInfo->pPools}, including calling {@link #vmaGetAllocationInfo GetAllocationInfo}, or access their data.</li>
-     * <li>Some mutexes protecting internal data structures may be locked, so trying to make or free any allocations, bind buffers or images, map memory, or
-     * launch another simultaneous defragmentation in between may cause stall (when done on another thread) or deadlock (when done on the same thread),
-     * unless you are 100% sure that defragmented allocations are in different pools.</li>
-     * <li>Information returned via {@code pStats} and {@code pInfo->pAllocationsChanged} are undefined. They become valid after call to
-     * {@link #vmaDefragmentationEnd DefragmentationEnd}.</li>
-     * <li>If {@code pInfo->commandBuffer} is not null, you must submit that command buffer and make sure it finished execution before calling
-     * {@link #vmaDefragmentationEnd DefragmentationEnd}.</li>
-     * </ul>
      *
      * @param allocator allocator object
      * @param pInfo     structure filled with parameters of defragmentation
-     * @param pStats    Optional. Statistics of defragmentation. You can pass null if you are not interested in this information.
-     * @param pContext  context object that must be passed to {@link #vmaDefragmentationEnd DefragmentationEnd} to finish defragmentation
+     * @param pContext  context object that must be passed to {@link #vmaEndDefragmentation EndDefragmentation} to finish defragmentation
      *
-     * @return {@code VK_SUCCESS} and {@code *pContext == null} if defragmentation finished within this function call. {@code VK_NOT_READY} and
-     *         {@code *pContext != null} if defragmentation has been started and you need to call {@link #vmaDefragmentationEnd DefragmentationEnd} to finish it. Negative value in case of error.
+     * @return {@code VK_SUCCESS} if defragmentation can begin. {@code VK_ERROR_FEATURE_NOT_PRESENT} if defragmentation is not supported.
      */
     @NativeType("VkResult")
-    public static int vmaDefragmentationBegin(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationInfo2 const *") VmaDefragmentationInfo2 pInfo, @Nullable @NativeType("VmaDefragmentationStats *") VmaDefragmentationStats pStats, @NativeType("VmaDefragmentationContext *") PointerBuffer pContext) {
+    public static int vmaBeginDefragmentation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationInfo const *") VmaDefragmentationInfo pInfo, @NativeType("VmaDefragmentationContext *") PointerBuffer pContext) {
         if (CHECKS) {
             check(allocator);
             check(pContext, 1);
-            VmaDefragmentationInfo2.validate(pInfo.address());
         }
-        return nvmaDefragmentationBegin(allocator, pInfo.address(), memAddressSafe(pStats), memAddress(pContext));
+        return nvmaBeginDefragmentation(allocator, pInfo.address(), memAddress(pContext));
     }
 
-    // --- [ vmaDefragmentationEnd ] ---
+    // --- [ vmaEndDefragmentation ] ---
 
-    /** Unsafe version of: {@link #vmaDefragmentationEnd DefragmentationEnd} */
-    public static native int nvmaDefragmentationEnd(long allocator, long context);
+    /** Unsafe version of: {@link #vmaEndDefragmentation EndDefragmentation} */
+    public static native void nvmaEndDefragmentation(long allocator, long context, long pStats);
 
     /**
      * Ends defragmentation process.
      * 
-     * <p>Use this function to finish defragmentation started by {@link #vmaDefragmentationBegin DefragmentationBegin}. It is safe to pass {@code context == null}. The function then does
-     * nothing.</p>
+     * <p>Use this function to finish defragmentation started by {@link #vmaBeginDefragmentation BeginDefragmentation}.</p>
      *
      * @param allocator allocator object
+     * @param context   context object that has been created by {@link #vmaBeginDefragmentation BeginDefragmentation}
+     * @param pStats    optional stats for the defragmentation. Can be null.
      */
-    @NativeType("VkResult")
-    public static int vmaDefragmentationEnd(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationContext") long context) {
+    public static void vmaEndDefragmentation(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationContext") long context, @Nullable @NativeType("VmaDefragmentationStats *") VmaDefragmentationStats pStats) {
         if (CHECKS) {
             check(allocator);
+            check(context);
         }
-        return nvmaDefragmentationEnd(allocator, context);
+        nvmaEndDefragmentation(allocator, context, memAddressSafe(pStats));
     }
 
     // --- [ vmaBeginDefragmentationPass ] ---
 
+    /** Unsafe version of: {@link #vmaBeginDefragmentationPass BeginDefragmentationPass} */
     public static native int nvmaBeginDefragmentationPass(long allocator, long context, long pInfo);
 
+    /**
+     * Starts single defragmentation pass.
+     *
+     * @param allocator allocator object
+     * @param context   context object that has been created by {@link #vmaBeginDefragmentation BeginDefragmentation}
+     * @param pInfo     computed information for current pass
+     *
+     * @return {@code VK_SUCCESS} if no more moves are possible. Then you can omit call to {@link #vmaEndDefragmentationPass EndDefragmentationPass} and simply end whole defragmentation.
+     *         {@code VK_INCOMPLETE} if there are pending moves returned in {@code pPassInfo}. You need to perform them, call {@code vmaEndDefragmentationPass()}, and
+     *         then preferably try another pass with {@code vmaBeginDefragmentationPass()}.
+     */
     @NativeType("VkResult")
-    public static int vmaBeginDefragmentationPass(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationContext") long context, @NativeType("VmaDefragmentationPassInfo *") VmaDefragmentationPassInfo pInfo) {
+    public static int vmaBeginDefragmentationPass(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationContext") long context, @NativeType("VmaDefragmentationPassMoveInfo *") VmaDefragmentationPassMoveInfo pInfo) {
         if (CHECKS) {
             check(allocator);
+            check(context);
         }
         return nvmaBeginDefragmentationPass(allocator, context, pInfo.address());
     }
 
     // --- [ vmaEndDefragmentationPass ] ---
 
-    public static native int nvmaEndDefragmentationPass(long allocator, long context);
-
-    @NativeType("VkResult")
-    public static int vmaEndDefragmentationPass(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationContext") long context) {
-        if (CHECKS) {
-            check(allocator);
-        }
-        return nvmaEndDefragmentationPass(allocator, context);
-    }
-
-    // --- [ vmaDefragment ] ---
+    /** Unsafe version of: {@link #vmaEndDefragmentationPass EndDefragmentationPass} */
+    public static native int nvmaEndDefragmentationPass(long allocator, long context, long pPassInfo);
 
     /**
-     * Unsafe version of: {@link #vmaDefragment Defragment}
-     *
-     * @param allocationCount number of elements in {@code pAllocations} and {@code pAllocationsChanged} arrays
-     */
-    public static native int nvmaDefragment(long allocator, long pAllocations, long allocationCount, long pAllocationsChanged, long pDefragmentationInfo, long pDefragmentationStats);
-
-    /**
-     * Deprecated: This is a part of the old interface. It is recommended to use structure {@link VmaDefragmentationInfo2} and function {@link #vmaDefragmentationBegin DefragmentationBegin}
-     * instead.
+     * Ends single defragmentation pass.
      * 
-     * <p>Compacts memory by moving allocations.</p>
-     * 
-     * <p>This function works by moving allocations to different places (different {@code VkDeviceMemory} objects and/or different offsets) in order to optimize
-     * memory usage. Only allocations that are in {@code pAllocations} array can be moved. All other allocations are considered nonmovable in this call. Basic
-     * rules:</p>
+     * <p>Ends incremental defragmentation pass and commits all defragmentation moves from {@code pPassInfo}.
+     * After this call:</p>
      * 
      * <ul>
-     * <li>Only allocations made in memory types that have {@code VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT} and {@code VK_MEMORY_PROPERTY_HOST_COHERENT_BIT} flags
-     * can be compacted. You may pass other allocations but it makes no sense - these will never be moved.</li>
-     * <li>Custom pools created with {@link #VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT} or {@link #VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT POOL_CREATE_BUDDY_ALGORITHM_BIT} flag are not defragmented. Allocations passed to
-     * this function that come from such pools are ignored.</li>
-     * <li>Allocations created with {@link #VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT ALLOCATION_CREATE_DEDICATED_MEMORY_BIT} or created as dedicated allocations for any other reason are also ignored.</li>
-     * <li>Both allocations made with or without {@link #VMA_ALLOCATION_CREATE_MAPPED_BIT ALLOCATION_CREATE_MAPPED_BIT} flag can be compacted. If not persistently mapped, memory will be mapped
-     * temporarily inside this function if needed.</li>
-     * <li>You must not pass same {@code VmaAllocation} object multiple times in {@code pAllocations} array.</li>
+     * <li>Allocations at {@code pPassInfo[i].srcAllocation} that had {@code pPassInfo[i].operation ==} {@link #VMA_DEFRAGMENTATION_MOVE_OPERATION_COPY DEFRAGMENTATION_MOVE_OPERATION_COPY} (which is the
+     * default) will be pointing to the new destination place.</li>
+     * <li>Allocation at {@code pPassInfo[i].srcAllocation} that had {@code pPassInfo[i].operation ==} {@link #VMA_DEFRAGMENTATION_MOVE_OPERATION_DESTROY DEFRAGMENTATION_MOVE_OPERATION_DESTROY} will be freed.</li>
      * </ul>
      * 
-     * <p>The function also frees empty {@code VkDeviceMemory} blocks.</p>
-     * 
-     * <p>Warning: This function may be time-consuming, so you shouldn't call it too often (like after every resource creation/destruction). You
-     * can call it on special occasions (like when reloading a game level or when you just destroyed a lot of objects). Calling it every frame may be OK, but
-     * you should measure that on your platform.</p>
+     * <p>If no more moves are possible you can end whole defragmentation.</p>
      *
-     * @param pAllocations          array of allocations that can be moved during this compaction
-     * @param pAllocationsChanged   array of boolean values that will indicate whether matching allocation in {@code pAllocations} array has been moved. This parameter is optional.
-     *                              Pass null if you don't need this information.
-     * @param pDefragmentationInfo  configuration parameters. Optional - pass null to use default values.
-     * @param pDefragmentationStats statistics returned by the function. Optional - pass null if you don't need this information.
-     *
-     * @return {@code VK_SUCCESS} if completed, negative error code in case of error.
+     * @param allocator allocator object
+     * @param context   context object that has been created by {@link #vmaBeginDefragmentation BeginDefragmentation}
+     * @param pPassInfo computed information for current pass filled by {@link #vmaBeginDefragmentationPass BeginDefragmentationPass} and possibly modified by you
      */
     @NativeType("VkResult")
-    public static int vmaDefragment(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation const *") PointerBuffer pAllocations, @Nullable @NativeType("VkBool32 *") IntBuffer pAllocationsChanged, @Nullable @NativeType("VmaDefragmentationInfo const *") VmaDefragmentationInfo pDefragmentationInfo, @Nullable @NativeType("VmaDefragmentationStats *") VmaDefragmentationStats pDefragmentationStats) {
+    public static int vmaEndDefragmentationPass(@NativeType("VmaAllocator") long allocator, @NativeType("VmaDefragmentationContext") long context, @NativeType("VmaDefragmentationPassMoveInfo *") VmaDefragmentationPassMoveInfo pPassInfo) {
         if (CHECKS) {
             check(allocator);
-            checkSafe(pAllocationsChanged, pAllocations.remaining());
+            check(context);
         }
-        return nvmaDefragment(allocator, memAddress(pAllocations), pAllocations.remaining(), memAddressSafe(pAllocationsChanged), memAddressSafe(pDefragmentationInfo), memAddressSafe(pDefragmentationStats));
+        return nvmaEndDefragmentationPass(allocator, context, pPassInfo.address());
     }
 
     // --- [ vmaBindBufferMemory ] ---
@@ -3209,7 +3292,9 @@ public class Vma {
     public static native int nvmaCreateBuffer(long allocator, long pBufferCreateInfo, long pAllocationCreateInfo, long pBuffer, long pAllocation, long pAllocationInfo);
 
     /**
-     * This function automatically:
+     * Creates a new {@code VkBuffer}, allocates and binds memory for it.
+     * 
+     * <p>This function automatically:</p>
      * 
      * <ul>
      * <li>Creates buffer.</li>
@@ -3272,6 +3357,79 @@ public class Vma {
         return nvmaCreateBufferWithAlignment(allocator, pBufferCreateInfo.address(), pAllocationCreateInfo.address(), minAlignment, memAddress(pBuffer), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
 
+    // --- [ vmaCreateAliasingBuffer ] ---
+
+    /** Unsafe version of: {@link #vmaCreateAliasingBuffer CreateAliasingBuffer} */
+    public static native int nvmaCreateAliasingBuffer(long allocator, long allocation, long pBufferCreateInfo, long pBuffer);
+
+    /**
+     * Creates a new {@code VkBuffer}, binds already created memory for it.
+     * 
+     * <p>This function automatically:</p>
+     * 
+     * <ul>
+     * <li>Creates buffer.</li>
+     * <li>Binds the buffer with the supplied memory.</li>
+     * </ul>
+     * 
+     * <p>If any of these operations fail, buffer is not created, returned value is negative error code and {@code *pBuffer} is null.</p>
+     * 
+     * <p>If the function succeeded, you must destroy the buffer when you no longer need it using {@code vkDestroyBuffer()}. If you want to also destroy the
+     * corresponding allocation you can use convenience function {@link #vmaDestroyBuffer DestroyBuffer}.</p>
+     * 
+     * <p>Note: There is a new version of this function augmented with parameter {@code allocationLocalOffset} - see {@link #vmaCreateAliasingBuffer2 CreateAliasingBuffer2}.</p>
+     *
+     * @param allocator  allocator
+     * @param allocation allocation that provides memory to be used for binding new buffer to it
+     * @param pBuffer    buffer that was created
+     */
+    @NativeType("VkResult")
+    public static int vmaCreateAliasingBuffer(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pBufferCreateInfo, @NativeType("VkBuffer *") LongBuffer pBuffer) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+            check(pBuffer, 1);
+        }
+        return nvmaCreateAliasingBuffer(allocator, allocation, pBufferCreateInfo.address(), memAddress(pBuffer));
+    }
+
+    // --- [ vmaCreateAliasingBuffer2 ] ---
+
+    /** Unsafe version of: {@link #vmaCreateAliasingBuffer2 CreateAliasingBuffer2} */
+    public static native int nvmaCreateAliasingBuffer2(long allocator, long allocation, long allocationLocalOffset, long pBufferCreateInfo, long pBuffer);
+
+    /**
+     * Creates a new {@code VkBuffer}, binds already created memory for it.
+     * 
+     * <p>This function automatically:</p>
+     * 
+     * <ul>
+     * <li>Creates buffer.</li>
+     * <li>Binds the buffer with the supplied memory.</li>
+     * </ul>
+     * 
+     * <p>If any of these operations fail, buffer is not created, returned value is negative error code and {@code *pBuffer} is null.</p>
+     * 
+     * <p>If the function succeeded, you must destroy the buffer when you no longer need it using {@code vkDestroyBuffer()}. If you want to also destroy the
+     * corresponding allocation you can use convenience function {@link #vmaDestroyBuffer DestroyBuffer}.</p>
+     * 
+     * <p>Note: This is a new version of the function augmented with parameter {@code allocationLocalOffset}.</p>
+     *
+     * @param allocator             allocator
+     * @param allocation            allocation that provides memory to be used for binding new buffer to it
+     * @param allocationLocalOffset additional offset to be added while binding, relative to the beginning of the allocation. Normally it should be 0.
+     * @param pBuffer               buffer that was created
+     */
+    @NativeType("VkResult")
+    public static int vmaCreateAliasingBuffer2(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkDeviceSize") long allocationLocalOffset, @NativeType("VkBufferCreateInfo const *") VkBufferCreateInfo pBufferCreateInfo, @NativeType("VkBuffer *") LongBuffer pBuffer) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+            check(pBuffer, 1);
+        }
+        return nvmaCreateAliasingBuffer2(allocator, allocation, allocationLocalOffset, pBufferCreateInfo.address(), memAddress(pBuffer));
+    }
+
     // --- [ vmaDestroyBuffer ] ---
 
     /** Unsafe version of: {@link #vmaDestroyBuffer DestroyBuffer} */
@@ -3286,7 +3444,7 @@ public class Vma {
      * vkDestroyBuffer(device, buffer, allocationCallbacks);
      * vmaFreeMemory(allocator, allocation);</code></pre>
      * 
-     * <p>It it safe to pass null as buffer and/or allocation.</p>
+     * <p>It is safe to pass null as buffer and/or allocation.</p>
      */
     public static void vmaDestroyBuffer(@NativeType("VmaAllocator") long allocator, @NativeType("VkBuffer") long buffer, @NativeType("VmaAllocation") long allocation) {
         if (CHECKS) {
@@ -3317,6 +3475,38 @@ public class Vma {
         return nvmaCreateImage(allocator, pImageCreateInfo.address(), pAllocationCreateInfo.address(), memAddress(pImage), memAddress(pAllocation), memAddressSafe(pAllocationInfo));
     }
 
+    // --- [ vmaCreateAliasingImage ] ---
+
+    /** Unsafe version of: {@link #vmaCreateAliasingImage CreateAliasingImage} */
+    public static native int nvmaCreateAliasingImage(long allocator, long allocation, long pImageCreateInfo, long pImage);
+
+    /** Function similar to {@link #vmaCreateAliasingBuffer CreateAliasingBuffer} but for images. */
+    @NativeType("VkResult")
+    public static int vmaCreateAliasingImage(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkImageCreateInfo const *") VkImageCreateInfo pImageCreateInfo, @NativeType("VkImage *") LongBuffer pImage) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+            check(pImage, 1);
+        }
+        return nvmaCreateAliasingImage(allocator, allocation, pImageCreateInfo.address(), memAddress(pImage));
+    }
+
+    // --- [ vmaCreateAliasingImage2 ] ---
+
+    /** Unsafe version of: {@link #vmaCreateAliasingImage2 CreateAliasingImage2} */
+    public static native int nvmaCreateAliasingImage2(long allocator, long allocation, long allocationLocalOffset, long pImageCreateInfo, long pImage);
+
+    /** Function similar to {@link #vmaCreateAliasingBuffer2 CreateAliasingBuffer2} but for images. */
+    @NativeType("VkResult")
+    public static int vmaCreateAliasingImage2(@NativeType("VmaAllocator") long allocator, @NativeType("VmaAllocation") long allocation, @NativeType("VkDeviceSize") long allocationLocalOffset, @NativeType("VkImageCreateInfo const *") VkImageCreateInfo pImageCreateInfo, @NativeType("VkImage *") LongBuffer pImage) {
+        if (CHECKS) {
+            check(allocator);
+            check(allocation);
+            check(pImage, 1);
+        }
+        return nvmaCreateAliasingImage2(allocator, allocation, allocationLocalOffset, pImageCreateInfo.address(), memAddress(pImage));
+    }
+
     // --- [ vmaDestroyImage ] ---
 
     /** Unsafe version of: {@link #vmaDestroyImage DestroyImage} */
@@ -3331,7 +3521,7 @@ public class Vma {
      * vkDestroyImage(device, image, allocationCallbacks);
      * vmaFreeMemory(allocator, allocation);</code></pre>
      * 
-     * <p>It it safe to pass null as image and/or allocation.</p>
+     * <p>It is safe to pass null as image and/or allocation.</p>
      */
     public static void vmaDestroyImage(@NativeType("VmaAllocator") long allocator, @NativeType("VkImage") long image, @NativeType("VmaAllocation") long allocation) {
         if (CHECKS) {
@@ -3484,17 +3674,38 @@ public class Vma {
         nvmaSetVirtualAllocationUserData(virtualBlock, allocation, pUserData);
     }
 
-    // --- [ vmaCalculateVirtualBlockStats ] ---
+    // --- [ vmaGetVirtualBlockStatistics ] ---
 
-    /** Unsafe version of: {@link #vmaCalculateVirtualBlockStats CalculateVirtualBlockStats} */
-    public static native void nvmaCalculateVirtualBlockStats(long virtualBlock, long pStatInfo);
+    /** Unsafe version of: {@link #vmaGetVirtualBlockStatistics GetVirtualBlockStatistics} */
+    public static native void nvmaGetVirtualBlockStatistics(long virtualBlock, long pStats);
 
-    /** Calculates and returns statistics about virtual allocations and memory usage in given {@code VmaVirtualBlock}. */
-    public static void vmaCalculateVirtualBlockStats(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("VmaStatInfo *") VmaStatInfo pStatInfo) {
+    /**
+     * Calculates and returns statistics about virtual allocations and memory usage in given {@code VmaVirtualBlock}.
+     * 
+     * <p>This function is fast to call. For more detailed statistics, see {@link #vmaCalculateVirtualBlockStatistics CalculateVirtualBlockStatistics}.</p>
+     */
+    public static void vmaGetVirtualBlockStatistics(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("VmaStatistics *") VmaStatistics pStats) {
         if (CHECKS) {
             check(virtualBlock);
         }
-        nvmaCalculateVirtualBlockStats(virtualBlock, pStatInfo.address());
+        nvmaGetVirtualBlockStatistics(virtualBlock, pStats.address());
+    }
+
+    // --- [ vmaCalculateVirtualBlockStatistics ] ---
+
+    /** Unsafe version of: {@link #vmaCalculateVirtualBlockStatistics CalculateVirtualBlockStatistics} */
+    public static native void nvmaCalculateVirtualBlockStatistics(long virtualBlock, long pStats);
+
+    /**
+     * Calculates and returns detailed statistics about virtual allocations and memory usage in given {@code VmaVirtualBlock}.
+     * 
+     * <p>This function is slow to call. Use for debugging purposes. For less detailed statistics, see {@link #vmaGetVirtualBlockStatistics GetVirtualBlockStatistics}.</p>
+     */
+    public static void vmaCalculateVirtualBlockStatistics(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("VmaDetailedStatistics *") VmaDetailedStatistics pStats) {
+        if (CHECKS) {
+            check(virtualBlock);
+        }
+        nvmaCalculateVirtualBlockStatistics(virtualBlock, pStats.address());
     }
 
     // --- [ vmaBuildVirtualBlockStatsString ] ---
@@ -3509,7 +3720,7 @@ public class Vma {
      *
      * @param virtualBlock  virtual block
      * @param ppStatsString returned string
-     * @param detailedMap   pass {@code VK_FALSE} to only obtain statistics as returned by {@link #vmaCalculateVirtualBlockStats CalculateVirtualBlockStats}. Pass {@code VK_TRUE} to also obtain full list of
+     * @param detailedMap   pass {@code VK_FALSE} to only obtain statistics as returned by {@link #vmaCalculateVirtualBlockStatistics CalculateVirtualBlockStatistics}. Pass {@code VK_TRUE} to also obtain full list of
      *                      allocations and free spaces.
      */
     public static void vmaBuildVirtualBlockStatsString(@NativeType("VmaVirtualBlock") long virtualBlock, @NativeType("char **") PointerBuffer ppStatsString, @NativeType("VkBool32") boolean detailedMap) {

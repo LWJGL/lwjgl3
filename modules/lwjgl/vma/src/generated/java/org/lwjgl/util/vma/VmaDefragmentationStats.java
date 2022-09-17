@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Statistics returned by function {@link Vma#vmaDefragment Defragment}.
+ * Statistics returned for defragmentation process in function {@link Vma#vmaEndDefragmentation EndDefragmentation}.
  * 
  * <h3>Layout</h3>
  * 

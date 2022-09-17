@@ -15,17 +15,21 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
+import org.lwjgl.vulkan.*;
+
 /**
- * Deprecated. Optional configuration parameters to be passed to function {@link Vma#vmaDefragment Defragment}.
+ * Parameters for defragmentation.
  * 
- * <p>This is a part of the old interface. It is recommended to use structure {@link VmaDefragmentationInfo2} and function {@link Vma#vmaDefragmentationBegin DefragmentationBegin} instead.</p>
+ * <p>To be used with function {@link Vma#vmaBeginDefragmentation BeginDefragmentation}.</p>
  * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaDefragmentationInfo {
- *     VkDeviceSize {@link #maxBytesToMove};
- *     uint32_t {@link #maxAllocationsToMove};
+ *     VmaDefragmentationFlags {@link #flags};
+ *     VmaPool {@link #pool};
+ *     VkDeviceSize {@link #maxBytesPerPass};
+ *     uint32_t {@link #maxAllocationsPerPass};
  * }</code></pre>
  */
 public class VmaDefragmentationInfo extends Struct implements NativeResource {
@@ -38,11 +42,15 @@ public class VmaDefragmentationInfo extends Struct implements NativeResource {
 
     /** The struct member offsets. */
     public static final int
-        MAXBYTESTOMOVE,
-        MAXALLOCATIONSTOMOVE;
+        FLAGS,
+        POOL,
+        MAXBYTESPERPASS,
+        MAXALLOCATIONSPERPASS;
 
     static {
         Layout layout = __struct(
+            __member(4),
+            __member(POINTER_SIZE),
             __member(8),
             __member(4)
         );
@@ -50,8 +58,10 @@ public class VmaDefragmentationInfo extends Struct implements NativeResource {
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        MAXBYTESTOMOVE = layout.offsetof(0);
-        MAXALLOCATIONSTOMOVE = layout.offsetof(1);
+        FLAGS = layout.offsetof(0);
+        POOL = layout.offsetof(1);
+        MAXBYTESPERPASS = layout.offsetof(2);
+        MAXALLOCATIONSPERPASS = layout.offsetof(3);
     }
 
     /**
@@ -67,33 +77,51 @@ public class VmaDefragmentationInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
+    /** use combination of {@code VmaDefragmentationFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT}</td><td>{@link Vma#VMA_DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED_BIT DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED_BIT}</td></tr><tr><td>{@link Vma#VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT}</td><td>{@link Vma#VMA_DEFRAGMENTATION_FLAG_ALGORITHM_EXTENSIVE_BIT DEFRAGMENTATION_FLAG_ALGORITHM_EXTENSIVE_BIT}</td></tr><tr><td>{@link Vma#VMA_DEFRAGMENTATION_FLAG_ALGORITHM_MASK DEFRAGMENTATION_FLAG_ALGORITHM_MASK}</td></tr></table> */
+    @NativeType("VmaDefragmentationFlags")
+    public int flags() { return nflags(address()); }
     /**
-     * maximum total numbers of bytes that can be copied while moving allocations to different places.
+     * custom pool to be defragmented.
      * 
-     * <p>Default is {@code VK_WHOLE_SIZ}E, which means no limit.</p>
+     * <p>If null then default pools will undergo defragmentation process.</p>
+     */
+    @NativeType("VmaPool")
+    public long pool() { return npool(address()); }
+    /**
+     * maximum numbers of bytes that can be copied during single pass, while moving allocations to different places.
+     * 
+     * <p>0 means no limit.</p>
      */
     @NativeType("VkDeviceSize")
-    public long maxBytesToMove() { return nmaxBytesToMove(address()); }
+    public long maxBytesPerPass() { return nmaxBytesPerPass(address()); }
     /**
-     * maximum number of allocations that can be moved to different place.
+     * maximum number of allocations that can be moved during single pass to a different place.
      * 
-     * <p>Default is {@code UINT32_MAX}, which means no limit.</p>
+     * <p>0 means no limit.</p>
      */
     @NativeType("uint32_t")
-    public int maxAllocationsToMove() { return nmaxAllocationsToMove(address()); }
+    public int maxAllocationsPerPass() { return nmaxAllocationsPerPass(address()); }
 
-    /** Sets the specified value to the {@link #maxBytesToMove} field. */
-    public VmaDefragmentationInfo maxBytesToMove(@NativeType("VkDeviceSize") long value) { nmaxBytesToMove(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxAllocationsToMove} field. */
-    public VmaDefragmentationInfo maxAllocationsToMove(@NativeType("uint32_t") int value) { nmaxAllocationsToMove(address(), value); return this; }
+    /** Sets the specified value to the {@link #flags} field. */
+    public VmaDefragmentationInfo flags(@NativeType("VmaDefragmentationFlags") int value) { nflags(address(), value); return this; }
+    /** Sets the specified value to the {@link #pool} field. */
+    public VmaDefragmentationInfo pool(@NativeType("VmaPool") long value) { npool(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxBytesPerPass} field. */
+    public VmaDefragmentationInfo maxBytesPerPass(@NativeType("VkDeviceSize") long value) { nmaxBytesPerPass(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxAllocationsPerPass} field. */
+    public VmaDefragmentationInfo maxAllocationsPerPass(@NativeType("uint32_t") int value) { nmaxAllocationsPerPass(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VmaDefragmentationInfo set(
-        long maxBytesToMove,
-        int maxAllocationsToMove
+        int flags,
+        long pool,
+        long maxBytesPerPass,
+        int maxAllocationsPerPass
     ) {
-        maxBytesToMove(maxBytesToMove);
-        maxAllocationsToMove(maxAllocationsToMove);
+        flags(flags);
+        pool(pool);
+        maxBytesPerPass(maxBytesPerPass);
+        maxAllocationsPerPass(maxAllocationsPerPass);
 
         return this;
     }
@@ -242,15 +270,23 @@ public class VmaDefragmentationInfo extends Struct implements NativeResource {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #maxBytesToMove}. */
-    public static long nmaxBytesToMove(long struct) { return UNSAFE.getLong(null, struct + VmaDefragmentationInfo.MAXBYTESTOMOVE); }
-    /** Unsafe version of {@link #maxAllocationsToMove}. */
-    public static int nmaxAllocationsToMove(long struct) { return UNSAFE.getInt(null, struct + VmaDefragmentationInfo.MAXALLOCATIONSTOMOVE); }
+    /** Unsafe version of {@link #flags}. */
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VmaDefragmentationInfo.FLAGS); }
+    /** Unsafe version of {@link #pool}. */
+    public static long npool(long struct) { return memGetAddress(struct + VmaDefragmentationInfo.POOL); }
+    /** Unsafe version of {@link #maxBytesPerPass}. */
+    public static long nmaxBytesPerPass(long struct) { return UNSAFE.getLong(null, struct + VmaDefragmentationInfo.MAXBYTESPERPASS); }
+    /** Unsafe version of {@link #maxAllocationsPerPass}. */
+    public static int nmaxAllocationsPerPass(long struct) { return UNSAFE.getInt(null, struct + VmaDefragmentationInfo.MAXALLOCATIONSPERPASS); }
 
-    /** Unsafe version of {@link #maxBytesToMove(long) maxBytesToMove}. */
-    public static void nmaxBytesToMove(long struct, long value) { UNSAFE.putLong(null, struct + VmaDefragmentationInfo.MAXBYTESTOMOVE, value); }
-    /** Unsafe version of {@link #maxAllocationsToMove(int) maxAllocationsToMove}. */
-    public static void nmaxAllocationsToMove(long struct, int value) { UNSAFE.putInt(null, struct + VmaDefragmentationInfo.MAXALLOCATIONSTOMOVE, value); }
+    /** Unsafe version of {@link #flags(int) flags}. */
+    public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + VmaDefragmentationInfo.FLAGS, value); }
+    /** Unsafe version of {@link #pool(long) pool}. */
+    public static void npool(long struct, long value) { memPutAddress(struct + VmaDefragmentationInfo.POOL, value); }
+    /** Unsafe version of {@link #maxBytesPerPass(long) maxBytesPerPass}. */
+    public static void nmaxBytesPerPass(long struct, long value) { UNSAFE.putLong(null, struct + VmaDefragmentationInfo.MAXBYTESPERPASS, value); }
+    /** Unsafe version of {@link #maxAllocationsPerPass(int) maxAllocationsPerPass}. */
+    public static void nmaxAllocationsPerPass(long struct, int value) { UNSAFE.putInt(null, struct + VmaDefragmentationInfo.MAXALLOCATIONSPERPASS, value); }
 
     // -----------------------------------
 
@@ -290,17 +326,27 @@ public class VmaDefragmentationInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VmaDefragmentationInfo#maxBytesToMove} field. */
+        /** @return the value of the {@link VmaDefragmentationInfo#flags} field. */
+        @NativeType("VmaDefragmentationFlags")
+        public int flags() { return VmaDefragmentationInfo.nflags(address()); }
+        /** @return the value of the {@link VmaDefragmentationInfo#pool} field. */
+        @NativeType("VmaPool")
+        public long pool() { return VmaDefragmentationInfo.npool(address()); }
+        /** @return the value of the {@link VmaDefragmentationInfo#maxBytesPerPass} field. */
         @NativeType("VkDeviceSize")
-        public long maxBytesToMove() { return VmaDefragmentationInfo.nmaxBytesToMove(address()); }
-        /** @return the value of the {@link VmaDefragmentationInfo#maxAllocationsToMove} field. */
+        public long maxBytesPerPass() { return VmaDefragmentationInfo.nmaxBytesPerPass(address()); }
+        /** @return the value of the {@link VmaDefragmentationInfo#maxAllocationsPerPass} field. */
         @NativeType("uint32_t")
-        public int maxAllocationsToMove() { return VmaDefragmentationInfo.nmaxAllocationsToMove(address()); }
+        public int maxAllocationsPerPass() { return VmaDefragmentationInfo.nmaxAllocationsPerPass(address()); }
 
-        /** Sets the specified value to the {@link VmaDefragmentationInfo#maxBytesToMove} field. */
-        public VmaDefragmentationInfo.Buffer maxBytesToMove(@NativeType("VkDeviceSize") long value) { VmaDefragmentationInfo.nmaxBytesToMove(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaDefragmentationInfo#maxAllocationsToMove} field. */
-        public VmaDefragmentationInfo.Buffer maxAllocationsToMove(@NativeType("uint32_t") int value) { VmaDefragmentationInfo.nmaxAllocationsToMove(address(), value); return this; }
+        /** Sets the specified value to the {@link VmaDefragmentationInfo#flags} field. */
+        public VmaDefragmentationInfo.Buffer flags(@NativeType("VmaDefragmentationFlags") int value) { VmaDefragmentationInfo.nflags(address(), value); return this; }
+        /** Sets the specified value to the {@link VmaDefragmentationInfo#pool} field. */
+        public VmaDefragmentationInfo.Buffer pool(@NativeType("VmaPool") long value) { VmaDefragmentationInfo.npool(address(), value); return this; }
+        /** Sets the specified value to the {@link VmaDefragmentationInfo#maxBytesPerPass} field. */
+        public VmaDefragmentationInfo.Buffer maxBytesPerPass(@NativeType("VkDeviceSize") long value) { VmaDefragmentationInfo.nmaxBytesPerPass(address(), value); return this; }
+        /** Sets the specified value to the {@link VmaDefragmentationInfo#maxAllocationsPerPass} field. */
+        public VmaDefragmentationInfo.Buffer maxAllocationsPerPass(@NativeType("uint32_t") int value) { VmaDefragmentationInfo.nmaxAllocationsPerPass(address(), value); return this; }
 
     }
 

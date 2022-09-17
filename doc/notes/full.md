@@ -16,7 +16,7 @@ This build includes the following changes:
 - meshoptimizer: Updated to 0.17 (up from 0.16)
 - Nuklear: Updated to 4.9.6 (up from 4.09.0)
 - Shaderc: Updated to 2022.1 (up from 2021.3)
-- vma: Updated to latest 3.3.0-development
+- vma: Updated to latest 3.0.0-development (up from 2.2.0)
   * Added virtual allocator API.
   * Added `VMA_MEMORY_USAGE_AUTO`.
 - Vulkan: Updated to 1.3.206 (up from 1.2.198)

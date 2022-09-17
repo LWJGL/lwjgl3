@@ -9,21 +9,26 @@ import javax.annotation.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
+ * Parameters for incremental defragmentation steps.
+ * 
+ * <p>To be used with function {@link Vma#vmaBeginDefragmentationPass BeginDefragmentationPass}.</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct VmaDefragmentationPassMoveInfo {
- *     VmaAllocation allocation;
- *     VkDeviceMemory memory;
- *     VkDeviceSize offset;
+ *     uint32_t {@link #moveCount};
+ *     {@link VmaDefragmentationMove VmaDefragmentationMove} * {@link #pMoves};
  * }</code></pre>
  */
-public class VmaDefragmentationPassMoveInfo extends Struct {
+public class VmaDefragmentationPassMoveInfo extends Struct implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -33,23 +38,20 @@ public class VmaDefragmentationPassMoveInfo extends Struct {
 
     /** The struct member offsets. */
     public static final int
-        ALLOCATION,
-        MEMORY,
-        OFFSET;
+        MOVECOUNT,
+        PMOVES;
 
     static {
         Layout layout = __struct(
-            __member(POINTER_SIZE),
-            __member(8),
-            __member(8)
+            __member(4),
+            __member(POINTER_SIZE)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        ALLOCATION = layout.offsetof(0);
-        MEMORY = layout.offsetof(1);
-        OFFSET = layout.offsetof(2);
+        MOVECOUNT = layout.offsetof(0);
+        PMOVES = layout.offsetof(1);
     }
 
     /**
@@ -65,17 +67,87 @@ public class VmaDefragmentationPassMoveInfo extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code allocation} field. */
-    @NativeType("VmaAllocation")
-    public long allocation() { return nallocation(address()); }
-    /** @return the value of the {@code memory} field. */
-    @NativeType("VkDeviceMemory")
-    public long memory() { return nmemory(address()); }
-    /** @return the value of the {@code offset} field. */
-    @NativeType("VkDeviceSize")
-    public long offset() { return noffset(address()); }
+    /** number of elements in the {@code pMoves} array. */
+    @NativeType("uint32_t")
+    public int moveCount() { return nmoveCount(address()); }
+    /**
+     * array of moves to be performed by the user in the current defragmentation pass.
+     * 
+     * <p>Pointer to an array of {@code moveCount} elements, owned by VMA, created in {@link Vma#vmaBeginDefragmentationPass BeginDefragmentationPass}, destroyed in {@link Vma#vmaEndDefragmentationPass EndDefragmentationPass}.</p>
+     * 
+     * <p>For each element, you should:</p>
+     * 
+     * <ol>
+     * <li>Create a new buffer/image in the place pointed by {@link VmaDefragmentationMove}{@code ::dstMemory} + {@code VmaDefragmentationMove::dstOffset}.</li>
+     * <li>Copy data from the {@code VmaDefragmentationMove::srcAllocation} e.g. using {@code vkCmdCopyBuffer}, {@code vkCmdCopyImage}.</li>
+     * <li>Make sure these commands finished executing on the GPU.</li>
+     * <li>Destroy the old buffer/image.</li>
+     * </ol>
+     * 
+     * <p>Only then you can finish defragmentation pass by calling {@code vmaEndDefragmentationPass()}. After this call, the allocation will point to the new
+     * place in memory.</p>
+     * 
+     * <p>Alternatively, if you cannot move specific allocation, you can set {@code VmaDefragmentationMove::operation} to
+     * {@link Vma#VMA_DEFRAGMENTATION_MOVE_OPERATION_IGNORE DEFRAGMENTATION_MOVE_OPERATION_IGNORE}.</p>
+     * 
+     * <p>Alternatively, if you decide you want to completely remove the allocation:</p>
+     * 
+     * <ol>
+     * <li>Destroy its buffer/image.</li>
+     * <li>Set {@code VmaDefragmentationMove::operation} to {@link Vma#VMA_DEFRAGMENTATION_MOVE_OPERATION_DESTROY DEFRAGMENTATION_MOVE_OPERATION_DESTROY}.</li>
+     * </ol>
+     * 
+     * <p>Then, after {@code vmaEndDefragmentationPass()} the allocation will be freed.</p>
+     */
+    @Nullable
+    @NativeType("VmaDefragmentationMove *")
+    public VmaDefragmentationMove.Buffer pMoves() { return npMoves(address()); }
+
+    /** Sets the specified value to the {@link #moveCount} field. */
+    public VmaDefragmentationPassMoveInfo moveCount(@NativeType("uint32_t") int value) { nmoveCount(address(), value); return this; }
+    /** Sets the address of the specified {@link VmaDefragmentationMove.Buffer} to the {@link #pMoves} field. */
+    public VmaDefragmentationPassMoveInfo pMoves(@Nullable @NativeType("VmaDefragmentationMove *") VmaDefragmentationMove.Buffer value) { npMoves(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VmaDefragmentationPassMoveInfo set(
+        int moveCount,
+        @Nullable VmaDefragmentationMove.Buffer pMoves
+    ) {
+        moveCount(moveCount);
+        pMoves(pMoves);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public VmaDefragmentationPassMoveInfo set(VmaDefragmentationPassMoveInfo src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
 
     // -----------------------------------
+
+    /** Returns a new {@code VmaDefragmentationPassMoveInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VmaDefragmentationPassMoveInfo malloc() {
+        return wrap(VmaDefragmentationPassMoveInfo.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VmaDefragmentationPassMoveInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VmaDefragmentationPassMoveInfo calloc() {
+        return wrap(VmaDefragmentationPassMoveInfo.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VmaDefragmentationPassMoveInfo} instance allocated with {@link BufferUtils}. */
+    public static VmaDefragmentationPassMoveInfo create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VmaDefragmentationPassMoveInfo.class, memAddress(container), container);
+    }
 
     /** Returns a new {@code VmaDefragmentationPassMoveInfo} instance for the specified memory address. */
     public static VmaDefragmentationPassMoveInfo create(long address) {
@@ -86,6 +158,34 @@ public class VmaDefragmentationPassMoveInfo extends Struct {
     @Nullable
     public static VmaDefragmentationPassMoveInfo createSafe(long address) {
         return address == NULL ? null : wrap(VmaDefragmentationPassMoveInfo.class, address);
+    }
+
+    /**
+     * Returns a new {@link VmaDefragmentationPassMoveInfo.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VmaDefragmentationPassMoveInfo.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VmaDefragmentationPassMoveInfo.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VmaDefragmentationPassMoveInfo.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VmaDefragmentationPassMoveInfo.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VmaDefragmentationPassMoveInfo.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
     }
 
     /**
@@ -104,19 +204,73 @@ public class VmaDefragmentationPassMoveInfo extends Struct {
         return address == NULL ? null : wrap(Buffer.class, address, capacity);
     }
 
+    /**
+     * Returns a new {@code VmaDefragmentationPassMoveInfo} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VmaDefragmentationPassMoveInfo malloc(MemoryStack stack) {
+        return wrap(VmaDefragmentationPassMoveInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VmaDefragmentationPassMoveInfo} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VmaDefragmentationPassMoveInfo calloc(MemoryStack stack) {
+        return wrap(VmaDefragmentationPassMoveInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VmaDefragmentationPassMoveInfo.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VmaDefragmentationPassMoveInfo.Buffer malloc(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VmaDefragmentationPassMoveInfo.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VmaDefragmentationPassMoveInfo.Buffer calloc(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
     // -----------------------------------
 
-    /** Unsafe version of {@link #allocation}. */
-    public static long nallocation(long struct) { return memGetAddress(struct + VmaDefragmentationPassMoveInfo.ALLOCATION); }
-    /** Unsafe version of {@link #memory}. */
-    public static long nmemory(long struct) { return UNSAFE.getLong(null, struct + VmaDefragmentationPassMoveInfo.MEMORY); }
-    /** Unsafe version of {@link #offset}. */
-    public static long noffset(long struct) { return UNSAFE.getLong(null, struct + VmaDefragmentationPassMoveInfo.OFFSET); }
+    /** Unsafe version of {@link #moveCount}. */
+    public static int nmoveCount(long struct) { return UNSAFE.getInt(null, struct + VmaDefragmentationPassMoveInfo.MOVECOUNT); }
+    /** Unsafe version of {@link #pMoves}. */
+    @Nullable public static VmaDefragmentationMove.Buffer npMoves(long struct) { return VmaDefragmentationMove.createSafe(memGetAddress(struct + VmaDefragmentationPassMoveInfo.PMOVES), nmoveCount(struct)); }
+
+    /** Sets the specified value to the {@code moveCount} field of the specified {@code struct}. */
+    public static void nmoveCount(long struct, int value) { UNSAFE.putInt(null, struct + VmaDefragmentationPassMoveInfo.MOVECOUNT, value); }
+    /** Unsafe version of {@link #pMoves(VmaDefragmentationMove.Buffer) pMoves}. */
+    public static void npMoves(long struct, @Nullable VmaDefragmentationMove.Buffer value) { memPutAddress(struct + VmaDefragmentationPassMoveInfo.PMOVES, memAddressSafe(value)); nmoveCount(struct, value == null ? 0 : value.remaining()); }
+
+    /**
+     * Validates pointer members that should not be {@code NULL}.
+     *
+     * @param struct the struct to validate
+     */
+    public static void validate(long struct) {
+        int moveCount = nmoveCount(struct);
+        long pMoves = memGetAddress(struct + VmaDefragmentationPassMoveInfo.PMOVES);
+        if (pMoves != NULL) {
+            validate(pMoves, moveCount, VmaDefragmentationMove.SIZEOF, VmaDefragmentationMove::validate);
+        }
+    }
 
     // -----------------------------------
 
     /** An array of {@link VmaDefragmentationPassMoveInfo} structs. */
-    public static class Buffer extends StructBuffer<VmaDefragmentationPassMoveInfo, Buffer> {
+    public static class Buffer extends StructBuffer<VmaDefragmentationPassMoveInfo, Buffer> implements NativeResource {
 
         private static final VmaDefragmentationPassMoveInfo ELEMENT_FACTORY = VmaDefragmentationPassMoveInfo.create(-1L);
 
@@ -151,15 +305,18 @@ public class VmaDefragmentationPassMoveInfo extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code allocation} field. */
-        @NativeType("VmaAllocation")
-        public long allocation() { return VmaDefragmentationPassMoveInfo.nallocation(address()); }
-        /** @return the value of the {@code memory} field. */
-        @NativeType("VkDeviceMemory")
-        public long memory() { return VmaDefragmentationPassMoveInfo.nmemory(address()); }
-        /** @return the value of the {@code offset} field. */
-        @NativeType("VkDeviceSize")
-        public long offset() { return VmaDefragmentationPassMoveInfo.noffset(address()); }
+        /** @return the value of the {@link VmaDefragmentationPassMoveInfo#moveCount} field. */
+        @NativeType("uint32_t")
+        public int moveCount() { return VmaDefragmentationPassMoveInfo.nmoveCount(address()); }
+        /** @return a {@link VmaDefragmentationMove.Buffer} view of the struct array pointed to by the {@link VmaDefragmentationPassMoveInfo#pMoves} field. */
+        @Nullable
+        @NativeType("VmaDefragmentationMove *")
+        public VmaDefragmentationMove.Buffer pMoves() { return VmaDefragmentationPassMoveInfo.npMoves(address()); }
+
+        /** Sets the specified value to the {@link VmaDefragmentationPassMoveInfo#moveCount} field. */
+        public VmaDefragmentationPassMoveInfo.Buffer moveCount(@NativeType("uint32_t") int value) { VmaDefragmentationPassMoveInfo.nmoveCount(address(), value); return this; }
+        /** Sets the address of the specified {@link VmaDefragmentationMove.Buffer} to the {@link VmaDefragmentationPassMoveInfo#pMoves} field. */
+        public VmaDefragmentationPassMoveInfo.Buffer pMoves(@Nullable @NativeType("VmaDefragmentationMove *") VmaDefragmentationMove.Buffer value) { VmaDefragmentationPassMoveInfo.npMoves(address(), value); return this; }
 
     }
 

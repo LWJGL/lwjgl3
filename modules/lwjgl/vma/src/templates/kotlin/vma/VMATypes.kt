@@ -17,6 +17,7 @@ val VmaVirtualBlock = "VmaVirtualBlock".handle
 val VmaAllocationCreateFlags = "VmaAllocationCreateFlags".enumType
 val VmaAllocatorCreateFlags = "VmaAllocatorCreateFlags".enumType
 val VmaDefragmentationFlags = "VmaDefragmentationFlags".enumType
+val VmaDefragmentationMoveOperation = "VmaDefragmentationMoveOperation".enumType
 val VmaMemoryUsage = "VmaMemoryUsage".enumType
 val VmaPoolCreateFlags = "VmaPoolCreateFlags".enumType
 val VmaVirtualAllocationCreateFlags = typedef(VkFlags, "VmaVirtualAllocationCreateFlags")
@@ -270,47 +271,97 @@ val VmaAllocatorInfo = struct(Module.VMA, "VmaAllocatorInfo", mutable = false) {
     )
 }
 
-val VmaStatInfo = struct(Module.VMA, "VmaStatInfo", mutable = false) {
-    documentation = "Calculated statistics of memory usage in entire allocator."
+val VmaStatistics = struct(Module.VMA, "VmaStatistics", mutable = false) {
+    documentation =
+        """
+        Calculated statistics of memory usage e.g. in a specific memory type, heap, custom pool, or total.
 
-    uint32_t("blockCount", "number of {@code VkDeviceMemory} Vulkan memory blocks allocated")
-    uint32_t("allocationCount", "number of {@code VmaAllocation} allocation objects allocated")
+        These are fast to calculate.
+        """
+
+    uint32_t("blockCount", "number of {@code VkDeviceMemory} objects - Vulkan memory blocks allocated")
+    uint32_t(
+        "allocationCount",
+        """
+        number of {@code VmaAllocation} objects allocated.
+
+        Dedicated allocations have their own blocks, so each one adds 1 to {@code allocationCount} as well as {@code blockCount}.
+        """
+    )
+    VkDeviceSize(
+        "blockBytes",
+        """
+        number of bytes allocated in {@code VkDeviceMemory} blocks.
+
+        To avoid confusion, please be aware that what Vulkan calls an "allocation" - a whole {@code VkDeviceMemory} object (e.g. as in
+        {@code VkPhysicalDeviceLimits::maxMemoryAllocationCount}) is called a "block" in VMA, while VMA calls "allocation" a {@code VmaAllocation} object that
+        represents a memory region sub-allocated from such block, usually for a single buffer or image.
+        """
+    )
+    VkDeviceSize(
+        "allocationBytes",
+        """
+        total number of bytes occupied by all {@code VmaAllocation} objects.
+
+        Always less or equal than {@code blockBytes}. Difference {@code (blockBytes - allocationBytes)} is the amount of memory allocated from Vulkan but
+        unused by any {@code VmaAllocation}.
+        """
+    )
+
+    see = arrayOf("#GetHeapBudgets()", "#GetPoolStatistics()")
+}
+
+val VmaDetailedStatistics = struct(Module.VMA, "VmaDetailedStatistics", mutable = false) {
+    documentation =
+        """
+        More detailed statistics than ##VmaStatistics.
+
+        These are slower to calculate. Use for debugging purposes.
+
+        Previous version of the statistics API provided averages, but they have been removed because they can be easily calculated as:
+        ${codeBlock("""
+VkDeviceSize allocationSizeAvg = detailedStats.statistics.allocationBytes / detailedStats.statistics.allocationCount;
+VkDeviceSize unusedBytes = detailedStats.statistics.blockBytes - detailedStats.statistics.allocationBytes;
+VkDeviceSize unusedRangeSizeAvg = unusedBytes / detailedStats.unusedRangeCount;""")}
+        """
+
+    VmaStatistics("statistics", "basic statistics")
     uint32_t("unusedRangeCount", "number of free ranges of memory between allocations")
-    VkDeviceSize("usedBytes", "total number of bytes occupied by all allocations")
-    VkDeviceSize("unusedBytes", "total number of bytes occupied by unused ranges")
-    VkDeviceSize("allocationSizeMin", "")
-    VkDeviceSize("allocationSizeAvg", "")
-    VkDeviceSize("allocationSizeMax", "")
-    VkDeviceSize("unusedRangeSizeMin", "")
-    VkDeviceSize("unusedRangeSizeAvg", "")
-    VkDeviceSize("unusedRangeSizeMax", "")
+    VkDeviceSize("allocationSizeMin", "smallest allocation size. {@code VK_WHOLE_SIZE} if there are 0 allocations.")
+    VkDeviceSize("allocationSizeMax", "largest allocation size. 0 if there are 0 allocations.")
+    VkDeviceSize("unusedRangeSizeMin", "smallest empty range size. {@code VK_WHOLE_SIZE} if there are 0 empty ranges.")
+    VkDeviceSize("unusedRangeSizeMax", "largest empty range size. 0 if there are 0 empty ranges.")
+
+    see = arrayOf("#CalculateStatistics()", "#CalculatePoolStatistics()")
 }
 
 private const val VK_MAX_MEMORY_TYPES = 32
 private const val VK_MAX_MEMORY_HEAPS = 16
 
-/// General statistics from current state of Allocator.
-val VmaStats = struct(Module.VMA, "VmaStats", mutable = false) {
-    documentation = "General statistics from current state of Allocator."
+val VmaTotalStatistics = struct(Module.VMA, "VmaTotalStatistics", mutable = false) {
+    documentation =
+        """
+        General statistics from current state of the Allocator - total memory usage across all memory heaps and types.
 
-    VmaStatInfo("memoryType", "")[VK_MAX_MEMORY_TYPES]
-    VmaStatInfo("memoryHeap", "")[VK_MAX_MEMORY_HEAPS]
-    VmaStatInfo("total", "")
+        These are slower to calculate. Use for debugging purposes.
+        """
+
+    VmaDetailedStatistics("memoryType", "")[VK_MAX_MEMORY_TYPES]
+    VmaDetailedStatistics("memoryHeap", "")[VK_MAX_MEMORY_HEAPS]
+    VmaDetailedStatistics("total", "")
+
+    see = arrayOf("#CalculateStatistics()")
 }
 
 val VmaBudget = struct(Module.VMA, "VmaBudget", mutable = false) {
-    documentation = "Statistics of current memory usage and available budget, in bytes, for specific memory heap."
-
-    VkDeviceSize("blockBytes", "Sum size of all {@code VkDeviceMemory} blocks allocated from particular heap, in bytes.")
-    VkDeviceSize(
-        "allocationBytes",
+    documentation =
         """
-        Sum size of all allocations created in particular heap, in bytes.
+        Statistics of current memory usage and available budget for a specific memory heap.
 
-        Usually less or equal than {@code blockBytes}. Difference {@code blockBytes - allocationBytes} is the amount of memory allocated but unused - available
-        for new allocations or wasted due to fragmentation.
+        These are fast to calculate.
         """
-    )
+
+    VmaStatistics("statistics", "statistics fetched from the library")
     VkDeviceSize(
         "usage",
         """
@@ -318,8 +369,8 @@ val VmaBudget = struct(Module.VMA, "VmaBudget", mutable = false) {
 
         Fetched from system using {@code VK_EXT_memory_budget} extension if enabled.
 
-        It might be different than {@code blockBytes} (usually higher) due to additional implicit objects also occupying the memory, like swapchain, pipelines,
-        descriptor heaps, command buffers, or {@code VkDeviceMemory} blocks allocated outside of this library, if any.
+        It might be different than {@code statistics.blockBytes} (usually higher) due to additional implicit objects also occupying the memory, like swapchain,
+        pipelines, descriptor heaps, command buffers, or {@code VkDeviceMemory} blocks allocated outside of this library, if any.
         """
     )
     VkDeviceSize(
@@ -329,14 +380,23 @@ val VmaBudget = struct(Module.VMA, "VmaBudget", mutable = false) {
 
         Fetched from system using {@code VK_EXT_memory_budget} extension if enabled.
 
-        It might be different (most probably smaller) than {@code VkMemoryHeap::size[heapIndex]} due to factors external to the program, like other programs
-        also consuming system resources. Difference {@code budget - usage} is the amount of additional memory that can probably be allocated without problems.
-        Exceeding the budget may result in various problems.
+        It might be different (most probably smaller) than {@code VkMemoryHeap::size[heapIndex]} due to factors external to the program, decided by the
+        operating system. Difference {@code budget - usage} is the amount of additional memory that can probably be allocated without problems. Exceeding
+        the budget may result in various problems.
         """
     )
+
+    see = arrayOf("#GetHeapBudgets()")
 }
 
 val VmaAllocationCreateInfo = struct(Module.VMA, "VmaAllocationCreateInfo") {
+    documentation =
+        """
+        Parameters of new {@code VmaAllocation}.
+
+        To be used with functions like #CreateBuffer(), #CreateImage(), and many others.
+        """
+
     VmaAllocationCreateFlags("flags", "use {@code VmaAllocationCreateFlagBits} enum").links("ALLOCATION_CREATE_\\w+", LinkMode.BITFIELD)
     VmaMemoryUsage(
         "usage",
@@ -471,15 +531,6 @@ val VmaPoolCreateInfo = struct(Module.VMA, "VmaPoolCreateInfo") {
     )
 }
 
-val VmaPoolStats = struct(Module.VMA, "VmaPoolStats", mutable = false) {
-    documentation = "Describes parameter of existing {@code VmaPool}."
-    VkDeviceSize("size", "total amount of {@code VkDeviceMemory} allocated from Vulkan for this pool, in bytes")
-    VkDeviceSize("unusedSize", "total number of bytes in the pool not used by any {@code VmaAllocation}")
-    size_t("allocationCount", "number of {@code VmaAllocation} objects created from this pool that were not destroyed")
-    size_t("unusedRangeCount", "number of continuous memory ranges in the pool not used by any {@code VmaAllocation}")
-    size_t("blockCount", "number of {@code VkDeviceMemory} blocks allocated for this pool")
-}
-
 val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false) {
     documentation = "Parameters of {@code VmaAllocation} objects, that can be retrieved using function #GetAllocationInfo()."
 
@@ -498,7 +549,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
 
         Same memory object can be shared by multiple allocations.
 
-        It can change after call to #Defragment() if this allocation is passed to the function.
+        It can change after the allocation is moved during defragmentation.
         """
     )
     VkDeviceSize(
@@ -510,7 +561,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         #CreateImage(), functions that operate on these resources refer to the beginning of the buffer or image, not entire device memory block. Functions like
         #MapMemory(), #BindBufferMemory() also refer to the beginning of the allocation and apply this offset automatically.
 
-        It can change after call to #Defragment() if this allocation is passed to the function.
+        It can change after the allocation is moved during defragmentation.
         """
     )
     VkDeviceSize(
@@ -533,7 +584,7 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
 
         If the allocation hasn't been mapped using #MapMemory() and hasn't been created with #ALLOCATION_CREATE_MAPPED_BIT flag, this value is null.
 
-        It can change after call to #MapMemory(), #UnmapMemory(). It can also change after call to #Defragment() if this allocation is passed to the function.
+        It can change after call to #MapMemory(), #UnmapMemory(). It can also change after the allocation is moved during defragmentation.
         """
     )
     nullable..opaque_p(
@@ -544,106 +595,80 @@ val VmaAllocationInfo = struct(Module.VMA, "VmaAllocationInfo", mutable = false)
         It can change after call to #SetAllocationUserData() for this allocation.
         """
     )
+    nullable..charUTF8.const.p(
+        "pName",
+        """
+        Custom allocation name that was set with #SetAllocationName().
+
+        It can change after call to {@code vmaSetAllocationName()} for this allocation.
+
+        Another way to set custom name is to pass it in ##VmaAllocationCreateInfo{@code ::pUserData} with additional flag
+        #ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT set (DEPRECATED).
+        """
+    )
 }
 
-val VmaDefragmentationInfo2 = struct(Module.VMA, "VmaDefragmentationInfo2") {
+val VmaDefragmentationInfo = struct(Module.VMA, "VmaDefragmentationInfo") {
     javaImport("org.lwjgl.vulkan.*")
     documentation =
         """
         Parameters for defragmentation.
 
-        To be used with function #DefragmentationBegin().
+        To be used with function #BeginDefragmentation().
         """
 
-    VmaDefragmentationFlags("flags", "reserved for future use. Should be 0.")
-    AutoSize("pAllocations", "pAllocationsChanged")..uint32_t("allocationCount", "number of allocations in {@code pAllocations} array")
-    VmaAllocation.p(
-        "pAllocations",
+    VmaDefragmentationFlags("flags", "use combination of {@code VmaDefragmentationFlagBits}.").links("DEFRAGMENTATION_FLAG_ALGORITHM_\\w+", LinkMode.BITFIELD)
+    nullable..VmaPool(
+        "pool",
         """
-        pointer to array of allocations that can be defragmented.
+        custom pool to be defragmented.
 
-        The array should have {@code allocationCount} elements. The array should not contain nulls. Elements in the array should be unique - same allocation
-        cannot occur twice. All allocations not present in this array are considered non-moveable during this defragmentation.
-        """
-    )
-    nullable..VkBool32.p(
-        "pAllocationsChanged",
-        """
-        Optional, output. Pointer to array that will be filled with information whether the allocation at certain index has been changed during defragmentation.
-
-        The array should have {@code allocationCount} elements. You can pass null if you are not interested in this information.
-        """
-    )
-    AutoSize("pPools")..uint32_t("poolCount", "number of pools in {@code pPools} array")
-    nullable..VmaPool.const.p(
-        "pPools",
-        """
-        Either null or pointer to array of pools to be defragmented.
-
-        All the allocations in the specified pools can be moved during defragmentation and there is no way to check if they were really moved as in
-        {@code pAllocationsChanged}, so you must query all the allocations in all these pools for new {@code VkDeviceMemory} and offset using
-        #GetAllocationInfo() if you might need to recreate buffers and images bound to them.
-
-        The array should have {@code poolCount} elements. The array should not contain nulls. Elements in the array should be unique - same pool cannot occur
-        twice.
-
-        Using this array is equivalent to specifying all allocations from the pools in {@code pAllocations}. It might be more efficient.
+        If null then default pools will undergo defragmentation process.
         """
     )
     VkDeviceSize(
-        "maxCpuBytesToMove",
+        "maxBytesPerPass",
         """
-        maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on CPU side, like {@code memcpy()},
-        {@code memmove()}.
+        maximum numbers of bytes that can be copied during single pass, while moving allocations to different places.
 
-        {@code VK_WHOLE_SIZE} means no limit.
+        0 means no limit.
         """
     )
     uint32_t(
-        "maxCpuAllocationsToMove",
+        "maxAllocationsPerPass",
         """
-        maximum number of allocations that can be moved to a different place using transfers on CPU side, like {@code memcpy()}, {@code memmove()}.
+        maximum number of allocations that can be moved during single pass to a different place.
 
-        {@code UINT32_MAX} means no limit.
-        """
-    )
-    VkDeviceSize(
-        "maxGpuBytesToMove",
-        """
-        maximum total numbers of bytes that can be copied while moving allocations to different places using transfers on GPU side, posted to
-        {@code commandBuffer}.
-
-        {@code VK_WHOLE_SIZE} means no limit.
-        """
-    )
-    uint32_t(
-        "maxGpuAllocationsToMove",
-        """
-        maximum number of allocations that can be moved to a different place using transfers on GPU side, posted to {@code commandBuffer}.
-
-        {@code UINT32_MAX} means no limit.
-        """
-    )
-    nullable..VkCommandBuffer(
-        "commandBuffer",
-        """
-        command buffer where GPU copy commands will be posted. Optional.
-
-        If not null, it must be a valid command buffer handle that supports Transfer queue type. It must be in the recording state and outside of a render pass
-        instance. You need to submit it and make sure it finished execution before calling #DefragmentationEnd().
-
-        Passing null means that only CPU defragmentation will be performed.
+        0 means no limit.
         """
     )
 }
 
-val VmaDefragmentationPassMoveInfo = struct(Module.VMA, "VmaDefragmentationPassMoveInfo", mutable = false) {
-    VmaAllocation("allocation", "")
-    VkDeviceMemory("memory", "")
-    VkDeviceSize("offset", "")
+val VmaDefragmentationMove = struct(Module.VMA, "VmaDefragmentationMove")  {
+    documentation = "Single move of an allocation to be done for defragmentation."
+
+    VmaDefragmentationMoveOperation(
+        "operation",
+        """
+        operation to be performed on the allocation by #EndDefragmentationPass().
+        
+        Default value is #DEFRAGMENTATION_MOVE_OPERATION_COPY. You can modify it.
+        """
+    )
+    VmaAllocation("srcAllocation", "allocation that should be moved")
+    VmaAllocation(
+        "dstTmpAllocation",
+        """
+        temporary allocation pointing to destination memory that will replace {@code srcAllocation}.
+
+        Warning: Do not store this allocation in your data structures! It exists only temporarily, for the duration of the defragmentation pass, to be used for
+        binding new buffer/image to the destination memory using e.g. #BindBufferMemory(). #EndDefragmentationPass() will destroy it and make
+        {@code srcAllocation} point to this memory.
+        """
+    )
 }
 
-val VmaDefragmentationPassInfo = struct(Module.VMA, "VmaDefragmentationPassInfo", mutable = false) {
+val VmaDefragmentationPassMoveInfo = struct(Module.VMA, "VmaDefragmentationPassMoveInfo") {
     documentation =
         """
         Parameters for incremental defragmentation steps.
@@ -651,38 +676,41 @@ val VmaDefragmentationPassInfo = struct(Module.VMA, "VmaDefragmentationPassInfo"
         To be used with function #BeginDefragmentationPass().
         """
 
-    AutoSize("pMoves")..uint32_t("moveCount", "")
-    VmaDefragmentationPassMoveInfo.p("pMoves", "")
-}
-
-val VmaDefragmentationInfo = struct(Module.VMA, "VmaDefragmentationInfo") {
-    documentation =
+    AutoSize("pMoves")..uint32_t("moveCount", "number of elements in the {@code pMoves} array.")
+    nullable..VmaDefragmentationMove.p(
+        "pMoves",
         """
-        Deprecated. Optional configuration parameters to be passed to function #Defragment().
+        array of moves to be performed by the user in the current defragmentation pass.
 
-        This is a part of the old interface. It is recommended to use structure ##VmaDefragmentationInfo2 and function #DefragmentationBegin() instead.
-        """
+        Pointer to an array of {@code moveCount} elements, owned by VMA, created in #BeginDefragmentationPass(), destroyed in #EndDefragmentationPass().
 
-    VkDeviceSize(
-        "maxBytesToMove",
-        """
-        maximum total numbers of bytes that can be copied while moving allocations to different places.
+        For each element, you should:
+        ${ol(
+            "Create a new buffer/image in the place pointed by ##VmaDefragmentationMove{@code ::dstMemory} + {@code VmaDefragmentationMove::dstOffset}.",
+            "Copy data from the {@code VmaDefragmentationMove::srcAllocation} e.g. using {@code vkCmdCopyBuffer}, {@code vkCmdCopyImage}.",
+            "Make sure these commands finished executing on the GPU.",
+            "Destroy the old buffer/image."
+        )}
 
-        Default is {@code VK_WHOLE_SIZ}E, which means no limit.
-        """
-    )
-    uint32_t(
-        "maxAllocationsToMove",
-        """
-        maximum number of allocations that can be moved to different place.
+        Only then you can finish defragmentation pass by calling {@code vmaEndDefragmentationPass()}. After this call, the allocation will point to the new
+        place in memory.
 
-        Default is {@code UINT32_MAX}, which means no limit.
+        Alternatively, if you cannot move specific allocation, you can set {@code VmaDefragmentationMove::operation} to
+        #DEFRAGMENTATION_MOVE_OPERATION_IGNORE.
+
+        Alternatively, if you decide you want to completely remove the allocation:
+        ${ol(
+            "Destroy its buffer/image.",
+            "Set {@code VmaDefragmentationMove::operation} to #DEFRAGMENTATION_MOVE_OPERATION_DESTROY."
+        )}
+
+        Then, after {@code vmaEndDefragmentationPass()} the allocation will be freed.
         """
     )
 }
 
 val VmaDefragmentationStats = struct(Module.VMA, "VmaDefragmentationStats", mutable = false) {
-    documentation = "Statistics returned by function #Defragment()."
+    documentation = "Statistics returned for defragmentation process in function #EndDefragmentation()."
 
     VkDeviceSize("bytesMoved", "total number of bytes that have been copied while moving allocations to different places")
     VkDeviceSize("bytesFreed", "total number of bytes that have been released to the system by freeing empty {@code VkDeviceMemory} objects")

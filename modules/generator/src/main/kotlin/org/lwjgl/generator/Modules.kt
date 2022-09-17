@@ -622,7 +622,7 @@ enum class Module(
         "vma",
         "org.lwjgl.util.vma",
         """
-        Contains bindings to ${url("https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator", "Vulkan")}, an easy to integrate Vulkan memory
+        Contains bindings to ${url("https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator", "VMA")}, an easy to integrate Vulkan memory
         allocation library.
 
         <h4>Problem</h4>

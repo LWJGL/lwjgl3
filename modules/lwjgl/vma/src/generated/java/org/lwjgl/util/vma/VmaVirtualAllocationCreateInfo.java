@@ -87,7 +87,7 @@ public class VmaVirtualAllocationCreateInfo extends Struct implements NativeReso
      */
     @NativeType("VkDeviceSize")
     public long alignment() { return nalignment(address()); }
-    /** use combination of {@code VmaVirtualAllocationCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK}</td></tr></table> */
+    /** use combination of {@code VmaVirtualAllocationCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK}</td></tr></table> */
     @NativeType("VmaVirtualAllocationCreateFlags")
     public int flags() { return nflags(address()); }
     /**
