@@ -187,6 +187,14 @@ public class LibIOURing {
 
     static { Library.initialize(); }
 
+    /**
+     * If {@code sqe->file_index} is set to this for opcodes that instantiate a new direct descriptor (like {@code openat/openat2/accept}), then io_uring will
+     * allocate an available direct descriptor instead of having the application pass one in.
+     * 
+     * <p>The picked direct descriptor will be returned in {@code cqe->res}, or {@code -ENFILE} if the space is full.</p>
+     */
+    public static final int IORING_FILE_INDEX_ALLOC = ~0;
+
     public static final int IORING_MAX_ENTRIES = 4096;
 
     /**
@@ -372,21 +380,97 @@ public class LibIOURing {
      * <li>{@link #IORING_SETUP_R_DISABLED SETUP_R_DISABLED} - 
      * If this flag is specified, the io_uring ring starts in a disabled state.
      * 
-     * <p>In this state, restrictions can be registered, but submissions are not allowed. See {@link #io_uring_register register} for details on how to enable the ring. Available
-     * since 5.10.</p>
+     * <p>In this state, restrictions can be registered, but submissions are not allowed. See {@link #io_uring_register register} for details on how to enable the ring.</p>
+     * 
+     * <p>Available since 5.10.</p>
+     * </li>
+     * <li>{@link #IORING_SETUP_SUBMIT_ALL SETUP_SUBMIT_ALL} - 
+     * Continue submit on error.
+     * 
+     * <p>Normally io_uring stops submitting a batch of request, if one of these requests results in an error. This can cause submission of less than what is
+     * expected, if a request ends in error while being submitted. If the ring is created with this flag, {@link #io_uring_enter enter} will continue submitting requests even
+     * if it encounters an error submitting a request. CQEs are still posted for errored request regardless of whether or not this flag is set at ring
+     * creation time, the only difference is if the submit sequence is halted or continued when an error is observed.</p>
+     * 
+     * <p>Available since 5.18.</p>
+     * </li>
+     * <li>{@link #IORING_SETUP_COOP_TASKRUN SETUP_COOP_TASKRUN} - 
+     * Cooperative task running.
+     * 
+     * <p>By default, io_uring will interrupt a task running in userspace when a completion event comes in. This is to ensure that completions run in a
+     * timely manner. For a lot of use cases, this is overkill and can cause reduced performance from both the inter-processor interrupt used to do this,
+     * the kernel/user transition, the needless interruption of the tasks userspace activities, and reduced batching if completions come in at a rapid
+     * rate. Most applications don't need the forceful interruption, as the events are processed at any kernel/user transition. The exception are setups
+     * where the application uses multiple threads operating on the same ring, where the application waiting on completions isn't the one that submitted
+     * them. For most other use cases, setting this flag will improve performance.</p>
+     * 
+     * <p>Available since 5.19.</p>
+     * </li>
+     * <li>{@link #IORING_SETUP_TASKRUN_FLAG SETUP_TASKRUN_FLAG} - 
+     * Used in conjunction with {@link #IORING_SETUP_COOP_TASKRUN SETUP_COOP_TASKRUN}, this provides a flag, {@link #IORING_SQ_TASKRUN SQ_TASKRUN}, which is set in the SQ ring {@code flags} whenever completions are
+     * pending that should be processed. liburing will check for this flag even when doing {@link LibURing#io_uring_peek_cqe peek_cqe} and enter the kernel to process them, and
+     * applications can do the same. This makes {@code IORING_SETUP_TASKRUN_FLAG} safe to use even when applications rely on a peek style operation on the
+     * CQ ring to see if anything might be pending to reap.
+     * 
+     * <p>Available since 5.19.</p>
+     * </li>
+     * <li>{@link #IORING_SETUP_SQE128 SETUP_SQE128} - 
+     * If set, io_uring will use 128-byte SQEs rather than the normal 64-byte sized variant.
+     * 
+     * <p>This is a requirement for using certain request types, as of 5.19 only the {@link #IORING_OP_URING_CMD OP_URING_CMD} passthrough command for NVMe passthrough needs this.</p>
+     * 
+     * <p>Available since 5.19.</p>
+     * </li>
+     * <li>{@link #IORING_SETUP_CQE32 SETUP_CQE32} - 
+     * If set, io_uring will use 32-byte CQEs rather than the normal 32-byte sized variant.
+     * 
+     * <p>This is a requirement for using certain request types, as of 5.19 only the {@link #IORING_OP_URING_CMD OP_URING_CMD} passthrough command for NVMe passthrough needs this.</p>
+     * 
+     * <p>Available since 5.19.</p>
+     * </li>
+     * <li>{@link #IORING_SETUP_SINGLE_ISSUER SETUP_SINGLE_ISSUER} - 
+     * A hint to the kernel that only a single task can submit requests, which is used for internal optimisations.
+     * 
+     * <p>The kernel enforces the rule, which only affects {@link #io_uring_enter enter} calls submitting requests and will fail them with {@code -EEXIST} if the restriction is
+     * violated. The submitter task may differ from the task that created the ring. Note that when {@link #IORING_SETUP_SQPOLL SETUP_SQPOLL} is set it is considered that the polling
+     * task is doing all submissions on behalf of the userspace and so it always complies with the rule disregarding how many userspace tasks do
+     * {@code io_uring_enter}.</p>
+     * 
+     * <p>Available since 5.20.</p>
+     * </li>
+     * <li>{@link #IORING_SETUP_DEFER_TASKRUN SETUP_DEFER_TASKRUN} - 
+     * Defer running task work to get events.
+     * 
+     * <p>By default, io_uring will process all outstanding work at the end of any system call or thread interrupt. This can delay the application from
+     * making other progress. Setting this flag will hint to io_uring that it should defer work until an {@link #io_uring_enter enter} call with the {@link #IORING_ENTER_GETEVENTS ENTER_GETEVENTS} flag set.
+     * This allows the application to request work to run just before it wants to process completions. This flag requires the {@link #IORING_SETUP_SINGLE_ISSUER SETUP_SINGLE_ISSUER} flag to
+     * be set, and also enforces that the call to {@code io_uring_enter} is called from the same thread that submitted requests. Note that if this flag is
+     * set then it is the application's responsibility to periodically trigger work (for example via any of the CQE waiting functions) or else completions
+     * may not be delivered.</p>
+     * 
+     * <p>Available since 6.1.</p>
      * </li>
      * </ul>
      */
     public static final int
-        IORING_SETUP_IOPOLL     = 1 << 0,
-        IORING_SETUP_SQPOLL     = 1 << 1,
-        IORING_SETUP_SQ_AFF     = 1 << 2,
-        IORING_SETUP_CQSIZE     = 1 << 3,
-        IORING_SETUP_CLAMP      = 1 << 4,
-        IORING_SETUP_ATTACH_WQ  = 1 << 5,
-        IORING_SETUP_R_DISABLED = 1 << 6;
+        IORING_SETUP_IOPOLL        = 1 << 0,
+        IORING_SETUP_SQPOLL        = 1 << 1,
+        IORING_SETUP_SQ_AFF        = 1 << 2,
+        IORING_SETUP_CQSIZE        = 1 << 3,
+        IORING_SETUP_CLAMP         = 1 << 4,
+        IORING_SETUP_ATTACH_WQ     = 1 << 5,
+        IORING_SETUP_R_DISABLED    = 1 << 6,
+        IORING_SETUP_SUBMIT_ALL    = 1 << 7,
+        IORING_SETUP_COOP_TASKRUN  = 1 << 8,
+        IORING_SETUP_TASKRUN_FLAG  = 1 << 9,
+        IORING_SETUP_SQE128        = 1 << 10,
+        IORING_SETUP_CQE32         = 1 << 11,
+        IORING_SETUP_SINGLE_ISSUER = 1 << 12,
+        IORING_SETUP_DEFER_TASKRUN = 1 << 13;
 
     /**
+     * {@code io_uring_op}
+     * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
@@ -752,6 +836,42 @@ public class LibIOURing {
      * 
      * <p>Available since 5.15.</p>
      * </li>
+     * <li>{@link #IORING_OP_MSG_RING OP_MSG_RING} - 
+     * Send a message to an io_uring.
+     * 
+     * <p>{@code fd} must be set to a file descriptor of a ring that the application has access to, {@code len} can be set to any 32-bit value that the
+     * application wishes to pass on, and {@code off} should be set any 64-bit value that the application wishes to send. On the target ring, a CQE will
+     * be posted with the {@code res} field matching the {@code len} set, and a {@code user_data} field matching the {@code off} value being passed in.
+     * This request type can be used to either just wake or interrupt anyone waiting for completions on the target ring, or it can be used to pass
+     * messages via the two fields.</p>
+     * 
+     * <p>Available since 5.18.</p>
+     * </li>
+     * <li>{@link #IORING_OP_FSETXATTR OP_FSETXATTR}</li>
+     * <li>{@link #IORING_OP_SETXATTR OP_SETXATTR}</li>
+     * <li>{@link #IORING_OP_FGETXATTR OP_FGETXATTR}</li>
+     * <li>{@link #IORING_OP_GETXATTR OP_GETXATTR}</li>
+     * <li>{@link #IORING_OP_SOCKET OP_SOCKET}</li>
+     * <li>{@link #IORING_OP_URING_CMD OP_URING_CMD}</li>
+     * <li>{@link #IORING_OP_SEND_ZC OP_SEND_ZC} - 
+     * Issue the zerocopy equivalent of a {@code send(2)} system call.
+     * 
+     * <p>Similar to {@link #IORING_OP_SEND OP_SEND}, but tries to avoid making intermediate copies of data. Zerocopy execution is not guaranteed and it may fall back to copying.</p>
+     * 
+     * <p>The {@code flags} field of the first {@code "struct io_uring_cqe"} may likely contain {@link #IORING_CQE_F_MORE CQE_F_MORE}, which means that there will be a second
+     * completion event / notification for the request, with the {@code user_data} field set to the same value. The user must not modify the data buffer
+     * until the notification is posted. The first cqe follows the usual rules and so its {@code res} field will contain the number of bytes sent or a
+     * negative error code. The notification's {@code res} field will be set to zero and the {@code flags} field will contain {@link #IORING_CQE_F_NOTIF CQE_F_NOTIF}. The two step
+     * model is needed because the kernel may hold on to buffers for a long time, e.g. waiting for a TCP ACK, and having a separate cqe for request
+     * completions allows userspace to push more data without extra delays. Note, notifications are only responsible for controlling the lifetime of the
+     * buffers, and as such don't mean anything about whether the data has atually been sent out or received by the other end.</p>
+     * 
+     * <p>{@code fd} must be set to the socket file descriptor, {@code addr} must contain a pointer to the buffer, {@code len} denotes the length of the
+     * buffer to send, and {@code msg_flags} holds the flags associated with the system call. When {@code addr2} is non-zero it points to the address of
+     * the target with {@code addr_len} specifying its size, turning the request into a {@code sendto(2)} system call equivalent.</p>
+     * 
+     * <p>Available since 6.0.</p>
+     * </li>
      * <li>{@link #IORING_OP_LAST OP_LAST}</li>
      * </ul>
      */
@@ -796,7 +916,15 @@ public class LibIOURing {
         IORING_OP_MKDIRAT         = 37,
         IORING_OP_SYMLINKAT       = 38,
         IORING_OP_LINKAT          = 39,
-        IORING_OP_LAST            = 40;
+        IORING_OP_MSG_RING        = 40,
+        IORING_OP_FSETXATTR       = 41,
+        IORING_OP_SETXATTR        = 42,
+        IORING_OP_FGETXATTR       = 43,
+        IORING_OP_GETXATTR        = 44,
+        IORING_OP_SOCKET          = 45,
+        IORING_OP_URING_CMD       = 46,
+        IORING_OP_SEND_ZC         = 47,
+        IORING_OP_LAST            = 48;
 
     /** {@code sqe->fsync_flags} */
     public static final int IORING_FSYNC_DATASYNC = 1 << 0;
@@ -836,18 +964,115 @@ public class LibIOURing {
      * 
      * <p>{@code IORING_POLL_UPDATE}: Update existing poll request, matching {@code sqe->addr} as the old {@code user_data} field.</p>
      * 
+     * <p>{@code IORING_POLL_LEVEL}: Level triggered poll.</p>
+     * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
      * <li>{@link #IORING_POLL_ADD_MULTI POLL_ADD_MULTI} - Multishot poll. Sets {@code IORING_CQE_F_MORE} if the poll handler will continue to report CQEs on behalf of the same SQE.</li>
      * <li>{@link #IORING_POLL_UPDATE_EVENTS POLL_UPDATE_EVENTS}</li>
      * <li>{@link #IORING_POLL_UPDATE_USER_DATA POLL_UPDATE_USER_DATA}</li>
+     * <li>{@link #IORING_POLL_ADD_LEVEL POLL_ADD_LEVEL}</li>
      * </ul>
      */
     public static final int
         IORING_POLL_ADD_MULTI        = 1 << 0,
         IORING_POLL_UPDATE_EVENTS    = 1 << 1,
-        IORING_POLL_UPDATE_USER_DATA = 1 << 2;
+        IORING_POLL_UPDATE_USER_DATA = 1 << 2,
+        IORING_POLL_ADD_LEVEL        = 1 << 3;
+
+    /**
+     * {@code ASYNC_CANCEL} flags.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #IORING_ASYNC_CANCEL_ALL ASYNC_CANCEL_ALL} - 
+     * Cancel all requests that match the given criteria, rather than just canceling the first one found.
+     * 
+     * <p>Available since 5.19.</p>
+     * </li>
+     * <li>{@link #IORING_ASYNC_CANCEL_FD ASYNC_CANCEL_FD} - 
+     * Match based on the file descriptor used in the original request rather than the {@code user_data}.
+     * 
+     * <p>This is what {@link LibURing#io_uring_prep_cancel_fd prep_cancel_fd} sets up.</p>
+     * 
+     * <p>Available since 5.19.</p>
+     * </li>
+     * <li>{@link #IORING_ASYNC_CANCEL_ANY ASYNC_CANCEL_ANY} - 
+     * Match any request in the ring, regardless of {@code user_data} or file descriptor.
+     * 
+     * <p>Can be used to cancel any pending request in the ring.</p>
+     * 
+     * <p>Available since 5.19.</p>
+     * </li>
+     * <li>{@link #IORING_ASYNC_CANCEL_FD_FIXED ASYNC_CANCEL_FD_FIXED} - {@code fd} passed in is a fixed descriptor</li>
+     * </ul>
+     */
+    public static final int
+        IORING_ASYNC_CANCEL_ALL      = 1 << 0,
+        IORING_ASYNC_CANCEL_FD       = 1 << 1,
+        IORING_ASYNC_CANCEL_ANY      = 1 << 2,
+        IORING_ASYNC_CANCEL_FD_FIXED = 1 << 3;
+
+    /**
+     * {@code send/sendmsg} and {@code recv/recvmsg} flags ({@code sqe->ioprio})
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #IORING_RECVSEND_POLL_FIRST RECVSEND_POLL_FIRST} - 
+     * If set, io_uring will assume the socket is currently empty and attempting to receive data will be unsuccessful.
+     * 
+     * <p>For this case, io_uring will arm internal poll and trigger a receive of the data when the socket has data to be read. This initial receive attempt
+     * can be wasteful for the case where the socket is expected to be empty, setting this flag will bypass the initial receive attempt and go straight to
+     * arming poll. If poll does indicate that data is ready to be received, the operation will proceed.</p>
+     * 
+     * <p>Can be used with the CQE {@link #IORING_CQE_F_SOCK_NONEMPTY CQE_F_SOCK_NONEMPTY} flag, which io_uring will set on CQEs after a {@code recv(2)} or {@code recvmsg(2)} operation. If
+     * set, the socket still had data to be read after the operation completed.</p>
+     * 
+     * <p>Both these flags are available since 5.19.</p>
+     * </li>
+     * <li>{@link #IORING_RECV_MULTISHOT RECV_MULTISHOT} - 
+     * Multishot {@code recv}.
+     * 
+     * <p>Sets {@link #IORING_CQE_F_MORE CQE_F_MORE} if the handler will continue to report CQEs on behalf of the same SQE.</p>
+     * </li>
+     * <li>{@link #IORING_RECVSEND_FIXED_BUF RECVSEND_FIXED_BUF} - Use registered buffers, the index is stored in the {@code buf_index} field.</li>
+     * </ul>
+     */
+    public static final int
+        IORING_RECVSEND_POLL_FIRST = 1 << 0,
+        IORING_RECV_MULTISHOT      = 1 << 1,
+        IORING_RECVSEND_FIXED_BUF  = 1 << 2;
+
+    /** Accept flags stored in {@code sqe->ioprio} */
+    public static final int IORING_ACCEPT_MULTISHOT = 1 << 0;
+
+    /**
+     * {@link #IORING_OP_MSG_RING OP_MSG_RING} command types, stored in {@code sqe->addr}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #IORING_MSG_DATA MSG_DATA} - pass {@code sqe->len} as {@code res} and {@code off} as {@code user_data}</li>
+     * <li>{@link #IORING_MSG_SEND_FD MSG_SEND_FD} - send a registered fd to another ring</li>
+     * </ul>
+     */
+    public static final int
+        IORING_MSG_DATA    = 0,
+        IORING_MSG_SEND_FD = 1;
+
+    /**
+     * {@link #IORING_OP_MSG_RING OP_MSG_RING} flags ({@code sqe->msg_ring_flags})
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #IORING_MSG_RING_CQE_SKIP MSG_RING_CQE_SKIP} - Don't post a CQE to the target ring. Not applicable for {@link #IORING_MSG_DATA MSG_DATA}, obviously.</li>
+     * </ul>
+     */
+    public static final int IORING_MSG_RING_CQE_SKIP = 1 << 0;
 
     /**
      * {@code cqe->flags}
@@ -857,11 +1082,15 @@ public class LibIOURing {
      * <ul>
      * <li>{@link #IORING_CQE_F_BUFFER CQE_F_BUFFER} - If set, the upper 16 bits are the buffer ID</li>
      * <li>{@link #IORING_CQE_F_MORE CQE_F_MORE} - If set, parent SQE will generate more CQE entries</li>
+     * <li>{@link #IORING_CQE_F_SOCK_NONEMPTY CQE_F_SOCK_NONEMPTY} - If set, more data to read after socket {@code recv}.</li>
+     * <li>{@link #IORING_CQE_F_NOTIF CQE_F_NOTIF} - Set for notification CQEs. Can be used to distinct them from sends.</li>
      * </ul>
      */
     public static final int
-        IORING_CQE_F_BUFFER = 1 << 0,
-        IORING_CQE_F_MORE   = 1 << 0;
+        IORING_CQE_F_BUFFER        = 1 << 0,
+        IORING_CQE_F_MORE          = 1 << 1,
+        IORING_CQE_F_SOCK_NONEMPTY = 1 << 2,
+        IORING_CQE_F_NOTIF         = 1 << 3;
 
     public static final int IORING_CQE_BUFFER_SHIFT = 16;
 
@@ -879,11 +1108,13 @@ public class LibIOURing {
      * <ul>
      * <li>{@link #IORING_SQ_NEED_WAKEUP SQ_NEED_WAKEUP} - needs {@code io_uring_enter} wakeup</li>
      * <li>{@link #IORING_SQ_CQ_OVERFLOW SQ_CQ_OVERFLOW} - CQ ring is overflown</li>
+     * <li>{@link #IORING_SQ_TASKRUN SQ_TASKRUN} - task should enter the kernel</li>
      * </ul>
      */
     public static final int
         IORING_SQ_NEED_WAKEUP = 1 << 0,
-        IORING_SQ_CQ_OVERFLOW = 1 << 0;
+        IORING_SQ_CQ_OVERFLOW = 1 << 1,
+        IORING_SQ_TASKRUN     = 1 << 2;
 
     /**
      * {@code cq_ring->flags}
@@ -930,13 +1161,18 @@ public class LibIOURing {
      * events and wishes to stop waiting after a specified amount of time, then this can be accomplished directly in version 5.11 and newer by using this
      * feature.</p>
      * </li>
+     * <li>{@link #IORING_ENTER_REGISTERED_RING ENTER_REGISTERED_RING} - 
+     * If the ring file descriptor has been registered through use of {@link #IORING_REGISTER_RING_FDS REGISTER_RING_FDS}, then setting this flag will tell the kernel that the
+     * {@code ring_fd} passed in is the registered ring offset rather than a normal file descriptor.
+     * </li>
      * </ul>
      */
     public static final int
-        IORING_ENTER_GETEVENTS = 1 << 0,
-        IORING_ENTER_SQ_WAKEUP = 1 << 1,
-        IORING_ENTER_SQ_WAIT   = 1 << 2,
-        IORING_ENTER_EXT_ARG   = 1 << 3;
+        IORING_ENTER_GETEVENTS       = 1 << 0,
+        IORING_ENTER_SQ_WAKEUP       = 1 << 1,
+        IORING_ENTER_SQ_WAIT         = 1 << 2,
+        IORING_ENTER_EXT_ARG         = 1 << 3,
+        IORING_ENTER_REGISTERED_RING = 1 << 4;
 
     /**
      * {@code io_uring_params->features} flags
@@ -947,15 +1183,18 @@ public class LibIOURing {
      * <li>{@link #IORING_FEAT_SINGLE_MMAP FEAT_SINGLE_MMAP} - 
      * If this flag is set, the two SQ and CQ rings can be mapped with a single {@code mmap(2)} call.
      * 
-     * <p>The SQEs must still be allocated separately. This brings the necessary {@code mmap(2)} calls down from three to two. Available since kernel 5.4.</p>
+     * <p>The SQEs must still be allocated separately. This brings the necessary {@code mmap(2)} calls down from three to two.</p>
+     * 
+     * <p>Available since kernel 5.4.</p>
      * </li>
      * <li>{@link #IORING_FEAT_NODROP FEAT_NODROP} - 
      * If this flag is set, {@code io_uring} supports never dropping completion events.
      * 
      * <p>If a completion event occurs and the CQ ring is full, the kernel stores the event internally until such a time that the CQ ring has room for more
      * entries. If this overflow condition is entered, attempting to submit more IO will fail with the {@code -EBUSY} error value, if it can't flush the
-     * overflown events to the CQ ring. If this happens, the application must reap events from the CQ ring and attempt the submit again. Available since
-     * kernel 5.5.</p>
+     * overflown events to the CQ ring. If this happens, the application must reap events from the CQ ring and attempt the submit again.</p>
+     * 
+     * <p>Available since kernel 5.5.</p>
      * </li>
      * <li>{@link #IORING_FEAT_SUBMIT_STABLE FEAT_SUBMIT_STABLE} - 
      * If this flag is set, applications can be certain that any data for async offload has been consumed when the kernel has consumed the SQE.
@@ -1030,7 +1269,20 @@ public class LibIOURing {
      * 
      * <p>Available since kernel 5.13.</p>
      * </li>
-     * <li>{@link #IORING_FEAT_CQE_SKIP FEAT_CQE_SKIP}</li>
+     * <li>{@link #IORING_FEAT_CQE_SKIP FEAT_CQE_SKIP} - 
+     * If this flag is set, then io_uring supports setting {@link #IOSQE_CQE_SKIP_SUCCESS} in the submitted SQE, indicating that no CQE should be generated for
+     * this SQE if it executes normally. If an error happens processing the SQE, a CQE with the appropriate error value will still be generated.
+     * 
+     * <p>Available since kernel 5.17.</p>
+     * </li>
+     * <li>{@link #IORING_FEAT_LINKED_FILE FEAT_LINKED_FILE} - 
+     * If this flag is set, then io_uring supports sane assignment of files for SQEs that have dependencies. For example, if a chain of SQEs are submitted
+     * with {@link #IOSQE_IO_LINK}, then kernels without this flag will prepare the file for each link upfront. If a previous link opens a file with a known
+     * index, eg if direct descriptors are used with open or accept, then file assignment needs to happen post execution of that SQE. If this flag is set,
+     * then the kernel will defer file assignment until execution of a given request is started.
+     * 
+     * <p>Available since kernel 5.17.</p>
+     * </li>
      * </ul>
      */
     public static final int
@@ -1045,7 +1297,8 @@ public class LibIOURing {
         IORING_FEAT_EXT_ARG         = 1 << 8,
         IORING_FEAT_NATIVE_WORKERS  = 1 << 9,
         IORING_FEAT_RSRC_TAGS       = 1 << 10,
-        IORING_FEAT_CQE_SKIP        = 1 << 11;
+        IORING_FEAT_CQE_SKIP        = 1 << 11,
+        IORING_FEAT_LINKED_FILE     = 1 << 12;
 
     /**
      * {@link #io_uring_register register} {@code opcodes} and arguments
@@ -1279,6 +1532,46 @@ public class LibIOURing {
      * 
      * <p>Available since 5.15.</p>
      * </li>
+     * <li>{@link #IORING_REGISTER_RING_FDS REGISTER_RING_FDS} - 
+     * Whenever {@link #io_uring_enter enter} is called to submit request or wait for completions, the kernel must grab a reference to the file descriptor. If the application
+     * using io_uring is threaded, the file table is marked as shared, and the reference grab and put of the file descriptor count is more expensive than
+     * it is for a non-threaded application.
+     * 
+     * <p>Similarly to how io_uring allows registration of files, this allow registration of the ring file descriptor itself. This reduces the overhead of
+     * the {@code io_uring_enter (2)} system call.</p>
+     * 
+     * <p>{@code arg} must be set to an unsigned int pointer to an array of type {@code struct io_uring_rsrc_register} of {@code nr_args} number of entries.
+     * The {@code data} field of this struct must point to an io_uring file descriptor, and the {@code offset} field can be either {@code -1} or an
+     * explicit offset desired for the registered file descriptor value. If {@code -1} is used, then upon successful return of this system call, the field
+     * will contain the value of the registered file descriptor to be used for future {@code io_uring_enter (2)} system calls.</p>
+     * 
+     * <p>On successful completion of this request, the returned descriptors may be used instead of the real file descriptor for {@code io_uring_enter (2)},
+     * provided that {@code IORING_ENTER_REGISTERED_RING} is set in the {@code flags} for the system call. This flag tells the kernel that a registered
+     * descriptor is used rather than a real file descriptor.</p>
+     * 
+     * <p>Each thread or process using a ring must register the file descriptor directly by issuing this request.</p>
+     * 
+     * <p>The maximum number of supported registered ring descriptors is currently limited to {@code 16}.</p>
+     * 
+     * <p>Available since 5.18.</p>
+     * </li>
+     * <li>{@link #IORING_UNREGISTER_RING_FDS UNREGISTER_RING_FDS} - 
+     * Unregister descriptors previously registered with {@link #IORING_REGISTER_RING_FDS REGISTER_RING_FDS}.
+     * 
+     * <p>{@code arg} must be set to an unsigned int pointer to an array of type {@code struct io_uring_rsrc_register} of {@code nr_args} number of entries.
+     * Only the {@code offset} field should be set in the structure, containing the registered file descriptor offset previously returned from
+     * {@code IORING_REGISTER_RING_FDS} that the application wishes to unregister.</p>
+     * 
+     * <p>Note that this isn't done automatically on ring exit, if the thread or task that previously registered a ring file descriptor isn't exiting. It is
+     * recommended to manually unregister any previously registered ring descriptors if the ring is closed and the task persists. This will free up a
+     * registration slot, making it available for future use.</p>
+     * 
+     * <p>Available since 5.18.</p>
+     * </li>
+     * <li>{@link #IORING_REGISTER_PBUF_RING REGISTER_PBUF_RING} - register ring based provide buffer group</li>
+     * <li>{@link #IORING_UNREGISTER_PBUF_RING UNREGISTER_PBUF_RING} - unregister ring based provide buffer group</li>
+     * <li>{@link #IORING_REGISTER_SYNC_CANCEL REGISTER_SYNC_CANCEL} - sync cancelation API</li>
+     * <li>{@link #IORING_REGISTER_FILE_ALLOC_RANGE REGISTER_FILE_ALLOC_RANGE} - register a range of fixed file slots for automatic slot allocation</li>
      * <li>{@link #IORING_REGISTER_LAST REGISTER_LAST}</li>
      * </ul>
      */
@@ -1303,7 +1596,16 @@ public class LibIOURing {
         IORING_REGISTER_IOWQ_AFF         = 17,
         IORING_UNREGISTER_IOWQ_AFF       = 18,
         IORING_REGISTER_IOWQ_MAX_WORKERS = 19,
-        IORING_REGISTER_LAST             = 20;
+        IORING_REGISTER_RING_FDS         = 20,
+        IORING_UNREGISTER_RING_FDS       = 21,
+        IORING_REGISTER_PBUF_RING        = 22,
+        IORING_UNREGISTER_PBUF_RING      = 23,
+        IORING_REGISTER_SYNC_CANCEL      = 24,
+        IORING_REGISTER_FILE_ALLOC_RANGE = 25,
+        IORING_REGISTER_LAST             = 26;
+
+    /** Register a fully sparse file space, rather than pass in an array of all -1 file descriptors. */
+    public static final int IORING_RSRC_REGISTER_SPARSE = 1 << 0;
 
     /**
      * {@code io-wq} worker categories
@@ -1388,7 +1690,7 @@ public class LibIOURing {
      * application memory, greatly reducing per-I/O overhead.</p>
      *
      * @param fd     the file descriptor returned by a call to {@link #io_uring_setup setup}
-     * @param opcode one of:<br><table><tr><td>{@link #IORING_REGISTER_BUFFERS REGISTER_BUFFERS}</td><td>{@link #IORING_REGISTER_FILES REGISTER_FILES}</td><td>{@link #IORING_REGISTER_EVENTFD REGISTER_EVENTFD}</td><td>{@link #IORING_REGISTER_FILES_UPDATE REGISTER_FILES_UPDATE}</td></tr><tr><td>{@link #IORING_REGISTER_EVENTFD_ASYNC REGISTER_EVENTFD_ASYNC}</td><td>{@link #IORING_REGISTER_PROBE REGISTER_PROBE}</td><td>{@link #IORING_REGISTER_PERSONALITY REGISTER_PERSONALITY}</td><td>{@link #IORING_REGISTER_RESTRICTIONS REGISTER_RESTRICTIONS}</td></tr><tr><td>{@link #IORING_REGISTER_ENABLE_RINGS REGISTER_ENABLE_RINGS}</td><td>{@link #IORING_REGISTER_FILES2 REGISTER_FILES2}</td><td>{@link #IORING_REGISTER_FILES_UPDATE2 REGISTER_FILES_UPDATE2}</td><td>{@link #IORING_REGISTER_BUFFERS2 REGISTER_BUFFERS2}</td></tr><tr><td>{@link #IORING_REGISTER_BUFFERS_UPDATE REGISTER_BUFFERS_UPDATE}</td><td>{@link #IORING_REGISTER_IOWQ_AFF REGISTER_IOWQ_AFF}</td><td>{@link #IORING_REGISTER_IOWQ_MAX_WORKERS REGISTER_IOWQ_MAX_WORKERS}</td><td>{@link #IORING_REGISTER_LAST REGISTER_LAST}</td></tr><tr><td>{@link #IORING_REGISTER_FILES_SKIP REGISTER_FILES_SKIP}</td></tr></table>
+     * @param opcode one of:<br><table><tr><td>{@link #IORING_REGISTER_BUFFERS REGISTER_BUFFERS}</td><td>{@link #IORING_REGISTER_FILES REGISTER_FILES}</td><td>{@link #IORING_REGISTER_EVENTFD REGISTER_EVENTFD}</td><td>{@link #IORING_REGISTER_FILES_UPDATE REGISTER_FILES_UPDATE}</td></tr><tr><td>{@link #IORING_REGISTER_EVENTFD_ASYNC REGISTER_EVENTFD_ASYNC}</td><td>{@link #IORING_REGISTER_PROBE REGISTER_PROBE}</td><td>{@link #IORING_REGISTER_PERSONALITY REGISTER_PERSONALITY}</td><td>{@link #IORING_REGISTER_RESTRICTIONS REGISTER_RESTRICTIONS}</td></tr><tr><td>{@link #IORING_REGISTER_ENABLE_RINGS REGISTER_ENABLE_RINGS}</td><td>{@link #IORING_REGISTER_FILES2 REGISTER_FILES2}</td><td>{@link #IORING_REGISTER_FILES_UPDATE2 REGISTER_FILES_UPDATE2}</td><td>{@link #IORING_REGISTER_BUFFERS2 REGISTER_BUFFERS2}</td></tr><tr><td>{@link #IORING_REGISTER_BUFFERS_UPDATE REGISTER_BUFFERS_UPDATE}</td><td>{@link #IORING_REGISTER_IOWQ_AFF REGISTER_IOWQ_AFF}</td><td>{@link #IORING_REGISTER_IOWQ_MAX_WORKERS REGISTER_IOWQ_MAX_WORKERS}</td><td>{@link #IORING_REGISTER_RING_FDS REGISTER_RING_FDS}</td></tr><tr><td>{@link #IORING_REGISTER_PBUF_RING REGISTER_PBUF_RING}</td><td>{@link #IORING_REGISTER_SYNC_CANCEL REGISTER_SYNC_CANCEL}</td><td>{@link #IORING_REGISTER_FILE_ALLOC_RANGE REGISTER_FILE_ALLOC_RANGE}</td><td>{@link #IORING_REGISTER_LAST REGISTER_LAST}</td></tr><tr><td>{@link #IORING_REGISTER_FILES_SKIP REGISTER_FILES_SKIP}</td></tr></table>
      *
      * @return on success, returns 0. On error, -1 is returned, and {@code errno} is set accordingly.
      */
@@ -1429,7 +1731,7 @@ public class LibIOURing {
      *
      * @param fd        the file descriptor returned by {@link #io_uring_setup setup}
      * @param to_submit the number of I/Os to submit from the submission queue
-     * @param flags     one or more of:<br><table><tr><td>{@link #IORING_ENTER_GETEVENTS ENTER_GETEVENTS}</td><td>{@link #IORING_ENTER_SQ_WAKEUP ENTER_SQ_WAKEUP}</td><td>{@link #IORING_ENTER_SQ_WAIT ENTER_SQ_WAIT}</td><td>{@link #IORING_ENTER_EXT_ARG ENTER_EXT_ARG}</td></tr></table>
+     * @param flags     one or more of:<br><table><tr><td>{@link #IORING_ENTER_GETEVENTS ENTER_GETEVENTS}</td><td>{@link #IORING_ENTER_SQ_WAKEUP ENTER_SQ_WAKEUP}</td><td>{@link #IORING_ENTER_SQ_WAIT ENTER_SQ_WAIT}</td><td>{@link #IORING_ENTER_EXT_ARG ENTER_EXT_ARG}</td><td>{@link #IORING_ENTER_REGISTERED_RING ENTER_REGISTERED_RING}</td></tr></table>
      * @param sig       a pointer to a signal mask (see {@code sigprocmask(2)}); if {@code sig} is not {@code NULL}, {@code io_uring_enter()} first replaces the current signal
      *                  mask by the one pointed to by sig, then waits for events to become available in the completion queue, and then restores the original signal mask.
      *                  The following {@code io_uring_enter()} call:

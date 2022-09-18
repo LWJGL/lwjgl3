@@ -4,9 +4,9 @@
  * MACHINE GENERATED FILE, DO NOT EDIT
  */
 #include "common_tools.h"
-#include "liburing/io_uring.h"
 DISABLE_WARNINGS()
-_Pragma("GCC diagnostic ignored \"-Wpedantic\"")
+#include "liburing/compat.h"
+#include "liburing/io_uring.h"
 #include "syscall.h"
 ENABLE_WARNINGS()
 

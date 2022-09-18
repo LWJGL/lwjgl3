@@ -52,6 +52,11 @@ static inline T io_uring_smp_load_acquire(const T *p)
 		reinterpret_cast<const std::atomic<T> *>(p),
 		std::memory_order_acquire);
 }
+
+static inline void io_uring_smp_mb()
+{
+	std::atomic_thread_fence(std::memory_order_seq_cst);
+}
 #else
 #include <stdatomic.h>
 
@@ -68,6 +73,9 @@ static inline T io_uring_smp_load_acquire(const T *p)
 #define io_uring_smp_load_acquire(p)				\
 	atomic_load_explicit((_Atomic __typeof__(*(p)) *)(p),	\
 			     memory_order_acquire)
+
+#define io_uring_smp_mb()					\
+	atomic_thread_fence(memory_order_seq_cst)
 #endif
 
 #endif /* defined(LIBURING_BARRIER_H) */

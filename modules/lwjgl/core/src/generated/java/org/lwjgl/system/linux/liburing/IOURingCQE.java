@@ -12,6 +12,7 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -25,6 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u64 {@link #user_data};
  *     __s32 {@link #res};
  *     __u32 {@link #flags};
+ *     __u64 {@link #big_cqe}[0];
  * }</code></pre>
  */
 @NativeType("struct io_uring_cqe")
@@ -40,13 +42,15 @@ public class IOURingCQE extends Struct implements NativeResource {
     public static final int
         USER_DATA,
         RES,
-        FLAGS;
+        FLAGS,
+        BIG_CQE;
 
     static {
         Layout layout = __struct(
             __member(8),
             __member(4),
-            __member(4)
+            __member(4),
+            __array(8, 0)
         );
 
         SIZEOF = layout.getSize();
@@ -55,6 +59,7 @@ public class IOURingCQE extends Struct implements NativeResource {
         USER_DATA = layout.offsetof(0);
         RES = layout.offsetof(1);
         FLAGS = layout.offsetof(2);
+        BIG_CQE = layout.offsetof(3);
     }
 
     /**
@@ -90,6 +95,12 @@ public class IOURingCQE extends Struct implements NativeResource {
     /** is used for certain commands, like {@link LibIOURing#IORING_OP_POLL_ADD OP_POLL_ADD} or in conjunction with {@link LibIOURing#IOSQE_BUFFER_SELECT}, see those entries */
     @NativeType("__u32")
     public int flags() { return nflags(address()); }
+    /** If the ring is initialized with {@link LibIOURing#IORING_SETUP_CQE32 SETUP_CQE32}, then this field contains 16-bytes of padding, doubling the size of the CQE. */
+    @NativeType("__u64[0]")
+    public LongBuffer big_cqe() { return nbig_cqe(address()); }
+    /** If the ring is initialized with {@link LibIOURing#IORING_SETUP_CQE32 SETUP_CQE32}, then this field contains 16-bytes of padding, doubling the size of the CQE. */
+    @NativeType("__u64")
+    public long big_cqe(int index) { return nbig_cqe(address(), index); }
 
     /** Sets the specified value to the {@link #user_data} field. */
     public IOURingCQE user_data(@NativeType("__u64") long value) { nuser_data(address(), value); return this; }
@@ -97,16 +108,22 @@ public class IOURingCQE extends Struct implements NativeResource {
     public IOURingCQE res(@NativeType("__s32") int value) { nres(address(), value); return this; }
     /** Sets the specified value to the {@link #flags} field. */
     public IOURingCQE flags(@NativeType("__u32") int value) { nflags(address(), value); return this; }
+    /** Copies the specified {@link LongBuffer} to the {@link #big_cqe} field. */
+    public IOURingCQE big_cqe(@NativeType("__u64[0]") LongBuffer value) { nbig_cqe(address(), value); return this; }
+    /** Sets the specified value at the specified index of the {@link #big_cqe} field. */
+    public IOURingCQE big_cqe(int index, @NativeType("__u64") long value) { nbig_cqe(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
     public IOURingCQE set(
         long user_data,
         int res,
-        int flags
+        int flags,
+        LongBuffer big_cqe
     ) {
         user_data(user_data);
         res(res);
         flags(flags);
+        big_cqe(big_cqe);
 
         return this;
     }
@@ -242,6 +259,12 @@ public class IOURingCQE extends Struct implements NativeResource {
     public static int nres(long struct) { return UNSAFE.getInt(null, struct + IOURingCQE.RES); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + IOURingCQE.FLAGS); }
+    /** Unsafe version of {@link #big_cqe}. */
+    public static LongBuffer nbig_cqe(long struct) { return memLongBuffer(struct + IOURingCQE.BIG_CQE, 0); }
+    /** Unsafe version of {@link #big_cqe(int) big_cqe}. */
+    public static long nbig_cqe(long struct, int index) {
+        return UNSAFE.getLong(null, struct + IOURingCQE.BIG_CQE + check(index, 0) * 8);
+    }
 
     /** Unsafe version of {@link #user_data(long) user_data}. */
     public static void nuser_data(long struct, long value) { UNSAFE.putLong(null, struct + IOURingCQE.USER_DATA, value); }
@@ -249,6 +272,15 @@ public class IOURingCQE extends Struct implements NativeResource {
     public static void nres(long struct, int value) { UNSAFE.putInt(null, struct + IOURingCQE.RES, value); }
     /** Unsafe version of {@link #flags(int) flags}. */
     public static void nflags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingCQE.FLAGS, value); }
+    /** Unsafe version of {@link #big_cqe(LongBuffer) big_cqe}. */
+    public static void nbig_cqe(long struct, LongBuffer value) {
+        if (CHECKS) { checkGT(value, 0); }
+        memCopy(memAddress(value), struct + IOURingCQE.BIG_CQE, value.remaining() * 8);
+    }
+    /** Unsafe version of {@link #big_cqe(int, long) big_cqe}. */
+    public static void nbig_cqe(long struct, int index, long value) {
+        UNSAFE.putLong(null, struct + IOURingCQE.BIG_CQE + check(index, 0) * 8, value);
+    }
 
     // -----------------------------------
 
@@ -297,6 +329,12 @@ public class IOURingCQE extends Struct implements NativeResource {
         /** @return the value of the {@link IOURingCQE#flags} field. */
         @NativeType("__u32")
         public int flags() { return IOURingCQE.nflags(address()); }
+        /** @return a {@link LongBuffer} view of the {@link IOURingCQE#big_cqe} field. */
+        @NativeType("__u64[0]")
+        public LongBuffer big_cqe() { return IOURingCQE.nbig_cqe(address()); }
+        /** @return the value at the specified index of the {@link IOURingCQE#big_cqe} field. */
+        @NativeType("__u64")
+        public long big_cqe(int index) { return IOURingCQE.nbig_cqe(address(), index); }
 
         /** Sets the specified value to the {@link IOURingCQE#user_data} field. */
         public IOURingCQE.Buffer user_data(@NativeType("__u64") long value) { IOURingCQE.nuser_data(address(), value); return this; }
@@ -304,6 +342,10 @@ public class IOURingCQE extends Struct implements NativeResource {
         public IOURingCQE.Buffer res(@NativeType("__s32") int value) { IOURingCQE.nres(address(), value); return this; }
         /** Sets the specified value to the {@link IOURingCQE#flags} field. */
         public IOURingCQE.Buffer flags(@NativeType("__u32") int value) { IOURingCQE.nflags(address(), value); return this; }
+        /** Copies the specified {@link LongBuffer} to the {@link IOURingCQE#big_cqe} field. */
+        public IOURingCQE.Buffer big_cqe(@NativeType("__u64[0]") LongBuffer value) { IOURingCQE.nbig_cqe(address(), value); return this; }
+        /** Sets the specified value at the specified index of the {@link IOURingCQE#big_cqe} field. */
+        public IOURingCQE.Buffer big_cqe(int index, @NativeType("__u64") long value) { IOURingCQE.nbig_cqe(address(), index, value); return this; }
 
     }
 

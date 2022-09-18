@@ -17,10 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Passed in for {@link LibIOURing#io_uring_setup setup}. Copied back with updated info on success.
+ * Passed in for {@link LibURing#io_uring_setup setup}. Copied back with updated info on success.
  * 
  * <p>The {@code flags}, {@code sq_thread_cpu}, and {@code sq_thread_idle} fields are used to configure the {@code io_uring} instance. If no {@code flags}
- * are specified, the {@code io_uring} instance is setup for interrupt driven I/O. I/O may be submitted using {@link LibIOURing#io_uring_enter enter} and can be reaped by polling the
+ * are specified, the {@code io_uring} instance is setup for interrupt driven I/O. I/O may be submitted using {@link LibURing#io_uring_enter enter} and can be reaped by polling the
  * completion queue.</p>
  * 
  * <p>The rest of the fields are filled in by the kernel, and provide the information necessary to memory map the submission queue, completion queue, and the
@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *            PROT_READ|PROT_WRITE, MAP_SHARED|MAP_POPULATE,
  *            ring_fd, IORING_OFF_SQ_RING);</code></pre>
  * 
- * <p>where {@code sq_off} is the {@code io_sqring_offsets} structure, and {@code ring_fd} is the file descriptor returned from {@link LibIOURing#io_uring_setup setup}. The addition of
+ * <p>where {@code sq_off} is the {@code io_sqring_offsets} structure, and {@code ring_fd} is the file descriptor returned from {@link LibURing#io_uring_setup setup}. The addition of
  * {@code sq_off.array} to the length of the region accounts for the fact that the ring located at the end of the data structure. As an example, the ring
  * buffer head pointer can be accessed by adding {@code sq_off.head} to the address returned from {@code mmap(2)}:</p>
  * 
@@ -143,7 +143,7 @@ public class IOURingParams extends Struct implements NativeResource {
     /** @return the value of the {@code cq_entries} field. */
     @NativeType("__u32")
     public int cq_entries() { return ncq_entries(address()); }
-    /** one or more of:<br><table><tr><td>{@link LibIOURing#IORING_SETUP_IOPOLL SETUP_IOPOLL}</td><td>{@link LibIOURing#IORING_SETUP_SQPOLL SETUP_SQPOLL}</td><td>{@link LibIOURing#IORING_SETUP_SQ_AFF SETUP_SQ_AFF}</td><td>{@link LibIOURing#IORING_SETUP_CQSIZE SETUP_CQSIZE}</td><td>{@link LibIOURing#IORING_SETUP_CLAMP SETUP_CLAMP}</td><td>{@link LibIOURing#IORING_SETUP_ATTACH_WQ SETUP_ATTACH_WQ}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_R_DISABLED SETUP_R_DISABLED}</td></tr></table> */
+    /** one or more of:<br><table><tr><td>{@link LibIOURing#IORING_SETUP_IOPOLL SETUP_IOPOLL}</td><td>{@link LibIOURing#IORING_SETUP_SQPOLL SETUP_SQPOLL}</td><td>{@link LibIOURing#IORING_SETUP_SQ_AFF SETUP_SQ_AFF}</td><td>{@link LibIOURing#IORING_SETUP_CQSIZE SETUP_CQSIZE}</td><td>{@link LibIOURing#IORING_SETUP_CLAMP SETUP_CLAMP}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_ATTACH_WQ SETUP_ATTACH_WQ}</td><td>{@link LibIOURing#IORING_SETUP_R_DISABLED SETUP_R_DISABLED}</td><td>{@link LibIOURing#IORING_SETUP_SUBMIT_ALL SETUP_SUBMIT_ALL}</td><td>{@link LibIOURing#IORING_SETUP_COOP_TASKRUN SETUP_COOP_TASKRUN}</td><td>{@link LibIOURing#IORING_SETUP_TASKRUN_FLAG SETUP_TASKRUN_FLAG}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_SQE128 SETUP_SQE128}</td><td>{@link LibIOURing#IORING_SETUP_CQE32 SETUP_CQE32}</td><td>{@link LibIOURing#IORING_SETUP_SINGLE_ISSUER SETUP_SINGLE_ISSUER}</td><td>{@link LibIOURing#IORING_SETUP_DEFER_TASKRUN SETUP_DEFER_TASKRUN}</td></tr></table> */
     @NativeType("__u32")
     public int flags() { return nflags(address()); }
     /** @return the value of the {@code sq_thread_cpu} field. */
@@ -152,7 +152,7 @@ public class IOURingParams extends Struct implements NativeResource {
     /** @return the value of the {@code sq_thread_idle} field. */
     @NativeType("__u32")
     public int sq_thread_idle() { return nsq_thread_idle(address()); }
-    /** filled in by the kernel, which specifies various features supported by current kernel version. One or more of:<br><table><tr><td>{@link LibIOURing#IORING_FEAT_SINGLE_MMAP FEAT_SINGLE_MMAP}</td><td>{@link LibIOURing#IORING_FEAT_NODROP FEAT_NODROP}</td><td>{@link LibIOURing#IORING_FEAT_SUBMIT_STABLE FEAT_SUBMIT_STABLE}</td><td>{@link LibIOURing#IORING_FEAT_RW_CUR_POS FEAT_RW_CUR_POS}</td><td>{@link LibIOURing#IORING_FEAT_CUR_PERSONALITY FEAT_CUR_PERSONALITY}</td></tr><tr><td>{@link LibIOURing#IORING_FEAT_FAST_POLL FEAT_FAST_POLL}</td><td>{@link LibIOURing#IORING_FEAT_POLL_32BITS FEAT_POLL_32BITS}</td><td>{@link LibIOURing#IORING_FEAT_SQPOLL_NONFIXED FEAT_SQPOLL_NONFIXED}</td><td>{@link LibIOURing#IORING_FEAT_EXT_ARG FEAT_EXT_ARG}</td><td>{@link LibIOURing#IORING_FEAT_NATIVE_WORKERS FEAT_NATIVE_WORKERS}</td></tr><tr><td>{@link LibIOURing#IORING_FEAT_RSRC_TAGS FEAT_RSRC_TAGS}</td><td>{@link LibIOURing#IORING_FEAT_CQE_SKIP FEAT_CQE_SKIP}</td></tr></table> */
+    /** filled in by the kernel, which specifies various features supported by current kernel version. One or more of:<br><table><tr><td>{@link LibIOURing#IORING_FEAT_SINGLE_MMAP FEAT_SINGLE_MMAP}</td><td>{@link LibIOURing#IORING_FEAT_NODROP FEAT_NODROP}</td><td>{@link LibIOURing#IORING_FEAT_SUBMIT_STABLE FEAT_SUBMIT_STABLE}</td><td>{@link LibIOURing#IORING_FEAT_RW_CUR_POS FEAT_RW_CUR_POS}</td><td>{@link LibIOURing#IORING_FEAT_CUR_PERSONALITY FEAT_CUR_PERSONALITY}</td></tr><tr><td>{@link LibIOURing#IORING_FEAT_FAST_POLL FEAT_FAST_POLL}</td><td>{@link LibIOURing#IORING_FEAT_POLL_32BITS FEAT_POLL_32BITS}</td><td>{@link LibIOURing#IORING_FEAT_SQPOLL_NONFIXED FEAT_SQPOLL_NONFIXED}</td><td>{@link LibIOURing#IORING_FEAT_EXT_ARG FEAT_EXT_ARG}</td><td>{@link LibIOURing#IORING_FEAT_NATIVE_WORKERS FEAT_NATIVE_WORKERS}</td></tr><tr><td>{@link LibIOURing#IORING_FEAT_RSRC_TAGS FEAT_RSRC_TAGS}</td><td>{@link LibIOURing#IORING_FEAT_CQE_SKIP FEAT_CQE_SKIP}</td><td>{@link LibIOURing#IORING_FEAT_LINKED_FILE FEAT_LINKED_FILE}</td></tr></table> */
     @NativeType("__u32")
     public int features() { return nfeatures(address()); }
     /** @return the value of the {@code wq_fd} field. */
@@ -166,7 +166,7 @@ public class IOURingParams extends Struct implements NativeResource {
     public int resv(int index) { return nresv(address(), index); }
     /**
      * The {@code flags} field is used by the kernel to communicate state information to the application. Currently, it is used to inform the application when
-     * a call to {@link LibIOURing#io_uring_enter enter} is necessary.
+     * a call to {@link LibURing#io_uring_enter enter} is necessary.
      * 
      * <p>The {@code dropped} member is incremented for each invalid submission queue entry encountered in the ring buffer.</p>
      * 

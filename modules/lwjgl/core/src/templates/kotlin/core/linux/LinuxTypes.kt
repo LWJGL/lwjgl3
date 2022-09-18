@@ -102,6 +102,13 @@ val sockaddr = struct(Module.CORE_LINUX, "Sockaddr", nativeName = "struct sockad
     char("sa_data", "address data")[14]
 }
 
+val cmsghdr = struct(Module.CORE_LINUX, "CMsghdr", nativeName = "struct cmsghdr") {
+    socklen_t("cmsg_len", "data byte count, including header")
+    int("cmsg_level", "originating protocol")
+    int("cmsg_type", "protocol-specific type")
+    char("cmsg_data", "")[0]
+}
+
 // sys/stat.h
 
 val stat = "struct stat".opaque // TODO:

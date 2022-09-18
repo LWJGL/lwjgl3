@@ -9,10 +9,10 @@ import core.linux.*
 import core.linux.liburing.*
 
 val LibIOURing = "LibIOURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath = "linux", prefixConstant = "IORING_", prefixMethod = "io_uring_") {
-    nativeImport("liburing/io_uring.h")
     nativeDirective(
         """DISABLE_WARNINGS()
-_Pragma("GCC diagnostic ignored \"-Wpedantic\"")
+#include "liburing/compat.h"
+#include "liburing/io_uring.h"
 #include "syscall.h"
 ENABLE_WARNINGS()""")
 
@@ -198,6 +198,17 @@ atomic_store_release(cqring->head, head);""")}
         avoids the {@code io_uring_enter(2)} call you need to make to tell the kernel to pick SQEs up. For high-performance applications, this means even
         lesser system call overheads.
         """
+
+    IntConstant(
+        """
+        If {@code sqe->file_index} is set to this for opcodes that instantiate a new direct descriptor (like {@code openat/openat2/accept}), then io_uring will
+        allocate an available direct descriptor instead of having the application pass one in.
+
+        The picked direct descriptor will be returned in {@code cqe->res}, or {@code -ENFILE} if the space is full.
+        """,
+
+        "FILE_INDEX_ALLOC".."~0"
+    )
 
     IntConstant("", "MAX_ENTRIES".."4096")
 
@@ -395,15 +406,103 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             """
             If this flag is specified, the io_uring ring starts in a disabled state.
 
-            In this state, restrictions can be registered, but submissions are not allowed. See #register() for details on how to enable the ring. Available
-            since 5.10.
+            In this state, restrictions can be registered, but submissions are not allowed. See #register() for details on how to enable the ring.
+
+            Available since 5.10.
             """,
             "1 << 6"
+        ),
+        "SETUP_SUBMIT_ALL".enum(
+            """
+            Continue submit on error.
+
+            Normally io_uring stops submitting a batch of request, if one of these requests results in an error. This can cause submission of less than what is
+            expected, if a request ends in error while being submitted. If the ring is created with this flag, #enter() will continue submitting requests even
+            if it encounters an error submitting a request. CQEs are still posted for errored request regardless of whether or not this flag is set at ring
+            creation time, the only difference is if the submit sequence is halted or continued when an error is observed.
+
+            Available since 5.18.
+            """,
+            "1 << 7"
+        ),
+        "SETUP_COOP_TASKRUN".enum(
+            """
+            Cooperative task running.
+ 
+            By default, io_uring will interrupt a task running in userspace when a completion event comes in. This is to ensure that completions run in a
+            timely manner. For a lot of use cases, this is overkill and can cause reduced performance from both the inter-processor interrupt used to do this,
+            the kernel/user transition, the needless interruption of the tasks userspace activities, and reduced batching if completions come in at a rapid
+            rate. Most applications don't need the forceful interruption, as the events are processed at any kernel/user transition. The exception are setups
+            where the application uses multiple threads operating on the same ring, where the application waiting on completions isn't the one that submitted
+            them. For most other use cases, setting this flag will improve performance.
+
+            Available since 5.19.
+            """,
+            "1 << 8"
+        ),
+        "SETUP_TASKRUN_FLAG".enum(
+            """
+            Used in conjunction with #SETUP_COOP_TASKRUN, this provides a flag, #SQ_TASKRUN, which is set in the SQ ring {@code flags} whenever completions are
+            pending that should be processed. liburing will check for this flag even when doing #peek_cqe() and enter the kernel to process them, and
+            applications can do the same. This makes {@code IORING_SETUP_TASKRUN_FLAG} safe to use even when applications rely on a peek style operation on the
+            CQ ring to see if anything might be pending to reap.
+
+            Available since 5.19.
+            """,
+            "1 << 9"
+        ),
+        "SETUP_SQE128".enum(
+            """
+            If set, io_uring will use 128-byte SQEs rather than the normal 64-byte sized variant.
+
+            This is a requirement for using certain request types, as of 5.19 only the #OP_URING_CMD passthrough command for NVMe passthrough needs this.
+
+            Available since 5.19.
+            """,
+            "1 << 10"
+        ),
+        "SETUP_CQE32".enum(
+            """
+            If set, io_uring will use 32-byte CQEs rather than the normal 32-byte sized variant.
+
+            This is a requirement for using certain request types, as of 5.19 only the #OP_URING_CMD passthrough command for NVMe passthrough needs this.
+
+            Available since 5.19.
+            """,
+            "1 << 11"
+        ),
+        "SETUP_SINGLE_ISSUER".enum(
+            """
+            A hint to the kernel that only a single task can submit requests, which is used for internal optimisations.
+
+            The kernel enforces the rule, which only affects #enter() calls submitting requests and will fail them with {@code -EEXIST} if the restriction is
+            violated. The submitter task may differ from the task that created the ring. Note that when #SETUP_SQPOLL is set it is considered that the polling
+            task is doing all submissions on behalf of the userspace and so it always complies with the rule disregarding how many userspace tasks do
+            {@code io_uring_enter}.
+
+            Available since 5.20.
+            """,
+            "1 << 12"
+        ),
+        "SETUP_DEFER_TASKRUN".enum(
+            """
+            Defer running task work to get events.
+
+            By default, io_uring will process all outstanding work at the end of any system call or thread interrupt. This can delay the application from
+            making other progress. Setting this flag will hint to io_uring that it should defer work until an #enter() call with the #ENTER_GETEVENTS flag set.
+            This allows the application to request work to run just before it wants to process completions. This flag requires the #SETUP_SINGLE_ISSUER flag to
+            be set, and also enforces that the call to {@code io_uring_enter} is called from the same thread that submitted requests. Note that if this flag is
+            set then it is the application's responsibility to periodically trigger work (for example via any of the CQE waiting functions) or else completions
+            may not be delivered.
+
+            Available since 6.1.
+            """,
+            "1 << 13"
         )
     )
 
     EnumConstantByte(
-        "",
+        "{@code io_uring_op}",
 
         "OP_NOP".enumByte("Do not perform any I/O. This is useful for testing the performance of the {@code io_uring} implementation itself.", "0"),
         "OP_READV".enumByte("Vectored read operation, similar to {@code preadv2(2)}. If the file is not seekable, {@code off} must be set to zero."),
@@ -836,13 +935,46 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             Available since 5.15.
             """
         ),
-        /*"OP_GETDENTS".enumByte(
+        "OP_MSG_RING".enumByte(
             """
-            Issue the equivalent of a {@code getdents64(2)} system call.
+            Send a message to an io_uring.
 
-            Available since 5.17.
+            {@code fd} must be set to a file descriptor of a ring that the application has access to, {@code len} can be set to any 32-bit value that the
+            application wishes to pass on, and {@code off} should be set any 64-bit value that the application wishes to send. On the target ring, a CQE will
+            be posted with the {@code res} field matching the {@code len} set, and a {@code user_data} field matching the {@code off} value being passed in.
+            This request type can be used to either just wake or interrupt anyone waiting for completions on the target ring, or it can be used to pass
+            messages via the two fields.
+
+            Available since 5.18.
             """
-        ),*/
+        ),
+	    "OP_FSETXATTR".enumByte,
+	    "OP_SETXATTR".enumByte,
+	    "OP_FGETXATTR".enumByte,
+	    "OP_GETXATTR".enumByte,
+	    "OP_SOCKET".enumByte,
+	    "OP_URING_CMD".enumByte,
+        "OP_SEND_ZC".enumByte(
+            """
+            Issue the zerocopy equivalent of a {@code send(2)} system call.
+            
+            Similar to #OP_SEND, but tries to avoid making intermediate copies of data. Zerocopy execution is not guaranteed and it may fall back to copying.
+
+            The {@code flags} field of the first {@code "struct io_uring_cqe"} may likely contain #CQE_F_MORE, which means that there will be a second
+            completion event / notification for the request, with the {@code user_data} field set to the same value. The user must not modify the data buffer
+            until the notification is posted. The first cqe follows the usual rules and so its {@code res} field will contain the number of bytes sent or a
+            negative error code. The notification's {@code res} field will be set to zero and the {@code flags} field will contain #CQE_F_NOTIF. The two step
+            model is needed because the kernel may hold on to buffers for a long time, e.g. waiting for a TCP ACK, and having a separate cqe for request
+            completions allows userspace to push more data without extra delays. Note, notifications are only responsible for controlling the lifetime of the
+            buffers, and as such don't mean anything about whether the data has atually been sent out or received by the other end.
+
+            {@code fd} must be set to the socket file descriptor, {@code addr} must contain a pointer to the buffer, {@code len} denotes the length of the
+            buffer to send, and {@code msg_flags} holds the flags associated with the system call. When {@code addr2} is non-zero it points to the address of
+            the target with {@code addr_len} specifying its size, turning the request into a {@code sendto(2)} system call equivalent.
+
+            Available since 6.0.
+            """
+        ),
         "OP_LAST".enumByte
     )
 
@@ -877,6 +1009,8 @@ if (flags & IORING_SQ_NEED_WAKEUP)
         {@code sqe->len}.
 
         {@code IORING_POLL_UPDATE}: Update existing poll request, matching {@code sqe->addr} as the old {@code user_data} field.
+
+        {@code IORING_POLL_LEVEL}: Level triggered poll.
         """,
 
         "POLL_ADD_MULTI".enum(
@@ -884,14 +1018,99 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             "1 << 0"
         ),
         "POLL_UPDATE_EVENTS".enum("", "1 << 1"),
-        "POLL_UPDATE_USER_DATA".enum("", "1 << 2")
+        "POLL_UPDATE_USER_DATA".enum("", "1 << 2"),
+        "POLL_ADD_LEVEL".enum("", "1 << 3")
+    )
+
+    EnumConstant(
+        "{@code ASYNC_CANCEL} flags.",
+
+        "ASYNC_CANCEL_ALL".enum(
+            """
+            Cancel all requests that match the given criteria, rather than just canceling the first one found.
+
+            Available since 5.19.
+            """,
+            "1 << 0"
+        ),
+        "ASYNC_CANCEL_FD".enum(
+            """
+            Match based on the file descriptor used in the original request rather than the {@code user_data}.
+
+            This is what #prep_cancel_fd() sets up.
+
+            Available since 5.19.
+            """,
+            "1 << 1"
+        ),
+        "ASYNC_CANCEL_ANY".enum(
+            """
+            Match any request in the ring, regardless of {@code user_data} or file descriptor.
+
+            Can be used to cancel any pending request in the ring.
+
+            Available since 5.19.
+            """,
+            "1 << 2"
+        ),
+        "ASYNC_CANCEL_FD_FIXED".enum("{@code fd} passed in is a fixed descriptor", "1 << 3")
+    )
+
+    EnumConstant(
+        "{@code send/sendmsg} and {@code recv/recvmsg} flags ({@code sqe->ioprio})",
+
+        "RECVSEND_POLL_FIRST".enum(
+            """
+            If set, io_uring will assume the socket is currently empty and attempting to receive data will be unsuccessful.
+            
+            For this case, io_uring will arm internal poll and trigger a receive of the data when the socket has data to be read. This initial receive attempt
+            can be wasteful for the case where the socket is expected to be empty, setting this flag will bypass the initial receive attempt and go straight to
+            arming poll. If poll does indicate that data is ready to be received, the operation will proceed.
+
+            Can be used with the CQE #CQE_F_SOCK_NONEMPTY flag, which io_uring will set on CQEs after a {@code recv(2)} or {@code recvmsg(2)} operation. If
+            set, the socket still had data to be read after the operation completed.
+            
+            Both these flags are available since 5.19.
+            """,
+            "1 << 0"
+        ),
+        "RECV_MULTISHOT".enum(
+            """
+            Multishot {@code recv}.
+            
+            Sets #CQE_F_MORE if the handler will continue to report CQEs on behalf of the same SQE.
+            """,
+            "1 << 1"
+        ),
+        "RECVSEND_FIXED_BUF".enum("Use registered buffers, the index is stored in the {@code buf_index} field.", "1 << 2")
+    )
+
+    EnumConstant(
+        "Accept flags stored in {@code sqe->ioprio}",
+
+        "ACCEPT_MULTISHOT".enum("", "1 << 0")
+    )
+
+    EnumConstant(
+        "#OP_MSG_RING command types, stored in {@code sqe->addr}",
+
+        "MSG_DATA".enum("pass {@code sqe->len} as {@code res} and {@code off} as {@code user_data}", "0"),
+        "MSG_SEND_FD".enum("send a registered fd to another ring")
+    )
+
+    EnumConstant(
+        "#OP_MSG_RING flags ({@code sqe->msg_ring_flags})",
+
+        "MSG_RING_CQE_SKIP".enum("Don't post a CQE to the target ring. Not applicable for #MSG_DATA, obviously.", "1 << 0")
     )
 
     EnumConstant(
         "{@code cqe->flags}",
 
         "CQE_F_BUFFER".enum("If set, the upper 16 bits are the buffer ID", "1 << 0"),
-        "CQE_F_MORE".enum("If set, parent SQE will generate more CQE entries", "1 << 0")
+        "CQE_F_MORE".enum("If set, parent SQE will generate more CQE entries", "1 << 1"),
+        "CQE_F_SOCK_NONEMPTY".enum("If set, more data to read after socket {@code recv}.", "1 << 2"),
+        "CQE_F_NOTIF".enum("Set for notification CQEs. Can be used to distinct them from sends.", "1 << 3")
     )
 
     EnumConstant(
@@ -912,7 +1131,8 @@ if (flags & IORING_SQ_NEED_WAKEUP)
         "{@code sq_ring->flags}",
 
         "SQ_NEED_WAKEUP".enum("needs {@code io_uring_enter} wakeup", "1 << 0"),
-        "SQ_CQ_OVERFLOW".enum("CQ ring is overflown", "1 << 0")
+        "SQ_CQ_OVERFLOW".enum("CQ ring is overflown", "1 << 1"),
+        "SQ_TASKRUN".enum("task should enter the kernel", "1 << 2")
     )
 
     EnumConstant(
@@ -963,6 +1183,13 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
             feature.
             """,
             "1 << 3"
+        ),
+        "ENTER_REGISTERED_RING".enum(
+            """
+            If the ring file descriptor has been registered through use of #REGISTER_RING_FDS, then setting this flag will tell the kernel that the
+            {@code ring_fd} passed in is the registered ring offset rather than a normal file descriptor.
+            """,
+            "1 << 4"
         )
     )
 
@@ -973,7 +1200,9 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
             """
             If this flag is set, the two SQ and CQ rings can be mapped with a single {@code mmap(2)} call.
 
-            The SQEs must still be allocated separately. This brings the necessary {@code mmap(2)} calls down from three to two. Available since kernel 5.4.
+            The SQEs must still be allocated separately. This brings the necessary {@code mmap(2)} calls down from three to two.
+
+            Available since kernel 5.4.
             """,
             "1 << 0"
         ),
@@ -983,8 +1212,9 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
 
             If a completion event occurs and the CQ ring is full, the kernel stores the event internally until such a time that the CQ ring has room for more
             entries. If this overflow condition is entered, attempting to submit more IO will fail with the {@code -EBUSY} error value, if it can't flush the
-            overflown events to the CQ ring. If this happens, the application must reap events from the CQ ring and attempt the submit again. Available since
-            kernel 5.5.
+            overflown events to the CQ ring. If this happens, the application must reap events from the CQ ring and attempt the submit again.
+
+            Available since kernel 5.5.
             """,
             "1 << 1"
         ),
@@ -1088,7 +1318,26 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
             """,
             "1 << 10"
         ),
-        "FEAT_CQE_SKIP".enum("", "1 << 11")
+        "FEAT_CQE_SKIP".enum(
+            """
+            If this flag is set, then io_uring supports setting #IOSQE_CQE_SKIP_SUCCESS in the submitted SQE, indicating that no CQE should be generated for
+            this SQE if it executes normally. If an error happens processing the SQE, a CQE with the appropriate error value will still be generated.
+
+            Available since kernel 5.17.
+            """,
+            "1 << 11"
+        ),
+        "FEAT_LINKED_FILE".enum(
+            """
+            If this flag is set, then io_uring supports sane assignment of files for SQEs that have dependencies. For example, if a chain of SQEs are submitted
+            with #IOSQE_IO_LINK, then kernels without this flag will prepare the file for each link upfront. If a previous link opens a file with a known
+            index, eg if direct descriptors are used with open or accept, then file assignment needs to happen post execution of that SQE. If this flag is set,
+            then the kernel will defer file assignment until execution of a given request is started.
+
+            Available since kernel 5.17.
+            """,
+            "1 << 12"
+        )
     )
 
     EnumConstant(
@@ -1364,8 +1613,58 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
             Available since 5.15.
             """
         ),
+        "REGISTER_RING_FDS".enum(
+            """
+            Whenever #enter() is called to submit request or wait for completions, the kernel must grab a reference to the file descriptor. If the application
+            using io_uring is threaded, the file table is marked as shared, and the reference grab and put of the file descriptor count is more expensive than
+            it is for a non-threaded application.
+
+            Similarly to how io_uring allows registration of files, this allow registration of the ring file descriptor itself. This reduces the overhead of
+            the {@code io_uring_enter (2)} system call.
+
+            {@code arg} must be set to an unsigned int pointer to an array of type {@code struct io_uring_rsrc_register} of {@code nr_args} number of entries.
+            The {@code data} field of this struct must point to an io_uring file descriptor, and the {@code offset} field can be either {@code -1} or an
+            explicit offset desired for the registered file descriptor value. If {@code -1} is used, then upon successful return of this system call, the field
+            will contain the value of the registered file descriptor to be used for future {@code io_uring_enter (2)} system calls.
+
+            On successful completion of this request, the returned descriptors may be used instead of the real file descriptor for {@code io_uring_enter (2)},
+            provided that {@code IORING_ENTER_REGISTERED_RING} is set in the {@code flags} for the system call. This flag tells the kernel that a registered
+            descriptor is used rather than a real file descriptor.
+
+            Each thread or process using a ring must register the file descriptor directly by issuing this request.
+
+            The maximum number of supported registered ring descriptors is currently limited to {@code 16}.
+
+            Available since 5.18.
+            """
+        ),
+        "UNREGISTER_RING_FDS".enum(
+            """
+            Unregister descriptors previously registered with #REGISTER_RING_FDS.
+
+            {@code arg} must be set to an unsigned int pointer to an array of type {@code struct io_uring_rsrc_register} of {@code nr_args} number of entries.
+            Only the {@code offset} field should be set in the structure, containing the registered file descriptor offset previously returned from
+            {@code IORING_REGISTER_RING_FDS} that the application wishes to unregister.
+
+            Note that this isn't done automatically on ring exit, if the thread or task that previously registered a ring file descriptor isn't exiting. It is
+            recommended to manually unregister any previously registered ring descriptors if the ring is closed and the task persists. This will free up a
+            registration slot, making it available for future use.
+
+            Available since 5.18.
+            """
+        ),
+        "REGISTER_PBUF_RING".enum("register ring based provide buffer group"),
+        "UNREGISTER_PBUF_RING".enum("unregister ring based provide buffer group"),
+        "REGISTER_SYNC_CANCEL".enum("sync cancelation API"),
+        "REGISTER_FILE_ALLOC_RANGE".enum("register a range of fixed file slots for automatic slot allocation"),
 
         "REGISTER_LAST".enum
+    )
+
+    EnumConstant(
+        "Register a fully sparse file space, rather than pass in an array of all -1 file descriptors.",
+
+        "RSRC_REGISTER_SPARSE".enum("", "1 << 0")
     )
 
     EnumConstant(

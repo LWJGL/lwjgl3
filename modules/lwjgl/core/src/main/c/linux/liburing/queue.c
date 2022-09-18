@@ -4,6 +4,7 @@
 #include "lib.h"
 #include "syscall.h"
 #include "liburing.h"
+#include "int_flags.h"
 #include "liburing/compat.h"
 #include "liburing/io_uring.h"
 
@@ -11,11 +12,23 @@
  * Returns true if we're not using SQ thread (thus nobody submits but us)
  * or if IORING_SQ_NEED_WAKEUP is set, so submit thread must be explicitly
  * awakened. For the latter case, we set the thread wakeup flag.
+ * If no SQEs are ready for submission, returns false.
  */
-static inline bool sq_ring_needs_enter(struct io_uring *ring, unsigned *flags)
+static inline bool sq_ring_needs_enter(struct io_uring *ring,
+				       unsigned submit,
+				       unsigned *flags)
 {
+	if (!submit)
+		return false;
+
 	if (!(ring->flags & IORING_SETUP_SQPOLL))
 		return true;
+
+	/*
+	 * Ensure the kernel can see the store to the SQ tail before we read
+	 * the flags.
+	 */
+	io_uring_smp_mb();
 
 	if (uring_unlikely(IO_URING_READ_ONCE(*ring->sq.kflags) &
 			   IORING_SQ_NEED_WAKEUP)) {
@@ -28,49 +41,13 @@ static inline bool sq_ring_needs_enter(struct io_uring *ring, unsigned *flags)
 
 static inline bool cq_ring_needs_flush(struct io_uring *ring)
 {
-	return IO_URING_READ_ONCE(*ring->sq.kflags) & IORING_SQ_CQ_OVERFLOW;
+	return IO_URING_READ_ONCE(*ring->sq.kflags) &
+				 (IORING_SQ_CQ_OVERFLOW | IORING_SQ_TASKRUN);
 }
 
 static inline bool cq_ring_needs_enter(struct io_uring *ring)
 {
 	return (ring->flags & IORING_SETUP_IOPOLL) || cq_ring_needs_flush(ring);
-}
-
-static int __io_uring_peek_cqe(struct io_uring *ring,
-			       struct io_uring_cqe **cqe_ptr,
-			       unsigned *nr_available)
-{
-	struct io_uring_cqe *cqe;
-	int err = 0;
-	unsigned available;
-	unsigned mask = *ring->cq.kring_mask;
-
-	do {
-		unsigned tail = io_uring_smp_load_acquire(ring->cq.ktail);
-		unsigned head = *ring->cq.khead;
-
-		cqe = NULL;
-		available = tail - head;
-		if (!available)
-			break;
-
-		cqe = &ring->cq.cqes[head & mask];
-		if (!(ring->features & IORING_FEAT_EXT_ARG) &&
-				cqe->user_data == LIBURING_UDATA_TIMEOUT) {
-			if (cqe->res < 0)
-				err = cqe->res;
-			io_uring_cq_advance(ring, 1);
-			if (!err)
-				continue;
-			cqe = NULL;
-		}
-
-		break;
-	} while (1);
-
-	*cqe_ptr = cqe;
-	*nr_available = available;
-	return err;
 }
 
 struct get_data {
@@ -81,10 +58,12 @@ struct get_data {
 	void *arg;
 };
 
-static int _io_uring_get_cqe(struct io_uring *ring, struct io_uring_cqe **cqe_ptr,
+static int _io_uring_get_cqe(struct io_uring *ring,
+			     struct io_uring_cqe **cqe_ptr,
 			     struct get_data *data)
 {
 	struct io_uring_cqe *cqe = NULL;
+	bool looped = false;
 	int err;
 
 	do {
@@ -97,7 +76,12 @@ static int _io_uring_get_cqe(struct io_uring *ring, struct io_uring_cqe **cqe_pt
 		if (err)
 			break;
 		if (!cqe && !data->wait_nr && !data->submit) {
-			if (!cq_ring_needs_enter(ring)) {
+			/*
+			 * If we already looped once, we already entererd
+			 * the kernel. Since there's nothing to submit or
+			 * wait for, don't keep retrying.
+			 */
+			if (looped || !cq_ring_needs_enter(ring)) {
 				err = -EAGAIN;
 				break;
 			}
@@ -107,14 +91,16 @@ static int _io_uring_get_cqe(struct io_uring *ring, struct io_uring_cqe **cqe_pt
 			flags = IORING_ENTER_GETEVENTS | data->get_flags;
 			need_enter = true;
 		}
-		if (data->submit && sq_ring_needs_enter(ring, &flags))
+		if (sq_ring_needs_enter(ring, data->submit, &flags))
 			need_enter = true;
 		if (!need_enter)
 			break;
 
-		ret = ____sys_io_uring_enter2(ring->ring_fd, data->submit,
-					      data->wait_nr, flags, data->arg,
-					      data->sz);
+		if (ring->int_flags & INT_FLAG_REG_RING)
+			flags |= IORING_ENTER_REGISTERED_RING;
+		ret = __sys_io_uring_enter2(ring->enter_ring_fd, data->submit,
+					    data->wait_nr, flags, data->arg,
+					    data->sz);
 		if (ret < 0) {
 			err = ret;
 			break;
@@ -123,6 +109,7 @@ static int _io_uring_get_cqe(struct io_uring *ring, struct io_uring_cqe **cqe_pt
 		data->submit -= ret;
 		if (cqe)
 			break;
+		looped = true;
 	} while (1);
 
 	*cqe_ptr = cqe;
@@ -143,6 +130,15 @@ int __io_uring_get_cqe(struct io_uring *ring, struct io_uring_cqe **cqe_ptr,
 	return _io_uring_get_cqe(ring, cqe_ptr, &data);
 }
 
+int io_uring_get_events(struct io_uring *ring)
+{
+	int flags = IORING_ENTER_GETEVENTS;
+
+	if (ring->int_flags & INT_FLAG_REG_RING)
+		flags |= IORING_ENTER_REGISTERED_RING;
+	return __sys_io_uring_enter(ring->enter_ring_fd, 0, 0, flags, NULL);
+}
+
 /*
  * Fill in an array of IO completions up to count, if any are available.
  * Returns the amount of IO completions filled.
@@ -152,34 +148,36 @@ unsigned io_uring_peek_batch_cqe(struct io_uring *ring,
 {
 	unsigned ready;
 	bool overflow_checked = false;
+	int shift = 0;
+
+	if (ring->flags & IORING_SETUP_CQE32)
+		shift = 1;
 
 again:
 	ready = io_uring_cq_ready(ring);
 	if (ready) {
 		unsigned head = *ring->cq.khead;
-		unsigned mask = *ring->cq.kring_mask;
+		unsigned mask = ring->cq.ring_mask;
 		unsigned last;
 		int i = 0;
 
 		count = count > ready ? ready : count;
 		last = head + count;
 		for (;head != last; head++, i++)
-			cqes[i] = &ring->cq.cqes[head & mask];
+			cqes[i] = &ring->cq.cqes[(head & mask) << shift];
 
 		return count;
 	}
 
 	if (overflow_checked)
-		goto done;
+		return 0;
 
 	if (cq_ring_needs_flush(ring)) {
-		____sys_io_uring_enter(ring->ring_fd, 0, 0,
-				       IORING_ENTER_GETEVENTS, NULL);
+		io_uring_get_events(ring);
 		overflow_checked = true;
 		goto again;
 	}
 
-done:
 	return 0;
 }
 
@@ -187,31 +185,18 @@ done:
  * Sync internal state with kernel ring state on the SQ side. Returns the
  * number of pending items in the SQ ring, for the shared ring.
  */
-int __io_uring_flush_sq(struct io_uring *ring)
+unsigned __io_uring_flush_sq(struct io_uring *ring)
 {
 	struct io_uring_sq *sq = &ring->sq;
-	const unsigned mask = *sq->kring_mask;
-	unsigned ktail = *sq->ktail;
-	unsigned to_submit = sq->sqe_tail - sq->sqe_head;
+	unsigned tail = sq->sqe_tail;
 
-	if (!to_submit)
-		goto out;
-
-	/*
-	 * Fill in sqes that we have queued up, adding them to the kernel ring
-	 */
-	do {
-		sq->array[ktail & mask] = sq->sqe_head & mask;
-		ktail++;
-		sq->sqe_head++;
-	} while (--to_submit);
-
-	/*
-	 * Ensure that the kernel sees the SQE updates before it sees the tail
-	 * update.
-	 */
-	io_uring_smp_store_release(sq->ktail, ktail);
-out:
+	if (sq->sqe_head != tail) {
+		sq->sqe_head = tail;
+		/*
+		 * Ensure kernel sees the SQE updates before the tail update.
+		 */
+		io_uring_smp_store_release(sq->ktail, tail);
+	}
 	/*
 	 * This _may_ look problematic, as we're not supposed to be reading
 	 * SQ->head without acquire semantics. When we're in SQPOLL mode, the
@@ -223,7 +208,7 @@ out:
 	 * we can submit. The point is, we need to be able to deal with this
 	 * situation regardless of any perceived atomicity.
 	 */
-	return ktail - *sq->khead;
+	return tail - *sq->khead;
 }
 
 /*
@@ -232,7 +217,8 @@ out:
  */
 static int io_uring_wait_cqes_new(struct io_uring *ring,
 				  struct io_uring_cqe **cqe_ptr,
-				  unsigned wait_nr, struct __kernel_timespec *ts,
+				  unsigned wait_nr,
+				  struct __kernel_timespec *ts,
 				  sigset_t *sigmask)
 {
 	struct io_uring_getevents_arg arg = {
@@ -267,7 +253,6 @@ static int io_uring_wait_cqes_new(struct io_uring *ring,
  * hence this function is safe to use for applications that split SQ and CQ
  * handling between two threads.
  */
-
 static int __io_uring_submit_timeout(struct io_uring *ring, unsigned wait_nr,
 				     struct __kernel_timespec *ts)
 {
@@ -360,18 +345,21 @@ int io_uring_wait_cqe_timeout(struct io_uring *ring,
  * Returns number of sqes submitted
  */
 static int __io_uring_submit(struct io_uring *ring, unsigned submitted,
-			     unsigned wait_nr)
+			     unsigned wait_nr, bool getevents)
 {
+	bool cq_needs_enter = getevents || wait_nr || cq_ring_needs_enter(ring);
 	unsigned flags;
 	int ret;
 
 	flags = 0;
-	if (sq_ring_needs_enter(ring, &flags) || wait_nr) {
-		if (wait_nr || (ring->flags & IORING_SETUP_IOPOLL))
+	if (sq_ring_needs_enter(ring, submitted, &flags) || cq_needs_enter) {
+		if (cq_needs_enter)
 			flags |= IORING_ENTER_GETEVENTS;
+		if (ring->int_flags & INT_FLAG_REG_RING)
+			flags |= IORING_ENTER_REGISTERED_RING;
 
-		ret = ____sys_io_uring_enter(ring->ring_fd, submitted, wait_nr,
-					     flags, NULL);
+		ret = __sys_io_uring_enter(ring->enter_ring_fd, submitted,
+					   wait_nr, flags, NULL);
 	} else
 		ret = submitted;
 
@@ -380,7 +368,7 @@ static int __io_uring_submit(struct io_uring *ring, unsigned submitted,
 
 static int __io_uring_submit_and_wait(struct io_uring *ring, unsigned wait_nr)
 {
-	return __io_uring_submit(ring, __io_uring_flush_sq(ring), wait_nr);
+	return __io_uring_submit(ring, __io_uring_flush_sq(ring), wait_nr, false);
 }
 
 /*
@@ -403,29 +391,24 @@ int io_uring_submit_and_wait(struct io_uring *ring, unsigned wait_nr)
 	return __io_uring_submit_and_wait(ring, wait_nr);
 }
 
-/*
- * Return an sqe to fill. Application must later call io_uring_submit()
- * when it's ready to tell the kernel about it. The caller may call this
- * function multiple times before calling io_uring_submit().
- *
- * Returns a vacant sqe, or NULL if we're full.
- */
+int io_uring_submit_and_get_events(struct io_uring *ring)
+{
+	return __io_uring_submit(ring, __io_uring_flush_sq(ring), 0, true);
+}
+
+#ifdef LIBURING_INTERNAL
 struct io_uring_sqe *io_uring_get_sqe(struct io_uring *ring)
 {
-	struct io_uring_sq *sq = &ring->sq;
-	unsigned int head = io_uring_smp_load_acquire(sq->khead);
-	unsigned int next = sq->sqe_tail + 1;
-	struct io_uring_sqe *sqe = NULL;
-
-	if (next - head <= *sq->kring_entries) {
-		sqe = &sq->sqes[sq->sqe_tail & *sq->kring_mask];
-		sq->sqe_tail = next;
-	}
-	return sqe;
+	return _io_uring_get_sqe(ring);
 }
+#endif
 
 int __io_uring_sqring_wait(struct io_uring *ring)
 {
-	return  ____sys_io_uring_enter(ring->ring_fd, 0, 0,
-				       IORING_ENTER_SQ_WAIT, NULL);
+	int flags = IORING_ENTER_SQ_WAIT;
+
+	if (ring->int_flags & INT_FLAG_REG_RING)
+		flags |= IORING_ENTER_REGISTERED_RING;
+
+	return __sys_io_uring_enter(ring->enter_ring_fd, 0, 0, flags, NULL);
 }

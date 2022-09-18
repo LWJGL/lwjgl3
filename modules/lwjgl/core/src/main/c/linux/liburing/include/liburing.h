@@ -6,13 +6,19 @@
 #define _XOPEN_SOURCE 500 /* Required for glibc to expose sigset_t */
 #endif
 
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE /* Required for musl to expose cpu_set_t */
+#endif
+
 #include <sys/socket.h>
+#include <sys/stat.h>
 #include <sys/uio.h>
 #include <errno.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <inttypes.h>
 #include <time.h>
+#include <fcntl.h>
 #include <sched.h>
 #include <linux/swab.h>
 #include "liburing/compat.h"
@@ -20,11 +26,47 @@
 #include "liburing/barrier.h"
 
 #ifndef uring_unlikely
-#  define uring_unlikely(cond)      __builtin_expect(!!(cond), 0)
+#define uring_unlikely(cond)	__builtin_expect(!!(cond), 0)
 #endif
 
 #ifndef uring_likely
-#  define uring_likely(cond)        __builtin_expect(!!(cond), 1)
+#define uring_likely(cond)	__builtin_expect(!!(cond), 1)
+#endif
+
+#ifdef __alpha__
+/*
+ * alpha and mips are the exceptions, all other architectures have
+ * common numbers for new system calls.
+ */
+#ifndef __NR_io_uring_setup
+#define __NR_io_uring_setup		535
+#endif
+#ifndef __NR_io_uring_enter
+#define __NR_io_uring_enter		536
+#endif
+#ifndef __NR_io_uring_register
+#define __NR_io_uring_register		537
+#endif
+#elif defined __mips__
+#ifndef __NR_io_uring_setup
+#define __NR_io_uring_setup		(__NR_Linux + 425)
+#endif
+#ifndef __NR_io_uring_enter
+#define __NR_io_uring_enter		(__NR_Linux + 426)
+#endif
+#ifndef __NR_io_uring_register
+#define __NR_io_uring_register		(__NR_Linux + 427)
+#endif
+#else /* !__alpha__ and !__mips__ */
+#ifndef __NR_io_uring_setup
+#define __NR_io_uring_setup		425
+#endif
+#ifndef __NR_io_uring_enter
+#define __NR_io_uring_enter		426
+#endif
+#ifndef __NR_io_uring_register
+#define __NR_io_uring_register		427
+#endif
 #endif
 
 #ifdef __cplusplus
@@ -37,7 +79,9 @@ extern "C" {
 struct io_uring_sq {
 	unsigned *khead;
 	unsigned *ktail;
+	// Deprecated: use `ring_mask` instead of `*kring_mask`
 	unsigned *kring_mask;
+	// Deprecated: use `ring_entries` instead of `*kring_entries`
 	unsigned *kring_entries;
 	unsigned *kflags;
 	unsigned *kdropped;
@@ -50,13 +94,18 @@ struct io_uring_sq {
 	size_t ring_sz;
 	void *ring_ptr;
 
-	unsigned pad[4];
+	unsigned ring_mask;
+	unsigned ring_entries;
+
+	unsigned pad[2];
 };
 
 struct io_uring_cq {
 	unsigned *khead;
 	unsigned *ktail;
+	// Deprecated: use `ring_mask` instead of `*kring_mask`
 	unsigned *kring_mask;
+	// Deprecated: use `ring_entries` instead of `*kring_entries`
 	unsigned *kring_entries;
 	unsigned *kflags;
 	unsigned *koverflow;
@@ -65,7 +114,10 @@ struct io_uring_cq {
 	size_t ring_sz;
 	void *ring_ptr;
 
-	unsigned pad[4];
+	unsigned ring_mask;
+	unsigned ring_entries;
+
+	unsigned pad[2];
 };
 
 struct io_uring {
@@ -75,7 +127,10 @@ struct io_uring {
 	int ring_fd;
 
 	unsigned features;
-	unsigned pad[3];
+	int enter_ring_fd;
+	__u8 int_flags;
+	__u8 pad[3];
+	unsigned pad2;
 };
 
 /*
@@ -96,7 +151,8 @@ struct io_uring_probe *io_uring_get_probe(void);
  */
 void io_uring_free_probe(struct io_uring_probe *probe);
 
-static inline int io_uring_opcode_supported(const struct io_uring_probe *p, int op)
+static inline int io_uring_opcode_supported(const struct io_uring_probe *p,
+					    int op)
 {
 	if (op > p->last_op)
 		return 0;
@@ -126,13 +182,13 @@ int io_uring_submit_and_wait_timeout(struct io_uring *ring,
 				     unsigned wait_nr,
 				     struct __kernel_timespec *ts,
 				     sigset_t *sigmask);
-struct io_uring_sqe *io_uring_get_sqe(struct io_uring *ring);
 
 int io_uring_register_buffers(struct io_uring *ring, const struct iovec *iovecs,
 			      unsigned nr_iovecs);
 int io_uring_register_buffers_tags(struct io_uring *ring,
 				   const struct iovec *iovecs,
 				   const __u64 *tags, unsigned nr);
+int io_uring_register_buffers_sparse(struct io_uring *ring, unsigned nr);
 int io_uring_register_buffers_update_tag(struct io_uring *ring,
 					 unsigned off,
 					 const struct iovec *iovecs,
@@ -143,13 +199,14 @@ int io_uring_register_files(struct io_uring *ring, const int *files,
 			    unsigned nr_files);
 int io_uring_register_files_tags(struct io_uring *ring, const int *files,
 				 const __u64 *tags, unsigned nr);
+int io_uring_register_files_sparse(struct io_uring *ring, unsigned nr);
 int io_uring_register_files_update_tag(struct io_uring *ring, unsigned off,
 				       const int *files, const __u64 *tags,
 				       unsigned nr_files);
 
 int io_uring_unregister_files(struct io_uring *ring);
 int io_uring_register_files_update(struct io_uring *ring, unsigned off,
-				   int *files, unsigned nr_files);
+				   const int *files, unsigned nr_files);
 int io_uring_register_eventfd(struct io_uring *ring, int fd);
 int io_uring_register_eventfd_async(struct io_uring *ring, int fd);
 int io_uring_unregister_eventfd(struct io_uring *ring);
@@ -167,6 +224,31 @@ int io_uring_register_iowq_aff(struct io_uring *ring, size_t cpusz,
 int io_uring_unregister_iowq_aff(struct io_uring *ring);
 int io_uring_register_iowq_max_workers(struct io_uring *ring,
 				       unsigned int *values);
+int io_uring_register_ring_fd(struct io_uring *ring);
+int io_uring_unregister_ring_fd(struct io_uring *ring);
+int io_uring_register_buf_ring(struct io_uring *ring,
+			       struct io_uring_buf_reg *reg, unsigned int flags);
+int io_uring_unregister_buf_ring(struct io_uring *ring, int bgid);
+int io_uring_register_sync_cancel(struct io_uring *ring,
+				 struct io_uring_sync_cancel_reg *reg);
+
+int io_uring_register_file_alloc_range(struct io_uring *ring,
+					unsigned off, unsigned len);
+
+int io_uring_get_events(struct io_uring *ring);
+int io_uring_submit_and_get_events(struct io_uring *ring);
+
+/*
+ * io_uring syscalls.
+ */
+int io_uring_enter(unsigned int fd, unsigned int to_submit,
+		   unsigned int min_complete, unsigned int flags, sigset_t *sig);
+int io_uring_enter2(unsigned int fd, unsigned int to_submit,
+		    unsigned int min_complete, unsigned int flags,
+		    sigset_t *sig, size_t sz);
+int io_uring_setup(unsigned int entries, struct io_uring_params *p);
+int io_uring_register(unsigned int fd, unsigned int opcode, const void *arg,
+		      unsigned int nr_args);
 
 /*
  * Helper for the peek/wait single cqe functions. Exported because of that,
@@ -178,6 +260,16 @@ int __io_uring_get_cqe(struct io_uring *ring,
 
 #define LIBURING_UDATA_TIMEOUT	((__u64) -1)
 
+/*
+ * Calculates the step size for CQE iteration.
+ * 	For standard CQE's its 1, for big CQE's its two.
+ */
+#define io_uring_cqe_shift(ring)					\
+	(!!((ring)->flags & IORING_SETUP_CQE32))
+
+#define io_uring_cqe_index(ring,ptr,mask)				\
+	(((ptr) & (mask)) << io_uring_cqe_shift(ring))
+
 #define io_uring_for_each_cqe(ring, head, cqe)				\
 	/*								\
 	 * io_uring_smp_load_acquire() enforces the order of tail	\
@@ -185,7 +277,7 @@ int __io_uring_get_cqe(struct io_uring *ring,
 	 */								\
 	for (head = *(ring)->cq.khead;					\
 	     (cqe = (head != io_uring_smp_load_acquire((ring)->cq.ktail) ? \
-		&(ring)->cq.cqes[head & (*(ring)->cq.kring_mask)] : NULL)); \
+		&(ring)->cq.cqes[io_uring_cqe_index(ring, head, (ring)->cq.ring_mask)] : NULL)); \
 	     head++)							\
 
 /*
@@ -283,26 +375,30 @@ static inline void io_uring_prep_rw(int op, struct io_uring_sqe *sqe, int fd,
 	sqe->buf_index = 0;
 	sqe->personality = 0;
 	sqe->file_index = 0;
-	sqe->__pad2[0] = sqe->__pad2[1] = 0;
+	sqe->addr3 = 0;
+	sqe->__pad2[0] = 0;
 }
 
 /**
  * @pre Either fd_in or fd_out must be a pipe.
  * @param off_in If fd_in refers to a pipe, off_in must be (int64_t) -1;
- *               If fd_in does not refer to a pipe and off_in is (int64_t) -1, then bytes are read
- *               from fd_in starting from the file offset and it is adjust appropriately;
- *               If fd_in does not refer to a pipe and off_in is not (int64_t) -1, then the
- *               starting offset of fd_in will be off_in.
+ *		 If fd_in does not refer to a pipe and off_in is (int64_t) -1,
+ *		 then bytes are read from fd_in starting from the file offset
+ *		 and it is adjust appropriately;
+ *               If fd_in does not refer to a pipe and off_in is not
+ *		 (int64_t) -1, then the  starting offset of fd_in will be
+ *		 off_in.
  * @param off_out The description of off_in also applied to off_out.
  * @param splice_flags see man splice(2) for description of flags.
  *
- * This splice operation can be used to implement sendfile by splicing to an intermediate pipe
- * first, then splice to the final destination.
+ * This splice operation can be used to implement sendfile by splicing to an
+ * intermediate pipe first, then splice to the final destination.
  * In fact, the implementation of sendfile in kernel uses splice internally.
  *
- * NOTE that even if fd_in or fd_out refers to a pipe, the splice operation can still failed with
- * EINVAL if one of the fd doesn't explicitly support splice operation, e.g. reading from terminal
- * is unsupported from kernel 5.7 to 5.11.
+ * NOTE that even if fd_in or fd_out refers to a pipe, the splice operation
+ * can still failed with EINVAL if one of the fd doesn't explicitly support
+ * splice operation, e.g. reading from terminal is unsupported from kernel 5.7
+ * to 5.11.
  * Check issue #291 for more information.
  */
 static inline void io_uring_prep_splice(struct io_uring_sqe *sqe,
@@ -338,7 +434,8 @@ static inline void io_uring_prep_readv(struct io_uring_sqe *sqe, int fd,
 
 static inline void io_uring_prep_readv2(struct io_uring_sqe *sqe, int fd,
 				       const struct iovec *iovecs,
-				       unsigned nr_vecs, __u64 offset, int flags)
+				       unsigned nr_vecs, __u64 offset,
+				       int flags)
 {
 	io_uring_prep_readv(sqe, fd, iovecs, nr_vecs, offset);
 	sqe->rw_flags = flags;
@@ -361,7 +458,8 @@ static inline void io_uring_prep_writev(struct io_uring_sqe *sqe, int fd,
 
 static inline void io_uring_prep_writev2(struct io_uring_sqe *sqe, int fd,
 				       const struct iovec *iovecs,
-				       unsigned nr_vecs, __u64 offset, int flags)
+				       unsigned nr_vecs, __u64 offset,
+				       int flags)
 {
 	io_uring_prep_writev(sqe, fd, iovecs, nr_vecs, offset);
 	sqe->rw_flags = flags;
@@ -382,8 +480,16 @@ static inline void io_uring_prep_recvmsg(struct io_uring_sqe *sqe, int fd,
 	sqe->msg_flags = flags;
 }
 
+static inline void io_uring_prep_recvmsg_multishot(struct io_uring_sqe *sqe, int fd,
+						   struct msghdr *msg, unsigned flags)
+{
+	io_uring_prep_recvmsg(sqe, fd, msg, flags);
+	sqe->ioprio |= IORING_RECV_MULTISHOT;
+}
+
 static inline void io_uring_prep_sendmsg(struct io_uring_sqe *sqe, int fd,
-					 const struct msghdr *msg, unsigned flags)
+					 const struct msghdr *msg,
+					 unsigned flags)
 {
 	io_uring_prep_rw(IORING_OP_SENDMSG, sqe, fd, msg, 1, 0);
 	sqe->msg_flags = flags;
@@ -486,12 +592,44 @@ static inline void io_uring_prep_accept_direct(struct io_uring_sqe *sqe, int fd,
 	__io_uring_set_target_fixed_file(sqe, file_index);
 }
 
-static inline void io_uring_prep_cancel(struct io_uring_sqe *sqe,
-					__u64 user_data, int flags)
+static inline void io_uring_prep_multishot_accept(struct io_uring_sqe *sqe,
+						  int fd, struct sockaddr *addr,
+						  socklen_t *addrlen, int flags)
+{
+	io_uring_prep_accept(sqe, fd, addr, addrlen, flags);
+	sqe->ioprio |= IORING_ACCEPT_MULTISHOT;
+}
+
+/* multishot accept directly into the fixed file table */
+static inline void io_uring_prep_multishot_accept_direct(struct io_uring_sqe *sqe,
+							 int fd,
+							 struct sockaddr *addr,
+							 socklen_t *addrlen,
+							 int flags)
+{
+	io_uring_prep_multishot_accept(sqe, fd, addr, addrlen, flags);
+	__io_uring_set_target_fixed_file(sqe, IORING_FILE_INDEX_ALLOC - 1);
+}
+
+static inline void io_uring_prep_cancel64(struct io_uring_sqe *sqe,
+					  __u64 user_data, int flags)
 {
 	io_uring_prep_rw(IORING_OP_ASYNC_CANCEL, sqe, -1, NULL, 0, 0);
 	sqe->addr = user_data;
 	sqe->cancel_flags = (__u32) flags;
+}
+
+static inline void io_uring_prep_cancel(struct io_uring_sqe *sqe,
+					void *user_data, int flags)
+{
+	io_uring_prep_cancel64(sqe, (__u64) (uintptr_t) user_data, flags);
+}
+
+static inline void io_uring_prep_cancel_fd(struct io_uring_sqe *sqe, int fd,
+					   unsigned int flags)
+{
+	io_uring_prep_rw(IORING_OP_ASYNC_CANCEL, sqe, fd, NULL, 0, 0);
+	sqe->cancel_flags = (__u32) flags | IORING_ASYNC_CANCEL_FD;
 }
 
 static inline void io_uring_prep_link_timeout(struct io_uring_sqe *sqe,
@@ -520,14 +658,14 @@ static inline void io_uring_prep_files_update(struct io_uring_sqe *sqe,
 static inline void io_uring_prep_fallocate(struct io_uring_sqe *sqe, int fd,
 					   int mode, off_t offset, off_t len)
 {
-
 	io_uring_prep_rw(IORING_OP_FALLOCATE, sqe, fd,
-			(const uintptr_t *) (unsigned long) len,
-			(unsigned int) mode, (__u64) offset);
+			0, (unsigned int) mode, (__u64) offset);
+	sqe->addr = (__u64) len;
 }
 
 static inline void io_uring_prep_openat(struct io_uring_sqe *sqe, int dfd,
-					const char *path, int flags, mode_t mode)
+					const char *path, int flags,
+					mode_t mode)
 {
 	io_uring_prep_rw(IORING_OP_OPENAT, sqe, dfd, path, mode, 0);
 	sqe->open_flags = (__u32) flags;
@@ -542,7 +680,6 @@ static inline void io_uring_prep_openat_direct(struct io_uring_sqe *sqe,
 	io_uring_prep_openat(sqe, dfd, path, flags, mode);
 	__io_uring_set_target_fixed_file(sqe, file_index);
 }
-
 
 static inline void io_uring_prep_close(struct io_uring_sqe *sqe, int fd)
 {
@@ -563,7 +700,8 @@ static inline void io_uring_prep_read(struct io_uring_sqe *sqe, int fd,
 }
 
 static inline void io_uring_prep_write(struct io_uring_sqe *sqe, int fd,
-				       const void *buf, unsigned nbytes, __u64 offset)
+				       const void *buf, unsigned nbytes,
+				       __u64 offset)
 {
 	io_uring_prep_rw(IORING_OP_WRITE, sqe, fd, buf, nbytes, offset);
 }
@@ -599,11 +737,102 @@ static inline void io_uring_prep_send(struct io_uring_sqe *sqe, int sockfd,
 	sqe->msg_flags = (__u32) flags;
 }
 
+static inline void io_uring_prep_send_zc(struct io_uring_sqe *sqe, int sockfd,
+					 const void *buf, size_t len, int flags,
+					 unsigned zc_flags)
+{
+	io_uring_prep_rw(IORING_OP_SEND_ZC, sqe, sockfd, buf, (__u32) len, 0);
+	sqe->msg_flags = (__u32) flags;
+	sqe->ioprio = zc_flags;
+}
+
+static inline void io_uring_prep_send_set_addr(struct io_uring_sqe *sqe,
+						const struct sockaddr *dest_addr,
+						__u16 addr_len)
+{
+	sqe->addr2 = (unsigned long)(void *)dest_addr;
+	sqe->addr_len = addr_len;
+}
+
 static inline void io_uring_prep_recv(struct io_uring_sqe *sqe, int sockfd,
 				      void *buf, size_t len, int flags)
 {
 	io_uring_prep_rw(IORING_OP_RECV, sqe, sockfd, buf, (__u32) len, 0);
 	sqe->msg_flags = (__u32) flags;
+}
+
+static inline void io_uring_prep_recv_multishot(struct io_uring_sqe *sqe,
+						int sockfd, void *buf,
+						size_t len, int flags)
+{
+	io_uring_prep_recv(sqe, sockfd, buf, len, flags);
+	sqe->ioprio |= IORING_RECV_MULTISHOT;
+}
+
+static inline struct io_uring_recvmsg_out *
+io_uring_recvmsg_validate(void *buf, int buf_len, struct msghdr *msgh)
+{
+	int header = msgh->msg_controllen + msgh->msg_namelen +
+				sizeof(struct io_uring_recvmsg_out);
+
+	if (buf_len < header)
+		return NULL;
+	return (struct io_uring_recvmsg_out *)buf;
+}
+
+static inline void *io_uring_recvmsg_name(struct io_uring_recvmsg_out *o)
+{
+	return (void *) &o[1];
+}
+
+static inline struct cmsghdr *
+io_uring_recvmsg_cmsg_firsthdr(struct io_uring_recvmsg_out *o,
+			       struct msghdr *msgh)
+{
+	if (o->controllen < sizeof(struct cmsghdr))
+		return NULL;
+
+	return (struct cmsghdr *)((unsigned char *) io_uring_recvmsg_name(o) +
+			msgh->msg_namelen);
+}
+
+static inline struct cmsghdr *
+io_uring_recvmsg_cmsg_nexthdr(struct io_uring_recvmsg_out *o, struct msghdr *msgh,
+			      struct cmsghdr *cmsg)
+{
+	unsigned char *end;
+
+	if (cmsg->cmsg_len < sizeof(struct cmsghdr))
+		return NULL;
+	end = (unsigned char *) io_uring_recvmsg_cmsg_firsthdr(o, msgh) +
+		o->controllen;
+	cmsg = (struct cmsghdr *)((unsigned char *) cmsg +
+			CMSG_ALIGN(cmsg->cmsg_len));
+
+	if ((unsigned char *) (cmsg + 1) > end)
+		return NULL;
+	if (((unsigned char *) cmsg) + CMSG_ALIGN(cmsg->cmsg_len) > end)
+		return NULL;
+
+	return cmsg;
+}
+
+static inline void *io_uring_recvmsg_payload(struct io_uring_recvmsg_out *o,
+					     struct msghdr *msgh)
+{
+	return (void *)((unsigned char *)io_uring_recvmsg_name(o) +
+			msgh->msg_namelen + msgh->msg_controllen);
+}
+
+static inline unsigned int
+io_uring_recvmsg_payload_length(struct io_uring_recvmsg_out *o,
+				int buf_len, struct msghdr *msgh)
+{
+	unsigned long payload_start, payload_end;
+
+	payload_start = (unsigned long) io_uring_recvmsg_payload(o, msgh);
+	payload_end = (unsigned long) o + buf_len;
+	return (unsigned int) (payload_end - payload_start);
 }
 
 static inline void io_uring_prep_openat2(struct io_uring_sqe *sqe, int dfd,
@@ -661,13 +890,26 @@ static inline void io_uring_prep_unlinkat(struct io_uring_sqe *sqe, int dfd,
 	sqe->unlink_flags = (__u32) flags;
 }
 
+static inline void io_uring_prep_unlink(struct io_uring_sqe *sqe,
+					  const char *path, int flags)
+{
+	io_uring_prep_unlinkat(sqe, AT_FDCWD, path, flags);
+}
+
 static inline void io_uring_prep_renameat(struct io_uring_sqe *sqe, int olddfd,
 					  const char *oldpath, int newdfd,
-					  const char *newpath, int flags)
+					  const char *newpath, unsigned int flags)
 {
-	io_uring_prep_rw(IORING_OP_RENAMEAT, sqe, olddfd, oldpath, (__u32) newdfd,
+	io_uring_prep_rw(IORING_OP_RENAMEAT, sqe, olddfd, oldpath,
+				(__u32) newdfd,
 				(uint64_t) (uintptr_t) newpath);
 	sqe->rename_flags = (__u32) flags;
+}
+
+static inline void io_uring_prep_rename(struct io_uring_sqe *sqe,
+					  const char *oldpath, const char *newpath)
+{
+	io_uring_prep_renameat(sqe, AT_FDCWD, oldpath, AT_FDCWD, newpath, 0);
 }
 
 static inline void io_uring_prep_sync_file_range(struct io_uring_sqe *sqe,
@@ -684,11 +926,24 @@ static inline void io_uring_prep_mkdirat(struct io_uring_sqe *sqe, int dfd,
 	io_uring_prep_rw(IORING_OP_MKDIRAT, sqe, dfd, path, mode, 0);
 }
 
+static inline void io_uring_prep_mkdir(struct io_uring_sqe *sqe,
+					const char *path, mode_t mode)
+{
+	io_uring_prep_mkdirat(sqe, AT_FDCWD, path, mode);
+}
+
 static inline void io_uring_prep_symlinkat(struct io_uring_sqe *sqe,
-					const char *target, int newdirfd, const char *linkpath)
+					   const char *target, int newdirfd,
+					   const char *linkpath)
 {
 	io_uring_prep_rw(IORING_OP_SYMLINKAT, sqe, newdirfd, target, 0,
 				(uint64_t) (uintptr_t) linkpath);
+}
+
+static inline void io_uring_prep_symlink(struct io_uring_sqe *sqe,
+					   const char *target, const char *linkpath)
+{
+	io_uring_prep_symlinkat(sqe, target, AT_FDCWD, linkpath);
 }
 
 static inline void io_uring_prep_linkat(struct io_uring_sqe *sqe, int olddfd,
@@ -700,21 +955,114 @@ static inline void io_uring_prep_linkat(struct io_uring_sqe *sqe, int olddfd,
 	sqe->hardlink_flags = (__u32) flags;
 }
 
+static inline void io_uring_prep_link(struct io_uring_sqe *sqe,
+					const char *oldpath, const char *newpath, int flags)
+{
+	io_uring_prep_linkat(sqe, AT_FDCWD, oldpath, AT_FDCWD, newpath, flags);
+}
+
+static inline void io_uring_prep_msg_ring(struct io_uring_sqe *sqe, int fd,
+					  unsigned int len, __u64 data,
+					  unsigned int flags)
+{
+	io_uring_prep_rw(IORING_OP_MSG_RING, sqe, fd, NULL, len, data);
+	sqe->rw_flags = flags;
+}
+
+static inline void io_uring_prep_getxattr(struct io_uring_sqe *sqe,
+					  const char *name,
+					  char *value,
+					  const char *path,
+					  size_t len)
+{
+	io_uring_prep_rw(IORING_OP_GETXATTR, sqe, 0, name, len,
+				(__u64) (uintptr_t) value);
+	sqe->addr3 = (__u64) (uintptr_t) path;
+	sqe->xattr_flags = 0;
+}
+
+static inline void io_uring_prep_setxattr(struct io_uring_sqe *sqe,
+					  const char *name,
+					  const char *value,
+					  const char *path,
+					  int flags,
+					  size_t len)
+{
+	io_uring_prep_rw(IORING_OP_SETXATTR, sqe, 0, name, len,
+				(__u64) (uintptr_t) value);
+	sqe->addr3 = (__u64) (uintptr_t) path;
+	sqe->xattr_flags = flags;
+}
+
+static inline void io_uring_prep_fgetxattr(struct io_uring_sqe *sqe,
+		                           int         fd,
+					   const char *name,
+					   char *value,
+					   size_t      len)
+{
+	io_uring_prep_rw(IORING_OP_FGETXATTR, sqe, fd, name, len,
+				(__u64) (uintptr_t) value);
+	sqe->xattr_flags = 0;
+}
+
+static inline void io_uring_prep_fsetxattr(struct io_uring_sqe *sqe,
+					   int         fd,
+					   const char *name,
+					   const char *value,
+					   int         flags,
+					   size_t      len)
+{
+	io_uring_prep_rw(IORING_OP_FSETXATTR, sqe, fd, name, len,
+				(__u64) (uintptr_t) value);
+	sqe->xattr_flags = flags;
+}
+
+static inline void io_uring_prep_socket(struct io_uring_sqe *sqe, int domain,
+					int type, int protocol,
+					unsigned int flags)
+{
+	io_uring_prep_rw(IORING_OP_SOCKET, sqe, domain, NULL, protocol, type);
+	sqe->rw_flags = flags;
+}
+
+static inline void io_uring_prep_socket_direct(struct io_uring_sqe *sqe,
+					       int domain, int type,
+					       int protocol,
+					       unsigned file_index,
+					       unsigned int flags)
+{
+	io_uring_prep_rw(IORING_OP_SOCKET, sqe, domain, NULL, protocol, type);
+	sqe->rw_flags = flags;
+	__io_uring_set_target_fixed_file(sqe, file_index);
+}
+
+static inline void io_uring_prep_socket_direct_alloc(struct io_uring_sqe *sqe,
+				int domain, int type, int protocol,
+				unsigned int flags)
+{
+	io_uring_prep_rw(IORING_OP_SOCKET, sqe, domain, NULL, protocol, type);
+	sqe->rw_flags = flags;
+	__io_uring_set_target_fixed_file(sqe, IORING_FILE_INDEX_ALLOC - 1);
+}
+
 /*
  * Returns number of unconsumed (if SQPOLL) or unsubmitted entries exist in
  * the SQ ring
  */
 static inline unsigned io_uring_sq_ready(const struct io_uring *ring)
 {
+	unsigned khead = *ring->sq.khead;
+
 	/*
-	 * Without a barrier, we could miss an update and think the SQ wasn't ready.
-	 * We don't need the load acquire for non-SQPOLL since then we drive updates.
+	 * Without a barrier, we could miss an update and think the SQ wasn't
+	 * ready. We don't need the load acquire for non-SQPOLL since then we
+	 * drive updates.
 	 */
 	if (ring->flags & IORING_SETUP_SQPOLL)
-		return ring->sq.sqe_tail - io_uring_smp_load_acquire(ring->sq.khead);
+		khead = io_uring_smp_load_acquire(ring->sq.khead);
 
 	/* always use real head, to avoid losing sync for short submit */
-	return ring->sq.sqe_tail - *ring->sq.khead;
+	return ring->sq.sqe_tail - khead;
 }
 
 /*
@@ -722,7 +1070,7 @@ static inline unsigned io_uring_sq_ready(const struct io_uring *ring)
  */
 static inline unsigned io_uring_sq_space_left(const struct io_uring *ring)
 {
-	return *ring->sq.kring_entries - io_uring_sq_ready(ring);
+	return ring->sq.ring_entries - io_uring_sq_ready(ring);
 }
 
 /*
@@ -748,6 +1096,15 @@ static inline int io_uring_sqring_wait(struct io_uring *ring)
 static inline unsigned io_uring_cq_ready(const struct io_uring *ring)
 {
 	return io_uring_smp_load_acquire(ring->cq.ktail) - *ring->cq.khead;
+}
+
+/*
+ * Returns true if there are overflow entries waiting to be flushed onto
+ * the CQ ring
+ */
+static inline bool io_uring_cq_has_overflow(const struct io_uring *ring)
+{
+	return IO_URING_READ_ONCE(*ring->sq.kflags) & IORING_SQ_CQ_OVERFLOW;
 }
 
 /*
@@ -801,12 +1158,62 @@ static inline int io_uring_wait_cqe_nr(struct io_uring *ring,
 }
 
 /*
+ * Internal helper, don't use directly in applications. Use one of the
+ * "official" versions of this, io_uring_peek_cqe(), io_uring_wait_cqe(),
+ * or io_uring_wait_cqes*().
+ */
+static inline int __io_uring_peek_cqe(struct io_uring *ring,
+				      struct io_uring_cqe **cqe_ptr,
+				      unsigned *nr_available)
+{
+	struct io_uring_cqe *cqe;
+	int err = 0;
+	unsigned available;
+	unsigned mask = ring->cq.ring_mask;
+	int shift = 0;
+
+	if (ring->flags & IORING_SETUP_CQE32)
+		shift = 1;
+
+	do {
+		unsigned tail = io_uring_smp_load_acquire(ring->cq.ktail);
+		unsigned head = *ring->cq.khead;
+
+		cqe = NULL;
+		available = tail - head;
+		if (!available)
+			break;
+
+		cqe = &ring->cq.cqes[(head & mask) << shift];
+		if (!(ring->features & IORING_FEAT_EXT_ARG) &&
+				cqe->user_data == LIBURING_UDATA_TIMEOUT) {
+			if (cqe->res < 0)
+				err = cqe->res;
+			io_uring_cq_advance(ring, 1);
+			if (!err)
+				continue;
+			cqe = NULL;
+		}
+
+		break;
+	} while (1);
+
+	*cqe_ptr = cqe;
+	if (nr_available)
+		*nr_available = available;
+	return err;
+}
+
+/*
  * Return an IO completion, if one is readily available. Returns 0 with
  * cqe_ptr filled in on success, -errno on failure.
  */
 static inline int io_uring_peek_cqe(struct io_uring *ring,
 				    struct io_uring_cqe **cqe_ptr)
 {
+	if (!__io_uring_peek_cqe(ring, cqe_ptr, NULL) && *cqe_ptr)
+		return 0;
+
 	return io_uring_wait_cqe_nr(ring, cqe_ptr, 0);
 }
 
@@ -817,8 +1224,104 @@ static inline int io_uring_peek_cqe(struct io_uring *ring,
 static inline int io_uring_wait_cqe(struct io_uring *ring,
 				    struct io_uring_cqe **cqe_ptr)
 {
+	if (!__io_uring_peek_cqe(ring, cqe_ptr, NULL) && *cqe_ptr)
+		return 0;
+
 	return io_uring_wait_cqe_nr(ring, cqe_ptr, 1);
 }
+
+/*
+ * Return an sqe to fill. Application must later call io_uring_submit()
+ * when it's ready to tell the kernel about it. The caller may call this
+ * function multiple times before calling io_uring_submit().
+ *
+ * Returns a vacant sqe, or NULL if we're full.
+ */
+static inline struct io_uring_sqe *_io_uring_get_sqe(struct io_uring *ring)
+{
+	struct io_uring_sq *sq = &ring->sq;
+	unsigned int head = io_uring_smp_load_acquire(sq->khead);
+	unsigned int next = sq->sqe_tail + 1;
+	int shift = 0;
+
+	if (ring->flags & IORING_SETUP_SQE128)
+		shift = 1;
+
+	if (next - head <= sq->ring_entries) {
+		struct io_uring_sqe *sqe;
+
+		sqe = &sq->sqes[(sq->sqe_tail & sq->ring_mask) << shift];
+		sq->sqe_tail = next;
+		return sqe;
+	}
+
+	return NULL;
+}
+
+/*
+ * Return the appropriate mask for a buffer ring of size 'ring_entries'
+ */
+static inline int io_uring_buf_ring_mask(__u32 ring_entries)
+{
+	return ring_entries - 1;
+}
+
+static inline void io_uring_buf_ring_init(struct io_uring_buf_ring *br)
+{
+	br->tail = 0;
+}
+
+/*
+ * Assign 'buf' with the addr/len/buffer ID supplied
+ */
+static inline void io_uring_buf_ring_add(struct io_uring_buf_ring *br,
+					 void *addr, unsigned int len,
+					 unsigned short bid, int mask,
+					 int buf_offset)
+{
+	struct io_uring_buf *buf = &br->bufs[(br->tail + buf_offset) & mask];
+
+	buf->addr = (unsigned long) (uintptr_t) addr;
+	buf->len = len;
+	buf->bid = bid;
+}
+
+/*
+ * Make 'count' new buffers visible to the kernel. Called after
+ * io_uring_buf_ring_add() has been called 'count' times to fill in new
+ * buffers.
+ */
+static inline void io_uring_buf_ring_advance(struct io_uring_buf_ring *br,
+					     int count)
+{
+	unsigned short new_tail = br->tail + count;
+
+	io_uring_smp_store_release(&br->tail, new_tail);
+}
+
+/*
+ * Make 'count' new buffers visible to the kernel while at the same time
+ * advancing the CQ ring seen entries. This can be used when the application
+ * is using ring provided buffers and returns buffers while processing CQEs,
+ * avoiding an extra atomic when needing to increment both the CQ ring and
+ * the ring buffer index at the same time.
+ */
+static inline void io_uring_buf_ring_cq_advance(struct io_uring *ring,
+						struct io_uring_buf_ring *br,
+						int count)
+{
+	br->tail += count;
+	io_uring_cq_advance(ring, count);
+}
+
+#ifndef LIBURING_INTERNAL
+static inline struct io_uring_sqe *io_uring_get_sqe(struct io_uring *ring)
+{
+	return _io_uring_get_sqe(ring);
+}
+#else
+struct io_uring_sqe *io_uring_get_sqe(struct io_uring *ring);
+#endif
 
 ssize_t io_uring_mlock_size(unsigned entries, unsigned flags);
 ssize_t io_uring_mlock_size_params(unsigned entries, struct io_uring_params *p);

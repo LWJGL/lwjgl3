@@ -1,9 +1,5 @@
 /* SPDX-License-Identifier: MIT */
 
-#ifndef __INTERNAL__LIBURING_SYSCALL_H
-	#error "This file should be included from src/syscall.h (liburing)"
-#endif
-
 #ifndef LIBURING_ARCH_X86_SYSCALL_H
 #define LIBURING_ARCH_X86_SYSCALL_H
 
@@ -140,79 +136,160 @@
 	rax;								\
 })
 
-static inline void *__sys_mmap(void *addr, size_t length, int prot, int flags,
-			       int fd, off_t offset)
-{
-	return (void *) __do_syscall6(__NR_mmap, addr, length, prot, flags, fd,
-				      offset);
-}
-
-static inline int __sys_munmap(void *addr, size_t length)
-{
-	return (int) __do_syscall2(__NR_munmap, addr, length);
-}
-
-static inline int __sys_madvise(void *addr, size_t length, int advice)
-{
-	return (int) __do_syscall3(__NR_madvise, addr, length, advice);
-}
-
-static inline int __sys_getrlimit(int resource, struct rlimit *rlim)
-{
-	return (int) __do_syscall2(__NR_getrlimit, resource, rlim);
-}
-
-static inline int __sys_setrlimit(int resource, const struct rlimit *rlim)
-{
-	return (int) __do_syscall2(__NR_setrlimit, resource, rlim);
-}
-
-static inline int __sys_close(int fd)
-{
-	return (int) __do_syscall1(__NR_close, fd);
-}
-
-static inline int ____sys_io_uring_register(int fd, unsigned opcode,
-					    const void *arg, unsigned nr_args)
-{
-	return (int) __do_syscall4(__NR_io_uring_register, fd, opcode, arg,
-				   nr_args);
-}
-
-static inline int ____sys_io_uring_setup(unsigned entries,
-					 struct io_uring_params *p)
-{
-	return (int) __do_syscall2(__NR_io_uring_setup, entries, p);
-}
-
-static inline int ____sys_io_uring_enter2(int fd, unsigned to_submit,
-					  unsigned min_complete, unsigned flags,
-					  sigset_t *sig, int sz)
-{
-	return (int) __do_syscall6(__NR_io_uring_enter, fd, to_submit,
-				   min_complete, flags, sig, sz);
-}
-
-static inline int ____sys_io_uring_enter(int fd, unsigned to_submit,
-					 unsigned min_complete, unsigned flags,
-					 sigset_t *sig)
-{
-	return ____sys_io_uring_enter2(fd, to_submit, min_complete, flags, sig,
-				       _NSIG / 8);
-}
+#include "../syscall-defs.h"
 
 #else /* #if defined(__x86_64__) */
 
-/*
- * For x86 (32-bit), fallback to libc wrapper.
- * We can't use CONFIG_NOLIBC for x86 (32-bit) at the moment.
- *
- * TODO: Add x86 (32-bit) nolibc support.
- */
 #ifdef CONFIG_NOLIBC
-	#error "x86 (32-bit) is currently not supported for nolibc builds"
-#endif
+/**
+ * Note for syscall registers usage (x86, 32-bit):
+ *   - %eax is the syscall number.
+ *   - %eax is also the return value.
+ *   - %ebx is the 1st argument.
+ *   - %ecx is the 2nd argument.
+ *   - %edx is the 3rd argument.
+ *   - %esi is the 4th argument.
+ *   - %edi is the 5th argument.
+ *   - %ebp is the 6th argument.
+ */
+
+#define __do_syscall0(NUM) ({			\
+	intptr_t eax;				\
+						\
+	__asm__ volatile(			\
+		"int	$0x80"			\
+		: "=a"(eax)	/* %eax */	\
+		: "a"(NUM)	/* %eax */	\
+		: "memory"			\
+	);					\
+	eax;					\
+})
+
+#define __do_syscall1(NUM, ARG1) ({		\
+	intptr_t eax;				\
+						\
+	__asm__ volatile(			\
+		"int	$0x80"			\
+		: "=a"(eax)	/* %eax */	\
+		: "a"(NUM),	/* %eax */	\
+		  "b"((ARG1))	/* %ebx */	\
+		: "memory"			\
+	);					\
+	eax;					\
+})
+
+#define __do_syscall2(NUM, ARG1, ARG2) ({	\
+	intptr_t eax;				\
+						\
+	__asm__ volatile(			\
+		"int	$0x80"			\
+		: "=a" (eax)	/* %eax */	\
+		: "a"(NUM),	/* %eax */	\
+		  "b"((ARG1)),	/* %ebx */	\
+		  "c"((ARG2))	/* %ecx */	\
+		: "memory"			\
+	);					\
+	eax;					\
+})
+
+#define __do_syscall3(NUM, ARG1, ARG2, ARG3) ({	\
+	intptr_t eax;				\
+						\
+	__asm__ volatile(			\
+		"int	$0x80"			\
+		: "=a" (eax)	/* %eax */	\
+		: "a"(NUM),	/* %eax */	\
+		  "b"((ARG1)),	/* %ebx */	\
+		  "c"((ARG2)),	/* %ecx */	\
+		  "d"((ARG3))	/* %edx */	\
+		: "memory"			\
+	);					\
+	eax;					\
+})
+
+#define __do_syscall4(NUM, ARG1, ARG2, ARG3, ARG4) ({	\
+	intptr_t eax;					\
+							\
+	__asm__ volatile(				\
+		"int	$0x80"				\
+		: "=a" (eax)	/* %eax */		\
+		: "a"(NUM),	/* %eax */		\
+		  "b"((ARG1)),	/* %ebx */		\
+		  "c"((ARG2)),	/* %ecx */		\
+		  "d"((ARG3)),	/* %edx */		\
+		  "S"((ARG4))	/* %esi */		\
+		: "memory"				\
+	);						\
+	eax;						\
+})
+
+#define __do_syscall5(NUM, ARG1, ARG2, ARG3, ARG4, ARG5) ({	\
+	intptr_t eax;						\
+								\
+	__asm__ volatile(					\
+		"int	$0x80"					\
+		: "=a" (eax)	/* %eax */			\
+		: "a"(NUM),	/* %eax */			\
+		  "b"((ARG1)),	/* %ebx */			\
+		  "c"((ARG2)),	/* %ecx */			\
+		  "d"((ARG3)),	/* %edx */			\
+		  "S"((ARG4)),	/* %esi */			\
+		  "D"((ARG5))	/* %edi */			\
+		: "memory"					\
+	);							\
+	eax;							\
+})
+
+
+/*
+ * On i386, the 6th argument of syscall goes in %ebp. However, both Clang
+ * and GCC cannot use %ebp in the clobber list and in the "r" constraint
+ * without using -fomit-frame-pointer. To make it always available for
+ * any kind of compilation, the below workaround is implemented:
+ *
+ *  1) Push the 6-th argument.
+ *  2) Push %ebp.
+ *  3) Load the 6-th argument from 4(%esp) to %ebp.
+ *  4) Do the syscall (int $0x80).
+ *  5) Pop %ebp (restore the old value of %ebp).
+ *  6) Add %esp by 4 (undo the stack pointer).
+ *
+ * WARNING:
+ *   Don't use register variables for __do_syscall6(), there is a known
+ *   GCC bug that results in an endless loop.
+ *
+ * BugLink: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105032
+ *
+ */
+#define __do_syscall6(NUM, ARG1, ARG2, ARG3, ARG4, ARG5, ARG6) ({	\
+	intptr_t eax  = (intptr_t)(NUM);				\
+	intptr_t arg6 = (intptr_t)(ARG6); /* Always in memory */	\
+	__asm__ volatile (						\
+		"pushl	%[_arg6]\n\t"					\
+		"pushl	%%ebp\n\t"					\
+		"movl	4(%%esp),%%ebp\n\t"				\
+		"int	$0x80\n\t"					\
+		"popl	%%ebp\n\t"					\
+		"addl	$4,%%esp"					\
+		: "+a"(eax)		/* %eax */			\
+		: "b"(ARG1),		/* %ebx */			\
+		  "c"(ARG2),		/* %ecx */			\
+		  "d"(ARG3),		/* %edx */			\
+		  "S"(ARG4),		/* %esi */			\
+		  "D"(ARG5),		/* %edi */			\
+		  [_arg6]"m"(arg6)	/* memory */			\
+		: "memory", "cc"					\
+	);								\
+	eax;								\
+})
+
+#include "../syscall-defs.h"
+
+#else /* #ifdef CONFIG_NOLIBC */
+
 #include "../generic/syscall.h"
+
+#endif /* #ifdef CONFIG_NOLIBC */
 
 #endif /* #if defined(__x86_64__) */
 

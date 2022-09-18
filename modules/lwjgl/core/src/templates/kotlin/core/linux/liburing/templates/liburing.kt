@@ -9,7 +9,10 @@ import core.linux.*
 import core.linux.liburing.*
 
 val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath = "linux", prefixConstant = "", prefixMethod = "io_uring_") {
-    nativeImport("liburing.h")
+    nativeDirective(
+        """DISABLE_WARNINGS()
+#include "liburing.h"
+ENABLE_WARNINGS()""")
     javaImport("org.lwjgl.system.linux.*")
 
     documentation =
@@ -212,19 +215,6 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         returnDoc = "the number of submitted submission queue entries on success. On failure it returns {@code -errno}."
     )
 
-    io_uring_sqe.p(
-        "get_sqe",
-        """
-        Gets the next available submission queue entry from the submission queue belonging to the {@code ring} param.
-
-        If a submission queue event is returned, it should be filled out via one of the prep functions such as #prep_read() and submitted via #submit().
-        """,
-
-        io_uring.p("ring", ""),
-
-        returnDoc = "a pointer to the next submission queue event on success and #NULL on failure"
-    )
-
     int(
         "register_buffers",
         """
@@ -252,6 +242,24 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         iovec.const.p("iovecs", ""),
         __u64.const.p("tags", ""),
         AutoSize("iovecs", "tags")..unsigned("nr", "")
+    )
+
+    int(
+        "register_buffers_sparse",
+        """
+        Registers {@code nr_iovecs} empty buffers belonging to the {@code ring}.
+
+        These buffers must be updated before use, using eg #register_buffers_update_tag().
+
+        After the caller has registered the buffers, they can be used with one of the fixed buffers functions.
+
+        Registered buffers is an optimization that is useful in conjunction with {@code O_DIRECT} reads and writes, where it maps the specified range into the
+        kernel once when the buffer is registered rather than doing a map and unmap for each IO every time IO is performed to that region. Additionally, it
+        also avoids manipulating the page reference counts for each IO.
+        """,
+
+        io_uring.p("ring", ""),
+        unsigned("nr_iovecs", "")
     )
 
     int(
@@ -300,6 +308,20 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
     )
 
     int(
+        "register_files_sparse",
+        """
+        Registers an empty file table of {@code nr_files} number of file descriptors.
+
+        Registering a file table is a prerequisite for using any request that uses direct descriptors.
+        
+        The sparse variant is available in kernels 5.19 and later.
+        """,
+
+        io_uring.p("ring", ""),
+        unsigned("nr_files", "")
+    )
+
+    int(
         "register_files_update_tag",
         "",
 
@@ -323,7 +345,7 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
 
         io_uring.p("ring", ""),
         unsigned("off", ""),
-        int.p("files", ""),
+        int.const.p("files", ""),
         AutoSize("files")..unsigned("nr_files", "")
     )
 
@@ -421,6 +443,212 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
 
         io_uring.p("ring", ""),
         Check(2)..unsigned_int.p("values", "")
+    )
+
+    int(
+        "register_ring_fd",
+        """
+        Registers the file descriptor of the ring.
+
+        Whenever #enter() is called to submit request or wait for completions, the kernel must grab a reference to the file descriptor. If the application
+        using io_uring is threaded, the file table is marked as shared, and the reference grab and put of the file descriptor count is more expensive than it
+        is for a non-threaded application.
+
+        Similarly to how io_uring allows registration of files, this allow registration of the ring file descriptor itself. This reduces the overhead of the
+        {@code io_uring_enter (2)} system call.
+
+        If an application using liburing is threaded, then an application should call this function to register the ring descriptor when a ring is set up. See
+        NOTES for restrictions when a ring is shared.
+
+        ${note("""
+        When the ring descriptor is registered, it is stored internally in the {@code struct io_uring} structure. For applications that share a ring between
+        threads, for example having one thread do submits and another reap events, then this optimization cannot be used as each thread may have a different
+        index for the registered ring fd.
+        """)}
+        """,
+
+        io_uring.p("ring", ""),
+
+        returnDoc = "1 on success, indicating that one file descriptor was registered, or {@code -errno} on error"
+    )
+
+    int(
+        "unregister_ring_fd",
+        """
+        Unregisters the file descriptor of the ring.
+
+        Unregisters a ring descriptor previously registered with the task. This is done automatically when #queue_exit() is called, but can also be done to
+        free up space for new ring registrations. For more information on ring descriptor registration, see #register_ring_fd().
+        """,
+
+        io_uring.p("ring", ""),
+
+        returnDoc = "1 on success, indicating that one file descriptor was unregistered, or {@code -errno} on error"
+    )
+
+    int(
+        "register_buf_ring",
+        """
+        Registers a shared buffer ring to be used with provided buffers.
+        
+        For the request types that support it, provided buffers are given to the ring and one is selected by a request if it has #IOSQE_BUFFER_SELECT set in
+        the SQE {@code flags}, when the request is ready to receive data. This allows both clear ownership of the buffer lifetime, and a way to have more
+        read/receive type of operations in flight than buffers available.
+
+        The {@code reg} argument must be filled in with the appropriate information. It looks as follows:
+        ${codeBlock("""
+struct io_uring_buf_reg {
+    __u64 ring_addr;
+    __u32 ring_entries;
+    __u16 bgid;
+    __u16 pad;
+    __u64 resv[3];
+};""")}
+
+        The {@code ring_addr} field must contain the address to the memory allocated to fit this ring. The memory must be page aligned and hence allocated
+        appropriately using eg {@code posix_memalign (3)} or similar. The size of the ring is the product of {@code ring_entries} and the size of
+        {@code "struct io_uring_buf"}. {@code ring_entries} is the desired size of the ring, and must be a power-of-2 in size. {@code bgid} is the buffer group
+        ID associated with this ring. SQEs that select a buffer has a buffer group associated with them in their {@code buf_group} field, and the associated
+        CQE will have LibIOURing#IORING_CQE_F_BUFFER set in their {@code flags} member, which will also contain the specific ID of the buffer selected. The
+        rest of the fields are reserved and must be cleared to zero.
+
+        The {@code flags} argument is currently unused and must be set to zero.
+
+        A shared buffer ring looks as follows:
+        ${codeBlock("""
+struct io_uring_buf_ring {
+    union {
+	struct {
+            __u64 resv1;
+            __u32 resv2;
+            __u16 resv3;
+            __u16 tail;
+	};
+	struct io_uring_buf bufs[0];
+    };
+};""")}
+
+        where {@code tail} is the index at which the application can insert new buffers for consumption by requests, and {@code struct io_uring_buf} is buffer
+        definition:
+        ${codeBlock("""
+struct io_uring_buf {
+    __u64 addr;
+    __u32 len;
+    __u16 bid;
+    __u16 resv;
+};""")}
+
+        where {@code addr} is the address for the buffer, {@code len} is the length of the buffer in bytes, and {@code bid} is the buffer ID that will be
+        returned in the CQE once consumed.
+
+        Reserved fields must not be touched. Applications must use LibURing#io_uring_buf_ring_init() to initialise the buffer ring. Applications may use
+        LibURing#io_uring_buf_ring_add() and #buf_ring_advance() or #buf_ring_advance() to provide buffers, which will set these fields and update the tail.
+
+        Available since 5.19.
+        """,
+
+        io_uring.p("ring", ""),
+        io_uring_buf_reg.p("reg", ""),
+        unsigned_int("flags", ""),
+
+        returnDoc = "0 on success, {@code -errno} on failure"
+    )
+
+    int(
+        "unregister_buf_ring",
+        "Function unregisters a previously registered shared buffer ring indicated by {@code bgid}.",
+
+        io_uring.p("ring", ""),
+        int("bgid", ""),
+
+        returnDoc = "0 on success, {@code -errno} on failure"
+    )
+
+    int(
+        "register_sync_cancel",
+        "",
+
+        io_uring.p("ring", ""),
+        io_uring_sync_cancel_reg.p("reg", "")
+    )
+
+    int(
+        "register_file_alloc_range",
+        "",
+
+        io_uring.p("ring", ""),
+        unsigned("off", ""),
+        unsigned("len", "")
+    )
+
+    int(
+        "get_events",
+        """
+        Runs outstanding work and flushes completion events to the CQE ring.
+
+        There can be events needing to be flushed if the ring was full and had overflowed. Alternatively if the ring was setup with the #SETUP_DEFER_TASKRUN
+        flag then this will process outstanding tasks, possibly resulting in more CQEs.
+        """,
+
+        io_uring.p("ring", ""),
+
+        returnDoc = "0 on success, {@code -errno} on failure"
+    )
+
+    int(
+        "submit_and_get_events",
+        """
+        Submits the next events to the submission queue as with #submit().
+
+        After submission it will flush CQEs as with #get_events().
+
+        The benefit of this function is that it does both with only one system call.
+        """,
+
+        io_uring.p("ring", ""),
+
+        returnDoc = "the number of submitted submission queue entries on success, {@code -errno} on failure"
+    )
+
+    int(
+        "enter",
+        "See LibIOURing#io_uring_enter().",
+
+        unsigned_int("fd", ""),
+        unsigned_int("to_submit", ""),
+        unsigned_int("min_complete", ""),
+        unsigned_int("flags", ""),
+        sigset_t.p("sig", "")
+    )
+
+    int(
+        "enter2",
+        "See LibIOURing#io_uring_enter2().",
+
+        unsigned_int("fd", ""),
+        unsigned_int("to_submit", ""),
+        unsigned_int("min_complete", ""),
+        unsigned_int("flags", ""),
+        sigset_t.p("sig", ""),
+        size_t("sz", "")
+    )
+
+    int(
+        "setup",
+        "See LibIOURing#io_uring_setup().",
+
+        unsigned_int("entries", ""),
+        io_uring_params.p("p", "")
+    )
+
+    int(
+        "register",
+        "See LibIOURing#io_uring_register().",
+
+        unsigned_int("fd", ""),
+        unsigned_int("opcode", ""),
+        nullable..opaque_p("arg", ""),
+        unsigned_int("nr_args", "")
     )
 
     void(
@@ -702,6 +930,16 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
     )
 
     void(
+        "prep_recvmsg_multishot",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        msghdr.p("msg", ""),
+        unsigned("flags", "")
+    )
+
+    void(
         "prep_sendmsg",
         "",
 
@@ -817,12 +1055,52 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
     )
 
     void(
-        "prep_cancel",
+        "prep_multishot_accept",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        sockaddr.p("addr", ""),
+        Check(1)..socklen_t.p("addrlen", ""),
+        int("flags", "")
+    )
+
+    void(
+        "prep_multishot_accept_direct",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        sockaddr.p("addr", ""),
+        Check(1)..socklen_t.p("addrlen", ""),
+        int("flags", ""),
+    )
+
+    void(
+        "prep_cancel64",
         "",
 
         io_uring_sqe.p("sqe", ""),
         __u64("user_data", ""),
+        int("flags", "")
+    )
+
+    void(
+        "prep_cancel",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        opaque_p("user_data", ""),
         int("flags", "") // TODO:
+    )
+
+    void(
+        "prep_cancel_fd",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        unsigned_int("flags", "")
     )
 
     void(
@@ -995,6 +1273,27 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
     )
 
     void(
+        "prep_send_zc",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("sockfd", ""),
+        void.const.p("buf", ""),
+        AutoSize("buf")..size_t("len", ""),
+        int("flags", ""),
+        unsigned("zc_flags", "")
+    )
+
+    void(
+        "prep_send_set_addr",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        sockaddr.const.p("dest_addr", ""),
+        __u16("addr_len", "")
+    )
+
+    void(
         "prep_recv",
         "",
 
@@ -1003,6 +1302,67 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         void.p("buf", ""),
         AutoSize("buf")..size_t("len", ""),
         int("flags", "")
+    )
+
+    void(
+        "prep_recv_multishot",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("sockfd", ""),
+        void.p("buf", ""),
+        AutoSize("buf")..size_t("len", ""),
+        int("flags", "")
+    )
+
+    io_uring_recvmsg_out.p(
+        "recvmsg_validate",
+        "",
+
+        void.p("buf", ""),
+        AutoSize("buf")..int("buf_len", ""),
+        msghdr.p("msgh", "")
+    )
+
+    opaque_p(
+        "recvmsg_name",
+        "",
+
+        io_uring_recvmsg_out.p("o", "")
+    )
+
+    cmsghdr.p(
+        "recvmsg_cmsg_firsthdr",
+        "",
+
+        io_uring_recvmsg_out.p("o", ""),
+        msghdr.p("msgh", "")
+    )
+
+    cmsghdr.p(
+        "recvmsg_cmsg_nexthdr",
+        "",
+
+        io_uring_recvmsg_out.p("o", ""),
+        msghdr.p("msgh", ""),
+        cmsghdr.p("cmsg", "")
+    )
+
+    opaque_p(
+        "recvmsg_payload",
+        "",
+
+        io_uring_recvmsg_out.p("o", ""),
+        msghdr.p("msgh", "")
+    )
+
+    unsigned_int(
+        "recvmsg_payload_length",
+        "",
+
+        io_uring_recvmsg_out.p("o", ""),
+        int("buf_len", ""),
+        msghdr.p("msgh", "")
     )
 
     void(
@@ -1078,6 +1438,15 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
     )
 
     void(
+        "prep_unlink",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        charUTF8.const.p("path", ""),
+        int("flags", "")
+    )
+
+    void(
         "prep_renameat",
         "",
 
@@ -1086,7 +1455,16 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         charUTF8.const.p("oldpath", ""),
         int("newdfd", ""),
         charUTF8.const.p("newpath", ""),
-        int("flags", "") // TODO:
+        unsigned_int("flags", "") // TODO:
+    )
+
+    void(
+        "prep_rename",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        charUTF8.const.p("oldpath", ""),
+        charUTF8.const.p("newpath", "")
     )
 
     void(
@@ -1111,12 +1489,30 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
     )
 
     void(
+        "prep_mkdir",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        charUTF8.const.p("path", ""),
+        int("mode", "") // TODO:
+    )
+
+    void(
         "prep_symlinkat",
         "",
 
         io_uring_sqe.p("sqe", ""),
         charUTF8.const.p("target", ""),
         int("newdirfd", ""),
+        charUTF8.const.p("linkpath", "")
+    )
+
+    void(
+        "prep_symlink",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        charUTF8.const.p("target", ""),
         charUTF8.const.p("linkpath", "")
     )
 
@@ -1132,24 +1528,106 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         int("flags", "") // TODO:
     )
 
-    // TODO: add readdir(3)
-    /*void(
-        "prep_getdents",
-        """
-        Prepares a {@code getdents64} request.
+    void(
+        "prep_link",
+        "",
 
-        The submission queue entry {@code sqe} is setup to use the file descriptor {@code fd} to start writing up to {@code count} bytes into the buffer
-        {@code buf} starting at {@code offset}.
+        io_uring_sqe.p("sqe", ""),
+        charUTF8.const.p("oldpath", ""),
+        charUTF8.const.p("newpath", ""),
+        int("flags", "") // TODO:
+    )
 
-        After the {@code getdents} call has been prepared it can be submitted with one of the submit functions.
-        """,
+    void(
+        "prep_msg_ring",
+        "",
 
         io_uring_sqe.p("sqe", ""),
         int("fd", ""),
-        void.p("buf", ""),
-        AutoSize("buf")..unsigned_int("count", ""),
-        uint64_t("offset", "")
-    )*/
+        unsigned_int("len", ""),
+        __u64("data", ""),
+        unsigned_int("flags", "") // TODO:
+    )
+
+    void(
+        "prep_getxattr",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        charUTF8.const.p("name", ""),
+        char.p("value", ""),
+        charUTF8.const.p("path", ""),
+        AutoSize("value")..size_t("len", "")
+    )
+
+    void(
+        "prep_setxattr",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        charUTF8.const.p("name", ""),
+        char.const.p("value", ""),
+        charUTF8.const.p("path", ""),
+        int("flags", ""),
+        AutoSize("value")..size_t("len", "")
+    )
+
+    void(
+        "prep_fgetxattr",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        charUTF8.const.p("name", ""),
+        char.p("value", ""),
+        AutoSize("value")..size_t("len", "")
+    )
+
+    void(
+        "prep_fsetxattr",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        charUTF8.const.p("name", ""),
+        char.const.p("value", ""),
+        int("flags", ""),
+        AutoSize("value")..size_t("len", "")
+    )
+
+    void(
+        "prep_socket",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("domain", ""),
+        int("type", ""),
+        int("protocol", ""),
+        unsigned_int("flags", "") // TODO:
+    )
+
+    void(
+        "prep_socket_direct",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("domain", ""),
+        int("type", ""),
+        int("protocol", ""),
+        unsigned_int("file_index", ""),
+        unsigned_int("flags", "") // TODO:
+    )
+
+    void(
+        "prep_socket_direct_alloc",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("domain", ""),
+        int("type", ""),
+        int("protocol", ""),
+        unsigned_int("flags", "") // TODO:
+    )
 
     unsigned_int(
         "sq_ready",
@@ -1182,6 +1660,13 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
     unsigned_int(
         "cq_ready",
         "Retuns the number of unconsumed entries that are ready belonging to the {@code ring} param.",
+
+        io_uring.const.p("ring", "")
+    )
+
+    bool(
+        "cq_has_overflow",
+        "Returns true if there are overflow entries waiting to be flushed onto the CQ ring",
 
         io_uring.const.p("ring", "")
     )
@@ -1240,6 +1725,54 @@ val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath 
         Check(1)..io_uring_cqe.p.p("cqe_ptr", ""),
 
         returnDoc = "0 on success and the {@code cqe_ptr} param is filled in. On failure it returns {@code -errno}."
+    )
+
+    customMethod("""
+    /** Return the appropriate mask for a buffer ring of size {@code ring_entries} */
+    public static int io_uring_buf_ring_mask(@NativeType("__u32") int ring_entries) {
+        return ring_entries - 1;
+    }
+
+    public static void io_uring_buf_ring_init(@NativeType("struct io_uring_buf_ring *") IOURingBufRing br) {
+        br.tail((short)0);
+    }
+
+    public static void io_uring_buf_ring_add(@NativeType("struct io_uring_buf_ring *") IOURingBufRing br, @NativeType("void *") ByteBuffer addr, @NativeType("unsigned short") short bid, int mask, int buf_offset) {
+        IOURingBuf buf = br.bufs((br.tail() + buf_offset) & mask);
+
+        buf.addr(memAddress(addr));
+        buf.len(addr.remaining());
+        buf.bid(bid);
+    }""")
+
+    void(
+        "buf_ring_advance",
+        "",
+
+        io_uring_buf_ring.p("br", ""),
+        int("count", "")
+    )
+
+    void(
+        "buf_ring_cq_advance",
+        "",
+
+        io_uring.p("ring", ""),
+        io_uring_buf_ring.p("br", ""),
+        int("count", "")
+    )
+
+    io_uring_sqe.p(
+        "get_sqe",
+        """
+        Gets the next available submission queue entry from the submission queue belonging to the {@code ring} param.
+
+        If a submission queue event is returned, it should be filled out via one of the prep functions such as #prep_read() and submitted via #submit().
+        """,
+
+        io_uring.p("ring", ""),
+
+        returnDoc = "a pointer to the next submission queue event on success and #NULL on failure"
     )
 
     int(

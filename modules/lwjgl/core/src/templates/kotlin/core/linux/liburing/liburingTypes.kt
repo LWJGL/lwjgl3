@@ -25,6 +25,10 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
     union {
         __u64("off", "offset into file")
         __u64("addr2", "")
+        struct {
+            __u32("cmd_op", "")
+            __u32("__pad1", "").private()
+        }
     }
     union {
         __u64("addr", "pointer to buffer or {@code iovecs}")
@@ -58,6 +62,8 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
         __u32("rename_flags", "")
         __u32("unlink_flags", "")
         __u32("hardlink_flags", "")
+        __u32("xattr_flags", "")
+        __u32("msg_ring_flags", "")
     }
     __u64("user_data", "an application-supplied value that will be copied into the completion queue entry")
     union {
@@ -75,8 +81,18 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
     union {
         __s32("splice_fd_in", "")
         __u32("file_index", "")
+        struct {
+            __u16("addr_len", "")
+            __u16("__pad3", "")[1].private()
+        }
     }
-    __u64("__pad2", "")[2].private()
+    union {
+		struct {
+			__u64("addr3", "")
+			__u64("__pad2", "")[1].private()
+		}
+		__u8("cmd", "If the ring is initialized with #SETUP_SQE128, then this field is used for 80 bytes of arbitrary command data")[0]
+	}
 }
 
 val io_uring_cqe = struct(Module.CORE_LINUX_LIBURING, "IOURingCQE", nativeName = "struct io_uring_cqe") {
@@ -102,6 +118,10 @@ val io_uring_cqe = struct(Module.CORE_LINUX_LIBURING, "IOURingCQE", nativeName =
         """
     )
     __u32("flags", "is used for certain commands, like #OP_POLL_ADD or in conjunction with #IOSQE_BUFFER_SELECT, see those entries")
+	__u64(
+        "big_cqe",
+        "If the ring is initialized with #SETUP_CQE32, then this field contains 16-bytes of padding, doubling the size of the CQE."
+    )[0]
 }
 
 val io_sqring_offsets = struct(Module.CORE_LINUX_LIBURING, "IOSQRingOffsets", nativeName = "struct io_sqring_offsets") {
@@ -198,17 +218,17 @@ index = tail & ring_mask;""")}
 
 val io_uring_rsrc_register = struct(Module.CORE_LINUX_LIBURING, "IOURingRSRCRegister", nativeName = "struct io_uring_rsrc_register") {
     __u32("nr", "")
-    __u32("resv", "")
+    __u32("flags", "")
     __u64("resv2", "")
     __u64("data", "")
     __u64("tags", "")
-};
+}
 
 val io_uring_rsrc_update = struct(Module.CORE_LINUX_LIBURING, "IOURingRSRCUpdate", nativeName = "struct io_uring_rsrc_update") {
     __u32("offset", "")
     __u32("resv", "")
     __u64("data", "")
-};
+}
 
 val io_uring_rsrc_update2 = struct(Module.CORE_LINUX_LIBURING, "IOURingRSRCUpdate2", nativeName = "struct io_uring_rsrc_update2") {
     __u32("offset", "")
@@ -217,14 +237,27 @@ val io_uring_rsrc_update2 = struct(Module.CORE_LINUX_LIBURING, "IOURingRSRCUpdat
     __u64("tags", "")
     __u32("nr", "")
     __u32("resv2", "")
-};
+}
+
+val io_uring_notification_slot = struct(Module.CORE_LINUX_LIBURING, "IOUringNotificationSlot", nativeName = "struct io_uring_notification_slot") {
+    __u64("tag", "")
+    __u64("resv", "")[3]
+}
+
+val io_uring_notification_register = struct(Module.CORE_LINUX_LIBURING, "IOUringNotificationRegister", nativeName = "struct io_uring_notification_register") {
+    __u32("nr_slots", "")
+    __u32("resv", "")
+    __u64("resv2", "")
+    __u64("data", "")
+    __u64("resv3", "")
+}
 
 val io_uring_probe_op = struct(Module.CORE_LINUX_LIBURING, "IOURingProbeOp", nativeName = "struct io_uring_probe_op") {
     __u8("op", "")
     __u8("resv", "")
     __u16("flags", "").links("IO_URING_OP_\\w+", LinkMode.BITFIELD)
     __u32("resv2", "")
-};
+}
 
 val io_uring_probe = struct(Module.CORE_LINUX_LIBURING, "IOURingProbe", nativeName = "struct io_uring_probe") {
     __u8("last_op", "")	/* last opcode supported */
@@ -232,7 +265,7 @@ val io_uring_probe = struct(Module.CORE_LINUX_LIBURING, "IOURingProbe", nativeNa
     __u16("resv", "")
     __u32("resv2", "")[3].private()
     io_uring_probe_op("ops", "")[0]
-};
+}
 
 val io_uring_restriction = struct(Module.CORE_LINUX_LIBURING, "IOURingRestriction", nativeName = "struct io_uring_restriction")  {
     __u16("opcode", "")
@@ -240,9 +273,38 @@ val io_uring_restriction = struct(Module.CORE_LINUX_LIBURING, "IOURingRestrictio
         __u8("register_op", "")
         __u8("sqe_op", "")
         __u8("sqe_flags", "")
-    };
+    }
     __u8("resv", "").private()
     __u32("resv2", "")[3].private()
+}
+
+val io_uring_buf = struct(Module.CORE_LINUX_LIBURING, "IOURingBuf", nativeName = "struct io_uring_buf") {
+	__u64("addr", "")
+	__u32("len", "")
+	__u16("bid", "")
+	__u16("resv", "")
+}
+
+val io_uring_buf_ring = struct(Module.CORE_LINUX_LIBURING, "IOURingBufRing", nativeName = "struct io_uring_buf_ring") {
+	union {
+		struct {
+			__u64("resv1", "")
+			__u32("resv2", "")
+			__u16("resv3", "")
+			__u16("tail", "")
+		}
+		io_uring_buf("bufs", "")[0]
+	}
+}
+
+val io_uring_buf_reg = struct(Module.CORE_LINUX_LIBURING, "IOURingBufReg", nativeName = "struct io_uring_buf_reg") {
+    documentation = "Argument for {@code IORING_(UN)REGISTER_PBUF_RING}."
+
+    __u64("ring_addr", "")
+	__u32("ring_entries", "")
+	__u16("bgid", "")
+	__u16("pad", "")
+	__u64("resv", "")[3]
 }
 
 val io_uring_getevents_arg = struct(Module.CORE_LINUX_LIBURING, "IOURingGeteventsArg", nativeName = "struct io_uring_getevents_arg") {
@@ -252,6 +314,37 @@ val io_uring_getevents_arg = struct(Module.CORE_LINUX_LIBURING, "IOURingGetevent
     __u64("ts", "")
 }
 
+val io_uring_sync_cancel_reg = struct(Module.CORE_LINUX_LIBURING, "IOURingSyncCancelReg", nativeName = "struct io_uring_sync_cancel_reg") {
+    javaImport("org.lwjgl.system.linux.*")
+    documentation = "Argument for #REGISTER_SYNC_CANCEL."
+
+    __u64("addr", "")
+    __s32("fd", "")
+    __u32("flags", "")
+    __kernel_timespec("timeout", "")
+    __u64("pad", "")[4].private()
+}
+
+val io_uring_file_index_range = struct(Module.CORE_LINUX_LIBURING, "IOURingFileIndexRange", nativeName = "struct io_uring_file_index_range") {
+    documentation =
+        """
+        Argument for #REGISTER_FILE_ALLOC_RANGE.
+
+        The range is specified as {@code [off, off + len)}.
+        """
+
+    __u32("off", "")
+    __u32("len", "")
+    __u64("resv", "")
+}
+
+val io_uring_recvmsg_out = struct(Module.CORE_LINUX_LIBURING, "IOURingRecvmsgOut", nativeName = "struct io_uring_recvmsg_out") {
+    __u32("namelen", "")
+    __u32("controllen", "")
+    __u32("payloadlen", "")
+    __u32("flags", "")
+}
+
 // liburing.h
 
 val io_uring_sq = struct(Module.CORE_LINUX_LIBURING, "IOURingSQ", nativeName = "struct io_uring_sq") {
@@ -259,8 +352,8 @@ val io_uring_sq = struct(Module.CORE_LINUX_LIBURING, "IOURingSQ", nativeName = "
 
     unsigned.p("khead", "")
     unsigned.p("ktail", "")
-    unsigned.p("kring_mask", "")
-    unsigned.p("kring_entries", "")
+    unsigned.p("kring_mask", "Deprecated: use {@code ring_mask} instead of {@code *kring_mask}")
+    unsigned.p("kring_entries", "Deprecated: use {@code ring_entries} instead of {@code *kring_entries}")
     unsigned.p("kflags", "")
     unsigned.p("kdropped", "")
     unsigned.p("array", "")
@@ -272,7 +365,10 @@ val io_uring_sq = struct(Module.CORE_LINUX_LIBURING, "IOURingSQ", nativeName = "
     AutoSize("ring_ptr")..size_t("ring_sz", "")
     void.p("ring_ptr", "")
 
-    unsigned("pad", "")[4].private()
+    unsigned("ring_mask", "")
+	unsigned("ring_entries", "")
+
+    unsigned("pad", "")[2].private()
 }
 
 val io_uring_cq = struct(Module.CORE_LINUX_LIBURING, "IOURingCQ", nativeName = "struct io_uring_cq") {
@@ -280,8 +376,8 @@ val io_uring_cq = struct(Module.CORE_LINUX_LIBURING, "IOURingCQ", nativeName = "
 
     unsigned.p("khead", "")
     unsigned.p("ktail", "")
-    unsigned.p("kring_mask", "")
-    unsigned.p("kring_entries", "")
+    unsigned.p("kring_mask", "Deprecated: use {@code ring_mask} instead of {@code *kring_mask}")
+    unsigned.p("kring_entries", "Deprecated: use {@code ring_entries} instead of {@code *kring_entries}")
     unsigned.p("kflags", "")
     unsigned.p("koverflow", "")
     io_uring_cqe.p("cqes", "")
@@ -289,7 +385,10 @@ val io_uring_cq = struct(Module.CORE_LINUX_LIBURING, "IOURingCQ", nativeName = "
     AutoSize("ring_ptr")..size_t("ring_sz", "")
     void.p("ring_ptr", "")
 
-    unsigned_int("pad", "")[4].private()
+    unsigned("ring_mask", "")
+    unsigned("ring_entries", "")
+
+    unsigned_int("pad", "")[2].private()
 }
 
 val io_uring = struct(Module.CORE_LINUX_LIBURING, "IOURing", nativeName = "struct io_uring") {
@@ -299,5 +398,8 @@ val io_uring = struct(Module.CORE_LINUX_LIBURING, "IOURing", nativeName = "struc
     int("ring_fd", "")
 
     unsigned_int("features", "")
-    unsigned_int("pad", "")[3].private()
+    int("enter_ring_fd", "")
+	__u8("int_flags", "")
+	__u8("pad", "")[3].private()
+    unsigned("pad2", "").private()
 }
