@@ -211,8 +211,10 @@ class NativeClass internal constructor(
 
     val link get() = "{@link ${this.className} ${this.templateName}}"
 
-    override fun processDocumentation(documentation: String, forcePackage: Boolean): String =
-        processDocumentation(documentation, prefixConstant, prefixMethod, forcePackage = forcePackage)
+    override fun processDocumentation(documentation: String, forcePackage: Boolean): String {
+        processSeeLinks("", "", forcePackage)
+        return processDocumentation(documentation, prefixConstant, prefixMethod, forcePackage = forcePackage)
+    }
 
     private val constantLinks: Map<String, String> by lazy(LazyThreadSafetyMode.NONE) {
         val map = HashMap<String, String>()
