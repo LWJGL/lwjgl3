@@ -202,7 +202,7 @@ val WNDCLASSEX = struct(Module.CORE_WINDOWS, "WNDCLASSEX") {
     WNDPROC("lpfnWndProc", "a pointer to the window procedure")
     int("cbClsExtra", "the number of extra bytes to allocate following the window-class structure. The system initializes the bytes to zero.")
     int("cbWndExtra", "the number of extra bytes to allocate following the window instance. The system initializes the bytes to zero.")
-    HINSTANCE("hInstance", "a handle to the instance that contains the window procedure for the class")
+    nullable..HINSTANCE("hInstance", "a handle to the instance that contains the window procedure for the class")
     nullable..HICON(
         "hIcon",
         "a handle to the class icon. This member must be a handle to an icon resource. If this member is #NULL, the system provides a default icon."

@@ -404,7 +404,7 @@ public class WNDCLASSEX extends Struct implements NativeResource {
     /** Unsafe version of {@link #cbWndExtra(int) cbWndExtra}. */
     public static void ncbWndExtra(long struct, int value) { UNSAFE.putInt(null, struct + WNDCLASSEX.CBWNDEXTRA, value); }
     /** Unsafe version of {@link #hInstance(long) hInstance}. */
-    public static void nhInstance(long struct, long value) { memPutAddress(struct + WNDCLASSEX.HINSTANCE, check(value)); }
+    public static void nhInstance(long struct, long value) { memPutAddress(struct + WNDCLASSEX.HINSTANCE, value); }
     /** Unsafe version of {@link #hIcon(long) hIcon}. */
     public static void nhIcon(long struct, long value) { memPutAddress(struct + WNDCLASSEX.HICON, value); }
     /** Unsafe version of {@link #hCursor(long) hCursor}. */
@@ -431,7 +431,6 @@ public class WNDCLASSEX extends Struct implements NativeResource {
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + WNDCLASSEX.LPFNWNDPROC));
-        check(memGetAddress(struct + WNDCLASSEX.HINSTANCE));
         check(memGetAddress(struct + WNDCLASSEX.LPSZCLASSNAME));
     }
 
