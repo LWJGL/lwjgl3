@@ -236,19 +236,39 @@ final class MemoryManage {
 
         static long track(long address, long size) {
             if (address != NULL) {
-                Thread t        = Thread.currentThread();
-                Long   threadId = t.getId();
-                if (!THREADS.containsKey(threadId)) {
-                    THREADS.put(threadId, t.getName());
-                }
+                Thread t = Thread.currentThread();
+                THREADS.putIfAbsent(t.getId(), t.getName());
 
-                Allocation allocation = ALLOCATIONS.put(address, new Allocation(stackWalkGetTrace(), size));
-                if (allocation != null) {
-                    throw new IllegalStateException("The memory address specified is already being tracked: 0x" + Long.toHexString(address).toUpperCase());
+                Allocation allocationNew = new Allocation(stackWalkGetTrace(), size);
+                Allocation allocationOld = ALLOCATIONS.put(address, allocationNew);
+                if (allocationOld != null) {
+                    trackAbort(address, allocationOld, allocationNew);
                 }
             }
 
             return address;
+        }
+        private static void trackAbort(long address, Allocation allocationOld, Allocation allocationNew) {
+            String addressHex = Long.toHexString(address).toUpperCase();
+
+            trackAbortPrint(allocationOld, "Old", addressHex);
+            trackAbortPrint(allocationNew, "New", addressHex);
+
+            throw new IllegalStateException("The memory address specified is already being tracked: 0x" + addressHex);
+        }
+        private static void trackAbortPrint(Allocation allocation, String name, String address) {
+            DEBUG_STREAM.format(
+                "[LWJGL] %s allocation with size %d, thread %d (%s), address: 0x%s\n",
+                name,
+                allocation.size,
+                allocation.threadId,
+                THREADS.get(allocation.threadId),
+                address
+            );
+
+            for (Object el : allocation.stackTrace) {
+                DEBUG_STREAM.format("\tat %s\n", el.toString());
+            }
         }
 
         static long untrack(long address) {
@@ -258,10 +278,15 @@ final class MemoryManage {
 
             Allocation allocation = ALLOCATIONS.remove(address);
             if (allocation == null) {
-                throw new IllegalStateException("The memory address specified is not being tracked: 0x" + Long.toHexString(address).toUpperCase());
+                untrackAbort(address);
             }
 
             return allocation.size;
+        }
+        private static void untrackAbort(long address) {
+            String addressHex = Long.toHexString(address).toUpperCase();
+
+            throw new IllegalStateException("The memory address specified is not being tracked: 0x" + addressHex);
         }
 
         private static class Allocation {
