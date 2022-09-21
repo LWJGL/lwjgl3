@@ -200,9 +200,16 @@ public class MemoryStack extends Pointer.Default implements AutoCloseable {
             if (popped != null) {
                 reportAsymmetricPop(pushed, popped);
             }
-            debugFrames[frameIndex - 1] = null;
 
+            debugFrames[frameIndex - 1] = null;
             return super.pop();
+        }
+
+        // No need to check pop in try-with-resources
+        @Override
+        public void close() {
+            debugFrames[frameIndex - 1] = null;
+            super.pop();
         }
 
         private static void reportAsymmetricPop(Object pushed, Object popped) {
