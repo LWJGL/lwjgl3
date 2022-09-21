@@ -284,6 +284,27 @@ public class Configuration<T> {
     public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR_INTERNAL = new Configuration<>("org.lwjgl.util.DebugAllocator.internal", StateInit.BOOLEAN);
 
     /**
+     * Set to true to skip stacktrace generation on each tracked allocation.
+     *
+     * <p>When enabled, this option dramatically reduces the performance overhead of memory leak detection. After a leak is detected, disable this option and
+     * rerun the application to get the offending allocation's stacktrace.</p>
+     *
+     * <p>This option can also be dynamically toggled on and off, to limit the performance impact in specific portions of the application that are prime
+     * suspects for memory leaks.</p>
+     *
+     * <p>When reporting memory allocation aggregates, with
+     * {@link MemoryUtil#memReport(MemoryAllocationReport, MemoryAllocationReport.Aggregate, boolean) memReport} and the options
+     * {@link MemoryAllocationReport.Aggregate#GROUP_BY_METHOD GROUP_BY_METHOD} or
+     * {@link MemoryAllocationReport.Aggregate#GROUP_BY_STACKTRACE GROUP_BY_STACKTRACE}, memory allocations without an associated stacktrace will not be
+     * included.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.util.DebugAllocator.fast</b><br>
+     * &nbsp; &nbsp;Usage: Dynamic</p>
+     */
+    public static final Configuration<Boolean> DEBUG_MEMORY_ALLOCATOR_FAST = new Configuration<>("org.lwjgl.util.DebugAllocator.fast", StateInit.BOOLEAN);
+
+    /**
      * Set to true to enable LWJGL's debug mode for the {@link MemoryStack}.
      *
      * <p>When using the stack, each frame should be popped in the same method that pushed it. If this symmetry is broken, this mode will report it

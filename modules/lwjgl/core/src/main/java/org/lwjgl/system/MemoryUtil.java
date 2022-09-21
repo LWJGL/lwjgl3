@@ -143,12 +143,17 @@ public final class MemoryUtil {
         static final MemoryAllocator ALLOCATOR;
 
         static {
+            boolean debug = Configuration.DEBUG_MEMORY_ALLOCATOR.get(false);
+
             ALLOCATOR_IMPL = MemoryManage.getInstance();
-            ALLOCATOR = Configuration.DEBUG_MEMORY_ALLOCATOR.get(false)
+            ALLOCATOR = debug
                 ? new DebugAllocator(ALLOCATOR_IMPL)
                 : ALLOCATOR_IMPL;
 
             apiLog("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
+            if (debug && !Configuration.DEBUG_MEMORY_ALLOCATOR_FAST.get(false)) {
+                apiLog("\tReminder: enable Configuration.DEBUG_MEMORY_ALLOCATOR_FAST for low overhead allocation tracking.");
+            }
         }
     }
 
