@@ -31,7 +31,7 @@ public class BGFXPlatform {
     }
 
     /**
-     * Render frame. ({@code bgfx_renderer_frame_t})
+     * Render frame. ({@code bgfx_render_frame_t})
      * 
      * <h5>Enum values:</h5>
      * 
@@ -69,7 +69,7 @@ public class BGFXPlatform {
      *
      * @return current renderer state. One of: {@link #BGFX_RENDER_FRAME_NO_CONTEXT RENDER_FRAME_NO_CONTEXT} {@link #BGFX_RENDER_FRAME_RENDER RENDER_FRAME_RENDER} {@link #BGFX_RENDER_FRAME_TIMEOUT RENDER_FRAME_TIMEOUT} {@link #BGFX_RENDER_FRAME_EXITING RENDER_FRAME_EXITING} {@link #BGFX_RENDER_FRAME_COUNT RENDER_FRAME_COUNT}
      */
-    @NativeType("bgfx_renderer_frame_t")
+    @NativeType("bgfx_render_frame_t")
     public static int bgfx_render_frame(@NativeType("int32_t") int _msecs) {
         long __functionAddress = Functions.render_frame;
         return invokeI(_msecs, __functionAddress);

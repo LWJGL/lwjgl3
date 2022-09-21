@@ -294,6 +294,7 @@ public final class JNI {
     public static native void invokeV(short param0, short param1, int param2, int param3, int param4, byte param5, long __functionAddress);
     public static native void invokeV(short param0, short param1, short param2, short param3, short param4, byte param5, long __functionAddress);
     public static native void invokeV(short param0, short param1, short param2, short param3, short param4, int param5, byte param6, long __functionAddress);
+    public static native void invokeV(short param0, short param1, short param2, short param3, short param4, int param5, short param6, int param7, byte param8, long __functionAddress);
     public static native void invokeV(short param0, short param1, float param2, byte param3, byte param4, byte param5, byte param6, byte param7, byte param8, byte param9, byte param10, byte param11, long __functionAddress);
     public static native void invokeV(short param0, short param1, byte param2, short param3, short param4, short param5, short param6, byte param7, short param8, short param9, short param10, short param11, short param12, short param13, long __functionAddress);
     public static native void invokePV(long param0, long __functionAddress);
@@ -346,6 +347,7 @@ public final class JNI {
     public static native void invokePV(long param0, short param1, short param2, short param3, boolean param4, boolean param5, short param6, int param7, long __functionAddress);
     public static native void invokePV(short param0, byte param1, short param2, short param3, short param4, short param5, short param6, short param7, long param8, long __functionAddress);
     public static native void invokePV(short param0, short param1, byte param2, short param3, short param4, short param5, short param6, long param7, short param8, long __functionAddress);
+    public static native void invokePV(long param0, short param1, short param2, short param3, short param4, short param5, int param6, short param7, int param8, byte param9, long __functionAddress);
     public static native void invokePV(short param0, short param1, byte param2, byte param3, short param4, short param5, short param6, short param7, long param8, short param9, long __functionAddress);
     public static native void invokePV(long param0, short param1, short param2, byte param3, short param4, short param5, short param6, short param7, byte param8, short param9, short param10, short param11, short param12, short param13, short param14, long __functionAddress);
     public static native void invokePJV(long param0, long param1, long __functionAddress);

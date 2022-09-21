@@ -26,6 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     int64_t {@link #cpuTimeEnd};
  *     int64_t {@link #gpuTimeBegin};
  *     int64_t {@link #gpuTimeEnd};
+ *     uint32_t {@link #gpuFrameNum};
  * }</code></pre>
  */
 @NativeType("struct bgfx_view_stats_t")
@@ -44,7 +45,8 @@ public class BGFXViewStats extends Struct {
         CPUTIMEBEGIN,
         CPUTIMEEND,
         GPUTIMEBEGIN,
-        GPUTIMEEND;
+        GPUTIMEEND,
+        GPUFRAMENUM;
 
     static {
         Layout layout = __struct(
@@ -53,7 +55,8 @@ public class BGFXViewStats extends Struct {
             __member(8),
             __member(8),
             __member(8),
-            __member(8)
+            __member(8),
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -65,6 +68,7 @@ public class BGFXViewStats extends Struct {
         CPUTIMEEND = layout.offsetof(3);
         GPUTIMEBEGIN = layout.offsetof(4);
         GPUTIMEEND = layout.offsetof(5);
+        GPUFRAMENUM = layout.offsetof(6);
     }
 
     /**
@@ -101,6 +105,9 @@ public class BGFXViewStats extends Struct {
     /** GPU end time */
     @NativeType("int64_t")
     public long gpuTimeEnd() { return ngpuTimeEnd(address()); }
+    /** frame which generated {@code gpuTimeBegin}, {@code gpuTimeEnd} */
+    @NativeType("uint32_t")
+    public int gpuFrameNum() { return ngpuFrameNum(address()); }
 
     // -----------------------------------
 
@@ -147,6 +154,8 @@ public class BGFXViewStats extends Struct {
     public static long ngpuTimeBegin(long struct) { return UNSAFE.getLong(null, struct + BGFXViewStats.GPUTIMEBEGIN); }
     /** Unsafe version of {@link #gpuTimeEnd}. */
     public static long ngpuTimeEnd(long struct) { return UNSAFE.getLong(null, struct + BGFXViewStats.GPUTIMEEND); }
+    /** Unsafe version of {@link #gpuFrameNum}. */
+    public static int ngpuFrameNum(long struct) { return UNSAFE.getInt(null, struct + BGFXViewStats.GPUFRAMENUM); }
 
     // -----------------------------------
 
@@ -207,6 +216,9 @@ public class BGFXViewStats extends Struct {
         /** @return the value of the {@link BGFXViewStats#gpuTimeEnd} field. */
         @NativeType("int64_t")
         public long gpuTimeEnd() { return BGFXViewStats.ngpuTimeEnd(address()); }
+        /** @return the value of the {@link BGFXViewStats#gpuFrameNum} field. */
+        @NativeType("uint32_t")
+        public int gpuFrameNum() { return BGFXViewStats.ngpuFrameNum(address()); }
 
     }
 

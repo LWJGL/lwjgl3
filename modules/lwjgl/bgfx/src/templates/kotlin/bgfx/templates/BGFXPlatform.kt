@@ -14,7 +14,7 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(Module.BGFX, prefix = "BGFX", pref
         """
 
     val RenderFrame = EnumConstant(
-        "Render frame. ({@code bgfx_renderer_frame_t})",
+        "Render frame. ({@code bgfx_render_frame_t})",
 
         "RENDER_FRAME_NO_CONTEXT".enum,
         "RENDER_FRAME_RENDER".enum,
@@ -24,7 +24,7 @@ val BGFXPlatform = "BGFXPlatform".nativeClass(Module.BGFX, prefix = "BGFX", pref
         "RENDER_FRAME_COUNT".enum
     ).javaDocLinks
 
-    bgfx_renderer_frame_t(
+    bgfx_render_frame_t(
         "render_frame",
         """
         Render frame.

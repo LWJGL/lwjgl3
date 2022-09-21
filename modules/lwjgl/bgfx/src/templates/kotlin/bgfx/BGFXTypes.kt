@@ -18,7 +18,6 @@ val bgfx_attrib_t = "bgfx_attrib_t".enumType
 val bgfx_attrib_type_t = "bgfx_attrib_type_t".enumType
 val bgfx_backbuffer_ratio_t = "bgfx_backbuffer_ratio_t".enumType
 val bgfx_occlusion_query_result_t = "bgfx_occlusion_query_result_t".enumType
-val bgfx_render_frame_t = "bgfx_render_frame_t".enumType
 val bgfx_renderer_type_t = "bgfx_renderer_type_t".enumType
 val bgfx_texture_format_t = "bgfx_texture_format_t".enumType
 val bgfx_topology_convert_t = "bgfx_topology_convert_t".enumType
@@ -28,7 +27,7 @@ val bgfx_view_mode_t = "bgfx_view_mode_t".enumType
 
 val bgfx_view_id_t = typedef(uint16_t, "bgfx_view_id_t")
 
-val bgfx_encoder_s = "struct bgfx_encoder_s".opaque
+val bgfx_encoder_t = "bgfx_encoder_t".opaque
 
 /*
 #define BGFX_HANDLE_T(_name) \
@@ -90,6 +89,7 @@ val bgfx_view_stats_t = struct(Module.BGFX, "BGFXViewStats", nativeName = "bgfx_
     int64_t("cpuTimeEnd", "CPU (submit) end time")
     int64_t("gpuTimeBegin", "GPU begin time")
     int64_t("gpuTimeEnd", "GPU end time")
+    uint32_t("gpuFrameNum", "frame which generated {@code gpuTimeBegin}, {@code gpuTimeEnd}")
 }
 
 val bgfx_encoder_stats_t = struct(Module.BGFX, "BGFXEncoderStats", nativeName = "bgfx_encoder_stats_t", mutable = false) {
@@ -124,6 +124,7 @@ val bgfx_stats_t = struct(Module.BGFX, "BGFXStats", nativeName = "bgfx_stats_t",
     uint32_t("numCompute", "number of compute calls submitted")
     uint32_t("numBlit", "number of blit calls submitted")
     uint32_t("maxGpuLatency", "GPU driver latency")
+    uint32_t("gpuFrameNum", "frame which generated {@code gpuTimeBegin}, {@code gpuTimeEnd}")
 
     uint16_t("numDynamicIndexBuffers", "number of used dynamic index buffers")
     uint16_t("numDynamicVertexBuffers", "number of used dynamic vertex buffers")
@@ -591,7 +592,7 @@ val bgfx_init_t = struct(Module.BGFX, "BGFXInit", nativeName = "bgfx_init_t", sk
 
 // Platform API
 
-val bgfx_renderer_frame_t = "bgfx_renderer_frame_t".enumType
+val bgfx_render_frame_t = "bgfx_render_frame_t".enumType
 
 val bgfx_internal_data_t = struct(Module.BGFX, "BGFXInternalData", nativeName = "bgfx_internal_data_t", mutable = false, skipBuffer = true) {
     documentation = "Internal data."
