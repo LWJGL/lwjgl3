@@ -23,7 +23,10 @@ import static org.lwjgl.system.macosx.ObjCRuntime.*;
  */
 final class EventLoop {
 
-    static {
+    private EventLoop() {
+    }
+
+    static void check() {
         if (Platform.get() == Platform.MACOSX && !isMainThread()) {
             // The only way to avoid a crash is if the shared application (NSApp) has been created by something else
             throw new IllegalStateException(
@@ -33,13 +36,6 @@ final class EventLoop {
                       "the JVM with -XstartOnFirstThread. This check may be disabled with Configuration.GLFW_CHECK_THREAD0."
             );
         }
-    }
-
-    private EventLoop() {
-    }
-
-    static void check() {
-        // intentionally empty to trigger the static initializer
     }
 
     private static boolean isMainThread() {

@@ -394,16 +394,16 @@ public class Configuration<T> {
     public static final Configuration<String> GLFW_LIBRARY_NAME = new Configuration<>("org.lwjgl.glfw.libname", StateInit.STRING);
 
     /**
-     * macOS only: Set this property to false to disable first thread detection for GLFW functions that must be called on the main thread.
+     * macOS only: Set this property to false to disable first thread detection on {@code glfwInit}.
      *
-     * <p>By default, LWJGL will check if GLFW functions that must be called on the main thread are called on the first thread of the process. If that is not
-     * the case, an {@link IllegalStateException} will be thrown.</p>
+     * <p>By default, LWJGL will check if {@code glfwInit} is called on the first thread of the process. If not, an {@link IllegalStateException} will be
+     * thrown.</p>
      *
      * <p>The JVM can be launched with {@code -XstartOnFirstThread} to make the main thread the first thread of the process.</p>
      *
      * <p style="font-family: monospace">
      * Property: <b>org.lwjgl.glfw.checkThread0</b><br>
-     * &nbsp; &nbsp;Usage: Static</p>
+     * &nbsp; &nbsp;Usage: Dynamic</p>
      */
     public static final Configuration<Boolean> GLFW_CHECK_THREAD0 = new Configuration<>("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
 
