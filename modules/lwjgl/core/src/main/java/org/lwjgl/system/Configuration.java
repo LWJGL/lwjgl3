@@ -552,7 +552,7 @@ public class Configuration<T> {
     private final String property;
 
     @Nullable
-    private T state;
+    private volatile T state;
 
     Configuration(String property, StateInit<? extends T> init) {
         this.property = property;
