@@ -4,12 +4,15 @@
  */
 package org.lwjgl.system;
 
+import javax.annotation.*;
 import java.util.*;
 
 import static org.lwjgl.system.APIUtil.*;
 
 /** Java 9 version of {@code {@link StackWalkUtil}}. */
 final class StackWalkUtil {
+
+    private static final StackWalker STACKWALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
     static {
         apiLog("Java 9 stack walker enabled");
@@ -25,13 +28,18 @@ final class StackWalkUtil {
     }
 
     static Object stackWalkGetMethod(Class<?> after) {
-        return StackWalker.getInstance()
-            .walk(s -> s
-                .skip(2)
-                .filter(f -> !f.getClassName().startsWith(after.getName()))
-                .findFirst()
-            )
-            .orElseThrow(IllegalStateException::new);
+        return STACKWALKER.walk(s -> {
+            Iterator<StackWalker.StackFrame> iter = s.iterator();
+            iter.next(); // skip this method
+            iter.next(); // skip MemoryStack::pop
+
+            StackWalker.StackFrame frame;
+            do {
+                frame = iter.next();
+            } while (frame.getDeclaringClass() == after && iter.hasNext());
+
+            return frame;
+        });
     }
 
     private static boolean isSameMethod(StackWalker.StackFrame a, StackWalker.StackFrame b) {
@@ -39,9 +47,8 @@ final class StackWalkUtil {
     }
 
     private static boolean isSameMethod(StackWalker.StackFrame a, StackWalker.StackFrame b, String methodName) {
-        return a.getMethodName().equals(methodName) &&
-               a.getClassName().equals(b.getClassName()) &&
-               Objects.equals(a.getFileName(), b.getFileName());
+        return a.getDeclaringClass() == b.getDeclaringClass() &&
+               a.getMethodName().equals(methodName);
     }
 
     private static boolean isAutoCloseable(StackWalker.StackFrame element, StackWalker.StackFrame pushed) {
@@ -51,42 +58,42 @@ final class StackWalkUtil {
         }
 
         // Kotlin T.use: kotlin.AutoCloseable::closeFinally
-        if ("closeFinally".equals(element.getMethodName()) && "AutoCloseable.kt".equals(element.getFileName())) {
+        if ("kotlin.jdk7.AutoCloseableKt".equals(element.getClassName()) && "closeFinally".equals(element.getMethodName())) {
             return true;
         }
 
         return false;
     }
 
+    @Nullable
     static Object stackWalkCheckPop(Class<?> after, Object pushedObj) {
-        return StackWalker.getInstance().walk(s -> {
-            Iterator<StackWalker.StackFrame> iter = s
-                .skip(2)
-                .dropWhile(f -> f.getClassName().startsWith(after.getName()))
-                .iterator();
+        StackWalker.StackFrame pushed = (StackWalker.StackFrame)pushedObj;
 
-            if (iter.hasNext()) {
-                StackWalker.StackFrame element = iter.next();
+        return StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).walk(s -> {
+            Iterator<StackWalker.StackFrame> iter = s.iterator();
+            iter.next();
+            iter.next();
 
-                StackWalker.StackFrame pushed = (StackWalker.StackFrame)pushedObj;
+            StackWalker.StackFrame element;
+            do {
+                element = iter.next();
+            } while (element.getDeclaringClass() == after && iter.hasNext());
+
+            if (isSameMethod(element, pushed)) {
+                return null;
+            }
+
+            if (iter.hasNext() && isAutoCloseable(element, pushed)) {
+                // Some runtimes use a separate method to call AutoCloseable::close in try-with-resources blocks.
+                // That method suppresses any exceptions thrown by close if necessary.
+                // When that happens, the pop is 1 level deeper than expected.
+                element = iter.next();
                 if (isSameMethod(element, pushed)) {
                     return null;
                 }
-
-                if (isAutoCloseable(element, pushed) && iter.hasNext()) {
-                    // Some runtimes use a separate method to call AutoCloseable::close in try-with-resources blocks.
-                    // That method suppresses any exceptions thrown by close if necessary.
-                    // When that happens, the pop is 1 level deeper than expected.
-                    element = iter.next();
-                    if (isSameMethod(pushed, element)) {
-                        return null;
-                    }
-                }
-
-                return element;
             }
 
-            throw new IllegalStateException();
+            return element;
         });
     }
 
