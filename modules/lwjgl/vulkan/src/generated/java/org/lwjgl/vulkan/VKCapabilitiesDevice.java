@@ -10,7 +10,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
 
-/** Defines the capabilities of a Vulkan {@code VkDevice}. */
+/** Defines the enabled capabilities of a Vulkan {@code VkDevice}. */
 @SuppressWarnings("SimplifiableIfStatement")
 public class VKCapabilitiesDevice {
 

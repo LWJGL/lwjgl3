@@ -132,7 +132,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
     init {
         javaImport("static org.lwjgl.system.Checks.*")
 
-        documentation = "Defines the capabilities of a Vulkan {@code VkInstance}."
+        documentation = "Defines the enabled capabilities of a Vulkan {@code VkInstance}."
     }
 
     override fun PrintWriter.generateJava() {
@@ -276,7 +276,7 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
             "static org.lwjgl.system.Checks.*"
         )
 
-        documentation = "Defines the capabilities of a Vulkan {@code VkDevice}."
+        documentation = "Defines the enabled capabilities of a Vulkan {@code VkDevice}."
     }
 
     override fun PrintWriter.generateJava() {

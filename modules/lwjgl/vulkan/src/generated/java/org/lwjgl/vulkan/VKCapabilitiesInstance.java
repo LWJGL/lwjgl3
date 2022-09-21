@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.lwjgl.system.Checks.*;
 
-/** Defines the capabilities of a Vulkan {@code VkInstance}. */
+/** Defines the enabled capabilities of a Vulkan {@code VkInstance}. */
 @SuppressWarnings("SimplifiableIfStatement")
 public class VKCapabilitiesInstance {
 
