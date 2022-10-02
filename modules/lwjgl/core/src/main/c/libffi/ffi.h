@@ -1,6 +1,7 @@
 /* -----------------------------------------------------------------*-C-*-
-   libffi @VERSION@ - Copyright (c) 2011, 2014, 2019 Anthony Green
-                    - Copyright (c) 1996-2003, 2007, 2008 Red Hat, Inc.
+   libffi @VERSION@
+     - Copyright (c) 2011, 2014, 2019, 2021, 2022 Anthony Green
+     - Copyright (c) 1996-2003, 2007, 2008 Red Hat, Inc.
 
    Permission is hereby granted, free of charge, to any person
    obtaining a copy of this software and associated documentation
@@ -61,6 +62,31 @@ extern "C" {
 #else
 #define FFI_EXEC_TRAMPOLINE_TABLE 0
 #endif
+
+/* If these change, update src/mips/ffitarget.h. */
+#define FFI_TYPE_VOID       0
+#define FFI_TYPE_INT        1
+#define FFI_TYPE_FLOAT      2
+#define FFI_TYPE_DOUBLE     3
+#if HAVE_LONG_DOUBLE
+#define FFI_TYPE_LONGDOUBLE 4
+#else
+#define FFI_TYPE_LONGDOUBLE FFI_TYPE_DOUBLE
+#endif
+#define FFI_TYPE_UINT8      5
+#define FFI_TYPE_SINT8      6
+#define FFI_TYPE_UINT16     7
+#define FFI_TYPE_SINT16     8
+#define FFI_TYPE_UINT32     9
+#define FFI_TYPE_SINT32     10
+#define FFI_TYPE_UINT64     11
+#define FFI_TYPE_SINT64     12
+#define FFI_TYPE_STRUCT     13
+#define FFI_TYPE_POINTER    14
+#define FFI_TYPE_COMPLEX    15
+
+/* This should always refer to the last type code (for sanity checks).  */
+#define FFI_TYPE_LAST       FFI_TYPE_COMPLEX
 
 #include <ffitarget.h>
 
@@ -224,7 +250,8 @@ FFI_EXTERN ffi_type ffi_type_complex_longdouble;
 typedef enum {
   FFI_OK = 0,
   FFI_BAD_TYPEDEF,
-  FFI_BAD_ABI
+  FFI_BAD_ABI,
+  FFI_BAD_ARGTYPE
 } ffi_status;
 
 typedef struct {
@@ -317,11 +344,17 @@ typedef struct {
   void *trampoline_table;
   void *trampoline_table_entry;
 #else
-  char tramp[FFI_TRAMPOLINE_SIZE];
+  union {
+    char tramp[FFI_TRAMPOLINE_SIZE];
+    void *ftramp;
+  };
 #endif
   ffi_cif   *cif;
   void     (*fun)(ffi_cif*,void*,void**,void*);
   void      *user_data;
+#if defined(_MSC_VER) && defined(_M_IX86)
+  void      *padding;
+#endif
 } ffi_closure
 #ifdef __GNUC__
     __attribute__((aligned (8)))
@@ -362,7 +395,7 @@ ffi_prep_closure_loc (ffi_closure*,
 		      ffi_cif *,
 		      void (*fun)(ffi_cif*,void*,void**,void*),
 		      void *user_data,
-		      void*codeloc);
+		      void *codeloc);
 
 #ifdef __sgi
 # pragma pack 8
@@ -497,31 +530,6 @@ ffi_status ffi_get_struct_offsets (ffi_abi abi, ffi_type *struct_type,
 /* ---- Definitions shared with assembly code ---------------------------- */
 
 #endif
-
-/* If these change, update src/mips/ffitarget.h. */
-#define FFI_TYPE_VOID       0
-#define FFI_TYPE_INT        1
-#define FFI_TYPE_FLOAT      2
-#define FFI_TYPE_DOUBLE     3
-#if HAVE_LONG_DOUBLE
-#define FFI_TYPE_LONGDOUBLE 4
-#else
-#define FFI_TYPE_LONGDOUBLE FFI_TYPE_DOUBLE
-#endif
-#define FFI_TYPE_UINT8      5
-#define FFI_TYPE_SINT8      6
-#define FFI_TYPE_UINT16     7
-#define FFI_TYPE_SINT16     8
-#define FFI_TYPE_UINT32     9
-#define FFI_TYPE_SINT32     10
-#define FFI_TYPE_UINT64     11
-#define FFI_TYPE_SINT64     12
-#define FFI_TYPE_STRUCT     13
-#define FFI_TYPE_POINTER    14
-#define FFI_TYPE_COMPLEX    15
-
-/* This should always refer to the last type code (for sanity checks).  */
-#define FFI_TYPE_LAST       FFI_TYPE_COMPLEX
 
 #ifdef __cplusplus
 }

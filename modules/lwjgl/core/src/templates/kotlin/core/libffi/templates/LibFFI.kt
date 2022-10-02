@@ -62,7 +62,7 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);""")
     val ABI = EnumConstant(
         """
         ABI enumeration.
-        
+
         <b>LWJGL note</b>: ABIs that are not applicable to the current platform will have a value of -1 and should not be used.
         """,
 
@@ -107,7 +107,8 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);""")
 
         "OK".enum,
         "BAD_TYPEDEF".enum,
-        "BAD_ABI".enum
+        "BAD_ABI".enum,
+        "BAD_ARGTYPE".enum
     )
 
     macro..Address..ffi_type.p("type_void", "The {@code ffi_type_void} struct.", void())
@@ -140,7 +141,7 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);""")
         "prep_cif",
         """
         Initializes the specified Call Interface (CIF) according to the given parameters.
-        
+
         The resulting {@code ffi_cif} holds pointers to all the {@code ffi_type} objects that were used during initialization. You must ensure that these type
         objects have a lifetime at least as long as that of the {@code ffi_cif}.
         """,
@@ -195,7 +196,7 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);""")
         "call",
         """
         Calls the function {@code fn} according to the description given in {@code cif}.
-        
+
         {@code cif} must have already been prepared using #prep_cif().
         """,
 
@@ -208,7 +209,7 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);""")
             "rvalue",
             """
 			a pointer to a chunk of memory that will hold the result of the function call.
- 
+
             This must be large enough to hold the result, no smaller than the system register size (generally 32 or 64 bits), and must be suitably aligned; it
             is the caller's responsibility to ensure this. If CIF declares that the function returns {@code void} (using #type_void), then {@code rvalue} is
             ignored.
@@ -223,7 +224,7 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);""")
             "avalues",
             """
             a vector of {@code void *} pointers that point to the memory locations holding the argument values for a call.
-             
+
             If {@code cif} declares that the function has no arguments (i.e., {@code nargs} was 0), then {@code avalues} is ignored. Note that argument values
             may be modified by the callee (for instance, structs passed by value); the burden of copying pass-by-value arguments is placed on the caller.
 
@@ -260,7 +261,7 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);""")
         "closure_alloc",
         """
         Allocates a chunk of memory holding {@code size} bytes.
-         
+
         Returns a pointer to the writable address, and sets {@code *code} to the corresponding executable address.
         """,
 
@@ -281,7 +282,7 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);""")
         "prep_closure_loc",
         """
         Prepares a closure function.
-        
+
         After calling {@code ffi_prep_closure_loc,} you can cast {@code codeloc} to the appropriate pointer-to-function type.
         """,
 
@@ -295,7 +296,7 @@ typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);""")
                 "{@code cif} - The {@code ffi_cif} passed to {@code ffi_prep_closure_loc}.",
                 """
                 {@code ret} - a pointer to the memory used for the function's return value.
-                 
+
                 If the function is declared as returning {@code void}, then this value is garbage and should not be used.
 
                 Otherwise, {@code fun} must fill the object to which this points, following the same special promotion behavior as {@code ffi_call}. That is,

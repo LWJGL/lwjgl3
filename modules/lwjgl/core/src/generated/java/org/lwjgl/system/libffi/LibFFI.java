@@ -102,12 +102,14 @@ public class LibFFI {
      * <li>{@link #FFI_OK OK}</li>
      * <li>{@link #FFI_BAD_TYPEDEF BAD_TYPEDEF}</li>
      * <li>{@link #FFI_BAD_ABI BAD_ABI}</li>
+     * <li>{@link #FFI_BAD_ARGTYPE BAD_ARGTYPE}</li>
      * </ul>
      */
     public static final int
         FFI_OK          = 0,
         FFI_BAD_TYPEDEF = 1,
-        FFI_BAD_ABI     = 2;
+        FFI_BAD_ABI     = 2,
+        FFI_BAD_ARGTYPE = 3;
 
     protected LibFFI() {
         throw new UnsupportedOperationException();
