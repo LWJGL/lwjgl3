@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>24</dd>
  * <dt><b>Revision</b></dt>
- * <dd>5</dd>
+ * <dd>7</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires support for Vulkan 1.1</li>
@@ -55,7 +55,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2022-08-11</dd>
+ * <dd>2022-09-26</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -74,7 +74,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class KHRVideoQueue {
 
     /** The extension specification version. */
-    public static final int VK_KHR_VIDEO_QUEUE_SPEC_VERSION = 5;
+    public static final int VK_KHR_VIDEO_QUEUE_SPEC_VERSION = 7;
 
     /** The extension name. */
     public static final String VK_KHR_VIDEO_QUEUE_EXTENSION_NAME = "VK_KHR_video_queue";
@@ -576,9 +576,15 @@ public class KHRVideoQueue {
      * 
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-     * <li>{@code videoSession} <b>must</b> be a valid {@code VkVideoSessionKHR} handle</li>
+     * <li>If {@code videoSession} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code videoSession} <b>must</b> be a valid {@code VkVideoSessionKHR} handle</li>
      * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
-     * <li>{@code videoSession} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * <li>If {@code videoSession} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * </ul>
+     * 
+     * <h5>Host Synchronization</h5>
+     * 
+     * <ul>
+     * <li>Host access to {@code videoSession} <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -705,6 +711,12 @@ public class KHRVideoQueue {
      * <li>{@code pBindSessionMemoryInfos} <b>must</b> be a valid pointer to an array of {@code bindSessionMemoryInfoCount} valid {@link VkBindVideoSessionMemoryInfoKHR} structures</li>
      * <li>{@code bindSessionMemoryInfoCount} <b>must</b> be greater than 0</li>
      * <li>{@code videoSession} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+     * </ul>
+     * 
+     * <h5>Host Synchronization</h5>
+     * 
+     * <ul>
+     * <li>Host access to {@code videoSession} <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -889,8 +901,14 @@ public class KHRVideoQueue {
      * 
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
-     * <li>{@code videoSessionParameters} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
+     * <li>If {@code videoSessionParameters} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code videoSessionParameters} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
      * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
+     * </ul>
+     * 
+     * <h5>Host Synchronization</h5>
+     * 
+     * <ul>
+     * <li>Host access to {@code videoSessionParameters} <b>must</b> be externally synchronized</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -948,6 +966,7 @@ public class KHRVideoQueue {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -1011,6 +1030,7 @@ public class KHRVideoQueue {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 
@@ -1070,6 +1090,7 @@ public class KHRVideoQueue {
      * <h5>Host Synchronization</h5>
      * 
      * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
      * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
      * </ul>
      * 

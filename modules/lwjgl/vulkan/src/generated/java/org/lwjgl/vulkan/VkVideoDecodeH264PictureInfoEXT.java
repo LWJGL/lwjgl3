@@ -26,8 +26,8 @@ import org.lwjgl.vulkan.video.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT}</li>
  * <li>{@code pStdPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoDecodeH264PictureInfo} value</li>
- * <li>{@code pSlicesDataOffsets} <b>must</b> be a valid pointer to an array of {@code slicesCount} {@code uint32_t} values</li>
- * <li>{@code slicesCount} <b>must</b> be greater than 0</li>
+ * <li>{@code pSliceOffsets} <b>must</b> be a valid pointer to an array of {@code sliceCount} {@code uint32_t} values</li>
+ * <li>{@code sliceCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -37,8 +37,8 @@ import org.lwjgl.vulkan.video.*;
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
  *     {@link StdVideoDecodeH264PictureInfo StdVideoDecodeH264PictureInfo} const * {@link #pStdPictureInfo};
- *     uint32_t {@link #slicesCount};
- *     uint32_t const * {@link #pSlicesDataOffsets};
+ *     uint32_t {@link #sliceCount};
+ *     uint32_t const * {@link #pSliceOffsets};
  * }</code></pre>
  */
 public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeResource {
@@ -54,8 +54,8 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
         STYPE,
         PNEXT,
         PSTDPICTUREINFO,
-        SLICESCOUNT,
-        PSLICESDATAOFFSETS;
+        SLICECOUNT,
+        PSLICEOFFSETS;
 
     static {
         Layout layout = __struct(
@@ -72,8 +72,8 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         PSTDPICTUREINFO = layout.offsetof(2);
-        SLICESCOUNT = layout.offsetof(3);
-        PSLICESDATAOFFSETS = layout.offsetof(4);
+        SLICECOUNT = layout.offsetof(3);
+        PSLICEOFFSETS = layout.offsetof(4);
     }
 
     /**
@@ -100,10 +100,10 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
     public StdVideoDecodeH264PictureInfo pStdPictureInfo() { return npStdPictureInfo(address()); }
     /** the number of slices in this picture. */
     @NativeType("uint32_t")
-    public int slicesCount() { return nslicesCount(address()); }
-    /** a pointer to an array of {@code slicesCount} offsets indicating the start offset of each slice within the bitstream buffer. */
+    public int sliceCount() { return nsliceCount(address()); }
+    /** a pointer to an array of {@code sliceCount} offsets indicating the start offset of each slice within the bitstream buffer. */
     @NativeType("uint32_t const *")
-    public IntBuffer pSlicesDataOffsets() { return npSlicesDataOffsets(address()); }
+    public IntBuffer pSliceOffsets() { return npSliceOffsets(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH264PictureInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -111,24 +111,22 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
     public VkVideoDecodeH264PictureInfoEXT sType$Default() { return sType(EXTVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeH264PictureInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkVideoDecodeH264MvcInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoDecodeH264PictureInfoEXT pNext(VkVideoDecodeH264MvcInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the address of the specified {@link StdVideoDecodeH264PictureInfo} to the {@link #pStdPictureInfo} field. */
     public VkVideoDecodeH264PictureInfoEXT pStdPictureInfo(@NativeType("StdVideoDecodeH264PictureInfo const *") StdVideoDecodeH264PictureInfo value) { npStdPictureInfo(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pSlicesDataOffsets} field. */
-    public VkVideoDecodeH264PictureInfoEXT pSlicesDataOffsets(@NativeType("uint32_t const *") IntBuffer value) { npSlicesDataOffsets(address(), value); return this; }
+    /** Sets the address of the specified {@link IntBuffer} to the {@link #pSliceOffsets} field. */
+    public VkVideoDecodeH264PictureInfoEXT pSliceOffsets(@NativeType("uint32_t const *") IntBuffer value) { npSliceOffsets(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoDecodeH264PictureInfoEXT set(
         int sType,
         long pNext,
         StdVideoDecodeH264PictureInfo pStdPictureInfo,
-        IntBuffer pSlicesDataOffsets
+        IntBuffer pSliceOffsets
     ) {
         sType(sType);
         pNext(pNext);
         pStdPictureInfo(pStdPictureInfo);
-        pSlicesDataOffsets(pSlicesDataOffsets);
+        pSliceOffsets(pSliceOffsets);
 
         return this;
     }
@@ -264,10 +262,10 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH264PictureInfoEXT.PNEXT); }
     /** Unsafe version of {@link #pStdPictureInfo}. */
     public static StdVideoDecodeH264PictureInfo npStdPictureInfo(long struct) { return StdVideoDecodeH264PictureInfo.create(memGetAddress(struct + VkVideoDecodeH264PictureInfoEXT.PSTDPICTUREINFO)); }
-    /** Unsafe version of {@link #slicesCount}. */
-    public static int nslicesCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264PictureInfoEXT.SLICESCOUNT); }
-    /** Unsafe version of {@link #pSlicesDataOffsets() pSlicesDataOffsets}. */
-    public static IntBuffer npSlicesDataOffsets(long struct) { return memIntBuffer(memGetAddress(struct + VkVideoDecodeH264PictureInfoEXT.PSLICESDATAOFFSETS), nslicesCount(struct)); }
+    /** Unsafe version of {@link #sliceCount}. */
+    public static int nsliceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264PictureInfoEXT.SLICECOUNT); }
+    /** Unsafe version of {@link #pSliceOffsets() pSliceOffsets}. */
+    public static IntBuffer npSliceOffsets(long struct) { return memIntBuffer(memGetAddress(struct + VkVideoDecodeH264PictureInfoEXT.PSLICEOFFSETS), nsliceCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264PictureInfoEXT.STYPE, value); }
@@ -275,10 +273,10 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoDecodeH264PictureInfoEXT.PNEXT, value); }
     /** Unsafe version of {@link #pStdPictureInfo(StdVideoDecodeH264PictureInfo) pStdPictureInfo}. */
     public static void npStdPictureInfo(long struct, StdVideoDecodeH264PictureInfo value) { memPutAddress(struct + VkVideoDecodeH264PictureInfoEXT.PSTDPICTUREINFO, value.address()); }
-    /** Sets the specified value to the {@code slicesCount} field of the specified {@code struct}. */
-    public static void nslicesCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264PictureInfoEXT.SLICESCOUNT, value); }
-    /** Unsafe version of {@link #pSlicesDataOffsets(IntBuffer) pSlicesDataOffsets}. */
-    public static void npSlicesDataOffsets(long struct, IntBuffer value) { memPutAddress(struct + VkVideoDecodeH264PictureInfoEXT.PSLICESDATAOFFSETS, memAddress(value)); nslicesCount(struct, value.remaining()); }
+    /** Sets the specified value to the {@code sliceCount} field of the specified {@code struct}. */
+    public static void nsliceCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH264PictureInfoEXT.SLICECOUNT, value); }
+    /** Unsafe version of {@link #pSliceOffsets(IntBuffer) pSliceOffsets}. */
+    public static void npSliceOffsets(long struct, IntBuffer value) { memPutAddress(struct + VkVideoDecodeH264PictureInfoEXT.PSLICEOFFSETS, memAddress(value)); nsliceCount(struct, value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -287,7 +285,7 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
      */
     public static void validate(long struct) {
         check(memGetAddress(struct + VkVideoDecodeH264PictureInfoEXT.PSTDPICTUREINFO));
-        check(memGetAddress(struct + VkVideoDecodeH264PictureInfoEXT.PSLICESDATAOFFSETS));
+        check(memGetAddress(struct + VkVideoDecodeH264PictureInfoEXT.PSLICEOFFSETS));
     }
 
     // -----------------------------------
@@ -337,12 +335,12 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
         /** @return a {@link StdVideoDecodeH264PictureInfo} view of the struct pointed to by the {@link VkVideoDecodeH264PictureInfoEXT#pStdPictureInfo} field. */
         @NativeType("StdVideoDecodeH264PictureInfo const *")
         public StdVideoDecodeH264PictureInfo pStdPictureInfo() { return VkVideoDecodeH264PictureInfoEXT.npStdPictureInfo(address()); }
-        /** @return the value of the {@link VkVideoDecodeH264PictureInfoEXT#slicesCount} field. */
+        /** @return the value of the {@link VkVideoDecodeH264PictureInfoEXT#sliceCount} field. */
         @NativeType("uint32_t")
-        public int slicesCount() { return VkVideoDecodeH264PictureInfoEXT.nslicesCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkVideoDecodeH264PictureInfoEXT#pSlicesDataOffsets} field. */
+        public int sliceCount() { return VkVideoDecodeH264PictureInfoEXT.nsliceCount(address()); }
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkVideoDecodeH264PictureInfoEXT#pSliceOffsets} field. */
         @NativeType("uint32_t const *")
-        public IntBuffer pSlicesDataOffsets() { return VkVideoDecodeH264PictureInfoEXT.npSlicesDataOffsets(address()); }
+        public IntBuffer pSliceOffsets() { return VkVideoDecodeH264PictureInfoEXT.npSliceOffsets(address()); }
 
         /** Sets the specified value to the {@link VkVideoDecodeH264PictureInfoEXT#sType} field. */
         public VkVideoDecodeH264PictureInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH264PictureInfoEXT.nsType(address(), value); return this; }
@@ -350,12 +348,10 @@ public class VkVideoDecodeH264PictureInfoEXT extends Struct implements NativeRes
         public VkVideoDecodeH264PictureInfoEXT.Buffer sType$Default() { return sType(EXTVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT); }
         /** Sets the specified value to the {@link VkVideoDecodeH264PictureInfoEXT#pNext} field. */
         public VkVideoDecodeH264PictureInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH264PictureInfoEXT.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkVideoDecodeH264MvcInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoDecodeH264PictureInfoEXT.Buffer pNext(VkVideoDecodeH264MvcInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the address of the specified {@link StdVideoDecodeH264PictureInfo} to the {@link VkVideoDecodeH264PictureInfoEXT#pStdPictureInfo} field. */
         public VkVideoDecodeH264PictureInfoEXT.Buffer pStdPictureInfo(@NativeType("StdVideoDecodeH264PictureInfo const *") StdVideoDecodeH264PictureInfo value) { VkVideoDecodeH264PictureInfoEXT.npStdPictureInfo(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkVideoDecodeH264PictureInfoEXT#pSlicesDataOffsets} field. */
-        public VkVideoDecodeH264PictureInfoEXT.Buffer pSlicesDataOffsets(@NativeType("uint32_t const *") IntBuffer value) { VkVideoDecodeH264PictureInfoEXT.npSlicesDataOffsets(address(), value); return this; }
+        /** Sets the address of the specified {@link IntBuffer} to the {@link VkVideoDecodeH264PictureInfoEXT#pSliceOffsets} field. */
+        public VkVideoDecodeH264PictureInfoEXT.Buffer pSliceOffsets(@NativeType("uint32_t const *") IntBuffer value) { VkVideoDecodeH264PictureInfoEXT.npSliceOffsets(address(), value); return this; }
 
     }
 

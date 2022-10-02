@@ -26,6 +26,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
  *     uint8_t cpb_cnt_minus1;
  *     uint8_t bit_rate_scale;
  *     uint8_t cpb_size_scale;
+ *     uint8_t reserved1;
  *     uint32_t bit_rate_value_minus1[STD_VIDEO_H264_CPB_CNT_LIST_SIZE];
  *     uint32_t cpb_size_value_minus1[STD_VIDEO_H264_CPB_CNT_LIST_SIZE];
  *     uint8_t cbr_flag[STD_VIDEO_H264_CPB_CNT_LIST_SIZE];
@@ -48,6 +49,7 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
         CPB_CNT_MINUS1,
         BIT_RATE_SCALE,
         CPB_SIZE_SCALE,
+        RESERVED1,
         BIT_RATE_VALUE_MINUS1,
         CPB_SIZE_VALUE_MINUS1,
         CBR_FLAG,
@@ -58,6 +60,7 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
 
     static {
         Layout layout = __struct(
+            __member(1),
             __member(1),
             __member(1),
             __member(1),
@@ -76,13 +79,14 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
         CPB_CNT_MINUS1 = layout.offsetof(0);
         BIT_RATE_SCALE = layout.offsetof(1);
         CPB_SIZE_SCALE = layout.offsetof(2);
-        BIT_RATE_VALUE_MINUS1 = layout.offsetof(3);
-        CPB_SIZE_VALUE_MINUS1 = layout.offsetof(4);
-        CBR_FLAG = layout.offsetof(5);
-        INITIAL_CPB_REMOVAL_DELAY_LENGTH_MINUS1 = layout.offsetof(6);
-        CPB_REMOVAL_DELAY_LENGTH_MINUS1 = layout.offsetof(7);
-        DPB_OUTPUT_DELAY_LENGTH_MINUS1 = layout.offsetof(8);
-        TIME_OFFSET_LENGTH = layout.offsetof(9);
+        RESERVED1 = layout.offsetof(3);
+        BIT_RATE_VALUE_MINUS1 = layout.offsetof(4);
+        CPB_SIZE_VALUE_MINUS1 = layout.offsetof(5);
+        CBR_FLAG = layout.offsetof(6);
+        INITIAL_CPB_REMOVAL_DELAY_LENGTH_MINUS1 = layout.offsetof(7);
+        CPB_REMOVAL_DELAY_LENGTH_MINUS1 = layout.offsetof(8);
+        DPB_OUTPUT_DELAY_LENGTH_MINUS1 = layout.offsetof(9);
+        TIME_OFFSET_LENGTH = layout.offsetof(10);
     }
 
     /**
@@ -323,6 +327,7 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
     public static byte nbit_rate_scale(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.BIT_RATE_SCALE); }
     /** Unsafe version of {@link #cpb_size_scale}. */
     public static byte ncpb_size_scale(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.CPB_SIZE_SCALE); }
+    public static byte nreserved1(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264HrdParameters.RESERVED1); }
     /** Unsafe version of {@link #bit_rate_value_minus1}. */
     public static IntBuffer nbit_rate_value_minus1(long struct) { return memIntBuffer(struct + StdVideoH264HrdParameters.BIT_RATE_VALUE_MINUS1, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }
     /** Unsafe version of {@link #bit_rate_value_minus1(int) bit_rate_value_minus1}. */
@@ -356,6 +361,7 @@ public class StdVideoH264HrdParameters extends Struct implements NativeResource 
     public static void nbit_rate_scale(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.BIT_RATE_SCALE, value); }
     /** Unsafe version of {@link #cpb_size_scale(byte) cpb_size_scale}. */
     public static void ncpb_size_scale(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.CPB_SIZE_SCALE, value); }
+    public static void nreserved1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264HrdParameters.RESERVED1, value); }
     /** Unsafe version of {@link #bit_rate_value_minus1(IntBuffer) bit_rate_value_minus1}. */
     public static void nbit_rate_value_minus1(long struct, IntBuffer value) {
         if (CHECKS) { checkGT(value, STD_VIDEO_H264_CPB_CNT_LIST_SIZE); }

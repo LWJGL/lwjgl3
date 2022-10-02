@@ -125,7 +125,6 @@ public class EXTSampleLocations {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>The {@code sampleLocationsPerPixel} member of {@code pSampleLocationsInfo} <b>must</b> equal the {@code rasterizationSamples} member of the {@link VkPipelineMultisampleStateCreateInfo} structure the bound graphics pipeline has been created with</li>
      * <li>If {@link VkPhysicalDeviceSampleLocationsPropertiesEXT}{@code ::variableSampleLocations} is {@link VK10#VK_FALSE FALSE} then the current render pass <b>must</b> have been begun by specifying a {@link VkRenderPassSampleLocationsBeginInfoEXT} structure whose {@code pPostSubpassSampleLocations} member contains an element with a {@code subpassIndex} matching the current subpass index and the {@code sampleLocationsInfo} member of that element <b>must</b> match the sample locations state pointed to by {@code pSampleLocationsInfo}</li>
      * </ul>
      * 

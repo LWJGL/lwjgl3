@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>41</dd>
  * <dt><b>Revision</b></dt>
- * <dd>6</dd>
+ * <dd>7</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires support for Vulkan 1.0</li>
@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2022-08-09</dd>
+ * <dd>2022-09-18</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -55,7 +55,7 @@ package org.lwjgl.vulkan;
 public final class EXTVideoDecodeH264 {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VIDEO_DECODE_H264_SPEC_VERSION = 6;
+    public static final int VK_EXT_VIDEO_DECODE_H264_SPEC_VERSION = 7;
 
     /** The extension name. */
     public static final String VK_EXT_VIDEO_DECODE_H264_EXTENSION_NAME = "VK_EXT_video_decode_h264";
@@ -68,7 +68,6 @@ public final class EXTVideoDecodeH264 {
      * <ul>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT}</li>
@@ -78,7 +77,6 @@ public final class EXTVideoDecodeH264 {
     public static final int
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT                   = 1000040000,
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT                   = 1000040001,
-        VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_INFO_EXT                       = 1000040002,
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_INFO_EXT                   = 1000040003,
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT = 1000040004,
         VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT    = 1000040005,
@@ -97,6 +95,10 @@ public final class EXTVideoDecodeH264 {
      * <li>{@link #VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_EXT} specifies support for or use of a picture layout for interlaced content where all lines belonging to the first field are decoded to the even-numbered lines within the picture resource, and all lines belonging to the second field are decoded to the odd-numbered lines within the picture resource.</li>
      * <li>{@link #VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_EXT VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_EXT} specifies support for or use of a picture layout for interlaced content where all lines belonging to the first field are grouped together in a single plane, followed by another plane containing all lines belonging to the second field.</li>
      * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link VkVideoDecodeH264ProfileInfoEXT}</p>
      */
     public static final int
         VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT                      = 0,

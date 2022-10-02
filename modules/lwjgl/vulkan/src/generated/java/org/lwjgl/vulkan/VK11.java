@@ -705,7 +705,7 @@ public class VK11 extends VK10 {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkPipelineTessellationDomainOriginStateCreateInfo}</p>
+     * <p>{@link VkPipelineTessellationDomainOriginStateCreateInfo}, {@link EXTExtendedDynamicState3#vkCmdSetTessellationDomainOriginEXT CmdSetTessellationDomainOriginEXT}</p>
      */
     public static final int
         VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT = 0,

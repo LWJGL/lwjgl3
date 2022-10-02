@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@link VkVideoBeginCodingInfoKHR}{@code ::referenceSlotCount} <b>must</b> not exceed the value specified in {@link VkVideoSessionCreateInfoKHR}{@code ::maxReferencePicturesSlotsCount} when creating the video session object that is being provided in {@code videoSession}</li>
+ * <li>{@link VkVideoBeginCodingInfoKHR}{@code ::referenceSlotCount} <b>must</b> not exceed the value specified in {@link VkVideoSessionCreateInfoKHR}{@code ::maxDpbSlots} when creating the video session object that is being provided in {@code videoSession}</li>
  * <li>If {@code videoSessionParameters} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> have been created using {@code videoSession} as a parent object</li>
  * </ul>
  * 
@@ -328,11 +328,8 @@ public class VkVideoBeginCodingInfoKHR extends Struct implements NativeResource 
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        int referenceSlotCount = nreferenceSlotCount(struct);
-        if (referenceSlotCount != 0) {
-            long pReferenceSlots = memGetAddress(struct + VkVideoBeginCodingInfoKHR.PREFERENCESLOTS);
-            check(pReferenceSlots);
-            validate(pReferenceSlots, referenceSlotCount, VkVideoReferenceSlotInfoKHR.SIZEOF, VkVideoReferenceSlotInfoKHR::validate);
+        if (nreferenceSlotCount(struct) != 0) {
+            check(memGetAddress(struct + VkVideoBeginCodingInfoKHR.PREFERENCESLOTS));
         }
     }
 

@@ -39,7 +39,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDeviceAddressBindingCallbackDataEXT}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>If {@code pMessageIdName} is not {@code NULL}, {@code pMessageIdName} <b>must</b> be a null-terminated UTF-8 string</li>
  * <li>{@code pMessage} <b>must</b> be a null-terminated UTF-8 string</li>
@@ -193,6 +194,8 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct implements Nati
     public VkDebugUtilsMessengerCallbackDataEXT sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkDebugUtilsMessengerCallbackDataEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkDeviceAddressBindingCallbackDataEXT} value to the {@code pNext} chain. */
+    public VkDebugUtilsMessengerCallbackDataEXT pNext(VkDeviceAddressBindingCallbackDataEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkDebugUtilsMessengerCallbackDataEXT flags(@NativeType("VkDebugUtilsMessengerCallbackDataFlagsEXT") int value) { nflags(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@link #pMessageIdName} field. */
@@ -553,6 +556,8 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct implements Nati
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT); }
         /** Sets the specified value to the {@link VkDebugUtilsMessengerCallbackDataEXT#pNext} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugUtilsMessengerCallbackDataEXT.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkDeviceAddressBindingCallbackDataEXT} value to the {@code pNext} chain. */
+        public VkDebugUtilsMessengerCallbackDataEXT.Buffer pNext(VkDeviceAddressBindingCallbackDataEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkDebugUtilsMessengerCallbackDataEXT#flags} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer flags(@NativeType("VkDebugUtilsMessengerCallbackDataFlagsEXT") int value) { VkDebugUtilsMessengerCallbackDataEXT.nflags(address(), value); return this; }
         /** Sets the address of the specified encoded string to the {@link VkDebugUtilsMessengerCallbackDataEXT#pMessageIdName} field. */

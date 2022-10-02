@@ -36,7 +36,7 @@ import org.lwjgl.vulkan.video.*;
  * struct VkVideoDecodeH264CapabilitiesEXT {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     StdVideoH264Level {@link #maxLevel};
+ *     StdVideoH264LevelIdc maxLevelIdc;
  *     {@link VkOffset2D VkOffset2D} {@link #fieldOffsetGranularity};
  * }</code></pre>
  */
@@ -52,7 +52,7 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
     public static final int
         STYPE,
         PNEXT,
-        MAXLEVEL,
+        MAXLEVELIDC,
         FIELDOFFSETGRANULARITY;
 
     static {
@@ -68,7 +68,7 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        MAXLEVEL = layout.offsetof(2);
+        MAXLEVELIDC = layout.offsetof(2);
         FIELDOFFSETGRANULARITY = layout.offsetof(3);
     }
 
@@ -91,9 +91,9 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum H.264 level supported by the device. */
-    @NativeType("StdVideoH264Level")
-    public int maxLevel() { return nmaxLevel(address()); }
+    /** @return the value of the {@code maxLevelIdc} field. */
+    @NativeType("StdVideoH264LevelIdc")
+    public int maxLevelIdc() { return nmaxLevelIdc(address()); }
     /** - if Interlaced Video Content is supported, the maximum field offset granularity supported for the picture resource. */
     public VkOffset2D fieldOffsetGranularity() { return nfieldOffsetGranularity(address()); }
 
@@ -244,8 +244,8 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264CapabilitiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH264CapabilitiesEXT.PNEXT); }
-    /** Unsafe version of {@link #maxLevel}. */
-    public static int nmaxLevel(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264CapabilitiesEXT.MAXLEVEL); }
+    /** Unsafe version of {@link #maxLevelIdc}. */
+    public static int nmaxLevelIdc(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH264CapabilitiesEXT.MAXLEVELIDC); }
     /** Unsafe version of {@link #fieldOffsetGranularity}. */
     public static VkOffset2D nfieldOffsetGranularity(long struct) { return VkOffset2D.create(struct + VkVideoDecodeH264CapabilitiesEXT.FIELDOFFSETGRANULARITY); }
 
@@ -298,9 +298,9 @@ public class VkVideoDecodeH264CapabilitiesEXT extends Struct implements NativeRe
         /** @return the value of the {@link VkVideoDecodeH264CapabilitiesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoDecodeH264CapabilitiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkVideoDecodeH264CapabilitiesEXT#maxLevel} field. */
-        @NativeType("StdVideoH264Level")
-        public int maxLevel() { return VkVideoDecodeH264CapabilitiesEXT.nmaxLevel(address()); }
+        /** @return the value of the {@code maxLevelIdc} field. */
+        @NativeType("StdVideoH264LevelIdc")
+        public int maxLevelIdc() { return VkVideoDecodeH264CapabilitiesEXT.nmaxLevelIdc(address()); }
         /** @return a {@link VkOffset2D} view of the {@link VkVideoDecodeH264CapabilitiesEXT#fieldOffsetGranularity} field. */
         public VkOffset2D fieldOffsetGranularity() { return VkVideoDecodeH264CapabilitiesEXT.nfieldOffsetGranularity(address()); }
 

@@ -1,0 +1,312 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: https://www.lwjgl.org/license
+ * MACHINE GENERATED FILE, DO NOT EDIT
+ */
+package org.lwjgl.vulkan;
+
+import javax.annotation.*;
+
+import java.nio.*;
+
+import org.lwjgl.*;
+import org.lwjgl.system.*;
+
+import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
+
+/**
+ * Structure describing present barrier capabilities of a surface.
+ * 
+ * <h5>Description</h5>
+ * 
+ * <p>This structure <b>can</b> be included in the {@code pNext} chain of {@link VkSurfaceCapabilities2KHR} to determine support for present barrier access. If {@code presentBarrierSupported} is {@link VK10#VK_FALSE FALSE}, it indicates that the present barrier feature is not obtainable for this surface.</p>
+ * 
+ * <h5>Valid Usage (Implicit)</h5>
+ * 
+ * <ul>
+ * <li>{@code sType} <b>must</b> be {@link NVPresentBarrier#VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV}</li>
+ * </ul>
+ * 
+ * <h3>Layout</h3>
+ * 
+ * <pre><code>
+ * struct VkSurfaceCapabilitiesPresentBarrierNV {
+ *     VkStructureType {@link #sType};
+ *     void * {@link #pNext};
+ *     VkBool32 {@link #presentBarrierSupported};
+ * }</code></pre>
+ */
+public class VkSurfaceCapabilitiesPresentBarrierNV extends Struct implements NativeResource {
+
+    /** The struct size in bytes. */
+    public static final int SIZEOF;
+
+    /** The struct alignment in bytes. */
+    public static final int ALIGNOF;
+
+    /** The struct member offsets. */
+    public static final int
+        STYPE,
+        PNEXT,
+        PRESENTBARRIERSUPPORTED;
+
+    static {
+        Layout layout = __struct(
+            __member(4),
+            __member(POINTER_SIZE),
+            __member(4)
+        );
+
+        SIZEOF = layout.getSize();
+        ALIGNOF = layout.getAlignment();
+
+        STYPE = layout.offsetof(0);
+        PNEXT = layout.offsetof(1);
+        PRESENTBARRIERSUPPORTED = layout.offsetof(2);
+    }
+
+    /**
+     * Creates a {@code VkSurfaceCapabilitiesPresentBarrierNV} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
+     * visible to the struct instance and vice versa.
+     *
+     * <p>The created instance holds a strong reference to the container object.</p>
+     */
+    public VkSurfaceCapabilitiesPresentBarrierNV(ByteBuffer container) {
+        super(memAddress(container), __checkContainer(container, SIZEOF));
+    }
+
+    @Override
+    public int sizeof() { return SIZEOF; }
+
+    /** the type of this structure. */
+    @NativeType("VkStructureType")
+    public int sType() { return nsType(address()); }
+    /** {@code NULL} or a pointer to a structure extending this structure. */
+    @NativeType("void *")
+    public long pNext() { return npNext(address()); }
+    /** a boolean describing whether the surface is able to make use of the present barrier feature. */
+    @NativeType("VkBool32")
+    public boolean presentBarrierSupported() { return npresentBarrierSupported(address()) != 0; }
+
+    /** Sets the specified value to the {@link #sType} field. */
+    public VkSurfaceCapabilitiesPresentBarrierNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
+    /** Sets the {@link NVPresentBarrier#VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV} value to the {@link #sType} field. */
+    public VkSurfaceCapabilitiesPresentBarrierNV sType$Default() { return sType(NVPresentBarrier.VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV); }
+    /** Sets the specified value to the {@link #pNext} field. */
+    public VkSurfaceCapabilitiesPresentBarrierNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Sets the specified value to the {@link #presentBarrierSupported} field. */
+    public VkSurfaceCapabilitiesPresentBarrierNV presentBarrierSupported(@NativeType("VkBool32") boolean value) { npresentBarrierSupported(address(), value ? 1 : 0); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VkSurfaceCapabilitiesPresentBarrierNV set(
+        int sType,
+        long pNext,
+        boolean presentBarrierSupported
+    ) {
+        sType(sType);
+        pNext(pNext);
+        presentBarrierSupported(presentBarrierSupported);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public VkSurfaceCapabilitiesPresentBarrierNV set(VkSurfaceCapabilitiesPresentBarrierNV src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
+    // -----------------------------------
+
+    /** Returns a new {@code VkSurfaceCapabilitiesPresentBarrierNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static VkSurfaceCapabilitiesPresentBarrierNV malloc() {
+        return wrap(VkSurfaceCapabilitiesPresentBarrierNV.class, nmemAllocChecked(SIZEOF));
+    }
+
+    /** Returns a new {@code VkSurfaceCapabilitiesPresentBarrierNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static VkSurfaceCapabilitiesPresentBarrierNV calloc() {
+        return wrap(VkSurfaceCapabilitiesPresentBarrierNV.class, nmemCallocChecked(1, SIZEOF));
+    }
+
+    /** Returns a new {@code VkSurfaceCapabilitiesPresentBarrierNV} instance allocated with {@link BufferUtils}. */
+    public static VkSurfaceCapabilitiesPresentBarrierNV create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return wrap(VkSurfaceCapabilitiesPresentBarrierNV.class, memAddress(container), container);
+    }
+
+    /** Returns a new {@code VkSurfaceCapabilitiesPresentBarrierNV} instance for the specified memory address. */
+    public static VkSurfaceCapabilitiesPresentBarrierNV create(long address) {
+        return wrap(VkSurfaceCapabilitiesPresentBarrierNV.class, address);
+    }
+
+    /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
+    @Nullable
+    public static VkSurfaceCapabilitiesPresentBarrierNV createSafe(long address) {
+        return address == NULL ? null : wrap(VkSurfaceCapabilitiesPresentBarrierNV.class, address);
+    }
+
+    /**
+     * Returns a new {@link VkSurfaceCapabilitiesPresentBarrierNV.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkSurfaceCapabilitiesPresentBarrierNV.Buffer malloc(int capacity) {
+        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkSurfaceCapabilitiesPresentBarrierNV.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkSurfaceCapabilitiesPresentBarrierNV.Buffer calloc(int capacity) {
+        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkSurfaceCapabilitiesPresentBarrierNV.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static VkSurfaceCapabilitiesPresentBarrierNV.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return wrap(Buffer.class, memAddress(container), capacity, container);
+    }
+
+    /**
+     * Create a {@link VkSurfaceCapabilitiesPresentBarrierNV.Buffer} instance at the specified memory.
+     *
+     * @param address  the memory address
+     * @param capacity the buffer capacity
+     */
+    public static VkSurfaceCapabilitiesPresentBarrierNV.Buffer create(long address, int capacity) {
+        return wrap(Buffer.class, address, capacity);
+    }
+
+    /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
+    @Nullable
+    public static VkSurfaceCapabilitiesPresentBarrierNV.Buffer createSafe(long address, int capacity) {
+        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+    }
+
+    /**
+     * Returns a new {@code VkSurfaceCapabilitiesPresentBarrierNV} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkSurfaceCapabilitiesPresentBarrierNV malloc(MemoryStack stack) {
+        return wrap(VkSurfaceCapabilitiesPresentBarrierNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@code VkSurfaceCapabilitiesPresentBarrierNV} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static VkSurfaceCapabilitiesPresentBarrierNV calloc(MemoryStack stack) {
+        return wrap(VkSurfaceCapabilitiesPresentBarrierNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+    }
+
+    /**
+     * Returns a new {@link VkSurfaceCapabilitiesPresentBarrierNV.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkSurfaceCapabilitiesPresentBarrierNV.Buffer malloc(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link VkSurfaceCapabilitiesPresentBarrierNV.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static VkSurfaceCapabilitiesPresentBarrierNV.Buffer calloc(int capacity, MemoryStack stack) {
+        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
+    // -----------------------------------
+
+    /** Unsafe version of {@link #sType}. */
+    public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesPresentBarrierNV.STYPE); }
+    /** Unsafe version of {@link #pNext}. */
+    public static long npNext(long struct) { return memGetAddress(struct + VkSurfaceCapabilitiesPresentBarrierNV.PNEXT); }
+    /** Unsafe version of {@link #presentBarrierSupported}. */
+    public static int npresentBarrierSupported(long struct) { return UNSAFE.getInt(null, struct + VkSurfaceCapabilitiesPresentBarrierNV.PRESENTBARRIERSUPPORTED); }
+
+    /** Unsafe version of {@link #sType(int) sType}. */
+    public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceCapabilitiesPresentBarrierNV.STYPE, value); }
+    /** Unsafe version of {@link #pNext(long) pNext}. */
+    public static void npNext(long struct, long value) { memPutAddress(struct + VkSurfaceCapabilitiesPresentBarrierNV.PNEXT, value); }
+    /** Unsafe version of {@link #presentBarrierSupported(boolean) presentBarrierSupported}. */
+    public static void npresentBarrierSupported(long struct, int value) { UNSAFE.putInt(null, struct + VkSurfaceCapabilitiesPresentBarrierNV.PRESENTBARRIERSUPPORTED, value); }
+
+    // -----------------------------------
+
+    /** An array of {@link VkSurfaceCapabilitiesPresentBarrierNV} structs. */
+    public static class Buffer extends StructBuffer<VkSurfaceCapabilitiesPresentBarrierNV, Buffer> implements NativeResource {
+
+        private static final VkSurfaceCapabilitiesPresentBarrierNV ELEMENT_FACTORY = VkSurfaceCapabilitiesPresentBarrierNV.create(-1L);
+
+        /**
+         * Creates a new {@code VkSurfaceCapabilitiesPresentBarrierNV.Buffer} instance backed by the specified container.
+         *
+         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
+         * by {@link VkSurfaceCapabilitiesPresentBarrierNV#SIZEOF}, and its mark will be undefined.
+         *
+         * <p>The created buffer instance holds a strong reference to the container object.</p>
+         */
+        public Buffer(ByteBuffer container) {
+            super(container, container.remaining() / SIZEOF);
+        }
+
+        public Buffer(long address, int cap) {
+            super(address, null, -1, 0, cap, cap);
+        }
+
+        Buffer(long address, @Nullable ByteBuffer container, int mark, int pos, int lim, int cap) {
+            super(address, container, mark, pos, lim, cap);
+        }
+
+        @Override
+        protected Buffer self() {
+            return this;
+        }
+
+        @Override
+        protected VkSurfaceCapabilitiesPresentBarrierNV getElementFactory() {
+            return ELEMENT_FACTORY;
+        }
+
+        /** @return the value of the {@link VkSurfaceCapabilitiesPresentBarrierNV#sType} field. */
+        @NativeType("VkStructureType")
+        public int sType() { return VkSurfaceCapabilitiesPresentBarrierNV.nsType(address()); }
+        /** @return the value of the {@link VkSurfaceCapabilitiesPresentBarrierNV#pNext} field. */
+        @NativeType("void *")
+        public long pNext() { return VkSurfaceCapabilitiesPresentBarrierNV.npNext(address()); }
+        /** @return the value of the {@link VkSurfaceCapabilitiesPresentBarrierNV#presentBarrierSupported} field. */
+        @NativeType("VkBool32")
+        public boolean presentBarrierSupported() { return VkSurfaceCapabilitiesPresentBarrierNV.npresentBarrierSupported(address()) != 0; }
+
+        /** Sets the specified value to the {@link VkSurfaceCapabilitiesPresentBarrierNV#sType} field. */
+        public VkSurfaceCapabilitiesPresentBarrierNV.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceCapabilitiesPresentBarrierNV.nsType(address(), value); return this; }
+        /** Sets the {@link NVPresentBarrier#VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV} value to the {@link VkSurfaceCapabilitiesPresentBarrierNV#sType} field. */
+        public VkSurfaceCapabilitiesPresentBarrierNV.Buffer sType$Default() { return sType(NVPresentBarrier.VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV); }
+        /** Sets the specified value to the {@link VkSurfaceCapabilitiesPresentBarrierNV#pNext} field. */
+        public VkSurfaceCapabilitiesPresentBarrierNV.Buffer pNext(@NativeType("void *") long value) { VkSurfaceCapabilitiesPresentBarrierNV.npNext(address(), value); return this; }
+        /** Sets the specified value to the {@link VkSurfaceCapabilitiesPresentBarrierNV#presentBarrierSupported} field. */
+        public VkSurfaceCapabilitiesPresentBarrierNV.Buffer presentBarrierSupported(@NativeType("VkBool32") boolean value) { VkSurfaceCapabilitiesPresentBarrierNV.npresentBarrierSupported(address(), value ? 1 : 0); return this; }
+
+    }
+
+}

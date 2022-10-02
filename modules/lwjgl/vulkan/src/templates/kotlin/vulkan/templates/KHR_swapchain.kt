@@ -218,6 +218,8 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
         In particular, it will fail if the {@code imageExtent} member of {@code pCreateInfo} does not match the extents of the monitor. Other reasons for failure may include the app not being set as high-dpi aware, or if the physical device and monitor are not compatible in this mode.
         </div>
 
+        If the {@code pNext} chain of ##VkSwapchainCreateInfoKHR includes a ##VkSwapchainPresentBarrierCreateInfoNV structure, then that structure includes additional swapchain creation parameters specific to the present barrier. Swapchain creation <b>may</b> fail if the state of the current system restricts the usage of the present barrier feature ##VkSurfaceCapabilitiesPresentBarrierNV, or a swapchain itself does not satisfy all the required conditions. In this scenario #ERROR_INITIALIZATION_FAILED is returned.
+
         When the {@code VkSurfaceKHR} in ##VkSwapchainCreateInfoKHR is a display surface, then the {@code VkDisplayModeKHR} in display surface’s ##VkDisplaySurfaceCreateInfoKHR is associated with a particular {@code VkDisplayKHR}. Swapchain creation <b>may</b> fail if that {@code VkDisplayKHR} is not acquired by the application. In this scenario #ERROR_INITIALIZATION_FAILED is returned.
 
         <h5>Valid Usage (Implicit)</h5>

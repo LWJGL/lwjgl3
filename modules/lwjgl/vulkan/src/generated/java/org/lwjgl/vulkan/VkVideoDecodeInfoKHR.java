@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code srcBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
  * <li>{@code dstPictureResource} <b>must</b> be a valid {@link VkVideoPictureResourceInfoKHR} structure</li>
- * <li>{@code pSetupReferenceSlot} <b>must</b> be a valid pointer to a valid {@link VkVideoReferenceSlotInfoKHR} structure</li>
+ * <li>If {@code pSetupReferenceSlot} is not {@code NULL}, {@code pSetupReferenceSlot} <b>must</b> be a valid pointer to a valid {@link VkVideoReferenceSlotInfoKHR} structure</li>
  * <li>If {@code referenceSlotCount} is not 0, {@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid {@link VkVideoReferenceSlotInfoKHR} structures</li>
  * </ul>
  * 
@@ -142,6 +142,7 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     /** the destination <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decoded-output-picture">Decoded Output Picture</a> Resource. */
     public VkVideoPictureResourceInfoKHR dstPictureResource() { return ndstPictureResource(address()); }
     /** {@code NULL} or a pointer to a {@link VkVideoReferenceSlotInfoKHR} structure used for generating a DPB reference slot and Picture Resource. {@code pSetupReferenceSlot→slotIndex} specifies the slot index number to use as a target for producing the DPB data. {@code slotIndex} <b>must</b> reference a valid entry as specified in {@link VkVideoBeginCodingInfoKHR} via the {@code pReferenceSlots} within the {@link KHRVideoQueue#vkCmdBeginVideoCodingKHR CmdBeginVideoCodingKHR} command that established the Vulkan Video Decode Context for this command. */
+    @Nullable
     @NativeType("VkVideoReferenceSlotInfoKHR const *")
     public VkVideoReferenceSlotInfoKHR pSetupReferenceSlot() { return npSetupReferenceSlot(address()); }
     /** the number of the DPB Reference Pictures that will be used when this decoding operation is executing. */
@@ -175,7 +176,7 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     /** Passes the {@link #dstPictureResource} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkVideoDecodeInfoKHR dstPictureResource(java.util.function.Consumer<VkVideoPictureResourceInfoKHR> consumer) { consumer.accept(dstPictureResource()); return this; }
     /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR} to the {@link #pSetupReferenceSlot} field. */
-    public VkVideoDecodeInfoKHR pSetupReferenceSlot(@NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR value) { npSetupReferenceSlot(address(), value); return this; }
+    public VkVideoDecodeInfoKHR pSetupReferenceSlot(@Nullable @NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR value) { npSetupReferenceSlot(address(), value); return this; }
     /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR.Buffer} to the {@link #pReferenceSlots} field. */
     public VkVideoDecodeInfoKHR pReferenceSlots(@Nullable @NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR.Buffer value) { npReferenceSlots(address(), value); return this; }
 
@@ -188,7 +189,7 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         long srcBufferOffset,
         long srcBufferRange,
         VkVideoPictureResourceInfoKHR dstPictureResource,
-        VkVideoReferenceSlotInfoKHR pSetupReferenceSlot,
+        @Nullable VkVideoReferenceSlotInfoKHR pSetupReferenceSlot,
         @Nullable VkVideoReferenceSlotInfoKHR.Buffer pReferenceSlots
     ) {
         sType(sType);
@@ -344,7 +345,7 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #dstPictureResource}. */
     public static VkVideoPictureResourceInfoKHR ndstPictureResource(long struct) { return VkVideoPictureResourceInfoKHR.create(struct + VkVideoDecodeInfoKHR.DSTPICTURERESOURCE); }
     /** Unsafe version of {@link #pSetupReferenceSlot}. */
-    public static VkVideoReferenceSlotInfoKHR npSetupReferenceSlot(long struct) { return VkVideoReferenceSlotInfoKHR.create(memGetAddress(struct + VkVideoDecodeInfoKHR.PSETUPREFERENCESLOT)); }
+    @Nullable public static VkVideoReferenceSlotInfoKHR npSetupReferenceSlot(long struct) { return VkVideoReferenceSlotInfoKHR.createSafe(memGetAddress(struct + VkVideoDecodeInfoKHR.PSETUPREFERENCESLOT)); }
     /** Unsafe version of {@link #referenceSlotCount}. */
     public static int nreferenceSlotCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeInfoKHR.REFERENCESLOTCOUNT); }
     /** Unsafe version of {@link #pReferenceSlots}. */
@@ -365,7 +366,7 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     /** Unsafe version of {@link #dstPictureResource(VkVideoPictureResourceInfoKHR) dstPictureResource}. */
     public static void ndstPictureResource(long struct, VkVideoPictureResourceInfoKHR value) { memCopy(value.address(), struct + VkVideoDecodeInfoKHR.DSTPICTURERESOURCE, VkVideoPictureResourceInfoKHR.SIZEOF); }
     /** Unsafe version of {@link #pSetupReferenceSlot(VkVideoReferenceSlotInfoKHR) pSetupReferenceSlot}. */
-    public static void npSetupReferenceSlot(long struct, VkVideoReferenceSlotInfoKHR value) { memPutAddress(struct + VkVideoDecodeInfoKHR.PSETUPREFERENCESLOT, value.address()); }
+    public static void npSetupReferenceSlot(long struct, @Nullable VkVideoReferenceSlotInfoKHR value) { memPutAddress(struct + VkVideoDecodeInfoKHR.PSETUPREFERENCESLOT, memAddressSafe(value)); }
     /** Sets the specified value to the {@code referenceSlotCount} field of the specified {@code struct}. */
     public static void nreferenceSlotCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeInfoKHR.REFERENCESLOTCOUNT, value); }
     /** Unsafe version of {@link #pReferenceSlots(VkVideoReferenceSlotInfoKHR.Buffer) pReferenceSlots}. */
@@ -377,14 +378,8 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        long pSetupReferenceSlot = memGetAddress(struct + VkVideoDecodeInfoKHR.PSETUPREFERENCESLOT);
-        check(pSetupReferenceSlot);
-        VkVideoReferenceSlotInfoKHR.validate(pSetupReferenceSlot);
-        int referenceSlotCount = nreferenceSlotCount(struct);
-        if (referenceSlotCount != 0) {
-            long pReferenceSlots = memGetAddress(struct + VkVideoDecodeInfoKHR.PREFERENCESLOTS);
-            check(pReferenceSlots);
-            validate(pReferenceSlots, referenceSlotCount, VkVideoReferenceSlotInfoKHR.SIZEOF, VkVideoReferenceSlotInfoKHR::validate);
+        if (nreferenceSlotCount(struct) != 0) {
+            check(memGetAddress(struct + VkVideoDecodeInfoKHR.PREFERENCESLOTS));
         }
     }
 
@@ -447,6 +442,7 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         /** @return a {@link VkVideoPictureResourceInfoKHR} view of the {@link VkVideoDecodeInfoKHR#dstPictureResource} field. */
         public VkVideoPictureResourceInfoKHR dstPictureResource() { return VkVideoDecodeInfoKHR.ndstPictureResource(address()); }
         /** @return a {@link VkVideoReferenceSlotInfoKHR} view of the struct pointed to by the {@link VkVideoDecodeInfoKHR#pSetupReferenceSlot} field. */
+        @Nullable
         @NativeType("VkVideoReferenceSlotInfoKHR const *")
         public VkVideoReferenceSlotInfoKHR pSetupReferenceSlot() { return VkVideoDecodeInfoKHR.npSetupReferenceSlot(address()); }
         /** @return the value of the {@link VkVideoDecodeInfoKHR#referenceSlotCount} field. */
@@ -480,7 +476,7 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         /** Passes the {@link VkVideoDecodeInfoKHR#dstPictureResource} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkVideoDecodeInfoKHR.Buffer dstPictureResource(java.util.function.Consumer<VkVideoPictureResourceInfoKHR> consumer) { consumer.accept(dstPictureResource()); return this; }
         /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR} to the {@link VkVideoDecodeInfoKHR#pSetupReferenceSlot} field. */
-        public VkVideoDecodeInfoKHR.Buffer pSetupReferenceSlot(@NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR value) { VkVideoDecodeInfoKHR.npSetupReferenceSlot(address(), value); return this; }
+        public VkVideoDecodeInfoKHR.Buffer pSetupReferenceSlot(@Nullable @NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR value) { VkVideoDecodeInfoKHR.npSetupReferenceSlot(address(), value); return this; }
         /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR.Buffer} to the {@link VkVideoDecodeInfoKHR#pReferenceSlots} field. */
         public VkVideoDecodeInfoKHR.Buffer pReferenceSlots(@Nullable @NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR.Buffer value) { VkVideoDecodeInfoKHR.npReferenceSlots(address(), value); return this; }
 

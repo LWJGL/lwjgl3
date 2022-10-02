@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct StdVideoH265SpsFlags {
  *     uint32_t sps_temporal_id_nesting_flag : 1;
  *     uint32_t separate_colour_plane_flag : 1;
+ *     uint32_t conformance_window_flag : 1;
+ *     uint32_t sps_sub_layer_ordering_info_present_flag : 1;
  *     uint32_t scaling_list_enabled_flag : 1;
  *     uint32_t sps_scaling_list_data_present_flag : 1;
  *     uint32_t amp_enabled_flag : 1;
@@ -46,6 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t sps_scc_extension_flag : 1;
  *     uint32_t {@link #sps_curr_pic_ref_enabled_flag} : 1;
  *     uint32_t palette_mode_enabled_flag : 1;
+ *     uint32_t sps_palette_predictor_initializers_present_flag : 1;
  *     uint32_t sps_palette_predictor_initializer_present_flag : 1;
  *     uint32_t intra_boundary_filtering_disabled_flag : 1;
  * }</code></pre>
@@ -92,6 +95,12 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
     /** @return the value of the {@code separate_colour_plane_flag} field. */
     @NativeType("uint32_t")
     public boolean separate_colour_plane_flag() { return nseparate_colour_plane_flag(address()) != 0; }
+    /** @return the value of the {@code conformance_window_flag} field. */
+    @NativeType("uint32_t")
+    public boolean conformance_window_flag() { return nconformance_window_flag(address()) != 0; }
+    /** @return the value of the {@code sps_sub_layer_ordering_info_present_flag} field. */
+    @NativeType("uint32_t")
+    public boolean sps_sub_layer_ordering_info_present_flag() { return nsps_sub_layer_ordering_info_present_flag(address()) != 0; }
     /** @return the value of the {@code scaling_list_enabled_flag} field. */
     @NativeType("uint32_t")
     public boolean scaling_list_enabled_flag() { return nscaling_list_enabled_flag(address()) != 0; }
@@ -164,6 +173,9 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
     /** @return the value of the {@code palette_mode_enabled_flag} field. */
     @NativeType("uint32_t")
     public boolean palette_mode_enabled_flag() { return npalette_mode_enabled_flag(address()) != 0; }
+    /** @return the value of the {@code sps_palette_predictor_initializers_present_flag} field. */
+    @NativeType("uint32_t")
+    public boolean sps_palette_predictor_initializers_present_flag() { return nsps_palette_predictor_initializers_present_flag(address()) != 0; }
     /** @return the value of the {@code sps_palette_predictor_initializer_present_flag} field. */
     @NativeType("uint32_t")
     public boolean sps_palette_predictor_initializer_present_flag() { return nsps_palette_predictor_initializer_present_flag(address()) != 0; }
@@ -175,6 +187,10 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
     public StdVideoH265SpsFlags sps_temporal_id_nesting_flag(@NativeType("uint32_t") boolean value) { nsps_temporal_id_nesting_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code separate_colour_plane_flag} field. */
     public StdVideoH265SpsFlags separate_colour_plane_flag(@NativeType("uint32_t") boolean value) { nseparate_colour_plane_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code conformance_window_flag} field. */
+    public StdVideoH265SpsFlags conformance_window_flag(@NativeType("uint32_t") boolean value) { nconformance_window_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code sps_sub_layer_ordering_info_present_flag} field. */
+    public StdVideoH265SpsFlags sps_sub_layer_ordering_info_present_flag(@NativeType("uint32_t") boolean value) { nsps_sub_layer_ordering_info_present_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code scaling_list_enabled_flag} field. */
     public StdVideoH265SpsFlags scaling_list_enabled_flag(@NativeType("uint32_t") boolean value) { nscaling_list_enabled_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code sps_scaling_list_data_present_flag} field. */
@@ -223,6 +239,8 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
     public StdVideoH265SpsFlags sps_curr_pic_ref_enabled_flag(@NativeType("uint32_t") boolean value) { nsps_curr_pic_ref_enabled_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code palette_mode_enabled_flag} field. */
     public StdVideoH265SpsFlags palette_mode_enabled_flag(@NativeType("uint32_t") boolean value) { npalette_mode_enabled_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code sps_palette_predictor_initializers_present_flag} field. */
+    public StdVideoH265SpsFlags sps_palette_predictor_initializers_present_flag(@NativeType("uint32_t") boolean value) { nsps_palette_predictor_initializers_present_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code sps_palette_predictor_initializer_present_flag} field. */
     public StdVideoH265SpsFlags sps_palette_predictor_initializer_present_flag(@NativeType("uint32_t") boolean value) { nsps_palette_predictor_initializer_present_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code intra_boundary_filtering_disabled_flag} field. */
@@ -232,6 +250,8 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
     public StdVideoH265SpsFlags set(
         boolean sps_temporal_id_nesting_flag,
         boolean separate_colour_plane_flag,
+        boolean conformance_window_flag,
+        boolean sps_sub_layer_ordering_info_present_flag,
         boolean scaling_list_enabled_flag,
         boolean sps_scaling_list_data_present_flag,
         boolean amp_enabled_flag,
@@ -256,11 +276,14 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         boolean sps_scc_extension_flag,
         boolean sps_curr_pic_ref_enabled_flag,
         boolean palette_mode_enabled_flag,
+        boolean sps_palette_predictor_initializers_present_flag,
         boolean sps_palette_predictor_initializer_present_flag,
         boolean intra_boundary_filtering_disabled_flag
     ) {
         sps_temporal_id_nesting_flag(sps_temporal_id_nesting_flag);
         separate_colour_plane_flag(separate_colour_plane_flag);
+        conformance_window_flag(conformance_window_flag);
+        sps_sub_layer_ordering_info_present_flag(sps_sub_layer_ordering_info_present_flag);
         scaling_list_enabled_flag(scaling_list_enabled_flag);
         sps_scaling_list_data_present_flag(sps_scaling_list_data_present_flag);
         amp_enabled_flag(amp_enabled_flag);
@@ -285,6 +308,7 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         sps_scc_extension_flag(sps_scc_extension_flag);
         sps_curr_pic_ref_enabled_flag(sps_curr_pic_ref_enabled_flag);
         palette_mode_enabled_flag(palette_mode_enabled_flag);
+        sps_palette_predictor_initializers_present_flag(sps_palette_predictor_initializers_present_flag);
         sps_palette_predictor_initializer_present_flag(sps_palette_predictor_initializer_present_flag);
         intra_boundary_filtering_disabled_flag(intra_boundary_filtering_disabled_flag);
 
@@ -421,116 +445,128 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
     public static int nsps_temporal_id_nesting_flag(long struct) { return nbitfield0(struct) & 0x00_00_00_01; }
     /** Unsafe version of {@link #separate_colour_plane_flag}. */
     public static int nseparate_colour_plane_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_02) >>> 1; }
+    /** Unsafe version of {@link #conformance_window_flag}. */
+    public static int nconformance_window_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
+    /** Unsafe version of {@link #sps_sub_layer_ordering_info_present_flag}. */
+    public static int nsps_sub_layer_ordering_info_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
     /** Unsafe version of {@link #scaling_list_enabled_flag}. */
-    public static int nscaling_list_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
+    public static int nscaling_list_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
     /** Unsafe version of {@link #sps_scaling_list_data_present_flag}. */
-    public static int nsps_scaling_list_data_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
+    public static int nsps_scaling_list_data_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_20) >>> 5; }
     /** Unsafe version of {@link #amp_enabled_flag}. */
-    public static int namp_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
+    public static int namp_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_40) >>> 6; }
     /** Unsafe version of {@link #sample_adaptive_offset_enabled_flag}. */
-    public static int nsample_adaptive_offset_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_20) >>> 5; }
+    public static int nsample_adaptive_offset_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_80) >>> 7; }
     /** Unsafe version of {@link #pcm_enabled_flag}. */
-    public static int npcm_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_40) >>> 6; }
+    public static int npcm_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_01_00) >>> 8; }
     /** Unsafe version of {@link #pcm_loop_filter_disabled_flag}. */
-    public static int npcm_loop_filter_disabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_80) >>> 7; }
+    public static int npcm_loop_filter_disabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_02_00) >>> 9; }
     /** Unsafe version of {@link #long_term_ref_pics_present_flag}. */
-    public static int nlong_term_ref_pics_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_01_00) >>> 8; }
+    public static int nlong_term_ref_pics_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_04_00) >>> 10; }
     /** Unsafe version of {@link #sps_temporal_mvp_enabled_flag}. */
-    public static int nsps_temporal_mvp_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_02_00) >>> 9; }
+    public static int nsps_temporal_mvp_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_08_00) >>> 11; }
     /** Unsafe version of {@link #strong_intra_smoothing_enabled_flag}. */
-    public static int nstrong_intra_smoothing_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_04_00) >>> 10; }
+    public static int nstrong_intra_smoothing_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_10_00) >>> 12; }
     /** Unsafe version of {@link #vui_parameters_present_flag}. */
-    public static int nvui_parameters_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_08_00) >>> 11; }
+    public static int nvui_parameters_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_20_00) >>> 13; }
     /** Unsafe version of {@link #sps_extension_present_flag}. */
-    public static int nsps_extension_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_10_00) >>> 12; }
+    public static int nsps_extension_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_40_00) >>> 14; }
     /** Unsafe version of {@link #sps_range_extension_flag}. */
-    public static int nsps_range_extension_flag(long struct) { return (nbitfield0(struct) & 0x00_00_20_00) >>> 13; }
+    public static int nsps_range_extension_flag(long struct) { return (nbitfield0(struct) & 0x00_00_80_00) >>> 15; }
     /** Unsafe version of {@link #transform_skip_rotation_enabled_flag}. */
-    public static int ntransform_skip_rotation_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_40_00) >>> 14; }
+    public static int ntransform_skip_rotation_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_01_00_00) >>> 16; }
     /** Unsafe version of {@link #transform_skip_context_enabled_flag}. */
-    public static int ntransform_skip_context_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_80_00) >>> 15; }
+    public static int ntransform_skip_context_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_02_00_00) >>> 17; }
     /** Unsafe version of {@link #implicit_rdpcm_enabled_flag}. */
-    public static int nimplicit_rdpcm_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_01_00_00) >>> 16; }
+    public static int nimplicit_rdpcm_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_04_00_00) >>> 18; }
     /** Unsafe version of {@link #explicit_rdpcm_enabled_flag}. */
-    public static int nexplicit_rdpcm_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_02_00_00) >>> 17; }
+    public static int nexplicit_rdpcm_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_08_00_00) >>> 19; }
     /** Unsafe version of {@link #extended_precision_processing_flag}. */
-    public static int nextended_precision_processing_flag(long struct) { return (nbitfield0(struct) & 0x00_04_00_00) >>> 18; }
+    public static int nextended_precision_processing_flag(long struct) { return (nbitfield0(struct) & 0x00_10_00_00) >>> 20; }
     /** Unsafe version of {@link #intra_smoothing_disabled_flag}. */
-    public static int nintra_smoothing_disabled_flag(long struct) { return (nbitfield0(struct) & 0x00_08_00_00) >>> 19; }
+    public static int nintra_smoothing_disabled_flag(long struct) { return (nbitfield0(struct) & 0x00_20_00_00) >>> 21; }
     /** Unsafe version of {@link #high_precision_offsets_enabled_flag}. */
-    public static int nhigh_precision_offsets_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_10_00_00) >>> 20; }
+    public static int nhigh_precision_offsets_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_40_00_00) >>> 22; }
     /** Unsafe version of {@link #persistent_rice_adaptation_enabled_flag}. */
-    public static int npersistent_rice_adaptation_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_20_00_00) >>> 21; }
+    public static int npersistent_rice_adaptation_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_80_00_00) >>> 23; }
     /** Unsafe version of {@link #cabac_bypass_alignment_enabled_flag}. */
-    public static int ncabac_bypass_alignment_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_40_00_00) >>> 22; }
+    public static int ncabac_bypass_alignment_enabled_flag(long struct) { return (nbitfield0(struct) & 0x01_00_00_00) >>> 24; }
     /** Unsafe version of {@link #sps_scc_extension_flag}. */
-    public static int nsps_scc_extension_flag(long struct) { return (nbitfield0(struct) & 0x00_80_00_00) >>> 23; }
+    public static int nsps_scc_extension_flag(long struct) { return (nbitfield0(struct) & 0x02_00_00_00) >>> 25; }
     /** Unsafe version of {@link #sps_curr_pic_ref_enabled_flag}. */
-    public static int nsps_curr_pic_ref_enabled_flag(long struct) { return (nbitfield0(struct) & 0x01_00_00_00) >>> 24; }
+    public static int nsps_curr_pic_ref_enabled_flag(long struct) { return (nbitfield0(struct) & 0x04_00_00_00) >>> 26; }
     /** Unsafe version of {@link #palette_mode_enabled_flag}. */
-    public static int npalette_mode_enabled_flag(long struct) { return (nbitfield0(struct) & 0x02_00_00_00) >>> 25; }
+    public static int npalette_mode_enabled_flag(long struct) { return (nbitfield0(struct) & 0x08_00_00_00) >>> 27; }
+    /** Unsafe version of {@link #sps_palette_predictor_initializers_present_flag}. */
+    public static int nsps_palette_predictor_initializers_present_flag(long struct) { return (nbitfield0(struct) & 0x10_00_00_00) >>> 28; }
     /** Unsafe version of {@link #sps_palette_predictor_initializer_present_flag}. */
-    public static int nsps_palette_predictor_initializer_present_flag(long struct) { return (nbitfield0(struct) & 0x04_00_00_00) >>> 26; }
+    public static int nsps_palette_predictor_initializer_present_flag(long struct) { return (nbitfield0(struct) & 0x20_00_00_00) >>> 29; }
     /** Unsafe version of {@link #intra_boundary_filtering_disabled_flag}. */
-    public static int nintra_boundary_filtering_disabled_flag(long struct) { return (nbitfield0(struct) & 0x08_00_00_00) >>> 27; }
+    public static int nintra_boundary_filtering_disabled_flag(long struct) { return (nbitfield0(struct) & 0x40_00_00_00) >>> 30; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH265SpsFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #sps_temporal_id_nesting_flag(boolean) sps_temporal_id_nesting_flag}. */
     public static void nsps_temporal_id_nesting_flag(long struct, int value) { nbitfield0(struct, (nbitfield0(struct) & 0xFF_FF_FF_FE) | (value & 0x00_00_00_01)); }
     /** Unsafe version of {@link #separate_colour_plane_flag(boolean) separate_colour_plane_flag}. */
     public static void nseparate_colour_plane_flag(long struct, int value) { nbitfield0(struct, ((value << 1) & 0x00_00_00_02) | (nbitfield0(struct) & 0xFF_FF_FF_FD)); }
+    /** Unsafe version of {@link #conformance_window_flag(boolean) conformance_window_flag}. */
+    public static void nconformance_window_flag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
+    /** Unsafe version of {@link #sps_sub_layer_ordering_info_present_flag(boolean) sps_sub_layer_ordering_info_present_flag}. */
+    public static void nsps_sub_layer_ordering_info_present_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
     /** Unsafe version of {@link #scaling_list_enabled_flag(boolean) scaling_list_enabled_flag}. */
-    public static void nscaling_list_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
+    public static void nscaling_list_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 4) & 0x00_00_00_10) | (nbitfield0(struct) & 0xFF_FF_FF_EF)); }
     /** Unsafe version of {@link #sps_scaling_list_data_present_flag(boolean) sps_scaling_list_data_present_flag}. */
-    public static void nsps_scaling_list_data_present_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
+    public static void nsps_scaling_list_data_present_flag(long struct, int value) { nbitfield0(struct, ((value << 5) & 0x00_00_00_20) | (nbitfield0(struct) & 0xFF_FF_FF_DF)); }
     /** Unsafe version of {@link #amp_enabled_flag(boolean) amp_enabled_flag}. */
-    public static void namp_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 4) & 0x00_00_00_10) | (nbitfield0(struct) & 0xFF_FF_FF_EF)); }
+    public static void namp_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 6) & 0x00_00_00_40) | (nbitfield0(struct) & 0xFF_FF_FF_BF)); }
     /** Unsafe version of {@link #sample_adaptive_offset_enabled_flag(boolean) sample_adaptive_offset_enabled_flag}. */
-    public static void nsample_adaptive_offset_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 5) & 0x00_00_00_20) | (nbitfield0(struct) & 0xFF_FF_FF_DF)); }
+    public static void nsample_adaptive_offset_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 7) & 0x00_00_00_80) | (nbitfield0(struct) & 0xFF_FF_FF_7F)); }
     /** Unsafe version of {@link #pcm_enabled_flag(boolean) pcm_enabled_flag}. */
-    public static void npcm_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 6) & 0x00_00_00_40) | (nbitfield0(struct) & 0xFF_FF_FF_BF)); }
+    public static void npcm_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 8) & 0x00_00_01_00) | (nbitfield0(struct) & 0xFF_FF_FE_FF)); }
     /** Unsafe version of {@link #pcm_loop_filter_disabled_flag(boolean) pcm_loop_filter_disabled_flag}. */
-    public static void npcm_loop_filter_disabled_flag(long struct, int value) { nbitfield0(struct, ((value << 7) & 0x00_00_00_80) | (nbitfield0(struct) & 0xFF_FF_FF_7F)); }
+    public static void npcm_loop_filter_disabled_flag(long struct, int value) { nbitfield0(struct, ((value << 9) & 0x00_00_02_00) | (nbitfield0(struct) & 0xFF_FF_FD_FF)); }
     /** Unsafe version of {@link #long_term_ref_pics_present_flag(boolean) long_term_ref_pics_present_flag}. */
-    public static void nlong_term_ref_pics_present_flag(long struct, int value) { nbitfield0(struct, ((value << 8) & 0x00_00_01_00) | (nbitfield0(struct) & 0xFF_FF_FE_FF)); }
+    public static void nlong_term_ref_pics_present_flag(long struct, int value) { nbitfield0(struct, ((value << 10) & 0x00_00_04_00) | (nbitfield0(struct) & 0xFF_FF_FB_FF)); }
     /** Unsafe version of {@link #sps_temporal_mvp_enabled_flag(boolean) sps_temporal_mvp_enabled_flag}. */
-    public static void nsps_temporal_mvp_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 9) & 0x00_00_02_00) | (nbitfield0(struct) & 0xFF_FF_FD_FF)); }
+    public static void nsps_temporal_mvp_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 11) & 0x00_00_08_00) | (nbitfield0(struct) & 0xFF_FF_F7_FF)); }
     /** Unsafe version of {@link #strong_intra_smoothing_enabled_flag(boolean) strong_intra_smoothing_enabled_flag}. */
-    public static void nstrong_intra_smoothing_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 10) & 0x00_00_04_00) | (nbitfield0(struct) & 0xFF_FF_FB_FF)); }
+    public static void nstrong_intra_smoothing_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 12) & 0x00_00_10_00) | (nbitfield0(struct) & 0xFF_FF_EF_FF)); }
     /** Unsafe version of {@link #vui_parameters_present_flag(boolean) vui_parameters_present_flag}. */
-    public static void nvui_parameters_present_flag(long struct, int value) { nbitfield0(struct, ((value << 11) & 0x00_00_08_00) | (nbitfield0(struct) & 0xFF_FF_F7_FF)); }
+    public static void nvui_parameters_present_flag(long struct, int value) { nbitfield0(struct, ((value << 13) & 0x00_00_20_00) | (nbitfield0(struct) & 0xFF_FF_DF_FF)); }
     /** Unsafe version of {@link #sps_extension_present_flag(boolean) sps_extension_present_flag}. */
-    public static void nsps_extension_present_flag(long struct, int value) { nbitfield0(struct, ((value << 12) & 0x00_00_10_00) | (nbitfield0(struct) & 0xFF_FF_EF_FF)); }
+    public static void nsps_extension_present_flag(long struct, int value) { nbitfield0(struct, ((value << 14) & 0x00_00_40_00) | (nbitfield0(struct) & 0xFF_FF_BF_FF)); }
     /** Unsafe version of {@link #sps_range_extension_flag(boolean) sps_range_extension_flag}. */
-    public static void nsps_range_extension_flag(long struct, int value) { nbitfield0(struct, ((value << 13) & 0x00_00_20_00) | (nbitfield0(struct) & 0xFF_FF_DF_FF)); }
+    public static void nsps_range_extension_flag(long struct, int value) { nbitfield0(struct, ((value << 15) & 0x00_00_80_00) | (nbitfield0(struct) & 0xFF_FF_7F_FF)); }
     /** Unsafe version of {@link #transform_skip_rotation_enabled_flag(boolean) transform_skip_rotation_enabled_flag}. */
-    public static void ntransform_skip_rotation_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 14) & 0x00_00_40_00) | (nbitfield0(struct) & 0xFF_FF_BF_FF)); }
+    public static void ntransform_skip_rotation_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 16) & 0x00_01_00_00) | (nbitfield0(struct) & 0xFF_FE_FF_FF)); }
     /** Unsafe version of {@link #transform_skip_context_enabled_flag(boolean) transform_skip_context_enabled_flag}. */
-    public static void ntransform_skip_context_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 15) & 0x00_00_80_00) | (nbitfield0(struct) & 0xFF_FF_7F_FF)); }
+    public static void ntransform_skip_context_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 17) & 0x00_02_00_00) | (nbitfield0(struct) & 0xFF_FD_FF_FF)); }
     /** Unsafe version of {@link #implicit_rdpcm_enabled_flag(boolean) implicit_rdpcm_enabled_flag}. */
-    public static void nimplicit_rdpcm_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 16) & 0x00_01_00_00) | (nbitfield0(struct) & 0xFF_FE_FF_FF)); }
+    public static void nimplicit_rdpcm_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 18) & 0x00_04_00_00) | (nbitfield0(struct) & 0xFF_FB_FF_FF)); }
     /** Unsafe version of {@link #explicit_rdpcm_enabled_flag(boolean) explicit_rdpcm_enabled_flag}. */
-    public static void nexplicit_rdpcm_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 17) & 0x00_02_00_00) | (nbitfield0(struct) & 0xFF_FD_FF_FF)); }
+    public static void nexplicit_rdpcm_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 19) & 0x00_08_00_00) | (nbitfield0(struct) & 0xFF_F7_FF_FF)); }
     /** Unsafe version of {@link #extended_precision_processing_flag(boolean) extended_precision_processing_flag}. */
-    public static void nextended_precision_processing_flag(long struct, int value) { nbitfield0(struct, ((value << 18) & 0x00_04_00_00) | (nbitfield0(struct) & 0xFF_FB_FF_FF)); }
+    public static void nextended_precision_processing_flag(long struct, int value) { nbitfield0(struct, ((value << 20) & 0x00_10_00_00) | (nbitfield0(struct) & 0xFF_EF_FF_FF)); }
     /** Unsafe version of {@link #intra_smoothing_disabled_flag(boolean) intra_smoothing_disabled_flag}. */
-    public static void nintra_smoothing_disabled_flag(long struct, int value) { nbitfield0(struct, ((value << 19) & 0x00_08_00_00) | (nbitfield0(struct) & 0xFF_F7_FF_FF)); }
+    public static void nintra_smoothing_disabled_flag(long struct, int value) { nbitfield0(struct, ((value << 21) & 0x00_20_00_00) | (nbitfield0(struct) & 0xFF_DF_FF_FF)); }
     /** Unsafe version of {@link #high_precision_offsets_enabled_flag(boolean) high_precision_offsets_enabled_flag}. */
-    public static void nhigh_precision_offsets_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 20) & 0x00_10_00_00) | (nbitfield0(struct) & 0xFF_EF_FF_FF)); }
+    public static void nhigh_precision_offsets_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 22) & 0x00_40_00_00) | (nbitfield0(struct) & 0xFF_BF_FF_FF)); }
     /** Unsafe version of {@link #persistent_rice_adaptation_enabled_flag(boolean) persistent_rice_adaptation_enabled_flag}. */
-    public static void npersistent_rice_adaptation_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 21) & 0x00_20_00_00) | (nbitfield0(struct) & 0xFF_DF_FF_FF)); }
+    public static void npersistent_rice_adaptation_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 23) & 0x00_80_00_00) | (nbitfield0(struct) & 0xFF_7F_FF_FF)); }
     /** Unsafe version of {@link #cabac_bypass_alignment_enabled_flag(boolean) cabac_bypass_alignment_enabled_flag}. */
-    public static void ncabac_bypass_alignment_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 22) & 0x00_40_00_00) | (nbitfield0(struct) & 0xFF_BF_FF_FF)); }
+    public static void ncabac_bypass_alignment_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 24) & 0x01_00_00_00) | (nbitfield0(struct) & 0xFE_FF_FF_FF)); }
     /** Unsafe version of {@link #sps_scc_extension_flag(boolean) sps_scc_extension_flag}. */
-    public static void nsps_scc_extension_flag(long struct, int value) { nbitfield0(struct, ((value << 23) & 0x00_80_00_00) | (nbitfield0(struct) & 0xFF_7F_FF_FF)); }
+    public static void nsps_scc_extension_flag(long struct, int value) { nbitfield0(struct, ((value << 25) & 0x02_00_00_00) | (nbitfield0(struct) & 0xFD_FF_FF_FF)); }
     /** Unsafe version of {@link #sps_curr_pic_ref_enabled_flag(boolean) sps_curr_pic_ref_enabled_flag}. */
-    public static void nsps_curr_pic_ref_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 24) & 0x01_00_00_00) | (nbitfield0(struct) & 0xFE_FF_FF_FF)); }
+    public static void nsps_curr_pic_ref_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 26) & 0x04_00_00_00) | (nbitfield0(struct) & 0xFB_FF_FF_FF)); }
     /** Unsafe version of {@link #palette_mode_enabled_flag(boolean) palette_mode_enabled_flag}. */
-    public static void npalette_mode_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 25) & 0x02_00_00_00) | (nbitfield0(struct) & 0xFD_FF_FF_FF)); }
+    public static void npalette_mode_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 27) & 0x08_00_00_00) | (nbitfield0(struct) & 0xF7_FF_FF_FF)); }
+    /** Unsafe version of {@link #sps_palette_predictor_initializers_present_flag(boolean) sps_palette_predictor_initializers_present_flag}. */
+    public static void nsps_palette_predictor_initializers_present_flag(long struct, int value) { nbitfield0(struct, ((value << 28) & 0x10_00_00_00) | (nbitfield0(struct) & 0xEF_FF_FF_FF)); }
     /** Unsafe version of {@link #sps_palette_predictor_initializer_present_flag(boolean) sps_palette_predictor_initializer_present_flag}. */
-    public static void nsps_palette_predictor_initializer_present_flag(long struct, int value) { nbitfield0(struct, ((value << 26) & 0x04_00_00_00) | (nbitfield0(struct) & 0xFB_FF_FF_FF)); }
+    public static void nsps_palette_predictor_initializer_present_flag(long struct, int value) { nbitfield0(struct, ((value << 29) & 0x20_00_00_00) | (nbitfield0(struct) & 0xDF_FF_FF_FF)); }
     /** Unsafe version of {@link #intra_boundary_filtering_disabled_flag(boolean) intra_boundary_filtering_disabled_flag}. */
-    public static void nintra_boundary_filtering_disabled_flag(long struct, int value) { nbitfield0(struct, ((value << 27) & 0x08_00_00_00) | (nbitfield0(struct) & 0xF7_FF_FF_FF)); }
+    public static void nintra_boundary_filtering_disabled_flag(long struct, int value) { nbitfield0(struct, ((value << 30) & 0x40_00_00_00) | (nbitfield0(struct) & 0xBF_FF_FF_FF)); }
 
     // -----------------------------------
 
@@ -576,6 +612,12 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         /** @return the value of the {@code separate_colour_plane_flag} field. */
         @NativeType("uint32_t")
         public boolean separate_colour_plane_flag() { return StdVideoH265SpsFlags.nseparate_colour_plane_flag(address()) != 0; }
+        /** @return the value of the {@code conformance_window_flag} field. */
+        @NativeType("uint32_t")
+        public boolean conformance_window_flag() { return StdVideoH265SpsFlags.nconformance_window_flag(address()) != 0; }
+        /** @return the value of the {@code sps_sub_layer_ordering_info_present_flag} field. */
+        @NativeType("uint32_t")
+        public boolean sps_sub_layer_ordering_info_present_flag() { return StdVideoH265SpsFlags.nsps_sub_layer_ordering_info_present_flag(address()) != 0; }
         /** @return the value of the {@code scaling_list_enabled_flag} field. */
         @NativeType("uint32_t")
         public boolean scaling_list_enabled_flag() { return StdVideoH265SpsFlags.nscaling_list_enabled_flag(address()) != 0; }
@@ -648,6 +690,9 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         /** @return the value of the {@code palette_mode_enabled_flag} field. */
         @NativeType("uint32_t")
         public boolean palette_mode_enabled_flag() { return StdVideoH265SpsFlags.npalette_mode_enabled_flag(address()) != 0; }
+        /** @return the value of the {@code sps_palette_predictor_initializers_present_flag} field. */
+        @NativeType("uint32_t")
+        public boolean sps_palette_predictor_initializers_present_flag() { return StdVideoH265SpsFlags.nsps_palette_predictor_initializers_present_flag(address()) != 0; }
         /** @return the value of the {@code sps_palette_predictor_initializer_present_flag} field. */
         @NativeType("uint32_t")
         public boolean sps_palette_predictor_initializer_present_flag() { return StdVideoH265SpsFlags.nsps_palette_predictor_initializer_present_flag(address()) != 0; }
@@ -659,6 +704,10 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         public StdVideoH265SpsFlags.Buffer sps_temporal_id_nesting_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_temporal_id_nesting_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code separate_colour_plane_flag} field. */
         public StdVideoH265SpsFlags.Buffer separate_colour_plane_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nseparate_colour_plane_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code conformance_window_flag} field. */
+        public StdVideoH265SpsFlags.Buffer conformance_window_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nconformance_window_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code sps_sub_layer_ordering_info_present_flag} field. */
+        public StdVideoH265SpsFlags.Buffer sps_sub_layer_ordering_info_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_sub_layer_ordering_info_present_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code scaling_list_enabled_flag} field. */
         public StdVideoH265SpsFlags.Buffer scaling_list_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nscaling_list_enabled_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code sps_scaling_list_data_present_flag} field. */
@@ -707,6 +756,8 @@ public class StdVideoH265SpsFlags extends Struct implements NativeResource {
         public StdVideoH265SpsFlags.Buffer sps_curr_pic_ref_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_curr_pic_ref_enabled_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code palette_mode_enabled_flag} field. */
         public StdVideoH265SpsFlags.Buffer palette_mode_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.npalette_mode_enabled_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code sps_palette_predictor_initializers_present_flag} field. */
+        public StdVideoH265SpsFlags.Buffer sps_palette_predictor_initializers_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_palette_predictor_initializers_present_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code sps_palette_predictor_initializer_present_flag} field. */
         public StdVideoH265SpsFlags.Buffer sps_palette_predictor_initializer_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_palette_predictor_initializer_present_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code intra_boundary_filtering_disabled_flag} field. */

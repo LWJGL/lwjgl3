@@ -23,11 +23,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code pVideoProfile} <b>must</b> be a pointer to a valid {@link VkVideoProfileInfoKHR} structure whose {@code pNext} chain <b>must</b> include a valid codec-specific profile structure</li>
- * <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> are required for use with the created video session, the {@code maxReferencePicturesSlotsCount} <b>must</b> be set to a value bigger than 0</li>
- * <li>{@code maxReferencePicturesSlotsCount} <b>cannot</b> exceed the implementation reported {@link VkVideoCapabilitiesKHR}{@code ::maxReferencePicturesSlotsCount}</li>
- * <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> are required for use with the created video session, the {@code maxReferencePicturesActiveCount} <b>must</b> be set to a value bigger than 0</li>
- * <li>{@code maxReferencePicturesActiveCount} <b>cannot</b> exceed the implementation reported {@link VkVideoCapabilitiesKHR}{@code ::maxReferencePicturesActiveCount}</li>
- * <li>{@code maxReferencePicturesActiveCount} <b>cannot</b> exceed the {@code maxReferencePicturesSlotsCount}</li>
+ * <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> are required for use with the created video session, the {@code maxDpbSlots} <b>must</b> be set to a value bigger than 0</li>
+ * <li>{@code maxDpbSlots} <b>cannot</b> exceed the implementation reported {@link VkVideoCapabilitiesKHR}{@code ::maxDpbSlots}</li>
+ * <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> are required for use with the created video session, the {@code maxActiveReferencePictures} <b>must</b> be set to a value bigger than 0</li>
+ * <li>{@code maxActiveReferencePictures} <b>cannot</b> exceed the implementation reported {@link VkVideoCapabilitiesKHR}{@code ::maxActiveReferencePictures}</li>
+ * <li>{@code maxActiveReferencePictures} <b>cannot</b> exceed the {@code maxDpbSlots}</li>
  * <li>{@code maxCodedExtent} <b>cannot</b> be smaller than {@link VkVideoCapabilitiesKHR}{@code ::minExtent} and bigger than {@link VkVideoCapabilitiesKHR}{@code ::maxExtent}</li>
  * <li>If the {@code videoCodecOperation} member of {@code pVideoProfile} specifies a decode operation then {@code referencePicturesFormat} <b>must</b> be one of the supported decode DPB formats as reported by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} in the {@code format} member of {@link VkVideoFormatPropertiesKHR} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR}, and with a {@link VkVideoProfileListInfoKHR} structure chained to its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an entry matching {@code pVideoProfile}</li>
  * <li>If the {@code videoCodecOperation} member of {@code pVideoProfile} specifies an encode operation then {@code referencePicturesFormat} <b>must</b> be one of the supported encode DPB formats as reported by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} in the {@code format} member of {@link VkVideoFormatPropertiesKHR} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR}, and with a {@link VkVideoProfileListInfoKHR} structure chained to its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an entry matching {@code pVideoProfile}</li>
@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoSessionCreateFlagBitsKHR} values</li>
  * <li>{@code pVideoProfile} <b>must</b> be a valid pointer to a valid {@link VkVideoProfileInfoKHR} structure</li>
  * <li>{@code pictureFormat} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>{@code referencePicturesFormat} <b>must</b> be a valid {@code VkFormat} value</li>
+ * <li>{@code referencePictureFormat} <b>must</b> be a valid {@code VkFormat} value</li>
  * <li>{@code pStdHeaderVersion} <b>must</b> be a valid pointer to a valid {@link VkExtensionProperties} structure</li>
  * </ul>
  * 
@@ -62,9 +62,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkVideoProfileInfoKHR VkVideoProfileInfoKHR} const * {@link #pVideoProfile};
  *     VkFormat {@link #pictureFormat};
  *     {@link VkExtent2D VkExtent2D} {@link #maxCodedExtent};
- *     VkFormat {@link #referencePicturesFormat};
- *     uint32_t {@link #maxReferencePicturesSlotsCount};
- *     uint32_t {@link #maxReferencePicturesActiveCount};
+ *     VkFormat referencePictureFormat;
+ *     uint32_t {@link #maxDpbSlots};
+ *     uint32_t {@link #maxActiveReferencePictures};
  *     {@link VkExtensionProperties VkExtensionProperties} const * {@link #pStdHeaderVersion};
  * }</code></pre>
  */
@@ -85,9 +85,9 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         PVIDEOPROFILE,
         PICTUREFORMAT,
         MAXCODEDEXTENT,
-        REFERENCEPICTURESFORMAT,
-        MAXREFERENCEPICTURESSLOTSCOUNT,
-        MAXREFERENCEPICTURESACTIVECOUNT,
+        REFERENCEPICTUREFORMAT,
+        MAXDPBSLOTS,
+        MAXACTIVEREFERENCEPICTURES,
         PSTDHEADERVERSION;
 
     static {
@@ -115,9 +115,9 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         PVIDEOPROFILE = layout.offsetof(4);
         PICTUREFORMAT = layout.offsetof(5);
         MAXCODEDEXTENT = layout.offsetof(6);
-        REFERENCEPICTURESFORMAT = layout.offsetof(7);
-        MAXREFERENCEPICTURESSLOTSCOUNT = layout.offsetof(8);
-        MAXREFERENCEPICTURESACTIVECOUNT = layout.offsetof(9);
+        REFERENCEPICTUREFORMAT = layout.offsetof(7);
+        MAXDPBSLOTS = layout.offsetof(8);
+        MAXACTIVEREFERENCEPICTURES = layout.offsetof(9);
         PSTDHEADERVERSION = layout.offsetof(10);
     }
 
@@ -154,15 +154,15 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public int pictureFormat() { return npictureFormat(address()); }
     /** the maximum width and height of the coded pictures that this instance will be able to support. */
     public VkExtent2D maxCodedExtent() { return nmaxCodedExtent(address()); }
-    /** the format of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb">DPB</a> image views representing the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a>. */
+    /** @return the value of the {@code referencePictureFormat} field. */
     @NativeType("VkFormat")
-    public int referencePicturesFormat() { return nreferencePicturesFormat(address()); }
+    public int referencePictureFormat() { return nreferencePictureFormat(address()); }
     /** the maximum number of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB Slots</a> that can be activated with associated <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-picture-resources">Video Picture Resources</a> for the created video session. */
     @NativeType("uint32_t")
-    public int maxReferencePicturesSlotsCount() { return nmaxReferencePicturesSlotsCount(address()); }
+    public int maxDpbSlots() { return nmaxDpbSlots(address()); }
     /** the maximum number of active <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB Slots</a> that can be used as Dpb or Reconstructed <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> within a single decode or encode operation for the created video session. */
     @NativeType("uint32_t")
-    public int maxReferencePicturesActiveCount() { return nmaxReferencePicturesActiveCount(address()); }
+    public int maxActiveReferencePictures() { return nmaxActiveReferencePictures(address()); }
     /** a pointer to a {@link VkExtensionProperties} structure requesting the Video Std header version to use for {@code codecOperation} in {@code pVideoProfile}. */
     @NativeType("VkExtensionProperties const *")
     public VkExtensionProperties pStdHeaderVersion() { return npStdHeaderVersion(address()); }
@@ -185,12 +185,12 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public VkVideoSessionCreateInfoKHR maxCodedExtent(VkExtent2D value) { nmaxCodedExtent(address(), value); return this; }
     /** Passes the {@link #maxCodedExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkVideoSessionCreateInfoKHR maxCodedExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxCodedExtent()); return this; }
-    /** Sets the specified value to the {@link #referencePicturesFormat} field. */
-    public VkVideoSessionCreateInfoKHR referencePicturesFormat(@NativeType("VkFormat") int value) { nreferencePicturesFormat(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxReferencePicturesSlotsCount} field. */
-    public VkVideoSessionCreateInfoKHR maxReferencePicturesSlotsCount(@NativeType("uint32_t") int value) { nmaxReferencePicturesSlotsCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxReferencePicturesActiveCount} field. */
-    public VkVideoSessionCreateInfoKHR maxReferencePicturesActiveCount(@NativeType("uint32_t") int value) { nmaxReferencePicturesActiveCount(address(), value); return this; }
+    /** Sets the specified value to the {@code referencePictureFormat} field. */
+    public VkVideoSessionCreateInfoKHR referencePictureFormat(@NativeType("VkFormat") int value) { nreferencePictureFormat(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxDpbSlots} field. */
+    public VkVideoSessionCreateInfoKHR maxDpbSlots(@NativeType("uint32_t") int value) { nmaxDpbSlots(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxActiveReferencePictures} field. */
+    public VkVideoSessionCreateInfoKHR maxActiveReferencePictures(@NativeType("uint32_t") int value) { nmaxActiveReferencePictures(address(), value); return this; }
     /** Sets the address of the specified {@link VkExtensionProperties} to the {@link #pStdHeaderVersion} field. */
     public VkVideoSessionCreateInfoKHR pStdHeaderVersion(@NativeType("VkExtensionProperties const *") VkExtensionProperties value) { npStdHeaderVersion(address(), value); return this; }
 
@@ -203,9 +203,9 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         VkVideoProfileInfoKHR pVideoProfile,
         int pictureFormat,
         VkExtent2D maxCodedExtent,
-        int referencePicturesFormat,
-        int maxReferencePicturesSlotsCount,
-        int maxReferencePicturesActiveCount,
+        int referencePictureFormat,
+        int maxDpbSlots,
+        int maxActiveReferencePictures,
         VkExtensionProperties pStdHeaderVersion
     ) {
         sType(sType);
@@ -215,9 +215,9 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         pVideoProfile(pVideoProfile);
         pictureFormat(pictureFormat);
         maxCodedExtent(maxCodedExtent);
-        referencePicturesFormat(referencePicturesFormat);
-        maxReferencePicturesSlotsCount(maxReferencePicturesSlotsCount);
-        maxReferencePicturesActiveCount(maxReferencePicturesActiveCount);
+        referencePictureFormat(referencePictureFormat);
+        maxDpbSlots(maxDpbSlots);
+        maxActiveReferencePictures(maxActiveReferencePictures);
         pStdHeaderVersion(pStdHeaderVersion);
 
         return this;
@@ -362,12 +362,12 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public static int npictureFormat(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.PICTUREFORMAT); }
     /** Unsafe version of {@link #maxCodedExtent}. */
     public static VkExtent2D nmaxCodedExtent(long struct) { return VkExtent2D.create(struct + VkVideoSessionCreateInfoKHR.MAXCODEDEXTENT); }
-    /** Unsafe version of {@link #referencePicturesFormat}. */
-    public static int nreferencePicturesFormat(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.REFERENCEPICTURESFORMAT); }
-    /** Unsafe version of {@link #maxReferencePicturesSlotsCount}. */
-    public static int nmaxReferencePicturesSlotsCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.MAXREFERENCEPICTURESSLOTSCOUNT); }
-    /** Unsafe version of {@link #maxReferencePicturesActiveCount}. */
-    public static int nmaxReferencePicturesActiveCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.MAXREFERENCEPICTURESACTIVECOUNT); }
+    /** Unsafe version of {@link #referencePictureFormat}. */
+    public static int nreferencePictureFormat(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.REFERENCEPICTUREFORMAT); }
+    /** Unsafe version of {@link #maxDpbSlots}. */
+    public static int nmaxDpbSlots(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.MAXDPBSLOTS); }
+    /** Unsafe version of {@link #maxActiveReferencePictures}. */
+    public static int nmaxActiveReferencePictures(long struct) { return UNSAFE.getInt(null, struct + VkVideoSessionCreateInfoKHR.MAXACTIVEREFERENCEPICTURES); }
     /** Unsafe version of {@link #pStdHeaderVersion}. */
     public static VkExtensionProperties npStdHeaderVersion(long struct) { return VkExtensionProperties.create(memGetAddress(struct + VkVideoSessionCreateInfoKHR.PSTDHEADERVERSION)); }
 
@@ -385,12 +385,12 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public static void npictureFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.PICTUREFORMAT, value); }
     /** Unsafe version of {@link #maxCodedExtent(VkExtent2D) maxCodedExtent}. */
     public static void nmaxCodedExtent(long struct, VkExtent2D value) { memCopy(value.address(), struct + VkVideoSessionCreateInfoKHR.MAXCODEDEXTENT, VkExtent2D.SIZEOF); }
-    /** Unsafe version of {@link #referencePicturesFormat(int) referencePicturesFormat}. */
-    public static void nreferencePicturesFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.REFERENCEPICTURESFORMAT, value); }
-    /** Unsafe version of {@link #maxReferencePicturesSlotsCount(int) maxReferencePicturesSlotsCount}. */
-    public static void nmaxReferencePicturesSlotsCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.MAXREFERENCEPICTURESSLOTSCOUNT, value); }
-    /** Unsafe version of {@link #maxReferencePicturesActiveCount(int) maxReferencePicturesActiveCount}. */
-    public static void nmaxReferencePicturesActiveCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.MAXREFERENCEPICTURESACTIVECOUNT, value); }
+    /** Unsafe version of {@link #referencePictureFormat(int) referencePictureFormat}. */
+    public static void nreferencePictureFormat(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.REFERENCEPICTUREFORMAT, value); }
+    /** Unsafe version of {@link #maxDpbSlots(int) maxDpbSlots}. */
+    public static void nmaxDpbSlots(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.MAXDPBSLOTS, value); }
+    /** Unsafe version of {@link #maxActiveReferencePictures(int) maxActiveReferencePictures}. */
+    public static void nmaxActiveReferencePictures(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoSessionCreateInfoKHR.MAXACTIVEREFERENCEPICTURES, value); }
     /** Unsafe version of {@link #pStdHeaderVersion(VkExtensionProperties) pStdHeaderVersion}. */
     public static void npStdHeaderVersion(long struct, VkExtensionProperties value) { memPutAddress(struct + VkVideoSessionCreateInfoKHR.PSTDHEADERVERSION, value.address()); }
 
@@ -462,15 +462,15 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         public int pictureFormat() { return VkVideoSessionCreateInfoKHR.npictureFormat(address()); }
         /** @return a {@link VkExtent2D} view of the {@link VkVideoSessionCreateInfoKHR#maxCodedExtent} field. */
         public VkExtent2D maxCodedExtent() { return VkVideoSessionCreateInfoKHR.nmaxCodedExtent(address()); }
-        /** @return the value of the {@link VkVideoSessionCreateInfoKHR#referencePicturesFormat} field. */
+        /** @return the value of the {@code referencePictureFormat} field. */
         @NativeType("VkFormat")
-        public int referencePicturesFormat() { return VkVideoSessionCreateInfoKHR.nreferencePicturesFormat(address()); }
-        /** @return the value of the {@link VkVideoSessionCreateInfoKHR#maxReferencePicturesSlotsCount} field. */
+        public int referencePictureFormat() { return VkVideoSessionCreateInfoKHR.nreferencePictureFormat(address()); }
+        /** @return the value of the {@link VkVideoSessionCreateInfoKHR#maxDpbSlots} field. */
         @NativeType("uint32_t")
-        public int maxReferencePicturesSlotsCount() { return VkVideoSessionCreateInfoKHR.nmaxReferencePicturesSlotsCount(address()); }
-        /** @return the value of the {@link VkVideoSessionCreateInfoKHR#maxReferencePicturesActiveCount} field. */
+        public int maxDpbSlots() { return VkVideoSessionCreateInfoKHR.nmaxDpbSlots(address()); }
+        /** @return the value of the {@link VkVideoSessionCreateInfoKHR#maxActiveReferencePictures} field. */
         @NativeType("uint32_t")
-        public int maxReferencePicturesActiveCount() { return VkVideoSessionCreateInfoKHR.nmaxReferencePicturesActiveCount(address()); }
+        public int maxActiveReferencePictures() { return VkVideoSessionCreateInfoKHR.nmaxActiveReferencePictures(address()); }
         /** @return a {@link VkExtensionProperties} view of the struct pointed to by the {@link VkVideoSessionCreateInfoKHR#pStdHeaderVersion} field. */
         @NativeType("VkExtensionProperties const *")
         public VkExtensionProperties pStdHeaderVersion() { return VkVideoSessionCreateInfoKHR.npStdHeaderVersion(address()); }
@@ -493,12 +493,12 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         public VkVideoSessionCreateInfoKHR.Buffer maxCodedExtent(VkExtent2D value) { VkVideoSessionCreateInfoKHR.nmaxCodedExtent(address(), value); return this; }
         /** Passes the {@link VkVideoSessionCreateInfoKHR#maxCodedExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkVideoSessionCreateInfoKHR.Buffer maxCodedExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxCodedExtent()); return this; }
-        /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#referencePicturesFormat} field. */
-        public VkVideoSessionCreateInfoKHR.Buffer referencePicturesFormat(@NativeType("VkFormat") int value) { VkVideoSessionCreateInfoKHR.nreferencePicturesFormat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#maxReferencePicturesSlotsCount} field. */
-        public VkVideoSessionCreateInfoKHR.Buffer maxReferencePicturesSlotsCount(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nmaxReferencePicturesSlotsCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#maxReferencePicturesActiveCount} field. */
-        public VkVideoSessionCreateInfoKHR.Buffer maxReferencePicturesActiveCount(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nmaxReferencePicturesActiveCount(address(), value); return this; }
+        /** Sets the specified value to the {@code referencePictureFormat} field. */
+        public VkVideoSessionCreateInfoKHR.Buffer referencePictureFormat(@NativeType("VkFormat") int value) { VkVideoSessionCreateInfoKHR.nreferencePictureFormat(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#maxDpbSlots} field. */
+        public VkVideoSessionCreateInfoKHR.Buffer maxDpbSlots(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nmaxDpbSlots(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#maxActiveReferencePictures} field. */
+        public VkVideoSessionCreateInfoKHR.Buffer maxActiveReferencePictures(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nmaxActiveReferencePictures(address(), value); return this; }
         /** Sets the address of the specified {@link VkExtensionProperties} to the {@link VkVideoSessionCreateInfoKHR#pStdHeaderVersion} field. */
         public VkVideoSessionCreateInfoKHR.Buffer pStdHeaderVersion(@NativeType("VkExtensionProperties const *") VkExtensionProperties value) { VkVideoSessionCreateInfoKHR.npStdHeaderVersion(address(), value); return this; }
 

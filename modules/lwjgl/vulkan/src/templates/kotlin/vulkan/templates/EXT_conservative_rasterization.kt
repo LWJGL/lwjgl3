@@ -99,7 +99,7 @@ val EXT_conservative_rasterization = "EXTConservativeRasterization".nativeClassV
         </ul>
 
         <h5>See Also</h5>
-        ##VkPipelineRasterizationConservativeStateCreateInfoEXT
+        ##VkPipelineRasterizationConservativeStateCreateInfoEXT, #CmdSetConservativeRasterizationModeEXT()
         """,
 
         "CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT".."0",

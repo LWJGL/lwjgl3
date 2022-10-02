@@ -31,7 +31,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t num_ref_idx_active_override_flag : 1;
  *     uint32_t mvd_l1_zero_flag : 1;
  *     uint32_t cabac_init_flag : 1;
- *     uint32_t slice_deblocking_filter_disable_flag : 1;
+ *     uint32_t cu_chroma_qp_offset_enabled_flag : 1;
+ *     uint32_t deblocking_filter_override_flag : 1;
+ *     uint32_t slice_deblocking_filter_disabled_flag : 1;
  *     uint32_t collocated_from_l0_flag : 1;
  *     uint32_t slice_loop_filter_across_slices_enabled_flag : 1;
  * }</code></pre>
@@ -105,9 +107,15 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct implements
     /** @return the value of the {@code cabac_init_flag} field. */
     @NativeType("uint32_t")
     public boolean cabac_init_flag() { return ncabac_init_flag(address()) != 0; }
-    /** @return the value of the {@code slice_deblocking_filter_disable_flag} field. */
+    /** @return the value of the {@code cu_chroma_qp_offset_enabled_flag} field. */
     @NativeType("uint32_t")
-    public boolean slice_deblocking_filter_disable_flag() { return nslice_deblocking_filter_disable_flag(address()) != 0; }
+    public boolean cu_chroma_qp_offset_enabled_flag() { return ncu_chroma_qp_offset_enabled_flag(address()) != 0; }
+    /** @return the value of the {@code deblocking_filter_override_flag} field. */
+    @NativeType("uint32_t")
+    public boolean deblocking_filter_override_flag() { return ndeblocking_filter_override_flag(address()) != 0; }
+    /** @return the value of the {@code slice_deblocking_filter_disabled_flag} field. */
+    @NativeType("uint32_t")
+    public boolean slice_deblocking_filter_disabled_flag() { return nslice_deblocking_filter_disabled_flag(address()) != 0; }
     /** @return the value of the {@code collocated_from_l0_flag} field. */
     @NativeType("uint32_t")
     public boolean collocated_from_l0_flag() { return ncollocated_from_l0_flag(address()) != 0; }
@@ -137,8 +145,12 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct implements
     public StdVideoEncodeH265SliceSegmentHeaderFlags mvd_l1_zero_flag(@NativeType("uint32_t") boolean value) { nmvd_l1_zero_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code cabac_init_flag} field. */
     public StdVideoEncodeH265SliceSegmentHeaderFlags cabac_init_flag(@NativeType("uint32_t") boolean value) { ncabac_init_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code slice_deblocking_filter_disable_flag} field. */
-    public StdVideoEncodeH265SliceSegmentHeaderFlags slice_deblocking_filter_disable_flag(@NativeType("uint32_t") boolean value) { nslice_deblocking_filter_disable_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code cu_chroma_qp_offset_enabled_flag} field. */
+    public StdVideoEncodeH265SliceSegmentHeaderFlags cu_chroma_qp_offset_enabled_flag(@NativeType("uint32_t") boolean value) { ncu_chroma_qp_offset_enabled_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code deblocking_filter_override_flag} field. */
+    public StdVideoEncodeH265SliceSegmentHeaderFlags deblocking_filter_override_flag(@NativeType("uint32_t") boolean value) { ndeblocking_filter_override_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code slice_deblocking_filter_disabled_flag} field. */
+    public StdVideoEncodeH265SliceSegmentHeaderFlags slice_deblocking_filter_disabled_flag(@NativeType("uint32_t") boolean value) { nslice_deblocking_filter_disabled_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code collocated_from_l0_flag} field. */
     public StdVideoEncodeH265SliceSegmentHeaderFlags collocated_from_l0_flag(@NativeType("uint32_t") boolean value) { ncollocated_from_l0_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code slice_loop_filter_across_slices_enabled_flag} field. */
@@ -157,7 +169,9 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct implements
         boolean num_ref_idx_active_override_flag,
         boolean mvd_l1_zero_flag,
         boolean cabac_init_flag,
-        boolean slice_deblocking_filter_disable_flag,
+        boolean cu_chroma_qp_offset_enabled_flag,
+        boolean deblocking_filter_override_flag,
+        boolean slice_deblocking_filter_disabled_flag,
         boolean collocated_from_l0_flag,
         boolean slice_loop_filter_across_slices_enabled_flag
     ) {
@@ -172,7 +186,9 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct implements
         num_ref_idx_active_override_flag(num_ref_idx_active_override_flag);
         mvd_l1_zero_flag(mvd_l1_zero_flag);
         cabac_init_flag(cabac_init_flag);
-        slice_deblocking_filter_disable_flag(slice_deblocking_filter_disable_flag);
+        cu_chroma_qp_offset_enabled_flag(cu_chroma_qp_offset_enabled_flag);
+        deblocking_filter_override_flag(deblocking_filter_override_flag);
+        slice_deblocking_filter_disabled_flag(slice_deblocking_filter_disabled_flag);
         collocated_from_l0_flag(collocated_from_l0_flag);
         slice_loop_filter_across_slices_enabled_flag(slice_loop_filter_across_slices_enabled_flag);
 
@@ -327,12 +343,16 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct implements
     public static int nmvd_l1_zero_flag(long struct) { return (nbitfield0(struct) & 0x00_00_02_00) >>> 9; }
     /** Unsafe version of {@link #cabac_init_flag}. */
     public static int ncabac_init_flag(long struct) { return (nbitfield0(struct) & 0x00_00_04_00) >>> 10; }
-    /** Unsafe version of {@link #slice_deblocking_filter_disable_flag}. */
-    public static int nslice_deblocking_filter_disable_flag(long struct) { return (nbitfield0(struct) & 0x00_00_08_00) >>> 11; }
+    /** Unsafe version of {@link #cu_chroma_qp_offset_enabled_flag}. */
+    public static int ncu_chroma_qp_offset_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_08_00) >>> 11; }
+    /** Unsafe version of {@link #deblocking_filter_override_flag}. */
+    public static int ndeblocking_filter_override_flag(long struct) { return (nbitfield0(struct) & 0x00_00_10_00) >>> 12; }
+    /** Unsafe version of {@link #slice_deblocking_filter_disabled_flag}. */
+    public static int nslice_deblocking_filter_disabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_20_00) >>> 13; }
     /** Unsafe version of {@link #collocated_from_l0_flag}. */
-    public static int ncollocated_from_l0_flag(long struct) { return (nbitfield0(struct) & 0x00_00_10_00) >>> 12; }
+    public static int ncollocated_from_l0_flag(long struct) { return (nbitfield0(struct) & 0x00_00_40_00) >>> 14; }
     /** Unsafe version of {@link #slice_loop_filter_across_slices_enabled_flag}. */
-    public static int nslice_loop_filter_across_slices_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_20_00) >>> 13; }
+    public static int nslice_loop_filter_across_slices_enabled_flag(long struct) { return (nbitfield0(struct) & 0x00_00_80_00) >>> 15; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH265SliceSegmentHeaderFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #first_slice_segment_in_pic_flag(boolean) first_slice_segment_in_pic_flag}. */
@@ -357,12 +377,16 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct implements
     public static void nmvd_l1_zero_flag(long struct, int value) { nbitfield0(struct, ((value << 9) & 0x00_00_02_00) | (nbitfield0(struct) & 0xFF_FF_FD_FF)); }
     /** Unsafe version of {@link #cabac_init_flag(boolean) cabac_init_flag}. */
     public static void ncabac_init_flag(long struct, int value) { nbitfield0(struct, ((value << 10) & 0x00_00_04_00) | (nbitfield0(struct) & 0xFF_FF_FB_FF)); }
-    /** Unsafe version of {@link #slice_deblocking_filter_disable_flag(boolean) slice_deblocking_filter_disable_flag}. */
-    public static void nslice_deblocking_filter_disable_flag(long struct, int value) { nbitfield0(struct, ((value << 11) & 0x00_00_08_00) | (nbitfield0(struct) & 0xFF_FF_F7_FF)); }
+    /** Unsafe version of {@link #cu_chroma_qp_offset_enabled_flag(boolean) cu_chroma_qp_offset_enabled_flag}. */
+    public static void ncu_chroma_qp_offset_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 11) & 0x00_00_08_00) | (nbitfield0(struct) & 0xFF_FF_F7_FF)); }
+    /** Unsafe version of {@link #deblocking_filter_override_flag(boolean) deblocking_filter_override_flag}. */
+    public static void ndeblocking_filter_override_flag(long struct, int value) { nbitfield0(struct, ((value << 12) & 0x00_00_10_00) | (nbitfield0(struct) & 0xFF_FF_EF_FF)); }
+    /** Unsafe version of {@link #slice_deblocking_filter_disabled_flag(boolean) slice_deblocking_filter_disabled_flag}. */
+    public static void nslice_deblocking_filter_disabled_flag(long struct, int value) { nbitfield0(struct, ((value << 13) & 0x00_00_20_00) | (nbitfield0(struct) & 0xFF_FF_DF_FF)); }
     /** Unsafe version of {@link #collocated_from_l0_flag(boolean) collocated_from_l0_flag}. */
-    public static void ncollocated_from_l0_flag(long struct, int value) { nbitfield0(struct, ((value << 12) & 0x00_00_10_00) | (nbitfield0(struct) & 0xFF_FF_EF_FF)); }
+    public static void ncollocated_from_l0_flag(long struct, int value) { nbitfield0(struct, ((value << 14) & 0x00_00_40_00) | (nbitfield0(struct) & 0xFF_FF_BF_FF)); }
     /** Unsafe version of {@link #slice_loop_filter_across_slices_enabled_flag(boolean) slice_loop_filter_across_slices_enabled_flag}. */
-    public static void nslice_loop_filter_across_slices_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 13) & 0x00_00_20_00) | (nbitfield0(struct) & 0xFF_FF_DF_FF)); }
+    public static void nslice_loop_filter_across_slices_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 15) & 0x00_00_80_00) | (nbitfield0(struct) & 0xFF_FF_7F_FF)); }
 
     // -----------------------------------
 
@@ -435,9 +459,15 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct implements
         /** @return the value of the {@code cabac_init_flag} field. */
         @NativeType("uint32_t")
         public boolean cabac_init_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.ncabac_init_flag(address()) != 0; }
-        /** @return the value of the {@code slice_deblocking_filter_disable_flag} field. */
+        /** @return the value of the {@code cu_chroma_qp_offset_enabled_flag} field. */
         @NativeType("uint32_t")
-        public boolean slice_deblocking_filter_disable_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_deblocking_filter_disable_flag(address()) != 0; }
+        public boolean cu_chroma_qp_offset_enabled_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.ncu_chroma_qp_offset_enabled_flag(address()) != 0; }
+        /** @return the value of the {@code deblocking_filter_override_flag} field. */
+        @NativeType("uint32_t")
+        public boolean deblocking_filter_override_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.ndeblocking_filter_override_flag(address()) != 0; }
+        /** @return the value of the {@code slice_deblocking_filter_disabled_flag} field. */
+        @NativeType("uint32_t")
+        public boolean slice_deblocking_filter_disabled_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_deblocking_filter_disabled_flag(address()) != 0; }
         /** @return the value of the {@code collocated_from_l0_flag} field. */
         @NativeType("uint32_t")
         public boolean collocated_from_l0_flag() { return StdVideoEncodeH265SliceSegmentHeaderFlags.ncollocated_from_l0_flag(address()) != 0; }
@@ -467,8 +497,12 @@ public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct implements
         public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer mvd_l1_zero_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nmvd_l1_zero_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code cabac_init_flag} field. */
         public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer cabac_init_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265SliceSegmentHeaderFlags.ncabac_init_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code slice_deblocking_filter_disable_flag} field. */
-        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer slice_deblocking_filter_disable_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_deblocking_filter_disable_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code cu_chroma_qp_offset_enabled_flag} field. */
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer cu_chroma_qp_offset_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265SliceSegmentHeaderFlags.ncu_chroma_qp_offset_enabled_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code deblocking_filter_override_flag} field. */
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer deblocking_filter_override_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265SliceSegmentHeaderFlags.ndeblocking_filter_override_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code slice_deblocking_filter_disabled_flag} field. */
+        public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer slice_deblocking_filter_disabled_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265SliceSegmentHeaderFlags.nslice_deblocking_filter_disabled_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code collocated_from_l0_flag} field. */
         public StdVideoEncodeH265SliceSegmentHeaderFlags.Buffer collocated_from_l0_flag(@NativeType("uint32_t") boolean value) { StdVideoEncodeH265SliceSegmentHeaderFlags.ncollocated_from_l0_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code slice_loop_filter_across_slices_enabled_flag} field. */

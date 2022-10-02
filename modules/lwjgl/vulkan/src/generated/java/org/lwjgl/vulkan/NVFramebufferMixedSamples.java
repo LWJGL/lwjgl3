@@ -76,7 +76,7 @@ public final class NVFramebufferMixedSamples {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkPipelineCoverageModulationStateCreateInfoNV}</p>
+     * <p>{@link VkPipelineCoverageModulationStateCreateInfoNV}, {@link EXTExtendedDynamicState3#vkCmdSetCoverageModulationModeNV CmdSetCoverageModulationModeNV}</p>
      */
     public static final int
         VK_COVERAGE_MODULATION_MODE_NONE_NV  = 0,

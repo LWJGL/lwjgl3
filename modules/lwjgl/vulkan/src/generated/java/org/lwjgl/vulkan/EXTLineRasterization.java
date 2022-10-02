@@ -95,7 +95,7 @@ public class EXTLineRasterization {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkPipelineRasterizationLineStateCreateInfoEXT}</p>
+     * <p>{@link VkPipelineRasterizationLineStateCreateInfoEXT}, {@link EXTExtendedDynamicState3#vkCmdSetLineRasterizationModeEXT CmdSetLineRasterizationModeEXT}</p>
      */
     public static final int
         VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT            = 0,

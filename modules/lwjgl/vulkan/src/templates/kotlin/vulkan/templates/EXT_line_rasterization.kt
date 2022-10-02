@@ -100,7 +100,7 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
         </ul>
 
         <h5>See Also</h5>
-        ##VkPipelineRasterizationLineStateCreateInfoEXT
+        ##VkPipelineRasterizationLineStateCreateInfoEXT, #CmdSetLineRasterizationModeEXT()
         """,
 
         "LINE_RASTERIZATION_MODE_DEFAULT_EXT".."0",

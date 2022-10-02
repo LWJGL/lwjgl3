@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkAccelerationStructureGeometryAabbsDataKHR}, {@link VkAccelerationStructureGeometryInstancesDataKHR}, {@link VkAccelerationStructureGeometryMotionTrianglesDataNV}, {@link VkAccelerationStructureGeometryTrianglesDataKHR}, {@link VkCopyMemoryToAccelerationStructureInfoKHR}</p>
+ * <p>{@link VkAccelerationStructureGeometryAabbsDataKHR}, {@link VkAccelerationStructureGeometryInstancesDataKHR}, {@link VkAccelerationStructureGeometryMotionTrianglesDataNV}, {@link VkAccelerationStructureGeometryTrianglesDataKHR}, {@link VkAccelerationStructureTrianglesOpacityMicromapEXT}, {@link VkCopyMemoryToAccelerationStructureInfoKHR}, {@link VkCopyMemoryToMicromapInfoEXT}, {@link VkMicromapBuildInfoEXT}</p>
  * 
  * <h3>Layout</h3>
  * 

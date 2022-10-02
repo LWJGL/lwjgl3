@@ -257,6 +257,8 @@ public class KHRSwapchain {
      * <p>In particular, it will fail if the {@code imageExtent} member of {@code pCreateInfo} does not match the extents of the monitor. Other reasons for failure may include the app not being set as high-dpi aware, or if the physical device and monitor are not compatible in this mode.</p>
      * </div>
      * 
+     * <p>If the {@code pNext} chain of {@link VkSwapchainCreateInfoKHR} includes a {@link VkSwapchainPresentBarrierCreateInfoNV} structure, then that structure includes additional swapchain creation parameters specific to the present barrier. Swapchain creation <b>may</b> fail if the state of the current system restricts the usage of the present barrier feature {@link VkSurfaceCapabilitiesPresentBarrierNV}, or a swapchain itself does not satisfy all the required conditions. In this scenario {@link VK10#VK_ERROR_INITIALIZATION_FAILED ERROR_INITIALIZATION_FAILED} is returned.</p>
+     * 
      * <p>When the {@code VkSurfaceKHR} in {@link VkSwapchainCreateInfoKHR} is a display surface, then the {@code VkDisplayModeKHR} in display surface’s {@link VkDisplaySurfaceCreateInfoKHR} is associated with a particular {@code VkDisplayKHR}. Swapchain creation <b>may</b> fail if that {@code VkDisplayKHR} is not acquired by the application. In this scenario {@link VK10#VK_ERROR_INITIALIZATION_FAILED ERROR_INITIALIZATION_FAILED} is returned.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>

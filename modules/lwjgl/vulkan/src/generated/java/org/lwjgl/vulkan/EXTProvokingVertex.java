@@ -100,7 +100,7 @@ public final class EXTProvokingVertex {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkPipelineRasterizationProvokingVertexStateCreateInfoEXT}</p>
+     * <p>{@link VkPipelineRasterizationProvokingVertexStateCreateInfoEXT}, {@link EXTExtendedDynamicState3#vkCmdSetProvokingVertexModeEXT CmdSetProvokingVertexModeEXT}</p>
      */
     public static final int
         VK_PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT = 0,

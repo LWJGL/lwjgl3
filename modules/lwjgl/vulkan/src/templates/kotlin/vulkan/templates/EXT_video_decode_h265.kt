@@ -25,7 +25,7 @@ val EXT_video_decode_h265 = "EXTVideoDecodeH265".nativeClassVK("EXT_video_decode
             <dd>188</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>4</dd>
+            <dd>5</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -43,7 +43,7 @@ val EXT_video_decode_h265 = "EXTVideoDecodeH265".nativeClassVK("EXT_video_decode
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-08-09</dd>
+            <dd>2022-09-18</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -65,7 +65,7 @@ val EXT_video_decode_h265 = "EXTVideoDecodeH265".nativeClassVK("EXT_video_decode
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VIDEO_DECODE_H265_SPEC_VERSION".."4"
+        "EXT_VIDEO_DECODE_H265_SPEC_VERSION".."5"
     )
 
     StringConstant(

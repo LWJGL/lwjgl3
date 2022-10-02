@@ -25,10 +25,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code groupCountX} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxTaskWorkGroupCount}[0]</li>
- * <li>{@code groupCountY} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxTaskWorkGroupCount}[1]</li>
- * <li>{@code groupCountZ} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxTaskWorkGroupCount}[2]</li>
- * <li>The product of {@code groupCountX}, {@code groupCountY} and {@code groupCountZ} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxTaskWorkGroupTotalCount}</li>
+ * <li>If the current pipeline bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS} contains a shader using the {@code TaskEXT} {@code Execution} {@code Model}, {@code groupCountX} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxTaskWorkGroupCount}[0]</li>
+ * <li>If the current pipeline bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS} contains a shader using the {@code TaskEXT} {@code Execution} {@code Model}, {@code groupCountY} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxTaskWorkGroupCount}[1]</li>
+ * <li>If the current pipeline bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS} contains a shader using the {@code TaskEXT} {@code Execution} {@code Model}, {@code groupCountZ} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxTaskWorkGroupCount}[2]</li>
+ * <li>If the current pipeline bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS} contains a shader using the {@code TaskEXT} {@code Execution} {@code Model}, The product of {@code groupCountX}, {@code groupCountY} and {@code groupCountZ} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxTaskWorkGroupTotalCount}</li>
+ * <li>If the current pipeline bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS} does not contain a shader using the {@code TaskEXT} {@code Execution} {@code Model}, {@code groupCountX} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxMeshWorkGroupCount}[0]</li>
+ * <li>If the current pipeline bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS} does not contain a shader using the {@code TaskEXT} {@code Execution} {@code Model}, {@code groupCountY} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxMeshWorkGroupCount}[1]</li>
+ * <li>If the current pipeline bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS} does not contain a shader using the {@code TaskEXT} {@code Execution} {@code Model}, {@code groupCountZ} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxMeshWorkGroupCount}[2]</li>
+ * <li>If the current pipeline bound to {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS} does not contain a shader using the {@code TaskEXT} {@code Execution} {@code Model}, The product of {@code groupCountX}, {@code groupCountY} and {@code groupCountZ} <b>must</b> be less than or equal to {@link VkPhysicalDeviceMeshShaderPropertiesEXT}{@code ::maxMeshWorkGroupTotalCount}</li>
  * </ul>
  * 
  * <h5>See Also</h5>

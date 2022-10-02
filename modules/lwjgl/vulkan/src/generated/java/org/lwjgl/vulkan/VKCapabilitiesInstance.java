@@ -219,6 +219,10 @@ public class VKCapabilitiesInstance {
     public final long
         vkGetPhysicalDeviceExternalImageFormatPropertiesNV;
 
+    // NV_optical_flow
+    public final long
+        vkGetPhysicalDeviceOpticalFlowImageFormatsNV;
+
     /** The Vulkan API version number. */
     public final int apiVersion;
 
@@ -290,7 +294,7 @@ public class VKCapabilitiesInstance {
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {
         this.apiVersion = apiVersion;
 
-        long[] caps = new long[97];
+        long[] caps = new long[98];
 
         Vulkan10 = check_VK10(provider, caps, ext);
         Vulkan11 = check_VK11(provider, caps, ext);
@@ -336,6 +340,7 @@ public class VKCapabilitiesInstance {
         check_NV_cooperative_matrix(provider, caps, deviceExt);
         check_NV_coverage_reduction_mode(provider, caps, deviceExt);
         VK_NV_external_memory_capabilities = check_NV_external_memory_capabilities(provider, caps, ext);
+        check_NV_optical_flow(provider, caps, deviceExt);
 
         vkDestroyInstance = caps[0];
         vkEnumeratePhysicalDevices = caps[1];
@@ -434,6 +439,7 @@ public class VKCapabilitiesInstance {
         vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = caps[94];
         vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = caps[95];
         vkGetPhysicalDeviceExternalImageFormatPropertiesNV = caps[96];
+        vkGetPhysicalDeviceOpticalFlowImageFormatsNV = caps[97];
     }
 
     private static boolean check_VK10(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
@@ -895,6 +901,18 @@ public class VKCapabilitiesInstance {
         },
             "vkGetPhysicalDeviceExternalImageFormatPropertiesNV"
         ) || reportMissing("VK", "VK_NV_external_memory_capabilities");
+    }
+
+    private static boolean check_NV_optical_flow(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
+        if (!ext.contains("VK_NV_optical_flow")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            97
+        },
+            "vkGetPhysicalDeviceOpticalFlowImageFormatsNV"
+        ) || reportMissing("VK", "VK_NV_optical_flow");
     }
 
 }

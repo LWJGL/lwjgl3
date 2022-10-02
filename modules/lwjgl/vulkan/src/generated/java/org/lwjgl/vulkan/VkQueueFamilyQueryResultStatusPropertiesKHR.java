@@ -91,18 +91,14 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
     public VkQueueFamilyQueryResultStatusPropertiesKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyQueryResultStatusPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #queryResultStatusSupport} field. */
-    public VkQueueFamilyQueryResultStatusPropertiesKHR queryResultStatusSupport(@NativeType("VkBool32") boolean value) { nqueryResultStatusSupport(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkQueueFamilyQueryResultStatusPropertiesKHR set(
         int sType,
-        long pNext,
-        boolean queryResultStatusSupport
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        queryResultStatusSupport(queryResultStatusSupport);
 
         return this;
     }
@@ -243,8 +239,6 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyQueryResultStatusPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueueFamilyQueryResultStatusPropertiesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #queryResultStatusSupport(boolean) queryResultStatusSupport}. */
-    public static void nqueryResultStatusSupport(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyQueryResultStatusPropertiesKHR.QUERYRESULTSTATUSSUPPORT, value); }
 
     // -----------------------------------
 
@@ -300,8 +294,6 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
         public VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkQueueFamilyQueryResultStatusPropertiesKHR#pNext} field. */
         public VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyQueryResultStatusPropertiesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkQueueFamilyQueryResultStatusPropertiesKHR#queryResultStatusSupport} field. */
-        public VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer queryResultStatusSupport(@NativeType("VkBool32") boolean value) { VkQueueFamilyQueryResultStatusPropertiesKHR.nqueryResultStatusSupport(address(), value ? 1 : 0); return this; }
 
     }
 

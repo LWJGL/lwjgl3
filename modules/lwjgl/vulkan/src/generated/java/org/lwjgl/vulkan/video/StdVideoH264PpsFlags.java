@@ -24,9 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t redundant_pic_cnt_present_flag : 1;
  *     uint32_t constrained_intra_pred_flag : 1;
  *     uint32_t deblocking_filter_control_present_flag : 1;
- *     uint32_t weighted_bipred_idc_flag : 1;
  *     uint32_t weighted_pred_flag : 1;
- *     uint32_t pic_order_present_flag : 1;
+ *     uint32_t bottom_field_pic_order_in_frame_present_flag : 1;
  *     uint32_t entropy_coding_mode_flag : 1;
  *     uint32_t pic_scaling_matrix_present_flag : 1;
  * }</code></pre>
@@ -79,15 +78,12 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
     /** @return the value of the {@code deblocking_filter_control_present_flag} field. */
     @NativeType("uint32_t")
     public boolean deblocking_filter_control_present_flag() { return ndeblocking_filter_control_present_flag(address()) != 0; }
-    /** @return the value of the {@code weighted_bipred_idc_flag} field. */
-    @NativeType("uint32_t")
-    public boolean weighted_bipred_idc_flag() { return nweighted_bipred_idc_flag(address()) != 0; }
     /** @return the value of the {@code weighted_pred_flag} field. */
     @NativeType("uint32_t")
     public boolean weighted_pred_flag() { return nweighted_pred_flag(address()) != 0; }
-    /** @return the value of the {@code pic_order_present_flag} field. */
+    /** @return the value of the {@code bottom_field_pic_order_in_frame_present_flag} field. */
     @NativeType("uint32_t")
-    public boolean pic_order_present_flag() { return npic_order_present_flag(address()) != 0; }
+    public boolean bottom_field_pic_order_in_frame_present_flag() { return nbottom_field_pic_order_in_frame_present_flag(address()) != 0; }
     /** @return the value of the {@code entropy_coding_mode_flag} field. */
     @NativeType("uint32_t")
     public boolean entropy_coding_mode_flag() { return nentropy_coding_mode_flag(address()) != 0; }
@@ -103,12 +99,10 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
     public StdVideoH264PpsFlags constrained_intra_pred_flag(@NativeType("uint32_t") boolean value) { nconstrained_intra_pred_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code deblocking_filter_control_present_flag} field. */
     public StdVideoH264PpsFlags deblocking_filter_control_present_flag(@NativeType("uint32_t") boolean value) { ndeblocking_filter_control_present_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code weighted_bipred_idc_flag} field. */
-    public StdVideoH264PpsFlags weighted_bipred_idc_flag(@NativeType("uint32_t") boolean value) { nweighted_bipred_idc_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code weighted_pred_flag} field. */
     public StdVideoH264PpsFlags weighted_pred_flag(@NativeType("uint32_t") boolean value) { nweighted_pred_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code pic_order_present_flag} field. */
-    public StdVideoH264PpsFlags pic_order_present_flag(@NativeType("uint32_t") boolean value) { npic_order_present_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code bottom_field_pic_order_in_frame_present_flag} field. */
+    public StdVideoH264PpsFlags bottom_field_pic_order_in_frame_present_flag(@NativeType("uint32_t") boolean value) { nbottom_field_pic_order_in_frame_present_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code entropy_coding_mode_flag} field. */
     public StdVideoH264PpsFlags entropy_coding_mode_flag(@NativeType("uint32_t") boolean value) { nentropy_coding_mode_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code pic_scaling_matrix_present_flag} field. */
@@ -120,9 +114,8 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
         boolean redundant_pic_cnt_present_flag,
         boolean constrained_intra_pred_flag,
         boolean deblocking_filter_control_present_flag,
-        boolean weighted_bipred_idc_flag,
         boolean weighted_pred_flag,
-        boolean pic_order_present_flag,
+        boolean bottom_field_pic_order_in_frame_present_flag,
         boolean entropy_coding_mode_flag,
         boolean pic_scaling_matrix_present_flag
     ) {
@@ -130,9 +123,8 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
         redundant_pic_cnt_present_flag(redundant_pic_cnt_present_flag);
         constrained_intra_pred_flag(constrained_intra_pred_flag);
         deblocking_filter_control_present_flag(deblocking_filter_control_present_flag);
-        weighted_bipred_idc_flag(weighted_bipred_idc_flag);
         weighted_pred_flag(weighted_pred_flag);
-        pic_order_present_flag(pic_order_present_flag);
+        bottom_field_pic_order_in_frame_present_flag(bottom_field_pic_order_in_frame_present_flag);
         entropy_coding_mode_flag(entropy_coding_mode_flag);
         pic_scaling_matrix_present_flag(pic_scaling_matrix_present_flag);
 
@@ -273,16 +265,14 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
     public static int nconstrained_intra_pred_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_04) >>> 2; }
     /** Unsafe version of {@link #deblocking_filter_control_present_flag}. */
     public static int ndeblocking_filter_control_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_08) >>> 3; }
-    /** Unsafe version of {@link #weighted_bipred_idc_flag}. */
-    public static int nweighted_bipred_idc_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
     /** Unsafe version of {@link #weighted_pred_flag}. */
-    public static int nweighted_pred_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_20) >>> 5; }
-    /** Unsafe version of {@link #pic_order_present_flag}. */
-    public static int npic_order_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_40) >>> 6; }
+    public static int nweighted_pred_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_10) >>> 4; }
+    /** Unsafe version of {@link #bottom_field_pic_order_in_frame_present_flag}. */
+    public static int nbottom_field_pic_order_in_frame_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_20) >>> 5; }
     /** Unsafe version of {@link #entropy_coding_mode_flag}. */
-    public static int nentropy_coding_mode_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_80) >>> 7; }
+    public static int nentropy_coding_mode_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_40) >>> 6; }
     /** Unsafe version of {@link #pic_scaling_matrix_present_flag}. */
-    public static int npic_scaling_matrix_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_01_00) >>> 8; }
+    public static int npic_scaling_matrix_present_flag(long struct) { return (nbitfield0(struct) & 0x00_00_00_80) >>> 7; }
 
     public static void nbitfield0(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264PpsFlags.BITFIELD0, value); }
     /** Unsafe version of {@link #transform_8x8_mode_flag(boolean) transform_8x8_mode_flag}. */
@@ -293,16 +283,14 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
     public static void nconstrained_intra_pred_flag(long struct, int value) { nbitfield0(struct, ((value << 2) & 0x00_00_00_04) | (nbitfield0(struct) & 0xFF_FF_FF_FB)); }
     /** Unsafe version of {@link #deblocking_filter_control_present_flag(boolean) deblocking_filter_control_present_flag}. */
     public static void ndeblocking_filter_control_present_flag(long struct, int value) { nbitfield0(struct, ((value << 3) & 0x00_00_00_08) | (nbitfield0(struct) & 0xFF_FF_FF_F7)); }
-    /** Unsafe version of {@link #weighted_bipred_idc_flag(boolean) weighted_bipred_idc_flag}. */
-    public static void nweighted_bipred_idc_flag(long struct, int value) { nbitfield0(struct, ((value << 4) & 0x00_00_00_10) | (nbitfield0(struct) & 0xFF_FF_FF_EF)); }
     /** Unsafe version of {@link #weighted_pred_flag(boolean) weighted_pred_flag}. */
-    public static void nweighted_pred_flag(long struct, int value) { nbitfield0(struct, ((value << 5) & 0x00_00_00_20) | (nbitfield0(struct) & 0xFF_FF_FF_DF)); }
-    /** Unsafe version of {@link #pic_order_present_flag(boolean) pic_order_present_flag}. */
-    public static void npic_order_present_flag(long struct, int value) { nbitfield0(struct, ((value << 6) & 0x00_00_00_40) | (nbitfield0(struct) & 0xFF_FF_FF_BF)); }
+    public static void nweighted_pred_flag(long struct, int value) { nbitfield0(struct, ((value << 4) & 0x00_00_00_10) | (nbitfield0(struct) & 0xFF_FF_FF_EF)); }
+    /** Unsafe version of {@link #bottom_field_pic_order_in_frame_present_flag(boolean) bottom_field_pic_order_in_frame_present_flag}. */
+    public static void nbottom_field_pic_order_in_frame_present_flag(long struct, int value) { nbitfield0(struct, ((value << 5) & 0x00_00_00_20) | (nbitfield0(struct) & 0xFF_FF_FF_DF)); }
     /** Unsafe version of {@link #entropy_coding_mode_flag(boolean) entropy_coding_mode_flag}. */
-    public static void nentropy_coding_mode_flag(long struct, int value) { nbitfield0(struct, ((value << 7) & 0x00_00_00_80) | (nbitfield0(struct) & 0xFF_FF_FF_7F)); }
+    public static void nentropy_coding_mode_flag(long struct, int value) { nbitfield0(struct, ((value << 6) & 0x00_00_00_40) | (nbitfield0(struct) & 0xFF_FF_FF_BF)); }
     /** Unsafe version of {@link #pic_scaling_matrix_present_flag(boolean) pic_scaling_matrix_present_flag}. */
-    public static void npic_scaling_matrix_present_flag(long struct, int value) { nbitfield0(struct, ((value << 8) & 0x00_00_01_00) | (nbitfield0(struct) & 0xFF_FF_FE_FF)); }
+    public static void npic_scaling_matrix_present_flag(long struct, int value) { nbitfield0(struct, ((value << 7) & 0x00_00_00_80) | (nbitfield0(struct) & 0xFF_FF_FF_7F)); }
 
     // -----------------------------------
 
@@ -354,15 +342,12 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
         /** @return the value of the {@code deblocking_filter_control_present_flag} field. */
         @NativeType("uint32_t")
         public boolean deblocking_filter_control_present_flag() { return StdVideoH264PpsFlags.ndeblocking_filter_control_present_flag(address()) != 0; }
-        /** @return the value of the {@code weighted_bipred_idc_flag} field. */
-        @NativeType("uint32_t")
-        public boolean weighted_bipred_idc_flag() { return StdVideoH264PpsFlags.nweighted_bipred_idc_flag(address()) != 0; }
         /** @return the value of the {@code weighted_pred_flag} field. */
         @NativeType("uint32_t")
         public boolean weighted_pred_flag() { return StdVideoH264PpsFlags.nweighted_pred_flag(address()) != 0; }
-        /** @return the value of the {@code pic_order_present_flag} field. */
+        /** @return the value of the {@code bottom_field_pic_order_in_frame_present_flag} field. */
         @NativeType("uint32_t")
-        public boolean pic_order_present_flag() { return StdVideoH264PpsFlags.npic_order_present_flag(address()) != 0; }
+        public boolean bottom_field_pic_order_in_frame_present_flag() { return StdVideoH264PpsFlags.nbottom_field_pic_order_in_frame_present_flag(address()) != 0; }
         /** @return the value of the {@code entropy_coding_mode_flag} field. */
         @NativeType("uint32_t")
         public boolean entropy_coding_mode_flag() { return StdVideoH264PpsFlags.nentropy_coding_mode_flag(address()) != 0; }
@@ -378,12 +363,10 @@ public class StdVideoH264PpsFlags extends Struct implements NativeResource {
         public StdVideoH264PpsFlags.Buffer constrained_intra_pred_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.nconstrained_intra_pred_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code deblocking_filter_control_present_flag} field. */
         public StdVideoH264PpsFlags.Buffer deblocking_filter_control_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.ndeblocking_filter_control_present_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code weighted_bipred_idc_flag} field. */
-        public StdVideoH264PpsFlags.Buffer weighted_bipred_idc_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.nweighted_bipred_idc_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code weighted_pred_flag} field. */
         public StdVideoH264PpsFlags.Buffer weighted_pred_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.nweighted_pred_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code pic_order_present_flag} field. */
-        public StdVideoH264PpsFlags.Buffer pic_order_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.npic_order_present_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code bottom_field_pic_order_in_frame_present_flag} field. */
+        public StdVideoH264PpsFlags.Buffer bottom_field_pic_order_in_frame_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.nbottom_field_pic_order_in_frame_present_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code entropy_coding_mode_flag} field. */
         public StdVideoH264PpsFlags.Buffer entropy_coding_mode_flag(@NativeType("uint32_t") boolean value) { StdVideoH264PpsFlags.nentropy_coding_mode_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code pic_scaling_matrix_present_flag} field. */

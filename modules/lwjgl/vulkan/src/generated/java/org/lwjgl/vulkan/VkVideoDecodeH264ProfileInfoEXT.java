@@ -38,6 +38,7 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_INFO_EXT STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_INFO_EXT}</li>
+ * <li>If {@code pictureLayout} is not 0, {@code pictureLayout} <b>must</b> be a valid {@code VkVideoDecodeH264PictureLayoutFlagBitsEXT} value</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -47,7 +48,7 @@ import org.lwjgl.vulkan.video.*;
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
  *     StdVideoH264ProfileIdc {@link #stdProfileIdc};
- *     VkVideoDecodeH264PictureLayoutFlagsEXT {@link #pictureLayout};
+ *     VkVideoDecodeH264PictureLayoutFlagBitsEXT {@link #pictureLayout};
  * }</code></pre>
  */
 public class VkVideoDecodeH264ProfileInfoEXT extends Struct implements NativeResource {
@@ -104,8 +105,8 @@ public class VkVideoDecodeH264ProfileInfoEXT extends Struct implements NativeRes
     /** a {@code StdVideoH264ProfileIdc} value specifying the H.264 codec profile IDC */
     @NativeType("StdVideoH264ProfileIdc")
     public int stdProfileIdc() { return nstdProfileIdc(address()); }
-    /** a bitmask of {@code VkVideoDecodeH264PictureLayoutFlagBitsEXT} specifying the layout of the decoded picture’s contents depending on the nature (progressive vs. interlaced) of the input content. */
-    @NativeType("VkVideoDecodeH264PictureLayoutFlagsEXT")
+    /** a {@code VkVideoDecodeH264PictureLayoutFlagBitsEXT} value specifying the layout of the decoded picture’s contents depending on the nature (progressive vs. interlaced) of the input content. */
+    @NativeType("VkVideoDecodeH264PictureLayoutFlagBitsEXT")
     public int pictureLayout() { return npictureLayout(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
@@ -117,7 +118,7 @@ public class VkVideoDecodeH264ProfileInfoEXT extends Struct implements NativeRes
     /** Sets the specified value to the {@link #stdProfileIdc} field. */
     public VkVideoDecodeH264ProfileInfoEXT stdProfileIdc(@NativeType("StdVideoH264ProfileIdc") int value) { nstdProfileIdc(address(), value); return this; }
     /** Sets the specified value to the {@link #pictureLayout} field. */
-    public VkVideoDecodeH264ProfileInfoEXT pictureLayout(@NativeType("VkVideoDecodeH264PictureLayoutFlagsEXT") int value) { npictureLayout(address(), value); return this; }
+    public VkVideoDecodeH264ProfileInfoEXT pictureLayout(@NativeType("VkVideoDecodeH264PictureLayoutFlagBitsEXT") int value) { npictureLayout(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoDecodeH264ProfileInfoEXT set(
@@ -325,7 +326,7 @@ public class VkVideoDecodeH264ProfileInfoEXT extends Struct implements NativeRes
         @NativeType("StdVideoH264ProfileIdc")
         public int stdProfileIdc() { return VkVideoDecodeH264ProfileInfoEXT.nstdProfileIdc(address()); }
         /** @return the value of the {@link VkVideoDecodeH264ProfileInfoEXT#pictureLayout} field. */
-        @NativeType("VkVideoDecodeH264PictureLayoutFlagsEXT")
+        @NativeType("VkVideoDecodeH264PictureLayoutFlagBitsEXT")
         public int pictureLayout() { return VkVideoDecodeH264ProfileInfoEXT.npictureLayout(address()); }
 
         /** Sets the specified value to the {@link VkVideoDecodeH264ProfileInfoEXT#sType} field. */
@@ -337,7 +338,7 @@ public class VkVideoDecodeH264ProfileInfoEXT extends Struct implements NativeRes
         /** Sets the specified value to the {@link VkVideoDecodeH264ProfileInfoEXT#stdProfileIdc} field. */
         public VkVideoDecodeH264ProfileInfoEXT.Buffer stdProfileIdc(@NativeType("StdVideoH264ProfileIdc") int value) { VkVideoDecodeH264ProfileInfoEXT.nstdProfileIdc(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoDecodeH264ProfileInfoEXT#pictureLayout} field. */
-        public VkVideoDecodeH264ProfileInfoEXT.Buffer pictureLayout(@NativeType("VkVideoDecodeH264PictureLayoutFlagsEXT") int value) { VkVideoDecodeH264ProfileInfoEXT.npictureLayout(address(), value); return this; }
+        public VkVideoDecodeH264ProfileInfoEXT.Buffer pictureLayout(@NativeType("VkVideoDecodeH264PictureLayoutFlagBitsEXT") int value) { VkVideoDecodeH264ProfileInfoEXT.npictureLayout(address(), value); return this; }
 
     }
 

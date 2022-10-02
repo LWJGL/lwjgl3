@@ -49,6 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeH264RateControlInfoEXT}, {@link VkVideoEncodeH264RateControlLayerInfoEXT}, {@link VkVideoEncodeH265RateControlInfoEXT}, {@link VkVideoEncodeH265RateControlLayerInfoEXT}, {@link VkVideoEncodeRateControlInfoKHR}, or {@link VkVideoEncodeRateControlLayerInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoCodingControlFlagBitsKHR} values</li>
+ * <li>{@code flags} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h5>See Also</h5>

@@ -24,21 +24,21 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT}</li>
- * <li>If {@code pVpsStd} is not {@code NULL}, {@code pVpsStd} <b>must</b> be a valid pointer to an array of {@code vpsStdCount} {@code StdVideoH265VideoParameterSet} values</li>
- * <li>If {@code pSpsStd} is not {@code NULL}, {@code pSpsStd} <b>must</b> be a valid pointer to an array of {@code spsStdCount} {@code StdVideoH265SequenceParameterSet} values</li>
- * <li>If {@code pPpsStd} is not {@code NULL}, {@code pPpsStd} <b>must</b> be a valid pointer to an array of {@code ppsStdCount} {@code StdVideoH265PictureParameterSet} values</li>
- * <li>{@code vpsStdCount} <b>must</b> be greater than 0</li>
- * <li>{@code spsStdCount} <b>must</b> be greater than 0</li>
- * <li>{@code ppsStdCount} <b>must</b> be greater than 0</li>
+ * <li>If {@code pStdVPSs} is not {@code NULL}, {@code pStdVPSs} <b>must</b> be a valid pointer to an array of {@code stdVPSCount} {@code StdVideoH265VideoParameterSet} values</li>
+ * <li>If {@code pStdSPSs} is not {@code NULL}, {@code pStdSPSs} <b>must</b> be a valid pointer to an array of {@code stdSPSCount} {@code StdVideoH265SequenceParameterSet} values</li>
+ * <li>If {@code pStdPPSs} is not {@code NULL}, {@code pStdPPSs} <b>must</b> be a valid pointer to an array of {@code stdPPSCount} {@code StdVideoH265PictureParameterSet} values</li>
+ * <li>{@code stdVPSCount} <b>must</b> be greater than 0</li>
+ * <li>{@code stdSPSCount} <b>must</b> be greater than 0</li>
+ * <li>{@code stdPPSCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>The values of {@code vpsStdCount}, {@code spsStdCount} and {@code ppsStdCount} <b>must</b> be less than or equal to the values of {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}{@code ::maxVpsStdCount}, {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}:{@code maxSpsStdCount}, and {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}:{@code maxPpsStdCount}, respectively</li>
- * <li>Each {@code StdVideoH265VideoParameterSet} entry in {@code pVpsStd} <b>must</b> have a unique H.265 VPS ID</li>
- * <li>Each {@code StdVideoH265SequenceParameterSet} entry in {@code pSpsStd} <b>must</b> have a unique H.265 VPS-SPS ID pair</li>
- * <li>Each {@code StdVideoH265PictureParameterSet} entry in {@code pPpsStd} <b>must</b> have a unique H.265 VPS-SPS-PPS ID tuple</li>
+ * <li>The values of {@code stdVPSCount}, {@code stdSPSCount} and {@code stdPPSCount} <b>must</b> be less than or equal to the values of {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}{@code ::maxStdVPSCount}, {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}:{@code maxStdSPSCount}, and {@link VkVideoEncodeH265SessionParametersCreateInfoEXT}:{@code maxStdPPSCount}, respectively</li>
+ * <li>Each {@code StdVideoH265VideoParameterSet} entry in {@code pStdVPSs} <b>must</b> have a unique H.265 VPS ID</li>
+ * <li>Each {@code StdVideoH265SequenceParameterSet} entry in {@code pStdSPSs} <b>must</b> have a unique H.265 VPS-SPS ID pair</li>
+ * <li>Each {@code StdVideoH265PictureParameterSet} entry in {@code pStdPPSs} <b>must</b> have a unique H.265 VPS-SPS-PPS ID tuple</li>
  * <li>Each entry to be added <b>must</b> have a unique, to the rest of the parameter array entries and the existing parameters in the Video Session Parameters Object that is being updated, VPS-SPS-PPS IDs</li>
  * <li>Parameter entries that already exist in Video Session Parameters object with a particular VPS-SPS-PPS IDs <b>must</b> not be replaced nor updated</li>
  * <li>When creating a new object using a Video Session Parameters as a template, the array’s parameters with the same VPS-SPS-PPS IDs as the ones from the template take precedence</li>
@@ -55,12 +55,12 @@ import org.lwjgl.vulkan.video.*;
  * struct VkVideoEncodeH265SessionParametersAddInfoEXT {
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
- *     uint32_t {@link #vpsStdCount};
- *     {@link StdVideoH265VideoParameterSet StdVideoH265VideoParameterSet} const * {@link #pVpsStd};
- *     uint32_t {@link #spsStdCount};
- *     {@link StdVideoH265SequenceParameterSet StdVideoH265SequenceParameterSet} const * {@link #pSpsStd};
- *     uint32_t {@link #ppsStdCount};
- *     {@link StdVideoH265PictureParameterSet StdVideoH265PictureParameterSet} const * {@link #pPpsStd};
+ *     uint32_t {@link #stdVPSCount};
+ *     {@link StdVideoH265VideoParameterSet StdVideoH265VideoParameterSet} const * {@link #pStdVPSs};
+ *     uint32_t {@link #stdSPSCount};
+ *     {@link StdVideoH265SequenceParameterSet StdVideoH265SequenceParameterSet} const * {@link #pStdSPSs};
+ *     uint32_t {@link #stdPPSCount};
+ *     {@link StdVideoH265PictureParameterSet StdVideoH265PictureParameterSet} const * {@link #pStdPPSs};
  * }</code></pre>
  */
 public class VkVideoEncodeH265SessionParametersAddInfoEXT extends Struct implements NativeResource {
@@ -75,12 +75,12 @@ public class VkVideoEncodeH265SessionParametersAddInfoEXT extends Struct impleme
     public static final int
         STYPE,
         PNEXT,
-        VPSSTDCOUNT,
-        PVPSSTD,
-        SPSSTDCOUNT,
-        PSPSSTD,
-        PPSSTDCOUNT,
-        PPPSSTD;
+        STDVPSCOUNT,
+        PSTDVPSS,
+        STDSPSCOUNT,
+        PSTDSPSS,
+        STDPPSCOUNT,
+        PSTDPPSS;
 
     static {
         Layout layout = __struct(
@@ -99,12 +99,12 @@ public class VkVideoEncodeH265SessionParametersAddInfoEXT extends Struct impleme
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        VPSSTDCOUNT = layout.offsetof(2);
-        PVPSSTD = layout.offsetof(3);
-        SPSSTDCOUNT = layout.offsetof(4);
-        PSPSSTD = layout.offsetof(5);
-        PPSSTDCOUNT = layout.offsetof(6);
-        PPPSSTD = layout.offsetof(7);
+        STDVPSCOUNT = layout.offsetof(2);
+        PSTDVPSS = layout.offsetof(3);
+        STDSPSCOUNT = layout.offsetof(4);
+        PSTDSPSS = layout.offsetof(5);
+        STDPPSCOUNT = layout.offsetof(6);
+        PSTDPPSS = layout.offsetof(7);
     }
 
     /**
@@ -126,27 +126,27 @@ public class VkVideoEncodeH265SessionParametersAddInfoEXT extends Struct impleme
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of VPS elements in {@code pVpsStd}. */
+    /** the number of VPS elements in {@code pStdVPSs}. */
     @NativeType("uint32_t")
-    public int vpsStdCount() { return nvpsStdCount(address()); }
-    /** a pointer to an array of {@code vpsStdCount} {@code StdVideoH265VideoParameterSet} structures representing H.265 video parameter sets. */
+    public int stdVPSCount() { return nstdVPSCount(address()); }
+    /** a pointer to an array of {@code stdVPSCount} {@code StdVideoH265VideoParameterSet} structures representing H.265 video parameter sets. */
     @Nullable
     @NativeType("StdVideoH265VideoParameterSet const *")
-    public StdVideoH265VideoParameterSet.Buffer pVpsStd() { return npVpsStd(address()); }
-    /** the number of SPS elements in {@code pSpsStd}. */
+    public StdVideoH265VideoParameterSet.Buffer pStdVPSs() { return npStdVPSs(address()); }
+    /** the number of SPS elements in {@code pStdSPSs}. */
     @NativeType("uint32_t")
-    public int spsStdCount() { return nspsStdCount(address()); }
-    /** a pointer to an array of {@code spsStdCount} {@code StdVideoH265SequenceParameterSet} structures representing H.265 sequence parameter sets. */
+    public int stdSPSCount() { return nstdSPSCount(address()); }
+    /** a pointer to an array of {@code stdSPSCount} {@code StdVideoH265SequenceParameterSet} structures representing H.265 sequence parameter sets. */
     @Nullable
     @NativeType("StdVideoH265SequenceParameterSet const *")
-    public StdVideoH265SequenceParameterSet.Buffer pSpsStd() { return npSpsStd(address()); }
-    /** the number of PPS elements in {@code pPpsStd}. */
+    public StdVideoH265SequenceParameterSet.Buffer pStdSPSs() { return npStdSPSs(address()); }
+    /** the number of PPS elements in {@code pStdPPSs}. */
     @NativeType("uint32_t")
-    public int ppsStdCount() { return nppsStdCount(address()); }
-    /** a pointer to an array of {@code ppsStdCount} {@code StdVideoH265PictureParameterSet} structures representing H.265 picture parameter sets. */
+    public int stdPPSCount() { return nstdPPSCount(address()); }
+    /** a pointer to an array of {@code stdPPSCount} {@code StdVideoH265PictureParameterSet} structures representing H.265 picture parameter sets. */
     @Nullable
     @NativeType("StdVideoH265PictureParameterSet const *")
-    public StdVideoH265PictureParameterSet.Buffer pPpsStd() { return npPpsStd(address()); }
+    public StdVideoH265PictureParameterSet.Buffer pStdPPSs() { return npStdPPSs(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoEncodeH265SessionParametersAddInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -154,38 +154,38 @@ public class VkVideoEncodeH265SessionParametersAddInfoEXT extends Struct impleme
     public VkVideoEncodeH265SessionParametersAddInfoEXT sType$Default() { return sType(EXTVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeH265SessionParametersAddInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #vpsStdCount} field. */
-    public VkVideoEncodeH265SessionParametersAddInfoEXT vpsStdCount(@NativeType("uint32_t") int value) { nvpsStdCount(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265VideoParameterSet.Buffer} to the {@link #pVpsStd} field. */
-    public VkVideoEncodeH265SessionParametersAddInfoEXT pVpsStd(@Nullable @NativeType("StdVideoH265VideoParameterSet const *") StdVideoH265VideoParameterSet.Buffer value) { npVpsStd(address(), value); return this; }
-    /** Sets the specified value to the {@link #spsStdCount} field. */
-    public VkVideoEncodeH265SessionParametersAddInfoEXT spsStdCount(@NativeType("uint32_t") int value) { nspsStdCount(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265SequenceParameterSet.Buffer} to the {@link #pSpsStd} field. */
-    public VkVideoEncodeH265SessionParametersAddInfoEXT pSpsStd(@Nullable @NativeType("StdVideoH265SequenceParameterSet const *") StdVideoH265SequenceParameterSet.Buffer value) { npSpsStd(address(), value); return this; }
-    /** Sets the specified value to the {@link #ppsStdCount} field. */
-    public VkVideoEncodeH265SessionParametersAddInfoEXT ppsStdCount(@NativeType("uint32_t") int value) { nppsStdCount(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265PictureParameterSet.Buffer} to the {@link #pPpsStd} field. */
-    public VkVideoEncodeH265SessionParametersAddInfoEXT pPpsStd(@Nullable @NativeType("StdVideoH265PictureParameterSet const *") StdVideoH265PictureParameterSet.Buffer value) { npPpsStd(address(), value); return this; }
+    /** Sets the specified value to the {@link #stdVPSCount} field. */
+    public VkVideoEncodeH265SessionParametersAddInfoEXT stdVPSCount(@NativeType("uint32_t") int value) { nstdVPSCount(address(), value); return this; }
+    /** Sets the address of the specified {@link StdVideoH265VideoParameterSet.Buffer} to the {@link #pStdVPSs} field. */
+    public VkVideoEncodeH265SessionParametersAddInfoEXT pStdVPSs(@Nullable @NativeType("StdVideoH265VideoParameterSet const *") StdVideoH265VideoParameterSet.Buffer value) { npStdVPSs(address(), value); return this; }
+    /** Sets the specified value to the {@link #stdSPSCount} field. */
+    public VkVideoEncodeH265SessionParametersAddInfoEXT stdSPSCount(@NativeType("uint32_t") int value) { nstdSPSCount(address(), value); return this; }
+    /** Sets the address of the specified {@link StdVideoH265SequenceParameterSet.Buffer} to the {@link #pStdSPSs} field. */
+    public VkVideoEncodeH265SessionParametersAddInfoEXT pStdSPSs(@Nullable @NativeType("StdVideoH265SequenceParameterSet const *") StdVideoH265SequenceParameterSet.Buffer value) { npStdSPSs(address(), value); return this; }
+    /** Sets the specified value to the {@link #stdPPSCount} field. */
+    public VkVideoEncodeH265SessionParametersAddInfoEXT stdPPSCount(@NativeType("uint32_t") int value) { nstdPPSCount(address(), value); return this; }
+    /** Sets the address of the specified {@link StdVideoH265PictureParameterSet.Buffer} to the {@link #pStdPPSs} field. */
+    public VkVideoEncodeH265SessionParametersAddInfoEXT pStdPPSs(@Nullable @NativeType("StdVideoH265PictureParameterSet const *") StdVideoH265PictureParameterSet.Buffer value) { npStdPPSs(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoEncodeH265SessionParametersAddInfoEXT set(
         int sType,
         long pNext,
-        int vpsStdCount,
-        @Nullable StdVideoH265VideoParameterSet.Buffer pVpsStd,
-        int spsStdCount,
-        @Nullable StdVideoH265SequenceParameterSet.Buffer pSpsStd,
-        int ppsStdCount,
-        @Nullable StdVideoH265PictureParameterSet.Buffer pPpsStd
+        int stdVPSCount,
+        @Nullable StdVideoH265VideoParameterSet.Buffer pStdVPSs,
+        int stdSPSCount,
+        @Nullable StdVideoH265SequenceParameterSet.Buffer pStdSPSs,
+        int stdPPSCount,
+        @Nullable StdVideoH265PictureParameterSet.Buffer pStdPPSs
     ) {
         sType(sType);
         pNext(pNext);
-        vpsStdCount(vpsStdCount);
-        pVpsStd(pVpsStd);
-        spsStdCount(spsStdCount);
-        pSpsStd(pSpsStd);
-        ppsStdCount(ppsStdCount);
-        pPpsStd(pPpsStd);
+        stdVPSCount(stdVPSCount);
+        pStdVPSs(pStdVPSs);
+        stdSPSCount(stdSPSCount);
+        pStdSPSs(pStdSPSs);
+        stdPPSCount(stdPPSCount);
+        pStdPPSs(pStdPPSs);
 
         return this;
     }
@@ -319,35 +319,35 @@ public class VkVideoEncodeH265SessionParametersAddInfoEXT extends Struct impleme
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #vpsStdCount}. */
-    public static int nvpsStdCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.VPSSTDCOUNT); }
-    /** Unsafe version of {@link #pVpsStd}. */
-    @Nullable public static StdVideoH265VideoParameterSet.Buffer npVpsStd(long struct) { return StdVideoH265VideoParameterSet.createSafe(memGetAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PVPSSTD), nvpsStdCount(struct)); }
-    /** Unsafe version of {@link #spsStdCount}. */
-    public static int nspsStdCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.SPSSTDCOUNT); }
-    /** Unsafe version of {@link #pSpsStd}. */
-    @Nullable public static StdVideoH265SequenceParameterSet.Buffer npSpsStd(long struct) { return StdVideoH265SequenceParameterSet.createSafe(memGetAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PSPSSTD), nspsStdCount(struct)); }
-    /** Unsafe version of {@link #ppsStdCount}. */
-    public static int nppsStdCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PPSSTDCOUNT); }
-    /** Unsafe version of {@link #pPpsStd}. */
-    @Nullable public static StdVideoH265PictureParameterSet.Buffer npPpsStd(long struct) { return StdVideoH265PictureParameterSet.createSafe(memGetAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PPPSSTD), nppsStdCount(struct)); }
+    /** Unsafe version of {@link #stdVPSCount}. */
+    public static int nstdVPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.STDVPSCOUNT); }
+    /** Unsafe version of {@link #pStdVPSs}. */
+    @Nullable public static StdVideoH265VideoParameterSet.Buffer npStdVPSs(long struct) { return StdVideoH265VideoParameterSet.createSafe(memGetAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PSTDVPSS), nstdVPSCount(struct)); }
+    /** Unsafe version of {@link #stdSPSCount}. */
+    public static int nstdSPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.STDSPSCOUNT); }
+    /** Unsafe version of {@link #pStdSPSs}. */
+    @Nullable public static StdVideoH265SequenceParameterSet.Buffer npStdSPSs(long struct) { return StdVideoH265SequenceParameterSet.createSafe(memGetAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PSTDSPSS), nstdSPSCount(struct)); }
+    /** Unsafe version of {@link #stdPPSCount}. */
+    public static int nstdPPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.STDPPSCOUNT); }
+    /** Unsafe version of {@link #pStdPPSs}. */
+    @Nullable public static StdVideoH265PictureParameterSet.Buffer npStdPPSs(long struct) { return StdVideoH265PictureParameterSet.createSafe(memGetAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PSTDPPSS), nstdPPSCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PNEXT, value); }
-    /** Sets the specified value to the {@code vpsStdCount} field of the specified {@code struct}. */
-    public static void nvpsStdCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.VPSSTDCOUNT, value); }
-    /** Unsafe version of {@link #pVpsStd(StdVideoH265VideoParameterSet.Buffer) pVpsStd}. */
-    public static void npVpsStd(long struct, @Nullable StdVideoH265VideoParameterSet.Buffer value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PVPSSTD, memAddressSafe(value)); if (value != null) { nvpsStdCount(struct, value.remaining()); } }
-    /** Sets the specified value to the {@code spsStdCount} field of the specified {@code struct}. */
-    public static void nspsStdCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.SPSSTDCOUNT, value); }
-    /** Unsafe version of {@link #pSpsStd(StdVideoH265SequenceParameterSet.Buffer) pSpsStd}. */
-    public static void npSpsStd(long struct, @Nullable StdVideoH265SequenceParameterSet.Buffer value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PSPSSTD, memAddressSafe(value)); if (value != null) { nspsStdCount(struct, value.remaining()); } }
-    /** Sets the specified value to the {@code ppsStdCount} field of the specified {@code struct}. */
-    public static void nppsStdCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PPSSTDCOUNT, value); }
-    /** Unsafe version of {@link #pPpsStd(StdVideoH265PictureParameterSet.Buffer) pPpsStd}. */
-    public static void npPpsStd(long struct, @Nullable StdVideoH265PictureParameterSet.Buffer value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PPPSSTD, memAddressSafe(value)); if (value != null) { nppsStdCount(struct, value.remaining()); } }
+    /** Sets the specified value to the {@code stdVPSCount} field of the specified {@code struct}. */
+    public static void nstdVPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.STDVPSCOUNT, value); }
+    /** Unsafe version of {@link #pStdVPSs(StdVideoH265VideoParameterSet.Buffer) pStdVPSs}. */
+    public static void npStdVPSs(long struct, @Nullable StdVideoH265VideoParameterSet.Buffer value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PSTDVPSS, memAddressSafe(value)); if (value != null) { nstdVPSCount(struct, value.remaining()); } }
+    /** Sets the specified value to the {@code stdSPSCount} field of the specified {@code struct}. */
+    public static void nstdSPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.STDSPSCOUNT, value); }
+    /** Unsafe version of {@link #pStdSPSs(StdVideoH265SequenceParameterSet.Buffer) pStdSPSs}. */
+    public static void npStdSPSs(long struct, @Nullable StdVideoH265SequenceParameterSet.Buffer value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PSTDSPSS, memAddressSafe(value)); if (value != null) { nstdSPSCount(struct, value.remaining()); } }
+    /** Sets the specified value to the {@code stdPPSCount} field of the specified {@code struct}. */
+    public static void nstdPPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersAddInfoEXT.STDPPSCOUNT, value); }
+    /** Unsafe version of {@link #pStdPPSs(StdVideoH265PictureParameterSet.Buffer) pStdPPSs}. */
+    public static void npStdPPSs(long struct, @Nullable StdVideoH265PictureParameterSet.Buffer value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersAddInfoEXT.PSTDPPSS, memAddressSafe(value)); if (value != null) { nstdPPSCount(struct, value.remaining()); } }
 
     // -----------------------------------
 
@@ -393,27 +393,27 @@ public class VkVideoEncodeH265SessionParametersAddInfoEXT extends Struct impleme
         /** @return the value of the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH265SessionParametersAddInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#vpsStdCount} field. */
+        /** @return the value of the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#stdVPSCount} field. */
         @NativeType("uint32_t")
-        public int vpsStdCount() { return VkVideoEncodeH265SessionParametersAddInfoEXT.nvpsStdCount(address()); }
-        /** @return a {@link StdVideoH265VideoParameterSet.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pVpsStd} field. */
+        public int stdVPSCount() { return VkVideoEncodeH265SessionParametersAddInfoEXT.nstdVPSCount(address()); }
+        /** @return a {@link StdVideoH265VideoParameterSet.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pStdVPSs} field. */
         @Nullable
         @NativeType("StdVideoH265VideoParameterSet const *")
-        public StdVideoH265VideoParameterSet.Buffer pVpsStd() { return VkVideoEncodeH265SessionParametersAddInfoEXT.npVpsStd(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#spsStdCount} field. */
+        public StdVideoH265VideoParameterSet.Buffer pStdVPSs() { return VkVideoEncodeH265SessionParametersAddInfoEXT.npStdVPSs(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#stdSPSCount} field. */
         @NativeType("uint32_t")
-        public int spsStdCount() { return VkVideoEncodeH265SessionParametersAddInfoEXT.nspsStdCount(address()); }
-        /** @return a {@link StdVideoH265SequenceParameterSet.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pSpsStd} field. */
+        public int stdSPSCount() { return VkVideoEncodeH265SessionParametersAddInfoEXT.nstdSPSCount(address()); }
+        /** @return a {@link StdVideoH265SequenceParameterSet.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pStdSPSs} field. */
         @Nullable
         @NativeType("StdVideoH265SequenceParameterSet const *")
-        public StdVideoH265SequenceParameterSet.Buffer pSpsStd() { return VkVideoEncodeH265SessionParametersAddInfoEXT.npSpsStd(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#ppsStdCount} field. */
+        public StdVideoH265SequenceParameterSet.Buffer pStdSPSs() { return VkVideoEncodeH265SessionParametersAddInfoEXT.npStdSPSs(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#stdPPSCount} field. */
         @NativeType("uint32_t")
-        public int ppsStdCount() { return VkVideoEncodeH265SessionParametersAddInfoEXT.nppsStdCount(address()); }
-        /** @return a {@link StdVideoH265PictureParameterSet.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pPpsStd} field. */
+        public int stdPPSCount() { return VkVideoEncodeH265SessionParametersAddInfoEXT.nstdPPSCount(address()); }
+        /** @return a {@link StdVideoH265PictureParameterSet.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pStdPPSs} field. */
         @Nullable
         @NativeType("StdVideoH265PictureParameterSet const *")
-        public StdVideoH265PictureParameterSet.Buffer pPpsStd() { return VkVideoEncodeH265SessionParametersAddInfoEXT.npPpsStd(address()); }
+        public StdVideoH265PictureParameterSet.Buffer pStdPPSs() { return VkVideoEncodeH265SessionParametersAddInfoEXT.npStdPPSs(address()); }
 
         /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#sType} field. */
         public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH265SessionParametersAddInfoEXT.nsType(address(), value); return this; }
@@ -421,18 +421,18 @@ public class VkVideoEncodeH265SessionParametersAddInfoEXT extends Struct impleme
         public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer sType$Default() { return sType(EXTVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT); }
         /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pNext} field. */
         public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH265SessionParametersAddInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#vpsStdCount} field. */
-        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer vpsStdCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersAddInfoEXT.nvpsStdCount(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265VideoParameterSet.Buffer} to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pVpsStd} field. */
-        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer pVpsStd(@Nullable @NativeType("StdVideoH265VideoParameterSet const *") StdVideoH265VideoParameterSet.Buffer value) { VkVideoEncodeH265SessionParametersAddInfoEXT.npVpsStd(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#spsStdCount} field. */
-        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer spsStdCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersAddInfoEXT.nspsStdCount(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265SequenceParameterSet.Buffer} to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pSpsStd} field. */
-        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer pSpsStd(@Nullable @NativeType("StdVideoH265SequenceParameterSet const *") StdVideoH265SequenceParameterSet.Buffer value) { VkVideoEncodeH265SessionParametersAddInfoEXT.npSpsStd(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#ppsStdCount} field. */
-        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer ppsStdCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersAddInfoEXT.nppsStdCount(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265PictureParameterSet.Buffer} to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pPpsStd} field. */
-        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer pPpsStd(@Nullable @NativeType("StdVideoH265PictureParameterSet const *") StdVideoH265PictureParameterSet.Buffer value) { VkVideoEncodeH265SessionParametersAddInfoEXT.npPpsStd(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#stdVPSCount} field. */
+        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer stdVPSCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersAddInfoEXT.nstdVPSCount(address(), value); return this; }
+        /** Sets the address of the specified {@link StdVideoH265VideoParameterSet.Buffer} to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pStdVPSs} field. */
+        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer pStdVPSs(@Nullable @NativeType("StdVideoH265VideoParameterSet const *") StdVideoH265VideoParameterSet.Buffer value) { VkVideoEncodeH265SessionParametersAddInfoEXT.npStdVPSs(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#stdSPSCount} field. */
+        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer stdSPSCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersAddInfoEXT.nstdSPSCount(address(), value); return this; }
+        /** Sets the address of the specified {@link StdVideoH265SequenceParameterSet.Buffer} to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pStdSPSs} field. */
+        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer pStdSPSs(@Nullable @NativeType("StdVideoH265SequenceParameterSet const *") StdVideoH265SequenceParameterSet.Buffer value) { VkVideoEncodeH265SessionParametersAddInfoEXT.npStdSPSs(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#stdPPSCount} field. */
+        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer stdPPSCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersAddInfoEXT.nstdPPSCount(address(), value); return this; }
+        /** Sets the address of the specified {@link StdVideoH265PictureParameterSet.Buffer} to the {@link VkVideoEncodeH265SessionParametersAddInfoEXT#pStdPPSs} field. */
+        public VkVideoEncodeH265SessionParametersAddInfoEXT.Buffer pStdPPSs(@Nullable @NativeType("StdVideoH265PictureParameterSet const *") StdVideoH265PictureParameterSet.Buffer value) { VkVideoEncodeH265SessionParametersAddInfoEXT.npStdPPSs(address(), value); return this; }
 
     }
 

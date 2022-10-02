@@ -92,7 +92,7 @@ val NV_coverage_reduction_mode = "NVCoverageReductionMode".nativeClassVK("NV_cov
         </ul>
 
         <h5>See Also</h5>
-        ##VkFramebufferMixedSamplesCombinationNV, ##VkPipelineCoverageReductionStateCreateInfoNV
+        ##VkFramebufferMixedSamplesCombinationNV, ##VkPipelineCoverageReductionStateCreateInfoNV, #CmdSetCoverageReductionModeNV()
         """,
 
         "COVERAGE_REDUCTION_MODE_MERGE_NV".."0",

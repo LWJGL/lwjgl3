@@ -25,7 +25,7 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
             <dd>41</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>6</dd>
+            <dd>7</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -43,7 +43,7 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-08-09</dd>
+            <dd>2022-09-18</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -66,7 +66,7 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
     IntConstant(
         "The extension specification version.",
 
-        "EXT_VIDEO_DECODE_H264_SPEC_VERSION".."6"
+        "EXT_VIDEO_DECODE_H264_SPEC_VERSION".."7"
     )
 
     StringConstant(
@@ -80,7 +80,6 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
 
         "STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT".."1000040000",
         "STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT".."1000040001",
-        "STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_INFO_EXT".."1000040002",
         "STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_INFO_EXT".."1000040003",
         "STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT".."1000040004",
         "STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT".."1000040005",
@@ -103,6 +102,9 @@ val EXT_video_decode_h264 = "EXTVideoDecodeH264".nativeClassVK("EXT_video_decode
             <li>#VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_EXT specifies support for or use of a picture layout for interlaced content where all lines belonging to the first field are decoded to the even-numbered lines within the picture resource, and all lines belonging to the second field are decoded to the odd-numbered lines within the picture resource.</li>
             <li>#VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_EXT specifies support for or use of a picture layout for interlaced content where all lines belonging to the first field are grouped together in a single plane, followed by another plane containing all lines belonging to the second field.</li>
         </ul>
+
+        <h5>See Also</h5>
+        ##VkVideoDecodeH264ProfileInfoEXT
         """,
 
         "VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_EXT".."0",

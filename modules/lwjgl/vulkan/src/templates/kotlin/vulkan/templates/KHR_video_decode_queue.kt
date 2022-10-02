@@ -197,7 +197,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
         <pre><code>
 ￿void vkCmdDecodeVideoKHR(
 ￿    VkCommandBuffer                             commandBuffer,
-￿    const VkVideoDecodeInfoKHR*                 pFrameInfo);</code></pre>
+￿    const VkVideoDecodeInfoKHR*                 pDecodeInfo);</code></pre>
 
         <h5>Valid Usage</h5>
         <ul>
@@ -207,7 +207,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
-            <li>{@code pFrameInfo} <b>must</b> be a valid pointer to a valid ##VkVideoDecodeInfoKHR structure</li>
+            <li>{@code pDecodeInfo} <b>must</b> be a valid pointer to a valid ##VkVideoDecodeInfoKHR structure</li>
             <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
             <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support decode operations</li>
             <li>This command <b>must</b> only be called outside of a render pass instance</li>
@@ -217,6 +217,7 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
 
         <h5>Host Synchronization</h5>
         <ul>
+            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
             <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
         </ul>
 
@@ -231,6 +232,6 @@ val KHR_video_decode_queue = "KHRVideoDecodeQueue".nativeClassVK("KHR_video_deco
         """,
 
         VkCommandBuffer("commandBuffer", "the command buffer to be filled with this function for decode frame command."),
-        VkVideoDecodeInfoKHR.const.p("pFrameInfo", "a pointer to a ##VkVideoDecodeInfoKHR structure.")
+        VkVideoDecodeInfoKHR.const.p("pDecodeInfo", "a pointer to a ##VkVideoDecodeInfoKHR structure.")
     )
 }

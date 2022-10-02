@@ -218,7 +218,7 @@ public final class EXTBlendOperationAdvanced {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkPipelineColorBlendAdvancedStateCreateInfoEXT}</p>
+     * <p>{@link VkColorBlendAdvancedEXT}, {@link VkPipelineColorBlendAdvancedStateCreateInfoEXT}</p>
      */
     public static final int
         VK_BLEND_OVERLAP_UNCORRELATED_EXT = 0,

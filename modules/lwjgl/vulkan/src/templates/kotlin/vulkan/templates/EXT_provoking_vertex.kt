@@ -107,7 +107,7 @@ val EXT_provoking_vertex = "EXTProvokingVertex".nativeClassVK("EXT_provoking_ver
         These modes are described more precisely in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#drawing-primitive-topologies">Primitive Topologies</a>.
 
         <h5>See Also</h5>
-        ##VkPipelineRasterizationProvokingVertexStateCreateInfoEXT
+        ##VkPipelineRasterizationProvokingVertexStateCreateInfoEXT, #CmdSetProvokingVertexModeEXT()
         """,
 
         "PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT".."0",

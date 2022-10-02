@@ -174,7 +174,7 @@ val EXT_blend_operation_advanced = "EXTBlendOperationAdvanced".nativeClassVK("EX
         </table>
 
         <h5>See Also</h5>
-        ##VkPipelineColorBlendAdvancedStateCreateInfoEXT
+        ##VkColorBlendAdvancedEXT, ##VkPipelineColorBlendAdvancedStateCreateInfoEXT
         """,
 
         "BLEND_OVERLAP_UNCORRELATED_EXT".."0",

@@ -26,14 +26,17 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t sar_width;
  *     uint16_t sar_height;
  *     uint8_t video_format;
- *     uint8_t color_primaries;
+ *     uint8_t colour_primaries;
  *     uint8_t transfer_characteristics;
  *     uint8_t matrix_coefficients;
  *     uint32_t num_units_in_tick;
  *     uint32_t time_scale;
- *     {@link StdVideoH264HrdParameters StdVideoH264HrdParameters} const * {@link #pHrdParameters};
  *     uint8_t max_num_reorder_frames;
  *     uint8_t max_dec_frame_buffering;
+ *     uint8_t chroma_sample_loc_type_top_field;
+ *     uint8_t chroma_sample_loc_type_bottom_field;
+ *     uint32_t reserved1;
+ *     {@link StdVideoH264HrdParameters StdVideoH264HrdParameters} const * {@link #pHrdParameters};
  * }</code></pre>
  */
 public class StdVideoH264SequenceParameterSetVui extends Struct implements NativeResource {
@@ -51,14 +54,17 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
         SAR_WIDTH,
         SAR_HEIGHT,
         VIDEO_FORMAT,
-        COLOR_PRIMARIES,
+        COLOUR_PRIMARIES,
         TRANSFER_CHARACTERISTICS,
         MATRIX_COEFFICIENTS,
         NUM_UNITS_IN_TICK,
         TIME_SCALE,
-        PHRDPARAMETERS,
         MAX_NUM_REORDER_FRAMES,
-        MAX_DEC_FRAME_BUFFERING;
+        MAX_DEC_FRAME_BUFFERING,
+        CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD,
+        CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD,
+        RESERVED1,
+        PHRDPARAMETERS;
 
     static {
         Layout layout = __struct(
@@ -72,9 +78,12 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
             __member(1),
             __member(4),
             __member(4),
-            __member(POINTER_SIZE),
             __member(1),
-            __member(1)
+            __member(1),
+            __member(1),
+            __member(1),
+            __member(4),
+            __member(POINTER_SIZE)
         );
 
         SIZEOF = layout.getSize();
@@ -85,14 +94,17 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
         SAR_WIDTH = layout.offsetof(2);
         SAR_HEIGHT = layout.offsetof(3);
         VIDEO_FORMAT = layout.offsetof(4);
-        COLOR_PRIMARIES = layout.offsetof(5);
+        COLOUR_PRIMARIES = layout.offsetof(5);
         TRANSFER_CHARACTERISTICS = layout.offsetof(6);
         MATRIX_COEFFICIENTS = layout.offsetof(7);
         NUM_UNITS_IN_TICK = layout.offsetof(8);
         TIME_SCALE = layout.offsetof(9);
-        PHRDPARAMETERS = layout.offsetof(10);
-        MAX_NUM_REORDER_FRAMES = layout.offsetof(11);
-        MAX_DEC_FRAME_BUFFERING = layout.offsetof(12);
+        MAX_NUM_REORDER_FRAMES = layout.offsetof(10);
+        MAX_DEC_FRAME_BUFFERING = layout.offsetof(11);
+        CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD = layout.offsetof(12);
+        CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD = layout.offsetof(13);
+        RESERVED1 = layout.offsetof(14);
+        PHRDPARAMETERS = layout.offsetof(15);
     }
 
     /**
@@ -122,9 +134,9 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
     /** @return the value of the {@code video_format} field. */
     @NativeType("uint8_t")
     public byte video_format() { return nvideo_format(address()); }
-    /** @return the value of the {@code color_primaries} field. */
+    /** @return the value of the {@code colour_primaries} field. */
     @NativeType("uint8_t")
-    public byte color_primaries() { return ncolor_primaries(address()); }
+    public byte colour_primaries() { return ncolour_primaries(address()); }
     /** @return the value of the {@code transfer_characteristics} field. */
     @NativeType("uint8_t")
     public byte transfer_characteristics() { return ntransfer_characteristics(address()); }
@@ -137,15 +149,21 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
     /** @return the value of the {@code time_scale} field. */
     @NativeType("uint32_t")
     public int time_scale() { return ntime_scale(address()); }
-    /** must be a valid {@code ptr} to {@code hrd_parameters}, if {@code nal_hrd_parameters_present_flag} or {@code vcl_hrd_parameters_present_flag} are set */
-    @NativeType("StdVideoH264HrdParameters const *")
-    public StdVideoH264HrdParameters pHrdParameters() { return npHrdParameters(address()); }
     /** @return the value of the {@code max_num_reorder_frames} field. */
     @NativeType("uint8_t")
     public byte max_num_reorder_frames() { return nmax_num_reorder_frames(address()); }
     /** @return the value of the {@code max_dec_frame_buffering} field. */
     @NativeType("uint8_t")
     public byte max_dec_frame_buffering() { return nmax_dec_frame_buffering(address()); }
+    /** @return the value of the {@code chroma_sample_loc_type_top_field} field. */
+    @NativeType("uint8_t")
+    public byte chroma_sample_loc_type_top_field() { return nchroma_sample_loc_type_top_field(address()); }
+    /** @return the value of the {@code chroma_sample_loc_type_bottom_field} field. */
+    @NativeType("uint8_t")
+    public byte chroma_sample_loc_type_bottom_field() { return nchroma_sample_loc_type_bottom_field(address()); }
+    /** must be a valid {@code ptr} to {@code hrd_parameters}, if {@code nal_hrd_parameters_present_flag} or {@code vcl_hrd_parameters_present_flag} are set */
+    @NativeType("StdVideoH264HrdParameters const *")
+    public StdVideoH264HrdParameters pHrdParameters() { return npHrdParameters(address()); }
 
     /** Copies the specified {@link StdVideoH264SpsVuiFlags} to the {@code flags} field. */
     public StdVideoH264SequenceParameterSetVui flags(StdVideoH264SpsVuiFlags value) { nflags(address(), value); return this; }
@@ -159,8 +177,8 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
     public StdVideoH264SequenceParameterSetVui sar_height(@NativeType("uint16_t") short value) { nsar_height(address(), value); return this; }
     /** Sets the specified value to the {@code video_format} field. */
     public StdVideoH264SequenceParameterSetVui video_format(@NativeType("uint8_t") byte value) { nvideo_format(address(), value); return this; }
-    /** Sets the specified value to the {@code color_primaries} field. */
-    public StdVideoH264SequenceParameterSetVui color_primaries(@NativeType("uint8_t") byte value) { ncolor_primaries(address(), value); return this; }
+    /** Sets the specified value to the {@code colour_primaries} field. */
+    public StdVideoH264SequenceParameterSetVui colour_primaries(@NativeType("uint8_t") byte value) { ncolour_primaries(address(), value); return this; }
     /** Sets the specified value to the {@code transfer_characteristics} field. */
     public StdVideoH264SequenceParameterSetVui transfer_characteristics(@NativeType("uint8_t") byte value) { ntransfer_characteristics(address(), value); return this; }
     /** Sets the specified value to the {@code matrix_coefficients} field. */
@@ -169,12 +187,16 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
     public StdVideoH264SequenceParameterSetVui num_units_in_tick(@NativeType("uint32_t") int value) { nnum_units_in_tick(address(), value); return this; }
     /** Sets the specified value to the {@code time_scale} field. */
     public StdVideoH264SequenceParameterSetVui time_scale(@NativeType("uint32_t") int value) { ntime_scale(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH264HrdParameters} to the {@link #pHrdParameters} field. */
-    public StdVideoH264SequenceParameterSetVui pHrdParameters(@NativeType("StdVideoH264HrdParameters const *") StdVideoH264HrdParameters value) { npHrdParameters(address(), value); return this; }
     /** Sets the specified value to the {@code max_num_reorder_frames} field. */
     public StdVideoH264SequenceParameterSetVui max_num_reorder_frames(@NativeType("uint8_t") byte value) { nmax_num_reorder_frames(address(), value); return this; }
     /** Sets the specified value to the {@code max_dec_frame_buffering} field. */
     public StdVideoH264SequenceParameterSetVui max_dec_frame_buffering(@NativeType("uint8_t") byte value) { nmax_dec_frame_buffering(address(), value); return this; }
+    /** Sets the specified value to the {@code chroma_sample_loc_type_top_field} field. */
+    public StdVideoH264SequenceParameterSetVui chroma_sample_loc_type_top_field(@NativeType("uint8_t") byte value) { nchroma_sample_loc_type_top_field(address(), value); return this; }
+    /** Sets the specified value to the {@code chroma_sample_loc_type_bottom_field} field. */
+    public StdVideoH264SequenceParameterSetVui chroma_sample_loc_type_bottom_field(@NativeType("uint8_t") byte value) { nchroma_sample_loc_type_bottom_field(address(), value); return this; }
+    /** Sets the address of the specified {@link StdVideoH264HrdParameters} to the {@link #pHrdParameters} field. */
+    public StdVideoH264SequenceParameterSetVui pHrdParameters(@NativeType("StdVideoH264HrdParameters const *") StdVideoH264HrdParameters value) { npHrdParameters(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoH264SequenceParameterSetVui set(
@@ -183,28 +205,32 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
         short sar_width,
         short sar_height,
         byte video_format,
-        byte color_primaries,
+        byte colour_primaries,
         byte transfer_characteristics,
         byte matrix_coefficients,
         int num_units_in_tick,
         int time_scale,
-        StdVideoH264HrdParameters pHrdParameters,
         byte max_num_reorder_frames,
-        byte max_dec_frame_buffering
+        byte max_dec_frame_buffering,
+        byte chroma_sample_loc_type_top_field,
+        byte chroma_sample_loc_type_bottom_field,
+        StdVideoH264HrdParameters pHrdParameters
     ) {
         flags(flags);
         aspect_ratio_idc(aspect_ratio_idc);
         sar_width(sar_width);
         sar_height(sar_height);
         video_format(video_format);
-        color_primaries(color_primaries);
+        colour_primaries(colour_primaries);
         transfer_characteristics(transfer_characteristics);
         matrix_coefficients(matrix_coefficients);
         num_units_in_tick(num_units_in_tick);
         time_scale(time_scale);
-        pHrdParameters(pHrdParameters);
         max_num_reorder_frames(max_num_reorder_frames);
         max_dec_frame_buffering(max_dec_frame_buffering);
+        chroma_sample_loc_type_top_field(chroma_sample_loc_type_top_field);
+        chroma_sample_loc_type_bottom_field(chroma_sample_loc_type_bottom_field);
+        pHrdParameters(pHrdParameters);
 
         return this;
     }
@@ -344,8 +370,8 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
     public static short nsar_height(long struct) { return UNSAFE.getShort(null, struct + StdVideoH264SequenceParameterSetVui.SAR_HEIGHT); }
     /** Unsafe version of {@link #video_format}. */
     public static byte nvideo_format(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.VIDEO_FORMAT); }
-    /** Unsafe version of {@link #color_primaries}. */
-    public static byte ncolor_primaries(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.COLOR_PRIMARIES); }
+    /** Unsafe version of {@link #colour_primaries}. */
+    public static byte ncolour_primaries(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.COLOUR_PRIMARIES); }
     /** Unsafe version of {@link #transfer_characteristics}. */
     public static byte ntransfer_characteristics(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.TRANSFER_CHARACTERISTICS); }
     /** Unsafe version of {@link #matrix_coefficients}. */
@@ -354,12 +380,17 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
     public static int nnum_units_in_tick(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSetVui.NUM_UNITS_IN_TICK); }
     /** Unsafe version of {@link #time_scale}. */
     public static int ntime_scale(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSetVui.TIME_SCALE); }
-    /** Unsafe version of {@link #pHrdParameters}. */
-    public static StdVideoH264HrdParameters npHrdParameters(long struct) { return StdVideoH264HrdParameters.create(memGetAddress(struct + StdVideoH264SequenceParameterSetVui.PHRDPARAMETERS)); }
     /** Unsafe version of {@link #max_num_reorder_frames}. */
     public static byte nmax_num_reorder_frames(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.MAX_NUM_REORDER_FRAMES); }
     /** Unsafe version of {@link #max_dec_frame_buffering}. */
     public static byte nmax_dec_frame_buffering(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.MAX_DEC_FRAME_BUFFERING); }
+    /** Unsafe version of {@link #chroma_sample_loc_type_top_field}. */
+    public static byte nchroma_sample_loc_type_top_field(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD); }
+    /** Unsafe version of {@link #chroma_sample_loc_type_bottom_field}. */
+    public static byte nchroma_sample_loc_type_bottom_field(long struct) { return UNSAFE.getByte(null, struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD); }
+    public static int nreserved1(long struct) { return UNSAFE.getInt(null, struct + StdVideoH264SequenceParameterSetVui.RESERVED1); }
+    /** Unsafe version of {@link #pHrdParameters}. */
+    public static StdVideoH264HrdParameters npHrdParameters(long struct) { return StdVideoH264HrdParameters.create(memGetAddress(struct + StdVideoH264SequenceParameterSetVui.PHRDPARAMETERS)); }
 
     /** Unsafe version of {@link #flags(StdVideoH264SpsVuiFlags) flags}. */
     public static void nflags(long struct, StdVideoH264SpsVuiFlags value) { memCopy(value.address(), struct + StdVideoH264SequenceParameterSetVui.FLAGS, StdVideoH264SpsVuiFlags.SIZEOF); }
@@ -371,8 +402,8 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
     public static void nsar_height(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoH264SequenceParameterSetVui.SAR_HEIGHT, value); }
     /** Unsafe version of {@link #video_format(byte) video_format}. */
     public static void nvideo_format(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.VIDEO_FORMAT, value); }
-    /** Unsafe version of {@link #color_primaries(byte) color_primaries}. */
-    public static void ncolor_primaries(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.COLOR_PRIMARIES, value); }
+    /** Unsafe version of {@link #colour_primaries(byte) colour_primaries}. */
+    public static void ncolour_primaries(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.COLOUR_PRIMARIES, value); }
     /** Unsafe version of {@link #transfer_characteristics(byte) transfer_characteristics}. */
     public static void ntransfer_characteristics(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.TRANSFER_CHARACTERISTICS, value); }
     /** Unsafe version of {@link #matrix_coefficients(byte) matrix_coefficients}. */
@@ -381,12 +412,17 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
     public static void nnum_units_in_tick(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSetVui.NUM_UNITS_IN_TICK, value); }
     /** Unsafe version of {@link #time_scale(int) time_scale}. */
     public static void ntime_scale(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSetVui.TIME_SCALE, value); }
-    /** Unsafe version of {@link #pHrdParameters(StdVideoH264HrdParameters) pHrdParameters}. */
-    public static void npHrdParameters(long struct, StdVideoH264HrdParameters value) { memPutAddress(struct + StdVideoH264SequenceParameterSetVui.PHRDPARAMETERS, value.address()); }
     /** Unsafe version of {@link #max_num_reorder_frames(byte) max_num_reorder_frames}. */
     public static void nmax_num_reorder_frames(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.MAX_NUM_REORDER_FRAMES, value); }
     /** Unsafe version of {@link #max_dec_frame_buffering(byte) max_dec_frame_buffering}. */
     public static void nmax_dec_frame_buffering(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.MAX_DEC_FRAME_BUFFERING, value); }
+    /** Unsafe version of {@link #chroma_sample_loc_type_top_field(byte) chroma_sample_loc_type_top_field}. */
+    public static void nchroma_sample_loc_type_top_field(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_TOP_FIELD, value); }
+    /** Unsafe version of {@link #chroma_sample_loc_type_bottom_field(byte) chroma_sample_loc_type_bottom_field}. */
+    public static void nchroma_sample_loc_type_bottom_field(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoH264SequenceParameterSetVui.CHROMA_SAMPLE_LOC_TYPE_BOTTOM_FIELD, value); }
+    public static void nreserved1(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoH264SequenceParameterSetVui.RESERVED1, value); }
+    /** Unsafe version of {@link #pHrdParameters(StdVideoH264HrdParameters) pHrdParameters}. */
+    public static void npHrdParameters(long struct, StdVideoH264HrdParameters value) { memPutAddress(struct + StdVideoH264SequenceParameterSetVui.PHRDPARAMETERS, value.address()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -449,9 +485,9 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
         /** @return the value of the {@code video_format} field. */
         @NativeType("uint8_t")
         public byte video_format() { return StdVideoH264SequenceParameterSetVui.nvideo_format(address()); }
-        /** @return the value of the {@code color_primaries} field. */
+        /** @return the value of the {@code colour_primaries} field. */
         @NativeType("uint8_t")
-        public byte color_primaries() { return StdVideoH264SequenceParameterSetVui.ncolor_primaries(address()); }
+        public byte colour_primaries() { return StdVideoH264SequenceParameterSetVui.ncolour_primaries(address()); }
         /** @return the value of the {@code transfer_characteristics} field. */
         @NativeType("uint8_t")
         public byte transfer_characteristics() { return StdVideoH264SequenceParameterSetVui.ntransfer_characteristics(address()); }
@@ -464,15 +500,21 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
         /** @return the value of the {@code time_scale} field. */
         @NativeType("uint32_t")
         public int time_scale() { return StdVideoH264SequenceParameterSetVui.ntime_scale(address()); }
-        /** @return a {@link StdVideoH264HrdParameters} view of the struct pointed to by the {@link StdVideoH264SequenceParameterSetVui#pHrdParameters} field. */
-        @NativeType("StdVideoH264HrdParameters const *")
-        public StdVideoH264HrdParameters pHrdParameters() { return StdVideoH264SequenceParameterSetVui.npHrdParameters(address()); }
         /** @return the value of the {@code max_num_reorder_frames} field. */
         @NativeType("uint8_t")
         public byte max_num_reorder_frames() { return StdVideoH264SequenceParameterSetVui.nmax_num_reorder_frames(address()); }
         /** @return the value of the {@code max_dec_frame_buffering} field. */
         @NativeType("uint8_t")
         public byte max_dec_frame_buffering() { return StdVideoH264SequenceParameterSetVui.nmax_dec_frame_buffering(address()); }
+        /** @return the value of the {@code chroma_sample_loc_type_top_field} field. */
+        @NativeType("uint8_t")
+        public byte chroma_sample_loc_type_top_field() { return StdVideoH264SequenceParameterSetVui.nchroma_sample_loc_type_top_field(address()); }
+        /** @return the value of the {@code chroma_sample_loc_type_bottom_field} field. */
+        @NativeType("uint8_t")
+        public byte chroma_sample_loc_type_bottom_field() { return StdVideoH264SequenceParameterSetVui.nchroma_sample_loc_type_bottom_field(address()); }
+        /** @return a {@link StdVideoH264HrdParameters} view of the struct pointed to by the {@link StdVideoH264SequenceParameterSetVui#pHrdParameters} field. */
+        @NativeType("StdVideoH264HrdParameters const *")
+        public StdVideoH264HrdParameters pHrdParameters() { return StdVideoH264SequenceParameterSetVui.npHrdParameters(address()); }
 
         /** Copies the specified {@link StdVideoH264SpsVuiFlags} to the {@code flags} field. */
         public StdVideoH264SequenceParameterSetVui.Buffer flags(StdVideoH264SpsVuiFlags value) { StdVideoH264SequenceParameterSetVui.nflags(address(), value); return this; }
@@ -486,8 +528,8 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
         public StdVideoH264SequenceParameterSetVui.Buffer sar_height(@NativeType("uint16_t") short value) { StdVideoH264SequenceParameterSetVui.nsar_height(address(), value); return this; }
         /** Sets the specified value to the {@code video_format} field. */
         public StdVideoH264SequenceParameterSetVui.Buffer video_format(@NativeType("uint8_t") byte value) { StdVideoH264SequenceParameterSetVui.nvideo_format(address(), value); return this; }
-        /** Sets the specified value to the {@code color_primaries} field. */
-        public StdVideoH264SequenceParameterSetVui.Buffer color_primaries(@NativeType("uint8_t") byte value) { StdVideoH264SequenceParameterSetVui.ncolor_primaries(address(), value); return this; }
+        /** Sets the specified value to the {@code colour_primaries} field. */
+        public StdVideoH264SequenceParameterSetVui.Buffer colour_primaries(@NativeType("uint8_t") byte value) { StdVideoH264SequenceParameterSetVui.ncolour_primaries(address(), value); return this; }
         /** Sets the specified value to the {@code transfer_characteristics} field. */
         public StdVideoH264SequenceParameterSetVui.Buffer transfer_characteristics(@NativeType("uint8_t") byte value) { StdVideoH264SequenceParameterSetVui.ntransfer_characteristics(address(), value); return this; }
         /** Sets the specified value to the {@code matrix_coefficients} field. */
@@ -496,12 +538,16 @@ public class StdVideoH264SequenceParameterSetVui extends Struct implements Nativ
         public StdVideoH264SequenceParameterSetVui.Buffer num_units_in_tick(@NativeType("uint32_t") int value) { StdVideoH264SequenceParameterSetVui.nnum_units_in_tick(address(), value); return this; }
         /** Sets the specified value to the {@code time_scale} field. */
         public StdVideoH264SequenceParameterSetVui.Buffer time_scale(@NativeType("uint32_t") int value) { StdVideoH264SequenceParameterSetVui.ntime_scale(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH264HrdParameters} to the {@link StdVideoH264SequenceParameterSetVui#pHrdParameters} field. */
-        public StdVideoH264SequenceParameterSetVui.Buffer pHrdParameters(@NativeType("StdVideoH264HrdParameters const *") StdVideoH264HrdParameters value) { StdVideoH264SequenceParameterSetVui.npHrdParameters(address(), value); return this; }
         /** Sets the specified value to the {@code max_num_reorder_frames} field. */
         public StdVideoH264SequenceParameterSetVui.Buffer max_num_reorder_frames(@NativeType("uint8_t") byte value) { StdVideoH264SequenceParameterSetVui.nmax_num_reorder_frames(address(), value); return this; }
         /** Sets the specified value to the {@code max_dec_frame_buffering} field. */
         public StdVideoH264SequenceParameterSetVui.Buffer max_dec_frame_buffering(@NativeType("uint8_t") byte value) { StdVideoH264SequenceParameterSetVui.nmax_dec_frame_buffering(address(), value); return this; }
+        /** Sets the specified value to the {@code chroma_sample_loc_type_top_field} field. */
+        public StdVideoH264SequenceParameterSetVui.Buffer chroma_sample_loc_type_top_field(@NativeType("uint8_t") byte value) { StdVideoH264SequenceParameterSetVui.nchroma_sample_loc_type_top_field(address(), value); return this; }
+        /** Sets the specified value to the {@code chroma_sample_loc_type_bottom_field} field. */
+        public StdVideoH264SequenceParameterSetVui.Buffer chroma_sample_loc_type_bottom_field(@NativeType("uint8_t") byte value) { StdVideoH264SequenceParameterSetVui.nchroma_sample_loc_type_bottom_field(address(), value); return this; }
+        /** Sets the address of the specified {@link StdVideoH264HrdParameters} to the {@link StdVideoH264SequenceParameterSetVui#pHrdParameters} field. */
+        public StdVideoH264SequenceParameterSetVui.Buffer pHrdParameters(@NativeType("StdVideoH264HrdParameters const *") StdVideoH264HrdParameters value) { StdVideoH264SequenceParameterSetVui.npHrdParameters(address(), value); return this; }
 
     }
 

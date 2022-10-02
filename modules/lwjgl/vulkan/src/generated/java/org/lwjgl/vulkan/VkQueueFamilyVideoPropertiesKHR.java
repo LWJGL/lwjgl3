@@ -22,8 +22,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_QUEUE_FAMILY_VIDEO_PROPERTIES_KHR STRUCTURE_TYPE_QUEUE_FAMILY_VIDEO_PROPERTIES_KHR}</li>
- * <li>{@code videoCodecOperations} <b>must</b> be a valid combination of {@code VkVideoCodecOperationFlagBitsKHR} values</li>
- * <li>{@code videoCodecOperations} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -93,18 +91,14 @@ public class VkQueueFamilyVideoPropertiesKHR extends Struct implements NativeRes
     public VkQueueFamilyVideoPropertiesKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_QUEUE_FAMILY_VIDEO_PROPERTIES_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkQueueFamilyVideoPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #videoCodecOperations} field. */
-    public VkQueueFamilyVideoPropertiesKHR videoCodecOperations(@NativeType("VkVideoCodecOperationFlagsKHR") int value) { nvideoCodecOperations(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkQueueFamilyVideoPropertiesKHR set(
         int sType,
-        long pNext,
-        int videoCodecOperations
+        long pNext
     ) {
         sType(sType);
         pNext(pNext);
-        videoCodecOperations(videoCodecOperations);
 
         return this;
     }
@@ -245,8 +239,6 @@ public class VkQueueFamilyVideoPropertiesKHR extends Struct implements NativeRes
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyVideoPropertiesKHR.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkQueueFamilyVideoPropertiesKHR.PNEXT, value); }
-    /** Unsafe version of {@link #videoCodecOperations(int) videoCodecOperations}. */
-    public static void nvideoCodecOperations(long struct, int value) { UNSAFE.putInt(null, struct + VkQueueFamilyVideoPropertiesKHR.VIDEOCODECOPERATIONS, value); }
 
     // -----------------------------------
 
@@ -302,8 +294,6 @@ public class VkQueueFamilyVideoPropertiesKHR extends Struct implements NativeRes
         public VkQueueFamilyVideoPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_QUEUE_FAMILY_VIDEO_PROPERTIES_KHR); }
         /** Sets the specified value to the {@link VkQueueFamilyVideoPropertiesKHR#pNext} field. */
         public VkQueueFamilyVideoPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyVideoPropertiesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkQueueFamilyVideoPropertiesKHR#videoCodecOperations} field. */
-        public VkQueueFamilyVideoPropertiesKHR.Buffer videoCodecOperations(@NativeType("VkVideoCodecOperationFlagsKHR") int value) { VkQueueFamilyVideoPropertiesKHR.nvideoCodecOperations(address(), value); return this; }
 
     }
 

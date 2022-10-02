@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>When a {@code VkVideoSessionParametersKHR} object contains {@code maxVpsStdCount} {@code StdVideoH265VideoParameterSet} entries, no additional {@code StdVideoH265VideoParameterSet} entries can be added to it, and {@link VK10#VK_ERROR_TOO_MANY_OBJECTS ERROR_TOO_MANY_OBJECTS} will be returned if an attempt is made to add these entries. When a {@code VkVideoSessionParametersKHR} object contains {@code maxSpsStdCount} {@code StdVideoH265SequenceParameterSet} entries, no additional {@code StdVideoH265SequenceParameterSet} entries can be added to it, and {@link VK10#VK_ERROR_TOO_MANY_OBJECTS ERROR_TOO_MANY_OBJECTS} will be returned if an attempt is made to add these entries. When a {@code VkVideoSessionParametersKHR} object contains {@code maxPpsStdCount} {@code StdVideoH265PictureParameterSet} entries, no additional {@code StdVideoH265PictureParameterSet} entries can be added to it, and {@link VK10#VK_ERROR_TOO_MANY_OBJECTS ERROR_TOO_MANY_OBJECTS} will be returned if an attempt is made to add these entries.</p>
+ * <p>When a {@code VkVideoSessionParametersKHR} object contains {@code maxStdVPSCount} {@code StdVideoH265VideoParameterSet} entries, no additional {@code StdVideoH265VideoParameterSet} entries can be added to it, and {@link VK10#VK_ERROR_TOO_MANY_OBJECTS ERROR_TOO_MANY_OBJECTS} will be returned if an attempt is made to add these entries. When a {@code VkVideoSessionParametersKHR} object contains {@code maxStdSPSCount} {@code StdVideoH265SequenceParameterSet} entries, no additional {@code StdVideoH265SequenceParameterSet} entries can be added to it, and {@link VK10#VK_ERROR_TOO_MANY_OBJECTS ERROR_TOO_MANY_OBJECTS} will be returned if an attempt is made to add these entries. When a {@code VkVideoSessionParametersKHR} object contains {@code maxStdPPSCount} {@code StdVideoH265PictureParameterSet} entries, no additional {@code StdVideoH265PictureParameterSet} entries can be added to it, and {@link VK10#VK_ERROR_TOO_MANY_OBJECTS ERROR_TOO_MANY_OBJECTS} will be returned if an attempt is made to add these entries.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -39,9 +39,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkVideoEncodeH265SessionParametersCreateInfoEXT {
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
- *     uint32_t {@link #maxVpsStdCount};
- *     uint32_t {@link #maxSpsStdCount};
- *     uint32_t {@link #maxPpsStdCount};
+ *     uint32_t {@link #maxStdVPSCount};
+ *     uint32_t {@link #maxStdSPSCount};
+ *     uint32_t {@link #maxStdPPSCount};
  *     {@link VkVideoEncodeH265SessionParametersAddInfoEXT VkVideoEncodeH265SessionParametersAddInfoEXT} const * {@link #pParametersAddInfo};
  * }</code></pre>
  */
@@ -57,9 +57,9 @@ public class VkVideoEncodeH265SessionParametersCreateInfoEXT extends Struct impl
     public static final int
         STYPE,
         PNEXT,
-        MAXVPSSTDCOUNT,
-        MAXSPSSTDCOUNT,
-        MAXPPSSTDCOUNT,
+        MAXSTDVPSCOUNT,
+        MAXSTDSPSCOUNT,
+        MAXSTDPPSCOUNT,
         PPARAMETERSADDINFO;
 
     static {
@@ -77,9 +77,9 @@ public class VkVideoEncodeH265SessionParametersCreateInfoEXT extends Struct impl
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        MAXVPSSTDCOUNT = layout.offsetof(2);
-        MAXSPSSTDCOUNT = layout.offsetof(3);
-        MAXPPSSTDCOUNT = layout.offsetof(4);
+        MAXSTDVPSCOUNT = layout.offsetof(2);
+        MAXSTDSPSCOUNT = layout.offsetof(3);
+        MAXSTDPPSCOUNT = layout.offsetof(4);
         PPARAMETERSADDINFO = layout.offsetof(5);
     }
 
@@ -104,13 +104,13 @@ public class VkVideoEncodeH265SessionParametersCreateInfoEXT extends Struct impl
     public long pNext() { return npNext(address()); }
     /** the maximum number of entries of type {@code StdVideoH265VideoParameterSet} within {@code VkVideoSessionParametersKHR}. */
     @NativeType("uint32_t")
-    public int maxVpsStdCount() { return nmaxVpsStdCount(address()); }
+    public int maxStdVPSCount() { return nmaxStdVPSCount(address()); }
     /** the maximum number of entries of type {@code StdVideoH265SequenceParameterSet} within {@code VkVideoSessionParametersKHR}. */
     @NativeType("uint32_t")
-    public int maxSpsStdCount() { return nmaxSpsStdCount(address()); }
+    public int maxStdSPSCount() { return nmaxStdSPSCount(address()); }
     /** the maximum number of entries of type {@code StdVideoH265PictureParameterSet} within {@code VkVideoSessionParametersKHR}. */
     @NativeType("uint32_t")
-    public int maxPpsStdCount() { return nmaxPpsStdCount(address()); }
+    public int maxStdPPSCount() { return nmaxStdPPSCount(address()); }
     /** {@code NULL} or a pointer to a {@link VkVideoEncodeH265SessionParametersAddInfoEXT} structure specifying the video session parameters to add upon creation of this object. */
     @Nullable
     @NativeType("VkVideoEncodeH265SessionParametersAddInfoEXT const *")
@@ -122,12 +122,12 @@ public class VkVideoEncodeH265SessionParametersCreateInfoEXT extends Struct impl
     public VkVideoEncodeH265SessionParametersCreateInfoEXT sType$Default() { return sType(EXTVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeH265SessionParametersCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxVpsStdCount} field. */
-    public VkVideoEncodeH265SessionParametersCreateInfoEXT maxVpsStdCount(@NativeType("uint32_t") int value) { nmaxVpsStdCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxSpsStdCount} field. */
-    public VkVideoEncodeH265SessionParametersCreateInfoEXT maxSpsStdCount(@NativeType("uint32_t") int value) { nmaxSpsStdCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxPpsStdCount} field. */
-    public VkVideoEncodeH265SessionParametersCreateInfoEXT maxPpsStdCount(@NativeType("uint32_t") int value) { nmaxPpsStdCount(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxStdVPSCount} field. */
+    public VkVideoEncodeH265SessionParametersCreateInfoEXT maxStdVPSCount(@NativeType("uint32_t") int value) { nmaxStdVPSCount(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxStdSPSCount} field. */
+    public VkVideoEncodeH265SessionParametersCreateInfoEXT maxStdSPSCount(@NativeType("uint32_t") int value) { nmaxStdSPSCount(address(), value); return this; }
+    /** Sets the specified value to the {@link #maxStdPPSCount} field. */
+    public VkVideoEncodeH265SessionParametersCreateInfoEXT maxStdPPSCount(@NativeType("uint32_t") int value) { nmaxStdPPSCount(address(), value); return this; }
     /** Sets the address of the specified {@link VkVideoEncodeH265SessionParametersAddInfoEXT} to the {@link #pParametersAddInfo} field. */
     public VkVideoEncodeH265SessionParametersCreateInfoEXT pParametersAddInfo(@Nullable @NativeType("VkVideoEncodeH265SessionParametersAddInfoEXT const *") VkVideoEncodeH265SessionParametersAddInfoEXT value) { npParametersAddInfo(address(), value); return this; }
 
@@ -135,16 +135,16 @@ public class VkVideoEncodeH265SessionParametersCreateInfoEXT extends Struct impl
     public VkVideoEncodeH265SessionParametersCreateInfoEXT set(
         int sType,
         long pNext,
-        int maxVpsStdCount,
-        int maxSpsStdCount,
-        int maxPpsStdCount,
+        int maxStdVPSCount,
+        int maxStdSPSCount,
+        int maxStdPPSCount,
         @Nullable VkVideoEncodeH265SessionParametersAddInfoEXT pParametersAddInfo
     ) {
         sType(sType);
         pNext(pNext);
-        maxVpsStdCount(maxVpsStdCount);
-        maxSpsStdCount(maxSpsStdCount);
-        maxPpsStdCount(maxPpsStdCount);
+        maxStdVPSCount(maxStdVPSCount);
+        maxStdSPSCount(maxStdSPSCount);
+        maxStdPPSCount(maxStdPPSCount);
         pParametersAddInfo(pParametersAddInfo);
 
         return this;
@@ -279,12 +279,12 @@ public class VkVideoEncodeH265SessionParametersCreateInfoEXT extends Struct impl
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #maxVpsStdCount}. */
-    public static int nmaxVpsStdCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXVPSSTDCOUNT); }
-    /** Unsafe version of {@link #maxSpsStdCount}. */
-    public static int nmaxSpsStdCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXSPSSTDCOUNT); }
-    /** Unsafe version of {@link #maxPpsStdCount}. */
-    public static int nmaxPpsStdCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXPPSSTDCOUNT); }
+    /** Unsafe version of {@link #maxStdVPSCount}. */
+    public static int nmaxStdVPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXSTDVPSCOUNT); }
+    /** Unsafe version of {@link #maxStdSPSCount}. */
+    public static int nmaxStdSPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXSTDSPSCOUNT); }
+    /** Unsafe version of {@link #maxStdPPSCount}. */
+    public static int nmaxStdPPSCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXSTDPPSCOUNT); }
     /** Unsafe version of {@link #pParametersAddInfo}. */
     @Nullable public static VkVideoEncodeH265SessionParametersAddInfoEXT npParametersAddInfo(long struct) { return VkVideoEncodeH265SessionParametersAddInfoEXT.createSafe(memGetAddress(struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.PPARAMETERSADDINFO)); }
 
@@ -292,12 +292,12 @@ public class VkVideoEncodeH265SessionParametersCreateInfoEXT extends Struct impl
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #maxVpsStdCount(int) maxVpsStdCount}. */
-    public static void nmaxVpsStdCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXVPSSTDCOUNT, value); }
-    /** Unsafe version of {@link #maxSpsStdCount(int) maxSpsStdCount}. */
-    public static void nmaxSpsStdCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXSPSSTDCOUNT, value); }
-    /** Unsafe version of {@link #maxPpsStdCount(int) maxPpsStdCount}. */
-    public static void nmaxPpsStdCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXPPSSTDCOUNT, value); }
+    /** Unsafe version of {@link #maxStdVPSCount(int) maxStdVPSCount}. */
+    public static void nmaxStdVPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXSTDVPSCOUNT, value); }
+    /** Unsafe version of {@link #maxStdSPSCount(int) maxStdSPSCount}. */
+    public static void nmaxStdSPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXSTDSPSCOUNT, value); }
+    /** Unsafe version of {@link #maxStdPPSCount(int) maxStdPPSCount}. */
+    public static void nmaxStdPPSCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.MAXSTDPPSCOUNT, value); }
     /** Unsafe version of {@link #pParametersAddInfo(VkVideoEncodeH265SessionParametersAddInfoEXT) pParametersAddInfo}. */
     public static void npParametersAddInfo(long struct, @Nullable VkVideoEncodeH265SessionParametersAddInfoEXT value) { memPutAddress(struct + VkVideoEncodeH265SessionParametersCreateInfoEXT.PPARAMETERSADDINFO, memAddressSafe(value)); }
 
@@ -345,15 +345,15 @@ public class VkVideoEncodeH265SessionParametersCreateInfoEXT extends Struct impl
         /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH265SessionParametersCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxVpsStdCount} field. */
+        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxStdVPSCount} field. */
         @NativeType("uint32_t")
-        public int maxVpsStdCount() { return VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxVpsStdCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxSpsStdCount} field. */
+        public int maxStdVPSCount() { return VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxStdVPSCount(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxStdSPSCount} field. */
         @NativeType("uint32_t")
-        public int maxSpsStdCount() { return VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxSpsStdCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxPpsStdCount} field. */
+        public int maxStdSPSCount() { return VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxStdSPSCount(address()); }
+        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxStdPPSCount} field. */
         @NativeType("uint32_t")
-        public int maxPpsStdCount() { return VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxPpsStdCount(address()); }
+        public int maxStdPPSCount() { return VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxStdPPSCount(address()); }
         /** @return a {@link VkVideoEncodeH265SessionParametersAddInfoEXT} view of the struct pointed to by the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#pParametersAddInfo} field. */
         @Nullable
         @NativeType("VkVideoEncodeH265SessionParametersAddInfoEXT const *")
@@ -365,12 +365,12 @@ public class VkVideoEncodeH265SessionParametersCreateInfoEXT extends Struct impl
         public VkVideoEncodeH265SessionParametersCreateInfoEXT.Buffer sType$Default() { return sType(EXTVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#pNext} field. */
         public VkVideoEncodeH265SessionParametersCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH265SessionParametersCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxVpsStdCount} field. */
-        public VkVideoEncodeH265SessionParametersCreateInfoEXT.Buffer maxVpsStdCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxVpsStdCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxSpsStdCount} field. */
-        public VkVideoEncodeH265SessionParametersCreateInfoEXT.Buffer maxSpsStdCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxSpsStdCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxPpsStdCount} field. */
-        public VkVideoEncodeH265SessionParametersCreateInfoEXT.Buffer maxPpsStdCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxPpsStdCount(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxStdVPSCount} field. */
+        public VkVideoEncodeH265SessionParametersCreateInfoEXT.Buffer maxStdVPSCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxStdVPSCount(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxStdSPSCount} field. */
+        public VkVideoEncodeH265SessionParametersCreateInfoEXT.Buffer maxStdSPSCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxStdSPSCount(address(), value); return this; }
+        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#maxStdPPSCount} field. */
+        public VkVideoEncodeH265SessionParametersCreateInfoEXT.Buffer maxStdPPSCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersCreateInfoEXT.nmaxStdPPSCount(address(), value); return this; }
         /** Sets the address of the specified {@link VkVideoEncodeH265SessionParametersAddInfoEXT} to the {@link VkVideoEncodeH265SessionParametersCreateInfoEXT#pParametersAddInfo} field. */
         public VkVideoEncodeH265SessionParametersCreateInfoEXT.Buffer pParametersAddInfo(@Nullable @NativeType("VkVideoEncodeH265SessionParametersAddInfoEXT const *") VkVideoEncodeH265SessionParametersAddInfoEXT value) { VkVideoEncodeH265SessionParametersCreateInfoEXT.npParametersAddInfo(address(), value); return this; }
 

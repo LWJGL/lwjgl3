@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>39</dd>
  * <dt><b>Revision</b></dt>
- * <dd>8</dd>
+ * <dd>9</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires support for Vulkan 1.0</li>
@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2022-07-18</dd>
+ * <dd>2022-09-18</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -55,7 +55,7 @@ package org.lwjgl.vulkan;
 public final class EXTVideoEncodeH264 {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 8;
+    public static final int VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 9;
 
     /** The extension name. */
     public static final String VK_EXT_VIDEO_ENCODE_H264_EXTENSION_NAME = "VK_EXT_video_encode_h264";

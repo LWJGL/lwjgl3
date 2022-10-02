@@ -47,7 +47,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code lumaBitDepth} <b>must</b> be a valid combination of {@code VkVideoComponentBitDepthFlagBitsKHR} values</li>
  * <li>{@code lumaBitDepth} <b>must</b> not be 0</li>
  * <li>{@code chromaBitDepth} <b>must</b> be a valid combination of {@code VkVideoComponentBitDepthFlagBitsKHR} values</li>
- * <li>{@code chromaBitDepth} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h5>See Also</h5>

@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #pps_curr_pic_ref_enabled_flag} : 1;
  *     uint32_t residual_adaptive_colour_transform_enabled_flag : 1;
  *     uint32_t pps_slice_act_qp_offsets_present_flag : 1;
- *     uint32_t pps_palette_predictor_initializer_present_flag : 1;
+ *     uint32_t pps_palette_predictor_initializers_present_flag : 1;
  *     uint32_t monochrome_palette_flag : 1;
  *     uint32_t pps_range_extension_flag : 1;
  * }</code></pre>
@@ -173,9 +173,9 @@ public class StdVideoH265PpsFlags extends Struct implements NativeResource {
     /** @return the value of the {@code pps_slice_act_qp_offsets_present_flag} field. */
     @NativeType("uint32_t")
     public boolean pps_slice_act_qp_offsets_present_flag() { return npps_slice_act_qp_offsets_present_flag(address()) != 0; }
-    /** @return the value of the {@code pps_palette_predictor_initializer_present_flag} field. */
+    /** @return the value of the {@code pps_palette_predictor_initializers_present_flag} field. */
     @NativeType("uint32_t")
-    public boolean pps_palette_predictor_initializer_present_flag() { return npps_palette_predictor_initializer_present_flag(address()) != 0; }
+    public boolean pps_palette_predictor_initializers_present_flag() { return npps_palette_predictor_initializers_present_flag(address()) != 0; }
     /** @return the value of the {@code monochrome_palette_flag} field. */
     @NativeType("uint32_t")
     public boolean monochrome_palette_flag() { return nmonochrome_palette_flag(address()) != 0; }
@@ -239,8 +239,8 @@ public class StdVideoH265PpsFlags extends Struct implements NativeResource {
     public StdVideoH265PpsFlags residual_adaptive_colour_transform_enabled_flag(@NativeType("uint32_t") boolean value) { nresidual_adaptive_colour_transform_enabled_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code pps_slice_act_qp_offsets_present_flag} field. */
     public StdVideoH265PpsFlags pps_slice_act_qp_offsets_present_flag(@NativeType("uint32_t") boolean value) { npps_slice_act_qp_offsets_present_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code pps_palette_predictor_initializer_present_flag} field. */
-    public StdVideoH265PpsFlags pps_palette_predictor_initializer_present_flag(@NativeType("uint32_t") boolean value) { npps_palette_predictor_initializer_present_flag(address(), value ? 1 : 0); return this; }
+    /** Sets the specified value to the {@code pps_palette_predictor_initializers_present_flag} field. */
+    public StdVideoH265PpsFlags pps_palette_predictor_initializers_present_flag(@NativeType("uint32_t") boolean value) { npps_palette_predictor_initializers_present_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code monochrome_palette_flag} field. */
     public StdVideoH265PpsFlags monochrome_palette_flag(@NativeType("uint32_t") boolean value) { nmonochrome_palette_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code pps_range_extension_flag} field. */
@@ -276,7 +276,7 @@ public class StdVideoH265PpsFlags extends Struct implements NativeResource {
         boolean pps_curr_pic_ref_enabled_flag,
         boolean residual_adaptive_colour_transform_enabled_flag,
         boolean pps_slice_act_qp_offsets_present_flag,
-        boolean pps_palette_predictor_initializer_present_flag,
+        boolean pps_palette_predictor_initializers_present_flag,
         boolean monochrome_palette_flag,
         boolean pps_range_extension_flag
     ) {
@@ -308,7 +308,7 @@ public class StdVideoH265PpsFlags extends Struct implements NativeResource {
         pps_curr_pic_ref_enabled_flag(pps_curr_pic_ref_enabled_flag);
         residual_adaptive_colour_transform_enabled_flag(residual_adaptive_colour_transform_enabled_flag);
         pps_slice_act_qp_offsets_present_flag(pps_slice_act_qp_offsets_present_flag);
-        pps_palette_predictor_initializer_present_flag(pps_palette_predictor_initializer_present_flag);
+        pps_palette_predictor_initializers_present_flag(pps_palette_predictor_initializers_present_flag);
         monochrome_palette_flag(monochrome_palette_flag);
         pps_range_extension_flag(pps_range_extension_flag);
 
@@ -497,8 +497,8 @@ public class StdVideoH265PpsFlags extends Struct implements NativeResource {
     public static int nresidual_adaptive_colour_transform_enabled_flag(long struct) { return (nbitfield0(struct) & 0x04_00_00_00) >>> 26; }
     /** Unsafe version of {@link #pps_slice_act_qp_offsets_present_flag}. */
     public static int npps_slice_act_qp_offsets_present_flag(long struct) { return (nbitfield0(struct) & 0x08_00_00_00) >>> 27; }
-    /** Unsafe version of {@link #pps_palette_predictor_initializer_present_flag}. */
-    public static int npps_palette_predictor_initializer_present_flag(long struct) { return (nbitfield0(struct) & 0x10_00_00_00) >>> 28; }
+    /** Unsafe version of {@link #pps_palette_predictor_initializers_present_flag}. */
+    public static int npps_palette_predictor_initializers_present_flag(long struct) { return (nbitfield0(struct) & 0x10_00_00_00) >>> 28; }
     /** Unsafe version of {@link #monochrome_palette_flag}. */
     public static int nmonochrome_palette_flag(long struct) { return (nbitfield0(struct) & 0x20_00_00_00) >>> 29; }
     /** Unsafe version of {@link #pps_range_extension_flag}. */
@@ -561,8 +561,8 @@ public class StdVideoH265PpsFlags extends Struct implements NativeResource {
     public static void nresidual_adaptive_colour_transform_enabled_flag(long struct, int value) { nbitfield0(struct, ((value << 26) & 0x04_00_00_00) | (nbitfield0(struct) & 0xFB_FF_FF_FF)); }
     /** Unsafe version of {@link #pps_slice_act_qp_offsets_present_flag(boolean) pps_slice_act_qp_offsets_present_flag}. */
     public static void npps_slice_act_qp_offsets_present_flag(long struct, int value) { nbitfield0(struct, ((value << 27) & 0x08_00_00_00) | (nbitfield0(struct) & 0xF7_FF_FF_FF)); }
-    /** Unsafe version of {@link #pps_palette_predictor_initializer_present_flag(boolean) pps_palette_predictor_initializer_present_flag}. */
-    public static void npps_palette_predictor_initializer_present_flag(long struct, int value) { nbitfield0(struct, ((value << 28) & 0x10_00_00_00) | (nbitfield0(struct) & 0xEF_FF_FF_FF)); }
+    /** Unsafe version of {@link #pps_palette_predictor_initializers_present_flag(boolean) pps_palette_predictor_initializers_present_flag}. */
+    public static void npps_palette_predictor_initializers_present_flag(long struct, int value) { nbitfield0(struct, ((value << 28) & 0x10_00_00_00) | (nbitfield0(struct) & 0xEF_FF_FF_FF)); }
     /** Unsafe version of {@link #monochrome_palette_flag(boolean) monochrome_palette_flag}. */
     public static void nmonochrome_palette_flag(long struct, int value) { nbitfield0(struct, ((value << 29) & 0x20_00_00_00) | (nbitfield0(struct) & 0xDF_FF_FF_FF)); }
     /** Unsafe version of {@link #pps_range_extension_flag(boolean) pps_range_extension_flag}. */
@@ -690,9 +690,9 @@ public class StdVideoH265PpsFlags extends Struct implements NativeResource {
         /** @return the value of the {@code pps_slice_act_qp_offsets_present_flag} field. */
         @NativeType("uint32_t")
         public boolean pps_slice_act_qp_offsets_present_flag() { return StdVideoH265PpsFlags.npps_slice_act_qp_offsets_present_flag(address()) != 0; }
-        /** @return the value of the {@code pps_palette_predictor_initializer_present_flag} field. */
+        /** @return the value of the {@code pps_palette_predictor_initializers_present_flag} field. */
         @NativeType("uint32_t")
-        public boolean pps_palette_predictor_initializer_present_flag() { return StdVideoH265PpsFlags.npps_palette_predictor_initializer_present_flag(address()) != 0; }
+        public boolean pps_palette_predictor_initializers_present_flag() { return StdVideoH265PpsFlags.npps_palette_predictor_initializers_present_flag(address()) != 0; }
         /** @return the value of the {@code monochrome_palette_flag} field. */
         @NativeType("uint32_t")
         public boolean monochrome_palette_flag() { return StdVideoH265PpsFlags.nmonochrome_palette_flag(address()) != 0; }
@@ -756,8 +756,8 @@ public class StdVideoH265PpsFlags extends Struct implements NativeResource {
         public StdVideoH265PpsFlags.Buffer residual_adaptive_colour_transform_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265PpsFlags.nresidual_adaptive_colour_transform_enabled_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code pps_slice_act_qp_offsets_present_flag} field. */
         public StdVideoH265PpsFlags.Buffer pps_slice_act_qp_offsets_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH265PpsFlags.npps_slice_act_qp_offsets_present_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code pps_palette_predictor_initializer_present_flag} field. */
-        public StdVideoH265PpsFlags.Buffer pps_palette_predictor_initializer_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH265PpsFlags.npps_palette_predictor_initializer_present_flag(address(), value ? 1 : 0); return this; }
+        /** Sets the specified value to the {@code pps_palette_predictor_initializers_present_flag} field. */
+        public StdVideoH265PpsFlags.Buffer pps_palette_predictor_initializers_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH265PpsFlags.npps_palette_predictor_initializers_present_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code monochrome_palette_flag} field. */
         public StdVideoH265PpsFlags.Buffer monochrome_palette_flag(@NativeType("uint32_t") boolean value) { StdVideoH265PpsFlags.nmonochrome_palette_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code pps_range_extension_flag} field. */

@@ -36,14 +36,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkVideoCapabilitiesKHR {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     VkVideoCapabilityFlagsKHR {@link #capabilityFlags};
+ *     VkVideoCapabilityFlagsKHR {@link #flags};
  *     VkDeviceSize {@link #minBitstreamBufferOffsetAlignment};
  *     VkDeviceSize {@link #minBitstreamBufferSizeAlignment};
- *     {@link VkExtent2D VkExtent2D} {@link #videoPictureExtentGranularity};
- *     {@link VkExtent2D VkExtent2D} {@link #minExtent};
- *     {@link VkExtent2D VkExtent2D} {@link #maxExtent};
- *     uint32_t {@link #maxReferencePicturesSlotsCount};
- *     uint32_t {@link #maxReferencePicturesActiveCount};
+ *     {@link VkExtent2D VkExtent2D} {@link #pictureAccessGranularity};
+ *     {@link VkExtent2D VkExtent2D} {@link #minCodedExtent};
+ *     {@link VkExtent2D VkExtent2D} {@link #maxCodedExtent};
+ *     uint32_t {@link #maxDpbSlots};
+ *     uint32_t {@link #maxActiveReferencePictures};
  *     {@link VkExtensionProperties VkExtensionProperties} {@link #stdHeaderVersion};
  * }</code></pre>
  */
@@ -59,14 +59,14 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
     public static final int
         STYPE,
         PNEXT,
-        CAPABILITYFLAGS,
+        FLAGS,
         MINBITSTREAMBUFFEROFFSETALIGNMENT,
         MINBITSTREAMBUFFERSIZEALIGNMENT,
-        VIDEOPICTUREEXTENTGRANULARITY,
-        MINEXTENT,
-        MAXEXTENT,
-        MAXREFERENCEPICTURESSLOTSCOUNT,
-        MAXREFERENCEPICTURESACTIVECOUNT,
+        PICTUREACCESSGRANULARITY,
+        MINCODEDEXTENT,
+        MAXCODEDEXTENT,
+        MAXDPBSLOTS,
+        MAXACTIVEREFERENCEPICTURES,
         STDHEADERVERSION;
 
     static {
@@ -89,14 +89,14 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        CAPABILITYFLAGS = layout.offsetof(2);
+        FLAGS = layout.offsetof(2);
         MINBITSTREAMBUFFEROFFSETALIGNMENT = layout.offsetof(3);
         MINBITSTREAMBUFFERSIZEALIGNMENT = layout.offsetof(4);
-        VIDEOPICTUREEXTENTGRANULARITY = layout.offsetof(5);
-        MINEXTENT = layout.offsetof(6);
-        MAXEXTENT = layout.offsetof(7);
-        MAXREFERENCEPICTURESSLOTSCOUNT = layout.offsetof(8);
-        MAXREFERENCEPICTURESACTIVECOUNT = layout.offsetof(9);
+        PICTUREACCESSGRANULARITY = layout.offsetof(5);
+        MINCODEDEXTENT = layout.offsetof(6);
+        MAXCODEDEXTENT = layout.offsetof(7);
+        MAXDPBSLOTS = layout.offsetof(8);
+        MAXACTIVEREFERENCEPICTURES = layout.offsetof(9);
         STDHEADERVERSION = layout.offsetof(10);
     }
 
@@ -121,25 +121,25 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
     public long pNext() { return npNext(address()); }
     /** a bitmask of {@code VkVideoCapabilityFlagBitsKHR} specifying capability flags. */
     @NativeType("VkVideoCapabilityFlagsKHR")
-    public int capabilityFlags() { return ncapabilityFlags(address()); }
+    public int flags() { return nflags(address()); }
     /** the minimum alignment for the input or output bitstream buffer offset. */
     @NativeType("VkDeviceSize")
     public long minBitstreamBufferOffsetAlignment() { return nminBitstreamBufferOffsetAlignment(address()); }
     /** the minimum alignment for the input or output bitstream buffer size */
     @NativeType("VkDeviceSize")
     public long minBitstreamBufferSizeAlignment() { return nminBitstreamBufferSizeAlignment(address()); }
-    /** the minimum size alignment of the extent with the required padding for the decoded or encoded video images. */
-    public VkExtent2D videoPictureExtentGranularity() { return nvideoPictureExtentGranularity(address()); }
+    /** the granularity at which image access to video picture resources happen. */
+    public VkExtent2D pictureAccessGranularity() { return npictureAccessGranularity(address()); }
     /** the minimum width and height of the decoded or encoded video. */
-    public VkExtent2D minExtent() { return nminExtent(address()); }
+    public VkExtent2D minCodedExtent() { return nminCodedExtent(address()); }
     /** the maximum width and height of the decoded or encoded video. */
-    public VkExtent2D maxExtent() { return nmaxExtent(address()); }
+    public VkExtent2D maxCodedExtent() { return nmaxCodedExtent(address()); }
     /** the maximum number of DPB Slots supported by the implementation for a single video session instance. */
     @NativeType("uint32_t")
-    public int maxReferencePicturesSlotsCount() { return nmaxReferencePicturesSlotsCount(address()); }
+    public int maxDpbSlots() { return nmaxDpbSlots(address()); }
     /** the maximum slots that can be used as <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> with a single decode or encode operation. */
     @NativeType("uint32_t")
-    public int maxReferencePicturesActiveCount() { return nmaxReferencePicturesActiveCount(address()); }
+    public int maxActiveReferencePictures() { return nmaxActiveReferencePictures(address()); }
     /** a {@link VkExtensionProperties} structure reporting the Video Std header version supported for the {@code codecOperation} requested in {@code vkGetPhysicalDeviceVideoCapabilitiesKHR}{@code ::pVideoProfile}. */
     public VkExtensionProperties stdHeaderVersion() { return nstdHeaderVersion(address()); }
 
@@ -302,22 +302,22 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoCapabilitiesKHR.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoCapabilitiesKHR.PNEXT); }
-    /** Unsafe version of {@link #capabilityFlags}. */
-    public static int ncapabilityFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoCapabilitiesKHR.CAPABILITYFLAGS); }
+    /** Unsafe version of {@link #flags}. */
+    public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoCapabilitiesKHR.FLAGS); }
     /** Unsafe version of {@link #minBitstreamBufferOffsetAlignment}. */
     public static long nminBitstreamBufferOffsetAlignment(long struct) { return UNSAFE.getLong(null, struct + VkVideoCapabilitiesKHR.MINBITSTREAMBUFFEROFFSETALIGNMENT); }
     /** Unsafe version of {@link #minBitstreamBufferSizeAlignment}. */
     public static long nminBitstreamBufferSizeAlignment(long struct) { return UNSAFE.getLong(null, struct + VkVideoCapabilitiesKHR.MINBITSTREAMBUFFERSIZEALIGNMENT); }
-    /** Unsafe version of {@link #videoPictureExtentGranularity}. */
-    public static VkExtent2D nvideoPictureExtentGranularity(long struct) { return VkExtent2D.create(struct + VkVideoCapabilitiesKHR.VIDEOPICTUREEXTENTGRANULARITY); }
-    /** Unsafe version of {@link #minExtent}. */
-    public static VkExtent2D nminExtent(long struct) { return VkExtent2D.create(struct + VkVideoCapabilitiesKHR.MINEXTENT); }
-    /** Unsafe version of {@link #maxExtent}. */
-    public static VkExtent2D nmaxExtent(long struct) { return VkExtent2D.create(struct + VkVideoCapabilitiesKHR.MAXEXTENT); }
-    /** Unsafe version of {@link #maxReferencePicturesSlotsCount}. */
-    public static int nmaxReferencePicturesSlotsCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoCapabilitiesKHR.MAXREFERENCEPICTURESSLOTSCOUNT); }
-    /** Unsafe version of {@link #maxReferencePicturesActiveCount}. */
-    public static int nmaxReferencePicturesActiveCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoCapabilitiesKHR.MAXREFERENCEPICTURESACTIVECOUNT); }
+    /** Unsafe version of {@link #pictureAccessGranularity}. */
+    public static VkExtent2D npictureAccessGranularity(long struct) { return VkExtent2D.create(struct + VkVideoCapabilitiesKHR.PICTUREACCESSGRANULARITY); }
+    /** Unsafe version of {@link #minCodedExtent}. */
+    public static VkExtent2D nminCodedExtent(long struct) { return VkExtent2D.create(struct + VkVideoCapabilitiesKHR.MINCODEDEXTENT); }
+    /** Unsafe version of {@link #maxCodedExtent}. */
+    public static VkExtent2D nmaxCodedExtent(long struct) { return VkExtent2D.create(struct + VkVideoCapabilitiesKHR.MAXCODEDEXTENT); }
+    /** Unsafe version of {@link #maxDpbSlots}. */
+    public static int nmaxDpbSlots(long struct) { return UNSAFE.getInt(null, struct + VkVideoCapabilitiesKHR.MAXDPBSLOTS); }
+    /** Unsafe version of {@link #maxActiveReferencePictures}. */
+    public static int nmaxActiveReferencePictures(long struct) { return UNSAFE.getInt(null, struct + VkVideoCapabilitiesKHR.MAXACTIVEREFERENCEPICTURES); }
     /** Unsafe version of {@link #stdHeaderVersion}. */
     public static VkExtensionProperties nstdHeaderVersion(long struct) { return VkExtensionProperties.create(struct + VkVideoCapabilitiesKHR.STDHEADERVERSION); }
 
@@ -370,27 +370,27 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
         /** @return the value of the {@link VkVideoCapabilitiesKHR#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoCapabilitiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoCapabilitiesKHR#capabilityFlags} field. */
+        /** @return the value of the {@link VkVideoCapabilitiesKHR#flags} field. */
         @NativeType("VkVideoCapabilityFlagsKHR")
-        public int capabilityFlags() { return VkVideoCapabilitiesKHR.ncapabilityFlags(address()); }
+        public int flags() { return VkVideoCapabilitiesKHR.nflags(address()); }
         /** @return the value of the {@link VkVideoCapabilitiesKHR#minBitstreamBufferOffsetAlignment} field. */
         @NativeType("VkDeviceSize")
         public long minBitstreamBufferOffsetAlignment() { return VkVideoCapabilitiesKHR.nminBitstreamBufferOffsetAlignment(address()); }
         /** @return the value of the {@link VkVideoCapabilitiesKHR#minBitstreamBufferSizeAlignment} field. */
         @NativeType("VkDeviceSize")
         public long minBitstreamBufferSizeAlignment() { return VkVideoCapabilitiesKHR.nminBitstreamBufferSizeAlignment(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoCapabilitiesKHR#videoPictureExtentGranularity} field. */
-        public VkExtent2D videoPictureExtentGranularity() { return VkVideoCapabilitiesKHR.nvideoPictureExtentGranularity(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoCapabilitiesKHR#minExtent} field. */
-        public VkExtent2D minExtent() { return VkVideoCapabilitiesKHR.nminExtent(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoCapabilitiesKHR#maxExtent} field. */
-        public VkExtent2D maxExtent() { return VkVideoCapabilitiesKHR.nmaxExtent(address()); }
-        /** @return the value of the {@link VkVideoCapabilitiesKHR#maxReferencePicturesSlotsCount} field. */
+        /** @return a {@link VkExtent2D} view of the {@link VkVideoCapabilitiesKHR#pictureAccessGranularity} field. */
+        public VkExtent2D pictureAccessGranularity() { return VkVideoCapabilitiesKHR.npictureAccessGranularity(address()); }
+        /** @return a {@link VkExtent2D} view of the {@link VkVideoCapabilitiesKHR#minCodedExtent} field. */
+        public VkExtent2D minCodedExtent() { return VkVideoCapabilitiesKHR.nminCodedExtent(address()); }
+        /** @return a {@link VkExtent2D} view of the {@link VkVideoCapabilitiesKHR#maxCodedExtent} field. */
+        public VkExtent2D maxCodedExtent() { return VkVideoCapabilitiesKHR.nmaxCodedExtent(address()); }
+        /** @return the value of the {@link VkVideoCapabilitiesKHR#maxDpbSlots} field. */
         @NativeType("uint32_t")
-        public int maxReferencePicturesSlotsCount() { return VkVideoCapabilitiesKHR.nmaxReferencePicturesSlotsCount(address()); }
-        /** @return the value of the {@link VkVideoCapabilitiesKHR#maxReferencePicturesActiveCount} field. */
+        public int maxDpbSlots() { return VkVideoCapabilitiesKHR.nmaxDpbSlots(address()); }
+        /** @return the value of the {@link VkVideoCapabilitiesKHR#maxActiveReferencePictures} field. */
         @NativeType("uint32_t")
-        public int maxReferencePicturesActiveCount() { return VkVideoCapabilitiesKHR.nmaxReferencePicturesActiveCount(address()); }
+        public int maxActiveReferencePictures() { return VkVideoCapabilitiesKHR.nmaxActiveReferencePictures(address()); }
         /** @return a {@link VkExtensionProperties} view of the {@link VkVideoCapabilitiesKHR#stdHeaderVersion} field. */
         public VkExtensionProperties stdHeaderVersion() { return VkVideoCapabilitiesKHR.nstdHeaderVersion(address()); }
 

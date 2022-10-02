@@ -228,6 +228,9 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR indicates that the given acceleration structure build <b>should</b> prioritize trace performance over build time.</li>
             <li>#BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR indicates that the given acceleration structure build <b>should</b> prioritize build time over trace performance.</li>
             <li>#BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_KHR indicates that this acceleration structure <b>should</b> minimize the size of the scratch memory and the final result acceleration structure, potentially at the expense of build time or trace performance.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_UPDATE_EXT indicates that the opacity micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT indicates that the data of the opacity micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_DISABLE_OPACITY_MICROMAPS_EXT indicates that the specified acceleration structure <b>may</b> be referenced in an instance with #GEOMETRY_INSTANCE_DISABLE_OPACITY_MICROMAPS_EXT set.</li>
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -307,7 +310,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         </ul>
 
         <h5>See Also</h5>
-        #GetAccelerationStructureBuildSizesKHR()
+        #GetAccelerationStructureBuildSizesKHR(), #GetMicromapBuildSizesEXT()
         """,
 
         "ACCELERATION_STRUCTURE_BUILD_TYPE_HOST_KHR".."0",
@@ -383,7 +386,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
         </ul>
 
         <h5>See Also</h5>
-        #GetDeviceAccelerationStructureCompatibilityKHR()
+        #GetDeviceAccelerationStructureCompatibilityKHR(), #GetDeviceMicromapCompatibilityEXT()
         """,
 
         "ACCELERATION_STRUCTURE_COMPATIBILITY_COMPATIBLE_KHR".."0",
@@ -1526,6 +1529,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
                 For each ##VkAccelerationStructureBuildRangeInfoKHR corresponding to the ##VkAccelerationStructureBuildGeometryInfoKHR:
                 <ul>
                     <li>Its {@code primitiveCount} member is less than or equal to the corresponding element of {@code pMaxPrimitiveCounts}.</li>
+                    <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to #GEOMETRY_TYPE_TRIANGLES_KHR, if the {@code pNext} chain contains ##VkAccelerationStructureTrianglesOpacityMicromapEXT the corresponding member of {@code pBuildInfo} also contains ##VkAccelerationStructureTrianglesOpacityMicromapEXT and with an equivalent {@code micromap}.</li>
                 </ul>
             </li>
         </ul>

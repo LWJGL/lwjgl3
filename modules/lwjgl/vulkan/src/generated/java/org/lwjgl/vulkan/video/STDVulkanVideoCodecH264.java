@@ -13,7 +13,7 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_CPB_CNT_LIST_SIZE             = 32,
         STD_VIDEO_H264_SCALING_LIST_4X4_NUM_LISTS    = 6,
         STD_VIDEO_H264_SCALING_LIST_4X4_NUM_ELEMENTS = 16,
-        STD_VIDEO_H264_SCALING_LIST_8X8_NUM_LISTS    = 2,
+        STD_VIDEO_H264_SCALING_LIST_8X8_NUM_LISTS    = 6,
         STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS = 64,
         STD_VIDEO_H264_MAX_NUM_LIST_REF              = 32,
         STD_VIDEO_H264_MAX_CHROMA_PLANES             = 2;
@@ -59,54 +59,54 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_PROFILE_IDC_INVALID             = 0x7FFFFFFF;
 
     /**
-     * {@code StdVideoH264Level}
+     * {@code StdVideoH264LevelIdc}
      * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_1_0 VIDEO_H264_LEVEL_1_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_1_1 VIDEO_H264_LEVEL_1_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_1_2 VIDEO_H264_LEVEL_1_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_1_3 VIDEO_H264_LEVEL_1_3}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_2_0 VIDEO_H264_LEVEL_2_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_2_1 VIDEO_H264_LEVEL_2_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_2_2 VIDEO_H264_LEVEL_2_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_3_0 VIDEO_H264_LEVEL_3_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_3_1 VIDEO_H264_LEVEL_3_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_3_2 VIDEO_H264_LEVEL_3_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_4_0 VIDEO_H264_LEVEL_4_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_4_1 VIDEO_H264_LEVEL_4_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_4_2 VIDEO_H264_LEVEL_4_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_5_0 VIDEO_H264_LEVEL_5_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_5_1 VIDEO_H264_LEVEL_5_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_5_2 VIDEO_H264_LEVEL_5_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_6_0 VIDEO_H264_LEVEL_6_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_6_1 VIDEO_H264_LEVEL_6_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_6_2 VIDEO_H264_LEVEL_6_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_INVALID VIDEO_H264_LEVEL_INVALID}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_1_0 VIDEO_H264_LEVEL_IDC_1_0}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_1_1 VIDEO_H264_LEVEL_IDC_1_1}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_1_2 VIDEO_H264_LEVEL_IDC_1_2}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_1_3 VIDEO_H264_LEVEL_IDC_1_3}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_2_0 VIDEO_H264_LEVEL_IDC_2_0}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_2_1 VIDEO_H264_LEVEL_IDC_2_1}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_2_2 VIDEO_H264_LEVEL_IDC_2_2}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_3_0 VIDEO_H264_LEVEL_IDC_3_0}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_3_1 VIDEO_H264_LEVEL_IDC_3_1}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_3_2 VIDEO_H264_LEVEL_IDC_3_2}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_4_0 VIDEO_H264_LEVEL_IDC_4_0}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_4_1 VIDEO_H264_LEVEL_IDC_4_1}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_4_2 VIDEO_H264_LEVEL_IDC_4_2}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_5_0 VIDEO_H264_LEVEL_IDC_5_0}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_5_1 VIDEO_H264_LEVEL_IDC_5_1}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_5_2 VIDEO_H264_LEVEL_IDC_5_2}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_6_0 VIDEO_H264_LEVEL_IDC_6_0}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_6_1 VIDEO_H264_LEVEL_IDC_6_1}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_6_2 VIDEO_H264_LEVEL_IDC_6_2}</li>
+     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_INVALID VIDEO_H264_LEVEL_IDC_INVALID}</li>
      * </ul>
      */
     public static final int
-        STD_VIDEO_H264_LEVEL_1_0     = 0,
-        STD_VIDEO_H264_LEVEL_1_1     = 1,
-        STD_VIDEO_H264_LEVEL_1_2     = 2,
-        STD_VIDEO_H264_LEVEL_1_3     = 3,
-        STD_VIDEO_H264_LEVEL_2_0     = 4,
-        STD_VIDEO_H264_LEVEL_2_1     = 5,
-        STD_VIDEO_H264_LEVEL_2_2     = 6,
-        STD_VIDEO_H264_LEVEL_3_0     = 7,
-        STD_VIDEO_H264_LEVEL_3_1     = 8,
-        STD_VIDEO_H264_LEVEL_3_2     = 9,
-        STD_VIDEO_H264_LEVEL_4_0     = 10,
-        STD_VIDEO_H264_LEVEL_4_1     = 11,
-        STD_VIDEO_H264_LEVEL_4_2     = 12,
-        STD_VIDEO_H264_LEVEL_5_0     = 13,
-        STD_VIDEO_H264_LEVEL_5_1     = 14,
-        STD_VIDEO_H264_LEVEL_5_2     = 15,
-        STD_VIDEO_H264_LEVEL_6_0     = 16,
-        STD_VIDEO_H264_LEVEL_6_1     = 17,
-        STD_VIDEO_H264_LEVEL_6_2     = 18,
-        STD_VIDEO_H264_LEVEL_INVALID = 0x7FFFFFFF;
+        STD_VIDEO_H264_LEVEL_IDC_1_0     = 0,
+        STD_VIDEO_H264_LEVEL_IDC_1_1     = 1,
+        STD_VIDEO_H264_LEVEL_IDC_1_2     = 2,
+        STD_VIDEO_H264_LEVEL_IDC_1_3     = 3,
+        STD_VIDEO_H264_LEVEL_IDC_2_0     = 4,
+        STD_VIDEO_H264_LEVEL_IDC_2_1     = 5,
+        STD_VIDEO_H264_LEVEL_IDC_2_2     = 6,
+        STD_VIDEO_H264_LEVEL_IDC_3_0     = 7,
+        STD_VIDEO_H264_LEVEL_IDC_3_1     = 8,
+        STD_VIDEO_H264_LEVEL_IDC_3_2     = 9,
+        STD_VIDEO_H264_LEVEL_IDC_4_0     = 10,
+        STD_VIDEO_H264_LEVEL_IDC_4_1     = 11,
+        STD_VIDEO_H264_LEVEL_IDC_4_2     = 12,
+        STD_VIDEO_H264_LEVEL_IDC_5_0     = 13,
+        STD_VIDEO_H264_LEVEL_IDC_5_1     = 14,
+        STD_VIDEO_H264_LEVEL_IDC_5_2     = 15,
+        STD_VIDEO_H264_LEVEL_IDC_6_0     = 16,
+        STD_VIDEO_H264_LEVEL_IDC_6_1     = 17,
+        STD_VIDEO_H264_LEVEL_IDC_6_2     = 18,
+        STD_VIDEO_H264_LEVEL_IDC_INVALID = 0x7FFFFFFF;
 
     /**
      * {@code StdVideoH264PocType}
@@ -339,14 +339,12 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_NON_VCL_NALU_TYPE_INVALID         = 0x7FFFFFFF;
 
     /** The extension specification version. */
-    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 6);
+    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 8);
 
     /** The extension name. */
     public static final String VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h264_decode";
 
     public static final int STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE = 2;
-
-    public static final int STD_VIDEO_DECODE_H264_MVC_REF_LIST_SIZE = 15;
 
     /**
      * {@code StdVideoDecodeH264FieldOrderCount}
@@ -365,7 +363,7 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_INVALID = 0x7FFFFFFF;
 
     /** The extension specification version. */
-    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 6);
+    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 8);
 
     /** The extension name. */
     public static final String VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h264_encode";

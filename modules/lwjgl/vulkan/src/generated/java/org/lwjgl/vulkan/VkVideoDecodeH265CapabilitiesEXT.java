@@ -32,7 +32,7 @@ import org.lwjgl.vulkan.video.*;
  * struct VkVideoDecodeH265CapabilitiesEXT {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
- *     StdVideoH265Level {@link #maxLevel};
+ *     StdVideoH265LevelIdc maxLevelIdc;
  * }</code></pre>
  */
 public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeResource {
@@ -47,7 +47,7 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
     public static final int
         STYPE,
         PNEXT,
-        MAXLEVEL;
+        MAXLEVELIDC;
 
     static {
         Layout layout = __struct(
@@ -61,7 +61,7 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        MAXLEVEL = layout.offsetof(2);
+        MAXLEVELIDC = layout.offsetof(2);
     }
 
     /**
@@ -83,9 +83,9 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum H.265 level supported by the device. */
-    @NativeType("StdVideoH265Level")
-    public int maxLevel() { return nmaxLevel(address()); }
+    /** @return the value of the {@code maxLevelIdc} field. */
+    @NativeType("StdVideoH265LevelIdc")
+    public int maxLevelIdc() { return nmaxLevelIdc(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoDecodeH265CapabilitiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -234,8 +234,8 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265CapabilitiesEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoDecodeH265CapabilitiesEXT.PNEXT); }
-    /** Unsafe version of {@link #maxLevel}. */
-    public static int nmaxLevel(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265CapabilitiesEXT.MAXLEVEL); }
+    /** Unsafe version of {@link #maxLevelIdc}. */
+    public static int nmaxLevelIdc(long struct) { return UNSAFE.getInt(null, struct + VkVideoDecodeH265CapabilitiesEXT.MAXLEVELIDC); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoDecodeH265CapabilitiesEXT.STYPE, value); }
@@ -286,9 +286,9 @@ public class VkVideoDecodeH265CapabilitiesEXT extends Struct implements NativeRe
         /** @return the value of the {@link VkVideoDecodeH265CapabilitiesEXT#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoDecodeH265CapabilitiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkVideoDecodeH265CapabilitiesEXT#maxLevel} field. */
-        @NativeType("StdVideoH265Level")
-        public int maxLevel() { return VkVideoDecodeH265CapabilitiesEXT.nmaxLevel(address()); }
+        /** @return the value of the {@code maxLevelIdc} field. */
+        @NativeType("StdVideoH265LevelIdc")
+        public int maxLevelIdc() { return VkVideoDecodeH265CapabilitiesEXT.nmaxLevelIdc(address()); }
 
         /** Sets the specified value to the {@link VkVideoDecodeH265CapabilitiesEXT#sType} field. */
         public VkVideoDecodeH265CapabilitiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH265CapabilitiesEXT.nsType(address(), value); return this; }

@@ -488,7 +488,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         This enum affects how the {@code VertexOrderCw} and {@code VertexOrderCcw} tessellation execution modes are interpreted, since the winding is defined relative to the orientation of the domain.
 
         <h5>See Also</h5>
-        ##VkPipelineTessellationDomainOriginStateCreateInfo
+        ##VkPipelineTessellationDomainOriginStateCreateInfo, #CmdSetTessellationDomainOriginEXT()
         """,
 
         "TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT".."0",

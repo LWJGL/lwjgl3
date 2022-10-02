@@ -354,6 +354,7 @@ public class EXTDebugUtils {
      * <li>{@link #VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT} specifies that some general event has occurred. This is typically a non-specification, non-performance event.</li>
      * <li>{@link #VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT} specifies that something has occurred during validation against the Vulkan specification that may indicate invalid behavior.</li>
      * <li>{@link #VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT} specifies a potentially non-optimal use of Vulkan, e.g. using {@link VK10#vkCmdClearColorImage CmdClearColorImage} when setting {@link VkAttachmentDescription}{@code ::loadOp} to {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} would have worked.</li>
+     * <li>{@link EXTDeviceAddressBindingReport#VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT} specifies that the implementation has modified the set of GPU-visible virtual addresses associated with a Vulkan object.</li>
      * </ul>
      */
     public static final int

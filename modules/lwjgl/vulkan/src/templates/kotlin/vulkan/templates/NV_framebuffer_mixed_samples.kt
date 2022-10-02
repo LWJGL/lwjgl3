@@ -92,7 +92,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassVK("NV
         </ul>
 
         <h5>See Also</h5>
-        ##VkPipelineCoverageModulationStateCreateInfoNV
+        ##VkPipelineCoverageModulationStateCreateInfoNV, #CmdSetCoverageModulationModeNV()
         """,
 
         "COVERAGE_MODULATION_MODE_NONE_NV".."0",
