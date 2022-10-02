@@ -2921,7 +2921,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Notes:
         ${ul(
             "This function must only be called from the main thread.",
-            "<b>Wayland</b>: This function will only work when the cursor mode is #CURSOR_DISABLED, otherwise it will do nothing."
+            "<b>Wayland</b>: This function will only work when the cursor mode is #CURSOR_DISABLED, otherwise it will emit #FEATURE_UNAVAILABLE."
         )}
         """,
 

@@ -3817,7 +3817,7 @@ public class GLFW {
      * 
      * <ul>
      * <li>This function must only be called from the main thread.</li>
-     * <li><b>Wayland</b>: This function will only work when the cursor mode is {@link #GLFW_CURSOR_DISABLED CURSOR_DISABLED}, otherwise it will do nothing.</li>
+     * <li><b>Wayland</b>: This function will only work when the cursor mode is {@link #GLFW_CURSOR_DISABLED CURSOR_DISABLED}, otherwise it will emit {@link #GLFW_FEATURE_UNAVAILABLE FEATURE_UNAVAILABLE}.</li>
      * </ul>
      *
      * @param window the desired window
