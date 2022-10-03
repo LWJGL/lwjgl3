@@ -144,7 +144,12 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <local name="java.version.regex"/>
     <property name="java.version.regex" value="[1-9][0-9]+((\.0)*\.[1-9][0-9]*)*(-[a-zA-Z0-9]+)?"/>
 
-    <condition property="jdk14">                             <matches string="${java.version}" pattern="^(?!1[0-3])${java.version.regex}$"/>     </condition>
+    <condition property="jdk19">                             <matches string="${java.version}" pattern="^(?!1[0-8])${java.version.regex}$"/>     </condition>
+    <condition property="jdk18"><or><isset property="jdk19"/><matches string="${java.version}" pattern="^(?!1[0-7])${java.version.regex}$"/></or></condition>
+    <condition property="jdk17"><or><isset property="jdk18"/><matches string="${java.version}" pattern="^(?!1[0-6])${java.version.regex}$"/></or></condition>
+    <condition property="jdk16"><or><isset property="jdk17"/><matches string="${java.version}" pattern="^(?!1[0-5])${java.version.regex}$"/></or></condition>
+    <condition property="jdk15"><or><isset property="jdk16"/><matches string="${java.version}" pattern="^(?!1[0-4])${java.version.regex}$"/></or></condition>
+    <condition property="jdk14"><or><isset property="jdk15"/><matches string="${java.version}" pattern="^(?!1[0-3])${java.version.regex}$"/></or></condition>
     <condition property="jdk13"><or><isset property="jdk14"/><matches string="${java.version}" pattern="^(?!1[0-2])${java.version.regex}$"/></or></condition>
     <condition property="jdk12"><or><isset property="jdk13"/><matches string="${java.version}" pattern="^(?!1[0-1])${java.version.regex}$"/></or></condition>
     <condition property="jdk11"><or><isset property="jdk12"/><matches string="${java.version}" pattern="^(?!1[0-0])${java.version.regex}$"/></or></condition>
@@ -162,6 +167,11 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     </condition>
 
     <!-- May be set in the ant command line to test multi-release implementations. -->
+    <condition property="core.java18"><isset property="core.java19"/></condition>
+    <condition property="core.java17"><isset property="core.java18"/></condition>
+    <condition property="core.java16"><isset property="core.java17"/></condition>
+    <condition property="core.java15"><isset property="core.java16"/></condition>
+    <condition property="core.java14"><isset property="core.java15"/></condition>
     <condition property="core.java13"><isset property="core.java14"/></condition>
     <condition property="core.java12"><isset property="core.java13"/></condition>
     <condition property="core.java11"><isset property="core.java12"/></condition>

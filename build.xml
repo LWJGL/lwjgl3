@@ -288,7 +288,7 @@
         </apply>
     </target>
 
-    <target name="hydrate-kotlinc" description="Downloads the compiled Kotlin templates to build.lwjgl.org">
+    <target name="hydrate-kotlinc" description="Downloads the compiled Kotlin templates to build.lwjgl.org" depends="init">
         <!-- Download cache -->
         <get taskname="Downloading templates.jar" src="https://build.lwjgl.org/ci/templates.jar" dest="."/>
 
@@ -466,26 +466,25 @@
         <mkdir dir="${bin.lwjgl}/core/META-INF/versions/9" if:set="jdk9"/>
         <mkdir dir="${bin.lwjgl}/core/META-INF/versions/10" if:set="jdk10"/>
         <delete file="${bin.lwjgl}/core/META-INF/versions/9/module-info.class" quiet="true" if:set="jdk9"/>
-        <lwjgl.javac9
-            destdir="${bin.lwjgl}/core/META-INF/versions/9"
-            classpath="${bin.lwjgl}/core"
-
-            srcdir="${module.lwjgl}/core/src/main/java9"
-            includes="**"
-
-            taskname="javac: Core - Java 9"
-            if:set="jdk9"
-        />
-        <lwjgl.javac10
-            destdir="${bin.lwjgl}/core/META-INF/versions/10"
-            classpath="${bin.lwjgl}/core"
-
-            srcdir="${module.lwjgl}/core/src/main/java10"
-            includes="**"
-
-            taskname="javac: Core - Java 10"
-            if:set="jdk10"
-        />
+        <lwjgl.javac9 destdir="${bin.lwjgl}/core/META-INF/versions/9" taskname="javac: Core - Java 9" if:set="jdk9">
+            <classpath>
+                <pathelement path="${bin.lwjgl}/core"/>
+                <pathelement path="${lib}/java/jsr305.jar"/>
+            </classpath>
+            <src>
+                <pathelement path="${module.lwjgl}/core/src/main/java9"/>
+            </src>
+            <include name="**"/>
+        </lwjgl.javac9>
+        <lwjgl.javac10 destdir="${bin.lwjgl}/core/META-INF/versions/10" taskname="javac: Core - Java 10" if:set="jdk10">
+            <classpath>
+                <pathelement path="${bin.lwjgl}/core"/>
+            </classpath>
+            <src>
+                <pathelement path="${module.lwjgl}/core/src/main/java10"/>
+            </src>
+            <include name="**"/>
+        </lwjgl.javac10>
 
         <parallel threadsPerProcessor="1">
             <compileBinding binding="assimp"/>
