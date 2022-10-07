@@ -102,7 +102,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
         val capName = nativeClass.capName
 
         print("""
-    private static boolean check_${nativeClass.templateName}(FunctionProvider provider, long[] caps, java.util.Set<String> ext) {
+    private static boolean check_${nativeClass.templateName}(FunctionProvider provider, long[] caps, Set<String> ext) {
         if (!ext.contains("$capName")) {
             return false;
         }""")
@@ -132,7 +132,12 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
     init {
         javaImport("static org.lwjgl.system.Checks.*")
 
-        documentation = "Defines the enabled capabilities of a Vulkan {@code VkInstance}."
+        documentation =
+            """
+            Reports the enabled capabilities and function pointers of a Vulkan {@code VkInstance}.
+
+            The addresses are cached for future use. This class also allows developers to query the capabilities made available to the Vulkan instance handle.
+            """
     }
 
     override fun PrintWriter.generateJava() {
@@ -159,7 +164,7 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
                     .joinToString(",\n$t$t") { cmd -> cmd.name }
 
                 if (functions.isNotEmpty()) {
-                    println("\n$t// ${it.templateName}")
+                    println("\n$t/** Function pointers for ${it.templateName} */")
                     println("${t}public final long")
                     println("$t$t$functions;")
                 }
@@ -276,7 +281,12 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
             "static org.lwjgl.system.Checks.*"
         )
 
-        documentation = "Defines the enabled capabilities of a Vulkan {@code VkDevice}."
+        documentation =
+            """
+            Reports the enabled capabilities and function pointers of a Vulkan {@code VkDevice}.
+
+            The addresses are cached for future use. This class also allows developers to query the capabilities made available to the Vulkan device handle.
+            """
     }
 
     override fun PrintWriter.generateJava() {
@@ -303,7 +313,7 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
                     .joinToString(",\n$t$t") { cmd -> cmd.name }
 
                 if (functions.isNotEmpty()) {
-                    println("\n$t// ${it.templateName}")
+                    println("\n$t/** Function pointers for ${it.templateName} */")
                     println("${t}public final long")
                     println("$t$t$functions;")
                 }

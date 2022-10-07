@@ -10,11 +10,15 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
 
-/** Defines the enabled capabilities of a Vulkan {@code VkDevice}. */
+/**
+ * Reports the enabled capabilities and function pointers of a Vulkan {@code VkDevice}.
+ * 
+ * <p>The addresses are cached for future use. This class also allows developers to query the capabilities made available to the Vulkan device handle.</p>
+ */
 @SuppressWarnings("SimplifiableIfStatement")
 public class VKCapabilitiesDevice {
 
-    // VK10
+    /** Function pointers for VK10 */
     public final long
         vkGetDeviceProcAddr,
         vkDestroyDevice,
@@ -138,7 +142,7 @@ public class VKCapabilitiesDevice {
         vkCmdEndRenderPass,
         vkCmdExecuteCommands;
 
-    // VK11
+    /** Function pointers for VK11 */
     public final long
         vkBindBufferMemory2,
         vkBindImageMemory2,
@@ -157,7 +161,7 @@ public class VKCapabilitiesDevice {
         vkUpdateDescriptorSetWithTemplate,
         vkGetDescriptorSetLayoutSupport;
 
-    // VK12
+    /** Function pointers for VK12 */
     public final long
         vkCmdDrawIndirectCount,
         vkCmdDrawIndexedIndirectCount,
@@ -173,7 +177,7 @@ public class VKCapabilitiesDevice {
         vkGetBufferOpaqueCaptureAddress,
         vkGetDeviceMemoryOpaqueCaptureAddress;
 
-    // VK13
+    /** Function pointers for VK13 */
     public final long
         vkCreatePrivateDataSlot,
         vkDestroyPrivateDataSlot,
@@ -212,41 +216,41 @@ public class VKCapabilitiesDevice {
         vkGetDeviceImageMemoryRequirements,
         vkGetDeviceImageSparseMemoryRequirements;
 
-    // AMD_buffer_marker
+    /** Function pointers for AMD_buffer_marker */
     public final long
         vkCmdWriteBufferMarkerAMD;
 
-    // AMD_display_native_hdr
+    /** Function pointers for AMD_display_native_hdr */
     public final long
         vkSetLocalDimmingAMD;
 
-    // AMD_draw_indirect_count
+    /** Function pointers for AMD_draw_indirect_count */
     public final long
         vkCmdDrawIndirectCountAMD,
         vkCmdDrawIndexedIndirectCountAMD;
 
-    // AMD_shader_info
+    /** Function pointers for AMD_shader_info */
     public final long
         vkGetShaderInfoAMD;
 
-    // EXT_buffer_device_address
+    /** Function pointers for EXT_buffer_device_address */
     public final long
         vkGetBufferDeviceAddressEXT;
 
-    // EXT_calibrated_timestamps
+    /** Function pointers for EXT_calibrated_timestamps */
     public final long
         vkGetCalibratedTimestampsEXT;
 
-    // EXT_color_write_enable
+    /** Function pointers for EXT_color_write_enable */
     public final long
         vkCmdSetColorWriteEnableEXT;
 
-    // EXT_conditional_rendering
+    /** Function pointers for EXT_conditional_rendering */
     public final long
         vkCmdBeginConditionalRenderingEXT,
         vkCmdEndConditionalRenderingEXT;
 
-    // EXT_debug_marker
+    /** Function pointers for EXT_debug_marker */
     public final long
         vkDebugMarkerSetObjectTagEXT,
         vkDebugMarkerSetObjectNameEXT,
@@ -254,22 +258,22 @@ public class VKCapabilitiesDevice {
         vkCmdDebugMarkerEndEXT,
         vkCmdDebugMarkerInsertEXT;
 
-    // EXT_device_fault
+    /** Function pointers for EXT_device_fault */
     public final long
         vkGetDeviceFaultInfoEXT;
 
-    // EXT_discard_rectangles
+    /** Function pointers for EXT_discard_rectangles */
     public final long
         vkCmdSetDiscardRectangleEXT;
 
-    // EXT_display_control
+    /** Function pointers for EXT_display_control */
     public final long
         vkDisplayPowerControlEXT,
         vkRegisterDeviceEventEXT,
         vkRegisterDisplayEventEXT,
         vkGetSwapchainCounterEXT;
 
-    // EXT_extended_dynamic_state
+    /** Function pointers for EXT_extended_dynamic_state */
     public final long
         vkCmdSetCullModeEXT,
         vkCmdSetFrontFaceEXT,
@@ -284,7 +288,7 @@ public class VKCapabilitiesDevice {
         vkCmdSetStencilTestEnableEXT,
         vkCmdSetStencilOpEXT;
 
-    // EXT_extended_dynamic_state2
+    /** Function pointers for EXT_extended_dynamic_state2 */
     public final long
         vkCmdSetPatchControlPointsEXT,
         vkCmdSetRasterizerDiscardEnableEXT,
@@ -292,7 +296,7 @@ public class VKCapabilitiesDevice {
         vkCmdSetLogicOpEXT,
         vkCmdSetPrimitiveRestartEnableEXT;
 
-    // EXT_extended_dynamic_state3
+    /** Function pointers for EXT_extended_dynamic_state3 */
     public final long
         vkCmdSetTessellationDomainOriginEXT,
         vkCmdSetDepthClampEnableEXT,
@@ -326,52 +330,52 @@ public class VKCapabilitiesDevice {
         vkCmdSetRepresentativeFragmentTestEnableNV,
         vkCmdSetCoverageReductionModeNV;
 
-    // EXT_external_memory_host
+    /** Function pointers for EXT_external_memory_host */
     public final long
         vkGetMemoryHostPointerPropertiesEXT;
 
-    // EXT_full_screen_exclusive
+    /** Function pointers for EXT_full_screen_exclusive */
     public final long
         vkAcquireFullScreenExclusiveModeEXT,
         vkReleaseFullScreenExclusiveModeEXT,
         vkGetDeviceGroupSurfacePresentModes2EXT;
 
-    // EXT_hdr_metadata
+    /** Function pointers for EXT_hdr_metadata */
     public final long
         vkSetHdrMetadataEXT;
 
-    // EXT_host_query_reset
+    /** Function pointers for EXT_host_query_reset */
     public final long
         vkResetQueryPoolEXT;
 
-    // EXT_image_compression_control
+    /** Function pointers for EXT_image_compression_control */
     public final long
         vkGetImageSubresourceLayout2EXT;
 
-    // EXT_image_drm_format_modifier
+    /** Function pointers for EXT_image_drm_format_modifier */
     public final long
         vkGetImageDrmFormatModifierPropertiesEXT;
 
-    // EXT_line_rasterization
+    /** Function pointers for EXT_line_rasterization */
     public final long
         vkCmdSetLineStippleEXT;
 
-    // EXT_mesh_shader
+    /** Function pointers for EXT_mesh_shader */
     public final long
         vkCmdDrawMeshTasksEXT,
         vkCmdDrawMeshTasksIndirectEXT,
         vkCmdDrawMeshTasksIndirectCountEXT;
 
-    // EXT_metal_objects
+    /** Function pointers for EXT_metal_objects */
     public final long
         vkExportMetalObjectsEXT;
 
-    // EXT_multi_draw
+    /** Function pointers for EXT_multi_draw */
     public final long
         vkCmdDrawMultiEXT,
         vkCmdDrawMultiIndexedEXT;
 
-    // EXT_opacity_micromap
+    /** Function pointers for EXT_opacity_micromap */
     public final long
         vkCreateMicromapEXT,
         vkDestroyMicromapEXT,
@@ -388,31 +392,31 @@ public class VKCapabilitiesDevice {
         vkGetDeviceMicromapCompatibilityEXT,
         vkGetMicromapBuildSizesEXT;
 
-    // EXT_pageable_device_local_memory
+    /** Function pointers for EXT_pageable_device_local_memory */
     public final long
         vkSetDeviceMemoryPriorityEXT;
 
-    // EXT_pipeline_properties
+    /** Function pointers for EXT_pipeline_properties */
     public final long
         vkGetPipelinePropertiesEXT;
 
-    // EXT_private_data
+    /** Function pointers for EXT_private_data */
     public final long
         vkCreatePrivateDataSlotEXT,
         vkDestroyPrivateDataSlotEXT,
         vkSetPrivateDataEXT,
         vkGetPrivateDataEXT;
 
-    // EXT_sample_locations
+    /** Function pointers for EXT_sample_locations */
     public final long
         vkCmdSetSampleLocationsEXT;
 
-    // EXT_shader_module_identifier
+    /** Function pointers for EXT_shader_module_identifier */
     public final long
         vkGetShaderModuleIdentifierEXT,
         vkGetShaderModuleCreateInfoIdentifierEXT;
 
-    // EXT_transform_feedback
+    /** Function pointers for EXT_transform_feedback */
     public final long
         vkCmdBindTransformFeedbackBuffersEXT,
         vkCmdBeginTransformFeedbackEXT,
@@ -421,32 +425,32 @@ public class VKCapabilitiesDevice {
         vkCmdEndQueryIndexedEXT,
         vkCmdDrawIndirectByteCountEXT;
 
-    // EXT_validation_cache
+    /** Function pointers for EXT_validation_cache */
     public final long
         vkCreateValidationCacheEXT,
         vkDestroyValidationCacheEXT,
         vkMergeValidationCachesEXT,
         vkGetValidationCacheDataEXT;
 
-    // EXT_vertex_input_dynamic_state
+    /** Function pointers for EXT_vertex_input_dynamic_state */
     public final long
         vkCmdSetVertexInputEXT;
 
-    // GOOGLE_display_timing
+    /** Function pointers for GOOGLE_display_timing */
     public final long
         vkGetRefreshCycleDurationGOOGLE,
         vkGetPastPresentationTimingGOOGLE;
 
-    // HUAWEI_invocation_mask
+    /** Function pointers for HUAWEI_invocation_mask */
     public final long
         vkCmdBindInvocationMaskHUAWEI;
 
-    // HUAWEI_subpass_shading
+    /** Function pointers for HUAWEI_subpass_shading */
     public final long
         vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI,
         vkCmdSubpassShadingHUAWEI;
 
-    // INTEL_performance_query
+    /** Function pointers for INTEL_performance_query */
     public final long
         vkInitializePerformanceApiINTEL,
         vkUninitializePerformanceApiINTEL,
@@ -458,7 +462,7 @@ public class VKCapabilitiesDevice {
         vkQueueSetPerformanceConfigurationINTEL,
         vkGetPerformanceParameterINTEL;
 
-    // KHR_acceleration_structure
+    /** Function pointers for KHR_acceleration_structure */
     public final long
         vkCreateAccelerationStructureKHR,
         vkDestroyAccelerationStructureKHR,
@@ -477,18 +481,18 @@ public class VKCapabilitiesDevice {
         vkGetDeviceAccelerationStructureCompatibilityKHR,
         vkGetAccelerationStructureBuildSizesKHR;
 
-    // KHR_bind_memory2
+    /** Function pointers for KHR_bind_memory2 */
     public final long
         vkBindBufferMemory2KHR,
         vkBindImageMemory2KHR;
 
-    // KHR_buffer_device_address
+    /** Function pointers for KHR_buffer_device_address */
     public final long
         vkGetBufferDeviceAddressKHR,
         vkGetBufferOpaqueCaptureAddressKHR,
         vkGetDeviceMemoryOpaqueCaptureAddressKHR;
 
-    // KHR_copy_commands2
+    /** Function pointers for KHR_copy_commands2 */
     public final long
         vkCmdCopyBuffer2KHR,
         vkCmdCopyImage2KHR,
@@ -497,14 +501,14 @@ public class VKCapabilitiesDevice {
         vkCmdBlitImage2KHR,
         vkCmdResolveImage2KHR;
 
-    // KHR_create_renderpass2
+    /** Function pointers for KHR_create_renderpass2 */
     public final long
         vkCreateRenderPass2KHR,
         vkCmdBeginRenderPass2KHR,
         vkCmdNextSubpass2KHR,
         vkCmdEndRenderPass2KHR;
 
-    // KHR_deferred_host_operations
+    /** Function pointers for KHR_deferred_host_operations */
     public final long
         vkCreateDeferredOperationKHR,
         vkDestroyDeferredOperationKHR,
@@ -512,14 +516,14 @@ public class VKCapabilitiesDevice {
         vkGetDeferredOperationResultKHR,
         vkDeferredOperationJoinKHR;
 
-    // KHR_descriptor_update_template
+    /** Function pointers for KHR_descriptor_update_template */
     public final long
         vkCreateDescriptorUpdateTemplateKHR,
         vkDestroyDescriptorUpdateTemplateKHR,
         vkUpdateDescriptorSetWithTemplateKHR,
         vkCmdPushDescriptorSetWithTemplateKHR;
 
-    // KHR_device_group
+    /** Function pointers for KHR_device_group */
     public final long
         vkGetDeviceGroupPeerMemoryFeaturesKHR,
         vkCmdSetDeviceMaskKHR,
@@ -528,98 +532,98 @@ public class VKCapabilitiesDevice {
         vkGetDeviceGroupSurfacePresentModesKHR,
         vkAcquireNextImage2KHR;
 
-    // KHR_display_swapchain
+    /** Function pointers for KHR_display_swapchain */
     public final long
         vkCreateSharedSwapchainsKHR;
 
-    // KHR_draw_indirect_count
+    /** Function pointers for KHR_draw_indirect_count */
     public final long
         vkCmdDrawIndirectCountKHR,
         vkCmdDrawIndexedIndirectCountKHR;
 
-    // KHR_dynamic_rendering
+    /** Function pointers for KHR_dynamic_rendering */
     public final long
         vkCmdBeginRenderingKHR,
         vkCmdEndRenderingKHR;
 
-    // KHR_external_fence_fd
+    /** Function pointers for KHR_external_fence_fd */
     public final long
         vkImportFenceFdKHR,
         vkGetFenceFdKHR;
 
-    // KHR_external_fence_win32
+    /** Function pointers for KHR_external_fence_win32 */
     public final long
         vkImportFenceWin32HandleKHR,
         vkGetFenceWin32HandleKHR;
 
-    // KHR_external_memory_fd
+    /** Function pointers for KHR_external_memory_fd */
     public final long
         vkGetMemoryFdKHR,
         vkGetMemoryFdPropertiesKHR;
 
-    // KHR_external_memory_win32
+    /** Function pointers for KHR_external_memory_win32 */
     public final long
         vkGetMemoryWin32HandleKHR,
         vkGetMemoryWin32HandlePropertiesKHR;
 
-    // KHR_external_semaphore_fd
+    /** Function pointers for KHR_external_semaphore_fd */
     public final long
         vkImportSemaphoreFdKHR,
         vkGetSemaphoreFdKHR;
 
-    // KHR_external_semaphore_win32
+    /** Function pointers for KHR_external_semaphore_win32 */
     public final long
         vkImportSemaphoreWin32HandleKHR,
         vkGetSemaphoreWin32HandleKHR;
 
-    // KHR_fragment_shading_rate
+    /** Function pointers for KHR_fragment_shading_rate */
     public final long
         vkCmdSetFragmentShadingRateKHR;
 
-    // KHR_get_memory_requirements2
+    /** Function pointers for KHR_get_memory_requirements2 */
     public final long
         vkGetImageMemoryRequirements2KHR,
         vkGetBufferMemoryRequirements2KHR,
         vkGetImageSparseMemoryRequirements2KHR;
 
-    // KHR_maintenance1
+    /** Function pointers for KHR_maintenance1 */
     public final long
         vkTrimCommandPoolKHR;
 
-    // KHR_maintenance3
+    /** Function pointers for KHR_maintenance3 */
     public final long
         vkGetDescriptorSetLayoutSupportKHR;
 
-    // KHR_maintenance4
+    /** Function pointers for KHR_maintenance4 */
     public final long
         vkGetDeviceBufferMemoryRequirementsKHR,
         vkGetDeviceImageMemoryRequirementsKHR,
         vkGetDeviceImageSparseMemoryRequirementsKHR;
 
-    // KHR_performance_query
+    /** Function pointers for KHR_performance_query */
     public final long
         vkAcquireProfilingLockKHR,
         vkReleaseProfilingLockKHR;
 
-    // KHR_pipeline_executable_properties
+    /** Function pointers for KHR_pipeline_executable_properties */
     public final long
         vkGetPipelineExecutablePropertiesKHR,
         vkGetPipelineExecutableStatisticsKHR,
         vkGetPipelineExecutableInternalRepresentationsKHR;
 
-    // KHR_present_wait
+    /** Function pointers for KHR_present_wait */
     public final long
         vkWaitForPresentKHR;
 
-    // KHR_push_descriptor
+    /** Function pointers for KHR_push_descriptor */
     public final long
         vkCmdPushDescriptorSetKHR;
 
-    // KHR_ray_tracing_maintenance1
+    /** Function pointers for KHR_ray_tracing_maintenance1 */
     public final long
         vkCmdTraceRaysIndirect2KHR;
 
-    // KHR_ray_tracing_pipeline
+    /** Function pointers for KHR_ray_tracing_pipeline */
     public final long
         vkCmdTraceRaysKHR,
         vkCreateRayTracingPipelinesKHR,
@@ -629,16 +633,16 @@ public class VKCapabilitiesDevice {
         vkGetRayTracingShaderGroupStackSizeKHR,
         vkCmdSetRayTracingPipelineStackSizeKHR;
 
-    // KHR_sampler_ycbcr_conversion
+    /** Function pointers for KHR_sampler_ycbcr_conversion */
     public final long
         vkCreateSamplerYcbcrConversionKHR,
         vkDestroySamplerYcbcrConversionKHR;
 
-    // KHR_shared_presentable_image
+    /** Function pointers for KHR_shared_presentable_image */
     public final long
         vkGetSwapchainStatusKHR;
 
-    // KHR_swapchain
+    /** Function pointers for KHR_swapchain */
     public final long
         vkCreateSwapchainKHR,
         vkDestroySwapchainKHR,
@@ -646,7 +650,7 @@ public class VKCapabilitiesDevice {
         vkAcquireNextImageKHR,
         vkQueuePresentKHR;
 
-    // KHR_synchronization2
+    /** Function pointers for KHR_synchronization2 */
     public final long
         vkCmdSetEvent2KHR,
         vkCmdResetEvent2KHR,
@@ -657,21 +661,21 @@ public class VKCapabilitiesDevice {
         vkCmdWriteBufferMarker2AMD,
         vkGetQueueCheckpointData2NV;
 
-    // KHR_timeline_semaphore
+    /** Function pointers for KHR_timeline_semaphore */
     public final long
         vkGetSemaphoreCounterValueKHR,
         vkWaitSemaphoresKHR,
         vkSignalSemaphoreKHR;
 
-    // KHR_video_decode_queue
+    /** Function pointers for KHR_video_decode_queue */
     public final long
         vkCmdDecodeVideoKHR;
 
-    // KHR_video_encode_queue
+    /** Function pointers for KHR_video_encode_queue */
     public final long
         vkCmdEncodeVideoKHR;
 
-    // KHR_video_queue
+    /** Function pointers for KHR_video_queue */
     public final long
         vkCreateVideoSessionKHR,
         vkDestroyVideoSessionKHR,
@@ -684,16 +688,16 @@ public class VKCapabilitiesDevice {
         vkCmdEndVideoCodingKHR,
         vkCmdControlVideoCodingKHR;
 
-    // NV_clip_space_w_scaling
+    /** Function pointers for NV_clip_space_w_scaling */
     public final long
         vkCmdSetViewportWScalingNV;
 
-    // NV_device_diagnostic_checkpoints
+    /** Function pointers for NV_device_diagnostic_checkpoints */
     public final long
         vkCmdSetCheckpointNV,
         vkGetQueueCheckpointDataNV;
 
-    // NV_device_generated_commands
+    /** Function pointers for NV_device_generated_commands */
     public final long
         vkGetGeneratedCommandsMemoryRequirementsNV,
         vkCmdPreprocessGeneratedCommandsNV,
@@ -702,32 +706,32 @@ public class VKCapabilitiesDevice {
         vkCreateIndirectCommandsLayoutNV,
         vkDestroyIndirectCommandsLayoutNV;
 
-    // NV_external_memory_rdma
+    /** Function pointers for NV_external_memory_rdma */
     public final long
         vkGetMemoryRemoteAddressNV;
 
-    // NV_external_memory_win32
+    /** Function pointers for NV_external_memory_win32 */
     public final long
         vkGetMemoryWin32HandleNV;
 
-    // NV_fragment_shading_rate_enums
+    /** Function pointers for NV_fragment_shading_rate_enums */
     public final long
         vkCmdSetFragmentShadingRateEnumNV;
 
-    // NV_mesh_shader
+    /** Function pointers for NV_mesh_shader */
     public final long
         vkCmdDrawMeshTasksNV,
         vkCmdDrawMeshTasksIndirectNV,
         vkCmdDrawMeshTasksIndirectCountNV;
 
-    // NV_optical_flow
+    /** Function pointers for NV_optical_flow */
     public final long
         vkCreateOpticalFlowSessionNV,
         vkDestroyOpticalFlowSessionNV,
         vkBindOpticalFlowSessionImageNV,
         vkCmdOpticalFlowExecuteNV;
 
-    // NV_ray_tracing
+    /** Function pointers for NV_ray_tracing */
     public final long
         vkCreateAccelerationStructureNV,
         vkDestroyAccelerationStructureNV,
@@ -742,17 +746,17 @@ public class VKCapabilitiesDevice {
         vkCmdWriteAccelerationStructuresPropertiesNV,
         vkCompileDeferredNV;
 
-    // NV_scissor_exclusive
+    /** Function pointers for NV_scissor_exclusive */
     public final long
         vkCmdSetExclusiveScissorNV;
 
-    // NV_shading_rate_image
+    /** Function pointers for NV_shading_rate_image */
     public final long
         vkCmdBindShadingRateImageNV,
         vkCmdSetViewportShadingRatePaletteNV,
         vkCmdSetCoarseSampleOrderNV;
 
-    // NVX_binary_import
+    /** Function pointers for NVX_binary_import */
     public final long
         vkCreateCuModuleNVX,
         vkCreateCuFunctionNVX,
@@ -760,17 +764,17 @@ public class VKCapabilitiesDevice {
         vkDestroyCuFunctionNVX,
         vkCmdCuLaunchKernelNVX;
 
-    // NVX_image_view_handle
+    /** Function pointers for NVX_image_view_handle */
     public final long
         vkGetImageViewHandleNVX,
         vkGetImageViewAddressNVX;
 
-    // QCOM_tile_properties
+    /** Function pointers for QCOM_tile_properties */
     public final long
         vkGetFramebufferTilePropertiesQCOM,
         vkGetDynamicRenderingTilePropertiesQCOM;
 
-    // VALVE_descriptor_set_host_mapping
+    /** Function pointers for VALVE_descriptor_set_host_mapping */
     public final long
         vkGetDescriptorSetLayoutHostMappingInfoVALVE,
         vkGetDescriptorSetHostMappingVALVE;
