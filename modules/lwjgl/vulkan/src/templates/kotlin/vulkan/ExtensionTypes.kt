@@ -4752,9 +4752,6 @@ val VkPresentTimeGOOGLE = struct(Module.VULKAN, "VkPresentTimeGOOGLE") {
         """
         The earliest time image should be presented.
 
-        <h5>Description</h5>
-        Unresolved directive in VkPresentTimeGOOGLE.adoc - include::D:\CLONES\KHRONOS\Vulkan-Docs\gen/validity/structs/VkPresentTimeGOOGLE.txt[]
-
         <h5>See Also</h5>
         ##VkPresentTimesInfoGOOGLE
         """

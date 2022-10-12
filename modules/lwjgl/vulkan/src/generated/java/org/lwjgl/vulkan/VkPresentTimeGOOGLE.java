@@ -18,10 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * The earliest time image should be presented.
  * 
- * <h5>Description</h5>
- * 
- * <p>Unresolved directive in VkPresentTimeGOOGLE.adoc - include::D:\CLONES\KHRONOS\Vulkan-Docs\gen/validity/structs/VkPresentTimeGOOGLE.txt[]</p>
- * 
  * <h5>See Also</h5>
  * 
  * <p>{@link VkPresentTimesInfoGOOGLE}</p>
