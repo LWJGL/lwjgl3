@@ -360,7 +360,7 @@ publishing {
 
             licenses {
                 license {
-                    name.set("BSD")
+                    name.set("BSD-3-Clause")
                     url.set("https://www.lwjgl.org/license")
                     distribution.set("repo")
                 }

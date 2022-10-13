@@ -21,7 +21,7 @@
 
     <licenses>
         <license>
-            <name>BSD</name>
+            <name>BSD-3-Clause</name>
             <url>https://www.lwjgl.org/license</url>
             <distribution>repo</distribution>
         </license>
