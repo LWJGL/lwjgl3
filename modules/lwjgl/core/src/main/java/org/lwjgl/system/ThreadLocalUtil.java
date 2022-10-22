@@ -131,6 +131,7 @@ public final class ThreadLocalUtil {
                 jniCallCount = 230;
                 break;
             case JNI_VERSION_19:
+            case JNI_VERSION_20:
                 jniCallCount = 231;
                 break;
             default:
