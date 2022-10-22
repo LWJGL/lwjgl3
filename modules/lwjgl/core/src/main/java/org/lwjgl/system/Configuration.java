@@ -196,6 +196,25 @@ public class Configuration<T> {
     public static final Configuration<Integer> ARRAY_TLC_SIZE = new Configuration<>("org.lwjgl.system.arrayTLCSize", StateInit.INT);
 
     /**
+     * Overrides the number of functions in the {@code JNINativeInterface_} struct.
+     *
+     * <p>This is only necessary when LWJGL runs on a JVM with a newer, unsupported JNI version, that has introduced new JNI functions. The function count
+     * must be accurate in order to use the OpenGL, OpenGL ES, or OpenAL bindings.</p>
+     *
+     * <p>The currently known values are:</p>
+     * <ul>
+     *     <li>229 for Java 8</li>
+     *     <li>230 for Java 9 to Java 18</li>
+     *     <li>231 for Java 19 or higher</li>
+     * </ul>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.system.JNINativeInterfaceSize</b><br>
+     * &nbsp; &nbsp;Usage: Static</p>
+     */
+    public static final Configuration<Integer> JNI_NATIVE_INTERFACE_FUNCTION_COUNT = new Configuration<>("org.lwjgl.system.JNINativeInterfaceSize", StateInit.INT);
+
+    /**
      * Set to true to disable LWJGL's basic checks.
      *
      * <p>These are trivial checks that LWJGL performs to avoid JVM crashes, very useful during development. Their performance impact is usually minimal, but
@@ -568,9 +587,6 @@ public class Configuration<T> {
 
     /** Similar to {@link #LIBRARY_NAME} for the Shaderc libshaderc library (<b>org.lwjgl.shaderc.libname</b>). */
     public static final Configuration<String> SHADERC_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.libname", StateInit.STRING);
-
-    /** Similar to {@link #LIBRARY_NAME} for the Shaderc libshaderc_spvc library (<b>org.lwjgl.shaderc_spvc.libname</b>). */
-    public static final Configuration<String> SHADERC_SPVC_LIBRARY_NAME = new Configuration<>("org.lwjgl.shaderc.spvc.libname", StateInit.STRING);
 
     // -- SPVC
 

@@ -139,7 +139,7 @@ public final class ThreadLocalUtil {
                 DEBUG_STREAM
                     .println("[LWJGL] [ThreadLocalUtil] Unsupported JNI version detected, this may result in a crash. Please inform LWJGL developers.");
         }
-        JNI_NATIVE_INTERFACE_FUNCTION_COUNT = reservedCount + jniCallCount;
+        JNI_NATIVE_INTERFACE_FUNCTION_COUNT = reservedCount + Configuration.JNI_NATIVE_INTERFACE_FUNCTION_COUNT.get(jniCallCount);
     }
 
     private ThreadLocalUtil() {
