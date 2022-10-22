@@ -17,7 +17,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWVulkan.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.vulkan.EXTDebugReport.*;
+import static org.lwjgl.vulkan.EXTDebugUtils.*;
 import static org.lwjgl.vulkan.KHRSurface.*;
 import static org.lwjgl.vulkan.KHRSwapchain.*;
 import static org.lwjgl.vulkan.VK10.*;
@@ -59,8 +59,8 @@ public final class HelloVulkan {
     private static final int DEMO_TEXTURE_COUNT    = 1;
     private static final int VERTEX_BUFFER_BIND_ID = 0;
 
-    private static final ByteBuffer KHR_swapchain    = memASCII(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
-    private static final ByteBuffer EXT_debug_report = memASCII(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
+    private static final ByteBuffer KHR_swapchain   = memASCII(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
+    private static final ByteBuffer EXT_debug_utils = memASCII(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 
     private static final byte[] fragShaderCode = {
         0x03, 0x02, 0x23, 0x07, 0x00, 0x00, 0x01, 0x00, 0x08, 0x00, 0x0d, 0x00,
@@ -271,26 +271,36 @@ public final class HelloVulkan {
         }
     }
 
-    private final VkDebugReportCallbackEXT dbgFunc = VkDebugReportCallbackEXT.create(
-        (flags, objectType, object, location, messageCode, pLayerPrefix, pMessage, pUserData) -> {
+    private final VkDebugUtilsMessengerCallbackEXT dbgFunc = VkDebugUtilsMessengerCallbackEXT.create(
+        (messageSeverity, messageTypes, pCallbackData, pUserData) -> {
+            String severity;
+            if ((messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT) != 0) {
+                severity = "VERBOSE";
+            } else if ((messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT) != 0) {
+                severity = "INFO";
+            } else if ((messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT) != 0) {
+                severity = "WARNING";
+            } else if ((messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) != 0) {
+                severity = "ERROR";
+            } else {
+                severity = "UNKNOWN";
+            }
+
             String type;
-            if ((flags & VK_DEBUG_REPORT_INFORMATION_BIT_EXT) != 0) {
-                type = "INFORMATION";
-            } else if ((flags & VK_DEBUG_REPORT_WARNING_BIT_EXT) != 0) {
-                type = "WARNING";
-            } else if ((flags & VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT) != 0) {
-                type = "PERFORMANCE WARNING";
-            } else if ((flags & VK_DEBUG_REPORT_ERROR_BIT_EXT) != 0) {
-                type = "ERROR";
-            } else if ((flags & VK_DEBUG_REPORT_DEBUG_BIT_EXT) != 0) {
-                type = "DEBUG";
+            if ((messageTypes & VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT) != 0) {
+                type = "GENERAL";
+            } else if ((messageTypes & VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT) != 0) {
+                type = "VALIDATION";
+            } else if ((messageTypes & VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT) != 0) {
+                type = "PERFORMANCE";
             } else {
                 type = "UNKNOWN";
             }
 
+            VkDebugUtilsMessengerCallbackDataEXT data = VkDebugUtilsMessengerCallbackDataEXT.create(pCallbackData);
             System.err.format(
-                "%s: [%s] Code %d : %s\n",
-                type, memASCII(pLayerPrefix), messageCode, VkDebugReportCallbackEXT.getString(pMessage)
+                "%s %s: [%s]\n\t%s\n",
+                type, severity, data.pMessageIdNameString(), data.pMessageString()
             );
 
             /*
@@ -406,9 +416,9 @@ public final class HelloVulkan {
 
                 for (int i = 0; i < ip.get(0); i++) {
                     instance_extensions.position(i);
-                    if (VK_EXT_DEBUG_REPORT_EXTENSION_NAME.equals(instance_extensions.extensionNameString())) {
+                    if (VK_EXT_DEBUG_UTILS_EXTENSION_NAME.equals(instance_extensions.extensionNameString())) {
                         if (VALIDATE) {
-                            extension_names.put(EXT_debug_report);
+                            extension_names.put(EXT_debug_utils);
                         }
                     }
                 }
@@ -435,13 +445,24 @@ public final class HelloVulkan {
                 .ppEnabledExtensionNames(extension_names);
             extension_names.clear();
 
-            VkDebugReportCallbackCreateInfoEXT dbgCreateInfo;
+            VkDebugUtilsMessengerCreateInfoEXT dbgCreateInfo;
             if (VALIDATE) {
-                dbgCreateInfo = VkDebugReportCallbackCreateInfoEXT.malloc(stack)
+                dbgCreateInfo = VkDebugUtilsMessengerCreateInfoEXT.malloc(stack)
                     .sType$Default()
                     .pNext(NULL)
-                    .flags(VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT)
-                    .pfnCallback(dbgFunc)
+                    .flags(0)
+                    .messageSeverity(
+                        /*VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
+                        VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT |*/
+                        VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
+                        VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT
+                    )
+                    .messageType(
+                        VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+                        VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT |
+                        VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT
+                    )
+                    .pfnUserCallback(dbgFunc)
                     .pUserData(NULL);
 
                 inst_info.pNext(dbgCreateInfo.address());
@@ -493,7 +514,7 @@ public final class HelloVulkan {
             }
 
             if (VALIDATE) {
-                err = vkCreateDebugReportCallbackEXT(inst, dbgCreateInfo, null, lp);
+                err = vkCreateDebugUtilsMessengerEXT(inst, dbgCreateInfo, null, lp);
                 switch (err) {
                     case VK_SUCCESS:
                         msg_callback = lp.get(0);
@@ -745,7 +766,6 @@ public final class HelloVulkan {
                     image_memory_barrier.dstAccessMask(VK_ACCESS_MEMORY_READ_BIT);
                     break;
             }
-
 
 
             vkCmdPipelineBarrier(setup_cmd, src_stages, dest_stages, 0, null, null, image_memory_barrier);
@@ -1920,7 +1940,7 @@ public final class HelloVulkan {
         vkDestroyDevice(device, null);
         vkDestroySurfaceKHR(inst, surface, null);
         if (msg_callback != NULL) {
-            vkDestroyDebugReportCallbackEXT(inst, msg_callback, null);
+            vkDestroyDebugUtilsMessengerEXT(inst, msg_callback, null);
         }
         vkDestroyInstance(inst, null);
         dbgFunc.free();
@@ -1941,7 +1961,7 @@ public final class HelloVulkan {
         memFree(lp);
         memFree(ip);
 
-        memFree(EXT_debug_report);
+        memFree(EXT_debug_utils);
         memFree(KHR_swapchain);
     }
 
