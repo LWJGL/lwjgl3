@@ -428,6 +428,17 @@ public class Configuration<T> {
     /** Similar to {@link #OPENGL_EXTENSION_FILTER} for the EGL library (<b>org.lwjgl.egl.extensionFilter</b>). */
     public static final Configuration<Object> EGL_EXTENSION_FILTER = new Configuration<>("org.lwjgl.egl.extensionFilter", StateInit.STRING);
 
+    // -- FMOD
+
+    /** Similar to {@link #LIBRARY_NAME} for the FMOD Core library (<b>org.lwjgl.fmod.libname</b>). */
+    public static final Configuration<String> FMOD_LIBRARY_NAME = new Configuration<>("org.lwjgl.fmod.libname", StateInit.STRING);
+
+    /** Similar to {@link #LIBRARY_NAME} for the FMOD Studio library (<b>org.lwjgl.fmod.studio.libname</b>). */
+    public static final Configuration<String> FMOD_STUDIO_LIBRARY_NAME = new Configuration<>("org.lwjgl.fmod.studio.libname", StateInit.STRING);
+
+    /** Similar to {@link #LIBRARY_NAME} for the FMOD FSBank library (<b>org.lwjgl.fmod.fsbank.libname</b>). */
+    public static final Configuration<String> FMOD_FSBANK_LIBRARY_NAME = new Configuration<>("org.lwjgl.fmod.fsbank.libname", StateInit.STRING);
+
     // -- GLFW
 
     /** Similar to {@link #LIBRARY_NAME} for the GLFW library (<b>org.lwjgl.glfw.libname</b>). */

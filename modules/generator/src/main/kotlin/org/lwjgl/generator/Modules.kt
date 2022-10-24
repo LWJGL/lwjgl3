@@ -118,6 +118,28 @@ enum class Module(
         """,
         CallingConvention.STDCALL
     ),
+    FMOD(
+        "fmod",
+        "org.lwjgl.fmod",
+        """
+        Contains bindings to the ${url("https://www.fmod.com", "FMOD")}, an end-to-end solution for adding sound and music to any game.
+
+        The FMOD license does not permit redistribution, so LWJGL does not include the FMOD native libraries. They must be downloaded and deployed separately.
+        The {@code SharedLibraryLoader} enables many options and it can be as simple as putting the libraries on the classpath. LWJGL by default will look for
+        these shared libraries:
+        ${ul(
+            "fmod",
+            "fmodstudio",
+            "fsbank"
+        )}
+
+        but these can be overridden with an absolute/relative path or simple name, using the corresponding {@link org.lwjgl.system.Configuration Configuration}
+        options. For example, setting {@link org.lwjgl.system.Configuration\#FMOD_LIBRARY_NAME FMOD_LIBRARY_NAME} to "fmodL" will load the logging version of
+        the FMOD core library.
+        """,
+        CallingConvention.STDCALL,
+        arrayOverloads = false
+    ),
     GLFW(
         "glfw",
         "org.lwjgl.glfw",

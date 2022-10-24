@@ -491,6 +491,7 @@
             <compileBinding binding="bgfx"/>
             <compileBinding binding="cuda"/>
             <compileBinding binding="egl"/>
+            <compileBinding binding="fmod"/>
             <compileBinding binding="jawt"/>
             <compileBinding binding="jemalloc"/>
             <compileBinding binding="libdivide"/>
@@ -1552,6 +1553,9 @@
 
         <!-- EGL -->
         <release-module name="egl" title="EGL" if:true="${binding.egl}"/>
+
+        <!-- FMOD -->
+        <release-module name="fmod" title="FMOD" if:true="${binding.fmod}"/>
 
         <!-- GLFW -->
         <release-module name="glfw" title="GLFW" if:true="${binding.glfw}">

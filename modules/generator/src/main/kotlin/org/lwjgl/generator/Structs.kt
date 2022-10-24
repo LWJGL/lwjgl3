@@ -1972,7 +1972,9 @@ ${validations.joinToString("\n")}
                         println("${indent}public $returnType $setter(${it.annotate(bufferType)} value) { $n$setter($ADDRESS, value); return this; }")
                         printSetterJavadoc(accessMode, it, indent, "Sets the specified value at the specified index of the #member field.", setter)
                         if (overrides) println("$indent@Override")
-                        println("${indent}public $returnType $setter(int index, ${it.annotate(it.nativeType.javaMethodType, it.nativeType)} value) { $n$setter($ADDRESS, index, value); return this; }")
+                        println("${indent}public $returnType $setter(int index, ${it.annotate(it.nativeType.javaMethodType, it.nativeType)} value) { $n$setter($ADDRESS, index, ${
+                            if (it.nativeType.isPointerData) "memAddressSafe(value)" else "value"
+                        }); return this; }")
                     }
                 } else if (it.nativeType is CharSequenceType) {
                     printSetterJavadoc(accessMode, it, indent, "Sets the address of the specified encoded string to the #member field.", setter)

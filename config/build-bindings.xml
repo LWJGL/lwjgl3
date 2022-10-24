@@ -23,6 +23,7 @@ This script is included in /config/build-definitions.xml.
     </condition>
     <property name="binding.cuda" value="true"/>
     <property name="binding.egl" value="true"/>
+    <property name="binding.fmod" value="true"/>
     <property name="binding.glfw" value="true"/>
     <property name="binding.jawt" value="true"/>
     <property name="binding.jemalloc" value="true"/>
@@ -72,6 +73,7 @@ This script is included in /config/build-definitions.xml.
     <!-- TODO: automate -->
     <property name="java-only.binding.cuda" value="true"/>
     <property name="java-only.binding.egl" value="true"/>
+    <property name="java-only.binding.fmod" value="true"/>
     <property name="java-only.binding.jawt" value="true"/>
     <property name="java-only.binding.odbc" value="true"/>
     <property name="java-only.binding.opencl" value="true"/>
@@ -97,6 +99,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.bgfx}"><local name="module"/><property name="module" value="bgfx"/><body/></sequential>
                 <sequential if:true="${binding.cuda}"><local name="module"/><property name="module" value="cuda"/><body/></sequential>
                 <sequential if:true="${binding.egl}"><local name="module"/><property name="module" value="egl"/><body/></sequential>
+                <sequential if:true="${binding.fmod}"><local name="module"/><property name="module" value="fmod"/><body/></sequential>
                 <sequential if:true="${binding.glfw}"><local name="module"/><property name="module" value="glfw"/><body/></sequential>
                 <sequential if:true="${binding.jawt}"><local name="module"/><property name="module" value="jawt"/><body/></sequential>
                 <sequential if:true="${binding.jemalloc}"><local name="module"/><property name="module" value="jemalloc"/><body/></sequential>
