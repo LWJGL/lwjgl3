@@ -1808,7 +1808,7 @@ ${validations.joinToString("\n")}
                         val javaType = it.nativeType.nativeMethodType
 
                         if (it.public)
-                            println("$t/** Unsafe version of {@link #$setter(int, $javaType) $setter}. */")
+                            println("$t/** Unsafe version of {@link #$setter(int, ${it.nativeType.javaMethodType}) $setter}. */")
                         println("${t}public static void n$setter(long $STRUCT, int index, $javaType value) {")
                         println("$t$t${getBufferMethod("put", it, javaType)}$STRUCT + $field + check(index, ${it.size}) * ${mapping.bytesExpression}, value);")
                         println("$t}")

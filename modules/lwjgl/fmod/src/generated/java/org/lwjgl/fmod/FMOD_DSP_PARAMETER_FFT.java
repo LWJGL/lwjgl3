@@ -246,7 +246,7 @@ public class FMOD_DSP_PARAMETER_FFT extends Struct implements NativeResource {
         if (CHECKS) { checkGT(value, 32); }
         memCopy(memAddress(value), struct + FMOD_DSP_PARAMETER_FFT.SPECTRUM, value.remaining() * POINTER_SIZE);
     }
-    /** Unsafe version of {@link #spectrum(int, long) spectrum}. */
+    /** Unsafe version of {@link #spectrum(int, FloatBuffer) spectrum}. */
     public static void nspectrum(long struct, int index, long value) {
         memPutAddress(struct + FMOD_DSP_PARAMETER_FFT.SPECTRUM + check(index, 32) * POINTER_SIZE, value);
     }
