@@ -18,10 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying an image copy operation.
  * 
- * <h5>Description</h5>
- * 
- * <p>For {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D} images, copies are performed slice by slice starting with the {@code z} member of the {@code srcOffset} or {@code dstOffset}, and copying {@code depth} slices. For images with multiple layers, copies are performed layer by layer starting with the {@code baseArrayLayer} member of the {@code srcSubresource} or {@code dstSubresource} and copying {@code layerCount} layers. Image data <b>can</b> be copied between images with different image types. If one image is {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D} and the other image is {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} with multiple layers, then each slice is copied to or from a different layer; {@code depth} slices in the 3D image correspond to {@code layerCount} layers in the 2D image, with an effective {@code depth} of 1 used for the 2D image.</p>
- * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

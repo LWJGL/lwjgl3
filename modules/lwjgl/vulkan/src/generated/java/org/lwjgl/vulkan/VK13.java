@@ -1944,7 +1944,7 @@ public class VK13 extends VK12 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command is functionally identical to {@link VK10#vkCmdCopyBuffer CmdCopyBuffer}, but includes extensible sub-structures that include {@code sType} and {@code pNext} parameters, allowing them to be more easily extended.</p>
+     * <p>Each source region specified by {@code pCopyBufferInfo→pname}:pRegions is copied from the source buffer to the destination region of the destination buffer. If any of the specified regions in {@code pCopyBufferInfo→pname}:srcBuffer overlaps in memory with any of the specified regions in {@code pCopyBufferInfo→pname}:dstBuffer, values read from those overlapping regions are undefined.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

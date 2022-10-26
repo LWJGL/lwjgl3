@@ -836,6 +836,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_AMD_texture_gather_bias_lod;
     /** When true, {@link ARMRasterizationOrderAttachmentAccess} is supported. */
     public final boolean VK_ARM_rasterization_order_attachment_access;
+    /** When true, {@link ARMShaderCoreBuiltins} is supported. */
+    public final boolean VK_ARM_shader_core_builtins;
     /** When true, {@link EXT4444Formats} is supported. */
     public final boolean VK_EXT_4444_formats;
     /** When true, {@link EXTAstcDecodeMode} is supported. */
@@ -1355,6 +1357,7 @@ public class VKCapabilitiesDevice {
         VK_AMD_shader_trinary_minmax = ext.contains("VK_AMD_shader_trinary_minmax");
         VK_AMD_texture_gather_bias_lod = ext.contains("VK_AMD_texture_gather_bias_lod");
         VK_ARM_rasterization_order_attachment_access = ext.contains("VK_ARM_rasterization_order_attachment_access");
+        VK_ARM_shader_core_builtins = ext.contains("VK_ARM_shader_core_builtins");
         VK_EXT_4444_formats = ext.contains("VK_EXT_4444_formats");
         VK_EXT_astc_decode_mode = ext.contains("VK_EXT_astc_decode_mode");
         VK_EXT_attachment_feedback_loop_layout = ext.contains("VK_EXT_attachment_feedback_loop_layout");

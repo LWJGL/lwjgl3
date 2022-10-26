@@ -3630,6 +3630,8 @@ val VkPipelineRobustnessCreateInfoEXT = struct(Module.VULKAN, "VkPipelineRobustn
 
         If ##VkPipelineRobustnessCreateInfoEXT is specified for both a pipeline and a pipeline stage, the ##VkPipelineRobustnessCreateInfoEXT specified for the pipeline stage will take precedence.
 
+        When ##VkPipelineRobustnessCreateInfoEXT is specified for a pipeline, it only affects the subset of the pipeline that is specified by the create info, as opposed to subsets linked from pipeline libraries. For ##VkGraphicsPipelineCreateInfo, that subset is specified by ##VkGraphicsPipelineLibraryCreateInfoEXT{@code ::flags}. For ##VkRayTracingPipelineCreateInfoKHR, that subset is specified by the specific stages in ##VkRayTracingPipelineCreateInfoKHR{@code ::pStages}.
+
         <h5>Valid Usage</h5>
         <ul>
             <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineRobustness">{@code pipelineRobustness}</a> feature is not enabled, {@code storageBuffers} <b>must</b> be #PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT</li>
@@ -12171,9 +12173,14 @@ val VkSamplerCustomBorderColorCreateInfoEXT = struct(Module.VULKAN, "VkSamplerCu
         """
         Structure specifying custom border color.
 
+        <h5>Description</h5>
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        If {@code format} is a combined depth stencil format, the aspect is determined by the value of ##VkSamplerCreateInfo{@code ::pname}:borderColor. If ##VkSamplerCreateInfo{@code ::pname}:borderColor is #BORDER_COLOR_FLOAT_CUSTOM_EXT, the depth aspect is considered. If ##VkSamplerCreateInfo{@code ::pname}:borderColor is #BORDER_COLOR_INT_CUSTOM_EXT, the stencil aspect is considered.
+        </div>
+
         <h5>Valid Usage</h5>
         <ul>
-            <li>If provided {@code format} is not #FORMAT_UNDEFINED then the ##VkSamplerCreateInfo{@code ::borderColor} type <b>must</b> match the sampled type of the provided {@code format}, as shown in the <em>SPIR-V Sampled Type</em> column of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-numericformat">Interpretation of Numeric Format</a> table</li>
+            <li>If {@code format} is not #FORMAT_UNDEFINED and {@code format} is not a combined depth stencil format then the ##VkSamplerCreateInfo{@code ::borderColor} type <b>must</b> match the sampled type of the provided {@code format}, as shown in the <em>SPIR-V Sampled Type</em> column of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-numericformat">Interpretation of Numeric Format</a> table</li>
             <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-customBorderColorWithoutFormat">{@code customBorderColorWithoutFormat}</a> feature is not enabled then {@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
             <li>If the sampler is used to sample an image view of #FORMAT_B4G4R4A4_UNORM_PACK16, #FORMAT_B5G6R5_UNORM_PACK16, or #FORMAT_B5G5R5A1_UNORM_PACK16 format then {@code format} <b>must</b> not be #FORMAT_UNDEFINED</li>
         </ul>
@@ -13661,6 +13668,13 @@ val VkCopyCommandTransformInfoQCOM = struct(Module.VULKAN, "VkCopyCommandTransfo
     documentation =
         """
         Structure describing transform parameters of rotated copy command.
+
+        <h5>Description</h5>
+        Including this structure in the {@code pNext} chain of ##VkBufferImageCopy2 defines a rotation to be performed when copying between an image and a buffer. Including this structure in the {@code pNext} chain of ##VkBlitImageInfo2 defines a rotation to be performed when blitting between two images. If this structure is not specified in either case, the implementation behaves as if it was specified with a {@code transform} equal to #SURFACE_TRANSFORM_IDENTITY_BIT_KHR.
+
+        Specifying a transform for a copy between an image and a buffer <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#copies-buffers-images-rotation-addressing">rotates the region accessed in the image around the offset</a>. Specifying a transform for a blit performs a similar transform as described in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#copies-images-scaling-rotation">Image Blits with Scaling and Rotation</a>.
+
+        Rotations other than #SURFACE_TRANSFORM_IDENTITY_BIT_KHR <b>can</b> only be specified for single-plane 2D images with a 1x1x1 <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-compatibility-classes">texel block extent</a>.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -16736,4 +16750,43 @@ val VkMutableDescriptorTypeCreateInfoEXT = struct(Module.VULKAN, "VkMutableDescr
     nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     AutoSize("pMutableDescriptorTypeLists", optional = true)..uint32_t("mutableDescriptorTypeListCount", "the number of elements in {@code pMutableDescriptorTypeLists}.")
     VkMutableDescriptorTypeListEXT.const.p("pMutableDescriptorTypeLists", "a pointer to an array of ##VkMutableDescriptorTypeListEXT structures.")
+}
+
+val VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM = struct(Module.VULKAN, "VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM") {
+    documentation =
+        """
+        Structure describing the shader core builtins features that can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("shaderCoreBuiltins", "indicates whether the implementation supports the SPIR-V {@code CoreBuiltinsARM} capability.")
+}
+
+val VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM = struct(Module.VULKAN, "VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM", mutable = false) {
+    documentation =
+        """
+        Structure describing shader core builtins properties supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM")..VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    uint32_t("shaderCoreCount", "the number of shader cores on the device.")
+    uint32_t("shaderWarpsPerCore", "the maximum number of simultaneously executing warps on a shader core.")
 }

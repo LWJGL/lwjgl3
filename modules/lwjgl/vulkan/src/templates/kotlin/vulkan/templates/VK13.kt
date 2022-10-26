@@ -1541,7 +1541,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    const VkCopyBufferInfo2*                    pCopyBufferInfo);</code></pre>
 
         <h5>Description</h5>
-        This command is functionally identical to #CmdCopyBuffer(), but includes extensible sub-structures that include {@code sType} and {@code pNext} parameters, allowing them to be more easily extended.
+        Each source region specified by {@code pCopyBufferInfo→pname}:pRegions is copied from the source buffer to the destination region of the destination buffer. If any of the specified regions in {@code pCopyBufferInfo→pname}:srcBuffer overlaps in memory with any of the specified regions in {@code pCopyBufferInfo→pname}:dstBuffer, values read from those overlapping regions are undefined.
 
         <h5>Valid Usage</h5>
         <ul>

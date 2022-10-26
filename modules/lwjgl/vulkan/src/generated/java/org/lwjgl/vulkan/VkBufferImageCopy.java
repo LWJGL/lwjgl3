@@ -18,28 +18,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying a buffer image copy operation.
  * 
- * <h5>Description</h5>
- * 
- * <p>When copying to or from a depth or stencil aspect, the data in buffer memory uses a layout that is a (mostly) tightly packed representation of the depth or stencil data. Specifically:</p>
- * 
- * <ul>
- * <li>data copied to or from the stencil aspect of any depth/stencil format is tightly packed with one {@link VK10#VK_FORMAT_S8_UINT FORMAT_S8_UINT} value per texel.</li>
- * <li>data copied to or from the depth aspect of a {@link VK10#VK_FORMAT_D16_UNORM FORMAT_D16_UNORM} or {@link VK10#VK_FORMAT_D16_UNORM_S8_UINT FORMAT_D16_UNORM_S8_UINT} format is tightly packed with one {@link VK10#VK_FORMAT_D16_UNORM FORMAT_D16_UNORM} value per texel.</li>
- * <li>data copied to or from the depth aspect of a {@link VK10#VK_FORMAT_D32_SFLOAT FORMAT_D32_SFLOAT} or {@link VK10#VK_FORMAT_D32_SFLOAT_S8_UINT FORMAT_D32_SFLOAT_S8_UINT} format is tightly packed with one {@link VK10#VK_FORMAT_D32_SFLOAT FORMAT_D32_SFLOAT} value per texel.</li>
- * <li>data copied to or from the depth aspect of a {@link VK10#VK_FORMAT_X8_D24_UNORM_PACK32 FORMAT_X8_D24_UNORM_PACK32} or {@link VK10#VK_FORMAT_D24_UNORM_S8_UINT FORMAT_D24_UNORM_S8_UINT} format is packed with one 32-bit word per texel with the D24 value in the LSBs of the word, and undefined values in the eight MSBs.</li>
- * </ul>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>To copy both the depth and stencil aspects of a depth/stencil format, two entries in {@code pRegions} <b>can</b> be used, where one specifies the depth aspect in {@code imageSubresource}, and the other specifies the stencil aspect.</p>
- * </div>
- * 
- * <p>Because depth or stencil aspect buffer to image copies <b>may</b> require format conversions on some implementations, they are not supported on queues that do not support graphics.</p>
- * 
- * <p>When copying to a depth aspect, and the {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is not enabled, the data in buffer memory <b>must</b> be in the range <code>[0,1]</code>, or the resulting values are undefined.</p>
- * 
- * <p>Copies are done layer by layer starting with image layer {@code baseArrayLayer} member of {@code imageSubresource}. {@code layerCount} layers are copied from the source image or to the destination image.</p>
- * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

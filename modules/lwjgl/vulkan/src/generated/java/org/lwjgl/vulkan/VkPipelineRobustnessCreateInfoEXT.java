@@ -31,6 +31,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@link VkPipelineRobustnessCreateInfoEXT} is specified for both a pipeline and a pipeline stage, the {@link VkPipelineRobustnessCreateInfoEXT} specified for the pipeline stage will take precedence.</p>
  * 
+ * <p>When {@link VkPipelineRobustnessCreateInfoEXT} is specified for a pipeline, it only affects the subset of the pipeline that is specified by the create info, as opposed to subsets linked from pipeline libraries. For {@link VkGraphicsPipelineCreateInfo}, that subset is specified by {@link VkGraphicsPipelineLibraryCreateInfoEXT}{@code ::flags}. For {@link VkRayTracingPipelineCreateInfoKHR}, that subset is specified by the specific stages in {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages}.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

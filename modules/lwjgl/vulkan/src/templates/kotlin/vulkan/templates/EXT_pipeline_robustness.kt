@@ -93,7 +93,7 @@ val EXT_pipeline_robustness = "EXTPipelineRobustness".nativeClassVK("EXT_pipelin
 
         <h5>Description</h5>
         <ul>
-            <li>#PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT specifies that this pipeline stage follows the robustness behavior of the logical device that created this pipeline</li>
+            <li>#PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DEVICE_DEFAULT_EXT specifies that this pipeline stage follows the behavior of robustness features that are enabled on the device that created this pipeline</li>
             <li>#PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_DISABLED_EXT specifies that buffer accesses by this pipeline stage to the relevant resource types <b>must</b> not be out of bounds</li>
             <li>#PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_EXT specifies that out of bounds accesses by this pipeline stage to the relevant resource types behave as if the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is enabled</li>
             <li>#PIPELINE_ROBUSTNESS_BUFFER_BEHAVIOR_ROBUST_BUFFER_ACCESS_2_EXT specifies that out of bounds accesses by this pipeline stage to the relevant resource types behave as if the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is enabled</li>
@@ -115,7 +115,7 @@ val EXT_pipeline_robustness = "EXTPipelineRobustness".nativeClassVK("EXT_pipelin
 
         <h5>Description</h5>
         <ul>
-            <li>#PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_DEVICE_DEFAULT_EXT specifies that this pipeline stage follows the robustness behavior of the logical device that created this pipeline</li>
+            <li>#PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_DEVICE_DEFAULT_EXT specifies that this pipeline stage follows the behavior of robustness features that are enabled on the device that created this pipeline</li>
             <li>#PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_DISABLED_EXT specifies that image accesses by this pipeline stage to the relevant resource types <b>must</b> not be out of bounds</li>
             <li>#PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_EXT specifies that out of bounds accesses by this pipeline stage to images behave as if the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustImageAccess">{@code robustImageAccess}</a> feature is enabled</li>
             <li>#PIPELINE_ROBUSTNESS_IMAGE_BEHAVIOR_ROBUST_IMAGE_ACCESS_2_EXT specifies that out of bounds accesses by this pipeline stage to images behave as if the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustImageAccess2">{@code robustImageAccess2}</a> feature is enabled</li>

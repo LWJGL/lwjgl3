@@ -19,10 +19,6 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying parameters of a buffer copy command.
  * 
- * <h5>Description</h5>
- * 
- * <p>Members defined by this structure with the same name as parameters in {@link VK10#vkCmdCopyBuffer CmdCopyBuffer} have the identical effect to those parameters; the child structure {@link VkBufferCopy2} is a variant of {@link VkBufferCopy} which includes {@code sType} and {@code pNext} parameters, allowing it to be extended.</p>
- * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

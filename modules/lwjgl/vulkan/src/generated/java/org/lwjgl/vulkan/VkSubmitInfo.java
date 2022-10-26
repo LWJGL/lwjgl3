@@ -60,7 +60,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
  * <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitDstStageMask} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid combinations of {@code VkPipelineStageFlagBits} values</li>
- * <li>Each element of {@code pWaitDstStageMask} <b>must</b> not be 0</li>
  * <li>If {@code commandBufferCount} is not 0, {@code pCommandBuffers} <b>must</b> be a valid pointer to an array of {@code commandBufferCount} valid {@code VkCommandBuffer} handles</li>
  * <li>If {@code signalSemaphoreCount} is not 0, {@code pSignalSemaphores} <b>must</b> be a valid pointer to an array of {@code signalSemaphoreCount} valid {@code VkSemaphore} handles</li>
  * <li>Each of the elements of {@code pCommandBuffers}, the elements of {@code pSignalSemaphores}, and the elements of {@code pWaitSemaphores} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
@@ -425,7 +424,6 @@ public class VkSubmitInfo extends Struct implements NativeResource {
     public static void validate(long struct) {
         if (nwaitSemaphoreCount(struct) != 0) {
             check(memGetAddress(struct + VkSubmitInfo.PWAITSEMAPHORES));
-            check(memGetAddress(struct + VkSubmitInfo.PWAITDSTSTAGEMASK));
         }
         if (ncommandBufferCount(struct) != 0) {
             check(memGetAddress(struct + VkSubmitInfo.PCOMMANDBUFFERS));
