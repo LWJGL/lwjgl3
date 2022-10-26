@@ -100,6 +100,10 @@ enum class Artifacts(
         "lwjgl-egl", "LWJGL - EGL bindings",
         "An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system."
     ),
+    FMOD(
+        "lwjgl-fmod", "LWJGL - FMOD bindings",
+        "An end-to-end solution for adding sound and music to any game."
+    ),
     GLFW(
         "lwjgl-glfw", "LWJGL - GLFW bindings",
         "A multi-platform library for OpenGL, OpenGL ES and Vulkan development on the desktop. It provides a simple API for creating windows, contexts and surfaces, receiving input and events.",
