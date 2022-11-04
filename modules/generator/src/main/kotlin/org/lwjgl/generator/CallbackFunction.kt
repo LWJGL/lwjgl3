@@ -16,6 +16,7 @@ class CallbackFunction internal constructor(
 
     internal var functionDoc: (CallbackFunction) -> String = { "" }
     var additionalCode = ""
+    var callingConvention = module.callingConvention
 
     internal fun nativeType(name: String, separator: String = ", ", prefix: String = "", postfix: String = "") =
         "${returns.name} (*$name) (${if (signature.isEmpty()) "void" else signature.asSequence()
@@ -215,7 +216,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 ${access.modifier}interface ${className}I extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
-        ${if (module.callingConvention === CallingConvention.STDCALL) "apiStdcall()" else "FFI_DEFAULT_ABI"},
+        ${if (callingConvention === CallingConvention.STDCALL) "apiStdcall()" else "FFI_DEFAULT_ABI"},
         ${returns.libffi},
         ${signature.joinToString(", ") { it.nativeType.libffi }}
     );
