@@ -118,6 +118,11 @@ enum class Artifacts(
         "A general purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support.",
         *Platforms.ALL
     ),
+    KTX(
+        "lwjgl-ktx", "LWJGL - KTX (Khronos Texture) bindings",
+        "A lightweight container for textures for OpenGL®, Vulkan® and other GPU APIs.",
+        *Platforms.ALL
+    ),
     LIBDIVIDE(
         "lwjgl-libdivide", "LWJGL - libdivide bindings",
         "A library that replaces expensive integer divides with comparatively cheap multiplication and bitshifts.",

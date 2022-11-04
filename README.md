@@ -112,9 +112,11 @@ improve the chances of a quick and useful response.
 |Library|Description|
 |-------|-----------|
 |[EGL](https://www.khronos.org/egl)|An interface between Khronos rendering APIs such as OpenGL ES or OpenVG and the underlying native platform window system.|
+|[KTX (Khronos Texture)](https://www.khronos.org/ktx/)|A lightweight container for textures for OpenGL®, Vulkan® and other GPU APIs.|
 |[OpenCL](https://www.khronos.org/opencl/)|An open, royalty-free standard for cross-platform, parallel programming of diverse processors found in personal computers, servers, mobile devices and embedded platforms.|
 |[OpenGL](https://www.khronos.org/opengl/)|The most widely adopted 2D and 3D graphics API in the industry, bringing thousands of applications to a wide variety of computer platforms.|
 |[OpenGL ES](https://www.khronos.org/opengles/)|A royalty-free, cross-platform API for full-function 2D and 3D graphics on embedded systems - including consoles, phones, appliances and vehicles.|
+|[OpenXR](https://www.khronos.org/openxr/)|A royalty-free, open standard that provides high-performance access to Augmented Reality (AR) and Virtual Reality (VR)—collectively known as XR—platforms and devices.|
 |[Vulkan](https://www.khronos.org/vulkan/)|A new generation graphics and compute API that provides high-efficiency, cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms.|
 
 #### Display and Input
@@ -161,7 +163,6 @@ improve the chances of a quick and useful response.
 |-------|-----------|
 |[LibOVR](https://developer.oculus.com/documentation/)|The API of the Oculus SDK.|
 |[OpenVR](https://github.com/ValveSoftware/openvr)|An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.|
-|[OpenXR](https://www.khronos.org/openxr/)|A royalty-free, open standard that provides high-performance access to Augmented Reality (AR) and Virtual Reality (VR)—collectively known as XR—platforms and devices.|
 
 #### [stb](https://github.com/nothings/stb) - single-file public domain libraries for C/C++
 

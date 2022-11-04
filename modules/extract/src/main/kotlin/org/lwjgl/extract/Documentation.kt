@@ -204,6 +204,9 @@ private fun CXComment.parse(doc: Documentation, builder: StringBuilder, context:
             }
             CXComment_BlockCommand         -> {
                 when (clang_BlockCommandComment_getCommandName(this, stack.str).str) {
+                    "author" -> {
+                        // TODO: ignored for now
+                    }
                     "brief"      -> {
                         parseChildren(doc, builder, context)
                     }

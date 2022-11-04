@@ -468,6 +468,11 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the jemalloc library (<b>org.lwjgl.system.jemalloc.libname</b>). */
     public static final Configuration<String> JEMALLOC_LIBRARY_NAME = new Configuration<>("org.lwjgl.system.jemalloc.libname", StateInit.STRING);
 
+    // -- KTX
+
+    /** Similar to {@link #LIBRARY_NAME} for the KTX library (<b>org.lwjgl.ktx.libname</b>). */
+    public static final Configuration<String> KTX_LIBRARY_NAME = new Configuration<>("org.lwjgl.ktx.libname", StateInit.STRING);
+
     // -- LLVM
 
     /** Similar to {@link #LIBRARY_NAME} for the LLVM library (<b>org.lwjgl.llvm.libname</b>). */

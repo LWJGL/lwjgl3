@@ -551,6 +551,12 @@
             <exclude name="org/lwjgl/glfw/GLFWVulkan.java" unless:true="${binding.vulkan}"/>
         </compileBinding>
 
+        <compileBinding binding="ktx">
+            <classpath>
+                <pathelement path="${bin.lwjgl}/vulkan"/>
+            </classpath>
+        </compileBinding>
+
         <compileBinding binding="openxr">
             <classpath>
                 <pathelement path="${bin.lwjgl}/egl"/>
@@ -831,6 +837,7 @@
             <include name="org/lwjgl/demo/system/linux/liburing/**" if:set="platform.linux"/>
 
             <include name="org/lwjgl/demo/util/*.java"/>
+            <include name="org/lwjgl/demo/util/ktx/**" if:true="${binding.ktx}"/>
             <include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
             <include name="org/lwjgl/demo/util/lz4/**" if:true="${binding.lz4}"/>
             <include name="org/lwjgl/demo/util/meow/**" if:true="${binding.meow}"/>
@@ -1595,6 +1602,9 @@
 
         <!-- jemalloc -->
         <release-module name="jemalloc" native-library="jemalloc" title="jemalloc" if:true="${binding.jemalloc}"/>
+
+        <!-- KTX -->
+        <release-module name="ktx" native-library="ktx" title="KTX" if:true="${binding.ktx}"/>
 
         <!-- libdivide -->
         <release-module name="libdivide" native-library="lwjgl_libdivide" title="libdivide" if:true="${binding.libdivide}"/>
