@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct ktxTexture1 {
  *     class_id {@link #classId};
- *     struct ktxTexture_vtbl * {@link #vtbl};
+ *     {@link ktxTexture_vtbl struct ktxTexture_vtbl} * {@link #vtbl};
  *     struct ktxTexture_vvtbl * {@link #vvtbl};
  *     struct ktxTexture_protected * {@link #_protected};
  *     ktx_bool_t {@link #isArray};
@@ -166,20 +166,12 @@ public class ktxTexture1 extends Struct implements NativeResource {
     /** must be:<br><table><tr><td>{@link KTX#ktxTexture1_c}</td></tr></table> */
     @NativeType("class_id")
     public int classId() { return nclassId(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return pointer to the class's vtble
-     */
+    /** pointer to the class's vtble */
     @NativeType("struct ktxTexture_vtbl *")
-    public PointerBuffer vtbl(int capacity) { return nvtbl(address(), capacity); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return pointer to the class's vtble for Vulkan functions
-     */
+    public ktxTexture_vtbl vtbl() { return nvtbl(address()); }
+    /** pointer to the class's vtble for Vulkan functions */
     @NativeType("struct ktxTexture_vvtbl *")
-    public PointerBuffer vvtbl(int capacity) { return nvvtbl(address(), capacity); }
+    public long vvtbl() { return nvvtbl(address()); }
     /**
      * @param capacity the number of elements in the returned buffer
      *
@@ -371,10 +363,10 @@ public class ktxTexture1 extends Struct implements NativeResource {
 
     /** Unsafe version of {@link #classId}. */
     public static int nclassId(long struct) { return UNSAFE.getInt(null, struct + ktxTexture1.CLASSID); }
-    /** Unsafe version of {@link #vtbl(int) vtbl}. */
-    public static PointerBuffer nvtbl(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture1.VTBL), capacity); }
-    /** Unsafe version of {@link #vvtbl(int) vvtbl}. */
-    public static PointerBuffer nvvtbl(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture1.VVTBL), capacity); }
+    /** Unsafe version of {@link #vtbl}. */
+    public static ktxTexture_vtbl nvtbl(long struct) { return ktxTexture_vtbl.create(memGetAddress(struct + ktxTexture1.VTBL)); }
+    /** Unsafe version of {@link #vvtbl}. */
+    public static long nvvtbl(long struct) { return memGetAddress(struct + ktxTexture1.VVTBL); }
     /** Unsafe version of {@link #_protected(int) _protected}. */
     public static PointerBuffer n_protected(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + ktxTexture1._PROTECTED), capacity); }
     /** Unsafe version of {@link #isArray}. */
@@ -462,20 +454,12 @@ public class ktxTexture1 extends Struct implements NativeResource {
         /** @return the value of the {@link ktxTexture1#classId} field. */
         @NativeType("class_id")
         public int classId() { return ktxTexture1.nclassId(address()); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@link ktxTexture1#vtbl} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ktxTexture_vtbl} view of the struct pointed to by the {@link ktxTexture1#vtbl} field. */
         @NativeType("struct ktxTexture_vtbl *")
-        public PointerBuffer vtbl(int capacity) { return ktxTexture1.nvtbl(address(), capacity); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@link ktxTexture1#vvtbl} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        public ktxTexture_vtbl vtbl() { return ktxTexture1.nvtbl(address()); }
+        /** @return the value of the {@link ktxTexture1#vvtbl} field. */
         @NativeType("struct ktxTexture_vvtbl *")
-        public PointerBuffer vvtbl(int capacity) { return ktxTexture1.nvvtbl(address(), capacity); }
+        public long vvtbl() { return ktxTexture1.nvvtbl(address()); }
         /**
          * @return a {@link PointerBuffer} view of the data pointed to by the {@link ktxTexture1#_protected} field.
          *

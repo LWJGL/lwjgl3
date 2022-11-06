@@ -34,8 +34,6 @@ val ktxHashList_p = "ktxHashList*".handle
 val ktxTexture1_private = "struct ktxTexture1_private".handle
 val ktxTexture2_private = "struct ktxTexture2_private".handle
 val ktxTexture_protected = "struct ktxTexture_protected".handle
-val _ktxTexture_vtbl = "struct ktxTexture_vtbl".handle
-val _ktxTexture_vvtbl = "struct ktxTexture_vvtbl".handle
 
 val ktxTextureCreateFlags = typedef(ktx_uint32_t, "ktxTextureCreateFlags")
 val ktx_pack_uastc_flags = typedef(ktx_uint32_t, "ktx_pack_uastc_flags")
@@ -72,6 +70,9 @@ val ktxOrientation = struct(Module.KTX, "ktxOrientation", nativeName = "struct k
     ktxOrientationY("y", "orientation in Y")
     ktxOrientationZ("z", "orientation in Z")
 }
+
+val _ktxTexture_vtbl = struct(Module.KTX, "ktxTexture_vtbl", nativeName = "struct ktxTexture_vtbl")
+val _ktxTexture_vvtbl = "struct ktxTexture_vvtbl".opaque
 
 val ktxTexture = struct(Module.KTX, "ktxTexture", mutable = false) {
     documentation =
@@ -139,203 +140,23 @@ val PFNKTXITERCB = Module.KTX.callback {
     }
 }
 
-val PFNKTEXDESTROY = Module.KTX.callback {
-    void(
-        "PFNKTEXDESTROY",
-        "",
-
-        ktxTexture.p("This", ""),
-
-        nativeType = "PFNKTEXDESTROY"
-    )
-}
-
-val PFNKTEXGETIMAGEOFFSET = Module.KTX.callback {
-    ktx_error_code_e(
-        "PFNKTEXGETIMAGEOFFSET",
-        "",
-
-        ktxTexture.p("This", ""),
-        ktx_uint32_t("level", ""),
-        ktx_uint32_t("layer", ""),
-        ktx_uint32_t("faceSlice", ""),
-        Check(1)..ktx_size_t.p("pOffset", ""),
-
-        nativeType = "PFNKTEXGETIMAGEOFFSET"
-    )
-}
-
-val PFNKTEXGETDATASIZEUNCOMPRESSED = Module.KTX.callback {
-    ktx_size_t(
-        "PFNKTEXGETDATASIZEUNCOMPRESSED",
-        "",
-
-        ktxTexture.p("This", ""),
-
-        nativeType = "PFNKTEXGETDATASIZEUNCOMPRESSED"
-    )
-}
-
-val PFNKTEXGETIMAGESIZE = Module.KTX.callback {
-    ktx_size_t(
-        "PFNKTEXGETIMAGESIZE",
-        "",
-
-        ktxTexture.p("This", ""),
-        ktx_uint32_t("level", ""),
-
-        nativeType = "PFNKTEXGETIMAGESIZE"
-    )
-}
-
-val PFNKTEXITERATELEVELS = Module.KTX.callback {
-    ktx_error_code_e(
-        "PFNKTEXITERATELEVELS",
-        "",
-
-        ktxTexture.p("This", ""),
-        PFNKTXITERCB("iterCb", ""),
-        nullable..opaque_p("userdata", ""),
-
-        nativeType = "PFNKTEXITERATELEVELS"
-    )
-}
-
-val PFNKTEXITERATELOADLEVELFACES = Module.KTX.callback {
-    ktx_error_code_e(
-        "PFNKTEXITERATELOADLEVELFACES",
-        "",
-
-        ktxTexture.p("This", ""),
-        PFNKTXITERCB("iterCb", ""),
-        nullable..opaque_p("userdata", ""),
-
-        nativeType = "PFNKTEXITERATELOADLEVELFACES"
-    )
-}
-
-val PFNKTEXLOADIMAGEDATA = Module.KTX.callback {
-    ktx_error_code_e(
-        "PFNKTEXLOADIMAGEDATA",
-        "",
-
-        ktxTexture.p("This", ""),
-        ktx_uint8_t.p("pBuffer", ""),
-        AutoSize("pBuffer")..ktx_size_t("bufSize", ""),
-
-        nativeType = "PFNKTEXLOADIMAGEDATA"
-    )
-}
-
-val PFNKTEXNEEDSTRANSCODING = Module.KTX.callback {
-    ktx_bool_t(
-        "PFNKTEXNEEDSTRANSCODING",
-        "",
-
-        ktxTexture.p("This", ""),
-
-        nativeType = "PFNKTEXNEEDSTRANSCODING"
-    )
-}
-
-val PFNKTEXSETIMAGEFROMMEMORY = Module.KTX.callback {
-    ktx_error_code_e(
-        "PFNKTEXSETIMAGEFROMMEMORY",
-        "",
-
-        ktxTexture.p("This", ""),
-        ktx_uint32_t("level", ""),
-        ktx_uint32_t("layer", ""),
-        ktx_uint32_t("faceSlice", ""),
-        ktx_uint8_t.const.p("src", ""),
-        AutoSize("src")..ktx_size_t("srcSize", ""),
-
-        nativeType = "PFNKTEXSETIMAGEFROMMEMORY"
-    )
-}
-
-/*val PFNKTEXSETIMAGEFROMSTDIOSTREAM = Module.KTX.callback {
-    ktx_error_code_e(
-        "PFNKTEXSETIMAGEFROMSTDIOSTREAM",
-        "",
-
-        ktxTexture.p("This", ""),
-        ktx_uint32_t("level", ""),
-        ktx_uint32_t("layer", ""),
-        ktx_uint32_t("faceSlice", ""),
-        FILE.p("src", ""),
-        ktx_size_t("srcSize", ""),
-
-        nativeType = "PFNKTEXSETIMAGEFROMSTDIOSTREAM"
-    )
-}
-
-val PFNKTEXWRITETOSTDIOSTREAM = Module.KTX.callback {
-    ktx_error_code_e(
-        "PFNKTEXWRITETOSTDIOSTREAM",
-        "",
-
-        ktxTexture.p("This", ""),
-        FILE.p("dstsstr", ""),
-
-        nativeType = "PFNKTEXWRITETOSTDIOSTREAM"
-    )
-}*/
-
-val PFNKTEXWRITETONAMEDFILE = Module.KTX.callback {
-    ktx_error_code_e(
-        "PFNKTEXWRITETONAMEDFILE",
-        "",
-
-        ktxTexture.p("This", ""),
-        charUTF8.const.p.const("dstname", ""),
-
-        nativeType = "PFNKTEXWRITETONAMEDFILE"
-    )
-}
-
-val PFNKTEXWRITETOMEMORY = Module.KTX.callback {
-    ktx_error_code_e(
-        "PFNKTEXWRITETOMEMORY",
-        "",
-
-        ktxTexture.p("This", ""),
-        Check(1)..ktx_uint8_t.p.p("bytes", ""),
-        Check(1)..ktx_size_t.p("size", ""),
-
-        nativeType = "PFNKTEXWRITETOMEMORY"
-    )
-}
-
-val PFNKTEXWRITETOSTREAM = Module.KTX.callback {
-    ktx_error_code_e(
-        "PFNKTEXWRITETOSTREAM",
-        "",
-
-        ktxTexture.p("This", ""),
-        _ktxStream.p("dststr", ""),
-
-        nativeType = "PFNKTEXWRITETOSTREAM"
-    )
-}
-
 val ktxTexture_vtbl = struct(Module.KTX, "ktxTexture_vtbl", nativeName = "struct ktxTexture_vtbl", mutable = false) {
     documentation = " Table of virtual {@code ktxTexture} methods."
 
-    PFNKTEXDESTROY("Destroy", "")
-    PFNKTEXGETIMAGEOFFSET("GetImageOffset", "")
-    PFNKTEXGETDATASIZEUNCOMPRESSED("GetDataSizeUncompressed", "")
-    PFNKTEXGETIMAGESIZE("GetImageSize", "")
-    PFNKTEXITERATELEVELS("IterateLevels", "")
-    PFNKTEXITERATELOADLEVELFACES("IterateLoadLevelFaces", "")
-    PFNKTEXNEEDSTRANSCODING("NeedsTranscoding", "")
-    PFNKTEXLOADIMAGEDATA("LoadImageData", "")
-    PFNKTEXSETIMAGEFROMMEMORY("SetImageFromMemory", "")
-    "PFNKTEXSETIMAGEFROMSTDIOSTREAM".opaque.p("SetImageFromStdioStream", "")
-    "PFNKTEXWRITETOSTDIOSTREAM".opaque.p("WriteToStdioStream", "")
-    PFNKTEXWRITETONAMEDFILE("WriteToNamedFile", "")
-    PFNKTEXWRITETOMEMORY("WriteToMemory", "")
-    PFNKTEXWRITETOSTREAM("WriteToStream", "")
+    "PFNKTEXDESTROY".handle("Destroy", "")
+    "PFNKTEXGETIMAGEOFFSET".handle("GetImageOffset", "")
+    "PFNKTEXGETDATASIZEUNCOMPRESSED".handle("GetDataSizeUncompressed", "")
+    "PFNKTEXGETIMAGESIZE".handle("GetImageSize", "")
+    "PFNKTEXITERATELEVELS".handle("IterateLevels", "")
+    "PFNKTEXITERATELOADLEVELFACES".handle("IterateLoadLevelFaces", "")
+    "PFNKTEXNEEDSTRANSCODING".handle("NeedsTranscoding", "")
+    "PFNKTEXLOADIMAGEDATA".handle("LoadImageData", "")
+    "PFNKTEXSETIMAGEFROMMEMORY".handle("SetImageFromMemory", "")
+    "PFNKTEXSETIMAGEFROMSTDIOSTREAM".handle("SetImageFromStdioStream", "")
+    "PFNKTEXWRITETOSTDIOSTREAM".handle("WriteToStdioStream", "")
+    "PFNKTEXWRITETONAMEDFILE".handle("WriteToNamedFile", "")
+    "PFNKTEXWRITETOMEMORY".handle("WriteToMemory", "")
+    "PFNKTEXWRITETOSTREAM".handle("WriteToStream", "")
 }
 
 val ktxTexture1 = struct(Module.KTX, "ktxTexture1", mutable = false) {
