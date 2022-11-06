@@ -15,6 +15,7 @@
     <orderEntry type="module" module-name="templates.egl" />
     <orderEntry type="module" module-name="templates.fmod" />
     <orderEntry type="module" module-name="templates.glfw" />
+    <orderEntry type="module" module-name="templates.harfbuzz" />
     <orderEntry type="module" module-name="templates.jawt" />
     <orderEntry type="module" module-name="templates.jemalloc" />
     <orderEntry type="module" module-name="templates.ktx" />

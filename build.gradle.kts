@@ -109,6 +109,11 @@ enum class Artifacts(
         "A multi-platform library for OpenGL, OpenGL ES and Vulkan development on the desktop. It provides a simple API for creating windows, contexts and surfaces, receiving input and events.",
         *Platforms.ALL
     ),
+    HARFBUZZ(
+        "lwjgl-harfbuzz", "LWJGL - HarfBuzz bindings",
+        "A text shaping library that allows programs to convert a sequence of Unicode input into properly formatted and positioned glyph output — for any writing system and language.",
+        *Platforms.ALL
+    ),
     JAWT(
         "lwjgl-jawt", "LWJGL - JAWT bindings",
         "The AWT native interface."

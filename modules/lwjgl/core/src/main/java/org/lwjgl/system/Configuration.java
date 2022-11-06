@@ -458,6 +458,11 @@ public class Configuration<T> {
      */
     public static final Configuration<Boolean> GLFW_CHECK_THREAD0 = new Configuration<>("org.lwjgl.glfw.checkThread0", StateInit.BOOLEAN);
 
+    // -- HARFBUZZ
+
+    /** Similar to {@link #LIBRARY_NAME} for the HarfBuzz library (<b>org.lwjgl.harfbuzz.libname</b>). */
+    public static final Configuration<String> HARFBUZZ_LIBRARY_NAME = new Configuration<>("org.lwjgl.harfbuzz.libname", StateInit.STRING);
+
     // -- JAWT
 
     /** Similar to {@link #LIBRARY_NAME} for the jawt library (<b>org.lwjgl.system.jawt.libname</b>). */

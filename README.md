@@ -143,6 +143,7 @@ improve the chances of a quick and useful response.
 |-------|-----------|
 |[Assimp](http://www.assimp.org/)|A portable Open Source library to import various well-known 3D model formats in a uniform manner.|
 |[bgfx](https://bkaradzic.github.io/bgfx/)|Cross-platform, graphics API agnostic, “Bring Your Own Engine/Framework” style rendering library, licensed under permissive BSD-2 clause open source license.|
+|[HarfBuzz](https://harfbuzz.github.io/)|A text shaping library that allows programs to convert a sequence of Unicode input into properly formatted and positioned glyph output — for any writing system and language.|
 |[meshoptimizer](https://github.com/zeux/meshoptimizer)|A mesh optimization library that makes meshes smaller and faster to render.|
 |[NanoSVG](https://github.com/memononen/nanosvg)|A simple stupid SVG parser.|
 |[NanoVG](https://github.com/memononen/nanovg)|A small antialiased vector graphics rendering library for OpenGL.|

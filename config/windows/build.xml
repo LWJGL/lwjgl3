@@ -427,6 +427,7 @@ EXPORTS
             <update-dependency module="bgfx" artifact="bgfx.dll"/>
             <update-dependency module="jemalloc" artifact="jemalloc.dll"/>
             <update-dependency module="glfw" artifact="glfw.dll"/>
+            <update-dependency module="harfbuzz" artifact="harfbuzz.dll"/>
             <update-dependency module="ktx" artifact="ktx.dll"/>
             <update-dependency module="openal" artifact="OpenAL.dll"/>
             <update-dependency module="openvr" artifact="openvr_api.dll"/>

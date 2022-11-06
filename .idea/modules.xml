@@ -19,6 +19,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.egl.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.egl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.fmod.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.fmod.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.glfw.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.glfw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.harfbuzz.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.harfbuzz.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.jawt.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.jawt.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.jemalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.jemalloc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/templates/templates.ktx.iml" filepath="$PROJECT_DIR$/.idea/modules/templates/templates.ktx.iml" />
@@ -69,6 +70,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.egl.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.egl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.fmod.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.fmod.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.glfw.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.glfw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.harfbuzz.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.harfbuzz.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.jawt.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.jawt.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.jemalloc.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.jemalloc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.ktx.iml" filepath="$PROJECT_DIR$/.idea/modules/lwjgl/lwjgl.ktx.iml" />

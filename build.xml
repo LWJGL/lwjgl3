@@ -492,6 +492,7 @@
             <compileBinding binding="cuda"/>
             <compileBinding binding="egl"/>
             <compileBinding binding="fmod"/>
+            <compileBinding binding="harfbuzz"/>
             <compileBinding binding="jawt"/>
             <compileBinding binding="jemalloc"/>
             <compileBinding binding="libdivide"/>
@@ -837,6 +838,7 @@
             <include name="org/lwjgl/demo/system/linux/liburing/**" if:set="platform.linux"/>
 
             <include name="org/lwjgl/demo/util/*.java"/>
+            <include name="org/lwjgl/demo/util/harfbuzz/**" if:true="${binding.harfbuzz}"/>
             <include name="org/lwjgl/demo/util/ktx/**" if:true="${binding.ktx}"/>
             <include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
             <include name="org/lwjgl/demo/util/lz4/**" if:true="${binding.lz4}"/>
@@ -1596,6 +1598,9 @@
                 <get-release platform="windows" arch="arm64" file="glfw.dll.git"/>
             </natives>
         </release-module>
+
+        <!-- HarfBuzz -->
+        <release-module name="harfbuzz" native-library="harfbuzz" title="HarfBuzz" if:true="${binding.harfbuzz}"/>
 
         <!-- JAWT -->
         <release-module name="jawt" title="JAWT" if:true="${binding.jawt}"/>

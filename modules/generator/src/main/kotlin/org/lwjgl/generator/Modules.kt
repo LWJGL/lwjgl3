@@ -160,6 +160,17 @@ enum class Module(
         The other window toolkit must be initialized (e.g. with AWT's {@code Toolkit.getDefaultToolkit()}) before #Init() is called.
         """
     ),
+    HARFBUZZ(
+        "harfbuzz",
+        "org.lwjgl.util.harfbuzz",
+        """
+        Contains bindings to the ${url("https://harfbuzz.github.io/", "HarfBuzz")}, a text shaping library.
+
+        Using the HarfBuzz library allows programs to convert a sequence of Unicode input into properly formatted and positioned glyph output — for any writing
+        system and language.
+        """,
+        arrayOverloads = false
+    ),
     JAWT(
         "jawt",
         "org.lwjgl.system.jawt",
