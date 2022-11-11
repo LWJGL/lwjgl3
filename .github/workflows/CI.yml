@@ -92,6 +92,7 @@ jobs:
             then
               sudo sed -i 's/amd64,i386/armhf,arm64/' /etc/apt/sources.list.d/ports.list
             elif [[ "${{matrix.ARCH}}" == "ppc64el" ]]
+            then
               sudo sed -i 's/amd64,i386/ppc64el/' /etc/apt/sources.list.d/ports.list
             fi
             sudo sed -i 's#http://.*/ubuntu#http://ports.ubuntu.com/ubuntu-ports#' /etc/apt/sources.list.d/ports.list
