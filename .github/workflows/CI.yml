@@ -88,7 +88,12 @@ jobs:
           then
             sudo sed -i 's/deb http/deb [arch=amd64,i386] http/' /etc/apt/sources.list
             sudo grep "ubuntu.com/ubuntu" /etc/apt/sources.list | sudo tee /etc/apt/sources.list.d/ports.list
-            sudo sed -i 's/amd64,i386/armhf,arm64/' /etc/apt/sources.list.d/ports.list
+            if [[ "${{matrix.ARCH}}" == "arm32" || "${{matrix.ARCH}}" == "arm64" ]]
+            then
+              sudo sed -i 's/amd64,i386/armhf,arm64/' /etc/apt/sources.list.d/ports.list
+            elif [[ "${{matrix.ARCH}}" == "ppc64el" ]]
+              sudo sed -i 's/amd64,i386/ppc64el/' /etc/apt/sources.list.d/ports.list
+            fi
             sudo sed -i 's#http://.*/ubuntu#http://ports.ubuntu.com/ubuntu-ports#' /etc/apt/sources.list.d/ports.list
           else
             sudo apt-get -yq install gcc-mips64el-linux-gnuabi64 libc6-dev-mips64el-cross
