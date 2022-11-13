@@ -36,13 +36,14 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     </condition>
 
     <!-- Normalize os.arch -->
+    <condition property="build.arch" value="ppc64le" unless:set="build.arch"><and><not><isset property="build.arch.arm"/></not><istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="arm64" unless:set="build.arch"><and>     <isset property="build.arch.arm"/>      <istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="arm32" unless:set="build.arch"><and>     <isset property="build.arch.arm"/>      <isfalse value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="x64"   unless:set="build.arch"><and><not><isset property="build.arch.arm"/></not><istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="x86"   unless:set="build.arch"><and><not><isset property="build.arch.arm"/></not><isfalse value="${is64Bit}"/></and></condition>
 
-    <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32">
-        <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32)$"/></not></condition>
+    <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32, ppc64le">
+        <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32|ppc64le)$"/></not></condition>
     </fail>
 
     <property name="build.arch.${build.arch}" value="true"/>
