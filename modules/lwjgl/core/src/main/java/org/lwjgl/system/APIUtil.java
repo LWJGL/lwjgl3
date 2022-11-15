@@ -80,10 +80,20 @@ public final class APIUtil {
      *
      * @param msg the message to print
      */
-    public static void apiLog(@Nullable CharSequence msg) {
+    public static void apiLog(CharSequence msg) {
         if (DEBUG) {
-            DEBUG_STREAM.print("[LWJGL] ");
-            DEBUG_STREAM.println(msg);
+            DEBUG_STREAM.print("[LWJGL] " + msg + "\n");
+        }
+    }
+
+    /**
+     * Same as {@link #apiLog}, but replaces the LWJGL prefix with a tab character.
+     *
+     * @param msg the message to print, in continuation of a previous message
+     */
+    public static void apiLogMore(CharSequence msg) {
+        if (DEBUG) {
+            DEBUG_STREAM.print("\t" + msg + "\n");
         }
     }
 
