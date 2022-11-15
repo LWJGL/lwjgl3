@@ -128,7 +128,7 @@ final class SharedLibraryLoader {
             if (canWrite(root, file, resource, load)) {
                 return file;
             }
-            apiLog(String.format("\tThe path %s is not accessible. Trying other paths.", override));
+            apiLogMore("The path " + override + " is not accessible. Trying other paths.");
         }
 
         String version = Version.getVersion().replace(' ', '-');
@@ -207,7 +207,7 @@ final class SharedLibraryLoader {
             ) {
                 if (crc(source) == crc(target)) {
                     if (Configuration.DEBUG_LOADER.get(false)) {
-                        apiLog(String.format("\tFound at: %s", file));
+                        apiLogMore("Found at: " + file);
                     }
                     return lock(file);
                 }
@@ -215,10 +215,10 @@ final class SharedLibraryLoader {
         }
 
         // If file doesn't exist or the CRC doesn't match, extract it to the temp dir.
-        apiLog(String.format("\tExtracting: %s", resource.getPath()));
+        apiLogMore("Extracting: " + resource.getPath());
         //noinspection FieldAccessNotGuarded (already inside the lock)
         if (extractPath == null) {
-            apiLog(String.format("\t        to: %s", file));
+            apiLogMore("        to: " + file);
         }
 
         Files.createDirectories(file.getParent());
@@ -242,7 +242,7 @@ final class SharedLibraryLoader {
 
             if (fc.tryLock(0L, Long.MAX_VALUE, true) == null) {
                 if (Configuration.DEBUG_LOADER.get(false)) {
-                    apiLog("\tFile is locked by another process, waiting...");
+                    apiLogMore("File is locked by another process, waiting...");
                 }
 
                 fc.lock(0L, Long.MAX_VALUE, true); // this will block until the file is locked

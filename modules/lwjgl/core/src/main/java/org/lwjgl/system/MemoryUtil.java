@@ -152,7 +152,7 @@ public final class MemoryUtil {
 
             apiLog("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
             if (debug && !Configuration.DEBUG_MEMORY_ALLOCATOR_FAST.get(false)) {
-                apiLog("\tReminder: enable Configuration.DEBUG_MEMORY_ALLOCATOR_FAST for low overhead allocation tracking.");
+                apiLogMore("Reminder: enable Configuration.DEBUG_MEMORY_ALLOCATOR_FAST for low overhead allocation tracking.");
             }
         }
     }

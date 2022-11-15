@@ -157,26 +157,36 @@ final class MemoryManage {
 
                 boolean missingStacktrace = false;
                 for (Allocation allocation : ALLOCATIONS.keySet()) {
-                    DEBUG_STREAM.format(
-                        "[LWJGL] %d bytes leaked, thread %d (%s), address: 0x%s\n",
-                        allocation.size,
-                        allocation.threadId,
-                        THREADS.get(allocation.threadId),
-                        Long.toHexString(allocation.address).toUpperCase()
-                    );
+                    StringBuilder sb = new StringBuilder(512);
+
+                    sb
+                        .append("[LWJGL] ")
+                        .append(allocation.size)
+                        .append(" bytes leaked, thread ")
+                        .append(allocation.threadId)
+                        .append(" (")
+                        .append(THREADS.get(allocation.threadId))
+                        .append("), address: 0x")
+                        .append(Long.toHexString(allocation.address).toUpperCase())
+                        .append("\n");
 
                     StackTraceElement[] stackTrace = allocation.getElements();
                     if (stackTrace != null) {
                         for (Object el : stackTrace) {
-                            DEBUG_STREAM.format("\tat %s\n", el.toString());
+                            sb
+                                .append("\tat ")
+                                .append(el.toString())
+                                .append("\n");
                         }
                     } else {
                         missingStacktrace = true;
                     }
+
+                    DEBUG_STREAM.print(sb);
                 }
 
                 if (missingStacktrace) {
-                    DEBUG_STREAM.println("[LWJGL] Reminder: disable Configuration.DEBUG_MEMORY_ALLOCATOR_FAST to get stacktraces of leaking allocations.");
+                    DEBUG_STREAM.print("[LWJGL] Reminder: disable Configuration.DEBUG_MEMORY_ALLOCATOR_FAST to get stacktraces of leaking allocations.\n");
                 }
             }));
         }
@@ -271,21 +281,32 @@ final class MemoryManage {
             throw new IllegalStateException("The memory address specified is already being tracked: 0x" + addressHex);
         }
         private static void trackAbortPrint(Allocation allocation, String name, String address) {
-            DEBUG_STREAM.format(
-                "[LWJGL] %s allocation with size %d, thread %d (%s), address: 0x%s\n",
-                name,
-                allocation.size,
-                allocation.threadId,
-                THREADS.get(allocation.threadId),
-                address
-            );
+            StringBuilder sb = new StringBuilder(512);
+
+            sb
+                .append("[LWJGL] ")
+                .append(name)
+                .append(" allocation with size ")
+                .append(allocation.size)
+                .append(", thread ")
+                .append(allocation.threadId)
+                .append(" (")
+                .append(THREADS.get(allocation.threadId))
+                .append("), address: 0x")
+                .append(address)
+                .append("\n");
 
             StackTraceElement[] stackTrace = allocation.getElements();
             if (stackTrace != null) {
                 for (Object el : stackTrace) {
-                    DEBUG_STREAM.format("\tat %s\n", el.toString());
+                    sb
+                        .append("\tat ")
+                        .append(el.toString())
+                        .append("\n");
                 }
             }
+
+            DEBUG_STREAM.print(sb);
         }
 
         static long untrack(long address) {
