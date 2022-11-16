@@ -6,6 +6,7 @@ package org.lwjgl.extract
 
 import org.lwjgl.llvm.*
 import org.lwjgl.llvm.ClangIndex.*
+import org.lwjgl.system.*
 import org.lwjgl.system.MemoryStack.*
 import org.lwjgl.system.MemoryUtil.*
 import java.io.*
@@ -61,6 +62,8 @@ internal class ExtractionContext(val header: Header, val options: Options, error
 
     private val index = clang_createIndex(false, false)
     private val sources = HashMap<String, String>()
+
+    private val macroExpansions = HashMap<Int, String>()
 
     val tu = stackPush().use { stack ->
         val pp = stack.mallocPointer(1)
@@ -136,6 +139,15 @@ internal class ExtractionContext(val header: Header, val options: Options, error
         return hasError
     }
 
+    internal fun saveMacroExpansion(stack: MemoryStack, cursor: CXCursor) {
+        val loc = clang_getCursorLocation(cursor, CXSourceLocation.malloc(stack))
+        val offset = stack.mallocInt(1)
+
+        clang_getExpansionLocation(loc, null, null, null, offset)
+
+        macroExpansions[offset[0]] = getSource(cursor)
+    }
+
     internal fun getSource(cursor: CXCursor): String {
         return stackPush().use { stack ->
             val start = stack.mallocInt(1)
@@ -148,18 +160,23 @@ internal class ExtractionContext(val header: Header, val options: Options, error
                 clang_getSpellingLocation(clang_getRangeEnd(range, loc), null, null, null, end)
             }
 
-            stack.mallocPointer(1)
-                .let { pp ->
+            val startIndex = start[0]
+            val endIndex = end[0]
+            if (startIndex <= endIndex) {
+                val file = stack.mallocPointer(1).let { pp ->
                     clang_getFileLocation(loc, pp, null, null, null)
                     pp[0]
                 }
-                .let { file ->
-                    sources
-                        .getOrPut(clang_getFileName(file, stack.str).str) {
-                            memUTF8(clang_getFileContents(clang_Cursor_getTranslationUnit(cursor), file)!!)
-                        }
-                        .substring(start[0], end[0])
-                }
+                sources
+                    .getOrPut(clang_getFileName(file, stack.str).str) {
+                        memUTF8(clang_getFileContents(clang_Cursor_getTranslationUnit(cursor), file)!!)
+                    }
+                    .substring(startIndex, endIndex)
+            } else {
+                // There is probably a better way to detect macro expansions.
+                // For now, this works fine because clang_getCursorExtent() returns invalid ranges for macro expansions.
+                macroExpansions[endIndex]!!
+            }
         }
     }
 }
@@ -332,8 +349,15 @@ internal fun parse(
                         }
                     }
                     CXCursor_UnexposedDecl,
-                    CXCursor_InclusionDirective,
+                    CXCursor_InclusionDirective -> {
+                    }
                     CXCursor_MacroExpansion  -> {
+                        // Because of preprocessing, macros are expanded before parsing and stored as top-level elements.
+                        // This is the only chance to store the fully expanded source.
+
+                        // When the macro is encountered in the AST, the (correct) source is not available anymore. However,
+                        // the expansion location is available, so we can use that to retrieve it.
+                        context.saveMacroExpansion(frame, cursor) // creates mapping: expansion location -> source
                     }
                     CXCursor_VarDecl         -> {
                         errors.println("----------[ SKIPPED ]----------")
