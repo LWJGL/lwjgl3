@@ -220,13 +220,10 @@ public class AIScene extends Struct implements NativeResource {
     /** @return the value of the {@code mNumSkeletons} field. */
     @NativeType("unsigned int")
     public int mNumSkeletons() { return nmNumSkeletons(address()); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code mSkeletons} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code mSkeletons} field. */
+    @Nullable
     @NativeType("struct aiSkeleton **")
-    public PointerBuffer mSkeletons(int capacity) { return nmSkeletons(address(), capacity); }
+    public PointerBuffer mSkeletons() { return nmSkeletons(address()); }
 
     /** Sets the specified value to the {@link #mFlags} field. */
     public AIScene mFlags(@NativeType("unsigned int") int value) { nmFlags(address(), value); return this; }
@@ -250,10 +247,8 @@ public class AIScene extends Struct implements NativeResource {
     public AIScene mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
     /** Passes the {@link #mName} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIScene mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-    /** Sets the specified value to the {@code mNumSkeletons} field. */
-    public AIScene mNumSkeletons(@NativeType("unsigned int") int value) { nmNumSkeletons(address(), value); return this; }
     /** Sets the address of the specified {@link PointerBuffer} to the {@code mSkeletons} field. */
-    public AIScene mSkeletons(@NativeType("struct aiSkeleton **") PointerBuffer value) { nmSkeletons(address(), value); return this; }
+    public AIScene mSkeletons(@Nullable @NativeType("struct aiSkeleton **") PointerBuffer value) { nmSkeletons(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public AIScene set(
@@ -267,8 +262,7 @@ public class AIScene extends Struct implements NativeResource {
         @Nullable PointerBuffer mCameras,
         @Nullable AIMetaData mMetaData,
         AIString mName,
-        int mNumSkeletons,
-        PointerBuffer mSkeletons
+        @Nullable PointerBuffer mSkeletons
     ) {
         mFlags(mFlags);
         mRootNode(mRootNode);
@@ -280,7 +274,6 @@ public class AIScene extends Struct implements NativeResource {
         mCameras(mCameras);
         mMetaData(mMetaData);
         mName(mName);
-        mNumSkeletons(mNumSkeletons);
         mSkeletons(mSkeletons);
 
         return this;
@@ -464,8 +457,8 @@ public class AIScene extends Struct implements NativeResource {
     public static AIString nmName(long struct) { return AIString.create(struct + AIScene.MNAME); }
     /** Unsafe version of {@link #mNumSkeletons}. */
     public static int nmNumSkeletons(long struct) { return UNSAFE.getInt(null, struct + AIScene.MNUMSKELETONS); }
-    /** Unsafe version of {@link #mSkeletons(int) mSkeletons}. */
-    public static PointerBuffer nmSkeletons(long struct, int capacity) { return memPointerBuffer(memGetAddress(struct + AIScene.MSKELETONS), capacity); }
+    /** Unsafe version of {@link #mSkeletons() mSkeletons}. */
+    @Nullable public static PointerBuffer nmSkeletons(long struct) { return memPointerBufferSafe(memGetAddress(struct + AIScene.MSKELETONS), nmNumSkeletons(struct)); }
     public static ByteBuffer nmPrivate(long struct, int capacity) { return memByteBuffer(memGetAddress(struct + AIScene.MPRIVATE), capacity); }
 
     /** Unsafe version of {@link #mFlags(int) mFlags}. */
@@ -500,10 +493,10 @@ public class AIScene extends Struct implements NativeResource {
     public static void nmMetaData(long struct, @Nullable AIMetaData value) { memPutAddress(struct + AIScene.MMETADATA, memAddressSafe(value)); }
     /** Unsafe version of {@link #mName(AIString) mName}. */
     public static void nmName(long struct, AIString value) { memCopy(value.address(), struct + AIScene.MNAME, AIString.SIZEOF); }
-    /** Unsafe version of {@link #mNumSkeletons(int) mNumSkeletons}. */
+    /** Sets the specified value to the {@code mNumSkeletons} field of the specified {@code struct}. */
     public static void nmNumSkeletons(long struct, int value) { UNSAFE.putInt(null, struct + AIScene.MNUMSKELETONS, value); }
     /** Unsafe version of {@link #mSkeletons(PointerBuffer) mSkeletons}. */
-    public static void nmSkeletons(long struct, PointerBuffer value) { memPutAddress(struct + AIScene.MSKELETONS, memAddress(value)); }
+    public static void nmSkeletons(long struct, @Nullable PointerBuffer value) { memPutAddress(struct + AIScene.MSKELETONS, memAddressSafe(value)); nmNumSkeletons(struct, value == null ? 0 : value.remaining()); }
     public static void nmPrivate(long struct, ByteBuffer value) { memPutAddress(struct + AIScene.MPRIVATE, memAddress(value)); }
 
     /**
@@ -538,7 +531,9 @@ public class AIScene extends Struct implements NativeResource {
         if (mMetaData != NULL) {
             AIMetaData.validate(mMetaData);
         }
-        check(memGetAddress(struct + AIScene.MSKELETONS));
+        if (nmNumSkeletons(struct) != 0) {
+            check(memGetAddress(struct + AIScene.MSKELETONS));
+        }
     }
 
     // -----------------------------------
@@ -638,13 +633,10 @@ public class AIScene extends Struct implements NativeResource {
         /** @return the value of the {@code mNumSkeletons} field. */
         @NativeType("unsigned int")
         public int mNumSkeletons() { return AIScene.nmNumSkeletons(address()); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code mSkeletons} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code mSkeletons} field. */
+        @Nullable
         @NativeType("struct aiSkeleton **")
-        public PointerBuffer mSkeletons(int capacity) { return AIScene.nmSkeletons(address(), capacity); }
+        public PointerBuffer mSkeletons() { return AIScene.nmSkeletons(address()); }
 
         /** Sets the specified value to the {@link AIScene#mFlags} field. */
         public AIScene.Buffer mFlags(@NativeType("unsigned int") int value) { AIScene.nmFlags(address(), value); return this; }
@@ -668,10 +660,8 @@ public class AIScene extends Struct implements NativeResource {
         public AIScene.Buffer mName(@NativeType("struct aiString") AIString value) { AIScene.nmName(address(), value); return this; }
         /** Passes the {@link AIScene#mName} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIScene.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-        /** Sets the specified value to the {@code mNumSkeletons} field. */
-        public AIScene.Buffer mNumSkeletons(@NativeType("unsigned int") int value) { AIScene.nmNumSkeletons(address(), value); return this; }
         /** Sets the address of the specified {@link PointerBuffer} to the {@code mSkeletons} field. */
-        public AIScene.Buffer mSkeletons(@NativeType("struct aiSkeleton **") PointerBuffer value) { AIScene.nmSkeletons(address(), value); return this; }
+        public AIScene.Buffer mSkeletons(@Nullable @NativeType("struct aiSkeleton **") PointerBuffer value) { AIScene.nmSkeletons(address(), value); return this; }
 
     }
 

@@ -1085,7 +1085,7 @@ val aiScene = struct(Module.ASSIMP, "AIScene", nativeName = "struct aiScene") {
     )
     aiString("mName", "The name of the scene itself.")
 
-    unsigned_int("mNumSkeletons", "")
+    AutoSize("mSkeletons", optional = true)..unsigned_int("mNumSkeletons", "")
     aiSkeleton.p.p("mSkeletons", "")
 
     char.p("mPrivate", "Internal use only, do not touch!").private()
