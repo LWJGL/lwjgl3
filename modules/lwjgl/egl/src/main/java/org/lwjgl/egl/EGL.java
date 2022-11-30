@@ -96,7 +96,7 @@ public final class EGL {
                     if (address == NULL) {
                         address = library.getFunctionAddress(functionName);
                         if (address == NULL && Checks.DEBUG_FUNCTIONS) {
-                            apiLog("Failed to locate address for EGL function " + memASCII(functionName));
+                            apiLogMissing("EGL", functionName);
                         }
                     }
 

@@ -145,7 +145,7 @@ public final class AL {
         FunctionProvider functionProvider = functionName -> {
             long address = invokePP(memAddress(functionName), alGetProcAddress);
             if (address == NULL && Checks.DEBUG_FUNCTIONS) {
-                apiLog("Failed to locate address for AL function " + memASCII(functionName));
+                apiLogMissing("AL", functionName);
             }
             return address;
         };

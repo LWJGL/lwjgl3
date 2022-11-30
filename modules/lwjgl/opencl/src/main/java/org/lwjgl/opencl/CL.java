@@ -165,7 +165,7 @@ public final class CL {
             if (address == NULL) {
                 address = library.getFunctionAddress(functionName);
                 if (address == NULL && Checks.DEBUG_FUNCTIONS) {
-                    apiLog("Failed to locate address for CL function " + memASCII(functionName));
+                    apiLogMissing("CL", functionName);
                 }
             }
 

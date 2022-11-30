@@ -97,6 +97,13 @@ public final class APIUtil {
         }
     }
 
+    public static void apiLogMissing(String api, ByteBuffer functionName) {
+        if (DEBUG) {
+            String function = memASCII(functionName, functionName.remaining() - 1);
+            DEBUG_STREAM.print("[LWJGL] Failed to locate address for " + api + " function " + function + "\n");
+        }
+    }
+
     public static String apiFindLibrary(String start, String name) {
         String libName = Platform.get().mapLibraryName(name);
         try (Stream<Path> paths = Files.find(

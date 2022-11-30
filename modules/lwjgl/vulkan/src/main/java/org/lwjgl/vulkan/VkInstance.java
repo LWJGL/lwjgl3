@@ -39,7 +39,7 @@ public class VkInstance extends DispatchableHandleInstance {
         return new VKCapabilitiesInstance(functionName -> {
             long address = callPPP(handle, memAddress(functionName), VK.getGlobalCommands().vkGetInstanceProcAddr);
             if (address == NULL && Checks.DEBUG_FUNCTIONS) {
-                apiLog("Failed to locate address for VK instance function " + memASCII(functionName));
+                apiLogMissing("VK instance", functionName);
             }
             return address;
         }, apiVersion, VK.getEnabledExtensionSet(apiVersion, ci.ppEnabledExtensionNames()), getAvailableDeviceExtensions(handle));

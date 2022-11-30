@@ -158,7 +158,7 @@ public final class GL {
                     if (address == NULL) {
                         address = library.getFunctionAddress(functionName);
                         if (address == NULL && DEBUG_FUNCTIONS) {
-                            apiLog("Failed to locate address for GL function " + memASCII(functionName));
+                            apiLogMissing("GL", functionName);
                         }
                     }
 
