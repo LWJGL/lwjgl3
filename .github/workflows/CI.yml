@@ -12,7 +12,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   S3_PARAMS: --cache-control "public,must-revalidate,proxy-revalidate,max-age=0"
-  ANT_OPTS: -Xmx1G
+  ANT_OPTS: -Xmx4G
 
 jobs:
   check-kotlinc-cache:
@@ -21,7 +21,7 @@ jobs:
     env:
       JAVA_HOME: jdk8
       LWJGL_BUILD_TYPE: nightly
-      ANT_OPTS: -Xmx2G
+      ANT_OPTS: -Xmx4G
     steps:
       - uses: actions/checkout@v3
         with:
