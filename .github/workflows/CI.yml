@@ -47,7 +47,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ARCH: [x64, arm32, arm64, ppc64el]
+        ARCH: [ppc64el]
+#         ARCH: [x64, arm32, arm64, ppc64el]
         include:
           - ARCH: x64
             PACKAGES: xorg-dev libgtk-3-dev libglu-dev libgl1-mesa-glx libx11-dev
