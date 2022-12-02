@@ -281,7 +281,7 @@
 
             <srcfile/>
 
-            <arg value="s3://lwjgl-build/ci/"/>
+            <arg value="s3://darren-lwjgl-build/ci/"/>
             <arg line='--cache-control "public, must-revalidate, proxy-revalidate, max-age=0"'/>
 
             <fileset file="templates.jar"/>
@@ -1032,7 +1032,7 @@
 
             <srcfile/>
 
-            <arg value="s3://lwjgl-build/${build.type}/${platform.remote}/${build.arch}/"/>
+            <arg value="s3://darren-lwjgl-build/${build.type}/${platform.remote}/${build.arch}/"/>
             <arg line='--cache-control "public, must-revalidate, proxy-revalidate, max-age=0"'/>
 
             <fileset dir=".">
