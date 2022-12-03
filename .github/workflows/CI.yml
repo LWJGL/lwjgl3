@@ -92,7 +92,7 @@ jobs:
             if [[ "${{matrix.ARCH}}" == "arm32" || "${{matrix.ARCH}}" == "arm64" ]]
             then
               sudo sed -i 's/amd64,i386/armhf,arm64/' /etc/apt/sources.list.d/ports.list
-            elif [[ "${{matrix.ARCH}}" == "ppc64el" ]]
+            elif [[ "${{matrix.ARCH}}" == "ppc64le" ]]
             then
               sudo sed -i 's/amd64,i386/ppc64el,ppc64el/' /etc/apt/sources.list.d/ports.list
             fi
