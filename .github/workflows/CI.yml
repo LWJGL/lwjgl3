@@ -31,10 +31,10 @@ jobs:
           mkdir jdk8
           tar xf jdk8.tar.gz -C jdk8 --strip-components 1
         name: Download JDK
-      - run: ant -emacs hydrate-kotlinc
-        id: hydration
-        name: Check generator hydration
-        continue-on-error: true
+#       - run: ant -emacs hydrate-kotlinc
+#         id: hydration
+#         name: Check generator hydration
+#         continue-on-error: true
       - run: |
           git clone https://github.com/LWJGL-CI/OculusSDK.git ../OculusSDK
           ant -emacs cache-kotlinc -Drevision="HEAD~2..HEAD~1"
@@ -110,7 +110,7 @@ jobs:
       - run: sudo apt-get -yq -f --allow-unauthenticated --no-install-suggests --no-install-recommends install ${{matrix.CROSS_PACKAGES}} -o Dpkg::Options::="--force-overwrite"
         if: contains(matrix.ARCH, 'x64') != true
         name: Install cross-compilation dependencies
-      - run: ant -emacs clean-generated generate
+      - run: ant -emacs compile-templates clean-generated generate
         name: Hydrate generator
       - run: ant -emacs compile
         name: Build Java
