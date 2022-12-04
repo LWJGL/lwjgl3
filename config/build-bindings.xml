@@ -48,7 +48,12 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.opencl" value="true"/>
     <property name="binding.opengl" value="true"/>
     <property name="binding.opengles" value="true"/>
-    <condition property="binding.openvr" value="false" else="true"><isset property="build.arch.arm"/></condition>
+    <condition property="binding.openvr" value="false" else="true">
+        <or>
+            <isset property="build.arch.arm"/>
+            <isset property="build.arch.ppc64le"/>
+        </or>
+    </condition>
     <property name="binding.openxr" value="true"/>
     <property name="binding.opus" value="true"/>
     <property name="binding.par" value="true"/>
