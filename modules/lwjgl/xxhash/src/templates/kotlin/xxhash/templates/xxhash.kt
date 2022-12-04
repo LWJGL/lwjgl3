@@ -11,7 +11,7 @@ val xxhash = "XXHash".nativeClass(Module.XXHASH, prefix = "XXH", prefixMethod = 
     nativeDirective(
         """DISABLE_WARNINGS()
 #include "lwjgl_malloc.h"
-#if defined(LWJGL_arm64) || defined(LWJGL_arm32) || defined(LWJGL_powerpc64le)
+#if defined(LWJGL_arm64) || defined(LWJGL_arm32) || defined(LWJGL_ppc64le)
     #define XXH_INLINE_ALL
     #include "xxhash.h"
 #else

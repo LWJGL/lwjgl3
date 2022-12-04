@@ -7,7 +7,7 @@
 
     <property name="gcc.prefix" value="aarch64-linux-gnu-" if:set="build.arch.arm64"/>
     <property name="gcc.prefix" value="arm-linux-gnueabihf-" if:set="build.arch.arm32"/>
-    <property name="gcc.prefix" value="powerpc64le-linux-gnu-" if:set="build.arch.powerpc64le"/>
+    <property name="gcc.prefix" value="powerpc64le-linux-gnu-" if:set="build.arch.ppc64le"/>
 
     <condition property="gcc.prefix" value="${gcc.prefix}" else="">
         <isset property="gcc.prefix"/>
@@ -177,7 +177,7 @@
                 <arg value="-I${src.main.rel}/libffi"/>
                 <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
-                <arg value="-I${src.main.rel}/libffi/powerpc" if:set="build.arch.powerpc64le"/>
+                <arg value="-I${src.main.rel}/libffi/powerpc" if:set="build.arch.ppc64le"/>
                 <arg value="-I${src.main.rel}/libffi/x86" unless:set="build.arch.arm"/>
                 <arg value="-DX86_64" if:set="build.arch.x64"/> <!-- for libffi/x86/ffitarget.h -->
                 <arg value="-I${src.main.rel}/${platform}/liburing"/>
@@ -267,7 +267,7 @@
                 <condition property="linux.triplet" value="x86_64-linux-gnu">
                     <and>
                         <not><isset property="build.arch.arm"/></not>
-                        <not><isset property="build.arch.powerpc64le"/></not>
+                        <not><isset property="build.arch.ppc64le"/></not>
                     </and>
                 </condition>
                 <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>

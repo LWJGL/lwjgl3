@@ -37,7 +37,7 @@ This script is included in /config/build-definitions.xml.
         <or>
             <not><isset property="build.arch.arm"/></not>
             <isset property="build.arch.arm64"/>
-            <isset property="build.arch.powerpc64le"/>
+            <isset property="build.arch.ppc64le"/>
         </or>
     </condition>
     <property name="binding.meshoptimizer" value="true"/>
@@ -65,7 +65,7 @@ This script is included in /config/build-definitions.xml.
     <condition property="binding.sse" value="false" else="true">
         <or>
             <isset property="build.arch.arm"/>
-            <isset property="build.arch.powerpc64le"/>
+            <isset property="build.arch.ppc64le"/>
         </or>
     </condition>
     <property name="binding.stb" value="true"/>
@@ -74,7 +74,7 @@ This script is included in /config/build-definitions.xml.
     <condition property="binding.tootle" value="false" else="true">
         <or>
             <isset property="build.arch.arm"/>
-            <isset property="build.arch.powerpc64le"/>
+            <isset property="build.arch.ppc64le"/>
         </or>
     </condition>
     <property name="binding.vulkan" value="true"/>
