@@ -177,6 +177,7 @@
                 <arg value="-I${src.main.rel}/libffi"/>
                 <arg value="-I${src.main.rel}/libffi/aarch64" if:set="build.arch.arm64"/>
                 <arg value="-I${src.main.rel}/libffi/arm" if:set="build.arch.arm32"/>
+                <arg value="-I${src.main.rel}/libffi/powerpc" if:set="build.arch.powerpc64le"/>
                 <arg value="-I${src.main.rel}/libffi/x86" unless:set="build.arch.arm"/>
                 <arg value="-DX86_64" if:set="build.arch.x64"/> <!-- for libffi/x86/ffitarget.h -->
                 <arg value="-I${src.main.rel}/${platform}/liburing"/>
