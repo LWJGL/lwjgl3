@@ -82,6 +82,12 @@ public class BindingConfig extends Task {
         LWJGL.setProperty("module.templatepath", join(File.pathSeparator, templates));
         LWJGL.setProperty("module.sourcepath", join(File.pathSeparator, sources));
         LWJGL.setProperty("module.javadocsourcepath", String.join(File.pathSeparator, sources));
+
+        System.out.println("====" + LWJGL.getProperty("module.classpath"));
+
+        System.out.println("====" + LWJGL.getProperty("module.templatepath"));
+        System.out.println("====" + LWJGL.getProperty("module.sourcepath"));
+        System.out.println("====" + LWJGL.getProperty("module.javadocsourcepath"));
     }
 
 }
