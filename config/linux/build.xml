@@ -234,9 +234,18 @@
         <!-- Meow -->
         <sequential if:true="${binding.meow}">
             <local name="meow.flags"/>
-            <condition property="meow.flags" value="-march=armv8-a+crypto" else="-maes -msse4.2">
-                <isset property="build.arch.arm"/>
+<!--            <condition property="meow.flags" value="-march=armv8-a+crypto" else="-maes -msse4.2">-->
+<!--                <isset property="build.arch.arm"/>-->
+<!--            </condition>-->
+            <condition property="meow.flags" value="-maes -msse4.2">
+                <and>
+                    <not><isset property="build.arch.arm"/></not>
+                    <not><isset property="build.arch.ppc64le"/></not>
+                </and>
             </condition>
+            <condition property="meow.flags" value="-march=armv8-a+crypto"><isset property="build.arch.arm"/></condition>
+            <condition property="meow.flags" value=""><isset property="build.arch.ppc64le"/></condition>
+
             <build module="meow" simple="true" flags="-Werror -Wfatal-errors ${meow.flags}"/>
         </sequential>
 
