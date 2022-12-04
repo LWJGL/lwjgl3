@@ -37,7 +37,6 @@ This script is included in /config/build-definitions.xml.
         <or>
             <not><isset property="build.arch.arm"/></not>
             <isset property="build.arch.arm64"/>
-            <isset property="build.arch.ppc64le"/>
         </or>
     </condition>
     <property name="binding.meshoptimizer" value="true"/>
