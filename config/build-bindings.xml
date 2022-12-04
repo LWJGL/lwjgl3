@@ -102,7 +102,10 @@ This script is included in /config/build-definitions.xml.
         <and>
             <isset property="OCULUS_SDK_PATH"/>
             <available file="${OCULUS_SDK_PATH}/LibOVR/Include/OVR_CAPI.h"/>
-            <not><isset property="build.arch.arm"/></not>
+            <or>
+                <not><isset property="build.arch.arm"/></not>
+                <not><isset property="build.arch.ppc64le"/></not>
+            </or>
         </and>
     </condition>
 
