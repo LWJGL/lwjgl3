@@ -1646,7 +1646,6 @@
             <natives>
                 <get-release platform="linux" arch="x64" file="liblwjgl_meow.so"/>
                 <get-release platform="linux" arch="arm64" file="liblwjgl_meow.so"/>
-                <get-release platform="linux" arch="ppc64le" file="liblwjgl_meow.so"/>
                 <get-release platform="macos" arch="x64" file="liblwjgl_meow.dylib"/>
                 <get-release platform="macos" arch="arm64" file="liblwjgl_meow.dylib"/>
                 <get-release platform="windows" arch="x64" file="lwjgl_meow.dll"/>
