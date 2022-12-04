@@ -272,7 +272,7 @@
                 </condition>
                 <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
                 <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
-                <condition property="linux.triplet" value="powerpc64le-linux-gnu"><isset property="build.arch.powerpc64le"/></condition>
+                <condition property="linux.triplet" value="powerpc64le-linux-gnu"><isset property="build.arch.ppc64le"/></condition>
 
                 <compile>
                     <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
