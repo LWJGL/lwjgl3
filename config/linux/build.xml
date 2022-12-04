@@ -263,7 +263,12 @@
         <build module="nfd" simple="true" if:true="${binding.nfd}">
             <beforeCompile>
                 <local name="linux.triplet"/>
-                <condition property="linux.triplet" value="x86_64-linux-gnu"><not><isset property="build.arch.arm"/></not></condition>
+                <condition property="linux.triplet" value="x86_64-linux-gnu">
+                    <and>
+                        <not><isset property="build.arch.arm"/></not>
+                        <not><isset property="build.arch.powerpc64le"/></not>
+                    </and>
+                </condition>
                 <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
                 <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
                 <condition property="linux.triplet" value="powerpc64le-linux-gnu"><isset property="build.arch.powerpc64le"/></condition>
