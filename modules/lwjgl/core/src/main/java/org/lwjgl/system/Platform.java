@@ -55,6 +55,7 @@ public enum Platform {
         X86(false),
         ARM64(true),
         ARM32(false);
+        PPC64LE(true);
 
         static final Architecture current;
 
@@ -64,9 +65,13 @@ public enum Platform {
             String  osArch  = System.getProperty("os.arch");
             boolean is64Bit = osArch.contains("64") || osArch.startsWith("armv8");
 
-            current = osArch.startsWith("arm") || osArch.startsWith("aarch64")
-                ? (is64Bit ? Architecture.ARM64 : Architecture.ARM32)
-                : (is64Bit ? Architecture.X64 : Architecture.X86);
+            if (osArch.startsWith("arm") || osArch.startsWith("aarch64")) {
+                current = is64Bit ? Architecture.ARM64 : Architecture.ARM32;
+            } else if (osArch.startsWith("ppc64")) {
+                current = PPC64LE;
+            } else {
+                current = is64Bit ? Architecture.X64 : Architecture.X86;
+            }
         }
 
         Architecture(boolean is64Bit) {
