@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>The minimum, default, and maximum values are in un-normalized, user scales.</p>
  * 
- * <p>Note: at present, the only flag defined for flags is {@link OpenType#HB_VAR_AXIS_FLAG_HIDDEN VAR_AXIS_FLAG_HIDDEN}.</p>
+ * <p>Note: at present, the only flag defined for flags is {@link OpenType#HB_OT_VAR_AXIS_FLAG_HIDDEN VAR_AXIS_FLAG_HIDDEN}.</p>
  * 
  * <h3>Layout</h3>
  * 

@@ -140,6 +140,17 @@ enum class Module(
         CallingConvention.STDCALL,
         arrayOverloads = false
     ),
+    FREETYPE(
+        "freetype",
+        "org.lwjgl.util.freetype",
+        """
+        Contains bindings to the ${url("https://freetype.org/", "FreeType")}, a freely available software library to render fonts.
+
+        It is written in C, designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output (glyph images) of
+        most vector and bitmap font formats.
+        """,
+        arrayOverloads = false
+    ),
     GLFW(
         "glfw",
         "org.lwjgl.glfw",

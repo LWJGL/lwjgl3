@@ -24,10 +24,48 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>Using the HarfBuzz library allows programs to convert a sequence of Unicode input into properly formatted and positioned glyph output — for any writing
  * system and language.</p>
+ * 
+ * <h3>FreeType interop</h3>
+ * 
+ * <p>The default LWJGL HarfBuzz build does not include FreeType support and the {@code hb_ft_*} functions will not be available. However, LWJGL's FreeType
+ * build includes HarfBuzz and exports its full API. When working with both HarfBuzz and FreeType, the HarfBuzz bindings can be made to use FreeType's
+ * shared library, with one of the following ways:</p>
+ * 
+ * <ul>
+ * <li>launch the JVM with {@code -Dorg.lwjgl.harfbuzz.libname=freetype}</li>
+ * <li>run {@code Configuration.HARFBUZZ_LIBRARY_NAME.set("freetype")}</li>
+ * <li>run {@code Configuration.HARFBUZZ_LIBRARY_NAME.set(FreeType.getLibrary())} - recommended</li>
+ * </ul>
+ * 
+ * <p>The {@code org.lwjgl.harfbuzz.natives} module is not necessary when enabling the above.</p>
  */
 public class HarfBuzz {
 
-    private static final SharedLibrary HARFBUZZ = Library.loadNative(HarfBuzz.class, "org.lwjgl.harfbuzz", Configuration.HARFBUZZ_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz")), true);
+    private static final SharedLibrary HARFBUZZ;
+    static {
+        SharedLibrary library;
+
+        Object value = Configuration.HARFBUZZ_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz"));
+        if (value instanceof SharedLibrary) {
+            library = (SharedLibrary)value;
+        } else {
+            String name = (String)value;
+            if ("freetype".equals(name)) {
+                try {
+                    library = (SharedLibrary)Class
+                        .forName("org.lwjgl.util.freetype.FreeType")
+                        .getMethod("getLibrary")
+                        .invoke(null, (Object[])null);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                library = Library.loadNative(HarfBuzz.class, "org.lwjgl.harfbuzz", name, true);
+            }
+        }
+
+        HARFBUZZ = library;
+    }
 
     /** Contains the function pointers loaded from the harfbuzz {@link SharedLibrary}. */
     public static final class Functions {
@@ -260,6 +298,19 @@ public class HarfBuzz {
             font_set_var_coords_normalized           = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_coords_normalized"),
             font_get_var_coords_normalized           = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_var_coords_normalized"),
             font_set_var_named_instance              = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_named_instance"),
+            ft_face_create                           = HARFBUZZ.getFunctionAddress("hb_ft_face_create"),
+            ft_face_create_cached                    = HARFBUZZ.getFunctionAddress("hb_ft_face_create_cached"),
+            ft_face_create_referenced                = HARFBUZZ.getFunctionAddress("hb_ft_face_create_referenced"),
+            ft_font_create                           = HARFBUZZ.getFunctionAddress("hb_ft_font_create"),
+            ft_font_create_referenced                = HARFBUZZ.getFunctionAddress("hb_ft_font_create_referenced"),
+            ft_font_get_face                         = HARFBUZZ.getFunctionAddress("hb_ft_font_get_face"),
+            ft_font_lock_face                        = HARFBUZZ.getFunctionAddress("hb_ft_font_lock_face"),
+            ft_font_unlock_face                      = HARFBUZZ.getFunctionAddress("hb_ft_font_unlock_face"),
+            ft_font_set_load_flags                   = HARFBUZZ.getFunctionAddress("hb_ft_font_set_load_flags"),
+            ft_font_get_load_flags                   = HARFBUZZ.getFunctionAddress("hb_ft_font_get_load_flags"),
+            ft_font_changed                          = HARFBUZZ.getFunctionAddress("hb_ft_font_changed"),
+            ft_hb_font_changed                       = HARFBUZZ.getFunctionAddress("hb_ft_hb_font_changed"),
+            ft_font_set_funcs                        = HARFBUZZ.getFunctionAddress("hb_ft_font_set_funcs"),
             map_create                               = apiGetFunctionAddress(HARFBUZZ, "hb_map_create"),
             map_get_empty                            = apiGetFunctionAddress(HARFBUZZ, "hb_map_get_empty"),
             map_reference                            = apiGetFunctionAddress(HARFBUZZ, "hb_map_reference"),
@@ -4558,6 +4609,165 @@ public class HarfBuzz {
             check(font);
         }
         invokePV(font, instance_index, __functionAddress);
+    }
+
+    // --- [ hb_ft_face_create ] ---
+
+    public static long nhb_ft_face_create(long ft_face, long destroy) {
+        long __functionAddress = Functions.ft_face_create;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ft_face);
+        }
+        return invokePPP(ft_face, destroy, __functionAddress);
+    }
+
+    @NativeType("hb_face_t *")
+    public static long hb_ft_face_create(@NativeType("FT_Face") long ft_face, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        return nhb_ft_face_create(ft_face, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_ft_face_create_cached ] ---
+
+    @NativeType("hb_face_t *")
+    public static long hb_ft_face_create_cached(@NativeType("FT_Face") long ft_face) {
+        long __functionAddress = Functions.ft_face_create_cached;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ft_face);
+        }
+        return invokePP(ft_face, __functionAddress);
+    }
+
+    // --- [ hb_ft_face_create_referenced ] ---
+
+    @NativeType("hb_face_t *")
+    public static long hb_ft_face_create_referenced(@NativeType("FT_Face") long ft_face) {
+        long __functionAddress = Functions.ft_face_create_referenced;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ft_face);
+        }
+        return invokePP(ft_face, __functionAddress);
+    }
+
+    // --- [ hb_ft_font_create ] ---
+
+    public static long nhb_ft_font_create(long ft_face, long destroy) {
+        long __functionAddress = Functions.ft_font_create;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ft_face);
+        }
+        return invokePPP(ft_face, destroy, __functionAddress);
+    }
+
+    @NativeType("hb_font_t *")
+    public static long hb_ft_font_create(@NativeType("FT_Face") long ft_face, @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        return nhb_ft_font_create(ft_face, destroy.address());
+    }
+
+    // --- [ hb_ft_font_create_referenced ] ---
+
+    @NativeType("hb_font_t *")
+    public static long hb_ft_font_create_referenced(@NativeType("FT_Face") long ft_face) {
+        long __functionAddress = Functions.ft_font_create_referenced;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(ft_face);
+        }
+        return invokePP(ft_face, __functionAddress);
+    }
+
+    // --- [ hb_ft_font_get_face ] ---
+
+    @NativeType("FT_Face")
+    public static long hb_ft_font_get_face(@NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.ft_font_get_face;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(font);
+        }
+        return invokePP(font, __functionAddress);
+    }
+
+    // --- [ hb_ft_font_lock_face ] ---
+
+    @NativeType("FT_Face")
+    public static long hb_ft_font_lock_face(@NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.ft_font_lock_face;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(font);
+        }
+        return invokePP(font, __functionAddress);
+    }
+
+    // --- [ hb_ft_font_unlock_face ] ---
+
+    public static void hb_ft_font_unlock_face(@NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.ft_font_unlock_face;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(font);
+        }
+        invokePV(font, __functionAddress);
+    }
+
+    // --- [ hb_ft_font_set_load_flags ] ---
+
+    public static void hb_ft_font_set_load_flags(@NativeType("hb_font_t *") long font, int load_flags) {
+        long __functionAddress = Functions.ft_font_set_load_flags;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(font);
+        }
+        invokePV(font, load_flags, __functionAddress);
+    }
+
+    // --- [ hb_ft_font_get_load_flags ] ---
+
+    public static int hb_ft_font_get_load_flags(@NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.ft_font_get_load_flags;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(font);
+        }
+        return invokePI(font, __functionAddress);
+    }
+
+    // --- [ hb_ft_font_changed ] ---
+
+    public static void hb_ft_font_changed(@NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.ft_font_changed;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(font);
+        }
+        invokePV(font, __functionAddress);
+    }
+
+    // --- [ hb_ft_hb_font_changed ] ---
+
+    @NativeType("hb_bool_t")
+    public static boolean hb_ft_hb_font_changed(@NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.ft_hb_font_changed;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(font);
+        }
+        return invokePI(font, __functionAddress) != 0;
+    }
+
+    // --- [ hb_ft_font_set_funcs ] ---
+
+    public static void hb_ft_font_set_funcs(@NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.ft_font_set_funcs;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(font);
+        }
+        invokePV(font, __functionAddress);
     }
 
     // --- [ hb_map_create ] ---

@@ -492,6 +492,7 @@
             <compileBinding binding="cuda"/>
             <compileBinding binding="egl"/>
             <compileBinding binding="fmod"/>
+            <compileBinding binding="freetype"/>
             <compileBinding binding="harfbuzz"/>
             <compileBinding binding="jawt"/>
             <compileBinding binding="jemalloc"/>
@@ -838,6 +839,7 @@
             <include name="org/lwjgl/demo/system/linux/liburing/**" if:set="platform.linux"/>
 
             <include name="org/lwjgl/demo/util/*.java"/>
+            <include name="org/lwjgl/demo/util/freetype/**" if:true="${binding.freetype}"/>
             <include name="org/lwjgl/demo/util/harfbuzz/**" if:true="${binding.harfbuzz}"/>
             <include name="org/lwjgl/demo/util/ktx/**" if:true="${binding.ktx}"/>
             <include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
@@ -1565,6 +1567,9 @@
 
         <!-- FMOD -->
         <release-module name="fmod" title="FMOD" if:true="${binding.fmod}"/>
+
+        <!-- FreeType -->
+        <release-module name="freetype" native-library="freetype" title="FreeType" if:true="${binding.freetype}"/>
 
         <!-- GLFW -->
         <release-module name="glfw" title="GLFW" if:true="${binding.glfw}">

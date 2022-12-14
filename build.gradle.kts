@@ -104,6 +104,11 @@ enum class Artifacts(
         "lwjgl-fmod", "LWJGL - FMOD bindings",
         "An end-to-end solution for adding sound and music to any game."
     ),
+    FREETYPE(
+        "lwjgl-freetype", "LWJGL - FreeType bindings",
+        "A freely available software library to render fonts.",
+        *Platforms.ALL
+    ),
     GLFW(
         "lwjgl-glfw", "LWJGL - GLFW bindings",
         "A multi-platform library for OpenGL, OpenGL ES and Vulkan development on the desktop. It provides a simple API for creating windows, contexts and surfaces, receiving input and events.",

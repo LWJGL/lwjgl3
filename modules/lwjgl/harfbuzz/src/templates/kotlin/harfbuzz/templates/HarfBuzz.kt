@@ -14,6 +14,19 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
         Using the HarfBuzz library allows programs to convert a sequence of Unicode input into properly formatted and positioned glyph output — for any writing
         system and language.
+
+        <h3>FreeType interop</h3>
+
+        The default LWJGL HarfBuzz build does not include FreeType support and the {@code hb_ft_*} functions will not be available. However, LWJGL's FreeType
+        build includes HarfBuzz and exports its full API. When working with both HarfBuzz and FreeType, the HarfBuzz bindings can be made to use FreeType's
+        shared library, with one of the following ways:
+        ${ul(
+            "launch the JVM with {@code -Dorg.lwjgl.harfbuzz.libname=freetype}",
+            "run {@code Configuration.HARFBUZZ_LIBRARY_NAME.set(\"freetype\")}",
+            "run {@code Configuration.HARFBUZZ_LIBRARY_NAME.set(FreeType.getLibrary())} - recommended",
+        )}
+
+        The {@code org.lwjgl.harfbuzz.natives} module is not necessary when enabling the above.
         """
 
     // hb-common.h
@@ -2504,6 +2517,102 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
         hb_font_t.p("font", ""),
         unsigned_int("instance_index", "")
+    )
+
+    // hb-ft.h
+
+    IgnoreMissing..hb_face_t.p(
+        "ft_face_create",
+        "",
+
+        FT_Face("ft_face", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    IgnoreMissing..hb_face_t.p(
+        "ft_face_create_cached",
+        "",
+
+        FT_Face("ft_face", "")
+    )
+
+    IgnoreMissing..hb_face_t.p(
+        "ft_face_create_referenced",
+        "",
+
+        FT_Face("ft_face", "")
+    )
+
+    IgnoreMissing..hb_font_t.p(
+        "ft_font_create",
+        "",
+
+        FT_Face("ft_face", ""),
+        hb_destroy_func_t("destroy", "")
+    )
+
+    IgnoreMissing..hb_font_t.p(
+        "ft_font_create_referenced",
+        "",
+
+        FT_Face("ft_face", "")
+    )
+
+    IgnoreMissing..FT_Face(
+        "ft_font_get_face",
+        "",
+
+        hb_font_t.p("font", "")
+    )
+
+    IgnoreMissing..FT_Face(
+        "ft_font_lock_face",
+        "",
+
+        hb_font_t.p("font", "")
+    )
+
+    IgnoreMissing..void(
+        "ft_font_unlock_face",
+        "",
+
+        hb_font_t.p("font", "")
+    )
+
+    IgnoreMissing..void(
+        "ft_font_set_load_flags",
+        "",
+
+        hb_font_t.p("font", ""),
+        int("load_flags", "")
+    )
+
+    IgnoreMissing..int(
+        "ft_font_get_load_flags",
+        "",
+
+        hb_font_t.p("font", "")
+    )
+
+    IgnoreMissing..void(
+        "ft_font_changed",
+        "",
+
+        hb_font_t.p("font", "")
+    )
+
+    IgnoreMissing..hb_bool_t(
+        "ft_hb_font_changed",
+        "",
+
+        hb_font_t.p("font", "")
+    )
+
+    IgnoreMissing..void(
+        "ft_font_set_funcs",
+        "",
+
+        hb_font_t.p("font", "")
     )
 
     // hb-map.h

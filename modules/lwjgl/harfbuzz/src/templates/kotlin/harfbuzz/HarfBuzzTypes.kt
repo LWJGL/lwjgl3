@@ -5,12 +5,45 @@
 package harfbuzz
 
 import org.lwjgl.generator.*
+import java.io.*
 
-val HARFBUZZ_BINDING = simpleBinding(
-    Module.HARFBUZZ,
-    libraryExpression = """Configuration.HARFBUZZ_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz"))""",
-    bundledWithLWJGL = true
-)
+val HARFBUZZ_BINDING = object : SimpleBinding(Module.HARFBUZZ, "HARFBUZZ") {
+    override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
+        println(
+            """
+${t}private static final SharedLibrary HARFBUZZ;
+${t}static {
+$t${t}SharedLibrary library;
+
+$t${t}Object value = Configuration.HARFBUZZ_LIBRARY_NAME.get(Platform.mapLibraryNameBundled("harfbuzz"));
+$t${t}if (value instanceof SharedLibrary) {
+$t$t${t}library = (SharedLibrary)value;
+$t$t} else {
+$t$t${t}String name = (String)value;
+$t$t${t}if ("freetype".equals(name)) {
+$t$t$t${t}try {
+$t$t$t$t${t}library = (SharedLibrary)Class
+$t$t$t$t$t$t.forName("org.lwjgl.util.freetype.FreeType")
+$t$t$t$t$t$t.getMethod("getLibrary")
+$t$t$t$t$t$t.invoke(null, (Object[])null);
+$t$t$t$t} catch (Exception e) {
+$t$t$t$t${t}throw new RuntimeException(e);
+$t$t$t$t}
+$t$t$t} else {
+$t$t$t${t}library = Library.loadNative(HarfBuzz.class, "org.lwjgl.harfbuzz", name, true);
+$t$t$t}
+$t$t}
+
+$t${t}HARFBUZZ = library;
+$t}""")
+        generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from the harfbuzz {@link SharedLibrary}. */")
+        println("""
+    /** Returns the harfbuzz {@link SharedLibrary}. */
+    public static SharedLibrary getLibrary() {
+        return HARFBUZZ;
+    }""")
+    }
+}
 val HARFBUZZ_BINDING_DELEGATE = HARFBUZZ_BINDING.delegate("HarfBuzz.getLibrary()")
 
 val hb_language_t = "hb_language_t".handle
@@ -45,6 +78,8 @@ val hb_script_t = "hb_script_t".enumType
 val hb_style_tag_t = "hb_style_tag_t".enumType
 val hb_unicode_combining_class_t = "hb_unicode_combining_class_t".enumType
 val hb_unicode_general_category_t = "hb_unicode_general_category_t".enumType
+
+val FT_Face = "FT_Face".handle
 
 val hb_var_int_t = union(Module.HARFBUZZ, "hb_var_int_t") {
     documentation = ""

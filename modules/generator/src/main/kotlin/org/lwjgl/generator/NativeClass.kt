@@ -148,6 +148,7 @@ fun simpleBinding(
     libraryExpression: String = "\"$libraryName\"",
     bundledWithLWJGL: Boolean = false
 ) = object : SimpleBinding(module, libraryName.uppercase()) {
+    // TODO: Sync HARFBUZZ_BINDING if this changes
     override fun PrintWriter.generateFunctionSetup(nativeClass: NativeClass) {
         val libraryReference = libraryName.uppercase()
 

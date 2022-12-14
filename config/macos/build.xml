@@ -378,10 +378,11 @@
             <update-dependency module="assimp" artifact="libassimp.dylib"/>
             <update-dependency module="assimp" artifact="libdraco.dylib"/>
             <update-dependency module="bgfx" artifact="libbgfx.dylib"/>
-            <update-dependency module="jemalloc" artifact="libjemalloc.dylib"/>
+            <update-dependency module="freetype" artifact="libfreetype.dylib"/>
             <update-dependency module="glfw" artifact="libglfw.dylib"/>
             <update-dependency module="glfw" artifact="libglfw_async.dylib"/>
             <update-dependency module="harfbuzz" artifact="libharfbuzz.dylib"/>
+            <update-dependency module="jemalloc" artifact="libjemalloc.dylib"/>
             <update-dependency module="ktx" artifact="libktx.dylib"/>
             <update-dependency module="openal" artifact="libopenal.dylib"/>
             <update-dependency module="openvr" artifact="libopenvr_api.dylib"/>

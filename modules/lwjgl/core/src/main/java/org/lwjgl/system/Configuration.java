@@ -439,6 +439,10 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the FMOD FSBank library (<b>org.lwjgl.fmod.fsbank.libname</b>). */
     public static final Configuration<String> FMOD_FSBANK_LIBRARY_NAME = new Configuration<>("org.lwjgl.fmod.fsbank.libname", StateInit.STRING);
 
+    // -- FREETYPE
+    /** Similar to {@link #LIBRARY_NAME} for the FreeType library (<b>org.lwjgl.freetype.libname</b>). */
+    public static final Configuration<String> FREETYPE_LIBRARY_NAME = new Configuration<>("org.lwjgl.freetype.libname", StateInit.STRING);
+
     // -- GLFW
 
     /** Similar to {@link #LIBRARY_NAME} for the GLFW library (<b>org.lwjgl.glfw.libname</b>). */
@@ -460,8 +464,27 @@ public class Configuration<T> {
 
     // -- HARFBUZZ
 
-    /** Similar to {@link #LIBRARY_NAME} for the HarfBuzz library (<b>org.lwjgl.harfbuzz.libname</b>). */
-    public static final Configuration<String> HARFBUZZ_LIBRARY_NAME = new Configuration<>("org.lwjgl.harfbuzz.libname", StateInit.STRING);
+    /**
+     * Similar to {@link #LIBRARY_NAME} for the HarfBuzz library (<b>org.lwjgl.harfbuzz.libname</b>).
+     *
+     * <p>The default LWJGL HarfBuzz build does not include FreeType support and the {@code hb_ft_*} functions will not be available. However, LWJGL's FreeType
+     * build includes HarfBuzz and exports its full API. When working with both HarfBuzz and FreeType, the HarfBuzz bindings can be made to use FreeType's
+     * shared library, with one of the following ways:</p>
+     *
+     *  <ul>
+     *  <li>launch the JVM with {@code -Dorg.lwjgl.harfbuzz.libname=freetype}</li>
+     *  <li>run {@code Configuration.HARFBUZZ_LIBRARY_NAME.set("freetype")}</li>
+     *  <li>run {@code Configuration.HARFBUZZ_LIBRARY_NAME.set(FreeType.getLibrary())} - recommended</li>
+     *  </ul>
+     *
+     * <p>The {@code org.lwjgl.harfbuzz.natives} module is not necessary when enabling the above.</p>
+     *
+     * <p style="font-family: monospace">
+     * Property: <b>org.lwjgl.harfbuzz.libname</b><br>
+     * &nbsp; &nbsp; Type: String or a {@link SharedLibrary} instance<br>
+     * &nbsp; &nbsp;Usage: Dynamic</p>
+     */
+    public static final Configuration<Object> HARFBUZZ_LIBRARY_NAME = new Configuration<>("org.lwjgl.harfbuzz.libname", StateInit.STRING);
 
     // -- JAWT
 
