@@ -98,6 +98,7 @@ class AutoSize(
             } else {
                 when (param.nativeType.mapping) {
                     PointerMapping.DATA_INT,
+                    PointerMapping.DATA_CLONG,
                     PointerMapping.DATA_POINTER -> {
                     }
                     else                        -> throw IllegalArgumentException("Output pointer parameters with the AutoSize modifier must be integer pointer types.")
@@ -138,6 +139,7 @@ class AutoSizeResultParam(val expression: String?) : ParameterModifier {
             if (param.nativeType.mapping.nativeMethodType.isPrimitive) {
                 when (param.nativeType.mapping) {
                     PrimitiveMapping.INT,
+                    PrimitiveMapping.CLONG,
                     PrimitiveMapping.POINTER -> {
                     }
                     else                     -> {

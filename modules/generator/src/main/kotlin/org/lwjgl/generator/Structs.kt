@@ -860,7 +860,8 @@ $indentation}"""
             if (mallocable || members.any { m ->
                     m.nativeType.let {
                         (it.mapping === PointerMapping.DATA_POINTER && it is PointerType<*> && (it.elementType !is StructType || m is StructMemberArray)) ||
-                        (m is StructMemberArray && m.arrayType.elementType.isPointer && m.arrayType.elementType !is StructType)
+                        (m is StructMemberArray && ((m.arrayType.elementType.isPointer && m.arrayType.elementType !is StructType) || m.arrayType.elementType.mapping === PrimitiveMapping.CLONG)) ||
+                        it.mapping === PointerMapping.DATA_CLONG
                     }
                 })
                 println("import org.lwjgl.*;")

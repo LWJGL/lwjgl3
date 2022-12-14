@@ -281,6 +281,7 @@ class FunctionType internal constructor(
 // typedefs
 fun typedef(@Suppress("UNUSED_PARAMETER") typedef: OpaqueType, name: String) = OpaqueType(name)
 fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping)
+fun typedef(typedef: CharType, name: String) = CharType(name, typedef.mapping)
 fun typedef(typedef: IntegerType, name: String) = IntegerType(name, typedef.mapping, typedef.unsigned)
 fun <T: DataType> typedef(typedef: CArrayType<T>, name: String) = CArrayType(name, typedef.elementType, typedef.dimensions)
 fun <T: NativeType> typedef(typedef: PointerType<T>, name: String) = PointerType(name, typedef.mapping, true, typedef.elementType)

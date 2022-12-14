@@ -838,7 +838,12 @@ class Func(
                     returns.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "byte"
                     returns.nativeType is PointerType<*>                   -> "pointer"
                     else                                                   -> returns.nativeType.nativeMethodType
-                }}(0);
+                }}(${when (returns.nativeType.mapping) {
+                    PrimitiveMapping.BOOLEAN,
+                    PrimitiveMapping.BYTE  -> "(byte)"
+                    PrimitiveMapping.SHORT -> "(short)"
+                    else                   -> ""
+                }}0);
             """
             } else ""}long arguments = stack.nmalloc(POINTER_SIZE, POINTER_SIZE * ${parameters.size});
             ${parameters.asSequence()
@@ -869,7 +874,7 @@ class Func(
                     returns.nativeType.mapping == PrimitiveMapping.BOOLEAN -> "Byte"
                     returns.nativeType is PointerType<*>                   -> "Address"
                     else                                                   -> returns.nativeType.nativeMethodType.upperCaseFirst
-                }}(__result);"""
+                }}(__result)${if (returns.nativeType.mapping == PrimitiveMapping.BOOLEAN || returns.nativeType.mapping == PrimitiveMapping.BOOLEAN4) " != 0" else ""};"""
             } else ""}
         } finally {
             stack.setPointer(stackPointer);
