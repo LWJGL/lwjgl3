@@ -1028,7 +1028,7 @@ public class MeshOptimizer {
      *
      * @param destination      must contain enough space for the target index buffer, worst case is {@code index_count} elements (<b>not</b> {@code target_index_count})!
      * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
-     * @param target_error     represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}
+     * @param target_error     represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}; value range {@code [0..1]}
      * @param options          must be a bitmask composed of {@code meshopt_SimplifyX} options; 0 is a safe default
      * @param result_error     can be {@code NULL}; when it's not {@code NULL}, it will contain the resulting (relative) error after simplification
      */
@@ -1056,7 +1056,7 @@ public class MeshOptimizer {
      *
      * @param destination      must contain enough space for the target index buffer, worst case is {@code index_count} elements (<b>not</b> {@code target_index_count})!
      * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
-     * @param target_error     represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}
+     * @param target_error     represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}; value range {@code [0..1]}
      * @param result_error     can be {@code NULL}; when it's not {@code NULL}, it will contain the resulting (relative) error after simplification
      */
     @NativeType("size_t")

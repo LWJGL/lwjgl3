@@ -825,7 +825,10 @@ nmeshopt_setAllocator(
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
         size_t("target_index_count", ""),
-        float("target_error", "represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}"),
+        float(
+            "target_error",
+            "represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}; value range {@code [0..1]}"
+        ),
         unsigned_int("options", "must be a bitmask composed of {@code meshopt_SimplifyX} options; 0 is a safe default"),
         Check(1)..nullable..float.p("result_error", "can be #NULL; when it's not #NULL, it will contain the resulting (relative) error after simplification")
     )
@@ -853,7 +856,10 @@ nmeshopt_setAllocator(
         size_t("vertex_count", ""),
         size_t("vertex_positions_stride", ""),
         size_t("target_index_count", ""),
-        float("target_error", "represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}"),
+        float(
+            "target_error",
+            "represents the error relative to mesh extents that can be tolerated, e.g. {@code 0.01 = 1% deformation}; value range {@code [0..1]}"
+        ),
         Check(1)..nullable..float.p("result_error", "can be #NULL; when it's not #NULL, it will contain the resulting (relative) error after simplification")
     )
 
