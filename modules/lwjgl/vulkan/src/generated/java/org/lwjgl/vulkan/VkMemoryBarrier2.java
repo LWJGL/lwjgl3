@@ -79,6 +79,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code srcAccessMask} includes {@link NVOpticalFlow#VK_ACCESS_2_OPTICAL_FLOW_WRITE_BIT_NV ACCESS_2_OPTICAL_FLOW_WRITE_BIT_NV}, {@code srcStageMask} <b>must</b> include {@link NVOpticalFlow#VK_PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV}</li>
  * <li>If {@code srcAccessMask} includes {@link EXTOpacityMicromap#VK_ACCESS_2_MICROMAP_WRITE_BIT_EXT ACCESS_2_MICROMAP_WRITE_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT}</li>
  * <li>If {@code srcAccessMask} includes {@link EXTOpacityMicromap#VK_ACCESS_2_MICROMAP_READ_BIT_EXT ACCESS_2_MICROMAP_READ_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT} or {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}</li>
+ * <li>If {@code srcAccessMask} includes {@link EXTDescriptorBuffer#VK_ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
  * </ul>
  * 
  * <ul>
@@ -132,6 +133,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code dstAccessMask} includes {@link NVOpticalFlow#VK_ACCESS_2_OPTICAL_FLOW_WRITE_BIT_NV ACCESS_2_OPTICAL_FLOW_WRITE_BIT_NV}, {@code dstStageMask} <b>must</b> include {@link NVOpticalFlow#VK_PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV}</li>
  * <li>If {@code dstAccessMask} includes {@link EXTOpacityMicromap#VK_ACCESS_2_MICROMAP_WRITE_BIT_EXT ACCESS_2_MICROMAP_WRITE_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT}</li>
  * <li>If {@code dstAccessMask} includes {@link EXTOpacityMicromap#VK_ACCESS_2_MICROMAP_READ_BIT_EXT ACCESS_2_MICROMAP_READ_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT} or {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}</li>
+ * <li>If {@code dstAccessMask} includes {@link EXTDescriptorBuffer#VK_ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

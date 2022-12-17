@@ -40,8 +40,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code sequencesIndexBuffer} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, its usage flag <b>must</b> have the {@link VK10#VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT BUFFER_USAGE_INDIRECT_BUFFER_BIT} bit set</li>
  * <li>If {@code sequencesIndexBuffer} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code sequencesIndexOffset} <b>must</b> be aligned to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV}{@code ::minSequencesIndexBufferOffsetAlignment}</li>
  * <li>If {@code sequencesIndexBuffer} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} and is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>If the {@code indirectCommandsLayout} uses a token of {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV}, then the {@code pipeline} <b>must</b> contain a shader stage using the {@code MeshNV} {@code Execution} {@code Model}.</li>
- * <li>If the {@code indirectCommandsLayout} uses a token of {@link EXTMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV}, then the {@code pipeline} <b>must</b> contain a shader stage using the {@code MeshEXT} {@code Execution} {@code Model}.</li>
+ * <li>If the {@code indirectCommandsLayout} uses a token of {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_TASKS_NV}, then the {@code pipeline} <b>must</b> contain a shader stage using the {@code MeshNV} {@code Execution} {@code Model}</li>
+ * <li>If the {@code indirectCommandsLayout} uses a token of {@link EXTMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV}, then the {@code pipeline} <b>must</b> contain a shader stage using the {@code MeshEXT} {@code Execution} {@code Model}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -187,7 +187,7 @@ public class VkGeneratedCommandsInfoNV extends Struct implements NativeResource 
     /** the maximum number of sequences to reserve. If {@code sequencesCountBuffer} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, this is also the actual number of sequences generated. */
     @NativeType("uint32_t")
     public int sequencesCount() { return nsequencesCount(address()); }
-    /** the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with {@link NVDeviceGeneratedCommands#vkCmdExecuteGeneratedCommandsNV CmdExecuteGeneratedCommandsNV} with its {@code isPreprocessed} set to {@code VK_TRUE}, then the preprocessing step is skipped and data is only read from this buffer. The contents and the layout of this buffer is opaque to applications and <b>must</b> not be modified or copied to another buffer for reuse. */
+    /** the {@code VkBuffer} that is used for preprocessing the input data for execution. If this structure is used with {@link NVDeviceGeneratedCommands#vkCmdExecuteGeneratedCommandsNV CmdExecuteGeneratedCommandsNV} with its {@code isPreprocessed} set to {@link VK10#VK_TRUE TRUE}, then the preprocessing step is skipped and data is only read from this buffer. The contents and the layout of this buffer is opaque to applications and <b>must</b> not be modified or copied to another buffer for reuse. */
     @NativeType("VkBuffer")
     public long preprocessBuffer() { return npreprocessBuffer(address()); }
     /** the byte offset into {@code preprocessBuffer} where the preprocessed data is stored. */

@@ -36,7 +36,7 @@ import static org.lwjgl.vulkan.VK10.*;
  * <li>The value of an active instruction pointer at the time a fault occurred. This value may be indicative of the active pipeline or shader at the time of device loss</li>
  * </ul>
  * 
- * <p>Comparison of the GPU virtual addresses described by {@code pAddressInfos} to GPU virtual address ranges reported by the {@code VK_EXT_device_address_binding_report} extension may allow applications to correlate between these addresses and Vulkan objects. Applications should be aware that these addresses may also correspond to resources internal to an implementation, which will not be reported via the {@code VK_EXT_device_address_binding_report} extension.</p>
+ * <p>Comparison of the GPU virtual addresses described by {@code pAddressInfos} to GPU virtual address ranges reported by the {@link EXTDeviceAddressBindingReport VK_EXT_device_address_binding_report} extension may allow applications to correlate between these addresses and Vulkan objects. Applications should be aware that these addresses may also correspond to resources internal to an implementation, which will not be reported via the {@link EXTDeviceAddressBindingReport VK_EXT_device_address_binding_report} extension.</p>
  * </div>
  * 
  * <h5>Valid Usage (Implicit)</h5>

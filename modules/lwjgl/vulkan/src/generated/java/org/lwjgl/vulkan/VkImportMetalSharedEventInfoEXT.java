@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Description</h5>
  * 
- * <p>If the {@code pNext} chain of the {@link VkSemaphoreCreateInfo} structure includes both {@link VkImportMetalSharedEventInfoEXT} and {@link VkSemaphoreTypeCreateInfo}, the {@code signaledValue} property of the imported {@code MTLSharedEvent} object will be set to {@code initialValue} of {@link VkSemaphoreTypeCreateInfo}.</p>
+ * <p>If the {@code pNext} chain of the {@link VkSemaphoreCreateInfo} structure includes both {@link VkImportMetalSharedEventInfoEXT} and {@link VkSemaphoreTypeCreateInfo}, the {@code signaledValue} property of the imported {@code id&lt;MTLSharedEvent&gt;} object will be set to {@code initialValue} of {@link VkSemaphoreTypeCreateInfo}.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

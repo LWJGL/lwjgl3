@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT}.</li>
+ * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

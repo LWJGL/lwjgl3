@@ -58,7 +58,7 @@ import static org.lwjgl.system.JNI.*;
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
- * <li>Ian Elliot, Google</li>
+ * <li>Ian Elliott, Google</li>
  * <li>Jesse Hall, Google</li>
  * <li>James Jones, NVIDIA</li>
  * </ul></dd>

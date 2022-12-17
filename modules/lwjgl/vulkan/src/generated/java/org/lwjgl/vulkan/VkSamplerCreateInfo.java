@@ -73,11 +73,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-customBorderColors">{@code customBorderColors}</a> feature is not enabled, {@code borderColor} <b>must</b> not be {@link EXTCustomBorderColor#VK_BORDER_COLOR_FLOAT_CUSTOM_EXT BORDER_COLOR_FLOAT_CUSTOM_EXT} or {@link EXTCustomBorderColor#VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT}</li>
  * <li>If {@code borderColor} is one of {@link EXTCustomBorderColor#VK_BORDER_COLOR_FLOAT_CUSTOM_EXT BORDER_COLOR_FLOAT_CUSTOM_EXT} or {@link EXTCustomBorderColor#VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT}, and {@link VkSamplerCustomBorderColorCreateInfoEXT}{@code ::format} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, {@link VkSamplerCustomBorderColorCreateInfoEXT}{@code ::customBorderColor} <b>must</b> be within the range of values representable in {@code format}</li>
  * <li>The maximum number of samplers with custom border colors which <b>can</b> be simultaneously created on a device is implementation-dependent and specified by the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxCustomBorderColorSamplers">{@code maxCustomBorderColorSamplers}</a> member of the {@link VkPhysicalDeviceCustomBorderColorPropertiesEXT} structure</li>
- * <li>If {@code flags} includes {@link QCOMImageProcessing#VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM}, then {@code minFilter} and {@code magFilter} <b>must</b> be {@link VK10#VK_FILTER_NEAREST FILTER_NEAREST}.</li>
+ * <li>If {@code flags} includes {@link EXTDescriptorBuffer#VK_SAMPLER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT SAMPLER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}, the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+ * <li>If the {@code pNext} chain includes a {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} structure, {@code flags} <b>must</b> contain {@link EXTDescriptorBuffer#VK_SAMPLER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT SAMPLER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}</li>
+ * <li>If {@code flags} includes {@link QCOMImageProcessing#VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM}, then {@code minFilter} and {@code magFilter} <b>must</b> be {@link VK10#VK_FILTER_NEAREST FILTER_NEAREST}</li>
  * <li>If {@code flags} includes {@link QCOMImageProcessing#VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM}, then {@code mipmapMode} <b>must</b> be {@link VK10#VK_SAMPLER_MIPMAP_MODE_NEAREST SAMPLER_MIPMAP_MODE_NEAREST}</li>
  * <li>[If {@code flags} includes {@link QCOMImageProcessing#VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM}, then {@code minLod} and {@code maxLod} <b>must</b> be zero</li>
  * <li>If {@code flags} includes {@link QCOMImageProcessing#VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM}, then {@code addressModeU} and {@code addressModeV} <b>must</b> each be either {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE} or {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER}</li>
- * <li>If {@code flags} includes {@link QCOMImageProcessing#VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM}, and if {@code addressModeU} or {@code addressModeV} is {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER}, then {@code borderColor} <b>must</b> be {@link VK10#VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK BORDER_COLOR_FLOAT_TRANSPARENT_BLACK}.</li>
+ * <li>If {@code flags} includes {@link QCOMImageProcessing#VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM}, and if {@code addressModeU} or {@code addressModeV} is {@link VK10#VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER}, then {@code borderColor} <b>must</b> be {@link VK10#VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK BORDER_COLOR_FLOAT_TRANSPARENT_BLACK}</li>
  * <li>If {@code flags} includes {@link QCOMImageProcessing#VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM}, then {@code anisotropyEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * <li>If {@code flags} includes {@link QCOMImageProcessing#VK_SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM SAMPLER_CREATE_IMAGE_PROCESSING_BIT_QCOM}, then {@code compareEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
  * </ul>
@@ -86,7 +88,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO STRUCTURE_TYPE_SAMPLER_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkSamplerBorderColorComponentMappingCreateInfoEXT}, {@link VkSamplerCustomBorderColorCreateInfoEXT}, {@link VkSamplerReductionModeCreateInfo}, or {@link VkSamplerYcbcrConversionInfo}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT}, {@link VkSamplerBorderColorComponentMappingCreateInfoEXT}, {@link VkSamplerCustomBorderColorCreateInfoEXT}, {@link VkSamplerReductionModeCreateInfo}, or {@link VkSamplerYcbcrConversionInfo}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkSamplerCreateFlagBits} values</li>
  * <li>{@code magFilter} <b>must</b> be a valid {@code VkFilter} value</li>
@@ -291,6 +293,8 @@ public class VkSamplerCreateInfo extends Struct implements NativeResource {
     public VkSamplerCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSamplerCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkSamplerCreateInfo pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerBorderColorComponentMappingCreateInfoEXT} value to the {@code pNext} chain. */
     public VkSamplerCreateInfo pNext(VkSamplerBorderColorComponentMappingCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerCustomBorderColorCreateInfoEXT} value to the {@code pNext} chain. */
@@ -692,6 +696,8 @@ public class VkSamplerCreateInfo extends Struct implements NativeResource {
         public VkSamplerCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO); }
         /** Sets the specified value to the {@link VkSamplerCreateInfo#pNext} field. */
         public VkSamplerCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSamplerCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkSamplerCreateInfo.Buffer pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerBorderColorComponentMappingCreateInfoEXT} value to the {@code pNext} chain. */
         public VkSamplerCreateInfo.Buffer pNext(VkSamplerBorderColorComponentMappingCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerCustomBorderColorCreateInfoEXT} value to the {@code pNext} chain. */

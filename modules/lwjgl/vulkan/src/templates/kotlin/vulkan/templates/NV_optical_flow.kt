@@ -13,6 +13,10 @@ val NV_optical_flow = "NVOpticalFlow".nativeClassVK("NV_optical_flow", type = "d
         """
         Optical flow are fundamental algorithms in computer vision (CV) area. This extension allows applications to estimate 2D displacement of pixels between two frames.
 
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        This extension is designed to be used with upcoming NVIDIA Optical Flow SDK Version 5 which will be available on NVIDIA Developer webpage.
+        </div>
+
         <h5>Examples</h5>
         <pre><code>
 ￿// Example querying available input formats

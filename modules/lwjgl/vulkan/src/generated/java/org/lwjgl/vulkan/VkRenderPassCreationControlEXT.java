@@ -86,7 +86,7 @@ public class VkRenderPassCreationControlEXT extends Struct implements NativeReso
     /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to an extension-specific structure. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** a boolean value indicating whether subpass merging will be disabled. */

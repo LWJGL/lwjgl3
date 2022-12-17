@@ -254,6 +254,8 @@ public class VKCapabilitiesInstance {
     public final boolean VK_EXT_headless_surface;
     /** When true, {@link EXTMetalSurface} is supported. */
     public final boolean VK_EXT_metal_surface;
+    /** When true, {@link EXTSurfaceMaintenance1} is supported. */
+    public final boolean VK_EXT_surface_maintenance1;
     /** When true, {@link EXTSwapchainColorspace} is supported. */
     public final boolean VK_EXT_swapchain_colorspace;
     /** When true, {@link EXTValidationFeatures} is supported. */
@@ -290,6 +292,8 @@ public class VKCapabilitiesInstance {
     public final boolean VK_KHR_win32_surface;
     /** When true, {@link KHRXlibSurface} is supported. */
     public final boolean VK_KHR_xlib_surface;
+    /** When true, {@link LUNARGDirectDriverLoading} is supported. */
+    public final boolean VK_LUNARG_direct_driver_loading;
     /** When true, {@link MVKMacosSurface} is supported. */
     public final boolean VK_MVK_macos_surface;
     /** When true, {@link NVExternalMemoryCapabilities} is supported. */
@@ -315,6 +319,7 @@ public class VKCapabilitiesInstance {
         VK_EXT_headless_surface = check_EXT_headless_surface(provider, caps, ext);
         VK_EXT_metal_surface = check_EXT_metal_surface(provider, caps, ext);
         check_EXT_sample_locations(provider, caps, deviceExt);
+        VK_EXT_surface_maintenance1 = ext.contains("VK_EXT_surface_maintenance1");
         VK_EXT_swapchain_colorspace = ext.contains("VK_EXT_swapchain_colorspace");
         check_EXT_tooling_info(provider, caps, deviceExt);
         VK_EXT_validation_features = ext.contains("VK_EXT_validation_features");
@@ -339,6 +344,7 @@ public class VKCapabilitiesInstance {
         VK_KHR_wayland_surface = check_KHR_wayland_surface(provider, caps, ext);
         VK_KHR_win32_surface = check_KHR_win32_surface(provider, caps, ext);
         VK_KHR_xlib_surface = check_KHR_xlib_surface(provider, caps, ext);
+        VK_LUNARG_direct_driver_loading = ext.contains("VK_LUNARG_direct_driver_loading");
         VK_MVK_macos_surface = check_MVK_macos_surface(provider, caps, ext);
         check_NV_acquire_winrt_display(provider, caps, deviceExt);
         check_NV_cooperative_matrix(provider, caps, deviceExt);

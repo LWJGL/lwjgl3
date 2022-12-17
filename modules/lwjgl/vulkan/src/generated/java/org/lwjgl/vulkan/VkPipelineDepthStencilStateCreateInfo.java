@@ -153,7 +153,7 @@ public class VkPipelineDepthStencilStateCreateInfo extends Struct implements Nat
     /** controls whether <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-stencil">stencil testing</a> is enabled. */
     @NativeType("VkBool32")
     public boolean stencilTestEnable() { return nstencilTestEnable(address()) != 0; }
-    /** {@code front} and {@code back} control the parameters of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-stencil">stencil test</a>. */
+    /** {@code front} and {@code back} are {@link VkStencilOpState} values controlling the corresponding parameters of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-stencil">stencil test</a>. */
     public VkStencilOpState front() { return nfront(address()); }
     /** see {@code front} */
     public VkStencilOpState back() { return nback(address()); }

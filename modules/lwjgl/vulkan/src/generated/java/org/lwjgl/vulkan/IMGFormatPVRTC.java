@@ -8,6 +8,10 @@ package org.lwjgl.vulkan;
 /**
  * {@code VK_IMG_format_pvrtc} provides additional texture compression functionality specific to Imagination Technologies PowerVR Texture compression format (called PVRTC).
  * 
+ * <h5>Deprecation</h5>
+ * 
+ * <p>Both PVRTC1 and PVRTC2 are slower than standard image formats on PowerVR GPUs, and support will be removed from future hardware.</p>
+ * 
  * <h5>VK_IMG_format_pvrtc</h5>
  * 
  * <dl>
@@ -22,6 +26,10 @@ package org.lwjgl.vulkan;
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires support for Vulkan 1.0</li>
+ * </ul></dd>
+ * <dt><b>Deprecation state</b></dt>
+ * <dd><ul>
+ * <li><em>Deprecated</em> without replacement</li>
  * </ul></dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>

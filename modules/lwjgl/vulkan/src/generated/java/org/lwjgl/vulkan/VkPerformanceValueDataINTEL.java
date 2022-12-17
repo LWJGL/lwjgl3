@@ -94,7 +94,7 @@ public class VkPerformanceValueDataINTEL extends Struct implements NativeResourc
     public long value64() { return nvalue64(address()); }
     /** represents floating-point data. */
     public float valueFloat() { return nvalueFloat(address()); }
-    /** represents {@code Bool32} data. */
+    /** represents {@code VkBool32} data. */
     @NativeType("VkBool32")
     public boolean valueBool() { return nvalueBool(address()) != 0; }
     /** represents a pointer to a null-terminated UTF-8 string. */

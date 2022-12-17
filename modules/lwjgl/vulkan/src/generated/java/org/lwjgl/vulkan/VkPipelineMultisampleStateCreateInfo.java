@@ -132,7 +132,7 @@ public class VkPipelineMultisampleStateCreateInfo extends Struct implements Nati
     /** reserved for future use. */
     @NativeType("VkPipelineMultisampleStateCreateFlags")
     public int flags() { return nflags(address()); }
-    /** a {@code VkSampleCountFlagBits} value specifying the number of samples used in rasterization. */
+    /** a {@code VkSampleCountFlagBits} value specifying the number of samples used in rasterization. This value is ignored for the purposes of setting the number of samples used in rasterization if the pipeline is created with the {@link EXTExtendedDynamicState3#VK_DYNAMIC_STATE_RASTERIZATION_SAMPLES_EXT DYNAMIC_STATE_RASTERIZATION_SAMPLES_EXT} dynamic state set, but if {@link EXTExtendedDynamicState3#VK_DYNAMIC_STATE_SAMPLE_MASK_EXT DYNAMIC_STATE_SAMPLE_MASK_EXT} dynamic state is not set, it is still used to define the size of the {@code pSampleMask} array as described below. */
     @NativeType("VkSampleCountFlagBits")
     public int rasterizationSamples() { return nrasterizationSamples(address()); }
     /** <b>can</b> be used to enable <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-sampleshading">Sample Shading</a>. */

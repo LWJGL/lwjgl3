@@ -98,7 +98,7 @@ val EXT_hdr_metadata = "EXTHdrMetadata".nativeClassVK("EXT_hdr_metadata", type =
             <li>{@code pSwapchains} <b>must</b> be a valid pointer to an array of {@code swapchainCount} valid {@code VkSwapchainKHR} handles</li>
             <li>{@code pMetadata} <b>must</b> be a valid pointer to an array of {@code swapchainCount} valid ##VkHdrMetadataEXT structures</li>
             <li>{@code swapchainCount} <b>must</b> be greater than 0</li>
-            <li>Both of {@code device}, and the elements of {@code pSwapchains} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+            <li>Each element of {@code pSwapchains} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
         <h5>See Also</h5>

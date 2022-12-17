@@ -163,7 +163,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         </div>
 
         <h5>See Also</h5>
-        ##VkSwapchainCreateInfoKHR, #GetPhysicalDeviceSurfacePresentModes2EXT(), #GetPhysicalDeviceSurfacePresentModesKHR()
+        ##VkSurfacePresentModeCompatibilityEXT, ##VkSurfacePresentModeEXT, ##VkSwapchainCreateInfoKHR, ##VkSwapchainPresentModeInfoEXT, ##VkSwapchainPresentModesCreateInfoEXT, #GetPhysicalDeviceSurfacePresentModes2EXT(), #GetPhysicalDeviceSurfacePresentModesKHR()
         """,
 
         "PRESENT_MODE_IMMEDIATE_KHR".."0",
@@ -197,7 +197,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        In the initial release of the {@code VK_KHR_surface} and {@link KHRSwapchain VK_KHR_swapchain} extensions, the token #COLORSPACE_SRGB_NONLINEAR_KHR was used. Starting in the 2016-05-13 updates to the extension branches, matching release 1.0.13 of the core API specification, #COLOR_SPACE_SRGB_NONLINEAR_KHR is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.
+        In the initial release of the {@link KHRSurface VK_KHR_surface} and {@link KHRSwapchain VK_KHR_swapchain} extensions, the token #COLORSPACE_SRGB_NONLINEAR_KHR was used. Starting in the 2016-05-13 updates to the extension branches, matching release 1.0.13 of the core API specification, #COLOR_SPACE_SRGB_NONLINEAR_KHR is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.
         </div>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>

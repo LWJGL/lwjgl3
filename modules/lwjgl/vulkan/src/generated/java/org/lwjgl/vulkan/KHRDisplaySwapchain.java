@@ -101,7 +101,7 @@ public class KHRDisplaySwapchain {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>When the {@code VK_KHR_display_swapchain} extension is enabled, multiple swapchains that share presentable images are created by calling:</p>
+     * <p>When the {@link KHRDisplaySwapchain VK_KHR_display_swapchain} extension is enabled, multiple swapchains that share presentable images are created by calling:</p>
      * 
      * <pre><code>
      * VkResult vkCreateSharedSwapchainsKHR(
@@ -115,7 +115,7 @@ public class KHRDisplaySwapchain {
      * 
      * <p>{@code vkCreateSharedSwapchainsKHR} is similar to {@link KHRSwapchain#vkCreateSwapchainKHR CreateSwapchainKHR}, except that it takes an array of {@link VkSwapchainCreateInfoKHR} structures, and returns an array of swapchain objects.</p>
      * 
-     * <p>The swapchain creation parameters that affect the properties and number of presentable images <b>must</b> match between all the swapchains. If the displays used by any of the swapchains do not use the same presentable image layout or are incompatible in a way that prevents sharing images, swapchain creation will fail with the result code {@link #VK_ERROR_INCOMPATIBLE_DISPLAY_KHR ERROR_INCOMPATIBLE_DISPLAY_KHR}. If any error occurs, no swapchains will be created. Images presented to multiple swapchains <b>must</b> be re-acquired from all of them before transitioning away from {@link KHRSwapchain#VK_IMAGE_LAYOUT_PRESENT_SRC_KHR IMAGE_LAYOUT_PRESENT_SRC_KHR}. After destroying one or more of the swapchains, the remaining swapchains and the presentable images <b>can</b> continue to be used.</p>
+     * <p>The swapchain creation parameters that affect the properties and number of presentable images <b>must</b> match between all the swapchains. If the displays used by any of the swapchains do not use the same presentable image layout or are incompatible in a way that prevents sharing images, swapchain creation will fail with the result code {@link #VK_ERROR_INCOMPATIBLE_DISPLAY_KHR ERROR_INCOMPATIBLE_DISPLAY_KHR}. If any error occurs, no swapchains will be created. Images presented to multiple swapchains <b>must</b> be re-acquired from all of them before being modified. After destroying one or more of the swapchains, the remaining swapchains and the presentable images <b>can</b> continue to be used.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

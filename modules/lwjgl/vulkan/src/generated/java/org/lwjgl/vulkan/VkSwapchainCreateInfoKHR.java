@@ -26,7 +26,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code presentMode} is not {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR} nor {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR}, then {@code minImageCount} <b>must</b> be greater than or equal to the value returned in the {@code minImageCount} member of the {@link VkSurfaceCapabilitiesKHR} structure returned by {@link KHRSurface#vkGetPhysicalDeviceSurfaceCapabilitiesKHR GetPhysicalDeviceSurfaceCapabilitiesKHR} for the surface</li>
  * <li>{@code minImageCount} <b>must</b> be 1 if {@code presentMode} is either {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR} or {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR}</li>
  * <li>{@code imageFormat} and {@code imageColorSpace} <b>must</b> match the {@code format} and {@code colorSpace} members, respectively, of one of the {@link VkSurfaceFormatKHR} structures returned by {@code vkGetPhysicalDeviceSurfaceFormatsKHR} for the surface</li>
- * <li>{@code imageExtent} <b>must</b> be between {@code minImageExtent} and {@code maxImageExtent}, inclusive, where {@code minImageExtent} and {@code maxImageExtent} are members of the {@link VkSurfaceCapabilitiesKHR} structure returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR} for the surface</li>
+ * <li>If a {@link VkSwapchainPresentScalingCreateInfoEXT} structure was not included in the {@code pNext} chain, or it is included and {@link VkSwapchainPresentScalingCreateInfoEXT}{@code ::scalingBehavior} is zero then {@code imageExtent} <b>must</b> be between {@code minImageExtent} and {@code maxImageExtent}, inclusive, where {@code minImageExtent} and {@code maxImageExtent} are members of the {@link VkSurfaceCapabilitiesKHR} structure returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR} for the surface</li>
+ * <li>If a {@link VkSwapchainPresentScalingCreateInfoEXT} structure was included in the {@code pNext} chain and {@link VkSwapchainPresentScalingCreateInfoEXT}{@code ::scalingBehavior} is not zero then {@code imageExtent} <b>must</b> be between {@code minScaledImageExtent} and {@code maxScaledImageExtent}, inclusive, where {@code minScaledImageExtent} and {@code maxScaledImageExtent} are members of the {@link VkSurfacePresentScalingCapabilitiesEXT} structure returned by {@code vkGetPhysicalDeviceSurfaceCapabilities2KHR} for the surface and {@code presentMode}</li>
  * <li>{@code imageExtent} members {@code width} and {@code height} <b>must</b> both be non-zero</li>
  * <li>{@code imageArrayLayers} <b>must</b> be greater than 0 and less than or equal to the {@code maxImageArrayLayers} member of the {@link VkSurfaceCapabilitiesKHR} structure returned by {@code vkGetPhysicalDeviceSurfaceCapabilitiesKHR} for the surface</li>
  * <li>If {@code presentMode} is {@link KHRSurface#VK_PRESENT_MODE_IMMEDIATE_KHR PRESENT_MODE_IMMEDIATE_KHR}, {@link KHRSurface#VK_PRESENT_MODE_MAILBOX_KHR PRESENT_MODE_MAILBOX_KHR}, {@link KHRSurface#VK_PRESENT_MODE_FIFO_KHR PRESENT_MODE_FIFO_KHR} or {@link KHRSurface#VK_PRESENT_MODE_FIFO_RELAXED_KHR PRESENT_MODE_FIFO_RELAXED_KHR}, {@code imageUsage} <b>must</b> be a subset of the supported usage flags present in the {@code supportedUsageFlags} member of the {@link VkSurfaceCapabilitiesKHR} structure returned by {@link KHRSurface#vkGetPhysicalDeviceSurfaceCapabilitiesKHR GetPhysicalDeviceSurfaceCapabilitiesKHR} for {@code surface}</li>
@@ -52,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRSwapchain#VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupSwapchainCreateInfoKHR}, {@link VkImageCompressionControlEXT}, {@link VkImageFormatListCreateInfo}, {@link VkSurfaceFullScreenExclusiveInfoEXT}, {@link VkSurfaceFullScreenExclusiveWin32InfoEXT}, {@link VkSwapchainCounterCreateInfoEXT}, {@link VkSwapchainDisplayNativeHdrCreateInfoAMD}, or {@link VkSwapchainPresentBarrierCreateInfoNV}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupSwapchainCreateInfoKHR}, {@link VkImageCompressionControlEXT}, {@link VkImageFormatListCreateInfo}, {@link VkSurfaceFullScreenExclusiveInfoEXT}, {@link VkSurfaceFullScreenExclusiveWin32InfoEXT}, {@link VkSwapchainCounterCreateInfoEXT}, {@link VkSwapchainDisplayNativeHdrCreateInfoAMD}, {@link VkSwapchainPresentBarrierCreateInfoNV}, {@link VkSwapchainPresentModesCreateInfoEXT}, or {@link VkSwapchainPresentScalingCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkSwapchainCreateFlagBitsKHR} values</li>
  * <li>{@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
@@ -65,7 +66,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code compositeAlpha} <b>must</b> be a valid {@code VkCompositeAlphaFlagBitsKHR} value</li>
  * <li>{@code presentMode} <b>must</b> be a valid {@code VkPresentModeKHR} value</li>
  * <li>If {@code oldSwapchain} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code oldSwapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
- * <li>If {@code oldSwapchain} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code surface}</li>
  * <li>Both of {@code oldSwapchain}, and {@code surface} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
  * </ul>
  * 
@@ -210,7 +210,7 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>On some platforms, it is normal that {@code maxImageExtent} <b>may</b> become {@code (0, 0)}, for example when the window is minimized. In such a case, it is not possible to create a swapchain due to the Valid Usage requirements.</p>
+     * <p>On some platforms, it is normal that {@code maxImageExtent} <b>may</b> become {@code (0, 0)}, for example when the window is minimized. In such a case, it is not possible to create a swapchain due to the Valid Usage requirements , unless scaling is selected through {@link VkSwapchainPresentScalingCreateInfoEXT}, if supported .</p>
      * </div>
      */
     public VkExtent2D imageExtent() { return nimageExtent(address()); }
@@ -298,6 +298,10 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
     public VkSwapchainCreateInfoKHR pNext(VkSwapchainDisplayNativeHdrCreateInfoAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSwapchainPresentBarrierCreateInfoNV} value to the {@code pNext} chain. */
     public VkSwapchainCreateInfoKHR pNext(VkSwapchainPresentBarrierCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainPresentModesCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkSwapchainCreateInfoKHR pNext(VkSwapchainPresentModesCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainPresentScalingCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkSwapchainCreateInfoKHR pNext(VkSwapchainPresentScalingCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkSwapchainCreateInfoKHR flags(@NativeType("VkSwapchainCreateFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #surface} field. */
@@ -711,6 +715,10 @@ public class VkSwapchainCreateInfoKHR extends Struct implements NativeResource {
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainDisplayNativeHdrCreateInfoAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSwapchainPresentBarrierCreateInfoNV} value to the {@code pNext} chain. */
         public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainPresentBarrierCreateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainPresentModesCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainPresentModesCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainPresentScalingCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkSwapchainCreateInfoKHR.Buffer pNext(VkSwapchainPresentScalingCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#flags} field. */
         public VkSwapchainCreateInfoKHR.Buffer flags(@NativeType("VkSwapchainCreateFlagsKHR") int value) { VkSwapchainCreateInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkSwapchainCreateInfoKHR#surface} field. */

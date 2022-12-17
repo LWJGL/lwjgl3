@@ -106,6 +106,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>Christoph Kubisch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_opacity_micromap]%20@pixeljetstream%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_opacity_micromap%20extension*">pixeljetstream</a></li>
  * <li>Eric Werness</li>
  * </ul></dd>
+ * <dt><b>Extension Proposal</b></dt>
+ * <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_opacity_micromap.adoc">VK_EXT_opacity_micromap</a></dd>
  * </dl>
  * 
  * <h5>Other Extension Metadata</h5>
@@ -404,7 +406,7 @@ public class EXTOpacityMicromap {
      * <ul>
      * <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-micromap">{@code micromap}</a> feature <b>must</b> be enabled</li>
      * <li>If {@link VkMicromapCreateInfoEXT}{@code ::deviceAddress} is not zero, the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-micromapCaptureReplay">{@code micromapCaptureReplay}</a> feature <b>must</b> be enabled</li>
-     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -543,7 +545,7 @@ public class EXTOpacityMicromap {
      * <p>This means that there <b>cannot</b> be any memory aliasing between any micromap memories or scratch memories being used by any of the builds.</p>
      * </div>
      * 
-     * <p>Accesses to the micromap scratch buffers as identified by the {@link VkMicromapBuildInfoEXT}{@code ::scratchData} buffer device addresses <b>must</b> be <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies">synchronized</a> with the {@link #VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT} <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-access-types">access type</a> of {@link #VK_ACCESS_2_MICROMAP_READ_BIT_EXT ACCESS_2_MICROMAP_READ_BIT_EXT} or {@link #VK_ACCESS_2_MICROMAP_WRITE_BIT_EXT ACCESS_2_MICROMAP_WRITE_BIT_EXT}. Similarly for accesses to {@link VkMicromapBuildInfoEXT}{@code ::dstMicromap}.</p>
+     * <p>Accesses to the micromap scratch buffers as identified by the {@link VkMicromapBuildInfoEXT}{@code ::scratchData} buffer device addresses <b>must</b> be <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies">synchronized</a> with the {@link #VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT} <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-access-types">access type</a> of ({@link #VK_ACCESS_2_MICROMAP_READ_BIT_EXT ACCESS_2_MICROMAP_READ_BIT_EXT} | {@link #VK_ACCESS_2_MICROMAP_WRITE_BIT_EXT ACCESS_2_MICROMAP_WRITE_BIT_EXT}). Accesses to {@link VkMicromapBuildInfoEXT}{@code ::dstMicromap} <b>must</b> be <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies">synchronized</a> with the {@link #VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT} <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-access-types">access type</a> of {@link #VK_ACCESS_2_MICROMAP_WRITE_BIT_EXT ACCESS_2_MICROMAP_WRITE_BIT_EXT}.</p>
      * 
      * <p>Accesses to other input buffers as identified by any used values of {@link VkMicromapBuildInfoEXT}{@code ::data} or {@link VkMicromapBuildInfoEXT}{@code ::triangleArray} <b>must</b> be <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-dependencies">synchronized</a> with the {@link #VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT} <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#synchronization-access-types">access type</a> of {@link VK10#VK_ACCESS_SHADER_READ_BIT ACCESS_SHADER_READ_BIT}.</p>
      * 
@@ -1458,7 +1460,7 @@ public class EXTOpacityMicromap {
      * 
      * <ul>
      * <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-micromap">{@code micromap}</a> feature <b>must</b> be enabled</li>
-     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+     * <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

@@ -489,7 +489,6 @@ public class EXTExtendedDynamicState3 {
      * 
      * <ul>
      * <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3AlphaToCoverageEnable">{@code extendedDynamicState3AlphaToCoverageEnable}</a> feature <b>must</b> be enabled</li>
-     * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-alphaToOne">{@code alphaToOne}</a> feature is not enabled, {@code alphaToOneEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -548,6 +547,7 @@ public class EXTExtendedDynamicState3 {
      * 
      * <ul>
      * <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3AlphaToOneEnable">{@code extendedDynamicState3AlphaToOneEnable}</a> feature <b>must</b> be enabled</li>
+     * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-alphaToOne">{@code alphaToOne}</a> feature is not enabled, {@code alphaToOneEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -835,7 +835,6 @@ public class EXTExtendedDynamicState3 {
      * <ul>
      * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
      * <li>{@code pColorWriteMasks} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid combinations of {@code VkColorComponentFlagBits} values</li>
-     * <li>Each element of {@code pColorWriteMasks} <b>must</b> not be 0</li>
      * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
      * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
      * <li>This command <b>must</b> only be called outside of a video coding scope</li>

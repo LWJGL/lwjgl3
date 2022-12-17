@@ -39,14 +39,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRSwapchain#VK_STRUCTURE_TYPE_PRESENT_INFO_KHR STRUCTURE_TYPE_PRESENT_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupPresentInfoKHR}, {@link VkDisplayPresentInfoKHR}, {@link VkPresentIdKHR}, {@link VkPresentRegionsKHR}, or {@link VkPresentTimesInfoGOOGLE}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupPresentInfoKHR}, {@link VkDisplayPresentInfoKHR}, {@link VkPresentIdKHR}, {@link VkPresentRegionsKHR}, {@link VkPresentTimesInfoGOOGLE}, {@link VkSwapchainPresentFenceInfoEXT}, or {@link VkSwapchainPresentModeInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphores} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} valid {@code VkSemaphore} handles</li>
  * <li>{@code pSwapchains} <b>must</b> be a valid pointer to an array of {@code swapchainCount} valid {@code VkSwapchainKHR} handles</li>
  * <li>{@code pImageIndices} <b>must</b> be a valid pointer to an array of {@code swapchainCount} {@code uint32_t} values</li>
  * <li>If {@code pResults} is not {@code NULL}, {@code pResults} <b>must</b> be a valid pointer to an array of {@code swapchainCount} {@code VkResult} values</li>
  * <li>{@code swapchainCount} <b>must</b> be greater than 0</li>
- * <li>Both of the elements of {@code pSwapchains}, and the elements of {@code pWaitSemaphores} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+ * <li>Both of the elements of {@code pSwapchains}, and the elements of {@code pWaitSemaphores} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -167,6 +167,10 @@ public class VkPresentInfoKHR extends Struct implements NativeResource {
     public VkPresentInfoKHR pNext(VkPresentRegionsKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPresentTimesInfoGOOGLE} value to the {@code pNext} chain. */
     public VkPresentInfoKHR pNext(VkPresentTimesInfoGOOGLE value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainPresentFenceInfoEXT} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkSwapchainPresentFenceInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkSwapchainPresentModeInfoEXT} value to the {@code pNext} chain. */
+    public VkPresentInfoKHR pNext(VkSwapchainPresentModeInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pWaitSemaphores} field. */
     public VkPresentInfoKHR pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { npWaitSemaphores(address(), value); return this; }
     /** Sets the specified value to the {@link #swapchainCount} field. */
@@ -471,6 +475,10 @@ public class VkPresentInfoKHR extends Struct implements NativeResource {
         public VkPresentInfoKHR.Buffer pNext(VkPresentRegionsKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPresentTimesInfoGOOGLE} value to the {@code pNext} chain. */
         public VkPresentInfoKHR.Buffer pNext(VkPresentTimesInfoGOOGLE value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainPresentFenceInfoEXT} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkSwapchainPresentFenceInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkSwapchainPresentModeInfoEXT} value to the {@code pNext} chain. */
+        public VkPresentInfoKHR.Buffer pNext(VkSwapchainPresentModeInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkPresentInfoKHR#pWaitSemaphores} field. */
         public VkPresentInfoKHR.Buffer pWaitSemaphores(@Nullable @NativeType("VkSemaphore const *") LongBuffer value) { VkPresentInfoKHR.npWaitSemaphores(address(), value); return this; }
         /** Sets the specified value to the {@link VkPresentInfoKHR#swapchainCount} field. */

@@ -100,7 +100,7 @@ val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type =
 
         When the presentation has completed, the presentId associated with the related {@code pSwapchains} entry will be increased in value so that it is at least equal to the value provided in the ##VkPresentIdKHR structure.
 
-        There is no requirement for any precise timing relationship between the presentation of the image to the user and the update of the presentId value, but implementations <b>should</b> make this as close as possible to the presentation of the first pixel in the new image to the user.
+        There is no requirement for any precise timing relationship between the presentation of the image to the user and the update of the presentId value, but implementations <b>should</b> make this as close as possible to the presentation of the first pixel in the next image being presented to the user.
 
         The call to {@code vkWaitForPresentKHR} will block until either the presentId associated with {@code swapchain} is greater than or equal to {@code presentId}, or {@code timeout} nanoseconds passes. When the swapchain becomes OUT_OF_DATE, the call will either return #SUCCESS (if the image was delivered to the presentation engine and may have been presented to the user) or will return early with status #ERROR_OUT_OF_DATE_KHR (if the image was not presented to the user).
 
@@ -116,7 +116,7 @@ val KHR_present_wait = "KHRPresentWait".nativeClassVK("KHR_present_wait", type =
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
-            <li>Both of {@code device}, and {@code swapchain} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+            <li>{@code swapchain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
         <h5>Host Synchronization</h5>

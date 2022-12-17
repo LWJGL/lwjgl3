@@ -28,7 +28,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link NVRayTracing#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code info} <b>must</b> be a valid {@link VkAccelerationStructureInfoNV} structure</li>
  * </ul>
  * 
@@ -109,6 +110,8 @@ public class VkAccelerationStructureCreateInfoNV extends Struct implements Nativ
     public VkAccelerationStructureCreateInfoNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkAccelerationStructureCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkAccelerationStructureCreateInfoNV pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #compactedSize} field. */
     public VkAccelerationStructureCreateInfoNV compactedSize(@NativeType("VkDeviceSize") long value) { ncompactedSize(address(), value); return this; }
     /** Copies the specified {@link VkAccelerationStructureInfoNV} to the {@link #info} field. */
@@ -358,6 +361,8 @@ public class VkAccelerationStructureCreateInfoNV extends Struct implements Nativ
         public VkAccelerationStructureCreateInfoNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV); }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoNV#pNext} field. */
         public VkAccelerationStructureCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureCreateInfoNV.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkAccelerationStructureCreateInfoNV.Buffer pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoNV#compactedSize} field. */
         public VkAccelerationStructureCreateInfoNV.Buffer compactedSize(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureCreateInfoNV.ncompactedSize(address(), value); return this; }
         /** Copies the specified {@link VkAccelerationStructureInfoNV} to the {@link VkAccelerationStructureCreateInfoNV#info} field. */

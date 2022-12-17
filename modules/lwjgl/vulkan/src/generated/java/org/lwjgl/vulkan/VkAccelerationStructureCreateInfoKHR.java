@@ -55,13 +55,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code offset} <b>must</b> be a multiple of 256 bytes</li>
  * <li>If {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV} is set in {@code flags} and {@code type} is {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR}, one member of the {@code pNext} chain <b>must</b> be a pointer to a valid instance of {@link VkAccelerationStructureMotionInfoNV}</li>
  * <li>If any geometry includes {@link VkAccelerationStructureGeometryMotionTrianglesDataNV} then {@code flags} <b>must</b> contain {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV ACCELERATION_STRUCTURE_CREATE_MOTION_BIT_NV}</li>
+ * <li>If {@code createFlags} includes {@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}, the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
+ * <li>If the {@code pNext} chain includes a {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} structure, {@code createFlags} <b>must</b> contain {@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkAccelerationStructureMotionInfoNV}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAccelerationStructureMotionInfoNV} or {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code createFlags} <b>must</b> be a valid combination of {@code VkAccelerationStructureCreateFlagBitsKHR} values</li>
  * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
@@ -176,6 +178,8 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct implements Nati
     public VkAccelerationStructureCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkAccelerationStructureMotionInfoNV} value to the {@code pNext} chain. */
     public VkAccelerationStructureCreateInfoKHR pNext(VkAccelerationStructureMotionInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkAccelerationStructureCreateInfoKHR pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #createFlags} field. */
     public VkAccelerationStructureCreateInfoKHR createFlags(@NativeType("VkAccelerationStructureCreateFlagsKHR") int value) { ncreateFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #buffer} field. */
@@ -442,6 +446,8 @@ public class VkAccelerationStructureCreateInfoKHR extends Struct implements Nati
         public VkAccelerationStructureCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureCreateInfoKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkAccelerationStructureMotionInfoNV} value to the {@code pNext} chain. */
         public VkAccelerationStructureCreateInfoKHR.Buffer pNext(VkAccelerationStructureMotionInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkAccelerationStructureCreateInfoKHR.Buffer pNext(VkOpaqueCaptureDescriptorDataCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#createFlags} field. */
         public VkAccelerationStructureCreateInfoKHR.Buffer createFlags(@NativeType("VkAccelerationStructureCreateFlagsKHR") int value) { VkAccelerationStructureCreateInfoKHR.ncreateFlags(address(), value); return this; }
         /** Sets the specified value to the {@link VkAccelerationStructureCreateInfoKHR#buffer} field. */

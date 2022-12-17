@@ -194,6 +194,6 @@ val NV_external_memory_rdma = "NVExternalMemoryRdma".nativeClassVK("NV_external_
 
         VkDevice("device", "the logical device that created the device memory being exported."),
         VkMemoryGetRemoteAddressInfoNV.const.p("pMemoryGetRemoteAddressInfo", "a pointer to a ##VkMemoryGetRemoteAddressInfoNV structure containing parameters of the export operation."),
-        Check(1)..VkRemoteAddressNV.p("pAddress", "will return the address representing the payload of the device memory object.")
+        Check(1)..VkRemoteAddressNV.p("pAddress", "a pointer to a {@code VkRemoteAddressNV} value in which an address representing the payload of the device memory object is returned.")
     )
 }

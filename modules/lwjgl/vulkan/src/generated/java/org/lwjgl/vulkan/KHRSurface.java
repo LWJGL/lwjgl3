@@ -167,7 +167,7 @@ public class KHRSurface {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkSwapchainCreateInfoKHR}, {@link EXTFullScreenExclusive#vkGetPhysicalDeviceSurfacePresentModes2EXT GetPhysicalDeviceSurfacePresentModes2EXT}, {@link #vkGetPhysicalDeviceSurfacePresentModesKHR GetPhysicalDeviceSurfacePresentModesKHR}</p>
+     * <p>{@link VkSurfacePresentModeCompatibilityEXT}, {@link VkSurfacePresentModeEXT}, {@link VkSwapchainCreateInfoKHR}, {@link VkSwapchainPresentModeInfoEXT}, {@link VkSwapchainPresentModesCreateInfoEXT}, {@link EXTFullScreenExclusive#vkGetPhysicalDeviceSurfacePresentModes2EXT GetPhysicalDeviceSurfacePresentModes2EXT}, {@link #vkGetPhysicalDeviceSurfacePresentModesKHR GetPhysicalDeviceSurfacePresentModesKHR}</p>
      */
     public static final int
         VK_PRESENT_MODE_IMMEDIATE_KHR    = 0,
@@ -201,7 +201,7 @@ public class KHRSurface {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>In the initial release of the {@code VK_KHR_surface} and {@link KHRSwapchain VK_KHR_swapchain} extensions, the token {@link #VK_COLORSPACE_SRGB_NONLINEAR_KHR COLORSPACE_SRGB_NONLINEAR_KHR} was used. Starting in the 2016-05-13 updates to the extension branches, matching release 1.0.13 of the core API specification, {@link #VK_COLOR_SPACE_SRGB_NONLINEAR_KHR COLOR_SPACE_SRGB_NONLINEAR_KHR} is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.</p>
+     * <p>In the initial release of the {@link KHRSurface VK_KHR_surface} and {@link KHRSwapchain VK_KHR_swapchain} extensions, the token {@link #VK_COLORSPACE_SRGB_NONLINEAR_KHR COLORSPACE_SRGB_NONLINEAR_KHR} was used. Starting in the 2016-05-13 updates to the extension branches, matching release 1.0.13 of the core API specification, {@link #VK_COLOR_SPACE_SRGB_NONLINEAR_KHR COLOR_SPACE_SRGB_NONLINEAR_KHR} is used instead for consistency with Vulkan naming rules. The older enum is still available for backwards compatibility.</p>
      * </div>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>

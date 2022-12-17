@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>Only one of {@code pUsageCounts} or {@code ppUsageCounts} <b>can</b> be a valid pointer, the other <b>must</b> be {@code NULL}.</li>
+ * <li>Only one of {@code pUsageCounts} or {@code ppUsageCounts} <b>can</b> be a valid pointer, the other <b>must</b> be {@code NULL}</li>
  * <li>If {@code type} is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} the {@code format} member of {@link VkMicromapUsageEXT} <b>must</b> be a valid value from {@code VkOpacityMicromapFormatEXT}</li>
  * <li>If {@code type} is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} the {@code format} member of {@link VkMicromapTriangleEXT} <b>must</b> be a valid value from {@code VkOpacityMicromapFormatEXT}</li>
  * </ul>

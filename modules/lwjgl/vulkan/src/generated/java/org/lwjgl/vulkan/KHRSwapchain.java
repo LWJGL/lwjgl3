@@ -359,7 +359,7 @@ public class KHRSwapchain {
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>If {@code swapchain} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
      * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
-     * <li>Both of {@code device}, and {@code swapchain} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+     * <li>If {@code swapchain} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -420,7 +420,7 @@ public class KHRSwapchain {
      * <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
      * <li>{@code pSwapchainImageCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
      * <li>If the value referenced by {@code pSwapchainImageCount} is not 0, and {@code pSwapchainImages} is not {@code NULL}, {@code pSwapchainImages} <b>must</b> be a valid pointer to an array of {@code pSwapchainImageCount} {@code VkImage} handles</li>
-     * <li>Both of {@code device}, and {@code swapchain} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+     * <li>{@code swapchain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * </ul>
      * 
      * <h5>Return Codes</h5>
@@ -479,6 +479,10 @@ public class KHRSwapchain {
      *     VkFence                                     fence,
      *     uint32_t*                                   pImageIndex);</code></pre>
      * 
+     * <h5>Description</h5>
+     * 
+     * <p>If the {@code swapchain} has been created with the {@link EXTSwapchainMaintenance1#VK_SWAPCHAIN_CREATE_DEFERRED_MEMORY_ALLOCATION_BIT_EXT SWAPCHAIN_CREATE_DEFERRED_MEMORY_ALLOCATION_BIT_EXT} flag, the image whose index is returned in {@code pImageIndex} will be fully backed by memory before this call returns to the application, as if it is bound completely and contiguously to a single {@code VkDeviceMemory} object.</p>
+     * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
@@ -487,7 +491,7 @@ public class KHRSwapchain {
      * <li>If {@code semaphore} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} it <b>must</b> not have any uncompleted signal or wait operations pending</li>
      * <li>If {@code fence} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} it <b>must</b> be unsignaled and <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
      * <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
-     * <li>If the number of currently acquired images is greater than the difference between the number of images in {@code swapchain} and the value of {@link VkSurfaceCapabilitiesKHR}{@code ::minImageCount} as returned by a call to {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR} with the {@code surface} used to create {@code swapchain}, {@code timeout} <b>must</b> not be {@code UINT64_MAX}</li>
+     * <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#swapchain-acquire-forward-progress">forward progress</a> cannot be guaranteed for the {@code surface} used to create the {@code swapchain} member of {@code pAcquireInfo}, the {@code timeout} member of {@code pAcquireInfo} <b>must</b> not be {@code UINT64_MAX}</li>
      * <li>{@code semaphore} <b>must</b> have a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}</li>
      * </ul>
      * 
@@ -499,9 +503,9 @@ public class KHRSwapchain {
      * <li>If {@code semaphore} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
      * <li>If {@code fence} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
      * <li>{@code pImageIndex} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
+     * <li>{@code swapchain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * <li>If {@code semaphore} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * <li>If {@code fence} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
-     * <li>Both of {@code device}, and {@code swapchain} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
      * </ul>
      * 
      * <h5>Host Synchronization</h5>
@@ -916,10 +920,14 @@ public class KHRSwapchain {
      *     const VkAcquireNextImageInfoKHR*            pAcquireInfo,
      *     uint32_t*                                   pImageIndex);</code></pre>
      * 
+     * <h5>Description</h5>
+     * 
+     * <p>If the {@code swapchain} has been created with the {@link EXTSwapchainMaintenance1#VK_SWAPCHAIN_CREATE_DEFERRED_MEMORY_ALLOCATION_BIT_EXT SWAPCHAIN_CREATE_DEFERRED_MEMORY_ALLOCATION_BIT_EXT} flag, the image whose index is returned in {@code pImageIndex} will be fully backed by memory before this call returns to the application.</p>
+     * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If the number of currently acquired images is greater than the difference between the number of images in the {@code swapchain} member of {@code pAcquireInfo} and the value of {@link VkSurfaceCapabilitiesKHR}{@code ::minImageCount} as returned by a call to {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR} with the {@code surface} used to create {@code swapchain}, the {@code timeout} member of {@code pAcquireInfo} <b>must</b> not be {@code UINT64_MAX}</li>
+     * <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#swapchain-acquire-forward-progress">forward progress</a> cannot be guaranteed for the {@code surface} used to create {@code swapchain}, the {@code timeout} member of {@code pAcquireInfo} <b>must</b> not be {@code UINT64_MAX}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

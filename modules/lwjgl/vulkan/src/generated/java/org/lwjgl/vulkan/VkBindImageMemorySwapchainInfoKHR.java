@@ -28,6 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code imageIndex} <b>must</b> be less than the number of images in {@code swapchain}</li>
+ * <li>If the {@code swapchain} has been created with {@link EXTSwapchainMaintenance1#VK_SWAPCHAIN_CREATE_DEFERRED_MEMORY_ALLOCATION_BIT_EXT SWAPCHAIN_CREATE_DEFERRED_MEMORY_ALLOCATION_BIT_EXT}, {@code imageIndex} <b>must</b> be one that has previously been returned by {@link KHRSwapchain#vkAcquireNextImageKHR AcquireNextImageKHR} or {@link KHRSwapchain#vkAcquireNextImage2KHR AcquireNextImage2KHR}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

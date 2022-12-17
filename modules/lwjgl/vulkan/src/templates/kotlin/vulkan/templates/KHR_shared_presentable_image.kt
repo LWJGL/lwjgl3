@@ -116,7 +116,7 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
-            <li>Both of {@code device}, and {@code swapchain} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+            <li>{@code swapchain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
         <h5>Host Synchronization</h5>

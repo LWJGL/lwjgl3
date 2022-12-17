@@ -101,7 +101,7 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
             <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
             <li>{@code pDisplayTimingProperties} <b>must</b> be a valid pointer to a ##VkRefreshCycleDurationGOOGLE structure</li>
-            <li>Both of {@code device}, and {@code swapchain} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+            <li>{@code swapchain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
         <h5>Host Synchronization</h5>
@@ -159,7 +159,7 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
             <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
             <li>{@code pPresentationTimingCount} <b>must</b> be a valid pointer to a {@code uint32_t} value</li>
             <li>If the value referenced by {@code pPresentationTimingCount} is not 0, and {@code pPresentationTimings} is not {@code NULL}, {@code pPresentationTimings} <b>must</b> be a valid pointer to an array of {@code pPresentationTimingCount} ##VkPastPresentationTimingGOOGLE structures</li>
-            <li>Both of {@code device}, and {@code swapchain} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+            <li>{@code swapchain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
         <h5>Host Synchronization</h5>

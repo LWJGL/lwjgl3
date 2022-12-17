@@ -84,7 +84,7 @@ public class VkRenderPassSubpassFeedbackCreateInfoEXT extends Struct implements 
     /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to an extension-specific structure. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** a pointer to a {@link VkRenderPassSubpassFeedbackInfoEXT} structure in which feedback is returned. */

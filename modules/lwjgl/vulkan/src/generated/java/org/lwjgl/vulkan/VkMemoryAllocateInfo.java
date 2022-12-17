@@ -71,7 +71,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@link VkMemoryAllocateFlagsInfo}{@code ::flags} includes {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT}, the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-bufferDeviceAddress">{@code bufferDeviceAddress}</a> feature <b>must</b> be enabled</li>
  * <li>If the {@code pNext} chain includes a {@link VkImportMemoryHostPointerInfoEXT} structure, {@link VkMemoryOpaqueCaptureAddressAllocateInfo}{@code ::opaqueCaptureAddress} <b>must</b> be zero</li>
  * <li>If the parameters define an import operation, {@link VkMemoryOpaqueCaptureAddressAllocateInfo}{@code ::opaqueCaptureAddress} <b>must</b> be zero</li>
- * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT}.</li>
+ * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

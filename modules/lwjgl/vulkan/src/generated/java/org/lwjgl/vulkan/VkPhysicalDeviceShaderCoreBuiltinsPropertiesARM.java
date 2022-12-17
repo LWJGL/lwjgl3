@@ -34,6 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM {
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
+ *     uint64_t {@link #shaderCoreMask};
  *     uint32_t {@link #shaderCoreCount};
  *     uint32_t {@link #shaderWarpsPerCore};
  * }</code></pre>
@@ -50,6 +51,7 @@ public class VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM extends Struct impl
     public static final int
         STYPE,
         PNEXT,
+        SHADERCOREMASK,
         SHADERCORECOUNT,
         SHADERWARPSPERCORE;
 
@@ -57,6 +59,7 @@ public class VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM extends Struct impl
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
+            __member(8),
             __member(4),
             __member(4)
         );
@@ -66,8 +69,9 @@ public class VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM extends Struct impl
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        SHADERCORECOUNT = layout.offsetof(2);
-        SHADERWARPSPERCORE = layout.offsetof(3);
+        SHADERCOREMASK = layout.offsetof(2);
+        SHADERCORECOUNT = layout.offsetof(3);
+        SHADERWARPSPERCORE = layout.offsetof(4);
     }
 
     /**
@@ -89,6 +93,9 @@ public class VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM extends Struct impl
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
+    /** a bitfield where each bit set represents the presence of a shader core whose ID is the bit position. The highest ID for any shader core on the device is the position of the most significant bit set. */
+    @NativeType("uint64_t")
+    public long shaderCoreMask() { return nshaderCoreMask(address()); }
     /** the number of shader cores on the device. */
     @NativeType("uint32_t")
     public int shaderCoreCount() { return nshaderCoreCount(address()); }
@@ -243,6 +250,8 @@ public class VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM extends Struct impl
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.PNEXT); }
+    /** Unsafe version of {@link #shaderCoreMask}. */
+    public static long nshaderCoreMask(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.SHADERCOREMASK); }
     /** Unsafe version of {@link #shaderCoreCount}. */
     public static int nshaderCoreCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.SHADERCORECOUNT); }
     /** Unsafe version of {@link #shaderWarpsPerCore}. */
@@ -297,6 +306,9 @@ public class VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM extends Struct impl
         /** @return the value of the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.npNext(address()); }
+        /** @return the value of the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#shaderCoreMask} field. */
+        @NativeType("uint64_t")
+        public long shaderCoreMask() { return VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.nshaderCoreMask(address()); }
         /** @return the value of the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#shaderCoreCount} field. */
         @NativeType("uint32_t")
         public int shaderCoreCount() { return VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.nshaderCoreCount(address()); }

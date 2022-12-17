@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_pipeline_robustness = "EXTPipelineRobustness".nativeClassVK("EXT_pipeline_robustness", type = "device", postfix = "EXT") {
     documentation =
         """
-        {@code VK_EXT_pipeline_robustness} allows users to request robustness on a per-pipeline stage basis.
+        This extension allows users to request robustness on a per-pipeline stage basis.
 
         As <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-robustBufferAccess">{@code robustBufferAccess}</a> and other robustness features may have an adverse effect on performance, this extension is designed to allow users to request robust behavior only where it may be needed.
 

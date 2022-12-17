@@ -301,7 +301,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
             <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
             <li>{@code counter} <b>must</b> be a valid {@code VkSurfaceCounterFlagBitsEXT} value</li>
             <li>{@code pCounterValue} <b>must</b> be a valid pointer to a {@code uint64_t} value</li>
-            <li>Both of {@code device}, and {@code swapchain} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+            <li>{@code swapchain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
         </ul>
 
         <h5>Return Codes</h5>

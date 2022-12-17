@@ -114,12 +114,16 @@ public class KHRGetSurfaceCapabilities2 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code pSurfaceInfo→surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
-     * <li>{@code pSurfaceInfo→surface} <b>must</b> be supported by {@code physicalDevice}, as reported by {@link KHRSurface#vkGetPhysicalDeviceSurfaceSupportKHR GetPhysicalDeviceSurfaceSupportKHR} or an equivalent platform-specific mechanism</li>
+     * <li>If the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is not enabled, {@code pSurfaceInfo→surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+     * <li>If {@code pSurfaceInfo→surface} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> be supported by {@code physicalDevice}, as reported by {@link KHRSurface#vkGetPhysicalDeviceSurfaceSupportKHR GetPhysicalDeviceSurfaceSupportKHR} or an equivalent platform-specific mechanism</li>
      * </ul>
      * 
      * <ul>
      * <li>If a {@link VkSurfaceCapabilitiesFullScreenExclusiveEXT} structure is included in the {@code pNext} chain of {@code pSurfaceCapabilities}, a {@link VkSurfaceFullScreenExclusiveWin32InfoEXT} structure <b>must</b> be included in the {@code pNext} chain of {@code pSurfaceInfo}</li>
+     * <li>If a {@link VkSurfacePresentModeCompatibilityEXT} structure is included in the {@code pNext} chain of {@code pSurfaceCapabilities}, a {@link VkSurfacePresentModeEXT} structure <b>must</b> be included in the {@code pNext} chain of {@code pSurfaceInfo}</li>
+     * <li>If a {@link VkSurfacePresentScalingCapabilitiesEXT} structure is included in the {@code pNext} chain of {@code pSurfaceCapabilities}, a {@link VkSurfacePresentModeEXT} structure <b>must</b> be included in the {@code pNext} chain of {@code pSurfaceInfo}</li>
+     * <li>If a {@link VkSurfacePresentModeCompatibilityEXT} structure is included in the {@code pNext} chain of {@code pSurfaceCapabilities}, {@code pSurfaceInfo→surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
+     * <li>If a {@link VkSurfacePresentScalingCapabilitiesEXT} structure is included in the {@code pNext} chain of {@code pSurfaceCapabilities}, {@code pSurfaceInfo→surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

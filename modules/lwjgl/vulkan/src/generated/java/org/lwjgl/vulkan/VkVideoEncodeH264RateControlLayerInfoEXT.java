@@ -25,8 +25,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>When {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}, both {@code useMinQp} and {@code useMaxQp} must be set to {@link VK10#VK_TRUE TRUE}.</li>
- * <li>When {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}, the values provided in {@code minQP} must be identical to those provided in {@code maxQp}.</li>
+ * <li>When {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}, both {@code useMinQp} and {@code useMaxQp} must be set to {@link VK10#VK_TRUE TRUE}</li>
+ * <li>When {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}, the values provided in {@code minQP} must be identical to those provided in {@code maxQp}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

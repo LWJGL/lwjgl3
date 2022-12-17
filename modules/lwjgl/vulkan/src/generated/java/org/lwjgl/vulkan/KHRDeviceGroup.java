@@ -524,10 +524,14 @@ public class KHRDeviceGroup {
      *     const VkAcquireNextImageInfoKHR*            pAcquireInfo,
      *     uint32_t*                                   pImageIndex);</code></pre>
      * 
+     * <h5>Description</h5>
+     * 
+     * <p>If the {@code swapchain} has been created with the {@link EXTSwapchainMaintenance1#VK_SWAPCHAIN_CREATE_DEFERRED_MEMORY_ALLOCATION_BIT_EXT SWAPCHAIN_CREATE_DEFERRED_MEMORY_ALLOCATION_BIT_EXT} flag, the image whose index is returned in {@code pImageIndex} will be fully backed by memory before this call returns to the application.</p>
+     * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>If the number of currently acquired images is greater than the difference between the number of images in the {@code swapchain} member of {@code pAcquireInfo} and the value of {@link VkSurfaceCapabilitiesKHR}{@code ::minImageCount} as returned by a call to {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR} with the {@code surface} used to create {@code swapchain}, the {@code timeout} member of {@code pAcquireInfo} <b>must</b> not be {@code UINT64_MAX}</li>
+     * <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#swapchain-acquire-forward-progress">forward progress</a> cannot be guaranteed for the {@code surface} used to create {@code swapchain}, the {@code timeout} member of {@code pAcquireInfo} <b>must</b> not be {@code UINT64_MAX}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

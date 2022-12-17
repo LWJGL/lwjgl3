@@ -6,7 +6,7 @@
 package org.lwjgl.vulkan;
 
 /**
- * {@code VK_EXT_pipeline_robustness} allows users to request robustness on a per-pipeline stage basis.
+ * This extension allows users to request robustness on a per-pipeline stage basis.
  * 
  * <p>As <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> and other robustness features may have an adverse effect on performance, this extension is designed to allow users to request robust behavior only where it may be needed.</p>
  * 

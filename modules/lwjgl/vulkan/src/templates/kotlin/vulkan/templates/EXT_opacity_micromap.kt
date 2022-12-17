@@ -104,6 +104,9 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
                 <li>Christoph Kubisch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_opacity_micromap]%20@pixeljetstream%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_opacity_micromap%20extension*">pixeljetstream</a></li>
                 <li>Eric Werness</li>
             </ul></dd>
+
+            <dt><b>Extension Proposal</b></dt>
+            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_opacity_micromap.adoc">VK_EXT_opacity_micromap</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
@@ -351,7 +354,7 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
         <ul>
             <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-micromap">{@code micromap}</a> feature <b>must</b> be enabled</li>
             <li>If ##VkMicromapCreateInfoEXT{@code ::deviceAddress} is not zero, the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-micromapCaptureReplay">{@code micromapCaptureReplay}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -450,7 +453,7 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
         This means that there <b>cannot</b> be any memory aliasing between any micromap memories or scratch memories being used by any of the builds.
         </div>
 
-        Accesses to the micromap scratch buffers as identified by the ##VkMicromapBuildInfoEXT{@code ::scratchData} buffer device addresses <b>must</b> be <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_2_MICROMAP_READ_BIT_EXT or #ACCESS_2_MICROMAP_WRITE_BIT_EXT. Similarly for accesses to ##VkMicromapBuildInfoEXT{@code ::dstMicromap}.
+        Accesses to the micromap scratch buffers as identified by the ##VkMicromapBuildInfoEXT{@code ::scratchData} buffer device addresses <b>must</b> be <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of (#ACCESS_2_MICROMAP_READ_BIT_EXT | #ACCESS_2_MICROMAP_WRITE_BIT_EXT). Accesses to ##VkMicromapBuildInfoEXT{@code ::dstMicromap} <b>must</b> be <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_2_MICROMAP_WRITE_BIT_EXT.
 
         Accesses to other input buffers as identified by any used values of ##VkMicromapBuildInfoEXT{@code ::data} or ##VkMicromapBuildInfoEXT{@code ::triangleArray} <b>must</b> be <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies">synchronized</a> with the #PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-stages">pipeline stage</a> and an <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-access-types">access type</a> of #ACCESS_SHADER_READ_BIT.
 
@@ -1163,7 +1166,7 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
         <h5>Valid Usage</h5>
         <ul>
             <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-micromap">{@code micromap}</a> feature <b>must</b> be enabled</li>
-            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">bufferDeviceAddressMultiDevice</a> feature <b>must</b> be enabled</li>
+            <li>If {@code device} was created with multiple physical devices, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-bufferDeviceAddressMultiDevice">{@code bufferDeviceAddressMultiDevice}</a> feature <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

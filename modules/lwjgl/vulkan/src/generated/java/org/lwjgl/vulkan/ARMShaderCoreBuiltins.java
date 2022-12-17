@@ -22,7 +22,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>498</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd><ul>
  * <li>Requires support for Vulkan 1.0</li>
@@ -53,7 +53,7 @@ package org.lwjgl.vulkan;
 public final class ARMShaderCoreBuiltins {
 
     /** The extension specification version. */
-    public static final int VK_ARM_SHADER_CORE_BUILTINS_SPEC_VERSION = 1;
+    public static final int VK_ARM_SHADER_CORE_BUILTINS_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_ARM_SHADER_CORE_BUILTINS_EXTENSION_NAME = "VK_ARM_shader_core_builtins";

@@ -121,6 +121,46 @@ public class VkSubresourceLayout extends Struct implements NativeResource {
     @NativeType("VkDeviceSize")
     public long depthPitch() { return ndepthPitch(address()); }
 
+    /** Sets the specified value to the {@link #offset} field. */
+    public VkSubresourceLayout offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
+    /** Sets the specified value to the {@link #size} field. */
+    public VkSubresourceLayout size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
+    /** Sets the specified value to the {@link #rowPitch} field. */
+    public VkSubresourceLayout rowPitch(@NativeType("VkDeviceSize") long value) { nrowPitch(address(), value); return this; }
+    /** Sets the specified value to the {@link #arrayPitch} field. */
+    public VkSubresourceLayout arrayPitch(@NativeType("VkDeviceSize") long value) { narrayPitch(address(), value); return this; }
+    /** Sets the specified value to the {@link #depthPitch} field. */
+    public VkSubresourceLayout depthPitch(@NativeType("VkDeviceSize") long value) { ndepthPitch(address(), value); return this; }
+
+    /** Initializes this struct with the specified values. */
+    public VkSubresourceLayout set(
+        long offset,
+        long size,
+        long rowPitch,
+        long arrayPitch,
+        long depthPitch
+    ) {
+        offset(offset);
+        size(size);
+        rowPitch(rowPitch);
+        arrayPitch(arrayPitch);
+        depthPitch(depthPitch);
+
+        return this;
+    }
+
+    /**
+     * Copies the specified struct data to this struct.
+     *
+     * @param src the source struct
+     *
+     * @return this struct
+     */
+    public VkSubresourceLayout set(VkSubresourceLayout src) {
+        memCopy(src.address(), address(), SIZEOF);
+        return this;
+    }
+
     // -----------------------------------
 
     /** Returns a new {@code VkSubresourceLayout} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
@@ -264,6 +304,17 @@ public class VkSubresourceLayout extends Struct implements NativeResource {
     /** Unsafe version of {@link #depthPitch}. */
     public static long ndepthPitch(long struct) { return UNSAFE.getLong(null, struct + VkSubresourceLayout.DEPTHPITCH); }
 
+    /** Unsafe version of {@link #offset(long) offset}. */
+    public static void noffset(long struct, long value) { UNSAFE.putLong(null, struct + VkSubresourceLayout.OFFSET, value); }
+    /** Unsafe version of {@link #size(long) size}. */
+    public static void nsize(long struct, long value) { UNSAFE.putLong(null, struct + VkSubresourceLayout.SIZE, value); }
+    /** Unsafe version of {@link #rowPitch(long) rowPitch}. */
+    public static void nrowPitch(long struct, long value) { UNSAFE.putLong(null, struct + VkSubresourceLayout.ROWPITCH, value); }
+    /** Unsafe version of {@link #arrayPitch(long) arrayPitch}. */
+    public static void narrayPitch(long struct, long value) { UNSAFE.putLong(null, struct + VkSubresourceLayout.ARRAYPITCH, value); }
+    /** Unsafe version of {@link #depthPitch(long) depthPitch}. */
+    public static void ndepthPitch(long struct, long value) { UNSAFE.putLong(null, struct + VkSubresourceLayout.DEPTHPITCH, value); }
+
     // -----------------------------------
 
     /** An array of {@link VkSubresourceLayout} structs. */
@@ -317,6 +368,17 @@ public class VkSubresourceLayout extends Struct implements NativeResource {
         /** @return the value of the {@link VkSubresourceLayout#depthPitch} field. */
         @NativeType("VkDeviceSize")
         public long depthPitch() { return VkSubresourceLayout.ndepthPitch(address()); }
+
+        /** Sets the specified value to the {@link VkSubresourceLayout#offset} field. */
+        public VkSubresourceLayout.Buffer offset(@NativeType("VkDeviceSize") long value) { VkSubresourceLayout.noffset(address(), value); return this; }
+        /** Sets the specified value to the {@link VkSubresourceLayout#size} field. */
+        public VkSubresourceLayout.Buffer size(@NativeType("VkDeviceSize") long value) { VkSubresourceLayout.nsize(address(), value); return this; }
+        /** Sets the specified value to the {@link VkSubresourceLayout#rowPitch} field. */
+        public VkSubresourceLayout.Buffer rowPitch(@NativeType("VkDeviceSize") long value) { VkSubresourceLayout.nrowPitch(address(), value); return this; }
+        /** Sets the specified value to the {@link VkSubresourceLayout#arrayPitch} field. */
+        public VkSubresourceLayout.Buffer arrayPitch(@NativeType("VkDeviceSize") long value) { VkSubresourceLayout.narrayPitch(address(), value); return this; }
+        /** Sets the specified value to the {@link VkSubresourceLayout#depthPitch} field. */
+        public VkSubresourceLayout.Buffer depthPitch(@NativeType("VkDeviceSize") long value) { VkSubresourceLayout.ndepthPitch(address(), value); return this; }
 
     }
 

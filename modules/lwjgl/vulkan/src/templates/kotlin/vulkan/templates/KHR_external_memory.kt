@@ -65,7 +65,7 @@ val KHR_external_memory = "KHRExternalMemory".nativeClassVK("KHR_external_memory
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jason Ekstrand, Intel</li>
-                <li>Ian Elliot, Google</li>
+                <li>Ian Elliott, Google</li>
                 <li>Jesse Hall, Google</li>
                 <li>Tobias Hector, Imagination Technologies</li>
                 <li>James Jones, NVIDIA</li>

@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkWriteDescriptorSet}</p>
+ * <p>{@link VkDescriptorDataEXT}, {@link VkWriteDescriptorSet}</p>
  * 
  * <h3>Layout</h3>
  * 

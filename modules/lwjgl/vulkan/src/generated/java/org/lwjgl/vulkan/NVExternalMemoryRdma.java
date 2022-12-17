@@ -205,7 +205,7 @@ public class NVExternalMemoryRdma {
      *
      * @param device                      the logical device that created the device memory being exported.
      * @param pMemoryGetRemoteAddressInfo a pointer to a {@link VkMemoryGetRemoteAddressInfoNV} structure containing parameters of the export operation.
-     * @param pAddress                    will return the address representing the payload of the device memory object.
+     * @param pAddress                    a pointer to a {@code VkRemoteAddressNV} value in which an address representing the payload of the device memory object is returned.
      */
     @NativeType("VkResult")
     public static int vkGetMemoryRemoteAddressNV(VkDevice device, @NativeType("VkMemoryGetRemoteAddressInfoNV const *") VkMemoryGetRemoteAddressInfoNV pMemoryGetRemoteAddressInfo, @NativeType("VkRemoteAddressNV *") PointerBuffer pAddress) {

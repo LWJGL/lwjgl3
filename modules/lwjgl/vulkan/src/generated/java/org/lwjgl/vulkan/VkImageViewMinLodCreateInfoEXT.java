@@ -37,8 +37,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-minLod">{@code minLod}</a> feature is not enabled, {@code minLod} <b>must</b> be {@code 0.0}.</li>
- * <li>{@code minLod} <b>must</b> be less or equal to the index of the last mipmap level accessible to the view.</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-minLod">{@code minLod}</a> feature is not enabled, {@code minLod} <b>must</b> be {@code 0.0}</li>
+ * <li>{@code minLod} <b>must</b> be less or equal to the index of the last mipmap level accessible to the view</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

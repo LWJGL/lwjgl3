@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code regionCount} <b>must</b> be 0 if {@link NVOpticalFlow#VK_OPTICAL_FLOW_SESSION_CREATE_ALLOW_REGIONS_BIT_NV OPTICAL_FLOW_SESSION_CREATE_ALLOW_REGIONS_BIT_NV} was not set for {@code VkOpticalFlowSessionNV} on which this command is operating.</li>
+ * <li>{@code regionCount} <b>must</b> be 0 if {@link NVOpticalFlow#VK_OPTICAL_FLOW_SESSION_CREATE_ALLOW_REGIONS_BIT_NV OPTICAL_FLOW_SESSION_CREATE_ALLOW_REGIONS_BIT_NV} was not set for {@code VkOpticalFlowSessionNV} on which this command is operating</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

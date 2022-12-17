@@ -29,7 +29,7 @@ val ARM_shader_core_builtins = "ARMShaderCoreBuiltins".nativeClassVK("ARM_shader
             <dd>498</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
@@ -64,7 +64,7 @@ val ARM_shader_core_builtins = "ARMShaderCoreBuiltins".nativeClassVK("ARM_shader
     IntConstant(
         "The extension specification version.",
 
-        "ARM_SHADER_CORE_BUILTINS_SPEC_VERSION".."1"
+        "ARM_SHADER_CORE_BUILTINS_SPEC_VERSION".."2"
     )
 
     StringConstant(

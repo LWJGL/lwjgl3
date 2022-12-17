@@ -82,7 +82,7 @@ public class VkPipelinePropertiesIdentifierEXT extends Struct implements NativeR
     /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to an extension-specific structure. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
     /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values into which the pipeline identifier will be written. */

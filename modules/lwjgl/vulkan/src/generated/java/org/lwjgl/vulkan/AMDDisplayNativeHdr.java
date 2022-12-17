@@ -113,7 +113,7 @@ public class AMDDisplayNativeHdr {
      * <ul>
      * <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
      * <li>{@code swapChain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
-     * <li>Both of {@code device}, and {@code swapChain} <b>must</b> have been created, allocated, or retrieved from the same {@code VkInstance}</li>
+     * <li>{@code swapChain} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
      * </ul>
      * 
      * <h5>Valid Usage</h5>

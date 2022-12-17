@@ -145,6 +145,12 @@ public class NVExternalMemoryCapabilities {
      * 
      * <p>If {@code externalHandleType} is 0, {@code pExternalImageFormatProperties→imageFormatProperties} will return the same values as a call to {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}, and the other members of {@code pExternalImageFormatProperties} will all be 0. Otherwise, they are filled in as described for {@link VkExternalImageFormatPropertiesNV}.</p>
      * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>{@code externalHandleType} <b>must</b> not have more than one bit set</li>
+     * </ul>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
