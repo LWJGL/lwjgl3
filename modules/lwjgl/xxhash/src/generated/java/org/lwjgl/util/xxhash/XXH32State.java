@@ -104,7 +104,7 @@ public class XXH32State extends Struct implements NativeResource {
     /** amount of data in {@code mem32} */
     @NativeType("XXH32_hash_t")
     public int memsize() { return nmemsize(address()); }
-    /** reserved field. Do not read or write to it, it may be removed. */
+    /** reserved field. Do not read nor write to it. */
     @NativeType("XXH32_hash_t")
     public int reserved() { return nreserved(address()); }
 

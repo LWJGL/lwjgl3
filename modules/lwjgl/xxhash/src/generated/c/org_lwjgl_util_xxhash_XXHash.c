@@ -306,11 +306,11 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits_1withSec
     return (jlong)XXH3_64bits_withSecretandSeed(data, (size_t)len, secret, (size_t)secretSize, (XXH64_hash_t)seed);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_1128bits_1withSecretandSeed(JNIEnv *__env, jclass clazz, jlong dataAddress, jlong len, jlong secretAddress, jlong secretSize, jlong seed, jlong __result) {
-    void const *data = (void const *)(uintptr_t)dataAddress;
+JNIEXPORT void JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_1128bits_1withSecretandSeed(JNIEnv *__env, jclass clazz, jlong inputAddress, jlong length, jlong secretAddress, jlong secretSize, jlong seed, jlong __result) {
+    void const *input = (void const *)(uintptr_t)inputAddress;
     void const *secret = (void const *)(uintptr_t)secretAddress;
     UNUSED_PARAMS(__env, clazz)
-    *((XXH128_hash_t*)(uintptr_t)__result) = XXH3_128bits_withSecretandSeed(data, (size_t)len, secret, (size_t)secretSize, (XXH64_hash_t)seed);
+    *((XXH128_hash_t*)(uintptr_t)__result) = XXH3_128bits_withSecretandSeed(input, (size_t)length, secret, (size_t)secretSize, (XXH64_hash_t)seed);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_xxhash_XXHash_nXXH3_164bits_1reset_1withSecretandSeed(JNIEnv *__env, jclass clazz, jlong statePtrAddress, jlong secretAddress, jlong secretSize, jlong seed64) {

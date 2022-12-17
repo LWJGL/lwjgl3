@@ -102,7 +102,7 @@ hashFile(FILE* stream)
         Compared to XXH64, expect XXH3 to run approximately ~2x faster on large inputs and &gt;3x faster on small ones, exact differences vary depending on
         platform.
 
-        XXH3's speed benefits greatly from SIMD and 64-bit arithmetic, but does not require it. Any 32-bit and 64-bit targets that can run XXH32 smoothly can
+        XXH3's speed benefits greatly from SIMD and 64-bit arithmetic, but does not require it. Most 32-bit and 64-bit targets that can run XXH32 smoothly can
         run XXH3 at competitive speeds, even without vector support. Further details are explained in the implementation.
 
         Optimized implementations are provided for AVX512, AVX2, SSE2, NEON, POWER8, ZVector and scalar targets. This can be controlled via the XXH_VECTOR
@@ -140,7 +140,7 @@ hashFile(FILE* stream)
         """
 
     EnumConstant(
-        "Error codes.",
+        "Exit code for the streaming API. ({@code XXH_errorcode})",
 
         "OK".enum,
         "ERROR".enum
@@ -409,9 +409,10 @@ hashFile(FILE* stream)
     XXH64_hash_t(
         "3_64bits",
         """
-        Default 64-bit variant, using default secret and default seed of 0.
+        64-bit unseeded variant of XXH3.
 
-        It's the fastest variant.
+        This is equivalent to #3_64bits_withSeed() with a seed of 0, however it may have slightly better performance due to constant propagation of the
+        defaults.
         """,
 
         void.const.p("data", ""),
@@ -421,9 +422,11 @@ hashFile(FILE* stream)
     XXH64_hash_t(
         "3_64bits_withSeed",
         """
+        64-bit seeded variant of XXH3.
+
         This variant generates on the fly a custom secret, based on the default secret, altered using the {@code seed} value.
 
-        While this operation is decently fast, note that it's not completely free. Note {@code seed==0} produces same results as #3_64bits().
+        While this operation is decently fast, note that it's not completely free. Note {@code seed == 0} produces same results as #3_64bits().
         """,
 
         void.const.p("data", ""),
@@ -434,6 +437,8 @@ hashFile(FILE* stream)
     XXH64_hash_t(
         "3_64bits_withSecret",
         """
+        64-bit variant of XXH3 with a custom "secret".
+
         It's possible to provide any blob of bytes as a "secret" to generate the hash. This makes it more difficult for an external actor to prepare an
         intentional collision. The main condition is that {@code secretSize} <b>must</b> be large enough (&ge; #XXH3_SECRET_SIZE_MIN).
 
@@ -528,7 +533,14 @@ hashFile(FILE* stream)
 
     XXH128_hash_t(
         "3_128bits",
-        "",
+        """
+        Unseeded 128-bit variant of XXH3.
+
+        The 128-bit variant of XXH3 has more strength, but it has a bit of overhead for shorter inputs.
+
+        This is equivalent to #3_128bits_withSeed() with a seed of 0, however it may have slightly better performance due to constant propagation of the
+        defaults.
+        """,
 
         void.const.p("data", ""),
         AutoSize("data")..size_t("len", "")
@@ -536,7 +548,7 @@ hashFile(FILE* stream)
 
     XXH128_hash_t(
         "3_128bits_withSeed",
-        "",
+        "Seeded 128-bit variant of XXH3. See #3_64bits_withSeed().",
 
         void.const.p("data", ""),
         AutoSize("data")..size_t("len", ""),
@@ -545,7 +557,7 @@ hashFile(FILE* stream)
 
     XXH128_hash_t(
         "3_128bits_withSecret",
-        "",
+        "Custom secret 128-bit variant of XXH3. See #3_64bits_withSecret().",
 
         void.const.p("data", ""),
         AutoSize("data")..size_t("len", ""),
@@ -707,8 +719,8 @@ hashFile(FILE* stream)
         "3_128bits_withSecretandSeed",
         "",
 
-        nullable..void.const.p("data", ""),
-        AutoSize("data")..size_t("len", ""),
+        nullable..void.const.p("input", ""),
+        AutoSize("input")..size_t("length", ""),
         Check("XXH3_SECRET_SIZE_MIN")..void.const.p("secret", ""),
         AutoSize("secret")..size_t("secretSize", ""),
         XXH64_hash_t("seed", "")

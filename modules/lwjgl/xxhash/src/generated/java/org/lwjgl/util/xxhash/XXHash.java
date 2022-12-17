@@ -97,7 +97,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <p>Compared to XXH64, expect XXH3 to run approximately ~2x faster on large inputs and &gt;3x faster on small ones, exact differences vary depending on
  * platform.</p>
  * 
- * <p>XXH3's speed benefits greatly from SIMD and 64-bit arithmetic, but does not require it. Any 32-bit and 64-bit targets that can run XXH32 smoothly can
+ * <p>XXH3's speed benefits greatly from SIMD and 64-bit arithmetic, but does not require it. Most 32-bit and 64-bit targets that can run XXH32 smoothly can
  * run XXH3 at competitive speeds, even without vector support. Further details are explained in the implementation.</p>
  * 
  * <p>Optimized implementations are provided for AVX512, AVX2, SSE2, NEON, POWER8, ZVector and scalar targets. This can be controlled via the XXH_VECTOR
@@ -139,7 +139,7 @@ public class XXHash {
     static { LibXXHash.initialize(); }
 
     /**
-     * Error codes.
+     * Exit code for the streaming API. ({@code XXH_errorcode})
      * 
      * <h5>Enum values:</h5>
      * 
@@ -545,9 +545,10 @@ public class XXHash {
     public static native long nXXH3_64bits(long data, long len);
 
     /**
-     * Default 64-bit variant, using default secret and default seed of 0.
+     * 64-bit unseeded variant of XXH3.
      * 
-     * <p>It's the fastest variant.</p>
+     * <p>This is equivalent to {@link #XXH3_64bits_withSeed 3_64bits_withSeed} with a seed of 0, however it may have slightly better performance due to constant propagation of the
+     * defaults.</p>
      */
     @NativeType("XXH64_hash_t")
     public static long XXH3_64bits(@NativeType("void const *") ByteBuffer data) {
@@ -560,9 +561,11 @@ public class XXHash {
     public static native long nXXH3_64bits_withSeed(long data, long len, long seed);
 
     /**
-     * This variant generates on the fly a custom secret, based on the default secret, altered using the {@code seed} value.
+     * 64-bit seeded variant of XXH3.
      * 
-     * <p>While this operation is decently fast, note that it's not completely free. Note {@code seed==0} produces same results as {@link #XXH3_64bits 3_64bits}.</p>
+     * <p>This variant generates on the fly a custom secret, based on the default secret, altered using the {@code seed} value.</p>
+     * 
+     * <p>While this operation is decently fast, note that it's not completely free. Note {@code seed == 0} produces same results as {@link #XXH3_64bits 3_64bits}.</p>
      */
     @NativeType("XXH64_hash_t")
     public static long XXH3_64bits_withSeed(@NativeType("void const *") ByteBuffer data, @NativeType("XXH64_hash_t") long seed) {
@@ -575,8 +578,10 @@ public class XXHash {
     public static native long nXXH3_64bits_withSecret(long data, long len, long secret, long secretSize);
 
     /**
-     * It's possible to provide any blob of bytes as a "secret" to generate the hash. This makes it more difficult for an external actor to prepare an
-     * intentional collision. The main condition is that {@code secretSize} <b>must</b> be large enough (&ge; {@link #XXH3_SECRET_SIZE_MIN}).
+     * 64-bit variant of XXH3 with a custom "secret".
+     * 
+     * <p>It's possible to provide any blob of bytes as a "secret" to generate the hash. This makes it more difficult for an external actor to prepare an
+     * intentional collision. The main condition is that {@code secretSize} <b>must</b> be large enough (&ge; {@link #XXH3_SECRET_SIZE_MIN}).</p>
      * 
      * <p>However, the quality of the secret impacts the dispersion of the hash algorithm. Therefore, the secret <b>must</b> look like a bunch of random bytes.
      * Avoid "trivial" or structured data such as repeated sequences or a text document. Whenever in doubt about the "randomness" of the blob of bytes,
@@ -690,8 +695,17 @@ public class XXHash {
 
     // --- [ XXH3_128bits ] ---
 
+    /** Unsafe version of: {@link #XXH3_128bits} */
     public static native void nXXH3_128bits(long data, long len, long __result);
 
+    /**
+     * Unseeded 128-bit variant of XXH3.
+     * 
+     * <p>The 128-bit variant of XXH3 has more strength, but it has a bit of overhead for shorter inputs.</p>
+     * 
+     * <p>This is equivalent to {@link #XXH3_128bits_withSeed 3_128bits_withSeed} with a seed of 0, however it may have slightly better performance due to constant propagation of the
+     * defaults.</p>
+     */
     @NativeType("XXH128_hash_t")
     public static XXH128Hash XXH3_128bits(@NativeType("void const *") ByteBuffer data, @NativeType("XXH128_hash_t") XXH128Hash __result) {
         nXXH3_128bits(memAddress(data), data.remaining(), __result.address());
@@ -700,8 +714,10 @@ public class XXHash {
 
     // --- [ XXH3_128bits_withSeed ] ---
 
+    /** Unsafe version of: {@link #XXH3_128bits_withSeed} */
     public static native void nXXH3_128bits_withSeed(long data, long len, long seed, long __result);
 
+    /** Seeded 128-bit variant of XXH3. See {@link #XXH3_64bits_withSeed 3_64bits_withSeed}. */
     @NativeType("XXH128_hash_t")
     public static XXH128Hash XXH3_128bits_withSeed(@NativeType("void const *") ByteBuffer data, @NativeType("XXH64_hash_t") long seed, @NativeType("XXH128_hash_t") XXH128Hash __result) {
         nXXH3_128bits_withSeed(memAddress(data), data.remaining(), seed, __result.address());
@@ -710,8 +726,10 @@ public class XXHash {
 
     // --- [ XXH3_128bits_withSecret ] ---
 
+    /** Unsafe version of: {@link #XXH3_128bits_withSecret} */
     public static native void nXXH3_128bits_withSecret(long data, long len, long secret, long secretSize, long __result);
 
+    /** Custom secret 128-bit variant of XXH3. See {@link #XXH3_64bits_withSecret 3_64bits_withSecret}. */
     @NativeType("XXH128_hash_t")
     public static XXH128Hash XXH3_128bits_withSecret(@NativeType("void const *") ByteBuffer data, @NativeType("void const *") ByteBuffer secret, @NativeType("XXH128_hash_t") XXH128Hash __result) {
         if (CHECKS) {
@@ -910,14 +928,14 @@ public class XXHash {
 
     // --- [ XXH3_128bits_withSecretandSeed ] ---
 
-    public static native void nXXH3_128bits_withSecretandSeed(long data, long len, long secret, long secretSize, long seed, long __result);
+    public static native void nXXH3_128bits_withSecretandSeed(long input, long length, long secret, long secretSize, long seed, long __result);
 
     @NativeType("XXH128_hash_t")
-    public static XXH128Hash XXH3_128bits_withSecretandSeed(@Nullable @NativeType("void const *") ByteBuffer data, @NativeType("void const *") ByteBuffer secret, @NativeType("XXH64_hash_t") long seed, @NativeType("XXH128_hash_t") XXH128Hash __result) {
+    public static XXH128Hash XXH3_128bits_withSecretandSeed(@Nullable @NativeType("void const *") ByteBuffer input, @NativeType("void const *") ByteBuffer secret, @NativeType("XXH64_hash_t") long seed, @NativeType("XXH128_hash_t") XXH128Hash __result) {
         if (CHECKS) {
             check(secret, XXH3_SECRET_SIZE_MIN);
         }
-        nXXH3_128bits_withSecretandSeed(memAddressSafe(data), remainingSafe(data), memAddress(secret), secret.remaining(), seed, __result.address());
+        nXXH3_128bits_withSecretandSeed(memAddressSafe(input), remainingSafe(input), memAddress(secret), secret.remaining(), seed, __result.address());
         return __result;
     }
 

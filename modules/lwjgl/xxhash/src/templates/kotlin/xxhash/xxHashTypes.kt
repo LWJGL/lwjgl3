@@ -17,7 +17,7 @@ val XXH32_state_t = struct(Module.XXHASH, "XXH32State", nativeName = "XXH32_stat
     XXH32_hash_t("v", "accumulator lanes")[4]
     XXH32_hash_t("mem32", "internal buffer for partial reads. Treated as {@code unsigned char[16]}.")[4]
     XXH32_hash_t("memsize", "amount of data in {@code mem32}")
-    XXH32_hash_t("reserved", "reserved field. Do not read or write to it, it may be removed.")
+    XXH32_hash_t("reserved", "reserved field. Do not read nor write to it.")
 }
 
 val XXH64_state_t = struct(Module.XXHASH, "XXH64State", nativeName = "XXH64_state_t", mutable = false) {
@@ -28,7 +28,7 @@ val XXH64_state_t = struct(Module.XXHASH, "XXH64State", nativeName = "XXH64_stat
     XXH64_hash_t("mem64", "internal buffer for partial reads. Treated as {@code unsigned char[32]}.")[4]
     XXH32_hash_t("memsize", "amount of data in {@code mem64}")
     XXH32_hash_t("reserved32", "reserved field, needed for padding anyways")
-    XXH64_hash_t("reserved64", "reserved field. Do not read or write to it, it may be removed.")
+    XXH64_hash_t("reserved64", "reserved field. Do not read or write to it.")
 }
 
 val XXH_errorcode = "XXH_errorcode".enumType

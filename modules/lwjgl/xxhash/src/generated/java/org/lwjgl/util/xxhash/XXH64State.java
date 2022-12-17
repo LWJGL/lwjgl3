@@ -104,7 +104,7 @@ public class XXH64State extends Struct implements NativeResource {
     /** reserved field, needed for padding anyways */
     @NativeType("XXH32_hash_t")
     public int reserved32() { return nreserved32(address()); }
-    /** reserved field. Do not read or write to it, it may be removed. */
+    /** reserved field. Do not read or write to it. */
     @NativeType("XXH64_hash_t")
     public long reserved64() { return nreserved64(address()); }
 
