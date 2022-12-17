@@ -5,7 +5,7 @@
 [![Backers on Open Collective](https://opencollective.com/lwjgl/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/lwjgl/sponsors/badge.svg)](#sponsors)
 ![Size](https://img.shields.io/github/repo-size/LWJGL/lwjgl3.svg?label=size&colorB=lightgray)
-[![Build Status](https://img.shields.io/github/workflow/status/LWJGL-CI/glfw/LWJGL%20Build?logo=github)](https://github.com/LWJGL-CI/lwjgl3/actions/workflows/CI.yml)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/LWJGL-CI/lwjgl3/CI.yml?branch=master)](https://github.com/LWJGL-CI/lwjgl3/actions/workflows/CI.yml)
 
 ## LWJGL - Lightweight Java Game Library 3
 
