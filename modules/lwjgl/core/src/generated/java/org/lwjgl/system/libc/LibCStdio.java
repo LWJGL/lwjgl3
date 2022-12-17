@@ -82,14 +82,6 @@ public class LibCStdio {
         }
     }
 
-    // --- [ sprintf ] ---
-
-    @NativeType("void *")
-    private static native long sprintf();
-
-    /** The address of the {@code sprintf} function. */
-    public static final long sprintf = sprintf();
-
     // --- [ snprintf ] ---
 
     @NativeType("void *")

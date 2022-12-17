@@ -24,11 +24,6 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_libc_LibCStdio_nvsscanf(JNIEnv *__e
     return (jint)vsscanf(buffer, format, *vlist);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCStdio_sprintf(JNIEnv *__env, jclass clazz) {
-    UNUSED_PARAMS(__env, clazz)
-    return (jlong)(uintptr_t)sprintf;
-}
-
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_libc_LibCStdio_snprintf(JNIEnv *__env, jclass clazz) {
     UNUSED_PARAMS(__env, clazz)
     return (jlong)(uintptr_t)snprintf;

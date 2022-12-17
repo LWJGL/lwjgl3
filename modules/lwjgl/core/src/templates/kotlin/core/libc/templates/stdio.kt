@@ -33,7 +33,6 @@ val stdio = "LibCStdio".nativeClass(Module.CORE_LIBC) {
         "the number of receiving arguments successfully assigned, or {@code EOF} if read failure occurs before the first receiving argument was assigned"
     )
 
-    macro..opaque_p("sprintf", "The address of the {@code sprintf} function.", void())
     macro..opaque_p("snprintf", "The address of the {@code snprintf} function.", void())
 
     int(
