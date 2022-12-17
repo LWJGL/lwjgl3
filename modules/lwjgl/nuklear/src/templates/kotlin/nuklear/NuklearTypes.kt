@@ -160,7 +160,7 @@ val nk_convert_config = struct(Module.NUKLEAR, "NkConvertConfig", nativeName = "
     unsigned_int("circle_segment_count", "number of segments used for circles: default to 22")
     unsigned_int("arc_segment_count", "number of segments used for arcs: default to 22")
     unsigned_int("curve_segment_count", "number of segments used for curves: default to 22")
-    nk_draw_null_texture("null_texture", "handle to texture with a white pixel for shape drawing")
+    nk_draw_null_texture("tex_null", "handle to texture with a white pixel for shape drawing")
     Unsafe..nk_draw_vertex_layout_element.p("vertex_layout", "describes the vertex output format and packing")
     nk_size("vertex_size", "sizeof one vertex for vertex packing")
     nk_size("vertex_alignment", "vertex alignment: Can be optained by NK_ALIGNOF")

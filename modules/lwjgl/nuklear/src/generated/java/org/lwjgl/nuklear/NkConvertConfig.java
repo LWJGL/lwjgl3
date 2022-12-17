@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int {@link #circle_segment_count};
  *     unsigned int {@link #arc_segment_count};
  *     unsigned int {@link #curve_segment_count};
- *     {@link NkDrawNullTexture struct nk_draw_null_texture} {@link #null_texture};
+ *     {@link NkDrawNullTexture struct nk_draw_null_texture} {@link #tex_null};
  *     {@link NkDrawVertexLayoutElement struct nk_draw_vertex_layout_element} * {@link #vertex_layout};
  *     nk_size {@link #vertex_size};
  *     nk_size {@link #vertex_alignment};
@@ -50,7 +50,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
         CIRCLE_SEGMENT_COUNT,
         ARC_SEGMENT_COUNT,
         CURVE_SEGMENT_COUNT,
-        NULL_TEXTURE,
+        TEX_NULL,
         VERTEX_LAYOUT,
         VERTEX_SIZE,
         VERTEX_ALIGNMENT;
@@ -78,7 +78,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
         CIRCLE_SEGMENT_COUNT = layout.offsetof(3);
         ARC_SEGMENT_COUNT = layout.offsetof(4);
         CURVE_SEGMENT_COUNT = layout.offsetof(5);
-        NULL_TEXTURE = layout.offsetof(6);
+        TEX_NULL = layout.offsetof(6);
         VERTEX_LAYOUT = layout.offsetof(7);
         VERTEX_SIZE = layout.offsetof(8);
         VERTEX_ALIGNMENT = layout.offsetof(9);
@@ -116,7 +116,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
     public int curve_segment_count() { return ncurve_segment_count(address()); }
     /** handle to texture with a white pixel for shape drawing */
     @NativeType("struct nk_draw_null_texture")
-    public NkDrawNullTexture null_texture() { return nnull_texture(address()); }
+    public NkDrawNullTexture tex_null() { return ntex_null(address()); }
     /**
      * @param capacity the number of elements in the returned buffer
      *
@@ -143,10 +143,10 @@ public class NkConvertConfig extends Struct implements NativeResource {
     public NkConvertConfig arc_segment_count(@NativeType("unsigned int") int value) { narc_segment_count(address(), value); return this; }
     /** Sets the specified value to the {@link #curve_segment_count} field. */
     public NkConvertConfig curve_segment_count(@NativeType("unsigned int") int value) { ncurve_segment_count(address(), value); return this; }
-    /** Copies the specified {@link NkDrawNullTexture} to the {@link #null_texture} field. */
-    public NkConvertConfig null_texture(@NativeType("struct nk_draw_null_texture") NkDrawNullTexture value) { nnull_texture(address(), value); return this; }
-    /** Passes the {@link #null_texture} field to the specified {@link java.util.function.Consumer Consumer}. */
-    public NkConvertConfig null_texture(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(null_texture()); return this; }
+    /** Copies the specified {@link NkDrawNullTexture} to the {@link #tex_null} field. */
+    public NkConvertConfig tex_null(@NativeType("struct nk_draw_null_texture") NkDrawNullTexture value) { ntex_null(address(), value); return this; }
+    /** Passes the {@link #tex_null} field to the specified {@link java.util.function.Consumer Consumer}. */
+    public NkConvertConfig tex_null(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(tex_null()); return this; }
     /** Sets the address of the specified {@link NkDrawVertexLayoutElement.Buffer} to the {@link #vertex_layout} field. */
     public NkConvertConfig vertex_layout(@NativeType("struct nk_draw_vertex_layout_element *") NkDrawVertexLayoutElement.Buffer value) { nvertex_layout(address(), value); return this; }
     /** Sets the specified value to the {@link #vertex_size} field. */
@@ -162,7 +162,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
         int circle_segment_count,
         int arc_segment_count,
         int curve_segment_count,
-        NkDrawNullTexture null_texture,
+        NkDrawNullTexture tex_null,
         NkDrawVertexLayoutElement.Buffer vertex_layout,
         long vertex_size,
         long vertex_alignment
@@ -173,7 +173,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
         circle_segment_count(circle_segment_count);
         arc_segment_count(arc_segment_count);
         curve_segment_count(curve_segment_count);
-        null_texture(null_texture);
+        tex_null(tex_null);
         vertex_layout(vertex_layout);
         vertex_size(vertex_size);
         vertex_alignment(vertex_alignment);
@@ -337,8 +337,8 @@ public class NkConvertConfig extends Struct implements NativeResource {
     public static int narc_segment_count(long struct) { return UNSAFE.getInt(null, struct + NkConvertConfig.ARC_SEGMENT_COUNT); }
     /** Unsafe version of {@link #curve_segment_count}. */
     public static int ncurve_segment_count(long struct) { return UNSAFE.getInt(null, struct + NkConvertConfig.CURVE_SEGMENT_COUNT); }
-    /** Unsafe version of {@link #null_texture}. */
-    public static NkDrawNullTexture nnull_texture(long struct) { return NkDrawNullTexture.create(struct + NkConvertConfig.NULL_TEXTURE); }
+    /** Unsafe version of {@link #tex_null}. */
+    public static NkDrawNullTexture ntex_null(long struct) { return NkDrawNullTexture.create(struct + NkConvertConfig.TEX_NULL); }
     /** Unsafe version of {@link #vertex_layout}. */
     public static NkDrawVertexLayoutElement.Buffer nvertex_layout(long struct, int capacity) { return NkDrawVertexLayoutElement.create(memGetAddress(struct + NkConvertConfig.VERTEX_LAYOUT), capacity); }
     /** Unsafe version of {@link #vertex_size}. */
@@ -358,8 +358,8 @@ public class NkConvertConfig extends Struct implements NativeResource {
     public static void narc_segment_count(long struct, int value) { UNSAFE.putInt(null, struct + NkConvertConfig.ARC_SEGMENT_COUNT, value); }
     /** Unsafe version of {@link #curve_segment_count(int) curve_segment_count}. */
     public static void ncurve_segment_count(long struct, int value) { UNSAFE.putInt(null, struct + NkConvertConfig.CURVE_SEGMENT_COUNT, value); }
-    /** Unsafe version of {@link #null_texture(NkDrawNullTexture) null_texture}. */
-    public static void nnull_texture(long struct, NkDrawNullTexture value) { memCopy(value.address(), struct + NkConvertConfig.NULL_TEXTURE, NkDrawNullTexture.SIZEOF); }
+    /** Unsafe version of {@link #tex_null(NkDrawNullTexture) tex_null}. */
+    public static void ntex_null(long struct, NkDrawNullTexture value) { memCopy(value.address(), struct + NkConvertConfig.TEX_NULL, NkDrawNullTexture.SIZEOF); }
     /** Unsafe version of {@link #vertex_layout(NkDrawVertexLayoutElement.Buffer) vertex_layout}. */
     public static void nvertex_layout(long struct, NkDrawVertexLayoutElement.Buffer value) { memPutAddress(struct + NkConvertConfig.VERTEX_LAYOUT, value.address()); }
     /** Unsafe version of {@link #vertex_size(long) vertex_size}. */
@@ -431,9 +431,9 @@ public class NkConvertConfig extends Struct implements NativeResource {
         /** @return the value of the {@link NkConvertConfig#curve_segment_count} field. */
         @NativeType("unsigned int")
         public int curve_segment_count() { return NkConvertConfig.ncurve_segment_count(address()); }
-        /** @return a {@link NkDrawNullTexture} view of the {@link NkConvertConfig#null_texture} field. */
+        /** @return a {@link NkDrawNullTexture} view of the {@link NkConvertConfig#tex_null} field. */
         @NativeType("struct nk_draw_null_texture")
-        public NkDrawNullTexture null_texture() { return NkConvertConfig.nnull_texture(address()); }
+        public NkDrawNullTexture tex_null() { return NkConvertConfig.ntex_null(address()); }
         /**
          * @return a {@link NkDrawVertexLayoutElement.Buffer} view of the struct array pointed to by the {@link NkConvertConfig#vertex_layout} field.
          *
@@ -460,10 +460,10 @@ public class NkConvertConfig extends Struct implements NativeResource {
         public NkConvertConfig.Buffer arc_segment_count(@NativeType("unsigned int") int value) { NkConvertConfig.narc_segment_count(address(), value); return this; }
         /** Sets the specified value to the {@link NkConvertConfig#curve_segment_count} field. */
         public NkConvertConfig.Buffer curve_segment_count(@NativeType("unsigned int") int value) { NkConvertConfig.ncurve_segment_count(address(), value); return this; }
-        /** Copies the specified {@link NkDrawNullTexture} to the {@link NkConvertConfig#null_texture} field. */
-        public NkConvertConfig.Buffer null_texture(@NativeType("struct nk_draw_null_texture") NkDrawNullTexture value) { NkConvertConfig.nnull_texture(address(), value); return this; }
-        /** Passes the {@link NkConvertConfig#null_texture} field to the specified {@link java.util.function.Consumer Consumer}. */
-        public NkConvertConfig.Buffer null_texture(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(null_texture()); return this; }
+        /** Copies the specified {@link NkDrawNullTexture} to the {@link NkConvertConfig#tex_null} field. */
+        public NkConvertConfig.Buffer tex_null(@NativeType("struct nk_draw_null_texture") NkDrawNullTexture value) { NkConvertConfig.ntex_null(address(), value); return this; }
+        /** Passes the {@link NkConvertConfig#tex_null} field to the specified {@link java.util.function.Consumer Consumer}. */
+        public NkConvertConfig.Buffer tex_null(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(tex_null()); return this; }
         /** Sets the address of the specified {@link NkDrawVertexLayoutElement.Buffer} to the {@link NkConvertConfig#vertex_layout} field. */
         public NkConvertConfig.Buffer vertex_layout(@NativeType("struct nk_draw_vertex_layout_element *") NkDrawVertexLayoutElement.Buffer value) { NkConvertConfig.nvertex_layout(address(), value); return this; }
         /** Sets the specified value to the {@link NkConvertConfig#vertex_size} field. */

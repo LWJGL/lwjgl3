@@ -575,7 +575,7 @@ public class GLFWDemo {
                     .vertex_layout(VERTEX_LAYOUT)
                     .vertex_size(20)
                     .vertex_alignment(4)
-                    .null_texture(null_texture)
+                    .tex_null(null_texture)
                     .circle_segment_count(22)
                     .curve_segment_count(22)
                     .arc_segment_count(22)
