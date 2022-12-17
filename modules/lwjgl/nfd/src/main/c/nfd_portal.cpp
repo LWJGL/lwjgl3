@@ -1443,9 +1443,9 @@ nfdresult_t NFD_PathSet_GetPathN(const nfdpathset_t* pathSet,
     return AllocAndCopyFilePath(uri, *outPath);
 }
 
-void NFD_PathSet_FreePathN(const nfdnchar_t* filePath) {
+void NFD_PathSet_FreePathN(nfdnchar_t* filePath) {
     assert(filePath);
-    NFD_FreePathN(const_cast<nfdnchar_t*>(filePath));
+    NFD_FreePathN(filePath);
 }
 
 void NFD_PathSet_Free(const nfdpathset_t* pathSet) {

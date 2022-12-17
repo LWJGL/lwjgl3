@@ -584,7 +584,7 @@ nfdresult_t NFD_PathSet_GetPathN(const nfdpathset_t* pathSet,
     return NFD_OKAY;
 }
 
-void NFD_PathSet_FreePathN(const nfdnchar_t* filePath) {
+void NFD_PathSet_FreePathN(nfdnchar_t* filePath) {
     assert(filePath);
     (void)filePath;  // prevent warning in release build
     // no-op, because NFD_PathSet_Free does the freeing for us

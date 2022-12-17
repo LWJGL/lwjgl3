@@ -97,7 +97,7 @@ nfdfilteritem_t filterItem[2] = { { "Source code", "c,cpp,cc" }, { "Headers", "h
         "FreePath",
         "Free a file path that was returned by the dialogs.",
 
-        nfdchar_t.p("filePath", "")
+        RawPointer..nfdchar_t.p("filePath", "")
     )
 
     nfdresult_t(
@@ -136,7 +136,7 @@ nfdfilteritem_t filterItem[2] = { { "Source code", "c,cpp,cc" }, { "Headers", "h
         It is the caller's responsibility to free {@code outPaths} via #PathSet_Free() if this function returns #OKAY.
         """,
 
-        Check(1)..nfdpathset_t.p.p("outPath", ""),
+        Check(1)..nfdpathset_t.const.p.p("outPath", ""),
         nullable..nfdfilteritem_t.const.p("filterList", ""),
         AutoSize("filterList")..nfdfiltersize_t("filterCount", "if zero, {@code filterList} is ignored (you can use #NULL)"),
         nullable..nfdchar_t.const.p("defaultPath", "if #NULL, the operating system will decide")
@@ -218,7 +218,7 @@ nfdfilteritem_t filterItem[2] = { { "Source code", "c,cpp,cc" }, { "Headers", "h
         "PathSet_FreePath",
         "Free the path gotten by #PathSet_GetPath().",
 
-        nfdchar_t.const.p("filePath", "")
+        RawPointer..nfdchar_t.p("filePath", "")
     )
 
     nfdresult_t(

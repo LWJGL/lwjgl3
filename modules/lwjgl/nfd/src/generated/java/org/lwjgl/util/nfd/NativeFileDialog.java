@@ -125,6 +125,11 @@ public class NativeFileDialog {
         nNFD_FreePath(memAddress(filePath));
     }
 
+    /** Free a file path that was returned by the dialogs. */
+    public static void NFD_FreePath(@NativeType("nfdchar_t *") long filePath) {
+        nNFD_FreePath(filePath);
+    }
+
     // --- [ NFD_Init ] ---
 
     /** Initialize NFD - call this for every thread that might use NFD, before calling any other NFD functions on that thread. */
@@ -202,7 +207,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_OpenDialogMultiple(@NativeType("nfdpathset_t **") PointerBuffer outPath, @Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer filterList, @Nullable @NativeType("nfdchar_t const *") ByteBuffer defaultPath) {
+    public static int NFD_OpenDialogMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPath, @Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer filterList, @Nullable @NativeType("nfdchar_t const *") ByteBuffer defaultPath) {
         if (CHECKS) {
             check(outPath, 1);
             checkNT1Safe(defaultPath);
@@ -219,7 +224,7 @@ public class NativeFileDialog {
      * @param defaultPath if {@code NULL}, the operating system will decide
      */
     @NativeType("nfdresult_t")
-    public static int NFD_OpenDialogMultiple(@NativeType("nfdpathset_t **") PointerBuffer outPath, @Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer filterList, @Nullable @NativeType("nfdchar_t const *") CharSequence defaultPath) {
+    public static int NFD_OpenDialogMultiple(@NativeType("nfdpathset_t const **") PointerBuffer outPath, @Nullable @NativeType("nfdfilteritem_t const *") NFDFilterItem.Buffer filterList, @Nullable @NativeType("nfdchar_t const *") CharSequence defaultPath) {
         if (CHECKS) {
             check(outPath, 1);
             if (filterList != null) { Struct.validate(filterList.address(), remainingSafe(filterList), NFDFilterItem.SIZEOF, NFDFilterItem::validate); }
@@ -396,7 +401,7 @@ public class NativeFileDialog {
     public static native void nNFD_PathSet_FreePath(long filePath);
 
     /** Free the path gotten by {@link #NFD_PathSet_GetPath PathSet_GetPath}. */
-    public static void NFD_PathSet_FreePath(@NativeType("nfdchar_t const *") ByteBuffer filePath) {
+    public static void NFD_PathSet_FreePath(@NativeType("nfdchar_t *") ByteBuffer filePath) {
         if (CHECKS) {
             checkNT1(filePath);
         }
@@ -404,15 +409,8 @@ public class NativeFileDialog {
     }
 
     /** Free the path gotten by {@link #NFD_PathSet_GetPath PathSet_GetPath}. */
-    public static void NFD_PathSet_FreePath(@NativeType("nfdchar_t const *") CharSequence filePath) {
-        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        try {
-            stack.nUTF8(filePath, true);
-            long filePathEncoded = stack.getPointerAddress();
-            nNFD_PathSet_FreePath(filePathEncoded);
-        } finally {
-            stack.setPointer(stackPointer);
-        }
+    public static void NFD_PathSet_FreePath(@NativeType("nfdchar_t *") long filePath) {
+        nNFD_PathSet_FreePath(filePath);
     }
 
     // --- [ NFD_PathSet_GetEnum ] ---

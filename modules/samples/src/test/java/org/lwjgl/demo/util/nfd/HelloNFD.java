@@ -153,7 +153,7 @@ public final class HelloNFD {
                     int i = 0;
                     while (NFD_PathSet_EnumNext(psEnum, pp) == NFD_OKAY && pp.get(0) != NULL) {
                         System.out.format("Path %d: %s\n", i++, pp.getStringUTF8(0));
-                        nNFD_PathSet_FreePath(pp.get(0));
+                        NFD_PathSet_FreePath(pp.get(0));
                     }
 
                     NFD_PathSet_FreeEnum(psEnum);
@@ -204,7 +204,7 @@ public final class HelloNFD {
             case NFD_OKAY:
                 System.out.println("Success!");
                 System.out.println(path.getStringUTF8(0));
-                nNFD_FreePath(path.get(0));
+                NFD_FreePath(path.get(0));
                 break;
             case NFD_CANCEL:
                 System.out.println("User pressed cancel.");

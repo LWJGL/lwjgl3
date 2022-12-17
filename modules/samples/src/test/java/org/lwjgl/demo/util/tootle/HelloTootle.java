@@ -987,7 +987,7 @@ public final class HelloTootle {
             switch (result) {
                 case NFD_OKAY:
                     String filePath = pp.getStringUTF8(0);
-                    nNFD_FreePath(pp.get(0));
+                    NFD_FreePath(pp.get(0));
 
                     AIScene scene = importScene(stack, filePath);
                     if (scene != null) {

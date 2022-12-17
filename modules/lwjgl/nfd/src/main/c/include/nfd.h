@@ -144,7 +144,7 @@ nfdresult_t NFD_PathSet_GetPathN(const nfdpathset_t* pathSet,
 #elif __APPLE__
 #define NFD_PathSet_FreePathN NFD_FreePathN
 #else
-void NFD_PathSet_FreePathN(const nfdnchar_t* filePath);
+void NFD_PathSet_FreePathN(nfdnchar_t* filePath);
 #endif  // _WIN32, __APPLE__
 
 /* Gets an enumerator of the path set. */

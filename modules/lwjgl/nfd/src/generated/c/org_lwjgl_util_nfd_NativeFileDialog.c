@@ -34,7 +34,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1OpenDialog
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1OpenDialogMultiple(JNIEnv *__env, jclass clazz, jlong outPathAddress, jlong filterListAddress, jint filterCount, jlong defaultPathAddress) {
-    nfdpathset_t **outPath = (nfdpathset_t **)(uintptr_t)outPathAddress;
+    nfdpathset_t const **outPath = (nfdpathset_t const **)(uintptr_t)outPathAddress;
     nfdfilteritem_t const *filterList = (nfdfilteritem_t const *)(uintptr_t)filterListAddress;
     nfdchar_t const *defaultPath = (nfdchar_t const *)(uintptr_t)defaultPathAddress;
     UNUSED_PARAMS(__env, clazz)
@@ -82,7 +82,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1PathSet_1G
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_util_nfd_NativeFileDialog_nNFD_1PathSet_1FreePath(JNIEnv *__env, jclass clazz, jlong filePathAddress) {
-    nfdchar_t const *filePath = (nfdchar_t const *)(uintptr_t)filePathAddress;
+    nfdchar_t *filePath = (nfdchar_t *)(uintptr_t)filePathAddress;
     UNUSED_PARAMS(__env, clazz)
     NFD_PathSet_FreePath(filePath);
 }

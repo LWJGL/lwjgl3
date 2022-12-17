@@ -593,7 +593,7 @@ public final class ParShapesDemo {
                 case NFD_OKAY:
                     long path = pp.get(0);
                     npar_shapes_export(mesh.address(), path);
-                    nNFD_FreePath(path);
+                    NFD_FreePath(path);
                     break;
                 case NFD_ERROR:
                     System.err.format("Error: %s\n", NFD_GetError());
