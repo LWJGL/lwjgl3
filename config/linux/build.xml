@@ -259,18 +259,17 @@
         </build>
 
         <!-- NativeFileDialog -->
-        <build module="nfd" simple="true" if:true="${binding.nfd}">
+        <build module="nfd" simple="true" linker="g++" if:true="${binding.nfd}">
             <beforeCompile>
                 <local name="linux.triplet"/>
                 <condition property="linux.triplet" value="x86_64-linux-gnu"><not><isset property="build.arch.arm"/></not></condition>
                 <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
                 <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
 
-                <compile>
+                <compile lang="c++">
                     <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
-                    <arg value="-I${src.main.rel}"/>
                     <arg value="-I${src.main.rel}/include"/>
-                    <fileset dir="." includes="${src.main}/nfd_gtk.c"/>
+                    <fileset dir="." includes="${src.main}/nfd_gtk.cpp"/>
                 </compile>
             </beforeCompile>
             <source>
