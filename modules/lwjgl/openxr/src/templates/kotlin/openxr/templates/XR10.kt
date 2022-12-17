@@ -197,7 +197,7 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
         Note that all extension enums begin at the extension enum base of <code>1<sup>10</sup></code> (base 10). Each extension is assigned a block of 1000 enums, starting at the enum base and arranged by the extension’s index.
 
         <h5>See Also</h5>
-        ##XrActionCreateInfo, ##XrActionSetCreateInfo, ##XrActionSpaceCreateInfo, ##XrActionStateBoolean, ##XrActionStateFloat, ##XrActionStateGetInfo, ##XrActionStatePose, ##XrActionStateVector2f, ##XrActionsSyncInfo, ##XrApiLayerProperties, ##XrBaseInStructure, ##XrBaseOutStructure, ##XrBindingModificationBaseHeaderKHR, ##XrBindingModificationsKHR, ##XrBoundSourcesForActionEnumerateInfo, ##XrBoundary2DFB, ##XrCompositionLayerAlphaBlendFB, ##XrCompositionLayerBaseHeader, ##XrCompositionLayerColorScaleBiasKHR, ##XrCompositionLayerCubeKHR, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerDepthInfoKHR, ##XrCompositionLayerDepthTestVARJO, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerImageLayoutFB, ##XrCompositionLayerPassthroughFB, ##XrCompositionLayerProjection, ##XrCompositionLayerProjectionView, ##XrCompositionLayerQuad, ##XrCompositionLayerReprojectionInfoMSFT, ##XrCompositionLayerReprojectionPlaneOverrideMSFT, ##XrCompositionLayerSecureContentFB, ##XrCompositionLayerSettingsFB, ##XrCompositionLayerSpaceWarpInfoFB, ##XrControllerModelKeyStateMSFT, ##XrControllerModelNodePropertiesMSFT, ##XrControllerModelNodeStateMSFT, ##XrControllerModelPropertiesMSFT, ##XrControllerModelStateMSFT, ##XrDebugUtilsLabelEXT, ##XrDebugUtilsMessengerCallbackDataEXT, ##XrDebugUtilsMessengerCreateInfoEXT, ##XrDebugUtilsObjectNameInfoEXT, ##XrDigitalLensControlALMALENCE, ##XrEventDataBaseHeader, ##XrEventDataBuffer, ##XrEventDataDisplayRefreshRateChangedFB, ##XrEventDataEventsLost, ##XrEventDataInstanceLossPending, ##XrEventDataInteractionProfileChanged, ##XrEventDataMainSessionVisibilityChangedEXTX, ##XrEventDataMarkerTrackingUpdateVARJO, ##XrEventDataPassthroughStateChangedFB, ##XrEventDataPerfSettingsEXT, ##XrEventDataReferenceSpaceChangePending, ##XrEventDataSessionStateChanged, ##XrEventDataSpaceEraseCompleteFB, ##XrEventDataSpaceQueryCompleteFB, ##XrEventDataSpaceQueryResultsAvailableFB, ##XrEventDataSpaceSaveCompleteFB, ##XrEventDataSpaceSetStatusCompleteFB, ##XrEventDataSpatialAnchorCreateCompleteFB, ##XrEventDataVisibilityMaskChangedKHR, ##XrEventDataViveTrackerConnectedHTCX, ##XrExtensionProperties, ##XrEyeGazeSampleTimeEXT, ##XrFacialExpressionsHTC, ##XrFacialTrackerCreateInfoHTC, ##XrFoveatedViewConfigurationViewVARJO, ##XrFoveationLevelProfileCreateInfoFB, ##XrFoveationProfileCreateInfoFB, ##XrFrameBeginInfo, ##XrFrameEndInfo, ##XrFrameState, ##XrFrameWaitInfo, ##XrGeometryInstanceCreateInfoFB, ##XrGeometryInstanceTransformFB, ##XrGraphicsBindingEGLMNDX, ##XrGraphicsBindingOpenGLWaylandKHR, ##XrGraphicsBindingOpenGLWin32KHR, ##XrGraphicsBindingOpenGLXcbKHR, ##XrGraphicsBindingOpenGLXlibKHR, ##XrGraphicsBindingVulkanKHR, ##XrGraphicsRequirementsOpenGLKHR, ##XrGraphicsRequirementsVulkanKHR, ##XrHandJointLocationsEXT, ##XrHandJointVelocitiesEXT, ##XrHandJointsLocateInfoEXT, ##XrHandJointsMotionRangeInfoEXT, ##XrHandMeshMSFT, ##XrHandMeshSpaceCreateInfoMSFT, ##XrHandMeshUpdateInfoMSFT, ##XrHandPoseTypeInfoMSFT, ##XrHandTrackerCreateInfoEXT, ##XrHandTrackingAimStateFB, ##XrHandTrackingCapsulesStateFB, ##XrHandTrackingMeshFB, ##XrHandTrackingScaleFB, ##XrHapticActionInfo, ##XrHapticBaseHeader, ##XrHapticVibration, ##XrHolographicWindowAttachmentMSFT, ##XrInputSourceLocalizedNameGetInfo, ##XrInstanceCreateInfo, ##XrInstanceProperties, ##XrInteractionProfileAnalogThresholdVALVE, ##XrInteractionProfileDpadBindingEXT, ##XrInteractionProfileState, ##XrInteractionProfileSuggestedBinding, ##XrKeyboardSpaceCreateInfoFB, ##XrKeyboardTrackingQueryFB, ##XrLoaderInitInfoBaseHeaderKHR, ##XrMarkerSpaceCreateInfoVARJO, ##XrNewSceneComputeInfoMSFT, ##XrPassthroughBrightnessContrastSaturationFB, ##XrPassthroughColorMapMonoToMonoFB, ##XrPassthroughColorMapMonoToRgbaFB, ##XrPassthroughCreateInfoFB, ##XrPassthroughKeyboardHandsIntensityFB, ##XrPassthroughLayerCreateInfoFB, ##XrPassthroughStyleFB, ##XrPerformanceMetricsCounterMETA, ##XrPerformanceMetricsStateMETA, ##XrReferenceSpaceCreateInfo, ##XrRenderModelBufferFB, ##XrRenderModelCapabilitiesRequestFB, ##XrRenderModelLoadInfoFB, ##XrRenderModelPathInfoFB, ##XrRenderModelPropertiesFB, ##XrRoomLayoutFB, ##XrSceneComponentLocationsMSFT, ##XrSceneComponentParentFilterInfoMSFT, ##XrSceneComponentsGetInfoMSFT, ##XrSceneComponentsLocateInfoMSFT, ##XrSceneComponentsMSFT, ##XrSceneCreateInfoMSFT, ##XrSceneDeserializeInfoMSFT, ##XrSceneMeshBuffersGetInfoMSFT, ##XrSceneMeshBuffersMSFT, ##XrSceneMeshIndicesUint16MSFT, ##XrSceneMeshIndicesUint32MSFT, ##XrSceneMeshVertexBufferMSFT, ##XrSceneMeshesMSFT, ##XrSceneObjectTypesFilterInfoMSFT, ##XrSceneObjectsMSFT, ##XrSceneObserverCreateInfoMSFT, ##XrScenePlaneAlignmentFilterInfoMSFT, ##XrScenePlanesMSFT, ##XrSecondaryViewConfigurationFrameEndInfoMSFT, ##XrSecondaryViewConfigurationFrameStateMSFT, ##XrSecondaryViewConfigurationLayerInfoMSFT, ##XrSecondaryViewConfigurationSessionBeginInfoMSFT, ##XrSecondaryViewConfigurationStateMSFT, ##XrSecondaryViewConfigurationSwapchainCreateInfoMSFT, ##XrSemanticLabelsFB, ##XrSerializedSceneFragmentDataGetInfoMSFT, ##XrSessionActionSetsAttachInfo, ##XrSessionBeginInfo, ##XrSessionCreateInfo, ##XrSessionCreateInfoOverlayEXTX, ##XrSpaceComponentFilterInfoFB, ##XrSpaceComponentStatusFB, ##XrSpaceComponentStatusSetInfoFB, ##XrSpaceContainerFB, ##XrSpaceEraseInfoFB, ##XrSpaceFilterInfoBaseHeaderFB, ##XrSpaceLocation, ##XrSpaceQueryInfoBaseHeaderFB, ##XrSpaceQueryInfoFB, ##XrSpaceQueryResultsFB, ##XrSpaceSaveInfoFB, ##XrSpaceStorageLocationFilterInfoFB, ##XrSpaceUuidFilterInfoFB, ##XrSpaceVelocity, ##XrSpatialAnchorCreateInfoFB, ##XrSpatialAnchorCreateInfoMSFT, ##XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT, ##XrSpatialAnchorPersistenceInfoMSFT, ##XrSpatialAnchorSpaceCreateInfoMSFT, ##XrSpatialGraphNodeBindingPropertiesGetInfoMSFT, ##XrSpatialGraphNodeBindingPropertiesMSFT, ##XrSpatialGraphNodeSpaceCreateInfoMSFT, ##XrSpatialGraphStaticNodeBindingCreateInfoMSFT, ##XrSwapchainCreateInfo, ##XrSwapchainCreateInfoFoveationFB, ##XrSwapchainImageAcquireInfo, ##XrSwapchainImageBaseHeader, ##XrSwapchainImageFoveationVulkanFB, ##XrSwapchainImageOpenGLKHR, ##XrSwapchainImageReleaseInfo, ##XrSwapchainImageVulkanKHR, ##XrSwapchainImageWaitInfo, ##XrSwapchainStateBaseHeaderFB, ##XrSwapchainStateFoveationFB, ##XrSwapchainStateSamplerOpenGLESFB, ##XrSwapchainStateSamplerVulkanFB, ##XrSystemColorSpacePropertiesFB, ##XrSystemEyeGazeInteractionPropertiesEXT, ##XrSystemFacialTrackingPropertiesHTC, ##XrSystemFoveatedRenderingPropertiesVARJO, ##XrSystemGetInfo, ##XrSystemHandTrackingMeshPropertiesMSFT, ##XrSystemHandTrackingPropertiesEXT, ##XrSystemKeyboardTrackingPropertiesFB, ##XrSystemMarkerTrackingPropertiesVARJO, ##XrSystemPassthroughProperties2FB, ##XrSystemPassthroughPropertiesFB, ##XrSystemProperties, ##XrSystemRenderModelPropertiesFB, ##XrSystemSpaceWarpPropertiesFB, ##XrSystemSpatialEntityPropertiesFB, ##XrTriangleMeshCreateInfoFB, ##XrView, ##XrViewConfigurationDepthRangeEXT, ##XrViewConfigurationProperties, ##XrViewConfigurationView, ##XrViewConfigurationViewFovEPIC, ##XrViewLocateFoveatedRenderingVARJO, ##XrViewLocateInfo, ##XrViewState, ##XrVisibilityMaskKHR, ##XrVisualMeshComputeLodInfoMSFT, ##XrViveTrackerPathsHTCX, ##XrVulkanDeviceCreateInfoKHR, ##XrVulkanGraphicsDeviceGetInfoKHR, ##XrVulkanInstanceCreateInfoKHR, ##XrVulkanSwapchainCreateInfoMETA, ##XrVulkanSwapchainFormatListCreateInfoKHR, #StructureTypeToString()
+        ##XrActionCreateInfo, ##XrActionSetCreateInfo, ##XrActionSpaceCreateInfo, ##XrActionStateBoolean, ##XrActionStateFloat, ##XrActionStateGetInfo, ##XrActionStatePose, ##XrActionStateVector2f, ##XrActionsSyncInfo, ##XrActiveActionSetPrioritiesEXT, ##XrApiLayerProperties, ##XrBaseInStructure, ##XrBaseOutStructure, ##XrBindingModificationBaseHeaderKHR, ##XrBindingModificationsKHR, ##XrBoundSourcesForActionEnumerateInfo, ##XrBoundary2DFB, ##XrCompositionLayerAlphaBlendFB, ##XrCompositionLayerBaseHeader, ##XrCompositionLayerColorScaleBiasKHR, ##XrCompositionLayerCubeKHR, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerDepthInfoKHR, ##XrCompositionLayerDepthTestVARJO, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerImageLayoutFB, ##XrCompositionLayerPassthroughFB, ##XrCompositionLayerPassthroughHTC, ##XrCompositionLayerProjection, ##XrCompositionLayerProjectionView, ##XrCompositionLayerQuad, ##XrCompositionLayerReprojectionInfoMSFT, ##XrCompositionLayerReprojectionPlaneOverrideMSFT, ##XrCompositionLayerSecureContentFB, ##XrCompositionLayerSettingsFB, ##XrCompositionLayerSpaceWarpInfoFB, ##XrControllerModelKeyStateMSFT, ##XrControllerModelNodePropertiesMSFT, ##XrControllerModelNodeStateMSFT, ##XrControllerModelPropertiesMSFT, ##XrControllerModelStateMSFT, ##XrDebugUtilsLabelEXT, ##XrDebugUtilsMessengerCallbackDataEXT, ##XrDebugUtilsMessengerCreateInfoEXT, ##XrDebugUtilsObjectNameInfoEXT, ##XrDigitalLensControlALMALENCE, ##XrEventDataBaseHeader, ##XrEventDataBuffer, ##XrEventDataDisplayRefreshRateChangedFB, ##XrEventDataEventsLost, ##XrEventDataInstanceLossPending, ##XrEventDataInteractionProfileChanged, ##XrEventDataMainSessionVisibilityChangedEXTX, ##XrEventDataMarkerTrackingUpdateVARJO, ##XrEventDataPassthroughStateChangedFB, ##XrEventDataPerfSettingsEXT, ##XrEventDataReferenceSpaceChangePending, ##XrEventDataSessionStateChanged, ##XrEventDataSpaceEraseCompleteFB, ##XrEventDataSpaceQueryCompleteFB, ##XrEventDataSpaceQueryResultsAvailableFB, ##XrEventDataSpaceSaveCompleteFB, ##XrEventDataSpaceSetStatusCompleteFB, ##XrEventDataSpatialAnchorCreateCompleteFB, ##XrEventDataVisibilityMaskChangedKHR, ##XrEventDataViveTrackerConnectedHTCX, ##XrExtensionProperties, ##XrEyeGazeSampleTimeEXT, ##XrFacialExpressionsHTC, ##XrFacialTrackerCreateInfoHTC, ##XrFoveatedViewConfigurationViewVARJO, ##XrFoveationApplyInfoHTC, ##XrFoveationCustomModeInfoHTC, ##XrFoveationDynamicModeInfoHTC, ##XrFoveationLevelProfileCreateInfoFB, ##XrFoveationProfileCreateInfoFB, ##XrFrameBeginInfo, ##XrFrameEndInfo, ##XrFrameState, ##XrFrameWaitInfo, ##XrGeometryInstanceCreateInfoFB, ##XrGeometryInstanceTransformFB, ##XrGraphicsBindingEGLMNDX, ##XrGraphicsBindingOpenGLWaylandKHR, ##XrGraphicsBindingOpenGLWin32KHR, ##XrGraphicsBindingOpenGLXcbKHR, ##XrGraphicsBindingOpenGLXlibKHR, ##XrGraphicsBindingVulkanKHR, ##XrGraphicsRequirementsOpenGLKHR, ##XrGraphicsRequirementsVulkanKHR, ##XrHandJointLocationsEXT, ##XrHandJointVelocitiesEXT, ##XrHandJointsLocateInfoEXT, ##XrHandJointsMotionRangeInfoEXT, ##XrHandMeshMSFT, ##XrHandMeshSpaceCreateInfoMSFT, ##XrHandMeshUpdateInfoMSFT, ##XrHandPoseTypeInfoMSFT, ##XrHandTrackerCreateInfoEXT, ##XrHandTrackingAimStateFB, ##XrHandTrackingCapsulesStateFB, ##XrHandTrackingMeshFB, ##XrHandTrackingScaleFB, ##XrHapticActionInfo, ##XrHapticBaseHeader, ##XrHapticVibration, ##XrHolographicWindowAttachmentMSFT, ##XrInputSourceLocalizedNameGetInfo, ##XrInstanceCreateInfo, ##XrInstanceProperties, ##XrInteractionProfileAnalogThresholdVALVE, ##XrInteractionProfileDpadBindingEXT, ##XrInteractionProfileState, ##XrInteractionProfileSuggestedBinding, ##XrKeyboardSpaceCreateInfoFB, ##XrKeyboardTrackingQueryFB, ##XrLoaderInitInfoBaseHeaderKHR, ##XrMarkerSpaceCreateInfoVARJO, ##XrNewSceneComputeInfoMSFT, ##XrPassthroughBrightnessContrastSaturationFB, ##XrPassthroughColorHTC, ##XrPassthroughColorMapMonoToMonoFB, ##XrPassthroughColorMapMonoToRgbaFB, ##XrPassthroughCreateInfoFB, ##XrPassthroughCreateInfoHTC, ##XrPassthroughKeyboardHandsIntensityFB, ##XrPassthroughLayerCreateInfoFB, ##XrPassthroughMeshTransformInfoHTC, ##XrPassthroughStyleFB, ##XrPerformanceMetricsCounterMETA, ##XrPerformanceMetricsStateMETA, ##XrReferenceSpaceCreateInfo, ##XrRenderModelBufferFB, ##XrRenderModelCapabilitiesRequestFB, ##XrRenderModelLoadInfoFB, ##XrRenderModelPathInfoFB, ##XrRenderModelPropertiesFB, ##XrRoomLayoutFB, ##XrSceneComponentLocationsMSFT, ##XrSceneComponentParentFilterInfoMSFT, ##XrSceneComponentsGetInfoMSFT, ##XrSceneComponentsLocateInfoMSFT, ##XrSceneComponentsMSFT, ##XrSceneCreateInfoMSFT, ##XrSceneDeserializeInfoMSFT, ##XrSceneMeshBuffersGetInfoMSFT, ##XrSceneMeshBuffersMSFT, ##XrSceneMeshIndicesUint16MSFT, ##XrSceneMeshIndicesUint32MSFT, ##XrSceneMeshVertexBufferMSFT, ##XrSceneMeshesMSFT, ##XrSceneObjectTypesFilterInfoMSFT, ##XrSceneObjectsMSFT, ##XrSceneObserverCreateInfoMSFT, ##XrScenePlaneAlignmentFilterInfoMSFT, ##XrScenePlanesMSFT, ##XrSecondaryViewConfigurationFrameEndInfoMSFT, ##XrSecondaryViewConfigurationFrameStateMSFT, ##XrSecondaryViewConfigurationLayerInfoMSFT, ##XrSecondaryViewConfigurationSessionBeginInfoMSFT, ##XrSecondaryViewConfigurationStateMSFT, ##XrSecondaryViewConfigurationSwapchainCreateInfoMSFT, ##XrSemanticLabelsFB, ##XrSerializedSceneFragmentDataGetInfoMSFT, ##XrSessionActionSetsAttachInfo, ##XrSessionBeginInfo, ##XrSessionCreateInfo, ##XrSessionCreateInfoOverlayEXTX, ##XrSpaceComponentFilterInfoFB, ##XrSpaceComponentStatusFB, ##XrSpaceComponentStatusSetInfoFB, ##XrSpaceContainerFB, ##XrSpaceEraseInfoFB, ##XrSpaceFilterInfoBaseHeaderFB, ##XrSpaceLocation, ##XrSpaceQueryInfoBaseHeaderFB, ##XrSpaceQueryInfoFB, ##XrSpaceQueryResultsFB, ##XrSpaceSaveInfoFB, ##XrSpaceStorageLocationFilterInfoFB, ##XrSpaceUuidFilterInfoFB, ##XrSpaceVelocity, ##XrSpatialAnchorCreateInfoFB, ##XrSpatialAnchorCreateInfoMSFT, ##XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT, ##XrSpatialAnchorPersistenceInfoMSFT, ##XrSpatialAnchorSpaceCreateInfoMSFT, ##XrSpatialGraphNodeBindingPropertiesGetInfoMSFT, ##XrSpatialGraphNodeBindingPropertiesMSFT, ##XrSpatialGraphNodeSpaceCreateInfoMSFT, ##XrSpatialGraphStaticNodeBindingCreateInfoMSFT, ##XrSwapchainCreateInfo, ##XrSwapchainCreateInfoFoveationFB, ##XrSwapchainImageAcquireInfo, ##XrSwapchainImageBaseHeader, ##XrSwapchainImageFoveationVulkanFB, ##XrSwapchainImageOpenGLKHR, ##XrSwapchainImageReleaseInfo, ##XrSwapchainImageVulkanKHR, ##XrSwapchainImageWaitInfo, ##XrSwapchainStateBaseHeaderFB, ##XrSwapchainStateFoveationFB, ##XrSwapchainStateSamplerOpenGLESFB, ##XrSwapchainStateSamplerVulkanFB, ##XrSystemColorSpacePropertiesFB, ##XrSystemEyeGazeInteractionPropertiesEXT, ##XrSystemFacialTrackingPropertiesHTC, ##XrSystemFoveatedRenderingPropertiesVARJO, ##XrSystemGetInfo, ##XrSystemHandTrackingMeshPropertiesMSFT, ##XrSystemHandTrackingPropertiesEXT, ##XrSystemHeadsetIdPropertiesMETA, ##XrSystemKeyboardTrackingPropertiesFB, ##XrSystemMarkerTrackingPropertiesVARJO, ##XrSystemPassthroughProperties2FB, ##XrSystemPassthroughPropertiesFB, ##XrSystemProperties, ##XrSystemRenderModelPropertiesFB, ##XrSystemSpaceWarpPropertiesFB, ##XrSystemSpatialEntityPropertiesFB, ##XrTriangleMeshCreateInfoFB, ##XrView, ##XrViewConfigurationDepthRangeEXT, ##XrViewConfigurationProperties, ##XrViewConfigurationView, ##XrViewConfigurationViewFovEPIC, ##XrViewLocateFoveatedRenderingVARJO, ##XrViewLocateInfo, ##XrViewState, ##XrVisibilityMaskKHR, ##XrVisualMeshComputeLodInfoMSFT, ##XrViveTrackerPathsHTCX, ##XrVulkanDeviceCreateInfoKHR, ##XrVulkanGraphicsDeviceGetInfoKHR, ##XrVulkanInstanceCreateInfoKHR, ##XrVulkanSwapchainCreateInfoMETA, ##XrVulkanSwapchainFormatListCreateInfoKHR, #StructureTypeToString()
         """,
 
         "TYPE_UNKNOWN".."0",
@@ -317,7 +317,21 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
     )
 
     EnumConstant(
-        "XrSpaceVelocityFlagBits",
+        """
+        XrSpaceVelocityFlagBits - Space velocity flags
+
+        <h5>Description</h5>
+        The flag bits have the following meanings:
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#SPACE_VELOCITY_LINEAR_VALID_BIT — Indicates that the {@code linearVelocity} member contains valid data. Applications <b>must</b> not read the {@code linearVelocity} field if this flag is unset.</li>
+            <li>#SPACE_VELOCITY_ANGULAR_VALID_BIT — Indicates that the {@code angularVelocity} member contains valid data. Applications <b>must</b> not read the {@code angularVelocity} field if this flag is unset.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrSpaceVelocity
+        """,
 
         "SPACE_VELOCITY_LINEAR_VALID_BIT".enum(0x00000001),
         "SPACE_VELOCITY_ANGULAR_VALID_BIT".enum(0x00000002)
@@ -372,7 +386,23 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
     )
 
     EnumConstant(
-        "XrSpaceLocationFlagBits",
+        """
+        XrSpaceLocationFlagBits - Space location flags
+
+        <h5>Description</h5>
+        The flag bits have the following meanings:
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#SPACE_LOCATION_ORIENTATION_VALID_BIT indicates that the {@code pose} field’s {@code orientation} field contains valid data. For a space location tracking a device with its own inertial tracking, #SPACE_LOCATION_ORIENTATION_TRACKED_BIT <b>should</b> remain set when this bit is set. Applications <b>must</b> not read the {@code pose} field’s {@code orientation} if this flag is unset.</li>
+            <li>#SPACE_LOCATION_POSITION_VALID_BIT indicates that the {@code pose} field’s {@code position} field contains valid data. When a space location loses tracking, runtimes <b>should</b> continue to provide valid but untracked {@code position} values that are inferred or last-known, so long as it’s still meaningful for the application to use that position, clearing #SPACE_LOCATION_POSITION_TRACKED_BIT until positional tracking is recovered. Applications <b>must</b> not read the {@code pose} field’s {@code position} if this flag is unset.</li>
+            <li>#SPACE_LOCATION_ORIENTATION_TRACKED_BIT indicates that the {@code pose} field’s {@code orientation} field represents an actively tracked orientation. For a space location tracking a device with its own inertial tracking, this bit <b>should</b> remain set when #SPACE_LOCATION_ORIENTATION_VALID_BIT is set. For a space location tracking an object whose orientation is no longer known during tracking loss (e.g. an observed QR code), runtimes <b>should</b> continue to provide valid but untracked {@code orientation} values, so long as it’s still meaningful for the application to use that orientation.</li>
+            <li>#SPACE_LOCATION_POSITION_TRACKED_BIT indicates that the {@code pose} field’s {@code position} field represents an actively tracked position. When a space location loses tracking, runtimes <b>should</b> continue to provide valid but untracked {@code position} values that are inferred or last-known, e.g. based on neck model updates, inertial dead reckoning, or a last-known position, so long as it’s still meaningful for the application to use that position.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrSpaceLocation, #LocateSpace()
+        """,
 
         "SPACE_LOCATION_ORIENTATION_VALID_BIT".enum(0x00000001),
         "SPACE_LOCATION_POSITION_VALID_BIT".enum(0x00000002),
@@ -381,14 +411,51 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
     )
 
     EnumConstant(
-        "XrSwapchainCreateFlagBits",
+        """
+        XrSwapchainCreateFlagBits - Swapchain creation flags
+
+        <h5>Description</h5>
+        The flag bits have the following meanings:
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT indicates that the swapchain’s images will be protected from CPU access, using a mechanism such as Vulkan protected memory.</li>
+            <li>#SWAPCHAIN_CREATE_STATIC_IMAGE_BIT indicates that the application will acquire and release only one image to this swapchain over its entire lifetime. The runtime <b>must</b> allocate only one swapchain image.</li>
+        </ul>
+
+        A runtime <b>may</b> implement any of these, but is not required to. A runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateSwapchain() if an {@code XrSwapchainCreateFlags} bit is requested but not implemented.
+
+        <h5>See Also</h5>
+        ##XrSwapchainCreateInfo
+        """,
 
         "SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT".enum(0x00000001),
         "SWAPCHAIN_CREATE_STATIC_IMAGE_BIT".enum(0x00000002)
     )
 
     EnumConstant(
-        "XrSwapchainUsageFlagBits",
+        """
+        XrSwapchainUsageFlagBits - Swapchain usage flags
+
+        <h5>Description</h5>
+        The flag bits have the following meanings:
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT — Specifies that the image <b>may</b> be a color rendering target.</li>
+            <li>#SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT — Specifies that the image <b>may</b> be a depth/stencil rendering target.</li>
+            <li>#SWAPCHAIN_USAGE_UNORDERED_ACCESS_BIT — Specifies that the image <b>may</b> be accessed out of order and that access <b>may</b> be via atomic operations.</li>
+            <li>#SWAPCHAIN_USAGE_TRANSFER_SRC_BIT — Specifies that the image <b>may</b> be used as the source of a transfer operation.</li>
+            <li>#SWAPCHAIN_USAGE_TRANSFER_DST_BIT — Specifies that the image <b>may</b> be used as the destination of a transfer operation.</li>
+            <li>#SWAPCHAIN_USAGE_SAMPLED_BIT — Specifies that the image <b>may</b> be sampled by a shader.</li>
+            <li>#SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT — Specifies that the image <b>may</b> be reinterpreted as another image format.</li>
+            <li>#SWAPCHAIN_USAGE_INPUT_ATTACHMENT_BIT_MND — Specifies that the image <b>may</b> be used as a input attachment. (Added by the {@link MNDSwapchainUsageInputAttachmentBit XR_MND_swapchain_usage_input_attachment_bit} extension)</li>
+            <li>#SWAPCHAIN_USAGE_INPUT_ATTACHMENT_BIT_KHR — Specifies that the image <b>may</b> be used as a input attachment. (Added by the {@link KHRSwapchainUsageInputAttachmentBit XR_KHR_swapchain_usage_input_attachment_bit} extension)</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrSwapchainCreateInfo, #CreateSwapchain()
+        """,
 
         "SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT".enum(0x00000001),
         "SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT".enum(0x00000002),
@@ -400,7 +467,22 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
     )
 
     EnumConstant(
-        "XrCompositionLayerFlagBits",
+        """
+        XrCompositionLayerFlagBits - Composition layer flags
+
+        <h5>Description</h5>
+        The flag bits have the following meanings:
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT — Enables chromatic aberration correction when not done by default. This flag has no effect on any known conformant runtime, and is planned for deprecation for OpenXR 1.1</li>
+            <li>#COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT — Enables the layer texture alpha channel.</li>
+            <li>#COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT — Indicates the texture color channels have not been premultiplied by the texture alpha channel.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrCompositionLayerProjection, ##XrCompositionLayerQuad
+        """,
 
         "COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT".enum(0x00000001),
         "COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT".enum(0x00000002),
@@ -408,7 +490,23 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
     )
 
     EnumConstant(
-        "XrViewStateFlagBits",
+        """
+        XrViewStateFlagBits - View state flags
+
+        <h5>Description</h5>
+        The flag bits have the following meanings:
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#VIEW_STATE_ORIENTATION_VALID_BIT indicates whether all ##XrView orientations contain valid data. Applications <b>must</b> not read any of the ##XrView {@code pose} {@code orientation} fields if this flag is unset. #VIEW_STATE_ORIENTATION_TRACKED_BIT <b>should</b> generally remain set when this bit is set for views on a tracked headset or handheld device.</li>
+            <li>#VIEW_STATE_POSITION_VALID_BIT indicates whether all ##XrView positions contain valid data. Applications <b>must</b> not read any of the ##XrView{@code ::pose} {@code position} fields if this flag is unset. When a view loses tracking, runtimes <b>should</b> continue to provide valid but untracked view {@code position} values that are inferred or last-known, so long as it’s still meaningful for the application to render content using that position, clearing #VIEW_STATE_POSITION_TRACKED_BIT until tracking is recovered.</li>
+            <li>#VIEW_STATE_ORIENTATION_TRACKED_BIT indicates whether all ##XrView orientations represent an actively tracked orientation. This bit <b>should</b> generally remain set when #VIEW_STATE_ORIENTATION_VALID_BIT is set for views on a tracked headset or handheld device.</li>
+            <li>#VIEW_STATE_POSITION_TRACKED_BIT indicates whether all ##XrView positions represent an actively tracked position. When a view loses tracking, runtimes <b>should</b> continue to provide valid but untracked view {@code position} values that are inferred or last-known, e.g. based on neck model updates, inertial dead reckoning, or a last-known position, so long as it’s still meaningful for the application to render content using that position.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##XrView, ##XrViewState, #LocateViews()
+        """,
 
         "VIEW_STATE_ORIENTATION_VALID_BIT".enum(0x00000001),
         "VIEW_STATE_POSITION_VALID_BIT".enum(0x00000002),
@@ -441,7 +539,22 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
     )
 
     EnumConstant(
-        "XrInputSourceLocalizedNameFlagBits",
+        """
+        XrInputSourceLocalizedNameFlagBits - Input source localized name flags
+
+        <h5>Description</h5>
+        The flag bits have the following meanings:
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT indicates that the runtime <b>must</b> include the user path portion of the string in the result, if available. E.g. {@code Left Hand}.</li>
+            <li>#INPUT_SOURCE_LOCALIZED_NAME_INTERACTION_PROFILE_BIT indicates that the runtime <b>must</b> include the interaction profile portion of the string in the result, if available. E.g. {@code Vive Controller}.</li>
+            <li>#INPUT_SOURCE_LOCALIZED_NAME_COMPONENT_BIT indicates that the runtime <b>must</b> include the input component portion of the string in the result, if available. E.g. {@code Trigger}.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        #GetInputSourceLocalizedName()
+        """,
 
         "INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT".enum(0x00000001),
         "INPUT_SOURCE_LOCALIZED_NAME_INTERACTION_PROFILE_BIT".enum(0x00000002),
@@ -709,8 +822,6 @@ val XR10 = "XR10".nativeClass(Module.OPENXR, "XR10", prefix = "XR", binding = XR
 ￿    XrExtensionProperties*                      properties);</code></pre>
 
         <h5>Description</h5>
-        If {@code properties} is {@code NULL}, then the number of extensions properties available is returned in {@code propertyCountOutput}. Otherwise, {@code propertyCountInput} must point to a variable set by the user to the number of elements in the {@code properties} array. If {@code propertyCountInput} is less than the number of extension properties available, the contents of {@code properties} will be undefined. If {@code propertyCountInput} is smaller than the number of extensions available, the runtime <b>must</b> return the failure code #ERROR_SIZE_INSUFFICIENT and the contents of {@code properties} are undefined.
-
         Because the list of available layers may change externally between calls to #EnumerateInstanceExtensionProperties(), two calls <b>may</b> retrieve different results if a {@code layerName} is available in one call but not in another. The extensions supported by a layer may also change between two calls, e.g. if the layer implementation is replaced by a different version between those calls.
 
         <h5>Valid Usage (Implicit)</h5>

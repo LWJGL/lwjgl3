@@ -33,8 +33,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@link EXTXOverlay XR_EXTX_overlay} extension <b>must</b> be enabled prior to using {@link XrEventDataMainSessionVisibilityChangedEXTX}</li>
  * <li>{@code type} <b>must</b> be {@link EXTXOverlay#XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code XrOverlayMainSessionFlagBitsEXTX} values</li>
- * <li>{@code flags} <b>must</b> not be 0</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -111,22 +109,14 @@ public class XrEventDataMainSessionVisibilityChangedEXTX extends Struct implemen
     public XrEventDataMainSessionVisibilityChangedEXTX type$Default() { return type(EXTXOverlay.XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX); }
     /** Sets the specified value to the {@code next} field. */
     public XrEventDataMainSessionVisibilityChangedEXTX next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@code visible} field. */
-    public XrEventDataMainSessionVisibilityChangedEXTX visible(@NativeType("XrBool32") boolean value) { nvisible(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@code flags} field. */
-    public XrEventDataMainSessionVisibilityChangedEXTX flags(@NativeType("XrOverlayMainSessionFlagsEXTX") long value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataMainSessionVisibilityChangedEXTX set(
         int type,
-        long next,
-        boolean visible,
-        long flags
+        long next
     ) {
         type(type);
         next(next);
-        visible(visible);
-        flags(flags);
 
         return this;
     }
@@ -279,10 +269,6 @@ public class XrEventDataMainSessionVisibilityChangedEXTX extends Struct implemen
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataMainSessionVisibilityChangedEXTX.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataMainSessionVisibilityChangedEXTX.NEXT, value); }
-    /** Unsafe version of {@link #visible(boolean) visible}. */
-    public static void nvisible(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataMainSessionVisibilityChangedEXTX.VISIBLE, value); }
-    /** Unsafe version of {@link #flags(long) flags}. */
-    public static void nflags(long struct, long value) { UNSAFE.putLong(null, struct + XrEventDataMainSessionVisibilityChangedEXTX.FLAGS, value); }
 
     // -----------------------------------
 
@@ -341,10 +327,6 @@ public class XrEventDataMainSessionVisibilityChangedEXTX extends Struct implemen
         public XrEventDataMainSessionVisibilityChangedEXTX.Buffer type$Default() { return type(EXTXOverlay.XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX); }
         /** Sets the specified value to the {@code next} field. */
         public XrEventDataMainSessionVisibilityChangedEXTX.Buffer next(@NativeType("void const *") long value) { XrEventDataMainSessionVisibilityChangedEXTX.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@code visible} field. */
-        public XrEventDataMainSessionVisibilityChangedEXTX.Buffer visible(@NativeType("XrBool32") boolean value) { XrEventDataMainSessionVisibilityChangedEXTX.nvisible(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@code flags} field. */
-        public XrEventDataMainSessionVisibilityChangedEXTX.Buffer flags(@NativeType("XrOverlayMainSessionFlagsEXTX") long value) { XrEventDataMainSessionVisibilityChangedEXTX.nflags(address(), value); return this; }
 
     }
 

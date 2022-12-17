@@ -137,7 +137,7 @@ public class XrCompositionLayerEquirect2KHR extends Struct implements NativeReso
     /** @return the value of the {@code eyeVisibility} field. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
-    /** identifies the image {@link XrSwapchainSubImage} to use. */
+    /** identifies the image {@link XrSwapchainSubImage} to use. The swapchain <b>must</b> have been created with a {@code faceCount} of 1. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
     /** an {@link XrPosef} defining the position and orientation of the center point of the sphere onto which the equirect image data is mapped, relative to the reference frame of the {@code space}. */
     public XrPosef pose() { return npose(address()); }

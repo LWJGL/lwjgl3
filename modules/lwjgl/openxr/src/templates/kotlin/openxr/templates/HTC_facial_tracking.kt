@@ -19,7 +19,7 @@ val HTC_facial_tracking = "HTCFacialTracking".nativeClassXR("HTC_facial_tracking
     IntConstant(
         "The extension specification version.",
 
-        "HTC_facial_tracking_SPEC_VERSION".."1"
+        "HTC_facial_tracking_SPEC_VERSION".."2"
     )
 
     StringConstant(

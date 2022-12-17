@@ -47,7 +47,15 @@ public class ALMALENCEDigitalLensControl {
     /** Extends {@code XrStructureType}. */
     public static final int XR_TYPE_DIGITAL_LENS_CONTROL_ALMALENCE = 1000196000;
 
-    /** XrDigitalLensControlFlagBitsALMALENCE */
+    /**
+     * XrDigitalLensControlFlagBitsALMALENCE - XrDigitalLensControlFlagBitsALMALENCE
+     * 
+     * <h5>Flag Descriptions</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_DIGITAL_LENS_CONTROL_PROCESSING_DISABLE_BIT_ALMALENCE DIGITAL_LENS_CONTROL_PROCESSING_DISABLE_BIT_ALMALENCE} — disables Digital Lens processing of render textures</li>
+     * </ul>
+     */
     public static final int XR_DIGITAL_LENS_CONTROL_PROCESSING_DISABLE_BIT_ALMALENCE = 0x1;
 
     protected ALMALENCEDigitalLensControl() {

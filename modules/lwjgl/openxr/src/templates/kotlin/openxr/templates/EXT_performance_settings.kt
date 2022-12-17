@@ -28,7 +28,7 @@ val EXT_performance_settings = "EXTPerformanceSettings".nativeClassXR("EXT_perfo
     IntConstant(
         "The extension specification version.",
 
-        "EXT_performance_settings_SPEC_VERSION".."3"
+        "EXT_performance_settings_SPEC_VERSION".."4"
     )
 
     StringConstant(

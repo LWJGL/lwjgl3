@@ -53,7 +53,17 @@ val FB_render_model = "FBRenderModel".nativeClassXR("FB_render_model", type = "i
     )
 
     EnumConstant(
-        "XrRenderModelFlagBitsFB",
+        """
+        XrRenderModelFlagBitsFB - XrRenderModelFlagBitsFB
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB — Minimal level of support.  Can only contain a single mesh.  Can only contain a single texture.  Can not contain transparency.  Assumes unlit rendering.  Requires Extension KHR_texturebasisu.</li>
+            <li>#RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_2_BIT_FB — All of XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB support plus: Multiple meshes. Multiple Textures. Texture Transparency.</li>
+        </ul>
+
+        Render Model Support Levels: An application <b>should</b> request a model of a certain complexity via the ##XrRenderModelCapabilitiesRequestFB on the structure chain of ##XrRenderModelPropertiesFB passed into #GetRenderModelPropertiesFB(). The flags on the ##XrRenderModelCapabilitiesRequestFB are an acknowledgement of the application’s ability to render such a model. Multiple values of {@code XrRenderModelFlagBitsFB} can be set on this variable to indicate acceptance of different support levels. The flags parameter on the ##XrRenderModelPropertiesFB will indicate what capabilities the model in the runtime actually requires. It will be set to a single value of {@code XrRenderModelFlagBitsFB}.
+        """,
 
         "RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB".enum(0x00000001),
         "RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_2_BIT_FB".enum(0x00000002)

@@ -21,6 +21,10 @@ import org.lwjgl.vulkan.*;
 /**
  * Vulkan Device Create Info.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the {@code vulkanPhysicalDevice} parameter does not match the output of {@link KHRVulkanEnable#xrGetVulkanGraphicsDeviceKHR GetVulkanGraphicsDeviceKHR}, then the runtime <b>must</b> return {@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -45,7 +49,7 @@ import org.lwjgl.vulkan.*;
  *     XrStructureType type;
  *     void const * next;
  *     XrSystemId {@link #systemId};
- *     XrVulkanDeviceCreateFlagsKHR createFlags;
+ *     XrVulkanDeviceCreateFlagsKHR {@link #createFlags};
  *     PFN_vkGetInstanceProcAddr {@link #pfnGetInstanceProcAddr};
  *     VkPhysicalDevice {@link #vulkanPhysicalDevice};
  *     {@link VkDeviceCreateInfo VkDeviceCreateInfo} const * {@link #vulkanCreateInfo};
@@ -118,7 +122,7 @@ public class XrVulkanDeviceCreateInfoKHR extends Struct implements NativeResourc
     /** an {@code XrSystemId} handle for the system which will be used to create a session. */
     @NativeType("XrSystemId")
     public long systemId() { return nsystemId(address()); }
-    /** @return the value of the {@code createFlags} field. */
+    /** a bitmask of {@code XrVulkanDeviceCreateFlagBitsKHR} */
     @NativeType("XrVulkanDeviceCreateFlagsKHR")
     public long createFlags() { return ncreateFlags(address()); }
     /** a function pointer to {@code vkGetInstanceProcAddr} or a compatible entry point. */
@@ -143,7 +147,7 @@ public class XrVulkanDeviceCreateInfoKHR extends Struct implements NativeResourc
     public XrVulkanDeviceCreateInfoKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Sets the specified value to the {@link #systemId} field. */
     public XrVulkanDeviceCreateInfoKHR systemId(@NativeType("XrSystemId") long value) { nsystemId(address(), value); return this; }
-    /** Sets the specified value to the {@code createFlags} field. */
+    /** Sets the specified value to the {@link #createFlags} field. */
     public XrVulkanDeviceCreateInfoKHR createFlags(@NativeType("XrVulkanDeviceCreateFlagsKHR") long value) { ncreateFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #pfnGetInstanceProcAddr} field. */
     public XrVulkanDeviceCreateInfoKHR pfnGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddr") long value) { npfnGetInstanceProcAddr(address(), value); return this; }
@@ -396,7 +400,7 @@ public class XrVulkanDeviceCreateInfoKHR extends Struct implements NativeResourc
         /** @return the value of the {@link XrVulkanDeviceCreateInfoKHR#systemId} field. */
         @NativeType("XrSystemId")
         public long systemId() { return XrVulkanDeviceCreateInfoKHR.nsystemId(address()); }
-        /** @return the value of the {@code createFlags} field. */
+        /** @return the value of the {@link XrVulkanDeviceCreateInfoKHR#createFlags} field. */
         @NativeType("XrVulkanDeviceCreateFlagsKHR")
         public long createFlags() { return XrVulkanDeviceCreateInfoKHR.ncreateFlags(address()); }
         /** @return the value of the {@link XrVulkanDeviceCreateInfoKHR#pfnGetInstanceProcAddr} field. */
@@ -421,7 +425,7 @@ public class XrVulkanDeviceCreateInfoKHR extends Struct implements NativeResourc
         public XrVulkanDeviceCreateInfoKHR.Buffer next(@NativeType("void const *") long value) { XrVulkanDeviceCreateInfoKHR.nnext(address(), value); return this; }
         /** Sets the specified value to the {@link XrVulkanDeviceCreateInfoKHR#systemId} field. */
         public XrVulkanDeviceCreateInfoKHR.Buffer systemId(@NativeType("XrSystemId") long value) { XrVulkanDeviceCreateInfoKHR.nsystemId(address(), value); return this; }
-        /** Sets the specified value to the {@code createFlags} field. */
+        /** Sets the specified value to the {@link XrVulkanDeviceCreateInfoKHR#createFlags} field. */
         public XrVulkanDeviceCreateInfoKHR.Buffer createFlags(@NativeType("XrVulkanDeviceCreateFlagsKHR") long value) { XrVulkanDeviceCreateInfoKHR.ncreateFlags(address(), value); return this; }
         /** Sets the specified value to the {@link XrVulkanDeviceCreateInfoKHR#pfnGetInstanceProcAddr} field. */
         public XrVulkanDeviceCreateInfoKHR.Buffer pfnGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddr") long value) { XrVulkanDeviceCreateInfoKHR.npfnGetInstanceProcAddr(address(), value); return this; }

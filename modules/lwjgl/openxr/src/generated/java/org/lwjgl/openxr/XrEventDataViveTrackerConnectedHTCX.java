@@ -12,7 +12,6 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
-import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
@@ -29,7 +28,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@link HTCXViveTrackerInteraction XR_HTCX_vive_tracker_interaction} extension <b>must</b> be enabled prior to using {@link XrEventDataViveTrackerConnectedHTCX}</li>
  * <li>{@code type} <b>must</b> be {@link HTCXViveTrackerInteraction#XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code paths} <b>must</b> be a pointer to an {@link XrViveTrackerPathsHTCX} structure</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -103,18 +101,14 @@ public class XrEventDataViveTrackerConnectedHTCX extends Struct implements Nativ
     public XrEventDataViveTrackerConnectedHTCX type$Default() { return type(HTCXViveTrackerInteraction.XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX); }
     /** Sets the specified value to the {@link #next} field. */
     public XrEventDataViveTrackerConnectedHTCX next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrViveTrackerPathsHTCX} to the {@link #paths} field. */
-    public XrEventDataViveTrackerConnectedHTCX paths(@NativeType("XrViveTrackerPathsHTCX *") XrViveTrackerPathsHTCX value) { npaths(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataViveTrackerConnectedHTCX set(
         int type,
-        long next,
-        XrViveTrackerPathsHTCX paths
+        long next
     ) {
         type(type);
         next(next);
-        paths(paths);
 
         return this;
     }
@@ -265,17 +259,6 @@ public class XrEventDataViveTrackerConnectedHTCX extends Struct implements Nativ
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataViveTrackerConnectedHTCX.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataViveTrackerConnectedHTCX.NEXT, value); }
-    /** Unsafe version of {@link #paths(XrViveTrackerPathsHTCX) paths}. */
-    public static void npaths(long struct, XrViveTrackerPathsHTCX value) { memPutAddress(struct + XrEventDataViveTrackerConnectedHTCX.PATHS, value.address()); }
-
-    /**
-     * Validates pointer members that should not be {@code NULL}.
-     *
-     * @param struct the struct to validate
-     */
-    public static void validate(long struct) {
-        check(memGetAddress(struct + XrEventDataViveTrackerConnectedHTCX.PATHS));
-    }
 
     // -----------------------------------
 
@@ -331,8 +314,6 @@ public class XrEventDataViveTrackerConnectedHTCX extends Struct implements Nativ
         public XrEventDataViveTrackerConnectedHTCX.Buffer type$Default() { return type(HTCXViveTrackerInteraction.XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX); }
         /** Sets the specified value to the {@link XrEventDataViveTrackerConnectedHTCX#next} field. */
         public XrEventDataViveTrackerConnectedHTCX.Buffer next(@NativeType("void const *") long value) { XrEventDataViveTrackerConnectedHTCX.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrViveTrackerPathsHTCX} to the {@link XrEventDataViveTrackerConnectedHTCX#paths} field. */
-        public XrEventDataViveTrackerConnectedHTCX.Buffer paths(@NativeType("XrViveTrackerPathsHTCX *") XrViveTrackerPathsHTCX value) { XrEventDataViveTrackerConnectedHTCX.npaths(address(), value); return this; }
 
     }
 

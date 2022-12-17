@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <p>This extension provides APIs to enumerate and query performance metrics counters of the current XR device and XR application. Developers <b>can</b> perform performance analysis and do targeted optimization to the XR application using the performance metrics counters being collected. The application <b>should</b> not change its behavior based on the counter reads.</p>
  * 
- * <p>The performance metrics counters are organized into predefined {@code XrPath}, under the root path pathname:/perfmetrics_meta. You <b>can</b> query the available counters through {@link #xrEnumeratePerformanceMetricsCounterPathsMETA EnumeratePerformanceMetricsCounterPathsMETA}. Here is a list of the performance metrics counter paths that <b>may</b> be provided on Meta devices:</p>
+ * <p>The performance metrics counters are organized into predefined {@code XrPath} values, under the root path pathname:/perfmetrics_meta. An application <b>can</b> query the available counters through {@link #xrEnumeratePerformanceMetricsCounterPathsMETA EnumeratePerformanceMetricsCounterPathsMETA}. Here is a list of the performance metrics counter paths that <b>may</b> be provided on Meta devices:</p>
  * 
  * <ul>
  * <li>pathname:/perfmetrics_meta/app/cpu_frametime</li>
@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <li>pathname:/perfmetrics_meta/device/cpu0_utilization through pathname:/perfmetrics_meta/device/cpuX_utilization</li>
  * </ul>
  * 
- * <p>After a session is created, you <b>can</b> use {@link #xrSetPerformanceMetricsStateMETA SetPerformanceMetricsStateMETA} to enable the performance metrics system for that session. You <b>can</b> use {@link #xrQueryPerformanceMetricsCounterMETA QueryPerformanceMetricsCounterMETA} to query performance metrics counter on a session that has performance metrics system enabled, or use {@link #xrGetPerformanceMetricsStateMETA GetPerformanceMetricsStateMETA} to get the enablement state.</p>
+ * <p>After a session is created, an application <b>can</b> use {@link #xrSetPerformanceMetricsStateMETA SetPerformanceMetricsStateMETA} to enable the performance metrics system for that session. An application <b>can</b> use {@link #xrQueryPerformanceMetricsCounterMETA QueryPerformanceMetricsCounterMETA} to query a performance metrics counter on a session that has the performance metrics system enabled, or use {@link #xrGetPerformanceMetricsStateMETA GetPerformanceMetricsStateMETA} to query if the performance metrics system is enabled.</p>
  * 
  * <p>Note: the measurement intervals of individual performance metrics counters are defined by the OpenXR runtime. The application <b>must</b> not make assumptions or change its behavior at runtime by measuring them.</p>
  * 
@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class METAPerformanceMetrics {
 
     /** The extension specification version. */
-    public static final int XR_META_performance_metrics_SPEC_VERSION = 1;
+    public static final int XR_META_performance_metrics_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_META_PERFORMANCE_METRICS_EXTENSION_NAME = "XR_META_performance_metrics";
@@ -65,14 +65,14 @@ public class METAPerformanceMetrics {
         XR_TYPE_PERFORMANCE_METRICS_COUNTER_META = 1000232002;
 
     /**
-     * XrPerformanceMetricsCounterFlagBitsMETA
+     * XrPerformanceMetricsCounterFlagBitsMETA - XrPerformanceMetricsCounterFlagBitsMETA
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_PERFORMANCE_METRICS_COUNTER_ANY_VALUE_VALID_BIT_META PERFORMANCE_METRICS_COUNTER_ANY_VALUE_VALID_BIT_META}</li>
-     * <li>{@link #XR_PERFORMANCE_METRICS_COUNTER_UINT_VALUE_VALID_BIT_META PERFORMANCE_METRICS_COUNTER_UINT_VALUE_VALID_BIT_META}</li>
-     * <li>{@link #XR_PERFORMANCE_METRICS_COUNTER_FLOAT_VALUE_VALID_BIT_META PERFORMANCE_METRICS_COUNTER_FLOAT_VALUE_VALID_BIT_META}</li>
+     * <li>{@link #XR_PERFORMANCE_METRICS_COUNTER_ANY_VALUE_VALID_BIT_META PERFORMANCE_METRICS_COUNTER_ANY_VALUE_VALID_BIT_META} — Indicates any of the values in XrPerformanceMetricsCounterMETA is valid.</li>
+     * <li>{@link #XR_PERFORMANCE_METRICS_COUNTER_UINT_VALUE_VALID_BIT_META PERFORMANCE_METRICS_COUNTER_UINT_VALUE_VALID_BIT_META} — Indicates the uintValue in XrPerformanceMetricsCounterMETA is valid.</li>
+     * <li>{@link #XR_PERFORMANCE_METRICS_COUNTER_FLOAT_VALUE_VALID_BIT_META PERFORMANCE_METRICS_COUNTER_FLOAT_VALUE_VALID_BIT_META} — Indicates the floatValue in XrPerformanceMetricsCounterMETA is valid.</li>
      * </ul>
      */
     public static final int
@@ -131,7 +131,7 @@ public class METAPerformanceMetrics {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>The {@link #xrEnumeratePerformanceMetricsCounterPathsMETA EnumeratePerformanceMetricsCounterPathsMETA} function enumerate all performance metrics counter paths that supported by the runtime, it is defined as:</p>
+     * <p>The {@link #xrEnumeratePerformanceMetricsCounterPathsMETA EnumeratePerformanceMetricsCounterPathsMETA} function enumerates all performance metrics counter paths that supported by the runtime, it is defined as:</p>
      * 
      * <pre><code>
      * XrResult xrEnumeratePerformanceMetricsCounterPathsMETA(
@@ -337,6 +337,10 @@ public class METAPerformanceMetrics {
      * <h5>Description</h5>
      * 
      * <p>The {@link #xrQueryPerformanceMetricsCounterMETA QueryPerformanceMetricsCounterMETA} function queries a performance metrics counter.</p>
+     * 
+     * <p>The application <b>should</b> enable the performance metrics system (by calling {@link #xrSetPerformanceMetricsStateMETA SetPerformanceMetricsStateMETA}) before querying metrics using {@link #xrQueryPerformanceMetricsCounterMETA QueryPerformanceMetricsCounterMETA}. If the performance metrics system has not been enabled before calling {@link #xrQueryPerformanceMetricsCounterMETA QueryPerformanceMetricsCounterMETA}, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}.</p>
+     * 
+     * <p>If {@code counterPath} is not in the list returned by {@link #xrEnumeratePerformanceMetricsCounterPathsMETA EnumeratePerformanceMetricsCounterPathsMETA}, the runtime must return {@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED}.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

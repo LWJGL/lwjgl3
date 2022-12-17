@@ -51,7 +51,9 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassXR("EXT_debug_utils", type = "i
     )
 
     EnumConstant(
-        "XrDebugUtilsMessageSeverityFlagBitsEXT",
+        """
+        XrDebugUtilsMessageSeverityFlagBitsEXT - XrDebugUtilsMessageSeverityFlagBitsEXT
+        """,
 
         "DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT".enum(0x00000001),
         "DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT".enum(0x00000010),
@@ -60,7 +62,9 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassXR("EXT_debug_utils", type = "i
     )
 
     EnumConstant(
-        "XrDebugUtilsMessageTypeFlagBitsEXT",
+        """
+        XrDebugUtilsMessageTypeFlagBitsEXT - XrDebugUtilsMessageTypeFlagBitsEXT
+        """,
 
         "DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT".enum(0x00000001),
         "DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT".enum(0x00000002),

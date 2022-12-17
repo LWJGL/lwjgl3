@@ -52,7 +52,15 @@ val FB_foveation = "FBFoveation".nativeClassXR("FB_foveation", type = "instance"
     )
 
     EnumConstant(
-        "XrSwapchainCreateFoveationFlagBitsFB",
+        """
+        XrSwapchainCreateFoveationFlagBitsFB - XrSwapchainCreateFoveationFlagBitsFB
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#SWAPCHAIN_CREATE_FOVEATION_SCALED_BIN_BIT_FB — Explicitly create the swapchain with scaled bin foveation support. The application must ensure that the swapchain is using the OpenGL graphics API and that the QCOM_texture_foveated extension is supported and enabled.</li>
+            <li>#SWAPCHAIN_CREATE_FOVEATION_FRAGMENT_DENSITY_MAP_BIT_FB — Explicitly create the swapchain with fragment density map foveation support. The application must ensure that the swapchain is using the Vulkan graphics API and that the VK_EXT_fragment_density_map extension is supported and enabled.</li>
+        </ul>
+        """,
 
         "SWAPCHAIN_CREATE_FOVEATION_SCALED_BIN_BIT_FB".enum(0x00000001),
         "SWAPCHAIN_CREATE_FOVEATION_FRAGMENT_DENSITY_MAP_BIT_FB".enum(0x00000002)

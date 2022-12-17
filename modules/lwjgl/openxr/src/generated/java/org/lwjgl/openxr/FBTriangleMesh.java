@@ -43,7 +43,15 @@ public class FBTriangleMesh {
     /** Extends {@code XrObjectType}. */
     public static final int XR_OBJECT_TYPE_TRIANGLE_MESH_FB = 1000117000;
 
-    /** XrTriangleMeshFlagBitsFB */
+    /**
+     * XrTriangleMeshFlagBitsFB - XrTriangleMeshFlagBitsFB
+     * 
+     * <h5>Flag Descriptions</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_TRIANGLE_MESH_MUTABLE_BIT_FB TRIANGLE_MESH_MUTABLE_BIT_FB} — The triangle mesh is mutable (can be modified after it is created).</li>
+     * </ul>
+     */
     public static final int XR_TRIANGLE_MESH_MUTABLE_BIT_FB = 0x1;
 
     /**

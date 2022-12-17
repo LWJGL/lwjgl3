@@ -27,7 +27,7 @@ import static org.lwjgl.system.JNI.*;
 public class EXTPerformanceSettings {
 
     /** The extension specification version. */
-    public static final int XR_EXT_performance_settings_SPEC_VERSION = 3;
+    public static final int XR_EXT_performance_settings_SPEC_VERSION = 4;
 
     /** The extension name. */
     public static final String XR_EXT_PERFORMANCE_SETTINGS_EXTENSION_NAME = "XR_EXT_performance_settings";

@@ -24,15 +24,15 @@ public final class FBCompositionLayerSettings {
     public static final int XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB = 1000204000;
 
     /**
-     * XrCompositionLayerSettingsFlagBitsFB
+     * XrCompositionLayerSettingsFlagBitsFB - XrCompositionLayerSettingsFlagBitsFB
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB}</li>
-     * <li>{@link #XR_COMPOSITION_LAYER_SETTINGS_QUALITY_SUPER_SAMPLING_BIT_FB COMPOSITION_LAYER_SETTINGS_QUALITY_SUPER_SAMPLING_BIT_FB}</li>
-     * <li>{@link #XR_COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB}</li>
-     * <li>{@link #XR_COMPOSITION_LAYER_SETTINGS_QUALITY_SHARPENING_BIT_FB COMPOSITION_LAYER_SETTINGS_QUALITY_SHARPENING_BIT_FB}</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB} — Indicates compositor <b>may</b> use layer texture supersampling.</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_SETTINGS_QUALITY_SUPER_SAMPLING_BIT_FB COMPOSITION_LAYER_SETTINGS_QUALITY_SUPER_SAMPLING_BIT_FB} — Indicates compositor <b>may</b> use high quality layer texture supersampling.</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB} — Indicates compositor <b>may</b> use layer texture sharpening.</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_SETTINGS_QUALITY_SHARPENING_BIT_FB COMPOSITION_LAYER_SETTINGS_QUALITY_SHARPENING_BIT_FB} — Indicates compositor <b>may</b> use high quality layer texture sharpening.</li>
      * </ul>
      */
     public static final int

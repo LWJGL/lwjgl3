@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerDepthInfoKHR}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerProjectionView}, {@link XrCompositionLayerQuad}, {@link XrCompositionLayerSpaceWarpInfoFB}, {@link XrFrameEndInfo}, {@link XrRect2Di}</p>
+ * <p>{@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerDepthInfoKHR}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerProjectionView}, {@link XrCompositionLayerQuad}, {@link XrCompositionLayerSpaceWarpInfoFB}, {@link XrFoveationApplyInfoHTC}, {@link XrFrameEndInfo}, {@link XrRect2Di}</p>
  * 
  * <h3>Layout</h3>
  * 

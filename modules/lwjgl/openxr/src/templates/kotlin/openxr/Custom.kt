@@ -53,6 +53,7 @@ fun templateCustomization() {
     generateDispatchableHandle(XrGeometryInstanceFB, XrSession)
     generateDispatchableHandle(XrHandTrackerEXT, XrSession)
     generateDispatchableHandle(XrPassthroughFB, XrSession)
+    generateDispatchableHandle(XrPassthroughHTC, XrSession)
     generateDispatchableHandle(XrPassthroughLayerFB, XrSession)
     generateDispatchableHandle(XrSceneMSFT, XrSceneObserverMSFT)
     generateDispatchableHandle(XrSceneObserverMSFT, XrSession)

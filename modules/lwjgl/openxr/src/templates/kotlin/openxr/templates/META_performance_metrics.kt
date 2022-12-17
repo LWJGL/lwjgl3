@@ -15,7 +15,7 @@ val META_performance_metrics = "METAPerformanceMetrics".nativeClassXR("META_perf
 
         This extension provides APIs to enumerate and query performance metrics counters of the current XR device and XR application. Developers <b>can</b> perform performance analysis and do targeted optimization to the XR application using the performance metrics counters being collected. The application <b>should</b> not change its behavior based on the counter reads.
 
-        The performance metrics counters are organized into predefined {@code XrPath}, under the root path pathname:/perfmetrics_meta. You <b>can</b> query the available counters through #EnumeratePerformanceMetricsCounterPathsMETA(). Here is a list of the performance metrics counter paths that <b>may</b> be provided on Meta devices:
+        The performance metrics counters are organized into predefined {@code XrPath} values, under the root path pathname:/perfmetrics_meta. An application <b>can</b> query the available counters through #EnumeratePerformanceMetricsCounterPathsMETA(). Here is a list of the performance metrics counter paths that <b>may</b> be provided on Meta devices:
 
         <ul>
             <li>pathname:/perfmetrics_meta/app/cpu_frametime</li>
@@ -31,7 +31,7 @@ val META_performance_metrics = "METAPerformanceMetrics".nativeClassXR("META_perf
             <li>pathname:/perfmetrics_meta/device/cpu0_utilization through pathname:/perfmetrics_meta/device/cpuX_utilization</li>
         </ul>
 
-        After a session is created, you <b>can</b> use #SetPerformanceMetricsStateMETA() to enable the performance metrics system for that session. You <b>can</b> use #QueryPerformanceMetricsCounterMETA() to query performance metrics counter on a session that has performance metrics system enabled, or use #GetPerformanceMetricsStateMETA() to get the enablement state.
+        After a session is created, an application <b>can</b> use #SetPerformanceMetricsStateMETA() to enable the performance metrics system for that session. An application <b>can</b> use #QueryPerformanceMetricsCounterMETA() to query a performance metrics counter on a session that has the performance metrics system enabled, or use #GetPerformanceMetricsStateMETA() to query if the performance metrics system is enabled.
 
         Note: the measurement intervals of individual performance metrics counters are defined by the OpenXR runtime. The application <b>must</b> not make assumptions or change its behavior at runtime by measuring them.
 
@@ -41,7 +41,7 @@ val META_performance_metrics = "METAPerformanceMetrics".nativeClassXR("META_perf
     IntConstant(
         "The extension specification version.",
 
-        "META_performance_metrics_SPEC_VERSION".."1"
+        "META_performance_metrics_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -58,7 +58,16 @@ val META_performance_metrics = "METAPerformanceMetrics".nativeClassXR("META_perf
     )
 
     EnumConstant(
-        "XrPerformanceMetricsCounterFlagBitsMETA",
+        """
+        XrPerformanceMetricsCounterFlagBitsMETA - XrPerformanceMetricsCounterFlagBitsMETA
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#PERFORMANCE_METRICS_COUNTER_ANY_VALUE_VALID_BIT_META — Indicates any of the values in XrPerformanceMetricsCounterMETA is valid.</li>
+            <li>#PERFORMANCE_METRICS_COUNTER_UINT_VALUE_VALID_BIT_META — Indicates the uintValue in XrPerformanceMetricsCounterMETA is valid.</li>
+            <li>#PERFORMANCE_METRICS_COUNTER_FLOAT_VALUE_VALID_BIT_META — Indicates the floatValue in XrPerformanceMetricsCounterMETA is valid.</li>
+        </ul>
+        """,
 
         "PERFORMANCE_METRICS_COUNTER_ANY_VALUE_VALID_BIT_META".enum(0x00000001),
         "PERFORMANCE_METRICS_COUNTER_UINT_VALUE_VALID_BIT_META".enum(0x00000002),
@@ -98,7 +107,7 @@ val META_performance_metrics = "METAPerformanceMetrics".nativeClassXR("META_perf
         Enumerate all performance metrics counter paths that supported by the runtime.
 
         <h5>C Specification</h5>
-        The #EnumeratePerformanceMetricsCounterPathsMETA() function enumerate all performance metrics counter paths that supported by the runtime, it is defined as:
+        The #EnumeratePerformanceMetricsCounterPathsMETA() function enumerates all performance metrics counter paths that supported by the runtime, it is defined as:
 
         <pre><code>
 ￿XrResult xrEnumeratePerformanceMetricsCounterPathsMETA(
@@ -255,6 +264,10 @@ val META_performance_metrics = "METAPerformanceMetrics".nativeClassXR("META_perf
 
         <h5>Description</h5>
         The #QueryPerformanceMetricsCounterMETA() function queries a performance metrics counter.
+
+        The application <b>should</b> enable the performance metrics system (by calling #SetPerformanceMetricsStateMETA()) before querying metrics using #QueryPerformanceMetricsCounterMETA(). If the performance metrics system has not been enabled before calling #QueryPerformanceMetricsCounterMETA(), the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
+
+        If {@code counterPath} is not in the list returned by #EnumeratePerformanceMetricsCounterPathsMETA(), the runtime must return #ERROR_PATH_UNSUPPORTED.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

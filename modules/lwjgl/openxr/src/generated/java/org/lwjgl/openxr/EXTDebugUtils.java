@@ -55,7 +55,7 @@ public class EXTDebugUtils {
     public static final int XR_OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT = 1000019000;
 
     /**
-     * XrDebugUtilsMessageSeverityFlagBitsEXT
+     * XrDebugUtilsMessageSeverityFlagBitsEXT - XrDebugUtilsMessageSeverityFlagBitsEXT
      * 
      * <h5>Enum values:</h5>
      * 
@@ -73,7 +73,7 @@ public class EXTDebugUtils {
         XR_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT   = 0x1000;
 
     /**
-     * XrDebugUtilsMessageTypeFlagBitsEXT
+     * XrDebugUtilsMessageTypeFlagBitsEXT - XrDebugUtilsMessageTypeFlagBitsEXT
      * 
      * <h5>Enum values:</h5>
      * 

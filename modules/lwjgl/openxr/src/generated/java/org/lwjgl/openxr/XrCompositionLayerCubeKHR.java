@@ -126,7 +126,7 @@ public class XrCompositionLayerCubeKHR extends Struct implements NativeResource 
     /** @return the value of the {@code eyeVisibility} field. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
-    /** the swapchain. */
+    /** the swapchain, which <b>must</b> have been created with a {@code faceCount} of 6. */
     @NativeType("XrSwapchain")
     public long swapchain() { return nswapchain(address()); }
     /** the image array index, with 0 meaning the first or only array element. */

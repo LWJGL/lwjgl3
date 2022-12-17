@@ -124,7 +124,7 @@ public class XrCompositionLayerQuad extends Struct implements NativeResource {
     /** the {@code XrEyeVisibility} for this layer. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
-    /** the image layer {@link XrSwapchainSubImage} to use. */
+    /** the image layer {@link XrSwapchainSubImage} to use. The swapchain <b>must</b> have been created with a {@code faceCount} of 1. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
     /** an {@link XrPosef} defining the position and orientation of the quad in the reference frame of the {@code space}. */
     public XrPosef pose() { return npose(address()); }

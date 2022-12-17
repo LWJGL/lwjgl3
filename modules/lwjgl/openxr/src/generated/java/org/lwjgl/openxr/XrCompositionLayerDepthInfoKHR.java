@@ -124,7 +124,7 @@ public class XrCompositionLayerDepthInfoKHR extends Struct implements NativeReso
     /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** identifies the depth image {@link XrSwapchainSubImage} to be associated with the color swapchain. */
+    /** identifies the depth image {@link XrSwapchainSubImage} to be associated with the color swapchain. The swapchain <b>must</b> have been created with a {@code faceCount} of 1. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
     /** {@code minDepth} and {@code maxDepth} are the window space depths that correspond to the near and far frustum planes, respectively. {@code minDepth} must be less than {@code maxDepth}. {@code minDepth} and {@code maxDepth} must be in the range [0, 1]. */
     public float minDepth() { return nminDepth(address()); }

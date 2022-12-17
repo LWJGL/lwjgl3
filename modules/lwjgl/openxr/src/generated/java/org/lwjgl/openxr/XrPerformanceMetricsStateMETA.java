@@ -16,11 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Performance metrics enablement state.
+ * Performance metrics enable state.
  * 
  * <h5>Description</h5>
  * 
- * <p>{@link XrPerformanceMetricsStateMETA} is provided as input when calling {@link METAPerformanceMetrics#xrSetPerformanceMetricsStateMETA SetPerformanceMetricsStateMETA} to enable or disable the performance metrics system. {@link XrPerformanceMetricsStateMETA} is populated as an output parameter when calling {@link METAPerformanceMetrics#xrGetPerformanceMetricsStateMETA GetPerformanceMetricsStateMETA} to query the enablement status of the performance metrics system.</p>
+ * <p>{@link XrPerformanceMetricsStateMETA} is provided as input when calling {@link METAPerformanceMetrics#xrSetPerformanceMetricsStateMETA SetPerformanceMetricsStateMETA} to enable or disable the performance metrics system. {@link XrPerformanceMetricsStateMETA} is populated as an output parameter when calling {@link METAPerformanceMetrics#xrGetPerformanceMetricsStateMETA GetPerformanceMetricsStateMETA} to query if the performance metrics system is enabled.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

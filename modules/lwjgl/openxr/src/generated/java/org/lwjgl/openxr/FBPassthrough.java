@@ -117,14 +117,14 @@ public class FBPassthrough {
         XR_OBJECT_TYPE_GEOMETRY_INSTANCE_FB = 1000118004;
 
     /**
-     * XrPassthroughCapabilityFlagBitsFB
+     * XrPassthroughCapabilityFlagBitsFB - XrPassthroughCapabilityFlagBitsFB
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_PASSTHROUGH_CAPABILITY_BIT_FB PASSTHROUGH_CAPABILITY_BIT_FB}</li>
-     * <li>{@link #XR_PASSTHROUGH_CAPABILITY_COLOR_BIT_FB PASSTHROUGH_CAPABILITY_COLOR_BIT_FB}</li>
-     * <li>{@link #XR_PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB}</li>
+     * <li>{@link #XR_PASSTHROUGH_CAPABILITY_BIT_FB PASSTHROUGH_CAPABILITY_BIT_FB} — The system supports passthrough.</li>
+     * <li>{@link #XR_PASSTHROUGH_CAPABILITY_COLOR_BIT_FB PASSTHROUGH_CAPABILITY_COLOR_BIT_FB} — The system can show passthrough with realistic colors. {@link #XR_PASSTHROUGH_CAPABILITY_BIT_FB PASSTHROUGH_CAPABILITY_BIT_FB} <b>must</b> be set if {@link #XR_PASSTHROUGH_CAPABILITY_COLOR_BIT_FB PASSTHROUGH_CAPABILITY_COLOR_BIT_FB} is set.</li>
+     * <li>{@link #XR_PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB} — The system supports passthrough layers composited using depth testing. {@link #XR_PASSTHROUGH_CAPABILITY_BIT_FB PASSTHROUGH_CAPABILITY_BIT_FB} <b>must</b> be set if {@link #XR_PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB} is set.</li>
      * </ul>
      */
     public static final int
@@ -133,13 +133,13 @@ public class FBPassthrough {
         XR_PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB = 0x4;
 
     /**
-     * XrPassthroughFlagBitsFB
+     * XrPassthroughFlagBitsFB - XrPassthroughFlagBitsFB
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB}</li>
-     * <li>{@link #XR_PASSTHROUGH_LAYER_DEPTH_BIT_FB PASSTHROUGH_LAYER_DEPTH_BIT_FB}</li>
+     * <li>{@link #XR_PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB} — The object (passthrough, layer) is running at creation.</li>
+     * <li>{@link #XR_PASSTHROUGH_LAYER_DEPTH_BIT_FB PASSTHROUGH_LAYER_DEPTH_BIT_FB} — The passthrough system sends depth information to the compositor. Only applicable to layer objects.</li>
      * </ul>
      */
     public static final int
@@ -167,15 +167,15 @@ public class FBPassthrough {
         XR_PASSTHROUGH_LAYER_PURPOSE_PROJECTED_FB      = 1;
 
     /**
-     * XrPassthroughStateChangedFlagBitsFB
+     * XrPassthroughStateChangedFlagBitsFB - XrPassthroughStateChangedFlagBitsFB
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_PASSTHROUGH_STATE_CHANGED_REINIT_REQUIRED_BIT_FB PASSTHROUGH_STATE_CHANGED_REINIT_REQUIRED_BIT_FB}</li>
-     * <li>{@link #XR_PASSTHROUGH_STATE_CHANGED_NON_RECOVERABLE_ERROR_BIT_FB PASSTHROUGH_STATE_CHANGED_NON_RECOVERABLE_ERROR_BIT_FB}</li>
-     * <li>{@link #XR_PASSTHROUGH_STATE_CHANGED_RECOVERABLE_ERROR_BIT_FB PASSTHROUGH_STATE_CHANGED_RECOVERABLE_ERROR_BIT_FB}</li>
-     * <li>{@link #XR_PASSTHROUGH_STATE_CHANGED_RESTORED_ERROR_BIT_FB PASSTHROUGH_STATE_CHANGED_RESTORED_ERROR_BIT_FB}</li>
+     * <li>{@link #XR_PASSTHROUGH_STATE_CHANGED_REINIT_REQUIRED_BIT_FB PASSTHROUGH_STATE_CHANGED_REINIT_REQUIRED_BIT_FB} — Passthrough system requires reinitialization.</li>
+     * <li>{@link #XR_PASSTHROUGH_STATE_CHANGED_NON_RECOVERABLE_ERROR_BIT_FB PASSTHROUGH_STATE_CHANGED_NON_RECOVERABLE_ERROR_BIT_FB} — Non-recoverable error has occurred. A device reboot or a firmware update may be required.</li>
+     * <li>{@link #XR_PASSTHROUGH_STATE_CHANGED_RECOVERABLE_ERROR_BIT_FB PASSTHROUGH_STATE_CHANGED_RECOVERABLE_ERROR_BIT_FB} — A recoverable error has occurred. The runtime will attempt to recover, but some functionality may be temporarily unavailable.</li>
+     * <li>{@link #XR_PASSTHROUGH_STATE_CHANGED_RESTORED_ERROR_BIT_FB PASSTHROUGH_STATE_CHANGED_RESTORED_ERROR_BIT_FB} — The runtime has recovered from a previous error and is functioning normally.</li>
      * </ul>
      */
     public static final int

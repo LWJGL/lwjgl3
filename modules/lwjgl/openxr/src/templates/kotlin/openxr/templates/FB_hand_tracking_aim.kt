@@ -41,7 +41,22 @@ val FB_hand_tracking_aim = "FBHandTrackingAim".nativeClassXR("FB_hand_tracking_a
     )
 
     EnumConstant(
-        "XrHandTrackingAimFlagBitsFB",
+        """
+        XrHandTrackingAimFlagBitsFB - XrHandTrackingAimFlagBitsFB
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#HAND_TRACKING_AIM_COMPUTED_BIT_FB — Aiming data is computed from additional sources beyond the hand data in the base structure</li>
+            <li>#HAND_TRACKING_AIM_VALID_BIT_FB — Aiming data is valid</li>
+            <li>#HAND_TRACKING_AIM_INDEX_PINCHING_BIT_FB — Index finger pinch discrete signal</li>
+            <li>#HAND_TRACKING_AIM_MIDDLE_PINCHING_BIT_FB — Middle finger pinch discrete signal</li>
+            <li>#HAND_TRACKING_AIM_RING_PINCHING_BIT_FB — Ring finger pinch discrete signal</li>
+            <li>#HAND_TRACKING_AIM_LITTLE_PINCHING_BIT_FB — Little finger pinch discrete signal</li>
+            <li>#HAND_TRACKING_AIM_SYSTEM_GESTURE_BIT_FB — System gesture is active</li>
+            <li>#HAND_TRACKING_AIM_DOMINANT_HAND_BIT_FB — Hand is currently marked as dominant for the system</li>
+            <li>#HAND_TRACKING_AIM_MENU_PRESSED_BIT_FB — System menu gesture is active</li>
+        </ul>
+        """,
 
         "HAND_TRACKING_AIM_COMPUTED_BIT_FB".enum(0x00000001),
         "HAND_TRACKING_AIM_VALID_BIT_FB".enum(0x00000002),

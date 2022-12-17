@@ -37,7 +37,17 @@ val FB_composition_layer_settings = "FBCompositionLayerSettings".nativeClassXR("
     )
 
     EnumConstant(
-        "XrCompositionLayerSettingsFlagBitsFB",
+        """
+        XrCompositionLayerSettingsFlagBitsFB - XrCompositionLayerSettingsFlagBitsFB
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB — Indicates compositor <b>may</b> use layer texture supersampling.</li>
+            <li>#COMPOSITION_LAYER_SETTINGS_QUALITY_SUPER_SAMPLING_BIT_FB — Indicates compositor <b>may</b> use high quality layer texture supersampling.</li>
+            <li>#COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB — Indicates compositor <b>may</b> use layer texture sharpening.</li>
+            <li>#COMPOSITION_LAYER_SETTINGS_QUALITY_SHARPENING_BIT_FB — Indicates compositor <b>may</b> use high quality layer texture sharpening.</li>
+        </ul>
+        """,
 
         "COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB".enum(0x00000001),
         "COMPOSITION_LAYER_SETTINGS_QUALITY_SUPER_SAMPLING_BIT_FB".enum(0x00000002),

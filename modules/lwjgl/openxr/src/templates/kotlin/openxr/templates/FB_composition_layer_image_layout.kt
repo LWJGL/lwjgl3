@@ -37,7 +37,9 @@ val FB_composition_layer_image_layout = "FBCompositionLayerImageLayout".nativeCl
     )
 
     EnumConstant(
-        "XrCompositionLayerImageLayoutFlagBitsFB",
+        """
+        XrCompositionLayerImageLayoutFlagBitsFB - XrCompositionLayerImageLayoutFlagBitsFB
+        """,
 
         "COMPOSITION_LAYER_IMAGE_LAYOUT_VERTICAL_FLIP_BIT_FB".enum(0x00000001)
     )

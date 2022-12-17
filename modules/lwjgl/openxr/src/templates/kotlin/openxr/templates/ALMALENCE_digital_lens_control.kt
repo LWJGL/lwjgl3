@@ -56,7 +56,14 @@ val ALMALENCE_digital_lens_control = "ALMALENCEDigitalLensControl".nativeClassXR
     )
 
     EnumConstant(
-        "XrDigitalLensControlFlagBitsALMALENCE",
+        """
+        XrDigitalLensControlFlagBitsALMALENCE - XrDigitalLensControlFlagBitsALMALENCE
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#DIGITAL_LENS_CONTROL_PROCESSING_DISABLE_BIT_ALMALENCE — disables Digital Lens processing of render textures</li>
+        </ul>
+        """,
 
         "DIGITAL_LENS_CONTROL_PROCESSING_DISABLE_BIT_ALMALENCE".enum(0x00000001)
     )

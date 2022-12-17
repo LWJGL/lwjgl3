@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class HTCFacialTracking {
 
     /** The extension specification version. */
-    public static final int XR_HTC_facial_tracking_SPEC_VERSION = 1;
+    public static final int XR_HTC_facial_tracking_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_HTC_FACIAL_TRACKING_EXTENSION_NAME = "XR_HTC_facial_tracking";

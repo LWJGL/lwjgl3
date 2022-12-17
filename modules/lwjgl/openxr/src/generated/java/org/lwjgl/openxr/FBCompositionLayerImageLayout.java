@@ -23,7 +23,7 @@ public final class FBCompositionLayerImageLayout {
     /** Extends {@code XrStructureType}. */
     public static final int XR_TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB = 1000040000;
 
-    /** XrCompositionLayerImageLayoutFlagBitsFB */
+    /** XrCompositionLayerImageLayoutFlagBitsFB - XrCompositionLayerImageLayoutFlagBitsFB */
     public static final int XR_COMPOSITION_LAYER_IMAGE_LAYOUT_VERTICAL_FLIP_BIT_FB = 0x1;
 
     private FBCompositionLayerImageLayout() {}

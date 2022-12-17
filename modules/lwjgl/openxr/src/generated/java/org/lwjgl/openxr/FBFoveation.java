@@ -55,13 +55,13 @@ public class FBFoveation {
         XR_TYPE_SWAPCHAIN_STATE_FOVEATION_FB       = 1000114002;
 
     /**
-     * XrSwapchainCreateFoveationFlagBitsFB
+     * XrSwapchainCreateFoveationFlagBitsFB - XrSwapchainCreateFoveationFlagBitsFB
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_SWAPCHAIN_CREATE_FOVEATION_SCALED_BIN_BIT_FB SWAPCHAIN_CREATE_FOVEATION_SCALED_BIN_BIT_FB}</li>
-     * <li>{@link #XR_SWAPCHAIN_CREATE_FOVEATION_FRAGMENT_DENSITY_MAP_BIT_FB SWAPCHAIN_CREATE_FOVEATION_FRAGMENT_DENSITY_MAP_BIT_FB}</li>
+     * <li>{@link #XR_SWAPCHAIN_CREATE_FOVEATION_SCALED_BIN_BIT_FB SWAPCHAIN_CREATE_FOVEATION_SCALED_BIN_BIT_FB} — Explicitly create the swapchain with scaled bin foveation support. The application must ensure that the swapchain is using the OpenGL graphics API and that the QCOM_texture_foveated extension is supported and enabled.</li>
+     * <li>{@link #XR_SWAPCHAIN_CREATE_FOVEATION_FRAGMENT_DENSITY_MAP_BIT_FB SWAPCHAIN_CREATE_FOVEATION_FRAGMENT_DENSITY_MAP_BIT_FB} — Explicitly create the swapchain with fragment density map foveation support. The application must ensure that the swapchain is using the Vulkan graphics API and that the VK_EXT_fragment_density_map extension is supported and enabled.</li>
      * </ul>
      */
     public static final int

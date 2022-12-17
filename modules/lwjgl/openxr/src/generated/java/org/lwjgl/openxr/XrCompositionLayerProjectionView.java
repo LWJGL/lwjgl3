@@ -103,7 +103,7 @@ public class XrCompositionLayerProjectionView extends Struct implements NativeRe
     public XrPosef pose() { return npose(address()); }
     /** the {@link XrFovf} for this projection element. */
     public XrFovf fov() { return nfov(address()); }
-    /** the image layer {@link XrSwapchainSubImage} to use. */
+    /** the image layer {@link XrSwapchainSubImage} to use. The swapchain <b>must</b> have been created with a {@code faceCount} of 1. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
 
     /** Sets the specified value to the {@link #type} field. */

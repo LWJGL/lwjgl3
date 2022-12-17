@@ -68,14 +68,16 @@ public class FBRenderModel {
         XR_RENDER_MODEL_UNAVAILABLE_FB       = 1000119020;
 
     /**
-     * XrRenderModelFlagBitsFB
+     * XrRenderModelFlagBitsFB - XrRenderModelFlagBitsFB
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB}</li>
-     * <li>{@link #XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_2_BIT_FB RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_2_BIT_FB}</li>
+     * <li>{@link #XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB} — Minimal level of support.  Can only contain a single mesh.  Can only contain a single texture.  Can not contain transparency.  Assumes unlit rendering.  Requires Extension KHR_texturebasisu.</li>
+     * <li>{@link #XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_2_BIT_FB RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_2_BIT_FB} — All of XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB support plus: Multiple meshes. Multiple Textures. Texture Transparency.</li>
      * </ul>
+     * 
+     * <p>Render Model Support Levels: An application <b>should</b> request a model of a certain complexity via the {@link XrRenderModelCapabilitiesRequestFB} on the structure chain of {@link XrRenderModelPropertiesFB} passed into {@link #xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB}. The flags on the {@link XrRenderModelCapabilitiesRequestFB} are an acknowledgement of the application’s ability to render such a model. Multiple values of {@code XrRenderModelFlagBitsFB} can be set on this variable to indicate acceptance of different support levels. The flags parameter on the {@link XrRenderModelPropertiesFB} will indicate what capabilities the model in the runtime actually requires. It will be set to a single value of {@code XrRenderModelFlagBitsFB}.</p>
      */
     public static final int
         XR_RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB = 0x1,

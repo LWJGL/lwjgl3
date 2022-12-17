@@ -42,7 +42,14 @@ val FB_space_warp = "FBSpaceWarp".nativeClassXR("FB_space_warp", type = "instanc
     )
 
     EnumConstant(
-        "XrCompositionLayerSpaceWarpInfoFlagBitsFB",
+        """
+        XrCompositionLayerSpaceWarpInfoFlagBitsFB - XrCompositionLayerSpaceWarpInfoFlagBitsFB
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#COMPOSITION_LAYER_SPACE_WARP_INFO_FRAME_SKIP_BIT_FB requests that the runtime skips space warp frame extrapolation for a particular frame. This can be used when the application has better knowledge the particular frame will be not a good fit for space warp frame extrapolation.</li>
+        </ul>
+        """,
 
         "COMPOSITION_LAYER_SPACE_WARP_INFO_FRAME_SKIP_BIT_FB".enum(0x00000001)
     )

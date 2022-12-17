@@ -50,7 +50,14 @@ val FB_triangle_mesh = "FBTriangleMesh".nativeClassXR("FB_triangle_mesh", type =
     )
 
     EnumConstant(
-        "XrTriangleMeshFlagBitsFB",
+        """
+        XrTriangleMeshFlagBitsFB - XrTriangleMeshFlagBitsFB
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#TRIANGLE_MESH_MUTABLE_BIT_FB — The triangle mesh is mutable (can be modified after it is created).</li>
+        </ul>
+        """,
 
         "TRIANGLE_MESH_MUTABLE_BIT_FB".enum(0x00000001)
     )

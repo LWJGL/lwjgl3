@@ -24,13 +24,13 @@ public final class FBCompositionLayerSecureContent {
     public static final int XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB = 1000072000;
 
     /**
-     * XrCompositionLayerSecureContentFlagBitsFB
+     * XrCompositionLayerSecureContentFlagBitsFB - XrCompositionLayerSecureContentFlagBitsFB
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_COMPOSITION_LAYER_SECURE_CONTENT_EXCLUDE_LAYER_BIT_FB COMPOSITION_LAYER_SECURE_CONTENT_EXCLUDE_LAYER_BIT_FB}</li>
-     * <li>{@link #XR_COMPOSITION_LAYER_SECURE_CONTENT_REPLACE_LAYER_BIT_FB COMPOSITION_LAYER_SECURE_CONTENT_REPLACE_LAYER_BIT_FB}</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_SECURE_CONTENT_EXCLUDE_LAYER_BIT_FB COMPOSITION_LAYER_SECURE_CONTENT_EXCLUDE_LAYER_BIT_FB} — Indicates the layer will only be visible inside the HMD, and not visible to external sources</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_SECURE_CONTENT_REPLACE_LAYER_BIT_FB COMPOSITION_LAYER_SECURE_CONTENT_REPLACE_LAYER_BIT_FB} — Indicates the layer will be displayed inside the HMD, but replaced by proxy content when written to external sources</li>
      * </ul>
      */
     public static final int

@@ -41,10 +41,10 @@ import org.lwjgl.vulkan.*;
  * 
  * <pre><code>
  * struct XrVulkanInstanceCreateInfoKHR {
- *     XrStructureType type;
- *     void const * next;
+ *     XrStructureType {@link #type};
+ *     void const * {@link #next};
  *     XrSystemId {@link #systemId};
- *     XrVulkanInstanceCreateFlagsKHR createFlags;
+ *     XrVulkanInstanceCreateFlagsKHR {@link #createFlags};
  *     PFN_vkGetInstanceProcAddr {@link #pfnGetInstanceProcAddr};
  *     {@link VkInstanceCreateInfo VkInstanceCreateInfo} const * {@link #vulkanCreateInfo};
  *     {@link VkAllocationCallbacks VkAllocationCallbacks} const * {@link #vulkanAllocator};
@@ -104,16 +104,16 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code type} field. */
+    /** the {@code XrStructureType} of this structure. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** @return the value of the {@code next} field. */
+    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
     /** an {@code XrSystemId} handle for the system which will be used to create a session. */
     @NativeType("XrSystemId")
     public long systemId() { return nsystemId(address()); }
-    /** @return the value of the {@code createFlags} field. */
+    /** a bitmask of {@code XrVulkanInstanceCreateFlagBitsKHR} */
     @NativeType("XrVulkanInstanceCreateFlagsKHR")
     public long createFlags() { return ncreateFlags(address()); }
     /** a function pointer to {@code vkGetInstanceProcAddr} or a compatible entry point. */
@@ -127,15 +127,15 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct implements NativeResou
     @NativeType("VkAllocationCallbacks const *")
     public VkAllocationCallbacks vulkanAllocator() { return nvulkanAllocator(address()); }
 
-    /** Sets the specified value to the {@code type} field. */
+    /** Sets the specified value to the {@link #type} field. */
     public XrVulkanInstanceCreateInfoKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHRVulkanEnable2#XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR} value to the {@code type} field. */
+    /** Sets the {@link KHRVulkanEnable2#XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR} value to the {@link #type} field. */
     public XrVulkanInstanceCreateInfoKHR type$Default() { return type(KHRVulkanEnable2.XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@code next} field. */
+    /** Sets the specified value to the {@link #next} field. */
     public XrVulkanInstanceCreateInfoKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Sets the specified value to the {@link #systemId} field. */
     public XrVulkanInstanceCreateInfoKHR systemId(@NativeType("XrSystemId") long value) { nsystemId(address(), value); return this; }
-    /** Sets the specified value to the {@code createFlags} field. */
+    /** Sets the specified value to the {@link #createFlags} field. */
     public XrVulkanInstanceCreateInfoKHR createFlags(@NativeType("XrVulkanInstanceCreateFlagsKHR") long value) { ncreateFlags(address(), value); return this; }
     /** Sets the specified value to the {@link #pfnGetInstanceProcAddr} field. */
     public XrVulkanInstanceCreateInfoKHR pfnGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddr") long value) { npfnGetInstanceProcAddr(address(), value); return this; }
@@ -370,16 +370,16 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code type} field. */
+        /** @return the value of the {@link XrVulkanInstanceCreateInfoKHR#type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrVulkanInstanceCreateInfoKHR.ntype(address()); }
-        /** @return the value of the {@code next} field. */
+        /** @return the value of the {@link XrVulkanInstanceCreateInfoKHR#next} field. */
         @NativeType("void const *")
         public long next() { return XrVulkanInstanceCreateInfoKHR.nnext(address()); }
         /** @return the value of the {@link XrVulkanInstanceCreateInfoKHR#systemId} field. */
         @NativeType("XrSystemId")
         public long systemId() { return XrVulkanInstanceCreateInfoKHR.nsystemId(address()); }
-        /** @return the value of the {@code createFlags} field. */
+        /** @return the value of the {@link XrVulkanInstanceCreateInfoKHR#createFlags} field. */
         @NativeType("XrVulkanInstanceCreateFlagsKHR")
         public long createFlags() { return XrVulkanInstanceCreateInfoKHR.ncreateFlags(address()); }
         /** @return the value of the {@link XrVulkanInstanceCreateInfoKHR#pfnGetInstanceProcAddr} field. */
@@ -393,15 +393,15 @@ public class XrVulkanInstanceCreateInfoKHR extends Struct implements NativeResou
         @NativeType("VkAllocationCallbacks const *")
         public VkAllocationCallbacks vulkanAllocator() { return XrVulkanInstanceCreateInfoKHR.nvulkanAllocator(address()); }
 
-        /** Sets the specified value to the {@code type} field. */
+        /** Sets the specified value to the {@link XrVulkanInstanceCreateInfoKHR#type} field. */
         public XrVulkanInstanceCreateInfoKHR.Buffer type(@NativeType("XrStructureType") int value) { XrVulkanInstanceCreateInfoKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHRVulkanEnable2#XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR} value to the {@code type} field. */
+        /** Sets the {@link KHRVulkanEnable2#XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR} value to the {@link XrVulkanInstanceCreateInfoKHR#type} field. */
         public XrVulkanInstanceCreateInfoKHR.Buffer type$Default() { return type(KHRVulkanEnable2.XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@code next} field. */
+        /** Sets the specified value to the {@link XrVulkanInstanceCreateInfoKHR#next} field. */
         public XrVulkanInstanceCreateInfoKHR.Buffer next(@NativeType("void const *") long value) { XrVulkanInstanceCreateInfoKHR.nnext(address(), value); return this; }
         /** Sets the specified value to the {@link XrVulkanInstanceCreateInfoKHR#systemId} field. */
         public XrVulkanInstanceCreateInfoKHR.Buffer systemId(@NativeType("XrSystemId") long value) { XrVulkanInstanceCreateInfoKHR.nsystemId(address(), value); return this; }
-        /** Sets the specified value to the {@code createFlags} field. */
+        /** Sets the specified value to the {@link XrVulkanInstanceCreateInfoKHR#createFlags} field. */
         public XrVulkanInstanceCreateInfoKHR.Buffer createFlags(@NativeType("XrVulkanInstanceCreateFlagsKHR") long value) { XrVulkanInstanceCreateInfoKHR.ncreateFlags(address(), value); return this; }
         /** Sets the specified value to the {@link XrVulkanInstanceCreateInfoKHR#pfnGetInstanceProcAddr} field. */
         public XrVulkanInstanceCreateInfoKHR.Buffer pfnGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddr") long value) { XrVulkanInstanceCreateInfoKHR.npfnGetInstanceProcAddr(address(), value); return this; }

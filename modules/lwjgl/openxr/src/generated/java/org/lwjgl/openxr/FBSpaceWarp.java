@@ -39,7 +39,15 @@ public final class FBSpaceWarp {
         XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB = 1000171000,
         XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB      = 1000171001;
 
-    /** XrCompositionLayerSpaceWarpInfoFlagBitsFB */
+    /**
+     * XrCompositionLayerSpaceWarpInfoFlagBitsFB - XrCompositionLayerSpaceWarpInfoFlagBitsFB
+     * 
+     * <h5>Flag Descriptions</h5>
+     * 
+     * <ul>
+     * <li>{@link #XR_COMPOSITION_LAYER_SPACE_WARP_INFO_FRAME_SKIP_BIT_FB COMPOSITION_LAYER_SPACE_WARP_INFO_FRAME_SKIP_BIT_FB} requests that the runtime skips space warp frame extrapolation for a particular frame. This can be used when the application has better knowledge the particular frame will be not a good fit for space warp frame extrapolation.</li>
+     * </ul>
+     */
     public static final int XR_COMPOSITION_LAYER_SPACE_WARP_INFO_FRAME_SKIP_BIT_FB = 0x1;
 
     private FBSpaceWarp() {}

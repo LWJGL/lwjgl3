@@ -207,7 +207,7 @@ public class XR10 {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link XrActionCreateInfo}, {@link XrActionSetCreateInfo}, {@link XrActionSpaceCreateInfo}, {@link XrActionStateBoolean}, {@link XrActionStateFloat}, {@link XrActionStateGetInfo}, {@link XrActionStatePose}, {@link XrActionStateVector2f}, {@link XrActionsSyncInfo}, {@link XrApiLayerProperties}, {@link XrBaseInStructure}, {@link XrBaseOutStructure}, {@link XrBindingModificationBaseHeaderKHR}, {@link XrBindingModificationsKHR}, {@link XrBoundSourcesForActionEnumerateInfo}, {@link XrBoundary2DFB}, {@link XrCompositionLayerAlphaBlendFB}, {@link XrCompositionLayerBaseHeader}, {@link XrCompositionLayerColorScaleBiasKHR}, {@link XrCompositionLayerCubeKHR}, {@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerDepthInfoKHR}, {@link XrCompositionLayerDepthTestVARJO}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerImageLayoutFB}, {@link XrCompositionLayerPassthroughFB}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerProjectionView}, {@link XrCompositionLayerQuad}, {@link XrCompositionLayerReprojectionInfoMSFT}, {@link XrCompositionLayerReprojectionPlaneOverrideMSFT}, {@link XrCompositionLayerSecureContentFB}, {@link XrCompositionLayerSettingsFB}, {@link XrCompositionLayerSpaceWarpInfoFB}, {@link XrControllerModelKeyStateMSFT}, {@link XrControllerModelNodePropertiesMSFT}, {@link XrControllerModelNodeStateMSFT}, {@link XrControllerModelPropertiesMSFT}, {@link XrControllerModelStateMSFT}, {@link XrDebugUtilsLabelEXT}, {@link XrDebugUtilsMessengerCallbackDataEXT}, {@link XrDebugUtilsMessengerCreateInfoEXT}, {@link XrDebugUtilsObjectNameInfoEXT}, {@link XrDigitalLensControlALMALENCE}, {@link XrEventDataBaseHeader}, {@link XrEventDataBuffer}, {@link XrEventDataDisplayRefreshRateChangedFB}, {@link XrEventDataEventsLost}, {@link XrEventDataInstanceLossPending}, {@link XrEventDataInteractionProfileChanged}, {@link XrEventDataMainSessionVisibilityChangedEXTX}, {@link XrEventDataMarkerTrackingUpdateVARJO}, {@link XrEventDataPassthroughStateChangedFB}, {@link XrEventDataPerfSettingsEXT}, {@link XrEventDataReferenceSpaceChangePending}, {@link XrEventDataSessionStateChanged}, {@link XrEventDataSpaceEraseCompleteFB}, {@link XrEventDataSpaceQueryCompleteFB}, {@link XrEventDataSpaceQueryResultsAvailableFB}, {@link XrEventDataSpaceSaveCompleteFB}, {@link XrEventDataSpaceSetStatusCompleteFB}, {@link XrEventDataSpatialAnchorCreateCompleteFB}, {@link XrEventDataVisibilityMaskChangedKHR}, {@link XrEventDataViveTrackerConnectedHTCX}, {@link XrExtensionProperties}, {@link XrEyeGazeSampleTimeEXT}, {@link XrFacialExpressionsHTC}, {@link XrFacialTrackerCreateInfoHTC}, {@link XrFoveatedViewConfigurationViewVARJO}, {@link XrFoveationLevelProfileCreateInfoFB}, {@link XrFoveationProfileCreateInfoFB}, {@link XrFrameBeginInfo}, {@link XrFrameEndInfo}, {@link XrFrameState}, {@link XrFrameWaitInfo}, {@link XrGeometryInstanceCreateInfoFB}, {@link XrGeometryInstanceTransformFB}, {@link XrGraphicsBindingEGLMNDX}, {@link XrGraphicsBindingOpenGLWaylandKHR}, {@link XrGraphicsBindingOpenGLWin32KHR}, {@link XrGraphicsBindingOpenGLXcbKHR}, {@link XrGraphicsBindingOpenGLXlibKHR}, {@link XrGraphicsBindingVulkanKHR}, {@link XrGraphicsRequirementsOpenGLKHR}, {@link XrGraphicsRequirementsVulkanKHR}, {@link XrHandJointLocationsEXT}, {@link XrHandJointVelocitiesEXT}, {@link XrHandJointsLocateInfoEXT}, {@link XrHandJointsMotionRangeInfoEXT}, {@link XrHandMeshMSFT}, {@link XrHandMeshSpaceCreateInfoMSFT}, {@link XrHandMeshUpdateInfoMSFT}, {@link XrHandPoseTypeInfoMSFT}, {@link XrHandTrackerCreateInfoEXT}, {@link XrHandTrackingAimStateFB}, {@link XrHandTrackingCapsulesStateFB}, {@link XrHandTrackingMeshFB}, {@link XrHandTrackingScaleFB}, {@link XrHapticActionInfo}, {@link XrHapticBaseHeader}, {@link XrHapticVibration}, {@link XrHolographicWindowAttachmentMSFT}, {@link XrInputSourceLocalizedNameGetInfo}, {@link XrInstanceCreateInfo}, {@link XrInstanceProperties}, {@link XrInteractionProfileAnalogThresholdVALVE}, {@link XrInteractionProfileDpadBindingEXT}, {@link XrInteractionProfileState}, {@link XrInteractionProfileSuggestedBinding}, {@link XrKeyboardSpaceCreateInfoFB}, {@link XrKeyboardTrackingQueryFB}, {@link XrLoaderInitInfoBaseHeaderKHR}, {@link XrMarkerSpaceCreateInfoVARJO}, {@link XrNewSceneComputeInfoMSFT}, {@link XrPassthroughBrightnessContrastSaturationFB}, {@link XrPassthroughColorMapMonoToMonoFB}, {@link XrPassthroughColorMapMonoToRgbaFB}, {@link XrPassthroughCreateInfoFB}, {@link XrPassthroughKeyboardHandsIntensityFB}, {@link XrPassthroughLayerCreateInfoFB}, {@link XrPassthroughStyleFB}, {@link XrPerformanceMetricsCounterMETA}, {@link XrPerformanceMetricsStateMETA}, {@link XrReferenceSpaceCreateInfo}, {@link XrRenderModelBufferFB}, {@link XrRenderModelCapabilitiesRequestFB}, {@link XrRenderModelLoadInfoFB}, {@link XrRenderModelPathInfoFB}, {@link XrRenderModelPropertiesFB}, {@link XrRoomLayoutFB}, {@link XrSceneComponentLocationsMSFT}, {@link XrSceneComponentParentFilterInfoMSFT}, {@link XrSceneComponentsGetInfoMSFT}, {@link XrSceneComponentsLocateInfoMSFT}, {@link XrSceneComponentsMSFT}, {@link XrSceneCreateInfoMSFT}, {@link XrSceneDeserializeInfoMSFT}, {@link XrSceneMeshBuffersGetInfoMSFT}, {@link XrSceneMeshBuffersMSFT}, {@link XrSceneMeshIndicesUint16MSFT}, {@link XrSceneMeshIndicesUint32MSFT}, {@link XrSceneMeshVertexBufferMSFT}, {@link XrSceneMeshesMSFT}, {@link XrSceneObjectTypesFilterInfoMSFT}, {@link XrSceneObjectsMSFT}, {@link XrSceneObserverCreateInfoMSFT}, {@link XrScenePlaneAlignmentFilterInfoMSFT}, {@link XrScenePlanesMSFT}, {@link XrSecondaryViewConfigurationFrameEndInfoMSFT}, {@link XrSecondaryViewConfigurationFrameStateMSFT}, {@link XrSecondaryViewConfigurationLayerInfoMSFT}, {@link XrSecondaryViewConfigurationSessionBeginInfoMSFT}, {@link XrSecondaryViewConfigurationStateMSFT}, {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT}, {@link XrSemanticLabelsFB}, {@link XrSerializedSceneFragmentDataGetInfoMSFT}, {@link XrSessionActionSetsAttachInfo}, {@link XrSessionBeginInfo}, {@link XrSessionCreateInfo}, {@link XrSessionCreateInfoOverlayEXTX}, {@link XrSpaceComponentFilterInfoFB}, {@link XrSpaceComponentStatusFB}, {@link XrSpaceComponentStatusSetInfoFB}, {@link XrSpaceContainerFB}, {@link XrSpaceEraseInfoFB}, {@link XrSpaceFilterInfoBaseHeaderFB}, {@link XrSpaceLocation}, {@link XrSpaceQueryInfoBaseHeaderFB}, {@link XrSpaceQueryInfoFB}, {@link XrSpaceQueryResultsFB}, {@link XrSpaceSaveInfoFB}, {@link XrSpaceStorageLocationFilterInfoFB}, {@link XrSpaceUuidFilterInfoFB}, {@link XrSpaceVelocity}, {@link XrSpatialAnchorCreateInfoFB}, {@link XrSpatialAnchorCreateInfoMSFT}, {@link XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT}, {@link XrSpatialAnchorPersistenceInfoMSFT}, {@link XrSpatialAnchorSpaceCreateInfoMSFT}, {@link XrSpatialGraphNodeBindingPropertiesGetInfoMSFT}, {@link XrSpatialGraphNodeBindingPropertiesMSFT}, {@link XrSpatialGraphNodeSpaceCreateInfoMSFT}, {@link XrSpatialGraphStaticNodeBindingCreateInfoMSFT}, {@link XrSwapchainCreateInfo}, {@link XrSwapchainCreateInfoFoveationFB}, {@link XrSwapchainImageAcquireInfo}, {@link XrSwapchainImageBaseHeader}, {@link XrSwapchainImageFoveationVulkanFB}, {@link XrSwapchainImageOpenGLKHR}, {@link XrSwapchainImageReleaseInfo}, {@link XrSwapchainImageVulkanKHR}, {@link XrSwapchainImageWaitInfo}, {@link XrSwapchainStateBaseHeaderFB}, {@link XrSwapchainStateFoveationFB}, {@link XrSwapchainStateSamplerOpenGLESFB}, {@link XrSwapchainStateSamplerVulkanFB}, {@link XrSystemColorSpacePropertiesFB}, {@link XrSystemEyeGazeInteractionPropertiesEXT}, {@link XrSystemFacialTrackingPropertiesHTC}, {@link XrSystemFoveatedRenderingPropertiesVARJO}, {@link XrSystemGetInfo}, {@link XrSystemHandTrackingMeshPropertiesMSFT}, {@link XrSystemHandTrackingPropertiesEXT}, {@link XrSystemKeyboardTrackingPropertiesFB}, {@link XrSystemMarkerTrackingPropertiesVARJO}, {@link XrSystemPassthroughProperties2FB}, {@link XrSystemPassthroughPropertiesFB}, {@link XrSystemProperties}, {@link XrSystemRenderModelPropertiesFB}, {@link XrSystemSpaceWarpPropertiesFB}, {@link XrSystemSpatialEntityPropertiesFB}, {@link XrTriangleMeshCreateInfoFB}, {@link XrView}, {@link XrViewConfigurationDepthRangeEXT}, {@link XrViewConfigurationProperties}, {@link XrViewConfigurationView}, {@link XrViewConfigurationViewFovEPIC}, {@link XrViewLocateFoveatedRenderingVARJO}, {@link XrViewLocateInfo}, {@link XrViewState}, {@link XrVisibilityMaskKHR}, {@link XrVisualMeshComputeLodInfoMSFT}, {@link XrViveTrackerPathsHTCX}, {@link XrVulkanDeviceCreateInfoKHR}, {@link XrVulkanGraphicsDeviceGetInfoKHR}, {@link XrVulkanInstanceCreateInfoKHR}, {@link XrVulkanSwapchainCreateInfoMETA}, {@link XrVulkanSwapchainFormatListCreateInfoKHR}, {@link #xrStructureTypeToString StructureTypeToString}</p>
+     * <p>{@link XrActionCreateInfo}, {@link XrActionSetCreateInfo}, {@link XrActionSpaceCreateInfo}, {@link XrActionStateBoolean}, {@link XrActionStateFloat}, {@link XrActionStateGetInfo}, {@link XrActionStatePose}, {@link XrActionStateVector2f}, {@link XrActionsSyncInfo}, {@link XrActiveActionSetPrioritiesEXT}, {@link XrApiLayerProperties}, {@link XrBaseInStructure}, {@link XrBaseOutStructure}, {@link XrBindingModificationBaseHeaderKHR}, {@link XrBindingModificationsKHR}, {@link XrBoundSourcesForActionEnumerateInfo}, {@link XrBoundary2DFB}, {@link XrCompositionLayerAlphaBlendFB}, {@link XrCompositionLayerBaseHeader}, {@link XrCompositionLayerColorScaleBiasKHR}, {@link XrCompositionLayerCubeKHR}, {@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerDepthInfoKHR}, {@link XrCompositionLayerDepthTestVARJO}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerImageLayoutFB}, {@link XrCompositionLayerPassthroughFB}, {@link XrCompositionLayerPassthroughHTC}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerProjectionView}, {@link XrCompositionLayerQuad}, {@link XrCompositionLayerReprojectionInfoMSFT}, {@link XrCompositionLayerReprojectionPlaneOverrideMSFT}, {@link XrCompositionLayerSecureContentFB}, {@link XrCompositionLayerSettingsFB}, {@link XrCompositionLayerSpaceWarpInfoFB}, {@link XrControllerModelKeyStateMSFT}, {@link XrControllerModelNodePropertiesMSFT}, {@link XrControllerModelNodeStateMSFT}, {@link XrControllerModelPropertiesMSFT}, {@link XrControllerModelStateMSFT}, {@link XrDebugUtilsLabelEXT}, {@link XrDebugUtilsMessengerCallbackDataEXT}, {@link XrDebugUtilsMessengerCreateInfoEXT}, {@link XrDebugUtilsObjectNameInfoEXT}, {@link XrDigitalLensControlALMALENCE}, {@link XrEventDataBaseHeader}, {@link XrEventDataBuffer}, {@link XrEventDataDisplayRefreshRateChangedFB}, {@link XrEventDataEventsLost}, {@link XrEventDataInstanceLossPending}, {@link XrEventDataInteractionProfileChanged}, {@link XrEventDataMainSessionVisibilityChangedEXTX}, {@link XrEventDataMarkerTrackingUpdateVARJO}, {@link XrEventDataPassthroughStateChangedFB}, {@link XrEventDataPerfSettingsEXT}, {@link XrEventDataReferenceSpaceChangePending}, {@link XrEventDataSessionStateChanged}, {@link XrEventDataSpaceEraseCompleteFB}, {@link XrEventDataSpaceQueryCompleteFB}, {@link XrEventDataSpaceQueryResultsAvailableFB}, {@link XrEventDataSpaceSaveCompleteFB}, {@link XrEventDataSpaceSetStatusCompleteFB}, {@link XrEventDataSpatialAnchorCreateCompleteFB}, {@link XrEventDataVisibilityMaskChangedKHR}, {@link XrEventDataViveTrackerConnectedHTCX}, {@link XrExtensionProperties}, {@link XrEyeGazeSampleTimeEXT}, {@link XrFacialExpressionsHTC}, {@link XrFacialTrackerCreateInfoHTC}, {@link XrFoveatedViewConfigurationViewVARJO}, {@link XrFoveationApplyInfoHTC}, {@link XrFoveationCustomModeInfoHTC}, {@link XrFoveationDynamicModeInfoHTC}, {@link XrFoveationLevelProfileCreateInfoFB}, {@link XrFoveationProfileCreateInfoFB}, {@link XrFrameBeginInfo}, {@link XrFrameEndInfo}, {@link XrFrameState}, {@link XrFrameWaitInfo}, {@link XrGeometryInstanceCreateInfoFB}, {@link XrGeometryInstanceTransformFB}, {@link XrGraphicsBindingEGLMNDX}, {@link XrGraphicsBindingOpenGLWaylandKHR}, {@link XrGraphicsBindingOpenGLWin32KHR}, {@link XrGraphicsBindingOpenGLXcbKHR}, {@link XrGraphicsBindingOpenGLXlibKHR}, {@link XrGraphicsBindingVulkanKHR}, {@link XrGraphicsRequirementsOpenGLKHR}, {@link XrGraphicsRequirementsVulkanKHR}, {@link XrHandJointLocationsEXT}, {@link XrHandJointVelocitiesEXT}, {@link XrHandJointsLocateInfoEXT}, {@link XrHandJointsMotionRangeInfoEXT}, {@link XrHandMeshMSFT}, {@link XrHandMeshSpaceCreateInfoMSFT}, {@link XrHandMeshUpdateInfoMSFT}, {@link XrHandPoseTypeInfoMSFT}, {@link XrHandTrackerCreateInfoEXT}, {@link XrHandTrackingAimStateFB}, {@link XrHandTrackingCapsulesStateFB}, {@link XrHandTrackingMeshFB}, {@link XrHandTrackingScaleFB}, {@link XrHapticActionInfo}, {@link XrHapticBaseHeader}, {@link XrHapticVibration}, {@link XrHolographicWindowAttachmentMSFT}, {@link XrInputSourceLocalizedNameGetInfo}, {@link XrInstanceCreateInfo}, {@link XrInstanceProperties}, {@link XrInteractionProfileAnalogThresholdVALVE}, {@link XrInteractionProfileDpadBindingEXT}, {@link XrInteractionProfileState}, {@link XrInteractionProfileSuggestedBinding}, {@link XrKeyboardSpaceCreateInfoFB}, {@link XrKeyboardTrackingQueryFB}, {@link XrLoaderInitInfoBaseHeaderKHR}, {@link XrMarkerSpaceCreateInfoVARJO}, {@link XrNewSceneComputeInfoMSFT}, {@link XrPassthroughBrightnessContrastSaturationFB}, {@link XrPassthroughColorHTC}, {@link XrPassthroughColorMapMonoToMonoFB}, {@link XrPassthroughColorMapMonoToRgbaFB}, {@link XrPassthroughCreateInfoFB}, {@link XrPassthroughCreateInfoHTC}, {@link XrPassthroughKeyboardHandsIntensityFB}, {@link XrPassthroughLayerCreateInfoFB}, {@link XrPassthroughMeshTransformInfoHTC}, {@link XrPassthroughStyleFB}, {@link XrPerformanceMetricsCounterMETA}, {@link XrPerformanceMetricsStateMETA}, {@link XrReferenceSpaceCreateInfo}, {@link XrRenderModelBufferFB}, {@link XrRenderModelCapabilitiesRequestFB}, {@link XrRenderModelLoadInfoFB}, {@link XrRenderModelPathInfoFB}, {@link XrRenderModelPropertiesFB}, {@link XrRoomLayoutFB}, {@link XrSceneComponentLocationsMSFT}, {@link XrSceneComponentParentFilterInfoMSFT}, {@link XrSceneComponentsGetInfoMSFT}, {@link XrSceneComponentsLocateInfoMSFT}, {@link XrSceneComponentsMSFT}, {@link XrSceneCreateInfoMSFT}, {@link XrSceneDeserializeInfoMSFT}, {@link XrSceneMeshBuffersGetInfoMSFT}, {@link XrSceneMeshBuffersMSFT}, {@link XrSceneMeshIndicesUint16MSFT}, {@link XrSceneMeshIndicesUint32MSFT}, {@link XrSceneMeshVertexBufferMSFT}, {@link XrSceneMeshesMSFT}, {@link XrSceneObjectTypesFilterInfoMSFT}, {@link XrSceneObjectsMSFT}, {@link XrSceneObserverCreateInfoMSFT}, {@link XrScenePlaneAlignmentFilterInfoMSFT}, {@link XrScenePlanesMSFT}, {@link XrSecondaryViewConfigurationFrameEndInfoMSFT}, {@link XrSecondaryViewConfigurationFrameStateMSFT}, {@link XrSecondaryViewConfigurationLayerInfoMSFT}, {@link XrSecondaryViewConfigurationSessionBeginInfoMSFT}, {@link XrSecondaryViewConfigurationStateMSFT}, {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT}, {@link XrSemanticLabelsFB}, {@link XrSerializedSceneFragmentDataGetInfoMSFT}, {@link XrSessionActionSetsAttachInfo}, {@link XrSessionBeginInfo}, {@link XrSessionCreateInfo}, {@link XrSessionCreateInfoOverlayEXTX}, {@link XrSpaceComponentFilterInfoFB}, {@link XrSpaceComponentStatusFB}, {@link XrSpaceComponentStatusSetInfoFB}, {@link XrSpaceContainerFB}, {@link XrSpaceEraseInfoFB}, {@link XrSpaceFilterInfoBaseHeaderFB}, {@link XrSpaceLocation}, {@link XrSpaceQueryInfoBaseHeaderFB}, {@link XrSpaceQueryInfoFB}, {@link XrSpaceQueryResultsFB}, {@link XrSpaceSaveInfoFB}, {@link XrSpaceStorageLocationFilterInfoFB}, {@link XrSpaceUuidFilterInfoFB}, {@link XrSpaceVelocity}, {@link XrSpatialAnchorCreateInfoFB}, {@link XrSpatialAnchorCreateInfoMSFT}, {@link XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT}, {@link XrSpatialAnchorPersistenceInfoMSFT}, {@link XrSpatialAnchorSpaceCreateInfoMSFT}, {@link XrSpatialGraphNodeBindingPropertiesGetInfoMSFT}, {@link XrSpatialGraphNodeBindingPropertiesMSFT}, {@link XrSpatialGraphNodeSpaceCreateInfoMSFT}, {@link XrSpatialGraphStaticNodeBindingCreateInfoMSFT}, {@link XrSwapchainCreateInfo}, {@link XrSwapchainCreateInfoFoveationFB}, {@link XrSwapchainImageAcquireInfo}, {@link XrSwapchainImageBaseHeader}, {@link XrSwapchainImageFoveationVulkanFB}, {@link XrSwapchainImageOpenGLKHR}, {@link XrSwapchainImageReleaseInfo}, {@link XrSwapchainImageVulkanKHR}, {@link XrSwapchainImageWaitInfo}, {@link XrSwapchainStateBaseHeaderFB}, {@link XrSwapchainStateFoveationFB}, {@link XrSwapchainStateSamplerOpenGLESFB}, {@link XrSwapchainStateSamplerVulkanFB}, {@link XrSystemColorSpacePropertiesFB}, {@link XrSystemEyeGazeInteractionPropertiesEXT}, {@link XrSystemFacialTrackingPropertiesHTC}, {@link XrSystemFoveatedRenderingPropertiesVARJO}, {@link XrSystemGetInfo}, {@link XrSystemHandTrackingMeshPropertiesMSFT}, {@link XrSystemHandTrackingPropertiesEXT}, {@link XrSystemHeadsetIdPropertiesMETA}, {@link XrSystemKeyboardTrackingPropertiesFB}, {@link XrSystemMarkerTrackingPropertiesVARJO}, {@link XrSystemPassthroughProperties2FB}, {@link XrSystemPassthroughPropertiesFB}, {@link XrSystemProperties}, {@link XrSystemRenderModelPropertiesFB}, {@link XrSystemSpaceWarpPropertiesFB}, {@link XrSystemSpatialEntityPropertiesFB}, {@link XrTriangleMeshCreateInfoFB}, {@link XrView}, {@link XrViewConfigurationDepthRangeEXT}, {@link XrViewConfigurationProperties}, {@link XrViewConfigurationView}, {@link XrViewConfigurationViewFovEPIC}, {@link XrViewLocateFoveatedRenderingVARJO}, {@link XrViewLocateInfo}, {@link XrViewState}, {@link XrVisibilityMaskKHR}, {@link XrVisualMeshComputeLodInfoMSFT}, {@link XrViveTrackerPathsHTCX}, {@link XrVulkanDeviceCreateInfoKHR}, {@link XrVulkanGraphicsDeviceGetInfoKHR}, {@link XrVulkanInstanceCreateInfoKHR}, {@link XrVulkanSwapchainCreateInfoMETA}, {@link XrVulkanSwapchainFormatListCreateInfoKHR}, {@link #xrStructureTypeToString StructureTypeToString}</p>
      * 
      * <h5>Enum values:</h5>
      * 
@@ -383,14 +383,22 @@ public class XR10 {
         XR_ENVIRONMENT_BLEND_MODE_ALPHA_BLEND = 3;
 
     /**
-     * XrSpaceVelocityFlagBits
+     * XrSpaceVelocityFlagBits - Space velocity flags
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Description</h5>
+     * 
+     * <p>The flag bits have the following meanings:</p>
+     * 
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_SPACE_VELOCITY_LINEAR_VALID_BIT SPACE_VELOCITY_LINEAR_VALID_BIT}</li>
-     * <li>{@link #XR_SPACE_VELOCITY_ANGULAR_VALID_BIT SPACE_VELOCITY_ANGULAR_VALID_BIT}</li>
+     * <li>{@link #XR_SPACE_VELOCITY_LINEAR_VALID_BIT SPACE_VELOCITY_LINEAR_VALID_BIT} — Indicates that the {@code linearVelocity} member contains valid data. Applications <b>must</b> not read the {@code linearVelocity} field if this flag is unset.</li>
+     * <li>{@link #XR_SPACE_VELOCITY_ANGULAR_VALID_BIT SPACE_VELOCITY_ANGULAR_VALID_BIT} — Indicates that the {@code angularVelocity} member contains valid data. Applications <b>must</b> not read the {@code angularVelocity} field if this flag is unset.</li>
      * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link XrSpaceVelocity}</p>
      */
     public static final int
         XR_SPACE_VELOCITY_LINEAR_VALID_BIT  = 0x1,
@@ -443,16 +451,24 @@ public class XR10 {
         XR_REFERENCE_SPACE_TYPE_STAGE = 3;
 
     /**
-     * XrSpaceLocationFlagBits
+     * XrSpaceLocationFlagBits - Space location flags
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Description</h5>
+     * 
+     * <p>The flag bits have the following meanings:</p>
+     * 
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_SPACE_LOCATION_ORIENTATION_VALID_BIT SPACE_LOCATION_ORIENTATION_VALID_BIT}</li>
-     * <li>{@link #XR_SPACE_LOCATION_POSITION_VALID_BIT SPACE_LOCATION_POSITION_VALID_BIT}</li>
-     * <li>{@link #XR_SPACE_LOCATION_ORIENTATION_TRACKED_BIT SPACE_LOCATION_ORIENTATION_TRACKED_BIT}</li>
-     * <li>{@link #XR_SPACE_LOCATION_POSITION_TRACKED_BIT SPACE_LOCATION_POSITION_TRACKED_BIT}</li>
+     * <li>{@link #XR_SPACE_LOCATION_ORIENTATION_VALID_BIT SPACE_LOCATION_ORIENTATION_VALID_BIT} indicates that the {@code pose} field’s {@code orientation} field contains valid data. For a space location tracking a device with its own inertial tracking, {@link #XR_SPACE_LOCATION_ORIENTATION_TRACKED_BIT SPACE_LOCATION_ORIENTATION_TRACKED_BIT} <b>should</b> remain set when this bit is set. Applications <b>must</b> not read the {@code pose} field’s {@code orientation} if this flag is unset.</li>
+     * <li>{@link #XR_SPACE_LOCATION_POSITION_VALID_BIT SPACE_LOCATION_POSITION_VALID_BIT} indicates that the {@code pose} field’s {@code position} field contains valid data. When a space location loses tracking, runtimes <b>should</b> continue to provide valid but untracked {@code position} values that are inferred or last-known, so long as it’s still meaningful for the application to use that position, clearing {@link #XR_SPACE_LOCATION_POSITION_TRACKED_BIT SPACE_LOCATION_POSITION_TRACKED_BIT} until positional tracking is recovered. Applications <b>must</b> not read the {@code pose} field’s {@code position} if this flag is unset.</li>
+     * <li>{@link #XR_SPACE_LOCATION_ORIENTATION_TRACKED_BIT SPACE_LOCATION_ORIENTATION_TRACKED_BIT} indicates that the {@code pose} field’s {@code orientation} field represents an actively tracked orientation. For a space location tracking a device with its own inertial tracking, this bit <b>should</b> remain set when {@link #XR_SPACE_LOCATION_ORIENTATION_VALID_BIT SPACE_LOCATION_ORIENTATION_VALID_BIT} is set. For a space location tracking an object whose orientation is no longer known during tracking loss (e.g. an observed QR code), runtimes <b>should</b> continue to provide valid but untracked {@code orientation} values, so long as it’s still meaningful for the application to use that orientation.</li>
+     * <li>{@link #XR_SPACE_LOCATION_POSITION_TRACKED_BIT SPACE_LOCATION_POSITION_TRACKED_BIT} indicates that the {@code pose} field’s {@code position} field represents an actively tracked position. When a space location loses tracking, runtimes <b>should</b> continue to provide valid but untracked {@code position} values that are inferred or last-known, e.g. based on neck model updates, inertial dead reckoning, or a last-known position, so long as it’s still meaningful for the application to use that position.</li>
      * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link XrSpaceLocation}, {@link #xrLocateSpace LocateSpace}</p>
      */
     public static final int
         XR_SPACE_LOCATION_ORIENTATION_VALID_BIT   = 0x1,
@@ -461,33 +477,53 @@ public class XR10 {
         XR_SPACE_LOCATION_POSITION_TRACKED_BIT    = 0x8;
 
     /**
-     * XrSwapchainCreateFlagBits
+     * XrSwapchainCreateFlagBits - Swapchain creation flags
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Description</h5>
+     * 
+     * <p>The flag bits have the following meanings:</p>
+     * 
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT}</li>
-     * <li>{@link #XR_SWAPCHAIN_CREATE_STATIC_IMAGE_BIT SWAPCHAIN_CREATE_STATIC_IMAGE_BIT}</li>
+     * <li>{@link #XR_SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT} indicates that the swapchain’s images will be protected from CPU access, using a mechanism such as Vulkan protected memory.</li>
+     * <li>{@link #XR_SWAPCHAIN_CREATE_STATIC_IMAGE_BIT SWAPCHAIN_CREATE_STATIC_IMAGE_BIT} indicates that the application will acquire and release only one image to this swapchain over its entire lifetime. The runtime <b>must</b> allocate only one swapchain image.</li>
      * </ul>
+     * 
+     * <p>A runtime <b>may</b> implement any of these, but is not required to. A runtime <b>must</b> return {@link #XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link #xrCreateSwapchain CreateSwapchain} if an {@code XrSwapchainCreateFlags} bit is requested but not implemented.</p>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link XrSwapchainCreateInfo}</p>
      */
     public static final int
         XR_SWAPCHAIN_CREATE_PROTECTED_CONTENT_BIT = 0x1,
         XR_SWAPCHAIN_CREATE_STATIC_IMAGE_BIT      = 0x2;
 
     /**
-     * XrSwapchainUsageFlagBits
+     * XrSwapchainUsageFlagBits - Swapchain usage flags
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Description</h5>
+     * 
+     * <p>The flag bits have the following meanings:</p>
+     * 
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT}</li>
-     * <li>{@link #XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
-     * <li>{@link #XR_SWAPCHAIN_USAGE_UNORDERED_ACCESS_BIT SWAPCHAIN_USAGE_UNORDERED_ACCESS_BIT}</li>
-     * <li>{@link #XR_SWAPCHAIN_USAGE_TRANSFER_SRC_BIT SWAPCHAIN_USAGE_TRANSFER_SRC_BIT}</li>
-     * <li>{@link #XR_SWAPCHAIN_USAGE_TRANSFER_DST_BIT SWAPCHAIN_USAGE_TRANSFER_DST_BIT}</li>
-     * <li>{@link #XR_SWAPCHAIN_USAGE_SAMPLED_BIT SWAPCHAIN_USAGE_SAMPLED_BIT}</li>
-     * <li>{@link #XR_SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT}</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT} — Specifies that the image <b>may</b> be a color rendering target.</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT} — Specifies that the image <b>may</b> be a depth/stencil rendering target.</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_UNORDERED_ACCESS_BIT SWAPCHAIN_USAGE_UNORDERED_ACCESS_BIT} — Specifies that the image <b>may</b> be accessed out of order and that access <b>may</b> be via atomic operations.</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_TRANSFER_SRC_BIT SWAPCHAIN_USAGE_TRANSFER_SRC_BIT} — Specifies that the image <b>may</b> be used as the source of a transfer operation.</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_TRANSFER_DST_BIT SWAPCHAIN_USAGE_TRANSFER_DST_BIT} — Specifies that the image <b>may</b> be used as the destination of a transfer operation.</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_SAMPLED_BIT SWAPCHAIN_USAGE_SAMPLED_BIT} — Specifies that the image <b>may</b> be sampled by a shader.</li>
+     * <li>{@link #XR_SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT} — Specifies that the image <b>may</b> be reinterpreted as another image format.</li>
+     * <li>{@link MNDSwapchainUsageInputAttachmentBit#XR_SWAPCHAIN_USAGE_INPUT_ATTACHMENT_BIT_MND SWAPCHAIN_USAGE_INPUT_ATTACHMENT_BIT_MND} — Specifies that the image <b>may</b> be used as a input attachment. (Added by the {@link MNDSwapchainUsageInputAttachmentBit XR_MND_swapchain_usage_input_attachment_bit} extension)</li>
+     * <li>{@link KHRSwapchainUsageInputAttachmentBit#XR_SWAPCHAIN_USAGE_INPUT_ATTACHMENT_BIT_KHR SWAPCHAIN_USAGE_INPUT_ATTACHMENT_BIT_KHR} — Specifies that the image <b>may</b> be used as a input attachment. (Added by the {@link KHRSwapchainUsageInputAttachmentBit XR_KHR_swapchain_usage_input_attachment_bit} extension)</li>
      * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link XrSwapchainCreateInfo}, {@link #xrCreateSwapchain CreateSwapchain}</p>
      */
     public static final int
         XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT         = 0x1,
@@ -499,15 +535,23 @@ public class XR10 {
         XR_SWAPCHAIN_USAGE_MUTABLE_FORMAT_BIT           = 0x40;
 
     /**
-     * XrCompositionLayerFlagBits
+     * XrCompositionLayerFlagBits - Composition layer flags
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Description</h5>
+     * 
+     * <p>The flag bits have the following meanings:</p>
+     * 
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT}</li>
-     * <li>{@link #XR_COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT}</li>
-     * <li>{@link #XR_COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT}</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT} — Enables chromatic aberration correction when not done by default. This flag has no effect on any known conformant runtime, and is planned for deprecation for OpenXR 1.1</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT COMPOSITION_LAYER_BLEND_TEXTURE_SOURCE_ALPHA_BIT} — Enables the layer texture alpha channel.</li>
+     * <li>{@link #XR_COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT} — Indicates the texture color channels have not been premultiplied by the texture alpha channel.</li>
      * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link XrCompositionLayerProjection}, {@link XrCompositionLayerQuad}</p>
      */
     public static final int
         XR_COMPOSITION_LAYER_CORRECT_CHROMATIC_ABERRATION_BIT = 0x1,
@@ -515,16 +559,24 @@ public class XR10 {
         XR_COMPOSITION_LAYER_UNPREMULTIPLIED_ALPHA_BIT        = 0x4;
 
     /**
-     * XrViewStateFlagBits
+     * XrViewStateFlagBits - View state flags
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Description</h5>
+     * 
+     * <p>The flag bits have the following meanings:</p>
+     * 
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_VIEW_STATE_ORIENTATION_VALID_BIT VIEW_STATE_ORIENTATION_VALID_BIT}</li>
-     * <li>{@link #XR_VIEW_STATE_POSITION_VALID_BIT VIEW_STATE_POSITION_VALID_BIT}</li>
-     * <li>{@link #XR_VIEW_STATE_ORIENTATION_TRACKED_BIT VIEW_STATE_ORIENTATION_TRACKED_BIT}</li>
-     * <li>{@link #XR_VIEW_STATE_POSITION_TRACKED_BIT VIEW_STATE_POSITION_TRACKED_BIT}</li>
+     * <li>{@link #XR_VIEW_STATE_ORIENTATION_VALID_BIT VIEW_STATE_ORIENTATION_VALID_BIT} indicates whether all {@link XrView} orientations contain valid data. Applications <b>must</b> not read any of the {@link XrView} {@code pose} {@code orientation} fields if this flag is unset. {@link #XR_VIEW_STATE_ORIENTATION_TRACKED_BIT VIEW_STATE_ORIENTATION_TRACKED_BIT} <b>should</b> generally remain set when this bit is set for views on a tracked headset or handheld device.</li>
+     * <li>{@link #XR_VIEW_STATE_POSITION_VALID_BIT VIEW_STATE_POSITION_VALID_BIT} indicates whether all {@link XrView} positions contain valid data. Applications <b>must</b> not read any of the {@link XrView}{@code ::pose} {@code position} fields if this flag is unset. When a view loses tracking, runtimes <b>should</b> continue to provide valid but untracked view {@code position} values that are inferred or last-known, so long as it’s still meaningful for the application to render content using that position, clearing {@link #XR_VIEW_STATE_POSITION_TRACKED_BIT VIEW_STATE_POSITION_TRACKED_BIT} until tracking is recovered.</li>
+     * <li>{@link #XR_VIEW_STATE_ORIENTATION_TRACKED_BIT VIEW_STATE_ORIENTATION_TRACKED_BIT} indicates whether all {@link XrView} orientations represent an actively tracked orientation. This bit <b>should</b> generally remain set when {@link #XR_VIEW_STATE_ORIENTATION_VALID_BIT VIEW_STATE_ORIENTATION_VALID_BIT} is set for views on a tracked headset or handheld device.</li>
+     * <li>{@link #XR_VIEW_STATE_POSITION_TRACKED_BIT VIEW_STATE_POSITION_TRACKED_BIT} indicates whether all {@link XrView} positions represent an actively tracked position. When a view loses tracking, runtimes <b>should</b> continue to provide valid but untracked view {@code position} values that are inferred or last-known, e.g. based on neck model updates, inertial dead reckoning, or a last-known position, so long as it’s still meaningful for the application to render content using that position.</li>
      * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link XrView}, {@link XrViewState}, {@link #xrLocateViews LocateViews}</p>
      */
     public static final int
         XR_VIEW_STATE_ORIENTATION_VALID_BIT   = 0x1,
@@ -557,15 +609,23 @@ public class XR10 {
         XR_ACTION_TYPE_VIBRATION_OUTPUT = 100;
 
     /**
-     * XrInputSourceLocalizedNameFlagBits
+     * XrInputSourceLocalizedNameFlagBits - Input source localized name flags
      * 
-     * <h5>Enum values:</h5>
+     * <h5>Description</h5>
+     * 
+     * <p>The flag bits have the following meanings:</p>
+     * 
+     * <h5>Flag Descriptions</h5>
      * 
      * <ul>
-     * <li>{@link #XR_INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT}</li>
-     * <li>{@link #XR_INPUT_SOURCE_LOCALIZED_NAME_INTERACTION_PROFILE_BIT INPUT_SOURCE_LOCALIZED_NAME_INTERACTION_PROFILE_BIT}</li>
-     * <li>{@link #XR_INPUT_SOURCE_LOCALIZED_NAME_COMPONENT_BIT INPUT_SOURCE_LOCALIZED_NAME_COMPONENT_BIT}</li>
+     * <li>{@link #XR_INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT} indicates that the runtime <b>must</b> include the user path portion of the string in the result, if available. E.g. {@code Left Hand}.</li>
+     * <li>{@link #XR_INPUT_SOURCE_LOCALIZED_NAME_INTERACTION_PROFILE_BIT INPUT_SOURCE_LOCALIZED_NAME_INTERACTION_PROFILE_BIT} indicates that the runtime <b>must</b> include the interaction profile portion of the string in the result, if available. E.g. {@code Vive Controller}.</li>
+     * <li>{@link #XR_INPUT_SOURCE_LOCALIZED_NAME_COMPONENT_BIT INPUT_SOURCE_LOCALIZED_NAME_COMPONENT_BIT} indicates that the runtime <b>must</b> include the input component portion of the string in the result, if available. E.g. {@code Trigger}.</li>
      * </ul>
+     * 
+     * <h5>See Also</h5>
+     * 
+     * <p>{@link #xrGetInputSourceLocalizedName GetInputSourceLocalizedName}</p>
      */
     public static final int
         XR_INPUT_SOURCE_LOCALIZED_NAME_USER_PATH_BIT           = 0x1,
@@ -1036,8 +1096,6 @@ public class XR10 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>If {@code properties} is {@code NULL}, then the number of extensions properties available is returned in {@code propertyCountOutput}. Otherwise, {@code propertyCountInput} must point to a variable set by the user to the number of elements in the {@code properties} array. If {@code propertyCountInput} is less than the number of extension properties available, the contents of {@code properties} will be undefined. If {@code propertyCountInput} is smaller than the number of extensions available, the runtime <b>must</b> return the failure code {@link #XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT} and the contents of {@code properties} are undefined.</p>
-     * 
      * <p>Because the list of available layers may change externally between calls to {@link #xrEnumerateInstanceExtensionProperties EnumerateInstanceExtensionProperties}, two calls <b>may</b> retrieve different results if a {@code layerName} is available in one call but not in another. The extensions supported by a layer may also change between two calls, e.g. if the layer implementation is replaced by a different version between those calls.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -1098,8 +1156,6 @@ public class XR10 {
      *     XrExtensionProperties*                      properties);</code></pre>
      * 
      * <h5>Description</h5>
-     * 
-     * <p>If {@code properties} is {@code NULL}, then the number of extensions properties available is returned in {@code propertyCountOutput}. Otherwise, {@code propertyCountInput} must point to a variable set by the user to the number of elements in the {@code properties} array. If {@code propertyCountInput} is less than the number of extension properties available, the contents of {@code properties} will be undefined. If {@code propertyCountInput} is smaller than the number of extensions available, the runtime <b>must</b> return the failure code {@link #XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT} and the contents of {@code properties} are undefined.</p>
      * 
      * <p>Because the list of available layers may change externally between calls to {@link #xrEnumerateInstanceExtensionProperties EnumerateInstanceExtensionProperties}, two calls <b>may</b> retrieve different results if a {@code layerName} is available in one call but not in another. The extensions supported by a layer may also change between two calls, e.g. if the layer implementation is replaced by a different version between those calls.</p>
      * 

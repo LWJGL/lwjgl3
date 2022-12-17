@@ -65,7 +65,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class HTCXViveTrackerInteraction {
 
     /** The extension specification version. */
-    public static final int XR_HTCX_vive_tracker_interaction_SPEC_VERSION = 1;
+    public static final int XR_HTCX_vive_tracker_interaction_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_HTCX_VIVE_TRACKER_INTERACTION_EXTENSION_NAME = "XR_HTCX_vive_tracker_interaction";

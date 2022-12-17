@@ -53,7 +53,7 @@ public final class EXTXOverlay {
         XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX                = 1000033000,
         XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX = 1000033003;
 
-    /** XrOverlayMainSessionFlagBitsEXTX */
+    /** XrOverlayMainSessionFlagBitsEXTX - XrOverlayMainSessionFlagBitsEXTX */
     public static final int XR_OVERLAY_MAIN_SESSION_ENABLED_COMPOSITION_LAYER_INFO_DEPTH_BIT_EXTX = 0x1;
 
     private EXTXOverlay() {}

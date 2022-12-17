@@ -61,7 +61,7 @@ val HTCX_vive_tracker_interaction = "HTCXViveTrackerInteraction".nativeClassXR("
     IntConstant(
         "The extension specification version.",
 
-        "HTCX_vive_tracker_interaction_SPEC_VERSION".."1"
+        "HTCX_vive_tracker_interaction_SPEC_VERSION".."2"
     )
 
     StringConstant(

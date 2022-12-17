@@ -248,7 +248,7 @@ val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = f
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code type} <b>must</b> be #TYPE_SYSTEM_PROPERTIES</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrRenderModelCapabilitiesRequestFB, ##XrSystemColorSpacePropertiesFB, ##XrSystemEyeGazeInteractionPropertiesEXT, ##XrSystemFacialTrackingPropertiesHTC, ##XrSystemFoveatedRenderingPropertiesVARJO, ##XrSystemHandTrackingMeshPropertiesMSFT, ##XrSystemHandTrackingPropertiesEXT, ##XrSystemKeyboardTrackingPropertiesFB, ##XrSystemMarkerTrackingPropertiesVARJO, ##XrSystemPassthroughProperties2FB, ##XrSystemPassthroughPropertiesFB, ##XrSystemRenderModelPropertiesFB, ##XrSystemSpaceWarpPropertiesFB, ##XrSystemSpatialEntityPropertiesFB</li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrRenderModelCapabilitiesRequestFB, ##XrSystemColorSpacePropertiesFB, ##XrSystemEyeGazeInteractionPropertiesEXT, ##XrSystemFacialTrackingPropertiesHTC, ##XrSystemFoveatedRenderingPropertiesVARJO, ##XrSystemHandTrackingMeshPropertiesMSFT, ##XrSystemHandTrackingPropertiesEXT, ##XrSystemHeadsetIdPropertiesMETA, ##XrSystemKeyboardTrackingPropertiesFB, ##XrSystemMarkerTrackingPropertiesVARJO, ##XrSystemPassthroughProperties2FB, ##XrSystemPassthroughPropertiesFB, ##XrSystemRenderModelPropertiesFB, ##XrSystemSpaceWarpPropertiesFB, ##XrSystemSpatialEntityPropertiesFB</li>
         </ul>
 
         <h5>See Also</h5>
@@ -257,7 +257,7 @@ val XrSystemProperties = struct(Module.OPENXR, "XrSystemProperties", mutable = f
 
     Expression("#TYPE_SYSTEM_PROPERTIES")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
     PointerSetter(
-        "XrRenderModelCapabilitiesRequestFB", "XrSystemColorSpacePropertiesFB", "XrSystemEyeGazeInteractionPropertiesEXT", "XrSystemFacialTrackingPropertiesHTC", "XrSystemFoveatedRenderingPropertiesVARJO", "XrSystemHandTrackingMeshPropertiesMSFT", "XrSystemHandTrackingPropertiesEXT", "XrSystemKeyboardTrackingPropertiesFB", "XrSystemMarkerTrackingPropertiesVARJO", "XrSystemPassthroughProperties2FB", "XrSystemPassthroughPropertiesFB", "XrSystemRenderModelPropertiesFB", "XrSystemSpaceWarpPropertiesFB", "XrSystemSpatialEntityPropertiesFB",
+        "XrRenderModelCapabilitiesRequestFB", "XrSystemColorSpacePropertiesFB", "XrSystemEyeGazeInteractionPropertiesEXT", "XrSystemFacialTrackingPropertiesHTC", "XrSystemFoveatedRenderingPropertiesVARJO", "XrSystemHandTrackingMeshPropertiesMSFT", "XrSystemHandTrackingPropertiesEXT", "XrSystemHeadsetIdPropertiesMETA", "XrSystemKeyboardTrackingPropertiesFB", "XrSystemMarkerTrackingPropertiesVARJO", "XrSystemPassthroughProperties2FB", "XrSystemPassthroughPropertiesFB", "XrSystemRenderModelPropertiesFB", "XrSystemSpaceWarpPropertiesFB", "XrSystemSpatialEntityPropertiesFB",
         prepend = true
     )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.").mutable()
     XrSystemId("systemId", "the {@code XrSystemId} identifying the system.")
@@ -307,7 +307,7 @@ val XrVector3f = struct(Module.OPENXR, "XrVector3f") {
         If used to represent physical distances (rather than e.g. velocity or angular velocity) and not otherwise specified, values <b>must</b> be in meters.
 
         <h5>See Also</h5>
-        ##XrCompositionLayerReprojectionPlaneOverrideMSFT, ##XrGeometryInstanceCreateInfoFB, ##XrGeometryInstanceTransformFB, ##XrHandCapsuleFB, ##XrHandJointVelocityEXT, ##XrHandMeshVertexMSFT, ##XrHandTrackingMeshFB, ##XrKeyboardTrackingDescriptionFB, ##XrPosef, ##XrQuaternionf, ##XrSceneMeshVertexBufferMSFT, ##XrSceneOrientedBoxBoundMSFT, ##XrSceneSphereBoundMSFT, ##XrSpaceVelocity, ##XrTriangleMeshCreateInfoFB, ##XrVector2f, ##XrVector4f, #TriangleMeshGetVertexBufferFB()
+        ##XrCompositionLayerReprojectionPlaneOverrideMSFT, ##XrGeometryInstanceCreateInfoFB, ##XrGeometryInstanceTransformFB, ##XrHandCapsuleFB, ##XrHandJointVelocityEXT, ##XrHandMeshVertexMSFT, ##XrHandTrackingMeshFB, ##XrKeyboardTrackingDescriptionFB, ##XrPassthroughMeshTransformInfoHTC, ##XrPosef, ##XrQuaternionf, ##XrSceneMeshVertexBufferMSFT, ##XrSceneOrientedBoxBoundMSFT, ##XrSceneSphereBoundMSFT, ##XrSpaceVelocity, ##XrTriangleMeshCreateInfoFB, ##XrVector2f, ##XrVector4f, #TriangleMeshGetVertexBufferFB()
         """
 
     float("x", "the x coordinate of the vector.")
@@ -362,7 +362,7 @@ val XrPosef = struct(Module.OPENXR, "XrPosef") {
         A runtime <b>must</b> return #ERROR_POSE_INVALID if the {@code orientation} norm deviates by more than 1% from unit length.
 
         <h5>See Also</h5>
-        ##XrActionSpaceCreateInfo, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerProjectionView, ##XrCompositionLayerQuad, ##XrCompositionLayerSpaceWarpInfoFB, ##XrControllerModelNodeStateMSFT, ##XrEventDataReferenceSpaceChangePending, ##XrGeometryInstanceCreateInfoFB, ##XrGeometryInstanceTransformFB, ##XrHandJointLocationEXT, ##XrHandMeshSpaceCreateInfoMSFT, ##XrHandTrackingAimStateFB, ##XrHandTrackingMeshFB, ##XrMarkerSpaceCreateInfoVARJO, ##XrQuaternionf, ##XrReferenceSpaceCreateInfo, ##XrSceneComponentLocationMSFT, ##XrSceneFrustumBoundMSFT, ##XrSceneOrientedBoxBoundMSFT, ##XrSpaceLocation, ##XrSpatialAnchorCreateInfoFB, ##XrSpatialAnchorCreateInfoMSFT, ##XrSpatialAnchorSpaceCreateInfoMSFT, ##XrSpatialGraphNodeBindingPropertiesMSFT, ##XrSpatialGraphNodeSpaceCreateInfoMSFT, ##XrSpatialGraphStaticNodeBindingCreateInfoMSFT, ##XrVector2f, ##XrVector3f, ##XrVector4f, ##XrView, #SetInputDeviceLocationEXT()
+        ##XrActionSpaceCreateInfo, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerProjectionView, ##XrCompositionLayerQuad, ##XrCompositionLayerSpaceWarpInfoFB, ##XrControllerModelNodeStateMSFT, ##XrEventDataReferenceSpaceChangePending, ##XrGeometryInstanceCreateInfoFB, ##XrGeometryInstanceTransformFB, ##XrHandJointLocationEXT, ##XrHandMeshSpaceCreateInfoMSFT, ##XrHandTrackingAimStateFB, ##XrHandTrackingMeshFB, ##XrMarkerSpaceCreateInfoVARJO, ##XrPassthroughMeshTransformInfoHTC, ##XrQuaternionf, ##XrReferenceSpaceCreateInfo, ##XrSceneComponentLocationMSFT, ##XrSceneFrustumBoundMSFT, ##XrSceneOrientedBoxBoundMSFT, ##XrSpaceLocation, ##XrSpatialAnchorCreateInfoFB, ##XrSpatialAnchorCreateInfoMSFT, ##XrSpatialAnchorSpaceCreateInfoMSFT, ##XrSpatialGraphNodeBindingPropertiesMSFT, ##XrSpatialGraphNodeSpaceCreateInfoMSFT, ##XrSpatialGraphStaticNodeBindingCreateInfoMSFT, ##XrVector2f, ##XrVector3f, ##XrVector4f, ##XrView, #SetInputDeviceLocationEXT()
         """
 
     XrQuaternionf("orientation", "an ##XrQuaternionf representing the orientation within a space.")
@@ -739,7 +739,7 @@ val XrCompositionLayerBaseHeader = struct(Module.OPENXR, "XrCompositionLayerBase
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
-            <li>{@code type} <b>must</b> be one of the following XrStructureType values: #TYPE_COMPOSITION_LAYER_CUBE_KHR, #TYPE_COMPOSITION_LAYER_CYLINDER_KHR, #TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR, #TYPE_COMPOSITION_LAYER_EQUIRECT_KHR, #TYPE_COMPOSITION_LAYER_PROJECTION, #TYPE_COMPOSITION_LAYER_QUAD</li>
+            <li>{@code type} <b>must</b> be one of the following XrStructureType values: #TYPE_COMPOSITION_LAYER_CUBE_KHR, #TYPE_COMPOSITION_LAYER_CYLINDER_KHR, #TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR, #TYPE_COMPOSITION_LAYER_EQUIRECT_KHR, #TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC, #TYPE_COMPOSITION_LAYER_PROJECTION, #TYPE_COMPOSITION_LAYER_QUAD</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrCompositionLayerAlphaBlendFB, ##XrCompositionLayerColorScaleBiasKHR, ##XrCompositionLayerImageLayoutFB, ##XrCompositionLayerPassthroughFB, ##XrCompositionLayerSecureContentFB, ##XrCompositionLayerSettingsFB</li>
             <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerFlagBits} values</li>
             <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
@@ -768,7 +768,7 @@ val XrFrameEndInfo = struct(Module.OPENXR, "XrFrameEndInfo") {
             <li>{@code type} <b>must</b> be #TYPE_FRAME_END_INFO</li>
             <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSecondaryViewConfigurationFrameEndInfoMSFT</li>
             <li>{@code environmentBlendMode} <b>must</b> be a valid {@code XrEnvironmentBlendMode} value</li>
-            <li>If {@code layerCount} is not 0, {@code layers} <b>must</b> be a pointer to an array of {@code layerCount} valid ##XrCompositionLayerBaseHeader-based structures. See also: ##XrCompositionLayerCubeKHR, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerProjection, ##XrCompositionLayerQuad</li>
+            <li>If {@code layerCount} is not 0, {@code layers} <b>must</b> be a pointer to an array of {@code layerCount} valid ##XrCompositionLayerBaseHeader-based structures. See also: ##XrCompositionLayerCubeKHR, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerPassthroughHTC, ##XrCompositionLayerProjection, ##XrCompositionLayerQuad</li>
         </ul>
 
         <h5>See Also</h5>
@@ -1163,7 +1163,7 @@ val XrVector2f = struct(Module.OPENXR, "XrVector2f") {
         If used to represent physical distances (rather than e.g. normalized direction) and not otherwise specified, values <b>must</b> be in meters.
 
         <h5>See Also</h5>
-        ##XrActionStateVector2f, ##XrBoundary2DFB, ##XrCompositionLayerEquirectKHR, ##XrHandTrackingMeshFB, ##XrPosef, ##XrQuaternionf, ##XrVector3f, ##XrVector4f, ##XrVisibilityMaskKHR, #SetInputDeviceStateVector2fEXT()
+        ##XrActionStateVector2f, ##XrBoundary2DFB, ##XrCompositionLayerEquirectKHR, ##XrFoveationConfigurationHTC, ##XrHandTrackingMeshFB, ##XrPosef, ##XrQuaternionf, ##XrVector3f, ##XrVector4f, ##XrVisibilityMaskKHR, #SetInputDeviceStateVector2fEXT()
         """
 
     float("x", "the x coordinate of the vector.")
@@ -1248,7 +1248,7 @@ val XrActionsSyncInfo = struct(Module.OPENXR, "XrActionsSyncInfo") {
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code type} <b>must</b> be #TYPE_ACTIONS_SYNC_INFO</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrActiveActionSetPrioritiesEXT</li>
             <li>If {@code countActiveActionSets} is not 0, {@code activeActionSets} <b>must</b> be a pointer to an array of {@code countActiveActionSets} valid ##XrActiveActionSet structures</li>
         </ul>
 
@@ -1257,7 +1257,10 @@ val XrActionsSyncInfo = struct(Module.OPENXR, "XrActionsSyncInfo") {
         """
 
     Expression("#TYPE_ACTIONS_SYNC_INFO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    PointerSetter(
+        "XrActiveActionSetPrioritiesEXT",
+        prepend = true
+    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
     AutoSize("activeActionSets", optional = true)..uint32_t("countActiveActionSets", "an integer specifying the number of valid elements in the {@code activeActionSets} array.")
     nullable..XrActiveActionSet.const.p("activeActionSets", "{@code NULL} or a pointer to an array of one or more ##XrActiveActionSet structures that should be synchronized.")
 }
@@ -1305,7 +1308,7 @@ val XrInputSourceLocalizedNameGetInfo = struct(Module.OPENXR, "XrInputSourceLoca
 
     Expression("#TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
     nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrPath("sourcePath", "")
+    XrPath("sourcePath", "an {@code XrPath} representing a bound source returned by #EnumerateBoundSourcesForAction().")
     XrInputSourceLocalizedNameFlags("whichComponents", "any set of flags from {@code XrInputSourceLocalizedNameFlagBits}.")
 }
 
@@ -1448,7 +1451,7 @@ val XrSwapchainSubImage = struct(Module.OPENXR, "XrSwapchainSubImage") {
         </ul>
 
         <h5>See Also</h5>
-        ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerDepthInfoKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerProjectionView, ##XrCompositionLayerQuad, ##XrCompositionLayerSpaceWarpInfoFB, ##XrFrameEndInfo, ##XrRect2Di
+        ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerDepthInfoKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerProjectionView, ##XrCompositionLayerQuad, ##XrCompositionLayerSpaceWarpInfoFB, ##XrFoveationApplyInfoHTC, ##XrFrameEndInfo, ##XrRect2Di
         """
 
     XrSwapchain("swapchain", "the {@code XrSwapchain} to be displayed.")
@@ -1482,7 +1485,7 @@ val XrCompositionLayerProjectionView = struct(Module.OPENXR, "XrCompositionLayer
     )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
     XrPosef("pose", "an ##XrPosef defining the location and orientation of this projection element in the {@code space} of the corresponding ##XrCompositionLayerProjectionView.")
     XrFovf("fov", "the ##XrFovf for this projection element.")
-    XrSwapchainSubImage("subImage", "the image layer ##XrSwapchainSubImage to use.")
+    XrSwapchainSubImage("subImage", "the image layer ##XrSwapchainSubImage to use. The swapchain <b>must</b> have been created with a {@code faceCount} of 1.")
 }
 
 val XrCompositionLayerProjection = struct(Module.OPENXR, "XrCompositionLayerProjection", parentStruct = XrCompositionLayerBaseHeader) {
@@ -1547,7 +1550,7 @@ val XrCompositionLayerQuad = struct(Module.OPENXR, "XrCompositionLayerQuad", par
     XrCompositionLayerFlags("layerFlags", "a bitmask of {@code XrCompositionLayerFlagBits} describing flags to apply to the layer.")
     XrSpace("space", "the {@code XrSpace} in which the {@code pose} of the quad layer is evaluated over time.")
     XrEyeVisibility("eyeVisibility", "the {@code XrEyeVisibility} for this layer.")
-    XrSwapchainSubImage("subImage", "the image layer ##XrSwapchainSubImage to use.")
+    XrSwapchainSubImage("subImage", "the image layer ##XrSwapchainSubImage to use. The swapchain <b>must</b> have been created with a {@code faceCount} of 1.")
     XrPosef("pose", "an ##XrPosef defining the position and orientation of the quad in the reference frame of the {@code space}.")
     XrExtent2Df("size", "the width and height of the quad in meters.")
 }

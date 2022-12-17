@@ -24,10 +24,6 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>The {@link EXTPerformanceSettings XR_EXT_performance_settings} extension <b>must</b> be enabled prior to using {@link XrEventDataPerfSettingsEXT}</li>
  * <li>{@code type} <b>must</b> be {@link EXTPerformanceSettings#XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT TYPE_EVENT_DATA_PERF_SETTINGS_EXT}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code domain} <b>must</b> be a valid {@code XrPerfSettingsDomainEXT} value</li>
- * <li>{@code subDomain} <b>must</b> be a valid {@code XrPerfSettingsSubDomainEXT} value</li>
- * <li>{@code fromLevel} <b>must</b> be a valid {@code XrPerfSettingsNotificationLevelEXT} value</li>
- * <li>{@code toLevel} <b>must</b> be a valid {@code XrPerfSettingsNotificationLevelEXT} value</li>
  * </ul>
  * 
  * <h3>Layout</h3>
@@ -118,30 +114,14 @@ public class XrEventDataPerfSettingsEXT extends Struct implements NativeResource
     public XrEventDataPerfSettingsEXT type$Default() { return type(EXTPerformanceSettings.XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT); }
     /** Sets the specified value to the {@link #next} field. */
     public XrEventDataPerfSettingsEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #domain} field. */
-    public XrEventDataPerfSettingsEXT domain(@NativeType("XrPerfSettingsDomainEXT") int value) { ndomain(address(), value); return this; }
-    /** Sets the specified value to the {@link #subDomain} field. */
-    public XrEventDataPerfSettingsEXT subDomain(@NativeType("XrPerfSettingsSubDomainEXT") int value) { nsubDomain(address(), value); return this; }
-    /** Sets the specified value to the {@link #fromLevel} field. */
-    public XrEventDataPerfSettingsEXT fromLevel(@NativeType("XrPerfSettingsNotificationLevelEXT") int value) { nfromLevel(address(), value); return this; }
-    /** Sets the specified value to the {@link #toLevel} field. */
-    public XrEventDataPerfSettingsEXT toLevel(@NativeType("XrPerfSettingsNotificationLevelEXT") int value) { ntoLevel(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public XrEventDataPerfSettingsEXT set(
         int type,
-        long next,
-        int domain,
-        int subDomain,
-        int fromLevel,
-        int toLevel
+        long next
     ) {
         type(type);
         next(next);
-        domain(domain);
-        subDomain(subDomain);
-        fromLevel(fromLevel);
-        toLevel(toLevel);
 
         return this;
     }
@@ -298,14 +278,6 @@ public class XrEventDataPerfSettingsEXT extends Struct implements NativeResource
     public static void ntype(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataPerfSettingsEXT.TYPE, value); }
     /** Unsafe version of {@link #next(long) next}. */
     public static void nnext(long struct, long value) { memPutAddress(struct + XrEventDataPerfSettingsEXT.NEXT, value); }
-    /** Unsafe version of {@link #domain(int) domain}. */
-    public static void ndomain(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataPerfSettingsEXT.DOMAIN, value); }
-    /** Unsafe version of {@link #subDomain(int) subDomain}. */
-    public static void nsubDomain(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataPerfSettingsEXT.SUBDOMAIN, value); }
-    /** Unsafe version of {@link #fromLevel(int) fromLevel}. */
-    public static void nfromLevel(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataPerfSettingsEXT.FROMLEVEL, value); }
-    /** Unsafe version of {@link #toLevel(int) toLevel}. */
-    public static void ntoLevel(long struct, int value) { UNSAFE.putInt(null, struct + XrEventDataPerfSettingsEXT.TOLEVEL, value); }
 
     // -----------------------------------
 
@@ -370,14 +342,6 @@ public class XrEventDataPerfSettingsEXT extends Struct implements NativeResource
         public XrEventDataPerfSettingsEXT.Buffer type$Default() { return type(EXTPerformanceSettings.XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT); }
         /** Sets the specified value to the {@link XrEventDataPerfSettingsEXT#next} field. */
         public XrEventDataPerfSettingsEXT.Buffer next(@NativeType("void const *") long value) { XrEventDataPerfSettingsEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataPerfSettingsEXT#domain} field. */
-        public XrEventDataPerfSettingsEXT.Buffer domain(@NativeType("XrPerfSettingsDomainEXT") int value) { XrEventDataPerfSettingsEXT.ndomain(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataPerfSettingsEXT#subDomain} field. */
-        public XrEventDataPerfSettingsEXT.Buffer subDomain(@NativeType("XrPerfSettingsSubDomainEXT") int value) { XrEventDataPerfSettingsEXT.nsubDomain(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataPerfSettingsEXT#fromLevel} field. */
-        public XrEventDataPerfSettingsEXT.Buffer fromLevel(@NativeType("XrPerfSettingsNotificationLevelEXT") int value) { XrEventDataPerfSettingsEXT.nfromLevel(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataPerfSettingsEXT#toLevel} field. */
-        public XrEventDataPerfSettingsEXT.Buffer toLevel(@NativeType("XrPerfSettingsNotificationLevelEXT") int value) { XrEventDataPerfSettingsEXT.ntoLevel(address(), value); return this; }
 
     }
 

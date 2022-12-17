@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_ACTIONS_SYNC_INFO TYPE_ACTIONS_SYNC_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrActiveActionSetPrioritiesEXT}</li>
  * <li>If {@code countActiveActionSets} is not 0, {@code activeActionSets} <b>must</b> be a pointer to an array of {@code countActiveActionSets} valid {@link XrActiveActionSet} structures</li>
  * </ul>
  * 
@@ -105,6 +105,8 @@ public class XrActionsSyncInfo extends Struct implements NativeResource {
     public XrActionsSyncInfo type$Default() { return type(XR10.XR_TYPE_ACTIONS_SYNC_INFO); }
     /** Sets the specified value to the {@link #next} field. */
     public XrActionsSyncInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrActiveActionSetPrioritiesEXT} value to the {@code next} chain. */
+    public XrActionsSyncInfo next(XrActiveActionSetPrioritiesEXT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #countActiveActionSets} field. */
     public XrActionsSyncInfo countActiveActionSets(@NativeType("uint32_t") int value) { ncountActiveActionSets(address(), value); return this; }
     /** Sets the address of the specified {@link XrActiveActionSet.Buffer} to the {@link #activeActionSets} field. */
@@ -326,6 +328,8 @@ public class XrActionsSyncInfo extends Struct implements NativeResource {
         public XrActionsSyncInfo.Buffer type$Default() { return type(XR10.XR_TYPE_ACTIONS_SYNC_INFO); }
         /** Sets the specified value to the {@link XrActionsSyncInfo#next} field. */
         public XrActionsSyncInfo.Buffer next(@NativeType("void const *") long value) { XrActionsSyncInfo.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrActiveActionSetPrioritiesEXT} value to the {@code next} chain. */
+        public XrActionsSyncInfo.Buffer next(XrActiveActionSetPrioritiesEXT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrActionsSyncInfo#countActiveActionSets} field. */
         public XrActionsSyncInfo.Buffer countActiveActionSets(@NativeType("uint32_t") int value) { XrActionsSyncInfo.ncountActiveActionSets(address(), value); return this; }
         /** Sets the address of the specified {@link XrActiveActionSet.Buffer} to the {@link XrActionsSyncInfo#activeActionSets} field. */

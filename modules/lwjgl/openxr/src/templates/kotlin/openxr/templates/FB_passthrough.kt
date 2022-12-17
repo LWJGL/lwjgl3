@@ -86,7 +86,16 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
     )
 
     EnumConstant(
-        "XrPassthroughCapabilityFlagBitsFB",
+        """
+        XrPassthroughCapabilityFlagBitsFB - XrPassthroughCapabilityFlagBitsFB
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#PASSTHROUGH_CAPABILITY_BIT_FB — The system supports passthrough.</li>
+            <li>#PASSTHROUGH_CAPABILITY_COLOR_BIT_FB — The system can show passthrough with realistic colors. #PASSTHROUGH_CAPABILITY_BIT_FB <b>must</b> be set if #PASSTHROUGH_CAPABILITY_COLOR_BIT_FB is set.</li>
+            <li>#PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB — The system supports passthrough layers composited using depth testing. #PASSTHROUGH_CAPABILITY_BIT_FB <b>must</b> be set if #PASSTHROUGH_CAPABILITY_LAYER_DEPTH_BIT_FB is set.</li>
+        </ul>
+        """,
 
         "PASSTHROUGH_CAPABILITY_BIT_FB".enum(0x00000001),
         "PASSTHROUGH_CAPABILITY_COLOR_BIT_FB".enum(0x00000002),
@@ -94,7 +103,15 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
     )
 
     EnumConstant(
-        "XrPassthroughFlagBitsFB",
+        """
+        XrPassthroughFlagBitsFB - XrPassthroughFlagBitsFB
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB — The object (passthrough, layer) is running at creation.</li>
+            <li>#PASSTHROUGH_LAYER_DEPTH_BIT_FB — The passthrough system sends depth information to the compositor. Only applicable to layer objects.</li>
+        </ul>
+        """,
 
         "PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB".enum(0x00000001),
         "PASSTHROUGH_LAYER_DEPTH_BIT_FB".enum(0x00000002)
@@ -121,7 +138,17 @@ val FB_passthrough = "FBPassthrough".nativeClassXR("FB_passthrough", type = "ins
     )
 
     EnumConstant(
-        "XrPassthroughStateChangedFlagBitsFB",
+        """
+        XrPassthroughStateChangedFlagBitsFB - XrPassthroughStateChangedFlagBitsFB
+
+        <h5>Flag Descriptions</h5>
+        <ul>
+            <li>#PASSTHROUGH_STATE_CHANGED_REINIT_REQUIRED_BIT_FB — Passthrough system requires reinitialization.</li>
+            <li>#PASSTHROUGH_STATE_CHANGED_NON_RECOVERABLE_ERROR_BIT_FB — Non-recoverable error has occurred. A device reboot or a firmware update may be required.</li>
+            <li>#PASSTHROUGH_STATE_CHANGED_RECOVERABLE_ERROR_BIT_FB — A recoverable error has occurred. The runtime will attempt to recover, but some functionality may be temporarily unavailable.</li>
+            <li>#PASSTHROUGH_STATE_CHANGED_RESTORED_ERROR_BIT_FB — The runtime has recovered from a previous error and is functioning normally.</li>
+        </ul>
+        """,
 
         "PASSTHROUGH_STATE_CHANGED_REINIT_REQUIRED_BIT_FB".enum(0x00000001),
         "PASSTHROUGH_STATE_CHANGED_NON_RECOVERABLE_ERROR_BIT_FB".enum(0x00000002),
