@@ -222,7 +222,6 @@
         <build module="nfd" simple="true" if:true="${binding.nfd}">
             <source>
                 <arg value="-I${src.main.rel}/include"/>
-                <fileset dir="." includes="${src.main}/nfd_common.c"/>
                 <fileset dir="." includes="${src.main}/nfd_cocoa.m"/>
             </source>
             <link>

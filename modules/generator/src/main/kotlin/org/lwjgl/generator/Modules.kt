@@ -400,8 +400,8 @@ enum class Module(
         "nfd",
         "org.lwjgl.util.nfd",
         """
-        Contains bindings to ${url("https://github.com/mlabbe/nativefiledialog", "Native File Dialog")}, a tiny, neat C library that portably invokes native
-        file open and save dialogs. Write dialog code once and have it popup native dialogs on all supported platforms.
+        Contains bindings to ${url("https://github.com/btzy/nativefiledialog-extended", "Native File Dialog Extended")}, a small C library that portably
+        invokes native file open, folder select and file save dialogs. Write dialog code once and have it pop up native dialogs on all supported platforms.
         """,
         library = JNILibrary.create("LibNFD", setupAllocator = true)
     ),

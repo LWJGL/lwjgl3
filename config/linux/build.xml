@@ -270,7 +270,6 @@
                     <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
                     <arg value="-I${src.main.rel}"/>
                     <arg value="-I${src.main.rel}/include"/>
-                    <fileset dir="." includes="${src.main}/nfd_common.c"/>
                     <fileset dir="." includes="${src.main}/nfd_gtk.c"/>
                 </compile>
             </beforeCompile>

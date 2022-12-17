@@ -125,7 +125,7 @@ improve the chances of a quick and useful response.
 |-------|-----------|
 |[GLFW](http://www.glfw.org/)|Create multiple windows, handle user input (keyboard, mouse, gaming peripherals) and manage contexts. Also features multi-monitor support, clipboard access, file drag-n-drop, and [much more](http://www.glfw.org/docs/latest/news.html).|
 |[JAWT](http://docs.oracle.com/javase/8/docs/technotes/guides/awt/AWT_Native_Interface.html)|The AWT native interface.|
-|[nfd](https://github.com/mlabbe/nativefiledialog)|A tiny, neat C library that portably invokes native file open and save dialogs.|
+|[Native File Dialog Extended](https://github.com/btzy/nativefiledialog-extended)|A small C library that portably invokes native file open, folder select and file save dialogs.|
 |[tinyfd](https://sourceforge.net/projects/tinyfiledialogs/)|A native dialog library.|
 
 #### Audio

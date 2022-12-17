@@ -14,14 +14,14 @@
 
 EXTERN_C_ENTER
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_NFDPathSet_offsets(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_util_nfd_PFDPathSetEnum_offsets(JNIEnv *__env, jclass clazz, jlong bufferAddress) {
     jint *buffer = (jint *)(uintptr_t)bufferAddress;
 
     UNUSED_PARAMS(__env, clazz)
 
-    buffer[0] = alignof(nfdpathset_t);
+    buffer[0] = alignof(nfdpathsetenum_t);
 
-    return sizeof(nfdpathset_t);
+    return sizeof(nfdpathsetenum_t);
 }
 
 EXTERN_C_EXIT

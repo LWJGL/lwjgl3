@@ -10,6 +10,7 @@ import org.lwjgl.assimp.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
+import org.lwjgl.util.nfd.*;
 import org.lwjgl.util.par.*;
 
 import javax.annotation.*;
@@ -18,6 +19,7 @@ import java.nio.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.regex.*;
 
 import static java.lang.Math.*;
 import static org.lwjgl.assimp.Assimp.*;
@@ -34,6 +36,37 @@ import static org.lwjgl.util.par.ParShapes.*;
 import static org.lwjgl.util.tootle.Tootle.*;
 
 public final class HelloTootle {
+
+    private static final Pattern REGEX_SPACE = Pattern.compile("\\s+");
+
+    private static final NFDFilterItem.Buffer ASSIMP_FILTER_LIST;
+    static {
+        int formatCount = (int)aiGetImportFormatCount();
+
+        Map<String, String> importers = new HashMap<>(formatCount);
+        for (int i = 0; i < formatCount; i++) {
+            AIImporterDesc desc = Objects.requireNonNull(aiGetImportFormatDescription(i));
+
+            String name       = desc.mNameString();
+            String extensions = desc.mFileExtensionsString();
+
+            int importerIndex = name.indexOf(" Importer");
+            importers.put(
+                importerIndex == -1 ? name : name.substring(0, name.indexOf(" Importer")),
+                String.join(",", REGEX_SPACE.split(extensions))
+            );
+        }
+
+        String[] names = importers.keySet().toArray(new String[0]);
+        Arrays.sort(names);
+
+        ASSIMP_FILTER_LIST = NFDFilterItem.malloc(formatCount);
+        for (int i = 0; i < names.length; i++) {
+            ASSIMP_FILTER_LIST.get(i)
+                .name(memUTF8(names[i]))
+                .spec(memUTF8(importers.get(names[i])));
+        }
+    }
 
     private final long window;
 
@@ -382,6 +415,8 @@ public final class HelloTootle {
             throw new OutOfMemoryError();
         }
         aiSetImportPropertyInteger(propertyStore, AI_CONFIG_PP_PTV_NORMALIZE, 1);
+
+        NFD_Init();
     }
 
     public static void main(String[] args) {
@@ -401,6 +436,12 @@ public final class HelloTootle {
             new HelloTootle().run();
         } finally {
             TootleCleanup();
+
+            for (NFDFilterItem item : ASSIMP_FILTER_LIST) {
+                memFree(item.name());
+                memFree(item.spec());
+            }
+            ASSIMP_FILTER_LIST.free();
         }
     }
 
@@ -434,6 +475,8 @@ public final class HelloTootle {
         if (debugCB != null) {
             debugCB.free();
         }
+
+        NFD_Quit();
     }
 
     private void run() {
@@ -940,11 +983,11 @@ public final class HelloTootle {
         try (MemoryStack stack = stackPush()) {
             PointerBuffer pp = stack.mallocPointer(1);
 
-            int result = NFD_OpenDialog(null, Paths.get("modules/samples/src/test/resources/demo").toAbsolutePath().toString(), pp);
+            int result = NFD_OpenDialog(pp, ASSIMP_FILTER_LIST, Paths.get("modules/samples/src/test/resources/demo").toAbsolutePath().toString());
             switch (result) {
                 case NFD_OKAY:
                     String filePath = pp.getStringUTF8(0);
-                    nNFD_Free(pp.get(0));
+                    nNFD_FreePath(pp.get(0));
 
                     AIScene scene = importScene(stack, filePath);
                     if (scene != null) {

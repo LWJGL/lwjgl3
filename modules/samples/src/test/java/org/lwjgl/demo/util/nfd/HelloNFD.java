@@ -16,6 +16,7 @@ import java.util.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11C.*;
+import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.util.nfd.NativeFileDialog.*;
 
@@ -90,12 +91,17 @@ public final class HelloNFD {
         System.out.println("Press " + modDescr + "+Shift+O to launch the multi file open dialog.");
         System.out.println("Press " + modDescr + "+Alt+O to launch the folder select dialog.");
         System.out.println("Press " + modDescr + "+S to launch the file save dialog.");
+
+        NFD_Init();
+
         while (!glfwWindowShouldClose(window)) {
             glfwPollEvents();
 
             glClear(GL_COLOR_BUFFER_BIT);
             glfwSwapBuffers(window);
         }
+
+        NFD_Quit();
 
         GL.setCapabilities(null);
 
@@ -107,28 +113,50 @@ public final class HelloNFD {
     }
 
     private static void openSingle() {
-        PointerBuffer outPath = memAllocPointer(1);
+        try (MemoryStack stack = stackPush()) {
+            NFDFilterItem.Buffer filters = NFDFilterItem.malloc(2);
+            filters.get(0)
+                .name(stack.UTF8("Images"))
+                .spec(stack.UTF8("png,jpg"));
+            filters.get(1)
+                .name(stack.UTF8("Documents"))
+                .spec(stack.UTF8("doc,pdf,txt"));
 
-        try {
+            PointerBuffer pp = stack.mallocPointer(1);
             checkResult(
-                NFD_OpenDialog("png,jpg;pdf", null, outPath),
-                outPath
+                NFD_OpenDialog(pp, filters, (ByteBuffer)null),
+                pp
             );
-        } finally {
-            memFree(outPath);
         }
     }
 
     private static void openMulti() {
-        try (NFDPathSet pathSet = NFDPathSet.calloc()) {
-            int result = NFD_OpenDialogMultiple("png,jpg;pdf", null, pathSet);
+        try (MemoryStack stack = stackPush()) {
+            NFDFilterItem.Buffer filters = NFDFilterItem.malloc(2);
+            filters.get(0)
+                .name(stack.UTF8("Images"))
+                .spec(stack.UTF8("png,jpg"));
+            filters.get(1)
+                .name(stack.UTF8("Documents"))
+                .spec(stack.UTF8("doc,pdf,txt"));
+
+            PointerBuffer pp = stack.mallocPointer(1);
+
+            int result = NFD_OpenDialogMultiple(pp, filters, (ByteBuffer)null);
             switch (result) {
                 case NFD_OKAY:
-                    long count = NFD_PathSet_GetCount(pathSet);
-                    for (long i = 0; i < count; i++) {
-                        String path = NFD_PathSet_GetPath(pathSet, i);
-                        System.out.format("Path %d: %s\n", i, path);
+                    long pathSet = pp.get(0);
+
+                    NFDPathSetEnum psEnum = NFDPathSetEnum.calloc(stack);
+                    NFD_PathSet_GetEnum(pathSet, psEnum);
+
+                    int i = 0;
+                    while (NFD_PathSet_EnumNext(psEnum, pp) == NFD_OKAY && pp.get(0) != NULL) {
+                        System.out.format("Path %d: %s\n", i++, pp.getStringUTF8(0));
+                        nNFD_PathSet_FreePath(pp.get(0));
                     }
+
+                    NFD_PathSet_FreeEnum(psEnum);
                     NFD_PathSet_Free(pathSet);
                     break;
                 case NFD_CANCEL:
@@ -145,7 +173,7 @@ public final class HelloNFD {
 
         try {
             checkResult(
-                NFD_PickFolder((ByteBuffer)null, outPath),
+                NFD_PickFolder(outPath, (ByteBuffer)null),
                 outPath
             );
         } finally {
@@ -154,15 +182,20 @@ public final class HelloNFD {
     }
 
     private static void save() {
-        PointerBuffer savePath = memAllocPointer(1);
+        try (MemoryStack stack = stackPush()) {
+            NFDFilterItem.Buffer filters = NFDFilterItem.malloc(2);
+            filters.get(0)
+                .name(stack.UTF8("Documents"))
+                .spec(stack.UTF8("doc,pdf,txt"));
+            filters.get(1)
+                .name(stack.UTF8("Images"))
+                .spec(stack.UTF8("png,jpg"));
 
-        try {
+            PointerBuffer pp = stack.mallocPointer(1);
             checkResult(
-                NFD_SaveDialog("png,jpg;pdf", null, savePath),
-                savePath
+                NFD_SaveDialog(pp, filters, null, "test.txt"),
+                pp
             );
-        } finally {
-            memFree(savePath);
         }
     }
 
@@ -171,7 +204,7 @@ public final class HelloNFD {
             case NFD_OKAY:
                 System.out.println("Success!");
                 System.out.println(path.getStringUTF8(0));
-                nNFD_Free(path.get(0));
+                nNFD_FreePath(path.get(0));
                 break;
             case NFD_CANCEL:
                 System.out.println("User pressed cancel.");

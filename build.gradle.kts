@@ -172,7 +172,7 @@ enum class Artifacts(
     ),
     NFD(
         "lwjgl-nfd", "LWJGL - Native File Dialog bindings",
-        "A tiny, neat C library that portably invokes native file open and save dialogs.",
+        "A small C library that portably invokes native file open, folder select and file save dialogs.",
         *Platforms.ALL
     ),
     NUKLEAR(
