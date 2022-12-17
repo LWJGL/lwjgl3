@@ -226,6 +226,7 @@
             </source>
             <link>
                 <arg line="-framework AppKit"/>
+                <arg line="-framework UniformTypeIdentifiers" if:set="build.arch.arm"/>
             </link>
         </build>
 
