@@ -22,10 +22,7 @@ import static org.lwjgl.util.yoga.Yoga.*;
  * 
  * <pre><code>
  * struct CompactValue {
- *     union {
- *         float value;
- *         uint32_t repr;
- *     };
+ *     uint32_t repr_;
  * }</code></pre>
  */
 public class CompactValue extends Struct {
@@ -38,22 +35,17 @@ public class CompactValue extends Struct {
 
     /** The struct member offsets. */
     public static final int
-        VALUE,
-        REPR;
+        REPR_;
 
     static {
         Layout layout = __struct(
-            __union(
-                __member(4),
-                __member(4)
-            )
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
         ALIGNOF = layout.getAlignment();
 
-        VALUE = layout.offsetof(1);
-        REPR = layout.offsetof(2);
+        REPR_ = layout.offsetof(0);
     }
 
     /**
@@ -69,11 +61,9 @@ public class CompactValue extends Struct {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** @return the value of the {@code value} field. */
-    public float value() { return nvalue(address()); }
-    /** @return the value of the {@code repr} field. */
+    /** @return the value of the {@code repr_} field. */
     @NativeType("uint32_t")
-    public int repr() { return nrepr(address()); }
+    public int repr_() { return nrepr_(address()); }
 
     // -----------------------------------
 
@@ -106,10 +96,8 @@ public class CompactValue extends Struct {
 
     // -----------------------------------
 
-    /** Unsafe version of {@link #value}. */
-    public static float nvalue(long struct) { return UNSAFE.getFloat(null, struct + CompactValue.VALUE); }
-    /** Unsafe version of {@link #repr}. */
-    public static int nrepr(long struct) { return UNSAFE.getInt(null, struct + CompactValue.REPR); }
+    /** Unsafe version of {@link #repr_}. */
+    public static int nrepr_(long struct) { return UNSAFE.getInt(null, struct + CompactValue.REPR_); }
 
     private static final int BIAS        = 0x20000000;
     private static final int PERCENT_BIT = 0x40000000;
@@ -117,9 +105,13 @@ public class CompactValue extends Struct {
     private static final int AUTO_BITS         = 0x7faaaaaa;
     private static final int ZERO_BITS_POINT   = 0x7f8f0f0f;
     private static final int ZERO_BITS_PERCENT = 0x7f80f0f0;
+    
+    public int repr() {
+        return repr_();
+    }
 
     public float decode() {
-        int repr = repr();
+        int repr = repr_();
 
         switch (repr) {
             case AUTO_BITS:
@@ -129,7 +121,7 @@ public class CompactValue extends Struct {
                 return 0.0f;
         }
 
-        if (Float.isNaN(value())) {
+        if (Float.isNaN(Float.intBitsToFloat(repr))) {
             return Float.NaN;
         }
 
@@ -157,7 +149,7 @@ public class CompactValue extends Struct {
                     .unit(YGUnitPercent);
         }
 
-        if (Float.isNaN(value())) {
+        if (Float.isNaN(Float.intBitsToFloat(repr))) {
             return __result
                 .value(YGUndefined)
                 .unit(YGUnitUndefined);
@@ -210,11 +202,9 @@ public class CompactValue extends Struct {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@code value} field. */
-        public float value() { return CompactValue.nvalue(address()); }
-        /** @return the value of the {@code repr} field. */
+        /** @return the value of the {@code repr_} field. */
         @NativeType("uint32_t")
-        public int repr() { return CompactValue.nrepr(address()); }
+        public int repr_() { return CompactValue.nrepr_(address()); }
 
     }
 

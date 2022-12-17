@@ -122,6 +122,14 @@ div {
         "ExperimentalFeatureWebFlexBasis".enum
     )
 
+    val Gutters = EnumConstant(
+        "YGGutter",
+
+        "GutterColumn".enum,
+        "GutterRow".enum,
+        "GutterAll".enum
+    ).javaDocLinks
+
     EnumConstant(
         "YGFlexDirection",
 
@@ -824,6 +832,22 @@ div {
     )
 
     void(
+        "NodeStyleSetGap",
+        "",
+
+        node,
+        YGGutter("gutter", "", Gutters),
+        float("gapLength", "")
+    )
+    float(
+        "NodeStyleGetGap",
+        "",
+
+        constNode,
+        YGGutter("gutter", "", Gutters)
+    )
+
+    void(
         "NodeStyleSetWidth",
         "",
 
@@ -1123,6 +1147,13 @@ div {
         bool("shouldDiffLayout", "")
     )
 
+    bool(
+        "ConfigGetUseLegacyStretchBehaviour",
+        "",
+
+        YGConfigRef("config", "")
+    )
+
     void(
         "ConfigSetUseLegacyStretchBehaviour",
         """
@@ -1235,6 +1266,7 @@ div {
     YG_TYPE_TO_STRING(YGEdge)
     YG_TYPE_TO_STRING(YGExperimentalFeature)
     YG_TYPE_TO_STRING(YGFlexDirection)
+    YG_TYPE_TO_STRING(YGGutter)
     YG_TYPE_TO_STRING(YGJustify)
     YG_TYPE_TO_STRING(YGLogLevel)
     YG_TYPE_TO_STRING(YGMeasureMode)

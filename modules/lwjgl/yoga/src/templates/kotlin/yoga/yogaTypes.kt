@@ -18,6 +18,7 @@ val YGDisplay = "YGDisplay".enumType
 val YGEdge = "YGEdge".enumType
 val YGExperimentalFeature = "YGExperimentalFeature".enumType
 val YGFlexDirection = "YGFlexDirection".enumType
+val YGGutter = "YGGutter".enumType
 val YGJustify = "YGJustify".enumType
 val YGLogLevel = "YGLogLevel".enumType
 val YGMeasureMode = "YGMeasureMode".enumType
@@ -132,10 +133,7 @@ val CompactValue = struct(Module.YOGA, "CompactValue", mutable = false) {
     javaImport("static org.lwjgl.util.yoga.Yoga.*")
     documentation = "Unstable/private API."
 
-    union {
-        float("value", "")
-        uint32_t("repr", "")
-    }
+    uint32_t("repr_", "")
 
     customMethod("""
     private static final int BIAS        = 0x20000000;
@@ -144,9 +142,13 @@ val CompactValue = struct(Module.YOGA, "CompactValue", mutable = false) {
     private static final int AUTO_BITS         = 0x7faaaaaa;
     private static final int ZERO_BITS_POINT   = 0x7f8f0f0f;
     private static final int ZERO_BITS_PERCENT = 0x7f80f0f0;
+    
+    public int repr() {
+        return repr_();
+    }
 
     public float decode() {
-        int repr = repr();
+        int repr = repr_();
 
         switch (repr) {
             case AUTO_BITS:
@@ -156,7 +158,7 @@ val CompactValue = struct(Module.YOGA, "CompactValue", mutable = false) {
                 return 0.0f;
         }
 
-        if (Float.isNaN(value())) {
+        if (Float.isNaN(Float.intBitsToFloat(repr))) {
             return Float.NaN;
         }
 
@@ -184,7 +186,7 @@ val CompactValue = struct(Module.YOGA, "CompactValue", mutable = false) {
                     .unit(YGUnitPercent);
         }
 
-        if (Float.isNaN(value())) {
+        if (Float.isNaN(Float.intBitsToFloat(repr))) {
             return __result
                 .value(YGUndefined)
                 .unit(YGUnitUndefined);
@@ -251,9 +253,12 @@ val YGLayout = struct(Module.YOGA, "YGLayout", mutable = false) {
     YGCachedMeasurement("cachedLayout", "")
 }
 
-const val YGEdgeCount = 9
 val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     documentation = "Unstable/private API."
+
+    val Dimensions = 2
+    val Edges = 9
+    val Gutters = 3
 
     uint32_t("flags", "").virtual()
     YGDirection("direction", "", bits = 2).getter("nflags(struct) & 0b11")
@@ -270,13 +275,14 @@ val YGStyle = struct(Module.YOGA, "YGStyle", mutable = false) {
     YGFloatOptional("flexGrow", "")
     YGFloatOptional("flexShrink", "")
     CompactValue("flexBasis", "")
-    CompactValue("margin", "")[YGEdgeCount]
-    NativeName("position")..CompactValue("positions", "")[YGEdgeCount]
-    CompactValue("padding", "")[YGEdgeCount]
-    CompactValue("border", "")[YGEdgeCount]
-    CompactValue("dimensions", "")[2]
-    CompactValue("minDimensions", "")[2]
-    CompactValue("maxDimensions", "")[2]
+    CompactValue("margin", "")[Edges]
+    NativeName("position")..CompactValue("positions", "")[Edges]
+    CompactValue("padding", "")[Edges]
+    CompactValue("border", "")[Edges]
+    CompactValue("gap_", "")[Gutters]
+    CompactValue("dimensions", "")[Dimensions]
+    CompactValue("minDimensions", "")[Dimensions]
+    CompactValue("maxDimensions", "")[Dimensions]
 
     YGFloatOptional("aspectRatio", "")
 }

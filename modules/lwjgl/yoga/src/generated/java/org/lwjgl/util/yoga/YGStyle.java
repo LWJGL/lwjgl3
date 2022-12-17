@@ -39,6 +39,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link CompactValue CompactValue} positions[9];
  *     {@link CompactValue CompactValue} padding[9];
  *     {@link CompactValue CompactValue} border[9];
+ *     {@link CompactValue CompactValue} gap_[3];
  *     {@link CompactValue CompactValue} dimensions[2];
  *     {@link CompactValue CompactValue} minDimensions[2];
  *     {@link CompactValue CompactValue} maxDimensions[2];
@@ -64,6 +65,7 @@ public class YGStyle extends Struct {
         POSITIONS,
         PADDING,
         BORDER,
+        GAP_,
         DIMENSIONS,
         MINDIMENSIONS,
         MAXDIMENSIONS,
@@ -80,6 +82,7 @@ public class YGStyle extends Struct {
             __array(CompactValue.SIZEOF, CompactValue.ALIGNOF, 9),
             __array(CompactValue.SIZEOF, CompactValue.ALIGNOF, 9),
             __array(CompactValue.SIZEOF, CompactValue.ALIGNOF, 9),
+            __array(CompactValue.SIZEOF, CompactValue.ALIGNOF, 3),
             __array(CompactValue.SIZEOF, CompactValue.ALIGNOF, 2),
             __array(CompactValue.SIZEOF, CompactValue.ALIGNOF, 2),
             __array(CompactValue.SIZEOF, CompactValue.ALIGNOF, 2),
@@ -98,10 +101,11 @@ public class YGStyle extends Struct {
         POSITIONS = layout.offsetof(6);
         PADDING = layout.offsetof(7);
         BORDER = layout.offsetof(8);
-        DIMENSIONS = layout.offsetof(9);
-        MINDIMENSIONS = layout.offsetof(10);
-        MAXDIMENSIONS = layout.offsetof(11);
-        ASPECTRATIO = layout.offsetof(12);
+        GAP_ = layout.offsetof(9);
+        DIMENSIONS = layout.offsetof(10);
+        MINDIMENSIONS = layout.offsetof(11);
+        MAXDIMENSIONS = layout.offsetof(12);
+        ASPECTRATIO = layout.offsetof(13);
     }
 
     /**
@@ -175,6 +179,11 @@ public class YGStyle extends Struct {
     public CompactValue.Buffer border() { return nborder(address()); }
     /** @return a {@link CompactValue} view of the struct at the specified index of the {@code border} field. */
     public CompactValue border(int index) { return nborder(address(), index); }
+    /** @return a {@link CompactValue}.Buffer view of the {@code gap_} field. */
+    @NativeType("CompactValue[3]")
+    public CompactValue.Buffer gap_() { return ngap_(address()); }
+    /** @return a {@link CompactValue} view of the struct at the specified index of the {@code gap_} field. */
+    public CompactValue gap_(int index) { return ngap_(address(), index); }
     /** @return a {@link CompactValue}.Buffer view of the {@code dimensions} field. */
     @NativeType("CompactValue[2]")
     public CompactValue.Buffer dimensions() { return ndimensions(address()); }
@@ -276,6 +285,12 @@ public class YGStyle extends Struct {
     /** Unsafe version of {@link #border(int) border}. */
     public static CompactValue nborder(long struct, int index) {
         return CompactValue.create(struct + YGStyle.BORDER + check(index, 9) * CompactValue.SIZEOF);
+    }
+    /** Unsafe version of {@link #gap_}. */
+    public static CompactValue.Buffer ngap_(long struct) { return CompactValue.create(struct + YGStyle.GAP_, 3); }
+    /** Unsafe version of {@link #gap_(int) gap_}. */
+    public static CompactValue ngap_(long struct, int index) {
+        return CompactValue.create(struct + YGStyle.GAP_ + check(index, 3) * CompactValue.SIZEOF);
     }
     /** Unsafe version of {@link #dimensions}. */
     public static CompactValue.Buffer ndimensions(long struct) { return CompactValue.create(struct + YGStyle.DIMENSIONS, 2); }
@@ -394,6 +409,11 @@ public class YGStyle extends Struct {
         public CompactValue.Buffer border() { return YGStyle.nborder(address()); }
         /** @return a {@link CompactValue} view of the struct at the specified index of the {@code border} field. */
         public CompactValue border(int index) { return YGStyle.nborder(address(), index); }
+        /** @return a {@link CompactValue}.Buffer view of the {@code gap_} field. */
+        @NativeType("CompactValue[3]")
+        public CompactValue.Buffer gap_() { return YGStyle.ngap_(address()); }
+        /** @return a {@link CompactValue} view of the struct at the specified index of the {@code gap_} field. */
+        public CompactValue gap_(int index) { return YGStyle.ngap_(address(), index); }
         /** @return a {@link CompactValue}.Buffer view of the {@code dimensions} field. */
         @NativeType("CompactValue[2]")
         public CompactValue.Buffer dimensions() { return YGStyle.ndimensions(address()); }

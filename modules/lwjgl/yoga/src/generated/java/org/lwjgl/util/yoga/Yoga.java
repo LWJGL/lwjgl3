@@ -170,6 +170,22 @@ public class Yoga {
     public static final int YGExperimentalFeatureWebFlexBasis = 0;
 
     /**
+     * YGGutter
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #YGGutterColumn GutterColumn}</li>
+     * <li>{@link #YGGutterRow GutterRow}</li>
+     * <li>{@link #YGGutterAll GutterAll}</li>
+     * </ul>
+     */
+    public static final int
+        YGGutterColumn = 0,
+        YGGutterRow    = 1,
+        YGGutterAll    = 2;
+
+    /**
      * YGFlexDirection
      * 
      * <h5>Enum values:</h5>
@@ -1320,6 +1336,32 @@ public class Yoga {
         return nYGNodeStyleGetBorder(node, edge);
     }
 
+    // --- [ YGNodeStyleSetGap ] ---
+
+    /** Unsafe version of: {@link #YGNodeStyleSetGap NodeStyleSetGap} */
+    public static native void nYGNodeStyleSetGap(long node, int gutter, float gapLength);
+
+    /** @param gutter one of:<br><table><tr><td>{@link #YGGutterColumn GutterColumn}</td><td>{@link #YGGutterRow GutterRow}</td><td>{@link #YGGutterAll GutterAll}</td></tr></table> */
+    public static void YGNodeStyleSetGap(@NativeType("YGNodeRef") long node, @NativeType("YGGutter") int gutter, float gapLength) {
+        if (CHECKS) {
+            check(node);
+        }
+        nYGNodeStyleSetGap(node, gutter, gapLength);
+    }
+
+    // --- [ YGNodeStyleGetGap ] ---
+
+    /** Unsafe version of: {@link #YGNodeStyleGetGap NodeStyleGetGap} */
+    public static native float nYGNodeStyleGetGap(long node, int gutter);
+
+    /** @param gutter one of:<br><table><tr><td>{@link #YGGutterColumn GutterColumn}</td><td>{@link #YGGutterRow GutterRow}</td><td>{@link #YGGutterAll GutterAll}</td></tr></table> */
+    public static float YGNodeStyleGetGap(@NativeType("YGNodeConstRef") long node, @NativeType("YGGutter") int gutter) {
+        if (CHECKS) {
+            check(node);
+        }
+        return nYGNodeStyleGetGap(node, gutter);
+    }
+
     // --- [ YGNodeStyleSetWidth ] ---
 
     public static native void nYGNodeStyleSetWidth(long node, float width);
@@ -1848,6 +1890,18 @@ public class Yoga {
         nYGConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour(config, shouldDiffLayout);
     }
 
+    // --- [ YGConfigGetUseLegacyStretchBehaviour ] ---
+
+    public static native boolean nYGConfigGetUseLegacyStretchBehaviour(long config);
+
+    @NativeType("bool")
+    public static boolean YGConfigGetUseLegacyStretchBehaviour(@NativeType("YGConfigRef") long config) {
+        if (CHECKS) {
+            check(config);
+        }
+        return nYGConfigGetUseLegacyStretchBehaviour(config);
+    }
+
     // --- [ YGConfigSetUseLegacyStretchBehaviour ] ---
 
     /** Unsafe version of: {@link #YGConfigSetUseLegacyStretchBehaviour ConfigSetUseLegacyStretchBehaviour} */
@@ -2075,6 +2129,18 @@ public class Yoga {
     @NativeType("char const *")
     public static String YGFlexDirectionToString(@NativeType("YGFlexDirection") int value) {
         long __result = nYGFlexDirectionToString(value);
+        return memASCII(__result);
+    }
+
+    // --- [ YGGutterToString ] ---
+
+    /** Unsafe version of: {@link #YGGutterToString GutterToString} */
+    public static native long nYGGutterToString(int value);
+
+    /** @param value one of:<br><table><tr><td>{@link #YGGutterColumn GutterColumn}</td><td>{@link #YGGutterRow GutterRow}</td><td>{@link #YGGutterAll GutterAll}</td></tr></table> */
+    @NativeType("char const *")
+    public static String YGGutterToString(@NativeType("YGGutter") int value) {
+        long __result = nYGGutterToString(value);
         return memASCII(__result);
     }
 

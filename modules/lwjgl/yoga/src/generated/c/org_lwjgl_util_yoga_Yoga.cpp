@@ -513,6 +513,18 @@ JNIEXPORT jfloat JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeStyleGetBorder(JNI
     return (jfloat)YGNodeStyleGetBorder(node, (YGEdge)edge);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeStyleSetGap(JNIEnv *__env, jclass clazz, jlong nodeAddress, jint gutter, jfloat gapLength) {
+    YGNodeRef node = (YGNodeRef)(uintptr_t)nodeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    YGNodeStyleSetGap(node, (YGGutter)gutter, gapLength);
+}
+
+JNIEXPORT jfloat JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeStyleGetGap(JNIEnv *__env, jclass clazz, jlong nodeAddress, jint gutter) {
+    YGNodeConstRef node = (YGNodeConstRef)(uintptr_t)nodeAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jfloat)YGNodeStyleGetGap(node, (YGGutter)gutter);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGNodeStyleSetWidth(JNIEnv *__env, jclass clazz, jlong nodeAddress, jfloat width) {
     YGNodeRef node = (YGNodeRef)(uintptr_t)nodeAddress;
     UNUSED_PARAMS(__env, clazz)
@@ -756,6 +768,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigSetShouldDiffLayou
     YGConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour(config, (bool)shouldDiffLayout);
 }
 
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigGetUseLegacyStretchBehaviour(JNIEnv *__env, jclass clazz, jlong configAddress) {
+    YGConfigRef config = (YGConfigRef)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jboolean)YGConfigGetUseLegacyStretchBehaviour(config);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGConfigSetUseLegacyStretchBehaviour(JNIEnv *__env, jclass clazz, jlong configAddress, jboolean useLegacyStretchBehaviour) {
     YGConfigRef config = (YGConfigRef)(uintptr_t)configAddress;
     UNUSED_PARAMS(__env, clazz)
@@ -872,6 +890,11 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGExperimentalFeatureToSt
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGFlexDirectionToString(JNIEnv *__env, jclass clazz, jint value) {
     UNUSED_PARAMS(__env, clazz)
     return (jlong)(uintptr_t)YGFlexDirectionToString((YGFlexDirection)value);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGGutterToString(JNIEnv *__env, jclass clazz, jint value) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)YGGutterToString((YGGutter)value);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_yoga_Yoga_nYGJustifyToString(JNIEnv *__env, jclass clazz, jint value) {
