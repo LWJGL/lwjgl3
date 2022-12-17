@@ -18,7 +18,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * <pre><code>
  * struct NSVGpaint {
- *     char type;
+ *     signed char type;
  *     union {
  *         unsigned int color;
  *         {@link NSVGGradient NSVGgradient} * gradient;
@@ -71,7 +71,7 @@ public class NSVGPaint extends Struct {
     public int sizeof() { return SIZEOF; }
 
     /** @return the value of the {@code type} field. */
-    @NativeType("char")
+    @NativeType("signed char")
     public byte type() { return ntype(address()); }
     /** @return the value of the {@code color} field. */
     @NativeType("unsigned int")
@@ -157,7 +157,7 @@ public class NSVGPaint extends Struct {
         }
 
         /** @return the value of the {@code type} field. */
-        @NativeType("char")
+        @NativeType("signed char")
         public byte type() { return NSVGPaint.ntype(address()); }
         /** @return the value of the {@code color} field. */
         @NativeType("unsigned int")

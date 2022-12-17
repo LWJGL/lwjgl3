@@ -42,6 +42,7 @@ public class NanoSVG {
      * <h5>Enum values:</h5>
      * 
      * <ul>
+     * <li>{@link #NSVG_PAINT_UNDEF PAINT_UNDEF}</li>
      * <li>{@link #NSVG_PAINT_NONE PAINT_NONE}</li>
      * <li>{@link #NSVG_PAINT_COLOR PAINT_COLOR}</li>
      * <li>{@link #NSVG_PAINT_LINEAR_GRADIENT PAINT_LINEAR_GRADIENT}</li>
@@ -49,6 +50,7 @@ public class NanoSVG {
      * </ul>
      */
     public static final int
+        NSVG_PAINT_UNDEF           = -1,
         NSVG_PAINT_NONE            = 0,
         NSVG_PAINT_COLOR           = 1,
         NSVG_PAINT_LINEAR_GRADIENT = 2,

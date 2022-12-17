@@ -21,7 +21,7 @@ val NSVGgradient = struct(Module.NANOVG, "NSVGGradient", nativeName = "NSVGgradi
 }
 
 val NSVGpaint = struct(Module.NANOVG, "NSVGPaint", nativeName = "NSVGpaint", mutable = false) {
-    char("type", "")
+    typedef(char, "signed char")("type", "")
     union {
         unsigned_int("color", "")
         NSVGgradient.p("gradient", "")
@@ -53,6 +53,9 @@ val NSVGshape = struct(Module.NANOVG, "NSVGShape", nativeName = "NSVGshape", mut
     char("fillRule", "fill rule, see NSVGfillRule")
     unsigned_char("flags", "logical or of NSVG_FLAGS_* flags")
     float("bounds", "tight bounding box of the shape {@code [minx,miny,maxx,maxy]}")[4]
+    charASCII("fillGradient", "optional 'id' of fill gradient")[64]
+    charASCII("strokeGradient", "optional 'id' of stroke gradient")[64]
+    float("xform", "root transformation for fill/stroke gradient")[6]
     NSVGpath.p("paths", "linked list of paths in the image")
     _NSVGshape.p("next", "pointer to next shape, or #NULL if last element")
 }
