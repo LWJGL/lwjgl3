@@ -2,7 +2,7 @@
 then comment out << extern "C" >> bellow in this header file) */
 
 /*_________
- /         \ tinyfiledialogs.h v3.8.8 [Apr 22, 2021] zlib licence
+ /         \ tinyfiledialogs.h v3.9.0 [Nov 3, 2022] zlib licence
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs | Copyright (c) 2014 - 2021 Guillaume Vareille http://ysengrin.com
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -137,7 +137,7 @@ int tinyfd_messageBox(
 char * tinyfd_inputBox(
 	char const * aTitle , /* NULL or "" */
 	char const * aMessage , /* NULL or "" (\n and \t have no effect) */
-	char const * aDefaultInput ) ;  /* NULL passwordBox, "" inputbox */
+	char const * aDefaultInput ) ;  /* NULL = passwordBox, "" = inputbox */
 		/* returns NULL on cancel */
 
 char * tinyfd_saveFileDialog(
