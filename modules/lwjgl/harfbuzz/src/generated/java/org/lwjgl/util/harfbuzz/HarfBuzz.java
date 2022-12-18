@@ -883,7 +883,7 @@ public class HarfBuzz {
         HB_GLYPH_FLAG_UNSAFE_TO_BREAK        = 0x1,
         HB_GLYPH_FLAG_UNSAFE_TO_CONCAT       = 0x2,
         HB_GLYPH_FLAG_SAFE_TO_INSERT_TATWEEL = 0x4,
-        HB_GLYPH_FLAG_DEFINED                = 0000007;
+        HB_GLYPH_FLAG_DEFINED                = 0x00000007;
 
     /**
      * {@code hb_buffer_t}
@@ -6030,7 +6030,7 @@ public class HarfBuzz {
     }
 
     /** The default {@code hb_segment_properties_t} of of freshly created {@code hb_buffer_t}. */
-    public static hb_segment_properties_t HB_SEGMENT_PROPERTIES_DEFAULT = hb_segment_properties_t.create().set(
+    public static final hb_segment_properties_t HB_SEGMENT_PROPERTIES_DEFAULT = hb_segment_properties_t.create().set(
         HB_DIRECTION_INVALID,
         HB_SCRIPT_INVALID,
         HB_LANGUAGE_INVALID

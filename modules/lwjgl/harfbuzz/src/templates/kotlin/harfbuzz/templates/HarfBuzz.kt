@@ -679,7 +679,7 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
             """,
             0x00000004
         ),
-        "GLYPH_FLAG_DEFINED".enum("All the currently defined flags.", "0000007")
+        "GLYPH_FLAG_DEFINED".enum("All the currently defined flags.", "0x00000007")
     )
 
     EnumConstant(
@@ -841,7 +841,7 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     }
 
     /** The default {@code hb_segment_properties_t} of of freshly created {@code hb_buffer_t}. */
-    public static hb_segment_properties_t HB_SEGMENT_PROPERTIES_DEFAULT = hb_segment_properties_t.create().set(
+    public static final hb_segment_properties_t HB_SEGMENT_PROPERTIES_DEFAULT = hb_segment_properties_t.create().set(
         HB_DIRECTION_INVALID,
         HB_SCRIPT_INVALID,
         HB_LANGUAGE_INVALID

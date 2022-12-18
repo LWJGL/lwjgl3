@@ -687,7 +687,7 @@ val hb_ot = "OpenType".nativeClass(Module.HARFBUZZ, prefix = "HB_OT", prefixMeth
     )
     IntConstant(
         """
-        OpenType script tag, {@code math, for features specific to math shaping.
+        OpenType script tag, {@code math}, for features specific to math shaping.
  
         {@code HB_OT_TAG_MATH_SCRIPT} is not a valid {@code hb_script_t} and should only be used with functions that accept raw OpenType script tags, such as
         {@code hb_ot_layout_collect_features}. In other cases, #SCRIPT_MATH should be used instead.
