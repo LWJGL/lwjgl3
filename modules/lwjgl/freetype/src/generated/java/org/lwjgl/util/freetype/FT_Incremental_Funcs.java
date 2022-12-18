@@ -17,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A table of functions for accessing fonts that load data incrementally. Used in {@link FT_Incremental_InterfaceRec}.
+ * A table of functions for accessing fonts that load data incrementally. Used in {@link FT_Incremental_Interface}.
  * 
  * <h3>Layout</h3>
  * 

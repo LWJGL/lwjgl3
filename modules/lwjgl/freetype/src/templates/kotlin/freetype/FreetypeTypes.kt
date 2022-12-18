@@ -769,7 +769,7 @@ val FT_GlyphRec = struct(Module.FREETYPE, "FT_Glyph", nativeName = "FT_GlyphRec"
 }
 
 val FT_BitmapGlyphRec = struct(Module.FREETYPE, "FT_BitmapGlyph", nativeName = "FT_BitmapGlyphRec", mutable = false) {
-    documentation = "A structure used for bitmap glyph images. This really is a 'sub-class' of ##FT_GlyphRec."
+    documentation = "A structure used for bitmap glyph images. This really is a 'sub-class' of ##FT_Glyph."
 
     FT_GlyphRec("root", "")
     FT_Int("left", "")
@@ -778,14 +778,14 @@ val FT_BitmapGlyphRec = struct(Module.FREETYPE, "FT_BitmapGlyph", nativeName = "
 }
 
 val FT_OutlineGlyphRec = struct(Module.FREETYPE, "FT_OutlineGlyph", nativeName = "FT_OutlineGlyphRec", mutable = false) {
-    documentation = "A structure used for outline (vectorial) glyph images. This really is a 'sub-class' of ##FT_GlyphRec."
+    documentation = "A structure used for outline (vectorial) glyph images. This really is a 'sub-class' of ##FT_Glyph."
 
     FT_GlyphRec("root", "")
     FT_Outline("outline", "")
 }
 
 val FT_SvgGlyphRec = struct(Module.FREETYPE, "FT_SvgGlyph", nativeName = "FT_SvgGlyphRec", mutable = false) {
-    documentation = "A structure used for OT-SVG glyphs. This is a 'sub-class' of ##FT_GlyphRec."
+    documentation = "A structure used for OT-SVG glyphs. This is a 'sub-class' of ##FT_Glyph."
 
     FT_GlyphRec("root", "")
     FT_Byte.p("svg_document", "")
@@ -1454,7 +1454,7 @@ val FT_Incremental_GetGlyphMetricsFunc = Module.FREETYPE.callback {
 }
 
 val FT_Incremental_FuncsRec = struct(Module.FREETYPE, "FT_Incremental_Funcs", nativeName = "FT_Incremental_FuncsRec") {
-    documentation = "A table of functions for accessing fonts that load data incrementally. Used in ##FT_Incremental_InterfaceRec."
+    documentation = "A table of functions for accessing fonts that load data incrementally. Used in ##FT_Incremental_Interface."
 
     FT_Incremental_GetGlyphDataFunc("get_glyph_data", "")
     FT_Incremental_FreeGlyphDataFunc("free_glyph_data", "")

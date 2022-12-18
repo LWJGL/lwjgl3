@@ -14,7 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used for bitmap glyph images. This really is a 'sub-class' of {@link FT_GlyphRec}.
+ * A structure used for bitmap glyph images. This really is a 'sub-class' of {@link FT_Glyph}.
  * 
  * <h3>Layout</h3>
  * 
