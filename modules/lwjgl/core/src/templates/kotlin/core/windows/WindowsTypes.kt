@@ -46,13 +46,16 @@ val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 val LPCSTR = typedef(CHAR.const.p, "LPCSTR")
 val LPCWSTR = typedef(WCHAR.const.p, "LPCWSTR")
 val LPCTSTR = typedef(TCHAR.const.p, "LPCTSTR")
+val LPWSTR = typedef(WCHAR.p, "LPWSTR")
 val LPTSTR = typedef(TCHAR.p, "LPTSTR")
 
 val FARPROC = "FARPROC".handle
 val PROC = "PROC".handle
+val PVOID = "PVOID".handle
 val LPVOID = "LPVOID".handle
 
 val HINSTANCE = typedef(HANDLE, "HINSTANCE")
+val HLOCAL = typedef(HANDLE, "HLOCAL")
 val HMODULE = typedef(HANDLE, "HMODULE")
 val HWND = typedef(HANDLE, "HWND")
 val HMENU = typedef(HANDLE, "HMENU")
@@ -632,3 +635,23 @@ val INPUT = struct(Module.CORE_WINDOWS, "INPUT") {
     }("DUMMYUNIONNAME", "")
 }
 val LPINPUT = typedef(INPUT.p, "PINPUT")
+
+val DATA_BLOB = struct(Module.CORE_WINDOWS, "DATA_BLOB") {
+    documentation = "The {@code DATA_BLOB} structure contains an arbitrary array of bytes."
+
+    AutoSize("pbData")..DWORD("cbData", "the count, in bytes, of data")
+    BYTE.p("pbData", "a pointer to the data buffer")
+}
+
+val CRYPTPROTECT_PROMPTSTRUCT = struct(Module.CORE_WINDOWS, "CRYPTPROTECT_PROMPTSTRUCT", skipBuffer = true) {
+    documentation =
+        """
+        Provides the text of a prompt and information about when and where that prompt is to be displayed when using the #CryptProtectData() and
+        #CryptUnprotectData() functions.
+        """
+
+    Expression("SIZEOF")..DWORD("cbSize", "the size, in bytes, of this structure")
+    DWORD("dwPromptFlags", "flags that indicate when prompts to the user are to be displayed").links("CRYPTPROTECT_PROMPT_\\w+", LinkMode.BITFIELD)
+    HWND("hwndApp", "window handle to the parent window")
+    LPCWSTR("szPrompt", "a string containing the text of a prompt to be displayed")
+}
