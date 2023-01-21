@@ -474,12 +474,12 @@ class NativeClass internal constructor(
                     staticImports.add("org.lwjgl.system.APIUtil.*")
                 if ((binding != null && binding.apiCapabilities.ordinal >= 2) || functions.any { func ->
                         func.hasParam { param ->
-                            param.nativeType is PointerType<*> && func.getReferenceParam<AutoSize>(param.name).let {
+                            param.nativeType is PointerType<*> && (param.has<Check>() || func.getReferenceParam<AutoSize>(param.name).let {
                                 if (it == null)
-                                    !param.has<Nullable>() && param.nativeType.elementType !is StructType
+                                    (!param.has<Nullable>() || param.nativeType is CharSequenceType) && param.nativeType.elementType !is StructType
                                 else
                                     it.get<AutoSize>().reference != param.name // dependent auto-size
-                            }
+                            })
                         } || (module.arrayOverloads && func.hasArrayOverloads) || (func.has<IgnoreMissing>() && binding?.apiCapabilities != APICapabilities.JNI_CAPABILITIES)
                     })
                     staticImports.add("org.lwjgl.system.Checks.*")

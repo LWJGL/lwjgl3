@@ -29,6 +29,28 @@ public class WinBase {
         throw new UnsupportedOperationException();
     }
 
+    // --- [ LocalFree ] ---
+
+    /** Unsafe version of: {@link #LocalFree} */
+    public static native long nLocalFree(long hMem);
+
+    /**
+     * Frees the specified local memory object and invalidates its handle.
+     *
+     * @param hMem a handle to the local memory object
+     *
+     * @return if the function succeeds, the return value is {@code NULL}.
+     *         
+     *         <p>If the function fails, the return value is equal to a handle to the local memory object. To get extended error information, call {@link #GetLastError}.</p>
+     */
+    @NativeType("HLOCAL")
+    public static long LocalFree(@NativeType("HLOCAL") long hMem) {
+        if (CHECKS) {
+            check(hMem);
+        }
+        return nLocalFree(hMem);
+    }
+
     // --- [ GetLastError ] ---
 
     /**
