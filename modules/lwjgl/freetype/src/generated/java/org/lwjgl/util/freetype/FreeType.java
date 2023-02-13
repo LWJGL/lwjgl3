@@ -581,9 +581,9 @@ public class FreeType {
 
     public static final int FREETYPE_MAJOR = 2;
 
-    public static final int FREETYPE_MINOR = 12;
+    public static final int FREETYPE_MINOR = 13;
 
-    public static final int FREETYPE_PATCH = 1;
+    public static final int FREETYPE_PATCH = 0;
 
     public static final int FT_ADVANCE_FLAG_FAST_ONLY = 0x20000000;
 
@@ -5592,13 +5592,13 @@ public class FreeType {
 
     // --- [ FT_GlyphSlot_Slant ] ---
 
-    public static void nFT_GlyphSlot_Slant(long slot, long slant) {
+    public static void nFT_GlyphSlot_Slant(long slot, long xslant, long yslant) {
         long __functionAddress = Functions.GlyphSlot_Slant;
-        invokePNV(slot, slant, __functionAddress);
+        invokePNNV(slot, xslant, yslant, __functionAddress);
     }
 
-    public static void FT_GlyphSlot_Slant(FT_GlyphSlot slot, @NativeType("FT_Fixed") long slant) {
-        nFT_GlyphSlot_Slant(slot.address(), slant);
+    public static void FT_GlyphSlot_Slant(FT_GlyphSlot slot, @NativeType("FT_Fixed") long xslant, @NativeType("FT_Fixed") long yslant) {
+        nFT_GlyphSlot_Slant(slot.address(), xslant, yslant);
     }
 
     // --- [ FT_Sin ] ---

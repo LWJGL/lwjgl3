@@ -651,8 +651,8 @@ val freetype = "FreeType".nativeClass(Module.FREETYPE, prefix = "FT", prefixMeth
     )
 
     IntConstant("", "FREETYPE_MAJOR".."2").noPrefix()
-    IntConstant("", "FREETYPE_MINOR".."12").noPrefix()
-    IntConstant("", "FREETYPE_PATCH".."1").noPrefix()
+    IntConstant("", "FREETYPE_MINOR".."13").noPrefix()
+    IntConstant("", "FREETYPE_PATCH".."0").noPrefix()
 
     void(
         "Library_Version",
@@ -2500,7 +2500,8 @@ val freetype = "FreeType".nativeClass(Module.FREETYPE, prefix = "FT", prefixMeth
         "",
 
         FT_GlyphSlot("slot", ""),
-        FT_Fixed("slant", "")
+        FT_Fixed("xslant", ""),
+        FT_Fixed("yslant", "")
     )
 
     // fttrigon.h
