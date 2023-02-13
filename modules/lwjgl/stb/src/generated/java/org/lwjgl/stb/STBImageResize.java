@@ -72,10 +72,10 @@ public class STBImageResize {
      * Set this flag if your texture has premultiplied alpha. Otherwise, stbir will use alpha-weighted resampling (effectively premultiplying, resampling,
      * then unpremultiplying).
      */
-    public static final int STBIR_FLAG_ALPHA_PREMULTIPLIED = -1;
+    public static final int STBIR_FLAG_ALPHA_PREMULTIPLIED = 1 << 0;
 
     /** The specified alpha channel should be handled as gamma-corrected value even when doing sRGB operations. */
-    public static final int STBIR_FLAG_ALPHA_USES_COLORSPACE = -1;
+    public static final int STBIR_FLAG_ALPHA_USES_COLORSPACE = 1 << 1;
 
     /**
      * Edge wrap mode.
