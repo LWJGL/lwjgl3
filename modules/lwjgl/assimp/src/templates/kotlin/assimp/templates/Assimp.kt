@@ -672,7 +672,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
-        Will enable the skeleton structo to store bone data.
+        Will enable the skeleton struct to store bone data.
 
         This will decouple the bone coupling to the mesh. This feature is experimental.
 
@@ -2712,7 +2712,7 @@ aiAttachLogStream(&c);""")}
         ),
         "TextureType_CLEARCOAT".enum(
             """
-            Simulates a layer of 'polish' or 'laquer' layered on top of a PBR substrate.
+            Simulates a layer of 'polish' or 'lacquer' layered on top of a PBR substrate.
 
             ${url("https://autodesk.github.io/standard-surface/\\#closures/coating", "coating")},
             ${url("https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_clearcoat", "KHR_materials_clearcoat")}
@@ -3142,6 +3142,7 @@ aiAttachLogStream(&c);""")}
     EnumConstant(
         "Enumerates the methods of mesh morphing supported by Assimp. ({@code enum aiMorphingMethod})",
 
+        "MorphingMethod_UNKNOWN".enum("Morphing method to be determined.", "0x0"),
         "MorphingMethod_VERTEX_BLEND".enum("Interpolation between morph targets.", "0x1"),
         "MorphingMethod_MORPH_NORMALIZED".enum("Normalized morphing between morph targets.", "0x2"),
         "MorphingMethod_MORPH_RELATIVE".enum("Relative morphing between morph targets.", "0x3")

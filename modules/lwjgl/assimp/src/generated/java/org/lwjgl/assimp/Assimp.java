@@ -719,7 +719,7 @@ public class Assimp {
     public static final String AI_CONFIG_FBX_CONVERT_TO_M = "AI_CONFIG_FBX_CONVERT_TO_M";
 
     /**
-     * Will enable the skeleton structo to store bone data.
+     * Will enable the skeleton struct to store bone data.
      * 
      * <p>This will decouple the bone coupling to the mesh. This feature is experimental.</p>
      * 
@@ -1466,7 +1466,7 @@ public class Assimp {
      * <p><a target="_blank" href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_sheen">KHR_materials_sheen</a>)</p>
      * </li>
      * <li>{@link #aiTextureType_CLEARCOAT TextureType_CLEARCOAT} - 
-     * Simulates a layer of 'polish' or 'laquer' layered on top of a PBR substrate.
+     * Simulates a layer of 'polish' or 'lacquer' layered on top of a PBR substrate.
      * 
      * <p><a target="_blank" href="https://autodesk.github.io/standard-surface/#closures/coating">coating</a>,
      * <a target="_blank" href="https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_clearcoat">KHR_materials_clearcoat</a></p>
@@ -1753,12 +1753,14 @@ public class Assimp {
      * <h5>Enum values:</h5>
      * 
      * <ul>
+     * <li>{@link #aiMorphingMethod_UNKNOWN MorphingMethod_UNKNOWN} - Morphing method to be determined.</li>
      * <li>{@link #aiMorphingMethod_VERTEX_BLEND MorphingMethod_VERTEX_BLEND} - Interpolation between morph targets.</li>
      * <li>{@link #aiMorphingMethod_MORPH_NORMALIZED MorphingMethod_MORPH_NORMALIZED} - Normalized morphing between morph targets.</li>
      * <li>{@link #aiMorphingMethod_MORPH_RELATIVE MorphingMethod_MORPH_RELATIVE} - Relative morphing between morph targets.</li>
      * </ul>
      */
     public static final int
+        aiMorphingMethod_UNKNOWN          = 0x0,
         aiMorphingMethod_VERTEX_BLEND     = 0x1,
         aiMorphingMethod_MORPH_NORMALIZED = 0x2,
         aiMorphingMethod_MORPH_RELATIVE   = 0x3;

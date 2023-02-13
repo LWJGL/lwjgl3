@@ -382,6 +382,8 @@ val aiAnimMesh = struct(Module.ASSIMP, "AIAnimMesh", nativeName = "struct aiAnim
     float("mWeight", "Weight of the {@code AnimMesh}.")
 }
 
+val aiMorphingMethod = "aiMorphingMethod".enumType
+
 val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
     javaImport("static org.lwjgl.assimp.Assimp.*")
     documentation =
@@ -524,16 +526,30 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
     )
     AutoSize("mAnimMeshes", optional = true)..unsigned_int(
         "mNumAnimMeshes",
-        "The number of attachment meshes. Note! Currently only works with Collada loader."
+        """
+        The number of attachment meshes.
+
+        Currently known to work with loaders:
+        ${ul(
+            "Collada",
+            "gltf"
+        )}
+        """
     )
     aiAnimMesh.p.p(
         "mAnimMeshes",
         """
         Attachment meshes for this mesh, for vertex-based animation. Attachment meshes carry replacement data for some of the mesh'es vertex components
-        (usually positions, normals). Note! Currently only works with Collada loader.
+        (usually positions, normals).
+
+        Currently known to work with loaders:
+        ${ul(
+            "Collada",
+            "gltf"
+        )}
         """
     )
-    unsigned_int("mMethod", "Method of morphing when anim-meshes are specified.").links("MorphingMethod_\\w+")
+    aiMorphingMethod("mMethod", "Method of morphing when anim-meshes are specified.").links("MorphingMethod_\\w+")
     aiAABB("mAABB", "the bounding box")
     Check("AI_MAX_NUMBER_OF_TEXTURECOORDS")..nullable..aiString.p.p(
         "mTextureCoordsNames",
@@ -695,8 +711,8 @@ val aiMeshMorphKey = struct(Module.ASSIMP, "AIMeshMorphKey", nativeName = "struc
     documentation = "Binds a morph anim mesh to a specific point in time."
 
     double("mTime", "the time of this key")
-    unsigned_int.p("mValues", "the values at the time of this key")
-    double.p("mWeights", "the weights at the time of this key")
+    unsigned_int.p("mValues", "index of attachment mesh to apply weight at the same position in {@code mWeights}")
+    double.p("mWeights", "weight to apply to the blend shape index at the same position in {@code mValues}")
     AutoSize("mValues", "mWeights")..unsigned_int("mNumValuesAndWeights", "the number of values and weights")
 }
 

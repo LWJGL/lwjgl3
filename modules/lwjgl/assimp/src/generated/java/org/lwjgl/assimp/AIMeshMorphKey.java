@@ -77,10 +77,10 @@ public class AIMeshMorphKey extends Struct implements NativeResource {
 
     /** the time of this key */
     public double mTime() { return nmTime(address()); }
-    /** the values at the time of this key */
+    /** index of attachment mesh to apply weight at the same position in {@code mWeights} */
     @NativeType("unsigned int *")
     public IntBuffer mValues() { return nmValues(address()); }
-    /** the weights at the time of this key */
+    /** weight to apply to the blend shape index at the same position in {@code mValues} */
     @NativeType("double *")
     public DoubleBuffer mWeights() { return nmWeights(address()); }
     /** the number of values and weights */

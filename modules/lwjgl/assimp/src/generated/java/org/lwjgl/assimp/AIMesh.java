@@ -49,7 +49,7 @@ import static org.lwjgl.assimp.Assimp.*;
  *     {@link AIString struct aiString} {@link #mName};
  *     unsigned int {@link #mNumAnimMeshes};
  *     {@link AIAnimMesh struct aiAnimMesh} ** {@link #mAnimMeshes};
- *     unsigned int {@link #mMethod};
+ *     aiMorphingMethod {@link #mMethod};
  *     {@link AIAABB struct aiAABB} {@link #mAABB};
  *     {@link AIString struct aiString} ** {@link #mTextureCoordsNames};
  * }</code></pre>
@@ -286,18 +286,34 @@ public class AIMesh extends Struct implements NativeResource {
      */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
-    /** The number of attachment meshes. Note! Currently only works with Collada loader. */
+    /**
+     * The number of attachment meshes.
+     * 
+     * <p>Currently known to work with loaders:</p>
+     * 
+     * <ul>
+     * <li>Collada</li>
+     * <li>gltf</li>
+     * </ul>
+     */
     @NativeType("unsigned int")
     public int mNumAnimMeshes() { return nmNumAnimMeshes(address()); }
     /**
      * Attachment meshes for this mesh, for vertex-based animation. Attachment meshes carry replacement data for some of the mesh'es vertex components
-     * (usually positions, normals). Note! Currently only works with Collada loader.
+     * (usually positions, normals).
+     * 
+     * <p>Currently known to work with loaders:</p>
+     * 
+     * <ul>
+     * <li>Collada</li>
+     * <li>gltf</li>
+     * </ul>
      */
     @Nullable
     @NativeType("struct aiAnimMesh **")
     public PointerBuffer mAnimMeshes() { return nmAnimMeshes(address()); }
-    /** Method of morphing when anim-meshes are specified. One of:<br><table><tr><td>{@link Assimp#aiMorphingMethod_VERTEX_BLEND MorphingMethod_VERTEX_BLEND}</td><td>{@link Assimp#aiMorphingMethod_MORPH_NORMALIZED MorphingMethod_MORPH_NORMALIZED}</td></tr><tr><td>{@link Assimp#aiMorphingMethod_MORPH_RELATIVE MorphingMethod_MORPH_RELATIVE}</td></tr></table> */
-    @NativeType("unsigned int")
+    /** Method of morphing when anim-meshes are specified. One of:<br><table><tr><td>{@link Assimp#aiMorphingMethod_UNKNOWN MorphingMethod_UNKNOWN}</td><td>{@link Assimp#aiMorphingMethod_VERTEX_BLEND MorphingMethod_VERTEX_BLEND}</td></tr><tr><td>{@link Assimp#aiMorphingMethod_MORPH_NORMALIZED MorphingMethod_MORPH_NORMALIZED}</td><td>{@link Assimp#aiMorphingMethod_MORPH_RELATIVE MorphingMethod_MORPH_RELATIVE}</td></tr></table> */
+    @NativeType("aiMorphingMethod")
     public int mMethod() { return nmMethod(address()); }
     /** the bounding box */
     @NativeType("struct aiAABB")
@@ -348,7 +364,7 @@ public class AIMesh extends Struct implements NativeResource {
     /** Sets the address of the specified {@link PointerBuffer} to the {@link #mAnimMeshes} field. */
     public AIMesh mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { nmAnimMeshes(address(), value); return this; }
     /** Sets the specified value to the {@link #mMethod} field. */
-    public AIMesh mMethod(@NativeType("unsigned int") int value) { nmMethod(address(), value); return this; }
+    public AIMesh mMethod(@NativeType("aiMorphingMethod") int value) { nmMethod(address(), value); return this; }
     /** Copies the specified {@link AIAABB} to the {@link #mAABB} field. */
     public AIMesh mAABB(@NativeType("struct aiAABB") AIAABB value) { nmAABB(address(), value); return this; }
     /** Passes the {@link #mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
@@ -781,7 +797,7 @@ public class AIMesh extends Struct implements NativeResource {
         @NativeType("struct aiAnimMesh **")
         public PointerBuffer mAnimMeshes() { return AIMesh.nmAnimMeshes(address()); }
         /** @return the value of the {@link AIMesh#mMethod} field. */
-        @NativeType("unsigned int")
+        @NativeType("aiMorphingMethod")
         public int mMethod() { return AIMesh.nmMethod(address()); }
         /** @return a {@link AIAABB} view of the {@link AIMesh#mAABB} field. */
         @NativeType("struct aiAABB")
@@ -832,7 +848,7 @@ public class AIMesh extends Struct implements NativeResource {
         /** Sets the address of the specified {@link PointerBuffer} to the {@link AIMesh#mAnimMeshes} field. */
         public AIMesh.Buffer mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { AIMesh.nmAnimMeshes(address(), value); return this; }
         /** Sets the specified value to the {@link AIMesh#mMethod} field. */
-        public AIMesh.Buffer mMethod(@NativeType("unsigned int") int value) { AIMesh.nmMethod(address(), value); return this; }
+        public AIMesh.Buffer mMethod(@NativeType("aiMorphingMethod") int value) { AIMesh.nmMethod(address(), value); return this; }
         /** Copies the specified {@link AIAABB} to the {@link AIMesh#mAABB} field. */
         public AIMesh.Buffer mAABB(@NativeType("struct aiAABB") AIAABB value) { AIMesh.nmAABB(address(), value); return this; }
         /** Passes the {@link AIMesh#mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
