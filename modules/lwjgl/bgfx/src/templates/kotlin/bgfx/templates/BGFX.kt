@@ -14,7 +14,7 @@ val BGFX = "BGFX".nativeClass(Module.BGFX, prefix = "BGFX", prefixMethod = "bgfx
     IntConstant(
         "API version",
 
-        "API_VERSION".."117"
+        "API_VERSION".."118"
     )
 
     ShortConstant(
@@ -653,11 +653,19 @@ RGBA16S
         "TEXTURE_FORMAT_ATCE".enum("ATCE RGBA 8 BPP explicit alpha"),
         "TEXTURE_FORMAT_ATCI".enum("ATCI RGBA 8 BPP interpolated alpha"),
         "TEXTURE_FORMAT_ASTC4x4".enum("ASTC 4x4 8.0 BPP"),
+        "TEXTURE_FORMAT_ASTC5X4".enum("ASTC 5x4 6.40 BPP"),
         "TEXTURE_FORMAT_ASTC5x5".enum("ASTC 5x5 5.12 BPP"),
+        "TEXTURE_FORMAT_ASTC6X5".enum("ASTC 6x5 4.27 BPP"),
         "TEXTURE_FORMAT_ASTC6x6".enum("ASTC 6x6 3.56 BPP"),
         "TEXTURE_FORMAT_ASTC8x5".enum("ASTC 8x5 3.20 BPP"),
         "TEXTURE_FORMAT_ASTC8x6".enum("ASTC 8x6 2.67 BPP"),
+        "TEXTURE_FORMAT_ASTC8X8".enum("ASTC 8x8 2.00 BPP"),
         "TEXTURE_FORMAT_ASTC10x5".enum("ASTC 10x5 2.56 BPP"),
+        "TEXTURE_FORMAT_ASTC10X6".enum("ASTC 10x6 2.13 BPP"),
+        "TEXTURE_FORMAT_ASTC10X8".enum("ASTC 10x8 1.60 BPP"),
+        "TEXTURE_FORMAT_ASTC10X10".enum("ASTC 10x10 1.28 BPP"),
+        "TEXTURE_FORMAT_ASTC12X10".enum("ASTC 12x10 1.07 BPP"),
+        "TEXTURE_FORMAT_ASTC12X12".enum("ASTC 12x12 0.89 BPP"),
 
         "TEXTURE_FORMAT_UNKNOWN".enum,
 
