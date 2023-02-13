@@ -353,6 +353,7 @@ public class FMOD {
             DSP_GetChannelFormat              = apiGetFunctionAddress(FMOD, "FMOD_DSP_GetChannelFormat"),
             DSP_GetOutputChannelFormat        = apiGetFunctionAddress(FMOD, "FMOD_DSP_GetOutputChannelFormat"),
             DSP_Reset                         = apiGetFunctionAddress(FMOD, "FMOD_DSP_Reset"),
+            DSP_SetCallback                   = apiGetFunctionAddress(FMOD, "FMOD_DSP_SetCallback"),
             DSP_SetParameterFloat             = apiGetFunctionAddress(FMOD, "FMOD_DSP_SetParameterFloat"),
             DSP_SetParameterInt               = apiGetFunctionAddress(FMOD, "FMOD_DSP_SetParameterInt"),
             DSP_SetParameterBool              = apiGetFunctionAddress(FMOD, "FMOD_DSP_SetParameterBool"),
@@ -420,7 +421,7 @@ public class FMOD {
         return FMOD;
     }
 
-    public static final int FMOD_VERSION = 0x20209;
+    public static final int FMOD_VERSION = 0x20212;
 
     public static final int FMOD_DEBUG_LEVEL_NONE = 0x0;
 
@@ -1064,6 +1065,7 @@ public class FMOD {
      * <li>{@link #FMOD_OUTPUTTYPE_WINSONIC OUTPUTTYPE_WINSONIC}</li>
      * <li>{@link #FMOD_OUTPUTTYPE_AAUDIO OUTPUTTYPE_AAUDIO}</li>
      * <li>{@link #FMOD_OUTPUTTYPE_AUDIOWORKLET OUTPUTTYPE_AUDIOWORKLET}</li>
+     * <li>{@link #FMOD_OUTPUTTYPE_PHASE OUTPUTTYPE_PHASE}</li>
      * <li>{@link #FMOD_OUTPUTTYPE_MAX OUTPUTTYPE_MAX}</li>
      * </ul>
      */
@@ -1088,7 +1090,8 @@ public class FMOD {
         FMOD_OUTPUTTYPE_WINSONIC      = 17,
         FMOD_OUTPUTTYPE_AAUDIO        = 18,
         FMOD_OUTPUTTYPE_AUDIOWORKLET  = 19,
-        FMOD_OUTPUTTYPE_MAX           = 20;
+        FMOD_OUTPUTTYPE_PHASE         = 20,
+        FMOD_OUTPUTTYPE_MAX           = 21;
 
     /**
      * {@code FMOD_DEBUG_MODE}
@@ -1455,6 +1458,20 @@ public class FMOD {
         FMOD_DSP_RESAMPLER_CUBIC    = 3,
         FMOD_DSP_RESAMPLER_SPLINE   = 4,
         FMOD_DSP_RESAMPLER_MAX      = 5;
+
+    /**
+     * {@code FMOD_DSP_CALLBACK_TYPE}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #FMOD_DSP_CALLBACK_DATAPARAMETERRELEASE DSP_CALLBACK_DATAPARAMETERRELEASE}</li>
+     * <li>{@link #FMOD_DSP_CALLBACK_MAX DSP_CALLBACK_MAX}</li>
+     * </ul>
+     */
+    public static final int
+        FMOD_DSP_CALLBACK_DATAPARAMETERRELEASE = 0,
+        FMOD_DSP_CALLBACK_MAX                  = 1;
 
     /**
      * {@code FMOD_DSPCONNECTION_TYPE}
@@ -7850,6 +7867,21 @@ public class FMOD {
             check(dsp);
         }
         return callPI(dsp, __functionAddress);
+    }
+
+    // --- [ FMOD_DSP_SetCallback ] ---
+
+    public static int nFMOD_DSP_SetCallback(long dsp, long callback) {
+        long __functionAddress = Functions.DSP_SetCallback;
+        if (CHECKS) {
+            check(dsp);
+        }
+        return callPPI(dsp, callback, __functionAddress);
+    }
+
+    @NativeType("FMOD_RESULT")
+    public static int FMOD_DSP_SetCallback(@NativeType("FMOD_DSP *") long dsp, @NativeType("FMOD_DSP_CALLBACK") FMOD_DSP_CALLBACKI callback) {
+        return nFMOD_DSP_SetCallback(dsp, callback.address());
     }
 
     // --- [ FMOD_DSP_SetParameterFloat ] ---

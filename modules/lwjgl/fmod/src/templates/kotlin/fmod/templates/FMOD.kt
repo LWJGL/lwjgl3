@@ -14,7 +14,7 @@ val FMOD = "FMOD".nativeClass(
     binding = simpleBinding(Module.FMOD, libraryName = "FMOD", libraryExpression = "Configuration.FMOD_LIBRARY_NAME, \"fmod\"")
 ) {
 
-    IntConstant("", "VERSION"..0x00020209)
+    IntConstant("", "VERSION"..0x00020212)
 
     IntConstant("", "DEBUG_LEVEL_NONE"..0x00000000)
     IntConstant("", "DEBUG_LEVEL_ERROR"..0x00000001)
@@ -396,6 +396,7 @@ val FMOD = "FMOD".nativeClass(
         "OUTPUTTYPE_WINSONIC".enum,
         "OUTPUTTYPE_AAUDIO".enum,
         "OUTPUTTYPE_AUDIOWORKLET".enum,
+        "OUTPUTTYPE_PHASE".enum,
         "OUTPUTTYPE_MAX".enum
     )
 
@@ -580,6 +581,13 @@ val FMOD = "FMOD".nativeClass(
         "DSP_RESAMPLER_CUBIC".enum,
         "DSP_RESAMPLER_SPLINE".enum,
         "DSP_RESAMPLER_MAX".enum
+    )
+
+    EnumConstant(
+        "{@code FMOD_DSP_CALLBACK_TYPE}",
+
+        "DSP_CALLBACK_DATAPARAMETERRELEASE".enum("", "0"),
+        "DSP_CALLBACK_MAX".enum
     )
 
     EnumConstant(
@@ -4088,6 +4096,14 @@ val FMOD = "FMOD".nativeClass(
         "",
 
         FMOD_DSP.p("dsp", "")
+    )
+
+    FMOD_RESULT(
+        "DSP_SetCallback",
+        "",
+
+        FMOD_DSP.p("dsp", ""),
+        FMOD_DSP_CALLBACK("callback", "")
     )
 
     FMOD_RESULT(

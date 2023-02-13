@@ -40,6 +40,7 @@ val FMOD_CHANNELCONTROL_TYPE = "FMOD_CHANNELCONTROL_TYPE".enumType
 val FMOD_CHANNELORDER = "FMOD_CHANNELORDER".enumType
 val FMOD_DEBUG_MODE = "FMOD_DEBUG_MODE".enumType
 val FMOD_DSPCONNECTION_TYPE = "FMOD_DSPCONNECTION_TYPE".enumType
+val FMOD_DSP_CALLBACK_TYPE = "FMOD_DSP_CALLBACK_TYPE".enumType
 val FMOD_DSP_CHANNELMIX = "FMOD_DSP_CHANNELMIX".enumType
 val FMOD_DSP_CHANNELMIX_OUTPUT = "FMOD_DSP_CHANNELMIX_OUTPUT".enumType
 val FMOD_DSP_CHORUS = "FMOD_DSP_CHORUS".enumType
@@ -156,6 +157,19 @@ val FMOD_CHANNELCONTROL_CALLBACK = Module.FMOD.callback {
         nullable..opaque_p("commanddata2", ""),
 
         nativeType = "FMOD_CHANNELCONTROL_CALLBACK"
+    )
+}
+
+val FMOD_DSP_CALLBACK = Module.FMOD.callback {
+    FMOD_RESULT(
+        "FMOD_DSP_CALLBACK",
+        "",
+
+        FMOD_DSP.p("dsp", ""),
+        FMOD_DSP_CALLBACK_TYPE("type", ""),
+        opaque_p("data", ""),
+
+        nativeType = "FMOD_DSP_CALLBACK"
     )
 }
 
