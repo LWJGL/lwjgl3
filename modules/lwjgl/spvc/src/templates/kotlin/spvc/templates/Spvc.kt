@@ -33,7 +33,7 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         """
 
     IntConstant("", "C_API_VERSION_MAJOR".."0")
-    IntConstant("", "C_API_VERSION_MINOR".."49")
+    IntConstant("", "C_API_VERSION_MINOR".."51")
     IntConstant("", "C_API_VERSION_PATCH".."0")
 
     IntConstant("", "COMPILER_OPTION_COMMON_BIT"..0x1000000)
@@ -135,7 +135,8 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "RESOURCE_TYPE_SEPARATE_IMAGE".enum,
         "RESOURCE_TYPE_SEPARATE_SAMPLERS".enum,
         "RESOURCE_TYPE_ACCELERATION_STRUCTURE".enum,
-        "RESOURCE_TYPE_RAY_QUERY".enum
+        "RESOURCE_TYPE_RAY_QUERY".enum,
+        "RESOURCE_TYPE_SHADER_RECORD_BUFFER".enum
     )
 
     EnumConstant(
@@ -230,6 +231,14 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "MSL_SHADER_INPUT_FORMAT_UINT16".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_UINT16"),
         "MSL_SHADER_INPUT_FORMAT_ANY16".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_ANY16"),
         "MSL_SHADER_INPUT_FORMAT_ANY32".enum("", "SPVC_MSL_SHADER_VARIABLE_FORMAT_ANY32")
+    )
+
+    EnumConstant(
+        "{@code spvc_msl_shader_variable_rate}",
+
+        "MSL_SHADER_VARIABLE_RATE_PER_VERTEX".enum("", "0"),
+        "MSL_SHADER_VARIABLE_RATE_PER_PRIMITIVE".enum,
+        "MSL_SHADER_VARIABLE_RATE_PER_PATCH".enum,
     )
 
     EnumConstant(
@@ -503,7 +512,9 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "COMPILER_OPTION_MSL_FORCE_SAMPLE_RATE_SHADING".enum("", "75 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_MSL_IOS_SUPPORT_BASE_VERTEX_INSTANCE".enum("", "76 | SPVC_COMPILER_OPTION_MSL_BIT"),
         "COMPILER_OPTION_GLSL_OVR_MULTIVIEW_VIEW_COUNT".enum("", "77 | SPVC_COMPILER_OPTION_GLSL_BIT"),
-        "COMPILER_OPTION_RELAX_NAN_CHECKS".enum("", "78 | SPVC_COMPILER_OPTION_COMMON_BIT")
+        "COMPILER_OPTION_RELAX_NAN_CHECKS".enum("", "78 | SPVC_COMPILER_OPTION_COMMON_BIT"),
+        "COMPILER_OPTION_MSL_RAW_BUFFER_TESE_INPUT".enum("", "79 | SPVC_COMPILER_OPTION_MSL_BIT"),
+        "COMPILER_OPTION_MSL_SHADER_PATCH_INPUT_BUFFER_INDEX".enum("", "80 | SPVC_COMPILER_OPTION_MSL_BIT")
     )
 
     void(
@@ -531,7 +542,11 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
     void(
         "msl_shader_interface_var_init",
-        "Initializes the shader input struct.",
+        """
+        Initializes the shader input struct.
+
+        Deprecated. Use #msl_shader_interface_var_init_2().
+        """,
 
         spvc_msl_shader_interface_var.p("var", "")
     )
@@ -541,6 +556,13 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
         "Deprecated. Use #msl_shader_interface_var_init().",
 
         spvc_msl_shader_input.p("input", "")
+    )
+
+    void(
+        "msl_shader_interface_var_init_2",
+        "Initializes the shader interface variable struct.",
+
+        spvc_msl_shader_interface_var_2.p("var", "")
     )
 
     void(
@@ -860,18 +882,34 @@ val Spvc = "Spvc".nativeClass(Module.SPVC, prefix = "SPVC_", prefixMethod = "spv
 
     spvc_result(
         "compiler_msl_add_shader_input",
-        "",
+        "Deprecated; use #compiler_msl_add_shader_input_2().",
 
         spvc_compiler("compiler", ""),
         spvc_msl_shader_interface_var.const.p("input", "")
     )
 
     spvc_result(
-        "compiler_msl_add_shader_output",
+        "compiler_msl_add_shader_input_2",
         "",
 
         spvc_compiler("compiler", ""),
+        spvc_msl_shader_interface_var_2.const.p("input", "")
+    )
+
+    spvc_result(
+        "compiler_msl_add_shader_output",
+        "Deprecated; use #compiler_msl_add_shader_output_2().",
+
+        spvc_compiler("compiler", ""),
         spvc_msl_shader_interface_var.const.p("output", "")
+    )
+
+    spvc_result(
+        "compiler_msl_add_shader_output_2",
+        "",
+
+        spvc_compiler("compiler", ""),
+        spvc_msl_shader_interface_var_2.const.p("output", "")
     )
 
     spvc_result(

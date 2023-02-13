@@ -21,6 +21,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>After compilation, it is possible to query whether or not this location was used. If {@code vecsize} is nonzero, it must be greater than or equal to
  * the {@code vecsize} declared in the shader, or behavior is undefined.</p>
  * 
+ * <p>Deprecated; use {@code spvc_msl_shader_interface_var_2}.</p>
+ * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
