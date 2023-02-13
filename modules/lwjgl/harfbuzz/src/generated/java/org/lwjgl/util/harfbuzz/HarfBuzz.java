@@ -74,333 +74,384 @@ public class HarfBuzz {
 
         /** Function address. */
         public static final long
-            tag_from_string                          = apiGetFunctionAddress(HARFBUZZ, "hb_tag_from_string"),
-            tag_to_string                            = apiGetFunctionAddress(HARFBUZZ, "hb_tag_to_string"),
-            direction_from_string                    = apiGetFunctionAddress(HARFBUZZ, "hb_direction_from_string"),
-            direction_to_string                      = apiGetFunctionAddress(HARFBUZZ, "hb_direction_to_string"),
-            language_from_string                     = apiGetFunctionAddress(HARFBUZZ, "hb_language_from_string"),
-            language_to_string                       = apiGetFunctionAddress(HARFBUZZ, "hb_language_to_string"),
-            language_get_default                     = apiGetFunctionAddress(HARFBUZZ, "hb_language_get_default"),
-            language_matches                         = apiGetFunctionAddress(HARFBUZZ, "hb_language_matches"),
-            script_from_iso15924_tag                 = apiGetFunctionAddress(HARFBUZZ, "hb_script_from_iso15924_tag"),
-            script_from_string                       = apiGetFunctionAddress(HARFBUZZ, "hb_script_from_string"),
-            script_to_iso15924_tag                   = apiGetFunctionAddress(HARFBUZZ, "hb_script_to_iso15924_tag"),
-            script_get_horizontal_direction          = apiGetFunctionAddress(HARFBUZZ, "hb_script_get_horizontal_direction"),
-            feature_from_string                      = apiGetFunctionAddress(HARFBUZZ, "hb_feature_from_string"),
-            feature_to_string                        = apiGetFunctionAddress(HARFBUZZ, "hb_feature_to_string"),
-            variation_from_string                    = apiGetFunctionAddress(HARFBUZZ, "hb_variation_from_string"),
-            variation_to_string                      = apiGetFunctionAddress(HARFBUZZ, "hb_variation_to_string"),
-            color_get_alpha                          = apiGetFunctionAddress(HARFBUZZ, "hb_color_get_alpha"),
-            color_get_red                            = apiGetFunctionAddress(HARFBUZZ, "hb_color_get_red"),
-            color_get_green                          = apiGetFunctionAddress(HARFBUZZ, "hb_color_get_green"),
-            color_get_blue                           = apiGetFunctionAddress(HARFBUZZ, "hb_color_get_blue"),
-            blob_create                              = apiGetFunctionAddress(HARFBUZZ, "hb_blob_create"),
-            blob_create_or_fail                      = apiGetFunctionAddress(HARFBUZZ, "hb_blob_create_or_fail"),
-            blob_create_from_file                    = apiGetFunctionAddress(HARFBUZZ, "hb_blob_create_from_file"),
-            blob_create_from_file_or_fail            = apiGetFunctionAddress(HARFBUZZ, "hb_blob_create_from_file_or_fail"),
-            blob_create_sub_blob                     = apiGetFunctionAddress(HARFBUZZ, "hb_blob_create_sub_blob"),
-            blob_copy_writable_or_fail               = apiGetFunctionAddress(HARFBUZZ, "hb_blob_copy_writable_or_fail"),
-            blob_get_empty                           = apiGetFunctionAddress(HARFBUZZ, "hb_blob_get_empty"),
-            blob_reference                           = apiGetFunctionAddress(HARFBUZZ, "hb_blob_reference"),
-            blob_destroy                             = apiGetFunctionAddress(HARFBUZZ, "hb_blob_destroy"),
-            blob_set_user_data                       = apiGetFunctionAddress(HARFBUZZ, "hb_blob_set_user_data"),
-            blob_get_user_data                       = apiGetFunctionAddress(HARFBUZZ, "hb_blob_get_user_data"),
-            blob_make_immutable                      = apiGetFunctionAddress(HARFBUZZ, "hb_blob_make_immutable"),
-            blob_is_immutable                        = apiGetFunctionAddress(HARFBUZZ, "hb_blob_is_immutable"),
-            blob_get_length                          = apiGetFunctionAddress(HARFBUZZ, "hb_blob_get_length"),
-            blob_get_data                            = apiGetFunctionAddress(HARFBUZZ, "hb_blob_get_data"),
-            blob_get_data_writable                   = apiGetFunctionAddress(HARFBUZZ, "hb_blob_get_data_writable"),
-            segment_properties_equal                 = apiGetFunctionAddress(HARFBUZZ, "hb_segment_properties_equal"),
-            segment_properties_hash                  = apiGetFunctionAddress(HARFBUZZ, "hb_segment_properties_hash"),
-            segment_properties_overlay               = apiGetFunctionAddress(HARFBUZZ, "hb_segment_properties_overlay"),
-            buffer_create                            = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_create"),
-            buffer_create_similar                    = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_create_similar"),
-            buffer_reset                             = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_reset"),
-            buffer_get_empty                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_empty"),
-            buffer_reference                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_reference"),
-            buffer_destroy                           = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_destroy"),
-            buffer_set_user_data                     = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_user_data"),
-            buffer_get_user_data                     = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_user_data"),
-            buffer_set_content_type                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_content_type"),
-            buffer_get_content_type                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_content_type"),
-            buffer_set_unicode_funcs                 = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_unicode_funcs"),
-            buffer_get_unicode_funcs                 = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_unicode_funcs"),
-            buffer_set_direction                     = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_direction"),
-            buffer_get_direction                     = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_direction"),
-            buffer_set_script                        = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_script"),
-            buffer_get_script                        = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_script"),
-            buffer_set_language                      = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_language"),
-            buffer_get_language                      = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_language"),
-            buffer_set_segment_properties            = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_segment_properties"),
-            buffer_get_segment_properties            = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_segment_properties"),
-            buffer_guess_segment_properties          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_guess_segment_properties"),
-            buffer_set_flags                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_flags"),
-            buffer_get_flags                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_flags"),
-            buffer_set_cluster_level                 = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_cluster_level"),
-            buffer_get_cluster_level                 = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_cluster_level"),
-            buffer_set_replacement_codepoint         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_replacement_codepoint"),
-            buffer_get_replacement_codepoint         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_replacement_codepoint"),
-            buffer_set_invisible_glyph               = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_invisible_glyph"),
-            buffer_get_invisible_glyph               = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_invisible_glyph"),
-            buffer_set_not_found_glyph               = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_not_found_glyph"),
-            buffer_get_not_found_glyph               = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_not_found_glyph"),
-            buffer_clear_contents                    = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_clear_contents"),
-            buffer_pre_allocate                      = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_pre_allocate"),
-            buffer_allocation_successful             = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_allocation_successful"),
-            buffer_reverse                           = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_reverse"),
-            buffer_reverse_range                     = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_reverse_range"),
-            buffer_reverse_clusters                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_reverse_clusters"),
-            buffer_add                               = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add"),
-            buffer_add_utf8                          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add_utf8"),
-            buffer_add_utf16                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add_utf16"),
-            buffer_add_utf32                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add_utf32"),
-            buffer_add_latin1                        = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add_latin1"),
-            buffer_add_codepoints                    = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add_codepoints"),
-            buffer_append                            = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_append"),
-            buffer_set_length                        = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_length"),
-            buffer_get_length                        = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_length"),
-            buffer_get_glyph_infos                   = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_glyph_infos"),
-            buffer_get_glyph_positions               = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_glyph_positions"),
-            buffer_has_positions                     = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_has_positions"),
-            buffer_normalize_glyphs                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_normalize_glyphs"),
-            buffer_serialize_format_from_string      = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize_format_from_string"),
-            buffer_serialize_format_to_string        = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize_format_to_string"),
-            buffer_serialize_list_formats            = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize_list_formats"),
-            buffer_serialize_glyphs                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize_glyphs"),
-            buffer_serialize_unicode                 = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize_unicode"),
-            buffer_serialize                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize"),
-            buffer_deserialize_glyphs                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_deserialize_glyphs"),
-            buffer_deserialize_unicode               = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_deserialize_unicode"),
-            buffer_diff                              = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_diff"),
-            buffer_set_message_func                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_message_func"),
-            draw_funcs_set_move_to_func              = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_move_to_func"),
-            draw_funcs_set_line_to_func              = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_line_to_func"),
-            draw_funcs_set_quadratic_to_func         = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_quadratic_to_func"),
-            draw_funcs_set_cubic_to_func             = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_cubic_to_func"),
-            draw_funcs_set_close_path_func           = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_close_path_func"),
-            draw_funcs_create                        = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_create"),
-            draw_funcs_reference                     = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_reference"),
-            draw_funcs_destroy                       = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_destroy"),
-            draw_funcs_make_immutable                = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_make_immutable"),
-            draw_funcs_is_immutable                  = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_is_immutable"),
-            draw_move_to                             = apiGetFunctionAddress(HARFBUZZ, "hb_draw_move_to"),
-            draw_line_to                             = apiGetFunctionAddress(HARFBUZZ, "hb_draw_line_to"),
-            draw_quadratic_to                        = apiGetFunctionAddress(HARFBUZZ, "hb_draw_quadratic_to"),
-            draw_cubic_to                            = apiGetFunctionAddress(HARFBUZZ, "hb_draw_cubic_to"),
-            draw_close_path                          = apiGetFunctionAddress(HARFBUZZ, "hb_draw_close_path"),
-            face_count                               = apiGetFunctionAddress(HARFBUZZ, "hb_face_count"),
-            face_create                              = apiGetFunctionAddress(HARFBUZZ, "hb_face_create"),
-            face_create_for_tables                   = apiGetFunctionAddress(HARFBUZZ, "hb_face_create_for_tables"),
-            face_get_empty                           = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_empty"),
-            face_reference                           = apiGetFunctionAddress(HARFBUZZ, "hb_face_reference"),
-            face_destroy                             = apiGetFunctionAddress(HARFBUZZ, "hb_face_destroy"),
-            face_set_user_data                       = apiGetFunctionAddress(HARFBUZZ, "hb_face_set_user_data"),
-            face_get_user_data                       = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_user_data"),
-            face_make_immutable                      = apiGetFunctionAddress(HARFBUZZ, "hb_face_make_immutable"),
-            face_is_immutable                        = apiGetFunctionAddress(HARFBUZZ, "hb_face_is_immutable"),
-            face_reference_table                     = apiGetFunctionAddress(HARFBUZZ, "hb_face_reference_table"),
-            face_reference_blob                      = apiGetFunctionAddress(HARFBUZZ, "hb_face_reference_blob"),
-            face_set_index                           = apiGetFunctionAddress(HARFBUZZ, "hb_face_set_index"),
-            face_get_index                           = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_index"),
-            face_set_upem                            = apiGetFunctionAddress(HARFBUZZ, "hb_face_set_upem"),
-            face_get_upem                            = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_upem"),
-            face_set_glyph_count                     = apiGetFunctionAddress(HARFBUZZ, "hb_face_set_glyph_count"),
-            face_get_glyph_count                     = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_glyph_count"),
-            face_get_table_tags                      = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_table_tags"),
-            face_collect_unicodes                    = apiGetFunctionAddress(HARFBUZZ, "hb_face_collect_unicodes"),
-            face_collect_variation_selectors         = apiGetFunctionAddress(HARFBUZZ, "hb_face_collect_variation_selectors"),
-            face_collect_variation_unicodes          = apiGetFunctionAddress(HARFBUZZ, "hb_face_collect_variation_unicodes"),
-            face_builder_create                      = apiGetFunctionAddress(HARFBUZZ, "hb_face_builder_create"),
-            face_builder_add_table                   = apiGetFunctionAddress(HARFBUZZ, "hb_face_builder_add_table"),
-            face_builder_sort_tables                 = apiGetFunctionAddress(HARFBUZZ, "hb_face_builder_sort_tables"),
-            font_funcs_create                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_create"),
-            font_funcs_get_empty                     = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_get_empty"),
-            font_funcs_reference                     = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_reference"),
-            font_funcs_destroy                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_destroy"),
-            font_funcs_set_user_data                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_user_data"),
-            font_funcs_get_user_data                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_get_user_data"),
-            font_funcs_make_immutable                = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_make_immutable"),
-            font_funcs_is_immutable                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_is_immutable"),
-            font_funcs_set_font_h_extents_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_font_h_extents_func"),
-            font_funcs_set_font_v_extents_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_font_v_extents_func"),
-            font_funcs_set_nominal_glyph_func        = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_nominal_glyph_func"),
-            font_funcs_set_nominal_glyphs_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_nominal_glyphs_func"),
-            font_funcs_set_variation_glyph_func      = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_variation_glyph_func"),
-            font_funcs_set_glyph_h_advance_func      = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_h_advance_func"),
-            font_funcs_set_glyph_v_advance_func      = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_v_advance_func"),
-            font_funcs_set_glyph_h_advances_func     = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_h_advances_func"),
-            font_funcs_set_glyph_v_advances_func     = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_v_advances_func"),
-            font_funcs_set_glyph_h_origin_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_h_origin_func"),
-            font_funcs_set_glyph_v_origin_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_v_origin_func"),
-            font_funcs_set_glyph_h_kerning_func      = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_h_kerning_func"),
-            font_funcs_set_glyph_extents_func        = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_extents_func"),
-            font_funcs_set_glyph_contour_point_func  = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_contour_point_func"),
-            font_funcs_set_glyph_name_func           = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_name_func"),
-            font_funcs_set_glyph_from_name_func      = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_from_name_func"),
-            font_funcs_set_glyph_shape_func          = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_shape_func"),
-            font_get_h_extents                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_h_extents"),
-            font_get_v_extents                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_v_extents"),
-            font_get_nominal_glyph                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_nominal_glyph"),
-            font_get_variation_glyph                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_variation_glyph"),
-            font_get_nominal_glyphs                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_nominal_glyphs"),
-            font_get_glyph_h_advance                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_h_advance"),
-            font_get_glyph_v_advance                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_v_advance"),
-            font_get_glyph_h_advances                = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_h_advances"),
-            font_get_glyph_v_advances                = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_v_advances"),
-            font_get_glyph_h_origin                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_h_origin"),
-            font_get_glyph_v_origin                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_v_origin"),
-            font_get_glyph_h_kerning                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_h_kerning"),
-            font_get_glyph_extents                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_extents"),
-            font_get_glyph_contour_point             = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_contour_point"),
-            font_get_glyph_name                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_name"),
-            font_get_glyph_from_name                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_from_name"),
-            font_get_glyph_shape                     = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_shape"),
-            font_get_glyph                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph"),
-            font_get_extents_for_direction           = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_extents_for_direction"),
-            font_get_glyph_advance_for_direction     = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_advance_for_direction"),
-            font_get_glyph_advances_for_direction    = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_advances_for_direction"),
-            font_get_glyph_origin_for_direction      = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_origin_for_direction"),
-            font_add_glyph_origin_for_direction      = apiGetFunctionAddress(HARFBUZZ, "hb_font_add_glyph_origin_for_direction"),
-            font_subtract_glyph_origin_for_direction = apiGetFunctionAddress(HARFBUZZ, "hb_font_subtract_glyph_origin_for_direction"),
-            font_get_glyph_kerning_for_direction     = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_kerning_for_direction"),
-            font_get_glyph_extents_for_origin        = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_extents_for_origin"),
-            font_get_glyph_contour_point_for_origin  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_contour_point_for_origin"),
-            font_glyph_to_string                     = apiGetFunctionAddress(HARFBUZZ, "hb_font_glyph_to_string"),
-            font_glyph_from_string                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_glyph_from_string"),
-            font_create                              = apiGetFunctionAddress(HARFBUZZ, "hb_font_create"),
-            font_create_sub_font                     = apiGetFunctionAddress(HARFBUZZ, "hb_font_create_sub_font"),
-            font_get_empty                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_empty"),
-            font_reference                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_reference"),
-            font_destroy                             = apiGetFunctionAddress(HARFBUZZ, "hb_font_destroy"),
-            font_set_user_data                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_user_data"),
-            font_get_user_data                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_user_data"),
-            font_make_immutable                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_make_immutable"),
-            font_is_immutable                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_is_immutable"),
-            font_get_serial                          = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_serial"),
-            font_changed                             = apiGetFunctionAddress(HARFBUZZ, "hb_font_changed"),
-            font_set_parent                          = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_parent"),
-            font_get_parent                          = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_parent"),
-            font_set_face                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_face"),
-            font_get_face                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_face"),
-            font_set_funcs                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_funcs"),
-            font_set_funcs_data                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_funcs_data"),
-            font_set_scale                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_scale"),
-            font_get_scale                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_scale"),
-            font_set_ppem                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_ppem"),
-            font_get_ppem                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_ppem"),
-            font_set_ptem                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_ptem"),
-            font_get_ptem                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_ptem"),
-            font_set_synthetic_slant                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_synthetic_slant"),
-            font_get_synthetic_slant                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_synthetic_slant"),
-            font_set_variations                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_variations"),
-            font_set_var_coords_design               = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_coords_design"),
-            font_get_var_coords_design               = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_var_coords_design"),
-            font_set_var_coords_normalized           = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_coords_normalized"),
-            font_get_var_coords_normalized           = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_var_coords_normalized"),
-            font_set_var_named_instance              = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_named_instance"),
-            ft_face_create                           = HARFBUZZ.getFunctionAddress("hb_ft_face_create"),
-            ft_face_create_cached                    = HARFBUZZ.getFunctionAddress("hb_ft_face_create_cached"),
-            ft_face_create_referenced                = HARFBUZZ.getFunctionAddress("hb_ft_face_create_referenced"),
-            ft_font_create                           = HARFBUZZ.getFunctionAddress("hb_ft_font_create"),
-            ft_font_create_referenced                = HARFBUZZ.getFunctionAddress("hb_ft_font_create_referenced"),
-            ft_font_get_face                         = HARFBUZZ.getFunctionAddress("hb_ft_font_get_face"),
-            ft_font_lock_face                        = HARFBUZZ.getFunctionAddress("hb_ft_font_lock_face"),
-            ft_font_unlock_face                      = HARFBUZZ.getFunctionAddress("hb_ft_font_unlock_face"),
-            ft_font_set_load_flags                   = HARFBUZZ.getFunctionAddress("hb_ft_font_set_load_flags"),
-            ft_font_get_load_flags                   = HARFBUZZ.getFunctionAddress("hb_ft_font_get_load_flags"),
-            ft_font_changed                          = HARFBUZZ.getFunctionAddress("hb_ft_font_changed"),
-            ft_hb_font_changed                       = HARFBUZZ.getFunctionAddress("hb_ft_hb_font_changed"),
-            ft_font_set_funcs                        = HARFBUZZ.getFunctionAddress("hb_ft_font_set_funcs"),
-            map_create                               = apiGetFunctionAddress(HARFBUZZ, "hb_map_create"),
-            map_get_empty                            = apiGetFunctionAddress(HARFBUZZ, "hb_map_get_empty"),
-            map_reference                            = apiGetFunctionAddress(HARFBUZZ, "hb_map_reference"),
-            map_destroy                              = apiGetFunctionAddress(HARFBUZZ, "hb_map_destroy"),
-            map_set_user_data                        = apiGetFunctionAddress(HARFBUZZ, "hb_map_set_user_data"),
-            map_get_user_data                        = apiGetFunctionAddress(HARFBUZZ, "hb_map_get_user_data"),
-            map_allocation_successful                = apiGetFunctionAddress(HARFBUZZ, "hb_map_allocation_successful"),
-            map_copy                                 = apiGetFunctionAddress(HARFBUZZ, "hb_map_copy"),
-            map_clear                                = apiGetFunctionAddress(HARFBUZZ, "hb_map_clear"),
-            map_is_empty                             = apiGetFunctionAddress(HARFBUZZ, "hb_map_is_empty"),
-            map_get_population                       = apiGetFunctionAddress(HARFBUZZ, "hb_map_get_population"),
-            map_is_equal                             = apiGetFunctionAddress(HARFBUZZ, "hb_map_is_equal"),
-            map_hash                                 = apiGetFunctionAddress(HARFBUZZ, "hb_map_hash"),
-            map_set                                  = apiGetFunctionAddress(HARFBUZZ, "hb_map_set"),
-            map_get                                  = apiGetFunctionAddress(HARFBUZZ, "hb_map_get"),
-            map_del                                  = apiGetFunctionAddress(HARFBUZZ, "hb_map_del"),
-            map_has                                  = apiGetFunctionAddress(HARFBUZZ, "hb_map_has"),
-            set_create                               = apiGetFunctionAddress(HARFBUZZ, "hb_set_create"),
-            set_get_empty                            = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_empty"),
-            set_reference                            = apiGetFunctionAddress(HARFBUZZ, "hb_set_reference"),
-            set_destroy                              = apiGetFunctionAddress(HARFBUZZ, "hb_set_destroy"),
-            set_set_user_data                        = apiGetFunctionAddress(HARFBUZZ, "hb_set_set_user_data"),
-            set_get_user_data                        = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_user_data"),
-            set_allocation_successful                = apiGetFunctionAddress(HARFBUZZ, "hb_set_allocation_successful"),
-            set_copy                                 = apiGetFunctionAddress(HARFBUZZ, "hb_set_copy"),
-            set_clear                                = apiGetFunctionAddress(HARFBUZZ, "hb_set_clear"),
-            set_is_empty                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_is_empty"),
-            set_invert                               = apiGetFunctionAddress(HARFBUZZ, "hb_set_invert"),
-            set_has                                  = apiGetFunctionAddress(HARFBUZZ, "hb_set_has"),
-            set_add                                  = apiGetFunctionAddress(HARFBUZZ, "hb_set_add"),
-            set_add_range                            = apiGetFunctionAddress(HARFBUZZ, "hb_set_add_range"),
-            set_add_sorted_array                     = apiGetFunctionAddress(HARFBUZZ, "hb_set_add_sorted_array"),
-            set_del                                  = apiGetFunctionAddress(HARFBUZZ, "hb_set_del"),
-            set_del_range                            = apiGetFunctionAddress(HARFBUZZ, "hb_set_del_range"),
-            set_is_equal                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_is_equal"),
-            set_hash                                 = apiGetFunctionAddress(HARFBUZZ, "hb_set_hash"),
-            set_is_subset                            = apiGetFunctionAddress(HARFBUZZ, "hb_set_is_subset"),
-            set_set                                  = apiGetFunctionAddress(HARFBUZZ, "hb_set_set"),
-            set_union                                = apiGetFunctionAddress(HARFBUZZ, "hb_set_union"),
-            set_intersect                            = apiGetFunctionAddress(HARFBUZZ, "hb_set_intersect"),
-            set_subtract                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_subtract"),
-            set_symmetric_difference                 = apiGetFunctionAddress(HARFBUZZ, "hb_set_symmetric_difference"),
-            set_get_population                       = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_population"),
-            set_get_min                              = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_min"),
-            set_get_max                              = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_max"),
-            set_next                                 = apiGetFunctionAddress(HARFBUZZ, "hb_set_next"),
-            set_previous                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_previous"),
-            set_next_range                           = apiGetFunctionAddress(HARFBUZZ, "hb_set_next_range"),
-            set_previous_range                       = apiGetFunctionAddress(HARFBUZZ, "hb_set_previous_range"),
-            set_next_many                            = apiGetFunctionAddress(HARFBUZZ, "hb_set_next_many"),
-            shape                                    = apiGetFunctionAddress(HARFBUZZ, "hb_shape"),
-            shape_full                               = apiGetFunctionAddress(HARFBUZZ, "hb_shape_full"),
-            shape_list_shapers                       = apiGetFunctionAddress(HARFBUZZ, "hb_shape_list_shapers"),
-            shape_plan_create                        = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_create"),
-            shape_plan_create_cached                 = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_create_cached"),
-            shape_plan_create2                       = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_create2"),
-            shape_plan_create_cached2                = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_create_cached2"),
-            shape_plan_get_empty                     = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_get_empty"),
-            shape_plan_reference                     = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_reference"),
-            shape_plan_destroy                       = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_destroy"),
-            shape_plan_set_user_data                 = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_set_user_data"),
-            shape_plan_get_user_data                 = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_get_user_data"),
-            shape_plan_execute                       = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_execute"),
-            shape_plan_get_shaper                    = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_get_shaper"),
-            style_get_value                          = apiGetFunctionAddress(HARFBUZZ, "hb_style_get_value"),
-            unicode_funcs_get_default                = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_get_default"),
-            unicode_funcs_create                     = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_create"),
-            unicode_funcs_get_empty                  = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_get_empty"),
-            unicode_funcs_reference                  = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_reference"),
-            unicode_funcs_destroy                    = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_destroy"),
-            unicode_funcs_set_user_data              = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_user_data"),
-            unicode_funcs_get_user_data              = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_get_user_data"),
-            unicode_funcs_make_immutable             = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_make_immutable"),
-            unicode_funcs_is_immutable               = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_is_immutable"),
-            unicode_funcs_get_parent                 = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_get_parent"),
-            unicode_funcs_set_combining_class_func   = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_combining_class_func"),
-            unicode_funcs_set_general_category_func  = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_general_category_func"),
-            unicode_funcs_set_mirroring_func         = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_mirroring_func"),
-            unicode_funcs_set_script_func            = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_script_func"),
-            unicode_funcs_set_compose_func           = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_compose_func"),
-            unicode_funcs_set_decompose_func         = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_decompose_func"),
-            unicode_combining_class                  = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_combining_class"),
-            unicode_general_category                 = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_general_category"),
-            unicode_mirroring                        = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_mirroring"),
-            unicode_script                           = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_script"),
-            unicode_compose                          = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_compose"),
-            unicode_decompose                        = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_decompose"),
-            version                                  = apiGetFunctionAddress(HARFBUZZ, "hb_version"),
-            version_string                           = apiGetFunctionAddress(HARFBUZZ, "hb_version_string"),
-            version_atleast                          = apiGetFunctionAddress(HARFBUZZ, "hb_version_atleast");
+            tag_from_string                           = apiGetFunctionAddress(HARFBUZZ, "hb_tag_from_string"),
+            tag_to_string                             = apiGetFunctionAddress(HARFBUZZ, "hb_tag_to_string"),
+            direction_from_string                     = apiGetFunctionAddress(HARFBUZZ, "hb_direction_from_string"),
+            direction_to_string                       = apiGetFunctionAddress(HARFBUZZ, "hb_direction_to_string"),
+            language_from_string                      = apiGetFunctionAddress(HARFBUZZ, "hb_language_from_string"),
+            language_to_string                        = apiGetFunctionAddress(HARFBUZZ, "hb_language_to_string"),
+            language_get_default                      = apiGetFunctionAddress(HARFBUZZ, "hb_language_get_default"),
+            language_matches                          = apiGetFunctionAddress(HARFBUZZ, "hb_language_matches"),
+            script_from_iso15924_tag                  = apiGetFunctionAddress(HARFBUZZ, "hb_script_from_iso15924_tag"),
+            script_from_string                        = apiGetFunctionAddress(HARFBUZZ, "hb_script_from_string"),
+            script_to_iso15924_tag                    = apiGetFunctionAddress(HARFBUZZ, "hb_script_to_iso15924_tag"),
+            script_get_horizontal_direction           = apiGetFunctionAddress(HARFBUZZ, "hb_script_get_horizontal_direction"),
+            feature_from_string                       = apiGetFunctionAddress(HARFBUZZ, "hb_feature_from_string"),
+            feature_to_string                         = apiGetFunctionAddress(HARFBUZZ, "hb_feature_to_string"),
+            variation_from_string                     = apiGetFunctionAddress(HARFBUZZ, "hb_variation_from_string"),
+            variation_to_string                       = apiGetFunctionAddress(HARFBUZZ, "hb_variation_to_string"),
+            color_get_alpha                           = apiGetFunctionAddress(HARFBUZZ, "hb_color_get_alpha"),
+            color_get_red                             = apiGetFunctionAddress(HARFBUZZ, "hb_color_get_red"),
+            color_get_green                           = apiGetFunctionAddress(HARFBUZZ, "hb_color_get_green"),
+            color_get_blue                            = apiGetFunctionAddress(HARFBUZZ, "hb_color_get_blue"),
+            blob_create                               = apiGetFunctionAddress(HARFBUZZ, "hb_blob_create"),
+            blob_create_or_fail                       = apiGetFunctionAddress(HARFBUZZ, "hb_blob_create_or_fail"),
+            blob_create_from_file                     = apiGetFunctionAddress(HARFBUZZ, "hb_blob_create_from_file"),
+            blob_create_from_file_or_fail             = apiGetFunctionAddress(HARFBUZZ, "hb_blob_create_from_file_or_fail"),
+            blob_create_sub_blob                      = apiGetFunctionAddress(HARFBUZZ, "hb_blob_create_sub_blob"),
+            blob_copy_writable_or_fail                = apiGetFunctionAddress(HARFBUZZ, "hb_blob_copy_writable_or_fail"),
+            blob_get_empty                            = apiGetFunctionAddress(HARFBUZZ, "hb_blob_get_empty"),
+            blob_reference                            = apiGetFunctionAddress(HARFBUZZ, "hb_blob_reference"),
+            blob_destroy                              = apiGetFunctionAddress(HARFBUZZ, "hb_blob_destroy"),
+            blob_set_user_data                        = apiGetFunctionAddress(HARFBUZZ, "hb_blob_set_user_data"),
+            blob_get_user_data                        = apiGetFunctionAddress(HARFBUZZ, "hb_blob_get_user_data"),
+            blob_make_immutable                       = apiGetFunctionAddress(HARFBUZZ, "hb_blob_make_immutable"),
+            blob_is_immutable                         = apiGetFunctionAddress(HARFBUZZ, "hb_blob_is_immutable"),
+            blob_get_length                           = apiGetFunctionAddress(HARFBUZZ, "hb_blob_get_length"),
+            blob_get_data                             = apiGetFunctionAddress(HARFBUZZ, "hb_blob_get_data"),
+            blob_get_data_writable                    = apiGetFunctionAddress(HARFBUZZ, "hb_blob_get_data_writable"),
+            segment_properties_equal                  = apiGetFunctionAddress(HARFBUZZ, "hb_segment_properties_equal"),
+            segment_properties_hash                   = apiGetFunctionAddress(HARFBUZZ, "hb_segment_properties_hash"),
+            segment_properties_overlay                = apiGetFunctionAddress(HARFBUZZ, "hb_segment_properties_overlay"),
+            buffer_create                             = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_create"),
+            buffer_create_similar                     = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_create_similar"),
+            buffer_reset                              = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_reset"),
+            buffer_get_empty                          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_empty"),
+            buffer_reference                          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_reference"),
+            buffer_destroy                            = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_destroy"),
+            buffer_set_user_data                      = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_user_data"),
+            buffer_get_user_data                      = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_user_data"),
+            buffer_set_content_type                   = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_content_type"),
+            buffer_get_content_type                   = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_content_type"),
+            buffer_set_unicode_funcs                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_unicode_funcs"),
+            buffer_get_unicode_funcs                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_unicode_funcs"),
+            buffer_set_direction                      = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_direction"),
+            buffer_get_direction                      = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_direction"),
+            buffer_set_script                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_script"),
+            buffer_get_script                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_script"),
+            buffer_set_language                       = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_language"),
+            buffer_get_language                       = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_language"),
+            buffer_set_segment_properties             = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_segment_properties"),
+            buffer_get_segment_properties             = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_segment_properties"),
+            buffer_guess_segment_properties           = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_guess_segment_properties"),
+            buffer_set_flags                          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_flags"),
+            buffer_get_flags                          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_flags"),
+            buffer_set_cluster_level                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_cluster_level"),
+            buffer_get_cluster_level                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_cluster_level"),
+            buffer_set_replacement_codepoint          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_replacement_codepoint"),
+            buffer_get_replacement_codepoint          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_replacement_codepoint"),
+            buffer_set_invisible_glyph                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_invisible_glyph"),
+            buffer_get_invisible_glyph                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_invisible_glyph"),
+            buffer_set_not_found_glyph                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_not_found_glyph"),
+            buffer_get_not_found_glyph                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_not_found_glyph"),
+            buffer_clear_contents                     = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_clear_contents"),
+            buffer_pre_allocate                       = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_pre_allocate"),
+            buffer_allocation_successful              = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_allocation_successful"),
+            buffer_reverse                            = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_reverse"),
+            buffer_reverse_range                      = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_reverse_range"),
+            buffer_reverse_clusters                   = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_reverse_clusters"),
+            buffer_add                                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add"),
+            buffer_add_utf8                           = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add_utf8"),
+            buffer_add_utf16                          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add_utf16"),
+            buffer_add_utf32                          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add_utf32"),
+            buffer_add_latin1                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add_latin1"),
+            buffer_add_codepoints                     = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_add_codepoints"),
+            buffer_append                             = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_append"),
+            buffer_set_length                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_length"),
+            buffer_get_length                         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_length"),
+            buffer_get_glyph_infos                    = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_glyph_infos"),
+            buffer_get_glyph_positions                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_get_glyph_positions"),
+            buffer_has_positions                      = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_has_positions"),
+            buffer_normalize_glyphs                   = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_normalize_glyphs"),
+            buffer_serialize_format_from_string       = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize_format_from_string"),
+            buffer_serialize_format_to_string         = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize_format_to_string"),
+            buffer_serialize_list_formats             = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize_list_formats"),
+            buffer_serialize_glyphs                   = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize_glyphs"),
+            buffer_serialize_unicode                  = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize_unicode"),
+            buffer_serialize                          = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_serialize"),
+            buffer_deserialize_glyphs                 = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_deserialize_glyphs"),
+            buffer_deserialize_unicode                = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_deserialize_unicode"),
+            buffer_diff                               = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_diff"),
+            buffer_set_message_func                   = apiGetFunctionAddress(HARFBUZZ, "hb_buffer_set_message_func"),
+            draw_funcs_set_move_to_func               = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_move_to_func"),
+            draw_funcs_set_line_to_func               = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_line_to_func"),
+            draw_funcs_set_quadratic_to_func          = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_quadratic_to_func"),
+            draw_funcs_set_cubic_to_func              = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_cubic_to_func"),
+            draw_funcs_set_close_path_func            = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_close_path_func"),
+            draw_funcs_create                         = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_create"),
+            draw_funcs_get_empty                      = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_get_empty"),
+            draw_funcs_reference                      = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_reference"),
+            draw_funcs_destroy                        = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_destroy"),
+            draw_funcs_set_user_data                  = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_set_user_data"),
+            draw_funcs_get_user_data                  = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_get_user_data"),
+            draw_funcs_make_immutable                 = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_make_immutable"),
+            draw_funcs_is_immutable                   = apiGetFunctionAddress(HARFBUZZ, "hb_draw_funcs_is_immutable"),
+            draw_move_to                              = apiGetFunctionAddress(HARFBUZZ, "hb_draw_move_to"),
+            draw_line_to                              = apiGetFunctionAddress(HARFBUZZ, "hb_draw_line_to"),
+            draw_quadratic_to                         = apiGetFunctionAddress(HARFBUZZ, "hb_draw_quadratic_to"),
+            draw_cubic_to                             = apiGetFunctionAddress(HARFBUZZ, "hb_draw_cubic_to"),
+            draw_close_path                           = apiGetFunctionAddress(HARFBUZZ, "hb_draw_close_path"),
+            face_count                                = apiGetFunctionAddress(HARFBUZZ, "hb_face_count"),
+            face_create                               = apiGetFunctionAddress(HARFBUZZ, "hb_face_create"),
+            face_create_for_tables                    = apiGetFunctionAddress(HARFBUZZ, "hb_face_create_for_tables"),
+            face_get_empty                            = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_empty"),
+            face_reference                            = apiGetFunctionAddress(HARFBUZZ, "hb_face_reference"),
+            face_destroy                              = apiGetFunctionAddress(HARFBUZZ, "hb_face_destroy"),
+            face_set_user_data                        = apiGetFunctionAddress(HARFBUZZ, "hb_face_set_user_data"),
+            face_get_user_data                        = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_user_data"),
+            face_make_immutable                       = apiGetFunctionAddress(HARFBUZZ, "hb_face_make_immutable"),
+            face_is_immutable                         = apiGetFunctionAddress(HARFBUZZ, "hb_face_is_immutable"),
+            face_reference_table                      = apiGetFunctionAddress(HARFBUZZ, "hb_face_reference_table"),
+            face_reference_blob                       = apiGetFunctionAddress(HARFBUZZ, "hb_face_reference_blob"),
+            face_set_index                            = apiGetFunctionAddress(HARFBUZZ, "hb_face_set_index"),
+            face_get_index                            = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_index"),
+            face_set_upem                             = apiGetFunctionAddress(HARFBUZZ, "hb_face_set_upem"),
+            face_get_upem                             = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_upem"),
+            face_set_glyph_count                      = apiGetFunctionAddress(HARFBUZZ, "hb_face_set_glyph_count"),
+            face_get_glyph_count                      = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_glyph_count"),
+            face_get_table_tags                       = apiGetFunctionAddress(HARFBUZZ, "hb_face_get_table_tags"),
+            face_collect_unicodes                     = apiGetFunctionAddress(HARFBUZZ, "hb_face_collect_unicodes"),
+            face_collect_nominal_glyph_mapping        = apiGetFunctionAddress(HARFBUZZ, "hb_face_collect_nominal_glyph_mapping"),
+            face_collect_variation_selectors          = apiGetFunctionAddress(HARFBUZZ, "hb_face_collect_variation_selectors"),
+            face_collect_variation_unicodes           = apiGetFunctionAddress(HARFBUZZ, "hb_face_collect_variation_unicodes"),
+            face_builder_create                       = apiGetFunctionAddress(HARFBUZZ, "hb_face_builder_create"),
+            face_builder_add_table                    = apiGetFunctionAddress(HARFBUZZ, "hb_face_builder_add_table"),
+            face_builder_sort_tables                  = apiGetFunctionAddress(HARFBUZZ, "hb_face_builder_sort_tables"),
+            font_funcs_create                         = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_create"),
+            font_funcs_get_empty                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_get_empty"),
+            font_funcs_reference                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_reference"),
+            font_funcs_destroy                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_destroy"),
+            font_funcs_set_user_data                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_user_data"),
+            font_funcs_get_user_data                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_get_user_data"),
+            font_funcs_make_immutable                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_make_immutable"),
+            font_funcs_is_immutable                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_is_immutable"),
+            font_funcs_set_font_h_extents_func        = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_font_h_extents_func"),
+            font_funcs_set_font_v_extents_func        = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_font_v_extents_func"),
+            font_funcs_set_nominal_glyph_func         = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_nominal_glyph_func"),
+            font_funcs_set_nominal_glyphs_func        = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_nominal_glyphs_func"),
+            font_funcs_set_variation_glyph_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_variation_glyph_func"),
+            font_funcs_set_glyph_h_advance_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_h_advance_func"),
+            font_funcs_set_glyph_v_advance_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_v_advance_func"),
+            font_funcs_set_glyph_h_advances_func      = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_h_advances_func"),
+            font_funcs_set_glyph_v_advances_func      = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_v_advances_func"),
+            font_funcs_set_glyph_h_origin_func        = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_h_origin_func"),
+            font_funcs_set_glyph_v_origin_func        = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_v_origin_func"),
+            font_funcs_set_glyph_h_kerning_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_h_kerning_func"),
+            font_funcs_set_glyph_extents_func         = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_extents_func"),
+            font_funcs_set_glyph_contour_point_func   = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_contour_point_func"),
+            font_funcs_set_glyph_name_func            = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_name_func"),
+            font_funcs_set_glyph_from_name_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_from_name_func"),
+            font_funcs_set_draw_glyph_func            = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_draw_glyph_func"),
+            hb_font_funcs_set_paint_glyph_func        = apiGetFunctionAddress(HARFBUZZ, "hb_hb_font_funcs_set_paint_glyph_func"),
+            font_get_h_extents                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_h_extents"),
+            font_get_v_extents                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_v_extents"),
+            font_get_nominal_glyph                    = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_nominal_glyph"),
+            font_get_variation_glyph                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_variation_glyph"),
+            font_get_nominal_glyphs                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_nominal_glyphs"),
+            font_get_glyph_h_advance                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_h_advance"),
+            font_get_glyph_v_advance                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_v_advance"),
+            font_get_glyph_h_advances                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_h_advances"),
+            font_get_glyph_v_advances                 = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_v_advances"),
+            font_get_glyph_h_origin                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_h_origin"),
+            font_get_glyph_v_origin                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_v_origin"),
+            font_get_glyph_h_kerning                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_h_kerning"),
+            font_get_glyph_extents                    = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_extents"),
+            font_get_glyph_contour_point              = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_contour_point"),
+            font_get_glyph_name                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_name"),
+            font_get_glyph_from_name                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_from_name"),
+            font_get_glyph_shape                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_shape"),
+            font_draw_glyph                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_draw_glyph"),
+            font_paint_glyph                          = apiGetFunctionAddress(HARFBUZZ, "hb_font_paint_glyph"),
+            font_get_glyph                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph"),
+            font_get_extents_for_direction            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_extents_for_direction"),
+            font_get_glyph_advance_for_direction      = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_advance_for_direction"),
+            font_get_glyph_advances_for_direction     = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_advances_for_direction"),
+            font_get_glyph_origin_for_direction       = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_origin_for_direction"),
+            font_add_glyph_origin_for_direction       = apiGetFunctionAddress(HARFBUZZ, "hb_font_add_glyph_origin_for_direction"),
+            font_subtract_glyph_origin_for_direction  = apiGetFunctionAddress(HARFBUZZ, "hb_font_subtract_glyph_origin_for_direction"),
+            font_get_glyph_kerning_for_direction      = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_kerning_for_direction"),
+            font_get_glyph_extents_for_origin         = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_extents_for_origin"),
+            font_get_glyph_contour_point_for_origin   = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_glyph_contour_point_for_origin"),
+            font_glyph_to_string                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_glyph_to_string"),
+            font_glyph_from_string                    = apiGetFunctionAddress(HARFBUZZ, "hb_font_glyph_from_string"),
+            font_create                               = apiGetFunctionAddress(HARFBUZZ, "hb_font_create"),
+            font_create_sub_font                      = apiGetFunctionAddress(HARFBUZZ, "hb_font_create_sub_font"),
+            font_get_empty                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_empty"),
+            font_reference                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_reference"),
+            font_destroy                              = apiGetFunctionAddress(HARFBUZZ, "hb_font_destroy"),
+            font_set_user_data                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_user_data"),
+            font_get_user_data                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_user_data"),
+            font_make_immutable                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_make_immutable"),
+            font_is_immutable                         = apiGetFunctionAddress(HARFBUZZ, "hb_font_is_immutable"),
+            font_get_serial                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_serial"),
+            font_changed                              = apiGetFunctionAddress(HARFBUZZ, "hb_font_changed"),
+            font_set_parent                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_parent"),
+            font_get_parent                           = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_parent"),
+            font_set_face                             = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_face"),
+            font_get_face                             = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_face"),
+            font_set_funcs                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_funcs"),
+            font_set_funcs_data                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_funcs_data"),
+            font_set_scale                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_scale"),
+            font_get_scale                            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_scale"),
+            font_set_ppem                             = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_ppem"),
+            font_get_ppem                             = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_ppem"),
+            font_set_ptem                             = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_ptem"),
+            font_get_ptem                             = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_ptem"),
+            font_set_synthetic_bold                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_synthetic_bold"),
+            font_get_synthetic_bold                   = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_synthetic_bold"),
+            font_set_synthetic_slant                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_synthetic_slant"),
+            font_get_synthetic_slant                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_synthetic_slant"),
+            font_set_variations                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_variations"),
+            font_set_var_coords_design                = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_coords_design"),
+            font_get_var_coords_design                = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_var_coords_design"),
+            font_set_var_coords_normalized            = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_coords_normalized"),
+            font_get_var_coords_normalized            = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_var_coords_normalized"),
+            font_set_var_named_instance               = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_named_instance"),
+            font_get_var_named_instance               = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_var_named_instance"),
+            ft_face_create                            = HARFBUZZ.getFunctionAddress("hb_ft_face_create"),
+            ft_face_create_cached                     = HARFBUZZ.getFunctionAddress("hb_ft_face_create_cached"),
+            ft_face_create_referenced                 = HARFBUZZ.getFunctionAddress("hb_ft_face_create_referenced"),
+            ft_font_create                            = HARFBUZZ.getFunctionAddress("hb_ft_font_create"),
+            ft_font_create_referenced                 = HARFBUZZ.getFunctionAddress("hb_ft_font_create_referenced"),
+            ft_font_get_face                          = HARFBUZZ.getFunctionAddress("hb_ft_font_get_face"),
+            ft_font_lock_face                         = HARFBUZZ.getFunctionAddress("hb_ft_font_lock_face"),
+            ft_font_unlock_face                       = HARFBUZZ.getFunctionAddress("hb_ft_font_unlock_face"),
+            ft_font_set_load_flags                    = HARFBUZZ.getFunctionAddress("hb_ft_font_set_load_flags"),
+            ft_font_get_load_flags                    = HARFBUZZ.getFunctionAddress("hb_ft_font_get_load_flags"),
+            ft_font_changed                           = HARFBUZZ.getFunctionAddress("hb_ft_font_changed"),
+            ft_hb_font_changed                        = HARFBUZZ.getFunctionAddress("hb_ft_hb_font_changed"),
+            ft_font_set_funcs                         = HARFBUZZ.getFunctionAddress("hb_ft_font_set_funcs"),
+            map_create                                = apiGetFunctionAddress(HARFBUZZ, "hb_map_create"),
+            map_get_empty                             = apiGetFunctionAddress(HARFBUZZ, "hb_map_get_empty"),
+            map_reference                             = apiGetFunctionAddress(HARFBUZZ, "hb_map_reference"),
+            map_destroy                               = apiGetFunctionAddress(HARFBUZZ, "hb_map_destroy"),
+            map_set_user_data                         = apiGetFunctionAddress(HARFBUZZ, "hb_map_set_user_data"),
+            map_get_user_data                         = apiGetFunctionAddress(HARFBUZZ, "hb_map_get_user_data"),
+            map_allocation_successful                 = apiGetFunctionAddress(HARFBUZZ, "hb_map_allocation_successful"),
+            map_copy                                  = apiGetFunctionAddress(HARFBUZZ, "hb_map_copy"),
+            map_clear                                 = apiGetFunctionAddress(HARFBUZZ, "hb_map_clear"),
+            map_is_empty                              = apiGetFunctionAddress(HARFBUZZ, "hb_map_is_empty"),
+            map_get_population                        = apiGetFunctionAddress(HARFBUZZ, "hb_map_get_population"),
+            map_is_equal                              = apiGetFunctionAddress(HARFBUZZ, "hb_map_is_equal"),
+            map_hash                                  = apiGetFunctionAddress(HARFBUZZ, "hb_map_hash"),
+            map_set                                   = apiGetFunctionAddress(HARFBUZZ, "hb_map_set"),
+            map_get                                   = apiGetFunctionAddress(HARFBUZZ, "hb_map_get"),
+            map_del                                   = apiGetFunctionAddress(HARFBUZZ, "hb_map_del"),
+            map_has                                   = apiGetFunctionAddress(HARFBUZZ, "hb_map_has"),
+            map_update                                = apiGetFunctionAddress(HARFBUZZ, "hb_map_update"),
+            map_next                                  = apiGetFunctionAddress(HARFBUZZ, "hb_map_next"),
+            map_keys                                  = apiGetFunctionAddress(HARFBUZZ, "hb_map_keys"),
+            map_values                                = apiGetFunctionAddress(HARFBUZZ, "hb_map_values"),
+            paint_funcs_create                        = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_create"),
+            paint_funcs_get_empty                     = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_get_empty"),
+            paint_funcs_reference                     = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_reference"),
+            paint_funcs_destroy                       = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_destroy"),
+            paint_funcs_set_user_data                 = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_user_data"),
+            paint_funcs_get_user_data                 = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_get_user_data"),
+            paint_funcs_make_immutable                = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_make_immutable"),
+            paint_funcs_is_immutable                  = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_is_immutable"),
+            color_line_get_color_stops                = apiGetFunctionAddress(HARFBUZZ, "hb_color_line_get_color_stops"),
+            color_line_get_extend                     = apiGetFunctionAddress(HARFBUZZ, "hb_color_line_get_extend"),
+            paint_funcs_set_push_transform_func       = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_transform_func"),
+            paint_funcs_set_pop_transform_func        = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_pop_transform_func"),
+            paint_funcs_set_push_clip_glyph_func      = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_clip_glyph_func"),
+            paint_funcs_set_push_clip_rectangle_func  = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_clip_rectangle_func"),
+            paint_funcs_set_pop_clip_func             = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_pop_clip_func"),
+            paint_funcs_set_color_func                = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_color_func"),
+            paint_funcs_set_image_func                = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_image_func"),
+            paint_funcs_set_linear_gradient_func      = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_linear_gradient_func"),
+            paint_funcs_set_radial_gradient_func      = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_radial_gradient_func"),
+            paint_funcs_set_sweep_gradient_func       = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_sweep_gradient_func"),
+            paint_funcs_set_push_group_func           = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_push_group_func"),
+            paint_funcs_set_pop_group_func            = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_pop_group_func"),
+            paint_funcs_set_custom_palette_color_func = apiGetFunctionAddress(HARFBUZZ, "hb_paint_funcs_set_custom_palette_color_func"),
+            paint_push_transform                      = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_transform"),
+            paint_pop_transform                       = apiGetFunctionAddress(HARFBUZZ, "hb_paint_pop_transform"),
+            paint_push_clip_glyph                     = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_clip_glyph"),
+            paint_push_clip_rectangle                 = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_clip_rectangle"),
+            paint_pop_clip                            = apiGetFunctionAddress(HARFBUZZ, "hb_paint_pop_clip"),
+            paint_color                               = apiGetFunctionAddress(HARFBUZZ, "hb_paint_color"),
+            paint_image                               = apiGetFunctionAddress(HARFBUZZ, "hb_paint_image"),
+            paint_linear_gradient                     = apiGetFunctionAddress(HARFBUZZ, "hb_paint_linear_gradient"),
+            paint_radial_gradient                     = apiGetFunctionAddress(HARFBUZZ, "hb_paint_radial_gradient"),
+            paint_sweep_gradient                      = apiGetFunctionAddress(HARFBUZZ, "hb_paint_sweep_gradient"),
+            paint_push_group                          = apiGetFunctionAddress(HARFBUZZ, "hb_paint_push_group"),
+            paint_pop_group                           = apiGetFunctionAddress(HARFBUZZ, "hb_paint_pop_group"),
+            paint_custom_palette_color                = apiGetFunctionAddress(HARFBUZZ, "hb_paint_custom_palette_color"),
+            set_create                                = apiGetFunctionAddress(HARFBUZZ, "hb_set_create"),
+            set_get_empty                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_empty"),
+            set_reference                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_reference"),
+            set_destroy                               = apiGetFunctionAddress(HARFBUZZ, "hb_set_destroy"),
+            set_set_user_data                         = apiGetFunctionAddress(HARFBUZZ, "hb_set_set_user_data"),
+            set_get_user_data                         = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_user_data"),
+            set_allocation_successful                 = apiGetFunctionAddress(HARFBUZZ, "hb_set_allocation_successful"),
+            set_copy                                  = apiGetFunctionAddress(HARFBUZZ, "hb_set_copy"),
+            set_clear                                 = apiGetFunctionAddress(HARFBUZZ, "hb_set_clear"),
+            set_is_empty                              = apiGetFunctionAddress(HARFBUZZ, "hb_set_is_empty"),
+            set_invert                                = apiGetFunctionAddress(HARFBUZZ, "hb_set_invert"),
+            set_is_inverted                           = apiGetFunctionAddress(HARFBUZZ, "hb_set_is_inverted"),
+            set_has                                   = apiGetFunctionAddress(HARFBUZZ, "hb_set_has"),
+            set_add                                   = apiGetFunctionAddress(HARFBUZZ, "hb_set_add"),
+            set_add_range                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_add_range"),
+            set_add_sorted_array                      = apiGetFunctionAddress(HARFBUZZ, "hb_set_add_sorted_array"),
+            set_del                                   = apiGetFunctionAddress(HARFBUZZ, "hb_set_del"),
+            set_del_range                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_del_range"),
+            set_is_equal                              = apiGetFunctionAddress(HARFBUZZ, "hb_set_is_equal"),
+            set_hash                                  = apiGetFunctionAddress(HARFBUZZ, "hb_set_hash"),
+            set_is_subset                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_is_subset"),
+            set_set                                   = apiGetFunctionAddress(HARFBUZZ, "hb_set_set"),
+            set_union                                 = apiGetFunctionAddress(HARFBUZZ, "hb_set_union"),
+            set_intersect                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_intersect"),
+            set_subtract                              = apiGetFunctionAddress(HARFBUZZ, "hb_set_subtract"),
+            set_symmetric_difference                  = apiGetFunctionAddress(HARFBUZZ, "hb_set_symmetric_difference"),
+            set_get_population                        = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_population"),
+            set_get_min                               = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_min"),
+            set_get_max                               = apiGetFunctionAddress(HARFBUZZ, "hb_set_get_max"),
+            set_next                                  = apiGetFunctionAddress(HARFBUZZ, "hb_set_next"),
+            set_previous                              = apiGetFunctionAddress(HARFBUZZ, "hb_set_previous"),
+            set_next_range                            = apiGetFunctionAddress(HARFBUZZ, "hb_set_next_range"),
+            set_previous_range                        = apiGetFunctionAddress(HARFBUZZ, "hb_set_previous_range"),
+            set_next_many                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_next_many"),
+            shape                                     = apiGetFunctionAddress(HARFBUZZ, "hb_shape"),
+            shape_full                                = apiGetFunctionAddress(HARFBUZZ, "hb_shape_full"),
+            shape_list_shapers                        = apiGetFunctionAddress(HARFBUZZ, "hb_shape_list_shapers"),
+            shape_plan_create                         = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_create"),
+            shape_plan_create_cached                  = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_create_cached"),
+            shape_plan_create2                        = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_create2"),
+            shape_plan_create_cached2                 = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_create_cached2"),
+            shape_plan_get_empty                      = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_get_empty"),
+            shape_plan_reference                      = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_reference"),
+            shape_plan_destroy                        = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_destroy"),
+            shape_plan_set_user_data                  = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_set_user_data"),
+            shape_plan_get_user_data                  = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_get_user_data"),
+            shape_plan_execute                        = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_execute"),
+            shape_plan_get_shaper                     = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_get_shaper"),
+            style_get_value                           = apiGetFunctionAddress(HARFBUZZ, "hb_style_get_value"),
+            unicode_funcs_get_default                 = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_get_default"),
+            unicode_funcs_create                      = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_create"),
+            unicode_funcs_get_empty                   = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_get_empty"),
+            unicode_funcs_reference                   = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_reference"),
+            unicode_funcs_destroy                     = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_destroy"),
+            unicode_funcs_set_user_data               = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_user_data"),
+            unicode_funcs_get_user_data               = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_get_user_data"),
+            unicode_funcs_make_immutable              = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_make_immutable"),
+            unicode_funcs_is_immutable                = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_is_immutable"),
+            unicode_funcs_get_parent                  = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_get_parent"),
+            unicode_funcs_set_combining_class_func    = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_combining_class_func"),
+            unicode_funcs_set_general_category_func   = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_general_category_func"),
+            unicode_funcs_set_mirroring_func          = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_mirroring_func"),
+            unicode_funcs_set_script_func             = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_script_func"),
+            unicode_funcs_set_compose_func            = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_compose_func"),
+            unicode_funcs_set_decompose_func          = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_funcs_set_decompose_func"),
+            unicode_combining_class                   = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_combining_class"),
+            unicode_general_category                  = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_general_category"),
+            unicode_mirroring                         = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_mirroring"),
+            unicode_script                            = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_script"),
+            unicode_compose                           = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_compose"),
+            unicode_decompose                         = apiGetFunctionAddress(HARFBUZZ, "hb_unicode_decompose"),
+            version                                   = apiGetFunctionAddress(HARFBUZZ, "hb_version"),
+            version_string                            = apiGetFunctionAddress(HARFBUZZ, "hb_version_string"),
+            version_atleast                           = apiGetFunctionAddress(HARFBUZZ, "hb_version_atleast");
 
     }
 
@@ -1069,7 +1120,112 @@ public class HarfBuzz {
         HB_BUFFER_DIFF_FLAG_GLYPH_FLAGS_MISMATCH  = 0x40,
         HB_BUFFER_DIFF_FLAG_POSITION_MISMATCH     = 0x80;
 
+    /**
+     * Constant signifying that a font does not have any named-instance index set.
+     * 
+     * <p>This is the default of a font.</p>
+     */
+    public static final int HB_FONT_NO_VAR_NAMED_INSTANCE = 0xFFFFFFFF;
+
     public static final int HB_MAP_VALUE_INVALID = -1;
+
+    /** Tag identifying PNG images in {@code hb_paint_image_func_t} callbacks. */
+    public static final int HB_PAINT_IMAGE_FORMAT_PNG = HB_TAG('p', 'n', 'g', ' ');
+
+    /** Tag identifying SVG images in {@code hb_paint_image_func_t} callbacks. */
+    public static final int HB_PAINT_IMAGE_FORMAT_SVG = HB_TAG('s', 'v', 'g', ' ');
+
+    /**
+     * Tag identifying raw pixel-data images in {@code hb_paint_image_func_t} callbacks.
+     * 
+     * <p>The data is in BGRA pre-multiplied sRGBA color-space format.</p>
+     */
+    public static final int HB_PAINT_IMAGE_FORMAT_BGRA = HB_TAG('B', 'G', 'R', 'A');
+
+    /**
+     * The values of this enumeration determine how color values outside the minimum and maximum defined offset on a {@code hb_color_line_t} are determined.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #HB_PAINT_EXTEND_PAD PAINT_EXTEND_PAD} - Outside the defined interval, the color of the closest color stop is used.</li>
+     * <li>{@link #HB_PAINT_EXTEND_REPEAT PAINT_EXTEND_REPEAT} - The color line is repeated over repeated multiples of the defined interval.</li>
+     * <li>{@link #HB_PAINT_EXTEND_REFLECT PAINT_EXTEND_REFLECT} - 
+     * The color line is repeated over repeated intervals, as for the repeat mode. However, in each repeated interval, the ordering of color stops is the
+     * reverse of the adjacent interval.
+     * </li>
+     * </ul>
+     */
+    public static final int
+        HB_PAINT_EXTEND_PAD     = 0,
+        HB_PAINT_EXTEND_REPEAT  = 1,
+        HB_PAINT_EXTEND_REFLECT = 2;
+
+    /**
+     * {@code hb_paint_composite_mode_t}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_CLEAR PAINT_COMPOSITE_MODE_CLEAR}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_SRC PAINT_COMPOSITE_MODE_SRC}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_DEST PAINT_COMPOSITE_MODE_DEST}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_SRC_OVER PAINT_COMPOSITE_MODE_SRC_OVER}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_DEST_OVER PAINT_COMPOSITE_MODE_DEST_OVER}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_SRC_IN PAINT_COMPOSITE_MODE_SRC_IN}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_DEST_IN PAINT_COMPOSITE_MODE_DEST_IN}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_SRC_OUT PAINT_COMPOSITE_MODE_SRC_OUT}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_DEST_OUT PAINT_COMPOSITE_MODE_DEST_OUT}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_SRC_ATOP PAINT_COMPOSITE_MODE_SRC_ATOP}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_DEST_ATOP PAINT_COMPOSITE_MODE_DEST_ATOP}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_XOR PAINT_COMPOSITE_MODE_XOR}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_PLUS PAINT_COMPOSITE_MODE_PLUS}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_SCREEN PAINT_COMPOSITE_MODE_SCREEN}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_OVERLAY PAINT_COMPOSITE_MODE_OVERLAY}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_DARKEN PAINT_COMPOSITE_MODE_DARKEN}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_LIGHTEN PAINT_COMPOSITE_MODE_LIGHTEN}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_COLOR_DODGE PAINT_COMPOSITE_MODE_COLOR_DODGE}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_COLOR_BURN PAINT_COMPOSITE_MODE_COLOR_BURN}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_HARD_LIGHT PAINT_COMPOSITE_MODE_HARD_LIGHT}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_SOFT_LIGHT PAINT_COMPOSITE_MODE_SOFT_LIGHT}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_DIFFERENCE PAINT_COMPOSITE_MODE_DIFFERENCE}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_EXCLUSION PAINT_COMPOSITE_MODE_EXCLUSION}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_MULTIPLY PAINT_COMPOSITE_MODE_MULTIPLY}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_HSL_HUE PAINT_COMPOSITE_MODE_HSL_HUE}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_HSL_SATURATION PAINT_COMPOSITE_MODE_HSL_SATURATION}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_HSL_COLOR PAINT_COMPOSITE_MODE_HSL_COLOR}</li>
+     * <li>{@link #HB_PAINT_COMPOSITE_MODE_HSL_LUMINOSITY PAINT_COMPOSITE_MODE_HSL_LUMINOSITY}</li>
+     * </ul>
+     */
+    public static final int
+        HB_PAINT_COMPOSITE_MODE_CLEAR          = 0,
+        HB_PAINT_COMPOSITE_MODE_SRC            = 1,
+        HB_PAINT_COMPOSITE_MODE_DEST           = 2,
+        HB_PAINT_COMPOSITE_MODE_SRC_OVER       = 3,
+        HB_PAINT_COMPOSITE_MODE_DEST_OVER      = 4,
+        HB_PAINT_COMPOSITE_MODE_SRC_IN         = 5,
+        HB_PAINT_COMPOSITE_MODE_DEST_IN        = 6,
+        HB_PAINT_COMPOSITE_MODE_SRC_OUT        = 7,
+        HB_PAINT_COMPOSITE_MODE_DEST_OUT       = 8,
+        HB_PAINT_COMPOSITE_MODE_SRC_ATOP       = 9,
+        HB_PAINT_COMPOSITE_MODE_DEST_ATOP      = 10,
+        HB_PAINT_COMPOSITE_MODE_XOR            = 11,
+        HB_PAINT_COMPOSITE_MODE_PLUS           = 12,
+        HB_PAINT_COMPOSITE_MODE_SCREEN         = 13,
+        HB_PAINT_COMPOSITE_MODE_OVERLAY        = 14,
+        HB_PAINT_COMPOSITE_MODE_DARKEN         = 15,
+        HB_PAINT_COMPOSITE_MODE_LIGHTEN        = 16,
+        HB_PAINT_COMPOSITE_MODE_COLOR_DODGE    = 17,
+        HB_PAINT_COMPOSITE_MODE_COLOR_BURN     = 18,
+        HB_PAINT_COMPOSITE_MODE_HARD_LIGHT     = 19,
+        HB_PAINT_COMPOSITE_MODE_SOFT_LIGHT     = 20,
+        HB_PAINT_COMPOSITE_MODE_DIFFERENCE     = 21,
+        HB_PAINT_COMPOSITE_MODE_EXCLUSION      = 22,
+        HB_PAINT_COMPOSITE_MODE_MULTIPLY       = 23,
+        HB_PAINT_COMPOSITE_MODE_HSL_HUE        = 24,
+        HB_PAINT_COMPOSITE_MODE_HSL_SATURATION = 25,
+        HB_PAINT_COMPOSITE_MODE_HSL_COLOR      = 26,
+        HB_PAINT_COMPOSITE_MODE_HSL_LUMINOSITY = 27;
 
     public static final int HB_SET_VALUE_INVALID = -1;
 
@@ -1322,13 +1478,13 @@ public class HarfBuzz {
         HB_UNICODE_COMBINING_CLASS_IOTA_SUBSCRIPT       = 240,
         HB_UNICODE_COMBINING_CLASS_INVALID              = 255;
 
-    public static final int HB_VERSION_MAJOR = 5;
+    public static final int HB_VERSION_MAJOR = 7;
 
-    public static final int HB_VERSION_MINOR = 3;
+    public static final int HB_VERSION_MINOR = 0;
 
-    public static final int HB_VERSION_MICRO = 1;
+    public static final int HB_VERSION_MICRO = 0;
 
-    public static final String HB_VERSION_STRING = "5.3.1";
+    public static final String HB_VERSION_STRING = "7.0.0";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
@@ -2811,6 +2967,14 @@ public class HarfBuzz {
         return invokeP(__functionAddress);
     }
 
+    // --- [ hb_draw_funcs_get_empty ] ---
+
+    @NativeType("hb_draw_funcs_t *")
+    public static long hb_draw_funcs_get_empty() {
+        long __functionAddress = Functions.draw_funcs_get_empty;
+        return invokeP(__functionAddress);
+    }
+
     // --- [ hb_draw_funcs_reference ] ---
 
     @NativeType("hb_draw_funcs_t *")
@@ -2830,6 +2994,36 @@ public class HarfBuzz {
             check(dfuncs);
         }
         invokePV(dfuncs, __functionAddress);
+    }
+
+    // --- [ hb_draw_funcs_set_user_data ] ---
+
+    public static int nhb_draw_funcs_set_user_data(long dfuncs, long key, long data, long destroy, int replace) {
+        long __functionAddress = Functions.draw_funcs_set_user_data;
+        if (CHECKS) {
+            check(dfuncs);
+        }
+        return invokePPPPI(dfuncs, key, data, destroy, replace, __functionAddress);
+    }
+
+    @NativeType("hb_bool_t")
+    public static boolean hb_draw_funcs_set_user_data(@NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("hb_user_data_key_t *") hb_user_data_key_t key, @NativeType("void *") long data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy, @NativeType("hb_bool_t") boolean replace) {
+        return nhb_draw_funcs_set_user_data(dfuncs, key.address(), data, memAddressSafe(destroy), replace ? 1 : 0) != 0;
+    }
+
+    // --- [ hb_draw_funcs_get_user_data ] ---
+
+    public static long nhb_draw_funcs_get_user_data(long dfuncs, long key) {
+        long __functionAddress = Functions.draw_funcs_get_user_data;
+        if (CHECKS) {
+            check(dfuncs);
+        }
+        return invokePPP(dfuncs, key, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long hb_draw_funcs_get_user_data(@NativeType("hb_draw_funcs_t const *") long dfuncs, @NativeType("hb_user_data_key_t *") hb_user_data_key_t key) {
+        return nhb_draw_funcs_get_user_data(dfuncs, key.address());
     }
 
     // --- [ hb_draw_funcs_make_immutable ] ---
@@ -3150,6 +3344,17 @@ public class HarfBuzz {
             check(out);
         }
         invokePPV(face, out, __functionAddress);
+    }
+
+    // --- [ hb_face_collect_nominal_glyph_mapping ] ---
+
+    public static void hb_face_collect_nominal_glyph_mapping(@NativeType("hb_face_t *") long face, @NativeType("hb_map_t *") long mapping, @NativeType("hb_set_t *") long unicodes) {
+        long __functionAddress = Functions.face_collect_nominal_glyph_mapping;
+        if (CHECKS) {
+            check(face);
+            check(mapping);
+        }
+        invokePPPV(face, mapping, unicodes, __functionAddress);
     }
 
     // --- [ hb_face_collect_variation_selectors ] ---
@@ -3677,11 +3882,11 @@ public class HarfBuzz {
         nhb_font_funcs_set_glyph_from_name_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
     }
 
-    // --- [ hb_font_funcs_set_glyph_shape_func ] ---
+    // --- [ hb_font_funcs_set_draw_glyph_func ] ---
 
-    /** Unsafe version of: {@link #hb_font_funcs_set_glyph_shape_func font_funcs_set_glyph_shape_func} */
-    public static void nhb_font_funcs_set_glyph_shape_func(long ffuncs, long func, long user_data, long destroy) {
-        long __functionAddress = Functions.font_funcs_set_glyph_shape_func;
+    /** Unsafe version of: {@link #hb_font_funcs_set_draw_glyph_func font_funcs_set_draw_glyph_func} */
+    public static void nhb_font_funcs_set_draw_glyph_func(long ffuncs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.font_funcs_set_draw_glyph_func;
         if (CHECKS) {
             check(ffuncs);
         }
@@ -3689,15 +3894,38 @@ public class HarfBuzz {
     }
 
     /**
-     * Sets the implementation function for {@code hb_font_get_glyph_shape_func_t}.
+     * Sets the implementation function for {@code hb_font_draw_glyph_func_t}.
      *
      * @param ffuncs    a font-function structure
      * @param func      the callback function to assign
      * @param user_data data to pass to {@code func}
      * @param destroy   the function to call when {@code user_data} is not needed anymore
      */
-    public static void hb_font_funcs_set_glyph_shape_func(@NativeType("hb_font_funcs_t *") long ffuncs, @NativeType("hb_font_get_glyph_shape_func_t") hb_font_get_glyph_shape_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
-        nhb_font_funcs_set_glyph_shape_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
+    public static void hb_font_funcs_set_draw_glyph_func(@NativeType("hb_font_funcs_t *") long ffuncs, @NativeType("hb_font_draw_glyph_func_t") hb_font_draw_glyph_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_font_funcs_set_draw_glyph_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_hb_font_funcs_set_paint_glyph_func ] ---
+
+    /** Unsafe version of: {@link #hb_hb_font_funcs_set_paint_glyph_func hb_font_funcs_set_paint_glyph_func} */
+    public static void nhb_hb_font_funcs_set_paint_glyph_func(long ffuncs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.hb_font_funcs_set_paint_glyph_func;
+        if (CHECKS) {
+            check(ffuncs);
+        }
+        invokePPPPV(ffuncs, func, user_data, destroy, __functionAddress);
+    }
+
+    /**
+     * Sets the implementation function for {@code hb_font_paint_glyph_func_t}.
+     *
+     * @param ffuncs    a font-function structure
+     * @param func      the callback function to assign
+     * @param user_data data to pass to {@code func}
+     * @param destroy   the function to call when {@code user_data} is not needed anymore
+     */
+    public static void hb_hb_font_funcs_set_paint_glyph_func(@NativeType("hb_font_funcs_t *") long ffuncs, @NativeType("hb_font_paint_glyph_func_t") hb_font_paint_glyph_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_hb_font_funcs_set_paint_glyph_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
     }
 
     // --- [ hb_font_get_h_extents ] ---
@@ -3985,6 +4213,28 @@ public class HarfBuzz {
             check(dfuncs);
         }
         invokePPPV(font, glyph, dfuncs, draw_data, __functionAddress);
+    }
+
+    // --- [ hb_font_draw_glyph ] ---
+
+    public static void hb_font_draw_glyph(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("void *") long draw_data) {
+        long __functionAddress = Functions.font_draw_glyph;
+        if (CHECKS) {
+            check(font);
+            check(dfuncs);
+        }
+        invokePPPV(font, glyph, dfuncs, draw_data, __functionAddress);
+    }
+
+    // --- [ hb_font_paint_glyph ] ---
+
+    public static void hb_font_paint_glyph(@NativeType("hb_font_t *") long font, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_draw_funcs_t *") long pfuncs, @NativeType("void *") long paint_data, @NativeType("unsigned int") int palette_index, @NativeType("hb_color_t") int foreground) {
+        long __functionAddress = Functions.font_paint_glyph;
+        if (CHECKS) {
+            check(font);
+            check(pfuncs);
+        }
+        invokePPPV(font, glyph, pfuncs, paint_data, palette_index, foreground, __functionAddress);
     }
 
     // --- [ hb_font_get_glyph ] ---
@@ -4493,6 +4743,35 @@ public class HarfBuzz {
         return invokePF(font, __functionAddress);
     }
 
+    // --- [ hb_font_set_synthetic_bold ] ---
+
+    public static void hb_font_set_synthetic_bold(@NativeType("hb_font_t *") long font, float x_embolden, float y_embolden, @NativeType("hb_bool_t") boolean in_place) {
+        long __functionAddress = Functions.font_set_synthetic_bold;
+        if (CHECKS) {
+            check(font);
+        }
+        invokePV(font, x_embolden, y_embolden, in_place ? 1 : 0, __functionAddress);
+    }
+
+    // --- [ hb_font_get_synthetic_bold ] ---
+
+    public static void nhb_font_get_synthetic_bold(long font, long x_embolden, long y_embolden, long in_place) {
+        long __functionAddress = Functions.font_get_synthetic_bold;
+        if (CHECKS) {
+            check(font);
+        }
+        invokePPPPV(font, x_embolden, y_embolden, in_place, __functionAddress);
+    }
+
+    public static void hb_font_get_synthetic_bold(@NativeType("hb_font_t *") long font, @Nullable @NativeType("float *") FloatBuffer x_embolden, @Nullable @NativeType("float *") FloatBuffer y_embolden, @Nullable @NativeType("hb_bool_t *") IntBuffer in_place) {
+        if (CHECKS) {
+            checkSafe(x_embolden, 1);
+            checkSafe(y_embolden, 1);
+            checkSafe(in_place, 1);
+        }
+        nhb_font_get_synthetic_bold(font, memAddressSafe(x_embolden), memAddressSafe(y_embolden), memAddressSafe(in_place));
+    }
+
     // --- [ hb_font_set_synthetic_slant ] ---
 
     public static void hb_font_set_synthetic_slant(@NativeType("hb_font_t *") long font, float slant) {
@@ -4609,6 +4888,17 @@ public class HarfBuzz {
             check(font);
         }
         invokePV(font, instance_index, __functionAddress);
+    }
+
+    // --- [ hb_font_get_var_named_instance ] ---
+
+    @NativeType("unsigned int")
+    public static int hb_font_get_var_named_instance(@NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.font_get_var_named_instance;
+        if (CHECKS) {
+            check(font);
+        }
+        return invokePI(font, __functionAddress);
     }
 
     // --- [ hb_ft_face_create ] ---
@@ -4957,6 +5247,512 @@ public class HarfBuzz {
         return invokePI(map, key, __functionAddress) != 0;
     }
 
+    // --- [ hb_map_update ] ---
+
+    public static void hb_map_update(@NativeType("hb_map_t *") long map, @NativeType("hb_map_t const *") long other) {
+        long __functionAddress = Functions.map_update;
+        if (CHECKS) {
+            check(map);
+            check(other);
+        }
+        invokePPV(map, other, __functionAddress);
+    }
+
+    // --- [ hb_map_next ] ---
+
+    public static int nhb_map_next(long map, long idx, long key, long value) {
+        long __functionAddress = Functions.map_next;
+        if (CHECKS) {
+            check(map);
+        }
+        return invokePPPPI(map, idx, key, value, __functionAddress);
+    }
+
+    @NativeType("hb_bool_t")
+    public static boolean hb_map_next(@NativeType("hb_map_t const *") long map, @NativeType("int *") IntBuffer idx, @NativeType("hb_codepoint_t *") IntBuffer key, @NativeType("hb_codepoint_t *") IntBuffer value) {
+        if (CHECKS) {
+            check(idx, 1);
+            check(key, 1);
+            check(value, 1);
+        }
+        return nhb_map_next(map, memAddress(idx), memAddress(key), memAddress(value)) != 0;
+    }
+
+    // --- [ hb_map_keys ] ---
+
+    public static void hb_map_keys(@NativeType("hb_map_t const *") long map, @NativeType("hb_set_t *") long keys) {
+        long __functionAddress = Functions.map_keys;
+        if (CHECKS) {
+            check(map);
+            check(keys);
+        }
+        invokePPV(map, keys, __functionAddress);
+    }
+
+    // --- [ hb_map_values ] ---
+
+    public static void hb_map_values(@NativeType("hb_map_t const *") long map, @NativeType("hb_set_t *") long values) {
+        long __functionAddress = Functions.map_values;
+        if (CHECKS) {
+            check(map);
+            check(values);
+        }
+        invokePPV(map, values, __functionAddress);
+    }
+
+    // --- [ hb_paint_funcs_create ] ---
+
+    @NativeType("hb_paint_funcs_t *")
+    public static long hb_paint_funcs_create() {
+        long __functionAddress = Functions.paint_funcs_create;
+        return invokeP(__functionAddress);
+    }
+
+    // --- [ hb_paint_funcs_get_empty ] ---
+
+    @NativeType("hb_paint_funcs_t *")
+    public static long hb_paint_funcs_get_empty() {
+        long __functionAddress = Functions.paint_funcs_get_empty;
+        return invokeP(__functionAddress);
+    }
+
+    // --- [ hb_paint_funcs_reference ] ---
+
+    @NativeType("hb_paint_funcs_t *")
+    public static long hb_paint_funcs_reference(@NativeType("hb_paint_funcs_t *") long funcs) {
+        long __functionAddress = Functions.paint_funcs_reference;
+        if (CHECKS) {
+            check(funcs);
+        }
+        return invokePP(funcs, __functionAddress);
+    }
+
+    // --- [ hb_paint_funcs_destroy ] ---
+
+    public static void hb_paint_funcs_destroy(@NativeType("hb_paint_funcs_t *") long funcs) {
+        long __functionAddress = Functions.paint_funcs_destroy;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePV(funcs, __functionAddress);
+    }
+
+    // --- [ hb_paint_funcs_set_user_data ] ---
+
+    public static int nhb_paint_funcs_set_user_data(long funcs, long key, long data, long destroy, int replace) {
+        long __functionAddress = Functions.paint_funcs_set_user_data;
+        if (CHECKS) {
+            check(funcs);
+        }
+        return invokePPPPI(funcs, key, data, destroy, replace, __functionAddress);
+    }
+
+    @NativeType("hb_bool_t")
+    public static boolean hb_paint_funcs_set_user_data(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_user_data_key_t *") hb_user_data_key_t key, @NativeType("void *") long data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy, @NativeType("hb_bool_t") boolean replace) {
+        return nhb_paint_funcs_set_user_data(funcs, key.address(), data, memAddressSafe(destroy), replace ? 1 : 0) != 0;
+    }
+
+    // --- [ hb_paint_funcs_get_user_data ] ---
+
+    public static long nhb_paint_funcs_get_user_data(long funcs, long key) {
+        long __functionAddress = Functions.paint_funcs_get_user_data;
+        if (CHECKS) {
+            check(funcs);
+        }
+        return invokePPP(funcs, key, __functionAddress);
+    }
+
+    @NativeType("void *")
+    public static long hb_paint_funcs_get_user_data(@NativeType("hb_paint_funcs_t const *") long funcs, @NativeType("hb_user_data_key_t *") hb_user_data_key_t key) {
+        return nhb_paint_funcs_get_user_data(funcs, key.address());
+    }
+
+    // --- [ hb_paint_funcs_make_immutable ] ---
+
+    public static void hb_paint_funcs_make_immutable(@NativeType("hb_paint_funcs_t *") long funcs) {
+        long __functionAddress = Functions.paint_funcs_make_immutable;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePV(funcs, __functionAddress);
+    }
+
+    // --- [ hb_paint_funcs_is_immutable ] ---
+
+    @NativeType("hb_bool_t")
+    public static boolean hb_paint_funcs_is_immutable(@NativeType("hb_paint_funcs_t *") long funcs) {
+        long __functionAddress = Functions.paint_funcs_is_immutable;
+        if (CHECKS) {
+            check(funcs);
+        }
+        return invokePI(funcs, __functionAddress) != 0;
+    }
+
+    // --- [ hb_color_line_get_color_stops ] ---
+
+    public static int nhb_color_line_get_color_stops(long color_line, int start, long count, long color_stops) {
+        long __functionAddress = Functions.color_line_get_color_stops;
+        return invokePPPI(color_line, start, count, color_stops, __functionAddress);
+    }
+
+    @NativeType("unsigned int")
+    public static int hb_color_line_get_color_stops(@NativeType("hb_color_line_t *") hb_color_line_t color_line, @NativeType("unsigned int") int start, @NativeType("unsigned int *") IntBuffer count, @NativeType("hb_color_stop_t *") hb_color_stop_t color_stops) {
+        if (CHECKS) {
+            check(count, 1);
+        }
+        return nhb_color_line_get_color_stops(color_line.address(), start, memAddress(count), color_stops.address());
+    }
+
+    // --- [ hb_color_line_get_extend ] ---
+
+    public static int nhb_color_line_get_extend(long color_line) {
+        long __functionAddress = Functions.color_line_get_extend;
+        return invokePI(color_line, __functionAddress);
+    }
+
+    @NativeType("hb_paint_extend_t")
+    public static int hb_color_line_get_extend(@NativeType("hb_color_line_t *") hb_color_line_t color_line) {
+        return nhb_color_line_get_extend(color_line.address());
+    }
+
+    // --- [ hb_paint_funcs_set_push_transform_func ] ---
+
+    public static void nhb_paint_funcs_set_push_transform_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_push_transform_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_push_transform_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_push_transform_func_t") hb_font_paint_glyph_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_push_transform_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_pop_transform_func ] ---
+
+    public static void nhb_paint_funcs_set_pop_transform_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_pop_transform_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_pop_transform_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_pop_transform_func_t") hb_paint_pop_transform_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_pop_transform_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_push_clip_glyph_func ] ---
+
+    public static void nhb_paint_funcs_set_push_clip_glyph_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_push_clip_glyph_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_push_clip_glyph_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_push_clip_glyph_func_t") hb_paint_push_clip_glyph_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_push_clip_glyph_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_push_clip_rectangle_func ] ---
+
+    public static void nhb_paint_funcs_set_push_clip_rectangle_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_push_clip_rectangle_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_push_clip_rectangle_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_push_clip_rectangle_func_t") hb_paint_push_clip_rectangle_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_push_clip_rectangle_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_pop_clip_func ] ---
+
+    public static void nhb_paint_funcs_set_pop_clip_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_pop_clip_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_pop_clip_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_pop_clip_func_t") hb_paint_pop_clip_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_pop_clip_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_color_func ] ---
+
+    public static void nhb_paint_funcs_set_color_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_color_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_color_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_color_func_t") hb_paint_color_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_color_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_image_func ] ---
+
+    public static void nhb_paint_funcs_set_image_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_image_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_image_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_image_func_t") hb_paint_image_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_image_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_linear_gradient_func ] ---
+
+    public static void nhb_paint_funcs_set_linear_gradient_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_linear_gradient_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_linear_gradient_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_linear_gradient_func_t") hb_paint_linear_gradient_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_linear_gradient_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_radial_gradient_func ] ---
+
+    public static void nhb_paint_funcs_set_radial_gradient_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_radial_gradient_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_radial_gradient_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_radial_gradient_func_t") hb_paint_radial_gradient_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_radial_gradient_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_sweep_gradient_func ] ---
+
+    public static void nhb_paint_funcs_set_sweep_gradient_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_sweep_gradient_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_sweep_gradient_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_sweep_gradient_func_t") hb_paint_sweep_gradient_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_sweep_gradient_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_push_group_func ] ---
+
+    public static void nhb_paint_funcs_set_push_group_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_push_group_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_push_group_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_push_group_func_t") hb_paint_push_group_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_push_group_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_pop_group_func ] ---
+
+    public static void nhb_paint_funcs_set_pop_group_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_pop_group_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_pop_group_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_pop_group_func_t") hb_paint_pop_group_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_pop_group_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_funcs_set_custom_palette_color_func ] ---
+
+    public static void nhb_paint_funcs_set_custom_palette_color_func(long funcs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.paint_funcs_set_custom_palette_color_func;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPPV(funcs, func, user_data, destroy, __functionAddress);
+    }
+
+    public static void hb_paint_funcs_set_custom_palette_color_func(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("hb_paint_custom_palette_color_func_t") hb_paint_custom_palette_color_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_paint_funcs_set_custom_palette_color_func(funcs, func.address(), user_data, memAddressSafe(destroy));
+    }
+
+    // --- [ hb_paint_push_transform ] ---
+
+    public static void hb_paint_push_transform(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, float xx, float yx, float xy, float yy, float dx, float dy) {
+        long __functionAddress = Functions.paint_push_transform;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPV(funcs, paint_data, xx, yx, xy, yy, dx, dy, __functionAddress);
+    }
+
+    // --- [ hb_paint_pop_transform ] ---
+
+    public static void hb_paint_pop_transform(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data) {
+        long __functionAddress = Functions.paint_pop_transform;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPV(funcs, paint_data, __functionAddress);
+    }
+
+    // --- [ hb_paint_push_clip_glyph ] ---
+
+    public static void hb_paint_push_clip_glyph(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_font_t *") long font) {
+        long __functionAddress = Functions.paint_push_clip_glyph;
+        if (CHECKS) {
+            check(funcs);
+            check(font);
+        }
+        invokePPPV(funcs, paint_data, glyph, font, __functionAddress);
+    }
+
+    // --- [ hb_paint_push_clip_rectangle ] ---
+
+    public static void hb_paint_push_clip_rectangle(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, float xmin, float ymin, float xmax, float ymax) {
+        long __functionAddress = Functions.paint_push_clip_rectangle;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPV(funcs, paint_data, xmin, ymin, xmax, ymax, __functionAddress);
+    }
+
+    // --- [ hb_paint_pop_clip ] ---
+
+    public static void hb_paint_pop_clip(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data) {
+        long __functionAddress = Functions.paint_pop_clip;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPV(funcs, paint_data, __functionAddress);
+    }
+
+    // --- [ hb_paint_color ] ---
+
+    public static void hb_paint_color(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_bool_t") boolean is_foreground, @NativeType("hb_color_t") int color) {
+        long __functionAddress = Functions.paint_color;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPV(funcs, paint_data, is_foreground ? 1 : 0, color, __functionAddress);
+    }
+
+    // --- [ hb_paint_image ] ---
+
+    public static void nhb_paint_image(long funcs, long paint_data, long image, int width, int height, int format, float slant, long extents) {
+        long __functionAddress = Functions.paint_image;
+        if (CHECKS) {
+            check(funcs);
+            check(image);
+        }
+        invokePPPPV(funcs, paint_data, image, width, height, format, slant, extents, __functionAddress);
+    }
+
+    public static void hb_paint_image(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_blob_t *") long image, @NativeType("unsigned int") int width, @NativeType("unsigned int") int height, @NativeType("hb_tag_t") int format, float slant, @NativeType("hb_glyph_extents_t *") hb_glyph_extents_t extents) {
+        nhb_paint_image(funcs, paint_data, image, width, height, format, slant, extents.address());
+    }
+
+    // --- [ hb_paint_linear_gradient ] ---
+
+    public static void nhb_paint_linear_gradient(long funcs, long paint_data, long color_line, float x0, float yx0, float x1, float y1, float x2, float y2) {
+        long __functionAddress = Functions.paint_linear_gradient;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPV(funcs, paint_data, color_line, x0, yx0, x1, y1, x2, y2, __functionAddress);
+    }
+
+    public static void hb_paint_linear_gradient(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_color_line_t *") hb_color_line_t color_line, float x0, float yx0, float x1, float y1, float x2, float y2) {
+        nhb_paint_linear_gradient(funcs, paint_data, color_line.address(), x0, yx0, x1, y1, x2, y2);
+    }
+
+    // --- [ hb_paint_radial_gradient ] ---
+
+    public static void nhb_paint_radial_gradient(long funcs, long paint_data, long color_line, float x0, float y0, float r0, float x1, float y1, float r1) {
+        long __functionAddress = Functions.paint_radial_gradient;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPV(funcs, paint_data, color_line, x0, y0, r0, x1, y1, r1, __functionAddress);
+    }
+
+    public static void hb_paint_radial_gradient(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_color_line_t *") hb_color_line_t color_line, float x0, float y0, float r0, float x1, float y1, float r1) {
+        nhb_paint_radial_gradient(funcs, paint_data, color_line.address(), x0, y0, r0, x1, y1, r1);
+    }
+
+    // --- [ hb_paint_sweep_gradient ] ---
+
+    public static void nhb_paint_sweep_gradient(long funcs, long paint_data, long color_line, float x0, float y0, float start_angle, float end_angle) {
+        long __functionAddress = Functions.paint_sweep_gradient;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPPV(funcs, paint_data, color_line, x0, y0, start_angle, end_angle, __functionAddress);
+    }
+
+    public static void hb_paint_sweep_gradient(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_color_line_t *") hb_color_line_t color_line, float x0, float y0, float start_angle, float end_angle) {
+        nhb_paint_sweep_gradient(funcs, paint_data, color_line.address(), x0, y0, start_angle, end_angle);
+    }
+
+    // --- [ hb_paint_push_group ] ---
+
+    public static void hb_paint_push_group(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data) {
+        long __functionAddress = Functions.paint_push_group;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPV(funcs, paint_data, __functionAddress);
+    }
+
+    // --- [ hb_paint_pop_group ] ---
+
+    public static void hb_paint_pop_group(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_paint_composite_mode_t") int mode) {
+        long __functionAddress = Functions.paint_pop_group;
+        if (CHECKS) {
+            check(funcs);
+        }
+        invokePPV(funcs, paint_data, mode, __functionAddress);
+    }
+
+    // --- [ hb_paint_custom_palette_color ] ---
+
+    public static int nhb_paint_custom_palette_color(long funcs, long paint_data, int color_index, long color) {
+        long __functionAddress = Functions.paint_custom_palette_color;
+        if (CHECKS) {
+            check(funcs);
+        }
+        return invokePPPI(funcs, paint_data, color_index, color, __functionAddress);
+    }
+
+    @NativeType("hb_bool_t")
+    public static boolean hb_paint_custom_palette_color(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("unsigned int") int color_index, @NativeType("hb_color_t *") IntBuffer color) {
+        if (CHECKS) {
+            check(color, 1);
+        }
+        return nhb_paint_custom_palette_color(funcs, paint_data, color_index, memAddress(color)) != 0;
+    }
+
     // --- [ hb_set_create ] ---
 
     @NativeType("hb_set_t *")
@@ -5076,6 +5872,17 @@ public class HarfBuzz {
             check(set);
         }
         invokePV(set, __functionAddress);
+    }
+
+    // --- [ hb_set_is_inverted ] ---
+
+    @NativeType("hb_bool_t")
+    public static boolean hb_set_is_inverted(@NativeType("hb_set_t const *") long set) {
+        long __functionAddress = Functions.set_is_inverted;
+        if (CHECKS) {
+            check(set);
+        }
+        return invokePI(set, __functionAddress) != 0;
     }
 
     // --- [ hb_set_has ] ---

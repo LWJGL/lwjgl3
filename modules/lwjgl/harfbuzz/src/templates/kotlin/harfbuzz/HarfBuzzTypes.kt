@@ -59,6 +59,7 @@ val hb_font_funcs_t = "hb_font_funcs_t".opaque
 val hb_font_t = "hb_font_t".opaque
 val hb_map_t = "hb_map_t".opaque
 val hb_mask_t = typedef(uint32_t, "hb_mask_t")
+val hb_paint_funcs_t = "hb_paint_funcs_t".opaque
 val hb_position_t = typedef(int32_t, "hb_position_t")
 val hb_set_t = "hb_set_t".opaque
 val hb_shape_plan_t = "hb_shape_plan_t".opaque
@@ -74,6 +75,8 @@ val hb_buffer_serialize_format_t = "hb_buffer_serialize_format_t".enumType
 val hb_direction_t = "hb_direction_t".enumType
 val hb_glyph_flags_t = "hb_glyph_flags_t".enumType
 val hb_memory_mode_t = "hb_memory_mode_t".enumType
+val hb_paint_composite_mode_t = "hb_paint_composite_mode_t".enumType
+val hb_paint_extend_t = "hb_paint_extend_t".enumType
 val hb_script_t = "hb_script_t".enumType
 val hb_style_tag_t = "hb_style_tag_t".enumType
 val hb_unicode_combining_class_t = "hb_unicode_combining_class_t".enumType
@@ -336,11 +339,11 @@ val hb_draw_line_to_func_t = Module.HARFBUZZ.callback {
         "A virtual method for the {@code hb_draw_funcs_t} to perform a \"line-to\" draw operation.",
 
         hb_draw_funcs_t.p("dfuncs", "draw functions object"),
-        void.p("draw_data", "the data accompanying the draw functions"),
+        void.p("draw_data", "the data accompanying the draw functions in #font_draw_glyph()"),
         hb_draw_state_t.p("st", "current draw state"),
         float("to_x", "X component of target point"),
         float("to_y", "Y component of target point"),
-        nullable..opaque_p("user_data", "user data pointer passed by the caller"),
+        nullable..opaque_p("user_data", "user data pointer passed to #draw_funcs_set_line_to_func()"),
 
         nativeType = "hb_draw_line_to_func_t"
     )
@@ -352,13 +355,13 @@ val hb_draw_quadratic_to_func_t = Module.HARFBUZZ.callback {
         "A virtual method for the {@code hb_draw_funcs_t} to perform a \"quadratic-to\" draw operation.",
 
         hb_draw_funcs_t.p("dfuncs", "draw functions object"),
-        void.p("draw_data", "the data accompanying the draw functions"),
+        void.p("draw_data", "the data accompanying the draw functions in #font_draw_glyph()"),
         hb_draw_state_t.p("st", "current draw state"),
         float("control_x", "X component of control point"),
         float("control_y", "Y component of control point"),
         float("to_x", "X component of target point"),
         float("to_y", "Y component of target point"),
-        nullable..opaque_p("user_data", "user data pointer passed by the caller"),
+        nullable..opaque_p("user_data", "user data pointer passed to #draw_funcs_set_quadratic_to_func()"),
 
         nativeType = "hb_draw_quadratic_to_func_t"
     )
@@ -370,7 +373,7 @@ val hb_draw_cubic_to_func_t = Module.HARFBUZZ.callback {
         "A virtual method for the {@code hb_draw_funcs_t} to perform a \"cubic-to\" draw operation.",
 
         hb_draw_funcs_t.p("dfuncs", "draw functions object"),
-        void.p("draw_data", "the data accompanying the draw functions"),
+        void.p("draw_data", "the data accompanying the draw functions in #font_draw_glyph()"),
         hb_draw_state_t.p("st", "current draw state"),
         float("control1_x", "X component of first control point"),
         float("control1_y", "Y component of first control point"),
@@ -378,7 +381,7 @@ val hb_draw_cubic_to_func_t = Module.HARFBUZZ.callback {
         float("control2_y", "Y component of second control point"),
         float("to_x", "X component of target point"),
         float("to_y", "Y component of target point"),
-        nullable..opaque_p("user_data", "user data pointer passed by the caller"),
+        nullable..opaque_p("user_data", "user data pointer passed to #draw_funcs_set_cubic_to_func()"),
 
         nativeType = "hb_draw_cubic_to_func_t"
     )
@@ -390,9 +393,9 @@ val hb_draw_close_path_func_t = Module.HARFBUZZ.callback {
         "A virtual method for the {@code hb_draw_funcs_t} to perform a \"close-path\" draw operation.",
 
         hb_draw_funcs_t.p("dfuncs", "draw functions object"),
-        void.p("draw_data", "the data accompanying the draw functions"),
+        void.p("draw_data", "the data accompanying the draw functions in #font_draw_glyph()"),
         hb_draw_state_t.p("st", "current draw state"),
-        nullable..opaque_p("user_data", "user data pointer passed by the caller"),
+        nullable..opaque_p("user_data", "user data pointer passed to #draw_funcs_set_close_path_func()"),
 
         nativeType = "hb_draw_close_path_func_t"
     )
@@ -687,19 +690,304 @@ val hb_font_get_glyph_from_name_func_t = Module.HARFBUZZ.callback {
     )
 }
 
-val hb_font_get_glyph_shape_func_t = Module.HARFBUZZ.callback {
+val hb_font_draw_glyph_func_t = Module.HARFBUZZ.callback {
     void(
-        "hb_font_get_glyph_shape_func_t",
+        "hb_font_draw_glyph_func_t",
         "A virtual method for the {@code hb_font_funcs_t} of an {@code hb_font_t} object.",
 
         hb_font_t.p("font", "{@code hb_font_t} to work upon"),
-        nullable..opaque_p("font_data", "{@code font} user data pointer"),
+        nullable..opaque_p("font_data", "user data pointer"),
         hb_codepoint_t("glyph", "the glyph ID to query"),
         hb_draw_funcs_t.p("draw_funcs", "the draw functions to send the shape data to"),
         nullable..opaque_p("draw_data", "the data accompanying the draw functions"),
         nullable..opaque_p("user_data", "user data pointer passed by the caller"),
 
-        nativeType = "hb_font_get_glyph_shape_func_t"
+        nativeType = "hb_font_draw_glyph_func_t"
+    )
+}
+
+val hb_font_paint_glyph_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_font_paint_glyph_func_t",
+        "A virtual method for the {@code hb_font_funcs_t} of an {@code hb_font_t} object.",
+
+        hb_font_t.p("font", "{@code hb_font_t} to work upon"),
+        nullable..opaque_p("font_data", "user data pointer"),
+        hb_codepoint_t("glyph", "the glyph ID to query"),
+        hb_paint_funcs_t.p("paint_funcs", "the paint functions to use"),
+        nullable..opaque_p("paint_data", "the data accompanying the paint functions"),
+        unsigned_int("palette_index", "the color palette to use"),
+        hb_color_t("foreground", "the foreground color"),
+        nullable..opaque_p("user_data", "user data pointer passed by the caller"),
+
+        nativeType = "hb_font_paint_glyph_func_t"
+    )
+}
+
+val hb_paint_push_transform_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_font_paint_glyph_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        float("xx", ""),
+        float("yx", ""),
+        float("xy", ""),
+        float("yy", ""),
+        float("dx", ""),
+        float("dy", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_push_transform_func_t"
+    )
+}
+
+val hb_paint_pop_transform_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_pop_transform_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_pop_transform_func_t"
+    )
+}
+
+val hb_paint_push_clip_glyph_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_push_clip_glyph_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_codepoint_t("glyph", ""),
+        hb_font_t.p("font", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_push_clip_glyph_func_t"
+    )
+}
+
+val hb_paint_push_clip_rectangle_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_push_clip_rectangle_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        float("xmin", ""),
+        float("ymin", ""),
+        float("xmax", ""),
+        float("ymax", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_push_clip_rectangle_func_t"
+    )
+}
+
+val hb_paint_pop_clip_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_pop_clip_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_pop_clip_func_t"
+    )
+}
+
+val hb_paint_color_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_color_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_bool_t("is_foreground", ""),
+        hb_color_t("color", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_color_func_t"
+    )
+}
+
+val hb_paint_image_func_t = Module.HARFBUZZ.callback {
+    hb_bool_t(
+        "hb_paint_image_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_blob_t.p("image", ""),
+        unsigned_int("width", ""),
+        unsigned_int("height", ""),
+        hb_tag_t("format", ""),
+        float("slant", ""),
+        nullable..hb_glyph_extents_t.p("extents", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_image_func_t"
+    )
+}
+
+val hb_color_stop_t = struct(Module.HARFBUZZ, "hb_color_stop_t") {
+    float("offset", "")
+    hb_bool_t("is_foreground", "")
+    hb_color_t("color", "")
+}
+
+val _hb_color_line_t = struct(Module.HARFBUZZ, "hb_color_line_t")
+val hb_color_line_get_color_stops_func_t = Module.HARFBUZZ.callback {
+    unsigned_int(
+        "hb_color_line_get_color_stops_func_t",
+        "",
+
+        _hb_color_line_t.p("color_line", ""),
+        nullable..opaque_p("color_line_data", ""),
+        unsigned_int("start", ""),
+        Check(1)..unsigned_int.p("count", ""),
+        hb_color_stop_t.p("color_stops", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_color_line_get_color_stops_func_t"
+    )
+}
+
+val hb_color_line_get_extend_func_t = Module.HARFBUZZ.callback {
+    hb_paint_extend_t(
+        "hb_color_line_get_extend_func_t",
+        "",
+
+        _hb_color_line_t.p("color_line", ""),
+        nullable..opaque_p("color_line_data", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_color_line_get_extend_func_t"
+    )
+}
+
+val hb_color_line_t = struct(Module.HARFBUZZ, "hb_color_line_t") {
+    opaque_p("data", "")
+
+    hb_color_line_get_color_stops_func_t("get_color_stops", "")
+    nullable..opaque_p("get_color_stops_user_data", "")
+
+    hb_color_line_get_extend_func_t("get_extend", "")
+    nullable..opaque_p("get_extend_user_data", "")
+
+    nullable..opaque_p("reserved0", "").private()
+    nullable..opaque_p("reserved1", "").private()
+    nullable..opaque_p("reserved2", "").private()
+    nullable..opaque_p("reserved3", "").private()
+    nullable..opaque_p("reserved4", "").private()
+    nullable..opaque_p("reserved5", "").private()
+    nullable..opaque_p("reserved6", "").private()
+    nullable..opaque_p("reserved7", "").private()
+    nullable..opaque_p("reserved8", "").private()
+}
+
+val hb_paint_linear_gradient_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_linear_gradient_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_color_line_t.p("color_line", ""),
+        float("x0", ""),
+        float("y0", ""),
+        float("x1", ""),
+        float("y1", ""),
+        float("x2", ""),
+        float("y2", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_linear_gradient_func_t"
+    )
+}
+
+val hb_paint_radial_gradient_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_radial_gradient_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_color_line_t.p("color_line", ""),
+        float("x0", ""),
+        float("y0", ""),
+        float("r0", ""),
+        float("x1", ""),
+        float("y1", ""),
+        float("r1", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_radial_gradient_func_t"
+    )
+}
+
+val hb_paint_sweep_gradient_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_sweep_gradient_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_color_line_t.p("color_line", ""),
+        float("x0", ""),
+        float("y0", ""),
+        float("start_angle", ""),
+        float("end_angle", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_sweep_gradient_func_t"
+    )
+}
+
+val hb_paint_push_group_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_push_group_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_push_group_func_t"
+    )
+}
+
+val hb_paint_pop_group_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_pop_group_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_paint_composite_mode_t("mode", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_pop_group_func_t"
+    )
+}
+
+val hb_paint_custom_palette_color_func_t = Module.HARFBUZZ.callback {
+    void(
+        "hb_paint_custom_palette_color_func_t",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        unsigned_int("color_index", ""),
+        hb_color_t.p("color", ""),
+        nullable..opaque_p("user_data", ""),
+
+        nativeType = "hb_paint_custom_palette_color_func_t"
     )
 }
 

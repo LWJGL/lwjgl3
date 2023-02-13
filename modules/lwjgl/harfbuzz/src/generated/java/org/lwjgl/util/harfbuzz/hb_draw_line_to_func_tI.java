@@ -54,11 +54,11 @@ public interface hb_draw_line_to_func_tI extends CallbackI {
      * A virtual method for the {@code hb_draw_funcs_t} to perform a "line-to" draw operation.
      *
      * @param dfuncs    draw functions object
-     * @param draw_data the data accompanying the draw functions
+     * @param draw_data the data accompanying the draw functions in {@link HarfBuzz#hb_font_draw_glyph font_draw_glyph}
      * @param st        current draw state
      * @param to_x      X component of target point
      * @param to_y      Y component of target point
-     * @param user_data user data pointer passed by the caller
+     * @param user_data user data pointer passed to {@link HarfBuzz#hb_draw_funcs_set_line_to_func draw_funcs_set_line_to_func}
      */
     void invoke(@NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("void *") long draw_data, @NativeType("hb_draw_state_t *") long st, float to_x, float to_y, @NativeType("void *") long user_data);
 

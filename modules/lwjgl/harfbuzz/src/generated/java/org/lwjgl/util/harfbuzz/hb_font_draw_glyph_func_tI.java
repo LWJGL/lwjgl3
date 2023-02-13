@@ -26,8 +26,8 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * )</code></pre>
  */
 @FunctionalInterface
-@NativeType("hb_font_get_glyph_shape_func_t")
-public interface hb_font_get_glyph_shape_func_tI extends CallbackI {
+@NativeType("hb_font_draw_glyph_func_t")
+public interface hb_font_draw_glyph_func_tI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
         FFI_DEFAULT_ABI,
@@ -54,7 +54,7 @@ public interface hb_font_get_glyph_shape_func_tI extends CallbackI {
      * A virtual method for the {@code hb_font_funcs_t} of an {@code hb_font_t} object.
      *
      * @param font       {@code hb_font_t} to work upon
-     * @param font_data  {@code font} user data pointer
+     * @param font_data  user data pointer
      * @param glyph      the glyph ID to query
      * @param draw_funcs the draw functions to send the shape data to
      * @param draw_data  the data accompanying the draw functions

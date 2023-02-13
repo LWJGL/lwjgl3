@@ -1453,6 +1453,13 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     hb_draw_funcs_t.p(
+        "draw_funcs_get_empty",
+        "",
+
+        void()
+    )
+
+    hb_draw_funcs_t.p(
         "draw_funcs_reference",
         "",
 
@@ -1464,6 +1471,26 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         "",
 
         hb_draw_funcs_t.p("dfuncs", "")
+    )
+
+    hb_bool_t(
+        "draw_funcs_set_user_data",
+        "",
+
+        hb_draw_funcs_t.p("dfuncs", ""),
+        hb_user_data_key_t.p("key", ""),
+        nullable..opaque_p("data", ""),
+        nullable..hb_destroy_func_t("destroy", ""),
+        hb_bool_t("replace", "")
+    )
+
+
+    opaque_p(
+        "draw_funcs_get_user_data",
+        "",
+
+        hb_draw_funcs_t.const.p("dfuncs", ""),
+        hb_user_data_key_t.p("key", "")
     )
 
     void(
@@ -1698,6 +1725,15 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
+        "face_collect_nominal_glyph_mapping",
+        "",
+
+        hb_face_t.p("face", ""),
+        hb_map_t.p("mapping", ""),
+        nullable..hb_set_t.p("unicodes", "")
+    )
+
+    void(
         "face_collect_variation_selectors",
         "",
 
@@ -1739,6 +1775,16 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     // hb-font.h
+
+    IntConstant(
+        """
+        Constant signifying that a font does not have any named-instance index set.
+
+        This is the default of a font.
+        """,
+
+        "FONT_NO_VAR_NAMED_INSTANCE"..0xFFFFFFFF.i
+    )
 
     hb_font_funcs_t.p(
         "font_funcs_create",
@@ -1962,11 +2008,21 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
-        "font_funcs_set_glyph_shape_func",
-        "Sets the implementation function for {@code hb_font_get_glyph_shape_func_t}.",
+        "font_funcs_set_draw_glyph_func",
+        "Sets the implementation function for {@code hb_font_draw_glyph_func_t}.",
 
         hb_font_funcs_t.p("ffuncs", "a font-function structure"),
-        hb_font_get_glyph_shape_func_t("func", "the callback function to assign"),
+        hb_font_draw_glyph_func_t("func", "the callback function to assign"),
+        nullable..opaque_p("user_data", "data to pass to {@code func}"),
+        nullable..hb_destroy_func_t("destroy", "the function to call when {@code user_data} is not needed anymore")
+    )
+
+    void(
+        "hb_font_funcs_set_paint_glyph_func",
+        "Sets the implementation function for {@code hb_font_paint_glyph_func_t}.",
+
+        hb_font_funcs_t.p("ffuncs", "a font-function structure"),
+        hb_font_paint_glyph_func_t("func", "the callback function to assign"),
         nullable..opaque_p("user_data", "data to pass to {@code func}"),
         nullable..hb_destroy_func_t("destroy", "the function to call when {@code user_data} is not needed anymore")
     )
@@ -2135,6 +2191,28 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         hb_codepoint_t("glyph", ""),
         hb_draw_funcs_t.p("dfuncs", ""),
         nullable..opaque_p("draw_data", "")
+    )
+
+    void(
+        "font_draw_glyph",
+        "",
+
+        hb_font_t.p("font", ""),
+        hb_codepoint_t("glyph", ""),
+        hb_draw_funcs_t.p("dfuncs", ""),
+        nullable..opaque_p("draw_data", "")
+    )
+
+    void(
+        "font_paint_glyph",
+        "",
+
+        hb_font_t.p("font", ""),
+        hb_codepoint_t("glyph", ""),
+        hb_draw_funcs_t.p("pfuncs", ""),
+        nullable..opaque_p("paint_data", ""),
+        unsigned_int("palette_index", ""),
+        hb_color_t("foreground", "")
     )
 
     hb_bool_t(
@@ -2454,6 +2532,26 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
+        "font_set_synthetic_bold",
+        "",
+
+        hb_font_t.p("font", ""),
+        float("x_embolden", ""),
+        float("y_embolden", ""),
+        hb_bool_t("in_place", "")
+    )
+
+    void(
+        "font_get_synthetic_bold",
+        "",
+
+        hb_font_t.p("font", ""),
+        Check(1)..nullable..float.p("x_embolden", ""),
+        Check(1)..nullable..float.p("y_embolden", ""),
+        Check(1)..nullable..hb_bool_t.p("in_place", "")
+    )
+
+    void(
         "font_set_synthetic_slant",
         "",
 
@@ -2517,6 +2615,13 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
         hb_font_t.p("font", ""),
         unsigned_int("instance_index", "")
+    )
+
+    unsigned_int(
+        "font_get_var_named_instance",
+        "",
+
+        hb_font_t.p("font", "")
     )
 
     // hb-ft.h
@@ -2749,6 +2854,465 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         hb_codepoint_t("key", "")
     )
 
+    void(
+        "map_update",
+        "",
+
+        hb_map_t.p("map", ""),
+        hb_map_t.const.p("other", "")
+    )
+
+    hb_bool_t(
+        "map_next",
+        "",
+
+        hb_map_t.const.p("map", ""),
+        Check(1)..int.p("idx", ""),
+        Check(1)..hb_codepoint_t.p("key", ""),
+        Check(1)..hb_codepoint_t.p("value", "")
+    )
+
+    void(
+        "map_keys",
+        "",
+
+        hb_map_t.const.p("map", ""),
+        hb_set_t.p("keys", "")
+    )
+
+    void(
+        "map_values",
+        "",
+
+        hb_map_t.const.p("map", ""),
+        hb_set_t.p("values", "")
+    )
+
+    // hb-paint.h
+
+    hb_paint_funcs_t.p(
+        "paint_funcs_create",
+        "",
+
+        void()
+    )
+
+    hb_paint_funcs_t.p(
+        "paint_funcs_get_empty",
+        "",
+
+        void()
+    )
+
+    hb_paint_funcs_t.p(
+        "paint_funcs_reference",
+        "",
+
+        hb_paint_funcs_t.p("funcs", "")
+    )
+
+    void(
+        "paint_funcs_destroy",
+        "",
+
+        hb_paint_funcs_t.p("funcs", "")
+    )
+
+    hb_bool_t(
+        "paint_funcs_set_user_data",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_user_data_key_t.p("key", ""),
+        nullable..opaque_p("data", ""),
+        nullable..hb_destroy_func_t("destroy", ""),
+        hb_bool_t("replace", "")
+    );
+
+
+    opaque_p(
+        "paint_funcs_get_user_data",
+        "",
+
+        hb_paint_funcs_t.const.p("funcs", ""),
+        hb_user_data_key_t.p("key", "")
+    );
+
+    void(
+        "paint_funcs_make_immutable",
+        "",
+
+        hb_paint_funcs_t.p("funcs", "")
+    )
+
+    hb_bool_t(
+        "paint_funcs_is_immutable",
+        "",
+
+        hb_paint_funcs_t.p("funcs", "")
+    )
+
+    IntConstant(
+        "Tag identifying PNG images in {@code hb_paint_image_func_t} callbacks.",
+
+        "PAINT_IMAGE_FORMAT_PNG".."HB_TAG('p', 'n', 'g', ' ')"
+    )
+
+    IntConstant(
+        "Tag identifying SVG images in {@code hb_paint_image_func_t} callbacks.",
+
+        "PAINT_IMAGE_FORMAT_SVG".."HB_TAG('s', 'v', 'g', ' ')"
+    )
+
+    IntConstant(
+        """
+        Tag identifying raw pixel-data images in {@code hb_paint_image_func_t} callbacks.
+
+        The data is in BGRA pre-multiplied sRGBA color-space format.
+        """,
+
+        "PAINT_IMAGE_FORMAT_BGRA".."HB_TAG('B', 'G', 'R', 'A')"
+    )
+
+    EnumConstant(
+        "The values of this enumeration determine how color values outside the minimum and maximum defined offset on a {@code hb_color_line_t} are determined.",
+
+        "PAINT_EXTEND_PAD".enum("Outside the defined interval, the color of the closest color stop is used.", "0"),
+        "PAINT_EXTEND_REPEAT".enum("The color line is repeated over repeated multiples of the defined interval."),
+        "PAINT_EXTEND_REFLECT".enum(
+            """
+            The color line is repeated over repeated intervals, as for the repeat mode. However, in each repeated interval, the ordering of color stops is the
+            reverse of the adjacent interval.
+            """
+        )
+    )
+
+    unsigned_int(
+        "color_line_get_color_stops",
+        "",
+
+        hb_color_line_t.p("color_line", ""),
+        unsigned_int("start", ""),
+        Check(1)..unsigned_int.p("count", ""),
+        hb_color_stop_t.p("color_stops", "")
+    )
+
+    hb_paint_extend_t(
+        "color_line_get_extend",
+        "",
+
+        hb_color_line_t.p("color_line", "")
+    )
+
+    EnumConstant(
+        "{@code hb_paint_composite_mode_t}",
+
+        "PAINT_COMPOSITE_MODE_CLEAR".enum("", "0"),
+        "PAINT_COMPOSITE_MODE_SRC".enum,
+        "PAINT_COMPOSITE_MODE_DEST".enum,
+        "PAINT_COMPOSITE_MODE_SRC_OVER".enum,
+        "PAINT_COMPOSITE_MODE_DEST_OVER".enum,
+        "PAINT_COMPOSITE_MODE_SRC_IN".enum,
+        "PAINT_COMPOSITE_MODE_DEST_IN".enum,
+        "PAINT_COMPOSITE_MODE_SRC_OUT".enum,
+        "PAINT_COMPOSITE_MODE_DEST_OUT".enum,
+        "PAINT_COMPOSITE_MODE_SRC_ATOP".enum,
+        "PAINT_COMPOSITE_MODE_DEST_ATOP".enum,
+        "PAINT_COMPOSITE_MODE_XOR".enum,
+        "PAINT_COMPOSITE_MODE_PLUS".enum,
+        "PAINT_COMPOSITE_MODE_SCREEN".enum,
+        "PAINT_COMPOSITE_MODE_OVERLAY".enum,
+        "PAINT_COMPOSITE_MODE_DARKEN".enum,
+        "PAINT_COMPOSITE_MODE_LIGHTEN".enum,
+        "PAINT_COMPOSITE_MODE_COLOR_DODGE".enum,
+        "PAINT_COMPOSITE_MODE_COLOR_BURN".enum,
+        "PAINT_COMPOSITE_MODE_HARD_LIGHT".enum,
+        "PAINT_COMPOSITE_MODE_SOFT_LIGHT".enum,
+        "PAINT_COMPOSITE_MODE_DIFFERENCE".enum,
+        "PAINT_COMPOSITE_MODE_EXCLUSION".enum,
+        "PAINT_COMPOSITE_MODE_MULTIPLY".enum,
+        "PAINT_COMPOSITE_MODE_HSL_HUE".enum,
+        "PAINT_COMPOSITE_MODE_HSL_SATURATION".enum,
+        "PAINT_COMPOSITE_MODE_HSL_COLOR".enum,
+        "PAINT_COMPOSITE_MODE_HSL_LUMINOSITY".enum
+    )
+
+    void(
+        "paint_funcs_set_push_transform_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_push_transform_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_pop_transform_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_pop_transform_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_push_clip_glyph_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_push_clip_glyph_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_push_clip_rectangle_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_push_clip_rectangle_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_pop_clip_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_pop_clip_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_color_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_color_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_image_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_image_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_linear_gradient_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_linear_gradient_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_radial_gradient_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_radial_gradient_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_sweep_gradient_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_sweep_gradient_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_push_group_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_push_group_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_pop_group_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_pop_group_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_funcs_set_custom_palette_color_func",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        hb_paint_custom_palette_color_func_t("func", ""),
+        nullable..opaque_p("user_data", ""),
+        nullable..hb_destroy_func_t("destroy", "")
+    )
+
+    void(
+        "paint_push_transform",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        float("xx", ""),
+        float("yx", ""),
+        float("xy", ""),
+        float("yy", ""),
+        float("dx", ""),
+        float("dy", "")
+    )
+
+    void(
+        "paint_pop_transform",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", "")
+    )
+
+    void(
+        "paint_push_clip_glyph",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_codepoint_t("glyph", ""),
+        hb_font_t.p("font", "")
+    )
+
+    void(
+        "paint_push_clip_rectangle",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        float("xmin", ""),
+        float("ymin", ""),
+        float("xmax", ""),
+        float("ymax", "")
+    )
+
+    void(
+        "paint_pop_clip",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", "")
+    )
+
+    void(
+        "paint_color",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_bool_t("is_foreground", ""),
+        hb_color_t("color", "")
+    )
+
+    void(
+        "paint_image",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_blob_t.p("image", ""),
+        unsigned_int("width", ""),
+        unsigned_int("height", ""),
+        hb_tag_t("format", ""),
+        float("slant", ""),
+        hb_glyph_extents_t.p("extents", "")
+    )
+
+    void(
+        "paint_linear_gradient",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_color_line_t.p("color_line", ""),
+        float("x0", ""),
+        float("yx0", ""),
+        float("x1", ""),
+        float("y1", ""),
+        float("x2", ""),
+        float("y2", ""),
+    )
+
+    void(
+        "paint_radial_gradient",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_color_line_t.p("color_line", ""),
+        float("x0", ""),
+        float("y0", ""),
+        float("r0", ""),
+        float("x1", ""),
+        float("y1", ""),
+        float("r1", "")
+    )
+
+    void(
+        "paint_sweep_gradient",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_color_line_t.p("color_line", ""),
+        float("x0", ""),
+        float("y0", ""),
+        float("start_angle", ""),
+        float("end_angle", "")
+    )
+
+    void(
+        "paint_push_group",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", "")
+    )
+
+    void(
+        "paint_pop_group",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        hb_paint_composite_mode_t("mode", "")
+    )
+
+    hb_bool_t(
+        "paint_custom_palette_color",
+        "",
+
+        hb_paint_funcs_t.p("funcs", ""),
+        nullable..opaque_p("paint_data", ""),
+        unsigned_int("color_index", ""),
+        Check(1)..hb_color_t.p("color", "")
+    )
+
     // hb-set.h
 
     IntConstant("", "SET_VALUE_INVALID".."-1")
@@ -2833,6 +3397,13 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         "",
 
         hb_set_t.p("set", "")
+    )
+
+    hb_bool_t(
+        "set_is_inverted",
+        "",
+
+        hb_set_t.const.p("set", "")
     )
 
     hb_bool_t(
@@ -3543,11 +4114,11 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
 
     // hb-version.h
 
-    IntConstant("", "VERSION_MAJOR".."5")
-    IntConstant("", "VERSION_MINOR".."3")
-    IntConstant("", "VERSION_MICRO".."1")
+    IntConstant("", "VERSION_MAJOR".."7")
+    IntConstant("", "VERSION_MINOR".."0")
+    IntConstant("", "VERSION_MICRO".."0")
 
-    StringConstant("", "VERSION_STRING".."5.3.1")
+    StringConstant("", "VERSION_STRING".."7.0.0")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {

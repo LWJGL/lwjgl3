@@ -17,21 +17,21 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  * 
  * <pre><code>
  * void (*{@link #invoke}) (
- *     hb_draw_funcs_t *dfuncs,
- *     void *draw_data,
- *     hb_draw_state_t *st,
- *     float control1_x,
- *     float control1_y,
- *     float control2_x,
- *     float control2_y,
- *     float to_x,
- *     float to_y,
+ *     hb_paint_funcs_t *funcs,
+ *     void *paint_data,
+ *     hb_color_line_t *color_line,
+ *     float x0,
+ *     float y0,
+ *     float r0,
+ *     float x1,
+ *     float y1,
+ *     float r1,
  *     void *user_data
  * )</code></pre>
  */
 @FunctionalInterface
-@NativeType("hb_draw_cubic_to_func_t")
-public interface hb_draw_cubic_to_func_tI extends CallbackI {
+@NativeType("hb_paint_radial_gradient_func_t")
+public interface hb_paint_radial_gradient_func_tI extends CallbackI {
 
     FFICIF CIF = apiCreateCIF(
         FFI_DEFAULT_ABI,
@@ -58,20 +58,6 @@ public interface hb_draw_cubic_to_func_tI extends CallbackI {
         );
     }
 
-    /**
-     * A virtual method for the {@code hb_draw_funcs_t} to perform a "cubic-to" draw operation.
-     *
-     * @param dfuncs     draw functions object
-     * @param draw_data  the data accompanying the draw functions in {@link HarfBuzz#hb_font_draw_glyph font_draw_glyph}
-     * @param st         current draw state
-     * @param control1_x X component of first control point
-     * @param control1_y Y component of first control point
-     * @param control2_x X component of second control point
-     * @param control2_y Y component of second control point
-     * @param to_x       X component of target point
-     * @param to_y       Y component of target point
-     * @param user_data  user data pointer passed to {@link HarfBuzz#hb_draw_funcs_set_cubic_to_func draw_funcs_set_cubic_to_func}
-     */
-    void invoke(@NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("void *") long draw_data, @NativeType("hb_draw_state_t *") long st, float control1_x, float control1_y, float control2_x, float control2_y, float to_x, float to_y, @NativeType("void *") long user_data);
+    void invoke(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_color_line_t *") long color_line, float x0, float y0, float r0, float x1, float y1, float r1, @NativeType("void *") long user_data);
 
 }
