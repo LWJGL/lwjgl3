@@ -57,3 +57,21 @@ val ALBUFFERCALLBACKTYPESOFT = Module.OPENAL.callback {
         nativeType = "ALBUFFERCALLBACKTYPESOFT"
     )
 }
+
+// AL_SOFT_events
+
+val ALEVENTPROCSOFT = Module.OPENAL.callback {
+    void(
+        "SOFTEventProc",
+        "",
+
+        ALenum("eventType", ""),
+        ALuint("object", ""),
+        ALuint("param", ""),
+        AutoSize("message")..ALsizei("length", ""),
+        ALcharASCII.const.p("message", ""),
+        Unsafe..nullable..ALvoid.p("userParam", ""),
+
+        nativeType = "ALEVENTPROCSOFT"
+    )
+}

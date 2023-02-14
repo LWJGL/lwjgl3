@@ -74,6 +74,8 @@ public final class ALCCapabilities {
     public final boolean OpenALC10;
     /** When true, {@link ALC11} is supported. */
     public final boolean OpenALC11;
+    /** When true, {@link SOFTLoopbackBformat} is supported. */
+    public final boolean OpenALC_SOFT_loopback_bformat;
     /** When true, {@link EnumerateAllExt} is supported. */
     public final boolean ALC_ENUMERATE_ALL_EXT;
     /**
@@ -124,6 +126,7 @@ public final class ALCCapabilities {
 
         OpenALC10 = check_ALC10(provider, device, caps, ext);
         OpenALC11 = check_ALC11(provider, device, caps, ext);
+        OpenALC_SOFT_loopback_bformat = ext.contains("OpenALC_SOFT_loopback_bformat");
         ALC_ENUMERATE_ALL_EXT = ext.contains("ALC_ENUMERATE_ALL_EXT");
         ALC_ENUMERATION_EXT = ext.contains("ALC_ENUMERATION_EXT");
         ALC_EXT_CAPTURE = check_EXT_CAPTURE(provider, device, caps, ext);
