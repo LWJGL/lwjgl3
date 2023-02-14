@@ -16,17 +16,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the codec video profile.
+ * Structure specifying a video profile.
  * 
  * <h5>Description</h5>
  * 
- * <p>When a {@link VkVideoProfileInfoKHR} structure is specified through the {@code pProfiles} member of an {@link VkVideoProfileListInfoKHR} structure in the {@code pNext} chain of the input parameter of a query command such as {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR}, {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR}, or {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2}, the following error codes indicate specific causes of the failure of the query operation:</p>
+ * <p>Video profiles are provided as input to video capability queries such as {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} or {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR}, as well as when creating resources to be used by video coding operations such as images, buffers, query pools, and video sessions.</p>
+ * 
+ * <p>The full description of a video profile is specified by an instance of this structure, and the codec-specific and auxiliary structures provided in its {@code pNext} chain.</p>
+ * 
+ * <p>When this structure is specified as an input parameter to {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR}, or through the {@code pProfiles} member of an {@link VkVideoProfileListInfoKHR} structure in the {@code pNext} chain of the input parameter of a query command such as {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} or {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2}, the following error codes indicate specific causes of the failure of the query operation:</p>
  * 
  * <ul>
- * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR} The requested video picture layout (e.g. through the {@code pictureLayout} member of a {@link VkVideoDecodeH264ProfileInfoEXT} structure included in the {@code pNext} chain of {@link VkVideoProfileInfoKHR}) is not supported.</li>
- * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR} A video profile operation specified by {@code videoCodecOperation} is not supported.</li>
- * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR} Format parameters specified by {@code chromaSubsampling}, {@code lumaBitDepth}, or {@code chromaBitDepth} are not supported.</li>
- * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR} Codec-specific parameters corresponding to the {@code videoCodecOperation} are not provided through the {@code pNext} chain of {@link VkVideoProfileInfoKHR}, or the specified parameters are not supported.</li>
+ * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR} indicates that the requested video picture layout (e.g. through the {@code pictureLayout} member of a {@link VkVideoDecodeH264ProfileInfoKHR} structure included in the {@code pNext} chain of {@link VkVideoProfileInfoKHR}) is not supported.</li>
+ * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR} indicates that a video profile operation specified by {@code videoCodecOperation} is not supported.</li>
+ * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR} indicates that video format parameters specified by {@code chromaSubsampling}, {@code lumaBitDepth}, or {@code chromaBitDepth} are not supported.</li>
+ * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR} indicates that the codec-specific parameters corresponding to the video codec operation are not supported.</li>
  * </ul>
  * 
  * <h5>Valid Usage</h5>
@@ -35,6 +39,10 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code chromaSubsampling} <b>must</b> have a single bit set</li>
  * <li>{@code lumaBitDepth} <b>must</b> have a single bit set</li>
  * <li>If {@code chromaSubsampling} is not {@link KHRVideoQueue#VK_VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR}, then {@code chromaBitDepth} <b>must</b> have a single bit set</li>
+ * <li>If {@code videoCodecOperation} is {@link KHRVideoDecodeH264#VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoDecodeH264ProfileInfoKHR} structure</li>
+ * <li>If {@code videoCodecOperation} is {@link KHRVideoDecodeH265#VK_VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoDecodeH265ProfileInfoKHR} structure</li>
+ * <li>If {@code videoCodecOperation} is {@link EXTVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoEncodeH264ProfileInfoEXT} structure</li>
+ * <li>If {@code videoCodecOperation} is {@link EXTVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoEncodeH265ProfileInfoEXT} structure</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -141,10 +149,10 @@ public class VkVideoProfileInfoKHR extends Struct implements NativeResource {
     public VkVideoProfileInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoProfileInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoProfileInfoKHR pNext(VkVideoDecodeH264ProfileInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoDecodeH265ProfileInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoProfileInfoKHR pNext(VkVideoDecodeH265ProfileInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoProfileInfoKHR pNext(VkVideoDecodeH264ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH265ProfileInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoProfileInfoKHR pNext(VkVideoDecodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeUsageInfoKHR} value to the {@code pNext} chain. */
     public VkVideoProfileInfoKHR pNext(VkVideoDecodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264ProfileInfoEXT} value to the {@code pNext} chain. */
@@ -395,10 +403,10 @@ public class VkVideoProfileInfoKHR extends Struct implements NativeResource {
         public VkVideoProfileInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoProfileInfoKHR#pNext} field. */
         public VkVideoProfileInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoProfileInfoKHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoProfileInfoKHR.Buffer pNext(VkVideoDecodeH264ProfileInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoDecodeH265ProfileInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoProfileInfoKHR.Buffer pNext(VkVideoDecodeH265ProfileInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoProfileInfoKHR.Buffer pNext(VkVideoDecodeH264ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH265ProfileInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoProfileInfoKHR.Buffer pNext(VkVideoDecodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeUsageInfoKHR} value to the {@code pNext} chain. */
         public VkVideoProfileInfoKHR.Buffer pNext(VkVideoDecodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264ProfileInfoEXT} value to the {@code pNext} chain. */

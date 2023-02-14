@@ -339,7 +339,7 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_NON_VCL_NALU_TYPE_INVALID         = 0x7FFFFFFF;
 
     /** The extension specification version. */
-    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 8);
+    public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(1, 0, 0);
 
     /** The extension name. */
     public static final String VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h264_decode";

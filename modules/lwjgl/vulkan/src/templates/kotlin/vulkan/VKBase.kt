@@ -21,6 +21,14 @@ val PFN_vkGetInstanceProcAddr = "PFN_vkGetInstanceProcAddr".handle
 
 val VkRemoteAddressNV = "VkRemoteAddressNV".handle
 
+// Android interop types
+val AHardwareBuffer = "AHardwareBuffer".opaque
+val ANativeWindow = "ANativeWindow".opaque
+
+// DirectFB interop types
+val IDirectFB = "IDirectFB".opaque
+val IDirectFBSurface = "IDirectFBSurface".opaque
+
 // Metal interop types
 val CAMetalLayer = "CAMetalLayer".handle
 val MTLDevice_id = "MTLDevice_id".handle
@@ -29,3 +37,8 @@ val MTLBuffer_id = "MTLBuffer_id".handle
 val MTLTexture_id = "MTLTexture_id".handle
 val MTLSharedEvent_id = "MTLSharedEvent_id".handle
 val IOSurfaceRef = "IOSurfaceRef".handle
+
+// XCB interop types
+val xcb_connection_t = "xcb_connection_t".opaque
+val xcb_visualid_t = typedef(uint32_t, "xcb_visualid_t")
+val xcb_window_t = typedef(uint32_t, "xcb_window_t")

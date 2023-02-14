@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying shaders in a shader group.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the pipeline is created with {@link KHRPipelineLibrary#VK_PIPELINE_CREATE_LIBRARY_BIT_KHR PIPELINE_CREATE_LIBRARY_BIT_KHR} and the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-pipelineLibraryGroupHandles">pipelineLibraryGroupHandles</a> feature is enabled, {@code pShaderGroupCaptureReplayHandle} is inherited by all pipelines which link against this pipeline and remains bitwise identical for any pipeline which references this pipeline library.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

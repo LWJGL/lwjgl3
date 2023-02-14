@@ -17,13 +17,39 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of decode starts.
+ * Structure specifying video coding scope begin information.
+ * 
+ * <h5>Description</h5>
+ * 
+ * <p>Limiting values are defined below that are referenced by the relevant valid usage statements of this structure.</p>
+ * 
+ * <ul>
+ * <li>Let {@code VkOffset2D codedOffsetGranularity} be the minimum alignment requirement for the coded offset of video picture resources. Unless otherwise defined, the value of the {@code x} and {@code y} members of {@code codedOffsetGranularity} are 0.
+ * 
+ * <ul>
+ * <li>If {@code videoSession} was created with an <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-h264-profile">H.264 decode profile</a> with a {@link VkVideoDecodeH264ProfileInfoKHR}{@code ::pictureLayout} of {@link KHRVideoDecodeH264#VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR}, then {@code codedOffsetGranularity} is equal to {@link VkVideoDecodeH264CapabilitiesKHR}{@code ::fieldOffsetGranularity}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for that video profile.</li>
+ * </ul>
+ * </li>
+ * </ul>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@link VkVideoBeginCodingInfoKHR}{@code ::referenceSlotCount} <b>must</b> not exceed the value specified in {@link VkVideoSessionCreateInfoKHR}{@code ::maxDpbSlots} when creating the video session object that is being provided in {@code videoSession}</li>
- * <li>If {@code videoSessionParameters} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> have been created using {@code videoSession} as a parent object</li>
+ * <li>{@code videoSession} <b>must</b> have memory bound to all of its memory bindings returned by {@link KHRVideoQueue#vkGetVideoSessionMemoryRequirementsKHR GetVideoSessionMemoryRequirementsKHR} for {@code videoSession}</li>
+ * <li>Each non-negative {@link VkVideoReferenceSlotInfoKHR}{@code ::slotIndex} specified in the elements of {@code pReferenceSlots} <b>must</b> be less than the {@link VkVideoSessionCreateInfoKHR}{@code ::maxDpbSlots} specified when {@code videoSession} was created</li>
+ * <li>Each video picture resource corresponding to any non-{@code NULL} {@code pPictureResource} member specified in the elements of {@code pReferenceSlots} <b>must</b> be <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-picture-resource-uniqueness">unique</a> within {@code pReferenceSlots}</li>
+ * <li>If the {@code pPictureResource} member of any element of {@code pReferenceSlots} is not {@code NULL}, then the image view specified in {@code pPictureResource→imageViewBinding} for that element <b>must</b> be <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-profile-compatibility">compatible</a> with the video profile {@code videoSession} was created with</li>
+ * <li>If the {@code pPictureResource} member of any element of {@code pReferenceSlots} is not {@code NULL}, then the format of the image view specified in {@code pPictureResource→imageViewBinding} for that element <b>must</b> match the {@link VkVideoSessionCreateInfoKHR}::referencePictureFormat {@code videoSession} was created with</li>
+ * <li>If the {@code pPictureResource} member of any element of {@code pReferenceSlots} is not {@code NULL}, then its {@code codedOffset} member <b>must</b> be an integer multiple of {@code codedOffsetGranularity}</li>
+ * <li>If the {@code pPictureResource} member of any element of {@code pReferenceSlots} is not {@code NULL}, then its {@code codedExtent} member <b>must</b> be between {@code minCodedExtent} and {@code maxCodedExtent}, inclusive, {@code videoSession} was created with</li>
+ * <li>If {@link VkVideoCapabilitiesKHR}{@code ::flags} does not include {@link KHRVideoQueue#VK_VIDEO_CAPABILITY_SEPARATE_REFERENCE_IMAGES_BIT_KHR VIDEO_CAPABILITY_SEPARATE_REFERENCE_IMAGES_BIT_KHR}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile {@code videoSession} was created with, then {@code pPictureResource→imageViewBinding} of all elements of {@code pReferenceSlots} with a non-{@code NULL} {@code pPictureResource} member <b>must</b> specify image views created from the same image</li>
+ * <li>If {@code videoSession} was created with a decode operation and the {@code slotIndex} member of any element of {@code pReferenceSlots} is not negative, then the image view specified in {@code pPictureResource→imageViewBinding} for that element <b>must</b> have been created with {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR}</li>
+ * <li>If {@code videoSession} was created with an encode operation and the {@code slotIndex} member of any element of {@code pReferenceSlots} is not negative, then the image view specified in {@code pPictureResource→imageViewBinding} for that element <b>must</b> have been created with {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR}</li>
+ * <li>If {@code videoSession} was created with the video codec operation {@link KHRVideoDecodeH264#VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR}, then {@code videoSessionParameters} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+ * <li>If {@code videoSession} was created with the video codec operation {@link KHRVideoDecodeH265#VK_VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR}, then {@code videoSessionParameters} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+ * <li>If {@code videoSession} was created with the video codec operation {@link EXTVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT}, then {@code videoSessionParameters} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+ * <li>If {@code videoSession} was created with the video codec operation {@link EXTVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT}, then {@code videoSessionParameters} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
+ * <li>If {@code videoSessionParameters} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> have been created with {@code videoSession} specified in {@link VkVideoSessionParametersCreateInfoKHR}{@code ::videoSession}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -122,13 +148,13 @@ public class VkVideoBeginCodingInfoKHR extends Struct implements NativeResource 
     /** the video session object to be bound for the processing of the video commands. */
     @NativeType("VkVideoSessionKHR")
     public long videoSession() { return nvideoSession(address()); }
-    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a handle of a {@code VkVideoSessionParametersKHR} object to be used for the processing of the video commands. If {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then no video session parameters apply to this command buffer context. */
+    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a handle of a {@code VkVideoSessionParametersKHR} object to be used for the processing of the video commands. If {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then no video session parameters object is bound for the duration of the video coding scope. */
     @NativeType("VkVideoSessionParametersKHR")
     public long videoSessionParameters() { return nvideoSessionParameters(address()); }
-    /** the number of reference slot entries provided in {@code pReferenceSlots}. */
+    /** the number of elements in the {@code pReferenceSlots} array. */
     @NativeType("uint32_t")
     public int referenceSlotCount() { return nreferenceSlotCount(address()); }
-    /** a pointer to an array of {@link VkVideoReferenceSlotInfoKHR} structures specifying reference slots, used within the video command context between this {@link KHRVideoQueue#vkCmdBeginVideoCodingKHR CmdBeginVideoCodingKHR} command and the {@link KHRVideoQueue#vkCmdEndVideoCodingKHR CmdEndVideoCodingKHR} command that follows. Each reference slot provides a slot index and the {@link VkVideoPictureResourceInfoKHR} specifying the reference picture resource bound to this slot index. A slot index <b>must</b> not appear more than once in {@code pReferenceSlots} in a given command. */
+    /** a pointer to an array of {@link VkVideoReferenceSlotInfoKHR} structures specifying the information used to determine the set of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#bound-reference-picture-resources">bound reference picture resources</a> for the video coding scope and their initial association with <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB slot</a> indices. */
     @Nullable
     @NativeType("VkVideoReferenceSlotInfoKHR const *")
     public VkVideoReferenceSlotInfoKHR.Buffer pReferenceSlots() { return npReferenceSlots(address()); }

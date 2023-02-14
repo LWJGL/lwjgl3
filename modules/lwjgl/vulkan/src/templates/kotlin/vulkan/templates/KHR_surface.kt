@@ -205,7 +205,7 @@ val KHR_surface = "KHRSurface".nativeClassVK("KHR_surface", type = "instance", p
         </div>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        For a traditional "Linear" or non-gamma transfer function color space use #COLOR_SPACE_PASS_THROUGH_EXT.
+        For a traditional “{@code Linear}” or non-gamma transfer function color space use #COLOR_SPACE_PASS_THROUGH_EXT.
         </div>
 
         The color components of non-linear color space swap chain images <b>must</b> have had the appropriate transfer function applied. The color space selected for the swap chain image will not affect the processing of data written into the image by the implementation. Vulkan requires that all implementations support the sRGB transfer function by use of an SRGB pixel format. Other transfer functions, such as SMPTE 170M or SMPTE2084, <b>can</b> be performed by the application shader. This extension defines enums for {@code VkColorSpaceKHR} that correspond to the following color spaces:

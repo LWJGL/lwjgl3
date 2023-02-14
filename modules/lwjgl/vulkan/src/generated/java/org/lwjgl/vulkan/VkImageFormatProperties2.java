@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExternalImageFormatProperties}, {@link VkFilterCubicImageViewImageFormatPropertiesEXT}, {@link VkImageCompressionPropertiesEXT}, {@link VkSamplerYcbcrConversionImageFormatProperties}, or {@link VkTextureLODGatherFormatPropertiesAMD}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAndroidHardwareBufferUsageANDROID}, {@link VkExternalImageFormatProperties}, {@link VkFilterCubicImageViewImageFormatPropertiesEXT}, {@link VkImageCompressionPropertiesEXT}, {@link VkSamplerYcbcrConversionImageFormatProperties}, or {@link VkTextureLODGatherFormatPropertiesAMD}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -105,6 +105,8 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
     public VkImageFormatProperties2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkImageFormatProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkAndroidHardwareBufferUsageANDROID} value to the {@code pNext} chain. */
+    public VkImageFormatProperties2 pNext(VkAndroidHardwareBufferUsageANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExternalImageFormatProperties} value to the {@code pNext} chain. */
     public VkImageFormatProperties2 pNext(VkExternalImageFormatProperties value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExternalImageFormatPropertiesKHR} value to the {@code pNext} chain. */
@@ -340,6 +342,8 @@ public class VkImageFormatProperties2 extends Struct implements NativeResource {
         public VkImageFormatProperties2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2); }
         /** Sets the specified value to the {@link VkImageFormatProperties2#pNext} field. */
         public VkImageFormatProperties2.Buffer pNext(@NativeType("void *") long value) { VkImageFormatProperties2.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkAndroidHardwareBufferUsageANDROID} value to the {@code pNext} chain. */
+        public VkImageFormatProperties2.Buffer pNext(VkAndroidHardwareBufferUsageANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExternalImageFormatProperties} value to the {@code pNext} chain. */
         public VkImageFormatProperties2.Buffer pNext(VkExternalImageFormatProperties value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExternalImageFormatPropertiesKHR} value to the {@code pNext} chain. */

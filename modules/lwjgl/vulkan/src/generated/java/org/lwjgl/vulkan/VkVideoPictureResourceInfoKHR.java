@@ -16,7 +16,25 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the picture resources.
+ * Structure specifying the parameters of a video picture resource.
+ * 
+ * <h5>Description</h5>
+ * 
+ * <p>The image subresource referred to by such a structure is defined as the image array layer index specified in {@code baseArrayLayer} relative to the image subresource range the image view specified in {@code imageViewBinding} was created with.</p>
+ * 
+ * <p>The meaning of the {@code codedOffset} and {@code codedExtent} depends on the command and context the video picture resource is used in, as well as on the used <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-profiles">video profile</a> and corresponding codec-specific semantics, as described later.</p>
+ * 
+ * <p>A video picture resource is uniquely defined by the image subresource referred to by an instance of this structure, together with the {@code codedOffset} and {@code codedExtent} members that identify the image subregion within the image subresource referenced corresponding to the video picture resource according to the particular codec-specific semantics.</p>
+ * 
+ * <p>Accesses to image data within a video picture resource happen at the granularity indicated by {@link VkVideoCapabilitiesKHR}{@code ::pictureAccessGranularity}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-profiles">video profile</a>. As a result, given an effective image subregion corresponding to a video picture resource, the actual image subregion accessed <b>may</b> be larger than that as it <b>may</b> include additional padding texels due to the picture access granularity. Any writes performed by video coding operations to such padding texels will result in undefined texel values.</p>
+ * 
+ * <p>Two video picture resources match if they refer to the same image subresource and they specify identical {@code codedOffset} and {@code codedExtent} values.</p>
+ * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>{@code baseArrayLayer} <b>must</b> be less than the {@link VkImageViewCreateInfo}{@code ::subresourceRange.layerCount} specified when the image view {@code imageViewBinding} was created</li>
+ * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -99,14 +117,14 @@ public class VkVideoPictureResourceInfoKHR extends Struct implements NativeResou
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the offset to be used for the picture resource. */
+    /** the offset in texels of the image subregion to use. */
     public VkOffset2D codedOffset() { return ncodedOffset(address()); }
-    /** the extent to be used for the picture resource. */
+    /** the size in pixels of the coded image data. */
     public VkExtent2D codedExtent() { return ncodedExtent(address()); }
-    /** the first array layer to be accessed for the Decode or Encode Operations. */
+    /** the array layer of the image view specified in {@code imageViewBinding} to use as the video picture resource. */
     @NativeType("uint32_t")
     public int baseArrayLayer() { return nbaseArrayLayer(address()); }
-    /** a {@code VkImageView} image view representing this picture resource. */
+    /** an image view representing the video picture resource. */
     @NativeType("VkImageView")
     public long imageViewBinding() { return nimageViewBinding(address()); }
 

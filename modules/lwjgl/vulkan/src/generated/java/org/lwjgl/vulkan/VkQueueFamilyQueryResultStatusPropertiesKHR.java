@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying support for result status query.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If this structure is included in the {@code pNext} chain of the {@link VkQueueFamilyProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}, then it is filled with information about whether <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#queries-result-status-only">result status queries</a> are supported by the specified queue family.</p>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>

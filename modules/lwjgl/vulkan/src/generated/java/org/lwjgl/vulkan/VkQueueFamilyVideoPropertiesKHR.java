@@ -16,7 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying support for video codec operations.
+ * Structure describing video codec operations supported by a queue family.
+ * 
+ * <h5>Description</h5>
+ * 
+ * <p>If this structure is included in the {@code pNext} chain of the {@link VkQueueFamilyProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}, then it is filled with the set of video codec operations supported by the specified queue family.</p>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -81,7 +85,7 @@ public class VkQueueFamilyVideoPropertiesKHR extends Struct implements NativeRes
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoCodecOperationFlagBitsKHR} specifying supported video codec operation(s). */
+    /** a bitmask of {@code VkVideoCodecOperationFlagBitsKHR} that indicates the set of video codec operations supported by the queue family. */
     @NativeType("VkVideoCodecOperationFlagsKHR")
     public int videoCodecOperations() { return nvideoCodecOperations(address()); }
 

@@ -649,6 +649,7 @@ public class NVRayTracing {
      * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, then objects that were previously active <b>must</b> not be made inactive as per <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#acceleration-structure-inactive-prims">Inactive Primitives and Instances</a></li>
      * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, then objects that were previously inactive <b>must</b> not be made active as per <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#acceleration-structure-inactive-prims">Inactive Primitives and Instances</a></li>
      * <li>If {@code update} is {@link VK10#VK_TRUE TRUE}, the {@code src} and {@code dst} objects <b>must</b> either be the same object or not have any <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-memory-aliasing">memory aliasing</a></li>
+     * <li>{@code dst} <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object via {@link #vkBindAccelerationStructureMemoryNV BindAccelerationStructureMemoryNV}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -727,6 +728,8 @@ public class NVRayTracing {
      * <li>If {@code mode} is {@link KHRAccelerationStructure#VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR}, {@code src} <b>must</b> have been constructed with {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR} in the build</li>
      * <li>The {@code buffer} used to create {@code src} <b>must</b> be bound to device memory</li>
      * <li>The {@code buffer} used to create {@code dst} <b>must</b> be bound to device memory</li>
+     * <li>The range of memory backing {@code dst} that is accessed by this command <b>must</b> not overlap the memory backing {@code src} that is accessed by this command</li>
+     * <li>{@code dst} <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object via {@link #vkBindAccelerationStructureMemoryNV BindAccelerationStructureMemoryNV}</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -824,7 +827,6 @@ public class NVRayTracing {
      * <li>If the descriptors used by the {@code VkPipeline} bound to the pipeline bind point were specified via {@code vkCmdSetDescriptorBufferOffsetsEXT}, the bound {@code VkPipeline} <b>must</b> have been created with {@link EXTDescriptorBuffer#VK_PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT}</li>
      * <li>If a descriptor is dynamically used with a {@code VkPipeline} created with {@link EXTDescriptorBuffer#VK_PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT}, the descriptor memory <b>must</b> be resident</li>
      * <li>A valid pipeline <b>must</b> be bound to the pipeline bind point used by this command</li>
-     * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command requires any dynamic state, that state <b>must</b> have been set or inherited (if the {@link NVInheritedViewportScissor VK_NV_inherited_viewport_scissor} extension is enabled) for {@code commandBuffer}, and done so after any previously bound pipeline with the corresponding state not specified as dynamic</li>
      * <li>There <b>must</b> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the {@code VkPipeline} object bound to the pipeline bind point used by this command, since that pipeline was bound</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}, {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE IMAGE_VIEW_TYPE_CUBE}, {@link VK10#VK_IMAGE_VIEW_TYPE_1D_ARRAY IMAGE_VIEW_TYPE_1D_ARRAY}, {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY} or {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY}, in any shader stage</li>
      * <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>

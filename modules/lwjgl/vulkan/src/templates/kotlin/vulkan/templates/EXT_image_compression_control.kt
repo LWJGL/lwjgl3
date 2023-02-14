@@ -188,9 +188,14 @@ val EXT_image_compression_control = "EXTImageCompressionControl".nativeClassVK("
         <h5>Description</h5>
         {@code vkGetImageSubresourceLayout2EXT} behaves similarly to #GetImageSubresourceLayout(), with the ability to specify extended inputs via chained input structures, and to return extended information via chained output structures.
 
+        It is legal to call {@code vkGetImageSubresourceLayout2EXT} with a {@code image} created with {@code tiling} equal to #IMAGE_TILING_OPTIMAL, but the members of ##VkImageSubresource2EXT{@code ::imageSubresource} will have undefined values in this case.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        Structures chained from ##VkImageSubresource2EXT{@code ::pNext} will also be updated when {@code tiling} is equal to #IMAGE_TILING_OPTIMAL.
+        </div>
+
         <h5>Valid Usage</h5>
         <ul>
-            <li>{@code image} <b>must</b> have been created with {@code tiling} equal to #IMAGE_TILING_LINEAR or #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT</li>
             <li>The {@code aspectMask} member of {@code pSubresource} <b>must</b> only have a single bit set</li>
             <li>The {@code mipLevel} member of {@code pSubresource} <b>must</b> be less than the {@code mipLevels} specified in ##VkImageCreateInfo when {@code image} was created</li>
             <li>The {@code arrayLayer} member of {@code pSubresource} <b>must</b> be less than the {@code arrayLayers} specified in ##VkImageCreateInfo when {@code image} was created</li>
@@ -200,6 +205,7 @@ val EXT_image_compression_control = "EXTImageCompressionControl".nativeClassVK("
             <li>If {@code format} does not contain a stencil or depth component, the {@code aspectMask} member of {@code pSubresource} <b>must</b> not contain #IMAGE_ASPECT_DEPTH_BIT or #IMAGE_ASPECT_STENCIL_BIT</li>
             <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_LINEAR and its {@code format} is a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a> with two planes, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT or #IMAGE_ASPECT_PLANE_1_BIT</li>
             <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_LINEAR and its {@code format} is a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a> with three planes, the {@code aspectMask} member of {@code pSubresource} <b>must</b> be #IMAGE_ASPECT_PLANE_0_BIT, #IMAGE_ASPECT_PLANE_1_BIT or #IMAGE_ASPECT_PLANE_2_BIT</li>
+            <li>If {@code image} was created with the #EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID external memory handle type, then {@code image} <b>must</b> be bound to memory</li>
             <li>If the {@code tiling} of the {@code image} is #IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, then the {@code aspectMask} member of {@code pSubresource} <b>must</b> be <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code> and the index <em>i</em> <b>must</b> be less than the ##VkDrmFormatModifierPropertiesEXT{@code ::drmFormatModifierPlaneCount} associated with the image’s {@code format} and ##VkImageDrmFormatModifierPropertiesEXT{@code ::drmFormatModifier}</li>
         </ul>
 

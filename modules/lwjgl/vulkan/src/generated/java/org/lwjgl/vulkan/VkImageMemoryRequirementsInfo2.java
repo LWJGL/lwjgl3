@@ -25,6 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code image} was created with {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} and with {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then there <b>must</b> be a {@link VkImagePlaneMemoryRequirementsInfo} included in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
  * <li>If {@code image} was not created with the {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} flag, there <b>must</b> not be a {@link VkImagePlaneMemoryRequirementsInfo} included in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
  * <li>If {@code image} was created with a single-plane format and with any {@code tiling} other than {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then there <b>must</b> not be a {@link VkImagePlaneMemoryRequirementsInfo} included in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
+ * <li>If {@code image} was created with the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID} external memory handle type, then {@code image} <b>must</b> be bound to memory</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

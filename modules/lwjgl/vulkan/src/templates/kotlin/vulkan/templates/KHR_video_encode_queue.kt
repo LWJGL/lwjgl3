@@ -249,7 +249,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
             <li>#VIDEO_ENCODE_TUNING_MODE_DEFAULT_KHR specifies the default tuning mode.</li>
             <li>#VIDEO_ENCODE_TUNING_MODE_HIGH_QUALITY_KHR specifies that video encoding is tuned for high quality. When using this tuning mode, the implementation <b>may</b> compromise the latency of video encoding operations to improve quality.</li>
             <li>#VIDEO_ENCODE_TUNING_MODE_LOW_LATENCY_KHR specifies that video encoding is tuned for low latency. When using this tuning mode, the implementation <b>may</b> compromise quality to increase the performance and lower the latency of video encode operations.</li>
-            <li>#VIDEO_ENCODE_TUNING_MODE_ULTRA_LOW_LATENCY_KHR specifies that video encoding is tuned for ultra-low latency. When using this tuning mode, the implementation <b>may</b> compromise quality to maximimize the performance and minimize the latency of video encoding operations.</li>
+            <li>#VIDEO_ENCODE_TUNING_MODE_ULTRA_LOW_LATENCY_KHR specifies that video encoding is tuned for ultra-low latency. When using this tuning mode, the implementation <b>may</b> compromise quality to maximize the performance and minimize the latency of video encoding operations.</li>
             <li>#VIDEO_ENCODE_TUNING_MODE_LOSSLESS_KHR specifies that video encoding is tuned for lossless encoding. When using this tuning mode, video encode operations produce lossless output.</li>
         </ul>
 
@@ -270,12 +270,22 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         Encode operation for bitstream generation.
 
         <h5>C Specification</h5>
-        To launch an encode operation that results in bitstream generation, call:
+        To launch video encode operations, call:
 
         <pre><code>
 ￿void vkCmdEncodeVideoKHR(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    const VkVideoEncodeInfoKHR*                 pEncodeInfo);</code></pre>
+
+        <h5>Description</h5>
+        Each call issues one or more video encode operations. The implicit parameter {@code opCount} corresponds to the number of video encode operations issued by the command. After calling this command, the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-operation-active-query-index">active query index</a> of each <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-operation-active">active</a> query is incremented by {@code opCount}.
+
+        Currently each call to this command results in the issue of a single video encode operation.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>For each <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-operation-active">active</a> query, the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-operation-active-query-index">active query index</a> corresponding to the query type of that query plus {@code opCount} <b>must</b> be less than or equal to the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-operation-last-activatable-query-index">last activatable query index</a> corresponding to the query type of that query plus one</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

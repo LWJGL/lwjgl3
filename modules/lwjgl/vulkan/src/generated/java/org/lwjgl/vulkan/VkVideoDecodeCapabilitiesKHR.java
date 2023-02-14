@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying decode capabilities.
+ * Structure describing general video decode capabilities for a video profile.
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
@@ -81,7 +81,7 @@ public class VkVideoDecodeCapabilitiesKHR extends Struct implements NativeResour
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoDecodeCapabilityFlagBitsKHR} describing supported decoding features. */
+    /** a bitmask of {@code VkVideoDecodeCapabilityFlagBitsKHR} describing the supported video decoding capabilities. */
     @NativeType("VkVideoDecodeCapabilityFlagsKHR")
     public int flags() { return nflags(address()); }
 

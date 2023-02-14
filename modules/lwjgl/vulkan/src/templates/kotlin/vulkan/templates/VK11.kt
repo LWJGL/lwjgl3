@@ -531,7 +531,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </div>
 
         <h5>See Also</h5>
-        ##VkSamplerYcbcrConversionCreateInfo
+        ##VkAndroidHardwareBufferFormatProperties2ANDROID, ##VkAndroidHardwareBufferFormatPropertiesANDROID, ##VkSamplerYcbcrConversionCreateInfo
         """,
 
         "SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY".."0",
@@ -556,7 +556,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         No range modification takes place if {@code ycbcrModel} is #SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY; the {@code ycbcrRange} field of ##VkSamplerYcbcrConversionCreateInfo is ignored in this case.
 
         <h5>See Also</h5>
-        ##VkSamplerYcbcrConversionCreateInfo
+        ##VkAndroidHardwareBufferFormatProperties2ANDROID, ##VkAndroidHardwareBufferFormatPropertiesANDROID, ##VkSamplerYcbcrConversionCreateInfo
         """,
 
         "SAMPLER_YCBCR_RANGE_ITU_FULL".."0",
@@ -574,7 +574,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         </ul>
 
         <h5>See Also</h5>
-        ##VkSamplerYcbcrConversionCreateInfo
+        ##VkAndroidHardwareBufferFormatProperties2ANDROID, ##VkAndroidHardwareBufferFormatPropertiesANDROID, ##VkSamplerYcbcrConversionCreateInfo
         """,
 
         "CHROMA_LOCATION_COSITED_EVEN".."0",
@@ -614,6 +614,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT specifies a host pointer returned by a host memory allocation command. It does not own a reference to the underlying memory resource, and will therefore become invalid if the host memory is freed.</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT specifies a host pointer to <em>host mapped foreign memory</em>. It does not own a reference to the underlying memory resource, and will therefore become invalid if the foreign memory is unmapped or otherwise becomes no longer available.</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT is a file descriptor for a Linux dma_buf. It owns a reference to the underlying memory resource represented by its Vulkan memory object.</li>
+            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID specifies an {@code AHardwareBuffer} object defined by the Android NDK. See <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#memory-external-android-hardware-buffer">Android Hardware Buffers</a> for more details of this handle type.</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_RDMA_ADDRESS_BIT_NV is a handle to an allocation accessible by remote devices. It owns a reference to the underlying memory resource represented by its Vulkan memory object.</li>
         </ul>
 
@@ -633,6 +634,7 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
                 <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT</td><td>No restriction</td><td>No restriction</td></tr>
                 <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT</td><td>No restriction</td><td>No restriction</td></tr>
                 <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT</td><td>No restriction</td><td>No restriction</td></tr>
+                <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</td><td>No restriction</td><td>No restriction</td></tr>
                 <tr><td>#EXTERNAL_MEMORY_HANDLE_TYPE_RDMA_ADDRESS_BIT_NV</td><td>No restriction</td><td>No restriction</td></tr>
             </tbody>
         </table>
@@ -675,9 +677,10 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT</li>
             <li>#EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT</li>
+            <li>#EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID for images only</li>
         </ul>
 
-        Implementations <b>must</b> not report #EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT for images or buffers with external handle type #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT, or #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT.
+        Implementations <b>must</b> not report #EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT for buffers with external handle type #EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID. Implementations <b>must</b> not report #EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT for images or buffers with external handle type #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT, or #EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT.
         """,
 
         "EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT".enum(0x00000001),
@@ -1144,7 +1147,6 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
             <li>If the descriptors used by the {@code VkPipeline} bound to the pipeline bind point were specified via {@code vkCmdSetDescriptorBufferOffsetsEXT}, the bound {@code VkPipeline} <b>must</b> have been created with #PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT</li>
             <li>If a descriptor is dynamically used with a {@code VkPipeline} created with #PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT, the descriptor memory <b>must</b> be resident</li>
             <li>A valid pipeline <b>must</b> be bound to the pipeline bind point used by this command</li>
-            <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command requires any dynamic state, that state <b>must</b> have been set or inherited (if the {@link NVInheritedViewportScissor VK_NV_inherited_viewport_scissor} extension is enabled) for {@code commandBuffer}, and done so after any previously bound pipeline with the corresponding state not specified as dynamic</li>
             <li>There <b>must</b> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the {@code VkPipeline} object bound to the pipeline bind point used by this command, since that pipeline was bound</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
@@ -1542,7 +1544,12 @@ val VK11 = "VK11".nativeClass(Module.VULKAN, "VK11", prefix = "VK", binding = VK
         <h5>Description</h5>
         {@code vkGetPhysicalDeviceImageFormatProperties2} behaves similarly to #GetPhysicalDeviceImageFormatProperties(), with the ability to return extended information in a {@code pNext} chain of output structures.
 
-        If the {@code pNext} chain of {@code pImageFormatInfo} includes a ##VkVideoProfileListInfoKHR structure with a {@code profileCount} member greater than 0, then {@code vkGetPhysicalDeviceImageFormatProperties2} returns format capabilities specific to image types used in conjunction with the specified video codec operations and corresponding video profiles. In this case {@code vkGetPhysicalDeviceImageFormatProperties2} returns one of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profile-error-codes">video-profile-specific error codes</a> if any of the profiles specified via ##VkVideoProfileListInfoKHR{@code ::pProfiles} are not supported. Furthermore, if ##VkPhysicalDeviceImageFormatInfo2{@code ::usage} includes any image usage flags not supported by the specified video profiles then {@code vkGetPhysicalDeviceImageFormatProperties2} returns #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
+        If the {@code pNext} chain of {@code pImageFormatInfo} includes a ##VkVideoProfileListInfoKHR structure with a {@code profileCount} member greater than 0, then this command returns format capabilities specific to image types used in conjunction with the specified <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profiles">video profiles</a>. In this case, this command will return one of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profile-error-codes">video-profile-specific error codes</a> if any of the profiles specified via ##VkVideoProfileListInfoKHR{@code ::pProfiles} are not supported. Furthermore, if ##VkPhysicalDeviceImageFormatInfo2{@code ::usage} includes any image usage flag not supported by the specified video profiles, then this command returns #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If the {@code pNext} chain of {@code pImageFormatProperties} includes a ##VkAndroidHardwareBufferUsageANDROID structure, the {@code pNext} chain of {@code pImageFormatInfo} <b>must</b> include a ##VkPhysicalDeviceExternalImageFormatInfo structure with {@code handleType} set to #EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

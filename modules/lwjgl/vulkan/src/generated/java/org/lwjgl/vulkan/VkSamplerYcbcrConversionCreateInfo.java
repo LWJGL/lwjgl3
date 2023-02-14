@@ -27,12 +27,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <p>If {@code format} supports {@link VK11#VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT} the {@code forceExplicitReconstruction} value behaves as if it was set to {@link VK10#VK_TRUE TRUE}.</p>
  * </div>
  * 
- * <p>Sampler Y′C<sub>B</sub>C<sub>R</sub> conversion objects do not support <em>external format conversion</em> without additional extensions defining <em>external formats</em>.</p>
+ * <p>If the {@code pNext} chain includes a {@link VkExternalFormatANDROID} structure with non-zero {@code externalFormat} member, the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion object represents an <em>external format conversion</em>, and {@code format} <b>must</b> be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}. Such conversions <b>must</b> only be used to sample image views with a matching <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-external-android-hardware-buffer-external-formats">external format</a>. When creating an external format conversion, the value of {@code components} is ignored.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code format} <b>must</b> represent unsigned normalized values (i.e. the format must be a {@code UNORM} format)</li>
+ * <li>If an external format conversion is being created, {@code format} <b>must</b> be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
+ * <li>If an external format conversion is not being created, {@code format} <b>must</b> represent unsigned normalized values (i.e. the format must be a {@code UNORM} format)</li>
  * <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> of the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion <b>must</b> support {@link VK11#VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT} or {@link VK11#VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT}</li>
  * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> of the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion do not support {@link VK11#VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT}, {@code xChromaOffset} and {@code yChromaOffset} <b>must</b> not be {@link VK11#VK_CHROMA_LOCATION_COSITED_EVEN CHROMA_LOCATION_COSITED_EVEN} if the corresponding components are <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-chroma-reconstruction">downsampled</a></li>
  * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#potential-format-features">potential format features</a> of the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion do not support {@link VK11#VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT}, {@code xChromaOffset} and {@code yChromaOffset} <b>must</b> not be {@link VK11#VK_CHROMA_LOCATION_MIDPOINT CHROMA_LOCATION_MIDPOINT} if the corresponding components are <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-chroma-reconstruction">downsampled</a></li>
@@ -51,7 +52,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
+ * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkExternalFormatANDROID}</li>
+ * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
  * <li>{@code ycbcrModel} <b>must</b> be a valid {@code VkSamplerYcbcrModelConversion} value</li>
  * <li>{@code ycbcrRange} <b>must</b> be a valid {@code VkSamplerYcbcrRange} value</li>
@@ -182,6 +184,8 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
     public VkSamplerYcbcrConversionCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkSamplerYcbcrConversionCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
+    /** Prepends the specified {@link VkExternalFormatANDROID} value to the {@code pNext} chain. */
+    public VkSamplerYcbcrConversionCreateInfo pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #format} field. */
     public VkSamplerYcbcrConversionCreateInfo format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
     /** Sets the specified value to the {@link #ycbcrModel} field. */
@@ -488,6 +492,8 @@ public class VkSamplerYcbcrConversionCreateInfo extends Struct implements Native
         public VkSamplerYcbcrConversionCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO); }
         /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#pNext} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSamplerYcbcrConversionCreateInfo.npNext(address(), value); return this; }
+        /** Prepends the specified {@link VkExternalFormatANDROID} value to the {@code pNext} chain. */
+        public VkSamplerYcbcrConversionCreateInfo.Buffer pNext(VkExternalFormatANDROID value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#format} field. */
         public VkSamplerYcbcrConversionCreateInfo.Buffer format(@NativeType("VkFormat") int value) { VkSamplerYcbcrConversionCreateInfo.nformat(address(), value); return this; }
         /** Sets the specified value to the {@link VkSamplerYcbcrConversionCreateInfo#ycbcrModel} field. */

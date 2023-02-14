@@ -31,13 +31,14 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code queryType} is {@link VK10#VK_QUERY_TYPE_PIPELINE_STATISTICS QUERY_TYPE_PIPELINE_STATISTICS}, {@code pipelineStatistics} <b>must</b> be a valid combination of {@code VkQueryPipelineStatisticFlagBits} values</li>
  * <li>If {@code queryType} is {@link KHRPerformanceQuery#VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR QUERY_TYPE_PERFORMANCE_QUERY_KHR}, the {@code pNext} chain <b>must</b> include a {@link VkQueryPoolPerformanceCreateInfoKHR} structure</li>
  * <li>{@code queryCount} <b>must</b> be greater than 0</li>
+ * <li>If {@code queryType} is {@link KHRVideoEncodeQueue#VK_QUERY_TYPE_VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR QUERY_TYPE_VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoProfileInfoKHR} structure with {@code videoCodecOperation} specifying an encode operation</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkQueryPoolPerformanceCreateInfoKHR}, {@link VkQueryPoolPerformanceQueryCreateInfoINTEL}, {@link VkVideoDecodeH264ProfileInfoEXT}, {@link VkVideoDecodeH265ProfileInfoEXT}, {@link VkVideoDecodeUsageInfoKHR}, {@link VkVideoEncodeH264ProfileInfoEXT}, {@link VkVideoEncodeH265ProfileInfoEXT}, {@link VkVideoEncodeUsageInfoKHR}, or {@link VkVideoProfileInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkQueryPoolPerformanceCreateInfoKHR}, {@link VkQueryPoolPerformanceQueryCreateInfoINTEL}, {@link VkVideoDecodeH264ProfileInfoKHR}, {@link VkVideoDecodeH265ProfileInfoKHR}, {@link VkVideoDecodeUsageInfoKHR}, {@link VkVideoEncodeH264ProfileInfoEXT}, {@link VkVideoEncodeH265ProfileInfoEXT}, {@link VkVideoEncodeUsageInfoKHR}, or {@link VkVideoProfileInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code queryType} <b>must</b> be a valid {@code VkQueryType} value</li>
@@ -141,10 +142,10 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
     public VkQueryPoolCreateInfo pNext(VkQueryPoolPerformanceCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkQueryPoolPerformanceQueryCreateInfoINTEL} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoEXT} value to the {@code pNext} chain. */
-    public VkQueryPoolCreateInfo pNext(VkVideoDecodeH264ProfileInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoDecodeH265ProfileInfoEXT} value to the {@code pNext} chain. */
-    public VkQueryPoolCreateInfo pNext(VkVideoDecodeH265ProfileInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
+    public VkQueryPoolCreateInfo pNext(VkVideoDecodeH264ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH265ProfileInfoKHR} value to the {@code pNext} chain. */
+    public VkQueryPoolCreateInfo pNext(VkVideoDecodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoDecodeUsageInfoKHR} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkVideoDecodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264ProfileInfoEXT} value to the {@code pNext} chain. */
@@ -422,10 +423,10 @@ public class VkQueryPoolCreateInfo extends Struct implements NativeResource {
         public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolPerformanceCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkQueryPoolPerformanceQueryCreateInfoINTEL} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolPerformanceQueryCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoEXT} value to the {@code pNext} chain. */
-        public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeH264ProfileInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoDecodeH265ProfileInfoEXT} value to the {@code pNext} chain. */
-        public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeH265ProfileInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH264ProfileInfoKHR} value to the {@code pNext} chain. */
+        public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeH264ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH265ProfileInfoKHR} value to the {@code pNext} chain. */
+        public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoDecodeUsageInfoKHR} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoDecodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264ProfileInfoEXT} value to the {@code pNext} chain. */

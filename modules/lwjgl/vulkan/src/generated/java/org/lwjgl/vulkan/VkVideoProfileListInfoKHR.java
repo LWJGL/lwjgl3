@@ -17,16 +17,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure enumerating the video profiles.
+ * Structure specifying one or more video profiles used in conjunction.
  * 
  * <h5>Description</h5>
  * 
- * <p>Video transcoding is an example of a use case that necessitates numerous profiles. When the application provides one or more video decode and encode profiles in the list of profiles, the implementation ensures that the video formats and parameters reported produce video resources suitable for the transcoding use cases without the need for manual transformation.</p>
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+ * 
+ * <p>Video transcoding is an example of a use case that necessitates the specification of multiple profiles in various contexts.</p>
+ * </div>
+ * 
+ * <p>When the application provides a video decode profile and one or more video encode profiles in the profile list, the implementation ensures that any capabilitities returned or resources created are suitable for the video transcoding use cases without the need for manual data transformations.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>If the {@code pProfiles} list contains more than one {@link VkVideoProfileInfoKHR} entry, then it <b>must</b> not contain more than one entry whose {@code videoCodecOperation} member specifies a decode operation</li>
+ * <li>{@code pProfiles} <b>must</b> not contain more than one element whose {@code videoCodecOperation} member specifies a decode operation</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -101,10 +106,10 @@ public class VkVideoProfileListInfoKHR extends Struct implements NativeResource 
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** an integer which holds the number of video profiles included in {@code pProfiles}. */
+    /** the number of elements in the {@code pProfiles} array. */
     @NativeType("uint32_t")
     public int profileCount() { return nprofileCount(address()); }
-    /** a pointer to an array of {@link VkVideoProfileInfoKHR} structures. Each {@link VkVideoProfileInfoKHR} structure <b>must</b> chain the corresponding codec-operation specific extension video profile structure. */
+    /** a pointer to an array of {@link VkVideoProfileInfoKHR} structures. */
     @Nullable
     @NativeType("VkVideoProfileInfoKHR const *")
     public VkVideoProfileInfoKHR.Buffer pProfiles() { return npProfiles(address()); }

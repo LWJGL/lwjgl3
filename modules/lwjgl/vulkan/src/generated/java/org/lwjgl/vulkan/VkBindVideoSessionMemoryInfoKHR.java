@@ -18,6 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure specifying memory bindings for a video session object.
  * 
+ * <h5>Valid Usage</h5>
+ * 
+ * <ul>
+ * <li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
+ * <li>{@code memorySize} <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
+ * </ul>
+ * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
@@ -99,7 +106,7 @@ public class VkBindVideoSessionMemoryInfoKHR extends Struct implements NativeRes
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the index of the memory binding returned in {@link VkVideoSessionMemoryRequirementsKHR}{@code ::memoryBindIndex} from {@link KHRVideoQueue#vkGetVideoSessionMemoryRequirementsKHR GetVideoSessionMemoryRequirementsKHR}. */
+    /** the memory binding index to bind memory to. */
     @NativeType("uint32_t")
     public int memoryBindIndex() { return nmemoryBindIndex(address()); }
     /** the allocated device memory to be bound to the video session’s memory binding with index {@code memoryBindIndex}. */

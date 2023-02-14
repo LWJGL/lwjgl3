@@ -17,19 +17,25 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of decoding a frame.
+ * Structure specifying video decode parameters.
  * 
- * <h5>Description</h5>
+ * <h5>Valid Usage</h5>
  * 
- * <p>The coded size of the decode operation is specified in {@code codedExtent} of {@code dstPictureResource}.</p>
- * 
- * <p>The coded offset of the decode operation is specified in {@code codedOffset} of {@code dstPictureResource}. The purpose of this field is interpreted based on the codec extension. When decoding content in H.264 field mode, {@code codedOffset} specifies the line or picture field’s offset within the image.</p>
+ * <ul>
+ * <li>{@code srcBuffer} <b>must</b> have been created with {@link KHRVideoDecodeQueue#VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR} set</li>
+ * <li>{@code srcBufferOffset} <b>must</b> be less than the size of {@code srcBuffer}</li>
+ * <li>{@code srcBufferRange} <b>must</b> be less than or equal to the size of {@code srcBuffer} minus {@code srcBufferOffset}</li>
+ * <li>If {@code pSetupReferenceSlot} is not {@code NULL}, then its {@code slotIndex} member <b>must</b> not be negative</li>
+ * <li>If {@code pSetupReferenceSlot} is not {@code NULL}, then its {@code pPictureResource} <b>must</b> not be {@code NULL}</li>
+ * <li>The {@code slotIndex} member of each element of {@code pReferenceSlots} <b>must</b> not be negative</li>
+ * <li>The {@code pPictureResource} member of each element of {@code pReferenceSlots} <b>must</b> not be {@code NULL}</li>
+ * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264PictureInfoEXT} or {@link VkVideoDecodeH265PictureInfoEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeH264PictureInfoKHR} or {@link VkVideoDecodeH265PictureInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be 0</li>
  * <li>{@code srcBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
@@ -124,31 +130,31 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. All the codec specific structures related to each frame(picture parameters, quantization matrix, etc.) <b>must</b> be chained here and pass to decode session with the function call {@link KHRVideoDecodeQueue#vkCmdDecodeVideoKHR CmdDecodeVideoKHR}. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** reserved for future use. */
     @NativeType("VkVideoDecodeFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** the source buffer that holds the encoded bitstream. */
+    /** the source video bitstream buffer to read the encoded bitstream from. */
     @NativeType("VkBuffer")
     public long srcBuffer() { return nsrcBuffer(address()); }
-    /** the buffer offset where the valid encoded bitstream starts in srcBuffer. It <b>must</b> meet the alignment requirement {@code minBitstreamBufferOffsetAlignment} within {@link VkVideoCapabilitiesKHR} queried with the {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} function. */
+    /** the starting offset in bytes from the start of {@code srcBuffer} to read the encoded bitstream from. */
     @NativeType("VkDeviceSize")
     public long srcBufferOffset() { return nsrcBufferOffset(address()); }
-    /** the size of the srcBuffer with valid encoded bitstream, starting from {@code srcBufferOffset}. It <b>must</b> meet the alignment requirement {@code minBitstreamBufferSizeAlignment} within {@link VkVideoCapabilitiesKHR} queried with the {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} function. */
+    /** the size in bytes of the encoded bitstream to decode from {@code srcBuffer}, starting from {@code srcBufferOffset}. */
     @NativeType("VkDeviceSize")
     public long srcBufferRange() { return nsrcBufferRange(address()); }
-    /** the destination <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decoded-output-picture">Decoded Output Picture</a> Resource. */
+    /** the video picture resource to use as the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-output-picture">decode output picture</a>. */
     public VkVideoPictureResourceInfoKHR dstPictureResource() { return ndstPictureResource(address()); }
-    /** {@code NULL} or a pointer to a {@link VkVideoReferenceSlotInfoKHR} structure used for generating a DPB reference slot and Picture Resource. {@code pSetupReferenceSlot→slotIndex} specifies the slot index number to use as a target for producing the DPB data. {@code slotIndex} <b>must</b> reference a valid entry as specified in {@link VkVideoBeginCodingInfoKHR} via the {@code pReferenceSlots} within the {@link KHRVideoQueue#vkCmdBeginVideoCodingKHR CmdBeginVideoCodingKHR} command that established the Vulkan Video Decode Context for this command. */
+    /** {@code NULL} or a pointer to a {@link VkVideoReferenceSlotInfoKHR} structure describing the DPB slot to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot-states">activate</a> and the video picture resource to use as the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reconstructed-picture">reconstructed picture</a> to activate the DPB slot with. */
     @Nullable
     @NativeType("VkVideoReferenceSlotInfoKHR const *")
     public VkVideoReferenceSlotInfoKHR pSetupReferenceSlot() { return npSetupReferenceSlot(address()); }
-    /** the number of the DPB Reference Pictures that will be used when this decoding operation is executing. */
+    /** the number of elements in the {@code pReferenceSlots} array. */
     @NativeType("uint32_t")
     public int referenceSlotCount() { return nreferenceSlotCount(address()); }
-    /** a pointer to an array of {@link VkVideoReferenceSlotInfoKHR} structures specifying the DPB Reference pictures that will be used when this decoding operation is executing. */
+    /** a pointer to an array of {@link VkVideoReferenceSlotInfoKHR} structures describing the DPB slots and corresponding <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">reference picture</a> resources to use in this video decode operation (the set of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#active-reference-pictures">active reference pictures</a>). */
     @Nullable
     @NativeType("VkVideoReferenceSlotInfoKHR const *")
     public VkVideoReferenceSlotInfoKHR.Buffer pReferenceSlots() { return npReferenceSlots(address()); }
@@ -159,10 +165,10 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
     public VkVideoDecodeInfoKHR sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Prepends the specified {@link VkVideoDecodeH264PictureInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH264PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoDecodeH265PictureInfoEXT} value to the {@code pNext} chain. */
-    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH265PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH264PictureInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH264PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH265PictureInfoKHR} value to the {@code pNext} chain. */
+    public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Sets the specified value to the {@link #flags} field. */
     public VkVideoDecodeInfoKHR flags(@NativeType("VkVideoDecodeFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #srcBuffer} field. */
@@ -459,10 +465,10 @@ public class VkVideoDecodeInfoKHR extends Struct implements NativeResource {
         public VkVideoDecodeInfoKHR.Buffer sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR); }
         /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#pNext} field. */
         public VkVideoDecodeInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeInfoKHR.npNext(address(), value); return this; }
-        /** Prepends the specified {@link VkVideoDecodeH264PictureInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH264PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoDecodeH265PictureInfoEXT} value to the {@code pNext} chain. */
-        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH265PictureInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH264PictureInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH264PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH265PictureInfoKHR} value to the {@code pNext} chain. */
+        public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#flags} field. */
         public VkVideoDecodeInfoKHR.Buffer flags(@NativeType("VkVideoDecodeFlagsKHR") int value) { VkVideoDecodeInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#srcBuffer} field. */

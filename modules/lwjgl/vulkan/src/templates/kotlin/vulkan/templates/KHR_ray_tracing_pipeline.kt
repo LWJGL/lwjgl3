@@ -303,7 +303,6 @@ val KHR_ray_tracing_pipeline = "KHRRayTracingPipeline".nativeClassVK("KHR_ray_tr
             <li>If the descriptors used by the {@code VkPipeline} bound to the pipeline bind point were specified via {@code vkCmdSetDescriptorBufferOffsetsEXT}, the bound {@code VkPipeline} <b>must</b> have been created with #PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT</li>
             <li>If a descriptor is dynamically used with a {@code VkPipeline} created with #PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT, the descriptor memory <b>must</b> be resident</li>
             <li>A valid pipeline <b>must</b> be bound to the pipeline bind point used by this command</li>
-            <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command requires any dynamic state, that state <b>must</b> have been set or inherited (if the {@link NVInheritedViewportScissor VK_NV_inherited_viewport_scissor} extension is enabled) for {@code commandBuffer}, and done so after any previously bound pipeline with the corresponding state not specified as dynamic</li>
             <li>There <b>must</b> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the {@code VkPipeline} object bound to the pipeline bind point used by this command, since that pipeline was bound</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>
@@ -533,8 +532,10 @@ val KHR_ray_tracing_pipeline = "KHRRayTracingPipeline".nativeClassVK("KHR_ray_tr
             <li>{@code firstGroup} <b>must</b> be less than the number of shader groups in {@code pipeline}</li>
             <li>The sum of {@code firstGroup} and {@code groupCount} <b>must</b> be less than or equal to the number of shader groups in {@code pipeline}</li>
             <li>{@code dataSize} <b>must</b> be at least <code>##VkPhysicalDeviceRayTracingPipelinePropertiesKHR::shaderGroupHandleSize × groupCount</code></li>
-            <li>{@code pipeline} <b>must</b> not have been created with #PIPELINE_CREATE_LIBRARY_BIT_KHR</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineLibraryGroupHandles">pipelineLibraryGroupHandles</a> feature is not enabled, {@code pipeline} <b>must</b> not have been created with #PIPELINE_CREATE_LIBRARY_BIT_KHR</li>
         </ul>
+
+        If {@code pipeline} was created with #PIPELINE_CREATE_LIBRARY_BIT_KHR and the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineLibraryGroupHandles">pipelineLibraryGroupHandles</a> feature is enabled applications <b>can</b> query group handles from that pipeline, even if the pipeline is a library and is never bound to a command buffer. These group handles remain bitwise identical for any {@code pipeline} which references the pipeline library. Group indices are assigned as-if the pipeline was created without #PIPELINE_CREATE_LIBRARY_BIT_KHR.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -596,8 +597,10 @@ val KHR_ray_tracing_pipeline = "KHRRayTracingPipeline".nativeClassVK("KHR_ray_tr
             <li>{@code dataSize} <b>must</b> be at least <code>##VkPhysicalDeviceRayTracingPipelinePropertiesKHR::shaderGroupHandleCaptureReplaySize × groupCount</code></li>
             <li>##VkPhysicalDeviceRayTracingPipelineFeaturesKHR{@code ::rayTracingPipelineShaderGroupHandleCaptureReplay} <b>must</b> be enabled to call this function</li>
             <li>{@code pipeline} <b>must</b> have been created with a {@code flags} that included #PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR</li>
-            <li>{@code pipeline} <b>must</b> not have been created with #PIPELINE_CREATE_LIBRARY_BIT_KHR</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineLibraryGroupHandles">pipelineLibraryGroupHandles</a> feature is not enabled, {@code pipeline} <b>must</b> not have been created with #PIPELINE_CREATE_LIBRARY_BIT_KHR</li>
         </ul>
+
+        If {@code pipeline} was created with #PIPELINE_CREATE_LIBRARY_BIT_KHR and the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-pipelineLibraryGroupHandles">pipelineLibraryGroupHandles</a> feature is enabled applications <b>can</b> query capture replay group handles from that pipeline. The capture replay handle remains bitwise identical for any {@code pipeline} which references the pipeline library. Group indices are assigned as-if the pipeline was created without #PIPELINE_CREATE_LIBRARY_BIT_KHR.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -673,7 +676,6 @@ val KHR_ray_tracing_pipeline = "KHRRayTracingPipeline".nativeClassVK("KHR_ray_tr
             <li>If the descriptors used by the {@code VkPipeline} bound to the pipeline bind point were specified via {@code vkCmdSetDescriptorBufferOffsetsEXT}, the bound {@code VkPipeline} <b>must</b> have been created with #PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT</li>
             <li>If a descriptor is dynamically used with a {@code VkPipeline} created with #PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT, the descriptor memory <b>must</b> be resident</li>
             <li>A valid pipeline <b>must</b> be bound to the pipeline bind point used by this command</li>
-            <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command requires any dynamic state, that state <b>must</b> have been set or inherited (if the {@link NVInheritedViewportScissor VK_NV_inherited_viewport_scissor} extension is enabled) for {@code commandBuffer}, and done so after any previously bound pipeline with the corresponding state not specified as dynamic</li>
             <li>There <b>must</b> not have been any calls to dynamic state setting commands for any state not specified as dynamic in the {@code VkPipeline} object bound to the pipeline bind point used by this command, since that pipeline was bound</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used to sample from any {@code VkImage} with a {@code VkImageView} of the type #IMAGE_VIEW_TYPE_3D, #IMAGE_VIEW_TYPE_CUBE, #IMAGE_VIEW_TYPE_1D_ARRAY, #IMAGE_VIEW_TYPE_2D_ARRAY or #IMAGE_VIEW_TYPE_CUBE_ARRAY, in any shader stage</li>
             <li>If the {@code VkPipeline} object bound to the pipeline bind point used by this command accesses a {@code VkSampler} object that uses unnormalized coordinates, that sampler <b>must</b> not be used with any of the SPIR-V {@code OpImageSample*} or {@code OpImageSparseSample*} instructions with {@code ImplicitLod}, {@code Dref} or {@code Proj} in their name, in any shader stage</li>

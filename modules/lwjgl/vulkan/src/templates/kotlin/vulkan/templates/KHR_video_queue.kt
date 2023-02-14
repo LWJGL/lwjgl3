@@ -34,26 +34,28 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <dd>24</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>7</dd>
+            <dd>8</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd><ul>
                 <li>Requires support for Vulkan 1.1</li>
                 <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
                 <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2} to be enabled for any device-level functionality</li>
-                <li>This is a <em>provisional</em> extension and <b>must</b> be used with caution. See the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#boilerplate-provisional-header">description</a> of provisional header files for enablement and stability details.</li>
             </ul></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
                 <li>Tony Zlatinski <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_video_queue]%20@tzlatinski%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_video_queue%20extension*">tzlatinski</a></li>
             </ul></dd>
+
+            <dt><b>Extension Proposal</b></dt>
+            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_KHR_video_queue.adoc">VK_KHR_video_queue</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-09-26</dd>
+            <dd>2022-09-29</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -75,7 +77,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_QUEUE_SPEC_VERSION".."7"
+        "KHR_VIDEO_QUEUE_SPEC_VERSION".."8"
     )
 
     StringConstant(
@@ -138,15 +140,13 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
     EnumConstant(
         """
-        VkVideoCodecOperationFlagBitsKHR - Video codec operation types
+        VkVideoCodecOperationFlagBitsKHR - Video codec operation bits
 
         <h5>Description</h5>
-        Each decode or encode codec-specific extension extends this enumeration with the appropriate bit corresponding to the extension’s codec operation:
-
         <ul>
             <li>#VIDEO_CODEC_OPERATION_NONE_KHR indicates no support for any video codec operations.</li>
-            <li>#VIDEO_CODEC_OPERATION_DECODE_H264_BIT_EXT specifies support for H.264 video decode operations.</li>
-            <li>#VIDEO_CODEC_OPERATION_DECODE_H265_BIT_EXT specifies support for H.265 video decode operations.</li>
+            <li>#VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR specifies support for H.264 video decode operations.</li>
+            <li>#VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR specifies support for H.265 video decode operations.</li>
             <li>#VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT specifies support for H.264 video encode operations.</li>
             <li>#VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT specifies support for H.265 video encode operations.</li>
         </ul>
@@ -160,14 +160,14 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
     EnumConstant(
         """
-        VkVideoChromaSubsamplingFlagBitsKHR - Video chroma subsampling
+        VkVideoChromaSubsamplingFlagBitsKHR - Video format chroma subsampling bits
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR - the format is monochrome.</li>
-            <li>#VIDEO_CHROMA_SUBSAMPLING_420_BIT_KHR - the format is 4:2:0 chroma subsampled. The two chroma components are each subsampled at a factor of 2 both horizontally and vertically.</li>
-            <li>#VIDEO_CHROMA_SUBSAMPLING_422_BIT_KHR - the format is 4:2:2 chroma subsampled. The two chroma components are sampled at half the sample rate of luma. The horizontal chroma resolution is halved.</li>
-            <li>#VIDEO_CHROMA_SUBSAMPLING_444_BIT_KHR - the format is 4:4:4 chroma sampled. Each of the three YCbCr components have the same sample rate, thus there is no chroma subsampling.</li>
+            <li>#VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR specifies that the format is monochrome.</li>
+            <li>#VIDEO_CHROMA_SUBSAMPLING_420_BIT_KHR specified that the format is 4:2:0 chroma subsampled, i.e. the two chroma components are sampled horizontally and vertically at half the sample rate of the luma component.</li>
+            <li>#VIDEO_CHROMA_SUBSAMPLING_422_BIT_KHR - the format is 4:2:2 chroma subsampled, i.e. the two chroma components are sampled horizontally at half the sample rate of luma component.</li>
+            <li>#VIDEO_CHROMA_SUBSAMPLING_444_BIT_KHR - the format is 4:4:4 chroma sampled, i.e. all three components of the Y′C<sub>B</sub>C<sub>R</sub> format are sampled at the same rate, thus there is no chroma subsampling.</li>
         </ul>
         """,
 
@@ -180,13 +180,13 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
     EnumConstant(
         """
-        VkVideoComponentBitDepthFlagBitsKHR - Video component bit depth
+        VkVideoComponentBitDepthFlagBitsKHR - Video format component bit depth
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_COMPONENT_BIT_DEPTH_8_BIT_KHR - the format component bit depth is 8 bits.</li>
-            <li>#VIDEO_COMPONENT_BIT_DEPTH_10_BIT_KHR - the format component bit depth is 10 bits.</li>
-            <li>#VIDEO_COMPONENT_BIT_DEPTH_12_BIT_KHR - the format component bit depth is 12 bits.</li>
+            <li>#VIDEO_COMPONENT_BIT_DEPTH_8_BIT_KHR specifies a component bit depth of 8 bits.</li>
+            <li>#VIDEO_COMPONENT_BIT_DEPTH_10_BIT_KHR specifies a component bit depth of 10 bits.</li>
+            <li>#VIDEO_COMPONENT_BIT_DEPTH_12_BIT_KHR specifies a component bit depth of 12 bits.</li>
         </ul>
         """,
 
@@ -198,12 +198,12 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
     EnumConstant(
         """
-        VkVideoCapabilityFlagBitsKHR - Video Decode and Encode Capability Flags
+        VkVideoCapabilityFlagBitsKHR - Video decode and encode capability bits
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR - the decode or encode session supports protected content.</li>
-            <li>#VIDEO_CAPABILITY_SEPARATE_REFERENCE_IMAGES_BIT_KHR - the DPB or Reconstructed Video Picture Resources for the video session <b>may</b> be created as a separate {@code VkImage} for each DPB picture. If not supported, the DPB <b>must</b> be created as single multi-layered image where each layer represents one of the DPB Video Picture Resources.</li>
+            <li>#VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR specifies that video sessions support producing and consuming protected content.</li>
+            <li>#VIDEO_CAPABILITY_SEPARATE_REFERENCE_IMAGES_BIT_KHR specifies that the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resources">video picture resources</a> associated with the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slots</a> of a video session <b>can</b> be backed by separate {@code VkImage} objects. If this capability flag is not present, then all DPB slots of a video session <b>must</b> be associated with video picture resources backed by the same {@code VkImage} object (e.g. using different layers of the same image).</li>
         </ul>
         """,
 
@@ -213,11 +213,11 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
     EnumConstant(
         """
-        VkVideoSessionCreateFlagBitsKHR - Video decode or encode video session creation flags
+        VkVideoSessionCreateFlagBitsKHR - Video session creation flags
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR - create the video session for use with protected video content</li>
+            <li>#VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR specifies that the video session uses protected video content.</li>
         </ul>
         """,
 
@@ -259,16 +259,29 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
     VkResult(
         "GetPhysicalDeviceVideoCapabilitiesKHR",
         """
-        Query video decode or encode capabilities.
+        Query video coding capabilities.
 
         <h5>C Specification</h5>
-        To query video decode or encode capabilities for a specific codec, call:
+        To query video coding capabilities for a specific video profile, call:
 
         <pre><code>
 ￿VkResult vkGetPhysicalDeviceVideoCapabilitiesKHR(
 ￿    VkPhysicalDevice                            physicalDevice,
 ￿    const VkVideoProfileInfoKHR*                pVideoProfile,
 ￿    VkVideoCapabilitiesKHR*                     pCapabilities);</code></pre>
+
+        <h5>Description</h5>
+        If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profiles">video profile</a> described by {@code pVideoProfile} is supported by the implementation, then this command returns #SUCCESS and {@code pCapabilities} is filled with the capabilities supported with the specified video profile. Otherwise, one of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profile-error-codes">video-profile-specific error codes</a> are returned.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code pVideoProfile→videoCodecOperation} specifies a decode operation, then the {@code pNext} chain of {@code pCapabilities} <b>must</b> include a ##VkVideoDecodeCapabilitiesKHR structure</li>
+            <li>If {@code pVideoProfile→videoCodecOperation} is #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR, then the {@code pNext} chain of {@code pCapabilities} <b>must</b> include a ##VkVideoDecodeH264CapabilitiesKHR structure</li>
+            <li>If {@code pVideoProfile→videoCodecOperation} is #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the {@code pNext} chain of {@code pCapabilities} <b>must</b> include a ##VkVideoDecodeH265CapabilitiesKHR structure</li>
+            <li>If {@code pVideoProfile→videoCodecOperation} specifies an encode operation, then the {@code pNext} chain of {@code pCapabilities} <b>must</b> include a ##VkVideoEncodeCapabilitiesKHR structure</li>
+            <li>If {@code pVideoProfile→videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT, then the {@code pNext} chain of {@code pCapabilities} <b>must</b> include a ##VkVideoEncodeH264CapabilitiesEXT structure</li>
+            <li>If {@code pVideoProfile→videoCodecOperation} is #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT, then the {@code pNext} chain of {@code pCapabilities} <b>must</b> include a ##VkVideoEncodeH265CapabilitiesEXT structure</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -299,18 +312,18 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkVideoCapabilitiesKHR, ##VkVideoProfileInfoKHR
         """,
 
-        VkPhysicalDevice("physicalDevice", "the physical device whose video decode or encode capabilities will be queried."),
-        VkVideoProfileInfoKHR.const.p("pVideoProfile", "a pointer to a ##VkVideoProfileInfoKHR structure with a chained codec-operation specific video profile structure."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the video decode or encode capabilities."),
+        VkVideoProfileInfoKHR.const.p("pVideoProfile", "a pointer to a ##VkVideoProfileInfoKHR structure."),
         VkVideoCapabilitiesKHR.p("pCapabilities", "a pointer to a ##VkVideoCapabilitiesKHR structure in which the capabilities are returned.")
     )
 
     VkResult(
         "GetPhysicalDeviceVideoFormatPropertiesKHR",
         """
-        Query supported Video Decode and Encode image formats.
+        Query supported video decode and encode image formats and capabilities.
 
         <h5>C Specification</h5>
-        To enumerate the supported output, input and DPB image formats for a specific codec operation and video profile, call:
+        To enumerate the supported output, input and DPB image formats and corresponding capabilities for a specific video profile, call:
 
         <pre><code>
 ￿VkResult vkGetPhysicalDeviceVideoFormatPropertiesKHR(
@@ -322,9 +335,17 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         <h5>Description</h5>
         If {@code pVideoFormatProperties} is {@code NULL}, then the number of video format properties supported for the given {@code physicalDevice} is returned in {@code pVideoFormatPropertyCount}. Otherwise, {@code pVideoFormatPropertyCount} <b>must</b> point to a variable set by the user to the number of elements in the {@code pVideoFormatProperties} array, and on return the variable is overwritten with the number of values actually written to {@code pVideoFormatProperties}. If the value of {@code pVideoFormatPropertyCount} is less than the number of video format properties supported, at most {@code pVideoFormatPropertyCount} values will be written to {@code pVideoFormatProperties}, and #INCOMPLETE will be returned instead of #SUCCESS, to indicate that not all the available values were returned.
 
-        If an implementation reports #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR is supported but #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR is not supported in ##VkVideoDecodeCapabilitiesKHR{@code ::flags}, then to query for video format properties for decode DPB or output, ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} <b>must</b> have both #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR and #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR set. Otherwise, the call will fail with #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
+        Video format properties are always queried with respect to a specific set of video profiles. These are specified by chaining the ##VkVideoProfileListInfoKHR structure to {@code pVideoFormatInfo}.
 
-        If an implementation reports #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR is supported but #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR is not supported in ##VkVideoDecodeCapabilitiesKHR{@code ::flags}, then to query for video format properties for decode DPB, ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} <b>must</b> have #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR set and #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR not set. Otherwise, the call will fail with #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR. Similarly, to query for video format properties for decode output, ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} <b>must</b> have #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR set and #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR not set. Otherwise, the call will fail with #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
+        For most use cases, the images are used by a single video session and a single video profile is provided. For a use case such as video transcoding, where a decode session output image <b>can</b> be used as encode input in one or more encode sessions, multiple video profiles corresponding to the video sessions that will share the image <b>must</b> be provided.
+
+        If any of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profiles">video profiles</a> specified via ##VkVideoProfileListInfoKHR{@code ::pProfiles} are not supported, then this command returns one of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profile-error-codes">video-profile-specific error codes</a>. Furthermore, if ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} includes any image usage flags not supported by the specified video profiles, then this command returns #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
+
+        This command also returns #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR if ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} does not include the appropriate flags as dictated by the decode capability flags returned in ##VkVideoDecodeCapabilitiesKHR{@code ::flags} for any of the profiles specified in the ##VkVideoProfileListInfoKHR structure provided in the {@code pNext} chain of {@code pVideoFormatInfo}.
+
+        If the decode capability flags include #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR but not #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR, then in order to query video format properties for decode DPB and output usage, ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} <b>must</b> include both #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR and #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR. Otherwise, the call will fail with #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
+
+        If the decode capability flags include #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_DISTINCT_BIT_KHR but not #VIDEO_DECODE_CAPABILITY_DPB_AND_OUTPUT_COINCIDE_BIT_KHR, then in order to query video format properties for decode DPB usage, ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} <b>must</b> include #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR, but not #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR. Otherwise, the call will fail with #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR. Similarly, to query video format properties for decode output usage, ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} <b>must</b> include #IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR, but not #IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR. Otherwise, the call will fail with #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
 
         The {@code imageUsage} member of the ##VkPhysicalDeviceVideoFormatInfoKHR structure specifies the expected video usage flags that the returned video formats <b>must</b> support. Correspondingly, the {@code imageUsageFlags} member of each ##VkVideoFormatPropertiesKHR structure returned will contain at least the same set of image usage flags.
 
@@ -333,12 +354,6 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
         For most use cases, only decode or encode related usage flags are going to be specified. For a use case such as transcode, if the image were to be shared between decode and encode session(s), then both decode and encode related usage flags <b>can</b> be set.
         </div>
-
-        Video format properties are always queried with respect to a specific set of video profiles, as defined by the ##VkVideoProfileInfoKHR structure. These are specified by chaining the ##VkVideoProfileListInfoKHR structure to {@code pVideoFormatInfo}.
-
-        For most use cases, the images are used by a single video session and a single video profile is provided. For a use case such as transcode, where a decode session output image <b>can</b> be used as encode input in one or more encode sessions, multiple video profiles corresponding to the video sessions that will share the image <b>must</b> be provided.
-
-        If any of the profiles specified via ##VkVideoProfileListInfoKHR{@code ::pProfiles} are not supported, then {@code vkGetPhysicalDeviceVideoFormatPropertiesKHR} returns one of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-profile-error-codes">video-profile-specific error codes</a>. Furthermore, if ##VkPhysicalDeviceVideoFormatInfoKHR{@code ::imageUsage} includes any image usage flags not supported by the specified video profiles then {@code vkGetPhysicalDeviceVideoFormatPropertiesKHR} returns #ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR.
 
         Multiple ##VkVideoFormatPropertiesKHR entries <b>may</b> be returned with the same {@code format} member with different {@code componentMapping}, {@code imageType}, or {@code imageTiling} values, as described later.
 
@@ -358,7 +373,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The {@code pNext} chain of {@code pVideoFormatInfo} <b>must</b> include a valid ##VkVideoProfileListInfoKHR structure with {@code profileCount} greater than 0</li>
+            <li>The {@code pNext} chain of {@code pVideoFormatInfo} <b>must</b> include a ##VkVideoProfileListInfoKHR structure with {@code profileCount} greater than 0</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -393,10 +408,10 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkPhysicalDeviceVideoFormatInfoKHR, ##VkVideoFormatPropertiesKHR
         """,
 
-        VkPhysicalDevice("physicalDevice", "the physical device being queried."),
-        VkPhysicalDeviceVideoFormatInfoKHR.const.p("pVideoFormatInfo", "a pointer to a ##VkPhysicalDeviceVideoFormatInfoKHR structure specifying the codec and video profile for which information is returned."),
+        VkPhysicalDevice("physicalDevice", "the physical device from which to query the video format properties."),
+        VkPhysicalDeviceVideoFormatInfoKHR.const.p("pVideoFormatInfo", "a pointer to a ##VkPhysicalDeviceVideoFormatInfoKHR structure specifying the usage and video profiles for which supported image formats and capabilities are returned."),
         AutoSize("pVideoFormatProperties")..Check(1)..uint32_t.p("pVideoFormatPropertyCount", "a pointer to an integer related to the number of video format properties available or queried, as described below."),
-        nullable..VkVideoFormatPropertiesKHR.p("pVideoFormatProperties", "a pointer to an array of ##VkVideoFormatPropertiesKHR structures in which supported formats and image parameters are returned.")
+        nullable..VkVideoFormatPropertiesKHR.p("pVideoFormatProperties", "a pointer to an array of ##VkVideoFormatPropertiesKHR structures in which supported image formats and capabilities are returned.")
     )
 
     VkResult(
@@ -415,7 +430,19 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 ￿    VkVideoSessionKHR*                          pVideoSession);</code></pre>
 
         <h5>Description</h5>
-        Video session objects are created in <em>uninitialized</em> state. In order to transition the video session into <em>initial</em> state, the application <b>must</b> issue a #CmdControlVideoCodingKHR() command with the {@code flags} member of ##VkVideoCodingControlInfoKHR including #VIDEO_CODING_CONTROL_RESET_BIT_KHR.
+        The resulting video session object is said to be created with the video codec operation specified in {@code pCreateInfo→pVideoProfile→videoCodecOperation}.
+
+        The name and version of the codec-specific Video Std header to be used with the video session is specified by the ##VkExtensionProperties structure pointed to by {@code pCreateInfo→pStdHeaderVersion}. If a non-existent or unsupported Video Std header version is specified in {@code pCreateInfo→pStdHeaderVersion→specVersion}, then this command returns #ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR.
+
+        Video session objects are created in <em>uninitialized</em> state. In order to transition the video session into <em>initial</em> state, the application <b>must</b> issue a #CmdControlVideoCodingKHR() command with ##VkVideoCodingControlInfoKHR{@code ::flags} including #VIDEO_CODING_CONTROL_RESET_BIT_KHR.
+
+        Video session objects also maintain the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-state-and-backing-store">state</a> of the DPB. The number of DPB slots usable with the created video session is specified in {@code pCreateInfo→maxDpbSlots}, and each slot is initially in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">inactive state</a>.
+
+        Each <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> maintained by the created video session <b>can</b> refer to a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reference-picture">reference picture</a> representing a video frame.
+
+        In addition, if the {@code videoCodecOperation} member of the ##VkVideoProfileInfoKHR structure pointed to by {@code pCreateInfo→pVideoProfile} is #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR and the {@code pictureLayout} member of the ##VkVideoDecodeH264ProfileInfoKHR structure provided in the ##VkVideoProfileInfoKHR{@code ::pNext} chain is not #VIDEO_DECODE_H264_PICTURE_LAYOUT_PROGRESSIVE_KHR, then the created video session supports <em>interlaced</em> frames and each <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> maintained by the created video session <b>can</b> instead refer to separate top field and bottom field <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reference-picture">reference pictures</a> that together <b>can</b> represent a full video frame. In this case, it is up to the application, driven by the video content, whether it associates any individual DPB slot with separate top and/or bottom field pictures or a single picture representing a full frame.
+
+        The created video session <b>can</b> be used to perform video coding operations using video frames up to the maximum size specified in {@code pCreateInfo→maxCodedExtent}. The minimum frame size allowed is implicitly derived from ##VkVideoCapabilitiesKHR{@code ::minCodedExtent}, as returned by #GetPhysicalDeviceVideoCapabilitiesKHR() for the video profile specified by {@code pCreateInfo→pVideoProfile}. Accordingly, the created video session is said to be created with a {@code minCodedExtent} equal to that.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -445,25 +472,32 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkAllocationCallbacks, ##VkVideoSessionCreateInfoKHR
         """,
 
-        VkDevice("device", "the logical device that creates the decode or encode session object."),
-        VkVideoSessionCreateInfoKHR.const.p("pCreateInfo", "a pointer to a ##VkVideoSessionCreateInfoKHR structure containing parameters specifying the creation of the decode or encode session."),
+        VkDevice("device", "the logical device that creates the video session."),
+        VkVideoSessionCreateInfoKHR.const.p("pCreateInfo", "a pointer to a ##VkVideoSessionCreateInfoKHR structure containing parameters to be used to create the video session."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkVideoSessionKHR.p("pVideoSession", "a pointer to a {@code VkVideoSessionKHR} structure specifying the decode or encode video session object which will be created by this function when it returns #SUCCESS")
+        Check(1)..VkVideoSessionKHR.p("pVideoSession", "a pointer to a {@code VkVideoSessionKHR} handle in which the resulting video session object is returned.")
     )
 
     void(
         "DestroyVideoSessionKHR",
         """
-        Destroy decode session object.
+        Destroy video session object.
 
         <h5>C Specification</h5>
-        To destroy a decode session object, call:
+        To destroy a video session, call:
 
         <pre><code>
 ￿void vkDestroyVideoSessionKHR(
 ￿    VkDevice                                    device,
 ￿    VkVideoSessionKHR                           videoSession,
 ￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>All submitted commands that refer to {@code videoSession} <b>must</b> have completed execution</li>
+            <li>If ##VkAllocationCallbacks were provided when {@code videoSession} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+            <li>If no ##VkAllocationCallbacks were provided when {@code videoSession} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -482,18 +516,18 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkAllocationCallbacks
         """,
 
-        VkDevice("device", "the device that was used for the creation of the video session."),
-        VkVideoSessionKHR("videoSession", "the decode or encode video session to be destroyed."),
+        VkDevice("device", "the logical device that destroys the video session."),
+        VkVideoSessionKHR("videoSession", "the video session to destroy."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     VkResult(
         "GetVideoSessionMemoryRequirementsKHR",
         """
-        Get Memory Requirements.
+        Get the memory requirements for a video session.
 
         <h5>C Specification</h5>
-        To get memory requirements for a video session, call:
+        To determine the memory requirements for a video session object, call:
 
         <pre><code>
 ￿VkResult vkGetVideoSessionMemoryRequirementsKHR(
@@ -520,11 +554,6 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <dd><ul>
                 <li>#SUCCESS</li>
                 <li>#INCOMPLETE</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_INITIALIZATION_FAILED</li>
             </ul></dd>
         </dl>
 
@@ -553,6 +582,24 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 ￿    uint32_t                                    bindSessionMemoryInfoCount,
 ￿    const VkBindVideoSessionMemoryInfoKHR*      pBindSessionMemoryInfos);</code></pre>
 
+        <h5>Description</h5>
+        The valid usage statements below refer to the ##VkMemoryRequirements structure corresponding to a specific element of {@code pBindSessionMemoryInfos}, which is defined as follows:
+
+        <ul>
+            <li>If the {@code memoryBindIndex} member of the element of {@code pBindSessionMemoryInfos} in question matches the {@code memoryBindIndex} member of one of the elements returned in {@code pMemoryRequirements} when #GetVideoSessionMemoryRequirementsKHR() is called with the same {@code videoSession} and with {@code pMemoryRequirementsCount} equal to {@code bindSessionMemoryInfoCount}, then the {@code memoryRequirements} member of that element of {@code pMemoryRequirements} is the ##VkMemoryRequirements structure corresponding to the element of {@code pBindSessionMemoryInfos} in question.</li>
+            <li>Otherwise the element of {@code pBindSessionMemoryInfos} in question is said to not have a corresponding ##VkMemoryRequirements structure.</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The memory binding of {@code videoSession} identified by the {@code memoryBindIndex} member of any element of {@code pBindSessionMemoryInfos} <b>must</b> not already be backed by a memory object</li>
+            <li>The {@code memoryBindIndex} member of each element of {@code pBindSessionMemoryInfos} <b>must</b> be unique within {@code pBindSessionMemoryInfos}</li>
+            <li>Each element of {@code pBindSessionMemoryInfos} <b>must</b> have a corresponding ##VkMemoryRequirements structure</li>
+            <li>If an element of {@code pBindSessionMemoryInfos} has a corresponding ##VkMemoryRequirements structure, then the {@code memory} member of that element of {@code pBindSessionMemoryInfos} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the corresponding ##VkMemoryRequirements structure</li>
+            <li>If an element of {@code pBindSessionMemoryInfos} has a corresponding ##VkMemoryRequirements structure, then the {@code memoryOffset} member of that element of {@code pBindSessionMemoryInfos} <b>must</b> be an integer multiple of the {@code alignment} member of the corresponding ##VkMemoryRequirements structure</li>
+            <li>If an element of {@code pBindSessionMemoryInfos} has a corresponding ##VkMemoryRequirements structure, then the {@code memorySize} member of that element of {@code pBindSessionMemoryInfos} <b>must</b> equal the {@code size} member of the corresponding ##VkMemoryRequirements structure</li>
+        </ul>
+
         <h5>Valid Usage (Implicit)</h5>
         <ul>
             <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
@@ -578,7 +625,6 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
             <dd><ul>
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-                <li>#ERROR_INITIALIZATION_FAILED</li>
             </ul></dd>
         </dl>
 
@@ -595,7 +641,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
     VkResult(
         "CreateVideoSessionParametersKHR",
         """
-        Creates video session video session parameter object.
+        Creates video session parameters object.
 
         <h5>C Specification</h5>
         To create a video session parameters object, call:
@@ -606,6 +652,56 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 ￿    const VkVideoSessionParametersCreateInfoKHR* pCreateInfo,
 ￿    const VkAllocationCallbacks*                pAllocator,
 ￿    VkVideoSessionParametersKHR*                pVideoSessionParameters);</code></pre>
+
+        <h5>Description</h5>
+        The resulting video session parameters object is said to be created with the video codec operation {@code pCreateInfo→videoSession} was created with.
+
+        If {@code pCreateInfo→videoSessionParametersTemplate} is not #NULL_HANDLE, then it will be used as a template for constructing the new video session parameters object. This happens by first adding any parameters according to the additional creation parameters provided in the {@code pCreateInfo→pNext} chain, followed by adding any parameters from the template object that have a key that does not match the key of any of the already added parameters.
+
+        If {@code pCreateInfo→videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR, then the created video session parameters object will initially contain the following sets of parameter entries:
+
+        <ul>
+            <li>
+                {@code StdVideoH264SequenceParameterSet} structures representing <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h264-sps">H.264 SPS</a> entries, as follows:
+                <ul>
+                    <li>If the {@code pParametersAddInfo} member of the ##VkVideoDecodeH264SessionParametersCreateInfoKHR structure provided in the {@code pCreateInfo→pNext} chain is not {@code NULL}, then the set of {@code StdVideoH264SequenceParameterSet} entries specified in {@code pParametersAddInfo→pStdSPSs} are added first;</li>
+                    <li>If {@code pCreateInfo→videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH264SequenceParameterSet} entry stored in it is copied to the created video session parameters object if the created object does not already contain such an entry with the same {@code seq_parameter_set_id}.</li>
+                </ul>
+            </li>
+            <li>
+                {@code StdVideoH264PictureParameterSet} structures representing <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h264-pps">H.264 PPS</a> entries, as follows:
+                <ul>
+                    <li>If the {@code pParametersAddInfo} member of the ##VkVideoDecodeH264SessionParametersCreateInfoKHR structure provided in the {@code pCreateInfo→pNext} chain is not {@code NULL}, then the set of {@code StdVideoH264PictureParameterSet} entries specified in {@code pParametersAddInfo→pStdPPSs} are added first;</li>
+                    <li>If {@code pCreateInfo→videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH264PictureParameterSet} entry stored in it is copied to the created video session parameters object if the created object does not already contain such an entry with the same {@code seq_parameter_set_id} and {@code pic_parameter_set_id}.</li>
+                </ul>
+            </li>
+        </ul>
+
+        If {@code pCreateInfo→videoSession} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the created video session parameters object will initially contain the following sets of parameter entries:
+
+        <ul>
+            <li>
+                {@code StdVideoH265VideoParameterSet} structures representing <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h265-vps">H.264 VPS</a> entries, as follows:
+                <ul>
+                    <li>If the {@code pParametersAddInfo} member of the ##VkVideoDecodeH265SessionParametersCreateInfoKHR structure provided in the {@code pCreateInfo→pNext} chain is not {@code NULL}, then the set of {@code StdVideoH265VideoParameterSet} entries specified in {@code pParametersAddInfo→pStdVPSs} are added first;</li>
+                    <li>If {@code pCreateInfo→videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH265VideoParameterSet} entry stored in it is copied to the created video session parameters object if the created object does not already contain such an entry with the same {@code vps_video_parameter_set_id}.</li>
+                </ul>
+            </li>
+            <li>
+                {@code StdVideoH265SequenceParameterSet} structures representing <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h265-sps">H.265 SPS</a> entries, as follows:
+                <ul>
+                    <li>If the {@code pParametersAddInfo} member of the ##VkVideoDecodeH265SessionParametersCreateInfoKHR structure provided in the {@code pCreateInfo→pNext} chain is not {@code NULL}, then the set of {@code StdVideoH265SequenceParameterSet} entries specified in {@code pParametersAddInfo→pStdSPSs} are added first;</li>
+                    <li>If {@code pCreateInfo→videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH265SequenceParameterSet} entry stored in it is copied to the created video session parameters object if the created object does not already contain such an entry with the same {@code sps_video_parameter_set_id} and {@code sps_seq_parameter_set_id}.</li>
+                </ul>
+            </li>
+            <li>
+                {@code StdVideoH265PictureParameterSet} structures representing <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h265-pps">H.265 PPS</a> entries, as follows:
+                <ul>
+                    <li>If the {@code pParametersAddInfo} member of the ##VkVideoDecodeH265SessionParametersCreateInfoKHR structure provided in the {@code pCreateInfo→pNext} chain is not {@code NULL}, then the set of {@code StdVideoH265PictureParameterSet} entries specified in {@code pParametersAddInfo→pStdPPSs} are added first;</li>
+                    <li>If {@code pCreateInfo→videoSessionParametersTemplate} is not #NULL_HANDLE, then each {@code StdVideoH265PictureParameterSet} entry stored in it is copied to the created video session parameters object if the created object does not already contain such an entry with the same {@code sps_video_parameter_set_id}, {@code pps_seq_parameter_set_id}, and {@code pps_pic_parameter_set_id}.</li>
+                </ul>
+            </li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -624,10 +720,9 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
-                <li>#ERROR_INITIALIZATION_FAILED</li>
                 <li>#ERROR_OUT_OF_HOST_MEMORY</li>
                 <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
-                <li>#ERROR_TOO_MANY_OBJECTS</li>
+                <li>#ERROR_INITIALIZATION_FAILED</li>
             </ul></dd>
         </dl>
 
@@ -635,25 +730,67 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkAllocationCallbacks, ##VkVideoSessionParametersCreateInfoKHR
         """,
 
-        VkDevice("device", "the logical device that was used for the creation of the video session object."),
-        VkVideoSessionParametersCreateInfoKHR.const.p("pCreateInfo", "a pointer to ##VkVideoSessionParametersCreateInfoKHR structure specifying the video session parameters."),
+        VkDevice("device", "the logical device that creates the video session parameters object."),
+        VkVideoSessionParametersCreateInfoKHR.const.p("pCreateInfo", "a pointer to ##VkVideoSessionParametersCreateInfoKHR structure containing parameters to be used to create the video session parameters object."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkVideoSessionParametersKHR.p("pVideoSessionParameters", "a pointer to a {@code VkVideoSessionParametersKHR} handle in which the video session parameters object is returned.")
+        Check(1)..VkVideoSessionParametersKHR.p("pVideoSessionParameters", "a pointer to a {@code VkVideoSessionParametersKHR} handle in which the resulting video session parameters object is returned.")
     )
 
     VkResult(
         "UpdateVideoSessionParametersKHR",
         """
-        Update video session video session parameter object.
+        Update video session parameters object.
 
         <h5>C Specification</h5>
-        To update, add, or remove video session parameters state, call:
+        To update video session parameters object with new parameters, call:
 
         <pre><code>
 ￿VkResult vkUpdateVideoSessionParametersKHR(
 ￿    VkDevice                                    device,
 ￿    VkVideoSessionParametersKHR                 videoSessionParameters,
 ￿    const VkVideoSessionParametersUpdateInfoKHR* pUpdateInfo);</code></pre>
+
+        <h5>Description</h5>
+        After a successful call to this command, the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-parameters">update sequence counter</a> of {@code videoSessionParameters} is changed to the value specified in {@code pUpdateInfo→updateSequenceCount}.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+        As each update issued to a video session parameters object needs to specify the next available update sequence count value, concurrent updates of the same video session parameters object are inherently disallowed. However, recording video coding operations to command buffers referring to parameters previously added to the video session parameters object is allowed, even if there is a concurrent update in progress adding some new entries to the object.
+        </div>
+
+        If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR and the {@code pUpdateInfo→pNext} chain includes a ##VkVideoDecodeH264SessionParametersAddInfoKHR structure, then this command adds the following parameter entries to {@code videoSessionParameters}:
+
+        <ul>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h264-sps">H.264 SPS</a> entries specified in ##VkVideoDecodeH264SessionParametersAddInfoKHR{@code ::pStdSPSs}.</li>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h264-pps">H.264 PPS</a> entries specified in ##VkVideoDecodeH264SessionParametersAddInfoKHR{@code ::pStdPPSs}.</li>
+        </ul>
+
+        If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR and the {@code pUpdateInfo→pNext} chain includes a ##VkVideoDecodeH265SessionParametersAddInfoKHR structure, then this command adds the following parameter entries to {@code videoSessionParameters}:
+
+        <ul>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h265-vps">H.265 VPS</a> entries specified in ##VkVideoDecodeH265SessionParametersAddInfoKHR{@code ::pStdVPSs}.</li>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h265-sps">H.265 SPS</a> entries specified in ##VkVideoDecodeH265SessionParametersAddInfoKHR{@code ::pStdSPSs}.</li>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h265-pps">H.265 PPS</a> entries specified in ##VkVideoDecodeH265SessionParametersAddInfoKHR{@code ::pStdPPSs}.</li>
+        </ul>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>{@code pUpdateInfo→updateSequenceCount} <b>must</b> equal the current <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-parameters">update sequence counter</a> of {@code videoSessionParameters} plus one</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoDecodeH264SessionParametersAddInfoKHR structure, then {@code videoSessionParameters} <b>must</b> not already contain a {@code StdVideoH264SequenceParameterSet} entry with {@code seq_parameter_set_id} matching any of the elements of ##VkVideoDecodeH264SessionParametersAddInfoKHR{@code ::pStdSPSs}</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR, then the number of {@code StdVideoH264SequenceParameterSet} entries already stored in it plus the value of the {@code stdSPSCount} member of the ##VkVideoDecodeH264SessionParametersAddInfoKHR structure included in the {@code pUpdateInfo→pNext} chain <b>must</b> be less than or equal to the ##VkVideoDecodeH264SessionParametersCreateInfoKHR{@code ::maxStdSPSCount} {@code videoSessionParameters} was created with</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoDecodeH264SessionParametersAddInfoKHR structure, then {@code videoSessionParameters} <b>must</b> not already contain a {@code StdVideoH264PictureParameterSet} entry with both {@code seq_parameter_set_id} and {@code pic_parameter_set_id} matching any of the elements of ##VkVideoDecodeH264SessionParametersAddInfoKHR{@code ::pStdPPSs}</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR, then the number of {@code StdVideoH264PictureParameterSet} entries already stored in it plus the value of the {@code stdPPSCount} member of the ##VkVideoDecodeH264SessionParametersAddInfoKHR structure included in the {@code pUpdateInfo→pNext} chain <b>must</b> be less than or equal to the ##VkVideoDecodeH264SessionParametersCreateInfoKHR{@code ::maxStdPPSCount} {@code videoSessionParameters} was created with</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoDecodeH265SessionParametersAddInfoKHR structure, then {@code videoSessionParameters} <b>must</b> not already contain a {@code StdVideoH265VideoParameterSet} entry with {@code vps_video_parameter_set_id} matching any of the elements of ##VkVideoDecodeH265SessionParametersAddInfoKHR{@code ::pStdVPSs}</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the number of {@code StdVideoH265VideoParameterSet} entries already stored in it plus the value of the {@code stdVPSCount} member of the ##VkVideoDecodeH265SessionParametersAddInfoKHR structure included in the {@code pUpdateInfo→pNext} chain <b>must</b> be less than or equal to the ##VkVideoDecodeH265SessionParametersCreateInfoKHR{@code ::maxStdVPSCount} {@code videoSessionParameters} was created with</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoDecodeH265SessionParametersAddInfoKHR structure, then {@code videoSessionParameters} <b>must</b> not already contain a {@code StdVideoH265SequenceParameterSet} entry with both {@code sps_video_parameter_set_id} and {@code sps_seq_parameter_set_id} matching any of the elements of ##VkVideoDecodeH265SessionParametersAddInfoKHR{@code ::pStdSPSs}</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the number of {@code StdVideoH265SequenceParameterSet} entries already stored in it plus the value of the {@code stdSPSCount} member of the ##VkVideoDecodeH265SessionParametersAddInfoKHR structure included in the {@code pUpdateInfo→pNext} chain <b>must</b> be less than or equal to the ##VkVideoDecodeH265SessionParametersCreateInfoKHR{@code ::maxStdSPSCount} {@code videoSessionParameters} was created with</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoDecodeH265SessionParametersAddInfoKHR structure, then {@code videoSessionParameters} <b>must</b> not already contain a {@code StdVideoH265PictureParameterSet} entry with {@code sps_video_parameter_set_id}, {@code pps_seq_parameter_set_id}, and {@code pps_pic_parameter_set_id} all matching any of the elements of ##VkVideoDecodeH265SessionParametersAddInfoKHR{@code ::pStdPPSs}</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR, then the number of {@code StdVideoH265PictureParameterSet} entries already stored in it plus the value of the {@code stdPPSCount} member of the ##VkVideoDecodeH265SessionParametersAddInfoKHR structure included in the {@code pUpdateInfo→pNext} chain <b>must</b> be less than or equal to the ##VkVideoDecodeH265SessionParametersCreateInfoKHR{@code ::maxStdPPSCount} {@code videoSessionParameters} was created with</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoEncodeH264SessionParametersAddInfoEXT structure, then {@code videoSessionParameters} <b>must</b> not already contain a {@code StdVideoH264SequenceParameterSet} entry with {@code seq_parameter_set_id} matching any of the elements of ##VkVideoEncodeH264SessionParametersAddInfoEXT{@code ::pStdSPSs}</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoEncodeH264SessionParametersAddInfoEXT structure, then {@code videoSessionParameters} <b>must</b> not already contain a {@code StdVideoH264PictureParameterSet} entry with both {@code seq_parameter_set_id} and {@code pic_parameter_set_id} matching any of the elements of ##VkVideoEncodeH264SessionParametersAddInfoEXT{@code ::pStdPPSs}</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoEncodeH265SessionParametersAddInfoEXT structure, then {@code videoSessionParameters} <b>must</b> not already contain a {@code StdVideoH265VideoParameterSet} entry with {@code vps_video_parameter_set_id} matching any of the elements of ##VkVideoEncodeH265SessionParametersAddInfoEXT{@code ::pStdVPSs}</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoEncodeH265SessionParametersAddInfoEXT structure, then {@code videoSessionParameters} <b>must</b> not already contain a {@code StdVideoH265SequenceParameterSet} entry with both {@code sps_video_parameter_set_id} and {@code sps_seq_parameter_set_id} matching any of the elements of ##VkVideoEncodeH265SessionParametersAddInfoEXT{@code ::pStdSPSs}</li>
+            <li>If {@code videoSessionParameters} was created with the video codec operation #VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_EXT and the {@code pNext} chain of {@code pUpdateInfo} includes a ##VkVideoEncodeH265SessionParametersAddInfoEXT structure, then {@code videoSessionParameters} <b>must</b> not already contain a {@code StdVideoH265PictureParameterSet} entry with {@code sps_video_parameter_set_id}, {@code pps_seq_parameter_set_id}, and {@code pps_pic_parameter_set_id} all matching any of the elements of ##VkVideoEncodeH265SessionParametersAddInfoEXT{@code ::pStdPPSs}</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -671,8 +808,8 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 
             <dt>On failure, this command returns</dt>
             <dd><ul>
-                <li>#ERROR_INITIALIZATION_FAILED</li>
-                <li>#ERROR_TOO_MANY_OBJECTS</li>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
             </ul></dd>
         </dl>
 
@@ -680,9 +817,9 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkVideoSessionParametersUpdateInfoKHR
         """,
 
-        VkDevice("device", "the logical device that was used for the creation of the video session object."),
-        VkVideoSessionParametersKHR("videoSessionParameters", "the video session parameters object that is going to be updated."),
-        VkVideoSessionParametersUpdateInfoKHR.const.p("pUpdateInfo", "a pointer to a ##VkVideoSessionParametersUpdateInfoKHR structure containing the session parameters update information.")
+        VkDevice("device", "the logical device that updates the video session parameters."),
+        VkVideoSessionParametersKHR("videoSessionParameters", "the video session parameters object to update."),
+        VkVideoSessionParametersUpdateInfoKHR.const.p("pUpdateInfo", "a pointer to a ##VkVideoSessionParametersUpdateInfoKHR structure specifying the parameter update information.")
     )
 
     void(
@@ -698,6 +835,13 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 ￿    VkDevice                                    device,
 ￿    VkVideoSessionParametersKHR                 videoSessionParameters,
 ￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>All submitted commands that refer to {@code videoSessionParameters} <b>must</b> have completed execution</li>
+            <li>If ##VkAllocationCallbacks were provided when {@code videoSessionParameters} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+            <li>If no ##VkAllocationCallbacks were provided when {@code videoSessionParameters} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -715,15 +859,15 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkAllocationCallbacks
         """,
 
-        VkDevice("device", "the device the video session parameters object was created with."),
-        VkVideoSessionParametersKHR("videoSessionParameters", "the video session parameters object to be destroyed."),
+        VkDevice("device", "the logical device that destroys the video session parameters object."),
+        VkVideoSessionParametersKHR("videoSessionParameters", "the video session parameters object to destroy."),
         nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
     )
 
     void(
         "CmdBeginVideoCodingKHR",
         """
-        Start decode jobs.
+        Begin video coding scope.
 
         <h5>C Specification</h5>
         To begin a video coding scope, call:
@@ -734,7 +878,47 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 ￿    const VkVideoBeginCodingInfoKHR*            pBeginInfo);</code></pre>
 
         <h5>Description</h5>
-        After beginning a video coding scope, the session object specified by the {@code videoSession} member of ##VkVideoBeginCodingInfoKHR is <em>bound</em> to the command buffer, and the command buffer is ready to record video coding operations.
+        After beginning a video coding scope, the video session object specified in {@code pBeginInfo→videoSession} is <em>bound</em> to the command buffer, and the command buffer is ready to record video coding operations. Similarly, if {@code pBeginInfo→videoSessionParameters} is not #NULL_HANDLE, it is also <em>bound</em> to the command buffer, and video coding operations <b>can</b> refer to the codec-specific parameters stored in it.
+
+        This command also establishes the set of <em>bound reference picture resources</em> that <b>can</b> be used as <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reconstructed-picture">reconstructed pictures</a> or <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reference-picture">reference pictures</a> within the video coding scope. Each element of this set consists of a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resources">video picture resource</a> and the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot">DPB slot</a> index associated with it, if there is one.
+
+        The set of bound reference picture resources is immutable within a video coding scope, however, the DPB slot index associated with any of the bound reference picture resources <b>can</b> change during the video coding scope in response to video coding operations.
+
+        The ##VkVideoReferenceSlotInfoKHR structures provided as the elements of {@code pBeginInfo→pReferenceSlots} are interpreted by this command as follows:
+
+        <ul>
+            <li>If {@code slotIndex} is non-negative and {@code pPictureResource} is not {@code NULL}, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resources">video picture resource</a> defined by the ##VkVideoPictureResourceInfoKHR structure pointed to by {@code pPictureResource} is added to the set of bound reference picture resources and is associated with the DPB slot index specified in {@code slotIndex}.</li>
+            <li>If {@code slotIndex} is non-negative and {@code pPictureResource} is {@code NULL}, then the DPB slot with index {@code slotIndex} is <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">deactivated</a> by this command.</li>
+            <li>If {@code slotIndex} is negative and {@code pPictureResource} is not {@code NULL}, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resources">video picture resource</a> defined by the ##VkVideoPictureResourceInfoKHR structure pointed to by {@code pPictureResource} is added to the set of bound reference picture resources without an associated DPB slot. Such a picture resource <b>can</b> be subsequently used as a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#reconstructed-picture">reconstructed picture</a> to associate it with a DPB slot.</li>
+            <li>If {@code slotIndex} is negative and {@code pPictureResource} is {@code NULL}, then the element is ignored.</li>
+        </ul>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+        It is possible for multiple bound reference picture resources to be associated with the same DPB slot index, or for a single bound reference picture to refer to multiple separate reference pictures. For example, in case of an <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h264-profile">H.264 decode profile</a> with <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h264-interlaced-support">interlaced frame support</a> a single DPB slot can refer to two separate pictures for the top and bottom fields. Depending on the picture layout used by the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#decode-h264-profile">H.264 decode profile</a>, the following special cases <b>may</b> arise:
+
+        <ul>
+            <li>If the picture layout is #VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_KHR, then the top and bottom field pictures are physically co-located in the same video picture resource with even scanlines corresponding to the top field and odd scanlines corresponding to the bottom field, respectively.</li>
+            <li>If the picture layout is #VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR, then the top and bottom field pictures are stored in separate video picture resources (in separate subregions of the same image layer, in separate layers of the same image, or in entirely separate images), hence two elements of ##VkVideoBeginCodingInfoKHR{@code ::pReferenceSlots} <b>can</b> contain the same {@code slotIndex} but specify different video picture resources in their {@code pPictureResource} members.</li>
+        </ul>
+        </div>
+
+        All non-negative {@code slotIndex} values specified in the elements of {@code pBeginInfo→pReferenceSlots} <b>must</b> identify DPB slots of the video session that are in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">active state</a> at the time this command is executed on the device.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+        The application does not have to specify an entry in {@code pBeginInfo→pReferenceSlots} corresponding to all active DPB slots of the video session, but only for those which are intended to be used in the video coding scope. This way the application can avoid any potential runtime cost associated with binding the corresponding picture resources to the command buffer.
+        </div>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support the video codec operation {@code pBeginInfo→videoSession} was created with, as returned by #GetPhysicalDeviceQueueFamilyProperties2() in ##VkQueueFamilyVideoPropertiesKHR{@code ::videoCodecOperations}</li>
+            <li>There <b>must</b> be no <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-operation-active">active</a> queries</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer and <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, then {@code pBeginInfo→videoSession} <b>must</b> not have been created with #VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR</li>
+            <li>If {@code commandBuffer} is a protected command buffer and <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, then {@code pBeginInfo→videoSession} <b>must</b> have been created with #VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR</li>
+            <li>If {@code commandBuffer} is an unprotected command buffer, <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, and the {@code pPictureResource} member of any element of {@code pBeginInfo→pReferenceSlots} is not {@code NULL}, then {@code pPictureResource→imageViewBinding} for that element <b>must</b> not specify an image view created from a protected image</li>
+            <li>If {@code commandBuffer} is a protected command buffer <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-protectedNoFault">{@code protectedNoFault}</a> is not supported, and the {@code pPictureResource} member of any element of {@code pBeginInfo→pReferenceSlots} is not {@code NULL}, then {@code pPictureResource→imageViewBinding} for that element <b>must</b> specify an image view created from a protected image</li>
+            <li>If the {@code slotIndex} member of any element of {@code pBeginInfo→pReferenceSlots} is not negative, then it <b>must</b> specify the index of a DPB slot that is in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">active state</a> in {@code pBeginInfo→videoSession} at the time the command is executed on the device</li>
+            <li>Each video picture resource specified by any non-{@code NULL} {@code pPictureResource} member specified in the elements of {@code pBeginInfo→pReferenceSlots} for which {@code slotIndex} is not negative <b>must</b> <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-picture-resource-matching">match</a> one of the video picture resources currently associated with the DPB slot index of {@code pBeginInfo→videoSession} specified by {@code slotIndex} at the time the command is executed on the device</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -763,14 +947,14 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkVideoBeginCodingInfoKHR
         """,
 
-        VkCommandBuffer("commandBuffer", "the command buffer to be used when recording commands for the video decode or encode operations."),
-        VkVideoBeginCodingInfoKHR.const.p("pBeginInfo", "a pointer to a ##VkVideoBeginCodingInfoKHR structure.")
+        VkCommandBuffer("commandBuffer", "the command buffer in which to record the command."),
+        VkVideoBeginCodingInfoKHR.const.p("pBeginInfo", "a pointer to a ##VkVideoBeginCodingInfoKHR structure specifying the parameters of the video coding scope, including the video session and video session parameters object to use.")
     )
 
     void(
         "CmdEndVideoCodingKHR",
         """
-        End decode jobs.
+        End video coding scope.
 
         <h5>C Specification</h5>
         To end a video coding scope, call:
@@ -781,7 +965,12 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 ￿    const VkVideoEndCodingInfoKHR*              pEndCodingInfo);</code></pre>
 
         <h5>Description</h5>
-        After ending a video coding scope, the session object previously bound by the corresponding #CmdBeginVideoCodingKHR() command is <em>unbound</em>.
+        After ending a video coding scope, the video session object, the optional video session parameters object, and all <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#bound-reference-picture-resources">reference picture resources</a> previously bound by the corresponding #CmdBeginVideoCodingKHR() command are <em>unbound</em>.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>There <b>must</b> be no <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#queries-operation-active">active</a> queries</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -810,14 +999,14 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkVideoEndCodingInfoKHR
         """,
 
-        VkCommandBuffer("commandBuffer", "the command buffer to be filled by this function."),
-        VkVideoEndCodingInfoKHR.const.p("pEndCodingInfo", "a pointer to a ##VkVideoEndCodingInfoKHR structure.")
+        VkCommandBuffer("commandBuffer", "the command buffer in which to record the command."),
+        VkVideoEndCodingInfoKHR.const.p("pEndCodingInfo", "a pointer to a ##VkVideoEndCodingInfoKHR structure specifying the parameters for ending the video coding scope.")
     )
 
     void(
         "CmdControlVideoCodingKHR",
         """
-        Set encode rate control parameters.
+        Control video coding parameters.
 
         <h5>C Specification</h5>
         To apply dynamic controls to the currently bound video session object, call:
@@ -826,6 +1015,20 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
 ￿void vkCmdControlVideoCodingKHR(
 ￿    VkCommandBuffer                             commandBuffer,
 ￿    const VkVideoCodingControlInfoKHR*          pCodingControlInfo);</code></pre>
+
+        <h5>Description</h5>
+        The control parameters provided in this call are applied to the video session at the time the command executes on the device and are in effect until a subsequent call to this command with the same video session bound changes the corresponding control parameters.
+
+        A newly created video session <b>must</b> be reset before performing video coding operations using it by including #VIDEO_CODING_CONTROL_RESET_BIT_KHR in {@code pCodingControlInfo→flags}. The reset operation also returns all DPB slots of the video session to the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#dpb-slot-states">inactive state</a>. Correspondingly, any DPB slot index associated with the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#bound-reference-picture-resources">bound reference picture resources</a> is removed.
+
+        For encode sessions, the reset operation returns rate control configuration to implementation default settings.
+
+        After video coding operations are performed using a video session, the reset operation <b>can</b> be used to return the video session to the same <em>initial</em> state as after the reset of a newly created video session. This <b>can</b> be used, for example, when different video sequences are needed to be processed with the same video session object.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code pCodingControlInfo→flags} does not include #VIDEO_CODING_CONTROL_RESET_BIT_KHR, then the bound video session <b>must</b> not be in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#video-session-uninitialized">uninitialized</a> state at the time the command is executed on the device</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -854,7 +1057,7 @@ val KHR_video_queue = "KHRVideoQueue".nativeClassVK("KHR_video_queue", type = "d
         ##VkVideoCodingControlInfoKHR
         """,
 
-        VkCommandBuffer("commandBuffer", "the command buffer to be filled by this function."),
-        VkVideoCodingControlInfoKHR.const.p("pCodingControlInfo", "a pointer to a ##VkVideoCodingControlInfoKHR structure.")
+        VkCommandBuffer("commandBuffer", "the command buffer in which to record the command."),
+        VkVideoCodingControlInfoKHR.const.p("pCodingControlInfo", "a pointer to a ##VkVideoCodingControlInfoKHR structure specifying the control parameters.")
     )
 }

@@ -1682,7 +1682,7 @@ public class EXTExtendedDynamicState3 {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command sets the {@code coverageToColorLocation} state for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineSampleLocationsStateCreateInfoEXT}{@code ::coverageToColorLocation} value used to create the currently active pipeline.</p>
+     * <p>This command sets the {@code coverageToColorLocation} state for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineCoverageToColorStateCreateInfoNV}{@code ::coverageToColorLocation} value used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

@@ -19,7 +19,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
             <li>Elements of ##VkRenderPassMultiviewCreateInfo{@code ::pViewMasks} are now specified in ##VkSubpassDescription2KHR{@code ::viewMask}.</li>
             <li>Elements of ##VkRenderPassMultiviewCreateInfo{@code ::pViewOffsets} are now specified in ##VkSubpassDependency2KHR{@code ::viewOffset}.</li>
             <li>##VkRenderPassMultiviewCreateInfo{@code ::correlationMaskCount} and ##VkRenderPassMultiviewCreateInfo{@code ::pCorrelationMasks} are directly specified in ##VkRenderPassCreateInfo2KHR.</li>
-            <li>##VkInputAttachmentAspectReference{@code ::aspectMask} is now specified in the relevant input attachment description in ##VkAttachmentDescription2KHR{@code ::aspectMask}</li>
+            <li>##VkInputAttachmentAspectReference{@code ::aspectMask} is now specified in the relevant input attachment reference in ##VkAttachmentReference2KHR{@code ::aspectMask}</li>
         </ul>
 
         The details of these mappings are explained fully in the new structures.

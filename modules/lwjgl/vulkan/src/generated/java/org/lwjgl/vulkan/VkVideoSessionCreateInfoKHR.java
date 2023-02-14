@@ -17,22 +17,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created video decode session.
+ * Structure specifying parameters of a newly created video session.
  * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>{@code pVideoProfile} <b>must</b> be a pointer to a valid {@link VkVideoProfileInfoKHR} structure whose {@code pNext} chain <b>must</b> include a valid codec-specific profile structure</li>
- * <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> are required for use with the created video session, the {@code maxDpbSlots} <b>must</b> be set to a value bigger than 0</li>
- * <li>{@code maxDpbSlots} <b>cannot</b> exceed the implementation reported {@link VkVideoCapabilitiesKHR}{@code ::maxDpbSlots}</li>
- * <li>If <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> are required for use with the created video session, the {@code maxActiveReferencePictures} <b>must</b> be set to a value bigger than 0</li>
- * <li>{@code maxActiveReferencePictures} <b>cannot</b> exceed the implementation reported {@link VkVideoCapabilitiesKHR}{@code ::maxActiveReferencePictures}</li>
- * <li>{@code maxActiveReferencePictures} <b>cannot</b> exceed the {@code maxDpbSlots}</li>
- * <li>{@code maxCodedExtent} <b>cannot</b> be smaller than {@link VkVideoCapabilitiesKHR}{@code ::minExtent} and bigger than {@link VkVideoCapabilitiesKHR}{@code ::maxExtent}</li>
- * <li>If the {@code videoCodecOperation} member of {@code pVideoProfile} specifies a decode operation then {@code referencePicturesFormat} <b>must</b> be one of the supported decode DPB formats as reported by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} in the {@code format} member of {@link VkVideoFormatPropertiesKHR} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR}, and with a {@link VkVideoProfileListInfoKHR} structure chained to its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an entry matching {@code pVideoProfile}</li>
- * <li>If the {@code videoCodecOperation} member of {@code pVideoProfile} specifies an encode operation then {@code referencePicturesFormat} <b>must</b> be one of the supported encode DPB formats as reported by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} in the {@code format} member of {@link VkVideoFormatPropertiesKHR} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR}, and with a {@link VkVideoProfileListInfoKHR} structure chained to its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an entry matching {@code pVideoProfile}</li>
- * <li>If the {@code videoCodecOperation} member of {@code pVideoProfile} specifies a decode operation then {@code pictureFormat} <b>must</b> be one of the supported decode output formats as reported by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} in the {@code format} member of {@link VkVideoFormatPropertiesKHR} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR}, and with a {@link VkVideoProfileListInfoKHR} structure chained to its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an entry matching {@code pVideoProfile}</li>
- * <li>If the {@code videoCodecOperation} member of {@code pVideoProfile} specifies an encode operation then {@code pictureFormat} <b>must</b> be one of the supported encode input formats as reported by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} in the {@code format} member of {@link VkVideoFormatPropertiesKHR} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR}, and with a {@link VkVideoProfileListInfoKHR} structure chained to its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an entry matching {@code pVideoProfile}</li>
+ * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-protectedMemory">{@code protectedMemory}</a> feature is not enabled or if {@link VkVideoCapabilitiesKHR}{@code ::flags} does not include {@link KHRVideoQueue#VK_VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR VIDEO_CAPABILITY_PROTECTED_CONTENT_BIT_KHR}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile specified by {@code pVideoProfile}, then {@code flags} <b>must</b> not include {@link KHRVideoQueue#VK_VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR}</li>
+ * <li>{@code pVideoProfile} <b>must</b> be a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-profile-support">supported video profile</a></li>
+ * <li>{@code maxDpbSlots} <b>must</b> be less than or equal to {@link VkVideoCapabilitiesKHR}{@code ::maxDpbSlots}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile specified by {@code pVideoProfile}</li>
+ * <li>{@code maxActiveReferencePictures} <b>must</b> be less than or equal to {@link VkVideoCapabilitiesKHR}{@code ::maxActiveReferencePictures}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile specified by {@code pVideoProfile}</li>
+ * <li>If either {@code maxDpbSlots} or {@code maxActiveReferencePictures} is 0, then both <b>must</b> be 0</li>
+ * <li>{@code maxCodedExtent} <b>must</b> be between {@link VkVideoCapabilitiesKHR}{@code ::minCodedExtent} and {@link VkVideoCapabilitiesKHR}{@code ::maxCodedExtent}, inclusive, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile specified by {@code pVideoProfile}</li>
+ * <li>If {@code pVideoProfile→videoCodecOperation} specifies a decode operation and {@code maxActiveReferencePictures} is greater than 0, then {@code referencePictureFormat} <b>must</b> be one of the supported decode DPB formats, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} in {@link VkVideoFormatPropertiesKHR}{@code ::format} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR}, and with a {@link VkVideoProfileListInfoKHR} structure specified in the {@code pNext} chain of its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an element matching {@code pVideoProfile}</li>
+ * <li>If {@code pVideoProfile→videoCodecOperation} specifies an encode operation and {@code maxActiveReferencePictures} is greater than 0, then {@code referencePictureFormat} <b>must</b> be one of the supported decode DPB formats, as returned by then {@code referencePictureFormat} <b>must</b> be one of the supported encode DPB formats, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} in {@link VkVideoFormatPropertiesKHR}{@code ::format} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR}, and with a {@link VkVideoProfileListInfoKHR} structure specified in the {@code pNext} chain of its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an element matching {@code pVideoProfile}</li>
+ * <li>If {@code pVideoProfile→videoCodecOperation} specifies a decode operation, then {@code pictureFormat} <b>must</b> be one of the supported decode output formats, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} in {@link VkVideoFormatPropertiesKHR}{@code ::format} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR}, and with a {@link VkVideoProfileListInfoKHR} structure specified in the {@code pNext} chain of its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an element matching {@code pVideoProfile}</li>
+ * <li>If {@code pVideoProfile→videoCodecOperation} specifies an encode operation, then {@code pictureFormat} <b>must</b> be one of the supported encode input formats, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} in {@link VkVideoFormatPropertiesKHR}{@code ::format} when called with the {@code imageUsage} member of its {@code pVideoFormatInfo} parameter containing {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR}, and with a {@link VkVideoProfileListInfoKHR} structure specified in the {@code pNext} chain of its {@code pVideoFormatInfo} parameter whose {@code pProfiles} member contains an element matching {@code pVideoProfile}</li>
+ * <li>{@code pStdHeaderVersion→extensionName} <b>must</b> match {@link VkVideoCapabilitiesKHR}{@code ::stdHeaderVersion.extensionName}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile specified by {@code pVideoProfile}</li>
+ * <li>{@code pStdHeaderVersion→specVersion} <b>must</b> be less than or equal to {@link VkVideoCapabilitiesKHR}{@code ::stdHeaderVersion.specVersion}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile specified by {@code pVideoProfile}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -62,7 +63,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkVideoProfileInfoKHR VkVideoProfileInfoKHR} const * {@link #pVideoProfile};
  *     VkFormat {@link #pictureFormat};
  *     {@link VkExtent2D VkExtent2D} {@link #maxCodedExtent};
- *     VkFormat referencePictureFormat;
+ *     VkFormat {@link #referencePictureFormat};
  *     uint32_t {@link #maxDpbSlots};
  *     uint32_t {@link #maxActiveReferencePictures};
  *     {@link VkExtensionProperties VkExtensionProperties} const * {@link #pStdHeaderVersion};
@@ -140,30 +141,30 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the queue family of the created video session. */
+    /** the index of the queue family the created video session will be used with. */
     @NativeType("uint32_t")
     public int queueFamilyIndex() { return nqueueFamilyIndex(address()); }
     /** a bitmask of {@code VkVideoSessionCreateFlagBitsKHR} specifying creation flags. */
     @NativeType("VkVideoSessionCreateFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** a pointer to a {@link VkVideoProfileInfoKHR} structure. */
+    /** a pointer to a {@link VkVideoProfileInfoKHR} structure specifying the video profile the created video session will be used with. */
     @NativeType("VkVideoProfileInfoKHR const *")
     public VkVideoProfileInfoKHR pVideoProfile() { return npVideoProfile(address()); }
-    /** the format of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#resources-image-views">image views</a> representing decoded <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decoded-output-picture">Output</a> or encoded <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-input-picture">Input</a> pictures. */
+    /** the image format the created video session will be used with. If {@code pVideoProfile→videoCodecOperation} specifies a decode operation, then {@code pictureFormat} is the image format of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-output-picture">decode output pictures</a> usable with the created video session. If {@code pVideoProfile→videoCodecOperation} specifies an encode operation, then {@code pictureFormat} is the image format of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#encode-input-picture">encode input pictures</a> usable with the created video session. */
     @NativeType("VkFormat")
     public int pictureFormat() { return npictureFormat(address()); }
-    /** the maximum width and height of the coded pictures that this instance will be able to support. */
+    /** the maximum width and height of the coded frames the created video session will be used with. */
     public VkExtent2D maxCodedExtent() { return nmaxCodedExtent(address()); }
-    /** @return the value of the {@code referencePictureFormat} field. */
+    /** the image format of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">reference pictures</a> stored in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb">DPB</a> the created video session will be used with. */
     @NativeType("VkFormat")
     public int referencePictureFormat() { return nreferencePictureFormat(address()); }
-    /** the maximum number of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB Slots</a> that can be activated with associated <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-picture-resources">Video Picture Resources</a> for the created video session. */
+    /** the maximum number of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB Slots</a> that <b>can</b> be used with the created video session. */
     @NativeType("uint32_t")
     public int maxDpbSlots() { return nmaxDpbSlots(address()); }
-    /** the maximum number of active <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB Slots</a> that can be used as Dpb or Reconstructed <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> within a single decode or encode operation for the created video session. */
+    /** the maximum number of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#active-reference-pictures">active reference pictures</a> that <b>can</b> be used in a single video coding operation using the created video session. */
     @NativeType("uint32_t")
     public int maxActiveReferencePictures() { return nmaxActiveReferencePictures(address()); }
-    /** a pointer to a {@link VkExtensionProperties} structure requesting the Video Std header version to use for {@code codecOperation} in {@code pVideoProfile}. */
+    /** a pointer to a {@link VkExtensionProperties} structure requesting the Video Std header version to use for the {@code videoCodecOperation} specified in {@code pVideoProfile}. */
     @NativeType("VkExtensionProperties const *")
     public VkExtensionProperties pStdHeaderVersion() { return npStdHeaderVersion(address()); }
 
@@ -185,7 +186,7 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
     public VkVideoSessionCreateInfoKHR maxCodedExtent(VkExtent2D value) { nmaxCodedExtent(address(), value); return this; }
     /** Passes the {@link #maxCodedExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkVideoSessionCreateInfoKHR maxCodedExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxCodedExtent()); return this; }
-    /** Sets the specified value to the {@code referencePictureFormat} field. */
+    /** Sets the specified value to the {@link #referencePictureFormat} field. */
     public VkVideoSessionCreateInfoKHR referencePictureFormat(@NativeType("VkFormat") int value) { nreferencePictureFormat(address(), value); return this; }
     /** Sets the specified value to the {@link #maxDpbSlots} field. */
     public VkVideoSessionCreateInfoKHR maxDpbSlots(@NativeType("uint32_t") int value) { nmaxDpbSlots(address(), value); return this; }
@@ -462,7 +463,7 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         public int pictureFormat() { return VkVideoSessionCreateInfoKHR.npictureFormat(address()); }
         /** @return a {@link VkExtent2D} view of the {@link VkVideoSessionCreateInfoKHR#maxCodedExtent} field. */
         public VkExtent2D maxCodedExtent() { return VkVideoSessionCreateInfoKHR.nmaxCodedExtent(address()); }
-        /** @return the value of the {@code referencePictureFormat} field. */
+        /** @return the value of the {@link VkVideoSessionCreateInfoKHR#referencePictureFormat} field. */
         @NativeType("VkFormat")
         public int referencePictureFormat() { return VkVideoSessionCreateInfoKHR.nreferencePictureFormat(address()); }
         /** @return the value of the {@link VkVideoSessionCreateInfoKHR#maxDpbSlots} field. */
@@ -493,7 +494,7 @@ public class VkVideoSessionCreateInfoKHR extends Struct implements NativeResourc
         public VkVideoSessionCreateInfoKHR.Buffer maxCodedExtent(VkExtent2D value) { VkVideoSessionCreateInfoKHR.nmaxCodedExtent(address(), value); return this; }
         /** Passes the {@link VkVideoSessionCreateInfoKHR#maxCodedExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkVideoSessionCreateInfoKHR.Buffer maxCodedExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(maxCodedExtent()); return this; }
-        /** Sets the specified value to the {@code referencePictureFormat} field. */
+        /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#referencePictureFormat} field. */
         public VkVideoSessionCreateInfoKHR.Buffer referencePictureFormat(@NativeType("VkFormat") int value) { VkVideoSessionCreateInfoKHR.nreferencePictureFormat(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoSessionCreateInfoKHR#maxDpbSlots} field. */
         public VkVideoSessionCreateInfoKHR.Buffer maxDpbSlots(@NativeType("uint32_t") int value) { VkVideoSessionCreateInfoKHR.nmaxDpbSlots(address(), value); return this; }

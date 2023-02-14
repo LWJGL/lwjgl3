@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>The bound video session object <b>must</b> not be in <em>uninitialized</em> state</li>
+ * <li>The bound video session <b>must</b> not be in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#video-session-uninitialized">uninitialized</a> state at the time the command is executed on the device</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

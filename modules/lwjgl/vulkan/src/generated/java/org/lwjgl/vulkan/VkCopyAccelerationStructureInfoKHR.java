@@ -26,6 +26,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If {@code mode} is {@link KHRAccelerationStructure#VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_KHR}, {@code src} <b>must</b> have been constructed with {@link KHRAccelerationStructure#VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_KHR} in the build</li>
  * <li>The {@code buffer} used to create {@code src} <b>must</b> be bound to device memory</li>
  * <li>The {@code buffer} used to create {@code dst} <b>must</b> be bound to device memory</li>
+ * <li>The range of memory backing {@code dst} that is accessed by this command <b>must</b> not overlap the memory backing {@code src} that is accessed by this command</li>
+ * <li>{@code dst} <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object via {@link NVRayTracing#vkBindAccelerationStructureMemoryNV BindAccelerationStructureMemoryNV}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

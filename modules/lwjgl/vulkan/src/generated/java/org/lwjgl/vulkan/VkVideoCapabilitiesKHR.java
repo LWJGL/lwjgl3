@@ -16,13 +16,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of video capabilities.
+ * Structure describing general video capabilities for a video profile.
+ * 
+ * <h5>Description</h5>
+ * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note:</h5>
+ * 
+ * <p>It is common for video compression standards to allow using all reference pictures associated with active DPB slots as active reference pictures, hence for video decode profiles the values returned in {@code maxDpbSlots} and {@code maxActiveReferencePictures} are often equal. Similarly, in case of video decode profiles supporting field pictures the value of {@code maxActiveReferencePictures} often equals <code>maxDpbSlots × 2</code>.</p>
+ * </div>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeCapabilitiesKHR}, {@link VkVideoDecodeH264CapabilitiesEXT}, {@link VkVideoDecodeH265CapabilitiesEXT}, {@link VkVideoEncodeCapabilitiesKHR}, {@link VkVideoEncodeH264CapabilitiesEXT}, or {@link VkVideoEncodeH265CapabilitiesEXT}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeCapabilitiesKHR}, {@link VkVideoDecodeH264CapabilitiesKHR}, {@link VkVideoDecodeH265CapabilitiesKHR}, {@link VkVideoEncodeCapabilitiesKHR}, {@link VkVideoEncodeH264CapabilitiesEXT}, or {@link VkVideoEncodeH265CapabilitiesEXT}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * </ul>
  * 
@@ -122,25 +129,25 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
     /** a bitmask of {@code VkVideoCapabilityFlagBitsKHR} specifying capability flags. */
     @NativeType("VkVideoCapabilityFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** the minimum alignment for the input or output bitstream buffer offset. */
+    /** the minimum alignment for bitstream buffer offsets. */
     @NativeType("VkDeviceSize")
     public long minBitstreamBufferOffsetAlignment() { return nminBitstreamBufferOffsetAlignment(address()); }
-    /** the minimum alignment for the input or output bitstream buffer size */
+    /** the minimum alignment for bitstream buffer range sizes. */
     @NativeType("VkDeviceSize")
     public long minBitstreamBufferSizeAlignment() { return nminBitstreamBufferSizeAlignment(address()); }
     /** the granularity at which image access to video picture resources happen. */
     public VkExtent2D pictureAccessGranularity() { return npictureAccessGranularity(address()); }
-    /** the minimum width and height of the decoded or encoded video. */
+    /** the minimum width and height of the coded frames. */
     public VkExtent2D minCodedExtent() { return nminCodedExtent(address()); }
-    /** the maximum width and height of the decoded or encoded video. */
+    /** the maximum width and height of the coded frames. */
     public VkExtent2D maxCodedExtent() { return nmaxCodedExtent(address()); }
-    /** the maximum number of DPB Slots supported by the implementation for a single video session instance. */
+    /** the maximum number of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB slots</a> supported by a single video session. */
     @NativeType("uint32_t")
     public int maxDpbSlots() { return nmaxDpbSlots(address()); }
-    /** the maximum slots that can be used as <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#reference-picture">Reference Pictures</a> with a single decode or encode operation. */
+    /** the maximum number of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#active-reference-pictures">active reference pictures</a> a single video coding operation <b>can</b> use. */
     @NativeType("uint32_t")
     public int maxActiveReferencePictures() { return nmaxActiveReferencePictures(address()); }
-    /** a {@link VkExtensionProperties} structure reporting the Video Std header version supported for the {@code codecOperation} requested in {@code vkGetPhysicalDeviceVideoCapabilitiesKHR}{@code ::pVideoProfile}. */
+    /** a {@link VkExtensionProperties} structure reporting the Video Std header name and version supported for the video profile. */
     public VkExtensionProperties stdHeaderVersion() { return nstdHeaderVersion(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
@@ -151,10 +158,10 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
     public VkVideoCapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoDecodeCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoDecodeCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoDecodeH264CapabilitiesEXT} value to the {@code pNext} chain. */
-    public VkVideoCapabilitiesKHR pNext(VkVideoDecodeH264CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Prepends the specified {@link VkVideoDecodeH265CapabilitiesEXT} value to the {@code pNext} chain. */
-    public VkVideoCapabilitiesKHR pNext(VkVideoDecodeH265CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH264CapabilitiesKHR} value to the {@code pNext} chain. */
+    public VkVideoCapabilitiesKHR pNext(VkVideoDecodeH264CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkVideoDecodeH265CapabilitiesKHR} value to the {@code pNext} chain. */
+    public VkVideoCapabilitiesKHR pNext(VkVideoDecodeH265CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeCapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoEncodeCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH264CapabilitiesEXT} value to the {@code pNext} chain. */
@@ -402,10 +409,10 @@ public class VkVideoCapabilitiesKHR extends Struct implements NativeResource {
         public VkVideoCapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoCapabilitiesKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoDecodeCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoDecodeH264CapabilitiesEXT} value to the {@code pNext} chain. */
-        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeH264CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Prepends the specified {@link VkVideoDecodeH265CapabilitiesEXT} value to the {@code pNext} chain. */
-        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeH265CapabilitiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH264CapabilitiesKHR} value to the {@code pNext} chain. */
+        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeH264CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkVideoDecodeH265CapabilitiesKHR} value to the {@code pNext} chain. */
+        public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeH265CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeCapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoEncodeCapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH264CapabilitiesEXT} value to the {@code pNext} chain. */

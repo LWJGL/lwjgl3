@@ -85,7 +85,7 @@ public class VkPhysicalDevicePushDescriptorPropertiesKHR extends Struct implemen
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum number of descriptors that <b>can</b> be used in a descriptor set created with {@link KHRPushDescriptor#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR} set. */
+    /** the maximum number of descriptors that <b>can</b> be used in a descriptor set layout created with {@link KHRPushDescriptor#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR} set. */
     @NativeType("uint32_t")
     public int maxPushDescriptors() { return nmaxPushDescriptors(address()); }
 

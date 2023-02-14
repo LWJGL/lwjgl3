@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the end of decode encode commands sequence.
+ * Structure specifying video coding scope end information.
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 

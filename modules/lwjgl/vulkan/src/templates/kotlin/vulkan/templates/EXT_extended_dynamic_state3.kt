@@ -1305,7 +1305,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
 ￿    uint32_t                                    coverageToColorLocation);</code></pre>
 
         <h5>Description</h5>
-        This command sets the {@code coverageToColorLocation} state for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::coverageToColorLocation} value used to create the currently active pipeline.
+        This command sets the {@code coverageToColorLocation} state for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineCoverageToColorStateCreateInfoNV{@code ::coverageToColorLocation} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
