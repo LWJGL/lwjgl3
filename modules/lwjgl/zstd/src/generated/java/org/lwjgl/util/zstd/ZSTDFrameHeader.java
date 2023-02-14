@@ -27,6 +27,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int headerSize;
  *     unsigned int dictID;
  *     unsigned int checksumFlag;
+ *     unsigned _reserved1;
+ *     unsigned _reserved2;
  * }</code></pre>
  */
 @NativeType("struct ZSTD_frameHeader")
@@ -46,12 +48,16 @@ public class ZSTDFrameHeader extends Struct implements NativeResource {
         FRAMETYPE,
         HEADERSIZE,
         DICTID,
-        CHECKSUMFLAG;
+        CHECKSUMFLAG,
+        _RESERVED1,
+        _RESERVED2;
 
     static {
         Layout layout = __struct(
             __member(8),
             __member(8),
+            __member(4),
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -69,6 +75,8 @@ public class ZSTDFrameHeader extends Struct implements NativeResource {
         HEADERSIZE = layout.offsetof(4);
         DICTID = layout.offsetof(5);
         CHECKSUMFLAG = layout.offsetof(6);
+        _RESERVED1 = layout.offsetof(7);
+        _RESERVED2 = layout.offsetof(8);
     }
 
     /**
@@ -252,6 +260,8 @@ public class ZSTDFrameHeader extends Struct implements NativeResource {
     public static int ndictID(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader.DICTID); }
     /** Unsafe version of {@link #checksumFlag}. */
     public static int nchecksumFlag(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader.CHECKSUMFLAG); }
+    public static int n_reserved1(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader._RESERVED1); }
+    public static int n_reserved2(long struct) { return UNSAFE.getInt(null, struct + ZSTDFrameHeader._RESERVED2); }
 
     // -----------------------------------
 

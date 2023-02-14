@@ -113,6 +113,10 @@ ENABLE_WARNINGS()""")
     IntConstant("", "TARGETLENGTH_MIN".."0")
     IntConstant("", "STRATEGY_MIN".."ZSTD_fast")
     IntConstant("", "STRATEGY_MAX".."ZSTD_btultra2")
+    IntConstant(
+        "The minimum valid max blocksize. Maximum blocksizes smaller than this make compressBound() inaccurate.",
+        "BLOCKSIZE_MAX_MIN".."1 << 10"
+    )
     IntConstant("", "OVERLAPLOG_MIN".."0")
     IntConstant("", "OVERLAPLOG_MAX".."9")
     IntConstant("", "WINDOWLOG_LIMIT_DEFAULT".."27")
@@ -249,23 +253,22 @@ ENABLE_WARNINGS()""")
         """
         Experimental parameter. Default is {@code 0 == disabled}. Set to 1 to enable.
 
-        Tells the compressor that the {@code ZSTD_inBuffer} will ALWAYS be the same between calls, except for the modifications that zstd makes to pos (the
-        caller must not modify pos). This is checked by the compressor, and compression will fail if it ever changes. This means the only flush mode that makes
-        sense is #e_end, so zstd will error if {@code ZSTD_e_end} is not used. The data in the {@code ZSTD_inBuffer} in the range {@code [src, src + pos)} MUST
-        not be modified during compression or you will get data corruption.
+        Tells the compressor that input data presented with {@code ZSTD_inBuffer} will ALWAYS be the same between calls. Technically, the {@code src} pointer
+        must never be changed, and the {@code pos} field can only be updated by zstd. However, it's possible to increase the {@code size} field, allowing
+        scenarios where more data can be appended after compressions starts. These conditions are checked by the compressor, and compression will fail if they
+        are not respected. Also, data in the {@code ZSTD_inBuffer} within the range {@code [src, src + pos)} MUST not be modified during compression or it will
+        result in data corruption.
 
         When this flag is enabled zstd won't allocate an input window buffer, because the user guarantees it can reference the {@code ZSTD_inBuffer} until the
         frame is complete. But, it will still allocate an output buffer large enough to fit a block (see #c_stableOutBuffer). This will also avoid the
         {@code memcpy()} from the input buffer to the input window buffer.
 
-        NOTE: #compressStream2() will error if {@code ZSTD_e_end} is not used. That means this flag cannot be used with {@code ZSTD_compressStream*()}.
-
         NOTE: So long as the {@code ZSTD_inBuffer} always points to valid memory, using this flag is ALWAYS memory safe, and will never access out-of-bounds
-        memory. However, compression WILL fail if you violate the preconditions.
+        memory. However, compression WILL fail if conditions are not respected.
 
-        WARNING: The data in the {@code ZSTD_inBuffer} in the range {@code [dst, dst + pos)} MUST not be modified during compression or you will get data
+        WARNING: The data in the {@code ZSTD_inBuffer} in the range {@code [src, src + pos)} MUST not be modified during compression or it will result in data
         corruption. This is because zstd needs to reference data in the {@code ZSTD_inBuffer} to find matches. Normally zstd maintains its own window buffer
-        for this purpose, but passing this flag tells zstd to use the user provided buffer.
+        for this purpose, but passing this flag tells zstd to rely on user provided buffer instead.
         """,
 
         "c_stableInBuffer".."ZSTD_c_experimentalParam9"
@@ -308,8 +311,8 @@ ENABLE_WARNINGS()""")
 
         Without validation, providing a sequence that does not conform to the zstd spec will cause undefined behavior, and may produce a corrupted block.
 
-        With validation enabled, a if sequence is invalid (see {@code doc/zstd_compression_format.md} for specifics regarding
-        {@code offset}/{@code matchlength} requirements) then the function will bail out and return an error.       
+        With validation enabled, if sequence is invalid (see {@code doc/zstd_compression_format.md} for specifics regarding {@code offset}/{@code matchlength}
+        requirements) then the function will bail out and return an error.       
         """,
 
         "c_validateSequences".."ZSTD_c_experimentalParam12"
@@ -361,6 +364,66 @@ ENABLE_WARNINGS()""")
     )
     IntConstant(
         """
+        Controlled with ZSTD_paramSwitch_e enum. Default is ZSTD_ps_auto.
+ 
+        In some situations, zstd uses CDict tables in-place rather than copying them into the working context. (See docs on {@code ZSTD_dictAttachPref_e} for
+        details). In such situations, compression speed is seriously impacted when CDict tables are "cold" (outside CPU cache). This parameter instructs zstd
+        to prefetch CDict tables when they are used in-place.
+
+        For sufficiently small inputs, the cost of the prefetch will outweigh the benefit. For sufficiently large inputs, zstd will by default {@code memcpy()}
+        CDict tables into the working context, so there is no need to prefetch. This parameter is targeted at a middle range of input sizes, where a prefetch
+        is cheap enough to be useful but {@code memcpy()} is too expensive. The exact range of input sizes where this makes sense is best determined by careful
+        experimentation.
+
+        Note: for this parameter, #ps_auto is currently equivalent to #ps_disable, but in the future zstd may conditionally enable this feature via an
+        auto-detection heuristic for cold CDicts. Use {@code ZSTD_ps_disable} to opt out of prefetching under any circumstances.
+        """,
+
+        "c_prefetchCDictTables".."ZSTD_c_experimentalParam16"
+    )
+    IntConstant(
+        """
+        Allowed values are 0 (disable) and 1 (enable). The default setting is 0.
+
+        Controls whether zstd will fall back to an internal sequence producer if an external sequence producer is registered and returns an error code. This
+        fallback is block-by-block: the internal sequence producer will only be called for blocks where the external sequence producer returns an error code.
+        Fallback parsing will follow any other cParam settings, such as compression level, the same as in a normal (fully-internal) compression operation.
+
+        The user is strongly encouraged to read the full Block-Level Sequence Producer API documentation (below) before setting this parameter.
+        """,
+
+        "c_enableSeqProducerFallback".."ZSTD_c_experimentalParam17"
+    )
+    IntConstant(
+        """
+        Allowed values are between 1KB and #BLOCKSIZE_MAX (128KB). The default is {@code ZSTD_BLOCKSIZE_MAX}, and setting to 0 will set to the default.
+
+        This parameter can be used to set an upper bound on the blocksize that overrides the default {@code ZSTD_BLOCKSIZE_MAX}. It cannot be used to set upper
+        bounds greater than {@code ZSTD_BLOCKSIZE_MAX} or bounds lower than 1KB (will make #compressBound() innacurate). Only currently meant to be used for
+        testing.
+        """,
+        "c_maxBlockSize".."ZSTD_c_experimentalParam18"
+    )
+    IntConstant(
+        """
+        This parameter affects how zstd parses external sequences, such as sequences provided through the #compressSequences() API or from an external
+        block-level sequence producer.
+
+        If set to #ps_enable, the library will check for repeated offsets in external sequences, even if those repcodes are not explicitly indicated in the
+        "rep" field. Note that this is the only way to exploit repcode matches while using {@code compressSequences()} or an external sequence producer, since
+        zstd currently ignores the "rep" field of external sequences.
+
+        If set to #ps_disable, the library will not exploit repeated offsets in external sequences, regardless of whether the "rep" field has been set. This
+        reduces sequence compression overhead by about 25% while sacrificing some compression ratio.
+
+        The default value is #ps_auto, for which the library will enable/disable based on compression level.
+
+        Note: for now, this param only has an effect if #c_blockDelimiters is set to #sf_explicitBlockDelimiters. That may change in the future.
+        """,
+        "c_searchForExternalRepcodes".."ZSTD_c_experimentalParam19"
+    )
+    IntConstant(
+        """
         Experimental parameter.
 
         Allows selection between {@code ZSTD_format_e} input compression formats.
@@ -376,7 +439,7 @@ ENABLE_WARNINGS()""")
         the {@code ZSTD_outBuffer} MUST be large enough to fit the entire decompressed frame. This will be checked when the frame content size is known. The
         data in the {@code ZSTD_outBuffer} in the range {@code [dst, dst + pos)} MUST not be modified during decompression or you will get data corruption.
 
-        When this flags is enabled zstd won't allocate an output buffer, because it can write directly to the {@code ZSTD_outBuffer}, but it will still
+        When this flag is enabled zstd won't allocate an output buffer, because it can write directly to the {@code ZSTD_outBuffer}, but it will still
         allocate an input buffer large enough to fit any compressed block. This will also avoid the {@code memcpy()} from the internal output buffer to the
         {@code ZSTD_outBuffer}. If you need to avoid the input buffer allocation use the buffer-less streaming API.
 
@@ -417,6 +480,17 @@ ENABLE_WARNINGS()""")
         themselves.
         """,
         "d_refMultipleDDicts".."ZSTD_d_experimentalParam4"
+    )
+    IntConstant(
+        """
+        Set to 1 to disable the Huffman assembly implementation.
+
+        The default value is 0, which allows zstd to use the Huffman assembly implementation if available.
+
+        This parameter can be used to disable Huffman assembly at runtime. If you want to disable it at compile time you can define the macro
+        {@code ZSTD_DISABLE_ASM}.
+        """,
+        "d_disableHuffmanAssembly".."ZSTD_d_experimentalParam5"
     )
 
     EnumConstant(
@@ -509,11 +583,64 @@ ENABLE_WARNINGS()""")
         returnDoc = ": size of the Frame Header, or an error code (if srcSize is too small)"
     )
 
+    size_t(
+        "decompressionMargin",
+        """
+        Zstd supports in-place decompression, where the input and output buffers overlap. In this case, the output buffer must be at least
+        {@code (Margin + Output_Size)} bytes large, and the input buffer must be at the end of the output buffer.
+        ${codeBlock("""
+_______________________ Output Buffer ________________________
+|                                                              |
+|                                        ____ Input Buffer ____|
+|                                       |                      |
+v                                       v                      v
+|---------------------------------------|-----------|----------|
+^                                                   ^          ^
+|___________________ Output_Size ___________________|_ Margin _|""")}
+
+        This applies only to single-pass decompression through #decompress() or #decompressDCtx(). This function supports multi-frame input.
+        """,
+
+        void.const.p("src", "the compressed frame(s)"),
+        AutoSize("src")..size_t("srcSize", "the size of the compressed frame(s)"),
+
+        returnDoc = "the decompression margin or an error that can be checked with #isError()."
+    )
+
+    customMethod("""
+    /** 
+     * Similar to {@link #ZSTD_decompressionMargin decompressionMargin}, but instead of computing the margin from the compressed frame, compute it from the
+     * original {@code size} and the {@code blockSizeLog}.
+     * 
+     * <p>WARNING: This macro does not support multi-frame input, the input must be a single zstd frame. If you need that support use the function, or
+     * implement it yourself.</p>
+     *
+     * @param originalSize the original uncompressed size of the data
+     * @param blockSize    the block {@code size == MIN(windowSize, ZSTD_BLOCKSIZE_MAX)}. Unless you explicitly set the {@code windowLog} smaller than
+     *                     {@code ZSTD_BLOCKSIZELOG_MAX} you can just use {@code ZSTD_BLOCKSIZE_MAX}.
+     */
+    public static long ZSTD_DECOMPRESSION_MARGIN(long originalSize, long blockSize) {
+        return
+            ZSTD_FRAMEHEADERSIZE_MAX                                                              /* Frame header */ +
+            4                                                                                         /* checksum */ +
+            ((originalSize) == 0 ? 0 : 3 * (((originalSize) + (blockSize) - 1) / blockSize)) /* 3 bytes per block */ +
+            (blockSize);                                                                   /* One block of margin */
+    }""")
+
     EnumConstant(
         "{@code ZSTD_sequenceFormat_e}",
 
         "sf_noBlockDelimiters".enum("Representation of {@code ZSTD_Sequence} has no block delimiters, sequences only.", "0"),
         "sf_explicitBlockDelimiters".enum("Representation of {@code ZSTD_Sequence} contains explicit block delimiters.")
+    )
+
+    size_t(
+        "sequenceBound",
+        "",
+
+        size_t("srcSize", "size of the input buffer"),
+
+        returnDoc = "upper-bound for the number of sequences that can be generated from a buffer of {@code srcSize} bytes"
     )
 
     size_t(
@@ -541,8 +668,8 @@ ENABLE_WARNINGS()""")
     size_t(
         "mergeBlockDelimiters",
         """
-        Given an array of {@code ZSTD_Sequence}, remove all sequences that represent block delimiters/last literals by merging them into into the literals of
-        the next sequence.
+        Given an array of {@code ZSTD_Sequence}, remove all sequences that represent block delimiters/last literals by merging them into the literals of the
+        next sequence.
 
         As such, the final generated result has no explicit representation of block boundaries, and the final last literals segment is not represented in the
         sequences.
@@ -556,13 +683,13 @@ ENABLE_WARNINGS()""")
         returnDoc = "number of sequences left after merging"
     )
 
-/*! ZSTD_compressSequences() :
-
- */
     size_t(
         "compressSequences",
         """
-        Compress an array of {@code ZSTD_Sequence}, generated from the original source buffer, into {@code dst}.
+        Compress an array of {@code ZSTD_Sequence}, associated with {@code src} buffer, into {@code dst}.
+
+        {@code src} contains the entire input (not just the literals). If {@code srcSize} &gt; {@code sum(sequence.length)}, the remaining bytes are considered
+        all literals.
 
         If a dictionary is included, then the {@code cctx} should reference the {@code dict}. (see: #CCtx_refCDict(), #CCtx_loadDictionary(), etc.) The entire
         source is compressed into a single frame.
@@ -601,7 +728,7 @@ ENABLE_WARNINGS()""")
         that disagrees with the {@code repcode} history.
         """,
 
-        ZSTD_CCtx.p.const("cctx", ""),
+        ZSTD_CCtx.p("cctx", ""),
         void.p("dst", ""),
         AutoSize("dst")..size_t("dstSize", ""),
         ZSTD_Sequence.const.p("inSeqs", ""),
@@ -609,7 +736,7 @@ ENABLE_WARNINGS()""")
         void.const.p("src", ""),
         AutoSize("src")..size_t("srcSize", ""),
 
-        returnDoc = "final compressed size or a ZSTD error."
+        returnDoc = "final compressed size, or a ZSTD error code."
     )
 
     size_t(
@@ -617,7 +744,7 @@ ENABLE_WARNINGS()""")
         """
         Generates a zstd skippable frame containing data given by {@code src}, and writes it to {@code dst} buffer.
 
-        Skippable frames begin with a a 4-byte magic number. There are 16 possible choices of magic number, ranging from #MAGIC_SKIPPABLE_START to
+        Skippable frames begin with a 4-byte magic number. There are 16 possible choices of magic number, ranging from #MAGIC_SKIPPABLE_START to
         {@code ZSTD_MAGIC_SKIPPABLE_START+15}. As such, the parameter {@code magicVariant} controls the exact skippable frame magic number variant used, so the
         magic number used will be {@code ZSTD_MAGIC_SKIPPABLE_START + magicVariant}.
 
@@ -679,7 +806,10 @@ ENABLE_WARNINGS()""")
         can be used in tandem with #getCParams(), and #estimateCCtxSize_usingCCtxParams(), which can be used in tandem with #CCtxParams_setParameter(). Both
         can be used to estimate memory using custom compression parameters and arbitrary {@code srcSize} limits.
 
-        Note 2: only single-threaded compression is supported. #estimateCCtxSize_usingCCtxParams() will return an error code if #c_nbWorkers is &ge; 1.
+        Note: only single-threaded compression is supported. #estimateCCtxSize_usingCCtxParams() will return an error code if #c_nbWorkers is &ge; 1.
+
+        Note 2: {@code ZSTD_estimateCCtxSize*} functions are not compatible with the Block-Level Sequence Producer API at this time. Size estimates assume that
+        no external sequence producer is registered.
         """,
 
         int("compressionLevel", "")
@@ -706,6 +836,11 @@ ENABLE_WARNINGS()""")
 
         Note: if streaming is init with function {@code ZSTD_init?Stream_usingDict()}, an internal Dict will be created, which additional size is not estimated
         here. In this case, get total size by adding {@code ZSTD_estimate?DictSize}.
+
+        Note 2: only single-threaded compression is supported. #estimateCStreamSize_usingCCtxParams() will return an error code if #c_nbWorkers is &ge; 1.
+
+        Note 3: {@code ZSTD_estimateCStreamSize*} functions are not compatible with the Block-Level Sequence Producer API at this time. Size estimates assume
+        that no external sequence producer is registered.
         """,
 
         int("compressionLevel", "")
@@ -944,6 +1079,20 @@ ENABLE_WARNINGS()""")
         ZSTD_compressionParameters("cPar", ""),
         unsigned_long_long("srcSize", ""),
         size_t("dictSize", "")
+    )
+
+    size_t(
+        "CCtx_setCParams",
+        """
+        Set all parameters provided within {@code cparams} into the working {@code cctx}.
+
+        Note: if modifying parameters during compression (MT mode only), note that changes to the {@code .windowLog} parameter will be ignored.
+        """,
+
+        ZSTD_CCtx.p("cctx", ""),
+        ZSTD_compressionParameters("cparams", ""),
+
+        returnDoc = "0 on success, or an error code (can be checked with #isError())"
     )
 
     size_t(
@@ -1371,14 +1520,6 @@ ENABLE_WARNINGS()""")
         AutoSize("src")..size_t("srcSize", "")
     )
 
-    void(
-        "copyDCtx",
-        "",
-
-        ZSTD_DCtx.p("dctx", ""),
-        ZSTD_DCtx.const.p("preparedDCtx", "")
-    )
-
     ZSTD_nextInputType_e(
         "nextInputType",
         "",
@@ -1422,5 +1563,36 @@ ENABLE_WARNINGS()""")
         ZSTD_DCtx.p("dctx", ""),
         void.const.p("blockStart", ""),
         AutoSize("blockStart")..size_t("blockSize", "")
+    )
+
+    // BLOCK-LEVEL SEQUENCE PRODUCER API
+
+    LongConstant(
+        "",
+
+        "SEQUENCE_PRODUCER_ERROR".."-1L"
+    )
+
+    void(
+        "registerSequenceProducer",
+        """
+        Instruct zstd to use a block-level external sequence producer function.
+
+        The {@code sequenceProducerState} must be initialized by the caller, and the caller is responsible for managing its lifetime. This parameter is sticky
+        across compressions. It will remain set until the user explicitly resets compression parameters.
+ 
+        Sequence producer registration is considered to be an "advanced parameter", part of the "advanced API". This means it will only have an effect on
+        compression APIs which respect advanced parameters, such as #compress2() and #compressStream2(). Older compression APIs such as #compressCCtx(), which
+        predate the introduction of "advanced parameters", will ignore any external sequence producer setting.
+ 
+        The sequence producer can be "cleared" by registering a #NULL function pointer. This removes all limitations described above in the "LIMITATIONS"
+        section of the API docs.
+ 
+        The user is strongly encouraged to read the full API documentation before calling this function.
+        """,
+
+        ZSTD_CCtx.p("cctx", ""),
+        nullable..opaque_p("sequenceProducerState", ""),
+        nullable..ZSTD_sequenceProducer_F("sequenceProducer", "")
     )
 }

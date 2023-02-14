@@ -174,4 +174,25 @@ val ZSTD_frameHeader = struct(Module.ZSTD, "ZSTDFrameHeader", nativeName = "ZSTD
     unsigned_int("headerSize", "")
     unsigned_int("dictID", "")
     unsigned_int("checksumFlag", "")
+    unsigned("_reserved1", "").private()
+    unsigned("_reserved2", "").private()
+}
+
+val ZSTD_sequenceProducer_F = Module.ZSTD.callback {
+    void.p(
+        "ZSTDSequenceProducer",
+        "",
+
+        nullable..opaque_p("sequenceProducerState", ""),
+        ZSTD_Sequence.p("outSeqs", ""),
+        AutoSize("outSeqs")..size_t("outSeqsCapacity", ""),
+        void.const.p("src", ""),
+        AutoSize("src")..size_t("srcSize", ""),
+        void.const.p("dict", ""),
+        AutoSize("dict")..size_t("dictSize", ""),
+        int("compressionLevel", ""),
+        size_t("windowSize", ""),
+
+        nativeType = "ZSTD_sequenceProducer_F *"
+    )
 }

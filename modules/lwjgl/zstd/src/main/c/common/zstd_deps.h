@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Facebook, Inc.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
  * All rights reserved.
  *
  * This source code is licensed under both the BSD-style license (found in the
@@ -27,7 +27,6 @@
 #include <limits.h>
 #include <stddef.h>
 #include <string.h>
-#include "lwjgl_malloc.h"
 
 #if defined(__GNUC__) && __GNUC__ >= 4
 # define ZSTD_memcpy(d,s,l) __builtin_memcpy((d),(s),(l))
@@ -52,9 +51,9 @@
 
 #include <stdlib.h>
 
-#define ZSTD_malloc(s) org_lwjgl_malloc(s)
-#define ZSTD_calloc(n,s) org_lwjgl_calloc((n), (s))
-#define ZSTD_free(p) org_lwjgl_free((p))
+#define ZSTD_malloc(s) malloc(s)
+#define ZSTD_calloc(n,s) calloc((n), (s))
+#define ZSTD_free(p) free((p))
 
 #endif /* ZSTD_DEPS_MALLOC */
 #endif /* ZSTD_DEPS_NEED_MALLOC */

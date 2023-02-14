@@ -112,7 +112,7 @@ public class Zstd {
     public static final int
         ZSTD_VERSION_MAJOR   = 1,
         ZSTD_VERSION_MINOR   = 5,
-        ZSTD_VERSION_RELEASE = 2;
+        ZSTD_VERSION_RELEASE = 4;
 
     /** Version number. */
     public static final int ZSTD_VERSION_NUMBER = (ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE);
@@ -304,6 +304,10 @@ public class Zstd {
      * <li>{@link #ZSTD_c_experimentalParam13 c_experimentalParam13}</li>
      * <li>{@link #ZSTD_c_experimentalParam14 c_experimentalParam14}</li>
      * <li>{@link #ZSTD_c_experimentalParam15 c_experimentalParam15}</li>
+     * <li>{@link #ZSTD_c_experimentalParam16 c_experimentalParam16}</li>
+     * <li>{@link #ZSTD_c_experimentalParam17 c_experimentalParam17}</li>
+     * <li>{@link #ZSTD_c_experimentalParam18 c_experimentalParam18}</li>
+     * <li>{@link #ZSTD_c_experimentalParam19 c_experimentalParam19}</li>
      * </ul>
      */
     public static final int
@@ -340,7 +344,11 @@ public class Zstd {
         ZSTD_c_experimentalParam12        = 1009,
         ZSTD_c_experimentalParam13        = 1010,
         ZSTD_c_experimentalParam14        = 1011,
-        ZSTD_c_experimentalParam15        = 1012;
+        ZSTD_c_experimentalParam15        = 1012,
+        ZSTD_c_experimentalParam16        = 1013,
+        ZSTD_c_experimentalParam17        = 1014,
+        ZSTD_c_experimentalParam18        = 1015,
+        ZSTD_c_experimentalParam19        = 1016;
 
     /**
      * {@code ZSTD_ResetDirective}
@@ -391,6 +399,7 @@ public class Zstd {
      * <li>{@link #ZSTD_d_experimentalParam2 d_experimentalParam2}</li>
      * <li>{@link #ZSTD_d_experimentalParam3 d_experimentalParam3}</li>
      * <li>{@link #ZSTD_d_experimentalParam4 d_experimentalParam4}</li>
+     * <li>{@link #ZSTD_d_experimentalParam5 d_experimentalParam5}</li>
      * </ul>
      */
     public static final int
@@ -398,7 +407,8 @@ public class Zstd {
         ZSTD_d_experimentalParam1 = 1000,
         ZSTD_d_experimentalParam2 = 1001,
         ZSTD_d_experimentalParam3 = 1002,
-        ZSTD_d_experimentalParam4 = 1003;
+        ZSTD_d_experimentalParam4 = 1003,
+        ZSTD_d_experimentalParam5 = 1004;
 
     /**
      * {@code ZSTD_EndDirective}
@@ -670,7 +680,7 @@ public class Zstd {
     /**
      * All parameters must belong to an interval with lower and upper bounds, otherwise they will either trigger an error or be automatically clamped.
      *
-     * @param cParam   one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td></tr><tr><td>{@link #ZSTD_c_searchLog c_searchLog}</td><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td></tr><tr><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td></tr><tr><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td></tr><tr><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td><td>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link #ZSTD_c_experimentalParam9 c_experimentalParam9}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link #ZSTD_c_experimentalParam11 c_experimentalParam11}</td><td>{@link #ZSTD_c_experimentalParam12 c_experimentalParam12}</td><td>{@link #ZSTD_c_experimentalParam13 c_experimentalParam13}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam14 c_experimentalParam14}</td><td>{@link #ZSTD_c_experimentalParam15 c_experimentalParam15}</td></tr></table>
+     * @param cParam   one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td></tr><tr><td>{@link #ZSTD_c_searchLog c_searchLog}</td><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td></tr><tr><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td></tr><tr><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td></tr><tr><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td><td>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link #ZSTD_c_experimentalParam9 c_experimentalParam9}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link #ZSTD_c_experimentalParam11 c_experimentalParam11}</td><td>{@link #ZSTD_c_experimentalParam12 c_experimentalParam12}</td><td>{@link #ZSTD_c_experimentalParam13 c_experimentalParam13}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam14 c_experimentalParam14}</td><td>{@link #ZSTD_c_experimentalParam15 c_experimentalParam15}</td><td>{@link #ZSTD_c_experimentalParam16 c_experimentalParam16}</td><td>{@link #ZSTD_c_experimentalParam17 c_experimentalParam17}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam18 c_experimentalParam18}</td><td>{@link #ZSTD_c_experimentalParam19 c_experimentalParam19}</td></tr></table>
      * @param __result a structure, {@code ZSTD_bounds}, which contains
      *                 
      *                 <ul>
@@ -698,7 +708,7 @@ public class Zstd {
      * compressionLevel, hashLog, chainLog, searchLog, minMatch, targetLength and strategy. new parameters will be active for next job only (after a
      * {@code flush()}).</p>
      *
-     * @param param one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td></tr><tr><td>{@link #ZSTD_c_searchLog c_searchLog}</td><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td></tr><tr><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td></tr><tr><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td></tr><tr><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td><td>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link #ZSTD_c_experimentalParam9 c_experimentalParam9}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link #ZSTD_c_experimentalParam11 c_experimentalParam11}</td><td>{@link #ZSTD_c_experimentalParam12 c_experimentalParam12}</td><td>{@link #ZSTD_c_experimentalParam13 c_experimentalParam13}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam14 c_experimentalParam14}</td><td>{@link #ZSTD_c_experimentalParam15 c_experimentalParam15}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link #ZSTD_c_compressionLevel c_compressionLevel}</td><td>{@link #ZSTD_c_windowLog c_windowLog}</td><td>{@link #ZSTD_c_hashLog c_hashLog}</td><td>{@link #ZSTD_c_chainLog c_chainLog}</td></tr><tr><td>{@link #ZSTD_c_searchLog c_searchLog}</td><td>{@link #ZSTD_c_minMatch c_minMatch}</td><td>{@link #ZSTD_c_targetLength c_targetLength}</td><td>{@link #ZSTD_c_strategy c_strategy}</td></tr><tr><td>{@link #ZSTD_c_enableLongDistanceMatching c_enableLongDistanceMatching}</td><td>{@link #ZSTD_c_ldmHashLog c_ldmHashLog}</td><td>{@link #ZSTD_c_ldmMinMatch c_ldmMinMatch}</td><td>{@link #ZSTD_c_ldmBucketSizeLog c_ldmBucketSizeLog}</td></tr><tr><td>{@link #ZSTD_c_ldmHashRateLog c_ldmHashRateLog}</td><td>{@link #ZSTD_c_contentSizeFlag c_contentSizeFlag}</td><td>{@link #ZSTD_c_checksumFlag c_checksumFlag}</td><td>{@link #ZSTD_c_dictIDFlag c_dictIDFlag}</td></tr><tr><td>{@link #ZSTD_c_nbWorkers c_nbWorkers}</td><td>{@link #ZSTD_c_jobSize c_jobSize}</td><td>{@link #ZSTD_c_overlapLog c_overlapLog}</td><td>{@link #ZSTD_c_experimentalParam1 c_experimentalParam1}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam2 c_experimentalParam2}</td><td>{@link #ZSTD_c_experimentalParam3 c_experimentalParam3}</td><td>{@link #ZSTD_c_experimentalParam4 c_experimentalParam4}</td><td>{@link #ZSTD_c_experimentalParam5 c_experimentalParam5}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam6 c_experimentalParam6}</td><td>{@link #ZSTD_c_experimentalParam7 c_experimentalParam7}</td><td>{@link #ZSTD_c_experimentalParam8 c_experimentalParam8}</td><td>{@link #ZSTD_c_experimentalParam9 c_experimentalParam9}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam10 c_experimentalParam10}</td><td>{@link #ZSTD_c_experimentalParam11 c_experimentalParam11}</td><td>{@link #ZSTD_c_experimentalParam12 c_experimentalParam12}</td><td>{@link #ZSTD_c_experimentalParam13 c_experimentalParam13}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam14 c_experimentalParam14}</td><td>{@link #ZSTD_c_experimentalParam15 c_experimentalParam15}</td><td>{@link #ZSTD_c_experimentalParam16 c_experimentalParam16}</td><td>{@link #ZSTD_c_experimentalParam17 c_experimentalParam17}</td></tr><tr><td>{@link #ZSTD_c_experimentalParam18 c_experimentalParam18}</td><td>{@link #ZSTD_c_experimentalParam19 c_experimentalParam19}</td></tr></table>
      *
      * @return an error code (which can be tested using {@link #ZSTD_isError isError})
      */
@@ -752,9 +762,9 @@ public class Zstd {
      * <li>The session: will stop compressing current frame, and make {@code CCtx} ready to start a new one. Useful after an error, or to interrupt any
      * ongoing compression. Any internal data not yet flushed is cancelled. Compression parameters and dictionary remain unchanged. They will be used to
      * compress next frame. Resetting session never fails.</li>
-     * <li>The parameters: changes all parameters back to "default". This removes any reference to any dictionary too. Parameters can only be changed between
-     * 2 sessions (i.e. no compression is currently ongoing) otherwise the reset fails, and function returns an error value (which can be tested using
-     * {@link #ZSTD_isError isError})</li>
+     * <li>The parameters: changes all parameters back to "default". This also removes any reference to any dictionary or external sequence producer.
+     * Parameters can only be changed between 2 sessions (i.e. no compression is currently ongoing) otherwise the reset fails, and function returns an
+     * error value (which can betested using {@link #ZSTD_isError isError}).</li>
      * <li>Both: similar to resetting the session, followed by resetting parameters.</li>
      * </ul>
      *
@@ -820,7 +830,7 @@ public class Zstd {
      * <p>All parameters have valid bounds. Bounds can be queried using {@link #ZSTD_dParam_getBounds dParam_getBounds}. Providing a value beyond bound will either clamp it, or trigger an
      * error (depending on parameter). Setting a parameter is only possible during frame initialization (before starting decompression).</p>
      *
-     * @param param one of:<br><table><tr><td>{@link #ZSTD_d_windowLogMax d_windowLogMax}</td><td>{@link #ZSTD_d_experimentalParam1 d_experimentalParam1}</td><td>{@link #ZSTD_d_experimentalParam2 d_experimentalParam2}</td><td>{@link #ZSTD_d_experimentalParam3 d_experimentalParam3}</td></tr><tr><td>{@link #ZSTD_d_experimentalParam4 d_experimentalParam4}</td></tr></table>
+     * @param param one of:<br><table><tr><td>{@link #ZSTD_d_windowLogMax d_windowLogMax}</td><td>{@link #ZSTD_d_experimentalParam1 d_experimentalParam1}</td><td>{@link #ZSTD_d_experimentalParam2 d_experimentalParam2}</td><td>{@link #ZSTD_d_experimentalParam3 d_experimentalParam3}</td></tr><tr><td>{@link #ZSTD_d_experimentalParam4 d_experimentalParam4}</td><td>{@link #ZSTD_d_experimentalParam5 d_experimentalParam5}</td></tr></table>
      *
      * @return 0, or an error code (which can be tested using {@link #ZSTD_isError isError})
      */
@@ -1210,7 +1220,7 @@ public class Zstd {
      *         
      *         <ul>
      *         <li>The frame does not require a dictionary to be decoded (most common case).</li>
-     *         <li>The frame was built with {@code dictID} intentionally removed. Whatever dictionary is necessary is a hidden information.
+     *         <li>The frame was built with {@code dictID} intentionally removed. Whatever dictionary is necessary is a hidden piece of information.
      *         
      *         <p>Note: this use case also happens when using a non-conformant dictionary.</p></li>
      *         <li>{@code srcSize} is too small, and as a result, the frame header could not be decoded (only possible if {@code srcSize} &lt; {@link ZstdX#ZSTD_FRAMEHEADERSIZE_MAX FRAMEHEADERSIZE_MAX}).</li>
@@ -1233,8 +1243,8 @@ public class Zstd {
      * 
      * <p>Special: Loading a {@code NULL} (or 0-size) dictionary invalidates previous dictionary, meaning "return to no-dictionary mode".</p>
      * 
-     * <p>Note 1: Dictionary is sticky, it will be used for all future compressed frames. To return to "no-dictionary" situation, load a {@code NULL} dictionary (or
-     * reset parameters).</p>
+     * <p>Note 1: Dictionary is sticky, it will be used for all future compressed frames, until parameters are reset, a new dictionary is loaded, or the
+     * dictionary is explicitly invalidated by loading a {@code NULL} dictionary.</p>
      * 
      * <p>Note 2: Loading a dictionary involves building tables. It's also a CPU consuming operation, with non-negligible impact on latency. Tables are dependent
      * on compression parameters, and for this reason, compression parameters can no longer be changed after loading a dictionary.</p>
@@ -1260,7 +1270,7 @@ public class Zstd {
     public static native long nZSTD_CCtx_refCDict(long cctx, long cdict);
 
     /**
-     * References a prepared dictionary, to be used for all next compressed frames.
+     * References a prepared dictionary, to be used for all future compressed frames.
      * 
      * <p>Note that compression parameters are enforced from within {@code CDict}, and supercede any compression parameter previously set within {@code CCtx}.
      * The parameters ignored are labelled as "superseded-by-cdict" in the {@code ZSTD_cParameter} enum docs. The ignored parameters will be used again if the
@@ -1323,8 +1333,8 @@ public class Zstd {
     public static native long nZSTD_DCtx_loadDictionary(long dctx, long dict, long dictSize);
 
     /**
-     * Create an internal {@code DDict} from {@code dict} buffer, to be used to decompress next frames. The dictionary remains valid for all future frames,
-     * until explicitly invalidated.
+     * Create an internal {@code DDict} from {@code dict} buffer, to be used to decompress all future frames. The dictionary remains valid for all future
+     * frames, until explicitly invalidated, or a new dictionary is loaded.
      * 
      * <p>Special: Adding a {@code NULL} (or 0-size) dictionary invalidates any previous dictionary, meaning "return to no-dictionary mode".</p>
      * 
@@ -1359,10 +1369,8 @@ public class Zstd {
      * {@code DDict} used for decompression will be determined at decompression time, as per the {@code dict ID} in the frame. The memory for the table is
      * allocated on the first call to {@code refDDict}, and can be freed with {@link #ZSTD_freeDCtx freeDCtx}.</p>
      * 
-     * <p>Note 1: Currently, only one dictionary can be managed. Referencing a new dictionary effectively "discards" any previous one. Special: referencing a
-     * {@code NULL} {@code DDict} means "return to no-dictionary mode".</p>
-     * 
-     * <p>Note 2: {@code DDict} is just referenced, its lifetime must outlive its usage from {@code DCtx}.</p>
+     * <p>If called with {@link ZstdX#ZSTD_d_refMultipleDDicts d_refMultipleDDicts} disabled (the default), only one dictionary will be managed, and referencing a dictionary effectively "discards"
+     * any previous one.</p>
      *
      * @return 0, or an error code (which can be tested with {@link #ZSTD_isError isError})
      */

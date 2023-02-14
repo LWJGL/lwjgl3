@@ -109,7 +109,7 @@ ENABLE_WARNINGS()""")
 
         "VERSION_MAJOR".."1",
         "VERSION_MINOR".."5",
-        "VERSION_RELEASE".."2"
+        "VERSION_RELEASE".."4"
     )
 
     IntConstant("Version number.", "VERSION_NUMBER".."(ZSTD_VERSION_MAJOR *100*100 + ZSTD_VERSION_MINOR *100 + ZSTD_VERSION_RELEASE)")
@@ -326,7 +326,11 @@ ENABLE_WARNINGS()""")
         "c_experimentalParam12".enum,
         "c_experimentalParam13".enum,
         "c_experimentalParam14".enum,
-        "c_experimentalParam15".enum
+        "c_experimentalParam15".enum,
+        "c_experimentalParam16".enum,
+        "c_experimentalParam17".enum,
+        "c_experimentalParam18".enum,
+        "c_experimentalParam19".enum
     ).javaDocLinks
 
     val resetDirectives = EnumConstant(
@@ -373,7 +377,8 @@ ENABLE_WARNINGS()""")
         ),
         "d_experimentalParam2".enum,
         "d_experimentalParam3".enum,
-        "d_experimentalParam4".enum
+        "d_experimentalParam4".enum,
+        "d_experimentalParam5".enum
     ).javaDocLinks
 
     val endDirectives = EnumConstant(
@@ -673,9 +678,9 @@ ENABLE_WARNINGS()""")
             compress next frame. Resetting session never fails.
             """,
             """
-            The parameters: changes all parameters back to "default". This removes any reference to any dictionary too. Parameters can only be changed between
-            2 sessions (i.e. no compression is currently ongoing) otherwise the reset fails, and function returns an error value (which can be tested using
-            #isError())
+            The parameters: changes all parameters back to "default". This also removes any reference to any dictionary or external sequence producer.
+            Parameters can only be changed between 2 sessions (i.e. no compression is currently ongoing) otherwise the reset fails, and function returns an
+            error value (which can betested using #isError()).
             """,
             "Both: similar to resetting the session, followed by resetting parameters."
         )}
@@ -1076,7 +1081,7 @@ ENABLE_WARNINGS()""")
         ${ul(
             "The frame does not require a dictionary to be decoded (most common case).",
             """
-            The frame was built with {@code dictID} intentionally removed. Whatever dictionary is necessary is a hidden information.
+            The frame was built with {@code dictID} intentionally removed. Whatever dictionary is necessary is a hidden piece of information.
 
             Note: this use case also happens when using a non-conformant dictionary.
             """,
@@ -1095,8 +1100,8 @@ ENABLE_WARNINGS()""")
 
         Special: Loading a #NULL (or 0-size) dictionary invalidates previous dictionary, meaning "return to no-dictionary mode".
 
-        Note 1: Dictionary is sticky, it will be used for all future compressed frames. To return to "no-dictionary" situation, load a #NULL dictionary (or
-        reset parameters).
+        Note 1: Dictionary is sticky, it will be used for all future compressed frames, until parameters are reset, a new dictionary is loaded, or the
+        dictionary is explicitly invalidated by loading a #NULL dictionary.
 
         Note 2: Loading a dictionary involves building tables. It's also a CPU consuming operation, with non-negligible impact on latency. Tables are dependent
         on compression parameters, and for this reason, compression parameters can no longer be changed after loading a dictionary.
@@ -1117,7 +1122,7 @@ ENABLE_WARNINGS()""")
     size_t(
         "CCtx_refCDict",
         """
-        References a prepared dictionary, to be used for all next compressed frames.
+        References a prepared dictionary, to be used for all future compressed frames.
 
         Note that compression parameters are enforced from within {@code CDict}, and supercede any compression parameter previously set within {@code CCtx}.
         The parameters ignored are labelled as "superseded-by-cdict" in the {@code ZSTD_cParameter} enum docs. The ignored parameters will be used again if the
@@ -1169,8 +1174,8 @@ ENABLE_WARNINGS()""")
     size_t(
         "DCtx_loadDictionary",
         """
-        Create an internal {@code DDict} from {@code dict} buffer, to be used to decompress next frames. The dictionary remains valid for all future frames,
-        until explicitly invalidated.
+        Create an internal {@code DDict} from {@code dict} buffer, to be used to decompress all future frames. The dictionary remains valid for all future
+        frames, until explicitly invalidated, or a new dictionary is loaded.
 
         Special: Adding a #NULL (or 0-size) dictionary invalidates any previous dictionary, meaning "return to no-dictionary mode".
 
@@ -1195,15 +1200,13 @@ ENABLE_WARNINGS()""")
         """
         References a prepared dictionary, to be used to decompress next frames. The dictionary remains active for decompression of future frames using same
         {@code DCtx}.
-        
+
         If called with {@code ZSTD_d_refMultipleDDicts} enabled, repeated calls of this function  will store the {@code DDict} references in a table, and the
         {@code DDict} used for decompression will be determined at decompression time, as per the {@code dict ID} in the frame. The memory for the table is
         allocated on the first call to {@code refDDict}, and can be freed with #freeDCtx().
 
-        Note 1: Currently, only one dictionary can be managed. Referencing a new dictionary effectively "discards" any previous one. Special: referencing a
-        #NULL {@code DDict} means "return to no-dictionary mode".
-
-        Note 2: {@code DDict} is just referenced, its lifetime must outlive its usage from {@code DCtx}.
+        If called with #d_refMultipleDDicts disabled (the default), only one dictionary will be managed, and referencing a dictionary effectively "discards"
+        any previous one.
         """,
 
         ZSTD_DCtx.p("dctx", ""),
