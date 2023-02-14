@@ -64,7 +64,7 @@ public class NkStyleItem extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the style type. One of:<br><table><tr><td>{@link Nuklear#NK_STYLE_ITEM_COLOR STYLE_ITEM_COLOR}</td><td>{@link Nuklear#NK_STYLE_ITEM_IMAGE STYLE_ITEM_IMAGE}</td><td>{@link Nuklear#NK_STYLE_ITEM_NINE_SLICE STYLE_ITEM_NINE_SLICE}</td></tr></table> */
+    /** the style type. One of:<br><table><tr><td>{@link Nuklear#NK_STYLE_ITEM_STACK_SIZE STYLE_ITEM_STACK_SIZE}</td><td>{@link Nuklear#NK_STYLE_ITEM_COLOR STYLE_ITEM_COLOR}</td><td>{@link Nuklear#NK_STYLE_ITEM_IMAGE STYLE_ITEM_IMAGE}</td><td>{@link Nuklear#NK_STYLE_ITEM_NINE_SLICE STYLE_ITEM_NINE_SLICE}</td></tr></table> */
     @NativeType("enum nk_style_item_type")
     public int type() { return ntype(address()); }
     /** the style data */

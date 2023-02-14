@@ -242,6 +242,21 @@ public class Nuklear {
         NK_UNDEFINED                = -1.0f,
         NK_SCROLLBAR_HIDING_TIMEOUT = 4.0f;
 
+    /** Implementation limits. */
+    public static final int
+        NK_TEXTEDIT_UNDOSTATECOUNT         = 99,
+        NK_TEXTEDIT_UNDOCHARCOUNT          = 999,
+        NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS = 16,
+        NK_CHART_MAX_SLOT                  = 4,
+        NK_WINDOW_MAX_NAME                 = 64,
+        NK_BUTTON_BEHAVIOR_STACK_SIZE      = 8,
+        NK_FONT_STACK_SIZE                 = 8,
+        NK_STYLE_ITEM_STACK_SIZE           = 16,
+        NK_FLOAT_STACK_SIZE                = 32,
+        NK_VECTOR_STACK_SIZE               = 16,
+        NK_FLAGS_STACK_SIZE                = 32,
+        NK_COLOR_STACK_SIZE                = 32;
+
     /**
      * Boolean values.
      * 
@@ -1056,6 +1071,7 @@ public class Nuklear {
      * <li>{@link #NK_FORMAT_UINT FORMAT_UINT}</li>
      * <li>{@link #NK_FORMAT_FLOAT FORMAT_FLOAT}</li>
      * <li>{@link #NK_FORMAT_DOUBLE FORMAT_DOUBLE}</li>
+     * <li>{@link #NK_FORMAT_COLOR_BEGIN FORMAT_COLOR_BEGIN}</li>
      * <li>{@link #NK_FORMAT_R8G8B8 FORMAT_R8G8B8}</li>
      * <li>{@link #NK_FORMAT_R16G15B16 FORMAT_R16G15B16}</li>
      * <li>{@link #NK_FORMAT_R32G32B32 FORMAT_R32G32B32}</li>
@@ -1067,6 +1083,7 @@ public class Nuklear {
      * <li>{@link #NK_FORMAT_R32G32B32A32_DOUBLE FORMAT_R32G32B32A32_DOUBLE}</li>
      * <li>{@link #NK_FORMAT_RGB32 FORMAT_RGB32}</li>
      * <li>{@link #NK_FORMAT_RGBA32 FORMAT_RGBA32}</li>
+     * <li>{@link #NK_FORMAT_COLOR_END FORMAT_COLOR_END}</li>
      * <li>{@link #NK_FORMAT_COUNT FORMAT_COUNT}</li>
      * </ul>
      */
@@ -1079,7 +1096,8 @@ public class Nuklear {
         NK_FORMAT_UINT                = 5,
         NK_FORMAT_FLOAT               = 6,
         NK_FORMAT_DOUBLE              = 7,
-        NK_FORMAT_R8G8B8              = 8,
+        NK_FORMAT_COLOR_BEGIN         = 8,
+        NK_FORMAT_R8G8B8              = NK_FORMAT_COLOR_BEGIN,
         NK_FORMAT_R16G15B16           = 9,
         NK_FORMAT_R32G32B32           = 10,
         NK_FORMAT_R8G8B8A8            = 11,
@@ -1090,6 +1108,7 @@ public class Nuklear {
         NK_FORMAT_R32G32B32A32_DOUBLE = 16,
         NK_FORMAT_RGB32               = 17,
         NK_FORMAT_RGBA32              = 18,
+        NK_FORMAT_COLOR_END           = NK_FORMAT_RGBA32,
         NK_FORMAT_COUNT               = 19;
 
     /**
@@ -1217,6 +1236,20 @@ public class Nuklear {
         NK_WINDOW_CLOSED     = 1 << 14,
         NK_WINDOW_MINIMIZED  = 1 << 15,
         NK_WINDOW_REMOVE_ROM = 1 << 16;
+
+    /**
+     * {@code enum nk_font_coord_type}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #NK_COORD_UV COORD_UV}</li>
+     * <li>{@link #NK_COORD_PIXEL COORD_PIXEL}</li>
+     * </ul>
+     */
+    public static final int
+        NK_COORD_UV    = 0,
+        NK_COORD_PIXEL = 1;
 
     protected Nuklear() {
         throw new UnsupportedOperationException();
@@ -9596,6 +9629,262 @@ public class Nuklear {
         return __result;
     }
 
+    // --- [ nk_font_default_glyph_ranges ] ---
+
+    public static native long nnk_font_default_glyph_ranges();
+
+    @Nullable
+    @NativeType("nk_rune const *")
+    public static IntBuffer nk_font_default_glyph_ranges() {
+        long __result = nnk_font_default_glyph_ranges();
+        return memIntBufferSafe(__result, 2);
+    }
+
+    @Nullable
+    @NativeType("nk_rune const *")
+    public static IntBuffer nk_font_default_glyph_ranges(long length) {
+        long __result = nnk_font_default_glyph_ranges();
+        return memIntBufferSafe(__result, (int)length);
+    }
+
+    // --- [ nk_font_chinese_glyph_ranges ] ---
+
+    public static native long nnk_font_chinese_glyph_ranges();
+
+    @Nullable
+    @NativeType("nk_rune const *")
+    public static IntBuffer nk_font_chinese_glyph_ranges() {
+        long __result = nnk_font_chinese_glyph_ranges();
+        return memIntBufferSafe(__result, 10);
+    }
+
+    @Nullable
+    @NativeType("nk_rune const *")
+    public static IntBuffer nk_font_chinese_glyph_ranges(long length) {
+        long __result = nnk_font_chinese_glyph_ranges();
+        return memIntBufferSafe(__result, (int)length);
+    }
+
+    // --- [ nk_font_cyrillic_glyph_ranges ] ---
+
+    public static native long nnk_font_cyrillic_glyph_ranges();
+
+    @Nullable
+    @NativeType("nk_rune const *")
+    public static IntBuffer nk_font_cyrillic_glyph_ranges() {
+        long __result = nnk_font_cyrillic_glyph_ranges();
+        return memIntBufferSafe(__result, 8);
+    }
+
+    @Nullable
+    @NativeType("nk_rune const *")
+    public static IntBuffer nk_font_cyrillic_glyph_ranges(long length) {
+        long __result = nnk_font_cyrillic_glyph_ranges();
+        return memIntBufferSafe(__result, (int)length);
+    }
+
+    // --- [ nk_font_korean_glyph_ranges ] ---
+
+    public static native long nnk_font_korean_glyph_ranges();
+
+    @Nullable
+    @NativeType("nk_rune const *")
+    public static IntBuffer nk_font_korean_glyph_ranges() {
+        long __result = nnk_font_korean_glyph_ranges();
+        return memIntBufferSafe(__result, 6);
+    }
+
+    @Nullable
+    @NativeType("nk_rune const *")
+    public static IntBuffer nk_font_korean_glyph_ranges(long length) {
+        long __result = nnk_font_korean_glyph_ranges();
+        return memIntBufferSafe(__result, (int)length);
+    }
+
+    // --- [ nk_font_atlas_init ] ---
+
+    public static native void nnk_font_atlas_init(long atlas, long alloc);
+
+    public static void nk_font_atlas_init(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("struct nk_allocator *") NkAllocator alloc) {
+        nnk_font_atlas_init(atlas.address(), alloc.address());
+    }
+
+    // --- [ nk_font_atlas_init_custom ] ---
+
+    public static native void nnk_font_atlas_init_custom(long atlas, long persistent, long transient_);
+
+    public static void nk_font_atlas_init_custom(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("struct nk_allocator *") NkAllocator persistent, @NativeType("struct nk_allocator *") NkAllocator transient_) {
+        nnk_font_atlas_init_custom(atlas.address(), persistent.address(), transient_.address());
+    }
+
+    // --- [ nk_font_atlas_begin ] ---
+
+    public static native void nnk_font_atlas_begin(long atlas);
+
+    public static void nk_font_atlas_begin(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas) {
+        nnk_font_atlas_begin(atlas.address());
+    }
+
+    // --- [ nk_font_config ] ---
+
+    public static native void nnk_font_config(float pixel_height, long __result);
+
+    @NativeType("struct nk_font_config")
+    public static NkFontConfig nk_font_config(float pixel_height, @NativeType("struct nk_font_config") NkFontConfig __result) {
+        nnk_font_config(pixel_height, __result.address());
+        return __result;
+    }
+
+    // --- [ nk_font_atlas_add ] ---
+
+    public static native long nnk_font_atlas_add(long atlas, long config);
+
+    @Nullable
+    @NativeType("struct nk_font *")
+    public static NkFont nk_font_atlas_add(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("struct nk_font_config const *") NkFontConfig config) {
+        long __result = nnk_font_atlas_add(atlas.address(), config.address());
+        return NkFont.createSafe(__result);
+    }
+
+    // --- [ nk_font_atlas_add_default ] ---
+
+    public static native long nnk_font_atlas_add_default(long atlas, float height, long config);
+
+    @Nullable
+    @NativeType("struct nk_font *")
+    public static NkFont nk_font_atlas_add_default(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, float height, @Nullable @NativeType("struct nk_font_config const *") NkFontConfig config) {
+        long __result = nnk_font_atlas_add_default(atlas.address(), height, memAddressSafe(config));
+        return NkFont.createSafe(__result);
+    }
+
+    // --- [ nk_font_atlas_add_from_memory ] ---
+
+    public static native long nnk_font_atlas_add_from_memory(long atlas, long memory, long size, float height, long config);
+
+    @Nullable
+    @NativeType("struct nk_font *")
+    public static NkFont nk_font_atlas_add_from_memory(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("void *") ByteBuffer memory, float height, @Nullable @NativeType("struct nk_font_config const *") NkFontConfig config) {
+        long __result = nnk_font_atlas_add_from_memory(atlas.address(), memAddress(memory), memory.remaining(), height, memAddressSafe(config));
+        return NkFont.createSafe(__result);
+    }
+
+    // --- [ nk_font_atlas_add_from_file ] ---
+
+    public static native long nnk_font_atlas_add_from_file(long atlas, long file_path, float height, long config);
+
+    @Nullable
+    @NativeType("struct nk_font *")
+    public static NkFont nk_font_atlas_add_from_file(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("char const *") ByteBuffer file_path, float height, @Nullable @NativeType("struct nk_font_config const *") NkFontConfig config) {
+        if (CHECKS) {
+            checkNT1(file_path);
+        }
+        long __result = nnk_font_atlas_add_from_file(atlas.address(), memAddress(file_path), height, memAddressSafe(config));
+        return NkFont.createSafe(__result);
+    }
+
+    @Nullable
+    @NativeType("struct nk_font *")
+    public static NkFont nk_font_atlas_add_from_file(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("char const *") CharSequence file_path, float height, @Nullable @NativeType("struct nk_font_config const *") NkFontConfig config) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(file_path, true);
+            long file_pathEncoded = stack.getPointerAddress();
+            long __result = nnk_font_atlas_add_from_file(atlas.address(), file_pathEncoded, height, memAddressSafe(config));
+            return NkFont.createSafe(__result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ nk_font_atlas_add_compressed ] ---
+
+    public static native long nnk_font_atlas_add_compressed(long atlas, long memory, long size, float height, long config);
+
+    @Nullable
+    @NativeType("struct nk_font *")
+    public static NkFont nk_font_atlas_add_compressed(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("void *") ByteBuffer memory, float height, @Nullable @NativeType("struct nk_font_config const *") NkFontConfig config) {
+        long __result = nnk_font_atlas_add_compressed(atlas.address(), memAddress(memory), memory.remaining(), height, memAddressSafe(config));
+        return NkFont.createSafe(__result);
+    }
+
+    // --- [ nk_font_atlas_add_compressed_base85 ] ---
+
+    public static native long nnk_font_atlas_add_compressed_base85(long atlas, long data, float height, long config);
+
+    @Nullable
+    @NativeType("struct nk_font *")
+    public static NkFont nk_font_atlas_add_compressed_base85(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("char const *") ByteBuffer data, float height, @Nullable @NativeType("struct nk_font_config const *") NkFontConfig config) {
+        if (CHECKS) {
+            checkNT1(data);
+        }
+        long __result = nnk_font_atlas_add_compressed_base85(atlas.address(), memAddress(data), height, memAddressSafe(config));
+        return NkFont.createSafe(__result);
+    }
+
+    @Nullable
+    @NativeType("struct nk_font *")
+    public static NkFont nk_font_atlas_add_compressed_base85(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("char const *") CharSequence data, float height, @Nullable @NativeType("struct nk_font_config const *") NkFontConfig config) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nASCII(data, true);
+            long dataEncoded = stack.getPointerAddress();
+            long __result = nnk_font_atlas_add_compressed_base85(atlas.address(), dataEncoded, height, memAddressSafe(config));
+            return NkFont.createSafe(__result);
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ nk_font_atlas_bake ] ---
+
+    public static native long nnk_font_atlas_bake(long atlas, long width, long height, int fmt);
+
+    @Nullable
+    @NativeType("void const *")
+    public static ByteBuffer nk_font_atlas_bake(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("int *") IntBuffer width, @NativeType("int *") IntBuffer height, @NativeType("enum nk_font_atlas_format") int fmt) {
+        if (CHECKS) {
+            check(width, 1);
+            check(height, 1);
+        }
+        long __result = nnk_font_atlas_bake(atlas.address(), memAddress(width), memAddress(height), fmt);
+        return memByteBufferSafe(__result, width.get(width.position()) * height.get(height.position()));
+    }
+
+    // --- [ nk_font_atlas_end ] ---
+
+    public static native void nnk_font_atlas_end(long atlas, long tex, long tex_null);
+
+    public static void nk_font_atlas_end(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("nk_handle") NkHandle tex, @Nullable @NativeType("struct nk_draw_null_texture *") NkDrawNullTexture tex_null) {
+        nnk_font_atlas_end(atlas.address(), tex.address(), memAddressSafe(tex_null));
+    }
+
+    // --- [ nk_font_find_glyph ] ---
+
+    public static native long nnk_font_find_glyph(long font, int unicode);
+
+    @Nullable
+    @NativeType("struct nk_font_glyph const *")
+    public static NkFontGlyph nk_font_find_glyph(@NativeType("struct nk_font *") NkFont font, @NativeType("nk_rune") int unicode) {
+        long __result = nnk_font_find_glyph(font.address(), unicode);
+        return NkFontGlyph.createSafe(__result);
+    }
+
+    // --- [ nk_font_atlas_cleanup ] ---
+
+    public static native void nnk_font_atlas_cleanup(long atlas);
+
+    public static void nk_font_atlas_cleanup(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas) {
+        nnk_font_atlas_cleanup(atlas.address());
+    }
+
+    // --- [ nk_font_atlas_clear ] ---
+
+    public static native void nnk_font_atlas_clear(long atlas);
+
+    public static void nk_font_atlas_clear(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas) {
+        nnk_font_atlas_clear(atlas.address());
+    }
+
     /** Array version of: {@link #nnk_window_get_scroll} */
     public static native void nnk_window_get_scroll(long ctx, int[] offset_x, int[] offset_y);
 
@@ -10583,6 +10872,21 @@ public class Nuklear {
     /** Array version of: {@link #nk_fill_polygon fill_polygon} */
     public static void nk_fill_polygon(@NativeType("struct nk_command_buffer *") NkCommandBuffer b, @NativeType("float *") float[] points, @NativeType("struct nk_color") NkColor color) {
         nnk_fill_polygon(b.address(), points, points.length, color.address());
+    }
+
+    /** Array version of: {@link #nnk_font_atlas_bake} */
+    public static native long nnk_font_atlas_bake(long atlas, int[] width, int[] height, int fmt);
+
+    /** Array version of: {@link #nk_font_atlas_bake font_atlas_bake} */
+    @Nullable
+    @NativeType("void const *")
+    public static ByteBuffer nk_font_atlas_bake(@NativeType("struct nk_font_atlas *") NkFontAtlas atlas, @NativeType("int *") int[] width, @NativeType("int *") int[] height, @NativeType("enum nk_font_atlas_format") int fmt) {
+        if (CHECKS) {
+            check(width, 1);
+            check(height, 1);
+        }
+        long __result = nnk_font_atlas_bake(atlas.address(), width, height, fmt);
+        return memByteBufferSafe(__result, width[0] * height[0]);
     }
 
 }

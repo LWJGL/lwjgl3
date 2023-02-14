@@ -30,32 +30,34 @@ val nk_handle_in_callback = "nk_handle".handle
 const val NK_UTF_SIZE = 4
 val nk_glyph = char.p
 
-val nk_anti_aliasing = "enum nk_anti_aliasing".enumType
 val nk_allocation_type = "enum nk_allocation_type".enumType
-val nk_command_type = "enum nk_command_type".enumType
-val nk_style_item_type = "enum nk_style_item_type".enumType
-val nk_symbol_type = "enum nk_symbol_type".enumType
-val nk_style_header_align = "enum nk_style_header_align".enumType
-val nk_chart_type = "enum nk_chart_type".enumType
-val nk_panel_type = "enum nk_panel_type".enumType
-val nk_panel_row_layout_type = "enum nk_panel_row_layout_type".enumType
-val nk_collapse_states = "enum nk_collapse_states".enumType
-val nk_show_states = "enum nk_show_states".enumType
-val nk_layout_format = "enum nk_layout_format".enumType
-val nk_tree_type = "enum nk_tree_type".enumType
-val nk_button_behavior = "enum nk_button_behavior".enumType
-val nk_color_format = "enum nk_color_format".enumType
-val nk_popup_type = "enum nk_popup_type".enumType
-val nk_keys = "enum nk_keys".enumType
-val nk_buttons = "enum nk_buttons".enumType
-val nk_style_colors = "enum nk_style_colors".enumType
-val nk_style_cursor = "enum nk_style_cursor".enumType
-val nk_widget_layout_states = "enum nk_widget_layout_states".enumType
-val nk_heading = "enum nk_heading".enumType
+val nk_anti_aliasing = "enum nk_anti_aliasing".enumType
 val nk_buffer_allocation_type = "enum nk_buffer_allocation_type".enumType
+val nk_button_behavior = "enum nk_button_behavior".enumType
+val nk_buttons = "enum nk_buttons".enumType
+val nk_chart_type = "enum nk_chart_type".enumType
+val nk_collapse_states = "enum nk_collapse_states".enumType
+val nk_color_format = "enum nk_color_format".enumType
+val nk_command_type = "enum nk_command_type".enumType
 val nk_draw_list_stroke = "enum nk_draw_list_stroke".enumType
 val nk_draw_vertex_layout_attribute = "enum nk_draw_vertex_layout_attribute".enumType
 val nk_draw_vertex_layout_format = "enum nk_draw_vertex_layout_format".enumType
+val nk_font_atlas_format = "enum nk_font_atlas_format".enumType
+val nk_font_coord_type = "enum nk_font_coord_type".enumType
+val nk_heading = "enum nk_heading".enumType
+val nk_keys = "enum nk_keys".enumType
+val nk_layout_format = "enum nk_layout_format".enumType
+val nk_panel_row_layout_type = "enum nk_panel_row_layout_type".enumType
+val nk_panel_type = "enum nk_panel_type".enumType
+val nk_popup_type = "enum nk_popup_type".enumType
+val nk_show_states = "enum nk_show_states".enumType
+val nk_style_colors = "enum nk_style_colors".enumType
+val nk_style_cursor = "enum nk_style_cursor".enumType
+val nk_style_header_align = "enum nk_style_header_align".enumType
+val nk_style_item_type = "enum nk_style_item_type".enumType
+val nk_symbol_type = "enum nk_symbol_type".enumType
+val nk_tree_type = "enum nk_tree_type".enumType
+val nk_widget_layout_states = "enum nk_widget_layout_states".enumType
 
 // API
 
@@ -83,6 +85,15 @@ val nk_rect = struct(Module.NUKLEAR, "NkRect", nativeName = "struct nk_rect") {
     float("y", "")
     float("w", "")
     float("h", "")
+}
+
+val nk_recti = struct(Module.NUKLEAR, "NkRecti", nativeName = "struct nk_recti") {
+    documentation = ""
+
+    short("x", "")
+    short("y", "")
+    short("w", "")
+    short("h", "")
 }
 
 val nk_image = struct(Module.NUKLEAR, "NkImage", nativeName = "struct nk_image") {
@@ -1115,14 +1126,15 @@ val nk_chart_slot = struct(Module.NUKLEAR, "NkChartSlot", nativeName = "struct n
     int("index", "")
 }
 
-const val NK_CHART_MAX_SLOT = 4
 val nk_chart = struct(Module.NUKLEAR, "NkChart", nativeName = "struct nk_chart", mutable = false) {
+    javaImport("static org.lwjgl.nuklear.Nuklear.*")
+
     int("slot", "")
     float("x", "")
     float("y", "")
     float("w", "")
     float("h", "")
-    nk_chart_slot("slots", "")[NK_CHART_MAX_SLOT]
+    nk_chart_slot("slots", "")["NK_CHART_MAX_SLOT"]
 }
 
 const val NK_MAX_LAYOUT_ROW_TEMPLATE_COLUMNS = 16
@@ -1184,6 +1196,8 @@ val nk_panel = struct(Module.NUKLEAR, "NkPanel", nativeName = "struct nk_panel",
 
 private val _nk_window = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_window")
 val nk_popup_state = struct(Module.NUKLEAR, "NkPopupState", nativeName = "struct nk_popup_state", mutable = false) {
+    javaImport("static org.lwjgl.nuklear.Nuklear.*")
+
     _nk_window.p("win", "")
     nk_panel_type("type", "").links("PANEL_\\w+")
     nk_popup_buffer("buf", "")
@@ -1226,11 +1240,12 @@ val nk_property_state = struct(Module.NUKLEAR, "NkPropertyState", nativeName = "
     int("state", "")
 }
 
-const val NK_WINDOW_MAX_NAME = 64
 val nk_window = struct(Module.NUKLEAR, "NkWindow", nativeName = "struct nk_window", mutable = false) {
+    javaImport("static org.lwjgl.nuklear.Nuklear.*")
+
     unsigned_int("seq", "")
     nk_hash("name", "")
-    charUTF8("name_string", "")[NK_WINDOW_MAX_NAME]
+    charUTF8("name_string", "")["NK_WINDOW_MAX_NAME"]
     nk_flags("flags", "")
     nk_rect("bounds", "")
     nk_scroll("scrollbar", "")
@@ -1363,4 +1378,88 @@ val nk_item_getter = Module.NUKLEAR.callback {
     ) {
         documentation = "Instances of this interface may be passed to the #combo_callback() and #combobox_callback() functions."
     }
+}
+
+val nk_baked_font = struct(Module.NUKLEAR, "NkBakedFont", nativeName = "struct nk_baked_font") {
+    documentation = ""
+
+    float("height", "height of the font")
+    float("ascent", "font glyph ascent")
+    float("descent", "font glyph descent")
+    nk_rune("glyph_offset", "glyph array offset inside the font glyph baking output array")
+    nk_rune("glyph_count", "number of glyphs of this font inside the glyph baking array output")
+    nullable..nk_rune.const.p("ranges", "font codepoint ranges as pairs of (from/to) and 0 as last element")
+}
+
+private val _nk_font_config = struct(Module.NUKLEAR, "NkFontConfig", nativeName = "struct nk_font_config")
+val nk_font_config = struct(Module.NUKLEAR, "NkFontConfig", nativeName = "struct nk_font_config") {
+    documentation = ""
+
+    nullable.._nk_font_config.p("next", "NOTE: only used internally")
+    nullable..void.p("ttf_blob", "pointer to loaded TTF file memory block")
+    AutoSize("ttf_blob")..nk_size("ttf_size", "size of the loaded TTF file memory block")
+    unsigned_charb("ttf_data_owned_by_atlas", "used inside font atlas: default to: 0")
+    unsigned_charb("merge_mode", "merges this font into the last font")
+    unsigned_charb("pixel_snap", "align every character to pixel boundary (if true set oversample (1,1))")
+    unsigned_charb("oversample_v", "rasterize at high quality for sub-pixel position")
+    unsigned_charb("oversample_h", "rasterize at high quality for sub-pixel position")
+    unsigned_char("padding", "rasterize at high quality for sub-pixel position")[3]
+    float("size", "baked pixel height of the font")
+    nk_font_coord_type("coord_type", "texture coordinate format with either pixel or UV coordinates")
+    nk_vec2("spacing", "extra pixel spacing between glyphs")
+    nullable..nk_rune.const.p("range", "list of unicode ranges (2 values per range, zero terminated)")
+    nullable..nk_baked_font.p("font", "font to setup in the baking process")
+    nk_rune("fallback_glyph", "fallback glyph to use if a given rune is not found")
+    nullable.._nk_font_config.p("n", "")
+    nullable.._nk_font_config.p("p", "")
+}
+
+val nk_font_glyph = struct(Module.NUKLEAR, "NkFontGlyph", nativeName = "struct nk_font_glyph") {
+    documentation = ""
+
+    nk_rune("codepoint", "")
+    float("xadvance", "")
+    float("x0", "")
+    float("y0", "")
+    float("x1", "")
+    float("y1", "")
+    float("w", "")
+    float("h", "")
+    float("u0", "")
+    float("v0", "")
+    float("u1", "")
+    float("v1", "")
+}
+
+private val _nk_font = struct(Module.NUKLEAR, "NkFont", nativeName = "struct nk_font")
+val nk_font = struct(Module.NUKLEAR, "NkFont", nativeName = "struct nk_font") {
+    documentation = ""
+
+    nullable.._nk_font.p("next", "")
+    nk_user_font("handle", "")
+    nk_baked_font("info", "")
+    float("scale", "")
+    nullable..nk_font_glyph.p("glyphs", "")
+    nullable..nk_font_glyph.const.p("fallback", "")
+    nk_rune("fallback_codepoint", "")
+    nk_handle("texture", "")
+    nullable..nk_font_config.p("config", "")
+}
+
+val nk_font_atlas = struct(Module.NUKLEAR, "NkFontAtlas", nativeName = "struct nk_font_atlas") {
+    documentation = ""
+
+    nullable..void.p("pixel", "")
+    AutoSize("pixel")..int("tex_width", "")
+    AutoSize("pixel")..int("tex_height", "")
+    nk_allocator("permanent", "")
+    nk_allocator("temporary", "")
+    nk_recti("custom", "")
+    nk_cursor("cursors", "")[7]
+    AutoSize("glyphs")..int("glyph_count", "")
+    nullable..nk_font_glyph.p("glyphs", "")
+    nullable..nk_font.p("default_font", "")
+    nullable..nk_font.p("fonts", "")
+    nullable..nk_font_config.p("config", "")
+    int("font_num", "")
 }

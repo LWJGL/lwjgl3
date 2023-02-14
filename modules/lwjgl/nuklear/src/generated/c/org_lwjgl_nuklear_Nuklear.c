@@ -7,6 +7,8 @@
 DISABLE_WARNINGS()
 #define NK_PRIVATE
 #define NK_INCLUDE_FIXED_TYPES
+#define NK_INCLUDE_FONT_BAKING
+    #define NK_INCLUDE_DEFAULT_FONT
 #define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_BOOL
 #define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
@@ -3438,6 +3440,132 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1style_1item_1hide(JNI
     *((struct nk_style_item*)(uintptr_t)__result) = nk_style_item_hide();
 }
 
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1default_1glyph_1ranges(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_default_glyph_ranges();
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1chinese_1glyph_1ranges(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_chinese_glyph_ranges();
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1cyrillic_1glyph_1ranges(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_cyrillic_glyph_ranges();
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1korean_1glyph_1ranges(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_korean_glyph_ranges();
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1init(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong allocAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    struct nk_allocator *alloc = (struct nk_allocator *)(uintptr_t)allocAddress;
+    UNUSED_PARAMS(__env, clazz)
+    nk_font_atlas_init(atlas, alloc);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1init_1custom(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong persistentAddress, jlong transient_Address) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    struct nk_allocator *persistent = (struct nk_allocator *)(uintptr_t)persistentAddress;
+    struct nk_allocator *transient_ = (struct nk_allocator *)(uintptr_t)transient_Address;
+    UNUSED_PARAMS(__env, clazz)
+    nk_font_atlas_init_custom(atlas, persistent, transient_);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1begin(JNIEnv *__env, jclass clazz, jlong atlasAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    UNUSED_PARAMS(__env, clazz)
+    nk_font_atlas_begin(atlas);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1config(JNIEnv *__env, jclass clazz, jfloat pixel_height, jlong __result) {
+    UNUSED_PARAMS(__env, clazz)
+    *((struct nk_font_config*)(uintptr_t)__result) = nk_font_config(pixel_height);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1add(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong configAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    struct nk_font_config const *config = (struct nk_font_config const *)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_atlas_add(atlas, config);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1add_1default(JNIEnv *__env, jclass clazz, jlong atlasAddress, jfloat height, jlong configAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    struct nk_font_config const *config = (struct nk_font_config const *)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_atlas_add_default(atlas, height, config);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1add_1from_1memory(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong memoryAddress, jlong size, jfloat height, jlong configAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    void *memory = (void *)(uintptr_t)memoryAddress;
+    struct nk_font_config const *config = (struct nk_font_config const *)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_atlas_add_from_memory(atlas, memory, (nk_size)size, height, config);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1add_1from_1file(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong file_pathAddress, jfloat height, jlong configAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    char const *file_path = (char const *)(uintptr_t)file_pathAddress;
+    struct nk_font_config const *config = (struct nk_font_config const *)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_atlas_add_from_file(atlas, file_path, height, config);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1add_1compressed(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong memoryAddress, jlong size, jfloat height, jlong configAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    void *memory = (void *)(uintptr_t)memoryAddress;
+    struct nk_font_config const *config = (struct nk_font_config const *)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_atlas_add_compressed(atlas, memory, (nk_size)size, height, config);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1add_1compressed_1base85(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong dataAddress, jfloat height, jlong configAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    char const *data = (char const *)(uintptr_t)dataAddress;
+    struct nk_font_config const *config = (struct nk_font_config const *)(uintptr_t)configAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_atlas_add_compressed_base85(atlas, data, height, config);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1bake__JJJI(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong widthAddress, jlong heightAddress, jint fmt) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    int *width = (int *)(uintptr_t)widthAddress;
+    int *height = (int *)(uintptr_t)heightAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_atlas_bake(atlas, width, height, (enum nk_font_atlas_format)fmt);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1end(JNIEnv *__env, jclass clazz, jlong atlasAddress, jlong texAddress, jlong tex_nullAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    nk_handle *tex = (nk_handle *)(uintptr_t)texAddress;
+    struct nk_draw_null_texture *tex_null = (struct nk_draw_null_texture *)(uintptr_t)tex_nullAddress;
+    UNUSED_PARAMS(__env, clazz)
+    nk_font_atlas_end(atlas, *tex, tex_null);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1find_1glyph(JNIEnv *__env, jclass clazz, jlong fontAddress, jint unicode) {
+    struct nk_font *font = (struct nk_font *)(uintptr_t)fontAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return (jlong)(uintptr_t)nk_font_find_glyph(font, (nk_rune)unicode);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1cleanup(JNIEnv *__env, jclass clazz, jlong atlasAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    UNUSED_PARAMS(__env, clazz)
+    nk_font_atlas_cleanup(atlas);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1clear(JNIEnv *__env, jclass clazz, jlong atlasAddress) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    UNUSED_PARAMS(__env, clazz)
+    nk_font_atlas_clear(atlas);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1window_1get_1scroll__J_3I_3I(JNIEnv *__env, jclass clazz, jlong ctxAddress, jintArray offset_xAddress, jintArray offset_yAddress) {
     struct nk_context *ctx = (struct nk_context *)(uintptr_t)ctxAddress;
     jint *offset_x = offset_xAddress == NULL ? NULL : (*__env)->GetIntArrayElements(__env, offset_xAddress, NULL);
@@ -4034,6 +4162,18 @@ JNIEXPORT void JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1fill_1polygon__J_3FIJ
     UNUSED_PARAMS(__env, clazz)
     nk_fill_polygon(b, (float *)points, point_count, *color);
     (*__env)->ReleaseFloatArrayElements(__env, pointsAddress, points, 0);
+}
+
+JNIEXPORT jlong JNICALL Java_org_lwjgl_nuklear_Nuklear_nnk_1font_1atlas_1bake__J_3I_3II(JNIEnv *__env, jclass clazz, jlong atlasAddress, jintArray widthAddress, jintArray heightAddress, jint fmt) {
+    struct nk_font_atlas *atlas = (struct nk_font_atlas *)(uintptr_t)atlasAddress;
+    jlong __result;
+    jint *width = (*__env)->GetIntArrayElements(__env, widthAddress, NULL);
+    jint *height = (*__env)->GetIntArrayElements(__env, heightAddress, NULL);
+    UNUSED_PARAMS(__env, clazz)
+    __result = (jlong)(uintptr_t)nk_font_atlas_bake(atlas, (int *)width, (int *)height, (enum nk_font_atlas_format)fmt);
+    (*__env)->ReleaseIntArrayElements(__env, heightAddress, height, 0);
+    (*__env)->ReleaseIntArrayElements(__env, widthAddress, width, 0);
+    return __result;
 }
 
 EXTERN_C_EXIT

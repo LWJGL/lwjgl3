@@ -13,6 +13,8 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
+import static org.lwjgl.nuklear.Nuklear.*;
+
 /**
  * <h3>Layout</h3>
  * 
@@ -20,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * struct nk_window {
  *     unsigned int seq;
  *     nk_hash name;
- *     char name_string[64];
+ *     char name_string[NK_WINDOW_MAX_NAME];
  *     nk_flags flags;
  *     {@link NkRect struct nk_rect} bounds;
  *     {@link NkScroll struct nk_scroll} scrollbar;
@@ -72,7 +74,7 @@ public class NkWindow extends Struct {
         Layout layout = __struct(
             __member(4),
             __member(4),
-            __array(1, 64),
+            __array(1, NK_WINDOW_MAX_NAME),
             __member(4),
             __member(NkRect.SIZEOF, NkRect.ALIGNOF),
             __member(NkScroll.SIZEOF, NkScroll.ALIGNOF),
@@ -133,10 +135,10 @@ public class NkWindow extends Struct {
     @NativeType("nk_hash")
     public int name() { return nname(address()); }
     /** @return a {@link ByteBuffer} view of the {@code name_string} field. */
-    @NativeType("char[64]")
+    @NativeType("char[NK_WINDOW_MAX_NAME]")
     public ByteBuffer name_string() { return nname_string(address()); }
     /** @return the null-terminated string stored in the {@code name_string} field. */
-    @NativeType("char[64]")
+    @NativeType("char[NK_WINDOW_MAX_NAME]")
     public String name_stringString() { return nname_stringString(address()); }
     /** @return the value of the {@code flags} field. */
     @NativeType("nk_flags")
@@ -219,7 +221,7 @@ public class NkWindow extends Struct {
     /** Unsafe version of {@link #name}. */
     public static int nname(long struct) { return UNSAFE.getInt(null, struct + NkWindow.NAME); }
     /** Unsafe version of {@link #name_string}. */
-    public static ByteBuffer nname_string(long struct) { return memByteBuffer(struct + NkWindow.NAME_STRING, 64); }
+    public static ByteBuffer nname_string(long struct) { return memByteBuffer(struct + NkWindow.NAME_STRING, NK_WINDOW_MAX_NAME); }
     /** Unsafe version of {@link #name_stringString}. */
     public static String nname_stringString(long struct) { return memUTF8(struct + NkWindow.NAME_STRING); }
     /** Unsafe version of {@link #flags}. */
@@ -298,10 +300,10 @@ public class NkWindow extends Struct {
         @NativeType("nk_hash")
         public int name() { return NkWindow.nname(address()); }
         /** @return a {@link ByteBuffer} view of the {@code name_string} field. */
-        @NativeType("char[64]")
+        @NativeType("char[NK_WINDOW_MAX_NAME]")
         public ByteBuffer name_string() { return NkWindow.nname_string(address()); }
         /** @return the null-terminated string stored in the {@code name_string} field. */
-        @NativeType("char[64]")
+        @NativeType("char[NK_WINDOW_MAX_NAME]")
         public String name_stringString() { return NkWindow.nname_stringString(address()); }
         /** @return the value of the {@code flags} field. */
         @NativeType("nk_flags")

@@ -12,6 +12,8 @@ val nuklear = "Nuklear".nativeClass(Module.NUKLEAR, prefix = "NK", prefixMethod 
         """DISABLE_WARNINGS()
 #define NK_PRIVATE
 #define NK_INCLUDE_FIXED_TYPES
+#define NK_INCLUDE_FONT_BAKING
+    #define NK_INCLUDE_DEFAULT_FONT
 #define NK_INCLUDE_STANDARD_IO
 #define NK_INCLUDE_STANDARD_BOOL
 #define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
@@ -250,6 +252,23 @@ nk_style_pop_vec2(ctx);""")}
 
         "UNDEFINED"..-1.0f,
         "SCROLLBAR_HIDING_TIMEOUT"..4.0f
+    )
+
+    IntConstant(
+        "Implementation limits.",
+
+        "TEXTEDIT_UNDOSTATECOUNT".."99",
+        "TEXTEDIT_UNDOCHARCOUNT".."999",
+        "MAX_LAYOUT_ROW_TEMPLATE_COLUMNS".."16",
+        "CHART_MAX_SLOT".."4",
+        "WINDOW_MAX_NAME".."64",
+        "BUTTON_BEHAVIOR_STACK_SIZE".."8",
+        "FONT_STACK_SIZE".."8",
+        "STYLE_ITEM_STACK_SIZE".."16",
+        "FLOAT_STACK_SIZE".."32",
+        "VECTOR_STACK_SIZE".."16",
+        "FLAGS_STACK_SIZE".."32",
+        "COLOR_STACK_SIZE".."32"
     )
 
     EnumConstant(
@@ -669,8 +688,9 @@ nk_style_pop_vec2(ctx);""")}
         "FORMAT_FLOAT".enum,
         "FORMAT_DOUBLE".enum,
 
-        "FORMAT_R8G8B8".enum,
-        "FORMAT_R16G15B16".enum,
+        "FORMAT_COLOR_BEGIN".enum,
+        "FORMAT_R8G8B8".enum("", "NK_FORMAT_COLOR_BEGIN"),
+        "FORMAT_R16G15B16".enum("", "9"),
         "FORMAT_R32G32B32".enum,
 
         "FORMAT_R8G8B8A8".enum,
@@ -682,8 +702,8 @@ nk_style_pop_vec2(ctx);""")}
 
         "FORMAT_RGB32".enum,
         "FORMAT_RGBA32".enum,
-
-        "FORMAT_COUNT".enum
+        "FORMAT_COLOR_END".enum("", "NK_FORMAT_RGBA32"),
+        "FORMAT_COUNT".enum("", "19")
     )
 
     EnumConstant(
@@ -4992,6 +5012,174 @@ nk_style_pop_vec2(ctx);""")}
             "style_item_hide",
             "",
             void()
+        )
+    }();
+
+    {
+        EnumConstant(
+            "{@code enum nk_font_coord_type}",
+
+            "COORD_UV".enum("", "0"),
+            "COORD_PIXEL".enum
+        )
+
+        MapPointer("2")..nk_rune.const.p(
+            "font_default_glyph_ranges",
+            "",
+
+            void()
+        )
+
+        MapPointer("10")..nk_rune.const.p(
+            "font_chinese_glyph_ranges",
+            "",
+
+            void()
+        )
+
+        MapPointer("8")..nk_rune.const.p(
+            "font_cyrillic_glyph_ranges",
+            "",
+
+            void()
+        )
+
+        MapPointer("6")..nk_rune.const.p(
+            "font_korean_glyph_ranges",
+            "",
+
+            void()
+        )
+
+        void(
+            "font_atlas_init",
+            "",
+
+            nk_font_atlas.p("atlas", ""),
+            nk_allocator.p("alloc", "")
+        )
+
+        void(
+            "font_atlas_init_custom",
+            "",
+
+            nk_font_atlas.p("atlas", ""),
+            nk_allocator.p("persistent", ""),
+            nk_allocator.p("transient_", "")
+        )
+
+        void(
+            "font_atlas_begin",
+            "",
+
+            nk_font_atlas.p("atlas", "")
+        )
+
+        nk_font_config(
+            "font_config",
+            "",
+
+            float("pixel_height", "")
+        )
+
+        nk_font.p(
+            "font_atlas_add",
+            "",
+
+            nk_font_atlas.p("atlas", ""),
+            nk_font_config.const.p("config", "")
+        )
+
+        nk_font.p(
+            "font_atlas_add_default",
+            "",
+
+            nk_font_atlas.p("atlas", ""),
+            float("height", ""),
+            nullable..nk_font_config.const.p("config", "")
+        )
+
+        nk_font.p(
+            "font_atlas_add_from_memory",
+            "",
+
+            nk_font_atlas.p("atlas", ""),
+            void.p("memory", ""),
+            AutoSize("memory")..nk_size("size", ""),
+            float("height", ""),
+            nullable..nk_font_config.const.p("config", "")
+        )
+
+        nk_font.p(
+            "font_atlas_add_from_file",
+            "",
+
+            nk_font_atlas.p("atlas", ""),
+            charUTF8.const.p("file_path", ""),
+            float("height", ""),
+            nullable..nk_font_config.const.p("config", "")
+        )
+
+        nk_font.p(
+            "font_atlas_add_compressed",
+            "",
+
+            nk_font_atlas.p("atlas", ""),
+            void.p("memory", ""),
+            AutoSize("memory")..nk_size("size", ""),
+            float("height", ""),
+            nullable..nk_font_config.const.p("config", "")
+        )
+
+        nk_font.p(
+            "font_atlas_add_compressed_base85",
+            "",
+
+            nk_font_atlas.p("atlas", ""),
+            charASCII.const.p("data", ""),
+            float("height", ""),
+            nullable..nk_font_config.const.p("config", "")
+        )
+
+        void.const.p(
+            "font_atlas_bake",
+            "",
+
+            nk_font_atlas.p("atlas", ""),
+            AutoSizeResult..Check(1)..int.p("width", ""),
+            AutoSizeResult..Check(1)..int.p("height", ""),
+            nk_font_atlas_format("fmt", "")
+        )
+
+        void(
+            "font_atlas_end",
+            "",
+
+            nk_font_atlas.p("atlas", ""),
+            nk_handle("tex", ""),
+            nullable..nk_draw_null_texture.p("tex_null", "")
+        )
+
+        nk_font_glyph.const.p(
+            "font_find_glyph",
+            "",
+
+            nk_font.p("font", ""),
+            nk_rune("unicode", "")
+        )
+
+        void(
+            "font_atlas_cleanup",
+            "",
+
+            nk_font_atlas.p("atlas", "")
+        )
+
+        void(
+            "font_atlas_clear",
+            "",
+
+            nk_font_atlas.p("atlas", "")
         )
     }()
 }
