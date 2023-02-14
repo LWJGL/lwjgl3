@@ -1287,7 +1287,7 @@ public class MeshOptimizer {
      * {@code dot(center - camera_position, cone_axis) >= cone_cutoff * length(center - camera_position) + radius}</p>
      * 
      * <p>The formula that uses the apex is slightly more accurate but needs the apex; if you are already using bounding sphere to do frustum/occlusion culling,
-     * the formula that doesn't use the apex may be preferable.</p>
+     * the formula that doesn't use the apex may be preferable (for derivation see Real-Time Rendering 4th Edition, section 19.3).</p>
      *
      * @param vertex_positions should have {@code float3} position in the first 12 bytes of each vertex
      */

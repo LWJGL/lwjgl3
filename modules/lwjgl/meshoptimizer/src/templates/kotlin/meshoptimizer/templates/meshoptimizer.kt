@@ -1071,7 +1071,7 @@ nmeshopt_setAllocator(
         {@code dot(center - camera_position, cone_axis) >= cone_cutoff * length(center - camera_position) + radius}
 
         The formula that uses the apex is slightly more accurate but needs the apex; if you are already using bounding sphere to do frustum/occlusion culling,
-        the formula that doesn't use the apex may be preferable.
+        the formula that doesn't use the apex may be preferable (for derivation see Real-Time Rendering 4th Edition, section 19.3).
         """,
 
         unsigned_int.const.p("indices", ""),
