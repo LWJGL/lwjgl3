@@ -1415,15 +1415,6 @@ v                                       v                      v
     )
 
     size_t(
-        "copyCCtx",
-        "",
-
-        ZSTD_CCtx.p("cctx", ""),
-        ZSTD_CCtx.const.p("preparedCCtx", ""),
-        unsigned_long_long("pledgedSrcSize", "if not known, use #CONTENTSIZE_UNKNOWN")
-    )
-
-    size_t(
         "compressContinue",
         "",
 

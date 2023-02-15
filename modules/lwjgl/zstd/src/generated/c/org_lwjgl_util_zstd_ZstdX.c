@@ -465,13 +465,6 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1compressBegin_1usi
     return (jlong)ZSTD_compressBegin_usingCDict(cctx, cdict);
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1copyCCtx(JNIEnv *__env, jclass clazz, jlong cctxAddress, jlong preparedCCtxAddress, jlong pledgedSrcSize) {
-    ZSTD_CCtx *cctx = (ZSTD_CCtx *)(uintptr_t)cctxAddress;
-    ZSTD_CCtx const *preparedCCtx = (ZSTD_CCtx const *)(uintptr_t)preparedCCtxAddress;
-    UNUSED_PARAMS(__env, clazz)
-    return (jlong)ZSTD_copyCCtx(cctx, preparedCCtx, (unsigned long long)pledgedSrcSize);
-}
-
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_zstd_ZstdX_nZSTD_1compressContinue(JNIEnv *__env, jclass clazz, jlong cctxAddress, jlong dstAddress, jlong dstCapacity, jlong srcAddress, jlong srcSize) {
     ZSTD_CCtx *cctx = (ZSTD_CCtx *)(uintptr_t)cctxAddress;
     void *dst = (void *)(uintptr_t)dstAddress;

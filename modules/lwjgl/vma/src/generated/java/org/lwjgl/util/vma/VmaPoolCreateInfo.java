@@ -178,6 +178,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
     public VmaPoolCreateInfo pMemoryAllocateNext(VkExportMemoryWin32HandleInfoNV value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
     /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pMemoryAllocateNext} chain. */
     public VmaPoolCreateInfo pMemoryAllocateNext(VkExportMetalObjectCreateInfoEXT value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
+    /** Prepends the specified {@link VkImportAndroidHardwareBufferInfoANDROID} value to the {@code pMemoryAllocateNext} chain. */
+    public VmaPoolCreateInfo pMemoryAllocateNext(VkImportAndroidHardwareBufferInfoANDROID value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
     /** Prepends the specified {@link VkImportMemoryFdInfoKHR} value to the {@code pMemoryAllocateNext} chain. */
     public VmaPoolCreateInfo pMemoryAllocateNext(VkImportMemoryFdInfoKHR value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
     /** Prepends the specified {@link VkImportMemoryHostPointerInfoEXT} value to the {@code pMemoryAllocateNext} chain. */
@@ -496,6 +498,8 @@ public class VmaPoolCreateInfo extends Struct implements NativeResource {
         public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(VkExportMemoryWin32HandleInfoNV value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
         /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pMemoryAllocateNext} chain. */
         public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(VkExportMetalObjectCreateInfoEXT value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
+        /** Prepends the specified {@link VkImportAndroidHardwareBufferInfoANDROID} value to the {@code pMemoryAllocateNext} chain. */
+        public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(VkImportAndroidHardwareBufferInfoANDROID value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
         /** Prepends the specified {@link VkImportMemoryFdInfoKHR} value to the {@code pMemoryAllocateNext} chain. */
         public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(VkImportMemoryFdInfoKHR value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
         /** Prepends the specified {@link VkImportMemoryHostPointerInfoEXT} value to the {@code pMemoryAllocateNext} chain. */

@@ -1768,21 +1768,6 @@ public class ZstdX {
         return nZSTD_compressBegin_usingCDict(cctx, cdict);
     }
 
-    // --- [ ZSTD_copyCCtx ] ---
-
-    /** Unsafe version of: {@link #ZSTD_copyCCtx copyCCtx} */
-    public static native long nZSTD_copyCCtx(long cctx, long preparedCCtx, long pledgedSrcSize);
-
-    /** @param pledgedSrcSize if not known, use {@link Zstd#ZSTD_CONTENTSIZE_UNKNOWN CONTENTSIZE_UNKNOWN} */
-    @NativeType("size_t")
-    public static long ZSTD_copyCCtx(@NativeType("ZSTD_CCtx *") long cctx, @NativeType("ZSTD_CCtx const *") long preparedCCtx, @NativeType("unsigned long long") long pledgedSrcSize) {
-        if (CHECKS) {
-            check(cctx);
-            check(preparedCCtx);
-        }
-        return nZSTD_copyCCtx(cctx, preparedCCtx, pledgedSrcSize);
-    }
-
     // --- [ ZSTD_compressContinue ] ---
 
     public static native long nZSTD_compressContinue(long cctx, long dst, long dstCapacity, long src, long srcSize);
