@@ -32,7 +32,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet2_nglExtGetProgram
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet2_glExtIsProgramBinaryQCOM(JNIEnv *__env, jclass clazz, jint program) {
     glExtIsProgramBinaryQCOMPROC glExtIsProgramBinaryQCOM = (glExtIsProgramBinaryQCOMPROC)tlsGetFunction(859);
     UNUSED_PARAM(clazz)
-    return (jboolean)glExtIsProgramBinaryQCOM(program);
+    return glExtIsProgramBinaryQCOM(program);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMExtendedGet2_nglExtGetProgramBinarySourceQCOM__IIJJ(JNIEnv *__env, jclass clazz, jint program, jint shadertype, jlong sourceAddress, jlong lengthAddress) {

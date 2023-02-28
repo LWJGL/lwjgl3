@@ -28,7 +28,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_EXTSeparateShaderObjects_nglCreateS
     glCreateShaderProgramEXTPROC glCreateShaderProgramEXT = (glCreateShaderProgramEXTPROC)tlsGetFunction(1847);
     uintptr_t string = (uintptr_t)stringAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glCreateShaderProgramEXT(type, string);
+    return glCreateShaderProgramEXT(type, string);
 }
 
 EXTERN_C_EXIT

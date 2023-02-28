@@ -1759,7 +1759,7 @@ public class HarfBuzz {
     @NativeType("uint8_t")
     public static byte hb_color_get_alpha(@NativeType("hb_color_t") int color) {
         long __functionAddress = Functions.color_get_alpha;
-        return invokeB(color, __functionAddress);
+        return invokeU(color, __functionAddress);
     }
 
     // --- [ hb_color_get_red ] ---
@@ -1767,7 +1767,7 @@ public class HarfBuzz {
     @NativeType("uint8_t")
     public static byte hb_color_get_red(@NativeType("hb_color_t") int color) {
         long __functionAddress = Functions.color_get_red;
-        return invokeB(color, __functionAddress);
+        return invokeU(color, __functionAddress);
     }
 
     // --- [ hb_color_get_green ] ---
@@ -1775,7 +1775,7 @@ public class HarfBuzz {
     @NativeType("uint8_t")
     public static byte hb_color_get_green(@NativeType("hb_color_t") int color) {
         long __functionAddress = Functions.color_get_green;
-        return invokeB(color, __functionAddress);
+        return invokeU(color, __functionAddress);
     }
 
     // --- [ hb_color_get_blue ] ---
@@ -1783,7 +1783,7 @@ public class HarfBuzz {
     @NativeType("uint8_t")
     public static byte hb_color_get_blue(@NativeType("hb_color_t") int color) {
         long __functionAddress = Functions.color_get_blue;
-        return invokeB(color, __functionAddress);
+        return invokeU(color, __functionAddress);
     }
 
     // --- [ hb_blob_create ] ---

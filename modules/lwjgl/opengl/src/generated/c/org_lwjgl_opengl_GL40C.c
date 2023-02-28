@@ -225,14 +225,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL40C_nglGetSubroutineUniformLocati
     glGetSubroutineUniformLocationPROC glGetSubroutineUniformLocation = (glGetSubroutineUniformLocationPROC)tlsGetFunction(749);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetSubroutineUniformLocation(program, shadertype, name);
+    return glGetSubroutineUniformLocation(program, shadertype, name);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL40C_nglGetSubroutineIndex(JNIEnv *__env, jclass clazz, jint program, jint shadertype, jlong nameAddress) {
     glGetSubroutineIndexPROC glGetSubroutineIndex = (glGetSubroutineIndexPROC)tlsGetFunction(750);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetSubroutineIndex(program, shadertype, name);
+    return glGetSubroutineIndex(program, shadertype, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL40C_nglGetActiveSubroutineUniformiv__IIIIJ(JNIEnv *__env, jclass clazz, jint program, jint shadertype, jint index, jint pname, jlong valuesAddress) {
@@ -315,7 +315,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL40C_nglGenTransformFeedbacks__IJ(
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL40C_glIsTransformFeedback(JNIEnv *__env, jclass clazz, jint id) {
     glIsTransformFeedbackPROC glIsTransformFeedback = (glIsTransformFeedbackPROC)tlsGetFunction(762);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsTransformFeedback(id);
+    return glIsTransformFeedback(id);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL40C_glPauseTransformFeedback(JNIEnv *__env, jclass clazz) {

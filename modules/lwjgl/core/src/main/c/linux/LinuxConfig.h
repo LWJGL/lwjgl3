@@ -4,7 +4,7 @@
  */
 
 #include <stddef.h>
-#include <inttypes.h>
+#include <stdint.h>
 
 #define DISABLE_WARNINGS() \
     _Pragma("GCC diagnostic push") \

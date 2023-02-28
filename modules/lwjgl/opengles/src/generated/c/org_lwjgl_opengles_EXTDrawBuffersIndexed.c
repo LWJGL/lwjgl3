@@ -62,7 +62,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTDrawBuffersIndexed_glColorMask
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_EXTDrawBuffersIndexed_glIsEnablediEXT(JNIEnv *__env, jclass clazz, jint target, jint index) {
     glIsEnablediEXTPROC glIsEnablediEXT = (glIsEnablediEXTPROC)tlsGetFunction(426);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsEnablediEXT(target, index);
+    return glIsEnablediEXT(target, index);
 }
 
 EXTERN_C_EXIT

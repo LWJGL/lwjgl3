@@ -46,11 +46,13 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
                 prefix will invoke the native function with the {@code __stdcall} calling convention on Windows and the default calling convention on other
                 systems.
                 """,
+                "a {@code U} (unsigned) or a {@code B} (signed) for each {@code byte} parameter",
+                "a {@code C} (unsigned) or an {@code S} (signed) for each {@code short} parameter",
                 """
-                a {@code J} or a {@code P} for each {@code long} parameter
+                a {@code J}, a {@code N} or a {@code P} for each {@code long} parameter
 
-                {@code J} parameters represent 64-bit integer values. {@code P} parameters represent pointer addresses. A pointer address is a 32-bit value on
-                32-bit architectures and a 64-bit value on 64-bit architectures.
+                {@code J} parameters represent 64-bit integer values. {@code N} parameters represent C long values, which may be 32-bit or 64-bit integers
+                depending on the platform. {@code P} parameters represent pointer addresses, which maybe 32-bit or 64-bit values depending on the JVM.
                 """,
                 """
                 the return value <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html\#type_signatures">JNI type signature</a>
@@ -128,20 +130,22 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
     """)
             if (it.returnType.mapping !== TypeMapping.VOID) {
                 print("return ")
-                if (it.returnType.isPointer || it.returnType.mapping === PrimitiveMapping.CLONG)
-                    print("(jlong)")
+                val resultType = it.returnType.jniFunctionType
+                if (it.returnType.abiType != resultType)
+                    print("($resultType)");
             }
-            print("((${it.returnType.nativeType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
+            print("((${it.returnType.abiType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
             print(it.arguments.asSequence()
-                .joinToString(", ", prefix = "(", postfix = ")") { arg -> arg.nativeType })
+                .joinToString(", ", prefix = "(", postfix = ")") { arg -> arg.abiType })
             print(")(uintptr_t)$FUNCTION_ADDRESS)(")
             print(it.arguments.asSequence()
-                .mapIndexed { i, param -> if (param.isPointer)
-                    "(uintptr_t)param$i"
-                else if (param.mapping === PrimitiveMapping.CLONG)
-                    "(long)param$i"
-                else
-                    "param$i" }
+                .mapIndexed { i, arg ->
+                    val abiType = arg.abiType
+                    if (abiType.startsWith("j"))
+                        "param$i"
+                    else
+                        "($abiType)param$i"
+                }
                 .joinToString(", "))
             print(""");
 }
@@ -163,11 +167,12 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
         .joinToString("\n$t")}
     """)
             if (it.returnType.mapping !== TypeMapping.VOID) {
-                print("${it.returnType.jniFunctionType} $RESULT = ")
-                if (it.returnType.isPointer || it.returnType.mapping === PrimitiveMapping.CLONG)
-                    print("(jlong)")
+                val resultType = it.returnType.jniFunctionType
+                print("$resultType $RESULT = ")
+                if (it.returnType.abiType != resultType)
+                    print("($resultType)");
             }
-            print("((${it.returnType.nativeType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
+            print("((${it.returnType.abiType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
             print(it.arguments.asSequence()
                 .joinToString(", ", prefix = "(", postfix = ")") { arg -> arg.nativeType })
             print(")(uintptr_t)$FUNCTION_ADDRESS)(")
@@ -207,7 +212,7 @@ private open class Signature constructor(
     val arguments: List<NativeType>
 ) : Comparable<Signature> {
 
-    val key = "${callingConvention.method}${arguments.asSequence().joinToString("") { it.jniSignature }}${returnType.jniSignature}"
+    //val key = "${callingConvention.method}${arguments.asSequence().joinToString("") { it.jniSignature }}${returnType.jniSignature}"
 
     val signature = "${callingConvention.method}${arguments.asSequence().joinToString("") { it.jniSignatureJava }}${returnType.jniSignature}"
     val signatureNative = "${signature}__${arguments.asSequence().joinToString("") { it.jniSignatureStrict }}J"

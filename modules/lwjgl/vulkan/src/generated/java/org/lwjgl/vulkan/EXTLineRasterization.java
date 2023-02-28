@@ -164,7 +164,7 @@ public class EXTLineRasterization {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(commandBuffer.address(), lineStippleFactor, lineStipplePattern, __functionAddress);
+        callPCV(commandBuffer.address(), lineStippleFactor, lineStipplePattern, __functionAddress);
     }
 
 }

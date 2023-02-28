@@ -60,7 +60,7 @@ typedef void (APIENTRY *glVertexAttrib3dPROC) (jint, jdouble, jdouble, jdouble);
 typedef void (APIENTRY *glVertexAttrib4fPROC) (jint, jfloat, jfloat, jfloat, jfloat);
 typedef void (APIENTRY *glVertexAttrib4sPROC) (jint, jshort, jshort, jshort, jshort);
 typedef void (APIENTRY *glVertexAttrib4dPROC) (jint, jdouble, jdouble, jdouble, jdouble);
-typedef void (APIENTRY *glVertexAttrib4NubPROC) (jint, jbyte, jbyte, jbyte, jbyte);
+typedef void (APIENTRY *glVertexAttrib4NubPROC) (jint, uint8_t, uint8_t, uint8_t, uint8_t);
 typedef void (APIENTRY *glVertexAttrib1fvPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glVertexAttrib1svPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glVertexAttrib1dvPROC) (jint, uintptr_t);
@@ -105,7 +105,7 @@ EXTERN_C_ENTER
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL20C_glCreateProgram(JNIEnv *__env, jclass clazz) {
     glCreateProgramPROC glCreateProgram = (glCreateProgramPROC)tlsGetFunction(452);
     UNUSED_PARAM(clazz)
-    return (jint)glCreateProgram();
+    return glCreateProgram();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL20C_glDeleteProgram(JNIEnv *__env, jclass clazz, jint program) {
@@ -117,13 +117,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL20C_glDeleteProgram(JNIEnv *__env
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL20C_glIsProgram(JNIEnv *__env, jclass clazz, jint program) {
     glIsProgramPROC glIsProgram = (glIsProgramPROC)tlsGetFunction(454);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsProgram(program);
+    return glIsProgram(program);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL20C_glCreateShader(JNIEnv *__env, jclass clazz, jint type) {
     glCreateShaderPROC glCreateShader = (glCreateShaderPROC)tlsGetFunction(455);
     UNUSED_PARAM(clazz)
-    return (jint)glCreateShader(type);
+    return glCreateShader(type);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL20C_glDeleteShader(JNIEnv *__env, jclass clazz, jint shader) {
@@ -135,7 +135,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL20C_glDeleteShader(JNIEnv *__env,
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL20C_glIsShader(JNIEnv *__env, jclass clazz, jint shader) {
     glIsShaderPROC glIsShader = (glIsShaderPROC)tlsGetFunction(457);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsShader(shader);
+    return glIsShader(shader);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL20C_glAttachShader(JNIEnv *__env, jclass clazz, jint program, jint shader) {
@@ -349,7 +349,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL20C_nglGetUniformLocation(JNIEnv 
     glGetUniformLocationPROC glGetUniformLocation = (glGetUniformLocationPROC)tlsGetFunction(489);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetUniformLocation(program, name);
+    return glGetUniformLocation(program, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL20C_nglGetActiveUniform__IIIJJJJ(JNIEnv *__env, jclass clazz, jint program, jint index, jint maxLength, jlong lengthAddress, jlong sizeAddress, jlong typeAddress, jlong nameAddress) {
@@ -459,7 +459,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL20C_glVertexAttrib4d(JNIEnv *__en
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL20C_glVertexAttrib4Nub(JNIEnv *__env, jclass clazz, jint index, jbyte x, jbyte y, jbyte z, jbyte w) {
     glVertexAttrib4NubPROC glVertexAttrib4Nub = (glVertexAttrib4NubPROC)tlsGetFunction(506);
     UNUSED_PARAM(clazz)
-    glVertexAttrib4Nub(index, x, y, z, w);
+    glVertexAttrib4Nub(index, (uint8_t)x, (uint8_t)y, (uint8_t)z, (uint8_t)w);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL20C_nglVertexAttrib1fv__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
@@ -663,7 +663,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL20C_nglGetAttribLocation(JNIEnv *
     glGetAttribLocationPROC glGetAttribLocation = (glGetAttribLocationPROC)tlsGetFunction(535);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetAttribLocation(program, name);
+    return glGetAttribLocation(program, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL20C_nglGetVertexAttribiv__IIJ(JNIEnv *__env, jclass clazz, jint index, jint pname, jlong paramsAddress) {

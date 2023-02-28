@@ -115,7 +115,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL43C_nglGetDebugMessageLog__IIJJJJ
     uintptr_t lengths = (uintptr_t)lengthsAddress;
     uintptr_t messageLog = (uintptr_t)messageLogAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetDebugMessageLog(count, bufsize, sources, types, ids, severities, lengths, messageLog);
+    return glGetDebugMessageLog(count, bufsize, sources, types, ids, severities, lengths, messageLog);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL43C_nglPushDebugGroup(JNIEnv *__env, jclass clazz, jint source, jint id, jint length, jlong messageAddress) {
@@ -246,7 +246,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL43C_nglGetProgramResourceIndex(JN
     glGetProgramResourceIndexPROC glGetProgramResourceIndex = (glGetProgramResourceIndexPROC)tlsGetFunction(897);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetProgramResourceIndex(program, programInterface, name);
+    return glGetProgramResourceIndex(program, programInterface, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL43C_nglGetProgramResourceName__IIIIJJ(JNIEnv *__env, jclass clazz, jint program, jint programInterface, jint index, jint bufSize, jlong lengthAddress, jlong nameAddress) {
@@ -270,14 +270,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL43C_nglGetProgramResourceLocation
     glGetProgramResourceLocationPROC glGetProgramResourceLocation = (glGetProgramResourceLocationPROC)tlsGetFunction(900);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetProgramResourceLocation(program, programInterface, name);
+    return glGetProgramResourceLocation(program, programInterface, name);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL43C_nglGetProgramResourceLocationIndex(JNIEnv *__env, jclass clazz, jint program, jint programInterface, jlong nameAddress) {
     glGetProgramResourceLocationIndexPROC glGetProgramResourceLocationIndex = (glGetProgramResourceLocationIndexPROC)tlsGetFunction(901);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetProgramResourceLocationIndex(program, programInterface, name);
+    return glGetProgramResourceLocationIndex(program, programInterface, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL43C_glShaderStorageBlockBinding(JNIEnv *__env, jclass clazz, jint program, jint storageBlockIndex, jint storageBlockBinding) {

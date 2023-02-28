@@ -96,7 +96,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_GLES32_nglGetDebugMessageLog__IIJ
     uintptr_t lengths = (uintptr_t)lengthsAddress;
     uintptr_t messageLog = (uintptr_t)messageLogAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetDebugMessageLog(count, bufsize, sources, types, ids, severities, lengths, messageLog);
+    return glGetDebugMessageLog(count, bufsize, sources, types, ids, severities, lengths, messageLog);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES32_nglGetPointerv(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
@@ -196,7 +196,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES32_glColorMaski(JNIEnv *__env
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_GLES32_glIsEnabledi(JNIEnv *__env, jclass clazz, jint target, jint index) {
     glIsEnablediPROC glIsEnabledi = (glIsEnablediPROC)tlsGetFunction(334);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsEnabledi(target, index);
+    return glIsEnabledi(target, index);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES32_nglDrawElementsBaseVertex(JNIEnv *__env, jclass clazz, jint mode, jint count, jint type, jlong indicesAddress, jint basevertex) {
@@ -235,7 +235,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES32_glPrimitiveBoundingBox(JNI
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_GLES32_glGetGraphicsResetStatus(JNIEnv *__env, jclass clazz) {
     glGetGraphicsResetStatusPROC glGetGraphicsResetStatus = (glGetGraphicsResetStatusPROC)tlsGetFunction(340);
     UNUSED_PARAM(clazz)
-    return (jint)glGetGraphicsResetStatus();
+    return glGetGraphicsResetStatus();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES32_nglReadnPixels__IIIIIIIJ(JNIEnv *__env, jclass clazz, jint x, jint y, jint width, jint height, jint format, jint type, jint bufSize, jlong pixelsAddress) {

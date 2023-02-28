@@ -112,7 +112,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL32C_nglIsSync(JNIEnv *__env, 
     glIsSyncPROC glIsSync = (glIsSyncPROC)tlsGetFunction(659);
     uintptr_t sync = (uintptr_t)syncAddress;
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsSync(sync);
+    return glIsSync(sync);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL32C_nglDeleteSync(JNIEnv *__env, jclass clazz, jlong syncAddress) {
@@ -126,7 +126,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL32C_nglClientWaitSync(JNIEnv *__e
     glClientWaitSyncPROC glClientWaitSync = (glClientWaitSyncPROC)tlsGetFunction(661);
     uintptr_t sync = (uintptr_t)syncAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glClientWaitSync(sync, flags, timeout);
+    return glClientWaitSync(sync, flags, timeout);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL32C_nglWaitSync(JNIEnv *__env, jclass clazz, jlong syncAddress, jint flags, jlong timeout) {

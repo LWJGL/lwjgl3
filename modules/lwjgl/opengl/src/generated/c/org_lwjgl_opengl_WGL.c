@@ -44,7 +44,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_WGL_nwglCopyContext(JNIEnv *__env, 
     uintptr_t dst = (uintptr_t)dstAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)wglCopyContext(src, dst, mask);
+    __result = wglCopyContext(src, dst, mask);
     saveLastError();
     return __result;
 }
@@ -54,7 +54,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_WGL_nwglDeleteContext(JNIEnv *__env
     uintptr_t context = (uintptr_t)contextAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)wglDeleteContext(context);
+    __result = wglDeleteContext(context);
     saveLastError();
     return __result;
 }
@@ -93,7 +93,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_WGL_nwglMakeCurrent(JNIEnv *__env, 
     uintptr_t hglrc = (uintptr_t)hglrcAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)wglMakeCurrent(hdc, hglrc);
+    __result = wglMakeCurrent(hdc, hglrc);
     saveLastError();
     return __result;
 }
@@ -104,7 +104,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_WGL_nwglShareLists(JNIEnv *__env, j
     uintptr_t hglrc2 = (uintptr_t)hglrc2Address;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)wglShareLists(hglrc1, hglrc2);
+    __result = wglShareLists(hglrc1, hglrc2);
     saveLastError();
     return __result;
 }

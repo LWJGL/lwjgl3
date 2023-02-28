@@ -152,7 +152,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexProgram_nglGetProgramStrin
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_ARBVertexProgram_glIsProgramARB(JNIEnv *__env, jclass clazz, jint program) {
     glIsProgramARBPROC glIsProgramARB = (glIsProgramARBPROC)tlsGetFunction(1473);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsProgramARB(program);
+    return glIsProgramARB(program);
 }
 
 EXTERN_C_EXIT

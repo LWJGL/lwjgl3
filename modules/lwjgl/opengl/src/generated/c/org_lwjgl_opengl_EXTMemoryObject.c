@@ -52,7 +52,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTMemoryObject_nglDeleteMemoryObje
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_EXTMemoryObject_glIsMemoryObjectEXT(JNIEnv *__env, jclass clazz, jint memoryObject) {
     glIsMemoryObjectEXTPROC glIsMemoryObjectEXT = (glIsMemoryObjectEXTPROC)tlsGetFunction(1794);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsMemoryObjectEXT(memoryObject);
+    return glIsMemoryObjectEXT(memoryObject);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTMemoryObject_nglCreateMemoryObjectsEXT__IJ(JNIEnv *__env, jclass clazz, jint n, jlong memoryObjectsAddress) {

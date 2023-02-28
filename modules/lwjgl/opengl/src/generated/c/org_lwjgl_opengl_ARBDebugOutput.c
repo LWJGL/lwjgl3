@@ -44,7 +44,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_ARBDebugOutput_nglGetDebugMessageLo
     uintptr_t lengths = (uintptr_t)lengthsAddress;
     uintptr_t messageLog = (uintptr_t)messageLogAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetDebugMessageLogARB(count, bufSize, sources, types, ids, severities, lengths, messageLog);
+    return glGetDebugMessageLogARB(count, bufSize, sources, types, ids, severities, lengths, messageLog);
 }
 
 EXTERN_C_EXIT

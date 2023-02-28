@@ -500,7 +500,7 @@ public class CoreGraphics {
     @NativeType("CGEventRef")
     public static long CGEventCreateKeyboardEvent(@NativeType("CGEventSourceRef") long source, @NativeType("CGKeyCode") short virtualKey, @NativeType("bool") boolean keyDown) {
         long __functionAddress = Functions.EventCreateKeyboardEvent;
-        return invokePP(source, virtualKey, keyDown, __functionAddress);
+        return invokePCP(source, virtualKey, keyDown, __functionAddress);
     }
 
     // --- [ CGEventCreateScrollWheelEvent ] ---

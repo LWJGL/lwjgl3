@@ -16,7 +16,7 @@ val HANDLE = "HANDLE".handle
 
 val BOOL = PrimitiveType("BOOL", PrimitiveMapping.BOOLEAN4)
 val BYTE = IntegerType("BYTE", PrimitiveMapping.BYTE)
-val WORD = IntegerType("WORD", PrimitiveMapping.SHORT)
+val WORD = IntegerType("WORD", PrimitiveMapping.SHORT, unsigned = true)
 val SHORT = IntegerType("SHORT", PrimitiveMapping.SHORT)
 val USHORT = IntegerType("USHORT", PrimitiveMapping.SHORT, unsigned = true)
 val UINT = IntegerType("UINT", PrimitiveMapping.INT, unsigned = true)
@@ -27,7 +27,7 @@ val LONGLONG = IntegerType("LONGLONG", PrimitiveMapping.LONG)
 val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
 val LDOUBLE = PrimitiveType("LDOUBLE", PrimitiveMapping.DOUBLE)
 
-val ATOM = PrimitiveType("ATOM", PrimitiveMapping.SHORT)
+val ATOM = typedef(WORD, "ATOM")
 
 val PULONG = typedef(ULONG.p, "PULONG")
 

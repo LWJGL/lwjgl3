@@ -80,7 +80,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL31C_nglGetUniformBlockIndex(JNIEn
     glGetUniformBlockIndexPROC glGetUniformBlockIndex = (glGetUniformBlockIndexPROC)tlsGetFunction(643);
     uintptr_t uniformBlockName = (uintptr_t)uniformBlockNameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetUniformBlockIndex(program, uniformBlockName);
+    return glGetUniformBlockIndex(program, uniformBlockName);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL31C_nglGetActiveUniformBlockiv__IIIJ(JNIEnv *__env, jclass clazz, jint program, jint uniformBlockIndex, jint pname, jlong paramsAddress) {

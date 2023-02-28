@@ -33,13 +33,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVFence_nglGenFencesNV__IJ(JNIEnv *
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_NVFence_glIsFenceNV(JNIEnv *__env, jclass clazz, jint fence) {
     glIsFenceNVPROC glIsFenceNV = (glIsFenceNVPROC)tlsGetFunction(1964);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsFenceNV(fence);
+    return glIsFenceNV(fence);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_NVFence_glTestFenceNV(JNIEnv *__env, jclass clazz, jint fence) {
     glTestFenceNVPROC glTestFenceNV = (glTestFenceNVPROC)tlsGetFunction(1965);
     UNUSED_PARAM(clazz)
-    return (jboolean)glTestFenceNV(fence);
+    return glTestFenceNV(fence);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVFence_nglGetFenceivNV__IIJ(JNIEnv *__env, jclass clazz, jint fence, jint pname, jlong paramsAddress) {

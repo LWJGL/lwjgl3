@@ -22,7 +22,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_NVXGpuMulticast2_nglAsyncCopyImageS
     uintptr_t signalSemaphoreArray = (uintptr_t)signalSemaphoreArrayAddress;
     uintptr_t signalValueArray = (uintptr_t)signalValueArrayAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glAsyncCopyImageSubDataNVX(waitSemaphoreCount, waitSemaphoreArray, waitValueArray, srcGpu, dstGpuMask, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth, signalSemaphoreCount, signalSemaphoreArray, signalValueArray);
+    return glAsyncCopyImageSubDataNVX(waitSemaphoreCount, waitSemaphoreArray, waitValueArray, srcGpu, dstGpuMask, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth, signalSemaphoreCount, signalSemaphoreArray, signalValueArray);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_NVXGpuMulticast2_nglAsyncCopyBufferSubDataNVX__IJJIIIIJJJIJJ(JNIEnv *__env, jclass clazz, jint waitSemaphoreCount, jlong waitSemaphoreArrayAddress, jlong fenceValueArrayAddress, jint readGpu, jint writeGpuMask, jint readBuffer, jint writeBuffer, jlong readOffset, jlong writeOffset, jlong size, jint signalSemaphoreCount, jlong signalSemaphoreArrayAddress, jlong signalValueArrayAddress) {

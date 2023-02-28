@@ -228,7 +228,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_GL45C_nglMapNamedBufferRange(JNIEn
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL45C_glUnmapNamedBuffer(JNIEnv *__env, jclass clazz, jint buffer) {
     glUnmapNamedBufferPROC glUnmapNamedBuffer = (glUnmapNamedBufferPROC)tlsGetFunction(938);
     UNUSED_PARAM(clazz)
-    return (jboolean)glUnmapNamedBuffer(buffer);
+    return glUnmapNamedBuffer(buffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL45C_glFlushMappedNamedBufferRange(JNIEnv *__env, jclass clazz, jint buffer, jlong offset, jlong length) {
@@ -365,7 +365,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL45C_glBlitNamedFramebuffer(JNIEnv
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL45C_glCheckNamedFramebufferStatus(JNIEnv *__env, jclass clazz, jint framebuffer, jint target) {
     glCheckNamedFramebufferStatusPROC glCheckNamedFramebufferStatus = (glCheckNamedFramebufferStatusPROC)tlsGetFunction(959);
     UNUSED_PARAM(clazz)
-    return (jint)glCheckNamedFramebufferStatus(framebuffer, target);
+    return glCheckNamedFramebufferStatus(framebuffer, target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL45C_nglGetNamedFramebufferParameteriv__IIJ(JNIEnv *__env, jclass clazz, jint framebuffer, jint pname, jlong paramsAddress) {
@@ -790,7 +790,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL45C_glTextureBarrier(JNIEnv *__en
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL45C_glGetGraphicsResetStatus(JNIEnv *__env, jclass clazz) {
     glGetGraphicsResetStatusPROC glGetGraphicsResetStatus = (glGetGraphicsResetStatusPROC)tlsGetFunction(1024);
     UNUSED_PARAM(clazz)
-    return (jint)glGetGraphicsResetStatus();
+    return glGetGraphicsResetStatus();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL45C_nglGetnTexImage__IIIIIJ(JNIEnv *__env, jclass clazz, jint tex, jint level, jint format, jint type, jint bufSize, jlong imgAddress) {

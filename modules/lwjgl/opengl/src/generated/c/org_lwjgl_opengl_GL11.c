@@ -22,8 +22,8 @@ typedef void (APIENTRY *glColor3sPROC) (jshort, jshort, jshort);
 typedef void (APIENTRY *glColor3iPROC) (jint, jint, jint);
 typedef void (APIENTRY *glColor3fPROC) (jfloat, jfloat, jfloat);
 typedef void (APIENTRY *glColor3dPROC) (jdouble, jdouble, jdouble);
-typedef void (APIENTRY *glColor3ubPROC) (jbyte, jbyte, jbyte);
-typedef void (APIENTRY *glColor3usPROC) (jshort, jshort, jshort);
+typedef void (APIENTRY *glColor3ubPROC) (uint8_t, uint8_t, uint8_t);
+typedef void (APIENTRY *glColor3usPROC) (uint16_t, uint16_t, uint16_t);
 typedef void (APIENTRY *glColor3uiPROC) (jint, jint, jint);
 typedef void (APIENTRY *glColor3bvPROC) (uintptr_t);
 typedef void (APIENTRY *glColor3svPROC) (uintptr_t);
@@ -38,8 +38,8 @@ typedef void (APIENTRY *glColor4sPROC) (jshort, jshort, jshort, jshort);
 typedef void (APIENTRY *glColor4iPROC) (jint, jint, jint, jint);
 typedef void (APIENTRY *glColor4fPROC) (jfloat, jfloat, jfloat, jfloat);
 typedef void (APIENTRY *glColor4dPROC) (jdouble, jdouble, jdouble, jdouble);
-typedef void (APIENTRY *glColor4ubPROC) (jbyte, jbyte, jbyte, jbyte);
-typedef void (APIENTRY *glColor4usPROC) (jshort, jshort, jshort, jshort);
+typedef void (APIENTRY *glColor4ubPROC) (uint8_t, uint8_t, uint8_t, uint8_t);
+typedef void (APIENTRY *glColor4usPROC) (uint16_t, uint16_t, uint16_t, uint16_t);
 typedef void (APIENTRY *glColor4uiPROC) (jint, jint, jint, jint);
 typedef void (APIENTRY *glColor4bvPROC) (uintptr_t);
 typedef void (APIENTRY *glColor4svPROC) (uintptr_t);
@@ -96,7 +96,7 @@ typedef void (APIENTRY *glGetTexGenivPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glGetTexGenfvPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glGetTexGendvPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glIndexiPROC) (jint);
-typedef void (APIENTRY *glIndexubPROC) (jbyte);
+typedef void (APIENTRY *glIndexubPROC) (uint8_t);
 typedef void (APIENTRY *glIndexsPROC) (jshort);
 typedef void (APIENTRY *glIndexfPROC) (jfloat);
 typedef void (APIENTRY *glIndexdPROC) (jdouble);
@@ -118,7 +118,7 @@ typedef void (APIENTRY *glLightiPROC) (jint, jint, jint);
 typedef void (APIENTRY *glLightfPROC) (jint, jint, jfloat);
 typedef void (APIENTRY *glLightivPROC) (jint, jint, uintptr_t);
 typedef void (APIENTRY *glLightfvPROC) (jint, jint, uintptr_t);
-typedef void (APIENTRY *glLineStipplePROC) (jint, jshort);
+typedef void (APIENTRY *glLineStipplePROC) (jint, uint16_t);
 typedef void (APIENTRY *glListBasePROC) (jint);
 typedef void (APIENTRY *glLoadMatrixfPROC) (uintptr_t);
 typedef void (APIENTRY *glLoadMatrixdPROC) (uintptr_t);
@@ -300,7 +300,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL11_nglAreTexturesResident__IJ
     uintptr_t textures = (uintptr_t)texturesAddress;
     uintptr_t residences = (uintptr_t)residencesAddress;
     UNUSED_PARAM(clazz)
-    return (jboolean)glAreTexturesResident(n, textures, residences);
+    return glAreTexturesResident(n, textures, residences);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glArrayElement(JNIEnv *__env, jclass clazz, jint i) {
@@ -387,13 +387,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glColor3d(JNIEnv *__env, jclas
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glColor3ub(JNIEnv *__env, jclass clazz, jbyte red, jbyte green, jbyte blue) {
     glColor3ubPROC glColor3ub = (glColor3ubPROC)tlsGetFunction(24);
     UNUSED_PARAM(clazz)
-    glColor3ub(red, green, blue);
+    glColor3ub((uint8_t)red, (uint8_t)green, (uint8_t)blue);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glColor3us(JNIEnv *__env, jclass clazz, jshort red, jshort green, jshort blue) {
     glColor3usPROC glColor3us = (glColor3usPROC)tlsGetFunction(25);
     UNUSED_PARAM(clazz)
-    glColor3us(red, green, blue);
+    glColor3us((uint16_t)red, (uint16_t)green, (uint16_t)blue);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glColor3ui(JNIEnv *__env, jclass clazz, jint red, jint green, jint blue) {
@@ -491,13 +491,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glColor4d(JNIEnv *__env, jclas
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glColor4ub(JNIEnv *__env, jclass clazz, jbyte red, jbyte green, jbyte blue, jbyte alpha) {
     glColor4ubPROC glColor4ub = (glColor4ubPROC)tlsGetFunction(40);
     UNUSED_PARAM(clazz)
-    glColor4ub(red, green, blue, alpha);
+    glColor4ub((uint8_t)red, (uint8_t)green, (uint8_t)blue, (uint8_t)alpha);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glColor4us(JNIEnv *__env, jclass clazz, jshort red, jshort green, jshort blue, jshort alpha) {
     glColor4usPROC glColor4us = (glColor4usPROC)tlsGetFunction(41);
     UNUSED_PARAM(clazz)
-    glColor4us(red, green, blue, alpha);
+    glColor4us((uint16_t)red, (uint16_t)green, (uint16_t)blue, (uint16_t)alpha);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glColor4ui(JNIEnv *__env, jclass clazz, jint red, jint green, jint blue, jint alpha) {
@@ -744,7 +744,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_nglFogfv__IJ(JNIEnv *__env, jc
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL11_glGenLists(JNIEnv *__env, jclass clazz, jint s) {
     glGenListsPROC glGenLists = (glGenListsPROC)tlsGetFunction(90);
     UNUSED_PARAM(clazz)
-    return (jint)glGenLists(s);
+    return glGenLists(s);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_nglGetClipPlane__IJ(JNIEnv *__env, jclass clazz, jint plane, jlong equationAddress) {
@@ -875,7 +875,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glIndexi(JNIEnv *__env, jclass
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glIndexub(JNIEnv *__env, jclass clazz, jbyte index) {
     glIndexubPROC glIndexub = (glIndexubPROC)tlsGetFunction(124);
     UNUSED_PARAM(clazz)
-    glIndexub(index);
+    glIndexub((uint8_t)index);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glIndexs(JNIEnv *__env, jclass clazz, jshort index) {
@@ -960,7 +960,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_nglInterleavedArrays__IIJ(JNIE
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL11_glIsList(JNIEnv *__env, jclass clazz, jint list) {
     glIsListPROC glIsList = (glIsListPROC)tlsGetFunction(138);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsList(list);
+    return glIsList(list);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glLightModeli(JNIEnv *__env, jclass clazz, jint pname, jint param) {
@@ -1018,7 +1018,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_nglLightfv__IIJ(JNIEnv *__env,
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glLineStipple(JNIEnv *__env, jclass clazz, jint factor, jshort pattern) {
     glLineStipplePROC glLineStipple = (glLineStipplePROC)tlsGetFunction(148);
     UNUSED_PARAM(clazz)
-    glLineStipple(factor, pattern);
+    glLineStipple(factor, (uint16_t)pattern);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glListBase(JNIEnv *__env, jclass clazz, jint base) {
@@ -1570,7 +1570,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_nglRectdv__JJ(JNIEnv *__env, j
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL11_glRenderMode(JNIEnv *__env, jclass clazz, jint mode) {
     glRenderModePROC glRenderMode = (glRenderModePROC)tlsGetFunction(242);
     UNUSED_PARAM(clazz)
-    return (jint)glRenderMode(mode);
+    return glRenderMode(mode);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11_glRotatef(JNIEnv *__env, jclass clazz, jfloat angle, jfloat x, jfloat y, jfloat z) {

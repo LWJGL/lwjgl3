@@ -2057,7 +2057,7 @@ class Func(
                     }
                 } else if (!returns.isVoid) {
                     print(if (code.nativeAfterCall != null) "$RESULT = " else "return ")
-                    if (returns.jniFunctionType != returns.nativeType.name)
+                    if (returns.jniFunctionType != returns.toNativeType(nativeClass.binding))
                         print("(${returns.jniFunctionType})")
                     if (returns.nativeType is PointerType<*> && nativeClass.binding == null)
                         print("(uintptr_t)")

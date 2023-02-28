@@ -2085,7 +2085,7 @@ public class SQL {
     /** Unsafe version of: {@link #SQLAllocHandle AllocHandle} */
     public static short nSQLAllocHandle(short HandleType, long InputHandle, long OutputHandle) {
         long __functionAddress = Functions.AllocHandle;
-        return callPPS(HandleType, InputHandle, OutputHandle, __functionAddress);
+        return callSPPS(HandleType, InputHandle, OutputHandle, __functionAddress);
     }
 
     /**
@@ -2126,7 +2126,7 @@ public class SQL {
         if (CHECKS) {
             check(ConnectionHandle);
         }
-        return callPPPPS(ConnectionHandle, ServerName, NameLength1, UserName, NameLength2, Authentication, NameLength3, __functionAddress);
+        return callPPSPSPSS(ConnectionHandle, ServerName, NameLength1, UserName, NameLength2, Authentication, NameLength3, __functionAddress);
     }
 
     /**
@@ -2190,7 +2190,7 @@ public class SQL {
             check(__functionAddress);
             check(EnvironmentHandle);
         }
-        return callPPPPPS(EnvironmentHandle, Direction, ServerName, BufferLength1, NameLength1Ptr, Description, BufferLength2, NameLength2Ptr, __functionAddress);
+        return callPCPSPPSPS(EnvironmentHandle, Direction, ServerName, BufferLength1, NameLength1Ptr, Description, BufferLength2, NameLength2Ptr, __functionAddress);
     }
 
     /**
@@ -2242,7 +2242,7 @@ public class SQL {
         if (CHECKS) {
             check(ConnectionHandle);
         }
-        return callPPPS(ConnectionHandle, InfoType, InfoValuePtr, BufferLength, StringLengthPtr, __functionAddress);
+        return callPCPSPS(ConnectionHandle, InfoType, InfoValuePtr, BufferLength, StringLengthPtr, __functionAddress);
     }
 
     /**
@@ -2317,7 +2317,7 @@ public class SQL {
         if (CHECKS) {
             check(ConnectionHandle);
         }
-        return callPPS(ConnectionHandle, FunctionId, SupportedPtr, __functionAddress);
+        return callPCPS(ConnectionHandle, FunctionId, SupportedPtr, __functionAddress);
     }
 
     /**
@@ -2356,7 +2356,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPS(StatementHandle, DataType, __functionAddress);
+        return callPSS(StatementHandle, DataType, __functionAddress);
     }
 
     // --- [ SQLSetConnectAttr ] ---
@@ -2548,7 +2548,7 @@ public class SQL {
         if (CHECKS) {
             check(DescriptorHandle);
         }
-        return callPPPS(DescriptorHandle, RecNumber, FieldIdentifier, ValuePtr, BufferLength, StringLengthPtr, __functionAddress);
+        return callPSSPPS(DescriptorHandle, RecNumber, FieldIdentifier, ValuePtr, BufferLength, StringLengthPtr, __functionAddress);
     }
 
     /**
@@ -2572,7 +2572,7 @@ public class SQL {
         if (CHECKS) {
             check(DescriptorHandle);
         }
-        return callPPPPPPPPPS(DescriptorHandle, RecNumber, Name, BufferLength, StringLengthPtr, TypePtr, SubTypePtr, LengthPtr, PrecisionPtr, ScalePtr, NullablePtr, __functionAddress);
+        return callPSPSPPPPPPPS(DescriptorHandle, RecNumber, Name, BufferLength, StringLengthPtr, TypePtr, SubTypePtr, LengthPtr, PrecisionPtr, ScalePtr, NullablePtr, __functionAddress);
     }
 
     /**
@@ -2603,7 +2603,7 @@ public class SQL {
         if (CHECKS) {
             check(DescriptorHandle);
         }
-        return callPPS(DescriptorHandle, RecNumber, FieldIdentifier, ValuePtr, BufferLength, __functionAddress);
+        return callPSSPS(DescriptorHandle, RecNumber, FieldIdentifier, ValuePtr, BufferLength, __functionAddress);
     }
 
     /**
@@ -2624,7 +2624,7 @@ public class SQL {
         if (CHECKS) {
             check(DescriptorHandle);
         }
-        return callPPPPPS(DescriptorHandle, RecNumber, Type, SubType, Length, Precision, Scale, DataPtr, StringLengthPtr, IndicatorPtr, __functionAddress);
+        return callPSSSPSSPPPS(DescriptorHandle, RecNumber, Type, SubType, Length, Precision, Scale, DataPtr, StringLengthPtr, IndicatorPtr, __functionAddress);
     }
 
     /**
@@ -2705,7 +2705,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPS(StatementHandle, CursorName, BufferLength, NameLengthPtr, __functionAddress);
+        return callPPSPS(StatementHandle, CursorName, BufferLength, NameLengthPtr, __functionAddress);
     }
 
     /**
@@ -2729,7 +2729,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPS(StatementHandle, CursorName, NameLength, __functionAddress);
+        return callPPSS(StatementHandle, CursorName, NameLength, __functionAddress);
     }
 
     /**
@@ -2916,7 +2916,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPPPPPS(StatementHandle, ColumnNumber, ColumnName, BufferLength, NameLengthPtr, DataTypePtr, ColumnSizePtr, DecimalDigitsPtr, NullablePtr, __functionAddress);
+        return callPCPSPPPPPS(StatementHandle, ColumnNumber, ColumnName, BufferLength, NameLengthPtr, DataTypePtr, ColumnSizePtr, DecimalDigitsPtr, NullablePtr, __functionAddress);
     }
 
     /**
@@ -2945,7 +2945,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPPS(StatementHandle, ColumnNumber, FieldIdentifier, CharacterAttributePtr, BufferLength, StringLengthPtr, NumericAttributePtr, __functionAddress);
+        return callPCCPSPPS(StatementHandle, ColumnNumber, FieldIdentifier, CharacterAttributePtr, BufferLength, StringLengthPtr, NumericAttributePtr, __functionAddress);
     }
 
     /**
@@ -2971,7 +2971,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPPS(StatementHandle, ColumnNumber, TargetType, TargetValuePtr, BufferLength, StrLen_or_Ind, __functionAddress);
+        return callPCSPPPS(StatementHandle, ColumnNumber, TargetType, TargetValuePtr, BufferLength, StrLen_or_Ind, __functionAddress);
     }
 
     /**
@@ -3084,7 +3084,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPS(StatementHandle, FetchOrientation, FetchOffset, __functionAddress);
+        return callPSPS(StatementHandle, FetchOrientation, FetchOffset, __functionAddress);
     }
 
     // --- [ SQLGetData ] ---
@@ -3095,7 +3095,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPPS(StatementHandle, Col_or_Param_Num, TargetType, TargetValuePtr, BufferLength, StrLen_or_IndPtr, __functionAddress);
+        return callPCSPPPS(StatementHandle, Col_or_Param_Num, TargetType, TargetValuePtr, BufferLength, StrLen_or_IndPtr, __functionAddress);
     }
 
     /**
@@ -3140,7 +3140,7 @@ public class SQL {
         if (CHECKS) {
             check(Handle);
         }
-        return callPPPS(HandleType, Handle, RecNumber, DiagIdentifier, DiagInfoPtr, BufferLength, StringLengthPtr, __functionAddress);
+        return callSPSSPSPS(HandleType, Handle, RecNumber, DiagIdentifier, DiagInfoPtr, BufferLength, StringLengthPtr, __functionAddress);
     }
 
     /**
@@ -3181,7 +3181,7 @@ public class SQL {
         if (CHECKS) {
             check(Handle);
         }
-        return callPPPPPS(HandleType, Handle, RecNumber, SQLState, NativeErrorPtr, MessageText, BufferLength, TextLengthPtr, __functionAddress);
+        return callSPSPPPSPS(HandleType, Handle, RecNumber, SQLState, NativeErrorPtr, MessageText, BufferLength, TextLengthPtr, __functionAddress);
     }
 
     /**
@@ -3217,7 +3217,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPS(StatementHandle, Option, __functionAddress);
+        return callPCS(StatementHandle, Option, __functionAddress);
     }
 
     // --- [ SQLCloseCursor ] ---
@@ -3273,7 +3273,7 @@ public class SQL {
             check(__functionAddress);
             check(Handle);
         }
-        return callPS(HandleType, Handle, __functionAddress);
+        return callSPS(HandleType, Handle, __functionAddress);
     }
 
     // --- [ SQLEndTran ] ---
@@ -3293,7 +3293,7 @@ public class SQL {
         if (CHECKS) {
             check(Handle);
         }
-        return callPS(HandleType, Handle, CompletionType, __functionAddress);
+        return callSPSS(HandleType, Handle, CompletionType, __functionAddress);
     }
 
     // --- [ SQLDisconnect ] ---
@@ -3329,7 +3329,7 @@ public class SQL {
         if (CHECKS) {
             check(Handle);
         }
-        return callPS(HandleType, Handle, __functionAddress);
+        return callSPS(HandleType, Handle, __functionAddress);
     }
 
     // --- [ SQLCompleteAsync ] ---
@@ -3341,7 +3341,7 @@ public class SQL {
             check(__functionAddress);
             check(Handle);
         }
-        return callPPS(HandleType, Handle, AsyncRetCodePtr, __functionAddress);
+        return callSPPS(HandleType, Handle, AsyncRetCodePtr, __functionAddress);
     }
 
     /**
@@ -3379,7 +3379,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPPPS(StatementHandle, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, ColumnName, NameLength4, __functionAddress);
+        return callPPSPSPSPSS(StatementHandle, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, ColumnName, NameLength4, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3394,7 +3394,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPPS(StatementHandle, IdentifierType, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, Scope, Nullable, __functionAddress);
+        return callPCPSPSPSCCS(StatementHandle, IdentifierType, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, Scope, Nullable, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3409,7 +3409,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPPS(StatementHandle, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, Unique, Reserved, __functionAddress);
+        return callPPSPSPSCCS(StatementHandle, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, Unique, Reserved, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3424,7 +3424,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPPPS(StatementHandle, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, TableType, NameLength4, __functionAddress);
+        return callPPSPSPSPSS(StatementHandle, CatalogName, NameLength1, SchemaName, NameLength2, TableName, NameLength3, TableType, NameLength4, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3443,7 +3443,7 @@ public class SQL {
             check(EnvironmentHandle);
             check(ConnectionHandle);
         }
-        return callPPS(EnvironmentHandle, ConnectionHandle, CompletionType, __functionAddress);
+        return callPPCS(EnvironmentHandle, ConnectionHandle, CompletionType, __functionAddress);
     }
 
     // --- [ SQLDriverConnect ] ---
@@ -3459,7 +3459,7 @@ public class SQL {
         if (CHECKS) {
             check(ConnectionHandle);
         }
-        return callPPPPPS(ConnectionHandle, WindowHandle, InConnectionString, StringLength1, OutConnectionString, BufferLength, StringLength2Ptr, DriverCompletion, __functionAddress);
+        return callPPPSPSPCS(ConnectionHandle, WindowHandle, InConnectionString, StringLength1, OutConnectionString, BufferLength, StringLength2Ptr, DriverCompletion, __functionAddress);
     }
 
     /**
@@ -3570,7 +3570,7 @@ public class SQL {
         if (CHECKS) {
             check(ConnectionHandle);
         }
-        return callPPPPS(ConnectionHandle, InConnectionString, StringLength1, OutConnectionString, BufferLength, StringLength2Ptr, __functionAddress);
+        return callPPSPSPS(ConnectionHandle, InConnectionString, StringLength1, OutConnectionString, BufferLength, StringLength2Ptr, __functionAddress);
     }
 
     /**
@@ -3649,7 +3649,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPS(StatementHandle, Operation, __functionAddress);
+        return callPCS(StatementHandle, Operation, __functionAddress);
     }
 
     // --- [ SQLColumnPrivileges ] ---
@@ -3659,7 +3659,7 @@ public class SQL {
         if (CHECKS) {
             check(hstmt);
         }
-        return callPPPPPS(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName, __functionAddress);
+        return callPPSPSPSPSS(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3675,7 +3675,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPPPS(StatementHandle, ParameterNumber, DataTypePtr, ParameterSizePtr, DecimalDigitsPtr, NullablePtr, __functionAddress);
+        return callPCPPPPS(StatementHandle, ParameterNumber, DataTypePtr, ParameterSizePtr, DecimalDigitsPtr, NullablePtr, __functionAddress);
     }
 
     /**
@@ -3701,7 +3701,7 @@ public class SQL {
         if (CHECKS) {
             check(hstmt);
         }
-        return callPPPPS(hstmt, fFetchType, irow, pcrow, rgfRowStatus, __functionAddress);
+        return callPCPPPS(hstmt, fFetchType, irow, pcrow, rgfRowStatus, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3720,7 +3720,7 @@ public class SQL {
         if (CHECKS) {
             check(hstmt);
         }
-        return callPPPPPPPS(hstmt, szPkCatalogName, cchPkCatalogName, szPkSchemaName, cchPkSchemaName, szPkTableName, cchPkTableName, szFkCatalogName, cchFkCatalogName, szFkSchemaName, cchFkSchemaName, szFkTableName, cchFkTableName, __functionAddress);
+        return callPPSPSPSPSPSPSS(hstmt, szPkCatalogName, cchPkCatalogName, szPkSchemaName, cchPkSchemaName, szPkTableName, cchPkTableName, szFkCatalogName, cchFkCatalogName, szFkSchemaName, cchFkSchemaName, szFkTableName, cchFkTableName, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3842,7 +3842,7 @@ public class SQL {
         if (CHECKS) {
             check(hstmt);
         }
-        return callPPPPS(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, __functionAddress);
+        return callPPSPSPSS(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3857,7 +3857,7 @@ public class SQL {
         if (CHECKS) {
             check(hstmt);
         }
-        return callPPPPPS(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, szColumnName, cchColumnName, __functionAddress);
+        return callPPSPSPSPSS(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, szColumnName, cchColumnName, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3872,7 +3872,7 @@ public class SQL {
         if (CHECKS) {
             check(hstmt);
         }
-        return callPPPPS(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, __functionAddress);
+        return callPPSPSPSS(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3896,7 +3896,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPJS(StatementHandle, RowNumber, Operation, LockType, __functionAddress);
+        return callPJCCS(StatementHandle, RowNumber, Operation, LockType, __functionAddress);
     }
 
     // --- [ SQLTablePrivileges ] ---
@@ -3906,7 +3906,7 @@ public class SQL {
         if (CHECKS) {
             check(hstmt);
         }
-        return callPPPPS(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, __functionAddress);
+        return callPPSPSPSS(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, __functionAddress);
     }
 
     @NativeType("SQLRETURN")
@@ -3923,7 +3923,7 @@ public class SQL {
             check(__functionAddress);
             check(EnvironmentHandle);
         }
-        return callPPPPPS(EnvironmentHandle, Direction, DriverDescription, BufferLength1, DescriptionLengthPtr, DriverAttributes, BufferLength2, AttributesLengthPtr, __functionAddress);
+        return callPCPSPPSPS(EnvironmentHandle, Direction, DriverDescription, BufferLength1, DescriptionLengthPtr, DriverAttributes, BufferLength2, AttributesLengthPtr, __functionAddress);
     }
 
     /**
@@ -3948,7 +3948,7 @@ public class SQL {
         if (CHECKS) {
             check(StatementHandle);
         }
-        return callPPPPPS(StatementHandle, ParameterNumber, InputOutputType, ValueType, ParameterType, ColumnSize, DecimalDigits, ParameterValuePtr, BufferLength, StrLen_or_IndPtr, __functionAddress);
+        return callPCSSSPSPPPS(StatementHandle, ParameterNumber, InputOutputType, ValueType, ParameterType, ColumnSize, DecimalDigits, ParameterValuePtr, BufferLength, StrLen_or_IndPtr, __functionAddress);
     }
 
     /**
@@ -3973,7 +3973,7 @@ public class SQL {
             check(__functionAddress);
             check(hInput);
         }
-        return callPPS(fHandleType, hInput, phOutput, __functionAddress);
+        return callSPPS(fHandleType, hInput, phOutput, __functionAddress);
     }
 
     @NativeType("SQLRETURN")

@@ -29,7 +29,7 @@ val spvc_resources = "spvc_resources".handle
 val spvc_set = "spvc_set".handle
 val spvc_type = "spvc_type".handle
 
-val spvc_bool = typedef(IntegerType("unsigned char", PrimitiveMapping.BOOLEAN, unsigned = true), "spvc_bool")
+val spvc_bool = typedef(PrimitiveType("unsigned char", PrimitiveMapping.BOOLEAN), "spvc_bool")
 val spvc_constant_id = typedef(SpvId, "spvc_constant_id")
 val spvc_type_id = typedef(SpvId, "spvc_type_id")
 val spvc_variable_id = typedef(SpvId, "spvc_variable_id")

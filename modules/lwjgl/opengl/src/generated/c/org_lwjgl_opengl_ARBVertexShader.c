@@ -18,7 +18,7 @@ typedef void (APIENTRY *glVertexAttrib3dARBPROC) (jint, jdouble, jdouble, jdoubl
 typedef void (APIENTRY *glVertexAttrib4fARBPROC) (jint, jfloat, jfloat, jfloat, jfloat);
 typedef void (APIENTRY *glVertexAttrib4sARBPROC) (jint, jshort, jshort, jshort, jshort);
 typedef void (APIENTRY *glVertexAttrib4dARBPROC) (jint, jdouble, jdouble, jdouble, jdouble);
-typedef void (APIENTRY *glVertexAttrib4NubARBPROC) (jint, jbyte, jbyte, jbyte, jbyte);
+typedef void (APIENTRY *glVertexAttrib4NubARBPROC) (jint, uint8_t, uint8_t, uint8_t, uint8_t);
 typedef void (APIENTRY *glVertexAttrib1fvARBPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glVertexAttrib1svARBPROC) (jint, uintptr_t);
 typedef void (APIENTRY *glVertexAttrib1dvARBPROC) (jint, uintptr_t);
@@ -130,7 +130,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexShader_glVertexAttrib4dARB
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexShader_glVertexAttrib4NubARB(JNIEnv *__env, jclass clazz, jint index, jbyte x, jbyte y, jbyte z, jbyte w) {
     glVertexAttrib4NubARBPROC glVertexAttrib4NubARB = (glVertexAttrib4NubARBPROC)tlsGetFunction(1424);
     UNUSED_PARAM(clazz)
-    glVertexAttrib4NubARB(index, x, y, z, w);
+    glVertexAttrib4NubARB(index, (uint8_t)x, (uint8_t)y, (uint8_t)z, (uint8_t)w);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexShader_nglVertexAttrib1fvARB__IJ(JNIEnv *__env, jclass clazz, jint index, jlong vAddress) {
@@ -334,7 +334,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_ARBVertexShader_nglGetAttribLocatio
     glGetAttribLocationARBPROC glGetAttribLocationARB = (glGetAttribLocationARBPROC)tlsGetFunction(1476);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetAttribLocationARB(programObj, name);
+    return glGetAttribLocationARB(programObj, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBVertexShader_nglGetVertexAttribivARB__IIJ(JNIEnv *__env, jclass clazz, jint index, jint pname, jlong paramsAddress) {

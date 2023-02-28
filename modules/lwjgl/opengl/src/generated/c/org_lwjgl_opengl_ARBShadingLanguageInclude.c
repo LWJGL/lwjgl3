@@ -42,7 +42,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_ARBShadingLanguageInclude_nglIs
     glIsNamedStringARBPROC glIsNamedStringARB = (glIsNamedStringARBPROC)tlsGetFunction(1358);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsNamedStringARB(namelen, name);
+    return glIsNamedStringARB(namelen, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBShadingLanguageInclude_nglGetNamedStringARB__IJIJJ(JNIEnv *__env, jclass clazz, jint namelen, jlong nameAddress, jint bufSize, jlong stringlenAddress, jlong stringAddress) {

@@ -21,7 +21,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_opengles_OESMapbuffer_nglMapBufferOES(JNI
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_OESMapbuffer_glUnmapBufferOES(JNIEnv *__env, jclass clazz, jint target) {
     glUnmapBufferOESPROC glUnmapBufferOES = (glUnmapBufferOESPROC)tlsGetFunction(806);
     UNUSED_PARAM(clazz)
-    return (jboolean)glUnmapBufferOES(target);
+    return glUnmapBufferOES(target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESMapbuffer_nglGetBufferPointervOES(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {

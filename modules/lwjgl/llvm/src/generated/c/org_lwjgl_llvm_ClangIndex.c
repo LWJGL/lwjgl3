@@ -250,7 +250,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1equalLocations(JNI
     CXSourceLocation *loc1 = (CXSourceLocation *)(uintptr_t)loc1Address;
     CXSourceLocation *loc2 = (CXSourceLocation *)(uintptr_t)loc2Address;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_equalLocations(*loc1, *loc2);
+    return clang_equalLocations(*loc1, *loc2);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getLocation(JNIEnv *__env, jclass clazz, jlong tuAddress, jlong fileAddress, jint line, jint column, jlong __functionAddress, jlong __result) {
@@ -273,14 +273,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Location_1isInSyst
     clang_Location_isInSystemHeaderPROC clang_Location_isInSystemHeader = (clang_Location_isInSystemHeaderPROC)(uintptr_t)__functionAddress;
     CXSourceLocation *location = (CXSourceLocation *)(uintptr_t)locationAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Location_isInSystemHeader(*location);
+    return clang_Location_isInSystemHeader(*location);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Location_1isFromMainFile(JNIEnv *__env, jclass clazz, jlong locationAddress, jlong __functionAddress) {
     clang_Location_isFromMainFilePROC clang_Location_isFromMainFile = (clang_Location_isFromMainFilePROC)(uintptr_t)__functionAddress;
     CXSourceLocation *location = (CXSourceLocation *)(uintptr_t)locationAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Location_isFromMainFile(*location);
+    return clang_Location_isFromMainFile(*location);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getNullRange(JNIEnv *__env, jclass clazz, jlong __functionAddress, jlong __result) {
@@ -302,14 +302,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1equalRanges(JNIEnv
     CXSourceRange *range1 = (CXSourceRange *)(uintptr_t)range1Address;
     CXSourceRange *range2 = (CXSourceRange *)(uintptr_t)range2Address;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_equalRanges(*range1, *range2);
+    return clang_equalRanges(*range1, *range2);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Range_1isNull(JNIEnv *__env, jclass clazz, jlong rangeAddress, jlong __functionAddress) {
     clang_Range_isNullPROC clang_Range_isNull = (clang_Range_isNullPROC)(uintptr_t)__functionAddress;
     CXSourceRange *range = (CXSourceRange *)(uintptr_t)rangeAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Range_isNull(*range);
+    return clang_Range_isNull(*range);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getExpansionLocation(JNIEnv *__env, jclass clazz, jlong locationAddress, jlong fileAddress, jlong lineAddress, jlong columnAddress, jlong offsetAddress, jlong __functionAddress) {
@@ -466,63 +466,63 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1equalCursors(JNIEn
     CXCursor *A = (CXCursor *)(uintptr_t)AAddress;
     CXCursor *B = (CXCursor *)(uintptr_t)BAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_equalCursors(*A, *B);
+    return clang_equalCursors(*A, *B);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isNull(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_Cursor_isNullPROC clang_Cursor_isNull = (clang_Cursor_isNullPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isNull(*cursor);
+    return clang_Cursor_isNull(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1hashCursor(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_hashCursorPROC clang_hashCursor = (clang_hashCursorPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_hashCursor(*cursor);
+    return clang_hashCursor(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorKind(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_getCursorKindPROC clang_getCursorKind = (clang_getCursorKindPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getCursorKind(*cursor);
+    return clang_getCursorKind(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1isInvalidDeclaration(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_isInvalidDeclarationPROC clang_isInvalidDeclaration = (clang_isInvalidDeclarationPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_isInvalidDeclaration(*cursor);
+    return clang_isInvalidDeclaration(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1hasAttrs(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_hasAttrsPROC clang_Cursor_hasAttrs = (clang_Cursor_hasAttrsPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_hasAttrs(*C);
+    return clang_Cursor_hasAttrs(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorLinkage(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_getCursorLinkagePROC clang_getCursorLinkage = (clang_getCursorLinkagePROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getCursorLinkage(*cursor);
+    return clang_getCursorLinkage(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorVisibility(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_getCursorVisibilityPROC clang_getCursorVisibility = (clang_getCursorVisibilityPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getCursorVisibility(*cursor);
+    return clang_getCursorVisibility(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorAvailability(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_getCursorAvailabilityPROC clang_getCursorAvailability = (clang_getCursorAvailabilityPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getCursorAvailability(*cursor);
+    return clang_getCursorAvailability(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorPlatformAvailability(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong always_deprecatedAddress, jlong deprecated_messageAddress, jlong always_unavailableAddress, jlong unavailable_messageAddress, jlong availabilityAddress, jint availability_size, jlong __functionAddress) {
@@ -534,7 +534,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorPlatformA
     uintptr_t unavailable_message = (uintptr_t)unavailable_messageAddress;
     uintptr_t availability = (uintptr_t)availabilityAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getCursorPlatformAvailability(*cursor, always_deprecated, deprecated_message, always_unavailable, unavailable_message, availability, availability_size);
+    return clang_getCursorPlatformAvailability(*cursor, always_deprecated, deprecated_message, always_unavailable, unavailable_message, availability, availability_size);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getVarDeclInitializer(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress, jlong __result) {
@@ -548,28 +548,28 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1hasVarDecl
     clang_Cursor_hasVarDeclGlobalStoragePROC clang_Cursor_hasVarDeclGlobalStorage = (clang_Cursor_hasVarDeclGlobalStoragePROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_hasVarDeclGlobalStorage(*cursor);
+    return clang_Cursor_hasVarDeclGlobalStorage(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1hasVarDeclExternalStorage(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_Cursor_hasVarDeclExternalStoragePROC clang_Cursor_hasVarDeclExternalStorage = (clang_Cursor_hasVarDeclExternalStoragePROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_hasVarDeclExternalStorage(*cursor);
+    return clang_Cursor_hasVarDeclExternalStorage(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorLanguage(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_getCursorLanguagePROC clang_getCursorLanguage = (clang_getCursorLanguagePROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getCursorLanguage(*cursor);
+    return clang_getCursorLanguage(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorTLSKind(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_getCursorTLSKindPROC clang_getCursorTLSKind = (clang_getCursorTLSKindPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getCursorTLSKind(*cursor);
+    return clang_getCursorTLSKind(*cursor);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getTranslationUnit(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
@@ -584,7 +584,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXCursorSet_1conta
     uintptr_t cset = (uintptr_t)csetAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXCursorSet_contains(cset, *cursor);
+    return clang_CXCursorSet_contains(cset, *cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXCursorSet_1insert(JNIEnv *__env, jclass clazz, jlong csetAddress, jlong cursorAddress, jlong __functionAddress) {
@@ -592,7 +592,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXCursorSet_1inser
     uintptr_t cset = (uintptr_t)csetAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXCursorSet_insert(cset, *cursor);
+    return clang_CXCursorSet_insert(cset, *cursor);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorSemanticParent(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress, jlong __result) {
@@ -679,28 +679,28 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getEnumConstantDe
     clang_getEnumConstantDeclValuePROC clang_getEnumConstantDeclValue = (clang_getEnumConstantDeclValuePROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)clang_getEnumConstantDeclValue(*C);
+    return clang_getEnumConstantDeclValue(*C);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getEnumConstantDeclUnsignedValue(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_getEnumConstantDeclUnsignedValuePROC clang_getEnumConstantDeclUnsignedValue = (clang_getEnumConstantDeclUnsignedValuePROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)clang_getEnumConstantDeclUnsignedValue(*C);
+    return clang_getEnumConstantDeclUnsignedValue(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getFieldDeclBitWidth(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_getFieldDeclBitWidthPROC clang_getFieldDeclBitWidth = (clang_getFieldDeclBitWidthPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getFieldDeclBitWidth(*C);
+    return clang_getFieldDeclBitWidth(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getNumArguments(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_getNumArgumentsPROC clang_Cursor_getNumArguments = (clang_Cursor_getNumArgumentsPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_getNumArguments(*C);
+    return clang_Cursor_getNumArguments(*C);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getArgument(JNIEnv *__env, jclass clazz, jlong CAddress, jint i, jlong __functionAddress, jlong __result) {
@@ -714,14 +714,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getNumTemp
     clang_Cursor_getNumTemplateArgumentsPROC clang_Cursor_getNumTemplateArguments = (clang_Cursor_getNumTemplateArgumentsPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_getNumTemplateArguments(*C);
+    return clang_Cursor_getNumTemplateArguments(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getTemplateArgumentKind(JNIEnv *__env, jclass clazz, jlong CAddress, jint I, jlong __functionAddress) {
     clang_Cursor_getTemplateArgumentKindPROC clang_Cursor_getTemplateArgumentKind = (clang_Cursor_getTemplateArgumentKindPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_getTemplateArgumentKind(*C, I);
+    return clang_Cursor_getTemplateArgumentKind(*C, I);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getTemplateArgumentType(JNIEnv *__env, jclass clazz, jlong CAddress, jint I, jlong __functionAddress, jlong __result) {
@@ -735,14 +735,14 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getTempla
     clang_Cursor_getTemplateArgumentValuePROC clang_Cursor_getTemplateArgumentValue = (clang_Cursor_getTemplateArgumentValuePROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)clang_Cursor_getTemplateArgumentValue(*C, I);
+    return clang_Cursor_getTemplateArgumentValue(*C, I);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getTemplateArgumentUnsignedValue(JNIEnv *__env, jclass clazz, jlong CAddress, jint I, jlong __functionAddress) {
     clang_Cursor_getTemplateArgumentUnsignedValuePROC clang_Cursor_getTemplateArgumentUnsignedValue = (clang_Cursor_getTemplateArgumentUnsignedValuePROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)clang_Cursor_getTemplateArgumentUnsignedValue(*C, I);
+    return clang_Cursor_getTemplateArgumentUnsignedValue(*C, I);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1equalTypes(JNIEnv *__env, jclass clazz, jlong AAddress, jlong BAddress, jlong __functionAddress) {
@@ -750,7 +750,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1equalTypes(JNIEnv 
     CXType *A = (CXType *)(uintptr_t)AAddress;
     CXType *B = (CXType *)(uintptr_t)BAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_equalTypes(*A, *B);
+    return clang_equalTypes(*A, *B);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCanonicalType(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress, jlong __result) {
@@ -764,49 +764,49 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1isConstQualifiedTy
     clang_isConstQualifiedTypePROC clang_isConstQualifiedType = (clang_isConstQualifiedTypePROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_isConstQualifiedType(*T);
+    return clang_isConstQualifiedType(*T);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isMacroFunctionLike(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_isMacroFunctionLikePROC clang_Cursor_isMacroFunctionLike = (clang_Cursor_isMacroFunctionLikePROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isMacroFunctionLike(*C);
+    return clang_Cursor_isMacroFunctionLike(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isMacroBuiltin(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_isMacroBuiltinPROC clang_Cursor_isMacroBuiltin = (clang_Cursor_isMacroBuiltinPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isMacroBuiltin(*C);
+    return clang_Cursor_isMacroBuiltin(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isFunctionInlined(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_isFunctionInlinedPROC clang_Cursor_isFunctionInlined = (clang_Cursor_isFunctionInlinedPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isFunctionInlined(*C);
+    return clang_Cursor_isFunctionInlined(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1isVolatileQualifiedType(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress) {
     clang_isVolatileQualifiedTypePROC clang_isVolatileQualifiedType = (clang_isVolatileQualifiedTypePROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_isVolatileQualifiedType(*T);
+    return clang_isVolatileQualifiedType(*T);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1isRestrictQualifiedType(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress) {
     clang_isRestrictQualifiedTypePROC clang_isRestrictQualifiedType = (clang_isRestrictQualifiedTypePROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_isRestrictQualifiedType(*T);
+    return clang_isRestrictQualifiedType(*T);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getAddressSpace(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress) {
     clang_getAddressSpacePROC clang_getAddressSpace = (clang_getAddressSpacePROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getAddressSpace(*T);
+    return clang_getAddressSpace(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getTypedefName(JNIEnv *__env, jclass clazz, jlong CTAddress, jlong __functionAddress, jlong __result) {
@@ -854,7 +854,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getFunctionTypeCal
     clang_getFunctionTypeCallingConvPROC clang_getFunctionTypeCallingConv = (clang_getFunctionTypeCallingConvPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getFunctionTypeCallingConv(*T);
+    return clang_getFunctionTypeCallingConv(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getResultType(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress, jlong __result) {
@@ -868,14 +868,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getExceptionSpecif
     clang_getExceptionSpecificationTypePROC clang_getExceptionSpecificationType = (clang_getExceptionSpecificationTypePROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getExceptionSpecificationType(*T);
+    return clang_getExceptionSpecificationType(*T);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getNumArgTypes(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress) {
     clang_getNumArgTypesPROC clang_getNumArgTypes = (clang_getNumArgTypesPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getNumArgTypes(*T);
+    return clang_getNumArgTypes(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getArgType(JNIEnv *__env, jclass clazz, jlong TAddress, jint i, jlong __functionAddress, jlong __result) {
@@ -896,7 +896,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getNumObjCPr
     clang_Type_getNumObjCProtocolRefsPROC clang_Type_getNumObjCProtocolRefs = (clang_Type_getNumObjCProtocolRefsPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Type_getNumObjCProtocolRefs(*T);
+    return clang_Type_getNumObjCProtocolRefs(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getObjCProtocolDecl(JNIEnv *__env, jclass clazz, jlong TAddress, jint i, jlong __functionAddress, jlong __result) {
@@ -910,7 +910,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getNumObjCTy
     clang_Type_getNumObjCTypeArgsPROC clang_Type_getNumObjCTypeArgs = (clang_Type_getNumObjCTypeArgsPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Type_getNumObjCTypeArgs(*T);
+    return clang_Type_getNumObjCTypeArgs(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getObjCTypeArg(JNIEnv *__env, jclass clazz, jlong TAddress, jint i, jlong __functionAddress, jlong __result) {
@@ -924,7 +924,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1isFunctionTypeVari
     clang_isFunctionTypeVariadicPROC clang_isFunctionTypeVariadic = (clang_isFunctionTypeVariadicPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_isFunctionTypeVariadic(*T);
+    return clang_isFunctionTypeVariadic(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorResultType(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress, jlong __result) {
@@ -938,14 +938,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorException
     clang_getCursorExceptionSpecificationTypePROC clang_getCursorExceptionSpecificationType = (clang_getCursorExceptionSpecificationTypePROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getCursorExceptionSpecificationType(*C);
+    return clang_getCursorExceptionSpecificationType(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1isPODType(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress) {
     clang_isPODTypePROC clang_isPODType = (clang_isPODTypePROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_isPODType(*T);
+    return clang_isPODType(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getElementType(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress, jlong __result) {
@@ -959,7 +959,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getNumElements(JN
     clang_getNumElementsPROC clang_getNumElements = (clang_getNumElementsPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)clang_getNumElements(*T);
+    return clang_getNumElements(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getArrayElementType(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress, jlong __result) {
@@ -973,7 +973,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getArraySize(JNIE
     clang_getArraySizePROC clang_getArraySize = (clang_getArraySizePROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)clang_getArraySize(*T);
+    return clang_getArraySize(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getNamedType(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress, jlong __result) {
@@ -987,21 +987,21 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1isTransparen
     clang_Type_isTransparentTagTypedefPROC clang_Type_isTransparentTagTypedef = (clang_Type_isTransparentTagTypedefPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Type_isTransparentTagTypedef(*T);
+    return clang_Type_isTransparentTagTypedef(*T);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getNullability(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress) {
     clang_Type_getNullabilityPROC clang_Type_getNullability = (clang_Type_getNullabilityPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Type_getNullability(*T);
+    return clang_Type_getNullability(*T);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getAlignOf(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress) {
     clang_Type_getAlignOfPROC clang_Type_getAlignOf = (clang_Type_getAlignOfPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)clang_Type_getAlignOf(*T);
+    return clang_Type_getAlignOf(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getClassType(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress, jlong __result) {
@@ -1015,7 +1015,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getSizeOf(J
     clang_Type_getSizeOfPROC clang_Type_getSizeOf = (clang_Type_getSizeOfPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)clang_Type_getSizeOf(*T);
+    return clang_Type_getSizeOf(*T);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getOffsetOf(JNIEnv *__env, jclass clazz, jlong TAddress, jlong SAddress, jlong __functionAddress) {
@@ -1023,7 +1023,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getOffsetOf
     CXType *T = (CXType *)(uintptr_t)TAddress;
     uintptr_t S = (uintptr_t)SAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)clang_Type_getOffsetOf(*T, S);
+    return clang_Type_getOffsetOf(*T, S);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getModifiedType(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress, jlong __result) {
@@ -1044,35 +1044,35 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getOffset
     clang_Cursor_getOffsetOfFieldPROC clang_Cursor_getOffsetOfField = (clang_Cursor_getOffsetOfFieldPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jlong)clang_Cursor_getOffsetOfField(*C);
+    return clang_Cursor_getOffsetOfField(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isAnonymous(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_isAnonymousPROC clang_Cursor_isAnonymous = (clang_Cursor_isAnonymousPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isAnonymous(*C);
+    return clang_Cursor_isAnonymous(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isAnonymousRecordDecl(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_isAnonymousRecordDeclPROC clang_Cursor_isAnonymousRecordDecl = (clang_Cursor_isAnonymousRecordDeclPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isAnonymousRecordDecl(*C);
+    return clang_Cursor_isAnonymousRecordDecl(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isInlineNamespace(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_isInlineNamespacePROC clang_Cursor_isInlineNamespace = (clang_Cursor_isInlineNamespacePROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isInlineNamespace(*C);
+    return clang_Cursor_isInlineNamespace(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getNumTemplateArguments(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress) {
     clang_Type_getNumTemplateArgumentsPROC clang_Type_getNumTemplateArguments = (clang_Type_getNumTemplateArgumentsPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Type_getNumTemplateArguments(*T);
+    return clang_Type_getNumTemplateArguments(*T);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getTemplateArgumentAsType(JNIEnv *__env, jclass clazz, jlong TAddress, jint i, jlong __functionAddress, jlong __result) {
@@ -1086,42 +1086,42 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1getCXXRefQua
     clang_Type_getCXXRefQualifierPROC clang_Type_getCXXRefQualifier = (clang_Type_getCXXRefQualifierPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Type_getCXXRefQualifier(*T);
+    return clang_Type_getCXXRefQualifier(*T);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isBitField(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_isBitFieldPROC clang_Cursor_isBitField = (clang_Cursor_isBitFieldPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isBitField(*C);
+    return clang_Cursor_isBitField(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1isVirtualBase(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_isVirtualBasePROC clang_isVirtualBase = (clang_isVirtualBasePROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_isVirtualBase(*cursor);
+    return clang_isVirtualBase(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCXXAccessSpecifier(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_getCXXAccessSpecifierPROC clang_getCXXAccessSpecifier = (clang_getCXXAccessSpecifierPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getCXXAccessSpecifier(*cursor);
+    return clang_getCXXAccessSpecifier(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getStorageClass(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_Cursor_getStorageClassPROC clang_Cursor_getStorageClass = (clang_Cursor_getStorageClassPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_getStorageClass(*cursor);
+    return clang_Cursor_getStorageClass(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getNumOverloadedDecls(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress) {
     clang_getNumOverloadedDeclsPROC clang_getNumOverloadedDecls = (clang_getNumOverloadedDeclsPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getNumOverloadedDecls(*cursor);
+    return clang_getNumOverloadedDecls(*cursor);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getOverloadedDecl(JNIEnv *__env, jclass clazz, jlong cursorAddress, jint index, jlong __functionAddress, jlong __result) {
@@ -1144,7 +1144,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1visitChildren(JNIE
     uintptr_t visitor = (uintptr_t)visitorAddress;
     uintptr_t client_data = (uintptr_t)client_dataAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_visitChildren(*parent, visitor, client_data);
+    return clang_visitChildren(*parent, visitor, client_data);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCursorUSR(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress, jlong __result) {
@@ -1254,7 +1254,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1isCursorDefinition
     clang_isCursorDefinitionPROC clang_isCursorDefinition = (clang_isCursorDefinitionPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_isCursorDefinition(*cursor);
+    return clang_isCursorDefinition(*cursor);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getCanonicalCursor(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress, jlong __result) {
@@ -1268,14 +1268,14 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getObjCSel
     clang_Cursor_getObjCSelectorIndexPROC clang_Cursor_getObjCSelectorIndex = (clang_Cursor_getObjCSelectorIndexPROC)(uintptr_t)__functionAddress;
     CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_getObjCSelectorIndex(*cursor);
+    return clang_Cursor_getObjCSelectorIndex(*cursor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isDynamicCall(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_isDynamicCallPROC clang_Cursor_isDynamicCall = (clang_Cursor_isDynamicCallPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isDynamicCall(*C);
+    return clang_Cursor_isDynamicCall(*C);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getReceiverType(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress, jlong __result) {
@@ -1289,7 +1289,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getObjCPro
     clang_Cursor_getObjCPropertyAttributesPROC clang_Cursor_getObjCPropertyAttributes = (clang_Cursor_getObjCPropertyAttributesPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_getObjCPropertyAttributes(*C, reserved);
+    return clang_Cursor_getObjCPropertyAttributes(*C, reserved);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getObjCPropertyGetterName(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress, jlong __result) {
@@ -1310,21 +1310,21 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getObjCDec
     clang_Cursor_getObjCDeclQualifiersPROC clang_Cursor_getObjCDeclQualifiers = (clang_Cursor_getObjCDeclQualifiersPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_getObjCDeclQualifiers(*C);
+    return clang_Cursor_getObjCDeclQualifiers(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isObjCOptional(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_isObjCOptionalPROC clang_Cursor_isObjCOptional = (clang_Cursor_isObjCOptionalPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isObjCOptional(*C);
+    return clang_Cursor_isObjCOptional(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isVariadic(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_Cursor_isVariadicPROC clang_Cursor_isVariadic = (clang_Cursor_isVariadicPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isVariadic(*C);
+    return clang_Cursor_isVariadic(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isExternalSymbol(JNIEnv *__env, jclass clazz, jlong CAddress, jlong languageAddress, jlong definedInAddress, jlong isGeneratedAddress, jlong __functionAddress) {
@@ -1334,7 +1334,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1isExternal
     uintptr_t definedIn = (uintptr_t)definedInAddress;
     uintptr_t isGenerated = (uintptr_t)isGeneratedAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Cursor_isExternalSymbol(*C, language, definedIn, isGenerated);
+    return clang_Cursor_isExternalSymbol(*C, language, definedIn, isGenerated);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Cursor_1getCommentRange(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress, jlong __result) {
@@ -1404,91 +1404,91 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXConstructor_1is
     clang_CXXConstructor_isConvertingConstructorPROC clang_CXXConstructor_isConvertingConstructor = (clang_CXXConstructor_isConvertingConstructorPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXConstructor_isConvertingConstructor(*C);
+    return clang_CXXConstructor_isConvertingConstructor(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXConstructor_1isCopyConstructor(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXConstructor_isCopyConstructorPROC clang_CXXConstructor_isCopyConstructor = (clang_CXXConstructor_isCopyConstructorPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXConstructor_isCopyConstructor(*C);
+    return clang_CXXConstructor_isCopyConstructor(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXConstructor_1isDefaultConstructor(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXConstructor_isDefaultConstructorPROC clang_CXXConstructor_isDefaultConstructor = (clang_CXXConstructor_isDefaultConstructorPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXConstructor_isDefaultConstructor(*C);
+    return clang_CXXConstructor_isDefaultConstructor(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXConstructor_1isMoveConstructor(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXConstructor_isMoveConstructorPROC clang_CXXConstructor_isMoveConstructor = (clang_CXXConstructor_isMoveConstructorPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXConstructor_isMoveConstructor(*C);
+    return clang_CXXConstructor_isMoveConstructor(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXField_1isMutable(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXField_isMutablePROC clang_CXXField_isMutable = (clang_CXXField_isMutablePROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXField_isMutable(*C);
+    return clang_CXXField_isMutable(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isDefaulted(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXMethod_isDefaultedPROC clang_CXXMethod_isDefaulted = (clang_CXXMethod_isDefaultedPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXMethod_isDefaulted(*C);
+    return clang_CXXMethod_isDefaulted(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isPureVirtual(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXMethod_isPureVirtualPROC clang_CXXMethod_isPureVirtual = (clang_CXXMethod_isPureVirtualPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXMethod_isPureVirtual(*C);
+    return clang_CXXMethod_isPureVirtual(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isStatic(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXMethod_isStaticPROC clang_CXXMethod_isStatic = (clang_CXXMethod_isStaticPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXMethod_isStatic(*C);
+    return clang_CXXMethod_isStatic(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isVirtual(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXMethod_isVirtualPROC clang_CXXMethod_isVirtual = (clang_CXXMethod_isVirtualPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXMethod_isVirtual(*C);
+    return clang_CXXMethod_isVirtual(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXRecord_1isAbstract(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXRecord_isAbstractPROC clang_CXXRecord_isAbstract = (clang_CXXRecord_isAbstractPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXRecord_isAbstract(*C);
+    return clang_CXXRecord_isAbstract(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1EnumDecl_1isScoped(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_EnumDecl_isScopedPROC clang_EnumDecl_isScoped = (clang_EnumDecl_isScopedPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_EnumDecl_isScoped(*C);
+    return clang_EnumDecl_isScoped(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isConst(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXMethod_isConstPROC clang_CXXMethod_isConst = (clang_CXXMethod_isConstPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_CXXMethod_isConst(*C);
+    return clang_CXXMethod_isConst(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getTemplateCursorKind(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_getTemplateCursorKindPROC clang_getTemplateCursorKind = (clang_getTemplateCursorKindPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getTemplateCursorKind(*C);
+    return clang_getTemplateCursorKind(*C);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getSpecializedCursorTemplate(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress, jlong __result) {
@@ -1517,7 +1517,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getTokenKind(JNIEn
     clang_getTokenKindPROC clang_getTokenKind = (clang_getTokenKindPROC)(uintptr_t)__functionAddress;
     CXToken *token = (CXToken *)(uintptr_t)tokenAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_getTokenKind(*token);
+    return clang_getTokenKind(*token);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getTokenSpelling(JNIEnv *__env, jclass clazz, jlong TUAddress, jlong tokenAddress, jlong __functionAddress, jlong __result) {
@@ -1650,7 +1650,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1findReferencesInFi
     uintptr_t file = (uintptr_t)fileAddress;
     CXCursorAndRangeVisitor *visitor = (CXCursorAndRangeVisitor *)(uintptr_t)visitorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_findReferencesInFile(*cursor, file, *visitor);
+    return clang_findReferencesInFile(*cursor, file, *visitor);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1findIncludesInFile(JNIEnv *__env, jclass clazz, jlong TUAddress, jlong fileAddress, jlong visitorAddress, jlong __functionAddress) {
@@ -1659,7 +1659,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1findIncludesInFile
     uintptr_t file = (uintptr_t)fileAddress;
     CXCursorAndRangeVisitor *visitor = (CXCursorAndRangeVisitor *)(uintptr_t)visitorAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_findIncludesInFile(TU, file, *visitor);
+    return clang_findIncludesInFile(TU, file, *visitor);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1indexLoc_1getFileLocation(JNIEnv *__env, jclass clazz, jlong locAddress, jlong indexFileAddress, jlong fileAddress, jlong lineAddress, jlong columnAddress, jlong offsetAddress, jlong __functionAddress) {
@@ -1687,7 +1687,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1Type_1visitFields(
     uintptr_t visitor = (uintptr_t)visitorAddress;
     uintptr_t client_data = (uintptr_t)client_dataAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)clang_Type_visitFields(*T, visitor, client_data);
+    return clang_Type_visitFields(*T, visitor, client_data);
 }
 
 EXTERN_C_EXIT

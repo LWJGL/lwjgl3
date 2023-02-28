@@ -51,7 +51,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL15C_nglGenBuffers__IJ(JNIEnv *__e
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL15C_glIsBuffer(JNIEnv *__env, jclass clazz, jint buffer) {
     glIsBufferPROC glIsBuffer = (glIsBufferPROC)tlsGetFunction(436);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsBuffer(buffer);
+    return glIsBuffer(buffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL15C_nglBufferData__IJJI(JNIEnv *__env, jclass clazz, jint target, jlong size, jlong dataAddress, jint usage) {
@@ -84,7 +84,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_GL15C_nglMapBuffer(JNIEnv *__env, 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL15C_glUnmapBuffer(JNIEnv *__env, jclass clazz, jint target) {
     glUnmapBufferPROC glUnmapBuffer = (glUnmapBufferPROC)tlsGetFunction(441);
     UNUSED_PARAM(clazz)
-    return (jboolean)glUnmapBuffer(target);
+    return glUnmapBuffer(target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL15C_nglGetBufferParameteriv__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {
@@ -118,7 +118,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL15C_nglDeleteQueries__IJ(JNIEnv *
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL15C_glIsQuery(JNIEnv *__env, jclass clazz, jint id) {
     glIsQueryPROC glIsQuery = (glIsQueryPROC)tlsGetFunction(446);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsQuery(id);
+    return glIsQuery(id);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL15C_glBeginQuery(JNIEnv *__env, jclass clazz, jint target, jint id) {

@@ -33,7 +33,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTOcclusionQueryBoolean_nglDelet
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_EXTOcclusionQueryBoolean_glIsQueryEXT(JNIEnv *__env, jclass clazz, jint id) {
     glIsQueryEXTPROC glIsQueryEXT = (glIsQueryEXTPROC)tlsGetFunction(408);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsQueryEXT(id);
+    return glIsQueryEXT(id);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTOcclusionQueryBoolean_glBeginQueryEXT(JNIEnv *__env, jclass clazz, jint target, jint id) {

@@ -33,7 +33,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTSemaphore_nglDeleteSemaphoresEXT
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_EXTSemaphore_glIsSemaphoreEXT(JNIEnv *__env, jclass clazz, jint semaphore) {
     glIsSemaphoreEXTPROC glIsSemaphoreEXT = (glIsSemaphoreEXTPROC)tlsGetFunction(1837);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsSemaphoreEXT(semaphore);
+    return glIsSemaphoreEXT(semaphore);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTSemaphore_nglSemaphoreParameterui64vEXT__IIJ(JNIEnv *__env, jclass clazz, jint semaphore, jint pname, jlong paramsAddress) {

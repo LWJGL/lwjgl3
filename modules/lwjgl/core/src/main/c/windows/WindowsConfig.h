@@ -3,6 +3,8 @@
  * License terms: https://www.lwjgl.org/license
  */
 
+#include <stdint.h>
+
 #define DISABLE_WARNINGS() \
     __pragma(warning(push, 0))
 

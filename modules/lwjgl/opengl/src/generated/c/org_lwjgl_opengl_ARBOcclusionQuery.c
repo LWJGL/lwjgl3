@@ -34,7 +34,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBOcclusionQuery_nglDeleteQueriesA
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_ARBOcclusionQuery_glIsQueryARB(JNIEnv *__env, jclass clazz, jint id) {
     glIsQueryARBPROC glIsQueryARB = (glIsQueryARBPROC)tlsGetFunction(1283);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsQueryARB(id);
+    return glIsQueryARB(id);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBOcclusionQuery_glBeginQueryARB(JNIEnv *__env, jclass clazz, jint target, jint id) {

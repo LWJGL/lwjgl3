@@ -69,7 +69,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_EXTSeparateShaderObjects_nglCreat
     glCreateShaderProgramvEXTPROC glCreateShaderProgramvEXT = (glCreateShaderProgramvEXTPROC)tlsGetFunction(495);
     uintptr_t strings = (uintptr_t)stringsAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glCreateShaderProgramvEXT(type, count, strings);
+    return glCreateShaderProgramvEXT(type, count, strings);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSeparateShaderObjects_nglDeleteProgramPipelinesEXT__IJ(JNIEnv *__env, jclass clazz, jint n, jlong pipelinesAddress) {
@@ -104,7 +104,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSeparateShaderObjects_nglGetPr
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_EXTSeparateShaderObjects_glIsProgramPipelineEXT(JNIEnv *__env, jclass clazz, jint pipeline) {
     glIsProgramPipelineEXTPROC glIsProgramPipelineEXT = (glIsProgramPipelineEXTPROC)tlsGetFunction(500);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsProgramPipelineEXT(pipeline);
+    return glIsProgramPipelineEXT(pipeline);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTSeparateShaderObjects_glProgramParameteriEXT(JNIEnv *__env, jclass clazz, jint program, jint pname, jint value) {

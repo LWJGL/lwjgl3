@@ -7287,7 +7287,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPI(dstDevice, uc, N, __functionAddress);
+        return callPUPI(dstDevice, uc, N, __functionAddress);
     }
 
     // --- [ cuMemsetD16 ] ---
@@ -7307,7 +7307,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPI(dstDevice, us, N, __functionAddress);
+        return callPCPI(dstDevice, us, N, __functionAddress);
     }
 
     // --- [ cuMemsetD32 ] ---
@@ -7351,7 +7351,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPI(dstDevice, dstPitch, uc, Width, Height, __functionAddress);
+        return callPPUPPI(dstDevice, dstPitch, uc, Width, Height, __functionAddress);
     }
 
     // --- [ cuMemsetD2D16 ] ---
@@ -7375,7 +7375,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPI(dstDevice, dstPitch, us, Width, Height, __functionAddress);
+        return callPPCPPI(dstDevice, dstPitch, us, Width, Height, __functionAddress);
     }
 
     // --- [ cuMemsetD2D32 ] ---
@@ -7420,7 +7420,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPI(dstDevice, uc, N, hStream, __functionAddress);
+        return callPUPPI(dstDevice, uc, N, hStream, __functionAddress);
     }
 
     // --- [ cuMemsetD16Async ] ---
@@ -7441,7 +7441,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPI(dstDevice, us, N, hStream, __functionAddress);
+        return callPCPPI(dstDevice, us, N, hStream, __functionAddress);
     }
 
     // --- [ cuMemsetD32Async ] ---
@@ -7487,7 +7487,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPPI(dstDevice, dstPitch, uc, Width, Height, hStream, __functionAddress);
+        return callPPUPPPI(dstDevice, dstPitch, uc, Width, Height, hStream, __functionAddress);
     }
 
     // --- [ cuMemsetD2D16Async ] ---
@@ -7512,7 +7512,7 @@ public class CU {
         if (CHECKS) {
             check(dstDevice);
         }
-        return callPPPPPI(dstDevice, dstPitch, us, Width, Height, hStream, __functionAddress);
+        return callPPCPPPI(dstDevice, dstPitch, us, Width, Height, hStream, __functionAddress);
     }
 
     // --- [ cuMemsetD2D32Async ] ---

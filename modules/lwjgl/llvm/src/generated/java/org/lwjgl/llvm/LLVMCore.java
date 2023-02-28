@@ -5519,7 +5519,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(IntTy);
         }
-        return invokePPP(IntTy, Text, Radix, __functionAddress);
+        return invokePPUP(IntTy, Text, Radix, __functionAddress);
     }
 
     /**
@@ -5560,7 +5560,7 @@ public class LLVMCore {
         if (CHECKS) {
             check(IntTy);
         }
-        return invokePPP(IntTy, Text, SLen, Radix, __functionAddress);
+        return invokePPUP(IntTy, Text, SLen, Radix, __functionAddress);
     }
 
     /** Obtain a constant value for an integer parsed from a string with specified length. */

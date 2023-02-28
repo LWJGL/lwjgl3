@@ -1144,7 +1144,7 @@ public class LLVMOrc {
     /** Unsafe version of: {@link #LLVMOrcCreateDynamicLibrarySearchGeneratorForProcess OrcCreateDynamicLibrarySearchGeneratorForProcess} */
     public static long nLLVMOrcCreateDynamicLibrarySearchGeneratorForProcess(long Result, byte GlobalPrefx, long Filter, long FilterCtx) {
         long __functionAddress = Functions.OrcCreateDynamicLibrarySearchGeneratorForProcess;
-        return invokePPPP(Result, GlobalPrefx, Filter, FilterCtx, __functionAddress);
+        return invokePBPPP(Result, GlobalPrefx, Filter, FilterCtx, __functionAddress);
     }
 
     /**

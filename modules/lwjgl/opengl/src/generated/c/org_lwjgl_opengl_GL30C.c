@@ -349,7 +349,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL30C_nglGetFragDataLocation(JNIEnv
     glGetFragDataLocationPROC glGetFragDataLocation = (glGetFragDataLocationPROC)tlsGetFunction(589);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetFragDataLocation(program, name);
+    return glGetFragDataLocation(program, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL30C_glBeginConditionalRender(JNIEnv *__env, jclass clazz, jint id, jint mode) {
@@ -385,7 +385,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL30C_glClampColor(JNIEnv *__env, j
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL30C_glIsRenderbuffer(JNIEnv *__env, jclass clazz, jint renderbuffer) {
     glIsRenderbufferPROC glIsRenderbuffer = (glIsRenderbufferPROC)tlsGetFunction(595);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsRenderbuffer(renderbuffer);
+    return glIsRenderbuffer(renderbuffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL30C_glBindRenderbuffer(JNIEnv *__env, jclass clazz, jint target, jint renderbuffer) {
@@ -430,7 +430,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL30C_nglGetRenderbufferParameteriv
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL30C_glIsFramebuffer(JNIEnv *__env, jclass clazz, jint framebuffer) {
     glIsFramebufferPROC glIsFramebuffer = (glIsFramebufferPROC)tlsGetFunction(602);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsFramebuffer(framebuffer);
+    return glIsFramebuffer(framebuffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL30C_glBindFramebuffer(JNIEnv *__env, jclass clazz, jint target, jint framebuffer) {
@@ -456,7 +456,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL30C_nglGenFramebuffers__IJ(JNIEnv
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL30C_glCheckFramebufferStatus(JNIEnv *__env, jclass clazz, jint target) {
     glCheckFramebufferStatusPROC glCheckFramebufferStatus = (glCheckFramebufferStatusPROC)tlsGetFunction(606);
     UNUSED_PARAM(clazz)
-    return (jint)glCheckFramebufferStatus(target);
+    return glCheckFramebufferStatus(target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL30C_glFramebufferTexture1D(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint textarget, jint texture, jint level) {
@@ -571,7 +571,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL30C_glDisablei(JNIEnv *__env, jcl
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL30C_glIsEnabledi(JNIEnv *__env, jclass clazz, jint target, jint index) {
     glIsEnablediPROC glIsEnabledi = (glIsEnablediPROC)tlsGetFunction(624);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsEnabledi(target, index);
+    return glIsEnabledi(target, index);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL30C_glBindBufferRange(JNIEnv *__env, jclass clazz, jint target, jint index, jint buffer, jlong offset, jlong size) {
@@ -638,7 +638,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL30C_nglGenVertexArrays__IJ(JNIEnv
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL30C_glIsVertexArray(JNIEnv *__env, jclass clazz, jint array) {
     glIsVertexArrayPROC glIsVertexArray = (glIsVertexArrayPROC)tlsGetFunction(634);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsVertexArray(array);
+    return glIsVertexArray(array);
 }
 
 EXTERN_C_EXIT

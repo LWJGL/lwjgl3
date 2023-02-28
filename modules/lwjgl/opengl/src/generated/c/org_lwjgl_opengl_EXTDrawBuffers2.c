@@ -50,7 +50,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDrawBuffers2_glDisableIndexedEXT
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_EXTDrawBuffers2_glIsEnabledIndexedEXT(JNIEnv *__env, jclass clazz, jint target, jint index) {
     glIsEnabledIndexedEXTPROC glIsEnabledIndexedEXT = (glIsEnabledIndexedEXTPROC)tlsGetFunction(1594);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsEnabledIndexedEXT(target, index);
+    return glIsEnabledIndexedEXT(target, index);
 }
 
 EXTERN_C_EXIT

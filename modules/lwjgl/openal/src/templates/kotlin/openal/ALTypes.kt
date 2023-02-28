@@ -12,7 +12,7 @@ val ALvoid = "ALvoid".void
 
 // numeric
 
-val ALboolean = IntegerType("ALboolean", PrimitiveMapping.BOOLEAN)
+val ALboolean = PrimitiveType("ALboolean", PrimitiveMapping.BOOLEAN)
 val ALint = IntegerType("ALint", PrimitiveMapping.INT)
 val ALuint = IntegerType("ALuint", PrimitiveMapping.INT, unsigned = true)
 val ALfloat = PrimitiveType("ALfloat", PrimitiveMapping.FLOAT)

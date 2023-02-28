@@ -3365,7 +3365,7 @@ public class FreeType {
 
     public static short nFT_Get_FSType_Flags(long face) {
         long __functionAddress = Functions.Get_FSType_Flags;
-        return invokePS(face, __functionAddress);
+        return invokePC(face, __functionAddress);
     }
 
     @NativeType("FT_UShort")
@@ -4053,7 +4053,7 @@ public class FreeType {
 
     public static int nFT_Palette_Select(long face, short palette_index, long apalette) {
         long __functionAddress = Functions.Palette_Select;
-        return invokePPI(face, palette_index, apalette, __functionAddress);
+        return invokePCPI(face, palette_index, apalette, __functionAddress);
     }
 
     @NativeType("FT_Error")

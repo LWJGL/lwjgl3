@@ -1215,7 +1215,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_attachment_init attachment_init} */
     public static void nbgfx_attachment_init(long _this, short _handle, int _access, short _layer, short _numLayers, short _mip, byte _resolve) {
         long __functionAddress = Functions.attachment_init;
-        invokePV(_this, _handle, _access, _layer, _numLayers, _mip, _resolve, __functionAddress);
+        invokePCCCCUV(_this, _handle, _access, _layer, _numLayers, _mip, _resolve, __functionAddress);
     }
 
     /**
@@ -1260,7 +1260,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_vertex_layout_add vertex_layout_add} */
     public static long nbgfx_vertex_layout_add(long _this, int _attrib, byte _num, int _type, boolean _normalized, boolean _asInt) {
         long __functionAddress = Functions.vertex_layout_add;
-        return invokePP(_this, _attrib, _num, _type, _normalized, _asInt, __functionAddress);
+        return invokePUP(_this, _attrib, _num, _type, _normalized, _asInt, __functionAddress);
     }
 
     /**
@@ -1340,7 +1340,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_vertex_layout_skip vertex_layout_skip} */
     public static long nbgfx_vertex_layout_skip(long _this, byte _num) {
         long __functionAddress = Functions.vertex_layout_skip;
-        return invokePP(_this, _num, __functionAddress);
+        return invokePUP(_this, _num, __functionAddress);
     }
 
     /**
@@ -1647,7 +1647,7 @@ public class BGFX {
      */
     public static byte nbgfx_get_supported_renderers(byte _max, long _enum) {
         long __functionAddress = Functions.get_supported_renderers;
-        return invokePB(_max, _enum, __functionAddress);
+        return invokeUPU(_max, _enum, __functionAddress);
     }
 
     /**
@@ -2183,7 +2183,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_dbg_text_clear dbg_text_clear} */
     public static void nbgfx_dbg_text_clear(byte _attr, boolean _small) {
         long __functionAddress = Functions.dbg_text_clear;
-        invokeV(_attr, _small, __functionAddress);
+        invokeUV(_attr, _small, __functionAddress);
     }
 
     /**
@@ -2201,7 +2201,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_dbg_text_printf dbg_text_printf} */
     public static void nbgfx_dbg_text_printf(short _x, short _y, byte _attr, long _format) {
         long __functionAddress = Functions.dbg_text_printf;
-        invokePV(_x, _y, _attr, _format, __functionAddress);
+        invokeCCUPV(_x, _y, _attr, _format, __functionAddress);
     }
 
     /**
@@ -2252,7 +2252,7 @@ public class BGFX {
         if (CHECKS) {
             check(_argList);
         }
-        invokePPV(_x, _y, _attr, _format, _argList, __functionAddress);
+        invokeCCUPPV(_x, _y, _attr, _format, _argList, __functionAddress);
     }
 
     /**
@@ -2296,7 +2296,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_dbg_text_image dbg_text_image} */
     public static void nbgfx_dbg_text_image(short _x, short _y, short _width, short _height, long _data, short _pitch) {
         long __functionAddress = Functions.dbg_text_image;
-        invokePV(_x, _y, _width, _height, _data, _pitch, __functionAddress);
+        invokeCCCCPCV(_x, _y, _width, _height, _data, _pitch, __functionAddress);
     }
 
     /**
@@ -2324,7 +2324,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        return invokePS(_mem, _flags, __functionAddress);
+        return invokePCC(_mem, _flags, __functionAddress);
     }
 
     /**
@@ -2347,7 +2347,7 @@ public class BGFX {
      */
     public static void nbgfx_set_index_buffer_name(short _handle, long _name, int _len) {
         long __functionAddress = Functions.set_index_buffer_name;
-        invokePV(_handle, _name, _len, __functionAddress);
+        invokeCPV(_handle, _name, _len, __functionAddress);
     }
 
     /**
@@ -2386,7 +2386,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_index_buffer(@NativeType("bgfx_index_buffer_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_index_buffer;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_create_vertex_layout ] ---
@@ -2394,7 +2394,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_create_vertex_layout create_vertex_layout} */
     public static short nbgfx_create_vertex_layout(long _layout) {
         long __functionAddress = Functions.create_vertex_layout;
-        return invokePS(_layout, __functionAddress);
+        return invokePC(_layout, __functionAddress);
     }
 
     /**
@@ -2416,7 +2416,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_vertex_layout(@NativeType("bgfx_vertex_layout_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_vertex_layout;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_create_vertex_buffer ] ---
@@ -2427,7 +2427,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        return invokePPS(_mem, _layout, _flags, __functionAddress);
+        return invokePPCC(_mem, _layout, _flags, __functionAddress);
     }
 
     /**
@@ -2451,7 +2451,7 @@ public class BGFX {
      */
     public static void nbgfx_set_vertex_buffer_name(short _handle, long _name, int _len) {
         long __functionAddress = Functions.set_vertex_buffer_name;
-        invokePV(_handle, _name, _len, __functionAddress);
+        invokeCPV(_handle, _name, _len, __functionAddress);
     }
 
     /**
@@ -2490,7 +2490,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_vertex_buffer(@NativeType("bgfx_vertex_buffer_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_vertex_buffer;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_create_dynamic_index_buffer ] ---
@@ -2498,7 +2498,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_create_dynamic_index_buffer create_dynamic_index_buffer} */
     public static short nbgfx_create_dynamic_index_buffer(int _num, short _flags) {
         long __functionAddress = Functions.create_dynamic_index_buffer;
-        return invokeS(_num, _flags, __functionAddress);
+        return invokeCC(_num, _flags, __functionAddress);
     }
 
     /**
@@ -2520,7 +2520,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        return invokePS(_mem, _flags, __functionAddress);
+        return invokePCC(_mem, _flags, __functionAddress);
     }
 
     /**
@@ -2542,7 +2542,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        invokePV(_handle, _startIndex, _mem, __functionAddress);
+        invokeCPV(_handle, _startIndex, _mem, __functionAddress);
     }
 
     /**
@@ -2565,7 +2565,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_dynamic_index_buffer(@NativeType("bgfx_dynamic_index_buffer_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_dynamic_index_buffer;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_create_dynamic_vertex_buffer ] ---
@@ -2573,7 +2573,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_create_dynamic_vertex_buffer create_dynamic_vertex_buffer} */
     public static short nbgfx_create_dynamic_vertex_buffer(int _num, long _layout, short _flags) {
         long __functionAddress = Functions.create_dynamic_vertex_buffer;
-        return invokePS(_num, _layout, _flags, __functionAddress);
+        return invokePCC(_num, _layout, _flags, __functionAddress);
     }
 
     /**
@@ -2596,7 +2596,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        return invokePPS(_mem, _layout, _flags, __functionAddress);
+        return invokePPCC(_mem, _layout, _flags, __functionAddress);
     }
 
     /**
@@ -2619,7 +2619,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        invokePV(_handle, _startVertex, _mem, __functionAddress);
+        invokeCPV(_handle, _startVertex, _mem, __functionAddress);
     }
 
     /**
@@ -2642,7 +2642,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_dynamic_vertex_buffer(@NativeType("bgfx_dynamic_vertex_buffer_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_dynamic_vertex_buffer;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_get_avail_transient_index_buffer ] ---
@@ -2683,7 +2683,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_get_avail_instance_data_buffer get_avail_instance_data_buffer} */
     public static int nbgfx_get_avail_instance_data_buffer(int _num, short _stride) {
         long __functionAddress = Functions.get_avail_instance_data_buffer;
-        return invokeI(_num, _stride, __functionAddress);
+        return invokeCI(_num, _stride, __functionAddress);
     }
 
     /**
@@ -2763,7 +2763,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_alloc_instance_data_buffer alloc_instance_data_buffer} */
     public static void nbgfx_alloc_instance_data_buffer(long _idb, int _num, short _stride) {
         long __functionAddress = Functions.alloc_instance_data_buffer;
-        invokePV(_idb, _num, _stride, __functionAddress);
+        invokePCV(_idb, _num, _stride, __functionAddress);
     }
 
     /**
@@ -2787,7 +2787,7 @@ public class BGFX {
     @NativeType("bgfx_indirect_buffer_handle_t")
     public static short bgfx_create_indirect_buffer(@NativeType("uint32_t") int _num) {
         long __functionAddress = Functions.create_indirect_buffer;
-        return invokeS(_num, __functionAddress);
+        return invokeC(_num, __functionAddress);
     }
 
     // --- [ bgfx_destroy_indirect_buffer ] ---
@@ -2799,7 +2799,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_indirect_buffer(@NativeType("bgfx_indirect_buffer_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_indirect_buffer;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_create_shader ] ---
@@ -2810,7 +2810,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        return invokePS(_mem, __functionAddress);
+        return invokePC(_mem, __functionAddress);
     }
 
     /**
@@ -2832,7 +2832,7 @@ public class BGFX {
      */
     public static short nbgfx_get_shader_uniforms(short _handle, long _uniforms, short _max) {
         long __functionAddress = Functions.get_shader_uniforms;
-        return invokePS(_handle, _uniforms, _max, __functionAddress);
+        return invokeCPCC(_handle, _uniforms, _max, __functionAddress);
     }
 
     /**
@@ -2859,7 +2859,7 @@ public class BGFX {
      */
     public static void nbgfx_set_shader_name(short _handle, long _name, int _len) {
         long __functionAddress = Functions.set_shader_name;
-        invokePV(_handle, _name, _len, __functionAddress);
+        invokeCPV(_handle, _name, _len, __functionAddress);
     }
 
     /**
@@ -2898,7 +2898,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_shader(@NativeType("bgfx_shader_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_shader;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_create_program ] ---
@@ -2915,7 +2915,7 @@ public class BGFX {
     @NativeType("bgfx_program_handle_t")
     public static short bgfx_create_program(@NativeType("bgfx_shader_handle_t") short _vsh, @NativeType("bgfx_shader_handle_t") short _fsh, @NativeType("bool") boolean _destroyShaders) {
         long __functionAddress = Functions.create_program;
-        return invokeS(_vsh, _fsh, _destroyShaders, __functionAddress);
+        return invokeCCC(_vsh, _fsh, _destroyShaders, __functionAddress);
     }
 
     // --- [ bgfx_create_compute_program ] ---
@@ -2929,7 +2929,7 @@ public class BGFX {
     @NativeType("bgfx_program_handle_t")
     public static short bgfx_create_compute_program(@NativeType("bgfx_shader_handle_t") short _csh, @NativeType("bool") boolean _destroyShaders) {
         long __functionAddress = Functions.create_compute_program;
-        return invokeS(_csh, _destroyShaders, __functionAddress);
+        return invokeCC(_csh, _destroyShaders, __functionAddress);
     }
 
     // --- [ bgfx_destroy_program ] ---
@@ -2941,7 +2941,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_program(@NativeType("bgfx_program_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_program;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_is_texture_valid ] ---
@@ -2949,7 +2949,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_is_texture_valid is_texture_valid} */
     public static boolean nbgfx_is_texture_valid(short _depth, boolean _cubeMap, short _numLayers, int _format, long _flags) {
         long __functionAddress = Functions.is_texture_valid;
-        return invokeJZ(_depth, _cubeMap, _numLayers, _format, _flags, __functionAddress);
+        return invokeCCJZ(_depth, _cubeMap, _numLayers, _format, _flags, __functionAddress);
     }
 
     /**
@@ -2973,7 +2973,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_is_frame_buffer_valid is_frame_buffer_valid} */
     public static boolean nbgfx_is_frame_buffer_valid(byte _num, long _attachment) {
         long __functionAddress = Functions.is_frame_buffer_valid;
-        return invokePZ(_num, _attachment, __functionAddress);
+        return invokeUPZ(_num, _attachment, __functionAddress);
     }
 
     /**
@@ -2994,7 +2994,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_calc_texture_size calc_texture_size} */
     public static void nbgfx_calc_texture_size(long _info, short _width, short _height, short _depth, boolean _cubeMap, boolean _hasMips, short _numLayers, int _format) {
         long __functionAddress = Functions.calc_texture_size;
-        invokePV(_info, _width, _height, _depth, _cubeMap, _hasMips, _numLayers, _format, __functionAddress);
+        invokePCCCCV(_info, _width, _height, _depth, _cubeMap, _hasMips, _numLayers, _format, __functionAddress);
     }
 
     /**
@@ -3021,7 +3021,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        return invokePJPS(_mem, _flags, _skip, _info, __functionAddress);
+        return invokePJUPC(_mem, _flags, _skip, _info, __functionAddress);
     }
 
     /**
@@ -3045,7 +3045,7 @@ public class BGFX {
         if (CHECKS) {
             if (_mem != NULL) { BGFXMemory.validate(_mem); }
         }
-        return invokeJPS(_width, _height, _hasMips, _numLayers, _format, _flags, _mem, __functionAddress);
+        return invokeCCCJPC(_width, _height, _hasMips, _numLayers, _format, _flags, _mem, __functionAddress);
     }
 
     /**
@@ -3070,7 +3070,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_create_texture_2d_scaled create_texture_2d_scaled} */
     public static short nbgfx_create_texture_2d_scaled(int _ratio, boolean _hasMips, short _numLayers, int _format, long _flags) {
         long __functionAddress = Functions.create_texture_2d_scaled;
-        return invokeJS(_ratio, _hasMips, _numLayers, _format, _flags, __functionAddress);
+        return invokeCJC(_ratio, _hasMips, _numLayers, _format, _flags, __functionAddress);
     }
 
     /**
@@ -3095,7 +3095,7 @@ public class BGFX {
         if (CHECKS) {
             if (_mem != NULL) { BGFXMemory.validate(_mem); }
         }
-        return invokeJPS(_width, _height, _depth, _hasMips, _format, _flags, _mem, __functionAddress);
+        return invokeCCCJPC(_width, _height, _depth, _hasMips, _format, _flags, _mem, __functionAddress);
     }
 
     /**
@@ -3122,7 +3122,7 @@ public class BGFX {
         if (CHECKS) {
             if (_mem != NULL) { BGFXMemory.validate(_mem); }
         }
-        return invokeJPS(_size, _hasMips, _numLayers, _format, _flags, _mem, __functionAddress);
+        return invokeCCJPC(_size, _hasMips, _numLayers, _format, _flags, _mem, __functionAddress);
     }
 
     /**
@@ -3149,7 +3149,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        invokePV(_handle, _layer, _mip, _x, _y, _width, _height, _mem, _pitch, __functionAddress);
+        invokeCCUCCCCPCV(_handle, _layer, _mip, _x, _y, _width, _height, _mem, _pitch, __functionAddress);
     }
 
     /**
@@ -3179,7 +3179,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        invokePV(_handle, _mip, _x, _y, _z, _width, _height, _depth, _mem, __functionAddress);
+        invokeCUCCCCCCPV(_handle, _mip, _x, _y, _z, _width, _height, _depth, _mem, __functionAddress);
     }
 
     /**
@@ -3209,7 +3209,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXMemory.validate(_mem);
         }
-        invokePV(_handle, _layer, _side, _mip, _x, _y, _width, _height, _mem, _pitch, __functionAddress);
+        invokeCCUUCCCCPCV(_handle, _layer, _side, _mip, _x, _y, _width, _height, _mem, _pitch, __functionAddress);
     }
 
     /**
@@ -3257,7 +3257,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_read_texture read_texture} */
     public static int nbgfx_read_texture(short _handle, long _data, byte _mip) {
         long __functionAddress = Functions.read_texture;
-        return invokePI(_handle, _data, _mip, __functionAddress);
+        return invokeCPUI(_handle, _data, _mip, __functionAddress);
     }
 
     /**
@@ -3333,7 +3333,7 @@ public class BGFX {
      */
     public static void nbgfx_set_texture_name(short _handle, long _name, int _len) {
         long __functionAddress = Functions.set_texture_name;
-        invokePV(_handle, _name, _len, __functionAddress);
+        invokeCPV(_handle, _name, _len, __functionAddress);
     }
 
     /**
@@ -3378,7 +3378,7 @@ public class BGFX {
     @NativeType("void *")
     public static long bgfx_get_direct_access_ptr(@NativeType("bgfx_texture_handle_t") short _handle) {
         long __functionAddress = Functions.get_direct_access_ptr;
-        return invokeP(_handle, __functionAddress);
+        return invokeCP(_handle, __functionAddress);
     }
 
     // --- [ bgfx_destroy_texture ] ---
@@ -3390,7 +3390,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_texture(@NativeType("bgfx_texture_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_texture;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_create_frame_buffer ] ---
@@ -3398,7 +3398,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_create_frame_buffer create_frame_buffer} */
     public static short nbgfx_create_frame_buffer(short _width, short _height, int _format, long _textureFlags) {
         long __functionAddress = Functions.create_frame_buffer;
-        return invokeJS(_width, _height, _format, _textureFlags, __functionAddress);
+        return invokeCCJC(_width, _height, _format, _textureFlags, __functionAddress);
     }
 
     /**
@@ -3430,7 +3430,7 @@ public class BGFX {
     @NativeType("bgfx_frame_buffer_handle_t")
     public static short bgfx_create_frame_buffer_scaled(@NativeType("bgfx_backbuffer_ratio_t") int _ratio, @NativeType("bgfx_texture_format_t") int _format, @NativeType("uint64_t") long _textureFlags) {
         long __functionAddress = Functions.create_frame_buffer_scaled;
-        return invokeJS(_ratio, _format, _textureFlags, __functionAddress);
+        return invokeJC(_ratio, _format, _textureFlags, __functionAddress);
     }
 
     // --- [ bgfx_create_frame_buffer_from_handles ] ---
@@ -3442,7 +3442,7 @@ public class BGFX {
      */
     public static short nbgfx_create_frame_buffer_from_handles(byte _num, long _handles, boolean _destroyTextures) {
         long __functionAddress = Functions.create_frame_buffer_from_handles;
-        return invokePS(_num, _handles, _destroyTextures, __functionAddress);
+        return invokeUPC(_num, _handles, _destroyTextures, __functionAddress);
     }
 
     /**
@@ -3467,7 +3467,7 @@ public class BGFX {
      */
     public static short nbgfx_create_frame_buffer_from_attachment(byte _num, long _attachment, boolean _destroyTextures) {
         long __functionAddress = Functions.create_frame_buffer_from_attachment;
-        return invokePS(_num, _attachment, _destroyTextures, __functionAddress);
+        return invokeUPC(_num, _attachment, _destroyTextures, __functionAddress);
     }
 
     /**
@@ -3491,7 +3491,7 @@ public class BGFX {
         if (CHECKS) {
             check(_nwh);
         }
-        return invokePS(_nwh, _width, _height, _format, _depthFormat, __functionAddress);
+        return invokePCCC(_nwh, _width, _height, _format, _depthFormat, __functionAddress);
     }
 
     /**
@@ -3521,7 +3521,7 @@ public class BGFX {
      */
     public static void nbgfx_set_frame_buffer_name(short _handle, long _name, int _len) {
         long __functionAddress = Functions.set_frame_buffer_name;
-        invokePV(_handle, _name, _len, __functionAddress);
+        invokeCPV(_handle, _name, _len, __functionAddress);
     }
 
     /**
@@ -3556,7 +3556,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_get_texture get_texture} */
     public static short nbgfx_get_texture(short _handle, byte _attachment) {
         long __functionAddress = Functions.get_texture;
-        return invokeS(_handle, _attachment, __functionAddress);
+        return invokeCUC(_handle, _attachment, __functionAddress);
     }
 
     /**
@@ -3581,7 +3581,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_frame_buffer(@NativeType("bgfx_frame_buffer_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_frame_buffer;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_create_uniform ] ---
@@ -3589,7 +3589,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_create_uniform create_uniform} */
     public static short nbgfx_create_uniform(long _name, int _type, short _num) {
         long __functionAddress = Functions.create_uniform;
-        return invokePS(_name, _type, _num, __functionAddress);
+        return invokePCC(_name, _type, _num, __functionAddress);
     }
 
     /**
@@ -3677,7 +3677,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_get_uniform_info get_uniform_info} */
     public static void nbgfx_get_uniform_info(short _handle, long _info) {
         long __functionAddress = Functions.get_uniform_info;
-        invokePV(_handle, _info, __functionAddress);
+        invokeCPV(_handle, _info, __functionAddress);
     }
 
     /**
@@ -3699,7 +3699,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_uniform(@NativeType("bgfx_uniform_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_uniform;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_create_occlusion_query ] ---
@@ -3712,7 +3712,7 @@ public class BGFX {
     @NativeType("bgfx_occlusion_query_handle_t")
     public static short bgfx_create_occlusion_query() {
         long __functionAddress = Functions.create_occlusion_query;
-        return invokeS(__functionAddress);
+        return invokeC(__functionAddress);
     }
 
     // --- [ bgfx_get_result ] ---
@@ -3720,7 +3720,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_get_result get_result} */
     public static int nbgfx_get_result(short _handle, long _result) {
         long __functionAddress = Functions.get_result;
-        return invokePI(_handle, _result, __functionAddress);
+        return invokeCPI(_handle, _result, __functionAddress);
     }
 
     /**
@@ -3748,7 +3748,7 @@ public class BGFX {
      */
     public static void bgfx_destroy_occlusion_query(@NativeType("bgfx_occlusion_query_handle_t") short _handle) {
         long __functionAddress = Functions.destroy_occlusion_query;
-        invokeV(_handle, __functionAddress);
+        invokeCV(_handle, __functionAddress);
     }
 
     // --- [ bgfx_set_palette_color ] ---
@@ -3756,7 +3756,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_palette_color set_palette_color} */
     public static void nbgfx_set_palette_color(byte _index, long _rgba) {
         long __functionAddress = Functions.set_palette_color;
-        invokePV(_index, _rgba, __functionAddress);
+        invokeUPV(_index, _rgba, __functionAddress);
     }
 
     /**
@@ -3777,7 +3777,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_palette_color_rgba8 set_palette_color_rgba8} */
     public static void nbgfx_set_palette_color_rgba8(byte _index, int _rgba) {
         long __functionAddress = Functions.set_palette_color_rgba8;
-        invokeV(_index, _rgba, __functionAddress);
+        invokeUV(_index, _rgba, __functionAddress);
     }
 
     /**
@@ -3795,7 +3795,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_view_name set_view_name} */
     public static void nbgfx_set_view_name(short _id, long _name) {
         long __functionAddress = Functions.set_view_name;
-        invokePV(_id, _name, __functionAddress);
+        invokeCPV(_id, _name, __functionAddress);
     }
 
     /**
@@ -3851,7 +3851,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_view_rect set_view_rect} */
     public static void nbgfx_set_view_rect(short _id, short _x, short _y, short _width, short _height) {
         long __functionAddress = Functions.set_view_rect;
-        invokeV(_id, _x, _y, _width, _height, __functionAddress);
+        invokeCCCCCV(_id, _x, _y, _width, _height, __functionAddress);
     }
 
     /**
@@ -3872,7 +3872,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_view_rect_ratio set_view_rect_ratio} */
     public static void nbgfx_set_view_rect_ratio(short _id, short _x, short _y, int _ratio) {
         long __functionAddress = Functions.set_view_rect_ratio;
-        invokeV(_id, _x, _y, _ratio, __functionAddress);
+        invokeCCCV(_id, _x, _y, _ratio, __functionAddress);
     }
 
     /**
@@ -3892,7 +3892,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_view_scissor set_view_scissor} */
     public static void nbgfx_set_view_scissor(short _id, short _x, short _y, short _width, short _height) {
         long __functionAddress = Functions.set_view_scissor;
-        invokeV(_id, _x, _y, _width, _height, __functionAddress);
+        invokeCCCCCV(_id, _x, _y, _width, _height, __functionAddress);
     }
 
     /**
@@ -3914,7 +3914,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_view_clear set_view_clear} */
     public static void nbgfx_set_view_clear(short _id, short _flags, int _rgba, float _depth, byte _stencil) {
         long __functionAddress = Functions.set_view_clear;
-        invokeV(_id, _flags, _rgba, _depth, _stencil, __functionAddress);
+        invokeCCUV(_id, _flags, _rgba, _depth, _stencil, __functionAddress);
     }
 
     /**
@@ -3935,7 +3935,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_view_clear_mrt set_view_clear_mrt} */
     public static void nbgfx_set_view_clear_mrt(short _id, short _flags, float _depth, byte _stencil, byte _0, byte _1, byte _2, byte _3, byte _4, byte _5, byte _6, byte _7) {
         long __functionAddress = Functions.set_view_clear_mrt;
-        invokeV(_id, _flags, _depth, _stencil, _0, _1, _2, _3, _4, _5, _6, _7, __functionAddress);
+        invokeCCUUUUUUUUUV(_id, _flags, _depth, _stencil, _0, _1, _2, _3, _4, _5, _6, _7, __functionAddress);
     }
 
     /**
@@ -3963,7 +3963,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_view_mode set_view_mode} */
     public static void nbgfx_set_view_mode(short _id, int _mode) {
         long __functionAddress = Functions.set_view_mode;
-        invokeV(_id, _mode, __functionAddress);
+        invokeCV(_id, _mode, __functionAddress);
     }
 
     /**
@@ -3981,7 +3981,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_view_frame_buffer set_view_frame_buffer} */
     public static void nbgfx_set_view_frame_buffer(short _id, short _handle) {
         long __functionAddress = Functions.set_view_frame_buffer;
-        invokeV(_id, _handle, __functionAddress);
+        invokeCCV(_id, _handle, __functionAddress);
     }
 
     /**
@@ -4001,7 +4001,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_view_transform set_view_transform} */
     public static void nbgfx_set_view_transform(short _id, long _view, long _proj) {
         long __functionAddress = Functions.set_view_transform;
-        invokePPV(_id, _view, _proj, __functionAddress);
+        invokeCPPV(_id, _view, _proj, __functionAddress);
     }
 
     /**
@@ -4039,7 +4039,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_view_order set_view_order} */
     public static void nbgfx_set_view_order(short _id, short _num, long _order) {
         long __functionAddress = Functions.set_view_order;
-        invokePV(_id, _num, _order, __functionAddress);
+        invokeCCPV(_id, _num, _order, __functionAddress);
     }
 
     /**
@@ -4061,7 +4061,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_reset_view reset_view} */
     public static void nbgfx_reset_view(short _id) {
         long __functionAddress = Functions.reset_view;
-        invokeV(_id, __functionAddress);
+        invokeCV(_id, __functionAddress);
     }
 
     /**
@@ -4190,7 +4190,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _handle, _visible, __functionAddress);
+        invokePCV(_this, _handle, _visible, __functionAddress);
     }
 
     // --- [ bgfx_encoder_set_stencil ] ---
@@ -4218,7 +4218,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        return invokePS(_this, _x, _y, _width, _height, __functionAddress);
+        return invokePCCCCC(_this, _x, _y, _width, _height, __functionAddress);
     }
 
     /**
@@ -4245,7 +4245,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _cache, __functionAddress);
+        invokePCV(_this, _cache, __functionAddress);
     }
 
     /**
@@ -4270,7 +4270,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        return invokePPI(_this, _mtx, _num, __functionAddress);
+        return invokePPCI(_this, _mtx, _num, __functionAddress);
     }
 
     /**
@@ -4307,7 +4307,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _cache, _num, __functionAddress);
+        invokePCV(_this, _cache, _num, __functionAddress);
     }
 
     /**
@@ -4329,7 +4329,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        return invokePPI(_this, _transform, _num, __functionAddress);
+        return invokePPCI(_this, _transform, _num, __functionAddress);
     }
 
     /**
@@ -4356,7 +4356,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePPV(_this, _handle, _value, _num, __functionAddress);
+        invokePCPCV(_this, _handle, _value, _num, __functionAddress);
     }
 
     /**
@@ -4446,7 +4446,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _handle, _firstIndex, _numIndices, __functionAddress);
+        invokePCV(_this, _handle, _firstIndex, _numIndices, __functionAddress);
     }
 
     // --- [ bgfx_encoder_set_dynamic_index_buffer ] ---
@@ -4464,7 +4464,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _handle, _firstIndex, _numIndices, __functionAddress);
+        invokePCV(_this, _handle, _firstIndex, _numIndices, __functionAddress);
     }
 
     // --- [ bgfx_encoder_set_transient_index_buffer ] ---
@@ -4499,7 +4499,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stream, _handle, _startVertex, _numVertices, __functionAddress);
+        invokePUCV(_this, _stream, _handle, _startVertex, _numVertices, __functionAddress);
     }
 
     /**
@@ -4523,7 +4523,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stream, _handle, _startVertex, _numVertices, _layoutHandle, __functionAddress);
+        invokePUCCV(_this, _stream, _handle, _startVertex, _numVertices, _layoutHandle, __functionAddress);
     }
 
     /**
@@ -4548,7 +4548,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stream, _handle, _startVertex, _numVertices, __functionAddress);
+        invokePUCV(_this, _stream, _handle, _startVertex, _numVertices, __functionAddress);
     }
 
     /**
@@ -4572,7 +4572,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stream, _handle, _startVertex, _numVertices, _layoutHandle, __functionAddress);
+        invokePUCCV(_this, _stream, _handle, _startVertex, _numVertices, _layoutHandle, __functionAddress);
     }
 
     /**
@@ -4598,7 +4598,7 @@ public class BGFX {
             check(_this);
             BGFXTransientVertexBuffer.validate(_tvb);
         }
-        invokePPV(_this, _stream, _tvb, _startVertex, _numVertices, __functionAddress);
+        invokePUPV(_this, _stream, _tvb, _startVertex, _numVertices, __functionAddress);
     }
 
     /**
@@ -4623,7 +4623,7 @@ public class BGFX {
             check(_this);
             BGFXTransientVertexBuffer.validate(_tvb);
         }
-        invokePPV(_this, _stream, _tvb, _startVertex, _numVertices, _layoutHandle, __functionAddress);
+        invokePUPCV(_this, _stream, _tvb, _startVertex, _numVertices, _layoutHandle, __functionAddress);
     }
 
     /**
@@ -4697,7 +4697,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _handle, _start, _num, __functionAddress);
+        invokePCV(_this, _handle, _start, _num, __functionAddress);
     }
 
     // --- [ bgfx_encoder_set_instance_data_from_dynamic_vertex_buffer ] ---
@@ -4715,7 +4715,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _handle, _start, _num, __functionAddress);
+        invokePCV(_this, _handle, _start, _num, __functionAddress);
     }
 
     // --- [ bgfx_encoder_set_instance_count ] ---
@@ -4744,7 +4744,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stage, _sampler, _handle, _flags, __functionAddress);
+        invokePUCCV(_this, _stage, _sampler, _handle, _flags, __functionAddress);
     }
 
     /**
@@ -4768,7 +4768,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, __functionAddress);
+        invokePCV(_this, _id, __functionAddress);
     }
 
     /**
@@ -4794,7 +4794,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _handle, _depth, _flags, __functionAddress);
+        invokePCCUV(_this, _id, _handle, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -4818,7 +4818,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _program, _occlusionQuery, _depth, _flags, __functionAddress);
+        invokePCCCUV(_this, _id, _program, _occlusionQuery, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -4843,7 +4843,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _handle, _indirectHandle, _start, _num, _depth, _flags, __functionAddress);
+        invokePCCCCCUV(_this, _id, _handle, _indirectHandle, _start, _num, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -4872,7 +4872,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _program, _indirectHandle, _start, _numHandle, _numIndex, _numMax, _depth, _flags, __functionAddress);
+        invokePCCCCCCUV(_this, _id, _program, _indirectHandle, _start, _numHandle, _numIndex, _numMax, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -4903,7 +4903,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stage, _handle, _access, __functionAddress);
+        invokePUCV(_this, _stage, _handle, _access, __functionAddress);
     }
 
     /**
@@ -4926,7 +4926,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stage, _handle, _access, __functionAddress);
+        invokePUCV(_this, _stage, _handle, _access, __functionAddress);
     }
 
     /**
@@ -4949,7 +4949,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stage, _handle, _access, __functionAddress);
+        invokePUCV(_this, _stage, _handle, _access, __functionAddress);
     }
 
     /**
@@ -4972,7 +4972,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stage, _handle, _access, __functionAddress);
+        invokePUCV(_this, _stage, _handle, _access, __functionAddress);
     }
 
     /**
@@ -4995,7 +4995,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stage, _handle, _access, __functionAddress);
+        invokePUCV(_this, _stage, _handle, _access, __functionAddress);
     }
 
     /**
@@ -5018,7 +5018,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _stage, _handle, _mip, _access, _format, __functionAddress);
+        invokePUCUV(_this, _stage, _handle, _mip, _access, _format, __functionAddress);
     }
 
     /**
@@ -5043,7 +5043,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _handle, _numX, _numY, _numZ, _flags, __functionAddress);
+        invokePCCUV(_this, _id, _handle, _numX, _numY, _numZ, _flags, __functionAddress);
     }
 
     /**
@@ -5069,7 +5069,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _handle, _indirectHandle, _start, _num, _flags, __functionAddress);
+        invokePCCCCCUV(_this, _id, _handle, _indirectHandle, _start, _num, _flags, __functionAddress);
     }
 
     /**
@@ -5095,7 +5095,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _flags, __functionAddress);
+        invokePUV(_this, _flags, __functionAddress);
     }
 
     /**
@@ -5116,7 +5116,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePV(_this, _id, _dst, _dstMip, _dstX, _dstY, _dstZ, _src, _srcMip, _srcX, _srcY, _srcZ, _width, _height, _depth, __functionAddress);
+        invokePCCUCCCCUCCCCCCV(_this, _id, _dst, _dstMip, _dstX, _dstY, _dstZ, _src, _srcMip, _srcX, _srcY, _srcZ, _width, _height, _depth, __functionAddress);
     }
 
     /**
@@ -5151,7 +5151,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_request_screen_shot request_screen_shot} */
     public static void nbgfx_request_screen_shot(short _handle, long _filePath) {
         long __functionAddress = Functions.request_screen_shot;
-        invokePV(_handle, _filePath, __functionAddress);
+        invokeCPV(_handle, _filePath, __functionAddress);
     }
 
     /**
@@ -5258,7 +5258,7 @@ public class BGFX {
      */
     public static void bgfx_set_condition(@NativeType("bgfx_occlusion_query_handle_t") short _handle, @NativeType("bool") boolean _visible) {
         long __functionAddress = Functions.set_condition;
-        invokeV(_handle, _visible, __functionAddress);
+        invokeCV(_handle, _visible, __functionAddress);
     }
 
     // --- [ bgfx_set_stencil ] ---
@@ -5279,7 +5279,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_scissor set_scissor} */
     public static short nbgfx_set_scissor(short _x, short _y, short _width, short _height) {
         long __functionAddress = Functions.set_scissor;
-        return invokeS(_x, _y, _width, _height, __functionAddress);
+        return invokeCCCCC(_x, _y, _width, _height, __functionAddress);
     }
 
     /**
@@ -5302,7 +5302,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_scissor_cached set_scissor_cached} */
     public static void nbgfx_set_scissor_cached(short _cache) {
         long __functionAddress = Functions.set_scissor_cached;
-        invokeV(_cache, __functionAddress);
+        invokeCV(_cache, __functionAddress);
     }
 
     /**
@@ -5323,7 +5323,7 @@ public class BGFX {
      */
     public static int nbgfx_set_transform(long _mtx, short _num) {
         long __functionAddress = Functions.set_transform;
-        return invokePI(_mtx, _num, __functionAddress);
+        return invokePCI(_mtx, _num, __functionAddress);
     }
 
     /**
@@ -5355,7 +5355,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_transform_cached set_transform_cached} */
     public static void nbgfx_set_transform_cached(int _cache, short _num) {
         long __functionAddress = Functions.set_transform_cached;
-        invokeV(_cache, _num, __functionAddress);
+        invokeCV(_cache, _num, __functionAddress);
     }
 
     /**
@@ -5373,7 +5373,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_alloc_transform alloc_transform} */
     public static int nbgfx_alloc_transform(long _transform, short _num) {
         long __functionAddress = Functions.alloc_transform;
-        return invokePI(_transform, _num, __functionAddress);
+        return invokePCI(_transform, _num, __functionAddress);
     }
 
     /**
@@ -5396,7 +5396,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_uniform set_uniform} */
     public static void nbgfx_set_uniform(short _handle, long _value, short _num) {
         long __functionAddress = Functions.set_uniform;
-        invokePV(_handle, _value, _num, __functionAddress);
+        invokeCPCV(_handle, _value, _num, __functionAddress);
     }
 
     /**
@@ -5476,7 +5476,7 @@ public class BGFX {
      */
     public static void bgfx_set_index_buffer(@NativeType("bgfx_index_buffer_handle_t") short _handle, @NativeType("uint32_t") int _firstIndex, @NativeType("uint32_t") int _numIndices) {
         long __functionAddress = Functions.set_index_buffer;
-        invokeV(_handle, _firstIndex, _numIndices, __functionAddress);
+        invokeCV(_handle, _firstIndex, _numIndices, __functionAddress);
     }
 
     // --- [ bgfx_set_dynamic_index_buffer ] ---
@@ -5490,7 +5490,7 @@ public class BGFX {
      */
     public static void bgfx_set_dynamic_index_buffer(@NativeType("bgfx_dynamic_index_buffer_handle_t") short _handle, @NativeType("uint32_t") int _firstIndex, @NativeType("uint32_t") int _numIndices) {
         long __functionAddress = Functions.set_dynamic_index_buffer;
-        invokeV(_handle, _firstIndex, _numIndices, __functionAddress);
+        invokeCV(_handle, _firstIndex, _numIndices, __functionAddress);
     }
 
     // --- [ bgfx_set_transient_index_buffer ] ---
@@ -5520,7 +5520,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_vertex_buffer set_vertex_buffer} */
     public static void nbgfx_set_vertex_buffer(byte _stream, short _handle, int _startVertex, int _numVertices) {
         long __functionAddress = Functions.set_vertex_buffer;
-        invokeV(_stream, _handle, _startVertex, _numVertices, __functionAddress);
+        invokeUCV(_stream, _handle, _startVertex, _numVertices, __functionAddress);
     }
 
     /**
@@ -5540,7 +5540,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_vertex_buffer_with_layout set_vertex_buffer_with_layout} */
     public static void nbgfx_set_vertex_buffer_with_layout(byte _stream, short _handle, int _startVertex, int _numVertices, short _layoutHandle) {
         long __functionAddress = Functions.set_vertex_buffer_with_layout;
-        invokeV(_stream, _handle, _startVertex, _numVertices, _layoutHandle, __functionAddress);
+        invokeUCCV(_stream, _handle, _startVertex, _numVertices, _layoutHandle, __functionAddress);
     }
 
     /**
@@ -5561,7 +5561,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_dynamic_vertex_buffer set_dynamic_vertex_buffer} */
     public static void nbgfx_set_dynamic_vertex_buffer(byte _stream, short _handle, int _startVertex, int _numVertices) {
         long __functionAddress = Functions.set_dynamic_vertex_buffer;
-        invokeV(_stream, _handle, _startVertex, _numVertices, __functionAddress);
+        invokeUCV(_stream, _handle, _startVertex, _numVertices, __functionAddress);
     }
 
     /**
@@ -5581,7 +5581,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_dynamic_vertex_buffer_with_layout set_dynamic_vertex_buffer_with_layout} */
     public static void nbgfx_set_dynamic_vertex_buffer_with_layout(byte _stream, short _handle, int _startVertex, int _numVertices, short _layoutHandle) {
         long __functionAddress = Functions.set_dynamic_vertex_buffer_with_layout;
-        invokeV(_stream, _handle, _startVertex, _numVertices, _layoutHandle, __functionAddress);
+        invokeUCCV(_stream, _handle, _startVertex, _numVertices, _layoutHandle, __functionAddress);
     }
 
     /**
@@ -5605,7 +5605,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXTransientVertexBuffer.validate(_tvb);
         }
-        invokePV(_stream, _tvb, _startVertex, _numVertices, __functionAddress);
+        invokeUPV(_stream, _tvb, _startVertex, _numVertices, __functionAddress);
     }
 
     /**
@@ -5628,7 +5628,7 @@ public class BGFX {
         if (CHECKS) {
             BGFXTransientVertexBuffer.validate(_tvb);
         }
-        invokePV(_stream, _tvb, _startVertex, _numVertices, _layoutHandle, __functionAddress);
+        invokeUPCV(_stream, _tvb, _startVertex, _numVertices, _layoutHandle, __functionAddress);
     }
 
     /**
@@ -5691,7 +5691,7 @@ public class BGFX {
      */
     public static void bgfx_set_instance_data_from_vertex_buffer(@NativeType("bgfx_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _start, @NativeType("uint32_t") int _num) {
         long __functionAddress = Functions.set_instance_data_from_vertex_buffer;
-        invokeV(_handle, _start, _num, __functionAddress);
+        invokeCV(_handle, _start, _num, __functionAddress);
     }
 
     // --- [ bgfx_set_instance_data_from_dynamic_vertex_buffer ] ---
@@ -5705,7 +5705,7 @@ public class BGFX {
      */
     public static void bgfx_set_instance_data_from_dynamic_vertex_buffer(@NativeType("bgfx_dynamic_vertex_buffer_handle_t") short _handle, @NativeType("uint32_t") int _start, @NativeType("uint32_t") int _num) {
         long __functionAddress = Functions.set_instance_data_from_dynamic_vertex_buffer;
-        invokeV(_handle, _start, _num, __functionAddress);
+        invokeCV(_handle, _start, _num, __functionAddress);
     }
 
     // --- [ bgfx_set_instance_count ] ---
@@ -5727,7 +5727,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_texture set_texture} */
     public static void nbgfx_set_texture(byte _stage, short _sampler, short _handle, int _flags) {
         long __functionAddress = Functions.set_texture;
-        invokeV(_stage, _sampler, _handle, _flags, __functionAddress);
+        invokeUCCV(_stage, _sampler, _handle, _flags, __functionAddress);
     }
 
     /**
@@ -5747,7 +5747,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_touch touch} */
     public static void nbgfx_touch(short _id) {
         long __functionAddress = Functions.touch;
-        invokeV(_id, __functionAddress);
+        invokeCV(_id, __functionAddress);
     }
 
     /**
@@ -5766,7 +5766,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_submit submit} */
     public static void nbgfx_submit(short _id, short _program, int _depth, byte _flags) {
         long __functionAddress = Functions.submit;
-        invokeV(_id, _program, _depth, _flags, __functionAddress);
+        invokeCCUV(_id, _program, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -5786,7 +5786,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_submit_occlusion_query submit_occlusion_query} */
     public static void nbgfx_submit_occlusion_query(short _id, short _program, short _occlusionQuery, int _depth, byte _flags) {
         long __functionAddress = Functions.submit_occlusion_query;
-        invokeV(_id, _program, _occlusionQuery, _depth, _flags, __functionAddress);
+        invokeCCCUV(_id, _program, _occlusionQuery, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -5807,7 +5807,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_submit_indirect submit_indirect} */
     public static void nbgfx_submit_indirect(short _id, short _program, short _indirectHandle, short _start, short _num, int _depth, byte _flags) {
         long __functionAddress = Functions.submit_indirect;
-        invokeV(_id, _program, _indirectHandle, _start, _num, _depth, _flags, __functionAddress);
+        invokeCCCCCUV(_id, _program, _indirectHandle, _start, _num, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -5832,7 +5832,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_submit_indirect_count submit_indirect_count} */
     public static void nbgfx_submit_indirect_count(short _id, short _program, short _indirectHandle, short _start, short _numHandle, int _numIndex, short _numMax, int _depth, byte _flags) {
         long __functionAddress = Functions.submit_indirect_count;
-        invokeV(_id, _program, _indirectHandle, _start, _numHandle, _numIndex, _numMax, _depth, _flags, __functionAddress);
+        invokeCCCCCCUV(_id, _program, _indirectHandle, _start, _numHandle, _numIndex, _numMax, _depth, _flags, __functionAddress);
     }
 
     /**
@@ -5859,7 +5859,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_compute_index_buffer set_compute_index_buffer} */
     public static void nbgfx_set_compute_index_buffer(byte _stage, short _handle, int _access) {
         long __functionAddress = Functions.set_compute_index_buffer;
-        invokeV(_stage, _handle, _access, __functionAddress);
+        invokeUCV(_stage, _handle, _access, __functionAddress);
     }
 
     /**
@@ -5878,7 +5878,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_compute_vertex_buffer set_compute_vertex_buffer} */
     public static void nbgfx_set_compute_vertex_buffer(byte _stage, short _handle, int _access) {
         long __functionAddress = Functions.set_compute_vertex_buffer;
-        invokeV(_stage, _handle, _access, __functionAddress);
+        invokeUCV(_stage, _handle, _access, __functionAddress);
     }
 
     /**
@@ -5897,7 +5897,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_compute_dynamic_index_buffer set_compute_dynamic_index_buffer} */
     public static void nbgfx_set_compute_dynamic_index_buffer(byte _stage, short _handle, int _access) {
         long __functionAddress = Functions.set_compute_dynamic_index_buffer;
-        invokeV(_stage, _handle, _access, __functionAddress);
+        invokeUCV(_stage, _handle, _access, __functionAddress);
     }
 
     /**
@@ -5916,7 +5916,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_compute_dynamic_vertex_buffer set_compute_dynamic_vertex_buffer} */
     public static void nbgfx_set_compute_dynamic_vertex_buffer(byte _stage, short _handle, int _access) {
         long __functionAddress = Functions.set_compute_dynamic_vertex_buffer;
-        invokeV(_stage, _handle, _access, __functionAddress);
+        invokeUCV(_stage, _handle, _access, __functionAddress);
     }
 
     /**
@@ -5935,7 +5935,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_compute_indirect_buffer set_compute_indirect_buffer} */
     public static void nbgfx_set_compute_indirect_buffer(byte _stage, short _handle, int _access) {
         long __functionAddress = Functions.set_compute_indirect_buffer;
-        invokeV(_stage, _handle, _access, __functionAddress);
+        invokeUCV(_stage, _handle, _access, __functionAddress);
     }
 
     /**
@@ -5954,7 +5954,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_set_image set_image} */
     public static void nbgfx_set_image(byte _stage, short _handle, byte _mip, int _access, int _format) {
         long __functionAddress = Functions.set_image;
-        invokeV(_stage, _handle, _mip, _access, _format, __functionAddress);
+        invokeUCUV(_stage, _handle, _mip, _access, _format, __functionAddress);
     }
 
     /**
@@ -5975,7 +5975,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_dispatch dispatch} */
     public static void nbgfx_dispatch(short _id, short _program, int _numX, int _numY, int _numZ, byte _flags) {
         long __functionAddress = Functions.dispatch;
-        invokeV(_id, _program, _numX, _numY, _numZ, _flags, __functionAddress);
+        invokeCCUV(_id, _program, _numX, _numY, _numZ, _flags, __functionAddress);
     }
 
     /**
@@ -5997,7 +5997,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_dispatch_indirect dispatch_indirect} */
     public static void nbgfx_dispatch_indirect(short _id, short _program, short _indirectHandle, short _start, short _num, byte _flags) {
         long __functionAddress = Functions.dispatch_indirect;
-        invokeV(_id, _program, _indirectHandle, _start, _num, _flags, __functionAddress);
+        invokeCCCCCUV(_id, _program, _indirectHandle, _start, _num, _flags, __functionAddress);
     }
 
     /**
@@ -6019,7 +6019,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_discard discard} */
     public static void nbgfx_discard(byte _flags) {
         long __functionAddress = Functions.discard;
-        invokeV(_flags, __functionAddress);
+        invokeUV(_flags, __functionAddress);
     }
 
     /**
@@ -6036,7 +6036,7 @@ public class BGFX {
     /** Unsafe version of: {@link #bgfx_blit blit} */
     public static void nbgfx_blit(short _id, short _dst, byte _dstMip, short _dstX, short _dstY, short _dstZ, short _src, byte _srcMip, short _srcX, short _srcY, short _srcZ, short _width, short _height, short _depth) {
         long __functionAddress = Functions.blit;
-        invokeV(_id, _dst, _dstMip, _dstX, _dstY, _dstZ, _src, _srcMip, _srcX, _srcY, _srcZ, _width, _height, _depth, __functionAddress);
+        invokeCCUCCCCUCCCCCCV(_id, _dst, _dstMip, _dstX, _dstY, _dstZ, _src, _srcMip, _srcX, _srcY, _srcZ, _width, _height, _depth, __functionAddress);
     }
 
     /**
@@ -6283,7 +6283,7 @@ public class BGFX {
     @NativeType("uint8_t")
     public static byte bgfx_get_supported_renderers(@NativeType("bgfx_renderer_type_t *") int[] _enum) {
         long __functionAddress = Functions.get_supported_renderers;
-        return invokePB((byte)_enum.length, _enum, __functionAddress);
+        return invokeUPU((byte)_enum.length, _enum, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_copy copy} */
@@ -6335,35 +6335,35 @@ public class BGFX {
     @NativeType("uint16_t")
     public static short bgfx_get_shader_uniforms(@NativeType("bgfx_shader_handle_t") short _handle, @NativeType("bgfx_uniform_handle_t *") short[] _uniforms) {
         long __functionAddress = Functions.get_shader_uniforms;
-        return invokePS(_handle, _uniforms, (short)_uniforms.length, __functionAddress);
+        return invokeCPCC(_handle, _uniforms, (short)_uniforms.length, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_read_texture read_texture} */
     @NativeType("uint32_t")
     public static int bgfx_read_texture(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("void *") short[] _data, @NativeType("uint8_t") int _mip) {
         long __functionAddress = Functions.read_texture;
-        return invokePI(_handle, _data, (byte)_mip, __functionAddress);
+        return invokeCPUI(_handle, _data, (byte)_mip, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_read_texture read_texture} */
     @NativeType("uint32_t")
     public static int bgfx_read_texture(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("void *") int[] _data, @NativeType("uint8_t") int _mip) {
         long __functionAddress = Functions.read_texture;
-        return invokePI(_handle, _data, (byte)_mip, __functionAddress);
+        return invokeCPUI(_handle, _data, (byte)_mip, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_read_texture read_texture} */
     @NativeType("uint32_t")
     public static int bgfx_read_texture(@NativeType("bgfx_texture_handle_t") short _handle, @NativeType("void *") float[] _data, @NativeType("uint8_t") int _mip) {
         long __functionAddress = Functions.read_texture;
-        return invokePI(_handle, _data, (byte)_mip, __functionAddress);
+        return invokeCPUI(_handle, _data, (byte)_mip, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_create_frame_buffer_from_handles create_frame_buffer_from_handles} */
     @NativeType("bgfx_frame_buffer_handle_t")
     public static short bgfx_create_frame_buffer_from_handles(@NativeType("bgfx_texture_handle_t const *") short[] _handles, @NativeType("bool") boolean _destroyTextures) {
         long __functionAddress = Functions.create_frame_buffer_from_handles;
-        return invokePS((byte)_handles.length, _handles, _destroyTextures, __functionAddress);
+        return invokeUPC((byte)_handles.length, _handles, _destroyTextures, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_get_result get_result} */
@@ -6373,7 +6373,7 @@ public class BGFX {
         if (CHECKS) {
             checkSafe(_result, 1);
         }
-        return invokePI(_handle, _result, __functionAddress);
+        return invokeCPI(_handle, _result, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_set_palette_color set_palette_color} */
@@ -6382,7 +6382,7 @@ public class BGFX {
         if (CHECKS) {
             check(_rgba, 4);
         }
-        invokePV((byte)_index, _rgba, __functionAddress);
+        invokeUPV((byte)_index, _rgba, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_set_view_transform set_view_transform} */
@@ -6392,7 +6392,7 @@ public class BGFX {
             checkSafe(_view, 64 >> 2);
             checkSafe(_proj, 64 >> 2);
         }
-        invokePPV((short)_id, _view, _proj, __functionAddress);
+        invokeCPPV((short)_id, _view, _proj, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_set_view_order set_view_order} */
@@ -6401,7 +6401,7 @@ public class BGFX {
         if (CHECKS) {
             checkSafe(_order, _num);
         }
-        invokePV((short)_id, (short)_num, _order, __functionAddress);
+        invokeCCPV((short)_id, (short)_num, _order, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_encoder_set_transform encoder_set_transform} */
@@ -6411,7 +6411,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        return invokePPI(_this, _mtx, (short)(_mtx.length >> 4), __functionAddress);
+        return invokePPCI(_this, _mtx, (short)(_mtx.length >> 4), __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_encoder_set_uniform encoder_set_uniform} */
@@ -6420,7 +6420,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePPV(_this, _handle, _value, (short)_num, __functionAddress);
+        invokePCPCV(_this, _handle, _value, (short)_num, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_encoder_set_uniform encoder_set_uniform} */
@@ -6429,7 +6429,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePPV(_this, _handle, _value, (short)_num, __functionAddress);
+        invokePCPCV(_this, _handle, _value, (short)_num, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_encoder_set_uniform encoder_set_uniform} */
@@ -6438,7 +6438,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePPV(_this, _handle, _value, (short)_num, __functionAddress);
+        invokePCPCV(_this, _handle, _value, (short)_num, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_encoder_set_uniform encoder_set_uniform} */
@@ -6447,7 +6447,7 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePPV(_this, _handle, _value, (short)_num, __functionAddress);
+        invokePCPCV(_this, _handle, _value, (short)_num, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_encoder_set_uniform encoder_set_uniform} */
@@ -6456,44 +6456,44 @@ public class BGFX {
         if (CHECKS) {
             check(_this);
         }
-        invokePPV(_this, _handle, _value, (short)_num, __functionAddress);
+        invokePCPCV(_this, _handle, _value, (short)_num, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_set_transform set_transform} */
     @NativeType("uint32_t")
     public static int bgfx_set_transform(@NativeType("void const *") float[] _mtx) {
         long __functionAddress = Functions.set_transform;
-        return invokePI(_mtx, (short)(_mtx.length >> 4), __functionAddress);
+        return invokePCI(_mtx, (short)(_mtx.length >> 4), __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_set_uniform set_uniform} */
     public static void bgfx_set_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") short[] _value, @NativeType("uint16_t") int _num) {
         long __functionAddress = Functions.set_uniform;
-        invokePV(_handle, _value, (short)_num, __functionAddress);
+        invokeCPCV(_handle, _value, (short)_num, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_set_uniform set_uniform} */
     public static void bgfx_set_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") int[] _value, @NativeType("uint16_t") int _num) {
         long __functionAddress = Functions.set_uniform;
-        invokePV(_handle, _value, (short)_num, __functionAddress);
+        invokeCPCV(_handle, _value, (short)_num, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_set_uniform set_uniform} */
     public static void bgfx_set_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") long[] _value, @NativeType("uint16_t") int _num) {
         long __functionAddress = Functions.set_uniform;
-        invokePV(_handle, _value, (short)_num, __functionAddress);
+        invokeCPCV(_handle, _value, (short)_num, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_set_uniform set_uniform} */
     public static void bgfx_set_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") float[] _value, @NativeType("uint16_t") int _num) {
         long __functionAddress = Functions.set_uniform;
-        invokePV(_handle, _value, (short)_num, __functionAddress);
+        invokeCPCV(_handle, _value, (short)_num, __functionAddress);
     }
 
     /** Array version of: {@link #bgfx_set_uniform set_uniform} */
     public static void bgfx_set_uniform(@NativeType("bgfx_uniform_handle_t") short _handle, @NativeType("void const *") double[] _value, @NativeType("uint16_t") int _num) {
         long __functionAddress = Functions.set_uniform;
-        invokePV(_handle, _value, (short)_num, __functionAddress);
+        invokeCPCV(_handle, _value, (short)_num, __functionAddress);
     }
 
 }

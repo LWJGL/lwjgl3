@@ -26,7 +26,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_APPLESync_nglIsSyncAPPLE(JNIE
     glIsSyncAPPLEPROC glIsSyncAPPLE = (glIsSyncAPPLEPROC)tlsGetFunction(381);
     uintptr_t sync = (uintptr_t)syncAddress;
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsSyncAPPLE(sync);
+    return glIsSyncAPPLE(sync);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_APPLESync_nglDeleteSyncAPPLE(JNIEnv *__env, jclass clazz, jlong syncAddress) {
@@ -40,7 +40,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_APPLESync_nglClientWaitSyncAPPLE(
     glClientWaitSyncAPPLEPROC glClientWaitSyncAPPLE = (glClientWaitSyncAPPLEPROC)tlsGetFunction(383);
     uintptr_t sync = (uintptr_t)syncAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glClientWaitSyncAPPLE(sync, flags, timeout);
+    return glClientWaitSyncAPPLE(sync, flags, timeout);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_APPLESync_nglWaitSyncAPPLE(JNIEnv *__env, jclass clazz, jlong syncAddress, jint flags, jlong timeout) {

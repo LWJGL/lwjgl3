@@ -32,7 +32,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_openvr_VROverlay_nVROverlay_1GetTransformF
     HmdVector2_t *coordinatesInOverlay = (HmdVector2_t *)(uintptr_t)coordinatesInOverlayAddress;
     uintptr_t pmatTransform = (uintptr_t)pmatTransformAddress;
     UNUSED_PARAMS(__env, clazz)
-    return (jint)VROverlay_GetTransformForOverlayCoordinates(ulOverlayHandle, eTrackingOrigin, *coordinatesInOverlay, pmatTransform);
+    return VROverlay_GetTransformForOverlayCoordinates(ulOverlayHandle, eTrackingOrigin, *coordinatesInOverlay, pmatTransform);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_openvr_VROverlay_nVROverlay_1SetKeyboardPositionForOverlay(JNIEnv *__env, jclass clazz, jlong ulOverlayHandle, jlong avoidRectAddress, jlong __functionAddress) {

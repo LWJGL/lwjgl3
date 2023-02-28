@@ -43,7 +43,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_AMDDebugOutput_nglGetDebugMessageLo
     uintptr_t lengths = (uintptr_t)lengthsAddress;
     uintptr_t messageLog = (uintptr_t)messageLogAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetDebugMessageLogAMD(count, bufsize, categories, severities, ids, lengths, messageLog);
+    return glGetDebugMessageLogAMD(count, bufsize, categories, severities, ids, lengths, messageLog);
 }
 
 EXTERN_C_EXIT

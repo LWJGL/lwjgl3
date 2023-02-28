@@ -62,7 +62,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESDrawBuffersIndexed_glColorMask
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_OESDrawBuffersIndexed_glIsEnablediOES(JNIEnv *__env, jclass clazz, jint target, jint index) {
     glIsEnablediOESPROC glIsEnablediOES = (glIsEnablediOESPROC)tlsGetFunction(795);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsEnablediOES(target, index);
+    return glIsEnablediOES(target, index);
 }
 
 EXTERN_C_EXIT

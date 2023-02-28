@@ -982,7 +982,7 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_nglMapNamedBu
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_glUnmapNamedBufferEXT(JNIEnv *__env, jclass clazz, jint buffer) {
     glUnmapNamedBufferEXTPROC glUnmapNamedBufferEXT = (glUnmapNamedBufferEXTPROC)tlsGetFunction(1627);
     UNUSED_PARAM(clazz)
-    return (jboolean)glUnmapNamedBufferEXT(buffer);
+    return glUnmapNamedBufferEXT(buffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_nglGetNamedBufferParameterivEXT__IIJ(JNIEnv *__env, jclass clazz, jint buffer, jint pname, jlong paramsAddress) {
@@ -1375,7 +1375,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_glNamedRenderb
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_glCheckNamedFramebufferStatusEXT(JNIEnv *__env, jclass clazz, jint framebuffer, jint target) {
     glCheckNamedFramebufferStatusEXTPROC glCheckNamedFramebufferStatusEXT = (glCheckNamedFramebufferStatusEXTPROC)tlsGetFunction(1686);
     UNUSED_PARAM(clazz)
-    return (jint)glCheckNamedFramebufferStatusEXT(framebuffer, target);
+    return glCheckNamedFramebufferStatusEXT(framebuffer, target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTDirectStateAccess_glNamedFramebufferTexture1DEXT(JNIEnv *__env, jclass clazz, jint framebuffer, jint attachment, jint textarget, jint texture, jint level) {

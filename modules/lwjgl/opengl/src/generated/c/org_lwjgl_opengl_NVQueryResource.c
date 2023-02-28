@@ -14,7 +14,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_NVQueryResource_nglQueryResourceNV_
     glQueryResourceNVPROC glQueryResourceNV = (glQueryResourceNVPROC)tlsGetFunction(2117);
     uintptr_t buffer = (uintptr_t)bufferAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glQueryResourceNV(queryType, pname, bufSize, buffer);
+    return glQueryResourceNV(queryType, pname, bufSize, buffer);
 }
 
 EXTERN_C_EXIT

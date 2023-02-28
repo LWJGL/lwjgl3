@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTShaderPixelLocalStorage2_glFra
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_EXTShaderPixelLocalStorage2_glGetFramebufferPixelLocalStorageSizeEXT(JNIEnv *__env, jclass clazz, jint target) {
     glGetFramebufferPixelLocalStorageSizeEXTPROC glGetFramebufferPixelLocalStorageSizeEXT = (glGetFramebufferPixelLocalStorageSizeEXTPROC)tlsGetFunction(539);
     UNUSED_PARAM(clazz)
-    return (jint)glGetFramebufferPixelLocalStorageSizeEXT(target);
+    return glGetFramebufferPixelLocalStorageSizeEXT(target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTShaderPixelLocalStorage2_nglClearPixelLocalStorageuiEXT__IIJ(JNIEnv *__env, jclass clazz, jint offset, jint n, jlong valuesAddress) {

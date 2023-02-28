@@ -8,8 +8,8 @@ import org.lwjgl.generator.*
 
 val id = "id".handle // Opaque object pointer
 
-val Boolean = IntegerType("Boolean", PrimitiveMapping.BOOLEAN, unsigned = true)
-val BOOL = IntegerType("BOOL", PrimitiveMapping.BOOLEAN)
+val Boolean = PrimitiveType("Boolean", PrimitiveMapping.BOOLEAN)
+val BOOL = PrimitiveType("BOOL", PrimitiveMapping.BOOLEAN)
 
 val uint8_tASCII = CharType("uint8_t", CharMapping.ASCII)
 

@@ -29,7 +29,7 @@ EXTERN_C_ENTER
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_EXTFramebufferObject_glIsRenderbufferEXT(JNIEnv *__env, jclass clazz, jint renderbuffer) {
     glIsRenderbufferEXTPROC glIsRenderbufferEXT = (glIsRenderbufferEXTPROC)tlsGetFunction(1734);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsRenderbufferEXT(renderbuffer);
+    return glIsRenderbufferEXT(renderbuffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTFramebufferObject_glBindRenderbufferEXT(JNIEnv *__env, jclass clazz, jint target, jint renderbuffer) {
@@ -68,7 +68,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTFramebufferObject_nglGetRenderbu
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_EXTFramebufferObject_glIsFramebufferEXT(JNIEnv *__env, jclass clazz, jint framebuffer) {
     glIsFramebufferEXTPROC glIsFramebufferEXT = (glIsFramebufferEXTPROC)tlsGetFunction(1740);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsFramebufferEXT(framebuffer);
+    return glIsFramebufferEXT(framebuffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTFramebufferObject_glBindFramebufferEXT(JNIEnv *__env, jclass clazz, jint target, jint framebuffer) {
@@ -94,7 +94,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTFramebufferObject_nglGenFramebuf
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_EXTFramebufferObject_glCheckFramebufferStatusEXT(JNIEnv *__env, jclass clazz, jint target) {
     glCheckFramebufferStatusEXTPROC glCheckFramebufferStatusEXT = (glCheckFramebufferStatusEXTPROC)tlsGetFunction(1744);
     UNUSED_PARAM(clazz)
-    return (jint)glCheckFramebufferStatusEXT(target);
+    return glCheckFramebufferStatusEXT(target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTFramebufferObject_glFramebufferTexture1DEXT(JNIEnv *__env, jclass clazz, jint target, jint attachment, jint textarget, jint texture, jint level) {

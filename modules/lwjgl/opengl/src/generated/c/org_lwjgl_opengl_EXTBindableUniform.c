@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTBindableUniform_glUniformBufferE
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_EXTBindableUniform_glGetUniformBufferSizeEXT(JNIEnv *__env, jclass clazz, jint program, jint location) {
     glGetUniformBufferSizeEXTPROC glGetUniformBufferSizeEXT = (glGetUniformBufferSizeEXTPROC)tlsGetFunction(1494);
     UNUSED_PARAM(clazz)
-    return (jint)glGetUniformBufferSizeEXT(program, location);
+    return glGetUniformBufferSizeEXT(program, location);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_EXTBindableUniform_glGetUniformOffsetEXT(JNIEnv *__env, jclass clazz, jint program, jint location) {

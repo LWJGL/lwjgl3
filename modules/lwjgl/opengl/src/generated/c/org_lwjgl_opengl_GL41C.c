@@ -169,7 +169,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL41C_nglCreateShaderProgramv(JNIEn
     glCreateShaderProgramvPROC glCreateShaderProgramv = (glCreateShaderProgramvPROC)tlsGetFunction(780);
     uintptr_t strings = (uintptr_t)stringsAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glCreateShaderProgramv(type, count, strings);
+    return glCreateShaderProgramv(type, count, strings);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL41C_glBindProgramPipeline(JNIEnv *__env, jclass clazz, jint pipeline) {
@@ -195,7 +195,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL41C_nglGenProgramPipelines__IJ(JN
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL41C_glIsProgramPipeline(JNIEnv *__env, jclass clazz, jint pipeline) {
     glIsProgramPipelinePROC glIsProgramPipeline = (glIsProgramPipelinePROC)tlsGetFunction(784);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsProgramPipeline(pipeline);
+    return glIsProgramPipeline(pipeline);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL41C_nglGetProgramPipelineiv__IIJ(JNIEnv *__env, jclass clazz, jint pipeline, jint pname, jlong paramsAddress) {

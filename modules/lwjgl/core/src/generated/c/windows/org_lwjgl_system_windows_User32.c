@@ -6,7 +6,7 @@
 #include "common_tools.h"
 #include "WindowsLWJGL.h"
 
-typedef jshort (APIENTRY *RegisterClassExWPROC) (uintptr_t);
+typedef uint16_t (APIENTRY *RegisterClassExWPROC) (uintptr_t);
 typedef jint (APIENTRY *UnregisterClassWPROC) (uintptr_t, uintptr_t);
 typedef uintptr_t (APIENTRY *CreateWindowExWPROC) (jint, uintptr_t, uintptr_t, jint, jint, jint, jint, jint, uintptr_t, uintptr_t, uintptr_t, uintptr_t);
 typedef jint (APIENTRY *DestroyWindowPROC) (uintptr_t);
@@ -51,7 +51,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nUnregisterClass(JNI
     uintptr_t hInstance = (uintptr_t)hInstanceAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)UnregisterClassW(lpClassName, hInstance);
+    __result = UnregisterClassW(lpClassName, hInstance);
     saveLastError();
     return __result;
 }
@@ -76,7 +76,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nDestroyWindow(JNIEn
     uintptr_t hWnd = (uintptr_t)hWndAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)DestroyWindow(hWnd);
+    __result = DestroyWindow(hWnd);
     saveLastError();
     return __result;
 }
@@ -87,7 +87,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nSetWindowPos(JNIEnv
     uintptr_t hWndInsertAfter = (uintptr_t)hWndInsertAfterAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)SetWindowPos(hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags);
+    __result = SetWindowPos(hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags);
     saveLastError();
     return __result;
 }
@@ -98,7 +98,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nSetWindowText(JNIEn
     uintptr_t lpString = (uintptr_t)lpStringAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)SetWindowTextW(hWnd, lpString);
+    __result = SetWindowTextW(hWnd, lpString);
     saveLastError();
     return __result;
 }
@@ -109,7 +109,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nGetMessage(JNIEnv *
     uintptr_t hWnd = (uintptr_t)hWndAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)GetMessageW(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax);
+    __result = GetMessageW(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax);
     saveLastError();
     return __result;
 }
@@ -118,7 +118,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nWaitMessage(JNIEnv 
     WaitMessagePROC WaitMessage = (WaitMessagePROC)(uintptr_t)__functionAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)WaitMessage();
+    __result = WaitMessage();
     saveLastError();
     return __result;
 }
@@ -128,7 +128,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nPostMessage(JNIEnv 
     uintptr_t hWnd = (uintptr_t)hWndAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)PostMessageW(hWnd, Msg, (uintptr_t)wParam, (uintptr_t)lParam);
+    __result = PostMessageW(hWnd, Msg, (uintptr_t)wParam, (uintptr_t)lParam);
     saveLastError();
     return __result;
 }
@@ -138,7 +138,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nSendMessage(JNIEnv 
     uintptr_t hWnd = (uintptr_t)hWndAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)SendMessageW(hWnd, Msg, (uintptr_t)wParam, (uintptr_t)lParam);
+    __result = SendMessageW(hWnd, Msg, (uintptr_t)wParam, (uintptr_t)lParam);
     saveLastError();
     return __result;
 }
@@ -148,7 +148,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nAdjustWindowRectEx(
     uintptr_t lpRect = (uintptr_t)lpRectAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)AdjustWindowRectEx(lpRect, dwStyle, bMenu, dwExStyle);
+    __result = AdjustWindowRectEx(lpRect, dwStyle, bMenu, dwExStyle);
     saveLastError();
     return __result;
 }
@@ -159,7 +159,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nGetWindowRect(JNIEn
     uintptr_t lpRect = (uintptr_t)lpRectAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)GetWindowRect(hWnd, lpRect);
+    __result = GetWindowRect(hWnd, lpRect);
     saveLastError();
     return __result;
 }
@@ -169,7 +169,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nMoveWindow(JNIEnv *
     uintptr_t hWnd = (uintptr_t)hWndAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)MoveWindow(hWnd, X, Y, nWidth, nHeight, bRepaint);
+    __result = MoveWindow(hWnd, X, Y, nWidth, nHeight, bRepaint);
     saveLastError();
     return __result;
 }
@@ -180,7 +180,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nGetWindowPlacement(
     uintptr_t lpwndpl = (uintptr_t)lpwndplAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)GetWindowPlacement(hWnd, lpwndpl);
+    __result = GetWindowPlacement(hWnd, lpwndpl);
     saveLastError();
     return __result;
 }
@@ -191,7 +191,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nSetWindowPlacement(
     uintptr_t lpwndpl = (uintptr_t)lpwndplAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)SetWindowPlacement(hWnd, lpwndpl);
+    __result = SetWindowPlacement(hWnd, lpwndpl);
     saveLastError();
     return __result;
 }
@@ -241,7 +241,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nSetLayeredWindowAtt
     uintptr_t hwnd = (uintptr_t)hwndAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)SetLayeredWindowAttributes(hwnd, crKey, bAlpha, dwFlags);
+    __result = SetLayeredWindowAttributes(hwnd, crKey, bAlpha, dwFlags);
     saveLastError();
     return __result;
 }
@@ -273,7 +273,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nRegisterTouchWindow
     uintptr_t hWnd = (uintptr_t)hWndAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)RegisterTouchWindow(hWnd, ulFlags);
+    __result = RegisterTouchWindow(hWnd, ulFlags);
     saveLastError();
     return __result;
 }
@@ -283,7 +283,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nUnregisterTouchWind
     uintptr_t hWnd = (uintptr_t)hWndAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)UnregisterTouchWindow(hWnd);
+    __result = UnregisterTouchWindow(hWnd);
     saveLastError();
     return __result;
 }
@@ -294,7 +294,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nGetTouchInputInfo(J
     uintptr_t pInputs = (uintptr_t)pInputsAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)GetTouchInputInfo(hTouchInput, cInputs, pInputs, cbSize);
+    __result = GetTouchInputInfo(hTouchInput, cInputs, pInputs, cbSize);
     saveLastError();
     return __result;
 }
@@ -304,7 +304,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_User32_nCloseTouchInputHand
     uintptr_t hTouchInput = (uintptr_t)hTouchInputAddress;
     jint __result;
     UNUSED_PARAMS(__env, clazz)
-    __result = (jint)CloseTouchInputHandle(hTouchInput);
+    __result = CloseTouchInputHandle(hTouchInput);
     saveLastError();
     return __result;
 }

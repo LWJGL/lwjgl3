@@ -96,7 +96,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_NVViewportArray_glDisableiNV(JNIE
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_NVViewportArray_glIsEnablediNV(JNIEnv *__env, jclass clazz, jint target, jint index) {
     glIsEnablediNVPROC glIsEnablediNV = (glIsEnablediNVPROC)tlsGetFunction(785);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsEnablediNV(target, index);
+    return glIsEnablediNV(target, index);
 }
 
 EXTERN_C_EXIT

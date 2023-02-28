@@ -25,13 +25,13 @@ EXTERN_C_ENTER
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_NVBindlessTexture_glGetTextureHandleNV(JNIEnv *__env, jclass clazz, jint texture) {
     glGetTextureHandleNVPROC glGetTextureHandleNV = (glGetTextureHandleNVPROC)tlsGetFunction(1911);
     UNUSED_PARAM(clazz)
-    return (jlong)glGetTextureHandleNV(texture);
+    return glGetTextureHandleNV(texture);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_NVBindlessTexture_glGetTextureSamplerHandleNV(JNIEnv *__env, jclass clazz, jint texture, jint sampler) {
     glGetTextureSamplerHandleNVPROC glGetTextureSamplerHandleNV = (glGetTextureSamplerHandleNVPROC)tlsGetFunction(1912);
     UNUSED_PARAM(clazz)
-    return (jlong)glGetTextureSamplerHandleNV(texture, sampler);
+    return glGetTextureSamplerHandleNV(texture, sampler);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVBindlessTexture_glMakeTextureHandleResidentNV(JNIEnv *__env, jclass clazz, jlong handle) {
@@ -49,7 +49,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVBindlessTexture_glMakeTextureHand
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_NVBindlessTexture_glGetImageHandleNV(JNIEnv *__env, jclass clazz, jint texture, jint level, jboolean layered, jint layer, jint format) {
     glGetImageHandleNVPROC glGetImageHandleNV = (glGetImageHandleNVPROC)tlsGetFunction(1915);
     UNUSED_PARAM(clazz)
-    return (jlong)glGetImageHandleNV(texture, level, layered, layer, format);
+    return glGetImageHandleNV(texture, level, layered, layer, format);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVBindlessTexture_glMakeImageHandleResidentNV(JNIEnv *__env, jclass clazz, jlong handle, jint access) {
@@ -93,13 +93,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVBindlessTexture_nglProgramUniform
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_NVBindlessTexture_glIsTextureHandleResidentNV(JNIEnv *__env, jclass clazz, jlong handle) {
     glIsTextureHandleResidentNVPROC glIsTextureHandleResidentNV = (glIsTextureHandleResidentNVPROC)tlsGetFunction(1922);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsTextureHandleResidentNV(handle);
+    return glIsTextureHandleResidentNV(handle);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_NVBindlessTexture_glIsImageHandleResidentNV(JNIEnv *__env, jclass clazz, jlong handle) {
     glIsImageHandleResidentNVPROC glIsImageHandleResidentNV = (glIsImageHandleResidentNVPROC)tlsGetFunction(1923);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsImageHandleResidentNV(handle);
+    return glIsImageHandleResidentNV(handle);
 }
 
 EXTERN_C_EXIT

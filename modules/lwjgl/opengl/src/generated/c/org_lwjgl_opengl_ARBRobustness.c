@@ -32,7 +32,7 @@ EXTERN_C_ENTER
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_ARBRobustness_glGetGraphicsResetStatusARB(JNIEnv *__env, jclass clazz) {
     glGetGraphicsResetStatusARBPROC glGetGraphicsResetStatusARB = (glGetGraphicsResetStatusARBPROC)tlsGetFunction(1292);
     UNUSED_PARAM(clazz)
-    return (jint)glGetGraphicsResetStatusARB();
+    return glGetGraphicsResetStatusARB();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBRobustness_nglGetnMapdvARB__IIIJ(JNIEnv *__env, jclass clazz, jint target, jint query, jint bufSize, jlong dataAddress) {

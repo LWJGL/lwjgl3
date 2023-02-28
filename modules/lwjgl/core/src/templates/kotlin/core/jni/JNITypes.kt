@@ -6,7 +6,7 @@ package core.jni
 
 import org.lwjgl.generator.*
 
-val jboolean = IntegerType("jboolean", PrimitiveMapping.BOOLEAN)
+val jboolean = PrimitiveType("jboolean", PrimitiveMapping.BOOLEAN)
 val jbyte = IntegerType("jbyte", PrimitiveMapping.BYTE)
 val jchar = CharType("jchar", CharMapping.UTF16)
 val jshort = IntegerType("jshort", PrimitiveMapping.SHORT)

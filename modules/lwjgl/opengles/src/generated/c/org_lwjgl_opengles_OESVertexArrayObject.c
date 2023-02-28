@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_OESVertexArrayObject_nglGenVertex
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_OESVertexArrayObject_glIsVertexArrayOES(JNIEnv *__env, jclass clazz, jint array) {
     glIsVertexArrayOESPROC glIsVertexArrayOES = (glIsVertexArrayOESPROC)tlsGetFunction(832);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsVertexArrayOES(array);
+    return glIsVertexArrayOES(array);
 }
 
 EXTERN_C_EXIT

@@ -12,7 +12,7 @@ val ALCvoid = "ALCvoid".void
 
 // numeric
 
-val ALCboolean = IntegerType("ALCboolean", PrimitiveMapping.BOOLEAN)
+val ALCboolean = PrimitiveType("ALCboolean", PrimitiveMapping.BOOLEAN)
 val ALCint = IntegerType("ALCint", PrimitiveMapping.INT)
 val ALCuint = IntegerType("ALCuint", PrimitiveMapping.INT, unsigned = true)
 

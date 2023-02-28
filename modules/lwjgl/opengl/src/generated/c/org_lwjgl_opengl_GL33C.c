@@ -48,7 +48,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL33C_nglGetFragDataIndex(JNIEnv *_
     glGetFragDataIndexPROC glGetFragDataIndex = (glGetFragDataIndexPROC)tlsGetFunction(667);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetFragDataIndex(program, name);
+    return glGetFragDataIndex(program, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL33C_nglGenSamplers__IJ(JNIEnv *__env, jclass clazz, jint count, jlong samplersAddress) {
@@ -68,7 +68,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL33C_nglDeleteSamplers__IJ(JNIEnv 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL33C_glIsSampler(JNIEnv *__env, jclass clazz, jint sampler) {
     glIsSamplerPROC glIsSampler = (glIsSamplerPROC)tlsGetFunction(670);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsSampler(sampler);
+    return glIsSampler(sampler);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL33C_glBindSampler(JNIEnv *__env, jclass clazz, jint unit, jint sampler) {

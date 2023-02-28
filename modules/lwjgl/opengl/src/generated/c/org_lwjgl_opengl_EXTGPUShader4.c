@@ -214,7 +214,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_nglGetFragDataLocatio
     glGetFragDataLocationEXTPROC glGetFragDataLocationEXT = (glGetFragDataLocationEXTPROC)tlsGetFunction(1782);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetFragDataLocationEXT(program, name);
+    return glGetFragDataLocationEXT(program, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTGPUShader4_glUniform1uiEXT(JNIEnv *__env, jclass clazz, jint location, jint v0) {

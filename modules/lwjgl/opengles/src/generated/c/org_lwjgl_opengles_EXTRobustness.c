@@ -16,7 +16,7 @@ EXTERN_C_ENTER
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_EXTRobustness_glGetGraphicsResetStatusEXT(JNIEnv *__env, jclass clazz) {
     glGetGraphicsResetStatusEXTPROC glGetGraphicsResetStatusEXT = (glGetGraphicsResetStatusEXTPROC)tlsGetFunction(479);
     UNUSED_PARAM(clazz)
-    return (jint)glGetGraphicsResetStatusEXT();
+    return glGetGraphicsResetStatusEXT();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTRobustness_nglReadnPixelsEXT__IIIIIIIJ(JNIEnv *__env, jclass clazz, jint x, jint y, jint width, jint height, jint format, jint type, jint bufSize, jlong dataAddress) {

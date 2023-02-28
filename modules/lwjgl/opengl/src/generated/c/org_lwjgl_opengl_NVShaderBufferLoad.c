@@ -38,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glMakeBufferNonR
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glIsBufferResidentNV(JNIEnv *__env, jclass clazz, jint target) {
     glIsBufferResidentNVPROC glIsBufferResidentNV = (glIsBufferResidentNVPROC)tlsGetFunction(2128);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsBufferResidentNV(target);
+    return glIsBufferResidentNV(target);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glMakeNamedBufferResidentNV(JNIEnv *__env, jclass clazz, jint buffer, jint access) {
@@ -56,7 +56,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glMakeNamedBuffe
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_glIsNamedBufferResidentNV(JNIEnv *__env, jclass clazz, jint buffer) {
     glIsNamedBufferResidentNVPROC glIsNamedBufferResidentNV = (glIsNamedBufferResidentNVPROC)tlsGetFunction(2131);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsNamedBufferResidentNV(buffer);
+    return glIsNamedBufferResidentNV(buffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVShaderBufferLoad_nglGetBufferParameterui64vNV__IIJ(JNIEnv *__env, jclass clazz, jint target, jint pname, jlong paramsAddress) {

@@ -1021,7 +1021,7 @@ public class VRSystem {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(unControllerDeviceIndex, unAxisId, usDurationMicroSec, __functionAddress);
+        callCV(unControllerDeviceIndex, unAxisId, usDurationMicroSec, __functionAddress);
     }
 
     // --- [ VRSystem_GetButtonIdNameFromEnum ] ---

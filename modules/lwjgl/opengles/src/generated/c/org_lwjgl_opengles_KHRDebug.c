@@ -51,7 +51,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetDebugMessageLogKHR
     uintptr_t lengths = (uintptr_t)lengthsAddress;
     uintptr_t messageLog = (uintptr_t)messageLogAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetDebugMessageLogKHR(count, bufsize, sources, types, ids, severities, lengths, messageLog);
+    return glGetDebugMessageLogKHR(count, bufsize, sources, types, ids, severities, lengths, messageLog);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_KHRDebug_nglGetPointervKHR(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {

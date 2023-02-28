@@ -231,7 +231,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetDoublev__IJ(JNIEnv *__e
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_GL11C_glGetError(JNIEnv *__env, jclass clazz) {
     glGetErrorPROC glGetError = (glGetErrorPROC)tlsGetFunction(98);
     UNUSED_PARAM(clazz)
-    return (jint)glGetError();
+    return glGetError();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_nglGetPointerv(JNIEnv *__env, jclass clazz, jint pname, jlong paramsAddress) {
@@ -291,13 +291,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_glHint(JNIEnv *__env, jclass 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL11C_glIsEnabled(JNIEnv *__env, jclass clazz, jint cap) {
     glIsEnabledPROC glIsEnabled = (glIsEnabledPROC)tlsGetFunction(137);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsEnabled(cap);
+    return glIsEnabled(cap);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_GL11C_glIsTexture(JNIEnv *__env, jclass clazz, jint texture) {
     glIsTexturePROC glIsTexture = (glIsTexturePROC)tlsGetFunction(139);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsTexture(texture);
+    return glIsTexture(texture);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL11C_glLineWidth(JNIEnv *__env, jclass clazz, jfloat width) {

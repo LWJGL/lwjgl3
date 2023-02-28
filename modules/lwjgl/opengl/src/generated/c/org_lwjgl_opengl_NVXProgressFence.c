@@ -16,7 +16,7 @@ EXTERN_C_ENTER
 JNIEXPORT jint JNICALL Java_org_lwjgl_opengl_NVXProgressFence_glCreateProgressFenceNVX(JNIEnv *__env, jclass clazz) {
     glCreateProgressFenceNVXPROC glCreateProgressFenceNVX = (glCreateProgressFenceNVXPROC)tlsGetFunction(2217);
     UNUSED_PARAM(clazz)
-    return (jint)glCreateProgressFenceNVX();
+    return glCreateProgressFenceNVX();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVXProgressFence_nglSignalSemaphoreui64NVX__IIJJ(JNIEnv *__env, jclass clazz, jint signalGpu, jint fenceObjectCount, jlong semaphoreArrayAddress, jlong fenceValueArrayAddress) {

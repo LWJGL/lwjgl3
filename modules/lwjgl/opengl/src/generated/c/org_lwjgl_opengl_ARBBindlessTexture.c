@@ -28,13 +28,13 @@ EXTERN_C_ENTER
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glGetTextureHandleARB(JNIEnv *__env, jclass clazz, jint texture) {
     glGetTextureHandleARBPROC glGetTextureHandleARB = (glGetTextureHandleARBPROC)tlsGetFunction(1111);
     UNUSED_PARAM(clazz)
-    return (jlong)glGetTextureHandleARB(texture);
+    return glGetTextureHandleARB(texture);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glGetTextureSamplerHandleARB(JNIEnv *__env, jclass clazz, jint texture, jint sampler) {
     glGetTextureSamplerHandleARBPROC glGetTextureSamplerHandleARB = (glGetTextureSamplerHandleARBPROC)tlsGetFunction(1112);
     UNUSED_PARAM(clazz)
-    return (jlong)glGetTextureSamplerHandleARB(texture, sampler);
+    return glGetTextureSamplerHandleARB(texture, sampler);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glMakeTextureHandleResidentARB(JNIEnv *__env, jclass clazz, jlong handle) {
@@ -52,7 +52,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glMakeTextureHan
 JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glGetImageHandleARB(JNIEnv *__env, jclass clazz, jint texture, jint level, jboolean layered, jint layer, jint format) {
     glGetImageHandleARBPROC glGetImageHandleARB = (glGetImageHandleARBPROC)tlsGetFunction(1115);
     UNUSED_PARAM(clazz)
-    return (jlong)glGetImageHandleARB(texture, level, layered, layer, format);
+    return glGetImageHandleARB(texture, level, layered, layer, format);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glMakeImageHandleResidentARB(JNIEnv *__env, jclass clazz, jlong handle, jint access) {
@@ -96,13 +96,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_nglProgramUnifor
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glIsTextureHandleResidentARB(JNIEnv *__env, jclass clazz, jlong handle) {
     glIsTextureHandleResidentARBPROC glIsTextureHandleResidentARB = (glIsTextureHandleResidentARBPROC)tlsGetFunction(1122);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsTextureHandleResidentARB(handle);
+    return glIsTextureHandleResidentARB(handle);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glIsImageHandleResidentARB(JNIEnv *__env, jclass clazz, jlong handle) {
     glIsImageHandleResidentARBPROC glIsImageHandleResidentARB = (glIsImageHandleResidentARBPROC)tlsGetFunction(1123);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsImageHandleResidentARB(handle);
+    return glIsImageHandleResidentARB(handle);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_ARBBindlessTexture_glVertexAttribL1ui64ARB(JNIEnv *__env, jclass clazz, jint index, jlong x) {

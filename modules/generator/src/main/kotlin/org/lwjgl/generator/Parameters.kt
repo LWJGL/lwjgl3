@@ -39,14 +39,7 @@ class ReturnValue private constructor(override val nativeType: NativeType) : Qua
         get() = nativeType is StructType
 
     internal fun toNativeType(binding: APIBinding?) =
-        if (binding == null || isStructValue) {
-            nativeType.name
-        } else {
-            if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType<*>)
-                "uintptr_t"
-            else
-                nativeType.jniFunctionType
-        }
+        if (binding == null || isStructValue) nativeType.name else nativeType.abiType
 
 }
 
@@ -111,7 +104,7 @@ class Parameter(
         else if (nativeType.mapping === PrimitiveMapping.POINTER || nativeType is PointerType<*>)
             "uintptr_t"
         else
-            nativeType.jniFunctionType
+            nativeType.abiType
 
     override fun validate(modifier: ParameterModifier) = modifier.validate(this)
 

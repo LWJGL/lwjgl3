@@ -127,7 +127,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_GLES31_nglGetProgramResourceIndex
     glGetProgramResourceIndexPROC glGetProgramResourceIndex = (glGetProgramResourceIndexPROC)tlsGetFunction(253);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetProgramResourceIndex(program, programInterface, name);
+    return glGetProgramResourceIndex(program, programInterface, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES31_nglGetProgramResourceName__IIIIJJ(JNIEnv *__env, jclass clazz, jint program, jint programInterface, jint index, jint bufSize, jlong lengthAddress, jlong nameAddress) {
@@ -151,7 +151,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_GLES31_nglGetProgramResourceLocat
     glGetProgramResourceLocationPROC glGetProgramResourceLocation = (glGetProgramResourceLocationPROC)tlsGetFunction(256);
     uintptr_t name = (uintptr_t)nameAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glGetProgramResourceLocation(program, programInterface, name);
+    return glGetProgramResourceLocation(program, programInterface, name);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES31_glUseProgramStages(JNIEnv *__env, jclass clazz, jint pipeline, jint stages, jint program) {
@@ -170,7 +170,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_opengles_GLES31_nglCreateShaderProgramv(JN
     glCreateShaderProgramvPROC glCreateShaderProgramv = (glCreateShaderProgramvPROC)tlsGetFunction(259);
     uintptr_t strings = (uintptr_t)stringsAddress;
     UNUSED_PARAM(clazz)
-    return (jint)glCreateShaderProgramv(type, count, strings);
+    return glCreateShaderProgramv(type, count, strings);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES31_glBindProgramPipeline(JNIEnv *__env, jclass clazz, jint pipeline) {
@@ -196,7 +196,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES31_nglGenProgramPipelines__IJ
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_opengles_GLES31_glIsProgramPipeline(JNIEnv *__env, jclass clazz, jint pipeline) {
     glIsProgramPipelinePROC glIsProgramPipeline = (glIsProgramPipelinePROC)tlsGetFunction(263);
     UNUSED_PARAM(clazz)
-    return (jboolean)glIsProgramPipeline(pipeline);
+    return glIsProgramPipeline(pipeline);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_GLES31_nglGetProgramPipelineiv__IIJ(JNIEnv *__env, jclass clazz, jint pipeline, jint pname, jlong paramsAddress) {
