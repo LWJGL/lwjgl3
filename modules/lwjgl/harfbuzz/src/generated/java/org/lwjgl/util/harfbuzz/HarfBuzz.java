@@ -242,7 +242,7 @@ public class HarfBuzz {
             font_funcs_set_glyph_name_func            = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_name_func"),
             font_funcs_set_glyph_from_name_func       = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_glyph_from_name_func"),
             font_funcs_set_draw_glyph_func            = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_draw_glyph_func"),
-            hb_font_funcs_set_paint_glyph_func        = apiGetFunctionAddress(HARFBUZZ, "hb_hb_font_funcs_set_paint_glyph_func"),
+            font_funcs_set_paint_glyph_func           = apiGetFunctionAddress(HARFBUZZ, "hb_font_funcs_set_paint_glyph_func"),
             font_get_h_extents                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_h_extents"),
             font_get_v_extents                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_v_extents"),
             font_get_nominal_glyph                    = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_nominal_glyph"),
@@ -3905,11 +3905,11 @@ public class HarfBuzz {
         nhb_font_funcs_set_draw_glyph_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
     }
 
-    // --- [ hb_hb_font_funcs_set_paint_glyph_func ] ---
+    // --- [ hb_font_funcs_set_paint_glyph_func ] ---
 
-    /** Unsafe version of: {@link #hb_hb_font_funcs_set_paint_glyph_func hb_font_funcs_set_paint_glyph_func} */
-    public static void nhb_hb_font_funcs_set_paint_glyph_func(long ffuncs, long func, long user_data, long destroy) {
-        long __functionAddress = Functions.hb_font_funcs_set_paint_glyph_func;
+    /** Unsafe version of: {@link #hb_font_funcs_set_paint_glyph_func font_funcs_set_paint_glyph_func} */
+    public static void nhb_font_funcs_set_paint_glyph_func(long ffuncs, long func, long user_data, long destroy) {
+        long __functionAddress = Functions.font_funcs_set_paint_glyph_func;
         if (CHECKS) {
             check(ffuncs);
         }
@@ -3924,8 +3924,8 @@ public class HarfBuzz {
      * @param user_data data to pass to {@code func}
      * @param destroy   the function to call when {@code user_data} is not needed anymore
      */
-    public static void hb_hb_font_funcs_set_paint_glyph_func(@NativeType("hb_font_funcs_t *") long ffuncs, @NativeType("hb_font_paint_glyph_func_t") hb_font_paint_glyph_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
-        nhb_hb_font_funcs_set_paint_glyph_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
+    public static void hb_font_funcs_set_paint_glyph_func(@NativeType("hb_font_funcs_t *") long ffuncs, @NativeType("hb_font_paint_glyph_func_t") hb_font_paint_glyph_func_tI func, @NativeType("void *") long user_data, @Nullable @NativeType("hb_destroy_func_t") hb_destroy_func_tI destroy) {
+        nhb_font_funcs_set_paint_glyph_func(ffuncs, func.address(), user_data, memAddressSafe(destroy));
     }
 
     // --- [ hb_font_get_h_extents ] ---

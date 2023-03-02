@@ -2018,7 +2018,7 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
-        "hb_font_funcs_set_paint_glyph_func",
+        "font_funcs_set_paint_glyph_func",
         "Sets the implementation function for {@code hb_font_paint_glyph_func_t}.",
 
         hb_font_funcs_t.p("ffuncs", "a font-function structure"),
