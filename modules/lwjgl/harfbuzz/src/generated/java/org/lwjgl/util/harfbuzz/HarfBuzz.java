@@ -1482,9 +1482,9 @@ public class HarfBuzz {
 
     public static final int HB_VERSION_MINOR = 0;
 
-    public static final int HB_VERSION_MICRO = 0;
+    public static final int HB_VERSION_MICRO = 1;
 
-    public static final String HB_VERSION_STRING = "7.0.0";
+    public static final String HB_VERSION_STRING = "7.0.1";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
