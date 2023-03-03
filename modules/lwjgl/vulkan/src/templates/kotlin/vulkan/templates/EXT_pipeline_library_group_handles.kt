@@ -32,11 +32,7 @@ val EXT_pipeline_library_group_handles = "EXTPipelineLibraryGroupHandles".native
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.1</li>
-                <li>Requires {@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRPipelineLibrary VK_KHR_pipeline_library} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline} and {@link KHRPipelineLibrary VK_KHR_pipeline_library}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

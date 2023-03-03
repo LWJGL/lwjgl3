@@ -28,13 +28,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2} to be enabled for any device-level functionality</li>
-                <li>Requires {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} and {@link KHRSynchronization2 VK_KHR_synchronization2} and {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -523,7 +517,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
         Get buffer opaque capture descriptor data.
 
         <h5>C Specification</h5>
-        To get the the opaque descriptor data for a buffer, call:
+        To get the opaque descriptor data for a buffer, call:
 
         <pre><code>
 ￿VkResult vkGetBufferOpaqueCaptureDescriptorDataEXT(
@@ -721,7 +715,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
         Check(1)..void.p("pData", "a pointer to a user-allocated buffer where the data will be written.")
     )
 
-    DependsOn("""(ext.contains("VK_KHR_acceleration_structure") && ext.contains("VK_NV_ray_tracing"))""")..VkResult(
+    DependsOn("""ext.contains("VK_KHR_acceleration_structure") || ext.contains("VK_NV_ray_tracing")""")..VkResult(
         "GetAccelerationStructureOpaqueCaptureDescriptorDataEXT",
         """
         Get acceleration structure opaque capture descriptor data.

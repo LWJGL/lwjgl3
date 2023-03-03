@@ -28,7 +28,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If both aspects are included in {@code aspectMask}, the implicit {@code usage} is equal to the intersection of {@link VkImageCreateInfo}{@code ::usage} and {@link VkImageStencilUsageCreateInfo}{@code ::stencilUsage}.</li>
  * </ul>
  * 
+ * <p>If {@code image} is a 3D image, its Z range <b>can</b> be restricted to a subset by adding a {@link VkImageViewSlicedCreateInfoEXT} to the {@code pNext} chain.</p>
+ * 
  * <p>If {@code image} was created with the {@link VK10#VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT IMAGE_CREATE_MUTABLE_FORMAT_BIT} flag, and if the {@code format} of the image is not <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar</a>, {@code format} <b>can</b> be different from the image’s format, but if {@code image} was created without the {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} flag and they are not equal they <b>must</b> be <em>compatible</em>. Image format compatibility is defined in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-compatibility-classes">Format Compatibility Classes</a> section. Views of compatible formats will have the same mapping between texel coordinates and memory locations irrespective of the {@code format}, with only the interpretation of the bit pattern changing.</p>
+ * 
+ * <p>If {@code image} was created with a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar</a> format, and the image view’s {@code aspectMask} is one of {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT}, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT} or {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT}, the view’s aspect mask is considered to be equivalent to {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} when used as a framebuffer attachment.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 
@@ -153,7 +157,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExportMetalObjectCreateInfoEXT}, {@link VkImageViewASTCDecodeModeEXT}, {@link VkImageViewMinLodCreateInfoEXT}, {@link VkImageViewSampleWeightCreateInfoQCOM}, {@link VkImageViewUsageCreateInfo}, {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT}, or {@link VkSamplerYcbcrConversionInfo}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExportMetalObjectCreateInfoEXT}, {@link VkImageViewASTCDecodeModeEXT}, {@link VkImageViewMinLodCreateInfoEXT}, {@link VkImageViewSampleWeightCreateInfoQCOM}, {@link VkImageViewSlicedCreateInfoEXT}, {@link VkImageViewUsageCreateInfo}, {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT}, or {@link VkSamplerYcbcrConversionInfo}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkExportMetalObjectCreateInfoEXT}</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkImageViewCreateFlagBits} values</li>
  * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
@@ -275,6 +279,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
     public VkImageViewCreateInfo pNext(VkImageViewMinLodCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewSampleWeightCreateInfoQCOM} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkImageViewSampleWeightCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkImageViewSlicedCreateInfoEXT} value to the {@code pNext} chain. */
+    public VkImageViewCreateInfo pNext(VkImageViewSlicedCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewUsageCreateInfo} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImageViewUsageCreateInfoKHR} value to the {@code pNext} chain. */
@@ -578,6 +584,8 @@ public class VkImageViewCreateInfo extends Struct implements NativeResource {
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewMinLodCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewSampleWeightCreateInfoQCOM} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewSampleWeightCreateInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkImageViewSlicedCreateInfoEXT} value to the {@code pNext} chain. */
+        public VkImageViewCreateInfo.Buffer pNext(VkImageViewSlicedCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewUsageCreateInfo} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkImageViewUsageCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImageViewUsageCreateInfoKHR} value to the {@code pNext} chain. */

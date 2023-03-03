@@ -31,10 +31,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
@@ -66,7 +63,7 @@ val EXT_extended_dynamic_state = "EXTExtendedDynamicState".nativeClassVK("EXT_ex
                 <li>Graeme Leese, Broadcom</li>
                 <li>Hans-Kristian Arntzen, Valve Corporation</li>
                 <li>Jan-Harald Fredriksen, Arm Limited</li>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Jeff Bolz, NVIDIA</li>
                 <li>Jesse Hall, Google</li>
                 <li>Philip Rebohle, Valve Corporation</li>

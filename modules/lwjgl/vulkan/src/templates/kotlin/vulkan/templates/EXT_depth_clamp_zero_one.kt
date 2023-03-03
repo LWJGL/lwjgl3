@@ -28,9 +28,7 @@ val EXT_depth_clamp_zero_one = "EXTDepthClampZeroOne".nativeClassVK("EXT_depth_c
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

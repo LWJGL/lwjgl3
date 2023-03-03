@@ -77,7 +77,7 @@ import org.lwjgl.vulkan.video.*;
  * <pre><code>
  * struct VkVideoDecodeH264DpbSlotInfoKHR {
  *     VkStructureType {@link #sType};
- *     void const * pNext;
+ *     void const * {@link #pNext};
  *     {@link StdVideoDecodeH264ReferenceInfo StdVideoDecodeH264ReferenceInfo} const * {@link #pStdReferenceInfo};
  * }</code></pre>
  */
@@ -126,7 +126,7 @@ public class VkVideoDecodeH264DpbSlotInfoKHR extends Struct implements NativeRes
     /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** @return the value of the {@code pNext} field. */
+    /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** a pointer to a {@code StdVideoDecodeH264ReferenceInfo} structure specifying <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-h264-reference-info">H.264 reference information</a>. */
@@ -137,7 +137,7 @@ public class VkVideoDecodeH264DpbSlotInfoKHR extends Struct implements NativeRes
     public VkVideoDecodeH264DpbSlotInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
     /** Sets the {@link KHRVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR} value to the {@link #sType} field. */
     public VkVideoDecodeH264DpbSlotInfoKHR sType$Default() { return sType(KHRVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR); }
-    /** Sets the specified value to the {@code pNext} field. */
+    /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeH264DpbSlotInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoDecodeH264ReferenceInfo} to the {@link #pStdReferenceInfo} field. */
     public VkVideoDecodeH264DpbSlotInfoKHR pStdReferenceInfo(@NativeType("StdVideoDecodeH264ReferenceInfo const *") StdVideoDecodeH264ReferenceInfo value) { npStdReferenceInfo(address(), value); return this; }
@@ -344,7 +344,7 @@ public class VkVideoDecodeH264DpbSlotInfoKHR extends Struct implements NativeRes
         /** @return the value of the {@link VkVideoDecodeH264DpbSlotInfoKHR#sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoDecodeH264DpbSlotInfoKHR.nsType(address()); }
-        /** @return the value of the {@code pNext} field. */
+        /** @return the value of the {@link VkVideoDecodeH264DpbSlotInfoKHR#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoDecodeH264DpbSlotInfoKHR.npNext(address()); }
         /** @return a {@link StdVideoDecodeH264ReferenceInfo} view of the struct pointed to by the {@link VkVideoDecodeH264DpbSlotInfoKHR#pStdReferenceInfo} field. */
@@ -355,7 +355,7 @@ public class VkVideoDecodeH264DpbSlotInfoKHR extends Struct implements NativeRes
         public VkVideoDecodeH264DpbSlotInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH264DpbSlotInfoKHR.nsType(address(), value); return this; }
         /** Sets the {@link KHRVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR} value to the {@link VkVideoDecodeH264DpbSlotInfoKHR#sType} field. */
         public VkVideoDecodeH264DpbSlotInfoKHR.Buffer sType$Default() { return sType(KHRVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR); }
-        /** Sets the specified value to the {@code pNext} field. */
+        /** Sets the specified value to the {@link VkVideoDecodeH264DpbSlotInfoKHR#pNext} field. */
         public VkVideoDecodeH264DpbSlotInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH264DpbSlotInfoKHR.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoDecodeH264ReferenceInfo} to the {@link VkVideoDecodeH264DpbSlotInfoKHR#pStdReferenceInfo} field. */
         public VkVideoDecodeH264DpbSlotInfoKHR.Buffer pStdReferenceInfo(@NativeType("StdVideoDecodeH264ReferenceInfo const *") StdVideoDecodeH264ReferenceInfo value) { VkVideoDecodeH264DpbSlotInfoKHR.npStdReferenceInfo(address(), value); return this; }

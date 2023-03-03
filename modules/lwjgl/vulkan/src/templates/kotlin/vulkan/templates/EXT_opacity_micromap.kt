@@ -93,11 +93,7 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRAccelerationStructure VK_KHR_acceleration_structure} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRAccelerationStructure VK_KHR_acceleration_structure} and {@link KHRSynchronization2 VK_KHR_synchronization2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

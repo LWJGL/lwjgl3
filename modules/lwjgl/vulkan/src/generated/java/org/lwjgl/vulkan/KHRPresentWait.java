@@ -25,11 +25,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRSwapchain VK_KHR_swapchain} to be enabled for any device-level functionality</li>
- * <li>Requires {@link KHRPresentId VK_KHR_present_id} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRPresentId VK_KHR_present_id}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Keith Packard <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_present_wait]%20@keithp%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_present_wait%20extension*">keithp</a></li>

@@ -164,10 +164,7 @@ val NV_external_memory_win32 = "NVExternalMemoryWin32".nativeClassVK("NV_externa
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link NVExternalMemory VK_NV_external_memory} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link NVExternalMemory VK_NV_external_memory}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>

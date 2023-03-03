@@ -33,11 +33,7 @@ val KHR_variable_pointers = "KHRVariablePointers".nativeClassVK("KHR_variable_po
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRStorageBufferStorageClass VK_KHR_storage_buffer_storage_class} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRStorageBufferStorageClass VK_KHR_storage_buffer_storage_class}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
@@ -73,7 +69,7 @@ val KHR_variable_pointers = "KHRVariablePointers".nativeClassVK("KHR_variable_po
                 <li>Graeme Leese, Broadcom</li>
                 <li>Weifeng Zhang, Qualcomm</li>
                 <li>Stephen Clarke, Imagination Technologies</li>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Jesse Hall, Google</li>
             </ul></dd>
         </dl>

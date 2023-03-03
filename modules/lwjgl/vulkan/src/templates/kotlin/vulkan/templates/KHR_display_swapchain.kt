@@ -33,11 +33,7 @@ val KHR_display_swapchain = "KHRDisplaySwapchain".nativeClassVK("KHR_display_swa
             <dd>10</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSwapchain VK_KHR_swapchain} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRDisplay VK_KHR_display} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRDisplay VK_KHR_display}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

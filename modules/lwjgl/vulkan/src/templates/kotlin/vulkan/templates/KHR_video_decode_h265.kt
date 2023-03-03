@@ -32,10 +32,7 @@ val KHR_video_decode_h265 = "KHRVideoDecodeH265".nativeClassVK("KHR_video_decode
             <dd>7</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRVideoDecodeQueue VK_KHR_video_decode_queue} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRVideoDecodeQueue VK_KHR_video_decode_queue}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

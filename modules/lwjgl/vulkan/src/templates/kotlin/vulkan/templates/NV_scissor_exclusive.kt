@@ -13,6 +13,8 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclus
         """
         This extension adds support for an exclusive scissor test to Vulkan. The exclusive scissor test behaves like the scissor test, except that the exclusive scissor test fails for pixels inside the corresponding rectangle and passes for pixels outside the rectangle. If the same rectangle is used for both the scissor and exclusive scissor tests, the exclusive scissor test will pass if and only if the scissor test fails.
 
+        Version 2 of this extension introduces #DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV and #CmdSetExclusiveScissorEnableNV(). Applications that use this dynamic state must ensure the implementation advertises at least {@code specVersion} 2 of this extension.
+
         <h5>VK_NV_scissor_exclusive</h5>
         <dl>
             <dt><b>Name String</b></dt>
@@ -25,13 +27,10 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclus
             <dd>206</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -42,7 +41,7 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclus
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2018-07-31</dd>
+            <dd>2023-01-18</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -63,7 +62,7 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclus
     IntConstant(
         "The extension specification version.",
 
-        "NV_SCISSOR_EXCLUSIVE_SPEC_VERSION".."1"
+        "NV_SCISSOR_EXCLUSIVE_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -82,7 +81,62 @@ val NV_scissor_exclusive = "NVScissorExclusive".nativeClassVK("NV_scissor_exclus
     EnumConstant(
         "Extends {@code VkDynamicState}.",
 
+        "DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV".."1000205000",
         "DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV".."1000205001"
+    )
+
+    void(
+        "CmdSetExclusiveScissorEnableNV",
+        """
+        Dynamically enable each exclusive scissor for a command buffer.
+
+        <h5>C Specification</h5>
+        To <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> whether an exclusive scissor is enabled or not, call:
+
+        <pre><code>
+￿void vkCmdSetExclusiveScissorEnableNV(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    firstExclusiveScissor,
+￿    uint32_t                                    exclusiveScissorCount,
+￿    const VkBool32*                             pExclusiveScissorEnables);</code></pre>
+
+        <h5>Description</h5>
+        The exclusive scissor enables taken from element <code>i</code> of {@code pExclusiveScissorEnables} replace the current state for the scissor index <code>firstExclusiveScissor + i</code>, for <code>i</code> in <code>[0, exclusiveScissorCount)</code>.
+
+        This command sets the exclusive scissor enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is implied by the ##VkPipelineViewportExclusiveScissorStateCreateInfoNV{@code ::exclusiveScissorCount} value used to create the currently active pipeline, where all {@code exclusiveScissorCount} exclusive scissors are implicitly enabled and the remainder up to ##VkPhysicalDeviceLimits{@code ::maxViewports} are implicitly disabled.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-exclusiveScissor">{@code exclusiveScissor}</a> feature <b>must</b> be enabled, and the implementation <b>must</b> support at least {@code specVersion} 2 of the {@link NVScissorExclusive VK_NV_scissor_exclusive} extension</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+            <li>{@code pExclusiveScissorEnables} <b>must</b> be a valid pointer to an array of {@code exclusiveScissorCount} {@code VkBool32} values</li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+            <li>This command <b>must</b> only be called outside of a video coding scope</li>
+            <li>{@code exclusiveScissorCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>Command Properties</h5>
+        <table class="lwjgl">
+            <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
+        </table>
+        """,
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        uint32_t("firstExclusiveScissor", "the index of the first exclusive scissor rectangle whose state is updated by the command."),
+        AutoSize("pExclusiveScissorEnables")..uint32_t("exclusiveScissorCount", "the number of exclusive scissor rectangles updated by the command."),
+        VkBool32.const.p("pExclusiveScissorEnables", "a pointer to an array of {@code VkBool32} values defining whether the exclusive scissor is enabled.")
     )
 
     void(

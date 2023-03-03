@@ -28,10 +28,7 @@ val EXT_display_surface_counter = "EXTDisplaySurfaceCounter".nativeClassVK("EXT_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRDisplay VK_KHR_display} to be enabled</li>
-            </ul></dd>
+            <dd>{@link KHRDisplay VK_KHR_display}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

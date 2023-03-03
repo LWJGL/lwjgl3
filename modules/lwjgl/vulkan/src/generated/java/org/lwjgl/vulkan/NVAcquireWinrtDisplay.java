@@ -30,10 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link EXTDirectModeDisplay VK_EXT_direct_mode_display} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link EXTDirectModeDisplay VK_EXT_direct_mode_display}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Jeff Juliano <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_NV_acquire_winrt_display]%20@jjuliano%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_NV_acquire_winrt_display%20extension*">jjuliano</a></li>

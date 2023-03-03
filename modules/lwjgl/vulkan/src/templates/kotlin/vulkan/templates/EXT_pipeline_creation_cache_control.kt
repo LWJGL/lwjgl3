@@ -54,9 +54,7 @@ val EXT_pipeline_creation_cache_control = "EXTPipelineCreationCacheControl".nati
             <dd>3</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>

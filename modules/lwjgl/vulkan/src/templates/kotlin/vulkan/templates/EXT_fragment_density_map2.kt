@@ -28,10 +28,7 @@ val EXT_fragment_density_map2 = "EXTFragmentDensityMap2".nativeClassVK("EXT_frag
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link EXTFragmentDensityMap VK_EXT_fragment_density_map} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link EXTFragmentDensityMap VK_EXT_fragment_density_map}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

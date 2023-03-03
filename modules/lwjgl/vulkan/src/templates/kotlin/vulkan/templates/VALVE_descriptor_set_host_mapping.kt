@@ -114,9 +114,7 @@ val VALVE_descriptor_set_host_mapping = "VALVEDescriptorSetHostMapping".nativeCl
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Special Use</b></dt>
             <dd><ul>

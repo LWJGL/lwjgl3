@@ -27,10 +27,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
  * <li><em>Deprecated</em> by {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} extension
@@ -63,7 +60,7 @@ import static org.lwjgl.system.JNI.*;
  * <li>Jeff Bolz, NVIDIA</li>
  * <li>Neil Henning, AMD</li>
  * <li>Tobias Hector, AMD</li>
- * <li>Jason Ekstrand, Intel</li>
+ * <li>Faith Ekstrand, Intel</li>
  * <li>Baldur Karlsson, Valve</li>
  * </ul></dd>
  * </dl>

@@ -37,10 +37,7 @@ val GOOGLE_display_timing = "GOOGLEDisplayTiming".nativeClassVK("GOOGLE_display_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSwapchain VK_KHR_swapchain} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRSwapchain VK_KHR_swapchain}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

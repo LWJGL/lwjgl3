@@ -20,13 +20,10 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link EXTShaderAtomicFloat VK_EXT_shader_atomic_float} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link EXTShaderAtomicFloat VK_EXT_shader_atomic_float}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
- * <li>Jason Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_atomic_float2]%20@jekstrand%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_shader_atomic_float2%20extension*">jekstrand</a></li>
+ * <li>Faith Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_atomic_float2]%20@gfxstrand%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_shader_atomic_float2%20extension*">gfxstrand</a></li>
  * </ul></dd>
  * </dl>
  * 
@@ -45,7 +42,7 @@ package org.lwjgl.vulkan;
  * </ul></dd>
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
- * <li>Jason Ekstrand, Intel</li>
+ * <li>Faith Ekstrand, Intel</li>
  * </ul></dd>
  * </dl>
  */

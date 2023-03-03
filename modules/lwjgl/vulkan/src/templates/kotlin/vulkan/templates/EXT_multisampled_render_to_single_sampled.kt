@@ -32,11 +32,7 @@ val EXT_multisampled_render_to_single_sampled = "EXTMultisampledRenderToSingleSa
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRCreateRenderpass2 VK_KHR_create_renderpass2} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRDepthStencilResolve VK_KHR_depth_stencil_resolve} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRCreateRenderpass2 VK_KHR_create_renderpass2} and {@link KHRDepthStencilResolve VK_KHR_depth_stencil_resolve}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

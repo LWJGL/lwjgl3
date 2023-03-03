@@ -30,10 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>6</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRSurface VK_KHR_surface} to be enabled</li>
- * </ul></dd>
+ * <dd>{@link KHRSurface VK_KHR_surface}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Jesse Hall <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_xcb_surface]%20@critsec%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_xcb_surface%20extension*">critsec</a></li>
@@ -51,7 +48,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Patrick Doane, Blizzard</li>
- * <li>Jason Ekstrand, Intel</li>
+ * <li>Faith Ekstrand, Intel</li>
  * <li>Ian Elliott, LunarG</li>
  * <li>Courtney Goeltzenleuchter, LunarG</li>
  * <li>Jesse Hall, Google</li>

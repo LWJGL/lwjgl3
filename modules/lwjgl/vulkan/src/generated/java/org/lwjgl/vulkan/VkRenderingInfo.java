@@ -25,6 +25,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If there is an instance of {@link VkDeviceGroupRenderPassBeginInfo} included in the {@code pNext} chain and its {@code deviceCount} member is not 0, then {@code renderArea} is ignored, and the render area is defined per-device by that structure.</p>
  * 
+ * <p>If multiview is enabled, and the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiview-per-view-render-areas">{@code multiviewPerViewRenderAreas}</a> feature is enabled, and there is an instance of {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} included in the {@code pNext} chain with {@code perViewRenderAreaCount} not equal to 0, then the elements of {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM}{@code ::pPerViewRenderAreas} override {@code renderArea} and define a render area for each view. In this case, {@code renderArea} <b>must</b> be set to an area at least as large as the union of all the per-view render areas.</p>
+ * 
  * <p>Each element of the {@code pColorAttachments} array corresponds to an output location in the shader, i.e. if the shader declares an output variable decorated with a {@code Location} value of <b>X</b>, then it uses the attachment provided in {@code pColorAttachments}[<b>X</b>]. If the {@code imageView} member of any element of {@code pColorAttachments} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, writes to the corresponding location by a fragment are discarded.</p>
  * 
  * <h5>Valid Usage</h5>
@@ -89,13 +91,15 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>If the {@code imageView} member of a {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} structure included in the {@code pNext} chain is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> not be equal to the {@code imageView} member of a {@link VkRenderingFragmentDensityMapAttachmentInfoEXT} structure included in the {@code pNext} chain</li>
  * <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiview">{@code multiview}</a> feature is not enabled, {@code viewMask} <b>must</b> be 0</li>
  * <li>The index of the most significant bit in {@code viewMask} <b>must</b> be less than <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxMultiviewViewCount">{@code maxMultiviewViewCount}</a></li>
+ * <li>If the {@code perViewRenderAreaCount} member of a {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} structure included in the {@code pNext} chain is not 0, then the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-multiview-per-view-render-areas">{@code multiviewPerViewRenderAreas}</a> feature <b>must</b> be enabled.</li>
+ * <li>If the {@code perViewRenderAreaCount} member of a {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} structure included in the {@code pNext} chain is not 0, then {@code renderArea} <b>must</b> specify a render area that includes the union of all per view render areas.</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_RENDERING_INFO STRUCTURE_TYPE_RENDERING_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupRenderPassBeginInfo}, {@link VkMultisampledRenderToSingleSampledInfoEXT}, {@link VkMultiviewPerViewAttributesInfoNVX}, {@link VkRenderingFragmentDensityMapAttachmentInfoEXT}, or {@link VkRenderingFragmentShadingRateAttachmentInfoKHR}</li>
+ * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceGroupRenderPassBeginInfo}, {@link VkMultisampledRenderToSingleSampledInfoEXT}, {@link VkMultiviewPerViewAttributesInfoNVX}, {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM}, {@link VkRenderingFragmentDensityMapAttachmentInfoEXT}, or {@link VkRenderingFragmentShadingRateAttachmentInfoKHR}</li>
  * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
  * <li>{@code flags} <b>must</b> be a valid combination of {@code VkRenderingFlagBits} values</li>
  * <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachments} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid {@link VkRenderingAttachmentInfo} structures</li>
@@ -233,6 +237,8 @@ public class VkRenderingInfo extends Struct implements NativeResource {
     public VkRenderingInfo pNext(VkMultisampledRenderToSingleSampledInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMultiviewPerViewAttributesInfoNVX} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} value to the {@code pNext} chain. */
+    public VkRenderingInfo pNext(VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderingFragmentDensityMapAttachmentInfoEXT} value to the {@code pNext} chain. */
     public VkRenderingInfo pNext(VkRenderingFragmentDensityMapAttachmentInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} value to the {@code pNext} chain. */
@@ -542,6 +548,8 @@ public class VkRenderingInfo extends Struct implements NativeResource {
         public VkRenderingInfo.Buffer pNext(VkMultisampledRenderToSingleSampledInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMultiviewPerViewAttributesInfoNVX} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkMultiviewPerViewAttributesInfoNVX value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM} value to the {@code pNext} chain. */
+        public VkRenderingInfo.Buffer pNext(VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderingFragmentDensityMapAttachmentInfoEXT} value to the {@code pNext} chain. */
         public VkRenderingInfo.Buffer pNext(VkRenderingFragmentDensityMapAttachmentInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} value to the {@code pNext} chain. */

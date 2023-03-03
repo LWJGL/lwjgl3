@@ -22,10 +22,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Joshua Ashton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_image_view_min_lod]%20@Joshua-Ashton%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_image_view_min_lod%20extension*">Joshua-Ashton</a></li>
@@ -45,7 +42,7 @@ package org.lwjgl.vulkan;
  * <li>Hans-Kristian Arntzen, Valve</li>
  * <li>Samuel Iglesias Gonsalvez, Igalia</li>
  * <li>Tobias Hector, AMD</li>
- * <li>Jason Ekstrand, Intel</li>
+ * <li>Faith Ekstrand, Intel</li>
  * <li>Tom Olson, ARM</li>
  * </ul></dd>
  * </dl>

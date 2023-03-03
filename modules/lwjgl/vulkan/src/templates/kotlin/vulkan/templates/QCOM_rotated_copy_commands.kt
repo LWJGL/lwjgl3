@@ -30,11 +30,7 @@ val QCOM_rotated_copy_commands = "QCOMRotatedCopyCommands".nativeClassVK("QCOM_r
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSwapchain VK_KHR_swapchain} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRCopyCommands2 VK_KHR_copy_commands2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRCopyCommands2 VK_KHR_copy_commands2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

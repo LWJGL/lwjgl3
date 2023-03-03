@@ -34,10 +34,7 @@ val VALVE_mutable_descriptor_type = "VALVEMutableDescriptorType".nativeClassVK("
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRMaintenance3 VK_KHR_maintenance3} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRMaintenance3 VK_KHR_maintenance3}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>

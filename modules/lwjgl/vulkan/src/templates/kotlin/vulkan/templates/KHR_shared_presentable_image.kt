@@ -28,12 +28,7 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSwapchain VK_KHR_swapchain} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

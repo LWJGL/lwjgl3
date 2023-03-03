@@ -28,10 +28,7 @@ val EXT_external_memory_dma_buf = "EXTExternalMemoryDmaBuf".nativeClassVK("EXT_e
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRExternalMemoryFd VK_KHR_external_memory_fd} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRExternalMemoryFd VK_KHR_external_memory_fd}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -51,7 +48,7 @@ val EXT_external_memory_dma_buf = "EXTExternalMemoryDmaBuf".nativeClassVK("EXT_e
             <dd><ul>
                 <li>Chad Versace, Google</li>
                 <li>James Jones, NVIDIA</li>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
             </ul></dd>
         </dl>
         """

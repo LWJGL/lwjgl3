@@ -28,10 +28,7 @@ val NV_fragment_shading_rate_enums = "NVFragmentShadingRateEnums".nativeClassVK(
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRFragmentShadingRate VK_KHR_fragment_shading_rate} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRFragmentShadingRate VK_KHR_fragment_shading_rate}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

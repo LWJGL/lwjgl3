@@ -29,9 +29,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>12</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * </ul></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
  * <dt><b>Special Uses</b></dt>
  * <dd><ul>
  * <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
@@ -58,7 +56,7 @@ package org.lwjgl.vulkan;
  * <li>Liam Middlebrook, NVIDIA</li>
  * <li>Jeff Bolz, NVIDIA</li>
  * <li>Tobias Hector, AMD</li>
- * <li>Jason Ekstrand, Intel</li>
+ * <li>Faith Ekstrand, Intel</li>
  * <li>Spencer Fricke, Samsung Electronics</li>
  * <li>Graeme Leese, Broadcom</li>
  * <li>Jesse Hall, Google</li>

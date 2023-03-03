@@ -31,10 +31,7 @@ val KHR_external_memory = "KHRExternalMemory".nativeClassVK("KHR_external_memory
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRExternalMemoryCapabilities VK_KHR_external_memory_capabilities} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRExternalMemoryCapabilities VK_KHR_external_memory_capabilities}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
@@ -64,7 +61,7 @@ val KHR_external_memory = "KHRExternalMemory".nativeClassVK("KHR_external_memory
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Ian Elliott, Google</li>
                 <li>Jesse Hall, Google</li>
                 <li>Tobias Hector, Imagination Technologies</li>

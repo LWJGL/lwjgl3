@@ -28,11 +28,7 @@ val EXT_display_control = "EXTDisplayControl".nativeClassVK("EXT_display_control
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link EXTDisplaySurfaceCounter VK_EXT_display_surface_counter} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRSwapchain VK_KHR_swapchain} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link EXTDisplaySurfaceCounter VK_EXT_display_surface_counter} and {@link KHRSwapchain VK_KHR_swapchain}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

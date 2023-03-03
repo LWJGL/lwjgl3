@@ -30,10 +30,7 @@ val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", type =
             <dd>6</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSurface VK_KHR_surface} to be enabled</li>
-            </ul></dd>
+            <dd>{@link KHRSurface VK_KHR_surface}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -53,7 +50,7 @@ val KHR_xlib_surface = "KHRXlibSurface".nativeClassVK("KHR_xlib_surface", type =
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Patrick Doane, Blizzard</li>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Ian Elliott, LunarG</li>
                 <li>Courtney Goeltzenleuchter, LunarG</li>
                 <li>Jesse Hall, Google</li>

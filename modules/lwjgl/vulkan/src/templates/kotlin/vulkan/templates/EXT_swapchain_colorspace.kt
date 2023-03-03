@@ -28,10 +28,7 @@ val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapc
             <dd>4</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSurface VK_KHR_surface} to be enabled</li>
-            </ul></dd>
+            <dd>{@link KHRSurface VK_KHR_surface}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

@@ -28,10 +28,7 @@ val KHR_external_memory_fd = "KHRExternalMemoryFd".nativeClassVK("KHR_external_m
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRExternalMemory VK_KHR_external_memory} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRExternalMemory VK_KHR_external_memory}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

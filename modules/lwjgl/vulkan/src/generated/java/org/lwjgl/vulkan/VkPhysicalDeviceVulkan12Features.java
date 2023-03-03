@@ -392,7 +392,7 @@ public class VkPhysicalDeviceVulkan12Features extends Struct implements NativeRe
     /** indicates that the implementation supports the {@code bufferDeviceAddress} , {@code rayTracingPipeline} and {@code rayQuery} features for logical devices created with multiple physical devices. If this feature is not supported, buffer and acceleration structure addresses <b>must</b> not be queried on a logical device created with more than one physical device. */
     @NativeType("VkBool32")
     public boolean bufferDeviceAddressMultiDevice() { return nbufferDeviceAddressMultiDevice(address()) != 0; }
-    /** indicates whether the Vulkan Memory Model is supported, as defined in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-model">Vulkan Memory Model</a>. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModel} capability. */
+    /** indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModel} capability. */
     @NativeType("VkBool32")
     public boolean vulkanMemoryModel() { return nvulkanMemoryModel(address()) != 0; }
     /** indicates whether the Vulkan Memory Model can use {@code Device} scope synchronization. This also indicates whether shader modules <b>can</b> declare the {@code VulkanMemoryModelDeviceScope} capability. */

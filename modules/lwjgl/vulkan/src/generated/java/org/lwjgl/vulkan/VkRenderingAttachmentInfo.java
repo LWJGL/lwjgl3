@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If {@code resolveMode} is {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}, then {@code resolveImageView} is ignored. If {@code resolveMode} is not {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}, and {@code resolveImageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, values in {@code resolveImageView} within the render area become undefined once rendering begins. Only values in the aspect corresponding to the use of this attachment become undefined (the depth aspect if this attachment is used as {@link VkRenderingInfo}{@code ::pDepthAttachment}, and the stencil aspect if it is used as {@code pStencilAttachment}).</p>
  * 
- * <p>At the end of rendering, the values written to each pixel location in {@code imageView} will be resolved according to {@code resolveMode} and stored into the the same location in {@code resolveImageView}.</p>
+ * <p>At the end of rendering, the values written to each pixel location in {@code imageView} will be resolved according to {@code resolveMode} and stored into the same location in {@code resolveImageView}.</p>
  * 
  * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
  * 

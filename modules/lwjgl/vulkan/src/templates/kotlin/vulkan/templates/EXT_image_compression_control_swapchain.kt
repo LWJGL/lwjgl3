@@ -28,10 +28,7 @@ val EXT_image_compression_control_swapchain = "EXTImageCompressionControlSwapcha
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link EXTImageCompressionControl VK_EXT_image_compression_control} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link EXTImageCompressionControl VK_EXT_image_compression_control}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

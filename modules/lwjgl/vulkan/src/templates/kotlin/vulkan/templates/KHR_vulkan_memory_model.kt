@@ -11,7 +11,7 @@ import vulkan.*
 val KHR_vulkan_memory_model = "KHRVulkanMemoryModel".nativeClassVK("KHR_vulkan_memory_model", type = "device", postfix = "KHR") {
     documentation =
         """
-        The {@code VK_KHR_vulkan_memory_model} extension allows use of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#memory-model">Vulkan Memory Model</a>, which formally defines how to synchronize memory accesses to the same memory locations performed by multiple shader invocations.
+        The {@link KHRVulkanMemoryModel VK_KHR_vulkan_memory_model} extension allows use of the features guarded by the {@code VulkanMemoryModel}, {@code VulkanMemoryModelDeviceScope}, and {@code VulkanMemoryModelAvailabilityVisibilityChains} capabilities in shader modules. The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#memory-model">Vulkan Memory Model</a> formally defines how to synchronize memory accesses to the same memory locations performed by multiple shader invocations.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Version 3 of the spec added a member ({@code vulkanMemoryModelAvailabilityVisibilityChains}) to ##VkPhysicalDeviceVulkanMemoryModelFeaturesKHR, which is an incompatible change from version 2.
@@ -35,9 +35,7 @@ val KHR_vulkan_memory_model = "KHRVulkanMemoryModel".nativeClassVK("KHR_vulkan_m
             <dd>3</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>

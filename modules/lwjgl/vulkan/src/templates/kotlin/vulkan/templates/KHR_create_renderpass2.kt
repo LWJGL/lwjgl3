@@ -42,11 +42,7 @@ val KHR_create_renderpass2 = "KHRCreateRenderpass2".nativeClassVK("KHR_create_re
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRMultiview VK_KHR_multiview} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRMaintenance2 VK_KHR_maintenance2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRMultiview VK_KHR_multiview} and {@link KHRMaintenance2 VK_KHR_maintenance2}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>

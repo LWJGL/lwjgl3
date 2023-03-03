@@ -71,7 +71,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>Extension {@code EGL_MESA_image_dma_buf_export}<sup><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn3">3</a></sup> is the inverse of {@code EGL_EXT_image_dma_buf_import_modifiers}.</p>
  * 
- * <p>The Linux kernel modesetting API (KMS), when configuring the display’s framebuffer with {@code struct drm_mode_fb_cmd2}<sup><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn4">4</a></sup>, allows one to specify the frambuffer’s <em>modifier</em> as well as a per-plane memory handle, offset, and row pitch.</p>
+ * <p>The Linux kernel modesetting API (KMS), when configuring the display’s framebuffer with {@code struct drm_mode_fb_cmd2}<sup><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn4">4</a></sup>, allows one to specify the framebuffer’s <em>modifier</em> as well as a per-plane memory handle, offset, and row pitch.</p>
  * 
  * <p>GBM, a graphics buffer manager for Linux, allows creation of a {@code gbm_bo} (that is, a graphics <em>buffer object</em>) by importing data similar to that in {@code EGL_EXT_image_dma_buf_import_modifiers}<sup><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn1">1</a></sup>; and symmetrically allows exporting the same data from the {@code gbm_bo}. See the references to <em>modifier</em> and <em>plane</em> in {@code gbm.h}<sup><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VK_EXT_image_drm_format_modifier-fn5">5</a></sup>.</p>
  * 
@@ -87,13 +87,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRBindMemory2 VK_KHR_bind_memory2} to be enabled for any device-level functionality</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
- * <li>Requires {@link KHRImageFormatList VK_KHR_image_format_list} to be enabled for any device-level functionality</li>
- * <li>Requires {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRBindMemory2 VK_KHR_bind_memory2} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRImageFormatList VK_KHR_image_format_list} and {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_image_drm_format_modifier]%20@chadversary%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_image_drm_format_modifier%20extension*">chadversary</a></li>
@@ -113,7 +107,7 @@ import static org.lwjgl.system.JNI.*;
  * <li>Bas Nieuwenhuizen, Google</li>
  * <li>Chad Versace, Google</li>
  * <li>James Jones, NVIDIA</li>
- * <li>Jason Ekstrand, Intel</li>
+ * <li>Faith Ekstrand, Intel</li>
  * <li>Jőrg Wagner, ARM</li>
  * <li>Kristian Høgsberg Kristensen, Google</li>
  * <li>Ray Smith, ARM</li>

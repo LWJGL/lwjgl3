@@ -51,11 +51,7 @@ val KHR_ray_query = "KHRRayQuery".nativeClassVK("KHR_ray_query", type = "device"
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.1</li>
-                <li>Requires {@link KHRSpirv14 VK_KHR_spirv_1_4} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRAccelerationStructure VK_KHR_acceleration_structure} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRSpirv14 VK_KHR_spirv_1_4} and {@link KHRAccelerationStructure VK_KHR_acceleration_structure}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

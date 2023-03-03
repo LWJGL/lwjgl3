@@ -228,11 +228,6 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
             <dt><b>Revision</b></dt>
             <dd>2</dd>
 
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-            </ul></dd>
-
             <dt><b>Special Use</b></dt>
             <dd><ul>
                 <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#extendingvulkan-compatibility-specialuse">Debugging tools</a></li>
@@ -377,6 +372,9 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         <ul>
             <li>{@code pNameInfo→objectType} <b>must</b> not be #OBJECT_TYPE_UNKNOWN</li>
             <li>{@code pNameInfo→objectHandle} <b>must</b> not be #NULL_HANDLE</li>
+            <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of an instance-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendent of the same {@code VkInstance} as the object identified by {@code pNameInfo→pname}:objectHandle</li>
+            <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of a physical-device-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendant of the same {@code VkPhysicalDevice} as the object identified by {@code pNameInfo→pname}:objectHandle</li>
+            <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of a device-level object, that object <b>must</b> be a descendent of the {@code VkDevice} identified by {@code device}</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>
@@ -408,7 +406,7 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
         ##VkDebugUtilsObjectNameInfoEXT
         """,
 
-        VkDevice("device", "the device that created the object."),
+        VkDevice("device", "the device that is associated with the named object passed in via {@code objectHandle}."),
         VkDebugUtilsObjectNameInfoEXT.const.p("pNameInfo", "a pointer to a ##VkDebugUtilsObjectNameInfoEXT structure specifying parameters of the name to set on the object.")
     )
 
@@ -422,6 +420,13 @@ val EXT_debug_utils = "EXTDebugUtils".nativeClassVK("EXT_debug_utils", type = "i
 ￿VkResult vkSetDebugUtilsObjectTagEXT(
 ￿    VkDevice                                    device,
 ￿    const VkDebugUtilsObjectTagInfoEXT*         pTagInfo);</code></pre>
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of an instance-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendent of the same {@code VkInstance} as the object identified by {@code pNameInfo→pname}:objectHandle</li>
+            <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of a physical-device-level object, the {@code VkDevice} identified by {@code device} <b>must</b> be a descendant of the same {@code VkPhysicalDevice} as the object identified by {@code pNameInfo→pname}:objectHandle</li>
+            <li>If {@code pNameInfo→pname}:objectHandle is the valid handle of a device-level object, that object <b>must</b> be a descendent of the {@code VkDevice} identified by {@code device}</li>
+        </ul>
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

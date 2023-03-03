@@ -25,10 +25,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>8</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRVideoDecodeQueue VK_KHR_video_decode_queue} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRVideoDecodeQueue VK_KHR_video_decode_queue}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li><a target="_blank" href="mailto:peter.fang@amd.com">peter.fang@amd.com</a></li>

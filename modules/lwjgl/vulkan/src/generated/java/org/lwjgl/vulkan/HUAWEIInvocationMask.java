@@ -58,11 +58,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline} to be enabled for any device-level functionality</li>
- * <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRRayTracingPipeline VK_KHR_ray_tracing_pipeline} and {@link KHRSynchronization2 VK_KHR_synchronization2}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Pan Gao <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_HUAWEI_invocation_mask]%20@PanGao-h%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_HUAWEI_invocation_mask%20extension*">PanGao-h</a></li>

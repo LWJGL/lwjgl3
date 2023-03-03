@@ -162,7 +162,7 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
     /** exactly one bit of {@code VkOpticalFlowGridSizeFlagsNV} specifying the grid size of the output flow and cost maps to be bound to this optical flow session. The size of the output flow and cost maps is determined by {@link VkOpticalFlowSessionCreateInfoNV}{@code ::width} and {@link VkOpticalFlowSessionCreateInfoNV}{@code ::height} divided by {@link VkOpticalFlowSessionCreateInfoNV}{@code ::outputGridSize}. */
     @NativeType("VkOpticalFlowGridSizeFlagsNV")
     public int outputGridSize() { return noutputGridSize(address()); }
-    /** one exactly bit of {@code VkOpticalFlowGridSizeFlagsNV} specifying the grid size of of the hint flow vector maps to be bound to this optical flow session. The size of the hint maps is determined by {@link VkOpticalFlowSessionCreateInfoNV}{@code ::width} and {@link VkOpticalFlowSessionCreateInfoNV}{@code ::height} divided by {@link VkOpticalFlowSessionCreateInfoNV}{@code ::hintGridSize}. */
+    /** one exactly bit of {@code VkOpticalFlowGridSizeFlagsNV} specifying the grid size of the hint flow vector maps to be bound to this optical flow session. The size of the hint maps is determined by {@link VkOpticalFlowSessionCreateInfoNV}{@code ::width} and {@link VkOpticalFlowSessionCreateInfoNV}{@code ::height} divided by {@link VkOpticalFlowSessionCreateInfoNV}{@code ::hintGridSize}. */
     @NativeType("VkOpticalFlowGridSizeFlagsNV")
     public int hintGridSize() { return nhintGridSize(address()); }
     /** the {@code VkOpticalFlowPerformanceLevelNV} used for this optical flow session. */

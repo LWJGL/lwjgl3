@@ -30,11 +30,6 @@ val AMD_draw_indirect_count = "AMDDrawIndirectCount".nativeClassVK("AMD_draw_ind
             <dt><b>Revision</b></dt>
             <dd>2</dd>
 
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-            </ul></dd>
-
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
                 <li>

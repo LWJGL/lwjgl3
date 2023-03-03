@@ -32,10 +32,7 @@ val KHR_surface_protected_capabilities = "KHRSurfaceProtectedCapabilities".nativ
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.1</li>
-                <li>Requires {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} to be enabled</li>
-            </ul></dd>
+            <dd><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

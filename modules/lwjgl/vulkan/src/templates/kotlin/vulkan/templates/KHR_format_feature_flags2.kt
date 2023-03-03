@@ -42,10 +42,7 @@ val KHR_format_feature_flags2 = "KHRFormatFeatureFlags2".nativeClassVK("KHR_form
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
@@ -74,7 +71,7 @@ val KHR_format_feature_flags2 = "KHRFormatFeatureFlags2".nativeClassVK("KHR_form
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Lionel Landwerlin, Intel</li>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Tobias Hector, AMD</li>
                 <li>Spencer Fricke, Samsung Electronics</li>
                 <li>Graeme Leese, Broadcom</li>

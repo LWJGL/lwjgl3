@@ -28,10 +28,7 @@ val EXT_primitives_generated_query = "EXTPrimitivesGeneratedQuery".nativeClassVK
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link EXTTransformFeedback VK_EXT_transform_feedback} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link EXTTransformFeedback VK_EXT_transform_feedback}</dd>
 
             <dt><b>Special Use</b></dt>
             <dd><ul>
@@ -56,7 +53,7 @@ val EXT_primitives_generated_query = "EXTPrimitivesGeneratedQuery".nativeClassVK
             <dd><ul>
                 <li>Shahbaz Youssefi, Google</li>
                 <li>Piers Daniell, NVIDIA</li>
-                <li>Jason Ekstrand, Collabora</li>
+                <li>Faith Ekstrand, Collabora</li>
                 <li>Jan-Harald Fredriksen, Arm</li>
             </ul></dd>
         </dl>

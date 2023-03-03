@@ -15,7 +15,9 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
 
         The traditional 2-pass GPU culling solution using compute shader needs a pipeline barrier between compute pipeline and graphics pipeline, sometimes, in order to optimize performance, an additional compaction process may also be required. this extension improve the above mentioned shortcomings which can allow compute shader directly emit visible clusters to following graphics pipeline.
 
-        A set of new built-in output variables are used to express visible cluster, in addition, a new built-in function is used to emit these variables from CCS to IA stage, then IA can use these variables to fetches vertices of visible cluster and drive vertex shader to shading these vertices. As stated above, both IA and vertex shader are preserved, vertex shader still used for vertices position shading, instead of directly outputting a set of transformed vertices from compute shader, this makes CCS more suitable for mobile GPUs.
+        A set of new built-in output variables are used to express visible cluster, in addition, a new built-in function is used to emit these variables from CCS to IA stage, then IA can use these variables to fetches vertices of visible cluster and drive vertex shader to shading these vertices. Note that ccs do not work at the same time with geometry shader or tessellation shader.
+
+        As stated above, both IA and vertex shader are preserved, vertex shader still used for vertices position shading, instead of directly outputting a set of transformed vertices from compute shader, this makes CCS more suitable for mobile GPUs.
 
         <h5>Sample code</h5>
         Example of cluster culling in a GLSL shader
@@ -101,18 +103,18 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
 ￿
 ￿layout(binding = GPU_CLUSTER_DESCRIPTOR_BINDING, std430) readonly buffer cluster_descriptor_ssbo
 ￿{
-￿    ClusterDescriptor cluster_descriptors[];
+￿        ClusterDescriptor cluster_descriptors[];
 ￿};
 ￿
 ￿
 ￿layout(binding = GPU_DRAW_BUFFER_BINDING, std430) buffer draw_indirect_ssbo
 ￿{
-￿    DrawElementsCommand draw_commands[];
+￿        DrawElementsCommand draw_commands[];
 ￿};
 ￿
 ￿layout(binding = GPU_INSTANCE_DESCRIPTOR_BINDING, std430) buffer instance_descriptor_ssbo
 ￿{
-￿    InstanceDescriptor instance_descriptors[];
+￿        InstanceDescriptor instance_descriptors[];
 ￿};
 ￿
 ￿uniform bool disable_frustum_culling;
@@ -228,10 +230,7 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -321,7 +320,7 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
 ￿    uint32_t                                    groupCountZ);</code></pre>
 
         <h5>Description</h5>
-        When the command is executed,a global workgroup consisting of groupCountX*groupCountY*groupCountZ local workgroup is assembled.
+        When the command is executed,a global workgroup consisting of groupCountX*groupCountY*groupCountZ local workgroup is assembled. Note the cluster culling shader pipeline only accepts {@code vkCmdDrawClusterHUAWEI} and #CmdDrawClusterIndirectHUAWEI() as drawing commands.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -329,6 +328,7 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
             <li>If a {@code VkSampler} created with {@code mipmapMode} equal to #SAMPLER_MIPMAP_MODE_LINEAR and {@code compareEnable} equal to #FALSE is used to sample a {@code VkImageView} as a result of this command, then the image view’s <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</li>
             <li>If a {@code VkImageView} is sampled with <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-depth-compare-operation">depth comparison</a>, the image view’s <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT</li>
             <li>If a {@code VkImageView} is accessed using atomic operations as a result of this command, then the image view’s <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT</li>
+            <li>If a #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER descriptor is accessed using atomic operations as a result of this command, then the storage texel buffer’s <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-buffer-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT</li>
             <li>If a {@code VkImageView} is sampled with #FILTER_CUBIC_EXT as a result of this command, then the image view’s <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT</li>
             <li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_EXT as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering, as specified by ##VkFilterCubicImageViewImageFormatPropertiesEXT{@code ::filterCubic} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
             <li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_EXT with a reduction mode of either #SAMPLER_REDUCTION_MODE_MIN or #SAMPLER_REDUCTION_MODE_MAX as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering together with minmax filtering, as specified by ##VkFilterCubicImageViewImageFormatPropertiesEXT{@code ::filterCubicMinmax} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
@@ -397,7 +397,6 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT dynamic state enabled then #CmdSetSampleLocationsEXT() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_CULL_MODE dynamic state enabled then #CmdSetCullMode() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_FRONT_FACE dynamic state enabled then #CmdSetFrontFace() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
-            <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_PRIMITIVE_TOPOLOGY dynamic state enabled then #CmdSetPrimitiveTopology() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DEPTH_TEST_ENABLE dynamic state enabled then #CmdSetDepthTestEnable() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DEPTH_WRITE_ENABLE dynamic state enabled then #CmdSetDepthWriteEnable() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DEPTH_COMPARE_OP dynamic state enabled then #CmdSetDepthCompareOp() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
@@ -413,6 +412,8 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_VIEWPORT_WITH_COUNT and #DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV dynamic states enabled then the {@code viewportCount} parameter in the last call to #CmdSetViewportShadingRatePaletteNV() <b>must</b> be greater than or equal to the {@code viewportCount} parameter in the last call to #CmdSetViewportWithCount()</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_VIEWPORT_WITH_COUNT dynamic state enabled and a ##VkPipelineViewportSwizzleStateCreateInfoNV structure chained from ##VkPipelineViewportStateCreateInfo, then the bound graphics pipeline <b>must</b> have been created with ##VkPipelineViewportSwizzleStateCreateInfoNV{@code ::viewportCount} greater or equal to the {@code viewportCount} parameter in the last call to #CmdSetViewportWithCount()</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_VIEWPORT_WITH_COUNT dynamic state enabled and a ##VkPipelineViewportExclusiveScissorStateCreateInfoNV structure chained from ##VkPipelineViewportStateCreateInfo, then the bound graphics pipeline <b>must</b> have been created with ##VkPipelineViewportExclusiveScissorStateCreateInfoNV{@code ::exclusiveScissorCount} greater or equal to the {@code viewportCount} parameter in the last call to #CmdSetViewportWithCount()</li>
+            <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV dynamic state enabled then #CmdSetExclusiveScissorEnableNV() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
+            <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV dynamic state enabled then #CmdSetExclusiveScissorNV() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE dynamic state enabled then #CmdSetRasterizerDiscardEnable() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DEPTH_BIAS_ENABLE dynamic state enabled then #CmdSetDepthBiasEnable() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_LOGIC_OP_EXT dynamic state enabled then #CmdSetLogicOpEXT() <b>must</b> have been called in the current command buffer prior to this drawing command and the {@code logicOp} <b>must</b> be a valid {@code VkLogicOp} value</li>
@@ -432,6 +433,8 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT dynamic state enabled then #CmdSetColorWriteEnableEXT() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT dynamic state enabled then the {@code attachmentCount} parameter of {@code vkCmdSetColorWriteEnableEXT} <b>must</b> be greater than or equal to the ##VkPipelineColorBlendStateCreateInfo{@code ::attachmentCount} of the currently bound graphics pipeline</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT dynamic state enabled then #CmdSetDiscardRectangleEXT() <b>must</b> have been called in the current command buffer prior to this drawing command for each discard rectangle in ##VkPipelineDiscardRectangleStateCreateInfoEXT{@code ::discardRectangleCount}</li>
+            <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT dynamic state enabled then #CmdSetDiscardRectangleEnableEXT() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
+            <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT dynamic state enabled then #CmdSetDiscardRectangleModeEXT() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the current render pass instance was begun with #CmdBeginRendering() and ##VkRenderingInfo{@code ::pDepthAttachment→imageView} was not #NULL_HANDLE, the value of ##VkPipelineRenderingCreateInfo{@code ::depthAttachmentFormat} used to create the currently bound graphics pipeline <b>must</b> be equal to the {@code VkFormat} used to create ##VkRenderingInfo{@code ::pDepthAttachment→imageView}</li>
             <li>If the current render pass instance was begun with #CmdBeginRendering() and ##VkRenderingInfo{@code ::pDepthAttachment→imageView} was #NULL_HANDLE, the value of ##VkPipelineRenderingCreateInfo{@code ::depthAttachmentFormat} used to create the currently bound graphics pipeline <b>must</b> be equal to #FORMAT_UNDEFINED</li>
             <li>If the current render pass instance was begun with #CmdBeginRendering() and ##VkRenderingInfo{@code ::pStencilAttachment→imageView} was not #NULL_HANDLE, the value of ##VkPipelineRenderingCreateInfo{@code ::stencilAttachmentFormat} used to create the currently bound graphics pipeline <b>must</b> be equal to the {@code VkFormat} used to create ##VkRenderingInfo{@code ::pStencilAttachment→imageView}</li>
@@ -567,7 +570,7 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
 ￿    VkDeviceSize                                offset);</code></pre>
 
         <h5>Description</h5>
-        {@code vkCmdDrawClusterIndirectHUAWEI} behaves similarly to #CmdDrawClusterHUAWEI() except that the parameters are read by the device from a buffer during execution. The parameters of the dispatch are encoded in a ##VkDispatchIndirectCommand structure taken from buffer starting at offset.
+        {@code vkCmdDrawClusterIndirectHUAWEI} behaves similarly to #CmdDrawClusterHUAWEI() except that the parameters are read by the device from a buffer during execution. The parameters of the dispatch are encoded in a ##VkDispatchIndirectCommand structure taken from buffer starting at offset.Note the cluster culling shader pipeline only accepts #CmdDrawClusterHUAWEI() and {@code vkCmdDrawClusterIndirectHUAWEI} as drawing commands.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -575,6 +578,7 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
             <li>If a {@code VkSampler} created with {@code mipmapMode} equal to #SAMPLER_MIPMAP_MODE_LINEAR and {@code compareEnable} equal to #FALSE is used to sample a {@code VkImageView} as a result of this command, then the image view’s <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT</li>
             <li>If a {@code VkImageView} is sampled with <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#textures-depth-compare-operation">depth comparison</a>, the image view’s <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT</li>
             <li>If a {@code VkImageView} is accessed using atomic operations as a result of this command, then the image view’s <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT</li>
+            <li>If a #DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER descriptor is accessed using atomic operations as a result of this command, then the storage texel buffer’s <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-buffer-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT</li>
             <li>If a {@code VkImageView} is sampled with #FILTER_CUBIC_EXT as a result of this command, then the image view’s <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#resources-image-view-format-features">format features</a> <b>must</b> contain #FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT</li>
             <li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_EXT as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering, as specified by ##VkFilterCubicImageViewImageFormatPropertiesEXT{@code ::filterCubic} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
             <li>Any {@code VkImageView} being sampled with #FILTER_CUBIC_EXT with a reduction mode of either #SAMPLER_REDUCTION_MODE_MIN or #SAMPLER_REDUCTION_MODE_MAX as a result of this command <b>must</b> have a {@code VkImageViewType} and format that supports cubic filtering together with minmax filtering, as specified by ##VkFilterCubicImageViewImageFormatPropertiesEXT{@code ::filterCubicMinmax} returned by {@code vkGetPhysicalDeviceImageFormatProperties2}</li>
@@ -643,7 +647,6 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT dynamic state enabled then #CmdSetSampleLocationsEXT() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_CULL_MODE dynamic state enabled then #CmdSetCullMode() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_FRONT_FACE dynamic state enabled then #CmdSetFrontFace() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
-            <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_PRIMITIVE_TOPOLOGY dynamic state enabled then #CmdSetPrimitiveTopology() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DEPTH_TEST_ENABLE dynamic state enabled then #CmdSetDepthTestEnable() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DEPTH_WRITE_ENABLE dynamic state enabled then #CmdSetDepthWriteEnable() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DEPTH_COMPARE_OP dynamic state enabled then #CmdSetDepthCompareOp() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
@@ -659,6 +662,8 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_VIEWPORT_WITH_COUNT and #DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV dynamic states enabled then the {@code viewportCount} parameter in the last call to #CmdSetViewportShadingRatePaletteNV() <b>must</b> be greater than or equal to the {@code viewportCount} parameter in the last call to #CmdSetViewportWithCount()</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_VIEWPORT_WITH_COUNT dynamic state enabled and a ##VkPipelineViewportSwizzleStateCreateInfoNV structure chained from ##VkPipelineViewportStateCreateInfo, then the bound graphics pipeline <b>must</b> have been created with ##VkPipelineViewportSwizzleStateCreateInfoNV{@code ::viewportCount} greater or equal to the {@code viewportCount} parameter in the last call to #CmdSetViewportWithCount()</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_VIEWPORT_WITH_COUNT dynamic state enabled and a ##VkPipelineViewportExclusiveScissorStateCreateInfoNV structure chained from ##VkPipelineViewportStateCreateInfo, then the bound graphics pipeline <b>must</b> have been created with ##VkPipelineViewportExclusiveScissorStateCreateInfoNV{@code ::exclusiveScissorCount} greater or equal to the {@code viewportCount} parameter in the last call to #CmdSetViewportWithCount()</li>
+            <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV dynamic state enabled then #CmdSetExclusiveScissorEnableNV() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
+            <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV dynamic state enabled then #CmdSetExclusiveScissorNV() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE dynamic state enabled then #CmdSetRasterizerDiscardEnable() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DEPTH_BIAS_ENABLE dynamic state enabled then #CmdSetDepthBiasEnable() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_LOGIC_OP_EXT dynamic state enabled then #CmdSetLogicOpEXT() <b>must</b> have been called in the current command buffer prior to this drawing command and the {@code logicOp} <b>must</b> be a valid {@code VkLogicOp} value</li>
@@ -678,6 +683,8 @@ val HUAWEI_cluster_culling_shader = "HUAWEIClusterCullingShader".nativeClassVK("
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT dynamic state enabled then #CmdSetColorWriteEnableEXT() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT dynamic state enabled then the {@code attachmentCount} parameter of {@code vkCmdSetColorWriteEnableEXT} <b>must</b> be greater than or equal to the ##VkPipelineColorBlendStateCreateInfo{@code ::attachmentCount} of the currently bound graphics pipeline</li>
             <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT dynamic state enabled then #CmdSetDiscardRectangleEXT() <b>must</b> have been called in the current command buffer prior to this drawing command for each discard rectangle in ##VkPipelineDiscardRectangleStateCreateInfoEXT{@code ::discardRectangleCount}</li>
+            <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT dynamic state enabled then #CmdSetDiscardRectangleEnableEXT() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
+            <li>If the bound graphics pipeline state was created with the #DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT dynamic state enabled then #CmdSetDiscardRectangleModeEXT() <b>must</b> have been called in the current command buffer prior to this drawing command</li>
             <li>If the current render pass instance was begun with #CmdBeginRendering() and ##VkRenderingInfo{@code ::pDepthAttachment→imageView} was not #NULL_HANDLE, the value of ##VkPipelineRenderingCreateInfo{@code ::depthAttachmentFormat} used to create the currently bound graphics pipeline <b>must</b> be equal to the {@code VkFormat} used to create ##VkRenderingInfo{@code ::pDepthAttachment→imageView}</li>
             <li>If the current render pass instance was begun with #CmdBeginRendering() and ##VkRenderingInfo{@code ::pDepthAttachment→imageView} was #NULL_HANDLE, the value of ##VkPipelineRenderingCreateInfo{@code ::depthAttachmentFormat} used to create the currently bound graphics pipeline <b>must</b> be equal to #FORMAT_UNDEFINED</li>
             <li>If the current render pass instance was begun with #CmdBeginRendering() and ##VkRenderingInfo{@code ::pStencilAttachment→imageView} was not #NULL_HANDLE, the value of ##VkPipelineRenderingCreateInfo{@code ::stencilAttachmentFormat} used to create the currently bound graphics pipeline <b>must</b> be equal to the {@code VkFormat} used to create ##VkRenderingInfo{@code ::pStencilAttachment→imageView}</li>

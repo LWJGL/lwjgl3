@@ -28,10 +28,7 @@ val KHR_pipeline_executable_properties = "KHRPipelineExecutableProperties".nativ
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Special Use</b></dt>
             <dd><ul>
@@ -40,7 +37,7 @@ val KHR_pipeline_executable_properties = "KHRPipelineExecutableProperties".nativ
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Jason Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_pipeline_executable_properties]%20@jekstrand%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_pipeline_executable_properties%20extension*">jekstrand</a></li>
+                <li>Faith Ekstrand <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_pipeline_executable_properties]%20@gfxstrand%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_pipeline_executable_properties%20extension*">gfxstrand</a></li>
             </ul></dd>
         </dl>
 
@@ -54,7 +51,7 @@ val KHR_pipeline_executable_properties = "KHRPipelineExecutableProperties".nativ
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Ian Romanick, Intel</li>
                 <li>Kenneth Graunke, Intel</li>
                 <li>Baldur Karlsson, Valve</li>

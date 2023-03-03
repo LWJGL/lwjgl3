@@ -28,10 +28,7 @@ val EXT_attachment_feedback_loop_layout = "EXTAttachmentFeedbackLoopLayout".nati
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -53,7 +50,7 @@ val EXT_attachment_feedback_loop_layout = "EXTAttachmentFeedbackLoopLayout".nati
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Joshua Ashton, Valve</li>
-                <li>Jason Ekstrand, Collabora</li>
+                <li>Faith Ekstrand, Collabora</li>
                 <li>Bas Nieuwenhuizen, Google</li>
                 <li>Samuel Iglesias Gonsálvez, Igalia</li>
                 <li>Ralph Potter, Samsung</li>

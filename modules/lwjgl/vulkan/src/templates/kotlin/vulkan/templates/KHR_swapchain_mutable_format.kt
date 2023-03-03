@@ -30,12 +30,7 @@ val KHR_swapchain_mutable_format = "KHRSwapchainMutableFormat".nativeClassVK("KH
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSwapchain VK_KHR_swapchain} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRMaintenance2 VK_KHR_maintenance2} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRImageFormatList VK_KHR_image_format_list} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRMaintenance2 VK_KHR_maintenance2} and {@link KHRImageFormatList VK_KHR_image_format_list}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -53,7 +48,7 @@ val KHR_swapchain_mutable_format = "KHRSwapchainMutableFormat".nativeClassVK("KH
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Jan-Harald Fredriksen, ARM</li>
                 <li>Jesse Hall, Google</li>
                 <li>Daniel Rakos, AMD</li>

@@ -152,10 +152,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link NVExternalMemoryWin32 VK_NV_external_memory_win32} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link NVExternalMemoryWin32 VK_NV_external_memory_win32}</dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
  * <li><em>Promoted</em> to {@link KHRWin32KeyedMutex VK_KHR_win32_keyed_mutex} extension</li>

@@ -55,10 +55,7 @@ val NVX_multiview_per_view_attributes = "NVXMultiviewPerViewAttributes".nativeCl
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRMultiview VK_KHR_multiview} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRMultiview VK_KHR_multiview}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

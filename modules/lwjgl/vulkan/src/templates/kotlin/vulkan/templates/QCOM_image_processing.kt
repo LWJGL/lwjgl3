@@ -40,10 +40,7 @@ val QCOM_image_processing = "QCOMImageProcessing".nativeClassVK("QCOM_image_proc
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRFormatFeatureFlags2 VK_KHR_format_feature_flags2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

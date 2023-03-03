@@ -28,10 +28,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -55,7 +52,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
                 <li>Daniel Story, Nintendo</li>
                 <li>Jamie Madill, Google</li>
                 <li>Jan-Harald Fredriksen, Arm</li>
-                <li>Jason Ekstrand, Collabora</li>
+                <li>Faith Ekstrand, Collabora</li>
                 <li>Mike Blumenkrantz, Valve</li>
                 <li>Ricardo Garcia, Igalia</li>
                 <li>Samuel Pitoiset, Valve</li>
@@ -369,7 +366,7 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
         Specify the alpha to coverage enable state dynamically for a command buffer.
 
         <h5>C Specification</h5>
-        To <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the {@code alphaToOneEnable} state, call:
+        To <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the {@code alphaToCoverageEnable} state, call:
 
         <pre><code>
 ￿void vkCmdSetAlphaToCoverageEnableEXT(

@@ -30,13 +30,7 @@ val ANDROID_external_memory_android_hardware_buffer = "ANDROIDExternalMemoryAndr
             <dd>5</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRExternalMemory VK_KHR_external_memory} to be enabled for any device-level functionality</li>
-                <li>Requires {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} and {@link KHRExternalMemory VK_KHR_external_memory} and {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign} and {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

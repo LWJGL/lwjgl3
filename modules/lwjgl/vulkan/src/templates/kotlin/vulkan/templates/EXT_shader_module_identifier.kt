@@ -34,11 +34,7 @@ val EXT_shader_module_identifier = "EXTShaderModuleIdentifier".nativeClassVK("EX
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-                <li>Requires {@link EXTPipelineCreationCacheControl VK_EXT_pipeline_creation_cache_control} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link EXTPipelineCreationCacheControl VK_EXT_pipeline_creation_cache_control}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -64,7 +60,7 @@ val EXT_shader_module_identifier = "EXTShaderModuleIdentifier".nativeClassVK("EX
                 <li>Piers Daniell, NVIDIA</li>
                 <li>Jan-Harald Fredriksen, Arm</li>
                 <li>Tom Olson, Arm</li>
-                <li>Jason Ekstrand, Collabora</li>
+                <li>Faith Ekstrand, Collabora</li>
             </ul></dd>
         </dl>
         """

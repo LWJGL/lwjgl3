@@ -30,10 +30,7 @@ val NV_acquire_winrt_display = "NVAcquireWinrtDisplay".nativeClassVK("NV_acquire
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link EXTDirectModeDisplay VK_EXT_direct_mode_display} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link EXTDirectModeDisplay VK_EXT_direct_mode_display}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

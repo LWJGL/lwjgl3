@@ -33,10 +33,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
             <dd>70</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSurface VK_KHR_surface} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRSurface VK_KHR_surface}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -72,7 +69,7 @@ val KHR_swapchain = "KHRSwapchain".nativeClassVK("KHR_swapchain", type = "device
                 <li>Graham Sellers, AMD</li>
                 <li>Jeff Vigil, Qualcomm</li>
                 <li>Chia-I Wu, LunarG</li>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Matthaeus G. Chajdas, AMD</li>
                 <li>Ray Smith, ARM</li>
             </ul></dd>

@@ -28,10 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link EXTDirectModeDisplay VK_EXT_direct_mode_display} to be enabled</li>
- * </ul></dd>
+ * <dd>{@link EXTDirectModeDisplay VK_EXT_direct_mode_display}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Drew DeVault <a target="_blank" href="mailto:sir@cmpwn.com">sir@cmpwn.com</a></li>

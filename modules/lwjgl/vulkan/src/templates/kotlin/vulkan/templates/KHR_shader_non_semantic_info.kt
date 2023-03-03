@@ -30,11 +30,6 @@ val KHR_shader_non_semantic_info = "KHRShaderNonSemanticInfo".nativeClassVK("KHR
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-            </ul></dd>
-
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
                 <li><em>Promoted</em> to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>

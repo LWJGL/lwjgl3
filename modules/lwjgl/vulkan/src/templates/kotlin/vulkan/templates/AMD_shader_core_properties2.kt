@@ -31,10 +31,7 @@ val AMD_shader_core_properties2 = "AMDShaderCoreProperties2".nativeClassVK("AMD_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link AMDShaderCoreProperties VK_AMD_shader_core_properties} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link AMDShaderCoreProperties VK_AMD_shader_core_properties}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

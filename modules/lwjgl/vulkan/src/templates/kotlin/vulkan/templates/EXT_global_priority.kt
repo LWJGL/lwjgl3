@@ -35,11 +35,6 @@ val EXT_global_priority = "EXTGlobalPriority".nativeClassVK("EXT_global_priority
             <dt><b>Revision</b></dt>
             <dd>2</dd>
 
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-            </ul></dd>
-
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
                 <li><em>Promoted</em> to {@link KHRGlobalPriority VK_KHR_global_priority} extension</li>

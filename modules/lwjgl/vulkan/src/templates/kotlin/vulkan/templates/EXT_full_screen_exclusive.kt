@@ -30,13 +30,7 @@ val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full
             <dd>4</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRSurface VK_KHR_surface} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} to be enabled for any device-level functionality</li>
-                <li>Requires {@link KHRSwapchain VK_KHR_swapchain} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRSurface VK_KHR_surface} and {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} and {@link KHRSwapchain VK_KHR_swapchain}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -265,7 +259,7 @@ val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full
         VkSwapchainKHR("swapchain", "the swapchain to release exclusive full-screen access from.")
     )
 
-    DependsOn("""ext.contains("VK_KHR_device_group") || ext.contains("Vulkan11")""")..VkResult(
+    DependsOn("VK_KHR_device_group || Vulkan11")..VkResult(
         "GetDeviceGroupSurfacePresentModes2EXT",
         """
         Query device group present capabilities for a surface.

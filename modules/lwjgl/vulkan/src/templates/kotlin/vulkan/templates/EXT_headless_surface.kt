@@ -32,10 +32,7 @@ val EXT_headless_surface = "EXTHeadlessSurface".nativeClassVK("EXT_headless_surf
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSurface VK_KHR_surface} to be enabled</li>
-            </ul></dd>
+            <dd>{@link KHRSurface VK_KHR_surface}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

@@ -41,9 +41,7 @@ val EXT_subgroup_size_control = "EXTSubgroupSizeControl".nativeClassVK("EXT_subg
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.1</li>
-            </ul></dd>
+            <dd><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
@@ -69,7 +67,7 @@ val EXT_subgroup_size_control = "EXTSubgroupSizeControl".nativeClassVK("EXT_subg
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Jeff Bolz, NVIDIA</li>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Sławek Grajewski, Intel</li>
                 <li>Jesse Hall, Google</li>
                 <li>Neil Henning, AMD</li>

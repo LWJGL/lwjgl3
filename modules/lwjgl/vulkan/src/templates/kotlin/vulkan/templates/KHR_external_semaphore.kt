@@ -31,10 +31,7 @@ val KHR_external_semaphore = "KHRExternalSemaphore".nativeClassVK("KHR_external_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRExternalSemaphoreCapabilities VK_KHR_external_semaphore_capabilities} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRExternalSemaphoreCapabilities VK_KHR_external_semaphore_capabilities}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
@@ -62,7 +59,7 @@ val KHR_external_semaphore = "KHRExternalSemaphore".nativeClassVK("KHR_external_
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Jesse Hall, Google</li>
                 <li>Tobias Hector, Imagination Technologies</li>
                 <li>James Jones, NVIDIA</li>

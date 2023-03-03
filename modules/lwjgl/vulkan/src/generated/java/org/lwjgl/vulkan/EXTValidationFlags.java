@@ -23,10 +23,6 @@ package org.lwjgl.vulkan;
  * <dd>62</dd>
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
- * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
  * <li><em>Deprecated</em> by {@link EXTValidationFeatures VK_EXT_validation_features} extension</li>

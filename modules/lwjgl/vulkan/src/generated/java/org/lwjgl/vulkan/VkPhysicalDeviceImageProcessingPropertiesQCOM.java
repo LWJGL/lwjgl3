@@ -110,7 +110,7 @@ public class VkPhysicalDeviceImageProcessingPropertiesQCOM extends Struct implem
     public VkExtent2D maxWeightFilterDimension() { return nmaxWeightFilterDimension(address()); }
     /** a {@link VkExtent2D} describing the largest dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blockSize} in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-blockmatch">block matching</a> operations. */
     public VkExtent2D maxBlockMatchRegion() { return nmaxBlockMatchRegion(address()); }
-    /** a {@link VkExtent2D} describing the the maximum dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blocksize} in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-boxfilter">box filter sampling</a> operations. */
+    /** a {@link VkExtent2D} describing the maximum dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blocksize} in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#textures-boxfilter">box filter sampling</a> operations. */
     public VkExtent2D maxBoxFilterBlockSize() { return nmaxBoxFilterBlockSize(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */

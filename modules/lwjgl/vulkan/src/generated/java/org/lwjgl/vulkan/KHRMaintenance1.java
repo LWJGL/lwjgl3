@@ -41,10 +41,6 @@ import static org.lwjgl.system.JNI.*;
  * <dd>70</dd>
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
- * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * </ul></dd>
  * <dt><b>Deprecation state</b></dt>
  * <dd><ul>
  * <li><em>Promoted</em> to <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#versions-1.1-promotions">Vulkan 1.1</a></li>
@@ -70,7 +66,7 @@ import static org.lwjgl.system.JNI.*;
  * <li>Daniel Koch, NVIDIA</li>
  * <li>Daniel Rakos, AMD</li>
  * <li>Jan-Harald Fredriksen, ARM</li>
- * <li>Jason Ekstrand, Intel</li>
+ * <li>Faith Ekstrand, Intel</li>
  * <li>Jeff Bolz, NVIDIA</li>
  * <li>Jesse Hall, Google</li>
  * <li>John Kessenich, Google</li>

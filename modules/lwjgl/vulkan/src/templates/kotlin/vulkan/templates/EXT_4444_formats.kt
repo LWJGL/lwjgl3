@@ -35,10 +35,7 @@ val EXT_4444_formats = "EXT4444Formats".nativeClassVK("EXT_4444_formats", type =
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
@@ -67,7 +64,7 @@ val EXT_4444_formats = "EXT4444Formats".nativeClassVK("EXT_4444_formats", type =
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Joshua Ashton, Valve</li>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
             </ul></dd>
         </dl>
         """

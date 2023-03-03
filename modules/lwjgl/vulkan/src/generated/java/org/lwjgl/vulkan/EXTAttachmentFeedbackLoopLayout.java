@@ -20,10 +20,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Joshua Ashton <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_attachment_feedback_loop_layout]%20@Joshua-Ashton%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_attachment_feedback_loop_layout%20extension*">Joshua-Ashton</a></li>
@@ -42,7 +39,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Joshua Ashton, Valve</li>
- * <li>Jason Ekstrand, Collabora</li>
+ * <li>Faith Ekstrand, Collabora</li>
  * <li>Bas Nieuwenhuizen, Google</li>
  * <li>Samuel Iglesias Gonsálvez, Igalia</li>
  * <li>Ralph Potter, Samsung</li>

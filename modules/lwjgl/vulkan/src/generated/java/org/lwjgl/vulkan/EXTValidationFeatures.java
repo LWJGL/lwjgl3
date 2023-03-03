@@ -24,10 +24,6 @@ package org.lwjgl.vulkan;
  * <dd>248</dd>
  * <dt><b>Revision</b></dt>
  * <dd>5</dd>
- * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * </ul></dd>
  * <dt><b>Special Use</b></dt>
  * <dd><ul>
  * <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">Debugging tools</a></li>

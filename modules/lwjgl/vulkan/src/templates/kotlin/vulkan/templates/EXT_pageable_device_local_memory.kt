@@ -34,10 +34,7 @@ val EXT_pageable_device_local_memory = "EXTPageableDeviceLocalMemory".nativeClas
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link EXTMemoryPriority VK_EXT_memory_priority} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link EXTMemoryPriority VK_EXT_memory_priority}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

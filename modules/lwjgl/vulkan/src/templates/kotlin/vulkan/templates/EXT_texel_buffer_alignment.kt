@@ -14,7 +14,7 @@ val EXT_texel_buffer_alignment = "EXTTexelBufferAlignment".nativeClassVK("EXT_te
         This extension adds more expressive alignment requirements for uniform and storage texel buffers. Some implementations have single texel alignment requirements that cannot be expressed via ##VkPhysicalDeviceLimits{@code ::minTexelBufferOffsetAlignment}.
 
         <h5>Promotion to Vulkan 1.3</h5>
-        Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. However, only the properties structure is promoted. The feature structure is not promoted and {@code texelBufferAlignment} is enabled if when using a Vulkan 1.3 instance. The original type name is still available as an alias of the core functionality.
+        Functionality in this extension is included in core Vulkan 1.3, with the EXT suffix omitted. However, only the properties structure is promoted. The feature structure is not promoted and {@code texelBufferAlignment} is enabled if using a Vulkan 1.3 instance. The original type name is still available as an alias of the core functionality.
 
         <h5>VK_EXT_texel_buffer_alignment</h5>
         <dl>
@@ -31,10 +31,7 @@ val EXT_texel_buffer_alignment = "EXTTexelBufferAlignment".nativeClassVK("EXT_te
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>

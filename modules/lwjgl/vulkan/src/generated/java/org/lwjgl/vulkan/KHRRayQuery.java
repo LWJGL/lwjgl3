@@ -44,11 +44,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.1</li>
- * <li>Requires {@link KHRSpirv14 VK_KHR_spirv_1_4} to be enabled for any device-level functionality</li>
- * <li>Requires {@link KHRAccelerationStructure VK_KHR_acceleration_structure} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRSpirv14 VK_KHR_spirv_1_4} and {@link KHRAccelerationStructure VK_KHR_acceleration_structure}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Daniel Koch <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_ray_query]%20@dgkoch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_ray_query%20extension*">dgkoch</a></li>

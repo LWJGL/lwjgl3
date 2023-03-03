@@ -32,10 +32,7 @@ val EXT_fragment_shader_interlock = "EXTFragmentShaderInterlock".nativeClassVK("
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -59,7 +56,7 @@ val EXT_fragment_shader_interlock = "EXTFragmentShaderInterlock".nativeClassVK("
                 <li>Daniel Koch, NVIDIA</li>
                 <li>Graeme Leese, Broadcom</li>
                 <li>Jan-Harald Fredriksen, Arm</li>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Jeff Bolz, NVIDIA</li>
                 <li>Ruihao Zhang, Qualcomm</li>
                 <li>Slawomir Grajewski, Intel</li>

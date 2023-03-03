@@ -34,10 +34,7 @@ val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRExternalMemory VK_KHR_external_memory} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRExternalMemory VK_KHR_external_memory}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
@@ -57,7 +54,7 @@ val EXT_queue_family_foreign = "EXTQueueFamilyForeign".nativeClassVK("EXT_queue_
             <dd><ul>
                 <li>Chad Versace, Google</li>
                 <li>James Jones, NVIDIA</li>
-                <li>Jason Ekstrand, Intel</li>
+                <li>Faith Ekstrand, Intel</li>
                 <li>Jesse Hall, Google</li>
                 <li>Daniel Rakos, AMD</li>
                 <li>Ray Smith, ARM</li>

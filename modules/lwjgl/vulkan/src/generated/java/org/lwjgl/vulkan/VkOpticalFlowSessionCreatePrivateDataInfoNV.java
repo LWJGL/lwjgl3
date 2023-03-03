@@ -94,7 +94,7 @@ public class VkOpticalFlowSessionCreatePrivateDataInfoNV extends Struct implemen
     /** an identifier for data which is passed at a memory location specified in {@link VkOpticalFlowSessionCreatePrivateDataInfoNV}{@code ::pPrivateData}. */
     @NativeType("uint32_t")
     public int id() { return nid(address()); }
-    /** is the size of data in bytes which is passed at a memory location specified in {@link VkOpticalFlowSessionCreatePrivateDataInfoNV}{@code ::pPrivateData}. */
+    /** the size of data in bytes which is passed at a memory location specified in {@link VkOpticalFlowSessionCreatePrivateDataInfoNV}{@code ::pPrivateData}. */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
     /** a pointer to NV internal data. */

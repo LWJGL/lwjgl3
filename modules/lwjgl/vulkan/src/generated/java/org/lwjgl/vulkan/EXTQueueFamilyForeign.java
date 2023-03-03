@@ -26,10 +26,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRExternalMemory VK_KHR_external_memory} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRExternalMemory VK_KHR_external_memory}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_queue_family_foreign]%20@chadversary%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_queue_family_foreign%20extension*">chadversary</a></li>
@@ -47,7 +44,7 @@ package org.lwjgl.vulkan;
  * <dd><ul>
  * <li>Chad Versace, Google</li>
  * <li>James Jones, NVIDIA</li>
- * <li>Jason Ekstrand, Intel</li>
+ * <li>Faith Ekstrand, Intel</li>
  * <li>Jesse Hall, Google</li>
  * <li>Daniel Rakos, AMD</li>
  * <li>Ray Smith, ARM</li>

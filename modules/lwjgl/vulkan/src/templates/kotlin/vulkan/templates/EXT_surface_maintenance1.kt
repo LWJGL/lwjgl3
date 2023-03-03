@@ -36,11 +36,7 @@ val EXT_surface_maintenance1 = "EXTSurfaceMaintenance1".nativeClassVK("EXT_surfa
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRSurface VK_KHR_surface} to be enabled</li>
-                <li>Requires {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} to be enabled</li>
-            </ul></dd>
+            <dd>{@link KHRSurface VK_KHR_surface} and {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

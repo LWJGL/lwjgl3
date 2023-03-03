@@ -34,11 +34,6 @@ val AMD_negative_viewport_height = "AMDNegativeViewportHeight".nativeClassVK("AM
             <dt><b>Revision</b></dt>
             <dd>1</dd>
 
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-            </ul></dd>
-
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
                 <li>

@@ -32,10 +32,7 @@ val EXT_border_color_swizzle = "EXTBorderColorSwizzle".nativeClassVK("EXT_border
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link EXTCustomBorderColor VK_EXT_custom_border_color} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link EXTCustomBorderColor VK_EXT_custom_border_color}</dd>
 
             <dt><b>Special Uses</b></dt>
             <dd><ul>

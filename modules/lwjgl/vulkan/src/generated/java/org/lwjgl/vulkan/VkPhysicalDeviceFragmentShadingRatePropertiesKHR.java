@@ -190,7 +190,7 @@ public class VkPhysicalDeviceFragmentShadingRatePropertiesKHR extends Struct imp
     /** specifies whether the implementation supports writing {@code FragDepth} or {@code FragStencilRefEXT} from a fragment shader for multi-pixel fragments. If this value is {@link VK10#VK_FALSE FALSE}, writing to those built-ins will clamp the fragment shading rate to <code>(1,1)</code>. */
     @NativeType("VkBool32")
     public boolean fragmentShadingRateWithShaderDepthStencilWrites() { return nfragmentShadingRateWithShaderDepthStencilWrites(address()) != 0; }
-    /** specifies whether the the implementation supports setting valid bits of {@link VkPipelineMultisampleStateCreateInfo}{@code ::pSampleMask} to 0 for multi-pixel fragments. If this value is {@link VK10#VK_FALSE FALSE}, zeroing valid bits in the sample mask will clamp the fragment shading rate to <code>(1,1)</code>. */
+    /** specifies whether the implementation supports setting valid bits of {@link VkPipelineMultisampleStateCreateInfo}{@code ::pSampleMask} to 0 for multi-pixel fragments. If this value is {@link VK10#VK_FALSE FALSE}, zeroing valid bits in the sample mask will clamp the fragment shading rate to <code>(1,1)</code>. */
     @NativeType("VkBool32")
     public boolean fragmentShadingRateWithSampleMask() { return nfragmentShadingRateWithSampleMask(address()) != 0; }
     /** specifies whether the implementation supports reading or writing {@code SampleMask} for multi-pixel fragments. If this value is {@link VK10#VK_FALSE FALSE}, using that built-in will clamp the fragment shading rate to <code>(1,1)</code>. */

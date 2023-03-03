@@ -31,10 +31,7 @@ val EXT_scalar_block_layout = "EXTScalarBlockLayout".nativeClassVK("EXT_scalar_b
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
 
             <dt><b>Deprecation state</b></dt>
             <dd><ul>
@@ -62,7 +59,7 @@ val EXT_scalar_block_layout = "EXTScalarBlockLayout".nativeClassVK("EXT_scalar_b
                 <li>Jeff Bolz</li>
                 <li>Jan-Harald Fredriksen</li>
                 <li>Graeme Leese</li>
-                <li>Jason Ekstrand</li>
+                <li>Faith Ekstrand</li>
                 <li>John Kessenich</li>
             </ul></dd>
         </dl>

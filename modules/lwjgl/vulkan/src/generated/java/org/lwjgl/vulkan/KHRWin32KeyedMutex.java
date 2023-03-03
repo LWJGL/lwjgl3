@@ -20,10 +20,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRExternalMemoryWin32 VK_KHR_external_memory_win32} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRExternalMemoryWin32 VK_KHR_external_memory_win32}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Carsten Rohde <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_win32_keyed_mutex]%20@crohde%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_win32_keyed_mutex%20extension*">crohde</a></li>

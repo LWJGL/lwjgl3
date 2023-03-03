@@ -28,10 +28,7 @@ val KHR_win32_keyed_mutex = "KHRWin32KeyedMutex".nativeClassVK("KHR_win32_keyed_
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd><ul>
-                <li>Requires support for Vulkan 1.0</li>
-                <li>Requires {@link KHRExternalMemoryWin32 VK_KHR_external_memory_win32} to be enabled for any device-level functionality</li>
-            </ul></dd>
+            <dd>{@link KHRExternalMemoryWin32 VK_KHR_external_memory_win32}</dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

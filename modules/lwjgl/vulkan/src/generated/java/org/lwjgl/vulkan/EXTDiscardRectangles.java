@@ -17,6 +17,8 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <p>These discard rectangles operate orthogonally to the existing scissor test functionality. The discard rectangles can be different for each physical device in a device group by specifying the device mask and setting discard rectangle dynamic state.</p>
  * 
+ * <p>Version 2 of this extension introduces new dynamic states {@link #VK_DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT} and {@link #VK_DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT}, and the corresponding functions {@link #vkCmdSetDiscardRectangleEnableEXT CmdSetDiscardRectangleEnableEXT} and {@link #vkCmdSetDiscardRectangleModeEXT CmdSetDiscardRectangleModeEXT}. Applications that use these dynamic states must ensure the implementation advertises at least {@code specVersion} 2 of this extension.</p>
+ * 
  * <h5>VK_EXT_discard_rectangles</h5>
  * 
  * <dl>
@@ -27,12 +29,9 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>100</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_discard_rectangles]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_discard_rectangles%20extension*">pdaniell-nv</a></li>
@@ -43,7 +42,7 @@ import static org.lwjgl.system.JNI.*;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2016-12-22</dd>
+ * <dd>2023-01-18</dd>
  * <dt><b>Interactions and External Dependencies</b></dt>
  * <dd><ul>
  * <li>Interacts with {@link KHRDeviceGroup VK_KHR_device_group}</li>
@@ -59,7 +58,7 @@ import static org.lwjgl.system.JNI.*;
 public class EXTDiscardRectangles {
 
     /** The extension specification version. */
-    public static final int VK_EXT_DISCARD_RECTANGLES_SPEC_VERSION = 1;
+    public static final int VK_EXT_DISCARD_RECTANGLES_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_DISCARD_RECTANGLES_EXTENSION_NAME = "VK_EXT_discard_rectangles";
@@ -78,8 +77,21 @@ public class EXTDiscardRectangles {
         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT = 1000099000,
         VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT = 1000099001;
 
-    /** Extends {@code VkDynamicState}. */
-    public static final int VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT = 1000099000;
+    /**
+     * Extends {@code VkDynamicState}.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_EXT}</li>
+     * <li>{@link #VK_DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT}</li>
+     * <li>{@link #VK_DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT}</li>
+     * </ul>
+     */
+    public static final int
+        VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT        = 1000099000,
+        VK_DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT = 1000099001,
+        VK_DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT   = 1000099002;
 
     /**
      * VkDiscardRectangleModeEXT - Specify the discard rectangle mode
@@ -93,7 +105,7 @@ public class EXTDiscardRectangles {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkPipelineDiscardRectangleStateCreateInfoEXT}</p>
+     * <p>{@link VkPipelineDiscardRectangleStateCreateInfoEXT}, {@link #vkCmdSetDiscardRectangleModeEXT CmdSetDiscardRectangleModeEXT}</p>
      */
     public static final int
         VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT = 0,
@@ -183,6 +195,123 @@ public class EXTDiscardRectangles {
      */
     public static void vkCmdSetDiscardRectangleEXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstDiscardRectangle, @NativeType("VkRect2D const *") VkRect2D.Buffer pDiscardRectangles) {
         nvkCmdSetDiscardRectangleEXT(commandBuffer, firstDiscardRectangle, pDiscardRectangles.remaining(), pDiscardRectangles.address());
+    }
+
+    // --- [ vkCmdSetDiscardRectangleEnableEXT ] ---
+
+    /**
+     * Enable discard rectangles dynamically for a command buffer.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>To <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically set</a> whether discard rectangles are enabled, call:</p>
+     * 
+     * <pre><code>
+     * void vkCmdSetDiscardRectangleEnableEXT(
+     *     VkCommandBuffer                             commandBuffer,
+     *     VkBool32                                    discardRectangleEnable);</code></pre>
+     * 
+     * <h5>Description</h5>
+     * 
+     * <p>This command sets the discard rectangle enable for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is implied by the {@link VkPipelineDiscardRectangleStateCreateInfoEXT}{@code ::discardRectangleCount} value used to create the currently active pipeline, where a non-zero {@code discardRectangleCount} implicitly enables discard rectangles, otherwise they are disabled.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>The {@link EXTDiscardRectangles VK_EXT_discard_rectangles} extension <b>must</b> be enabled, and the implementation <b>must</b> support at least {@code specVersion} 2 of this extension</li>
+     * </ul>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+     * <li>This command <b>must</b> only be called outside of a video coding scope</li>
+     * </ul>
+     * 
+     * <h5>Host Synchronization</h5>
+     * 
+     * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+     * </ul>
+     * 
+     * <h5>Command Properties</h5>
+     * 
+     * <table class="lwjgl">
+     * <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
+     * </table>
+     *
+     * @param commandBuffer          the command buffer into which the command will be recorded.
+     * @param discardRectangleEnable specifies whether discard rectangles are enabled or not.
+     */
+    public static void vkCmdSetDiscardRectangleEnableEXT(VkCommandBuffer commandBuffer, @NativeType("VkBool32") boolean discardRectangleEnable) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetDiscardRectangleEnableEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(commandBuffer.address(), discardRectangleEnable ? 1 : 0, __functionAddress);
+    }
+
+    // --- [ vkCmdSetDiscardRectangleModeEXT ] ---
+
+    /**
+     * Sets the discard rectangle mode dynamically for a command buffer.
+     * 
+     * <h5>C Specification</h5>
+     * 
+     * <p>To <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#pipelines-dynamic-state">dynamically set</a> the discard rectangle mode, call:</p>
+     * 
+     * <pre><code>
+     * void vkCmdSetDiscardRectangleModeEXT(
+     *     VkCommandBuffer                             commandBuffer,
+     *     VkDiscardRectangleModeEXT                   discardRectangleMode);</code></pre>
+     * 
+     * <h5>Description</h5>
+     * 
+     * <p>This command sets the discard rectangle mode for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineDiscardRectangleStateCreateInfoEXT}{@code ::discardRectangleMode} value used to create the currently active pipeline.</p>
+     * 
+     * <h5>Valid Usage</h5>
+     * 
+     * <ul>
+     * <li>The {@link EXTDiscardRectangles VK_EXT_discard_rectangles} extension <b>must</b> be enabled, and the implementation <b>must</b> support at least {@code specVersion} 2 of this extension</li>
+     * </ul>
+     * 
+     * <h5>Valid Usage (Implicit)</h5>
+     * 
+     * <ul>
+     * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+     * <li>{@code discardRectangleMode} <b>must</b> be a valid {@code VkDiscardRectangleModeEXT} value</li>
+     * <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#commandbuffers-lifecycle">recording state</a></li>
+     * <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+     * <li>This command <b>must</b> only be called outside of a video coding scope</li>
+     * </ul>
+     * 
+     * <h5>Host Synchronization</h5>
+     * 
+     * <ul>
+     * <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+     * <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+     * </ul>
+     * 
+     * <h5>Command Properties</h5>
+     * 
+     * <table class="lwjgl">
+     * <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+     * <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
+     * </table>
+     *
+     * @param commandBuffer        the command buffer into which the command will be recorded.
+     * @param discardRectangleMode specifies the discard rectangle mode for all discard rectangles, either inclusive or exclusive.
+     */
+    public static void vkCmdSetDiscardRectangleModeEXT(VkCommandBuffer commandBuffer, @NativeType("VkDiscardRectangleModeEXT") int discardRectangleMode) {
+        long __functionAddress = commandBuffer.getCapabilities().vkCmdSetDiscardRectangleModeEXT;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        callPV(commandBuffer.address(), discardRectangleMode, __functionAddress);
     }
 
 }

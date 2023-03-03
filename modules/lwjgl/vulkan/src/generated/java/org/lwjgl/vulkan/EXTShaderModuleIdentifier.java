@@ -31,11 +31,7 @@ import static org.lwjgl.system.JNI.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
- * <li>Requires {@link EXTPipelineCreationCacheControl VK_EXT_pipeline_creation_cache_control} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link EXTPipelineCreationCacheControl VK_EXT_pipeline_creation_cache_control}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Hans-Kristian Arntzen <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_module_identifier]%20@HansKristian-Work%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_shader_module_identifier%20extension*">HansKristian-Work</a></li>
@@ -58,7 +54,7 @@ import static org.lwjgl.system.JNI.*;
  * <li>Piers Daniell, NVIDIA</li>
  * <li>Jan-Harald Fredriksen, Arm</li>
  * <li>Tom Olson, Arm</li>
- * <li>Jason Ekstrand, Collabora</li>
+ * <li>Faith Ekstrand, Collabora</li>
  * </ul></dd>
  * </dl>
  */

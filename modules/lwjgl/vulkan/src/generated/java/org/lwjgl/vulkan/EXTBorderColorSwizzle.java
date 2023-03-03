@@ -24,10 +24,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link EXTCustomBorderColor VK_EXT_custom_border_color} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link EXTCustomBorderColor VK_EXT_custom_border_color}</dd>
  * <dt><b>Special Uses</b></dt>
  * <dd><ul>
  * <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>

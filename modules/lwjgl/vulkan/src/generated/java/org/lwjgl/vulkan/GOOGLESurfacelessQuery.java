@@ -20,10 +20,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Revision</b></dt>
  * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRSurface VK_KHR_surface} to be enabled</li>
- * </ul></dd>
+ * <dd>{@link KHRSurface VK_KHR_surface}</dd>
  * <dt><b>Special Use</b></dt>
  * <dd><ul>
  * <li><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>

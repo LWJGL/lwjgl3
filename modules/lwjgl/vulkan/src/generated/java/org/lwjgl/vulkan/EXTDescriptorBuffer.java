@@ -28,13 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Revision</b></dt>
  * <dd>1</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd><ul>
- * <li>Requires support for Vulkan 1.0</li>
- * <li>Requires {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} to be enabled for any device-level functionality</li>
- * <li>Requires {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} to be enabled for any device-level functionality</li>
- * <li>Requires {@link KHRSynchronization2 VK_KHR_synchronization2} to be enabled for any device-level functionality</li>
- * <li>Requires {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing} to be enabled for any device-level functionality</li>
- * </ul></dd>
+ * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} and {@link KHRSynchronization2 VK_KHR_synchronization2} and {@link EXTDescriptorIndexing VK_EXT_descriptor_indexing}</dd>
  * <dt><b>Contact</b></dt>
  * <dd><ul>
  * <li>Tobias Hector <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_descriptor_buffer]%20@tobski%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_descriptor_buffer%20extension*">tobski</a></li>
@@ -651,7 +645,7 @@ public class EXTDescriptorBuffer {
      * 
      * <h5>C Specification</h5>
      * 
-     * <p>To get the the opaque descriptor data for a buffer, call:</p>
+     * <p>To get the opaque descriptor data for a buffer, call:</p>
      * 
      * <pre><code>
      * VkResult vkGetBufferOpaqueCaptureDescriptorDataEXT(
