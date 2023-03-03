@@ -262,6 +262,8 @@ public final class ALCapabilities {
     public final boolean AL_SOFT_source_spatialize;
     /** When true, {@link SOFTUHJ} is supported. */
     public final boolean AL_SOFT_UHJ;
+    /** When true, {@link SOFTXHoldOnDisconnect} is supported. */
+    public final boolean AL_SOFTX_hold_on_disconnect;
 
     /** Off-heap array of the above function addresses. */
     final PointerBuffer addresses;
@@ -310,6 +312,7 @@ public final class ALCapabilities {
         AL_SOFT_source_resampler = check_SOFT_source_resampler(provider, caps, ext);
         AL_SOFT_source_spatialize = ext.contains("AL_SOFT_source_spatialize");
         AL_SOFT_UHJ = ext.contains("AL_SOFT_UHJ");
+        AL_SOFTX_hold_on_disconnect = ext.contains("AL_SOFTX_hold_on_disconnect");
 
         alGetError = caps.get(0);
         alEnable = caps.get(1);
