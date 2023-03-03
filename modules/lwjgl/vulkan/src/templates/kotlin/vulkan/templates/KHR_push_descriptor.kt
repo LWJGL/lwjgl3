@@ -159,7 +159,7 @@ val KHR_push_descriptor = "KHRPushDescriptor".nativeClassVK("KHR_push_descriptor
         VkWriteDescriptorSet.const.p("pDescriptorWrites", "a pointer to an array of ##VkWriteDescriptorSet structures describing the descriptors to be updated.")
     )
 
-    DependsOn("Vulkan11 || VK_KHR_descriptor_update_template")..void(
+    DependsOn("""ext.contains("Vulkan11") || ext.contains("VK_KHR_descriptor_update_template")""")..void(
         "CmdPushDescriptorSetWithTemplateKHR",
         """
         Pushes descriptor updates into a command buffer using a descriptor update template.

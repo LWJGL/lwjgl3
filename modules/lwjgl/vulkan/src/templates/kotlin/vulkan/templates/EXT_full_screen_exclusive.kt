@@ -259,7 +259,7 @@ val EXT_full_screen_exclusive = "EXTFullScreenExclusive".nativeClassVK("EXT_full
         VkSwapchainKHR("swapchain", "the swapchain to release exclusive full-screen access from.")
     )
 
-    DependsOn("VK_KHR_device_group || Vulkan11")..VkResult(
+    DependsOn("""ext.contains("VK_KHR_device_group") || ext.contains("Vulkan11")""")..VkResult(
         "GetDeviceGroupSurfacePresentModes2EXT",
         """
         Query device group present capabilities for a surface.

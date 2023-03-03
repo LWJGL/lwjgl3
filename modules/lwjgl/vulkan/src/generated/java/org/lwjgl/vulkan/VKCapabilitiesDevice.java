@@ -2510,7 +2510,7 @@ public class VKCapabilitiesDevice {
             return false;
         }
 
-        int flag0 = VK_KHR_device_group || Vulkan11 ? 0 : Integer.MIN_VALUE;
+        int flag0 = ext.contains("VK_KHR_device_group") || ext.contains("Vulkan11") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
             271, 272, flag0 + 273
@@ -3119,7 +3119,7 @@ public class VKCapabilitiesDevice {
             return false;
         }
 
-        int flag0 = Vulkan11 || VK_KHR_descriptor_update_template ? 0 : Integer.MIN_VALUE;
+        int flag0 = ext.contains("Vulkan11") || ext.contains("VK_KHR_descriptor_update_template") ? 0 : Integer.MIN_VALUE;
 
         return checkFunctions(provider, caps, new int[] {
             414, flag0 + 375
