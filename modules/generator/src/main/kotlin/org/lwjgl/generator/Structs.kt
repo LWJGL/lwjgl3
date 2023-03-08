@@ -32,6 +32,9 @@ private val BUFFER_KEYWORDS = setOf(
     "apply", "get", "parallelStream", "put", "stream"
 )
 
+private val LINE_END_PATTERN = "\n(?!$)".toRegex()
+private val MEMBER_NAME_PATTERN = Regex("\\p{javaJavaIdentifierStart}\\p{javaJavaIdentifierPart}*")
+
 open class StructMember(
     val nativeType: DataType,
     val name: String,
@@ -577,10 +580,12 @@ $indent}"""
         }
 
     private fun StructMember.getCheckExpression() = if (this.has<Check>())
-        this.get<Check>().expression.let { expression ->
-            // if expression is the name of another member, convert to auto-size expression
-            members.singleOrNull { it.name == expression }?.autoSize ?: expression
-        }
+        this.get<Check>().expression
+            .replace(MEMBER_NAME_PATTERN) { result ->
+                val expression = result.value
+                // if expression is the name of another member, convert to auto-size expression
+                members.singleOrNull { it.name == expression }?.autoSize ?: expression
+            }
     else
         null
 
@@ -1378,7 +1383,7 @@ ${validations.joinToString("\n")}
                     PrintWriter(writer).use {
                         it.generateJava(nested = true, level = level + 1)
                     }
-                    println(writer.toString().replace("\n(?!$)".toRegex(), "\n    "))
+                    println(writer.toString().replace(LINE_END_PATTERN, "\n    "))
                 }
             }
 

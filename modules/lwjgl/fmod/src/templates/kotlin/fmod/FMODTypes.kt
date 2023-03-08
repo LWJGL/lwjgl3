@@ -1322,7 +1322,7 @@ val FMOD_DSP_PARAMETER_DESC_INT = struct(Module.FMOD, "FMOD_DSP_PARAMETER_DESC_I
     int("max", "")
     int("defaultval", "")
     FMOD_BOOL("goestoinf", "")
-    Check("nmax(struct) - nmin(struct) + 1")..nullable..charUTF8.const.p.const.p("valuenames", "")
+    Check("max - min + 1")..nullable..charUTF8.const.p.const.p("valuenames", "")
 }
 
 val FMOD_DSP_PARAMETER_DESC_BOOL = struct(Module.FMOD, "FMOD_DSP_PARAMETER_DESC_BOOL") {
