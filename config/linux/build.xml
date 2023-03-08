@@ -465,6 +465,7 @@
             <update-dependency module="freetype" artifact="libfreetype.so"/>
             <update-dependency module="glfw" artifact="libglfw.so"/>
             <update-dependency module="harfbuzz" artifact="libharfbuzz.so"/>
+            <update-dependency module="hwloc" artifact="libhwloc.so"/>
             <update-dependency module="jemalloc" artifact="libjemalloc.so"/>
             <update-dependency module="ktx" artifact="libktx.so"/>
             <update-dependency module="openal" artifact="libopenal.so"/>

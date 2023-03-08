@@ -494,6 +494,7 @@
             <compileBinding binding="fmod"/>
             <compileBinding binding="freetype"/>
             <compileBinding binding="harfbuzz"/>
+            <compileBinding binding="hwloc"/>
             <compileBinding binding="jawt"/>
             <compileBinding binding="jemalloc"/>
             <compileBinding binding="libdivide"/>
@@ -841,6 +842,7 @@
             <include name="org/lwjgl/demo/util/*.java"/>
             <include name="org/lwjgl/demo/util/freetype/**" if:true="${binding.freetype}"/>
             <include name="org/lwjgl/demo/util/harfbuzz/**" if:true="${binding.harfbuzz}"/>
+            <include name="org/lwjgl/demo/util/hwloc/**" if:true="${binding.hwloc}"/>
             <include name="org/lwjgl/demo/util/ktx/**" if:true="${binding.ktx}"/>
             <include name="org/lwjgl/demo/util/lmdb/**" if:true="${binding.lmdb}"/>
             <include name="org/lwjgl/demo/util/lz4/**" if:true="${binding.lz4}"/>
@@ -1606,6 +1608,9 @@
 
         <!-- HarfBuzz -->
         <release-module name="harfbuzz" native-library="harfbuzz" title="HarfBuzz" if:true="${binding.harfbuzz}"/>
+
+        <!-- hwloc -->
+        <release-module name="hwloc" native-library="hwloc" title="hwloc" if:true="${binding.hwloc}"/>
 
         <!-- JAWT -->
         <release-module name="jawt" title="JAWT" if:true="${binding.jawt}"/>

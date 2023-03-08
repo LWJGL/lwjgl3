@@ -382,6 +382,7 @@
             <update-dependency module="glfw" artifact="libglfw.dylib"/>
             <update-dependency module="glfw" artifact="libglfw_async.dylib"/>
             <update-dependency module="harfbuzz" artifact="libharfbuzz.dylib"/>
+            <update-dependency module="hwloc" artifact="libhwloc.dylib"/>
             <update-dependency module="jemalloc" artifact="libjemalloc.dylib"/>
             <update-dependency module="ktx" artifact="libktx.dylib"/>
             <update-dependency module="openal" artifact="libopenal.dylib"/>

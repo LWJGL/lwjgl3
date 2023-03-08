@@ -119,6 +119,11 @@ enum class Artifacts(
         "A text shaping library that allows programs to convert a sequence of Unicode input into properly formatted and positioned glyph output — for any writing system and language.",
         *Platforms.ALL
     ),
+    HWLOC(
+        "lwjgl-hwloc", "LWJGL - hwloc bindings",
+        "A portable abstraction of the hierarchical topology of modern architectures, including NUMA memory nodes, sockets, shared caches, cores and simultaneous multithreading.",
+        *Platforms.ALL
+    ),
     JAWT(
         "lwjgl-jawt", "LWJGL - JAWT bindings",
         "The AWT native interface."

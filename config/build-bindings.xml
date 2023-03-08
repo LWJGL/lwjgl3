@@ -27,6 +27,7 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.freetype" value="true"/>
     <property name="binding.glfw" value="true"/>
     <property name="binding.harfbuzz" value="true"/>
+    <property name="binding.hwloc" value="true"/>
     <property name="binding.jawt" value="true"/>
     <property name="binding.jemalloc" value="true"/>
     <property name="binding.ktx" value="true"/>
@@ -106,6 +107,7 @@ This script is included in /config/build-definitions.xml.
                 <sequential if:true="${binding.freetype}"><local name="module"/><property name="module" value="freetype"/><body/></sequential>
                 <sequential if:true="${binding.glfw}"><local name="module"/><property name="module" value="glfw"/><body/></sequential>
                 <sequential if:true="${binding.harfbuzz}"><local name="module"/><property name="module" value="harfbuzz"/><body/></sequential>
+                <sequential if:true="${binding.hwloc}"><local name="module"/><property name="module" value="hwloc"/><body/></sequential>
                 <sequential if:true="${binding.jawt}"><local name="module"/><property name="module" value="jawt"/><body/></sequential>
                 <sequential if:true="${binding.jemalloc}"><local name="module"/><property name="module" value="jemalloc"/><body/></sequential>
                 <sequential if:true="${binding.ktx}"><local name="module"/><property name="module" value="ktx"/><body/></sequential>

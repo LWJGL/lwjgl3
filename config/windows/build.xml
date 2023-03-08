@@ -425,6 +425,7 @@ EXPORTS
             <update-dependency module="freetype" artifact="freetype.dll"/>
             <update-dependency module="glfw" artifact="glfw.dll"/>
             <update-dependency module="harfbuzz" artifact="harfbuzz.dll"/>
+            <update-dependency module="hwloc" artifact="hwloc.dll"/>
             <update-dependency module="jemalloc" artifact="jemalloc.dll"/>
             <update-dependency module="ktx" artifact="ktx.dll"/>
             <update-dependency module="openal" artifact="OpenAL.dll"/>

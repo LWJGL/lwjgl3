@@ -486,6 +486,11 @@ public class Configuration<T> {
      */
     public static final Configuration<Object> HARFBUZZ_LIBRARY_NAME = new Configuration<>("org.lwjgl.harfbuzz.libname", StateInit.STRING);
 
+    // -- HWLOC
+
+    /** Similar to {@link #LIBRARY_NAME} for the hwloc library (<b>org.lwjgl.hwloc.libname</b>). */
+    public static final Configuration<String> HWLOC_LIBRARY_NAME = new Configuration<>("org.lwjgl.hwloc.libname", StateInit.STRING);
+
     // -- JAWT
 
     /** Similar to {@link #LIBRARY_NAME} for the jawt library (<b>org.lwjgl.system.jawt.libname</b>). */

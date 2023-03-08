@@ -182,6 +182,25 @@ enum class Module(
         """,
         arrayOverloads = false
     ),
+    HWLOC(
+        "hwloc",
+        "org.lwjgl.util.hwloc",
+        """
+        Contains bindings to the ${url("https://www.open-mpi.org/projects/hwloc/", "hwloc")}, a portable abstraction (across OS, versions, architectures, ...)
+        of the hierarchical topology of modern architectures, including NUMA memory nodes, sockets, shared caches, cores and simultaneous multithreading.
+
+        It also gathers various system attributes such as cache and memory information as well as the locality of I/O devices such as network interfaces,
+        InfiniBand HCAs or GPUs.
+
+        hwloc primarily aims at helping applications with gathering information about increasingly complex parallel computing platforms so as to exploit them
+        accordingly and efficiently. For instance, two tasks that tightly cooperate should probably be placed onto cores sharing a cache. However, two
+        independent memory-intensive tasks should better be spread out onto different sockets so as to maximize their memory throughput.
+
+        hwloc may also help many applications just by providing a portable CPU and memory binding API and a reliable way to find out how many cores and/or
+        hardware threads are available.
+        """,
+        arrayOverloads = false
+    ),
     JAWT(
         "jawt",
         "org.lwjgl.system.jawt",
