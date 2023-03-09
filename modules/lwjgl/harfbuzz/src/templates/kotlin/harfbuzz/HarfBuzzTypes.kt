@@ -726,7 +726,7 @@ val hb_font_paint_glyph_func_t = Module.HARFBUZZ.callback {
 
 val hb_paint_push_transform_func_t = Module.HARFBUZZ.callback {
     void(
-        "hb_font_paint_glyph_func_t",
+        "hb_paint_push_transform_func_t",
         "",
 
         hb_paint_funcs_t.p("funcs", ""),
