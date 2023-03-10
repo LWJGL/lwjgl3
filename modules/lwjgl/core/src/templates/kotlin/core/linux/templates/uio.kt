@@ -67,7 +67,7 @@ val uio = "UIO".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         off_t("__offset", "")
     )
 
-    SaveErrno..ssize_t(
+    /*SaveErrno..ssize_t(
         "preadv2",
         "",
 
@@ -76,9 +76,9 @@ val uio = "UIO".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         int("__count", ""),
         off_t("__offset", ""),
         int("__flags", "")
-    )
+    )*/
 
-    SaveErrno..ssize_t(
+    /*SaveErrno..ssize_t(
         "pwritev2",
         "",
 
@@ -87,7 +87,7 @@ val uio = "UIO".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         int("__count", ""),
         off_t("__offset", ""),
         int("__flags", "")
-    )
+    )*/
 
     SaveErrno..ssize_t(
         "process_vm_readv",

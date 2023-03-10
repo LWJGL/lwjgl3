@@ -45,24 +45,6 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UIO_npwritev(JNIEnv *__env, 
     return __result;
 }
 
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UIO_npreadv2(JNIEnv *__env, jclass clazz, jint __fd, jlong __iovecAddress, jint __count, jlong __offset, jint __flags) {
-    struct iovec const *__iovec = (struct iovec const *)(uintptr_t)__iovecAddress;
-    jlong __result;
-    UNUSED_PARAMS(__env, clazz)
-    __result = (jlong)preadv2(__fd, __iovec, __count, (off_t)__offset, __flags);
-    saveErrno();
-    return __result;
-}
-
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UIO_npwritev2(JNIEnv *__env, jclass clazz, jint __fd, jlong __iovecAddress, jint __count, jlong __offset, jint __flags) {
-    struct iovec const *__iovec = (struct iovec const *)(uintptr_t)__iovecAddress;
-    jlong __result;
-    UNUSED_PARAMS(__env, clazz)
-    __result = (jlong)pwritev2(__fd, __iovec, __count, (off_t)__offset, __flags);
-    saveErrno();
-    return __result;
-}
-
 JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UIO_nprocess_1vm_1readv(JNIEnv *__env, jclass clazz, jint __pid, jlong __lvecAddress, jlong __liovcnt, jlong __rvecAddress, jlong __riovcnt, jlong __flags) {
     struct iovec const *__lvec = (struct iovec const *)(uintptr_t)__lvecAddress;
     struct iovec const *__rvec = (struct iovec const *)(uintptr_t)__rvecAddress;

@@ -76,24 +76,6 @@ public class UIO {
         return npwritev(__fd, __iovec.address(), __count, __offset);
     }
 
-    // --- [ preadv2 ] ---
-
-    public static native long npreadv2(int __fd, long __iovec, int __count, long __offset, int __flags);
-
-    @NativeType("ssize_t")
-    public static long preadv2(int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count, @NativeType("off_t") long __offset, int __flags) {
-        return npreadv2(__fd, __iovec.address(), __count, __offset, __flags);
-    }
-
-    // --- [ pwritev2 ] ---
-
-    public static native long npwritev2(int __fd, long __iovec, int __count, long __offset, int __flags);
-
-    @NativeType("ssize_t")
-    public static long pwritev2(int __fd, @NativeType("struct iovec const *") IOVec __iovec, int __count, @NativeType("off_t") long __offset, int __flags) {
-        return npwritev2(__fd, __iovec.address(), __count, __offset, __flags);
-    }
-
     // --- [ process_vm_readv ] ---
 
     /** Unsafe version of: {@link #process_vm_readv} */
