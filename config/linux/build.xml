@@ -34,7 +34,7 @@
             <condition property="gcc" value="@{gcc.exec}" else="@{gpp.exec}"><equals arg1="@{lang}" arg2="c"/></condition>
             <mkdir dir="@{dest}"/>
             <apply dir="@{dest}" executable="${gcc}" dest="@{dest}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-                <arg line="-c" unless:set="cpp"/>
+                <arg line="-c -std=gnu11" unless:set="cpp"/>
                 <arg line="-c -std=gnu++14" if:set="cpp"/>
                 <arg line="-m64" if:set="build.arch.x64"/>
                 <arg line="-m32 -mfpmath=sse -msse -msse2" if:set="build.arch.x86"/>
@@ -267,7 +267,7 @@
                 <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
 
                 <compile lang="c++">
-                    <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
+                    <arg line="-I/usr/include/gtk-3.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/lib/${linux.triplet}/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/atk-1.0"/>
                     <arg value="-I${src.main.rel}/include"/>
                     <fileset dir="." includes="${src.main}/nfd_gtk.cpp"/>
                 </compile>
@@ -407,8 +407,8 @@
                 <arg value="-I${module.lwjgl.rel}/vulkan/src/main/c"/>
                 <fileset dir="." includes="${src.generated}/*.cpp"/>
             </source>
-            <link if:set="build.arch.arm">
-                <arg value="-latomic"/>
+            <link>
+                <arg value="-latomic" if:set="build.arch.arm"/>
             </link>
         </build>
 
