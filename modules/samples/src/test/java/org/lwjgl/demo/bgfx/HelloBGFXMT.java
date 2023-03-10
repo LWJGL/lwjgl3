@@ -103,11 +103,15 @@ public final class HelloBGFXMT implements AutoCloseable {
         });
         graphicsThread.start();
 
-        try {
-            glfwPollEvents();
-            graphicsLatch.await(16, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            throw new IllegalStateException(e);
+        while (true) {
+            try {
+                glfwPollEvents();
+                if (graphicsLatch.await(16, TimeUnit.MILLISECONDS)) {
+                    break;
+                }
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
         }
 
         glfwShowWindow(window);
