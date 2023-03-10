@@ -97,6 +97,10 @@ public class StackTest {
     }
 
     public void testSOE() {
+        if (Platform.getArchitecture() == Platform.Architecture.ARM64 || Platform.getArchitecture() == Platform.Architecture.ARM32) {
+            throw new SkipException("This test crashes the JVM on ARM architectures.");
+        }
+
         expectThrows(StackOverflowError.class, () -> {
             MemoryStack stack = MemoryStack.create();
 

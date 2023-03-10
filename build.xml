@@ -886,7 +886,7 @@
             <jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
             <jvmarg value="-Dorg.lwjgl.util.DebugAllocator=true"/>
             <jvmarg value="-XstartOnFirstThread" if:set="platform.macos"/>
-            <jvmarg value="-Xss256k"/> <!-- for StackTest::testSOE -->
+            <jvmarg value="-Xss256k" unless:set="build.arch.arm"/> <!-- for StackTest::testSOE -->
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
 
             <xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
