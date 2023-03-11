@@ -19,6 +19,7 @@ val ssize_t = IntegerType("ssize_t", PrimitiveMapping.POINTER)
 val mode_t = typedef(unsigned_int, "mode_t")
 val off_t = typedef(int64_t, "off_t")
 val pid_t = typedef(int, "pid_t")
+val pthread_t = typedef(unsigned_long_int, "pthread_t")
 val socklen_t = typedef(uint32_t, "socklen_t")
 
 val cpu_set_t = "cpu_set_t".opaque

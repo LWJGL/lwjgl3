@@ -53,4 +53,19 @@ public class UNISTD {
         return nread(fd, memAddress(buf), buf.remaining());
     }
 
+    // --- [ getpid ] ---
+
+    @NativeType("pid_t")
+    public static native int getpid();
+
+    // --- [ getppid ] ---
+
+    @NativeType("pid_t")
+    public static native int getppid();
+
+    // --- [ gettid ] ---
+
+    @NativeType("pid_t")
+    public static native int gettid();
+
 }

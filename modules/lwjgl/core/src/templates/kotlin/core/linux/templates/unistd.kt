@@ -48,4 +48,25 @@ val unistd = "UNISTD".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         void.p("buf", ""),
         AutoSize("buf")..size_t("count", "")
     )
+
+    pid_t(
+        "getpid",
+        "",
+
+        void()
+    )
+
+    pid_t(
+        "getppid",
+        "",
+
+        void()
+    )
+
+    pid_t(
+        "gettid",
+        "",
+
+        void()
+    )
 }

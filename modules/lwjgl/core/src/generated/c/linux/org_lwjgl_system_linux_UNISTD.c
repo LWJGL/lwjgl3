@@ -34,4 +34,19 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_UNISTD_nread(JNIEnv *__env, 
     return __result;
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_UNISTD_getpid(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)getpid();
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_UNISTD_getppid(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)getppid();
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_UNISTD_gettid(JNIEnv *__env, jclass clazz) {
+    UNUSED_PARAMS(__env, clazz)
+    return (jint)gettid();
+}
+
 EXTERN_C_EXIT
