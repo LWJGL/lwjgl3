@@ -2576,6 +2576,15 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     )
 
     void(
+        "font_set_variation",
+        "",
+
+        hb_font_t.p("font", ""),
+        hb_tag_t("tag", ""),
+        float("value", "")
+    )
+
+    void(
         "font_set_var_coords_design",
         "",
 
@@ -3608,7 +3617,23 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
         NullTerminated..nullable..charASCII.const.p.const.p("shaper_list", "")
     )
 
-        customMethod("""
+    hb_bool_t(
+        "shape_justify",
+        "",
+
+        hb_font_t.p("font", ""),
+        hb_buffer_t.p("buffer", ""),
+        nullable..hb_feature_t.const.p("features", ""),
+        AutoSize("features")..unsigned_int("num_features", ""),
+        NullTerminated..nullable..charASCII.const.p.const.p("shaper_list", ""),
+        float("min_target_advance", ""),
+        float("max_target_advance", ""),
+        Check(1)..float.p("advance", ""),
+        Check(1)..hb_tag_t.p("var_tag", ""),
+        Check(1)..float.p("var_value", "")
+    )
+
+    customMethod("""
     private static final int shape_list_shapers_COUNT;
     static {
         long shapers = nhb_shape_list_shapers();
@@ -4115,10 +4140,10 @@ val hb = "HarfBuzz".nativeClass(Module.HARFBUZZ, prefix = "HB", prefixMethod = "
     // hb-version.h
 
     IntConstant("", "VERSION_MAJOR".."7")
-    IntConstant("", "VERSION_MINOR".."0")
-    IntConstant("", "VERSION_MICRO".."1")
+    IntConstant("", "VERSION_MINOR".."1")
+    IntConstant("", "VERSION_MICRO".."0")
 
-    StringConstant("", "VERSION_STRING".."7.0.1")
+    StringConstant("", "VERSION_STRING".."7.1.0")
 
     customMethod("""
     public static boolean HB_VERSION_ATLEAST(int major, int minor, int micro) {

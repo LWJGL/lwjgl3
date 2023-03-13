@@ -302,6 +302,7 @@ public class HarfBuzz {
             font_set_synthetic_slant                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_synthetic_slant"),
             font_get_synthetic_slant                  = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_synthetic_slant"),
             font_set_variations                       = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_variations"),
+            font_set_variation                        = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_variation"),
             font_set_var_coords_design                = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_coords_design"),
             font_get_var_coords_design                = apiGetFunctionAddress(HARFBUZZ, "hb_font_get_var_coords_design"),
             font_set_var_coords_normalized            = apiGetFunctionAddress(HARFBUZZ, "hb_font_set_var_coords_normalized"),
@@ -414,6 +415,7 @@ public class HarfBuzz {
             set_next_many                             = apiGetFunctionAddress(HARFBUZZ, "hb_set_next_many"),
             shape                                     = apiGetFunctionAddress(HARFBUZZ, "hb_shape"),
             shape_full                                = apiGetFunctionAddress(HARFBUZZ, "hb_shape_full"),
+            shape_justify                             = apiGetFunctionAddress(HARFBUZZ, "hb_shape_justify"),
             shape_list_shapers                        = apiGetFunctionAddress(HARFBUZZ, "hb_shape_list_shapers"),
             shape_plan_create                         = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_create"),
             shape_plan_create_cached                  = apiGetFunctionAddress(HARFBUZZ, "hb_shape_plan_create_cached"),
@@ -1480,11 +1482,11 @@ public class HarfBuzz {
 
     public static final int HB_VERSION_MAJOR = 7;
 
-    public static final int HB_VERSION_MINOR = 0;
+    public static final int HB_VERSION_MINOR = 1;
 
-    public static final int HB_VERSION_MICRO = 1;
+    public static final int HB_VERSION_MICRO = 0;
 
-    public static final String HB_VERSION_STRING = "7.0.1";
+    public static final String HB_VERSION_STRING = "7.1.0";
 
     protected HarfBuzz() {
         throw new UnsupportedOperationException();
@@ -4806,6 +4808,16 @@ public class HarfBuzz {
         nhb_font_set_variations(font, variations.address(), variations.remaining());
     }
 
+    // --- [ hb_font_set_variation ] ---
+
+    public static void hb_font_set_variation(@NativeType("hb_font_t *") long font, @NativeType("hb_tag_t") int tag, float value) {
+        long __functionAddress = Functions.font_set_variation;
+        if (CHECKS) {
+            check(font);
+        }
+        invokePV(font, tag, value, __functionAddress);
+    }
+
     // --- [ hb_font_set_var_coords_design ] ---
 
     public static void nhb_font_set_var_coords_design(long font, long coords, int coords_length) {
@@ -6206,6 +6218,28 @@ public class HarfBuzz {
             checkNTSafe(shaper_list);
         }
         return nhb_shape_full(font, buffer, memAddressSafe(features), remainingSafe(features), memAddressSafe(shaper_list)) != 0;
+    }
+
+    // --- [ hb_shape_justify ] ---
+
+    public static int nhb_shape_justify(long font, long buffer, long features, int num_features, long shaper_list, float min_target_advance, float max_target_advance, long advance, long var_tag, long var_value) {
+        long __functionAddress = Functions.shape_justify;
+        if (CHECKS) {
+            check(font);
+            check(buffer);
+        }
+        return invokePPPPPPPI(font, buffer, features, num_features, shaper_list, min_target_advance, max_target_advance, advance, var_tag, var_value, __functionAddress);
+    }
+
+    @NativeType("hb_bool_t")
+    public static boolean hb_shape_justify(@NativeType("hb_font_t *") long font, @NativeType("hb_buffer_t *") long buffer, @Nullable @NativeType("hb_feature_t const *") hb_feature_t.Buffer features, @Nullable @NativeType("char const * const *") PointerBuffer shaper_list, float min_target_advance, float max_target_advance, @NativeType("float *") FloatBuffer advance, @NativeType("hb_tag_t *") IntBuffer var_tag, @NativeType("float *") FloatBuffer var_value) {
+        if (CHECKS) {
+            checkNTSafe(shaper_list);
+            check(advance, 1);
+            check(var_tag, 1);
+            check(var_value, 1);
+        }
+        return nhb_shape_justify(font, buffer, memAddressSafe(features), remainingSafe(features), memAddressSafe(shaper_list), min_target_advance, max_target_advance, memAddress(advance), memAddress(var_tag), memAddress(var_value)) != 0;
     }
 
     // --- [ hb_shape_list_shapers ] ---
