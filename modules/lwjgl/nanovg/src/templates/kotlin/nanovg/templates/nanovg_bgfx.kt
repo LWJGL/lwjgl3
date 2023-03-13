@@ -17,6 +17,12 @@ val nanovg_bgfx = "NanoVGBGFX".dependsOn(Module.BGFX)?.nativeClass(Module.NANOVG
 
     javaImport("static org.lwjgl.nanovg.NanoVG.*")
 
+    EnumConstant(
+        "These are additional flags on top of NVGimageFlags.",
+
+        "IMAGE_NODELETE".enum("Do not delete GL texture handle.", "1<<16")
+    )
+
     NVGcontext.p(
         "Create",
         "",

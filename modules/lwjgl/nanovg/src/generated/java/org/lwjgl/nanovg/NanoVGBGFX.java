@@ -39,6 +39,17 @@ public class NanoVGBGFX {
 
     }
 
+    /**
+     * These are additional flags on top of NVGimageFlags.
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #NVG_IMAGE_NODELETE IMAGE_NODELETE} - Do not delete GL texture handle.</li>
+     * </ul>
+     */
+    public static final int NVG_IMAGE_NODELETE = 1<<16;
+
     static {
         MemoryAllocator allocator = getAllocator(Configuration.DEBUG_MEMORY_ALLOCATOR_INTERNAL.get(true));
         org_lwjgl_nanovg_setup(
