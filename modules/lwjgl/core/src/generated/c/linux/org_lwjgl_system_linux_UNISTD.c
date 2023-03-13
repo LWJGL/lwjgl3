@@ -7,6 +7,14 @@
 #include <unistd.h>
 #include <errno.h>
 
+#include <sys/syscall.h>
+
+#ifndef SYS_gettid
+#error "SYS_gettid unavailable on this system"
+#endif
+
+#define gettid() ((pid_t)syscall(SYS_gettid))
+
 EXTERN_C_ENTER
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_linux_UNISTD_close(JNIEnv *__env, jclass clazz, jint fd) {

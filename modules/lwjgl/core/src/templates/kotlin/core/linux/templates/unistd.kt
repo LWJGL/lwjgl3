@@ -12,6 +12,15 @@ val unistd = "UNISTD".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         "<unistd.h>",
         "<errno.h>"
     )
+    nativeDirective("""
+#include <sys/syscall.h>
+
+#ifndef SYS_gettid
+#error "SYS_gettid unavailable on this system"
+#endif
+
+#define gettid() ((pid_t)syscall(SYS_gettid))""")
+
     documentation = "Native bindings to &lt;unistd.h&gt;."
 
     EnumConstant(
