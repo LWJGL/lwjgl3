@@ -3161,6 +3161,8 @@ aiAttachLogStream(&c);""")}
         "AI_AISTRING".enum,
         "AI_AIVECTOR3D".enum,
         "AI_AIMETADATA".enum,
+        "AI_INT64".enum,
+        "AI_UINT32".enum,
         "AI_META_MAX".enum
     ).noPrefix()
 

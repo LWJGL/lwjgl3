@@ -558,6 +558,22 @@ val aiMesh = struct(Module.ASSIMP, "AIMesh", nativeName = "struct aiMesh") {
 }
 
 val aiSkeletonBone = struct(Module.ASSIMP, "AISkeletonBone", nativeName = "struct aiSkeletonBone") {
+    documentation =
+        """
+        A skeleton bone represents a single bone is a skeleton structure.
+
+        Skeleton-Animations can be represented via a skeleton struct, which describes a hierarchical tree assembled from skeleton bones. A bone is linked to a
+        mesh. The bone knows its parent bone. If there is no parent bone the parent id is marked with -1.
+
+        The skeleton-bone stores a pointer to its used armature. If there is no armature this value if set to {@code nullptr}.
+
+        A skeleton bone stores its offset-matrix, which is the absolute transformation for the bone. The bone stores the locale transformation to its parent as
+        well. You can compute the offset matrix by multiplying the hierarchy like:
+        ${codeBlock("""
+Tree: s1 -> s2 -> s3
+Offset-Matrix s3 = locale-s3 * locale-s2 * locale-s1""")}
+        """
+
     int("mParent", "the parent bone index, is -1 one if this bone represents the root bone")
     nullable..aiNode.p(
         "mArmature",
@@ -593,9 +609,28 @@ val aiSkeletonBone = struct(Module.ASSIMP, "AISkeletonBone", nativeName = "struc
 }
 
 val aiSkeleton = struct(Module.ASSIMP, "AISkeleton", nativeName = "struct aiSkeleton") {
-    aiString("mName", "")
-    AutoSize("mBones")..unsigned_int("mNumBones", "")
-    aiSkeletonBone.p.p("mBones", "");
+    documentation =
+        """
+        A skeleton represents the bone hierarchy of an animation.
+
+        Skeleton animations can be described as a tree of bones:
+        ${codeBlock("""
+   root
+     |
+   node1
+   /   \
+node3  node4""")}
+
+        If you want to calculate the transformation of node three you need to compute the transformation hierarchy for the transformation chain of node3:
+        ${codeBlock("""
+root->node1->node3""")}
+
+        Each node is represented as a skeleton instance.
+        """
+
+    aiString("mName", "the name of the skeleton instance")
+    AutoSize("mBones")..unsigned_int("mNumBones", "the number of bones in the skeleton")
+    aiSkeletonBone.p.p("mBones", "the bone instance in the skeleton");
 }
 
 val aiUVTransform = struct(Module.ASSIMP, "AIUVTransform", nativeName = "struct aiUVTransform", mutable = false) {

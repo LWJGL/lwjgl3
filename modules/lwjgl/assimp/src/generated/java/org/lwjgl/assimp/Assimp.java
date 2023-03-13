@@ -1779,6 +1779,8 @@ public class Assimp {
      * <li>{@link #AI_AISTRING AI_AISTRING}</li>
      * <li>{@link #AI_AIVECTOR3D AI_AIVECTOR3D}</li>
      * <li>{@link #AI_AIMETADATA AI_AIMETADATA}</li>
+     * <li>{@link #AI_INT64 AI_INT64}</li>
+     * <li>{@link #AI_UINT32 AI_UINT32}</li>
      * <li>{@link #AI_META_MAX AI_META_MAX}</li>
      * </ul>
      */
@@ -1791,7 +1793,9 @@ public class Assimp {
         AI_AISTRING   = 5,
         AI_AIVECTOR3D = 6,
         AI_AIMETADATA = 7,
-        AI_META_MAX   = 8;
+        AI_INT64      = 8,
+        AI_UINT32     = 9,
+        AI_META_MAX   = 10;
 
     /**
      * Scene metadata holding the name of the importer which loaded the source asset.
