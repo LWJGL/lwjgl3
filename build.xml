@@ -987,7 +987,6 @@
             notree="true"
             public="true"
             Splitindex="true"
-            maxmemory="2G"
             failonerror="true"
             verbose="true"
         >
@@ -1347,7 +1346,6 @@
                 nohelp="true"
                 notree="true"
                 public="true"
-                maxmemory="1G"
                 failonerror="true"
                 unless:set="javadoc.skip"
             >
