@@ -54,6 +54,7 @@ public class LLVMLTO {
             module_get_symbol_attribute                                      = apiGetFunctionAddress(LTO, "lto_module_get_symbol_attribute"),
             module_get_linkeropts                                            = apiGetFunctionAddress(LTO, "lto_module_get_linkeropts"),
             module_get_macho_cputype                                         = apiGetFunctionAddressOptional(LTO, "lto_module_get_macho_cputype"),
+            module_has_ctor_dtor                                             = apiGetFunctionAddressOptional(LTO, "lto_module_has_ctor_dtor"),
             codegen_set_diagnostic_handler                                   = apiGetFunctionAddress(LTO, "lto_codegen_set_diagnostic_handler"),
             codegen_create                                                   = apiGetFunctionAddress(LTO, "lto_codegen_create"),
             codegen_create_in_local_context                                  = apiGetFunctionAddress(LTO, "lto_codegen_create_in_local_context"),
@@ -116,7 +117,7 @@ public class LLVMLTO {
         return LTO;
     }
 
-    public static final int LTOAPI_VERSION = 28;
+    public static final int LTOAPI_VERSION = 29;
 
     /**
      * {@code lto_symbol_attributes}
@@ -754,6 +755,25 @@ public class LLVMLTO {
             check(out_cpusubtype, 1);
         }
         return nlto_module_get_macho_cputype(mod, memAddress(out_cputype), memAddress(out_cpusubtype));
+    }
+
+    // --- [ lto_module_has_ctor_dtor ] ---
+
+    /**
+     * This function can be used by the linker to check if a given module has any constructor or destructor functions.
+     *
+     * @return true if the module has either the {@code @llvm.global_ctors} or the {@code @llvm.global_dtors} symbol. Otherwise returns false.
+     *
+     * @since {@code LTO_API_VERSION=29}
+     */
+    @NativeType("lto_bool_t")
+    public static boolean lto_module_has_ctor_dtor(@NativeType("lto_module_t") long mod) {
+        long __functionAddress = Functions.module_has_ctor_dtor;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(mod);
+        }
+        return invokePZ(mod, __functionAddress);
     }
 
     // --- [ lto_codegen_set_diagnostic_handler ] ---

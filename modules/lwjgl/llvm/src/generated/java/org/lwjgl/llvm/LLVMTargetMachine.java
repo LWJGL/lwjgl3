@@ -471,12 +471,31 @@ public class LLVMTargetMachine {
      * {@code ErrorMessage}. Use {@link LLVMCore#LLVMDisposeMessage DisposeMessage} to dispose the message.
      */
     @NativeType("LLVMBool")
-    public static boolean LLVMTargetMachineEmitToFile(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMModuleRef") long M, @NativeType("char *") ByteBuffer Filename, @NativeType("LLVMCodeGenFileType") int codegen, @NativeType("char **") PointerBuffer ErrorMessage) {
+    public static boolean LLVMTargetMachineEmitToFile(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMModuleRef") long M, @NativeType("char const *") ByteBuffer Filename, @NativeType("LLVMCodeGenFileType") int codegen, @NativeType("char **") PointerBuffer ErrorMessage) {
         if (CHECKS) {
             checkNT1(Filename);
             check(ErrorMessage, 1);
         }
         return nLLVMTargetMachineEmitToFile(T, M, memAddress(Filename), codegen, memAddress(ErrorMessage)) != 0;
+    }
+
+    /**
+     * Emits an asm or object file for the given module to the filename. This wraps several c++ only classes (among them a file stream). Returns any error in
+     * {@code ErrorMessage}. Use {@link LLVMCore#LLVMDisposeMessage DisposeMessage} to dispose the message.
+     */
+    @NativeType("LLVMBool")
+    public static boolean LLVMTargetMachineEmitToFile(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Filename, @NativeType("LLVMCodeGenFileType") int codegen, @NativeType("char **") PointerBuffer ErrorMessage) {
+        if (CHECKS) {
+            check(ErrorMessage, 1);
+        }
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(Filename, true);
+            long FilenameEncoded = stack.getPointerAddress();
+            return nLLVMTargetMachineEmitToFile(T, M, FilenameEncoded, codegen, memAddress(ErrorMessage)) != 0;
+        } finally {
+            stack.setPointer(stackPointer);
+        }
     }
 
     // --- [ LLVMTargetMachineEmitToMemoryBuffer ] ---

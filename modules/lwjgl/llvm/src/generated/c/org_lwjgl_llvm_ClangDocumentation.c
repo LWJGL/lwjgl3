@@ -40,6 +40,8 @@ typedef CXString (*clang_VerbatimLineComment_getTextPROC) (CXComment);
 typedef CXString (*clang_HTMLTagComment_getAsStringPROC) (CXComment);
 typedef CXString (*clang_FullComment_getAsHTMLPROC) (CXComment);
 typedef CXString (*clang_FullComment_getAsXMLPROC) (CXComment);
+typedef CXString (*clang_getSymbolGraphForUSRPROC) (uintptr_t, uintptr_t);
+typedef CXString (*clang_getSymbolGraphForCursorPROC) (CXCursor);
 
 EXTERN_C_ENTER
 
@@ -279,6 +281,21 @@ JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangDocumentation_nclang_1FullCommen
     CXComment *Comment = (CXComment *)(uintptr_t)CommentAddress;
     UNUSED_PARAMS(__env, clazz)
     *((CXString*)(uintptr_t)__result) = clang_FullComment_getAsXML(*Comment);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangDocumentation_nclang_1getSymbolGraphForUSR(JNIEnv *__env, jclass clazz, jlong usrAddress, jlong apiAddress, jlong __functionAddress, jlong __result) {
+    clang_getSymbolGraphForUSRPROC clang_getSymbolGraphForUSR = (clang_getSymbolGraphForUSRPROC)(uintptr_t)__functionAddress;
+    uintptr_t usr = (uintptr_t)usrAddress;
+    uintptr_t api = (uintptr_t)apiAddress;
+    UNUSED_PARAMS(__env, clazz)
+    *((CXString*)(uintptr_t)__result) = clang_getSymbolGraphForUSR(usr, api);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangDocumentation_nclang_1getSymbolGraphForCursor(JNIEnv *__env, jclass clazz, jlong cursorAddress, jlong __functionAddress, jlong __result) {
+    clang_getSymbolGraphForCursorPROC clang_getSymbolGraphForCursor = (clang_getSymbolGraphForCursorPROC)(uintptr_t)__functionAddress;
+    CXCursor *cursor = (CXCursor *)(uintptr_t)cursorAddress;
+    UNUSED_PARAMS(__env, clazz)
+    *((CXString*)(uintptr_t)__result) = clang_getSymbolGraphForCursor(*cursor);
 }
 
 EXTERN_C_EXIT

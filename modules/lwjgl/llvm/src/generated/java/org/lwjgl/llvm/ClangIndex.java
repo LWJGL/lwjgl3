@@ -174,6 +174,8 @@ public class ClangIndex {
             getAddressSpace                         = apiGetFunctionAddress(CLANG, "clang_getAddressSpace"),
             getTypedefName                          = apiGetFunctionAddress(CLANG, "clang_getTypedefName"),
             getPointeeType                          = apiGetFunctionAddress(CLANG, "clang_getPointeeType"),
+            getUnqualifiedType                      = apiGetFunctionAddressOptional(CLANG, "clang_getUnqualifiedType"),
+            getNonReferenceType                     = apiGetFunctionAddressOptional(CLANG, "clang_getNonReferenceType"),
             getTypeDeclaration                      = apiGetFunctionAddress(CLANG, "clang_getTypeDeclaration"),
             getDeclObjCTypeEncoding                 = apiGetFunctionAddress(CLANG, "clang_getDeclObjCTypeEncoding"),
             Type_getObjCEncoding                    = apiGetFunctionAddress(CLANG, "clang_Type_getObjCEncoding"),
@@ -270,9 +272,12 @@ public class ClangIndex {
             CXXConstructor_isMoveConstructor        = apiGetFunctionAddress(CLANG, "clang_CXXConstructor_isMoveConstructor"),
             CXXField_isMutable                      = apiGetFunctionAddress(CLANG, "clang_CXXField_isMutable"),
             CXXMethod_isDefaulted                   = apiGetFunctionAddress(CLANG, "clang_CXXMethod_isDefaulted"),
+            CXXMethod_isDeleted                     = apiGetFunctionAddressOptional(CLANG, "clang_CXXMethod_isDeleted"),
             CXXMethod_isPureVirtual                 = apiGetFunctionAddress(CLANG, "clang_CXXMethod_isPureVirtual"),
             CXXMethod_isStatic                      = apiGetFunctionAddress(CLANG, "clang_CXXMethod_isStatic"),
             CXXMethod_isVirtual                     = apiGetFunctionAddress(CLANG, "clang_CXXMethod_isVirtual"),
+            CXXMethod_isCopyAssignmentOperator      = apiGetFunctionAddressOptional(CLANG, "clang_CXXMethod_isCopyAssignmentOperator"),
+            CXXMethod_isMoveAssignmentOperator      = apiGetFunctionAddressOptional(CLANG, "clang_CXXMethod_isMoveAssignmentOperator"),
             CXXRecord_isAbstract                    = apiGetFunctionAddressOptional(CLANG, "clang_CXXRecord_isAbstract"),
             EnumDecl_isScoped                       = apiGetFunctionAddress(CLANG, "clang_EnumDecl_isScoped"),
             CXXMethod_isConst                       = apiGetFunctionAddress(CLANG, "clang_CXXMethod_isConst"),
@@ -363,7 +368,7 @@ public class ClangIndex {
 
     public static final int
         CINDEX_VERSION_MAJOR = 0,
-        CINDEX_VERSION_MINOR = 62,
+        CINDEX_VERSION_MINOR = 63,
         CINDEX_VERSION       = CINDEX_VERSION_MAJOR*10000 + CINDEX_VERSION_MINOR;
 
     public static final String CINDEX_VERSION_STRING = "0.62";
@@ -1031,6 +1036,9 @@ public class ClangIndex {
      * <li>{@link #CXCursor_OMPArrayShapingExpr Cursor_OMPArrayShapingExpr} - OpenMP 5.0 [2.1.4, Array Shaping].</li>
      * <li>{@link #CXCursor_OMPIteratorExpr Cursor_OMPIteratorExpr} - OpenMP 5.0 [2.1.6 Iterators]</li>
      * <li>{@link #CXCursor_CXXAddrspaceCastExpr Cursor_CXXAddrspaceCastExpr} - OpenCL's {@code addrspace_cast<>} expression.</li>
+     * <li>{@link #CXCursor_ConceptSpecializationExpr Cursor_ConceptSpecializationExpr} - Expression that references a C++20 concept.</li>
+     * <li>{@link #CXCursor_RequiresExpr Cursor_RequiresExpr} - Expression that references a C++20 concept.</li>
+     * <li>{@link #CXCursor_CXXParenListInitExpr Cursor_CXXParenListInitExpr} - Expression that references a C++20 parenthesized list aggregate initializer.</li>
      * <li>{@link #CXCursor_LastExpr Cursor_LastExpr}</li>
      * <li>{@link #CXCursor_FirstStmt Cursor_FirstStmt} - Statements</li>
      * <li>{@link #CXCursor_UnexposedStmt Cursor_UnexposedStmt} - 
@@ -1149,6 +1157,18 @@ public class ClangIndex {
      * <li>{@link #CXCursor_OMPDispatchDirective Cursor_OMPDispatchDirective} - OpenMP dispatch directive.</li>
      * <li>{@link #CXCursor_OMPMaskedDirective Cursor_OMPMaskedDirective} - OpenMP masked directive.</li>
      * <li>{@link #CXCursor_OMPUnrollDirective Cursor_OMPUnrollDirective} - OpenMP unroll directive.</li>
+     * <li>{@link #CXCursor_OMPMetaDirective Cursor_OMPMetaDirective} - OpenMP metadirective directive.</li>
+     * <li>{@link #CXCursor_OMPGenericLoopDirective Cursor_OMPGenericLoopDirective} - OpenMP loop directive.</li>
+     * <li>{@link #CXCursor_OMPTeamsGenericLoopDirective Cursor_OMPTeamsGenericLoopDirective} - OpenMP teams loop directive.</li>
+     * <li>{@link #CXCursor_OMPTargetTeamsGenericLoopDirective Cursor_OMPTargetTeamsGenericLoopDirective} - OpenMP target teams loop directive.</li>
+     * <li>{@link #CXCursor_OMPParallelGenericLoopDirective Cursor_OMPParallelGenericLoopDirective} - OpenMP parallel loop directive.</li>
+     * <li>{@link #CXCursor_OMPTargetParallelGenericLoopDirective Cursor_OMPTargetParallelGenericLoopDirective} - OpenMP target parallel loop directive.</li>
+     * <li>{@link #CXCursor_OMPParallelMaskedDirective Cursor_OMPParallelMaskedDirective} - OpenMP parallel masked directive.</li>
+     * <li>{@link #CXCursor_OMPMaskedTaskLoopDirective Cursor_OMPMaskedTaskLoopDirective} - OpenMP masked taskloop directive.</li>
+     * <li>{@link #CXCursor_OMPMaskedTaskLoopSimdDirective Cursor_OMPMaskedTaskLoopSimdDirective} - OpenMP masked taskloop simd directive.</li>
+     * <li>{@link #CXCursor_OMPParallelMaskedTaskLoopDirective Cursor_OMPParallelMaskedTaskLoopDirective} - OpenMP parallel masked taskloop directive.</li>
+     * <li>{@link #CXCursor_OMPParallelMaskedTaskLoopSimdDirective Cursor_OMPParallelMaskedTaskLoopSimdDirective} - OpenMP parallel masked taskloop simd directive.</li>
+     * <li>{@link #CXCursor_OMPErrDirective Cursor_OMPErrDirective} - OpenMP error directive.</li>
      * <li>{@link #CXCursor_LastStmt Cursor_LastStmt}</li>
      * <li>{@link #CXCursor_TranslationUnit Cursor_TranslationUnit} - 
      * Cursor that represents the translation unit itself.
@@ -1210,6 +1230,7 @@ public class ClangIndex {
      * <li>{@link #CXCursor_TypeAliasTemplateDecl Cursor_TypeAliasTemplateDecl}</li>
      * <li>{@link #CXCursor_StaticAssert Cursor_StaticAssert} - A static_assert or _Static_assert node</li>
      * <li>{@link #CXCursor_FriendDecl Cursor_FriendDecl} - a friend declaration.</li>
+     * <li>{@link #CXCursor_ConceptDecl Cursor_ConceptDecl} - a concept declaration.</li>
      * <li>{@link #CXCursor_FirstExtraDecl Cursor_FirstExtraDecl}</li>
      * <li>{@link #CXCursor_LastExtraDecl Cursor_LastExtraDecl}</li>
      * <li>{@link #CXCursor_OverloadCandidate Cursor_OverloadCandidate} - A code completion overload candidate.</li>
@@ -1330,7 +1351,10 @@ public class ClangIndex {
         CXCursor_OMPArrayShapingExpr                              = 150,
         CXCursor_OMPIteratorExpr                                  = 151,
         CXCursor_CXXAddrspaceCastExpr                             = 152,
-        CXCursor_LastExpr                                         = CXCursor_CXXAddrspaceCastExpr,
+        CXCursor_ConceptSpecializationExpr                        = 153,
+        CXCursor_RequiresExpr                                     = 154,
+        CXCursor_CXXParenListInitExpr                             = 155,
+        CXCursor_LastExpr                                         = CXCursor_CXXParenListInitExpr,
         CXCursor_FirstStmt                                        = 200,
         CXCursor_UnexposedStmt                                    = 200,
         CXCursor_LabelStmt                                        = 201,
@@ -1427,8 +1451,20 @@ public class ClangIndex {
         CXCursor_OMPDispatchDirective                             = 291,
         CXCursor_OMPMaskedDirective                               = 292,
         CXCursor_OMPUnrollDirective                               = 293,
-        CXCursor_LastStmt                                         = CXCursor_OMPUnrollDirective,
-        CXCursor_TranslationUnit                                  = 300,
+        CXCursor_OMPMetaDirective                                 = 294,
+        CXCursor_OMPGenericLoopDirective                          = 295,
+        CXCursor_OMPTeamsGenericLoopDirective                     = 296,
+        CXCursor_OMPTargetTeamsGenericLoopDirective               = 297,
+        CXCursor_OMPParallelGenericLoopDirective                  = 298,
+        CXCursor_OMPTargetParallelGenericLoopDirective            = 299,
+        CXCursor_OMPParallelMaskedDirective                       = 300,
+        CXCursor_OMPMaskedTaskLoopDirective                       = 301,
+        CXCursor_OMPMaskedTaskLoopSimdDirective                   = 302,
+        CXCursor_OMPParallelMaskedTaskLoopDirective               = 303,
+        CXCursor_OMPParallelMaskedTaskLoopSimdDirective           = 304,
+        CXCursor_OMPErrDirective                                  = 305,
+        CXCursor_LastStmt                                         = CXCursor_OMPErrDirective,
+        CXCursor_TranslationUnit                                  = 350,
         CXCursor_FirstAttr                                        = 400,
         CXCursor_UnexposedAttr                                    = 400,
         CXCursor_IBActionAttr                                     = 401,
@@ -1484,8 +1520,9 @@ public class ClangIndex {
         CXCursor_TypeAliasTemplateDecl                            = 601,
         CXCursor_StaticAssert                                     = 602,
         CXCursor_FriendDecl                                       = 603,
+        CXCursor_ConceptDecl                                      = 604,
         CXCursor_FirstExtraDecl                                   = CXCursor_ModuleImportDecl,
-        CXCursor_LastExtraDecl                                    = CXCursor_FriendDecl,
+        CXCursor_LastExtraDecl                                    = CXCursor_ConceptDecl,
         CXCursor_OverloadCandidate                                = 700;
 
     /**
@@ -1614,6 +1651,7 @@ public class ClangIndex {
      * <li>{@link #CXType_UAccum Type_UAccum}</li>
      * <li>{@link #CXType_ULongAccum Type_ULongAccum}</li>
      * <li>{@link #CXType_BFloat16 Type_BFloat16}</li>
+     * <li>{@link #CXType_Ibm128 Type_Ibm128}</li>
      * <li>{@link #CXType_FirstBuiltin Type_FirstBuiltin}</li>
      * <li>{@link #CXType_LastBuiltin Type_LastBuiltin}</li>
      * <li>{@link #CXType_Complex Type_Complex}</li>
@@ -1698,6 +1736,7 @@ public class ClangIndex {
      * <li>{@link #CXType_OCLIntelSubgroupAVCImeDualRefStreamin Type_OCLIntelSubgroupAVCImeDualRefStreamin}</li>
      * <li>{@link #CXType_ExtVector Type_ExtVector}</li>
      * <li>{@link #CXType_Atomic Type_Atomic}</li>
+     * <li>{@link #CXType_BTFTagAttributed Type_BTFTagAttributed}</li>
      * </ul>
      */
     public static final int
@@ -1741,8 +1780,9 @@ public class ClangIndex {
         CXType_UAccum                                         = 37,
         CXType_ULongAccum                                     = 38,
         CXType_BFloat16                                       = 39,
+        CXType_Ibm128                                         = 40,
         CXType_FirstBuiltin                                   = CXType_Void,
-        CXType_LastBuiltin                                    = CXType_BFloat16,
+        CXType_LastBuiltin                                    = CXType_Ibm128,
         CXType_Complex                                        = 100,
         CXType_Pointer                                        = 101,
         CXType_BlockPointer                                   = 102,
@@ -1820,7 +1860,8 @@ public class ClangIndex {
         CXType_OCLIntelSubgroupAVCImeSingleRefStreamin        = 174,
         CXType_OCLIntelSubgroupAVCImeDualRefStreamin          = 175,
         CXType_ExtVector                                      = 176,
-        CXType_Atomic                                         = 177;
+        CXType_Atomic                                         = 177,
+        CXType_BTFTagAttributed                               = 178;
 
     /**
      * Describes the calling convention of a function type
@@ -1849,6 +1890,7 @@ public class ClangIndex {
      * <li>{@link #CXCallingConv_PreserveAll CallingConv_PreserveAll}</li>
      * <li>{@link #CXCallingConv_AArch64VectorCall CallingConv_AArch64VectorCall}</li>
      * <li>{@link #CXCallingConv_SwiftAsync CallingConv_SwiftAsync}</li>
+     * <li>{@link #CXCallingConv_AArch64SVEPCS CallingConv_AArch64SVEPCS}</li>
      * <li>{@link #CXCallingConv_Invalid CallingConv_Invalid}</li>
      * <li>{@link #CXCallingConv_Unexposed CallingConv_Unexposed}</li>
      * </ul>
@@ -1873,6 +1915,7 @@ public class ClangIndex {
         CXCallingConv_PreserveAll       = 15,
         CXCallingConv_AArch64VectorCall = 16,
         CXCallingConv_SwiftAsync        = 17,
+        CXCallingConv_AArch64SVEPCS     = 18,
         CXCallingConv_Invalid           = 100,
         CXCallingConv_Unexposed         = 200;
 
@@ -1923,7 +1966,7 @@ public class ClangIndex {
      * <li>{@link #CXTypeNullability_Invalid TypeNullability_Invalid} - Nullability is not applicable to this type.</li>
      * <li>{@link #CXTypeNullability_NullableResult TypeNullability_NullableResult} - 
      * Generally behaves like {@code Nullable}, except when used in a block parameter that was imported into a swift async method. There, swift will
-     * assume that the parameter can get null even if no error occured. {@code _Nullable} parameters are assumed to only get null on error.
+     * assume that the parameter can get null even if no error occurred. {@code _Nullable} parameters are assumed to only get null on error.
      * </li>
      * </ul>
      */
@@ -2525,6 +2568,7 @@ public class ClangIndex {
      * <li>{@link #CXIdxEntity_CXXConversionFunction IdxEntity_CXXConversionFunction}</li>
      * <li>{@link #CXIdxEntity_CXXTypeAlias IdxEntity_CXXTypeAlias}</li>
      * <li>{@link #CXIdxEntity_CXXInterface IdxEntity_CXXInterface}</li>
+     * <li>{@link #CXIdxEntity_CXXConcept IdxEntity_CXXConcept}</li>
      * </ul>
      */
     public static final int
@@ -2554,7 +2598,8 @@ public class ClangIndex {
         CXIdxEntity_CXXDestructor         = 23,
         CXIdxEntity_CXXConversionFunction = 24,
         CXIdxEntity_CXXTypeAlias          = 25,
-        CXIdxEntity_CXXInterface          = 26;
+        CXIdxEntity_CXXInterface          = 26,
+        CXIdxEntity_CXXConcept            = 27;
 
     /**
      * {@code CXIdxEntityLanguage}
@@ -5576,7 +5621,7 @@ public class ClangIndex {
     }
 
     /**
-     * Returns the number of template args of a function decl representing a template specialization.
+     * Returns the number of template args of a function, struct, or class decl representing a template specialization.
      * 
      * <p>If the argument cursor cannot be converted into a template function declaration, -1 is returned.</p>
      * 
@@ -5609,7 +5654,8 @@ public class ClangIndex {
     /**
      * Retrieve the kind of the I'th template argument of the {@code CXCursor} {@code C}.
      * 
-     * <p>If the argument {@code CXCursor} does not represent a {@code FunctionDecl}, an invalid template argument kind is returned.</p>
+     * <p>If the argument {@code CXCursor} does not represent a {@code FunctionDecl}, {@code StructDecl}, or {@code ClassTemplatePartialSpecialization}, an
+     * invalid template argument kind is returned.</p>
      * 
      * <p>For example, for the following declaration and specialization:</p>
      * 
@@ -5641,8 +5687,9 @@ public class ClangIndex {
     /**
      * Retrieve a {@code CXType} representing the type of a {@code TemplateArgument} of a function decl representing a template specialization.
      * 
-     * <p>If the argument {@code CXCursor does} not represent a {@code FunctionDecl} whose {@code I}'th template argument has a kind of
-     * {@code CXTemplateArgKind_Integral}, an invalid type is returned.</p>
+     * <p>If the argument {@code CXCursor} does not represent a {@code FunctionDecl}, {@code StructDecl}, {@code ClassDecl} or
+     * {@code ClassTemplatePartialSpecialization} whose {@code I}'th template argument has a kind of {@link #CXTemplateArgumentKind_Integral TemplateArgumentKind_Integral}, an invalid type is
+     * returned.</p>
      * 
      * <p>For example, for the following declaration and specialization:</p>
      * 
@@ -5675,8 +5722,8 @@ public class ClangIndex {
      * Retrieve the value of an {@code Integral} {@code TemplateArgument} (of a function decl representing a template specialization) as a {@code signed long
      * long}.
      * 
-     * <p>It is undefined to call this function on a {@code CXCursor} that does not represent a {@code FunctionDecl} or whose {@code I}'th template argument is
-     * not an integral value.</p>
+     * <p>It is undefined to call this function on a {@code CXCursor} that does not represent a {@code FunctionDecl}, {@code StructDecl}, {@code ClassDecl} or
+     * {@code ClassTemplatePartialSpecialization} whose {@code I}'th template argument is not an integral value.</p>
      * 
      * <p>For example, for the following declaration and specialization:</p>
      * 
@@ -5709,8 +5756,8 @@ public class ClangIndex {
      * Retrieve the value of an {@code Integral} {@code TemplateArgument} (of a function decl representing a template specialization) as an {@code unsigned
      * long long}.
      * 
-     * <p>It is undefined to call this function on a {@code CXCursor} that does not represent a {@code FunctionDecl} or whose {@code I}'th template argument is
-     * not an integral value.</p>
+     * <p>It is undefined to call this function on a {@code CXCursor} that does not represent a {@code FunctionDecl}, {@code StructDecl}, {@code ClassDecl} or
+     * {@code ClassTemplatePartialSpecialization} or whose {@code I}'th template argument is not an integral value.</p>
      * 
      * <p>For example, for the following declaration and specialization:</p>
      * 
@@ -5927,6 +5974,77 @@ public class ClangIndex {
     /** For pointer types, returns the type of the pointee. */
     public static CXType clang_getPointeeType(CXType T, CXType __result) {
         nclang_getPointeeType(T.address(), __result.address());
+        return __result;
+    }
+
+    // --- [ clang_getUnqualifiedType ] ---
+
+    /** Unsafe version of: {@link #clang_getUnqualifiedType getUnqualifiedType} */
+    public static native void nclang_getUnqualifiedType(long CT, long __functionAddress, long __result);
+
+    /** Unsafe version of: {@link #clang_getUnqualifiedType getUnqualifiedType} */
+    public static void nclang_getUnqualifiedType(long CT, long __result) {
+        long __functionAddress = Functions.getUnqualifiedType;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        nclang_getUnqualifiedType(CT, __functionAddress, __result);
+    }
+
+    /**
+     * Retrieve the unqualified variant of the given type, removing as little sugar as possible.
+     * 
+     * <p>For example, given the following series of typedefs:</p>
+     * 
+     * <pre><code>
+     * typedef int Integer;
+     * typedef const Integer CInteger;
+     * typedef CInteger DifferenceType;</code></pre>
+     * 
+     * <p>Executing {@code clang_getUnqualifiedType()} on a {@code CXType} that represents {@code DifferenceType}, will desugar to a type representing
+     * {@code Integer}, that has no qualifiers.</p>
+     * 
+     * <p>And, executing {@code clang_getUnqualifiedType()} on the type of the first argument of the following function declaration:</p>
+     * 
+     * <pre><code>
+     * void foo(const int);</code></pre>
+     * 
+     * <p>Will return a type representing {@code int}, removing the {@code const} qualifier.</p>
+     * 
+     * <p>Sugar over array types is not desugared.</p>
+     * 
+     * <p>A type can be checked for qualifiers with {@link #clang_isConstQualifiedType isConstQualifiedType}, {@link #clang_isVolatileQualifiedType isVolatileQualifiedType} and {@link #clang_isRestrictQualifiedType isRestrictQualifiedType}.</p>
+     * 
+     * <p>A type that resulted from a call to {@code clang_getUnqualifiedType} will return {@code false} for all of the above calls.</p>
+     */
+    public static CXType clang_getUnqualifiedType(CXType CT, CXType __result) {
+        nclang_getUnqualifiedType(CT.address(), __result.address());
+        return __result;
+    }
+
+    // --- [ clang_getNonReferenceType ] ---
+
+    /** Unsafe version of: {@link #clang_getNonReferenceType getNonReferenceType} */
+    public static native void nclang_getNonReferenceType(long CT, long __functionAddress, long __result);
+
+    /** Unsafe version of: {@link #clang_getNonReferenceType getNonReferenceType} */
+    public static void nclang_getNonReferenceType(long CT, long __result) {
+        long __functionAddress = Functions.getNonReferenceType;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        nclang_getNonReferenceType(CT, __functionAddress, __result);
+    }
+
+    /**
+     * For reference types (e.g., {@code "const int&"}), returns the type that the reference refers to (e.g {@code "const int"}).
+     * 
+     * <p>Otherwise, returns the type itself.</p>
+     * 
+     * <p>A type that has kind {@link #CXType_LValueReference Type_LValueReference} or {@link #CXType_RValueReference Type_RValueReference} is a reference type.</p>
+     */
+    public static CXType clang_getNonReferenceType(CXType CT, CXType __result) {
+        nclang_getNonReferenceType(CT.address(), __result.address());
         return __result;
     }
 
@@ -7993,6 +8111,26 @@ public class ClangIndex {
         return nclang_CXXMethod_isDefaulted(C.address()) != 0;
     }
 
+    // --- [ clang_CXXMethod_isDeleted ] ---
+
+    /** Unsafe version of: {@link #clang_CXXMethod_isDeleted CXXMethod_isDeleted} */
+    public static native int nclang_CXXMethod_isDeleted(long C, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_CXXMethod_isDeleted CXXMethod_isDeleted} */
+    public static int nclang_CXXMethod_isDeleted(long C) {
+        long __functionAddress = Functions.CXXMethod_isDeleted;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_CXXMethod_isDeleted(C, __functionAddress);
+    }
+
+    /** Determine if a C++ method is declared {@code '= delete'}. */
+    @NativeType("unsigned")
+    public static boolean clang_CXXMethod_isDeleted(CXCursor C) {
+        return nclang_CXXMethod_isDeleted(C.address()) != 0;
+    }
+
     // --- [ clang_CXXMethod_isPureVirtual ] ---
 
     /** Unsafe version of: {@link #clang_CXXMethod_isPureVirtual CXXMethod_isPureVirtual} */
@@ -8045,6 +8183,88 @@ public class ClangIndex {
     @NativeType("unsigned")
     public static boolean clang_CXXMethod_isVirtual(CXCursor C) {
         return nclang_CXXMethod_isVirtual(C.address()) != 0;
+    }
+
+    // --- [ clang_CXXMethod_isCopyAssignmentOperator ] ---
+
+    /** Unsafe version of: {@link #clang_CXXMethod_isCopyAssignmentOperator CXXMethod_isCopyAssignmentOperator} */
+    public static native int nclang_CXXMethod_isCopyAssignmentOperator(long C, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_CXXMethod_isCopyAssignmentOperator CXXMethod_isCopyAssignmentOperator} */
+    public static int nclang_CXXMethod_isCopyAssignmentOperator(long C) {
+        long __functionAddress = Functions.CXXMethod_isCopyAssignmentOperator;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_CXXMethod_isCopyAssignmentOperator(C, __functionAddress);
+    }
+
+    /**
+     * Determine if a C++ member function is a copy-assignment operator, returning 1 if such is the case and 0 otherwise.
+     * 
+     * <p>A copy-assignment operator {@code X::operator=} is a non-static, non-template member function of class {@code X} with exactly one parameter of type
+     * {@code X}, {@code X&}, {@code const X&}, {@code volatile X&} or {@code const volatile X&}.</p>
+     * 
+     * <p>That is, for example, the {@code operator=} in:</p>
+     * 
+     * <pre><code>
+     * class Foo {
+     *     bool operator=(const volatile Foo&amp;);
+     * };</code></pre>
+     * 
+     * <p>Is a copy-assignment operator, while the {@code operator=} in:</p>
+     * 
+     * <pre><code>
+     * class Bar {
+     *     bool operator=(const int&amp;);
+     * };</code></pre>
+     * 
+     * <p>Is not.</p>
+     */
+    @NativeType("unsigned")
+    public static boolean clang_CXXMethod_isCopyAssignmentOperator(CXCursor C) {
+        return nclang_CXXMethod_isCopyAssignmentOperator(C.address()) != 0;
+    }
+
+    // --- [ clang_CXXMethod_isMoveAssignmentOperator ] ---
+
+    /** Unsafe version of: {@link #clang_CXXMethod_isMoveAssignmentOperator CXXMethod_isMoveAssignmentOperator} */
+    public static native int nclang_CXXMethod_isMoveAssignmentOperator(long C, long __functionAddress);
+
+    /** Unsafe version of: {@link #clang_CXXMethod_isMoveAssignmentOperator CXXMethod_isMoveAssignmentOperator} */
+    public static int nclang_CXXMethod_isMoveAssignmentOperator(long C) {
+        long __functionAddress = Functions.CXXMethod_isMoveAssignmentOperator;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        return nclang_CXXMethod_isMoveAssignmentOperator(C, __functionAddress);
+    }
+
+    /**
+     * Determine if a C++ member function is a move-assignment operator, returning 1 if such is the case and 0 otherwise.
+     * 
+     * <p>A move-assignment operator {@code X::operator=} is a non-static, non-template member function of class {@code X} with exactly one parameter of type
+     * {@code X&&}, {@code const X&&}, {@code volatile X&&} or {@code const volatile X&&}.</p>
+     * 
+     * <p>That is, for example, the {@code operator=} in:</p>
+     * 
+     * <pre><code>
+     * class Foo {
+     *     bool operator=(const volatile Foo&amp;&amp;);
+     * };</code></pre>
+     * 
+     * <p>Is a move-assignment operator, while the {@code operator=} in:</p>
+     * 
+     * <pre><code>
+     * class Bar {
+     *     bool operator=(const int&amp;&amp;);
+     * };</code></pre>
+     * 
+     * <p>Is not.</p>
+     */
+    @NativeType("unsigned")
+    public static boolean clang_CXXMethod_isMoveAssignmentOperator(CXCursor C) {
+        return nclang_CXXMethod_isMoveAssignmentOperator(C.address()) != 0;
     }
 
     // --- [ clang_CXXRecord_isAbstract ] ---

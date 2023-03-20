@@ -6,7 +6,6 @@ package llvm
 
 import org.lwjgl.generator.*
 
-val LLVMOrcCLookupSet = "LLVMOrcCLookupSet".handle
 val LLVMOrcDefinitionGeneratorRef = "LLVMOrcDefinitionGeneratorRef".handle
 val LLVMOrcDumpObjectsRef = "LLVMOrcDumpObjectsRef".handle
 val LLVMOrcExecutionSessionRef = "LLVMOrcExecutionSessionRef".handle
@@ -74,13 +73,13 @@ val LLVMOrcCSymbolFlagsMapPair = struct(Module.LLVM, "LLVMOrcCSymbolFlagsMapPair
 }
 val LLVMOrcCSymbolFlagsMapPairs = typedef(LLVMOrcCSymbolFlagsMapPair.p, "LLVMOrcCSymbolFlagsMapPairs")
 
-val LLVMJITCSymbolMapPair = struct(Module.LLVM, "LLVMJITCSymbolMapPair") {
+val LLVMOrcCSymbolMapPair = struct(Module.LLVM, "LLVMOrcCSymbolMapPair") {
     documentation = "Represents a pair of a symbol name and an evaluated symbol."
 
     LLVMOrcSymbolStringPoolEntryRef("Name", "")
     LLVMJITEvaluatedSymbol("Sym", "")
 }
-val LLVMOrcCSymbolMapPairs = typedef(LLVMJITCSymbolMapPair.p, "LLVMOrcCSymbolMapPairs")
+val LLVMOrcCSymbolMapPairs = typedef(LLVMOrcCSymbolMapPair.p, "LLVMOrcCSymbolMapPairs")
 
 val LLVMOrcCSymbolAliasMapEntry = struct(Module.LLVM, "LLVMOrcCSymbolAliasMapEntry") {
     documentation = "Represents a {@code SymbolAliasMapEntry}"
@@ -112,12 +111,21 @@ val LLVMOrcCDependenceMapPair = struct(Module.LLVM, "LLVMOrcCDependenceMapPair")
 }
 val LLVMOrcCDependenceMapPairs = typedef(LLVMOrcCDependenceMapPair.p, "LLVMOrcCDependenceMapPairs")
 
+val LLVMOrcCJITDylibSearchOrderElement = struct(Module.LLVM, "LLVMOrcCJITDylibSearchOrderElement") {
+    documentation = "An element type for a JITDylib search order."
+
+    LLVMOrcJITDylibRef("JD", "")
+    LLVMOrcJITDylibLookupFlags("JDLookupFlags", "")
+}
+val LLVMOrcCJITDylibSearchOrder = typedef(LLVMOrcCJITDylibSearchOrderElement.p, "LLVMOrcCJITDylibSearchOrder")
+
 val LLVMOrcCLookupSetElement = struct(Module.LLVM, "LLVMOrcCLookupSetElement") {
     documentation = "An element type for a symbol lookup set."
 
     LLVMOrcSymbolStringPoolEntryRef("Name", "")
     LLVMOrcSymbolLookupFlags("LookupFlags", "")
 }
+val LLVMOrcCLookupSet = typedef(LLVMOrcCLookupSetElement.p, "LLVMOrcCLookupSet")
 
 val LLVMOrcMaterializationUnitMaterializeFunction = Module.LLVM.callback {
     void(
@@ -213,6 +221,21 @@ val LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction = Module.LLVM.callback {
     }
 }
 
+val LLVMOrcDisposeCAPIDefinitionGeneratorFunction = Module.LLVM.callback {
+    void(
+        "LLVMOrcDisposeCAPIDefinitionGeneratorFunction",
+        """
+        Disposer for a custom generator.
+
+        Will be called by ORC when the {@code JITDylib} that the generator is attached to is destroyed.
+        """,
+
+        opaque_p("Ctx", ""),
+
+        nativeType = "LLVMOrcDisposeCAPIDefinitionGeneratorFunction"
+    )
+}
+
 val LLVMOrcSymbolPredicate = Module.LLVM.callback {
     int(
         "LLVMOrcSymbolPredicate",
@@ -284,5 +307,58 @@ val LLVMOrcObjectTransformLayerTransformFunction = Module.LLVM.callback {
         nativeType = "LLVMOrcObjectTransformLayerTransformFunction"
     ) {
         documentation = "Instances of this interface may be passed to the #OrcObjectTransformLayerSetTransform() method."
+    }
+}
+
+val LLVMOrcExecutionSessionLookupHandleResultFunction = Module.LLVM.callback {
+    void(
+        "LLVMOrcExecutionSessionLookupHandleResultFunction",
+        """
+        Callback type for {@code ExecutionSession} lookups.
+
+        If {@code Err} is #ErrorSuccess then {@code Result} will contain a pointer to a list of ( {@code SymbolStringPtr}, {@code JITEvaluatedSymbol} ) pairs
+        of length {@code NumPairs}.
+
+        If {@code Err} is a failure value then {@code Result} and {@code Ctx} are undefined and should not be accessed. The callback is responsible for
+        handling the error value (e.g. by calling #GetErrorMessage() + #DisposeErrorMessage()).
+
+        The caller retains ownership of the {@code Result} array and will release all contained symbol names. Clients are responsible for retaining any symbol
+        names that they wish to hold after the function returns.
+        """,
+
+        LLVMErrorRef("Err", ""),
+        nullable..LLVMOrcCSymbolMapPairs("Result", ""),
+        AutoSize("Result")..size_t("NumPairs", ""),
+        nullable..opaque_p("Ctx", ""),
+
+        nativeType = "LLVMOrcExecutionSessionLookupHandleResultFunction"
+    ) {
+        documentation = "Instances of this interface may be passed to the #OrcExecutionSessionLookup() method."
+    }
+}
+
+val LLVMMemoryManagerCreateContextCallback = Module.LLVM.callback {
+    void(
+        "LLVMMemoryManagerCreateContextCallback",
+        "",
+
+        nullable..opaque_p("CtxCtx", ""),
+
+        nativeType = "LLVMMemoryManagerCreateContextCallback"
+    ) {
+        documentation = "Instances of this interface may be passed to the #OrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks() method."
+    }
+}
+
+val LLVMMemoryManagerNotifyTerminatingCallback = Module.LLVM.callback {
+    void(
+        "LLVMMemoryManagerNotifyTerminatingCallback",
+        "",
+
+        nullable..opaque_p("CtxCtx", ""),
+
+        nativeType = "LLVMMemoryManagerNotifyTerminatingCallback"
+    ) {
+        documentation = "Instances of this interface may be passed to the #OrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks() method."
     }
 }

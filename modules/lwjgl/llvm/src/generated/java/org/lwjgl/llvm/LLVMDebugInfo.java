@@ -35,6 +35,7 @@ public class LLVMDebugInfo {
             CreateDIBuilder                            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMCreateDIBuilder"),
             DisposeDIBuilder                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeDIBuilder"),
             DIBuilderFinalize                          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderFinalize"),
+            DIBuilderFinalizeSubprogram                = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMDIBuilderFinalizeSubprogram"),
             DIBuilderCreateCompileUnit                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateCompileUnit"),
             DIBuilderCreateFile                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateFile"),
             DIBuilderCreateModule                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDIBuilderCreateModule"),
@@ -246,6 +247,15 @@ public class LLVMDebugInfo {
      * <li>{@link #LLVMDWARFSourceLanguageFortran08 DWARFSourceLanguageFortran08} - New in DWARF v5:</li>
      * <li>{@link #LLVMDWARFSourceLanguageRenderScript DWARFSourceLanguageRenderScript} - New in DWARF v5:</li>
      * <li>{@link #LLVMDWARFSourceLanguageBLISS DWARFSourceLanguageBLISS} - New in DWARF v5:</li>
+     * <li>{@link #LLVMDWARFSourceLanguageKotlin DWARFSourceLanguageKotlin}</li>
+     * <li>{@link #LLVMDWARFSourceLanguageZig DWARFSourceLanguageZig}</li>
+     * <li>{@link #LLVMDWARFSourceLanguageCrystal DWARFSourceLanguageCrystal}</li>
+     * <li>{@link #LLVMDWARFSourceLanguageC_plus_plus_17 DWARFSourceLanguageC_plus_plus_17}</li>
+     * <li>{@link #LLVMDWARFSourceLanguageC_plus_plus_20 DWARFSourceLanguageC_plus_plus_20}</li>
+     * <li>{@link #LLVMDWARFSourceLanguageC17 DWARFSourceLanguageC17}</li>
+     * <li>{@link #LLVMDWARFSourceLanguageFortran18 DWARFSourceLanguageFortran18}</li>
+     * <li>{@link #LLVMDWARFSourceLanguageAda2005 DWARFSourceLanguageAda2005}</li>
+     * <li>{@link #LLVMDWARFSourceLanguageAda2012 DWARFSourceLanguageAda2012}</li>
      * <li>{@link #LLVMDWARFSourceLanguageMips_Assembler DWARFSourceLanguageMips_Assembler} - Vendor extensions:</li>
      * <li>{@link #LLVMDWARFSourceLanguageGOOGLE_RenderScript DWARFSourceLanguageGOOGLE_RenderScript} - Vendor extensions:</li>
      * <li>{@link #LLVMDWARFSourceLanguageBORLAND_Delphi DWARFSourceLanguageBORLAND_Delphi} - Vendor extensions:</li>
@@ -289,9 +299,18 @@ public class LLVMDebugInfo {
         LLVMDWARFSourceLanguageFortran08           = 34,
         LLVMDWARFSourceLanguageRenderScript        = 35,
         LLVMDWARFSourceLanguageBLISS               = 36,
-        LLVMDWARFSourceLanguageMips_Assembler      = 37,
-        LLVMDWARFSourceLanguageGOOGLE_RenderScript = 38,
-        LLVMDWARFSourceLanguageBORLAND_Delphi      = 39;
+        LLVMDWARFSourceLanguageKotlin              = 37,
+        LLVMDWARFSourceLanguageZig                 = 38,
+        LLVMDWARFSourceLanguageCrystal             = 39,
+        LLVMDWARFSourceLanguageC_plus_plus_17      = 40,
+        LLVMDWARFSourceLanguageC_plus_plus_20      = 41,
+        LLVMDWARFSourceLanguageC17                 = 42,
+        LLVMDWARFSourceLanguageFortran18           = 43,
+        LLVMDWARFSourceLanguageAda2005             = 44,
+        LLVMDWARFSourceLanguageAda2012             = 45,
+        LLVMDWARFSourceLanguageMips_Assembler      = 46,
+        LLVMDWARFSourceLanguageGOOGLE_RenderScript = 47,
+        LLVMDWARFSourceLanguageBORLAND_Delphi      = 48;
 
     /**
      * The amount of debug information to emit.
@@ -352,6 +371,7 @@ public class LLVMDebugInfo {
      * <li>{@link #LLVMDIStringTypeMetadataKind DIStringTypeMetadataKind}</li>
      * <li>{@link #LLVMDIGenericSubrangeMetadataKind DIGenericSubrangeMetadataKind}</li>
      * <li>{@link #LLVMDIArgListMetadataKind DIArgListMetadataKind}</li>
+     * <li>{@link #LLVMDIAssignIDMetadataKind DIAssignIDMetadataKind}</li>
      * </ul>
      */
     public static final int
@@ -389,7 +409,8 @@ public class LLVMDebugInfo {
         LLVMDICommonBlockMetadataKind                = 31,
         LLVMDIStringTypeMetadataKind                 = 32,
         LLVMDIGenericSubrangeMetadataKind            = 33,
-        LLVMDIArgListMetadataKind                    = 34;
+        LLVMDIArgListMetadataKind                    = 34,
+        LLVMDIAssignIDMetadataKind                   = 35;
 
     /**
      * Describes the kind of macro declaration used for {@code LLVMDIBuilderCreateMacro}. ({@code LLVMDWARFMacinfoRecordType})
@@ -469,10 +490,7 @@ public class LLVMDebugInfo {
 
     // --- [ LLVMCreateDIBuilder ] ---
 
-    /**
-     * Construct a builder for a module and collect unresolved nodes attached to the module in order to resolve cycles during a call to {@code
-     * LLVMDIBuilderFinalize}.
-     */
+    /** Construct a builder for a module and collect unresolved nodes attached to the module in order to resolve cycles during a call to {@link #LLVMDIBuilderFinalize DIBuilderFinalize}. */
     @NativeType("LLVMDIBuilderRef")
     public static long LLVMCreateDIBuilder(@NativeType("LLVMModuleRef") long M) {
         long __functionAddress = Functions.CreateDIBuilder;
@@ -489,7 +507,7 @@ public class LLVMDebugInfo {
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 
-     * <p>You must call {@code {@link #LLVMDIBuilderFinalize DIBuilderFinalize}} before this</p></div>
+     * <p>You must call {@link #LLVMDIBuilderFinalize DIBuilderFinalize} before this</p></div>
      */
     public static void LLVMDisposeDIBuilder(@NativeType("LLVMDIBuilderRef") long Builder) {
         long __functionAddress = Functions.DisposeDIBuilder;
@@ -508,6 +526,23 @@ public class LLVMDebugInfo {
             check(Builder);
         }
         invokePV(Builder, __functionAddress);
+    }
+
+    // --- [ LLVMDIBuilderFinalizeSubprogram ] ---
+
+    /**
+     * Finalize a specific subprogram.
+     * 
+     * <p>No new variables may be added to this subprogram afterwards.</p>
+     */
+    public static void LLVMDIBuilderFinalizeSubprogram(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Subprogram) {
+        long __functionAddress = Functions.DIBuilderFinalizeSubprogram;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(Builder);
+            check(Subprogram);
+        }
+        invokePPV(Builder, Subprogram, __functionAddress);
     }
 
     // --- [ LLVMDIBuilderCreateCompileUnit ] ---
@@ -889,16 +924,11 @@ public class LLVMDebugInfo {
     // --- [ LLVMDIBuilderCreateImportedModuleFromAlias ] ---
 
     /**
-     * Create a descriptor for an imported module that aliases another imported entity descriptor.
+     * Unsafe version of: {@link #LLVMDIBuilderCreateImportedModuleFromAlias DIBuilderCreateImportedModuleFromAlias}
      *
-     * @param Builder        the {@code DIBuilder}
-     * @param Scope          the scope this module is imported into
-     * @param ImportedEntity previous imported entity to alias
-     * @param File           file where the declaration is located
-     * @param Line           line number of the declaration
+     * @param NumElements number of renamed elements
      */
-    @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateImportedModuleFromAlias(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long ImportedEntity, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line) {
+    public static long nLLVMDIBuilderCreateImportedModuleFromAlias(long Builder, long Scope, long ImportedEntity, long File, int Line, long Elements, int NumElements) {
         long __functionAddress = Functions.DIBuilderCreateImportedModuleFromAlias;
         if (CHECKS) {
             check(Builder);
@@ -906,22 +936,32 @@ public class LLVMDebugInfo {
             check(ImportedEntity);
             check(File);
         }
-        return invokePPPPP(Builder, Scope, ImportedEntity, File, Line, __functionAddress);
+        return invokePPPPPP(Builder, Scope, ImportedEntity, File, Line, Elements, NumElements, __functionAddress);
+    }
+
+    /**
+     * Create a descriptor for an imported module that aliases another imported entity descriptor.
+     *
+     * @param Builder        the {@code DIBuilder}
+     * @param Scope          the scope this module is imported into
+     * @param ImportedEntity previous imported entity to alias
+     * @param File           file where the declaration is located
+     * @param Line           line number of the declaration
+     * @param Elements       renamed elements
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateImportedModuleFromAlias(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long ImportedEntity, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @Nullable @NativeType("LLVMMetadataRef *") PointerBuffer Elements) {
+        return nLLVMDIBuilderCreateImportedModuleFromAlias(Builder, Scope, ImportedEntity, File, Line, memAddressSafe(Elements), remainingSafe(Elements));
     }
 
     // --- [ LLVMDIBuilderCreateImportedModuleFromModule ] ---
 
     /**
-     * Create a descriptor for an imported module.
+     * Unsafe version of: {@link #LLVMDIBuilderCreateImportedModuleFromModule DIBuilderCreateImportedModuleFromModule}
      *
-     * @param Builder the {@code DIBuilder}
-     * @param Scope   the scope this module is imported into
-     * @param M       the module being imported here
-     * @param File    file where the declaration is located
-     * @param Line    line number of the declaration
+     * @param NumElements number of renamed elements
      */
-    @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateImportedModuleFromModule(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long M, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line) {
+    public static long nLLVMDIBuilderCreateImportedModuleFromModule(long Builder, long Scope, long M, long File, int Line, long Elements, int NumElements) {
         long __functionAddress = Functions.DIBuilderCreateImportedModuleFromModule;
         if (CHECKS) {
             check(Builder);
@@ -929,7 +969,22 @@ public class LLVMDebugInfo {
             check(M);
             check(File);
         }
-        return invokePPPPP(Builder, Scope, M, File, Line, __functionAddress);
+        return invokePPPPPP(Builder, Scope, M, File, Line, Elements, NumElements, __functionAddress);
+    }
+
+    /**
+     * Create a descriptor for an imported module.
+     *
+     * @param Builder  the {@code DIBuilder}
+     * @param Scope    the scope this module is imported into
+     * @param M        the module being imported here
+     * @param File     file where the declaration is located
+     * @param Line     line number of the declaration
+     * @param Elements renamed elements
+     */
+    @NativeType("LLVMMetadataRef")
+    public static long LLVMDIBuilderCreateImportedModuleFromModule(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long M, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @Nullable @NativeType("LLVMMetadataRef *") PointerBuffer Elements) {
+        return nLLVMDIBuilderCreateImportedModuleFromModule(Builder, Scope, M, File, Line, memAddressSafe(Elements), remainingSafe(Elements));
     }
 
     // --- [ LLVMDIBuilderCreateImportedDeclaration ] ---
@@ -937,9 +992,10 @@ public class LLVMDebugInfo {
     /**
      * Unsafe version of: {@link #LLVMDIBuilderCreateImportedDeclaration DIBuilderCreateImportedDeclaration}
      *
-     * @param NameLen the length of the C string passed to {@code Name}
+     * @param NameLen     the length of the C string passed to {@code Name}
+     * @param NumElements number of renamed elements
      */
-    public static long nLLVMDIBuilderCreateImportedDeclaration(long Builder, long Scope, long Decl, long File, int Line, long Name, long NameLen) {
+    public static long nLLVMDIBuilderCreateImportedDeclaration(long Builder, long Scope, long Decl, long File, int Line, long Name, long NameLen, long Elements, int NumElements) {
         long __functionAddress = Functions.DIBuilderCreateImportedDeclaration;
         if (CHECKS) {
             check(Builder);
@@ -947,41 +1003,43 @@ public class LLVMDebugInfo {
             check(Decl);
             check(File);
         }
-        return invokePPPPPPP(Builder, Scope, Decl, File, Line, Name, NameLen, __functionAddress);
+        return invokePPPPPPPP(Builder, Scope, Decl, File, Line, Name, NameLen, Elements, NumElements, __functionAddress);
     }
 
     /**
-     * Create a descriptor for an imported function, type, or variable.  Suitable for e.g. FORTRAN-style USE declarations.
+     * Create a descriptor for an imported function, type, or variable. Suitable for e.g. FORTRAN-style USE declarations.
      *
-     * @param Builder the DIBuilder
-     * @param Scope   the scope this module is imported into
-     * @param Decl    the declaration (or definition) of a function, type, or variable
-     * @param File    file where the declaration is located
-     * @param Line    line number of the declaration
-     * @param Name    a name that uniquely identifies this imported declaration
+     * @param Builder  the DIBuilder
+     * @param Scope    the scope this module is imported into
+     * @param Decl     the declaration (or definition) of a function, type, or variable
+     * @param File     file where the declaration is located
+     * @param Line     line number of the declaration
+     * @param Name     a name that uniquely identifies this imported declaration
+     * @param Elements renamed elements
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateImportedDeclaration(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long Decl, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("char const *") ByteBuffer Name) {
-        return nLLVMDIBuilderCreateImportedDeclaration(Builder, Scope, Decl, File, Line, memAddress(Name), Name.remaining());
+    public static long LLVMDIBuilderCreateImportedDeclaration(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long Decl, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("char const *") ByteBuffer Name, @Nullable @NativeType("LLVMMetadataRef *") PointerBuffer Elements) {
+        return nLLVMDIBuilderCreateImportedDeclaration(Builder, Scope, Decl, File, Line, memAddress(Name), Name.remaining(), memAddressSafe(Elements), remainingSafe(Elements));
     }
 
     /**
-     * Create a descriptor for an imported function, type, or variable.  Suitable for e.g. FORTRAN-style USE declarations.
+     * Create a descriptor for an imported function, type, or variable. Suitable for e.g. FORTRAN-style USE declarations.
      *
-     * @param Builder the DIBuilder
-     * @param Scope   the scope this module is imported into
-     * @param Decl    the declaration (or definition) of a function, type, or variable
-     * @param File    file where the declaration is located
-     * @param Line    line number of the declaration
-     * @param Name    a name that uniquely identifies this imported declaration
+     * @param Builder  the DIBuilder
+     * @param Scope    the scope this module is imported into
+     * @param Decl     the declaration (or definition) of a function, type, or variable
+     * @param File     file where the declaration is located
+     * @param Line     line number of the declaration
+     * @param Name     a name that uniquely identifies this imported declaration
+     * @param Elements renamed elements
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateImportedDeclaration(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long Decl, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("char const *") CharSequence Name) {
+    public static long LLVMDIBuilderCreateImportedDeclaration(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("LLVMMetadataRef") long Scope, @NativeType("LLVMMetadataRef") long Decl, @NativeType("LLVMMetadataRef") long File, @NativeType("unsigned int") int Line, @NativeType("char const *") CharSequence Name, @Nullable @NativeType("LLVMMetadataRef *") PointerBuffer Elements) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             int NameEncodedLength = stack.nUTF8(Name, false);
             long NameEncoded = stack.getPointerAddress();
-            return nLLVMDIBuilderCreateImportedDeclaration(Builder, Scope, Decl, File, Line, NameEncoded, NameEncodedLength);
+            return nLLVMDIBuilderCreateImportedDeclaration(Builder, Scope, Decl, File, Line, NameEncoded, NameEncodedLength, memAddressSafe(Elements), remainingSafe(Elements));
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -2685,7 +2743,7 @@ public class LLVMDebugInfo {
      * @param Addr    an array of complex address operations
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateExpression(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("int64_t *") LongBuffer Addr) {
+    public static long LLVMDIBuilderCreateExpression(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("uint64_t *") LongBuffer Addr) {
         return nLLVMDIBuilderCreateExpression(Builder, memAddress(Addr), Addr.remaining());
     }
 
@@ -2698,7 +2756,7 @@ public class LLVMDebugInfo {
      * @param Value   the constant value
      */
     @NativeType("LLVMMetadataRef")
-    public static long LLVMDIBuilderCreateConstantValueExpression(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("int64_t") long Value) {
+    public static long LLVMDIBuilderCreateConstantValueExpression(@NativeType("LLVMDIBuilderRef") long Builder, @NativeType("uint64_t") long Value) {
         long __functionAddress = Functions.DIBuilderCreateConstantValueExpression;
         if (CHECKS) {
             check(Builder);

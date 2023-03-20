@@ -201,7 +201,7 @@ val LLVMTargetMachine = "LLVMTargetMachine".nativeClass(
 
         LLVMTargetMachineRef("T", ""),
         LLVMModuleRef("M", ""),
-        charUTF8.p("Filename", ""),
+        charUTF8.const.p("Filename", ""),
         LLVMCodeGenFileType("codegen", ""),
         Check(1)..charUTF8.p.p("ErrorMessage", "")
     )

@@ -75,7 +75,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         since = "12"
     )
 
-    void(
+    IgnoreMissing..void(
         "AddArgumentPromotionPass",
         "See {@code llvm::createArgumentPromotionPass} function.",
 
@@ -154,7 +154,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddPruneEHPass",
         "See {@code llvm::createPruneEHPass} function.",
 
@@ -437,7 +437,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "PassManagerBuilderPopulateLTOPassManager",
         "See {@code llvm::PassManagerBuilder::populateLTOPassManager}.",
 
@@ -582,7 +582,7 @@ val LLVMTransforms = "LLVMTransforms".nativeClass(
         LLVMPassManagerRef("PM", "")
     )
 
-    void(
+    IgnoreMissing..void(
         "AddLoopUnswitchPass",
         "See {@code llvm::createLoopUnswitchPass} function.",
 

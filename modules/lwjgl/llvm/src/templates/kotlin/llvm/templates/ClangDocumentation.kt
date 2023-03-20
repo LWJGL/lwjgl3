@@ -498,4 +498,55 @@ val ClangDocumentation = "ClangDocumentation".nativeClass(
 
         returnDoc = "string containing an XML document"
     )
+
+    IgnoreMissing..CXErrorCode(
+        "createAPISet",
+        "Traverses the translation unit to create a {@code CXAPISet}.",
+
+        CXTranslationUnit("tu", "the {@code CXTranslationUnit} to build the {@code CXAPISet} for"),
+        Check(1)..CXAPISet.p("out_api", "a pointer to the output of this function. It is needs to be disposed of by calling #disposeAPISet()."),
+
+        returnDoc = "error code indicating success or failure of the APISet creation"
+    )
+
+    IgnoreMissing..void(
+        "disposeAPISet",
+        """
+        Dispose of an APISet.
+
+        The provided {@code CXAPISet} can not be used after this function is called.
+        """,
+
+        CXAPISet("api", "")
+    )
+
+    IgnoreMissing..CXString(
+        "getSymbolGraphForUSR",
+        """
+        Generate a single symbol symbol graph for the given USR.
+
+        Returns a null string if the associated symbol can not be found in the provided {@code CXAPISet}. The output contains the symbol graph as well as some
+        additional information about related symbols.
+        """,
+
+        charUTF8.const.p("usr", "a string containing the USR of the symbol to generate the symbol graph for"),
+        CXAPISet("api", "the {@code CXAPISet} to look for the symbol in"),
+
+        returnDoc = "a string containing the serialized symbol graph representation for the symbol being queried or a null string if it can not be found in the APISet"
+    )
+
+    IgnoreMissing..CXString(
+        "getSymbolGraphForCursor",
+        """
+        Generate a single symbol symbol graph for the declaration at the given cursor.
+
+        Returns a null string if the AST node for the cursor isn't a declaration. The output contains the symbol graph as well as some additional information
+        about related symbols.
+        """,
+
+        CXCursor("cursor", "the declaration for which to generate the single symbol symbol graph."),
+
+        returnDoc =
+        "a string containing the serialized symbol graph representation for the symbol being queried or a null string if it can not be found in the APISet"
+    )
 }

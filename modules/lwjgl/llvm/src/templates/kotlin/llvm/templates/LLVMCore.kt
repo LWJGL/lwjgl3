@@ -107,7 +107,8 @@ val LLVMCore = "LLVMCore".nativeClass(
         "TokenTypeKind".enum("Tokens"),
         "ScalableVectorTypeKind".enum("Scalable SIMD vector type"),
         "BFloatTypeKind".enum("16 bit brain floating point type"),
-        "X86_AMXTypeKind".enum("X86 AMX")
+        "X86_AMXTypeKind".enum("X86 AMX"),
+        "TargetExtTypeKind".enum("Target extension type")
     )
 
     EnumConstant(
@@ -231,7 +232,8 @@ val LLVMCore = "LLVMCore".nativeClass(
         "MetadataAsValueValueKind".enum,
         "InlineAsmValueKind".enum,
         "InstructionValueKind".enum,
-        "PoisonValueValueKind".enum
+        "PoisonValueValueKind".enum,
+        "ConstantTargetNoneValueKind".enum
     )
 
     EnumConstant(
@@ -322,7 +324,9 @@ val LLVMCore = "LLVMCore".nativeClass(
         "AtomicRMWBinOpUMax".enum("Sets the value if it's greater than the original using an unsigned comparison and return the old one"),
         "AtomicRMWBinOpUMin".enum("Sets the value if it's greater than the original using an unsigned comparison and return the old one"),
         "AtomicRMWBinOpFAdd".enum("Add a floating point value and return the old one"),
-        "AtomicRMWBinOpFSub".enum("Subtract a floating point value and return the old one")
+        "AtomicRMWBinOpFSub".enum("Subtract a floating point value and return the old one"),
+        "AtomicRMWBinOpFMax".enum("Sets the value if it's greater than the original using a floating point comparison and return the old one"),
+        "AtomicRMWBinOpFMin".enum("Sets the value if it's smaller than the original using a floating point comparison and return the old one")
     )
 
     EnumConstant(
@@ -390,6 +394,21 @@ val LLVMCore = "LLVMCore".nativeClass(
         "Deallocate and destroy all {@code ManagedStatic} variables.",
 
         void()
+    )
+
+    /*===-- Version query -----------------------------------------------------===*/
+
+    IgnoreMissing..void(
+        "GetVersion",
+        """
+        Return the major, minor, and patch version of LLVM.
+
+        The version components are returned via the function's three output parameters or skipped if a #NULL pointer was supplied.
+        """,
+
+        Check(1)..nullable..unsigned.p("Major", ""),
+        Check(1)..nullable..unsigned.p("Minor", ""),
+        Check(1)..nullable..unsigned.p("Patch", "")
     )
 
     Nonnull..charUTF8.p(
@@ -478,6 +497,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBool("Discard", ""),
 
         since = "8.0"
+    )
+
+    IgnoreMissing..void(
+        "ContextSetOpaquePointers",
+        "Set whether the given context is in opaque pointer mode.",
+
+        LLVMContextRef("C", ""),
+        LLVMBool("OpaquePointers", "")
     )
 
     void(
@@ -1442,9 +1469,9 @@ val LLVMCore = "LLVMCore".nativeClass(
     LLVMTypeRef(
         "GetElementType",
         """
-        Obtain the type of elements within a sequential type.
+        Obtain the element type of an array or vector type.
 
-        This works on array, vector, and pointer types.
+        This currently also works for pointer types, but this usage is deprecated.
         """,
 
         LLVMTypeRef("Ty", "")
@@ -1498,6 +1525,21 @@ val LLVMCore = "LLVMCore".nativeClass(
 
         LLVMTypeRef("ElementType", ""),
         unsigned_int("AddressSpace", "")
+    )
+
+    IgnoreMissing..LLVMBool(
+        "PointerTypeIsOpaque",
+        "Determine whether a pointer is opaque.",
+
+        LLVMTypeRef("Ty", "")
+    )
+
+    IgnoreMissing..LLVMTypeRef(
+        "PointerTypeInContext",
+        "Create an opaque pointer type in a context.",
+
+        LLVMContextRef("C", ""),
+        unsigned("AddressSpace", "")
     )
 
     unsigned_int(
@@ -1611,6 +1653,18 @@ val LLVMCore = "LLVMCore".nativeClass(
         void(),
 
         since = "12"
+    )
+
+    IgnoreMissing..LLVMTypeRef(
+        "TargetExtTypeInContext",
+        "Create a target extension type in LLVM context.",
+
+        LLVMContextRef("C", ""),
+        charUTF8.const.p("Name", ""),
+        nullable..LLVMTypeRef.p("TypeParams", ""),
+        AutoSize("TypeParams")..unsigned("TypeParamCount", ""),
+        nullable..unsigned.p("IntParams", ""),
+        AutoSize("IntParams")..unsigned("IntParamCount", "")
     )
 
     LLVMTypeRef(
@@ -2101,9 +2155,25 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("ConstantVals")..unsigned_int("Count", "")
     )
 
+    IgnoreMissing..LLVMValueRef(
+        "GetAggregateElement",
+        """
+        Get element of a constant aggregate (struct, array or vector) at the specified index.
+
+        Returns null if the index is out of range, or it's not possible to determine the element (e.g., because the constant is a constant expression.)
+        """,
+
+        LLVMValueRef("C", ""),
+        unsigned("Idx", "")
+    )
+
     LLVMValueRef(
         "GetElementAsConstant",
-        "Get an element at specified index as a constant.",
+        """
+        Get an element at specified index as a constant.
+
+        Deprecated, use #GetAggregateElement() instead.
+        """,
 
         LLVMValueRef("C", ""),
         unsigned_int("idx", "")
@@ -2159,7 +2229,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("ConstantVal", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFNeg",
         "",
 
@@ -2197,7 +2267,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFAdd",
         "",
 
@@ -2229,7 +2299,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFSub",
         "",
 
@@ -2261,7 +2331,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFMul",
         "",
 
@@ -2269,7 +2339,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstUDiv",
         "",
 
@@ -2277,7 +2347,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstExactUDiv",
         "",
 
@@ -2285,7 +2355,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstSDiv",
         "",
 
@@ -2293,7 +2363,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstExactSDiv",
         "",
 
@@ -2301,7 +2371,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFDiv",
         "",
 
@@ -2309,7 +2379,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstURem",
         "",
 
@@ -2317,7 +2387,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstSRem",
         "",
 
@@ -2325,7 +2395,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstFRem",
         "",
 
@@ -2399,7 +2469,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("RHSConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstGEP",
         "",
 
@@ -2420,7 +2490,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         since = "8.0"
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstInBoundsGEP",
         "",
 
@@ -2629,7 +2699,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("MaskConstant", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstExtractValue",
         "",
 
@@ -2638,7 +2708,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         AutoSize("IdxList")..unsigned_int("NumIdx", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "ConstInsertValue",
         "",
 
@@ -2988,12 +3058,23 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMBool("IsExtInit", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "AddAlias",
         "",
 
         LLVMModuleRef("M", ""),
         LLVMTypeRef("Ty", ""),
+        LLVMValueRef("Aliasee", ""),
+        charUTF8.const.p("Name", "")
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "AddAlias2",
+        "Add a GlobalAlias with the given value type, address space and aliasee.",
+
+        LLVMModuleRef("M", ""),
+        LLVMTypeRef("ValueTy", ""),
+        unsigned("AddrSpace", ""),
         LLVMValueRef("Aliasee", ""),
         charUTF8.const.p("Name", "")
     )
@@ -3962,7 +4043,7 @@ val LLVMCore = "LLVMCore".nativeClass(
     void(
         "InstructionRemoveFromParent",
         """
-        Remove and delete an instruction.
+        Remove an instruction.
 
         The instruction specified is removed from its containing building block but is kept alive.
         """,
@@ -3976,6 +4057,17 @@ val LLVMCore = "LLVMCore".nativeClass(
         Remove and delete an instruction.
 
         The instruction specified is removed from its containing building block and then deleted.
+        """,
+
+        LLVMValueRef("Inst", "")
+    )
+
+    IgnoreMissing..void(
+        "DeleteInstruction",
+        """
+        Delete an instruction.
+
+        The instruction specified is deleted. It must have previously been removed from its containing building block.
         """,
 
         LLVMValueRef("Inst", "")
@@ -4075,7 +4167,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         "",
 
         LLVMValueRef("Instr", ""),
-        unsigned_int("index", ""),
+        LLVMAttributeIndex("index", ""),
         unsigned_int("Align", "")
     )
 
@@ -4312,7 +4404,7 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     LLVMBool(
         "IsInBounds",
-        "Check whether the given {@code GEP} instruction is inbounds.",
+        "Check whether the given {@code GEP} operator is inbounds.",
 
         LLVMValueRef("GEP", "")
     )
@@ -4323,6 +4415,13 @@ val LLVMCore = "LLVMCore".nativeClass(
 
         LLVMValueRef("GEP", ""),
         LLVMBool("InBounds", "")
+    )
+
+    IgnoreMissing..LLVMTypeRef(
+        "GetGEPSourceElementType",
+        "Get the source element type of the given GEP operator.",
+
+        LLVMValueRef("GEP", "")
     )
 
     void(
@@ -4360,7 +4459,7 @@ val LLVMCore = "LLVMCore".nativeClass(
 
     unsigned_int(
         "GetNumIndices",
-        "Obtain the number of indices. NB: This also works on {@code GEP}.",
+        "Obtain the number of indices. NB: This also works on {@code GEP} operators.",
 
         LLVMValueRef("Inst", "")
     )
@@ -4479,6 +4578,8 @@ val LLVMCore = "LLVMCore".nativeClass(
         Attempts to set the debug location for the given instruction using the current debug location for the given builder. If the builder has no current
         debug location, this function is a no-op.
 
+        Deprecated in favor of the more general #AddMetadataToInst().
+ 
         See {@code llvm::IRBuilder::SetInstDebugLocation()}.
         """,
 
@@ -4486,6 +4587,14 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Inst", ""),
 
         since = "9"
+    )
+
+    IgnoreMissing..void(
+        "AddMetadataToInst",
+        "Adds the metadata registered with the given builder to the given instruction.",
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMValueRef("Inst", "")
     )
 
     IgnoreMissing..LLVMMetadataRef(
@@ -4593,7 +4702,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         unsigned_int("NumDests", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildInvoke",
         "",
 
@@ -5227,7 +5336,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("PointerVal", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildLoad",
         "",
 
@@ -5257,7 +5366,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMValueRef("Ptr", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildGEP",
         "",
 
@@ -5268,7 +5377,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildInBoundsGEP",
         "",
 
@@ -5279,7 +5388,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildStructGEP",
         "",
 
@@ -5598,7 +5707,7 @@ val LLVMCore = "LLVMCore".nativeClass(
     )
 
     IgnoreMissing..LLVMValueRef(
-        "BuildPointerCast2",
+        "BuildIntCast2",
         "",
 
         LLVMBuilderRef("Builder", ""),
@@ -5619,6 +5728,17 @@ val LLVMCore = "LLVMCore".nativeClass(
         LLVMTypeRef("DestTy", ""),
         charUTF8.const.p("Name", "")
     )
+
+    IgnoreMissing..LLVMOpcode(
+        "GetCastOpcode",
+        "",
+
+        LLVMValueRef("Src", ""),
+        LLVMBool("SrcIsSigned", ""),
+        LLVMTypeRef("DestTy", ""),
+        LLVMBool("DestIsSigned", "")
+    )
+
 
     LLVMValueRef(
         "BuildFPCast",
@@ -5661,7 +5781,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildCall",
         "",
 
@@ -5789,11 +5909,22 @@ val LLVMCore = "LLVMCore".nativeClass(
         charUTF8.const.p("Name", "")
     )
 
-    LLVMValueRef(
+    IgnoreMissing..LLVMValueRef(
         "BuildPtrDiff",
         "",
 
         LLVMBuilderRef("Builder", ""),
+        LLVMValueRef("LHS", ""),
+        LLVMValueRef("RHS", ""),
+        charUTF8.const.p("Name", "")
+    )
+
+    IgnoreMissing..LLVMValueRef(
+        "BuildPtrDiff2",
+        "",
+
+        LLVMBuilderRef("Builder", ""),
+        LLVMTypeRef("ElemTy", ""),
         LLVMValueRef("LHS", ""),
         LLVMValueRef("RHS", ""),
         charUTF8.const.p("Name", "")

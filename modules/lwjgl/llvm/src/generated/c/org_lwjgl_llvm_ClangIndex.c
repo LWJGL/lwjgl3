@@ -89,6 +89,8 @@ typedef jint (*clang_isRestrictQualifiedTypePROC) (CXType);
 typedef jint (*clang_getAddressSpacePROC) (CXType);
 typedef CXString (*clang_getTypedefNamePROC) (CXType);
 typedef CXType (*clang_getPointeeTypePROC) (CXType);
+typedef CXType (*clang_getUnqualifiedTypePROC) (CXType);
+typedef CXType (*clang_getNonReferenceTypePROC) (CXType);
 typedef CXCursor (*clang_getTypeDeclarationPROC) (CXType);
 typedef CXString (*clang_getDeclObjCTypeEncodingPROC) (CXCursor);
 typedef CXString (*clang_Type_getObjCEncodingPROC) (CXType);
@@ -176,9 +178,12 @@ typedef jint (*clang_CXXConstructor_isDefaultConstructorPROC) (CXCursor);
 typedef jint (*clang_CXXConstructor_isMoveConstructorPROC) (CXCursor);
 typedef jint (*clang_CXXField_isMutablePROC) (CXCursor);
 typedef jint (*clang_CXXMethod_isDefaultedPROC) (CXCursor);
+typedef jint (*clang_CXXMethod_isDeletedPROC) (CXCursor);
 typedef jint (*clang_CXXMethod_isPureVirtualPROC) (CXCursor);
 typedef jint (*clang_CXXMethod_isStaticPROC) (CXCursor);
 typedef jint (*clang_CXXMethod_isVirtualPROC) (CXCursor);
+typedef jint (*clang_CXXMethod_isCopyAssignmentOperatorPROC) (CXCursor);
+typedef jint (*clang_CXXMethod_isMoveAssignmentOperatorPROC) (CXCursor);
 typedef jint (*clang_CXXRecord_isAbstractPROC) (CXCursor);
 typedef jint (*clang_EnumDecl_isScopedPROC) (CXCursor);
 typedef jint (*clang_CXXMethod_isConstPROC) (CXCursor);
@@ -823,6 +828,20 @@ JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getPointeeType(JNI
     *((CXType*)(uintptr_t)__result) = clang_getPointeeType(*T);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getUnqualifiedType(JNIEnv *__env, jclass clazz, jlong CTAddress, jlong __functionAddress, jlong __result) {
+    clang_getUnqualifiedTypePROC clang_getUnqualifiedType = (clang_getUnqualifiedTypePROC)(uintptr_t)__functionAddress;
+    CXType *CT = (CXType *)(uintptr_t)CTAddress;
+    UNUSED_PARAMS(__env, clazz)
+    *((CXType*)(uintptr_t)__result) = clang_getUnqualifiedType(*CT);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getNonReferenceType(JNIEnv *__env, jclass clazz, jlong CTAddress, jlong __functionAddress, jlong __result) {
+    clang_getNonReferenceTypePROC clang_getNonReferenceType = (clang_getNonReferenceTypePROC)(uintptr_t)__functionAddress;
+    CXType *CT = (CXType *)(uintptr_t)CTAddress;
+    UNUSED_PARAMS(__env, clazz)
+    *((CXType*)(uintptr_t)__result) = clang_getNonReferenceType(*CT);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1getTypeDeclaration(JNIEnv *__env, jclass clazz, jlong TAddress, jlong __functionAddress, jlong __result) {
     clang_getTypeDeclarationPROC clang_getTypeDeclaration = (clang_getTypeDeclarationPROC)(uintptr_t)__functionAddress;
     CXType *T = (CXType *)(uintptr_t)TAddress;
@@ -1442,6 +1461,13 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isDefau
     return clang_CXXMethod_isDefaulted(*C);
 }
 
+JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isDeleted(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
+    clang_CXXMethod_isDeletedPROC clang_CXXMethod_isDeleted = (clang_CXXMethod_isDeletedPROC)(uintptr_t)__functionAddress;
+    CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return clang_CXXMethod_isDeleted(*C);
+}
+
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isPureVirtual(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
     clang_CXXMethod_isPureVirtualPROC clang_CXXMethod_isPureVirtual = (clang_CXXMethod_isPureVirtualPROC)(uintptr_t)__functionAddress;
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
@@ -1461,6 +1487,20 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isVirtu
     CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
     UNUSED_PARAMS(__env, clazz)
     return clang_CXXMethod_isVirtual(*C);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isCopyAssignmentOperator(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
+    clang_CXXMethod_isCopyAssignmentOperatorPROC clang_CXXMethod_isCopyAssignmentOperator = (clang_CXXMethod_isCopyAssignmentOperatorPROC)(uintptr_t)__functionAddress;
+    CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return clang_CXXMethod_isCopyAssignmentOperator(*C);
+}
+
+JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXMethod_1isMoveAssignmentOperator(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {
+    clang_CXXMethod_isMoveAssignmentOperatorPROC clang_CXXMethod_isMoveAssignmentOperator = (clang_CXXMethod_isMoveAssignmentOperatorPROC)(uintptr_t)__functionAddress;
+    CXCursor *C = (CXCursor *)(uintptr_t)CAddress;
+    UNUSED_PARAMS(__env, clazz)
+    return clang_CXXMethod_isMoveAssignmentOperator(*C);
 }
 
 JNIEXPORT jint JNICALL Java_org_lwjgl_llvm_ClangIndex_nclang_1CXXRecord_1isAbstract(JNIEnv *__env, jclass clazz, jlong CAddress, jlong __functionAddress) {

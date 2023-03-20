@@ -92,7 +92,7 @@ public class LLVMDisassembler {
      * function is equivalent to calling {@link #LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} with an empty CPU name and feature set.</p>
      */
     @NativeType("LLVMDisasmContextRef")
-    public static long LLVMCreateDisasm(@NativeType("char const *") ByteBuffer TripleName, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
+    public static long LLVMCreateDisasm(@NativeType("char const *") ByteBuffer TripleName, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
         if (CHECKS) {
             checkNT1(TripleName);
         }
@@ -107,7 +107,7 @@ public class LLVMDisassembler {
      * function is equivalent to calling {@link #LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} with an empty CPU name and feature set.</p>
      */
     @NativeType("LLVMDisasmContextRef")
-    public static long LLVMCreateDisasm(@NativeType("char const *") CharSequence TripleName, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
+    public static long LLVMCreateDisasm(@NativeType("char const *") CharSequence TripleName, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(TripleName, true);
@@ -134,7 +134,7 @@ public class LLVMDisassembler {
      * function is equivalent to calling {@link #LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} with an empty feature set.</p>
      */
     @NativeType("LLVMDisasmContextRef")
-    public static long LLVMCreateDisasmCPU(@NativeType("char const *") ByteBuffer Triple, @NativeType("char const *") ByteBuffer CPU, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
+    public static long LLVMCreateDisasmCPU(@NativeType("char const *") ByteBuffer Triple, @NativeType("char const *") ByteBuffer CPU, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
         if (CHECKS) {
             checkNT1(Triple);
             checkNT1(CPU);
@@ -150,7 +150,7 @@ public class LLVMDisassembler {
      * function is equivalent to calling {@link #LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} with an empty feature set.</p>
      */
     @NativeType("LLVMDisasmContextRef")
-    public static long LLVMCreateDisasmCPU(@NativeType("char const *") CharSequence Triple, @NativeType("char const *") CharSequence CPU, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
+    public static long LLVMCreateDisasmCPU(@NativeType("char const *") CharSequence Triple, @NativeType("char const *") CharSequence CPU, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(Triple, true);
@@ -178,7 +178,7 @@ public class LLVMDisassembler {
      * functions as described above. These can all be passed as {@code NULL}. If successful, this returns a disassembler context. If not, it returns {@code NULL}.</p>
      */
     @NativeType("LLVMDisasmContextRef")
-    public static long LLVMCreateDisasmCPUFeatures(@NativeType("char const *") ByteBuffer Triple, @NativeType("char const *") ByteBuffer CPU, @NativeType("char const *") ByteBuffer Features, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
+    public static long LLVMCreateDisasmCPUFeatures(@NativeType("char const *") ByteBuffer Triple, @NativeType("char const *") ByteBuffer CPU, @NativeType("char const *") ByteBuffer Features, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
         if (CHECKS) {
             checkNT1(Triple);
             checkNT1(CPU);
@@ -194,7 +194,7 @@ public class LLVMDisassembler {
      * functions as described above. These can all be passed as {@code NULL}. If successful, this returns a disassembler context. If not, it returns {@code NULL}.</p>
      */
     @NativeType("LLVMDisasmContextRef")
-    public static long LLVMCreateDisasmCPUFeatures(@NativeType("char const *") CharSequence Triple, @NativeType("char const *") CharSequence CPU, @NativeType("char const *") CharSequence Features, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
+    public static long LLVMCreateDisasmCPUFeatures(@NativeType("char const *") CharSequence Triple, @NativeType("char const *") CharSequence CPU, @NativeType("char const *") CharSequence Features, @NativeType("void *") long DisInfo, int TagType, @Nullable @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") LLVMOpInfoCallbackI GetOpInfo, @Nullable @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") LLVMSymbolLookupCallbackI SymbolLookUp) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             stack.nUTF8(Triple, true);

@@ -166,8 +166,11 @@ public class LLVMBitReader {
     }
 
     /**
-     * Reads a module from the specified path, returning via the {@code OutMP} parameter a module provider which performs lazy deserialization. Returns 0 on
-     * success.
+     * Reads a module from the given memory buffer, returning via the {@code OutMP} parameter a module provider which performs lazy deserialization.
+     * 
+     * <p>Takes ownership of {@code MemBuf} if (and only if) the module was read successfully.</p>
+     *
+     * @return 0 on success
      */
     @NativeType("LLVMBool")
     public static boolean LLVMGetBitcodeModuleInContext2(@NativeType("LLVMContextRef") long ContextRef, @NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMModuleRef *") PointerBuffer OutM) {

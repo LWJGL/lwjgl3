@@ -22,6 +22,7 @@ val LLVMOrc = "LLVMOrc".nativeClass(
         ({@code LLVMJITSymbolGenericFlags})
         """,
 
+        "JITSymbolGenericFlagsNone".enum("", "0"),
         "JITSymbolGenericFlagsExported".enum("", "1 << 0"),
         "JITSymbolGenericFlagsWeak".enum("", "1 << 1"),
         "JITSymbolGenericFlagsCallable".enum("", "1 << 2"),
@@ -127,6 +128,41 @@ val LLVMOrc = "LLVMOrc".nativeClass(
         LLVMOrcSymbolStringPoolEntryRef("S", "")
     )
 
+    IgnoreMissing..void(
+        "OrcExecutionSessionLookup",
+        """
+        Look up symbols in an execution session.
+
+        This is a wrapper around the general {@code ExecutionSession::lookup} function.
+
+        The {@code SearchOrder} argument contains a list of ({@code JITDylibs}, {@code JITDylibSearchFlags}) pairs that describe the search order. The
+        {@code JITDylibs} will be searched in the given order to try to find the symbols in the {@code Symbols} argument.
+
+        The Symbols argument should contain a null-terminated array of ({@code SymbolStringPtr}, {@code SymbolLookupFlags}) pairs describing the symbols to be
+        searched for. This function takes ownership of the elements of the {@code Symbols} array. The {@code Name} fields of the {@code Symbols} elements are
+        taken to have been retained by the client for this function. The client should <b>not</b> release the {@code Name} fields, but are still responsible
+        for destroying the array itself.
+
+        The {@code HandleResult} function will be called once all searched for symbols have been found, or an error occurs. The {@code HandleResult} function
+        will be passed an {@code LLVMErrorRef} indicating success or failure, and (on success) a null-terminated {@code LLVMOrcCSymbolMapPairs} array
+        containing the function result, and the {@code Ctx} value passed to the lookup function.
+
+        The client is fully responsible for managing the lifetime of the {@code Ctx} object. A common idiom is to allocate the context prior to the lookup and
+        deallocate it in the handler.
+
+        THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!
+        """,
+
+        LLVMOrcExecutionSessionRef("ES", ""),
+        LLVMOrcLookupKind("K", ""),
+        nullable..LLVMOrcCJITDylibSearchOrder("SearchOrder", ""),
+        AutoSize("SearchOrder")..size_t("SearchOrderSize", ""),
+        nullable..LLVMOrcCLookupSet("Symbols", ""),
+        AutoSize("Symbols")..size_t("SymbolsSize", ""),
+        LLVMOrcExecutionSessionLookupHandleResultFunction("HandleResult", ""),
+        nullable..opaque_p("Ctx", "")
+    )
+
     void(
         "OrcReleaseSymbolStringPoolEntry",
         "Reduces the ref-count for of a {@code SymbolStringPool} entry.",
@@ -136,7 +172,11 @@ val LLVMOrc = "LLVMOrc".nativeClass(
 
     charUTF8.const.p(
         "OrcSymbolStringPoolEntryStr",
-        "",
+        """
+        Return the c-string for the given symbol.
+
+        This string will remain valid until the entry is freed (once all {@code LLVMOrcSymbolStringPoolEntryRefs} have been released).
+        """,
 
         LLVMOrcSymbolStringPoolEntryRef("S", "")
     )
@@ -605,10 +645,29 @@ LLVMOrcMaterializationResponsibilityAddDependencies(JD, Name, &Dependence, 1);""
 
     LLVMOrcDefinitionGeneratorRef(
         "OrcCreateCustomCAPIDefinitionGenerator",
-        "Create a custom generator.",
+        """
+        Create a custom generator.
+
+        The {@code F} argument will be used to implement the {@code DefinitionGenerator}'s {@code tryToGenerate} method (see
+        ##LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction).
+ 
+        {@code Ctx} is a context object that will be passed to {@code F}. This argument is permitted to be null.
+
+        {@code Dispose} is the disposal function for {@code Ctx}. This argument is permitted to be null (in which case the client is responsible for the
+        lifetime of {@code Ctx}).
+        """,
 
         LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction("F", ""),
-        opaque_p("Ctx", "")
+        nullable..opaque_p("Ctx", ""),
+        nullable..LLVMOrcDisposeCAPIDefinitionGeneratorFunction("Dispose", "")
+    )
+
+    IgnoreMissing..void(
+        "OrcLookupStateContinueLookup",
+        "Continue a lookup that was suspended in a generator (see ##LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction).",
+
+        LLVMOrcLookupStateRef("S", ""),
+        LLVMErrorRef("Err", "")
     )
 
     LLVMErrorRef(
@@ -629,6 +688,48 @@ LLVMOrcMaterializationResponsibilityAddDependencies(JD, Name, &Dependence, 1);""
         char("GlobalPrefx", ""),
         nullable..LLVMOrcSymbolPredicate("Filter", ""),
         nullable..opaque_p("FilterCtx", "")
+    )
+
+    IgnoreMissing..LLVMErrorRef(
+        "OrcCreateDynamicLibrarySearchGeneratorForPath",
+        """
+        Get a {@code LLVMOrcCreateDynamicLibrarySearchGeneratorForPath} that will reflect library symbols into the {@code JITDylib}. On success the resulting
+        generator is owned by the client. Ownership is typically transferred by adding the instance to a {@code JITDylib} using #OrcJITDylibAddGenerator(),
+
+        The {@code GlobalPrefix} argument specifies the character that appears on the front of linker-mangled symbols for the target platform (e.g. '_' on
+        MachO). If non-null, this character will be stripped from the start of all symbol strings before passing the remaining substring to {@code dlsym}.
+
+        The optional {@code Filter} and {@code Ctx} arguments can be used to supply a symbol name filter: Only symbols for which the filter returns true will
+        be visible to JIT'd code. If the {@code Filter} argument is null then all library symbols will be visible to JIT'd code. Note that the symbol name
+        passed to the {@code Filter} function is the full mangled symbol: The client is responsible for stripping the global prefix if present.
+
+        THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!
+        """,
+
+        Check(1)..LLVMOrcDefinitionGeneratorRef.p("Result", ""),
+        charUTF8.const.p("FileName", ""),
+        char("GlobalPrefix", ""),
+        nullable..LLVMOrcSymbolPredicate("Filter", ""),
+        nullable..opaque_p("FilterCtx", "")
+    )
+
+    IgnoreMissing..LLVMErrorRef(
+        "OrcCreateStaticLibrarySearchGeneratorForPath",
+        """
+        Get a {@code LLVMOrcCreateStaticLibrarySearchGeneratorForPath} that will reflect static library symbols into the {@code JITDylib}. On success the
+        resulting generator is owned by the client. Ownership is typically transferred by adding the instance to a {@code JITDylib} using
+        #OrcJITDylibAddGenerator(),
+
+        Call with the optional {@code TargetTriple} argument will succeed if the file at the given path is a static library or a MachO universal binary
+        containing a static library that is compatible with the given triple. Otherwise it will return an error.
+        
+        THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!
+        """,
+
+        Check(1)..LLVMOrcDefinitionGeneratorRef.p("Result", ""),
+        LLVMOrcObjectLayerRef("ObjLayer", ""),
+        charUTF8.const.p("FileName", ""),
+        nullable..charUTF8.const.p("TargetTriple", "")
     )
 
     LLVMOrcThreadSafeContextRef(

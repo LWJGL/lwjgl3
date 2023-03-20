@@ -32,7 +32,7 @@ public class LLVMTransforms {
             PassManagerBuilderAddCoroutinePassesToExtensionPoints = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMPassManagerBuilderAddCoroutinePassesToExtensionPoints"),
             AddInstructionCombiningPass                           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddInstructionCombiningPass"),
             AddInstructionSimplifyPass                            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddInstructionSimplifyPass"),
-            AddArgumentPromotionPass                              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddArgumentPromotionPass"),
+            AddArgumentPromotionPass                              = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddArgumentPromotionPass"),
             AddConstantMergePass                                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddConstantMergePass"),
             AddMergeFunctionsPass                                 = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddMergeFunctionsPass"),
             AddCalledValuePropagationPass                         = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddCalledValuePropagationPass"),
@@ -43,7 +43,7 @@ public class LLVMTransforms {
             AddGlobalDCEPass                                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddGlobalDCEPass"),
             AddGlobalOptimizerPass                                = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddGlobalOptimizerPass"),
             AddIPConstantPropagationPass                          = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddIPConstantPropagationPass"),
-            AddPruneEHPass                                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddPruneEHPass"),
+            AddPruneEHPass                                        = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddPruneEHPass"),
             AddIPSCCPPass                                         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddIPSCCPPass"),
             AddInternalizePass                                    = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddInternalizePass"),
             AddInternalizePassWithMustPreservePredicate           = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddInternalizePassWithMustPreservePredicate"),
@@ -73,7 +73,7 @@ public class LLVMTransforms {
             PassManagerBuilderUseInlinerWithThreshold             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMPassManagerBuilderUseInlinerWithThreshold"),
             PassManagerBuilderPopulateFunctionPassManager         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMPassManagerBuilderPopulateFunctionPassManager"),
             PassManagerBuilderPopulateModulePassManager           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMPassManagerBuilderPopulateModulePassManager"),
-            PassManagerBuilderPopulateLTOPassManager              = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMPassManagerBuilderPopulateLTOPassManager"),
+            PassManagerBuilderPopulateLTOPassManager              = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMPassManagerBuilderPopulateLTOPassManager"),
             AddAggressiveDCEPass                                  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddAggressiveDCEPass"),
             AddDCEPass                                            = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddDCEPass"),
             AddBitTrackingDCEPass                                 = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddBitTrackingDCEPass"),
@@ -93,7 +93,7 @@ public class LLVMTransforms {
             AddLoopRerollPass                                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLoopRerollPass"),
             AddLoopUnrollPass                                     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLoopUnrollPass"),
             AddLoopUnrollAndJamPass                               = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddLoopUnrollAndJamPass"),
-            AddLoopUnswitchPass                                   = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddLoopUnswitchPass"),
+            AddLoopUnswitchPass                                   = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddLoopUnswitchPass"),
             AddLowerAtomicPass                                    = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMAddLowerAtomicPass"),
             AddMemCpyOptPass                                      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddMemCpyOptPass"),
             AddPartiallyInlineLibCallsPass                        = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddPartiallyInlineLibCallsPass"),
@@ -237,6 +237,7 @@ public class LLVMTransforms {
     public static void LLVMAddArgumentPromotionPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddArgumentPromotionPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(PM, __functionAddress);
@@ -365,6 +366,7 @@ public class LLVMTransforms {
     public static void LLVMAddPruneEHPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddPruneEHPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(PM, __functionAddress);
@@ -783,6 +785,7 @@ public class LLVMTransforms {
     public static void LLVMPassManagerBuilderPopulateLTOPassManager(@NativeType("LLVMPassManagerBuilderRef") long PMB, @NativeType("LLVMPassManagerRef") long PM, @NativeType("LLVMBool") boolean Internalize, @NativeType("LLVMBool") boolean RunInliner) {
         long __functionAddress = Functions.PassManagerBuilderPopulateLTOPassManager;
         if (CHECKS) {
+            check(__functionAddress);
             check(PMB);
             check(PM);
         }
@@ -1010,6 +1013,7 @@ public class LLVMTransforms {
     public static void LLVMAddLoopUnswitchPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLoopUnswitchPass;
         if (CHECKS) {
+            check(__functionAddress);
             check(PM);
         }
         invokePV(PM, __functionAddress);

@@ -19,7 +19,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         "",
 
         "CINDEX_VERSION_MAJOR".."0",
-        "CINDEX_VERSION_MINOR".."62",
+        "CINDEX_VERSION_MINOR".."63",
         "CINDEX_VERSION".."CINDEX_VERSION_MAJOR*10000 + CINDEX_VERSION_MINOR"
     ).noPrefix()
 
@@ -686,7 +686,10 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_OMPArrayShapingExpr".enum("OpenMP 5.0 [2.1.4, Array Shaping]."),
         "Cursor_OMPIteratorExpr".enum("OpenMP 5.0 [2.1.6 Iterators]"),
         "Cursor_CXXAddrspaceCastExpr".enum("OpenCL's {@code addrspace_cast<>} expression."),
-        "Cursor_LastExpr".enum("", "CXCursor_CXXAddrspaceCastExpr"),
+        "Cursor_ConceptSpecializationExpr".enum("Expression that references a C++20 concept."),
+        "Cursor_RequiresExpr".enum("Expression that references a C++20 concept."),
+        "Cursor_CXXParenListInitExpr".enum("Expression that references a C++20 parenthesized list aggregate initializer."),
+        "Cursor_LastExpr".enum("", "CXCursor_CXXParenListInitExpr"),
         "Cursor_FirstStmt".enum("Statements", "200"),
         "Cursor_UnexposedStmt".enum(
             """
@@ -813,14 +816,26 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_OMPDispatchDirective".enum("OpenMP dispatch directive."),
         "Cursor_OMPMaskedDirective".enum("OpenMP masked directive."),
         "Cursor_OMPUnrollDirective".enum("OpenMP unroll directive."),
-        "Cursor_LastStmt".enum("", "CXCursor_OMPUnrollDirective"),
+        "Cursor_OMPMetaDirective".enum("OpenMP metadirective directive."),
+        "Cursor_OMPGenericLoopDirective".enum("OpenMP loop directive."),
+        "Cursor_OMPTeamsGenericLoopDirective".enum("OpenMP teams loop directive."),
+        "Cursor_OMPTargetTeamsGenericLoopDirective".enum("OpenMP target teams loop directive."),
+        "Cursor_OMPParallelGenericLoopDirective".enum("OpenMP parallel loop directive."),
+        "Cursor_OMPTargetParallelGenericLoopDirective".enum("OpenMP target parallel loop directive."),
+        "Cursor_OMPParallelMaskedDirective".enum("OpenMP parallel masked directive."),
+        "Cursor_OMPMaskedTaskLoopDirective".enum("OpenMP masked taskloop directive."),
+        "Cursor_OMPMaskedTaskLoopSimdDirective".enum("OpenMP masked taskloop simd directive."),
+        "Cursor_OMPParallelMaskedTaskLoopDirective".enum("OpenMP parallel masked taskloop directive."),
+        "Cursor_OMPParallelMaskedTaskLoopSimdDirective".enum("OpenMP parallel masked taskloop simd directive."),
+        "Cursor_OMPErrDirective".enum("OpenMP error directive."),
+        "Cursor_LastStmt".enum("", "CXCursor_OMPErrDirective"),
         "Cursor_TranslationUnit".enum(
             """
             Cursor that represents the translation unit itself.
 
             The translation unit cursor exists primarily to act as the root cursor for traversing the contents of a translation unit.
             """,
-            "300"
+            "350"
         ),
         "Cursor_FirstAttr".enum("Attributes", "400"),
         "Cursor_UnexposedAttr".enum("An attribute whose specific kind is not exposed via this interface.", "400"),
@@ -877,8 +892,9 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Cursor_TypeAliasTemplateDecl".enum(""),
         "Cursor_StaticAssert".enum("A static_assert or _Static_assert node"),
         "Cursor_FriendDecl".enum("a friend declaration."),
+        "Cursor_ConceptDecl".enum("a concept declaration."),
         "Cursor_FirstExtraDecl".enum("", "CXCursor_ModuleImportDecl"),
-        "Cursor_LastExtraDecl".enum("", "CXCursor_FriendDecl"),
+        "Cursor_LastExtraDecl".enum("", "CXCursor_ConceptDecl"),
         "Cursor_OverloadCandidate".enum("A code completion overload candidate.", "700")
     )
 
@@ -979,8 +995,9 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Type_UAccum".enum(""),
         "Type_ULongAccum".enum(""),
         "Type_BFloat16".enum(""),
+        "Type_Ibm128".enum(""),
         "Type_FirstBuiltin".enum("", "CXType_Void"),
-        "Type_LastBuiltin".enum("", "CXType_BFloat16"),
+        "Type_LastBuiltin".enum("", "CXType_Ibm128"),
         "Type_Complex".enum("", "100"),
         "Type_Pointer".enum(""),
         "Type_BlockPointer".enum(""),
@@ -1066,7 +1083,8 @@ val ClangIndex = "ClangIndex".nativeClass(
         "Type_OCLIntelSubgroupAVCImeDualRefStreamin".enum(""),
 
         "Type_ExtVector".enum(""),
-        "Type_Atomic".enum("")
+        "Type_Atomic".enum(""),
+        "Type_BTFTagAttributed".enum
     )
 
     EnumConstant(
@@ -1095,6 +1113,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         "CallingConv_PreserveAll".enum(""),
         "CallingConv_AArch64VectorCall".enum(""),
         "CallingConv_SwiftAsync".enum(""),
+        "CallingConv_AArch64SVEPCS".enum,
         "CallingConv_Invalid".enum("", "100"),
         "CallingConv_Unexposed".enum("", "200")
     )
@@ -1133,7 +1152,7 @@ val ClangIndex = "ClangIndex".nativeClass(
         "TypeNullability_NullableResult".enum(
             """
             Generally behaves like {@code Nullable}, except when used in a block parameter that was imported into a swift async method. There, swift will
-            assume that the parameter can get null even if no error occured. {@code _Nullable} parameters are assumed to only get null on error.
+            assume that the parameter can get null even if no error occurred. {@code _Nullable} parameters are assumed to only get null on error.
             """
         )
     )
@@ -1570,7 +1589,8 @@ val ClangIndex = "ClangIndex".nativeClass(
         "IdxEntity_CXXDestructor".enum,
         "IdxEntity_CXXConversionFunction".enum,
         "IdxEntity_CXXTypeAlias".enum,
-        "IdxEntity_CXXInterface".enum
+        "IdxEntity_CXXInterface".enum,
+        "IdxEntity_CXXConcept".enum
     )
 
     EnumConstant(
@@ -3202,7 +3222,7 @@ val ClangIndex = "ClangIndex".nativeClass(
     int(
         "Cursor_getNumTemplateArguments",
         """
-        Returns the number of template args of a function decl representing a template specialization.
+        Returns the number of template args of a function, struct, or class decl representing a template specialization.
 
         If the argument cursor cannot be converted into a template function declaration, -1 is returned.
 
@@ -3226,7 +3246,8 @@ void foo <float , -7, true>();""")}
         """
         Retrieve the kind of the I'th template argument of the {@code CXCursor} {@code C}.
 
-        If the argument {@code CXCursor} does not represent a {@code FunctionDecl}, an invalid template argument kind is returned.
+        If the argument {@code CXCursor} does not represent a {@code FunctionDecl}, {@code StructDecl}, or {@code ClassTemplatePartialSpecialization}, an
+        invalid template argument kind is returned.
 
         For example, for the following declaration and specialization:
 
@@ -3249,8 +3270,9 @@ void foo <float , -7, true>();""")}
         """
         Retrieve a {@code CXType} representing the type of a {@code TemplateArgument} of a function decl representing a template specialization.
 
-        If the argument {@code CXCursor does} not represent a {@code FunctionDecl} whose {@code I}'th template argument has a kind of
-        {@code CXTemplateArgKind_Integral}, an invalid type is returned.
+        If the argument {@code CXCursor} does not represent a {@code FunctionDecl}, {@code StructDecl}, {@code ClassDecl} or
+        {@code ClassTemplatePartialSpecialization} whose {@code I}'th template argument has a kind of #TemplateArgumentKind_Integral, an invalid type is
+        returned.
 
         For example, for the following declaration and specialization:
 
@@ -3274,8 +3296,8 @@ void foo <float , -7, true>();""")}
         Retrieve the value of an {@code Integral} {@code TemplateArgument} (of a function decl representing a template specialization) as a {@code signed long
         long}.
 
-        It is undefined to call this function on a {@code CXCursor} that does not represent a {@code FunctionDecl} or whose {@code I}'th template argument is
-        not an integral value.
+        It is undefined to call this function on a {@code CXCursor} that does not represent a {@code FunctionDecl}, {@code StructDecl}, {@code ClassDecl} or
+        {@code ClassTemplatePartialSpecialization} whose {@code I}'th template argument is not an integral value.
 
         For example, for the following declaration and specialization:
 
@@ -3299,8 +3321,8 @@ void foo <float , -7, true>();""")}
         Retrieve the value of an {@code Integral} {@code TemplateArgument} (of a function decl representing a template specialization) as an {@code unsigned
         long long}.
 
-        It is undefined to call this function on a {@code CXCursor} that does not represent a {@code FunctionDecl} or whose {@code I}'th template argument is
-        not an integral value.
+        It is undefined to call this function on a {@code CXCursor} that does not represent a {@code FunctionDecl}, {@code StructDecl}, {@code ClassDecl} or
+        {@code ClassTemplatePartialSpecialization} or whose {@code I}'th template argument is not an integral value.
 
         For example, for the following declaration and specialization:
 
@@ -3409,6 +3431,49 @@ void foo <float , 2147483649, true>();""")}
         "For pointer types, returns the type of the pointee.",
 
         CXType("T", "")
+    )
+
+    IgnoreMissing..CXType(
+        "getUnqualifiedType",
+        """
+        Retrieve the unqualified variant of the given type, removing as little sugar as possible.
+
+        For example, given the following series of typedefs:
+        ${codeBlock("""
+typedef int Integer;
+typedef const Integer CInteger;
+typedef CInteger DifferenceType;""")}
+
+        Executing {@code clang_getUnqualifiedType()} on a {@code CXType} that represents {@code DifferenceType}, will desugar to a type representing
+        {@code Integer}, that has no qualifiers.
+
+        And, executing {@code clang_getUnqualifiedType()} on the type of the first argument of the following function declaration:
+        ${codeBlock("""
+void foo(const int);""")}
+
+        Will return a type representing {@code int}, removing the {@code const} qualifier.
+
+        Sugar over array types is not desugared.
+
+        A type can be checked for qualifiers with #isConstQualifiedType(), #isVolatileQualifiedType() and #isRestrictQualifiedType().
+
+        A type that resulted from a call to {@code clang_getUnqualifiedType} will return {@code false} for all of the above calls.
+        """,
+
+        CXType("CT", "")
+    )
+
+    IgnoreMissing..CXType(
+        "getNonReferenceType",
+        """
+        For reference types (e.g., {@code "const int&"}), returns the type that the reference refers to (e.g {@code "const int"}).
+
+        Otherwise, returns the type itself.
+
+        A type that has kind #Type_LValueReference or #Type_RValueReference is a reference type.
+        """,
+
+        CXType("CT", "")
     )
 
     CXCursor(
@@ -4376,6 +4441,13 @@ void foo <float , 2147483649, true>();""")}
         CXCursor("C", "")
     )
 
+    IgnoreMissing..unsignedb(
+        "CXXMethod_isDeleted",
+        "Determine if a C++ method is declared {@code '= delete'}.",
+
+        CXCursor("C", "")
+    )
+
     unsignedb(
         "CXXMethod_isPureVirtual",
         "Determine if a C++ member function or member function template is pure virtual.",
@@ -4395,6 +4467,54 @@ void foo <float , 2147483649, true>();""")}
         """
         Determine if a C++ member function or member function template is explicitly declared 'virtual' or if it overrides a virtual method from one of the
         base classes.
+        """,
+
+        CXCursor("C", "")
+    )
+
+    IgnoreMissing..unsignedb(
+        "CXXMethod_isCopyAssignmentOperator",
+        """
+        Determine if a C++ member function is a copy-assignment operator, returning 1 if such is the case and 0 otherwise.
+
+        A copy-assignment operator {@code X::operator=} is a non-static, non-template member function of class {@code X} with exactly one parameter of type
+        {@code X}, {@code X&}, {@code const X&}, {@code volatile X&} or {@code const volatile X&}.
+
+        That is, for example, the {@code operator=} in:
+        ${codeBlock("""
+class Foo {
+    bool operator=(const volatile Foo&);
+};""")}
+      Is a copy-assignment operator, while the {@code operator=} in:
+      ${codeBlock("""
+class Bar {
+    bool operator=(const int&);
+};""")}
+        Is not.
+        """,
+
+        CXCursor("C", "")
+    )
+
+    IgnoreMissing..unsignedb(
+        "CXXMethod_isMoveAssignmentOperator",
+        """
+        Determine if a C++ member function is a move-assignment operator, returning 1 if such is the case and 0 otherwise.
+
+        A move-assignment operator {@code X::operator=} is a non-static, non-template member function of class {@code X} with exactly one parameter of type
+        {@code X&&}, {@code const X&&}, {@code volatile X&&} or {@code const volatile X&&}.
+
+        That is, for example, the {@code operator=} in:
+        ${codeBlock("""
+class Foo {
+    bool operator=(const volatile Foo&&);
+};""")}
+        Is a move-assignment operator, while the {@code operator=} in:
+        ${codeBlock("""
+class Bar {
+    bool operator=(const int&&);
+};""")}
+        Is not.
         """,
 
         CXCursor("C", "")

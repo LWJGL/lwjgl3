@@ -21,7 +21,7 @@ typedef struct {
 
     documentation = ""
 
-    IntConstant("", "API_VERSION".."28")
+    IntConstant("", "API_VERSION".."29")
 
     EnumConstant(
         "{@code lto_symbol_attributes}",
@@ -275,6 +275,16 @@ typedef struct {
 
         returnDoc = "true on error (check #get_error_message() for details).",
         since = "11, {@code LTO_API_VERSION=27}"
+    )
+
+    IgnoreMissing..lto_bool_t(
+        "module_has_ctor_dtor",
+        "This function can be used by the linker to check if a given module has any constructor or destructor functions.",
+
+        lto_module_t("mod", ""),
+
+        returnDoc = "true if the module has either the {@code @llvm.global_ctors} or the {@code @llvm.global_dtors} symbol. Otherwise returns false.",
+        since = "{@code LTO_API_VERSION=29}"
     )
 
     void(

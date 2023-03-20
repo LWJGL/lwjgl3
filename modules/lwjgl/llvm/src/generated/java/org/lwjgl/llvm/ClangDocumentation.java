@@ -5,9 +5,17 @@
  */
 package org.lwjgl.llvm;
 
+import java.nio.*;
+
+import org.lwjgl.*;
+
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public class ClangDocumentation {
 
@@ -53,7 +61,11 @@ public class ClangDocumentation {
             VerbatimLineComment_getText               = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_VerbatimLineComment_getText"),
             HTMLTagComment_getAsString                = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_HTMLTagComment_getAsString"),
             FullComment_getAsHTML                     = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_FullComment_getAsHTML"),
-            FullComment_getAsXML                      = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_FullComment_getAsXML");
+            FullComment_getAsXML                      = apiGetFunctionAddress(ClangIndex.getLibrary(), "clang_FullComment_getAsXML"),
+            createAPISet                              = apiGetFunctionAddressOptional(ClangIndex.getLibrary(), "clang_createAPISet"),
+            disposeAPISet                             = apiGetFunctionAddressOptional(ClangIndex.getLibrary(), "clang_disposeAPISet"),
+            getSymbolGraphForUSR                      = apiGetFunctionAddressOptional(ClangIndex.getLibrary(), "clang_getSymbolGraphForUSR"),
+            getSymbolGraphForCursor                   = apiGetFunctionAddressOptional(ClangIndex.getLibrary(), "clang_getSymbolGraphForCursor");
 
     }
 
@@ -931,6 +943,133 @@ public class ClangDocumentation {
      */
     public static CXString clang_FullComment_getAsXML(CXComment Comment, CXString __result) {
         nclang_FullComment_getAsXML(Comment.address(), __result.address());
+        return __result;
+    }
+
+    // --- [ clang_createAPISet ] ---
+
+    /** Unsafe version of: {@link #clang_createAPISet createAPISet} */
+    public static int nclang_createAPISet(long tu, long out_api) {
+        long __functionAddress = Functions.createAPISet;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(tu);
+        }
+        return invokePPI(tu, out_api, __functionAddress);
+    }
+
+    /**
+     * Traverses the translation unit to create a {@code CXAPISet}.
+     *
+     * @param tu      the {@code CXTranslationUnit} to build the {@code CXAPISet} for
+     * @param out_api a pointer to the output of this function. It is needs to be disposed of by calling {@link #clang_disposeAPISet disposeAPISet}.
+     *
+     * @return error code indicating success or failure of the APISet creation
+     */
+    @NativeType("enum CXErrorCode")
+    public static int clang_createAPISet(@NativeType("CXTranslationUnit") long tu, @NativeType("CXAPISet *") PointerBuffer out_api) {
+        if (CHECKS) {
+            check(out_api, 1);
+        }
+        return nclang_createAPISet(tu, memAddress(out_api));
+    }
+
+    // --- [ clang_disposeAPISet ] ---
+
+    /**
+     * Dispose of an APISet.
+     * 
+     * <p>The provided {@code CXAPISet} can not be used after this function is called.</p>
+     */
+    public static void clang_disposeAPISet(@NativeType("CXAPISet") long api) {
+        long __functionAddress = Functions.disposeAPISet;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(api);
+        }
+        invokePV(api, __functionAddress);
+    }
+
+    // --- [ clang_getSymbolGraphForUSR ] ---
+
+    /** Unsafe version of: {@link #clang_getSymbolGraphForUSR getSymbolGraphForUSR} */
+    public static native void nclang_getSymbolGraphForUSR(long usr, long api, long __functionAddress, long __result);
+
+    /** Unsafe version of: {@link #clang_getSymbolGraphForUSR getSymbolGraphForUSR} */
+    public static void nclang_getSymbolGraphForUSR(long usr, long api, long __result) {
+        long __functionAddress = Functions.getSymbolGraphForUSR;
+        if (CHECKS) {
+            check(__functionAddress);
+            check(api);
+        }
+        nclang_getSymbolGraphForUSR(usr, api, __functionAddress, __result);
+    }
+
+    /**
+     * Generate a single symbol symbol graph for the given USR.
+     * 
+     * <p>Returns a null string if the associated symbol can not be found in the provided {@code CXAPISet}. The output contains the symbol graph as well as some
+     * additional information about related symbols.</p>
+     *
+     * @param usr      a string containing the USR of the symbol to generate the symbol graph for
+     * @param api      the {@code CXAPISet} to look for the symbol in
+     * @param __result a string containing the serialized symbol graph representation for the symbol being queried or a null string if it can not be found in the APISet
+     */
+    public static CXString clang_getSymbolGraphForUSR(@NativeType("char const *") ByteBuffer usr, @NativeType("CXAPISet") long api, CXString __result) {
+        if (CHECKS) {
+            checkNT1(usr);
+        }
+        nclang_getSymbolGraphForUSR(memAddress(usr), api, __result.address());
+        return __result;
+    }
+
+    /**
+     * Generate a single symbol symbol graph for the given USR.
+     * 
+     * <p>Returns a null string if the associated symbol can not be found in the provided {@code CXAPISet}. The output contains the symbol graph as well as some
+     * additional information about related symbols.</p>
+     *
+     * @param usr      a string containing the USR of the symbol to generate the symbol graph for
+     * @param api      the {@code CXAPISet} to look for the symbol in
+     * @param __result a string containing the serialized symbol graph representation for the symbol being queried or a null string if it can not be found in the APISet
+     */
+    public static CXString clang_getSymbolGraphForUSR(@NativeType("char const *") CharSequence usr, @NativeType("CXAPISet") long api, CXString __result) {
+        MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
+        try {
+            stack.nUTF8(usr, true);
+            long usrEncoded = stack.getPointerAddress();
+            nclang_getSymbolGraphForUSR(usrEncoded, api, __result.address());
+            return __result;
+        } finally {
+            stack.setPointer(stackPointer);
+        }
+    }
+
+    // --- [ clang_getSymbolGraphForCursor ] ---
+
+    /** Unsafe version of: {@link #clang_getSymbolGraphForCursor getSymbolGraphForCursor} */
+    public static native void nclang_getSymbolGraphForCursor(long cursor, long __functionAddress, long __result);
+
+    /** Unsafe version of: {@link #clang_getSymbolGraphForCursor getSymbolGraphForCursor} */
+    public static void nclang_getSymbolGraphForCursor(long cursor, long __result) {
+        long __functionAddress = Functions.getSymbolGraphForCursor;
+        if (CHECKS) {
+            check(__functionAddress);
+        }
+        nclang_getSymbolGraphForCursor(cursor, __functionAddress, __result);
+    }
+
+    /**
+     * Generate a single symbol symbol graph for the declaration at the given cursor.
+     * 
+     * <p>Returns a null string if the AST node for the cursor isn't a declaration. The output contains the symbol graph as well as some additional information
+     * about related symbols.</p>
+     *
+     * @param cursor   the declaration for which to generate the single symbol symbol graph.
+     * @param __result a string containing the serialized symbol graph representation for the symbol being queried or a null string if it can not be found in the APISet
+     */
+    public static CXString clang_getSymbolGraphForCursor(CXCursor cursor, CXString __result) {
+        nclang_getSymbolGraphForCursor(cursor.address(), __result.address());
         return __result;
     }
 

@@ -11,6 +11,7 @@ val LLVM_BINDING_DELEGATE = LLVM_BINDING.delegate("LLVMCore.getLibrary()")
 
 val LLVMAttributeRef = "LLVMAttributeRef".handle
 val LLVMBasicBlockRef = "LLVMBasicBlockRef".handle
+val LLVMBinaryRef = "LLVMBinaryRef".handle
 val LLVMBuilderRef = "LLVMBuilderRef".handle
 val LLVMComdatRef = "LLVMComdatRef".handle
 val LLVMContextRef = "LLVMContextRef".handle
@@ -60,6 +61,7 @@ val LLVMValueMetadataEntry = "LLVMValueMetadataEntry".opaque
 
 val LLVMAtomicOrdering = "LLVMAtomicOrdering".enumType
 val LLVMAtomicRMWBinOp = "LLVMAtomicRMWBinOp".enumType
+val LLVMBinaryType = "LLVMBinaryType".enumType
 val LLVMByteOrdering = "enum LLVMByteOrdering".enumType
 val LLVMCodeGenFileType = "LLVMCodeGenFileType".enumType
 val LLVMCodeGenOptLevel = "LLVMCodeGenOptLevel".enumType
@@ -185,16 +187,17 @@ val LLVMOpInfoCallback = Module.LLVM.callback {
         That block of information is saved when the disassembler context is created and passed to the call back in the {@code DisInfo} parameter. The
         instruction containing operand is at the {@code PC} parameter. For some instruction sets, there can be more than one operand with symbolic information.
         To determine the symbolic operand information for each operand, the bytes for the specific operand in the instruction are specified by the
-        {@code Offset} parameter and its byte width is the size parameter. For instructions sets with fixed widths and one symbolic operand per instruction,
-        the {@code Offset} parameter will be zero and {@code Size} parameter will be the instruction width. The information is returned in {@code TagBuf} and
-        is {@code Triple} specific with its specific information defined by the value of {@code TagType} for that {@code Triple}. If symbolic information is
-        returned the function returns 1, otherwise it returns 0.
+        {@code Offset} parameter and its byte width is the {@code OpSize} parameter. For instructions sets with fixed widths and one symbolic operand per
+        instruction, the {@code Offset} parameter will be zero and {@code InstSize} parameter will be the instruction width. The information is returned in
+        {@code TagBuf} and is {@code Triple} specific with its specific information defined by the value of {@code TagType} for that {@code Triple}. If
+        symbolic information is returned the function returns 1, otherwise it returns 0.
         """,
 
         opaque_p("DisInfo", ""),
         uint64_t("PC", ""),
         uint64_t("Offset", ""),
-        uint64_t("Size", ""),
+        uint64_t("OpSize", ""),
+        uint64_t("InstSize", ""),
         int("TagType", ""),
         void.p("TagBuf", "")
     ) {

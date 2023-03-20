@@ -594,6 +594,8 @@ val CXCommentKind = "enum CXCommentKind".enumType
 val CXCommentInlineCommandRenderKind = "enum CXCommentInlineCommandRenderKind".enumType
 val CXCommentParamPassDirection = "enum CXCommentParamPassDirection".enumType
 
+val CXAPISet = "CXAPISet".handle
+
 val CXComment = struct(Module.LLVM, "CXComment", mutable = false) {
     documentation = "A parsed comment."
 
