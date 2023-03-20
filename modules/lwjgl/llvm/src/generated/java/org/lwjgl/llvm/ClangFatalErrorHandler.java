@@ -23,8 +23,8 @@ public class ClangFatalErrorHandler {
 
         /** Function address. */
         public static final long
-            install_aborting_llvm_fatal_error_handler = CLANG.getFunctionAddress("clang_install_aborting_llvm_fatal_error_handler"),
-            uninstall_llvm_fatal_error_handler        = CLANG.getFunctionAddress("clang_uninstall_llvm_fatal_error_handler");
+            install_aborting_llvm_fatal_error_handler = apiGetFunctionAddressOptional(CLANG, "clang_install_aborting_llvm_fatal_error_handler"),
+            uninstall_llvm_fatal_error_handler        = apiGetFunctionAddressOptional(CLANG, "clang_uninstall_llvm_fatal_error_handler");
 
     }
 

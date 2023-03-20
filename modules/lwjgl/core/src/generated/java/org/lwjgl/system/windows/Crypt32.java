@@ -31,9 +31,9 @@ public class Crypt32 {
         /** Function address. */
         public static final long
             CryptProtectData     = apiGetFunctionAddress(CRYPT32, "CryptProtectData"),
-            CryptProtectMemory   = CRYPT32.getFunctionAddress("CryptProtectMemory"),
+            CryptProtectMemory   = apiGetFunctionAddressOptional(CRYPT32, "CryptProtectMemory"),
             CryptUnprotectData   = apiGetFunctionAddress(CRYPT32, "CryptUnprotectData"),
-            CryptUnprotectMemory = CRYPT32.getFunctionAddress("CryptUnprotectMemory");
+            CryptUnprotectMemory = apiGetFunctionAddressOptional(CRYPT32, "CryptUnprotectMemory");
 
     }
 

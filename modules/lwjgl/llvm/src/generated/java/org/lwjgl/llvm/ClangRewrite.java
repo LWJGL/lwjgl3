@@ -29,13 +29,13 @@ public class ClangRewrite {
 
         /** Function address. */
         public static final long
-            create                = CLANG.getFunctionAddress("clang_CXRewriter_create"),
-            insertTextBefore      = CLANG.getFunctionAddress("clang_CXRewriter_insertTextBefore"),
-            replaceText           = CLANG.getFunctionAddress("clang_CXRewriter_replaceText"),
-            removeText            = CLANG.getFunctionAddress("clang_CXRewriter_removeText"),
-            overwriteChangedFiles = CLANG.getFunctionAddress("clang_CXRewriter_overwriteChangedFiles"),
-            writeMainFileToStdOut = CLANG.getFunctionAddress("clang_CXRewriter_writeMainFileToStdOut"),
-            dispose               = CLANG.getFunctionAddress("clang_CXRewriter_dispose");
+            create                = apiGetFunctionAddressOptional(CLANG, "clang_CXRewriter_create"),
+            insertTextBefore      = apiGetFunctionAddressOptional(CLANG, "clang_CXRewriter_insertTextBefore"),
+            replaceText           = apiGetFunctionAddressOptional(CLANG, "clang_CXRewriter_replaceText"),
+            removeText            = apiGetFunctionAddressOptional(CLANG, "clang_CXRewriter_removeText"),
+            overwriteChangedFiles = apiGetFunctionAddressOptional(CLANG, "clang_CXRewriter_overwriteChangedFiles"),
+            writeMainFileToStdOut = apiGetFunctionAddressOptional(CLANG, "clang_CXRewriter_writeMainFileToStdOut"),
+            dispose               = apiGetFunctionAddressOptional(CLANG, "clang_CXRewriter_dispose");
 
     }
 

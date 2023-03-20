@@ -65,11 +65,11 @@ public class User32 {
             GetDC                               = apiGetFunctionAddress(USER32, "GetDC"),
             ReleaseDC                           = apiGetFunctionAddress(USER32, "ReleaseDC"),
             GetSystemMetrics                    = apiGetFunctionAddress(USER32, "GetSystemMetrics"),
-            RegisterTouchWindow                 = USER32.getFunctionAddress("RegisterTouchWindow"),
-            UnregisterTouchWindow               = USER32.getFunctionAddress("UnregisterTouchWindow"),
-            IsTouchWindow                       = USER32.getFunctionAddress("IsTouchWindow"),
-            GetTouchInputInfo                   = USER32.getFunctionAddress("GetTouchInputInfo"),
-            CloseTouchInputHandle               = USER32.getFunctionAddress("CloseTouchInputHandle"),
+            RegisterTouchWindow                 = apiGetFunctionAddressOptional(USER32, "RegisterTouchWindow"),
+            UnregisterTouchWindow               = apiGetFunctionAddressOptional(USER32, "UnregisterTouchWindow"),
+            IsTouchWindow                       = apiGetFunctionAddressOptional(USER32, "IsTouchWindow"),
+            GetTouchInputInfo                   = apiGetFunctionAddressOptional(USER32, "GetTouchInputInfo"),
+            CloseTouchInputHandle               = apiGetFunctionAddressOptional(USER32, "CloseTouchInputHandle"),
             MonitorFromWindow                   = apiGetFunctionAddress(USER32, "MonitorFromWindow"),
             GetMonitorInfo                      = apiGetFunctionAddress(USER32, "GetMonitorInfoW"),
             EnumDisplayDevices                  = apiGetFunctionAddress(USER32, "EnumDisplayDevicesW"),
@@ -84,13 +84,13 @@ public class User32 {
             GetAsyncKeyState                    = apiGetFunctionAddress(USER32, "GetAsyncKeyState"),
             GetMessageExtraInfo                 = apiGetFunctionAddress(USER32, "GetMessageExtraInfo"),
             SendInput                           = apiGetFunctionAddress(USER32, "SendInput"),
-            GetDpiForSystem                     = USER32.getFunctionAddress("GetDpiForSystem"),
-            GetDpiForWindow                     = USER32.getFunctionAddress("GetDpiForWindow"),
-            GetAwarenessFromDpiAwarenessContext = USER32.getFunctionAddress("GetAwarenessFromDpiAwarenessContext"),
-            GetThreadDpiAwarenessContext        = USER32.getFunctionAddress("GetThreadDpiAwarenessContext"),
-            GetWindowDpiAwarenessContext        = USER32.getFunctionAddress("GetWindowDpiAwarenessContext"),
-            IsValidDpiAwarenessContext          = USER32.getFunctionAddress("IsValidDpiAwarenessContext"),
-            SetThreadDpiAwarenessContext        = USER32.getFunctionAddress("SetThreadDpiAwarenessContext");
+            GetDpiForSystem                     = apiGetFunctionAddressOptional(USER32, "GetDpiForSystem"),
+            GetDpiForWindow                     = apiGetFunctionAddressOptional(USER32, "GetDpiForWindow"),
+            GetAwarenessFromDpiAwarenessContext = apiGetFunctionAddressOptional(USER32, "GetAwarenessFromDpiAwarenessContext"),
+            GetThreadDpiAwarenessContext        = apiGetFunctionAddressOptional(USER32, "GetThreadDpiAwarenessContext"),
+            GetWindowDpiAwarenessContext        = apiGetFunctionAddressOptional(USER32, "GetWindowDpiAwarenessContext"),
+            IsValidDpiAwarenessContext          = apiGetFunctionAddressOptional(USER32, "IsValidDpiAwarenessContext"),
+            SetThreadDpiAwarenessContext        = apiGetFunctionAddressOptional(USER32, "SetThreadDpiAwarenessContext");
 
     }
 

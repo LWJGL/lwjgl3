@@ -140,10 +140,22 @@ public final class APIUtil {
         }
         return a;
     }
-
     private static void requiredFunctionMissing(String functionName) {
         if (!Configuration.DISABLE_FUNCTION_CHECKS.get(false)) {
             throw new NullPointerException("A required function is missing: " + functionName);
+        }
+    }
+
+    public static long apiGetFunctionAddressOptional(SharedLibrary library, String functionName) {
+        long a = library.getFunctionAddress(functionName);
+        if (DEBUG_FUNCTIONS && a == NULL) {
+            optionalFunctionMissing(library, functionName);
+        }
+        return a;
+    }
+    private static void optionalFunctionMissing(SharedLibrary library, String functionName) {
+        if (DEBUG) {
+            DEBUG_STREAM.print("[LWJGL] Failed to locate address for " + library.getName() + " function " + functionName + "\n");
         }
     }
 

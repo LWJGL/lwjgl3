@@ -50,7 +50,7 @@ public final class Checks {
     /**
      * Debug functions flag.
      *
-     * <p>When enabled, capabilities classes will print an error message when they fail to retrieve a function pointer.</p>
+     * <p>When enabled, a warning message will be output to the debug stream when LWJGL fails to retrieve a function pointer.</p>
      *
      * <p>Can be enabled by setting {@link Configuration#DEBUG_FUNCTIONS} to true.</p>
      */

@@ -130,7 +130,7 @@ abstract class SimpleBinding(
         public static final long
             ${bindingFunctions.joinToString(separator = ",\n$t$t$t", postfix = ";") {
             "${it.simpleName}${" ".repeat(alignment - it.simpleName.length)} = ${if (it has IgnoreMissing)
-                "$libraryExpression.getFunctionAddress(${it.functionAddress})"
+                "apiGetFunctionAddressOptional($libraryExpression, ${it.functionAddress})"
             else
                 "apiGetFunctionAddress($libraryExpression, ${it.functionAddress})"}"
         }}

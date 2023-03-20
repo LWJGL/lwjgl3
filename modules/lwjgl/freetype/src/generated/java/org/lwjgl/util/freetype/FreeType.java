@@ -109,7 +109,7 @@ public class FreeType {
             Bitmap_Blend                         = apiGetFunctionAddress(FREETYPE, "FT_Bitmap_Blend"),
             GlyphSlot_Own_Bitmap                 = apiGetFunctionAddress(FREETYPE, "FT_GlyphSlot_Own_Bitmap"),
             Bitmap_Done                          = apiGetFunctionAddress(FREETYPE, "FT_Bitmap_Done"),
-            Stream_OpenBzip2                     = FREETYPE.getFunctionAddress("FT_Stream_OpenBzip2"),
+            Stream_OpenBzip2                     = apiGetFunctionAddressOptional(FREETYPE, "FT_Stream_OpenBzip2"),
             FTC_Manager_New                      = apiGetFunctionAddress(FREETYPE, "FTC_Manager_New"),
             FTC_Manager_Reset                    = apiGetFunctionAddress(FREETYPE, "FTC_Manager_Reset"),
             FTC_Manager_Done                     = apiGetFunctionAddress(FREETYPE, "FTC_Manager_Done"),

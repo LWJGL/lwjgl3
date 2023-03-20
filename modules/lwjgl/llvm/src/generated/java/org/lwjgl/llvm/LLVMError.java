@@ -31,7 +31,7 @@ public class LLVMError {
             GetErrorMessage      = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetErrorMessage"),
             DisposeErrorMessage  = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMDisposeErrorMessage"),
             GetStringErrorTypeId = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetStringErrorTypeId"),
-            CreateStringError    = LLVMCore.getLibrary().getFunctionAddress("LLVMCreateStringError");
+            CreateStringError    = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMCreateStringError");
 
     }
 

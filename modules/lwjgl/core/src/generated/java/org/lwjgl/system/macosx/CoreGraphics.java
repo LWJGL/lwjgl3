@@ -37,7 +37,7 @@ public class CoreGraphics {
             EventCreateMouseEvent         = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateMouseEvent"),
             EventCreateKeyboardEvent      = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateKeyboardEvent"),
             EventCreateScrollWheelEvent   = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateScrollWheelEvent"),
-            EventCreateScrollWheelEvent2  = COREGRAPHICS.getFunctionAddress("CGEventCreateScrollWheelEvent2"),
+            EventCreateScrollWheelEvent2  = apiGetFunctionAddressOptional(COREGRAPHICS, "CGEventCreateScrollWheelEvent2"),
             EventCreateCopy               = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateCopy"),
             EventCreateSourceFromEvent    = apiGetFunctionAddress(COREGRAPHICS, "CGEventCreateSourceFromEvent"),
             EventSetSource                = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetSource"),
@@ -57,12 +57,12 @@ public class CoreGraphics {
             EventGetDoubleValueField      = apiGetFunctionAddress(COREGRAPHICS, "CGEventGetDoubleValueField"),
             EventSetDoubleValueField      = apiGetFunctionAddress(COREGRAPHICS, "CGEventSetDoubleValueField"),
             EventTapCreate                = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapCreate"),
-            EventTapCreateForPid          = COREGRAPHICS.getFunctionAddress("CGEventTapCreateForPid"),
+            EventTapCreateForPid          = apiGetFunctionAddressOptional(COREGRAPHICS, "CGEventTapCreateForPid"),
             EventTapEnable                = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapEnable"),
             EventTapIsEnabled             = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapIsEnabled"),
             EventTapPostEvent             = apiGetFunctionAddress(COREGRAPHICS, "CGEventTapPostEvent"),
             EventPost                     = apiGetFunctionAddress(COREGRAPHICS, "CGEventPost"),
-            EventPostToPid                = COREGRAPHICS.getFunctionAddress("CGEventPostToPid"),
+            EventPostToPid                = apiGetFunctionAddressOptional(COREGRAPHICS, "CGEventPostToPid"),
             GetEventTapList               = apiGetFunctionAddress(COREGRAPHICS, "CGGetEventTapList");
 
     }

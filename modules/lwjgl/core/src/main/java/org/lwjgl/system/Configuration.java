@@ -339,9 +339,9 @@ public class Configuration<T> {
     public static final Configuration<Boolean> DEBUG_STACK = new Configuration<>("org.lwjgl.util.DebugStack", StateInit.BOOLEAN);
 
     /**
-     * When enabled, capabilities classes will print an error message when they fail to retrieve a function pointer.
+     * When enabled, a warning message will be output to {@link #DEBUG_STREAM} when LWJGL fails to retrieve a function pointer.
      *
-     * <p>Function pointers in such classes are retrieved unconditionally, so this option may generate a lot of output and many false negatives.</p>
+     * <p>This option may generate a lot of output and false negatives for functions in unused classes.</p>
      *
      * <p>This option requires {@link #DEBUG} to be enabled.</p>
      *

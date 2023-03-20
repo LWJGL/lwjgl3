@@ -28,9 +28,9 @@ public class Kernel32 {
             GetProcessId              = apiGetFunctionAddress(KERNEL32, "GetProcessId"),
             GetCurrentThread          = apiGetFunctionAddress(KERNEL32, "GetCurrentThread"),
             GetCurrentThreadId        = apiGetFunctionAddress(KERNEL32, "GetCurrentThreadId"),
-            GetThreadId               = KERNEL32.getFunctionAddress("GetThreadId"),
-            GetProcessIdOfThread      = KERNEL32.getFunctionAddress("GetProcessIdOfThread"),
-            GetCurrentProcessorNumber = KERNEL32.getFunctionAddress("GetCurrentProcessorNumber");
+            GetThreadId               = apiGetFunctionAddressOptional(KERNEL32, "GetThreadId"),
+            GetProcessIdOfThread      = apiGetFunctionAddressOptional(KERNEL32, "GetProcessIdOfThread"),
+            GetCurrentProcessorNumber = apiGetFunctionAddressOptional(KERNEL32, "GetCurrentProcessorNumber");
 
     }
 

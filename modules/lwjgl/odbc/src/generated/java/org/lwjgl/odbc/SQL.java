@@ -43,7 +43,7 @@ public class SQL {
         public static final long
             AllocHandle      = apiGetFunctionAddress(ODBC, "SQLAllocHandle"),
             Connect          = apiGetFunctionAddress(ODBC, "SQLConnectW"),
-            DataSources      = ODBC.getFunctionAddress("SQLDataSourcesW"),
+            DataSources      = apiGetFunctionAddressOptional(ODBC, "SQLDataSourcesW"),
             GetInfo          = apiGetFunctionAddress(ODBC, "SQLGetInfoW"),
             GetFunctions     = apiGetFunctionAddress(ODBC, "SQLGetFunctions"),
             GetTypeInfo      = apiGetFunctionAddress(ODBC, "SQLGetTypeInfoW"),
@@ -78,16 +78,16 @@ public class SQL {
             FreeStmt         = apiGetFunctionAddress(ODBC, "SQLFreeStmt"),
             CloseCursor      = apiGetFunctionAddress(ODBC, "SQLCloseCursor"),
             Cancel           = apiGetFunctionAddress(ODBC, "SQLCancel"),
-            CancelHandle     = ODBC.getFunctionAddress("SQLCancelHandle"),
+            CancelHandle     = apiGetFunctionAddressOptional(ODBC, "SQLCancelHandle"),
             EndTran          = apiGetFunctionAddress(ODBC, "SQLEndTran"),
             Disconnect       = apiGetFunctionAddress(ODBC, "SQLDisconnect"),
             FreeHandle       = apiGetFunctionAddress(ODBC, "SQLFreeHandle"),
-            CompleteAsync    = ODBC.getFunctionAddress("SQLCompleteAsync"),
+            CompleteAsync    = apiGetFunctionAddressOptional(ODBC, "SQLCompleteAsync"),
             Columns          = apiGetFunctionAddress(ODBC, "SQLColumnsW"),
             SpecialColumns   = apiGetFunctionAddress(ODBC, "SQLSpecialColumnsW"),
             Statistics       = apiGetFunctionAddress(ODBC, "SQLStatisticsW"),
             Tables           = apiGetFunctionAddress(ODBC, "SQLTablesW"),
-            Transact         = ODBC.getFunctionAddress("SQLTransact"),
+            Transact         = apiGetFunctionAddressOptional(ODBC, "SQLTransact"),
             DriverConnect    = apiGetFunctionAddress(ODBC, "SQLDriverConnectW"),
             BrowseConnect    = apiGetFunctionAddress(ODBC, "SQLBrowseConnectW"),
             BulkOperations   = apiGetFunctionAddress(ODBC, "SQLBulkOperations"),
@@ -104,9 +104,9 @@ public class SQL {
             Procedures       = apiGetFunctionAddress(ODBC, "SQLProceduresW"),
             SetPos           = apiGetFunctionAddress(ODBC, "SQLSetPos"),
             TablePrivileges  = apiGetFunctionAddress(ODBC, "SQLTablePrivilegesW"),
-            Drivers          = ODBC.getFunctionAddress("SQLDriversW"),
+            Drivers          = apiGetFunctionAddressOptional(ODBC, "SQLDriversW"),
             BindParameter    = apiGetFunctionAddress(ODBC, "SQLBindParameter"),
-            AllocHandleStd   = ODBC.getFunctionAddress("SQLAllocHandleStd");
+            AllocHandleStd   = apiGetFunctionAddressOptional(ODBC, "SQLAllocHandleStd");
 
     }
 

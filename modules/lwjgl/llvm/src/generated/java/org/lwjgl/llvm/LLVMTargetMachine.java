@@ -48,9 +48,9 @@ public class LLVMTargetMachine {
             TargetMachineEmitToFile         = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToFile"),
             TargetMachineEmitToMemoryBuffer = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMTargetMachineEmitToMemoryBuffer"),
             GetDefaultTargetTriple          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMGetDefaultTargetTriple"),
-            NormalizeTargetTriple           = LLVMCore.getLibrary().getFunctionAddress("LLVMNormalizeTargetTriple"),
-            GetHostCPUName                  = LLVMCore.getLibrary().getFunctionAddress("LLVMGetHostCPUName"),
-            GetHostCPUFeatures              = LLVMCore.getLibrary().getFunctionAddress("LLVMGetHostCPUFeatures"),
+            NormalizeTargetTriple           = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMNormalizeTargetTriple"),
+            GetHostCPUName                  = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetHostCPUName"),
+            GetHostCPUFeatures              = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMGetHostCPUFeatures"),
             AddAnalysisPasses               = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMAddAnalysisPasses");
 
     }

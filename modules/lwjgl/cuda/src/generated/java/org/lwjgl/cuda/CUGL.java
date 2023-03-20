@@ -33,7 +33,7 @@ public class CUGL {
         public static final long
             GraphicsGLRegisterBuffer  = apiGetFunctionAddress(CU.getLibrary(), "cuGraphicsGLRegisterBuffer"),
             GraphicsGLRegisterImage   = apiGetFunctionAddress(CU.getLibrary(), "cuGraphicsGLRegisterImage"),
-            GLGetDevices              = CU.getLibrary().getFunctionAddress(__CUDA_API_VERSION("cuGLGetDevices", 2)),
+            GLGetDevices              = apiGetFunctionAddressOptional(CU.getLibrary(), __CUDA_API_VERSION("cuGLGetDevices", 2)),
             GLCtxCreate               = apiGetFunctionAddress(CU.getLibrary(), __CUDA_API_VERSION("cuGLCtxCreate", 2)),
             GLInit                    = apiGetFunctionAddress(CU.getLibrary(), "cuGLInit"),
             GLRegisterBufferObject    = apiGetFunctionAddress(CU.getLibrary(), "cuGLRegisterBufferObject"),

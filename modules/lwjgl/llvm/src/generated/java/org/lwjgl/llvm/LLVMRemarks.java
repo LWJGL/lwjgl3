@@ -45,12 +45,12 @@ public class LLVMRemarks {
             RemarkEntryGetFirstArg          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMRemarkEntryGetFirstArg"),
             RemarkEntryGetNextArg           = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMRemarkEntryGetNextArg"),
             RemarkParserCreateYAML          = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMRemarkParserCreateYAML"),
-            RemarkParserCreateBitstream     = LLVMCore.getLibrary().getFunctionAddress("LLVMRemarkParserCreateBitstream"),
+            RemarkParserCreateBitstream     = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMRemarkParserCreateBitstream"),
             RemarkParserGetNext             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMRemarkParserGetNext"),
             RemarkParserHasError            = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMRemarkParserHasError"),
             RemarkParserGetErrorMessage     = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMRemarkParserGetErrorMessage"),
             RemarkParserDispose             = apiGetFunctionAddress(LLVMCore.getLibrary(), "LLVMRemarkParserDispose"),
-            RemarkVersion                   = LLVMCore.getLibrary().getFunctionAddress("LLVMRemarkVersion");
+            RemarkVersion                   = apiGetFunctionAddressOptional(LLVMCore.getLibrary(), "LLVMRemarkVersion");
 
     }
 
