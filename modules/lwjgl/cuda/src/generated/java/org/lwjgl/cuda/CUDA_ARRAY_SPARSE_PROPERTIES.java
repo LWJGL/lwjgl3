@@ -17,20 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * CUDA array sparse properties.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_ARRAY_SPARSE_PROPERTIES {
  *     struct {
- *         unsigned int {@link #tileExtent_width width};
- *         unsigned int {@link #tileExtent_height height};
- *         unsigned int {@link #tileExtent_depth depth};
+ *         unsigned int width;
+ *         unsigned int height;
+ *         unsigned int depth;
  *     } tileExtent;
- *     unsigned int {@link #miptailFirstLevel};
- *     unsigned long long {@link #miptailSize};
- *     unsigned int {@link #flags};
+ *     unsigned int miptailFirstLevel;
+ *     unsigned long long miptailSize;
+ *     unsigned int flags;
  *     unsigned int reserved[4];
  * }</code></pre>
  */
@@ -92,22 +90,22 @@ public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** width of sparse tile in elements */
+    /** @return the value of the {@code tileExtent.width} field. */
     @NativeType("unsigned int")
     public int tileExtent_width() { return ntileExtent_width(address()); }
-    /** height of sparse tile in elements */
+    /** @return the value of the {@code tileExtent.height} field. */
     @NativeType("unsigned int")
     public int tileExtent_height() { return ntileExtent_height(address()); }
-    /** depth of sparse tile in elements */
+    /** @return the value of the {@code tileExtent.depth} field. */
     @NativeType("unsigned int")
     public int tileExtent_depth() { return ntileExtent_depth(address()); }
-    /** first mip level at which the mip tail begins */
+    /** @return the value of the {@code miptailFirstLevel} field. */
     @NativeType("unsigned int")
     public int miptailFirstLevel() { return nmiptailFirstLevel(address()); }
-    /** total size of the mip tail */
+    /** @return the value of the {@code miptailSize} field. */
     @NativeType("unsigned long long")
     public long miptailSize() { return nmiptailSize(address()); }
-    /** flags will either be zero or {@link CU#CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL} */
+    /** @return the value of the {@code flags} field. */
     @NativeType("unsigned int")
     public int flags() { return nflags(address()); }
     /** @return a {@link IntBuffer} view of the {@code reserved} field. */
@@ -117,17 +115,17 @@ public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct implements NativeResour
     @NativeType("unsigned int")
     public int reserved(int index) { return nreserved(address(), index); }
 
-    /** Sets the specified value to the {@link #tileExtent_width} field. */
+    /** Sets the specified value to the {@code width} field. */
     public CUDA_ARRAY_SPARSE_PROPERTIES tileExtent_width(@NativeType("unsigned int") int value) { ntileExtent_width(address(), value); return this; }
-    /** Sets the specified value to the {@link #tileExtent_height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public CUDA_ARRAY_SPARSE_PROPERTIES tileExtent_height(@NativeType("unsigned int") int value) { ntileExtent_height(address(), value); return this; }
-    /** Sets the specified value to the {@link #tileExtent_depth} field. */
+    /** Sets the specified value to the {@code depth} field. */
     public CUDA_ARRAY_SPARSE_PROPERTIES tileExtent_depth(@NativeType("unsigned int") int value) { ntileExtent_depth(address(), value); return this; }
-    /** Sets the specified value to the {@link #miptailFirstLevel} field. */
+    /** Sets the specified value to the {@code miptailFirstLevel} field. */
     public CUDA_ARRAY_SPARSE_PROPERTIES miptailFirstLevel(@NativeType("unsigned int") int value) { nmiptailFirstLevel(address(), value); return this; }
-    /** Sets the specified value to the {@link #miptailSize} field. */
+    /** Sets the specified value to the {@code miptailSize} field. */
     public CUDA_ARRAY_SPARSE_PROPERTIES miptailSize(@NativeType("unsigned long long") long value) { nmiptailSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public CUDA_ARRAY_SPARSE_PROPERTIES flags(@NativeType("unsigned int") int value) { nflags(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public CUDA_ARRAY_SPARSE_PROPERTIES reserved(@NativeType("unsigned int[4]") IntBuffer value) { nreserved(address(), value); return this; }
@@ -359,22 +357,22 @@ public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUDA_ARRAY_SPARSE_PROPERTIES#tileExtent_width} field. */
+        /** @return the value of the {@code tileExtent.width} field. */
         @NativeType("unsigned int")
         public int tileExtent_width() { return CUDA_ARRAY_SPARSE_PROPERTIES.ntileExtent_width(address()); }
-        /** @return the value of the {@link CUDA_ARRAY_SPARSE_PROPERTIES#tileExtent_height} field. */
+        /** @return the value of the {@code tileExtent.height} field. */
         @NativeType("unsigned int")
         public int tileExtent_height() { return CUDA_ARRAY_SPARSE_PROPERTIES.ntileExtent_height(address()); }
-        /** @return the value of the {@link CUDA_ARRAY_SPARSE_PROPERTIES#tileExtent_depth} field. */
+        /** @return the value of the {@code tileExtent.depth} field. */
         @NativeType("unsigned int")
         public int tileExtent_depth() { return CUDA_ARRAY_SPARSE_PROPERTIES.ntileExtent_depth(address()); }
-        /** @return the value of the {@link CUDA_ARRAY_SPARSE_PROPERTIES#miptailFirstLevel} field. */
+        /** @return the value of the {@code miptailFirstLevel} field. */
         @NativeType("unsigned int")
         public int miptailFirstLevel() { return CUDA_ARRAY_SPARSE_PROPERTIES.nmiptailFirstLevel(address()); }
-        /** @return the value of the {@link CUDA_ARRAY_SPARSE_PROPERTIES#miptailSize} field. */
+        /** @return the value of the {@code miptailSize} field. */
         @NativeType("unsigned long long")
         public long miptailSize() { return CUDA_ARRAY_SPARSE_PROPERTIES.nmiptailSize(address()); }
-        /** @return the value of the {@link CUDA_ARRAY_SPARSE_PROPERTIES#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("unsigned int")
         public int flags() { return CUDA_ARRAY_SPARSE_PROPERTIES.nflags(address()); }
         /** @return a {@link IntBuffer} view of the {@code reserved} field. */
@@ -384,17 +382,17 @@ public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct implements NativeResour
         @NativeType("unsigned int")
         public int reserved(int index) { return CUDA_ARRAY_SPARSE_PROPERTIES.nreserved(address(), index); }
 
-        /** Sets the specified value to the {@link CUDA_ARRAY_SPARSE_PROPERTIES#tileExtent_width} field. */
+        /** Sets the specified value to the {@code width} field. */
         public CUDA_ARRAY_SPARSE_PROPERTIES.Buffer tileExtent_width(@NativeType("unsigned int") int value) { CUDA_ARRAY_SPARSE_PROPERTIES.ntileExtent_width(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_ARRAY_SPARSE_PROPERTIES#tileExtent_height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public CUDA_ARRAY_SPARSE_PROPERTIES.Buffer tileExtent_height(@NativeType("unsigned int") int value) { CUDA_ARRAY_SPARSE_PROPERTIES.ntileExtent_height(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_ARRAY_SPARSE_PROPERTIES#tileExtent_depth} field. */
+        /** Sets the specified value to the {@code depth} field. */
         public CUDA_ARRAY_SPARSE_PROPERTIES.Buffer tileExtent_depth(@NativeType("unsigned int") int value) { CUDA_ARRAY_SPARSE_PROPERTIES.ntileExtent_depth(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_ARRAY_SPARSE_PROPERTIES#miptailFirstLevel} field. */
+        /** Sets the specified value to the {@code miptailFirstLevel} field. */
         public CUDA_ARRAY_SPARSE_PROPERTIES.Buffer miptailFirstLevel(@NativeType("unsigned int") int value) { CUDA_ARRAY_SPARSE_PROPERTIES.nmiptailFirstLevel(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_ARRAY_SPARSE_PROPERTIES#miptailSize} field. */
+        /** Sets the specified value to the {@code miptailSize} field. */
         public CUDA_ARRAY_SPARSE_PROPERTIES.Buffer miptailSize(@NativeType("unsigned long long") long value) { CUDA_ARRAY_SPARSE_PROPERTIES.nmiptailSize(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_ARRAY_SPARSE_PROPERTIES#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public CUDA_ARRAY_SPARSE_PROPERTIES.Buffer flags(@NativeType("unsigned int") int value) { CUDA_ARRAY_SPARSE_PROPERTIES.nflags(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
         public CUDA_ARRAY_SPARSE_PROPERTIES.Buffer reserved(@NativeType("unsigned int[4]") IntBuffer value) { CUDA_ARRAY_SPARSE_PROPERTIES.nreserved(address(), value); return this; }

@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Host node parameters.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_HOST_NODE_PARAMS {
  *     void (*{@link CUhostFnI fn}) (void *userData);
- *     void * {@link #userData};
+ *     void * userData;
  * }</code></pre>
  */
 public class CUDA_HOST_NODE_PARAMS extends Struct implements NativeResource {
@@ -66,16 +64,16 @@ public class CUDA_HOST_NODE_PARAMS extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** The function to call when the node executes */
+    /** @return the value of the {@code fn} field. */
     @NativeType("void (*) (void *)")
     public CUhostFn fn() { return nfn(address()); }
-    /** Argument to pass to the function */
+    /** @return the value of the {@code userData} field. */
     @NativeType("void *")
     public long userData() { return nuserData(address()); }
 
-    /** Sets the specified value to the {@link #fn} field. */
+    /** Sets the specified value to the {@code fn} field. */
     public CUDA_HOST_NODE_PARAMS fn(@NativeType("void (*) (void *)") CUhostFnI value) { nfn(address(), value); return this; }
-    /** Sets the specified value to the {@link #userData} field. */
+    /** Sets the specified value to the {@code userData} field. */
     public CUDA_HOST_NODE_PARAMS userData(@NativeType("void *") long value) { nuserData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -290,16 +288,16 @@ public class CUDA_HOST_NODE_PARAMS extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUDA_HOST_NODE_PARAMS#fn} field. */
+        /** @return the value of the {@code fn} field. */
         @NativeType("void (*) (void *)")
         public CUhostFn fn() { return CUDA_HOST_NODE_PARAMS.nfn(address()); }
-        /** @return the value of the {@link CUDA_HOST_NODE_PARAMS#userData} field. */
+        /** @return the value of the {@code userData} field. */
         @NativeType("void *")
         public long userData() { return CUDA_HOST_NODE_PARAMS.nuserData(address()); }
 
-        /** Sets the specified value to the {@link CUDA_HOST_NODE_PARAMS#fn} field. */
+        /** Sets the specified value to the {@code fn} field. */
         public CUDA_HOST_NODE_PARAMS.Buffer fn(@NativeType("void (*) (void *)") CUhostFnI value) { CUDA_HOST_NODE_PARAMS.nfn(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_HOST_NODE_PARAMS#userData} field. */
+        /** Sets the specified value to the {@code userData} field. */
         public CUDA_HOST_NODE_PARAMS.Buffer userData(@NativeType("void *") long value) { CUDA_HOST_NODE_PARAMS.nuserData(address(), value); return this; }
 
     }

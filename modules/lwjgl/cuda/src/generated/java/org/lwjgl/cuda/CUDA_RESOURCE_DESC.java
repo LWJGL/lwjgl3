@@ -17,39 +17,37 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * CUDA Resource descriptor.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_RESOURCE_DESC {
- *     CUresourcetype {@link #resType};
+ *     CUresourcetype resType;
  *     union {
  *         struct {
- *             CUarray {@link #res_array_hArray hArray};
+ *             CUarray hArray;
  *         } array;
  *         struct {
- *             CUmipmappedArray {@link #res_mipmap_hMipmappedArray hMipmappedArray};
+ *             CUmipmappedArray hMipmappedArray;
  *         } mipmap;
  *         struct {
- *             CUdeviceptr {@link #res_linear_devPtr devPtr};
- *             CUarray_format {@link #res_linear_format format};
- *             unsigned int {@link #res_linear_numChannels numChannels};
- *             size_t {@link #res_linear_sizeInBytes sizeInBytes};
+ *             CUdeviceptr devPtr;
+ *             CUarray_format format;
+ *             unsigned int numChannels;
+ *             size_t sizeInBytes;
  *         } linear;
  *         struct {
- *             CUdeviceptr {@link #res_pitch2D_devPtr devPtr};
- *             CUarray_format {@link #res_pitch2D_format format};
- *             unsigned int {@link #res_pitch2D_numChannels numChannels};
- *             size_t {@link #res_pitch2D_width width};
- *             size_t {@link #res_pitch2D_height height};
- *             size_t {@link #res_pitch2D_pitchInBytes pitchInBytes};
+ *             CUdeviceptr devPtr;
+ *             CUarray_format format;
+ *             unsigned int numChannels;
+ *             size_t width;
+ *             size_t height;
+ *             size_t pitchInBytes;
  *         } pitch2D;
  *         struct {
  *             int reserved[32];
  *         } reserved;
  *     } res;
- *     unsigned int {@link #flags};
+ *     unsigned int flags;
  * }</code></pre>
  */
 public class CUDA_RESOURCE_DESC extends Struct implements NativeResource {
@@ -154,43 +152,43 @@ public class CUDA_RESOURCE_DESC extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Resource type */
+    /** @return the value of the {@code resType} field. */
     @NativeType("CUresourcetype")
     public int resType() { return nresType(address()); }
-    /** CUDA array */
+    /** @return the value of the {@code res.array.hArray} field. */
     @NativeType("CUarray")
     public long res_array_hArray() { return nres_array_hArray(address()); }
-    /** CUDA mipmapped array */
+    /** @return the value of the {@code res.mipmap.hMipmappedArray} field. */
     @NativeType("CUmipmappedArray")
     public long res_mipmap_hMipmappedArray() { return nres_mipmap_hMipmappedArray(address()); }
-    /** Device pointer */
+    /** @return the value of the {@code res.linear.devPtr} field. */
     @NativeType("CUdeviceptr")
     public long res_linear_devPtr() { return nres_linear_devPtr(address()); }
-    /** Array format */
+    /** @return the value of the {@code res.linear.format} field. */
     @NativeType("CUarray_format")
     public int res_linear_format() { return nres_linear_format(address()); }
-    /** Channels per array element */
+    /** @return the value of the {@code res.linear.numChannels} field. */
     @NativeType("unsigned int")
     public int res_linear_numChannels() { return nres_linear_numChannels(address()); }
-    /** Size in bytes */
+    /** @return the value of the {@code res.linear.sizeInBytes} field. */
     @NativeType("size_t")
     public long res_linear_sizeInBytes() { return nres_linear_sizeInBytes(address()); }
-    /** Device pointer */
+    /** @return the value of the {@code res.pitch2D.devPtr} field. */
     @NativeType("CUdeviceptr")
     public long res_pitch2D_devPtr() { return nres_pitch2D_devPtr(address()); }
-    /** Array format */
+    /** @return the value of the {@code res.pitch2D.format} field. */
     @NativeType("CUarray_format")
     public int res_pitch2D_format() { return nres_pitch2D_format(address()); }
-    /** Channels per array element */
+    /** @return the value of the {@code res.pitch2D.numChannels} field. */
     @NativeType("unsigned int")
     public int res_pitch2D_numChannels() { return nres_pitch2D_numChannels(address()); }
-    /** Width of the array in elements */
+    /** @return the value of the {@code res.pitch2D.width} field. */
     @NativeType("size_t")
     public long res_pitch2D_width() { return nres_pitch2D_width(address()); }
-    /** Height of the array in elements */
+    /** @return the value of the {@code res.pitch2D.height} field. */
     @NativeType("size_t")
     public long res_pitch2D_height() { return nres_pitch2D_height(address()); }
-    /** Pitch between two rows in bytes */
+    /** @return the value of the {@code res.pitch2D.pitchInBytes} field. */
     @NativeType("size_t")
     public long res_pitch2D_pitchInBytes() { return nres_pitch2D_pitchInBytes(address()); }
     /** @return a {@link IntBuffer} view of the {@code res.reserved.reserved} field. */
@@ -198,41 +196,41 @@ public class CUDA_RESOURCE_DESC extends Struct implements NativeResource {
     public IntBuffer res_reserved_reserved() { return nres_reserved_reserved(address()); }
     /** @return the value at the specified index of the {@code res.reserved.reserved} field. */
     public int res_reserved_reserved(int index) { return nres_reserved_reserved(address(), index); }
-    /** Flags (must be zero) */
+    /** @return the value of the {@code flags} field. */
     @NativeType("unsigned int")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #resType} field. */
+    /** Sets the specified value to the {@code resType} field. */
     public CUDA_RESOURCE_DESC resType(@NativeType("CUresourcetype") int value) { nresType(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_array_hArray} field. */
+    /** Sets the specified value to the {@code hArray} field. */
     public CUDA_RESOURCE_DESC res_array_hArray(@NativeType("CUarray") long value) { nres_array_hArray(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_mipmap_hMipmappedArray} field. */
+    /** Sets the specified value to the {@code hMipmappedArray} field. */
     public CUDA_RESOURCE_DESC res_mipmap_hMipmappedArray(@NativeType("CUmipmappedArray") long value) { nres_mipmap_hMipmappedArray(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_linear_devPtr} field. */
+    /** Sets the specified value to the {@code devPtr} field. */
     public CUDA_RESOURCE_DESC res_linear_devPtr(@NativeType("CUdeviceptr") long value) { nres_linear_devPtr(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_linear_format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public CUDA_RESOURCE_DESC res_linear_format(@NativeType("CUarray_format") int value) { nres_linear_format(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_linear_numChannels} field. */
+    /** Sets the specified value to the {@code numChannels} field. */
     public CUDA_RESOURCE_DESC res_linear_numChannels(@NativeType("unsigned int") int value) { nres_linear_numChannels(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_linear_sizeInBytes} field. */
+    /** Sets the specified value to the {@code sizeInBytes} field. */
     public CUDA_RESOURCE_DESC res_linear_sizeInBytes(@NativeType("size_t") long value) { nres_linear_sizeInBytes(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_pitch2D_devPtr} field. */
+    /** Sets the specified value to the {@code devPtr} field. */
     public CUDA_RESOURCE_DESC res_pitch2D_devPtr(@NativeType("CUdeviceptr") long value) { nres_pitch2D_devPtr(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_pitch2D_format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public CUDA_RESOURCE_DESC res_pitch2D_format(@NativeType("CUarray_format") int value) { nres_pitch2D_format(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_pitch2D_numChannels} field. */
+    /** Sets the specified value to the {@code numChannels} field. */
     public CUDA_RESOURCE_DESC res_pitch2D_numChannels(@NativeType("unsigned int") int value) { nres_pitch2D_numChannels(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_pitch2D_width} field. */
+    /** Sets the specified value to the {@code width} field. */
     public CUDA_RESOURCE_DESC res_pitch2D_width(@NativeType("size_t") long value) { nres_pitch2D_width(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_pitch2D_height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public CUDA_RESOURCE_DESC res_pitch2D_height(@NativeType("size_t") long value) { nres_pitch2D_height(address(), value); return this; }
-    /** Sets the specified value to the {@link #res_pitch2D_pitchInBytes} field. */
+    /** Sets the specified value to the {@code pitchInBytes} field. */
     public CUDA_RESOURCE_DESC res_pitch2D_pitchInBytes(@NativeType("size_t") long value) { nres_pitch2D_pitchInBytes(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public CUDA_RESOURCE_DESC res_reserved_reserved(@NativeType("int[32]") IntBuffer value) { nres_reserved_reserved(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code reserved} field. */
     public CUDA_RESOURCE_DESC res_reserved_reserved(int index, int value) { nres_reserved_reserved(address(), index, value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public CUDA_RESOURCE_DESC flags(@NativeType("unsigned int") int value) { nflags(address(), value); return this; }
 
     /**
@@ -490,43 +488,43 @@ public class CUDA_RESOURCE_DESC extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#resType} field. */
+        /** @return the value of the {@code resType} field. */
         @NativeType("CUresourcetype")
         public int resType() { return CUDA_RESOURCE_DESC.nresType(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_array_hArray} field. */
+        /** @return the value of the {@code res.array.hArray} field. */
         @NativeType("CUarray")
         public long res_array_hArray() { return CUDA_RESOURCE_DESC.nres_array_hArray(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_mipmap_hMipmappedArray} field. */
+        /** @return the value of the {@code res.mipmap.hMipmappedArray} field. */
         @NativeType("CUmipmappedArray")
         public long res_mipmap_hMipmappedArray() { return CUDA_RESOURCE_DESC.nres_mipmap_hMipmappedArray(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_linear_devPtr} field. */
+        /** @return the value of the {@code res.linear.devPtr} field. */
         @NativeType("CUdeviceptr")
         public long res_linear_devPtr() { return CUDA_RESOURCE_DESC.nres_linear_devPtr(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_linear_format} field. */
+        /** @return the value of the {@code res.linear.format} field. */
         @NativeType("CUarray_format")
         public int res_linear_format() { return CUDA_RESOURCE_DESC.nres_linear_format(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_linear_numChannels} field. */
+        /** @return the value of the {@code res.linear.numChannels} field. */
         @NativeType("unsigned int")
         public int res_linear_numChannels() { return CUDA_RESOURCE_DESC.nres_linear_numChannels(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_linear_sizeInBytes} field. */
+        /** @return the value of the {@code res.linear.sizeInBytes} field. */
         @NativeType("size_t")
         public long res_linear_sizeInBytes() { return CUDA_RESOURCE_DESC.nres_linear_sizeInBytes(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_pitch2D_devPtr} field. */
+        /** @return the value of the {@code res.pitch2D.devPtr} field. */
         @NativeType("CUdeviceptr")
         public long res_pitch2D_devPtr() { return CUDA_RESOURCE_DESC.nres_pitch2D_devPtr(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_pitch2D_format} field. */
+        /** @return the value of the {@code res.pitch2D.format} field. */
         @NativeType("CUarray_format")
         public int res_pitch2D_format() { return CUDA_RESOURCE_DESC.nres_pitch2D_format(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_pitch2D_numChannels} field. */
+        /** @return the value of the {@code res.pitch2D.numChannels} field. */
         @NativeType("unsigned int")
         public int res_pitch2D_numChannels() { return CUDA_RESOURCE_DESC.nres_pitch2D_numChannels(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_pitch2D_width} field. */
+        /** @return the value of the {@code res.pitch2D.width} field. */
         @NativeType("size_t")
         public long res_pitch2D_width() { return CUDA_RESOURCE_DESC.nres_pitch2D_width(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_pitch2D_height} field. */
+        /** @return the value of the {@code res.pitch2D.height} field. */
         @NativeType("size_t")
         public long res_pitch2D_height() { return CUDA_RESOURCE_DESC.nres_pitch2D_height(address()); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#res_pitch2D_pitchInBytes} field. */
+        /** @return the value of the {@code res.pitch2D.pitchInBytes} field. */
         @NativeType("size_t")
         public long res_pitch2D_pitchInBytes() { return CUDA_RESOURCE_DESC.nres_pitch2D_pitchInBytes(address()); }
         /** @return a {@link IntBuffer} view of the {@code res.reserved.reserved} field. */
@@ -534,41 +532,41 @@ public class CUDA_RESOURCE_DESC extends Struct implements NativeResource {
         public IntBuffer res_reserved_reserved() { return CUDA_RESOURCE_DESC.nres_reserved_reserved(address()); }
         /** @return the value at the specified index of the {@code res.reserved.reserved} field. */
         public int res_reserved_reserved(int index) { return CUDA_RESOURCE_DESC.nres_reserved_reserved(address(), index); }
-        /** @return the value of the {@link CUDA_RESOURCE_DESC#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("unsigned int")
         public int flags() { return CUDA_RESOURCE_DESC.nflags(address()); }
 
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#resType} field. */
+        /** Sets the specified value to the {@code resType} field. */
         public CUDA_RESOURCE_DESC.Buffer resType(@NativeType("CUresourcetype") int value) { CUDA_RESOURCE_DESC.nresType(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_array_hArray} field. */
+        /** Sets the specified value to the {@code hArray} field. */
         public CUDA_RESOURCE_DESC.Buffer res_array_hArray(@NativeType("CUarray") long value) { CUDA_RESOURCE_DESC.nres_array_hArray(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_mipmap_hMipmappedArray} field. */
+        /** Sets the specified value to the {@code hMipmappedArray} field. */
         public CUDA_RESOURCE_DESC.Buffer res_mipmap_hMipmappedArray(@NativeType("CUmipmappedArray") long value) { CUDA_RESOURCE_DESC.nres_mipmap_hMipmappedArray(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_linear_devPtr} field. */
+        /** Sets the specified value to the {@code devPtr} field. */
         public CUDA_RESOURCE_DESC.Buffer res_linear_devPtr(@NativeType("CUdeviceptr") long value) { CUDA_RESOURCE_DESC.nres_linear_devPtr(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_linear_format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public CUDA_RESOURCE_DESC.Buffer res_linear_format(@NativeType("CUarray_format") int value) { CUDA_RESOURCE_DESC.nres_linear_format(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_linear_numChannels} field. */
+        /** Sets the specified value to the {@code numChannels} field. */
         public CUDA_RESOURCE_DESC.Buffer res_linear_numChannels(@NativeType("unsigned int") int value) { CUDA_RESOURCE_DESC.nres_linear_numChannels(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_linear_sizeInBytes} field. */
+        /** Sets the specified value to the {@code sizeInBytes} field. */
         public CUDA_RESOURCE_DESC.Buffer res_linear_sizeInBytes(@NativeType("size_t") long value) { CUDA_RESOURCE_DESC.nres_linear_sizeInBytes(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_pitch2D_devPtr} field. */
+        /** Sets the specified value to the {@code devPtr} field. */
         public CUDA_RESOURCE_DESC.Buffer res_pitch2D_devPtr(@NativeType("CUdeviceptr") long value) { CUDA_RESOURCE_DESC.nres_pitch2D_devPtr(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_pitch2D_format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public CUDA_RESOURCE_DESC.Buffer res_pitch2D_format(@NativeType("CUarray_format") int value) { CUDA_RESOURCE_DESC.nres_pitch2D_format(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_pitch2D_numChannels} field. */
+        /** Sets the specified value to the {@code numChannels} field. */
         public CUDA_RESOURCE_DESC.Buffer res_pitch2D_numChannels(@NativeType("unsigned int") int value) { CUDA_RESOURCE_DESC.nres_pitch2D_numChannels(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_pitch2D_width} field. */
+        /** Sets the specified value to the {@code width} field. */
         public CUDA_RESOURCE_DESC.Buffer res_pitch2D_width(@NativeType("size_t") long value) { CUDA_RESOURCE_DESC.nres_pitch2D_width(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_pitch2D_height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public CUDA_RESOURCE_DESC.Buffer res_pitch2D_height(@NativeType("size_t") long value) { CUDA_RESOURCE_DESC.nres_pitch2D_height(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#res_pitch2D_pitchInBytes} field. */
+        /** Sets the specified value to the {@code pitchInBytes} field. */
         public CUDA_RESOURCE_DESC.Buffer res_pitch2D_pitchInBytes(@NativeType("size_t") long value) { CUDA_RESOURCE_DESC.nres_pitch2D_pitchInBytes(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
         public CUDA_RESOURCE_DESC.Buffer res_reserved_reserved(@NativeType("int[32]") IntBuffer value) { CUDA_RESOURCE_DESC.nres_reserved_reserved(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code reserved} field. */
         public CUDA_RESOURCE_DESC.Buffer res_reserved_reserved(int index, int value) { CUDA_RESOURCE_DESC.nres_reserved_reserved(address(), index, value); return this; }
-        /** Sets the specified value to the {@link CUDA_RESOURCE_DESC#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public CUDA_RESOURCE_DESC.Buffer flags(@NativeType("unsigned int") int value) { CUDA_RESOURCE_DESC.nflags(address(), value); return this; }
 
     }

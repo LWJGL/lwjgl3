@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Memory access descriptor.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUmemAccessDesc {
- *     {@link CUmemLocation CUmemLocation} {@link #location};
- *     CUmemAccess_flags {@link #flags};
+ *     {@link CUmemLocation CUmemLocation} location;
+ *     CUmemAccess_flags flags;
  * }</code></pre>
  */
 public class CUmemAccessDesc extends Struct implements NativeResource {
@@ -65,17 +63,17 @@ public class CUmemAccessDesc extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** location on which the request is to change it's accessibility */
+    /** @return a {@link CUmemLocation} view of the {@code location} field. */
     public CUmemLocation location() { return nlocation(address()); }
-    /** {@code CUmemProt} accessibility flags to set on the request */
+    /** @return the value of the {@code flags} field. */
     @NativeType("CUmemAccess_flags")
     public int flags() { return nflags(address()); }
 
-    /** Copies the specified {@link CUmemLocation} to the {@link #location} field. */
+    /** Copies the specified {@link CUmemLocation} to the {@code location} field. */
     public CUmemAccessDesc location(CUmemLocation value) { nlocation(address(), value); return this; }
-    /** Passes the {@link #location} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code location} field to the specified {@link java.util.function.Consumer Consumer}. */
     public CUmemAccessDesc location(java.util.function.Consumer<CUmemLocation> consumer) { consumer.accept(location()); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public CUmemAccessDesc flags(@NativeType("CUmemAccess_flags") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -262,17 +260,17 @@ public class CUmemAccessDesc extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link CUmemLocation} view of the {@link CUmemAccessDesc#location} field. */
+        /** @return a {@link CUmemLocation} view of the {@code location} field. */
         public CUmemLocation location() { return CUmemAccessDesc.nlocation(address()); }
-        /** @return the value of the {@link CUmemAccessDesc#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("CUmemAccess_flags")
         public int flags() { return CUmemAccessDesc.nflags(address()); }
 
-        /** Copies the specified {@link CUmemLocation} to the {@link CUmemAccessDesc#location} field. */
+        /** Copies the specified {@link CUmemLocation} to the {@code location} field. */
         public CUmemAccessDesc.Buffer location(CUmemLocation value) { CUmemAccessDesc.nlocation(address(), value); return this; }
-        /** Passes the {@link CUmemAccessDesc#location} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code location} field to the specified {@link java.util.function.Consumer Consumer}. */
         public CUmemAccessDesc.Buffer location(java.util.function.Consumer<CUmemLocation> consumer) { consumer.accept(location()); return this; }
-        /** Sets the specified value to the {@link CUmemAccessDesc#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public CUmemAccessDesc.Buffer flags(@NativeType("CUmemAccess_flags") int value) { CUmemAccessDesc.nflags(address(), value); return this; }
 
     }

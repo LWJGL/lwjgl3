@@ -17,17 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Memory allocation node parameters.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_MEM_ALLOC_NODE_PARAMS {
- *     {@link CUmemPoolProps CUmemPoolProps} {@link #poolProps};
- *     {@link CUmemAccessDesc CUmemAccessDesc} const * {@link #accessDescs};
- *     size_t {@link #accessDescCount};
- *     size_t {@link #bytesize};
- *     CUdeviceptr {@link #dptr};
+ *     {@link CUmemPoolProps CUmemPoolProps} poolProps;
+ *     {@link CUmemAccessDesc CUmemAccessDesc} const * accessDescs;
+ *     size_t accessDescCount;
+ *     size_t bytesize;
+ *     CUdeviceptr dptr;
  * }</code></pre>
  */
 public class CUDA_MEM_ALLOC_NODE_PARAMS extends Struct implements NativeResource {
@@ -78,33 +76,30 @@ public class CUDA_MEM_ALLOC_NODE_PARAMS extends Struct implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * in: location where the allocation should reside (specified in {@code location}). {@code handleTypes} must be {@link CU#CU_MEM_HANDLE_TYPE_NONE MEM_HANDLE_TYPE_NONE}. IPC is not
-     * supported.
-     */
+    /** @return a {@link CUmemPoolProps} view of the {@code poolProps} field. */
     public CUmemPoolProps poolProps() { return npoolProps(address()); }
-    /** in: array of memory access descriptors. Used to describe peer GPU access */
+    /** @return a {@link CUmemAccessDesc.Buffer} view of the struct array pointed to by the {@code accessDescs} field. */
     @NativeType("CUmemAccessDesc const *")
     public CUmemAccessDesc.Buffer accessDescs() { return naccessDescs(address()); }
-    /** in: number of memory access descriptors.  Must not exceed the number of GPUs. */
+    /** @return the value of the {@code accessDescCount} field. */
     @NativeType("size_t")
     public long accessDescCount() { return naccessDescCount(address()); }
-    /** in: size in bytes of the requested allocation */
+    /** @return the value of the {@code bytesize} field. */
     @NativeType("size_t")
     public long bytesize() { return nbytesize(address()); }
-    /** out: address of the allocation returned by CUDA */
+    /** @return the value of the {@code dptr} field. */
     @NativeType("CUdeviceptr")
     public long dptr() { return ndptr(address()); }
 
-    /** Copies the specified {@link CUmemPoolProps} to the {@link #poolProps} field. */
+    /** Copies the specified {@link CUmemPoolProps} to the {@code poolProps} field. */
     public CUDA_MEM_ALLOC_NODE_PARAMS poolProps(CUmemPoolProps value) { npoolProps(address(), value); return this; }
-    /** Passes the {@link #poolProps} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code poolProps} field to the specified {@link java.util.function.Consumer Consumer}. */
     public CUDA_MEM_ALLOC_NODE_PARAMS poolProps(java.util.function.Consumer<CUmemPoolProps> consumer) { consumer.accept(poolProps()); return this; }
-    /** Sets the address of the specified {@link CUmemAccessDesc.Buffer} to the {@link #accessDescs} field. */
+    /** Sets the address of the specified {@link CUmemAccessDesc.Buffer} to the {@code accessDescs} field. */
     public CUDA_MEM_ALLOC_NODE_PARAMS accessDescs(@NativeType("CUmemAccessDesc const *") CUmemAccessDesc.Buffer value) { naccessDescs(address(), value); return this; }
-    /** Sets the specified value to the {@link #bytesize} field. */
+    /** Sets the specified value to the {@code bytesize} field. */
     public CUDA_MEM_ALLOC_NODE_PARAMS bytesize(@NativeType("size_t") long value) { nbytesize(address(), value); return this; }
-    /** Sets the specified value to the {@link #dptr} field. */
+    /** Sets the specified value to the {@code dptr} field. */
     public CUDA_MEM_ALLOC_NODE_PARAMS dptr(@NativeType("CUdeviceptr") long value) { ndptr(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,30 +311,30 @@ public class CUDA_MEM_ALLOC_NODE_PARAMS extends Struct implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link CUmemPoolProps} view of the {@link CUDA_MEM_ALLOC_NODE_PARAMS#poolProps} field. */
+        /** @return a {@link CUmemPoolProps} view of the {@code poolProps} field. */
         public CUmemPoolProps poolProps() { return CUDA_MEM_ALLOC_NODE_PARAMS.npoolProps(address()); }
-        /** @return a {@link CUmemAccessDesc.Buffer} view of the struct array pointed to by the {@link CUDA_MEM_ALLOC_NODE_PARAMS#accessDescs} field. */
+        /** @return a {@link CUmemAccessDesc.Buffer} view of the struct array pointed to by the {@code accessDescs} field. */
         @NativeType("CUmemAccessDesc const *")
         public CUmemAccessDesc.Buffer accessDescs() { return CUDA_MEM_ALLOC_NODE_PARAMS.naccessDescs(address()); }
-        /** @return the value of the {@link CUDA_MEM_ALLOC_NODE_PARAMS#accessDescCount} field. */
+        /** @return the value of the {@code accessDescCount} field. */
         @NativeType("size_t")
         public long accessDescCount() { return CUDA_MEM_ALLOC_NODE_PARAMS.naccessDescCount(address()); }
-        /** @return the value of the {@link CUDA_MEM_ALLOC_NODE_PARAMS#bytesize} field. */
+        /** @return the value of the {@code bytesize} field. */
         @NativeType("size_t")
         public long bytesize() { return CUDA_MEM_ALLOC_NODE_PARAMS.nbytesize(address()); }
-        /** @return the value of the {@link CUDA_MEM_ALLOC_NODE_PARAMS#dptr} field. */
+        /** @return the value of the {@code dptr} field. */
         @NativeType("CUdeviceptr")
         public long dptr() { return CUDA_MEM_ALLOC_NODE_PARAMS.ndptr(address()); }
 
-        /** Copies the specified {@link CUmemPoolProps} to the {@link CUDA_MEM_ALLOC_NODE_PARAMS#poolProps} field. */
+        /** Copies the specified {@link CUmemPoolProps} to the {@code poolProps} field. */
         public CUDA_MEM_ALLOC_NODE_PARAMS.Buffer poolProps(CUmemPoolProps value) { CUDA_MEM_ALLOC_NODE_PARAMS.npoolProps(address(), value); return this; }
-        /** Passes the {@link CUDA_MEM_ALLOC_NODE_PARAMS#poolProps} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code poolProps} field to the specified {@link java.util.function.Consumer Consumer}. */
         public CUDA_MEM_ALLOC_NODE_PARAMS.Buffer poolProps(java.util.function.Consumer<CUmemPoolProps> consumer) { consumer.accept(poolProps()); return this; }
-        /** Sets the address of the specified {@link CUmemAccessDesc.Buffer} to the {@link CUDA_MEM_ALLOC_NODE_PARAMS#accessDescs} field. */
+        /** Sets the address of the specified {@link CUmemAccessDesc.Buffer} to the {@code accessDescs} field. */
         public CUDA_MEM_ALLOC_NODE_PARAMS.Buffer accessDescs(@NativeType("CUmemAccessDesc const *") CUmemAccessDesc.Buffer value) { CUDA_MEM_ALLOC_NODE_PARAMS.naccessDescs(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_MEM_ALLOC_NODE_PARAMS#bytesize} field. */
+        /** Sets the specified value to the {@code bytesize} field. */
         public CUDA_MEM_ALLOC_NODE_PARAMS.Buffer bytesize(@NativeType("size_t") long value) { CUDA_MEM_ALLOC_NODE_PARAMS.nbytesize(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_MEM_ALLOC_NODE_PARAMS#dptr} field. */
+        /** Sets the specified value to the {@code dptr} field. */
         public CUDA_MEM_ALLOC_NODE_PARAMS.Buffer dptr(@NativeType("CUdeviceptr") long value) { CUDA_MEM_ALLOC_NODE_PARAMS.ndptr(address(), value); return this; }
 
     }

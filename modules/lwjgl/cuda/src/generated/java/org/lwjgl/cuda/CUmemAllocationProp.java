@@ -17,20 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specifies the allocation properties for a allocation.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUmemAllocationProp {
- *     CUmemAllocationType {@link #type};
- *     CUmemAllocationHandleType {@link #requestedHandleTypes};
- *     {@link CUmemLocation CUmemLocation} {@link #location};
- *     void * {@link #win32HandleMetaData};
+ *     CUmemAllocationType type;
+ *     CUmemAllocationHandleType requestedHandleTypes;
+ *     {@link CUmemLocation CUmemLocation} location;
+ *     void * win32HandleMetaData;
  *     struct {
- *         unsigned char {@link #allocFlags_compressionType compressionType};
+ *         unsigned char compressionType;
  *         unsigned char gpuDirectRDMACapable;
- *         unsigned short {@link #allocFlags_usage usage};
+ *         unsigned short usage;
  *         unsigned char reserved[4];
  *     } allocFlags;
  * }</code></pre>
@@ -96,35 +94,24 @@ public class CUmemAllocationProp extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** allocation type */
+    /** @return the value of the {@code type} field. */
     @NativeType("CUmemAllocationType")
     public int type() { return ntype(address()); }
-    /** requested {@code CUmemAllocationHandleType} */
+    /** @return the value of the {@code requestedHandleTypes} field. */
     @NativeType("CUmemAllocationHandleType")
     public int requestedHandleTypes() { return nrequestedHandleTypes(address()); }
-    /** location of allocation */
+    /** @return a {@link CUmemLocation} view of the {@code location} field. */
     public CUmemLocation location() { return nlocation(address()); }
-    /**
-     * windows-specific {@code POBJECT_ATTRIBUTES} required when {@link CU#CU_MEM_HANDLE_TYPE_WIN32 MEM_HANDLE_TYPE_WIN32} is specified. This object atributes structure includes security
-     * attributes that define the scope of which exported allocations may be tranferred to other processes. In all other cases, this field is required to be
-     * zero.
-     */
+    /** @return the value of the {@code win32HandleMetaData} field. */
     @NativeType("void *")
     public long win32HandleMetaData() { return nwin32HandleMetaData(address()); }
-    /**
-     * allocation hint for requesting compressible memory.
-     * 
-     * <p>On devices that support Compute Data Compression, compressible memory can be used to accelerate accesses to data with unstructured sparsity and
-     * other compressible data patterns. Applications are expected to query allocation property of the handle obtained with {@link CU#cuMemCreate MemCreate} using
-     * {@link CU#cuMemGetAllocationPropertiesFromHandle MemGetAllocationPropertiesFromHandle} to validate if the obtained allocation is compressible or not. Note that compressed memory may not be
-     * mappable on all devices.</p>
-     */
+    /** @return the value of the {@code allocFlags.compressionType} field. */
     @NativeType("unsigned char")
     public byte allocFlags_compressionType() { return nallocFlags_compressionType(address()); }
     /** @return the value of the {@code allocFlags.gpuDirectRDMACapable} field. */
     @NativeType("unsigned char")
     public byte allocFlags_gpuDirectRDMACapable() { return nallocFlags_gpuDirectRDMACapable(address()); }
-    /** bitmask indicating intended usage for this allocation */
+    /** @return the value of the {@code allocFlags.usage} field. */
     @NativeType("unsigned short")
     public short allocFlags_usage() { return nallocFlags_usage(address()); }
     /** @return a {@link ByteBuffer} view of the {@code allocFlags.reserved} field. */
@@ -134,21 +121,21 @@ public class CUmemAllocationProp extends Struct implements NativeResource {
     @NativeType("unsigned char")
     public byte allocFlags_reserved(int index) { return nallocFlags_reserved(address(), index); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public CUmemAllocationProp type(@NativeType("CUmemAllocationType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #requestedHandleTypes} field. */
+    /** Sets the specified value to the {@code requestedHandleTypes} field. */
     public CUmemAllocationProp requestedHandleTypes(@NativeType("CUmemAllocationHandleType") int value) { nrequestedHandleTypes(address(), value); return this; }
-    /** Copies the specified {@link CUmemLocation} to the {@link #location} field. */
+    /** Copies the specified {@link CUmemLocation} to the {@code location} field. */
     public CUmemAllocationProp location(CUmemLocation value) { nlocation(address(), value); return this; }
-    /** Passes the {@link #location} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code location} field to the specified {@link java.util.function.Consumer Consumer}. */
     public CUmemAllocationProp location(java.util.function.Consumer<CUmemLocation> consumer) { consumer.accept(location()); return this; }
-    /** Sets the specified value to the {@link #win32HandleMetaData} field. */
+    /** Sets the specified value to the {@code win32HandleMetaData} field. */
     public CUmemAllocationProp win32HandleMetaData(@NativeType("void *") long value) { nwin32HandleMetaData(address(), value); return this; }
-    /** Sets the specified value to the {@link #allocFlags_compressionType} field. */
+    /** Sets the specified value to the {@code compressionType} field. */
     public CUmemAllocationProp allocFlags_compressionType(@NativeType("unsigned char") byte value) { nallocFlags_compressionType(address(), value); return this; }
     /** Sets the specified value to the {@code gpuDirectRDMACapable} field. */
     public CUmemAllocationProp allocFlags_gpuDirectRDMACapable(@NativeType("unsigned char") byte value) { nallocFlags_gpuDirectRDMACapable(address(), value); return this; }
-    /** Sets the specified value to the {@link #allocFlags_usage} field. */
+    /** Sets the specified value to the {@code usage} field. */
     public CUmemAllocationProp allocFlags_usage(@NativeType("unsigned short") short value) { nallocFlags_usage(address(), value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code reserved} field. */
     public CUmemAllocationProp allocFlags_reserved(@NativeType("unsigned char[4]") ByteBuffer value) { nallocFlags_reserved(address(), value); return this; }
@@ -386,24 +373,24 @@ public class CUmemAllocationProp extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUmemAllocationProp#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("CUmemAllocationType")
         public int type() { return CUmemAllocationProp.ntype(address()); }
-        /** @return the value of the {@link CUmemAllocationProp#requestedHandleTypes} field. */
+        /** @return the value of the {@code requestedHandleTypes} field. */
         @NativeType("CUmemAllocationHandleType")
         public int requestedHandleTypes() { return CUmemAllocationProp.nrequestedHandleTypes(address()); }
-        /** @return a {@link CUmemLocation} view of the {@link CUmemAllocationProp#location} field. */
+        /** @return a {@link CUmemLocation} view of the {@code location} field. */
         public CUmemLocation location() { return CUmemAllocationProp.nlocation(address()); }
-        /** @return the value of the {@link CUmemAllocationProp#win32HandleMetaData} field. */
+        /** @return the value of the {@code win32HandleMetaData} field. */
         @NativeType("void *")
         public long win32HandleMetaData() { return CUmemAllocationProp.nwin32HandleMetaData(address()); }
-        /** @return the value of the {@link CUmemAllocationProp#allocFlags_compressionType} field. */
+        /** @return the value of the {@code allocFlags.compressionType} field. */
         @NativeType("unsigned char")
         public byte allocFlags_compressionType() { return CUmemAllocationProp.nallocFlags_compressionType(address()); }
         /** @return the value of the {@code allocFlags.gpuDirectRDMACapable} field. */
         @NativeType("unsigned char")
         public byte allocFlags_gpuDirectRDMACapable() { return CUmemAllocationProp.nallocFlags_gpuDirectRDMACapable(address()); }
-        /** @return the value of the {@link CUmemAllocationProp#allocFlags_usage} field. */
+        /** @return the value of the {@code allocFlags.usage} field. */
         @NativeType("unsigned short")
         public short allocFlags_usage() { return CUmemAllocationProp.nallocFlags_usage(address()); }
         /** @return a {@link ByteBuffer} view of the {@code allocFlags.reserved} field. */
@@ -413,21 +400,21 @@ public class CUmemAllocationProp extends Struct implements NativeResource {
         @NativeType("unsigned char")
         public byte allocFlags_reserved(int index) { return CUmemAllocationProp.nallocFlags_reserved(address(), index); }
 
-        /** Sets the specified value to the {@link CUmemAllocationProp#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public CUmemAllocationProp.Buffer type(@NativeType("CUmemAllocationType") int value) { CUmemAllocationProp.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link CUmemAllocationProp#requestedHandleTypes} field. */
+        /** Sets the specified value to the {@code requestedHandleTypes} field. */
         public CUmemAllocationProp.Buffer requestedHandleTypes(@NativeType("CUmemAllocationHandleType") int value) { CUmemAllocationProp.nrequestedHandleTypes(address(), value); return this; }
-        /** Copies the specified {@link CUmemLocation} to the {@link CUmemAllocationProp#location} field. */
+        /** Copies the specified {@link CUmemLocation} to the {@code location} field. */
         public CUmemAllocationProp.Buffer location(CUmemLocation value) { CUmemAllocationProp.nlocation(address(), value); return this; }
-        /** Passes the {@link CUmemAllocationProp#location} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code location} field to the specified {@link java.util.function.Consumer Consumer}. */
         public CUmemAllocationProp.Buffer location(java.util.function.Consumer<CUmemLocation> consumer) { consumer.accept(location()); return this; }
-        /** Sets the specified value to the {@link CUmemAllocationProp#win32HandleMetaData} field. */
+        /** Sets the specified value to the {@code win32HandleMetaData} field. */
         public CUmemAllocationProp.Buffer win32HandleMetaData(@NativeType("void *") long value) { CUmemAllocationProp.nwin32HandleMetaData(address(), value); return this; }
-        /** Sets the specified value to the {@link CUmemAllocationProp#allocFlags_compressionType} field. */
+        /** Sets the specified value to the {@code compressionType} field. */
         public CUmemAllocationProp.Buffer allocFlags_compressionType(@NativeType("unsigned char") byte value) { CUmemAllocationProp.nallocFlags_compressionType(address(), value); return this; }
         /** Sets the specified value to the {@code gpuDirectRDMACapable} field. */
         public CUmemAllocationProp.Buffer allocFlags_gpuDirectRDMACapable(@NativeType("unsigned char") byte value) { CUmemAllocationProp.nallocFlags_gpuDirectRDMACapable(address(), value); return this; }
-        /** Sets the specified value to the {@link CUmemAllocationProp#allocFlags_usage} field. */
+        /** Sets the specified value to the {@code usage} field. */
         public CUmemAllocationProp.Buffer allocFlags_usage(@NativeType("unsigned short") short value) { CUmemAllocationProp.nallocFlags_usage(address(), value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code reserved} field. */
         public CUmemAllocationProp.Buffer allocFlags_reserved(@NativeType("unsigned char[4]") ByteBuffer value) { CUmemAllocationProp.nallocFlags_reserved(address(), value); return this; }

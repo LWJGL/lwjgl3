@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Array descriptor.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_ARRAY_DESCRIPTOR {
- *     size_t {@link #Width};
- *     size_t {@link #Height};
- *     CUarray_format {@link #Format};
- *     unsigned int {@link #NumChannels};
+ *     size_t Width;
+ *     size_t Height;
+ *     CUarray_format Format;
+ *     unsigned int NumChannels;
  * }</code></pre>
  */
 public class CUDA_ARRAY_DESCRIPTOR extends Struct implements NativeResource {
@@ -73,26 +71,26 @@ public class CUDA_ARRAY_DESCRIPTOR extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Width of array */
+    /** @return the value of the {@code Width} field. */
     @NativeType("size_t")
     public long Width() { return nWidth(address()); }
-    /** Height of array */
+    /** @return the value of the {@code Height} field. */
     @NativeType("size_t")
     public long Height() { return nHeight(address()); }
-    /** Array format */
+    /** @return the value of the {@code Format} field. */
     @NativeType("CUarray_format")
     public int Format() { return nFormat(address()); }
-    /** Channels per array element */
+    /** @return the value of the {@code NumChannels} field. */
     @NativeType("unsigned int")
     public int NumChannels() { return nNumChannels(address()); }
 
-    /** Sets the specified value to the {@link #Width} field. */
+    /** Sets the specified value to the {@code Width} field. */
     public CUDA_ARRAY_DESCRIPTOR Width(@NativeType("size_t") long value) { nWidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #Height} field. */
+    /** Sets the specified value to the {@code Height} field. */
     public CUDA_ARRAY_DESCRIPTOR Height(@NativeType("size_t") long value) { nHeight(address(), value); return this; }
-    /** Sets the specified value to the {@link #Format} field. */
+    /** Sets the specified value to the {@code Format} field. */
     public CUDA_ARRAY_DESCRIPTOR Format(@NativeType("CUarray_format") int value) { nFormat(address(), value); return this; }
-    /** Sets the specified value to the {@link #NumChannels} field. */
+    /** Sets the specified value to the {@code NumChannels} field. */
     public CUDA_ARRAY_DESCRIPTOR NumChannels(@NativeType("unsigned int") int value) { nNumChannels(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -310,26 +308,26 @@ public class CUDA_ARRAY_DESCRIPTOR extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUDA_ARRAY_DESCRIPTOR#Width} field. */
+        /** @return the value of the {@code Width} field. */
         @NativeType("size_t")
         public long Width() { return CUDA_ARRAY_DESCRIPTOR.nWidth(address()); }
-        /** @return the value of the {@link CUDA_ARRAY_DESCRIPTOR#Height} field. */
+        /** @return the value of the {@code Height} field. */
         @NativeType("size_t")
         public long Height() { return CUDA_ARRAY_DESCRIPTOR.nHeight(address()); }
-        /** @return the value of the {@link CUDA_ARRAY_DESCRIPTOR#Format} field. */
+        /** @return the value of the {@code Format} field. */
         @NativeType("CUarray_format")
         public int Format() { return CUDA_ARRAY_DESCRIPTOR.nFormat(address()); }
-        /** @return the value of the {@link CUDA_ARRAY_DESCRIPTOR#NumChannels} field. */
+        /** @return the value of the {@code NumChannels} field. */
         @NativeType("unsigned int")
         public int NumChannels() { return CUDA_ARRAY_DESCRIPTOR.nNumChannels(address()); }
 
-        /** Sets the specified value to the {@link CUDA_ARRAY_DESCRIPTOR#Width} field. */
+        /** Sets the specified value to the {@code Width} field. */
         public CUDA_ARRAY_DESCRIPTOR.Buffer Width(@NativeType("size_t") long value) { CUDA_ARRAY_DESCRIPTOR.nWidth(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_ARRAY_DESCRIPTOR#Height} field. */
+        /** Sets the specified value to the {@code Height} field. */
         public CUDA_ARRAY_DESCRIPTOR.Buffer Height(@NativeType("size_t") long value) { CUDA_ARRAY_DESCRIPTOR.nHeight(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_ARRAY_DESCRIPTOR#Format} field. */
+        /** Sets the specified value to the {@code Format} field. */
         public CUDA_ARRAY_DESCRIPTOR.Buffer Format(@NativeType("CUarray_format") int value) { CUDA_ARRAY_DESCRIPTOR.nFormat(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_ARRAY_DESCRIPTOR#NumChannels} field. */
+        /** Sets the specified value to the {@code NumChannels} field. */
         public CUDA_ARRAY_DESCRIPTOR.Buffer NumChannels(@NativeType("unsigned int") int value) { CUDA_ARRAY_DESCRIPTOR.nNumChannels(address(), value); return this; }
 
     }

@@ -10,13 +10,9 @@ import org.lwjgl.generator.*
 val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_BINDING) {
     documentation =
         "Contains bindings to <a href=\"https://docs.nvidia.com/cuda/nvrtc/index.html\">NVRTC</a>, a runtime compilation library for CUDA C++."
-    
+
     EnumConstant(
-        """
-        The enumerated type {@code nvrtcResult} defines API call result codes.
-        
-        NVRTC API functions return {@code nvrtcResult} to indicate the call result.
-        """,
+        "{@code nvrtcResult}",
 
         "SUCCESS".enum("", "0"),
         "ERROR_OUT_OF_MEMORY".enum,
@@ -29,207 +25,179 @@ val NVRTC = "NVRTC".nativeClass(Module.CUDA, prefix = "NVRTC", binding = NVRTC_B
         "ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION".enum,
         "ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION".enum,
         "ERROR_NAME_EXPRESSION_NOT_VALID".enum,
-        "ERROR_INTERNAL_ERROR".enum
+        "ERROR_INTERNAL_ERROR".enum,
+        "ERROR_TIME_FILE_WRITE_FAILED".enum
     )
 
     charASCII.const.p(
         "GetErrorString",
-        """
-        A helper function that returns a string describing the given {@code nvrtcResult} code, e.g., #SUCCESS to {@code "NVRTC_SUCCESS"}.
-        
-        For unrecognized enumeration values, it returns {@code "NVRTC_ERROR unknown"}.
-        """,
+        "",
 
-        nvrtcResult("result", "CUDA Runtime Compilation API result code"),
-
-        returnDoc = "message string for the given {@code nvrtcResult} code"
+        nvrtcResult("result", "")
     )
 
     nvrtcResult(
         "Version",
-        "Sets the output parameters {@code major} and {@code minor} with the CUDA Runtime Compilation version number.",
+        "",
 
-        Check(1)..int.p("major", "CUDA Runtime Compilation major version number"),
-        Check(1)..int.p("minor", "CUDA Runtime Compilation minor version number")
+        Check(1)..int.p("major", ""),
+        Check(1)..int.p("minor", "")
     )
 
     IgnoreMissing..nvrtcResult(
         "GetNumSupportedArchs",
-        """
-        Sets the output parameter {@code numArchs} with the number of architectures supported by NVRTC.
-        
-        This can then be used to pass an array to #GetSupportedArchs() to get the supported architectures.
-        """,
+        "",
 
-        Check(1)..int.p("numArchs", "number of supported architectures")
+        Check(1)..int.p("numArchs", "")
     )
 
     IgnoreMissing..nvrtcResult(
         "GetSupportedArchs",
-        """
-        Populates the array passed via the output parameter {@code supportedArchs} with the architectures supported by NVRTC.
-        
-        The array is sorted in the ascending order. The size of the array to be passed can be determined using #GetNumSupportedArchs().
-        """,
+        "",
 
-        Unsafe..int.p("supportedArchs", "sorted array of supported architectures")
+        Unsafe..int.p("supportedArchs", "")
     )
 
     nvrtcResult(
         "CreateProgram",
-        "Creates an instance of {@code nvrtcProgram} with the given input parameters, and sets the output parameter {@code prog} with it.",
+        "",
 
-        Check(1)..nvrtcProgram.p("prog", "CUDA Runtime Compilation program"),
-        charUTF8.const.p("src", "CUDA program source"),
-        nullable..charUTF8.const.p("name", "CUDA program name. {@code name} can be #NULL; {@code \"default_program\"} is used when {@code name} is #NULL or \"\"."),
-        AutoSize("headers", "includeNames")..int("numHeaders", "number of headers used. {@code numHeaders} must be greater than or equal to 0."),
-        nullable..charUTF8.const.p.const.p("headers", "sources of the headers. {@code headers} can be #NULL when {@code numHeaders} is 0."),
-        nullable..char.const.p.const.p(
-            "includeNames",
-            "name of each header by which they can be included in the CUDA program source. {@code includeNames} can be #NULL when {@code numHeaders} is 0."
-        )
+        Check(1)..nvrtcProgram.p("prog", ""),
+        charUTF8.const.p("src", ""),
+        nullable..charUTF8.const.p("name", ""),
+        AutoSize("headers", "includeNames")..int("numHeaders", ""),
+        nullable..charUTF8.const.p.const.p("headers", ""),
+        nullable..char.const.p.const.p("includeNames", "")
     )
 
     nvrtcResult(
         "DestroyProgram",
-        "Destroys the given program.",
+        "",
 
-        Check(1)..nvrtcProgram.p("prog", "CUDA Runtime Compilation program")
+        Check(1)..nvrtcProgram.p("prog", "")
     )
 
     nvrtcResult(
         "CompileProgram",
-        """
-        Compiles the given program.
+        "",
 
-        It supports compile options listed in {@code options}.
-        """,
-
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        AutoSize("options")..int("numOptions", "number of compiler options passed"),
-        nullable..charASCII.const.p.const.p("options", "compiler options in the form of C string array. {@code options} can be #NULL when {@code numOptions} is 0.")
+        nvrtcProgram("prog", ""),
+        AutoSize("options")..int("numOptions", ""),
+        nullable..charASCII.const.p.const.p("options", "")
     )
 
     nvrtcResult(
         "GetPTXSize",
-        "Sets {@code ptxSizeRet} with the size of the PTX generated by the previous compilation of {@code prog} (including the trailing #NULL).",
+        "",
 
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        Check(1)..size_t.p("ptxSizeRet", "size of the generated PTX (including the trailing #NULL)")
+        nvrtcProgram("prog", ""),
+        Check(1)..size_t.p("ptxSizeRet", "")
     )
 
     nvrtcResult(
         "GetPTX",
-        "Stores the PTX generated by the previous compilation of {@code prog} in the memory pointed by {@code ptx}.",
+        "",
 
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        Unsafe..char.p("ptx", "compiled result")
+        nvrtcProgram("prog", ""),
+        Unsafe..char.p("ptx", "")
     )
 
     IgnoreMissing..nvrtcResult(
         "GetCUBINSize",
-        """
-        Sets {@code cubinSizeRet} with the size of the {@code cubin} generated by the previous compilation of {@code prog}.
-        
-        The value of {@code cubinSizeRet} is set to 0 if the value specified to {@code -arch} is a virtual architecture instead of an actual architecture.
-        """,
+        "",
 
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        Check(1)..size_t.p("cubinSizeRet", "size of the generated cubin")
+        nvrtcProgram("prog", ""),
+        Check(1)..size_t.p("cubinSizeRet", "")
     )
 
     IgnoreMissing..nvrtcResult(
         "GetCUBIN",
-        """
-        Stores the {@code cubin} generated by the previous compilation of {@code prog} in the memory pointed by {@code cubin}.
-        
-        No {@code cubin} is available if the value specified to {@code -arch} is a virtual architecture instead of an actual architecture.
-        """,
+        "",
 
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        Unsafe..char.p("cubin", "compiled and assembled result")
+        nvrtcProgram("prog", ""),
+        Unsafe..char.p("cubin", "")
     )
 
     IgnoreMissing..nvrtcResult(
         "GetNVVMSize",
-        """
-        Sets {@code nvvmSizeRet} with the size of the NVVM generated by the previous compilation of {@code prog}.
-        
-        The value of {@code nvvmSizeRet} is set to 0 if the program was not compiled with {@code -dlto}.
-        """,
+        "",
 
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        Check(1)..size_t.p("nvvmSizeRet", "size of the generated NVVM"),
-
-        returnDoc = ""
+        nvrtcProgram("prog", ""),
+        Check(1)..size_t.p("nvvmSizeRet", ""),
     )
 
     IgnoreMissing..nvrtcResult(
         "GetNVVM",
-        """
-        Stores the NVVM generated by the previous compilation of {@code prog} in the memory pointed by {@code nvvm}.
-        
-        The program must have been compiled with {@code -dlto}, otherwise will return an error.
-        """,
+        "",
 
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        Unsafe..char.p("nvvm", "compiled result")
+        nvrtcProgram("prog", ""),
+        Unsafe..char.p("nvvm", "")
+    )
+
+    IgnoreMissing..nvrtcResult(
+        "GetLTOIRSize",
+        "",
+
+        nvrtcProgram("prog", ""),
+        Check(1)..size_t.p("LTOIRSizeRet", "")
+    )
+
+    IgnoreMissing..nvrtcResult(
+        "GetLTOIR",
+        "",
+
+        nvrtcProgram("prog", ""),
+        Unsafe..char.p("LTOIR", "")
+    )
+
+    IgnoreMissing..nvrtcResult(
+        "GetOptiXIRSize",
+        "",
+
+        nvrtcProgram("prog", ""),
+        Check(1)..size_t.p("optixirSizeRet", "")
+    )
+
+    IgnoreMissing..nvrtcResult(
+        "GetOptiXIR",
+        "",
+
+        nvrtcProgram("prog", ""),
+        Unsafe..char.p("optixir", "")
     )
 
     nvrtcResult(
         "GetProgramLogSize",
-        """
-        Sets {@code logSizeRet} with the size of the log generated by the previous compilation of {@code prog} (including the trailing #NULL).
+        "",
 
-        Note that compilation log may be generated with warnings and informative messages, even when the compilation of {@code prog} succeeds.
-        """,
-
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        Check(1)..size_t.p("logSizeRet", "size of the compilation log (including the trailing #NULL)")
+        nvrtcProgram("prog", ""),
+        Check(1)..size_t.p("logSizeRet", "")
     )
 
     nvrtcResult(
         "GetProgramLog",
-        "Stores the log generated by the previous compilation of {@code prog} in the memory pointed by {@code log}.",
+        "",
 
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        Unsafe..char.p("log", "compilation log")
+        nvrtcProgram("prog", ""),
+        Unsafe..char.p("log", "")
     )
 
     nvrtcResult(
         "AddNameExpression",
-        """
-        Notes the given name expression denoting the address of a {@code __global__} function or {@code __device__}/{@code __constant__} variable.
+        "",
 
-        The identical name expression string must be provided on a subsequent call to #GetLoweredName() to extract the lowered name.
-        """,
-
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        charUTF8.const.p.const(
-            "name_expression",
-            "constant expression denoting the address of a {@code __global__} function or {@code __device__}/{@code __constant__} variable"
-        ),
+        nvrtcProgram("prog", ""),
+        charUTF8.const.p.const("name_expression", ""),
 
         returnDoc = ""
     )
 
     nvrtcResult(
         "GetLoweredName",
-        """
-        Extracts the lowered (mangled) name for a {@code __global__} function or {@code __device__}/{@code __constant__} variable, and updates
-        {@code *lowered_name} to point to it.
-        
-        The memory containing the name is released when the NVRTC program is destroyed by #DestroyProgram(). The identical name expression must have been
-        previously provided to #AddNameExpression().
-        """,
+        "",
 
-        nvrtcProgram("prog", "CUDA Runtime Compilation program"),
-        charUTF8.const.p.const(
-            "name_expression",
-            "constant expression denoting the address of a {@code __global__} function or {@code __device__}/{@code __constant__} variable"),
-        Check(1)..charUTF8.const.p.p(
-            "lowered_name",
-            "initialized by the function to point to a C string containing the lowered (mangled) name corresponding to the provided name expression"
-        )
+        nvrtcProgram("prog", ""),
+        charUTF8.const.p.const("name_expression", ""),
+        Check(1)..charUTF8.const.p.p("lowered_name", "")
     )
 }

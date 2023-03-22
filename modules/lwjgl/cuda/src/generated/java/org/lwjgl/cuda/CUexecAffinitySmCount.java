@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Value for {@link CU#CU_EXEC_AFFINITY_TYPE_SM_COUNT EXEC_AFFINITY_TYPE_SM_COUNT}.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUexecAffinitySmCount {
- *     unsigned int {@link #val};
+ *     unsigned int val;
  * }</code></pre>
  */
 public class CUexecAffinitySmCount extends Struct implements NativeResource {
@@ -61,11 +59,11 @@ public class CUexecAffinitySmCount extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the number of SMs the context is limited to use */
+    /** @return the value of the {@code val} field. */
     @NativeType("unsigned int")
     public int val() { return nval(address()); }
 
-    /** Sets the specified value to the {@link #val} field. */
+    /** Sets the specified value to the {@code val} field. */
     public CUexecAffinitySmCount val(@NativeType("unsigned int") int value) { nval(address(), value); return this; }
 
     /**
@@ -237,11 +235,11 @@ public class CUexecAffinitySmCount extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUexecAffinitySmCount#val} field. */
+        /** @return the value of the {@code val} field. */
         @NativeType("unsigned int")
         public int val() { return CUexecAffinitySmCount.nval(address()); }
 
-        /** Sets the specified value to the {@link CUexecAffinitySmCount#val} field. */
+        /** Sets the specified value to the {@code val} field. */
         public CUexecAffinitySmCount.Buffer val(@NativeType("unsigned int") int value) { CUexecAffinitySmCount.nval(address(), value); return this; }
 
     }

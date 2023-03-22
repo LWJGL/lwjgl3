@@ -41,7 +41,6 @@ public class CUWGL {
 
     // --- [ cuWGLGetDevice ] ---
 
-    /** Unsafe version of: {@link #cuWGLGetDevice WGLGetDevice} */
     public static int ncuWGLGetDevice(long pDevice, long hGpu) {
         long __functionAddress = Functions.WGLGetDevice;
         if (CHECKS) {
@@ -50,14 +49,6 @@ public class CUWGL {
         return callPPI(pDevice, hGpu, __functionAddress);
     }
 
-    /**
-     * Gets the CUDA device associated with {@code hGpu}.
-     * 
-     * <p>Returns in {@code *pDevice} the CUDA device associated with a {@code hGpu}, if applicable.</p>
-     *
-     * @param pDevice device associated with hGpu
-     * @param hGpu    handle to a GPU, as queried via {@code WGL_NV_gpu_affinity()}
-     */
     @NativeType("CUresult")
     public static int cuWGLGetDevice(@NativeType("CUdevice *") IntBuffer pDevice, @NativeType("HGPUNV") long hGpu) {
         if (CHECKS) {

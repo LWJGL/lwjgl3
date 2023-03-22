@@ -16,8 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * GPU Direct v3 tokens.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Execution Affinity Parameters.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUexecAffinityParam {
  *     CUexecAffinityType type;
  *     union {
- *         {@link CUexecAffinitySmCount CUexecAffinitySmCount} {@link #param_smCount smCount};
+ *         {@link CUexecAffinitySmCount CUexecAffinitySmCount} smCount;
  *     } param;
  * }</code></pre>
  */
@@ -74,14 +72,14 @@ public class CUexecAffinityParam extends Struct implements NativeResource {
     /** @return the value of the {@code type} field. */
     @NativeType("CUexecAffinityType")
     public int type() { return ntype(address()); }
-    /** value for {@link CU#CU_EXEC_AFFINITY_TYPE_SM_COUNT EXEC_AFFINITY_TYPE_SM_COUNT} */
+    /** @return a {@link CUexecAffinitySmCount} view of the {@code param.smCount} field. */
     public CUexecAffinitySmCount param_smCount() { return nparam_smCount(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public CUexecAffinityParam type(@NativeType("CUexecAffinityType") int value) { ntype(address(), value); return this; }
-    /** Copies the specified {@link CUexecAffinitySmCount} to the {@link #param_smCount} field. */
+    /** Copies the specified {@link CUexecAffinitySmCount} to the {@code smCount} field. */
     public CUexecAffinityParam param_smCount(CUexecAffinitySmCount value) { nparam_smCount(address(), value); return this; }
-    /** Passes the {@link #param_smCount} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code smCount} field to the specified {@link java.util.function.Consumer Consumer}. */
     public CUexecAffinityParam param_smCount(java.util.function.Consumer<CUexecAffinitySmCount> consumer) { consumer.accept(param_smCount()); return this; }
 
     /**
@@ -260,14 +258,14 @@ public class CUexecAffinityParam extends Struct implements NativeResource {
         /** @return the value of the {@code type} field. */
         @NativeType("CUexecAffinityType")
         public int type() { return CUexecAffinityParam.ntype(address()); }
-        /** @return a {@link CUexecAffinitySmCount} view of the {@link CUexecAffinityParam#param_smCount} field. */
+        /** @return a {@link CUexecAffinitySmCount} view of the {@code param.smCount} field. */
         public CUexecAffinitySmCount param_smCount() { return CUexecAffinityParam.nparam_smCount(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public CUexecAffinityParam.Buffer type(@NativeType("CUexecAffinityType") int value) { CUexecAffinityParam.ntype(address(), value); return this; }
-        /** Copies the specified {@link CUexecAffinitySmCount} to the {@link CUexecAffinityParam#param_smCount} field. */
+        /** Copies the specified {@link CUexecAffinitySmCount} to the {@code smCount} field. */
         public CUexecAffinityParam.Buffer param_smCount(CUexecAffinitySmCount value) { CUexecAffinityParam.nparam_smCount(address(), value); return this; }
-        /** Passes the {@link CUexecAffinityParam#param_smCount} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code smCount} field to the specified {@link java.util.function.Consumer Consumer}. */
         public CUexecAffinityParam.Buffer param_smCount(java.util.function.Consumer<CUexecAffinitySmCount> consumer) { consumer.accept(param_smCount()); return this; }
 
     }

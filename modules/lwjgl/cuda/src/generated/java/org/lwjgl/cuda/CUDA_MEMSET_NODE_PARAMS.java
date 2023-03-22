@@ -17,18 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Memset node parameters.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_MEMSET_NODE_PARAMS {
- *     CUdeviceptr {@link #dst};
- *     size_t {@link #pitch};
- *     unsigned int {@link #value};
- *     unsigned int {@link #elementSize};
- *     size_t {@link #width};
- *     size_t {@link #height};
+ *     CUdeviceptr dst;
+ *     size_t pitch;
+ *     unsigned int value;
+ *     unsigned int elementSize;
+ *     size_t width;
+ *     size_t height;
  * }</code></pre>
  */
 public class CUDA_MEMSET_NODE_PARAMS extends Struct implements NativeResource {
@@ -82,36 +80,36 @@ public class CUDA_MEMSET_NODE_PARAMS extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Destination device pointer */
+    /** @return the value of the {@code dst} field. */
     @NativeType("CUdeviceptr")
     public long dst() { return ndst(address()); }
-    /** Pitch of destination device pointer. Unused if height is 1 */
+    /** @return the value of the {@code pitch} field. */
     @NativeType("size_t")
     public long pitch() { return npitch(address()); }
-    /** Value to be set */
+    /** @return the value of the {@code value} field. */
     @NativeType("unsigned int")
     public int value() { return nvalue(address()); }
-    /** Size of each element in bytes. Must be 1, 2, or 4. */
+    /** @return the value of the {@code elementSize} field. */
     @NativeType("unsigned int")
     public int elementSize() { return nelementSize(address()); }
-    /** Width of the row in elements */
+    /** @return the value of the {@code width} field. */
     @NativeType("size_t")
     public long width() { return nwidth(address()); }
-    /** Number of rows */
+    /** @return the value of the {@code height} field. */
     @NativeType("size_t")
     public long height() { return nheight(address()); }
 
-    /** Sets the specified value to the {@link #dst} field. */
+    /** Sets the specified value to the {@code dst} field. */
     public CUDA_MEMSET_NODE_PARAMS dst(@NativeType("CUdeviceptr") long value) { ndst(address(), value); return this; }
-    /** Sets the specified value to the {@link #pitch} field. */
+    /** Sets the specified value to the {@code pitch} field. */
     public CUDA_MEMSET_NODE_PARAMS pitch(@NativeType("size_t") long value) { npitch(address(), value); return this; }
-    /** Sets the specified value to the {@link #value} field. */
+    /** Sets the specified value to the {@code value} field. */
     public CUDA_MEMSET_NODE_PARAMS value(@NativeType("unsigned int") int value) { nvalue(address(), value); return this; }
-    /** Sets the specified value to the {@link #elementSize} field. */
+    /** Sets the specified value to the {@code elementSize} field. */
     public CUDA_MEMSET_NODE_PARAMS elementSize(@NativeType("unsigned int") int value) { nelementSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #width} field. */
+    /** Sets the specified value to the {@code width} field. */
     public CUDA_MEMSET_NODE_PARAMS width(@NativeType("size_t") long value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public CUDA_MEMSET_NODE_PARAMS height(@NativeType("size_t") long value) { nheight(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -350,36 +348,36 @@ public class CUDA_MEMSET_NODE_PARAMS extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUDA_MEMSET_NODE_PARAMS#dst} field. */
+        /** @return the value of the {@code dst} field. */
         @NativeType("CUdeviceptr")
         public long dst() { return CUDA_MEMSET_NODE_PARAMS.ndst(address()); }
-        /** @return the value of the {@link CUDA_MEMSET_NODE_PARAMS#pitch} field. */
+        /** @return the value of the {@code pitch} field. */
         @NativeType("size_t")
         public long pitch() { return CUDA_MEMSET_NODE_PARAMS.npitch(address()); }
-        /** @return the value of the {@link CUDA_MEMSET_NODE_PARAMS#value} field. */
+        /** @return the value of the {@code value} field. */
         @NativeType("unsigned int")
         public int value() { return CUDA_MEMSET_NODE_PARAMS.nvalue(address()); }
-        /** @return the value of the {@link CUDA_MEMSET_NODE_PARAMS#elementSize} field. */
+        /** @return the value of the {@code elementSize} field. */
         @NativeType("unsigned int")
         public int elementSize() { return CUDA_MEMSET_NODE_PARAMS.nelementSize(address()); }
-        /** @return the value of the {@link CUDA_MEMSET_NODE_PARAMS#width} field. */
+        /** @return the value of the {@code width} field. */
         @NativeType("size_t")
         public long width() { return CUDA_MEMSET_NODE_PARAMS.nwidth(address()); }
-        /** @return the value of the {@link CUDA_MEMSET_NODE_PARAMS#height} field. */
+        /** @return the value of the {@code height} field. */
         @NativeType("size_t")
         public long height() { return CUDA_MEMSET_NODE_PARAMS.nheight(address()); }
 
-        /** Sets the specified value to the {@link CUDA_MEMSET_NODE_PARAMS#dst} field. */
+        /** Sets the specified value to the {@code dst} field. */
         public CUDA_MEMSET_NODE_PARAMS.Buffer dst(@NativeType("CUdeviceptr") long value) { CUDA_MEMSET_NODE_PARAMS.ndst(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_MEMSET_NODE_PARAMS#pitch} field. */
+        /** Sets the specified value to the {@code pitch} field. */
         public CUDA_MEMSET_NODE_PARAMS.Buffer pitch(@NativeType("size_t") long value) { CUDA_MEMSET_NODE_PARAMS.npitch(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_MEMSET_NODE_PARAMS#value} field. */
+        /** Sets the specified value to the {@code value} field. */
         public CUDA_MEMSET_NODE_PARAMS.Buffer value(@NativeType("unsigned int") int value) { CUDA_MEMSET_NODE_PARAMS.nvalue(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_MEMSET_NODE_PARAMS#elementSize} field. */
+        /** Sets the specified value to the {@code elementSize} field. */
         public CUDA_MEMSET_NODE_PARAMS.Buffer elementSize(@NativeType("unsigned int") int value) { CUDA_MEMSET_NODE_PARAMS.nelementSize(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_MEMSET_NODE_PARAMS#width} field. */
+        /** Sets the specified value to the {@code width} field. */
         public CUDA_MEMSET_NODE_PARAMS.Buffer width(@NativeType("size_t") long value) { CUDA_MEMSET_NODE_PARAMS.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_MEMSET_NODE_PARAMS#height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public CUDA_MEMSET_NODE_PARAMS.Buffer height(@NativeType("size_t") long value) { CUDA_MEMSET_NODE_PARAMS.nheight(address(), value); return this; }
 
     }

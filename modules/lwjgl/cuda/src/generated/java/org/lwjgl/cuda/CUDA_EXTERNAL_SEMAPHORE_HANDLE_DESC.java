@@ -17,22 +17,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * External semaphore handle descriptor.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC {
- *     CUexternalSemaphoreHandleType {@link #type};
+ *     CUexternalSemaphoreHandleType type;
  *     union {
- *         int {@link #handle_fd fd};
+ *         int fd;
  *         struct {
- *             void * {@link #handle_win32_handle handle};
- *             void const * {@link #handle_win32_name name};
+ *             void * handle;
+ *             void const * name;
  *         } win32;
- *         void const * {@link #handle_nvSciSyncObj nvSciSyncObj};
+ *         void const * nvSciSyncObj;
  *     } handle;
- *     unsigned int {@link #flags};
+ *     unsigned int flags;
  *     unsigned int reserved[16];
  * }</code></pre>
  */
@@ -98,28 +96,21 @@ public class CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC extends Struct implements Nativ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** type of the handle */
+    /** @return the value of the {@code type} field. */
     @NativeType("CUexternalSemaphoreHandleType")
     public int type() { return ntype(address()); }
-    /**
-     * File descriptor referencing the semaphore object. Valid when type is one of the following:
-     * 
-     * <ul>
-     * <li>{@link CU#CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD}</li>
-     * <li>{@link CU#CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_FD EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_FD}</li>
-     * </ul>
-     */
+    /** @return the value of the {@code handle.fd} field. */
     public int handle_fd() { return nhandle_fd(address()); }
-    /** Valid NT handle. Must be NULL if 'name' is non-NULL */
+    /** @return the value of the {@code handle.win32.handle} field. */
     @NativeType("void *")
     public long handle_win32_handle() { return nhandle_win32_handle(address()); }
-    /** Name of a valid synchronization primitive. Must be NULL if 'handle' is non-NULL. */
+    /** @return the value of the {@code handle.win32.name} field. */
     @NativeType("void const *")
     public long handle_win32_name() { return nhandle_win32_name(address()); }
-    /** Valid {@code NvSciSyncObj}. Must be non {@code NULL} */
+    /** @return the value of the {@code handle.nvSciSyncObj} field. */
     @NativeType("void const *")
     public long handle_nvSciSyncObj() { return nhandle_nvSciSyncObj(address()); }
-    /** Flags reserved for the future. Must be zero. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("unsigned int")
     public int flags() { return nflags(address()); }
     /** @return a {@link IntBuffer} view of the {@code reserved} field. */
@@ -129,17 +120,17 @@ public class CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC extends Struct implements Nativ
     @NativeType("unsigned int")
     public int reserved(int index) { return nreserved(address(), index); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC type(@NativeType("CUexternalSemaphoreHandleType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #handle_fd} field. */
+    /** Sets the specified value to the {@code fd} field. */
     public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC handle_fd(int value) { nhandle_fd(address(), value); return this; }
-    /** Sets the specified value to the {@link #handle_win32_handle} field. */
+    /** Sets the specified value to the {@code handle} field. */
     public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC handle_win32_handle(@NativeType("void *") long value) { nhandle_win32_handle(address(), value); return this; }
-    /** Sets the specified value to the {@link #handle_win32_name} field. */
+    /** Sets the specified value to the {@code name} field. */
     public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC handle_win32_name(@NativeType("void const *") long value) { nhandle_win32_name(address(), value); return this; }
-    /** Sets the specified value to the {@link #handle_nvSciSyncObj} field. */
+    /** Sets the specified value to the {@code nvSciSyncObj} field. */
     public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC handle_nvSciSyncObj(@NativeType("void const *") long value) { nhandle_nvSciSyncObj(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC flags(@NativeType("unsigned int") int value) { nflags(address(), value); return this; }
     /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC reserved(@NativeType("unsigned int[16]") IntBuffer value) { nreserved(address(), value); return this; }
@@ -369,21 +360,21 @@ public class CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC extends Struct implements Nativ
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("CUexternalSemaphoreHandleType")
         public int type() { return CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.ntype(address()); }
-        /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#handle_fd} field. */
+        /** @return the value of the {@code handle.fd} field. */
         public int handle_fd() { return CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nhandle_fd(address()); }
-        /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#handle_win32_handle} field. */
+        /** @return the value of the {@code handle.win32.handle} field. */
         @NativeType("void *")
         public long handle_win32_handle() { return CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nhandle_win32_handle(address()); }
-        /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#handle_win32_name} field. */
+        /** @return the value of the {@code handle.win32.name} field. */
         @NativeType("void const *")
         public long handle_win32_name() { return CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nhandle_win32_name(address()); }
-        /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#handle_nvSciSyncObj} field. */
+        /** @return the value of the {@code handle.nvSciSyncObj} field. */
         @NativeType("void const *")
         public long handle_nvSciSyncObj() { return CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nhandle_nvSciSyncObj(address()); }
-        /** @return the value of the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("unsigned int")
         public int flags() { return CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nflags(address()); }
         /** @return a {@link IntBuffer} view of the {@code reserved} field. */
@@ -393,17 +384,17 @@ public class CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC extends Struct implements Nativ
         @NativeType("unsigned int")
         public int reserved(int index) { return CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nreserved(address(), index); }
 
-        /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.Buffer type(@NativeType("CUexternalSemaphoreHandleType") int value) { CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#handle_fd} field. */
+        /** Sets the specified value to the {@code fd} field. */
         public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.Buffer handle_fd(int value) { CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nhandle_fd(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#handle_win32_handle} field. */
+        /** Sets the specified value to the {@code handle} field. */
         public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.Buffer handle_win32_handle(@NativeType("void *") long value) { CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nhandle_win32_handle(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#handle_win32_name} field. */
+        /** Sets the specified value to the {@code name} field. */
         public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.Buffer handle_win32_name(@NativeType("void const *") long value) { CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nhandle_win32_name(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#handle_nvSciSyncObj} field. */
+        /** Sets the specified value to the {@code nvSciSyncObj} field. */
         public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.Buffer handle_nvSciSyncObj(@NativeType("void const *") long value) { CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nhandle_nvSciSyncObj(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.Buffer flags(@NativeType("unsigned int") int value) { CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nflags(address(), value); return this; }
         /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
         public CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.Buffer reserved(@NativeType("unsigned int[16]") IntBuffer value) { CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC.nreserved(address(), value); return this; }

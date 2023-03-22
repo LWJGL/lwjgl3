@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Semaphore wait node parameters
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUDA_EXT_SEM_WAIT_NODE_PARAMS {
- *     CUexternalSemaphore * {@link #extSemArray};
- *     {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS} const * {@link #paramsArray};
- *     unsigned int {@link #numExtSems};
+ *     CUexternalSemaphore * extSemArray;
+ *     {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS} const * paramsArray;
+ *     unsigned int numExtSems;
  * }</code></pre>
  */
 public class CUDA_EXT_SEM_WAIT_NODE_PARAMS extends Struct implements NativeResource {
@@ -70,21 +68,21 @@ public class CUDA_EXT_SEM_WAIT_NODE_PARAMS extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** array of external semaphore handles */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code extSemArray} field. */
     @NativeType("CUexternalSemaphore *")
     public PointerBuffer extSemArray() { return nextSemArray(address()); }
-    /** array of external semaphore wait parameters */
+    /** @return a {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer} view of the struct array pointed to by the {@code paramsArray} field. */
     @NativeType("CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS const *")
     public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer paramsArray() { return nparamsArray(address()); }
-    /** number of handles and parameters supplied in extSemArray and paramsArray */
+    /** @return the value of the {@code numExtSems} field. */
     @NativeType("unsigned int")
     public int numExtSems() { return nnumExtSems(address()); }
 
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #extSemArray} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code extSemArray} field. */
     public CUDA_EXT_SEM_WAIT_NODE_PARAMS extSemArray(@NativeType("CUexternalSemaphore *") PointerBuffer value) { nextSemArray(address(), value); return this; }
-    /** Sets the address of the specified {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer} to the {@link #paramsArray} field. */
+    /** Sets the address of the specified {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer} to the {@code paramsArray} field. */
     public CUDA_EXT_SEM_WAIT_NODE_PARAMS paramsArray(@NativeType("CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS const *") CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer value) { nparamsArray(address(), value); return this; }
-    /** Sets the specified value to the {@link #numExtSems} field. */
+    /** Sets the specified value to the {@code numExtSems} field. */
     public CUDA_EXT_SEM_WAIT_NODE_PARAMS numExtSems(@NativeType("unsigned int") int value) { nnumExtSems(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -287,21 +285,21 @@ public class CUDA_EXT_SEM_WAIT_NODE_PARAMS extends Struct implements NativeResou
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link CUDA_EXT_SEM_WAIT_NODE_PARAMS#extSemArray} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code extSemArray} field. */
         @NativeType("CUexternalSemaphore *")
         public PointerBuffer extSemArray() { return CUDA_EXT_SEM_WAIT_NODE_PARAMS.nextSemArray(address()); }
-        /** @return a {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer} view of the struct array pointed to by the {@link CUDA_EXT_SEM_WAIT_NODE_PARAMS#paramsArray} field. */
+        /** @return a {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer} view of the struct array pointed to by the {@code paramsArray} field. */
         @NativeType("CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS const *")
         public CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer paramsArray() { return CUDA_EXT_SEM_WAIT_NODE_PARAMS.nparamsArray(address()); }
-        /** @return the value of the {@link CUDA_EXT_SEM_WAIT_NODE_PARAMS#numExtSems} field. */
+        /** @return the value of the {@code numExtSems} field. */
         @NativeType("unsigned int")
         public int numExtSems() { return CUDA_EXT_SEM_WAIT_NODE_PARAMS.nnumExtSems(address()); }
 
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link CUDA_EXT_SEM_WAIT_NODE_PARAMS#extSemArray} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code extSemArray} field. */
         public CUDA_EXT_SEM_WAIT_NODE_PARAMS.Buffer extSemArray(@NativeType("CUexternalSemaphore *") PointerBuffer value) { CUDA_EXT_SEM_WAIT_NODE_PARAMS.nextSemArray(address(), value); return this; }
-        /** Sets the address of the specified {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer} to the {@link CUDA_EXT_SEM_WAIT_NODE_PARAMS#paramsArray} field. */
+        /** Sets the address of the specified {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer} to the {@code paramsArray} field. */
         public CUDA_EXT_SEM_WAIT_NODE_PARAMS.Buffer paramsArray(@NativeType("CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS const *") CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS.Buffer value) { CUDA_EXT_SEM_WAIT_NODE_PARAMS.nparamsArray(address(), value); return this; }
-        /** Sets the specified value to the {@link CUDA_EXT_SEM_WAIT_NODE_PARAMS#numExtSems} field. */
+        /** Sets the specified value to the {@code numExtSems} field. */
         public CUDA_EXT_SEM_WAIT_NODE_PARAMS.Buffer numExtSems(@NativeType("unsigned int") int value) { CUDA_EXT_SEM_WAIT_NODE_PARAMS.nnumExtSems(address(), value); return this; }
 
     }

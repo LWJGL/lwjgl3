@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specifies a memory location.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUmemLocation {
- *     CUmemLocationType {@link #type};
- *     int {@link #id};
+ *     CUmemLocationType type;
+ *     int id;
  * }</code></pre>
  */
 public class CUmemLocation extends Struct implements NativeResource {
@@ -65,15 +63,15 @@ public class CUmemLocation extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** specifies the location type, which modifies the meaning of id */
+    /** @return the value of the {@code type} field. */
     @NativeType("CUmemLocationType")
     public int type() { return ntype(address()); }
-    /** identifier for a given this location's {@code CUmemLocationType} */
+    /** @return the value of the {@code id} field. */
     public int id() { return nid(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public CUmemLocation type(@NativeType("CUmemLocationType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #id} field. */
+    /** Sets the specified value to the {@code id} field. */
     public CUmemLocation id(int value) { nid(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -260,15 +258,15 @@ public class CUmemLocation extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUmemLocation#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("CUmemLocationType")
         public int type() { return CUmemLocation.ntype(address()); }
-        /** @return the value of the {@link CUmemLocation#id} field. */
+        /** @return the value of the {@code id} field. */
         public int id() { return CUmemLocation.nid(address()); }
 
-        /** Sets the specified value to the {@link CUmemLocation#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public CUmemLocation.Buffer type(@NativeType("CUmemLocationType") int value) { CUmemLocation.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link CUmemLocation#id} field. */
+        /** Sets the specified value to the {@code id} field. */
         public CUmemLocation.Buffer id(int value) { CUmemLocation.nid(address(), value); return this; }
 
     }

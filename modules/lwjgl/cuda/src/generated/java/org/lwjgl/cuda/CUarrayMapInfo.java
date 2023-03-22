@@ -17,44 +17,42 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specifies the CUDA array or CUDA mipmapped array memory mapping information.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUarrayMapInfo {
- *     CUresourcetype {@link #resourceType};
+ *     CUresourcetype resourceType;
  *     union {
  *         CUmipmappedArray mipmap;
  *         CUarray array;
  *     } resource;
- *     CUarraySparseSubresourceType {@link #subresourceType};
+ *     CUarraySparseSubresourceType subresourceType;
  *     union {
  *         struct {
- *             unsigned int {@link #subresource_sparseLevel_level level};
- *             unsigned int {@link #subresource_sparseLevel_layer layer};
- *             unsigned int {@link #subresource_sparseLevel_offsetX offsetX};
- *             unsigned int {@link #subresource_sparseLevel_offsetY offsetY};
- *             unsigned int {@link #subresource_sparseLevel_offsetZ offsetZ};
- *             unsigned int {@link #subresource_sparseLevel_extentWidth extentWidth};
- *             unsigned int {@link #subresource_sparseLevel_extentHeight extentHeight};
- *             unsigned int {@link #subresource_sparseLevel_extentDepth extentDepth};
+ *             unsigned int level;
+ *             unsigned int layer;
+ *             unsigned int offsetX;
+ *             unsigned int offsetY;
+ *             unsigned int offsetZ;
+ *             unsigned int extentWidth;
+ *             unsigned int extentHeight;
+ *             unsigned int extentDepth;
  *         } sparseLevel;
  *         struct {
- *             unsigned int {@link #subresource_miptail_layer layer};
- *             unsigned long long {@link #subresource_miptail_offset offset};
- *             unsigned long long {@link #subresource_miptail_size size};
+ *             unsigned int layer;
+ *             unsigned long long offset;
+ *             unsigned long long size;
  *         } miptail;
  *     } subresource;
- *     CUmemOperationType {@link #memOperationType};
- *     CUmemHandleType {@link #memHandleType};
+ *     CUmemOperationType memOperationType;
+ *     CUmemHandleType memHandleType;
  *     union {
  *         CUmemGenericAllocationHandle memHandle;
  *     } memHandle;
- *     unsigned long long {@link #offset};
- *     unsigned int {@link #deviceBitMask};
- *     unsigned int {@link #flags};
- *     unsigned int {@link #reserved}[2];
+ *     unsigned long long offset;
+ *     unsigned int deviceBitMask;
+ *     unsigned int flags;
+ *     unsigned int reserved[2];
  * }</code></pre>
  */
 public class CUarrayMapInfo extends Struct implements NativeResource {
@@ -176,7 +174,7 @@ public class CUarrayMapInfo extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** resource type */
+    /** @return the value of the {@code resourceType} field. */
     @NativeType("CUresourcetype")
     public int resourceType() { return nresourceType(address()); }
     /** @return the value of the {@code resource.mipmap} field. */
@@ -185,112 +183,112 @@ public class CUarrayMapInfo extends Struct implements NativeResource {
     /** @return the value of the {@code resource.array} field. */
     @NativeType("CUarray")
     public long resource_array() { return nresource_array(address()); }
-    /** sparse subresource type */
+    /** @return the value of the {@code subresourceType} field. */
     @NativeType("CUarraySparseSubresourceType")
     public int subresourceType() { return nsubresourceType(address()); }
-    /** for CUDA mipmapped arrays must a valid mipmap level. For CUDA arrays must be zero */
+    /** @return the value of the {@code subresource.sparseLevel.level} field. */
     @NativeType("unsigned int")
     public int subresource_sparseLevel_level() { return nsubresource_sparseLevel_level(address()); }
-    /** for CUDA layered arrays must be a valid layer index. Otherwise, must be zero */
+    /** @return the value of the {@code subresource.sparseLevel.layer} field. */
     @NativeType("unsigned int")
     public int subresource_sparseLevel_layer() { return nsubresource_sparseLevel_layer(address()); }
-    /** starting X offset in elements */
+    /** @return the value of the {@code subresource.sparseLevel.offsetX} field. */
     @NativeType("unsigned int")
     public int subresource_sparseLevel_offsetX() { return nsubresource_sparseLevel_offsetX(address()); }
-    /** starting Y offset in elements */
+    /** @return the value of the {@code subresource.sparseLevel.offsetY} field. */
     @NativeType("unsigned int")
     public int subresource_sparseLevel_offsetY() { return nsubresource_sparseLevel_offsetY(address()); }
-    /** starting Z offset in elements */
+    /** @return the value of the {@code subresource.sparseLevel.offsetZ} field. */
     @NativeType("unsigned int")
     public int subresource_sparseLevel_offsetZ() { return nsubresource_sparseLevel_offsetZ(address()); }
-    /** width in elements */
+    /** @return the value of the {@code subresource.sparseLevel.extentWidth} field. */
     @NativeType("unsigned int")
     public int subresource_sparseLevel_extentWidth() { return nsubresource_sparseLevel_extentWidth(address()); }
-    /** height in elements */
+    /** @return the value of the {@code subresource.sparseLevel.extentHeight} field. */
     @NativeType("unsigned int")
     public int subresource_sparseLevel_extentHeight() { return nsubresource_sparseLevel_extentHeight(address()); }
-    /** depth in elements */
+    /** @return the value of the {@code subresource.sparseLevel.extentDepth} field. */
     @NativeType("unsigned int")
     public int subresource_sparseLevel_extentDepth() { return nsubresource_sparseLevel_extentDepth(address()); }
-    /** for CUDA layered arrays must be a valid layer index. Otherwise, must be zero */
+    /** @return the value of the {@code subresource.miptail.layer} field. */
     @NativeType("unsigned int")
     public int subresource_miptail_layer() { return nsubresource_miptail_layer(address()); }
-    /** offset within mip tail */
+    /** @return the value of the {@code subresource.miptail.offset} field. */
     @NativeType("unsigned long long")
     public long subresource_miptail_offset() { return nsubresource_miptail_offset(address()); }
-    /** extent in bytes */
+    /** @return the value of the {@code subresource.miptail.size} field. */
     @NativeType("unsigned long long")
     public long subresource_miptail_size() { return nsubresource_miptail_size(address()); }
-    /** memory operation type */
+    /** @return the value of the {@code memOperationType} field. */
     @NativeType("CUmemOperationType")
     public int memOperationType() { return nmemOperationType(address()); }
-    /** memory handle type */
+    /** @return the value of the {@code memHandleType} field. */
     @NativeType("CUmemHandleType")
     public int memHandleType() { return nmemHandleType(address()); }
     /** @return the value of the {@code memHandle.memHandle} field. */
     @NativeType("CUmemGenericAllocationHandle")
     public long memHandle_memHandle() { return nmemHandle_memHandle(address()); }
-    /** offset within the memory */
+    /** @return the value of the {@code offset} field. */
     @NativeType("unsigned long long")
     public long offset() { return noffset(address()); }
-    /** device ordinal bit mask */
+    /** @return the value of the {@code deviceBitMask} field. */
     @NativeType("unsigned int")
     public int deviceBitMask() { return ndeviceBitMask(address()); }
-    /** flags for future use, must be zero now */
+    /** @return the value of the {@code flags} field. */
     @NativeType("unsigned int")
     public int flags() { return nflags(address()); }
-    /** reserved for future use, must be zero now */
+    /** @return a {@link IntBuffer} view of the {@code reserved} field. */
     @NativeType("unsigned int[2]")
     public IntBuffer reserved() { return nreserved(address()); }
-    /** reserved for future use, must be zero now */
+    /** @return the value at the specified index of the {@code reserved} field. */
     @NativeType("unsigned int")
     public int reserved(int index) { return nreserved(address(), index); }
 
-    /** Sets the specified value to the {@link #resourceType} field. */
+    /** Sets the specified value to the {@code resourceType} field. */
     public CUarrayMapInfo resourceType(@NativeType("CUresourcetype") int value) { nresourceType(address(), value); return this; }
     /** Sets the specified value to the {@code mipmap} field. */
     public CUarrayMapInfo resource_mipmap(@NativeType("CUmipmappedArray") long value) { nresource_mipmap(address(), value); return this; }
     /** Sets the specified value to the {@code array} field. */
     public CUarrayMapInfo resource_array(@NativeType("CUarray") long value) { nresource_array(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresourceType} field. */
+    /** Sets the specified value to the {@code subresourceType} field. */
     public CUarrayMapInfo subresourceType(@NativeType("CUarraySparseSubresourceType") int value) { nsubresourceType(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_sparseLevel_level} field. */
+    /** Sets the specified value to the {@code level} field. */
     public CUarrayMapInfo subresource_sparseLevel_level(@NativeType("unsigned int") int value) { nsubresource_sparseLevel_level(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_sparseLevel_layer} field. */
+    /** Sets the specified value to the {@code layer} field. */
     public CUarrayMapInfo subresource_sparseLevel_layer(@NativeType("unsigned int") int value) { nsubresource_sparseLevel_layer(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_sparseLevel_offsetX} field. */
+    /** Sets the specified value to the {@code offsetX} field. */
     public CUarrayMapInfo subresource_sparseLevel_offsetX(@NativeType("unsigned int") int value) { nsubresource_sparseLevel_offsetX(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_sparseLevel_offsetY} field. */
+    /** Sets the specified value to the {@code offsetY} field. */
     public CUarrayMapInfo subresource_sparseLevel_offsetY(@NativeType("unsigned int") int value) { nsubresource_sparseLevel_offsetY(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_sparseLevel_offsetZ} field. */
+    /** Sets the specified value to the {@code offsetZ} field. */
     public CUarrayMapInfo subresource_sparseLevel_offsetZ(@NativeType("unsigned int") int value) { nsubresource_sparseLevel_offsetZ(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_sparseLevel_extentWidth} field. */
+    /** Sets the specified value to the {@code extentWidth} field. */
     public CUarrayMapInfo subresource_sparseLevel_extentWidth(@NativeType("unsigned int") int value) { nsubresource_sparseLevel_extentWidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_sparseLevel_extentHeight} field. */
+    /** Sets the specified value to the {@code extentHeight} field. */
     public CUarrayMapInfo subresource_sparseLevel_extentHeight(@NativeType("unsigned int") int value) { nsubresource_sparseLevel_extentHeight(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_sparseLevel_extentDepth} field. */
+    /** Sets the specified value to the {@code extentDepth} field. */
     public CUarrayMapInfo subresource_sparseLevel_extentDepth(@NativeType("unsigned int") int value) { nsubresource_sparseLevel_extentDepth(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_miptail_layer} field. */
+    /** Sets the specified value to the {@code layer} field. */
     public CUarrayMapInfo subresource_miptail_layer(@NativeType("unsigned int") int value) { nsubresource_miptail_layer(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_miptail_offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public CUarrayMapInfo subresource_miptail_offset(@NativeType("unsigned long long") long value) { nsubresource_miptail_offset(address(), value); return this; }
-    /** Sets the specified value to the {@link #subresource_miptail_size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public CUarrayMapInfo subresource_miptail_size(@NativeType("unsigned long long") long value) { nsubresource_miptail_size(address(), value); return this; }
-    /** Sets the specified value to the {@link #memOperationType} field. */
+    /** Sets the specified value to the {@code memOperationType} field. */
     public CUarrayMapInfo memOperationType(@NativeType("CUmemOperationType") int value) { nmemOperationType(address(), value); return this; }
-    /** Sets the specified value to the {@link #memHandleType} field. */
+    /** Sets the specified value to the {@code memHandleType} field. */
     public CUarrayMapInfo memHandleType(@NativeType("CUmemHandleType") int value) { nmemHandleType(address(), value); return this; }
     /** Sets the specified value to the {@code memHandle} field. */
     public CUarrayMapInfo memHandle_memHandle(@NativeType("CUmemGenericAllocationHandle") long value) { nmemHandle_memHandle(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public CUarrayMapInfo offset(@NativeType("unsigned long long") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceBitMask} field. */
+    /** Sets the specified value to the {@code deviceBitMask} field. */
     public CUarrayMapInfo deviceBitMask(@NativeType("unsigned int") int value) { ndeviceBitMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public CUarrayMapInfo flags(@NativeType("unsigned int") int value) { nflags(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@link #reserved} field. */
+    /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
     public CUarrayMapInfo reserved(@NativeType("unsigned int[2]") IntBuffer value) { nreserved(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #reserved} field. */
+    /** Sets the specified value at the specified index of the {@code reserved} field. */
     public CUarrayMapInfo reserved(int index, @NativeType("unsigned int") int value) { nreserved(address(), index, value); return this; }
 
     /**
@@ -557,7 +555,7 @@ public class CUarrayMapInfo extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUarrayMapInfo#resourceType} field. */
+        /** @return the value of the {@code resourceType} field. */
         @NativeType("CUresourcetype")
         public int resourceType() { return CUarrayMapInfo.nresourceType(address()); }
         /** @return the value of the {@code resource.mipmap} field. */
@@ -566,112 +564,112 @@ public class CUarrayMapInfo extends Struct implements NativeResource {
         /** @return the value of the {@code resource.array} field. */
         @NativeType("CUarray")
         public long resource_array() { return CUarrayMapInfo.nresource_array(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresourceType} field. */
+        /** @return the value of the {@code subresourceType} field. */
         @NativeType("CUarraySparseSubresourceType")
         public int subresourceType() { return CUarrayMapInfo.nsubresourceType(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_sparseLevel_level} field. */
+        /** @return the value of the {@code subresource.sparseLevel.level} field. */
         @NativeType("unsigned int")
         public int subresource_sparseLevel_level() { return CUarrayMapInfo.nsubresource_sparseLevel_level(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_sparseLevel_layer} field. */
+        /** @return the value of the {@code subresource.sparseLevel.layer} field. */
         @NativeType("unsigned int")
         public int subresource_sparseLevel_layer() { return CUarrayMapInfo.nsubresource_sparseLevel_layer(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_sparseLevel_offsetX} field. */
+        /** @return the value of the {@code subresource.sparseLevel.offsetX} field. */
         @NativeType("unsigned int")
         public int subresource_sparseLevel_offsetX() { return CUarrayMapInfo.nsubresource_sparseLevel_offsetX(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_sparseLevel_offsetY} field. */
+        /** @return the value of the {@code subresource.sparseLevel.offsetY} field. */
         @NativeType("unsigned int")
         public int subresource_sparseLevel_offsetY() { return CUarrayMapInfo.nsubresource_sparseLevel_offsetY(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_sparseLevel_offsetZ} field. */
+        /** @return the value of the {@code subresource.sparseLevel.offsetZ} field. */
         @NativeType("unsigned int")
         public int subresource_sparseLevel_offsetZ() { return CUarrayMapInfo.nsubresource_sparseLevel_offsetZ(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_sparseLevel_extentWidth} field. */
+        /** @return the value of the {@code subresource.sparseLevel.extentWidth} field. */
         @NativeType("unsigned int")
         public int subresource_sparseLevel_extentWidth() { return CUarrayMapInfo.nsubresource_sparseLevel_extentWidth(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_sparseLevel_extentHeight} field. */
+        /** @return the value of the {@code subresource.sparseLevel.extentHeight} field. */
         @NativeType("unsigned int")
         public int subresource_sparseLevel_extentHeight() { return CUarrayMapInfo.nsubresource_sparseLevel_extentHeight(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_sparseLevel_extentDepth} field. */
+        /** @return the value of the {@code subresource.sparseLevel.extentDepth} field. */
         @NativeType("unsigned int")
         public int subresource_sparseLevel_extentDepth() { return CUarrayMapInfo.nsubresource_sparseLevel_extentDepth(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_miptail_layer} field. */
+        /** @return the value of the {@code subresource.miptail.layer} field. */
         @NativeType("unsigned int")
         public int subresource_miptail_layer() { return CUarrayMapInfo.nsubresource_miptail_layer(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_miptail_offset} field. */
+        /** @return the value of the {@code subresource.miptail.offset} field. */
         @NativeType("unsigned long long")
         public long subresource_miptail_offset() { return CUarrayMapInfo.nsubresource_miptail_offset(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#subresource_miptail_size} field. */
+        /** @return the value of the {@code subresource.miptail.size} field. */
         @NativeType("unsigned long long")
         public long subresource_miptail_size() { return CUarrayMapInfo.nsubresource_miptail_size(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#memOperationType} field. */
+        /** @return the value of the {@code memOperationType} field. */
         @NativeType("CUmemOperationType")
         public int memOperationType() { return CUarrayMapInfo.nmemOperationType(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#memHandleType} field. */
+        /** @return the value of the {@code memHandleType} field. */
         @NativeType("CUmemHandleType")
         public int memHandleType() { return CUarrayMapInfo.nmemHandleType(address()); }
         /** @return the value of the {@code memHandle.memHandle} field. */
         @NativeType("CUmemGenericAllocationHandle")
         public long memHandle_memHandle() { return CUarrayMapInfo.nmemHandle_memHandle(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("unsigned long long")
         public long offset() { return CUarrayMapInfo.noffset(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#deviceBitMask} field. */
+        /** @return the value of the {@code deviceBitMask} field. */
         @NativeType("unsigned int")
         public int deviceBitMask() { return CUarrayMapInfo.ndeviceBitMask(address()); }
-        /** @return the value of the {@link CUarrayMapInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("unsigned int")
         public int flags() { return CUarrayMapInfo.nflags(address()); }
-        /** @return a {@link IntBuffer} view of the {@link CUarrayMapInfo#reserved} field. */
+        /** @return a {@link IntBuffer} view of the {@code reserved} field. */
         @NativeType("unsigned int[2]")
         public IntBuffer reserved() { return CUarrayMapInfo.nreserved(address()); }
-        /** @return the value at the specified index of the {@link CUarrayMapInfo#reserved} field. */
+        /** @return the value at the specified index of the {@code reserved} field. */
         @NativeType("unsigned int")
         public int reserved(int index) { return CUarrayMapInfo.nreserved(address(), index); }
 
-        /** Sets the specified value to the {@link CUarrayMapInfo#resourceType} field. */
+        /** Sets the specified value to the {@code resourceType} field. */
         public CUarrayMapInfo.Buffer resourceType(@NativeType("CUresourcetype") int value) { CUarrayMapInfo.nresourceType(address(), value); return this; }
         /** Sets the specified value to the {@code mipmap} field. */
         public CUarrayMapInfo.Buffer resource_mipmap(@NativeType("CUmipmappedArray") long value) { CUarrayMapInfo.nresource_mipmap(address(), value); return this; }
         /** Sets the specified value to the {@code array} field. */
         public CUarrayMapInfo.Buffer resource_array(@NativeType("CUarray") long value) { CUarrayMapInfo.nresource_array(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresourceType} field. */
+        /** Sets the specified value to the {@code subresourceType} field. */
         public CUarrayMapInfo.Buffer subresourceType(@NativeType("CUarraySparseSubresourceType") int value) { CUarrayMapInfo.nsubresourceType(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_sparseLevel_level} field. */
+        /** Sets the specified value to the {@code level} field. */
         public CUarrayMapInfo.Buffer subresource_sparseLevel_level(@NativeType("unsigned int") int value) { CUarrayMapInfo.nsubresource_sparseLevel_level(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_sparseLevel_layer} field. */
+        /** Sets the specified value to the {@code layer} field. */
         public CUarrayMapInfo.Buffer subresource_sparseLevel_layer(@NativeType("unsigned int") int value) { CUarrayMapInfo.nsubresource_sparseLevel_layer(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_sparseLevel_offsetX} field. */
+        /** Sets the specified value to the {@code offsetX} field. */
         public CUarrayMapInfo.Buffer subresource_sparseLevel_offsetX(@NativeType("unsigned int") int value) { CUarrayMapInfo.nsubresource_sparseLevel_offsetX(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_sparseLevel_offsetY} field. */
+        /** Sets the specified value to the {@code offsetY} field. */
         public CUarrayMapInfo.Buffer subresource_sparseLevel_offsetY(@NativeType("unsigned int") int value) { CUarrayMapInfo.nsubresource_sparseLevel_offsetY(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_sparseLevel_offsetZ} field. */
+        /** Sets the specified value to the {@code offsetZ} field. */
         public CUarrayMapInfo.Buffer subresource_sparseLevel_offsetZ(@NativeType("unsigned int") int value) { CUarrayMapInfo.nsubresource_sparseLevel_offsetZ(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_sparseLevel_extentWidth} field. */
+        /** Sets the specified value to the {@code extentWidth} field. */
         public CUarrayMapInfo.Buffer subresource_sparseLevel_extentWidth(@NativeType("unsigned int") int value) { CUarrayMapInfo.nsubresource_sparseLevel_extentWidth(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_sparseLevel_extentHeight} field. */
+        /** Sets the specified value to the {@code extentHeight} field. */
         public CUarrayMapInfo.Buffer subresource_sparseLevel_extentHeight(@NativeType("unsigned int") int value) { CUarrayMapInfo.nsubresource_sparseLevel_extentHeight(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_sparseLevel_extentDepth} field. */
+        /** Sets the specified value to the {@code extentDepth} field. */
         public CUarrayMapInfo.Buffer subresource_sparseLevel_extentDepth(@NativeType("unsigned int") int value) { CUarrayMapInfo.nsubresource_sparseLevel_extentDepth(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_miptail_layer} field. */
+        /** Sets the specified value to the {@code layer} field. */
         public CUarrayMapInfo.Buffer subresource_miptail_layer(@NativeType("unsigned int") int value) { CUarrayMapInfo.nsubresource_miptail_layer(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_miptail_offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public CUarrayMapInfo.Buffer subresource_miptail_offset(@NativeType("unsigned long long") long value) { CUarrayMapInfo.nsubresource_miptail_offset(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#subresource_miptail_size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public CUarrayMapInfo.Buffer subresource_miptail_size(@NativeType("unsigned long long") long value) { CUarrayMapInfo.nsubresource_miptail_size(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#memOperationType} field. */
+        /** Sets the specified value to the {@code memOperationType} field. */
         public CUarrayMapInfo.Buffer memOperationType(@NativeType("CUmemOperationType") int value) { CUarrayMapInfo.nmemOperationType(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#memHandleType} field. */
+        /** Sets the specified value to the {@code memHandleType} field. */
         public CUarrayMapInfo.Buffer memHandleType(@NativeType("CUmemHandleType") int value) { CUarrayMapInfo.nmemHandleType(address(), value); return this; }
         /** Sets the specified value to the {@code memHandle} field. */
         public CUarrayMapInfo.Buffer memHandle_memHandle(@NativeType("CUmemGenericAllocationHandle") long value) { CUarrayMapInfo.nmemHandle_memHandle(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public CUarrayMapInfo.Buffer offset(@NativeType("unsigned long long") long value) { CUarrayMapInfo.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#deviceBitMask} field. */
+        /** Sets the specified value to the {@code deviceBitMask} field. */
         public CUarrayMapInfo.Buffer deviceBitMask(@NativeType("unsigned int") int value) { CUarrayMapInfo.ndeviceBitMask(address(), value); return this; }
-        /** Sets the specified value to the {@link CUarrayMapInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public CUarrayMapInfo.Buffer flags(@NativeType("unsigned int") int value) { CUarrayMapInfo.nflags(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@link CUarrayMapInfo#reserved} field. */
+        /** Copies the specified {@link IntBuffer} to the {@code reserved} field. */
         public CUarrayMapInfo.Buffer reserved(@NativeType("unsigned int[2]") IntBuffer value) { CUarrayMapInfo.nreserved(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link CUarrayMapInfo#reserved} field. */
+        /** Sets the specified value at the specified index of the {@code reserved} field. */
         public CUarrayMapInfo.Buffer reserved(int index, @NativeType("unsigned int") int value) { CUarrayMapInfo.nreserved(address(), index, value); return this; }
 
     }

@@ -17,8 +17,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Opaque data for exporting a pool allocation.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>

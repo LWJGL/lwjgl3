@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Stream attributes union, used with {@link CU#cuStreamSetAttribute StreamSetAttribute}/{@link CU#cuStreamGetAttribute StreamGetAttribute}.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * union CUstreamAttrValue {
- *     {@link CUaccessPolicyWindow CUaccessPolicyWindow} {@link #accessPolicyWindow};
- *     CUsynchronizationPolicy {@link #syncPolicy};
+ *     {@link CUaccessPolicyWindow CUaccessPolicyWindow} accessPolicyWindow;
+ *     CUsynchronizationPolicy syncPolicy;
  * }</code></pre>
  */
 public class CUstreamAttrValue extends Struct implements NativeResource {
@@ -65,17 +63,17 @@ public class CUstreamAttrValue extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** attribute {@link CUaccessPolicyWindow} */
+    /** @return a {@link CUaccessPolicyWindow} view of the {@code accessPolicyWindow} field. */
     public CUaccessPolicyWindow accessPolicyWindow() { return naccessPolicyWindow(address()); }
-    /** value for {@link CU#CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY} */
+    /** @return the value of the {@code syncPolicy} field. */
     @NativeType("CUsynchronizationPolicy")
     public int syncPolicy() { return nsyncPolicy(address()); }
 
-    /** Copies the specified {@link CUaccessPolicyWindow} to the {@link #accessPolicyWindow} field. */
+    /** Copies the specified {@link CUaccessPolicyWindow} to the {@code accessPolicyWindow} field. */
     public CUstreamAttrValue accessPolicyWindow(CUaccessPolicyWindow value) { naccessPolicyWindow(address(), value); return this; }
-    /** Passes the {@link #accessPolicyWindow} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code accessPolicyWindow} field to the specified {@link java.util.function.Consumer Consumer}. */
     public CUstreamAttrValue accessPolicyWindow(java.util.function.Consumer<CUaccessPolicyWindow> consumer) { consumer.accept(accessPolicyWindow()); return this; }
-    /** Sets the specified value to the {@link #syncPolicy} field. */
+    /** Sets the specified value to the {@code syncPolicy} field. */
     public CUstreamAttrValue syncPolicy(@NativeType("CUsynchronizationPolicy") int value) { nsyncPolicy(address(), value); return this; }
 
     /**
@@ -251,17 +249,17 @@ public class CUstreamAttrValue extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link CUaccessPolicyWindow} view of the {@link CUstreamAttrValue#accessPolicyWindow} field. */
+        /** @return a {@link CUaccessPolicyWindow} view of the {@code accessPolicyWindow} field. */
         public CUaccessPolicyWindow accessPolicyWindow() { return CUstreamAttrValue.naccessPolicyWindow(address()); }
-        /** @return the value of the {@link CUstreamAttrValue#syncPolicy} field. */
+        /** @return the value of the {@code syncPolicy} field. */
         @NativeType("CUsynchronizationPolicy")
         public int syncPolicy() { return CUstreamAttrValue.nsyncPolicy(address()); }
 
-        /** Copies the specified {@link CUaccessPolicyWindow} to the {@link CUstreamAttrValue#accessPolicyWindow} field. */
+        /** Copies the specified {@link CUaccessPolicyWindow} to the {@code accessPolicyWindow} field. */
         public CUstreamAttrValue.Buffer accessPolicyWindow(CUaccessPolicyWindow value) { CUstreamAttrValue.naccessPolicyWindow(address(), value); return this; }
-        /** Passes the {@link CUstreamAttrValue#accessPolicyWindow} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code accessPolicyWindow} field to the specified {@link java.util.function.Consumer Consumer}. */
         public CUstreamAttrValue.Buffer accessPolicyWindow(java.util.function.Consumer<CUaccessPolicyWindow> consumer) { consumer.accept(accessPolicyWindow()); return this; }
-        /** Sets the specified value to the {@link CUstreamAttrValue#syncPolicy} field. */
+        /** Sets the specified value to the {@code syncPolicy} field. */
         public CUstreamAttrValue.Buffer syncPolicy(@NativeType("CUsynchronizationPolicy") int value) { CUstreamAttrValue.nsyncPolicy(address(), value); return this; }
 
     }

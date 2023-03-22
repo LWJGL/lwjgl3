@@ -17,22 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specifies an access policy for a window, a contiguous extent of memory beginning at {@code base_ptr} and ending at {@code base_ptr + num_bytes}.
- * 
- * <p>{@code num_bytes} is limited by {@link CU#CU_DEVICE_ATTRIBUTE_MAX_ACCESS_POLICY_WINDOW_SIZE DEVICE_ATTRIBUTE_MAX_ACCESS_POLICY_WINDOW_SIZE}. Partition into many segments and assign segments such that: sum of
- * "hit segments" / window == approx. ratio. sum of "miss segments" / window == approx 1-ratio. Segments and ratio specifications are fitted to the
- * capabilities of the architecture. Accesses in a hit segment apply the hitProp access policy. Accesses in a miss segment apply the missProp access
- * policy.</p>
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUaccessPolicyWindow {
- *     void * {@link #base_ptr};
- *     size_t {@link #num_bytes};
- *     float {@link #hitRatio};
- *     CUaccessProperty {@link #hitProp};
- *     CUaccessProperty {@link #missProp};
+ *     void * base_ptr;
+ *     size_t num_bytes;
+ *     float hitRatio;
+ *     CUaccessProperty hitProp;
+ *     CUaccessProperty missProp;
  * }</code></pre>
  */
 public class CUaccessPolicyWindow extends Struct implements NativeResource {
@@ -83,30 +76,30 @@ public class CUaccessPolicyWindow extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** starting address of the access policy window. CUDA driver may align it. */
+    /** @return the value of the {@code base_ptr} field. */
     @NativeType("void *")
     public long base_ptr() { return nbase_ptr(address()); }
-    /** size in bytes of the window policy. CUDA driver may restrict the maximum size and alignment. */
+    /** @return the value of the {@code num_bytes} field. */
     @NativeType("size_t")
     public long num_bytes() { return nnum_bytes(address()); }
-    /** specifies percentage of lines assigned {@code hitProp}, rest are assigned {@code missProp} */
+    /** @return the value of the {@code hitRatio} field. */
     public float hitRatio() { return nhitRatio(address()); }
-    /** {@code CUaccessProperty} set for hit */
+    /** @return the value of the {@code hitProp} field. */
     @NativeType("CUaccessProperty")
     public int hitProp() { return nhitProp(address()); }
-    /** {@code CUaccessProperty} set for miss. Must be either {@link CU#CU_ACCESS_PROPERTY_NORMAL ACCESS_PROPERTY_NORMAL} or {@link CU#CU_ACCESS_PROPERTY_STREAMING ACCESS_PROPERTY_STREAMING} */
+    /** @return the value of the {@code missProp} field. */
     @NativeType("CUaccessProperty")
     public int missProp() { return nmissProp(address()); }
 
-    /** Sets the specified value to the {@link #base_ptr} field. */
+    /** Sets the specified value to the {@code base_ptr} field. */
     public CUaccessPolicyWindow base_ptr(@NativeType("void *") long value) { nbase_ptr(address(), value); return this; }
-    /** Sets the specified value to the {@link #num_bytes} field. */
+    /** Sets the specified value to the {@code num_bytes} field. */
     public CUaccessPolicyWindow num_bytes(@NativeType("size_t") long value) { nnum_bytes(address(), value); return this; }
-    /** Sets the specified value to the {@link #hitRatio} field. */
+    /** Sets the specified value to the {@code hitRatio} field. */
     public CUaccessPolicyWindow hitRatio(float value) { nhitRatio(address(), value); return this; }
-    /** Sets the specified value to the {@link #hitProp} field. */
+    /** Sets the specified value to the {@code hitProp} field. */
     public CUaccessPolicyWindow hitProp(@NativeType("CUaccessProperty") int value) { nhitProp(address(), value); return this; }
-    /** Sets the specified value to the {@link #missProp} field. */
+    /** Sets the specified value to the {@code missProp} field. */
     public CUaccessPolicyWindow missProp(@NativeType("CUaccessProperty") int value) { nmissProp(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,30 +313,30 @@ public class CUaccessPolicyWindow extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUaccessPolicyWindow#base_ptr} field. */
+        /** @return the value of the {@code base_ptr} field. */
         @NativeType("void *")
         public long base_ptr() { return CUaccessPolicyWindow.nbase_ptr(address()); }
-        /** @return the value of the {@link CUaccessPolicyWindow#num_bytes} field. */
+        /** @return the value of the {@code num_bytes} field. */
         @NativeType("size_t")
         public long num_bytes() { return CUaccessPolicyWindow.nnum_bytes(address()); }
-        /** @return the value of the {@link CUaccessPolicyWindow#hitRatio} field. */
+        /** @return the value of the {@code hitRatio} field. */
         public float hitRatio() { return CUaccessPolicyWindow.nhitRatio(address()); }
-        /** @return the value of the {@link CUaccessPolicyWindow#hitProp} field. */
+        /** @return the value of the {@code hitProp} field. */
         @NativeType("CUaccessProperty")
         public int hitProp() { return CUaccessPolicyWindow.nhitProp(address()); }
-        /** @return the value of the {@link CUaccessPolicyWindow#missProp} field. */
+        /** @return the value of the {@code missProp} field. */
         @NativeType("CUaccessProperty")
         public int missProp() { return CUaccessPolicyWindow.nmissProp(address()); }
 
-        /** Sets the specified value to the {@link CUaccessPolicyWindow#base_ptr} field. */
+        /** Sets the specified value to the {@code base_ptr} field. */
         public CUaccessPolicyWindow.Buffer base_ptr(@NativeType("void *") long value) { CUaccessPolicyWindow.nbase_ptr(address(), value); return this; }
-        /** Sets the specified value to the {@link CUaccessPolicyWindow#num_bytes} field. */
+        /** Sets the specified value to the {@code num_bytes} field. */
         public CUaccessPolicyWindow.Buffer num_bytes(@NativeType("size_t") long value) { CUaccessPolicyWindow.nnum_bytes(address(), value); return this; }
-        /** Sets the specified value to the {@link CUaccessPolicyWindow#hitRatio} field. */
+        /** Sets the specified value to the {@code hitRatio} field. */
         public CUaccessPolicyWindow.Buffer hitRatio(float value) { CUaccessPolicyWindow.nhitRatio(address(), value); return this; }
-        /** Sets the specified value to the {@link CUaccessPolicyWindow#hitProp} field. */
+        /** Sets the specified value to the {@code hitProp} field. */
         public CUaccessPolicyWindow.Buffer hitProp(@NativeType("CUaccessProperty") int value) { CUaccessPolicyWindow.nhitProp(address(), value); return this; }
-        /** Sets the specified value to the {@link CUaccessPolicyWindow#missProp} field. */
+        /** Sets the specified value to the {@code missProp} field. */
         public CUaccessPolicyWindow.Buffer missProp(@NativeType("CUaccessProperty") int value) { CUaccessPolicyWindow.nmissProp(address(), value); return this; }
 
     }

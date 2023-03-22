@@ -13,8 +13,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
 /**
- * Instances of this interface may be passed to the {@link CU#cuLaunchHostFunc LaunchHostFunc} method.
- * 
  * <h3>Type</h3>
  * 
  * <pre><code>
@@ -42,11 +40,6 @@ public interface CUhostFnI extends CallbackI {
         );
     }
 
-    /**
-     * CUDA host function.
-     *
-     * @param userData argument value passed to the function
-     */
     void invoke(@NativeType("void *") long userData);
 
 }

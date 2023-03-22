@@ -17,17 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specifies the properties of allocations made from the pool.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * struct CUmemPoolProps {
- *     CUmemAllocationType {@link #allocType};
- *     CUmemAllocationHandleType {@link #handleTypes};
- *     {@link CUmemLocation CUmemLocation} {@link #location};
- *     void * {@link #win32SecurityAttributes};
- *     unsigned char {@link #reserved}[64];
+ *     CUmemAllocationType allocType;
+ *     CUmemAllocationHandleType handleTypes;
+ *     {@link CUmemLocation CUmemLocation} location;
+ *     void * win32SecurityAttributes;
+ *     unsigned char reserved[64];
  * }</code></pre>
  */
 public class CUmemPoolProps extends Struct implements NativeResource {
@@ -78,40 +76,37 @@ public class CUmemPoolProps extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** allocation type. Currently must be specified as {@link CU#CU_MEM_ALLOCATION_TYPE_PINNED MEM_ALLOCATION_TYPE_PINNED}. */
+    /** @return the value of the {@code allocType} field. */
     @NativeType("CUmemAllocationType")
     public int allocType() { return nallocType(address()); }
-    /** handle types that will be supported by allocations from the pool */
+    /** @return the value of the {@code handleTypes} field. */
     @NativeType("CUmemAllocationHandleType")
     public int handleTypes() { return nhandleTypes(address()); }
-    /** location where allocations should reside */
+    /** @return a {@link CUmemLocation} view of the {@code location} field. */
     public CUmemLocation location() { return nlocation(address()); }
-    /**
-     * windows-specific {@code LPSECURITYATTRIBUTES} required when {@link CU#CU_MEM_HANDLE_TYPE_WIN32 MEM_HANDLE_TYPE_WIN32} is specified. This security attribute defines the scope of which
-     * exported allocations may be tranferred to other processes. In all other cases, this field is required to be zero.
-     */
+    /** @return the value of the {@code win32SecurityAttributes} field. */
     @NativeType("void *")
     public long win32SecurityAttributes() { return nwin32SecurityAttributes(address()); }
-    /** reserved for future use, must be 0 */
+    /** @return a {@link ByteBuffer} view of the {@code reserved} field. */
     @NativeType("unsigned char[64]")
     public ByteBuffer reserved() { return nreserved(address()); }
-    /** reserved for future use, must be 0 */
+    /** @return the value at the specified index of the {@code reserved} field. */
     @NativeType("unsigned char")
     public byte reserved(int index) { return nreserved(address(), index); }
 
-    /** Sets the specified value to the {@link #allocType} field. */
+    /** Sets the specified value to the {@code allocType} field. */
     public CUmemPoolProps allocType(@NativeType("CUmemAllocationType") int value) { nallocType(address(), value); return this; }
-    /** Sets the specified value to the {@link #handleTypes} field. */
+    /** Sets the specified value to the {@code handleTypes} field. */
     public CUmemPoolProps handleTypes(@NativeType("CUmemAllocationHandleType") int value) { nhandleTypes(address(), value); return this; }
-    /** Copies the specified {@link CUmemLocation} to the {@link #location} field. */
+    /** Copies the specified {@link CUmemLocation} to the {@code location} field. */
     public CUmemPoolProps location(CUmemLocation value) { nlocation(address(), value); return this; }
-    /** Passes the {@link #location} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code location} field to the specified {@link java.util.function.Consumer Consumer}. */
     public CUmemPoolProps location(java.util.function.Consumer<CUmemLocation> consumer) { consumer.accept(location()); return this; }
-    /** Sets the specified value to the {@link #win32SecurityAttributes} field. */
+    /** Sets the specified value to the {@code win32SecurityAttributes} field. */
     public CUmemPoolProps win32SecurityAttributes(@NativeType("void *") long value) { nwin32SecurityAttributes(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@link #reserved} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code reserved} field. */
     public CUmemPoolProps reserved(@NativeType("unsigned char[64]") ByteBuffer value) { nreserved(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #reserved} field. */
+    /** Sets the specified value at the specified index of the {@code reserved} field. */
     public CUmemPoolProps reserved(int index, @NativeType("unsigned char") byte value) { nreserved(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,37 +322,37 @@ public class CUmemPoolProps extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CUmemPoolProps#allocType} field. */
+        /** @return the value of the {@code allocType} field. */
         @NativeType("CUmemAllocationType")
         public int allocType() { return CUmemPoolProps.nallocType(address()); }
-        /** @return the value of the {@link CUmemPoolProps#handleTypes} field. */
+        /** @return the value of the {@code handleTypes} field. */
         @NativeType("CUmemAllocationHandleType")
         public int handleTypes() { return CUmemPoolProps.nhandleTypes(address()); }
-        /** @return a {@link CUmemLocation} view of the {@link CUmemPoolProps#location} field. */
+        /** @return a {@link CUmemLocation} view of the {@code location} field. */
         public CUmemLocation location() { return CUmemPoolProps.nlocation(address()); }
-        /** @return the value of the {@link CUmemPoolProps#win32SecurityAttributes} field. */
+        /** @return the value of the {@code win32SecurityAttributes} field. */
         @NativeType("void *")
         public long win32SecurityAttributes() { return CUmemPoolProps.nwin32SecurityAttributes(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link CUmemPoolProps#reserved} field. */
+        /** @return a {@link ByteBuffer} view of the {@code reserved} field. */
         @NativeType("unsigned char[64]")
         public ByteBuffer reserved() { return CUmemPoolProps.nreserved(address()); }
-        /** @return the value at the specified index of the {@link CUmemPoolProps#reserved} field. */
+        /** @return the value at the specified index of the {@code reserved} field. */
         @NativeType("unsigned char")
         public byte reserved(int index) { return CUmemPoolProps.nreserved(address(), index); }
 
-        /** Sets the specified value to the {@link CUmemPoolProps#allocType} field. */
+        /** Sets the specified value to the {@code allocType} field. */
         public CUmemPoolProps.Buffer allocType(@NativeType("CUmemAllocationType") int value) { CUmemPoolProps.nallocType(address(), value); return this; }
-        /** Sets the specified value to the {@link CUmemPoolProps#handleTypes} field. */
+        /** Sets the specified value to the {@code handleTypes} field. */
         public CUmemPoolProps.Buffer handleTypes(@NativeType("CUmemAllocationHandleType") int value) { CUmemPoolProps.nhandleTypes(address(), value); return this; }
-        /** Copies the specified {@link CUmemLocation} to the {@link CUmemPoolProps#location} field. */
+        /** Copies the specified {@link CUmemLocation} to the {@code location} field. */
         public CUmemPoolProps.Buffer location(CUmemLocation value) { CUmemPoolProps.nlocation(address(), value); return this; }
-        /** Passes the {@link CUmemPoolProps#location} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code location} field to the specified {@link java.util.function.Consumer Consumer}. */
         public CUmemPoolProps.Buffer location(java.util.function.Consumer<CUmemLocation> consumer) { consumer.accept(location()); return this; }
-        /** Sets the specified value to the {@link CUmemPoolProps#win32SecurityAttributes} field. */
+        /** Sets the specified value to the {@code win32SecurityAttributes} field. */
         public CUmemPoolProps.Buffer win32SecurityAttributes(@NativeType("void *") long value) { CUmemPoolProps.nwin32SecurityAttributes(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@link CUmemPoolProps#reserved} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code reserved} field. */
         public CUmemPoolProps.Buffer reserved(@NativeType("unsigned char[64]") ByteBuffer value) { CUmemPoolProps.nreserved(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link CUmemPoolProps#reserved} field. */
+        /** Sets the specified value at the specified index of the {@code reserved} field. */
         public CUmemPoolProps.Buffer reserved(int index, @NativeType("unsigned char") byte value) { CUmemPoolProps.nreserved(address(), index, value); return this; }
 
     }

@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Graph kernel node attributes union, used with {@link CU#cuGraphKernelNodeSetAttribute GraphKernelNodeSetAttribute}/{@link CU#cuGraphKernelNodeGetAttribute GraphKernelNodeGetAttribute}.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
  * union CUkernelNodeAttrValue {
- *     {@link CUaccessPolicyWindow CUaccessPolicyWindow} {@link #accessPolicyWindow};
- *     int {@link #cooperative};
+ *     {@link CUaccessPolicyWindow CUaccessPolicyWindow} accessPolicyWindow;
+ *     int cooperative;
  * }</code></pre>
  */
 public class CUkernelNodeAttrValue extends Struct implements NativeResource {
@@ -65,16 +63,16 @@ public class CUkernelNodeAttrValue extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** attribute {@code CUaccessPolicyWindow} */
+    /** @return a {@link CUaccessPolicyWindow} view of the {@code accessPolicyWindow} field. */
     public CUaccessPolicyWindow accessPolicyWindow() { return naccessPolicyWindow(address()); }
-    /** nonzero indicates a cooperative kernel (see {@link CU#cuLaunchCooperativeKernel LaunchCooperativeKernel}) */
+    /** @return the value of the {@code cooperative} field. */
     public int cooperative() { return ncooperative(address()); }
 
-    /** Copies the specified {@link CUaccessPolicyWindow} to the {@link #accessPolicyWindow} field. */
+    /** Copies the specified {@link CUaccessPolicyWindow} to the {@code accessPolicyWindow} field. */
     public CUkernelNodeAttrValue accessPolicyWindow(CUaccessPolicyWindow value) { naccessPolicyWindow(address(), value); return this; }
-    /** Passes the {@link #accessPolicyWindow} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code accessPolicyWindow} field to the specified {@link java.util.function.Consumer Consumer}. */
     public CUkernelNodeAttrValue accessPolicyWindow(java.util.function.Consumer<CUaccessPolicyWindow> consumer) { consumer.accept(accessPolicyWindow()); return this; }
-    /** Sets the specified value to the {@link #cooperative} field. */
+    /** Sets the specified value to the {@code cooperative} field. */
     public CUkernelNodeAttrValue cooperative(int value) { ncooperative(address(), value); return this; }
 
     /**
@@ -250,16 +248,16 @@ public class CUkernelNodeAttrValue extends Struct implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link CUaccessPolicyWindow} view of the {@link CUkernelNodeAttrValue#accessPolicyWindow} field. */
+        /** @return a {@link CUaccessPolicyWindow} view of the {@code accessPolicyWindow} field. */
         public CUaccessPolicyWindow accessPolicyWindow() { return CUkernelNodeAttrValue.naccessPolicyWindow(address()); }
-        /** @return the value of the {@link CUkernelNodeAttrValue#cooperative} field. */
+        /** @return the value of the {@code cooperative} field. */
         public int cooperative() { return CUkernelNodeAttrValue.ncooperative(address()); }
 
-        /** Copies the specified {@link CUaccessPolicyWindow} to the {@link CUkernelNodeAttrValue#accessPolicyWindow} field. */
+        /** Copies the specified {@link CUaccessPolicyWindow} to the {@code accessPolicyWindow} field. */
         public CUkernelNodeAttrValue.Buffer accessPolicyWindow(CUaccessPolicyWindow value) { CUkernelNodeAttrValue.naccessPolicyWindow(address(), value); return this; }
-        /** Passes the {@link CUkernelNodeAttrValue#accessPolicyWindow} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code accessPolicyWindow} field to the specified {@link java.util.function.Consumer Consumer}. */
         public CUkernelNodeAttrValue.Buffer accessPolicyWindow(java.util.function.Consumer<CUaccessPolicyWindow> consumer) { consumer.accept(accessPolicyWindow()); return this; }
-        /** Sets the specified value to the {@link CUkernelNodeAttrValue#cooperative} field. */
+        /** Sets the specified value to the {@code cooperative} field. */
         public CUkernelNodeAttrValue.Buffer cooperative(int value) { CUkernelNodeAttrValue.ncooperative(address(), value); return this; }
 
     }

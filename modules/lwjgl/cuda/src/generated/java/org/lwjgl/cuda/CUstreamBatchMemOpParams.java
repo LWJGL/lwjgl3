@@ -17,8 +17,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Per-operation parameters for {@link CU#cuStreamBatchMemOp StreamBatchMemOp}.
- * 
  * <h3>Layout</h3>
  * 
  * <pre><code>
@@ -32,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *             cuuint64_t value64;
  *         };
  *         unsigned int flags;
- *         CUdeviceptr {@link #waitValue_alias alias};
+ *         CUdeviceptr alias;
  *     } waitValue;
  *     struct {
  *         CUstreamBatchMemOpType operation;
@@ -42,12 +40,16 @@ import static org.lwjgl.system.MemoryStack.*;
  *             cuuint64_t value64;
  *         };
  *         unsigned int flags;
- *         CUdeviceptr {@link #writeValue_alias alias};
+ *         CUdeviceptr alias;
  *     } writeValue;
  *     struct {
  *         CUstreamBatchMemOpType operation;
  *         unsigned int flags;
  *     } flushRemoteWrites;
+ *     struct {
+ *         CUstreamBatchMemOpType operation;
+ *         unsigned int flags;
+ *     } memoryBarrier;
  *     cuuint64_t pad[6];
  * }</code></pre>
  */
@@ -79,6 +81,9 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
         FLUSHREMOTEWRITES,
             FLUSHREMOTEWRITES_OPERATION,
             FLUSHREMOTEWRITES_FLAGS,
+        MEMORYBARRIER,
+            MEMORYBARRIER_OPERATION,
+            MEMORYBARRIER_FLAGS,
         PAD;
 
     static {
@@ -108,6 +113,10 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
                 __member(4),
                 __member(4)
             ),
+            __struct(
+                __member(4),
+                __member(4)
+            ),
             __array(8, 6)
         );
 
@@ -132,7 +141,10 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
         FLUSHREMOTEWRITES = layout.offsetof(17);
             FLUSHREMOTEWRITES_OPERATION = layout.offsetof(18);
             FLUSHREMOTEWRITES_FLAGS = layout.offsetof(19);
-        PAD = layout.offsetof(20);
+        MEMORYBARRIER = layout.offsetof(20);
+            MEMORYBARRIER_OPERATION = layout.offsetof(21);
+            MEMORYBARRIER_FLAGS = layout.offsetof(22);
+        PAD = layout.offsetof(23);
     }
 
     /**
@@ -166,7 +178,7 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     /** @return the value of the {@code waitValue.flags} field. */
     @NativeType("unsigned int")
     public int waitValue_flags() { return nwaitValue_flags(address()); }
-    /** For driver internal use. Initial value is unimportant. */
+    /** @return the value of the {@code waitValue.alias} field. */
     @NativeType("CUdeviceptr")
     public long waitValue_alias() { return nwaitValue_alias(address()); }
     /** @return the value of the {@code writeValue.operation} field. */
@@ -184,7 +196,7 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     /** @return the value of the {@code writeValue.flags} field. */
     @NativeType("unsigned int")
     public int writeValue_flags() { return nwriteValue_flags(address()); }
-    /** For driver internal use. Initial value is unimportant. */
+    /** @return the value of the {@code writeValue.alias} field. */
     @NativeType("CUdeviceptr")
     public long writeValue_alias() { return nwriteValue_alias(address()); }
     /** @return the value of the {@code flushRemoteWrites.operation} field. */
@@ -193,6 +205,12 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     /** @return the value of the {@code flushRemoteWrites.flags} field. */
     @NativeType("unsigned int")
     public int flushRemoteWrites_flags() { return nflushRemoteWrites_flags(address()); }
+    /** @return the value of the {@code memoryBarrier.operation} field. */
+    @NativeType("CUstreamBatchMemOpType")
+    public int memoryBarrier_operation() { return nmemoryBarrier_operation(address()); }
+    /** @return the value of the {@code memoryBarrier.flags} field. */
+    @NativeType("unsigned int")
+    public int memoryBarrier_flags() { return nmemoryBarrier_flags(address()); }
     /** @return a {@link LongBuffer} view of the {@code pad} field. */
     @NativeType("cuuint64_t[6]")
     public LongBuffer pad() { return npad(address()); }
@@ -212,7 +230,7 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     public CUstreamBatchMemOpParams waitValue_value64(@NativeType("cuuint64_t") long value) { nwaitValue_value64(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public CUstreamBatchMemOpParams waitValue_flags(@NativeType("unsigned int") int value) { nwaitValue_flags(address(), value); return this; }
-    /** Sets the specified value to the {@link #waitValue_alias} field. */
+    /** Sets the specified value to the {@code alias} field. */
     public CUstreamBatchMemOpParams waitValue_alias(@NativeType("CUdeviceptr") long value) { nwaitValue_alias(address(), value); return this; }
     /** Sets the specified value to the {@code operation} field. */
     public CUstreamBatchMemOpParams writeValue_operation(@NativeType("CUstreamBatchMemOpType") int value) { nwriteValue_operation(address(), value); return this; }
@@ -224,12 +242,16 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     public CUstreamBatchMemOpParams writeValue_value64(@NativeType("cuuint64_t") long value) { nwriteValue_value64(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public CUstreamBatchMemOpParams writeValue_flags(@NativeType("unsigned int") int value) { nwriteValue_flags(address(), value); return this; }
-    /** Sets the specified value to the {@link #writeValue_alias} field. */
+    /** Sets the specified value to the {@code alias} field. */
     public CUstreamBatchMemOpParams writeValue_alias(@NativeType("CUdeviceptr") long value) { nwriteValue_alias(address(), value); return this; }
     /** Sets the specified value to the {@code operation} field. */
     public CUstreamBatchMemOpParams flushRemoteWrites_operation(@NativeType("CUstreamBatchMemOpType") int value) { nflushRemoteWrites_operation(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public CUstreamBatchMemOpParams flushRemoteWrites_flags(@NativeType("unsigned int") int value) { nflushRemoteWrites_flags(address(), value); return this; }
+    /** Sets the specified value to the {@code operation} field. */
+    public CUstreamBatchMemOpParams memoryBarrier_operation(@NativeType("CUstreamBatchMemOpType") int value) { nmemoryBarrier_operation(address(), value); return this; }
+    /** Sets the specified value to the {@code flags} field. */
+    public CUstreamBatchMemOpParams memoryBarrier_flags(@NativeType("unsigned int") int value) { nmemoryBarrier_flags(address(), value); return this; }
     /** Copies the specified {@link LongBuffer} to the {@code pad} field. */
     public CUstreamBatchMemOpParams pad(@NativeType("cuuint64_t[6]") LongBuffer value) { npad(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code pad} field. */
@@ -409,6 +431,10 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     public static int nflushRemoteWrites_operation(long struct) { return UNSAFE.getInt(null, struct + CUstreamBatchMemOpParams.FLUSHREMOTEWRITES_OPERATION); }
     /** Unsafe version of {@link #flushRemoteWrites_flags}. */
     public static int nflushRemoteWrites_flags(long struct) { return UNSAFE.getInt(null, struct + CUstreamBatchMemOpParams.FLUSHREMOTEWRITES_FLAGS); }
+    /** Unsafe version of {@link #memoryBarrier_operation}. */
+    public static int nmemoryBarrier_operation(long struct) { return UNSAFE.getInt(null, struct + CUstreamBatchMemOpParams.MEMORYBARRIER_OPERATION); }
+    /** Unsafe version of {@link #memoryBarrier_flags}. */
+    public static int nmemoryBarrier_flags(long struct) { return UNSAFE.getInt(null, struct + CUstreamBatchMemOpParams.MEMORYBARRIER_FLAGS); }
     /** Unsafe version of {@link #pad}. */
     public static LongBuffer npad(long struct) { return memLongBuffer(struct + CUstreamBatchMemOpParams.PAD, 6); }
     /** Unsafe version of {@link #pad(int) pad}. */
@@ -446,6 +472,10 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
     public static void nflushRemoteWrites_operation(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.FLUSHREMOTEWRITES_OPERATION, value); }
     /** Unsafe version of {@link #flushRemoteWrites_flags(int) flushRemoteWrites_flags}. */
     public static void nflushRemoteWrites_flags(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.FLUSHREMOTEWRITES_FLAGS, value); }
+    /** Unsafe version of {@link #memoryBarrier_operation(int) memoryBarrier_operation}. */
+    public static void nmemoryBarrier_operation(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.MEMORYBARRIER_OPERATION, value); }
+    /** Unsafe version of {@link #memoryBarrier_flags(int) memoryBarrier_flags}. */
+    public static void nmemoryBarrier_flags(long struct, int value) { UNSAFE.putInt(null, struct + CUstreamBatchMemOpParams.MEMORYBARRIER_FLAGS, value); }
     /** Unsafe version of {@link #pad(LongBuffer) pad}. */
     public static void npad(long struct, LongBuffer value) {
         if (CHECKS) { checkGT(value, 6); }
@@ -512,7 +542,7 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
         /** @return the value of the {@code waitValue.flags} field. */
         @NativeType("unsigned int")
         public int waitValue_flags() { return CUstreamBatchMemOpParams.nwaitValue_flags(address()); }
-        /** @return the value of the {@link CUstreamBatchMemOpParams#waitValue_alias} field. */
+        /** @return the value of the {@code waitValue.alias} field. */
         @NativeType("CUdeviceptr")
         public long waitValue_alias() { return CUstreamBatchMemOpParams.nwaitValue_alias(address()); }
         /** @return the value of the {@code writeValue.operation} field. */
@@ -530,7 +560,7 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
         /** @return the value of the {@code writeValue.flags} field. */
         @NativeType("unsigned int")
         public int writeValue_flags() { return CUstreamBatchMemOpParams.nwriteValue_flags(address()); }
-        /** @return the value of the {@link CUstreamBatchMemOpParams#writeValue_alias} field. */
+        /** @return the value of the {@code writeValue.alias} field. */
         @NativeType("CUdeviceptr")
         public long writeValue_alias() { return CUstreamBatchMemOpParams.nwriteValue_alias(address()); }
         /** @return the value of the {@code flushRemoteWrites.operation} field. */
@@ -539,6 +569,12 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
         /** @return the value of the {@code flushRemoteWrites.flags} field. */
         @NativeType("unsigned int")
         public int flushRemoteWrites_flags() { return CUstreamBatchMemOpParams.nflushRemoteWrites_flags(address()); }
+        /** @return the value of the {@code memoryBarrier.operation} field. */
+        @NativeType("CUstreamBatchMemOpType")
+        public int memoryBarrier_operation() { return CUstreamBatchMemOpParams.nmemoryBarrier_operation(address()); }
+        /** @return the value of the {@code memoryBarrier.flags} field. */
+        @NativeType("unsigned int")
+        public int memoryBarrier_flags() { return CUstreamBatchMemOpParams.nmemoryBarrier_flags(address()); }
         /** @return a {@link LongBuffer} view of the {@code pad} field. */
         @NativeType("cuuint64_t[6]")
         public LongBuffer pad() { return CUstreamBatchMemOpParams.npad(address()); }
@@ -558,7 +594,7 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
         public CUstreamBatchMemOpParams.Buffer waitValue_value64(@NativeType("cuuint64_t") long value) { CUstreamBatchMemOpParams.nwaitValue_value64(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public CUstreamBatchMemOpParams.Buffer waitValue_flags(@NativeType("unsigned int") int value) { CUstreamBatchMemOpParams.nwaitValue_flags(address(), value); return this; }
-        /** Sets the specified value to the {@link CUstreamBatchMemOpParams#waitValue_alias} field. */
+        /** Sets the specified value to the {@code alias} field. */
         public CUstreamBatchMemOpParams.Buffer waitValue_alias(@NativeType("CUdeviceptr") long value) { CUstreamBatchMemOpParams.nwaitValue_alias(address(), value); return this; }
         /** Sets the specified value to the {@code operation} field. */
         public CUstreamBatchMemOpParams.Buffer writeValue_operation(@NativeType("CUstreamBatchMemOpType") int value) { CUstreamBatchMemOpParams.nwriteValue_operation(address(), value); return this; }
@@ -570,12 +606,16 @@ public class CUstreamBatchMemOpParams extends Struct implements NativeResource {
         public CUstreamBatchMemOpParams.Buffer writeValue_value64(@NativeType("cuuint64_t") long value) { CUstreamBatchMemOpParams.nwriteValue_value64(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public CUstreamBatchMemOpParams.Buffer writeValue_flags(@NativeType("unsigned int") int value) { CUstreamBatchMemOpParams.nwriteValue_flags(address(), value); return this; }
-        /** Sets the specified value to the {@link CUstreamBatchMemOpParams#writeValue_alias} field. */
+        /** Sets the specified value to the {@code alias} field. */
         public CUstreamBatchMemOpParams.Buffer writeValue_alias(@NativeType("CUdeviceptr") long value) { CUstreamBatchMemOpParams.nwriteValue_alias(address(), value); return this; }
         /** Sets the specified value to the {@code operation} field. */
         public CUstreamBatchMemOpParams.Buffer flushRemoteWrites_operation(@NativeType("CUstreamBatchMemOpType") int value) { CUstreamBatchMemOpParams.nflushRemoteWrites_operation(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public CUstreamBatchMemOpParams.Buffer flushRemoteWrites_flags(@NativeType("unsigned int") int value) { CUstreamBatchMemOpParams.nflushRemoteWrites_flags(address(), value); return this; }
+        /** Sets the specified value to the {@code operation} field. */
+        public CUstreamBatchMemOpParams.Buffer memoryBarrier_operation(@NativeType("CUstreamBatchMemOpType") int value) { CUstreamBatchMemOpParams.nmemoryBarrier_operation(address(), value); return this; }
+        /** Sets the specified value to the {@code flags} field. */
+        public CUstreamBatchMemOpParams.Buffer memoryBarrier_flags(@NativeType("unsigned int") int value) { CUstreamBatchMemOpParams.nmemoryBarrier_flags(address(), value); return this; }
         /** Copies the specified {@link LongBuffer} to the {@code pad} field. */
         public CUstreamBatchMemOpParams.Buffer pad(@NativeType("cuuint64_t[6]") LongBuffer value) { CUstreamBatchMemOpParams.npad(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code pad} field. */
