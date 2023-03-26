@@ -24,7 +24,7 @@ typedef wchar_t nfdnchar_t;
 typedef char nfdnchar_t;
 #endif  // _WIN32
 
-/*  */
+/* opaque data structure -- see NFD_PathSet_* */
 typedef void nfdpathset_t;
 #ifndef NFD_PORTAL
 typedef struct {
