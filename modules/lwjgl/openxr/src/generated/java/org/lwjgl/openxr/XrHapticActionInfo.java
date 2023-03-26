@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XR10#xrApplyHapticFeedback ApplyHapticFeedback}, {@link XR10#xrStopHapticFeedback StopHapticFeedback}</p>
+ * <p>{@link XR10#xrApplyHapticFeedback ApplyHapticFeedback}, {@link FBHapticPcm#xrGetDeviceSampleRateFB GetDeviceSampleRateFB}, {@link XR10#xrStopHapticFeedback StopHapticFeedback}</p>
  * 
  * <h3>Layout</h3>
  * 

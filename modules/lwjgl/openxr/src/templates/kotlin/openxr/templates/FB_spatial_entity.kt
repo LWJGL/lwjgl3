@@ -32,7 +32,7 @@ val FB_spatial_entity = "FBSpatialEntity".nativeClassXR("FB_spatial_entity", typ
     IntConstant(
         "The extension specification version.",
 
-        "FB_spatial_entity_SPEC_VERSION".."1"
+        "FB_spatial_entity_SPEC_VERSION".."2"
     )
 
     StringConstant(
@@ -72,6 +72,7 @@ val FB_spatial_entity = "FBSpatialEntity".nativeClassXR("FB_spatial_entity", typ
         <ul>
             <li>#SPACE_COMPONENT_TYPE_LOCATABLE_FB — Enables tracking the 6 DOF pose of the {@code XrSpace} with #LocateSpace().</li>
             <li>#SPACE_COMPONENT_TYPE_STORABLE_FB — Enables persistence operations: save and erase.</li>
+            <li>#SPACE_COMPONENT_TYPE_SHARABLE_FB — Enables sharing of spatial entities.</li>
             <li>#SPACE_COMPONENT_TYPE_BOUNDED_2D_FB — Bounded 2D component.</li>
             <li>#SPACE_COMPONENT_TYPE_BOUNDED_3D_FB — Bounded 3D component.</li>
             <li>#SPACE_COMPONENT_TYPE_SEMANTIC_LABELS_FB — Semantic labels component.</li>
@@ -85,6 +86,7 @@ val FB_spatial_entity = "FBSpatialEntity".nativeClassXR("FB_spatial_entity", typ
 
         "SPACE_COMPONENT_TYPE_LOCATABLE_FB".."0",
         "SPACE_COMPONENT_TYPE_STORABLE_FB".."1",
+        "SPACE_COMPONENT_TYPE_SHARABLE_FB".."2",
         "SPACE_COMPONENT_TYPE_BOUNDED_2D_FB".."3",
         "SPACE_COMPONENT_TYPE_BOUNDED_3D_FB".."4",
         "SPACE_COMPONENT_TYPE_SEMANTIC_LABELS_FB".."5",

@@ -83,15 +83,17 @@ public class FBSpatialEntityQuery {
      * <ul>
      * <li>{@link #XR_SPACE_STORAGE_LOCATION_INVALID_FB SPACE_STORAGE_LOCATION_INVALID_FB} — Invalid storage location</li>
      * <li>{@link #XR_SPACE_STORAGE_LOCATION_LOCAL_FB SPACE_STORAGE_LOCATION_LOCAL_FB} — Local device storage</li>
+     * <li>{@link #XR_SPACE_STORAGE_LOCATION_CLOUD_FB SPACE_STORAGE_LOCATION_CLOUD_FB} — Cloud storage</li>
      * </ul>
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link XrEventDataSpaceEraseCompleteFB}, {@link XrEventDataSpaceSaveCompleteFB}, {@link XrSpaceEraseInfoFB}, {@link XrSpaceSaveInfoFB}, {@link XrSpaceStorageLocationFilterInfoFB}</p>
+     * <p>{@link XrEventDataSpaceEraseCompleteFB}, {@link XrEventDataSpaceSaveCompleteFB}, {@link XrSpaceEraseInfoFB}, {@link XrSpaceListSaveInfoFB}, {@link XrSpaceSaveInfoFB}, {@link XrSpaceStorageLocationFilterInfoFB}</p>
      */
     public static final int
         XR_SPACE_STORAGE_LOCATION_INVALID_FB = 0,
-        XR_SPACE_STORAGE_LOCATION_LOCAL_FB   = 1;
+        XR_SPACE_STORAGE_LOCATION_LOCAL_FB   = 1,
+        XR_SPACE_STORAGE_LOCATION_CLOUD_FB   = 2;
 
     protected FBSpatialEntityQuery() {
         throw new UnsupportedOperationException();

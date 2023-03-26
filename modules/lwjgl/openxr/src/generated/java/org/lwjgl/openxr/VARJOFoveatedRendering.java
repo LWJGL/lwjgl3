@@ -32,7 +32,7 @@ package org.lwjgl.openxr;
 public final class VARJOFoveatedRendering {
 
     /** The extension specification version. */
-    public static final int XR_VARJO_foveated_rendering_SPEC_VERSION = 2;
+    public static final int XR_VARJO_foveated_rendering_SPEC_VERSION = 3;
 
     /** The extension name. */
     public static final String XR_VARJO_FOVEATED_RENDERING_EXTENSION_NAME = "XR_VARJO_foveated_rendering";

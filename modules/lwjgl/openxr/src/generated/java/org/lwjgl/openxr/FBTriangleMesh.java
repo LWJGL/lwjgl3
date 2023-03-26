@@ -380,15 +380,15 @@ public class FBTriangleMesh {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Begins updating the mesh buffer data. The application <b>must</b> call this function before it makes any modifications to the buffers retrieved by {@link #xrTriangleMeshGetVertexBufferFB TriangleMeshGetVertexBufferFB} and {@link #xrTriangleMeshGetIndexBufferFB TriangleMeshGetIndexBufferFB}. If only the vertex buffer contents need to be updated, and the mesh is in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_ready">fb_triangle_mesh_ready</a>, {@link #xrTriangleMeshBeginVertexBufferUpdateFB TriangleMeshBeginVertexBufferUpdateFB} <b>may</b> be used instead. To commit the modifications, the application <b>must</b> call {@link #xrTriangleMeshEndUpdateFB TriangleMeshEndUpdateFB}.</p>
+     * <p>Begins updating the mesh buffer data. The application <b>must</b> call this function before it makes any modifications to the buffers retrieved by {@link #xrTriangleMeshGetVertexBufferFB TriangleMeshGetVertexBufferFB} and {@link #xrTriangleMeshGetIndexBufferFB TriangleMeshGetIndexBufferFB}. If only the vertex buffer contents need to be updated, and the mesh is in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_ready">fb_triangle_mesh_state_ready</a>, {@link #xrTriangleMeshBeginVertexBufferUpdateFB TriangleMeshBeginVertexBufferUpdateFB} <b>may</b> be used instead. To commit the modifications, the application <b>must</b> call {@link #xrTriangleMeshEndUpdateFB TriangleMeshEndUpdateFB}.</p>
      * 
      * <p>The triangle mesh {@code mesh} <b>must</b> be mutable. The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if the mesh is immutable.</p>
      * 
-     * <p>The triangle mesh {@code mesh} <b>must</b> be in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_topology_undefined">fb_triangle_mesh_topology_undefined</a> or <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_ready">fb_triangle_mesh_ready</a>.</p>
+     * <p>The triangle mesh {@code mesh} <b>must</b> be in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_undefined_topology">fb_triangle_mesh_state_undefined_topology</a> or <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_ready">fb_triangle_mesh_state_ready</a>.</p>
      * 
      * <ul>
-     * <li>If the triangle mesh is in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_topology_undefined">fb_triangle_mesh_topology_undefined</a> before this call, a successful call moves it to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_defining_topology">fb_triangle_mesh_state_defining_topology</a>.</li>
-     * <li>If the triangle mesh is in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_ready">fb_triangle_mesh_ready</a> before this call, a successful call moves it to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_updating_mesh">fb_triangle_mesh_state_updating_mesh</a>.</li>
+     * <li>If the triangle mesh is in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_undefined_topology">fb_triangle_mesh_state_undefined_topology</a> before this call, a successful call moves it to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_defining_topology">fb_triangle_mesh_state_defining_topology</a>.</li>
+     * <li>If the triangle mesh is in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_ready">fb_triangle_mesh_state_ready</a> before this call, a successful call moves it to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_updating_mesh">fb_triangle_mesh_state_updating_mesh</a>.</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>
@@ -457,7 +457,7 @@ public class FBTriangleMesh {
      * 
      * <p>The triangle mesh {@code mesh} <b>must</b> be in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_defining_topology">fb_triangle_mesh_state_defining_topology</a> or <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_updating_mesh">fb_triangle_mesh_state_updating_mesh</a>.</p>
      * 
-     * <p>A successful call moves {@code mesh} to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_ready">fb_triangle_mesh_ready</a>.</p>
+     * <p>A successful call moves {@code mesh} to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_ready">fb_triangle_mesh_state_ready</a>.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
@@ -529,11 +529,11 @@ public class FBTriangleMesh {
      * 
      * <h5>Description</h5>
      * 
-     * <p>Begins an update of the vertex positions of a mutable triangle mesh. The vertex count returned through {@code outVertexCount} is defined by the last call to {@link #xrTriangleMeshEndUpdateFB TriangleMeshEndUpdateFB}. Once the modification is done, call {@link #xrTriangleMeshEndVertexBufferUpdateFB TriangleMeshEndVertexBufferUpdateFB} to commit the changes and move to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_ready">fb_triangle_mesh_ready</a>.</p>
+     * <p>Begins an update of the vertex positions of a mutable triangle mesh. The vertex count returned through {@code outVertexCount} is defined by the last call to {@link #xrTriangleMeshEndUpdateFB TriangleMeshEndUpdateFB}. Once the modification is done, call {@link #xrTriangleMeshEndVertexBufferUpdateFB TriangleMeshEndVertexBufferUpdateFB} to commit the changes and move to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_ready">fb_triangle_mesh_state_ready</a>.</p>
      * 
      * <p>The triangle mesh {@code mesh} <b>must</b> be mutable. The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if the mesh is immutable.</p>
      * 
-     * <p>The triangle mesh {@code mesh} <b>must</b> be in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_ready">fb_triangle_mesh_ready</a>.</p>
+     * <p>The triangle mesh {@code mesh} <b>must</b> be in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_ready">fb_triangle_mesh_state_ready</a>.</p>
      * 
      * <p>A successful call moves {@code mesh} to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_updating_vertices">fb_triangle_mesh_state_updating_vertices</a>.</p>
      * 
@@ -602,7 +602,7 @@ public class FBTriangleMesh {
      * 
      * <p>The triangle mesh {@code mesh} <b>must</b> be in state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_updating_vertices">fb_triangle_mesh_state_updating_vertices</a>.</p>
      * 
-     * <p>A successful call moves {@code mesh} to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_ready">fb_triangle_mesh_ready</a>.</p>
+     * <p>A successful call moves {@code mesh} to state <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#fb_triangle_mesh_state_ready">fb_triangle_mesh_state_ready</a>.</p>
      * 
      * <h5>Valid Usage (Implicit)</h5>
      * 

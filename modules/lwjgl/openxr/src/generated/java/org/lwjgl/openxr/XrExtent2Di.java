@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link XrOffset2Di}, {@link XrRect2Di}</p>
+ * <p>{@link XrExternalCameraIntrinsicsOCULUS}, {@link XrOffset2Di}, {@link XrRect2Di}</p>
  * 
  * <h3>Layout</h3>
  * 

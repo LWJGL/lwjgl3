@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_HAPTIC_VIBRATION TYPE_HAPTIC_VIBRATION}</li>
+ * <li>{@code type} <b>must</b> be one of the following XrStructureType values: {@link FBHapticAmplitudeEnvelope#XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB}, {@link FBHapticPcm#XR_TYPE_HAPTIC_PCM_VIBRATION_FB TYPE_HAPTIC_PCM_VIBRATION_FB}, {@link XR10#XR_TYPE_HAPTIC_VIBRATION TYPE_HAPTIC_VIBRATION}</li>
  * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
  * </ul>
  * 
@@ -145,6 +145,16 @@ public class XrHapticBaseHeader extends Struct implements NativeResource {
         return wrap(XrHapticBaseHeader.class, value);
     }
 
+    /** Upcasts the specified {@code XrHapticAmplitudeEnvelopeVibrationFB} instance to {@code XrHapticBaseHeader}. */
+    public static XrHapticBaseHeader create(XrHapticAmplitudeEnvelopeVibrationFB value) {
+        return wrap(XrHapticBaseHeader.class, value);
+    }
+
+    /** Upcasts the specified {@code XrHapticPcmVibrationFB} instance to {@code XrHapticBaseHeader}. */
+    public static XrHapticBaseHeader create(XrHapticPcmVibrationFB value) {
+        return wrap(XrHapticBaseHeader.class, value);
+    }
+
     /**
      * Returns a new {@link XrHapticBaseHeader.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
      *
@@ -191,6 +201,16 @@ public class XrHapticBaseHeader extends Struct implements NativeResource {
 
     /** Upcasts the specified {@code XrHapticVibration.Buffer} instance to {@code XrHapticBaseHeader.Buffer}. */
     public static XrHapticBaseHeader.Buffer create(XrHapticVibration.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrHapticAmplitudeEnvelopeVibrationFB.Buffer} instance to {@code XrHapticBaseHeader.Buffer}. */
+    public static XrHapticBaseHeader.Buffer create(XrHapticAmplitudeEnvelopeVibrationFB.Buffer value) {
+        return wrap(Buffer.class, value);
+    }
+
+    /** Upcasts the specified {@code XrHapticPcmVibrationFB.Buffer} instance to {@code XrHapticBaseHeader.Buffer}. */
+    public static XrHapticBaseHeader.Buffer create(XrHapticPcmVibrationFB.Buffer value) {
         return wrap(Buffer.class, value);
     }
 

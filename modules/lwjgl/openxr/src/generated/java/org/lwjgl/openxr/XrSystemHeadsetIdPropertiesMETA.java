@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>An application <b>can</b> get a corresponding headset UUID of the headset model by chaining an {@link XrSystemHeadsetIdPropertiesMETA} structure to the {@link XrSystemProperties} when calling {@link XR10#xrGetSystemProperties GetSystemProperties}.</p>
  * 
- * <p>The UUID returned in the {@link XrSystemHeadsetIdPropertiesMETA} struct is an opaque UUID that identifies a runtime / headset model combo.</p>
+ * <p>The UUID returned in the {@link XrSystemHeadsetIdPropertiesMETA} structure is an opaque UUID that identifies a runtime / headset model combo.</p>
  * 
  * <p>The runtime <b>should</b> always return the same UUID for a given headset model for the entire lifetime of that product.</p>
  * 

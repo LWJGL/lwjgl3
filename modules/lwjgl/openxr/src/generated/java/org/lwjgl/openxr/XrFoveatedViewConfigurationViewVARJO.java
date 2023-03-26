@@ -56,7 +56,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>Note</h5>
  * 
- * <p>Applications using this extension are encouraged to create 2 sets of swapchains or one big enough set of swapchains and 2 sets of viewports. One set will be used when rendering gaze is not available and other one will be used when foveated rendering and rendering gaze is available. Using foveated textures <b>may</b> not provide optimal visual quality when rendering gaze is not available.</p>
+ * <p>Applications using this extension are encouraged to create two sets of swapchains or one big enough set of swapchains and two sets of viewports. One set will be used when rendering gaze is not available and other one will be used when foveated rendering and rendering gaze is available. Using foveated textures <b>may</b> not provide optimal visual quality when rendering gaze is not available.</p>
  * 
  * <h5>See Also</h5>
  * 

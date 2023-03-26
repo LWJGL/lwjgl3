@@ -72,14 +72,16 @@ val FB_spatial_entity_query = "FBSpatialEntityQuery".nativeClassXR("FB_spatial_e
         <ul>
             <li>#SPACE_STORAGE_LOCATION_INVALID_FB — Invalid storage location</li>
             <li>#SPACE_STORAGE_LOCATION_LOCAL_FB — Local device storage</li>
+            <li>#SPACE_STORAGE_LOCATION_CLOUD_FB — Cloud storage</li>
         </ul>
 
         <h5>See Also</h5>
-        ##XrEventDataSpaceEraseCompleteFB, ##XrEventDataSpaceSaveCompleteFB, ##XrSpaceEraseInfoFB, ##XrSpaceSaveInfoFB, ##XrSpaceStorageLocationFilterInfoFB
+        ##XrEventDataSpaceEraseCompleteFB, ##XrEventDataSpaceSaveCompleteFB, ##XrSpaceEraseInfoFB, ##XrSpaceListSaveInfoFB, ##XrSpaceSaveInfoFB, ##XrSpaceStorageLocationFilterInfoFB
         """,
 
         "SPACE_STORAGE_LOCATION_INVALID_FB".."0",
-        "SPACE_STORAGE_LOCATION_LOCAL_FB".."1"
+        "SPACE_STORAGE_LOCATION_LOCAL_FB".."1",
+        "SPACE_STORAGE_LOCATION_CLOUD_FB".."2"
     )
 
     XrResult(

@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_FRAME_END_INFO TYPE_FRAME_END_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSecondaryViewConfigurationFrameEndInfoMSFT}</li>
+ * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a target="_blank" href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrFrameEndInfoML}, {@link XrGlobalDimmerFrameEndInfoML}, {@link XrLocalDimmingFrameEndInfoMETA}, {@link XrSecondaryViewConfigurationFrameEndInfoMSFT}</li>
  * <li>{@code environmentBlendMode} <b>must</b> be a valid {@code XrEnvironmentBlendMode} value</li>
  * <li>If {@code layerCount} is not 0, {@code layers} <b>must</b> be a pointer to an array of {@code layerCount} valid {@link XrCompositionLayerBaseHeader}-based structures. See also: {@link XrCompositionLayerCubeKHR}, {@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerPassthroughHTC}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerQuad}</li>
  * </ul>
@@ -120,6 +120,12 @@ public class XrFrameEndInfo extends Struct implements NativeResource {
     public XrFrameEndInfo type$Default() { return type(XR10.XR_TYPE_FRAME_END_INFO); }
     /** Sets the specified value to the {@link #next} field. */
     public XrFrameEndInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
+    /** Prepends the specified {@link XrFrameEndInfoML} value to the {@code next} chain. */
+    public XrFrameEndInfo next(XrFrameEndInfoML value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrGlobalDimmerFrameEndInfoML} value to the {@code next} chain. */
+    public XrFrameEndInfo next(XrGlobalDimmerFrameEndInfoML value) { return this.next(value.next(this.next()).address()); }
+    /** Prepends the specified {@link XrLocalDimmingFrameEndInfoMETA} value to the {@code next} chain. */
+    public XrFrameEndInfo next(XrLocalDimmingFrameEndInfoMETA value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSecondaryViewConfigurationFrameEndInfoMSFT} value to the {@code next} chain. */
     public XrFrameEndInfo next(XrSecondaryViewConfigurationFrameEndInfoMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Sets the specified value to the {@link #displayTime} field. */
@@ -365,6 +371,12 @@ public class XrFrameEndInfo extends Struct implements NativeResource {
         public XrFrameEndInfo.Buffer type$Default() { return type(XR10.XR_TYPE_FRAME_END_INFO); }
         /** Sets the specified value to the {@link XrFrameEndInfo#next} field. */
         public XrFrameEndInfo.Buffer next(@NativeType("void const *") long value) { XrFrameEndInfo.nnext(address(), value); return this; }
+        /** Prepends the specified {@link XrFrameEndInfoML} value to the {@code next} chain. */
+        public XrFrameEndInfo.Buffer next(XrFrameEndInfoML value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrGlobalDimmerFrameEndInfoML} value to the {@code next} chain. */
+        public XrFrameEndInfo.Buffer next(XrGlobalDimmerFrameEndInfoML value) { return this.next(value.next(this.next()).address()); }
+        /** Prepends the specified {@link XrLocalDimmingFrameEndInfoMETA} value to the {@code next} chain. */
+        public XrFrameEndInfo.Buffer next(XrLocalDimmingFrameEndInfoMETA value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSecondaryViewConfigurationFrameEndInfoMSFT} value to the {@code next} chain. */
         public XrFrameEndInfo.Buffer next(XrSecondaryViewConfigurationFrameEndInfoMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Sets the specified value to the {@link XrFrameEndInfo#displayTime} field. */

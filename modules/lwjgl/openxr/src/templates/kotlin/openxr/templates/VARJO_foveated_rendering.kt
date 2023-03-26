@@ -38,7 +38,7 @@ val VARJO_foveated_rendering = "VARJOFoveatedRendering".nativeClassXR("VARJO_fov
     IntConstant(
         "The extension specification version.",
 
-        "VARJO_foveated_rendering_SPEC_VERSION".."2"
+        "VARJO_foveated_rendering_SPEC_VERSION".."3"
     )
 
     StringConstant(

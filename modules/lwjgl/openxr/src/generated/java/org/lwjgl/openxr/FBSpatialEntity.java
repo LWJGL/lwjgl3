@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class FBSpatialEntity {
 
     /** The extension specification version. */
-    public static final int XR_FB_spatial_entity_SPEC_VERSION = 1;
+    public static final int XR_FB_spatial_entity_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String XR_FB_SPATIAL_ENTITY_EXTENSION_NAME = "XR_FB_spatial_entity";
@@ -93,6 +93,7 @@ public class FBSpatialEntity {
      * <ul>
      * <li>{@link #XR_SPACE_COMPONENT_TYPE_LOCATABLE_FB SPACE_COMPONENT_TYPE_LOCATABLE_FB} — Enables tracking the 6 DOF pose of the {@code XrSpace} with {@link XR10#xrLocateSpace LocateSpace}.</li>
      * <li>{@link #XR_SPACE_COMPONENT_TYPE_STORABLE_FB SPACE_COMPONENT_TYPE_STORABLE_FB} — Enables persistence operations: save and erase.</li>
+     * <li>{@link #XR_SPACE_COMPONENT_TYPE_SHARABLE_FB SPACE_COMPONENT_TYPE_SHARABLE_FB} — Enables sharing of spatial entities.</li>
      * <li>{@link #XR_SPACE_COMPONENT_TYPE_BOUNDED_2D_FB SPACE_COMPONENT_TYPE_BOUNDED_2D_FB} — Bounded 2D component.</li>
      * <li>{@link #XR_SPACE_COMPONENT_TYPE_BOUNDED_3D_FB SPACE_COMPONENT_TYPE_BOUNDED_3D_FB} — Bounded 3D component.</li>
      * <li>{@link #XR_SPACE_COMPONENT_TYPE_SEMANTIC_LABELS_FB SPACE_COMPONENT_TYPE_SEMANTIC_LABELS_FB} — Semantic labels component.</li>
@@ -107,6 +108,7 @@ public class FBSpatialEntity {
     public static final int
         XR_SPACE_COMPONENT_TYPE_LOCATABLE_FB       = 0,
         XR_SPACE_COMPONENT_TYPE_STORABLE_FB        = 1,
+        XR_SPACE_COMPONENT_TYPE_SHARABLE_FB        = 2,
         XR_SPACE_COMPONENT_TYPE_BOUNDED_2D_FB      = 3,
         XR_SPACE_COMPONENT_TYPE_BOUNDED_3D_FB      = 4,
         XR_SPACE_COMPONENT_TYPE_SEMANTIC_LABELS_FB = 5,
