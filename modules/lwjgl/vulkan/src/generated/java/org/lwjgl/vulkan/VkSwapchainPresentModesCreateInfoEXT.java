@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkSwapchainPresentModesCreateInfoEXT {
  *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
+ *     void const * {@link #pNext};
  *     uint32_t {@link #presentModeCount};
  *     VkPresentModeKHR const * {@link #pPresentModes};
  * }</code></pre>
@@ -94,7 +94,7 @@ public class VkSwapchainPresentModesCreateInfoEXT extends Struct implements Nati
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
+    @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** the number of presentation modes provided. */
     @NativeType("uint32_t")
@@ -108,7 +108,7 @@ public class VkSwapchainPresentModesCreateInfoEXT extends Struct implements Nati
     /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT} value to the {@link #sType} field. */
     public VkSwapchainPresentModesCreateInfoEXT sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkSwapchainPresentModesCreateInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkSwapchainPresentModesCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pPresentModes} field. */
     public VkSwapchainPresentModesCreateInfoEXT pPresentModes(@NativeType("VkPresentModeKHR const *") IntBuffer value) { npPresentModes(address(), value); return this; }
 
@@ -319,7 +319,7 @@ public class VkSwapchainPresentModesCreateInfoEXT extends Struct implements Nati
         @NativeType("VkStructureType")
         public int sType() { return VkSwapchainPresentModesCreateInfoEXT.nsType(address()); }
         /** @return the value of the {@link VkSwapchainPresentModesCreateInfoEXT#pNext} field. */
-        @NativeType("void *")
+        @NativeType("void const *")
         public long pNext() { return VkSwapchainPresentModesCreateInfoEXT.npNext(address()); }
         /** @return the value of the {@link VkSwapchainPresentModesCreateInfoEXT#presentModeCount} field. */
         @NativeType("uint32_t")
@@ -333,7 +333,7 @@ public class VkSwapchainPresentModesCreateInfoEXT extends Struct implements Nati
         /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT} value to the {@link VkSwapchainPresentModesCreateInfoEXT#sType} field. */
         public VkSwapchainPresentModesCreateInfoEXT.Buffer sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT); }
         /** Sets the specified value to the {@link VkSwapchainPresentModesCreateInfoEXT#pNext} field. */
-        public VkSwapchainPresentModesCreateInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkSwapchainPresentModesCreateInfoEXT.npNext(address(), value); return this; }
+        public VkSwapchainPresentModesCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainPresentModesCreateInfoEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkSwapchainPresentModesCreateInfoEXT#pPresentModes} field. */
         public VkSwapchainPresentModesCreateInfoEXT.Buffer pPresentModes(@NativeType("VkPresentModeKHR const *") IntBuffer value) { VkSwapchainPresentModesCreateInfoEXT.npPresentModes(address(), value); return this; }
 

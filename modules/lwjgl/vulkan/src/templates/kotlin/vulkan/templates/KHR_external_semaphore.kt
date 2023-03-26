@@ -66,7 +66,7 @@ val KHR_external_semaphore = "KHRExternalSemaphore".nativeClassVK("KHR_external_
                 <li>Jeff Juliano, NVIDIA</li>
                 <li>Matthew Netsch, Qualcomm Technologies, Inc.</li>
                 <li>Ray Smith, ARM</li>
-                <li>Chad Versace, Google</li>
+                <li>Lina Versace, Google</li>
             </ul></dd>
         </dl>
         """

@@ -146,7 +146,7 @@ val STD_vulkan_video_codec_h265 = "STDVulkanVideoCodecH265".nativeClassVK("STD_v
     IntConstant(
         "The extension specification version.",
 
-        "VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION".."VK_MAKE_VIDEO_STD_VERSION(0, 9, 9)"
+        "VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION".."VK_MAKE_VIDEO_STD_VERSION(0, 9, 10)"
     ).noPrefix()
 
     StringConstant(

@@ -25,13 +25,8 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
  * <li>{@code pStdReferenceInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH264ReferenceInfo} value</li>
  * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeH264ReferenceListsInfoEXT}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -39,7 +34,6 @@ import org.lwjgl.vulkan.video.*;
  * struct VkVideoEncodeH264DpbSlotInfoEXT {
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
- *     int8_t {@link #slotIndex};
  *     {@link StdVideoEncodeH264ReferenceInfo StdVideoEncodeH264ReferenceInfo} const * {@link #pStdReferenceInfo};
  * }</code></pre>
  */
@@ -55,14 +49,12 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
     public static final int
         STYPE,
         PNEXT,
-        SLOTINDEX,
         PSTDREFERENCEINFO;
 
     static {
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
-            __member(1),
             __member(POINTER_SIZE)
         );
 
@@ -71,8 +63,7 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        SLOTINDEX = layout.offsetof(2);
-        PSTDREFERENCEINFO = layout.offsetof(3);
+        PSTDREFERENCEINFO = layout.offsetof(2);
     }
 
     /**
@@ -94,9 +85,6 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#dpb-slot">DPB Slot</a> index for this picture. {@code slotIndex} <b>must</b> match the {@code slotIndex} in {@code pSetupReferenceSlot} of {@link VkVideoEncodeInfoKHR} in the command used to encode the corresponding picture. */
-    @NativeType("int8_t")
-    public byte slotIndex() { return nslotIndex(address()); }
     /** a pointer to a {@code StdVideoEncodeH264ReferenceInfo} structure specifying the syntax and other codec-specific information from the H.264 specification associated with this reference picture. */
     @NativeType("StdVideoEncodeH264ReferenceInfo const *")
     public StdVideoEncodeH264ReferenceInfo pStdReferenceInfo() { return npStdReferenceInfo(address()); }
@@ -107,8 +95,6 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
     public VkVideoEncodeH264DpbSlotInfoEXT sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeH264DpbSlotInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #slotIndex} field. */
-    public VkVideoEncodeH264DpbSlotInfoEXT slotIndex(@NativeType("int8_t") byte value) { nslotIndex(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoEncodeH264ReferenceInfo} to the {@link #pStdReferenceInfo} field. */
     public VkVideoEncodeH264DpbSlotInfoEXT pStdReferenceInfo(@NativeType("StdVideoEncodeH264ReferenceInfo const *") StdVideoEncodeH264ReferenceInfo value) { npStdReferenceInfo(address(), value); return this; }
 
@@ -116,12 +102,10 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
     public VkVideoEncodeH264DpbSlotInfoEXT set(
         int sType,
         long pNext,
-        byte slotIndex,
         StdVideoEncodeH264ReferenceInfo pStdReferenceInfo
     ) {
         sType(sType);
         pNext(pNext);
-        slotIndex(slotIndex);
         pStdReferenceInfo(pStdReferenceInfo);
 
         return this;
@@ -256,8 +240,6 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264DpbSlotInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH264DpbSlotInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #slotIndex}. */
-    public static byte nslotIndex(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH264DpbSlotInfoEXT.SLOTINDEX); }
     /** Unsafe version of {@link #pStdReferenceInfo}. */
     public static StdVideoEncodeH264ReferenceInfo npStdReferenceInfo(long struct) { return StdVideoEncodeH264ReferenceInfo.create(memGetAddress(struct + VkVideoEncodeH264DpbSlotInfoEXT.PSTDREFERENCEINFO)); }
 
@@ -265,8 +247,6 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264DpbSlotInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH264DpbSlotInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #slotIndex(byte) slotIndex}. */
-    public static void nslotIndex(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH264DpbSlotInfoEXT.SLOTINDEX, value); }
     /** Unsafe version of {@link #pStdReferenceInfo(StdVideoEncodeH264ReferenceInfo) pStdReferenceInfo}. */
     public static void npStdReferenceInfo(long struct, StdVideoEncodeH264ReferenceInfo value) { memPutAddress(struct + VkVideoEncodeH264DpbSlotInfoEXT.PSTDREFERENCEINFO, value.address()); }
 
@@ -323,9 +303,6 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
         /** @return the value of the {@link VkVideoEncodeH264DpbSlotInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH264DpbSlotInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264DpbSlotInfoEXT#slotIndex} field. */
-        @NativeType("int8_t")
-        public byte slotIndex() { return VkVideoEncodeH264DpbSlotInfoEXT.nslotIndex(address()); }
         /** @return a {@link StdVideoEncodeH264ReferenceInfo} view of the struct pointed to by the {@link VkVideoEncodeH264DpbSlotInfoEXT#pStdReferenceInfo} field. */
         @NativeType("StdVideoEncodeH264ReferenceInfo const *")
         public StdVideoEncodeH264ReferenceInfo pStdReferenceInfo() { return VkVideoEncodeH264DpbSlotInfoEXT.npStdReferenceInfo(address()); }
@@ -336,8 +313,6 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
         public VkVideoEncodeH264DpbSlotInfoEXT.Buffer sType$Default() { return sType(EXTVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT); }
         /** Sets the specified value to the {@link VkVideoEncodeH264DpbSlotInfoEXT#pNext} field. */
         public VkVideoEncodeH264DpbSlotInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH264DpbSlotInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264DpbSlotInfoEXT#slotIndex} field. */
-        public VkVideoEncodeH264DpbSlotInfoEXT.Buffer slotIndex(@NativeType("int8_t") byte value) { VkVideoEncodeH264DpbSlotInfoEXT.nslotIndex(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoEncodeH264ReferenceInfo} to the {@link VkVideoEncodeH264DpbSlotInfoEXT#pStdReferenceInfo} field. */
         public VkVideoEncodeH264DpbSlotInfoEXT.Buffer pStdReferenceInfo(@NativeType("StdVideoEncodeH264ReferenceInfo const *") StdVideoEncodeH264ReferenceInfo value) { VkVideoEncodeH264DpbSlotInfoEXT.npStdReferenceInfo(address(), value); return this; }
 

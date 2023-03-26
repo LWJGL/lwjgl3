@@ -71,7 +71,7 @@ val KHR_external_memory = "KHRExternalMemory".nativeClassVK("KHR_external_memory
                 <li>Daniel Rakos, AMD</li>
                 <li>Carsten Rohde, NVIDIA</li>
                 <li>Ray Smith, ARM</li>
-                <li>Chad Versace, Google</li>
+                <li>Lina Versace, Google</li>
             </ul></dd>
         </dl>
         """

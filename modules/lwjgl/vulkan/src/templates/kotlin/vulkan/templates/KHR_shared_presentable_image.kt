@@ -28,7 +28,7 @@ val KHR_shared_presentable_image = "KHRSharedPresentableImage".nativeClassVK("KH
             <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2}</dd>
+            <dd>{@link KHRSwapchain VK_KHR_swapchain} and {@link KHRGetSurfaceCapabilities2 VK_KHR_get_surface_capabilities2} and      {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}      or      <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>

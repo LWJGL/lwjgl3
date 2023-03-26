@@ -18,7 +18,7 @@ package org.lwjgl.vulkan;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>39</dd>
  * <dt><b>Revision</b></dt>
- * <dd>9</dd>
+ * <dd>10</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRVideoEncodeQueue VK_KHR_video_encode_queue}
  * 
@@ -35,7 +35,7 @@ package org.lwjgl.vulkan;
  * 
  * <dl>
  * <dt><b>Last Modified Date</b></dt>
- * <dd>2022-09-18</dd>
+ * <dd>2023-03-06</dd>
  * <dt><b>IP Status</b></dt>
  * <dd>No known IP claims.</dd>
  * <dt><b>Contributors</b></dt>
@@ -55,7 +55,7 @@ package org.lwjgl.vulkan;
 public final class EXTVideoEncodeH264 {
 
     /** The extension specification version. */
-    public static final int VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 9;
+    public static final int VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 10;
 
     /** The extension name. */
     public static final String VK_EXT_VIDEO_ENCODE_H264_EXTENSION_NAME = "VK_EXT_video_encode_h264";
@@ -72,11 +72,9 @@ public final class EXTVideoEncodeH264 {
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT}</li>
      * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT}</li>
-     * <li>{@link #VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_INFO_EXT}</li>
      * </ul>
      */
     public static final int
@@ -86,11 +84,9 @@ public final class EXTVideoEncodeH264 {
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT                 = 1000038003,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT                  = 1000038004,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT                = 1000038005,
-        VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_INFO_EXT   = 1000038006,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_INFO_EXT                   = 1000038007,
         VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT              = 1000038008,
-        VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT        = 1000038009,
-        VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_INFO_EXT           = 1000038010;
+        VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT        = 1000038009;
 
     /** Extends {@code VkVideoCodecOperationFlagBitsKHR}. */
     public static final int VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_EXT = 0x10000;
@@ -126,6 +122,7 @@ public final class EXTVideoEncodeH264 {
      * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_ROW_UNALIGNED_SLICE_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_ROW_UNALIGNED_SLICE_BIT_EXT} reports that each slice in a frame with multiple slices may begin or finish at any offset in a macroblock row. If not supported, all slices in the frame <b>must</b> begin at the start of a macroblock row (and hence each slice <b>must</b> finish at the end of a macroblock row).</li>
      * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_EXT} reports that when {@link #VK_VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT} is supported and a frame is encoded with multiple slices, the implementation allows encoding each slice with a different {@code StdVideoEncodeH264SliceHeader}::slice_type. If not supported, all slices of the frame <b>must</b> be encoded with the same {@code slice_type} which corresponds to the picture type of the frame. For example, all slices of a P-frame would be encoded as P-slices.</li>
      * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_B_FRAME_IN_L1_LIST_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_B_FRAME_IN_L1_LIST_BIT_EXT} reports support for using a B frame as L1 reference.</li>
+     * <li>{@link #VK_VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_REFERENCE_FINAL_LISTS_BIT_EXT VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_REFERENCE_FINAL_LISTS_BIT_EXT} reports that the implementation allows encoding each slice with a different {@code StdVideoEncodeH264ReferenceListsInfo}. If not supported, all slices of the frame <b>must</b> be encoded with the same {@code StdVideoEncodeH264ReferenceListsInfo}.</li>
      * </ul>
      */
     public static final int
@@ -153,63 +150,8 @@ public final class EXTVideoEncodeH264 {
         VK_VIDEO_ENCODE_H264_CAPABILITY_SLICE_MB_COUNT_BIT_EXT                  = 0x200000,
         VK_VIDEO_ENCODE_H264_CAPABILITY_ROW_UNALIGNED_SLICE_BIT_EXT             = 0x400000,
         VK_VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_EXT            = 0x800000,
-        VK_VIDEO_ENCODE_H264_CAPABILITY_B_FRAME_IN_L1_LIST_BIT_EXT              = 0x1000000;
-
-    /**
-     * VkVideoEncodeH264InputModeFlagBitsEXT - Video encode H.264 input modes
-     * 
-     * <h5>Description</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT} indicates that a single command buffer <b>must</b> at least encode an entire frame. Any non-VCL NALUs <b>must</b> be encoded using the same command buffer as the frame if {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT} indicates that a single command buffer <b>must</b> at least encode a single slice. Any non-VCL NALUs <b>must</b> be encoded using the same command buffer as the first slice of the frame if {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT} indicates that a single command buffer <b>may</b> encode a non-VCL NALU by itself.</li>
-     * </ul>
-     * 
-     * <p>An implementation <b>must</b> support at least one of {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT} or {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT}.</p>
-     * 
-     * <p>If {@link #VK_VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT} is not supported, the following two additional restrictions apply for frames encoded with multiple slices. First, all frame slices <b>must</b> have the same pRefList0ModOperations and the same pRefList1ModOperations. Second, the order in which slices appear in {@link VkVideoEncodeH264VclFrameInfoEXT}{@code ::pNaluSliceEntries} or in the command buffer <b>must</b> match the placement order of the slices in the frame.</p>
-     */
-    public static final int
-        VK_VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT   = 0x1,
-        VK_VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT   = 0x2,
-        VK_VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT = 0x4;
-
-    /**
-     * VkVideoEncodeH264OutputModeFlagBitsEXT - Video encode H.264 output modes
-     * 
-     * <h5>Description</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT} indicates that calls to generate all NALUs of a frame <b>must</b> be included within a single begin/end pair. Any non-VCL NALUs <b>must</b> be encoded within the same begin/end pair if {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT} indicates that each begin/end pair <b>must</b> encode at least one slice. Any non-VCL NALUs <b>must</b> be encoded within the same begin/end pair as the first slice of the frame if {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT} is not supported.</li>
-     * <li>{@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT} indicates that each begin/end pair <b>may</b> encode only a non-VCL NALU by itself. An implementation <b>must</b> support at least one of {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT} or {@link #VK_VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT}.</li>
-     * </ul>
-     * 
-     * <p>A single begin/end pair <b>must</b> not encode more than a single frame.</p>
-     * 
-     * <p>The bitstreams of NALUs generated within a single begin/end pair are written continuously into the same bitstream buffer (any padding between the NALUs <b>must</b> be compliant to the H.264 standard).</p>
-     * 
-     * <p>The supported input modes <b>must</b> be coarser or equal to the supported output modes. For example, it is illegal to report slice input is supported but only frame output is supported.</p>
-     * 
-     * <p>An implementation <b>must</b> report one of the following combinations of input/output modes:</p>
-     * 
-     * <ul>
-     * <li>Input: Frame, Output: Frame</li>
-     * <li>Input: Frame, Output: Frame and Non-VCL</li>
-     * <li>Input: Frame, Output: Slice</li>
-     * <li>Input: Frame, Output: Slice and Non-VCL</li>
-     * <li>Input: Slice, Output: Slice</li>
-     * <li>Input: Slice, Output: Slice and Non-VCL</li>
-     * <li>Input: Frame and Non-VCL, Output: Frame and Non-VCL</li>
-     * <li>Input: Frame and Non-VCL, Output: Slice and Non-VCL</li>
-     * <li>Input: Slice and Non-VCL, Output: Slice and Non-VCL</li>
-     * </ul>
-     */
-    public static final int
-        VK_VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT   = 0x1,
-        VK_VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT   = 0x2,
-        VK_VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT = 0x4;
+        VK_VIDEO_ENCODE_H264_CAPABILITY_B_FRAME_IN_L1_LIST_BIT_EXT              = 0x1000000,
+        VK_VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_REFERENCE_FINAL_LISTS_BIT_EXT = 0x2000000;
 
     /**
      * VkVideoEncodeH264RateControlStructureEXT - Specifies the video encode H.264 rate control structure

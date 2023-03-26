@@ -38,6 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #maxWorkGroupCount}[3];
  *     uint32_t {@link #maxWorkGroupSize}[3];
  *     uint32_t {@link #maxOutputClusterCount};
+ *     VkDeviceSize {@link #indirectBufferOffsetAlignment};
  * }</code></pre>
  */
 public class VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI extends Struct implements NativeResource {
@@ -54,7 +55,8 @@ public class VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI extends Struct
         PNEXT,
         MAXWORKGROUPCOUNT,
         MAXWORKGROUPSIZE,
-        MAXOUTPUTCLUSTERCOUNT;
+        MAXOUTPUTCLUSTERCOUNT,
+        INDIRECTBUFFEROFFSETALIGNMENT;
 
     static {
         Layout layout = __struct(
@@ -62,7 +64,8 @@ public class VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI extends Struct
             __member(POINTER_SIZE),
             __array(4, 3),
             __array(4, 3),
-            __member(4)
+            __member(4),
+            __member(8)
         );
 
         SIZEOF = layout.getSize();
@@ -73,6 +76,7 @@ public class VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI extends Struct
         MAXWORKGROUPCOUNT = layout.offsetof(2);
         MAXWORKGROUPSIZE = layout.offsetof(3);
         MAXOUTPUTCLUSTERCOUNT = layout.offsetof(4);
+        INDIRECTBUFFEROFFSETALIGNMENT = layout.offsetof(5);
     }
 
     /**
@@ -109,6 +113,9 @@ public class VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI extends Struct
     /** the maximum number of output cluster a single cluster culling shader workgroup can emit. */
     @NativeType("uint32_t")
     public int maxOutputClusterCount() { return nmaxOutputClusterCount(address()); }
+    /** indicates the alignment for cluster drawing command buffer stride. {@link HUAWEIClusterCullingShader#vkCmdDrawClusterIndirectHUAWEI CmdDrawClusterIndirectHUAWEI}{@code ::offset} must be a multiple of this value. */
+    @NativeType("VkDeviceSize")
+    public long indirectBufferOffsetAlignment() { return nindirectBufferOffsetAlignment(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -271,6 +278,8 @@ public class VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI extends Struct
     }
     /** Unsafe version of {@link #maxOutputClusterCount}. */
     public static int nmaxOutputClusterCount(long struct) { return UNSAFE.getInt(null, struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.MAXOUTPUTCLUSTERCOUNT); }
+    /** Unsafe version of {@link #indirectBufferOffsetAlignment}. */
+    public static long nindirectBufferOffsetAlignment(long struct) { return UNSAFE.getLong(null, struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.INDIRECTBUFFEROFFSETALIGNMENT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.STYPE, value); }
@@ -336,6 +345,9 @@ public class VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI extends Struct
         /** @return the value of the {@link VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI#maxOutputClusterCount} field. */
         @NativeType("uint32_t")
         public int maxOutputClusterCount() { return VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.nmaxOutputClusterCount(address()); }
+        /** @return the value of the {@link VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI#indirectBufferOffsetAlignment} field. */
+        @NativeType("VkDeviceSize")
+        public long indirectBufferOffsetAlignment() { return VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.nindirectBufferOffsetAlignment(address()); }
 
         /** Sets the specified value to the {@link VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI#sType} field. */
         public VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.nsType(address(), value); return this; }

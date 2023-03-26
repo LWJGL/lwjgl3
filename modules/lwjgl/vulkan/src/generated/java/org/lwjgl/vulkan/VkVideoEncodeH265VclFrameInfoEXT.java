@@ -25,15 +25,15 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link EXTVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT}</li>
- * <li>If {@code pReferenceFinalLists} is not {@code NULL}, {@code pReferenceFinalLists} <b>must</b> be a valid pointer to a valid {@link VkVideoEncodeH265ReferenceListsInfoEXT} structure</li>
+ * <li>If {@code pStdReferenceFinalLists} is not {@code NULL}, {@code pStdReferenceFinalLists} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH265ReferenceListsInfo} value</li>
  * <li>{@code pNaluSliceSegmentEntries} <b>must</b> be a valid pointer to an array of {@code naluSliceSegmentEntryCount} valid {@link VkVideoEncodeH265NaluSliceSegmentInfoEXT} structures</li>
- * <li>{@code pCurrentPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH265PictureInfo} value</li>
+ * <li>{@code pStdPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH265PictureInfo} value</li>
  * <li>{@code naluSliceSegmentEntryCount} <b>must</b> be greater than 0</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkVideoEncodeH265NaluSliceSegmentInfoEXT}, {@link VkVideoEncodeH265ReferenceListsInfoEXT}</p>
+ * <p>{@link VkVideoEncodeH265NaluSliceSegmentInfoEXT}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -41,10 +41,10 @@ import org.lwjgl.vulkan.video.*;
  * struct VkVideoEncodeH265VclFrameInfoEXT {
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
- *     {@link VkVideoEncodeH265ReferenceListsInfoEXT VkVideoEncodeH265ReferenceListsInfoEXT} const * {@link #pReferenceFinalLists};
+ *     {@link StdVideoEncodeH265ReferenceModifications StdVideoEncodeH265ReferenceModifications} const * {@link #pStdReferenceFinalLists};
  *     uint32_t {@link #naluSliceSegmentEntryCount};
  *     {@link VkVideoEncodeH265NaluSliceSegmentInfoEXT VkVideoEncodeH265NaluSliceSegmentInfoEXT} const * {@link #pNaluSliceSegmentEntries};
- *     {@link StdVideoEncodeH265PictureInfo StdVideoEncodeH265PictureInfo} const * {@link #pCurrentPictureInfo};
+ *     {@link StdVideoEncodeH265PictureInfo StdVideoEncodeH265PictureInfo} const * {@link #pStdPictureInfo};
  * }</code></pre>
  */
 public class VkVideoEncodeH265VclFrameInfoEXT extends Struct implements NativeResource {
@@ -59,10 +59,10 @@ public class VkVideoEncodeH265VclFrameInfoEXT extends Struct implements NativeRe
     public static final int
         STYPE,
         PNEXT,
-        PREFERENCEFINALLISTS,
+        PSTDREFERENCEFINALLISTS,
         NALUSLICESEGMENTENTRYCOUNT,
         PNALUSLICESEGMENTENTRIES,
-        PCURRENTPICTUREINFO;
+        PSTDPICTUREINFO;
 
     static {
         Layout layout = __struct(
@@ -79,10 +79,10 @@ public class VkVideoEncodeH265VclFrameInfoEXT extends Struct implements NativeRe
 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
-        PREFERENCEFINALLISTS = layout.offsetof(2);
+        PSTDREFERENCEFINALLISTS = layout.offsetof(2);
         NALUSLICESEGMENTENTRYCOUNT = layout.offsetof(3);
         PNALUSLICESEGMENTENTRIES = layout.offsetof(4);
-        PCURRENTPICTUREINFO = layout.offsetof(5);
+        PSTDPICTUREINFO = layout.offsetof(5);
     }
 
     /**
@@ -104,10 +104,10 @@ public class VkVideoEncodeH265VclFrameInfoEXT extends Struct implements NativeRe
     /** {@code NULL} or a pointer to a structure extending this structure. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** {@code NULL} or a pointer to a {@link VkVideoEncodeH265ReferenceListsInfoEXT} structure specifying the reference lists to be used for the current picture. */
+    /** {@code NULL} or a pointer to a {@code StdVideoEncodeH265ReferenceListsInfo} structure specifying the reference lists to be used for the current picture. */
     @Nullable
-    @NativeType("VkVideoEncodeH265ReferenceListsInfoEXT const *")
-    public VkVideoEncodeH265ReferenceListsInfoEXT pReferenceFinalLists() { return npReferenceFinalLists(address()); }
+    @NativeType("StdVideoEncodeH265ReferenceModifications const *")
+    public StdVideoEncodeH265ReferenceModifications pStdReferenceFinalLists() { return npStdReferenceFinalLists(address()); }
     /** the number of slice segment NALUs in the frame. */
     @NativeType("uint32_t")
     public int naluSliceSegmentEntryCount() { return nnaluSliceSegmentEntryCount(address()); }
@@ -116,7 +116,7 @@ public class VkVideoEncodeH265VclFrameInfoEXT extends Struct implements NativeRe
     public VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer pNaluSliceSegmentEntries() { return npNaluSliceSegmentEntries(address()); }
     /** a pointer to a {@code StdVideoEncodeH265PictureInfo} structure specifying the syntax and other codec-specific information from the H.265 specification, associated with this picture. */
     @NativeType("StdVideoEncodeH265PictureInfo const *")
-    public StdVideoEncodeH265PictureInfo pCurrentPictureInfo() { return npCurrentPictureInfo(address()); }
+    public StdVideoEncodeH265PictureInfo pStdPictureInfo() { return npStdPictureInfo(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoEncodeH265VclFrameInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -124,26 +124,26 @@ public class VkVideoEncodeH265VclFrameInfoEXT extends Struct implements NativeRe
     public VkVideoEncodeH265VclFrameInfoEXT sType$Default() { return sType(EXTVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeH265VclFrameInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVideoEncodeH265ReferenceListsInfoEXT} to the {@link #pReferenceFinalLists} field. */
-    public VkVideoEncodeH265VclFrameInfoEXT pReferenceFinalLists(@Nullable @NativeType("VkVideoEncodeH265ReferenceListsInfoEXT const *") VkVideoEncodeH265ReferenceListsInfoEXT value) { npReferenceFinalLists(address(), value); return this; }
+    /** Sets the address of the specified {@link StdVideoEncodeH265ReferenceModifications} to the {@link #pStdReferenceFinalLists} field. */
+    public VkVideoEncodeH265VclFrameInfoEXT pStdReferenceFinalLists(@Nullable @NativeType("StdVideoEncodeH265ReferenceModifications const *") StdVideoEncodeH265ReferenceModifications value) { npStdReferenceFinalLists(address(), value); return this; }
     /** Sets the address of the specified {@link VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer} to the {@link #pNaluSliceSegmentEntries} field. */
     public VkVideoEncodeH265VclFrameInfoEXT pNaluSliceSegmentEntries(@NativeType("VkVideoEncodeH265NaluSliceSegmentInfoEXT const *") VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer value) { npNaluSliceSegmentEntries(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoEncodeH265PictureInfo} to the {@link #pCurrentPictureInfo} field. */
-    public VkVideoEncodeH265VclFrameInfoEXT pCurrentPictureInfo(@NativeType("StdVideoEncodeH265PictureInfo const *") StdVideoEncodeH265PictureInfo value) { npCurrentPictureInfo(address(), value); return this; }
+    /** Sets the address of the specified {@link StdVideoEncodeH265PictureInfo} to the {@link #pStdPictureInfo} field. */
+    public VkVideoEncodeH265VclFrameInfoEXT pStdPictureInfo(@NativeType("StdVideoEncodeH265PictureInfo const *") StdVideoEncodeH265PictureInfo value) { npStdPictureInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoEncodeH265VclFrameInfoEXT set(
         int sType,
         long pNext,
-        @Nullable VkVideoEncodeH265ReferenceListsInfoEXT pReferenceFinalLists,
+        @Nullable StdVideoEncodeH265ReferenceModifications pStdReferenceFinalLists,
         VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer pNaluSliceSegmentEntries,
-        StdVideoEncodeH265PictureInfo pCurrentPictureInfo
+        StdVideoEncodeH265PictureInfo pStdPictureInfo
     ) {
         sType(sType);
         pNext(pNext);
-        pReferenceFinalLists(pReferenceFinalLists);
+        pStdReferenceFinalLists(pStdReferenceFinalLists);
         pNaluSliceSegmentEntries(pNaluSliceSegmentEntries);
-        pCurrentPictureInfo(pCurrentPictureInfo);
+        pStdPictureInfo(pStdPictureInfo);
 
         return this;
     }
@@ -277,27 +277,27 @@ public class VkVideoEncodeH265VclFrameInfoEXT extends Struct implements NativeRe
     public static int nsType(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265VclFrameInfoEXT.STYPE); }
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PNEXT); }
-    /** Unsafe version of {@link #pReferenceFinalLists}. */
-    @Nullable public static VkVideoEncodeH265ReferenceListsInfoEXT npReferenceFinalLists(long struct) { return VkVideoEncodeH265ReferenceListsInfoEXT.createSafe(memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PREFERENCEFINALLISTS)); }
+    /** Unsafe version of {@link #pStdReferenceFinalLists}. */
+    @Nullable public static StdVideoEncodeH265ReferenceModifications npStdReferenceFinalLists(long struct) { return StdVideoEncodeH265ReferenceModifications.createSafe(memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PSTDREFERENCEFINALLISTS)); }
     /** Unsafe version of {@link #naluSliceSegmentEntryCount}. */
     public static int nnaluSliceSegmentEntryCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265VclFrameInfoEXT.NALUSLICESEGMENTENTRYCOUNT); }
     /** Unsafe version of {@link #pNaluSliceSegmentEntries}. */
     public static VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer npNaluSliceSegmentEntries(long struct) { return VkVideoEncodeH265NaluSliceSegmentInfoEXT.create(memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PNALUSLICESEGMENTENTRIES), nnaluSliceSegmentEntryCount(struct)); }
-    /** Unsafe version of {@link #pCurrentPictureInfo}. */
-    public static StdVideoEncodeH265PictureInfo npCurrentPictureInfo(long struct) { return StdVideoEncodeH265PictureInfo.create(memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PCURRENTPICTUREINFO)); }
+    /** Unsafe version of {@link #pStdPictureInfo}. */
+    public static StdVideoEncodeH265PictureInfo npStdPictureInfo(long struct) { return StdVideoEncodeH265PictureInfo.create(memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PSTDPICTUREINFO)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265VclFrameInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #pReferenceFinalLists(VkVideoEncodeH265ReferenceListsInfoEXT) pReferenceFinalLists}. */
-    public static void npReferenceFinalLists(long struct, @Nullable VkVideoEncodeH265ReferenceListsInfoEXT value) { memPutAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PREFERENCEFINALLISTS, memAddressSafe(value)); }
+    /** Unsafe version of {@link #pStdReferenceFinalLists(StdVideoEncodeH265ReferenceModifications) pStdReferenceFinalLists}. */
+    public static void npStdReferenceFinalLists(long struct, @Nullable StdVideoEncodeH265ReferenceModifications value) { memPutAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PSTDREFERENCEFINALLISTS, memAddressSafe(value)); }
     /** Sets the specified value to the {@code naluSliceSegmentEntryCount} field of the specified {@code struct}. */
     public static void nnaluSliceSegmentEntryCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265VclFrameInfoEXT.NALUSLICESEGMENTENTRYCOUNT, value); }
     /** Unsafe version of {@link #pNaluSliceSegmentEntries(VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer) pNaluSliceSegmentEntries}. */
     public static void npNaluSliceSegmentEntries(long struct, VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer value) { memPutAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PNALUSLICESEGMENTENTRIES, value.address()); nnaluSliceSegmentEntryCount(struct, value.remaining()); }
-    /** Unsafe version of {@link #pCurrentPictureInfo(StdVideoEncodeH265PictureInfo) pCurrentPictureInfo}. */
-    public static void npCurrentPictureInfo(long struct, StdVideoEncodeH265PictureInfo value) { memPutAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PCURRENTPICTUREINFO, value.address()); }
+    /** Unsafe version of {@link #pStdPictureInfo(StdVideoEncodeH265PictureInfo) pStdPictureInfo}. */
+    public static void npStdPictureInfo(long struct, StdVideoEncodeH265PictureInfo value) { memPutAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PSTDPICTUREINFO, value.address()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -305,15 +305,15 @@ public class VkVideoEncodeH265VclFrameInfoEXT extends Struct implements NativeRe
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        long pReferenceFinalLists = memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PREFERENCEFINALLISTS);
-        if (pReferenceFinalLists != NULL) {
-            VkVideoEncodeH265ReferenceListsInfoEXT.validate(pReferenceFinalLists);
+        long pStdReferenceFinalLists = memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PSTDREFERENCEFINALLISTS);
+        if (pStdReferenceFinalLists != NULL) {
+            StdVideoEncodeH265ReferenceModifications.validate(pStdReferenceFinalLists);
         }
         int naluSliceSegmentEntryCount = nnaluSliceSegmentEntryCount(struct);
         long pNaluSliceSegmentEntries = memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PNALUSLICESEGMENTENTRIES);
         check(pNaluSliceSegmentEntries);
         validate(pNaluSliceSegmentEntries, naluSliceSegmentEntryCount, VkVideoEncodeH265NaluSliceSegmentInfoEXT.SIZEOF, VkVideoEncodeH265NaluSliceSegmentInfoEXT::validate);
-        check(memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PCURRENTPICTUREINFO));
+        check(memGetAddress(struct + VkVideoEncodeH265VclFrameInfoEXT.PSTDPICTUREINFO));
     }
 
     // -----------------------------------
@@ -360,19 +360,19 @@ public class VkVideoEncodeH265VclFrameInfoEXT extends Struct implements NativeRe
         /** @return the value of the {@link VkVideoEncodeH265VclFrameInfoEXT#pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH265VclFrameInfoEXT.npNext(address()); }
-        /** @return a {@link VkVideoEncodeH265ReferenceListsInfoEXT} view of the struct pointed to by the {@link VkVideoEncodeH265VclFrameInfoEXT#pReferenceFinalLists} field. */
+        /** @return a {@link StdVideoEncodeH265ReferenceModifications} view of the struct pointed to by the {@link VkVideoEncodeH265VclFrameInfoEXT#pStdReferenceFinalLists} field. */
         @Nullable
-        @NativeType("VkVideoEncodeH265ReferenceListsInfoEXT const *")
-        public VkVideoEncodeH265ReferenceListsInfoEXT pReferenceFinalLists() { return VkVideoEncodeH265VclFrameInfoEXT.npReferenceFinalLists(address()); }
+        @NativeType("StdVideoEncodeH265ReferenceModifications const *")
+        public StdVideoEncodeH265ReferenceModifications pStdReferenceFinalLists() { return VkVideoEncodeH265VclFrameInfoEXT.npStdReferenceFinalLists(address()); }
         /** @return the value of the {@link VkVideoEncodeH265VclFrameInfoEXT#naluSliceSegmentEntryCount} field. */
         @NativeType("uint32_t")
         public int naluSliceSegmentEntryCount() { return VkVideoEncodeH265VclFrameInfoEXT.nnaluSliceSegmentEntryCount(address()); }
         /** @return a {@link VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeH265VclFrameInfoEXT#pNaluSliceSegmentEntries} field. */
         @NativeType("VkVideoEncodeH265NaluSliceSegmentInfoEXT const *")
         public VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer pNaluSliceSegmentEntries() { return VkVideoEncodeH265VclFrameInfoEXT.npNaluSliceSegmentEntries(address()); }
-        /** @return a {@link StdVideoEncodeH265PictureInfo} view of the struct pointed to by the {@link VkVideoEncodeH265VclFrameInfoEXT#pCurrentPictureInfo} field. */
+        /** @return a {@link StdVideoEncodeH265PictureInfo} view of the struct pointed to by the {@link VkVideoEncodeH265VclFrameInfoEXT#pStdPictureInfo} field. */
         @NativeType("StdVideoEncodeH265PictureInfo const *")
-        public StdVideoEncodeH265PictureInfo pCurrentPictureInfo() { return VkVideoEncodeH265VclFrameInfoEXT.npCurrentPictureInfo(address()); }
+        public StdVideoEncodeH265PictureInfo pStdPictureInfo() { return VkVideoEncodeH265VclFrameInfoEXT.npStdPictureInfo(address()); }
 
         /** Sets the specified value to the {@link VkVideoEncodeH265VclFrameInfoEXT#sType} field. */
         public VkVideoEncodeH265VclFrameInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH265VclFrameInfoEXT.nsType(address(), value); return this; }
@@ -380,12 +380,12 @@ public class VkVideoEncodeH265VclFrameInfoEXT extends Struct implements NativeRe
         public VkVideoEncodeH265VclFrameInfoEXT.Buffer sType$Default() { return sType(EXTVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT); }
         /** Sets the specified value to the {@link VkVideoEncodeH265VclFrameInfoEXT#pNext} field. */
         public VkVideoEncodeH265VclFrameInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH265VclFrameInfoEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVideoEncodeH265ReferenceListsInfoEXT} to the {@link VkVideoEncodeH265VclFrameInfoEXT#pReferenceFinalLists} field. */
-        public VkVideoEncodeH265VclFrameInfoEXT.Buffer pReferenceFinalLists(@Nullable @NativeType("VkVideoEncodeH265ReferenceListsInfoEXT const *") VkVideoEncodeH265ReferenceListsInfoEXT value) { VkVideoEncodeH265VclFrameInfoEXT.npReferenceFinalLists(address(), value); return this; }
+        /** Sets the address of the specified {@link StdVideoEncodeH265ReferenceModifications} to the {@link VkVideoEncodeH265VclFrameInfoEXT#pStdReferenceFinalLists} field. */
+        public VkVideoEncodeH265VclFrameInfoEXT.Buffer pStdReferenceFinalLists(@Nullable @NativeType("StdVideoEncodeH265ReferenceModifications const *") StdVideoEncodeH265ReferenceModifications value) { VkVideoEncodeH265VclFrameInfoEXT.npStdReferenceFinalLists(address(), value); return this; }
         /** Sets the address of the specified {@link VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer} to the {@link VkVideoEncodeH265VclFrameInfoEXT#pNaluSliceSegmentEntries} field. */
         public VkVideoEncodeH265VclFrameInfoEXT.Buffer pNaluSliceSegmentEntries(@NativeType("VkVideoEncodeH265NaluSliceSegmentInfoEXT const *") VkVideoEncodeH265NaluSliceSegmentInfoEXT.Buffer value) { VkVideoEncodeH265VclFrameInfoEXT.npNaluSliceSegmentEntries(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoEncodeH265PictureInfo} to the {@link VkVideoEncodeH265VclFrameInfoEXT#pCurrentPictureInfo} field. */
-        public VkVideoEncodeH265VclFrameInfoEXT.Buffer pCurrentPictureInfo(@NativeType("StdVideoEncodeH265PictureInfo const *") StdVideoEncodeH265PictureInfo value) { VkVideoEncodeH265VclFrameInfoEXT.npCurrentPictureInfo(address(), value); return this; }
+        /** Sets the address of the specified {@link StdVideoEncodeH265PictureInfo} to the {@link VkVideoEncodeH265VclFrameInfoEXT#pStdPictureInfo} field. */
+        public VkVideoEncodeH265VclFrameInfoEXT.Buffer pStdPictureInfo(@NativeType("StdVideoEncodeH265PictureInfo const *") StdVideoEncodeH265PictureInfo value) { VkVideoEncodeH265VclFrameInfoEXT.npStdPictureInfo(address(), value); return this; }
 
     }
 

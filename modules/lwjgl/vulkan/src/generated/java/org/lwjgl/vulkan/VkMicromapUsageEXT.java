@@ -22,15 +22,17 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} then {@code format} <b>must</b> be {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} or {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT}</li>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} and {@code format} is {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@code maxOpacity2StateSubdivisionLevel} of {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT}</li>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} and {@code format} is {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@code maxOpacity4StateSubdivisionLevel} of {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT}</li>
+ * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} and {@code format} is {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT}{@code ::maxOpacity2StateSubdivisionLevel}</li>
+ * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} and {@code format} is {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT}{@code ::maxOpacity4StateSubdivisionLevel}</li>
+ * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link NVDisplacementMicromap#VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV} then {@code format} <b>must</b> be {@link NVDisplacementMicromap#VK_DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV}, {@link NVDisplacementMicromap#VK_DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV} or {@link NVDisplacementMicromap#VK_DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV}</li>
+ * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link NVDisplacementMicromap#VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@link VkPhysicalDeviceDisplacementMicromapPropertiesNV}{@code ::maxDisplacementMicromapSubdivisionLevel}</li>
  * </ul>
  * 
  * <p>The {@code format} is interpreted based on the {@code type} of the micromap using it.</p>
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkAccelerationStructureTrianglesOpacityMicromapEXT}, {@link VkMicromapBuildInfoEXT}</p>
+ * <p>{@link VkAccelerationStructureTrianglesDisplacementMicromapNV}, {@link VkAccelerationStructureTrianglesOpacityMicromapEXT}, {@link VkMicromapBuildInfoEXT}</p>
  * 
  * <h3>Layout</h3>
  * 

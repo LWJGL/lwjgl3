@@ -23,6 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link StdVideoEncodeH264PictureInfoFlags StdVideoEncodeH264PictureInfoFlags} flags;
  *     uint8_t seq_parameter_set_id;
  *     uint8_t pic_parameter_set_id;
+ *     uint16_t reserved1;
  *     StdVideoH264PictureType pictureType;
  *     uint32_t frame_num;
  *     int32_t PicOrderCnt;
@@ -41,6 +42,7 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
         FLAGS,
         SEQ_PARAMETER_SET_ID,
         PIC_PARAMETER_SET_ID,
+        RESERVED1,
         PICTURETYPE,
         FRAME_NUM,
         PICORDERCNT;
@@ -50,6 +52,7 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
             __member(StdVideoEncodeH264PictureInfoFlags.SIZEOF, StdVideoEncodeH264PictureInfoFlags.ALIGNOF),
             __member(1),
             __member(1),
+            __member(2),
             __member(4),
             __member(4),
             __member(4)
@@ -61,9 +64,10 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
         FLAGS = layout.offsetof(0);
         SEQ_PARAMETER_SET_ID = layout.offsetof(1);
         PIC_PARAMETER_SET_ID = layout.offsetof(2);
-        PICTURETYPE = layout.offsetof(3);
-        FRAME_NUM = layout.offsetof(4);
-        PICORDERCNT = layout.offsetof(5);
+        RESERVED1 = layout.offsetof(3);
+        PICTURETYPE = layout.offsetof(4);
+        FRAME_NUM = layout.offsetof(5);
+        PICORDERCNT = layout.offsetof(6);
     }
 
     /**
@@ -87,6 +91,9 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
     /** @return the value of the {@code pic_parameter_set_id} field. */
     @NativeType("uint8_t")
     public byte pic_parameter_set_id() { return npic_parameter_set_id(address()); }
+    /** @return the value of the {@code reserved1} field. */
+    @NativeType("uint16_t")
+    public short reserved1() { return nreserved1(address()); }
     /** @return the value of the {@code pictureType} field. */
     @NativeType("StdVideoH264PictureType")
     public int pictureType() { return npictureType(address()); }
@@ -105,6 +112,8 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
     public StdVideoEncodeH264PictureInfo seq_parameter_set_id(@NativeType("uint8_t") byte value) { nseq_parameter_set_id(address(), value); return this; }
     /** Sets the specified value to the {@code pic_parameter_set_id} field. */
     public StdVideoEncodeH264PictureInfo pic_parameter_set_id(@NativeType("uint8_t") byte value) { npic_parameter_set_id(address(), value); return this; }
+    /** Sets the specified value to the {@code reserved1} field. */
+    public StdVideoEncodeH264PictureInfo reserved1(@NativeType("uint16_t") short value) { nreserved1(address(), value); return this; }
     /** Sets the specified value to the {@code pictureType} field. */
     public StdVideoEncodeH264PictureInfo pictureType(@NativeType("StdVideoH264PictureType") int value) { npictureType(address(), value); return this; }
     /** Sets the specified value to the {@code frame_num} field. */
@@ -117,6 +126,7 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
         StdVideoEncodeH264PictureInfoFlags flags,
         byte seq_parameter_set_id,
         byte pic_parameter_set_id,
+        short reserved1,
         int pictureType,
         int frame_num,
         int PicOrderCnt
@@ -124,6 +134,7 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
         flags(flags);
         seq_parameter_set_id(seq_parameter_set_id);
         pic_parameter_set_id(pic_parameter_set_id);
+        reserved1(reserved1);
         pictureType(pictureType);
         frame_num(frame_num);
         PicOrderCnt(PicOrderCnt);
@@ -262,6 +273,8 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
     public static byte nseq_parameter_set_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264PictureInfo.SEQ_PARAMETER_SET_ID); }
     /** Unsafe version of {@link #pic_parameter_set_id}. */
     public static byte npic_parameter_set_id(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264PictureInfo.PIC_PARAMETER_SET_ID); }
+    /** Unsafe version of {@link #reserved1}. */
+    public static short nreserved1(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH264PictureInfo.RESERVED1); }
     /** Unsafe version of {@link #pictureType}. */
     public static int npictureType(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264PictureInfo.PICTURETYPE); }
     /** Unsafe version of {@link #frame_num}. */
@@ -275,6 +288,8 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
     public static void nseq_parameter_set_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264PictureInfo.SEQ_PARAMETER_SET_ID, value); }
     /** Unsafe version of {@link #pic_parameter_set_id(byte) pic_parameter_set_id}. */
     public static void npic_parameter_set_id(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264PictureInfo.PIC_PARAMETER_SET_ID, value); }
+    /** Unsafe version of {@link #reserved1(short) reserved1}. */
+    public static void nreserved1(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH264PictureInfo.RESERVED1, value); }
     /** Unsafe version of {@link #pictureType(int) pictureType}. */
     public static void npictureType(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264PictureInfo.PICTURETYPE, value); }
     /** Unsafe version of {@link #frame_num(int) frame_num}. */
@@ -328,6 +343,9 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
         /** @return the value of the {@code pic_parameter_set_id} field. */
         @NativeType("uint8_t")
         public byte pic_parameter_set_id() { return StdVideoEncodeH264PictureInfo.npic_parameter_set_id(address()); }
+        /** @return the value of the {@code reserved1} field. */
+        @NativeType("uint16_t")
+        public short reserved1() { return StdVideoEncodeH264PictureInfo.nreserved1(address()); }
         /** @return the value of the {@code pictureType} field. */
         @NativeType("StdVideoH264PictureType")
         public int pictureType() { return StdVideoEncodeH264PictureInfo.npictureType(address()); }
@@ -346,6 +364,8 @@ public class StdVideoEncodeH264PictureInfo extends Struct implements NativeResou
         public StdVideoEncodeH264PictureInfo.Buffer seq_parameter_set_id(@NativeType("uint8_t") byte value) { StdVideoEncodeH264PictureInfo.nseq_parameter_set_id(address(), value); return this; }
         /** Sets the specified value to the {@code pic_parameter_set_id} field. */
         public StdVideoEncodeH264PictureInfo.Buffer pic_parameter_set_id(@NativeType("uint8_t") byte value) { StdVideoEncodeH264PictureInfo.npic_parameter_set_id(address(), value); return this; }
+        /** Sets the specified value to the {@code reserved1} field. */
+        public StdVideoEncodeH264PictureInfo.Buffer reserved1(@NativeType("uint16_t") short value) { StdVideoEncodeH264PictureInfo.nreserved1(address(), value); return this; }
         /** Sets the specified value to the {@code pictureType} field. */
         public StdVideoEncodeH264PictureInfo.Buffer pictureType(@NativeType("StdVideoH264PictureType") int value) { StdVideoEncodeH264PictureInfo.npictureType(address(), value); return this; }
         /** Sets the specified value to the {@code frame_num} field. */

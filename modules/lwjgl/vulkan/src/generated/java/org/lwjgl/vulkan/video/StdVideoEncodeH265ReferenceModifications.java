@@ -22,10 +22,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct StdVideoEncodeH265ReferenceModifications {
  *     {@link StdVideoEncodeH265ReferenceModificationFlags StdVideoEncodeH265ReferenceModificationFlags} flags;
- *     uint8_t {@link #referenceList0ModificationsCount};
- *     uint8_t const * {@link #pReferenceList0Modifications};
- *     uint8_t {@link #referenceList1ModificationsCount};
- *     uint8_t const * {@link #pReferenceList1Modifications};
+ *     uint8_t num_ref_idx_l0_active_minus1;
+ *     uint8_t num_ref_idx_l1_active_minus1;
+ *     uint16_t reserved1;
+ *     uint8_t const * pRefPicList0Entries;
+ *     uint8_t const * pRefPicList1Entries;
+ *     uint8_t const * pRefList0Modifications;
+ *     uint8_t const * pRefList1Modifications;
  * }</code></pre>
  */
 public class StdVideoEncodeH265ReferenceModifications extends Struct implements NativeResource {
@@ -39,17 +42,23 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct implements 
     /** The struct member offsets. */
     public static final int
         FLAGS,
-        REFERENCELIST0MODIFICATIONSCOUNT,
-        PREFERENCELIST0MODIFICATIONS,
-        REFERENCELIST1MODIFICATIONSCOUNT,
-        PREFERENCELIST1MODIFICATIONS;
+        NUM_REF_IDX_L0_ACTIVE_MINUS1,
+        NUM_REF_IDX_L1_ACTIVE_MINUS1,
+        RESERVED1,
+        PREFPICLIST0ENTRIES,
+        PREFPICLIST1ENTRIES,
+        PREFLIST0MODIFICATIONS,
+        PREFLIST1MODIFICATIONS;
 
     static {
         Layout layout = __struct(
             __member(StdVideoEncodeH265ReferenceModificationFlags.SIZEOF, StdVideoEncodeH265ReferenceModificationFlags.ALIGNOF),
             __member(1),
-            __member(POINTER_SIZE),
             __member(1),
+            __member(2),
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
+            __member(POINTER_SIZE),
             __member(POINTER_SIZE)
         );
 
@@ -57,10 +66,13 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct implements 
         ALIGNOF = layout.getAlignment();
 
         FLAGS = layout.offsetof(0);
-        REFERENCELIST0MODIFICATIONSCOUNT = layout.offsetof(1);
-        PREFERENCELIST0MODIFICATIONS = layout.offsetof(2);
-        REFERENCELIST1MODIFICATIONSCOUNT = layout.offsetof(3);
-        PREFERENCELIST1MODIFICATIONS = layout.offsetof(4);
+        NUM_REF_IDX_L0_ACTIVE_MINUS1 = layout.offsetof(1);
+        NUM_REF_IDX_L1_ACTIVE_MINUS1 = layout.offsetof(2);
+        RESERVED1 = layout.offsetof(3);
+        PREFPICLIST0ENTRIES = layout.offsetof(4);
+        PREFPICLIST1ENTRIES = layout.offsetof(5);
+        PREFLIST0MODIFICATIONS = layout.offsetof(6);
+        PREFLIST1MODIFICATIONS = layout.offsetof(7);
     }
 
     /**
@@ -78,37 +90,66 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct implements 
 
     /** @return a {@link StdVideoEncodeH265ReferenceModificationFlags} view of the {@code flags} field. */
     public StdVideoEncodeH265ReferenceModificationFlags flags() { return nflags(address()); }
-    /** num_ref_idx_l0_active_minus1 */
+    /** @return the value of the {@code num_ref_idx_l0_active_minus1} field. */
     @NativeType("uint8_t")
-    public byte referenceList0ModificationsCount() { return nreferenceList0ModificationsCount(address()); }
-    /** list_entry_l0 */
-    @NativeType("uint8_t const *")
-    public ByteBuffer pReferenceList0Modifications() { return npReferenceList0Modifications(address()); }
-    /** num_ref_idx_l1_active_minus1 */
+    public byte num_ref_idx_l0_active_minus1() { return nnum_ref_idx_l0_active_minus1(address()); }
+    /** @return the value of the {@code num_ref_idx_l1_active_minus1} field. */
     @NativeType("uint8_t")
-    public byte referenceList1ModificationsCount() { return nreferenceList1ModificationsCount(address()); }
-    /** list_entry_l1 */
+    public byte num_ref_idx_l1_active_minus1() { return nnum_ref_idx_l1_active_minus1(address()); }
+    /** @return the value of the {@code reserved1} field. */
+    @NativeType("uint16_t")
+    public short reserved1() { return nreserved1(address()); }
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pRefPicList0Entries} field. */
     @NativeType("uint8_t const *")
-    public ByteBuffer pReferenceList1Modifications() { return npReferenceList1Modifications(address()); }
+    public ByteBuffer pRefPicList0Entries() { return npRefPicList0Entries(address()); }
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pRefPicList1Entries} field. */
+    @NativeType("uint8_t const *")
+    public ByteBuffer pRefPicList1Entries() { return npRefPicList1Entries(address()); }
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pRefList0Modifications} field. */
+    @NativeType("uint8_t const *")
+    public ByteBuffer pRefList0Modifications() { return npRefList0Modifications(address()); }
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pRefList1Modifications} field. */
+    @NativeType("uint8_t const *")
+    public ByteBuffer pRefList1Modifications() { return npRefList1Modifications(address()); }
 
     /** Copies the specified {@link StdVideoEncodeH265ReferenceModificationFlags} to the {@code flags} field. */
     public StdVideoEncodeH265ReferenceModifications flags(StdVideoEncodeH265ReferenceModificationFlags value) { nflags(address(), value); return this; }
     /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
     public StdVideoEncodeH265ReferenceModifications flags(java.util.function.Consumer<StdVideoEncodeH265ReferenceModificationFlags> consumer) { consumer.accept(flags()); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pReferenceList0Modifications} field. */
-    public StdVideoEncodeH265ReferenceModifications pReferenceList0Modifications(@NativeType("uint8_t const *") ByteBuffer value) { npReferenceList0Modifications(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pReferenceList1Modifications} field. */
-    public StdVideoEncodeH265ReferenceModifications pReferenceList1Modifications(@NativeType("uint8_t const *") ByteBuffer value) { npReferenceList1Modifications(address(), value); return this; }
+    /** Sets the specified value to the {@code num_ref_idx_l0_active_minus1} field. */
+    public StdVideoEncodeH265ReferenceModifications num_ref_idx_l0_active_minus1(@NativeType("uint8_t") byte value) { nnum_ref_idx_l0_active_minus1(address(), value); return this; }
+    /** Sets the specified value to the {@code num_ref_idx_l1_active_minus1} field. */
+    public StdVideoEncodeH265ReferenceModifications num_ref_idx_l1_active_minus1(@NativeType("uint8_t") byte value) { nnum_ref_idx_l1_active_minus1(address(), value); return this; }
+    /** Sets the specified value to the {@code reserved1} field. */
+    public StdVideoEncodeH265ReferenceModifications reserved1(@NativeType("uint16_t") short value) { nreserved1(address(), value); return this; }
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pRefPicList0Entries} field. */
+    public StdVideoEncodeH265ReferenceModifications pRefPicList0Entries(@NativeType("uint8_t const *") ByteBuffer value) { npRefPicList0Entries(address(), value); return this; }
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pRefPicList1Entries} field. */
+    public StdVideoEncodeH265ReferenceModifications pRefPicList1Entries(@NativeType("uint8_t const *") ByteBuffer value) { npRefPicList1Entries(address(), value); return this; }
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pRefList0Modifications} field. */
+    public StdVideoEncodeH265ReferenceModifications pRefList0Modifications(@NativeType("uint8_t const *") ByteBuffer value) { npRefList0Modifications(address(), value); return this; }
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pRefList1Modifications} field. */
+    public StdVideoEncodeH265ReferenceModifications pRefList1Modifications(@NativeType("uint8_t const *") ByteBuffer value) { npRefList1Modifications(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public StdVideoEncodeH265ReferenceModifications set(
         StdVideoEncodeH265ReferenceModificationFlags flags,
-        ByteBuffer pReferenceList0Modifications,
-        ByteBuffer pReferenceList1Modifications
+        byte num_ref_idx_l0_active_minus1,
+        byte num_ref_idx_l1_active_minus1,
+        short reserved1,
+        ByteBuffer pRefPicList0Entries,
+        ByteBuffer pRefPicList1Entries,
+        ByteBuffer pRefList0Modifications,
+        ByteBuffer pRefList1Modifications
     ) {
         flags(flags);
-        pReferenceList0Modifications(pReferenceList0Modifications);
-        pReferenceList1Modifications(pReferenceList1Modifications);
+        num_ref_idx_l0_active_minus1(num_ref_idx_l0_active_minus1);
+        num_ref_idx_l1_active_minus1(num_ref_idx_l1_active_minus1);
+        reserved1(reserved1);
+        pRefPicList0Entries(pRefPicList0Entries);
+        pRefPicList1Entries(pRefPicList1Entries);
+        pRefList0Modifications(pRefList0Modifications);
+        pRefList1Modifications(pRefList1Modifications);
 
         return this;
     }
@@ -240,25 +281,37 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct implements 
 
     /** Unsafe version of {@link #flags}. */
     public static StdVideoEncodeH265ReferenceModificationFlags nflags(long struct) { return StdVideoEncodeH265ReferenceModificationFlags.create(struct + StdVideoEncodeH265ReferenceModifications.FLAGS); }
-    /** Unsafe version of {@link #referenceList0ModificationsCount}. */
-    public static byte nreferenceList0ModificationsCount(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceModifications.REFERENCELIST0MODIFICATIONSCOUNT); }
-    /** Unsafe version of {@link #pReferenceList0Modifications() pReferenceList0Modifications}. */
-    public static ByteBuffer npReferenceList0Modifications(long struct) { return memByteBuffer(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFERENCELIST0MODIFICATIONS), Byte.toUnsignedInt(nreferenceList0ModificationsCount(struct))); }
-    /** Unsafe version of {@link #referenceList1ModificationsCount}. */
-    public static byte nreferenceList1ModificationsCount(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceModifications.REFERENCELIST1MODIFICATIONSCOUNT); }
-    /** Unsafe version of {@link #pReferenceList1Modifications() pReferenceList1Modifications}. */
-    public static ByteBuffer npReferenceList1Modifications(long struct) { return memByteBuffer(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFERENCELIST1MODIFICATIONS), Byte.toUnsignedInt(nreferenceList1ModificationsCount(struct))); }
+    /** Unsafe version of {@link #num_ref_idx_l0_active_minus1}. */
+    public static byte nnum_ref_idx_l0_active_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L0_ACTIVE_MINUS1); }
+    /** Unsafe version of {@link #num_ref_idx_l1_active_minus1}. */
+    public static byte nnum_ref_idx_l1_active_minus1(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L1_ACTIVE_MINUS1); }
+    /** Unsafe version of {@link #reserved1}. */
+    public static short nreserved1(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH265ReferenceModifications.RESERVED1); }
+    /** Unsafe version of {@link #pRefPicList0Entries() pRefPicList0Entries}. */
+    public static ByteBuffer npRefPicList0Entries(long struct) { return memByteBuffer(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFPICLIST0ENTRIES), Byte.toUnsignedInt(nnum_ref_idx_l0_active_minus1(struct)) + 1); }
+    /** Unsafe version of {@link #pRefPicList1Entries() pRefPicList1Entries}. */
+    public static ByteBuffer npRefPicList1Entries(long struct) { return memByteBuffer(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFPICLIST1ENTRIES), Byte.toUnsignedInt(nnum_ref_idx_l1_active_minus1(struct)) + 1); }
+    /** Unsafe version of {@link #pRefList0Modifications() pRefList0Modifications}. */
+    public static ByteBuffer npRefList0Modifications(long struct) { return memByteBuffer(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFLIST0MODIFICATIONS), Byte.toUnsignedInt(nnum_ref_idx_l0_active_minus1(struct)) + 1); }
+    /** Unsafe version of {@link #pRefList1Modifications() pRefList1Modifications}. */
+    public static ByteBuffer npRefList1Modifications(long struct) { return memByteBuffer(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFLIST1MODIFICATIONS), Byte.toUnsignedInt(nnum_ref_idx_l1_active_minus1(struct)) + 1); }
 
     /** Unsafe version of {@link #flags(StdVideoEncodeH265ReferenceModificationFlags) flags}. */
     public static void nflags(long struct, StdVideoEncodeH265ReferenceModificationFlags value) { memCopy(value.address(), struct + StdVideoEncodeH265ReferenceModifications.FLAGS, StdVideoEncodeH265ReferenceModificationFlags.SIZEOF); }
-    /** Sets the specified value to the {@code referenceList0ModificationsCount} field of the specified {@code struct}. */
-    public static void nreferenceList0ModificationsCount(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceModifications.REFERENCELIST0MODIFICATIONSCOUNT, value); }
-    /** Unsafe version of {@link #pReferenceList0Modifications(ByteBuffer) pReferenceList0Modifications}. */
-    public static void npReferenceList0Modifications(long struct, ByteBuffer value) { memPutAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFERENCELIST0MODIFICATIONS, memAddress(value)); nreferenceList0ModificationsCount(struct, (byte)value.remaining()); }
-    /** Sets the specified value to the {@code referenceList1ModificationsCount} field of the specified {@code struct}. */
-    public static void nreferenceList1ModificationsCount(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceModifications.REFERENCELIST1MODIFICATIONSCOUNT, value); }
-    /** Unsafe version of {@link #pReferenceList1Modifications(ByteBuffer) pReferenceList1Modifications}. */
-    public static void npReferenceList1Modifications(long struct, ByteBuffer value) { memPutAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFERENCELIST1MODIFICATIONS, memAddress(value)); nreferenceList1ModificationsCount(struct, (byte)value.remaining()); }
+    /** Unsafe version of {@link #num_ref_idx_l0_active_minus1(byte) num_ref_idx_l0_active_minus1}. */
+    public static void nnum_ref_idx_l0_active_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L0_ACTIVE_MINUS1, value); }
+    /** Unsafe version of {@link #num_ref_idx_l1_active_minus1(byte) num_ref_idx_l1_active_minus1}. */
+    public static void nnum_ref_idx_l1_active_minus1(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH265ReferenceModifications.NUM_REF_IDX_L1_ACTIVE_MINUS1, value); }
+    /** Unsafe version of {@link #reserved1(short) reserved1}. */
+    public static void nreserved1(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH265ReferenceModifications.RESERVED1, value); }
+    /** Unsafe version of {@link #pRefPicList0Entries(ByteBuffer) pRefPicList0Entries}. */
+    public static void npRefPicList0Entries(long struct, ByteBuffer value) { memPutAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFPICLIST0ENTRIES, memAddress(value)); }
+    /** Unsafe version of {@link #pRefPicList1Entries(ByteBuffer) pRefPicList1Entries}. */
+    public static void npRefPicList1Entries(long struct, ByteBuffer value) { memPutAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFPICLIST1ENTRIES, memAddress(value)); }
+    /** Unsafe version of {@link #pRefList0Modifications(ByteBuffer) pRefList0Modifications}. */
+    public static void npRefList0Modifications(long struct, ByteBuffer value) { memPutAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFLIST0MODIFICATIONS, memAddress(value)); }
+    /** Unsafe version of {@link #pRefList1Modifications(ByteBuffer) pRefList1Modifications}. */
+    public static void npRefList1Modifications(long struct, ByteBuffer value) { memPutAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFLIST1MODIFICATIONS, memAddress(value)); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -266,8 +319,10 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct implements 
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        check(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFERENCELIST0MODIFICATIONS));
-        check(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFERENCELIST1MODIFICATIONS));
+        check(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFPICLIST0ENTRIES));
+        check(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFPICLIST1ENTRIES));
+        check(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFLIST0MODIFICATIONS));
+        check(memGetAddress(struct + StdVideoEncodeH265ReferenceModifications.PREFLIST1MODIFICATIONS));
     }
 
     // -----------------------------------
@@ -310,27 +365,46 @@ public class StdVideoEncodeH265ReferenceModifications extends Struct implements 
 
         /** @return a {@link StdVideoEncodeH265ReferenceModificationFlags} view of the {@code flags} field. */
         public StdVideoEncodeH265ReferenceModificationFlags flags() { return StdVideoEncodeH265ReferenceModifications.nflags(address()); }
-        /** @return the value of the {@link StdVideoEncodeH265ReferenceModifications#referenceList0ModificationsCount} field. */
+        /** @return the value of the {@code num_ref_idx_l0_active_minus1} field. */
         @NativeType("uint8_t")
-        public byte referenceList0ModificationsCount() { return StdVideoEncodeH265ReferenceModifications.nreferenceList0ModificationsCount(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link StdVideoEncodeH265ReferenceModifications#pReferenceList0Modifications} field. */
-        @NativeType("uint8_t const *")
-        public ByteBuffer pReferenceList0Modifications() { return StdVideoEncodeH265ReferenceModifications.npReferenceList0Modifications(address()); }
-        /** @return the value of the {@link StdVideoEncodeH265ReferenceModifications#referenceList1ModificationsCount} field. */
+        public byte num_ref_idx_l0_active_minus1() { return StdVideoEncodeH265ReferenceModifications.nnum_ref_idx_l0_active_minus1(address()); }
+        /** @return the value of the {@code num_ref_idx_l1_active_minus1} field. */
         @NativeType("uint8_t")
-        public byte referenceList1ModificationsCount() { return StdVideoEncodeH265ReferenceModifications.nreferenceList1ModificationsCount(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link StdVideoEncodeH265ReferenceModifications#pReferenceList1Modifications} field. */
+        public byte num_ref_idx_l1_active_minus1() { return StdVideoEncodeH265ReferenceModifications.nnum_ref_idx_l1_active_minus1(address()); }
+        /** @return the value of the {@code reserved1} field. */
+        @NativeType("uint16_t")
+        public short reserved1() { return StdVideoEncodeH265ReferenceModifications.nreserved1(address()); }
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pRefPicList0Entries} field. */
         @NativeType("uint8_t const *")
-        public ByteBuffer pReferenceList1Modifications() { return StdVideoEncodeH265ReferenceModifications.npReferenceList1Modifications(address()); }
+        public ByteBuffer pRefPicList0Entries() { return StdVideoEncodeH265ReferenceModifications.npRefPicList0Entries(address()); }
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pRefPicList1Entries} field. */
+        @NativeType("uint8_t const *")
+        public ByteBuffer pRefPicList1Entries() { return StdVideoEncodeH265ReferenceModifications.npRefPicList1Entries(address()); }
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pRefList0Modifications} field. */
+        @NativeType("uint8_t const *")
+        public ByteBuffer pRefList0Modifications() { return StdVideoEncodeH265ReferenceModifications.npRefList0Modifications(address()); }
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pRefList1Modifications} field. */
+        @NativeType("uint8_t const *")
+        public ByteBuffer pRefList1Modifications() { return StdVideoEncodeH265ReferenceModifications.npRefList1Modifications(address()); }
 
         /** Copies the specified {@link StdVideoEncodeH265ReferenceModificationFlags} to the {@code flags} field. */
         public StdVideoEncodeH265ReferenceModifications.Buffer flags(StdVideoEncodeH265ReferenceModificationFlags value) { StdVideoEncodeH265ReferenceModifications.nflags(address(), value); return this; }
         /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
         public StdVideoEncodeH265ReferenceModifications.Buffer flags(java.util.function.Consumer<StdVideoEncodeH265ReferenceModificationFlags> consumer) { consumer.accept(flags()); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link StdVideoEncodeH265ReferenceModifications#pReferenceList0Modifications} field. */
-        public StdVideoEncodeH265ReferenceModifications.Buffer pReferenceList0Modifications(@NativeType("uint8_t const *") ByteBuffer value) { StdVideoEncodeH265ReferenceModifications.npReferenceList0Modifications(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link StdVideoEncodeH265ReferenceModifications#pReferenceList1Modifications} field. */
-        public StdVideoEncodeH265ReferenceModifications.Buffer pReferenceList1Modifications(@NativeType("uint8_t const *") ByteBuffer value) { StdVideoEncodeH265ReferenceModifications.npReferenceList1Modifications(address(), value); return this; }
+        /** Sets the specified value to the {@code num_ref_idx_l0_active_minus1} field. */
+        public StdVideoEncodeH265ReferenceModifications.Buffer num_ref_idx_l0_active_minus1(@NativeType("uint8_t") byte value) { StdVideoEncodeH265ReferenceModifications.nnum_ref_idx_l0_active_minus1(address(), value); return this; }
+        /** Sets the specified value to the {@code num_ref_idx_l1_active_minus1} field. */
+        public StdVideoEncodeH265ReferenceModifications.Buffer num_ref_idx_l1_active_minus1(@NativeType("uint8_t") byte value) { StdVideoEncodeH265ReferenceModifications.nnum_ref_idx_l1_active_minus1(address(), value); return this; }
+        /** Sets the specified value to the {@code reserved1} field. */
+        public StdVideoEncodeH265ReferenceModifications.Buffer reserved1(@NativeType("uint16_t") short value) { StdVideoEncodeH265ReferenceModifications.nreserved1(address(), value); return this; }
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pRefPicList0Entries} field. */
+        public StdVideoEncodeH265ReferenceModifications.Buffer pRefPicList0Entries(@NativeType("uint8_t const *") ByteBuffer value) { StdVideoEncodeH265ReferenceModifications.npRefPicList0Entries(address(), value); return this; }
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pRefPicList1Entries} field. */
+        public StdVideoEncodeH265ReferenceModifications.Buffer pRefPicList1Entries(@NativeType("uint8_t const *") ByteBuffer value) { StdVideoEncodeH265ReferenceModifications.npRefPicList1Entries(address(), value); return this; }
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pRefList0Modifications} field. */
+        public StdVideoEncodeH265ReferenceModifications.Buffer pRefList0Modifications(@NativeType("uint8_t const *") ByteBuffer value) { StdVideoEncodeH265ReferenceModifications.npRefList0Modifications(address(), value); return this; }
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pRefList1Modifications} field. */
+        public StdVideoEncodeH265ReferenceModifications.Buffer pRefList1Modifications(@NativeType("uint8_t const *") ByteBuffer value) { StdVideoEncodeH265ReferenceModifications.npRefList1Modifications(address(), value); return this; }
 
     }
 

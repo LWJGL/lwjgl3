@@ -60,7 +60,7 @@ package org.lwjgl.vulkan;
  * <li>Daniel Rakos, AMD</li>
  * <li>Carsten Rohde, NVIDIA</li>
  * <li>Ray Smith, ARM</li>
- * <li>Chad Versace, Google</li>
+ * <li>Lina Versace, Google</li>
  * </ul></dd>
  * </dl>
  */

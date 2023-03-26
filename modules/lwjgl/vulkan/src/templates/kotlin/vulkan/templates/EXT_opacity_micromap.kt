@@ -213,7 +213,8 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
 
         <h5>Description</h5>
         <ul>
-            <li>#MICROMAP_TYPE_OPACITY_MICROMAP_EXT is a micromap containing data to control the opacity of a triangle</li>
+            <li>#MICROMAP_TYPE_OPACITY_MICROMAP_EXT is a micromap containing data to control the opacity of a triangle.</li>
+            <li>#MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV is a micromap containing data to control the displacement of subtriangles within a triangle.</li>
         </ul>
 
         <h5>See Also</h5>
@@ -299,6 +300,10 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
             <li>#OPACITY_MICROMAP_FORMAT_2_STATE_EXT indicates that the given micromap format has one bit per subtriangle encoding either fully opaque or fully transparent.</li>
             <li>#OPACITY_MICROMAP_FORMAT_4_STATE_EXT indicates that the given micromap format has two bits per subtriangle encoding four modes which can be interpreted as described in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#ray-opacity-micromap">ray traversal</a>.</li>
         </ul>
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        For compactness, these values are stored as 16-bit in some structures.
+        </div>
         """,
 
         "OPACITY_MICROMAP_FORMAT_2_STATE_EXT".."1",

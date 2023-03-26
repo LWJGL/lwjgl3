@@ -25,6 +25,11 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>An application can add additional drivers by including the {@link VkDirectDriverLoadingListLUNARG} struct to the {@code pNext} element of the {@link VkInstanceCreateInfo} structure given to {@code vkCreateInstance}.</p>
  * 
+ * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+ * 
+ * <p>{@link VkDirectDriverLoadingListLUNARG} allows applications to ship drivers with themselves. Only drivers that are designed to work with it should be used, such as drivers that implement Vulkan in software or that implement Vulkan by translating it to a different API. Any driver that requires installation should not be used, such as hardware drivers.</p>
+ * </div>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

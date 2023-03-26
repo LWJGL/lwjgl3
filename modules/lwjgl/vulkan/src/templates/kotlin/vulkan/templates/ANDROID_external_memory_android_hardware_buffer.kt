@@ -49,7 +49,7 @@ val ANDROID_external_memory_android_hardware_buffer = "ANDROIDExternalMemoryAndr
             <dt><b>Contributors</b></dt>
             <dd><ul>
                 <li>Ray Smith, ARM</li>
-                <li>Chad Versace, Google</li>
+                <li>Lina Versace, Google</li>
                 <li>Jesse Hall, Google</li>
                 <li>Tobias Hector, Imagination</li>
                 <li>James Jones, NVIDIA</li>

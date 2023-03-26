@@ -208,7 +208,7 @@ public final class STDVulkanVideoCodecH265 {
     public static final int STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE = 8;
 
     /** The extension specification version. */
-    public static final int VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 9);
+    public static final int VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(0, 9, 10);
 
     /** The extension name. */
     public static final String VK_STD_VULKAN_VIDEO_CODEC_H265_ENCODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h265_encode";

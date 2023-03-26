@@ -57,7 +57,7 @@ import static org.lwjgl.system.JNI.*;
  * <li>Ian Elliott, Google</li>
  * <li>Yiwei Zhang, Google</li>
  * <li>Charlie Lao, Google</li>
- * <li>Chad Versace, Google</li>
+ * <li>Lina Versace, Google</li>
  * <li>Ralph Potter, Samsung</li>
  * <li>Igor Nazarov, Samsung</li>
  * <li>Hyunchang Kim, Samsung</li>

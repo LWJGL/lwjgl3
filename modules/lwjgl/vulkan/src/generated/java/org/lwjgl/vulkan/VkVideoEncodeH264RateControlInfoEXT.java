@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #idrPeriod};
  *     uint32_t {@link #consecutiveBFrameCount};
  *     VkVideoEncodeH264RateControlStructureEXT {@link #rateControlStructure};
- *     uint8_t {@link #temporalLayerCount};
+ *     uint32_t {@link #temporalLayerCount};
  * }</code></pre>
  */
 public class VkVideoEncodeH264RateControlInfoEXT extends Struct implements NativeResource {
@@ -72,7 +72,7 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct implements Nativ
             __member(4),
             __member(4),
             __member(4),
-            __member(1)
+            __member(4)
         );
 
         SIZEOF = layout.getSize();
@@ -119,8 +119,8 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct implements Nativ
     @NativeType("VkVideoEncodeH264RateControlStructureEXT")
     public int rateControlStructure() { return nrateControlStructure(address()); }
     /** specifies the number of temporal layers enabled in the stream. */
-    @NativeType("uint8_t")
-    public byte temporalLayerCount() { return ntemporalLayerCount(address()); }
+    @NativeType("uint32_t")
+    public int temporalLayerCount() { return ntemporalLayerCount(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoEncodeH264RateControlInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -137,7 +137,7 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct implements Nativ
     /** Sets the specified value to the {@link #rateControlStructure} field. */
     public VkVideoEncodeH264RateControlInfoEXT rateControlStructure(@NativeType("VkVideoEncodeH264RateControlStructureEXT") int value) { nrateControlStructure(address(), value); return this; }
     /** Sets the specified value to the {@link #temporalLayerCount} field. */
-    public VkVideoEncodeH264RateControlInfoEXT temporalLayerCount(@NativeType("uint8_t") byte value) { ntemporalLayerCount(address(), value); return this; }
+    public VkVideoEncodeH264RateControlInfoEXT temporalLayerCount(@NativeType("uint32_t") int value) { ntemporalLayerCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoEncodeH264RateControlInfoEXT set(
@@ -147,7 +147,7 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct implements Nativ
         int idrPeriod,
         int consecutiveBFrameCount,
         int rateControlStructure,
-        byte temporalLayerCount
+        int temporalLayerCount
     ) {
         sType(sType);
         pNext(pNext);
@@ -298,7 +298,7 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct implements Nativ
     /** Unsafe version of {@link #rateControlStructure}. */
     public static int nrateControlStructure(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.RATECONTROLSTRUCTURE); }
     /** Unsafe version of {@link #temporalLayerCount}. */
-    public static byte ntemporalLayerCount(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH264RateControlInfoEXT.TEMPORALLAYERCOUNT); }
+    public static int ntemporalLayerCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.TEMPORALLAYERCOUNT); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.STYPE, value); }
@@ -312,8 +312,8 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct implements Nativ
     public static void nconsecutiveBFrameCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.CONSECUTIVEBFRAMECOUNT, value); }
     /** Unsafe version of {@link #rateControlStructure(int) rateControlStructure}. */
     public static void nrateControlStructure(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.RATECONTROLSTRUCTURE, value); }
-    /** Unsafe version of {@link #temporalLayerCount(byte) temporalLayerCount}. */
-    public static void ntemporalLayerCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH264RateControlInfoEXT.TEMPORALLAYERCOUNT, value); }
+    /** Unsafe version of {@link #temporalLayerCount(int) temporalLayerCount}. */
+    public static void ntemporalLayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH264RateControlInfoEXT.TEMPORALLAYERCOUNT, value); }
 
     // -----------------------------------
 
@@ -372,8 +372,8 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct implements Nativ
         @NativeType("VkVideoEncodeH264RateControlStructureEXT")
         public int rateControlStructure() { return VkVideoEncodeH264RateControlInfoEXT.nrateControlStructure(address()); }
         /** @return the value of the {@link VkVideoEncodeH264RateControlInfoEXT#temporalLayerCount} field. */
-        @NativeType("uint8_t")
-        public byte temporalLayerCount() { return VkVideoEncodeH264RateControlInfoEXT.ntemporalLayerCount(address()); }
+        @NativeType("uint32_t")
+        public int temporalLayerCount() { return VkVideoEncodeH264RateControlInfoEXT.ntemporalLayerCount(address()); }
 
         /** Sets the specified value to the {@link VkVideoEncodeH264RateControlInfoEXT#sType} field. */
         public VkVideoEncodeH264RateControlInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264RateControlInfoEXT.nsType(address(), value); return this; }
@@ -390,7 +390,7 @@ public class VkVideoEncodeH264RateControlInfoEXT extends Struct implements Nativ
         /** Sets the specified value to the {@link VkVideoEncodeH264RateControlInfoEXT#rateControlStructure} field. */
         public VkVideoEncodeH264RateControlInfoEXT.Buffer rateControlStructure(@NativeType("VkVideoEncodeH264RateControlStructureEXT") int value) { VkVideoEncodeH264RateControlInfoEXT.nrateControlStructure(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH264RateControlInfoEXT#temporalLayerCount} field. */
-        public VkVideoEncodeH264RateControlInfoEXT.Buffer temporalLayerCount(@NativeType("uint8_t") byte value) { VkVideoEncodeH264RateControlInfoEXT.ntemporalLayerCount(address(), value); return this; }
+        public VkVideoEncodeH264RateControlInfoEXT.Buffer temporalLayerCount(@NativeType("uint32_t") int value) { VkVideoEncodeH264RateControlInfoEXT.ntemporalLayerCount(address(), value); return this; }
 
     }
 

@@ -530,6 +530,13 @@ public class KHRVideoQueue {
      * 
      * <p>The created video session <b>can</b> be used to perform video coding operations using video frames up to the maximum size specified in {@code pCreateInfo→maxCodedExtent}. The minimum frame size allowed is implicitly derived from {@link VkVideoCapabilitiesKHR}{@code ::minCodedExtent}, as returned by {@link #vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile specified by {@code pCreateInfo→pVideoProfile}. Accordingly, the created video session is said to be created with a {@code minCodedExtent} equal to that.</p>
      * 
+     * <p>In case of video session objects created with a video encode operation, implementations <b>may</b> return the {@link KHRVideoEncodeQueue#VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR} error if any of the specified Video Std parameters do not adhere to the syntactic or semantic requirements of the used video compression standard, or if values derived from parameters according to the rules defined by the used video compression standard do not adhere to the capabilities of the video compression standard or the implementation.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Applications <b>should</b> not rely on the {@link KHRVideoEncodeQueue#VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR} error being returned by any command as a means to verify Video Std parameters, as implementations are not required to report the error in any specific set of cases.</p>
+     * </div>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -552,6 +559,7 @@ public class KHRVideoQueue {
      * <li>{@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}</li>
      * <li>{@link VK10#VK_ERROR_INITIALIZATION_FAILED ERROR_INITIALIZATION_FAILED}</li>
      * <li>{@link #VK_ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR}</li>
+     * <li>{@link KHRVideoEncodeQueue#VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR}</li>
      * </ul></dd>
      * </dl>
      * 
@@ -870,6 +878,13 @@ public class KHRVideoQueue {
      * </li>
      * </ul>
      * 
+     * <p>In case of video session parameters objects created with a video encode operation, implementations <b>may</b> return the {@link KHRVideoEncodeQueue#VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR} error if any of the specified Video Std parameters do not adhere to the syntactic or semantic requirements of the used video compression standard, or if values derived from parameters according to the rules defined by the used video compression standard do not adhere to the capabilities of the video compression standard or the implementation.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Applications <b>should</b> not rely on the {@link KHRVideoEncodeQueue#VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR} error being returned by any command as a means to verify Video Std parameters, as implementations are not required to report the error in any specific set of cases.</p>
+     * </div>
+     * 
      * <h5>Valid Usage (Implicit)</h5>
      * 
      * <ul>
@@ -891,6 +906,7 @@ public class KHRVideoQueue {
      * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * <li>{@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}</li>
      * <li>{@link VK10#VK_ERROR_INITIALIZATION_FAILED ERROR_INITIALIZATION_FAILED}</li>
+     * <li>{@link KHRVideoEncodeQueue#VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR}</li>
      * </ul></dd>
      * </dl>
      * 
@@ -959,6 +975,13 @@ public class KHRVideoQueue {
      * <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-h265-pps">H.265 PPS</a> entries specified in {@link VkVideoDecodeH265SessionParametersAddInfoKHR}{@code ::pStdPPSs}.</li>
      * </ul>
      * 
+     * <p>In case of video session parameters objects created with a video encode operation, implementations <b>may</b> return the {@link KHRVideoEncodeQueue#VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR} error if any of the specified Video Std parameters do not adhere to the syntactic or semantic requirements of the used video compression standard, or if values derived from parameters according to the rules defined by the used video compression standard do not adhere to the capabilities of the video compression standard or the implementation.</p>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>Applications <b>should</b> not rely on the {@link KHRVideoEncodeQueue#VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR} error being returned by any command as a means to verify Video Std parameters, as implementations are not required to report the error in any specific set of cases.</p>
+     * </div>
+     * 
      * <h5>Valid Usage</h5>
      * 
      * <ul>
@@ -999,6 +1022,7 @@ public class KHRVideoQueue {
      * <dd><ul>
      * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
      * <li>{@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}</li>
+     * <li>{@link KHRVideoEncodeQueue#VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR}</li>
      * </ul></dd>
      * </dl>
      * 

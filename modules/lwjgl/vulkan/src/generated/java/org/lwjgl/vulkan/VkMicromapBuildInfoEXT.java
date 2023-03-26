@@ -24,7 +24,9 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>Each micromap triangle refers to one element in {@code triangleArray} which contains the {@code format} and {@code subdivisionLevel} for that particular triangle as well as a {@code dataOffset} in bytes which is the location relative to {@code data} where that triangle’s micromap data begins. The data at {@code triangleArray} is laid out as a 4 byte unsigned integer for the {@code dataOffset} followed by a 2 byte unsigned integer for the subdivision level then a 2 byte unsigned integer for the format. In practice, compilers compile {@link VkMicromapTriangleEXT} to match this pattern.</p>
  * 
- * <p>The data at {@code data} is packed as either one bit per element for {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} or two bits per element for {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT} and is packed from LSB to MSB in each byte. The data at each index in those bytes is interpreted as discussed in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#ray-opacity-micromap">Ray Opacity Micromap</a>.</p>
+ * <p>For opacity micromaps, the data at {@code data} is packed as either one bit per element for {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} or two bits per element for {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT} and is packed from LSB to MSB in each byte. The data at each index in those bytes is interpreted as discussed in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#ray-opacity-micromap">Ray Opacity Micromap</a>.</p>
+ * 
+ * <p>For displacement micromaps, the data at {@code data} is interpreted as discussed in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#displacement-micromap-encoding">Displacement Micromap Encoding</a>.</p>
  * 
  * <h5>Valid Usage</h5>
  * 
@@ -32,6 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>Only one of {@code pUsageCounts} or {@code ppUsageCounts} <b>can</b> be a valid pointer, the other <b>must</b> be {@code NULL}</li>
  * <li>If {@code type} is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} the {@code format} member of {@link VkMicromapUsageEXT} <b>must</b> be a valid value from {@code VkOpacityMicromapFormatEXT}</li>
  * <li>If {@code type} is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} the {@code format} member of {@link VkMicromapTriangleEXT} <b>must</b> be a valid value from {@code VkOpacityMicromapFormatEXT}</li>
+ * <li>If {@code type} is {@link NVDisplacementMicromap#VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV} the {@code format} member of {@link VkMicromapUsageEXT} <b>must</b> be a valid value from {@code VkDisplacementMicromapFormatNV}</li>
+ * <li>If {@code type} is {@link NVDisplacementMicromap#VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV} the {@code format} member of {@link VkMicromapTriangleEXT} <b>must</b> be a valid value from {@code VkDisplacementMicromapFormatNV}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>

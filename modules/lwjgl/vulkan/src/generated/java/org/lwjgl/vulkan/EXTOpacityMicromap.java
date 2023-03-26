@@ -250,7 +250,8 @@ public class EXTOpacityMicromap {
      * <h5>Description</h5>
      * 
      * <ul>
-     * <li>{@link #VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} is a micromap containing data to control the opacity of a triangle</li>
+     * <li>{@link #VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} is a micromap containing data to control the opacity of a triangle.</li>
+     * <li>{@link NVDisplacementMicromap#VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV} is a micromap containing data to control the displacement of subtriangles within a triangle.</li>
      * </ul>
      * 
      * <h5>See Also</h5>
@@ -337,6 +338,11 @@ public class EXTOpacityMicromap {
      * <li>{@link #VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} indicates that the given micromap format has one bit per subtriangle encoding either fully opaque or fully transparent.</li>
      * <li>{@link #VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT} indicates that the given micromap format has two bits per subtriangle encoding four modes which can be interpreted as described in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#ray-opacity-micromap">ray traversal</a>.</li>
      * </ul>
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>For compactness, these values are stored as 16-bit in some structures.</p>
+     * </div>
      */
     public static final int
         VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT = 1,

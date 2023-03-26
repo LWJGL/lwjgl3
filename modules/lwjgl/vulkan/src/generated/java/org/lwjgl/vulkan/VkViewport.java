@@ -51,6 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code width} <b>must</b> be greater than {@code 0.0}</li>
  * <li>{@code width} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxViewportDimensions}[0]</li>
+ * <li>If the {@link KHRMaintenance1 VK_KHR_maintenance1} extension is not enabled, the {@link AMDNegativeViewportHeight VK_AMD_negative_viewport_height} extension is not enabled, and {@link VkPhysicalDeviceProperties}{@code ::apiVersion} is less than Vulkan 1.1, {@code height} <b>must</b> be greater than {@code 0.0}</li>
  * <li>The absolute value of {@code height} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxViewportDimensions}[1]</li>
  * <li>{@code x} <b>must</b> be greater than or equal to {@code viewportBoundsRange}[0]</li>
  * <li><code>(x + width)</code> <b>must</b> be less than or equal to {@code viewportBoundsRange}[1]</li>
@@ -58,8 +59,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code y} <b>must</b> be less than or equal to {@code viewportBoundsRange}[1]</li>
  * <li><code>(y + height)</code> <b>must</b> be greater than or equal to {@code viewportBoundsRange}[0]</li>
  * <li><code>(y + height)</code> <b>must</b> be less than or equal to {@code viewportBoundsRange}[1]</li>
- * <li>Unless {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is enabled {@code minDepth} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
- * <li>Unless {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is enabled {@code maxDepth} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
+ * <li>If the {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is not enabled, {@code minDepth} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
+ * <li>If the {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is not enabled, {@code maxDepth} <b>must</b> be between {@code 0.0} and {@code 1.0}, inclusive</li>
  * </ul>
  * 
  * <h5>See Also</h5>

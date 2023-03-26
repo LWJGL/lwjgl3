@@ -35,11 +35,9 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkStructureType {@link #sType};
  *     void * {@link #pNext};
  *     VkVideoEncodeH264CapabilityFlagsEXT {@link #flags};
- *     VkVideoEncodeH264InputModeFlagsEXT {@link #inputModeFlags};
- *     VkVideoEncodeH264OutputModeFlagsEXT {@link #outputModeFlags};
- *     uint8_t {@link #maxPPictureL0ReferenceCount};
- *     uint8_t {@link #maxBPictureL0ReferenceCount};
- *     uint8_t {@link #maxL1ReferenceCount};
+ *     uint32_t {@link #maxPPictureL0ReferenceCount};
+ *     uint32_t {@link #maxBPictureL0ReferenceCount};
+ *     uint32_t {@link #maxL1ReferenceCount};
  *     VkBool32 {@link #motionVectorsOverPicBoundariesFlag};
  *     uint32_t {@link #maxBytesPerPicDenom};
  *     uint32_t {@link #maxBitsPerMbDenom};
@@ -60,8 +58,6 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
         STYPE,
         PNEXT,
         FLAGS,
-        INPUTMODEFLAGS,
-        OUTPUTMODEFLAGS,
         MAXPPICTUREL0REFERENCECOUNT,
         MAXBPICTUREL0REFERENCECOUNT,
         MAXL1REFERENCECOUNT,
@@ -78,9 +74,7 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
             __member(4),
             __member(4),
             __member(4),
-            __member(1),
-            __member(1),
-            __member(1),
+            __member(4),
             __member(4),
             __member(4),
             __member(4),
@@ -94,16 +88,14 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         FLAGS = layout.offsetof(2);
-        INPUTMODEFLAGS = layout.offsetof(3);
-        OUTPUTMODEFLAGS = layout.offsetof(4);
-        MAXPPICTUREL0REFERENCECOUNT = layout.offsetof(5);
-        MAXBPICTUREL0REFERENCECOUNT = layout.offsetof(6);
-        MAXL1REFERENCECOUNT = layout.offsetof(7);
-        MOTIONVECTORSOVERPICBOUNDARIESFLAG = layout.offsetof(8);
-        MAXBYTESPERPICDENOM = layout.offsetof(9);
-        MAXBITSPERMBDENOM = layout.offsetof(10);
-        LOG2MAXMVLENGTHHORIZONTAL = layout.offsetof(11);
-        LOG2MAXMVLENGTHVERTICAL = layout.offsetof(12);
+        MAXPPICTUREL0REFERENCECOUNT = layout.offsetof(3);
+        MAXBPICTUREL0REFERENCECOUNT = layout.offsetof(4);
+        MAXL1REFERENCECOUNT = layout.offsetof(5);
+        MOTIONVECTORSOVERPICBOUNDARIESFLAG = layout.offsetof(6);
+        MAXBYTESPERPICDENOM = layout.offsetof(7);
+        MAXBITSPERMBDENOM = layout.offsetof(8);
+        LOG2MAXMVLENGTHHORIZONTAL = layout.offsetof(9);
+        LOG2MAXMVLENGTHVERTICAL = layout.offsetof(10);
     }
 
     /**
@@ -128,21 +120,15 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
     /** a bitmask of {@code VkVideoEncodeH264CapabilityFlagBitsEXT} describing supported encoding tools. */
     @NativeType("VkVideoEncodeH264CapabilityFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** a bitmask of {@code VkVideoEncodeH264InputModeFlagBitsEXT} describing supported command buffer input granularities/modes. */
-    @NativeType("VkVideoEncodeH264InputModeFlagsEXT")
-    public int inputModeFlags() { return ninputModeFlags(address()); }
-    /** a bitmask of {@code VkVideoEncodeH264OutputModeFlagBitsEXT} describing supported output (bitstream size reporting) granularities/modes. */
-    @NativeType("VkVideoEncodeH264OutputModeFlagsEXT")
-    public int outputModeFlags() { return noutputModeFlags(address()); }
     /** reports the maximum number of reference pictures the implementation supports in the reference list L0 for P pictures. */
-    @NativeType("uint8_t")
-    public byte maxPPictureL0ReferenceCount() { return nmaxPPictureL0ReferenceCount(address()); }
+    @NativeType("uint32_t")
+    public int maxPPictureL0ReferenceCount() { return nmaxPPictureL0ReferenceCount(address()); }
     /** reports the maximum number of reference pictures the implementation supports in the reference list L0 for B pictures. The reported value is 0 if encoding of B pictures is not supported. */
-    @NativeType("uint8_t")
-    public byte maxBPictureL0ReferenceCount() { return nmaxBPictureL0ReferenceCount(address()); }
+    @NativeType("uint32_t")
+    public int maxBPictureL0ReferenceCount() { return nmaxBPictureL0ReferenceCount(address()); }
     /** reports the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of B pictures is supported. The reported value is 0 if encoding of B pictures is not supported. */
-    @NativeType("uint8_t")
-    public byte maxL1ReferenceCount() { return nmaxL1ReferenceCount(address()); }
+    @NativeType("uint32_t")
+    public int maxL1ReferenceCount() { return nmaxL1ReferenceCount(address()); }
     /** if {@link VK10#VK_TRUE TRUE}, indicates motion_vectors_over_pic_boundaries_flag will be enabled if bitstream_restriction_flag is enabled in StdVideoH264SpsVuiFlags. */
     @NativeType("VkBool32")
     public boolean motionVectorsOverPicBoundariesFlag() { return nmotionVectorsOverPicBoundariesFlag(address()) != 0; }
@@ -308,16 +294,12 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH264CapabilitiesEXT.PNEXT); }
     /** Unsafe version of {@link #flags}. */
     public static int nflags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.FLAGS); }
-    /** Unsafe version of {@link #inputModeFlags}. */
-    public static int ninputModeFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.INPUTMODEFLAGS); }
-    /** Unsafe version of {@link #outputModeFlags}. */
-    public static int noutputModeFlags(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.OUTPUTMODEFLAGS); }
     /** Unsafe version of {@link #maxPPictureL0ReferenceCount}. */
-    public static byte nmaxPPictureL0ReferenceCount(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXPPICTUREL0REFERENCECOUNT); }
+    public static int nmaxPPictureL0ReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXPPICTUREL0REFERENCECOUNT); }
     /** Unsafe version of {@link #maxBPictureL0ReferenceCount}. */
-    public static byte nmaxBPictureL0ReferenceCount(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXBPICTUREL0REFERENCECOUNT); }
+    public static int nmaxBPictureL0ReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXBPICTUREL0REFERENCECOUNT); }
     /** Unsafe version of {@link #maxL1ReferenceCount}. */
-    public static byte nmaxL1ReferenceCount(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXL1REFERENCECOUNT); }
+    public static int nmaxL1ReferenceCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.MAXL1REFERENCECOUNT); }
     /** Unsafe version of {@link #motionVectorsOverPicBoundariesFlag}. */
     public static int nmotionVectorsOverPicBoundariesFlag(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH264CapabilitiesEXT.MOTIONVECTORSOVERPICBOUNDARIESFLAG); }
     /** Unsafe version of {@link #maxBytesPerPicDenom}. */
@@ -381,21 +363,15 @@ public class VkVideoEncodeH264CapabilitiesEXT extends Struct implements NativeRe
         /** @return the value of the {@link VkVideoEncodeH264CapabilitiesEXT#flags} field. */
         @NativeType("VkVideoEncodeH264CapabilityFlagsEXT")
         public int flags() { return VkVideoEncodeH264CapabilitiesEXT.nflags(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesEXT#inputModeFlags} field. */
-        @NativeType("VkVideoEncodeH264InputModeFlagsEXT")
-        public int inputModeFlags() { return VkVideoEncodeH264CapabilitiesEXT.ninputModeFlags(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesEXT#outputModeFlags} field. */
-        @NativeType("VkVideoEncodeH264OutputModeFlagsEXT")
-        public int outputModeFlags() { return VkVideoEncodeH264CapabilitiesEXT.noutputModeFlags(address()); }
         /** @return the value of the {@link VkVideoEncodeH264CapabilitiesEXT#maxPPictureL0ReferenceCount} field. */
-        @NativeType("uint8_t")
-        public byte maxPPictureL0ReferenceCount() { return VkVideoEncodeH264CapabilitiesEXT.nmaxPPictureL0ReferenceCount(address()); }
+        @NativeType("uint32_t")
+        public int maxPPictureL0ReferenceCount() { return VkVideoEncodeH264CapabilitiesEXT.nmaxPPictureL0ReferenceCount(address()); }
         /** @return the value of the {@link VkVideoEncodeH264CapabilitiesEXT#maxBPictureL0ReferenceCount} field. */
-        @NativeType("uint8_t")
-        public byte maxBPictureL0ReferenceCount() { return VkVideoEncodeH264CapabilitiesEXT.nmaxBPictureL0ReferenceCount(address()); }
+        @NativeType("uint32_t")
+        public int maxBPictureL0ReferenceCount() { return VkVideoEncodeH264CapabilitiesEXT.nmaxBPictureL0ReferenceCount(address()); }
         /** @return the value of the {@link VkVideoEncodeH264CapabilitiesEXT#maxL1ReferenceCount} field. */
-        @NativeType("uint8_t")
-        public byte maxL1ReferenceCount() { return VkVideoEncodeH264CapabilitiesEXT.nmaxL1ReferenceCount(address()); }
+        @NativeType("uint32_t")
+        public int maxL1ReferenceCount() { return VkVideoEncodeH264CapabilitiesEXT.nmaxL1ReferenceCount(address()); }
         /** @return the value of the {@link VkVideoEncodeH264CapabilitiesEXT#motionVectorsOverPicBoundariesFlag} field. */
         @NativeType("VkBool32")
         public boolean motionVectorsOverPicBoundariesFlag() { return VkVideoEncodeH264CapabilitiesEXT.nmotionVectorsOverPicBoundariesFlag(address()) != 0; }

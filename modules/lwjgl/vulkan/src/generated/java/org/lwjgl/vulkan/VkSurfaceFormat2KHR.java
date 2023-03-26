@@ -18,6 +18,10 @@ import static org.lwjgl.system.MemoryStack.*;
 /**
  * Structure describing a supported swapchain format tuple.
  * 
+ * <h5>Description</h5>
+ * 
+ * <p>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-imageCompressionControlSwapchain">{@code imageCompressionControlSwapchain}</a> feature is supported and a {@link VkImageCompressionPropertiesEXT} structure is included in the {@code pNext} chain of this structure, then it will be filled with the compression properties that are supported for the {@code surfaceFormat}.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

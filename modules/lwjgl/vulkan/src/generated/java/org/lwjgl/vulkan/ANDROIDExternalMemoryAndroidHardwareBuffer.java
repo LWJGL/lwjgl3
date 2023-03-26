@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Contributors</b></dt>
  * <dd><ul>
  * <li>Ray Smith, ARM</li>
- * <li>Chad Versace, Google</li>
+ * <li>Lina Versace, Google</li>
  * <li>Jesse Hall, Google</li>
  * <li>Tobias Hector, Imagination</li>
  * <li>James Jones, NVIDIA</li>

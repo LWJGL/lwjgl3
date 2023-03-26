@@ -89,11 +89,11 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
             <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRBindMemory2 VK_KHR_bind_memory2} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} and {@link KHRImageFormatList VK_KHR_image_format_list} and {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion}</dd>
+            <dd>         {@link KHRBindMemory2 VK_KHR_bind_memory2}          and          {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}          and          {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion}      or      <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and      {@link KHRImageFormatList VK_KHR_image_format_list}      or      <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.2">Version 1.2</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Chad Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_image_drm_format_modifier]%20@chadversary%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_image_drm_format_modifier%20extension*">chadversary</a></li>
+                <li>Lina Versace <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_image_drm_format_modifier]%20@versalinyaa%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_image_drm_format_modifier%20extension*">versalinyaa</a></li>
             </ul></dd>
         </dl>
 
@@ -109,7 +109,7 @@ val EXT_image_drm_format_modifier = "EXTImageDrmFormatModifier".nativeClassVK("E
             <dd><ul>
                 <li>Antoine Labour, Google</li>
                 <li>Bas Nieuwenhuizen, Google</li>
-                <li>Chad Versace, Google</li>
+                <li>Lina Versace, Google</li>
                 <li>James Jones, NVIDIA</li>
                 <li>Faith Ekstrand, Intel</li>
                 <li>Jőrg Wagner, ARM</li>

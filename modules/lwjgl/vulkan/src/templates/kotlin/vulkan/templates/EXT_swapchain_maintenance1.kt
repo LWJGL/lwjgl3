@@ -62,7 +62,7 @@ val EXT_swapchain_maintenance1 = "EXTSwapchainMaintenance1".nativeClassVK("EXT_s
                 <li>Ian Elliott, Google</li>
                 <li>Yiwei Zhang, Google</li>
                 <li>Charlie Lao, Google</li>
-                <li>Chad Versace, Google</li>
+                <li>Lina Versace, Google</li>
                 <li>Ralph Potter, Samsung</li>
                 <li>Igor Nazarov, Samsung</li>
                 <li>Hyunchang Kim, Samsung</li>

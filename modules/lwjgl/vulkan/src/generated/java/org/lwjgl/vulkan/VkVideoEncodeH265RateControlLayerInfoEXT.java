@@ -25,8 +25,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage</h5>
  * 
  * <ul>
- * <li>When {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}, both {@code useMinQp} and {@code useMaxQp} must be set to {@link VK10#VK_TRUE TRUE}</li>
- * <li>When {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}, the values provided in {@code minQP} must be identical to those provided in {@code maxQp}</li>
+ * <li>When {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}, both {@code useMinQp} and {@code useMaxQp} must be set to {@link VK10#VK_TRUE TRUE}</li>
+ * <li>When {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}, the values provided in {@code minQP} must be identical to those provided in {@code maxQp}</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * struct VkVideoEncodeH265RateControlLayerInfoEXT {
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
- *     uint8_t {@link #temporalId};
+ *     uint32_t {@link #temporalId};
  *     VkBool32 {@link #useInitialRcQp};
  *     {@link VkVideoEncodeH265QpEXT VkVideoEncodeH265QpEXT} {@link #initialRcQp};
  *     VkBool32 {@link #useMinQp};
@@ -86,7 +86,7 @@ public class VkVideoEncodeH265RateControlLayerInfoEXT extends Struct implements 
         Layout layout = __struct(
             __member(4),
             __member(POINTER_SIZE),
-            __member(1),
+            __member(4),
             __member(4),
             __member(VkVideoEncodeH265QpEXT.SIZEOF, VkVideoEncodeH265QpEXT.ALIGNOF),
             __member(4),
@@ -133,12 +133,12 @@ public class VkVideoEncodeH265RateControlLayerInfoEXT extends Struct implements 
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** specifies the H.265 temporal ID of the video coding layer that settings provided in this structure and its parent {@link VkVideoEncodeRateControlLayerInfoKHR} structure apply to. */
-    @NativeType("uint8_t")
-    public byte temporalId() { return ntemporalId(address()); }
+    @NativeType("uint32_t")
+    public int temporalId() { return ntemporalId(address()); }
     /** indicates whether the values within {@code initialRcQp} should be used by the implementation. */
     @NativeType("VkBool32")
     public boolean useInitialRcQp() { return nuseInitialRcQp(address()) != 0; }
-    /** provides the QP values for each picture type, to be used in rate control calculations at the start of video encode operations on a newly-created video session, or immediately after a session reset. These values are ignored when {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR}. */
+    /** provides the QP values for each picture type, to be used in rate control calculations at the start of video encode operations on a newly-created video session, or immediately after a session reset. These values are ignored when {@link VkVideoEncodeRateControlInfoKHR}{@code ::rateControlMode} is not {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR} or {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR}. */
     public VkVideoEncodeH265QpEXT initialRcQp() { return ninitialRcQp(address()); }
     /** indicates whether the values within {@code minQp} should be used by the implementation. When it is set to {@link VK10#VK_FALSE FALSE}, the implementation ignores the values in {@code minQp} and chooses suitable values. */
     @NativeType("VkBool32")
@@ -163,7 +163,7 @@ public class VkVideoEncodeH265RateControlLayerInfoEXT extends Struct implements 
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoEncodeH265RateControlLayerInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #temporalId} field. */
-    public VkVideoEncodeH265RateControlLayerInfoEXT temporalId(@NativeType("uint8_t") byte value) { ntemporalId(address(), value); return this; }
+    public VkVideoEncodeH265RateControlLayerInfoEXT temporalId(@NativeType("uint32_t") int value) { ntemporalId(address(), value); return this; }
     /** Sets the specified value to the {@link #useInitialRcQp} field. */
     public VkVideoEncodeH265RateControlLayerInfoEXT useInitialRcQp(@NativeType("VkBool32") boolean value) { nuseInitialRcQp(address(), value ? 1 : 0); return this; }
     /** Copies the specified {@link VkVideoEncodeH265QpEXT} to the {@link #initialRcQp} field. */
@@ -193,7 +193,7 @@ public class VkVideoEncodeH265RateControlLayerInfoEXT extends Struct implements 
     public VkVideoEncodeH265RateControlLayerInfoEXT set(
         int sType,
         long pNext,
-        byte temporalId,
+        int temporalId,
         boolean useInitialRcQp,
         VkVideoEncodeH265QpEXT initialRcQp,
         boolean useMinQp,
@@ -348,7 +348,7 @@ public class VkVideoEncodeH265RateControlLayerInfoEXT extends Struct implements 
     /** Unsafe version of {@link #pNext}. */
     public static long npNext(long struct) { return memGetAddress(struct + VkVideoEncodeH265RateControlLayerInfoEXT.PNEXT); }
     /** Unsafe version of {@link #temporalId}. */
-    public static byte ntemporalId(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeH265RateControlLayerInfoEXT.TEMPORALID); }
+    public static int ntemporalId(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265RateControlLayerInfoEXT.TEMPORALID); }
     /** Unsafe version of {@link #useInitialRcQp}. */
     public static int nuseInitialRcQp(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeH265RateControlLayerInfoEXT.USEINITIALRCQP); }
     /** Unsafe version of {@link #initialRcQp}. */
@@ -370,8 +370,8 @@ public class VkVideoEncodeH265RateControlLayerInfoEXT extends Struct implements 
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265RateControlLayerInfoEXT.STYPE, value); }
     /** Unsafe version of {@link #pNext(long) pNext}. */
     public static void npNext(long struct, long value) { memPutAddress(struct + VkVideoEncodeH265RateControlLayerInfoEXT.PNEXT, value); }
-    /** Unsafe version of {@link #temporalId(byte) temporalId}. */
-    public static void ntemporalId(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeH265RateControlLayerInfoEXT.TEMPORALID, value); }
+    /** Unsafe version of {@link #temporalId(int) temporalId}. */
+    public static void ntemporalId(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265RateControlLayerInfoEXT.TEMPORALID, value); }
     /** Unsafe version of {@link #useInitialRcQp(boolean) useInitialRcQp}. */
     public static void nuseInitialRcQp(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeH265RateControlLayerInfoEXT.USEINITIALRCQP, value); }
     /** Unsafe version of {@link #initialRcQp(VkVideoEncodeH265QpEXT) initialRcQp}. */
@@ -434,8 +434,8 @@ public class VkVideoEncodeH265RateControlLayerInfoEXT extends Struct implements 
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH265RateControlLayerInfoEXT.npNext(address()); }
         /** @return the value of the {@link VkVideoEncodeH265RateControlLayerInfoEXT#temporalId} field. */
-        @NativeType("uint8_t")
-        public byte temporalId() { return VkVideoEncodeH265RateControlLayerInfoEXT.ntemporalId(address()); }
+        @NativeType("uint32_t")
+        public int temporalId() { return VkVideoEncodeH265RateControlLayerInfoEXT.ntemporalId(address()); }
         /** @return the value of the {@link VkVideoEncodeH265RateControlLayerInfoEXT#useInitialRcQp} field. */
         @NativeType("VkBool32")
         public boolean useInitialRcQp() { return VkVideoEncodeH265RateControlLayerInfoEXT.nuseInitialRcQp(address()) != 0; }
@@ -464,7 +464,7 @@ public class VkVideoEncodeH265RateControlLayerInfoEXT extends Struct implements 
         /** Sets the specified value to the {@link VkVideoEncodeH265RateControlLayerInfoEXT#pNext} field. */
         public VkVideoEncodeH265RateControlLayerInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH265RateControlLayerInfoEXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH265RateControlLayerInfoEXT#temporalId} field. */
-        public VkVideoEncodeH265RateControlLayerInfoEXT.Buffer temporalId(@NativeType("uint8_t") byte value) { VkVideoEncodeH265RateControlLayerInfoEXT.ntemporalId(address(), value); return this; }
+        public VkVideoEncodeH265RateControlLayerInfoEXT.Buffer temporalId(@NativeType("uint32_t") int value) { VkVideoEncodeH265RateControlLayerInfoEXT.ntemporalId(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeH265RateControlLayerInfoEXT#useInitialRcQp} field. */
         public VkVideoEncodeH265RateControlLayerInfoEXT.Buffer useInitialRcQp(@NativeType("VkBool32") boolean value) { VkVideoEncodeH265RateControlLayerInfoEXT.nuseInitialRcQp(address(), value ? 1 : 0); return this; }
         /** Copies the specified {@link VkVideoEncodeH265QpEXT} to the {@link VkVideoEncodeH265RateControlLayerInfoEXT#initialRcQp} field. */

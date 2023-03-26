@@ -29,7 +29,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
             <dd>300</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>7</dd>
+            <dd>8</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRVideoQueue VK_KHR_video_queue} and {@link KHRSynchronization2 VK_KHR_synchronization2}
@@ -47,7 +47,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-08-12</dd>
+            <dd>2023-03-06</dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
@@ -72,7 +72,7 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
     IntConstant(
         "The extension specification version.",
 
-        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."7"
+        "KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION".."8"
     )
 
     StringConstant(
@@ -101,7 +101,8 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
         "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR".."1000299001",
         "STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR".."1000299002",
         "STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR".."1000299003",
-        "STRUCTURE_TYPE_VIDEO_ENCODE_USAGE_INFO_KHR".."1000299004"
+        "STRUCTURE_TYPE_VIDEO_ENCODE_USAGE_INFO_KHR".."1000299004",
+        "STRUCTURE_TYPE_QUERY_POOL_VIDEO_ENCODE_FEEDBACK_CREATE_INFO_KHR".."1000299005"
     )
 
     EnumConstant(
@@ -150,7 +151,13 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
     EnumConstant(
         "Extends {@code VkQueryType}.",
 
-        "QUERY_TYPE_VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR".."1000299000"
+        "QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR".."1000299000"
+    )
+
+    EnumConstant(
+        "Extends {@code VkResult}.",
+
+        "ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR".."-1000299000"
     )
 
     EnumConstantLong(
@@ -179,18 +186,37 @@ val KHR_video_encode_queue = "KHRVideoEncodeQueue".nativeClassVK("KHR_video_enco
 
         <h5>Description</h5>
         <ul>
-            <li>#VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR for disabling rate control.</li>
-            <li>#VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR for constant bitrate rate control mode.</li>
-            <li>#VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR for variable bitrate rate control mode.</li>
+            <li>#VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR specifies the use of implementation-specific rate control.</li>
+            <li>#VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR specifies that rate control is disabled and any quality control parameters for the encoding are provided on a per-picture basis. In this mode implementations will encode pictures independently of the output bitrate of prior video encode operations. When using an H.264 encode profile, implementations will use the QP values specified in the ##VkVideoEncodeH264RateControlInfoEXT structure for the encoded picture. When using an H.265 encode profile, implementations will use the QP values specified in the ##VkVideoEncodeH265RateControlInfoEXT structure for the encoded picture.</li>
+            <li>#VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR specifies the use of constant bitrate rate control mode.</li>
+            <li>#VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR specifies the use of variable bitrate rate control mode.</li>
         </ul>
 
         <h5>See Also</h5>
         ##VkVideoEncodeRateControlInfoKHR
         """,
 
-        "VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR".."0",
-        "VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR".."1",
-        "VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR".."2"
+        "VIDEO_ENCODE_RATE_CONTROL_MODE_DEFAULT_KHR".."0",
+        "VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR".enum(0x00000001),
+        "VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR".enum(0x00000002),
+        "VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR".enum(0x00000004)
+    )
+
+    EnumConstant(
+        """
+        VkVideoEncodeFeedbackFlagBitsKHR - Bits specifying queried video encode feedback values
+
+        <h5>Description</h5>
+        <ul>
+            <li>#VIDEO_ENCODE_FEEDBACK_BITSTREAM_BUFFER_OFFSET_BIT_KHR specifies that queries managed by the pool will capture the byte offset of the bitstream data written by the video encode operation to the bitstream buffer specified in ##VkVideoEncodeInfoKHR{@code ::dstBuffer} relative to the offset specified in ##VkVideoEncodeInfoKHR{@code ::dstBufferOffset}.</li>
+            <li>#VIDEO_ENCODE_FEEDBACK_BITSTREAM_BYTES_WRITTEN_BIT_KHR specifies that queries managed by the pool will capture the number of bytes written by the video encode operation to the bitstream buffer specified in ##VkVideoEncodeInfoKHR{@code ::dstBuffer}.</li>
+        </ul>
+
+        When retrieving the results of video encode feedback queries, the values corresponding to each enabled video encode feedback are written in the order of the bits defined above, followed by an optional value indicating availability or result status if #QUERY_RESULT_WITH_AVAILABILITY_BIT or #QUERY_RESULT_WITH_STATUS_BIT_KHR is specified, respectively.
+        """,
+
+        "VIDEO_ENCODE_FEEDBACK_BITSTREAM_BUFFER_OFFSET_BIT_KHR".enum(0x00000001),
+        "VIDEO_ENCODE_FEEDBACK_BITSTREAM_BYTES_WRITTEN_BIT_KHR".enum(0x00000002)
     )
 
     EnumConstant(

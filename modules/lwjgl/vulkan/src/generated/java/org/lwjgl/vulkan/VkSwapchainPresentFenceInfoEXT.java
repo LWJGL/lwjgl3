@@ -57,7 +57,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <pre><code>
  * struct VkSwapchainPresentFenceInfoEXT {
  *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
+ *     void const * {@link #pNext};
  *     uint32_t {@link #swapchainCount};
  *     VkFence const * {@link #pFences};
  * }</code></pre>
@@ -111,7 +111,7 @@ public class VkSwapchainPresentFenceInfoEXT extends Struct implements NativeReso
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */
-    @NativeType("void *")
+    @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** the number of swapchains being presented to by this command. */
     @NativeType("uint32_t")
@@ -125,7 +125,7 @@ public class VkSwapchainPresentFenceInfoEXT extends Struct implements NativeReso
     /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT} value to the {@link #sType} field. */
     public VkSwapchainPresentFenceInfoEXT sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
-    public VkSwapchainPresentFenceInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
+    public VkSwapchainPresentFenceInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link LongBuffer} to the {@link #pFences} field. */
     public VkSwapchainPresentFenceInfoEXT pFences(@NativeType("VkFence const *") LongBuffer value) { npFences(address(), value); return this; }
 
@@ -336,7 +336,7 @@ public class VkSwapchainPresentFenceInfoEXT extends Struct implements NativeReso
         @NativeType("VkStructureType")
         public int sType() { return VkSwapchainPresentFenceInfoEXT.nsType(address()); }
         /** @return the value of the {@link VkSwapchainPresentFenceInfoEXT#pNext} field. */
-        @NativeType("void *")
+        @NativeType("void const *")
         public long pNext() { return VkSwapchainPresentFenceInfoEXT.npNext(address()); }
         /** @return the value of the {@link VkSwapchainPresentFenceInfoEXT#swapchainCount} field. */
         @NativeType("uint32_t")
@@ -350,7 +350,7 @@ public class VkSwapchainPresentFenceInfoEXT extends Struct implements NativeReso
         /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT} value to the {@link VkSwapchainPresentFenceInfoEXT#sType} field. */
         public VkSwapchainPresentFenceInfoEXT.Buffer sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT); }
         /** Sets the specified value to the {@link VkSwapchainPresentFenceInfoEXT#pNext} field. */
-        public VkSwapchainPresentFenceInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkSwapchainPresentFenceInfoEXT.npNext(address(), value); return this; }
+        public VkSwapchainPresentFenceInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainPresentFenceInfoEXT.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link LongBuffer} to the {@link VkSwapchainPresentFenceInfoEXT#pFences} field. */
         public VkSwapchainPresentFenceInfoEXT.Buffer pFences(@NativeType("VkFence const *") LongBuffer value) { VkSwapchainPresentFenceInfoEXT.npFences(address(), value); return this; }
 

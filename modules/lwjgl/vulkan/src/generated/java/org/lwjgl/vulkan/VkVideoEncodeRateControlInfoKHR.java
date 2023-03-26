@@ -34,9 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR}</li>
  * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code rateControlMode} <b>must</b> be a valid {@code VkVideoEncodeRateControlModeFlagBitsKHR} value</li>
- * <li>{@code pLayerConfigs} <b>must</b> be a valid pointer to an array of {@code layerCount} valid {@link VkVideoEncodeRateControlLayerInfoKHR} structures</li>
- * <li>{@code layerCount} <b>must</b> be greater than 0</li>
+ * <li>If {@code rateControlMode} is not 0, {@code rateControlMode} <b>must</b> be a valid {@code VkVideoEncodeRateControlModeFlagBitsKHR} value</li>
+ * <li>If {@code layerCount} is not 0, {@code pLayers} <b>must</b> be a valid pointer to an array of {@code layerCount} valid {@link VkVideoEncodeRateControlLayerInfoKHR} structures</li>
  * </ul>
  * 
  * <h5>See Also</h5>
@@ -51,8 +50,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * {@link #pNext};
  *     VkVideoEncodeRateControlFlagsKHR {@link #flags};
  *     VkVideoEncodeRateControlModeFlagBitsKHR {@link #rateControlMode};
- *     uint8_t {@link #layerCount};
- *     {@link VkVideoEncodeRateControlLayerInfoKHR VkVideoEncodeRateControlLayerInfoKHR} const * {@link #pLayerConfigs};
+ *     uint32_t {@link #layerCount};
+ *     {@link VkVideoEncodeRateControlLayerInfoKHR VkVideoEncodeRateControlLayerInfoKHR} const * {@link #pLayers};
  * }</code></pre>
  */
 public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeResource {
@@ -70,7 +69,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
         FLAGS,
         RATECONTROLMODE,
         LAYERCOUNT,
-        PLAYERCONFIGS;
+        PLAYERS;
 
     static {
         Layout layout = __struct(
@@ -78,7 +77,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
             __member(POINTER_SIZE),
             __member(4),
             __member(4),
-            __member(1),
+            __member(4),
             __member(POINTER_SIZE)
         );
 
@@ -90,7 +89,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
         FLAGS = layout.offsetof(2);
         RATECONTROLMODE = layout.offsetof(3);
         LAYERCOUNT = layout.offsetof(4);
-        PLAYERCONFIGS = layout.offsetof(5);
+        PLAYERS = layout.offsetof(5);
     }
 
     /**
@@ -119,11 +118,12 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
     @NativeType("VkVideoEncodeRateControlModeFlagBitsKHR")
     public int rateControlMode() { return nrateControlMode(address()); }
     /** specifies the number of rate control layers in the video encode stream. */
-    @NativeType("uint8_t")
-    public byte layerCount() { return nlayerCount(address()); }
+    @NativeType("uint32_t")
+    public int layerCount() { return nlayerCount(address()); }
     /** a pointer to an array of {@link VkVideoEncodeRateControlLayerInfoKHR} structures specifying the rate control configurations of {@code layerCount} rate control layers. */
+    @Nullable
     @NativeType("VkVideoEncodeRateControlLayerInfoKHR const *")
-    public VkVideoEncodeRateControlLayerInfoKHR.Buffer pLayerConfigs() { return npLayerConfigs(address()); }
+    public VkVideoEncodeRateControlLayerInfoKHR.Buffer pLayers() { return npLayers(address()); }
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVideoEncodeRateControlInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
@@ -135,8 +135,8 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
     public VkVideoEncodeRateControlInfoKHR flags(@NativeType("VkVideoEncodeRateControlFlagsKHR") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@link #rateControlMode} field. */
     public VkVideoEncodeRateControlInfoKHR rateControlMode(@NativeType("VkVideoEncodeRateControlModeFlagBitsKHR") int value) { nrateControlMode(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVideoEncodeRateControlLayerInfoKHR.Buffer} to the {@link #pLayerConfigs} field. */
-    public VkVideoEncodeRateControlInfoKHR pLayerConfigs(@NativeType("VkVideoEncodeRateControlLayerInfoKHR const *") VkVideoEncodeRateControlLayerInfoKHR.Buffer value) { npLayerConfigs(address(), value); return this; }
+    /** Sets the address of the specified {@link VkVideoEncodeRateControlLayerInfoKHR.Buffer} to the {@link #pLayers} field. */
+    public VkVideoEncodeRateControlInfoKHR pLayers(@Nullable @NativeType("VkVideoEncodeRateControlLayerInfoKHR const *") VkVideoEncodeRateControlLayerInfoKHR.Buffer value) { npLayers(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
     public VkVideoEncodeRateControlInfoKHR set(
@@ -144,13 +144,13 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
         long pNext,
         int flags,
         int rateControlMode,
-        VkVideoEncodeRateControlLayerInfoKHR.Buffer pLayerConfigs
+        @Nullable VkVideoEncodeRateControlLayerInfoKHR.Buffer pLayers
     ) {
         sType(sType);
         pNext(pNext);
         flags(flags);
         rateControlMode(rateControlMode);
-        pLayerConfigs(pLayerConfigs);
+        pLayers(pLayers);
 
         return this;
     }
@@ -289,9 +289,9 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
     /** Unsafe version of {@link #rateControlMode}. */
     public static int nrateControlMode(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlInfoKHR.RATECONTROLMODE); }
     /** Unsafe version of {@link #layerCount}. */
-    public static byte nlayerCount(long struct) { return UNSAFE.getByte(null, struct + VkVideoEncodeRateControlInfoKHR.LAYERCOUNT); }
-    /** Unsafe version of {@link #pLayerConfigs}. */
-    public static VkVideoEncodeRateControlLayerInfoKHR.Buffer npLayerConfigs(long struct) { return VkVideoEncodeRateControlLayerInfoKHR.create(memGetAddress(struct + VkVideoEncodeRateControlInfoKHR.PLAYERCONFIGS), Byte.toUnsignedInt(nlayerCount(struct))); }
+    public static int nlayerCount(long struct) { return UNSAFE.getInt(null, struct + VkVideoEncodeRateControlInfoKHR.LAYERCOUNT); }
+    /** Unsafe version of {@link #pLayers}. */
+    @Nullable public static VkVideoEncodeRateControlLayerInfoKHR.Buffer npLayers(long struct) { return VkVideoEncodeRateControlLayerInfoKHR.createSafe(memGetAddress(struct + VkVideoEncodeRateControlInfoKHR.PLAYERS), nlayerCount(struct)); }
 
     /** Unsafe version of {@link #sType(int) sType}. */
     public static void nsType(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlInfoKHR.STYPE, value); }
@@ -302,9 +302,9 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
     /** Unsafe version of {@link #rateControlMode(int) rateControlMode}. */
     public static void nrateControlMode(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlInfoKHR.RATECONTROLMODE, value); }
     /** Sets the specified value to the {@code layerCount} field of the specified {@code struct}. */
-    public static void nlayerCount(long struct, byte value) { UNSAFE.putByte(null, struct + VkVideoEncodeRateControlInfoKHR.LAYERCOUNT, value); }
-    /** Unsafe version of {@link #pLayerConfigs(VkVideoEncodeRateControlLayerInfoKHR.Buffer) pLayerConfigs}. */
-    public static void npLayerConfigs(long struct, VkVideoEncodeRateControlLayerInfoKHR.Buffer value) { memPutAddress(struct + VkVideoEncodeRateControlInfoKHR.PLAYERCONFIGS, value.address()); nlayerCount(struct, (byte)value.remaining()); }
+    public static void nlayerCount(long struct, int value) { UNSAFE.putInt(null, struct + VkVideoEncodeRateControlInfoKHR.LAYERCOUNT, value); }
+    /** Unsafe version of {@link #pLayers(VkVideoEncodeRateControlLayerInfoKHR.Buffer) pLayers}. */
+    public static void npLayers(long struct, @Nullable VkVideoEncodeRateControlLayerInfoKHR.Buffer value) { memPutAddress(struct + VkVideoEncodeRateControlInfoKHR.PLAYERS, memAddressSafe(value)); nlayerCount(struct, value == null ? 0 : value.remaining()); }
 
     /**
      * Validates pointer members that should not be {@code NULL}.
@@ -312,10 +312,9 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
      * @param struct the struct to validate
      */
     public static void validate(long struct) {
-        byte layerCount = nlayerCount(struct);
-        long pLayerConfigs = memGetAddress(struct + VkVideoEncodeRateControlInfoKHR.PLAYERCONFIGS);
-        check(pLayerConfigs);
-        validate(pLayerConfigs, layerCount, VkVideoEncodeRateControlLayerInfoKHR.SIZEOF, VkVideoEncodeRateControlLayerInfoKHR::validate);
+        if (nlayerCount(struct) != 0) {
+            check(memGetAddress(struct + VkVideoEncodeRateControlInfoKHR.PLAYERS));
+        }
     }
 
     // -----------------------------------
@@ -369,11 +368,12 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
         @NativeType("VkVideoEncodeRateControlModeFlagBitsKHR")
         public int rateControlMode() { return VkVideoEncodeRateControlInfoKHR.nrateControlMode(address()); }
         /** @return the value of the {@link VkVideoEncodeRateControlInfoKHR#layerCount} field. */
-        @NativeType("uint8_t")
-        public byte layerCount() { return VkVideoEncodeRateControlInfoKHR.nlayerCount(address()); }
-        /** @return a {@link VkVideoEncodeRateControlLayerInfoKHR.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeRateControlInfoKHR#pLayerConfigs} field. */
+        @NativeType("uint32_t")
+        public int layerCount() { return VkVideoEncodeRateControlInfoKHR.nlayerCount(address()); }
+        /** @return a {@link VkVideoEncodeRateControlLayerInfoKHR.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeRateControlInfoKHR#pLayers} field. */
+        @Nullable
         @NativeType("VkVideoEncodeRateControlLayerInfoKHR const *")
-        public VkVideoEncodeRateControlLayerInfoKHR.Buffer pLayerConfigs() { return VkVideoEncodeRateControlInfoKHR.npLayerConfigs(address()); }
+        public VkVideoEncodeRateControlLayerInfoKHR.Buffer pLayers() { return VkVideoEncodeRateControlInfoKHR.npLayers(address()); }
 
         /** Sets the specified value to the {@link VkVideoEncodeRateControlInfoKHR#sType} field. */
         public VkVideoEncodeRateControlInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeRateControlInfoKHR.nsType(address(), value); return this; }
@@ -385,8 +385,8 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
         public VkVideoEncodeRateControlInfoKHR.Buffer flags(@NativeType("VkVideoEncodeRateControlFlagsKHR") int value) { VkVideoEncodeRateControlInfoKHR.nflags(address(), value); return this; }
         /** Sets the specified value to the {@link VkVideoEncodeRateControlInfoKHR#rateControlMode} field. */
         public VkVideoEncodeRateControlInfoKHR.Buffer rateControlMode(@NativeType("VkVideoEncodeRateControlModeFlagBitsKHR") int value) { VkVideoEncodeRateControlInfoKHR.nrateControlMode(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVideoEncodeRateControlLayerInfoKHR.Buffer} to the {@link VkVideoEncodeRateControlInfoKHR#pLayerConfigs} field. */
-        public VkVideoEncodeRateControlInfoKHR.Buffer pLayerConfigs(@NativeType("VkVideoEncodeRateControlLayerInfoKHR const *") VkVideoEncodeRateControlLayerInfoKHR.Buffer value) { VkVideoEncodeRateControlInfoKHR.npLayerConfigs(address(), value); return this; }
+        /** Sets the address of the specified {@link VkVideoEncodeRateControlLayerInfoKHR.Buffer} to the {@link VkVideoEncodeRateControlInfoKHR#pLayers} field. */
+        public VkVideoEncodeRateControlInfoKHR.Buffer pLayers(@Nullable @NativeType("VkVideoEncodeRateControlLayerInfoKHR const *") VkVideoEncodeRateControlLayerInfoKHR.Buffer value) { VkVideoEncodeRateControlInfoKHR.npLayers(address(), value); return this; }
 
     }
 

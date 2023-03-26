@@ -31,6 +31,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     StdVideoH264DisableDeblockingFilterIdc disable_deblocking_filter_idc;
  *     int8_t slice_alpha_c0_offset_div2;
  *     int8_t slice_beta_offset_div2;
+ *     uint16_t reserved1;
+ *     uint32_t reserved2;
  *     {@link StdVideoEncodeH264WeightTable StdVideoEncodeH264WeightTable} const * pWeightTable;
  * }</code></pre>
  */
@@ -54,6 +56,8 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         DISABLE_DEBLOCKING_FILTER_IDC,
         SLICE_ALPHA_C0_OFFSET_DIV2,
         SLICE_BETA_OFFSET_DIV2,
+        RESERVED1,
+        RESERVED2,
         PWEIGHTTABLE;
 
     static {
@@ -68,6 +72,8 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
             __member(4),
             __member(1),
             __member(1),
+            __member(2),
+            __member(4),
             __member(POINTER_SIZE)
         );
 
@@ -84,7 +90,9 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         DISABLE_DEBLOCKING_FILTER_IDC = layout.offsetof(7);
         SLICE_ALPHA_C0_OFFSET_DIV2 = layout.offsetof(8);
         SLICE_BETA_OFFSET_DIV2 = layout.offsetof(9);
-        PWEIGHTTABLE = layout.offsetof(10);
+        RESERVED1 = layout.offsetof(10);
+        RESERVED2 = layout.offsetof(11);
+        PWEIGHTTABLE = layout.offsetof(12);
     }
 
     /**
@@ -129,6 +137,12 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
     /** @return the value of the {@code slice_beta_offset_div2} field. */
     @NativeType("int8_t")
     public byte slice_beta_offset_div2() { return nslice_beta_offset_div2(address()); }
+    /** @return the value of the {@code reserved1} field. */
+    @NativeType("uint16_t")
+    public short reserved1() { return nreserved1(address()); }
+    /** @return the value of the {@code reserved2} field. */
+    @NativeType("uint32_t")
+    public int reserved2() { return nreserved2(address()); }
     /** @return a {@link StdVideoEncodeH264WeightTable} view of the struct pointed to by the {@code pWeightTable} field. */
     @NativeType("StdVideoEncodeH264WeightTable const *")
     public StdVideoEncodeH264WeightTable pWeightTable() { return npWeightTable(address()); }
@@ -155,6 +169,10 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
     public StdVideoEncodeH264SliceHeader slice_alpha_c0_offset_div2(@NativeType("int8_t") byte value) { nslice_alpha_c0_offset_div2(address(), value); return this; }
     /** Sets the specified value to the {@code slice_beta_offset_div2} field. */
     public StdVideoEncodeH264SliceHeader slice_beta_offset_div2(@NativeType("int8_t") byte value) { nslice_beta_offset_div2(address(), value); return this; }
+    /** Sets the specified value to the {@code reserved1} field. */
+    public StdVideoEncodeH264SliceHeader reserved1(@NativeType("uint16_t") short value) { nreserved1(address(), value); return this; }
+    /** Sets the specified value to the {@code reserved2} field. */
+    public StdVideoEncodeH264SliceHeader reserved2(@NativeType("uint32_t") int value) { nreserved2(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoEncodeH264WeightTable} to the {@code pWeightTable} field. */
     public StdVideoEncodeH264SliceHeader pWeightTable(@NativeType("StdVideoEncodeH264WeightTable const *") StdVideoEncodeH264WeightTable value) { npWeightTable(address(), value); return this; }
 
@@ -170,6 +188,8 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         int disable_deblocking_filter_idc,
         byte slice_alpha_c0_offset_div2,
         byte slice_beta_offset_div2,
+        short reserved1,
+        int reserved2,
         StdVideoEncodeH264WeightTable pWeightTable
     ) {
         flags(flags);
@@ -182,6 +202,8 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         disable_deblocking_filter_idc(disable_deblocking_filter_idc);
         slice_alpha_c0_offset_div2(slice_alpha_c0_offset_div2);
         slice_beta_offset_div2(slice_beta_offset_div2);
+        reserved1(reserved1);
+        reserved2(reserved2);
         pWeightTable(pWeightTable);
 
         return this;
@@ -332,6 +354,10 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
     public static byte nslice_alpha_c0_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_ALPHA_C0_OFFSET_DIV2); }
     /** Unsafe version of {@link #slice_beta_offset_div2}. */
     public static byte nslice_beta_offset_div2(long struct) { return UNSAFE.getByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2); }
+    /** Unsafe version of {@link #reserved1}. */
+    public static short nreserved1(long struct) { return UNSAFE.getShort(null, struct + StdVideoEncodeH264SliceHeader.RESERVED1); }
+    /** Unsafe version of {@link #reserved2}. */
+    public static int nreserved2(long struct) { return UNSAFE.getInt(null, struct + StdVideoEncodeH264SliceHeader.RESERVED2); }
     /** Unsafe version of {@link #pWeightTable}. */
     public static StdVideoEncodeH264WeightTable npWeightTable(long struct) { return StdVideoEncodeH264WeightTable.create(memGetAddress(struct + StdVideoEncodeH264SliceHeader.PWEIGHTTABLE)); }
 
@@ -355,6 +381,10 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
     public static void nslice_alpha_c0_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_ALPHA_C0_OFFSET_DIV2, value); }
     /** Unsafe version of {@link #slice_beta_offset_div2(byte) slice_beta_offset_div2}. */
     public static void nslice_beta_offset_div2(long struct, byte value) { UNSAFE.putByte(null, struct + StdVideoEncodeH264SliceHeader.SLICE_BETA_OFFSET_DIV2, value); }
+    /** Unsafe version of {@link #reserved1(short) reserved1}. */
+    public static void nreserved1(long struct, short value) { UNSAFE.putShort(null, struct + StdVideoEncodeH264SliceHeader.RESERVED1, value); }
+    /** Unsafe version of {@link #reserved2(int) reserved2}. */
+    public static void nreserved2(long struct, int value) { UNSAFE.putInt(null, struct + StdVideoEncodeH264SliceHeader.RESERVED2, value); }
     /** Unsafe version of {@link #pWeightTable(StdVideoEncodeH264WeightTable) pWeightTable}. */
     public static void npWeightTable(long struct, StdVideoEncodeH264WeightTable value) { memPutAddress(struct + StdVideoEncodeH264SliceHeader.PWEIGHTTABLE, value.address()); }
 
@@ -434,6 +464,12 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         /** @return the value of the {@code slice_beta_offset_div2} field. */
         @NativeType("int8_t")
         public byte slice_beta_offset_div2() { return StdVideoEncodeH264SliceHeader.nslice_beta_offset_div2(address()); }
+        /** @return the value of the {@code reserved1} field. */
+        @NativeType("uint16_t")
+        public short reserved1() { return StdVideoEncodeH264SliceHeader.nreserved1(address()); }
+        /** @return the value of the {@code reserved2} field. */
+        @NativeType("uint32_t")
+        public int reserved2() { return StdVideoEncodeH264SliceHeader.nreserved2(address()); }
         /** @return a {@link StdVideoEncodeH264WeightTable} view of the struct pointed to by the {@code pWeightTable} field. */
         @NativeType("StdVideoEncodeH264WeightTable const *")
         public StdVideoEncodeH264WeightTable pWeightTable() { return StdVideoEncodeH264SliceHeader.npWeightTable(address()); }
@@ -460,6 +496,10 @@ public class StdVideoEncodeH264SliceHeader extends Struct implements NativeResou
         public StdVideoEncodeH264SliceHeader.Buffer slice_alpha_c0_offset_div2(@NativeType("int8_t") byte value) { StdVideoEncodeH264SliceHeader.nslice_alpha_c0_offset_div2(address(), value); return this; }
         /** Sets the specified value to the {@code slice_beta_offset_div2} field. */
         public StdVideoEncodeH264SliceHeader.Buffer slice_beta_offset_div2(@NativeType("int8_t") byte value) { StdVideoEncodeH264SliceHeader.nslice_beta_offset_div2(address(), value); return this; }
+        /** Sets the specified value to the {@code reserved1} field. */
+        public StdVideoEncodeH264SliceHeader.Buffer reserved1(@NativeType("uint16_t") short value) { StdVideoEncodeH264SliceHeader.nreserved1(address(), value); return this; }
+        /** Sets the specified value to the {@code reserved2} field. */
+        public StdVideoEncodeH264SliceHeader.Buffer reserved2(@NativeType("uint32_t") int value) { StdVideoEncodeH264SliceHeader.nreserved2(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoEncodeH264WeightTable} to the {@code pWeightTable} field. */
         public StdVideoEncodeH264SliceHeader.Buffer pWeightTable(@NativeType("StdVideoEncodeH264WeightTable const *") StdVideoEncodeH264WeightTable value) { StdVideoEncodeH264SliceHeader.npWeightTable(address(), value); return this; }
 

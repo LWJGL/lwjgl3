@@ -226,6 +226,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
             <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_UPDATE_EXT indicates that the opacity micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
             <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT indicates that the data of the opacity micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
             <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_DISABLE_OPACITY_MICROMAPS_EXT indicates that the specified acceleration structure <b>may</b> be referenced in an instance with #GEOMETRY_INSTANCE_DISABLE_OPACITY_MICROMAPS_EXT set.</li>
+            <li>#BUILD_ACCELERATION_STRUCTURE_ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV indicates that the displacement micromaps associated with the specified acceleration structure <b>may</b> change with an acceleration structure update.</li>
         </ul>
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
@@ -1526,6 +1527,7 @@ val KHR_acceleration_structure = "KHRAccelerationStructure".nativeClassVK("KHR_a
                 <ul>
                     <li>Its {@code primitiveCount} member is less than or equal to the corresponding element of {@code pMaxPrimitiveCounts}.</li>
                     <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to #GEOMETRY_TYPE_TRIANGLES_KHR, if the {@code pNext} chain contains ##VkAccelerationStructureTrianglesOpacityMicromapEXT the corresponding member of {@code pBuildInfo} also contains ##VkAccelerationStructureTrianglesOpacityMicromapEXT and with an equivalent {@code micromap}.</li>
+                    <li>For each element of either {@code pGeometries} or {@code ppGeometries} at a given index, with a {@code geometryType} member equal to #GEOMETRY_TYPE_TRIANGLES_KHR, if the {@code pNext} chain contains ##VkAccelerationStructureTrianglesDisplacementMicromapNV the corresponding member of {@code pBuildInfo} also contains ##VkAccelerationStructureTrianglesDisplacementMicromapNV and with an equivalent {@code micromap}.</li>
                 </ul>
             </li>
         </ul>
