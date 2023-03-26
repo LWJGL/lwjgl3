@@ -533,6 +533,10 @@ import org.lwjgl.vulkan.*;
  * vkDestroyImage(allocator, img2, nullptr);
  * vkDestroyImage(allocator, img1, nullptr);</code></pre>
  * 
+ * <p>VMA also provides convenience functions that create a buffer or image and bind it to memory represented by an existing {@code VmaAllocation}:
+ * {@link #vmaCreateAliasingBuffer CreateAliasingBuffer}, {@link #vmaCreateAliasingBuffer2 CreateAliasingBuffer2}, {@link #vmaCreateAliasingImage CreateAliasingImage}, {@link #vmaCreateAliasingImage2 CreateAliasingImage2}. Versions with "2" offer additional parameter
+ * {@code allocationLocalOffset}.</p>
+ * 
  * <p>Remember that using resources that alias in memory requires proper synchronization. You need to issue a memory barrier to make sure commands that use
  * {@code img1} and {@code img2} don't overlap on GPU timeline. You also need to treat a resource after aliasing as uninitialized - containing garbage
  * data. For example, if you use {@code img1} and then want to use {@code img2}, you need to issue an image memory barrier for {@code img2} with
