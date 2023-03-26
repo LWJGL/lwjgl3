@@ -3974,6 +3974,7 @@ static int osx9orBetter(void)
         {
                 lOsx9orBetter = 0 ;
                 lIn = popen( "osascript -e 'set osver to system version of (system info)'" , "r" ) ;
+                V = 0 ;
                 if ( ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
                         && ( 2 == sscanf(lBuff, "%d.%d", &V, &v) ) )
                 {
@@ -5519,7 +5520,7 @@ char * tinyfd_inputBox(
                 if (aMessage && strlen(aMessage)) strcat(lDialogString, aMessage) ;
                 strcat(lDialogString, "\"") ;
 
-                if ( aDefaultInput && strlen(aDefaultInput) )
+                if ( aDefaultInput )
                 {
                         strcat(lDialogString, " --entry-text=\"") ;
                         strcat(lDialogString, aDefaultInput) ;
@@ -6611,7 +6612,7 @@ char * tinyfd_openFileDialog(
                 {
                         strcat( lDialogString , " --multiple" ) ;
                 }
-                
+
                 strcat(lDialogString, " --title=\"") ;
                 if (aTitle && strlen(aTitle)) strcat(lDialogString, aTitle) ;
                 strcat(lDialogString, "\"") ;
