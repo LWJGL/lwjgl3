@@ -62,6 +62,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         __u32 hardlink_flags;
  *         __u32 xattr_flags;
  *         __u32 msg_ring_flags;
+ *         __u32 uring_cmd_flags;
  *     };
  *     __u64 {@link #user_data};
  *     union {
@@ -126,6 +127,7 @@ public class IOURingSQE extends Struct implements NativeResource {
         HARDLINK_FLAGS,
         XATTR_FLAGS,
         MSG_RING_FLAGS,
+        URING_CMD_FLAGS,
         USER_DATA,
         BUF_INDEX,
         BUF_GROUP,
@@ -161,6 +163,7 @@ public class IOURingSQE extends Struct implements NativeResource {
                 __member(4),
                 __member(4),
                 __member(2),
+                __member(4),
                 __member(4),
                 __member(4),
                 __member(4),
@@ -232,17 +235,18 @@ public class IOURingSQE extends Struct implements NativeResource {
         HARDLINK_FLAGS = layout.offsetof(30);
         XATTR_FLAGS = layout.offsetof(31);
         MSG_RING_FLAGS = layout.offsetof(32);
-        USER_DATA = layout.offsetof(33);
-        BUF_INDEX = layout.offsetof(35);
-        BUF_GROUP = layout.offsetof(36);
-        PERSONALITY = layout.offsetof(37);
-        SPLICE_FD_IN = layout.offsetof(39);
-        FILE_INDEX = layout.offsetof(40);
-        ADDR_LEN = layout.offsetof(42);
-        __PAD3 = layout.offsetof(43);
-        ADDR3 = layout.offsetof(46);
-        __PAD2 = layout.offsetof(47);
-        CMD = layout.offsetof(48);
+        URING_CMD_FLAGS = layout.offsetof(33);
+        USER_DATA = layout.offsetof(34);
+        BUF_INDEX = layout.offsetof(36);
+        BUF_GROUP = layout.offsetof(37);
+        PERSONALITY = layout.offsetof(38);
+        SPLICE_FD_IN = layout.offsetof(40);
+        FILE_INDEX = layout.offsetof(41);
+        ADDR_LEN = layout.offsetof(43);
+        __PAD3 = layout.offsetof(44);
+        ADDR3 = layout.offsetof(47);
+        __PAD2 = layout.offsetof(48);
+        CMD = layout.offsetof(49);
     }
 
     /**
@@ -349,6 +353,9 @@ public class IOURingSQE extends Struct implements NativeResource {
     /** @return the value of the {@code msg_ring_flags} field. */
     @NativeType("__u32")
     public int msg_ring_flags() { return nmsg_ring_flags(address()); }
+    /** @return the value of the {@code uring_cmd_flags} field. */
+    @NativeType("__u32")
+    public int uring_cmd_flags() { return nuring_cmd_flags(address()); }
     /** an application-supplied value that will be copied into the completion queue entry */
     @NativeType("__u64")
     public long user_data() { return nuser_data(address()); }
@@ -454,6 +461,8 @@ public class IOURingSQE extends Struct implements NativeResource {
     public IOURingSQE xattr_flags(@NativeType("__u32") int value) { nxattr_flags(address(), value); return this; }
     /** Sets the specified value to the {@code msg_ring_flags} field. */
     public IOURingSQE msg_ring_flags(@NativeType("__u32") int value) { nmsg_ring_flags(address(), value); return this; }
+    /** Sets the specified value to the {@code uring_cmd_flags} field. */
+    public IOURingSQE uring_cmd_flags(@NativeType("__u32") int value) { nuring_cmd_flags(address(), value); return this; }
     /** Sets the specified value to the {@link #user_data} field. */
     public IOURingSQE user_data(@NativeType("__u64") long value) { nuser_data(address(), value); return this; }
     /** Sets the specified value to the {@link #buf_index} field. */
@@ -665,6 +674,8 @@ public class IOURingSQE extends Struct implements NativeResource {
     public static int nxattr_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.XATTR_FLAGS); }
     /** Unsafe version of {@link #msg_ring_flags}. */
     public static int nmsg_ring_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.MSG_RING_FLAGS); }
+    /** Unsafe version of {@link #uring_cmd_flags}. */
+    public static int nuring_cmd_flags(long struct) { return UNSAFE.getInt(null, struct + IOURingSQE.URING_CMD_FLAGS); }
     /** Unsafe version of {@link #user_data}. */
     public static long nuser_data(long struct) { return UNSAFE.getLong(null, struct + IOURingSQE.USER_DATA); }
     /** Unsafe version of {@link #buf_index}. */
@@ -753,6 +764,8 @@ public class IOURingSQE extends Struct implements NativeResource {
     public static void nxattr_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.XATTR_FLAGS, value); }
     /** Unsafe version of {@link #msg_ring_flags(int) msg_ring_flags}. */
     public static void nmsg_ring_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.MSG_RING_FLAGS, value); }
+    /** Unsafe version of {@link #uring_cmd_flags(int) uring_cmd_flags}. */
+    public static void nuring_cmd_flags(long struct, int value) { UNSAFE.putInt(null, struct + IOURingSQE.URING_CMD_FLAGS, value); }
     /** Unsafe version of {@link #user_data(long) user_data}. */
     public static void nuser_data(long struct, long value) { UNSAFE.putLong(null, struct + IOURingSQE.USER_DATA, value); }
     /** Unsafe version of {@link #buf_index(short) buf_index}. */
@@ -918,6 +931,9 @@ public class IOURingSQE extends Struct implements NativeResource {
         /** @return the value of the {@code msg_ring_flags} field. */
         @NativeType("__u32")
         public int msg_ring_flags() { return IOURingSQE.nmsg_ring_flags(address()); }
+        /** @return the value of the {@code uring_cmd_flags} field. */
+        @NativeType("__u32")
+        public int uring_cmd_flags() { return IOURingSQE.nuring_cmd_flags(address()); }
         /** @return the value of the {@link IOURingSQE#user_data} field. */
         @NativeType("__u64")
         public long user_data() { return IOURingSQE.nuser_data(address()); }
@@ -1019,6 +1035,8 @@ public class IOURingSQE extends Struct implements NativeResource {
         public IOURingSQE.Buffer xattr_flags(@NativeType("__u32") int value) { IOURingSQE.nxattr_flags(address(), value); return this; }
         /** Sets the specified value to the {@code msg_ring_flags} field. */
         public IOURingSQE.Buffer msg_ring_flags(@NativeType("__u32") int value) { IOURingSQE.nmsg_ring_flags(address(), value); return this; }
+        /** Sets the specified value to the {@code uring_cmd_flags} field. */
+        public IOURingSQE.Buffer uring_cmd_flags(@NativeType("__u32") int value) { IOURingSQE.nuring_cmd_flags(address(), value); return this; }
         /** Sets the specified value to the {@link IOURingSQE#user_data} field. */
         public IOURingSQE.Buffer user_data(@NativeType("__u64") long value) { IOURingSQE.nuser_data(address(), value); return this; }
         /** Sets the specified value to the {@link IOURingSQE#buf_index} field. */

@@ -872,6 +872,7 @@ public class LibIOURing {
      * 
      * <p>Available since 6.0.</p>
      * </li>
+     * <li>{@link #IORING_OP_SENDMSG_ZC OP_SENDMSG_ZC}</li>
      * <li>{@link #IORING_OP_LAST OP_LAST}</li>
      * </ul>
      */
@@ -924,7 +925,10 @@ public class LibIOURing {
         IORING_OP_SOCKET          = 45,
         IORING_OP_URING_CMD       = 46,
         IORING_OP_SEND_ZC         = 47,
-        IORING_OP_LAST            = 48;
+        IORING_OP_SENDMSG_ZC      = 48,
+        IORING_OP_LAST            = 49;
+
+    public static final int IORING_URING_CMD_FIXED = 1 << 0;
 
     /** {@code sqe->fsync_flags} */
     public static final int IORING_FSYNC_DATASYNC = 1 << 0;
@@ -1039,12 +1043,16 @@ public class LibIOURing {
      * <p>Sets {@link #IORING_CQE_F_MORE CQE_F_MORE} if the handler will continue to report CQEs on behalf of the same SQE.</p>
      * </li>
      * <li>{@link #IORING_RECVSEND_FIXED_BUF RECVSEND_FIXED_BUF} - Use registered buffers, the index is stored in the {@code buf_index} field.</li>
+     * <li>{@link #IORING_SEND_ZC_REPORT_USAGE SEND_ZC_REPORT_USAGE}</li>
      * </ul>
      */
     public static final int
-        IORING_RECVSEND_POLL_FIRST = 1 << 0,
-        IORING_RECV_MULTISHOT      = 1 << 1,
-        IORING_RECVSEND_FIXED_BUF  = 1 << 2;
+        IORING_RECVSEND_POLL_FIRST  = 1 << 0,
+        IORING_RECV_MULTISHOT       = 1 << 1,
+        IORING_RECVSEND_FIXED_BUF   = 1 << 2,
+        IORING_SEND_ZC_REPORT_USAGE = 1 << 3;
+
+    public static final int IORING_NOTIF_USAGE_ZC_COPIED = 1 << 31;
 
     /** Accept flags stored in {@code sqe->ioprio} */
     public static final int IORING_ACCEPT_MULTISHOT = 1 << 0;
@@ -1070,9 +1078,12 @@ public class LibIOURing {
      * 
      * <ul>
      * <li>{@link #IORING_MSG_RING_CQE_SKIP MSG_RING_CQE_SKIP} - Don't post a CQE to the target ring. Not applicable for {@link #IORING_MSG_DATA MSG_DATA}, obviously.</li>
+     * <li>{@link #IORING_MSG_RING_FLAGS_PASS MSG_RING_FLAGS_PASS}</li>
      * </ul>
      */
-    public static final int IORING_MSG_RING_CQE_SKIP = 1 << 0;
+    public static final int
+        IORING_MSG_RING_CQE_SKIP   = 1 << 0,
+        IORING_MSG_RING_FLAGS_PASS = 1 << 1;
 
     /**
      * {@code cqe->flags}
@@ -1096,9 +1107,12 @@ public class LibIOURing {
 
     /** Magic offsets for the application to {@code mmap} the data it needs */
     public static final long
-        IORING_OFF_SQ_RING = 0L,
-        IORING_OFF_CQ_RING = 0x8000000L,
-        IORING_OFF_SQES    = 0x10000000L;
+        IORING_OFF_SQ_RING    = 0L,
+        IORING_OFF_CQ_RING    = 0x8000000L,
+        IORING_OFF_SQES       = 0x10000000L,
+        IORING_OFF_PBUF_RING  = 0x80000000L,
+        IORING_OFF_PBUF_SHIFT = 16,
+        IORING_OFF_MMAP_MASK  = 0xf8000000L;
 
     /**
      * {@code sq_ring->flags}
@@ -1283,6 +1297,7 @@ public class LibIOURing {
      * 
      * <p>Available since kernel 5.17.</p>
      * </li>
+     * <li>{@link #IORING_FEAT_REG_REG_RING FEAT_REG_REG_RING}</li>
      * </ul>
      */
     public static final int
@@ -1298,7 +1313,8 @@ public class LibIOURing {
         IORING_FEAT_NATIVE_WORKERS  = 1 << 9,
         IORING_FEAT_RSRC_TAGS       = 1 << 10,
         IORING_FEAT_CQE_SKIP        = 1 << 11,
-        IORING_FEAT_LINKED_FILE     = 1 << 12;
+        IORING_FEAT_LINKED_FILE     = 1 << 12,
+        IORING_FEAT_REG_REG_RING    = 1 << 13;
 
     /**
      * {@link #io_uring_register register} {@code opcodes} and arguments
@@ -1573,36 +1589,38 @@ public class LibIOURing {
      * <li>{@link #IORING_REGISTER_SYNC_CANCEL REGISTER_SYNC_CANCEL} - sync cancelation API</li>
      * <li>{@link #IORING_REGISTER_FILE_ALLOC_RANGE REGISTER_FILE_ALLOC_RANGE} - register a range of fixed file slots for automatic slot allocation</li>
      * <li>{@link #IORING_REGISTER_LAST REGISTER_LAST}</li>
+     * <li>{@link #IORING_REGISTER_USE_REGISTERED_RING REGISTER_USE_REGISTERED_RING}</li>
      * </ul>
      */
     public static final int
-        IORING_REGISTER_BUFFERS          = 0,
-        IORING_UNREGISTER_BUFFERS        = 1,
-        IORING_REGISTER_FILES            = 2,
-        IORING_UNREGISTER_FILES          = 3,
-        IORING_REGISTER_EVENTFD          = 4,
-        IORING_UNREGISTER_EVENTFD        = 5,
-        IORING_REGISTER_FILES_UPDATE     = 6,
-        IORING_REGISTER_EVENTFD_ASYNC    = 7,
-        IORING_REGISTER_PROBE            = 8,
-        IORING_REGISTER_PERSONALITY      = 9,
-        IORING_UNREGISTER_PERSONALITY    = 10,
-        IORING_REGISTER_RESTRICTIONS     = 11,
-        IORING_REGISTER_ENABLE_RINGS     = 12,
-        IORING_REGISTER_FILES2           = 13,
-        IORING_REGISTER_FILES_UPDATE2    = 14,
-        IORING_REGISTER_BUFFERS2         = 15,
-        IORING_REGISTER_BUFFERS_UPDATE   = 16,
-        IORING_REGISTER_IOWQ_AFF         = 17,
-        IORING_UNREGISTER_IOWQ_AFF       = 18,
-        IORING_REGISTER_IOWQ_MAX_WORKERS = 19,
-        IORING_REGISTER_RING_FDS         = 20,
-        IORING_UNREGISTER_RING_FDS       = 21,
-        IORING_REGISTER_PBUF_RING        = 22,
-        IORING_UNREGISTER_PBUF_RING      = 23,
-        IORING_REGISTER_SYNC_CANCEL      = 24,
-        IORING_REGISTER_FILE_ALLOC_RANGE = 25,
-        IORING_REGISTER_LAST             = 26;
+        IORING_REGISTER_BUFFERS             = 0,
+        IORING_UNREGISTER_BUFFERS           = 1,
+        IORING_REGISTER_FILES               = 2,
+        IORING_UNREGISTER_FILES             = 3,
+        IORING_REGISTER_EVENTFD             = 4,
+        IORING_UNREGISTER_EVENTFD           = 5,
+        IORING_REGISTER_FILES_UPDATE        = 6,
+        IORING_REGISTER_EVENTFD_ASYNC       = 7,
+        IORING_REGISTER_PROBE               = 8,
+        IORING_REGISTER_PERSONALITY         = 9,
+        IORING_UNREGISTER_PERSONALITY       = 10,
+        IORING_REGISTER_RESTRICTIONS        = 11,
+        IORING_REGISTER_ENABLE_RINGS        = 12,
+        IORING_REGISTER_FILES2              = 13,
+        IORING_REGISTER_FILES_UPDATE2       = 14,
+        IORING_REGISTER_BUFFERS2            = 15,
+        IORING_REGISTER_BUFFERS_UPDATE      = 16,
+        IORING_REGISTER_IOWQ_AFF            = 17,
+        IORING_UNREGISTER_IOWQ_AFF          = 18,
+        IORING_REGISTER_IOWQ_MAX_WORKERS    = 19,
+        IORING_REGISTER_RING_FDS            = 20,
+        IORING_UNREGISTER_RING_FDS          = 21,
+        IORING_REGISTER_PBUF_RING           = 22,
+        IORING_UNREGISTER_PBUF_RING         = 23,
+        IORING_REGISTER_SYNC_CANCEL         = 24,
+        IORING_REGISTER_FILE_ALLOC_RANGE    = 25,
+        IORING_REGISTER_LAST                = 26,
+        IORING_REGISTER_USE_REGISTERED_RING = 1 << 31;
 
     /** Register a fully sparse file space, rather than pass in an array of all -1 file descriptors. */
     public static final int IORING_RSRC_REGISTER_SPARSE = 1 << 0;
@@ -1625,6 +1643,8 @@ public class LibIOURing {
     public static final int IORING_REGISTER_FILES_SKIP = -2;
 
     public static final int IO_URING_OP_SUPPORTED = 1 << 0;
+
+    public static final int IOU_PBUF_RING_MMAP = 1;
 
     /**
      * {@code io_uring_restriction->opcode} values
@@ -1690,7 +1710,7 @@ public class LibIOURing {
      * application memory, greatly reducing per-I/O overhead.</p>
      *
      * @param fd     the file descriptor returned by a call to {@link #io_uring_setup setup}
-     * @param opcode one of:<br><table><tr><td>{@link #IORING_REGISTER_BUFFERS REGISTER_BUFFERS}</td><td>{@link #IORING_REGISTER_FILES REGISTER_FILES}</td><td>{@link #IORING_REGISTER_EVENTFD REGISTER_EVENTFD}</td><td>{@link #IORING_REGISTER_FILES_UPDATE REGISTER_FILES_UPDATE}</td></tr><tr><td>{@link #IORING_REGISTER_EVENTFD_ASYNC REGISTER_EVENTFD_ASYNC}</td><td>{@link #IORING_REGISTER_PROBE REGISTER_PROBE}</td><td>{@link #IORING_REGISTER_PERSONALITY REGISTER_PERSONALITY}</td><td>{@link #IORING_REGISTER_RESTRICTIONS REGISTER_RESTRICTIONS}</td></tr><tr><td>{@link #IORING_REGISTER_ENABLE_RINGS REGISTER_ENABLE_RINGS}</td><td>{@link #IORING_REGISTER_FILES2 REGISTER_FILES2}</td><td>{@link #IORING_REGISTER_FILES_UPDATE2 REGISTER_FILES_UPDATE2}</td><td>{@link #IORING_REGISTER_BUFFERS2 REGISTER_BUFFERS2}</td></tr><tr><td>{@link #IORING_REGISTER_BUFFERS_UPDATE REGISTER_BUFFERS_UPDATE}</td><td>{@link #IORING_REGISTER_IOWQ_AFF REGISTER_IOWQ_AFF}</td><td>{@link #IORING_REGISTER_IOWQ_MAX_WORKERS REGISTER_IOWQ_MAX_WORKERS}</td><td>{@link #IORING_REGISTER_RING_FDS REGISTER_RING_FDS}</td></tr><tr><td>{@link #IORING_REGISTER_PBUF_RING REGISTER_PBUF_RING}</td><td>{@link #IORING_REGISTER_SYNC_CANCEL REGISTER_SYNC_CANCEL}</td><td>{@link #IORING_REGISTER_FILE_ALLOC_RANGE REGISTER_FILE_ALLOC_RANGE}</td><td>{@link #IORING_REGISTER_LAST REGISTER_LAST}</td></tr><tr><td>{@link #IORING_REGISTER_FILES_SKIP REGISTER_FILES_SKIP}</td></tr></table>
+     * @param opcode one of:<br><table><tr><td>{@link #IORING_REGISTER_BUFFERS REGISTER_BUFFERS}</td><td>{@link #IORING_REGISTER_FILES REGISTER_FILES}</td><td>{@link #IORING_REGISTER_EVENTFD REGISTER_EVENTFD}</td><td>{@link #IORING_REGISTER_FILES_UPDATE REGISTER_FILES_UPDATE}</td></tr><tr><td>{@link #IORING_REGISTER_EVENTFD_ASYNC REGISTER_EVENTFD_ASYNC}</td><td>{@link #IORING_REGISTER_PROBE REGISTER_PROBE}</td><td>{@link #IORING_REGISTER_PERSONALITY REGISTER_PERSONALITY}</td><td>{@link #IORING_REGISTER_RESTRICTIONS REGISTER_RESTRICTIONS}</td></tr><tr><td>{@link #IORING_REGISTER_ENABLE_RINGS REGISTER_ENABLE_RINGS}</td><td>{@link #IORING_REGISTER_FILES2 REGISTER_FILES2}</td><td>{@link #IORING_REGISTER_FILES_UPDATE2 REGISTER_FILES_UPDATE2}</td><td>{@link #IORING_REGISTER_BUFFERS2 REGISTER_BUFFERS2}</td></tr><tr><td>{@link #IORING_REGISTER_BUFFERS_UPDATE REGISTER_BUFFERS_UPDATE}</td><td>{@link #IORING_REGISTER_IOWQ_AFF REGISTER_IOWQ_AFF}</td><td>{@link #IORING_REGISTER_IOWQ_MAX_WORKERS REGISTER_IOWQ_MAX_WORKERS}</td><td>{@link #IORING_REGISTER_RING_FDS REGISTER_RING_FDS}</td></tr><tr><td>{@link #IORING_REGISTER_PBUF_RING REGISTER_PBUF_RING}</td><td>{@link #IORING_REGISTER_SYNC_CANCEL REGISTER_SYNC_CANCEL}</td><td>{@link #IORING_REGISTER_FILE_ALLOC_RANGE REGISTER_FILE_ALLOC_RANGE}</td><td>{@link #IORING_REGISTER_LAST REGISTER_LAST}</td></tr><tr><td>{@link #IORING_REGISTER_USE_REGISTERED_RING REGISTER_USE_REGISTERED_RING}</td><td>{@link #IORING_REGISTER_FILES_SKIP REGISTER_FILES_SKIP}</td></tr></table>
      *
      * @return on success, returns 0. On error, -1 is returned, and {@code errno} is set accordingly.
      */

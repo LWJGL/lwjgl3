@@ -487,10 +487,17 @@ ENABLE_WARNINGS()""")
     )
 
     int(
+        "close_ring_fd",
+        "",
+
+        io_uring.p("ring", "")
+    )
+
+    int(
         "register_buf_ring",
         """
         Registers a shared buffer ring to be used with provided buffers.
-        
+
         For the request types that support it, provided buffers are given to the ring and one is selected by a request if it has #IOSQE_BUFFER_SELECT set in
         the SQE {@code flags}, when the request is ready to receive data. This allows both clear ownership of the buffer lifetime, and a way to have more
         read/receive type of operations in flight than buffers available.
@@ -651,6 +658,27 @@ struct io_uring_buf {
         unsigned_int("nr_args", "")
     )
 
+    io_uring_buf_ring.p(
+        "setup_buf_ring",
+        "",
+
+        io_uring.p("ring", ""),
+        unsigned_int("nentries", ""),
+        int("bgid", ""),
+        unsigned_int("flags", ""),
+        Check(1)..int.p("ret", "")
+    )
+
+    int(
+        "free_buf_ring",
+        "",
+
+        io_uring.p("ring", ""),
+        io_uring_buf_ring.p("br", ""),
+        unsigned_int("nentries", ""),
+        int("bgid", "")
+    )
+
     void(
         "cqe_seen",
         """
@@ -730,7 +758,7 @@ struct io_uring_buf {
         This splice operation can be used to implement {@code sendfile} by splicing to an intermediate pipe first, then splice to the final destination. In
         fact, the implementation of {@code sendfile} in kernel uses {@code splice} internally.
 
-        NOTE that even if {@code fd_in} or {@code fd_out} refers to a pipe, the splice operation can still failed with {@code EINVAL} if one of the fd doesn't
+        NOTE that even if {@code fd_in} or {@code fd_out} refers to a pipe, the splice operation can still fail with {@code EINVAL} if one of the fd doesn't
         explicitly support splice operation, e.g. reading from terminal is unsupported from kernel 5.7 to 5.11. Check issue \#291 for more information.
         """,
 
@@ -1285,6 +1313,29 @@ struct io_uring_buf {
     )
 
     void(
+        "prep_send_zc_fixed",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("sockfd", ""),
+        void.const.p("buf", ""),
+        AutoSize("buf")..size_t("len", ""),
+        int("flags", ""),
+        unsigned("zc_flags", ""),
+        unsigned("buf_index", "")
+    )
+
+    void(
+        "prep_sendmsg_zc",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        msghdr.const.p("msg", ""),
+        unsigned("flags", "")
+    )
+
+    void(
         "prep_send_set_addr",
         "",
 
@@ -1539,6 +1590,18 @@ struct io_uring_buf {
     )
 
     void(
+        "prep_msg_ring_cqe_flags",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        unsigned_int("len", ""),
+        __u64("data", ""),
+        unsigned_int("flags", ""),
+        unsigned_int("cqe_flags", "")
+    )
+
+    void(
         "prep_msg_ring",
         "",
 
@@ -1550,6 +1613,29 @@ struct io_uring_buf {
     )
 
     void(
+        "prep_msg_ring_fd",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        int("source_fd", ""),
+        int("target_fd", ""),
+        __u64("data", ""),
+        unsigned_int("flags", "")
+    )
+
+    void(
+        "prep_msg_ring_fd_alloc",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("fd", ""),
+        int("source_fd", ""),
+        __u64("data", ""),
+        unsigned_int("flags", "")
+    )
+
+    void(
         "prep_getxattr",
         "",
 
@@ -1557,7 +1643,7 @@ struct io_uring_buf {
         charUTF8.const.p("name", ""),
         char.p("value", ""),
         charUTF8.const.p("path", ""),
-        AutoSize("value")..size_t("len", "")
+        AutoSize("value")..unsigned_int("len", "")
     )
 
     void(
@@ -1569,7 +1655,7 @@ struct io_uring_buf {
         char.const.p("value", ""),
         charUTF8.const.p("path", ""),
         int("flags", ""),
-        AutoSize("value")..size_t("len", "")
+        AutoSize("value")..unsigned_int("len", "")
     )
 
     void(
@@ -1580,7 +1666,7 @@ struct io_uring_buf {
         int("fd", ""),
         charUTF8.const.p("name", ""),
         char.p("value", ""),
-        AutoSize("value")..size_t("len", "")
+        AutoSize("value")..unsigned_int("len", "")
     )
 
     void(
@@ -1592,7 +1678,7 @@ struct io_uring_buf {
         charUTF8.const.p("name", ""),
         char.const.p("value", ""),
         int("flags", ""),
-        AutoSize("value")..size_t("len", "")
+        AutoSize("value")..unsigned_int("len", "")
     )
 
     void(
@@ -1795,5 +1881,27 @@ struct io_uring_buf {
 
         unsigned("entries", ""),
         io_uring_params.p("p", "")
+    )
+
+    int(
+        "major_version",
+        "",
+
+        void()
+    )
+
+    int(
+        "minor_version",
+        "",
+
+        void()
+    )
+
+    bool(
+        "check_version",
+        "",
+
+        int("major", ""),
+        int("minor", "")
     )
 }

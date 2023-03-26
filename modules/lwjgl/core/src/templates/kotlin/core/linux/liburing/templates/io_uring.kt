@@ -975,7 +975,14 @@ if (flags & IORING_SQ_NEED_WAKEUP)
             Available since 6.0.
             """
         ),
+        "OP_SENDMSG_ZC".enumByte,
         "OP_LAST".enumByte
+    )
+
+    IntConstant(
+        "",
+
+        "URING_CMD_FIXED".."1 << 0"
     )
 
     EnumConstant(
@@ -1077,13 +1084,16 @@ if (flags & IORING_SQ_NEED_WAKEUP)
         "RECV_MULTISHOT".enum(
             """
             Multishot {@code recv}.
-            
+
             Sets #CQE_F_MORE if the handler will continue to report CQEs on behalf of the same SQE.
             """,
             "1 << 1"
         ),
-        "RECVSEND_FIXED_BUF".enum("Use registered buffers, the index is stored in the {@code buf_index} field.", "1 << 2")
+        "RECVSEND_FIXED_BUF".enum("Use registered buffers, the index is stored in the {@code buf_index} field.", "1 << 2"),
+        "SEND_ZC_REPORT_USAGE".enum("", "1 << 3")
     )
+
+    IntConstant("", "NOTIF_USAGE_ZC_COPIED".."1 << 31")
 
     EnumConstant(
         "Accept flags stored in {@code sqe->ioprio}",
@@ -1101,7 +1111,8 @@ if (flags & IORING_SQ_NEED_WAKEUP)
     EnumConstant(
         "#OP_MSG_RING flags ({@code sqe->msg_ring_flags})",
 
-        "MSG_RING_CQE_SKIP".enum("Don't post a CQE to the target ring. Not applicable for #MSG_DATA, obviously.", "1 << 0")
+        "MSG_RING_CQE_SKIP".enum("Don't post a CQE to the target ring. Not applicable for #MSG_DATA, obviously.", "1 << 0"),
+        "MSG_RING_FLAGS_PASS".enum("", "1 << 1")
     )
 
     EnumConstant(
@@ -1125,6 +1136,9 @@ if (flags & IORING_SQ_NEED_WAKEUP)
         "OFF_SQ_RING".."0L",
         "OFF_CQ_RING".."0x8000000L",
         "OFF_SQES".."0x10000000L",
+        "OFF_PBUF_RING".."0x80000000L",
+        "OFF_PBUF_SHIFT".."16",
+        "OFF_MMAP_MASK".."0xf8000000L",
     )
 
     EnumConstant(
@@ -1337,7 +1351,8 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
             Available since kernel 5.17.
             """,
             "1 << 12"
-        )
+        ),
+        "FEAT_REG_REG_RING".enum("", "1 << 13")
     )
 
     EnumConstant(
@@ -1658,7 +1673,9 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         "REGISTER_SYNC_CANCEL".enum("sync cancelation API"),
         "REGISTER_FILE_ALLOC_RANGE".enum("register a range of fixed file slots for automatic slot allocation"),
 
-        "REGISTER_LAST".enum
+        "REGISTER_LAST".enum,
+
+        "REGISTER_USE_REGISTERED_RING".enum("", "1 << 31")
     )
 
     EnumConstant(
@@ -1684,6 +1701,12 @@ int io_uring_enter(unsigned int fd, unsigned int to_submit,
         "",
 
         "IO_URING_OP_SUPPORTED".."1 << 0"
+    ).noPrefix()
+
+    EnumConstant(
+        "",
+
+        "IOU_PBUF_RING_MMAP".enum("", "1")
     ).noPrefix()
 
     EnumConstant(

@@ -23,9 +23,9 @@ static inline void *ERR_PTR(intptr_t n)
 	return (void *) n;
 }
 
-static inline intptr_t PTR_ERR(const void *ptr)
+static inline int PTR_ERR(const void *ptr)
 {
-	return (intptr_t) ptr;
+	return (int) (intptr_t) ptr;
 }
 
 static inline bool IS_ERR(const void *ptr)

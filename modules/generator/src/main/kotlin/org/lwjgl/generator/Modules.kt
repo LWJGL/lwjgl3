@@ -41,7 +41,8 @@ enum class Module(
     CORE_LINUX_LIBURING(
         "core.linux.liburing",
         "org.lwjgl.system.linux.liburing",
-        "Contains bindings to liburing." // TODO:
+        "Contains bindings to liburing.", // TODO:
+        arrayOverloads = false
     ),
     CORE_MACOS(
         "core.macos",

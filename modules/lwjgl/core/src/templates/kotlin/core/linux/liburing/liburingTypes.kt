@@ -64,6 +64,7 @@ val io_uring_sqe = struct(Module.CORE_LINUX_LIBURING, "IOURingSQE", nativeName =
         __u32("hardlink_flags", "")
         __u32("xattr_flags", "")
         __u32("msg_ring_flags", "")
+        __u32("uring_cmd_flags", "")
     }
     __u64("user_data", "an application-supplied value that will be copied into the completion queue entry")
     union {
@@ -303,7 +304,7 @@ val io_uring_buf_reg = struct(Module.CORE_LINUX_LIBURING, "IOURingBufReg", nativ
     __u64("ring_addr", "")
 	__u32("ring_entries", "")
 	__u16("bgid", "")
-	__u16("pad", "")
+	__u16("flags", "")
 	__u64("resv", "")[3]
 }
 

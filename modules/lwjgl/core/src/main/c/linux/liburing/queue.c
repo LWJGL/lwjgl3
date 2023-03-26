@@ -55,6 +55,7 @@ struct get_data {
 	unsigned wait_nr;
 	unsigned get_flags;
 	int sz;
+	int has_ts;
 	void *arg;
 };
 
@@ -64,7 +65,7 @@ static int _io_uring_get_cqe(struct io_uring *ring,
 {
 	struct io_uring_cqe *cqe = NULL;
 	bool looped = false;
-	int err;
+	int err = 0;
 
 	do {
 		bool need_enter = false;
@@ -72,17 +73,21 @@ static int _io_uring_get_cqe(struct io_uring *ring,
 		unsigned nr_available;
 		int ret;
 
-		err = __io_uring_peek_cqe(ring, &cqe, &nr_available);
-		if (err)
+		ret = __io_uring_peek_cqe(ring, &cqe, &nr_available);
+		if (ret) {
+			if (!err)
+				err = ret;
 			break;
+		}
 		if (!cqe && !data->wait_nr && !data->submit) {
 			/*
-			 * If we already looped once, we already entererd
+			 * If we already looped once, we already entered
 			 * the kernel. Since there's nothing to submit or
 			 * wait for, don't keep retrying.
 			 */
 			if (looped || !cq_ring_needs_enter(ring)) {
-				err = -EAGAIN;
+				if (!err)
+					err = -EAGAIN;
 				break;
 			}
 			need_enter = true;
@@ -95,6 +100,13 @@ static int _io_uring_get_cqe(struct io_uring *ring,
 			need_enter = true;
 		if (!need_enter)
 			break;
+		if (looped && data->has_ts) {
+			struct io_uring_getevents_arg *arg = data->arg;
+
+			if (!cqe && arg->ts && !err)
+				err = -ETIME;
+			break;
+		}
 
 		if (ring->int_flags & INT_FLAG_REG_RING)
 			flags |= IORING_ENTER_REGISTERED_RING;
@@ -102,14 +114,18 @@ static int _io_uring_get_cqe(struct io_uring *ring,
 					    data->wait_nr, flags, data->arg,
 					    data->sz);
 		if (ret < 0) {
-			err = ret;
+			if (!err)
+				err = ret;
 			break;
 		}
 
 		data->submit -= ret;
 		if (cqe)
 			break;
-		looped = true;
+		if (!looped) {
+			looped = true;
+			err = ret;
+		}
 	} while (1);
 
 	*cqe_ptr = cqe;
@@ -185,7 +201,7 @@ again:
  * Sync internal state with kernel ring state on the SQ side. Returns the
  * number of pending items in the SQ ring, for the shared ring.
  */
-unsigned __io_uring_flush_sq(struct io_uring *ring)
+static unsigned __io_uring_flush_sq(struct io_uring *ring)
 {
 	struct io_uring_sq *sq = &ring->sq;
 	unsigned tail = sq->sqe_tail;
@@ -195,7 +211,10 @@ unsigned __io_uring_flush_sq(struct io_uring *ring)
 		/*
 		 * Ensure kernel sees the SQE updates before the tail update.
 		 */
-		io_uring_smp_store_release(sq->ktail, tail);
+		if (!(ring->flags & IORING_SETUP_SQPOLL))
+			IO_URING_WRITE_ONCE(*sq->ktail, tail);
+		else
+			io_uring_smp_store_release(sq->ktail, tail);
 	}
 	/*
 	 * This _may_ look problematic, as we're not supposed to be reading
@@ -230,6 +249,7 @@ static int io_uring_wait_cqes_new(struct io_uring *ring,
 		.wait_nr	= wait_nr,
 		.get_flags	= IORING_ENTER_EXT_ARG,
 		.sz		= sizeof(arg),
+		.has_ts		= ts != NULL,
 		.arg		= &arg
 	};
 
@@ -314,6 +334,7 @@ int io_uring_submit_and_wait_timeout(struct io_uring *ring,
 				.wait_nr	= wait_nr,
 				.get_flags	= IORING_ENTER_EXT_ARG,
 				.sz		= sizeof(arg),
+				.has_ts		= ts != NULL,
 				.arg		= &arg
 			};
 
