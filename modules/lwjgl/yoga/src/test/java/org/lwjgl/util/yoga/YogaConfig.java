@@ -38,10 +38,6 @@ public class YogaConfig {
         YGConfigSetExperimentalFeatureEnabled(handle, feature.value, enabled);
     }
 
-    void setShouldDiffLayoutWithoutLegacyStretchBehaviour(boolean shouldDiffLayout) {
-        YGConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour(handle, shouldDiffLayout);
-    }
-
     void setUseLegacyStretchBehaviour(boolean useLegaceStretchBehaviour) {
         YGConfigSetUseLegacyStretchBehaviour(handle, useLegaceStretchBehaviour);
     }

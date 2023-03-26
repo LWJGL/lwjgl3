@@ -448,20 +448,20 @@ void YGNode::cloneChildrenIfNeeded(void* cloneContext) {
   iterChildrenAfterCloningIfNeeded([](YGNodeRef, void*) {}, cloneContext);
 }
 
-void YGNode::markDirtyAndPropogate() {
+void YGNode::markDirtyAndPropagate() {
   if (!facebook::yoga::detail::getBooleanData(flags, isDirty_)) {
     setDirty(true);
     setLayoutComputedFlexBasis(YGFloatOptional());
     if (owner_) {
-      owner_->markDirtyAndPropogate();
+      owner_->markDirtyAndPropagate();
     }
   }
 }
 
-void YGNode::markDirtyAndPropogateDownwards() {
+void YGNode::markDirtyAndPropagateDownwards() {
   facebook::yoga::detail::setBooleanData(flags, isDirty_, true);
   for_each(children_.begin(), children_.end(), [](YGNodeRef childNode) {
-    childNode->markDirtyAndPropogateDownwards();
+    childNode->markDirtyAndPropagateDownwards();
   });
 }
 
@@ -558,53 +558,6 @@ YGFloatOptional YGNode::getTrailingPaddingAndBorder(
     const float widthSize) const {
   return getTrailingPadding(axis, widthSize) +
       YGFloatOptional(getTrailingBorder(axis));
-}
-
-bool YGNode::didUseLegacyFlag() {
-  bool didUseLegacyFlag = layout_.didUseLegacyFlag();
-  if (didUseLegacyFlag) {
-    return true;
-  }
-  for (const auto& child : children_) {
-    if (child->layout_.didUseLegacyFlag()) {
-      didUseLegacyFlag = true;
-      break;
-    }
-  }
-  return didUseLegacyFlag;
-}
-
-void YGNode::setLayoutDoesLegacyFlagAffectsLayout(
-    bool doesLegacyFlagAffectsLayout) {
-  layout_.setDoesLegacyStretchFlagAffectsLayout(doesLegacyFlagAffectsLayout);
-}
-
-void YGNode::setLayoutDidUseLegacyFlag(bool didUseLegacyFlag) {
-  layout_.setDidUseLegacyFlag(didUseLegacyFlag);
-}
-
-bool YGNode::isLayoutTreeEqualToNode(const YGNode& node) const {
-  if (children_.size() != node.children_.size()) {
-    return false;
-  }
-  if (layout_ != node.layout_) {
-    return false;
-  }
-  if (children_.size() == 0) {
-    return true;
-  }
-
-  bool isLayoutTreeEqual = true;
-  YGNodeRef otherNodeChildren = nullptr;
-  for (std::vector<YGNodeRef>::size_type i = 0; i < children_.size(); ++i) {
-    otherNodeChildren = node.children_[i];
-    isLayoutTreeEqual =
-        children_[i]->isLayoutTreeEqualToNode(*otherNodeChildren);
-    if (!isLayoutTreeEqual) {
-      return false;
-    }
-  }
-  return isLayoutTreeEqual;
 }
 
 void YGNode::reset() {

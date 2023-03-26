@@ -109,7 +109,7 @@ WIN_EXPORT void YGNodeMarkDirty(YGNodeRef node);
 //
 // Intended to be used for Yoga benchmarks. Don't use in production, as calling
 // `YGCalculateLayout` will cause the recalculation of each and every node.
-WIN_EXPORT void YGNodeMarkDirtyAndPropogateToDescendants(YGNodeRef node);
+WIN_EXPORT void YGNodeMarkDirtyAndPropagateToDescendants(YGNodeRef node);
 
 WIN_EXPORT void YGNodePrint(YGNodeRef node, YGPrintOptions options);
 
@@ -147,7 +147,6 @@ WIN_EXPORT void YGNodeSetHasNewLayout(YGNodeRef node, bool hasNewLayout);
 YGNodeType YGNodeGetNodeType(YGNodeRef node);
 void YGNodeSetNodeType(YGNodeRef node, YGNodeType nodeType);
 WIN_EXPORT bool YGNodeIsDirty(YGNodeRef node);
-bool YGNodeLayoutGetDidUseLegacyFlag(YGNodeRef node);
 
 WIN_EXPORT void YGNodeStyleSetDirection(YGNodeRef node, YGDirection direction);
 WIN_EXPORT YGDirection YGNodeStyleGetDirection(YGNodeConstRef node);
@@ -290,7 +289,6 @@ WIN_EXPORT float YGNodeLayoutGetWidth(YGNodeRef node);
 WIN_EXPORT float YGNodeLayoutGetHeight(YGNodeRef node);
 WIN_EXPORT YGDirection YGNodeLayoutGetDirection(YGNodeRef node);
 WIN_EXPORT bool YGNodeLayoutGetHadOverflow(YGNodeRef node);
-bool YGNodeLayoutGetDidLegacyStretchFlagAffectLayout(YGNodeRef node);
 
 // Get the computed values for these nodes after performing layout. If they were
 // set using point values then the returned value will be the same as
@@ -315,9 +313,6 @@ WIN_EXPORT void YGAssertWithConfig(
 WIN_EXPORT void YGConfigSetPointScaleFactor(
     YGConfigRef config,
     float pixelsInPoint);
-void YGConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour(
-    YGConfigRef config,
-    bool shouldDiffLayout);
 
 // Yoga previously had an error where containers would take the maximum space
 // possible instead of the minimum like they are supposed to. In practice this

@@ -426,12 +426,6 @@ class YogaNode {
             : YGNodeStyleGetPosition(node, edge.value, __result);
     }
 
-    public boolean getDoesLegacyStretchFlagAffectsLayout() {
-        return INTERNAL_API
-            ? internal.layout().doesLegacyStretchFlagAffectsLayout()
-            : YGNodeLayoutGetDidLegacyStretchFlagAffectLayout(node);
-    }
-
     @Nullable
     YGMeasureFunc getMeasureFunction() {
         return internal.measure_noContext();

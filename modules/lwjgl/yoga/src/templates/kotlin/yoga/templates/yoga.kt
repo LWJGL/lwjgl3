@@ -119,7 +119,9 @@ div {
     EnumConstant(
         "YGExperimentalFeature",
 
-        "ExperimentalFeatureWebFlexBasis".enum
+        "ExperimentalFeatureWebFlexBasis".enum,
+        "ExperimentalFeatureAbsolutePercentageAgainstPaddingEdge".enum,
+        "ExperimentalFeatureFixAbsoluteTrailingColumnMargin".enum
     )
 
     val Gutters = EnumConstant(
@@ -368,7 +370,7 @@ div {
     )
 
     void(
-        "NodeMarkDirtyAndPropogateToDescendants",
+        "NodeMarkDirtyAndPropagateToDescendants",
         """
         Marks the current node and all its descendants as dirty.
 
@@ -515,13 +517,6 @@ div {
 
     bool(
         "NodeIsDirty",
-        "",
-
-        node
-    )
-
-    bool(
-        "NodeLayoutGetDidUseLegacyFlag",
         "",
 
         node
@@ -1059,12 +1054,6 @@ div {
 
         node
     )
-    bool(
-        "NodeLayoutGetDidLegacyStretchFlagAffectLayout",
-        "",
-
-        node
-    )
 
     float(
         "NodeLayoutGetMargin",
@@ -1137,14 +1126,6 @@ div {
 
         YGConfigRef("config", ""),
         float("pixelsInPoint", "")
-    )
-
-    void(
-        "ConfigSetShouldDiffLayoutWithoutLegacyStretchBehaviour",
-        "",
-
-        YGConfigRef("config", ""),
-        bool("shouldDiffLayout", "")
     )
 
     bool(
