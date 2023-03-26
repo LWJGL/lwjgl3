@@ -559,6 +559,14 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
     )
 
     void(
+        "compile_options_set_preserve_bindings",
+        "Sets whether the compiler should preserve all bindings, even when those bindings are not used.",
+
+        shaderc_compile_options_t("options", ""),
+        bool("preserve_bindings", "")
+    )
+
+    void(
         "compile_options_set_auto_map_locations",
         "Sets whether the compiler should automatically assign locations to uniform variables that don't have explicit locations in the shader source.",
 

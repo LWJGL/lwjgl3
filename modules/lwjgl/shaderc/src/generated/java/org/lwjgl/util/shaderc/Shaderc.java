@@ -51,6 +51,7 @@ public class Shaderc {
             compile_options_set_hlsl_offsets                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_offsets"),
             compile_options_set_binding_base                            = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_binding_base"),
             compile_options_set_binding_base_for_stage                  = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_binding_base_for_stage"),
+            compile_options_set_preserve_bindings                       = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_preserve_bindings"),
             compile_options_set_auto_map_locations                      = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_auto_map_locations"),
             compile_options_set_hlsl_register_set_and_binding_for_stage = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding_for_stage"),
             compile_options_set_hlsl_register_set_and_binding           = apiGetFunctionAddress(SHADERC, "shaderc_compile_options_set_hlsl_register_set_and_binding"),
@@ -908,6 +909,17 @@ public class Shaderc {
             check(options);
         }
         invokePV(options, shader_kind, kind, base, __functionAddress);
+    }
+
+    // --- [ shaderc_compile_options_set_preserve_bindings ] ---
+
+    /** Sets whether the compiler should preserve all bindings, even when those bindings are not used. */
+    public static void shaderc_compile_options_set_preserve_bindings(@NativeType("shaderc_compile_options_t") long options, @NativeType("bool") boolean preserve_bindings) {
+        long __functionAddress = Functions.compile_options_set_preserve_bindings;
+        if (CHECKS) {
+            check(options);
+        }
+        invokePV(options, preserve_bindings, __functionAddress);
     }
 
     // --- [ shaderc_compile_options_set_auto_map_locations ] ---
