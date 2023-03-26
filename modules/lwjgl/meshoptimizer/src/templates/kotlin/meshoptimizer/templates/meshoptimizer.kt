@@ -7,18 +7,18 @@ package meshoptimizer.templates
 import meshoptimizer.*
 import org.lwjgl.generator.*
 
-val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "MESHOPTIMIZER", prefixMethod = "meshopt_") {
+val meshoptimizer = "MeshOptimizer".nativeClass(Module.MESHOPTIMIZER, prefix = "meshopt", prefixMethod = "meshopt_") {
     nativeImport("meshoptimizer.h")
     javaImport("static java.lang.Float.*")
 
     documentation =
         """
         Native bindings to ${url("https://github.com/zeux/meshoptimizer", "meshoptimizer")}.
-        
+
         When a GPU renders triangle meshes, various stages of the GPU pipeline have to process vertex and index data. The efficiency of these stages depends on
         the data you feed to them; this library provides algorithms to help optimize meshes for these stages, as well as algorithms to reduce the mesh
         complexity and storage overhead.
-        
+
         <h3>Pipeline</h3>
 
         When optimizing a mesh, you should typically feed it through a set of optimizations (the order is important!):
@@ -292,7 +292,7 @@ meshopt_setAllocator(malloc, free);""")}
         via arguments.
 
         All functions have bounded stack usage that does not exceed 32 KB for any algorithms.
-        
+
         LWJGL note: meshoptimizer can be configured to use the LWJGL memory allocator with the following code:
         ${codeBlock("""
 nmeshopt_setAllocator(
@@ -301,13 +301,13 @@ nmeshopt_setAllocator(
 );""")}
         """
 
-    IntConstant("", "VERSION".."180")
+    IntConstant("", "MESHOPTIMIZER_VERSION".."180").noPrefix()
 
     size_t(
         "generateVertexRemap",
         """
         Generates a vertex remap table from the vertex buffer and an optional index buffer and returns number of unique vertices.
-        
+
         As a result, all vertices that are binary equivalent map to the same (new) location, with no gaps in the resulting sequence. Resulting remap table
         maps old vertices to new vertices and can be used in #remapVertexBuffer()/#remapIndexBuffer(). Note that binary equivalence considers all
         {@code vertex_size} bytes, including padding which should be zero-initialized.
@@ -371,7 +371,7 @@ nmeshopt_setAllocator(
         "generateShadowIndexBuffer",
         """
         Generates index buffer that can be used for more efficient rendering when only a subset of the vertex attributes is necessary.
-        
+
         All vertices that are binary equivalent (wrt first {@code vertex_size} bytes) map to the first vertex in the original vertex buffer. This makes it
         possible to use the index buffer for Z pre-pass or shadowmap rendering, while using the original index buffer for regular rendering. Note that binary
         equivalence considers all {@code vertex_size} bytes, including padding which should be zero-initialized.
@@ -390,7 +390,7 @@ nmeshopt_setAllocator(
         "generateShadowIndexBufferMulti",
         """
         Generates index buffer that can be used for more efficient rendering when only a subset of the vertex attributes is necessary.
-        
+
         All vertices that are binary equivalent (wrt specified {@code streams}) map to the first vertex in the original vertex buffer. This makes it possible
         to use the index buffer for Z pre-pass or shadowmap rendering, while using the original index buffer for regular rendering. Note that binary
         equivalence considers all size bytes in each stream, including padding which should be zero-initialized.
@@ -434,7 +434,7 @@ nmeshopt_setAllocator(
         "generateTessellationIndexBuffer",
         """
         Generate index buffer that can be used for PN-AEN tessellation with crack-free displacement.
-        
+
         Each triangle is converted into a 12-vertex patch with the following layout:
         ${ul(
             "0, 1, 2: original triangle vertices",
@@ -463,7 +463,7 @@ nmeshopt_setAllocator(
         "optimizeVertexCache",
         """
         Vertex transform cache optimizer.
-        
+
         Reorders {@code indices} to reduce the number of GPU vertex shader invocations. If index buffer contains multiple ranges for multiple draw calls, this
         function needs to be called on each range individually.
         """,
@@ -493,7 +493,7 @@ nmeshopt_setAllocator(
         "optimizeVertexCacheFifo",
         """
         Vertex transform cache optimizer for FIFO caches.
-        
+
         Reorders indices to reduce the number of GPU vertex shader invocations. Generally takes ~3x less time to optimize meshes but produces inferior results
         compared to #optimizeVertexCache(). If index buffer contains multiple ranges for multiple draw calls, this function needs to be called on each range
         individually.
@@ -510,7 +510,7 @@ nmeshopt_setAllocator(
         "optimizeOverdraw",
         """
         Overdraw optimizer.
-         
+
         Reorders indices to reduce the number of GPU vertex shader invocations and the pixel overdraw. If index buffer contains multiple ranges for multiple
         draw calls, this function needs to be called on each range individually.
         """,
@@ -534,7 +534,7 @@ nmeshopt_setAllocator(
         "optimizeVertexFetch",
         """
         Vertex fetch cache optimizer.
-         
+
         Reorders vertices and changes indices to reduce the amount of GPU memory fetches during vertex processing. Returns the number of unique vertices, which
         is the same as input vertex count unless some vertices are unused. This function works for a single vertex stream; for multiple vertex streams, use
         #optimizeVertexFetchRemap() + #remapVertexBuffer() for each stream.
@@ -552,7 +552,7 @@ nmeshopt_setAllocator(
         "optimizeVertexFetchRemap",
         """
         Vertex fetch cache optimizer.
-         
+
         Generates vertex remap to reduce the amount of GPU memory fetches during vertex processing. Returns the number of unique vertices, which is the same as
         input vertex count unless some vertices are unused. The resulting remap table should be used to reorder vertex/index buffers using
         #remapVertexBuffer()/#remapIndexBuffer().
@@ -568,7 +568,7 @@ nmeshopt_setAllocator(
         "encodeIndexBuffer",
         """
         Index buffer encoder.
-         
+
         Encodes index data into an array of bytes that is generally much smaller (&lt;1.5 bytes/triangle) and compresses better (&lt;1 bytes/triangle) compared
         to original. Input index buffer must represent a triangle list. Returns encoded data size on success, 0 on error; the only error condition is if buffer
         doesn't have enough space. For maximum efficiency the index buffer being encoded has to be optimized for vertex cache and vertex fetch first.
@@ -599,7 +599,7 @@ nmeshopt_setAllocator(
         "decodeIndexBuffer",
         """
         Index buffer decoder.
-         
+
         Decodes index data from an array of bytes generated by #encodeIndexBuffer(). Returns 0 if decoding was successful, and an error code otherwise. The
         decoder is safe to use for untrusted input, but it may produce garbage data (e.g. out of range indices).
         """,
@@ -654,7 +654,7 @@ nmeshopt_setAllocator(
         "encodeVertexBuffer",
         """
         Vertex buffer encoder.
-        
+
         Encodes vertex data into an array of bytes that is generally smaller and compresses better compared to original. Returns encoded data size on success,
         0 on error; the only error condition is if buffer doesn't have enough space. This function works for a single vertex stream; for multiple vertex
         streams, call {@code meshopt_encodeVertexBuffer} for each stream. Note that all {@code vertex_size} bytes of each vertex are encoded verbatim,
@@ -687,7 +687,7 @@ nmeshopt_setAllocator(
         "decodeVertexBuffer",
         """
         Vertex buffer decoder.
-         
+
         Decodes vertex data from an array of bytes generated by #encodeVertexBuffer(). Returns 0 if decoding was successful, and an error code otherwise. The
         decoder is safe to use for untrusted input, but it may produce garbage data.
         """,
@@ -739,11 +739,19 @@ nmeshopt_setAllocator(
         size_t("stride", "")
     )
 
+    EnumConstant(
+        "{@code meshopt_EncodeExpMode}",
+
+        "EncodeExpSeparate".enum("When encoding exponents, use separate values for each component (maximum quality).", "0"),
+        "EncodeExpSharedVector".enum("When encoding exponents, use shared value for all components of each vector (better compression)."),
+        "EncodeExpSharedComponent".enum("When encoding exponents, use shared value for each component of all vectors (best compression).")
+    )
+
     void(
         "encodeFilterOct",
         """
         Experimental: Encodes unit vectors with K-bit (K &le; 16) signed X/Y as an output.
-     
+
         Each component is stored as an 8-bit or 16-bit normalized integer; {@code stride} must be equal to 4 or 8. {@code W} is preserved as is. Input data
         must contain 4 floats for every vector ({@code count*4} total).
         """,
@@ -785,7 +793,8 @@ nmeshopt_setAllocator(
         size_t("count", ""),
         size_t("stride", ""),
         int("bits", ""),
-        Check("count * (stride >> 2)")..float.const.p("data", "")
+        Check("count * (stride >> 2)")..float.const.p("data", ""),
+        meshopt_EncodeExpMode("mode", "")
     )
 
     EnumConstant(
@@ -837,7 +846,7 @@ nmeshopt_setAllocator(
         "simplifySloppy",
         """
         Experimental: Mesh simplifier (sloppy). Reduces the number of triangles in the mesh, sacrificing mesh appearance for simplification performance.
-         
+
         The algorithm doesn't preserve mesh topology but can stop short of the target goal based on target error. Returns the number of indices after
         simplification, with destination containing new index data. The resulting index buffer references vertices from the original vertex buffer. If the
         original vertex data isn't required, creating a compact vertex buffer using #optimizeVertexFetch() is recommended.
@@ -890,7 +899,7 @@ nmeshopt_setAllocator(
         "simplifyScale",
         """
         Returns the error scaling factor used by the simplifier to convert between absolute and relative extents.
-     
+
         Absolute error must be <b>divided</b> by the scaling factor before passing it to #simplify() as {@code target_error}. Relative error returned by
         {@code meshopt_simplify} via {@code result_error} must be <b>multiplied</b> by the scaling factor to get absolute error.
         """,
@@ -905,7 +914,7 @@ nmeshopt_setAllocator(
         """
         Mesh stripifier. Converts a previously vertex cache optimized triangle list to triangle strip, stitching strips using restart index or degenerate
         triangles.
-         
+
         Returns the number of indices in the resulting strip, with destination containing new index data. For maximum efficiency the index buffer being
         converted has to be optimized for vertex cache first. Using restart indices can result in ~10% smaller index buffers, but on some GPUs restart indices
         may result in decreased performance.
@@ -929,7 +938,7 @@ nmeshopt_setAllocator(
         "unstripify",
         """
         Mesh unstripifier. Converts a triangle strip to a triangle list.
-         
+
         Returns the number of indices in the resulting list, with destination containing new index data.
         """,
 
@@ -950,7 +959,7 @@ nmeshopt_setAllocator(
         "analyzeVertexCache",
         """
         Vertex transform cache analyzer.
-        
+
         Returns cache hit statistics using a simplified FIFO model. Results may not match actual GPU performance.
         """,
 
@@ -966,7 +975,7 @@ nmeshopt_setAllocator(
         "analyzeOverdraw",
         """
         Overdraw analyzer. Returns overdraw statistics using a software rasterizer.
-        
+
         Results may not match actual GPU performance.
         """,
 
@@ -984,7 +993,7 @@ nmeshopt_setAllocator(
         "analyzeVertexFetch",
         """
         Vertex fetch cache analyzer. Returns cache hit statistics using a simplified direct mapped model.
-        
+
         Results may not match actual GPU performance.
         """,
 
@@ -999,7 +1008,7 @@ nmeshopt_setAllocator(
         """
         Meshlet builder. Splits the mesh into a set of meshlets where each meshlet has a micro index buffer indexing into meshlet vertices that refer to the
         original vertex buffer.
-         
+
         The resulting data can be used to render meshes using NVidia programmable mesh shading pipeline, or in other cluster-based renderers. When using
         {@code buildMeshlets}, vertex positions need to be provided to minimize the size of the resulting clusters. When using #buildMeshletsScan(), for
         maximum efficiency the index buffer being converted has to be optimized for vertex cache first.
@@ -1103,7 +1112,7 @@ nmeshopt_setAllocator(
         "spatialSortRemap",
         """
         Experimental: Spatial sorter. Generates a remap table that can be used to reorder points for spatial locality.
-        
+
         Resulting remap table maps old vertices to new vertices and can be used in #remapVertexBuffer().
         """,
 
@@ -1117,7 +1126,7 @@ nmeshopt_setAllocator(
         "spatialSortTriangles",
         """
         Experimental: Spatial sorter. Reorders triangles for spatial locality, and generates a new index buffer.
-        
+
         The resulting index buffer can be used with other functions like #optimizeVertexCache().
         """,
 
@@ -1136,7 +1145,7 @@ nmeshopt_setAllocator(
         "setAllocator",
         """
         Set allocation callbacks.
-        
+
         These callbacks will be used instead of the default operator new/operator delete for all temporary allocations in the library. Note that all algorithms
         only allocate memory for temporary use. {@code allocate}/{@code deallocate} are always called in a stack-like order - last pointer to be allocated is
         deallocated first.

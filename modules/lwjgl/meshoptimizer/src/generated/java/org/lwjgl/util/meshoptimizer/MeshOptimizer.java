@@ -328,19 +328,35 @@ public class MeshOptimizer {
     public static final int MESHOPTIMIZER_VERSION = 180;
 
     /**
+     * {@code meshopt_EncodeExpMode}
+     * 
+     * <h5>Enum values:</h5>
+     * 
+     * <ul>
+     * <li>{@link #meshopt_EncodeExpSeparate EncodeExpSeparate} - When encoding exponents, use separate values for each component (maximum quality).</li>
+     * <li>{@link #meshopt_EncodeExpSharedVector EncodeExpSharedVector} - When encoding exponents, use shared value for all components of each vector (better compression).</li>
+     * <li>{@link #meshopt_EncodeExpSharedComponent EncodeExpSharedComponent} - When encoding exponents, use shared value for each component of all vectors (best compression).</li>
+     * </ul>
+     */
+    public static final int
+        meshopt_EncodeExpSeparate        = 0,
+        meshopt_EncodeExpSharedVector    = 1,
+        meshopt_EncodeExpSharedComponent = 2;
+
+    /**
      * Simplification options.
      * 
      * <h5>Enum values:</h5>
      * 
      * <ul>
-     * <li>{@link #MESHOPTIMIZER_SimplifyLockBorder SimplifyLockBorder} - 
+     * <li>{@link #meshopt_SimplifyLockBorder SimplifyLockBorder} - 
      * Do not move vertices that are located on the topological border (vertices on triangle edges that don't have a paired triangle).
      * 
      * <p>Useful for simplifying portions of the larger mesh.</p>
      * </li>
      * </ul>
      */
-    public static final int MESHOPTIMIZER_SimplifyLockBorder = 1 << 0;
+    public static final int meshopt_SimplifyLockBorder = 1 << 0;
 
     protected MeshOptimizer() {
         throw new UnsupportedOperationException();
@@ -981,7 +997,7 @@ public class MeshOptimizer {
     // --- [ meshopt_encodeFilterExp ] ---
 
     /** Unsafe version of: {@link #meshopt_encodeFilterExp encodeFilterExp} */
-    public static native void nmeshopt_encodeFilterExp(long destination, long count, long stride, int bits, long data);
+    public static native void nmeshopt_encodeFilterExp(long destination, long count, long stride, int bits, long data, int mode);
 
     /**
      * Experimental: Encodes arbitrary (finite) floating-point data with 8-bit exponent and K-bit integer mantissa (1 &le; K &le; 24).
@@ -990,12 +1006,12 @@ public class MeshOptimizer {
      * contain {@code stride/4} floats for every vector ({@code count*stride/4} total). When individual (scalar) encoding is desired, simply pass
      * {@code stride=4} and adjust {@code count} accordingly.</p>
      */
-    public static void meshopt_encodeFilterExp(@NativeType("void *") ByteBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
+    public static void meshopt_encodeFilterExp(@NativeType("void *") ByteBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data, @NativeType("enum meshopt_EncodeExpMode") int mode) {
         if (CHECKS) {
             check(destination, count * (stride >> 2) * 4);
             check(data, count * (stride >> 2));
         }
-        nmeshopt_encodeFilterExp(memAddress(destination), count, stride, bits, memAddress(data));
+        nmeshopt_encodeFilterExp(memAddress(destination), count, stride, bits, memAddress(data), mode);
     }
 
     /**
@@ -1005,12 +1021,12 @@ public class MeshOptimizer {
      * contain {@code stride/4} floats for every vector ({@code count*stride/4} total). When individual (scalar) encoding is desired, simply pass
      * {@code stride=4} and adjust {@code count} accordingly.</p>
      */
-    public static void meshopt_encodeFilterExp(@NativeType("void *") IntBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data) {
+    public static void meshopt_encodeFilterExp(@NativeType("void *") IntBuffer destination, @NativeType("size_t") long count, @NativeType("size_t") long stride, int bits, @NativeType("float const *") FloatBuffer data, @NativeType("enum meshopt_EncodeExpMode") int mode) {
         if (CHECKS) {
             check(destination, (count * (stride >> 2) * 4) >> 2);
             check(data, count * (stride >> 2));
         }
-        nmeshopt_encodeFilterExp(memAddress(destination), count, stride, bits, memAddress(data));
+        nmeshopt_encodeFilterExp(memAddress(destination), count, stride, bits, memAddress(data), mode);
     }
 
     // --- [ meshopt_simplify ] ---

@@ -6,6 +6,8 @@ package meshoptimizer
 
 import org.lwjgl.generator.*
 
+val meshopt_EncodeExpMode = "enum meshopt_EncodeExpMode".enumType
+
 val meshopt_Stream = struct(Module.MESHOPTIMIZER, "MeshoptStream", nativeName = "struct meshopt_Stream") {
     documentation =
         """

@@ -215,11 +215,11 @@ JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_
     meshopt_encodeFilterQuat(destination, (size_t)count, (size_t)stride, bits, data);
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeFilterExp(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong count, jlong stride, jint bits, jlong dataAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1encodeFilterExp(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong count, jlong stride, jint bits, jlong dataAddress, jint mode) {
     void *destination = (void *)(uintptr_t)destinationAddress;
     float const *data = (float const *)(uintptr_t)dataAddress;
     UNUSED_PARAMS(__env, clazz)
-    meshopt_encodeFilterExp(destination, (size_t)count, (size_t)stride, bits, data);
+    meshopt_encodeFilterExp(destination, (size_t)count, (size_t)stride, bits, data, (enum meshopt_EncodeExpMode)mode);
 }
 
 JNIEXPORT jlong JNICALL Java_org_lwjgl_util_meshoptimizer_MeshOptimizer_nmeshopt_1simplify(JNIEnv *__env, jclass clazz, jlong destinationAddress, jlong indicesAddress, jlong index_count, jlong vertex_positionsAddress, jlong vertex_count, jlong vertex_positions_stride, jlong target_index_count, jfloat target_error, jint options, jlong result_errorAddress) {
