@@ -57,10 +57,7 @@ public final class CL {
                 CL = Library.loadNative(CL.class, "org.lwjgl.opencl", Configuration.OPENCL_LIBRARY_NAME, "OpenCL");
                 break;
             case MACOSX:
-                String override = Configuration.OPENCL_LIBRARY_NAME.get();
-                CL = override != null
-                    ? Library.loadNative(CL.class, "org.lwjgl.opencl", override)
-                    : MacOSXLibrary.getWithIdentifier("com.apple.opencl");
+                CL = Library.loadNative(CL.class, "org.lwjgl.opencl", Configuration.OPENCL_LIBRARY_NAME, "/System/Library/Frameworks/OpenCL.framework/Versions/Current/OpenCL");
                 break;
             default:
                 throw new IllegalStateException();

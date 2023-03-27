@@ -101,10 +101,7 @@ public final class GL {
                 GL = Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_LIBRARY_NAME, "libGL.so.1", "libGL.so");
                 break;
             case MACOSX:
-                String override = Configuration.OPENGL_LIBRARY_NAME.get();
-                GL = override != null
-                    ? Library.loadNative(GL.class, "org.lwjgl.opengl", override)
-                    : MacOSXLibrary.getWithIdentifier("com.apple.opengl");
+                GL = Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_LIBRARY_NAME, "/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL");
                 break;
             case WINDOWS:
                 GL = Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_LIBRARY_NAME, "opengl32");
