@@ -532,6 +532,8 @@ public class EGLCapabilities {
     public final boolean EGL_NV_robustness_video_memory_purge;
     /** When true, {@link NVStreamConsumerEGLImage} is supported. */
     public final boolean EGL_NV_stream_consumer_eglimage;
+    /** When true, {@link NVStreamConsumerEGLImageUseScanoutAttrib} is supported. */
+    public final boolean EGL_NV_stream_consumer_eglimage_use_scanout_attrib;
     /** When true, {@link NVStreamConsumerGLTextureYUV} is supported. */
     public final boolean EGL_NV_stream_consumer_gltexture_yuv;
     /** See {@link NVStreamRemote NV_stream_remote}. */
@@ -1168,6 +1170,7 @@ public class EGLCapabilities {
         EGL_NV_quadruple_buffer = ext.contains("EGL_NV_quadruple_buffer");
         EGL_NV_robustness_video_memory_purge = ext.contains("EGL_NV_robustness_video_memory_purge");
         EGL_NV_stream_consumer_eglimage = check_NV_stream_consumer_eglimage(ext);
+        EGL_NV_stream_consumer_eglimage_use_scanout_attrib = ext.contains("EGL_NV_stream_consumer_eglimage_use_scanout_attrib");
         EGL_NV_stream_consumer_gltexture_yuv = check_NV_stream_consumer_gltexture_yuv(ext);
         EGL_NV_stream_cross_display = ext.contains("EGL_NV_stream_cross_display");
         EGL_NV_stream_cross_object = ext.contains("EGL_NV_stream_cross_object");
