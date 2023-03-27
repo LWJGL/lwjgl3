@@ -510,7 +510,7 @@ public class GL32C extends GL31C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsBaseVertex">Reference Page</a>
      */
-    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices, @NativeType("GLint *") IntBuffer basevertex) {
+    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices, @NativeType("GLint *") IntBuffer basevertex) {
         if (CHECKS) {
             check(indices, count.remaining());
             check(basevertex, count.remaining());
@@ -896,7 +896,7 @@ public class GL32C extends GL31C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsBaseVertex">Reference Page</a>
      */
-    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") int[] count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices, @NativeType("GLint *") int[] basevertex) {
+    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") int[] count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices, @NativeType("GLint *") int[] basevertex) {
         long __functionAddress = GL.getICD().glMultiDrawElementsBaseVertex;
         if (CHECKS) {
             check(__functionAddress);

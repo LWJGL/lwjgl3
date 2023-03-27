@@ -349,7 +349,7 @@ public class GL31C extends GL30C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
-    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") PointerBuffer uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
+    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") PointerBuffer uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
         if (CHECKS) {
             check(uniformIndices, uniformNames.remaining());
         }
@@ -365,7 +365,7 @@ public class GL31C extends GL30C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
-    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence[] uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
+    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") CharSequence[] uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
         if (CHECKS) {
             check(uniformIndices, uniformNames.length);
         }
@@ -387,7 +387,7 @@ public class GL31C extends GL30C {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
     @NativeType("void")
-    public static int glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence uniformName) {
+    public static int glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") CharSequence uniformName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             long uniformNamesAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memASCII, uniformName);
@@ -671,7 +671,7 @@ public class GL31C extends GL30C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
-    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") PointerBuffer uniformNames, @NativeType("GLuint *") int[] uniformIndices) {
+    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") PointerBuffer uniformNames, @NativeType("GLuint *") int[] uniformIndices) {
         long __functionAddress = GL.getICD().glGetUniformIndices;
         if (CHECKS) {
             check(__functionAddress);

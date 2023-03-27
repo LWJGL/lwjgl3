@@ -167,7 +167,7 @@ val GL20C = "GL20C".nativeClassGL("GL20C") {
 
         GLuint("shader", "the shader object whose source code is to be replaced"),
         AutoSize("strings", "length")..GLsizei("count", "the number of elements in the string and length arrays"),
-        PointerArray(GLcharUTF8.p, "string", "length")..GLcharUTF8.const.p.p(
+        PointerArray(GLcharUTF8.p, "string", "length")..GLcharUTF8.const.p.const.p(
             "strings",
             "an array of pointers to strings containing the source code to be loaded into the shader"
         ),

@@ -294,7 +294,7 @@ public class GL20C extends GL15C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
-    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") PointerBuffer strings, @Nullable @NativeType("GLint const *") IntBuffer length) {
+    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") PointerBuffer strings, @Nullable @NativeType("GLint const *") IntBuffer length) {
         if (CHECKS) {
             checkSafe(length, strings.remaining());
         }
@@ -314,7 +314,7 @@ public class GL20C extends GL15C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
-    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") CharSequence... strings) {
+    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") CharSequence... strings) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             long stringsAddress = org.lwjgl.system.APIUtil.apiArrayi(stack, MemoryUtil::memUTF8, strings);
@@ -337,7 +337,7 @@ public class GL20C extends GL15C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
-    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") CharSequence string) {
+    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") CharSequence string) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             long stringsAddress = org.lwjgl.system.APIUtil.apiArrayi(stack, MemoryUtil::memUTF8, string);
@@ -2342,7 +2342,7 @@ public class GL20C extends GL15C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
-    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") PointerBuffer strings, @Nullable @NativeType("GLint const *") int[] length) {
+    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") PointerBuffer strings, @Nullable @NativeType("GLint const *") int[] length) {
         long __functionAddress = GL.getICD().glShaderSource;
         if (CHECKS) {
             check(__functionAddress);

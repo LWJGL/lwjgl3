@@ -95,7 +95,7 @@ val EXT_separate_shader_objects = "EXTSeparateShaderObjects".nativeClassGLES("EX
 
         GLenum("type", ""),
         AutoSize("strings")..GLsizei("count", ""),
-        PointerArray(GLcharUTF8.p, "string")..GLcharUTF8.const.p.p("strings", "")
+        PointerArray(GLcharUTF8.p, "string")..GLcharUTF8.const.p.const.p("strings", "")
     )
 
     void(

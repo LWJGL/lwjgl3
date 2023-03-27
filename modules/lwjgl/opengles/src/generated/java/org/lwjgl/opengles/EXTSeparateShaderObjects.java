@@ -92,12 +92,12 @@ public class EXTSeparateShaderObjects {
     public static native int nglCreateShaderProgramvEXT(int type, int count, long strings);
 
     @NativeType("GLuint")
-    public static int glCreateShaderProgramvEXT(@NativeType("GLenum") int type, @NativeType("GLchar const **") PointerBuffer strings) {
+    public static int glCreateShaderProgramvEXT(@NativeType("GLenum") int type, @NativeType("GLchar const * const *") PointerBuffer strings) {
         return nglCreateShaderProgramvEXT(type, strings.remaining(), memAddress(strings));
     }
 
     @NativeType("GLuint")
-    public static int glCreateShaderProgramvEXT(@NativeType("GLenum") int type, @NativeType("GLchar const **") CharSequence... strings) {
+    public static int glCreateShaderProgramvEXT(@NativeType("GLenum") int type, @NativeType("GLchar const * const *") CharSequence... strings) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             long stringsAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memUTF8, strings);
@@ -110,7 +110,7 @@ public class EXTSeparateShaderObjects {
     }
 
     @NativeType("GLuint")
-    public static int glCreateShaderProgramvEXT(@NativeType("GLenum") int type, @NativeType("GLchar const **") CharSequence string) {
+    public static int glCreateShaderProgramvEXT(@NativeType("GLenum") int type, @NativeType("GLchar const * const *") CharSequence string) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             long stringsAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memUTF8, string);

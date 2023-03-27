@@ -2225,7 +2225,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTransformFeedbackVaryings">Reference Page</a>
      */
-    public static void glTransformFeedbackVaryings(@NativeType("GLuint") int program, @NativeType("GLchar const **") PointerBuffer varyings, @NativeType("GLenum") int bufferMode) {
+    public static void glTransformFeedbackVaryings(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") PointerBuffer varyings, @NativeType("GLenum") int bufferMode) {
         nglTransformFeedbackVaryings(program, varyings.remaining(), memAddress(varyings), bufferMode);
     }
 
@@ -2238,7 +2238,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTransformFeedbackVaryings">Reference Page</a>
      */
-    public static void glTransformFeedbackVaryings(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence[] varyings, @NativeType("GLenum") int bufferMode) {
+    public static void glTransformFeedbackVaryings(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") CharSequence[] varyings, @NativeType("GLenum") int bufferMode) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             long varyingsAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memASCII, varyings);
@@ -2257,7 +2257,7 @@ public class GL30C extends GL21C {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glTransformFeedbackVaryings">Reference Page</a>
      */
-    public static void glTransformFeedbackVaryings(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence varying, @NativeType("GLenum") int bufferMode) {
+    public static void glTransformFeedbackVaryings(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") CharSequence varying, @NativeType("GLenum") int bufferMode) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             long varyingsAddress = org.lwjgl.system.APIUtil.apiArray(stack, MemoryUtil::memASCII, varying);
