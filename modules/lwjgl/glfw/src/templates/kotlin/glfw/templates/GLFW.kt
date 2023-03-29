@@ -726,11 +726,15 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
-        """
-        X11 specific init hint.
-        """,
+        "X11 specific init hint.",
 
         "X11_XCB_VULKAN_SURFACE"..0x00052001
+    )
+
+    IntConstant(
+        "Wayland specific init hint.",
+
+        "WAYLAND_LIBDECOR"..0x00053001
     )
 
     IntConstant(
@@ -1022,6 +1026,13 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "ANGLE_PLATFORM_TYPE_D3D11"..0x00037005,
         "ANGLE_PLATFORM_TYPE_VULKAN"..0x00037007,
         "ANGLE_PLATFORM_TYPE_METAL"..0x00037008
+    )
+
+    IntConstant(
+        "Values for the #WAYLAND_LIBDECOR hint.",
+
+        "WAYLAND_PREFER_LIBDECOR"..0x00038001,
+        "WAYLAND_DISABLE_LIBDECOR"..0x00038002
     )
 
     Code(

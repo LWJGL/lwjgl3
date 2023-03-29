@@ -796,6 +796,9 @@ public class GLFW {
     /** X11 specific init hint. */
     public static final int GLFW_X11_XCB_VULKAN_SURFACE = 0x52001;
 
+    /** Wayland specific init hint. */
+    public static final int GLFW_WAYLAND_LIBDECOR = 0x53001;
+
     /** Hint value for {@link #GLFW_PLATFORM PLATFORM} that enables automatic platform selection. */
     public static final int
         GLFW_ANY_PLATFORM     = 0x60000,
@@ -1026,6 +1029,11 @@ public class GLFW {
         GLFW_ANGLE_PLATFORM_TYPE_D3D11    = 0x37005,
         GLFW_ANGLE_PLATFORM_TYPE_VULKAN   = 0x37007,
         GLFW_ANGLE_PLATFORM_TYPE_METAL    = 0x37008;
+
+    /** Values for the {@link #GLFW_WAYLAND_LIBDECOR WAYLAND_LIBDECOR} hint. */
+    public static final int
+        GLFW_WAYLAND_PREFER_LIBDECOR  = 0x38001,
+        GLFW_WAYLAND_DISABLE_LIBDECOR = 0x38002;
 
     protected GLFW() {
         throw new UnsupportedOperationException();
