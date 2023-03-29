@@ -17,44 +17,44 @@ typedef void (APIENTRY *glGetTransformFeedbackVaryingEXTPROC) (jint, jint, jint,
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTransformFeedback_glBindBufferRangeEXT(JNIEnv *__env, jclass clazz, jint target, jint index, jint buffer, jlong offset, jlong size) {
-    glBindBufferRangeEXTPROC glBindBufferRangeEXT = (glBindBufferRangeEXTPROC)tlsGetFunction(1865);
+    glBindBufferRangeEXTPROC glBindBufferRangeEXT = (glBindBufferRangeEXTPROC)tlsGetFunction(1867);
     UNUSED_PARAM(clazz)
     glBindBufferRangeEXT(target, index, buffer, (uintptr_t)offset, (uintptr_t)size);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTransformFeedback_glBindBufferOffsetEXT(JNIEnv *__env, jclass clazz, jint target, jint index, jint buffer, jlong offset) {
-    glBindBufferOffsetEXTPROC glBindBufferOffsetEXT = (glBindBufferOffsetEXTPROC)tlsGetFunction(1866);
+    glBindBufferOffsetEXTPROC glBindBufferOffsetEXT = (glBindBufferOffsetEXTPROC)tlsGetFunction(1868);
     UNUSED_PARAM(clazz)
     glBindBufferOffsetEXT(target, index, buffer, (uintptr_t)offset);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTransformFeedback_glBindBufferBaseEXT(JNIEnv *__env, jclass clazz, jint target, jint index, jint buffer) {
-    glBindBufferBaseEXTPROC glBindBufferBaseEXT = (glBindBufferBaseEXTPROC)tlsGetFunction(1867);
+    glBindBufferBaseEXTPROC glBindBufferBaseEXT = (glBindBufferBaseEXTPROC)tlsGetFunction(1869);
     UNUSED_PARAM(clazz)
     glBindBufferBaseEXT(target, index, buffer);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTransformFeedback_glBeginTransformFeedbackEXT(JNIEnv *__env, jclass clazz, jint primitiveMode) {
-    glBeginTransformFeedbackEXTPROC glBeginTransformFeedbackEXT = (glBeginTransformFeedbackEXTPROC)tlsGetFunction(1868);
+    glBeginTransformFeedbackEXTPROC glBeginTransformFeedbackEXT = (glBeginTransformFeedbackEXTPROC)tlsGetFunction(1870);
     UNUSED_PARAM(clazz)
     glBeginTransformFeedbackEXT(primitiveMode);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTransformFeedback_glEndTransformFeedbackEXT(JNIEnv *__env, jclass clazz) {
-    glEndTransformFeedbackEXTPROC glEndTransformFeedbackEXT = (glEndTransformFeedbackEXTPROC)tlsGetFunction(1869);
+    glEndTransformFeedbackEXTPROC glEndTransformFeedbackEXT = (glEndTransformFeedbackEXTPROC)tlsGetFunction(1871);
     UNUSED_PARAM(clazz)
     glEndTransformFeedbackEXT();
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTransformFeedback_nglTransformFeedbackVaryingsEXT(JNIEnv *__env, jclass clazz, jint program, jint count, jlong varyingsAddress, jint bufferMode) {
-    glTransformFeedbackVaryingsEXTPROC glTransformFeedbackVaryingsEXT = (glTransformFeedbackVaryingsEXTPROC)tlsGetFunction(1870);
+    glTransformFeedbackVaryingsEXTPROC glTransformFeedbackVaryingsEXT = (glTransformFeedbackVaryingsEXTPROC)tlsGetFunction(1872);
     uintptr_t varyings = (uintptr_t)varyingsAddress;
     UNUSED_PARAM(clazz)
     glTransformFeedbackVaryingsEXT(program, count, varyings, bufferMode);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_EXTTransformFeedback_nglGetTransformFeedbackVaryingEXT__IIIJJJJ(JNIEnv *__env, jclass clazz, jint program, jint index, jint bufSize, jlong lengthAddress, jlong sizeAddress, jlong typeAddress, jlong nameAddress) {
-    glGetTransformFeedbackVaryingEXTPROC glGetTransformFeedbackVaryingEXT = (glGetTransformFeedbackVaryingEXTPROC)tlsGetFunction(1871);
+    glGetTransformFeedbackVaryingEXTPROC glGetTransformFeedbackVaryingEXT = (glGetTransformFeedbackVaryingEXTPROC)tlsGetFunction(1873);
     uintptr_t length = (uintptr_t)lengthAddress;
     uintptr_t size = (uintptr_t)sizeAddress;
     uintptr_t type = (uintptr_t)typeAddress;

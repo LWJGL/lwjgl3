@@ -26,7 +26,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTInstancedArrays_nglDrawElement
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_EXTInstancedArrays_glVertexAttribDivisorEXT(JNIEnv *__env, jclass clazz, jint index, jint divisor) {
-    glVertexAttribDivisorEXTPROC glVertexAttribDivisorEXT = (glVertexAttribDivisorEXTPROC)tlsGetFunction(444);
+    glVertexAttribDivisorEXTPROC glVertexAttribDivisorEXT = (glVertexAttribDivisorEXTPROC)tlsGetFunction(446);
     UNUSED_PARAM(clazz)
     glVertexAttribDivisorEXT(index, divisor);
 }

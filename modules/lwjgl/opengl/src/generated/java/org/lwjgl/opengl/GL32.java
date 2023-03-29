@@ -505,7 +505,7 @@ public class GL32 extends GL31 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsBaseVertex">Reference Page</a>
      */
-    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices, @NativeType("GLint *") IntBuffer basevertex) {
+    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices, @NativeType("GLint *") IntBuffer basevertex) {
         GL32C.glMultiDrawElementsBaseVertex(mode, count, type, indices, basevertex);
     }
 
@@ -853,7 +853,7 @@ public class GL32 extends GL31 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glMultiDrawElementsBaseVertex">Reference Page</a>
      */
-    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") int[] count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices, @NativeType("GLint *") int[] basevertex) {
+    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") int[] count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices, @NativeType("GLint *") int[] basevertex) {
         GL32C.glMultiDrawElementsBaseVertex(mode, count, type, indices, basevertex);
     }
 

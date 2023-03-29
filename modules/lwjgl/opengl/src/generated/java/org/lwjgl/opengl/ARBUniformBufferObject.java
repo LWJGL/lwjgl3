@@ -167,7 +167,7 @@ public class ARBUniformBufferObject {
      * @param uniformNames   an array of pointers to buffers containing the names of the queried uniforms
      * @param uniformIndices an array that will receive the indices of the uniforms
      */
-    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") PointerBuffer uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
+    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") PointerBuffer uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
         GL31C.glGetUniformIndices(program, uniformNames, uniformIndices);
     }
 
@@ -178,7 +178,7 @@ public class ARBUniformBufferObject {
      * @param uniformNames   an array of pointers to buffers containing the names of the queried uniforms
      * @param uniformIndices an array that will receive the indices of the uniforms
      */
-    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence[] uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
+    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") CharSequence[] uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
         GL31C.glGetUniformIndices(program, uniformNames, uniformIndices);
     }
 
@@ -188,7 +188,7 @@ public class ARBUniformBufferObject {
      * @param program the name of a program containing uniforms whose indices to query
      */
     @NativeType("void")
-    public static int glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence uniformName) {
+    public static int glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") CharSequence uniformName) {
         return GL31C.glGetUniformIndices(program, uniformName);
     }
 
@@ -449,7 +449,7 @@ public class ARBUniformBufferObject {
     }
 
     /** Array version of: {@link #glGetUniformIndices GetUniformIndices} */
-    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") PointerBuffer uniformNames, @NativeType("GLuint *") int[] uniformIndices) {
+    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") PointerBuffer uniformNames, @NativeType("GLuint *") int[] uniformIndices) {
         GL31C.glGetUniformIndices(program, uniformNames, uniformIndices);
     }
 

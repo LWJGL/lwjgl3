@@ -320,12 +320,12 @@ public class ARBDrawElementsBaseVertex {
      * @param indices    a pointer to the location where the indices are stored
      * @param basevertex a pointer to the location where the base vertices are stored
      */
-    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices, @NativeType("GLint *") IntBuffer basevertex) {
+    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices, @NativeType("GLint *") IntBuffer basevertex) {
         GL32C.glMultiDrawElementsBaseVertex(mode, count, type, indices, basevertex);
     }
 
     /** Array version of: {@link #glMultiDrawElementsBaseVertex MultiDrawElementsBaseVertex} */
-    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") int[] count, @NativeType("GLenum") int type, @NativeType("void const **") PointerBuffer indices, @NativeType("GLint *") int[] basevertex) {
+    public static void glMultiDrawElementsBaseVertex(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") int[] count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices, @NativeType("GLint *") int[] basevertex) {
         GL32C.glMultiDrawElementsBaseVertex(mode, count, type, indices, basevertex);
     }
 

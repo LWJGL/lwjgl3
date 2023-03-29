@@ -14,25 +14,25 @@ typedef void (APIENTRY *glMultiDrawMeshTasksIndirectCountNVPROC) (uintptr_t, uin
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMeshShader_glDrawMeshTasksNV(JNIEnv *__env, jclass clazz, jint first, jint count) {
-    glDrawMeshTasksNVPROC glDrawMeshTasksNV = (glDrawMeshTasksNVPROC)tlsGetFunction(2043);
+    glDrawMeshTasksNVPROC glDrawMeshTasksNV = (glDrawMeshTasksNVPROC)tlsGetFunction(2045);
     UNUSED_PARAM(clazz)
     glDrawMeshTasksNV(first, count);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMeshShader_glDrawMeshTasksIndirectNV(JNIEnv *__env, jclass clazz, jlong indirect) {
-    glDrawMeshTasksIndirectNVPROC glDrawMeshTasksIndirectNV = (glDrawMeshTasksIndirectNVPROC)tlsGetFunction(2044);
+    glDrawMeshTasksIndirectNVPROC glDrawMeshTasksIndirectNV = (glDrawMeshTasksIndirectNVPROC)tlsGetFunction(2046);
     UNUSED_PARAM(clazz)
     glDrawMeshTasksIndirectNV((uintptr_t)indirect);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMeshShader_glMultiDrawMeshTasksIndirectNV(JNIEnv *__env, jclass clazz, jlong indirect, jint drawcount, jint stride) {
-    glMultiDrawMeshTasksIndirectNVPROC glMultiDrawMeshTasksIndirectNV = (glMultiDrawMeshTasksIndirectNVPROC)tlsGetFunction(2045);
+    glMultiDrawMeshTasksIndirectNVPROC glMultiDrawMeshTasksIndirectNV = (glMultiDrawMeshTasksIndirectNVPROC)tlsGetFunction(2047);
     UNUSED_PARAM(clazz)
     glMultiDrawMeshTasksIndirectNV((uintptr_t)indirect, drawcount, stride);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_NVMeshShader_glMultiDrawMeshTasksIndirectCountNV(JNIEnv *__env, jclass clazz, jlong indirect, jlong drawcount, jint maxdrawcount, jint stride) {
-    glMultiDrawMeshTasksIndirectCountNVPROC glMultiDrawMeshTasksIndirectCountNV = (glMultiDrawMeshTasksIndirectCountNVPROC)tlsGetFunction(2046);
+    glMultiDrawMeshTasksIndirectCountNVPROC glMultiDrawMeshTasksIndirectCountNV = (glMultiDrawMeshTasksIndirectCountNVPROC)tlsGetFunction(2048);
     UNUSED_PARAM(clazz)
     glMultiDrawMeshTasksIndirectCountNV((uintptr_t)indirect, (uintptr_t)drawcount, maxdrawcount, stride);
 }

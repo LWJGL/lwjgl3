@@ -322,7 +322,7 @@ public class GL20 extends GL15 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
-    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") PointerBuffer strings, @Nullable @NativeType("GLint const *") IntBuffer length) {
+    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") PointerBuffer strings, @Nullable @NativeType("GLint const *") IntBuffer length) {
         GL20C.glShaderSource(shader, strings, length);
     }
 
@@ -339,7 +339,7 @@ public class GL20 extends GL15 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
-    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") CharSequence... strings) {
+    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") CharSequence... strings) {
         GL20C.glShaderSource(shader, strings);
     }
 
@@ -355,7 +355,7 @@ public class GL20 extends GL15 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
-    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") CharSequence string) {
+    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") CharSequence string) {
         GL20C.glShaderSource(shader, string);
     }
 
@@ -2277,7 +2277,7 @@ public class GL20 extends GL15 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glShaderSource">Reference Page</a>
      */
-    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const **") PointerBuffer strings, @Nullable @NativeType("GLint const *") int[] length) {
+    public static void glShaderSource(@NativeType("GLuint") int shader, @NativeType("GLchar const * const *") PointerBuffer strings, @Nullable @NativeType("GLint const *") int[] length) {
         GL20C.glShaderSource(shader, strings, length);
     }
 

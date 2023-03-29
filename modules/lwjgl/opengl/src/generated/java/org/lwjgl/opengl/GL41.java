@@ -341,7 +341,7 @@ public class GL41 extends GL40 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glCreateShaderProgramv">Reference Page</a>
      */
     @NativeType("GLuint")
-    public static int glCreateShaderProgramv(@NativeType("GLenum") int type, @NativeType("GLchar const **") PointerBuffer strings) {
+    public static int glCreateShaderProgramv(@NativeType("GLenum") int type, @NativeType("GLchar const * const *") PointerBuffer strings) {
         return GL41C.glCreateShaderProgramv(type, strings);
     }
 
@@ -381,7 +381,7 @@ public class GL41 extends GL40 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glCreateShaderProgramv">Reference Page</a>
      */
     @NativeType("GLuint")
-    public static int glCreateShaderProgramv(@NativeType("GLenum") int type, @NativeType("GLchar const **") CharSequence... strings) {
+    public static int glCreateShaderProgramv(@NativeType("GLenum") int type, @NativeType("GLchar const * const *") CharSequence... strings) {
         return GL41C.glCreateShaderProgramv(type, strings);
     }
 
@@ -420,7 +420,7 @@ public class GL41 extends GL40 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glCreateShaderProgramv">Reference Page</a>
      */
     @NativeType("GLuint")
-    public static int glCreateShaderProgramv(@NativeType("GLenum") int type, @NativeType("GLchar const **") CharSequence string) {
+    public static int glCreateShaderProgramv(@NativeType("GLenum") int type, @NativeType("GLchar const * const *") CharSequence string) {
         return GL41C.glCreateShaderProgramv(type, string);
     }
 

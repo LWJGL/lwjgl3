@@ -12,13 +12,13 @@ typedef void (APIENTRY *glTexEstimateMotionRegionsQCOMPROC) (jint, jint, jint, j
 EXTERN_C_ENTER
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMMotionEstimation_glTexEstimateMotionQCOM(JNIEnv *__env, jclass clazz, jint ref, jint target, jint output) {
-    glTexEstimateMotionQCOMPROC glTexEstimateMotionQCOM = (glTexEstimateMotionQCOMPROC)tlsGetFunction(864);
+    glTexEstimateMotionQCOMPROC glTexEstimateMotionQCOM = (glTexEstimateMotionQCOMPROC)tlsGetFunction(866);
     UNUSED_PARAM(clazz)
     glTexEstimateMotionQCOM(ref, target, output);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengles_QCOMMotionEstimation_glTexEstimateMotionRegionsQCOM(JNIEnv *__env, jclass clazz, jint ref, jint target, jint output, jint mask) {
-    glTexEstimateMotionRegionsQCOMPROC glTexEstimateMotionRegionsQCOM = (glTexEstimateMotionRegionsQCOMPROC)tlsGetFunction(865);
+    glTexEstimateMotionRegionsQCOMPROC glTexEstimateMotionRegionsQCOM = (glTexEstimateMotionRegionsQCOMPROC)tlsGetFunction(867);
     UNUSED_PARAM(clazz)
     glTexEstimateMotionRegionsQCOM(ref, target, output, mask);
 }

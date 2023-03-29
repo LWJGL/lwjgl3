@@ -356,7 +356,7 @@ public class GL31 extends GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
-    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") PointerBuffer uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
+    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") PointerBuffer uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
         GL31C.glGetUniformIndices(program, uniformNames, uniformIndices);
     }
 
@@ -369,7 +369,7 @@ public class GL31 extends GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
-    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence[] uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
+    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") CharSequence[] uniformNames, @NativeType("GLuint *") IntBuffer uniformIndices) {
         GL31C.glGetUniformIndices(program, uniformNames, uniformIndices);
     }
 
@@ -381,7 +381,7 @@ public class GL31 extends GL30 {
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
     @NativeType("void")
-    public static int glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") CharSequence uniformName) {
+    public static int glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") CharSequence uniformName) {
         return GL31C.glGetUniformIndices(program, uniformName);
     }
 
@@ -615,7 +615,7 @@ public class GL31 extends GL30 {
      * 
      * @see <a target="_blank" href="http://docs.gl/gl4/glGetUniformIndices">Reference Page</a>
      */
-    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const **") PointerBuffer uniformNames, @NativeType("GLuint *") int[] uniformIndices) {
+    public static void glGetUniformIndices(@NativeType("GLuint") int program, @NativeType("GLchar const * const *") PointerBuffer uniformNames, @NativeType("GLuint *") int[] uniformIndices) {
         GL31C.glGetUniformIndices(program, uniformNames, uniformIndices);
     }
 
