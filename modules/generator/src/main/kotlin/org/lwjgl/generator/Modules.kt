@@ -669,7 +669,7 @@ enum class Module(
 
         tinyexr is a small, single header-only library to load and save OpenEXR(.exr) images.
         """,
-        library = JNILibrary.simple(),
+        library = JNILibrary.create("LibTinyEXR", setupAllocator = true, cpp = true),
         arrayOverloads = false
     ),
     TINYFD(

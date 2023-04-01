@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class TinyEXR {
 
-    static { Library.loadSystem(System::load, System::loadLibrary, TinyEXR.class, "org.lwjgl.tinyexr", Platform.mapLibraryNameBundled("lwjgl_tinyexr")); }
+    static { LibTinyEXR.initialize(); }
 
     /** Error codes. */
     public static final int
