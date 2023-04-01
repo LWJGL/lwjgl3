@@ -106,7 +106,7 @@ val EXT_sample_locations = "EXTSampleLocations".nativeClassVK("EXT_sample_locati
 ￿    const VkSampleLocationsInfoEXT*             pSampleLocationsInfo);</code></pre>
 
         <h5>Description</h5>
-        This command sets the custom sample locations for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}, and when the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsEnable} property of the bound graphics pipeline is #TRUE. Otherwise, this state is specified by the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsInfo} values used to create the currently active pipeline.
+        This command sets the custom sample locations for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}, and when the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsEnable} property of the bound graphics pipeline is #TRUE. Otherwise, this state is specified by the ##VkPipelineSampleLocationsStateCreateInfoEXT{@code ::sampleLocationsInfo} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

@@ -32,6 +32,7 @@ val VkIndirectCommandsLayoutNV = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkIndirectCo
 val VkPrivateDataSlotEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkPrivateDataSlotEXT")
 val VkMicromapEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkMicromapEXT")
 val VkOpticalFlowSessionNV = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkOpticalFlowSessionNV")
+val VkShaderEXT = VK_DEFINE_NON_DISPATCHABLE_HANDLE("VkShaderEXT")
 
 // Enum types
 val VkSurfaceTransformFlagBitsKHR = "VkSurfaceTransformFlagBitsKHR".enumType
@@ -164,6 +165,8 @@ val VkOpticalFlowPerformanceLevelNV = "VkOpticalFlowPerformanceLevelNV".enumType
 val VkOpticalFlowSessionBindingPointNV = "VkOpticalFlowSessionBindingPointNV".enumType
 val VkOpticalFlowSessionCreateFlagBitsNV = "VkOpticalFlowSessionCreateFlagBitsNV".enumType
 val VkOpticalFlowExecuteFlagBitsNV = "VkOpticalFlowExecuteFlagBitsNV".enumType
+val VkShaderCreateFlagBitsEXT = "VkShaderCreateFlagBitsEXT".enumType
+val VkShaderCodeTypeEXT = "VkShaderCodeTypeEXT".enumType
 val VkRayTracingInvocationReorderModeNV = "VkRayTracingInvocationReorderModeNV".enumType
 
 // Bitmask types
@@ -281,6 +284,7 @@ val VkOpticalFlowGridSizeFlagsNV = typedef(VkFlags, "VkOpticalFlowGridSizeFlagsN
 val VkOpticalFlowUsageFlagsNV = typedef(VkFlags, "VkOpticalFlowUsageFlagsNV")
 val VkOpticalFlowSessionCreateFlagsNV = typedef(VkFlags, "VkOpticalFlowSessionCreateFlagsNV")
 val VkOpticalFlowExecuteFlagsNV = typedef(VkFlags, "VkOpticalFlowExecuteFlagsNV")
+val VkShaderCreateFlagsEXT = typedef(VkFlags, "VkShaderCreateFlagsEXT")
 
 // Function pointer types
 val PFN_vkDebugReportCallbackEXT = Module.VULKAN.callback {
@@ -16426,6 +16430,50 @@ val VkPhysicalDeviceImage2DViewOf3DFeaturesEXT = struct(Module.VULKAN, "VkPhysic
     VkBool32("sampler2DViewOf3D", "indicates that the implementation supports using a 2D view of a 3D image in a descriptor of type #DESCRIPTOR_TYPE_SAMPLED_IMAGE or #DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER if the image is created using #IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT.")
 }
 
+val VkPhysicalDeviceShaderTileImageFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderTileImageFeaturesEXT") {
+    documentation =
+        """
+        Structure describing tile image features supported by the implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderTileImageFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceShaderTileImageFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TILE_IMAGE_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TILE_IMAGE_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkBool32("shaderTileImageColorReadAccess", "indicates that the implementation supports the {@code TileImageColorReadAccessEXT} SPIR-V capability.")
+    VkBool32("shaderTileImageDepthReadAccess", "indicates that the implementation supports the {@code TileImageDepthReadAccessEXT} SPIR-V capability.")
+    VkBool32("shaderTileImageStencilReadAccess", "indicates that the implementation supports the {@code TileImageStencilReadAccessEXT} SPIR-V capability.")
+}
+
+val VkPhysicalDeviceShaderTileImagePropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderTileImagePropertiesEXT", mutable = false) {
+    documentation =
+        """
+        Structure containing information about tile image support for a physical device.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderTileImagePropertiesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        These are properties of the tile image information of a physical device.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TILE_IMAGE_PROPERTIES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TILE_IMAGE_PROPERTIES_EXT")..VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    VkBool32("shaderTileImageCoherentReadAccelerated", "a boolean that will be #TRUE if coherent reads of tile image data is accelerated.")
+    VkBool32("shaderTileImageReadSampleFromPixelRateInvocation", "a boolean that will be #TRUE if reading from samples from a pixel rate fragment invocation is supported when ##VkPipelineMultisampleStateCreateInfo::rasterizationSamples &gt; 1.")
+    VkBool32("shaderTileImageReadFromHelperInvocation", "a boolean that will be #TRUE if reads of tile image data from helper fragment invocations result in valid values.")
+}
+
 val VkMicromapUsageEXT = struct(Module.VULKAN, "VkMicromapUsageEXT") {
     documentation =
         """
@@ -18349,6 +18397,154 @@ val VkPhysicalDevicePipelineProtectedAccessFeaturesEXT = struct(Module.VULKAN, "
     Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT")..VkStructureType("sType", "the type of this structure.")
     nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
     VkBool32("pipelineProtectedAccess", "indicates whether the implementation supports specifying protected access on individual pipelines.")
+}
+
+val VkPhysicalDeviceShaderObjectFeaturesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderObjectFeaturesEXT") {
+    documentation =
+        """
+        Structure describing whether shader objects can be supported by an implementation.
+
+        <h5>Description</h5>
+        If the ##VkPhysicalDeviceShaderObjectFeaturesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceFeatures2 structure passed to #GetPhysicalDeviceFeatures2(), it is filled in to indicate whether each corresponding feature is supported. ##VkPhysicalDeviceShaderObjectFeaturesEXT <b>can</b> also be used in the {@code pNext} chain of ##VkDeviceCreateInfo to selectively enable these features.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT")..VkStructureType("sType", "")
+    nullable..opaque_p("pNext", "")
+    VkBool32("shaderObject", "indicates whether the implementation supports <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#shaders-objects\">shader objects</a>.")
+}
+
+val VkPhysicalDeviceShaderObjectPropertiesEXT = struct(Module.VULKAN, "VkPhysicalDeviceShaderObjectPropertiesEXT", mutable = false) {
+    javaImport("static org.lwjgl.vulkan.VK10.*")
+    documentation =
+        """
+        Structure describing shader object properties supported by an implementation.
+
+        <h5>Description</h5>
+        The purpose and usage of the values of this structure are described in greater detail in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects-binary-compatibility">Binary Shader Compatibility</a>.
+
+        If the ##VkPhysicalDeviceShaderObjectPropertiesEXT structure is included in the {@code pNext} chain of the ##VkPhysicalDeviceProperties2 structure passed to #GetPhysicalDeviceProperties2(), it is filled in with each corresponding implementation-dependent property.
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT</li>
+        </ul>
+        """
+
+    Expression("#STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT")..VkStructureType("sType", "the type of this structure.").mutable()
+    nullable..opaque_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.").mutable()
+    uint8_t("shaderBinaryUUID", "an array of #UUID_SIZE {@code uint8_t} values representing a universally unique identifier for one or more implementations whose shader binaries are guaranteed to be compatible with each other.")["VK_UUID_SIZE"]
+    uint32_t("shaderBinaryVersion", "an unsigned integer incremented to represent backwards compatible differences between implementations with the same {@code shaderBinaryUUID}.")
+}
+
+val VkShaderCreateInfoEXT = struct(Module.VULKAN, "VkShaderCreateInfoEXT") {
+    documentation =
+        """
+        Structure specifying parameters of a newly created shader.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>If {@code stage} is not #SHADER_STAGE_TASK_BIT_EXT, #SHADER_STAGE_MESH_BIT_EXT, #SHADER_STAGE_VERTEX_BIT, #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, #SHADER_STAGE_GEOMETRY_BIT, or #SHADER_STAGE_FRAGMENT_BIT, {@code flags} <b>must</b> not include #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
+            <li>If {@code stage} is not #SHADER_STAGE_FRAGMENT_BIT, {@code flags} <b>must</b> not include #SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> feature is not enabled, {@code flags} <b>must</b> not include #SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT</li>
+            <li>If {@code stage} is not #SHADER_STAGE_FRAGMENT_BIT, {@code flags} <b>must</b> not include VK_SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-fragmentDensityMap">{@code fragmentDensityMap}</a> feature is not enabled, {@code flags} <b>must</b> not include #SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT</li>
+            <li>If {@code stage} is not #SHADER_STAGE_COMPUTE_BIT, {@code flags} <b>must</b> not include #SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT or #SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT</li>
+            <li>If {@code stage} is not #SHADER_STAGE_COMPUTE_BIT, {@code flags} <b>must</b> not include #SHADER_CREATE_DISPATCH_BASE_BIT_EXT</li>
+            <li>If {@code stage} is not #SHADER_STAGE_MESH_BIT_EXT, {@code flags} <b>must</b> not include #SHADER_CREATE_NO_TASK_SHADER_BIT_EXT</li>
+            <li>If {@code flags} includes both #SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT and #SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT, the local workgroup size in the X dimension of the shader <b>must</b> be a multiple of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-maxSubgroupSize">{@code maxSubgroupSize}</a></li>
+            <li>If {@code flags} includes #SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT but not #SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT and no ##VkShaderRequiredSubgroupSizeCreateInfoEXT structure is included in the {@code pNext} chain, the local workgroup size in the X dimension of the shader <b>must</b> be a multiple of <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#limits-subgroup-size">{@code subgroupSize}</a></li>
+            <li>{@code stage} <b>must</b> not be #SHADER_STAGE_ALL_GRAPHICS or #SHADER_STAGE_ALL</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code stage} <b>must</b> not be #SHADER_STAGE_TESSELLATION_CONTROL_BIT or #SHADER_STAGE_TESSELLATION_EVALUATION_BIT</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code stage} <b>must</b> not be #SHADER_STAGE_GEOMETRY_BIT</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-taskShader">{@code taskShader}</a> feature is not enabled, {@code stage} <b>must</b> not be #SHADER_STAGE_TASK_BIT_EXT</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-meshShader">{@code meshShader}</a> feature is not enabled, {@code stage} <b>must</b> not be #SHADER_STAGE_MESH_BIT_EXT</li>
+            <li>{@code stage} <b>must</b> not be #SHADER_STAGE_SUBPASS_SHADING_BIT_HUAWEI</li>
+            <li>{@code stage} <b>must</b> not be #SHADER_STAGE_CLUSTER_CULLING_BIT_HUAWEI</li>
+            <li>If {@code stage} is #SHADER_STAGE_VERTEX_BIT, {@code nextStage} <b>must</b> not include any bits other than #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_GEOMETRY_BIT, and #SHADER_STAGE_FRAGMENT_BIT</li>
+            <li>If {@code stage} is #SHADER_STAGE_VERTEX_BIT and the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code nextStage} <b>must</b> not include #SHADER_STAGE_TESSELLATION_CONTROL_BIT</li>
+            <li>If {@code stage} is #SHADER_STAGE_VERTEX_BIT and the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code nextStage} <b>must</b> not include #SHADER_STAGE_GEOMETRY_BIT</li>
+            <li>If {@code stage} is #SHADER_STAGE_TESSELLATION_CONTROL_BIT, {@code nextStage} <b>must</b> not include any bits other than #SHADER_STAGE_TESSELLATION_EVALUATION_BIT</li>
+            <li>If {@code stage} is #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, {@code nextStage} <b>must</b> not include any bits other than #SHADER_STAGE_GEOMETRY_BIT and #SHADER_STAGE_FRAGMENT_BIT</li>
+            <li>If {@code stage} is #SHADER_STAGE_TESSELLATION_EVALUATION_BIT and the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code nextStage} <b>must</b> not include #SHADER_STAGE_GEOMETRY_BIT</li>
+            <li>If {@code stage} is #SHADER_STAGE_GEOMETRY_BIT, {@code nextStage} <b>must</b> not include any bits other than #SHADER_STAGE_FRAGMENT_BIT</li>
+            <li>If {@code stage} is #SHADER_STAGE_FRAGMENT_BIT or #SHADER_STAGE_COMPUTE_BIT, {@code nextStage} <b>must</b> be 0</li>
+            <li>If {@code stage} is #SHADER_STAGE_TASK_BIT_EXT, {@code nextStage} <b>must</b> not include any bits other than #SHADER_STAGE_MESH_BIT_EXT</li>
+            <li>If {@code stage} is #SHADER_STAGE_MESH_BIT_EXT, {@code nextStage} <b>must</b> not include any bits other than #SHADER_STAGE_FRAGMENT_BIT</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, {@code codeSize} <b>must</b> be a multiple of 4</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, {@code pName} <b>must</b> be the name of an {@code OpEntryPoint} in {@code pCode} with an execution model that matches {@code stage}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, {@code pCode} <b>must</b> point to valid SPIR-V code, formatted and packed as described by the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirv-spec">Khronos SPIR-V Specification</a></li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, {@code pCode} <b>must</b> adhere to the validation rules described by the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirvenv-module-validation">Validation Rules within a Module</a> section of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirvenv-capabilities">SPIR-V Environment</a> appendix</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, {@code pCode} <b>must</b> declare the {@code Shader} capability for SPIR-V code</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, {@code pCode} <b>must</b> not declare any capability that is not supported by the API, as described by the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirvenv-module-validation">Capabilities</a> section of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirvenv-capabilities">SPIR-V Environment</a> appendix</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code pCode} declares any of the capabilities listed in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirvenv-capabilities-table">SPIR-V Environment</a> appendix, one of the corresponding requirements <b>must</b> be satisfied</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, {@code pCode} <b>must</b> not declare any SPIR-V extension that is not supported by the API, as described by the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirvenv-extensions">Extension</a> section of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirvenv-capabilities">SPIR-V Environment</a> appendix</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code pCode} declares any of the SPIR-V extensions listed in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirvenv-extensions-table">SPIR-V Environment</a> appendix, one of the corresponding requirements <b>must</b> be satisfied</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the identified entry point includes any variable in its interface that is declared with the {@code ClipDistance} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxClipDistances}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the identified entry point includes any variable in its interface that is declared with the {@code CullDistance} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxCullDistances}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the identified entry point includes any variables in its interface that are declared with the {@code ClipDistance} or {@code CullDistance} {@code BuiltIn} decoration, those variables <b>must</b> not have array sizes which sum to more than ##VkPhysicalDeviceLimits{@code ::maxCombinedClipAndCullDistances}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and the identified entry point includes any variable in its interface that is declared with the {@code SampleMask} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than ##VkPhysicalDeviceLimits{@code ::maxSampleMaskWords}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code stage} is #SHADER_STAGE_VERTEX_BIT, the identified entry point <b>must</b> not include any input variable in its interface that is decorated with {@code CullDistance}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code stage} is #SHADER_STAGE_TESSELLATION_CONTROL_BIT or #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, and the identified entry point has an {@code OpExecutionMode} instruction specifying a patch size with {@code OutputVertices}, the patch size <b>must</b> be greater than 0 and less than or equal to ##VkPhysicalDeviceLimits{@code ::maxTessellationPatchSize}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code stage} is #SHADER_STAGE_GEOMETRY_BIT, the identified entry point <b>must</b> have an {@code OpExecutionMode} instruction specifying a maximum output vertex count that is greater than 0 and less than or equal to ##VkPhysicalDeviceLimits{@code ::maxGeometryOutputVertices}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code stage} is #SHADER_STAGE_GEOMETRY_BIT, the identified entry point <b>must</b> have an {@code OpExecutionMode} instruction specifying an invocation count that is greater than 0 and less than or equal to ##VkPhysicalDeviceLimits{@code ::maxGeometryShaderInvocations}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code stage} is a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-graphics-subsets-pre-rasterization">pre-rasterization shader stage</a>, and the identified entry point writes to {@code Layer} for any primitive, it <b>must</b> write the same value to {@code Layer} for all vertices of a given primitive</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code stage} is a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-graphics-subsets-pre-rasterization">pre-rasterization shader stage</a>, and the identified entry point writes to {@code ViewportIndex} for any primitive, it <b>must</b> write the same value to {@code ViewportIndex} for all vertices of a given primitive</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code stage} is #SHADER_STAGE_FRAGMENT_BIT, the identified entry point <b>must</b> not include any output variables in its interface decorated with {@code CullDistance}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, and {@code stage} is #SHADER_STAGE_FRAGMENT_BIT, and the identified entry point writes to {@code FragDepth} in any execution path, all execution paths that are not exclusive to helper invocations <b>must</b> either discard the fragment, or write or initialize the value of {@code FragDepth}</li>
+            <li>If {@code codeType} is #SHADER_CODE_TYPE_SPIRV_EXT, the shader code in {@code pCode} <b>must</b> be valid as described by the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#spirv-spec">Khronos SPIR-V Specification</a> after applying the specializations provided in {@code pSpecializationInfo}, if any, and then converting all specialization constants into fixed constants</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code sType} <b>must</b> be #STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT</li>
+            <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of ##VkPipelineShaderStageRequiredSubgroupSizeCreateInfo</li>
+            <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
+            <li>{@code flags} <b>must</b> be a valid combination of {@code VkShaderCreateFlagBitsEXT} values</li>
+            <li>{@code stage} <b>must</b> be a valid {@code VkShaderStageFlagBits} value</li>
+            <li>{@code nextStage} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
+            <li>{@code codeType} <b>must</b> be a valid {@code VkShaderCodeTypeEXT} value</li>
+            <li>{@code pCode} <b>must</b> be a valid pointer to an array of {@code codeSize} bytes</li>
+            <li>If {@code pName} is not {@code NULL}, {@code pName} <b>must</b> be a null-terminated UTF-8 string</li>
+            <li>If {@code setLayoutCount} is not 0, and {@code pSetLayouts} is not {@code NULL}, {@code pSetLayouts} <b>must</b> be a valid pointer to an array of {@code setLayoutCount} valid {@code VkDescriptorSetLayout} handles</li>
+            <li>If {@code pushConstantRangeCount} is not 0, and {@code pPushConstantRanges} is not {@code NULL}, {@code pPushConstantRanges} <b>must</b> be a valid pointer to an array of {@code pushConstantRangeCount} valid ##VkPushConstantRange structures</li>
+            <li>If {@code pSpecializationInfo} is not {@code NULL}, {@code pSpecializationInfo} <b>must</b> be a valid pointer to a valid ##VkSpecializationInfo structure</li>
+            <li>{@code codeSize} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkPushConstantRange, ##VkSpecializationInfo, #CreateShadersEXT()
+        """
+
+    Expression("#STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT")..VkStructureType("sType", "the type of this structure.")
+    PointerSetter(
+        "VkPipelineShaderStageRequiredSubgroupSizeCreateInfo", "VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT", "VkShaderRequiredSubgroupSizeCreateInfoEXT",
+        prepend = true
+    )..nullable..opaque_const_p("pNext", "{@code NULL} or a pointer to a structure extending this structure.")
+    VkShaderCreateFlagsEXT("flags", "a bitmask of {@code VkShaderCreateFlagsEXT} describing additional parameters of the shader.")
+    VkShaderStageFlagBits("stage", "a {@code VkShaderStageFlagBits} value specifying a single shader stage.")
+    VkShaderStageFlags("nextStage", "a bitmask of {@code VkShaderStageFlags} specifying zero or more logically later stages which <b>may</b> be used as a logically next bound stage when drawing with the shader bound.")
+    VkShaderCodeTypeEXT("codeType", "a {@code VkShaderCodeTypeEXT} value specifying the type of the shader code pointed to be {@code pCode}.")
+    AutoSize("pCode")..size_t("codeSize", "the size in bytes of the shader code pointed to be {@code pCode}.")
+    void.const.p("pCode", "a pointer to the shader code to use to create the shader.")
+    nullable..charUTF8.const.p("pName", "a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage.")
+    AutoSize("pSetLayouts", optional = true)..uint32_t("setLayoutCount", "the number of descriptor set layouts pointed to by {@code pSetLayouts}.")
+    nullable..VkDescriptorSetLayout.const.p("pSetLayouts", "a pointer to an array of {@code VkDescriptorSetLayout} objects used by the shader stage.")
+    AutoSize("pPushConstantRanges", optional = true)..uint32_t("pushConstantRangeCount", "the number of push constant ranges pointed to by {@code pPushConstantRanges}.")
+    nullable..VkPushConstantRange.const.p("pPushConstantRanges", "a pointer to an array of ##VkPushConstantRange structures used by the shader stage.")
+    nullable..VkSpecializationInfo.const.p("pSpecializationInfo", "a pointer to a ##VkSpecializationInfo structure, as described in <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#pipelines-specialization-constants\">Specialization Constants</a>, or {@code NULL}.")
+}
+
+val VkShaderRequiredSubgroupSizeCreateInfoEXT = struct(Module.VULKAN, "VkShaderRequiredSubgroupSizeCreateInfoEXT", mutable = false, alias = VkPipelineShaderStageRequiredSubgroupSizeCreateInfo) {
+    documentation = "See ##VkPipelineShaderStageRequiredSubgroupSizeCreateInfo."
+
+    Expression("#STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO")..VkStructureType("sType", "").mutable()
+    nullable..opaque_p("pNext", "").mutable()
+    uint32_t("requiredSubgroupSize", "")
 }
 
 val VkPhysicalDeviceTilePropertiesFeaturesQCOM = struct(Module.VULKAN, "VkPhysicalDeviceTilePropertiesFeaturesQCOM") {

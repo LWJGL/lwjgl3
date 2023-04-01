@@ -124,7 +124,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
         <h5>Description</h5>
         The discard rectangle taken from element <code>i</code> of {@code pDiscardRectangles} replace the current state for the discard rectangle at index <code>firstDiscardRectangle + i</code>, for <code>i</code> in <code>[0, discardRectangleCount)</code>.
 
-        This command sets the discard rectangles for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDiscardRectangleStateCreateInfoEXT{@code ::pDiscardRectangles} values used to create the currently active pipeline.
+        This command sets the discard rectangles for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DISCARD_RECTANGLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDiscardRectangleStateCreateInfoEXT{@code ::pDiscardRectangles} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -181,7 +181,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 ￿    VkBool32                                    discardRectangleEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the discard rectangle enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is implied by the ##VkPipelineDiscardRectangleStateCreateInfoEXT{@code ::discardRectangleCount} value used to create the currently active pipeline, where a non-zero {@code discardRectangleCount} implicitly enables discard rectangles, otherwise they are disabled.
+        This command sets the discard rectangle enable for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is implied by the ##VkPipelineDiscardRectangleStateCreateInfoEXT{@code ::discardRectangleCount} value used to create the currently active pipeline, where a non-zero {@code discardRectangleCount} implicitly enables discard rectangles, otherwise they are disabled.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -227,7 +227,7 @@ val EXT_discard_rectangles = "EXTDiscardRectangles".nativeClassVK("EXT_discard_r
 ￿    VkDiscardRectangleModeEXT                   discardRectangleMode);</code></pre>
 
         <h5>Description</h5>
-        This command sets the discard rectangle mode for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDiscardRectangleStateCreateInfoEXT{@code ::discardRectangleMode} value used to create the currently active pipeline.
+        This command sets the discard rectangle mode for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDiscardRectangleStateCreateInfoEXT{@code ::discardRectangleMode} value used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

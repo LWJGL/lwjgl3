@@ -22,6 +22,8 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <p>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain of {@link VkPipelineShaderStageCreateInfo}, it specifies that the pipeline shader stage being compiled has a required subgroup size.</p>
  * 
+ * <p>If a {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} structure is included in the {@code pNext} chain of {@link VkShaderCreateInfoEXT}, it specifies that the shader being compiled has a required subgroup size.</p>
+ * 
  * <h5>Valid Usage</h5>
  * 
  * <ul>

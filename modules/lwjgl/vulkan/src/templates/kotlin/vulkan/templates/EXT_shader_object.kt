@@ -8,57 +8,353 @@ package vulkan.templates
 import org.lwjgl.generator.*
 import vulkan.*
 
-val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_extended_dynamic_state3", type = "device", postfix = "EXT") {
+val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension adds almost all of the remaining pipeline state as dynamic state to help applications further reduce the number of monolithic pipelines they need to create and bind.
+        This extension introduces a new {@code VkShaderEXT} object type which represents a single compiled shader stage. Shader objects can be used as a more flexible but comparably performant alternative to {@code VkPipeline} objects.
 
-        <h5>VK_EXT_extended_dynamic_state3</h5>
+        <h5>Examples</h5>
+        <b>Example 1</b>
+
+        Create linked pair of vertex and fragment shaders.
+
+        <pre><code>
+￿// Logical device created with the shaderObject feature enabled
+￿VkDevice device;
+￿
+￿// SPIR-V shader code for a vertex shader, along with its size in bytes
+￿void* pVertexSpirv;
+￿size_t vertexSpirvSize;
+￿
+￿// SPIR-V shader code for a fragment shader, along with its size in bytes
+￿void* pFragmentSpirv;
+￿size_t fragmentSpirvSize;
+￿
+￿// Descriptor set layout compatible with the shaders
+￿VkDescriptorSetLayout descriptorSetLayout;
+￿
+￿VkShaderCreateInfoEXT shaderCreateInfos[2] =
+￿{
+￿    {
+￿        .sType = VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT,
+￿        .pNext = NULL,
+￿        .flags = VK_SHADER_CREATE_LINK_STAGE_BIT_EXT,
+￿        .stage = VK_SHADER_STAGE_VERTEX_BIT,
+￿        .nextStage = VK_SHADER_STAGE_FRAGMENT_BIT,
+￿        .codeType = VK_SHADER_CODE_TYPE_SPIRV_EXT,
+￿        .codeSize = vertexSpirvSize,
+￿        .pCode = pVertexSpirv,
+￿        .pName = "main",
+￿        .setLayoutCount = 1,
+￿        .pSetLayouts = &amp;descriptorSetLayout;
+￿        .pushConstantRangeCount = 0,
+￿        .pPushConstantRanges = NULL,
+￿        .pSpecializationInfo = NULL
+￿    },
+￿    {
+￿        .sType = VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT,
+￿        .pNext = NULL,
+￿        .flags = VK_SHADER_CREATE_LINK_STAGE_BIT_EXT,
+￿        .stage = VK_SHADER_STAGE_FRAGMENT_BIT,
+￿        .nextStage = 0,
+￿        .codeType = VK_SHADER_CODE_TYPE_SPIRV_EXT,
+￿        .codeSize = fragmentSpirvSize,
+￿        .pCode = pFragmentSpirv,
+￿        .pName = "main",
+￿        .setLayoutCount = 1,
+￿        .pSetLayouts = &amp;descriptorSetLayout;
+￿        .pushConstantRangeCount = 0,
+￿        .pPushConstantRanges = NULL,
+￿        .pSpecializationInfo = NULL
+￿    }
+￿};
+￿
+￿VkResult result;
+￿VkShaderEXT shaders[2];
+￿
+￿result = vkCmdCreateShadersEXT(device, 2, &amp;shaderCreateInfos, NULL, shaders);
+￿if (result != VK_SUCCESS)
+￿{
+￿    // Handle error
+￿}</code></pre>
+
+        Later, during command buffer recording, bind the linked shaders and draw.
+
+        <pre><code>
+￿// Command buffer in the recording state
+￿VkCommandBuffer commandBuffer;
+￿
+￿// Vertex and fragment shader objects created above
+￿VkShaderEXT shaders[2];
+￿
+￿// Assume vertex buffers, descriptor sets, etc. have been bound, and existing
+￿// state setting commands have been called to set all required state
+￿
+￿const VkShaderStageFlagBits stages[2] =
+￿{
+￿    VK_SHADER_STAGE_VERTEX_BIT,
+￿    VK_SHADER_STAGE_FRAGMENT_BIT
+￿};
+￿
+￿// Bind linked shaders
+￿vkCmdBindShadersEXT(commandBuffer, 2, stages, shaders);
+￿
+￿// Equivalent to the previous line. Linked shaders can be bound one at a time,
+￿// in any order:
+￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;stages[1], &amp;shaders[1]);
+￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;stages[0], &amp;shaders[0]);
+￿
+￿// The above is sufficient to draw if the device was created with the
+￿// tessellationShader and geometryShader features disabled. Otherwise, since
+￿// those stages should not execute, vkCmdBindShadersEXT() must be called at
+￿// least once with each of their stages in pStages before drawing:
+￿
+￿const VkShaderStageFlagBits unusedStages[3] =
+￿{
+￿    VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,
+￿    VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,
+￿    VK_SHADER_STAGE_GEOMETRY_BIT
+￿};
+￿
+￿// NULL pShaders is equivalent to an array of stageCount VK_NULL_HANDLE values,
+￿// meaning no shaders are bound to those stages, and that any previously bound
+￿// shaders are unbound
+￿vkCmdBindShadersEXT(commandBuffer, 3, unusedStages, NULL);
+￿
+￿// Draw a triangle
+￿vkCmdDraw(commandBuffer, 3, 1, 0, 0);</code></pre>
+
+        <b>Example 2</b>
+
+        Create unlinked vertex, geometry, and fragment shaders.
+
+        <pre><code>
+￿// Logical device created with the shaderObject feature enabled
+￿VkDevice device;
+￿
+￿// SPIR-V shader code for vertex shaders, along with their sizes in bytes
+￿void* pVertexSpirv[2];
+￿size_t vertexSpirvSize[2];
+￿
+￿// SPIR-V shader code for a geometry shader, along with its size in bytes
+￿void pGeometrySpirv;
+￿size_t geometrySpirvSize;
+￿
+￿// SPIR-V shader code for fragment shaders, along with their sizes in bytes
+￿void* pFragmentSpirv[2];
+￿size_t fragmentSpirvSize[2];
+￿
+￿// Descriptor set layout compatible with the shaders
+￿VkDescriptorSetLayout descriptorSetLayout;
+￿
+￿VkShaderCreateInfoEXT shaderCreateInfos[5] =
+￿{
+￿    // Stage order does not matter
+￿    {
+￿        .sType = VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT,
+￿        .pNext = NULL,
+￿        .flags = 0,
+￿        .stage = VK_SHADER_STAGE_GEOMETRY_BIT,
+￿        .nextStage = VK_SHADER_STAGE_FRAGMENT_BIT,
+￿        .codeType = VK_SHADER_CODE_TYPE_SPIRV_EXT,
+￿        .codeSize = pGeometrySpirv,
+￿        .pCode = geometrySpirvSize,
+￿        .pName = "main",
+￿        .setLayoutCount = 1,
+￿        .pSetLayouts = &amp;descriptorSetLayout;
+￿        .pushConstantRangeCount = 0,
+￿        .pPushConstantRanges = NULL,
+￿        .pSpecializationInfo = NULL
+￿    },
+￿    {
+￿        .sType = VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT,
+￿        .pNext = NULL,
+￿        .flags = 0,
+￿        .stage = VK_SHADER_STAGE_VERTEX_BIT,
+￿        .nextStage = VK_SHADER_STAGE_GEOMETRY_BIT,
+￿        .codeType = VK_SHADER_CODE_TYPE_SPIRV_EXT,
+￿        .codeSize = vertexSpirvSize[0],
+￿        .pCode = pVertexSpirv[0],
+￿        .pName = "main",
+￿        .setLayoutCount = 1,
+￿        .pSetLayouts = &amp;descriptorSetLayout;
+￿        .pushConstantRangeCount = 0,
+￿        .pPushConstantRanges = NULL,
+￿        .pSpecializationInfo = NULL
+￿    },
+￿    {
+￿        .sType = VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT,
+￿        .pNext = NULL,
+￿        .flags = 0,
+￿        .stage = VK_SHADER_STAGE_FRAGMENT_BIT,
+￿        .nextStage = 0,
+￿        .codeType = VK_SHADER_CODE_TYPE_SPIRV_EXT,
+￿        .codeSize = fragmentSpirvSize[0],
+￿        .pCode = pFragmentSpirv[0],
+￿        .pName = "main",
+￿        .setLayoutCount = 1,
+￿        .pSetLayouts = &amp;descriptorSetLayout;
+￿        .pushConstantRangeCount = 0,
+￿        .pPushConstantRanges = NULL,
+￿        .pSpecializationInfo = NULL
+￿    },
+￿    {
+￿        .sType = VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT,
+￿        .pNext = NULL,
+￿        .flags = 0,
+￿        .stage = VK_SHADER_STAGE_FRAGMENT_BIT,
+￿        .nextStage = 0,
+￿        .codeType = VK_SHADER_CODE_TYPE_SPIRV_EXT,
+￿        .codeSize = fragmentSpirvSize[1],
+￿        .pCode = pFragmentSpirv[1],
+￿        .pName = "main",
+￿        .setLayoutCount = 1,
+￿        .pSetLayouts = &amp;descriptorSetLayout;
+￿        .pushConstantRangeCount = 0,
+￿        .pPushConstantRanges = NULL,
+￿        .pSpecializationInfo = NULL
+￿    },
+￿    {
+￿        .sType = VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT,
+￿        .pNext = NULL,
+￿        .flags = 0,
+￿        .stage = VK_SHADER_STAGE_VERTEX_BIT,
+￿        // Suppose we want this vertex shader to be able to be followed by
+￿        // either a geometry shader or fragment shader:
+￿        .nextStage = VK_SHADER_STAGE_GEOMETRY_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
+￿        .codeType = VK_SHADER_CODE_TYPE_SPIRV_EXT,
+￿        .codeSize = vertexSpirvSize[1],
+￿        .pCode = pVertexSpirv[1],
+￿        .pName = "main",
+￿        .setLayoutCount = 1,
+￿        .pSetLayouts = &amp;descriptorSetLayout;
+￿        .pushConstantRangeCount = 0,
+￿        .pPushConstantRanges = NULL,
+￿        .pSpecializationInfo = NULL
+￿    }
+￿};
+￿
+￿VkResult result;
+￿VkShaderEXT shaders[5];
+￿
+￿result = vkCmdCreateShadersEXT(device, 5, &amp;shaderCreateInfos, NULL, shaders);
+￿if (result != VK_SUCCESS)
+￿{
+￿    // Handle error
+￿}</code></pre>
+
+        Later, during command buffer recording, bind the linked shaders in different combinations and draw.
+
+        <pre><code>
+￿// Command buffer in the recording state
+￿VkCommandBuffer commandBuffer;
+￿
+￿// Vertex, geometry, and fragment shader objects created above
+￿VkShaderEXT shaders[5];
+￿
+￿// Assume vertex buffers, descriptor sets, etc. have been bound, and existing
+￿// state setting commands have been called to set all required state
+￿
+￿const VkShaderStageFlagBits vertexStage = VK_SHADER_STAGE_VERTEX_BIT;
+￿const VkShaderStageFlagBits geometryStage = VK_SHADER_STAGE_VERTEX_BIT;
+￿const VkShaderStageFlagBits fragmentStage = VK_SHADER_STAGE_VERTEX_BIT;
+￿
+￿// Bind unlinked vertex shader
+￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;vertexStage, &amp;shaders[0]);
+￿
+￿// Bind unlinked fragment shader
+￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;fragmentStage, &amp;shaders[3]);
+￿
+￿// Bind unlinked geometry shader
+￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;geometryStage, &amp;shaders[2]);
+￿
+￿// Assume the tessellationShader feature is disabled, so vkCmdBindShadersEXT()
+￿// need not have been called with either tessellation stage
+￿
+￿// Draw a triangle
+￿vkCmdDraw(commandBuffer, 3, 1, 0, 0);
+￿
+￿// Bind a different unlinked fragment shader
+￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;fragmentStage, &amp;shaders[4]);
+￿
+￿// Draw another triangle
+￿vkCmdDraw(commandBuffer, 3, 1, 0, 0);
+￿
+￿// Bind a different unlinked vertex shader
+￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;vertexStage, &amp;shaders[1]);
+￿
+￿// Draw another triangle
+￿vkCmdDraw(commandBuffer, 3, 1, 0, 0);</code></pre>
+
+        <h5>VK_EXT_shader_object</h5>
         <dl>
             <dt><b>Name String</b></dt>
-            <dd>{@code VK_EXT_extended_dynamic_state3}</dd>
+            <dd>{@code VK_EXT_shader_object}</dd>
 
             <dt><b>Extension Type</b></dt>
             <dd>Device extension</dd>
 
             <dt><b>Registered Extension Number</b></dt>
-            <dd>456</dd>
+            <dd>483</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>2</dd>
+            <dd>1</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
+            <dd>     {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}      or      <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.1">Version 1.1</a> and      {@link KHRDynamicRendering VK_KHR_dynamic_rendering}      or      <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#versions-1.3">Version 1.3</a></dd>
 
             <dt><b>Contact</b></dt>
             <dd><ul>
-                <li>Piers Daniell <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_extended_dynamic_state3]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_extended_dynamic_state3%20extension*">pdaniell-nv</a></li>
+                <li>Daniel Story <a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_object]%20@daniel-story%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_shader_object%20extension*">daniel-story</a></li>
             </ul></dd>
 
             <dt><b>Extension Proposal</b></dt>
-            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_extended_dynamic_state3.adoc">VK_EXT_extended_dynamic_state3</a></dd>
+            <dd><a target="_blank" href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_shader_object.adoc">VK_EXT_shader_object</a></dd>
         </dl>
 
         <h5>Other Extension Metadata</h5>
         <dl>
             <dt><b>Last Modified Date</b></dt>
-            <dd>2022-09-02</dd>
+            <dd>2023-03-30</dd>
+
+            <dt><b>Interactions and External Dependencies</b></dt>
+            <dd><ul>
+                <li>Interacts with {@link EXTExtendedDynamicState VK_EXT_extended_dynamic_state}</li>
+                <li>Interacts with {@link EXTExtendedDynamicState2 VK_EXT_extended_dynamic_state2}</li>
+                <li>Interacts with {@link EXTExtendedDynamicState3 VK_EXT_extended_dynamic_state3}</li>
+                <li>Interacts with {@link EXTVertexInputDynamicState VK_EXT_vertex_input_dynamic_state}</li>
+            </ul></dd>
 
             <dt><b>IP Status</b></dt>
             <dd>No known IP claims.</dd>
 
             <dt><b>Contributors</b></dt>
             <dd><ul>
-                <li>Daniel Story, Nintendo</li>
-                <li>Jamie Madill, Google</li>
-                <li>Jan-Harald Fredriksen, Arm</li>
-                <li>Faith Ekstrand, Collabora</li>
-                <li>Mike Blumenkrantz, Valve</li>
-                <li>Ricardo Garcia, Igalia</li>
-                <li>Samuel Pitoiset, Valve</li>
+                <li>Piers Daniell, NVIDIA</li>
+                <li>Sandy Jamieson, Nintendo</li>
+                <li>Žiga Markuš, LunarG</li>
+                <li>Tobias Hector, AMD</li>
+                <li>Alex Walters, Imagination</li>
                 <li>Shahbaz Youssefi, Google</li>
+                <li>Ralph Potter, Samsung</li>
+                <li>Jan-Harald Fredriksen, ARM</li>
+                <li>Connor Abott, Valve</li>
+                <li>Arseny Kapoulkine, Roblox</li>
+                <li>Patrick Doane, Activision</li>
+                <li>Jeff Leger, Qualcomm</li>
                 <li>Stu Smith, AMD</li>
-                <li>Tapani Pälli, Intel</li>
+                <li>Chris Glover, Google</li>
+                <li>Ricardo Garcia, Igalia</li>
+                <li>Faith Ekstrand, Collabora</li>
+                <li>Timur Kristóf, Valve</li>
+                <li>Constantine Shablya, Collabora</li>
+                <li>Daniel Koch, NVIDIA</li>
+                <li>Alyssa Rosenzweig, Collabora</li>
+                <li>Mike Blumenkrantz, Valve</li>
+                <li>Samuel Pitoiset, Valve</li>
+                <li>Qun Lin, AMD</li>
+                <li>Spencer Fricke, LunarG</li>
+                <li>Soroush Faghihi Kashani, Imagination</li>
             </ul></dd>
         </dl>
         """
@@ -66,56 +362,616 @@ val EXT_extended_dynamic_state3 = "EXTExtendedDynamicState3".nativeClassVK("EXT_
     IntConstant(
         "The extension specification version.",
 
-        "EXT_EXTENDED_DYNAMIC_STATE_3_SPEC_VERSION".."2"
+        "EXT_SHADER_OBJECT_SPEC_VERSION".."1"
     )
 
     StringConstant(
         "The extension name.",
 
-        "EXT_EXTENDED_DYNAMIC_STATE_3_EXTENSION_NAME".."VK_EXT_extended_dynamic_state3"
+        "EXT_SHADER_OBJECT_EXTENSION_NAME".."VK_EXT_shader_object"
     )
 
     EnumConstant(
         "Extends {@code VkStructureType}.",
 
-        "STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_FEATURES_EXT".."1000455000",
-        "STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT".."1000455001"
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT".."1000482000",
+        "STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT".."1000482001",
+        "STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT".."1000482002",
+        "STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT".."1000352001",
+        "STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT".."1000352002",
+        "STRUCTURE_TYPE_SHADER_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT".."1000225001"
     )
 
     EnumConstant(
-        "Extends {@code VkDynamicState}.",
+        "Extends {@code VkObjectType}.",
 
-        "DYNAMIC_STATE_TESSELLATION_DOMAIN_ORIGIN_EXT".."1000455002",
-        "DYNAMIC_STATE_DEPTH_CLAMP_ENABLE_EXT".."1000455003",
-        "DYNAMIC_STATE_POLYGON_MODE_EXT".."1000455004",
-        "DYNAMIC_STATE_RASTERIZATION_SAMPLES_EXT".."1000455005",
-        "DYNAMIC_STATE_SAMPLE_MASK_EXT".."1000455006",
-        "DYNAMIC_STATE_ALPHA_TO_COVERAGE_ENABLE_EXT".."1000455007",
-        "DYNAMIC_STATE_ALPHA_TO_ONE_ENABLE_EXT".."1000455008",
-        "DYNAMIC_STATE_LOGIC_OP_ENABLE_EXT".."1000455009",
-        "DYNAMIC_STATE_COLOR_BLEND_ENABLE_EXT".."1000455010",
-        "DYNAMIC_STATE_COLOR_BLEND_EQUATION_EXT".."1000455011",
-        "DYNAMIC_STATE_COLOR_WRITE_MASK_EXT".."1000455012",
-        "DYNAMIC_STATE_RASTERIZATION_STREAM_EXT".."1000455013",
-        "DYNAMIC_STATE_CONSERVATIVE_RASTERIZATION_MODE_EXT".."1000455014",
-        "DYNAMIC_STATE_EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT".."1000455015",
-        "DYNAMIC_STATE_DEPTH_CLIP_ENABLE_EXT".."1000455016",
-        "DYNAMIC_STATE_SAMPLE_LOCATIONS_ENABLE_EXT".."1000455017",
-        "DYNAMIC_STATE_COLOR_BLEND_ADVANCED_EXT".."1000455018",
-        "DYNAMIC_STATE_PROVOKING_VERTEX_MODE_EXT".."1000455019",
-        "DYNAMIC_STATE_LINE_RASTERIZATION_MODE_EXT".."1000455020",
-        "DYNAMIC_STATE_LINE_STIPPLE_ENABLE_EXT".."1000455021",
-        "DYNAMIC_STATE_DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT".."1000455022",
-        "DYNAMIC_STATE_VIEWPORT_W_SCALING_ENABLE_NV".."1000455023",
-        "DYNAMIC_STATE_VIEWPORT_SWIZZLE_NV".."1000455024",
-        "DYNAMIC_STATE_COVERAGE_TO_COLOR_ENABLE_NV".."1000455025",
-        "DYNAMIC_STATE_COVERAGE_TO_COLOR_LOCATION_NV".."1000455026",
-        "DYNAMIC_STATE_COVERAGE_MODULATION_MODE_NV".."1000455027",
-        "DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_ENABLE_NV".."1000455028",
-        "DYNAMIC_STATE_COVERAGE_MODULATION_TABLE_NV".."1000455029",
-        "DYNAMIC_STATE_SHADING_RATE_IMAGE_ENABLE_NV".."1000455030",
-        "DYNAMIC_STATE_REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV".."1000455031",
-        "DYNAMIC_STATE_COVERAGE_REDUCTION_MODE_NV".."1000455032"
+        "OBJECT_TYPE_SHADER_EXT".."1000482000"
+    )
+
+    EnumConstant(
+        "Extends {@code VkResult}.",
+
+        "ERROR_INCOMPATIBLE_SHADER_BINARY_EXT".."1000482000"
+    )
+
+    EnumConstant(
+        """
+        VkShaderCreateFlagBitsEXT - Bitmask controlling how a shader object is created
+
+        <h5>Description</h5>
+        <ul>
+            <li>#SHADER_CREATE_LINK_STAGE_BIT_EXT specifies that this stage is linked to all other stages being created in the same #CreateShadersEXT() call whose ##VkShaderCreateInfoEXT structures have the #SHADER_CREATE_LINK_STAGE_BIT_EXT flag set in {@code flags}.</li>
+            <li>#SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT specifies that the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces-builtin-variables-sgs">{@code SubgroupSize}</a> <b>may</b> vary in the shader stage.</li>
+            <li>#SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT specifies that the subgroup sizes <b>must</b> be launched with all invocations active in the compute stage.</li>
+            <li>#SHADER_CREATE_NO_TASK_SHADER_BIT_EXT specifies that the mesh shader being created <b>must</b> only be used without a task shader. Otherwise, the mesh shader being created <b>must</b> only be used with a task shader.</li>
+            <li>#SHADER_CREATE_DISPATCH_BASE_BIT_EXT specifies that a compute shader <b>can</b> be used with #CmdDispatchBase() with a non-zero base workgroup.</li>
+            <li>#SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT specifies that the fragment shader <b>can</b> be used with a fragment shading rate attachment.</li>
+            <li>#SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT specifies that the fragment shader <b>can</b> be used with a fragment density map attachment.</li>
+        </ul>
+        """,
+
+        "SHADER_CREATE_LINK_STAGE_BIT_EXT".enum(0x00000001),
+        "SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT".enum(0x00000002),
+        "SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT".enum(0x00000004),
+        "SHADER_CREATE_NO_TASK_SHADER_BIT_EXT".enum(0x00000008),
+        "SHADER_CREATE_DISPATCH_BASE_BIT_EXT".enum(0x00000010),
+        "SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT".enum(0x00000020),
+        "SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT".enum(0x00000040)
+    )
+
+    EnumConstant(
+        """
+        VkShaderCodeTypeEXT - Indicate a shader code type
+
+        <h5>Description</h5>
+        <ul>
+            <li>#SHADER_CODE_TYPE_BINARY_EXT specifies shader code in an opaque, implementation-defined binary format specific to the physical device.</li>
+            <li>#SHADER_CODE_TYPE_SPIRV_EXT specifies shader code in SPIR-V format.</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkShaderCreateInfoEXT
+        """,
+
+        "SHADER_CODE_TYPE_BINARY_EXT".."0",
+        "SHADER_CODE_TYPE_SPIRV_EXT".."1"
+    )
+
+    VkResult(
+        "CreateShadersEXT",
+        """
+        Create one or more new shaders.
+
+        <h5>C Specification</h5>
+        To create one or more shader objects, call:
+
+        <pre><code>
+￿VkResult vkCreateShadersEXT(
+￿    VkDevice                                    device,
+￿    uint32_t                                    createInfoCount,
+￿    const VkShaderCreateInfoEXT*                pCreateInfos,
+￿    const VkAllocationCallbacks*                pAllocator,
+￿    VkShaderEXT*                                pShaders);</code></pre>
+
+        <h5>Description</h5>
+        When this function returns, whether or not it succeeds, it is guaranteed that every element of {@code pShaders} will have been overwritten by either #NULL_HANDLE or a valid {@code VkShaderEXT} handle.
+
+        This means that whenever shader creation fails, the application <b>can</b> determine which shader the returned error pertains to by locating the first #NULL_HANDLE element in {@code pShaders}. It also means that an application <b>can</b> always clean up from a failed call by iterating over the {@code pShaders} array and destroying every element that is not #NULL_HANDLE.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature <b>must</b> be enabled</li>
+            <li>If {@code createInfoCount} is 1, there <b>must</b> be no element of {@code pCreateInfos} whose {@code flags} member includes #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
+            <li>If the {@code flags} member of any element of {@code pCreateInfos} includes #SHADER_CREATE_LINK_STAGE_BIT_EXT, the {@code flags} member of all other elements of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_VERTEX_BIT, #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, #SHADER_STAGE_GEOMETRY_BIT, or #SHADER_STAGE_FRAGMENT_BIT <b>must</b> also include #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
+            <li>If the {@code flags} member of any element of {@code pCreateInfos} includes #SHADER_CREATE_LINK_STAGE_BIT_EXT, the {@code flags} member of all other elements of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_TASK_BIT_EXT or #SHADER_STAGE_MESH_BIT_EXT <b>must</b> also include #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
+            <li>If the {@code flags} member of any element of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_TASK_BIT_EXT or #SHADER_STAGE_MESH_BIT_EXT includes #SHADER_CREATE_LINK_STAGE_BIT_EXT, there <b>must</b> be no member of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_VERTEX_BIT and whose {@code flags} member includes #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
+            <li>If there is any element of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_MESH_BIT_EXT and whose {@code flags} member includes both #SHADER_CREATE_LINK_STAGE_BIT_EXT and #SHADER_CREATE_NO_TASK_SHADER_BIT_EXT, there <b>must</b> be no element of {@code pCreateInfos} whose {@code stage} is #SHADER_STAGE_TASK_BIT_EXT and whose {@code flags} member includes #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
+            <li>For each element of {@code pCreateInfos} whose {@code flags} member includes #SHADER_CREATE_LINK_STAGE_BIT_EXT, if there is any other element of {@code pCreateInfos} whose {@code stage} is logically later than the {@code stage} of the former and whose {@code flags} member also includes #SHADER_CREATE_LINK_STAGE_BIT_EXT, the {@code nextStage} of the former <b>must</b> be equal to the {@code stage} of the element with the logically earliest {@code stage} following the {@code stage} of the former whose {@code flags} member also includes #SHADER_CREATE_LINK_STAGE_BIT_EXT</li>
+            <li>The {@code stage} member of each element of {@code pCreateInfos} whose {@code flags} member includes #SHADER_CREATE_LINK_STAGE_BIT_EXT <b>must</b> be unique</li>
+            <li>The {@code codeType} member of all elements of {@code pCreateInfos} whose {@code flags} member includes #SHADER_CREATE_LINK_STAGE_BIT_EXT <b>must</b> be the same</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code pCreateInfos} <b>must</b> be a valid pointer to an array of {@code createInfoCount} valid ##VkShaderCreateInfoEXT structures</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code pShaders} <b>must</b> be a valid pointer to an array of {@code createInfoCount} {@code VkShaderEXT} handles</li>
+            <li>{@code createInfoCount} <b>must</b> be greater than 0</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+                <li>#ERROR_INITIALIZATION_FAILED</li>
+                <li>#ERROR_INCOMPATIBLE_SHADER_BINARY_EXT</li>
+            </ul></dd>
+        </dl>
+
+        <h5>See Also</h5>
+        ##VkAllocationCallbacks, ##VkShaderCreateInfoEXT
+        """,
+
+        VkDevice("device", "the logical device that creates the shader objects."),
+        AutoSize("pCreateInfos", "pShaders")..uint32_t("createInfoCount", "the length of the {@code pCreateInfos} and {@code pShaders} arrays."),
+        VkShaderCreateInfoEXT.const.p("pCreateInfos", "a pointer to an array of ##VkShaderCreateInfoEXT structures."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
+        VkShaderEXT.p("pShaders", "a pointer to an array of {@code VkShaderEXT} handles in which the resulting shader objects are returned.")
+    )
+
+    void(
+        "DestroyShaderEXT",
+        """
+        Destroy a shader object.
+
+        <h5>C Specification</h5>
+        To destroy a shader object, call:
+
+        <pre><code>
+￿void vkDestroyShaderEXT(
+￿    VkDevice                                    device,
+￿    VkShaderEXT                                 shader,
+￿    const VkAllocationCallbacks*                pAllocator);</code></pre>
+
+        <h5>Description</h5>
+        Destroying a shader object used by one or more command buffers in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording or executable state</a> causes those command buffers to move into the <em>invalid state</em>.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">shaderObject</a> feature <b>must</b> be enabled</li>
+            <li>All submitted commands that refer to {@code shader} <b>must</b> have completed execution</li>
+            <li>If ##VkAllocationCallbacks were provided when {@code shader} was created, a compatible set of callbacks <b>must</b> be provided here</li>
+            <li>If no ##VkAllocationCallbacks were provided when {@code shader} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code shader} <b>must</b> be a valid {@code VkShaderEXT} handle</li>
+            <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid ##VkAllocationCallbacks structure</li>
+            <li>{@code shader} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code shader} <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>See Also</h5>
+        ##VkAllocationCallbacks
+        """,
+
+        VkDevice("device", "the logical device that destroys the shader object."),
+        VkShaderEXT("shader", "the handle of the shader object to destroy."),
+        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+    )
+
+    VkResult(
+        "GetShaderBinaryDataEXT",
+        """
+        Get the binary shader code from a shader object.
+
+        <h5>C Specification</h5>
+        Binary shader code <b>can</b> be retrieved from a shader object using the command:
+
+        <pre><code>
+￿VkResult vkGetShaderBinaryDataEXT(
+￿    VkDevice                                    device,
+￿    VkShaderEXT                                 shader,
+￿    size_t*                                     pDataSize,
+￿    void*                                       pData);</code></pre>
+
+        <h5>Description</h5>
+        If {@code pData} is {@code NULL}, then the size of the binary shader code of the shader object, in bytes, is returned in {@code pDataSize}. Otherwise, {@code pDataSize} <b>must</b> point to a variable set by the user to the size of the buffer, in bytes, pointed to by {@code pData}, and on return the variable is overwritten with the amount of data actually written to {@code pData}. If {@code pDataSize} is less than the size of the binary shader code, nothing is written to {@code pData}, and #INCOMPLETE will be returned instead of #SUCCESS.
+
+        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+        The behavior of this command when {@code pDataSize} is too small differs from how some other getter-type commands work in Vulkan. Because shader binary data is only usable in its entirety, it would never be useful for the implementation to return partial data. Because of this, nothing is written to {@code pData} unless {@code pDataSize} is large enough to fit the data it its entirety.
+        </div>
+
+        Binary shader code retrieved using {@code vkGetShaderBinaryDataEXT} <b>can</b> be passed to a subsequent call to {@code vkCreateShadersEXT} on a compatible physical device by specifying #SHADER_CODE_TYPE_BINARY_EXT in the {@code codeType} member of ##VkShaderCreateInfoEXT.
+
+        The shader code returned by repeated calls to this function with the same {@code VkShaderEXT} is guaranteed to be invariant for the lifetime of the {@code VkShaderEXT} object.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature <b>must</b> be enabled</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code device} <b>must</b> be a valid {@code VkDevice} handle</li>
+            <li>{@code shader} <b>must</b> be a valid {@code VkShaderEXT} handle</li>
+            <li>{@code pDataSize} <b>must</b> be a valid pointer to a {@code size_t} value</li>
+            <li>If the value referenced by {@code pDataSize} is not 0, and {@code pData} is not {@code NULL}, {@code pData} <b>must</b> be a valid pointer to an array of {@code pDataSize} bytes</li>
+            <li>{@code shader} <b>must</b> have been created, allocated, or retrieved from {@code device}</li>
+        </ul>
+
+        <h5>Return Codes</h5>
+        <dl>
+            <dt>On success, this command returns</dt>
+            <dd><ul>
+                <li>#SUCCESS</li>
+                <li>#INCOMPLETE</li>
+            </ul></dd>
+
+            <dt>On failure, this command returns</dt>
+            <dd><ul>
+                <li>#ERROR_OUT_OF_HOST_MEMORY</li>
+                <li>#ERROR_OUT_OF_DEVICE_MEMORY</li>
+            </ul></dd>
+        </dl>
+        """,
+
+        VkDevice("device", "the logical device that shader object was created from."),
+        VkShaderEXT("shader", "the shader object to retrieve binary shader code from."),
+        AutoSize("pData")..Check(1)..size_t.p("pDataSize", "a pointer to a {@code size_t} value related to the size of the binary shader code, as described below."),
+        nullable..void.p("pData", "either {@code NULL} or a pointer to a buffer.")
+    )
+
+    void(
+        "CmdBindShadersEXT",
+        """
+        Bind shader objects to a command buffer.
+
+        <h5>C Specification</h5>
+        Once shader objects have been created, they <b>can</b> be bound to the command buffer using the command:
+
+        <pre><code>
+￿void vkCmdBindShadersEXT(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    stageCount,
+￿    const VkShaderStageFlagBits*                pStages,
+￿    const VkShaderEXT*                          pShaders);</code></pre>
+
+        <h5>Description</h5>
+        When binding linked shaders, an application <b>may</b> bind them in any combination of one or more calls to {@code vkCmdBindShadersEXT} (i.e., shaders that were created linked together do not need to be bound in the same {@code vkCmdBindShadersEXT} call).
+
+        Any shader object bound to a particular stage <b>may</b> be unbound by setting its value in {@code pShaders} to #NULL_HANDLE. If {@code pShaders} is {@code NULL}, {@code vkCmdBindShadersEXT} behaves as if {@code pShaders} was an array of {@code stageCount} #NULL_HANDLE values (i.e., any shaders bound to the stages specified in {@code pStages} are unbound).
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature <b>must</b> be enabled</li>
+            <li>Every element of {@code pStages} <b>must</b> be unique</li>
+            <li>{@code pStages} <b>must</b> not contain #SHADER_STAGE_ALL_GRAPHICS or #SHADER_STAGE_ALL</li>
+            <li>{@code pStages} <b>must</b> not contain #SHADER_STAGE_RAYGEN_BIT_KHR, #SHADER_STAGE_ANY_HIT_BIT_KHR, #SHADER_STAGE_CLOSEST_HIT_BIT_KHR, #SHADER_STAGE_MISS_BIT_KHR, #SHADER_STAGE_INTERSECTION_BIT_KHR, or #SHADER_STAGE_CALLABLE_BIT_KHR</li>
+            <li>{@code pStages} <b>must</b> not contain #SHADER_STAGE_SUBPASS_SHADING_BIT_HUAWEI</li>
+            <li>{@code pStages} <b>must</b> not contain #SHADER_STAGE_CLUSTER_CULLING_BIT_HUAWEI</li>
+            <li>For each element of {@code pStages}, if {@code pShaders} is not {@code NULL}, and the element of the {@code pShaders} array with the same index is not #NULL_HANDLE, it <b>must</b> have been created with a {@code stage} equal to the corresponding element of {@code pStages}</li>
+            <li>If {@code pStages} contains both #SHADER_STAGE_TASK_BIT_EXT and #SHADER_STAGE_VERTEX_BIT, and {@code pShaders} is not {@code NULL}, and the same index in {@code pShaders} as #SHADER_STAGE_TASK_BIT_EXT in {@code pStages} is not #NULL_HANDLE, the same index in {@code pShaders} as #SHADER_STAGE_VERTEX_BIT in {@code pStages} <b>must</b> be #NULL_HANDLE</li>
+            <li>If {@code pStages} contains both #SHADER_STAGE_MESH_BIT_EXT and #SHADER_STAGE_VERTEX_BIT, and {@code pShaders} is not {@code NULL}, and the same index in {@code pShaders} as #SHADER_STAGE_MESH_BIT_EXT in {@code pStages} is not #NULL_HANDLE, the same index in {@code pShaders} as #SHADER_STAGE_VERTEX_BIT in {@code pStages} <b>must</b> be #NULL_HANDLE</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, and {@code pStages} contains #SHADER_STAGE_TESSELLATION_CONTROL_BIT or #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, and {@code pShaders} is not {@code NULL}, the same index or indices in {@code pShaders} <b>must</b> be #NULL_HANDLE</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-geometryShader">{@code geometryShader}</a> feature is not enabled, and {@code pStages} contains #SHADER_STAGE_GEOMETRY_BIT, and {@code pShaders} is not {@code NULL}, the same index in {@code pShaders} <b>must</b> be #NULL_HANDLE</li>
+            <li>If {@code pStages} contains #SHADER_STAGE_COMPUTE_BIT, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
+            <li>If {@code pStages} contains #SHADER_STAGE_VERTEX_BIT, #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, #SHADER_STAGE_GEOMETRY_BIT, or #SHADER_STAGE_FRAGMENT_BIT, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+            <li>If {@code pStages} contains #SHADER_STAGE_MESH_BIT_EXT or #SHADER_STAGE_TASK_BIT_EXT, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+            <li>{@code pStages} <b>must</b> be a valid pointer to an array of {@code stageCount} valid {@code VkShaderStageFlagBits} values</li>
+            <li>If {@code pShaders} is not {@code NULL}, {@code pShaders} <b>must</b> be a valid pointer to an array of {@code stageCount} valid or #NULL_HANDLE {@code VkShaderEXT} handles</li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics, or compute operations</li>
+            <li>This command <b>must</b> only be called outside of a video coding scope</li>
+            <li>{@code stageCount} <b>must</b> be greater than 0</li>
+            <li>Both of {@code commandBuffer}, and the elements of {@code pShaders} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>Command Properties</h5>
+        <table class="lwjgl">
+            <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics Compute</td><td>State</td></tr></tbody>
+        </table>
+        """,
+
+        VkCommandBuffer("commandBuffer", "the command buffer that the shader object will be bound to."),
+        AutoSize("pStages", "pShaders")..uint32_t("stageCount", "the length of the {@code pStages} and {@code pShaders} arrays."),
+        VkShaderStageFlagBits.const.p("pStages", "an array of {@code VkShaderStageFlagBits} values specifying one stage per array index that is affected by the corresponding value in the {@code pShaders} array."),
+        VkShaderEXT.const.p("pShaders", "an array of {@code VkShaderEXT} handles and/or #NULL_HANDLE values describing the shader binding operations to be performed on each stage in {@code pStages}.")
+    )
+
+    void(
+        "CmdSetCullModeEXT",
+        "See #CmdSetCullMode().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkCullModeFlags("cullMode", "specifies the cull mode property to use for drawing.")
+    )
+
+    void(
+        "CmdSetFrontFaceEXT",
+        "See #CmdSetFrontFace().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkFrontFace("frontFace", "a {@code VkFrontFace} value specifying the front-facing triangle orientation to be used for culling.")
+    )
+
+    void(
+        "CmdSetPrimitiveTopologyEXT",
+        "See #CmdSetPrimitiveTopology().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkPrimitiveTopology("primitiveTopology", "specifies the primitive topology to use for drawing.")
+    )
+
+    void(
+        "CmdSetViewportWithCountEXT",
+        "See #CmdSetViewportWithCount().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        AutoSize("pViewports")..uint32_t("viewportCount", "specifies the viewport count."),
+        VkViewport.const.p("pViewports", "specifies the viewports to use for drawing.")
+    )
+
+    void(
+        "CmdSetScissorWithCountEXT",
+        "See #CmdSetScissorWithCount().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        AutoSize("pScissors")..uint32_t("scissorCount", "specifies the scissor count."),
+        VkRect2D.const.p("pScissors", "specifies the scissors to use for drawing.")
+    )
+
+    void(
+        "CmdBindVertexBuffers2EXT",
+        "See #CmdBindVertexBuffers2().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command is recorded."),
+        uint32_t("firstBinding", "the index of the first vertex input binding whose state is updated by the command."),
+        AutoSize("pBuffers", "pOffsets", "pSizes", "pStrides")..uint32_t("bindingCount", "the number of vertex input bindings whose state is updated by the command."),
+        VkBuffer.const.p("pBuffers", "a pointer to an array of buffer handles."),
+        VkDeviceSize.const.p("pOffsets", "a pointer to an array of buffer offsets."),
+        nullable..VkDeviceSize.const.p("pSizes", "{@code NULL} or a pointer to an array of the size in bytes of vertex data bound from {@code pBuffers}."),
+        nullable..VkDeviceSize.const.p("pStrides", "{@code NULL} or a pointer to an array of buffer strides.")
+    )
+
+    void(
+        "CmdSetDepthTestEnableEXT",
+        "See #CmdSetDepthTestEnable().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkBool32("depthTestEnable", "specifies if the depth test is enabled.")
+    )
+
+    void(
+        "CmdSetDepthWriteEnableEXT",
+        "See #CmdSetDepthWriteEnable().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkBool32("depthWriteEnable", "specifies if depth writes are enabled.")
+    )
+
+    void(
+        "CmdSetDepthCompareOpEXT",
+        "See #CmdSetDepthCompareOp().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkCompareOp("depthCompareOp", "a {@code VkCompareOp} value specifying the comparison operator used for the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#fragops-depth-comparison\">Depth Comparison</a> step of the <a target=\"_blank\" href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\\#fragops-depth\">depth test</a>.")
+    )
+
+    void(
+        "CmdSetDepthBoundsTestEnableEXT",
+        "See #CmdSetDepthBoundsTestEnable().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkBool32("depthBoundsTestEnable", "specifies if the depth bounds test is enabled.")
+    )
+
+    void(
+        "CmdSetStencilTestEnableEXT",
+        "See #CmdSetStencilTestEnable().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkBool32("stencilTestEnable", "specifies if the stencil test is enabled.")
+    )
+
+    void(
+        "CmdSetStencilOpEXT",
+        "See #CmdSetStencilOp().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkStencilFaceFlags("faceMask", "a bitmask of {@code VkStencilFaceFlagBits} specifying the set of stencil state for which to update the stencil operation."),
+        VkStencilOp("failOp", "a {@code VkStencilOp} value specifying the action performed on samples that fail the stencil test."),
+        VkStencilOp("passOp", "a {@code VkStencilOp} value specifying the action performed on samples that pass both the depth and stencil tests."),
+        VkStencilOp("depthFailOp", "a {@code VkStencilOp} value specifying the action performed on samples that pass the stencil test and fail the depth test."),
+        VkCompareOp("compareOp", "a {@code VkCompareOp} value specifying the comparison operator used in the stencil test.")
+    )
+
+    void(
+        "CmdSetVertexInputEXT",
+        """
+        Set the vertex input state dynamically for a command buffer.
+
+        <h5>C Specification</h5>
+        To <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the vertex input attribute and vertex input binding descriptions, call:
+
+        <pre><code>
+￿void vkCmdSetVertexInputEXT(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    vertexBindingDescriptionCount,
+￿    const VkVertexInputBindingDescription2EXT*  pVertexBindingDescriptions,
+￿    uint32_t                                    vertexAttributeDescriptionCount,
+￿    const VkVertexInputAttributeDescription2EXT* pVertexAttributeDescriptions);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the vertex input attribute and vertex input binding descriptions state for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_VERTEX_INPUT_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkGraphicsPipelineCreateInfo{@code ::pVertexInputState} values used to create the currently active pipeline.
+
+        If drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or if the bound pipeline state object was also created with the #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE dynamic state enabled, then #CmdBindVertexBuffers2() can be used instead of {@code vkCmdSetVertexInputEXT} to dynamically set the stride.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>Either the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-vertexInputDynamicState">{@code vertexInputDynamicState}</a> feature or the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+            <li>{@code vertexBindingDescriptionCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputBindings}</li>
+            <li>{@code vertexAttributeDescriptionCount} <b>must</b> be less than or equal to ##VkPhysicalDeviceLimits{@code ::maxVertexInputAttributes}</li>
+            <li>For every {@code binding} specified by each element of {@code pVertexAttributeDescriptions}, a ##VkVertexInputBindingDescription2EXT <b>must</b> exist in {@code pVertexBindingDescriptions} with the same value of {@code binding}</li>
+            <li>All elements of {@code pVertexBindingDescriptions} <b>must</b> describe distinct binding numbers</li>
+            <li>All elements of {@code pVertexAttributeDescriptions} <b>must</b> describe distinct attribute locations</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+            <li>If {@code vertexBindingDescriptionCount} is not 0, {@code pVertexBindingDescriptions} <b>must</b> be a valid pointer to an array of {@code vertexBindingDescriptionCount} valid ##VkVertexInputBindingDescription2EXT structures</li>
+            <li>If {@code vertexAttributeDescriptionCount} is not 0, {@code pVertexAttributeDescriptions} <b>must</b> be a valid pointer to an array of {@code vertexAttributeDescriptionCount} valid ##VkVertexInputAttributeDescription2EXT structures</li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+            <li>This command <b>must</b> only be called outside of a video coding scope</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>Command Properties</h5>
+        <table class="lwjgl">
+            <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
+        </table>
+
+        <h5>See Also</h5>
+        ##VkVertexInputAttributeDescription2EXT, ##VkVertexInputBindingDescription2EXT
+        """,
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        AutoSize("pVertexBindingDescriptions")..uint32_t("vertexBindingDescriptionCount", "the number of vertex binding descriptions provided in {@code pVertexBindingDescriptions}."),
+        nullable..VkVertexInputBindingDescription2EXT.const.p("pVertexBindingDescriptions", "a pointer to an array of ##VkVertexInputBindingDescription2EXT structures."),
+        AutoSize("pVertexAttributeDescriptions")..uint32_t("vertexAttributeDescriptionCount", "the number of vertex attribute descriptions provided in {@code pVertexAttributeDescriptions}."),
+        nullable..VkVertexInputAttributeDescription2EXT.const.p("pVertexAttributeDescriptions", "a pointer to an array of ##VkVertexInputAttributeDescription2EXT structures.")
+    )
+
+    void(
+        "CmdSetPatchControlPointsEXT",
+        """
+        Specify the number of control points per patch dynamically for a command buffer.
+
+        <h5>C Specification</h5>
+        To <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the number of control points per patch, call:
+
+        <pre><code>
+￿void vkCmdSetPatchControlPointsEXT(
+￿    VkCommandBuffer                             commandBuffer,
+￿    uint32_t                                    patchControlPoints);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the number of control points per patch for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineTessellationStateCreateInfo{@code ::patchControlPoints} value used to create the currently active pipeline.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>Either the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState2PatchControlPoints">{@code extendedDynamicState2PatchControlPoints}</a> feature or the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+            <li>{@code patchControlPoints} <b>must</b> be greater than zero and less than or equal to ##VkPhysicalDeviceLimits{@code ::maxTessellationPatchSize}</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+            <li>This command <b>must</b> only be called outside of a video coding scope</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>Command Properties</h5>
+        <table class="lwjgl">
+            <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
+        </table>
+        """,
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        uint32_t("patchControlPoints", "specifies the number of control points per patch.")
+    )
+
+    void(
+        "CmdSetRasterizerDiscardEnableEXT",
+        "See #CmdSetRasterizerDiscardEnable().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkBool32("rasterizerDiscardEnable", "controls whether primitives are discarded immediately before the rasterization stage.")
+    )
+
+    void(
+        "CmdSetDepthBiasEnableEXT",
+        "See #CmdSetDepthBiasEnable().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkBool32("depthBiasEnable", "controls whether to bias fragment depth values.")
+    )
+
+    void(
+        "CmdSetLogicOpEXT",
+        """
+        Select which logical operation to apply for blend state dynamically for a command buffer.
+
+        <h5>C Specification</h5>
+        To <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically set</a> the logical operation to apply for blend state, call:
+
+        <pre><code>
+￿void vkCmdSetLogicOpEXT(
+￿    VkCommandBuffer                             commandBuffer,
+￿    VkLogicOp                                   logicOp);</code></pre>
+
+        <h5>Description</h5>
+        This command sets the logical operation for blend state for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LOGIC_OP_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineColorBlendStateCreateInfo{@code ::logicOp} value used to create the currently active pipeline.
+
+        <h5>Valid Usage</h5>
+        <ul>
+            <li>Either the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState2LogicOp">{@code extendedDynamicState2LogicOp}</a> feature or the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+        </ul>
+
+        <h5>Valid Usage (Implicit)</h5>
+        <ul>
+            <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
+            <li>{@code logicOp} <b>must</b> be a valid {@code VkLogicOp} value</li>
+            <li>{@code commandBuffer} <b>must</b> be in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#commandbuffers-lifecycle">recording state</a></li>
+            <li>The {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
+            <li>This command <b>must</b> only be called outside of a video coding scope</li>
+        </ul>
+
+        <h5>Host Synchronization</h5>
+        <ul>
+            <li>Host access to {@code commandBuffer} <b>must</b> be externally synchronized</li>
+            <li>Host access to the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> be externally synchronized</li>
+        </ul>
+
+        <h5>Command Properties</h5>
+        <table class="lwjgl">
+            <thead><tr><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkCommandBufferLevel">Command Buffer Levels</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginRenderPass">Render Pass Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#vkCmdBeginVideoCodingKHR">Video Coding Scope</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#VkQueueFlagBits">Supported Queue Types</a></th><th><a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fundamentals-queueoperation-command-types">Command Type</a></th></tr></thead>
+            <tbody><tr><td>Primary Secondary</td><td>Both</td><td>Outside</td><td>Graphics</td><td>State</td></tr></tbody>
+        </table>
+        """,
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkLogicOp("logicOp", "specifies the logical operation to apply for blend state.")
+    )
+
+    void(
+        "CmdSetPrimitiveRestartEnableEXT",
+        "See #CmdSetPrimitiveRestartEnable().",
+
+        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
+        VkBool32("primitiveRestartEnable", "controls whether a special vertex index value is treated as restarting the assembly of primitives. It behaves in the same way as ##VkPipelineInputAssemblyStateCreateInfo{@code ::primitiveRestartEnable}")
     )
 
     void(

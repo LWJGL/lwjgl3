@@ -92,7 +92,7 @@ public class EXTLineRasterization {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkPipelineRasterizationLineStateCreateInfoEXT}, {@link EXTExtendedDynamicState3#vkCmdSetLineRasterizationModeEXT CmdSetLineRasterizationModeEXT}</p>
+     * <p>{@link VkPipelineRasterizationLineStateCreateInfoEXT}, {@link EXTShaderObject#vkCmdSetLineRasterizationModeEXT CmdSetLineRasterizationModeEXT}</p>
      */
     public static final int
         VK_LINE_RASTERIZATION_MODE_DEFAULT_EXT            = 0,
@@ -121,7 +121,7 @@ public class EXTLineRasterization {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command sets the line stipple state for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_LINE_STIPPLE_EXT DYNAMIC_STATE_LINE_STIPPLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationLineStateCreateInfoEXT}{@code ::lineStippleFactor} and {@link VkPipelineRasterizationLineStateCreateInfoEXT}{@code ::lineStipplePattern} values used to create the currently active pipeline.</p>
+     * <p>This command sets the line stipple state for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_LINE_STIPPLE_EXT DYNAMIC_STATE_LINE_STIPPLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineRasterizationLineStateCreateInfoEXT}{@code ::lineStippleFactor} and {@link VkPipelineRasterizationLineStateCreateInfoEXT}{@code ::lineStipplePattern} values used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

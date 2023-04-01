@@ -275,7 +275,7 @@ val KHR_fragment_shading_rate = "KHRFragmentShadingRate".nativeClassVK("KHR_frag
 ￿    const VkFragmentShadingRateCombinerOpKHR    combinerOps[2]);</code></pre>
 
         <h5>Description</h5>
-        This command sets the pipeline fragment shading rate and combiner operation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineFragmentShadingRateStateCreateInfoKHR values used to create the currently active pipeline.
+        This command sets the pipeline fragment shading rate and combiner operation for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineFragmentShadingRateStateCreateInfoKHR values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

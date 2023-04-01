@@ -94,7 +94,7 @@ public class NVCoverageReductionMode {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkFramebufferMixedSamplesCombinationNV}, {@link VkPipelineCoverageReductionStateCreateInfoNV}, {@link EXTExtendedDynamicState3#vkCmdSetCoverageReductionModeNV CmdSetCoverageReductionModeNV}</p>
+     * <p>{@link VkFramebufferMixedSamplesCombinationNV}, {@link VkPipelineCoverageReductionStateCreateInfoNV}, {@link EXTShaderObject#vkCmdSetCoverageReductionModeNV CmdSetCoverageReductionModeNV}</p>
      */
     public static final int
         VK_COVERAGE_REDUCTION_MODE_MERGE_NV    = 0,

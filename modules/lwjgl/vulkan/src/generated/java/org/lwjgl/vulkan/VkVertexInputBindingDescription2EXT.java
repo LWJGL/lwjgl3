@@ -32,13 +32,13 @@ import static org.lwjgl.system.MemoryStack.*;
  * <h5>Valid Usage (Implicit)</h5>
  * 
  * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTVertexInputDynamicState#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT}</li>
+ * <li>{@code sType} <b>must</b> be {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT}</li>
  * <li>{@code inputRate} <b>must</b> be a valid {@code VkVertexInputRate} value</li>
  * </ul>
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link EXTVertexInputDynamicState#vkCmdSetVertexInputEXT CmdSetVertexInputEXT}</p>
+ * <p>{@link EXTShaderObject#vkCmdSetVertexInputEXT CmdSetVertexInputEXT}</p>
  * 
  * <h3>Layout</h3>
  * 
@@ -124,8 +124,8 @@ public class VkVertexInputBindingDescription2EXT extends Struct implements Nativ
 
     /** Sets the specified value to the {@link #sType} field. */
     public VkVertexInputBindingDescription2EXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTVertexInputDynamicState#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT} value to the {@link #sType} field. */
-    public VkVertexInputBindingDescription2EXT sType$Default() { return sType(EXTVertexInputDynamicState.VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT); }
+    /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT} value to the {@link #sType} field. */
+    public VkVertexInputBindingDescription2EXT sType$Default() { return sType(EXTShaderObject.VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT); }
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVertexInputBindingDescription2EXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Sets the specified value to the {@link #binding} field. */
@@ -366,8 +366,8 @@ public class VkVertexInputBindingDescription2EXT extends Struct implements Nativ
 
         /** Sets the specified value to the {@link VkVertexInputBindingDescription2EXT#sType} field. */
         public VkVertexInputBindingDescription2EXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVertexInputBindingDescription2EXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTVertexInputDynamicState#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT} value to the {@link VkVertexInputBindingDescription2EXT#sType} field. */
-        public VkVertexInputBindingDescription2EXT.Buffer sType$Default() { return sType(EXTVertexInputDynamicState.VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT); }
+        /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT} value to the {@link VkVertexInputBindingDescription2EXT#sType} field. */
+        public VkVertexInputBindingDescription2EXT.Buffer sType$Default() { return sType(EXTShaderObject.VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT); }
         /** Sets the specified value to the {@link VkVertexInputBindingDescription2EXT#pNext} field. */
         public VkVertexInputBindingDescription2EXT.Buffer pNext(@NativeType("void *") long value) { VkVertexInputBindingDescription2EXT.npNext(address(), value); return this; }
         /** Sets the specified value to the {@link VkVertexInputBindingDescription2EXT#binding} field. */

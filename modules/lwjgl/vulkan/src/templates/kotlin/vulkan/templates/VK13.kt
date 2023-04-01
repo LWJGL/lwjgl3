@@ -516,10 +516,11 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
             </li>
             <li>#ACCESS_2_SHADER_STORAGE_WRITE_BIT specifies write access to a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#descriptorsets-storagebuffer">storage buffer</a>, <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#descriptorsets-physical-storage-buffer">physical storage buffer</a>, <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#descriptorsets-storagetexelbuffer">storage texel buffer</a>, or <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#descriptorsets-storageimage">storage image</a> in any shader pipeline stage.</li>
             <li>#ACCESS_2_SHADER_WRITE_BIT is equivalent to #ACCESS_2_SHADER_STORAGE_WRITE_BIT.</li>
-            <li>#ACCESS_2_COLOR_ATTACHMENT_READ_BIT specifies read access to a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass">color attachment</a>, such as via <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#framebuffer-blending">blending</a> (other than <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#framebuffer-blend-advanced">advanced blend operations</a>), <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#framebuffer-logicop">logic operations</a>, or certain <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-load-store-ops">subpass load operations</a>. Such access occurs in the #PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage.</li>
+            <li>#ACCESS_2_COLOR_ATTACHMENT_READ_BIT specifies read access to a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass">color attachment</a>, such as via <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#framebuffer-blending">blending</a> (other than <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#framebuffer-blend-advanced">advanced blend operations</a>), <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#framebuffer-logicop">logic operations</a>, or via certain <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-load-store-ops">subpass load operations</a> or <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fragops-shader-tileimage-reads">fragment shader tile image reads</a>. Such access occurs in the #PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage.</li>
             <li>#ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT specifies write access to a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass">color, resolve, or depth/stencil resolve attachment</a> during a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass">render pass</a> or via certain <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-load-store-ops">subpass load and store operations</a>. Such access occurs in the #PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT pipeline stage.</li>
             <li>#ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT specifies read access to a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass">depth/stencil attachment</a>, via <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fragops-ds-state">depth or stencil operations</a> or certain <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-load-store-ops">subpass load operations</a>. Such access occurs in the #PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT or #PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT pipeline stages.</li>
-            <li>#ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT specifies write access to a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass">depth/stencil attachment</a>, via <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fragops-ds-state">depth or stencil operations</a> or certain <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-load-store-ops">subpass load and store operations</a>. Such access occurs in the #PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT or #PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT pipeline stages.</li>
+            <li>#ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT specifies write <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fragops-ds-state">depth or stencil operations</a> in the #PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT_KHR or #PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT_KHR pipeline stages or via certain <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-load-store-ops">subpass load operations</a> or <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fragops-shader-tileimage-reads">fragment shader tile image reads</a> in the #PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT_KHR pipeline stage.</li>
+            <li>#ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR specifies write access to a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass">depth/stencil attachment</a>, via <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fragops-ds-state">depth or stencil operations</a> or certain <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#renderpass-load-store-ops">subpass load and store operations</a>. Such access occurs in the #PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT or #PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT pipeline stages.</li>
             <li>#ACCESS_2_TRANSFER_READ_BIT specifies read access to an image or buffer in a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#copies">copy</a> operation. Such access occurs in the #PIPELINE_STAGE_2_COPY_BIT, #PIPELINE_STAGE_2_BLIT_BIT, or #PIPELINE_STAGE_2_RESOLVE_BIT pipeline stages.</li>
             <li>#ACCESS_2_TRANSFER_WRITE_BIT specifies write access to an image or buffer in a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#clears">clear</a> or <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#copies">copy</a> operation. Such access occurs in the #PIPELINE_STAGE_2_COPY_BIT, #PIPELINE_STAGE_2_BLIT_BIT, #PIPELINE_STAGE_2_CLEAR_BIT, or #PIPELINE_STAGE_2_RESOLVE_BIT pipeline stages.</li>
             <li>#ACCESS_2_HOST_READ_BIT specifies read access by a host operation. Accesses of this type are not performed through a resource, but directly on memory. Such access occurs in the #PIPELINE_STAGE_2_HOST_BIT pipeline stage.</li>
@@ -625,7 +626,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
             <li>#FORMAT_FEATURE_2_STORAGE_IMAGE_BIT specifies that an image view <b>can</b> be used as a <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#descriptorsets-storageimage">storage image</a>.</li>
             <li>#FORMAT_FEATURE_2_STORAGE_IMAGE_ATOMIC_BIT specifies that an image view <b>can</b> be used as storage image that supports atomic operations.</li>
             <li>#FORMAT_FEATURE_2_COLOR_ATTACHMENT_BIT specifies that an image view <b>can</b> be used as a framebuffer color attachment and as an input attachment.</li>
-            <li>#FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT specifies that an image view <b>can</b> be used as a framebuffer color attachment that supports blending and as an input attachment.</li>
+            <li>#FORMAT_FEATURE_2_COLOR_ATTACHMENT_BLEND_BIT specifies that an image view <b>can</b> be used as a framebuffer color attachment that supports blending.</li>
             <li>#FORMAT_FEATURE_2_DEPTH_STENCIL_ATTACHMENT_BIT specifies that an image view <b>can</b> be used as a framebuffer depth/stencil attachment and as an input attachment.</li>
             <li>#FORMAT_FEATURE_2_BLIT_SRC_BIT specifies that an image <b>can</b> be used as the {@code srcImage} for #CmdBlitImage2() and #CmdBlitImage().</li>
             <li>#FORMAT_FEATURE_2_BLIT_DST_BIT specifies that an image <b>can</b> be used as the {@code dstImage} for #CmdBlitImage2() and #CmdBlitImage().</li>
@@ -1277,7 +1278,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 
         The second <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies-scopes">synchronization scope</a> and <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-dependencies-access-scopes">access scope</a> of each memory dependency defined by {@code pDependencyInfo} are applied to operations that occurred later in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-submission-order">submission order</a>.
 
-        If {@code vkCmdPipelineBarrier2} is recorded within a render pass instance, the synchronization scopes are limited to operations within the same subpass.
+        If {@code vkCmdPipelineBarrier2} is recorded within a render pass instance, the synchronization scopes are limited to operations within the same subpass , or <b>must</b> follow the restrictions for <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-barriers-explicit-renderpass-tileimage">Tile Image Access Synchronization</a> if the render pass instance was started with #CmdBeginRendering() .
 
         <h5>Valid Usage</h5>
         <ul>
@@ -1291,7 +1292,8 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
             <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance, the source and destination stage masks of any memory barriers <b>must</b> only include graphics pipeline stages</li>
             <li>If {@code vkCmdPipelineBarrier2} is called outside of a render pass instance, the dependency flags <b>must</b> not include #DEPENDENCY_VIEW_LOCAL_BIT</li>
             <li>If {@code vkCmdPipelineBarrier2} is called inside a render pass instance, and there is more than one view in the current subpass, dependency flags <b>must</b> include #DEPENDENCY_VIEW_LOCAL_BIT</li>
-            <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance, the render pass <b>must</b> not have been started with #CmdBeginRendering()</li>
+            <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance and none of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderTileImageColorReadAccess">{@code shaderTileImageColorReadAccess}</a>, <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderTileImageDepthReadAccess">{@code shaderTileImageDepthReadAccess}</a>, <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderTileImageStencilReadAccess">{@code shaderTileImageStencilReadAccess}</a> features are enabled, the render pass <b>must</b> not have been started with #CmdBeginRendering()</li>
+            <li>If {@code vkCmdPipelineBarrier2} is called within a render pass instance started with #CmdBeginRendering(), it <b>must</b> adhere to the restrictions in <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#synchronization-pipeline-barriers-explicit-renderpass-tileimage">Explicit Render Pass Tile Image Access Synchronization</a></li>
             <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-synchronization2">{@code synchronization2}</a> feature <b>must</b> be enabled</li>
             <li>The {@code srcStageMask} member of any element of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers}, or {@code pImageMemoryBarriers} members of {@code pDependencyInfo} <b>must</b> only include pipeline stages valid for the queue family that was used to create the command pool that {@code commandBuffer} was allocated from</li>
             <li>The {@code dstStageMask} member of any element of the {@code pMemoryBarriers}, {@code pBufferMemoryBarriers}, or {@code pImageMemoryBarriers} members of {@code pDependencyInfo} <b>must</b> only include pipeline stages valid for the queue family that was used to create the command pool that {@code commandBuffer} was allocated from</li>
@@ -2036,7 +2038,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkCullModeFlags                             cullMode);</code></pre>
 
         <h5>Description</h5>
-        This command sets the cull mode for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_CULL_MODE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::cullMode} value used to create the currently active pipeline.
+        This command sets the cull mode for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_CULL_MODE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::cullMode} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2085,7 +2087,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkFrontFace                                 frontFace);</code></pre>
 
         <h5>Description</h5>
-        This command sets the front face orientation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_FRONT_FACE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::frontFace} value used to create the currently active pipeline.
+        This command sets the front face orientation for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_FRONT_FACE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::frontFace} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2134,7 +2136,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkPrimitiveTopology                         primitiveTopology);</code></pre>
 
         <h5>Description</h5>
-        This command sets the primitive topology for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_PRIMITIVE_TOPOLOGY set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineInputAssemblyStateCreateInfo{@code ::topology} value used to create the currently active pipeline.
+        This command sets the primitive topology for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_PRIMITIVE_TOPOLOGY set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineInputAssemblyStateCreateInfo{@code ::topology} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2185,7 +2187,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    const VkViewport*                           pViewports);</code></pre>
 
         <h5>Description</h5>
-        This command sets the viewport count and viewports state for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_WITH_COUNT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineViewportStateCreateInfo{@code ::viewportCount} and {@code pViewports} values used to create the currently active pipeline.
+        This command sets the viewport count and viewports state for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_WITH_COUNT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineViewportStateCreateInfo{@code ::viewportCount} and {@code pViewports} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2248,7 +2250,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    const VkRect2D*                             pScissors);</code></pre>
 
         <h5>Description</h5>
-        This command sets the scissor count and scissor rectangular bounds state for subsequence drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_SCISSOR_WITH_COUNT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineViewportStateCreateInfo{@code ::scissorCount} and {@code pScissors} values used to create the currently active pipeline.
+        This command sets the scissor count and scissor rectangular bounds state for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_SCISSOR_WITH_COUNT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineViewportStateCreateInfo{@code ::scissorCount} and {@code pScissors} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -2324,9 +2326,9 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
         <h5>Description</h5>
         The values taken from elements <code>i</code> of {@code pBuffers} and {@code pOffsets} replace the current state for the vertex input binding <code>firstBinding + i</code>, for <code>i</code> in <code>[0, bindingCount)</code>. The vertex input binding is updated to start at the offset indicated by {@code pOffsets}[i] from the start of the buffer {@code pBuffers}[i]. If {@code pSizes} is not {@code NULL} then {@code pSizes}[i] specifies the bound size of the vertex buffer starting from the corresponding elements of {@code pBuffers}[i] plus {@code pOffsets}[i]. All vertex input attributes that use each of these bindings will use these updated addresses in their address calculations for subsequent drawing commands. If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-nullDescriptor">{@code nullDescriptor}</a> feature is enabled, elements of {@code pBuffers} <b>can</b> be #NULL_HANDLE, and <b>can</b> be used by the vertex shader. If a vertex input attribute is bound to a vertex input binding that is #NULL_HANDLE, the values taken from memory are considered to be zero, and missing G, B, or A components are <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#fxvertex-input-extraction">filled with <code>(0,0,1)</code></a>.
 
-        This command also <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically sets</a> the byte strides between consecutive elements within buffer {@code pBuffers}[i] to the corresponding {@code pStrides}[i] value when the graphics pipeline is created with #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, strides are specified by the ##VkVertexInputBindingDescription{@code ::stride} values used to create the currently active pipeline.
+        This command also <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#pipelines-dynamic-state">dynamically sets</a> the byte strides between consecutive elements within buffer {@code pBuffers}[i] to the corresponding {@code pStrides}[i] value when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, strides are specified by the ##VkVertexInputBindingDescription{@code ::stride} values used to create the currently active pipeline.
 
-        If the bound pipeline state object was also created with the #DYNAMIC_STATE_VERTEX_INPUT_EXT dynamic state enabled then #CmdSetVertexInputEXT() <b>can</b> be used instead of {@code vkCmdBindVertexBuffers2} to set the stride.
+        If drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a> or if the bound pipeline state object was also created with the #DYNAMIC_STATE_VERTEX_INPUT_EXT dynamic state enabled then #CmdSetVertexInputEXT() <b>can</b> be used instead of {@code vkCmdBindVertexBuffers2} to set the stride.
 
         <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
         Unlike the static state to set the same, {@code pStrides} must be between 0 and the maximum extent of the attributes in the binding. #CmdSetVertexInputEXT() does not have this restriction so can be used if other stride values are desired.
@@ -2403,7 +2405,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkBool32                                    depthTestEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the depth test enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_TEST_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthTestEnable} value used to create the currently active pipeline.
+        This command sets the depth test enable for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_TEST_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthTestEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2451,7 +2453,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkBool32                                    depthWriteEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the depth write enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_WRITE_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthWriteEnable} value used to create the currently active pipeline.
+        This command sets the depth write enable for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_WRITE_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthWriteEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2499,7 +2501,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkCompareOp                                 depthCompareOp);</code></pre>
 
         <h5>Description</h5>
-        This command sets the depth comparison operator for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_COMPARE_OP set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthCompareOp} value used to create the currently active pipeline.
+        This command sets the depth comparison operator for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_COMPARE_OP set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthCompareOp} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2548,7 +2550,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkBool32                                    depthBoundsTestEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the depth bounds enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthBoundsTestEnable} value used to create the currently active pipeline.
+        This command sets the depth bounds enable for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::depthBoundsTestEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2596,7 +2598,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkBool32                                    stencilTestEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the stencil test enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_TEST_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::stencilTestEnable} value used to create the currently active pipeline.
+        This command sets the stencil test enable for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_TEST_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineDepthStencilStateCreateInfo{@code ::stencilTestEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2652,7 +2654,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkCompareOp                                 compareOp);</code></pre>
 
         <h5>Description</h5>
-        This command sets the stencil operation for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_OP set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineDepthStencilStateCreateInfo{@code ::failOp}, {@code passOp}, {@code depthFailOp}, and {@code compareOp} values used to create the currently active pipeline, for both front and back faces.
+        This command sets the stencil operation for subsequent drawing commands when when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_STENCIL_OP set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the corresponding ##VkPipelineDepthStencilStateCreateInfo{@code ::failOp}, {@code passOp}, {@code depthFailOp}, and {@code compareOp} values used to create the currently active pipeline, for both front and back faces.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2712,7 +2714,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkBool32                                    rasterizerDiscardEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the discard enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::rasterizerDiscardEnable} value used to create the currently active pipeline.
+        This command sets the discard enable for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::rasterizerDiscardEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2760,7 +2762,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkBool32                                    depthBiasEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the depth bias enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BIAS_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::depthBiasEnable} value used to create the currently active pipeline.
+        This command sets the depth bias enable for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_DEPTH_BIAS_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationStateCreateInfo{@code ::depthBiasEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>
@@ -2808,7 +2810,7 @@ val VK13 = "VK13".nativeClass(Module.VULKAN, "VK13", prefix = "VK", binding = VK
 ￿    VkBool32                                    primitiveRestartEnable);</code></pre>
 
         <h5>Description</h5>
-        This command sets the primitive restart enable for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineInputAssemblyStateCreateInfo{@code ::primitiveRestartEnable} value used to create the currently active pipeline.
+        This command sets the primitive restart enable for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineInputAssemblyStateCreateInfo{@code ::primitiveRestartEnable} value used to create the currently active pipeline.
 
         <h5>Valid Usage (Implicit)</h5>
         <ul>

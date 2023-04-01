@@ -254,7 +254,7 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
 ￿    const VkShadingRatePaletteNV*               pShadingRatePalettes);</code></pre>
 
         <h5>Description</h5>
-        This command sets the per-viewport shading rate image palettes for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineViewportShadingRateImageStateCreateInfoNV{@code ::pShadingRatePalettes} values used to create the currently active pipeline.
+        This command sets the per-viewport shading rate image palettes for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_SHADING_RATE_PALETTE_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineViewportShadingRateImageStateCreateInfoNV{@code ::pShadingRatePalettes} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -314,7 +314,7 @@ val NV_shading_rate_image = "NVShadingRateImage".nativeClassVK("NV_shading_rate_
         <h5>Description</h5>
         If {@code sampleOrderType} is #COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV, the coverage sample order used for any combination of fragment area and coverage sample count not enumerated in {@code pCustomSampleOrders} will be identical to that used for #COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV.
 
-        This command sets the order of coverage samples for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_COARSE_SAMPLE_ORDER_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineViewportCoarseSampleOrderStateCreateInfoNV values used to create the currently active pipeline.
+        This command sets the order of coverage samples for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_COARSE_SAMPLE_ORDER_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineViewportCoarseSampleOrderStateCreateInfoNV values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

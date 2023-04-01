@@ -175,7 +175,7 @@ val NV_clip_space_w_scaling = "NVClipSpaceWScaling".nativeClassVK("NV_clip_space
         <h5>Description</h5>
         The viewport parameters taken from element <code>i</code> of {@code pViewportWScalings} replace the current state for the viewport index <code>firstViewport + i</code>, for <code>i</code> in <code>[0, viewportCount)</code>.
 
-        This command sets the viewport <b>W</b> scaling for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineViewportWScalingStateCreateInfoNV{@code ::pViewportWScalings} values used to create the currently active pipeline.
+        This command sets the viewport <b>W</b> scaling for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_VIEWPORT_W_SCALING_NV set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineViewportWScalingStateCreateInfoNV{@code ::pViewportWScalings} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

@@ -117,7 +117,7 @@ public class EXTSampleLocations {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command sets the custom sample locations for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}, and when the {@link VkPipelineSampleLocationsStateCreateInfoEXT}{@code ::sampleLocationsEnable} property of the bound graphics pipeline is {@link VK10#VK_TRUE TRUE}. Otherwise, this state is specified by the {@link VkPipelineSampleLocationsStateCreateInfoEXT}{@code ::sampleLocationsInfo} values used to create the currently active pipeline.</p>
+     * <p>This command sets the custom sample locations for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT DYNAMIC_STATE_SAMPLE_LOCATIONS_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}, and when the {@link VkPipelineSampleLocationsStateCreateInfoEXT}{@code ::sampleLocationsEnable} property of the bound graphics pipeline is {@link VK10#VK_TRUE TRUE}. Otherwise, this state is specified by the {@link VkPipelineSampleLocationsStateCreateInfoEXT}{@code ::sampleLocationsInfo} values used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

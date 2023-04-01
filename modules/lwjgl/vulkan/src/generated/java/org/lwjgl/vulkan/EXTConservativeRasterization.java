@@ -89,7 +89,7 @@ public final class EXTConservativeRasterization {
      * 
      * <h5>See Also</h5>
      * 
-     * <p>{@link VkPipelineRasterizationConservativeStateCreateInfoEXT}, {@link EXTExtendedDynamicState3#vkCmdSetConservativeRasterizationModeEXT CmdSetConservativeRasterizationModeEXT}</p>
+     * <p>{@link VkPipelineRasterizationConservativeStateCreateInfoEXT}, {@link EXTShaderObject#vkCmdSetConservativeRasterizationModeEXT CmdSetConservativeRasterizationModeEXT}</p>
      */
     public static final int
         VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT      = 0,

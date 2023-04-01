@@ -111,7 +111,7 @@ public class EXTColorWriteEnable {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command sets the color write enables for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineColorWriteCreateInfoEXT}{@code ::pColorWriteEnables} values used to create the currently active pipeline.</p>
+     * <p>This command sets the color write enables for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineColorWriteCreateInfoEXT}{@code ::pColorWriteEnables} values used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

@@ -121,7 +121,7 @@ val EXT_line_rasterization = "EXTLineRasterization".nativeClassVK("EXT_line_rast
 ￿    uint16_t                                    lineStipplePattern);</code></pre>
 
         <h5>Description</h5>
-        This command sets the line stipple state for subsequent drawing commands when the graphics pipeline is created with #DYNAMIC_STATE_LINE_STIPPLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoEXT{@code ::lineStippleFactor} and ##VkPipelineRasterizationLineStateCreateInfoEXT{@code ::lineStipplePattern} values used to create the currently active pipeline.
+        This command sets the line stipple state for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#shaders-objects">shader objects</a>, or when the graphics pipeline is created with #DYNAMIC_STATE_LINE_STIPPLE_EXT set in ##VkPipelineDynamicStateCreateInfo{@code ::pDynamicStates}. Otherwise, this state is specified by the ##VkPipelineRasterizationLineStateCreateInfoEXT{@code ::lineStippleFactor} and ##VkPipelineRasterizationLineStateCreateInfoEXT{@code ::lineStipplePattern} values used to create the currently active pipeline.
 
         <h5>Valid Usage</h5>
         <ul>

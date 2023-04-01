@@ -128,7 +128,7 @@ public class NVScissorExclusive {
      * 
      * <p>The exclusive scissor enables taken from element <code>i</code> of {@code pExclusiveScissorEnables} replace the current state for the scissor index <code>firstExclusiveScissor + i</code>, for <code>i</code> in <code>[0, exclusiveScissorCount)</code>.</p>
      * 
-     * <p>This command sets the exclusive scissor enable for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is implied by the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV}{@code ::exclusiveScissorCount} value used to create the currently active pipeline, where all {@code exclusiveScissorCount} exclusive scissors are implicitly enabled and the remainder up to {@link VkPhysicalDeviceLimits}{@code ::maxViewports} are implicitly disabled.</p>
+     * <p>This command sets the exclusive scissor enable for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV DYNAMIC_STATE_EXCLUSIVE_SCISSOR_ENABLE_NV} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is implied by the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV}{@code ::exclusiveScissorCount} value used to create the currently active pipeline, where all {@code exclusiveScissorCount} exclusive scissors are implicitly enabled and the remainder up to {@link VkPhysicalDeviceLimits}{@code ::maxViewports} are implicitly disabled.</p>
      * 
      * <h5>Valid Usage</h5>
      * 
@@ -202,7 +202,7 @@ public class NVScissorExclusive {
      * 
      * <p>The scissor rectangles taken from element <code>i</code> of {@code pExclusiveScissors} replace the current state for the scissor index <code>firstExclusiveScissor + i</code>, for <code>i</code> in <code>[0, exclusiveScissorCount)</code>.</p>
      * 
-     * <p>This command sets the exclusive scissor rectangles for subsequent drawing commands when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV}{@code ::pExclusiveScissors} values used to create the currently active pipeline.</p>
+     * <p>This command sets the exclusive scissor rectangles for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link #VK_DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV DYNAMIC_STATE_EXCLUSIVE_SCISSOR_NV} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineViewportExclusiveScissorStateCreateInfoNV}{@code ::pExclusiveScissors} values used to create the currently active pipeline.</p>
      * 
      * <h5>Valid Usage</h5>
      * 

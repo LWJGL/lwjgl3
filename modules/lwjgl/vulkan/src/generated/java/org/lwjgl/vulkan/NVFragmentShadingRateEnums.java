@@ -159,7 +159,7 @@ public class NVFragmentShadingRateEnums {
      * 
      * <h5>Description</h5>
      * 
-     * <p>This command sets the pipeline fragment shading rate and combiner operation for subsequent drawing commands when the graphics pipeline is created with {@link KHRFragmentShadingRate#VK_DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineFragmentShadingRateEnumStateCreateInfoNV} values used to create the currently active pipeline.</p>
+     * <p>This command sets the pipeline fragment shading rate and combiner operation for subsequent drawing commands when drawing using <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#shaders-objects">shader objects</a>, or when the graphics pipeline is created with {@link KHRFragmentShadingRate#VK_DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR DYNAMIC_STATE_FRAGMENT_SHADING_RATE_KHR} set in {@link VkPipelineDynamicStateCreateInfo}{@code ::pDynamicStates}. Otherwise, this state is specified by the {@link VkPipelineFragmentShadingRateEnumStateCreateInfoNV} values used to create the currently active pipeline.</p>
      * 
      * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
      * 

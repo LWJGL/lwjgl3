@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link EXTExtendedDynamicState3#vkCmdSetColorBlendEquationEXT CmdSetColorBlendEquationEXT}</p>
+ * <p>{@link EXTShaderObject#vkCmdSetColorBlendEquationEXT CmdSetColorBlendEquationEXT}</p>
  * 
  * <h3>Layout</h3>
  * 

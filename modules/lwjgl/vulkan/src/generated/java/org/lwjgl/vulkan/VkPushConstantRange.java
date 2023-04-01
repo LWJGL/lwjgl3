@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <h5>See Also</h5>
  * 
- * <p>{@link VkPipelineLayoutCreateInfo}</p>
+ * <p>{@link VkPipelineLayoutCreateInfo}, {@link VkShaderCreateInfoEXT}</p>
  * 
  * <h3>Layout</h3>
  * 
