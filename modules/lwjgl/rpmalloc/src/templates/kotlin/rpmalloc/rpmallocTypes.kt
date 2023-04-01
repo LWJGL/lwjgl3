@@ -153,7 +153,7 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
             "RPMapFailCallback",
             """
             Called when a call to map memory pages fails (out of memory).
-            
+
             If this callback is not set or returns zero the library will return a null pointer in the allocation call. If this callback returns non-zero the
             map call will be retried. The argument passed is the number of bytes that was requested in the map call. Only used if the default system memory map
             function is used ({@code memory_map} callback is not set).
@@ -171,7 +171,7 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
 
         The page size MUST be a power of two in {@code [512,16384]} range (2<sup>9</sup> to 2<sup>14</sup>) unless 0 - set to 0 to use system page size. All
         memory mapping requests to {@code memory_map} will be made with size set to a multiple of the page size.
-        
+
         Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1, otherwise system page size is used.
         """
     )
@@ -181,7 +181,7 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
         size of a span of memory blocks.
 
         MUST be a power of two, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).
-        
+
         Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1.
         """
     )
@@ -208,7 +208,8 @@ val rpmalloc_config_t = struct(Module.RPMALLOC, "RPMallocConfig", nativeName = "
         <a href="https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt">hugetlbpage.txt</a>.
         """
     )
-    padding(4)
+    nullable..charASCII.const.p("page_name", "allocated pages name for systems supporting it to be able to distinguish among anonymous regions")
+    nullable..charASCII.const.p("huge_page_name", "huge allocated pages name for systems supporting it to be able to distinguish among anonymous regions")
 }
 
 val rpmalloc_global_statistics_t = struct(
