@@ -2144,7 +2144,7 @@ free_list_pop(void** list) {
 static void*
 _rpmalloc_allocate_from_heap_fallback(heap_t* heap, heap_size_class_t* heap_size_class, uint32_t class_idx) {
 	span_t* span = heap_size_class->partial_span;
-	rpmalloc_assume(heap);
+	rpmalloc_assume(heap != NULL);
 	if (EXPECTED(span != 0)) {
 		rpmalloc_assert(span->block_count == _memory_size_class[span->size_class].block_count, "Span block count corrupted");
 		rpmalloc_assert(!_rpmalloc_span_is_fully_utilized(span), "Internal failure");

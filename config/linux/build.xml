@@ -352,6 +352,7 @@
                 <compile lang="c++">
                     <arg value="-I${src.main.rel}"/>
                     <fileset dir="." includes="${src.main}/*.cc"/>
+                    <fileset dir="." includes="${src.generated}/*.cpp"/>
                 </compile>
                 <compile>
                     <arg value="-I${src.main.rel}"/>
