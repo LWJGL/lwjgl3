@@ -5,9 +5,9 @@
  */
 
 /**
- * Contains bindings to the <a target="_blank" href="http://www.openal.org/">OpenAL</a> cross-platform 3D audio API.
+ * Contains bindings to the <a target="_blank" href="https://www.openal.org/">OpenAL</a> cross-platform 3D audio API.
  * 
- * <p>LWJGL comes with a software OpenAL implementation, <a target="_blank" href="http://www.openal-soft.org/">OpenAL Soft</a>.</p>
+ * <p>LWJGL comes with a software OpenAL implementation, <a target="_blank" href="https://www.openal-soft.org/">OpenAL Soft</a>.</p>
  * 
  * <p>OpenAL Soft can be dynamically configured with <a target="_blank" href="https://github.com/kcat/openal-soft/blob/master/docs/env-vars.txt">environment variables</a>. A
  * very useful option for debugging is {@code ALSOFT_LOGLEVEL}; it can be set to values 0 through 4, with higher values producing more information.</p>

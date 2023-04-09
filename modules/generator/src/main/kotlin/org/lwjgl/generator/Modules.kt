@@ -461,9 +461,9 @@ enum class Module(
         "openal",
         "org.lwjgl.openal",
         """
-        Contains bindings to the ${url("http://www.openal.org/", "OpenAL")} cross-platform 3D audio API.
+        Contains bindings to the ${url("https://www.openal.org/", "OpenAL")} cross-platform 3D audio API.
 
-        LWJGL comes with a software OpenAL implementation, ${url("http://www.openal-soft.org/", "OpenAL Soft")}.
+        LWJGL comes with a software OpenAL implementation, ${url("https://www.openal-soft.org/", "OpenAL Soft")}.
 
         OpenAL Soft can be dynamically configured with ${url("https://github.com/kcat/openal-soft/blob/master/docs/env-vars.txt", "environment variables")}. A
         very useful option for debugging is {@code ALSOFT_LOGLEVEL}; it can be set to values 0 through 4, with higher values producing more information.
