@@ -59,40 +59,4 @@ public class GLFWNativeNSGL {
         return invokePP(window, __functionAddress);
     }
 
-    /** Calls {@link #setFramework(String)} with the OpenGL framework loaded by LWJGL. */
-    public static void setFrameworkLWJGL() {
-        FunctionProvider fp = GL.getFunctionProvider();
-        if (!(fp instanceof MacOSXLibraryBundle)) {
-            apiLog("GLFW OpenGL path override not set: OpenGL function provider is not a framework.");
-            return;
-
-        }
-
-        setFramework(((MacOSXLibraryBundle)fp).getName());
-    }
-
-    /**
-     * Overrides the OpenGL framework that GLFW loads internally.
-     *
-     * <p>This is useful when there's a mismatch between the frameworks loaded by LWJGL and GLFW.</p>
-     *
-     * <p>This method must be called before GLFW initializes OpenGL. The override is available only in the default GLFW build bundled with LWJGL. Using the
-     * override with a custom GLFW build will produce a warning in {@code DEBUG} mode (but not an error).</p>
-     *
-     * @param path the OpenGL framework, or {@code null} to remove the override.
-     */
-    public static void setFramework(@Nullable String path) {
-        long override = GLFW.getLibrary().getFunctionAddress("_glfw_opengl_library");
-        if (override == NULL) {
-            apiLog("GLFW OpenGL path override not set: Could not resolve override symbol.");
-            return;
-        }
-
-        long a = memGetAddress(override);
-        if (a != NULL) {
-            nmemFree(a);
-        }
-        memPutAddress(override, path == null ? NULL : memAddress(memUTF8(path)));
-    }
-
 }
