@@ -135,8 +135,12 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
                     print("($resultType)");
             }
             print("((${it.returnType.abiType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
-            print(it.arguments.asSequence()
-                .joinToString(", ", prefix = "(", postfix = ")") { arg -> arg.abiType })
+            print(if (it.arguments.isEmpty())
+                "(void)"
+            else
+                it.arguments.asSequence()
+                    .joinToString(", ", prefix = "(", postfix = ")") { arg -> arg.abiType }
+            )
             print(")(uintptr_t)$FUNCTION_ADDRESS)(")
             print(it.arguments.asSequence()
                 .mapIndexed { i, arg ->
