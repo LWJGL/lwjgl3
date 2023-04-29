@@ -122,3 +122,9 @@ This build includes the following changes:
 (B): binary incompatible change
 (S): source incompatible change
 ```
+
+#### Known Issues
+
+- glfw: GLFW added support for libglvnd (https://github.com/NVIDIA/libglvnd) and prioritizes loading `libGLX.so.0` when available over `libGL.so.1`. This may cause failures:
+  * On context creation (`glfwCreateWindow`) if the host system is misconfigured. Workaround: Call `GLFWNativeGLX.setPath(GL.getFunctionProvider())` before `glfwInit` to force GLFW to load `libGL.so.1` instead.
+  * On GL bindings initialization (`GL.createCapabilities`) because of incompatibility with `libGL.so.1`, which is the library that LWJGL loads. Workaround: Set `Configuration.OPENGL_LIBRARY_NAME` to `libGLX.so.0` to force LWJGL to load `libGLX.so.0` instead.

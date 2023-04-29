@@ -118,6 +118,12 @@ This build includes the following changes:
 - NativeFileDialog: Now uses the [btzy/nativefiledialog-extended](https://github.com/btzy/nativefiledialog-extended) API. (S)
 - Nuklear: Renamed `NkConvertConfig::null_texture` to `tex_null` to match the change in the native API. (S)
 
+#### Known Issues
+
+- glfw: GLFW added support for libglvnd (https://github.com/NVIDIA/libglvnd) and prioritizes loading `libGLX.so.0` when available over `libGL.so.1`. This may cause failures:
+  * On context creation (`glfwCreateWindow`) if the host system is misconfigured. Workaround: Call `GLFWNativeGLX.setPath(GL.getFunctionProvider())` before `glfwInit` to force GLFW to load `libGL.so.1` instead.
+  * On GL bindings initialization (`GL.createCapabilities`) because of incompatibility with `libGL.so.1`, which is the library that LWJGL loads. Workaround: Set `Configuration.OPENGL_LIBRARY_NAME` to `libGLX.so.0` to force LWJGL to load `libGLX.so.0` instead.
+
 ### 3.3.1
 
 _Released 2022 Feb 21_
