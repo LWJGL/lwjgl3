@@ -301,7 +301,7 @@ nmeshopt_setAllocator(
 );""")}
         """
 
-    IntConstant("", "MESHOPTIMIZER_VERSION".."180").noPrefix()
+    IntConstant("", "MESHOPTIMIZER_VERSION".."190").noPrefix()
 
     size_t(
         "generateVertexRemap",

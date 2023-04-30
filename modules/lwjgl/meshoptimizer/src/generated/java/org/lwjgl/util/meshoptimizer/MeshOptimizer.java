@@ -325,7 +325,7 @@ public class MeshOptimizer {
 
     static { LibMeshOptimizer.initialize(); }
 
-    public static final int MESHOPTIMIZER_VERSION = 180;
+    public static final int MESHOPTIMIZER_VERSION = 190;
 
     /**
      * {@code meshopt_EncodeExpMode}
