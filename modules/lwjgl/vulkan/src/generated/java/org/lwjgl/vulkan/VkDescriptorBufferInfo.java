@@ -101,7 +101,14 @@ public class VkDescriptorBufferInfo extends Struct implements NativeResource {
     /** the offset in bytes from the start of {@code buffer}. Access to buffer memory via this descriptor uses addressing that is relative to this starting offset. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** the size in bytes that is used for this descriptor update, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to use the range from {@code offset} to the end of the buffer. */
+    /**
+     * the size in bytes that is used for this descriptor update, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to use the range from {@code offset} to the end of the buffer.
+     * 
+     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
+     * 
+     * <p>When setting {@code range} to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#buffer-info-effective-range">effective range</a> <b>must</b> not be larger than the maximum range for the descriptor type (<a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxUniformBufferRange">{@code maxUniformBufferRange}</a> or <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#limits-maxStorageBufferRange">{@code maxStorageBufferRange}</a>). This means that {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} is not typically useful in the common case where uniform buffer descriptors are suballocated from a buffer that is much larger than {@code maxUniformBufferRange}.</p>
+     * </div>
+     */
     @NativeType("VkDeviceSize")
     public long range() { return nrange(address()); }
 

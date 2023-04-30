@@ -1224,6 +1224,8 @@ public class VKCapabilitiesDevice {
     public final boolean VK_KHR_ray_tracing_maintenance1;
     /** When true, {@link KHRRayTracingPipeline} is supported. */
     public final boolean VK_KHR_ray_tracing_pipeline;
+    /** When true, {@link KHRRayTracingPositionFetch} is supported. */
+    public final boolean VK_KHR_ray_tracing_position_fetch;
     /** When true, {@link KHRRelaxedBlockLayout} is supported. */
     public final boolean VK_KHR_relaxed_block_layout;
     /** When true, {@link KHRSamplerMirrorClampToEdge} is supported. */
@@ -1610,6 +1612,7 @@ public class VKCapabilitiesDevice {
         VK_KHR_ray_query = ext.contains("VK_KHR_ray_query");
         VK_KHR_ray_tracing_maintenance1 = check_KHR_ray_tracing_maintenance1(provider, caps, ext);
         VK_KHR_ray_tracing_pipeline = check_KHR_ray_tracing_pipeline(provider, caps, ext);
+        VK_KHR_ray_tracing_position_fetch = ext.contains("VK_KHR_ray_tracing_position_fetch");
         VK_KHR_relaxed_block_layout = ext.contains("VK_KHR_relaxed_block_layout");
         VK_KHR_sampler_mirror_clamp_to_edge = ext.contains("VK_KHR_sampler_mirror_clamp_to_edge");
         VK_KHR_sampler_ycbcr_conversion = check_KHR_sampler_ycbcr_conversion(provider, caps, ext);

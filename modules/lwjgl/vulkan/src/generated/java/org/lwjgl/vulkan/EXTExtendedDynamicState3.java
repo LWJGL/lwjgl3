@@ -485,7 +485,7 @@ public class EXTExtendedDynamicState3 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>Either the &lt;features-extendedDynamicState3AlphaToCoverageEnable, {@code extendedDynamicState3AlphaToCoverageEnable}&gt;&gt; feature or the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+     * <li>Either the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-extendedDynamicState3AlphaToCoverageEnable">{@code extendedDynamicState3AlphaToCoverageEnable}</a> feature or the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
      * </ul>
      * 
      * <h5>Valid Usage (Implicit)</h5>

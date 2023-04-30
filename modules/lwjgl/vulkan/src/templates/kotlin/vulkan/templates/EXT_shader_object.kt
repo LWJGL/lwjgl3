@@ -11,7 +11,7 @@ import vulkan.*
 val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", type = "device", postfix = "EXT") {
     documentation =
         """
-        This extension introduces a new {@code VkShaderEXT} object type which represents a single compiled shader stage. Shader objects can be used as a more flexible but comparably performant alternative to {@code VkPipeline} objects.
+        This extension introduces a new {@code VkShaderEXT} object type which represents a single compiled shader stage. Shader objects provide a more flexible alternative to {@code VkPipeline} objects, which may be helpful in certain use cases.
 
         <h5>Examples</h5>
         <b>Example 1</b>
@@ -72,7 +72,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿VkResult result;
 ￿VkShaderEXT shaders[2];
 ￿
-￿result = vkCmdCreateShadersEXT(device, 2, &amp;shaderCreateInfos, NULL, shaders);
+￿result = vkCreateShadersEXT(device, 2, &amp;shaderCreateInfos, NULL, shaders);
 ￿if (result != VK_SUCCESS)
 ￿{
 ￿    // Handle error
@@ -101,8 +101,8 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿
 ￿// Equivalent to the previous line. Linked shaders can be bound one at a time,
 ￿// in any order:
-￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;stages[1], &amp;shaders[1]);
-￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;stages[0], &amp;shaders[0]);
+￿// vkCmdBindShadersEXT(commandBuffer, 1, &amp;stages[1], &amp;shaders[1]);
+￿// vkCmdBindShadersEXT(commandBuffer, 1, &amp;stages[0], &amp;shaders[0]);
 ￿
 ￿// The above is sufficient to draw if the device was created with the
 ￿// tessellationShader and geometryShader features disabled. Otherwise, since
@@ -120,6 +120,9 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿// meaning no shaders are bound to those stages, and that any previously bound
 ￿// shaders are unbound
 ￿vkCmdBindShadersEXT(commandBuffer, 3, unusedStages, NULL);
+￿
+￿// Graphics shader objects may only be used to draw inside dynamic render pass
+￿// instances begun with vkCmdBeginRendering(), assume one has already been begun
 ￿
 ￿// Draw a triangle
 ￿vkCmdDraw(commandBuffer, 3, 1, 0, 0);</code></pre>
@@ -237,7 +240,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿VkResult result;
 ￿VkShaderEXT shaders[5];
 ￿
-￿result = vkCmdCreateShadersEXT(device, 5, &amp;shaderCreateInfos, NULL, shaders);
+￿result = vkCreateShadersEXT(device, 5, &amp;shaderCreateInfos, NULL, shaders);
 ￿if (result != VK_SUCCESS)
 ￿{
 ￿    // Handle error
@@ -255,33 +258,43 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 ￿// Assume vertex buffers, descriptor sets, etc. have been bound, and existing
 ￿// state setting commands have been called to set all required state
 ￿
-￿const VkShaderStageFlagBits vertexStage = VK_SHADER_STAGE_VERTEX_BIT;
-￿const VkShaderStageFlagBits geometryStage = VK_SHADER_STAGE_VERTEX_BIT;
-￿const VkShaderStageFlagBits fragmentStage = VK_SHADER_STAGE_VERTEX_BIT;
+￿const VkShaderStageFlagBits stages[3] =
+￿{
+￿    // Any order is allowed
+￿    VK_SHADER_STAGE_FRAGMENT_BIT,
+￿    VK_SHADER_STAGE_VERTEX_BIT,
+￿    VK_SHADER_STAGE_GEOMETRY_BIT,
+￿};
 ￿
-￿// Bind unlinked vertex shader
-￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;vertexStage, &amp;shaders[0]);
+￿VkShaderEXT bindShaders[3] =
+￿{
+￿    shaders[2], // FS
+￿    shaders[1], // VS
+￿    shaders[0]  // GS
+￿};
 ￿
-￿// Bind unlinked fragment shader
-￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;fragmentStage, &amp;shaders[3]);
-￿
-￿// Bind unlinked geometry shader
-￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;geometryStage, &amp;shaders[2]);
+￿// Bind unlinked shaders
+￿vkCmdBindShadersEXT(commandBuffer, 3, stages, bindShaders);
 ￿
 ￿// Assume the tessellationShader feature is disabled, so vkCmdBindShadersEXT()
 ￿// need not have been called with either tessellation stage
+￿
+￿// Graphics shader objects may only be used to draw inside dynamic render pass
+￿// instances begun with vkCmdBeginRendering(), assume one has already been begun
 ￿
 ￿// Draw a triangle
 ￿vkCmdDraw(commandBuffer, 3, 1, 0, 0);
 ￿
 ￿// Bind a different unlinked fragment shader
-￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;fragmentStage, &amp;shaders[4]);
+￿const VkShaderStageFlagBits fragmentStage = VK_SHADER_STAGE_FRAGMENT_BIT;
+￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;fragmentStage, &amp;shaders[3]);
 ￿
 ￿// Draw another triangle
 ￿vkCmdDraw(commandBuffer, 3, 1, 0, 0);
 ￿
 ￿// Bind a different unlinked vertex shader
-￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;vertexStage, &amp;shaders[1]);
+￿const VkShaderStageFlagBits vertexStage = VK_SHADER_STAGE_VERTEX_BIT;
+￿vkCmdBindShadersEXT(commandBuffer, 1, &amp;vertexStage, &amp;shaders[4]);
 ￿
 ￿// Draw another triangle
 ￿vkCmdDraw(commandBuffer, 3, 1, 0, 0);</code></pre>
@@ -395,28 +408,53 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
     )
 
     EnumConstant(
+        "Extends {@code VkShaderCreateFlagBitsEXT}.",
+
+        "SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT".enum(0x00000002),
+        "SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT".enum(0x00000004)
+    )
+
+    EnumConstant(
+        "Extends {@code VkShaderCreateFlagBitsEXT}.",
+
+        "SHADER_CREATE_NO_TASK_SHADER_BIT_EXT".enum(0x00000008)
+    )
+
+    EnumConstant(
+        "Extends {@code VkShaderCreateFlagBitsEXT}.",
+
+        "SHADER_CREATE_DISPATCH_BASE_BIT_EXT".enum(0x00000010)
+    )
+
+    EnumConstant(
+        "Extends {@code VkShaderCreateFlagBitsEXT}.",
+
+        "SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT".enum(0x00000020)
+    )
+
+    EnumConstant(
+        "Extends {@code VkShaderCreateFlagBitsEXT}.",
+
+        "SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT".enum(0x00000040)
+    )
+
+    EnumConstant(
         """
         VkShaderCreateFlagBitsEXT - Bitmask controlling how a shader object is created
 
         <h5>Description</h5>
         <ul>
-            <li>#SHADER_CREATE_LINK_STAGE_BIT_EXT specifies that this stage is linked to all other stages being created in the same #CreateShadersEXT() call whose ##VkShaderCreateInfoEXT structures have the #SHADER_CREATE_LINK_STAGE_BIT_EXT flag set in {@code flags}.</li>
-            <li>#SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT specifies that the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces-builtin-variables-sgs">{@code SubgroupSize}</a> <b>may</b> vary in the shader stage.</li>
-            <li>#SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT specifies that the subgroup sizes <b>must</b> be launched with all invocations active in the compute stage.</li>
-            <li>#SHADER_CREATE_NO_TASK_SHADER_BIT_EXT specifies that the mesh shader being created <b>must</b> only be used without a task shader. Otherwise, the mesh shader being created <b>must</b> only be used with a task shader.</li>
+            <li>#SHADER_CREATE_LINK_STAGE_BIT_EXT specifies that a shader is linked to all other shaders created in the same #CreateShadersEXT() call whose ##VkShaderCreateInfoEXT structures' {@code flags} include #SHADER_CREATE_LINK_STAGE_BIT_EXT.</li>
+            <li>#SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT specifies that the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#interfaces-builtin-variables-sgs">{@code SubgroupSize}</a> <b>may</b> vary in a compute shader.</li>
+            <li>#SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT specifies that the subgroup sizes <b>must</b> be launched with all invocations active in a compute shader.</li>
+            <li>#SHADER_CREATE_NO_TASK_SHADER_BIT_EXT specifies that a mesh shader <b>must</b> only be used without a task shader. Otherwise, the mesh shader <b>must</b> only be used with a task shader.</li>
             <li>#SHADER_CREATE_DISPATCH_BASE_BIT_EXT specifies that a compute shader <b>can</b> be used with #CmdDispatchBase() with a non-zero base workgroup.</li>
-            <li>#SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT specifies that the fragment shader <b>can</b> be used with a fragment shading rate attachment.</li>
-            <li>#SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT specifies that the fragment shader <b>can</b> be used with a fragment density map attachment.</li>
+            <li>#SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT specifies that a fragment shader <b>can</b> be used with a fragment shading rate attachment.</li>
+            <li>#SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT specifies that a fragment shader <b>can</b> be used with a fragment density map attachment.</li>
         </ul>
         """,
 
-        "SHADER_CREATE_LINK_STAGE_BIT_EXT".enum(0x00000001),
-        "SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT".enum(0x00000002),
-        "SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT".enum(0x00000004),
-        "SHADER_CREATE_NO_TASK_SHADER_BIT_EXT".enum(0x00000008),
-        "SHADER_CREATE_DISPATCH_BASE_BIT_EXT".enum(0x00000010),
-        "SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT".enum(0x00000020),
-        "SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT".enum(0x00000040)
+        "SHADER_CREATE_LINK_STAGE_BIT_EXT".enum(0x00000001)
     )
 
     EnumConstant(
@@ -456,7 +494,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         <h5>Description</h5>
         When this function returns, whether or not it succeeds, it is guaranteed that every element of {@code pShaders} will have been overwritten by either #NULL_HANDLE or a valid {@code VkShaderEXT} handle.
 
-        This means that whenever shader creation fails, the application <b>can</b> determine which shader the returned error pertains to by locating the first #NULL_HANDLE element in {@code pShaders}. It also means that an application <b>can</b> always clean up from a failed call by iterating over the {@code pShaders} array and destroying every element that is not #NULL_HANDLE.
+        This means that whenever shader creation fails, the application <b>can</b> determine which shader the returned error pertains to by locating the first #NULL_HANDLE element in {@code pShaders}. It also means that an application <b>can</b> reliably clean up from a failed call by iterating over the {@code pShaders} array and destroying every element that is not #NULL_HANDLE.
 
         <h5>Valid Usage</h5>
         <ul>
@@ -526,7 +564,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">shaderObject</a> feature <b>must</b> be enabled</li>
+            <li>The <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature <b>must</b> be enabled</li>
             <li>All submitted commands that refer to {@code shader} <b>must</b> have completed execution</li>
             <li>If ##VkAllocationCallbacks were provided when {@code shader} was created, a compatible set of callbacks <b>must</b> be provided here</li>
             <li>If no ##VkAllocationCallbacks were provided when {@code shader} was created, {@code pAllocator} <b>must</b> be {@code NULL}</li>
@@ -576,7 +614,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
         The behavior of this command when {@code pDataSize} is too small differs from how some other getter-type commands work in Vulkan. Because shader binary data is only usable in its entirety, it would never be useful for the implementation to return partial data. Because of this, nothing is written to {@code pData} unless {@code pDataSize} is large enough to fit the data it its entirety.
         </div>
 
-        Binary shader code retrieved using {@code vkGetShaderBinaryDataEXT} <b>can</b> be passed to a subsequent call to {@code vkCreateShadersEXT} on a compatible physical device by specifying #SHADER_CODE_TYPE_BINARY_EXT in the {@code codeType} member of ##VkShaderCreateInfoEXT.
+        Binary shader code retrieved using {@code vkGetShaderBinaryDataEXT} <b>can</b> be passed to a subsequent call to #CreateShadersEXT() on a compatible physical device by specifying #SHADER_CODE_TYPE_BINARY_EXT in the {@code codeType} member of ##VkShaderCreateInfoEXT.
 
         The shader code returned by repeated calls to this function with the same {@code VkShaderEXT} is guaranteed to be invariant for the lifetime of the {@code VkShaderEXT} object.
 
@@ -649,6 +687,8 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
             <li>If {@code pStages} contains both #SHADER_STAGE_MESH_BIT_EXT and #SHADER_STAGE_VERTEX_BIT, and {@code pShaders} is not {@code NULL}, and the same index in {@code pShaders} as #SHADER_STAGE_MESH_BIT_EXT in {@code pStages} is not #NULL_HANDLE, the same index in {@code pShaders} as #SHADER_STAGE_VERTEX_BIT in {@code pStages} <b>must</b> be #NULL_HANDLE</li>
             <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, and {@code pStages} contains #SHADER_STAGE_TESSELLATION_CONTROL_BIT or #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, and {@code pShaders} is not {@code NULL}, the same index or indices in {@code pShaders} <b>must</b> be #NULL_HANDLE</li>
             <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-geometryShader">{@code geometryShader}</a> feature is not enabled, and {@code pStages} contains #SHADER_STAGE_GEOMETRY_BIT, and {@code pShaders} is not {@code NULL}, the same index in {@code pShaders} <b>must</b> be #NULL_HANDLE</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-taskShader">{@code taskShader}</a> feature is not enabled, and {@code pStages} contains #SHADER_STAGE_TASK_BIT_EXT, and {@code pShaders} is not {@code NULL}, the same index in {@code pShaders} <b>must</b> be #NULL_HANDLE</li>
+            <li>If the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-meshShader">{@code meshShader}</a> feature is not enabled, and {@code pStages} contains #SHADER_STAGE_MESH_BIT_EXT, and {@code pShaders} is not {@code NULL}, the same index in {@code pShaders} <b>must</b> be #NULL_HANDLE</li>
             <li>If {@code pStages} contains #SHADER_STAGE_COMPUTE_BIT, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support compute operations</li>
             <li>If {@code pStages} contains #SHADER_STAGE_VERTEX_BIT, #SHADER_STAGE_TESSELLATION_CONTROL_BIT, #SHADER_STAGE_TESSELLATION_EVALUATION_BIT, #SHADER_STAGE_GEOMETRY_BIT, or #SHADER_STAGE_FRAGMENT_BIT, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
             <li>If {@code pStages} contains #SHADER_STAGE_MESH_BIT_EXT or #SHADER_STAGE_TASK_BIT_EXT, the {@code VkCommandPool} that {@code commandBuffer} was allocated from <b>must</b> support graphics operations</li>
@@ -1234,7 +1274,7 @@ val EXT_shader_object = "EXTShaderObject".nativeClassVK("EXT_shader_object", typ
 
         <h5>Valid Usage</h5>
         <ul>
-            <li>Either the &lt;features-extendedDynamicState3AlphaToCoverageEnable, {@code extendedDynamicState3AlphaToCoverageEnable}&gt;&gt; feature or the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
+            <li>Either the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-extendedDynamicState3AlphaToCoverageEnable">{@code extendedDynamicState3AlphaToCoverageEnable}</a> feature or the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html\#features-shaderObject">{@code shaderObject}</a> feature or both <b>must</b> be enabled</li>
         </ul>
 
         <h5>Valid Usage (Implicit)</h5>

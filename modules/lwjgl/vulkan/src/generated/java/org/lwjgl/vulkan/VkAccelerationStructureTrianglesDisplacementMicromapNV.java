@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * <li>{@code indexType} <b>must</b> be a valid {@code VkIndexType} value</li>
  * <li>If {@code usageCountsCount} is not 0, and {@code pUsageCounts} is not {@code NULL}, {@code pUsageCounts} <b>must</b> be a valid pointer to an array of {@code usageCountsCount} {@link VkMicromapUsageEXT} structures</li>
  * <li>If {@code usageCountsCount} is not 0, and {@code ppUsageCounts} is not {@code NULL}, {@code ppUsageCounts} <b>must</b> be a valid pointer to an array of {@code usageCountsCount} valid pointers to {@link VkMicromapUsageEXT} structures</li>
- * <li>{@code micromap} <b>must</b> be a valid {@code VkMicromapEXT} handle</li>
+ * <li>If {@code micromap} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code micromap} <b>must</b> be a valid {@code VkMicromapEXT} handle</li>
  * </ul>
  * 
  * <h5>See Also</h5>

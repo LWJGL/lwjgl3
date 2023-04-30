@@ -80,21 +80,21 @@ public class VkClearColorValue extends Struct implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** are the color clear values when the format of the image or attachment is one of the formats in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-numericformat">Interpretation of Numeric Format</a> table other than signed integer ({@code SINT}) or unsigned integer ({@code UINT}). Floating point values are automatically converted to the format of the image, with the clear value being treated as linear if the image is sRGB. */
+    /** are the color clear values when the format of the image or attachment is one of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-numericformat">numeric formats</a> with a numeric type that is floating-point. Floating point values are automatically converted to the format of the image, with the clear value being treated as linear if the image is sRGB. */
     @NativeType("float[4]")
     public FloatBuffer float32() { return nfloat32(address()); }
-    /** are the color clear values when the format of the image or attachment is one of the formats in the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-numericformat">Interpretation of Numeric Format</a> table other than signed integer ({@code SINT}) or unsigned integer ({@code UINT}). Floating point values are automatically converted to the format of the image, with the clear value being treated as linear if the image is sRGB. */
+    /** are the color clear values when the format of the image or attachment is one of the <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-numericformat">numeric formats</a> with a numeric type that is floating-point. Floating point values are automatically converted to the format of the image, with the clear value being treated as linear if the image is sRGB. */
     public float float32(int index) { return nfloat32(address(), index); }
-    /** are the color clear values when the format of the image or attachment is signed integer ({@code SINT}). Signed integer values are converted to the format of the image by casting to the smaller type (with negative 32-bit values mapping to negative values in the smaller type). If the integer clear value is not representable in the target type (e.g. would overflow in conversion to that type), the clear value is undefined. */
+    /** are the color clear values when the format of the image or attachment has a numeric type that is signed integer ({@code SINT}). Signed integer values are converted to the format of the image by casting to the smaller type (with negative 32-bit values mapping to negative values in the smaller type). If the integer clear value is not representable in the target type (e.g. would overflow in conversion to that type), the clear value is undefined. */
     @NativeType("int32_t[4]")
     public IntBuffer int32() { return nint32(address()); }
-    /** are the color clear values when the format of the image or attachment is signed integer ({@code SINT}). Signed integer values are converted to the format of the image by casting to the smaller type (with negative 32-bit values mapping to negative values in the smaller type). If the integer clear value is not representable in the target type (e.g. would overflow in conversion to that type), the clear value is undefined. */
+    /** are the color clear values when the format of the image or attachment has a numeric type that is signed integer ({@code SINT}). Signed integer values are converted to the format of the image by casting to the smaller type (with negative 32-bit values mapping to negative values in the smaller type). If the integer clear value is not representable in the target type (e.g. would overflow in conversion to that type), the clear value is undefined. */
     @NativeType("int32_t")
     public int int32(int index) { return nint32(address(), index); }
-    /** are the color clear values when the format of the image or attachment is unsigned integer ({@code UINT}). Unsigned integer values are converted to the format of the image by casting to the integer type with fewer bits. */
+    /** are the color clear values when the format of the image or attachment has a numeric type that is unsigned integer ({@code UINT}). Unsigned integer values are converted to the format of the image by casting to the integer type with fewer bits. */
     @NativeType("uint32_t[4]")
     public IntBuffer uint32() { return nuint32(address()); }
-    /** are the color clear values when the format of the image or attachment is unsigned integer ({@code UINT}). Unsigned integer values are converted to the format of the image by casting to the integer type with fewer bits. */
+    /** are the color clear values when the format of the image or attachment has a numeric type that is unsigned integer ({@code UINT}). Unsigned integer values are converted to the format of the image by casting to the integer type with fewer bits. */
     @NativeType("uint32_t")
     public int uint32(int index) { return nuint32(address(), index); }
 

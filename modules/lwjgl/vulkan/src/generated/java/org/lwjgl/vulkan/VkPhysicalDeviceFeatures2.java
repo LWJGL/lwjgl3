@@ -342,6 +342,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct implements NativeResource 
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceRayTracingMotionBlurFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceRayTracingPipelineFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+    /** Prepends the specified {@link VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR} value to the {@code pNext} chain. */
+    public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV} value to the {@code pNext} chain. */
     public VkPhysicalDeviceFeatures2 pNext(VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceRobustness2FeaturesEXT} value to the {@code pNext} chain. */
@@ -951,6 +953,8 @@ public class VkPhysicalDeviceFeatures2 extends Struct implements NativeResource 
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceRayTracingMotionBlurFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceRayTracingPipelineFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
+        /** Prepends the specified {@link VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR} value to the {@code pNext} chain. */
+        public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV} value to the {@code pNext} chain. */
         public VkPhysicalDeviceFeatures2.Buffer pNext(VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceRobustness2FeaturesEXT} value to the {@code pNext} chain. */

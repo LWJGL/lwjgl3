@@ -27,7 +27,7 @@ val EXT_device_fault = "EXTDeviceFault".nativeClassVK("EXT_device_fault", type =
             <dd>342</dd>
 
             <dt><b>Revision</b></dt>
-            <dd>1</dd>
+            <dd>2</dd>
 
             <dt><b>Extension and Version Dependencies</b></dt>
             <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
@@ -66,7 +66,7 @@ val EXT_device_fault = "EXTDeviceFault".nativeClassVK("EXT_device_fault", type =
     IntConstant(
         "The extension specification version.",
 
-        "EXT_DEVICE_FAULT_SPEC_VERSION".."1"
+        "EXT_DEVICE_FAULT_SPEC_VERSION".."2"
     )
 
     StringConstant(

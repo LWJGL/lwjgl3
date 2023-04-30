@@ -59,7 +59,7 @@ import org.lwjgl.vulkan.video.*;
  * 
  * <ul>
  * <li>{@code sType} <b>must</b> be {@link KHRVideoDecodeH265#VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_KHR}</li>
- * <li>{@code pStdPictureInfo} <b>must</b> be a valid pointer to a {@code StdVideoDecodeH265PictureInfo} value</li>
+ * <li>{@code pStdPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoDecodeH265PictureInfo} value</li>
  * <li>{@code pSliceSegmentOffsets} <b>must</b> be a valid pointer to an array of {@code sliceSegmentCount} {@code uint32_t} values</li>
  * <li>{@code sliceSegmentCount} <b>must</b> be greater than 0</li>
  * </ul>
@@ -70,7 +70,7 @@ import org.lwjgl.vulkan.video.*;
  * struct VkVideoDecodeH265PictureInfoKHR {
  *     VkStructureType {@link #sType};
  *     void const * {@link #pNext};
- *     {@link StdVideoDecodeH265PictureInfo StdVideoDecodeH265PictureInfo} * {@link #pStdPictureInfo};
+ *     {@link StdVideoDecodeH265PictureInfo StdVideoDecodeH265PictureInfo} const * {@link #pStdPictureInfo};
  *     uint32_t {@link #sliceSegmentCount};
  *     uint32_t const * {@link #pSliceSegmentOffsets};
  * }</code></pre>
@@ -130,7 +130,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
     /** a pointer to a {@code StdVideoDecodeH265PictureInfo} structure specifying <a target="_blank" href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#decode-h265-picture-info">H.265 picture information</a>. */
-    @NativeType("StdVideoDecodeH265PictureInfo *")
+    @NativeType("StdVideoDecodeH265PictureInfo const *")
     public StdVideoDecodeH265PictureInfo pStdPictureInfo() { return npStdPictureInfo(address()); }
     /** the number of elements in {@code pSliceSegmentOffsets}. */
     @NativeType("uint32_t")
@@ -146,7 +146,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
     /** Sets the specified value to the {@link #pNext} field. */
     public VkVideoDecodeH265PictureInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoDecodeH265PictureInfo} to the {@link #pStdPictureInfo} field. */
-    public VkVideoDecodeH265PictureInfoKHR pStdPictureInfo(@NativeType("StdVideoDecodeH265PictureInfo *") StdVideoDecodeH265PictureInfo value) { npStdPictureInfo(address(), value); return this; }
+    public VkVideoDecodeH265PictureInfoKHR pStdPictureInfo(@NativeType("StdVideoDecodeH265PictureInfo const *") StdVideoDecodeH265PictureInfo value) { npStdPictureInfo(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@link #pSliceSegmentOffsets} field. */
     public VkVideoDecodeH265PictureInfoKHR pSliceSegmentOffsets(@NativeType("uint32_t const *") IntBuffer value) { npSliceSegmentOffsets(address(), value); return this; }
 
@@ -367,7 +367,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
         @NativeType("void const *")
         public long pNext() { return VkVideoDecodeH265PictureInfoKHR.npNext(address()); }
         /** @return a {@link StdVideoDecodeH265PictureInfo} view of the struct pointed to by the {@link VkVideoDecodeH265PictureInfoKHR#pStdPictureInfo} field. */
-        @NativeType("StdVideoDecodeH265PictureInfo *")
+        @NativeType("StdVideoDecodeH265PictureInfo const *")
         public StdVideoDecodeH265PictureInfo pStdPictureInfo() { return VkVideoDecodeH265PictureInfoKHR.npStdPictureInfo(address()); }
         /** @return the value of the {@link VkVideoDecodeH265PictureInfoKHR#sliceSegmentCount} field. */
         @NativeType("uint32_t")
@@ -383,7 +383,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
         /** Sets the specified value to the {@link VkVideoDecodeH265PictureInfoKHR#pNext} field. */
         public VkVideoDecodeH265PictureInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH265PictureInfoKHR.npNext(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoDecodeH265PictureInfo} to the {@link VkVideoDecodeH265PictureInfoKHR#pStdPictureInfo} field. */
-        public VkVideoDecodeH265PictureInfoKHR.Buffer pStdPictureInfo(@NativeType("StdVideoDecodeH265PictureInfo *") StdVideoDecodeH265PictureInfo value) { VkVideoDecodeH265PictureInfoKHR.npStdPictureInfo(address(), value); return this; }
+        public VkVideoDecodeH265PictureInfoKHR.Buffer pStdPictureInfo(@NativeType("StdVideoDecodeH265PictureInfo const *") StdVideoDecodeH265PictureInfo value) { VkVideoDecodeH265PictureInfoKHR.npStdPictureInfo(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@link VkVideoDecodeH265PictureInfoKHR#pSliceSegmentOffsets} field. */
         public VkVideoDecodeH265PictureInfoKHR.Buffer pSliceSegmentOffsets(@NativeType("uint32_t const *") IntBuffer value) { VkVideoDecodeH265PictureInfoKHR.npSliceSegmentOffsets(address(), value); return this; }
 

@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * <dt><b>Registered Extension Number</b></dt>
  * <dd>342</dd>
  * <dt><b>Revision</b></dt>
- * <dd>1</dd>
+ * <dd>2</dd>
  * <dt><b>Extension and Version Dependencies</b></dt>
  * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2}</dd>
  * <dt><b>Contact</b></dt>
@@ -62,7 +62,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class EXTDeviceFault {
 
     /** The extension specification version. */
-    public static final int VK_EXT_DEVICE_FAULT_SPEC_VERSION = 1;
+    public static final int VK_EXT_DEVICE_FAULT_SPEC_VERSION = 2;
 
     /** The extension name. */
     public static final String VK_EXT_DEVICE_FAULT_EXTENSION_NAME = "VK_EXT_device_fault";
