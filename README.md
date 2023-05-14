@@ -189,7 +189,7 @@ improve the chances of a quick and useful response.
 |[libffi](https://sourceware.org)|A portable, high level programming interface to various calling conventions.|
 |[libdivide](https://libdivide.com/)|A library that replaces expensive integer divides with comparatively cheap multiplication and bitshifts.|
 |[LLVM](https://llvm.org/)|A collection of modular and reusable compiler and toolchain technologies.|
-|[LMDB](https://symas.com/products/lightning-memory-mapped-database/)|An extraordinarily fast, memory-efficient database. With memory-mapped files, it has the read performance of a pure in-memory database while retaining the persistence of standard disk-based databases.|
+|[LMDB](https://www.symas.com/lmdb)|An extraordinarily fast, memory-efficient database. With memory-mapped files, it has the read performance of a pure in-memory database while retaining the persistence of standard disk-based databases.|
 |[LZ4](http://lz4.github.io/lz4/)|A lossless data compression algorithm that is focused on compression and decompression speed.|
 |[Meow hash](https://github.com/cmuratori/meow_hash)|An extremely fast non-cryptographic hash.|
 |[ODBC](https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc)|A C programming language interface that makes it possible for applications to access data from a variety of database management systems (DBMSs).|
