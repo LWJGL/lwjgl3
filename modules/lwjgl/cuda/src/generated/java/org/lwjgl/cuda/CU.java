@@ -31,7 +31,7 @@ import static org.lwjgl.cuda.CUDA.*;
  */
 public class CU {
 
-    private static final SharedLibrary NVCUDA = Library.loadNative(CU.class, "org.lwjgl.cuda", Configuration.CUDA_LIBRARY_NAME, "nvcuda");
+    private static final SharedLibrary NVCUDA = Library.loadNative(CU.class, "org.lwjgl.cuda", Configuration.CUDA_LIBRARY_NAME, Platform.get() == Platform.WINDOWS ? "nvcuda" : "cuda");
 
     /** Contains the function pointers loaded from the NVCUDA {@link SharedLibrary}. */
     public static final class Functions {

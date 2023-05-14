@@ -6,7 +6,7 @@ package cuda
 
 import org.lwjgl.generator.*
 
-val NVCUDA_BINDING = simpleBinding(Module.CUDA, libraryName = "NVCUDA", libraryExpression = "Configuration.CUDA_LIBRARY_NAME, \"nvcuda\"")
+val NVCUDA_BINDING = simpleBinding(Module.CUDA, libraryName = "NVCUDA", libraryExpression = "Configuration.CUDA_LIBRARY_NAME, Platform.get() == Platform.WINDOWS ? \"nvcuda\" : \"cuda\"")
 val NVCUDA_BINDING_DELEGATE = NVCUDA_BINDING.delegate("CU.getLibrary()")
 
 internal fun Func.versioned(version: Int = 2): Func = NativeName("__CUDA_API_VERSION(\"${this.name}\", $version)")..this
