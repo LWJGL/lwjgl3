@@ -14,10 +14,10 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Native bindings to the {@code AL_EXT_static_buffer} extension.
+ * Native bindings to the {@code AL_EXT_STATIC_BUFFER} extension.
  * 
  * <p>This extension provides a means for the caller to avoid the overhead associated with the {@link AL10#alBufferData BufferData} call which performs a physical copy of the
- * data provided by the caller to internal buffers. When using the {@code AL_EXT_static_buffer} extension, OpenAL's internal buffers use the data pointer provided by
+ * data provided by the caller to internal buffers. When using the {@code AL_EXT_STATIC_BUFFER} extension, OpenAL's internal buffers use the data pointer provided by
  * the caller for all data access.</p>
  */
 public class EXTStaticBuffer {

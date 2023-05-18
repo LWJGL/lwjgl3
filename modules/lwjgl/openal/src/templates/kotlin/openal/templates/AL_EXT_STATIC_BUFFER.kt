@@ -7,7 +7,7 @@ package openal.templates
 import org.lwjgl.generator.*
 import openal.*
 
-val AL_EXT_static_buffer = "EXTStaticBuffer".nativeClassAL("EXT_static_buffer") {
+val AL_EXT_STATIC_BUFFER = "EXTStaticBuffer".nativeClassAL("EXT_STATIC_BUFFER") {
     documentation =
         """
         Native bindings to the $extensionName extension.

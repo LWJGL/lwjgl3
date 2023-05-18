@@ -356,6 +356,7 @@ public final class JNI {
     public static native void invokeCV(int param0, short param1, long __functionAddress);
     public static native void invokeCV(short param0, int param1, long __functionAddress);
     public static native void invokeCV(short param0, boolean param1, long __functionAddress);
+    public static native void invokeJV(int param0, long param1, long __functionAddress);
     public static native void invokeJV(long param0, int param1, long __functionAddress);
     public static native void invokePV(int param0, long param1, long __functionAddress);
     public static native void invokePV(long param0, float param1, long __functionAddress);
@@ -393,6 +394,7 @@ public final class JNI {
     public static native void invokeCPV(short param0, long param1, int param2, long __functionAddress);
     public static native void invokePCV(long param0, int param1, short param2, long __functionAddress);
     public static native void invokePCV(long param0, short param1, boolean param2, long __functionAddress);
+    public static native void invokePJV(int param0, long param1, long param2, long __functionAddress);
     public static native void invokePJV(long param0, int param1, long param2, long __functionAddress);
     public static native void invokePJV(long param0, long param1, int param2, long __functionAddress);
     public static native void invokePPV(int param0, long param1, long param2, long __functionAddress);
@@ -1238,6 +1240,7 @@ public final class JNI {
     public static native void invokePV(int param0, int param1, int param2, int param3, int param4, int param5, @Nullable int[] param6, long __functionAddress);
     public static native void invokePV(int param0, int param1, int param2, int param3, int param4, int param5, @Nullable short[] param6, long __functionAddress);
     public static native void invokeUPV(byte param0, @Nullable float[] param1, long __functionAddress);
+    public static native void invokePJV(int param0, @Nullable int[] param1, long param2, long __functionAddress);
     public static native void invokePPV(long param0, @Nullable float[] param1, int param2, long __functionAddress);
     public static native void invokePPV(long param0, @Nullable int[] param1, int param2, long __functionAddress);
     public static native void invokePPV(long param0, @Nullable short[] param1, int param2, long __functionAddress);

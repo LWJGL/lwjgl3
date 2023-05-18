@@ -127,7 +127,7 @@ public final class ALCapabilities {
         alGetAuxiliaryEffectSlotf,
         alGetAuxiliaryEffectSlotfv;
 
-    // EXT_static_buffer
+    // EXT_STATIC_BUFFER
     public final long
         alBufferDataStatic;
 
@@ -180,6 +180,11 @@ public final class ALCapabilities {
     public final long
         alGetStringiSOFT;
 
+    // SOFT_source_start_delay
+    public final long
+        alSourcePlayAtTimeSOFT,
+        alSourcePlayAtTimevSOFT;
+
     /** When true, {@link AL10} is supported. */
     public final boolean OpenAL10;
     /** When true, {@link AL11} is supported. */
@@ -215,7 +220,7 @@ public final class ALCapabilities {
     /** When true, {@link EXTSourceRadius} is supported. */
     public final boolean AL_EXT_SOURCE_RADIUS;
     /** When true, {@link EXTStaticBuffer} is supported. */
-    public final boolean AL_EXT_static_buffer;
+    public final boolean AL_EXT_STATIC_BUFFER;
     /** When true, {@link EXTStereoAngles} is supported. */
     public final boolean AL_EXT_STEREO_ANGLES;
     /** When true, {@link EXTVorbis} is supported. */
@@ -230,6 +235,8 @@ public final class ALCapabilities {
     public final boolean AL_SOFT_bformat_ex;
     /** When true, {@link SOFTBlockAlignment} is supported. */
     public final boolean AL_SOFT_block_alignment;
+    /** When true, {@link SOFTBufferLengthQuery} is supported. */
+    public final boolean AL_SOFT_buffer_length_query;
     /** When true, {@link SOFTBufferSamples} is supported. */
     public final boolean AL_SOFT_buffer_samples;
     /** When true, {@link SOFTBufferSubData} is supported. */
@@ -260,8 +267,12 @@ public final class ALCapabilities {
     public final boolean AL_SOFT_source_resampler;
     /** When true, {@link SOFTSourceSpatialize} is supported. */
     public final boolean AL_SOFT_source_spatialize;
+    /** When true, {@link SOFTSourceStartDelay} is supported. */
+    public final boolean AL_SOFT_source_start_delay;
     /** When true, {@link SOFTUHJ} is supported. */
     public final boolean AL_SOFT_UHJ;
+    /** When true, {@link SOFTUHJEx} is supported. */
+    public final boolean AL_SOFT_UHJ_ex;
     /** When true, {@link SOFTXHoldOnDisconnect} is supported. */
     public final boolean AL_SOFTX_hold_on_disconnect;
 
@@ -269,7 +280,7 @@ public final class ALCapabilities {
     final PointerBuffer addresses;
 
     ALCapabilities(FunctionProvider provider, Set<String> ext, IntFunction<PointerBuffer> bufferFactory) {
-        PointerBuffer caps = bufferFactory.apply(131);
+        PointerBuffer caps = bufferFactory.apply(133);
 
         OpenAL10 = check_AL10(provider, caps, ext);
         OpenAL11 = check_AL11(provider, caps, ext);
@@ -288,7 +299,7 @@ public final class ALCapabilities {
         AL_EXT_OFFSET = ext.contains("AL_EXT_OFFSET");
         AL_EXT_source_distance_model = ext.contains("AL_EXT_source_distance_model");
         AL_EXT_SOURCE_RADIUS = ext.contains("AL_EXT_SOURCE_RADIUS");
-        AL_EXT_static_buffer = check_EXT_static_buffer(provider, caps, ext);
+        AL_EXT_STATIC_BUFFER = check_EXT_STATIC_BUFFER(provider, caps, ext);
         AL_EXT_STEREO_ANGLES = ext.contains("AL_EXT_STEREO_ANGLES");
         AL_EXT_vorbis = ext.contains("AL_EXT_vorbis");
         AL_LOKI_IMA_ADPCM = ext.contains("AL_LOKI_IMA_ADPCM");
@@ -296,6 +307,7 @@ public final class ALCapabilities {
         AL_LOKI_WAVE_format = ext.contains("AL_LOKI_WAVE_format");
         AL_SOFT_bformat_ex = ext.contains("AL_SOFT_bformat_ex");
         AL_SOFT_block_alignment = ext.contains("AL_SOFT_block_alignment");
+        AL_SOFT_buffer_length_query = ext.contains("AL_SOFT_buffer_length_query");
         AL_SOFT_buffer_samples = check_SOFT_buffer_samples(provider, caps, ext);
         AL_SOFT_buffer_sub_data = check_SOFT_buffer_sub_data(provider, caps, ext);
         AL_SOFT_callback_buffer = check_SOFT_callback_buffer(provider, caps, ext);
@@ -311,7 +323,9 @@ public final class ALCapabilities {
         AL_SOFT_source_length = ext.contains("AL_SOFT_source_length");
         AL_SOFT_source_resampler = check_SOFT_source_resampler(provider, caps, ext);
         AL_SOFT_source_spatialize = ext.contains("AL_SOFT_source_spatialize");
+        AL_SOFT_source_start_delay = check_SOFT_source_start_delay(provider, caps, ext);
         AL_SOFT_UHJ = ext.contains("AL_SOFT_UHJ");
+        AL_SOFT_UHJ_ex = ext.contains("AL_SOFT_UHJ_ex");
         AL_SOFTX_hold_on_disconnect = ext.contains("AL_SOFTX_hold_on_disconnect");
 
         alGetError = caps.get(0);
@@ -445,6 +459,8 @@ public final class ALCapabilities {
         alGetSource3i64SOFT = caps.get(128);
         alGetSourcei64vSOFT = caps.get(129);
         alGetStringiSOFT = caps.get(130);
+        alSourcePlayAtTimeSOFT = caps.get(131);
+        alSourcePlayAtTimevSOFT = caps.get(132);
 
         addresses = ThreadLocalUtil.setupAddressBuffer(caps);
     }
@@ -502,8 +518,8 @@ public final class ALCapabilities {
         ) || reportMissing("AL", "ALC_EXT_EFX");
     }
 
-    private static boolean check_EXT_static_buffer(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
-        if (!ext.contains("AL_EXT_static_buffer")) {
+    private static boolean check_EXT_STATIC_BUFFER(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("AL_EXT_STATIC_BUFFER")) {
             return false;
         }
 
@@ -511,7 +527,7 @@ public final class ALCapabilities {
             102
         },
             "alBufferDataStatic"
-        ) || reportMissing("AL", "AL_EXT_static_buffer");
+        ) || reportMissing("AL", "AL_EXT_STATIC_BUFFER");
     }
 
     private static boolean check_SOFT_buffer_samples(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
@@ -597,6 +613,18 @@ public final class ALCapabilities {
         },
             "alGetStringiSOFT"
         ) || reportMissing("AL", "AL_SOFT_source_resampler");
+    }
+
+    private static boolean check_SOFT_source_start_delay(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
+        if (!ext.contains("AL_SOFT_source_start_delay")) {
+            return false;
+        }
+
+        return checkFunctions(provider, caps, new int[] {
+            131, 132
+        },
+            "alSourcePlayAtTimeSOFT", "alSourcePlayAtTimevSOFT"
+        ) || reportMissing("AL", "AL_SOFT_source_start_delay");
     }
 
 }
