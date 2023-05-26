@@ -71,6 +71,7 @@ following platforms/architectures:
 - Linux x64
 - Linux arm64 (ARMv8/AArch64)
 - Linux arm32 (ARMv7/armhf)
+- Linux riscv64
 - macOS x64
 - macOS arm64
 - Windows x64

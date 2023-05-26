@@ -1,9 +1,7 @@
 /* -----------------------------------------------------------------*-C-*-
-   ffitarget.h - Copyright (c) 2012  Anthony Green
-                 Copyright (c) 2010  CodeSourcery
-                 Copyright (c) 1996-2003  Red Hat, Inc.
+   ffitarget.h - 2014 Michael Knyszek
 
-   Target configuration macros for ARM.
+   Target configuration macros for RISC-V.
 
    Permission is hereby granted, free of charge, to any person obtaining
    a copy of this software and associated documentation files (the
@@ -34,70 +32,51 @@
 #error "Please do not include ffitarget.h directly into your source.  Use ffi.h instead."
 #endif
 
-#ifndef LIBFFI_ASM
-typedef unsigned long          ffi_arg;
-typedef signed long            ffi_sarg;
-
-typedef enum ffi_abi {
-  FFI_FIRST_ABI = 0,
-  FFI_SYSV,
-  FFI_VFP,
-  FFI_LAST_ABI,
-#if defined(__ARM_PCS_VFP) || defined(_WIN32)
-  FFI_DEFAULT_ABI = FFI_VFP,
-#else
-  FFI_DEFAULT_ABI = FFI_SYSV,
+#ifndef __riscv
+#error "libffi was configured for a RISC-V target but this does not appear to be a RISC-V compiler."
 #endif
 
-  // LWJGL
+#ifndef LIBFFI_ASM
+
+typedef unsigned long ffi_arg;
+typedef   signed long ffi_sarg;
+
+/* FFI_UNUSED_NN and riscv_unused are to maintain ABI compatibility with a
+   distributed Berkeley patch from 2014, and can be removed at SONAME bump */
+typedef enum ffi_abi {
+    FFI_FIRST_ABI = 0,
+    FFI_SYSV,
+    FFI_UNUSED_1,
+    FFI_UNUSED_2,
+    FFI_UNUSED_3,
+    FFI_LAST_ABI,
+
+    FFI_DEFAULT_ABI = FFI_SYSV,
+// LWJGL
   FFI_WIN64 = -1,
   FFI_GNUW64 = -1,
   FFI_UNIX64 = -1,
   FFI_EFI64 = -1,
-  //FFI_SYSV = -1,
+//FFI_SYSV = -1,
   FFI_STDCALL = -1,
   FFI_THISCALL = -1,
   FFI_FASTCALL = -1,
   FFI_MS_CDECL = -1,
   FFI_PASCAL = -1,
   FFI_REGISTER = -1,
-  //FFI_VFP = -1,
+  FFI_VFP = -1
 } ffi_abi;
-#endif
 
-#define FFI_EXTRA_CIF_FIELDS			\
-  int vfp_used;					\
-  unsigned short vfp_reg_free, vfp_nargs;	\
-  signed char vfp_args[16]			\
-
-#define FFI_TARGET_SPECIFIC_VARIADIC
-#ifndef _WIN32
-#define FFI_TARGET_HAS_COMPLEX_TYPE
-#endif
+#endif /* LIBFFI_ASM */
 
 /* ---- Definitions for closures ----------------------------------------- */
 
 #define FFI_CLOSURES 1
 #define FFI_GO_CLOSURES 1
+#define FFI_TRAMPOLINE_SIZE 24
 #define FFI_NATIVE_RAW_API 0
-
-#if defined (FFI_EXEC_TRAMPOLINE_TABLE) && FFI_EXEC_TRAMPOLINE_TABLE
-
-#ifdef __MACH__
-#define FFI_TRAMPOLINE_SIZE 12
-#define FFI_TRAMPOLINE_CLOSURE_OFFSET 8
-#else
-#error "No trampoline table implementation"
-#endif
-
-#else
-#ifdef _WIN32
-#define FFI_TRAMPOLINE_SIZE 16
-#define FFI_TRAMPOLINE_CLOSURE_FUNCTION 12
-#else
-#define FFI_TRAMPOLINE_SIZE 12
-#endif
-#define FFI_TRAMPOLINE_CLOSURE_OFFSET FFI_TRAMPOLINE_SIZE
-#endif
+#define FFI_EXTRA_CIF_FIELDS unsigned riscv_nfixedargs; unsigned riscv_unused;
+#define FFI_TARGET_SPECIFIC_VARIADIC
 
 #endif
+
