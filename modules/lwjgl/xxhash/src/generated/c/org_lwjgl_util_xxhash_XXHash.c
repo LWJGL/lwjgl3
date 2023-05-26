@@ -6,12 +6,12 @@
 #include "common_tools.h"
 DISABLE_WARNINGS()
 #include "lwjgl_malloc.h"
-#if defined(LWJGL_arm64) || defined(LWJGL_arm32)
-    #define XXH_INLINE_ALL
-    #include "xxhash.h"
-#else
+#if defined(LWJGL_x86) || defined(LWJGL_x64)
     #include "xxh_x86dispatch.c"
     #include "xxh_x86dispatch.h"
+#else
+    #define XXH_INLINE_ALL
+    #include "xxhash.h"
 #endif
 ENABLE_WARNINGS()
 

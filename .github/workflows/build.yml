@@ -51,7 +51,9 @@ jobs:
         ARCH: [x64]
         include:
           - ARCH: x64
-            PACKAGES: libX11-devel libXt-devel gtk3-devel libdbus-1-dev
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Upgrade git
         run: |
@@ -72,7 +74,7 @@ jobs:
           yum -y install ant awscli zstd
       - name: Install LWJGL dependencies
         run: |
-          yum -y install ${{matrix.PACKAGES}}
+          yum -y install libX11-devel libXt-devel gtk3-devel libdbus-1-dev
           mkdir jdk8
           curl -L https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-fx-jdk8.0.382-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
       - name: Restore kotlinc output
@@ -126,24 +128,29 @@ jobs:
     needs: cache-kotlinc
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:18.04
+      image: ${{matrix.CONTAINER}}
     strategy:
       fail-fast: false
       matrix:
-        ARCH: [arm32, arm64]
+        ARCH: [arm32, arm64, riscv64]
         include:
           - ARCH: arm32
-            PACKAGES: gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf libc6-dev-armhf-cross
             CROSS_ARCH: armhf
-            CROSS_PACKAGES: libgtk-3-dev:armhf libatk-bridge2.0-dev:armhf libgdk-pixbuf2.0-dev:armhf libglu-dev:armhf libgl1-mesa-glx:armhf libx11-dev:armhf libxt-dev:armhf libdbus-1-dev:armhf
-            NATIVE_PARAMS: -Dgcc.libpath.opengl=/usr/lib/arm-linux-gnueabihf/mesa
+            CONTAINER: ubuntu:18.04
+            TRIPLET: arm-linux-gnueabihf
           - ARCH: arm64
-            PACKAGES: gcc-aarch64-linux-gnu g++-aarch64-linux-gnu libc6-dev-arm64-cross
             CROSS_ARCH: arm64
-            CROSS_PACKAGES: libgtk-3-dev:arm64 libatk-bridge2.0-dev:arm64 libgdk-pixbuf2.0-dev:arm64 libglu-dev:arm64 libgl1-mesa-glx:arm64 libx11-dev:arm64 libxt-dev:arm64 libdbus-1-dev:arm64
-            NATIVE_PARAMS: -Dgcc.libpath.opengl=/usr/lib/aarch64-linux-gnu/mesa
+            CONTAINER: ubuntu:18.04
+            TRIPLET: aarch64-linux-gnu
+          - ARCH: riscv64
+            CROSS_ARCH: riscv64
+            CONTAINER: ubuntu:20.04
+            TRIPLET: riscv64-linux-gnu
     env:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Upgrade git
         run: |
@@ -153,6 +160,8 @@ jobs:
           apt-get -y update
           apt-get -y upgrade
           add-apt-repository -y ppa:git-core/ppa
+        if: ${{ matrix.CONTAINER == 'ubuntu:18.04' }}
+      - run: |
           apt-get -y update
           apt-get install -y git
       - name: Checkout repository
@@ -162,20 +171,20 @@ jobs:
       - name: Install dependencies
         run: |
           git config --global --add safe.directory $(pwd)
-          DEBIAN_FRONTEND=noninteractive apt-get -yq install ant awscli curl zstd ${{matrix.PACKAGES}}
+          DEBIAN_FRONTEND=noninteractive apt-get -yq install ant awscli curl zstd gcc-${{matrix.TRIPLET}} g++-${{matrix.TRIPLET}} libc6-dev-${{matrix.CROSS_ARCH}}-cross
           mkdir jdk8
           curl -L https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-fx-jdk8.0.382-linux_x64.tar.gz | tar xz -C jdk8 --strip-components 1
-      - name: Prepare cross-compilation
+      - name: Prepare cross-compilation for $${matrix.CROSS_ARCH}}
         run: |
           sed -i 's/deb http/deb [arch=amd64,i386] http/' /etc/apt/sources.list
           grep "ubuntu.com/ubuntu" /etc/apt/sources.list | tee /etc/apt/sources.list.d/ports.list
-          sed -i 's/amd64,i386/armhf,arm64/' /etc/apt/sources.list.d/ports.list
+          sed -i 's/amd64,i386/${{matrix.CROSS_ARCH}}/' /etc/apt/sources.list.d/ports.list
           sed -i 's#http://.*/ubuntu#http://ports.ubuntu.com/ubuntu-ports#' /etc/apt/sources.list.d/ports.list
           dpkg --add-architecture ${{matrix.CROSS_ARCH}}
           apt-get clean
           apt-get update || true
       - name: Install cross-compilation dependencies
-        run: apt-get -yq -f --allow-unauthenticated --no-install-suggests --no-install-recommends install ${{matrix.CROSS_PACKAGES}} -o Dpkg::Options::="--force-overwrite"
+        run: apt-get -yq -f --allow-unauthenticated --no-install-suggests --no-install-recommends install libgtk-3-dev:${{matrix.CROSS_ARCH}} libatk-bridge2.0-dev:${{matrix.CROSS_ARCH}} libgdk-pixbuf2.0-dev:${{matrix.CROSS_ARCH}} libglu-dev:${{matrix.CROSS_ARCH}} libgl1-mesa-glx:${{matrix.CROSS_ARCH}} libx11-dev:${{matrix.CROSS_ARCH}} libxt-dev:${{matrix.CROSS_ARCH}} libdbus-1-dev:${{matrix.CROSS_ARCH}} -o Dpkg::Options::="--force-overwrite"
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -190,7 +199,7 @@ jobs:
       - name: Build Java
         run: ant -emacs compile
       - name: Build native
-        run: ant -emacs compile-native ${{matrix.NATIVE_PARAMS}}
+        run: ant -emacs compile-native -Dgcc.libpath.opengl=/usr/lib/${{matrix.TRIPLET}}/mesa
 
   macos:
     name: macOS
@@ -268,6 +277,9 @@ jobs:
             MSVC_ARCH: amd64
           - ARCH: arm64
             MSVC_ARCH: amd64_arm64
+    defaults:
+      run:
+        shell: cmd
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -285,6 +297,7 @@ jobs:
           Invoke-WebRequest https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-fx-jdk8.0.382-win_x64.zip -OutFile jdk.zip
           Expand-Archive -Path jdk.zip -DestinationPath .\
           Rename-Item zulu8.72.0.17-ca-fx-jdk8.0.382-win_x64 jdk8
+        shell: pwsh
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
@@ -296,39 +309,35 @@ jobs:
           fail-on-cache-miss: true
       - name: Generate bindings
         run: ant -emacs clean-generated generate
-        shell: cmd
       - name: Build Java
         run: ant -emacs compile
-        shell: cmd
       - name: Switch to x86 JDK
         run: |
           Remove-Item -Recurse jdk8
           Invoke-WebRequest https://cdn.azul.com/zulu/bin/zulu8.72.0.17-ca-fx-jdk8.0.382-win_i686.zip -OutFile jdk.zip
           Expand-Archive -Path jdk.zip -DestinationPath .\
           Rename-Item zulu8.72.0.17-ca-fx-jdk8.0.382-win_i686 jdk8
+        shell: pwsh
         if: matrix.ARCH == 'x86'
       - name: Build native
         run: |
           set LWJGL_BUILD_ARCH=${{matrix.ARCH}}
           ant -emacs compile-native
-        shell: cmd
       - name: Run tests
         run: ant -emacs tests
-        shell: cmd
         if: contains(matrix.ARCH, 'arm') != true
       - name: Print test results
         run: type bin\test\testng-results.xml
-        shell: cmd
         if: failure()
       - name: Run demo with OpenJDK
         run: ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
-        shell: cmd
         if: matrix.ARCH == 'x64'
       - name: Download GraalVM
         run: |
           Invoke-WebRequest https://download.oracle.com/graalvm/21/latest/graalvm-jdk-21_windows-x64_bin.zip -OutFile jdk-graalvm.zip
           Expand-Archive -Path jdk-graalvm.zip -DestinationPath .\
           Get-ChildItem graalvm-jdk-21* | Rename-Item -newname jdk-graalvm-21
+        shell: pwsh
         if: matrix.ARCH == 'x64'
       - name: Build GraalVM Native Image
         run: |
@@ -341,15 +350,12 @@ jobs:
           bin/libs/native;^
           config/native-image ^
           org.lwjgl.demo.util.lz4.HelloLZ4 --verbose --no-fallback
-        shell: cmd
         if: matrix.ARCH == 'x64'
       - name: Run demo with GraalVM JIT
         run: |
           set JAVA_HOME=jdk-graalvm-21
           ant demo -Dclass=org.lwjgl.demo.util.lz4.HelloLZ4
-        shell: cmd
         if: matrix.ARCH == 'x64'
       - name: Run demo with GraalVM Native Image
         run: org.lwjgl.demo.util.lz4.hellolz4.exe
-        shell: cmd
         if: matrix.ARCH == 'x64'
