@@ -23,7 +23,7 @@ val EXT_opacity_micromap = "EXTOpacityMicromap".nativeClassVK("EXT_opacity_micro
             <li>a structure to extend ##VkAccelerationStructureGeometryTrianglesDataKHR to attach a micromap to the geometry of the acceleration structure.</li>
         </ul>
 
-        <h5>Reference code</h5>
+        <h5>Reference Code</h5>
         <pre><code>
 ￿uint32_t BarycentricsToSpaceFillingCurveIndex(float u, float v, uint32_t level)
 ￿{

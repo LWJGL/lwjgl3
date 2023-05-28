@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>If {@code accelerationStructure} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} then {@code accelerationStructure} <b>must</b> have been created with {@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} set in {@link VkAccelerationStructureCreateInfoKHR}{@code ::createFlags}</li>
- * <li>If {@code accelerationStructureNV} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} then {@code accelerationStructureNV} <b>must</b> have been created with {@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} set in {@link VkAccelerationStructureCreateInfoNV}::info{@code ::flags}</li>
+ * <li>If {@code accelerationStructureNV} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} then {@code accelerationStructureNV} <b>must</b> have been created with {@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} set in {@link VkAccelerationStructureCreateInfoNV}{@code ::info.flags}</li>
  * <li>If {@code accelerationStructure} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} then {@code accelerationStructureNV} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * <li>If {@code accelerationStructureNV} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} then {@code accelerationStructure} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
  * </ul>

@@ -132,7 +132,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
     /** the number of {@link VkPipelineColorBlendAttachmentState} elements in {@code pAttachments}. */
     @NativeType("uint32_t")
     public int attachmentCount() { return nattachmentCount(address()); }
-    /** a pointer to an array of {@link VkPipelineColorBlendAttachmentState} structures defining blend state for each color attachment. It is ignored if the pipeline is created with {@link EXTExtendedDynamicState3#VK_DYNAMIC_STATE_COLOR_BLEND_ENABLE_EXT DYNAMIC_STATE_COLOR_BLEND_ENABLE_EXT}, {@link EXTExtendedDynamicState3#VK_DYNAMIC_STATE_COLOR_BLEND_EQUATION_EXT DYNAMIC_STATE_COLOR_BLEND_EQUATION_EXT}, and {@link EXTExtendedDynamicState3#VK_DYNAMIC_STATE_COLOR_WRITE_MASK_EXT DYNAMIC_STATE_COLOR_WRITE_MASK_EXT} dynamic states set. */
+    /** a pointer to an array of {@link VkPipelineColorBlendAttachmentState} structures defining blend state for each color attachment. It is ignored if the pipeline is created with {@link EXTExtendedDynamicState3#VK_DYNAMIC_STATE_COLOR_BLEND_ADVANCED_EXT DYNAMIC_STATE_COLOR_BLEND_ADVANCED_EXT}, {@link EXTExtendedDynamicState3#VK_DYNAMIC_STATE_COLOR_BLEND_ENABLE_EXT DYNAMIC_STATE_COLOR_BLEND_ENABLE_EXT}, {@link EXTExtendedDynamicState3#VK_DYNAMIC_STATE_COLOR_BLEND_EQUATION_EXT DYNAMIC_STATE_COLOR_BLEND_EQUATION_EXT}, and {@link EXTExtendedDynamicState3#VK_DYNAMIC_STATE_COLOR_WRITE_MASK_EXT DYNAMIC_STATE_COLOR_WRITE_MASK_EXT} dynamic states set. */
     @Nullable
     @NativeType("VkPipelineColorBlendAttachmentState const *")
     public VkPipelineColorBlendAttachmentState.Buffer pAttachments() { return npAttachments(address()); }

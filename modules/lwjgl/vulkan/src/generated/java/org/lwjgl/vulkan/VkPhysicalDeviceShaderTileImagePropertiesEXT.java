@@ -98,7 +98,7 @@ public class VkPhysicalDeviceShaderTileImagePropertiesEXT extends Struct impleme
     /** a boolean that will be {@link VK10#VK_TRUE TRUE} if coherent reads of tile image data is accelerated. */
     @NativeType("VkBool32")
     public boolean shaderTileImageCoherentReadAccelerated() { return nshaderTileImageCoherentReadAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if reading from samples from a pixel rate fragment invocation is supported when {@link VkPipelineMultisampleStateCreateInfo}::rasterizationSamples &gt; 1. */
+    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if reading from samples from a pixel rate fragment invocation is supported when {@link VkPipelineMultisampleStateCreateInfo}{@code ::rasterizationSamples} &gt; 1. */
     @NativeType("VkBool32")
     public boolean shaderTileImageReadSampleFromPixelRateInvocation() { return nshaderTileImageReadSampleFromPixelRateInvocation(address()) != 0; }
     /** a boolean that will be {@link VK10#VK_TRUE TRUE} if reads of tile image data from helper fragment invocations result in valid values. */

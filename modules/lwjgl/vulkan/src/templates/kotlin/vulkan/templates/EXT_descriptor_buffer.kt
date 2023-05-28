@@ -227,7 +227,7 @@ val EXT_descriptor_buffer = "EXTDescriptorBuffer".nativeClassVK("EXT_descriptor_
         Each binding in a descriptor set layout is assigned an offset in memory by the implementation. When a shader accesses a resource with that binding, it will access the bound descriptor buffer from that offset to look for its descriptor. This command provides an application with that offset, so that descriptors can be placed in the correct locations. The precise location accessed by a shader for a given descriptor is as follows:
 
         <dl>
-            <dd><code>location = bufferAddress + setOffset + descriptorOffset (arrayElement * descriptorSize)</code></dd>
+            <dd><code>location = bufferAddress + setOffset + descriptorOffset + (arrayElement × descriptorSize)</code></dd>
         </dl>
 
         where <code>bufferAddress</code> and <code>setOffset</code> are the base address and offset for the identified descriptor set as specified by #CmdBindDescriptorBuffersEXT() and #CmdSetDescriptorBufferOffsetsEXT(), <code>descriptorOffset</code> is the offset for the binding returned by this command, <code>arrayElement</code> is the index into the array specified in the shader, and <code>descriptorSize</code> is the size of the relevant descriptor as obtained from ##VkPhysicalDeviceDescriptorBufferPropertiesEXT. Applications are responsible for placing valid descriptors at the expected location in order for a shader to access it. The overall offset added to <code>bufferAddress</code> to calculate <code>location</code> <b>must</b> be less than ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxSamplerDescriptorBufferRange} for samplers and ##VkPhysicalDeviceDescriptorBufferPropertiesEXT{@code ::maxResourceDescriptorBufferRange} for resources.

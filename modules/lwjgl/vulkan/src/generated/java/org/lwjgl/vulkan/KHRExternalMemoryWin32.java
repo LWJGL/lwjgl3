@@ -182,7 +182,7 @@ public class KHRExternalMemoryWin32 {
      * <h5>Valid Usage</h5>
      * 
      * <ul>
-     * <li>{@code handle} <b>must</b> be an external memory handle created outside of the Vulkan API</li>
+     * <li>{@code handle} <b>must</b> point to a valid Windows memory handle</li>
      * <li>{@code handleType} <b>must</b> not be one of the handle types defined as opaque</li>
      * </ul>
      * 

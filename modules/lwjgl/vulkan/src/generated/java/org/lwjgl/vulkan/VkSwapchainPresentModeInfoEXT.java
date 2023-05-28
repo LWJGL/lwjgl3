@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * 
  * <ul>
  * <li>{@code swapchainCount} <b>must</b> be equal to {@link VkPresentInfoKHR}{@code ::swapchainCount}</li>
- * <li>Each entry in {@code pPresentModes} must be a presentation mode specified in {@link VkSwapchainPresentModesCreateInfoEXT}::pPresentModes when creating the entry’s corresponding swapchain</li>
+ * <li>Each entry in {@code pPresentModes} must be a presentation mode specified in {@link VkSwapchainPresentModesCreateInfoEXT}{@code ::pPresentModes} when creating the entry’s corresponding swapchain</li>
  * </ul>
  * 
  * <h5>Valid Usage (Implicit)</h5>
@@ -105,7 +105,7 @@ public class VkSwapchainPresentModeInfoEXT extends Struct implements NativeResou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure. */

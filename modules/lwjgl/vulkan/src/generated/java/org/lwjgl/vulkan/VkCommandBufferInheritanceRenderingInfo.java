@@ -128,7 +128,7 @@ public class VkCommandBufferInheritanceRenderingInfo extends Struct implements N
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this structure */
+    /** the type of this structure. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
     /** {@code NULL} or a pointer to a structure extending this structure */
