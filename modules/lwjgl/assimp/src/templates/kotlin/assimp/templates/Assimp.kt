@@ -1181,6 +1181,20 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
     StringConstant(
         """
+        Specifies whether to use the deprecated {@code KHR_materials_pbrSpecularGlossiness} extension.
+
+        When this flag is undefined any material with specularity will use the new {@code KHR_materials_specular} extension. Enabling this flag will revert to
+        the deprecated extension. Note that exporting {@code KHR_materials_pbrSpecularGlossiness} with extensions other than {@code KHR_materials_unlit} is
+        unsupported, including the basic {@code pbrMetallicRoughness spec.
+
+        Property type: Bool. Default value: false.
+        """,
+
+        "AI_CONFIG_USE_GLTF_PBR_SPECULAR_GLOSSINESS".."USE_GLTF_PBR_SPECULAR_GLOSSINESS"
+    ).noPrefix()
+
+    StringConstant(
+        """
         Specifies the blob name, assimp uses for exporting.
 
         Some formats require auxiliary files to be written, that need to be linked back into the original file. For example, OBJ files export materials to a
