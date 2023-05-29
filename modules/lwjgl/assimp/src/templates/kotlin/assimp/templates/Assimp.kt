@@ -1185,7 +1185,7 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
 
         When this flag is undefined any material with specularity will use the new {@code KHR_materials_specular} extension. Enabling this flag will revert to
         the deprecated extension. Note that exporting {@code KHR_materials_pbrSpecularGlossiness} with extensions other than {@code KHR_materials_unlit} is
-        unsupported, including the basic {@code pbrMetallicRoughness spec.
+        unsupported, including the basic {@code pbrMetallicRoughness} spec.
 
         Property type: Bool. Default value: false.
         """,
