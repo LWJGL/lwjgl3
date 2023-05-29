@@ -105,6 +105,7 @@ __cold int io_uring_queue_mmap(int fd, struct io_uring_params *p,
 		ring->flags = p->flags;
 		ring->ring_fd = ring->enter_ring_fd = fd;
 		ring->int_flags = 0;
+		return 0;
 	}
 	return ret;
 }
@@ -401,7 +402,6 @@ static struct io_uring_buf_ring *br_setup(struct io_uring *ring,
 	}
 
 	return br;
-
 }
 #else
 static struct io_uring_buf_ring *br_setup(struct io_uring *ring,
@@ -434,7 +434,6 @@ static struct io_uring_buf_ring *br_setup(struct io_uring *ring,
 	}
 
 	return br;
-
 }
 #endif
 

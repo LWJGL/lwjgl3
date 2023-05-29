@@ -1399,6 +1399,22 @@ public class LibURing {
         nio_uring_prep_send(sqe.address(), sockfd, memAddress(buf), buf.remaining(), flags);
     }
 
+    // --- [ io_uring_prep_send_set_addr ] ---
+
+    public static native void nio_uring_prep_send_set_addr(long sqe, long dest_addr, short addr_len);
+
+    public static void io_uring_prep_send_set_addr(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("struct sockaddr const *") Sockaddr dest_addr, @NativeType("__u16") short addr_len) {
+        nio_uring_prep_send_set_addr(sqe.address(), dest_addr.address(), addr_len);
+    }
+
+    // --- [ io_uring_prep_sendto ] ---
+
+    public static native void nio_uring_prep_sendto(long sqe, int sockfd, long buf, long len, int flags, long addr, int addrlen);
+
+    public static void io_uring_prep_sendto(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, int sockfd, @NativeType("void const *") ByteBuffer buf, int flags, @NativeType("struct sockaddr const *") Sockaddr addr, @NativeType("socklen_t") int addrlen) {
+        nio_uring_prep_sendto(sqe.address(), sockfd, memAddress(buf), buf.remaining(), flags, addr.address(), addrlen);
+    }
+
     // --- [ io_uring_prep_send_zc ] ---
 
     public static native void nio_uring_prep_send_zc(long sqe, int sockfd, long buf, long len, int flags, int zc_flags);
@@ -1424,14 +1440,6 @@ public class LibURing {
             Msghdr.validate(msg.address());
         }
         nio_uring_prep_sendmsg_zc(sqe.address(), fd, msg.address(), flags);
-    }
-
-    // --- [ io_uring_prep_send_set_addr ] ---
-
-    public static native void nio_uring_prep_send_set_addr(long sqe, long dest_addr, short addr_len);
-
-    public static void io_uring_prep_send_set_addr(@NativeType("struct io_uring_sqe *") IOURingSQE sqe, @NativeType("struct sockaddr const *") Sockaddr dest_addr, @NativeType("__u16") short addr_len) {
-        nio_uring_prep_send_set_addr(sqe.address(), dest_addr.address(), addr_len);
     }
 
     // --- [ io_uring_prep_recv ] ---

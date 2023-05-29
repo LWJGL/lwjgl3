@@ -1000,6 +1000,7 @@ if (flags & IORING_SQ_NEED_WAKEUP)
         "TIMEOUT_REALTIME".enum("", "1 << 3"),
         "LINK_TIMEOUT_UPDATE".enum("", "1 << 4"),
         "TIMEOUT_ETIME_SUCCESS".enum("", "1 << 5"),
+        "TIMEOUT_MULTISHOT".enum("", "1 << 6"),
         "TIMEOUT_CLOCK_MASK".enum("", "IORING_TIMEOUT_BOOTTIME | IORING_TIMEOUT_REALTIME"),
         "TIMEOUT_UPDATE_MASK".enum("", "IORING_TIMEOUT_UPDATE | IORING_LINK_TIMEOUT_UPDATE")
     )

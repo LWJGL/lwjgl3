@@ -1301,6 +1301,28 @@ struct io_uring_buf {
     )
 
     void(
+        "prep_send_set_addr",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        sockaddr.const.p("dest_addr", ""),
+        __u16("addr_len", "")
+    )
+
+    void(
+        "prep_sendto",
+        "",
+
+        io_uring_sqe.p("sqe", ""),
+        int("sockfd", ""),
+        void.const.p("buf", ""),
+        AutoSize("buf")..size_t("len", ""),
+        int("flags", ""),
+        sockaddr.const.p("addr", ""),
+        socklen_t("addrlen", "")
+    )
+
+    void(
         "prep_send_zc",
         "",
 
@@ -1333,15 +1355,6 @@ struct io_uring_buf {
         int("fd", ""),
         msghdr.const.p("msg", ""),
         unsigned("flags", "")
-    )
-
-    void(
-        "prep_send_set_addr",
-        "",
-
-        io_uring_sqe.p("sqe", ""),
-        sockaddr.const.p("dest_addr", ""),
-        __u16("addr_len", "")
     )
 
     void(

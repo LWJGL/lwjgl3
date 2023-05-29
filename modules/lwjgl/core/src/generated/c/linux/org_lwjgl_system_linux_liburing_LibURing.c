@@ -672,6 +672,21 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     io_uring_prep_send(sqe, sockfd, buf, (size_t)len, flags);
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1send_1set_1addr(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong dest_addrAddress, jshort addr_len) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    struct sockaddr const *dest_addr = (struct sockaddr const *)(uintptr_t)dest_addrAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_prep_send_set_addr(sqe, dest_addr, (__u16)addr_len);
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1sendto(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint sockfd, jlong bufAddress, jlong len, jint flags, jlong addrAddress, jint addrlen) {
+    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
+    void const *buf = (void const *)(uintptr_t)bufAddress;
+    struct sockaddr const *addr = (struct sockaddr const *)(uintptr_t)addrAddress;
+    UNUSED_PARAMS(__env, clazz)
+    io_uring_prep_sendto(sqe, sockfd, buf, (size_t)len, flags, addr, (socklen_t)addrlen);
+}
+
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1send_1zc(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint sockfd, jlong bufAddress, jlong len, jint flags, jint zc_flags) {
     struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
     void const *buf = (void const *)(uintptr_t)bufAddress;
@@ -691,13 +706,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_
     struct msghdr const *msg = (struct msghdr const *)(uintptr_t)msgAddress;
     UNUSED_PARAMS(__env, clazz)
     io_uring_prep_sendmsg_zc(sqe, fd, msg, (unsigned)flags);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1send_1set_1addr(JNIEnv *__env, jclass clazz, jlong sqeAddress, jlong dest_addrAddress, jshort addr_len) {
-    struct io_uring_sqe *sqe = (struct io_uring_sqe *)(uintptr_t)sqeAddress;
-    struct sockaddr const *dest_addr = (struct sockaddr const *)(uintptr_t)dest_addrAddress;
-    UNUSED_PARAMS(__env, clazz)
-    io_uring_prep_send_set_addr(sqe, dest_addr, (__u16)addr_len);
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_system_linux_liburing_LibURing_nio_1uring_1prep_1recv(JNIEnv *__env, jclass clazz, jlong sqeAddress, jint sockfd, jlong bufAddress, jlong len, jint flags) {
