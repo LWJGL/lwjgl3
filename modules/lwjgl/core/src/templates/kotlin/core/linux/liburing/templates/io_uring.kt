@@ -11,6 +11,9 @@ import core.linux.liburing.*
 val LibIOURing = "LibIOURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath = "linux", prefixConstant = "IORING_", prefixMethod = "io_uring_") {
     nativeDirective(
         """DISABLE_WARNINGS()
+#ifdef LWJGL_LINUX
+    _Pragma("GCC diagnostic ignored \"-Wsign-compare\"")
+#endif
 #include "liburing/compat.h"
 #include "liburing/io_uring.h"
 #include "syscall.h"

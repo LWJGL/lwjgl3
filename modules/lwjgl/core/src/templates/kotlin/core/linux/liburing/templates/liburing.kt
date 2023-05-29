@@ -11,6 +11,9 @@ import core.linux.liburing.*
 val LibURing = "LibURing".nativeClass(Module.CORE_LINUX_LIBURING, nativeSubPath = "linux", prefixConstant = "", prefixMethod = "io_uring_") {
     nativeDirective(
         """DISABLE_WARNINGS()
+#ifdef LWJGL_LINUX
+    _Pragma("GCC diagnostic ignored \"-Wsign-compare\"")
+#endif
 #include "liburing.h"
 ENABLE_WARNINGS()""")
     javaImport("org.lwjgl.system.linux.*")
