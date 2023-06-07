@@ -96,6 +96,13 @@ public final class ThreadLocalUtil {
     /** A function to delegate to when an unsupported function is called. */
     private static final long FUNCTION_MISSING_ABORT = getFunctionMissingAbort();
 
+    /**
+     * An array filled with {@link #FUNCTION_MISSING_ABORT}.
+     *
+     * <p>The array size depends on whether OpenGL or OpenGL ES is used.</p>
+     */
+    private static long FUNCTION_MISSING_ABORT_TABLE = NULL;
+
     /** The offset in JNIEnv at which to store the pointer to the capabilities array. */
     private static final int CAPABILITIES_OFFSET = 3 * POINTER_SIZE;
 
@@ -164,9 +171,7 @@ public final class ThreadLocalUtil {
 
         if (capabilities == NULL) {
             if (env_p != JNI_NATIVE_INTERFACE) {
-                memPutAddress(env_p + CAPABILITIES_OFFSET,
-                    // FUNCTION_MISSING_ABORT table
-                    memGetAddress(JNI_NATIVE_INTERFACE + CAPABILITIES_OFFSET));
+                memPutAddress(env_p + CAPABILITIES_OFFSET, FUNCTION_MISSING_ABORT_TABLE);
             }
         } else {
             if (env_p == JNI_NATIVE_INTERFACE) {
@@ -179,20 +184,34 @@ public final class ThreadLocalUtil {
 
     // Ensures FUNCTION_MISSING_ABORT will be called even if no context is current,
     public static void setFunctionMissingAddresses(int functionCount) {
+        // OpenJDK: NULL
+        // GraalVM Native Image: pointer to UnimplementedWithJNIEnvArgument function (see #875)
+        long RESERVED0_NULL = memGetAddress(JNI_NATIVE_INTERFACE);
+
         long ptr = JNI_NATIVE_INTERFACE + CAPABILITIES_OFFSET;
+
+        long currentTable = memGetAddress(ptr);
         if (functionCount == 0) {
-            long missingCaps = memGetAddress(ptr);
-            if (missingCaps != NULL) {
-                getAllocator().free(missingCaps);
+            if (currentTable != RESERVED0_NULL) {
+                FUNCTION_MISSING_ABORT_TABLE = NULL;
+                getAllocator().free(currentTable);
                 memPutAddress(ptr, NULL);
             }
         } else {
-            long missingCaps = getAllocator().malloc(Integer.toUnsignedLong(functionCount) * POINTER_SIZE);
-            for (int i = 0; i < functionCount; i++) {
-                memPutAddress(missingCaps + Integer.toUnsignedLong(i) * POINTER_SIZE, FUNCTION_MISSING_ABORT);
+            if (currentTable != RESERVED0_NULL) {
+                throw new IllegalStateException("setFunctionMissingAddresses has been called already");
+            }
+            if (currentTable != NULL) {
+                // silently abort on Native Image, the global JNIEnv object lives in read-only memory by default. (see #875)
+                return;
             }
 
-            memPutAddress(ptr, missingCaps);
+            FUNCTION_MISSING_ABORT_TABLE = getAllocator().malloc(Integer.toUnsignedLong(functionCount) * POINTER_SIZE);
+            for (int i = 0; i < functionCount; i++) {
+                memPutAddress(FUNCTION_MISSING_ABORT_TABLE + Integer.toUnsignedLong(i) * POINTER_SIZE, FUNCTION_MISSING_ABORT);
+            }
+
+            memPutAddress(ptr, FUNCTION_MISSING_ABORT_TABLE);
         }
     }
 

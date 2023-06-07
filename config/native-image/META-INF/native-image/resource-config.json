@@ -1,0 +1,10 @@
+{
+  "resources": {
+    "includes": [
+      {
+        "pattern": "^.+?\\.(cl|dll|dylib|frag|jpg|mhr|obj|ogg|png|so|ttf|vert)$"
+      }
+    ]
+  },
+  "bundles": []
+}

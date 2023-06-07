@@ -48,7 +48,7 @@ val WinBase = "WinBase".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "window
 
     Code(
         nativeCall = """${t}EnvData *envData = (EnvData *)(*__env)->reserved2;
-${t}return envData == NULL ? 0 : envData->LastError;"""
+${t}return envData == (*__env)->reserved0 ? 0 : envData->LastError;"""
     )..DWORD(
         "getLastError",
         """

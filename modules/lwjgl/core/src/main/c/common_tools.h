@@ -57,7 +57,7 @@ extern JNIEnv* getEnv(jboolean* async);
 #define saveErrno() \
     jint errnum = errno; \
     EnvData *envData = (EnvData *)(*__env)->reserved2; \
-    if (envData == NULL) { \
+    if (envData == (*__env)->reserved0) { \
         jclass TLU = (*__env)->FindClass(__env, "org/lwjgl/system/ThreadLocalUtil"); \
         envData = (EnvData *)(uintptr_t)(*__env)->CallStaticLongMethod(__env, TLU, (*__env)->GetStaticMethodID(__env, TLU, "setupEnvData", "()J")); \
     } \
@@ -67,7 +67,7 @@ extern JNIEnv* getEnv(jboolean* async);
     #define saveLastError() \
         jint LastError = (jint)GetLastError(); \
         EnvData *envData = (EnvData *)(*__env)->reserved2; \
-        if (envData == NULL) { \
+        if (envData == (*__env)->reserved0) { \
             jclass TLU = (*__env)->FindClass(__env, "org/lwjgl/system/ThreadLocalUtil"); \
             envData = (EnvData *)(uintptr_t)(*__env)->CallStaticLongMethod(__env, TLU, (*__env)->GetStaticMethodID(__env, TLU, "setupEnvData", "()J")); \
         } \

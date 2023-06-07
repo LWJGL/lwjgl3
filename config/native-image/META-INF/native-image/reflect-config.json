@@ -1,0 +1,13 @@
+[
+  {"name": "java.nio.Buffer", "allDeclaredFields": true},
+  {"name": "java.nio.ByteBuffer", "allDeclaredFields": true},
+  {"name": "java.nio.MappedByteBuffer", "allDeclaredFields": true},
+  {"name": "java.nio.DirectByteBuffer", "allDeclaredFields": true, "unsafeAllocated": true},
+  {"name": "java.nio.DirectCharBufferU", "allDeclaredFields": true, "unsafeAllocated": true},
+  {"name": "java.nio.DirectDoubleBufferU", "allDeclaredFields": true, "unsafeAllocated": true},
+  {"name": "java.nio.DirectFloatBufferU", "allDeclaredFields": true, "unsafeAllocated": true},
+  {"name": "java.nio.DirectIntBufferU", "allDeclaredFields": true, "unsafeAllocated": true},
+  {"name": "java.nio.DirectLongBufferU", "allDeclaredFields": true, "unsafeAllocated": true},
+  {"name": "java.nio.DirectShortBufferU", "allDeclaredFields": true, "unsafeAllocated": true},
+  {"name": "sun.misc.Unsafe", "allDeclaredFields": true}
+]

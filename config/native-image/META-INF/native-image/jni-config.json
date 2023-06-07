@@ -1,0 +1,10 @@
+[
+{
+  "name":"org.lwjgl.system.CallbackI",
+  "methods":[{"name":"callback","parameterTypes":["long","long"] }]
+},
+{
+  "name":"org.lwjgl.system.ThreadLocalUtil",
+  "methods":[{"name":"setupEnvData","parameterTypes":[] }]
+}
+]

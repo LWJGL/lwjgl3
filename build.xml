@@ -945,6 +945,8 @@
             <jvmarg line="-XX:+PrintAssembly -XX:PrintAssemblyOptions=intel -XX:-TieredCompilation -XX:-UseCompressedOops" if:set="jitwatch"/>
             <jvmarg line="-XX:LogFile=${jitwatch}" if:set="jitwatch"/>
 
+            <!--<jvmarg line="-agentlib:native-image-agent=config-output-dir=META-INF/native-image"/>-->
+
             <jvmarg line="${jvmargs}" if:set="jvmargs"/>
 
             <arg line="${args}" if:set="args"/>
