@@ -41,7 +41,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     VkDeviceSize {@link #heapUsage}[VK_MAX_MEMORY_HEAPS];
  * }</code></pre>
  */
-public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct<VkPhysicalDeviceMemoryBudgetPropertiesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -71,6 +71,15 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
         PNEXT = layout.offsetof(1);
         HEAPBUDGET = layout.offsetof(2);
         HEAPUSAGE = layout.offsetof(3);
+    }
+
+    protected VkPhysicalDeviceMemoryBudgetPropertiesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceMemoryBudgetPropertiesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceMemoryBudgetPropertiesEXT(address, container);
     }
 
     /**
@@ -139,29 +148,29 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
 
     /** Returns a new {@code VkPhysicalDeviceMemoryBudgetPropertiesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT malloc() {
-        return wrap(VkPhysicalDeviceMemoryBudgetPropertiesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceMemoryBudgetPropertiesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMemoryBudgetPropertiesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT calloc() {
-        return wrap(VkPhysicalDeviceMemoryBudgetPropertiesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceMemoryBudgetPropertiesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMemoryBudgetPropertiesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceMemoryBudgetPropertiesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceMemoryBudgetPropertiesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMemoryBudgetPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT create(long address) {
-        return wrap(VkPhysicalDeviceMemoryBudgetPropertiesEXT.class, address);
+        return new VkPhysicalDeviceMemoryBudgetPropertiesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceMemoryBudgetPropertiesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceMemoryBudgetPropertiesEXT(address, null);
     }
 
     /**
@@ -170,7 +179,7 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -179,7 +188,7 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -189,7 +198,7 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
      */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -199,13 +208,13 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -233,7 +242,7 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceMemoryBudgetPropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceMemoryBudgetPropertiesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -242,7 +251,7 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceMemoryBudgetPropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceMemoryBudgetPropertiesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -252,7 +261,7 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -262,7 +271,7 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -299,9 +308,9 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct implements
         /**
          * Creates a new {@code VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

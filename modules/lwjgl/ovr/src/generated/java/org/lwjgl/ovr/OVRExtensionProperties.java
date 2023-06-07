@@ -28,7 +28,7 @@ import static org.lwjgl.ovr.OVR.OVR_MAX_EXTENSION_NAME_SIZE;
  * }</code></pre>
  */
 @NativeType("struct ovrExtensionProperties")
-public class OVRExtensionProperties extends Struct {
+public class OVRExtensionProperties extends Struct<OVRExtensionProperties> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -55,6 +55,15 @@ public class OVRExtensionProperties extends Struct {
         EXTENSIONID = layout.offsetof(0);
         EXTENSIONNAME = layout.offsetof(1);
         EXTENSIONVERSION = layout.offsetof(2);
+    }
+
+    protected OVRExtensionProperties(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected OVRExtensionProperties create(long address, @Nullable ByteBuffer container) {
+        return new OVRExtensionProperties(address, container);
     }
 
     /**
@@ -86,13 +95,13 @@ public class OVRExtensionProperties extends Struct {
 
     /** Returns a new {@code OVRExtensionProperties} instance for the specified memory address. */
     public static OVRExtensionProperties create(long address) {
-        return wrap(OVRExtensionProperties.class, address);
+        return new OVRExtensionProperties(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRExtensionProperties createSafe(long address) {
-        return address == NULL ? null : wrap(OVRExtensionProperties.class, address);
+        return address == NULL ? null : new OVRExtensionProperties(address, null);
     }
 
     /**
@@ -102,13 +111,13 @@ public class OVRExtensionProperties extends Struct {
      * @param capacity the buffer capacity
      */
     public static OVRExtensionProperties.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRExtensionProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -132,9 +141,9 @@ public class OVRExtensionProperties extends Struct {
         /**
          * Creates a new {@code OVRExtensionProperties.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link OVRExtensionProperties#SIZEOF}, and its mark will be undefined.
+         * by {@link OVRExtensionProperties#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

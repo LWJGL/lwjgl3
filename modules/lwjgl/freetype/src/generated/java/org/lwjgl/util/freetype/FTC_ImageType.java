@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct FTC_ImageTypeRec")
-public class FTC_ImageType extends Struct {
+public class FTC_ImageType extends Struct<FTC_ImageType> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -57,6 +57,15 @@ public class FTC_ImageType extends Struct {
         WIDTH = layout.offsetof(1);
         HEIGHT = layout.offsetof(2);
         FLAGS = layout.offsetof(3);
+    }
+
+    protected FTC_ImageType(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FTC_ImageType create(long address, @Nullable ByteBuffer container) {
+        return new FTC_ImageType(address, container);
     }
 
     /**
@@ -89,13 +98,13 @@ public class FTC_ImageType extends Struct {
 
     /** Returns a new {@code FTC_ImageType} instance for the specified memory address. */
     public static FTC_ImageType create(long address) {
-        return wrap(FTC_ImageType.class, address);
+        return new FTC_ImageType(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FTC_ImageType createSafe(long address) {
-        return address == NULL ? null : wrap(FTC_ImageType.class, address);
+        return address == NULL ? null : new FTC_ImageType(address, null);
     }
 
     /**
@@ -105,13 +114,13 @@ public class FTC_ImageType extends Struct {
      * @param capacity the buffer capacity
      */
     public static FTC_ImageType.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FTC_ImageType.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -135,9 +144,9 @@ public class FTC_ImageType extends Struct {
         /**
          * Creates a new {@code FTC_ImageType.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FTC_ImageType#SIZEOF}, and its mark will be undefined.
+         * by {@link FTC_ImageType#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link CXIdxLoc CXIdxLoc} loc;
  * }</code></pre>
  */
-public class CXIdxAttrInfo extends Struct implements NativeResource {
+public class CXIdxAttrInfo extends Struct<CXIdxAttrInfo> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -54,6 +54,15 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
         LOC = layout.offsetof(2);
     }
 
+    protected CXIdxAttrInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CXIdxAttrInfo create(long address, @Nullable ByteBuffer container) {
+        return new CXIdxAttrInfo(address, container);
+    }
+
     /**
      * Creates a {@code CXIdxAttrInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -79,29 +88,29 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
 
     /** Returns a new {@code CXIdxAttrInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CXIdxAttrInfo malloc() {
-        return wrap(CXIdxAttrInfo.class, nmemAllocChecked(SIZEOF));
+        return new CXIdxAttrInfo(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code CXIdxAttrInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CXIdxAttrInfo calloc() {
-        return wrap(CXIdxAttrInfo.class, nmemCallocChecked(1, SIZEOF));
+        return new CXIdxAttrInfo(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code CXIdxAttrInfo} instance allocated with {@link BufferUtils}. */
     public static CXIdxAttrInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(CXIdxAttrInfo.class, memAddress(container), container);
+        return new CXIdxAttrInfo(memAddress(container), container);
     }
 
     /** Returns a new {@code CXIdxAttrInfo} instance for the specified memory address. */
     public static CXIdxAttrInfo create(long address) {
-        return wrap(CXIdxAttrInfo.class, address);
+        return new CXIdxAttrInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CXIdxAttrInfo createSafe(long address) {
-        return address == NULL ? null : wrap(CXIdxAttrInfo.class, address);
+        return address == NULL ? null : new CXIdxAttrInfo(address, null);
     }
 
     /**
@@ -110,7 +119,7 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CXIdxAttrInfo.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -119,7 +128,7 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CXIdxAttrInfo.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -129,7 +138,7 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
      */
     public static CXIdxAttrInfo.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -139,13 +148,13 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CXIdxAttrInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CXIdxAttrInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -173,7 +182,7 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CXIdxAttrInfo malloc(MemoryStack stack) {
-        return wrap(CXIdxAttrInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new CXIdxAttrInfo(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -182,7 +191,7 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CXIdxAttrInfo calloc(MemoryStack stack) {
-        return wrap(CXIdxAttrInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new CXIdxAttrInfo(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -192,7 +201,7 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CXIdxAttrInfo.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CXIdxAttrInfo.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -224,9 +233,9 @@ public class CXIdxAttrInfo extends Struct implements NativeResource {
         /**
          * Creates a new {@code CXIdxAttrInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CXIdxAttrInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link CXIdxAttrInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

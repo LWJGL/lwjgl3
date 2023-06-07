@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VmaAllocation {@link #dstTmpAllocation};
  * }</code></pre>
  */
-public class VmaDefragmentationMove extends Struct implements NativeResource {
+public class VmaDefragmentationMove extends Struct<VmaDefragmentationMove> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -55,6 +55,15 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
         OPERATION = layout.offsetof(0);
         SRCALLOCATION = layout.offsetof(1);
         DSTTMPALLOCATION = layout.offsetof(2);
+    }
+
+    protected VmaDefragmentationMove(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VmaDefragmentationMove create(long address, @Nullable ByteBuffer container) {
+        return new VmaDefragmentationMove(address, container);
     }
 
     /**
@@ -126,29 +135,29 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
 
     /** Returns a new {@code VmaDefragmentationMove} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VmaDefragmentationMove malloc() {
-        return wrap(VmaDefragmentationMove.class, nmemAllocChecked(SIZEOF));
+        return new VmaDefragmentationMove(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VmaDefragmentationMove} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VmaDefragmentationMove calloc() {
-        return wrap(VmaDefragmentationMove.class, nmemCallocChecked(1, SIZEOF));
+        return new VmaDefragmentationMove(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VmaDefragmentationMove} instance allocated with {@link BufferUtils}. */
     public static VmaDefragmentationMove create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VmaDefragmentationMove.class, memAddress(container), container);
+        return new VmaDefragmentationMove(memAddress(container), container);
     }
 
     /** Returns a new {@code VmaDefragmentationMove} instance for the specified memory address. */
     public static VmaDefragmentationMove create(long address) {
-        return wrap(VmaDefragmentationMove.class, address);
+        return new VmaDefragmentationMove(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VmaDefragmentationMove createSafe(long address) {
-        return address == NULL ? null : wrap(VmaDefragmentationMove.class, address);
+        return address == NULL ? null : new VmaDefragmentationMove(address, null);
     }
 
     /**
@@ -157,7 +166,7 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDefragmentationMove.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -166,7 +175,7 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDefragmentationMove.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -176,7 +185,7 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
      */
     public static VmaDefragmentationMove.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -186,13 +195,13 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDefragmentationMove.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VmaDefragmentationMove.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -201,7 +210,7 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VmaDefragmentationMove malloc(MemoryStack stack) {
-        return wrap(VmaDefragmentationMove.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VmaDefragmentationMove(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -210,7 +219,7 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VmaDefragmentationMove calloc(MemoryStack stack) {
-        return wrap(VmaDefragmentationMove.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VmaDefragmentationMove(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -220,7 +229,7 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDefragmentationMove.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -230,7 +239,7 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VmaDefragmentationMove.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -269,9 +278,9 @@ public class VmaDefragmentationMove extends Struct implements NativeResource {
         /**
          * Creates a new {@code VmaDefragmentationMove.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VmaDefragmentationMove#SIZEOF}, and its mark will be undefined.
+         * by {@link VmaDefragmentationMove#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

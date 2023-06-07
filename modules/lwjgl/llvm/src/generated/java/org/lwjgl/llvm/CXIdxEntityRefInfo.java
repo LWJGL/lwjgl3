@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     CXSymbolRole {@link #role};
  * }</code></pre>
  */
-public class CXIdxEntityRefInfo extends Struct {
+public class CXIdxEntityRefInfo extends Struct<CXIdxEntityRefInfo> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -68,6 +68,15 @@ public class CXIdxEntityRefInfo extends Struct {
         PARENTENTITY = layout.offsetof(4);
         CONTAINER = layout.offsetof(5);
         ROLE = layout.offsetof(6);
+    }
+
+    protected CXIdxEntityRefInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CXIdxEntityRefInfo create(long address, @Nullable ByteBuffer container) {
+        return new CXIdxEntityRefInfo(address, container);
     }
 
     /**
@@ -115,13 +124,13 @@ public class CXIdxEntityRefInfo extends Struct {
 
     /** Returns a new {@code CXIdxEntityRefInfo} instance for the specified memory address. */
     public static CXIdxEntityRefInfo create(long address) {
-        return wrap(CXIdxEntityRefInfo.class, address);
+        return new CXIdxEntityRefInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CXIdxEntityRefInfo createSafe(long address) {
-        return address == NULL ? null : wrap(CXIdxEntityRefInfo.class, address);
+        return address == NULL ? null : new CXIdxEntityRefInfo(address, null);
     }
 
     /**
@@ -131,13 +140,13 @@ public class CXIdxEntityRefInfo extends Struct {
      * @param capacity the buffer capacity
      */
     public static CXIdxEntityRefInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CXIdxEntityRefInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -167,9 +176,9 @@ public class CXIdxEntityRefInfo extends Struct {
         /**
          * Creates a new {@code CXIdxEntityRefInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CXIdxEntityRefInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link CXIdxEntityRefInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

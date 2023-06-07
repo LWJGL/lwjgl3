@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #perViewPositionAllComponents};
  * }</code></pre>
  */
-public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Struct implements NativeResource {
+public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Struct<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         PERVIEWPOSITIONALLCOMPONENTS = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(address, container);
     }
 
     /**
@@ -123,29 +132,29 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
 
     /** Returns a new {@code VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX malloc() {
-        return wrap(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX calloc() {
-        return wrap(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.class, memAddress(container), container);
+        return new VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX} instance for the specified memory address. */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX create(long address) {
-        return wrap(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.class, address);
+        return new VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(address, null);
     }
 
     /**
@@ -154,7 +163,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -163,7 +172,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -173,7 +182,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
      */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -183,13 +192,13 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -217,7 +226,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -226,7 +235,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -236,7 +245,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -246,7 +255,7 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -273,9 +282,9 @@ public class VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX extends Str
         /**
          * Creates a new {@code VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

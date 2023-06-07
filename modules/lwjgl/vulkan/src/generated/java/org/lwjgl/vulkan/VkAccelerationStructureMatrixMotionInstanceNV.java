@@ -70,7 +70,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint64_t {@link #accelerationStructureReference};
  * }</code></pre>
  */
-public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implements NativeResource {
+public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct<VkAccelerationStructureMatrixMotionInstanceNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -103,6 +103,15 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
         BITFIELD0 = layout.offsetof(2);
         BITFIELD1 = layout.offsetof(3);
         ACCELERATIONSTRUCTUREREFERENCE = layout.offsetof(4);
+    }
+
+    protected VkAccelerationStructureMatrixMotionInstanceNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkAccelerationStructureMatrixMotionInstanceNV create(long address, @Nullable ByteBuffer container) {
+        return new VkAccelerationStructureMatrixMotionInstanceNV(address, container);
     }
 
     /**
@@ -201,29 +210,29 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
 
     /** Returns a new {@code VkAccelerationStructureMatrixMotionInstanceNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkAccelerationStructureMatrixMotionInstanceNV malloc() {
-        return wrap(VkAccelerationStructureMatrixMotionInstanceNV.class, nmemAllocChecked(SIZEOF));
+        return new VkAccelerationStructureMatrixMotionInstanceNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkAccelerationStructureMatrixMotionInstanceNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkAccelerationStructureMatrixMotionInstanceNV calloc() {
-        return wrap(VkAccelerationStructureMatrixMotionInstanceNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkAccelerationStructureMatrixMotionInstanceNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkAccelerationStructureMatrixMotionInstanceNV} instance allocated with {@link BufferUtils}. */
     public static VkAccelerationStructureMatrixMotionInstanceNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkAccelerationStructureMatrixMotionInstanceNV.class, memAddress(container), container);
+        return new VkAccelerationStructureMatrixMotionInstanceNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkAccelerationStructureMatrixMotionInstanceNV} instance for the specified memory address. */
     public static VkAccelerationStructureMatrixMotionInstanceNV create(long address) {
-        return wrap(VkAccelerationStructureMatrixMotionInstanceNV.class, address);
+        return new VkAccelerationStructureMatrixMotionInstanceNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAccelerationStructureMatrixMotionInstanceNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkAccelerationStructureMatrixMotionInstanceNV.class, address);
+        return address == NULL ? null : new VkAccelerationStructureMatrixMotionInstanceNV(address, null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureMatrixMotionInstanceNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -241,7 +250,7 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureMatrixMotionInstanceNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -251,7 +260,7 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
      */
     public static VkAccelerationStructureMatrixMotionInstanceNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -261,13 +270,13 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureMatrixMotionInstanceNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAccelerationStructureMatrixMotionInstanceNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -276,7 +285,7 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkAccelerationStructureMatrixMotionInstanceNV malloc(MemoryStack stack) {
-        return wrap(VkAccelerationStructureMatrixMotionInstanceNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkAccelerationStructureMatrixMotionInstanceNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -285,7 +294,7 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkAccelerationStructureMatrixMotionInstanceNV calloc(MemoryStack stack) {
-        return wrap(VkAccelerationStructureMatrixMotionInstanceNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkAccelerationStructureMatrixMotionInstanceNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -295,7 +304,7 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureMatrixMotionInstanceNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -305,7 +314,7 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureMatrixMotionInstanceNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -354,9 +363,9 @@ public class VkAccelerationStructureMatrixMotionInstanceNV extends Struct implem
         /**
          * Creates a new {@code VkAccelerationStructureMatrixMotionInstanceNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkAccelerationStructureMatrixMotionInstanceNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkAccelerationStructureMatrixMotionInstanceNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

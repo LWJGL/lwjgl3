@@ -31,7 +31,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     uint32_t {@link #postMergeIndex};
  * }</code></pre>
  */
-public class VkRenderPassSubpassFeedbackInfoEXT extends Struct {
+public class VkRenderPassSubpassFeedbackInfoEXT extends Struct<VkRenderPassSubpassFeedbackInfoEXT> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -58,6 +58,15 @@ public class VkRenderPassSubpassFeedbackInfoEXT extends Struct {
         SUBPASSMERGESTATUS = layout.offsetof(0);
         DESCRIPTION = layout.offsetof(1);
         POSTMERGEINDEX = layout.offsetof(2);
+    }
+
+    protected VkRenderPassSubpassFeedbackInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkRenderPassSubpassFeedbackInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkRenderPassSubpassFeedbackInfoEXT(address, container);
     }
 
     /**
@@ -90,13 +99,13 @@ public class VkRenderPassSubpassFeedbackInfoEXT extends Struct {
 
     /** Returns a new {@code VkRenderPassSubpassFeedbackInfoEXT} instance for the specified memory address. */
     public static VkRenderPassSubpassFeedbackInfoEXT create(long address) {
-        return wrap(VkRenderPassSubpassFeedbackInfoEXT.class, address);
+        return new VkRenderPassSubpassFeedbackInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkRenderPassSubpassFeedbackInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkRenderPassSubpassFeedbackInfoEXT.class, address);
+        return address == NULL ? null : new VkRenderPassSubpassFeedbackInfoEXT(address, null);
     }
 
     /**
@@ -106,13 +115,13 @@ public class VkRenderPassSubpassFeedbackInfoEXT extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassSubpassFeedbackInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkRenderPassSubpassFeedbackInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -136,9 +145,9 @@ public class VkRenderPassSubpassFeedbackInfoEXT extends Struct {
         /**
          * Creates a new {@code VkRenderPassSubpassFeedbackInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkRenderPassSubpassFeedbackInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkRenderPassSubpassFeedbackInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

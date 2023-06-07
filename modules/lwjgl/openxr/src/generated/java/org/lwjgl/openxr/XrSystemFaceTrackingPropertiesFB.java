@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrBool32 {@link #supportsFaceTracking};
  * }</code></pre>
  */
-public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeResource {
+public class XrSystemFaceTrackingPropertiesFB extends Struct<XrSystemFaceTrackingPropertiesFB> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -68,6 +68,15 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         SUPPORTSFACETRACKING = layout.offsetof(2);
+    }
+
+    protected XrSystemFaceTrackingPropertiesFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSystemFaceTrackingPropertiesFB create(long address, @Nullable ByteBuffer container) {
+        return new XrSystemFaceTrackingPropertiesFB(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
 
     /** Returns a new {@code XrSystemFaceTrackingPropertiesFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSystemFaceTrackingPropertiesFB malloc() {
-        return wrap(XrSystemFaceTrackingPropertiesFB.class, nmemAllocChecked(SIZEOF));
+        return new XrSystemFaceTrackingPropertiesFB(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSystemFaceTrackingPropertiesFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSystemFaceTrackingPropertiesFB calloc() {
-        return wrap(XrSystemFaceTrackingPropertiesFB.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSystemFaceTrackingPropertiesFB(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSystemFaceTrackingPropertiesFB} instance allocated with {@link BufferUtils}. */
     public static XrSystemFaceTrackingPropertiesFB create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSystemFaceTrackingPropertiesFB.class, memAddress(container), container);
+        return new XrSystemFaceTrackingPropertiesFB(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSystemFaceTrackingPropertiesFB} instance for the specified memory address. */
     public static XrSystemFaceTrackingPropertiesFB create(long address) {
-        return wrap(XrSystemFaceTrackingPropertiesFB.class, address);
+        return new XrSystemFaceTrackingPropertiesFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSystemFaceTrackingPropertiesFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrSystemFaceTrackingPropertiesFB.class, address);
+        return address == NULL ? null : new XrSystemFaceTrackingPropertiesFB(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static XrSystemFaceTrackingPropertiesFB.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static XrSystemFaceTrackingPropertiesFB.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
      */
     public static XrSystemFaceTrackingPropertiesFB.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static XrSystemFaceTrackingPropertiesFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSystemFaceTrackingPropertiesFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static XrSystemFaceTrackingPropertiesFB malloc(MemoryStack stack) {
-        return wrap(XrSystemFaceTrackingPropertiesFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSystemFaceTrackingPropertiesFB(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static XrSystemFaceTrackingPropertiesFB calloc(MemoryStack stack) {
-        return wrap(XrSystemFaceTrackingPropertiesFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSystemFaceTrackingPropertiesFB(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static XrSystemFaceTrackingPropertiesFB.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static XrSystemFaceTrackingPropertiesFB.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -258,9 +267,9 @@ public class XrSystemFaceTrackingPropertiesFB extends Struct implements NativeRe
         /**
          * Creates a new {@code XrSystemFaceTrackingPropertiesFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSystemFaceTrackingPropertiesFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSystemFaceTrackingPropertiesFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t const * {@link #pQueueFamilyIndices};
  * }</code></pre>
  */
-public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct<VkPhysicalDeviceImageDrmFormatModifierInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -85,6 +85,15 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
         SHARINGMODE = layout.offsetof(3);
         QUEUEFAMILYINDEXCOUNT = layout.offsetof(4);
         PQUEUEFAMILYINDICES = layout.offsetof(5);
+    }
+
+    protected VkPhysicalDeviceImageDrmFormatModifierInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceImageDrmFormatModifierInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceImageDrmFormatModifierInfoEXT(address, container);
     }
 
     /**
@@ -170,29 +179,29 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
 
     /** Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT malloc() {
-        return wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceImageDrmFormatModifierInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT calloc() {
-        return wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceImageDrmFormatModifierInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceImageDrmFormatModifierInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT create(long address) {
-        return wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, address);
+        return new VkPhysicalDeviceImageDrmFormatModifierInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceImageDrmFormatModifierInfoEXT(address, null);
     }
 
     /**
@@ -201,7 +210,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -210,7 +219,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -220,7 +229,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
      */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -230,13 +239,13 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -264,7 +273,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceImageDrmFormatModifierInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -273,7 +282,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceImageDrmFormatModifierInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceImageDrmFormatModifierInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -283,7 +292,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -293,7 +302,7 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -334,9 +343,9 @@ public class VkPhysicalDeviceImageDrmFormatModifierInfoEXT extends Struct implem
         /**
          * Creates a new {@code VkPhysicalDeviceImageDrmFormatModifierInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

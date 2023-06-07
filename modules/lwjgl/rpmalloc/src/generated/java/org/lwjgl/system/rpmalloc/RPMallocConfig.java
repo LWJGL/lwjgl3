@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct rpmalloc_config_t")
-public class RPMallocConfig extends Struct implements NativeResource {
+public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -91,6 +91,15 @@ public class RPMallocConfig extends Struct implements NativeResource {
         ENABLE_HUGE_PAGES = layout.offsetof(7);
         PAGE_NAME = layout.offsetof(8);
         HUGE_PAGE_NAME = layout.offsetof(9);
+    }
+
+    protected RPMallocConfig(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected RPMallocConfig create(long address, @Nullable ByteBuffer container) {
+        return new RPMallocConfig(address, container);
     }
 
     /**
@@ -243,29 +252,29 @@ public class RPMallocConfig extends Struct implements NativeResource {
 
     /** Returns a new {@code RPMallocConfig} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static RPMallocConfig malloc() {
-        return wrap(RPMallocConfig.class, nmemAllocChecked(SIZEOF));
+        return new RPMallocConfig(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code RPMallocConfig} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static RPMallocConfig calloc() {
-        return wrap(RPMallocConfig.class, nmemCallocChecked(1, SIZEOF));
+        return new RPMallocConfig(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code RPMallocConfig} instance allocated with {@link BufferUtils}. */
     public static RPMallocConfig create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(RPMallocConfig.class, memAddress(container), container);
+        return new RPMallocConfig(memAddress(container), container);
     }
 
     /** Returns a new {@code RPMallocConfig} instance for the specified memory address. */
     public static RPMallocConfig create(long address) {
-        return wrap(RPMallocConfig.class, address);
+        return new RPMallocConfig(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static RPMallocConfig createSafe(long address) {
-        return address == NULL ? null : wrap(RPMallocConfig.class, address);
+        return address == NULL ? null : new RPMallocConfig(address, null);
     }
 
     // -----------------------------------
@@ -286,7 +295,7 @@ public class RPMallocConfig extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static RPMallocConfig malloc(MemoryStack stack) {
-        return wrap(RPMallocConfig.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new RPMallocConfig(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -295,7 +304,7 @@ public class RPMallocConfig extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static RPMallocConfig calloc(MemoryStack stack) {
-        return wrap(RPMallocConfig.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new RPMallocConfig(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

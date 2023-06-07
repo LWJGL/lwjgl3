@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 amigoProfiling;
  * }</code></pre>
  */
-public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements NativeResource {
+public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct<VkPhysicalDeviceAmigoProfilingFeaturesSEC> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -60,6 +60,15 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         AMIGOPROFILING = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceAmigoProfilingFeaturesSEC(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceAmigoProfilingFeaturesSEC create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceAmigoProfilingFeaturesSEC(address, container);
     }
 
     /**
@@ -123,29 +132,29 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
 
     /** Returns a new {@code VkPhysicalDeviceAmigoProfilingFeaturesSEC} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC malloc() {
-        return wrap(VkPhysicalDeviceAmigoProfilingFeaturesSEC.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceAmigoProfilingFeaturesSEC(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAmigoProfilingFeaturesSEC} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC calloc() {
-        return wrap(VkPhysicalDeviceAmigoProfilingFeaturesSEC.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceAmigoProfilingFeaturesSEC(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAmigoProfilingFeaturesSEC} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceAmigoProfilingFeaturesSEC.class, memAddress(container), container);
+        return new VkPhysicalDeviceAmigoProfilingFeaturesSEC(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAmigoProfilingFeaturesSEC} instance for the specified memory address. */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC create(long address) {
-        return wrap(VkPhysicalDeviceAmigoProfilingFeaturesSEC.class, address);
+        return new VkPhysicalDeviceAmigoProfilingFeaturesSEC(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceAmigoProfilingFeaturesSEC.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceAmigoProfilingFeaturesSEC(address, null);
     }
 
     /**
@@ -154,7 +163,7 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -163,7 +172,7 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -173,7 +182,7 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
      */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -183,13 +192,13 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -198,7 +207,7 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceAmigoProfilingFeaturesSEC.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceAmigoProfilingFeaturesSEC(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -207,7 +216,7 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceAmigoProfilingFeaturesSEC.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceAmigoProfilingFeaturesSEC(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -217,7 +226,7 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -227,7 +236,7 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAmigoProfilingFeaturesSEC.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -256,9 +265,9 @@ public class VkPhysicalDeviceAmigoProfilingFeaturesSEC extends Struct implements
         /**
          * Creates a new {@code VkPhysicalDeviceAmigoProfilingFeaturesSEC.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceAmigoProfilingFeaturesSEC#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceAmigoProfilingFeaturesSEC#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

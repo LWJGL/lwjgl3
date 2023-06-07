@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #minLod};
  * }</code></pre>
  */
-public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct<VkPhysicalDeviceImageViewMinLodFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         MINLOD = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceImageViewMinLodFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceImageViewMinLodFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceImageViewMinLodFeaturesEXT(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
 
     /** Returns a new {@code VkPhysicalDeviceImageViewMinLodFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceImageViewMinLodFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceImageViewMinLodFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceImageViewMinLodFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceImageViewMinLodFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceImageViewMinLodFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceImageViewMinLodFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceImageViewMinLodFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceImageViewMinLodFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceImageViewMinLodFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceImageViewMinLodFeaturesEXT.class, address);
+        return new VkPhysicalDeviceImageViewMinLodFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceImageViewMinLodFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceImageViewMinLodFeaturesEXT(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
      */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceImageViewMinLodFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceImageViewMinLodFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceImageViewMinLodFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceImageViewMinLodFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImageViewMinLodFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkPhysicalDeviceImageViewMinLodFeaturesEXT extends Struct implement
         /**
          * Creates a new {@code VkPhysicalDeviceImageViewMinLodFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceImageViewMinLodFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceImageViewMinLodFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

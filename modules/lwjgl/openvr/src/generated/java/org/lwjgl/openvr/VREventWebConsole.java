@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct VREvent_WebConsole_t")
-public class VREventWebConsole extends Struct {
+public class VREventWebConsole extends Struct<VREventWebConsole> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -43,6 +43,15 @@ public class VREventWebConsole extends Struct {
         ALIGNOF = layout.getAlignment();
 
         WEBCONSOLEHANDLE = layout.offsetof(0);
+    }
+
+    protected VREventWebConsole(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VREventWebConsole create(long address, @Nullable ByteBuffer container) {
+        return new VREventWebConsole(address, container);
     }
 
     /**
@@ -66,13 +75,13 @@ public class VREventWebConsole extends Struct {
 
     /** Returns a new {@code VREventWebConsole} instance for the specified memory address. */
     public static VREventWebConsole create(long address) {
-        return wrap(VREventWebConsole.class, address);
+        return new VREventWebConsole(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventWebConsole createSafe(long address) {
-        return address == NULL ? null : wrap(VREventWebConsole.class, address);
+        return address == NULL ? null : new VREventWebConsole(address, null);
     }
 
     /**
@@ -82,13 +91,13 @@ public class VREventWebConsole extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventWebConsole.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventWebConsole.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -106,9 +115,9 @@ public class VREventWebConsole extends Struct {
         /**
          * Creates a new {@code VREventWebConsole.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VREventWebConsole#SIZEOF}, and its mark will be undefined.
+         * by {@link VREventWebConsole#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

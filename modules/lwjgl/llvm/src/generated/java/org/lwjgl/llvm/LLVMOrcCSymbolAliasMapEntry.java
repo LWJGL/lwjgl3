@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link LLVMJITSymbolFlags LLVMJITSymbolFlags} Flags;
  * }</code></pre>
  */
-public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResource {
+public class LLVMOrcCSymbolAliasMapEntry extends Struct<LLVMOrcCSymbolAliasMapEntry> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -51,6 +51,15 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
 
         NAME = layout.offsetof(0);
         FLAGS = layout.offsetof(1);
+    }
+
+    protected LLVMOrcCSymbolAliasMapEntry(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected LLVMOrcCSymbolAliasMapEntry create(long address, @Nullable ByteBuffer container) {
+        return new LLVMOrcCSymbolAliasMapEntry(address, container);
     }
 
     /**
@@ -106,29 +115,29 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
 
     /** Returns a new {@code LLVMOrcCSymbolAliasMapEntry} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static LLVMOrcCSymbolAliasMapEntry malloc() {
-        return wrap(LLVMOrcCSymbolAliasMapEntry.class, nmemAllocChecked(SIZEOF));
+        return new LLVMOrcCSymbolAliasMapEntry(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code LLVMOrcCSymbolAliasMapEntry} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static LLVMOrcCSymbolAliasMapEntry calloc() {
-        return wrap(LLVMOrcCSymbolAliasMapEntry.class, nmemCallocChecked(1, SIZEOF));
+        return new LLVMOrcCSymbolAliasMapEntry(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code LLVMOrcCSymbolAliasMapEntry} instance allocated with {@link BufferUtils}. */
     public static LLVMOrcCSymbolAliasMapEntry create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(LLVMOrcCSymbolAliasMapEntry.class, memAddress(container), container);
+        return new LLVMOrcCSymbolAliasMapEntry(memAddress(container), container);
     }
 
     /** Returns a new {@code LLVMOrcCSymbolAliasMapEntry} instance for the specified memory address. */
     public static LLVMOrcCSymbolAliasMapEntry create(long address) {
-        return wrap(LLVMOrcCSymbolAliasMapEntry.class, address);
+        return new LLVMOrcCSymbolAliasMapEntry(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LLVMOrcCSymbolAliasMapEntry createSafe(long address) {
-        return address == NULL ? null : wrap(LLVMOrcCSymbolAliasMapEntry.class, address);
+        return address == NULL ? null : new LLVMOrcCSymbolAliasMapEntry(address, null);
     }
 
     /**
@@ -137,7 +146,7 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static LLVMOrcCSymbolAliasMapEntry.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -146,7 +155,7 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static LLVMOrcCSymbolAliasMapEntry.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -156,7 +165,7 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
      */
     public static LLVMOrcCSymbolAliasMapEntry.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -166,13 +175,13 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static LLVMOrcCSymbolAliasMapEntry.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LLVMOrcCSymbolAliasMapEntry.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -181,7 +190,7 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static LLVMOrcCSymbolAliasMapEntry malloc(MemoryStack stack) {
-        return wrap(LLVMOrcCSymbolAliasMapEntry.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new LLVMOrcCSymbolAliasMapEntry(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -190,7 +199,7 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static LLVMOrcCSymbolAliasMapEntry calloc(MemoryStack stack) {
-        return wrap(LLVMOrcCSymbolAliasMapEntry.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new LLVMOrcCSymbolAliasMapEntry(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -200,7 +209,7 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static LLVMOrcCSymbolAliasMapEntry.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -210,7 +219,7 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static LLVMOrcCSymbolAliasMapEntry.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -244,9 +253,9 @@ public class LLVMOrcCSymbolAliasMapEntry extends Struct implements NativeResourc
         /**
          * Creates a new {@code LLVMOrcCSymbolAliasMapEntry.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link LLVMOrcCSymbolAliasMapEntry#SIZEOF}, and its mark will be undefined.
+         * by {@link LLVMOrcCSymbolAliasMapEntry#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

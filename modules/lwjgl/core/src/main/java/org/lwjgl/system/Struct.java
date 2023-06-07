@@ -14,31 +14,39 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Base class of all struct implementations. */
-public abstract class Struct extends Pointer.Default {
+public abstract class Struct<SELF extends Struct<SELF>> extends Pointer.Default {
 
     protected static final int DEFAULT_PACK_ALIGNMENT = Platform.get() == Platform.WINDOWS ? 8 : 0x4000_0000;
     protected static final int DEFAULT_ALIGN_AS       = 0;
 
-    private static final long CONTAINER;
-
     static {
         Library.initialize();
-
-        try {
-            CONTAINER = UNSAFE.objectFieldOffset(Struct.class.getDeclaredField("container"));
-        } catch (Throwable t) {
-            throw new UnsupportedOperationException(t);
-        }
     }
 
     @SuppressWarnings({"unused", "FieldCanBeLocal"})
     @Nullable
     protected ByteBuffer container;
 
+    /**
+     * Creates a struct instance at the specified address.
+     *
+     * @param address   the struct memory address
+     * @param container an optional container buffer, to be referenced strongly by the struct instance.
+     */
     protected Struct(long address, @Nullable ByteBuffer container) {
         super(address);
         this.container = container;
     }
+
+    /**
+     * Similar to {@link #Struct(long, ByteBuffer) the constructor}, but returns the exact type of the {@code Struct} subclass.
+     *
+     * <p>Effectively, every {@code Struct} instance is a factory for more instances of the same type. This is used by {@link StructBuffer}.</p>
+     *
+     * @param address   the struct memory address
+     * @param container an optional container buffer, to be referenced strongly by the struct instance.
+     */
+    protected abstract SELF create(long address, @Nullable ByteBuffer container);
 
     /** Returns {@code sizeof(struct)}. */
     public abstract int sizeof();
@@ -75,54 +83,6 @@ public abstract class Struct extends Pointer.Default {
 
     // ---------------- Implementation utilities ----------------
 
-    @SuppressWarnings("unchecked")
-    protected static <T extends Struct> T wrap(Class<T> clazz, long address) {
-        T struct;
-        try {
-            struct = (T)UNSAFE.allocateInstance(clazz);
-        } catch (InstantiationException e) {
-            throw new UnsupportedOperationException(e);
-        }
-
-        UNSAFE.putLong(struct, ADDRESS, address);
-
-        return struct;
-    }
-
-    protected static <S extends Struct, T extends Struct> T wrap(Class<T> clazz, S value) {
-        return wrap(clazz, value.address, value.container);
-    }
-
-    @SuppressWarnings("unchecked")
-    protected static <T extends Struct> T wrap(Class<T> clazz, long address, @Nullable ByteBuffer container) {
-        T struct;
-        try {
-            struct = (T)UNSAFE.allocateInstance(clazz);
-        } catch (InstantiationException e) {
-            throw new UnsupportedOperationException(e);
-        }
-
-        UNSAFE.putLong(struct, ADDRESS, address);
-        UNSAFE.putObject(struct, CONTAINER, container);
-
-        return struct;
-    }
-
-    @SuppressWarnings("unchecked")
-    <T extends Struct> T wrap(long address, int index, @Nullable ByteBuffer container) {
-        T struct;
-        try {
-            struct = (T)UNSAFE.allocateInstance(this.getClass());
-        } catch (InstantiationException e) {
-            throw new UnsupportedOperationException(e);
-        }
-
-        UNSAFE.putLong(struct, ADDRESS, address + Integer.toUnsignedLong(index) * sizeof());
-        UNSAFE.putObject(struct, CONTAINER, container);
-
-        return struct;
-    }
-
     private void checkMemberOffset(int memberOffset) {
         if (memberOffset < 0 || sizeof() - memberOffset < POINTER_SIZE) {
             throw new IllegalArgumentException("Invalid member offset.");
@@ -157,6 +117,17 @@ public abstract class Struct extends Pointer.Default {
         apiCheckAllocation(elements, getBytes(elements, elementSize), 0x7FFF_FFFFL);
         return ByteBuffer.allocateDirect(elements * elementSize).order(ByteOrder.nativeOrder());
     }
+
+    @Nullable
+    protected static <T extends Struct<T>> ByteBuffer __getContainer(T struct) {
+        return struct.container;
+    }
+
+    @Nullable
+    protected static ByteBuffer __getContainer(StructBuffer<?, ?> struct) {
+        return struct.container;
+    }
+
 
     /** A functional interface that enables lambda expressions to be passed to the {@link #validate} method. [INTERNAL USE ONLY] */
     @FunctionalInterface

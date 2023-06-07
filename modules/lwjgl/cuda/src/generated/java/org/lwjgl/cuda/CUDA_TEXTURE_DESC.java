@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int reserved[12];
  * }</code></pre>
  */
-public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
+public class CUDA_TEXTURE_DESC extends Struct<CUDA_TEXTURE_DESC> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -81,6 +81,15 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
         MAXMIPMAPLEVELCLAMP = layout.offsetof(7);
         BORDERCOLOR = layout.offsetof(8);
         RESERVED = layout.offsetof(9);
+    }
+
+    protected CUDA_TEXTURE_DESC(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CUDA_TEXTURE_DESC create(long address, @Nullable ByteBuffer container) {
+        return new CUDA_TEXTURE_DESC(address, container);
     }
 
     /**
@@ -201,29 +210,29 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
 
     /** Returns a new {@code CUDA_TEXTURE_DESC} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CUDA_TEXTURE_DESC malloc() {
-        return wrap(CUDA_TEXTURE_DESC.class, nmemAllocChecked(SIZEOF));
+        return new CUDA_TEXTURE_DESC(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code CUDA_TEXTURE_DESC} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CUDA_TEXTURE_DESC calloc() {
-        return wrap(CUDA_TEXTURE_DESC.class, nmemCallocChecked(1, SIZEOF));
+        return new CUDA_TEXTURE_DESC(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code CUDA_TEXTURE_DESC} instance allocated with {@link BufferUtils}. */
     public static CUDA_TEXTURE_DESC create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(CUDA_TEXTURE_DESC.class, memAddress(container), container);
+        return new CUDA_TEXTURE_DESC(memAddress(container), container);
     }
 
     /** Returns a new {@code CUDA_TEXTURE_DESC} instance for the specified memory address. */
     public static CUDA_TEXTURE_DESC create(long address) {
-        return wrap(CUDA_TEXTURE_DESC.class, address);
+        return new CUDA_TEXTURE_DESC(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CUDA_TEXTURE_DESC createSafe(long address) {
-        return address == NULL ? null : wrap(CUDA_TEXTURE_DESC.class, address);
+        return address == NULL ? null : new CUDA_TEXTURE_DESC(address, null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CUDA_TEXTURE_DESC.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -241,7 +250,7 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CUDA_TEXTURE_DESC.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -251,7 +260,7 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
      */
     public static CUDA_TEXTURE_DESC.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -261,13 +270,13 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CUDA_TEXTURE_DESC.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CUDA_TEXTURE_DESC.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -295,7 +304,7 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CUDA_TEXTURE_DESC malloc(MemoryStack stack) {
-        return wrap(CUDA_TEXTURE_DESC.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new CUDA_TEXTURE_DESC(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -304,7 +313,7 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CUDA_TEXTURE_DESC calloc(MemoryStack stack) {
-        return wrap(CUDA_TEXTURE_DESC.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new CUDA_TEXTURE_DESC(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -314,7 +323,7 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CUDA_TEXTURE_DESC.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -324,7 +333,7 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CUDA_TEXTURE_DESC.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -414,9 +423,9 @@ public class CUDA_TEXTURE_DESC extends Struct implements NativeResource {
         /**
          * Creates a new {@code CUDA_TEXTURE_DESC.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CUDA_TEXTURE_DESC#SIZEOF}, and its mark will be undefined.
+         * by {@link CUDA_TEXTURE_DESC#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

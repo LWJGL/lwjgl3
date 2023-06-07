@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkVertexInputBindingDivisorDescriptionEXT VkVertexInputBindingDivisorDescriptionEXT} const * {@link #pVertexBindingDivisors};
  * }</code></pre>
  */
-public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct implements NativeResource {
+public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct<VkPipelineVertexInputDivisorStateCreateInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -71,6 +71,15 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
         PNEXT = layout.offsetof(1);
         VERTEXBINDINGDIVISORCOUNT = layout.offsetof(2);
         PVERTEXBINDINGDIVISORS = layout.offsetof(3);
+    }
+
+    protected VkPipelineVertexInputDivisorStateCreateInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPipelineVertexInputDivisorStateCreateInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPipelineVertexInputDivisorStateCreateInfoEXT(address, container);
     }
 
     /**
@@ -137,29 +146,29 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
 
     /** Returns a new {@code VkPipelineVertexInputDivisorStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT malloc() {
-        return wrap(VkPipelineVertexInputDivisorStateCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPipelineVertexInputDivisorStateCreateInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineVertexInputDivisorStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT calloc() {
-        return wrap(VkPipelineVertexInputDivisorStateCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPipelineVertexInputDivisorStateCreateInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineVertexInputDivisorStateCreateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPipelineVertexInputDivisorStateCreateInfoEXT.class, memAddress(container), container);
+        return new VkPipelineVertexInputDivisorStateCreateInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPipelineVertexInputDivisorStateCreateInfoEXT} instance for the specified memory address. */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT create(long address) {
-        return wrap(VkPipelineVertexInputDivisorStateCreateInfoEXT.class, address);
+        return new VkPipelineVertexInputDivisorStateCreateInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPipelineVertexInputDivisorStateCreateInfoEXT.class, address);
+        return address == NULL ? null : new VkPipelineVertexInputDivisorStateCreateInfoEXT(address, null);
     }
 
     /**
@@ -168,7 +177,7 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -187,7 +196,7 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
      */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -197,13 +206,13 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -231,7 +240,7 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
      * @param stack the stack from which to allocate
      */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkPipelineVertexInputDivisorStateCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPipelineVertexInputDivisorStateCreateInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -240,7 +249,7 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
      * @param stack the stack from which to allocate
      */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkPipelineVertexInputDivisorStateCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPipelineVertexInputDivisorStateCreateInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -250,7 +259,7 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -260,7 +269,7 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -302,9 +311,9 @@ public class VkPipelineVertexInputDivisorStateCreateInfoEXT extends Struct imple
         /**
          * Creates a new {@code VkPipelineVertexInputDivisorStateCreateInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPipelineVertexInputDivisorStateCreateInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPipelineVertexInputDivisorStateCreateInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

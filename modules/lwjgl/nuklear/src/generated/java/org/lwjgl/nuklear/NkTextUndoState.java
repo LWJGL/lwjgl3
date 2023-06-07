@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct nk_text_undo_state")
-public class NkTextUndoState extends Struct {
+public class NkTextUndoState extends Struct<NkTextUndoState> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class NkTextUndoState extends Struct {
         REDO_POINT = layout.offsetof(3);
         UNDO_CHAR_POINT = layout.offsetof(4);
         REDO_CHAR_POINT = layout.offsetof(5);
+    }
+
+    protected NkTextUndoState(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkTextUndoState create(long address, @Nullable ByteBuffer container) {
+        return new NkTextUndoState(address, container);
     }
 
     /**
@@ -104,13 +113,13 @@ public class NkTextUndoState extends Struct {
 
     /** Returns a new {@code NkTextUndoState} instance for the specified memory address. */
     public static NkTextUndoState create(long address) {
-        return wrap(NkTextUndoState.class, address);
+        return new NkTextUndoState(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkTextUndoState createSafe(long address) {
-        return address == NULL ? null : wrap(NkTextUndoState.class, address);
+        return address == NULL ? null : new NkTextUndoState(address, null);
     }
 
     /**
@@ -120,13 +129,13 @@ public class NkTextUndoState extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkTextUndoState.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkTextUndoState.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -162,9 +171,9 @@ public class NkTextUndoState extends Struct {
         /**
          * Creates a new {@code NkTextUndoState.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkTextUndoState#SIZEOF}, and its mark will be undefined.
+         * by {@link NkTextUndoState#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

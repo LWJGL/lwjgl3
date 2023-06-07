@@ -58,7 +58,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * {@link #pTag};
  * }</code></pre>
  */
-public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResource {
+public class VkDebugMarkerObjectTagInfoEXT extends Struct<VkDebugMarkerObjectTagInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -97,6 +97,15 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
         TAGNAME = layout.offsetof(4);
         TAGSIZE = layout.offsetof(5);
         PTAG = layout.offsetof(6);
+    }
+
+    protected VkDebugMarkerObjectTagInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkDebugMarkerObjectTagInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkDebugMarkerObjectTagInfoEXT(address, container);
     }
 
     /**
@@ -184,29 +193,29 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
 
     /** Returns a new {@code VkDebugMarkerObjectTagInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDebugMarkerObjectTagInfoEXT malloc() {
-        return wrap(VkDebugMarkerObjectTagInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkDebugMarkerObjectTagInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkDebugMarkerObjectTagInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDebugMarkerObjectTagInfoEXT calloc() {
-        return wrap(VkDebugMarkerObjectTagInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkDebugMarkerObjectTagInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkDebugMarkerObjectTagInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkDebugMarkerObjectTagInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkDebugMarkerObjectTagInfoEXT.class, memAddress(container), container);
+        return new VkDebugMarkerObjectTagInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkDebugMarkerObjectTagInfoEXT} instance for the specified memory address. */
     public static VkDebugMarkerObjectTagInfoEXT create(long address) {
-        return wrap(VkDebugMarkerObjectTagInfoEXT.class, address);
+        return new VkDebugMarkerObjectTagInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDebugMarkerObjectTagInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkDebugMarkerObjectTagInfoEXT.class, address);
+        return address == NULL ? null : new VkDebugMarkerObjectTagInfoEXT(address, null);
     }
 
     /**
@@ -215,7 +224,7 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectTagInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -224,7 +233,7 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectTagInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -234,7 +243,7 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
      */
     public static VkDebugMarkerObjectTagInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -244,13 +253,13 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectTagInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDebugMarkerObjectTagInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -278,7 +287,7 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkDebugMarkerObjectTagInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkDebugMarkerObjectTagInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkDebugMarkerObjectTagInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -287,7 +296,7 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkDebugMarkerObjectTagInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkDebugMarkerObjectTagInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkDebugMarkerObjectTagInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -297,7 +306,7 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectTagInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -307,7 +316,7 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkDebugMarkerObjectTagInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -361,9 +370,9 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct implements NativeResou
         /**
          * Creates a new {@code VkDebugMarkerObjectTagInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkDebugMarkerObjectTagInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkDebugMarkerObjectTagInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

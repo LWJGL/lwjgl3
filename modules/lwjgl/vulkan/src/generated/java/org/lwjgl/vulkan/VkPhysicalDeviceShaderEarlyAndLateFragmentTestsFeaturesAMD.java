@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #shaderEarlyAndLateFragmentTests};
  * }</code></pre>
  */
-public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends Struct implements NativeResource {
+public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends Struct<VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         SHADEREARLYANDLATEFRAGMENTTESTS = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
 
     /** Returns a new {@code VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD malloc() {
-        return wrap(VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD calloc() {
-        return wrap(VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.class, memAddress(container), container);
+        return new VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD} instance for the specified memory address. */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD create(long address) {
-        return wrap(VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.class, address);
+        return new VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
      */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
         /**
          * Creates a new {@code VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

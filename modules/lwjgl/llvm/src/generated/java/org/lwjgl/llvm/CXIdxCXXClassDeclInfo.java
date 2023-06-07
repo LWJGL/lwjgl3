@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     unsigned numBases;
  * }</code></pre>
  */
-public class CXIdxCXXClassDeclInfo extends Struct {
+public class CXIdxCXXClassDeclInfo extends Struct<CXIdxCXXClassDeclInfo> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -51,6 +51,15 @@ public class CXIdxCXXClassDeclInfo extends Struct {
         DECLINFO = layout.offsetof(0);
         BASES = layout.offsetof(1);
         NUMBASES = layout.offsetof(2);
+    }
+
+    protected CXIdxCXXClassDeclInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CXIdxCXXClassDeclInfo create(long address, @Nullable ByteBuffer container) {
+        return new CXIdxCXXClassDeclInfo(address, container);
     }
 
     /**
@@ -80,13 +89,13 @@ public class CXIdxCXXClassDeclInfo extends Struct {
 
     /** Returns a new {@code CXIdxCXXClassDeclInfo} instance for the specified memory address. */
     public static CXIdxCXXClassDeclInfo create(long address) {
-        return wrap(CXIdxCXXClassDeclInfo.class, address);
+        return new CXIdxCXXClassDeclInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CXIdxCXXClassDeclInfo createSafe(long address) {
-        return address == NULL ? null : wrap(CXIdxCXXClassDeclInfo.class, address);
+        return address == NULL ? null : new CXIdxCXXClassDeclInfo(address, null);
     }
 
     /**
@@ -96,13 +105,13 @@ public class CXIdxCXXClassDeclInfo extends Struct {
      * @param capacity the buffer capacity
      */
     public static CXIdxCXXClassDeclInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CXIdxCXXClassDeclInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -124,9 +133,9 @@ public class CXIdxCXXClassDeclInfo extends Struct {
         /**
          * Creates a new {@code CXIdxCXXClassDeclInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CXIdxCXXClassDeclInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link CXIdxCXXClassDeclInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * {@link #next};
  * }</code></pre>
  */
-public class XrSwapchainImageBaseHeader extends Struct implements NativeResource {
+public class XrSwapchainImageBaseHeader extends Struct<XrSwapchainImageBaseHeader> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -65,6 +65,15 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
 
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
+    }
+
+    protected XrSwapchainImageBaseHeader(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSwapchainImageBaseHeader create(long address, @Nullable ByteBuffer container) {
+        return new XrSwapchainImageBaseHeader(address, container);
     }
 
     /**
@@ -119,39 +128,39 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
 
     /** Returns a new {@code XrSwapchainImageBaseHeader} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSwapchainImageBaseHeader malloc() {
-        return wrap(XrSwapchainImageBaseHeader.class, nmemAllocChecked(SIZEOF));
+        return new XrSwapchainImageBaseHeader(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSwapchainImageBaseHeader} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSwapchainImageBaseHeader calloc() {
-        return wrap(XrSwapchainImageBaseHeader.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSwapchainImageBaseHeader(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSwapchainImageBaseHeader} instance allocated with {@link BufferUtils}. */
     public static XrSwapchainImageBaseHeader create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSwapchainImageBaseHeader.class, memAddress(container), container);
+        return new XrSwapchainImageBaseHeader(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSwapchainImageBaseHeader} instance for the specified memory address. */
     public static XrSwapchainImageBaseHeader create(long address) {
-        return wrap(XrSwapchainImageBaseHeader.class, address);
+        return new XrSwapchainImageBaseHeader(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSwapchainImageBaseHeader createSafe(long address) {
-        return address == NULL ? null : wrap(XrSwapchainImageBaseHeader.class, address);
+        return address == NULL ? null : new XrSwapchainImageBaseHeader(address, null);
     }
 
     /** Upcasts the specified {@code XrSwapchainImageOpenGLKHR} instance to {@code XrSwapchainImageBaseHeader}. */
     public static XrSwapchainImageBaseHeader create(XrSwapchainImageOpenGLKHR value) {
-        return wrap(XrSwapchainImageBaseHeader.class, value);
+        return new XrSwapchainImageBaseHeader(value.address(), __getContainer(value));
     }
 
     /** Upcasts the specified {@code XrSwapchainImageVulkanKHR} instance to {@code XrSwapchainImageBaseHeader}. */
     public static XrSwapchainImageBaseHeader create(XrSwapchainImageVulkanKHR value) {
-        return wrap(XrSwapchainImageBaseHeader.class, value);
+        return new XrSwapchainImageBaseHeader(value.address(), __getContainer(value));
     }
 
     /**
@@ -160,7 +169,7 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
      * @param capacity the buffer capacity
      */
     public static XrSwapchainImageBaseHeader.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -169,7 +178,7 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
      * @param capacity the buffer capacity
      */
     public static XrSwapchainImageBaseHeader.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -179,7 +188,7 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
      */
     public static XrSwapchainImageBaseHeader.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -189,23 +198,23 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
      * @param capacity the buffer capacity
      */
     public static XrSwapchainImageBaseHeader.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSwapchainImageBaseHeader.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /** Upcasts the specified {@code XrSwapchainImageOpenGLKHR.Buffer} instance to {@code XrSwapchainImageBaseHeader.Buffer}. */
     public static XrSwapchainImageBaseHeader.Buffer create(XrSwapchainImageOpenGLKHR.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrSwapchainImageBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /** Upcasts the specified {@code XrSwapchainImageVulkanKHR.Buffer} instance to {@code XrSwapchainImageBaseHeader.Buffer}. */
     public static XrSwapchainImageBaseHeader.Buffer create(XrSwapchainImageVulkanKHR.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrSwapchainImageBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -214,7 +223,7 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
      * @param stack the stack from which to allocate
      */
     public static XrSwapchainImageBaseHeader malloc(MemoryStack stack) {
-        return wrap(XrSwapchainImageBaseHeader.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSwapchainImageBaseHeader(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -223,7 +232,7 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
      * @param stack the stack from which to allocate
      */
     public static XrSwapchainImageBaseHeader calloc(MemoryStack stack) {
-        return wrap(XrSwapchainImageBaseHeader.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSwapchainImageBaseHeader(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -233,7 +242,7 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
      * @param capacity the buffer capacity
      */
     public static XrSwapchainImageBaseHeader.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -243,7 +252,7 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
      * @param capacity the buffer capacity
      */
     public static XrSwapchainImageBaseHeader.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -268,9 +277,9 @@ public class XrSwapchainImageBaseHeader extends Struct implements NativeResource
         /**
          * Creates a new {@code XrSwapchainImageBaseHeader.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSwapchainImageBaseHeader#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSwapchainImageBaseHeader#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

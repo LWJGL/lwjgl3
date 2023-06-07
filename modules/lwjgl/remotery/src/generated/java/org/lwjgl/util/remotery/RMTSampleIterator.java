@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct rmtSampleIterator")
-public class RMTSampleIterator extends Struct implements NativeResource {
+public class RMTSampleIterator extends Struct<RMTSampleIterator> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -53,6 +53,15 @@ public class RMTSampleIterator extends Struct implements NativeResource {
         INITIAL = layout.offsetof(1);
     }
 
+    protected RMTSampleIterator(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected RMTSampleIterator create(long address, @Nullable ByteBuffer container) {
+        return new RMTSampleIterator(address, container);
+    }
+
     /**
      * Creates a {@code RMTSampleIterator} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -74,29 +83,29 @@ public class RMTSampleIterator extends Struct implements NativeResource {
 
     /** Returns a new {@code RMTSampleIterator} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static RMTSampleIterator malloc() {
-        return wrap(RMTSampleIterator.class, nmemAllocChecked(SIZEOF));
+        return new RMTSampleIterator(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code RMTSampleIterator} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static RMTSampleIterator calloc() {
-        return wrap(RMTSampleIterator.class, nmemCallocChecked(1, SIZEOF));
+        return new RMTSampleIterator(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code RMTSampleIterator} instance allocated with {@link BufferUtils}. */
     public static RMTSampleIterator create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(RMTSampleIterator.class, memAddress(container), container);
+        return new RMTSampleIterator(memAddress(container), container);
     }
 
     /** Returns a new {@code RMTSampleIterator} instance for the specified memory address. */
     public static RMTSampleIterator create(long address) {
-        return wrap(RMTSampleIterator.class, address);
+        return new RMTSampleIterator(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static RMTSampleIterator createSafe(long address) {
-        return address == NULL ? null : wrap(RMTSampleIterator.class, address);
+        return address == NULL ? null : new RMTSampleIterator(address, null);
     }
 
     /**
@@ -105,7 +114,7 @@ public class RMTSampleIterator extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static RMTSampleIterator malloc(MemoryStack stack) {
-        return wrap(RMTSampleIterator.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new RMTSampleIterator(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -114,7 +123,7 @@ public class RMTSampleIterator extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static RMTSampleIterator calloc(MemoryStack stack) {
-        return wrap(RMTSampleIterator.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new RMTSampleIterator(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

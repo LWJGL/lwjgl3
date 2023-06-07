@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkExternalMemoryHandleTypeFlagBits {@link #handleType};
  * }</code></pre>
  */
-public class VkPhysicalDeviceExternalBufferInfo extends Struct implements NativeResource {
+public class VkPhysicalDeviceExternalBufferInfo extends Struct<VkPhysicalDeviceExternalBufferInfo> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -77,6 +77,15 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
         FLAGS = layout.offsetof(2);
         USAGE = layout.offsetof(3);
         HANDLETYPE = layout.offsetof(4);
+    }
+
+    protected VkPhysicalDeviceExternalBufferInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceExternalBufferInfo create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceExternalBufferInfo(address, container);
     }
 
     /**
@@ -154,29 +163,29 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
 
     /** Returns a new {@code VkPhysicalDeviceExternalBufferInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceExternalBufferInfo malloc() {
-        return wrap(VkPhysicalDeviceExternalBufferInfo.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceExternalBufferInfo(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceExternalBufferInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceExternalBufferInfo calloc() {
-        return wrap(VkPhysicalDeviceExternalBufferInfo.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceExternalBufferInfo(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceExternalBufferInfo} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceExternalBufferInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceExternalBufferInfo.class, memAddress(container), container);
+        return new VkPhysicalDeviceExternalBufferInfo(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceExternalBufferInfo} instance for the specified memory address. */
     public static VkPhysicalDeviceExternalBufferInfo create(long address) {
-        return wrap(VkPhysicalDeviceExternalBufferInfo.class, address);
+        return new VkPhysicalDeviceExternalBufferInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceExternalBufferInfo createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceExternalBufferInfo.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceExternalBufferInfo(address, null);
     }
 
     /**
@@ -185,7 +194,7 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalBufferInfo.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -194,7 +203,7 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalBufferInfo.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -204,7 +213,7 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
      */
     public static VkPhysicalDeviceExternalBufferInfo.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -214,13 +223,13 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalBufferInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceExternalBufferInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -248,7 +257,7 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceExternalBufferInfo malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceExternalBufferInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceExternalBufferInfo(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -257,7 +266,7 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceExternalBufferInfo calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceExternalBufferInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceExternalBufferInfo(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -267,7 +276,7 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalBufferInfo.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -277,7 +286,7 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceExternalBufferInfo.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -314,9 +323,9 @@ public class VkPhysicalDeviceExternalBufferInfo extends Struct implements Native
         /**
          * Creates a new {@code VkPhysicalDeviceExternalBufferInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceExternalBufferInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceExternalBufferInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

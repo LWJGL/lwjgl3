@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct ktxTexture_vtbl")
-public class ktxTexture_vtbl extends Struct {
+public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -97,6 +97,15 @@ public class ktxTexture_vtbl extends Struct {
         WRITETONAMEDFILE = layout.offsetof(11);
         WRITETOMEMORY = layout.offsetof(12);
         WRITETOSTREAM = layout.offsetof(13);
+    }
+
+    protected ktxTexture_vtbl(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected ktxTexture_vtbl create(long address, @Nullable ByteBuffer container) {
+        return new ktxTexture_vtbl(address, container);
     }
 
     /**
@@ -159,13 +168,13 @@ public class ktxTexture_vtbl extends Struct {
 
     /** Returns a new {@code ktxTexture_vtbl} instance for the specified memory address. */
     public static ktxTexture_vtbl create(long address) {
-        return wrap(ktxTexture_vtbl.class, address);
+        return new ktxTexture_vtbl(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ktxTexture_vtbl createSafe(long address) {
-        return address == NULL ? null : wrap(ktxTexture_vtbl.class, address);
+        return address == NULL ? null : new ktxTexture_vtbl(address, null);
     }
 
     /**
@@ -175,13 +184,13 @@ public class ktxTexture_vtbl extends Struct {
      * @param capacity the buffer capacity
      */
     public static ktxTexture_vtbl.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ktxTexture_vtbl.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -225,9 +234,9 @@ public class ktxTexture_vtbl extends Struct {
         /**
          * Creates a new {@code ktxTexture_vtbl.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link ktxTexture_vtbl#SIZEOF}, and its mark will be undefined.
+         * by {@link ktxTexture_vtbl#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

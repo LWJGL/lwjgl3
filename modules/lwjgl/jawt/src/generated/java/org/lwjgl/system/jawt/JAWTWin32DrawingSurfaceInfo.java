@@ -32,7 +32,7 @@ import org.lwjgl.system.windows.User32;
  * }</code></pre>
  */
 @NativeType("struct JAWT_Win32DrawingSurfaceInfo")
-public class JAWTWin32DrawingSurfaceInfo extends Struct {
+public class JAWTWin32DrawingSurfaceInfo extends Struct<JAWTWin32DrawingSurfaceInfo> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -67,6 +67,15 @@ public class JAWTWin32DrawingSurfaceInfo extends Struct {
         PBITS = layout.offsetof(3);
         HDC = layout.offsetof(4);
         HPALETTE = layout.offsetof(5);
+    }
+
+    protected JAWTWin32DrawingSurfaceInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected JAWTWin32DrawingSurfaceInfo create(long address, @Nullable ByteBuffer container) {
+        return new JAWTWin32DrawingSurfaceInfo(address, container);
     }
 
     /**
@@ -106,13 +115,13 @@ public class JAWTWin32DrawingSurfaceInfo extends Struct {
 
     /** Returns a new {@code JAWTWin32DrawingSurfaceInfo} instance for the specified memory address. */
     public static JAWTWin32DrawingSurfaceInfo create(long address) {
-        return wrap(JAWTWin32DrawingSurfaceInfo.class, address);
+        return new JAWTWin32DrawingSurfaceInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static JAWTWin32DrawingSurfaceInfo createSafe(long address) {
-        return address == NULL ? null : wrap(JAWTWin32DrawingSurfaceInfo.class, address);
+        return address == NULL ? null : new JAWTWin32DrawingSurfaceInfo(address, null);
     }
 
     /**
@@ -122,13 +131,13 @@ public class JAWTWin32DrawingSurfaceInfo extends Struct {
      * @param capacity the buffer capacity
      */
     public static JAWTWin32DrawingSurfaceInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static JAWTWin32DrawingSurfaceInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -154,9 +163,9 @@ public class JAWTWin32DrawingSurfaceInfo extends Struct {
         /**
          * Creates a new {@code JAWTWin32DrawingSurfaceInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link JAWTWin32DrawingSurfaceInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link JAWTWin32DrawingSurfaceInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

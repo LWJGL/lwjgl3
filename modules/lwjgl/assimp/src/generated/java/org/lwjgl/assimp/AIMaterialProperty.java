@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct aiMaterialProperty")
-public class AIMaterialProperty extends Struct {
+public class AIMaterialProperty extends Struct<AIMaterialProperty> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -79,6 +79,15 @@ public class AIMaterialProperty extends Struct {
         MDATALENGTH = layout.offsetof(3);
         MTYPE = layout.offsetof(4);
         MDATA = layout.offsetof(5);
+    }
+
+    protected AIMaterialProperty(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected AIMaterialProperty create(long address, @Nullable ByteBuffer container) {
+        return new AIMaterialProperty(address, container);
     }
 
     /**
@@ -120,13 +129,13 @@ public class AIMaterialProperty extends Struct {
 
     /** Returns a new {@code AIMaterialProperty} instance for the specified memory address. */
     public static AIMaterialProperty create(long address) {
-        return wrap(AIMaterialProperty.class, address);
+        return new AIMaterialProperty(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIMaterialProperty createSafe(long address) {
-        return address == NULL ? null : wrap(AIMaterialProperty.class, address);
+        return address == NULL ? null : new AIMaterialProperty(address, null);
     }
 
     /**
@@ -136,13 +145,13 @@ public class AIMaterialProperty extends Struct {
      * @param capacity the buffer capacity
      */
     public static AIMaterialProperty.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIMaterialProperty.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -170,9 +179,9 @@ public class AIMaterialProperty extends Struct {
         /**
          * Creates a new {@code AIMaterialProperty.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link AIMaterialProperty#SIZEOF}, and its mark will be undefined.
+         * by {@link AIMaterialProperty#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

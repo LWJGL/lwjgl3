@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct cl_buffer_region")
-public class CLBufferRegion extends Struct implements NativeResource {
+public class CLBufferRegion extends Struct<CLBufferRegion> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -51,6 +51,15 @@ public class CLBufferRegion extends Struct implements NativeResource {
 
         ORIGIN = layout.offsetof(0);
         SIZE = layout.offsetof(1);
+    }
+
+    protected CLBufferRegion(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CLBufferRegion create(long address, @Nullable ByteBuffer container) {
+        return new CLBufferRegion(address, container);
     }
 
     /**
@@ -105,29 +114,29 @@ public class CLBufferRegion extends Struct implements NativeResource {
 
     /** Returns a new {@code CLBufferRegion} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CLBufferRegion malloc() {
-        return wrap(CLBufferRegion.class, nmemAllocChecked(SIZEOF));
+        return new CLBufferRegion(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code CLBufferRegion} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CLBufferRegion calloc() {
-        return wrap(CLBufferRegion.class, nmemCallocChecked(1, SIZEOF));
+        return new CLBufferRegion(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code CLBufferRegion} instance allocated with {@link BufferUtils}. */
     public static CLBufferRegion create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(CLBufferRegion.class, memAddress(container), container);
+        return new CLBufferRegion(memAddress(container), container);
     }
 
     /** Returns a new {@code CLBufferRegion} instance for the specified memory address. */
     public static CLBufferRegion create(long address) {
-        return wrap(CLBufferRegion.class, address);
+        return new CLBufferRegion(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CLBufferRegion createSafe(long address) {
-        return address == NULL ? null : wrap(CLBufferRegion.class, address);
+        return address == NULL ? null : new CLBufferRegion(address, null);
     }
 
     /**
@@ -136,7 +145,7 @@ public class CLBufferRegion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLBufferRegion.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -145,7 +154,7 @@ public class CLBufferRegion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLBufferRegion.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -155,7 +164,7 @@ public class CLBufferRegion extends Struct implements NativeResource {
      */
     public static CLBufferRegion.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -165,13 +174,13 @@ public class CLBufferRegion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLBufferRegion.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CLBufferRegion.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -199,7 +208,7 @@ public class CLBufferRegion extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CLBufferRegion malloc(MemoryStack stack) {
-        return wrap(CLBufferRegion.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new CLBufferRegion(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -208,7 +217,7 @@ public class CLBufferRegion extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CLBufferRegion calloc(MemoryStack stack) {
-        return wrap(CLBufferRegion.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new CLBufferRegion(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -218,7 +227,7 @@ public class CLBufferRegion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLBufferRegion.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -228,7 +237,7 @@ public class CLBufferRegion extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLBufferRegion.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -253,9 +262,9 @@ public class CLBufferRegion extends Struct implements NativeResource {
         /**
          * Creates a new {@code CLBufferRegion.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CLBufferRegion#SIZEOF}, and its mark will be undefined.
+         * by {@link CLBufferRegion#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

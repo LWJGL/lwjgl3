@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link YGCachedMeasurement YGCachedMeasurement} cachedLayout;
  * }</code></pre>
  */
-public class YGLayout extends Struct {
+public class YGLayout extends Struct<YGLayout> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -100,6 +100,15 @@ public class YGLayout extends Struct {
         CACHEDMEASUREMENTS = layout.offsetof(11);
         MEASUREDDIMENSIONS = layout.offsetof(12);
         CACHEDLAYOUT = layout.offsetof(13);
+    }
+
+    protected YGLayout(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected YGLayout create(long address, @Nullable ByteBuffer container) {
+        return new YGLayout(address, container);
     }
 
     /**
@@ -183,13 +192,13 @@ public class YGLayout extends Struct {
 
     /** Returns a new {@code YGLayout} instance for the specified memory address. */
     public static YGLayout create(long address) {
-        return wrap(YGLayout.class, address);
+        return new YGLayout(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGLayout createSafe(long address) {
-        return address == NULL ? null : wrap(YGLayout.class, address);
+        return address == NULL ? null : new YGLayout(address, null);
     }
 
     /**
@@ -199,13 +208,13 @@ public class YGLayout extends Struct {
      * @param capacity the buffer capacity
      */
     public static YGLayout.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGLayout.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -284,9 +293,9 @@ public class YGLayout extends Struct {
         /**
          * Creates a new {@code YGLayout.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link YGLayout#SIZEOF}, and its mark will be undefined.
+         * by {@link YGLayout#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

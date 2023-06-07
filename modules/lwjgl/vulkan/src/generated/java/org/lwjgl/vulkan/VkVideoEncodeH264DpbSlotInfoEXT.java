@@ -37,7 +37,7 @@ import org.lwjgl.vulkan.video.*;
  *     {@link StdVideoEncodeH264ReferenceInfo StdVideoEncodeH264ReferenceInfo} const * {@link #pStdReferenceInfo};
  * }</code></pre>
  */
-public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeResource {
+public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct<VkVideoEncodeH264DpbSlotInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         PSTDREFERENCEINFO = layout.offsetof(2);
+    }
+
+    protected VkVideoEncodeH264DpbSlotInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkVideoEncodeH264DpbSlotInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkVideoEncodeH264DpbSlotInfoEXT(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
 
     /** Returns a new {@code VkVideoEncodeH264DpbSlotInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkVideoEncodeH264DpbSlotInfoEXT malloc() {
-        return wrap(VkVideoEncodeH264DpbSlotInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkVideoEncodeH264DpbSlotInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoEncodeH264DpbSlotInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkVideoEncodeH264DpbSlotInfoEXT calloc() {
-        return wrap(VkVideoEncodeH264DpbSlotInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkVideoEncodeH264DpbSlotInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoEncodeH264DpbSlotInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkVideoEncodeH264DpbSlotInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkVideoEncodeH264DpbSlotInfoEXT.class, memAddress(container), container);
+        return new VkVideoEncodeH264DpbSlotInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkVideoEncodeH264DpbSlotInfoEXT} instance for the specified memory address. */
     public static VkVideoEncodeH264DpbSlotInfoEXT create(long address) {
-        return wrap(VkVideoEncodeH264DpbSlotInfoEXT.class, address);
+        return new VkVideoEncodeH264DpbSlotInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoEncodeH264DpbSlotInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkVideoEncodeH264DpbSlotInfoEXT.class, address);
+        return address == NULL ? null : new VkVideoEncodeH264DpbSlotInfoEXT(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeH264DpbSlotInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeH264DpbSlotInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
      */
     public static VkVideoEncodeH264DpbSlotInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeH264DpbSlotInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoEncodeH264DpbSlotInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkVideoEncodeH264DpbSlotInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkVideoEncodeH264DpbSlotInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkVideoEncodeH264DpbSlotInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkVideoEncodeH264DpbSlotInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkVideoEncodeH264DpbSlotInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkVideoEncodeH264DpbSlotInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeH264DpbSlotInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeH264DpbSlotInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -269,9 +278,9 @@ public class VkVideoEncodeH264DpbSlotInfoEXT extends Struct implements NativeRes
         /**
          * Creates a new {@code VkVideoEncodeH264DpbSlotInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkVideoEncodeH264DpbSlotInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkVideoEncodeH264DpbSlotInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

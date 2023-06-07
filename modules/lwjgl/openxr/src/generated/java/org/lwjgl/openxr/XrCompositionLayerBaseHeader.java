@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSpace {@link #space};
  * }</code></pre>
  */
-public class XrCompositionLayerBaseHeader extends Struct implements NativeResource {
+public class XrCompositionLayerBaseHeader extends Struct<XrCompositionLayerBaseHeader> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -76,6 +76,15 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
         NEXT = layout.offsetof(1);
         LAYERFLAGS = layout.offsetof(2);
         SPACE = layout.offsetof(3);
+    }
+
+    protected XrCompositionLayerBaseHeader(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrCompositionLayerBaseHeader create(long address, @Nullable ByteBuffer container) {
+        return new XrCompositionLayerBaseHeader(address, container);
     }
 
     /**
@@ -158,64 +167,64 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
 
     /** Returns a new {@code XrCompositionLayerBaseHeader} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrCompositionLayerBaseHeader malloc() {
-        return wrap(XrCompositionLayerBaseHeader.class, nmemAllocChecked(SIZEOF));
+        return new XrCompositionLayerBaseHeader(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrCompositionLayerBaseHeader} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrCompositionLayerBaseHeader calloc() {
-        return wrap(XrCompositionLayerBaseHeader.class, nmemCallocChecked(1, SIZEOF));
+        return new XrCompositionLayerBaseHeader(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrCompositionLayerBaseHeader} instance allocated with {@link BufferUtils}. */
     public static XrCompositionLayerBaseHeader create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrCompositionLayerBaseHeader.class, memAddress(container), container);
+        return new XrCompositionLayerBaseHeader(memAddress(container), container);
     }
 
     /** Returns a new {@code XrCompositionLayerBaseHeader} instance for the specified memory address. */
     public static XrCompositionLayerBaseHeader create(long address) {
-        return wrap(XrCompositionLayerBaseHeader.class, address);
+        return new XrCompositionLayerBaseHeader(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrCompositionLayerBaseHeader createSafe(long address) {
-        return address == NULL ? null : wrap(XrCompositionLayerBaseHeader.class, address);
+        return address == NULL ? null : new XrCompositionLayerBaseHeader(address, null);
     }
 
     /** Upcasts the specified {@code XrCompositionLayerProjection} instance to {@code XrCompositionLayerBaseHeader}. */
     public static XrCompositionLayerBaseHeader create(XrCompositionLayerProjection value) {
-        return wrap(XrCompositionLayerBaseHeader.class, value);
+        return new XrCompositionLayerBaseHeader(value.address(), __getContainer(value));
     }
 
     /** Upcasts the specified {@code XrCompositionLayerQuad} instance to {@code XrCompositionLayerBaseHeader}. */
     public static XrCompositionLayerBaseHeader create(XrCompositionLayerQuad value) {
-        return wrap(XrCompositionLayerBaseHeader.class, value);
+        return new XrCompositionLayerBaseHeader(value.address(), __getContainer(value));
     }
 
     /** Upcasts the specified {@code XrCompositionLayerCubeKHR} instance to {@code XrCompositionLayerBaseHeader}. */
     public static XrCompositionLayerBaseHeader create(XrCompositionLayerCubeKHR value) {
-        return wrap(XrCompositionLayerBaseHeader.class, value);
+        return new XrCompositionLayerBaseHeader(value.address(), __getContainer(value));
     }
 
     /** Upcasts the specified {@code XrCompositionLayerCylinderKHR} instance to {@code XrCompositionLayerBaseHeader}. */
     public static XrCompositionLayerBaseHeader create(XrCompositionLayerCylinderKHR value) {
-        return wrap(XrCompositionLayerBaseHeader.class, value);
+        return new XrCompositionLayerBaseHeader(value.address(), __getContainer(value));
     }
 
     /** Upcasts the specified {@code XrCompositionLayerEquirectKHR} instance to {@code XrCompositionLayerBaseHeader}. */
     public static XrCompositionLayerBaseHeader create(XrCompositionLayerEquirectKHR value) {
-        return wrap(XrCompositionLayerBaseHeader.class, value);
+        return new XrCompositionLayerBaseHeader(value.address(), __getContainer(value));
     }
 
     /** Upcasts the specified {@code XrCompositionLayerEquirect2KHR} instance to {@code XrCompositionLayerBaseHeader}. */
     public static XrCompositionLayerBaseHeader create(XrCompositionLayerEquirect2KHR value) {
-        return wrap(XrCompositionLayerBaseHeader.class, value);
+        return new XrCompositionLayerBaseHeader(value.address(), __getContainer(value));
     }
 
     /** Upcasts the specified {@code XrCompositionLayerPassthroughHTC} instance to {@code XrCompositionLayerBaseHeader}. */
     public static XrCompositionLayerBaseHeader create(XrCompositionLayerPassthroughHTC value) {
-        return wrap(XrCompositionLayerBaseHeader.class, value);
+        return new XrCompositionLayerBaseHeader(value.address(), __getContainer(value));
     }
 
     /**
@@ -224,7 +233,7 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerBaseHeader.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -233,7 +242,7 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerBaseHeader.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -243,7 +252,7 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
      */
     public static XrCompositionLayerBaseHeader.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -253,48 +262,48 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerBaseHeader.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrCompositionLayerBaseHeader.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /** Upcasts the specified {@code XrCompositionLayerProjection.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
     public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerProjection.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrCompositionLayerBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /** Upcasts the specified {@code XrCompositionLayerQuad.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
     public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerQuad.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrCompositionLayerBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /** Upcasts the specified {@code XrCompositionLayerCubeKHR.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
     public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerCubeKHR.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrCompositionLayerBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /** Upcasts the specified {@code XrCompositionLayerCylinderKHR.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
     public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerCylinderKHR.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrCompositionLayerBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /** Upcasts the specified {@code XrCompositionLayerEquirectKHR.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
     public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerEquirectKHR.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrCompositionLayerBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /** Upcasts the specified {@code XrCompositionLayerEquirect2KHR.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
     public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerEquirect2KHR.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrCompositionLayerBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /** Upcasts the specified {@code XrCompositionLayerPassthroughHTC.Buffer} instance to {@code XrCompositionLayerBaseHeader.Buffer}. */
     public static XrCompositionLayerBaseHeader.Buffer create(XrCompositionLayerPassthroughHTC.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrCompositionLayerBaseHeader.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -303,7 +312,7 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static XrCompositionLayerBaseHeader malloc(MemoryStack stack) {
-        return wrap(XrCompositionLayerBaseHeader.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrCompositionLayerBaseHeader(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -312,7 +321,7 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static XrCompositionLayerBaseHeader calloc(MemoryStack stack) {
-        return wrap(XrCompositionLayerBaseHeader.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrCompositionLayerBaseHeader(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -322,7 +331,7 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerBaseHeader.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -332,7 +341,7 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerBaseHeader.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -374,9 +383,9 @@ public class XrCompositionLayerBaseHeader extends Struct implements NativeResour
         /**
          * Creates a new {@code XrCompositionLayerBaseHeader.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrCompositionLayerBaseHeader#SIZEOF}, and its mark will be undefined.
+         * by {@link XrCompositionLayerBaseHeader#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

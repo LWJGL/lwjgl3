@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     void * short_metrics;
  * }</code></pre>
  */
-public class TT_HoriHeader extends Struct {
+public class TT_HoriHeader extends Struct<TT_HoriHeader> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -105,6 +105,15 @@ public class TT_HoriHeader extends Struct {
         NUMBER_OF_HMETRICS = layout.offsetof(13);
         LONG_METRICS = layout.offsetof(14);
         SHORT_METRICS = layout.offsetof(15);
+    }
+
+    protected TT_HoriHeader(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected TT_HoriHeader create(long address, @Nullable ByteBuffer container) {
+        return new TT_HoriHeader(address, container);
     }
 
     /**
@@ -186,13 +195,13 @@ public class TT_HoriHeader extends Struct {
 
     /** Returns a new {@code TT_HoriHeader} instance for the specified memory address. */
     public static TT_HoriHeader create(long address) {
-        return wrap(TT_HoriHeader.class, address);
+        return new TT_HoriHeader(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static TT_HoriHeader createSafe(long address) {
-        return address == NULL ? null : wrap(TT_HoriHeader.class, address);
+        return address == NULL ? null : new TT_HoriHeader(address, null);
     }
 
     /**
@@ -202,13 +211,13 @@ public class TT_HoriHeader extends Struct {
      * @param capacity the buffer capacity
      */
     public static TT_HoriHeader.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static TT_HoriHeader.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class TT_HoriHeader extends Struct {
         /**
          * Creates a new {@code TT_HoriHeader.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link TT_HoriHeader#SIZEOF}, and its mark will be undefined.
+         * by {@link TT_HoriHeader#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

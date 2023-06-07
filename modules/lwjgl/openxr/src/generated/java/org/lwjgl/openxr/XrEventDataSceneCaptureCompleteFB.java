@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrResult {@link #result};
  * }</code></pre>
  */
-public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeResource {
+public class XrEventDataSceneCaptureCompleteFB extends Struct<XrEventDataSceneCaptureCompleteFB> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -71,6 +71,15 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
         NEXT = layout.offsetof(1);
         REQUESTID = layout.offsetof(2);
         RESULT = layout.offsetof(3);
+    }
+
+    protected XrEventDataSceneCaptureCompleteFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrEventDataSceneCaptureCompleteFB create(long address, @Nullable ByteBuffer container) {
+        return new XrEventDataSceneCaptureCompleteFB(address, container);
     }
 
     /**
@@ -141,29 +150,29 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
 
     /** Returns a new {@code XrEventDataSceneCaptureCompleteFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrEventDataSceneCaptureCompleteFB malloc() {
-        return wrap(XrEventDataSceneCaptureCompleteFB.class, nmemAllocChecked(SIZEOF));
+        return new XrEventDataSceneCaptureCompleteFB(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrEventDataSceneCaptureCompleteFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrEventDataSceneCaptureCompleteFB calloc() {
-        return wrap(XrEventDataSceneCaptureCompleteFB.class, nmemCallocChecked(1, SIZEOF));
+        return new XrEventDataSceneCaptureCompleteFB(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrEventDataSceneCaptureCompleteFB} instance allocated with {@link BufferUtils}. */
     public static XrEventDataSceneCaptureCompleteFB create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrEventDataSceneCaptureCompleteFB.class, memAddress(container), container);
+        return new XrEventDataSceneCaptureCompleteFB(memAddress(container), container);
     }
 
     /** Returns a new {@code XrEventDataSceneCaptureCompleteFB} instance for the specified memory address. */
     public static XrEventDataSceneCaptureCompleteFB create(long address) {
-        return wrap(XrEventDataSceneCaptureCompleteFB.class, address);
+        return new XrEventDataSceneCaptureCompleteFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrEventDataSceneCaptureCompleteFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrEventDataSceneCaptureCompleteFB.class, address);
+        return address == NULL ? null : new XrEventDataSceneCaptureCompleteFB(address, null);
     }
 
     /**
@@ -172,7 +181,7 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static XrEventDataSceneCaptureCompleteFB.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -181,7 +190,7 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static XrEventDataSceneCaptureCompleteFB.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -191,7 +200,7 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
      */
     public static XrEventDataSceneCaptureCompleteFB.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -201,13 +210,13 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static XrEventDataSceneCaptureCompleteFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrEventDataSceneCaptureCompleteFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -216,7 +225,7 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static XrEventDataSceneCaptureCompleteFB malloc(MemoryStack stack) {
-        return wrap(XrEventDataSceneCaptureCompleteFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrEventDataSceneCaptureCompleteFB(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -225,7 +234,7 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static XrEventDataSceneCaptureCompleteFB calloc(MemoryStack stack) {
-        return wrap(XrEventDataSceneCaptureCompleteFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrEventDataSceneCaptureCompleteFB(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -235,7 +244,7 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static XrEventDataSceneCaptureCompleteFB.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -245,7 +254,7 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static XrEventDataSceneCaptureCompleteFB.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -278,9 +287,9 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct implements NativeR
         /**
          * Creates a new {@code XrEventDataSceneCaptureCompleteFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrEventDataSceneCaptureCompleteFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrEventDataSceneCaptureCompleteFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

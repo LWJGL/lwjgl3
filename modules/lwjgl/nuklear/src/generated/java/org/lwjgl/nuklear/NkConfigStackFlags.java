@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct nk_config_stack_flags")
-class NkConfigStackFlags extends Struct {
+class NkConfigStackFlags extends Struct<NkConfigStackFlags> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -48,6 +48,15 @@ class NkConfigStackFlags extends Struct {
 
         HEAD = layout.offsetof(0);
         ELEMENTS = layout.offsetof(1);
+    }
+
+    protected NkConfigStackFlags(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkConfigStackFlags create(long address, @Nullable ByteBuffer container) {
+        return new NkConfigStackFlags(address, container);
     }
 
     /**
@@ -76,13 +85,13 @@ class NkConfigStackFlags extends Struct {
 
     /** Returns a new {@code NkConfigStackFlags} instance for the specified memory address. */
     public static NkConfigStackFlags create(long address) {
-        return wrap(NkConfigStackFlags.class, address);
+        return new NkConfigStackFlags(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigStackFlags createSafe(long address) {
-        return address == NULL ? null : wrap(NkConfigStackFlags.class, address);
+        return address == NULL ? null : new NkConfigStackFlags(address, null);
     }
 
     /**
@@ -92,13 +101,13 @@ class NkConfigStackFlags extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkConfigStackFlags.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigStackFlags.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -122,9 +131,9 @@ class NkConfigStackFlags extends Struct {
         /**
          * Creates a new {@code NkConfigStackFlags.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkConfigStackFlags#SIZEOF}, and its mark will be undefined.
+         * by {@link NkConfigStackFlags#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrBool32 {@link #supportsMarkerTracking};
  * }</code></pre>
  */
-public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements NativeResource {
+public class XrSystemMarkerTrackingPropertiesVARJO extends Struct<XrSystemMarkerTrackingPropertiesVARJO> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -72,6 +72,15 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         SUPPORTSMARKERTRACKING = layout.offsetof(2);
+    }
+
+    protected XrSystemMarkerTrackingPropertiesVARJO(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSystemMarkerTrackingPropertiesVARJO create(long address, @Nullable ByteBuffer container) {
+        return new XrSystemMarkerTrackingPropertiesVARJO(address, container);
     }
 
     /**
@@ -131,29 +140,29 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
 
     /** Returns a new {@code XrSystemMarkerTrackingPropertiesVARJO} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSystemMarkerTrackingPropertiesVARJO malloc() {
-        return wrap(XrSystemMarkerTrackingPropertiesVARJO.class, nmemAllocChecked(SIZEOF));
+        return new XrSystemMarkerTrackingPropertiesVARJO(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSystemMarkerTrackingPropertiesVARJO} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSystemMarkerTrackingPropertiesVARJO calloc() {
-        return wrap(XrSystemMarkerTrackingPropertiesVARJO.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSystemMarkerTrackingPropertiesVARJO(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSystemMarkerTrackingPropertiesVARJO} instance allocated with {@link BufferUtils}. */
     public static XrSystemMarkerTrackingPropertiesVARJO create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSystemMarkerTrackingPropertiesVARJO.class, memAddress(container), container);
+        return new XrSystemMarkerTrackingPropertiesVARJO(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSystemMarkerTrackingPropertiesVARJO} instance for the specified memory address. */
     public static XrSystemMarkerTrackingPropertiesVARJO create(long address) {
-        return wrap(XrSystemMarkerTrackingPropertiesVARJO.class, address);
+        return new XrSystemMarkerTrackingPropertiesVARJO(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSystemMarkerTrackingPropertiesVARJO createSafe(long address) {
-        return address == NULL ? null : wrap(XrSystemMarkerTrackingPropertiesVARJO.class, address);
+        return address == NULL ? null : new XrSystemMarkerTrackingPropertiesVARJO(address, null);
     }
 
     /**
@@ -162,7 +171,7 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static XrSystemMarkerTrackingPropertiesVARJO.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -171,7 +180,7 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static XrSystemMarkerTrackingPropertiesVARJO.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -181,7 +190,7 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
      */
     public static XrSystemMarkerTrackingPropertiesVARJO.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -191,13 +200,13 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static XrSystemMarkerTrackingPropertiesVARJO.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSystemMarkerTrackingPropertiesVARJO.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -206,7 +215,7 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static XrSystemMarkerTrackingPropertiesVARJO malloc(MemoryStack stack) {
-        return wrap(XrSystemMarkerTrackingPropertiesVARJO.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSystemMarkerTrackingPropertiesVARJO(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -215,7 +224,7 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static XrSystemMarkerTrackingPropertiesVARJO calloc(MemoryStack stack) {
-        return wrap(XrSystemMarkerTrackingPropertiesVARJO.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSystemMarkerTrackingPropertiesVARJO(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -225,7 +234,7 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static XrSystemMarkerTrackingPropertiesVARJO.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -235,7 +244,7 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static XrSystemMarkerTrackingPropertiesVARJO.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -262,9 +271,9 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct implements Nat
         /**
          * Creates a new {@code XrSystemMarkerTrackingPropertiesVARJO.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSystemMarkerTrackingPropertiesVARJO#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSystemMarkerTrackingPropertiesVARJO#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

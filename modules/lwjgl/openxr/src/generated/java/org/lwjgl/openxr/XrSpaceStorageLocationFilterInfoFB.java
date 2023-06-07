@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSpaceStorageLocationFB {@link #location};
  * }</code></pre>
  */
-public class XrSpaceStorageLocationFilterInfoFB extends Struct implements NativeResource {
+public class XrSpaceStorageLocationFilterInfoFB extends Struct<XrSpaceStorageLocationFilterInfoFB> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -67,6 +67,15 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         LOCATION = layout.offsetof(2);
+    }
+
+    protected XrSpaceStorageLocationFilterInfoFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSpaceStorageLocationFilterInfoFB create(long address, @Nullable ByteBuffer container) {
+        return new XrSpaceStorageLocationFilterInfoFB(address, container);
     }
 
     /**
@@ -130,29 +139,29 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
 
     /** Returns a new {@code XrSpaceStorageLocationFilterInfoFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSpaceStorageLocationFilterInfoFB malloc() {
-        return wrap(XrSpaceStorageLocationFilterInfoFB.class, nmemAllocChecked(SIZEOF));
+        return new XrSpaceStorageLocationFilterInfoFB(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSpaceStorageLocationFilterInfoFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSpaceStorageLocationFilterInfoFB calloc() {
-        return wrap(XrSpaceStorageLocationFilterInfoFB.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSpaceStorageLocationFilterInfoFB(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSpaceStorageLocationFilterInfoFB} instance allocated with {@link BufferUtils}. */
     public static XrSpaceStorageLocationFilterInfoFB create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSpaceStorageLocationFilterInfoFB.class, memAddress(container), container);
+        return new XrSpaceStorageLocationFilterInfoFB(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSpaceStorageLocationFilterInfoFB} instance for the specified memory address. */
     public static XrSpaceStorageLocationFilterInfoFB create(long address) {
-        return wrap(XrSpaceStorageLocationFilterInfoFB.class, address);
+        return new XrSpaceStorageLocationFilterInfoFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSpaceStorageLocationFilterInfoFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrSpaceStorageLocationFilterInfoFB.class, address);
+        return address == NULL ? null : new XrSpaceStorageLocationFilterInfoFB(address, null);
     }
 
     /**
@@ -161,7 +170,7 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static XrSpaceStorageLocationFilterInfoFB.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -170,7 +179,7 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static XrSpaceStorageLocationFilterInfoFB.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -180,7 +189,7 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
      */
     public static XrSpaceStorageLocationFilterInfoFB.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -190,13 +199,13 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static XrSpaceStorageLocationFilterInfoFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSpaceStorageLocationFilterInfoFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -205,7 +214,7 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static XrSpaceStorageLocationFilterInfoFB malloc(MemoryStack stack) {
-        return wrap(XrSpaceStorageLocationFilterInfoFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSpaceStorageLocationFilterInfoFB(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -214,7 +223,7 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static XrSpaceStorageLocationFilterInfoFB calloc(MemoryStack stack) {
-        return wrap(XrSpaceStorageLocationFilterInfoFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSpaceStorageLocationFilterInfoFB(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -224,7 +233,7 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static XrSpaceStorageLocationFilterInfoFB.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -234,7 +243,7 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static XrSpaceStorageLocationFilterInfoFB.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -263,9 +272,9 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct implements Native
         /**
          * Creates a new {@code XrSpaceStorageLocationFilterInfoFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSpaceStorageLocationFilterInfoFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSpaceStorageLocationFilterInfoFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

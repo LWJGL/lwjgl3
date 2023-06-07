@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct NSVGimage")
-public class NSVGImage extends Struct {
+public class NSVGImage extends Struct<NSVGImage> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -53,6 +53,15 @@ public class NSVGImage extends Struct {
         SHAPES = layout.offsetof(2);
     }
 
+    protected NSVGImage(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NSVGImage create(long address, @Nullable ByteBuffer container) {
+        return new NSVGImage(address, container);
+    }
+
     /**
      * Creates a {@code NSVGImage} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -78,13 +87,13 @@ public class NSVGImage extends Struct {
 
     /** Returns a new {@code NSVGImage} instance for the specified memory address. */
     public static NSVGImage create(long address) {
-        return wrap(NSVGImage.class, address);
+        return new NSVGImage(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGImage createSafe(long address) {
-        return address == NULL ? null : wrap(NSVGImage.class, address);
+        return address == NULL ? null : new NSVGImage(address, null);
     }
 
     /**
@@ -94,13 +103,13 @@ public class NSVGImage extends Struct {
      * @param capacity the buffer capacity
      */
     public static NSVGImage.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGImage.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -122,9 +131,9 @@ public class NSVGImage extends Struct {
         /**
          * Creates a new {@code NSVGImage.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NSVGImage#SIZEOF}, and its mark will be undefined.
+         * by {@link NSVGImage#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

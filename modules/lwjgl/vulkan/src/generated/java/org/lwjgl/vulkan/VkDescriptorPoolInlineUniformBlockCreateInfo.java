@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #maxInlineUniformBlockBindings};
  * }</code></pre>
  */
-public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct implements NativeResource {
+public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct<VkDescriptorPoolInlineUniformBlockCreateInfo> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -60,6 +60,15 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         MAXINLINEUNIFORMBLOCKBINDINGS = layout.offsetof(2);
+    }
+
+    protected VkDescriptorPoolInlineUniformBlockCreateInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkDescriptorPoolInlineUniformBlockCreateInfo create(long address, @Nullable ByteBuffer container) {
+        return new VkDescriptorPoolInlineUniformBlockCreateInfo(address, container);
     }
 
     /**
@@ -123,29 +132,29 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
 
     /** Returns a new {@code VkDescriptorPoolInlineUniformBlockCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo malloc() {
-        return wrap(VkDescriptorPoolInlineUniformBlockCreateInfo.class, nmemAllocChecked(SIZEOF));
+        return new VkDescriptorPoolInlineUniformBlockCreateInfo(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkDescriptorPoolInlineUniformBlockCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo calloc() {
-        return wrap(VkDescriptorPoolInlineUniformBlockCreateInfo.class, nmemCallocChecked(1, SIZEOF));
+        return new VkDescriptorPoolInlineUniformBlockCreateInfo(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkDescriptorPoolInlineUniformBlockCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkDescriptorPoolInlineUniformBlockCreateInfo.class, memAddress(container), container);
+        return new VkDescriptorPoolInlineUniformBlockCreateInfo(memAddress(container), container);
     }
 
     /** Returns a new {@code VkDescriptorPoolInlineUniformBlockCreateInfo} instance for the specified memory address. */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo create(long address) {
-        return wrap(VkDescriptorPoolInlineUniformBlockCreateInfo.class, address);
+        return new VkDescriptorPoolInlineUniformBlockCreateInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorPoolInlineUniformBlockCreateInfo createSafe(long address) {
-        return address == NULL ? null : wrap(VkDescriptorPoolInlineUniformBlockCreateInfo.class, address);
+        return address == NULL ? null : new VkDescriptorPoolInlineUniformBlockCreateInfo(address, null);
     }
 
     /**
@@ -154,7 +163,7 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -163,7 +172,7 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -173,7 +182,7 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
      */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -183,13 +192,13 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorPoolInlineUniformBlockCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -198,7 +207,7 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo malloc(MemoryStack stack) {
-        return wrap(VkDescriptorPoolInlineUniformBlockCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkDescriptorPoolInlineUniformBlockCreateInfo(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -207,7 +216,7 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo calloc(MemoryStack stack) {
-        return wrap(VkDescriptorPoolInlineUniformBlockCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkDescriptorPoolInlineUniformBlockCreateInfo(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -217,7 +226,7 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -227,7 +236,7 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkDescriptorPoolInlineUniformBlockCreateInfo.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -256,9 +265,9 @@ public class VkDescriptorPoolInlineUniformBlockCreateInfo extends Struct impleme
         /**
          * Creates a new {@code VkDescriptorPoolInlineUniformBlockCreateInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkDescriptorPoolInlineUniformBlockCreateInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link VkDescriptorPoolInlineUniformBlockCreateInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

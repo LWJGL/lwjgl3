@@ -34,6 +34,15 @@ import static org.lwjgl.vulkan.VK10.*;
  */
 public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverProperties {
 
+    protected VkPhysicalDeviceDriverPropertiesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceDriverPropertiesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceDriverPropertiesKHR(address, container);
+    }
+
     /**
      * Creates a {@code VkPhysicalDeviceDriverPropertiesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -82,29 +91,29 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
 
     /** Returns a new {@code VkPhysicalDeviceDriverPropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceDriverPropertiesKHR malloc() {
-        return wrap(VkPhysicalDeviceDriverPropertiesKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceDriverPropertiesKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceDriverPropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceDriverPropertiesKHR calloc() {
-        return wrap(VkPhysicalDeviceDriverPropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceDriverPropertiesKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceDriverPropertiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceDriverPropertiesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceDriverPropertiesKHR.class, memAddress(container), container);
+        return new VkPhysicalDeviceDriverPropertiesKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceDriverPropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceDriverPropertiesKHR create(long address) {
-        return wrap(VkPhysicalDeviceDriverPropertiesKHR.class, address);
+        return new VkPhysicalDeviceDriverPropertiesKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceDriverPropertiesKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceDriverPropertiesKHR.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceDriverPropertiesKHR(address, null);
     }
 
     /**
@@ -113,7 +122,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDriverPropertiesKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -122,7 +131,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDriverPropertiesKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -132,7 +141,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
      */
     public static VkPhysicalDeviceDriverPropertiesKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -142,13 +151,13 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDriverPropertiesKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceDriverPropertiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -176,7 +185,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceDriverPropertiesKHR malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceDriverPropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceDriverPropertiesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -185,7 +194,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceDriverPropertiesKHR calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceDriverPropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceDriverPropertiesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -195,7 +204,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDriverPropertiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -205,7 +214,7 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDriverPropertiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -218,9 +227,9 @@ public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverP
         /**
          * Creates a new {@code VkPhysicalDeviceDriverPropertiesKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceDriverPropertiesKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceDriverPropertiesKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

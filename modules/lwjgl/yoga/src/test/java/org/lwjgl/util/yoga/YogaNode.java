@@ -531,7 +531,7 @@ class YogaNode {
             : YGNodeStyleGetFlexBasis(node, __result);
     }
 
-    static <T extends Struct> boolean assertEquals(T a, T b) {
+    static <T extends Struct<T>> boolean assertEquals(T a, T b) {
         for (int i = 0; i < a.sizeof(); i++) {
             if (memGetByte(a.address() + i) != memGetByte(b.address() + i)) {
                 return false;
@@ -570,12 +570,12 @@ class YogaNode {
         static final YGValue ZERO      = YGValue.create().set(0, YogaUnit.POINT);
         static final YGValue AUTO      = YGValue.create().set(YogaConstants.UNDEFINED, YogaUnit.AUTO);
 
-        YogaValue(ByteBuffer container) {
-            super(container);
+        YogaValue(long address, @Nullable ByteBuffer container) {
+            super(address, container);
         }
 
         public static YogaValue create(MemoryStack stack, float value, int unit) {
-            YogaValue v = wrap(YogaValue.class, stack.nmalloc(ALIGNOF, SIZEOF));
+            YogaValue v = new YogaValue(stack.nmalloc(ALIGNOF, SIZEOF), null);
             v.set(value, unit);
             return v;
         }

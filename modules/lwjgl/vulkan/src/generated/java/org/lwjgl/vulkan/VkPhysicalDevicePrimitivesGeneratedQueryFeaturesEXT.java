@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #primitivesGeneratedQueryWithNonZeroStreams};
  * }</code></pre>
  */
-public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct<VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -72,6 +72,15 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
         PRIMITIVESGENERATEDQUERY = layout.offsetof(2);
         PRIMITIVESGENERATEDQUERYWITHRASTERIZERDISCARD = layout.offsetof(3);
         PRIMITIVESGENERATEDQUERYWITHNONZEROSTREAMS = layout.offsetof(4);
+    }
+
+    protected VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(address, container);
     }
 
     /**
@@ -149,29 +158,29 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
 
     /** Returns a new {@code VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT malloc() {
-        return wrap(VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT calloc() {
-        return wrap(VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.class, address);
+        return new VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(address, null);
     }
 
     /**
@@ -180,7 +189,7 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -189,7 +198,7 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -199,7 +208,7 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
      */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -209,13 +218,13 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -224,7 +233,7 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -233,7 +242,7 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -243,7 +252,7 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -253,7 +262,7 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -290,9 +299,9 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct 
         /**
          * Creates a new {@code VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

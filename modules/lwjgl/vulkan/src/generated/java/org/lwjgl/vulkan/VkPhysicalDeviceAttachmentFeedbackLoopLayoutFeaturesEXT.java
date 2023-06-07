@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #attachmentFeedbackLoopLayout};
  * }</code></pre>
  */
-public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Struct<VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -60,6 +60,15 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         ATTACHMENTFEEDBACKLOOPLAYOUT = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(address, container);
     }
 
     /**
@@ -123,29 +132,29 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
 
     /** Returns a new {@code VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.class, address);
+        return new VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(address, null);
     }
 
     /**
@@ -154,7 +163,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -163,7 +172,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -173,7 +182,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -183,13 +192,13 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -198,7 +207,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -207,7 +216,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -217,7 +226,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -227,7 +236,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -256,9 +265,9 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT extends Str
         /**
          * Creates a new {@code VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct nk_row_layout")
-public class NkRowLayout extends Struct {
+public class NkRowLayout extends Struct<NkRowLayout> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -94,6 +94,15 @@ public class NkRowLayout extends Struct {
         TEMPLATES = layout.offsetof(12);
     }
 
+    protected NkRowLayout(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkRowLayout create(long address, @Nullable ByteBuffer container) {
+        return new NkRowLayout(address, container);
+    }
+
     /**
      * Creates a {@code NkRowLayout} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -148,13 +157,13 @@ public class NkRowLayout extends Struct {
 
     /** Returns a new {@code NkRowLayout} instance for the specified memory address. */
     public static NkRowLayout create(long address) {
-        return wrap(NkRowLayout.class, address);
+        return new NkRowLayout(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkRowLayout createSafe(long address) {
-        return address == NULL ? null : wrap(NkRowLayout.class, address);
+        return address == NULL ? null : new NkRowLayout(address, null);
     }
 
     /**
@@ -164,13 +173,13 @@ public class NkRowLayout extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkRowLayout.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkRowLayout.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -216,9 +225,9 @@ public class NkRowLayout extends Struct {
         /**
          * Creates a new {@code NkRowLayout.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkRowLayout#SIZEOF}, and its mark will be undefined.
+         * by {@link NkRowLayout#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

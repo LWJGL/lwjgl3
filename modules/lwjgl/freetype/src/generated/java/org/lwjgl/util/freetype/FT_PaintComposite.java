@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} backdrop_paint;
  * }</code></pre>
  */
-public class FT_PaintComposite extends Struct {
+public class FT_PaintComposite extends Struct<FT_PaintComposite> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -53,6 +53,15 @@ public class FT_PaintComposite extends Struct {
         SOURCE_PAINT = layout.offsetof(0);
         COMPOSITE_MODE = layout.offsetof(1);
         BACKDROP_PAINT = layout.offsetof(2);
+    }
+
+    protected FT_PaintComposite(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FT_PaintComposite create(long address, @Nullable ByteBuffer container) {
+        return new FT_PaintComposite(address, container);
     }
 
     /**
@@ -82,13 +91,13 @@ public class FT_PaintComposite extends Struct {
 
     /** Returns a new {@code FT_PaintComposite} instance for the specified memory address. */
     public static FT_PaintComposite create(long address) {
-        return wrap(FT_PaintComposite.class, address);
+        return new FT_PaintComposite(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_PaintComposite createSafe(long address) {
-        return address == NULL ? null : wrap(FT_PaintComposite.class, address);
+        return address == NULL ? null : new FT_PaintComposite(address, null);
     }
 
     /**
@@ -98,13 +107,13 @@ public class FT_PaintComposite extends Struct {
      * @param capacity the buffer capacity
      */
     public static FT_PaintComposite.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_PaintComposite.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -126,9 +135,9 @@ public class FT_PaintComposite extends Struct {
         /**
          * Creates a new {@code FT_PaintComposite.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FT_PaintComposite#SIZEOF}, and its mark will be undefined.
+         * by {@link FT_PaintComposite#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #formatA4B4G4R4};
  * }</code></pre>
  */
-public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct<VkPhysicalDevice4444FormatsFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -73,6 +73,15 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
         PNEXT = layout.offsetof(1);
         FORMATA4R4G4B4 = layout.offsetof(2);
         FORMATA4B4G4R4 = layout.offsetof(3);
+    }
+
+    protected VkPhysicalDevice4444FormatsFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDevice4444FormatsFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDevice4444FormatsFeaturesEXT(address, container);
     }
 
     /**
@@ -159,29 +168,29 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
 
     /** Returns a new {@code VkPhysicalDevice4444FormatsFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevice4444FormatsFeaturesEXT malloc() {
-        return wrap(VkPhysicalDevice4444FormatsFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDevice4444FormatsFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDevice4444FormatsFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevice4444FormatsFeaturesEXT calloc() {
-        return wrap(VkPhysicalDevice4444FormatsFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDevice4444FormatsFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDevice4444FormatsFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDevice4444FormatsFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDevice4444FormatsFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDevice4444FormatsFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDevice4444FormatsFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDevice4444FormatsFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDevice4444FormatsFeaturesEXT.class, address);
+        return new VkPhysicalDevice4444FormatsFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevice4444FormatsFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDevice4444FormatsFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDevice4444FormatsFeaturesEXT(address, null);
     }
 
     /**
@@ -190,7 +199,7 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice4444FormatsFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -199,7 +208,7 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice4444FormatsFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -209,7 +218,7 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
      */
     public static VkPhysicalDevice4444FormatsFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -219,13 +228,13 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice4444FormatsFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevice4444FormatsFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -234,7 +243,7 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevice4444FormatsFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDevice4444FormatsFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDevice4444FormatsFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -243,7 +252,7 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevice4444FormatsFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDevice4444FormatsFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDevice4444FormatsFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -253,7 +262,7 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice4444FormatsFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -263,7 +272,7 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevice4444FormatsFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -296,9 +305,9 @@ public class VkPhysicalDevice4444FormatsFeaturesEXT extends Struct implements Na
         /**
          * Creates a new {@code VkPhysicalDevice4444FormatsFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDevice4444FormatsFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDevice4444FormatsFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

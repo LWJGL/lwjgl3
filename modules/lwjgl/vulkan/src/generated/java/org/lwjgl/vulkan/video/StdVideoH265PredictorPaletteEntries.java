@@ -26,7 +26,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint16_t PredictorPaletteEntries[STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE];
  * }</code></pre>
  */
-public class StdVideoH265PredictorPaletteEntries extends Struct implements NativeResource {
+public class StdVideoH265PredictorPaletteEntries extends Struct<StdVideoH265PredictorPaletteEntries> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -47,6 +47,15 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
         ALIGNOF = layout.getAlignment();
 
         PREDICTORPALETTEENTRIES = layout.offsetof(0);
+    }
+
+    protected StdVideoH265PredictorPaletteEntries(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected StdVideoH265PredictorPaletteEntries create(long address, @Nullable ByteBuffer container) {
+        return new StdVideoH265PredictorPaletteEntries(address, container);
     }
 
     /**
@@ -90,29 +99,29 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
 
     /** Returns a new {@code StdVideoH265PredictorPaletteEntries} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static StdVideoH265PredictorPaletteEntries malloc() {
-        return wrap(StdVideoH265PredictorPaletteEntries.class, nmemAllocChecked(SIZEOF));
+        return new StdVideoH265PredictorPaletteEntries(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH265PredictorPaletteEntries} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static StdVideoH265PredictorPaletteEntries calloc() {
-        return wrap(StdVideoH265PredictorPaletteEntries.class, nmemCallocChecked(1, SIZEOF));
+        return new StdVideoH265PredictorPaletteEntries(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH265PredictorPaletteEntries} instance allocated with {@link BufferUtils}. */
     public static StdVideoH265PredictorPaletteEntries create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(StdVideoH265PredictorPaletteEntries.class, memAddress(container), container);
+        return new StdVideoH265PredictorPaletteEntries(memAddress(container), container);
     }
 
     /** Returns a new {@code StdVideoH265PredictorPaletteEntries} instance for the specified memory address. */
     public static StdVideoH265PredictorPaletteEntries create(long address) {
-        return wrap(StdVideoH265PredictorPaletteEntries.class, address);
+        return new StdVideoH265PredictorPaletteEntries(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH265PredictorPaletteEntries createSafe(long address) {
-        return address == NULL ? null : wrap(StdVideoH265PredictorPaletteEntries.class, address);
+        return address == NULL ? null : new StdVideoH265PredictorPaletteEntries(address, null);
     }
 
     /**
@@ -121,7 +130,7 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static StdVideoH265PredictorPaletteEntries.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -130,7 +139,7 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static StdVideoH265PredictorPaletteEntries.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -140,7 +149,7 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
      */
     public static StdVideoH265PredictorPaletteEntries.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -150,13 +159,13 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static StdVideoH265PredictorPaletteEntries.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH265PredictorPaletteEntries.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -165,7 +174,7 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static StdVideoH265PredictorPaletteEntries malloc(MemoryStack stack) {
-        return wrap(StdVideoH265PredictorPaletteEntries.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new StdVideoH265PredictorPaletteEntries(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -174,7 +183,7 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static StdVideoH265PredictorPaletteEntries calloc(MemoryStack stack) {
-        return wrap(StdVideoH265PredictorPaletteEntries.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new StdVideoH265PredictorPaletteEntries(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -184,7 +193,7 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static StdVideoH265PredictorPaletteEntries.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -194,7 +203,7 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static StdVideoH265PredictorPaletteEntries.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -226,9 +235,9 @@ public class StdVideoH265PredictorPaletteEntries extends Struct implements Nativ
         /**
          * Creates a new {@code StdVideoH265PredictorPaletteEntries.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link StdVideoH265PredictorPaletteEntries#SIZEOF}, and its mark will be undefined.
+         * by {@link StdVideoH265PredictorPaletteEntries#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

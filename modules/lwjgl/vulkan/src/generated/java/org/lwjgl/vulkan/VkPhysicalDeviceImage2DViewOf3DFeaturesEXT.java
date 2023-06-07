@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #sampler2DViewOf3D};
  * }</code></pre>
  */
-public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct<VkPhysicalDeviceImage2DViewOf3DFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -68,6 +68,15 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
         PNEXT = layout.offsetof(1);
         IMAGE2DVIEWOF3D = layout.offsetof(2);
         SAMPLER2DVIEWOF3D = layout.offsetof(3);
+    }
+
+    protected VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceImage2DViewOf3DFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(address, container);
     }
 
     /**
@@ -138,29 +147,29 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
 
     /** Returns a new {@code VkPhysicalDeviceImage2DViewOf3DFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceImage2DViewOf3DFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceImage2DViewOf3DFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceImage2DViewOf3DFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.class, address);
+        return new VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(address, null);
     }
 
     /**
@@ -169,7 +178,7 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +187,7 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -188,7 +197,7 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
      */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -198,13 +207,13 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -213,7 +222,7 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -222,7 +231,7 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -242,7 +251,7 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -275,9 +284,9 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct implement
         /**
          * Creates a new {@code VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #colorWriteEnable};
  * }</code></pre>
  */
-public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct<VkPhysicalDeviceColorWriteEnableFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         COLORWRITEENABLE = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceColorWriteEnableFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceColorWriteEnableFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceColorWriteEnableFeaturesEXT(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
 
     /** Returns a new {@code VkPhysicalDeviceColorWriteEnableFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceColorWriteEnableFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceColorWriteEnableFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceColorWriteEnableFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceColorWriteEnableFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceColorWriteEnableFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceColorWriteEnableFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceColorWriteEnableFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceColorWriteEnableFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceColorWriteEnableFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceColorWriteEnableFeaturesEXT.class, address);
+        return new VkPhysicalDeviceColorWriteEnableFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceColorWriteEnableFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceColorWriteEnableFeaturesEXT(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
      */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceColorWriteEnableFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceColorWriteEnableFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceColorWriteEnableFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceColorWriteEnableFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkPhysicalDeviceColorWriteEnableFeaturesEXT extends Struct implemen
         /**
          * Creates a new {@code VkPhysicalDeviceColorWriteEnableFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceColorWriteEnableFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceColorWriteEnableFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

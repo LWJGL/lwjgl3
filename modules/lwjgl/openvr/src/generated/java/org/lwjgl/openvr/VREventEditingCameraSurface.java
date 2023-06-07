@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct VREvent_EditingCameraSurface_t")
-public class VREventEditingCameraSurface extends Struct {
+public class VREventEditingCameraSurface extends Struct<VREventEditingCameraSurface> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -47,6 +47,15 @@ public class VREventEditingCameraSurface extends Struct {
 
         OVERLAYHANDLE = layout.offsetof(0);
         NVISUALMODE = layout.offsetof(1);
+    }
+
+    protected VREventEditingCameraSurface(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VREventEditingCameraSurface create(long address, @Nullable ByteBuffer container) {
+        return new VREventEditingCameraSurface(address, container);
     }
 
     /**
@@ -73,13 +82,13 @@ public class VREventEditingCameraSurface extends Struct {
 
     /** Returns a new {@code VREventEditingCameraSurface} instance for the specified memory address. */
     public static VREventEditingCameraSurface create(long address) {
-        return wrap(VREventEditingCameraSurface.class, address);
+        return new VREventEditingCameraSurface(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventEditingCameraSurface createSafe(long address) {
-        return address == NULL ? null : wrap(VREventEditingCameraSurface.class, address);
+        return address == NULL ? null : new VREventEditingCameraSurface(address, null);
     }
 
     /**
@@ -89,13 +98,13 @@ public class VREventEditingCameraSurface extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventEditingCameraSurface.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventEditingCameraSurface.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -115,9 +124,9 @@ public class VREventEditingCameraSurface extends Struct {
         /**
          * Creates a new {@code VREventEditingCameraSurface.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VREventEditingCameraSurface#SIZEOF}, and its mark will be undefined.
+         * by {@link VREventEditingCameraSurface#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link StdVideoH265HrdParameters StdVideoH265HrdParameters} const * pHrdParameters;
  * }</code></pre>
  */
-public class StdVideoH265SequenceParameterSetVui extends Struct implements NativeResource {
+public class StdVideoH265SequenceParameterSetVui extends Struct<StdVideoH265SequenceParameterSetVui> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -145,6 +145,15 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         LOG2_MAX_MV_LENGTH_HORIZONTAL = layout.offsetof(23);
         LOG2_MAX_MV_LENGTH_VERTICAL = layout.offsetof(24);
         PHRDPARAMETERS = layout.offsetof(25);
+    }
+
+    protected StdVideoH265SequenceParameterSetVui(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected StdVideoH265SequenceParameterSetVui create(long address, @Nullable ByteBuffer container) {
+        return new StdVideoH265SequenceParameterSetVui(address, container);
     }
 
     /**
@@ -347,29 +356,29 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
 
     /** Returns a new {@code StdVideoH265SequenceParameterSetVui} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static StdVideoH265SequenceParameterSetVui malloc() {
-        return wrap(StdVideoH265SequenceParameterSetVui.class, nmemAllocChecked(SIZEOF));
+        return new StdVideoH265SequenceParameterSetVui(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH265SequenceParameterSetVui} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static StdVideoH265SequenceParameterSetVui calloc() {
-        return wrap(StdVideoH265SequenceParameterSetVui.class, nmemCallocChecked(1, SIZEOF));
+        return new StdVideoH265SequenceParameterSetVui(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH265SequenceParameterSetVui} instance allocated with {@link BufferUtils}. */
     public static StdVideoH265SequenceParameterSetVui create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(StdVideoH265SequenceParameterSetVui.class, memAddress(container), container);
+        return new StdVideoH265SequenceParameterSetVui(memAddress(container), container);
     }
 
     /** Returns a new {@code StdVideoH265SequenceParameterSetVui} instance for the specified memory address. */
     public static StdVideoH265SequenceParameterSetVui create(long address) {
-        return wrap(StdVideoH265SequenceParameterSetVui.class, address);
+        return new StdVideoH265SequenceParameterSetVui(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH265SequenceParameterSetVui createSafe(long address) {
-        return address == NULL ? null : wrap(StdVideoH265SequenceParameterSetVui.class, address);
+        return address == NULL ? null : new StdVideoH265SequenceParameterSetVui(address, null);
     }
 
     /**
@@ -378,7 +387,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static StdVideoH265SequenceParameterSetVui.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -387,7 +396,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static StdVideoH265SequenceParameterSetVui.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -397,7 +406,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
      */
     public static StdVideoH265SequenceParameterSetVui.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -407,13 +416,13 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static StdVideoH265SequenceParameterSetVui.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH265SequenceParameterSetVui.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -422,7 +431,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static StdVideoH265SequenceParameterSetVui malloc(MemoryStack stack) {
-        return wrap(StdVideoH265SequenceParameterSetVui.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new StdVideoH265SequenceParameterSetVui(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -431,7 +440,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static StdVideoH265SequenceParameterSetVui calloc(MemoryStack stack) {
-        return wrap(StdVideoH265SequenceParameterSetVui.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new StdVideoH265SequenceParameterSetVui(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -441,7 +450,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static StdVideoH265SequenceParameterSetVui.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -451,7 +460,7 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static StdVideoH265SequenceParameterSetVui.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -577,9 +586,9 @@ public class StdVideoH265SequenceParameterSetVui extends Struct implements Nativ
         /**
          * Creates a new {@code StdVideoH265SequenceParameterSetVui.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link StdVideoH265SequenceParameterSetVui#SIZEOF}, and its mark will be undefined.
+         * by {@link StdVideoH265SequenceParameterSetVui#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

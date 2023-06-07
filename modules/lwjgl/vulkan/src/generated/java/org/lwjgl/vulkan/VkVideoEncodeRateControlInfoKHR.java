@@ -54,7 +54,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkVideoEncodeRateControlLayerInfoKHR VkVideoEncodeRateControlLayerInfoKHR} const * {@link #pLayers};
  * }</code></pre>
  */
-public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeResource {
+public class VkVideoEncodeRateControlInfoKHR extends Struct<VkVideoEncodeRateControlInfoKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -90,6 +90,15 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
         RATECONTROLMODE = layout.offsetof(3);
         LAYERCOUNT = layout.offsetof(4);
         PLAYERS = layout.offsetof(5);
+    }
+
+    protected VkVideoEncodeRateControlInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkVideoEncodeRateControlInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkVideoEncodeRateControlInfoKHR(address, container);
     }
 
     /**
@@ -171,29 +180,29 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
 
     /** Returns a new {@code VkVideoEncodeRateControlInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkVideoEncodeRateControlInfoKHR malloc() {
-        return wrap(VkVideoEncodeRateControlInfoKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkVideoEncodeRateControlInfoKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoEncodeRateControlInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkVideoEncodeRateControlInfoKHR calloc() {
-        return wrap(VkVideoEncodeRateControlInfoKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkVideoEncodeRateControlInfoKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoEncodeRateControlInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkVideoEncodeRateControlInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkVideoEncodeRateControlInfoKHR.class, memAddress(container), container);
+        return new VkVideoEncodeRateControlInfoKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkVideoEncodeRateControlInfoKHR} instance for the specified memory address. */
     public static VkVideoEncodeRateControlInfoKHR create(long address) {
-        return wrap(VkVideoEncodeRateControlInfoKHR.class, address);
+        return new VkVideoEncodeRateControlInfoKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoEncodeRateControlInfoKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkVideoEncodeRateControlInfoKHR.class, address);
+        return address == NULL ? null : new VkVideoEncodeRateControlInfoKHR(address, null);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeRateControlInfoKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeRateControlInfoKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
      */
     public static VkVideoEncodeRateControlInfoKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -231,13 +240,13 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeRateControlInfoKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoEncodeRateControlInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -246,7 +255,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkVideoEncodeRateControlInfoKHR malloc(MemoryStack stack) {
-        return wrap(VkVideoEncodeRateControlInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkVideoEncodeRateControlInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -255,7 +264,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkVideoEncodeRateControlInfoKHR calloc(MemoryStack stack) {
-        return wrap(VkVideoEncodeRateControlInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkVideoEncodeRateControlInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -265,7 +274,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeRateControlInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -275,7 +284,7 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeRateControlInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -327,9 +336,9 @@ public class VkVideoEncodeRateControlInfoKHR extends Struct implements NativeRes
         /**
          * Creates a new {@code VkVideoEncodeRateControlInfoKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkVideoEncodeRateControlInfoKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkVideoEncodeRateControlInfoKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

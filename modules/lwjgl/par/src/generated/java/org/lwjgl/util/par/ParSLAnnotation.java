@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct parsl_annotation")
-public class ParSLAnnotation extends Struct {
+public class ParSLAnnotation extends Struct<ParSLAnnotation> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -59,6 +59,15 @@ public class ParSLAnnotation extends Struct {
         SPINE_TO_EDGE_Y = layout.offsetof(3);
     }
 
+    protected ParSLAnnotation(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected ParSLAnnotation create(long address, @Nullable ByteBuffer container) {
+        return new ParSLAnnotation(address, container);
+    }
+
     /**
      * Creates a {@code ParSLAnnotation} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -85,13 +94,13 @@ public class ParSLAnnotation extends Struct {
 
     /** Returns a new {@code ParSLAnnotation} instance for the specified memory address. */
     public static ParSLAnnotation create(long address) {
-        return wrap(ParSLAnnotation.class, address);
+        return new ParSLAnnotation(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ParSLAnnotation createSafe(long address) {
-        return address == NULL ? null : wrap(ParSLAnnotation.class, address);
+        return address == NULL ? null : new ParSLAnnotation(address, null);
     }
 
     /**
@@ -101,13 +110,13 @@ public class ParSLAnnotation extends Struct {
      * @param capacity the buffer capacity
      */
     public static ParSLAnnotation.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ParSLAnnotation.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -131,9 +140,9 @@ public class ParSLAnnotation extends Struct {
         /**
          * Creates a new {@code ParSLAnnotation.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link ParSLAnnotation#SIZEOF}, and its mark will be undefined.
+         * by {@link ParSLAnnotation#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

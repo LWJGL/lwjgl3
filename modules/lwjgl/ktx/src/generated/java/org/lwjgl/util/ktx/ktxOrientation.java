@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct ktxOrientation")
-public class ktxOrientation extends Struct {
+public class ktxOrientation extends Struct<ktxOrientation> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -53,6 +53,15 @@ public class ktxOrientation extends Struct {
         X = layout.offsetof(0);
         Y = layout.offsetof(1);
         Z = layout.offsetof(2);
+    }
+
+    protected ktxOrientation(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected ktxOrientation create(long address, @Nullable ByteBuffer container) {
+        return new ktxOrientation(address, container);
     }
 
     /**
@@ -82,13 +91,13 @@ public class ktxOrientation extends Struct {
 
     /** Returns a new {@code ktxOrientation} instance for the specified memory address. */
     public static ktxOrientation create(long address) {
-        return wrap(ktxOrientation.class, address);
+        return new ktxOrientation(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ktxOrientation createSafe(long address) {
-        return address == NULL ? null : wrap(ktxOrientation.class, address);
+        return address == NULL ? null : new ktxOrientation(address, null);
     }
 
     /**
@@ -98,13 +107,13 @@ public class ktxOrientation extends Struct {
      * @param capacity the buffer capacity
      */
     public static ktxOrientation.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ktxOrientation.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -126,9 +135,9 @@ public class ktxOrientation extends Struct {
         /**
          * Creates a new {@code ktxOrientation.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link ktxOrientation#SIZEOF}, and its mark will be undefined.
+         * by {@link ktxOrientation#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

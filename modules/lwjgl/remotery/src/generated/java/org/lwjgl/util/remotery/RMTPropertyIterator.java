@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct rmtPropertyIterator")
-public class RMTPropertyIterator extends Struct implements NativeResource {
+public class RMTPropertyIterator extends Struct<RMTPropertyIterator> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -53,6 +53,15 @@ public class RMTPropertyIterator extends Struct implements NativeResource {
         INITIAL = layout.offsetof(1);
     }
 
+    protected RMTPropertyIterator(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected RMTPropertyIterator create(long address, @Nullable ByteBuffer container) {
+        return new RMTPropertyIterator(address, container);
+    }
+
     /**
      * Creates a {@code RMTPropertyIterator} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -74,29 +83,29 @@ public class RMTPropertyIterator extends Struct implements NativeResource {
 
     /** Returns a new {@code RMTPropertyIterator} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static RMTPropertyIterator malloc() {
-        return wrap(RMTPropertyIterator.class, nmemAllocChecked(SIZEOF));
+        return new RMTPropertyIterator(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code RMTPropertyIterator} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static RMTPropertyIterator calloc() {
-        return wrap(RMTPropertyIterator.class, nmemCallocChecked(1, SIZEOF));
+        return new RMTPropertyIterator(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code RMTPropertyIterator} instance allocated with {@link BufferUtils}. */
     public static RMTPropertyIterator create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(RMTPropertyIterator.class, memAddress(container), container);
+        return new RMTPropertyIterator(memAddress(container), container);
     }
 
     /** Returns a new {@code RMTPropertyIterator} instance for the specified memory address. */
     public static RMTPropertyIterator create(long address) {
-        return wrap(RMTPropertyIterator.class, address);
+        return new RMTPropertyIterator(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static RMTPropertyIterator createSafe(long address) {
-        return address == NULL ? null : wrap(RMTPropertyIterator.class, address);
+        return address == NULL ? null : new RMTPropertyIterator(address, null);
     }
 
     /**
@@ -105,7 +114,7 @@ public class RMTPropertyIterator extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static RMTPropertyIterator malloc(MemoryStack stack) {
-        return wrap(RMTPropertyIterator.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new RMTPropertyIterator(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -114,7 +123,7 @@ public class RMTPropertyIterator extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static RMTPropertyIterator calloc(MemoryStack stack) {
-        return wrap(RMTPropertyIterator.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new RMTPropertyIterator(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

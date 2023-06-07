@@ -59,7 +59,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #transformOffset};
  * }</code></pre>
  */
-public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements NativeResource {
+public class VkAccelerationStructureBuildRangeInfoKHR extends Struct<VkAccelerationStructureBuildRangeInfoKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -89,6 +89,15 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
         PRIMITIVEOFFSET = layout.offsetof(1);
         FIRSTVERTEX = layout.offsetof(2);
         TRANSFORMOFFSET = layout.offsetof(3);
+    }
+
+    protected VkAccelerationStructureBuildRangeInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkAccelerationStructureBuildRangeInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkAccelerationStructureBuildRangeInfoKHR(address, container);
     }
 
     /**
@@ -157,29 +166,29 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
 
     /** Returns a new {@code VkAccelerationStructureBuildRangeInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkAccelerationStructureBuildRangeInfoKHR malloc() {
-        return wrap(VkAccelerationStructureBuildRangeInfoKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkAccelerationStructureBuildRangeInfoKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkAccelerationStructureBuildRangeInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkAccelerationStructureBuildRangeInfoKHR calloc() {
-        return wrap(VkAccelerationStructureBuildRangeInfoKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkAccelerationStructureBuildRangeInfoKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkAccelerationStructureBuildRangeInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkAccelerationStructureBuildRangeInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkAccelerationStructureBuildRangeInfoKHR.class, memAddress(container), container);
+        return new VkAccelerationStructureBuildRangeInfoKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkAccelerationStructureBuildRangeInfoKHR} instance for the specified memory address. */
     public static VkAccelerationStructureBuildRangeInfoKHR create(long address) {
-        return wrap(VkAccelerationStructureBuildRangeInfoKHR.class, address);
+        return new VkAccelerationStructureBuildRangeInfoKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAccelerationStructureBuildRangeInfoKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkAccelerationStructureBuildRangeInfoKHR.class, address);
+        return address == NULL ? null : new VkAccelerationStructureBuildRangeInfoKHR(address, null);
     }
 
     /**
@@ -188,7 +197,7 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureBuildRangeInfoKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -197,7 +206,7 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureBuildRangeInfoKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -207,7 +216,7 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
      */
     public static VkAccelerationStructureBuildRangeInfoKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -217,13 +226,13 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureBuildRangeInfoKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAccelerationStructureBuildRangeInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -232,7 +241,7 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
      * @param stack the stack from which to allocate
      */
     public static VkAccelerationStructureBuildRangeInfoKHR malloc(MemoryStack stack) {
-        return wrap(VkAccelerationStructureBuildRangeInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkAccelerationStructureBuildRangeInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -241,7 +250,7 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
      * @param stack the stack from which to allocate
      */
     public static VkAccelerationStructureBuildRangeInfoKHR calloc(MemoryStack stack) {
-        return wrap(VkAccelerationStructureBuildRangeInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkAccelerationStructureBuildRangeInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -251,7 +260,7 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureBuildRangeInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -261,7 +270,7 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureBuildRangeInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -294,9 +303,9 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct implements 
         /**
          * Creates a new {@code VkAccelerationStructureBuildRangeInfoKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkAccelerationStructureBuildRangeInfoKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkAccelerationStructureBuildRangeInfoKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

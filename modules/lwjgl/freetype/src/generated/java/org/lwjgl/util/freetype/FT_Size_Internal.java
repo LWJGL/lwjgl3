@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link FT_Size_Metrics FT_Size_Metrics} autohint_metrics;
  * }</code></pre>
  */
-public class FT_Size_Internal extends Struct {
+public class FT_Size_Internal extends Struct<FT_Size_Internal> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -52,6 +52,15 @@ public class FT_Size_Internal extends Struct {
         AUTOHINT_METRICS = layout.offsetof(2);
     }
 
+    protected FT_Size_Internal(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FT_Size_Internal create(long address, @Nullable ByteBuffer container) {
+        return new FT_Size_Internal(address, container);
+    }
+
     /**
      * Creates a {@code FT_Size_Internal} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -78,13 +87,13 @@ public class FT_Size_Internal extends Struct {
 
     /** Returns a new {@code FT_Size_Internal} instance for the specified memory address. */
     public static FT_Size_Internal create(long address) {
-        return wrap(FT_Size_Internal.class, address);
+        return new FT_Size_Internal(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_Size_Internal createSafe(long address) {
-        return address == NULL ? null : wrap(FT_Size_Internal.class, address);
+        return address == NULL ? null : new FT_Size_Internal(address, null);
     }
 
     /**
@@ -94,13 +103,13 @@ public class FT_Size_Internal extends Struct {
      * @param capacity the buffer capacity
      */
     public static FT_Size_Internal.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_Size_Internal.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -122,9 +131,9 @@ public class FT_Size_Internal extends Struct {
         /**
          * Creates a new {@code FT_Size_Internal.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FT_Size_Internal#SIZEOF}, and its mark will be undefined.
+         * by {@link FT_Size_Internal#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

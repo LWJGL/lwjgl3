@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkImage {@link #image};
  * }</code></pre>
  */
-public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements NativeResource {
+public class VkImageSparseMemoryRequirementsInfo2 extends Struct<VkImageSparseMemoryRequirementsInfo2> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -66,6 +66,15 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         IMAGE = layout.offsetof(2);
+    }
+
+    protected VkImageSparseMemoryRequirementsInfo2(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkImageSparseMemoryRequirementsInfo2 create(long address, @Nullable ByteBuffer container) {
+        return new VkImageSparseMemoryRequirementsInfo2(address, container);
     }
 
     /**
@@ -129,29 +138,29 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
 
     /** Returns a new {@code VkImageSparseMemoryRequirementsInfo2} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageSparseMemoryRequirementsInfo2 malloc() {
-        return wrap(VkImageSparseMemoryRequirementsInfo2.class, nmemAllocChecked(SIZEOF));
+        return new VkImageSparseMemoryRequirementsInfo2(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkImageSparseMemoryRequirementsInfo2} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageSparseMemoryRequirementsInfo2 calloc() {
-        return wrap(VkImageSparseMemoryRequirementsInfo2.class, nmemCallocChecked(1, SIZEOF));
+        return new VkImageSparseMemoryRequirementsInfo2(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkImageSparseMemoryRequirementsInfo2} instance allocated with {@link BufferUtils}. */
     public static VkImageSparseMemoryRequirementsInfo2 create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkImageSparseMemoryRequirementsInfo2.class, memAddress(container), container);
+        return new VkImageSparseMemoryRequirementsInfo2(memAddress(container), container);
     }
 
     /** Returns a new {@code VkImageSparseMemoryRequirementsInfo2} instance for the specified memory address. */
     public static VkImageSparseMemoryRequirementsInfo2 create(long address) {
-        return wrap(VkImageSparseMemoryRequirementsInfo2.class, address);
+        return new VkImageSparseMemoryRequirementsInfo2(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageSparseMemoryRequirementsInfo2 createSafe(long address) {
-        return address == NULL ? null : wrap(VkImageSparseMemoryRequirementsInfo2.class, address);
+        return address == NULL ? null : new VkImageSparseMemoryRequirementsInfo2(address, null);
     }
 
     /**
@@ -160,7 +169,7 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkImageSparseMemoryRequirementsInfo2.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -169,7 +178,7 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkImageSparseMemoryRequirementsInfo2.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -179,7 +188,7 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
      */
     public static VkImageSparseMemoryRequirementsInfo2.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -189,13 +198,13 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkImageSparseMemoryRequirementsInfo2.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageSparseMemoryRequirementsInfo2.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -223,7 +232,7 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkImageSparseMemoryRequirementsInfo2 malloc(MemoryStack stack) {
-        return wrap(VkImageSparseMemoryRequirementsInfo2.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkImageSparseMemoryRequirementsInfo2(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkImageSparseMemoryRequirementsInfo2 calloc(MemoryStack stack) {
-        return wrap(VkImageSparseMemoryRequirementsInfo2.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkImageSparseMemoryRequirementsInfo2(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -242,7 +251,7 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkImageSparseMemoryRequirementsInfo2.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -252,7 +261,7 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkImageSparseMemoryRequirementsInfo2.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -281,9 +290,9 @@ public class VkImageSparseMemoryRequirementsInfo2 extends Struct implements Nati
         /**
          * Creates a new {@code VkImageSparseMemoryRequirementsInfo2.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkImageSparseMemoryRequirementsInfo2#SIZEOF}, and its mark will be undefined.
+         * by {@link VkImageSparseMemoryRequirementsInfo2#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

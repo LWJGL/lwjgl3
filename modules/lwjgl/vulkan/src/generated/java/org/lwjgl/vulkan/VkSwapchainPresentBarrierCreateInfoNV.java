@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #presentBarrierEnable};
  * }</code></pre>
  */
-public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements NativeResource {
+public class VkSwapchainPresentBarrierCreateInfoNV extends Struct<VkSwapchainPresentBarrierCreateInfoNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         PRESENTBARRIERENABLE = layout.offsetof(2);
+    }
+
+    protected VkSwapchainPresentBarrierCreateInfoNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkSwapchainPresentBarrierCreateInfoNV create(long address, @Nullable ByteBuffer container) {
+        return new VkSwapchainPresentBarrierCreateInfoNV(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
 
     /** Returns a new {@code VkSwapchainPresentBarrierCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSwapchainPresentBarrierCreateInfoNV malloc() {
-        return wrap(VkSwapchainPresentBarrierCreateInfoNV.class, nmemAllocChecked(SIZEOF));
+        return new VkSwapchainPresentBarrierCreateInfoNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkSwapchainPresentBarrierCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSwapchainPresentBarrierCreateInfoNV calloc() {
-        return wrap(VkSwapchainPresentBarrierCreateInfoNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkSwapchainPresentBarrierCreateInfoNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkSwapchainPresentBarrierCreateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkSwapchainPresentBarrierCreateInfoNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkSwapchainPresentBarrierCreateInfoNV.class, memAddress(container), container);
+        return new VkSwapchainPresentBarrierCreateInfoNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkSwapchainPresentBarrierCreateInfoNV} instance for the specified memory address. */
     public static VkSwapchainPresentBarrierCreateInfoNV create(long address) {
-        return wrap(VkSwapchainPresentBarrierCreateInfoNV.class, address);
+        return new VkSwapchainPresentBarrierCreateInfoNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSwapchainPresentBarrierCreateInfoNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkSwapchainPresentBarrierCreateInfoNV.class, address);
+        return address == NULL ? null : new VkSwapchainPresentBarrierCreateInfoNV(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkSwapchainPresentBarrierCreateInfoNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkSwapchainPresentBarrierCreateInfoNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
      */
     public static VkSwapchainPresentBarrierCreateInfoNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkSwapchainPresentBarrierCreateInfoNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSwapchainPresentBarrierCreateInfoNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static VkSwapchainPresentBarrierCreateInfoNV malloc(MemoryStack stack) {
-        return wrap(VkSwapchainPresentBarrierCreateInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkSwapchainPresentBarrierCreateInfoNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static VkSwapchainPresentBarrierCreateInfoNV calloc(MemoryStack stack) {
-        return wrap(VkSwapchainPresentBarrierCreateInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkSwapchainPresentBarrierCreateInfoNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkSwapchainPresentBarrierCreateInfoNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkSwapchainPresentBarrierCreateInfoNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct implements Nat
         /**
          * Creates a new {@code VkSwapchainPresentBarrierCreateInfoNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkSwapchainPresentBarrierCreateInfoNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkSwapchainPresentBarrierCreateInfoNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

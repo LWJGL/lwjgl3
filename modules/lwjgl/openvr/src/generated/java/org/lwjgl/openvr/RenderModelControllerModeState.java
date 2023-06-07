@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct RenderModel_ControllerMode_State_t")
-public class RenderModelControllerModeState extends Struct implements NativeResource {
+public class RenderModelControllerModeState extends Struct<RenderModelControllerModeState> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -45,6 +45,15 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
         ALIGNOF = layout.getAlignment();
 
         BSCROLLWHEELVISIBLE = layout.offsetof(0);
+    }
+
+    protected RenderModelControllerModeState(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected RenderModelControllerModeState create(long address, @Nullable ByteBuffer container) {
+        return new RenderModelControllerModeState(address, container);
     }
 
     /**
@@ -83,29 +92,29 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
 
     /** Returns a new {@code RenderModelControllerModeState} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static RenderModelControllerModeState malloc() {
-        return wrap(RenderModelControllerModeState.class, nmemAllocChecked(SIZEOF));
+        return new RenderModelControllerModeState(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code RenderModelControllerModeState} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static RenderModelControllerModeState calloc() {
-        return wrap(RenderModelControllerModeState.class, nmemCallocChecked(1, SIZEOF));
+        return new RenderModelControllerModeState(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code RenderModelControllerModeState} instance allocated with {@link BufferUtils}. */
     public static RenderModelControllerModeState create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(RenderModelControllerModeState.class, memAddress(container), container);
+        return new RenderModelControllerModeState(memAddress(container), container);
     }
 
     /** Returns a new {@code RenderModelControllerModeState} instance for the specified memory address. */
     public static RenderModelControllerModeState create(long address) {
-        return wrap(RenderModelControllerModeState.class, address);
+        return new RenderModelControllerModeState(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static RenderModelControllerModeState createSafe(long address) {
-        return address == NULL ? null : wrap(RenderModelControllerModeState.class, address);
+        return address == NULL ? null : new RenderModelControllerModeState(address, null);
     }
 
     /**
@@ -114,7 +123,7 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static RenderModelControllerModeState.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -123,7 +132,7 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static RenderModelControllerModeState.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -133,7 +142,7 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
      */
     public static RenderModelControllerModeState.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -143,13 +152,13 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static RenderModelControllerModeState.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static RenderModelControllerModeState.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -177,7 +186,7 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static RenderModelControllerModeState malloc(MemoryStack stack) {
-        return wrap(RenderModelControllerModeState.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new RenderModelControllerModeState(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -186,7 +195,7 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static RenderModelControllerModeState calloc(MemoryStack stack) {
-        return wrap(RenderModelControllerModeState.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new RenderModelControllerModeState(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -196,7 +205,7 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static RenderModelControllerModeState.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -206,7 +215,7 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static RenderModelControllerModeState.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -227,9 +236,9 @@ public class RenderModelControllerModeState extends Struct implements NativeReso
         /**
          * Creates a new {@code RenderModelControllerModeState.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link RenderModelControllerModeState#SIZEOF}, and its mark will be undefined.
+         * by {@link RenderModelControllerModeState#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

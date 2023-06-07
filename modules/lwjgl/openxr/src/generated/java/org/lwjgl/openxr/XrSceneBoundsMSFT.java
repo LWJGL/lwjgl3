@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrSceneFrustumBoundMSFT XrSceneFrustumBoundMSFT} const * {@link #frustums};
  * }</code></pre>
  */
-public class XrSceneBoundsMSFT extends Struct implements NativeResource {
+public class XrSceneBoundsMSFT extends Struct<XrSceneBoundsMSFT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -89,6 +89,15 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
         BOXES = layout.offsetof(5);
         FRUSTUMCOUNT = layout.offsetof(6);
         FRUSTUMS = layout.offsetof(7);
+    }
+
+    protected XrSceneBoundsMSFT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSceneBoundsMSFT create(long address, @Nullable ByteBuffer container) {
+        return new XrSceneBoundsMSFT(address, container);
     }
 
     /**
@@ -188,29 +197,29 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
 
     /** Returns a new {@code XrSceneBoundsMSFT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSceneBoundsMSFT malloc() {
-        return wrap(XrSceneBoundsMSFT.class, nmemAllocChecked(SIZEOF));
+        return new XrSceneBoundsMSFT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSceneBoundsMSFT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSceneBoundsMSFT calloc() {
-        return wrap(XrSceneBoundsMSFT.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSceneBoundsMSFT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSceneBoundsMSFT} instance allocated with {@link BufferUtils}. */
     public static XrSceneBoundsMSFT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSceneBoundsMSFT.class, memAddress(container), container);
+        return new XrSceneBoundsMSFT(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSceneBoundsMSFT} instance for the specified memory address. */
     public static XrSceneBoundsMSFT create(long address) {
-        return wrap(XrSceneBoundsMSFT.class, address);
+        return new XrSceneBoundsMSFT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSceneBoundsMSFT createSafe(long address) {
-        return address == NULL ? null : wrap(XrSceneBoundsMSFT.class, address);
+        return address == NULL ? null : new XrSceneBoundsMSFT(address, null);
     }
 
     /**
@@ -219,7 +228,7 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrSceneBoundsMSFT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -228,7 +237,7 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrSceneBoundsMSFT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -238,7 +247,7 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
      */
     public static XrSceneBoundsMSFT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -248,13 +257,13 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrSceneBoundsMSFT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSceneBoundsMSFT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -263,7 +272,7 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrSceneBoundsMSFT malloc(MemoryStack stack) {
-        return wrap(XrSceneBoundsMSFT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSceneBoundsMSFT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -272,7 +281,7 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrSceneBoundsMSFT calloc(MemoryStack stack) {
-        return wrap(XrSceneBoundsMSFT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSceneBoundsMSFT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -282,7 +291,7 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrSceneBoundsMSFT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -292,7 +301,7 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrSceneBoundsMSFT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -350,9 +359,9 @@ public class XrSceneBoundsMSFT extends Struct implements NativeResource {
         /**
          * Creates a new {@code XrSceneBoundsMSFT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSceneBoundsMSFT#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSceneBoundsMSFT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

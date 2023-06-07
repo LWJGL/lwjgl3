@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBuffer buffer;
  * }</code></pre>
  */
-public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Struct implements NativeResource {
+public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Struct<VkDescriptorBufferBindingPushDescriptorBufferHandleEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -61,6 +61,15 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         BUFFER = layout.offsetof(2);
+    }
+
+    protected VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkDescriptorBufferBindingPushDescriptorBufferHandleEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(address, container);
     }
 
     /**
@@ -124,29 +133,29 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
 
     /** Returns a new {@code VkDescriptorBufferBindingPushDescriptorBufferHandleEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT malloc() {
-        return wrap(VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkDescriptorBufferBindingPushDescriptorBufferHandleEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT calloc() {
-        return wrap(VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkDescriptorBufferBindingPushDescriptorBufferHandleEXT} instance allocated with {@link BufferUtils}. */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.class, memAddress(container), container);
+        return new VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkDescriptorBufferBindingPushDescriptorBufferHandleEXT} instance for the specified memory address. */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT create(long address) {
-        return wrap(VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.class, address);
+        return new VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.class, address);
+        return address == NULL ? null : new VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(address, null);
     }
 
     /**
@@ -155,7 +164,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
      * @param capacity the buffer capacity
      */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -164,7 +173,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
      * @param capacity the buffer capacity
      */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -174,7 +183,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
      */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -184,13 +193,13 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
      * @param capacity the buffer capacity
      */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -199,7 +208,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT malloc(MemoryStack stack) {
-        return wrap(VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -208,7 +217,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
      * @param stack the stack from which to allocate
      */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT calloc(MemoryStack stack) {
-        return wrap(VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -218,7 +227,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
      * @param capacity the buffer capacity
      */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -228,7 +237,7 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
      * @param capacity the buffer capacity
      */
     public static VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -257,9 +266,9 @@ public class VkDescriptorBufferBindingPushDescriptorBufferHandleEXT extends Stru
         /**
          * Creates a new {@code VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

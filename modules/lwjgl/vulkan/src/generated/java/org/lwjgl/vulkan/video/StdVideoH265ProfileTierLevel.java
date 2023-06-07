@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     StdVideoH265LevelIdc general_level_idc;
  * }</code></pre>
  */
-public class StdVideoH265ProfileTierLevel extends Struct implements NativeResource {
+public class StdVideoH265ProfileTierLevel extends Struct<StdVideoH265ProfileTierLevel> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -52,6 +52,15 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
         FLAGS = layout.offsetof(0);
         GENERAL_PROFILE_IDC = layout.offsetof(1);
         GENERAL_LEVEL_IDC = layout.offsetof(2);
+    }
+
+    protected StdVideoH265ProfileTierLevel(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected StdVideoH265ProfileTierLevel create(long address, @Nullable ByteBuffer container) {
+        return new StdVideoH265ProfileTierLevel(address, container);
     }
 
     /**
@@ -114,29 +123,29 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
 
     /** Returns a new {@code StdVideoH265ProfileTierLevel} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static StdVideoH265ProfileTierLevel malloc() {
-        return wrap(StdVideoH265ProfileTierLevel.class, nmemAllocChecked(SIZEOF));
+        return new StdVideoH265ProfileTierLevel(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH265ProfileTierLevel} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static StdVideoH265ProfileTierLevel calloc() {
-        return wrap(StdVideoH265ProfileTierLevel.class, nmemCallocChecked(1, SIZEOF));
+        return new StdVideoH265ProfileTierLevel(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH265ProfileTierLevel} instance allocated with {@link BufferUtils}. */
     public static StdVideoH265ProfileTierLevel create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(StdVideoH265ProfileTierLevel.class, memAddress(container), container);
+        return new StdVideoH265ProfileTierLevel(memAddress(container), container);
     }
 
     /** Returns a new {@code StdVideoH265ProfileTierLevel} instance for the specified memory address. */
     public static StdVideoH265ProfileTierLevel create(long address) {
-        return wrap(StdVideoH265ProfileTierLevel.class, address);
+        return new StdVideoH265ProfileTierLevel(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH265ProfileTierLevel createSafe(long address) {
-        return address == NULL ? null : wrap(StdVideoH265ProfileTierLevel.class, address);
+        return address == NULL ? null : new StdVideoH265ProfileTierLevel(address, null);
     }
 
     /**
@@ -145,7 +154,7 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static StdVideoH265ProfileTierLevel.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -154,7 +163,7 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static StdVideoH265ProfileTierLevel.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -164,7 +173,7 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
      */
     public static StdVideoH265ProfileTierLevel.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -174,13 +183,13 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static StdVideoH265ProfileTierLevel.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH265ProfileTierLevel.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -189,7 +198,7 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static StdVideoH265ProfileTierLevel malloc(MemoryStack stack) {
-        return wrap(StdVideoH265ProfileTierLevel.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new StdVideoH265ProfileTierLevel(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -198,7 +207,7 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static StdVideoH265ProfileTierLevel calloc(MemoryStack stack) {
-        return wrap(StdVideoH265ProfileTierLevel.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new StdVideoH265ProfileTierLevel(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -208,7 +217,7 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static StdVideoH265ProfileTierLevel.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -218,7 +227,7 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static StdVideoH265ProfileTierLevel.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -247,9 +256,9 @@ public class StdVideoH265ProfileTierLevel extends Struct implements NativeResour
         /**
          * Creates a new {@code StdVideoH265ProfileTierLevel.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link StdVideoH265ProfileTierLevel#SIZEOF}, and its mark will be undefined.
+         * by {@link StdVideoH265ProfileTierLevel#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

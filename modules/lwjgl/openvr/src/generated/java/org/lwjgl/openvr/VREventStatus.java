@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct VREvent_Status_t")
-public class VREventStatus extends Struct {
+public class VREventStatus extends Struct<VREventStatus> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -45,6 +45,15 @@ public class VREventStatus extends Struct {
         ALIGNOF = layout.getAlignment();
 
         STATUSSTATE = layout.offsetof(0);
+    }
+
+    protected VREventStatus(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VREventStatus create(long address, @Nullable ByteBuffer container) {
+        return new VREventStatus(address, container);
     }
 
     /**
@@ -68,13 +77,13 @@ public class VREventStatus extends Struct {
 
     /** Returns a new {@code VREventStatus} instance for the specified memory address. */
     public static VREventStatus create(long address) {
-        return wrap(VREventStatus.class, address);
+        return new VREventStatus(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventStatus createSafe(long address) {
-        return address == NULL ? null : wrap(VREventStatus.class, address);
+        return address == NULL ? null : new VREventStatus(address, null);
     }
 
     /**
@@ -84,13 +93,13 @@ public class VREventStatus extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventStatus.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventStatus.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -108,9 +117,9 @@ public class VREventStatus extends Struct {
         /**
          * Creates a new {@code VREventStatus.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VREventStatus#SIZEOF}, and its mark will be undefined.
+         * by {@link VREventStatus#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

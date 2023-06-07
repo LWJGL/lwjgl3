@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct bgfx_internal_data_t")
-public class BGFXInternalData extends Struct {
+public class BGFXInternalData extends Struct<BGFXInternalData> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -49,6 +49,15 @@ public class BGFXInternalData extends Struct {
 
         CAPS = layout.offsetof(0);
         CONTEXT = layout.offsetof(1);
+    }
+
+    protected BGFXInternalData(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected BGFXInternalData create(long address, @Nullable ByteBuffer container) {
+        return new BGFXInternalData(address, container);
     }
 
     /**
@@ -75,13 +84,13 @@ public class BGFXInternalData extends Struct {
 
     /** Returns a new {@code BGFXInternalData} instance for the specified memory address. */
     public static BGFXInternalData create(long address) {
-        return wrap(BGFXInternalData.class, address);
+        return new BGFXInternalData(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXInternalData createSafe(long address) {
-        return address == NULL ? null : wrap(BGFXInternalData.class, address);
+        return address == NULL ? null : new BGFXInternalData(address, null);
     }
 
     // -----------------------------------

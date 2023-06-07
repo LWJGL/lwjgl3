@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #subpassMergeFeedback};
  * }</code></pre>
  */
-public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct<VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         SUBPASSMERGEFEEDBACK = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
 
     /** Returns a new {@code VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.class, address);
+        return new VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
      */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct impl
         /**
          * Creates a new {@code VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

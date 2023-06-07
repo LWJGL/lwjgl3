@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkVideoEncodeFeedbackFlagsKHR {@link #supportedEncodeFeedbackFlags};
  * }</code></pre>
  */
-public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResource {
+public class VkVideoEncodeCapabilitiesKHR extends Struct<VkVideoEncodeCapabilitiesKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -90,6 +90,15 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
         MAXQUALITYLEVELS = layout.offsetof(5);
         INPUTIMAGEDATAFILLALIGNMENT = layout.offsetof(6);
         SUPPORTEDENCODEFEEDBACKFLAGS = layout.offsetof(7);
+    }
+
+    protected VkVideoEncodeCapabilitiesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkVideoEncodeCapabilitiesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkVideoEncodeCapabilitiesKHR(address, container);
     }
 
     /**
@@ -163,29 +172,29 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
 
     /** Returns a new {@code VkVideoEncodeCapabilitiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkVideoEncodeCapabilitiesKHR malloc() {
-        return wrap(VkVideoEncodeCapabilitiesKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkVideoEncodeCapabilitiesKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoEncodeCapabilitiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkVideoEncodeCapabilitiesKHR calloc() {
-        return wrap(VkVideoEncodeCapabilitiesKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkVideoEncodeCapabilitiesKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoEncodeCapabilitiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkVideoEncodeCapabilitiesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkVideoEncodeCapabilitiesKHR.class, memAddress(container), container);
+        return new VkVideoEncodeCapabilitiesKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkVideoEncodeCapabilitiesKHR} instance for the specified memory address. */
     public static VkVideoEncodeCapabilitiesKHR create(long address) {
-        return wrap(VkVideoEncodeCapabilitiesKHR.class, address);
+        return new VkVideoEncodeCapabilitiesKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoEncodeCapabilitiesKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkVideoEncodeCapabilitiesKHR.class, address);
+        return address == NULL ? null : new VkVideoEncodeCapabilitiesKHR(address, null);
     }
 
     /**
@@ -194,7 +203,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeCapabilitiesKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -203,7 +212,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeCapabilitiesKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -213,7 +222,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
      */
     public static VkVideoEncodeCapabilitiesKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -223,13 +232,13 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeCapabilitiesKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoEncodeCapabilitiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -238,7 +247,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkVideoEncodeCapabilitiesKHR malloc(MemoryStack stack) {
-        return wrap(VkVideoEncodeCapabilitiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkVideoEncodeCapabilitiesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -247,7 +256,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkVideoEncodeCapabilitiesKHR calloc(MemoryStack stack) {
-        return wrap(VkVideoEncodeCapabilitiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkVideoEncodeCapabilitiesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -257,7 +266,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeCapabilitiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -267,7 +276,7 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeCapabilitiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -304,9 +313,9 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct implements NativeResour
         /**
          * Creates a new {@code VkVideoEncodeCapabilitiesKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkVideoEncodeCapabilitiesKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkVideoEncodeCapabilitiesKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

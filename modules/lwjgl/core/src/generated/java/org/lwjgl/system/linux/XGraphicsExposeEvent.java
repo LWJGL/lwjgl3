@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int {@link #minor_code};
  * }</code></pre>
  */
-public class XGraphicsExposeEvent extends Struct implements NativeResource {
+public class XGraphicsExposeEvent extends Struct<XGraphicsExposeEvent> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -89,6 +89,15 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
         COUNT = layout.offsetof(9);
         MAJOR_CODE = layout.offsetof(10);
         MINOR_CODE = layout.offsetof(11);
+    }
+
+    protected XGraphicsExposeEvent(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XGraphicsExposeEvent create(long address, @Nullable ByteBuffer container) {
+        return new XGraphicsExposeEvent(address, container);
     }
 
     /**
@@ -205,29 +214,29 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
 
     /** Returns a new {@code XGraphicsExposeEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XGraphicsExposeEvent malloc() {
-        return wrap(XGraphicsExposeEvent.class, nmemAllocChecked(SIZEOF));
+        return new XGraphicsExposeEvent(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XGraphicsExposeEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XGraphicsExposeEvent calloc() {
-        return wrap(XGraphicsExposeEvent.class, nmemCallocChecked(1, SIZEOF));
+        return new XGraphicsExposeEvent(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XGraphicsExposeEvent} instance allocated with {@link BufferUtils}. */
     public static XGraphicsExposeEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XGraphicsExposeEvent.class, memAddress(container), container);
+        return new XGraphicsExposeEvent(memAddress(container), container);
     }
 
     /** Returns a new {@code XGraphicsExposeEvent} instance for the specified memory address. */
     public static XGraphicsExposeEvent create(long address) {
-        return wrap(XGraphicsExposeEvent.class, address);
+        return new XGraphicsExposeEvent(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XGraphicsExposeEvent createSafe(long address) {
-        return address == NULL ? null : wrap(XGraphicsExposeEvent.class, address);
+        return address == NULL ? null : new XGraphicsExposeEvent(address, null);
     }
 
     /**
@@ -236,7 +245,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XGraphicsExposeEvent.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -245,7 +254,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XGraphicsExposeEvent.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -255,7 +264,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
      */
     public static XGraphicsExposeEvent.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -265,13 +274,13 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XGraphicsExposeEvent.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XGraphicsExposeEvent.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -299,7 +308,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XGraphicsExposeEvent malloc(MemoryStack stack) {
-        return wrap(XGraphicsExposeEvent.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XGraphicsExposeEvent(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -308,7 +317,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XGraphicsExposeEvent calloc(MemoryStack stack) {
-        return wrap(XGraphicsExposeEvent.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XGraphicsExposeEvent(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -318,7 +327,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XGraphicsExposeEvent.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -328,7 +337,7 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XGraphicsExposeEvent.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -402,9 +411,9 @@ public class XGraphicsExposeEvent extends Struct implements NativeResource {
         /**
          * Creates a new {@code XGraphicsExposeEvent.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XGraphicsExposeEvent#SIZEOF}, and its mark will be undefined.
+         * by {@link XGraphicsExposeEvent#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

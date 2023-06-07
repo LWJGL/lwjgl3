@@ -32,7 +32,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint8_t delta_poc_msb_cycle_lt[STD_VIDEO_H265_MAX_DELTA_POC];
  * }</code></pre>
  */
-public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implements NativeResource {
+public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct<StdVideoEncodeH265SliceSegmentLongTermRefPics> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -71,6 +71,15 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
         USED_BY_CURR_PIC_LT_FLAG = layout.offsetof(4);
         DELTA_POC_MSB_PRESENT_FLAG = layout.offsetof(5);
         DELTA_POC_MSB_CYCLE_LT = layout.offsetof(6);
+    }
+
+    protected StdVideoEncodeH265SliceSegmentLongTermRefPics(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected StdVideoEncodeH265SliceSegmentLongTermRefPics create(long address, @Nullable ByteBuffer container) {
+        return new StdVideoEncodeH265SliceSegmentLongTermRefPics(address, container);
     }
 
     /**
@@ -180,29 +189,29 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
 
     /** Returns a new {@code StdVideoEncodeH265SliceSegmentLongTermRefPics} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics malloc() {
-        return wrap(StdVideoEncodeH265SliceSegmentLongTermRefPics.class, nmemAllocChecked(SIZEOF));
+        return new StdVideoEncodeH265SliceSegmentLongTermRefPics(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoEncodeH265SliceSegmentLongTermRefPics} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics calloc() {
-        return wrap(StdVideoEncodeH265SliceSegmentLongTermRefPics.class, nmemCallocChecked(1, SIZEOF));
+        return new StdVideoEncodeH265SliceSegmentLongTermRefPics(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoEncodeH265SliceSegmentLongTermRefPics} instance allocated with {@link BufferUtils}. */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(StdVideoEncodeH265SliceSegmentLongTermRefPics.class, memAddress(container), container);
+        return new StdVideoEncodeH265SliceSegmentLongTermRefPics(memAddress(container), container);
     }
 
     /** Returns a new {@code StdVideoEncodeH265SliceSegmentLongTermRefPics} instance for the specified memory address. */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics create(long address) {
-        return wrap(StdVideoEncodeH265SliceSegmentLongTermRefPics.class, address);
+        return new StdVideoEncodeH265SliceSegmentLongTermRefPics(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics createSafe(long address) {
-        return address == NULL ? null : wrap(StdVideoEncodeH265SliceSegmentLongTermRefPics.class, address);
+        return address == NULL ? null : new StdVideoEncodeH265SliceSegmentLongTermRefPics(address, null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
      * @param capacity the buffer capacity
      */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -220,7 +229,7 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
      * @param capacity the buffer capacity
      */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -230,7 +239,7 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
      */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -240,13 +249,13 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
      * @param capacity the buffer capacity
      */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -255,7 +264,7 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics malloc(MemoryStack stack) {
-        return wrap(StdVideoEncodeH265SliceSegmentLongTermRefPics.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new StdVideoEncodeH265SliceSegmentLongTermRefPics(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -264,7 +273,7 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics calloc(MemoryStack stack) {
-        return wrap(StdVideoEncodeH265SliceSegmentLongTermRefPics.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new StdVideoEncodeH265SliceSegmentLongTermRefPics(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -274,7 +283,7 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
      * @param capacity the buffer capacity
      */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -284,7 +293,7 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
      * @param capacity the buffer capacity
      */
     public static StdVideoEncodeH265SliceSegmentLongTermRefPics.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -373,9 +382,9 @@ public class StdVideoEncodeH265SliceSegmentLongTermRefPics extends Struct implem
         /**
          * Creates a new {@code StdVideoEncodeH265SliceSegmentLongTermRefPics.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link StdVideoEncodeH265SliceSegmentLongTermRefPics#SIZEOF}, and its mark will be undefined.
+         * by {@link StdVideoEncodeH265SliceSegmentLongTermRefPics#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

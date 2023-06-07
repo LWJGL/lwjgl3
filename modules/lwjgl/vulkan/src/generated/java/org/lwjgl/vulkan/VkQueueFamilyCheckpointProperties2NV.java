@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineStageFlags2 {@link #checkpointExecutionStageMask};
  * }</code></pre>
  */
-public class VkQueueFamilyCheckpointProperties2NV extends Struct implements NativeResource {
+public class VkQueueFamilyCheckpointProperties2NV extends Struct<VkQueueFamilyCheckpointProperties2NV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         CHECKPOINTEXECUTIONSTAGEMASK = layout.offsetof(2);
+    }
+
+    protected VkQueueFamilyCheckpointProperties2NV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkQueueFamilyCheckpointProperties2NV create(long address, @Nullable ByteBuffer container) {
+        return new VkQueueFamilyCheckpointProperties2NV(address, container);
     }
 
     /**
@@ -123,29 +132,29 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
 
     /** Returns a new {@code VkQueueFamilyCheckpointProperties2NV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkQueueFamilyCheckpointProperties2NV malloc() {
-        return wrap(VkQueueFamilyCheckpointProperties2NV.class, nmemAllocChecked(SIZEOF));
+        return new VkQueueFamilyCheckpointProperties2NV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkQueueFamilyCheckpointProperties2NV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkQueueFamilyCheckpointProperties2NV calloc() {
-        return wrap(VkQueueFamilyCheckpointProperties2NV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkQueueFamilyCheckpointProperties2NV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkQueueFamilyCheckpointProperties2NV} instance allocated with {@link BufferUtils}. */
     public static VkQueueFamilyCheckpointProperties2NV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkQueueFamilyCheckpointProperties2NV.class, memAddress(container), container);
+        return new VkQueueFamilyCheckpointProperties2NV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkQueueFamilyCheckpointProperties2NV} instance for the specified memory address. */
     public static VkQueueFamilyCheckpointProperties2NV create(long address) {
-        return wrap(VkQueueFamilyCheckpointProperties2NV.class, address);
+        return new VkQueueFamilyCheckpointProperties2NV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkQueueFamilyCheckpointProperties2NV createSafe(long address) {
-        return address == NULL ? null : wrap(VkQueueFamilyCheckpointProperties2NV.class, address);
+        return address == NULL ? null : new VkQueueFamilyCheckpointProperties2NV(address, null);
     }
 
     /**
@@ -154,7 +163,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyCheckpointProperties2NV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -163,7 +172,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyCheckpointProperties2NV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -173,7 +182,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
      */
     public static VkQueueFamilyCheckpointProperties2NV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -183,13 +192,13 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyCheckpointProperties2NV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkQueueFamilyCheckpointProperties2NV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -198,7 +207,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkQueueFamilyCheckpointProperties2NV malloc(MemoryStack stack) {
-        return wrap(VkQueueFamilyCheckpointProperties2NV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkQueueFamilyCheckpointProperties2NV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -207,7 +216,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkQueueFamilyCheckpointProperties2NV calloc(MemoryStack stack) {
-        return wrap(VkQueueFamilyCheckpointProperties2NV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkQueueFamilyCheckpointProperties2NV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -217,7 +226,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyCheckpointProperties2NV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -227,7 +236,7 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyCheckpointProperties2NV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -254,9 +263,9 @@ public class VkQueueFamilyCheckpointProperties2NV extends Struct implements Nati
         /**
          * Creates a new {@code VkQueueFamilyCheckpointProperties2NV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkQueueFamilyCheckpointProperties2NV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkQueueFamilyCheckpointProperties2NV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

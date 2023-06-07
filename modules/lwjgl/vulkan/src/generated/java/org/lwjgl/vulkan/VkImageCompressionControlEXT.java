@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkImageCompressionFixedRateFlagsEXT * {@link #pFixedRateFlags};
  * }</code></pre>
  */
-public class VkImageCompressionControlEXT extends Struct implements NativeResource {
+public class VkImageCompressionControlEXT extends Struct<VkImageCompressionControlEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -84,6 +84,15 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
         FLAGS = layout.offsetof(2);
         COMPRESSIONCONTROLPLANECOUNT = layout.offsetof(3);
         PFIXEDRATEFLAGS = layout.offsetof(4);
+    }
+
+    protected VkImageCompressionControlEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkImageCompressionControlEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkImageCompressionControlEXT(address, container);
     }
 
     /**
@@ -162,29 +171,29 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
 
     /** Returns a new {@code VkImageCompressionControlEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageCompressionControlEXT malloc() {
-        return wrap(VkImageCompressionControlEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkImageCompressionControlEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkImageCompressionControlEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageCompressionControlEXT calloc() {
-        return wrap(VkImageCompressionControlEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkImageCompressionControlEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkImageCompressionControlEXT} instance allocated with {@link BufferUtils}. */
     public static VkImageCompressionControlEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkImageCompressionControlEXT.class, memAddress(container), container);
+        return new VkImageCompressionControlEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkImageCompressionControlEXT} instance for the specified memory address. */
     public static VkImageCompressionControlEXT create(long address) {
-        return wrap(VkImageCompressionControlEXT.class, address);
+        return new VkImageCompressionControlEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageCompressionControlEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkImageCompressionControlEXT.class, address);
+        return address == NULL ? null : new VkImageCompressionControlEXT(address, null);
     }
 
     /**
@@ -193,7 +202,7 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageCompressionControlEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageCompressionControlEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -212,7 +221,7 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
      */
     public static VkImageCompressionControlEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -222,13 +231,13 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageCompressionControlEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageCompressionControlEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -237,7 +246,7 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkImageCompressionControlEXT malloc(MemoryStack stack) {
-        return wrap(VkImageCompressionControlEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkImageCompressionControlEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -246,7 +255,7 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static VkImageCompressionControlEXT calloc(MemoryStack stack) {
-        return wrap(VkImageCompressionControlEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkImageCompressionControlEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -256,7 +265,7 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageCompressionControlEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -266,7 +275,7 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static VkImageCompressionControlEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -303,9 +312,9 @@ public class VkImageCompressionControlEXT extends Struct implements NativeResour
         /**
          * Creates a new {@code VkImageCompressionControlEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkImageCompressionControlEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkImageCompressionControlEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

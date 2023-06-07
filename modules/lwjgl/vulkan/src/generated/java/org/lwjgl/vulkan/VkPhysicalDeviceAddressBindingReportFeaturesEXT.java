@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #reportAddressBinding};
  * }</code></pre>
  */
-public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct<VkPhysicalDeviceAddressBindingReportFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         REPORTADDRESSBINDING = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceAddressBindingReportFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceAddressBindingReportFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceAddressBindingReportFeaturesEXT(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
 
     /** Returns a new {@code VkPhysicalDeviceAddressBindingReportFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceAddressBindingReportFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceAddressBindingReportFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAddressBindingReportFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceAddressBindingReportFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceAddressBindingReportFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAddressBindingReportFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceAddressBindingReportFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceAddressBindingReportFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAddressBindingReportFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceAddressBindingReportFeaturesEXT.class, address);
+        return new VkPhysicalDeviceAddressBindingReportFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceAddressBindingReportFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceAddressBindingReportFeaturesEXT(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
      */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceAddressBindingReportFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceAddressBindingReportFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceAddressBindingReportFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceAddressBindingReportFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAddressBindingReportFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkPhysicalDeviceAddressBindingReportFeaturesEXT extends Struct impl
         /**
          * Creates a new {@code VkPhysicalDeviceAddressBindingReportFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceAddressBindingReportFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceAddressBindingReportFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

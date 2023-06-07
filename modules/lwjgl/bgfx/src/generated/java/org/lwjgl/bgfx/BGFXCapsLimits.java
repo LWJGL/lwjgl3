@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct bgfx_caps_limits_t")
-public class BGFXCapsLimits extends Struct {
+public class BGFXCapsLimits extends Struct<BGFXCapsLimits> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -137,6 +137,15 @@ public class BGFXCapsLimits extends Struct {
         MINRESOURCECBSIZE = layout.offsetof(21);
         TRANSIENTVBSIZE = layout.offsetof(22);
         TRANSIENTIBSIZE = layout.offsetof(23);
+    }
+
+    protected BGFXCapsLimits(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected BGFXCapsLimits create(long address, @Nullable ByteBuffer container) {
+        return new BGFXCapsLimits(address, container);
     }
 
     /**
@@ -229,13 +238,13 @@ public class BGFXCapsLimits extends Struct {
 
     /** Returns a new {@code BGFXCapsLimits} instance for the specified memory address. */
     public static BGFXCapsLimits create(long address) {
-        return wrap(BGFXCapsLimits.class, address);
+        return new BGFXCapsLimits(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXCapsLimits createSafe(long address) {
-        return address == NULL ? null : wrap(BGFXCapsLimits.class, address);
+        return address == NULL ? null : new BGFXCapsLimits(address, null);
     }
 
     /**
@@ -245,13 +254,13 @@ public class BGFXCapsLimits extends Struct {
      * @param capacity the buffer capacity
      */
     public static BGFXCapsLimits.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXCapsLimits.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -315,9 +324,9 @@ public class BGFXCapsLimits extends Struct {
         /**
          * Creates a new {@code BGFXCapsLimits.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link BGFXCapsLimits#SIZEOF}, and its mark will be undefined.
+         * by {@link BGFXCapsLimits#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

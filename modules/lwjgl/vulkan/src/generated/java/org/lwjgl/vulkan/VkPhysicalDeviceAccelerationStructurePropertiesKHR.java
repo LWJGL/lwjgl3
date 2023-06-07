@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #minAccelerationStructureScratchOffsetAlignment};
  * }</code></pre>
  */
-public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct implements NativeResource {
+public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct<VkPhysicalDeviceAccelerationStructurePropertiesKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -96,6 +96,15 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
         MAXDESCRIPTORSETACCELERATIONSTRUCTURES = layout.offsetof(7);
         MAXDESCRIPTORSETUPDATEAFTERBINDACCELERATIONSTRUCTURES = layout.offsetof(8);
         MINACCELERATIONSTRUCTURESCRATCHOFFSETALIGNMENT = layout.offsetof(9);
+    }
+
+    protected VkPhysicalDeviceAccelerationStructurePropertiesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceAccelerationStructurePropertiesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceAccelerationStructurePropertiesKHR(address, container);
     }
 
     /**
@@ -176,29 +185,29 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
 
     /** Returns a new {@code VkPhysicalDeviceAccelerationStructurePropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR malloc() {
-        return wrap(VkPhysicalDeviceAccelerationStructurePropertiesKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceAccelerationStructurePropertiesKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAccelerationStructurePropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR calloc() {
-        return wrap(VkPhysicalDeviceAccelerationStructurePropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceAccelerationStructurePropertiesKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAccelerationStructurePropertiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceAccelerationStructurePropertiesKHR.class, memAddress(container), container);
+        return new VkPhysicalDeviceAccelerationStructurePropertiesKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAccelerationStructurePropertiesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR create(long address) {
-        return wrap(VkPhysicalDeviceAccelerationStructurePropertiesKHR.class, address);
+        return new VkPhysicalDeviceAccelerationStructurePropertiesKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceAccelerationStructurePropertiesKHR.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceAccelerationStructurePropertiesKHR(address, null);
     }
 
     /**
@@ -207,7 +216,7 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -216,7 +225,7 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -226,7 +235,7 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
      */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -236,13 +245,13 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -251,7 +260,7 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceAccelerationStructurePropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceAccelerationStructurePropertiesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -260,7 +269,7 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceAccelerationStructurePropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceAccelerationStructurePropertiesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -270,7 +279,7 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -280,7 +289,7 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -321,9 +330,9 @@ public class VkPhysicalDeviceAccelerationStructurePropertiesKHR extends Struct i
         /**
          * Creates a new {@code VkPhysicalDeviceAccelerationStructurePropertiesKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

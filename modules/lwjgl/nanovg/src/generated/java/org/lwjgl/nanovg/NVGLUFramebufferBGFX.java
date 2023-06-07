@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct NVGLUframebuffer")
-public class NVGLUFramebufferBGFX extends Struct {
+public class NVGLUFramebufferBGFX extends Struct<NVGLUFramebufferBGFX> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -59,6 +59,15 @@ public class NVGLUFramebufferBGFX extends Struct {
         VIEWID = layout.offsetof(3);
     }
 
+    protected NVGLUFramebufferBGFX(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NVGLUFramebufferBGFX create(long address, @Nullable ByteBuffer container) {
+        return new NVGLUFramebufferBGFX(address, container);
+    }
+
     /**
      * Creates a {@code NVGLUFramebufferBGFX} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -88,13 +97,13 @@ public class NVGLUFramebufferBGFX extends Struct {
 
     /** Returns a new {@code NVGLUFramebufferBGFX} instance for the specified memory address. */
     public static NVGLUFramebufferBGFX create(long address) {
-        return wrap(NVGLUFramebufferBGFX.class, address);
+        return new NVGLUFramebufferBGFX(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NVGLUFramebufferBGFX createSafe(long address) {
-        return address == NULL ? null : wrap(NVGLUFramebufferBGFX.class, address);
+        return address == NULL ? null : new NVGLUFramebufferBGFX(address, null);
     }
 
     /**
@@ -104,13 +113,13 @@ public class NVGLUFramebufferBGFX extends Struct {
      * @param capacity the buffer capacity
      */
     public static NVGLUFramebufferBGFX.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NVGLUFramebufferBGFX.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -134,9 +143,9 @@ public class NVGLUFramebufferBGFX extends Struct {
         /**
          * Creates a new {@code NVGLUFramebufferBGFX.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NVGLUFramebufferBGFX#SIZEOF}, and its mark will be undefined.
+         * by {@link NVGLUFramebufferBGFX#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

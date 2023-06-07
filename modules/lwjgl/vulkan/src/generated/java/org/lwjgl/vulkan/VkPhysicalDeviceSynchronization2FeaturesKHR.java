@@ -29,6 +29,15 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDeviceSynchronization2Features {
 
+    protected VkPhysicalDeviceSynchronization2FeaturesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceSynchronization2FeaturesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceSynchronization2FeaturesKHR(address, container);
+    }
+
     /**
      * Creates a {@code VkPhysicalDeviceSynchronization2FeaturesKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -82,29 +91,29 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDevic
 
     /** Returns a new {@code VkPhysicalDeviceSynchronization2FeaturesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR malloc() {
-        return wrap(VkPhysicalDeviceSynchronization2FeaturesKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceSynchronization2FeaturesKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceSynchronization2FeaturesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR calloc() {
-        return wrap(VkPhysicalDeviceSynchronization2FeaturesKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceSynchronization2FeaturesKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceSynchronization2FeaturesKHR} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceSynchronization2FeaturesKHR.class, memAddress(container), container);
+        return new VkPhysicalDeviceSynchronization2FeaturesKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceSynchronization2FeaturesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR create(long address) {
-        return wrap(VkPhysicalDeviceSynchronization2FeaturesKHR.class, address);
+        return new VkPhysicalDeviceSynchronization2FeaturesKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSynchronization2FeaturesKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceSynchronization2FeaturesKHR.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceSynchronization2FeaturesKHR(address, null);
     }
 
     /**
@@ -113,7 +122,7 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDevic
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -122,7 +131,7 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDevic
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -132,7 +141,7 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDevic
      */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -142,13 +151,13 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDevic
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -157,7 +166,7 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDevic
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceSynchronization2FeaturesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceSynchronization2FeaturesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -166,7 +175,7 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDevic
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceSynchronization2FeaturesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceSynchronization2FeaturesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -176,7 +185,7 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDevic
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -186,7 +195,7 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDevic
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -199,9 +208,9 @@ public class VkPhysicalDeviceSynchronization2FeaturesKHR extends VkPhysicalDevic
         /**
          * Creates a new {@code VkPhysicalDeviceSynchronization2FeaturesKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceSynchronization2FeaturesKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceSynchronization2FeaturesKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #multiviewPerViewViewports};
  * }</code></pre>
  */
-public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struct implements NativeResource {
+public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struct<VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         MULTIVIEWPERVIEWVIEWPORTS = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
 
     /** Returns a new {@code VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM malloc() {
-        return wrap(VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM calloc() {
-        return wrap(VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.class, memAddress(container), container);
+        return new VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM} instance for the specified memory address. */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM create(long address) {
-        return wrap(VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.class, address);
+        return new VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
      */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM extends Struc
         /**
          * Creates a new {@code VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

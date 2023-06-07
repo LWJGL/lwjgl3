@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #pipelineRobustness};
  * }</code></pre>
  */
-public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct<VkPhysicalDevicePipelineRobustnessFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -69,6 +69,15 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         PIPELINEROBUSTNESS = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDevicePipelineRobustnessFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDevicePipelineRobustnessFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDevicePipelineRobustnessFeaturesEXT(address, container);
     }
 
     /**
@@ -132,29 +141,29 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
 
     /** Returns a new {@code VkPhysicalDevicePipelineRobustnessFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT malloc() {
-        return wrap(VkPhysicalDevicePipelineRobustnessFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDevicePipelineRobustnessFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDevicePipelineRobustnessFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT calloc() {
-        return wrap(VkPhysicalDevicePipelineRobustnessFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDevicePipelineRobustnessFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDevicePipelineRobustnessFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDevicePipelineRobustnessFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDevicePipelineRobustnessFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDevicePipelineRobustnessFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDevicePipelineRobustnessFeaturesEXT.class, address);
+        return new VkPhysicalDevicePipelineRobustnessFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDevicePipelineRobustnessFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDevicePipelineRobustnessFeaturesEXT(address, null);
     }
 
     /**
@@ -163,7 +172,7 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -172,7 +181,7 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -182,7 +191,7 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
      */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -192,13 +201,13 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -207,7 +216,7 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDevicePipelineRobustnessFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDevicePipelineRobustnessFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -216,7 +225,7 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDevicePipelineRobustnessFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDevicePipelineRobustnessFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -226,7 +235,7 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -236,7 +245,7 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -265,9 +274,9 @@ public class VkPhysicalDevicePipelineRobustnessFeaturesEXT extends Struct implem
         /**
          * Creates a new {@code VkPhysicalDevicePipelineRobustnessFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDevicePipelineRobustnessFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

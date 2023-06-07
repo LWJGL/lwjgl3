@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_DSP_DFT_IFFTREAL_FUNCI FMOD_DSP_DFT_IFFTREAL_FUNC} inversefftreal;
  * }</code></pre>
  */
-public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResource {
+public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct<FMOD_DSP_STATE_DFT_FUNCTIONS> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -49,6 +49,15 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
 
         FFTREAL = layout.offsetof(0);
         INVERSEFFTREAL = layout.offsetof(1);
+    }
+
+    protected FMOD_DSP_STATE_DFT_FUNCTIONS(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FMOD_DSP_STATE_DFT_FUNCTIONS create(long address, @Nullable ByteBuffer container) {
+        return new FMOD_DSP_STATE_DFT_FUNCTIONS(address, container);
     }
 
     /**
@@ -101,29 +110,29 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
 
     /** Returns a new {@code FMOD_DSP_STATE_DFT_FUNCTIONS} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS malloc() {
-        return wrap(FMOD_DSP_STATE_DFT_FUNCTIONS.class, nmemAllocChecked(SIZEOF));
+        return new FMOD_DSP_STATE_DFT_FUNCTIONS(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code FMOD_DSP_STATE_DFT_FUNCTIONS} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS calloc() {
-        return wrap(FMOD_DSP_STATE_DFT_FUNCTIONS.class, nmemCallocChecked(1, SIZEOF));
+        return new FMOD_DSP_STATE_DFT_FUNCTIONS(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code FMOD_DSP_STATE_DFT_FUNCTIONS} instance allocated with {@link BufferUtils}. */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(FMOD_DSP_STATE_DFT_FUNCTIONS.class, memAddress(container), container);
+        return new FMOD_DSP_STATE_DFT_FUNCTIONS(memAddress(container), container);
     }
 
     /** Returns a new {@code FMOD_DSP_STATE_DFT_FUNCTIONS} instance for the specified memory address. */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS create(long address) {
-        return wrap(FMOD_DSP_STATE_DFT_FUNCTIONS.class, address);
+        return new FMOD_DSP_STATE_DFT_FUNCTIONS(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FMOD_DSP_STATE_DFT_FUNCTIONS createSafe(long address) {
-        return address == NULL ? null : wrap(FMOD_DSP_STATE_DFT_FUNCTIONS.class, address);
+        return address == NULL ? null : new FMOD_DSP_STATE_DFT_FUNCTIONS(address, null);
     }
 
     /**
@@ -132,7 +141,7 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -141,7 +150,7 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -151,7 +160,7 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
      */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -161,13 +170,13 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FMOD_DSP_STATE_DFT_FUNCTIONS.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -176,7 +185,7 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS malloc(MemoryStack stack) {
-        return wrap(FMOD_DSP_STATE_DFT_FUNCTIONS.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new FMOD_DSP_STATE_DFT_FUNCTIONS(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -185,7 +194,7 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS calloc(MemoryStack stack) {
-        return wrap(FMOD_DSP_STATE_DFT_FUNCTIONS.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new FMOD_DSP_STATE_DFT_FUNCTIONS(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -195,7 +204,7 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -205,7 +214,7 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_STATE_DFT_FUNCTIONS.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -240,9 +249,9 @@ public class FMOD_DSP_STATE_DFT_FUNCTIONS extends Struct implements NativeResour
         /**
          * Creates a new {@code FMOD_DSP_STATE_DFT_FUNCTIONS.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FMOD_DSP_STATE_DFT_FUNCTIONS#SIZEOF}, and its mark will be undefined.
+         * by {@link FMOD_DSP_STATE_DFT_FUNCTIONS#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

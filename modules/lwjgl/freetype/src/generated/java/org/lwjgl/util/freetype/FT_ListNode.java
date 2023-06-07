@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct FT_ListNodeRec")
-public class FT_ListNode extends Struct {
+public class FT_ListNode extends Struct<FT_ListNode> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -53,6 +53,15 @@ public class FT_ListNode extends Struct {
         PREV = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         DATA = layout.offsetof(2);
+    }
+
+    protected FT_ListNode(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FT_ListNode create(long address, @Nullable ByteBuffer container) {
+        return new FT_ListNode(address, container);
     }
 
     /**
@@ -86,13 +95,13 @@ public class FT_ListNode extends Struct {
 
     /** Returns a new {@code FT_ListNode} instance for the specified memory address. */
     public static FT_ListNode create(long address) {
-        return wrap(FT_ListNode.class, address);
+        return new FT_ListNode(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_ListNode createSafe(long address) {
-        return address == NULL ? null : wrap(FT_ListNode.class, address);
+        return address == NULL ? null : new FT_ListNode(address, null);
     }
 
     /**
@@ -102,13 +111,13 @@ public class FT_ListNode extends Struct {
      * @param capacity the buffer capacity
      */
     public static FT_ListNode.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_ListNode.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -130,9 +139,9 @@ public class FT_ListNode extends Struct {
         /**
          * Creates a new {@code FT_ListNode.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FT_ListNode#SIZEOF}, and its mark will be undefined.
+         * by {@link FT_ListNode#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkImageUsageFlags {@link #imageUsage};
  * }</code></pre>
  */
-public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements NativeResource {
+public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct<VkPhysicalDeviceVideoFormatInfoKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -68,6 +68,15 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         IMAGEUSAGE = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceVideoFormatInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceVideoFormatInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceVideoFormatInfoKHR(address, container);
     }
 
     /**
@@ -133,29 +142,29 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
 
     /** Returns a new {@code VkPhysicalDeviceVideoFormatInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVideoFormatInfoKHR malloc() {
-        return wrap(VkPhysicalDeviceVideoFormatInfoKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceVideoFormatInfoKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceVideoFormatInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVideoFormatInfoKHR calloc() {
-        return wrap(VkPhysicalDeviceVideoFormatInfoKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceVideoFormatInfoKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceVideoFormatInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceVideoFormatInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceVideoFormatInfoKHR.class, memAddress(container), container);
+        return new VkPhysicalDeviceVideoFormatInfoKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceVideoFormatInfoKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceVideoFormatInfoKHR create(long address) {
-        return wrap(VkPhysicalDeviceVideoFormatInfoKHR.class, address);
+        return new VkPhysicalDeviceVideoFormatInfoKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceVideoFormatInfoKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceVideoFormatInfoKHR.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceVideoFormatInfoKHR(address, null);
     }
 
     /**
@@ -164,7 +173,7 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVideoFormatInfoKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -173,7 +182,7 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVideoFormatInfoKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -183,7 +192,7 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
      */
     public static VkPhysicalDeviceVideoFormatInfoKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -193,13 +202,13 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVideoFormatInfoKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceVideoFormatInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -208,7 +217,7 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceVideoFormatInfoKHR malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceVideoFormatInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceVideoFormatInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -217,7 +226,7 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceVideoFormatInfoKHR calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceVideoFormatInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceVideoFormatInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -227,7 +236,7 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVideoFormatInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -237,7 +246,7 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVideoFormatInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -266,9 +275,9 @@ public class VkPhysicalDeviceVideoFormatInfoKHR extends Struct implements Native
         /**
          * Creates a new {@code VkPhysicalDeviceVideoFormatInfoKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceVideoFormatInfoKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceVideoFormatInfoKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

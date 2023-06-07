@@ -29,6 +29,15 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCaptureAddressCreateInfo {
 
+    protected VkBufferOpaqueCaptureAddressCreateInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkBufferOpaqueCaptureAddressCreateInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkBufferOpaqueCaptureAddressCreateInfoKHR(address, container);
+    }
+
     /**
      * Creates a {@code VkBufferOpaqueCaptureAddressCreateInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -82,29 +91,29 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
 
     /** Returns a new {@code VkBufferOpaqueCaptureAddressCreateInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR malloc() {
-        return wrap(VkBufferOpaqueCaptureAddressCreateInfoKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkBufferOpaqueCaptureAddressCreateInfoKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkBufferOpaqueCaptureAddressCreateInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR calloc() {
-        return wrap(VkBufferOpaqueCaptureAddressCreateInfoKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkBufferOpaqueCaptureAddressCreateInfoKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkBufferOpaqueCaptureAddressCreateInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkBufferOpaqueCaptureAddressCreateInfoKHR.class, memAddress(container), container);
+        return new VkBufferOpaqueCaptureAddressCreateInfoKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkBufferOpaqueCaptureAddressCreateInfoKHR} instance for the specified memory address. */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR create(long address) {
-        return wrap(VkBufferOpaqueCaptureAddressCreateInfoKHR.class, address);
+        return new VkBufferOpaqueCaptureAddressCreateInfoKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkBufferOpaqueCaptureAddressCreateInfoKHR.class, address);
+        return address == NULL ? null : new VkBufferOpaqueCaptureAddressCreateInfoKHR(address, null);
     }
 
     /**
@@ -113,7 +122,7 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
      * @param capacity the buffer capacity
      */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -122,7 +131,7 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
      * @param capacity the buffer capacity
      */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -132,7 +141,7 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
      */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -142,13 +151,13 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
      * @param capacity the buffer capacity
      */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -157,7 +166,7 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
      * @param stack the stack from which to allocate
      */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR malloc(MemoryStack stack) {
-        return wrap(VkBufferOpaqueCaptureAddressCreateInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkBufferOpaqueCaptureAddressCreateInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -166,7 +175,7 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
      * @param stack the stack from which to allocate
      */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR calloc(MemoryStack stack) {
-        return wrap(VkBufferOpaqueCaptureAddressCreateInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkBufferOpaqueCaptureAddressCreateInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -176,7 +185,7 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
      * @param capacity the buffer capacity
      */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -186,7 +195,7 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
      * @param capacity the buffer capacity
      */
     public static VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -199,9 +208,9 @@ public class VkBufferOpaqueCaptureAddressCreateInfoKHR extends VkBufferOpaqueCap
         /**
          * Creates a new {@code VkBufferOpaqueCaptureAddressCreateInfoKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkBufferOpaqueCaptureAddressCreateInfoKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkBufferOpaqueCaptureAddressCreateInfoKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

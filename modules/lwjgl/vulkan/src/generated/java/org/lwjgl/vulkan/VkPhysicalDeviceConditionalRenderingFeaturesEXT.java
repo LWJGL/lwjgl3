@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #inheritedConditionalRendering};
  * }</code></pre>
  */
-public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct<VkPhysicalDeviceConditionalRenderingFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -68,6 +68,15 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
         PNEXT = layout.offsetof(1);
         CONDITIONALRENDERING = layout.offsetof(2);
         INHERITEDCONDITIONALRENDERING = layout.offsetof(3);
+    }
+
+    protected VkPhysicalDeviceConditionalRenderingFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceConditionalRenderingFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceConditionalRenderingFeaturesEXT(address, container);
     }
 
     /**
@@ -138,29 +147,29 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
 
     /** Returns a new {@code VkPhysicalDeviceConditionalRenderingFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceConditionalRenderingFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceConditionalRenderingFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceConditionalRenderingFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceConditionalRenderingFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceConditionalRenderingFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceConditionalRenderingFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceConditionalRenderingFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceConditionalRenderingFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceConditionalRenderingFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceConditionalRenderingFeaturesEXT.class, address);
+        return new VkPhysicalDeviceConditionalRenderingFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceConditionalRenderingFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceConditionalRenderingFeaturesEXT(address, null);
     }
 
     /**
@@ -169,7 +178,7 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +187,7 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -188,7 +197,7 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
      */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -198,13 +207,13 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -232,7 +241,7 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceConditionalRenderingFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceConditionalRenderingFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -241,7 +250,7 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceConditionalRenderingFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceConditionalRenderingFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -251,7 +260,7 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -261,7 +270,7 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -294,9 +303,9 @@ public class VkPhysicalDeviceConditionalRenderingFeaturesEXT extends Struct impl
         /**
          * Creates a new {@code VkPhysicalDeviceConditionalRenderingFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

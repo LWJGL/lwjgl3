@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct FTC_SBitRec")
-public class FTC_SBit extends Struct {
+public class FTC_SBit extends Struct<FTC_SBit> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -81,6 +81,15 @@ public class FTC_SBit extends Struct {
         XADVANCE = layout.offsetof(7);
         YADVANCE = layout.offsetof(8);
         BUFFER = layout.offsetof(9);
+    }
+
+    protected FTC_SBit(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FTC_SBit create(long address, @Nullable ByteBuffer container) {
+        return new FTC_SBit(address, container);
     }
 
     /**
@@ -135,13 +144,13 @@ public class FTC_SBit extends Struct {
 
     /** Returns a new {@code FTC_SBit} instance for the specified memory address. */
     public static FTC_SBit create(long address) {
-        return wrap(FTC_SBit.class, address);
+        return new FTC_SBit(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FTC_SBit createSafe(long address) {
-        return address == NULL ? null : wrap(FTC_SBit.class, address);
+        return address == NULL ? null : new FTC_SBit(address, null);
     }
 
     /**
@@ -151,13 +160,13 @@ public class FTC_SBit extends Struct {
      * @param capacity the buffer capacity
      */
     public static FTC_SBit.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FTC_SBit.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -193,9 +202,9 @@ public class FTC_SBit extends Struct {
         /**
          * Creates a new {@code FTC_SBit.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FTC_SBit#SIZEOF}, and its mark will be undefined.
+         * by {@link FTC_SBit#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

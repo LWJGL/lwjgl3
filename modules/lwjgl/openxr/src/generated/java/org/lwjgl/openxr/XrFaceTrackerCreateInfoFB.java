@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrFaceExpressionSetFB {@link #faceExpressionSet};
  * }</code></pre>
  */
-public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource {
+public class XrFaceTrackerCreateInfoFB extends Struct<XrFaceTrackerCreateInfoFB> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -71,6 +71,15 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         FACEEXPRESSIONSET = layout.offsetof(2);
+    }
+
+    protected XrFaceTrackerCreateInfoFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrFaceTrackerCreateInfoFB create(long address, @Nullable ByteBuffer container) {
+        return new XrFaceTrackerCreateInfoFB(address, container);
     }
 
     /**
@@ -134,29 +143,29 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
 
     /** Returns a new {@code XrFaceTrackerCreateInfoFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrFaceTrackerCreateInfoFB malloc() {
-        return wrap(XrFaceTrackerCreateInfoFB.class, nmemAllocChecked(SIZEOF));
+        return new XrFaceTrackerCreateInfoFB(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrFaceTrackerCreateInfoFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrFaceTrackerCreateInfoFB calloc() {
-        return wrap(XrFaceTrackerCreateInfoFB.class, nmemCallocChecked(1, SIZEOF));
+        return new XrFaceTrackerCreateInfoFB(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrFaceTrackerCreateInfoFB} instance allocated with {@link BufferUtils}. */
     public static XrFaceTrackerCreateInfoFB create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrFaceTrackerCreateInfoFB.class, memAddress(container), container);
+        return new XrFaceTrackerCreateInfoFB(memAddress(container), container);
     }
 
     /** Returns a new {@code XrFaceTrackerCreateInfoFB} instance for the specified memory address. */
     public static XrFaceTrackerCreateInfoFB create(long address) {
-        return wrap(XrFaceTrackerCreateInfoFB.class, address);
+        return new XrFaceTrackerCreateInfoFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrFaceTrackerCreateInfoFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrFaceTrackerCreateInfoFB.class, address);
+        return address == NULL ? null : new XrFaceTrackerCreateInfoFB(address, null);
     }
 
     /**
@@ -165,7 +174,7 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrFaceTrackerCreateInfoFB.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -174,7 +183,7 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrFaceTrackerCreateInfoFB.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -184,7 +193,7 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
      */
     public static XrFaceTrackerCreateInfoFB.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -194,13 +203,13 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrFaceTrackerCreateInfoFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrFaceTrackerCreateInfoFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -209,7 +218,7 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static XrFaceTrackerCreateInfoFB malloc(MemoryStack stack) {
-        return wrap(XrFaceTrackerCreateInfoFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrFaceTrackerCreateInfoFB(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -218,7 +227,7 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static XrFaceTrackerCreateInfoFB calloc(MemoryStack stack) {
-        return wrap(XrFaceTrackerCreateInfoFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrFaceTrackerCreateInfoFB(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -228,7 +237,7 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrFaceTrackerCreateInfoFB.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -238,7 +247,7 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrFaceTrackerCreateInfoFB.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -267,9 +276,9 @@ public class XrFaceTrackerCreateInfoFB extends Struct implements NativeResource 
         /**
          * Creates a new {@code XrFaceTrackerCreateInfoFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrFaceTrackerCreateInfoFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrFaceTrackerCreateInfoFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

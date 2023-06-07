@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkQueueFlags {@link #supportedQueues};
  * }</code></pre>
  */
-public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct implements NativeResource {
+public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct<VkPhysicalDeviceCopyMemoryIndirectPropertiesNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -66,6 +66,15 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         SUPPORTEDQUEUES = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceCopyMemoryIndirectPropertiesNV create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(address, container);
     }
 
     /**
@@ -125,29 +134,29 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
 
     /** Returns a new {@code VkPhysicalDeviceCopyMemoryIndirectPropertiesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV malloc() {
-        return wrap(VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceCopyMemoryIndirectPropertiesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV calloc() {
-        return wrap(VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceCopyMemoryIndirectPropertiesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.class, memAddress(container), container);
+        return new VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceCopyMemoryIndirectPropertiesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV create(long address) {
-        return wrap(VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.class, address);
+        return new VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(address, null);
     }
 
     /**
@@ -156,7 +165,7 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -165,7 +174,7 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -175,7 +184,7 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
      */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -185,13 +194,13 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -200,7 +209,7 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -209,7 +218,7 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -219,7 +228,7 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -229,7 +238,7 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -256,9 +265,9 @@ public class VkPhysicalDeviceCopyMemoryIndirectPropertiesNV extends Struct imple
         /**
          * Creates a new {@code VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceCopyMemoryIndirectPropertiesNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceCopyMemoryIndirectPropertiesNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

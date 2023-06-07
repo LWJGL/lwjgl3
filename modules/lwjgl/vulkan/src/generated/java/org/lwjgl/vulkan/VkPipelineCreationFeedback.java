@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint64_t {@link #duration};
  * }</code></pre>
  */
-public class VkPipelineCreationFeedback extends Struct {
+public class VkPipelineCreationFeedback extends Struct<VkPipelineCreationFeedback> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -56,6 +56,15 @@ public class VkPipelineCreationFeedback extends Struct {
 
         FLAGS = layout.offsetof(0);
         DURATION = layout.offsetof(1);
+    }
+
+    protected VkPipelineCreationFeedback(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPipelineCreationFeedback create(long address, @Nullable ByteBuffer container) {
+        return new VkPipelineCreationFeedback(address, container);
     }
 
     /**
@@ -82,13 +91,13 @@ public class VkPipelineCreationFeedback extends Struct {
 
     /** Returns a new {@code VkPipelineCreationFeedback} instance for the specified memory address. */
     public static VkPipelineCreationFeedback create(long address) {
-        return wrap(VkPipelineCreationFeedback.class, address);
+        return new VkPipelineCreationFeedback(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineCreationFeedback createSafe(long address) {
-        return address == NULL ? null : wrap(VkPipelineCreationFeedback.class, address);
+        return address == NULL ? null : new VkPipelineCreationFeedback(address, null);
     }
 
     /**
@@ -98,13 +107,13 @@ public class VkPipelineCreationFeedback extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPipelineCreationFeedback.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineCreationFeedback.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -124,9 +133,9 @@ public class VkPipelineCreationFeedback extends Struct {
         /**
          * Creates a new {@code VkPipelineCreationFeedback.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPipelineCreationFeedback#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPipelineCreationFeedback#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

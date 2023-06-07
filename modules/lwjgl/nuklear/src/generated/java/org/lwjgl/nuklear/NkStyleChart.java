@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct nk_style_chart")
-public class NkStyleChart extends Struct implements NativeResource {
+public class NkStyleChart extends Struct<NkStyleChart> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -69,6 +69,15 @@ public class NkStyleChart extends Struct implements NativeResource {
         BORDER = layout.offsetof(4);
         ROUNDING = layout.offsetof(5);
         PADDING = layout.offsetof(6);
+    }
+
+    protected NkStyleChart(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkStyleChart create(long address, @Nullable ByteBuffer container) {
+        return new NkStyleChart(address, container);
     }
 
     /**
@@ -166,29 +175,29 @@ public class NkStyleChart extends Struct implements NativeResource {
 
     /** Returns a new {@code NkStyleChart} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkStyleChart malloc() {
-        return wrap(NkStyleChart.class, nmemAllocChecked(SIZEOF));
+        return new NkStyleChart(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code NkStyleChart} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkStyleChart calloc() {
-        return wrap(NkStyleChart.class, nmemCallocChecked(1, SIZEOF));
+        return new NkStyleChart(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code NkStyleChart} instance allocated with {@link BufferUtils}. */
     public static NkStyleChart create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(NkStyleChart.class, memAddress(container), container);
+        return new NkStyleChart(memAddress(container), container);
     }
 
     /** Returns a new {@code NkStyleChart} instance for the specified memory address. */
     public static NkStyleChart create(long address) {
-        return wrap(NkStyleChart.class, address);
+        return new NkStyleChart(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleChart createSafe(long address) {
-        return address == NULL ? null : wrap(NkStyleChart.class, address);
+        return address == NULL ? null : new NkStyleChart(address, null);
     }
 
     /**
@@ -197,7 +206,7 @@ public class NkStyleChart extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleChart.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -206,7 +215,7 @@ public class NkStyleChart extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleChart.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -216,7 +225,7 @@ public class NkStyleChart extends Struct implements NativeResource {
      */
     public static NkStyleChart.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -226,13 +235,13 @@ public class NkStyleChart extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleChart.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkStyleChart.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -260,7 +269,7 @@ public class NkStyleChart extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleChart malloc(MemoryStack stack) {
-        return wrap(NkStyleChart.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new NkStyleChart(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -269,7 +278,7 @@ public class NkStyleChart extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkStyleChart calloc(MemoryStack stack) {
-        return wrap(NkStyleChart.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new NkStyleChart(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -279,7 +288,7 @@ public class NkStyleChart extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleChart.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -289,7 +298,7 @@ public class NkStyleChart extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkStyleChart.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -334,9 +343,9 @@ public class NkStyleChart extends Struct implements NativeResource {
         /**
          * Creates a new {@code NkStyleChart.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkStyleChart#SIZEOF}, and its mark will be undefined.
+         * by {@link NkStyleChart#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

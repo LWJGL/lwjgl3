@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     size_t {@link #scratchMemUsageInBytes};
  * }</code></pre>
  */
-public class VkShaderResourceUsageAMD extends Struct {
+public class VkShaderResourceUsageAMD extends Struct<VkShaderResourceUsageAMD> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkShaderResourceUsageAMD extends Struct {
         LDSSIZEPERLOCALWORKGROUP = layout.offsetof(2);
         LDSUSAGESIZEINBYTES = layout.offsetof(3);
         SCRATCHMEMUSAGEINBYTES = layout.offsetof(4);
+    }
+
+    protected VkShaderResourceUsageAMD(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkShaderResourceUsageAMD create(long address, @Nullable ByteBuffer container) {
+        return new VkShaderResourceUsageAMD(address, container);
     }
 
     /**
@@ -99,13 +108,13 @@ public class VkShaderResourceUsageAMD extends Struct {
 
     /** Returns a new {@code VkShaderResourceUsageAMD} instance for the specified memory address. */
     public static VkShaderResourceUsageAMD create(long address) {
-        return wrap(VkShaderResourceUsageAMD.class, address);
+        return new VkShaderResourceUsageAMD(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkShaderResourceUsageAMD createSafe(long address) {
-        return address == NULL ? null : wrap(VkShaderResourceUsageAMD.class, address);
+        return address == NULL ? null : new VkShaderResourceUsageAMD(address, null);
     }
 
     /**
@@ -115,13 +124,13 @@ public class VkShaderResourceUsageAMD extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkShaderResourceUsageAMD.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkShaderResourceUsageAMD.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -147,9 +156,9 @@ public class VkShaderResourceUsageAMD extends Struct {
         /**
          * Creates a new {@code VkShaderResourceUsageAMD.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkShaderResourceUsageAMD#SIZEOF}, and its mark will be undefined.
+         * by {@link VkShaderResourceUsageAMD#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * {@link #next};
  * }</code></pre>
  */
-public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResource {
+public class XrLoaderInitInfoBaseHeaderKHR extends Struct<XrLoaderInitInfoBaseHeaderKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -61,6 +61,15 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
 
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
+    }
+
+    protected XrLoaderInitInfoBaseHeaderKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrLoaderInitInfoBaseHeaderKHR create(long address, @Nullable ByteBuffer container) {
+        return new XrLoaderInitInfoBaseHeaderKHR(address, container);
     }
 
     /**
@@ -115,29 +124,29 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
 
     /** Returns a new {@code XrLoaderInitInfoBaseHeaderKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrLoaderInitInfoBaseHeaderKHR malloc() {
-        return wrap(XrLoaderInitInfoBaseHeaderKHR.class, nmemAllocChecked(SIZEOF));
+        return new XrLoaderInitInfoBaseHeaderKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrLoaderInitInfoBaseHeaderKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrLoaderInitInfoBaseHeaderKHR calloc() {
-        return wrap(XrLoaderInitInfoBaseHeaderKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new XrLoaderInitInfoBaseHeaderKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrLoaderInitInfoBaseHeaderKHR} instance allocated with {@link BufferUtils}. */
     public static XrLoaderInitInfoBaseHeaderKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrLoaderInitInfoBaseHeaderKHR.class, memAddress(container), container);
+        return new XrLoaderInitInfoBaseHeaderKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code XrLoaderInitInfoBaseHeaderKHR} instance for the specified memory address. */
     public static XrLoaderInitInfoBaseHeaderKHR create(long address) {
-        return wrap(XrLoaderInitInfoBaseHeaderKHR.class, address);
+        return new XrLoaderInitInfoBaseHeaderKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrLoaderInitInfoBaseHeaderKHR createSafe(long address) {
-        return address == NULL ? null : wrap(XrLoaderInitInfoBaseHeaderKHR.class, address);
+        return address == NULL ? null : new XrLoaderInitInfoBaseHeaderKHR(address, null);
     }
 
     /**
@@ -146,7 +155,7 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrLoaderInitInfoBaseHeaderKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -155,7 +164,7 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrLoaderInitInfoBaseHeaderKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -165,7 +174,7 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
      */
     public static XrLoaderInitInfoBaseHeaderKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -175,13 +184,13 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrLoaderInitInfoBaseHeaderKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrLoaderInitInfoBaseHeaderKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -190,7 +199,7 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static XrLoaderInitInfoBaseHeaderKHR malloc(MemoryStack stack) {
-        return wrap(XrLoaderInitInfoBaseHeaderKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrLoaderInitInfoBaseHeaderKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -199,7 +208,7 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static XrLoaderInitInfoBaseHeaderKHR calloc(MemoryStack stack) {
-        return wrap(XrLoaderInitInfoBaseHeaderKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrLoaderInitInfoBaseHeaderKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -209,7 +218,7 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrLoaderInitInfoBaseHeaderKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -219,7 +228,7 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrLoaderInitInfoBaseHeaderKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -244,9 +253,9 @@ public class XrLoaderInitInfoBaseHeaderKHR extends Struct implements NativeResou
         /**
          * Creates a new {@code XrLoaderInitInfoBaseHeaderKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrLoaderInitInfoBaseHeaderKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link XrLoaderInitInfoBaseHeaderKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

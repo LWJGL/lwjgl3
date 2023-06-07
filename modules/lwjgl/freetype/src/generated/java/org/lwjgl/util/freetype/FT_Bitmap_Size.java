@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Pos {@link #y_ppem};
  * }</code></pre>
  */
-public class FT_Bitmap_Size extends Struct {
+public class FT_Bitmap_Size extends Struct<FT_Bitmap_Size> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -71,6 +71,15 @@ public class FT_Bitmap_Size extends Struct {
         SIZE = layout.offsetof(2);
         X_PPEM = layout.offsetof(3);
         Y_PPEM = layout.offsetof(4);
+    }
+
+    protected FT_Bitmap_Size(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FT_Bitmap_Size create(long address, @Nullable ByteBuffer container) {
+        return new FT_Bitmap_Size(address, container);
     }
 
     /**
@@ -106,13 +115,13 @@ public class FT_Bitmap_Size extends Struct {
 
     /** Returns a new {@code FT_Bitmap_Size} instance for the specified memory address. */
     public static FT_Bitmap_Size create(long address) {
-        return wrap(FT_Bitmap_Size.class, address);
+        return new FT_Bitmap_Size(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_Bitmap_Size createSafe(long address) {
-        return address == NULL ? null : wrap(FT_Bitmap_Size.class, address);
+        return address == NULL ? null : new FT_Bitmap_Size(address, null);
     }
 
     /**
@@ -122,13 +131,13 @@ public class FT_Bitmap_Size extends Struct {
      * @param capacity the buffer capacity
      */
     public static FT_Bitmap_Size.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_Bitmap_Size.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -154,9 +163,9 @@ public class FT_Bitmap_Size extends Struct {
         /**
          * Creates a new {@code FT_Bitmap_Size.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FT_Bitmap_Size#SIZEOF}, and its mark will be undefined.
+         * by {@link FT_Bitmap_Size#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #maxNumRegionsOfInterest};
  * }</code></pre>
  */
-public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements NativeResource {
+public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct<VkPhysicalDeviceOpticalFlowPropertiesNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -104,6 +104,15 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
         MAXWIDTH = layout.offsetof(10);
         MAXHEIGHT = layout.offsetof(11);
         MAXNUMREGIONSOFINTEREST = layout.offsetof(12);
+    }
+
+    protected VkPhysicalDeviceOpticalFlowPropertiesNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceOpticalFlowPropertiesNV create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceOpticalFlowPropertiesNV(address, container);
     }
 
     /**
@@ -193,29 +202,29 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
 
     /** Returns a new {@code VkPhysicalDeviceOpticalFlowPropertiesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV malloc() {
-        return wrap(VkPhysicalDeviceOpticalFlowPropertiesNV.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceOpticalFlowPropertiesNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceOpticalFlowPropertiesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV calloc() {
-        return wrap(VkPhysicalDeviceOpticalFlowPropertiesNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceOpticalFlowPropertiesNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceOpticalFlowPropertiesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceOpticalFlowPropertiesNV.class, memAddress(container), container);
+        return new VkPhysicalDeviceOpticalFlowPropertiesNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceOpticalFlowPropertiesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV create(long address) {
-        return wrap(VkPhysicalDeviceOpticalFlowPropertiesNV.class, address);
+        return new VkPhysicalDeviceOpticalFlowPropertiesNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceOpticalFlowPropertiesNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceOpticalFlowPropertiesNV.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceOpticalFlowPropertiesNV(address, null);
     }
 
     /**
@@ -224,7 +233,7 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -233,7 +242,7 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -243,7 +252,7 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
      */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -253,13 +262,13 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -268,7 +277,7 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceOpticalFlowPropertiesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceOpticalFlowPropertiesNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -277,7 +286,7 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceOpticalFlowPropertiesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceOpticalFlowPropertiesNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -287,7 +296,7 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -297,7 +306,7 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -344,9 +353,9 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct implements N
         /**
          * Creates a new {@code VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceOpticalFlowPropertiesNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceOpticalFlowPropertiesNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrTime {@link #time};
  * }</code></pre>
  */
-public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResource {
+public class XrSpatialAnchorCreateInfoFB extends Struct<XrSpatialAnchorCreateInfoFB> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -80,6 +80,15 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
         SPACE = layout.offsetof(2);
         POSEINSPACE = layout.offsetof(3);
         TIME = layout.offsetof(4);
+    }
+
+    protected XrSpatialAnchorCreateInfoFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSpatialAnchorCreateInfoFB create(long address, @Nullable ByteBuffer container) {
+        return new XrSpatialAnchorCreateInfoFB(address, container);
     }
 
     /**
@@ -158,29 +167,29 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
 
     /** Returns a new {@code XrSpatialAnchorCreateInfoFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSpatialAnchorCreateInfoFB malloc() {
-        return wrap(XrSpatialAnchorCreateInfoFB.class, nmemAllocChecked(SIZEOF));
+        return new XrSpatialAnchorCreateInfoFB(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSpatialAnchorCreateInfoFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSpatialAnchorCreateInfoFB calloc() {
-        return wrap(XrSpatialAnchorCreateInfoFB.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSpatialAnchorCreateInfoFB(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSpatialAnchorCreateInfoFB} instance allocated with {@link BufferUtils}. */
     public static XrSpatialAnchorCreateInfoFB create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSpatialAnchorCreateInfoFB.class, memAddress(container), container);
+        return new XrSpatialAnchorCreateInfoFB(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSpatialAnchorCreateInfoFB} instance for the specified memory address. */
     public static XrSpatialAnchorCreateInfoFB create(long address) {
-        return wrap(XrSpatialAnchorCreateInfoFB.class, address);
+        return new XrSpatialAnchorCreateInfoFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSpatialAnchorCreateInfoFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrSpatialAnchorCreateInfoFB.class, address);
+        return address == NULL ? null : new XrSpatialAnchorCreateInfoFB(address, null);
     }
 
     /**
@@ -189,7 +198,7 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static XrSpatialAnchorCreateInfoFB.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -198,7 +207,7 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static XrSpatialAnchorCreateInfoFB.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -208,7 +217,7 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
      */
     public static XrSpatialAnchorCreateInfoFB.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -218,13 +227,13 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static XrSpatialAnchorCreateInfoFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSpatialAnchorCreateInfoFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -233,7 +242,7 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static XrSpatialAnchorCreateInfoFB malloc(MemoryStack stack) {
-        return wrap(XrSpatialAnchorCreateInfoFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSpatialAnchorCreateInfoFB(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -242,7 +251,7 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static XrSpatialAnchorCreateInfoFB calloc(MemoryStack stack) {
-        return wrap(XrSpatialAnchorCreateInfoFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSpatialAnchorCreateInfoFB(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -252,7 +261,7 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static XrSpatialAnchorCreateInfoFB.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -262,7 +271,7 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static XrSpatialAnchorCreateInfoFB.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -308,9 +317,9 @@ public class XrSpatialAnchorCreateInfoFB extends Struct implements NativeResourc
         /**
          * Creates a new {@code XrSpatialAnchorCreateInfoFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSpatialAnchorCreateInfoFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSpatialAnchorCreateInfoFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

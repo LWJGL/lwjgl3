@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #persistentContent};
  * }</code></pre>
  */
-public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
+public class VkDisplayPropertiesKHR extends Struct<VkDisplayPropertiesKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -74,6 +74,15 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
         SUPPORTEDTRANSFORMS = layout.offsetof(4);
         PLANEREORDERPOSSIBLE = layout.offsetof(5);
         PERSISTENTCONTENT = layout.offsetof(6);
+    }
+
+    protected VkDisplayPropertiesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkDisplayPropertiesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkDisplayPropertiesKHR(address, container);
     }
 
     /**
@@ -130,29 +139,29 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
 
     /** Returns a new {@code VkDisplayPropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDisplayPropertiesKHR malloc() {
-        return wrap(VkDisplayPropertiesKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkDisplayPropertiesKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkDisplayPropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDisplayPropertiesKHR calloc() {
-        return wrap(VkDisplayPropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkDisplayPropertiesKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkDisplayPropertiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkDisplayPropertiesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkDisplayPropertiesKHR.class, memAddress(container), container);
+        return new VkDisplayPropertiesKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkDisplayPropertiesKHR} instance for the specified memory address. */
     public static VkDisplayPropertiesKHR create(long address) {
-        return wrap(VkDisplayPropertiesKHR.class, address);
+        return new VkDisplayPropertiesKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDisplayPropertiesKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkDisplayPropertiesKHR.class, address);
+        return address == NULL ? null : new VkDisplayPropertiesKHR(address, null);
     }
 
     /**
@@ -161,7 +170,7 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPropertiesKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -170,7 +179,7 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPropertiesKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -180,7 +189,7 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
      */
     public static VkDisplayPropertiesKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -190,13 +199,13 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPropertiesKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDisplayPropertiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -224,7 +233,7 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDisplayPropertiesKHR malloc(MemoryStack stack) {
-        return wrap(VkDisplayPropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkDisplayPropertiesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -233,7 +242,7 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkDisplayPropertiesKHR calloc(MemoryStack stack) {
-        return wrap(VkDisplayPropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkDisplayPropertiesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -243,7 +252,7 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPropertiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -253,7 +262,7 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkDisplayPropertiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -285,9 +294,9 @@ public class VkDisplayPropertiesKHR extends Struct implements NativeResource {
         /**
          * Creates a new {@code VkDisplayPropertiesKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkDisplayPropertiesKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkDisplayPropertiesKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

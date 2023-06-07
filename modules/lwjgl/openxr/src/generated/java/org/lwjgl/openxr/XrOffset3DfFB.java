@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float {@link #z};
  * }</code></pre>
  */
-public class XrOffset3DfFB extends Struct implements NativeResource {
+public class XrOffset3DfFB extends Struct<XrOffset3DfFB> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -68,6 +68,15 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
         X = layout.offsetof(0);
         Y = layout.offsetof(1);
         Z = layout.offsetof(2);
+    }
+
+    protected XrOffset3DfFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrOffset3DfFB create(long address, @Nullable ByteBuffer container) {
+        return new XrOffset3DfFB(address, container);
     }
 
     /**
@@ -126,29 +135,29 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
 
     /** Returns a new {@code XrOffset3DfFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrOffset3DfFB malloc() {
-        return wrap(XrOffset3DfFB.class, nmemAllocChecked(SIZEOF));
+        return new XrOffset3DfFB(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrOffset3DfFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrOffset3DfFB calloc() {
-        return wrap(XrOffset3DfFB.class, nmemCallocChecked(1, SIZEOF));
+        return new XrOffset3DfFB(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrOffset3DfFB} instance allocated with {@link BufferUtils}. */
     public static XrOffset3DfFB create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrOffset3DfFB.class, memAddress(container), container);
+        return new XrOffset3DfFB(memAddress(container), container);
     }
 
     /** Returns a new {@code XrOffset3DfFB} instance for the specified memory address. */
     public static XrOffset3DfFB create(long address) {
-        return wrap(XrOffset3DfFB.class, address);
+        return new XrOffset3DfFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrOffset3DfFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrOffset3DfFB.class, address);
+        return address == NULL ? null : new XrOffset3DfFB(address, null);
     }
 
     /**
@@ -157,7 +166,7 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrOffset3DfFB.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -166,7 +175,7 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrOffset3DfFB.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -176,7 +185,7 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
      */
     public static XrOffset3DfFB.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -186,13 +195,13 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrOffset3DfFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrOffset3DfFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -201,7 +210,7 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrOffset3DfFB malloc(MemoryStack stack) {
-        return wrap(XrOffset3DfFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrOffset3DfFB(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -210,7 +219,7 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrOffset3DfFB calloc(MemoryStack stack) {
-        return wrap(XrOffset3DfFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrOffset3DfFB(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -220,7 +229,7 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrOffset3DfFB.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -230,7 +239,7 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrOffset3DfFB.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -259,9 +268,9 @@ public class XrOffset3DfFB extends Struct implements NativeResource {
         /**
          * Creates a new {@code XrOffset3DfFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrOffset3DfFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrOffset3DfFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct aiScene")
-public class AIScene extends Struct implements NativeResource {
+public class AIScene extends Struct<AIScene> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -123,6 +123,15 @@ public class AIScene extends Struct implements NativeResource {
         MNUMSKELETONS = layout.offsetof(16);
         MSKELETONS = layout.offsetof(17);
         MPRIVATE = layout.offsetof(18);
+    }
+
+    protected AIScene(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected AIScene create(long address, @Nullable ByteBuffer container) {
+        return new AIScene(address, container);
     }
 
     /**
@@ -295,29 +304,29 @@ public class AIScene extends Struct implements NativeResource {
 
     /** Returns a new {@code AIScene} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static AIScene malloc() {
-        return wrap(AIScene.class, nmemAllocChecked(SIZEOF));
+        return new AIScene(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code AIScene} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static AIScene calloc() {
-        return wrap(AIScene.class, nmemCallocChecked(1, SIZEOF));
+        return new AIScene(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code AIScene} instance allocated with {@link BufferUtils}. */
     public static AIScene create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(AIScene.class, memAddress(container), container);
+        return new AIScene(memAddress(container), container);
     }
 
     /** Returns a new {@code AIScene} instance for the specified memory address. */
     public static AIScene create(long address) {
-        return wrap(AIScene.class, address);
+        return new AIScene(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIScene createSafe(long address) {
-        return address == NULL ? null : wrap(AIScene.class, address);
+        return address == NULL ? null : new AIScene(address, null);
     }
 
     /**
@@ -326,7 +335,7 @@ public class AIScene extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIScene.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -335,7 +344,7 @@ public class AIScene extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIScene.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -345,7 +354,7 @@ public class AIScene extends Struct implements NativeResource {
      */
     public static AIScene.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -355,13 +364,13 @@ public class AIScene extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIScene.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AIScene.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -389,7 +398,7 @@ public class AIScene extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIScene malloc(MemoryStack stack) {
-        return wrap(AIScene.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new AIScene(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -398,7 +407,7 @@ public class AIScene extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static AIScene calloc(MemoryStack stack) {
-        return wrap(AIScene.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new AIScene(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -408,7 +417,7 @@ public class AIScene extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIScene.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -418,7 +427,7 @@ public class AIScene extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static AIScene.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -546,9 +555,9 @@ public class AIScene extends Struct implements NativeResource {
         /**
          * Creates a new {@code AIScene.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link AIScene#SIZEOF}, and its mark will be undefined.
+         * by {@link AIScene#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

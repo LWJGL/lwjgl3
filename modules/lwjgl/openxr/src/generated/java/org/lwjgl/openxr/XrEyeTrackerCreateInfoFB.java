@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * {@link #next};
  * }</code></pre>
  */
-public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
+public class XrEyeTrackerCreateInfoFB extends Struct<XrEyeTrackerCreateInfoFB> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -66,6 +66,15 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
 
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
+    }
+
+    protected XrEyeTrackerCreateInfoFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrEyeTrackerCreateInfoFB create(long address, @Nullable ByteBuffer container) {
+        return new XrEyeTrackerCreateInfoFB(address, container);
     }
 
     /**
@@ -122,29 +131,29 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
 
     /** Returns a new {@code XrEyeTrackerCreateInfoFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrEyeTrackerCreateInfoFB malloc() {
-        return wrap(XrEyeTrackerCreateInfoFB.class, nmemAllocChecked(SIZEOF));
+        return new XrEyeTrackerCreateInfoFB(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrEyeTrackerCreateInfoFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrEyeTrackerCreateInfoFB calloc() {
-        return wrap(XrEyeTrackerCreateInfoFB.class, nmemCallocChecked(1, SIZEOF));
+        return new XrEyeTrackerCreateInfoFB(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrEyeTrackerCreateInfoFB} instance allocated with {@link BufferUtils}. */
     public static XrEyeTrackerCreateInfoFB create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrEyeTrackerCreateInfoFB.class, memAddress(container), container);
+        return new XrEyeTrackerCreateInfoFB(memAddress(container), container);
     }
 
     /** Returns a new {@code XrEyeTrackerCreateInfoFB} instance for the specified memory address. */
     public static XrEyeTrackerCreateInfoFB create(long address) {
-        return wrap(XrEyeTrackerCreateInfoFB.class, address);
+        return new XrEyeTrackerCreateInfoFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrEyeTrackerCreateInfoFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrEyeTrackerCreateInfoFB.class, address);
+        return address == NULL ? null : new XrEyeTrackerCreateInfoFB(address, null);
     }
 
     /**
@@ -153,7 +162,7 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrEyeTrackerCreateInfoFB.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -162,7 +171,7 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrEyeTrackerCreateInfoFB.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -172,7 +181,7 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
      */
     public static XrEyeTrackerCreateInfoFB.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -182,13 +191,13 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrEyeTrackerCreateInfoFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrEyeTrackerCreateInfoFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -197,7 +206,7 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrEyeTrackerCreateInfoFB malloc(MemoryStack stack) {
-        return wrap(XrEyeTrackerCreateInfoFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrEyeTrackerCreateInfoFB(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -206,7 +215,7 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrEyeTrackerCreateInfoFB calloc(MemoryStack stack) {
-        return wrap(XrEyeTrackerCreateInfoFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrEyeTrackerCreateInfoFB(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -216,7 +225,7 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrEyeTrackerCreateInfoFB.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -226,7 +235,7 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrEyeTrackerCreateInfoFB.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -251,9 +260,9 @@ public class XrEyeTrackerCreateInfoFB extends Struct implements NativeResource {
         /**
          * Creates a new {@code XrEyeTrackerCreateInfoFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrEyeTrackerCreateInfoFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrEyeTrackerCreateInfoFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

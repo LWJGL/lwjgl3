@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #negativeOneToOne};
  * }</code></pre>
  */
-public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct implements NativeResource {
+public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct<VkPipelineViewportDepthClipControlCreateInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -66,6 +66,15 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         NEGATIVEONETOONE = layout.offsetof(2);
+    }
+
+    protected VkPipelineViewportDepthClipControlCreateInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPipelineViewportDepthClipControlCreateInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPipelineViewportDepthClipControlCreateInfoEXT(address, container);
     }
 
     /**
@@ -129,29 +138,29 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
 
     /** Returns a new {@code VkPipelineViewportDepthClipControlCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT malloc() {
-        return wrap(VkPipelineViewportDepthClipControlCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPipelineViewportDepthClipControlCreateInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineViewportDepthClipControlCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT calloc() {
-        return wrap(VkPipelineViewportDepthClipControlCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPipelineViewportDepthClipControlCreateInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineViewportDepthClipControlCreateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPipelineViewportDepthClipControlCreateInfoEXT.class, memAddress(container), container);
+        return new VkPipelineViewportDepthClipControlCreateInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPipelineViewportDepthClipControlCreateInfoEXT} instance for the specified memory address. */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT create(long address) {
-        return wrap(VkPipelineViewportDepthClipControlCreateInfoEXT.class, address);
+        return new VkPipelineViewportDepthClipControlCreateInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineViewportDepthClipControlCreateInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPipelineViewportDepthClipControlCreateInfoEXT.class, address);
+        return address == NULL ? null : new VkPipelineViewportDepthClipControlCreateInfoEXT(address, null);
     }
 
     /**
@@ -160,7 +169,7 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -169,7 +178,7 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -179,7 +188,7 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
      */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -189,13 +198,13 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineViewportDepthClipControlCreateInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -204,7 +213,7 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkPipelineViewportDepthClipControlCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPipelineViewportDepthClipControlCreateInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -213,7 +222,7 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkPipelineViewportDepthClipControlCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPipelineViewportDepthClipControlCreateInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -223,7 +232,7 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -233,7 +242,7 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPipelineViewportDepthClipControlCreateInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -262,9 +271,9 @@ public class VkPipelineViewportDepthClipControlCreateInfoEXT extends Struct impl
         /**
          * Creates a new {@code VkPipelineViewportDepthClipControlCreateInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPipelineViewportDepthClipControlCreateInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPipelineViewportDepthClipControlCreateInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

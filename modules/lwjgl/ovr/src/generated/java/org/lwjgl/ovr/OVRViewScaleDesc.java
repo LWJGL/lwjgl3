@@ -40,7 +40,7 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * }</code></pre>
  */
 @NativeType("struct ovrViewScaleDesc")
-public class OVRViewScaleDesc extends Struct implements NativeResource {
+public class OVRViewScaleDesc extends Struct<OVRViewScaleDesc> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
 
         HMDTOEYEPOSE = layout.offsetof(0);
         HMDSPACETOWORLDSCALEINMETERS = layout.offsetof(1);
+    }
+
+    protected OVRViewScaleDesc(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected OVRViewScaleDesc create(long address, @Nullable ByteBuffer container) {
+        return new OVRViewScaleDesc(address, container);
     }
 
     /**
@@ -126,29 +135,29 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
 
     /** Returns a new {@code OVRViewScaleDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRViewScaleDesc malloc() {
-        return wrap(OVRViewScaleDesc.class, nmemAllocChecked(SIZEOF));
+        return new OVRViewScaleDesc(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code OVRViewScaleDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRViewScaleDesc calloc() {
-        return wrap(OVRViewScaleDesc.class, nmemCallocChecked(1, SIZEOF));
+        return new OVRViewScaleDesc(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code OVRViewScaleDesc} instance allocated with {@link BufferUtils}. */
     public static OVRViewScaleDesc create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(OVRViewScaleDesc.class, memAddress(container), container);
+        return new OVRViewScaleDesc(memAddress(container), container);
     }
 
     /** Returns a new {@code OVRViewScaleDesc} instance for the specified memory address. */
     public static OVRViewScaleDesc create(long address) {
-        return wrap(OVRViewScaleDesc.class, address);
+        return new OVRViewScaleDesc(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRViewScaleDesc createSafe(long address) {
-        return address == NULL ? null : wrap(OVRViewScaleDesc.class, address);
+        return address == NULL ? null : new OVRViewScaleDesc(address, null);
     }
 
     /**
@@ -157,7 +166,7 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewScaleDesc.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -166,7 +175,7 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewScaleDesc.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -176,7 +185,7 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
      */
     public static OVRViewScaleDesc.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -186,13 +195,13 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewScaleDesc.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRViewScaleDesc.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -220,7 +229,7 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRViewScaleDesc malloc(MemoryStack stack) {
-        return wrap(OVRViewScaleDesc.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new OVRViewScaleDesc(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -229,7 +238,7 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRViewScaleDesc calloc(MemoryStack stack) {
-        return wrap(OVRViewScaleDesc.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new OVRViewScaleDesc(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -239,7 +248,7 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewScaleDesc.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -249,7 +258,7 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRViewScaleDesc.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -285,9 +294,9 @@ public class OVRViewScaleDesc extends Struct implements NativeResource {
         /**
          * Creates a new {@code OVRViewScaleDesc.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link OVRViewScaleDesc#SIZEOF}, and its mark will be undefined.
+         * by {@link OVRViewScaleDesc#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

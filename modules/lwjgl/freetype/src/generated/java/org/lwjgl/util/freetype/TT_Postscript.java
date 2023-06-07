@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_ULong maxMemType1;
  * }</code></pre>
  */
-public class TT_Postscript extends Struct {
+public class TT_Postscript extends Struct<TT_Postscript> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -76,6 +76,15 @@ public class TT_Postscript extends Struct {
         MAXMEMTYPE42 = layout.offsetof(6);
         MINMEMTYPE1 = layout.offsetof(7);
         MAXMEMTYPE1 = layout.offsetof(8);
+    }
+
+    protected TT_Postscript(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected TT_Postscript create(long address, @Nullable ByteBuffer container) {
+        return new TT_Postscript(address, container);
     }
 
     /**
@@ -123,13 +132,13 @@ public class TT_Postscript extends Struct {
 
     /** Returns a new {@code TT_Postscript} instance for the specified memory address. */
     public static TT_Postscript create(long address) {
-        return wrap(TT_Postscript.class, address);
+        return new TT_Postscript(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static TT_Postscript createSafe(long address) {
-        return address == NULL ? null : wrap(TT_Postscript.class, address);
+        return address == NULL ? null : new TT_Postscript(address, null);
     }
 
     /**
@@ -139,13 +148,13 @@ public class TT_Postscript extends Struct {
      * @param capacity the buffer capacity
      */
     public static TT_Postscript.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static TT_Postscript.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -179,9 +188,9 @@ public class TT_Postscript extends Struct {
         /**
          * Creates a new {@code TT_Postscript.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link TT_Postscript#SIZEOF}, and its mark will be undefined.
+         * by {@link TT_Postscript#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

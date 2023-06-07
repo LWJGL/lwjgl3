@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkImageView {@link #imageView};
  * }</code></pre>
  */
-public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements NativeResource {
+public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct<VkImageViewCaptureDescriptorDataInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -72,6 +72,15 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         IMAGEVIEW = layout.offsetof(2);
+    }
+
+    protected VkImageViewCaptureDescriptorDataInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkImageViewCaptureDescriptorDataInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkImageViewCaptureDescriptorDataInfoEXT(address, container);
     }
 
     /**
@@ -135,29 +144,29 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
 
     /** Returns a new {@code VkImageViewCaptureDescriptorDataInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImageViewCaptureDescriptorDataInfoEXT malloc() {
-        return wrap(VkImageViewCaptureDescriptorDataInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkImageViewCaptureDescriptorDataInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkImageViewCaptureDescriptorDataInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImageViewCaptureDescriptorDataInfoEXT calloc() {
-        return wrap(VkImageViewCaptureDescriptorDataInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkImageViewCaptureDescriptorDataInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkImageViewCaptureDescriptorDataInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkImageViewCaptureDescriptorDataInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkImageViewCaptureDescriptorDataInfoEXT.class, memAddress(container), container);
+        return new VkImageViewCaptureDescriptorDataInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkImageViewCaptureDescriptorDataInfoEXT} instance for the specified memory address. */
     public static VkImageViewCaptureDescriptorDataInfoEXT create(long address) {
-        return wrap(VkImageViewCaptureDescriptorDataInfoEXT.class, address);
+        return new VkImageViewCaptureDescriptorDataInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageViewCaptureDescriptorDataInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkImageViewCaptureDescriptorDataInfoEXT.class, address);
+        return address == NULL ? null : new VkImageViewCaptureDescriptorDataInfoEXT(address, null);
     }
 
     /**
@@ -166,7 +175,7 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkImageViewCaptureDescriptorDataInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -175,7 +184,7 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkImageViewCaptureDescriptorDataInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -185,7 +194,7 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
      */
     public static VkImageViewCaptureDescriptorDataInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -195,13 +204,13 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkImageViewCaptureDescriptorDataInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImageViewCaptureDescriptorDataInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -210,7 +219,7 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static VkImageViewCaptureDescriptorDataInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkImageViewCaptureDescriptorDataInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkImageViewCaptureDescriptorDataInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -219,7 +228,7 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static VkImageViewCaptureDescriptorDataInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkImageViewCaptureDescriptorDataInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkImageViewCaptureDescriptorDataInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -229,7 +238,7 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkImageViewCaptureDescriptorDataInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -239,7 +248,7 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkImageViewCaptureDescriptorDataInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -268,9 +277,9 @@ public class VkImageViewCaptureDescriptorDataInfoEXT extends Struct implements N
         /**
          * Creates a new {@code VkImageViewCaptureDescriptorDataInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkImageViewCaptureDescriptorDataInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkImageViewCaptureDescriptorDataInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

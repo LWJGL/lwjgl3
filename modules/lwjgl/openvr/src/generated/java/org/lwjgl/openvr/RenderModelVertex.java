@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct RenderModel_Vertex_t")
-public class RenderModelVertex extends Struct {
+public class RenderModelVertex extends Struct<RenderModelVertex> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -54,6 +54,15 @@ public class RenderModelVertex extends Struct {
         VPOSITION = layout.offsetof(0);
         VNORMAL = layout.offsetof(1);
         RFTEXTURECOORD = layout.offsetof(2);
+    }
+
+    protected RenderModelVertex(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected RenderModelVertex create(long address, @Nullable ByteBuffer container) {
+        return new RenderModelVertex(address, container);
     }
 
     /**
@@ -85,13 +94,13 @@ public class RenderModelVertex extends Struct {
 
     /** Returns a new {@code RenderModelVertex} instance for the specified memory address. */
     public static RenderModelVertex create(long address) {
-        return wrap(RenderModelVertex.class, address);
+        return new RenderModelVertex(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static RenderModelVertex createSafe(long address) {
-        return address == NULL ? null : wrap(RenderModelVertex.class, address);
+        return address == NULL ? null : new RenderModelVertex(address, null);
     }
 
     /**
@@ -101,13 +110,13 @@ public class RenderModelVertex extends Struct {
      * @param capacity the buffer capacity
      */
     public static RenderModelVertex.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static RenderModelVertex.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -133,9 +142,9 @@ public class RenderModelVertex extends Struct {
         /**
          * Creates a new {@code RenderModelVertex.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link RenderModelVertex#SIZEOF}, and its mark will be undefined.
+         * by {@link RenderModelVertex#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

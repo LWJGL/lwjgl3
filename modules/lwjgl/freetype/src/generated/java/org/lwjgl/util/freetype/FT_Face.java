@@ -55,7 +55,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct FT_FaceRec")
-public class FT_Face extends Struct {
+public class FT_Face extends Struct<FT_Face> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -168,6 +168,15 @@ public class FT_Face extends Struct {
         INTERNAL = layout.offsetof(30);
     }
 
+    protected FT_Face(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FT_Face create(long address, @Nullable ByteBuffer container) {
+        return new FT_Face(address, container);
+    }
+
     /**
      * Creates a {@code FT_Face} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -263,13 +272,13 @@ public class FT_Face extends Struct {
 
     /** Returns a new {@code FT_Face} instance for the specified memory address. */
     public static FT_Face create(long address) {
-        return wrap(FT_Face.class, address);
+        return new FT_Face(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_Face createSafe(long address) {
-        return address == NULL ? null : wrap(FT_Face.class, address);
+        return address == NULL ? null : new FT_Face(address, null);
     }
 
     /**
@@ -279,13 +288,13 @@ public class FT_Face extends Struct {
      * @param capacity the buffer capacity
      */
     public static FT_Face.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_Face.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -360,9 +369,9 @@ public class FT_Face extends Struct {
         /**
          * Creates a new {@code FT_Face.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FT_Face#SIZEOF}, and its mark will be undefined.
+         * by {@link FT_Face#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

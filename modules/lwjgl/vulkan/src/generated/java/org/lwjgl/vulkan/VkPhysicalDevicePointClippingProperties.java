@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPointClippingBehavior {@link #pointClippingBehavior};
  * }</code></pre>
  */
-public class VkPhysicalDevicePointClippingProperties extends Struct implements NativeResource {
+public class VkPhysicalDevicePointClippingProperties extends Struct<VkPhysicalDevicePointClippingProperties> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         POINTCLIPPINGBEHAVIOR = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDevicePointClippingProperties(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDevicePointClippingProperties create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDevicePointClippingProperties(address, container);
     }
 
     /**
@@ -123,29 +132,29 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
 
     /** Returns a new {@code VkPhysicalDevicePointClippingProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevicePointClippingProperties malloc() {
-        return wrap(VkPhysicalDevicePointClippingProperties.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDevicePointClippingProperties(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDevicePointClippingProperties} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevicePointClippingProperties calloc() {
-        return wrap(VkPhysicalDevicePointClippingProperties.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDevicePointClippingProperties(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDevicePointClippingProperties} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDevicePointClippingProperties create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDevicePointClippingProperties.class, memAddress(container), container);
+        return new VkPhysicalDevicePointClippingProperties(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDevicePointClippingProperties} instance for the specified memory address. */
     public static VkPhysicalDevicePointClippingProperties create(long address) {
-        return wrap(VkPhysicalDevicePointClippingProperties.class, address);
+        return new VkPhysicalDevicePointClippingProperties(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePointClippingProperties createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDevicePointClippingProperties.class, address);
+        return address == NULL ? null : new VkPhysicalDevicePointClippingProperties(address, null);
     }
 
     /**
@@ -154,7 +163,7 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePointClippingProperties.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -163,7 +172,7 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePointClippingProperties.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -173,7 +182,7 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
      */
     public static VkPhysicalDevicePointClippingProperties.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -183,13 +192,13 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePointClippingProperties.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePointClippingProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -217,7 +226,7 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevicePointClippingProperties malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDevicePointClippingProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDevicePointClippingProperties(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -226,7 +235,7 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevicePointClippingProperties calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDevicePointClippingProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDevicePointClippingProperties(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -236,7 +245,7 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePointClippingProperties.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -246,7 +255,7 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePointClippingProperties.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -273,9 +282,9 @@ public class VkPhysicalDevicePointClippingProperties extends Struct implements N
         /**
          * Creates a new {@code VkPhysicalDevicePointClippingProperties.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDevicePointClippingProperties#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDevicePointClippingProperties#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

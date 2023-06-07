@@ -57,7 +57,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceAddressBindingTypeEXT {@link #bindingType};
  * }</code></pre>
  */
-public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements NativeResource {
+public class VkDeviceAddressBindingCallbackDataEXT extends Struct<VkDeviceAddressBindingCallbackDataEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -93,6 +93,15 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
         BASEADDRESS = layout.offsetof(3);
         SIZE = layout.offsetof(4);
         BINDINGTYPE = layout.offsetof(5);
+    }
+
+    protected VkDeviceAddressBindingCallbackDataEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkDeviceAddressBindingCallbackDataEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkDeviceAddressBindingCallbackDataEXT(address, container);
     }
 
     /**
@@ -177,29 +186,29 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
 
     /** Returns a new {@code VkDeviceAddressBindingCallbackDataEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDeviceAddressBindingCallbackDataEXT malloc() {
-        return wrap(VkDeviceAddressBindingCallbackDataEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkDeviceAddressBindingCallbackDataEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkDeviceAddressBindingCallbackDataEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDeviceAddressBindingCallbackDataEXT calloc() {
-        return wrap(VkDeviceAddressBindingCallbackDataEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkDeviceAddressBindingCallbackDataEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkDeviceAddressBindingCallbackDataEXT} instance allocated with {@link BufferUtils}. */
     public static VkDeviceAddressBindingCallbackDataEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkDeviceAddressBindingCallbackDataEXT.class, memAddress(container), container);
+        return new VkDeviceAddressBindingCallbackDataEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkDeviceAddressBindingCallbackDataEXT} instance for the specified memory address. */
     public static VkDeviceAddressBindingCallbackDataEXT create(long address) {
-        return wrap(VkDeviceAddressBindingCallbackDataEXT.class, address);
+        return new VkDeviceAddressBindingCallbackDataEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceAddressBindingCallbackDataEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkDeviceAddressBindingCallbackDataEXT.class, address);
+        return address == NULL ? null : new VkDeviceAddressBindingCallbackDataEXT(address, null);
     }
 
     /**
@@ -208,7 +217,7 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkDeviceAddressBindingCallbackDataEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -217,7 +226,7 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkDeviceAddressBindingCallbackDataEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -227,7 +236,7 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
      */
     public static VkDeviceAddressBindingCallbackDataEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -237,13 +246,13 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkDeviceAddressBindingCallbackDataEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceAddressBindingCallbackDataEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -252,7 +261,7 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static VkDeviceAddressBindingCallbackDataEXT malloc(MemoryStack stack) {
-        return wrap(VkDeviceAddressBindingCallbackDataEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkDeviceAddressBindingCallbackDataEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -261,7 +270,7 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static VkDeviceAddressBindingCallbackDataEXT calloc(MemoryStack stack) {
-        return wrap(VkDeviceAddressBindingCallbackDataEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkDeviceAddressBindingCallbackDataEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -271,7 +280,7 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkDeviceAddressBindingCallbackDataEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -281,7 +290,7 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkDeviceAddressBindingCallbackDataEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -322,9 +331,9 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct implements Nat
         /**
          * Creates a new {@code VkDeviceAddressBindingCallbackDataEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkDeviceAddressBindingCallbackDataEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkDeviceAddressBindingCallbackDataEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

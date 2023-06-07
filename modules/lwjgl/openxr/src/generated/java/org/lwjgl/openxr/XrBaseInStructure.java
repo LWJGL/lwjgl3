@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrBaseInStructure XrBaseInStructure} const * {@link #next};
  * }</code></pre>
  */
-public class XrBaseInStructure extends Struct implements NativeResource {
+public class XrBaseInStructure extends Struct<XrBaseInStructure> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -59,6 +59,15 @@ public class XrBaseInStructure extends Struct implements NativeResource {
 
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
+    }
+
+    protected XrBaseInStructure(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrBaseInStructure create(long address, @Nullable ByteBuffer container) {
+        return new XrBaseInStructure(address, container);
     }
 
     /**
@@ -113,29 +122,29 @@ public class XrBaseInStructure extends Struct implements NativeResource {
 
     /** Returns a new {@code XrBaseInStructure} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrBaseInStructure malloc() {
-        return wrap(XrBaseInStructure.class, nmemAllocChecked(SIZEOF));
+        return new XrBaseInStructure(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrBaseInStructure} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrBaseInStructure calloc() {
-        return wrap(XrBaseInStructure.class, nmemCallocChecked(1, SIZEOF));
+        return new XrBaseInStructure(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrBaseInStructure} instance allocated with {@link BufferUtils}. */
     public static XrBaseInStructure create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrBaseInStructure.class, memAddress(container), container);
+        return new XrBaseInStructure(memAddress(container), container);
     }
 
     /** Returns a new {@code XrBaseInStructure} instance for the specified memory address. */
     public static XrBaseInStructure create(long address) {
-        return wrap(XrBaseInStructure.class, address);
+        return new XrBaseInStructure(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrBaseInStructure createSafe(long address) {
-        return address == NULL ? null : wrap(XrBaseInStructure.class, address);
+        return address == NULL ? null : new XrBaseInStructure(address, null);
     }
 
     /**
@@ -144,7 +153,7 @@ public class XrBaseInStructure extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrBaseInStructure.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -153,7 +162,7 @@ public class XrBaseInStructure extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrBaseInStructure.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -163,7 +172,7 @@ public class XrBaseInStructure extends Struct implements NativeResource {
      */
     public static XrBaseInStructure.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -173,13 +182,13 @@ public class XrBaseInStructure extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrBaseInStructure.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrBaseInStructure.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -188,7 +197,7 @@ public class XrBaseInStructure extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrBaseInStructure malloc(MemoryStack stack) {
-        return wrap(XrBaseInStructure.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrBaseInStructure(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -197,7 +206,7 @@ public class XrBaseInStructure extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrBaseInStructure calloc(MemoryStack stack) {
-        return wrap(XrBaseInStructure.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrBaseInStructure(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -207,7 +216,7 @@ public class XrBaseInStructure extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrBaseInStructure.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -217,7 +226,7 @@ public class XrBaseInStructure extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrBaseInStructure.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -251,9 +260,9 @@ public class XrBaseInStructure extends Struct implements NativeResource {
         /**
          * Creates a new {@code XrBaseInStructure.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrBaseInStructure#SIZEOF}, and its mark will be undefined.
+         * by {@link XrBaseInStructure#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

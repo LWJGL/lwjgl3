@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkBool32 {@link #residencyNonResidentStrict};
  * }</code></pre>
  */
-public class VkPhysicalDeviceSparseProperties extends Struct {
+public class VkPhysicalDeviceSparseProperties extends Struct<VkPhysicalDeviceSparseProperties> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
         RESIDENCYSTANDARD3DBLOCKSHAPE = layout.offsetof(2);
         RESIDENCYALIGNEDMIPSIZE = layout.offsetof(3);
         RESIDENCYNONRESIDENTSTRICT = layout.offsetof(4);
+    }
+
+    protected VkPhysicalDeviceSparseProperties(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceSparseProperties create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceSparseProperties(address, container);
     }
 
     /**
@@ -99,13 +108,13 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
 
     /** Returns a new {@code VkPhysicalDeviceSparseProperties} instance for the specified memory address. */
     public static VkPhysicalDeviceSparseProperties create(long address) {
-        return wrap(VkPhysicalDeviceSparseProperties.class, address);
+        return new VkPhysicalDeviceSparseProperties(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSparseProperties createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceSparseProperties.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceSparseProperties(address, null);
     }
 
     /**
@@ -115,13 +124,13 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSparseProperties.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSparseProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -147,9 +156,9 @@ public class VkPhysicalDeviceSparseProperties extends Struct {
         /**
          * Creates a new {@code VkPhysicalDeviceSparseProperties.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceSparseProperties#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceSparseProperties#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

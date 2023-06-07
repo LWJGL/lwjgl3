@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkExternalMemoryHandleTypeFlagsNV {@link #handleTypes};
  * }</code></pre>
  */
-public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeResource {
+public class VkExternalMemoryImageCreateInfoNV extends Struct<VkExternalMemoryImageCreateInfoNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -61,6 +61,15 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         HANDLETYPES = layout.offsetof(2);
+    }
+
+    protected VkExternalMemoryImageCreateInfoNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkExternalMemoryImageCreateInfoNV create(long address, @Nullable ByteBuffer container) {
+        return new VkExternalMemoryImageCreateInfoNV(address, container);
     }
 
     /**
@@ -124,29 +133,29 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
 
     /** Returns a new {@code VkExternalMemoryImageCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExternalMemoryImageCreateInfoNV malloc() {
-        return wrap(VkExternalMemoryImageCreateInfoNV.class, nmemAllocChecked(SIZEOF));
+        return new VkExternalMemoryImageCreateInfoNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkExternalMemoryImageCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExternalMemoryImageCreateInfoNV calloc() {
-        return wrap(VkExternalMemoryImageCreateInfoNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkExternalMemoryImageCreateInfoNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkExternalMemoryImageCreateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkExternalMemoryImageCreateInfoNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkExternalMemoryImageCreateInfoNV.class, memAddress(container), container);
+        return new VkExternalMemoryImageCreateInfoNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkExternalMemoryImageCreateInfoNV} instance for the specified memory address. */
     public static VkExternalMemoryImageCreateInfoNV create(long address) {
-        return wrap(VkExternalMemoryImageCreateInfoNV.class, address);
+        return new VkExternalMemoryImageCreateInfoNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalMemoryImageCreateInfoNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkExternalMemoryImageCreateInfoNV.class, address);
+        return address == NULL ? null : new VkExternalMemoryImageCreateInfoNV(address, null);
     }
 
     /**
@@ -155,7 +164,7 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryImageCreateInfoNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -164,7 +173,7 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryImageCreateInfoNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -174,7 +183,7 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
      */
     public static VkExternalMemoryImageCreateInfoNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -184,13 +193,13 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryImageCreateInfoNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalMemoryImageCreateInfoNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -218,7 +227,7 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkExternalMemoryImageCreateInfoNV malloc(MemoryStack stack) {
-        return wrap(VkExternalMemoryImageCreateInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkExternalMemoryImageCreateInfoNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -227,7 +236,7 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkExternalMemoryImageCreateInfoNV calloc(MemoryStack stack) {
-        return wrap(VkExternalMemoryImageCreateInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkExternalMemoryImageCreateInfoNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -237,7 +246,7 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryImageCreateInfoNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -247,7 +256,7 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryImageCreateInfoNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -276,9 +285,9 @@ public class VkExternalMemoryImageCreateInfoNV extends Struct implements NativeR
         /**
          * Creates a new {@code VkExternalMemoryImageCreateInfoNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkExternalMemoryImageCreateInfoNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkExternalMemoryImageCreateInfoNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

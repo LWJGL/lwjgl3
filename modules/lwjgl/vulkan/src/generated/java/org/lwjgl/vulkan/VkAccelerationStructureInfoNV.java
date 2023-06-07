@@ -65,7 +65,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkGeometryNV VkGeometryNV} const * {@link #pGeometries};
  * }</code></pre>
  */
-public class VkAccelerationStructureInfoNV extends Struct implements NativeResource {
+public class VkAccelerationStructureInfoNV extends Struct<VkAccelerationStructureInfoNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -104,6 +104,15 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
         INSTANCECOUNT = layout.offsetof(4);
         GEOMETRYCOUNT = layout.offsetof(5);
         PGEOMETRIES = layout.offsetof(6);
+    }
+
+    protected VkAccelerationStructureInfoNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkAccelerationStructureInfoNV create(long address, @Nullable ByteBuffer container) {
+        return new VkAccelerationStructureInfoNV(address, container);
     }
 
     /**
@@ -192,29 +201,29 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
 
     /** Returns a new {@code VkAccelerationStructureInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkAccelerationStructureInfoNV malloc() {
-        return wrap(VkAccelerationStructureInfoNV.class, nmemAllocChecked(SIZEOF));
+        return new VkAccelerationStructureInfoNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkAccelerationStructureInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkAccelerationStructureInfoNV calloc() {
-        return wrap(VkAccelerationStructureInfoNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkAccelerationStructureInfoNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkAccelerationStructureInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkAccelerationStructureInfoNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkAccelerationStructureInfoNV.class, memAddress(container), container);
+        return new VkAccelerationStructureInfoNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkAccelerationStructureInfoNV} instance for the specified memory address. */
     public static VkAccelerationStructureInfoNV create(long address) {
-        return wrap(VkAccelerationStructureInfoNV.class, address);
+        return new VkAccelerationStructureInfoNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAccelerationStructureInfoNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkAccelerationStructureInfoNV.class, address);
+        return address == NULL ? null : new VkAccelerationStructureInfoNV(address, null);
     }
 
     /**
@@ -223,7 +232,7 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureInfoNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -232,7 +241,7 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureInfoNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -242,7 +251,7 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
      */
     public static VkAccelerationStructureInfoNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -252,13 +261,13 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureInfoNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAccelerationStructureInfoNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -286,7 +295,7 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkAccelerationStructureInfoNV malloc(MemoryStack stack) {
-        return wrap(VkAccelerationStructureInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkAccelerationStructureInfoNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -295,7 +304,7 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkAccelerationStructureInfoNV calloc(MemoryStack stack) {
-        return wrap(VkAccelerationStructureInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkAccelerationStructureInfoNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -305,7 +314,7 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureInfoNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -315,7 +324,7 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureInfoNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -371,9 +380,9 @@ public class VkAccelerationStructureInfoNV extends Struct implements NativeResou
         /**
          * Creates a new {@code VkAccelerationStructureInfoNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkAccelerationStructureInfoNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkAccelerationStructureInfoNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -59,7 +59,7 @@ import org.lwjgl.vulkan.*;
  *     PFN_vkWaitForFences vkWaitForFences;
  * }</code></pre>
  */
-public class ktxVulkanFunctions extends Struct implements NativeResource {
+public class ktxVulkanFunctions extends Struct<ktxVulkanFunctions> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -167,6 +167,15 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
         VKQUEUEWAITIDLE = layout.offsetof(27);
         VKUNMAPMEMORY = layout.offsetof(28);
         VKWAITFORFENCES = layout.offsetof(29);
+    }
+
+    protected ktxVulkanFunctions(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected ktxVulkanFunctions create(long address, @Nullable ByteBuffer container) {
+        return new ktxVulkanFunctions(address, container);
     }
 
     /**
@@ -417,29 +426,29 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
 
     /** Returns a new {@code ktxVulkanFunctions} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static ktxVulkanFunctions malloc() {
-        return wrap(ktxVulkanFunctions.class, nmemAllocChecked(SIZEOF));
+        return new ktxVulkanFunctions(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code ktxVulkanFunctions} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static ktxVulkanFunctions calloc() {
-        return wrap(ktxVulkanFunctions.class, nmemCallocChecked(1, SIZEOF));
+        return new ktxVulkanFunctions(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code ktxVulkanFunctions} instance allocated with {@link BufferUtils}. */
     public static ktxVulkanFunctions create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(ktxVulkanFunctions.class, memAddress(container), container);
+        return new ktxVulkanFunctions(memAddress(container), container);
     }
 
     /** Returns a new {@code ktxVulkanFunctions} instance for the specified memory address. */
     public static ktxVulkanFunctions create(long address) {
-        return wrap(ktxVulkanFunctions.class, address);
+        return new ktxVulkanFunctions(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ktxVulkanFunctions createSafe(long address) {
-        return address == NULL ? null : wrap(ktxVulkanFunctions.class, address);
+        return address == NULL ? null : new ktxVulkanFunctions(address, null);
     }
 
     /**
@@ -448,7 +457,7 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ktxVulkanFunctions.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -457,7 +466,7 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ktxVulkanFunctions.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -467,7 +476,7 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
      */
     public static ktxVulkanFunctions.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -477,13 +486,13 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ktxVulkanFunctions.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ktxVulkanFunctions.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -492,7 +501,7 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ktxVulkanFunctions malloc(MemoryStack stack) {
-        return wrap(ktxVulkanFunctions.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new ktxVulkanFunctions(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -501,7 +510,7 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ktxVulkanFunctions calloc(MemoryStack stack) {
-        return wrap(ktxVulkanFunctions.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new ktxVulkanFunctions(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -511,7 +520,7 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ktxVulkanFunctions.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -521,7 +530,7 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ktxVulkanFunctions.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -711,9 +720,9 @@ public class ktxVulkanFunctions extends Struct implements NativeResource {
         /**
          * Creates a new {@code ktxVulkanFunctions.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link ktxVulkanFunctions#SIZEOF}, and its mark will be undefined.
+         * by {@link ktxVulkanFunctions#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct nk_config_stack_color")
-class NkConfigStackColor extends Struct {
+class NkConfigStackColor extends Struct<NkConfigStackColor> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -48,6 +48,15 @@ class NkConfigStackColor extends Struct {
 
         HEAD = layout.offsetof(0);
         ELEMENTS = layout.offsetof(1);
+    }
+
+    protected NkConfigStackColor(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkConfigStackColor create(long address, @Nullable ByteBuffer container) {
+        return new NkConfigStackColor(address, container);
     }
 
     /**
@@ -76,13 +85,13 @@ class NkConfigStackColor extends Struct {
 
     /** Returns a new {@code NkConfigStackColor} instance for the specified memory address. */
     public static NkConfigStackColor create(long address) {
-        return wrap(NkConfigStackColor.class, address);
+        return new NkConfigStackColor(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigStackColor createSafe(long address) {
-        return address == NULL ? null : wrap(NkConfigStackColor.class, address);
+        return address == NULL ? null : new NkConfigStackColor(address, null);
     }
 
     /**
@@ -92,13 +101,13 @@ class NkConfigStackColor extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkConfigStackColor.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigStackColor.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -122,9 +131,9 @@ class NkConfigStackColor extends Struct {
         /**
          * Creates a new {@code NkConfigStackColor.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkConfigStackColor#SIZEOF}, and its mark will be undefined.
+         * by {@link NkConfigStackColor#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

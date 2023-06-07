@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct nk_configuration_stacks")
-class NkConfigurationStacks extends Struct {
+class NkConfigurationStacks extends Struct<NkConfigurationStacks> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -67,6 +67,15 @@ class NkConfigurationStacks extends Struct {
         COLORS = layout.offsetof(4);
         FONTS = layout.offsetof(5);
         BUTTON_BEHAVIORS = layout.offsetof(6);
+    }
+
+    protected NkConfigurationStacks(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkConfigurationStacks create(long address, @Nullable ByteBuffer container) {
+        return new NkConfigurationStacks(address, container);
     }
 
     /**
@@ -108,13 +117,13 @@ class NkConfigurationStacks extends Struct {
 
     /** Returns a new {@code NkConfigurationStacks} instance for the specified memory address. */
     public static NkConfigurationStacks create(long address) {
-        return wrap(NkConfigurationStacks.class, address);
+        return new NkConfigurationStacks(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigurationStacks createSafe(long address) {
-        return address == NULL ? null : wrap(NkConfigurationStacks.class, address);
+        return address == NULL ? null : new NkConfigurationStacks(address, null);
     }
 
     // -----------------------------------

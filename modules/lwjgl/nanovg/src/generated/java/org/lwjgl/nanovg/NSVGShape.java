@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct NSVGshape")
-public class NSVGShape extends Struct {
+public class NSVGShape extends Struct<NSVGShape> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -116,6 +116,15 @@ public class NSVGShape extends Struct {
         XFORM = layout.offsetof(16);
         PATHS = layout.offsetof(17);
         NEXT = layout.offsetof(18);
+    }
+
+    protected NSVGShape(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NSVGShape create(long address, @Nullable ByteBuffer container) {
+        return new NSVGShape(address, container);
     }
 
     /**
@@ -204,13 +213,13 @@ public class NSVGShape extends Struct {
 
     /** Returns a new {@code NSVGShape} instance for the specified memory address. */
     public static NSVGShape create(long address) {
-        return wrap(NSVGShape.class, address);
+        return new NSVGShape(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGShape createSafe(long address) {
-        return address == NULL ? null : wrap(NSVGShape.class, address);
+        return address == NULL ? null : new NSVGShape(address, null);
     }
 
     /**
@@ -220,13 +229,13 @@ public class NSVGShape extends Struct {
      * @param capacity the buffer capacity
      */
     public static NSVGShape.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGShape.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -298,9 +307,9 @@ public class NSVGShape extends Struct {
         /**
          * Creates a new {@code NSVGShape.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NSVGShape#SIZEOF}, and its mark will be undefined.
+         * by {@link NSVGShape#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

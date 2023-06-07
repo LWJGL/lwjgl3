@@ -62,7 +62,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkOffset2D VkOffset2D} const * {@link #pFragmentDensityOffsets};
  * }</code></pre>
  */
-public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct implements NativeResource {
+public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct<VkSubpassFragmentDensityMapOffsetEndInfoQCOM> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -92,6 +92,15 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
         PNEXT = layout.offsetof(1);
         FRAGMENTDENSITYOFFSETCOUNT = layout.offsetof(2);
         PFRAGMENTDENSITYOFFSETS = layout.offsetof(3);
+    }
+
+    protected VkSubpassFragmentDensityMapOffsetEndInfoQCOM(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkSubpassFragmentDensityMapOffsetEndInfoQCOM create(long address, @Nullable ByteBuffer container) {
+        return new VkSubpassFragmentDensityMapOffsetEndInfoQCOM(address, container);
     }
 
     /**
@@ -159,29 +168,29 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
 
     /** Returns a new {@code VkSubpassFragmentDensityMapOffsetEndInfoQCOM} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM malloc() {
-        return wrap(VkSubpassFragmentDensityMapOffsetEndInfoQCOM.class, nmemAllocChecked(SIZEOF));
+        return new VkSubpassFragmentDensityMapOffsetEndInfoQCOM(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkSubpassFragmentDensityMapOffsetEndInfoQCOM} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM calloc() {
-        return wrap(VkSubpassFragmentDensityMapOffsetEndInfoQCOM.class, nmemCallocChecked(1, SIZEOF));
+        return new VkSubpassFragmentDensityMapOffsetEndInfoQCOM(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkSubpassFragmentDensityMapOffsetEndInfoQCOM} instance allocated with {@link BufferUtils}. */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkSubpassFragmentDensityMapOffsetEndInfoQCOM.class, memAddress(container), container);
+        return new VkSubpassFragmentDensityMapOffsetEndInfoQCOM(memAddress(container), container);
     }
 
     /** Returns a new {@code VkSubpassFragmentDensityMapOffsetEndInfoQCOM} instance for the specified memory address. */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM create(long address) {
-        return wrap(VkSubpassFragmentDensityMapOffsetEndInfoQCOM.class, address);
+        return new VkSubpassFragmentDensityMapOffsetEndInfoQCOM(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM createSafe(long address) {
-        return address == NULL ? null : wrap(VkSubpassFragmentDensityMapOffsetEndInfoQCOM.class, address);
+        return address == NULL ? null : new VkSubpassFragmentDensityMapOffsetEndInfoQCOM(address, null);
     }
 
     /**
@@ -190,7 +199,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -199,7 +208,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -209,7 +218,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
      */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -219,13 +228,13 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -234,7 +243,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
      * @param stack the stack from which to allocate
      */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM malloc(MemoryStack stack) {
-        return wrap(VkSubpassFragmentDensityMapOffsetEndInfoQCOM.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkSubpassFragmentDensityMapOffsetEndInfoQCOM(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -243,7 +252,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
      * @param stack the stack from which to allocate
      */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM calloc(MemoryStack stack) {
-        return wrap(VkSubpassFragmentDensityMapOffsetEndInfoQCOM.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkSubpassFragmentDensityMapOffsetEndInfoQCOM(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -253,7 +262,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -263,7 +272,7 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -307,9 +316,9 @@ public class VkSubpassFragmentDensityMapOffsetEndInfoQCOM extends Struct impleme
         /**
          * Creates a new {@code VkSubpassFragmentDensityMapOffsetEndInfoQCOM.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM#SIZEOF}, and its mark will be undefined.
+         * by {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

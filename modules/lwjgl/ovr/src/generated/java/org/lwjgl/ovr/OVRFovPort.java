@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct ovrFovPort")
-public class OVRFovPort extends Struct implements NativeResource {
+public class OVRFovPort extends Struct<OVRFovPort> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -62,6 +62,15 @@ public class OVRFovPort extends Struct implements NativeResource {
         DOWNTAN = layout.offsetof(1);
         LEFTTAN = layout.offsetof(2);
         RIGHTTAN = layout.offsetof(3);
+    }
+
+    protected OVRFovPort(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected OVRFovPort create(long address, @Nullable ByteBuffer container) {
+        return new OVRFovPort(address, container);
     }
 
     /**
@@ -126,29 +135,29 @@ public class OVRFovPort extends Struct implements NativeResource {
 
     /** Returns a new {@code OVRFovPort} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRFovPort malloc() {
-        return wrap(OVRFovPort.class, nmemAllocChecked(SIZEOF));
+        return new OVRFovPort(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code OVRFovPort} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRFovPort calloc() {
-        return wrap(OVRFovPort.class, nmemCallocChecked(1, SIZEOF));
+        return new OVRFovPort(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code OVRFovPort} instance allocated with {@link BufferUtils}. */
     public static OVRFovPort create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(OVRFovPort.class, memAddress(container), container);
+        return new OVRFovPort(memAddress(container), container);
     }
 
     /** Returns a new {@code OVRFovPort} instance for the specified memory address. */
     public static OVRFovPort create(long address) {
-        return wrap(OVRFovPort.class, address);
+        return new OVRFovPort(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRFovPort createSafe(long address) {
-        return address == NULL ? null : wrap(OVRFovPort.class, address);
+        return address == NULL ? null : new OVRFovPort(address, null);
     }
 
     /**
@@ -157,7 +166,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -166,7 +175,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -176,7 +185,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      */
     public static OVRFovPort.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -186,13 +195,13 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRFovPort.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -220,7 +229,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRFovPort malloc(MemoryStack stack) {
-        return wrap(OVRFovPort.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new OVRFovPort(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -229,7 +238,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRFovPort calloc(MemoryStack stack) {
-        return wrap(OVRFovPort.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new OVRFovPort(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -239,7 +248,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -249,7 +258,7 @@ public class OVRFovPort extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static OVRFovPort.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -282,9 +291,9 @@ public class OVRFovPort extends Struct implements NativeResource {
         /**
          * Creates a new {@code OVRFovPort.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link OVRFovPort#SIZEOF}, and its mark will be undefined.
+         * by {@link OVRFovPort#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

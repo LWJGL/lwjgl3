@@ -312,7 +312,7 @@ public final class MemoryUtil {
      * @param size the number of C long values to allocate.
      */
     public static CLongBuffer memAllocCLong(int size) {
-        return Pointer.Default.wrap(CLongBuffer.class, nmemAllocChecked(getAllocationSize(size, CLONG_SHIFT)), size);
+        return CLongBuffer.create(nmemAllocChecked(getAllocationSize(size, CLONG_SHIFT)), size);
     }
 
     /**
@@ -330,7 +330,7 @@ public final class MemoryUtil {
      * @param size the number of pointer values to allocate.
      */
     public static PointerBuffer memAllocPointer(int size) {
-        return Pointer.Default.wrap(PointerBuffer.class, nmemAllocChecked(getAllocationSize(size, POINTER_SHIFT)), size);
+        return PointerBuffer.create(nmemAllocChecked(getAllocationSize(size, POINTER_SHIFT)), size);
     }
 
     /** Unsafe version of {@link #memFree}. */
@@ -460,7 +460,7 @@ public final class MemoryUtil {
      * @param num the number of C long values to allocate.
      */
     public static CLongBuffer memCallocCLong(int num) {
-        return Pointer.Default.wrap(CLongBuffer.class, nmemCallocChecked(num, CLONG_SIZE), num);
+        return CLongBuffer.create(nmemCallocChecked(num, CLONG_SIZE), num);
     }
 
     /**
@@ -478,7 +478,7 @@ public final class MemoryUtil {
      * @param num the number of pointer values to allocate.
      */
     public static PointerBuffer memCallocPointer(int num) {
-        return Pointer.Default.wrap(PointerBuffer.class, nmemCallocChecked(num, POINTER_SIZE), num);
+        return PointerBuffer.create(nmemCallocChecked(num, POINTER_SIZE), num);
     }
 
     // --- [ memRealloc] ---
@@ -872,7 +872,7 @@ public final class MemoryUtil {
         return wrap(BUFFER_BYTE, address, capacity).order(NATIVE_ORDER);
     }
 
-    /** Like {@link #memByteBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
+    /** Like {@link #memByteBuffer(long, int) memByteBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static ByteBuffer memByteBufferSafe(long address, int capacity) {
         return address == NULL ? null : wrap(BUFFER_BYTE, address, capacity).order(NATIVE_ORDER);
@@ -1005,7 +1005,7 @@ public final class MemoryUtil {
      *
      * @return the {@code ByteBuffer} view
      */
-    public static ByteBuffer memByteBuffer(Struct value) {
+    public static <T extends Struct<T>> ByteBuffer memByteBuffer(T value) {
         return wrap(BUFFER_BYTE, value.address, value.sizeof()).order(NATIVE_ORDER);
     }
 
@@ -1115,13 +1115,13 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(address);
         }
-        return Pointer.Default.wrap(CLongBuffer.class, address, capacity);
+        return CLongBuffer.create(address, capacity);
     }
 
     /** Like {@link #memCLongBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static CLongBuffer memCLongBufferSafe(long address, int capacity) {
-        return address == NULL ? null : Pointer.Default.wrap(CLongBuffer.class, address, capacity);
+        return address == NULL ? null : CLongBuffer.create(address, capacity);
     }
 
     /**
@@ -1185,13 +1185,13 @@ public final class MemoryUtil {
         if (CHECKS) {
             check(address);
         }
-        return Pointer.Default.wrap(PointerBuffer.class, address, capacity);
+        return PointerBuffer.create(address, capacity);
     }
 
     /** Like {@link #memPointerBuffer}, but returns {@code null} if {@code address} is {@link #NULL}. */
     @Nullable
     public static PointerBuffer memPointerBufferSafe(long address, int capacity) {
-        return address == NULL ? null : Pointer.Default.wrap(PointerBuffer.class, address, capacity);
+        return address == NULL ? null : PointerBuffer.create(address, capacity);
     }
 
     // --- [ Buffer duplication ] ---
@@ -1639,7 +1639,7 @@ public final class MemoryUtil {
      * @param value the value to set (memSet will convert it to unsigned byte)
      * @param <T>   the struct type
      */
-    public static <T extends Struct> void memSet(T ptr, int value) { memSet(ptr.address, value, ptr.sizeof()); }
+    public static <T extends Struct<T>> void memSet(T ptr, int value) { memSet(ptr.address, value, ptr.sizeof()); }
 
     // --- [ memcpy ] ---
 
@@ -1755,7 +1755,7 @@ public final class MemoryUtil {
      * @param dst the destination struct
      * @param <T> the struct type
      */
-    public static <T extends Struct> void memCopy(T src, T dst) {
+    public static <T extends Struct<T>> void memCopy(T src, T dst) {
         MultiReleaseMemCopy.copy(src.address, dst.address, src.sizeof());
     }
 

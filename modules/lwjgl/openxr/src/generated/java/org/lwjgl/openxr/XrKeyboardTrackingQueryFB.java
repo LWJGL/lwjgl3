@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrKeyboardTrackingQueryFlagsFB {@link #flags};
  * }</code></pre>
  */
-public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource {
+public class XrKeyboardTrackingQueryFB extends Struct<XrKeyboardTrackingQueryFB> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -72,6 +72,15 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         FLAGS = layout.offsetof(2);
+    }
+
+    protected XrKeyboardTrackingQueryFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrKeyboardTrackingQueryFB create(long address, @Nullable ByteBuffer container) {
+        return new XrKeyboardTrackingQueryFB(address, container);
     }
 
     /**
@@ -135,29 +144,29 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
 
     /** Returns a new {@code XrKeyboardTrackingQueryFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrKeyboardTrackingQueryFB malloc() {
-        return wrap(XrKeyboardTrackingQueryFB.class, nmemAllocChecked(SIZEOF));
+        return new XrKeyboardTrackingQueryFB(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrKeyboardTrackingQueryFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrKeyboardTrackingQueryFB calloc() {
-        return wrap(XrKeyboardTrackingQueryFB.class, nmemCallocChecked(1, SIZEOF));
+        return new XrKeyboardTrackingQueryFB(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrKeyboardTrackingQueryFB} instance allocated with {@link BufferUtils}. */
     public static XrKeyboardTrackingQueryFB create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrKeyboardTrackingQueryFB.class, memAddress(container), container);
+        return new XrKeyboardTrackingQueryFB(memAddress(container), container);
     }
 
     /** Returns a new {@code XrKeyboardTrackingQueryFB} instance for the specified memory address. */
     public static XrKeyboardTrackingQueryFB create(long address) {
-        return wrap(XrKeyboardTrackingQueryFB.class, address);
+        return new XrKeyboardTrackingQueryFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrKeyboardTrackingQueryFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrKeyboardTrackingQueryFB.class, address);
+        return address == NULL ? null : new XrKeyboardTrackingQueryFB(address, null);
     }
 
     /**
@@ -166,7 +175,7 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrKeyboardTrackingQueryFB.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -175,7 +184,7 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrKeyboardTrackingQueryFB.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -185,7 +194,7 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
      */
     public static XrKeyboardTrackingQueryFB.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -195,13 +204,13 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrKeyboardTrackingQueryFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrKeyboardTrackingQueryFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -210,7 +219,7 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static XrKeyboardTrackingQueryFB malloc(MemoryStack stack) {
-        return wrap(XrKeyboardTrackingQueryFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrKeyboardTrackingQueryFB(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -219,7 +228,7 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static XrKeyboardTrackingQueryFB calloc(MemoryStack stack) {
-        return wrap(XrKeyboardTrackingQueryFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrKeyboardTrackingQueryFB(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -229,7 +238,7 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrKeyboardTrackingQueryFB.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -239,7 +248,7 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrKeyboardTrackingQueryFB.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -268,9 +277,9 @@ public class XrKeyboardTrackingQueryFB extends Struct implements NativeResource 
         /**
          * Creates a new {@code XrKeyboardTrackingQueryFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrKeyboardTrackingQueryFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrKeyboardTrackingQueryFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

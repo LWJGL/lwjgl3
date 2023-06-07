@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     AHardwareBuffer * {@link #buffer};
  * }</code></pre>
  */
-public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements NativeResource {
+public class VkImportAndroidHardwareBufferInfoANDROID extends Struct<VkImportAndroidHardwareBufferInfoANDROID> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -73,6 +73,15 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         BUFFER = layout.offsetof(2);
+    }
+
+    protected VkImportAndroidHardwareBufferInfoANDROID(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkImportAndroidHardwareBufferInfoANDROID create(long address, @Nullable ByteBuffer container) {
+        return new VkImportAndroidHardwareBufferInfoANDROID(address, container);
     }
 
     /**
@@ -136,29 +145,29 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
 
     /** Returns a new {@code VkImportAndroidHardwareBufferInfoANDROID} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImportAndroidHardwareBufferInfoANDROID malloc() {
-        return wrap(VkImportAndroidHardwareBufferInfoANDROID.class, nmemAllocChecked(SIZEOF));
+        return new VkImportAndroidHardwareBufferInfoANDROID(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkImportAndroidHardwareBufferInfoANDROID} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImportAndroidHardwareBufferInfoANDROID calloc() {
-        return wrap(VkImportAndroidHardwareBufferInfoANDROID.class, nmemCallocChecked(1, SIZEOF));
+        return new VkImportAndroidHardwareBufferInfoANDROID(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkImportAndroidHardwareBufferInfoANDROID} instance allocated with {@link BufferUtils}. */
     public static VkImportAndroidHardwareBufferInfoANDROID create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkImportAndroidHardwareBufferInfoANDROID.class, memAddress(container), container);
+        return new VkImportAndroidHardwareBufferInfoANDROID(memAddress(container), container);
     }
 
     /** Returns a new {@code VkImportAndroidHardwareBufferInfoANDROID} instance for the specified memory address. */
     public static VkImportAndroidHardwareBufferInfoANDROID create(long address) {
-        return wrap(VkImportAndroidHardwareBufferInfoANDROID.class, address);
+        return new VkImportAndroidHardwareBufferInfoANDROID(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImportAndroidHardwareBufferInfoANDROID createSafe(long address) {
-        return address == NULL ? null : wrap(VkImportAndroidHardwareBufferInfoANDROID.class, address);
+        return address == NULL ? null : new VkImportAndroidHardwareBufferInfoANDROID(address, null);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkImportAndroidHardwareBufferInfoANDROID.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -176,7 +185,7 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkImportAndroidHardwareBufferInfoANDROID.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -186,7 +195,7 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
      */
     public static VkImportAndroidHardwareBufferInfoANDROID.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -196,13 +205,13 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkImportAndroidHardwareBufferInfoANDROID.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImportAndroidHardwareBufferInfoANDROID.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
      * @param stack the stack from which to allocate
      */
     public static VkImportAndroidHardwareBufferInfoANDROID malloc(MemoryStack stack) {
-        return wrap(VkImportAndroidHardwareBufferInfoANDROID.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkImportAndroidHardwareBufferInfoANDROID(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -220,7 +229,7 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
      * @param stack the stack from which to allocate
      */
     public static VkImportAndroidHardwareBufferInfoANDROID calloc(MemoryStack stack) {
-        return wrap(VkImportAndroidHardwareBufferInfoANDROID.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkImportAndroidHardwareBufferInfoANDROID(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -230,7 +239,7 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkImportAndroidHardwareBufferInfoANDROID.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -240,7 +249,7 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkImportAndroidHardwareBufferInfoANDROID.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -278,9 +287,9 @@ public class VkImportAndroidHardwareBufferInfoANDROID extends Struct implements 
         /**
          * Creates a new {@code VkImportAndroidHardwareBufferInfoANDROID.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkImportAndroidHardwareBufferInfoANDROID#SIZEOF}, and its mark will be undefined.
+         * by {@link VkImportAndroidHardwareBufferInfoANDROID#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

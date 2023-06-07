@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct NSVGpaint")
-public class NSVGPaint extends Struct {
+public class NSVGPaint extends Struct<NSVGPaint> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -57,6 +57,15 @@ public class NSVGPaint extends Struct {
         GRADIENT = layout.offsetof(3);
     }
 
+    protected NSVGPaint(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NSVGPaint create(long address, @Nullable ByteBuffer container) {
+        return new NSVGPaint(address, container);
+    }
+
     /**
      * Creates a {@code NSVGPaint} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -84,13 +93,13 @@ public class NSVGPaint extends Struct {
 
     /** Returns a new {@code NSVGPaint} instance for the specified memory address. */
     public static NSVGPaint create(long address) {
-        return wrap(NSVGPaint.class, address);
+        return new NSVGPaint(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGPaint createSafe(long address) {
-        return address == NULL ? null : wrap(NSVGPaint.class, address);
+        return address == NULL ? null : new NSVGPaint(address, null);
     }
 
     /**
@@ -100,13 +109,13 @@ public class NSVGPaint extends Struct {
      * @param capacity the buffer capacity
      */
     public static NSVGPaint.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NSVGPaint.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -128,9 +137,9 @@ public class NSVGPaint extends Struct {
         /**
          * Creates a new {@code NSVGPaint.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NSVGPaint#SIZEOF}, and its mark will be undefined.
+         * by {@link NSVGPaint#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

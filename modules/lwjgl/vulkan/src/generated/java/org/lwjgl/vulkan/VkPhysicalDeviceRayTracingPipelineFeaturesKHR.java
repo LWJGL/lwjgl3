@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #rayTraversalPrimitiveCulling};
  * }</code></pre>
  */
-public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implements NativeResource {
+public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct<VkPhysicalDeviceRayTracingPipelineFeaturesKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -86,6 +86,15 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
         RAYTRACINGPIPELINESHADERGROUPHANDLECAPTUREREPLAYMIXED = layout.offsetof(4);
         RAYTRACINGPIPELINETRACERAYSINDIRECT = layout.offsetof(5);
         RAYTRAVERSALPRIMITIVECULLING = layout.offsetof(6);
+    }
+
+    protected VkPhysicalDeviceRayTracingPipelineFeaturesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceRayTracingPipelineFeaturesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceRayTracingPipelineFeaturesKHR(address, container);
     }
 
     /**
@@ -177,29 +186,29 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
 
     /** Returns a new {@code VkPhysicalDeviceRayTracingPipelineFeaturesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR malloc() {
-        return wrap(VkPhysicalDeviceRayTracingPipelineFeaturesKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceRayTracingPipelineFeaturesKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceRayTracingPipelineFeaturesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR calloc() {
-        return wrap(VkPhysicalDeviceRayTracingPipelineFeaturesKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceRayTracingPipelineFeaturesKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceRayTracingPipelineFeaturesKHR} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceRayTracingPipelineFeaturesKHR.class, memAddress(container), container);
+        return new VkPhysicalDeviceRayTracingPipelineFeaturesKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceRayTracingPipelineFeaturesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR create(long address) {
-        return wrap(VkPhysicalDeviceRayTracingPipelineFeaturesKHR.class, address);
+        return new VkPhysicalDeviceRayTracingPipelineFeaturesKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceRayTracingPipelineFeaturesKHR.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceRayTracingPipelineFeaturesKHR(address, null);
     }
 
     /**
@@ -208,7 +217,7 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -217,7 +226,7 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -227,7 +236,7 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
      */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -237,13 +246,13 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -252,7 +261,7 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceRayTracingPipelineFeaturesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceRayTracingPipelineFeaturesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -261,7 +270,7 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceRayTracingPipelineFeaturesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceRayTracingPipelineFeaturesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -271,7 +280,7 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -281,7 +290,7 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -326,9 +335,9 @@ public class VkPhysicalDeviceRayTracingPipelineFeaturesKHR extends Struct implem
         /**
          * Creates a new {@code VkPhysicalDeviceRayTracingPipelineFeaturesKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

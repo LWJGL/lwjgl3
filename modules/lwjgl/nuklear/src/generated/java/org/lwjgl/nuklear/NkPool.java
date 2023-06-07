@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct nk_pool")
-class NkPool extends Struct {
+class NkPool extends Struct<NkPool> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -71,6 +71,15 @@ class NkPool extends Struct {
         CAPACITY = layout.offsetof(5);
         SIZE = layout.offsetof(6);
         CAP = layout.offsetof(7);
+    }
+
+    protected NkPool(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkPool create(long address, @Nullable ByteBuffer container) {
+        return new NkPool(address, container);
     }
 
     /**
@@ -115,13 +124,13 @@ class NkPool extends Struct {
 
     /** Returns a new {@code NkPool} instance for the specified memory address. */
     public static NkPool create(long address) {
-        return wrap(NkPool.class, address);
+        return new NkPool(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkPool createSafe(long address) {
-        return address == NULL ? null : wrap(NkPool.class, address);
+        return address == NULL ? null : new NkPool(address, null);
     }
 
     /**
@@ -131,13 +140,13 @@ class NkPool extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkPool.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkPool.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -169,9 +178,9 @@ class NkPool extends Struct {
         /**
          * Creates a new {@code NkPool.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkPool#SIZEOF}, and its mark will be undefined.
+         * by {@link NkPool#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

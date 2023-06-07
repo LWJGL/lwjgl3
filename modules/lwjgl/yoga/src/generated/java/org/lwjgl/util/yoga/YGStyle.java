@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link YGFloatOptional YGFloatOptional} aspectRatio;
  * }</code></pre>
  */
-public class YGStyle extends Struct {
+public class YGStyle extends Struct<YGStyle> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -106,6 +106,15 @@ public class YGStyle extends Struct {
         MINDIMENSIONS = layout.offsetof(11);
         MAXDIMENSIONS = layout.offsetof(12);
         ASPECTRATIO = layout.offsetof(13);
+    }
+
+    protected YGStyle(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected YGStyle create(long address, @Nullable ByteBuffer container) {
+        return new YGStyle(address, container);
     }
 
     /**
@@ -206,13 +215,13 @@ public class YGStyle extends Struct {
 
     /** Returns a new {@code YGStyle} instance for the specified memory address. */
     public static YGStyle create(long address) {
-        return wrap(YGStyle.class, address);
+        return new YGStyle(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGStyle createSafe(long address) {
-        return address == NULL ? null : wrap(YGStyle.class, address);
+        return address == NULL ? null : new YGStyle(address, null);
     }
 
     /**
@@ -222,13 +231,13 @@ public class YGStyle extends Struct {
      * @param capacity the buffer capacity
      */
     public static YGStyle.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGStyle.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -323,9 +332,9 @@ public class YGStyle extends Struct {
         /**
          * Creates a new {@code YGStyle.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link YGStyle#SIZEOF}, and its mark will be undefined.
+         * by {@link YGStyle#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

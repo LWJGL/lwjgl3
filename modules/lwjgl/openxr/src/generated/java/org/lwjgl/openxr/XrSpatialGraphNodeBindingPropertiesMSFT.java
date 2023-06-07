@@ -43,7 +43,7 @@ import static org.lwjgl.openxr.MSFTSpatialGraphBridge.*;
  *     {@link XrPosef XrPosef} {@link #poseInNodeSpace};
  * }</code></pre>
  */
-public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements NativeResource {
+public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct<XrSpatialGraphNodeBindingPropertiesMSFT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -73,6 +73,15 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
         NEXT = layout.offsetof(1);
         NODEID = layout.offsetof(2);
         POSEINNODESPACE = layout.offsetof(3);
+    }
+
+    protected XrSpatialGraphNodeBindingPropertiesMSFT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSpatialGraphNodeBindingPropertiesMSFT create(long address, @Nullable ByteBuffer container) {
+        return new XrSpatialGraphNodeBindingPropertiesMSFT(address, container);
     }
 
     /**
@@ -149,29 +158,29 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
 
     /** Returns a new {@code XrSpatialGraphNodeBindingPropertiesMSFT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSpatialGraphNodeBindingPropertiesMSFT malloc() {
-        return wrap(XrSpatialGraphNodeBindingPropertiesMSFT.class, nmemAllocChecked(SIZEOF));
+        return new XrSpatialGraphNodeBindingPropertiesMSFT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSpatialGraphNodeBindingPropertiesMSFT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSpatialGraphNodeBindingPropertiesMSFT calloc() {
-        return wrap(XrSpatialGraphNodeBindingPropertiesMSFT.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSpatialGraphNodeBindingPropertiesMSFT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSpatialGraphNodeBindingPropertiesMSFT} instance allocated with {@link BufferUtils}. */
     public static XrSpatialGraphNodeBindingPropertiesMSFT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSpatialGraphNodeBindingPropertiesMSFT.class, memAddress(container), container);
+        return new XrSpatialGraphNodeBindingPropertiesMSFT(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSpatialGraphNodeBindingPropertiesMSFT} instance for the specified memory address. */
     public static XrSpatialGraphNodeBindingPropertiesMSFT create(long address) {
-        return wrap(XrSpatialGraphNodeBindingPropertiesMSFT.class, address);
+        return new XrSpatialGraphNodeBindingPropertiesMSFT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSpatialGraphNodeBindingPropertiesMSFT createSafe(long address) {
-        return address == NULL ? null : wrap(XrSpatialGraphNodeBindingPropertiesMSFT.class, address);
+        return address == NULL ? null : new XrSpatialGraphNodeBindingPropertiesMSFT(address, null);
     }
 
     /**
@@ -180,7 +189,7 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static XrSpatialGraphNodeBindingPropertiesMSFT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -189,7 +198,7 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static XrSpatialGraphNodeBindingPropertiesMSFT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -199,7 +208,7 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
      */
     public static XrSpatialGraphNodeBindingPropertiesMSFT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -209,13 +218,13 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static XrSpatialGraphNodeBindingPropertiesMSFT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSpatialGraphNodeBindingPropertiesMSFT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -224,7 +233,7 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static XrSpatialGraphNodeBindingPropertiesMSFT malloc(MemoryStack stack) {
-        return wrap(XrSpatialGraphNodeBindingPropertiesMSFT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSpatialGraphNodeBindingPropertiesMSFT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -233,7 +242,7 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
      * @param stack the stack from which to allocate
      */
     public static XrSpatialGraphNodeBindingPropertiesMSFT calloc(MemoryStack stack) {
-        return wrap(XrSpatialGraphNodeBindingPropertiesMSFT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSpatialGraphNodeBindingPropertiesMSFT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -243,7 +252,7 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static XrSpatialGraphNodeBindingPropertiesMSFT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -253,7 +262,7 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
      * @param capacity the buffer capacity
      */
     public static XrSpatialGraphNodeBindingPropertiesMSFT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -297,9 +306,9 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct implements N
         /**
          * Creates a new {@code XrSpatialGraphNodeBindingPropertiesMSFT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSpatialGraphNodeBindingPropertiesMSFT#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSpatialGraphNodeBindingPropertiesMSFT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -900,7 +900,7 @@ $indentation}"""
             println("@NativeType(\"$nativeNameQualified\")")
         }
         print("${access.modifier}${if (nested) "static " else ""}class $className extends ")
-        print(alias?.className ?: "Struct${if (mallocable) " implements NativeResource" else ""}")
+        print(alias?.className ?: "Struct<$className>${if (mallocable) " implements NativeResource" else ""}")
         println(" {")
 
         if (alias == null) {
@@ -1015,6 +1015,15 @@ $indentation}"""
         printCustomMethods(customMethods, static = true)
 
         print("""
+    protected $className(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected $className create(long address, @Nullable ByteBuffer container) {
+        return new $className(address, container);
+    }
+
     /**
      * Creates a {@code $className} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -1077,18 +1086,18 @@ $indentation}"""
             print("""
     /** Returns a new {@code $className} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static $className malloc() {
-        return wrap($className.class, nmemAllocChecked(SIZEOF));
+        return new $className(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code $className} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static $className calloc() {
-        return wrap($className.class, nmemCallocChecked(1, SIZEOF));
+        return new $className(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code $className} instance allocated with {@link BufferUtils}. */
     public static $className create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap($className.class, memAddress(container), container);
+        return new $className(memAddress(container), container);
     }
 """)
         }
@@ -1096,13 +1105,13 @@ $indentation}"""
         print("""
     /** Returns a new {@code $className} instance for the specified memory address. */
     public static $className create(long address) {
-        return wrap($className.class, address);
+        return new $className(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static $className createSafe(long address) {
-        return address == NULL ? null : wrap($className.class, address);
+        return address == NULL ? null : new $className(address, null);
     }
 """)
         val subtypes = Generator.structChildren[module]?.get(this@Struct.nativeName)
@@ -1110,7 +1119,7 @@ $indentation}"""
             print("""
     /** Upcasts the specified {@code ${it.className}} instance to {@code $className}. */
     public static $className create(${it.className} value) {
-        return wrap($className.class, value);
+        return new $className(value.address(), __getContainer(value));
     }
 """)
         }
@@ -1119,7 +1128,7 @@ $indentation}"""
             print("""
     /** Downcasts the specified {@code ${parentStruct.className}} instance to {@code $className}. */
     public static $className create(${parentStruct.className} value) {
-        return wrap($className.class, value);
+        return new $className(value.address(), __getContainer(value));
     }
 """)
         }
@@ -1133,7 +1142,7 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer malloc(int $BUFFER_CAPACITY_PARAM) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc($BUFFER_CAPACITY_PARAM, SIZEOF)), $BUFFER_CAPACITY_PARAM);
+        return new Buffer(nmemAllocChecked(__checkMalloc($BUFFER_CAPACITY_PARAM, SIZEOF)), $BUFFER_CAPACITY_PARAM);
     }
 
     /**
@@ -1142,7 +1151,7 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer calloc(int $BUFFER_CAPACITY_PARAM) {
-        return wrap(Buffer.class, nmemCallocChecked($BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
+        return new Buffer(nmemCallocChecked($BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
 
     /**
@@ -1152,7 +1161,7 @@ $indentation}"""
      */
     public static $className.Buffer create(int $BUFFER_CAPACITY_PARAM) {
         ByteBuffer container = __create($BUFFER_CAPACITY_PARAM, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), $BUFFER_CAPACITY_PARAM, container);
+        return new Buffer(memAddress(container), container, -1, 0, $BUFFER_CAPACITY_PARAM, $BUFFER_CAPACITY_PARAM);
     }
 """)
             }
@@ -1165,20 +1174,20 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer create(long address, int $BUFFER_CAPACITY_PARAM) {
-        return wrap(Buffer.class, address, $BUFFER_CAPACITY_PARAM);
+        return new Buffer(address, $BUFFER_CAPACITY_PARAM);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static $className.Buffer createSafe(long address, int $BUFFER_CAPACITY_PARAM) {
-        return address == NULL ? null : wrap(Buffer.class, address, $BUFFER_CAPACITY_PARAM);
+        return address == NULL ? null : new Buffer(address, $BUFFER_CAPACITY_PARAM);
     }
 """)
             subtypes?.forEach {
                 print("""
     /** Upcasts the specified {@code ${it.className}.Buffer} instance to {@code $className.Buffer}. */
     public static $className.Buffer create(${it.className}.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new $className.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 """)
             }
@@ -1187,7 +1196,7 @@ $indentation}"""
                 print("""
     /** Downcasts the specified {@code ${parentStruct.className}.Buffer} instance to {@code $className.Buffer}. */
     public static $className.Buffer create(${parentStruct.className}.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new $className.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 """)
             }
@@ -1226,7 +1235,7 @@ $indentation}"""
      * @param stack the stack from which to allocate
      */
     public static $className malloc(MemoryStack stack) {
-        return wrap($className.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new $className(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -1235,7 +1244,7 @@ $indentation}"""
      * @param stack the stack from which to allocate
      */
     public static $className calloc(MemoryStack stack) {
-        return wrap($className.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new $className(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 """)
             if (generateBuffer) {
@@ -1247,7 +1256,7 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer malloc(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
+        return new Buffer(stack.nmalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM * SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
 
     /**
@@ -1257,7 +1266,7 @@ $indentation}"""
      * @param $BUFFER_CAPACITY_PARAM the buffer capacity
      */
     public static $className.Buffer calloc(int $BUFFER_CAPACITY_PARAM, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
+        return new Buffer(stack.ncalloc(ALIGNOF, $BUFFER_CAPACITY_PARAM, SIZEOF), $BUFFER_CAPACITY_PARAM);
     }
 """)
             }
@@ -1315,9 +1324,9 @@ ${validations.joinToString("\n")}
         /**
          * Creates a new {@code $className.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link $className#SIZEOF}, and its mark will be undefined.
+         * by {@link $className#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */""")

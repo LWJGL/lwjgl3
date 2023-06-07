@@ -26,7 +26,7 @@ import static org.lwjgl.util.lz4.LZ4HC.LZ4_STREAMHC_MINSIZE;
  * }</code></pre>
  */
 @NativeType("union LZ4_streamHC_t")
-public class LZ4StreamHC extends Struct {
+public class LZ4StreamHC extends Struct<LZ4StreamHC> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -50,6 +50,15 @@ public class LZ4StreamHC extends Struct {
 
         MINSTATESIZE = layout.offsetof(0);
         INTERNAL_DONOTUSE = layout.offsetof(1);
+    }
+
+    protected LZ4StreamHC(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected LZ4StreamHC create(long address, @Nullable ByteBuffer container) {
+        return new LZ4StreamHC(address, container);
     }
 
     /**
@@ -79,13 +88,13 @@ public class LZ4StreamHC extends Struct {
 
     /** Returns a new {@code LZ4StreamHC} instance for the specified memory address. */
     public static LZ4StreamHC create(long address) {
-        return wrap(LZ4StreamHC.class, address);
+        return new LZ4StreamHC(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4StreamHC createSafe(long address) {
-        return address == NULL ? null : wrap(LZ4StreamHC.class, address);
+        return address == NULL ? null : new LZ4StreamHC(address, null);
     }
 
     /**
@@ -95,13 +104,13 @@ public class LZ4StreamHC extends Struct {
      * @param capacity the buffer capacity
      */
     public static LZ4StreamHC.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4StreamHC.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -125,9 +134,9 @@ public class LZ4StreamHC extends Struct {
         /**
          * Creates a new {@code LZ4StreamHC.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link LZ4StreamHC#SIZEOF}, and its mark will be undefined.
+         * by {@link LZ4StreamHC#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

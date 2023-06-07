@@ -52,7 +52,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #image};
  * }</code></pre>
  */
-public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource {
+public class XrSwapchainImageOpenGLKHR extends Struct<XrSwapchainImageOpenGLKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -79,6 +79,15 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         IMAGE = layout.offsetof(2);
+    }
+
+    protected XrSwapchainImageOpenGLKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSwapchainImageOpenGLKHR create(long address, @Nullable ByteBuffer container) {
+        return new XrSwapchainImageOpenGLKHR(address, container);
     }
 
     /**
@@ -138,34 +147,34 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
 
     /** Returns a new {@code XrSwapchainImageOpenGLKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSwapchainImageOpenGLKHR malloc() {
-        return wrap(XrSwapchainImageOpenGLKHR.class, nmemAllocChecked(SIZEOF));
+        return new XrSwapchainImageOpenGLKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSwapchainImageOpenGLKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSwapchainImageOpenGLKHR calloc() {
-        return wrap(XrSwapchainImageOpenGLKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSwapchainImageOpenGLKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSwapchainImageOpenGLKHR} instance allocated with {@link BufferUtils}. */
     public static XrSwapchainImageOpenGLKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSwapchainImageOpenGLKHR.class, memAddress(container), container);
+        return new XrSwapchainImageOpenGLKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSwapchainImageOpenGLKHR} instance for the specified memory address. */
     public static XrSwapchainImageOpenGLKHR create(long address) {
-        return wrap(XrSwapchainImageOpenGLKHR.class, address);
+        return new XrSwapchainImageOpenGLKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSwapchainImageOpenGLKHR createSafe(long address) {
-        return address == NULL ? null : wrap(XrSwapchainImageOpenGLKHR.class, address);
+        return address == NULL ? null : new XrSwapchainImageOpenGLKHR(address, null);
     }
 
     /** Downcasts the specified {@code XrSwapchainImageBaseHeader} instance to {@code XrSwapchainImageOpenGLKHR}. */
     public static XrSwapchainImageOpenGLKHR create(XrSwapchainImageBaseHeader value) {
-        return wrap(XrSwapchainImageOpenGLKHR.class, value);
+        return new XrSwapchainImageOpenGLKHR(value.address(), __getContainer(value));
     }
 
     /**
@@ -174,7 +183,7 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrSwapchainImageOpenGLKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -183,7 +192,7 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrSwapchainImageOpenGLKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -193,7 +202,7 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
      */
     public static XrSwapchainImageOpenGLKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -203,18 +212,18 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrSwapchainImageOpenGLKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSwapchainImageOpenGLKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /** Downcasts the specified {@code XrSwapchainImageBaseHeader.Buffer} instance to {@code XrSwapchainImageOpenGLKHR.Buffer}. */
     public static XrSwapchainImageOpenGLKHR.Buffer create(XrSwapchainImageBaseHeader.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrSwapchainImageOpenGLKHR.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -223,7 +232,7 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static XrSwapchainImageOpenGLKHR malloc(MemoryStack stack) {
-        return wrap(XrSwapchainImageOpenGLKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSwapchainImageOpenGLKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static XrSwapchainImageOpenGLKHR calloc(MemoryStack stack) {
-        return wrap(XrSwapchainImageOpenGLKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSwapchainImageOpenGLKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -242,7 +251,7 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrSwapchainImageOpenGLKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -252,7 +261,7 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static XrSwapchainImageOpenGLKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -279,9 +288,9 @@ public class XrSwapchainImageOpenGLKHR extends Struct implements NativeResource 
         /**
          * Creates a new {@code XrSwapchainImageOpenGLKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSwapchainImageOpenGLKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSwapchainImageOpenGLKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrGlobalDimmerFrameEndInfoFlagsML {@link #flags};
  * }</code></pre>
  */
-public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResource {
+public class XrGlobalDimmerFrameEndInfoML extends Struct<XrGlobalDimmerFrameEndInfoML> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -67,6 +67,15 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
         NEXT = layout.offsetof(1);
         DIMMERVALUE = layout.offsetof(2);
         FLAGS = layout.offsetof(3);
+    }
+
+    protected XrGlobalDimmerFrameEndInfoML(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrGlobalDimmerFrameEndInfoML create(long address, @Nullable ByteBuffer container) {
+        return new XrGlobalDimmerFrameEndInfoML(address, container);
     }
 
     /**
@@ -136,29 +145,29 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
 
     /** Returns a new {@code XrGlobalDimmerFrameEndInfoML} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrGlobalDimmerFrameEndInfoML malloc() {
-        return wrap(XrGlobalDimmerFrameEndInfoML.class, nmemAllocChecked(SIZEOF));
+        return new XrGlobalDimmerFrameEndInfoML(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrGlobalDimmerFrameEndInfoML} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrGlobalDimmerFrameEndInfoML calloc() {
-        return wrap(XrGlobalDimmerFrameEndInfoML.class, nmemCallocChecked(1, SIZEOF));
+        return new XrGlobalDimmerFrameEndInfoML(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrGlobalDimmerFrameEndInfoML} instance allocated with {@link BufferUtils}. */
     public static XrGlobalDimmerFrameEndInfoML create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrGlobalDimmerFrameEndInfoML.class, memAddress(container), container);
+        return new XrGlobalDimmerFrameEndInfoML(memAddress(container), container);
     }
 
     /** Returns a new {@code XrGlobalDimmerFrameEndInfoML} instance for the specified memory address. */
     public static XrGlobalDimmerFrameEndInfoML create(long address) {
-        return wrap(XrGlobalDimmerFrameEndInfoML.class, address);
+        return new XrGlobalDimmerFrameEndInfoML(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrGlobalDimmerFrameEndInfoML createSafe(long address) {
-        return address == NULL ? null : wrap(XrGlobalDimmerFrameEndInfoML.class, address);
+        return address == NULL ? null : new XrGlobalDimmerFrameEndInfoML(address, null);
     }
 
     /**
@@ -167,7 +176,7 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static XrGlobalDimmerFrameEndInfoML.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -176,7 +185,7 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static XrGlobalDimmerFrameEndInfoML.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -186,7 +195,7 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
      */
     public static XrGlobalDimmerFrameEndInfoML.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -196,13 +205,13 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static XrGlobalDimmerFrameEndInfoML.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrGlobalDimmerFrameEndInfoML.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -211,7 +220,7 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static XrGlobalDimmerFrameEndInfoML malloc(MemoryStack stack) {
-        return wrap(XrGlobalDimmerFrameEndInfoML.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrGlobalDimmerFrameEndInfoML(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -220,7 +229,7 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static XrGlobalDimmerFrameEndInfoML calloc(MemoryStack stack) {
-        return wrap(XrGlobalDimmerFrameEndInfoML.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrGlobalDimmerFrameEndInfoML(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -230,7 +239,7 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static XrGlobalDimmerFrameEndInfoML.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -240,7 +249,7 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static XrGlobalDimmerFrameEndInfoML.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -273,9 +282,9 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct implements NativeResour
         /**
          * Creates a new {@code XrGlobalDimmerFrameEndInfoML.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrGlobalDimmerFrameEndInfoML#SIZEOF}, and its mark will be undefined.
+         * by {@link XrGlobalDimmerFrameEndInfoML#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -36,7 +36,7 @@ import static org.lwjgl.bgfx.BGFX.BGFX_TEXTURE_FORMAT_COUNT;
  * }</code></pre>
  */
 @NativeType("struct bgfx_caps_t")
-public class BGFXCaps extends Struct {
+public class BGFXCaps extends Struct<BGFXCaps> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -84,6 +84,15 @@ public class BGFXCaps extends Struct {
         GPU = layout.offsetof(7);
         LIMITS = layout.offsetof(8);
         FORMATS = layout.offsetof(9);
+    }
+
+    protected BGFXCaps(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected BGFXCaps create(long address, @Nullable ByteBuffer container) {
+        return new BGFXCaps(address, container);
     }
 
     /**
@@ -140,13 +149,13 @@ public class BGFXCaps extends Struct {
 
     /** Returns a new {@code BGFXCaps} instance for the specified memory address. */
     public static BGFXCaps create(long address) {
-        return wrap(BGFXCaps.class, address);
+        return new BGFXCaps(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXCaps createSafe(long address) {
-        return address == NULL ? null : wrap(BGFXCaps.class, address);
+        return address == NULL ? null : new BGFXCaps(address, null);
     }
 
     // -----------------------------------

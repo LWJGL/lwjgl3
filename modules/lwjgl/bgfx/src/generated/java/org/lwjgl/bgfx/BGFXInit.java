@@ -36,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct bgfx_init_t")
-public class BGFXInit extends Struct implements NativeResource {
+public class BGFXInit extends Struct<BGFXInit> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -87,6 +87,15 @@ public class BGFXInit extends Struct implements NativeResource {
         LIMITS = layout.offsetof(8);
         CALLBACK = layout.offsetof(9);
         ALLOCATOR = layout.offsetof(10);
+    }
+
+    protected BGFXInit(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected BGFXInit create(long address, @Nullable ByteBuffer container) {
+        return new BGFXInit(address, container);
     }
 
     /**
@@ -212,29 +221,29 @@ public class BGFXInit extends Struct implements NativeResource {
 
     /** Returns a new {@code BGFXInit} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXInit malloc() {
-        return wrap(BGFXInit.class, nmemAllocChecked(SIZEOF));
+        return new BGFXInit(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code BGFXInit} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXInit calloc() {
-        return wrap(BGFXInit.class, nmemCallocChecked(1, SIZEOF));
+        return new BGFXInit(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code BGFXInit} instance allocated with {@link BufferUtils}. */
     public static BGFXInit create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(BGFXInit.class, memAddress(container), container);
+        return new BGFXInit(memAddress(container), container);
     }
 
     /** Returns a new {@code BGFXInit} instance for the specified memory address. */
     public static BGFXInit create(long address) {
-        return wrap(BGFXInit.class, address);
+        return new BGFXInit(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXInit createSafe(long address) {
-        return address == NULL ? null : wrap(BGFXInit.class, address);
+        return address == NULL ? null : new BGFXInit(address, null);
     }
 
     // -----------------------------------
@@ -255,7 +264,7 @@ public class BGFXInit extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXInit malloc(MemoryStack stack) {
-        return wrap(BGFXInit.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new BGFXInit(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -264,7 +273,7 @@ public class BGFXInit extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXInit calloc(MemoryStack stack) {
-        return wrap(BGFXInit.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new BGFXInit(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

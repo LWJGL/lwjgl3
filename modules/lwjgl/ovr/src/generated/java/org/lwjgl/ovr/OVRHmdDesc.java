@@ -45,7 +45,7 @@ import static org.lwjgl.ovr.OVR.ovrEye_Count;
  * }</code></pre>
  */
 @NativeType("struct ovrHmdDesc")
-public class OVRHmdDesc extends Struct implements NativeResource {
+public class OVRHmdDesc extends Struct<OVRHmdDesc> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -113,6 +113,15 @@ public class OVRHmdDesc extends Struct implements NativeResource {
         MAXEYEFOV = layout.offsetof(14);
         RESOLUTION = layout.offsetof(15);
         DISPLAYREFRESHRATE = layout.offsetof(16);
+    }
+
+    protected OVRHmdDesc(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected OVRHmdDesc create(long address, @Nullable ByteBuffer container) {
+        return new OVRHmdDesc(address, container);
     }
 
     /**
@@ -191,29 +200,29 @@ public class OVRHmdDesc extends Struct implements NativeResource {
 
     /** Returns a new {@code OVRHmdDesc} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static OVRHmdDesc malloc() {
-        return wrap(OVRHmdDesc.class, nmemAllocChecked(SIZEOF));
+        return new OVRHmdDesc(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code OVRHmdDesc} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static OVRHmdDesc calloc() {
-        return wrap(OVRHmdDesc.class, nmemCallocChecked(1, SIZEOF));
+        return new OVRHmdDesc(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code OVRHmdDesc} instance allocated with {@link BufferUtils}. */
     public static OVRHmdDesc create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(OVRHmdDesc.class, memAddress(container), container);
+        return new OVRHmdDesc(memAddress(container), container);
     }
 
     /** Returns a new {@code OVRHmdDesc} instance for the specified memory address. */
     public static OVRHmdDesc create(long address) {
-        return wrap(OVRHmdDesc.class, address);
+        return new OVRHmdDesc(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRHmdDesc createSafe(long address) {
-        return address == NULL ? null : wrap(OVRHmdDesc.class, address);
+        return address == NULL ? null : new OVRHmdDesc(address, null);
     }
 
     // -----------------------------------
@@ -234,7 +243,7 @@ public class OVRHmdDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRHmdDesc malloc(MemoryStack stack) {
-        return wrap(OVRHmdDesc.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new OVRHmdDesc(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -243,7 +252,7 @@ public class OVRHmdDesc extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static OVRHmdDesc calloc(MemoryStack stack) {
-        return wrap(OVRHmdDesc.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new OVRHmdDesc(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

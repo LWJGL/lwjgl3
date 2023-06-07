@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct ktxStream")
-public class ktxStream extends Struct implements NativeResource {
+public class ktxStream extends Struct<ktxStream> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -116,6 +116,15 @@ public class ktxStream extends Struct implements NativeResource {
                 DATA_CUSTOM_PTR_SIZE = layout.offsetof(14);
         READPOS = layout.offsetof(15);
         CLOSEONDESTRUCT = layout.offsetof(16);
+    }
+
+    protected ktxStream(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected ktxStream create(long address, @Nullable ByteBuffer container) {
+        return new ktxStream(address, container);
     }
 
     /**
@@ -221,29 +230,29 @@ public class ktxStream extends Struct implements NativeResource {
 
     /** Returns a new {@code ktxStream} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static ktxStream malloc() {
-        return wrap(ktxStream.class, nmemAllocChecked(SIZEOF));
+        return new ktxStream(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code ktxStream} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static ktxStream calloc() {
-        return wrap(ktxStream.class, nmemCallocChecked(1, SIZEOF));
+        return new ktxStream(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code ktxStream} instance allocated with {@link BufferUtils}. */
     public static ktxStream create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(ktxStream.class, memAddress(container), container);
+        return new ktxStream(memAddress(container), container);
     }
 
     /** Returns a new {@code ktxStream} instance for the specified memory address. */
     public static ktxStream create(long address) {
-        return wrap(ktxStream.class, address);
+        return new ktxStream(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ktxStream createSafe(long address) {
-        return address == NULL ? null : wrap(ktxStream.class, address);
+        return address == NULL ? null : new ktxStream(address, null);
     }
 
     /**
@@ -252,7 +261,7 @@ public class ktxStream extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ktxStream.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -261,7 +270,7 @@ public class ktxStream extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ktxStream.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -271,7 +280,7 @@ public class ktxStream extends Struct implements NativeResource {
      */
     public static ktxStream.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -281,13 +290,13 @@ public class ktxStream extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ktxStream.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ktxStream.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -296,7 +305,7 @@ public class ktxStream extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ktxStream malloc(MemoryStack stack) {
-        return wrap(ktxStream.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new ktxStream(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -305,7 +314,7 @@ public class ktxStream extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ktxStream calloc(MemoryStack stack) {
-        return wrap(ktxStream.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new ktxStream(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -315,7 +324,7 @@ public class ktxStream extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ktxStream.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -325,7 +334,7 @@ public class ktxStream extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ktxStream.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -417,9 +426,9 @@ public class ktxStream extends Struct implements NativeResource {
         /**
          * Creates a new {@code ktxStream.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link ktxStream#SIZEOF}, and its mark will be undefined.
+         * by {@link ktxStream#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

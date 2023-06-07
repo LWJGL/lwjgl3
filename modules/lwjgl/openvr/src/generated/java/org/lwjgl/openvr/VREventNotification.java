@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct VREvent_Notification_t")
-public class VREventNotification extends Struct {
+public class VREventNotification extends Struct<VREventNotification> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -49,6 +49,15 @@ public class VREventNotification extends Struct {
 
         ULUSERVALUE = layout.offsetof(0);
         NOTIFICATIONID = layout.offsetof(1);
+    }
+
+    protected VREventNotification(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VREventNotification create(long address, @Nullable ByteBuffer container) {
+        return new VREventNotification(address, container);
     }
 
     /**
@@ -75,13 +84,13 @@ public class VREventNotification extends Struct {
 
     /** Returns a new {@code VREventNotification} instance for the specified memory address. */
     public static VREventNotification create(long address) {
-        return wrap(VREventNotification.class, address);
+        return new VREventNotification(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventNotification createSafe(long address) {
-        return address == NULL ? null : wrap(VREventNotification.class, address);
+        return address == NULL ? null : new VREventNotification(address, null);
     }
 
     /**
@@ -91,13 +100,13 @@ public class VREventNotification extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventNotification.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventNotification.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -117,9 +126,9 @@ public class VREventNotification extends Struct {
         /**
          * Creates a new {@code VREventNotification.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VREventNotification#SIZEOF}, and its mark will be undefined.
+         * by {@link VREventNotification#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

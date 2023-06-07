@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct VREvent_InputActionManifestLoad_t")
-public class VREventInputActionManifestLoad extends Struct {
+public class VREventInputActionManifestLoad extends Struct<VREventInputActionManifestLoad> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -55,6 +55,15 @@ public class VREventInputActionManifestLoad extends Struct {
         PATHMESSAGE = layout.offsetof(1);
         PATHMESSAGEPARAM = layout.offsetof(2);
         PATHMANIFESTPATH = layout.offsetof(3);
+    }
+
+    protected VREventInputActionManifestLoad(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VREventInputActionManifestLoad create(long address, @Nullable ByteBuffer container) {
+        return new VREventInputActionManifestLoad(address, container);
     }
 
     /**
@@ -87,13 +96,13 @@ public class VREventInputActionManifestLoad extends Struct {
 
     /** Returns a new {@code VREventInputActionManifestLoad} instance for the specified memory address. */
     public static VREventInputActionManifestLoad create(long address) {
-        return wrap(VREventInputActionManifestLoad.class, address);
+        return new VREventInputActionManifestLoad(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventInputActionManifestLoad createSafe(long address) {
-        return address == NULL ? null : wrap(VREventInputActionManifestLoad.class, address);
+        return address == NULL ? null : new VREventInputActionManifestLoad(address, null);
     }
 
     /**
@@ -103,13 +112,13 @@ public class VREventInputActionManifestLoad extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventInputActionManifestLoad.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventInputActionManifestLoad.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -133,9 +142,9 @@ public class VREventInputActionManifestLoad extends Struct {
         /**
          * Creates a new {@code VREventInputActionManifestLoad.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VREventInputActionManifestLoad#SIZEOF}, and its mark will be undefined.
+         * by {@link VREventInputActionManifestLoad#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

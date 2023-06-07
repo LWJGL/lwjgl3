@@ -47,7 +47,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkFormatFeatureFlags {@link #drmFormatModifierTilingFeatures};
  * }</code></pre>
  */
-public class VkDrmFormatModifierPropertiesEXT extends Struct {
+public class VkDrmFormatModifierPropertiesEXT extends Struct<VkDrmFormatModifierPropertiesEXT> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -74,6 +74,15 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct {
         DRMFORMATMODIFIER = layout.offsetof(0);
         DRMFORMATMODIFIERPLANECOUNT = layout.offsetof(1);
         DRMFORMATMODIFIERTILINGFEATURES = layout.offsetof(2);
+    }
+
+    protected VkDrmFormatModifierPropertiesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkDrmFormatModifierPropertiesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkDrmFormatModifierPropertiesEXT(address, container);
     }
 
     /**
@@ -103,13 +112,13 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct {
 
     /** Returns a new {@code VkDrmFormatModifierPropertiesEXT} instance for the specified memory address. */
     public static VkDrmFormatModifierPropertiesEXT create(long address) {
-        return wrap(VkDrmFormatModifierPropertiesEXT.class, address);
+        return new VkDrmFormatModifierPropertiesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDrmFormatModifierPropertiesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkDrmFormatModifierPropertiesEXT.class, address);
+        return address == NULL ? null : new VkDrmFormatModifierPropertiesEXT(address, null);
     }
 
     /**
@@ -119,13 +128,13 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkDrmFormatModifierPropertiesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDrmFormatModifierPropertiesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -147,9 +156,9 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct {
         /**
          * Creates a new {@code VkDrmFormatModifierPropertiesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkDrmFormatModifierPropertiesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkDrmFormatModifierPropertiesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

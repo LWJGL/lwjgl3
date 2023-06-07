@@ -28,7 +28,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint8_t max_num_reorder_pics[STD_VIDEO_H265_SUBLAYERS_LIST_SIZE];
  * }</code></pre>
  */
-public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
+public class StdVideoH265DecPicBufMgr extends Struct<StdVideoH265DecPicBufMgr> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -55,6 +55,15 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
         MAX_LATENCY_INCREASE_PLUS1 = layout.offsetof(0);
         MAX_DEC_PIC_BUFFERING_MINUS1 = layout.offsetof(1);
         MAX_NUM_REORDER_PICS = layout.offsetof(2);
+    }
+
+    protected StdVideoH265DecPicBufMgr(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected StdVideoH265DecPicBufMgr create(long address, @Nullable ByteBuffer container) {
+        return new StdVideoH265DecPicBufMgr(address, container);
     }
 
     /**
@@ -131,29 +140,29 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
 
     /** Returns a new {@code StdVideoH265DecPicBufMgr} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static StdVideoH265DecPicBufMgr malloc() {
-        return wrap(StdVideoH265DecPicBufMgr.class, nmemAllocChecked(SIZEOF));
+        return new StdVideoH265DecPicBufMgr(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH265DecPicBufMgr} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static StdVideoH265DecPicBufMgr calloc() {
-        return wrap(StdVideoH265DecPicBufMgr.class, nmemCallocChecked(1, SIZEOF));
+        return new StdVideoH265DecPicBufMgr(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH265DecPicBufMgr} instance allocated with {@link BufferUtils}. */
     public static StdVideoH265DecPicBufMgr create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(StdVideoH265DecPicBufMgr.class, memAddress(container), container);
+        return new StdVideoH265DecPicBufMgr(memAddress(container), container);
     }
 
     /** Returns a new {@code StdVideoH265DecPicBufMgr} instance for the specified memory address. */
     public static StdVideoH265DecPicBufMgr create(long address) {
-        return wrap(StdVideoH265DecPicBufMgr.class, address);
+        return new StdVideoH265DecPicBufMgr(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH265DecPicBufMgr createSafe(long address) {
-        return address == NULL ? null : wrap(StdVideoH265DecPicBufMgr.class, address);
+        return address == NULL ? null : new StdVideoH265DecPicBufMgr(address, null);
     }
 
     /**
@@ -162,7 +171,7 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static StdVideoH265DecPicBufMgr.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -171,7 +180,7 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static StdVideoH265DecPicBufMgr.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -181,7 +190,7 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
      */
     public static StdVideoH265DecPicBufMgr.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -191,13 +200,13 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static StdVideoH265DecPicBufMgr.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH265DecPicBufMgr.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -206,7 +215,7 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static StdVideoH265DecPicBufMgr malloc(MemoryStack stack) {
-        return wrap(StdVideoH265DecPicBufMgr.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new StdVideoH265DecPicBufMgr(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -215,7 +224,7 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static StdVideoH265DecPicBufMgr calloc(MemoryStack stack) {
-        return wrap(StdVideoH265DecPicBufMgr.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new StdVideoH265DecPicBufMgr(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -225,7 +234,7 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static StdVideoH265DecPicBufMgr.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -235,7 +244,7 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static StdVideoH265DecPicBufMgr.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -297,9 +306,9 @@ public class StdVideoH265DecPicBufMgr extends Struct implements NativeResource {
         /**
          * Creates a new {@code StdVideoH265DecPicBufMgr.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link StdVideoH265DecPicBufMgr#SIZEOF}, and its mark will be undefined.
+         * by {@link StdVideoH265DecPicBufMgr#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

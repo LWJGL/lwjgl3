@@ -59,7 +59,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #filterMinmaxImageComponentMapping};
  * }</code></pre>
  */
-public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implements NativeResource {
+public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct<VkPhysicalDeviceSamplerFilterMinmaxProperties> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -89,6 +89,15 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
         PNEXT = layout.offsetof(1);
         FILTERMINMAXSINGLECOMPONENTFORMATS = layout.offsetof(2);
         FILTERMINMAXIMAGECOMPONENTMAPPING = layout.offsetof(3);
+    }
+
+    protected VkPhysicalDeviceSamplerFilterMinmaxProperties(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceSamplerFilterMinmaxProperties create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceSamplerFilterMinmaxProperties(address, container);
     }
 
     /**
@@ -151,29 +160,29 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
 
     /** Returns a new {@code VkPhysicalDeviceSamplerFilterMinmaxProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties malloc() {
-        return wrap(VkPhysicalDeviceSamplerFilterMinmaxProperties.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceSamplerFilterMinmaxProperties(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceSamplerFilterMinmaxProperties} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties calloc() {
-        return wrap(VkPhysicalDeviceSamplerFilterMinmaxProperties.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceSamplerFilterMinmaxProperties(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceSamplerFilterMinmaxProperties} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceSamplerFilterMinmaxProperties.class, memAddress(container), container);
+        return new VkPhysicalDeviceSamplerFilterMinmaxProperties(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceSamplerFilterMinmaxProperties} instance for the specified memory address. */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties create(long address) {
-        return wrap(VkPhysicalDeviceSamplerFilterMinmaxProperties.class, address);
+        return new VkPhysicalDeviceSamplerFilterMinmaxProperties(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceSamplerFilterMinmaxProperties.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceSamplerFilterMinmaxProperties(address, null);
     }
 
     /**
@@ -182,7 +191,7 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -191,7 +200,7 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -201,7 +210,7 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
      */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -211,13 +220,13 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -226,7 +235,7 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceSamplerFilterMinmaxProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceSamplerFilterMinmaxProperties(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -235,7 +244,7 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceSamplerFilterMinmaxProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceSamplerFilterMinmaxProperties(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -245,7 +254,7 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -255,7 +264,7 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -284,9 +293,9 @@ public class VkPhysicalDeviceSamplerFilterMinmaxProperties extends Struct implem
         /**
          * Creates a new {@code VkPhysicalDeviceSamplerFilterMinmaxProperties.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceSamplerFilterMinmaxProperties#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

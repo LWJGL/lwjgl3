@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct bgfx_init_limits_t")
-public class BGFXInitLimits extends Struct implements NativeResource {
+public class BGFXInitLimits extends Struct<BGFXInitLimits> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -59,6 +59,15 @@ public class BGFXInitLimits extends Struct implements NativeResource {
         MINRESOURCECBSIZE = layout.offsetof(1);
         TRANSIENTVBSIZE = layout.offsetof(2);
         TRANSIENTIBSIZE = layout.offsetof(3);
+    }
+
+    protected BGFXInitLimits(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected BGFXInitLimits create(long address, @Nullable ByteBuffer container) {
+        return new BGFXInitLimits(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class BGFXInitLimits extends Struct implements NativeResource {
 
     /** Returns a new {@code BGFXInitLimits} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXInitLimits malloc() {
-        return wrap(BGFXInitLimits.class, nmemAllocChecked(SIZEOF));
+        return new BGFXInitLimits(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code BGFXInitLimits} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXInitLimits calloc() {
-        return wrap(BGFXInitLimits.class, nmemCallocChecked(1, SIZEOF));
+        return new BGFXInitLimits(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code BGFXInitLimits} instance allocated with {@link BufferUtils}. */
     public static BGFXInitLimits create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(BGFXInitLimits.class, memAddress(container), container);
+        return new BGFXInitLimits(memAddress(container), container);
     }
 
     /** Returns a new {@code BGFXInitLimits} instance for the specified memory address. */
     public static BGFXInitLimits create(long address) {
-        return wrap(BGFXInitLimits.class, address);
+        return new BGFXInitLimits(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXInitLimits createSafe(long address) {
-        return address == NULL ? null : wrap(BGFXInitLimits.class, address);
+        return address == NULL ? null : new BGFXInitLimits(address, null);
     }
 
     // -----------------------------------
@@ -170,7 +179,7 @@ public class BGFXInitLimits extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXInitLimits malloc(MemoryStack stack) {
-        return wrap(BGFXInitLimits.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new BGFXInitLimits(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -179,7 +188,7 @@ public class BGFXInitLimits extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXInitLimits calloc(MemoryStack stack) {
-        return wrap(BGFXInitLimits.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new BGFXInitLimits(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

@@ -38,7 +38,7 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      */
     public static CLongBuffer allocateDirect(int capacity) {
         ByteBuffer source = BufferUtils.createByteBuffer(BufferUtils.getAllocationSize(capacity, CLONG_SHIFT));
-        return wrap(CLongBuffer.class, memAddress(source), capacity, source);
+        return new CLongBuffer(memAddress(source), source, -1, 0, capacity, capacity);
     }
 
     /**
@@ -48,7 +48,7 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      * @param capacity the buffer capacity, in number of longs
      */
     public static CLongBuffer create(long address, int capacity) {
-        return wrap(CLongBuffer.class, address, capacity);
+        return new CLongBuffer(address, null, -1, 0, capacity, capacity);
     }
 
     /**
@@ -58,7 +58,7 @@ public class CLongBuffer extends CustomBuffer<CLongBuffer> implements Comparable
      */
     public static CLongBuffer create(ByteBuffer source) {
         int capacity = source.remaining() >> CLONG_SHIFT;
-        return wrap(CLongBuffer.class, memAddress(source), capacity, source);
+        return new CLongBuffer(memAddress(source), source, -1, 0, capacity, capacity);
     }
 
     @Override

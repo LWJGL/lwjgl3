@@ -7,9 +7,9 @@ package org.lwjgl.jmh;
 import org.lwjgl.stb.*;
 import org.lwjgl.system.*;
 import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.infra.*;
 
 import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 @State(Scope.Thread)
 public class InlineTest {
@@ -40,7 +40,7 @@ public class InlineTest {
     })
     @Benchmark
     @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-    public void escapeAnalysis() {
+    public void escapeAnalysis(Blackhole bh) {
         // This benchmark examines the efficacy of Escape Analysis on simple loops over struct buffers.
         // All code paths that touch an object must be inlined for the object to be marked as not
         // escaping, which means that EA is highly sensitive to inlining decisions. LWJGL has been tuned
@@ -50,21 +50,21 @@ public class InlineTest {
         try (MemoryStack frame = stack.push()) {
             STBTTAlignedQuad.Buffer q = STBTTAlignedQuad.malloc(10, frame);
             for (STBTTAlignedQuad el : q) {
-                consume(el);
+                bh.consume(el.address());
             }
         }
 
         /*try (MemoryStack frame = stack.push()) {
             STBTTAlignedQuad.Buffer q = STBTTAlignedQuad.malloc(10, frame);
             for (int i = 0; i < q.remaining(); i++) {
-                consume(q.get(i));
+                bh.consume(q.get(i).address());
             }
         }*/
 
         /*try (MemoryStack frame = stack.push()) {
             STBTTAlignedQuad
                 .malloc(10, frame)
-                .forEach(InlineTest::consume);
+                .forEach(it -> bh.consume(it.address()));
         }*/
 
         // This is tough for Hotspot, but Graal eliminates all allocations.
@@ -72,17 +72,14 @@ public class InlineTest {
             STBTTAlignedQuad
                 .malloc(10, frame)
                 .stream()
-                .forEach(InlineTest::consume);
+                .forEach(it -> bh.consume(it.address()));
         }*/
-    }
-
-    private static void consume(STBTTAlignedQuad el) {
-        memPutFloat(el.address() + STBTTAlignedQuad.T0, 1.0f);
     }
 
     //@Benchmark
     @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-    @Fork(jvmArgsAppend = {"-XX:MaxInlineLevel=9"}) // GC with 9, no GC with 10. 9 is the default in Hotspot
+    @Fork(jvmArgsAppend = {"-XX:MaxInlineLevel=9"})
+    // GC with 9, no GC with 10. 9 is the default in Hotspot
     public int level0() {
         return level1().x;
     }

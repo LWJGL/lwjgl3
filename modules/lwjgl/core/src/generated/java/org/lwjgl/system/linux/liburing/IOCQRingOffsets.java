@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct io_cqring_offsets")
-public class IOCQRingOffsets extends Struct implements NativeResource {
+public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -77,6 +77,15 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
         FLAGS = layout.offsetof(6);
         RESV1 = layout.offsetof(7);
         RESV2 = layout.offsetof(8);
+    }
+
+    protected IOCQRingOffsets(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected IOCQRingOffsets create(long address, @Nullable ByteBuffer container) {
+        return new IOCQRingOffsets(address, container);
     }
 
     /**
@@ -166,29 +175,29 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
 
     /** Returns a new {@code IOCQRingOffsets} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static IOCQRingOffsets malloc() {
-        return wrap(IOCQRingOffsets.class, nmemAllocChecked(SIZEOF));
+        return new IOCQRingOffsets(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code IOCQRingOffsets} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static IOCQRingOffsets calloc() {
-        return wrap(IOCQRingOffsets.class, nmemCallocChecked(1, SIZEOF));
+        return new IOCQRingOffsets(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code IOCQRingOffsets} instance allocated with {@link BufferUtils}. */
     public static IOCQRingOffsets create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(IOCQRingOffsets.class, memAddress(container), container);
+        return new IOCQRingOffsets(memAddress(container), container);
     }
 
     /** Returns a new {@code IOCQRingOffsets} instance for the specified memory address. */
     public static IOCQRingOffsets create(long address) {
-        return wrap(IOCQRingOffsets.class, address);
+        return new IOCQRingOffsets(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static IOCQRingOffsets createSafe(long address) {
-        return address == NULL ? null : wrap(IOCQRingOffsets.class, address);
+        return address == NULL ? null : new IOCQRingOffsets(address, null);
     }
 
     /**
@@ -197,7 +206,7 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static IOCQRingOffsets.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -206,7 +215,7 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static IOCQRingOffsets.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -216,7 +225,7 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
      */
     public static IOCQRingOffsets.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -226,13 +235,13 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static IOCQRingOffsets.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static IOCQRingOffsets.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -241,7 +250,7 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static IOCQRingOffsets malloc(MemoryStack stack) {
-        return wrap(IOCQRingOffsets.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new IOCQRingOffsets(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -250,7 +259,7 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static IOCQRingOffsets calloc(MemoryStack stack) {
-        return wrap(IOCQRingOffsets.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new IOCQRingOffsets(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -260,7 +269,7 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static IOCQRingOffsets.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -270,7 +279,7 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static IOCQRingOffsets.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -319,9 +328,9 @@ public class IOCQRingOffsets extends Struct implements NativeResource {
         /**
          * Creates a new {@code IOCQRingOffsets.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link IOCQRingOffsets#SIZEOF}, and its mark will be undefined.
+         * by {@link IOCQRingOffsets#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

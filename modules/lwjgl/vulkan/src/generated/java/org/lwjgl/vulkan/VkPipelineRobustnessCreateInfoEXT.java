@@ -69,7 +69,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineRobustnessImageBehaviorEXT {@link #images};
  * }</code></pre>
  */
-public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeResource {
+public class VkPipelineRobustnessCreateInfoEXT extends Struct<VkPipelineRobustnessCreateInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -105,6 +105,15 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
         UNIFORMBUFFERS = layout.offsetof(3);
         VERTEXINPUTS = layout.offsetof(4);
         IMAGES = layout.offsetof(5);
+    }
+
+    protected VkPipelineRobustnessCreateInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPipelineRobustnessCreateInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPipelineRobustnessCreateInfoEXT(address, container);
     }
 
     /**
@@ -213,29 +222,29 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
 
     /** Returns a new {@code VkPipelineRobustnessCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineRobustnessCreateInfoEXT malloc() {
-        return wrap(VkPipelineRobustnessCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPipelineRobustnessCreateInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineRobustnessCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineRobustnessCreateInfoEXT calloc() {
-        return wrap(VkPipelineRobustnessCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPipelineRobustnessCreateInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineRobustnessCreateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkPipelineRobustnessCreateInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPipelineRobustnessCreateInfoEXT.class, memAddress(container), container);
+        return new VkPipelineRobustnessCreateInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPipelineRobustnessCreateInfoEXT} instance for the specified memory address. */
     public static VkPipelineRobustnessCreateInfoEXT create(long address) {
-        return wrap(VkPipelineRobustnessCreateInfoEXT.class, address);
+        return new VkPipelineRobustnessCreateInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineRobustnessCreateInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPipelineRobustnessCreateInfoEXT.class, address);
+        return address == NULL ? null : new VkPipelineRobustnessCreateInfoEXT(address, null);
     }
 
     /**
@@ -244,7 +253,7 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkPipelineRobustnessCreateInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -253,7 +262,7 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkPipelineRobustnessCreateInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -263,7 +272,7 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
      */
     public static VkPipelineRobustnessCreateInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -273,13 +282,13 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkPipelineRobustnessCreateInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineRobustnessCreateInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -288,7 +297,7 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkPipelineRobustnessCreateInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkPipelineRobustnessCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPipelineRobustnessCreateInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -297,7 +306,7 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
      * @param stack the stack from which to allocate
      */
     public static VkPipelineRobustnessCreateInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkPipelineRobustnessCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPipelineRobustnessCreateInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -307,7 +316,7 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkPipelineRobustnessCreateInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -317,7 +326,7 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
      * @param capacity the buffer capacity
      */
     public static VkPipelineRobustnessCreateInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -358,9 +367,9 @@ public class VkPipelineRobustnessCreateInfoEXT extends Struct implements NativeR
         /**
          * Creates a new {@code VkPipelineRobustnessCreateInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPipelineRobustnessCreateInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPipelineRobustnessCreateInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkQueryPoolSamplingModeINTEL {@link #performanceCountersSampling};
  * }</code></pre>
  */
-public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implements NativeResource {
+public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct<VkQueryPoolPerformanceQueryCreateInfoINTEL> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -61,6 +61,15 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         PERFORMANCECOUNTERSSAMPLING = layout.offsetof(2);
+    }
+
+    protected VkQueryPoolPerformanceQueryCreateInfoINTEL(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkQueryPoolPerformanceQueryCreateInfoINTEL create(long address, @Nullable ByteBuffer container) {
+        return new VkQueryPoolPerformanceQueryCreateInfoINTEL(address, container);
     }
 
     /**
@@ -124,29 +133,29 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
 
     /** Returns a new {@code VkQueryPoolPerformanceQueryCreateInfoINTEL} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL malloc() {
-        return wrap(VkQueryPoolPerformanceQueryCreateInfoINTEL.class, nmemAllocChecked(SIZEOF));
+        return new VkQueryPoolPerformanceQueryCreateInfoINTEL(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkQueryPoolPerformanceQueryCreateInfoINTEL} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL calloc() {
-        return wrap(VkQueryPoolPerformanceQueryCreateInfoINTEL.class, nmemCallocChecked(1, SIZEOF));
+        return new VkQueryPoolPerformanceQueryCreateInfoINTEL(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkQueryPoolPerformanceQueryCreateInfoINTEL} instance allocated with {@link BufferUtils}. */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkQueryPoolPerformanceQueryCreateInfoINTEL.class, memAddress(container), container);
+        return new VkQueryPoolPerformanceQueryCreateInfoINTEL(memAddress(container), container);
     }
 
     /** Returns a new {@code VkQueryPoolPerformanceQueryCreateInfoINTEL} instance for the specified memory address. */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL create(long address) {
-        return wrap(VkQueryPoolPerformanceQueryCreateInfoINTEL.class, address);
+        return new VkQueryPoolPerformanceQueryCreateInfoINTEL(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL createSafe(long address) {
-        return address == NULL ? null : wrap(VkQueryPoolPerformanceQueryCreateInfoINTEL.class, address);
+        return address == NULL ? null : new VkQueryPoolPerformanceQueryCreateInfoINTEL(address, null);
     }
 
     /**
@@ -155,7 +164,7 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -164,7 +173,7 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -174,7 +183,7 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
      */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -184,13 +193,13 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -199,7 +208,7 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL malloc(MemoryStack stack) {
-        return wrap(VkQueryPoolPerformanceQueryCreateInfoINTEL.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkQueryPoolPerformanceQueryCreateInfoINTEL(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -208,7 +217,7 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL calloc(MemoryStack stack) {
-        return wrap(VkQueryPoolPerformanceQueryCreateInfoINTEL.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkQueryPoolPerformanceQueryCreateInfoINTEL(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -218,7 +227,7 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -228,7 +237,7 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -257,9 +266,9 @@ public class VkQueryPoolPerformanceQueryCreateInfoINTEL extends Struct implement
         /**
          * Creates a new {@code VkQueryPoolPerformanceQueryCreateInfoINTEL.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#SIZEOF}, and its mark will be undefined.
+         * by {@link VkQueryPoolPerformanceQueryCreateInfoINTEL#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

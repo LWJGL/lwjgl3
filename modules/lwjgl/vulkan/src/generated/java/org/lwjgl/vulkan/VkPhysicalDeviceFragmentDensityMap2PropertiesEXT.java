@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #maxDescriptorSetSubsampledSamplers};
  * }</code></pre>
  */
-public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct<VkPhysicalDeviceFragmentDensityMap2PropertiesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -76,6 +76,15 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
         SUBSAMPLEDCOARSERECONSTRUCTIONEARLYACCESS = layout.offsetof(3);
         MAXSUBSAMPLEDARRAYLAYERS = layout.offsetof(4);
         MAXDESCRIPTORSETSUBSAMPLEDSAMPLERS = layout.offsetof(5);
+    }
+
+    protected VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceFragmentDensityMap2PropertiesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(address, container);
     }
 
     /**
@@ -144,29 +153,29 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
 
     /** Returns a new {@code VkPhysicalDeviceFragmentDensityMap2PropertiesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT malloc() {
-        return wrap(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceFragmentDensityMap2PropertiesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT calloc() {
-        return wrap(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceFragmentDensityMap2PropertiesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceFragmentDensityMap2PropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT create(long address) {
-        return wrap(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.class, address);
+        return new VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(address, null);
     }
 
     /**
@@ -175,7 +184,7 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -184,7 +193,7 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -194,7 +203,7 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
      */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -204,13 +213,13 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -219,7 +228,7 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -228,7 +237,7 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -238,7 +247,7 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -248,7 +257,7 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -281,9 +290,9 @@ public class VkPhysicalDeviceFragmentDensityMap2PropertiesEXT extends Struct imp
         /**
          * Creates a new {@code VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

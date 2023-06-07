@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct nk_context")
-public class NkContext extends Struct implements NativeResource {
+public class NkContext extends Struct<NkContext> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -131,6 +131,15 @@ public class NkContext extends Struct implements NativeResource {
         SEQ = layout.offsetof(21);
     }
 
+    protected NkContext(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkContext create(long address, @Nullable ByteBuffer container) {
+        return new NkContext(address, container);
+    }
+
     /**
      * Creates a {@code NkContext} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -172,29 +181,29 @@ public class NkContext extends Struct implements NativeResource {
 
     /** Returns a new {@code NkContext} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkContext malloc() {
-        return wrap(NkContext.class, nmemAllocChecked(SIZEOF));
+        return new NkContext(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code NkContext} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkContext calloc() {
-        return wrap(NkContext.class, nmemCallocChecked(1, SIZEOF));
+        return new NkContext(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code NkContext} instance allocated with {@link BufferUtils}. */
     public static NkContext create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(NkContext.class, memAddress(container), container);
+        return new NkContext(memAddress(container), container);
     }
 
     /** Returns a new {@code NkContext} instance for the specified memory address. */
     public static NkContext create(long address) {
-        return wrap(NkContext.class, address);
+        return new NkContext(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkContext createSafe(long address) {
-        return address == NULL ? null : wrap(NkContext.class, address);
+        return address == NULL ? null : new NkContext(address, null);
     }
 
     // -----------------------------------
@@ -215,7 +224,7 @@ public class NkContext extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkContext malloc(MemoryStack stack) {
-        return wrap(NkContext.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new NkContext(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -224,7 +233,7 @@ public class NkContext extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkContext calloc(MemoryStack stack) {
-        return wrap(NkContext.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new NkContext(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

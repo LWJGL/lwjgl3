@@ -61,7 +61,7 @@ import org.lwjgl.vulkan.video.*;
  *     {@link StdVideoH264PictureParameterSet StdVideoH264PictureParameterSet} const * {@link #pStdPPSs};
  * }</code></pre>
  */
-public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct implements NativeResource {
+public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct<VkVideoDecodeH264SessionParametersAddInfoKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -97,6 +97,15 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
         PSTDSPSS = layout.offsetof(3);
         STDPPSCOUNT = layout.offsetof(4);
         PSTDPPSS = layout.offsetof(5);
+    }
+
+    protected VkVideoDecodeH264SessionParametersAddInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkVideoDecodeH264SessionParametersAddInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkVideoDecodeH264SessionParametersAddInfoKHR(address, container);
     }
 
     /**
@@ -175,29 +184,29 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
 
     /** Returns a new {@code VkVideoDecodeH264SessionParametersAddInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR malloc() {
-        return wrap(VkVideoDecodeH264SessionParametersAddInfoKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkVideoDecodeH264SessionParametersAddInfoKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoDecodeH264SessionParametersAddInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR calloc() {
-        return wrap(VkVideoDecodeH264SessionParametersAddInfoKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkVideoDecodeH264SessionParametersAddInfoKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoDecodeH264SessionParametersAddInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkVideoDecodeH264SessionParametersAddInfoKHR.class, memAddress(container), container);
+        return new VkVideoDecodeH264SessionParametersAddInfoKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkVideoDecodeH264SessionParametersAddInfoKHR} instance for the specified memory address. */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR create(long address) {
-        return wrap(VkVideoDecodeH264SessionParametersAddInfoKHR.class, address);
+        return new VkVideoDecodeH264SessionParametersAddInfoKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoDecodeH264SessionParametersAddInfoKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkVideoDecodeH264SessionParametersAddInfoKHR.class, address);
+        return address == NULL ? null : new VkVideoDecodeH264SessionParametersAddInfoKHR(address, null);
     }
 
     /**
@@ -206,7 +215,7 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -215,7 +224,7 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -225,7 +234,7 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
      */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -235,13 +244,13 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoDecodeH264SessionParametersAddInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -250,7 +259,7 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
      * @param stack the stack from which to allocate
      */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR malloc(MemoryStack stack) {
-        return wrap(VkVideoDecodeH264SessionParametersAddInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkVideoDecodeH264SessionParametersAddInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -259,7 +268,7 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
      * @param stack the stack from which to allocate
      */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR calloc(MemoryStack stack) {
-        return wrap(VkVideoDecodeH264SessionParametersAddInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkVideoDecodeH264SessionParametersAddInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -269,7 +278,7 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -279,7 +288,7 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH264SessionParametersAddInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -340,9 +349,9 @@ public class VkVideoDecodeH264SessionParametersAddInfoKHR extends Struct impleme
         /**
          * Creates a new {@code VkVideoDecodeH264SessionParametersAddInfoKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkVideoDecodeH264SessionParametersAddInfoKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkVideoDecodeH264SessionParametersAddInfoKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

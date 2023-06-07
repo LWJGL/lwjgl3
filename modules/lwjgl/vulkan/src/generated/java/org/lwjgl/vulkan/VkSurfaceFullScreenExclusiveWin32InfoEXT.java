@@ -54,7 +54,7 @@ import org.lwjgl.system.windows.*;
  *     HMONITOR {@link #hmonitor};
  * }</code></pre>
  */
-public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements NativeResource {
+public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct<VkSurfaceFullScreenExclusiveWin32InfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -81,6 +81,15 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         HMONITOR = layout.offsetof(2);
+    }
+
+    protected VkSurfaceFullScreenExclusiveWin32InfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkSurfaceFullScreenExclusiveWin32InfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkSurfaceFullScreenExclusiveWin32InfoEXT(address, container);
     }
 
     /**
@@ -144,29 +153,29 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
 
     /** Returns a new {@code VkSurfaceFullScreenExclusiveWin32InfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT malloc() {
-        return wrap(VkSurfaceFullScreenExclusiveWin32InfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkSurfaceFullScreenExclusiveWin32InfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkSurfaceFullScreenExclusiveWin32InfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT calloc() {
-        return wrap(VkSurfaceFullScreenExclusiveWin32InfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkSurfaceFullScreenExclusiveWin32InfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkSurfaceFullScreenExclusiveWin32InfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkSurfaceFullScreenExclusiveWin32InfoEXT.class, memAddress(container), container);
+        return new VkSurfaceFullScreenExclusiveWin32InfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkSurfaceFullScreenExclusiveWin32InfoEXT} instance for the specified memory address. */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT create(long address) {
-        return wrap(VkSurfaceFullScreenExclusiveWin32InfoEXT.class, address);
+        return new VkSurfaceFullScreenExclusiveWin32InfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkSurfaceFullScreenExclusiveWin32InfoEXT.class, address);
+        return address == NULL ? null : new VkSurfaceFullScreenExclusiveWin32InfoEXT(address, null);
     }
 
     /**
@@ -175,7 +184,7 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -184,7 +193,7 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -194,7 +203,7 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
      */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -204,13 +213,13 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -238,7 +247,7 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
      * @param stack the stack from which to allocate
      */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT malloc(MemoryStack stack) {
-        return wrap(VkSurfaceFullScreenExclusiveWin32InfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkSurfaceFullScreenExclusiveWin32InfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -247,7 +256,7 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
      * @param stack the stack from which to allocate
      */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT calloc(MemoryStack stack) {
-        return wrap(VkSurfaceFullScreenExclusiveWin32InfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkSurfaceFullScreenExclusiveWin32InfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -257,7 +266,7 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -267,7 +276,7 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -305,9 +314,9 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct implements 
         /**
          * Creates a new {@code VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

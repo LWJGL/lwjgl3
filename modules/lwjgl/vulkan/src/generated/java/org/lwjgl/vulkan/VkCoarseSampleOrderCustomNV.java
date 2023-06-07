@@ -57,7 +57,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkCoarseSampleLocationNV VkCoarseSampleLocationNV} const * {@link #pSampleLocations};
  * }</code></pre>
  */
-public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResource {
+public class VkCoarseSampleOrderCustomNV extends Struct<VkCoarseSampleOrderCustomNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -87,6 +87,15 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
         SAMPLECOUNT = layout.offsetof(1);
         SAMPLELOCATIONCOUNT = layout.offsetof(2);
         PSAMPLELOCATIONS = layout.offsetof(3);
+    }
+
+    protected VkCoarseSampleOrderCustomNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkCoarseSampleOrderCustomNV create(long address, @Nullable ByteBuffer container) {
+        return new VkCoarseSampleOrderCustomNV(address, container);
     }
 
     /**
@@ -151,29 +160,29 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
 
     /** Returns a new {@code VkCoarseSampleOrderCustomNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkCoarseSampleOrderCustomNV malloc() {
-        return wrap(VkCoarseSampleOrderCustomNV.class, nmemAllocChecked(SIZEOF));
+        return new VkCoarseSampleOrderCustomNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkCoarseSampleOrderCustomNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkCoarseSampleOrderCustomNV calloc() {
-        return wrap(VkCoarseSampleOrderCustomNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkCoarseSampleOrderCustomNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkCoarseSampleOrderCustomNV} instance allocated with {@link BufferUtils}. */
     public static VkCoarseSampleOrderCustomNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkCoarseSampleOrderCustomNV.class, memAddress(container), container);
+        return new VkCoarseSampleOrderCustomNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkCoarseSampleOrderCustomNV} instance for the specified memory address. */
     public static VkCoarseSampleOrderCustomNV create(long address) {
-        return wrap(VkCoarseSampleOrderCustomNV.class, address);
+        return new VkCoarseSampleOrderCustomNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCoarseSampleOrderCustomNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkCoarseSampleOrderCustomNV.class, address);
+        return address == NULL ? null : new VkCoarseSampleOrderCustomNV(address, null);
     }
 
     /**
@@ -182,7 +191,7 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleOrderCustomNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -191,7 +200,7 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleOrderCustomNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -201,7 +210,7 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
      */
     public static VkCoarseSampleOrderCustomNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -211,13 +220,13 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleOrderCustomNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCoarseSampleOrderCustomNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -245,7 +254,7 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkCoarseSampleOrderCustomNV malloc(MemoryStack stack) {
-        return wrap(VkCoarseSampleOrderCustomNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkCoarseSampleOrderCustomNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -254,7 +263,7 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkCoarseSampleOrderCustomNV calloc(MemoryStack stack) {
-        return wrap(VkCoarseSampleOrderCustomNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkCoarseSampleOrderCustomNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -264,7 +273,7 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleOrderCustomNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -274,7 +283,7 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkCoarseSampleOrderCustomNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -316,9 +325,9 @@ public class VkCoarseSampleOrderCustomNV extends Struct implements NativeResourc
         /**
          * Creates a new {@code VkCoarseSampleOrderCustomNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkCoarseSampleOrderCustomNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkCoarseSampleOrderCustomNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

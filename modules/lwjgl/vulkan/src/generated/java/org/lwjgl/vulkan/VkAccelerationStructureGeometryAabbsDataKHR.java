@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceSize {@link #stride};
  * }</code></pre>
  */
-public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implements NativeResource {
+public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct<VkAccelerationStructureGeometryAabbsDataKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -76,6 +76,15 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
         PNEXT = layout.offsetof(1);
         DATA = layout.offsetof(2);
         STRIDE = layout.offsetof(3);
+    }
+
+    protected VkAccelerationStructureGeometryAabbsDataKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkAccelerationStructureGeometryAabbsDataKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkAccelerationStructureGeometryAabbsDataKHR(address, container);
     }
 
     /**
@@ -147,29 +156,29 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
 
     /** Returns a new {@code VkAccelerationStructureGeometryAabbsDataKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkAccelerationStructureGeometryAabbsDataKHR malloc() {
-        return wrap(VkAccelerationStructureGeometryAabbsDataKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkAccelerationStructureGeometryAabbsDataKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkAccelerationStructureGeometryAabbsDataKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkAccelerationStructureGeometryAabbsDataKHR calloc() {
-        return wrap(VkAccelerationStructureGeometryAabbsDataKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkAccelerationStructureGeometryAabbsDataKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkAccelerationStructureGeometryAabbsDataKHR} instance allocated with {@link BufferUtils}. */
     public static VkAccelerationStructureGeometryAabbsDataKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkAccelerationStructureGeometryAabbsDataKHR.class, memAddress(container), container);
+        return new VkAccelerationStructureGeometryAabbsDataKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkAccelerationStructureGeometryAabbsDataKHR} instance for the specified memory address. */
     public static VkAccelerationStructureGeometryAabbsDataKHR create(long address) {
-        return wrap(VkAccelerationStructureGeometryAabbsDataKHR.class, address);
+        return new VkAccelerationStructureGeometryAabbsDataKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAccelerationStructureGeometryAabbsDataKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkAccelerationStructureGeometryAabbsDataKHR.class, address);
+        return address == NULL ? null : new VkAccelerationStructureGeometryAabbsDataKHR(address, null);
     }
 
     /**
@@ -178,7 +187,7 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureGeometryAabbsDataKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -187,7 +196,7 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureGeometryAabbsDataKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -197,7 +206,7 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
      */
     public static VkAccelerationStructureGeometryAabbsDataKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -207,13 +216,13 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureGeometryAabbsDataKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkAccelerationStructureGeometryAabbsDataKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -222,7 +231,7 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkAccelerationStructureGeometryAabbsDataKHR malloc(MemoryStack stack) {
-        return wrap(VkAccelerationStructureGeometryAabbsDataKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkAccelerationStructureGeometryAabbsDataKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkAccelerationStructureGeometryAabbsDataKHR calloc(MemoryStack stack) {
-        return wrap(VkAccelerationStructureGeometryAabbsDataKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkAccelerationStructureGeometryAabbsDataKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -241,7 +250,7 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureGeometryAabbsDataKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -251,7 +260,7 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkAccelerationStructureGeometryAabbsDataKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -284,9 +293,9 @@ public class VkAccelerationStructureGeometryAabbsDataKHR extends Struct implemen
         /**
          * Creates a new {@code VkAccelerationStructureGeometryAabbsDataKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkAccelerationStructureGeometryAabbsDataKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkAccelerationStructureGeometryAabbsDataKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

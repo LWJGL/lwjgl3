@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct FMOD_DSP_STATE")
-public class FMOD_DSP_STATE extends Struct implements NativeResource {
+public class FMOD_DSP_STATE extends Struct<FMOD_DSP_STATE> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -74,6 +74,15 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
         SIDECHAINCHANNELS = layout.offsetof(5);
         FUNCTIONS = layout.offsetof(6);
         SYSTEMOBJECT = layout.offsetof(7);
+    }
+
+    protected FMOD_DSP_STATE(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FMOD_DSP_STATE create(long address, @Nullable ByteBuffer container) {
+        return new FMOD_DSP_STATE(address, container);
     }
 
     /**
@@ -164,29 +173,29 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
 
     /** Returns a new {@code FMOD_DSP_STATE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static FMOD_DSP_STATE malloc() {
-        return wrap(FMOD_DSP_STATE.class, nmemAllocChecked(SIZEOF));
+        return new FMOD_DSP_STATE(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code FMOD_DSP_STATE} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static FMOD_DSP_STATE calloc() {
-        return wrap(FMOD_DSP_STATE.class, nmemCallocChecked(1, SIZEOF));
+        return new FMOD_DSP_STATE(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code FMOD_DSP_STATE} instance allocated with {@link BufferUtils}. */
     public static FMOD_DSP_STATE create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(FMOD_DSP_STATE.class, memAddress(container), container);
+        return new FMOD_DSP_STATE(memAddress(container), container);
     }
 
     /** Returns a new {@code FMOD_DSP_STATE} instance for the specified memory address. */
     public static FMOD_DSP_STATE create(long address) {
-        return wrap(FMOD_DSP_STATE.class, address);
+        return new FMOD_DSP_STATE(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FMOD_DSP_STATE createSafe(long address) {
-        return address == NULL ? null : wrap(FMOD_DSP_STATE.class, address);
+        return address == NULL ? null : new FMOD_DSP_STATE(address, null);
     }
 
     /**
@@ -195,7 +204,7 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_STATE.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -204,7 +213,7 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_STATE.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -214,7 +223,7 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
      */
     public static FMOD_DSP_STATE.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -224,13 +233,13 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_STATE.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FMOD_DSP_STATE.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -239,7 +248,7 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static FMOD_DSP_STATE malloc(MemoryStack stack) {
-        return wrap(FMOD_DSP_STATE.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new FMOD_DSP_STATE(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -248,7 +257,7 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static FMOD_DSP_STATE calloc(MemoryStack stack) {
-        return wrap(FMOD_DSP_STATE.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new FMOD_DSP_STATE(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -258,7 +267,7 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_STATE.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -268,7 +277,7 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_STATE.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -331,9 +340,9 @@ public class FMOD_DSP_STATE extends Struct implements NativeResource {
         /**
          * Creates a new {@code FMOD_DSP_STATE.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FMOD_DSP_STATE#SIZEOF}, and its mark will be undefined.
+         * by {@link FMOD_DSP_STATE#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkRayTracingInvocationReorderModeNV {@link #rayTracingInvocationReorderReorderingHint};
  * }</code></pre>
  */
-public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Struct implements NativeResource {
+public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Struct<VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -69,6 +69,15 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         RAYTRACINGINVOCATIONREORDERREORDERINGHINT = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(address, container);
     }
 
     /**
@@ -128,29 +137,29 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
 
     /** Returns a new {@code VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV malloc() {
-        return wrap(VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV calloc() {
-        return wrap(VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.class, memAddress(container), container);
+        return new VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV create(long address) {
-        return wrap(VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.class, address);
+        return new VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(address, null);
     }
 
     /**
@@ -159,7 +168,7 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -168,7 +177,7 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -178,7 +187,7 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
      */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -188,13 +197,13 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -203,7 +212,7 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -212,7 +221,7 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -222,7 +231,7 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -232,7 +241,7 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -259,9 +268,9 @@ public class VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV extends Str
         /**
          * Creates a new {@code VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

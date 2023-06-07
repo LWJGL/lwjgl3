@@ -75,7 +75,7 @@ import org.lwjgl.vulkan.video.*;
  *     uint32_t const * {@link #pSliceSegmentOffsets};
  * }</code></pre>
  */
-public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeResource {
+public class VkVideoDecodeH265PictureInfoKHR extends Struct<VkVideoDecodeH265PictureInfoKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -108,6 +108,15 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
         PSTDPICTUREINFO = layout.offsetof(2);
         SLICESEGMENTCOUNT = layout.offsetof(3);
         PSLICESEGMENTOFFSETS = layout.offsetof(4);
+    }
+
+    protected VkVideoDecodeH265PictureInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkVideoDecodeH265PictureInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkVideoDecodeH265PictureInfoKHR(address, container);
     }
 
     /**
@@ -181,29 +190,29 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
 
     /** Returns a new {@code VkVideoDecodeH265PictureInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkVideoDecodeH265PictureInfoKHR malloc() {
-        return wrap(VkVideoDecodeH265PictureInfoKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkVideoDecodeH265PictureInfoKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoDecodeH265PictureInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkVideoDecodeH265PictureInfoKHR calloc() {
-        return wrap(VkVideoDecodeH265PictureInfoKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkVideoDecodeH265PictureInfoKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoDecodeH265PictureInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkVideoDecodeH265PictureInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkVideoDecodeH265PictureInfoKHR.class, memAddress(container), container);
+        return new VkVideoDecodeH265PictureInfoKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkVideoDecodeH265PictureInfoKHR} instance for the specified memory address. */
     public static VkVideoDecodeH265PictureInfoKHR create(long address) {
-        return wrap(VkVideoDecodeH265PictureInfoKHR.class, address);
+        return new VkVideoDecodeH265PictureInfoKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoDecodeH265PictureInfoKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkVideoDecodeH265PictureInfoKHR.class, address);
+        return address == NULL ? null : new VkVideoDecodeH265PictureInfoKHR(address, null);
     }
 
     /**
@@ -212,7 +221,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH265PictureInfoKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH265PictureInfoKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
      */
     public static VkVideoDecodeH265PictureInfoKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -241,13 +250,13 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH265PictureInfoKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoDecodeH265PictureInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -256,7 +265,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkVideoDecodeH265PictureInfoKHR malloc(MemoryStack stack) {
-        return wrap(VkVideoDecodeH265PictureInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkVideoDecodeH265PictureInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -265,7 +274,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkVideoDecodeH265PictureInfoKHR calloc(MemoryStack stack) {
-        return wrap(VkVideoDecodeH265PictureInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkVideoDecodeH265PictureInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -275,7 +284,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH265PictureInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -285,7 +294,7 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH265PictureInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -332,9 +341,9 @@ public class VkVideoDecodeH265PictureInfoKHR extends Struct implements NativeRes
         /**
          * Creates a new {@code VkVideoDecodeH265PictureInfoKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkVideoDecodeH265PictureInfoKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkVideoDecodeH265PictureInfoKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

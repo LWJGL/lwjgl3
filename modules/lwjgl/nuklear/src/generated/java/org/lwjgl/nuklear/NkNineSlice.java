@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct nk_nine_slice")
-public class NkNineSlice extends Struct implements NativeResource {
+public class NkNineSlice extends Struct<NkNineSlice> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -61,6 +61,15 @@ public class NkNineSlice extends Struct implements NativeResource {
         T = layout.offsetof(2);
         R = layout.offsetof(3);
         B = layout.offsetof(4);
+    }
+
+    protected NkNineSlice(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkNineSlice create(long address, @Nullable ByteBuffer container) {
+        return new NkNineSlice(address, container);
     }
 
     /**
@@ -138,29 +147,29 @@ public class NkNineSlice extends Struct implements NativeResource {
 
     /** Returns a new {@code NkNineSlice} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkNineSlice malloc() {
-        return wrap(NkNineSlice.class, nmemAllocChecked(SIZEOF));
+        return new NkNineSlice(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code NkNineSlice} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkNineSlice calloc() {
-        return wrap(NkNineSlice.class, nmemCallocChecked(1, SIZEOF));
+        return new NkNineSlice(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code NkNineSlice} instance allocated with {@link BufferUtils}. */
     public static NkNineSlice create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(NkNineSlice.class, memAddress(container), container);
+        return new NkNineSlice(memAddress(container), container);
     }
 
     /** Returns a new {@code NkNineSlice} instance for the specified memory address. */
     public static NkNineSlice create(long address) {
-        return wrap(NkNineSlice.class, address);
+        return new NkNineSlice(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkNineSlice createSafe(long address) {
-        return address == NULL ? null : wrap(NkNineSlice.class, address);
+        return address == NULL ? null : new NkNineSlice(address, null);
     }
 
     /**
@@ -169,7 +178,7 @@ public class NkNineSlice extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkNineSlice.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +187,7 @@ public class NkNineSlice extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkNineSlice.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -188,7 +197,7 @@ public class NkNineSlice extends Struct implements NativeResource {
      */
     public static NkNineSlice.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -198,13 +207,13 @@ public class NkNineSlice extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkNineSlice.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkNineSlice.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -213,7 +222,7 @@ public class NkNineSlice extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkNineSlice malloc(MemoryStack stack) {
-        return wrap(NkNineSlice.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new NkNineSlice(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -222,7 +231,7 @@ public class NkNineSlice extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkNineSlice calloc(MemoryStack stack) {
-        return wrap(NkNineSlice.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new NkNineSlice(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class NkNineSlice extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkNineSlice.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -242,7 +251,7 @@ public class NkNineSlice extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkNineSlice.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -279,9 +288,9 @@ public class NkNineSlice extends Struct implements NativeResource {
         /**
          * Creates a new {@code NkNineSlice.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkNineSlice#SIZEOF}, and its mark will be undefined.
+         * by {@link NkNineSlice#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct meshopt_VertexCacheStatistics")
-public class MeshoptVertexCacheStatistics extends Struct implements NativeResource {
+public class MeshoptVertexCacheStatistics extends Struct<MeshoptVertexCacheStatistics> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -59,6 +59,15 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
         ATVR = layout.offsetof(3);
     }
 
+    protected MeshoptVertexCacheStatistics(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected MeshoptVertexCacheStatistics create(long address, @Nullable ByteBuffer container) {
+        return new MeshoptVertexCacheStatistics(address, container);
+    }
+
     /**
      * Creates a {@code MeshoptVertexCacheStatistics} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -87,29 +96,29 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
 
     /** Returns a new {@code MeshoptVertexCacheStatistics} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static MeshoptVertexCacheStatistics malloc() {
-        return wrap(MeshoptVertexCacheStatistics.class, nmemAllocChecked(SIZEOF));
+        return new MeshoptVertexCacheStatistics(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code MeshoptVertexCacheStatistics} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static MeshoptVertexCacheStatistics calloc() {
-        return wrap(MeshoptVertexCacheStatistics.class, nmemCallocChecked(1, SIZEOF));
+        return new MeshoptVertexCacheStatistics(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code MeshoptVertexCacheStatistics} instance allocated with {@link BufferUtils}. */
     public static MeshoptVertexCacheStatistics create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(MeshoptVertexCacheStatistics.class, memAddress(container), container);
+        return new MeshoptVertexCacheStatistics(memAddress(container), container);
     }
 
     /** Returns a new {@code MeshoptVertexCacheStatistics} instance for the specified memory address. */
     public static MeshoptVertexCacheStatistics create(long address) {
-        return wrap(MeshoptVertexCacheStatistics.class, address);
+        return new MeshoptVertexCacheStatistics(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static MeshoptVertexCacheStatistics createSafe(long address) {
-        return address == NULL ? null : wrap(MeshoptVertexCacheStatistics.class, address);
+        return address == NULL ? null : new MeshoptVertexCacheStatistics(address, null);
     }
 
     /**
@@ -118,7 +127,7 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static MeshoptVertexCacheStatistics.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -127,7 +136,7 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static MeshoptVertexCacheStatistics.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -137,7 +146,7 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
      */
     public static MeshoptVertexCacheStatistics.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -147,13 +156,13 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static MeshoptVertexCacheStatistics.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static MeshoptVertexCacheStatistics.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -162,7 +171,7 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static MeshoptVertexCacheStatistics malloc(MemoryStack stack) {
-        return wrap(MeshoptVertexCacheStatistics.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new MeshoptVertexCacheStatistics(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -171,7 +180,7 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
      * @param stack the stack from which to allocate
      */
     public static MeshoptVertexCacheStatistics calloc(MemoryStack stack) {
-        return wrap(MeshoptVertexCacheStatistics.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new MeshoptVertexCacheStatistics(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -181,7 +190,7 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static MeshoptVertexCacheStatistics.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -191,7 +200,7 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
      * @param capacity the buffer capacity
      */
     public static MeshoptVertexCacheStatistics.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -215,9 +224,9 @@ public class MeshoptVertexCacheStatistics extends Struct implements NativeResour
         /**
          * Creates a new {@code MeshoptVertexCacheStatistics.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link MeshoptVertexCacheStatistics#SIZEOF}, and its mark will be undefined.
+         * by {@link MeshoptVertexCacheStatistics#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

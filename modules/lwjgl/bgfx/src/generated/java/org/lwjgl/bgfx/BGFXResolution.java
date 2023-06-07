@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct bgfx_resolution_t")
-public class BGFXResolution extends Struct implements NativeResource {
+public class BGFXResolution extends Struct<BGFXResolution> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -67,6 +67,15 @@ public class BGFXResolution extends Struct implements NativeResource {
         RESET = layout.offsetof(3);
         NUMBACKBUFFERS = layout.offsetof(4);
         MAXFRAMELATENCY = layout.offsetof(5);
+    }
+
+    protected BGFXResolution(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected BGFXResolution create(long address, @Nullable ByteBuffer container) {
+        return new BGFXResolution(address, container);
     }
 
     /**
@@ -149,29 +158,29 @@ public class BGFXResolution extends Struct implements NativeResource {
 
     /** Returns a new {@code BGFXResolution} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXResolution malloc() {
-        return wrap(BGFXResolution.class, nmemAllocChecked(SIZEOF));
+        return new BGFXResolution(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code BGFXResolution} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXResolution calloc() {
-        return wrap(BGFXResolution.class, nmemCallocChecked(1, SIZEOF));
+        return new BGFXResolution(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code BGFXResolution} instance allocated with {@link BufferUtils}. */
     public static BGFXResolution create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(BGFXResolution.class, memAddress(container), container);
+        return new BGFXResolution(memAddress(container), container);
     }
 
     /** Returns a new {@code BGFXResolution} instance for the specified memory address. */
     public static BGFXResolution create(long address) {
-        return wrap(BGFXResolution.class, address);
+        return new BGFXResolution(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXResolution createSafe(long address) {
-        return address == NULL ? null : wrap(BGFXResolution.class, address);
+        return address == NULL ? null : new BGFXResolution(address, null);
     }
 
     // -----------------------------------
@@ -192,7 +201,7 @@ public class BGFXResolution extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXResolution malloc(MemoryStack stack) {
-        return wrap(BGFXResolution.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new BGFXResolution(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -201,7 +210,7 @@ public class BGFXResolution extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXResolution calloc(MemoryStack stack) {
-        return wrap(BGFXResolution.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new BGFXResolution(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

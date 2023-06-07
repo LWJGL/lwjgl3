@@ -83,7 +83,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #inheritedQueries};
  * }</code></pre>
  */
-public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
+public class VkPhysicalDeviceFeatures extends Struct<VkPhysicalDeviceFeatures> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -266,6 +266,15 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
         SPARSERESIDENCYALIASED = layout.offsetof(52);
         VARIABLEMULTISAMPLERATE = layout.offsetof(53);
         INHERITEDQUERIES = layout.offsetof(54);
+    }
+
+    protected VkPhysicalDeviceFeatures(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceFeatures create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceFeatures(address, container);
     }
 
     /**
@@ -891,29 +900,29 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
 
     /** Returns a new {@code VkPhysicalDeviceFeatures} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceFeatures malloc() {
-        return wrap(VkPhysicalDeviceFeatures.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceFeatures(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceFeatures} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceFeatures calloc() {
-        return wrap(VkPhysicalDeviceFeatures.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceFeatures(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceFeatures} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceFeatures create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceFeatures.class, memAddress(container), container);
+        return new VkPhysicalDeviceFeatures(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceFeatures} instance for the specified memory address. */
     public static VkPhysicalDeviceFeatures create(long address) {
-        return wrap(VkPhysicalDeviceFeatures.class, address);
+        return new VkPhysicalDeviceFeatures(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceFeatures createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceFeatures.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceFeatures(address, null);
     }
 
     /**
@@ -922,7 +931,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -931,7 +940,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -941,7 +950,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      */
     public static VkPhysicalDeviceFeatures.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -951,13 +960,13 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceFeatures.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -985,7 +994,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceFeatures malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceFeatures.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceFeatures(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -994,7 +1003,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceFeatures calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceFeatures.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceFeatures(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -1004,7 +1013,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -1014,7 +1023,7 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFeatures.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -1251,9 +1260,9 @@ public class VkPhysicalDeviceFeatures extends Struct implements NativeResource {
         /**
          * Creates a new {@code VkPhysicalDeviceFeatures.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceFeatures#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceFeatures#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

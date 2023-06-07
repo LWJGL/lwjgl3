@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     LLVMOrcJITDylibLookupFlags JDLookupFlags;
  * }</code></pre>
  */
-public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements NativeResource {
+public class LLVMOrcCJITDylibSearchOrderElement extends Struct<LLVMOrcCJITDylibSearchOrderElement> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -51,6 +51,15 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
 
         JD = layout.offsetof(0);
         JDLOOKUPFLAGS = layout.offsetof(1);
+    }
+
+    protected LLVMOrcCJITDylibSearchOrderElement(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected LLVMOrcCJITDylibSearchOrderElement create(long address, @Nullable ByteBuffer container) {
+        return new LLVMOrcCJITDylibSearchOrderElement(address, container);
     }
 
     /**
@@ -105,29 +114,29 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
 
     /** Returns a new {@code LLVMOrcCJITDylibSearchOrderElement} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static LLVMOrcCJITDylibSearchOrderElement malloc() {
-        return wrap(LLVMOrcCJITDylibSearchOrderElement.class, nmemAllocChecked(SIZEOF));
+        return new LLVMOrcCJITDylibSearchOrderElement(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code LLVMOrcCJITDylibSearchOrderElement} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static LLVMOrcCJITDylibSearchOrderElement calloc() {
-        return wrap(LLVMOrcCJITDylibSearchOrderElement.class, nmemCallocChecked(1, SIZEOF));
+        return new LLVMOrcCJITDylibSearchOrderElement(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code LLVMOrcCJITDylibSearchOrderElement} instance allocated with {@link BufferUtils}. */
     public static LLVMOrcCJITDylibSearchOrderElement create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(LLVMOrcCJITDylibSearchOrderElement.class, memAddress(container), container);
+        return new LLVMOrcCJITDylibSearchOrderElement(memAddress(container), container);
     }
 
     /** Returns a new {@code LLVMOrcCJITDylibSearchOrderElement} instance for the specified memory address. */
     public static LLVMOrcCJITDylibSearchOrderElement create(long address) {
-        return wrap(LLVMOrcCJITDylibSearchOrderElement.class, address);
+        return new LLVMOrcCJITDylibSearchOrderElement(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LLVMOrcCJITDylibSearchOrderElement createSafe(long address) {
-        return address == NULL ? null : wrap(LLVMOrcCJITDylibSearchOrderElement.class, address);
+        return address == NULL ? null : new LLVMOrcCJITDylibSearchOrderElement(address, null);
     }
 
     /**
@@ -136,7 +145,7 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static LLVMOrcCJITDylibSearchOrderElement.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -145,7 +154,7 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static LLVMOrcCJITDylibSearchOrderElement.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -155,7 +164,7 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
      */
     public static LLVMOrcCJITDylibSearchOrderElement.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -165,13 +174,13 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static LLVMOrcCJITDylibSearchOrderElement.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LLVMOrcCJITDylibSearchOrderElement.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -180,7 +189,7 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static LLVMOrcCJITDylibSearchOrderElement malloc(MemoryStack stack) {
-        return wrap(LLVMOrcCJITDylibSearchOrderElement.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new LLVMOrcCJITDylibSearchOrderElement(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -189,7 +198,7 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static LLVMOrcCJITDylibSearchOrderElement calloc(MemoryStack stack) {
-        return wrap(LLVMOrcCJITDylibSearchOrderElement.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new LLVMOrcCJITDylibSearchOrderElement(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -199,7 +208,7 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static LLVMOrcCJITDylibSearchOrderElement.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -209,7 +218,7 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static LLVMOrcCJITDylibSearchOrderElement.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -243,9 +252,9 @@ public class LLVMOrcCJITDylibSearchOrderElement extends Struct implements Native
         /**
          * Creates a new {@code LLVMOrcCJITDylibSearchOrderElement.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link LLVMOrcCJITDylibSearchOrderElement#SIZEOF}, and its mark will be undefined.
+         * by {@link LLVMOrcCJITDylibSearchOrderElement#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

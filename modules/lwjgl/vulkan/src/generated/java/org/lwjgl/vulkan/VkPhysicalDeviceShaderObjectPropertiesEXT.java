@@ -43,7 +43,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     uint32_t {@link #shaderBinaryVersion};
  * }</code></pre>
  */
-public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct<VkPhysicalDeviceShaderObjectPropertiesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -73,6 +73,15 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
         PNEXT = layout.offsetof(1);
         SHADERBINARYUUID = layout.offsetof(2);
         SHADERBINARYVERSION = layout.offsetof(3);
+    }
+
+    protected VkPhysicalDeviceShaderObjectPropertiesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceShaderObjectPropertiesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceShaderObjectPropertiesEXT(address, container);
     }
 
     /**
@@ -138,29 +147,29 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
 
     /** Returns a new {@code VkPhysicalDeviceShaderObjectPropertiesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT malloc() {
-        return wrap(VkPhysicalDeviceShaderObjectPropertiesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceShaderObjectPropertiesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceShaderObjectPropertiesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT calloc() {
-        return wrap(VkPhysicalDeviceShaderObjectPropertiesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceShaderObjectPropertiesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceShaderObjectPropertiesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceShaderObjectPropertiesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceShaderObjectPropertiesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceShaderObjectPropertiesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT create(long address) {
-        return wrap(VkPhysicalDeviceShaderObjectPropertiesEXT.class, address);
+        return new VkPhysicalDeviceShaderObjectPropertiesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShaderObjectPropertiesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceShaderObjectPropertiesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceShaderObjectPropertiesEXT(address, null);
     }
 
     /**
@@ -169,7 +178,7 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +187,7 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -188,7 +197,7 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
      */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -198,13 +207,13 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShaderObjectPropertiesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -213,7 +222,7 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceShaderObjectPropertiesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceShaderObjectPropertiesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -222,7 +231,7 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceShaderObjectPropertiesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceShaderObjectPropertiesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -242,7 +251,7 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderObjectPropertiesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -275,9 +284,9 @@ public class VkPhysicalDeviceShaderObjectPropertiesEXT extends Struct implements
         /**
          * Creates a new {@code VkPhysicalDeviceShaderObjectPropertiesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceShaderObjectPropertiesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceShaderObjectPropertiesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

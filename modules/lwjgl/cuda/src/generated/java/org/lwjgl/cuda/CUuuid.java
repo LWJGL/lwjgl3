@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     char bytes[16];
  * }</code></pre>
  */
-public class CUuuid extends Struct implements NativeResource {
+public class CUuuid extends Struct<CUuuid> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -44,6 +44,15 @@ public class CUuuid extends Struct implements NativeResource {
         ALIGNOF = layout.getAlignment();
 
         BYTES = layout.offsetof(0);
+    }
+
+    protected CUuuid(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CUuuid create(long address, @Nullable ByteBuffer container) {
+        return new CUuuid(address, container);
     }
 
     /**
@@ -70,29 +79,29 @@ public class CUuuid extends Struct implements NativeResource {
 
     /** Returns a new {@code CUuuid} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CUuuid malloc() {
-        return wrap(CUuuid.class, nmemAllocChecked(SIZEOF));
+        return new CUuuid(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code CUuuid} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CUuuid calloc() {
-        return wrap(CUuuid.class, nmemCallocChecked(1, SIZEOF));
+        return new CUuuid(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code CUuuid} instance allocated with {@link BufferUtils}. */
     public static CUuuid create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(CUuuid.class, memAddress(container), container);
+        return new CUuuid(memAddress(container), container);
     }
 
     /** Returns a new {@code CUuuid} instance for the specified memory address. */
     public static CUuuid create(long address) {
-        return wrap(CUuuid.class, address);
+        return new CUuuid(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CUuuid createSafe(long address) {
-        return address == NULL ? null : wrap(CUuuid.class, address);
+        return address == NULL ? null : new CUuuid(address, null);
     }
 
     /**
@@ -101,7 +110,7 @@ public class CUuuid extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CUuuid.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -110,7 +119,7 @@ public class CUuuid extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CUuuid.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -120,7 +129,7 @@ public class CUuuid extends Struct implements NativeResource {
      */
     public static CUuuid.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -130,13 +139,13 @@ public class CUuuid extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CUuuid.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CUuuid.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -164,7 +173,7 @@ public class CUuuid extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CUuuid malloc(MemoryStack stack) {
-        return wrap(CUuuid.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new CUuuid(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -173,7 +182,7 @@ public class CUuuid extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CUuuid calloc(MemoryStack stack) {
-        return wrap(CUuuid.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new CUuuid(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -183,7 +192,7 @@ public class CUuuid extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CUuuid.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -193,7 +202,7 @@ public class CUuuid extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CUuuid.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -213,9 +222,9 @@ public class CUuuid extends Struct implements NativeResource {
         /**
          * Creates a new {@code CUuuid.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CUuuid#SIZEOF}, and its mark will be undefined.
+         * by {@link CUuuid#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -55,7 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrVector2f XrVector2f} {@link #bias};
  * }</code></pre>
  */
-public class XrCompositionLayerEquirectKHR extends Struct implements NativeResource {
+public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEquirectKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -103,6 +103,15 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
         RADIUS = layout.offsetof(7);
         SCALE = layout.offsetof(8);
         BIAS = layout.offsetof(9);
+    }
+
+    protected XrCompositionLayerEquirectKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrCompositionLayerEquirectKHR create(long address, @Nullable ByteBuffer container) {
+        return new XrCompositionLayerEquirectKHR(address, container);
     }
 
     /**
@@ -218,34 +227,34 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
 
     /** Returns a new {@code XrCompositionLayerEquirectKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrCompositionLayerEquirectKHR malloc() {
-        return wrap(XrCompositionLayerEquirectKHR.class, nmemAllocChecked(SIZEOF));
+        return new XrCompositionLayerEquirectKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrCompositionLayerEquirectKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrCompositionLayerEquirectKHR calloc() {
-        return wrap(XrCompositionLayerEquirectKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new XrCompositionLayerEquirectKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrCompositionLayerEquirectKHR} instance allocated with {@link BufferUtils}. */
     public static XrCompositionLayerEquirectKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrCompositionLayerEquirectKHR.class, memAddress(container), container);
+        return new XrCompositionLayerEquirectKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code XrCompositionLayerEquirectKHR} instance for the specified memory address. */
     public static XrCompositionLayerEquirectKHR create(long address) {
-        return wrap(XrCompositionLayerEquirectKHR.class, address);
+        return new XrCompositionLayerEquirectKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrCompositionLayerEquirectKHR createSafe(long address) {
-        return address == NULL ? null : wrap(XrCompositionLayerEquirectKHR.class, address);
+        return address == NULL ? null : new XrCompositionLayerEquirectKHR(address, null);
     }
 
     /** Downcasts the specified {@code XrCompositionLayerBaseHeader} instance to {@code XrCompositionLayerEquirectKHR}. */
     public static XrCompositionLayerEquirectKHR create(XrCompositionLayerBaseHeader value) {
-        return wrap(XrCompositionLayerEquirectKHR.class, value);
+        return new XrCompositionLayerEquirectKHR(value.address(), __getContainer(value));
     }
 
     /**
@@ -254,7 +263,7 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerEquirectKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -263,7 +272,7 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerEquirectKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -273,7 +282,7 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
      */
     public static XrCompositionLayerEquirectKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -283,18 +292,18 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerEquirectKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrCompositionLayerEquirectKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /** Downcasts the specified {@code XrCompositionLayerBaseHeader.Buffer} instance to {@code XrCompositionLayerEquirectKHR.Buffer}. */
     public static XrCompositionLayerEquirectKHR.Buffer create(XrCompositionLayerBaseHeader.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrCompositionLayerEquirectKHR.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -303,7 +312,7 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static XrCompositionLayerEquirectKHR malloc(MemoryStack stack) {
-        return wrap(XrCompositionLayerEquirectKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrCompositionLayerEquirectKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -312,7 +321,7 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static XrCompositionLayerEquirectKHR calloc(MemoryStack stack) {
-        return wrap(XrCompositionLayerEquirectKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrCompositionLayerEquirectKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -322,7 +331,7 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerEquirectKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -332,7 +341,7 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerEquirectKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -399,9 +408,9 @@ public class XrCompositionLayerEquirectKHR extends Struct implements NativeResou
         /**
          * Creates a new {@code XrCompositionLayerEquirectKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrCompositionLayerEquirectKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link XrCompositionLayerEquirectKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

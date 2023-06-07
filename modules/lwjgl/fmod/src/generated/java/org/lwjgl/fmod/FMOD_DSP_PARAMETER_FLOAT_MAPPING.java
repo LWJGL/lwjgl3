@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR} piecewiselinearmapping;
  * }</code></pre>
  */
-public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeResource {
+public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct<FMOD_DSP_PARAMETER_FLOAT_MAPPING> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -48,6 +48,15 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
 
         TYPE = layout.offsetof(0);
         PIECEWISELINEARMAPPING = layout.offsetof(1);
+    }
+
+    protected FMOD_DSP_PARAMETER_FLOAT_MAPPING(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FMOD_DSP_PARAMETER_FLOAT_MAPPING create(long address, @Nullable ByteBuffer container) {
+        return new FMOD_DSP_PARAMETER_FLOAT_MAPPING(address, container);
     }
 
     /**
@@ -103,29 +112,29 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
 
     /** Returns a new {@code FMOD_DSP_PARAMETER_FLOAT_MAPPING} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING malloc() {
-        return wrap(FMOD_DSP_PARAMETER_FLOAT_MAPPING.class, nmemAllocChecked(SIZEOF));
+        return new FMOD_DSP_PARAMETER_FLOAT_MAPPING(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code FMOD_DSP_PARAMETER_FLOAT_MAPPING} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING calloc() {
-        return wrap(FMOD_DSP_PARAMETER_FLOAT_MAPPING.class, nmemCallocChecked(1, SIZEOF));
+        return new FMOD_DSP_PARAMETER_FLOAT_MAPPING(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code FMOD_DSP_PARAMETER_FLOAT_MAPPING} instance allocated with {@link BufferUtils}. */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(FMOD_DSP_PARAMETER_FLOAT_MAPPING.class, memAddress(container), container);
+        return new FMOD_DSP_PARAMETER_FLOAT_MAPPING(memAddress(container), container);
     }
 
     /** Returns a new {@code FMOD_DSP_PARAMETER_FLOAT_MAPPING} instance for the specified memory address. */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING create(long address) {
-        return wrap(FMOD_DSP_PARAMETER_FLOAT_MAPPING.class, address);
+        return new FMOD_DSP_PARAMETER_FLOAT_MAPPING(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING createSafe(long address) {
-        return address == NULL ? null : wrap(FMOD_DSP_PARAMETER_FLOAT_MAPPING.class, address);
+        return address == NULL ? null : new FMOD_DSP_PARAMETER_FLOAT_MAPPING(address, null);
     }
 
     /**
@@ -134,7 +143,7 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -143,7 +152,7 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -153,7 +162,7 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
      */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -163,13 +172,13 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -178,7 +187,7 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING malloc(MemoryStack stack) {
-        return wrap(FMOD_DSP_PARAMETER_FLOAT_MAPPING.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new FMOD_DSP_PARAMETER_FLOAT_MAPPING(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -187,7 +196,7 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING calloc(MemoryStack stack) {
-        return wrap(FMOD_DSP_PARAMETER_FLOAT_MAPPING.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new FMOD_DSP_PARAMETER_FLOAT_MAPPING(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -197,7 +206,7 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -207,7 +216,7 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static FMOD_DSP_PARAMETER_FLOAT_MAPPING.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -241,9 +250,9 @@ public class FMOD_DSP_PARAMETER_FLOAT_MAPPING extends Struct implements NativeRe
         /**
          * Creates a new {@code FMOD_DSP_PARAMETER_FLOAT_MAPPING.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FMOD_DSP_PARAMETER_FLOAT_MAPPING#SIZEOF}, and its mark will be undefined.
+         * by {@link FMOD_DSP_PARAMETER_FLOAT_MAPPING#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

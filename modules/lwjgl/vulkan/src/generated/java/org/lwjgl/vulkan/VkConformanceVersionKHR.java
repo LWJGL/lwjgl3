@@ -30,6 +30,15 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkConformanceVersionKHR extends VkConformanceVersion {
 
+    protected VkConformanceVersionKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkConformanceVersionKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkConformanceVersionKHR(address, container);
+    }
+
     /**
      * Creates a {@code VkConformanceVersionKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -85,29 +94,29 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
 
     /** Returns a new {@code VkConformanceVersionKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkConformanceVersionKHR malloc() {
-        return wrap(VkConformanceVersionKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkConformanceVersionKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkConformanceVersionKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkConformanceVersionKHR calloc() {
-        return wrap(VkConformanceVersionKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkConformanceVersionKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkConformanceVersionKHR} instance allocated with {@link BufferUtils}. */
     public static VkConformanceVersionKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkConformanceVersionKHR.class, memAddress(container), container);
+        return new VkConformanceVersionKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkConformanceVersionKHR} instance for the specified memory address. */
     public static VkConformanceVersionKHR create(long address) {
-        return wrap(VkConformanceVersionKHR.class, address);
+        return new VkConformanceVersionKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkConformanceVersionKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkConformanceVersionKHR.class, address);
+        return address == NULL ? null : new VkConformanceVersionKHR(address, null);
     }
 
     /**
@@ -116,7 +125,7 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -125,7 +134,7 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -135,7 +144,7 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
      */
     public static VkConformanceVersionKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -145,13 +154,13 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkConformanceVersionKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -179,7 +188,7 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
      * @param stack the stack from which to allocate
      */
     public static VkConformanceVersionKHR malloc(MemoryStack stack) {
-        return wrap(VkConformanceVersionKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkConformanceVersionKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -188,7 +197,7 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
      * @param stack the stack from which to allocate
      */
     public static VkConformanceVersionKHR calloc(MemoryStack stack) {
-        return wrap(VkConformanceVersionKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkConformanceVersionKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -198,7 +207,7 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -208,7 +217,7 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
      * @param capacity the buffer capacity
      */
     public static VkConformanceVersionKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -221,9 +230,9 @@ public class VkConformanceVersionKHR extends VkConformanceVersion {
         /**
          * Creates a new {@code VkConformanceVersionKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkConformanceVersionKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkConformanceVersionKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

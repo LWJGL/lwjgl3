@@ -51,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrSecondaryViewConfigurationLayerInfoMSFT XrSecondaryViewConfigurationLayerInfoMSFT} const * {@link #viewConfigurationLayersInfo};
  * }</code></pre>
  */
-public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct implements NativeResource {
+public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct<XrSecondaryViewConfigurationFrameEndInfoMSFT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -81,6 +81,15 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
         NEXT = layout.offsetof(1);
         VIEWCONFIGURATIONCOUNT = layout.offsetof(2);
         VIEWCONFIGURATIONLAYERSINFO = layout.offsetof(3);
+    }
+
+    protected XrSecondaryViewConfigurationFrameEndInfoMSFT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSecondaryViewConfigurationFrameEndInfoMSFT create(long address, @Nullable ByteBuffer container) {
+        return new XrSecondaryViewConfigurationFrameEndInfoMSFT(address, container);
     }
 
     /**
@@ -147,29 +156,29 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
 
     /** Returns a new {@code XrSecondaryViewConfigurationFrameEndInfoMSFT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT malloc() {
-        return wrap(XrSecondaryViewConfigurationFrameEndInfoMSFT.class, nmemAllocChecked(SIZEOF));
+        return new XrSecondaryViewConfigurationFrameEndInfoMSFT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSecondaryViewConfigurationFrameEndInfoMSFT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT calloc() {
-        return wrap(XrSecondaryViewConfigurationFrameEndInfoMSFT.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSecondaryViewConfigurationFrameEndInfoMSFT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSecondaryViewConfigurationFrameEndInfoMSFT} instance allocated with {@link BufferUtils}. */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSecondaryViewConfigurationFrameEndInfoMSFT.class, memAddress(container), container);
+        return new XrSecondaryViewConfigurationFrameEndInfoMSFT(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSecondaryViewConfigurationFrameEndInfoMSFT} instance for the specified memory address. */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT create(long address) {
-        return wrap(XrSecondaryViewConfigurationFrameEndInfoMSFT.class, address);
+        return new XrSecondaryViewConfigurationFrameEndInfoMSFT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT createSafe(long address) {
-        return address == NULL ? null : wrap(XrSecondaryViewConfigurationFrameEndInfoMSFT.class, address);
+        return address == NULL ? null : new XrSecondaryViewConfigurationFrameEndInfoMSFT(address, null);
     }
 
     /**
@@ -178,7 +187,7 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -187,7 +196,7 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -197,7 +206,7 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
      */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -207,13 +216,13 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -222,7 +231,7 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
      * @param stack the stack from which to allocate
      */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT malloc(MemoryStack stack) {
-        return wrap(XrSecondaryViewConfigurationFrameEndInfoMSFT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSecondaryViewConfigurationFrameEndInfoMSFT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -231,7 +240,7 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
      * @param stack the stack from which to allocate
      */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT calloc(MemoryStack stack) {
-        return wrap(XrSecondaryViewConfigurationFrameEndInfoMSFT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSecondaryViewConfigurationFrameEndInfoMSFT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -241,7 +250,7 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -251,7 +260,7 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static XrSecondaryViewConfigurationFrameEndInfoMSFT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -296,9 +305,9 @@ public class XrSecondaryViewConfigurationFrameEndInfoMSFT extends Struct impleme
         /**
          * Creates a new {@code XrSecondaryViewConfigurationFrameEndInfoMSFT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSecondaryViewConfigurationFrameEndInfoMSFT#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSecondaryViewConfigurationFrameEndInfoMSFT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -57,7 +57,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float {@link #blendConstants}[4];
  * }</code></pre>
  */
-public class VkPipelineColorBlendStateCreateInfo extends Struct implements NativeResource {
+public class VkPipelineColorBlendStateCreateInfo extends Struct<VkPipelineColorBlendStateCreateInfo> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -99,6 +99,15 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
         ATTACHMENTCOUNT = layout.offsetof(5);
         PATTACHMENTS = layout.offsetof(6);
         BLENDCONSTANTS = layout.offsetof(7);
+    }
+
+    protected VkPipelineColorBlendStateCreateInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPipelineColorBlendStateCreateInfo create(long address, @Nullable ByteBuffer container) {
+        return new VkPipelineColorBlendStateCreateInfo(address, container);
     }
 
     /**
@@ -206,29 +215,29 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
 
     /** Returns a new {@code VkPipelineColorBlendStateCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineColorBlendStateCreateInfo malloc() {
-        return wrap(VkPipelineColorBlendStateCreateInfo.class, nmemAllocChecked(SIZEOF));
+        return new VkPipelineColorBlendStateCreateInfo(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineColorBlendStateCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineColorBlendStateCreateInfo calloc() {
-        return wrap(VkPipelineColorBlendStateCreateInfo.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPipelineColorBlendStateCreateInfo(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineColorBlendStateCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkPipelineColorBlendStateCreateInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPipelineColorBlendStateCreateInfo.class, memAddress(container), container);
+        return new VkPipelineColorBlendStateCreateInfo(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPipelineColorBlendStateCreateInfo} instance for the specified memory address. */
     public static VkPipelineColorBlendStateCreateInfo create(long address) {
-        return wrap(VkPipelineColorBlendStateCreateInfo.class, address);
+        return new VkPipelineColorBlendStateCreateInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineColorBlendStateCreateInfo createSafe(long address) {
-        return address == NULL ? null : wrap(VkPipelineColorBlendStateCreateInfo.class, address);
+        return address == NULL ? null : new VkPipelineColorBlendStateCreateInfo(address, null);
     }
 
     /**
@@ -237,7 +246,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendStateCreateInfo.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -246,7 +255,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendStateCreateInfo.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -256,7 +265,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
      */
     public static VkPipelineColorBlendStateCreateInfo.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -266,13 +275,13 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendStateCreateInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineColorBlendStateCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -300,7 +309,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static VkPipelineColorBlendStateCreateInfo malloc(MemoryStack stack) {
-        return wrap(VkPipelineColorBlendStateCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPipelineColorBlendStateCreateInfo(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -309,7 +318,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static VkPipelineColorBlendStateCreateInfo calloc(MemoryStack stack) {
-        return wrap(VkPipelineColorBlendStateCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPipelineColorBlendStateCreateInfo(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -319,7 +328,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendStateCreateInfo.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -329,7 +338,7 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkPipelineColorBlendStateCreateInfo.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -389,9 +398,9 @@ public class VkPipelineColorBlendStateCreateInfo extends Struct implements Nativ
         /**
          * Creates a new {@code VkPipelineColorBlendStateCreateInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPipelineColorBlendStateCreateInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPipelineColorBlendStateCreateInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

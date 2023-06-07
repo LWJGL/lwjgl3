@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FT_Module_RequesterI FT_Module_Requester} get_interface;
  * }</code></pre>
  */
-public class FT_Module_Class extends Struct implements NativeResource {
+public class FT_Module_Class extends Struct<FT_Module_Class> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -79,6 +79,15 @@ public class FT_Module_Class extends Struct implements NativeResource {
         MODULE_INIT = layout.offsetof(6);
         MODULE_DONE = layout.offsetof(7);
         GET_INTERFACE = layout.offsetof(8);
+    }
+
+    protected FT_Module_Class(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FT_Module_Class create(long address, @Nullable ByteBuffer container) {
+        return new FT_Module_Class(address, container);
     }
 
     /**
@@ -190,29 +199,29 @@ public class FT_Module_Class extends Struct implements NativeResource {
 
     /** Returns a new {@code FT_Module_Class} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static FT_Module_Class malloc() {
-        return wrap(FT_Module_Class.class, nmemAllocChecked(SIZEOF));
+        return new FT_Module_Class(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code FT_Module_Class} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static FT_Module_Class calloc() {
-        return wrap(FT_Module_Class.class, nmemCallocChecked(1, SIZEOF));
+        return new FT_Module_Class(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code FT_Module_Class} instance allocated with {@link BufferUtils}. */
     public static FT_Module_Class create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(FT_Module_Class.class, memAddress(container), container);
+        return new FT_Module_Class(memAddress(container), container);
     }
 
     /** Returns a new {@code FT_Module_Class} instance for the specified memory address. */
     public static FT_Module_Class create(long address) {
-        return wrap(FT_Module_Class.class, address);
+        return new FT_Module_Class(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_Module_Class createSafe(long address) {
-        return address == NULL ? null : wrap(FT_Module_Class.class, address);
+        return address == NULL ? null : new FT_Module_Class(address, null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class FT_Module_Class extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FT_Module_Class.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -230,7 +239,7 @@ public class FT_Module_Class extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FT_Module_Class.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -240,7 +249,7 @@ public class FT_Module_Class extends Struct implements NativeResource {
      */
     public static FT_Module_Class.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -250,13 +259,13 @@ public class FT_Module_Class extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FT_Module_Class.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_Module_Class.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -265,7 +274,7 @@ public class FT_Module_Class extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static FT_Module_Class malloc(MemoryStack stack) {
-        return wrap(FT_Module_Class.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new FT_Module_Class(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -274,7 +283,7 @@ public class FT_Module_Class extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static FT_Module_Class calloc(MemoryStack stack) {
-        return wrap(FT_Module_Class.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new FT_Module_Class(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -284,7 +293,7 @@ public class FT_Module_Class extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FT_Module_Class.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -294,7 +303,7 @@ public class FT_Module_Class extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FT_Module_Class.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -361,9 +370,9 @@ public class FT_Module_Class extends Struct implements NativeResource {
         /**
          * Creates a new {@code FT_Module_Class.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FT_Module_Class#SIZEOF}, and its mark will be undefined.
+         * by {@link FT_Module_Class#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

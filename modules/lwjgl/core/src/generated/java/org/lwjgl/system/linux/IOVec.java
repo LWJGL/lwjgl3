@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct iovec")
-public class IOVec extends Struct implements NativeResource {
+public class IOVec extends Struct<IOVec> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -49,6 +49,15 @@ public class IOVec extends Struct implements NativeResource {
 
         IOV_BASE = layout.offsetof(0);
         IOV_LEN = layout.offsetof(1);
+    }
+
+    protected IOVec(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected IOVec create(long address, @Nullable ByteBuffer container) {
+        return new IOVec(address, container);
     }
 
     /**
@@ -104,29 +113,29 @@ public class IOVec extends Struct implements NativeResource {
 
     /** Returns a new {@code IOVec} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static IOVec malloc() {
-        return wrap(IOVec.class, nmemAllocChecked(SIZEOF));
+        return new IOVec(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code IOVec} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static IOVec calloc() {
-        return wrap(IOVec.class, nmemCallocChecked(1, SIZEOF));
+        return new IOVec(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code IOVec} instance allocated with {@link BufferUtils}. */
     public static IOVec create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(IOVec.class, memAddress(container), container);
+        return new IOVec(memAddress(container), container);
     }
 
     /** Returns a new {@code IOVec} instance for the specified memory address. */
     public static IOVec create(long address) {
-        return wrap(IOVec.class, address);
+        return new IOVec(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static IOVec createSafe(long address) {
-        return address == NULL ? null : wrap(IOVec.class, address);
+        return address == NULL ? null : new IOVec(address, null);
     }
 
     /**
@@ -135,7 +144,7 @@ public class IOVec extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static IOVec.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -144,7 +153,7 @@ public class IOVec extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static IOVec.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -154,7 +163,7 @@ public class IOVec extends Struct implements NativeResource {
      */
     public static IOVec.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -164,13 +173,13 @@ public class IOVec extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static IOVec.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static IOVec.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -179,7 +188,7 @@ public class IOVec extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static IOVec malloc(MemoryStack stack) {
-        return wrap(IOVec.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new IOVec(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -188,7 +197,7 @@ public class IOVec extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static IOVec calloc(MemoryStack stack) {
-        return wrap(IOVec.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new IOVec(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -198,7 +207,7 @@ public class IOVec extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static IOVec.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -208,7 +217,7 @@ public class IOVec extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static IOVec.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -233,9 +242,9 @@ public class IOVec extends Struct implements NativeResource {
         /**
          * Creates a new {@code IOVec.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link IOVec#SIZEOF}, and its mark will be undefined.
+         * by {@link IOVec#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

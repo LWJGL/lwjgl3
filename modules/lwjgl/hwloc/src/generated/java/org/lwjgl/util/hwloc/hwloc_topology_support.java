@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct hwloc_topology_support")
-public class hwloc_topology_support extends Struct {
+public class hwloc_topology_support extends Struct<hwloc_topology_support> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -55,6 +55,15 @@ public class hwloc_topology_support extends Struct {
         CPUBIND = layout.offsetof(1);
         MEMBIND = layout.offsetof(2);
         MISC = layout.offsetof(3);
+    }
+
+    protected hwloc_topology_support(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected hwloc_topology_support create(long address, @Nullable ByteBuffer container) {
+        return new hwloc_topology_support(address, container);
     }
 
     /**
@@ -87,13 +96,13 @@ public class hwloc_topology_support extends Struct {
 
     /** Returns a new {@code hwloc_topology_support} instance for the specified memory address. */
     public static hwloc_topology_support create(long address) {
-        return wrap(hwloc_topology_support.class, address);
+        return new hwloc_topology_support(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static hwloc_topology_support createSafe(long address) {
-        return address == NULL ? null : wrap(hwloc_topology_support.class, address);
+        return address == NULL ? null : new hwloc_topology_support(address, null);
     }
 
     /**
@@ -103,13 +112,13 @@ public class hwloc_topology_support extends Struct {
      * @param capacity the buffer capacity
      */
     public static hwloc_topology_support.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static hwloc_topology_support.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -133,9 +142,9 @@ public class hwloc_topology_support extends Struct {
         /**
          * Creates a new {@code hwloc_topology_support.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link hwloc_topology_support#SIZEOF}, and its mark will be undefined.
+         * by {@link hwloc_topology_support#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint64_t {@link #maxDecompressionIndirectCount};
  * }</code></pre>
  */
-public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct implements NativeResource {
+public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct<VkPhysicalDeviceMemoryDecompressionPropertiesNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -68,6 +68,15 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
         PNEXT = layout.offsetof(1);
         DECOMPRESSIONMETHODS = layout.offsetof(2);
         MAXDECOMPRESSIONINDIRECTCOUNT = layout.offsetof(3);
+    }
+
+    protected VkPhysicalDeviceMemoryDecompressionPropertiesNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceMemoryDecompressionPropertiesNV create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceMemoryDecompressionPropertiesNV(address, container);
     }
 
     /**
@@ -130,29 +139,29 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
 
     /** Returns a new {@code VkPhysicalDeviceMemoryDecompressionPropertiesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV malloc() {
-        return wrap(VkPhysicalDeviceMemoryDecompressionPropertiesNV.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceMemoryDecompressionPropertiesNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMemoryDecompressionPropertiesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV calloc() {
-        return wrap(VkPhysicalDeviceMemoryDecompressionPropertiesNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceMemoryDecompressionPropertiesNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMemoryDecompressionPropertiesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceMemoryDecompressionPropertiesNV.class, memAddress(container), container);
+        return new VkPhysicalDeviceMemoryDecompressionPropertiesNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceMemoryDecompressionPropertiesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV create(long address) {
-        return wrap(VkPhysicalDeviceMemoryDecompressionPropertiesNV.class, address);
+        return new VkPhysicalDeviceMemoryDecompressionPropertiesNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceMemoryDecompressionPropertiesNV.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceMemoryDecompressionPropertiesNV(address, null);
     }
 
     /**
@@ -161,7 +170,7 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -170,7 +179,7 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -180,7 +189,7 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
      */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -190,13 +199,13 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -205,7 +214,7 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceMemoryDecompressionPropertiesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceMemoryDecompressionPropertiesNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -214,7 +223,7 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceMemoryDecompressionPropertiesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceMemoryDecompressionPropertiesNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -224,7 +233,7 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -234,7 +243,7 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceMemoryDecompressionPropertiesNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -263,9 +272,9 @@ public class VkPhysicalDeviceMemoryDecompressionPropertiesNV extends Struct impl
         /**
          * Creates a new {@code VkPhysicalDeviceMemoryDecompressionPropertiesNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceMemoryDecompressionPropertiesNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceMemoryDecompressionPropertiesNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrColor4f XrColor4f} {@link #colorBias};
  * }</code></pre>
  */
-public class XrCompositionLayerColorScaleBiasKHR extends Struct implements NativeResource {
+public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLayerColorScaleBiasKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -76,6 +76,15 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
         NEXT = layout.offsetof(1);
         COLORSCALE = layout.offsetof(2);
         COLORBIAS = layout.offsetof(3);
+    }
+
+    protected XrCompositionLayerColorScaleBiasKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrCompositionLayerColorScaleBiasKHR create(long address, @Nullable ByteBuffer container) {
+        return new XrCompositionLayerColorScaleBiasKHR(address, container);
     }
 
     /**
@@ -148,29 +157,29 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
 
     /** Returns a new {@code XrCompositionLayerColorScaleBiasKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrCompositionLayerColorScaleBiasKHR malloc() {
-        return wrap(XrCompositionLayerColorScaleBiasKHR.class, nmemAllocChecked(SIZEOF));
+        return new XrCompositionLayerColorScaleBiasKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrCompositionLayerColorScaleBiasKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrCompositionLayerColorScaleBiasKHR calloc() {
-        return wrap(XrCompositionLayerColorScaleBiasKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new XrCompositionLayerColorScaleBiasKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrCompositionLayerColorScaleBiasKHR} instance allocated with {@link BufferUtils}. */
     public static XrCompositionLayerColorScaleBiasKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrCompositionLayerColorScaleBiasKHR.class, memAddress(container), container);
+        return new XrCompositionLayerColorScaleBiasKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code XrCompositionLayerColorScaleBiasKHR} instance for the specified memory address. */
     public static XrCompositionLayerColorScaleBiasKHR create(long address) {
-        return wrap(XrCompositionLayerColorScaleBiasKHR.class, address);
+        return new XrCompositionLayerColorScaleBiasKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrCompositionLayerColorScaleBiasKHR createSafe(long address) {
-        return address == NULL ? null : wrap(XrCompositionLayerColorScaleBiasKHR.class, address);
+        return address == NULL ? null : new XrCompositionLayerColorScaleBiasKHR(address, null);
     }
 
     /**
@@ -179,7 +188,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerColorScaleBiasKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -188,7 +197,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerColorScaleBiasKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -198,7 +207,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
      */
     public static XrCompositionLayerColorScaleBiasKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -208,13 +217,13 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerColorScaleBiasKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrCompositionLayerColorScaleBiasKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -223,7 +232,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static XrCompositionLayerColorScaleBiasKHR malloc(MemoryStack stack) {
-        return wrap(XrCompositionLayerColorScaleBiasKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrCompositionLayerColorScaleBiasKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static XrCompositionLayerColorScaleBiasKHR calloc(MemoryStack stack) {
-        return wrap(XrCompositionLayerColorScaleBiasKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrCompositionLayerColorScaleBiasKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -242,7 +251,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerColorScaleBiasKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -252,7 +261,7 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static XrCompositionLayerColorScaleBiasKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -285,9 +294,9 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct implements Nativ
         /**
          * Creates a new {@code XrCompositionLayerColorScaleBiasKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrCompositionLayerColorScaleBiasKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link XrCompositionLayerColorScaleBiasKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

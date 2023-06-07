@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct nk_allocator")
-public class NkAllocator extends Struct implements NativeResource {
+public class NkAllocator extends Struct<NkAllocator> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -53,6 +53,15 @@ public class NkAllocator extends Struct implements NativeResource {
         USERDATA = layout.offsetof(0);
         ALLOC = layout.offsetof(1);
         MFREE = layout.offsetof(2);
+    }
+
+    protected NkAllocator(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkAllocator create(long address, @Nullable ByteBuffer container) {
+        return new NkAllocator(address, container);
     }
 
     /**
@@ -118,29 +127,29 @@ public class NkAllocator extends Struct implements NativeResource {
 
     /** Returns a new {@code NkAllocator} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkAllocator malloc() {
-        return wrap(NkAllocator.class, nmemAllocChecked(SIZEOF));
+        return new NkAllocator(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code NkAllocator} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkAllocator calloc() {
-        return wrap(NkAllocator.class, nmemCallocChecked(1, SIZEOF));
+        return new NkAllocator(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code NkAllocator} instance allocated with {@link BufferUtils}. */
     public static NkAllocator create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(NkAllocator.class, memAddress(container), container);
+        return new NkAllocator(memAddress(container), container);
     }
 
     /** Returns a new {@code NkAllocator} instance for the specified memory address. */
     public static NkAllocator create(long address) {
-        return wrap(NkAllocator.class, address);
+        return new NkAllocator(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkAllocator createSafe(long address) {
-        return address == NULL ? null : wrap(NkAllocator.class, address);
+        return address == NULL ? null : new NkAllocator(address, null);
     }
 
     /**
@@ -149,7 +158,7 @@ public class NkAllocator extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkAllocator.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -158,7 +167,7 @@ public class NkAllocator extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkAllocator.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -168,7 +177,7 @@ public class NkAllocator extends Struct implements NativeResource {
      */
     public static NkAllocator.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -178,13 +187,13 @@ public class NkAllocator extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkAllocator.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkAllocator.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -212,7 +221,7 @@ public class NkAllocator extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkAllocator malloc(MemoryStack stack) {
-        return wrap(NkAllocator.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new NkAllocator(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class NkAllocator extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkAllocator calloc(MemoryStack stack) {
-        return wrap(NkAllocator.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new NkAllocator(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -231,7 +240,7 @@ public class NkAllocator extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkAllocator.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -241,7 +250,7 @@ public class NkAllocator extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkAllocator.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -270,9 +279,9 @@ public class NkAllocator extends Struct implements NativeResource {
         /**
          * Creates a new {@code NkAllocator.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkAllocator#SIZEOF}, and its mark will be undefined.
+         * by {@link NkAllocator#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

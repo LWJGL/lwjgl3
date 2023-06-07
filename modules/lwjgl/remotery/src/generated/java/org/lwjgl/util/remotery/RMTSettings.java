@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct rmtSettings")
-public class RMTSettings extends Struct implements NativeResource {
+public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -116,6 +116,15 @@ public class RMTSettings extends Struct implements NativeResource {
         SNAPSHOT_CONTEXT = layout.offsetof(15);
         INPUT_HANDLER_CONTEXT = layout.offsetof(16);
         LOGPATH = layout.offsetof(17);
+    }
+
+    protected RMTSettings(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected RMTSettings create(long address, @Nullable ByteBuffer container) {
+        return new RMTSettings(address, container);
     }
 
     /**
@@ -307,29 +316,29 @@ public class RMTSettings extends Struct implements NativeResource {
 
     /** Returns a new {@code RMTSettings} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static RMTSettings malloc() {
-        return wrap(RMTSettings.class, nmemAllocChecked(SIZEOF));
+        return new RMTSettings(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code RMTSettings} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static RMTSettings calloc() {
-        return wrap(RMTSettings.class, nmemCallocChecked(1, SIZEOF));
+        return new RMTSettings(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code RMTSettings} instance allocated with {@link BufferUtils}. */
     public static RMTSettings create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(RMTSettings.class, memAddress(container), container);
+        return new RMTSettings(memAddress(container), container);
     }
 
     /** Returns a new {@code RMTSettings} instance for the specified memory address. */
     public static RMTSettings create(long address) {
-        return wrap(RMTSettings.class, address);
+        return new RMTSettings(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static RMTSettings createSafe(long address) {
-        return address == NULL ? null : wrap(RMTSettings.class, address);
+        return address == NULL ? null : new RMTSettings(address, null);
     }
 
     // -----------------------------------
@@ -350,7 +359,7 @@ public class RMTSettings extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static RMTSettings malloc(MemoryStack stack) {
-        return wrap(RMTSettings.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new RMTSettings(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -359,7 +368,7 @@ public class RMTSettings extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static RMTSettings calloc(MemoryStack stack) {
-        return wrap(RMTSettings.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new RMTSettings(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

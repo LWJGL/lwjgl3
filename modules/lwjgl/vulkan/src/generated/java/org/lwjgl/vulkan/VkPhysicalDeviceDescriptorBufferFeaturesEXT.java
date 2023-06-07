@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #descriptorBufferPushDescriptors};
  * }</code></pre>
  */
-public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct<VkPhysicalDeviceDescriptorBufferFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -76,6 +76,15 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
         DESCRIPTORBUFFERCAPTUREREPLAY = layout.offsetof(3);
         DESCRIPTORBUFFERIMAGELAYOUTIGNORED = layout.offsetof(4);
         DESCRIPTORBUFFERPUSHDESCRIPTORS = layout.offsetof(5);
+    }
+
+    protected VkPhysicalDeviceDescriptorBufferFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceDescriptorBufferFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceDescriptorBufferFeaturesEXT(address, container);
     }
 
     /**
@@ -160,29 +169,29 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
 
     /** Returns a new {@code VkPhysicalDeviceDescriptorBufferFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceDescriptorBufferFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceDescriptorBufferFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceDescriptorBufferFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceDescriptorBufferFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceDescriptorBufferFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceDescriptorBufferFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceDescriptorBufferFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceDescriptorBufferFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceDescriptorBufferFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceDescriptorBufferFeaturesEXT.class, address);
+        return new VkPhysicalDeviceDescriptorBufferFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceDescriptorBufferFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceDescriptorBufferFeaturesEXT(address, null);
     }
 
     /**
@@ -191,7 +200,7 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -200,7 +209,7 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -210,7 +219,7 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
      */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -220,13 +229,13 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -235,7 +244,7 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceDescriptorBufferFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceDescriptorBufferFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -244,7 +253,7 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceDescriptorBufferFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceDescriptorBufferFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -254,7 +263,7 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -264,7 +273,7 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -305,9 +314,9 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct implemen
         /**
          * Creates a new {@code VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     VkExternalMemoryHandleTypeFlags {@link #compatibleHandleTypes};
  * }</code></pre>
  */
-public class VkExternalMemoryProperties extends Struct {
+public class VkExternalMemoryProperties extends Struct<VkExternalMemoryProperties> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -60,6 +60,15 @@ public class VkExternalMemoryProperties extends Struct {
         EXTERNALMEMORYFEATURES = layout.offsetof(0);
         EXPORTFROMIMPORTEDHANDLETYPES = layout.offsetof(1);
         COMPATIBLEHANDLETYPES = layout.offsetof(2);
+    }
+
+    protected VkExternalMemoryProperties(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkExternalMemoryProperties create(long address, @Nullable ByteBuffer container) {
+        return new VkExternalMemoryProperties(address, container);
     }
 
     /**
@@ -89,13 +98,13 @@ public class VkExternalMemoryProperties extends Struct {
 
     /** Returns a new {@code VkExternalMemoryProperties} instance for the specified memory address. */
     public static VkExternalMemoryProperties create(long address) {
-        return wrap(VkExternalMemoryProperties.class, address);
+        return new VkExternalMemoryProperties(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalMemoryProperties createSafe(long address) {
-        return address == NULL ? null : wrap(VkExternalMemoryProperties.class, address);
+        return address == NULL ? null : new VkExternalMemoryProperties(address, null);
     }
 
     /**
@@ -105,13 +114,13 @@ public class VkExternalMemoryProperties extends Struct {
      * @param capacity the buffer capacity
      */
     public static VkExternalMemoryProperties.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalMemoryProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -133,9 +142,9 @@ public class VkExternalMemoryProperties extends Struct {
         /**
          * Creates a new {@code VkExternalMemoryProperties.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkExternalMemoryProperties#SIZEOF}, and its mark will be undefined.
+         * by {@link VkExternalMemoryProperties#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

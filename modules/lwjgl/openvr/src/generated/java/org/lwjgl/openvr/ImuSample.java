@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct ImuSample_t")
-public class ImuSample extends Struct {
+public class ImuSample extends Struct<ImuSample> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -57,6 +57,15 @@ public class ImuSample extends Struct {
         UNOFFSCALEFLAGS = layout.offsetof(3);
     }
 
+    protected ImuSample(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected ImuSample create(long address, @Nullable ByteBuffer container) {
+        return new ImuSample(address, container);
+    }
+
     /**
      * Creates a {@code ImuSample} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -86,13 +95,13 @@ public class ImuSample extends Struct {
 
     /** Returns a new {@code ImuSample} instance for the specified memory address. */
     public static ImuSample create(long address) {
-        return wrap(ImuSample.class, address);
+        return new ImuSample(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ImuSample createSafe(long address) {
-        return address == NULL ? null : wrap(ImuSample.class, address);
+        return address == NULL ? null : new ImuSample(address, null);
     }
 
     /**
@@ -102,13 +111,13 @@ public class ImuSample extends Struct {
      * @param capacity the buffer capacity
      */
     public static ImuSample.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ImuSample.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -132,9 +141,9 @@ public class ImuSample extends Struct {
         /**
          * Creates a new {@code ImuSample.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link ImuSample#SIZEOF}, and its mark will be undefined.
+         * by {@link ImuSample#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

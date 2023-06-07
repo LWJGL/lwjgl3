@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t {@link #varying}[4000];
  * }</code></pre>
  */
-public class XrEventDataBuffer extends Struct implements NativeResource {
+public class XrEventDataBuffer extends Struct<XrEventDataBuffer> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -66,6 +66,15 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         VARYING = layout.offsetof(2);
+    }
+
+    protected XrEventDataBuffer(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrEventDataBuffer create(long address, @Nullable ByteBuffer container) {
+        return new XrEventDataBuffer(address, container);
     }
 
     /**
@@ -134,29 +143,29 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
 
     /** Returns a new {@code XrEventDataBuffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrEventDataBuffer malloc() {
-        return wrap(XrEventDataBuffer.class, nmemAllocChecked(SIZEOF));
+        return new XrEventDataBuffer(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrEventDataBuffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrEventDataBuffer calloc() {
-        return wrap(XrEventDataBuffer.class, nmemCallocChecked(1, SIZEOF));
+        return new XrEventDataBuffer(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrEventDataBuffer} instance allocated with {@link BufferUtils}. */
     public static XrEventDataBuffer create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrEventDataBuffer.class, memAddress(container), container);
+        return new XrEventDataBuffer(memAddress(container), container);
     }
 
     /** Returns a new {@code XrEventDataBuffer} instance for the specified memory address. */
     public static XrEventDataBuffer create(long address) {
-        return wrap(XrEventDataBuffer.class, address);
+        return new XrEventDataBuffer(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrEventDataBuffer createSafe(long address) {
-        return address == NULL ? null : wrap(XrEventDataBuffer.class, address);
+        return address == NULL ? null : new XrEventDataBuffer(address, null);
     }
 
     /**
@@ -165,7 +174,7 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrEventDataBuffer.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -174,7 +183,7 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrEventDataBuffer.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -184,7 +193,7 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
      */
     public static XrEventDataBuffer.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -194,13 +203,13 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrEventDataBuffer.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrEventDataBuffer.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -209,7 +218,7 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrEventDataBuffer malloc(MemoryStack stack) {
-        return wrap(XrEventDataBuffer.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrEventDataBuffer(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -218,7 +227,7 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrEventDataBuffer calloc(MemoryStack stack) {
-        return wrap(XrEventDataBuffer.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrEventDataBuffer(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -228,7 +237,7 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrEventDataBuffer.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -238,7 +247,7 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrEventDataBuffer.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -278,9 +287,9 @@ public class XrEventDataBuffer extends Struct implements NativeResource {
         /**
          * Creates a new {@code XrEventDataBuffer.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrEventDataBuffer#SIZEOF}, and its mark will be undefined.
+         * by {@link XrEventDataBuffer#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

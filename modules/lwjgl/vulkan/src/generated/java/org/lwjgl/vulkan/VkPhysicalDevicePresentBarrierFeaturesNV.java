@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #presentBarrier};
  * }</code></pre>
  */
-public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements NativeResource {
+public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct<VkPhysicalDevicePresentBarrierFeaturesNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         PRESENTBARRIER = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDevicePresentBarrierFeaturesNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDevicePresentBarrierFeaturesNV create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDevicePresentBarrierFeaturesNV(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
 
     /** Returns a new {@code VkPhysicalDevicePresentBarrierFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevicePresentBarrierFeaturesNV malloc() {
-        return wrap(VkPhysicalDevicePresentBarrierFeaturesNV.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDevicePresentBarrierFeaturesNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDevicePresentBarrierFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDevicePresentBarrierFeaturesNV calloc() {
-        return wrap(VkPhysicalDevicePresentBarrierFeaturesNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDevicePresentBarrierFeaturesNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDevicePresentBarrierFeaturesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDevicePresentBarrierFeaturesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDevicePresentBarrierFeaturesNV.class, memAddress(container), container);
+        return new VkPhysicalDevicePresentBarrierFeaturesNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDevicePresentBarrierFeaturesNV} instance for the specified memory address. */
     public static VkPhysicalDevicePresentBarrierFeaturesNV create(long address) {
-        return wrap(VkPhysicalDevicePresentBarrierFeaturesNV.class, address);
+        return new VkPhysicalDevicePresentBarrierFeaturesNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePresentBarrierFeaturesNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDevicePresentBarrierFeaturesNV.class, address);
+        return address == NULL ? null : new VkPhysicalDevicePresentBarrierFeaturesNV(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePresentBarrierFeaturesNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePresentBarrierFeaturesNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
      */
     public static VkPhysicalDevicePresentBarrierFeaturesNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePresentBarrierFeaturesNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDevicePresentBarrierFeaturesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevicePresentBarrierFeaturesNV malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDevicePresentBarrierFeaturesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDevicePresentBarrierFeaturesNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDevicePresentBarrierFeaturesNV calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDevicePresentBarrierFeaturesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDevicePresentBarrierFeaturesNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePresentBarrierFeaturesNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDevicePresentBarrierFeaturesNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkPhysicalDevicePresentBarrierFeaturesNV extends Struct implements 
         /**
          * Creates a new {@code VkPhysicalDevicePresentBarrierFeaturesNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDevicePresentBarrierFeaturesNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDevicePresentBarrierFeaturesNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

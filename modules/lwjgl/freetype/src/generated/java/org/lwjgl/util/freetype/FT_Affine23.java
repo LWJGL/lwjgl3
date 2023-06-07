@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Fixed dy;
  * }</code></pre>
  */
-public class FT_Affine23 extends Struct {
+public class FT_Affine23 extends Struct<FT_Affine23> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class FT_Affine23 extends Struct {
         YX = layout.offsetof(3);
         YY = layout.offsetof(4);
         DY = layout.offsetof(5);
+    }
+
+    protected FT_Affine23(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FT_Affine23 create(long address, @Nullable ByteBuffer container) {
+        return new FT_Affine23(address, container);
     }
 
     /**
@@ -102,13 +111,13 @@ public class FT_Affine23 extends Struct {
 
     /** Returns a new {@code FT_Affine23} instance for the specified memory address. */
     public static FT_Affine23 create(long address) {
-        return wrap(FT_Affine23.class, address);
+        return new FT_Affine23(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_Affine23 createSafe(long address) {
-        return address == NULL ? null : wrap(FT_Affine23.class, address);
+        return address == NULL ? null : new FT_Affine23(address, null);
     }
 
     /**
@@ -118,13 +127,13 @@ public class FT_Affine23 extends Struct {
      * @param capacity the buffer capacity
      */
     public static FT_Affine23.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_Affine23.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -152,9 +161,9 @@ public class FT_Affine23 extends Struct {
         /**
          * Creates a new {@code FT_Affine23.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FT_Affine23#SIZEOF}, and its mark will be undefined.
+         * by {@link FT_Affine23#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

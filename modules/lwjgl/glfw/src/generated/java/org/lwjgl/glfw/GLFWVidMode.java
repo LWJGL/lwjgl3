@@ -29,7 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct GLFWvidmode")
-public class GLFWVidMode extends Struct {
+public class GLFWVidMode extends Struct<GLFWVidMode> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -67,6 +67,15 @@ public class GLFWVidMode extends Struct {
         REFRESHRATE = layout.offsetof(5);
     }
 
+    protected GLFWVidMode(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected GLFWVidMode create(long address, @Nullable ByteBuffer container) {
+        return new GLFWVidMode(address, container);
+    }
+
     /**
      * Creates a {@code GLFWVidMode} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -97,13 +106,13 @@ public class GLFWVidMode extends Struct {
 
     /** Returns a new {@code GLFWVidMode} instance for the specified memory address. */
     public static GLFWVidMode create(long address) {
-        return wrap(GLFWVidMode.class, address);
+        return new GLFWVidMode(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static GLFWVidMode createSafe(long address) {
-        return address == NULL ? null : wrap(GLFWVidMode.class, address);
+        return address == NULL ? null : new GLFWVidMode(address, null);
     }
 
     /**
@@ -113,13 +122,13 @@ public class GLFWVidMode extends Struct {
      * @param capacity the buffer capacity
      */
     public static GLFWVidMode.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static GLFWVidMode.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -147,9 +156,9 @@ public class GLFWVidMode extends Struct {
         /**
          * Creates a new {@code GLFWVidMode.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link GLFWVidMode#SIZEOF}, and its mark will be undefined.
+         * by {@link GLFWVidMode#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

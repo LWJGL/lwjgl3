@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #attachmentFeedbackLoopDynamicState};
  * }</code></pre>
  */
-public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT extends Struct<VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         ATTACHMENTFEEDBACKLOOPDYNAMICSTATE = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
 
     /** Returns a new {@code VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.class, address);
+        return new VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT exten
         /**
          * Creates a new {@code VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

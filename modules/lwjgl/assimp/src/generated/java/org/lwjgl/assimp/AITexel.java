@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct aiTexel")
-public class AITexel extends Struct {
+public class AITexel extends Struct<AITexel> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -57,6 +57,15 @@ public class AITexel extends Struct {
         G = layout.offsetof(1);
         R = layout.offsetof(2);
         A = layout.offsetof(3);
+    }
+
+    protected AITexel(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected AITexel create(long address, @Nullable ByteBuffer container) {
+        return new AITexel(address, container);
     }
 
     /**
@@ -89,13 +98,13 @@ public class AITexel extends Struct {
 
     /** Returns a new {@code AITexel} instance for the specified memory address. */
     public static AITexel create(long address) {
-        return wrap(AITexel.class, address);
+        return new AITexel(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AITexel createSafe(long address) {
-        return address == NULL ? null : wrap(AITexel.class, address);
+        return address == NULL ? null : new AITexel(address, null);
     }
 
     /**
@@ -105,13 +114,13 @@ public class AITexel extends Struct {
      * @param capacity the buffer capacity
      */
     public static AITexel.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static AITexel.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -135,9 +144,9 @@ public class AITexel extends Struct {
         /**
          * Creates a new {@code AITexel.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link AITexel#SIZEOF}, and its mark will be undefined.
+         * by {@link AITexel#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct cl_device_pci_bus_info_khr")
-public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
+public class CLDevicePCIBusInfoKHR extends Struct<CLDevicePCIBusInfoKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -57,6 +57,15 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
         PCI_BUS = layout.offsetof(1);
         PCI_DEVICE = layout.offsetof(2);
         PCI_FUNCTION = layout.offsetof(3);
+    }
+
+    protected CLDevicePCIBusInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CLDevicePCIBusInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new CLDevicePCIBusInfoKHR(address, container);
     }
 
     /**
@@ -89,29 +98,29 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
 
     /** Returns a new {@code CLDevicePCIBusInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CLDevicePCIBusInfoKHR malloc() {
-        return wrap(CLDevicePCIBusInfoKHR.class, nmemAllocChecked(SIZEOF));
+        return new CLDevicePCIBusInfoKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code CLDevicePCIBusInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CLDevicePCIBusInfoKHR calloc() {
-        return wrap(CLDevicePCIBusInfoKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new CLDevicePCIBusInfoKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code CLDevicePCIBusInfoKHR} instance allocated with {@link BufferUtils}. */
     public static CLDevicePCIBusInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(CLDevicePCIBusInfoKHR.class, memAddress(container), container);
+        return new CLDevicePCIBusInfoKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code CLDevicePCIBusInfoKHR} instance for the specified memory address. */
     public static CLDevicePCIBusInfoKHR create(long address) {
-        return wrap(CLDevicePCIBusInfoKHR.class, address);
+        return new CLDevicePCIBusInfoKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CLDevicePCIBusInfoKHR createSafe(long address) {
-        return address == NULL ? null : wrap(CLDevicePCIBusInfoKHR.class, address);
+        return address == NULL ? null : new CLDevicePCIBusInfoKHR(address, null);
     }
 
     /**
@@ -120,7 +129,7 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDevicePCIBusInfoKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -129,7 +138,7 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDevicePCIBusInfoKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -139,7 +148,7 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
      */
     public static CLDevicePCIBusInfoKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -149,13 +158,13 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDevicePCIBusInfoKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CLDevicePCIBusInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -164,7 +173,7 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CLDevicePCIBusInfoKHR malloc(MemoryStack stack) {
-        return wrap(CLDevicePCIBusInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new CLDevicePCIBusInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -173,7 +182,7 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static CLDevicePCIBusInfoKHR calloc(MemoryStack stack) {
-        return wrap(CLDevicePCIBusInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new CLDevicePCIBusInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -183,7 +192,7 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDevicePCIBusInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -193,7 +202,7 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static CLDevicePCIBusInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -217,9 +226,9 @@ public class CLDevicePCIBusInfoKHR extends Struct implements NativeResource {
         /**
          * Creates a new {@code CLDevicePCIBusInfoKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CLDevicePCIBusInfoKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link CLDevicePCIBusInfoKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

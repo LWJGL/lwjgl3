@@ -41,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkIndexType {@link #indexType};
  * }</code></pre>
  */
-public class VkBindIndexBufferIndirectCommandNV extends Struct implements NativeResource {
+public class VkBindIndexBufferIndirectCommandNV extends Struct<VkBindIndexBufferIndirectCommandNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -68,6 +68,15 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
         BUFFERADDRESS = layout.offsetof(0);
         SIZE = layout.offsetof(1);
         INDEXTYPE = layout.offsetof(2);
+    }
+
+    protected VkBindIndexBufferIndirectCommandNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkBindIndexBufferIndirectCommandNV create(long address, @Nullable ByteBuffer container) {
+        return new VkBindIndexBufferIndirectCommandNV(address, container);
     }
 
     /**
@@ -129,29 +138,29 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
 
     /** Returns a new {@code VkBindIndexBufferIndirectCommandNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBindIndexBufferIndirectCommandNV malloc() {
-        return wrap(VkBindIndexBufferIndirectCommandNV.class, nmemAllocChecked(SIZEOF));
+        return new VkBindIndexBufferIndirectCommandNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkBindIndexBufferIndirectCommandNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBindIndexBufferIndirectCommandNV calloc() {
-        return wrap(VkBindIndexBufferIndirectCommandNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkBindIndexBufferIndirectCommandNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkBindIndexBufferIndirectCommandNV} instance allocated with {@link BufferUtils}. */
     public static VkBindIndexBufferIndirectCommandNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkBindIndexBufferIndirectCommandNV.class, memAddress(container), container);
+        return new VkBindIndexBufferIndirectCommandNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkBindIndexBufferIndirectCommandNV} instance for the specified memory address. */
     public static VkBindIndexBufferIndirectCommandNV create(long address) {
-        return wrap(VkBindIndexBufferIndirectCommandNV.class, address);
+        return new VkBindIndexBufferIndirectCommandNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBindIndexBufferIndirectCommandNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkBindIndexBufferIndirectCommandNV.class, address);
+        return address == NULL ? null : new VkBindIndexBufferIndirectCommandNV(address, null);
     }
 
     /**
@@ -160,7 +169,7 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkBindIndexBufferIndirectCommandNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -169,7 +178,7 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkBindIndexBufferIndirectCommandNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -179,7 +188,7 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
      */
     public static VkBindIndexBufferIndirectCommandNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -189,13 +198,13 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkBindIndexBufferIndirectCommandNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBindIndexBufferIndirectCommandNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -204,7 +213,7 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkBindIndexBufferIndirectCommandNV malloc(MemoryStack stack) {
-        return wrap(VkBindIndexBufferIndirectCommandNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkBindIndexBufferIndirectCommandNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -213,7 +222,7 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
      * @param stack the stack from which to allocate
      */
     public static VkBindIndexBufferIndirectCommandNV calloc(MemoryStack stack) {
-        return wrap(VkBindIndexBufferIndirectCommandNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkBindIndexBufferIndirectCommandNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -223,7 +232,7 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkBindIndexBufferIndirectCommandNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -233,7 +242,7 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
      * @param capacity the buffer capacity
      */
     public static VkBindIndexBufferIndirectCommandNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -262,9 +271,9 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct implements Native
         /**
          * Creates a new {@code VkBindIndexBufferIndirectCommandNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkBindIndexBufferIndirectCommandNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkBindIndexBufferIndirectCommandNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

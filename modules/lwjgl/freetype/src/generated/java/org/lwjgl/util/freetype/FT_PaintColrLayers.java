@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link FT_LayerIterator FT_LayerIterator} layer_iterator;
  * }</code></pre>
  */
-public class FT_PaintColrLayers extends Struct {
+public class FT_PaintColrLayers extends Struct<FT_PaintColrLayers> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -46,6 +46,15 @@ public class FT_PaintColrLayers extends Struct {
         LAYER_ITERATOR = layout.offsetof(0);
     }
 
+    protected FT_PaintColrLayers(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FT_PaintColrLayers create(long address, @Nullable ByteBuffer container) {
+        return new FT_PaintColrLayers(address, container);
+    }
+
     /**
      * Creates a {@code FT_PaintColrLayers} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -66,13 +75,13 @@ public class FT_PaintColrLayers extends Struct {
 
     /** Returns a new {@code FT_PaintColrLayers} instance for the specified memory address. */
     public static FT_PaintColrLayers create(long address) {
-        return wrap(FT_PaintColrLayers.class, address);
+        return new FT_PaintColrLayers(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_PaintColrLayers createSafe(long address) {
-        return address == NULL ? null : wrap(FT_PaintColrLayers.class, address);
+        return address == NULL ? null : new FT_PaintColrLayers(address, null);
     }
 
     /**
@@ -82,13 +91,13 @@ public class FT_PaintColrLayers extends Struct {
      * @param capacity the buffer capacity
      */
     public static FT_PaintColrLayers.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_PaintColrLayers.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -106,9 +115,9 @@ public class FT_PaintColrLayers extends Struct {
         /**
          * Creates a new {@code FT_PaintColrLayers.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FT_PaintColrLayers#SIZEOF}, and its mark will be undefined.
+         * by {@link FT_PaintColrLayers#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

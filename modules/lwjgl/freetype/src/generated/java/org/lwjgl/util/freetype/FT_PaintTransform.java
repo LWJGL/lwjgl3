@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link FT_Affine23 FT_Affine23} affine;
  * }</code></pre>
  */
-public class FT_PaintTransform extends Struct {
+public class FT_PaintTransform extends Struct<FT_PaintTransform> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -50,6 +50,15 @@ public class FT_PaintTransform extends Struct {
         AFFINE = layout.offsetof(1);
     }
 
+    protected FT_PaintTransform(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FT_PaintTransform create(long address, @Nullable ByteBuffer container) {
+        return new FT_PaintTransform(address, container);
+    }
+
     /**
      * Creates a {@code FT_PaintTransform} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -73,13 +82,13 @@ public class FT_PaintTransform extends Struct {
 
     /** Returns a new {@code FT_PaintTransform} instance for the specified memory address. */
     public static FT_PaintTransform create(long address) {
-        return wrap(FT_PaintTransform.class, address);
+        return new FT_PaintTransform(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_PaintTransform createSafe(long address) {
-        return address == NULL ? null : wrap(FT_PaintTransform.class, address);
+        return address == NULL ? null : new FT_PaintTransform(address, null);
     }
 
     /**
@@ -89,13 +98,13 @@ public class FT_PaintTransform extends Struct {
      * @param capacity the buffer capacity
      */
     public static FT_PaintTransform.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_PaintTransform.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -115,9 +124,9 @@ public class FT_PaintTransform extends Struct {
         /**
          * Creates a new {@code FT_PaintTransform.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FT_PaintTransform#SIZEOF}, and its mark will be undefined.
+         * by {@link FT_PaintTransform#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

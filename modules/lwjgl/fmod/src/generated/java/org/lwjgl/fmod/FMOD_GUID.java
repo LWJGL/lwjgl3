@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned char Data4[8];
  * }</code></pre>
  */
-public class FMOD_GUID extends Struct implements NativeResource {
+public class FMOD_GUID extends Struct<FMOD_GUID> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -57,6 +57,15 @@ public class FMOD_GUID extends Struct implements NativeResource {
         DATA2 = layout.offsetof(1);
         DATA3 = layout.offsetof(2);
         DATA4 = layout.offsetof(3);
+    }
+
+    protected FMOD_GUID(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FMOD_GUID create(long address, @Nullable ByteBuffer container) {
+        return new FMOD_GUID(address, container);
     }
 
     /**
@@ -130,29 +139,29 @@ public class FMOD_GUID extends Struct implements NativeResource {
 
     /** Returns a new {@code FMOD_GUID} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static FMOD_GUID malloc() {
-        return wrap(FMOD_GUID.class, nmemAllocChecked(SIZEOF));
+        return new FMOD_GUID(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code FMOD_GUID} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static FMOD_GUID calloc() {
-        return wrap(FMOD_GUID.class, nmemCallocChecked(1, SIZEOF));
+        return new FMOD_GUID(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code FMOD_GUID} instance allocated with {@link BufferUtils}. */
     public static FMOD_GUID create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(FMOD_GUID.class, memAddress(container), container);
+        return new FMOD_GUID(memAddress(container), container);
     }
 
     /** Returns a new {@code FMOD_GUID} instance for the specified memory address. */
     public static FMOD_GUID create(long address) {
-        return wrap(FMOD_GUID.class, address);
+        return new FMOD_GUID(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FMOD_GUID createSafe(long address) {
-        return address == NULL ? null : wrap(FMOD_GUID.class, address);
+        return address == NULL ? null : new FMOD_GUID(address, null);
     }
 
     /**
@@ -161,7 +170,7 @@ public class FMOD_GUID extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FMOD_GUID.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -170,7 +179,7 @@ public class FMOD_GUID extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FMOD_GUID.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -180,7 +189,7 @@ public class FMOD_GUID extends Struct implements NativeResource {
      */
     public static FMOD_GUID.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -190,13 +199,13 @@ public class FMOD_GUID extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FMOD_GUID.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FMOD_GUID.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -205,7 +214,7 @@ public class FMOD_GUID extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static FMOD_GUID malloc(MemoryStack stack) {
-        return wrap(FMOD_GUID.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new FMOD_GUID(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -214,7 +223,7 @@ public class FMOD_GUID extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static FMOD_GUID calloc(MemoryStack stack) {
-        return wrap(FMOD_GUID.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new FMOD_GUID(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -224,7 +233,7 @@ public class FMOD_GUID extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FMOD_GUID.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -234,7 +243,7 @@ public class FMOD_GUID extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static FMOD_GUID.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -278,9 +287,9 @@ public class FMOD_GUID extends Struct implements NativeResource {
         /**
          * Creates a new {@code FMOD_GUID.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FMOD_GUID#SIZEOF}, and its mark will be undefined.
+         * by {@link FMOD_GUID#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float {@link #maxFarZ};
  * }</code></pre>
  */
-public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeResource {
+public class XrViewConfigurationDepthRangeEXT extends Struct<XrViewConfigurationDepthRangeEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -82,6 +82,15 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
         MINNEARZ = layout.offsetof(3);
         RECOMMENDEDFARZ = layout.offsetof(4);
         MAXFARZ = layout.offsetof(5);
+    }
+
+    protected XrViewConfigurationDepthRangeEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrViewConfigurationDepthRangeEXT create(long address, @Nullable ByteBuffer container) {
+        return new XrViewConfigurationDepthRangeEXT(address, container);
     }
 
     /**
@@ -162,29 +171,29 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
 
     /** Returns a new {@code XrViewConfigurationDepthRangeEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrViewConfigurationDepthRangeEXT malloc() {
-        return wrap(XrViewConfigurationDepthRangeEXT.class, nmemAllocChecked(SIZEOF));
+        return new XrViewConfigurationDepthRangeEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrViewConfigurationDepthRangeEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrViewConfigurationDepthRangeEXT calloc() {
-        return wrap(XrViewConfigurationDepthRangeEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new XrViewConfigurationDepthRangeEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrViewConfigurationDepthRangeEXT} instance allocated with {@link BufferUtils}. */
     public static XrViewConfigurationDepthRangeEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrViewConfigurationDepthRangeEXT.class, memAddress(container), container);
+        return new XrViewConfigurationDepthRangeEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code XrViewConfigurationDepthRangeEXT} instance for the specified memory address. */
     public static XrViewConfigurationDepthRangeEXT create(long address) {
-        return wrap(XrViewConfigurationDepthRangeEXT.class, address);
+        return new XrViewConfigurationDepthRangeEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrViewConfigurationDepthRangeEXT createSafe(long address) {
-        return address == NULL ? null : wrap(XrViewConfigurationDepthRangeEXT.class, address);
+        return address == NULL ? null : new XrViewConfigurationDepthRangeEXT(address, null);
     }
 
     /**
@@ -193,7 +202,7 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static XrViewConfigurationDepthRangeEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static XrViewConfigurationDepthRangeEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -212,7 +221,7 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
      */
     public static XrViewConfigurationDepthRangeEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -222,13 +231,13 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static XrViewConfigurationDepthRangeEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrViewConfigurationDepthRangeEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -237,7 +246,7 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static XrViewConfigurationDepthRangeEXT malloc(MemoryStack stack) {
-        return wrap(XrViewConfigurationDepthRangeEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrViewConfigurationDepthRangeEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -246,7 +255,7 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static XrViewConfigurationDepthRangeEXT calloc(MemoryStack stack) {
-        return wrap(XrViewConfigurationDepthRangeEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrViewConfigurationDepthRangeEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -256,7 +265,7 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static XrViewConfigurationDepthRangeEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -266,7 +275,7 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static XrViewConfigurationDepthRangeEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -307,9 +316,9 @@ public class XrViewConfigurationDepthRangeEXT extends Struct implements NativeRe
         /**
          * Creates a new {@code XrViewConfigurationDepthRangeEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrViewConfigurationDepthRangeEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link XrViewConfigurationDepthRangeEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

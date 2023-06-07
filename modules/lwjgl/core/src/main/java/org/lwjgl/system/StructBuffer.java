@@ -14,7 +14,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Base class of struct custom buffers. */
-public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T, SELF>> extends CustomBuffer<SELF> implements Iterable<T> {
+public abstract class StructBuffer<T extends Struct<T>, SELF extends StructBuffer<T, SELF>> extends CustomBuffer<SELF> implements Iterable<T> {
 
     protected StructBuffer(ByteBuffer container, int remaining) {
         super(memAddress(container), container, -1, 0, remaining, remaining);
@@ -40,7 +40,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
     public T get() {
-        return getElementFactory().wrap(address, nextGetIndex(), container);
+        T factory = getElementFactory();
+        return factory.create(address + Integer.toUnsignedLong(nextGetIndex()) * factory.sizeof(), container);
     }
 
     /**
@@ -87,7 +88,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
      * @throws IndexOutOfBoundsException If {@code index} is negative or not smaller than the buffer's limit
      */
     public T get(int index) {
-        return getElementFactory().wrap(address, check(index, limit), container);
+        T factory = getElementFactory();
+        return factory.create(address + Integer.toUnsignedLong(check(index, limit)) * factory.sizeof(), container);
     }
 
     /**
@@ -164,7 +166,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
     // This class is static to avoid capturing the StructBuffer instance. Hotspot trivially marks the instance
     // as escaping when this happens, even if the iterator instance is not escaping and scalar replaced. This
     // is not a problem on Graal. Also, see JDK-8166840.
-    private static class StructIterator<T extends Struct, SELF extends StructBuffer<T, SELF>> implements Iterator<T> {
+    private static class StructIterator<T extends Struct<T>> implements Iterator<T> {
         private long address;
 
         @Nullable
@@ -191,15 +193,15 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
             if (CHECKS && fence <= index) {
                 throw new NoSuchElementException();
             }
-            return factory.wrap(address, index++, container);
+            return factory.create(address + Integer.toUnsignedLong(index++) * factory.sizeof(), container);
         }
 
         @Override public void forEachRemaining(Consumer<? super T> action) {
             Objects.requireNonNull(action);
             int i = index;
             try {
-                for (; i < fence; i++) {
-                    action.accept(factory.<T>wrap(address, i, container));
+                for (int sizeof = factory.sizeof(); i < fence; i++) {
+                    action.accept(factory.create(address + Integer.toUnsignedLong(i) * sizeof, container));
                 }
             } finally {
                 index = i;
@@ -211,8 +213,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
     public void forEach(Consumer<? super T> action) {
         Objects.requireNonNull(action);
         T factory = getElementFactory();
-        for (int i = position, fence = limit; i < fence; i++) {
-            action.accept(factory.<T>wrap(address, i, container));
+        for (int i = position, fence = limit, sizeof = factory.sizeof(); i < fence; i++) {
+            action.accept(factory.create(address + Integer.toUnsignedLong(i) * sizeof(), container));
         }
     }
 
@@ -221,7 +223,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
         return new StructSpliterator<>(address, container, getElementFactory(), position, limit);
     }
 
-    private static class StructSpliterator<T extends Struct, SELF extends StructBuffer<T, SELF>> implements Spliterator<T> {
+    private static class StructSpliterator<T extends Struct<T>> implements Spliterator<T> {
         private long address;
 
         @Nullable
@@ -245,7 +247,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
             Objects.requireNonNull(action);
 
             if (index < fence) {
-                action.accept(factory.<T>wrap(address, index++, container));
+                action.accept(factory.create(address + Integer.toUnsignedLong(index++) * factory.sizeof(), container));
                 return true;
             }
 
@@ -278,8 +280,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
             Objects.requireNonNull(action);
             int i = index;
             try {
-                for (; i < fence; i++) {
-                    action.accept(factory.<T>wrap(address, i, container));
+                for (int sizeof = factory.sizeof(); i < fence; i++) {
+                    action.accept(factory.create(address + Integer.toUnsignedLong(i) * sizeof, container));
                 }
             } finally {
                 index = i;

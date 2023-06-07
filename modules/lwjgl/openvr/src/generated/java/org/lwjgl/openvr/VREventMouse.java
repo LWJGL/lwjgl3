@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct VREvent_Mouse_t")
-public class VREventMouse extends Struct {
+public class VREventMouse extends Struct<VREventMouse> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -55,6 +55,15 @@ public class VREventMouse extends Struct {
         BUTTON = layout.offsetof(2);
     }
 
+    protected VREventMouse(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VREventMouse create(long address, @Nullable ByteBuffer container) {
+        return new VREventMouse(address, container);
+    }
+
     /**
      * Creates a {@code VREventMouse} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -80,13 +89,13 @@ public class VREventMouse extends Struct {
 
     /** Returns a new {@code VREventMouse} instance for the specified memory address. */
     public static VREventMouse create(long address) {
-        return wrap(VREventMouse.class, address);
+        return new VREventMouse(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventMouse createSafe(long address) {
-        return address == NULL ? null : wrap(VREventMouse.class, address);
+        return address == NULL ? null : new VREventMouse(address, null);
     }
 
     /**
@@ -96,13 +105,13 @@ public class VREventMouse extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventMouse.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventMouse.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -124,9 +133,9 @@ public class VREventMouse extends Struct {
         /**
          * Creates a new {@code VREventMouse.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VREventMouse#SIZEOF}, and its mark will be undefined.
+         * by {@link VREventMouse#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

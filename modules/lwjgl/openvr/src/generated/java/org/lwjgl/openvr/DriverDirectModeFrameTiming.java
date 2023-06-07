@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct DriverDirectMode_FrameTiming")
-public class DriverDirectModeFrameTiming extends Struct {
+public class DriverDirectModeFrameTiming extends Struct<DriverDirectModeFrameTiming> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -61,6 +61,15 @@ public class DriverDirectModeFrameTiming extends Struct {
         M_NNUMMISPRESENTED = layout.offsetof(2);
         M_NNUMDROPPEDFRAMES = layout.offsetof(3);
         M_NREPROJECTIONFLAGS = layout.offsetof(4);
+    }
+
+    protected DriverDirectModeFrameTiming(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected DriverDirectModeFrameTiming create(long address, @Nullable ByteBuffer container) {
+        return new DriverDirectModeFrameTiming(address, container);
     }
 
     /**
@@ -96,13 +105,13 @@ public class DriverDirectModeFrameTiming extends Struct {
 
     /** Returns a new {@code DriverDirectModeFrameTiming} instance for the specified memory address. */
     public static DriverDirectModeFrameTiming create(long address) {
-        return wrap(DriverDirectModeFrameTiming.class, address);
+        return new DriverDirectModeFrameTiming(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DriverDirectModeFrameTiming createSafe(long address) {
-        return address == NULL ? null : wrap(DriverDirectModeFrameTiming.class, address);
+        return address == NULL ? null : new DriverDirectModeFrameTiming(address, null);
     }
 
     /**
@@ -112,13 +121,13 @@ public class DriverDirectModeFrameTiming extends Struct {
      * @param capacity the buffer capacity
      */
     public static DriverDirectModeFrameTiming.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static DriverDirectModeFrameTiming.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -144,9 +153,9 @@ public class DriverDirectModeFrameTiming extends Struct {
         /**
          * Creates a new {@code DriverDirectModeFrameTiming.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link DriverDirectModeFrameTiming#SIZEOF}, and its mark will be undefined.
+         * by {@link DriverDirectModeFrameTiming#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

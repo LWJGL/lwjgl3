@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     int {@link #isImplicit};
  * }</code></pre>
  */
-public class CXIdxImportedASTFileInfo extends Struct {
+public class CXIdxImportedASTFileInfo extends Struct<CXIdxImportedASTFileInfo> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -58,6 +58,15 @@ public class CXIdxImportedASTFileInfo extends Struct {
         ISIMPLICIT = layout.offsetof(3);
     }
 
+    protected CXIdxImportedASTFileInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CXIdxImportedASTFileInfo create(long address, @Nullable ByteBuffer container) {
+        return new CXIdxImportedASTFileInfo(address, container);
+    }
+
     /**
      * Creates a {@code CXIdxImportedASTFileInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -87,13 +96,13 @@ public class CXIdxImportedASTFileInfo extends Struct {
 
     /** Returns a new {@code CXIdxImportedASTFileInfo} instance for the specified memory address. */
     public static CXIdxImportedASTFileInfo create(long address) {
-        return wrap(CXIdxImportedASTFileInfo.class, address);
+        return new CXIdxImportedASTFileInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CXIdxImportedASTFileInfo createSafe(long address) {
-        return address == NULL ? null : wrap(CXIdxImportedASTFileInfo.class, address);
+        return address == NULL ? null : new CXIdxImportedASTFileInfo(address, null);
     }
 
     /**
@@ -103,13 +112,13 @@ public class CXIdxImportedASTFileInfo extends Struct {
      * @param capacity the buffer capacity
      */
     public static CXIdxImportedASTFileInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CXIdxImportedASTFileInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -133,9 +142,9 @@ public class CXIdxImportedASTFileInfo extends Struct {
         /**
          * Creates a new {@code CXIdxImportedASTFileInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CXIdxImportedASTFileInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link CXIdxImportedASTFileInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

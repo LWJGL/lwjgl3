@@ -36,7 +36,7 @@ import static org.lwjgl.util.lz4.LZ4HC.*;
  * }</code></pre>
  */
 @NativeType("struct LZ4HC_CCtx_internal")
-public class LZ4HCCCtxInternal extends Struct {
+public class LZ4HCCCtxInternal extends Struct<LZ4HCCCtxInternal> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -90,6 +90,15 @@ public class LZ4HCCCtxInternal extends Struct {
         FAVORDECSPEED = layout.offsetof(9);
         DIRTY = layout.offsetof(10);
         DICTCTX = layout.offsetof(11);
+    }
+
+    protected LZ4HCCCtxInternal(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected LZ4HCCCtxInternal create(long address, @Nullable ByteBuffer container) {
+        return new LZ4HCCCtxInternal(address, container);
     }
 
     /**
@@ -163,13 +172,13 @@ public class LZ4HCCCtxInternal extends Struct {
 
     /** Returns a new {@code LZ4HCCCtxInternal} instance for the specified memory address. */
     public static LZ4HCCCtxInternal create(long address) {
-        return wrap(LZ4HCCCtxInternal.class, address);
+        return new LZ4HCCCtxInternal(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4HCCCtxInternal createSafe(long address) {
-        return address == NULL ? null : wrap(LZ4HCCCtxInternal.class, address);
+        return address == NULL ? null : new LZ4HCCCtxInternal(address, null);
     }
 
     /**
@@ -179,13 +188,13 @@ public class LZ4HCCCtxInternal extends Struct {
      * @param capacity the buffer capacity
      */
     public static LZ4HCCCtxInternal.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4HCCCtxInternal.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -233,9 +242,9 @@ public class LZ4HCCCtxInternal extends Struct {
         /**
          * Creates a new {@code LZ4HCCCtxInternal.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link LZ4HCCCtxInternal#SIZEOF}, and its mark will be undefined.
+         * by {@link LZ4HCCCtxInternal#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -72,7 +72,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkOpticalFlowSessionCreateFlagsNV {@link #flags};
  * }</code></pre>
  */
-public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeResource {
+public class VkOpticalFlowSessionCreateInfoNV extends Struct<VkOpticalFlowSessionCreateInfoNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -123,6 +123,15 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
         HINTGRIDSIZE = layout.offsetof(8);
         PERFORMANCELEVEL = layout.offsetof(9);
         FLAGS = layout.offsetof(10);
+    }
+
+    protected VkOpticalFlowSessionCreateInfoNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkOpticalFlowSessionCreateInfoNV create(long address, @Nullable ByteBuffer container) {
+        return new VkOpticalFlowSessionCreateInfoNV(address, container);
     }
 
     /**
@@ -244,29 +253,29 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
 
     /** Returns a new {@code VkOpticalFlowSessionCreateInfoNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkOpticalFlowSessionCreateInfoNV malloc() {
-        return wrap(VkOpticalFlowSessionCreateInfoNV.class, nmemAllocChecked(SIZEOF));
+        return new VkOpticalFlowSessionCreateInfoNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkOpticalFlowSessionCreateInfoNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkOpticalFlowSessionCreateInfoNV calloc() {
-        return wrap(VkOpticalFlowSessionCreateInfoNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkOpticalFlowSessionCreateInfoNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkOpticalFlowSessionCreateInfoNV} instance allocated with {@link BufferUtils}. */
     public static VkOpticalFlowSessionCreateInfoNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkOpticalFlowSessionCreateInfoNV.class, memAddress(container), container);
+        return new VkOpticalFlowSessionCreateInfoNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkOpticalFlowSessionCreateInfoNV} instance for the specified memory address. */
     public static VkOpticalFlowSessionCreateInfoNV create(long address) {
-        return wrap(VkOpticalFlowSessionCreateInfoNV.class, address);
+        return new VkOpticalFlowSessionCreateInfoNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkOpticalFlowSessionCreateInfoNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkOpticalFlowSessionCreateInfoNV.class, address);
+        return address == NULL ? null : new VkOpticalFlowSessionCreateInfoNV(address, null);
     }
 
     /**
@@ -275,7 +284,7 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkOpticalFlowSessionCreateInfoNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -284,7 +293,7 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkOpticalFlowSessionCreateInfoNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -294,7 +303,7 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
      */
     public static VkOpticalFlowSessionCreateInfoNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -304,13 +313,13 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkOpticalFlowSessionCreateInfoNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkOpticalFlowSessionCreateInfoNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -319,7 +328,7 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkOpticalFlowSessionCreateInfoNV malloc(MemoryStack stack) {
-        return wrap(VkOpticalFlowSessionCreateInfoNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkOpticalFlowSessionCreateInfoNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -328,7 +337,7 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkOpticalFlowSessionCreateInfoNV calloc(MemoryStack stack) {
-        return wrap(VkOpticalFlowSessionCreateInfoNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkOpticalFlowSessionCreateInfoNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -338,7 +347,7 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkOpticalFlowSessionCreateInfoNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -348,7 +357,7 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkOpticalFlowSessionCreateInfoNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -409,9 +418,9 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct implements NativeRe
         /**
          * Creates a new {@code VkOpticalFlowSessionCreateInfoNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkOpticalFlowSessionCreateInfoNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkOpticalFlowSessionCreateInfoNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

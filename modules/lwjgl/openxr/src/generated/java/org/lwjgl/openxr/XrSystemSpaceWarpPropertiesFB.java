@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #recommendedMotionVectorImageRectHeight};
  * }</code></pre>
  */
-public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResource {
+public class XrSystemSpaceWarpPropertiesFB extends Struct<XrSystemSpaceWarpPropertiesFB> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -70,6 +70,15 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
         NEXT = layout.offsetof(1);
         RECOMMENDEDMOTIONVECTORIMAGERECTWIDTH = layout.offsetof(2);
         RECOMMENDEDMOTIONVECTORIMAGERECTHEIGHT = layout.offsetof(3);
+    }
+
+    protected XrSystemSpaceWarpPropertiesFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSystemSpaceWarpPropertiesFB create(long address, @Nullable ByteBuffer container) {
+        return new XrSystemSpaceWarpPropertiesFB(address, container);
     }
 
     /**
@@ -132,29 +141,29 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
 
     /** Returns a new {@code XrSystemSpaceWarpPropertiesFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSystemSpaceWarpPropertiesFB malloc() {
-        return wrap(XrSystemSpaceWarpPropertiesFB.class, nmemAllocChecked(SIZEOF));
+        return new XrSystemSpaceWarpPropertiesFB(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSystemSpaceWarpPropertiesFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSystemSpaceWarpPropertiesFB calloc() {
-        return wrap(XrSystemSpaceWarpPropertiesFB.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSystemSpaceWarpPropertiesFB(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSystemSpaceWarpPropertiesFB} instance allocated with {@link BufferUtils}. */
     public static XrSystemSpaceWarpPropertiesFB create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSystemSpaceWarpPropertiesFB.class, memAddress(container), container);
+        return new XrSystemSpaceWarpPropertiesFB(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSystemSpaceWarpPropertiesFB} instance for the specified memory address. */
     public static XrSystemSpaceWarpPropertiesFB create(long address) {
-        return wrap(XrSystemSpaceWarpPropertiesFB.class, address);
+        return new XrSystemSpaceWarpPropertiesFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSystemSpaceWarpPropertiesFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrSystemSpaceWarpPropertiesFB.class, address);
+        return address == NULL ? null : new XrSystemSpaceWarpPropertiesFB(address, null);
     }
 
     /**
@@ -163,7 +172,7 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrSystemSpaceWarpPropertiesFB.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -172,7 +181,7 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrSystemSpaceWarpPropertiesFB.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -182,7 +191,7 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
      */
     public static XrSystemSpaceWarpPropertiesFB.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -192,13 +201,13 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrSystemSpaceWarpPropertiesFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSystemSpaceWarpPropertiesFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -207,7 +216,7 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static XrSystemSpaceWarpPropertiesFB malloc(MemoryStack stack) {
-        return wrap(XrSystemSpaceWarpPropertiesFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSystemSpaceWarpPropertiesFB(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -216,7 +225,7 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static XrSystemSpaceWarpPropertiesFB calloc(MemoryStack stack) {
-        return wrap(XrSystemSpaceWarpPropertiesFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSystemSpaceWarpPropertiesFB(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -226,7 +235,7 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrSystemSpaceWarpPropertiesFB.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -236,7 +245,7 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrSystemSpaceWarpPropertiesFB.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -265,9 +274,9 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct implements NativeResou
         /**
          * Creates a new {@code XrSystemSpaceWarpPropertiesFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSystemSpaceWarpPropertiesFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSystemSpaceWarpPropertiesFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

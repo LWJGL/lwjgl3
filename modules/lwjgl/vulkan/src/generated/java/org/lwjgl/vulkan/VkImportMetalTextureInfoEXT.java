@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     MTLTexture_id {@link #mtlTexture};
  * }</code></pre>
  */
-public class VkImportMetalTextureInfoEXT extends Struct implements NativeResource {
+public class VkImportMetalTextureInfoEXT extends Struct<VkImportMetalTextureInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -70,6 +70,15 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
         PNEXT = layout.offsetof(1);
         PLANE = layout.offsetof(2);
         MTLTEXTURE = layout.offsetof(3);
+    }
+
+    protected VkImportMetalTextureInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkImportMetalTextureInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkImportMetalTextureInfoEXT(address, container);
     }
 
     /**
@@ -140,29 +149,29 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
 
     /** Returns a new {@code VkImportMetalTextureInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkImportMetalTextureInfoEXT malloc() {
-        return wrap(VkImportMetalTextureInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkImportMetalTextureInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkImportMetalTextureInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkImportMetalTextureInfoEXT calloc() {
-        return wrap(VkImportMetalTextureInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkImportMetalTextureInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkImportMetalTextureInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkImportMetalTextureInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkImportMetalTextureInfoEXT.class, memAddress(container), container);
+        return new VkImportMetalTextureInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkImportMetalTextureInfoEXT} instance for the specified memory address. */
     public static VkImportMetalTextureInfoEXT create(long address) {
-        return wrap(VkImportMetalTextureInfoEXT.class, address);
+        return new VkImportMetalTextureInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImportMetalTextureInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkImportMetalTextureInfoEXT.class, address);
+        return address == NULL ? null : new VkImportMetalTextureInfoEXT(address, null);
     }
 
     /**
@@ -171,7 +180,7 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkImportMetalTextureInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -180,7 +189,7 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkImportMetalTextureInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -190,7 +199,7 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
      */
     public static VkImportMetalTextureInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -200,13 +209,13 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkImportMetalTextureInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkImportMetalTextureInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -215,7 +224,7 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkImportMetalTextureInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkImportMetalTextureInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkImportMetalTextureInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -224,7 +233,7 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
      * @param stack the stack from which to allocate
      */
     public static VkImportMetalTextureInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkImportMetalTextureInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkImportMetalTextureInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -234,7 +243,7 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkImportMetalTextureInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -244,7 +253,7 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
      * @param capacity the buffer capacity
      */
     public static VkImportMetalTextureInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -286,9 +295,9 @@ public class VkImportMetalTextureInfoEXT extends Struct implements NativeResourc
         /**
          * Creates a new {@code VkImportMetalTextureInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkImportMetalTextureInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkImportMetalTextureInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

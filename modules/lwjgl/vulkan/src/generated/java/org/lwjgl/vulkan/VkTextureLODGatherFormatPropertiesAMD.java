@@ -33,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #supportsTextureGatherLODBiasAMD};
  * }</code></pre>
  */
-public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements NativeResource {
+public class VkTextureLODGatherFormatPropertiesAMD extends Struct<VkTextureLODGatherFormatPropertiesAMD> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -60,6 +60,15 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         SUPPORTSTEXTUREGATHERLODBIASAMD = layout.offsetof(2);
+    }
+
+    protected VkTextureLODGatherFormatPropertiesAMD(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkTextureLODGatherFormatPropertiesAMD create(long address, @Nullable ByteBuffer container) {
+        return new VkTextureLODGatherFormatPropertiesAMD(address, container);
     }
 
     /**
@@ -119,29 +128,29 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
 
     /** Returns a new {@code VkTextureLODGatherFormatPropertiesAMD} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkTextureLODGatherFormatPropertiesAMD malloc() {
-        return wrap(VkTextureLODGatherFormatPropertiesAMD.class, nmemAllocChecked(SIZEOF));
+        return new VkTextureLODGatherFormatPropertiesAMD(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkTextureLODGatherFormatPropertiesAMD} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkTextureLODGatherFormatPropertiesAMD calloc() {
-        return wrap(VkTextureLODGatherFormatPropertiesAMD.class, nmemCallocChecked(1, SIZEOF));
+        return new VkTextureLODGatherFormatPropertiesAMD(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkTextureLODGatherFormatPropertiesAMD} instance allocated with {@link BufferUtils}. */
     public static VkTextureLODGatherFormatPropertiesAMD create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkTextureLODGatherFormatPropertiesAMD.class, memAddress(container), container);
+        return new VkTextureLODGatherFormatPropertiesAMD(memAddress(container), container);
     }
 
     /** Returns a new {@code VkTextureLODGatherFormatPropertiesAMD} instance for the specified memory address. */
     public static VkTextureLODGatherFormatPropertiesAMD create(long address) {
-        return wrap(VkTextureLODGatherFormatPropertiesAMD.class, address);
+        return new VkTextureLODGatherFormatPropertiesAMD(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkTextureLODGatherFormatPropertiesAMD createSafe(long address) {
-        return address == NULL ? null : wrap(VkTextureLODGatherFormatPropertiesAMD.class, address);
+        return address == NULL ? null : new VkTextureLODGatherFormatPropertiesAMD(address, null);
     }
 
     /**
@@ -150,7 +159,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkTextureLODGatherFormatPropertiesAMD.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -159,7 +168,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkTextureLODGatherFormatPropertiesAMD.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -169,7 +178,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
      */
     public static VkTextureLODGatherFormatPropertiesAMD.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -179,13 +188,13 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkTextureLODGatherFormatPropertiesAMD.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkTextureLODGatherFormatPropertiesAMD.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -213,7 +222,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static VkTextureLODGatherFormatPropertiesAMD malloc(MemoryStack stack) {
-        return wrap(VkTextureLODGatherFormatPropertiesAMD.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkTextureLODGatherFormatPropertiesAMD(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -222,7 +231,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
      * @param stack the stack from which to allocate
      */
     public static VkTextureLODGatherFormatPropertiesAMD calloc(MemoryStack stack) {
-        return wrap(VkTextureLODGatherFormatPropertiesAMD.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkTextureLODGatherFormatPropertiesAMD(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkTextureLODGatherFormatPropertiesAMD.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -242,7 +251,7 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
      * @param capacity the buffer capacity
      */
     public static VkTextureLODGatherFormatPropertiesAMD.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -269,9 +278,9 @@ public class VkTextureLODGatherFormatPropertiesAMD extends Struct implements Nat
         /**
          * Creates a new {@code VkTextureLODGatherFormatPropertiesAMD.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkTextureLODGatherFormatPropertiesAMD#SIZEOF}, and its mark will be undefined.
+         * by {@link VkTextureLODGatherFormatPropertiesAMD#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

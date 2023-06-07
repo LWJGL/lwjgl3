@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #textureCompressionASTC_HDR};
  * }</code></pre>
  */
-public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct implements NativeResource {
+public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct<VkPhysicalDeviceTextureCompressionASTCHDRFeatures> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         TEXTURECOMPRESSIONASTC_HDR = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceTextureCompressionASTCHDRFeatures(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceTextureCompressionASTCHDRFeatures create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceTextureCompressionASTCHDRFeatures(address, container);
     }
 
     /**
@@ -148,29 +157,29 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
 
     /** Returns a new {@code VkPhysicalDeviceTextureCompressionASTCHDRFeatures} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures malloc() {
-        return wrap(VkPhysicalDeviceTextureCompressionASTCHDRFeatures.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceTextureCompressionASTCHDRFeatures(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceTextureCompressionASTCHDRFeatures} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures calloc() {
-        return wrap(VkPhysicalDeviceTextureCompressionASTCHDRFeatures.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceTextureCompressionASTCHDRFeatures(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceTextureCompressionASTCHDRFeatures} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceTextureCompressionASTCHDRFeatures.class, memAddress(container), container);
+        return new VkPhysicalDeviceTextureCompressionASTCHDRFeatures(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceTextureCompressionASTCHDRFeatures} instance for the specified memory address. */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures create(long address) {
-        return wrap(VkPhysicalDeviceTextureCompressionASTCHDRFeatures.class, address);
+        return new VkPhysicalDeviceTextureCompressionASTCHDRFeatures(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceTextureCompressionASTCHDRFeatures.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceTextureCompressionASTCHDRFeatures(address, null);
     }
 
     /**
@@ -179,7 +188,7 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -188,7 +197,7 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -198,7 +207,7 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
      */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -208,13 +217,13 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -223,7 +232,7 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceTextureCompressionASTCHDRFeatures.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceTextureCompressionASTCHDRFeatures(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceTextureCompressionASTCHDRFeatures.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceTextureCompressionASTCHDRFeatures(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -242,7 +251,7 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -252,7 +261,7 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -281,9 +290,9 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct im
         /**
          * Creates a new {@code VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

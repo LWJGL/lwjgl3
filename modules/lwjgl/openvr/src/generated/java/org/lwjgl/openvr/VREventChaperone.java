@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct VREvent_Chaperone_t")
-public class VREventChaperone extends Struct {
+public class VREventChaperone extends Struct<VREventChaperone> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -47,6 +47,15 @@ public class VREventChaperone extends Struct {
 
         M_NPREVIOUSUNIVERSE = layout.offsetof(0);
         M_NCURRENTUNIVERSE = layout.offsetof(1);
+    }
+
+    protected VREventChaperone(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VREventChaperone create(long address, @Nullable ByteBuffer container) {
+        return new VREventChaperone(address, container);
     }
 
     /**
@@ -73,13 +82,13 @@ public class VREventChaperone extends Struct {
 
     /** Returns a new {@code VREventChaperone} instance for the specified memory address. */
     public static VREventChaperone create(long address) {
-        return wrap(VREventChaperone.class, address);
+        return new VREventChaperone(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventChaperone createSafe(long address) {
-        return address == NULL ? null : wrap(VREventChaperone.class, address);
+        return address == NULL ? null : new VREventChaperone(address, null);
     }
 
     /**
@@ -89,13 +98,13 @@ public class VREventChaperone extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventChaperone.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventChaperone.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -115,9 +124,9 @@ public class VREventChaperone extends Struct {
         /**
          * Creates a new {@code VREventChaperone.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VREventChaperone#SIZEOF}, and its mark will be undefined.
+         * by {@link VREventChaperone#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

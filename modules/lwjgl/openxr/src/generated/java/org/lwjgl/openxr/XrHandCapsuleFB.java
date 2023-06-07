@@ -46,7 +46,7 @@ import static org.lwjgl.openxr.FBHandTrackingCapsules.*;
  *     XrHandJointEXT joint;
  * }</code></pre>
  */
-public class XrHandCapsuleFB extends Struct {
+public class XrHandCapsuleFB extends Struct<XrHandCapsuleFB> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -73,6 +73,15 @@ public class XrHandCapsuleFB extends Struct {
         POINTS = layout.offsetof(0);
         RADIUS = layout.offsetof(1);
         JOINT = layout.offsetof(2);
+    }
+
+    protected XrHandCapsuleFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrHandCapsuleFB create(long address, @Nullable ByteBuffer container) {
+        return new XrHandCapsuleFB(address, container);
     }
 
     /**
@@ -103,13 +112,13 @@ public class XrHandCapsuleFB extends Struct {
 
     /** Returns a new {@code XrHandCapsuleFB} instance for the specified memory address. */
     public static XrHandCapsuleFB create(long address) {
-        return wrap(XrHandCapsuleFB.class, address);
+        return new XrHandCapsuleFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrHandCapsuleFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrHandCapsuleFB.class, address);
+        return address == NULL ? null : new XrHandCapsuleFB(address, null);
     }
 
     /**
@@ -119,13 +128,13 @@ public class XrHandCapsuleFB extends Struct {
      * @param capacity the buffer capacity
      */
     public static XrHandCapsuleFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrHandCapsuleFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -151,9 +160,9 @@ public class XrHandCapsuleFB extends Struct {
         /**
          * Creates a new {@code XrHandCapsuleFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrHandCapsuleFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrHandCapsuleFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

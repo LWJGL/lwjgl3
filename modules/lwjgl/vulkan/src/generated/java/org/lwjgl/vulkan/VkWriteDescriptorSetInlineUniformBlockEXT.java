@@ -31,6 +31,15 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptorSetInlineUniformBlock {
 
+    protected VkWriteDescriptorSetInlineUniformBlockEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkWriteDescriptorSetInlineUniformBlockEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkWriteDescriptorSetInlineUniformBlockEXT(address, container);
+    }
+
     /**
      * Creates a {@code VkWriteDescriptorSetInlineUniformBlockEXT} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -84,29 +93,29 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptor
 
     /** Returns a new {@code VkWriteDescriptorSetInlineUniformBlockEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkWriteDescriptorSetInlineUniformBlockEXT malloc() {
-        return wrap(VkWriteDescriptorSetInlineUniformBlockEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkWriteDescriptorSetInlineUniformBlockEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkWriteDescriptorSetInlineUniformBlockEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkWriteDescriptorSetInlineUniformBlockEXT calloc() {
-        return wrap(VkWriteDescriptorSetInlineUniformBlockEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkWriteDescriptorSetInlineUniformBlockEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkWriteDescriptorSetInlineUniformBlockEXT} instance allocated with {@link BufferUtils}. */
     public static VkWriteDescriptorSetInlineUniformBlockEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkWriteDescriptorSetInlineUniformBlockEXT.class, memAddress(container), container);
+        return new VkWriteDescriptorSetInlineUniformBlockEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkWriteDescriptorSetInlineUniformBlockEXT} instance for the specified memory address. */
     public static VkWriteDescriptorSetInlineUniformBlockEXT create(long address) {
-        return wrap(VkWriteDescriptorSetInlineUniformBlockEXT.class, address);
+        return new VkWriteDescriptorSetInlineUniformBlockEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWriteDescriptorSetInlineUniformBlockEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkWriteDescriptorSetInlineUniformBlockEXT.class, address);
+        return address == NULL ? null : new VkWriteDescriptorSetInlineUniformBlockEXT(address, null);
     }
 
     /**
@@ -115,7 +124,7 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptor
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSetInlineUniformBlockEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -124,7 +133,7 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptor
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSetInlineUniformBlockEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -134,7 +143,7 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptor
      */
     public static VkWriteDescriptorSetInlineUniformBlockEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -144,13 +153,13 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptor
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSetInlineUniformBlockEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWriteDescriptorSetInlineUniformBlockEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -178,7 +187,7 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptor
      * @param stack the stack from which to allocate
      */
     public static VkWriteDescriptorSetInlineUniformBlockEXT malloc(MemoryStack stack) {
-        return wrap(VkWriteDescriptorSetInlineUniformBlockEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkWriteDescriptorSetInlineUniformBlockEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -187,7 +196,7 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptor
      * @param stack the stack from which to allocate
      */
     public static VkWriteDescriptorSetInlineUniformBlockEXT calloc(MemoryStack stack) {
-        return wrap(VkWriteDescriptorSetInlineUniformBlockEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkWriteDescriptorSetInlineUniformBlockEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -197,7 +206,7 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptor
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSetInlineUniformBlockEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -207,7 +216,7 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptor
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSetInlineUniformBlockEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -220,9 +229,9 @@ public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptor
         /**
          * Creates a new {@code VkWriteDescriptorSetInlineUniformBlockEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkWriteDescriptorSetInlineUniformBlockEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkWriteDescriptorSetInlineUniformBlockEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

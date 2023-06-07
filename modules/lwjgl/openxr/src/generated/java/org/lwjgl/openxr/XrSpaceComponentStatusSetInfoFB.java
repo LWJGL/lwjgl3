@@ -46,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrDuration {@link #timeout};
  * }</code></pre>
  */
-public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeResource {
+public class XrSpaceComponentStatusSetInfoFB extends Struct<XrSpaceComponentStatusSetInfoFB> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -79,6 +79,15 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
         COMPONENTTYPE = layout.offsetof(2);
         ENABLED = layout.offsetof(3);
         TIMEOUT = layout.offsetof(4);
+    }
+
+    protected XrSpaceComponentStatusSetInfoFB(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSpaceComponentStatusSetInfoFB create(long address, @Nullable ByteBuffer container) {
+        return new XrSpaceComponentStatusSetInfoFB(address, container);
     }
 
     /**
@@ -156,29 +165,29 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
 
     /** Returns a new {@code XrSpaceComponentStatusSetInfoFB} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSpaceComponentStatusSetInfoFB malloc() {
-        return wrap(XrSpaceComponentStatusSetInfoFB.class, nmemAllocChecked(SIZEOF));
+        return new XrSpaceComponentStatusSetInfoFB(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSpaceComponentStatusSetInfoFB} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSpaceComponentStatusSetInfoFB calloc() {
-        return wrap(XrSpaceComponentStatusSetInfoFB.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSpaceComponentStatusSetInfoFB(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSpaceComponentStatusSetInfoFB} instance allocated with {@link BufferUtils}. */
     public static XrSpaceComponentStatusSetInfoFB create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSpaceComponentStatusSetInfoFB.class, memAddress(container), container);
+        return new XrSpaceComponentStatusSetInfoFB(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSpaceComponentStatusSetInfoFB} instance for the specified memory address. */
     public static XrSpaceComponentStatusSetInfoFB create(long address) {
-        return wrap(XrSpaceComponentStatusSetInfoFB.class, address);
+        return new XrSpaceComponentStatusSetInfoFB(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSpaceComponentStatusSetInfoFB createSafe(long address) {
-        return address == NULL ? null : wrap(XrSpaceComponentStatusSetInfoFB.class, address);
+        return address == NULL ? null : new XrSpaceComponentStatusSetInfoFB(address, null);
     }
 
     /**
@@ -187,7 +196,7 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static XrSpaceComponentStatusSetInfoFB.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -196,7 +205,7 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static XrSpaceComponentStatusSetInfoFB.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -206,7 +215,7 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
      */
     public static XrSpaceComponentStatusSetInfoFB.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -216,13 +225,13 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static XrSpaceComponentStatusSetInfoFB.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSpaceComponentStatusSetInfoFB.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static XrSpaceComponentStatusSetInfoFB malloc(MemoryStack stack) {
-        return wrap(XrSpaceComponentStatusSetInfoFB.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSpaceComponentStatusSetInfoFB(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -240,7 +249,7 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static XrSpaceComponentStatusSetInfoFB calloc(MemoryStack stack) {
-        return wrap(XrSpaceComponentStatusSetInfoFB.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSpaceComponentStatusSetInfoFB(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -250,7 +259,7 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static XrSpaceComponentStatusSetInfoFB.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -260,7 +269,7 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static XrSpaceComponentStatusSetInfoFB.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -297,9 +306,9 @@ public class XrSpaceComponentStatusSetInfoFB extends Struct implements NativeRes
         /**
          * Creates a new {@code XrSpaceComponentStatusSetInfoFB.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSpaceComponentStatusSetInfoFB#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSpaceComponentStatusSetInfoFB#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkSampleCountFlagBits {@link #rasterizationSamples};
  * }</code></pre>
  */
-public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implements NativeResource {
+public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct<VkMultisampledRenderToSingleSampledInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -72,6 +72,15 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
         PNEXT = layout.offsetof(1);
         MULTISAMPLEDRENDERTOSINGLESAMPLEDENABLE = layout.offsetof(2);
         RASTERIZATIONSAMPLES = layout.offsetof(3);
+    }
+
+    protected VkMultisampledRenderToSingleSampledInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkMultisampledRenderToSingleSampledInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkMultisampledRenderToSingleSampledInfoEXT(address, container);
     }
 
     /**
@@ -142,29 +151,29 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
 
     /** Returns a new {@code VkMultisampledRenderToSingleSampledInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkMultisampledRenderToSingleSampledInfoEXT malloc() {
-        return wrap(VkMultisampledRenderToSingleSampledInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkMultisampledRenderToSingleSampledInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkMultisampledRenderToSingleSampledInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkMultisampledRenderToSingleSampledInfoEXT calloc() {
-        return wrap(VkMultisampledRenderToSingleSampledInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkMultisampledRenderToSingleSampledInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkMultisampledRenderToSingleSampledInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkMultisampledRenderToSingleSampledInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkMultisampledRenderToSingleSampledInfoEXT.class, memAddress(container), container);
+        return new VkMultisampledRenderToSingleSampledInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkMultisampledRenderToSingleSampledInfoEXT} instance for the specified memory address. */
     public static VkMultisampledRenderToSingleSampledInfoEXT create(long address) {
-        return wrap(VkMultisampledRenderToSingleSampledInfoEXT.class, address);
+        return new VkMultisampledRenderToSingleSampledInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMultisampledRenderToSingleSampledInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkMultisampledRenderToSingleSampledInfoEXT.class, address);
+        return address == NULL ? null : new VkMultisampledRenderToSingleSampledInfoEXT(address, null);
     }
 
     /**
@@ -173,7 +182,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkMultisampledRenderToSingleSampledInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -182,7 +191,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkMultisampledRenderToSingleSampledInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -192,7 +201,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
      */
     public static VkMultisampledRenderToSingleSampledInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -202,13 +211,13 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkMultisampledRenderToSingleSampledInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMultisampledRenderToSingleSampledInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -217,7 +226,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkMultisampledRenderToSingleSampledInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkMultisampledRenderToSingleSampledInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkMultisampledRenderToSingleSampledInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -226,7 +235,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkMultisampledRenderToSingleSampledInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkMultisampledRenderToSingleSampledInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkMultisampledRenderToSingleSampledInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -236,7 +245,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkMultisampledRenderToSingleSampledInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -246,7 +255,7 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkMultisampledRenderToSingleSampledInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -279,9 +288,9 @@ public class VkMultisampledRenderToSingleSampledInfoEXT extends Struct implement
         /**
          * Creates a new {@code VkMultisampledRenderToSingleSampledInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkMultisampledRenderToSingleSampledInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkMultisampledRenderToSingleSampledInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

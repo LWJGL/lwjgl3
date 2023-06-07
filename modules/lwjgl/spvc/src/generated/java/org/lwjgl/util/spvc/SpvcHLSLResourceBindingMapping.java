@@ -25,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct spvc_hlsl_resource_binding_mapping")
-public class SpvcHLSLResourceBindingMapping extends Struct implements NativeResource {
+public class SpvcHLSLResourceBindingMapping extends Struct<SpvcHLSLResourceBindingMapping> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -49,6 +49,15 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
 
         REGISTER_SPACE = layout.offsetof(0);
         REGISTER_BINDING = layout.offsetof(1);
+    }
+
+    protected SpvcHLSLResourceBindingMapping(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected SpvcHLSLResourceBindingMapping create(long address, @Nullable ByteBuffer container) {
+        return new SpvcHLSLResourceBindingMapping(address, container);
     }
 
     /**
@@ -103,29 +112,29 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
 
     /** Returns a new {@code SpvcHLSLResourceBindingMapping} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static SpvcHLSLResourceBindingMapping malloc() {
-        return wrap(SpvcHLSLResourceBindingMapping.class, nmemAllocChecked(SIZEOF));
+        return new SpvcHLSLResourceBindingMapping(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code SpvcHLSLResourceBindingMapping} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static SpvcHLSLResourceBindingMapping calloc() {
-        return wrap(SpvcHLSLResourceBindingMapping.class, nmemCallocChecked(1, SIZEOF));
+        return new SpvcHLSLResourceBindingMapping(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code SpvcHLSLResourceBindingMapping} instance allocated with {@link BufferUtils}. */
     public static SpvcHLSLResourceBindingMapping create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(SpvcHLSLResourceBindingMapping.class, memAddress(container), container);
+        return new SpvcHLSLResourceBindingMapping(memAddress(container), container);
     }
 
     /** Returns a new {@code SpvcHLSLResourceBindingMapping} instance for the specified memory address. */
     public static SpvcHLSLResourceBindingMapping create(long address) {
-        return wrap(SpvcHLSLResourceBindingMapping.class, address);
+        return new SpvcHLSLResourceBindingMapping(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static SpvcHLSLResourceBindingMapping createSafe(long address) {
-        return address == NULL ? null : wrap(SpvcHLSLResourceBindingMapping.class, address);
+        return address == NULL ? null : new SpvcHLSLResourceBindingMapping(address, null);
     }
 
     /**
@@ -134,7 +143,7 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static SpvcHLSLResourceBindingMapping.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -143,7 +152,7 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static SpvcHLSLResourceBindingMapping.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -153,7 +162,7 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
      */
     public static SpvcHLSLResourceBindingMapping.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -163,13 +172,13 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static SpvcHLSLResourceBindingMapping.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static SpvcHLSLResourceBindingMapping.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -178,7 +187,7 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static SpvcHLSLResourceBindingMapping malloc(MemoryStack stack) {
-        return wrap(SpvcHLSLResourceBindingMapping.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new SpvcHLSLResourceBindingMapping(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -187,7 +196,7 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static SpvcHLSLResourceBindingMapping calloc(MemoryStack stack) {
-        return wrap(SpvcHLSLResourceBindingMapping.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new SpvcHLSLResourceBindingMapping(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -197,7 +206,7 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static SpvcHLSLResourceBindingMapping.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -207,7 +216,7 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static SpvcHLSLResourceBindingMapping.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -232,9 +241,9 @@ public class SpvcHLSLResourceBindingMapping extends Struct implements NativeReso
         /**
          * Creates a new {@code SpvcHLSLResourceBindingMapping.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link SpvcHLSLResourceBindingMapping#SIZEOF}, and its mark will be undefined.
+         * by {@link SpvcHLSLResourceBindingMapping#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

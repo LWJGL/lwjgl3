@@ -29,7 +29,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
  *     int32_t {@link #PicOrderCnt}[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE];
  * }</code></pre>
  */
-public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeResource {
+public class StdVideoDecodeH264ReferenceInfo extends Struct<StdVideoDecodeH264ReferenceInfo> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -59,6 +59,15 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
         FRAMENUM = layout.offsetof(1);
         RESERVED = layout.offsetof(2);
         PICORDERCNT = layout.offsetof(3);
+    }
+
+    protected StdVideoDecodeH264ReferenceInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected StdVideoDecodeH264ReferenceInfo create(long address, @Nullable ByteBuffer container) {
+        return new StdVideoDecodeH264ReferenceInfo(address, container);
     }
 
     /**
@@ -133,29 +142,29 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
 
     /** Returns a new {@code StdVideoDecodeH264ReferenceInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static StdVideoDecodeH264ReferenceInfo malloc() {
-        return wrap(StdVideoDecodeH264ReferenceInfo.class, nmemAllocChecked(SIZEOF));
+        return new StdVideoDecodeH264ReferenceInfo(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoDecodeH264ReferenceInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static StdVideoDecodeH264ReferenceInfo calloc() {
-        return wrap(StdVideoDecodeH264ReferenceInfo.class, nmemCallocChecked(1, SIZEOF));
+        return new StdVideoDecodeH264ReferenceInfo(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoDecodeH264ReferenceInfo} instance allocated with {@link BufferUtils}. */
     public static StdVideoDecodeH264ReferenceInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(StdVideoDecodeH264ReferenceInfo.class, memAddress(container), container);
+        return new StdVideoDecodeH264ReferenceInfo(memAddress(container), container);
     }
 
     /** Returns a new {@code StdVideoDecodeH264ReferenceInfo} instance for the specified memory address. */
     public static StdVideoDecodeH264ReferenceInfo create(long address) {
-        return wrap(StdVideoDecodeH264ReferenceInfo.class, address);
+        return new StdVideoDecodeH264ReferenceInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoDecodeH264ReferenceInfo createSafe(long address) {
-        return address == NULL ? null : wrap(StdVideoDecodeH264ReferenceInfo.class, address);
+        return address == NULL ? null : new StdVideoDecodeH264ReferenceInfo(address, null);
     }
 
     /**
@@ -164,7 +173,7 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static StdVideoDecodeH264ReferenceInfo.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -173,7 +182,7 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static StdVideoDecodeH264ReferenceInfo.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -183,7 +192,7 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
      */
     public static StdVideoDecodeH264ReferenceInfo.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -193,13 +202,13 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static StdVideoDecodeH264ReferenceInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoDecodeH264ReferenceInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -208,7 +217,7 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static StdVideoDecodeH264ReferenceInfo malloc(MemoryStack stack) {
-        return wrap(StdVideoDecodeH264ReferenceInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new StdVideoDecodeH264ReferenceInfo(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -217,7 +226,7 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static StdVideoDecodeH264ReferenceInfo calloc(MemoryStack stack) {
-        return wrap(StdVideoDecodeH264ReferenceInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new StdVideoDecodeH264ReferenceInfo(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -227,7 +236,7 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static StdVideoDecodeH264ReferenceInfo.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -237,7 +246,7 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static StdVideoDecodeH264ReferenceInfo.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -281,9 +290,9 @@ public class StdVideoDecodeH264ReferenceInfo extends Struct implements NativeRes
         /**
          * Creates a new {@code StdVideoDecodeH264ReferenceInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link StdVideoDecodeH264ReferenceInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link StdVideoDecodeH264ReferenceInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

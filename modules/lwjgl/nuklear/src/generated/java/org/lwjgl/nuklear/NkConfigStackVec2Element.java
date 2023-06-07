@@ -23,7 +23,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct nk_config_stack_vec2_element")
-class NkConfigStackVec2Element extends Struct {
+class NkConfigStackVec2Element extends Struct<NkConfigStackVec2Element> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -47,6 +47,15 @@ class NkConfigStackVec2Element extends Struct {
 
         PVALUES = layout.offsetof(0);
         OLD_VALUE = layout.offsetof(1);
+    }
+
+    protected NkConfigStackVec2Element(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkConfigStackVec2Element create(long address, @Nullable ByteBuffer container) {
+        return new NkConfigStackVec2Element(address, container);
     }
 
     /**
@@ -73,13 +82,13 @@ class NkConfigStackVec2Element extends Struct {
 
     /** Returns a new {@code NkConfigStackVec2Element} instance for the specified memory address. */
     public static NkConfigStackVec2Element create(long address) {
-        return wrap(NkConfigStackVec2Element.class, address);
+        return new NkConfigStackVec2Element(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigStackVec2Element createSafe(long address) {
-        return address == NULL ? null : wrap(NkConfigStackVec2Element.class, address);
+        return address == NULL ? null : new NkConfigStackVec2Element(address, null);
     }
 
     /**
@@ -89,13 +98,13 @@ class NkConfigStackVec2Element extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkConfigStackVec2Element.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConfigStackVec2Element.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -115,9 +124,9 @@ class NkConfigStackVec2Element extends Struct {
         /**
          * Creates a new {@code NkConfigStackVec2Element.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkConfigStackVec2Element#SIZEOF}, and its mark will be undefined.
+         * by {@link NkConfigStackVec2Element#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

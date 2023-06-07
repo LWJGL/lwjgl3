@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrUuidMSFT XrUuidMSFT} {@link #parentId};
  * }</code></pre>
  */
-public class XrSceneComponentParentFilterInfoMSFT extends Struct implements NativeResource {
+public class XrSceneComponentParentFilterInfoMSFT extends Struct<XrSceneComponentParentFilterInfoMSFT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -70,6 +70,15 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         PARENTID = layout.offsetof(2);
+    }
+
+    protected XrSceneComponentParentFilterInfoMSFT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSceneComponentParentFilterInfoMSFT create(long address, @Nullable ByteBuffer container) {
+        return new XrSceneComponentParentFilterInfoMSFT(address, container);
     }
 
     /**
@@ -134,29 +143,29 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
 
     /** Returns a new {@code XrSceneComponentParentFilterInfoMSFT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSceneComponentParentFilterInfoMSFT malloc() {
-        return wrap(XrSceneComponentParentFilterInfoMSFT.class, nmemAllocChecked(SIZEOF));
+        return new XrSceneComponentParentFilterInfoMSFT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSceneComponentParentFilterInfoMSFT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSceneComponentParentFilterInfoMSFT calloc() {
-        return wrap(XrSceneComponentParentFilterInfoMSFT.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSceneComponentParentFilterInfoMSFT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSceneComponentParentFilterInfoMSFT} instance allocated with {@link BufferUtils}. */
     public static XrSceneComponentParentFilterInfoMSFT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSceneComponentParentFilterInfoMSFT.class, memAddress(container), container);
+        return new XrSceneComponentParentFilterInfoMSFT(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSceneComponentParentFilterInfoMSFT} instance for the specified memory address. */
     public static XrSceneComponentParentFilterInfoMSFT create(long address) {
-        return wrap(XrSceneComponentParentFilterInfoMSFT.class, address);
+        return new XrSceneComponentParentFilterInfoMSFT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSceneComponentParentFilterInfoMSFT createSafe(long address) {
-        return address == NULL ? null : wrap(XrSceneComponentParentFilterInfoMSFT.class, address);
+        return address == NULL ? null : new XrSceneComponentParentFilterInfoMSFT(address, null);
     }
 
     /**
@@ -165,7 +174,7 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static XrSceneComponentParentFilterInfoMSFT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -174,7 +183,7 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static XrSceneComponentParentFilterInfoMSFT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -184,7 +193,7 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
      */
     public static XrSceneComponentParentFilterInfoMSFT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -194,13 +203,13 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static XrSceneComponentParentFilterInfoMSFT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSceneComponentParentFilterInfoMSFT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -209,7 +218,7 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static XrSceneComponentParentFilterInfoMSFT malloc(MemoryStack stack) {
-        return wrap(XrSceneComponentParentFilterInfoMSFT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSceneComponentParentFilterInfoMSFT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -218,7 +227,7 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static XrSceneComponentParentFilterInfoMSFT calloc(MemoryStack stack) {
-        return wrap(XrSceneComponentParentFilterInfoMSFT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSceneComponentParentFilterInfoMSFT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -228,7 +237,7 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static XrSceneComponentParentFilterInfoMSFT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -238,7 +247,7 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static XrSceneComponentParentFilterInfoMSFT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -267,9 +276,9 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct implements Nati
         /**
          * Creates a new {@code XrSceneComponentParentFilterInfoMSFT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSceneComponentParentFilterInfoMSFT#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSceneComponentParentFilterInfoMSFT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

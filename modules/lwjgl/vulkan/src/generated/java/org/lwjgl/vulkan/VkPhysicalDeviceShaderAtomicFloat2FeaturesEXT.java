@@ -48,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #sparseImageFloat32AtomicMinMax};
  * }</code></pre>
  */
-public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct<VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -108,6 +108,15 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
         SHADERSHAREDFLOAT64ATOMICMINMAX = layout.offsetof(11);
         SHADERIMAGEFLOAT32ATOMICMINMAX = layout.offsetof(12);
         SPARSEIMAGEFLOAT32ATOMICMINMAX = layout.offsetof(13);
+    }
+
+    protected VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(address, container);
     }
 
     /**
@@ -248,29 +257,29 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
 
     /** Returns a new {@code VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.class, address);
+        return new VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(address, null);
     }
 
     /**
@@ -279,7 +288,7 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -288,7 +297,7 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -298,7 +307,7 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
      */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -308,13 +317,13 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -323,7 +332,7 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -332,7 +341,7 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -342,7 +351,7 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -352,7 +361,7 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -425,9 +434,9 @@ public class VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT extends Struct implem
         /**
          * Creates a new {@code VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

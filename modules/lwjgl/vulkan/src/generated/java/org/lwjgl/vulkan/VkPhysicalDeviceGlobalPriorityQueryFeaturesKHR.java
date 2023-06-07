@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #globalPriorityQuery};
  * }</code></pre>
  */
-public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct implements NativeResource {
+public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct<VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         GLOBALPRIORITYQUERY = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
 
     /** Returns a new {@code VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR malloc() {
-        return wrap(VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR calloc() {
-        return wrap(VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.class, memAddress(container), container);
+        return new VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR} instance for the specified memory address. */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR create(long address) {
-        return wrap(VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.class, address);
+        return new VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
      */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR extends Struct imple
         /**
          * Creates a new {@code VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

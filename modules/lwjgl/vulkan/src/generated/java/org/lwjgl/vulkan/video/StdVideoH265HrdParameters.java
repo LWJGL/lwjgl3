@@ -40,7 +40,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} const * {@link #pSubLayerHrdParametersVcl};
  * }</code></pre>
  */
-public class StdVideoH265HrdParameters extends Struct implements NativeResource {
+public class StdVideoH265HrdParameters extends Struct<StdVideoH265HrdParameters> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -103,6 +103,15 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
         RESERVED = layout.offsetof(12);
         PSUBLAYERHRDPARAMETERSNAL = layout.offsetof(13);
         PSUBLAYERHRDPARAMETERSVCL = layout.offsetof(14);
+    }
+
+    protected StdVideoH265HrdParameters(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected StdVideoH265HrdParameters create(long address, @Nullable ByteBuffer container) {
+        return new StdVideoH265HrdParameters(address, container);
     }
 
     /**
@@ -252,29 +261,29 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
 
     /** Returns a new {@code StdVideoH265HrdParameters} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static StdVideoH265HrdParameters malloc() {
-        return wrap(StdVideoH265HrdParameters.class, nmemAllocChecked(SIZEOF));
+        return new StdVideoH265HrdParameters(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH265HrdParameters} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static StdVideoH265HrdParameters calloc() {
-        return wrap(StdVideoH265HrdParameters.class, nmemCallocChecked(1, SIZEOF));
+        return new StdVideoH265HrdParameters(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH265HrdParameters} instance allocated with {@link BufferUtils}. */
     public static StdVideoH265HrdParameters create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(StdVideoH265HrdParameters.class, memAddress(container), container);
+        return new StdVideoH265HrdParameters(memAddress(container), container);
     }
 
     /** Returns a new {@code StdVideoH265HrdParameters} instance for the specified memory address. */
     public static StdVideoH265HrdParameters create(long address) {
-        return wrap(StdVideoH265HrdParameters.class, address);
+        return new StdVideoH265HrdParameters(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH265HrdParameters createSafe(long address) {
-        return address == NULL ? null : wrap(StdVideoH265HrdParameters.class, address);
+        return address == NULL ? null : new StdVideoH265HrdParameters(address, null);
     }
 
     /**
@@ -283,7 +292,7 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static StdVideoH265HrdParameters.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -292,7 +301,7 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static StdVideoH265HrdParameters.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -302,7 +311,7 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
      */
     public static StdVideoH265HrdParameters.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -312,13 +321,13 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static StdVideoH265HrdParameters.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH265HrdParameters.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -327,7 +336,7 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static StdVideoH265HrdParameters malloc(MemoryStack stack) {
-        return wrap(StdVideoH265HrdParameters.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new StdVideoH265HrdParameters(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -336,7 +345,7 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static StdVideoH265HrdParameters calloc(MemoryStack stack) {
-        return wrap(StdVideoH265HrdParameters.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new StdVideoH265HrdParameters(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -346,7 +355,7 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static StdVideoH265HrdParameters.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -356,7 +365,7 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static StdVideoH265HrdParameters.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -472,9 +481,9 @@ public class StdVideoH265HrdParameters extends Struct implements NativeResource 
         /**
          * Creates a new {@code StdVideoH265HrdParameters.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link StdVideoH265HrdParameters#SIZEOF}, and its mark will be undefined.
+         * by {@link StdVideoH265HrdParameters#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

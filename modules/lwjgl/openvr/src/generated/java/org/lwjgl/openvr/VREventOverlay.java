@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct VREvent_Overlay_t")
-public class VREventOverlay extends Struct {
+public class VREventOverlay extends Struct<VREventOverlay> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -53,6 +53,15 @@ public class VREventOverlay extends Struct {
         OVERLAYHANDLE = layout.offsetof(0);
         DEVICEPATH = layout.offsetof(1);
         MEMORYBLOCKID = layout.offsetof(2);
+    }
+
+    protected VREventOverlay(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VREventOverlay create(long address, @Nullable ByteBuffer container) {
+        return new VREventOverlay(address, container);
     }
 
     /**
@@ -82,13 +91,13 @@ public class VREventOverlay extends Struct {
 
     /** Returns a new {@code VREventOverlay} instance for the specified memory address. */
     public static VREventOverlay create(long address) {
-        return wrap(VREventOverlay.class, address);
+        return new VREventOverlay(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventOverlay createSafe(long address) {
-        return address == NULL ? null : wrap(VREventOverlay.class, address);
+        return address == NULL ? null : new VREventOverlay(address, null);
     }
 
     /**
@@ -98,13 +107,13 @@ public class VREventOverlay extends Struct {
      * @param capacity the buffer capacity
      */
     public static VREventOverlay.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VREventOverlay.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -126,9 +135,9 @@ public class VREventOverlay extends Struct {
         /**
          * Creates a new {@code VREventOverlay.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VREventOverlay#SIZEOF}, and its mark will be undefined.
+         * by {@link VREventOverlay#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

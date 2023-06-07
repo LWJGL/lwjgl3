@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct CID_FaceInfoRec")
-public class CID_FaceInfo extends Struct {
+public class CID_FaceInfo extends Struct<CID_FaceInfo> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -115,6 +115,15 @@ public class CID_FaceInfo extends Struct {
         NUM_DICTS = layout.offsetof(15);
         FONT_DICTS = layout.offsetof(16);
         DATA_OFFSET = layout.offsetof(17);
+    }
+
+    protected CID_FaceInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CID_FaceInfo create(long address, @Nullable ByteBuffer container) {
+        return new CID_FaceInfo(address, container);
     }
 
     /**
@@ -199,13 +208,13 @@ public class CID_FaceInfo extends Struct {
 
     /** Returns a new {@code CID_FaceInfo} instance for the specified memory address. */
     public static CID_FaceInfo create(long address) {
-        return wrap(CID_FaceInfo.class, address);
+        return new CID_FaceInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CID_FaceInfo createSafe(long address) {
-        return address == NULL ? null : wrap(CID_FaceInfo.class, address);
+        return address == NULL ? null : new CID_FaceInfo(address, null);
     }
 
     /**
@@ -215,13 +224,13 @@ public class CID_FaceInfo extends Struct {
      * @param capacity the buffer capacity
      */
     public static CID_FaceInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CID_FaceInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -283,9 +292,9 @@ public class CID_FaceInfo extends Struct {
         /**
          * Creates a new {@code CID_FaceInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CID_FaceInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link CID_FaceInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrBool32 {@link #supportsFoveationEyeTracked};
  * }</code></pre>
  */
-public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements NativeResource {
+public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct<XrSystemFoveationEyeTrackedPropertiesMETA> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -70,6 +70,15 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         SUPPORTSFOVEATIONEYETRACKED = layout.offsetof(2);
+    }
+
+    protected XrSystemFoveationEyeTrackedPropertiesMETA(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSystemFoveationEyeTrackedPropertiesMETA create(long address, @Nullable ByteBuffer container) {
+        return new XrSystemFoveationEyeTrackedPropertiesMETA(address, container);
     }
 
     /**
@@ -129,29 +138,29 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
 
     /** Returns a new {@code XrSystemFoveationEyeTrackedPropertiesMETA} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSystemFoveationEyeTrackedPropertiesMETA malloc() {
-        return wrap(XrSystemFoveationEyeTrackedPropertiesMETA.class, nmemAllocChecked(SIZEOF));
+        return new XrSystemFoveationEyeTrackedPropertiesMETA(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSystemFoveationEyeTrackedPropertiesMETA} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSystemFoveationEyeTrackedPropertiesMETA calloc() {
-        return wrap(XrSystemFoveationEyeTrackedPropertiesMETA.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSystemFoveationEyeTrackedPropertiesMETA(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSystemFoveationEyeTrackedPropertiesMETA} instance allocated with {@link BufferUtils}. */
     public static XrSystemFoveationEyeTrackedPropertiesMETA create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSystemFoveationEyeTrackedPropertiesMETA.class, memAddress(container), container);
+        return new XrSystemFoveationEyeTrackedPropertiesMETA(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSystemFoveationEyeTrackedPropertiesMETA} instance for the specified memory address. */
     public static XrSystemFoveationEyeTrackedPropertiesMETA create(long address) {
-        return wrap(XrSystemFoveationEyeTrackedPropertiesMETA.class, address);
+        return new XrSystemFoveationEyeTrackedPropertiesMETA(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSystemFoveationEyeTrackedPropertiesMETA createSafe(long address) {
-        return address == NULL ? null : wrap(XrSystemFoveationEyeTrackedPropertiesMETA.class, address);
+        return address == NULL ? null : new XrSystemFoveationEyeTrackedPropertiesMETA(address, null);
     }
 
     /**
@@ -160,7 +169,7 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
      * @param capacity the buffer capacity
      */
     public static XrSystemFoveationEyeTrackedPropertiesMETA.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -169,7 +178,7 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
      * @param capacity the buffer capacity
      */
     public static XrSystemFoveationEyeTrackedPropertiesMETA.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -179,7 +188,7 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
      */
     public static XrSystemFoveationEyeTrackedPropertiesMETA.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -189,13 +198,13 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
      * @param capacity the buffer capacity
      */
     public static XrSystemFoveationEyeTrackedPropertiesMETA.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSystemFoveationEyeTrackedPropertiesMETA.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -204,7 +213,7 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
      * @param stack the stack from which to allocate
      */
     public static XrSystemFoveationEyeTrackedPropertiesMETA malloc(MemoryStack stack) {
-        return wrap(XrSystemFoveationEyeTrackedPropertiesMETA.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSystemFoveationEyeTrackedPropertiesMETA(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -213,7 +222,7 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
      * @param stack the stack from which to allocate
      */
     public static XrSystemFoveationEyeTrackedPropertiesMETA calloc(MemoryStack stack) {
-        return wrap(XrSystemFoveationEyeTrackedPropertiesMETA.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSystemFoveationEyeTrackedPropertiesMETA(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -223,7 +232,7 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
      * @param capacity the buffer capacity
      */
     public static XrSystemFoveationEyeTrackedPropertiesMETA.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -233,7 +242,7 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
      * @param capacity the buffer capacity
      */
     public static XrSystemFoveationEyeTrackedPropertiesMETA.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct implements
         /**
          * Creates a new {@code XrSystemFoveationEyeTrackedPropertiesMETA.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSystemFoveationEyeTrackedPropertiesMETA#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSystemFoveationEyeTrackedPropertiesMETA#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

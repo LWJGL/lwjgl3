@@ -29,6 +29,15 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
 
+    protected VkBufferDeviceAddressInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkBufferDeviceAddressInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkBufferDeviceAddressInfoKHR(address, container);
+    }
+
     /**
      * Creates a {@code VkBufferDeviceAddressInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -82,29 +91,29 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
 
     /** Returns a new {@code VkBufferDeviceAddressInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkBufferDeviceAddressInfoKHR malloc() {
-        return wrap(VkBufferDeviceAddressInfoKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkBufferDeviceAddressInfoKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkBufferDeviceAddressInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkBufferDeviceAddressInfoKHR calloc() {
-        return wrap(VkBufferDeviceAddressInfoKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkBufferDeviceAddressInfoKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkBufferDeviceAddressInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkBufferDeviceAddressInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkBufferDeviceAddressInfoKHR.class, memAddress(container), container);
+        return new VkBufferDeviceAddressInfoKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkBufferDeviceAddressInfoKHR} instance for the specified memory address. */
     public static VkBufferDeviceAddressInfoKHR create(long address) {
-        return wrap(VkBufferDeviceAddressInfoKHR.class, address);
+        return new VkBufferDeviceAddressInfoKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBufferDeviceAddressInfoKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkBufferDeviceAddressInfoKHR.class, address);
+        return address == NULL ? null : new VkBufferDeviceAddressInfoKHR(address, null);
     }
 
     /**
@@ -113,7 +122,7 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
      * @param capacity the buffer capacity
      */
     public static VkBufferDeviceAddressInfoKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -122,7 +131,7 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
      * @param capacity the buffer capacity
      */
     public static VkBufferDeviceAddressInfoKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -132,7 +141,7 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
      */
     public static VkBufferDeviceAddressInfoKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -142,13 +151,13 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
      * @param capacity the buffer capacity
      */
     public static VkBufferDeviceAddressInfoKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkBufferDeviceAddressInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -157,7 +166,7 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
      * @param stack the stack from which to allocate
      */
     public static VkBufferDeviceAddressInfoKHR malloc(MemoryStack stack) {
-        return wrap(VkBufferDeviceAddressInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkBufferDeviceAddressInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -166,7 +175,7 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
      * @param stack the stack from which to allocate
      */
     public static VkBufferDeviceAddressInfoKHR calloc(MemoryStack stack) {
-        return wrap(VkBufferDeviceAddressInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkBufferDeviceAddressInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -176,7 +185,7 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
      * @param capacity the buffer capacity
      */
     public static VkBufferDeviceAddressInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -186,7 +195,7 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
      * @param capacity the buffer capacity
      */
     public static VkBufferDeviceAddressInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -199,9 +208,9 @@ public class VkBufferDeviceAddressInfoKHR extends VkBufferDeviceAddressInfo {
         /**
          * Creates a new {@code VkBufferDeviceAddressInfoKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkBufferDeviceAddressInfoKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkBufferDeviceAddressInfoKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

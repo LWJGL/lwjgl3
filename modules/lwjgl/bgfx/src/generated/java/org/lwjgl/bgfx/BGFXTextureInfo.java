@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct bgfx_texture_info_t")
-public class BGFXTextureInfo extends Struct implements NativeResource {
+public class BGFXTextureInfo extends Struct<BGFXTextureInfo> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -79,6 +79,15 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
         NUMMIPS = layout.offsetof(6);
         BITSPERPIXEL = layout.offsetof(7);
         CUBEMAP = layout.offsetof(8);
+    }
+
+    protected BGFXTextureInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected BGFXTextureInfo create(long address, @Nullable ByteBuffer container) {
+        return new BGFXTextureInfo(address, container);
     }
 
     /**
@@ -126,29 +135,29 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
 
     /** Returns a new {@code BGFXTextureInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static BGFXTextureInfo malloc() {
-        return wrap(BGFXTextureInfo.class, nmemAllocChecked(SIZEOF));
+        return new BGFXTextureInfo(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code BGFXTextureInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static BGFXTextureInfo calloc() {
-        return wrap(BGFXTextureInfo.class, nmemCallocChecked(1, SIZEOF));
+        return new BGFXTextureInfo(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code BGFXTextureInfo} instance allocated with {@link BufferUtils}. */
     public static BGFXTextureInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(BGFXTextureInfo.class, memAddress(container), container);
+        return new BGFXTextureInfo(memAddress(container), container);
     }
 
     /** Returns a new {@code BGFXTextureInfo} instance for the specified memory address. */
     public static BGFXTextureInfo create(long address) {
-        return wrap(BGFXTextureInfo.class, address);
+        return new BGFXTextureInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXTextureInfo createSafe(long address) {
-        return address == NULL ? null : wrap(BGFXTextureInfo.class, address);
+        return address == NULL ? null : new BGFXTextureInfo(address, null);
     }
 
     /**
@@ -157,7 +166,7 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTextureInfo.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -166,7 +175,7 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTextureInfo.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -176,7 +185,7 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
      */
     public static BGFXTextureInfo.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -186,13 +195,13 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTextureInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static BGFXTextureInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -220,7 +229,7 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXTextureInfo malloc(MemoryStack stack) {
-        return wrap(BGFXTextureInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new BGFXTextureInfo(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -229,7 +238,7 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static BGFXTextureInfo calloc(MemoryStack stack) {
-        return wrap(BGFXTextureInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new BGFXTextureInfo(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -239,7 +248,7 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTextureInfo.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -249,7 +258,7 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static BGFXTextureInfo.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -283,9 +292,9 @@ public class BGFXTextureInfo extends Struct implements NativeResource {
         /**
          * Creates a new {@code BGFXTextureInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link BGFXTextureInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link BGFXTextureInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

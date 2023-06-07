@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkExternalFenceFeatureFlags {@link #externalFenceFeatures};
  * }</code></pre>
  */
-public class VkExternalFenceProperties extends Struct implements NativeResource {
+public class VkExternalFenceProperties extends Struct<VkExternalFenceProperties> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -77,6 +77,15 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
         EXPORTFROMIMPORTEDHANDLETYPES = layout.offsetof(2);
         COMPATIBLEHANDLETYPES = layout.offsetof(3);
         EXTERNALFENCEFEATURES = layout.offsetof(4);
+    }
+
+    protected VkExternalFenceProperties(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkExternalFenceProperties create(long address, @Nullable ByteBuffer container) {
+        return new VkExternalFenceProperties(address, container);
     }
 
     /**
@@ -142,29 +151,29 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
 
     /** Returns a new {@code VkExternalFenceProperties} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkExternalFenceProperties malloc() {
-        return wrap(VkExternalFenceProperties.class, nmemAllocChecked(SIZEOF));
+        return new VkExternalFenceProperties(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkExternalFenceProperties} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkExternalFenceProperties calloc() {
-        return wrap(VkExternalFenceProperties.class, nmemCallocChecked(1, SIZEOF));
+        return new VkExternalFenceProperties(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkExternalFenceProperties} instance allocated with {@link BufferUtils}. */
     public static VkExternalFenceProperties create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkExternalFenceProperties.class, memAddress(container), container);
+        return new VkExternalFenceProperties(memAddress(container), container);
     }
 
     /** Returns a new {@code VkExternalFenceProperties} instance for the specified memory address. */
     public static VkExternalFenceProperties create(long address) {
-        return wrap(VkExternalFenceProperties.class, address);
+        return new VkExternalFenceProperties(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalFenceProperties createSafe(long address) {
-        return address == NULL ? null : wrap(VkExternalFenceProperties.class, address);
+        return address == NULL ? null : new VkExternalFenceProperties(address, null);
     }
 
     /**
@@ -173,7 +182,7 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkExternalFenceProperties.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -182,7 +191,7 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkExternalFenceProperties.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -192,7 +201,7 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
      */
     public static VkExternalFenceProperties.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -202,13 +211,13 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkExternalFenceProperties.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkExternalFenceProperties.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -236,7 +245,7 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static VkExternalFenceProperties malloc(MemoryStack stack) {
-        return wrap(VkExternalFenceProperties.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkExternalFenceProperties(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -245,7 +254,7 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static VkExternalFenceProperties calloc(MemoryStack stack) {
-        return wrap(VkExternalFenceProperties.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkExternalFenceProperties(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -255,7 +264,7 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkExternalFenceProperties.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -265,7 +274,7 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
      * @param capacity the buffer capacity
      */
     public static VkExternalFenceProperties.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -296,9 +305,9 @@ public class VkExternalFenceProperties extends Struct implements NativeResource 
         /**
          * Creates a new {@code VkExternalFenceProperties.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkExternalFenceProperties#SIZEOF}, and its mark will be undefined.
+         * by {@link VkExternalFenceProperties#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

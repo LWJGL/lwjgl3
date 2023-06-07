@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct CID_FaceDictRec")
-public class CID_FaceDict extends Struct {
+public class CID_FaceDict extends Struct<CID_FaceDict> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -91,6 +91,15 @@ public class CID_FaceDict extends Struct {
         SD_BYTES = layout.offsetof(11);
     }
 
+    protected CID_FaceDict(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CID_FaceDict create(long address, @Nullable ByteBuffer container) {
+        return new CID_FaceDict(address, container);
+    }
+
     /**
      * Creates a {@code CID_FaceDict} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -143,13 +152,13 @@ public class CID_FaceDict extends Struct {
 
     /** Returns a new {@code CID_FaceDict} instance for the specified memory address. */
     public static CID_FaceDict create(long address) {
-        return wrap(CID_FaceDict.class, address);
+        return new CID_FaceDict(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CID_FaceDict createSafe(long address) {
-        return address == NULL ? null : wrap(CID_FaceDict.class, address);
+        return address == NULL ? null : new CID_FaceDict(address, null);
     }
 
     /**
@@ -159,13 +168,13 @@ public class CID_FaceDict extends Struct {
      * @param capacity the buffer capacity
      */
     public static CID_FaceDict.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CID_FaceDict.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -205,9 +214,9 @@ public class CID_FaceDict extends Struct {
         /**
          * Creates a new {@code CID_FaceDict.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CID_FaceDict#SIZEOF}, and its mark will be undefined.
+         * by {@link CID_FaceDict#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

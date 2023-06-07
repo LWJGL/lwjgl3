@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkPipelineCreationFeedback VkPipelineCreationFeedback} * {@link #pPipelineStageCreationFeedbacks};
  * }</code></pre>
  */
-public class VkPipelineCreationFeedbackCreateInfo extends Struct implements NativeResource {
+public class VkPipelineCreationFeedbackCreateInfo extends Struct<VkPipelineCreationFeedbackCreateInfo> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -86,6 +86,15 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
         PPIPELINECREATIONFEEDBACK = layout.offsetof(2);
         PIPELINESTAGECREATIONFEEDBACKCOUNT = layout.offsetof(3);
         PPIPELINESTAGECREATIONFEEDBACKS = layout.offsetof(4);
+    }
+
+    protected VkPipelineCreationFeedbackCreateInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPipelineCreationFeedbackCreateInfo create(long address, @Nullable ByteBuffer container) {
+        return new VkPipelineCreationFeedbackCreateInfo(address, container);
     }
 
     /**
@@ -160,29 +169,29 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
 
     /** Returns a new {@code VkPipelineCreationFeedbackCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineCreationFeedbackCreateInfo malloc() {
-        return wrap(VkPipelineCreationFeedbackCreateInfo.class, nmemAllocChecked(SIZEOF));
+        return new VkPipelineCreationFeedbackCreateInfo(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineCreationFeedbackCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineCreationFeedbackCreateInfo calloc() {
-        return wrap(VkPipelineCreationFeedbackCreateInfo.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPipelineCreationFeedbackCreateInfo(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineCreationFeedbackCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VkPipelineCreationFeedbackCreateInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPipelineCreationFeedbackCreateInfo.class, memAddress(container), container);
+        return new VkPipelineCreationFeedbackCreateInfo(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPipelineCreationFeedbackCreateInfo} instance for the specified memory address. */
     public static VkPipelineCreationFeedbackCreateInfo create(long address) {
-        return wrap(VkPipelineCreationFeedbackCreateInfo.class, address);
+        return new VkPipelineCreationFeedbackCreateInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineCreationFeedbackCreateInfo createSafe(long address) {
-        return address == NULL ? null : wrap(VkPipelineCreationFeedbackCreateInfo.class, address);
+        return address == NULL ? null : new VkPipelineCreationFeedbackCreateInfo(address, null);
     }
 
     /**
@@ -191,7 +200,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineCreationFeedbackCreateInfo.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -200,7 +209,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineCreationFeedbackCreateInfo.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -210,7 +219,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
      */
     public static VkPipelineCreationFeedbackCreateInfo.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -220,13 +229,13 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineCreationFeedbackCreateInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineCreationFeedbackCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -235,7 +244,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkPipelineCreationFeedbackCreateInfo malloc(MemoryStack stack) {
-        return wrap(VkPipelineCreationFeedbackCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPipelineCreationFeedbackCreateInfo(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -244,7 +253,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static VkPipelineCreationFeedbackCreateInfo calloc(MemoryStack stack) {
-        return wrap(VkPipelineCreationFeedbackCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPipelineCreationFeedbackCreateInfo(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -254,7 +263,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineCreationFeedbackCreateInfo.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -264,7 +273,7 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static VkPipelineCreationFeedbackCreateInfo.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -313,9 +322,9 @@ public class VkPipelineCreationFeedbackCreateInfo extends Struct implements Nati
         /**
          * Creates a new {@code VkPipelineCreationFeedbackCreateInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPipelineCreationFeedbackCreateInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPipelineCreationFeedbackCreateInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

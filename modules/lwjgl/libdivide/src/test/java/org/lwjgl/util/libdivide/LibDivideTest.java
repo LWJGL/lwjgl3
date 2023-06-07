@@ -198,11 +198,11 @@ public class LibDivideTest {
         );
     }
 
-    private interface Gen16<T extends Struct> {
+    private interface Gen16<T extends Struct<T>> {
         T apply(short denom, T __result);
     }
 
-    private interface Do16<T extends Struct> {
+    private interface Do16<T extends Struct<T>> {
         short apply(short numer, T denom);
     }
 
@@ -210,7 +210,7 @@ public class LibDivideTest {
         short apply(short numer, short denom);
     }
 
-    private static <T extends Struct> void test16(
+    private static <T extends Struct<T>> void test16(
         Function<MemoryStack, T> malloc,
         Gen16<T> genRef, Gen16<T> gen,
         Native16 doNative, Do16<T> doRef, Do16<T> doJava,
@@ -254,7 +254,7 @@ public class LibDivideTest {
         }
     }
 
-    private static <T extends Struct> void test16(T magic, Gen16<T> genRef, Gen16<T> gen, short d) {
+    private static <T extends Struct<T>> void test16(T magic, Gen16<T> genRef, Gen16<T> gen, short d) {
         genRef.apply(d, magic);
 
         short m = memGetShort(magic.address());
@@ -269,7 +269,7 @@ public class LibDivideTest {
         assertEquals(memGetByte(magic.address() + 2), b);
     }
 
-    private static <T extends Struct> void test16(T magic, Native16 doNative, Do16<T> doRef, Do16<T> doJava, short d, short n) {
+    private static <T extends Struct<T>> void test16(T magic, Native16 doNative, Do16<T> doRef, Do16<T> doJava, short d, short n) {
         short refNative = doNative.apply(n, d);
 
         short ref = doRef.apply(n, magic);
@@ -284,11 +284,11 @@ public class LibDivideTest {
         }
     }
 
-    private interface Gen32<T extends Struct> {
+    private interface Gen32<T extends Struct<T>> {
         T apply(int denom, T __result);
     }
 
-    private interface Do32<T extends Struct> {
+    private interface Do32<T extends Struct<T>> {
         int apply(int numer, T denom);
     }
 
@@ -296,7 +296,7 @@ public class LibDivideTest {
         int apply(int numer, int denom);
     }
 
-    private static <T extends Struct> void test32(
+    private static <T extends Struct<T>> void test32(
         Function<MemoryStack, T> malloc,
         Gen32<T> genRef, Gen32<T> gen,
         Native32 doNative, Do32<T> doRef, Do32<T> doJava,
@@ -333,7 +333,7 @@ public class LibDivideTest {
         }
     }
 
-    private static <T extends Struct> void test32(T magic, Gen32<T> genRef, Gen32<T> gen, int d) {
+    private static <T extends Struct<T>> void test32(T magic, Gen32<T> genRef, Gen32<T> gen, int d) {
         genRef.apply(d, magic);
 
         int  m = memGetInt(magic.address());
@@ -348,7 +348,7 @@ public class LibDivideTest {
         assertEquals(memGetByte(magic.address() + 4), b);
     }
 
-    private static <T extends Struct> void test32(T magic, Native32 doNative, Do32<T> doRef, Do32<T> doJava, int d, int n) {
+    private static <T extends Struct<T>> void test32(T magic, Native32 doNative, Do32<T> doRef, Do32<T> doJava, int d, int n) {
         int refNative = doNative.apply(n, d);
 
         int ref = doRef.apply(n, magic);
@@ -362,11 +362,11 @@ public class LibDivideTest {
         }
     }
 
-    private interface Gen64<T extends Struct> {
+    private interface Gen64<T extends Struct<T>> {
         T apply(long denom, T __result);
     }
 
-    private interface Do64<T extends Struct> {
+    private interface Do64<T extends Struct<T>> {
         long apply(long numer, T denom);
     }
 
@@ -374,7 +374,7 @@ public class LibDivideTest {
         long apply(long numer, long denom);
     }
 
-    private static <T extends Struct> void test64(
+    private static <T extends Struct<T>> void test64(
         Function<MemoryStack, T> malloc,
         Gen64<T> genRef, Gen64<T> gen,
         Native64 doNative, Do64<T> doRef, Do64<T> doJava,
@@ -412,7 +412,7 @@ public class LibDivideTest {
         }
     }
 
-    private static <T extends Struct> void test64(T magic, Gen64<T> genRef, Gen64<T> gen, long d) {
+    private static <T extends Struct<T>> void test64(T magic, Gen64<T> genRef, Gen64<T> gen, long d) {
         genRef.apply(d, magic);
 
         long m = memGetLong(magic.address());
@@ -427,7 +427,7 @@ public class LibDivideTest {
         assertEquals(memGetByte(magic.address() + 8), b);
     }
 
-    private static <T extends Struct> void test64(T magic, Native64 doNative, Do64<T> doRef, Do64<T> doJava, long d, long n) {
+    private static <T extends Struct<T>> void test64(T magic, Native64 doNative, Do64<T> doRef, Do64<T> doJava, long d, long n) {
         long refNative = doNative.apply(n, d);
 
         long ref = doRef.apply(n, magic);

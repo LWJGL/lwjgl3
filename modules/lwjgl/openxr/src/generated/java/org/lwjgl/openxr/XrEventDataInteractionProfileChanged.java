@@ -44,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrSession {@link #session};
  * }</code></pre>
  */
-public class XrEventDataInteractionProfileChanged extends Struct implements NativeResource {
+public class XrEventDataInteractionProfileChanged extends Struct<XrEventDataInteractionProfileChanged> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -71,6 +71,15 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         SESSION = layout.offsetof(2);
+    }
+
+    protected XrEventDataInteractionProfileChanged(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrEventDataInteractionProfileChanged create(long address, @Nullable ByteBuffer container) {
+        return new XrEventDataInteractionProfileChanged(address, container);
     }
 
     /**
@@ -130,34 +139,34 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
 
     /** Returns a new {@code XrEventDataInteractionProfileChanged} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrEventDataInteractionProfileChanged malloc() {
-        return wrap(XrEventDataInteractionProfileChanged.class, nmemAllocChecked(SIZEOF));
+        return new XrEventDataInteractionProfileChanged(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrEventDataInteractionProfileChanged} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrEventDataInteractionProfileChanged calloc() {
-        return wrap(XrEventDataInteractionProfileChanged.class, nmemCallocChecked(1, SIZEOF));
+        return new XrEventDataInteractionProfileChanged(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrEventDataInteractionProfileChanged} instance allocated with {@link BufferUtils}. */
     public static XrEventDataInteractionProfileChanged create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrEventDataInteractionProfileChanged.class, memAddress(container), container);
+        return new XrEventDataInteractionProfileChanged(memAddress(container), container);
     }
 
     /** Returns a new {@code XrEventDataInteractionProfileChanged} instance for the specified memory address. */
     public static XrEventDataInteractionProfileChanged create(long address) {
-        return wrap(XrEventDataInteractionProfileChanged.class, address);
+        return new XrEventDataInteractionProfileChanged(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrEventDataInteractionProfileChanged createSafe(long address) {
-        return address == NULL ? null : wrap(XrEventDataInteractionProfileChanged.class, address);
+        return address == NULL ? null : new XrEventDataInteractionProfileChanged(address, null);
     }
 
     /** Downcasts the specified {@code XrEventDataBaseHeader} instance to {@code XrEventDataInteractionProfileChanged}. */
     public static XrEventDataInteractionProfileChanged create(XrEventDataBaseHeader value) {
-        return wrap(XrEventDataInteractionProfileChanged.class, value);
+        return new XrEventDataInteractionProfileChanged(value.address(), __getContainer(value));
     }
 
     /**
@@ -166,7 +175,7 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static XrEventDataInteractionProfileChanged.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -175,7 +184,7 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static XrEventDataInteractionProfileChanged.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -185,7 +194,7 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
      */
     public static XrEventDataInteractionProfileChanged.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -195,18 +204,18 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static XrEventDataInteractionProfileChanged.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrEventDataInteractionProfileChanged.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /** Downcasts the specified {@code XrEventDataBaseHeader.Buffer} instance to {@code XrEventDataInteractionProfileChanged.Buffer}. */
     public static XrEventDataInteractionProfileChanged.Buffer create(XrEventDataBaseHeader.Buffer value) {
-        return wrap(Buffer.class, value);
+        return new XrEventDataInteractionProfileChanged.Buffer(value.address(), __getContainer(value), -1, 0, value.remaining(), value.remaining());
     }
 
     /**
@@ -215,7 +224,7 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static XrEventDataInteractionProfileChanged malloc(MemoryStack stack) {
-        return wrap(XrEventDataInteractionProfileChanged.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrEventDataInteractionProfileChanged(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -224,7 +233,7 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
      * @param stack the stack from which to allocate
      */
     public static XrEventDataInteractionProfileChanged calloc(MemoryStack stack) {
-        return wrap(XrEventDataInteractionProfileChanged.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrEventDataInteractionProfileChanged(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -234,7 +243,7 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static XrEventDataInteractionProfileChanged.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -244,7 +253,7 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
      * @param capacity the buffer capacity
      */
     public static XrEventDataInteractionProfileChanged.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -271,9 +280,9 @@ public class XrEventDataInteractionProfileChanged extends Struct implements Nati
         /**
          * Creates a new {@code XrEventDataInteractionProfileChanged.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrEventDataInteractionProfileChanged#SIZEOF}, and its mark will be undefined.
+         * by {@link XrEventDataInteractionProfileChanged#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

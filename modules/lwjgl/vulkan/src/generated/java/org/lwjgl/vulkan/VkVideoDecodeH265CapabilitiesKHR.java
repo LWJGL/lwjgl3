@@ -35,7 +35,7 @@ import org.lwjgl.vulkan.video.*;
  *     StdVideoH265LevelIdc {@link #maxLevelIdc};
  * }</code></pre>
  */
-public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeResource {
+public class VkVideoDecodeH265CapabilitiesKHR extends Struct<VkVideoDecodeH265CapabilitiesKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -62,6 +62,15 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         MAXLEVELIDC = layout.offsetof(2);
+    }
+
+    protected VkVideoDecodeH265CapabilitiesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkVideoDecodeH265CapabilitiesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkVideoDecodeH265CapabilitiesKHR(address, container);
     }
 
     /**
@@ -121,29 +130,29 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
 
     /** Returns a new {@code VkVideoDecodeH265CapabilitiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkVideoDecodeH265CapabilitiesKHR malloc() {
-        return wrap(VkVideoDecodeH265CapabilitiesKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkVideoDecodeH265CapabilitiesKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoDecodeH265CapabilitiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkVideoDecodeH265CapabilitiesKHR calloc() {
-        return wrap(VkVideoDecodeH265CapabilitiesKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkVideoDecodeH265CapabilitiesKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoDecodeH265CapabilitiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkVideoDecodeH265CapabilitiesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkVideoDecodeH265CapabilitiesKHR.class, memAddress(container), container);
+        return new VkVideoDecodeH265CapabilitiesKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkVideoDecodeH265CapabilitiesKHR} instance for the specified memory address. */
     public static VkVideoDecodeH265CapabilitiesKHR create(long address) {
-        return wrap(VkVideoDecodeH265CapabilitiesKHR.class, address);
+        return new VkVideoDecodeH265CapabilitiesKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoDecodeH265CapabilitiesKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkVideoDecodeH265CapabilitiesKHR.class, address);
+        return address == NULL ? null : new VkVideoDecodeH265CapabilitiesKHR(address, null);
     }
 
     /**
@@ -152,7 +161,7 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH265CapabilitiesKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -161,7 +170,7 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH265CapabilitiesKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -171,7 +180,7 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
      */
     public static VkVideoDecodeH265CapabilitiesKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -181,13 +190,13 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH265CapabilitiesKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoDecodeH265CapabilitiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -196,7 +205,7 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkVideoDecodeH265CapabilitiesKHR malloc(MemoryStack stack) {
-        return wrap(VkVideoDecodeH265CapabilitiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkVideoDecodeH265CapabilitiesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -205,7 +214,7 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkVideoDecodeH265CapabilitiesKHR calloc(MemoryStack stack) {
-        return wrap(VkVideoDecodeH265CapabilitiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkVideoDecodeH265CapabilitiesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -215,7 +224,7 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH265CapabilitiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -225,7 +234,7 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkVideoDecodeH265CapabilitiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -252,9 +261,9 @@ public class VkVideoDecodeH265CapabilitiesKHR extends Struct implements NativeRe
         /**
          * Creates a new {@code VkVideoDecodeH265CapabilitiesKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkVideoDecodeH265CapabilitiesKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkVideoDecodeH265CapabilitiesKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

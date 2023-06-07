@@ -53,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XrUuidEXT XrUuidEXT} {@link #id};
  * }</code></pre>
  */
-public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeResource {
+public class XrSystemHeadsetIdPropertiesMETA extends Struct<XrSystemHeadsetIdPropertiesMETA> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -80,6 +80,15 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
         TYPE = layout.offsetof(0);
         NEXT = layout.offsetof(1);
         ID = layout.offsetof(2);
+    }
+
+    protected XrSystemHeadsetIdPropertiesMETA(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSystemHeadsetIdPropertiesMETA create(long address, @Nullable ByteBuffer container) {
+        return new XrSystemHeadsetIdPropertiesMETA(address, container);
     }
 
     /**
@@ -138,29 +147,29 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
 
     /** Returns a new {@code XrSystemHeadsetIdPropertiesMETA} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSystemHeadsetIdPropertiesMETA malloc() {
-        return wrap(XrSystemHeadsetIdPropertiesMETA.class, nmemAllocChecked(SIZEOF));
+        return new XrSystemHeadsetIdPropertiesMETA(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSystemHeadsetIdPropertiesMETA} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSystemHeadsetIdPropertiesMETA calloc() {
-        return wrap(XrSystemHeadsetIdPropertiesMETA.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSystemHeadsetIdPropertiesMETA(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSystemHeadsetIdPropertiesMETA} instance allocated with {@link BufferUtils}. */
     public static XrSystemHeadsetIdPropertiesMETA create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSystemHeadsetIdPropertiesMETA.class, memAddress(container), container);
+        return new XrSystemHeadsetIdPropertiesMETA(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSystemHeadsetIdPropertiesMETA} instance for the specified memory address. */
     public static XrSystemHeadsetIdPropertiesMETA create(long address) {
-        return wrap(XrSystemHeadsetIdPropertiesMETA.class, address);
+        return new XrSystemHeadsetIdPropertiesMETA(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSystemHeadsetIdPropertiesMETA createSafe(long address) {
-        return address == NULL ? null : wrap(XrSystemHeadsetIdPropertiesMETA.class, address);
+        return address == NULL ? null : new XrSystemHeadsetIdPropertiesMETA(address, null);
     }
 
     /**
@@ -169,7 +178,7 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static XrSystemHeadsetIdPropertiesMETA.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +187,7 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static XrSystemHeadsetIdPropertiesMETA.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -188,7 +197,7 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
      */
     public static XrSystemHeadsetIdPropertiesMETA.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -198,13 +207,13 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static XrSystemHeadsetIdPropertiesMETA.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSystemHeadsetIdPropertiesMETA.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -213,7 +222,7 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static XrSystemHeadsetIdPropertiesMETA malloc(MemoryStack stack) {
-        return wrap(XrSystemHeadsetIdPropertiesMETA.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSystemHeadsetIdPropertiesMETA(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -222,7 +231,7 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static XrSystemHeadsetIdPropertiesMETA calloc(MemoryStack stack) {
-        return wrap(XrSystemHeadsetIdPropertiesMETA.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSystemHeadsetIdPropertiesMETA(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static XrSystemHeadsetIdPropertiesMETA.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -242,7 +251,7 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static XrSystemHeadsetIdPropertiesMETA.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -269,9 +278,9 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct implements NativeRes
         /**
          * Creates a new {@code XrSystemHeadsetIdPropertiesMETA.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSystemHeadsetIdPropertiesMETA#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSystemHeadsetIdPropertiesMETA#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

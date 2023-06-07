@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * {@link #pData};
  * }</code></pre>
  */
-public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements NativeResource {
+public class VkWriteDescriptorSetInlineUniformBlock extends Struct<VkWriteDescriptorSetInlineUniformBlock> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -73,6 +73,15 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
         PNEXT = layout.offsetof(1);
         DATASIZE = layout.offsetof(2);
         PDATA = layout.offsetof(3);
+    }
+
+    protected VkWriteDescriptorSetInlineUniformBlock(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkWriteDescriptorSetInlineUniformBlock create(long address, @Nullable ByteBuffer container) {
+        return new VkWriteDescriptorSetInlineUniformBlock(address, container);
     }
 
     /**
@@ -139,29 +148,29 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
 
     /** Returns a new {@code VkWriteDescriptorSetInlineUniformBlock} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkWriteDescriptorSetInlineUniformBlock malloc() {
-        return wrap(VkWriteDescriptorSetInlineUniformBlock.class, nmemAllocChecked(SIZEOF));
+        return new VkWriteDescriptorSetInlineUniformBlock(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkWriteDescriptorSetInlineUniformBlock} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkWriteDescriptorSetInlineUniformBlock calloc() {
-        return wrap(VkWriteDescriptorSetInlineUniformBlock.class, nmemCallocChecked(1, SIZEOF));
+        return new VkWriteDescriptorSetInlineUniformBlock(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkWriteDescriptorSetInlineUniformBlock} instance allocated with {@link BufferUtils}. */
     public static VkWriteDescriptorSetInlineUniformBlock create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkWriteDescriptorSetInlineUniformBlock.class, memAddress(container), container);
+        return new VkWriteDescriptorSetInlineUniformBlock(memAddress(container), container);
     }
 
     /** Returns a new {@code VkWriteDescriptorSetInlineUniformBlock} instance for the specified memory address. */
     public static VkWriteDescriptorSetInlineUniformBlock create(long address) {
-        return wrap(VkWriteDescriptorSetInlineUniformBlock.class, address);
+        return new VkWriteDescriptorSetInlineUniformBlock(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWriteDescriptorSetInlineUniformBlock createSafe(long address) {
-        return address == NULL ? null : wrap(VkWriteDescriptorSetInlineUniformBlock.class, address);
+        return address == NULL ? null : new VkWriteDescriptorSetInlineUniformBlock(address, null);
     }
 
     /**
@@ -170,7 +179,7 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSetInlineUniformBlock.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -179,7 +188,7 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSetInlineUniformBlock.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -189,7 +198,7 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
      */
     public static VkWriteDescriptorSetInlineUniformBlock.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -199,13 +208,13 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSetInlineUniformBlock.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkWriteDescriptorSetInlineUniformBlock.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -214,7 +223,7 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
      * @param stack the stack from which to allocate
      */
     public static VkWriteDescriptorSetInlineUniformBlock malloc(MemoryStack stack) {
-        return wrap(VkWriteDescriptorSetInlineUniformBlock.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkWriteDescriptorSetInlineUniformBlock(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -223,7 +232,7 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
      * @param stack the stack from which to allocate
      */
     public static VkWriteDescriptorSetInlineUniformBlock calloc(MemoryStack stack) {
-        return wrap(VkWriteDescriptorSetInlineUniformBlock.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkWriteDescriptorSetInlineUniformBlock(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -233,7 +242,7 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSetInlineUniformBlock.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -243,7 +252,7 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
      * @param capacity the buffer capacity
      */
     public static VkWriteDescriptorSetInlineUniformBlock.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -285,9 +294,9 @@ public class VkWriteDescriptorSetInlineUniformBlock extends Struct implements Na
         /**
          * Creates a new {@code VkWriteDescriptorSetInlineUniformBlock.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkWriteDescriptorSetInlineUniformBlock#SIZEOF}, and its mark will be undefined.
+         * by {@link VkWriteDescriptorSetInlineUniformBlock#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

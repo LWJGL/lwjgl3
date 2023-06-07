@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct nk_edit_state")
-public class NkEditState extends Struct {
+public class NkEditState extends Struct<NkEditState> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -85,6 +85,15 @@ public class NkEditState extends Struct {
         SINGLE_LINE = layout.offsetof(10);
     }
 
+    protected NkEditState(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkEditState create(long address, @Nullable ByteBuffer container) {
+        return new NkEditState(address, container);
+    }
+
     /**
      * Creates a {@code NkEditState} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -131,13 +140,13 @@ public class NkEditState extends Struct {
 
     /** Returns a new {@code NkEditState} instance for the specified memory address. */
     public static NkEditState create(long address) {
-        return wrap(NkEditState.class, address);
+        return new NkEditState(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkEditState createSafe(long address) {
-        return address == NULL ? null : wrap(NkEditState.class, address);
+        return address == NULL ? null : new NkEditState(address, null);
     }
 
     /**
@@ -147,13 +156,13 @@ public class NkEditState extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkEditState.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkEditState.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -191,9 +200,9 @@ public class NkEditState extends Struct {
         /**
          * Creates a new {@code NkEditState.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkEditState#SIZEOF}, and its mark will be undefined.
+         * by {@link NkEditState#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

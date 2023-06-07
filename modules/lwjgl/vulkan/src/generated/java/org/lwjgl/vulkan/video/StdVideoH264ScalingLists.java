@@ -29,7 +29,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
  *     uint8_t ScalingList8x8[STD_VIDEO_H264_SCALING_LIST_8X8_NUM_ELEMENTS];
  * }</code></pre>
  */
-public class StdVideoH264ScalingLists extends Struct implements NativeResource {
+public class StdVideoH264ScalingLists extends Struct<StdVideoH264ScalingLists> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -59,6 +59,15 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
         USE_DEFAULT_SCALING_MATRIX_MASK = layout.offsetof(1);
         SCALINGLIST4X4 = layout.offsetof(2);
         SCALINGLIST8X8 = layout.offsetof(3);
+    }
+
+    protected StdVideoH264ScalingLists(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected StdVideoH264ScalingLists create(long address, @Nullable ByteBuffer container) {
+        return new StdVideoH264ScalingLists(address, container);
     }
 
     /**
@@ -143,29 +152,29 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
 
     /** Returns a new {@code StdVideoH264ScalingLists} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static StdVideoH264ScalingLists malloc() {
-        return wrap(StdVideoH264ScalingLists.class, nmemAllocChecked(SIZEOF));
+        return new StdVideoH264ScalingLists(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH264ScalingLists} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static StdVideoH264ScalingLists calloc() {
-        return wrap(StdVideoH264ScalingLists.class, nmemCallocChecked(1, SIZEOF));
+        return new StdVideoH264ScalingLists(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code StdVideoH264ScalingLists} instance allocated with {@link BufferUtils}. */
     public static StdVideoH264ScalingLists create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(StdVideoH264ScalingLists.class, memAddress(container), container);
+        return new StdVideoH264ScalingLists(memAddress(container), container);
     }
 
     /** Returns a new {@code StdVideoH264ScalingLists} instance for the specified memory address. */
     public static StdVideoH264ScalingLists create(long address) {
-        return wrap(StdVideoH264ScalingLists.class, address);
+        return new StdVideoH264ScalingLists(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH264ScalingLists createSafe(long address) {
-        return address == NULL ? null : wrap(StdVideoH264ScalingLists.class, address);
+        return address == NULL ? null : new StdVideoH264ScalingLists(address, null);
     }
 
     /**
@@ -174,7 +183,7 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static StdVideoH264ScalingLists.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -183,7 +192,7 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static StdVideoH264ScalingLists.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -193,7 +202,7 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
      */
     public static StdVideoH264ScalingLists.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -203,13 +212,13 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static StdVideoH264ScalingLists.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static StdVideoH264ScalingLists.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -218,7 +227,7 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static StdVideoH264ScalingLists malloc(MemoryStack stack) {
-        return wrap(StdVideoH264ScalingLists.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new StdVideoH264ScalingLists(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -227,7 +236,7 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static StdVideoH264ScalingLists calloc(MemoryStack stack) {
-        return wrap(StdVideoH264ScalingLists.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new StdVideoH264ScalingLists(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -237,7 +246,7 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static StdVideoH264ScalingLists.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -247,7 +256,7 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static StdVideoH264ScalingLists.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -302,9 +311,9 @@ public class StdVideoH264ScalingLists extends Struct implements NativeResource {
         /**
          * Creates a new {@code StdVideoH264ScalingLists.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link StdVideoH264ScalingLists#SIZEOF}, and its mark will be undefined.
+         * by {@link StdVideoH264ScalingLists#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t const * {@link #buffer};
  * }</code></pre>
  */
-public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeResource {
+public class XrDeserializeSceneFragmentMSFT extends Struct<XrDeserializeSceneFragmentMSFT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -61,6 +61,15 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
 
         BUFFERSIZE = layout.offsetof(0);
         BUFFER = layout.offsetof(1);
+    }
+
+    protected XrDeserializeSceneFragmentMSFT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrDeserializeSceneFragmentMSFT create(long address, @Nullable ByteBuffer container) {
+        return new XrDeserializeSceneFragmentMSFT(address, container);
     }
 
     /**
@@ -116,29 +125,29 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
 
     /** Returns a new {@code XrDeserializeSceneFragmentMSFT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrDeserializeSceneFragmentMSFT malloc() {
-        return wrap(XrDeserializeSceneFragmentMSFT.class, nmemAllocChecked(SIZEOF));
+        return new XrDeserializeSceneFragmentMSFT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrDeserializeSceneFragmentMSFT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrDeserializeSceneFragmentMSFT calloc() {
-        return wrap(XrDeserializeSceneFragmentMSFT.class, nmemCallocChecked(1, SIZEOF));
+        return new XrDeserializeSceneFragmentMSFT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrDeserializeSceneFragmentMSFT} instance allocated with {@link BufferUtils}. */
     public static XrDeserializeSceneFragmentMSFT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrDeserializeSceneFragmentMSFT.class, memAddress(container), container);
+        return new XrDeserializeSceneFragmentMSFT(memAddress(container), container);
     }
 
     /** Returns a new {@code XrDeserializeSceneFragmentMSFT} instance for the specified memory address. */
     public static XrDeserializeSceneFragmentMSFT create(long address) {
-        return wrap(XrDeserializeSceneFragmentMSFT.class, address);
+        return new XrDeserializeSceneFragmentMSFT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrDeserializeSceneFragmentMSFT createSafe(long address) {
-        return address == NULL ? null : wrap(XrDeserializeSceneFragmentMSFT.class, address);
+        return address == NULL ? null : new XrDeserializeSceneFragmentMSFT(address, null);
     }
 
     /**
@@ -147,7 +156,7 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static XrDeserializeSceneFragmentMSFT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -156,7 +165,7 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static XrDeserializeSceneFragmentMSFT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -166,7 +175,7 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
      */
     public static XrDeserializeSceneFragmentMSFT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -176,13 +185,13 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static XrDeserializeSceneFragmentMSFT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrDeserializeSceneFragmentMSFT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -191,7 +200,7 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static XrDeserializeSceneFragmentMSFT malloc(MemoryStack stack) {
-        return wrap(XrDeserializeSceneFragmentMSFT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrDeserializeSceneFragmentMSFT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -200,7 +209,7 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
      * @param stack the stack from which to allocate
      */
     public static XrDeserializeSceneFragmentMSFT calloc(MemoryStack stack) {
-        return wrap(XrDeserializeSceneFragmentMSFT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrDeserializeSceneFragmentMSFT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -210,7 +219,7 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static XrDeserializeSceneFragmentMSFT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -220,7 +229,7 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
      * @param capacity the buffer capacity
      */
     public static XrDeserializeSceneFragmentMSFT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -245,9 +254,9 @@ public class XrDeserializeSceneFragmentMSFT extends Struct implements NativeReso
         /**
          * Creates a new {@code XrDeserializeSceneFragmentMSFT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrDeserializeSceneFragmentMSFT#SIZEOF}, and its mark will be undefined.
+         * by {@link XrDeserializeSceneFragmentMSFT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

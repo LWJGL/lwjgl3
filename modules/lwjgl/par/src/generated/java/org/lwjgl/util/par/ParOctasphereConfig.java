@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct par_octasphere_config")
-public class ParOctasphereConfig extends Struct implements NativeResource {
+public class ParOctasphereConfig extends Struct<ParOctasphereConfig> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -69,6 +69,15 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
         NUM_SUBDIVISIONS = layout.offsetof(4);
         UV_MODE = layout.offsetof(5);
         NORMALS_MODE = layout.offsetof(6);
+    }
+
+    protected ParOctasphereConfig(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected ParOctasphereConfig create(long address, @Nullable ByteBuffer container) {
+        return new ParOctasphereConfig(address, container);
     }
 
     /**
@@ -153,29 +162,29 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
 
     /** Returns a new {@code ParOctasphereConfig} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static ParOctasphereConfig malloc() {
-        return wrap(ParOctasphereConfig.class, nmemAllocChecked(SIZEOF));
+        return new ParOctasphereConfig(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code ParOctasphereConfig} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static ParOctasphereConfig calloc() {
-        return wrap(ParOctasphereConfig.class, nmemCallocChecked(1, SIZEOF));
+        return new ParOctasphereConfig(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code ParOctasphereConfig} instance allocated with {@link BufferUtils}. */
     public static ParOctasphereConfig create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(ParOctasphereConfig.class, memAddress(container), container);
+        return new ParOctasphereConfig(memAddress(container), container);
     }
 
     /** Returns a new {@code ParOctasphereConfig} instance for the specified memory address. */
     public static ParOctasphereConfig create(long address) {
-        return wrap(ParOctasphereConfig.class, address);
+        return new ParOctasphereConfig(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ParOctasphereConfig createSafe(long address) {
-        return address == NULL ? null : wrap(ParOctasphereConfig.class, address);
+        return address == NULL ? null : new ParOctasphereConfig(address, null);
     }
 
     /**
@@ -184,7 +193,7 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ParOctasphereConfig.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -193,7 +202,7 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ParOctasphereConfig.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -203,7 +212,7 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
      */
     public static ParOctasphereConfig.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -213,13 +222,13 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ParOctasphereConfig.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static ParOctasphereConfig.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -228,7 +237,7 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ParOctasphereConfig malloc(MemoryStack stack) {
-        return wrap(ParOctasphereConfig.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new ParOctasphereConfig(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -237,7 +246,7 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static ParOctasphereConfig calloc(MemoryStack stack) {
-        return wrap(ParOctasphereConfig.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new ParOctasphereConfig(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -247,7 +256,7 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ParOctasphereConfig.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -257,7 +266,7 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static ParOctasphereConfig.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -302,9 +311,9 @@ public class ParOctasphereConfig extends Struct implements NativeResource {
         /**
          * Creates a new {@code ParOctasphereConfig.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link ParOctasphereConfig#SIZEOF}, and its mark will be undefined.
+         * by {@link ParOctasphereConfig#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

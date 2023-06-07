@@ -42,7 +42,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrActionSet const * {@link #actionSets};
  * }</code></pre>
  */
-public class XrSessionActionSetsAttachInfo extends Struct implements NativeResource {
+public class XrSessionActionSetsAttachInfo extends Struct<XrSessionActionSetsAttachInfo> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -72,6 +72,15 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
         NEXT = layout.offsetof(1);
         COUNTACTIONSETS = layout.offsetof(2);
         ACTIONSETS = layout.offsetof(3);
+    }
+
+    protected XrSessionActionSetsAttachInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrSessionActionSetsAttachInfo create(long address, @Nullable ByteBuffer container) {
+        return new XrSessionActionSetsAttachInfo(address, container);
     }
 
     /**
@@ -138,29 +147,29 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
 
     /** Returns a new {@code XrSessionActionSetsAttachInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrSessionActionSetsAttachInfo malloc() {
-        return wrap(XrSessionActionSetsAttachInfo.class, nmemAllocChecked(SIZEOF));
+        return new XrSessionActionSetsAttachInfo(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrSessionActionSetsAttachInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrSessionActionSetsAttachInfo calloc() {
-        return wrap(XrSessionActionSetsAttachInfo.class, nmemCallocChecked(1, SIZEOF));
+        return new XrSessionActionSetsAttachInfo(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrSessionActionSetsAttachInfo} instance allocated with {@link BufferUtils}. */
     public static XrSessionActionSetsAttachInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrSessionActionSetsAttachInfo.class, memAddress(container), container);
+        return new XrSessionActionSetsAttachInfo(memAddress(container), container);
     }
 
     /** Returns a new {@code XrSessionActionSetsAttachInfo} instance for the specified memory address. */
     public static XrSessionActionSetsAttachInfo create(long address) {
-        return wrap(XrSessionActionSetsAttachInfo.class, address);
+        return new XrSessionActionSetsAttachInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSessionActionSetsAttachInfo createSafe(long address) {
-        return address == NULL ? null : wrap(XrSessionActionSetsAttachInfo.class, address);
+        return address == NULL ? null : new XrSessionActionSetsAttachInfo(address, null);
     }
 
     /**
@@ -169,7 +178,7 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrSessionActionSetsAttachInfo.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +187,7 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrSessionActionSetsAttachInfo.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -188,7 +197,7 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
      */
     public static XrSessionActionSetsAttachInfo.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -198,13 +207,13 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrSessionActionSetsAttachInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrSessionActionSetsAttachInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -213,7 +222,7 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static XrSessionActionSetsAttachInfo malloc(MemoryStack stack) {
-        return wrap(XrSessionActionSetsAttachInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrSessionActionSetsAttachInfo(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -222,7 +231,7 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static XrSessionActionSetsAttachInfo calloc(MemoryStack stack) {
-        return wrap(XrSessionActionSetsAttachInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrSessionActionSetsAttachInfo(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -232,7 +241,7 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrSessionActionSetsAttachInfo.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -242,7 +251,7 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static XrSessionActionSetsAttachInfo.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -284,9 +293,9 @@ public class XrSessionActionSetsAttachInfo extends Struct implements NativeResou
         /**
          * Creates a new {@code XrSessionActionSetsAttachInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrSessionActionSetsAttachInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link XrSessionActionSetsAttachInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int {@link #state};
  * }</code></pre>
  */
-public class XColormapEvent extends Struct implements NativeResource {
+public class XColormapEvent extends Struct<XColormapEvent> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -73,6 +73,15 @@ public class XColormapEvent extends Struct implements NativeResource {
         COLORMAP = layout.offsetof(5);
         NEW = layout.offsetof(6);
         STATE = layout.offsetof(7);
+    }
+
+    protected XColormapEvent(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XColormapEvent create(long address, @Nullable ByteBuffer container) {
+        return new XColormapEvent(address, container);
     }
 
     /**
@@ -166,29 +175,29 @@ public class XColormapEvent extends Struct implements NativeResource {
 
     /** Returns a new {@code XColormapEvent} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XColormapEvent malloc() {
-        return wrap(XColormapEvent.class, nmemAllocChecked(SIZEOF));
+        return new XColormapEvent(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XColormapEvent} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XColormapEvent calloc() {
-        return wrap(XColormapEvent.class, nmemCallocChecked(1, SIZEOF));
+        return new XColormapEvent(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XColormapEvent} instance allocated with {@link BufferUtils}. */
     public static XColormapEvent create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XColormapEvent.class, memAddress(container), container);
+        return new XColormapEvent(memAddress(container), container);
     }
 
     /** Returns a new {@code XColormapEvent} instance for the specified memory address. */
     public static XColormapEvent create(long address) {
-        return wrap(XColormapEvent.class, address);
+        return new XColormapEvent(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XColormapEvent createSafe(long address) {
-        return address == NULL ? null : wrap(XColormapEvent.class, address);
+        return address == NULL ? null : new XColormapEvent(address, null);
     }
 
     /**
@@ -197,7 +206,7 @@ public class XColormapEvent extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XColormapEvent.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -206,7 +215,7 @@ public class XColormapEvent extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XColormapEvent.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -216,7 +225,7 @@ public class XColormapEvent extends Struct implements NativeResource {
      */
     public static XColormapEvent.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -226,13 +235,13 @@ public class XColormapEvent extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XColormapEvent.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XColormapEvent.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -260,7 +269,7 @@ public class XColormapEvent extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XColormapEvent malloc(MemoryStack stack) {
-        return wrap(XColormapEvent.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XColormapEvent(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -269,7 +278,7 @@ public class XColormapEvent extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XColormapEvent calloc(MemoryStack stack) {
-        return wrap(XColormapEvent.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XColormapEvent(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -279,7 +288,7 @@ public class XColormapEvent extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XColormapEvent.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -289,7 +298,7 @@ public class XColormapEvent extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XColormapEvent.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -347,9 +356,9 @@ public class XColormapEvent extends Struct implements NativeResource {
         /**
          * Creates a new {@code XColormapEvent.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XColormapEvent#SIZEOF}, and its mark will be undefined.
+         * by {@link XColormapEvent#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

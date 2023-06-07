@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     unsigned int obj_index;
  * }</code></pre>
  */
-public class hwloc_topology_diff_too_complex_s extends Struct {
+public class hwloc_topology_diff_too_complex_s extends Struct<hwloc_topology_diff_too_complex_s> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -54,6 +54,15 @@ public class hwloc_topology_diff_too_complex_s extends Struct {
         NEXT = layout.offsetof(1);
         OBJ_DEPTH = layout.offsetof(2);
         OBJ_INDEX = layout.offsetof(3);
+    }
+
+    protected hwloc_topology_diff_too_complex_s(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected hwloc_topology_diff_too_complex_s create(long address, @Nullable ByteBuffer container) {
+        return new hwloc_topology_diff_too_complex_s(address, container);
     }
 
     /**
@@ -86,13 +95,13 @@ public class hwloc_topology_diff_too_complex_s extends Struct {
 
     /** Returns a new {@code hwloc_topology_diff_too_complex_s} instance for the specified memory address. */
     public static hwloc_topology_diff_too_complex_s create(long address) {
-        return wrap(hwloc_topology_diff_too_complex_s.class, address);
+        return new hwloc_topology_diff_too_complex_s(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static hwloc_topology_diff_too_complex_s createSafe(long address) {
-        return address == NULL ? null : wrap(hwloc_topology_diff_too_complex_s.class, address);
+        return address == NULL ? null : new hwloc_topology_diff_too_complex_s(address, null);
     }
 
     /**
@@ -102,13 +111,13 @@ public class hwloc_topology_diff_too_complex_s extends Struct {
      * @param capacity the buffer capacity
      */
     public static hwloc_topology_diff_too_complex_s.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static hwloc_topology_diff_too_complex_s.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -132,9 +141,9 @@ public class hwloc_topology_diff_too_complex_s extends Struct {
         /**
          * Creates a new {@code hwloc_topology_diff_too_complex_s.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link hwloc_topology_diff_too_complex_s#SIZEOF}, and its mark will be undefined.
+         * by {@link hwloc_topology_diff_too_complex_s#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

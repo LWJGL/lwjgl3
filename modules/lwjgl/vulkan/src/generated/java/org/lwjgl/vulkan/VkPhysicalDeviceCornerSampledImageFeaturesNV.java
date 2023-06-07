@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #cornerSampledImage};
  * }</code></pre>
  */
-public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct implements NativeResource {
+public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct<VkPhysicalDeviceCornerSampledImageFeaturesNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         CORNERSAMPLEDIMAGE = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceCornerSampledImageFeaturesNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceCornerSampledImageFeaturesNV create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceCornerSampledImageFeaturesNV(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
 
     /** Returns a new {@code VkPhysicalDeviceCornerSampledImageFeaturesNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV malloc() {
-        return wrap(VkPhysicalDeviceCornerSampledImageFeaturesNV.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceCornerSampledImageFeaturesNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceCornerSampledImageFeaturesNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV calloc() {
-        return wrap(VkPhysicalDeviceCornerSampledImageFeaturesNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceCornerSampledImageFeaturesNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceCornerSampledImageFeaturesNV} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceCornerSampledImageFeaturesNV.class, memAddress(container), container);
+        return new VkPhysicalDeviceCornerSampledImageFeaturesNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceCornerSampledImageFeaturesNV} instance for the specified memory address. */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV create(long address) {
-        return wrap(VkPhysicalDeviceCornerSampledImageFeaturesNV.class, address);
+        return new VkPhysicalDeviceCornerSampledImageFeaturesNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceCornerSampledImageFeaturesNV.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceCornerSampledImageFeaturesNV(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
      */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -221,7 +230,7 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceCornerSampledImageFeaturesNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceCornerSampledImageFeaturesNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -230,7 +239,7 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceCornerSampledImageFeaturesNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceCornerSampledImageFeaturesNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -240,7 +249,7 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -250,7 +259,7 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -279,9 +288,9 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct impleme
         /**
          * Creates a new {@code VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

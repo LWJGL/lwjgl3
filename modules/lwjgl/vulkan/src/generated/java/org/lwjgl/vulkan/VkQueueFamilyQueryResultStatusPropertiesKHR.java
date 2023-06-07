@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #queryResultStatusSupport};
  * }</code></pre>
  */
-public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implements NativeResource {
+public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct<VkQueueFamilyQueryResultStatusPropertiesKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         QUERYRESULTSTATUSSUPPORT = layout.offsetof(2);
+    }
+
+    protected VkQueueFamilyQueryResultStatusPropertiesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkQueueFamilyQueryResultStatusPropertiesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkQueueFamilyQueryResultStatusPropertiesKHR(address, container);
     }
 
     /**
@@ -123,29 +132,29 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
 
     /** Returns a new {@code VkQueueFamilyQueryResultStatusPropertiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR malloc() {
-        return wrap(VkQueueFamilyQueryResultStatusPropertiesKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkQueueFamilyQueryResultStatusPropertiesKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkQueueFamilyQueryResultStatusPropertiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR calloc() {
-        return wrap(VkQueueFamilyQueryResultStatusPropertiesKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkQueueFamilyQueryResultStatusPropertiesKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkQueueFamilyQueryResultStatusPropertiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkQueueFamilyQueryResultStatusPropertiesKHR.class, memAddress(container), container);
+        return new VkQueueFamilyQueryResultStatusPropertiesKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkQueueFamilyQueryResultStatusPropertiesKHR} instance for the specified memory address. */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR create(long address) {
-        return wrap(VkQueueFamilyQueryResultStatusPropertiesKHR.class, address);
+        return new VkQueueFamilyQueryResultStatusPropertiesKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkQueueFamilyQueryResultStatusPropertiesKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkQueueFamilyQueryResultStatusPropertiesKHR.class, address);
+        return address == NULL ? null : new VkQueueFamilyQueryResultStatusPropertiesKHR(address, null);
     }
 
     /**
@@ -154,7 +163,7 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -163,7 +172,7 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -173,7 +182,7 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
      */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -183,13 +192,13 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -198,7 +207,7 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR malloc(MemoryStack stack) {
-        return wrap(VkQueueFamilyQueryResultStatusPropertiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkQueueFamilyQueryResultStatusPropertiesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -207,7 +216,7 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
      * @param stack the stack from which to allocate
      */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR calloc(MemoryStack stack) {
-        return wrap(VkQueueFamilyQueryResultStatusPropertiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkQueueFamilyQueryResultStatusPropertiesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -217,7 +226,7 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -227,7 +236,7 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
      * @param capacity the buffer capacity
      */
     public static VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -254,9 +263,9 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct implemen
         /**
          * Creates a new {@code VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkQueueFamilyQueryResultStatusPropertiesKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkQueueFamilyQueryResultStatusPropertiesKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

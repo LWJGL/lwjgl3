@@ -30,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     LPCWSTR {@link #szPrompt};
  * }</code></pre>
  */
-public class CRYPTPROTECT_PROMPTSTRUCT extends Struct implements NativeResource {
+public class CRYPTPROTECT_PROMPTSTRUCT extends Struct<CRYPTPROTECT_PROMPTSTRUCT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -60,6 +60,15 @@ public class CRYPTPROTECT_PROMPTSTRUCT extends Struct implements NativeResource 
         DWPROMPTFLAGS = layout.offsetof(1);
         HWNDAPP = layout.offsetof(2);
         SZPROMPT = layout.offsetof(3);
+    }
+
+    protected CRYPTPROTECT_PROMPTSTRUCT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CRYPTPROTECT_PROMPTSTRUCT create(long address, @Nullable ByteBuffer container) {
+        return new CRYPTPROTECT_PROMPTSTRUCT(address, container);
     }
 
     /**
@@ -133,29 +142,29 @@ public class CRYPTPROTECT_PROMPTSTRUCT extends Struct implements NativeResource 
 
     /** Returns a new {@code CRYPTPROTECT_PROMPTSTRUCT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static CRYPTPROTECT_PROMPTSTRUCT malloc() {
-        return wrap(CRYPTPROTECT_PROMPTSTRUCT.class, nmemAllocChecked(SIZEOF));
+        return new CRYPTPROTECT_PROMPTSTRUCT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code CRYPTPROTECT_PROMPTSTRUCT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static CRYPTPROTECT_PROMPTSTRUCT calloc() {
-        return wrap(CRYPTPROTECT_PROMPTSTRUCT.class, nmemCallocChecked(1, SIZEOF));
+        return new CRYPTPROTECT_PROMPTSTRUCT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code CRYPTPROTECT_PROMPTSTRUCT} instance allocated with {@link BufferUtils}. */
     public static CRYPTPROTECT_PROMPTSTRUCT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(CRYPTPROTECT_PROMPTSTRUCT.class, memAddress(container), container);
+        return new CRYPTPROTECT_PROMPTSTRUCT(memAddress(container), container);
     }
 
     /** Returns a new {@code CRYPTPROTECT_PROMPTSTRUCT} instance for the specified memory address. */
     public static CRYPTPROTECT_PROMPTSTRUCT create(long address) {
-        return wrap(CRYPTPROTECT_PROMPTSTRUCT.class, address);
+        return new CRYPTPROTECT_PROMPTSTRUCT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CRYPTPROTECT_PROMPTSTRUCT createSafe(long address) {
-        return address == NULL ? null : wrap(CRYPTPROTECT_PROMPTSTRUCT.class, address);
+        return address == NULL ? null : new CRYPTPROTECT_PROMPTSTRUCT(address, null);
     }
 
     /**
@@ -164,7 +173,7 @@ public class CRYPTPROTECT_PROMPTSTRUCT extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static CRYPTPROTECT_PROMPTSTRUCT malloc(MemoryStack stack) {
-        return wrap(CRYPTPROTECT_PROMPTSTRUCT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new CRYPTPROTECT_PROMPTSTRUCT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -173,7 +182,7 @@ public class CRYPTPROTECT_PROMPTSTRUCT extends Struct implements NativeResource 
      * @param stack the stack from which to allocate
      */
     public static CRYPTPROTECT_PROMPTSTRUCT calloc(MemoryStack stack) {
-        return wrap(CRYPTPROTECT_PROMPTSTRUCT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new CRYPTPROTECT_PROMPTSTRUCT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

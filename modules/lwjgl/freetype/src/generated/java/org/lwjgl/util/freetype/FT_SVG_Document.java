@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct FT_SVG_DocumentRec")
-public class FT_SVG_Document extends Struct {
+public class FT_SVG_Document extends Struct<FT_SVG_Document> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -75,6 +75,15 @@ public class FT_SVG_Document extends Struct {
         DELTA = layout.offsetof(7);
     }
 
+    protected FT_SVG_Document(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected FT_SVG_Document create(long address, @Nullable ByteBuffer container) {
+        return new FT_SVG_Document(address, container);
+    }
+
     /**
      * Creates a {@code FT_SVG_Document} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -114,13 +123,13 @@ public class FT_SVG_Document extends Struct {
 
     /** Returns a new {@code FT_SVG_Document} instance for the specified memory address. */
     public static FT_SVG_Document create(long address) {
-        return wrap(FT_SVG_Document.class, address);
+        return new FT_SVG_Document(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_SVG_Document createSafe(long address) {
-        return address == NULL ? null : wrap(FT_SVG_Document.class, address);
+        return address == NULL ? null : new FT_SVG_Document(address, null);
     }
 
     /**
@@ -130,13 +139,13 @@ public class FT_SVG_Document extends Struct {
      * @param capacity the buffer capacity
      */
     public static FT_SVG_Document.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static FT_SVG_Document.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -168,9 +177,9 @@ public class FT_SVG_Document extends Struct {
         /**
          * Creates a new {@code FT_SVG_Document.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link FT_SVG_Document#SIZEOF}, and its mark will be undefined.
+         * by {@link FT_SVG_Document#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

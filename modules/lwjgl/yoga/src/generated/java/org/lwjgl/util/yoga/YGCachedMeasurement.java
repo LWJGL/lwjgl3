@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     float computedHeight;
  * }</code></pre>
  */
-public class YGCachedMeasurement extends Struct {
+public class YGCachedMeasurement extends Struct<YGCachedMeasurement> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -66,6 +66,15 @@ public class YGCachedMeasurement extends Struct {
         COMPUTEDHEIGHT = layout.offsetof(5);
     }
 
+    protected YGCachedMeasurement(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected YGCachedMeasurement create(long address, @Nullable ByteBuffer container) {
+        return new YGCachedMeasurement(address, container);
+    }
+
     /**
      * Creates a {@code YGCachedMeasurement} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -98,13 +107,13 @@ public class YGCachedMeasurement extends Struct {
 
     /** Returns a new {@code YGCachedMeasurement} instance for the specified memory address. */
     public static YGCachedMeasurement create(long address) {
-        return wrap(YGCachedMeasurement.class, address);
+        return new YGCachedMeasurement(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGCachedMeasurement createSafe(long address) {
-        return address == NULL ? null : wrap(YGCachedMeasurement.class, address);
+        return address == NULL ? null : new YGCachedMeasurement(address, null);
     }
 
     /**
@@ -114,13 +123,13 @@ public class YGCachedMeasurement extends Struct {
      * @param capacity the buffer capacity
      */
     public static YGCachedMeasurement.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static YGCachedMeasurement.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -148,9 +157,9 @@ public class YGCachedMeasurement extends Struct {
         /**
          * Creates a new {@code YGCachedMeasurement.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link YGCachedMeasurement#SIZEOF}, and its mark will be undefined.
+         * by {@link YGCachedMeasurement#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

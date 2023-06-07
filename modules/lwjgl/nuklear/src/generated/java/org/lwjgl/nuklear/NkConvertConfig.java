@@ -34,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct nk_convert_config")
-public class NkConvertConfig extends Struct implements NativeResource {
+public class NkConvertConfig extends Struct<NkConvertConfig> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -82,6 +82,15 @@ public class NkConvertConfig extends Struct implements NativeResource {
         VERTEX_LAYOUT = layout.offsetof(7);
         VERTEX_SIZE = layout.offsetof(8);
         VERTEX_ALIGNMENT = layout.offsetof(9);
+    }
+
+    protected NkConvertConfig(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkConvertConfig create(long address, @Nullable ByteBuffer container) {
+        return new NkConvertConfig(address, container);
     }
 
     /**
@@ -197,29 +206,29 @@ public class NkConvertConfig extends Struct implements NativeResource {
 
     /** Returns a new {@code NkConvertConfig} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static NkConvertConfig malloc() {
-        return wrap(NkConvertConfig.class, nmemAllocChecked(SIZEOF));
+        return new NkConvertConfig(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code NkConvertConfig} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static NkConvertConfig calloc() {
-        return wrap(NkConvertConfig.class, nmemCallocChecked(1, SIZEOF));
+        return new NkConvertConfig(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code NkConvertConfig} instance allocated with {@link BufferUtils}. */
     public static NkConvertConfig create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(NkConvertConfig.class, memAddress(container), container);
+        return new NkConvertConfig(memAddress(container), container);
     }
 
     /** Returns a new {@code NkConvertConfig} instance for the specified memory address. */
     public static NkConvertConfig create(long address) {
-        return wrap(NkConvertConfig.class, address);
+        return new NkConvertConfig(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConvertConfig createSafe(long address) {
-        return address == NULL ? null : wrap(NkConvertConfig.class, address);
+        return address == NULL ? null : new NkConvertConfig(address, null);
     }
 
     /**
@@ -228,7 +237,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkConvertConfig.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -237,7 +246,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkConvertConfig.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -247,7 +256,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
      */
     public static NkConvertConfig.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -257,13 +266,13 @@ public class NkConvertConfig extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkConvertConfig.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkConvertConfig.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -291,7 +300,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkConvertConfig malloc(MemoryStack stack) {
-        return wrap(NkConvertConfig.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new NkConvertConfig(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -300,7 +309,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static NkConvertConfig calloc(MemoryStack stack) {
-        return wrap(NkConvertConfig.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new NkConvertConfig(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -310,7 +319,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkConvertConfig.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -320,7 +329,7 @@ public class NkConvertConfig extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static NkConvertConfig.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -386,9 +395,9 @@ public class NkConvertConfig extends Struct implements NativeResource {
         /**
          * Creates a new {@code NkConvertConfig.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkConvertConfig#SIZEOF}, and its mark will be undefined.
+         * by {@link NkConvertConfig#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -49,7 +49,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct PS_PrivateRec")
-public class PS_Private extends Struct {
+public class PS_Private extends Struct<PS_Private> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -142,6 +142,15 @@ public class PS_Private extends Struct {
         LANGUAGE_GROUP = layout.offsetof(22);
         PASSWORD = layout.offsetof(23);
         MIN_FEATURE = layout.offsetof(24);
+    }
+
+    protected PS_Private(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected PS_Private create(long address, @Nullable ByteBuffer container) {
+        return new PS_Private(address, container);
     }
 
     /**
@@ -264,13 +273,13 @@ public class PS_Private extends Struct {
 
     /** Returns a new {@code PS_Private} instance for the specified memory address. */
     public static PS_Private create(long address) {
-        return wrap(PS_Private.class, address);
+        return new PS_Private(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static PS_Private createSafe(long address) {
-        return address == NULL ? null : wrap(PS_Private.class, address);
+        return address == NULL ? null : new PS_Private(address, null);
     }
 
     /**
@@ -280,13 +289,13 @@ public class PS_Private extends Struct {
      * @param capacity the buffer capacity
      */
     public static PS_Private.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static PS_Private.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -388,9 +397,9 @@ public class PS_Private extends Struct {
         /**
          * Creates a new {@code PS_Private.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link PS_Private#SIZEOF}, and its mark will be undefined.
+         * by {@link PS_Private#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

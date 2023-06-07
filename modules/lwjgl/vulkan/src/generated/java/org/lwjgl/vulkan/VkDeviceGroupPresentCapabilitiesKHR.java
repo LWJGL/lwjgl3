@@ -50,7 +50,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     VkDeviceGroupPresentModeFlagsKHR {@link #modes};
  * }</code></pre>
  */
-public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements NativeResource {
+public class VkDeviceGroupPresentCapabilitiesKHR extends Struct<VkDeviceGroupPresentCapabilitiesKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -80,6 +80,15 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
         PNEXT = layout.offsetof(1);
         PRESENTMASK = layout.offsetof(2);
         MODES = layout.offsetof(3);
+    }
+
+    protected VkDeviceGroupPresentCapabilitiesKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkDeviceGroupPresentCapabilitiesKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkDeviceGroupPresentCapabilitiesKHR(address, container);
     }
 
     /**
@@ -145,29 +154,29 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
 
     /** Returns a new {@code VkDeviceGroupPresentCapabilitiesKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDeviceGroupPresentCapabilitiesKHR malloc() {
-        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkDeviceGroupPresentCapabilitiesKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkDeviceGroupPresentCapabilitiesKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDeviceGroupPresentCapabilitiesKHR calloc() {
-        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkDeviceGroupPresentCapabilitiesKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkDeviceGroupPresentCapabilitiesKHR} instance allocated with {@link BufferUtils}. */
     public static VkDeviceGroupPresentCapabilitiesKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, memAddress(container), container);
+        return new VkDeviceGroupPresentCapabilitiesKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkDeviceGroupPresentCapabilitiesKHR} instance for the specified memory address. */
     public static VkDeviceGroupPresentCapabilitiesKHR create(long address) {
-        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, address);
+        return new VkDeviceGroupPresentCapabilitiesKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceGroupPresentCapabilitiesKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkDeviceGroupPresentCapabilitiesKHR.class, address);
+        return address == NULL ? null : new VkDeviceGroupPresentCapabilitiesKHR(address, null);
     }
 
     /**
@@ -176,7 +185,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -185,7 +194,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -195,7 +204,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -205,13 +214,13 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -239,7 +248,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static VkDeviceGroupPresentCapabilitiesKHR malloc(MemoryStack stack) {
-        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkDeviceGroupPresentCapabilitiesKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -248,7 +257,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param stack the stack from which to allocate
      */
     public static VkDeviceGroupPresentCapabilitiesKHR calloc(MemoryStack stack) {
-        return wrap(VkDeviceGroupPresentCapabilitiesKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkDeviceGroupPresentCapabilitiesKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -258,7 +267,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -268,7 +277,7 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
      * @param capacity the buffer capacity
      */
     public static VkDeviceGroupPresentCapabilitiesKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -301,9 +310,9 @@ public class VkDeviceGroupPresentCapabilitiesKHR extends Struct implements Nativ
         /**
          * Creates a new {@code VkDeviceGroupPresentCapabilitiesKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkDeviceGroupPresentCapabilitiesKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkDeviceGroupPresentCapabilitiesKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

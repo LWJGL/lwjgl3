@@ -33,7 +33,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_BUTTON_MAX;
  * }</code></pre>
  */
 @NativeType("struct nk_mouse")
-public class NkMouse extends Struct {
+public class NkMouse extends Struct<NkMouse> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -78,6 +78,15 @@ public class NkMouse extends Struct {
         GRAB = layout.offsetof(6);
         GRABBED = layout.offsetof(7);
         UNGRAB = layout.offsetof(8);
+    }
+
+    protected NkMouse(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected NkMouse create(long address, @Nullable ByteBuffer container) {
+        return new NkMouse(address, container);
     }
 
     /**
@@ -128,13 +137,13 @@ public class NkMouse extends Struct {
 
     /** Returns a new {@code NkMouse} instance for the specified memory address. */
     public static NkMouse create(long address) {
-        return wrap(NkMouse.class, address);
+        return new NkMouse(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkMouse createSafe(long address) {
-        return address == NULL ? null : wrap(NkMouse.class, address);
+        return address == NULL ? null : new NkMouse(address, null);
     }
 
     /**
@@ -144,13 +153,13 @@ public class NkMouse extends Struct {
      * @param capacity the buffer capacity
      */
     public static NkMouse.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static NkMouse.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -188,9 +197,9 @@ public class NkMouse extends Struct {
         /**
          * Creates a new {@code NkMouse.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link NkMouse#SIZEOF}, and its mark will be undefined.
+         * by {@link NkMouse#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

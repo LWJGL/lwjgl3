@@ -31,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #frameBSize};
  * }</code></pre>
  */
-public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResource {
+public class VkVideoEncodeH264FrameSizeEXT extends Struct<VkVideoEncodeH264FrameSizeEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -58,6 +58,15 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
         FRAMEISIZE = layout.offsetof(0);
         FRAMEPSIZE = layout.offsetof(1);
         FRAMEBSIZE = layout.offsetof(2);
+    }
+
+    protected VkVideoEncodeH264FrameSizeEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkVideoEncodeH264FrameSizeEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkVideoEncodeH264FrameSizeEXT(address, container);
     }
 
     /**
@@ -119,29 +128,29 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
 
     /** Returns a new {@code VkVideoEncodeH264FrameSizeEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkVideoEncodeH264FrameSizeEXT malloc() {
-        return wrap(VkVideoEncodeH264FrameSizeEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkVideoEncodeH264FrameSizeEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoEncodeH264FrameSizeEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkVideoEncodeH264FrameSizeEXT calloc() {
-        return wrap(VkVideoEncodeH264FrameSizeEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkVideoEncodeH264FrameSizeEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkVideoEncodeH264FrameSizeEXT} instance allocated with {@link BufferUtils}. */
     public static VkVideoEncodeH264FrameSizeEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkVideoEncodeH264FrameSizeEXT.class, memAddress(container), container);
+        return new VkVideoEncodeH264FrameSizeEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkVideoEncodeH264FrameSizeEXT} instance for the specified memory address. */
     public static VkVideoEncodeH264FrameSizeEXT create(long address) {
-        return wrap(VkVideoEncodeH264FrameSizeEXT.class, address);
+        return new VkVideoEncodeH264FrameSizeEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoEncodeH264FrameSizeEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkVideoEncodeH264FrameSizeEXT.class, address);
+        return address == NULL ? null : new VkVideoEncodeH264FrameSizeEXT(address, null);
     }
 
     /**
@@ -150,7 +159,7 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeH264FrameSizeEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -159,7 +168,7 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeH264FrameSizeEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -169,7 +178,7 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
      */
     public static VkVideoEncodeH264FrameSizeEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -179,13 +188,13 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeH264FrameSizeEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkVideoEncodeH264FrameSizeEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -194,7 +203,7 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkVideoEncodeH264FrameSizeEXT malloc(MemoryStack stack) {
-        return wrap(VkVideoEncodeH264FrameSizeEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkVideoEncodeH264FrameSizeEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -203,7 +212,7 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
      * @param stack the stack from which to allocate
      */
     public static VkVideoEncodeH264FrameSizeEXT calloc(MemoryStack stack) {
-        return wrap(VkVideoEncodeH264FrameSizeEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkVideoEncodeH264FrameSizeEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -213,7 +222,7 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeH264FrameSizeEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -223,7 +232,7 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
      * @param capacity the buffer capacity
      */
     public static VkVideoEncodeH264FrameSizeEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -252,9 +261,9 @@ public class VkVideoEncodeH264FrameSizeEXT extends Struct implements NativeResou
         /**
          * Creates a new {@code VkVideoEncodeH264FrameSizeEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkVideoEncodeH264FrameSizeEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkVideoEncodeH264FrameSizeEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

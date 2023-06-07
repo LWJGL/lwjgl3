@@ -45,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float {@link #priority};
  * }</code></pre>
  */
-public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeResource {
+public class VkMemoryPriorityAllocateInfoEXT extends Struct<VkMemoryPriorityAllocateInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -72,6 +72,15 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         PRIORITY = layout.offsetof(2);
+    }
+
+    protected VkMemoryPriorityAllocateInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkMemoryPriorityAllocateInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkMemoryPriorityAllocateInfoEXT(address, container);
     }
 
     /**
@@ -134,29 +143,29 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
 
     /** Returns a new {@code VkMemoryPriorityAllocateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkMemoryPriorityAllocateInfoEXT malloc() {
-        return wrap(VkMemoryPriorityAllocateInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkMemoryPriorityAllocateInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkMemoryPriorityAllocateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkMemoryPriorityAllocateInfoEXT calloc() {
-        return wrap(VkMemoryPriorityAllocateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkMemoryPriorityAllocateInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkMemoryPriorityAllocateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkMemoryPriorityAllocateInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkMemoryPriorityAllocateInfoEXT.class, memAddress(container), container);
+        return new VkMemoryPriorityAllocateInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkMemoryPriorityAllocateInfoEXT} instance for the specified memory address. */
     public static VkMemoryPriorityAllocateInfoEXT create(long address) {
-        return wrap(VkMemoryPriorityAllocateInfoEXT.class, address);
+        return new VkMemoryPriorityAllocateInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryPriorityAllocateInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkMemoryPriorityAllocateInfoEXT.class, address);
+        return address == NULL ? null : new VkMemoryPriorityAllocateInfoEXT(address, null);
     }
 
     /**
@@ -165,7 +174,7 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkMemoryPriorityAllocateInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -174,7 +183,7 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkMemoryPriorityAllocateInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -184,7 +193,7 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
      */
     public static VkMemoryPriorityAllocateInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -194,13 +203,13 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkMemoryPriorityAllocateInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMemoryPriorityAllocateInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -228,7 +237,7 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkMemoryPriorityAllocateInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkMemoryPriorityAllocateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkMemoryPriorityAllocateInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -237,7 +246,7 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
      * @param stack the stack from which to allocate
      */
     public static VkMemoryPriorityAllocateInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkMemoryPriorityAllocateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkMemoryPriorityAllocateInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -247,7 +256,7 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkMemoryPriorityAllocateInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -257,7 +266,7 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
      * @param capacity the buffer capacity
      */
     public static VkMemoryPriorityAllocateInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -286,9 +295,9 @@ public class VkMemoryPriorityAllocateInfoEXT extends Struct implements NativeRes
         /**
          * Creates a new {@code VkMemoryPriorityAllocateInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkMemoryPriorityAllocateInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkMemoryPriorityAllocateInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

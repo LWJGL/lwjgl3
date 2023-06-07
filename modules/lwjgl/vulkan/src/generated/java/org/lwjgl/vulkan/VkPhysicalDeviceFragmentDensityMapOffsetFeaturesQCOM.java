@@ -37,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 fragmentDensityMapOffset;
  * }</code></pre>
  */
-public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct implements NativeResource {
+public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct<VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
         STYPE = layout.offsetof(0);
         PNEXT = layout.offsetof(1);
         FRAGMENTDENSITYMAPOFFSET = layout.offsetof(2);
+    }
+
+    protected VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(address, container);
     }
 
     /**
@@ -127,29 +136,29 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
 
     /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM malloc() {
-        return wrap(VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM calloc() {
-        return wrap(VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.class, memAddress(container), container);
+        return new VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM} instance for the specified memory address. */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM create(long address) {
-        return wrap(VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.class, address);
+        return new VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(address, null);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -167,7 +176,7 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -177,7 +186,7 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
      */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -187,13 +196,13 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -202,7 +211,7 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -260,9 +269,9 @@ public class VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM extends Struct
         /**
          * Creates a new {@code VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

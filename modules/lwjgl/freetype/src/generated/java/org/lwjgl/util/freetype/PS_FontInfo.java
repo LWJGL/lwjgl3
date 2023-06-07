@@ -32,7 +32,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct PS_FontInfoRec")
-public class PS_FontInfo extends Struct {
+public class PS_FontInfo extends Struct<PS_FontInfo> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -77,6 +77,15 @@ public class PS_FontInfo extends Struct {
         IS_FIXED_PITCH = layout.offsetof(6);
         UNDERLINE_POSITION = layout.offsetof(7);
         UNDERLINE_THICKNESS = layout.offsetof(8);
+    }
+
+    protected PS_FontInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected PS_FontInfo create(long address, @Nullable ByteBuffer container) {
+        return new PS_FontInfo(address, container);
     }
 
     /**
@@ -139,13 +148,13 @@ public class PS_FontInfo extends Struct {
 
     /** Returns a new {@code PS_FontInfo} instance for the specified memory address. */
     public static PS_FontInfo create(long address) {
-        return wrap(PS_FontInfo.class, address);
+        return new PS_FontInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static PS_FontInfo createSafe(long address) {
-        return address == NULL ? null : wrap(PS_FontInfo.class, address);
+        return address == NULL ? null : new PS_FontInfo(address, null);
     }
 
     /**
@@ -155,13 +164,13 @@ public class PS_FontInfo extends Struct {
      * @param capacity the buffer capacity
      */
     public static PS_FontInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static PS_FontInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -205,9 +214,9 @@ public class PS_FontInfo extends Struct {
         /**
          * Creates a new {@code PS_FontInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link PS_FontInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link PS_FontInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

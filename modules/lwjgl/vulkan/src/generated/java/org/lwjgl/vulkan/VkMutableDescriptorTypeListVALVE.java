@@ -29,6 +29,15 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeListEXT {
 
+    protected VkMutableDescriptorTypeListVALVE(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkMutableDescriptorTypeListVALVE create(long address, @Nullable ByteBuffer container) {
+        return new VkMutableDescriptorTypeListVALVE(address, container);
+    }
+
     /**
      * Creates a {@code VkMutableDescriptorTypeListVALVE} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -59,29 +68,29 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
 
     /** Returns a new {@code VkMutableDescriptorTypeListVALVE} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkMutableDescriptorTypeListVALVE malloc() {
-        return wrap(VkMutableDescriptorTypeListVALVE.class, nmemAllocChecked(SIZEOF));
+        return new VkMutableDescriptorTypeListVALVE(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkMutableDescriptorTypeListVALVE} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkMutableDescriptorTypeListVALVE calloc() {
-        return wrap(VkMutableDescriptorTypeListVALVE.class, nmemCallocChecked(1, SIZEOF));
+        return new VkMutableDescriptorTypeListVALVE(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkMutableDescriptorTypeListVALVE} instance allocated with {@link BufferUtils}. */
     public static VkMutableDescriptorTypeListVALVE create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkMutableDescriptorTypeListVALVE.class, memAddress(container), container);
+        return new VkMutableDescriptorTypeListVALVE(memAddress(container), container);
     }
 
     /** Returns a new {@code VkMutableDescriptorTypeListVALVE} instance for the specified memory address. */
     public static VkMutableDescriptorTypeListVALVE create(long address) {
-        return wrap(VkMutableDescriptorTypeListVALVE.class, address);
+        return new VkMutableDescriptorTypeListVALVE(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMutableDescriptorTypeListVALVE createSafe(long address) {
-        return address == NULL ? null : wrap(VkMutableDescriptorTypeListVALVE.class, address);
+        return address == NULL ? null : new VkMutableDescriptorTypeListVALVE(address, null);
     }
 
     /**
@@ -90,7 +99,7 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
      * @param capacity the buffer capacity
      */
     public static VkMutableDescriptorTypeListVALVE.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -99,7 +108,7 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
      * @param capacity the buffer capacity
      */
     public static VkMutableDescriptorTypeListVALVE.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -109,7 +118,7 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
      */
     public static VkMutableDescriptorTypeListVALVE.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -119,13 +128,13 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
      * @param capacity the buffer capacity
      */
     public static VkMutableDescriptorTypeListVALVE.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkMutableDescriptorTypeListVALVE.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -134,7 +143,7 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
      * @param stack the stack from which to allocate
      */
     public static VkMutableDescriptorTypeListVALVE malloc(MemoryStack stack) {
-        return wrap(VkMutableDescriptorTypeListVALVE.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkMutableDescriptorTypeListVALVE(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -143,7 +152,7 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
      * @param stack the stack from which to allocate
      */
     public static VkMutableDescriptorTypeListVALVE calloc(MemoryStack stack) {
-        return wrap(VkMutableDescriptorTypeListVALVE.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkMutableDescriptorTypeListVALVE(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -153,7 +162,7 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
      * @param capacity the buffer capacity
      */
     public static VkMutableDescriptorTypeListVALVE.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -163,7 +172,7 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
      * @param capacity the buffer capacity
      */
     public static VkMutableDescriptorTypeListVALVE.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -176,9 +185,9 @@ public class VkMutableDescriptorTypeListVALVE extends VkMutableDescriptorTypeLis
         /**
          * Creates a new {@code VkMutableDescriptorTypeListVALVE.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkMutableDescriptorTypeListVALVE#SIZEOF}, and its mark will be undefined.
+         * by {@link VkMutableDescriptorTypeListVALVE#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

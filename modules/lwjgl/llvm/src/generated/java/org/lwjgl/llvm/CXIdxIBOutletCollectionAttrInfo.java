@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link CXIdxLoc CXIdxLoc} classLoc;
  * }</code></pre>
  */
-public class CXIdxIBOutletCollectionAttrInfo extends Struct {
+public class CXIdxIBOutletCollectionAttrInfo extends Struct<CXIdxIBOutletCollectionAttrInfo> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -56,6 +56,15 @@ public class CXIdxIBOutletCollectionAttrInfo extends Struct {
         CLASSLOC = layout.offsetof(3);
     }
 
+    protected CXIdxIBOutletCollectionAttrInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected CXIdxIBOutletCollectionAttrInfo create(long address, @Nullable ByteBuffer container) {
+        return new CXIdxIBOutletCollectionAttrInfo(address, container);
+    }
+
     /**
      * Creates a {@code CXIdxIBOutletCollectionAttrInfo} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -84,13 +93,13 @@ public class CXIdxIBOutletCollectionAttrInfo extends Struct {
 
     /** Returns a new {@code CXIdxIBOutletCollectionAttrInfo} instance for the specified memory address. */
     public static CXIdxIBOutletCollectionAttrInfo create(long address) {
-        return wrap(CXIdxIBOutletCollectionAttrInfo.class, address);
+        return new CXIdxIBOutletCollectionAttrInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CXIdxIBOutletCollectionAttrInfo createSafe(long address) {
-        return address == NULL ? null : wrap(CXIdxIBOutletCollectionAttrInfo.class, address);
+        return address == NULL ? null : new CXIdxIBOutletCollectionAttrInfo(address, null);
     }
 
     /**
@@ -100,13 +109,13 @@ public class CXIdxIBOutletCollectionAttrInfo extends Struct {
      * @param capacity the buffer capacity
      */
     public static CXIdxIBOutletCollectionAttrInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static CXIdxIBOutletCollectionAttrInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -130,9 +139,9 @@ public class CXIdxIBOutletCollectionAttrInfo extends Struct {
         /**
          * Creates a new {@code CXIdxIBOutletCollectionAttrInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link CXIdxIBOutletCollectionAttrInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link CXIdxIBOutletCollectionAttrInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -27,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  * }</code></pre>
  */
 @NativeType("struct LZ4F_decompressOptions_t")
-public class LZ4FDecompressOptions extends Struct implements NativeResource {
+public class LZ4FDecompressOptions extends Struct<LZ4FDecompressOptions> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -57,6 +57,15 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
         SKIPCHECKSUMS = layout.offsetof(1);
         RESERVED1 = layout.offsetof(2);
         RESERVED0 = layout.offsetof(3);
+    }
+
+    protected LZ4FDecompressOptions(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected LZ4FDecompressOptions create(long address, @Nullable ByteBuffer container) {
+        return new LZ4FDecompressOptions(address, container);
     }
 
     /**
@@ -133,29 +142,29 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
 
     /** Returns a new {@code LZ4FDecompressOptions} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static LZ4FDecompressOptions malloc() {
-        return wrap(LZ4FDecompressOptions.class, nmemAllocChecked(SIZEOF));
+        return new LZ4FDecompressOptions(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code LZ4FDecompressOptions} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static LZ4FDecompressOptions calloc() {
-        return wrap(LZ4FDecompressOptions.class, nmemCallocChecked(1, SIZEOF));
+        return new LZ4FDecompressOptions(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code LZ4FDecompressOptions} instance allocated with {@link BufferUtils}. */
     public static LZ4FDecompressOptions create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(LZ4FDecompressOptions.class, memAddress(container), container);
+        return new LZ4FDecompressOptions(memAddress(container), container);
     }
 
     /** Returns a new {@code LZ4FDecompressOptions} instance for the specified memory address. */
     public static LZ4FDecompressOptions create(long address) {
-        return wrap(LZ4FDecompressOptions.class, address);
+        return new LZ4FDecompressOptions(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4FDecompressOptions createSafe(long address) {
-        return address == NULL ? null : wrap(LZ4FDecompressOptions.class, address);
+        return address == NULL ? null : new LZ4FDecompressOptions(address, null);
     }
 
     /**
@@ -164,7 +173,7 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FDecompressOptions.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -173,7 +182,7 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FDecompressOptions.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -183,7 +192,7 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
      */
     public static LZ4FDecompressOptions.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -193,13 +202,13 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FDecompressOptions.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static LZ4FDecompressOptions.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -227,7 +236,7 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static LZ4FDecompressOptions malloc(MemoryStack stack) {
-        return wrap(LZ4FDecompressOptions.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new LZ4FDecompressOptions(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -236,7 +245,7 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static LZ4FDecompressOptions calloc(MemoryStack stack) {
-        return wrap(LZ4FDecompressOptions.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new LZ4FDecompressOptions(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -246,7 +255,7 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FDecompressOptions.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -256,7 +265,7 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static LZ4FDecompressOptions.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -289,9 +298,9 @@ public class LZ4FDecompressOptions extends Struct implements NativeResource {
         /**
          * Creates a new {@code LZ4FDecompressOptions.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link LZ4FDecompressOptions#SIZEOF}, and its mark will be undefined.
+         * by {@link LZ4FDecompressOptions#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

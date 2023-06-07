@@ -40,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t {@link #firstTask};
  * }</code></pre>
  */
-public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeResource {
+public class VkDrawMeshTasksIndirectCommandNV extends Struct<VkDrawMeshTasksIndirectCommandNV> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -64,6 +64,15 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
 
         TASKCOUNT = layout.offsetof(0);
         FIRSTTASK = layout.offsetof(1);
+    }
+
+    protected VkDrawMeshTasksIndirectCommandNV(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkDrawMeshTasksIndirectCommandNV create(long address, @Nullable ByteBuffer container) {
+        return new VkDrawMeshTasksIndirectCommandNV(address, container);
     }
 
     /**
@@ -118,29 +127,29 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
 
     /** Returns a new {@code VkDrawMeshTasksIndirectCommandNV} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkDrawMeshTasksIndirectCommandNV malloc() {
-        return wrap(VkDrawMeshTasksIndirectCommandNV.class, nmemAllocChecked(SIZEOF));
+        return new VkDrawMeshTasksIndirectCommandNV(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkDrawMeshTasksIndirectCommandNV} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkDrawMeshTasksIndirectCommandNV calloc() {
-        return wrap(VkDrawMeshTasksIndirectCommandNV.class, nmemCallocChecked(1, SIZEOF));
+        return new VkDrawMeshTasksIndirectCommandNV(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkDrawMeshTasksIndirectCommandNV} instance allocated with {@link BufferUtils}. */
     public static VkDrawMeshTasksIndirectCommandNV create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkDrawMeshTasksIndirectCommandNV.class, memAddress(container), container);
+        return new VkDrawMeshTasksIndirectCommandNV(memAddress(container), container);
     }
 
     /** Returns a new {@code VkDrawMeshTasksIndirectCommandNV} instance for the specified memory address. */
     public static VkDrawMeshTasksIndirectCommandNV create(long address) {
-        return wrap(VkDrawMeshTasksIndirectCommandNV.class, address);
+        return new VkDrawMeshTasksIndirectCommandNV(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDrawMeshTasksIndirectCommandNV createSafe(long address) {
-        return address == NULL ? null : wrap(VkDrawMeshTasksIndirectCommandNV.class, address);
+        return address == NULL ? null : new VkDrawMeshTasksIndirectCommandNV(address, null);
     }
 
     /**
@@ -149,7 +158,7 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkDrawMeshTasksIndirectCommandNV.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -158,7 +167,7 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkDrawMeshTasksIndirectCommandNV.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -168,7 +177,7 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
      */
     public static VkDrawMeshTasksIndirectCommandNV.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -178,13 +187,13 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkDrawMeshTasksIndirectCommandNV.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkDrawMeshTasksIndirectCommandNV.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -212,7 +221,7 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkDrawMeshTasksIndirectCommandNV malloc(MemoryStack stack) {
-        return wrap(VkDrawMeshTasksIndirectCommandNV.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkDrawMeshTasksIndirectCommandNV(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -221,7 +230,7 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
      * @param stack the stack from which to allocate
      */
     public static VkDrawMeshTasksIndirectCommandNV calloc(MemoryStack stack) {
-        return wrap(VkDrawMeshTasksIndirectCommandNV.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkDrawMeshTasksIndirectCommandNV(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -231,7 +240,7 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkDrawMeshTasksIndirectCommandNV.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -241,7 +250,7 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
      * @param capacity the buffer capacity
      */
     public static VkDrawMeshTasksIndirectCommandNV.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -266,9 +275,9 @@ public class VkDrawMeshTasksIndirectCommandNV extends Struct implements NativeRe
         /**
          * Creates a new {@code VkDrawMeshTasksIndirectCommandNV.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkDrawMeshTasksIndirectCommandNV#SIZEOF}, and its mark will be undefined.
+         * by {@link VkDrawMeshTasksIndirectCommandNV#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

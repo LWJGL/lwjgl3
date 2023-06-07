@@ -32,6 +32,15 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
 
+    protected VkSemaphoreSubmitInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkSemaphoreSubmitInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkSemaphoreSubmitInfoKHR(address, container);
+    }
+
     /**
      * Creates a {@code VkSemaphoreSubmitInfoKHR} instance at the current position of the specified {@link ByteBuffer} container. Changes to the buffer's content will be
      * visible to the struct instance and vice versa.
@@ -100,29 +109,29 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
 
     /** Returns a new {@code VkSemaphoreSubmitInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkSemaphoreSubmitInfoKHR malloc() {
-        return wrap(VkSemaphoreSubmitInfoKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkSemaphoreSubmitInfoKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkSemaphoreSubmitInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkSemaphoreSubmitInfoKHR calloc() {
-        return wrap(VkSemaphoreSubmitInfoKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkSemaphoreSubmitInfoKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkSemaphoreSubmitInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkSemaphoreSubmitInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkSemaphoreSubmitInfoKHR.class, memAddress(container), container);
+        return new VkSemaphoreSubmitInfoKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkSemaphoreSubmitInfoKHR} instance for the specified memory address. */
     public static VkSemaphoreSubmitInfoKHR create(long address) {
-        return wrap(VkSemaphoreSubmitInfoKHR.class, address);
+        return new VkSemaphoreSubmitInfoKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSemaphoreSubmitInfoKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkSemaphoreSubmitInfoKHR.class, address);
+        return address == NULL ? null : new VkSemaphoreSubmitInfoKHR(address, null);
     }
 
     /**
@@ -131,7 +140,7 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreSubmitInfoKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -140,7 +149,7 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreSubmitInfoKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -150,7 +159,7 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
      */
     public static VkSemaphoreSubmitInfoKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -160,13 +169,13 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreSubmitInfoKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkSemaphoreSubmitInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -175,7 +184,7 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
      * @param stack the stack from which to allocate
      */
     public static VkSemaphoreSubmitInfoKHR malloc(MemoryStack stack) {
-        return wrap(VkSemaphoreSubmitInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkSemaphoreSubmitInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -184,7 +193,7 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
      * @param stack the stack from which to allocate
      */
     public static VkSemaphoreSubmitInfoKHR calloc(MemoryStack stack) {
-        return wrap(VkSemaphoreSubmitInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkSemaphoreSubmitInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -194,7 +203,7 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreSubmitInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -204,7 +213,7 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
      * @param capacity the buffer capacity
      */
     public static VkSemaphoreSubmitInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -217,9 +226,9 @@ public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
         /**
          * Creates a new {@code VkSemaphoreSubmitInfoKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkSemaphoreSubmitInfoKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkSemaphoreSubmitInfoKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

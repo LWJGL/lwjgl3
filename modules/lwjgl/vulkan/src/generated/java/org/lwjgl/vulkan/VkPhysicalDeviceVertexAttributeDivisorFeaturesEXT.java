@@ -38,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #vertexAttributeInstanceRateZeroDivisor};
  * }</code></pre>
  */
-public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct implements NativeResource {
+public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct<VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -68,6 +68,15 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
         PNEXT = layout.offsetof(1);
         VERTEXATTRIBUTEINSTANCERATEDIVISOR = layout.offsetof(2);
         VERTEXATTRIBUTEINSTANCERATEZERODIVISOR = layout.offsetof(3);
+    }
+
+    protected VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(address, container);
     }
 
     /**
@@ -138,29 +147,29 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
 
     /** Returns a new {@code VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT malloc() {
-        return wrap(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT calloc() {
-        return wrap(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT} instance allocated with {@link BufferUtils}. */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.class, memAddress(container), container);
+        return new VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT} instance for the specified memory address. */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT create(long address) {
-        return wrap(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.class, address);
+        return new VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.class, address);
+        return address == NULL ? null : new VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(address, null);
     }
 
     /**
@@ -169,7 +178,7 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -178,7 +187,7 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -188,7 +197,7 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
      */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -198,13 +207,13 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -232,7 +241,7 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT malloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -241,7 +250,7 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
      * @param stack the stack from which to allocate
      */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT calloc(MemoryStack stack) {
-        return wrap(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -251,7 +260,7 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -261,7 +270,7 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
      * @param capacity the buffer capacity
      */
     public static VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -294,9 +303,9 @@ public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends Struct im
         /**
          * Creates a new {@code VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

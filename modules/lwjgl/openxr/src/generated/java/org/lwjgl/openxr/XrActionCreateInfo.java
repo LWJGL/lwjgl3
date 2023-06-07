@@ -86,7 +86,7 @@ import static org.lwjgl.openxr.XR10.*;
  *     char {@link #localizedActionName}[XR_MAX_LOCALIZED_ACTION_NAME_SIZE];
  * }</code></pre>
  */
-public class XrActionCreateInfo extends Struct implements NativeResource {
+public class XrActionCreateInfo extends Struct<XrActionCreateInfo> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -125,6 +125,15 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
         COUNTSUBACTIONPATHS = layout.offsetof(4);
         SUBACTIONPATHS = layout.offsetof(5);
         LOCALIZEDACTIONNAME = layout.offsetof(6);
+    }
+
+    protected XrActionCreateInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected XrActionCreateInfo create(long address, @Nullable ByteBuffer container) {
+        return new XrActionCreateInfo(address, container);
     }
 
     /**
@@ -223,29 +232,29 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
 
     /** Returns a new {@code XrActionCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static XrActionCreateInfo malloc() {
-        return wrap(XrActionCreateInfo.class, nmemAllocChecked(SIZEOF));
+        return new XrActionCreateInfo(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code XrActionCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static XrActionCreateInfo calloc() {
-        return wrap(XrActionCreateInfo.class, nmemCallocChecked(1, SIZEOF));
+        return new XrActionCreateInfo(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code XrActionCreateInfo} instance allocated with {@link BufferUtils}. */
     public static XrActionCreateInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(XrActionCreateInfo.class, memAddress(container), container);
+        return new XrActionCreateInfo(memAddress(container), container);
     }
 
     /** Returns a new {@code XrActionCreateInfo} instance for the specified memory address. */
     public static XrActionCreateInfo create(long address) {
-        return wrap(XrActionCreateInfo.class, address);
+        return new XrActionCreateInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrActionCreateInfo createSafe(long address) {
-        return address == NULL ? null : wrap(XrActionCreateInfo.class, address);
+        return address == NULL ? null : new XrActionCreateInfo(address, null);
     }
 
     /**
@@ -254,7 +263,7 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrActionCreateInfo.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -263,7 +272,7 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrActionCreateInfo.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -273,7 +282,7 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
      */
     public static XrActionCreateInfo.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -283,13 +292,13 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrActionCreateInfo.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static XrActionCreateInfo.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -298,7 +307,7 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrActionCreateInfo malloc(MemoryStack stack) {
-        return wrap(XrActionCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new XrActionCreateInfo(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -307,7 +316,7 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static XrActionCreateInfo calloc(MemoryStack stack) {
-        return wrap(XrActionCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new XrActionCreateInfo(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -317,7 +326,7 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrActionCreateInfo.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -327,7 +336,7 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static XrActionCreateInfo.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -388,9 +397,9 @@ public class XrActionCreateInfo extends Struct implements NativeResource {
         /**
          * Creates a new {@code XrActionCreateInfo.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link XrActionCreateInfo#SIZEOF}, and its mark will be undefined.
+         * by {@link XrActionCreateInfo#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

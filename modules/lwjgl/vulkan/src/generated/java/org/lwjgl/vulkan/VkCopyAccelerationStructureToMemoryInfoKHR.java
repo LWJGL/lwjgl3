@@ -50,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkCopyAccelerationStructureModeKHR {@link #mode};
  * }</code></pre>
  */
-public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implements NativeResource {
+public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct<VkCopyAccelerationStructureToMemoryInfoKHR> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -83,6 +83,15 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
         SRC = layout.offsetof(2);
         DST = layout.offsetof(3);
         MODE = layout.offsetof(4);
+    }
+
+    protected VkCopyAccelerationStructureToMemoryInfoKHR(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkCopyAccelerationStructureToMemoryInfoKHR create(long address, @Nullable ByteBuffer container) {
+        return new VkCopyAccelerationStructureToMemoryInfoKHR(address, container);
     }
 
     /**
@@ -161,29 +170,29 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
 
     /** Returns a new {@code VkCopyAccelerationStructureToMemoryInfoKHR} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkCopyAccelerationStructureToMemoryInfoKHR malloc() {
-        return wrap(VkCopyAccelerationStructureToMemoryInfoKHR.class, nmemAllocChecked(SIZEOF));
+        return new VkCopyAccelerationStructureToMemoryInfoKHR(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkCopyAccelerationStructureToMemoryInfoKHR} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkCopyAccelerationStructureToMemoryInfoKHR calloc() {
-        return wrap(VkCopyAccelerationStructureToMemoryInfoKHR.class, nmemCallocChecked(1, SIZEOF));
+        return new VkCopyAccelerationStructureToMemoryInfoKHR(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkCopyAccelerationStructureToMemoryInfoKHR} instance allocated with {@link BufferUtils}. */
     public static VkCopyAccelerationStructureToMemoryInfoKHR create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkCopyAccelerationStructureToMemoryInfoKHR.class, memAddress(container), container);
+        return new VkCopyAccelerationStructureToMemoryInfoKHR(memAddress(container), container);
     }
 
     /** Returns a new {@code VkCopyAccelerationStructureToMemoryInfoKHR} instance for the specified memory address. */
     public static VkCopyAccelerationStructureToMemoryInfoKHR create(long address) {
-        return wrap(VkCopyAccelerationStructureToMemoryInfoKHR.class, address);
+        return new VkCopyAccelerationStructureToMemoryInfoKHR(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCopyAccelerationStructureToMemoryInfoKHR createSafe(long address) {
-        return address == NULL ? null : wrap(VkCopyAccelerationStructureToMemoryInfoKHR.class, address);
+        return address == NULL ? null : new VkCopyAccelerationStructureToMemoryInfoKHR(address, null);
     }
 
     /**
@@ -192,7 +201,7 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkCopyAccelerationStructureToMemoryInfoKHR.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -201,7 +210,7 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkCopyAccelerationStructureToMemoryInfoKHR.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -211,7 +220,7 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
      */
     public static VkCopyAccelerationStructureToMemoryInfoKHR.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -221,13 +230,13 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkCopyAccelerationStructureToMemoryInfoKHR.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkCopyAccelerationStructureToMemoryInfoKHR.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -236,7 +245,7 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkCopyAccelerationStructureToMemoryInfoKHR malloc(MemoryStack stack) {
-        return wrap(VkCopyAccelerationStructureToMemoryInfoKHR.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkCopyAccelerationStructureToMemoryInfoKHR(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -245,7 +254,7 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
      * @param stack the stack from which to allocate
      */
     public static VkCopyAccelerationStructureToMemoryInfoKHR calloc(MemoryStack stack) {
-        return wrap(VkCopyAccelerationStructureToMemoryInfoKHR.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkCopyAccelerationStructureToMemoryInfoKHR(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -255,7 +264,7 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkCopyAccelerationStructureToMemoryInfoKHR.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -265,7 +274,7 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
      * @param capacity the buffer capacity
      */
     public static VkCopyAccelerationStructureToMemoryInfoKHR.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -302,9 +311,9 @@ public class VkCopyAccelerationStructureToMemoryInfoKHR extends Struct implement
         /**
          * Creates a new {@code VkCopyAccelerationStructureToMemoryInfoKHR.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkCopyAccelerationStructureToMemoryInfoKHR#SIZEOF}, and its mark will be undefined.
+         * by {@link VkCopyAccelerationStructureToMemoryInfoKHR#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

@@ -35,7 +35,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 {@link #depthClipEnable};
  * }</code></pre>
  */
-public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct implements NativeResource {
+public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct<VkPipelineRasterizationDepthClipStateCreateInfoEXT> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -65,6 +65,15 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
         PNEXT = layout.offsetof(1);
         FLAGS = layout.offsetof(2);
         DEPTHCLIPENABLE = layout.offsetof(3);
+    }
+
+    protected VkPipelineRasterizationDepthClipStateCreateInfoEXT(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkPipelineRasterizationDepthClipStateCreateInfoEXT create(long address, @Nullable ByteBuffer container) {
+        return new VkPipelineRasterizationDepthClipStateCreateInfoEXT(address, container);
     }
 
     /**
@@ -135,29 +144,29 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
 
     /** Returns a new {@code VkPipelineRasterizationDepthClipStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT malloc() {
-        return wrap(VkPipelineRasterizationDepthClipStateCreateInfoEXT.class, nmemAllocChecked(SIZEOF));
+        return new VkPipelineRasterizationDepthClipStateCreateInfoEXT(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineRasterizationDepthClipStateCreateInfoEXT} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT calloc() {
-        return wrap(VkPipelineRasterizationDepthClipStateCreateInfoEXT.class, nmemCallocChecked(1, SIZEOF));
+        return new VkPipelineRasterizationDepthClipStateCreateInfoEXT(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkPipelineRasterizationDepthClipStateCreateInfoEXT} instance allocated with {@link BufferUtils}. */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkPipelineRasterizationDepthClipStateCreateInfoEXT.class, memAddress(container), container);
+        return new VkPipelineRasterizationDepthClipStateCreateInfoEXT(memAddress(container), container);
     }
 
     /** Returns a new {@code VkPipelineRasterizationDepthClipStateCreateInfoEXT} instance for the specified memory address. */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT create(long address) {
-        return wrap(VkPipelineRasterizationDepthClipStateCreateInfoEXT.class, address);
+        return new VkPipelineRasterizationDepthClipStateCreateInfoEXT(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT createSafe(long address) {
-        return address == NULL ? null : wrap(VkPipelineRasterizationDepthClipStateCreateInfoEXT.class, address);
+        return address == NULL ? null : new VkPipelineRasterizationDepthClipStateCreateInfoEXT(address, null);
     }
 
     /**
@@ -166,7 +175,7 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -175,7 +184,7 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -185,7 +194,7 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
      */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -195,13 +204,13 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -229,7 +238,7 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
      * @param stack the stack from which to allocate
      */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT malloc(MemoryStack stack) {
-        return wrap(VkPipelineRasterizationDepthClipStateCreateInfoEXT.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkPipelineRasterizationDepthClipStateCreateInfoEXT(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -238,7 +247,7 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
      * @param stack the stack from which to allocate
      */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT calloc(MemoryStack stack) {
-        return wrap(VkPipelineRasterizationDepthClipStateCreateInfoEXT.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkPipelineRasterizationDepthClipStateCreateInfoEXT(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -248,7 +257,7 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -258,7 +267,7 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
      * @param capacity the buffer capacity
      */
     public static VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -291,9 +300,9 @@ public class VkPipelineRasterizationDepthClipStateCreateInfoEXT extends Struct i
         /**
          * Creates a new {@code VkPipelineRasterizationDepthClipStateCreateInfoEXT.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#SIZEOF}, and its mark will be undefined.
+         * by {@link VkPipelineRasterizationDepthClipStateCreateInfoEXT#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

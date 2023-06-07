@@ -43,7 +43,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * }</code></pre>
  */
 @NativeType("struct ovrPerfStatsPerCompositorFrame")
-public class OVRPerfStatsPerCompositorFrame extends Struct {
+public class OVRPerfStatsPerCompositorFrame extends Struct<OVRPerfStatsPerCompositorFrame> {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -115,6 +115,15 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
         ASWACTIVATEDTOGGLECOUNT = layout.offsetof(15);
         ASWPRESENTEDFRAMECOUNT = layout.offsetof(16);
         ASWFAILEDFRAMECOUNT = layout.offsetof(17);
+    }
+
+    protected OVRPerfStatsPerCompositorFrame(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected OVRPerfStatsPerCompositorFrame create(long address, @Nullable ByteBuffer container) {
+        return new OVRPerfStatsPerCompositorFrame(address, container);
     }
 
     /**
@@ -227,13 +236,13 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
 
     /** Returns a new {@code OVRPerfStatsPerCompositorFrame} instance for the specified memory address. */
     public static OVRPerfStatsPerCompositorFrame create(long address) {
-        return wrap(OVRPerfStatsPerCompositorFrame.class, address);
+        return new OVRPerfStatsPerCompositorFrame(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRPerfStatsPerCompositorFrame createSafe(long address) {
-        return address == NULL ? null : wrap(OVRPerfStatsPerCompositorFrame.class, address);
+        return address == NULL ? null : new OVRPerfStatsPerCompositorFrame(address, null);
     }
 
     /**
@@ -243,13 +252,13 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
      * @param capacity the buffer capacity
      */
     public static OVRPerfStatsPerCompositorFrame.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static OVRPerfStatsPerCompositorFrame.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     // -----------------------------------
@@ -301,9 +310,9 @@ public class OVRPerfStatsPerCompositorFrame extends Struct {
         /**
          * Creates a new {@code OVRPerfStatsPerCompositorFrame.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link OVRPerfStatsPerCompositorFrame#SIZEOF}, and its mark will be undefined.
+         * by {@link OVRPerfStatsPerCompositorFrame#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */

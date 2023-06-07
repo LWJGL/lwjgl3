@@ -38,7 +38,7 @@ import org.lwjgl.vulkan.*;
  *     VkExternalMemoryHandleTypeFlagsKHR const * {@link #pTypeExternalMemoryHandleTypes};
  * }</code></pre>
  */
-public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
+public class VmaAllocatorCreateInfo extends Struct<VmaAllocatorCreateInfo> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -89,6 +89,15 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
         INSTANCE = layout.offsetof(8);
         VULKANAPIVERSION = layout.offsetof(9);
         PTYPEEXTERNALMEMORYHANDLETYPES = layout.offsetof(10);
+    }
+
+    protected VmaAllocatorCreateInfo(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VmaAllocatorCreateInfo create(long address, @Nullable ByteBuffer container) {
+        return new VmaAllocatorCreateInfo(address, container);
     }
 
     /**
@@ -254,29 +263,29 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
 
     /** Returns a new {@code VmaAllocatorCreateInfo} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VmaAllocatorCreateInfo malloc() {
-        return wrap(VmaAllocatorCreateInfo.class, nmemAllocChecked(SIZEOF));
+        return new VmaAllocatorCreateInfo(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VmaAllocatorCreateInfo} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VmaAllocatorCreateInfo calloc() {
-        return wrap(VmaAllocatorCreateInfo.class, nmemCallocChecked(1, SIZEOF));
+        return new VmaAllocatorCreateInfo(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VmaAllocatorCreateInfo} instance allocated with {@link BufferUtils}. */
     public static VmaAllocatorCreateInfo create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VmaAllocatorCreateInfo.class, memAddress(container), container);
+        return new VmaAllocatorCreateInfo(memAddress(container), container);
     }
 
     /** Returns a new {@code VmaAllocatorCreateInfo} instance for the specified memory address. */
     public static VmaAllocatorCreateInfo create(long address) {
-        return wrap(VmaAllocatorCreateInfo.class, address);
+        return new VmaAllocatorCreateInfo(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VmaAllocatorCreateInfo createSafe(long address) {
-        return address == NULL ? null : wrap(VmaAllocatorCreateInfo.class, address);
+        return address == NULL ? null : new VmaAllocatorCreateInfo(address, null);
     }
 
     // -----------------------------------
@@ -297,7 +306,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VmaAllocatorCreateInfo malloc(MemoryStack stack) {
-        return wrap(VmaAllocatorCreateInfo.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VmaAllocatorCreateInfo(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -306,7 +315,7 @@ public class VmaAllocatorCreateInfo extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VmaAllocatorCreateInfo calloc(MemoryStack stack) {
-        return wrap(VmaAllocatorCreateInfo.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VmaAllocatorCreateInfo(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     // -----------------------------------

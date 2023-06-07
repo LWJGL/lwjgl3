@@ -95,7 +95,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t const * {@link #pCorrelatedViewMasks};
  * }</code></pre>
  */
-public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
+public class VkRenderPassCreateInfo2 extends Struct<VkRenderPassCreateInfo2> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -146,6 +146,15 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
         PDEPENDENCIES = layout.offsetof(8);
         CORRELATEDVIEWMASKCOUNT = layout.offsetof(9);
         PCORRELATEDVIEWMASKS = layout.offsetof(10);
+    }
+
+    protected VkRenderPassCreateInfo2(long address, @Nullable ByteBuffer container) {
+        super(address, container);
+    }
+
+    @Override
+    protected VkRenderPassCreateInfo2 create(long address, @Nullable ByteBuffer container) {
+        return new VkRenderPassCreateInfo2(address, container);
     }
 
     /**
@@ -258,29 +267,29 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
 
     /** Returns a new {@code VkRenderPassCreateInfo2} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
     public static VkRenderPassCreateInfo2 malloc() {
-        return wrap(VkRenderPassCreateInfo2.class, nmemAllocChecked(SIZEOF));
+        return new VkRenderPassCreateInfo2(nmemAllocChecked(SIZEOF), null);
     }
 
     /** Returns a new {@code VkRenderPassCreateInfo2} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
     public static VkRenderPassCreateInfo2 calloc() {
-        return wrap(VkRenderPassCreateInfo2.class, nmemCallocChecked(1, SIZEOF));
+        return new VkRenderPassCreateInfo2(nmemCallocChecked(1, SIZEOF), null);
     }
 
     /** Returns a new {@code VkRenderPassCreateInfo2} instance allocated with {@link BufferUtils}. */
     public static VkRenderPassCreateInfo2 create() {
         ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
-        return wrap(VkRenderPassCreateInfo2.class, memAddress(container), container);
+        return new VkRenderPassCreateInfo2(memAddress(container), container);
     }
 
     /** Returns a new {@code VkRenderPassCreateInfo2} instance for the specified memory address. */
     public static VkRenderPassCreateInfo2 create(long address) {
-        return wrap(VkRenderPassCreateInfo2.class, address);
+        return new VkRenderPassCreateInfo2(address, null);
     }
 
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkRenderPassCreateInfo2 createSafe(long address) {
-        return address == NULL ? null : wrap(VkRenderPassCreateInfo2.class, address);
+        return address == NULL ? null : new VkRenderPassCreateInfo2(address, null);
     }
 
     /**
@@ -289,7 +298,7 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassCreateInfo2.Buffer malloc(int capacity) {
-        return wrap(Buffer.class, nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
     }
 
     /**
@@ -298,7 +307,7 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassCreateInfo2.Buffer calloc(int capacity) {
-        return wrap(Buffer.class, nmemCallocChecked(capacity, SIZEOF), capacity);
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
     }
 
     /**
@@ -308,7 +317,7 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
      */
     public static VkRenderPassCreateInfo2.Buffer create(int capacity) {
         ByteBuffer container = __create(capacity, SIZEOF);
-        return wrap(Buffer.class, memAddress(container), capacity, container);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -318,13 +327,13 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassCreateInfo2.Buffer create(long address, int capacity) {
-        return wrap(Buffer.class, address, capacity);
+        return new Buffer(address, capacity);
     }
 
     /** Like {@link #create(long, int) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     @Nullable
     public static VkRenderPassCreateInfo2.Buffer createSafe(long address, int capacity) {
-        return address == NULL ? null : wrap(Buffer.class, address, capacity);
+        return address == NULL ? null : new Buffer(address, capacity);
     }
 
     /**
@@ -333,7 +342,7 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkRenderPassCreateInfo2 malloc(MemoryStack stack) {
-        return wrap(VkRenderPassCreateInfo2.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return new VkRenderPassCreateInfo2(stack.nmalloc(ALIGNOF, SIZEOF), null);
     }
 
     /**
@@ -342,7 +351,7 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static VkRenderPassCreateInfo2 calloc(MemoryStack stack) {
-        return wrap(VkRenderPassCreateInfo2.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return new VkRenderPassCreateInfo2(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
     }
 
     /**
@@ -352,7 +361,7 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassCreateInfo2.Buffer malloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
     }
 
     /**
@@ -362,7 +371,7 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static VkRenderPassCreateInfo2.Buffer calloc(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
     }
 
     // -----------------------------------
@@ -444,9 +453,9 @@ public class VkRenderPassCreateInfo2 extends Struct implements NativeResource {
         /**
          * Creates a new {@code VkRenderPassCreateInfo2.Buffer} instance backed by the specified container.
          *
-         * Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
+         * <p>Changes to the container's content will be visible to the struct buffer instance and vice versa. The two buffers' position, limit, and mark values
          * will be independent. The new buffer's position will be zero, its capacity and its limit will be the number of bytes remaining in this buffer divided
-         * by {@link VkRenderPassCreateInfo2#SIZEOF}, and its mark will be undefined.
+         * by {@link VkRenderPassCreateInfo2#SIZEOF}, and its mark will be undefined.</p>
          *
          * <p>The created buffer instance holds a strong reference to the container object.</p>
          */
