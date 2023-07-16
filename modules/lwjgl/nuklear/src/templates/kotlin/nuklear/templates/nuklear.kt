@@ -5148,7 +5148,7 @@ nk_style_pop_vec2(ctx);""")}
             nk_font_atlas.p("atlas", ""),
             AutoSizeResult..Check(1)..int.p("width", ""),
             AutoSizeResult..Check(1)..int.p("height", ""),
-            nk_font_atlas_format("fmt", "")
+            AutoSizeResult("(fmt == NK_FONT_ATLAS_RGBA32 ? 4 : 1)")..nk_font_atlas_format("fmt", "")
         )
 
         void(

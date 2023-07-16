@@ -9847,7 +9847,7 @@ public class Nuklear {
             check(height, 1);
         }
         long __result = nnk_font_atlas_bake(atlas.address(), memAddress(width), memAddress(height), fmt);
-        return memByteBufferSafe(__result, width.get(width.position()) * height.get(height.position()));
+        return memByteBufferSafe(__result, width.get(width.position()) * height.get(height.position()) * (fmt == NK_FONT_ATLAS_RGBA32 ? 4 : 1));
     }
 
     // --- [ nk_font_atlas_end ] ---
@@ -10886,7 +10886,7 @@ public class Nuklear {
             check(height, 1);
         }
         long __result = nnk_font_atlas_bake(atlas.address(), width, height, fmt);
-        return memByteBufferSafe(__result, width[0] * height[0]);
+        return memByteBufferSafe(__result, width[0] * height[0] * (fmt == NK_FONT_ATLAS_RGBA32 ? 4 : 1));
     }
 
 }
