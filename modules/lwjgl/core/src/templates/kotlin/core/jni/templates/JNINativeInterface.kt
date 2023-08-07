@@ -34,7 +34,8 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
         "VERSION_9"..0x00090000,
         "VERSION_10"..0x000A0000,
         "VERSION_19"..0x00130000,
-        "VERSION_20"..0x00140000
+        "VERSION_20"..0x00140000,
+        "VERSION_21"..0x00150000
     )
 
     EnumConstant(
