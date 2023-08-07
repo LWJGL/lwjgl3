@@ -300,7 +300,7 @@ val Shaderc = "Shaderc".nativeClass(Module.SHADERC, prefix = "shaderc_", prefixM
         Returns a {@code shaderc_compiler_t} that can be used to compile modules.
 
         A return of #NULL indicates that there was an error initializing the compiler. Any function operating on {@code shaderc_compiler_t} must offer the
-        ${url("http://herbsutter.com/2014/01/13/gotw-95-solution-thread-safety-and-synchronization/", "basic thread-safety guarantee")}. That is: concurrent
+        ${url("https://herbsutter.com/2014/01/13/gotw-95-solution-thread-safety-and-synchronization/", "basic thread-safety guarantee")}. That is: concurrent
         invocation of these functions on DIFFERENT objects needs no synchronization; concurrent invocation of these functions on the SAME object requires
         synchronization IF AND ONLY IF some of them take a non-const argument.
         """,

@@ -1880,7 +1880,7 @@ public class STBTruetype {
      * 
      * <ul>
      * <li><a target="_blank" href="https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6name.html">TrueType Reference Manual - The 'name' table</a></li>
-     * <li><a target="_blank" href="http://www.microsoft.com/typography/otspec/name.htm">OpenType™ Specification - The Naming Table</a></li>
+     * <li><a target="_blank" href="https://learn.microsoft.com/en-us/typography/opentype/spec/name">OpenType™ Specification - The Naming Table</a></li>
      * </ul>
      *
      * @param font       an {@link STBTTFontinfo} struct

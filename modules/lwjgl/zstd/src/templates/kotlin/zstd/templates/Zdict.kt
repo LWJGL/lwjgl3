@@ -16,7 +16,7 @@ ENABLE_WARNINGS()""")
 
     documentation =
         """
-        Native bindings to the dictionary builder API of ${url("http://facebook.github.io/zstd/", "Zstandard")} (zstd).
+        Native bindings to the dictionary builder API of ${url("https://facebook.github.io/zstd/", "Zstandard")} (zstd).
 
         <h4>Why should I use a dictionary?</h4>
 

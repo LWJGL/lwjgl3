@@ -505,7 +505,7 @@ This build includes the following changes:
 - Added [LLVM/Clang](https://llvm.org/) bindings.
     * LLVM binaries are not included in this release. They must be separately downloaded or built for each platform.
 - Added [Meow hash](https://github.com/cmuratori/meow_hash/) bindings.
-- Added [Opus](http://opus-codec.org/) bindings.
+- Added [Opus](https://opus-codec.org/) bindings.
 - bgfx: Updated to API version 90 (up from 76)
 - dyncall: Updated to 1.0 (up from 1.0-RC)
 - glfw: Updated to pre-release 3.3.0 version (up from 3.3.0 pre-release):
@@ -631,7 +631,7 @@ This build includes the following changes:
 - perf(core): Optimized pointer arithmetic by helping the JVM identify unsigned integers.
 - perf(core): The new `java.util.Objects` index check intrinsics are used on Java 9.
 - perf(core): `MemoryUtil` string decoding methods are now faster on both Java 8 and 9+.
-    * The Java 9 implementations are tuned for compact strings ([JEP 254](http://openjdk.java.net/jeps/254)).
+    * The Java 9 implementations are tuned for compact strings ([JEP 254](https://openjdk.org/jeps/254)).
 - perf(generator):  Function pointers in capabilities classes are not sorted by name anymore.
     * This makes it more likely that for functions that are commonly used together, their respective pointers
     will be closer in memory, avoiding unnecessary cache misses.
@@ -720,7 +720,7 @@ This build includes the following changes:
 #### Improvements
 
 - Added [JSR-305](https://jcp.org/en/jsr/detail?id=305) nullability annotations to the core and all bindings. (#344)
-    * Enables static analysis tools ([FindBugs](http://findbugs.sourceforge.net/), IDEs) to detect accesses that could cause `NullPointerException`. Eliminating those improves the quality of LWJGL applications.
+    * Enables static analysis tools ([FindBugs](https://findbugs.sourceforge.net/), IDEs) to detect accesses that could cause `NullPointerException`. Eliminating those improves the quality of LWJGL applications.
     * Enables better interopation with JVM-based languages that feature built-in null-safety. For example, see [Kotlin's JSR-305 support](https://kotlinlang.org/docs/reference/java-interop.html#jsr-305-support).
 - Added `Configuration` setting to disable function lookup checks.
 - lmdb: Databases are now binary compatible across 32 & 64-bit architectures. (#364)
@@ -791,11 +791,11 @@ This build includes the following changes:
 
 #### Bindings
 
-- Added [LZ4](http://lz4.github.io/lz4/) bindings.
+- Added [LZ4](https://lz4.org/) bindings.
 - Added [NanoSVG](https://github.com/memononen/nanosvg) to the existing `NanoVG` bindings.
 - Added [ODBC](https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc) bindings.
 - Added [Remotery](https://github.com/Celtoys/Remotery) bindings.
-- Added [Zstandard](http://facebook.github.io/zstd/) bindings.
+- Added [Zstandard](https://facebook.github.io/zstd/) bindings.
 - bgfx: Updated to API version 55 (up from 48)
 - glfw: Updated to pre-release 3.3.0 version (up from 3.3.0 pre-release):
     * Support for transparent window framebuffers (`GLFW_TRANSPARENT_FRAMEBUFFER` window hint)
@@ -1010,7 +1010,7 @@ This build includes the following changes:
 
 #### Bindings
 
-- Added [Assimp](http://www.assimp.org/) bindings.
+- Added [Assimp](https://www.assimp.org/) bindings.
 - bgfx: Updated to API version 34 (up from 28)
 - jemalloc: Updated to version 4.4.0 (up from 4.2.1)
 - LibOVR: Updated to version 1.10.0 (up from 1.9.0)
@@ -1114,8 +1114,8 @@ This build includes the following changes:
 - Added [Vulkan](https://www.khronos.org/vulkan/) bindings. (#50)
 - Added [NanoVG](https://github.com/memononen/nanovg) bindings. (#99)
 - Added [NativeFileDialog](https://github.com/mlabbe/nativefiledialog) bindings.
-- Added [par_shapes.h](http://github.prideout.net/shapes) bindings.
-- Added [dyncall](http://www.dyncall.org/) bindings.
+- Added [par_shapes.h](https://prideout.net/shapes) bindings.
+- Added [dyncall](https://www.dyncall.org/) bindings.
 - Added [jawt](https://en.wikipedia.org/wiki/Java_AWT_Native_Interface) bindings for AWT/Swing integration. (#125)
 - Added simple OS-specific **window creation** bindings, for custom window/context creation. (#105)
 - Added missing OpenCL and OpenAL **extensions**.
@@ -1184,7 +1184,7 @@ Changes to bindings:
 
 * Removed obsolete OS-specific bindings.
 * Added bindings to many OpenGL extensions that were missing in 3.0.0a.
-* Added bindings to [jemalloc](http://www.canonware.com/jemalloc/).
+* Added bindings to [jemalloc](https://jemalloc.net/).
 * Added bindings to [EGL](https://www.khronos.org/egl).
 * Added bindings to [OpenGL ES](https://www.khronos.org/opengles/).
 * Added bindings to [xxHash](https://github.com/Cyan4973/xxHash).

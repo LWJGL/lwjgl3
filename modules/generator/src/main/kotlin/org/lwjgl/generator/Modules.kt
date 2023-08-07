@@ -60,7 +60,7 @@ enum class Module(
         "assimp",
         "org.lwjgl.assimp",
         """
-        Contains bindings to the ${url("http://www.assimp.org/", "Assimp")} library, a library to import and export various 3d-model-formats including
+        Contains bindings to the ${url("https://www.assimp.org/", "Assimp")} library, a library to import and export various 3d-model-formats including
         scene-post-processing to generate missing render data.
 
         Assimp aims to provide a full asset conversion pipeline for use in game engines / realtime rendering systems of any kind, but it is not limited to this
@@ -156,10 +156,10 @@ enum class Module(
         "glfw",
         "org.lwjgl.glfw",
         """
-        Contains bindings to the ${url("http://www.glfw.org/", "GLFW")} library.
+        Contains bindings to the ${url("https://www.glfw.org/", "GLFW")} library.
 
-        GLFW comes with extensive documentation, which you can read online ${url("http://www.glfw.org/docs/latest/", "here")}. The
-        ${url("http://www.glfw.org/faq.html", "Frequently Asked Questions")} are also useful.
+        GLFW comes with extensive documentation, which you can read online ${url("https://www.glfw.org/docs/latest/", "here")}. The
+        ${url("https://www.glfw.org/faq.html", "Frequently Asked Questions")} are also useful.
 
         <h3>Using GLFW on macOS</h3> 
 
@@ -212,10 +212,10 @@ enum class Module(
         "jemalloc",
         "org.lwjgl.system.jemalloc",
         """
-        Contains bindings to the ${url("http://jemalloc.net/", "jemalloc")} library. jemalloc is a general purpose malloc implementation that emphasizes
+        Contains bindings to the ${url("https://jemalloc.net/", "jemalloc")} library. jemalloc is a general purpose malloc implementation that emphasizes
         fragmentation avoidance and scalable concurrency support.
 
-        The jemalloc documentation can be found ${url("http://jemalloc.net/jemalloc.3.html", "here")}. The jemalloc
+        The jemalloc documentation can be found ${url("https://jemalloc.net/jemalloc.3.html", "here")}. The jemalloc
         ${url("https://github.com/jemalloc/jemalloc/wiki", "wiki")} also contains useful information.
 
         The jemalloc shared library that comes with LWJGL is configured with:
@@ -232,7 +232,7 @@ enum class Module(
         The shared library may be replaced with a custom build that has more features enabled.
 
         Dynamic configuration (for enabled features) is also possible, using either the {@code MALLOC_CONF} environment variable or the
-        ${url("http://jemalloc.net/jemalloc.3.html\\#mallctl_namespace", "MALLCTL NAMESPACE")} and the {@code mallctl*} functions.
+        ${url("https://jemalloc.net/jemalloc.3.html\\#mallctl_namespace", "MALLCTL NAMESPACE")} and the {@code mallctl*} functions.
         """
     ),
     KTX(
@@ -386,7 +386,7 @@ enum class Module(
         "lz4",
         "org.lwjgl.util.lz4",
         """
-        Contains bindings to ${url("http://lz4.github.io/lz4/", "LZ4")}, a lossless compression algorithm, providing compression speed &gt; 500 MB/s per core,
+        Contains bindings to ${url("https://lz4.org/", "LZ4")}, a lossless compression algorithm, providing compression speed &gt; 500 MB/s per core,
         scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on
         multi-core systems.
         """,
@@ -469,7 +469,7 @@ enum class Module(
         very useful option for debugging is {@code ALSOFT_LOGLEVEL}; it can be set to values 0 through 4, with higher values producing more information.
 
         In addition to standard OpenAL features, OpenAL Soft supports ${url("https://en.wikipedia.org/wiki/Head-related_transfer_function", "HRTF")},
-        ${url("https://en.wikipedia.org/wiki/Ambisonics", "Ambisonics")} and ${url("http://www.codemasters.com/research/3D_sound_for_3D_games.pdf", "3D7.1")}.
+        ${url("https://en.wikipedia.org/wiki/Ambisonics", "Ambisonics")} and ${url("https://www.codemasters.com/research/3D_sound_for_3D_games.pdf", "3D7.1")}.
         Documentation for these features is available in the OpenAL Soft ${url("https://github.com/kcat/openal-soft/tree/master/docs", "repository")}.
         """
     ),
@@ -835,7 +835,7 @@ float h = layout.dimensions(YGDimensionHeight);""")}
         "zstd",
         "org.lwjgl.util.zstd",
         """
-        Contains bindings to ${url("http://facebook.github.io/zstd/", "Zstandard")} (zstd), a fast lossless compression algorithm, targeting real-time
+        Contains bindings to ${url("https://facebook.github.io/zstd/", "Zstandard")} (zstd), a fast lossless compression algorithm, targeting real-time
         compression scenarios at zlib-level and better compression ratios.
 
         Zstandard is a real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-off, while

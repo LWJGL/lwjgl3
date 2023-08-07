@@ -22,7 +22,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Contains bindings to the <a target="_blank" href="http://www.assimp.org/">Assimp</a> library.
+ * Contains bindings to the <a target="_blank" href="https://www.assimp.org/">Assimp</a> library.
  * 
  * <h3>General Features</h3>
  * 
@@ -320,7 +320,8 @@ public class Assimp {
      * Enables time measurements.
      * 
      * <p>If enabled, measures the time needed for each part of the loading process (i.e. IO time, importing, postprocessing, ..) and dumps these timings to the
-     * DefaultLogger. See the <a target="_blank" href="http://assimp.org/lib_html/perf.html">Performance Page</a> for more information on this topic.</p>
+     * DefaultLogger. See the <a target="_blank" href="https://assimp-docs.readthedocs.io/en/latest/usage/use_the_lib.html#performance">Performance Page</a> for more
+     * information on this topic.</p>
      * 
      * <p>Property type: bool. Default value: false.</p>
      */

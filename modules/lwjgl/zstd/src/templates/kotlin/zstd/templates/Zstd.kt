@@ -16,7 +16,7 @@ ENABLE_WARNINGS()""")
 
     documentation =
         """
-        Native bindings to ${url("http://facebook.github.io/zstd/", "Zstandard")} (zstd), a fast lossless compression algorithm, targeting real-time
+        Native bindings to ${url("https://facebook.github.io/zstd/", "Zstandard")} (zstd), a fast lossless compression algorithm, targeting real-time
         compression scenarios at zlib-level and better compression ratios.
 
         <h3>Introduction</h3>

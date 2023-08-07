@@ -92,7 +92,7 @@ val GLBinding = Generator.register(object : APIBinding(
             }
         }
 
-        val link = url("http://docs.gl/gl${if (deprecated) "3" else "4"}/$page", "Reference Page")
+        val link = url("https://docs.gl/gl${if (deprecated) "3" else "4"}/$page", "Reference Page")
         val injectedJavaDoc =
             if (deprecated)
                 "$link - <em>This function is deprecated and unavailable in the Core profile</em>"

@@ -554,7 +554,7 @@ val LLVMCore = "LLVMCore".nativeClass(
         """
         Return an unique id given the name of a enum attribute, or 0 if no attribute by that name exists.
 
-        See ${url("http://llvm.org/docs/LangRef.html\\#parameter-attributes")} and ${url("http://llvm.org/docs/LangRef.html\\#function-attributes")} for the
+        See ${url("https://llvm.org/docs/LangRef.html\\#parameter-attributes")} and ${url("https://llvm.org/docs/LangRef.html\\#function-attributes")} for the
         list of available attributes.
 
         NB: Attribute names and/or id are subject to change without going through the C API deprecation cycle.

@@ -14,7 +14,7 @@ val ZstdErrors = "ZstdErrors".nativeClass(Module.ZSTD, prefix = "ZSTD", prefixMe
 ENABLE_WARNINGS()""")*/
     nativeImport("zstd_errors.h")
 
-    documentation = "Native bindings to the experimental error code API of ${url("http://facebook.github.io/zstd/", "Zstandard")} (zstd)."
+    documentation = "Native bindings to the experimental error code API of ${url("https://facebook.github.io/zstd/", "Zstandard")} (zstd)."
 
     EnumConstant(
         "Error code. ({@code ZSTD_ErrorCode})",

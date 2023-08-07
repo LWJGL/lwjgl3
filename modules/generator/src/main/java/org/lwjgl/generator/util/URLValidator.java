@@ -54,7 +54,7 @@ public final class URLValidator {
             return;
         }
 
-        if (!url.toString().startsWith("http://docs.gl")) {
+        if (!url.toString().startsWith("https://docs.gl")) {
             System.err.println(status == HttpURLConnection.HTTP_MOVED_PERM
                 ? "301: " + url + "\n  -> " + location[0]
                 : status + ": " + url

@@ -10,7 +10,7 @@ import org.lwjgl.generator.*
 val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant = "ai", binding = ASSIMP_BINDING) {
     documentation =
         """
-        Contains bindings to the ${url("http://www.assimp.org/", "Assimp")} library.
+        Contains bindings to the ${url("https://www.assimp.org/", "Assimp")} library.
 
         <h3>General Features</h3>
         ${ul(
@@ -153,7 +153,8 @@ val Assimp = "Assimp".nativeClass(Module.ASSIMP, prefix = "ai", prefixConstant =
         Enables time measurements.
 
         If enabled, measures the time needed for each part of the loading process (i.e. IO time, importing, postprocessing, ..) and dumps these timings to the
-        DefaultLogger. See the ${url("http://assimp.org/lib_html/perf.html", "Performance Page")} for more information on this topic.
+        DefaultLogger. See the ${url("https://assimp-docs.readthedocs.io/en/latest/usage/use_the_lib.html\\#performance", "Performance Page")} for more
+        information on this topic.
 
         Property type: bool. Default value: false.
         """,

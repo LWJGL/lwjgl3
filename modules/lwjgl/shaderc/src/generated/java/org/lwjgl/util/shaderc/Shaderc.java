@@ -567,7 +567,7 @@ public class Shaderc {
      * Returns a {@code shaderc_compiler_t} that can be used to compile modules.
      * 
      * <p>A return of {@code NULL} indicates that there was an error initializing the compiler. Any function operating on {@code shaderc_compiler_t} must offer the
-     * <a target="_blank" href="http://herbsutter.com/2014/01/13/gotw-95-solution-thread-safety-and-synchronization/">basic thread-safety guarantee</a>. That is: concurrent
+     * <a target="_blank" href="https://herbsutter.com/2014/01/13/gotw-95-solution-thread-safety-and-synchronization/">basic thread-safety guarantee</a>. That is: concurrent
      * invocation of these functions on DIFFERENT objects needs no synchronization; concurrent invocation of these functions on the SAME object requires
      * synchronization IF AND ONLY IF some of them take a non-const argument.</p>
      */

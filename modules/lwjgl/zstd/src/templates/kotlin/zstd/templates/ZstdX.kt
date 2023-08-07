@@ -16,7 +16,7 @@ ENABLE_WARNINGS()""")
     javaImport("static org.lwjgl.util.zstd.Zstd.*")
 
     documentation =
-        "Native bindings to the experimental API of ${url("http://facebook.github.io/zstd/", "Zstandard")} (zstd)."
+        "Native bindings to the experimental API of ${url("https://facebook.github.io/zstd/", "Zstandard")} (zstd)."
 
     val dictContentTypes = EnumConstant(
         "{@code ZSTD_dictContentType_e}",

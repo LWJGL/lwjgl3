@@ -91,7 +91,7 @@ public class ClangDocumentation {
      * <p>For example:</p>
      * 
      * <pre><code>
-     *  &lt;br&gt; &lt;br /&gt; &lt;a href="http://example.org/"&gt;</code></pre>
+     *  &lt;br&gt; &lt;br /&gt; &lt;a href="https://example.org/"&gt;</code></pre>
      * </li>
      * <li>{@link #CXComment_HTMLEndTag Comment_HTMLEndTag} - 
      * HTML end tag. Considered inline content.

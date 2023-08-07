@@ -20,7 +20,7 @@ import org.lwjgl.system.*;
  * 
  * <p>This extension incorporates an optimized CMAA algorithm implementation into the GL implementation.</p>
  * 
- * <p>For more information on CMAA refer to <a target="_blank" href="http://software.intel.com">http://software.intel.com</a>.</p>
+ * <p>For more information on CMAA refer to <a target="_blank" href="https://software.intel.com">https://software.intel.com</a>.</p>
  */
 public class INTELFramebufferCMAA {
 

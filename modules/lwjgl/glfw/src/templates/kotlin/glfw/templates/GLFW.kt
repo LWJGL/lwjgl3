@@ -10,7 +10,7 @@ import glfw.*
 val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDING) {
     documentation =
         """
-        Native bindings to the ${url("http://www.glfw.org/docs/latest/", "GLFW")} library.
+        Native bindings to the ${url("https://www.glfw.org/docs/latest/", "GLFW")} library.
 
         GLFW is a free, Open Source, multi-platform library for opening a window, creating an OpenGL context and managing input. It is easy to integrate into
         existing applications and does not lay claim to the main loop.
@@ -229,7 +229,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     IntConstant("If this bit is set the Num Lock key is enabled and the #LOCK_KEY_MODS input mode is set.", "MOD_NUM_LOCK"..0x0020)
 
     IntConstant(
-        """Mouse buttons. See ${url("http://www.glfw.org/docs/latest/input.html\\#input_mouse_button", "mouse button input")} for how these are used.""",
+        """Mouse buttons. See ${url("https://www.glfw.org/docs/latest/input.html\\#input_mouse_button", "mouse button input")} for how these are used.""",
 
         "MOUSE_BUTTON_1".."0",
         "MOUSE_BUTTON_2".."1",
@@ -246,7 +246,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
-        """Joysticks. See ${url("http://www.glfw.org/docs/latest/input.html\\#joystick", "joystick input")} for how these are used.""",
+        """Joysticks. See ${url("https://www.glfw.org/docs/latest/input.html\\#joystick", "joystick input")} for how these are used.""",
 
         "JOYSTICK_1".."0",
         "JOYSTICK_2".."1",
@@ -268,7 +268,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
-        """Gamepad buttons. See ${url("http://www.glfw.org/docs/latest/input.html\\#gamepad", "gamepad")} for how these are used.""",
+        """Gamepad buttons. See ${url("https://www.glfw.org/docs/latest/input.html\\#gamepad", "gamepad")} for how these are used.""",
 
         "GAMEPAD_BUTTON_A".."0",
         "GAMEPAD_BUTTON_B".."1",
@@ -293,7 +293,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     )
 
     IntConstant(
-        """Gamepad axes. See ${url("http://www.glfw.org/docs/latest/input.html\\#gamepad", "gamepad")} for how these are used.""",
+        """Gamepad axes. See ${url("https://www.glfw.org/docs/latest/input.html\\#gamepad", "gamepad")} for how these are used.""",
 
         "GAMEPAD_AXIS_LEFT_X".."0",
         "GAMEPAD_AXIS_LEFT_Y".."1",
@@ -1727,7 +1727,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         specified with window hints.
 
         Successful creation does not change which context is current. Before you can use the newly created context, you need to make it current. For information
-        about the {@code share} parameter, see ${url("http://www.glfw.org/docs/latest/context.html\\#context_sharing", "context sharing")}.
+        about the {@code share} parameter, see ${url("https://www.glfw.org/docs/latest/context.html\\#context_sharing", "context sharing")}.
 
         The created window, framebuffer and context may differ from what you requested, as not all parameters and hints are hard constraints. This includes the
         size of the window, especially for full screen windows. To query the actual attributes of the created window, framebuffer and context, use queries like
@@ -1735,12 +1735,12 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         To create a full screen window, you need to specify the monitor the window will cover. If no monitor is specified, the window will be windowed mode.
         Unless you have a way for the user to choose a specific monitor, it is recommended that you pick the primary monitor. For more information on how to
-        query connected monitors, see ${url("http://www.glfw.org/docs/latest/monitor.html\\#monitor_monitors", "monitors")}.
+        query connected monitors, see ${url("https://www.glfw.org/docs/latest/monitor.html\\#monitor_monitors", "monitors")}.
 
         For full screen windows, the specified size becomes the resolution of the window's <i>desired video mode</i>. As long as a full screen window is not
         iconified, the supported video mode most closely matching the desired video mode is set for the specified monitor. For more information about full
         screen windows, including the creation of so called <i>windowed full screen</i> or <i>borderless full screen</i> windows, see
-        ${url("http://www.glfw.org/docs/latest/window.html\\#window_windowed_full_screen", "full screen")}.
+        ${url("https://www.glfw.org/docs/latest/window.html\\#window_windowed_full_screen", "full screen")}.
 
         Once you have created the window, you can switch it between windowed and full screen mode with #SetWindowMonitor(). If the window has an OpenGL or
         OpenGL ES context, it will be unaffected.
@@ -1751,9 +1751,9 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         As long as at least one full screen window is not iconified, the screensaver is prohibited from starting.
 
         Window systems put limits on window sizes. Very large or very small window dimensions may be overridden by the window system on creation. Check the
-        actual ${url("http://www.glfw.org/docs/latest/window.html\\#window_size", "size")} after creation.
+        actual ${url("https://www.glfw.org/docs/latest/window.html\\#window_size", "size")} after creation.
 
-        The ${url("http://www.glfw.org/docs/latest/window.html\\#buffer_swap", "swap interval")} is not set during window creation and the initial value may vary
+        The ${url("https://www.glfw.org/docs/latest/window.html\\#buffer_swap", "swap interval")} is not set during window creation and the initial value may vary
         depending on driver settings and defaults.
 
         ${note(ul(
@@ -2083,7 +2083,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "GetWindowFrameSize",
         """
         Retrieves the size, in screen coordinates, of each edge of the frame of the specified window. This size includes the title bar, if the window has one.
-        The size of the frame may vary depending on the ${url("http://www.glfw.org/docs/latest/window.html\\#window-hints_wnd", "window-related hints")} used to
+        The size of the frame may vary depending on the ${url("https://www.glfw.org/docs/latest/window.html\\#window-hints_wnd", "window-related hints")} used to
         create it.
 
         Because this function retrieves the size of each window frame edge and not the offset along a particular coordinate axis, the retrieved values will
@@ -2373,7 +2373,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         GLFWwindow.p("window", "the window to query"),
         int(
             "attrib",
-            "the <a href=\"http://www.glfw.org/docs/latest/window.html\\#window_attribs\">window attribute</a> whose value to return",
+            "the <a href=\"https://www.glfw.org/docs/latest/window.html\\#window_attribs\">window attribute</a> whose value to return",
             "${WindowHints.replace("#AUTO_ICONIFY ", "")} ${ClientAPIHints.replace("GLFW#(CONTEXT_RELEASE_BEHAVIOR|CONTEXT_NO_ERROR) ", "")}"
         ),
 
@@ -2438,7 +2438,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
     val CallbackReturnDoc =
         """
         the previously set callback, or #NULL if no callback was set or the library had not been
-        ${url("http://www.glfw.org/docs/latest/intro.html\\#intro_init", "initialized")}
+        ${url("https://www.glfw.org/docs/latest/intro.html\\#intro_init", "initialized")}
         """
 
     val CALLBACK_WINDOW = GLFWwindow.p("window", "the window whose callback to set")
@@ -2608,7 +2608,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         input callbacks associated with those events to be called.
 
         On some platforms, a window move, resize or menu operation will cause event processing to block. This is due to how event processing is designed on
-        those platforms. You can use the ${url("http://www.glfw.org/docs/latest/window.html\\#window_refresh", "window refresh callback")} to redraw the
+        those platforms. You can use the ${url("https://www.glfw.org/docs/latest/window.html\\#window_refresh", "window refresh callback")} to redraw the
         contents of your window when necessary during such operations.
 
         On some platforms, certain events are sent directly to the application without going through the event queue, causing callbacks to be called outside of
@@ -2637,7 +2637,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         callbacks.
 
         On some platforms, a window move, resize or menu operation will cause event processing to block. This is due to how event processing is designed on
-        those platforms. You can use the ${url("http://www.glfw.org/docs/latest/window.html\\#window_refresh", "window refresh callback")} to redraw the
+        those platforms. You can use the ${url("https://www.glfw.org/docs/latest/window.html\\#window_refresh", "window refresh callback")} to redraw the
         contents of your window when necessary during such operations.
 
         On some platforms, certain callbacks may be called outside of a call to one of the event processing functions.
@@ -2861,7 +2861,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
 
         The modifier key bit masks are not key tokens and cannot be used with this function.
 
-        <b>Do not use this function</b> to implement ${url("http://www.glfw.org/docs/latest/input.html\\#input_char", "text input")}.
+        <b>Do not use this function</b> to implement ${url("https://www.glfw.org/docs/latest/input.html\\#input_char", "text input")}.
 
         ${note(ul(
             "This function must only be called from the main thread.",
@@ -3040,7 +3040,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         "SetCursor",
         """
         Sets the cursor image to be used when the cursor is over the content area of the specified window. The set cursor will only be visible when the
-        ${url("http://www.glfw.org/docs/latest/input.html\\#cursor_mode", "cursor mode")} of the window is #CURSOR_NORMAL.
+        ${url("https://www.glfw.org/docs/latest/input.html\\#cursor_mode", "cursor mode")} of the window is #CURSOR_NORMAL.
 
         On some platforms, the set cursor may not be visible unless the window also has input focus.
 
@@ -3456,7 +3456,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         a single gamepad mapping or many mappings separated by newlines. The parser supports the full format of the {@code gamecontrollerdb.txt} source file
         including empty lines and comments.
 
-        See ${url("http://www.glfw.org/docs/latest/input.html\\#gamepad_mapping", "gamepad_mapping")} for a description of the format.
+        See ${url("https://www.glfw.org/docs/latest/input.html\\#gamepad_mapping", "gamepad_mapping")} for a description of the format.
 
         If there is already a gamepad mapping for a given GUID in the internal list, it will be replaced by the one passed to this function. If the library is
         terminated and re-initialized the internal list will revert to the built-in default.
@@ -3627,7 +3627,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         By default, making a context non-current implicitly forces a pipeline flush. On machines that support
         ${url("https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_context_flush_control.txt", "GL_KHR_context_flush_control")}, you can control whether
         a context performs this flush by setting the #CONTEXT_RELEASE_BEHAVIOR
-        ${url("http://www.glfw.org/docs/latest/window.html\\#window_hints_ctx", "window hint")}.
+        ${url("https://www.glfw.org/docs/latest/window.html\\#window_hints_ctx", "window hint")}.
 
         The specified window must have an OpenGL or OpenGL ES context. Specifying a window without a context will generate a #NO_WINDOW_CONTEXT error.
 
@@ -3709,7 +3709,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
     intb(
         "ExtensionSupported",
         """
-        Returns whether the specified ${url("http://www.glfw.org/docs/latest/context.html\\#context_glext", "API extension")} is supported by the current
+        Returns whether the specified ${url("https://www.glfw.org/docs/latest/context.html\\#context_glext", "API extension")} is supported by the current
         OpenGL or OpenGL ES context. It searches both for client API extension and context creation API extensions.
 
         A context must be current on the calling thread. Calling this function without a current context will cause a #NO_CURRENT_CONTEXT error.
@@ -3734,7 +3734,7 @@ if (hats[2] & GLFW_HAT_RIGHT)
         "GetProcAddress",
         """
         Returns the address of the specified OpenGL or OpenGL ES ${url(
-            "http://www.glfw.org/docs/latest/context.html\\#context_glext",
+            "https://www.glfw.org/docs/latest/context.html\\#context_glext",
             "core or extension function")
         }, if it is supported by the current context.
 

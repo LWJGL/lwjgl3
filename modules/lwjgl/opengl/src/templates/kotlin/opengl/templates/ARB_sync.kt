@@ -70,7 +70,7 @@ val ARB_sync = "ARBSync".nativeClassGL("ARB_sync") {
     LongConstant(
         "Accepted in the {@code timeout} parameter of WaitSync.",
 
-        "TIMEOUT_IGNORED".."0xFFFFFFFFFFFFFFFFL" // TODO: http://youtrack.jetbrains.com/issue/KT-2780
+        "TIMEOUT_IGNORED".."0xFFFFFFFFFFFFFFFFL" // TODO: https://youtrack.jetbrains.com/issue/KT-2780
     )
 
     IntConstant(

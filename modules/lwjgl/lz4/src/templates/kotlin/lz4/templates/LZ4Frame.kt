@@ -16,7 +16,7 @@ ENABLE_WARNINGS()""")
 
     documentation =
         """
-        Native bindings to the frame API of ${url("http://lz4.github.io/lz4/", "LZ4")}.
+        Native bindings to the frame API of ${url("https://lz4.org/", "LZ4")}.
 
         LZ4F is a stand-alone API to create LZ4-compressed frames conformant with specification v1.6.1. It also offers streaming capabilities. {@code lz4.h} is
         not required when using {@code lz4frame.h}, except to get constant such as #VERSION_NUMBER.

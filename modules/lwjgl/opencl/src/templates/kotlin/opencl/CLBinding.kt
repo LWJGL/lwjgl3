@@ -168,7 +168,7 @@ fun NativeClass.extensionLink(
     txt: String,
     prefix: String = txt.substring(0, txt.indexOf('_')),
     name: String = templateName
-) = url("http://www.khronos.org/registry/OpenCL/extensions/$prefix/cl_$txt.txt", name)
+) = url("https://www.khronos.org/registry/OpenCL/extensions/$prefix/cl_$txt.txt", name)
 
 val NativeClass.extensionName: String
     get() = "<strong>$templateName</strong>"

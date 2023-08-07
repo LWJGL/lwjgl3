@@ -39,7 +39,7 @@ val ClangDocumentation = "ClangDocumentation".nativeClass(
             For example:
 
             ${codeBlock("""
- <br> <br /> <a href="http://example.org/">""")}
+ <br> <br /> <a href="https://example.org/">""")}
             """
         ),
         "Comment_HTMLEndTag".enum(

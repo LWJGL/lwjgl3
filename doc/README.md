@@ -71,7 +71,7 @@ LWJGL comes with a preconfigured **IntelliJ IDEA** project. You can use the Comm
 * File &gt; Project Structure &gt; Project &gt; choose or create the Project SDK
 * If you haven't used the init-wiki target, either ignore the VCS errors, or go to Settings &gt; Version Control &gt; remove the missing directories from the list of VCS roots.
 
-LWJGL also comes with an **Eclipse** project. Copy the project files from the [eclipse](https://github.com/LWJGL/lwjgl3/tree/master/config/ide/eclipse) folder into the root directory and open it as an Eclipse file. There's also a Kotlin plugin for Eclipse available now, see [Getting Started with Eclipse](http://kotlinlang.org/docs/tutorials/getting-started-eclipse.html).
+LWJGL also comes with an **Eclipse** project. Copy the project files from the [eclipse](https://github.com/LWJGL/lwjgl3/tree/master/config/ide/eclipse) folder into the root directory and open it as an Eclipse file. There's also a Kotlin plugin for Eclipse available now, see [IDEs for Kotlin development](https://kotlinlang.org/docs/kotlin-ide.html#eclipse).
 
 LWJGL does also provide a project for **Netbeans**. You have to copy the *nbproject* folder into the root directory. Afterwards you can open it as NetBeans project.
 
@@ -85,7 +85,7 @@ LWJGL uses Ant for the build process, which goes like so:
 * `ant demo -Dclass=<classpath to demo>` (runs the demo specified by the *class* property)
 
 # GENERATOR
-LWJGL uses the **Generator** to automatically generate native code bindings. The Generator uses template files as input. Both the Generator itself and the template files are written in Kotlin, which is a new JVM-based language, more info [here](http://kotlinlang.org/). The Generator defines a handy DSL that the templates use to define the native code structure.
+LWJGL uses the **Generator** to automatically generate native code bindings. The Generator uses template files as input. Both the Generator itself and the template files are written in Kotlin, which is a new JVM-based language, more info [here](https://kotlinlang.org/). The Generator defines a handy DSL that the templates use to define the native code structure.
 
 * Generator source: `modules/generator/src/main/kotlin/org/lwjgl/generator`
 * Template configuration: `modules/lwjgl/<module>/src/templates/kotlin/<module>`
@@ -146,7 +146,7 @@ Tab-size: 4 spaces
 Right margin: 160 chars
 
 # COMMIT STYLE
-As of May 2017, LWJGL commit messages loosely follow the [Conventional Commits](http://conventionalcommits.org/) structure.
+As of May 2017, LWJGL commit messages loosely follow the [Conventional Commits](https://conventionalcommits.org/) structure.
 
 A commit should have a type prefix and an appropriate scope. The scope in particular is especially helpful when browsing LWJGL's commit history, given the variety of modules and library bindings in the repository.
 

@@ -16,7 +16,7 @@ ENABLE_WARNINGS()""")
 
     documentation =
         """
-        Native bindings to the high-compression API of ${url("http://lz4.github.io/lz4/", "LZ4")}.
+        Native bindings to the high-compression API of ${url("https://lz4.org/", "LZ4")}.
 
         <h3>Streaming Compression - Bufferless synchronous API</h3>
 

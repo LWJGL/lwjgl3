@@ -74,7 +74,7 @@ private val GLESBinding = register(object : APIBinding(
             }
         }
 
-        val link = url("http://docs.gl/es3/$page", "Reference Page")
+        val link = url("https://docs.gl/es3/$page", "Reference Page")
 
         if (documentation.isEmpty())
             println("$t/** $link */")
